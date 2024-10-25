@@ -19,26 +19,66 @@ std::vector<std::string_view> NativeBehaviorFactory::names() const
     return std::vector<std::string_view> { names.begin(), names.end() };
 }
 
-Behavior NativeBehaviorFactory::create(std::string_view name, const ParameterTuple &args) const
+UniqueOpaquePtr NativeBehaviorFactory::load(std::string_view name) const
 {
-    return NativeBehaviorRegistry::get(NativeBehaviorRegistry::sComponentsByName().at(name)).mInfo->create(args);
+    UniqueOpaquePtr ptr;
+    ptr.setupAs<const NativeBehaviorInfo *>() = NativeBehaviorRegistry::get(NativeBehaviorRegistry::sComponentsByName().at(name)).mInfo;
+    return ptr;
 }
 
-Threading::TaskFuture<ParameterTuple> NativeBehaviorFactory::createParameters(std::string_view name) const
+Threading::TaskFuture<bool> NativeBehaviorFactory::state(const UniqueOpaquePtr &handle) const
 {
-    return NativeBehaviorRegistry::get(NativeBehaviorRegistry::sComponentsByName().at(name)).mInfo->createParameters();
+    return true;
 }
 
-std::vector<ValueTypeDesc> NativeBehaviorFactory::parameterTypes(std::string_view name) const
+void NativeBehaviorFactory::release(UniqueOpaquePtr &ptr) const
 {
-    auto types = NativeBehaviorRegistry::get(NativeBehaviorRegistry::sComponentsByName().at(name)).mInfo->parameterTypes();
+    ptr.release<const NativeBehaviorInfo *>();
+}
+
+std::string_view NativeBehaviorFactory::name(const UniqueOpaquePtr &handle) const
+{
+    const NativeBehaviorInfo *info = handle;
+    return info->name();
+}
+
+Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const
+{
+    const NativeBehaviorInfo *info = handle;
+    return info->create(args);
+}
+
+Threading::TaskFuture<ParameterTuple> NativeBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
+{
+    const NativeBehaviorInfo *info = handle;
+    return info->createParameters();
+}
+
+ParameterTuple NativeBehaviorFactory::createDummyParameters(const UniqueOpaquePtr &handle) const
+{
+    const NativeBehaviorInfo *info = handle;
+    return info->createParameters();
+}
+
+std::vector<ValueTypeDesc> NativeBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+{
+    const NativeBehaviorInfo *info = handle;
+    auto types = info->parameterTypes();
     return { types.begin(), types.end() };
 }
 
-std::vector<ValueTypeDesc> NativeBehaviorFactory::resultTypes(std::string_view name) const
+std::vector<ValueTypeDesc> NativeBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
 {
-    auto types = NativeBehaviorRegistry::get(NativeBehaviorRegistry::sComponentsByName().at(name)).mInfo->resultTypes();
+    const NativeBehaviorInfo *info = handle;
+    auto types = info->resultTypes();
     return { types.begin(), types.end() };
+}
+
+std::vector<BindingDescriptor> NativeBehaviorFactory::bindings(const UniqueOpaquePtr &handle) const
+{
+    const NativeBehaviorInfo *info = handle;
+    auto bindings = info->bindings();
+    return { bindings.begin(), bindings.end() };
 }
 
 }

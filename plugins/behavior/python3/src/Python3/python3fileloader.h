@@ -47,10 +47,16 @@ namespace Scripting {
 
         struct Python3BehaviorFactory : BehaviorFactory<Python3BehaviorFactory> {
             std::vector<std::string_view> names() const override;
-            Behavior create(std::string_view name, const ParameterTuple &args) const override;
-            Threading::TaskFuture<ParameterTuple> createParameters(std::string_view name) const override;
-            std::vector<ValueTypeDesc> parameterTypes(std::string_view name) const override;
-            std::vector<ValueTypeDesc> resultTypes(std::string_view name) const override;   
+            UniqueOpaquePtr load(std::string_view name) const override;
+            Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const override;
+            void release(UniqueOpaquePtr &ptr) const override;
+            std::string_view name(const UniqueOpaquePtr &handle) const override;
+            Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const override;
+            Threading::TaskFuture<ParameterTuple> createParameters(const UniqueOpaquePtr &handle) const override;
+            ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const override;
+            std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
+            std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
+            std::vector<BindingDescriptor> bindings(const UniqueOpaquePtr &handle) const override;
         };
 
     }

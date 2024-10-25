@@ -212,7 +212,14 @@ namespace Render {
     {
         Assimp::Importer importer;
 
-        ByteBuffer buffer = (co_await info.resource()->readAsync()).value();
+        auto result = co_await info.resource()->readAsync();
+
+        if (result.is_done()) {
+            LOG_ERROR("File read was cancelled");
+            co_return false;
+        }
+
+        ByteBuffer buffer = std::move(result).value();
 
         const aiScene *scene = importer.ReadFileFromMemory(buffer.mData, buffer.mSize, aiProcess_MakeLeftHanded | aiProcess_Triangulate | aiProcess_LimitBoneWeights);
 

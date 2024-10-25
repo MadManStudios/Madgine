@@ -13,20 +13,22 @@
 namespace Engine {
 namespace Scene {
 
-    constexpr auto get_entity = get_binding_sender<"Entity", Entity::Entity *>;
+    using EntityBinding = Binding<"Entity", Entity::Entity*>;
+    constexpr EntityBinding entityBinding;
 
-    constexpr auto get_scene = get_binding_sender<"Scene", SceneManager *>;
+    using SceneBinding = Binding<"Scene", SceneManager*>;
+    constexpr SceneBinding sceneBinding;
 
-    constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration) {
-        return IntervalClock<Threading::CustomTimepoint>::wait(get_scene() | Execution::then(&SceneManager::simulationClock), duration);
+    constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration, SceneBinding entity = {}) {
+        return IntervalClock<Threading::CustomTimepoint>::wait(entity | Execution::then(&SceneManager::simulationClock), duration);
     };
 
-    constexpr auto yield_simulation = []() {
-        return wait_simulation(0s);
+    constexpr auto yield_simulation = [](SceneBinding scene = {}) {
+        return wait_simulation(0s, scene);
     };
 
     template <typename T>
-    constexpr auto get_component = []() { return get_entity() | Execution::then([](Entity::Entity *e) { return e->getComponent<T>(); }); };
+    constexpr auto get_component = [](EntityBinding entity = {}) { return entity | Execution::then([](Entity::Entity *e) { return e->getComponent<T>(); }); };
 
 }
 }

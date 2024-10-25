@@ -2,7 +2,7 @@
 
 #include "Meta/math/matrix3.h"
 
-#include "Madgine/behaviorcollector.h"
+#include "Madgine/behaviorhandle.h"
 #include "Madgine/parametertuple.h"
 
 namespace Engine {

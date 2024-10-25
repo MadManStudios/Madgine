@@ -34,15 +34,13 @@ struct BehaviorAwaitableReceiver : Execution::execution_receiver<> {
     }
 
     template <typename O>
-    friend bool tag_invoke(get_binding_d_t, BehaviorAwaitableReceiver &rec, std::string_view name, O &out)
+    friend BehaviorError tag_invoke(get_binding_d_t, BehaviorAwaitableReceiver &rec, std::string_view name, O &out)
     {
         ValueType v;
-        if (rec.mBehavior->mReceiver->getBinding(name, v)) {
+        BehaviorError error = rec.mBehavior->mReceiver->getBinding(name, v);
+        if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS })
             out = v.as<O>();
-            return true;
-        } else {
-            return false;
-        }
+        return error;
     }
 
     friend std::stop_token tag_invoke(Execution::get_stop_token_t, BehaviorAwaitableReceiver &rec)

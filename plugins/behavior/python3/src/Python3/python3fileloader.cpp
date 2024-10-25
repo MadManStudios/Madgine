@@ -179,27 +179,66 @@ namespace Scripting {
             return { names.begin(), names.end() };
         }
 
-        Behavior Python3BehaviorFactory::create(std::string_view name, const ParameterTuple &args) const
+        UniqueOpaquePtr Python3BehaviorFactory::load(std::string_view name) const
         {
+            UniqueOpaquePtr ptr;
+            ptr.setupAs<Python3FileLoader::Handle>() = Python3FileLoader::load(name);
+            return ptr;
+        }
+
+        Threading::TaskFuture<bool> Python3BehaviorFactory::state(const UniqueOpaquePtr &handle) const
+        {
+            return handle.as<Python3FileLoader::Handle>().info()->loadingTask();
+        }
+
+        void Python3BehaviorFactory::release(UniqueOpaquePtr &ptr) const
+        {
+            ptr.release<Python3FileLoader::Handle>();
+        }
+
+        std::string_view Python3BehaviorFactory::name(const UniqueOpaquePtr &handle) const
+        {
+            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
+            return file.name();
+        }
+
+        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const
+        {
+            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             Python3Lock lock;
-            PyObjectPtr main = Python3FileLoader::load(name)->get("main");
+            PyObjectPtr main = file->get("main");
             if (!main)
                 return Execution::just_error(fetchError());
             return main.callAsync();
         }
 
-        Threading::TaskFuture<ParameterTuple> Python3BehaviorFactory::createParameters(std::string_view name) const
+        Threading::TaskFuture<ParameterTuple> Python3BehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
         {
+            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return ParameterTuple { std::make_tuple() };
         }
 
-        std::vector<ValueTypeDesc> Python3BehaviorFactory::parameterTypes(std::string_view name) const
+        ParameterTuple Python3BehaviorFactory::createDummyParameters(const UniqueOpaquePtr &handle) const
         {
+            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
+            return ParameterTuple { std::make_tuple() };
+        }
+
+        std::vector<ValueTypeDesc> Python3BehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+        {
+            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return {};
         }
 
-        std::vector<ValueTypeDesc> Python3BehaviorFactory::resultTypes(std::string_view name) const
+        std::vector<ValueTypeDesc> Python3BehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
         {
+            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
+            return {};
+        }
+
+        std::vector<BindingDescriptor> Python3BehaviorFactory::bindings(const UniqueOpaquePtr &handle) const
+        {
+            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return {};
         }
 

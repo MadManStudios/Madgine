@@ -50,8 +50,8 @@ METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Input::HandlerBase)
 MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
-//NATIVE_BEHAVIOR(ClickBrick_Test, ClickBrick::Test)
-//NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<float>, Engine::InputParameter<Engine::Vector3>, Engine::InputParameter<Engine::Quaternion>)
+NATIVE_BEHAVIOR(ClickBrick_Test, ClickBrick::Test)
+NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<float>, Engine::InputParameter<Engine::Vector3>, Engine::InputParameter<Engine::Quaternion>)
 
 namespace ClickBrick {
 
@@ -200,10 +200,10 @@ void GameManager::start()
     mLifeLabel->mText = "Life: " + std::to_string(mLife);
 }
 
-Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q)
+Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity)
 {
 
-    Engine::Scene::Entity::Entity *e = co_await Engine::Scene::get_entity();
+    Engine::Scene::Entity::Entity *e = co_await entity;
 
     float qAcc = 1.0f;
     float qSpeed = 1.0f;
@@ -242,10 +242,10 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q)
     co_return;
 }
 
-Engine::Behavior Test()
+Engine::Behavior Test(Engine::Scene::EntityBinding entity)
 {
 
-    Engine::Scene::Entity::Entity *e = co_await Engine::Scene::get_entity();
+    Engine::Scene::Entity::Entity *e = co_await entity;
 
     bool loop = true;
     while (loop) {

@@ -41,10 +41,6 @@ CONSTANT_VARIABLE_ACCESS_SENDER_NODE_BEGIN(ReadVar, Engine::Execution::read_var<
 DYNAMIC_NAME(Name)
 SENDER_NODE_END(ReadVar)*/
 
-CONSTANT_VARIABLE_ACCESS_SENDER_NODE_BEGIN(GetBinding, Engine::get_binding_sender<"Name", Engine::ValueType>)
-DYNAMIC_NAME(Name)
-SENDER_NODE_END(GetBinding)
-
 CONSTANT_SENDER_NODE_BEGIN(Vector3To4, Engine::Execution::then, Engine::NodeGraph::NodeReader<Engine::Vector3, float>, Engine::NodeGraph::Vector3To4)
 SENDER_NODE_END(Vector3To4)
 

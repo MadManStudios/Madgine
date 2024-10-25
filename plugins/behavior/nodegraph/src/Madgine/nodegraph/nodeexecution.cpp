@@ -22,7 +22,7 @@ namespace NodeGraph {
         mInterpreter.write(pin, v);
     }
 
-    bool NodeInterpretHandleBase::getBinding(std::string_view name, ValueType &out)
+    BehaviorError NodeInterpretHandleBase::getBinding(std::string_view name, ValueType &out)
     {        
         return mInterpreter.getBinding(name, out);
     }

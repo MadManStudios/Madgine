@@ -1,12 +1,20 @@
 <Graph serId=1>
     <mNodes>
-        <Node type="GetBinding" serId=2>
-            <Name>Widget</Name>
+        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerEnter" serId=2>
             <mFlowOutPins>
                 <Item>
                 </Item>
             </mFlowOutPins>
             <mDataInPins>
+                <Item>
+                    <Item>
+                        <Element>
+                            <Element>-1</Element>
+                            <Element>0</Element>
+                            <Element>1</Element>
+                        </Element>
+                    </Item>
+                </Item>
             </mDataInPins>
             <mDataOutPins>
                 <Item>
@@ -38,7 +46,7 @@
                 <Item>
                     <Item>
                         <Element>
-                            <Element>6</Element>
+                            <Element>1</Element>
                             <Element>0</Element>
                             <Element>0</Element>
                         </Element>
@@ -68,6 +76,8 @@
                 </Item>
             </mFlowOutPins>
             <mDataInPins>
+                <Item>
+                </Item>
                 <Item>
                 </Item>
             </mDataInPins>
@@ -122,30 +132,9 @@
                 <Item>
                     <Item>
                         <Element>
+                            <Element>-1</Element>
+                            <Element>0</Element>
                             <Element>1</Element>
-                            <Element>0</Element>
-                            <Element>0</Element>
-                        </Element>
-                    </Item>
-                </Item>
-            </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
-        </Node>
-        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerEnter" serId=8>
-            <mFlowOutPins>
-                <Item>
-                </Item>
-            </mFlowOutPins>
-            <mDataInPins>
-                <Item>
-                    <Item>
-                        <Element>
-                            <Element>1</Element>
-                            <Element>0</Element>
-                            <Element>0</Element>
                         </Element>
                     </Item>
                 </Item>
@@ -169,5 +158,13 @@
     </mDataInPins>
     <mDataOutPins>
     </mDataOutPins>
-    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":331,"y":-35}},"node:180000":{"location":{"x":694,"y":87}},"node:2147483645":{"location":{"x":729,"y":-203}},"node:2147483646":{"location":{"x":6,"y":-203}},"node:240000":{"location":{"x":524,"y":59}},"node:300000":{"location":{"x":156,"y":87}},"node:360000":{"location":{"x":155,"y":13}},"node:60000":{"location":{"x":25,"y":48}}},"selection":null,"view":{"scroll":{"x":6.289215087890625,"y":-202.30035400390625},"visible_rect":{"max":{"x":753.2891845703125,"y":388.69964599609375},"min":{"x":6.289215087890625,"y":-202.30035400390625}},"zoom":1}}</mLayoutData>
+    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":203,"y":-183}},"node:180000":{"location":{"x":566,"y":-61}},"node:2147483645":{"location":{"x":310,"y":-601}},"node:2147483646":{"location":{"x":17,"y":-601}},"node:240000":{"location":{"x":396,"y":-89}},"node:300000":{"location":{"x":28,"y":-61}},"node:60000":{"location":{"x":27,"y":-141}}},"selection":["node:2147483646"],"view":{"scroll":{"x":17.1410102844238281,"y":-600.42333984375},"visible_rect":{"max":{"x":334.141021728515625,"y":-9.42333984375},"min":{"x":17.1410102844238281,"y":-600.42333984375}},"zoom":1}}</mLayoutData>
+    <mInputBindings>
+        <Item serId=8>
+            <mDescriptor>
+                <Element>Widget</Element>
+                <Element>Engine::Widgets::WidgetBase*</Element>
+            </mDescriptor>
+        </Item>
+    </mInputBindings>
 </Graph>

@@ -12,7 +12,7 @@
 
 #include "Madgine/parametertuple.h"
 
-#include "Madgine/behaviorcollector.h"
+#include "Madgine/behaviorhandle.h"
 
 namespace Engine {
 namespace Tools {

@@ -275,8 +275,8 @@ namespace Tools {
 
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
                 if (BehaviorHandle behavior = ImGui::BehaviorSelector()) {
-                    mPendingBehavior.mHandle = behavior;
-                    mPendingBehavior.mFuture = behavior.createParameters();
+                    mPendingBehavior.mHandle = std::move(behavior);
+                    mPendingBehavior.mFuture = mPendingBehavior.mHandle.createParameters();
                     mPendingBehavior.mParameters.reset();
                     showParameters = true;
                 }

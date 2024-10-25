@@ -23,7 +23,7 @@ namespace NodeGraph {
 
         void write(const NodeBase &node, const ValueType &v, uint32_t dataOutIndex, uint32_t group = 0);
 
-        bool getBinding(std::string_view name, ValueType &out);
+        BehaviorError getBinding(std::string_view name, ValueType &out);
     };
 
     template <typename Node>
@@ -41,17 +41,14 @@ namespace NodeGraph {
         }
 
         template <fixed_string Name, typename O>
-        friend bool tag_invoke(get_binding_t<Name>, NodeInterpretHandle &handle, O &out)
+        friend BehaviorError tag_invoke(get_binding_t<Name>, NodeInterpretHandle &handle, O &out)
         {
             ValueType v;
-            if (handle.getBinding(handle.mNode.template getDynamicName<Name>(), v)) {
+            BehaviorError error = handle.getBinding(handle.mNode.template getDynamicName<Name>(), v))
+            if (error.mResult == BehaviorResult{BehaviorResult::SUCCESS})
                 out = v.as<O>();
-                return true;
-            } else {
-                return false;
-            }
+            return error;
         }
-
     };
 
     template <typename Node>
@@ -190,10 +187,11 @@ namespace NodeGraph {
                 } else {
                     assert(mIndex == 0);
                     std::tuple<typed_Value<T>...> data;
-                    BehaviorError error = TupleUnpacker::accumulate(data, [&]<typename Ty>(typed_Value<Ty> &v, BehaviorError e) {
-                        if (e.mResult != GenericResult::SUCCESS)
-                            return e;
-                        return handle.read(v, mIndex++);
+                    BehaviorError error = TupleUnpacker::accumulate(
+                        data, [&]<typename Ty>(typed_Value<Ty> &v, BehaviorError e) {
+                            if (e.mResult != GenericResult::SUCCESS)
+                                return e;
+                            return handle.read(v, mIndex++);
                         },
                         BehaviorError {});
                     mIndex = 0;

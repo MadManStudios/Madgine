@@ -22,8 +22,6 @@ SERIALIZETABLE_END(Engine::NodeGraph::LibraryNode)
 namespace Engine {
 namespace NodeGraph {
 
-    
-
     struct LibraryInterpretData : NodeInterpreterData, BehaviorReceiver {
 
         LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args)
@@ -59,9 +57,15 @@ namespace NodeGraph {
             receiver.set_done();
         }
 
-        bool getBinding(std::string_view name, ValueType &ref) override
+        BehaviorError getBinding(std::string_view name, ValueType &ref) override
         {
-            return false;
+            for (uint32_t i = 0; i < mReceiver->mNode.dataInCount(1); ++i) {
+                if (mReceiver->mNode.dataInName(i, 1) == name) {
+                    return mReceiver->read(ref, i, 1);
+                }
+            }
+            throw 0;
+            //return false;
         }
 
         Debug::ParentLocation *debugLocation() override
@@ -74,7 +78,7 @@ namespace NodeGraph {
             return Execution::get_stop_token(*mReceiver);
         }
 
-        Log::Log* log() override
+        Log::Log *log() override
         {
             return Log::get_log(*mReceiver);
         }
@@ -86,11 +90,15 @@ namespace NodeGraph {
 
     LibraryNode::LibraryNode(NodeGraph &graph, BehaviorHandle behavior)
         : VirtualData(graph)
-        , mBehavior(behavior)
-        , mParameters(behavior.createParameters().get())
-        , mFullClassName(behavior.toString())
+        , mBehavior(std::move(behavior))
+        , mParameters(mBehavior.createDummyParameters())
+        , mFullClassName(mBehavior.toString())
     {
         this->setup();
+
+        Execution::detach(mBehavior.state().sender() | Execution::then([this](bool success) {
+            mBindings = mBehavior.bindings();
+        }));
     }
 
     LibraryNode::LibraryNode(const LibraryNode &other, NodeGraph &graph)
@@ -98,12 +106,13 @@ namespace NodeGraph {
         , mBehavior(other.mBehavior)
         , mParameters(other.mParameters)
         , mFullClassName(other.mFullClassName)
+        , mBindings(other.mBindings)
     {
     }
 
     std::string_view LibraryNode::name() const
     {
-        return mBehavior.mName;
+        return mBehavior.name();
     }
 
     std::string_view LibraryNode::className() const
@@ -124,6 +133,42 @@ namespace NodeGraph {
     uint32_t LibraryNode::flowOutBaseCount(uint32_t group) const
     {
         return 1;
+    }
+
+    uint32_t LibraryNode::dataInGroupCount() const
+    {
+        return 2;
+    }
+
+    uint32_t LibraryNode::dataInBaseCount(uint32_t group) const
+    {
+        if (group == 0) {
+            return 0;
+        } else {
+            return mBindings.size();
+        }
+    }
+
+    std::string_view LibraryNode::dataInName(uint32_t index, uint32_t group) const
+    {
+        if (group == 0) {
+            throw 0;
+        } else {
+            if (index >= mBindings.size())
+                return "<unknown>";
+            return mBindings[index].mName;
+        }
+    }
+
+    ExtendedValueTypeDesc LibraryNode::dataInType(uint32_t index, uint32_t group, bool bidir) const
+    {
+        if (group == 0) {
+            throw 0;
+        } else {
+            if (index >= mBindings.size())
+                return { ExtendedValueTypeEnum::GenericType };
+            return mBindings[index].mType;
+        }
     }
 
     uint32_t LibraryNode::dataProviderBaseCount(uint32_t group) const

@@ -8,9 +8,11 @@
 namespace Engine {
 namespace Widgets {
 
-    constexpr auto get_widget = get_binding_sender<"Widget", WidgetBase *>;
+    using WidgetBinding = Binding<"Widget", WidgetBase*>;
+    constexpr WidgetBinding widgetBinding;
 
-    constexpr auto get_widget_manager = get_binding_sender<"WidgetManager", WidgetManager *>;
+    using WidgetManagerBinding = Binding<"WidgetManager", WidgetManager*>;
+    constexpr WidgetManagerBinding widgetManagerBinding;
 
 }
 }

@@ -72,10 +72,10 @@ namespace Execution {
     };
 
     template <typename Sender>
-    using ValueStorage = typename Sender::template value_types<ValueStorageImpl>;
+    using ValueStorage = typename std::decay_t<Sender>::template value_types<ValueStorageImpl>;
 
     template <typename Sender>
-    using ErrorStorage = ErrorStorageImpl<typename Sender::result_type>;
+    using ErrorStorage = ErrorStorageImpl<typename std::decay_t<Sender>::result_type>;
 
     struct DoneStorage {
         void reproduce(auto &rec)

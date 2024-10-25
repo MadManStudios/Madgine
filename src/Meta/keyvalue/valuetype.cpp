@@ -142,7 +142,7 @@ std::string ValueType::toShortString() const
         [](std::chrono::duration<uint64_t, std::nano> dur) {
             return "<duration>"s;
         },
-        [](const ValueTypeDesc &type) {
+        [](const ExtendedValueTypeDesc &type) {
             return type.toString();
         },
         [](const auto &v) {

@@ -3,7 +3,7 @@
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 
-#include "Madgine/behaviorcollector.h"
+#include "Madgine/behaviorhandle.h"
 
 namespace Engine {
 namespace Tools {

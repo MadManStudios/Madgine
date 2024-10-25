@@ -77,10 +77,11 @@ namespace Scripting {
                 return NULL;
 
             ValueType v;
-            bool found = self->mScope.mReceiver->getBinding(name, v);
-            if (found) {
+            BehaviorError error = self->mScope.mReceiver->getBinding(name, v);
+            if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS }) {
                 return toPyObject(v);
             } else {
+                throw 0;
                 return nullptr;
             }
         }

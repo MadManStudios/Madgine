@@ -19,12 +19,12 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBase
         static_cast<Execution::VirtualReceiverBase<BehaviorError, ArgumentList> *>(this)->set_value(ArgumentList { std::forward<Args>(args)... });
     }
 
-    virtual bool getBinding(std::string_view name, ValueType &out) = 0;
+    virtual BehaviorError getBinding(std::string_view name, ValueType &out) = 0;
     virtual Debug::ParentLocation *debugLocation() = 0;
     virtual std::stop_token stopToken() = 0;
     virtual Log::Log *log() = 0;
 
-    bool getBindingHelper(std::string_view name, void (*)(const ValueType &, void *), void *data);
+    BehaviorError getBindingHelper(std::string_view name, CallableView<void(const ValueType &)> cb);
 
     template <typename O>
     friend auto tag_invoke(get_binding_d_t, BehaviorReceiver &rec, std::string_view name, O &out)
@@ -32,11 +32,10 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBase
         if constexpr (std::same_as<O, ValueType> || std::same_as<O, ValueTypeRef>) {
             return rec.getBinding(name, out);
         } else {
-            return rec.getBindingHelper(
-                name, [](const ValueType &v, void *out) {
-                    *static_cast<O *>(out) = ValueType_as<O>(v);
-                },
-                &out);
+            auto f = [&](const ValueType &v) {
+                out = ValueType_as<O>(v);
+            };
+            return rec.getBindingHelper(name, CallableView<void(const ValueType &)> { f });
         }
     }
 
@@ -50,11 +49,10 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBase
         return rec.debugLocation();
     }
 
-    friend Log::Log* tag_invoke(Log::get_log_t, BehaviorReceiver& rec)
+    friend Log::Log *tag_invoke(Log::get_log_t, BehaviorReceiver &rec)
     {
         return rec.log();
     }
-
 };
 
 template <typename Rec, typename Base = BehaviorReceiver>
@@ -62,7 +60,7 @@ struct VirtualBehaviorState : Execution::VirtualStateEx<Rec, Base, type_pack<Beh
 
     using Execution::VirtualStateEx<Rec, Base, type_pack<BehaviorError>, ArgumentList>::VirtualStateEx;
 
-    bool getBinding(std::string_view name, ValueType &out) override
+    BehaviorError getBinding(std::string_view name, ValueType &out) override
     {
         ValueTypeRef outRef { out };
         return get_binding_d(this->mRec, name, outRef);
@@ -78,7 +76,7 @@ struct VirtualBehaviorState : Execution::VirtualStateEx<Rec, Base, type_pack<Beh
         return Execution::get_stop_token(this->mRec);
     }
 
-    Log::Log* log() override
+    Log::Log *log() override
     {
         return Log::get_log(this->mRec);
     }

@@ -139,7 +139,7 @@ namespace NodeGraph {
             return Engine::Log::get_log(mRec);
         }
 
-        bool getBinding(std::string_view name, ValueType &out) override
+        BehaviorError getBinding(std::string_view name, ValueType &out) override
         {
             return get_binding_d(mRec, name, out);
         }

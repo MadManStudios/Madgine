@@ -10,7 +10,7 @@ namespace Execution {
     template <typename T>
     concept Sender = requires
     {
-        typename T::is_sender;
+        typename std::decay_t<T>::is_sender;
     };
 
     struct connect_t {
@@ -253,9 +253,9 @@ namespace Execution {
 
     template <typename Sender>
     struct algorithm_sender : base_sender {
-        using result_type = typename std::remove_reference_t<Sender>::result_type;
+        using result_type = typename std::decay_t<Sender>::result_type;
         template <template <typename...> typename Tuple>
-        using value_types = typename std::remove_reference_t<Sender>::template value_types<Tuple>;
+        using value_types = typename std::decay_t<Sender>::template value_types<Tuple>;
 
         template <typename CPO, typename... Args>
         friend auto tag_invoke(CPO f, algorithm_sender &sender, Args &&...args)

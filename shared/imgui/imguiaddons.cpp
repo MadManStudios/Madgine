@@ -465,12 +465,12 @@ bool ValueTypeDrawer::draw(const std::chrono::nanoseconds &d)
     return false;
 }
 
-bool ValueTypeDrawer::draw(Engine::ValueTypeDesc &t)
+bool ValueTypeDrawer::draw(Engine::ExtendedValueTypeDesc &t)
 {
     return ValueTypeTypePicker(t);
 }
 
-bool ValueTypeDrawer::draw(const Engine::ValueTypeDesc &t)
+bool ValueTypeDrawer::draw(const Engine::ExtendedValueTypeDesc &t)
 {
     Text(t.toString());
     return false;
@@ -535,24 +535,67 @@ bool InputText(const char *label, Engine::CoWString *s, ImGuiInputTextFlags flag
     return ImGui::InputText(label, s->data(), s->size() + 1, flags | ImGuiInputTextFlags_CallbackResize, &InputTextCallback<Engine::CoWString>, &cb);
 }
 
-template <typename T>
-bool SelectValueTypeType(Engine::ValueTypeDesc &t)
+bool ScopeTypePicker(const Engine::MetaTable *&t)
 {
-    Engine::ValueTypeDesc desc;
+    const Engine::MetaTable *type = Engine::sTypeList();
+    while (type) {
+        if (Selectable(type->mTypeName)) {
+            t = type;
+            return true;
+        }
+        type = type->mNext;
+    }
+    return false;
+}
 
-    bool result = Selectable(desc.toString().data(), t == desc);
+template <typename Ty, typename T>
+bool SelectValueTypeType(T &t)
+{
+    T desc = Engine::toValueTypeDesc<Ty>();
+
+    bool result;
+
+    if constexpr (std::same_as<Ty, Engine::OwnedScopePtr>) {
+        if (ImGui::BeginMenu("OwnedScopePtr")) {
+            const Engine::MetaTable *type;
+            result = ScopeTypePicker(type);
+            if (result)
+                desc = Engine::ValueTypeDesc { Engine::ValueTypeEnum::OwnedScopeValue, type->mSelf };
+            ImGui::EndMenu();
+        }
+    } else if constexpr (std::same_as<Ty, Engine::ScopePtr>){
+        if (ImGui::BeginMenu("ScopePtr")) {
+            const Engine::MetaTable *type;
+            result = ScopeTypePicker(type);
+            if (result)
+                desc = Engine::ValueTypeDesc { Engine::ValueTypeEnum::ScopeValue, type->mSelf };
+            ImGui::EndMenu();
+        }
+    } else {
+        result = Selectable(desc.toString().data(), t == desc);
+    }
     if (result)
         t = desc;
     return result;
 }
 
-template <typename... Ty>
-bool SelectValueTypeTypes(Engine::type_pack<Ty...>, Engine::ValueTypeDesc &t)
+template <typename... Ty, typename T>
+bool SelectValueTypeTypes(Engine::type_pack<Ty...>, T &t)
 {
     return (SelectValueTypeType<Ty>(t) || ...);
 }
 
 bool ValueTypeTypePicker(Engine::ValueTypeDesc &t)
+{
+    bool changed = false;
+    if (ImGui::BeginCombo("##combo", "", ImGuiComboFlags_NoPreview | ImGuiComboFlags_PopupAlignLeft)) {
+        changed |= SelectValueTypeTypes(Engine::ValueTypeList::transform<Engine::type_pack_first> {}, t);
+        ImGui::EndCombo();
+    }
+    return changed;
+}
+
+bool ValueTypeTypePicker(Engine::ExtendedValueTypeDesc &t)
 {
     bool changed = false;
     if (ImGui::BeginCombo("##combo", "", ImGuiComboFlags_NoPreview | ImGuiComboFlags_PopupAlignLeft)) {

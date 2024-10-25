@@ -128,7 +128,7 @@ namespace Execution {
 
             template <typename... V>
             using helper = decltype(TupleUnpacker::invoke(std::declval<T>(), std::declval<V>()...));
-            using helper_type = typename Sender::template value_types<helper>;
+            using helper_type = typename std::decay_t<Sender>::template value_types<helper>;
             template <template <typename...> typename Tuple>
             using value_types = typename decltype(return_types_helper<helper_type>())::template instantiate<Tuple>;
 

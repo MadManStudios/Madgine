@@ -70,8 +70,13 @@ namespace NodeGraph {
         if (!pin) {
             throw 0;
         } else if (!pin.mNode) {
-            retVal = mArguments.at(pin.mIndex);
-            return {};
+            assert(pin.mGroup < 2);
+            if (pin.mGroup == 0) {
+                retVal = mArguments.at(pin.mIndex);
+                return {};
+            } else {
+                return getBinding(mGraph->mInputBindings[pin.mIndex].mDescriptor.mName, retVal);
+            }
         } else {
             return mGraph->node(pin.mNode)->interpretRead(*this, retVal, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
         }

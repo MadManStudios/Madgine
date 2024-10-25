@@ -153,14 +153,14 @@ namespace Widgets {
             struct receiver : Execution::algorithm_receiver<Rec> {
 
                 template <typename O>
-                friend bool tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, O &out)
+                friend BehaviorError tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, O &out)
                 {
                     if (name == "Widget") {
                         out = rec.mWidget;
-                        return true;
+                        return {};
                     } else if (name == "WidgetManager") {
                         out = &rec.mWidget->manager();
-                        return true;
+                        return {};
                     } else {
                         return get_binding_d(rec.mRec, name, out);
                     }

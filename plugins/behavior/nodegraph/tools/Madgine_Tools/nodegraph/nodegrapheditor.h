@@ -63,6 +63,7 @@ namespace Tools {
         };
 
         IndexType<uint32_t> mSelectedNodeIndex;
+        bool mSelectedInputs = false;
 
         Vector2 mPopupPosition;
 

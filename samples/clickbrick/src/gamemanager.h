@@ -58,9 +58,12 @@ namespace ClickBrick {
         std::unique_ptr<Engine::Render::RenderTarget> mGameRenderTarget;
     };
 
-    Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q);
-    Engine::Behavior Test();
+    Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior Test(Engine::Scene::EntityBinding entity = {});
 
 }
+
+NATIVE_BEHAVIOR_DECLARATION(ClickBrick_Test)
+NATIVE_BEHAVIOR_DECLARATION(ClickBrick_Brick)
 
 REGISTER_TYPE(ClickBrick::GameManager)

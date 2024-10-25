@@ -64,5 +64,27 @@ namespace Serialize {
         });
     }
 
+    
+    StreamResult Operations<ExtendedValueTypeDesc>::read(FormattedSerializeStream &in, ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
+    {
+        std::string type;
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, name, hierarchy));
+        return {};
+    }
+
+    void Operations<ExtendedValueTypeDesc>::write(FormattedSerializeStream &out, const ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
+    {
+        Serialize::write(out, t.toString(), name, hierarchy);
+    }
+
+    StreamResult Operations<ExtendedValueTypeDesc>::applyMap(FormattedSerializeStream &in, ExtendedValueTypeDesc &t, bool success, const CallerHierarchyBasePtr &hierarchy)
+    {
+        return {};
+    }
+
+    StreamResult Operations<ExtendedValueTypeDesc>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    {
+        return Serialize::visitStream<std::string>(in, name, visitor);
+    }
 }
 }

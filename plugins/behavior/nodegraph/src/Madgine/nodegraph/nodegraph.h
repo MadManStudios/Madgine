@@ -4,6 +4,8 @@
 
 #include "nodebase.h"
 
+#include "Madgine/bindings.h"
+
 namespace Engine {
 namespace NodeGraph {
 
@@ -83,6 +85,12 @@ namespace NodeGraph {
         std::vector<DataOutPinPrototype> mDataOutPins;
 
         std::string mLayoutData;
+
+        struct InputBinding : Serialize::SerializableDataUnit {
+            BindingDescriptor mDescriptor { "Unnamed", ExtendedValueTypeIndex { ExtendedValueTypeEnum::GenericType } };
+            std::vector<Pin> mTargets;
+        };
+        std::vector<InputBinding> mInputBindings;
 
         NodeInterpreterSender interpret() const;
 

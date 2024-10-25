@@ -18,7 +18,7 @@ DEFINE_BEHAVIOR_FACTORY(NodeGraph, Engine::NodeGraph::NodeGraphBehaviorFactory)
 namespace Engine {
 namespace NodeGraph {
 
-    Resources::with_handle_t::sender<NodeInterpreterSender, NodeGraphLoader::Handle> NodeGraphLoader::Handle::interpret()
+    Resources::with_handle_t::sender<NodeInterpreterSender, NodeGraphLoader::Handle> NodeGraphLoader::Handle::interpret() const
     {
         return NodeInterpreterSender { *this } | Resources::with_handle(Handle { *this });
     }
@@ -51,24 +51,64 @@ namespace NodeGraph {
         return { names.begin(), names.end() };
     }
 
-    Behavior NodeGraphBehaviorFactory::create(std::string_view name, const ParameterTuple &args) const
+    UniqueOpaquePtr NodeGraphBehaviorFactory::load(std::string_view name) const
     {
-        return NodeGraphLoader::Handle { NodeGraphLoader::load(name) }.interpret();
+        UniqueOpaquePtr ptr;
+        ptr.setupAs<NodeGraphLoader::Handle>() = NodeGraphLoader::load(name);
+        return ptr;
     }
 
-    Threading::TaskFuture<ParameterTuple> NodeGraphBehaviorFactory::createParameters(std::string_view name) const
+    Threading::TaskFuture<bool> NodeGraphBehaviorFactory::state(const UniqueOpaquePtr &handle) const
     {
+        return handle.as<NodeGraphLoader::Handle>().info()->loadingTask();
+    }
+
+    void NodeGraphBehaviorFactory::release(UniqueOpaquePtr &ptr) const
+    {
+        ptr.release<NodeGraphLoader::Handle>();
+    }
+
+    std::string_view NodeGraphBehaviorFactory::name(const UniqueOpaquePtr &handle) const
+    {
+        const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
+        return graph.name();
+    }
+
+    Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const
+    {
+        const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
+        return graph.interpret();
+    }
+
+    Threading::TaskFuture<ParameterTuple> NodeGraphBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
+    {
+        const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
         return ParameterTuple { std::make_tuple() };
     }
 
-    std::vector<ValueTypeDesc> NodeGraphBehaviorFactory::parameterTypes(std::string_view name) const
+    ParameterTuple NodeGraphBehaviorFactory::createDummyParameters(const UniqueOpaquePtr &handle) const
     {
+        const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
+        return ParameterTuple { std::make_tuple() };
+    }
+
+    std::vector<ValueTypeDesc> NodeGraphBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+    {
+        const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
         return {};
     }
 
-    std::vector<ValueTypeDesc> NodeGraphBehaviorFactory::resultTypes(std::string_view name) const
+    std::vector<ValueTypeDesc> NodeGraphBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
     {
+        const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
         return {};
+    }
+
+    std::vector<BindingDescriptor> NodeGraphBehaviorFactory::bindings(const UniqueOpaquePtr &handle) const
+    {
+        const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
+        auto bindings = graph->mInputBindings | std::views::transform(&NodeGraph::InputBinding::mDescriptor);
+        return { bindings.begin(), bindings.end() };
     }
 
 }

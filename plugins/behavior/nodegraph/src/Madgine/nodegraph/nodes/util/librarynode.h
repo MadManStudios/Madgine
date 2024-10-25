@@ -5,7 +5,9 @@
 
 #include "Madgine/parametertuple.h"
 
-#include "Madgine/behaviorcollector.h"
+#include "Madgine/behaviorhandle.h"
+
+#include "Madgine/bindings.h"
 
 namespace Engine {
 namespace NodeGraph {
@@ -23,6 +25,11 @@ namespace NodeGraph {
 
         uint32_t flowOutBaseCount(uint32_t group) const override;
 
+        uint32_t dataInGroupCount() const override;
+        uint32_t dataInBaseCount(uint32_t group) const override;
+        std::string_view dataInName(uint32_t index, uint32_t group) const override;
+        ExtendedValueTypeDesc dataInType(uint32_t index, uint32_t group, bool bidir = true) const override;
+
         uint32_t dataProviderBaseCount(uint32_t group) const override;
         ExtendedValueTypeDesc dataProviderType(uint32_t index, uint32_t group = 0, bool bidir = true) const override;
 
@@ -30,11 +37,13 @@ namespace NodeGraph {
         void interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const override;
         BehaviorError interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group = 0) const override;
 
-        ParameterTuple mParameters;
-
     private:
-        BehaviorHandle mBehavior;        
+        BehaviorHandle mBehavior;
         std::string mFullClassName;
+
+    public:
+        ParameterTuple mParameters;
+        std::vector<BindingDescriptor> mBindings;
     };
 
 }

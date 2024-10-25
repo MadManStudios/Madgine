@@ -30,6 +30,9 @@ namespace Scene {
 
     struct LightManager;
     struct Light;
+
+    using EntityBinding = Binding<"Entity", Entity::Entity*>;
+    using SceneBinding = Binding<"Scene", SceneManager*>;
 }
 
 }

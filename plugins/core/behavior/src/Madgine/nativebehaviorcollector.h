@@ -18,6 +18,7 @@ struct NativeBehaviorInfo {
     virtual std::string_view name() const = 0;
     virtual std::span<const ValueTypeDesc> parameterTypes() const = 0;
     virtual std::span<const ValueTypeDesc> resultTypes() const = 0;
+    virtual std::span<const BindingDescriptor> bindings() const = 0;
 };
 
 DLL_IMPORT_VARIABLE(const NativeBehaviorInfo *, nativeBehaviorInfo, typename);
@@ -159,15 +160,28 @@ struct NativeBehavior : NativeBehaviorComponent<T, NativeBehaviorInfo> {
         return sResultTypes;
     }
 
+    static constexpr auto sBindings = []() {
+        return std::span<const BindingDescriptor> {};
+    }();
+    std::span<const BindingDescriptor> bindings() const override {
+        return sBindings;
+    }
+
     std::string_view mName;
 };
 
 struct NativeBehaviorFactory : BehaviorFactory<NativeBehaviorFactory> {
     std::vector<std::string_view> names() const override;
-    Behavior create(std::string_view name, const ParameterTuple &args) const override;
-    Threading::TaskFuture<ParameterTuple> createParameters(std::string_view name) const override;
-    std::vector<ValueTypeDesc> parameterTypes(std::string_view name) const override;
-    std::vector<ValueTypeDesc> resultTypes(std::string_view name) const override;
+    UniqueOpaquePtr load(std::string_view name) const override;
+    Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const override;
+    void release(UniqueOpaquePtr &ptr) const override;
+    std::string_view name(const UniqueOpaquePtr &handle) const override;
+    Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const override;
+    Threading::TaskFuture<ParameterTuple> createParameters(const UniqueOpaquePtr &handle) const override;
+    ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const override;
+    std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
+    std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
+    std::vector<BindingDescriptor> bindings(const UniqueOpaquePtr &handle) const override;
 };
 
 }

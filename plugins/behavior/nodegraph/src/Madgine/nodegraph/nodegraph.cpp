@@ -32,6 +32,8 @@
 #include "nodes/accessornode.h"
 #include "nodes/functionnode.h"
 
+#include "Meta/keyvalueutil/valuetypeserialize.h"
+
 METATABLE_BEGIN(Engine::NodeGraph::NodeGraph)
 METATABLE_END(Engine::NodeGraph::NodeGraph)
 
@@ -41,7 +43,16 @@ FIELD(mFlowOutPins)
 FIELD(mDataInPins)
 FIELD(mDataOutPins)
 FIELD(mLayoutData)
+FIELD(mInputBindings)
 SERIALIZETABLE_END(Engine::NodeGraph::NodeGraph)
+
+METATABLE_BEGIN(Engine::NodeGraph::NodeGraph::InputBinding)
+MEMBER(mDescriptor)
+METATABLE_END(Engine::NodeGraph::NodeGraph::InputBinding)
+
+SERIALIZETABLE_BEGIN(Engine::NodeGraph::NodeGraph::InputBinding)
+FIELD(mDescriptor)
+SERIALIZETABLE_END(Engine::NodeGraph::NodeGraph::InputBinding)
 
 namespace Engine {
 namespace NodeGraph {
@@ -57,6 +68,7 @@ namespace NodeGraph {
         , mDataInPins(other.mDataInPins)
         , mDataOutPins(other.mDataOutPins)
         , mLayoutData(other.mLayoutData)
+        , mInputBindings(other.mInputBindings)
     {
         mNodes.reserve(other.mNodes.size());
         std::ranges::transform(other.mNodes, std::back_inserter(mNodes), [&](const std::unique_ptr<NodeBase> &node) { return node->clone(*this); });
@@ -75,6 +87,7 @@ namespace NodeGraph {
         mDataOutPins = other.mDataOutPins;
         mDataProviderPins = other.mDataProviderPins;
         mDataReceiverPins = other.mDataReceiverPins;
+        mInputBindings = other.mInputBindings;
 
         mLayoutData = other.mLayoutData;
 
@@ -152,9 +165,13 @@ namespace NodeGraph {
                         Pin pin = node->dataInSource(i, group);
                         if (pin) {
                             if (!pin.mNode) {
-                                if (providerPins.size() <= pin.mIndex)
-                                    providerPins.resize(pin.mIndex + 1);
-                                providerPins[pin.mIndex] = DataProviderPinPrototype { { { nodeIndex(node), i, group } } };
+                                if (pin.mGroup == 0) {
+                                    if (providerPins.size() <= pin.mIndex)
+                                        providerPins.resize(pin.mIndex + 1);
+                                    providerPins[pin.mIndex] = DataProviderPinPrototype { { { nodeIndex(node), i, group } } };
+                                } else {
+                                    mInputBindings[pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
+                                }
                             } else {
                                 NodeBase *targetNode = this->node(pin.mNode);
                                 if (targetNode->dataProviderCount(pin.mGroup) <= pin.mIndex) {
@@ -627,10 +644,15 @@ namespace NodeGraph {
     void NodeGraph::connectDataIn(Pin target, Pin source)
     {
         if (!source.mNode) {
-            assert(mDataProviderPins.size() >= source.mIndex);
-            if (mDataProviderPins.size() == source.mIndex)
-                mDataProviderPins.emplace_back();
-            mDataProviderPins[source.mIndex].mTargets.push_back(target);
+            assert(source.mGroup < 2);
+            if (source.mGroup == 0) {
+                assert(mDataProviderPins.size() >= source.mIndex);
+                if (mDataProviderPins.size() == source.mIndex)
+                    mDataProviderPins.emplace_back();
+                mDataProviderPins[source.mIndex].mTargets.push_back(target);
+            } else {
+                mInputBindings[source.mIndex].mTargets.push_back(target);
+            } 
         } else {
             node(source.mNode)->onDataProviderUpdate(source, CONNECT);
             node(source.mNode)->mDataProviderPins[source.mGroup][source.mIndex].mTargets.push_back(target);

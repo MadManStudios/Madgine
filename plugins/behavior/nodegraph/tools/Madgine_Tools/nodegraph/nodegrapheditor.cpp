@@ -159,6 +159,14 @@ namespace Tools {
             if (mDragPin && mDragPin->mDir == NodeGraph::PinDir::In && mDragPin->mType == NodeGraph::PinType::Data) {
                 DataProviderPin(nullptr, 0, pinId, 0, *mDragType, mDragMask, false);
             }
+
+            pinId = 0;
+            for (const NodeGraph::NodeGraph::InputBinding& binding : mGraph.mInputBindings) {
+                if (DataProviderPin(binding.mDescriptor.mName.c_str(), 0, pinId, 1, binding.mDescriptor.mType, NodeGraph::NodeExecutionMask::ALL, !binding.mTargets.empty()))
+                    hoveredPin = binding.mDescriptor.mType;
+                ++pinId;
+            }
+
             ImGui::EndVertical();
             ed::EndNode();
 
@@ -375,6 +383,8 @@ namespace Tools {
                 } else {
                     mSelectedNodeIndex.reset();
                 }
+
+                mSelectedInputs = nodeId == std::numeric_limits<int>::max() - 1;
             } else {
                 mSelectedNodeIndex.reset();
             }
@@ -406,6 +416,13 @@ namespace Tools {
         if (mNodeDetailsVisible) {
             if (ImGui::Begin("Node graph - Node Details", &mNodeDetailsVisible)) {
                 ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
+                if (mSelectedInputs) {
+                    if (ImGui::BeginTable("inputs", 2, ImGuiTableFlags_Resizable)) {
+                        KeyValueVirtualSequenceRange range { mGraph.mInputBindings };
+                        mIsDirty |= getTool<Inspector>().drawValue("Inputs", range, true);
+                        ImGui::EndTable();
+                    }
+                }
                 if (mSelectedNodeIndex) {
                     if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
                         mIsDirty |= getTool<Inspector>().drawMembers(mGraph.nodes()[mSelectedNodeIndex].get());

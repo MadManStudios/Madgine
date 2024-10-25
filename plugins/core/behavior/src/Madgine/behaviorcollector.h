@@ -5,14 +5,22 @@
 
 #include "Modules/threading/taskfuture.h"
 
+#include "Generic/opaqueptr.h"
+
 namespace Engine {
 
 struct BehaviorFactoryBase {
     virtual std::vector<std::string_view> names() const = 0;
-    virtual Behavior create(std::string_view name, const ParameterTuple &args) const = 0;
-    virtual Threading::TaskFuture<ParameterTuple> createParameters(std::string_view name) const = 0;
-    virtual std::vector<ValueTypeDesc> parameterTypes(std::string_view name) const = 0;
-    virtual std::vector<ValueTypeDesc> resultTypes(std::string_view name) const = 0;
+    virtual UniqueOpaquePtr load(std::string_view name) const = 0;
+    virtual Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const = 0;
+    virtual void release(UniqueOpaquePtr &ptr) const = 0;
+    virtual std::string_view name(const UniqueOpaquePtr &handle) const = 0;
+    virtual Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const = 0;
+    virtual Threading::TaskFuture<ParameterTuple> createParameters(const UniqueOpaquePtr &handle) const = 0;
+    virtual ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const = 0;
+    virtual std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const = 0;
+    virtual std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const = 0;
+    virtual std::vector<BindingDescriptor> bindings(const UniqueOpaquePtr &handle) const = 0;
 };
 
 struct BehaviorFactoryAnnotation {
@@ -23,25 +31,6 @@ struct BehaviorFactoryAnnotation {
     }
 
     const BehaviorFactoryBase *mFactory;
-};
-
-template <typename T>
-struct DummyType {
-};
-
-struct MADGINE_BEHAVIOR_EXPORT BehaviorHandle {
-    Behavior create(const ParameterTuple &args) const;
-    Threading::TaskFuture<ParameterTuple> createParameters() const;
-    std::vector<ValueTypeDesc> parameterTypes() const;
-    std::vector<ValueTypeDesc> resultTypes() const;
-
-    std::string toString() const;
-    bool fromString(std::string_view s);
-
-    explicit operator bool() const;
-
-    IndexType<uint32_t> mIndex;
-    std::string mName;
 };
 }
 
