@@ -17,8 +17,8 @@
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-#include "bullet3-3.24/src/BulletSoftBody/btSoftRigidDynamicsWorld.h"
-#include "bullet3-3.24/src/btBulletDynamicsCommon.h"
+#include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
+#include "btBulletDynamicsCommon.h"
 
 UNIQUECOMPONENT(Engine::Physics::PhysicsManager)
 

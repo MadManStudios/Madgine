@@ -255,6 +255,23 @@ function(get_dependencies list target)
 
 endfunction(get_dependencies)
 
+
+SET(CMAKE_DEBUG_POSTFIX "" CACHE STRING "" FORCE) #Some libs set this value
+set(USE_MSVC_RUNTIME_LIBRARY_DLL ${BUILD_SHARED_LIBS} CACHE BOOL "" FORCE)
+
+macro(push_static)
+	set(OLD_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+	set(OLD_BUILD_TESTING ${BUILD_TESTING})
+
+	set(BUILD_SHARED_LIBS OFF)
+	set(BUILD_TESTING OFF)
+endmacro()
+
+macro(pop_static)
+	set(BUILD_SHARED_LIBS ${OLD_BUILD_SHARED_LIBS})
+	set(BUILD_TESTING ${OLD_BUILD_TESTING})
+endmacro()
+
 #Iterate over all files in platform
 
 set (globbing_expr "${CMAKE_CURRENT_LIST_DIR}/platform/*.cmake")
@@ -269,5 +286,3 @@ foreach(platform ${platforms})
 	message(STATUS "Adding platform-code: ${platform}")
 	include (${platform})
 endforeach()
-
-

@@ -1,5 +1,7 @@
 Project(GooglePlayServices)
 
+add_subdirectory(shared)
+
 if (NOT TARGET PlayServices)
 	return()
 endif()

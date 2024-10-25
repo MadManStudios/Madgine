@@ -1,6 +1,8 @@
 
 PROJECT(Resources)
 
+add_subdirectory(shared)
+
 set(sources "")
 FolderSources(sources "" src)
 	FolderSources(sources src Madgine)

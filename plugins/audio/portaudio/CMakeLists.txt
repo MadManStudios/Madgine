@@ -1,5 +1,7 @@
 Project(PortAudioApi)
 
+add_subdirectory(shared)
+
 if (NOT TARGET portaudio_static)
 	return()
 endif()

@@ -1,7 +1,7 @@
 
 Project(Bullet)
 
-
+add_subdirectory(shared)
 
 set(sources "")
 FolderSources(sources "" src)

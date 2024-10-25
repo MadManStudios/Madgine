@@ -1,5 +1,7 @@
 Project(EpicServices)
 
+add_subdirectory(shared)
+
 if (NOT TARGET EOS)
 	return()
 endif()

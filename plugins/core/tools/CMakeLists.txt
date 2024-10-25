@@ -1,5 +1,7 @@
 Project(Tools)
 
+add_subdirectory(shared)
+
 set(sources "")
 FolderSources(sources "" src ) 
 	FolderSources(sources src Madgine_Tools toolbase.cpp toolbase.h toolscollector.cpp toolscollector.h)

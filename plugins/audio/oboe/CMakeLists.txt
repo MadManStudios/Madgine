@@ -1,5 +1,11 @@
 Project(OboeApi)
 
+if (NOT ANDROID)
+	return()
+endif()
+
+add_subdirectory(shared)
+
 if (NOT TARGET oboe)
 	return()
 endif()

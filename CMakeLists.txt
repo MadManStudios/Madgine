@@ -62,6 +62,7 @@ include(util/Project)
 include(Plugins)
 include(Tools)
 include(Testing)
+include(Legal)
 
 set (CPACK_NSIS_MODIFY_PATH ON)
 set (CPACK_PACKAGE_VENDOR "MadMan Studios")
@@ -74,8 +75,6 @@ enable_packaging()
 add_subdirectory(util ${CMAKE_BINARY_DIR}/../util)
 
 add_subdirectory(src)
-
-add_subdirectory(shared)
 
 add_subdirectory(plugins)
 

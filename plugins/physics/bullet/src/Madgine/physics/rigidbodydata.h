@@ -2,7 +2,7 @@
 
 #include "rigidbody.h"
 
-#include "bullet3-3.24/src/BulletSoftBody/btSoftRigidDynamicsWorld.h"
+#include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 
 namespace Engine {
 namespace Physics {

@@ -11,13 +11,13 @@
 
 #include "Meta/serialize/operations.h"
 
-#include "bullet3-3.24/src/BulletCollision/CollisionShapes/btBoxShape.h"
-#include "bullet3-3.24/src/BulletCollision/CollisionShapes/btCapsuleShape.h"
-#include "bullet3-3.24/src/BulletCollision/CollisionShapes/btCompoundShape.h"
-#include "bullet3-3.24/src/BulletCollision/CollisionShapes/btConeShape.h"
-#include "bullet3-3.24/src/BulletCollision/CollisionShapes/btConvexHullShape.h"
-#include "bullet3-3.24/src/BulletCollision/CollisionShapes/btSphereShape.h"
-#include "bullet3-3.24/src/BulletCollision/CollisionShapes/btStaticPlaneShape.h"
+#include "BulletCollision/CollisionShapes/btBoxShape.h"
+#include "BulletCollision/CollisionShapes/btCapsuleShape.h"
+#include "BulletCollision/CollisionShapes/btCompoundShape.h"
+#include "BulletCollision/CollisionShapes/btConeShape.h"
+#include "BulletCollision/CollisionShapes/btConvexHullShape.h"
+#include "BulletCollision/CollisionShapes/btSphereShape.h"
+#include "BulletCollision/CollisionShapes/btStaticPlaneShape.h"
 
 RESOURCELOADER(Engine::Physics::CollisionShapeManager);
 

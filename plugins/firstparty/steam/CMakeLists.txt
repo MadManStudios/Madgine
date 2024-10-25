@@ -1,5 +1,7 @@
 Project(SteamServices)
 
+add_subdirectory(shared)
+
 if (NOT TARGET Steamworks)
 	return()
 endif()

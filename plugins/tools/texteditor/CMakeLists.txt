@@ -1,5 +1,6 @@
 project(TextEditor)
 
+add_subdirectory(shared)
 
 set(sources "")
 FolderSources(sources "" src)
