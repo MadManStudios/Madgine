@@ -89,4 +89,69 @@ struct BindingDescriptor {
     ExtendedValueTypeDesc mType;
 };
 
+template <typename T>
+decltype(auto) wrapBinding(T&& binding) {
+    return [binding { std::forward<T>(binding) }](auto &out)->BehaviorError {
+        out = binding;
+        return {};
+    };
+}
+
+template <fixed_string Name>
+struct with_binding_t {
+
+    template <typename Rec, typename T>
+    struct receiver : Execution::algorithm_receiver<Rec> {
+
+        template <typename O>
+        friend auto tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, O &out)
+        {
+            if (name == Name) {
+                return rec.mBinding(out);
+            } else {
+                return get_binding_d(rec.mRec, name, out);
+            }
+        }
+
+        T mBinding;
+    };
+
+    template <typename Inner, typename T>
+    struct sender : Execution::algorithm_sender<Inner> {
+        template <typename Rec>
+        friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
+        {
+            return Execution::algorithm_state<Inner, receiver<Rec, T>> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mBinding) };
+        }
+
+        T mBinding;
+    };
+
+    
+    template <typename Sender, typename T>
+    friend auto tag_invoke(with_binding_t, Sender &&inner, T &&binding)
+    {
+        return sender<Sender, decltype(wrapBinding(std::forward<T>(binding)))> { { {}, std::forward<Sender>(inner) }, wrapBinding(std::forward<T>(binding)) };
+    }
+
+    template <typename Sender, typename T>
+    requires tag_invocable<with_binding_t, Sender, T>
+    auto operator()(Sender &&sender, T &&binding) const
+        noexcept(is_nothrow_tag_invocable_v<with_binding_t, Sender, T>)
+            -> tag_invoke_result_t<with_binding_t, Sender, T>
+    {
+        return tag_invoke(*this, std::forward<Sender>(sender), std::forward<T>(binding));
+    }
+
+    template <typename T>
+    auto operator()(T &&binding) const
+    {
+        return pipable_from_right(*this, std::forward<T>(binding));
+    }
+
+};
+
+template <fixed_string Name>
+constexpr with_binding_t<Name> with_binding;
+
 }

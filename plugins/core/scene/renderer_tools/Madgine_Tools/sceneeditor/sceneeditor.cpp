@@ -414,7 +414,7 @@ namespace Tools {
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
-                if (BehaviorHandle behavior = ImGui::BehaviorSelector()) {
+                if (BehaviorHandle behavior = BehaviorSelector()) {
                     mPendingBehavior.mTargetEntity = entity;
                     mPendingBehavior.mHandle = behavior;
                     mPendingBehavior.mFuture = behavior.createParameters();

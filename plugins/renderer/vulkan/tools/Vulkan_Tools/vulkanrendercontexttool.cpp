@@ -37,7 +37,7 @@ namespace Tools {
 
     Threading::Task<bool> VulkanRenderContextTool::init()
     {
-        mImageTexture = { Render::TextureType_2D, false, Render::FORMAT_RGBA8, 100, 100 };
+        mImageTexture = { Render::TextureType_2D, false, Render::FORMAT_RGBA8, { 100, 100 } };
 
         getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](Resources::ImageLoader::Resource *image) {
             Resources::ImageLoader::Handle data = image->loadData();

@@ -79,8 +79,8 @@ namespace Render {
             1, &barrier);
     }
 
-    VulkanTexture::VulkanTexture(TextureType type, bool isRenderTarget, TextureFormat format, size_t width, size_t height, size_t samples, const ByteBuffer &data)
-        : Texture(type, format, { static_cast<int>(width), static_cast<int>(height) })
+    VulkanTexture::VulkanTexture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples, const ByteBuffer &data)
+        : Texture(type, format, size)
         , mIsRenderTarget(isRenderTarget)
         , mSamples(samples)
     {
@@ -99,7 +99,7 @@ namespace Render {
             std::terminate();
         }
 
-        VkDeviceSize imageSize = width * height * byteCount;
+        VkDeviceSize imageSize = size.x * size.y * byteCount;
 
         assert(samples == 1 || type == TextureType_2DMultiSample);
 
@@ -116,8 +116,8 @@ namespace Render {
 
         VkImageCreateInfo imageInfo {};
         imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-        imageInfo.extent.width = width;
-        imageInfo.extent.height = height;
+        imageInfo.extent.width = size.x;
+        imageInfo.extent.height = size.y;
         imageInfo.extent.depth = 1;
         imageInfo.mipLevels = 1;
         imageInfo.arrayLayers = 1;
@@ -208,8 +208,8 @@ namespace Render {
 
             region.imageOffset = { 0, 0, 0 };
             region.imageExtent = {
-                static_cast<uint32_t>(width),
-                static_cast<uint32_t>(height),
+                static_cast<uint32_t>(size.x),
+                static_cast<uint32_t>(size.y),
                 1
             };
             vkCmdCopyBufferToImage(
@@ -328,7 +328,7 @@ namespace Render {
 
     void VulkanTexture::setData(Vector2i size, const ByteBuffer &data)
     {
-        *this = VulkanTexture { mType, mIsRenderTarget, mFormat, static_cast<size_t>(size.x), static_cast<size_t>(size.y), mSamples, data };
+        *this = VulkanTexture { mType, mIsRenderTarget, mFormat, size, mSamples, data };
     }
 
     void VulkanTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)

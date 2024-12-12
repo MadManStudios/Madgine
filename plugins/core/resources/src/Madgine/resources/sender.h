@@ -25,15 +25,18 @@ namespace Resources {
 
             void start()
             {
-                if (this->mRec.mHandle.info()->loadingTask().is_ready()) {
-                    mState.start();
+                auto handler = [this](bool success) {
+                    if (success)
+                        mState.start();
+                    else
+                        this->mRec.set_error(GenericResult { GenericResult::UNKNOWN_ERROR });
+                };
+
+                Threading::TaskFuture<bool> fut = this->mRec.mHandle.info()->loadingTask();
+                if (fut.is_ready()) {
+                    handler(fut);
                 } else {
-                    Root::Root::getSingleton().taskQueue()->queueTask(this->mRec.mHandle.info()->loadingTask().then([this](bool success) {
-                        if (success)
-                            mState.start();
-                        else
-                            this->mRec.set_error(GenericResult { GenericResult::UNKNOWN_ERROR });
-                    }));
+                    Root::Root::getSingleton().taskQueue()->queueTask(fut.then(handler));
                 }
             }
 

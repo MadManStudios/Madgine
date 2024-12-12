@@ -19,7 +19,9 @@ if (EMSCRIPTEN)
 
 		set_target_properties(${target} PROPERTIES SUFFIX ".html")
 
-		_target_link_libraries(${target} PRIVATE "--preload-file ${CMAKE_BINARY_DIR}/data@/data")
+		_target_link_libraries(${target} PRIVATE "--preload-file \"${CMAKE_BINARY_DIR}/data@/data\"")
+
+		file(GENERATE OUTPUT ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_BASE_NAME:${target}>.bat CONTENT "emrun ./$<TARGET_FILE_NAME:${target}>")
 
 	endfunction (add_workspace_application)
 

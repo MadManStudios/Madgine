@@ -274,7 +274,7 @@ namespace Tools {
         unsigned char *pixels;
         int width, height;
         io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
-        co_await mFontTexture.create(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { width, height }, { pixels, static_cast<size_t>(width * height * 4) });
+        co_await mFontTexture.createTask(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { width, height }, { pixels, static_cast<size_t>(width * height * 4) });
 
         io.Fonts->SetTexID(mFontTexture->resource());
 

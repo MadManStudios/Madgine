@@ -33,16 +33,6 @@ namespace Render {
 #    if ANDROID || EMSCRIPTEN
         EGLSurface mSurface = nullptr;
 #    endif
-
-        static THREADLOCAL(OpenGLSSBOBufferStorage *) sCurrentSSBOBuffer;
-        mutable std::optional<OpenGLSSBOBufferStorage> mSSBOBuffer;
-
-    public:
-        static OpenGLSSBOBufferStorage &getSSBOStorage()
-        {
-            assert(sCurrentSSBOBuffer);
-            return *sCurrentSSBOBuffer;
-        }
 #endif
     };
 

@@ -49,7 +49,7 @@ namespace Threading {
 
     void TaskHandle::resumeInQueue()
     {
-        queue()->queueHandle(std::move(*this));
+        queue()->queueHandle(std::move(*this), true);
     }
 
     std::coroutine_handle<TaskSuspendablePromiseTypeBase> TaskHandle::release()

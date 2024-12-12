@@ -14,6 +14,8 @@
 
 #include "launcherconfig.h"
 
+#include "Interfaces/filesystem/path.h"
+
 #if EMSCRIPTEN
 #    define FIX_LOCAL static
 #else
@@ -26,6 +28,8 @@
 
 int launch(Engine::Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)> callback)
 {
+    Engine::Filesystem::Path path { "/cwd/.." };
+
     FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::App::Application> app { "Application" };
 
     FIX_LOCAL Engine::Window::WindowSettings windowSettings;

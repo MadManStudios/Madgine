@@ -9,8 +9,8 @@
 namespace Engine {
 namespace Render {
 
-    DirectX12Texture::DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, size_t width, size_t height, size_t samples, const ByteBuffer &data)
-        : Texture(type, format, { static_cast<int>(width), static_cast<int>(height) })
+    DirectX12Texture::DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples, const ByteBuffer &data)
+        : Texture(type, format, size)
         , mIsRenderTarget(isRenderTarget)
         , mSamples(samples)
     {
@@ -49,8 +49,8 @@ namespace Render {
         D3D12_RESOURCE_DESC textureDesc {};
 
         textureDesc.Format = xFormat;
-        textureDesc.Width = width;
-        textureDesc.Height = height;
+        textureDesc.Width = size.x;
+        textureDesc.Height = size.y;
         textureDesc.MipLevels = 1;
         textureDesc.SampleDesc.Count = samples;
         textureDesc.SampleDesc.Quality = 0;
@@ -111,8 +111,8 @@ namespace Render {
 
             D3D12_SUBRESOURCE_DATA subResourceDesc;
             subResourceDesc.pData = data.mData;
-            subResourceDesc.RowPitch = width * byteCount;
-            subResourceDesc.SlicePitch = subResourceDesc.RowPitch * height;
+            subResourceDesc.RowPitch = size.x * byteCount;
+            subResourceDesc.SlicePitch = subResourceDesc.RowPitch * size.y;
 
             DirectX12CommandList list = DirectX12RenderContext::getSingleton().fetchCommandList(D3D12_COMMAND_LIST_TYPE_DIRECT);
 
@@ -166,7 +166,7 @@ namespace Render {
 
     void DirectX12Texture::setData(Vector2i size, const ByteBuffer &data)
     {
-        *this = DirectX12Texture { mType, mIsRenderTarget, mFormat, static_cast<size_t>(size.x), static_cast<size_t>(size.y), mSamples, data };
+        *this = DirectX12Texture { mType, mIsRenderTarget, mFormat, size, mSamples, data };
     }
 
     void DirectX12Texture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)

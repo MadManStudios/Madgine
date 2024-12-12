@@ -342,7 +342,7 @@ namespace Tools {
                         }
                         ImGui::EndMenu();
                     }
-                    if (BehaviorHandle behavior = ImGui::BehaviorSelector()) {
+                    if (BehaviorHandle behavior = BehaviorSelector()) {
                         NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<NodeGraph::LibraryNode>(mGraph, behavior));
                         ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
                     }

@@ -57,6 +57,7 @@ namespace Render {
         , mSamples(context->supportsMultisampling() ? config.mSamples : 1)
         , mSize { 0, 0 }
         , mType(config.mType)
+        , mCreateDepthTexture(config.mCreateDepthBufferView)
     {
         if (mType == TextureType_2DMultiSample && !context->supportsMultisampling())
             mType = TextureType_2D;
@@ -68,18 +69,10 @@ namespace Render {
 
         for (size_t i = 0; i < config.mTextureCount * bufferCount; ++i) {
             OpenGLTexture &tex = mTextures.emplace_back(mType, config.mFormat, config.mSamples);
-            if (mType != TextureType_2DMultiSample) {
-                tex.setWrapMode(GL_CLAMP_TO_EDGE);
-                tex.setFilter(GL_NEAREST);
-            }
         }
 
-        if (createDepthBufferView) {
+        if (mCreateDepthTexture) {
             mDepthTexture = { mType, FORMAT_D32, mSamples };
-            if (mType == TextureType_Cube) {
-                mDepthTexture.setWrapMode(GL_CLAMP_TO_EDGE);
-                mDepthTexture.setFilter(GL_NEAREST);
-            }
         } else {
             glGenRenderbuffers(1, &mDepthRenderbuffer);
             GL_CHECK();
@@ -113,8 +106,13 @@ namespace Render {
 
         assert(width > 0 && height > 0);
 
-        for (OpenGLTexture &tex : mTextures)
+        for (OpenGLTexture &tex : mTextures) {
             tex.setData({ width, height }, {});
+            if (mType != TextureType_2DMultiSample) {
+                tex.setWrapMode(GL_CLAMP_TO_EDGE);
+                tex.setFilter(GL_NEAREST);
+            }
+        }
 
         if (mDepthRenderbuffer) {
             glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
@@ -129,8 +127,12 @@ namespace Render {
             glBindRenderbuffer(GL_RENDERBUFFER, 0);
             GL_CHECK();
         }
-        if (mDepthTexture) {
+        if (mCreateDepthTexture) {
             mDepthTexture.setData({ width, height }, {});
+            if (mType == TextureType_Cube) {
+                mDepthTexture.setWrapMode(GL_CLAMP_TO_EDGE);
+                mDepthTexture.setFilter(GL_NEAREST);
+            }
         }
 
         size_t framebufferCount = getFramebufferCount();
@@ -144,7 +146,7 @@ namespace Render {
                     attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
                 }
 
-                if (mDepthTexture) {
+                if (mCreateDepthTexture) {
                     attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
                 } else {
                     glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
@@ -167,7 +169,7 @@ namespace Render {
     {
         auto pib = mFramebuffers.try_emplace(mFlipFlopIndices);
         auto it = pib.first;
-        if (pib.second) {            
+        if (pib.second) {
             glGenFramebuffers(mFramebufferCount, it->second.data());
             GL_CHECK();
 
@@ -181,7 +183,7 @@ namespace Render {
                     attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
                 }
 
-                if (mDepthTexture) {
+                if (mCreateDepthTexture) {
                     attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
                 } else {
                     glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
@@ -272,7 +274,7 @@ namespace Render {
 
         auto pib = mFramebuffers.try_emplace(mFlipFlopIndices);
         auto it = pib.first;
-        if (pib.second) {            
+        if (pib.second) {
             glGenFramebuffers(mFramebufferCount, it->second.data());
             GL_CHECK();
 
@@ -286,7 +288,7 @@ namespace Render {
                     attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
                 }
 
-                if (mDepthTexture) {
+                if (mCreateDepthTexture) {
                     attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
                 } else {
                     glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
@@ -325,7 +327,11 @@ namespace Render {
                 GLenum attachment = GL_COLOR_ATTACHMENT0 + j;
                 glReadBuffer(attachment);
                 GL_CHECK();
+#if !OPENGL_ES
                 glDrawBuffer(attachment);
+#else
+                glDrawBuffers(1, &attachment);
+#endif
                 GL_CHECK();
                 glBlitFramebuffer(0, 0, inputTex->mSize.x, inputTex->mSize.y, 0, 0, mSize.x, mSize.y, GL_COLOR_BUFFER_BIT, GL_NEAREST);
                 GL_CHECK();

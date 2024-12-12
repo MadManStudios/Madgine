@@ -964,7 +964,7 @@ namespace Render {
         VK_FORMAT_R32G32B32A32_SFLOAT
     };
 
-    std::pair<std::vector<VkVertexInputBindingDescription>, std::vector<VkVertexInputAttributeDescription>> VulkanRenderContext::createVertexLayout(VertexFormat format, size_t instanceDataSize)
+    std::pair<std::vector<VkVertexInputBindingDescription>, std::vector<VkVertexInputAttributeDescription>> VulkanRenderContext::createVertexLayout(VertexFormat format)
     {
         std::pair<std::vector<VkVertexInputBindingDescription>, std::vector<VkVertexInputAttributeDescription>> vertexLayoutDesc;
 
@@ -980,14 +980,6 @@ namespace Render {
                 offset += sVertexElementSizes[i];
             } else {
                 vertexLayoutDesc.second.push_back({ i, 2, vFormats[i], vConstantOffsets[i] });
-            }
-        }
-
-        if (instanceDataSize > 0) {
-            vertexLayoutDesc.first.push_back({ 1, static_cast<uint32_t>(instanceDataSize), VK_VERTEX_INPUT_RATE_INSTANCE });
-            assert(instanceDataSize % 16 == 0);
-            for (size_t i = 0; i < instanceDataSize / 16; ++i) {
-                vertexLayoutDesc.second.push_back({ static_cast<uint32_t>(VertexElements::size + i), 1, VK_FORMAT_R32G32B32A32_SFLOAT, static_cast<uint32_t>(i * 16) });
             }
         }
 

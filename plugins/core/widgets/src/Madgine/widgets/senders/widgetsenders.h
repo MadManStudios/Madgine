@@ -11,8 +11,5 @@ namespace Widgets {
     using WidgetBinding = Binding<"Widget", WidgetBase*>;
     constexpr WidgetBinding widgetBinding;
 
-    using WidgetManagerBinding = Binding<"WidgetManager", WidgetManager*>;
-    constexpr WidgetManagerBinding widgetManagerBinding;
-
 }
 }

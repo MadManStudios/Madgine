@@ -79,13 +79,13 @@ namespace Tools {
         void close(DialogResult result) override
         {
             DialogStateBase::close(result);
-            TupleUnpacker::invokeExpand(LIFT(mRec.set_value, this), result, std::move(mTuple));
+            TupleUnpacker::invokeExpand(LIFT(this->mRec.set_value, this), result, std::move(mTuple));
         }
 
         void cancel() override
         {
             DialogStateBase::cancel();
-            mRec.set_done();
+            this->mRec.set_done();
         }
 
         F mF;
@@ -97,7 +97,7 @@ namespace Tools {
 
         using result_type = void;
         template <template <typename...> typename Variant>
-        using value_types = typename Engine::to_type_pack<Tuple>::prepend<DialogResult>::instantiate<Variant>;
+        using value_types = typename Engine::to_type_pack<Tuple>::template prepend<DialogResult>::template instantiate<Variant>;
 
         template <typename Rec>
         friend auto tag_invoke(Engine::Execution::connect_t, DialogSender &&sender, Rec &&rec)

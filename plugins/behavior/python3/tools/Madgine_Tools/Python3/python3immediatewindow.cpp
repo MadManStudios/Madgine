@@ -34,6 +34,7 @@
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>
 #else
+#    define Py_BUILD_CORE
 #    include "internal/pycore_frame.h"
 #endif
 

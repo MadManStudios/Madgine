@@ -53,7 +53,7 @@ namespace Threading {
 
         void set_value(T val)
         {
-            ManualLifetime<Execution::Flag<T>::CallbackDelay> cb = std::nullopt;
+            ManualLifetime<typename Execution::Flag<T>::CallbackDelay> cb = std::nullopt;
             {
                 std::lock_guard guard { mMutex };
                 construct(cb, mFlag.emplace(std::move(val)));

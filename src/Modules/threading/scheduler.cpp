@@ -8,17 +8,6 @@
 
 #include "Interfaces/threading/threadapi.h"
 
-#if EMSCRIPTEN
-
-#    include <emscripten.h>
-
-void emscriptenLoop(void *scheduler)
-{
-    static_cast<Engine::Threading::Scheduler *>(scheduler)->singleLoop();
-}
-
-#endif
-
 namespace Engine {
 namespace Threading {
 
@@ -29,10 +18,7 @@ namespace Threading {
 
     int Scheduler::go()
     {
-#if EMSCRIPTEN
-        emscripten_set_main_loop_arg(&emscriptenLoop, this, 0, false);
-#else
-
+#if !EMSCRIPTEN
         Threading::TaskQueue *main_queue = nullptr;
 
         for (Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
@@ -83,13 +69,6 @@ namespace Threading {
         queue->mTracker.mThread = std::this_thread::get_id();
 #endif
         setCurrentThreadName(mWorkgroup.name() + "_" + queue->name() + tags);
-    }
-
-    void Scheduler::singleLoop()
-    {
-        for (Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
-            queue->update(1);
-        }
     }
 
 }

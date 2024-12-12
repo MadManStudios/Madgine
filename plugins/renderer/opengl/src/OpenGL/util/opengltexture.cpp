@@ -8,8 +8,8 @@
 namespace Engine {
 namespace Render {
 
-    OpenGLTexture::OpenGLTexture(TextureType type, TextureFormat format, size_t samples)
-        : Texture(type, format)
+    OpenGLTexture::OpenGLTexture(TextureType type, TextureFormat format, Vector2i size, size_t samples, const ByteBuffer &data)
+        : Texture(type, format, size)
         , mSamples(samples)
     {
         GLuint temp;
@@ -30,56 +30,7 @@ namespace Render {
         mBlock.mResources[0].mHandle = mTextureHandle;
         mBlock.mResources[0].mTarget = target();
         mResourceBlock.setupAs<OpenGLResourceBlock<1> *>() = &mBlock;
-    }
 
-    OpenGLTexture::OpenGLTexture(OpenGLTexture &&other)
-        : Texture(std::move(other))
-        , mBlock(std::move(other.mBlock))
-        , mSamples(std::move(other.mSamples))
-    {
-        OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
-        assert(block == &other.mBlock);
-        mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &mBlock;
-    }
-
-    OpenGLTexture::~OpenGLTexture()
-    {
-        reset();
-    }
-
-    OpenGLTexture &OpenGLTexture::operator=(OpenGLTexture &&other)
-    {
-        Texture::operator=(std::move(other));
-        std::swap(mBlock, other.mBlock);
-        OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
-        assert(block == &other.mBlock);
-        mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &mBlock;
-
-        std::swap(mSamples, other.mSamples);
-        return *this;
-    }
-
-    void OpenGLTexture::reset()
-    {
-        if (mTextureHandle) {
-            GLuint handle = mTextureHandle.release<GLuint>();
-            glDeleteTextures(1, &handle);
-            GL_CHECK();
-        }
-        if (mResourceBlock) {
-            OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
-            assert(block == &mBlock);
-        }
-    }
-
-    void OpenGLTexture::bind() const
-    {
-        glBindTexture(target(), mTextureHandle);
-        GL_CHECK();
-    }
-
-    void OpenGLTexture::setData(Vector2i size, const ByteBuffer &data)
-    {
         GLenum internalStorage;
         GLenum internalFormat;
         GLenum sizedFormat;
@@ -94,7 +45,7 @@ namespace Render {
         case FORMAT_RGBA8_SRGB:
             internalStorage = GL_UNSIGNED_BYTE;
             internalFormat = GL_RGBA;
-            sizedFormat = GL_SRGB_ALPHA;
+            sizedFormat = GL_SRGB8_ALPHA8;
             byteWidth = 4;
             break;
         case FORMAT_RGBA16F:
@@ -128,24 +79,90 @@ namespace Render {
         case TextureType_2D:
             glTexImage2D(target(), 0, sizedFormat, size.x, size.y, 0, internalFormat, internalStorage, data.mData);
             break;
+#if MULTISAMPLING
         case TextureType_2DMultiSample:
-#if OPENGL_ES
-#    if OPENGL_ES >= 31
             glTexStorage2DMultisample(target(), mSamples, sizedFormat, size.x, size.y, true);
-#    else
-            throw 0;
-#    endif
-#else
-            glTexImage2DMultisample(target(), mSamples, sizedFormat, size.x, size.y, true);
-#endif
             break;
+#endif
         case TextureType_Cube:
             for (int i = 0; i < 6; ++i)
                 glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, sizedFormat, size.x, size.y, 0, internalFormat, internalStorage, data.mData);
             break;
+        default:
+            throw 0;
         }
         GL_CHECK();
-        mSize = size;
+    }
+
+    OpenGLTexture::OpenGLTexture(TextureType type, TextureFormat format, size_t samples)
+        : Texture(type, format)
+        , mSamples(samples)
+    {
+    }
+
+    OpenGLTexture::OpenGLTexture(OpenGLTexture &&other)
+        : Texture(std::move(other))
+        , mBlock(std::move(other.mBlock))
+        , mSamples(std::move(other.mSamples))
+    {
+        if (mResourceBlock) {
+            OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
+            assert(block == &other.mBlock);
+            mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &mBlock;
+        }
+        if (other.mResourceBlock) {
+            OpenGLResourceBlock<> *block = other.mResourceBlock.release<OpenGLResourceBlock<> *>();
+            assert(block == &mBlock);
+            other.mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &other.mBlock;
+        }
+    }
+
+    OpenGLTexture::~OpenGLTexture()
+    {
+        reset();
+    }
+
+    OpenGLTexture &OpenGLTexture::operator=(OpenGLTexture &&other)
+    {
+        Texture::operator=(std::move(other));
+        std::swap(mBlock, other.mBlock);
+        if (mResourceBlock) {
+            OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
+            assert(block == &other.mBlock);
+            mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &mBlock;
+        }
+        if (other.mResourceBlock) {
+            OpenGLResourceBlock<> *block = other.mResourceBlock.release<OpenGLResourceBlock<> *>();
+            assert(block == &mBlock);
+            other.mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &other.mBlock;
+        }
+
+        std::swap(mSamples, other.mSamples);
+        return *this;
+    }
+
+    void OpenGLTexture::reset()
+    {
+        if (mTextureHandle) {
+            GLuint handle = mTextureHandle.release<GLuint>();
+            glDeleteTextures(1, &handle);
+            GL_CHECK();
+        }
+        if (mResourceBlock) {
+            OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
+            assert(block == &mBlock);
+        }
+    }
+
+    void OpenGLTexture::bind() const
+    {
+        glBindTexture(target(), mTextureHandle);
+        GL_CHECK();
+    }
+
+    void OpenGLTexture::setData(Vector2i size, const ByteBuffer &data)
+    {
+        *this = OpenGLTexture { mType, mFormat, size, mSamples, data };
     }
 
     void OpenGLTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)
@@ -220,11 +237,6 @@ namespace Render {
         default:
             throw 0;
         }
-    }
-
-    OpenGLTexture::operator bool() const
-    {
-        return static_cast<bool>(mTextureHandle);
     }
 
 }

@@ -22,7 +22,12 @@ std::vector<std::string_view> NativeBehaviorFactory::names() const
 UniqueOpaquePtr NativeBehaviorFactory::load(std::string_view name) const
 {
     UniqueOpaquePtr ptr;
-    ptr.setupAs<const NativeBehaviorInfo *>() = NativeBehaviorRegistry::get(NativeBehaviorRegistry::sComponentsByName().at(name)).mInfo;
+
+    auto it = NativeBehaviorRegistry::sComponentsByName().find(name);
+
+    if (it != NativeBehaviorRegistry::sComponentsByName().end())
+        ptr.setupAs<const NativeBehaviorInfo *>() = NativeBehaviorRegistry::get(it->second).mInfo;
+
     return ptr;
 }
 

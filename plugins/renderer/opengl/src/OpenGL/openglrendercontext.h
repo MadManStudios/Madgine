@@ -4,11 +4,11 @@
 #include "Madgine/render/rendercontextcollector.h"
 #include "Madgine/render/vertexformat.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
-#include "util/openglvertexarray.h"
 #include "util/openglheapallocator.h"
+#include "util/openglvertexarray.h"
 
-#include "Generic/allocator/bump.h"
 #include "Generic/allocator/bucket.h"
+#include "Generic/allocator/bump.h"
 #include "Generic/allocator/fixed.h"
 #include "Generic/allocator/heap.h"
 
@@ -39,7 +39,7 @@ namespace Render {
         virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture *> textures) override;
         virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
 
-        void bindFormat(VertexFormat format, OpenGLBuffer *instanceBuffer, size_t instanceDataSize);
+        void bindFormat(VertexFormat format, size_t offset = 0);
         void unbindFormat();
 
         OpenGLHeapAllocator mBufferMemoryHeap;
@@ -47,6 +47,11 @@ namespace Render {
 
         OpenGLMappedHeapAllocator mTempMemoryHeap;
         BumpAllocator<FixedAllocator<OpenGLMappedHeapAllocator &>> mTempAllocator;
+
+#if EMSCRIPTEN
+        OpenGLMappedHeapAllocator mTempIndexMemoryHeap;
+        BumpAllocator<FixedAllocator<OpenGLMappedHeapAllocator &>> mTempIndexAllocator;
+#endif
 
     private:
         std::map<VertexFormat, OpenGLVertexArray> mVAOs;

@@ -17,11 +17,6 @@ extern EGLDisplay sDisplay;
 namespace Engine {
 namespace Render {
 
-#if OPENGL_ES
-    THREADLOCAL(OpenGLSSBOBufferStorage *)
-    OpenGLRenderWindow::sCurrentSSBOBuffer = nullptr;
-#endif
-
     OpenGLRenderWindow::OpenGLRenderWindow(OpenGLRenderContext *context, Window::OSWindow *w, size_t samples, OpenGLRenderWindow *reusedResources)
         : OpenGLRenderTarget(context, true, w->title())
         , mOsWindow(w)
@@ -68,18 +63,10 @@ namespace Render {
 #endif
 
         mContext = createContext(getSurface(), context->supportsMultisampling() ? samples : 1, reusedContext);
-
-#if OPENGL_ES
-        mSSBOBuffer = { 3, 128 };
-#endif
     }
 
     OpenGLRenderWindow::~OpenGLRenderWindow()
     {
-#if OPENGL_ES
-        mSSBOBuffer.reset();
-#endif
-
         destroyContext(getSurface(), mContext, mReusedContext);
 
 #if ANDROID || EMSCRIPTEN
@@ -108,10 +95,6 @@ namespace Render {
     void OpenGLRenderWindow::beginFrame()
     {
         makeCurrent(getSurface(), mContext);
-
-#if OPENGL_ES
-        sCurrentSSBOBuffer = &*mSSBOBuffer;
-#endif
 
         OpenGLRenderTarget::beginFrame();
     }

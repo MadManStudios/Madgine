@@ -10,6 +10,7 @@
 #include "util/math/pymatrix3.h"
 #include "util/math/pymatrix4.h"
 #include "util/math/pyquaternion.h"
+#include "util/math/pyvector2.h"
 #include "util/math/pyvector3.h"
 #include "util/math/pyvector4.h"
 #include "util/pyapifunction.h"
@@ -20,6 +21,9 @@
 #include "util/pytypedscopeptr.h"
 #include "util/pyvirtualiterator.h"
 #include "util/pyvirtualrange.h"
+#include "util/pysender.h"
+#include "util/pyflags.h"
+#include "util/pyenum.h"
 
 #include "python3fileloader.h"
 
@@ -36,6 +40,7 @@
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>
 #else
+#    define Py_BUILD_CORE
 #    include "internal/pycore_frame.h"
 #endif
 
@@ -141,6 +146,8 @@ namespace Scripting {
                 return NULL;
             if (PyType_Ready(&PyVirtualAssociativeIteratorType) < 0)
                 return NULL;
+            if (PyType_Ready(&PyVector2Type) < 0)
+                return NULL;
             if (PyType_Ready(&PyVector3Type) < 0)
                 return NULL;
             if (PyType_Ready(&PyVector4Type) < 0)
@@ -157,11 +164,23 @@ namespace Scripting {
                 return NULL;
             if (PyType_Ready(&PyBehaviorScopeType) < 0)
                 return NULL;
+            if (PyType_Ready(&PySenderType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyFlagsType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyEnumType) < 0)
+                return NULL;
 
             PyObject *m = PyModule_Create(&PyEngine_module);
             if (m == NULL)
                 return NULL;
 
+            Py_INCREF(&PyVector2Type);
+            if (PyModule_AddObject(m, "Vector2", (PyObject *)&PyVector2Type) < 0) {
+                Py_DECREF(&PyVector2Type);
+                Py_DECREF(m);
+                return NULL;
+            }
             Py_INCREF(&PyVector3Type);
             if (PyModule_AddObject(m, "Vector3", (PyObject *)&PyVector3Type) < 0) {
                 Py_DECREF(&PyVector3Type);
@@ -200,57 +219,63 @@ namespace Scripting {
         Python3Environment::Python3Environment(Root::Root &root)
             : RootComponent(root)
         {
+            root.taskQueue()->addSetupSteps([this]() { return callInit(); },
+                [this]() { return callFinalize(); });
+        }
 
-            root.taskQueue()->addSetupSteps([this]() {
-                wchar_t *program = Py_DecodeLocale("Madgine-Python3-Env", NULL);
+        Threading::Task<bool> Python3Environment::init()
+        {
+            wchar_t *program = Py_DecodeLocale("Madgine-Python3-Env", NULL);
 
-                Py_SetProgramName(program);
+            Py_SetProgramName(program);
 
-                /* Add a built-in module, before Py_Initialize */
-                if (PyImport_AppendInittab("Engine", PyInit_Engine) == -1) {
-                    LOG("Error: could not extend built-in modules table");
-                    mErrorCode = -1;
-                    return false;
-                }
+            /* Add a built-in module, before Py_Initialize */
+            if (PyImport_AppendInittab("Engine", PyInit_Engine) == -1) {
+                LOG("Error: could not extend built-in modules table");
+                mErrorCode = -1;
+                co_return false;
+            }
 
-                /* Add a built-in module, before Py_Initialize */
-                if (PyImport_AppendInittab("Environment", PyInit_Environment) == -1) {
-                    LOG("Error: could not extend built-in modules table");
-                    mErrorCode = -1;
-                    return false;
-                }
+            /* Add a built-in module, before Py_Initialize */
+            if (PyImport_AppendInittab("Environment", PyInit_Environment) == -1) {
+                LOG("Error: could not extend built-in modules table");
+                mErrorCode = -1;
+                co_return false;
+            }
 
-                Py_InitializeEx(0);
+            Py_InitializeEx(0);
 
-                setupExecution();
+            setupExecution();
 
-                PyRun_SimpleString("import Environment");
-                PyRun_SimpleString("import Engine");
-                sStream.redirect("stdout");
-                sStream.redirect("stderr");
+            PyRun_SimpleString("import Environment");
+            PyRun_SimpleString("import Engine");
+            sStream.redirect("stdout");
+            sStream.redirect("stderr");
 
-                Python3FileLoader::getSingleton().setup();
+            Python3FileLoader::getSingleton().setup();
 
-                PyEval_SaveThread();
+            PyEval_SaveThread();
 
-                return true; },
-                []() -> Threading::Task<void> {
-                    Python3FileLoader &loader = Python3FileLoader::getSingleton();
+            co_return true;
+        }
 
-                    for (std::pair<const std::string, Python3FileLoader::Resource> &res : loader) {
-                        co_await res.second.forceUnload();
-                    }
+        Threading::Task<void> Python3Environment::finalize()
+        {
+            Python3FileLoader &loader = Python3FileLoader::getSingleton();
 
-                    lock(nullptr, Execution::unstoppable_token {});
+            for (std::pair<const std::string, Python3FileLoader::Resource> &res : loader) {
+                co_await res.second.forceUnload();
+            }
 
-                    loader.cleanup();
+            lock(nullptr, Execution::unstoppable_token {});
 
-                    sStream.reset("stdout");
-                    sStream.reset("stderr");
+            loader.cleanup();
 
-                    auto result = Py_FinalizeEx();
-                    assert(result == 0);
-                });
+            sStream.reset("stdout");
+            sStream.reset("stderr");
+
+            auto result = Py_FinalizeEx();
+            assert(result == 0);
         }
 
         std::string_view Python3Environment::key() const

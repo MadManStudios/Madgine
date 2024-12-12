@@ -26,13 +26,13 @@ namespace Scene {
             virtual Entity *entity() override
             {
                 Entity *entity;
-                get_binding<"Entity">(mRec, entity);
+                get_binding<"Entity">(this->mRec, entity);
                 return entity;
             }
             virtual SceneManager *scene() override
             {
                 SceneManager *scene;
-                get_binding<"Scene">(mRec, scene);
+                get_binding<"Scene">(this->mRec, scene);
                 return scene;
             }
 

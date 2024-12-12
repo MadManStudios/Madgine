@@ -291,7 +291,7 @@ namespace TupleUnpacker {
     auto num_bindings_impl() noexcept
     {
         return
-#    if _MSC_VER > 1929
+#    if _MSC_VER > 1929 || EMSCRIPTEN
             decltype(
 #    endif
                 overloaded {
@@ -305,7 +305,7 @@ namespace TupleUnpacker {
                     [](auto &&u, int) -> decltype(({auto&& [a,b,c,d,e,f,g] = u; std::integral_constant<size_t, 7>{}; })) { return {}; },
                     [](auto &&u, int) -> decltype(({auto&& [a,b,c,d,e,f,g,h] = u; std::integral_constant<size_t, 8>{}; })) { return {}; },
                     [](auto &&u, int) -> decltype(({auto&& [a,b,c,d,e,f,g,h,i] = u; std::integral_constant<size_t, 9>{}; })) { return {}; } }(std::declval<T>(), int {})
-#    if _MSC_VER > 1929
+#    if _MSC_VER > 1929 || EMSCRIPTEN
             ) {}
 #    endif
         ;

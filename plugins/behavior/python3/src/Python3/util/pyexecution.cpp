@@ -9,7 +9,9 @@
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>
 #else
+#    define Py_BUILD_CORE
 #    include <internal/pycore_frame.h>
+#    include <pyframe.h>
 #endif
 
 #include "pydictptr.h"
@@ -65,25 +67,7 @@ namespace Scripting {
         static PyObject *
         PyBehaviorScope_subscript(PyBehaviorScopeObject *self, PyObject *key)
         {
-
-            PyObject *var = PyObject_GetItem(self->mScope.mInner, key);
-            if (var) {
-                return var;
-            }
-
-            const char *name;
-
-            if (!PyArg_Parse(key, "s", &name))
-                return NULL;
-
-            ValueType v;
-            BehaviorError error = self->mScope.mReceiver->getBinding(name, v);
-            if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS }) {
-                return toPyObject(v);
-            } else {
-                throw 0;
-                return nullptr;
-            }
+            return PyObject_GetItem(self->mScope.mInner, key);
         }
 
         static int

@@ -71,26 +71,24 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-}
-}
+    Engine::BehaviorHandle BehaviorSelector()
+    {
+        Engine::BehaviorHandle result;
 
-namespace ImGui {
-Engine::BehaviorHandle BehaviorSelector()
-{
-    Engine::BehaviorHandle result;
-
-    for (auto [name, index] : Engine::BehaviorFactoryRegistry::sComponentsByName()) {
-        if (ImGui::BeginMenu(name.data())) {
-            const Engine::BehaviorFactoryBase *factory = Engine::BehaviorFactoryRegistry::get(index).mFactory;
-            for (std::string_view name : factory->names()) {
-                if (ImGui::MenuItem(name.data())) {
-                    result = { index, std::string { name } };
+        for (auto [name, index] : Engine::BehaviorFactoryRegistry::sComponentsByName()) {
+            if (ImGui::BeginMenu(name.data())) {
+                const Engine::BehaviorFactoryBase *factory = Engine::BehaviorFactoryRegistry::get(index).mFactory;
+                for (std::string_view name : factory->names()) {
+                    if (ImGui::MenuItem(name.data())) {
+                        result = { index, std::string { name } };
+                    }
                 }
+                ImGui::EndMenu();
             }
-            ImGui::EndMenu();
         }
+
+        return result;
     }
 
-    return result;
 }
 }

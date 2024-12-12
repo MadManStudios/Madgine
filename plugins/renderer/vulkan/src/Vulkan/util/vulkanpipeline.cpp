@@ -27,7 +27,7 @@ namespace Render {
         return true;
     }
 
-    VkPipeline VulkanPipeline::get(VertexFormat format, size_t groupSize, size_t samples, size_t instanceDataSize, VkRenderPass renderpass, bool depthChecking) const
+    VkPipeline VulkanPipeline::get(VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking) const
     {
         size_t samplesBits = sqrt(samples);
         assert(samplesBits * samplesBits == samples);
@@ -89,7 +89,7 @@ namespace Render {
             dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
             dynamicState.pDynamicStates = dynamicStates.data();
 
-            auto vertexLayoutDesc = VulkanRenderContext::createVertexLayout(format, instanceDataSize);
+            auto vertexLayoutDesc = VulkanRenderContext::createVertexLayout(format);
 
             VkPipelineVertexInputStateCreateInfo vertexInputInfo {};
             vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;

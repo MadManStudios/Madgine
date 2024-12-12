@@ -99,53 +99,11 @@ namespace Scene {
             void clearComponents();
             void relocateComponent(EntityComponentHandle<EntityComponentBase> newIndex);
 
-            struct EntityScope {
-
-                template <typename Rec>
-                struct receiver : Execution::algorithm_receiver<Rec> {
-
-                    template <typename O>
-                    friend BehaviorError tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, O &out)
-                    {
-                        if (name == "Entity") {
-                            out = rec.mEntity;
-                            return {};
-                        } else if (name == "Scene"){
-                            out = &rec.mEntity->sceneMgr();
-                            return {};
-                        } else {
-                            return get_binding_d(rec.mRec, name, out);
-                        }
-                    }
-
-                    Entity *mEntity;
-                };
-
-                template <typename Inner>
-                struct sender : Execution::algorithm_sender<Inner> {
-                    template <typename Rec>
-                    friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
-                    {
-                        return Execution::algorithm_state<Inner, receiver<Rec>> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), sender.mEntity };
-                    }
-
-                    Entity *mEntity;
-                };
-
-                template <typename Inner>
-                friend auto operator|(Inner &&inner, EntityScope &&scope)
-                {
-                    return sender<Inner> { { {}, std::forward<Inner>(inner) }, scope.mEntity };
-                }
-
-                Entity *mEntity;
-            };
-
             template <typename Sender>
             void addBehavior(Sender &&sender)
             {
                 Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-                mLifetime.attach(std::forward<Sender>(sender) | EntityScope { this } | Execution::with_debug_location<Execution::SenderLocation>() | Execution::with_sub_debug_location(context) | Log::log_error());
+                mLifetime.attach(std::forward<Sender>(sender) | with_binding<"Entity">(this) | Execution::with_debug_location<Execution::SenderLocation>() | Execution::with_sub_debug_location(context) | Log::log_error());
                 mBehaviorContexts.emplace_back(context);
             }
 

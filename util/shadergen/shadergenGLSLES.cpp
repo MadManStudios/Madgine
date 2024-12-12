@@ -55,7 +55,6 @@ struct ReleasePtr : std::unique_ptr<T, ReleaseDeleter> {
         return -1;                                                   \
     }
 
-
 static std::map<std::string, uint32_t> sSemanticLocationMappings {
     { "POSITION0", 0 },
     { "POSITION1", 1 },
@@ -90,6 +89,7 @@ int transpileGLSLES(const std::wstring &fileName, const std::wstring &outFolder,
         spirv_cross::CompilerGLSL::Options options {};
         options.relax_nan_checks = true;
         options.es = true;
+        options.version = 300;
         glsl.set_common_options(options);
 
         spirv_cross::ShaderResources resources = glsl.get_shader_resources();
@@ -97,7 +97,7 @@ int transpileGLSLES(const std::wstring &fileName, const std::wstring &outFolder,
         std::map<spirv_cross::ID, std::pair<std::string, uint32_t>> imageData;
 
         for (auto &resource : resources.separate_images) {
-            imageData[resource.id] = { glsl.get_name(resource.id), glsl.get_decoration(resource.id, spv::DecorationBinding) };
+            imageData[resource.id] = { glsl.get_name(resource.id), 4 * (glsl.get_decoration(resource.id, spv::DecorationDescriptorSet) - 1) + glsl.get_decoration(resource.id, spv::DecorationBinding) };
         }
 
         glsl.build_dummy_sampler_for_combined_images();
@@ -114,8 +114,21 @@ int transpileGLSLES(const std::wstring &fileName, const std::wstring &outFolder,
 
         for (auto &resource : resources.sampled_images) {
             auto &data = imageData[map[resource.id]];
-            glsl.set_name(resource.id, data.first);
+            glsl.set_name(resource.id, "texture" + std::to_string(data.second));
             glsl.set_decoration(resource.id, spv::DecorationBinding, data.second);
+        }
+
+        glsl.add_header_line("#define readonly ");
+        glsl.add_header_line("#define buffer uniform");
+        glsl.add_header_line("#define std430 std140");
+        for (auto &resource : resources.storage_buffers) {
+            uint32_t set = glsl.get_decoration(resource.id, spv::DecorationDescriptorSet);
+            glsl.set_name(resource.base_type_id, "buffer" + std::to_string(4 + (set - 1) + glsl.get_decoration(resource.id, spv::DecorationBinding)));
+        }
+
+        for (auto& resource : resources.uniform_buffers) {            
+            //glsl.set_name(resource.id, "buffer" + std::to_string(glsl.get_decoration(resource.id, spv::DecorationBinding)));
+            glsl.set_name(resource.base_type_id, "buffer" + std::to_string(glsl.get_decoration(resource.id, spv::DecorationBinding)));
         }
 
         for (const spirv_cross::VariableID &id : glsl.get_active_interface_variables()) {
@@ -134,11 +147,25 @@ int transpileGLSLES(const std::wstring &fileName, const std::wstring &outFolder,
             }
         }
 
+        if (glsl.get_execution_model() == spv::ExecutionModel::ExecutionModelFragment) {
+            for (auto &resource : resources.stage_inputs) {
+                std::string name = glsl.get_name(resource.id);
+                name.replace(0, 2, "out");
+                glsl.set_name(resource.id, name);
+            }
+        }
+
         shaderCode = glsl.compile();
+
+        auto it = shaderCode.find("[]");
+        while (it != std::string::npos) {
+            shaderCode.replace(it, 2, "[10]");
+            it = shaderCode.find("[]");
+        }
     } catch (spirv_cross::CompilerError &error) {
         std::cout << std::endl;
         std::wcerr << fileName << "(1,1): error: " << error.what()
-                  << "\n";
+                   << "\n";
         return -1;
     }
 
@@ -150,7 +177,7 @@ int transpileGLSLES(const std::wstring &fileName, const std::wstring &outFolder,
 
     std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
 
-    std::ofstream of { converter.to_bytes( outputFile ) };
+    std::ofstream of { converter.to_bytes(outputFile) };
 
     of << shaderCode << std::endl;
 

@@ -18,11 +18,9 @@ namespace Tools {
         std::string_view key() const override;
     };
 
+    MADGINE_BEHAVIOR_TOOLS_EXPORT BehaviorHandle BehaviorSelector();
+
 }
 }
 
 REGISTER_TYPE(Engine::Tools::BehaviorTool)
-
-namespace ImGui {
-MADGINE_BEHAVIOR_TOOLS_EXPORT Engine::BehaviorHandle BehaviorSelector();
-}

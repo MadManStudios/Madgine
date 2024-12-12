@@ -40,6 +40,7 @@ BehaviorHandle &BehaviorHandle::operator=(const BehaviorHandle &other)
 {
     mIndex = other.mIndex;
     mHandle = BehaviorFactoryRegistry::get(mIndex).mFactory->load(other.name());
+    return *this;
 }
 
 BehaviorHandle &BehaviorHandle::operator=(BehaviorHandle &&other)
@@ -54,7 +55,7 @@ Behavior BehaviorHandle::create(const ParameterTuple &args) const
     return BehaviorFactoryRegistry::get(mIndex).mFactory->create(mHandle, args);
 }
 
-Threading::TaskFuture<bool> Engine::BehaviorHandle::state() const
+Threading::TaskFuture<bool> BehaviorHandle::state() const
 {
     return BehaviorFactoryRegistry::get(mIndex).mFactory->state(mHandle);
 }
@@ -79,7 +80,7 @@ std::vector<ValueTypeDesc> BehaviorHandle::resultTypes() const
     return BehaviorFactoryRegistry::get(mIndex).mFactory->resultTypes(mHandle);
 }
 
-std::vector<BindingDescriptor> Engine::BehaviorHandle::bindings() const
+std::vector<BindingDescriptor> BehaviorHandle::bindings() const
 {
     return BehaviorFactoryRegistry::get(mIndex).mFactory->bindings(mHandle);
 }

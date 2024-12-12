@@ -119,7 +119,7 @@ namespace Filesystem {
         ++sPendingCount;
         if (!sEnqueuesAllowed.test()) {
             --sPendingCount;
-            set_error(GenericResult::UNKNOWN_ERROR);
+            set_done();
             return;
         }
 

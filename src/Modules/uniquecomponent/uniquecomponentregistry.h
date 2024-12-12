@@ -273,7 +273,7 @@ namespace UniqueComponent {
 
         static std::vector<Annotations> sComponents();
 
-        static const Annotations &get(size_t i)
+        static Annotations get(size_t i)
         {
             return sComponents()[i];
         }

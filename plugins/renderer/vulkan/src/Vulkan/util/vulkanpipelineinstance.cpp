@@ -78,7 +78,7 @@ namespace Render {
 
         VkPipeline pipeline = mPipeline->ptr()[format][groupSize - 1][samplesBits - 1];
         if (!pipeline) {
-            pipeline = mPipeline->get(format, groupSize, samples, mInstanceDataSize, renderpass, mDepthChecking);
+            pipeline = mPipeline->get(format, groupSize, samples, renderpass, mDepthChecking);
             if (!pipeline)
                 return false;
         }
@@ -150,7 +150,7 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer VulkanPipelineInstance::mapTempBuffer(size_t space, size_t size, size_t count) const
+    WritableByteBuffer VulkanPipelineInstance::mapTempBuffer(size_t space, size_t size) const
     {
         assert(space >= 1);
         if (mTempDescriptors.size() <= space - 1)
@@ -158,13 +158,13 @@ namespace Render {
 
         VkDescriptorSet set = VulkanRenderContext::getSingleton().fetchTempDescriptorSet();
 
-        Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(size * count, 256);
+        Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(size, 256);
         auto [buffer, offset] = VulkanRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
         VkDescriptorBufferInfo bufferInfo {};
         bufferInfo.buffer = buffer;
         bufferInfo.offset = offset;
-        bufferInfo.range = size * count;        
+        bufferInfo.range = size;        
 
         VkWriteDescriptorSet descriptorWrite {};
         descriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
@@ -186,7 +186,7 @@ namespace Render {
         return { block.mAddress, block.mSize };
     }
 
-    void VulkanPipelineInstance::bindMesh(RenderTarget *target, const GPUMeshData *m, const ByteBuffer &instanceData) const
+    void VulkanPipelineInstance::bindMesh(RenderTarget *target, const GPUMeshData *m) const
     {
         VkCommandBuffer commandList = static_cast<VulkanRenderTarget *>(target)->mCommandList;
         VkRenderPass renderpass = static_cast<VulkanRenderTarget *>(target)->mRenderPass;
@@ -197,16 +197,6 @@ namespace Render {
         mGroupSize = mesh->mGroupSize;
 
         mesh->mVertices.bindVertex(commandList);
-
-        if (instanceData.mSize > 0) {
-            Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(instanceData.mSize);
-            auto [buffer, offset] = VulkanRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
-            VkDeviceSize vOffset = offset;
-
-            std::memcpy(block.mAddress, instanceData.mData, instanceData.mSize);
-
-            vkCmdBindVertexBuffers(commandList, 1, 1, &buffer, &vOffset);
-        }
 
         VulkanRenderContext::getSingleton().mConstantBuffer.bindVertex(commandList, 2);
 

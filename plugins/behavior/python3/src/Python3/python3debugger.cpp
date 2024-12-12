@@ -22,6 +22,7 @@
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>
 #else
+#    define Py_BUILD_CORE
 #    include <internal/pycore_frame.h>
 #endif
 
@@ -70,7 +71,7 @@ namespace Scripting {
                 return {};
             PyDictPtr locals = PyDictPtr::fromBorrowed(mFrame->f_locals);
 #else
-            PyDictPtr locals = PyFrame_GetLocals(mFrame->frame_obj);
+            PyDictPtr locals = PyFrame_GetLocals(mFrame);
 #endif
 
             std::map<std::string_view, ValueType> results;
@@ -146,7 +147,7 @@ namespace Scripting {
 #if PY_MINOR_VERSION < 11
                             frame;
 #else
-                            frame->f_frame;
+                            frame;
 #endif
                     }
                     break;
@@ -159,7 +160,7 @@ namespace Scripting {
 #if PY_MINOR_VERSION < 11
                             frame->f_back;
 #else
-                            frame->f_frame->previous->previous;
+                            frame->f_frame->previous->previous->frame_obj;
 #endif
                         if (!location->mLocation.mFrame)
                             location->mLocation.stepOut(location->mParent);
@@ -173,7 +174,7 @@ namespace Scripting {
 #if PY_MINOR_VERSION < 11
                             frame->f_back;
 #else
-                            frame->f_frame->previous->previous;
+                            frame->f_frame->previous->previous->frame_obj;
 #endif
                         if (!location->mLocation.mFrame)
                             location->mLocation.stepOut(location->mParent);

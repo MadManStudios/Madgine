@@ -33,7 +33,7 @@ namespace Render {
 
     void ShadowRenderPass::setup(RenderTarget *target)
     {
-        mPipeline.create({ .vs = "scene", .bufferSizes = { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) }, .instanceDataSize = 0 });
+        mPipeline.create({ .vs = "scene", .bufferSizes = { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) } });
 
         addDependency(&mData);
     }
@@ -148,8 +148,8 @@ namespace Render {
         Frustum localFrustum = qInv * cameraFrustum;
         auto corners = localFrustum.getCorners();
 
-        minBounds = std::accumulate(corners.begin(), corners.end(), minBounds, static_cast<Vector3 (*)(const Vector3 &, const Vector3 &)>(&min));
-        maxBounds = std::accumulate(corners.begin(), corners.end(), maxBounds, static_cast<Vector3 (*)(const Vector3 &, const Vector3 &)>(&max));
+        minBounds = std::accumulate(corners.begin(), corners.end(), minBounds, [](const Vector3 &v1, const Vector3 &v2) { return min(v1, v2); });
+        maxBounds = std::accumulate(corners.begin(), corners.end(), maxBounds, [](const Vector3 &v1, const Vector3 &v2) { return max(v1, v2); });
 
         Vector3 relPos = (maxBounds + minBounds) / 2.0f;
         relPos.z = minBounds.z - 1.0f;

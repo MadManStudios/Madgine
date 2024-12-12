@@ -44,12 +44,16 @@ namespace Render {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         GL_CHECK();
 
+#if !OPENGL_ES
         glEnable(GL_FRAMEBUFFER_SRGB);
+#endif
     }
 
     RenderFuture OpenGLRenderTarget::endFrame()
     {
+#if !OPENGL_ES
         glDisable(GL_FRAMEBUFFER_SRGB);
+#endif
 
         return RenderTarget::endFrame();
     }

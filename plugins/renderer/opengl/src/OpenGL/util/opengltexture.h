@@ -4,6 +4,8 @@
 
 #include "Madgine/render/texture.h"
 
+#include "Generic/bytebuffer.h"
+
 #include "Madgine/render/texturedescriptor.h"
 
 namespace Engine {
@@ -20,6 +22,7 @@ namespace Render {
 
     struct MADGINE_OPENGL_EXPORT OpenGLTexture : Texture {
 
+        OpenGLTexture(TextureType type, TextureFormat format, Vector2i size, size_t samples = 1, const ByteBuffer &data = {});
         OpenGLTexture(TextureType type, TextureFormat format, size_t samples = 1);
         OpenGLTexture() = default;
         OpenGLTexture(const OpenGLTexture &) = delete;
@@ -38,7 +41,6 @@ namespace Render {
 
         void setWrapMode(GLint mode);
 
-        explicit operator bool() const;
         void setFilter(GLint filter);
 
     private:

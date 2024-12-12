@@ -36,7 +36,7 @@ namespace Render {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
 
-        ID3D12PipelineState *pipeline = mPipeline->get(vertexFormat, groupSize, target, mInstanceDataSize, mDepthChecking);
+        ID3D12PipelineState *pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
         if (!pipeline) {
             return false;
         }
@@ -121,20 +121,20 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer DirectX12PipelineInstance::mapTempBuffer(size_t space, size_t size, size_t count) const
+    WritableByteBuffer DirectX12PipelineInstance::mapTempBuffer(size_t space, size_t size) const
     {
         assert(space >= 1);
         if (mTempGPUAddresses.size() <= space - 1)
             mTempGPUAddresses.resize(space);
 
-        Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(size * count, 256));
+        Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(size, 256));
         auto [res, offset] = DirectX12RenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
         mTempGPUAddresses[space - 1] = res->GetGPUVirtualAddress() + offset;
 
         return { block.mAddress, block.mSize };
     }
 
-    void DirectX12PipelineInstance::bindMesh(RenderTarget *_target, const GPUMeshData *m, const ByteBuffer &instanceData) const
+    void DirectX12PipelineInstance::bindMesh(RenderTarget *_target, const GPUMeshData *m) const
     {
 
         DirectX12RenderTarget *target = static_cast<DirectX12RenderTarget *>(_target);
@@ -149,20 +149,6 @@ namespace Render {
         mesh->mVertices.bindVertex(commandList, mesh->mVertexSize);
 
         DirectX12RenderContext::getSingleton().mConstantBuffer.bindVertex(commandList, 0, 2);
-
-        if (instanceData.mSize > 0) {
-            Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(instanceData.mSize);
-            auto [res, offset] = DirectX12RenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
-
-            std::memcpy(block.mAddress, instanceData.mData, instanceData.mSize);
-
-            D3D12_VERTEX_BUFFER_VIEW view;
-            view.BufferLocation = res->GetGPUVirtualAddress() + offset;
-            view.SizeInBytes = block.mSize;
-            view.StrideInBytes = mInstanceDataSize;
-            commandList->IASetVertexBuffers(1, 1, &view);
-            DX12_LOG("Bind Instance Buffer -> " << res->GetGPUVirtualAddress() + offset);
-        }
 
         
         if (mesh->mIndices) {

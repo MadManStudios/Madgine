@@ -15,13 +15,11 @@ namespace Render {
         std::string_view vs;
         std::string_view ps;
         std::vector<size_t> bufferSizes;
-        size_t instanceDataSize = 0;
         bool depthChecking = true;
     };
 
     struct MADGINE_PIPELINELOADER_EXPORT PipelineInstance {
         PipelineInstance(const PipelineConfiguration &config)
-            : mInstanceDataSize(config.instanceDataSize)
         {
         }
         PipelineInstance(const PipelineInstance &) = delete;
@@ -36,7 +34,7 @@ namespace Render {
             return mapParameters(index).cast<T>();
         }
 
-        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size, size_t count = 1) const = 0;
+        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size) const = 0;
         template <typename T>
         requires(!std::is_array_v<T>)
             ByteBufferImpl<T> mapTempBuffer(size_t space)
@@ -47,10 +45,10 @@ namespace Render {
         requires std::is_unbounded_array_v<T>
             ByteBufferImpl<T> mapTempBuffer(size_t space, size_t count)
         {
-            return mapTempBuffer(space, sizeof(std::remove_extent_t<T>), count).cast<T>();
+            return mapTempBuffer(space, sizeof(std::remove_extent_t<T>) * count).cast<T>();
         }
 
-        virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh, const ByteBuffer &instanceData = {}) const = 0;
+        virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh) const = 0;
         virtual ByteBufferImpl<uint32_t> mapIndices(RenderTarget *target, size_t count) const = 0;
         virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const = 0;
         template <typename T>
@@ -74,8 +72,6 @@ namespace Render {
         void renderQuad(RenderTarget *target) const;
 
         virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const = 0;
-
-        size_t mInstanceDataSize = 0;
     };
 
 }

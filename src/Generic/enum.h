@@ -1,5 +1,7 @@
 #pragma once
 
+#include "bits/array.h"
+
 namespace Engine {
 
 struct EnumMetaTable {
@@ -40,6 +42,23 @@ struct EnumMetaTable {
         return stream << actualType << "::" << toString(value);
     }
 
+    std::ostream &printFlags(std::ostream &stream, BitArray<64> flags) const
+    {
+        bool first = true;
+        for (int32_t v : values<int32_t>()) {
+            if (flags[v]) {
+                if (first)
+                    first = false;
+                else
+                    stream << '|';
+                print(stream, v, mName);
+            }
+        }
+        if (first)
+            stream << '0';
+        return stream;
+    }
+
     std::istream &read(std::istream &stream, int32_t &value, std::string_view actualType) const
     {
         std::istream::pos_type p = stream.tellg();
@@ -70,6 +89,28 @@ struct EnumMetaTable {
         if (!fromString(buffer, value)) {
             stream.seekg(p);
             stream.setstate(std::ios_base::failbit);
+        }
+        return stream;
+    }
+
+    std::istream &readFlags(std::istream &stream, BitArray<64> &flags) const
+    {
+        std::string s;
+        stream >> s;
+        flags = {};
+        if (s != "0") {
+            for (std::string_view e : StringUtil::tokenize(s, '|')) {
+                if (!e.starts_with(mName))
+                    throw 0;
+                e.remove_prefix(mName.size());
+                if (!e.starts_with("::"))
+                    throw 0;
+                e.remove_prefix(2);
+                int32_t v;
+                if (!fromString(e, v))
+                    throw 0;
+                flags[v] = true;
+            }
         }
         return stream;
     }

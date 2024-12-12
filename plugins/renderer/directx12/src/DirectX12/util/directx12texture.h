@@ -13,7 +13,7 @@ namespace Render {
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12Texture : Texture {
 
-        DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, size_t width, size_t height, size_t samples = 1, const ByteBuffer &data = {});
+        DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples = 1, const ByteBuffer &data = {});
         DirectX12Texture(TextureType type = TextureType_2D, bool isRenderTarget = false, TextureFormat format = FORMAT_RGBA8, size_t samples = 1);
         DirectX12Texture(const DirectX12Texture &) = delete;
         DirectX12Texture(DirectX12Texture &&);

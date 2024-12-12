@@ -620,15 +620,15 @@ namespace Widgets {
                 parameters->hasTexture = true;
             }
 
-            if (tex.mResource)
-                mData->mPipeline->bindResources(target, 2, tex.mResource);
-            else
-                mData->mPipeline->bindResources(target, 2, mData->mAtlas.resource());
-
             {
                 auto vertices = mData->mPipeline->mapVertices<Vertex[]>(target, vertexData.mTriangleVertices.size());
                 std::ranges::copy(vertexData.mTriangleVertices, vertices.mData);
             }
+
+            if (tex.mResource)
+                mData->mPipeline->bindResources(target, 2, tex.mResource);
+            else
+                mData->mPipeline->bindResources(target, 2, mData->mAtlas.resource());
 
             mData->mPipeline->setGroupSize(3);
             mData->mPipeline->render(target);

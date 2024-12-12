@@ -42,7 +42,7 @@ namespace Widgets {
 
         UIAtlas();
 
-        Threading::TaskFuture<bool> createTexture();
+        Threading::Task<bool> createTexture();
         void preload(const PreprocessedUIAtlas &atlas);
         void reset();
 

@@ -334,7 +334,7 @@ namespace Render {
         if (!allocation.mAddress)
             return {};
 
-        result.mPtr = reinterpret_cast<GPUPtr<void> &>(allocation.mAddress);
+        result.mPtr = GPUPtr<void> { allocation.mAddress };
         result.mSize = allocation.mSize;
 
         /* auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(result.mSize);
@@ -352,7 +352,7 @@ namespace Render {
     void DirectX12RenderContext::deallocateBufferImpl(GPUBuffer<void> buffer)
     {
         buffer.mBuffer.release<ID3D12Resource *>();
-        mBufferAllocator.deallocate({ reinterpret_cast<void *&>(buffer.mPtr), buffer.mSize });
+        mBufferAllocator.deallocate({ buffer.mPtr.encode(), buffer.mSize });
     }
 
     WritableByteBuffer DirectX12RenderContext::mapBufferImpl(GPUBuffer<void> &buffer)
@@ -447,20 +447,16 @@ namespace Render {
         DXGI_FORMAT_R32G32B32A32_FLOAT
     };
 
-    std::vector<D3D12_INPUT_ELEMENT_DESC> Engine::Render::DirectX12RenderContext::createVertexLayout(VertexFormat format, size_t instanceDataSize)
+    std::vector<D3D12_INPUT_ELEMENT_DESC> DirectX12RenderContext::createVertexLayout(VertexFormat format)
     {
         std::vector<D3D12_INPUT_ELEMENT_DESC> vertexLayoutDesc;
 
 #ifndef NDEBUG
 #    define semantic(i) vSemantics[i]
 #    define semanticIndex(i) vSemanticIndices[i]
-#    define instanceSemantic "INSTANCEDATA"
-#    define instanceSemanticIndex(i) (UINT) i
 #else
 #    define semantic(i) "TEXCOORD"
 #    define semanticIndex(i) (UINT) i
-#    define instanceSemantic "TEXCOORD"
-#    define instanceSemanticIndex(i) (UINT)(VertexElements::size + i)
 #endif
 
         UINT offset = 0;
@@ -473,17 +469,6 @@ namespace Render {
                 vertexLayoutDesc.push_back({ semantic(i),
                     semanticIndex(i), vFormats[i], 2, vConstantOffsets[i], D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 });
             }
-        }
-
-        assert(instanceDataSize % 16 == 0);
-        for (size_t i = 0; i < instanceDataSize / 16; ++i) {
-            vertexLayoutDesc.push_back({ instanceSemantic,
-                instanceSemanticIndex(i),
-                DXGI_FORMAT_R32G32B32A32_FLOAT,
-                1,
-                i == 0 ? 0 : D3D12_APPEND_ALIGNED_ELEMENT,
-                D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA,
-                1 });
         }
 
         return vertexLayoutDesc;

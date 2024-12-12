@@ -118,14 +118,9 @@ namespace Threading {
         return mName;
     }
 
-#if ENABLE_THREADING
-    bool WorkGroup::singleThreaded()
-    {
-        return mSubThreads.empty();
-    }
-
     void WorkGroup::update()
     {
+#if ENABLE_THREADING
         {
             std::unique_lock lock { mThreadsMutex };
             std::erase_if(mSubThreads,
@@ -136,6 +131,7 @@ namespace Threading {
                     return result;
                 });
         }
+#endif
 
         if (mState != WorkGroupState::RUNNING) {
             for (TaskQueue *queue : mTaskQueues)
@@ -154,6 +150,12 @@ namespace Threading {
                 break;
             }
         }
+    }
+
+#if ENABLE_THREADING
+    bool WorkGroup::singleThreaded()
+    {
+        return mSubThreads.empty();
     }
 
     bool WorkGroup::contains(std::thread::id id) const
@@ -196,16 +198,17 @@ namespace Threading {
         ThreadStorage::finalize(false);
         ThreadStorage::finalize(true);
     }
+#endif
 
     void WorkGroup::setState(WorkGroupState state)
     {
         LOG_DEBUG("Changing Workgroup state to " << state);
         mState = state;
+#if !EMSCRIPTEN
         for (TaskQueue *queue : mTaskQueues)
             queue->notify();
-    }
-
 #endif
+    }
 
     WorkGroup &WorkGroup::self()
     {

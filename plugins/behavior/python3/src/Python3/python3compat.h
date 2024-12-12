@@ -7,8 +7,8 @@ typedef struct _frame PyFrameObject;
 typedef PyFrameObject _PyInterpreterFrame;
 #endif
 
-int PyFrame_StackSize(_PyInterpreterFrame *frame);
-PyObject *PyFrame_StackPeek(_PyInterpreterFrame *frame);
-PyObject *PyFrame_StackPop(_PyInterpreterFrame *frame);
+int PyFrame_StackSize(PyFrameObject *frame);
+PyObject *PyFrame_StackPeek(PyFrameObject *frame);
+PyObject *PyFrame_StackPop(PyFrameObject *frame);
 void PyFrame_StackPush(_PyInterpreterFrame *frame, PyObject *object);
-MADGINE_PYTHON3_EXPORT PyCodeObject *PyFrame_GetCode2(_PyInterpreterFrame *frame);
+MADGINE_PYTHON3_EXPORT PyCodeObject *PyFrame_GetCode2(PyFrameObject *frame);

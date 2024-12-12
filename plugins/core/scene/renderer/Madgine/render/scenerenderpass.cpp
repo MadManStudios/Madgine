@@ -58,7 +58,7 @@ namespace Render {
 
         mShadowMap->addRenderPass(&mShadowPass);
 
-        mPipeline.create({ .vs = "scene", .ps = "scene", .bufferSizes = { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) }, .instanceDataSize = 0 });
+        mPipeline.create({ .vs = "scene", .ps = "scene", .bufferSizes = { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) } });
 
         addDependency(&mData);
         addDependency(mShadowMap.get());

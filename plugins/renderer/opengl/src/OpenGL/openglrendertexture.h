@@ -38,6 +38,7 @@ namespace Render {
         GLuint mDepthRenderbuffer = 0;
 
         OpenGLTexture mDepthTexture;
+        bool mCreateDepthTexture;
 
         size_t mSamples;
 

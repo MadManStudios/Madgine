@@ -19,6 +19,8 @@ namespace Threading {
 
         WorkGroupState state() const;
 
+        void update();
+
         void stop();
 
 #if ENABLE_THREADING
@@ -37,7 +39,6 @@ namespace Threading {
         }
 
         bool singleThreaded();
-        void update();
 
         bool contains(std::thread::id id) const;
 #endif

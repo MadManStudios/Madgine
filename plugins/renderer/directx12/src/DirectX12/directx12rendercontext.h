@@ -56,7 +56,7 @@ namespace Render {
 
         DirectX12CommandAllocator *graphicsQueue();
 
-        static std::vector<D3D12_INPUT_ELEMENT_DESC> createVertexLayout(VertexFormat format, size_t instanceDataSize);
+        static std::vector<D3D12_INPUT_ELEMENT_DESC> createVertexLayout(VertexFormat format);
 
         DirectX12DescriptorHeap mDescriptorHeap;
         DirectX12DescriptorHeap mRenderTargetDescriptorHeap;

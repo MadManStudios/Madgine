@@ -3,6 +3,7 @@
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/virtualstate.h"
 #include "Generic/delayedconstruct.h"
+#include "Generic/genericresult.h"
 
 namespace Engine {
 

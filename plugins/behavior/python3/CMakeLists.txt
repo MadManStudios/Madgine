@@ -1,36 +1,19 @@
 project(Python3)
 
-if (ANDROID)
+
+add_subdirectory(shared)
+
+if (NOT TARGET Python3::Python)
+	MESSAGE(STATUS "Failed to setup Python3 - Skipping plugin")
 	return()
 endif()
-
-find_package (Python3 COMPONENTS Development.Embed)
-
-if (NOT Python3_Development.Embed_FOUND OR NOT PYTHON_EXECUTABLE)
-	MESSAGE(STATUS "Failed to find Python3 - Skipping plugin")
-	return()
-endif()
-
-find_file (python_license NAMES LICENSE.txt PATHS ${Python3_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} ${PYTHON_EXECUTABLE}/.. NO_DEFAULT_PATH)
-
-if (NOT python_license)
-	MESSAGE(STATUS "Failed to find Python3 License - Skipping plugin")
-	return()
-endif()
-
-add_notices(Python3::Python 
-	READABLE_NAME Python3
-	LICENSE_FILE ${python_license}
-	CREDITS "Scripting-Language: Python3 - https://www.python.org/")
-
-
 
 
 set(sources "")
 FolderSources(sources "" src)
 FolderSources(sources src Python3 python3compat.cpp python3compat.h python3debugger.cpp python3debugger.h python3env.cpp python3env.h python3fileloader.cpp python3fileloader.h python3lib.h python3forward.h python3streamredirect.cpp python3streamredirect.h)
-	FolderSources(sources Python3 util pyapifunction.cpp pyapifunction.h pyboundapifunction.cpp pyboundapifunction.h pydictptr.cpp pydictptr.h pyexecution.cpp pyexecution.h pyframeptr.cpp pyframeptr.h pylistptr.cpp pylistptr.h pymoduleptr.cpp pymoduleptr.h pyobjectiter.cpp pyobjectiter.h pyobjectptr.cpp pyobjectptr.h pyobjectutil.cpp pyobjectutil.h pyownedscopeptr.cpp pyownedscopeptr.h pyscopeiterator.cpp pyscopeiterator.h python3lock.cpp python3lock.h pytypedscopeptr.cpp pytypedscopeptr.h pyvirtualiterator.cpp pyvirtualiterator.h pyvirtualrange.cpp pyvirtualrange.h)
-		FolderSources(sources util math pymatrix3.cpp pymatrix3.h pymatrix4.cpp pymatrix4.h pyquaternion.cpp pyquaternion.h pyvector3.cpp pyvector3.h pyvector4.cpp pyvector4.h)
+	FolderSources(sources Python3 util pyapifunction.cpp pyapifunction.h pyboundapifunction.cpp pyboundapifunction.h pydictptr.cpp pydictptr.h pyenum.cpp pyenum.h pyexecution.cpp pyexecution.h pyflags.cpp pyflags.h pyframeptr.cpp pyframeptr.h pylistptr.cpp pylistptr.h pymoduleptr.cpp pymoduleptr.h pyobjectiter.cpp pyobjectiter.h pyobjectptr.cpp pyobjectptr.h pyobjectutil.cpp pyobjectutil.h pyownedscopeptr.cpp pyownedscopeptr.h pyscopeiterator.cpp pyscopeiterator.h pysender.cpp pysender.h python3lock.cpp python3lock.h pytypedscopeptr.cpp pytypedscopeptr.h pyvirtualiterator.cpp pyvirtualiterator.h pyvirtualrange.cpp pyvirtualrange.h)
+		FolderSources(sources util math pymatrix3.cpp pymatrix3.h pymatrix4.cpp pymatrix4.h pyquaternion.cpp pyquaternion.h pyvector2.cpp pyvector2.h pyvector3.cpp pyvector3.h pyvector4.cpp pyvector4.h)
 
 add_plugin(Python3 Madgine Behavior ${sources} PRECOMPILED_HEADER src/Python3/python3lib.h)
 
@@ -42,10 +25,11 @@ if (_Python3_LIBRARY_DEBUG)
 	target_compile_definitions(Python3 PUBLIC HAS_PYTHON3_DEBUG_LIB)
 endif (_Python3_LIBRARY_DEBUG)
 
-add_custom_command(TARGET Python3
-	POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Python3::Python> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-
+if (NOT CMAKE_CROSSCOMPILING)
+	add_custom_command(TARGET Python3
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Python3::Python> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+endif()
 
 set(sources "")
 FolderSources(sources "" tools)

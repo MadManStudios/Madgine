@@ -64,10 +64,9 @@ namespace Widgets {
         void setAbsolutePosition(const Vector2 &pos);
 
         void applyGeometry();
-        void applyGeometry(const Vector3 &parentSize, const Vector2 &parentPos = Vector2::ZERO);        
+        void applyGeometry(const Vector3 &parentSize, const Vector2 &parentPos = Vector2::ZERO);
         virtual void updateChildrenGeometry();
         Geometry calculateGeometry(uint16_t activeConditions, GeometrySourceInfo *source = nullptr);
-        
 
         WidgetBase *createChild(WidgetClass _class);
         void clearChildren();
@@ -147,53 +146,11 @@ namespace Widgets {
         void setSizeValue(uint16_t index, float value, uint16_t mask = 0);
         void unsetSizeValue(uint16_t index, uint16_t mask);
 
-        struct WidgetScope {
-
-            template <typename Rec>
-            struct receiver : Execution::algorithm_receiver<Rec> {
-
-                template <typename O>
-                friend BehaviorError tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, O &out)
-                {
-                    if (name == "Widget") {
-                        out = rec.mWidget;
-                        return {};
-                    } else if (name == "WidgetManager") {
-                        out = &rec.mWidget->manager();
-                        return {};
-                    } else {
-                        return get_binding_d(rec.mRec, name, out);
-                    }
-                }
-
-                WidgetBase *mWidget;
-            };
-
-            template <typename Inner>
-            struct sender : Execution::algorithm_sender<Inner> {
-                template <typename Rec>
-                friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
-                {
-                    return Execution::algorithm_state<Inner, receiver<Rec>> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), sender.mWidget };
-                }
-
-                WidgetBase *mWidget;
-            };
-
-            template <typename Inner>
-            friend auto operator|(Inner &&inner, WidgetScope &&scope)
-            {
-                return sender<Inner> { { {}, std::forward<Inner>(inner) }, scope.mWidget };
-            }
-
-            WidgetBase *mWidget;
-        };
-
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {
             Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-            lifetime().attach(std::forward<Sender>(sender) | WidgetScope { this } | Execution::with_debug_location<Execution::SenderLocation>() | Execution::with_sub_debug_location(context) | Log::log_error());
+            lifetime().attach(std::forward<Sender>(sender) | with_binding<"Widget">(this) | Execution::with_debug_location<Execution::SenderLocation>() | Execution::with_sub_debug_location(context) | Log::log_error());
             mBehaviorContexts.emplace_back(context);
         }
         Execution::Lifetime &lifetime();

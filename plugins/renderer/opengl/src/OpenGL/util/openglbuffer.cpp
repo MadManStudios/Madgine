@@ -53,7 +53,7 @@ namespace Render {
 
         bind();
 
-#if !OPENGL_ES || OPENGL_ES >= 310
+#if !OPENGL_ES || OPENGL_ES >= 31
 #    if !OPENGL_ES
         if (glBindVertexBuffer)
 #    endif

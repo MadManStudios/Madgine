@@ -67,7 +67,7 @@ namespace Render {
 
         void createPipelineLayout();
 
-        static std::pair<std::vector<VkVertexInputBindingDescription>, std::vector<VkVertexInputAttributeDescription>> createVertexLayout(VertexFormat format, size_t instanceDataSize);
+        static std::pair<std::vector<VkVertexInputBindingDescription>, std::vector<VkVertexInputAttributeDescription>> createVertexLayout(VertexFormat format);
 
         size_t tempAllocatorMemoryQuota() const;
 

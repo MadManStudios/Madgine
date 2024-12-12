@@ -36,9 +36,9 @@ namespace Widgets {
     {
     }
 
-    Threading::TaskFuture<bool> UIAtlas::createTexture()
+    Threading::Task<bool> UIAtlas::createTexture()
     {
-        return mTexture.create(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
+        return mTexture.createTask(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
     }
 
     void UIAtlas::preload(const PreprocessedUIAtlas &atlas)

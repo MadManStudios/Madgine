@@ -8,8 +8,6 @@ namespace Threading {
 
         int go();
 
-        void singleLoop();
-
     private:
 #if !EMSCRIPTEN
         void schedulerLoop(Threading::TaskQueue *queue);

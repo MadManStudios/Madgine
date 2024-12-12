@@ -16,12 +16,17 @@
 
 #include "util/pyexecution.h"
 
+#include "Modules/threading/madgineobject.h"
+
 namespace Engine {
 namespace Scripting {
     namespace Python3 {
 
-        struct MADGINE_PYTHON3_EXPORT Python3Environment : Root::RootComponent<Python3Environment> {
+        struct MADGINE_PYTHON3_EXPORT Python3Environment : Root::RootComponent<Python3Environment>, Threading::MadgineObject<Python3Environment> {
             Python3Environment(Root::Root &root);            
+
+            Threading::Task<bool> init();
+            Threading::Task<void> finalize();
 
             std::string_view key() const override;
 

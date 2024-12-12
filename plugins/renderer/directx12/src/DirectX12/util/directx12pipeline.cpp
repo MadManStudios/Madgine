@@ -29,7 +29,7 @@ namespace Render {
         return true;
     }
 
-    ID3D12PipelineState *DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, size_t instanceDataSize, bool depthChecking) const
+    ID3D12PipelineState *DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking) const
     {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
@@ -88,7 +88,7 @@ namespace Render {
             if (resolve(mPixelShader))
                 pipelineDesc.PS = { resolve(mPixelShader)->GetBufferPointer(), resolve(mPixelShader)->GetBufferSize() };
 
-            std::vector<D3D12_INPUT_ELEMENT_DESC> vertexLayoutDesc = DirectX12RenderContext::createVertexLayout(vertexFormat, instanceDataSize);
+            std::vector<D3D12_INPUT_ELEMENT_DESC> vertexLayoutDesc = DirectX12RenderContext::createVertexLayout(vertexFormat);
 
             pipelineDesc.InputLayout.pInputElementDescs = vertexLayoutDesc.data();
             pipelineDesc.InputLayout.NumElements = vertexLayoutDesc.size();

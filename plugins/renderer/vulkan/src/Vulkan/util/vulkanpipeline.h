@@ -14,7 +14,7 @@ namespace Render {
         bool link(typename VulkanShaderLoader::Handle vertexShader, typename VulkanShaderLoader::Handle pixelShader);
         bool link(typename VulkanShaderLoader::Ptr vertexShader, typename VulkanShaderLoader::Ptr pixelShader);
 
-        VkPipeline get(VertexFormat format, size_t groupSize, size_t samples, size_t instanceDataSize, VkRenderPass renderpass, bool depthChecking = true) const;
+        VkPipeline get(VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking = true) const;
 
         const std::array<std::array<VulkanPtr<VkPipeline, &vkDestroyPipeline>, 3>, 3> *ptr() const;
 

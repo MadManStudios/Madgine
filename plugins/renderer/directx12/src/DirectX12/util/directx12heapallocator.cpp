@@ -70,12 +70,12 @@ namespace Render {
         ptr.mBuffer = mHeaps.size();
         ptr.mOffset = 0;
 
-        return { reinterpret_cast<void *&>(ptr), size };
+        return { ptr.encode(), size };
     }
 
     void DirectX12HeapAllocator::deallocate(Block block)
     {
-        GPUPtr<void> ptr = reinterpret_cast<GPUPtr<void> &>(block.mAddress);
+        GPUPtr<void> ptr { block.mAddress };
         assert(ptr.mOffset == 0 && ptr.mBuffer != 0);
 
         size_t index = ptr.mBuffer - 1;
@@ -91,7 +91,7 @@ namespace Render {
 
     std::pair<ID3D12Resource *, size_t> DirectX12HeapAllocator::resolve(void *ptr)
     {
-        GPUPtr<void> &gpuPtr = reinterpret_cast<GPUPtr<void> &>(ptr);
+        GPUPtr<void> gpuPtr { ptr };
         return { mHeaps[gpuPtr.mBuffer - 1].mReservedResource, gpuPtr.mOffset };
     }
 

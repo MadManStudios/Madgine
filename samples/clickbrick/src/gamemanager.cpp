@@ -108,7 +108,7 @@ void GameManager::setWidget(Engine::Widgets::WidgetBase *w)
 
 Engine::Threading::Task<void> GameManager::updateApp()
 {
-    while (mUI.app().taskQueue()->running()) {
+    /* while (mUI.app().taskQueue()->running()) {
         co_await Engine::Threading::TaskQualifiers { mSceneMgr.clock()(1ms) };
 
         std::chrono::microseconds timeSinceLastFrame = mSceneClock.tick(mSceneMgr.clock().now());
@@ -122,7 +122,8 @@ Engine::Threading::Task<void> GameManager::updateApp()
                 spawnBrick();
             });
         }
-    }
+    }*/
+    co_return;
 }
 
 void GameManager::spawnBrick()

@@ -65,50 +65,11 @@ namespace Scene {
         SceneComponentBase &getComponent(size_t i);
         size_t getComponentCount();
 
-        struct SceneScope {
-
-            template <typename Rec>
-            struct receiver : Execution::algorithm_receiver<Rec> {
-
-                template <typename O>
-                friend bool tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, O &out)
-                {
-                    if (name == "Scene") {
-                        out = rec.mScene;
-                        return true;
-                    } else {
-                        return Execution::resolve_var_d(rec.mRec, name, out);
-                    }
-                }
-
-                SceneManager *mScene;
-            };
-
-            template <typename Inner>
-            struct sender : Execution::algorithm_sender<Inner> {
-                template <typename Rec>
-                friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
-                {
-                    return Execution::algorithm_state<Inner, receiver<Rec>> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), sender.mScene };
-                }
-
-                SceneManager *mScene;
-            };
-
-            template <typename Inner>
-            friend auto operator|(Inner &&inner, SceneScope &&scope)
-            {
-                return sender<Inner> { { {}, std::forward<Inner>(inner) }, scope.mScene };
-            }
-
-            SceneManager *mScene;
-        };
-
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {
             Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-            mLifetime.attach(std::forward<Sender>(sender) | SceneScope { this } | Execution::with_debug_location<Execution::SenderLocation>() | Execution::with_sub_debug_location(context) | Log::log_error());
+            mLifetime.attach(std::forward<Sender>(sender) | with_binding<"Scene">(this) | Execution::with_debug_location<Execution::SenderLocation>() | Execution::with_sub_debug_location(context) | Log::log_error());
             mBehaviorContexts.emplace_back(context);
         }
 
@@ -155,9 +116,9 @@ namespace Scene {
         IntervalClock<std::chrono::steady_clock::time_point> mFrameClock;
 
         std::vector<Debug::ContextInfo *> mBehaviorContexts;
-                
+
         std::mutex mAnimationMutex;
-        std::vector<Entity::AnimationState*> mAnimationStates;
+        std::vector<Entity::AnimationState *> mAnimationStates;
 
         Entity::EntityComponentListContainer<std::vector<Placeholder<0>>> mEntityComponentLists;
 
@@ -168,7 +129,7 @@ namespace Scene {
             ContainerData(SceneManager &manager);
             ContainerData(ContainerData &&) = delete;
 
-            Serialize::NoParent<SceneContainer> mContainer;            
+            Serialize::NoParent<SceneContainer> mContainer;
         };
         std::map<std::string, ContainerData> mContainers;
     };

@@ -5,6 +5,7 @@
 #include "math/pymatrix3.h"
 #include "math/pymatrix4.h"
 #include "math/pyquaternion.h"
+#include "math/pyvector2.h"
 #include "math/pyvector3.h"
 #include "math/pyvector4.h"
 #include "pyapifunction.h"
@@ -16,6 +17,9 @@
 #include "pytypedscopeptr.h"
 #include "pyvirtualiterator.h"
 #include "pyvirtualrange.h"
+#include "pysender.h"
+#include "pyflags.h"
+#include "pyenum.h"
 
 #include "pymoduleptr.h"
 
@@ -201,8 +205,9 @@ namespace Scripting {
 
         PyObject *toPyObject(const Vector2 &v)
         {
-            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <Vector2> yet");
-            return NULL;
+            PyObject *obj = PyObject_CallObject((PyObject *)&PyVector2Type, NULL);
+            new (&reinterpret_cast<PyVector2 *>(obj)->mVector) Vector2(v);
+            return obj;
         }
 
         PyObject *toPyObject(const Vector3 &v)
@@ -276,14 +281,16 @@ namespace Scripting {
 
         PyObject *toPyObject(const EnumHolder &e)
         {
-            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <EnumHolder> yet");
-            return nullptr;
+            PyObject *obj = PyObject_CallObject((PyObject *)&PyEnumType, NULL);
+            new (&reinterpret_cast<PyEnum *>(obj)->mEnum) EnumHolder(e);
+            return obj;
         }
 
         PyObject *toPyObject(const FlagsHolder &f)
         {
-            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <FlagsHolder> yet");
-            return nullptr;
+            PyObject *obj = PyObject_CallObject((PyObject *)&PyFlagsType, NULL);
+            new (&reinterpret_cast<PyFlags *>(obj)->mFlags) FlagsHolder(f);
+            return obj;
         }
 
         PyObject *toPyObject(const KeyValueFunction &f)
@@ -294,8 +301,9 @@ namespace Scripting {
 
         PyObject *toPyObject(const KeyValueSender &s)
         {
-            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <sender> yet");
-            return nullptr;
+            PyObject *obj = PyObject_CallObject((PyObject *)&PySenderType, NULL);
+            new (&reinterpret_cast<PySender *>(obj)->mSender) KeyValueSender(s);
+            return obj;
         }
 
         PyObject *toPyObject(const ValueTypeDesc &t)

@@ -38,7 +38,7 @@ namespace Render {
 
     void PointShadowRenderPass::setup(RenderTarget *target)
     {
-        mPipeline.create({ .vs = "pointshadow", .ps = "pointshadow", .bufferSizes = { sizeof(PointShadowPerApplication), 0, 0 }, .instanceDataSize = sizeof(PointShadowInstanceData) });
+        mPipeline.create({ .vs = "pointshadow", .ps = "pointshadow", .bufferSizes = { sizeof(PointShadowPerApplication), 0, 0 } });
 
         addDependency(&mData);
     }
@@ -104,7 +104,7 @@ namespace Render {
                 };
             });
 
-            mPipeline->bindMesh(target, meshData, std::move(instanceData));
+            mPipeline->bindMesh(target, meshData);
             mPipeline->renderInstanced(target, instance.second.size());
         }
     }

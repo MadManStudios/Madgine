@@ -15,8 +15,13 @@ namespace Threading {
 
         TaskQualifiers() = default;
 
-        TaskQualifiers(CustomTimepoint timepoint)
+        TaskQualifiers(std::chrono::steady_clock::time_point timepoint)
             : mScheduledFor(timepoint)
+        {
+        }
+
+        TaskQualifiers(std::chrono::steady_clock::duration duration)
+            : mScheduledFor(std::chrono::steady_clock::now() + duration)
         {
         }
 
@@ -24,7 +29,7 @@ namespace Threading {
         void await_suspend(TaskHandle handle);
         void await_resume();
 
-        CustomTimepoint mScheduledFor = std::chrono::steady_clock::now();
+        std::chrono::steady_clock::time_point mScheduledFor = std::chrono::steady_clock::now();
     };
 
     struct MODULES_EXPORT TaskQueue {
@@ -32,7 +37,10 @@ namespace Threading {
         TaskQueue(const std::string &name, bool wantsMainThread = false);
         ~TaskQueue();
 
-        void queueHandle(TaskHandle task, TaskQualifiers qualifiers = {});
+#if !EMSCRIPTEN
+        void update(int taskCount = -1);
+        void notify();
+#endif
 
         template <typename T, bool Immediate>
         TaskFuture<T> queueTask(Task<T, Immediate> task, TaskQualifiers qualifiers = {})
@@ -40,7 +48,7 @@ namespace Threading {
             TaskFuture<T> fut = task.get_future();
             TaskHandle handle = task.assign(this);
             if (handle)
-                queueHandle(std::move(handle), std::move(qualifiers));
+                queueHandle(std::move(handle), false, std::move(qualifiers));
             return fut;
         }
 
@@ -49,21 +57,16 @@ namespace Threading {
         {
             TaskHandle handle = make_task(std::forward<F>(f)).assign(this);
             if (handle)
-                queueHandle(std::move(handle), std::move(qualifiers));
+                queueHandle(std::move(handle), false, std::move(qualifiers));
         }
 
         void increaseTaskInFlightCount();
         void decreaseTaskInFlightCount();
         size_t taskInFlightCount() const;
 
-        TaskHandle fetch();
-
         bool idle() const;
-        void notify();
 
         const std::string &name() const;
-
-        void update(int taskCount = -1);
 
         bool running() const;
         void stop();
@@ -96,9 +99,20 @@ namespace Threading {
             TaskQualifiers mQualifiers;
         };
 
-        void queueInternal(ScheduledTask tracker);
+        friend struct TaskHandle;
+        friend struct TaskQualifiers;
+
+        void queueHandle(TaskHandle task, bool resume, TaskQualifiers qualifiers = {});
+
+        void queueInternal(ScheduledTask tracker, bool resume);
 
         void addSetupStepTasks(Task<bool> init, Task<void> finalize = {});
+
+        Task<bool> patchSetupTask(Task<bool> init);
+
+#if !EMSCRIPTEN
+        TaskHandle fetch();
+#endif
 
     private:
         std::string mName;
@@ -107,13 +121,19 @@ namespace Threading {
         WorkGroup &mWorkGroup;
 
         std::atomic<size_t> mTaskInFlightCount = 0;
+        std::atomic<size_t> mSetupTaskInFlightCount = 0;
+        bool mInitializing = true;
 
+        std::list<ScheduledTask> mBacklog;
+
+        std::list<Task<void>> mCleanupSteps;
+
+#if !EMSCRIPTEN
         std::list<ScheduledTask> mQueue;
-        std::list<std::pair<Task<bool>, Task<void>>> mSetupSteps;
-        std::list<std::pair<Task<bool>, Task<void>>>::iterator mSetupState = mSetupSteps.begin();
+        std::condition_variable mCv;
+#endif
 
         mutable std::mutex mMutex;
-        std::condition_variable mCv;
     };
 
 }

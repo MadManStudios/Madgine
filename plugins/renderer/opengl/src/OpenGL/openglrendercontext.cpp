@@ -388,7 +388,7 @@ namespace Render {
                 assert(result);
 
                 for (int i = 0; i < numConfigs; i++) {
-                    Util::LogDummy out { Engine::Util::MessageType::INFO_TYPE };
+                    Log::LogDummy out { Log::MessageType::INFO_TYPE };
                     out << "Configuration:\n";
                     EGLConfig config = configs[i];
                     for (int j = 0; j < sizeof(eglAttributeNames) / sizeof(eglAttributeNames[0]); j++) {
@@ -570,6 +570,13 @@ namespace Render {
         : Component(queue)
         , mBufferAllocator(mBufferMemoryHeap)
         , mTempAllocator(mTempMemoryHeap)
+#if OPENGL_ES
+        , mTempMemoryHeap(GL_UNIFORM_BUFFER)
+#    if EMSCRIPTEN
+        , mTempIndexMemoryHeap(GL_ELEMENT_ARRAY_BUFFER)
+        , mTempIndexAllocator(mTempIndexMemoryHeap)
+#    endif
+#endif
     {
     }
 
@@ -628,7 +635,7 @@ namespace Render {
     {
         return checkMultisampling();
     }
-    
+
     template <size_t I = 1>
     struct ResourceBlockBuffer {
         size_t mSize;
@@ -636,7 +643,7 @@ namespace Render {
     };
 
     UniqueResourceBlock OpenGLRenderContext::createResourceBlock(std::vector<const Texture *> textures)
-    {        
+    {
         std::unique_ptr<OpenGLResourceBlock<4>> ptr = std::make_unique<OpenGLResourceBlock<4>>();
         ptr->mSize = textures.size();
         for (size_t i = 0; i < textures.size(); ++i) {
@@ -665,43 +672,37 @@ namespace Render {
         GL_FLOAT
     };
 
-    void OpenGLRenderContext::bindFormat(VertexFormat format, OpenGLBuffer *instanceBuffer, size_t instanceDataSize)
+    void OpenGLRenderContext::bindFormat(VertexFormat format, size_t bufferOffset)
     {
-#if !OPENGL_ES || OPENGL_ES >= 310
-#    if !OPENGL_ES
-        if (glVertexAttribFormat) {
-#    endif
-            auto pib = mVAOs.try_emplace(format, create);
-            pib.first->second.bind();
-            if (!pib.second)
-                return;
+#if !OPENGL_ES || OPENGL_ES >= 31
 
-            GLuint offset = 0;
-            for (size_t i = 0; i < VertexElements::size; ++i) {
-                if (format.has(i)) {
-                    if (vTypes[i] == GL_FLOAT)
-                        glVertexAttribFormat(i, sVertexElementSizes[i] / 4, vTypes[i], GL_FALSE, offset);
-                    else
-                        glVertexAttribIFormat(i, sVertexElementSizes[i] / 4, vTypes[i], offset);
-                    GL_CHECK();
-                    glVertexAttribBinding(i, 0);
-                    GL_CHECK();
-                    glEnableVertexAttribArray(i);
-                    offset += sVertexElementSizes[i];
-                } else {
-                    // glDisableVertexAttribArray(attribIndex);
-                }
-            }
-
+        auto pib = mVAOs.try_emplace(format, create);
+        pib.first->second.bind();
+        if (!pib.second)
             return;
-#    if !OPENGL_ES
+
+        GLuint offset = 0;
+        for (size_t i = 0; i < VertexElements::size; ++i) {
+            if (format.has(i)) {
+                if (vTypes[i] == GL_FLOAT)
+                    glVertexAttribFormat(i, sVertexElementSizes[i] / 4, vTypes[i], GL_FALSE, offset);
+                else
+                    glVertexAttribIFormat(i, sVertexElementSizes[i] / 4, vTypes[i], offset);
+                GL_CHECK();
+                glVertexAttribBinding(i, 0);
+                GL_CHECK();
+                glEnableVertexAttribArray(i);
+                offset += sVertexElementSizes[i];
+            } else {
+                // glDisableVertexAttribArray(attribIndex);
+            }
         }
-#    endif
-#endif
+
+#else
 
         GLuint stride = format.stride();
 
-        const std::byte *offset = 0;
+        const std::byte *offset = reinterpret_cast<const std::byte *>(bufferOffset);
         for (size_t i = 0; i < VertexElements::size; ++i) {
             if (format.has(i)) {
                 if (vTypes[i] == GL_FLOAT)
@@ -719,24 +720,12 @@ namespace Render {
         for (size_t i = 0; i < 8; ++i) {
             glDisableVertexAttribArray(VertexElements::size + i);
         }
-
-        if (instanceBuffer) {
-            instanceBuffer->bind();
-
-            for (size_t i = 0; i < instanceDataSize / 16; ++i) {
-                glVertexAttribPointer(VertexElements::size + i, 4, GL_FLOAT, GL_FALSE, instanceDataSize, reinterpret_cast<void *>(i * sizeof(float[4])));
-                GL_CHECK();
-                glVertexAttribDivisor(VertexElements::size + i, 1);
-                GL_CHECK();
-                glEnableVertexAttribArray(VertexElements::size + i);
-                GL_CHECK();
-            }
-        }
+#endif
     }
 
     void OpenGLRenderContext::unbindFormat()
     {
-#if !OPENGL_ES || OPENGL_ES >= 310
+#if !OPENGL_ES || OPENGL_ES >= 31
         glBindVertexArray(0);
         GL_CHECK();
 #endif

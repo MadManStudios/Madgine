@@ -150,7 +150,7 @@ namespace Filesystem {
                 --cursor;
                 size_t pos = mPath.rfind('/', cursor - 1);
                 if (pos != std::string::npos) {
-                    cursor = pos;
+                    cursor = std::max(pos, size_t { 1 });
                 } else {
                     cursor = 0;
                 }
@@ -166,7 +166,7 @@ namespace Filesystem {
 
         mPath.resize(cursor);
 
-        Filesystem::makeNormalized(mPath);
+        //Filesystem::makeNormalized(mPath);
     }
 
     Path Path::filename() const

@@ -2,10 +2,10 @@
 
 /// @cond
 
+#include "Madgine/clientlib.h"
 #include "Madgine/meshloaderlib.h"
 #include "Madgine/pipelineloaderlib.h"
 #include "Madgine/textureloaderlib.h"
-#include "Madgine/clientlib.h"
 
 #if defined(OpenGL_EXPORTS)
 #    define MADGINE_OPENGL_EXPORT DLL_EXPORT
@@ -17,7 +17,7 @@
 
 #if !ANDROID && !EMSCRIPTEN && !IOS
 #    include "../glad/glad.h"
-//#    define OPENGL_ES 31
+#    define OPENGL_ES 30
 #elif IOS
 #    include <OpenGLES/ES3/gl.h>
 #    define OPENGL_ES 30
@@ -56,11 +56,15 @@ inline void glCheck()
             LOG_FATAL(out.str());
         }
         glDump();
-        //std::terminate();
+        std::terminate();
     }
 }
 
-#define GL_CHECK() glCheck()
+#if !EMSCRIPTEN
+#    define GL_CHECK() glCheck()
+#else
+#    define GL_CHECK()
+#endif
 #define GL_LOG(x) LOG_DEBUG("GL: " << x)
 
 #if OPENGL_ES
