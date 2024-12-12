@@ -3,13 +3,8 @@
 template <typename T>
 void logContainer(const T &c) {
     Engine::Log::LogDummy ss { Engine::Log::MessageType::INFO_TYPE };
-    bool first = true;
+    Engine::StringUtil::StreamJoiner join { ss, ", " };    
     for (const auto &i : c) {
-        if (first) {
-            first = false;
-        } else {
-            ss << ", ";
-        }
-        ss << i;
+        join.next() << i;
     }
 }

@@ -113,7 +113,7 @@ namespace NodeGraph {
             if constexpr (Config::constant)
                 return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(std::move(values), argument_types {}, results));
             else
-                return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(std::move(values), argument_types {}, results)) | Execution::with_debug_location<Execution::SenderLocation>();
+                return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(std::move(values), argument_types {}, results)) | Execution::with_debug_location();
         }
 
         template <typename T>

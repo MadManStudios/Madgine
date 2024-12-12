@@ -90,19 +90,20 @@ namespace Tools {
             for (Widgets::PropertyDescriptor property : mWidget->conditionals()) {
                 uint16_t conditional = property.mAnnotator1;
 
-                std::string name = "  ";
-                bool first = true;
+                std::stringstream out;
+                if ((activeConditions & conditional) == conditional)
+                    out << "x ";
+                else
+                    out << "  ";
+
+                StringUtil::StreamJoiner join { out, "|" };
                 for (size_t i = 0; i < conditions.size(); ++i) {
                     if (conditional & (1 << i)) {
-                        if (!first)
-                            name += '|';
-                        first = false;
-                        name += conditions[i]->mName.empty() ? "<>" : conditions[i]->mName;
+                        join.next() << conditions[i]->mName.empty() ? "<>" : conditions[i]->mName;
                     }
                 }
-                if ((activeConditions & conditional) == conditional)
-                    name[0] = 'x';
-                if (ImGui::Selectable(name.c_str(), mCurrentConditional == conditional)) {
+                
+                if (ImGui::Selectable(out.str().c_str(), mCurrentConditional == conditional)) {
                     mCurrentConditional = conditional;
                 }
             }
@@ -263,10 +264,10 @@ namespace Tools {
 
         if (ImGui::CollapsingHeader("Behaviors")) {
             for (Debug::ContextInfo *context : mWidget->behaviorContexts()) {
-                Debug::ContinuationMode mode = mInspector.getTool<DebuggerView>().contextControls(*context);
+                std::optional<Debug::ContinuationMode> mode = mInspector.getTool<DebuggerView>().contextControls(*context);
                 mInspector.getTool<DebuggerView>().renderDebugContext(context);
-                if (mode != Debug::ContinuationMode::None)
-                    context->continueExecution(mode);
+                if (mode)
+                    context->continueExecution(*mode);
             }
         }
 

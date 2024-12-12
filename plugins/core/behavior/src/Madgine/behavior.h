@@ -159,7 +159,7 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
 template <typename Sender>
 struct SenderBehaviorState : BehaviorStateBase {
 
-    using State = Execution::connect_result_t<typename Execution::with_debug_location_t<Execution::SenderLocation>::sender<Sender>, BehaviorReceiver&>;
+    using State = Execution::connect_result_t<typename Execution::with_debug_location_t::sender<Sender>, BehaviorReceiver&>;
 
     SenderBehaviorState(Sender &&sender)
         : mData(std::forward<Sender>(sender))
@@ -170,7 +170,7 @@ struct SenderBehaviorState : BehaviorStateBase {
     {
         Sender sender = std::forward<Sender>(std::get<Sender>(mData));
         mData.template emplace<State>(
-            DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location<Execution::SenderLocation>(), rec); } });
+            DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(), rec); } });
     }
 
     void start() override

@@ -116,13 +116,9 @@ void CppFile::generate(std::ostream &stream, const Assignment &assign)
 
 void CppFile::generate(std::ostream &stream, const ArithOperation &op)
 {
-    bool first = true;
+    Engine::StringUtil::StreamJoiner join { stream, " + " };
     for (const Statement &ops : op.mOperands) {
-        if (first)
-            first = false;
-        else
-            stream << " + ";
-        generate(stream, ops);
+        generate(join.next(), ops);
     }
 }
 

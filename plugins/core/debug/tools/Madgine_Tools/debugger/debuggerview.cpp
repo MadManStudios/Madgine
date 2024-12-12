@@ -110,9 +110,9 @@ namespace Tools {
         }
     }
 
-    Debug::ContinuationMode DebuggerView::contextControls(Debug::ContextInfo &context)
+    std::optional<Debug::ContinuationMode> DebuggerView::contextControls(Debug::ContextInfo &context)
     {
-        Debug::ContinuationMode mode = Debug::ContinuationMode::None;
+        std::optional<Debug::ContinuationMode> mode;
         ImGui::PushID(&context);
         if (!context.alive() || !context.isPaused())
             ImGui::BeginDisabled();
@@ -150,7 +150,7 @@ namespace Tools {
         }
         ImGui::End();
 
-        Debug::ContinuationMode continuation = Debug::ContinuationMode::None;
+        std::optional<Debug::ContinuationMode> continuation;
         Debug::DebugLocation *prevSelected = mSelectedLocation;
         mSelectedLocation = nullptr;
 
@@ -196,8 +196,8 @@ namespace Tools {
         }
         ImGui::End();
 
-        if (continuation != Debug::ContinuationMode::None)
-            mSelectedContext->continueExecution(continuation);
+        if (continuation)
+            mSelectedContext->continueExecution(*continuation);
     }
 
     void DebuggerView::renderMenu()

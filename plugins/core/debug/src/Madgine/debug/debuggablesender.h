@@ -89,7 +89,6 @@ namespace Execution {
         }
     }
 
-    template <typename Location>
     struct with_debug_location_t {
 
         template <typename Sender, typename _Rec>
@@ -115,7 +114,7 @@ namespace Execution {
                 mState->set_error(std::forward<R>(result)...);
             }
 
-            friend Location *tag_invoke(get_debug_location_t, receiver &rec)
+            friend SenderLocation *tag_invoke(get_debug_location_t, receiver &rec)
             {
                 return &rec.mState->mLocation;
             }
@@ -173,7 +172,7 @@ namespace Execution {
             }
 
             Rec mRec;
-            Location mLocation;
+            SenderLocation mLocation;
             State mState;
 
             template <typename CPO, typename... Args>
@@ -227,15 +226,14 @@ namespace Execution {
         }
     };
 
-    template <typename Location>
-    inline constexpr with_debug_location_t<Location> with_debug_location;
+    inline constexpr with_debug_location_t with_debug_location;
 
     inline constexpr auto with_sub_debug_location = [](auto *location) {
         return with_query_value(get_debug_location, std::move(location));
     };
 
     template <typename Sender>
-    using DebuggableSender = decltype(std::declval<Sender>() | with_debug_location<SenderLocation>());
+    using DebuggableSender = decltype(std::declval<Sender>() | with_debug_location());
 
     template <typename T>
     concept is_debuggable = tag_invocable<get_debug_location_t, T &>;

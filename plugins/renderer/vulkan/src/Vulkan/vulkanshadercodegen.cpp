@@ -124,13 +124,9 @@ namespace Render {
                 throw 0;
             }
 
-            bool first = true;
+            StringUtil::StreamJoiner join { stream, opCode };
             for (const CodeGen::Statement &statement : op.mOperands) {
-                if (first)
-                    first = false;
-                else
-                    stream << opCode;
-                generate(stream, statement);
+                generate(join.next(), statement);
             }
 
             switch (op.mType) {
@@ -146,13 +142,9 @@ namespace Render {
         {
             generateType(stream, ctor.mType);
             stream << "(";
-            bool first = true;
+            StringUtil::StreamJoiner join { stream, "," };            
             for (const CodeGen::Statement &statement : ctor.mArguments) {
-                if (first)
-                    first = false;
-                else
-                    stream << ",";
-                generate(stream, statement);
+                generate(join.next(), statement);
             }
             stream << ")";
         }
@@ -254,14 +246,10 @@ namespace Render {
                 std::string_view name = function.mName == "main" ? "mainImpl" : std::string_view { function.mName };
                 generateType(stream, function.mReturnType);
                 stream << " " << name << "(";
-                bool first = true;
+                StringUtil::StreamJoiner join { stream, "," };
                 for (const CodeGen::Variable &arg : function.mArguments) {
-                    generateType(stream, arg.mType);
+                    generateType(join.next(), arg.mType);
                     stream << " " << arg.mName;
-                    if (first)
-                        first = false;
-                    else
-                        stream << ",";
                 }
                 stream << ")";
 

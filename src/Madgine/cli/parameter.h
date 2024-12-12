@@ -142,13 +142,9 @@ namespace CLI {
             std::ostringstream ss;
             ss << ParameterBase::help();
             ss << " [";
-            bool first = true;
+            StringUtil::StreamJoiner join { ss, ", " };
             for (int i = EnumType<Rep>::MIN + 1; i < EnumType<Rep>::MAX; ++i) {
-                if (first)
-                    first = false;
-                else
-                    ss << ", ";
-                ss << Rep::sTable.toString(i);
+                join.next() << Rep::sTable.toString(i);
             }
             ss << "].";
             return ss.str();

@@ -62,7 +62,7 @@ struct BehaviorAwaitableSender {
 
     auto buildState(Sender &&sender, CoroutineBehaviorState *state)
     {
-        return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location<Execution::SenderLocation>(), BehaviorAwaitableReceiver<Sender> { {}, this, state });
+        return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(), BehaviorAwaitableReceiver<Sender> { {}, this, state });
     }
 
     using S = std::invoke_result_t<decltype(&BehaviorAwaitableSender::buildState), BehaviorAwaitableSender, Sender, nullptr_t>;

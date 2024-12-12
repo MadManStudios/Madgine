@@ -479,10 +479,10 @@ namespace Tools {
         }
 
         for (Debug::ContextInfo *context : entity->behaviorContexts()) {
-            Debug::ContinuationMode mode = getTool<DebuggerView>().contextControls(*context);
+            std::optional<Debug::ContinuationMode> mode = getTool<DebuggerView>().contextControls(*context);
             getTool<DebuggerView>().renderDebugContext(context);
-            if (mode != Debug::ContinuationMode::None)
-                context->continueExecution(mode);
+            if (mode)
+                context->continueExecution(*mode);
         }
 
         if (Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> t = entity->getComponent<Scene::Entity::Transform>()) {

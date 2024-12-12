@@ -89,18 +89,10 @@ struct BindingDescriptor {
     ExtendedValueTypeDesc mType;
 };
 
-template <typename T>
-decltype(auto) wrapBinding(T&& binding) {
-    return [binding { std::forward<T>(binding) }](auto &out)->BehaviorError {
-        out = binding;
-        return {};
-    };
-}
-
 template <fixed_string Name>
 struct with_binding_t {
 
-    template <typename Rec, typename T>
+    template <typename Rec, typename F>
     struct receiver : Execution::algorithm_receiver<Rec> {
 
         template <typename O>
@@ -113,45 +105,53 @@ struct with_binding_t {
             }
         }
 
-        T mBinding;
+        F mBinding;
     };
 
-    template <typename Inner, typename T>
+    template <typename Inner, typename F>
     struct sender : Execution::algorithm_sender<Inner> {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
         {
-            return Execution::algorithm_state<Inner, receiver<Rec, T>> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mBinding) };
+            return Execution::algorithm_state<Inner, receiver<Rec, F>> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), std::forward<F>(sender.mBinding) };
         }
 
-        T mBinding;
+        F mBinding;
     };
 
     
-    template <typename Sender, typename T>
-    friend auto tag_invoke(with_binding_t, Sender &&inner, T &&binding)
+    template <typename Sender, typename F>
+    friend auto tag_invoke(with_binding_t, Sender &&inner, F &&binding)
     {
-        return sender<Sender, decltype(wrapBinding(std::forward<T>(binding)))> { { {}, std::forward<Sender>(inner) }, wrapBinding(std::forward<T>(binding)) };
+        return sender<Sender, F> { { {}, std::forward<Sender>(inner) }, std::forward<F>(binding) };
     }
 
-    template <typename Sender, typename T>
-    requires tag_invocable<with_binding_t, Sender, T>
-    auto operator()(Sender &&sender, T &&binding) const
-        noexcept(is_nothrow_tag_invocable_v<with_binding_t, Sender, T>)
-            -> tag_invoke_result_t<with_binding_t, Sender, T>
+    template <typename Sender, typename F>
+    requires tag_invocable<with_binding_t, Sender, F>
+    auto operator()(Sender &&sender, F &&binding) const
+        noexcept(is_nothrow_tag_invocable_v<with_binding_t, Sender, F>)
+            -> tag_invoke_result_t<with_binding_t, Sender, F>
     {
-        return tag_invoke(*this, std::forward<Sender>(sender), std::forward<T>(binding));
+        return tag_invoke(*this, std::forward<Sender>(sender), std::forward<F>(binding));
     }
 
-    template <typename T>
-    auto operator()(T &&binding) const
+    template <typename F>
+    auto operator()(F &&binding) const
     {
-        return pipable_from_right(*this, std::forward<T>(binding));
+        return pipable_from_right(*this, std::forward<F>(binding));
     }
 
 };
 
 template <fixed_string Name>
 constexpr with_binding_t<Name> with_binding;
+
+template <fixed_string Name>
+constexpr auto with_constant_binding = [](auto &&value) {
+    return with_binding<Name>([value { std::forward<decltype(value)>(value) }](auto &out) -> BehaviorError {
+        out = value;
+        return {};
+    });
+};
 
 }

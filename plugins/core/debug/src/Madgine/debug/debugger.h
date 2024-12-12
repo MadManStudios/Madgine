@@ -15,8 +15,7 @@ namespace Debug {
     enum class ContinuationMode {
         Resume,
         Step,
-        Abort,
-        None
+        Abort
     };
 
     enum class ContinuationType {
@@ -29,24 +28,17 @@ namespace Debug {
     struct Continuation {
     private:
         struct Base {
-            Base(ContinuationType type)
-                : mType(type)
-            {
-            }
             virtual ~Base() = default;
 
             virtual void call(ContinuationMode mode) = 0;
 
             virtual void visitArguments(std::ostream &) = 0;
-
-            ContinuationType mType;
         };
 
         template <typename F, typename... Args>
         struct Impl : Base {
-            Impl(F &&callback, ContinuationType type, Args &&...args)
-                : Base(type)
-                , mCallback(std::forward<F>(callback))
+            Impl(F &&callback, Args &&...args)
+                : mCallback(std::forward<F>(callback))
                 , mArgs { std::forward<Args>(args)... }
             {
             }
@@ -58,17 +50,12 @@ namespace Debug {
 
             virtual void visitArguments(std::ostream &out) override
             {
-                bool first = true;
+                StringUtil::StreamJoiner joiner { out, "\n" };
                 TupleUnpacker::forEach(mArgs, [&](auto &v) {
-                    if (first) {
-                        first = false;
-                    } else {
-                        out << "\n";
-                    }
                     if constexpr (requires { out << v; }) {
-                        out << v;
+                        joiner.next() << v;
                     } else {
-                        out << typeid(v).name();
+                        joiner.next() << typeid(v).name();
                     }
                 });
             }
@@ -82,7 +69,8 @@ namespace Debug {
 
         template <typename F, typename... Args>
         Continuation(F &&callback, ContinuationType type, Args &&...args)
-            : mImpl(std::make_unique<Impl<F, Args...>>(std::forward<F>(callback), type, std::forward<Args>(args)...))
+            : mImpl(std::make_unique<Impl<F, Args...>>(std::forward<F>(callback), std::forward<Args>(args)...))
+            , mType(type)
         {
         }
 
@@ -93,7 +81,7 @@ namespace Debug {
 
         ContinuationType type() const
         {
-            return mImpl->mType;
+            return mType;
         }
 
         void operator()(ContinuationMode mode)
@@ -109,6 +97,7 @@ namespace Debug {
 
     private:
         std::unique_ptr<Base> mImpl;
+        ContinuationType mType;
     };
 
     struct MADGINE_DEBUGGER_EXPORT ParentLocation {

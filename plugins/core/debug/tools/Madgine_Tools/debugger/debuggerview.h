@@ -54,7 +54,7 @@ namespace Tools {
 
         const Debug::DebugLocation *visualizeDebugLocation(const Debug::ContextInfo *context, const Debug::DebugLocation *location, const Debug::DebugLocation *inlineLocation);
 
-        Debug::ContinuationMode contextControls(Debug::ContextInfo &context);
+        std::optional<Debug::ContinuationMode> contextControls(Debug::ContextInfo &context);
 
     private:
         Debug::Debugger &mDebugger;

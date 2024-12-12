@@ -44,17 +44,13 @@ struct EnumMetaTable {
 
     std::ostream &printFlags(std::ostream &stream, BitArray<64> flags) const
     {
-        bool first = true;
+        StringUtil::StreamJoiner join { stream, "|" };        
         for (int32_t v : values<int32_t>()) {
             if (flags[v]) {
-                if (first)
-                    first = false;
-                else
-                    stream << '|';
-                print(stream, v, mName);
+                print(join.next(), v, mName);
             }
         }
-        if (first)
+        if (join.empty())
             stream << '0';
         return stream;
     }

@@ -53,15 +53,11 @@ bool File::openCStyleGuard(std::ostream &stream, const Engine::TinyVector<Engine
 
         stream << "(";
 
-        bool first = true;
+        Engine::StringUtil::StreamJoiner join { stream, " && " };        
 
         for (size_t i = 0; i < 62; ++i) {
             if (cond[i]) {
-                if (first)
-                    first = false;
-                else
-                    stream << " && ";
-                stream << "defined(" << mConditionalTokenList[i] << ")";
+                join.next() << "defined(" << mConditionalTokenList[i] << ")";
             }
         }
 

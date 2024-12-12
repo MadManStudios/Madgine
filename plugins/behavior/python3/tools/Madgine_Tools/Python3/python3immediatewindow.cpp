@@ -188,7 +188,7 @@ namespace Tools {
                   mPrompt->resume();
               })
             | Log::with_log(mPrompt.get())
-            | Execution::with_debug_location<Execution::SenderLocation>()
+            | Execution::with_debug_location()
             | Execution::with_sub_debug_location(&Debug::Debugger::getSingleton().createContext()));
         return false;
     }
