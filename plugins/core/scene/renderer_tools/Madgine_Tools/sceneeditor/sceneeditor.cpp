@@ -242,7 +242,7 @@ namespace Tools {
         //Serialize::FormattedSerializeStream in = mgr.openRead(mStartBuffer, Serialize::Formats::safebinary);
         //Serialize::StreamResult result = Serialize::read(in, *mSceneMgr, nullptr, {}, Serialize::StateTransmissionFlags_ApplyMap | Serialize::StateTransmissionFlags_Activation);
         //if (result.mState != Serialize::StreamState::OK) {
-            //LOG_ERROR(*result.mError);
+        //LOG_ERROR(*result.mError);
         //}
     }
 
@@ -253,14 +253,14 @@ namespace Tools {
 
         mCurrentSceneFile = p;
 
-        auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
+        //auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
 
-        //Filesystem::FileManager mgr { "Scene" };
-        //Serialize::FormattedSerializeStream in = mgr.openRead(mCurrentSceneFile, Serialize::Formats::xml);
-        //Serialize::StreamResult result = Serialize::read(in, *mSceneMgr, nullptr, {}, Serialize::StateTransmissionFlags_ApplyMap | Serialize::StateTransmissionFlags_Activation);
-        //if (result.mState != Serialize::StreamState::OK) {
-        //    LOG_ERROR(*result.mError);
-       // }
+        Filesystem::FileManager mgr { "Scene" };
+        Serialize::FormattedSerializeStream in = mgr.openRead(mCurrentSceneFile, Serialize::Formats::xml);
+        Serialize::StreamResult result = Serialize::read(in, mSceneMgr->container("Default"), nullptr, {}, Serialize::StateTransmissionFlags_ApplyMap | Serialize::StateTransmissionFlags_Activation);
+        if (result.mState != Serialize::StreamState::OK) {
+            LOG_ERROR(*result.mError);
+        }
     }
 
     void SceneEditor::saveScene(const Filesystem::Path &p)
@@ -269,9 +269,9 @@ namespace Tools {
 
         auto guard = mSceneMgr->mutex().lock(AccessMode::READ);
 
-        //Filesystem::FileManager mgr { "Scene" };
-        //Serialize::FormattedSerializeStream out = mgr.openWrite(mCurrentSceneFile, Serialize::Formats::xml);
-        //Serialize::write(out, *mSceneMgr, "Scene");
+        Filesystem::FileManager mgr { "Scene" };
+        Serialize::FormattedSerializeStream out = mgr.openWrite(mCurrentSceneFile, Serialize::Formats::xml);
+        Serialize::write(out, mSceneMgr->container("Default"), "Scene");
     }
 
     int SceneEditor::createViewIndex()
@@ -415,6 +415,12 @@ namespace Tools {
             }
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
                 if (BehaviorHandle behavior = BehaviorSelector()) {
+                    entity->behaviors().addBehavior(std::move(behavior));
+                }
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Temp Behavior")) {
+                if (BehaviorHandle behavior = BehaviorSelector()) {
                     mPendingBehavior.mTargetEntity = entity;
                     mPendingBehavior.mHandle = behavior;
                     mPendingBehavior.mFuture = behavior.createParameters();
@@ -479,11 +485,13 @@ namespace Tools {
         }
 
         for (Debug::ContextInfo *context : entity->behaviorContexts()) {
-            std::optional<Debug::ContinuationMode> mode = getTool<DebuggerView>().contextControls(*context);
+            std::optional<Debug::ContinuationControl> control = getTool<DebuggerView>().contextControls(*context);
             getTool<DebuggerView>().renderDebugContext(context);
-            if (mode)
-                context->continueExecution(*mode);
+            if (control)
+                context->control(*control);
         }
+
+        getTool<BehaviorTool>().DrawBehaviorList(entity->behaviors());
 
         if (Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> t = entity->getComponent<Scene::Entity::Transform>()) {
             constexpr Color4 colors[] = {

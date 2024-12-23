@@ -39,6 +39,8 @@ namespace Scene {
     SceneContainer::SceneContainer(SceneManager &sceneMgr)
         : mManager(sceneMgr)        
     {
+        mLifetime.start();
+        mManager.mLifetime.attach(mLifetime);
     }
 
     Entity::EntityPtr SceneContainer::findEntity(const std::string &name)
@@ -96,12 +98,8 @@ namespace Scene {
     Entity::EntityPtr SceneContainer::createEntity(const std::string &name,
         const std::function<void(Entity::Entity &)> &init)
     {
-        auto toPtr = [this](const typename RefcountedContainer<std::deque<Entity::Entity>>::iterator &it) {
-            Entity::Entity *entity = &*it;
-            mLifetime.attach(Execution::sequence(it->mLifetime.ended(), mutex().locked(AccessMode::WRITE, [this, entity]() {
-                remove(entity);
-            })));
-            return Entity::EntityPtr { entity };
+        auto toPtr = [this](const typename RefcountedContainer<std::deque<Entity::Entity>>::iterator &it) {            
+            return Entity::EntityPtr { &*it};
         };
         if (init)
             return toPtr(TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_init, this), mEntities.end(), init, createEntityData(name)));

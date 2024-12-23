@@ -12,9 +12,15 @@
 namespace Engine {
 namespace Debug {
 
-    enum class ContinuationMode {
+    enum class ContinuationControl {
         Resume,
         Step,
+        Pause,
+        Stop
+    };
+
+    enum class ContinuationMode {
+        Continue,
         Abort
     };
 
@@ -118,9 +124,11 @@ namespace Debug {
         void suspend(Continuation callback, std::stop_token st);
         void continueExecution(ContinuationMode mode);
 
+        void control(ContinuationControl control);
         void resume();
         void step();
-        void abort();
+        void pause();
+        void stop();
 
         bool alive() const;
         bool isPaused() const;
@@ -141,10 +149,14 @@ namespace Debug {
 
         mutable std::mutex mMutex;
 
+        friend struct Debugger;
+
     private:
         Continuation mCallback;
         Execution::stop_callback<stop_cb, finally_cb> mStopCallback;
         std::atomic<int> mPaused = 0;
+        bool mPauseRequested = false;
+        bool mStopRequested = false;
     };
 
     struct MADGINE_DEBUGGER_EXPORT DebugLocation : ParentLocation {
@@ -160,22 +172,22 @@ namespace Debug {
         {
             mContext->suspend({ std::forward<F>(callback), type, std::forward<Args>(args)... }, std::move(st));
         }
-        bool pass(ContinuationType type);
+        
         template <typename F, typename... Args>
-        void pass(F &&callback, std::stop_token st, ContinuationType type, Args &&...args)
+        void pass(F &&callback, std::stop_token st, ContinuationType type, bool forceStop = false, Args &&...args)
         {
-            if (pass(type)) {
-                std::forward<F>(callback)(ContinuationMode::Resume, std::forward<Args>(args)...);
-            } else {
+            if (forceStop || wantsPause(type)) {
                 yield(std::forward<F>(callback), std::move(st), type, std::forward<Args>(args)...);
+            } else {
+                std::forward<F>(callback)(ContinuationMode::Continue, std::forward<Args>(args)...);                
             }
         }
     };
 
     struct DebugListener {
-        virtual bool pass(DebugLocation *location, ContinuationType type)
+        virtual bool wantsPause(const DebugLocation *location, ContinuationType type)
         {
-            return true;
+            return false;
         }
         virtual void onSuspend(ContextInfo &context, ContinuationType type) { }
     };
@@ -196,7 +208,7 @@ namespace Debug {
         void addListener(DebugListener *listener);
         void removeListener(DebugListener *listener);
 
-        bool pass(DebugLocation *location, ContinuationType type);
+        bool wantsPause(const DebugLocation *location, ContinuationType type);
 
     private:
         std::deque<ContextInfo> mContexts;

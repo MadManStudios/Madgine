@@ -85,7 +85,7 @@ namespace Scripting {
 
         bool Python3DebugLocation::wantsPause(Debug::ContinuationType type) const
         {
-            return type == Debug::ContinuationType::Error;
+            return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
         }
 
         Filesystem::Path Python3DebugLocation::file() const
@@ -143,12 +143,7 @@ namespace Scripting {
                     if (!location->mResume && !location->mSkipOnce) {
                         if (!location->mLocation.mFrame)
                             location->mLocation.stepInto(location->mParent);
-                        location->mLocation.mFrame =
-#if PY_MINOR_VERSION < 11
-                            frame;
-#else
-                            frame;
-#endif
+                        location->mLocation.mFrame = frame;
                     }
                     break;
 
@@ -188,7 +183,7 @@ namespace Scripting {
                         location->mSkipOnce = false;
                         break;
                     }
-                    if (!location->mLocation.pass(Debug::ContinuationType::Flow)) {
+                    if (location->mLocation.wantsPause(Debug::ContinuationType::Flow)) {
                         PyObject *suspendEx = suspend([frame, location](BehaviorReceiver &receiver, std::vector<PyFramePtr> frames, Log::Log *log, std::stop_token st) {
                             _PyInterpreterFrame *frame = frames.front();
                             //++frame->prev_instr;
@@ -196,8 +191,7 @@ namespace Scripting {
                                 Python3Lock lock { log, std::move(st) };
                                 Guard guard { PyObjectPtr::fromBorrowed(reinterpret_cast<PyObject *>(location)) };
                                 switch (mode) {
-                                case Debug::ContinuationMode::Step:
-                                case Debug::ContinuationMode::Resume:
+                                case Debug::ContinuationMode::Continue:
                                     location->mSkipOnce = true;
                                     {
                                         _PyInterpreterFrame *frame = frames.front();

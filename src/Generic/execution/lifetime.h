@@ -12,31 +12,49 @@ namespace Execution {
             assert(mCount == 0);
         }
 
+        void start()
+        {
+            mStopSource = {};
+            unsigned int previous = mCount.fetch_add(1);
+            assert(previous == 0);
+        }
+
         template <typename Sender>
         void attach(Sender &&sender)
         {
+            unsigned int count = mCount;
             if (!mStopSource.stop_requested()) {
-                (new attach_state<Sender> { std::forward<Sender>(sender), this })->start();
+                assert(count > 0);
+                (new attach_state<Sender> { std::forward<Sender>(sender), *this })->start();
             }
         }
+
         void end()
         {
+            assert(mCount > 0);
             if (mStopSource.request_stop())
                 decreaseCount();
         }
-        auto ended()
+
+        bool running() const
         {
-            return ended_sender { this };
+            return mCount > 0;
         }
-        void reset()
+
+        using is_sender = void;
+
+        using result_type = GenericResult;
+        template <template <typename...> typename Tuple>
+        using value_types = Tuple<>;
+
+        template <typename Rec>
+        friend auto tag_invoke(connect_t, Lifetime &lifetime, Rec &&rec)
         {
-            if (!mStopSource.request_stop())
-                increaseCount();
-            mStopSource = {};
+            return state<Rec>(std::forward<Rec>(rec), lifetime);
         }
 
     private:
-        void endedImpl(VirtualReceiverBase<GenericResult> *receiver)
+        void setReceiver(VirtualReceiverBase<GenericResult> *receiver)
         {
             increaseCount();
             assert(!mReceiver);
@@ -65,27 +83,28 @@ namespace Execution {
         template <typename Sender>
         struct attach_receiver : execution_receiver<> {
 
-            void set_value() {
-                mState->mLifetime->decreaseCount();
+            void set_value()
+            {
+                mState->mLifetime.decreaseCount();
                 delete mState;
             }
 
             template <typename... V>
             [[nodiscard]] std::monostate set_value(V &&...)
             {
-                mState->mLifetime->decreaseCount();
+                mState->mLifetime.decreaseCount();
                 delete mState;
                 return {};
             }
             void set_done()
             {
-                mState->mLifetime->decreaseCount();
+                mState->mLifetime.decreaseCount();
                 delete mState;
             }
             template <typename... R>
             [[nodiscard]] std::monostate set_error(R &&...)
             {
-                mState->mLifetime->decreaseCount();
+                mState->mLifetime.decreaseCount();
                 delete mState;
                 return {};
             }
@@ -101,24 +120,24 @@ namespace Execution {
 
         template <typename Sender>
         struct attach_state {
-            attach_state(Sender &&sender, Lifetime *lifetime)
-                : mState(connect(std::forward<Sender>(sender), attach_receiver<Sender> { {}, this, lifetime->mStopSource.get_token() }))
+            attach_state(Sender &&sender, Lifetime &lifetime)
+                : mState(connect(std::forward<Sender>(sender), attach_receiver<Sender> { {}, this, lifetime.mStopSource.get_token() }))
                 , mLifetime(lifetime)
             {
             }
             void start()
             {
-                mLifetime->increaseCount();
+                mLifetime.increaseCount();
                 mState.start();
             }
 
             connect_result_t<Sender, attach_receiver<Sender>> mState;
-            Lifetime *mLifetime;
+            Lifetime &mLifetime;
         };
 
         template <typename Rec>
-        struct ended_state : VirtualReceiverBase<GenericResult> {
-            ended_state(Rec &&rec, Lifetime *lifetime)
+        struct state : VirtualReceiverBase<GenericResult> {
+            state(Rec &&rec, Lifetime &lifetime)
                 : mRec(std::forward<Rec>(rec))
                 , mCallback(get_stop_token(mRec), callback { lifetime })
                 , mLifetime(lifetime)
@@ -127,51 +146,40 @@ namespace Execution {
 
             void start()
             {
-                mLifetime->endedImpl(this);
+                mLifetime.setReceiver(this);
             }
 
-            virtual void set_value() override {
+            virtual void set_value() override
+            {
                 mRec.set_value();
             }
 
-            virtual void set_error(GenericResult result) override {
+            virtual void set_error(GenericResult result) override
+            {
                 mRec.set_error(result);
             }
 
-            virtual void set_done() override {
+            virtual void set_done() override
+            {
                 mRec.set_done();
             }
 
             struct callback {
-                void operator()() {
-                    mLifetime->end();
+                void operator()()
+                {
+                    mLifetime.end();
                 }
 
-                Lifetime *mLifetime;
+                Lifetime &mLifetime;
             };
 
             Rec mRec;
             std::stop_callback<callback> mCallback;
-            Lifetime *mLifetime;
-        };
-        struct ended_sender {
-            using is_sender = void;
-
-            using result_type = GenericResult;
-            template <template <typename...> typename Tuple>
-            using value_types = Tuple<>;
-
-            template <typename Rec>
-            friend auto tag_invoke(connect_t, ended_sender &&sender, Rec &&rec)
-            {
-                return ended_state<Rec>(std::forward<Rec>(rec), sender.mLifetime);
-            }
-
-            Lifetime *mLifetime;
+            Lifetime &mLifetime;
         };
 
         std::stop_source mStopSource;
-        std::atomic<uint32_t> mCount = 1;
+        std::atomic<uint32_t> mCount = 0;
         VirtualReceiverBase<GenericResult> *mReceiver = nullptr;
     };
 

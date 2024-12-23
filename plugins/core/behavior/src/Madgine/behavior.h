@@ -81,8 +81,6 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
         return VirtualBehaviorState<Rec, state> { std::forward<Rec>(rec), std::move(behavior.mState) };
     }
 
-    MADGINE_BEHAVIOR_EXPORT friend void tag_invoke(Execution::visit_state_t, Behavior &behavior, CallableView<void(const Execution::StateDescriptor &)> visitor);
-
     using promise_type = CoroutineBehaviorState;
 
     StatePtr mState;

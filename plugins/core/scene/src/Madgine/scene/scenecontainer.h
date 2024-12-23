@@ -49,6 +49,8 @@ namespace Scene {
         friend struct SceneManager;
 
     private:
+        friend struct Entity::Entity;
+
         Execution::Lifetime mLifetime;
 
         SceneManager &mManager;

@@ -8,14 +8,19 @@
 namespace Engine {
 namespace Tools {
 
-    struct BehaviorTool : public Tool<BehaviorTool> {
+    struct MADGINE_BEHAVIOR_TOOLS_EXPORT BehaviorTool : public Tool<BehaviorTool> {
 
         BehaviorTool(ImRoot &root);
 
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
 
+        void DrawBehaviorList(BehaviorList &list);
+
         std::string_view key() const override;
+
+    private:
+        Inspector *mInspector = nullptr;
     };
 
     MADGINE_BEHAVIOR_TOOLS_EXPORT BehaviorHandle BehaviorSelector();

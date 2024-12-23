@@ -970,7 +970,7 @@ namespace Execution {
                     mStates.template emplace<1>(
                                DelayedConstruct<std::variant_alternative_t<1, StateVariant>> {
                                    [this]() {
-                                       return Execution::connect(std::move(std::get<0>(mSenders)), receiver<inner_tag<0>, state> { this });
+                                       return Execution::connect(std::forward<std::tuple_element_t<0, std::tuple<Sender...>>>(std::get<0>(mSenders)), receiver<inner_tag<0>, state> { this });
                                    } })
                         .start();
                 }
@@ -985,7 +985,7 @@ namespace Execution {
                     mStates.template emplace<I + 1 + 1>(
                                DelayedConstruct<std::variant_alternative_t<I + 1 + 1, StateVariant>> {
                                    [this]() {
-                                       return Execution::connect(std::move(std::get<I + 1>(mSenders)), receiver<inner_tag<I + 1>, state> { this });
+                                       return Execution::connect(std::forward<std::tuple_element_t<I + 1, std::tuple<Sender...>>>(std::get<I + 1>(mSenders)), receiver<inner_tag<I + 1>, state> { this });
                                    } })
                         .start();
                 }
@@ -1010,7 +1010,7 @@ namespace Execution {
 
         template <typename... Sender>
         struct sender : base_sender {
-            using result_type = typename first_t<Sender...>::result_type;
+            using result_type = typename std::remove_reference_t<first_t<Sender...>>::result_type;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<>;
 

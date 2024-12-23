@@ -15,6 +15,7 @@ namespace Tools {
     bool BeginDebuggablePanel(const char *name);
     void EndDebuggablePanel();
     MADGINE_DEBUGGER_TOOLS_EXPORT void DrawDebugMarker(float y);
+    MADGINE_DEBUGGER_TOOLS_EXPORT void DrawBreakpoint(float y);
 
     struct MADGINE_DEBUGGER_TOOLS_EXPORT DebuggerView : Tool<DebuggerView>, Debug::DebugListener {
 
@@ -34,7 +35,7 @@ namespace Tools {
         void setCurrentContext(Debug::ContextInfo &context);
 
         void onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type) override;
-        bool pass(Debug::DebugLocation *location, Debug::ContinuationType type) override;
+        bool wantsPause(const Debug::DebugLocation *location, Debug::ContinuationType type) override;
 
         std::string_view key() const override;
 
@@ -54,7 +55,7 @@ namespace Tools {
 
         const Debug::DebugLocation *visualizeDebugLocation(const Debug::ContextInfo *context, const Debug::DebugLocation *location, const Debug::DebugLocation *inlineLocation);
 
-        std::optional<Debug::ContinuationMode> contextControls(Debug::ContextInfo &context);
+        std::optional<Debug::ContinuationControl> contextControls(Debug::ContextInfo &context);
 
     private:
         Debug::Debugger &mDebugger;

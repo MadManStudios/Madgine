@@ -35,9 +35,9 @@ namespace Debug {
         parent->mChild = nullptr;
     }
 
-    bool DebugLocation::pass(ContinuationType type)
+    bool DebugLocation::wantsPause(ContinuationType type) const
     {
-        return !wantsPause(type) && Debugger::getSingleton().pass(this, type);
+        return Debugger::getSingleton().wantsPause(this, type);
     }
 
     std::deque<ContextInfo> &Debugger::infos()
@@ -62,6 +62,11 @@ namespace Debug {
 
     void ContextInfo::suspend(Continuation callback, std::stop_token st)
     {
+        if (mStopRequested) {
+            callback(ContinuationMode::Abort);
+            return;
+        }
+
         for (DebugListener *listener : Debugger::getSingleton().mListeners)
             listener->onSuspend(*this, callback.type());
         mCallback = std::move(callback);
@@ -81,18 +86,44 @@ namespace Debug {
         }
     }
 
+    void ContextInfo::control(ContinuationControl control)
+    {
+        switch (control) {
+        case ContinuationControl::Resume:
+            resume();
+            break;
+        case ContinuationControl::Step:
+            step();
+            break;
+        case ContinuationControl::Pause:
+            pause();
+            break;
+        case ContinuationControl::Stop:
+            stop();
+            break;
+        }
+    }
+
     void ContextInfo::resume()
     {
-        continueExecution(ContinuationMode::Resume);
+        mPauseRequested = false;
+        continueExecution(ContinuationMode::Continue);
     }
 
     void ContextInfo::step()
     {
-        continueExecution(ContinuationMode::Step);
+        mPauseRequested = true;
+        continueExecution(ContinuationMode::Continue);
     }
 
-    void ContextInfo::abort()
+    void ContextInfo::pause()
     {
+        mPauseRequested = true;
+    }
+
+    void ContextInfo::stop()
+    {
+        mStopRequested = true;
         continueExecution(ContinuationMode::Abort);
     }
 
@@ -118,15 +149,15 @@ namespace Debug {
         return mCallback.type();
     }
 
-    bool Debugger::pass(DebugLocation *location, ContinuationType type)
+    bool Debugger::wantsPause(const DebugLocation *location, ContinuationType type)
     {
-        bool pass = true;
+        bool pause = location->mContext->mPauseRequested || location->mContext->mStopRequested;
 
         for (DebugListener *listener : mListeners) {
-            pass &= listener->pass(location, type);
+            pause |= listener->wantsPause(location, type);
         }
 
-        return pass;
+        return pause;
     }
 
     bool ContextInfo::stop_cb::operator()() const

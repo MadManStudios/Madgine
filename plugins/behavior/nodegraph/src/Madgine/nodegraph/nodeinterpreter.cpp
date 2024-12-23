@@ -161,7 +161,7 @@ namespace NodeGraph {
 
     bool NodeDebugLocation::wantsPause(Debug::ContinuationType type) const
     {
-        return type == Debug::ContinuationType::Error;
+        return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
     }
 
 }

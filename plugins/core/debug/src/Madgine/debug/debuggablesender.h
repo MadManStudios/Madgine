@@ -8,15 +8,16 @@ namespace Engine {
 namespace Execution {
 
     struct MADGINE_DEBUGGER_EXPORT SenderLocation : Debug::DebugLocation {
-        SenderLocation(std::vector<StateDescriptor> state);
+        SenderLocation(Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> state);
 
         std::string toString() const override;
         std::map<std::string_view, ValueType> localVariables() const override;
         bool wantsPause(Debug::ContinuationType type) const override;
 
-        std::vector<StateDescriptor> mState;
+        void visit(CallableView<void(const Execution::StateDescriptor &)> visitor) const;
+
+        Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> mState;
         size_t mIndex = 0;
-        const void *mContextData = nullptr;
     };
 
     struct get_debug_location_t {
@@ -38,26 +39,6 @@ namespace Execution {
     };
 
     inline constexpr get_debug_location_t get_debug_location;
-
-    struct get_debug_data_t {
-
-        template <typename T>
-        requires(!tag_invocable<get_debug_data_t, T &>) auto operator()(T &t) const
-        {
-            return nullptr;
-        }
-
-        template <typename T>
-        requires tag_invocable<get_debug_data_t, T &>
-        auto operator()(T &t) const
-            noexcept(is_nothrow_tag_invocable_v<get_debug_data_t, T &>)
-                -> tag_invoke_result_t<get_debug_data_t, T &>
-        {
-            return tag_invoke(*this, t);
-        }
-    };
-
-    inline constexpr get_debug_data_t get_debug_data;
 
     template <typename T>
     constexpr size_t get_debug_start_increment()
@@ -135,9 +116,9 @@ namespace Execution {
 
             using State = connect_result_t<Sender, receiver<Sender, Rec>>;
 
-            state(Sender &&sender, Rec &&rec, std::vector<StateDescriptor> state)
+            state(Sender &&sender, Rec &&rec)
                 : mRec(std::forward<Rec>(rec))
-                , mLocation(std::move(state))
+                , mLocation([this, info { visit_sender(sender) }](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(mState, info, std::move(visitor)); })
                 , mState { connect(std::forward<Sender>(sender), receiver<Sender, Rec> { this }) }
             {
             }
@@ -195,13 +176,8 @@ namespace Execution {
 
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
-            {
-                std::vector<StateDescriptor> stateDesc;
-                auto visitor = [&](const StateDescriptor &desc) {
-                    stateDesc.push_back(desc);
-                };
-                visit_state(sender, CallableView<void(const StateDescriptor &desc)> { visitor });
-                return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::move(stateDesc) };
+            {                
+                return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec) };
             }
         };
 
@@ -260,8 +236,7 @@ namespace Execution {
                     location->pass([=](Debug::ContinuationMode mode, V &&...value) mutable {
                         location->mIndex += stop_increment;
                         switch (mode) {
-                        case Debug::ContinuationMode::Resume:
-                        case Debug::ContinuationMode::Step:
+                        case Debug::ContinuationMode::Continue:
                             this->mRec.set_value(std::forward<V>(value)...);
                             break;
                         case Debug::ContinuationMode::Abort:
@@ -269,7 +244,7 @@ namespace Execution {
                             break;
                         }
                     },
-                        get_stop_token(this->mRec), Debug::ContinuationType::Return, std::forward<V>(value)...);
+                        get_stop_token(this->mRec), Debug::ContinuationType::Return, false, std::forward<V>(value)...);
                 }
             }
 
@@ -302,9 +277,8 @@ namespace Execution {
 
                     location->pass([=](Debug::ContinuationMode mode, R &&...result) mutable {
                         location->mIndex += stop_increment;
-                        switch (mode) {
-                        case Debug::ContinuationMode::Resume:
-                        case Debug::ContinuationMode::Step:
+                        switch (mode) {                        
+                        case Debug::ContinuationMode::Continue:
                             this->mRec.set_error(std::forward<R>(result)...);
                             break;
                         case Debug::ContinuationMode::Abort:
@@ -312,9 +286,11 @@ namespace Execution {
                             break;
                         }
                     },
-                        get_stop_token(this->mRec), Debug::ContinuationType::Error, std::forward<R>(result)...);
+                        get_stop_token(this->mRec), Debug::ContinuationType::Error, false, std::forward<R>(result)...);
                 }
             }
+
+            bool mBreakpointSet = false;
         };
 
         template <is_debuggable _Rec, typename Sender>
@@ -333,8 +309,6 @@ namespace Execution {
             void start()
             {
                 auto location = get_debug_location(get_receiver(mState));
-                if constexpr (std::same_as<SenderLocation *, decltype(location)>)
-                    location->mContextData = get_debug_data(mState);
 
                 constexpr size_t increment = get_debug_start_increment<Sender>();
                 if constexpr (increment == 0) {
@@ -344,11 +318,20 @@ namespace Execution {
                         location->mIndex += increment;
                         mState.start();
                     },
-                        get_stop_token(get_receiver(mState)), Debug::ContinuationType::Flow);
+                        get_stop_token(get_receiver(mState)), Debug::ContinuationType::Flow, mBreakpointSet);
                 }
             }
 
+            friend auto tag_invoke(visit_state_t, state &state, const auto &info, auto &&visitor)
+            {
+                visitor(Execution::State::Breakpoint { state.mBreakpointSet, Execution::State::Breakpoint::Alignment::Top });
+                visit_state(state.mState, info, std::forward<decltype(visitor)>(visitor));
+                visitor(Execution::State::Breakpoint { get_receiver(state).mBreakpointSet, Execution::State::Breakpoint::Alignment::Bottom });
+            }
+
             State mState;
+
+            bool mBreakpointSet = false;
 
             template <typename CPO, typename... Args>
             friend auto tag_invoke(CPO f, state &state, Args &&...args)

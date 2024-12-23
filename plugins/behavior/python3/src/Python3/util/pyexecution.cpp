@@ -350,11 +350,6 @@ namespace Scripting {
                            } },
                 std::move(mData));
         }
-
-        void tag_invoke(Execution::visit_state_t, ExecutionSender &sender, CallableView<void(const Execution::StateDescriptor &)> visitor)
-        {
-            visitor(Execution::State::SubLocation {});
-        }
     }
 }
 }

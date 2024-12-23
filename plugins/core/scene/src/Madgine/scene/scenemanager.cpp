@@ -92,6 +92,8 @@ namespace Scene {
             }
         });
 
+        mLifetime.start();
+
         co_return true;
     }
 
@@ -99,7 +101,7 @@ namespace Scene {
     {
         mLifetime.end();
 
-        co_await mLifetime.ended();
+        co_await mLifetime;
 
         //assert(mEntities.empty());
         //assert(mLocalEntities.empty());
@@ -182,7 +184,7 @@ namespace Scene {
     void SceneManager::clear()
     {
         mLifetime.end();
-        mLifetime.reset();
+        mLifetime.start();
     }
 
     void SceneManager::pause()
@@ -223,11 +225,7 @@ namespace Scene {
 
     SceneContainer &SceneManager::container(std::string_view name)
     {
-        auto pib = mContainers.try_emplace(std::string { name }, *this);
-        if (pib.second) {
-            mLifetime.attach(pib.first->second.mContainer.mLifetime.ended());
-        }
-        return pib.first->second.mContainer;
+        return mContainers.try_emplace(std::string { name }, *this).first->second.mContainer;
     }
 
     std::chrono::steady_clock::time_point SceneManager::Clock::get(std::chrono::steady_clock::time_point timepoint) const

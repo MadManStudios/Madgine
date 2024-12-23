@@ -264,10 +264,10 @@ namespace Tools {
 
         if (ImGui::CollapsingHeader("Behaviors")) {
             for (Debug::ContextInfo *context : mWidget->behaviorContexts()) {
-                std::optional<Debug::ContinuationMode> mode = mInspector.getTool<DebuggerView>().contextControls(*context);
+                std::optional<Debug::ContinuationControl> control = mInspector.getTool<DebuggerView>().contextControls(*context);
                 mInspector.getTool<DebuggerView>().renderDebugContext(context);
-                if (mode)
-                    context->continueExecution(*mode);
+                if (control)
+                    context->control(*control);
             }
         }
 

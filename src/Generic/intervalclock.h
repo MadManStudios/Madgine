@@ -8,6 +8,8 @@
 
 #include "execution/algorithm.h"
 
+#include "callable_view.h"
+
 namespace Engine {
 
 namespace Execution {
@@ -134,6 +136,36 @@ struct IntervalClock {
             mCallback.finish(std::move(elapsed));
         }
 
+        friend auto tag_invoke(Execution::visit_state_t, state &state, const std::chrono::steady_clock::duration &duration, auto &&visitor)
+        {
+            if (duration.count() == 0) {
+                visitor(Execution::State::Text { "Yield" });
+            } else {
+                std::string title;
+                /* if (dur.count() < 1000) {
+                    title = std::format("Waiting {} ns", dur.count());
+                } else if (dur.count() < 1000000) {
+                    title = std::format("Waiting {:.3f} us", std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(dur).count());
+                } else if (dur.count() < 1000000000) {
+                    title = std::format("Waiting {:.4f} ms", std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(dur).count());
+                } else {
+                    title = std::format("Waiting {:.4f} s", std::chrono::duration_cast<std::chrono::duration<float>>(dur).count());
+                }*/
+                title = "Waiting";
+
+                visitor(Execution::State::BeginBlock { title });
+
+                float progress = 0.0f;
+
+                std::chrono::steady_clock::duration remaining = std::chrono::duration_cast<std::chrono::steady_clock::duration>(state.mWaitUntil - state.mClock->lastTick());
+                progress = 1.0f - (static_cast<float>(remaining.count()) / duration.count());
+                
+                visitor(Execution::State::Progress { progress });
+
+                visitor(Execution::State::EndBlock {});
+            }
+        }
+
         struct stop_cb {
             bool operator()()
             {
@@ -178,43 +210,11 @@ struct IntervalClock {
             return state<Inner, Rec> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), sender.mDuration };
         }
 
-        template <typename F>
-        friend void tag_invoke(Execution::visit_state_t, sender &sender, F &&f)
+        friend auto tag_invoke(Execution::visit_sender_t, sender &sender)
         {
-            std::chrono::nanoseconds dur = std::chrono::duration_cast<std::chrono::nanoseconds>(sender.mDuration);
-            if (dur.count() == 0) {
-                f(Execution::State::Text { "Yield" });
-            } else {
-                std::string title;
-                /* if (dur.count() < 1000) {
-                    title = std::format("Waiting {} ns", dur.count());
-                } else if (dur.count() < 1000000) {
-                    title = std::format("Waiting {:.3f} us", std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(dur).count());
-                } else if (dur.count() < 1000000000) {
-                    title = std::format("Waiting {:.4f} ms", std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(dur).count());
-                } else {
-                    title = std::format("Waiting {:.4f} s", std::chrono::duration_cast<std::chrono::duration<float>>(dur).count());
-                }*/
-                title = "Waiting";
-
-                f(Execution::State::BeginBlock { title });
-
-                f(Execution::State::Contextual { 
-                    [duration { sender.mDuration }](const void *context) -> Execution::StateDescriptor { 
-                        float progress = 0.0f;
-                        if (context) {
-                            const WaitState *state = static_cast<const WaitState *>(context);
-                            std::chrono::steady_clock::duration remaining = std::chrono::duration_cast<std::chrono::steady_clock::duration>(state->mWaitUntil - state->mClock->lastTick());
-                            progress = 1.0f - (static_cast<float>(remaining.count()) / duration.count());
-                        }
-                        return Execution::State::Progress { progress }; 
-                    } 
-                });
-
-                f(Execution::State::EndBlock {});
-            }
+            return sender.mDuration;
         }
-                                
+
         static constexpr size_t debug_start_increment = 1;
         static constexpr size_t debug_operation_increment = 1;
         static constexpr size_t debug_stop_increment = 1;
@@ -238,7 +238,8 @@ struct IntervalClock {
         return sender<Sender> { { {}, std::forward<Sender>(inner) }, duration };
     }
 
-    const Timepoint& lastTick() const {
+    const Timepoint &lastTick() const
+    {
         return mLastTick;
     }
 

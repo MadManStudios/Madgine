@@ -40,6 +40,20 @@ namespace Resources {
                 }
             }
 
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, state &state, Args &&...args)
+                -> tag_invoke_result_t<CPO, State &, Args...>
+            {
+                return f(state.mState, std::forward<Args>(args)...);
+            }
+
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, const state &state, Args &&...args)
+                -> tag_invoke_result_t<CPO, const State &, Args...>
+            {
+                return f(state.mState, std::forward<Args>(args)...);
+            }
+
             State mState;
         };
 

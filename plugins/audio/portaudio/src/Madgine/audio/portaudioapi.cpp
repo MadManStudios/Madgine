@@ -32,9 +32,21 @@ namespace Audio {
 
         void start();
 
-        friend const void *tag_invoke(const Execution::get_debug_data_t &, PlaybackState &state)
+        friend auto tag_invoke(Execution::visit_state_t, PlaybackState &state, const auto &, auto &&visitor)
         {
-            return &state;
+            visitor(Execution::State::BeginBlock { "Play '"s + std::string { state.mBuffer.name() } + "'" });
+
+            float progress = 0.0f;
+            
+            const std::byte *start, *end, *current;
+            start = static_cast<const std::byte *>(state.mBuffer->mBuffer.begin());
+            end = static_cast<const std::byte *>(state.mEnd);
+            current = static_cast<const std::byte *>(state.mPtr);
+            progress = static_cast<float>(current - start) / (end - start);
+            
+            visitor(Execution::State::Progress { progress });
+
+            visitor(Execution::State::EndBlock {});
         }
 
         AudioLoader::Handle mBuffer;
@@ -91,28 +103,6 @@ namespace Audio {
         friend auto tag_invoke(Execution::connect_t, PlaybackSender &&sender, Rec &&rec)
         {
             return PlaybackStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mBuffer), sender.mApi };
-        }
-
-        template <typename F>
-        friend void tag_invoke(Execution::visit_state_t, PlaybackSender &sender, F &&f)
-        {
-            f(Execution::State::BeginBlock { "Play '"s + std::string { sender.mBuffer.name() } + "'" });
-
-            f(Execution::State::Contextual {
-                [](const void *context) -> Execution::StateDescriptor {
-                    float progress = 0.0f;
-                    if (context) {
-                        const PlaybackState *state = static_cast<const PlaybackState *>(context);
-                        const std::byte *start, *end, *current;
-                        start = static_cast<const std::byte *>(state->mBuffer->mBuffer.begin());
-                        end = static_cast<const std::byte *>(state->mEnd);
-                        current = static_cast<const std::byte *>(state->mPtr);
-                        progress = static_cast<float>(current - start) / (end - start);
-                    }
-                    return Execution::State::Progress { progress };
-                } });
-
-            f(Execution::State::EndBlock {});
         }
 
         static constexpr size_t debug_start_increment = 1;

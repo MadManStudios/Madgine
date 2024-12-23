@@ -108,6 +108,8 @@ namespace Scene {
             std::atomic<size_t> mPauseStack = 0;
         } mClock;
 
+        friend struct SceneContainer;
+
         Threading::DataMutex mMutex;
         Execution::Lifetime mLifetime;
 

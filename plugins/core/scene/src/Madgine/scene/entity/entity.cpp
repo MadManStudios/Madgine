@@ -16,6 +16,8 @@
 
 #include "entitycomponentbase.h"
 
+#include "Generic/execution/algorithm.h"
+
 METATABLE_BEGIN(Engine::Scene::Entity::Entity)
 NAMED_MEMBER(Name, mName)
 READONLY_PROPERTY(Components, components)
@@ -73,6 +75,7 @@ static constexpr Serializer sComponentSynchronizer {
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)
 FIELD(mComponents, Serialize::ParentCreator<&Engine::Scene::Entity::Entity::readComponent, &Engine::Scene::Entity::Entity::writeComponent, &Engine::Scene::Entity::Entity::clearComponents>)
 SERIALIZETABLE_ENTRY(sComponentSynchronizer)
+FIELD(mBehaviors)
 SERIALIZETABLE_END(Engine::Scene::Entity::Entity)
 
 namespace Engine {
@@ -100,6 +103,10 @@ namespace Scene {
             : mName(name)
             , mContainer(container)
         {
+            mLifetime.start();
+            container.mLifetime.attach(Execution::sequence(mLifetime, container.mutex().locked(AccessMode::WRITE, [this]() {
+                mContainer.remove(this);
+            })));
         }
 
         Entity::~Entity()
@@ -255,6 +262,11 @@ namespace Scene {
         EntityComponentPtr<EntityComponentBase> Entity::Helper::operator()(const EntityComponentOwningHandle<EntityComponentBase> &p) const
         {
             return { p, &mEntity->sceneMgr() };
+        }
+
+        BehaviorList &Entity::behaviors()
+        {
+            return mBehaviors;
         }
     }
 }

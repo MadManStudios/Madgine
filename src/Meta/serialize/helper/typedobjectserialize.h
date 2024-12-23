@@ -33,5 +33,24 @@ namespace Serialize {
         return tag;
     }
 
+    inline StreamResult beginExtendedTypedRead(FormattedSerializeStream &in, std::string &tag)
+    {
+        if (in.supportsNameLookup()) {
+            return in.lookupFieldName(tag);
+        } else {
+            STREAM_PROPAGATE_ERROR(in.beginExtendedRead(nullptr, 1));
+            return read(in, tag, "type");
+        }
+    }
+
+    inline const char *beginExtendedTypedWrite(FormattedSerializeStream &out, std::string_view tag)
+    {
+        const char *cTag = tag.data();
+        if (!out.supportsNameLookup()) {
+            out.beginExtendedWrite(cTag, 1);
+            write(out, tag, "type");
+        }
+        return cTag;
+    }
 }
 }

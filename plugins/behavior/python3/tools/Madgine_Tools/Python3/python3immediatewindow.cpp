@@ -146,7 +146,7 @@ namespace Tools {
         return "Python3ImmediateWindow";
     }
 
-    bool Python3ImmediateWindow::pass(Debug::DebugLocation *location, Debug::ContinuationType type)
+    bool Python3ImmediateWindow::wantsPause(const Debug::DebugLocation *location, Debug::ContinuationType type)
     {
 
         const Scripting::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Scripting::Python3::Python3DebugLocation *>(location);
@@ -158,12 +158,12 @@ namespace Tools {
                 TextDocument *doc = getTool<TextEditor>().getDocument(path);
                 if (doc && doc->hasBreakpoint(pyLocation->lineNr())) {
                     doc->goToLine(pyLocation->lineNr());
-                    return false;
+                    return true;
                 }
             }
         }
 
-        return true;
+        return false;
     }
 
     void Python3ImmediateWindow::onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type)

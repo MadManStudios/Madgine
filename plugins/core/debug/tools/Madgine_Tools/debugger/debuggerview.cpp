@@ -2,6 +2,7 @@
 
 #include "debuggerview.h"
 
+#include "Madgine_Tools/imguiicons.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
@@ -60,8 +61,9 @@ namespace Tools {
         if (const Execution::SenderLocation *senderLocation = dynamic_cast<const Execution::SenderLocation *>(location)) {
             const Debug::DebugLocation *subLocation = nullptr;
 
-            CallableView<void(const Execution::StateDescriptor &, const void *)> visitorView;
-            auto visitor = [this, context, location, inlineLocation, &visitorView, &subLocation](const Execution::StateDescriptor &desc, const void *contextData) {
+            auto visitor = [this, context, location, inlineLocation, &subLocation](const Execution::StateDescriptor &desc) {
+                float startY = ImGui::GetCursorScreenPos().y;
+
                 std::visit(overloaded { [](const Execution::State::Text &text) {
                                            ImGui::Text(text.mText);
                                        },
@@ -83,21 +85,27 @@ namespace Tools {
                                [this, context, location, inlineLocation, &subLocation](const Execution::State::SubLocation &) {
                                    subLocation = visualizeDebugLocation(context, location->mChild, inlineLocation);
                                },
-                               [contextData, &visitorView](const Execution::State::Contextual &contextual) mutable {
-                                   visitorView(contextual.mMapping(contextData), std::move(contextData));
+                               [](const Execution::State::Breakpoint &bp) {
+                                   float offset = 0.0f;
+                                   switch (bp.mAlignment) {
+
+                                   case Execution::State::Breakpoint::Alignment::Center:
+                                       offset = -9.0f;
+                                       break;
+                                   case Execution::State::Breakpoint::Alignment::Bottom:
+                                       offset = -18.0f;
+                                       break;
+                                   }
+                                   DrawBreakpoint(ImGui::GetCursorScreenPos().y + offset);
                                } },
                     desc);
+
+                //if (current && !location->mChild) {
+                //    DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY) - 7.0f);
+                //}
             };
-            visitorView = visitor;
-            size_t i = 0;
-            for (const Execution::StateDescriptor &state : senderLocation->mState) {
-                float startY = ImGui::GetCursorScreenPos().y;
-                bool current = i++ == senderLocation->mIndex;
-                visitor(state, current ? senderLocation->mContextData : nullptr);
-                if (current && !location->mChild) {
-                    DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY) - 7.0f);
-                }
-            }
+            senderLocation->visit(CallableView<void(const Execution::StateDescriptor &)> { visitor });
+
             return subLocation;
         } else {
             for (auto debugVisualizer : mDebugLocationVisualizers) {
@@ -110,26 +118,37 @@ namespace Tools {
         }
     }
 
-    std::optional<Debug::ContinuationMode> DebuggerView::contextControls(Debug::ContextInfo &context)
+    std::optional<Debug::ContinuationControl> DebuggerView::contextControls(Debug::ContextInfo &context)
     {
-        std::optional<Debug::ContinuationMode> mode;
-        ImGui::PushID(&context);
-        if (!context.alive() || !context.isPaused())
-            ImGui::BeginDisabled();
-        if (ImGui::Button("Resume")) {
-            mode = Debug::ContinuationMode::Resume;
+        std::optional<Debug::ContinuationControl> mode;
+        if (context.alive()) {
+            ImGui::PushID(&context);
+            if (!context.isPaused())
+                ImGui::BeginDisabled();
+            if (ImGui::Button(IMGUI_ICON_PLAY)) {
+                mode = Debug::ContinuationControl::Resume;
+            }
+            ImGui::SameLine(0, 0);
+            if (ImGui::Button(IMGUI_ICON_STEP)) {
+                mode = Debug::ContinuationControl::Step;
+            }
+            if (!context.isPaused())
+                ImGui::EndDisabled();
+            else
+                ImGui::BeginDisabled();
+            ImGui::SameLine(0, 0);
+            if (ImGui::Button(IMGUI_ICON_PAUSE)) {
+                mode = Debug::ContinuationControl::Pause;
+            }
+            if (context.isPaused())
+                ImGui::EndDisabled();
+            ImGui::SameLine(0, 0);
+            if (ImGui::Button(IMGUI_ICON_STOP)) {
+                mode = Debug::ContinuationControl::Stop;
+            }
+            
+            ImGui::PopID();
         }
-        ImGui::SameLine();
-        if (ImGui::Button("Step")) {
-            mode = Debug::ContinuationMode::Step;
-        }
-        ImGui::SameLine();
-        if (ImGui::Button("Abort")) {
-            mode = Debug::ContinuationMode::Abort;
-        }
-        if (!context.alive() || !context.isPaused())
-            ImGui::EndDisabled();
-        ImGui::PopID();
         return mode;
     }
 
@@ -150,7 +169,7 @@ namespace Tools {
         }
         ImGui::End();
 
-        std::optional<Debug::ContinuationMode> continuation;
+        std::optional<Debug::ContinuationControl> continuation;
         Debug::DebugLocation *prevSelected = mSelectedLocation;
         mSelectedLocation = nullptr;
 
@@ -197,7 +216,7 @@ namespace Tools {
         ImGui::End();
 
         if (continuation)
-            mSelectedContext->continueExecution(*continuation);
+            mSelectedContext->control(*continuation);
     }
 
     void DebuggerView::renderMenu()
@@ -249,9 +268,9 @@ namespace Tools {
         setCurrentContext(context);
     }
 
-    bool DebuggerView::pass(Debug::DebugLocation *location, Debug::ContinuationType type)
+    bool DebuggerView::wantsPause(const Debug::DebugLocation *location, Debug::ContinuationType type)
     {
-        return true;
+        return false;
     }
 
     std::string_view DebuggerView::key() const
@@ -282,5 +301,12 @@ namespace Tools {
         draw_list->AddTriangleFilled({ x + 12.0f, y - 5.0f }, { x + 12.0f, y + 5.0f }, { x + 17.0f, y }, IM_COL32(255, 200, 10, 255));
     }
 
+    void DrawBreakpoint(float y)
+    {
+        ImDrawList *draw_list = ImGui::GetWindowDrawList();
+        float x = sDebugStartX;
+        y += 7.0f;
+        draw_list->AddCircle({ x + 7.0f, y }, 7.0f, IM_COL32(155, 155, 155, 155));        
+    }
 }
 }

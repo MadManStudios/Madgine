@@ -45,11 +45,11 @@ namespace Threading {
         };
 
         template <typename Rec, typename F>
-        struct state : LockState {
+        struct state : LockState, Execution::base_state<Rec> {
 
             state(DataMutex *mutex, AccessMode mode, Rec &&rec, F &&f)
                 : LockState(mutex, mode)
-                , mRec(std::forward<Rec>(rec))
+                , Execution::base_state<Rec>(std::forward<Rec>(rec))
                 , mF(std::forward<F>(f))
             {
             }
@@ -73,13 +73,7 @@ namespace Threading {
                     mRec.set_value(std::forward<decltype(result)>(result));
                 }
             }
-                        
-            friend const Rec &tag_invoke(Execution::get_receiver_t, const state &state)
-            {
-                return state.mRec;
-            }
 
-            Rec mRec;
             F mF;
         };
 

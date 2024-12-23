@@ -22,12 +22,6 @@ namespace Scene {
 
             bool updateRender(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame, Matrix4 *matrices);
 
-            
-            friend const void *tag_invoke(const Execution::get_debug_data_t &, AnimationState &state)
-            {
-                return &state;
-            }
-
             virtual Entity *entity() = 0;
             virtual SceneManager *scene() = 0;
 

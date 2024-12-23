@@ -22,6 +22,8 @@
 
 #include "Madgine/behavior.h"
 
+#include "Madgine/behaviorlist.h"
+
 namespace Engine {
 namespace Scene {
     namespace Entity {
@@ -103,7 +105,7 @@ namespace Scene {
             void addBehavior(Sender &&sender)
             {
                 Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-                mLifetime.attach(std::forward<Sender>(sender) | with_constant_binding<"Entity">(this) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
+                mLifetime.attach(std::forward<Sender>(sender) | with_constant_binding<"Entity">(this) | with_constant_binding<"Scene">(&sceneMgr()) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
                 mBehaviorContexts.emplace_back(context);
             }
 
@@ -115,6 +117,8 @@ namespace Scene {
 
             SceneContainer &container();
             const SceneContainer &container() const;
+
+            BehaviorList &behaviors();
 
             friend struct SyncableEntityComponentBase;
             friend struct Scene::SceneContainer;
@@ -133,6 +137,8 @@ namespace Scene {
             Execution::Lifetime mLifetime;
 
             std::vector<Debug::ContextInfo *> mBehaviorContexts;
+
+            BehaviorList mBehaviors;
         };
 
     }

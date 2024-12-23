@@ -116,6 +116,8 @@ namespace Widgets {
         }
 #endif
 
+        mLifetime.start();
+
         co_return true;
     }
 
@@ -123,7 +125,7 @@ namespace Widgets {
     {
         mLifetime.end();
 
-        co_await mLifetime.ended();
+        co_await mLifetime;
 
         mTopLevelWidgets.clear();
 

@@ -18,6 +18,8 @@
 
 #include "Madgine/behavior.h"
 
+#include "Madgine/behaviorlist.h"
+
 #include "Madgine_Tools/inspector/inspector.h"
 
 #include "Madgine/behaviorcollector.h"
@@ -58,6 +60,8 @@ namespace Tools {
     {
         getTool<DebuggerView>().registerDebugLocationVisualizer<visualizeCoroutineLocation>();
 
+        mInspector = &getTool<Inspector>();
+
         co_return co_await ToolBase::init();
     }
 
@@ -71,13 +75,37 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    Engine::BehaviorHandle BehaviorSelector()
+    void BehaviorTool::DrawBehaviorList(BehaviorList &list)
     {
-        Engine::BehaviorHandle result;
+        std::erase_if(list.mEntries, [this](BehaviorList::Entry &entry) {
+            ImGui::BeginGroupPanel(entry.mHandle.name().data());
+            ImGui::BeginTable("Entry", 2, ImGuiTableFlags_Resizable);
+            mInspector->drawMembers(entry.mParameters.customScopePtr());
+            ImGui::EndTable();
 
-        for (auto [name, index] : Engine::BehaviorFactoryRegistry::sComponentsByName()) {
+            ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
+
+            ImGui::EndGroupPanel();
+
+            bool remove = false;
+
+            if (ImGui::BeginPopupCompoundContextItem()) {
+                if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { entry.mHandle.name() }).c_str())) {
+                    remove = true;
+                }
+                ImGui::EndPopup();
+            }
+            return remove;
+        });
+    }
+
+    BehaviorHandle BehaviorSelector()
+    {
+        BehaviorHandle result;
+
+        for (auto [name, index] : BehaviorFactoryRegistry::sComponentsByName()) {
             if (ImGui::BeginMenu(name.data())) {
-                const Engine::BehaviorFactoryBase *factory = Engine::BehaviorFactoryRegistry::get(index).mFactory;
+                const BehaviorFactoryBase *factory = BehaviorFactoryRegistry::get(index).mFactory;
                 for (std::string_view name : factory->names()) {
                     if (ImGui::MenuItem(name.data())) {
                         result = { index, std::string { name } };

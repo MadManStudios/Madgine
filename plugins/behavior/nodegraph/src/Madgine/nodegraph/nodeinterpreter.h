@@ -87,13 +87,11 @@ namespace NodeGraph {
     };
 
     template <typename _Rec>
-    struct NodeInterpreterState : NodeInterpreterStateBase {
-
-        using Rec = _Rec;
+    struct NodeInterpreterState : NodeInterpreterStateBase, Execution::base_state<_Rec> {
 
         NodeInterpreterState(Rec &&rec, const NodeGraph *graph, NodeGraphLoader::Handle handle)
             : NodeInterpreterStateBase { graph, std::move(handle) }
-            , mRec(std::forward<Rec>(rec))
+            , Execution::base_state<Rec>(std::forward<Rec>(rec))
         {
         }
 
@@ -119,11 +117,6 @@ namespace NodeGraph {
             this->mRec.set_value(std::move(result));
         }
 
-        friend Rec &tag_invoke(Execution::get_receiver_t, NodeInterpreterState &state)
-        {
-            return state.mRec;
-        }
-
         std::stop_token stopToken() override
         {
             return Execution::get_stop_token(mRec);
@@ -143,8 +136,6 @@ namespace NodeGraph {
         {
             return get_binding_d(mRec, name, out);
         }
-
-        Rec mRec;
     };
 
     struct NodeInterpreterSender : Execution::base_sender {
@@ -168,12 +159,6 @@ namespace NodeGraph {
         friend auto tag_invoke(Execution::connect_t, NodeInterpreterSender &&sender, Rec &&rec)
         {
             return NodeInterpreterState<Rec> { std::forward<Rec>(rec), sender.mGraph, std::move(sender.mHandle) };
-        }
-
-        template <typename F>
-        friend void tag_invoke(Execution::visit_state_t, NodeInterpreterSender &sender, F &&f)
-        {
-            f(Execution::State::SubLocation {});
         }
 
         static constexpr size_t debug_operation_increment = 1;

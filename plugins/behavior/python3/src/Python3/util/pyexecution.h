@@ -59,8 +59,6 @@ namespace Scripting {
                 return VirtualBehaviorState<Rec, ExecutionState> { std::forward<Rec>(rec), std::move(sender.mData) };
             }
 
-            MADGINE_PYTHON3_EXPORT friend void tag_invoke(Execution::visit_state_t, ExecutionSender &sender, CallableView<void(const Execution::StateDescriptor &)> visitor);
-
             ExecutionData mData;
         };
 

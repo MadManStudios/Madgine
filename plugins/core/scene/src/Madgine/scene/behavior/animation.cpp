@@ -36,6 +36,20 @@ namespace Scene {
                 return scene;
             }
 
+            friend auto tag_invoke(Execution::visit_state_t, AnimationStateImpl &state, const auto &, auto &&visitor)
+            {
+                visitor(Execution::State::BeginBlock { "Play '"s + state.mAnimationList->mAnimations[state.mCurrentAnimation].mName + "'" });
+
+                float progress = 0.0f;
+                
+                float duration = state.mAnimationList->mAnimations[state.mCurrentAnimation].mDuration;
+                progress = fmodf(state.mCurrentStep, duration) / duration;
+                
+                visitor(Execution::State::Progress { progress });
+
+                visitor(Execution::State::EndBlock {});
+            }
+
             using VirtualBehaviorState<Rec, AnimationState>::VirtualBehaviorState;
         };
 
@@ -48,28 +62,10 @@ namespace Scene {
             friend auto tag_invoke(Execution::connect_t, AnimationSender &&sender, Rec &&rec)
             {
                 return AnimationStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mAnimation), sender.mCurrentAnimation };
-            }
+            }            
 
-            template <typename F>
-            friend void tag_invoke(Execution::visit_state_t, AnimationSender &sender, F &&f)
-            {
-                f(Execution::State::BeginBlock { "Play '"s + std::string { sender.mAnimation->mAnimations[sender.mCurrentAnimation].mName } + "'" });
-
-                f(Execution::State::Contextual {
-                    [](const void *context) -> Execution::StateDescriptor {
-                        float progress = 0.0f;
-                        if (context) {
-                            const AnimationState *state = static_cast<const AnimationState *>(context);
-                            float duration = state->mAnimationList->mAnimations[state->mCurrentAnimation].mDuration;
-                            progress = fmodf(state->mCurrentStep, duration) / duration;
-                        }
-                        return Execution::State::Progress { progress };
-                    } });
-
-                f(Execution::State::EndBlock {});
-            }
-
-            static constexpr size_t debug_start_increment = 1;
+            static constexpr size_t debug_start_increment
+                = 1;
             static constexpr size_t debug_operation_increment = 1;
             static constexpr size_t debug_stop_increment = 1;
 

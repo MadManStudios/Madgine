@@ -129,12 +129,7 @@ std::map<std::string_view, ValueType> CoroutineLocation::localVariables() const
 
 bool CoroutineLocation::wantsPause(Debug::ContinuationType type) const
 {
-    return type == Debug::ContinuationType::Error;
-}
-
-void tag_invoke(Execution::visit_state_t, Behavior &behavior, CallableView<void(const Execution::StateDescriptor &)> visitor)
-{
-    visitor(Execution::State::SubLocation {});
+    return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
 }
 
 Behavior::state::state(StatePtr state)

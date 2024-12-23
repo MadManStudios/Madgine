@@ -38,7 +38,9 @@ BehaviorHandle::~BehaviorHandle()
 
 BehaviorHandle &BehaviorHandle::operator=(const BehaviorHandle &other)
 {
-    mIndex = other.mIndex;
+    if (mHandle)
+        BehaviorFactoryRegistry::get(mIndex).mFactory->release(mHandle);
+    mIndex = other.mIndex;    
     mHandle = BehaviorFactoryRegistry::get(mIndex).mFactory->load(other.name());
     return *this;
 }

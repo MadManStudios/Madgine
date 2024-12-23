@@ -35,13 +35,14 @@ namespace Input {
 
     Threading::Task<bool> HandlerBase::init()
     {
+        mLifetime.start();
         co_return true;
     }
 
     Threading::Task<void> HandlerBase::finalize()
     {
         mLifetime.end();
-        co_await mLifetime.ended();
+        co_await mLifetime;
         mWidget = nullptr;
         co_return;
     }
@@ -49,9 +50,10 @@ namespace Input {
     void HandlerBase::setWidget(Widgets::WidgetBase *widget)
     {
         if (mWidget != widget) {
-            mLifetime.reset();
+            mLifetime.end();
+            mLifetime.start();
 
-            widget->manager().lifetime().attach(mLifetime.ended());
+            widget->manager().lifetime().attach(mLifetime);
 
             mWidget = widget;
 
