@@ -40,7 +40,7 @@ void CoroutineBehaviorState::connect(BehaviorReceiver &rec)
 
 void CoroutineBehaviorState::start()
 {
-    mDebugLocation.stepInto(mReceiver->debugLocation());
+    mDebugLocation.stepInto(Execution::get_debug_location(*mReceiver));
     std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).resume();
 }
 
@@ -76,7 +76,7 @@ CoroutineBehaviorState::FinalSuspend CoroutineBehaviorState::final_suspend() noe
 
 void CoroutineBehaviorState::return_void()
 {
-    mDebugLocation.stepOut(mReceiver->debugLocation());
+    mDebugLocation.stepOut(Execution::get_debug_location(*mReceiver));
     //mValue = void
 }
 
@@ -87,13 +87,13 @@ void CoroutineBehaviorState::unhandled_exception()
 
 void CoroutineBehaviorState::set_error(BehaviorError result)
 {
-    mDebugLocation.stepOut(mReceiver->debugLocation());
+    mDebugLocation.stepOut(Execution::get_debug_location(*mReceiver));
     mReceiver->set_error(result);
 }
 
 void CoroutineBehaviorState::set_done()
 {
-    mDebugLocation.stepOut(mReceiver->debugLocation());
+    mDebugLocation.stepOut(Execution::get_debug_location(*mReceiver));
     mReceiver->set_done();
 }
 

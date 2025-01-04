@@ -45,7 +45,7 @@ struct BehaviorAwaitableReceiver : Execution::execution_receiver<> {
 
     friend std::stop_token tag_invoke(Execution::get_stop_token_t, BehaviorAwaitableReceiver &rec)
     {
-        return rec.mBehavior->mReceiver->stopToken();
+        return Execution::get_stop_token(*rec.mBehavior->mReceiver);
     }
 
     friend Debug::ParentLocation *tag_invoke(Execution::get_debug_location_t, BehaviorAwaitableReceiver &rec)

@@ -22,6 +22,8 @@ namespace Execution {
 
     struct get_debug_location_t {
 
+        using signature = Debug::DebugLocation*();
+
         template <typename T>
         requires(!tag_invocable<get_debug_location_t, T &>) auto operator()(T &t) const
         {

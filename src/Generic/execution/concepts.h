@@ -88,6 +88,8 @@ namespace Execution {
 
     struct get_stop_token_t {
 
+        using signature = std::stop_token();
+
         template <typename T>
         requires(!tag_invocable<get_stop_token_t, T &>) auto operator()(T &) const
         {

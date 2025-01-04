@@ -2,7 +2,6 @@
 
 #include "Generic/fixed_string.h"
 #include "Generic/linestruct.h"
-#include "Generic/type_holder.h"
 #include "accessor.h"
 #include "boundapifunction.h"
 #include "functiontable_impl.h"

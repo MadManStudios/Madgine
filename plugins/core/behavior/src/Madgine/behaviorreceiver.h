@@ -12,7 +12,7 @@
 
 namespace Engine {
 
-struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBase<BehaviorError, ArgumentList> {
+struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBaseEx<type_pack<BehaviorError>, type_pack<ArgumentList>, Execution::get_stop_token, Execution::get_debug_location, Log::get_log> {
     template <typename... Args>
     void set_value(Args &&...args)
     {
@@ -20,9 +20,6 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBase
     }
 
     virtual BehaviorError getBinding(std::string_view name, ValueType &out) = 0;
-    virtual Debug::ParentLocation *debugLocation() = 0;
-    virtual std::stop_token stopToken() = 0;
-    virtual Log::Log *log() = 0;
 
     BehaviorError getBindingHelper(std::string_view name, CallableView<void(const ValueType &)> cb);
 
@@ -39,46 +36,17 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBase
         }
     }
 
-    friend std::stop_token tag_invoke(Execution::get_stop_token_t, BehaviorReceiver &rec)
-    {
-        return rec.stopToken();
-    }
-
-    friend Debug::ParentLocation *tag_invoke(Execution::get_debug_location_t, BehaviorReceiver &rec)
-    {
-        return rec.debugLocation();
-    }
-
-    friend Log::Log *tag_invoke(Log::get_log_t, BehaviorReceiver &rec)
-    {
-        return rec.log();
-    }
 };
 
 template <typename Rec, typename Base = BehaviorReceiver>
-struct VirtualBehaviorState : Execution::VirtualStateEx<Rec, Base, type_pack<BehaviorError>, ArgumentList> {
+struct VirtualBehaviorState : Execution::VirtualState<Rec, Base> {
 
-    using Execution::VirtualStateEx<Rec, Base, type_pack<BehaviorError>, ArgumentList>::VirtualStateEx;
+    using Execution::VirtualState<Rec, Base>::VirtualState;
 
     BehaviorError getBinding(std::string_view name, ValueType &out) override
     {
         ValueTypeRef outRef { out };
         return get_binding_d(this->mRec, name, outRef);
-    }
-
-    Debug::ParentLocation *debugLocation() override
-    {
-        return Execution::get_debug_location(this->mRec);
-    }
-
-    std::stop_token stopToken() override
-    {
-        return Execution::get_stop_token(this->mRec);
-    }
-
-    Log::Log *log() override
-    {
-        return Log::get_log(this->mRec);
     }
 };
 

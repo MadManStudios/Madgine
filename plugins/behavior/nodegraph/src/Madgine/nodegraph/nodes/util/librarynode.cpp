@@ -22,20 +22,8 @@ SERIALIZETABLE_END(Engine::NodeGraph::LibraryNode)
 namespace Engine {
 namespace NodeGraph {
 
-    struct LibraryInterpretData : NodeInterpreterData, BehaviorReceiver {
-
-        LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args)
-            : mBehavior(type.create(args).connect(*this))
-        {
-        }
-
-        void start(NodeReceiver<NodeBase> receiver)
-        {
-            mReceiver.emplace(std::move(receiver));
-            mBehavior->start();
-        }
-
-        void set_value(ArgumentList values) override
+    struct LibraryInterpretReceiver {
+        void set_value(ArgumentList values)
         {
             mResult = std::move(values);
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
@@ -43,49 +31,57 @@ namespace NodeGraph {
             receiver.set_value();
         }
 
-        void set_error(BehaviorError result) override
+        void set_error(BehaviorError result)
         {
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
             mReceiver.reset();
             receiver.set_error(std::move(result));
         }
 
-        void set_done() override
+        void set_done()
         {
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
             mReceiver.reset();
             receiver.set_done();
         }
 
+        template <typename CPO, typename... Args>
+        friend auto tag_invoke(CPO f, LibraryInterpretReceiver &rec, Args &&...args)
+            -> tag_invoke_result_t<CPO, BehaviorReceiver &, Args...>
+        {
+            return f(*rec.mReceiver, std::forward<Args>(args)...);
+        }
+
+        std::optional<NodeReceiver<NodeBase>> mReceiver;
+        ArgumentList mResult;
+    };
+
+    struct LibraryInterpretData : NodeInterpreterData, Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver> {
+
+        LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args)
+            : Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver>(LibraryInterpretReceiver {})
+            , mBehavior(type.create(args).connect(*this))
+        {
+        }
+
+        void start(NodeReceiver<NodeBase> receiver)
+        {
+            mRec.mReceiver.emplace(std::move(receiver));
+            mBehavior->start();
+        }
+
         BehaviorError getBinding(std::string_view name, ValueType &ref) override
         {
-            for (uint32_t i = 0; i < mReceiver->mNode.dataInCount(1); ++i) {
-                if (mReceiver->mNode.dataInName(i, 1) == name) {
-                    return mReceiver->read(ref, i, 1);
+            for (uint32_t i = 0; i < mRec.mReceiver->mNode.dataInCount(1); ++i) {
+                if (mRec.mReceiver->mNode.dataInName(i, 1) == name) {
+                    return mRec.mReceiver->read(ref, i, 1);
                 }
             }
             throw 0;
             //return false;
         }
 
-        Debug::ParentLocation *debugLocation() override
-        {
-            return Execution::get_debug_location(*mReceiver);
-        }
-
-        std::stop_token stopToken() override
-        {
-            return Execution::get_stop_token(*mReceiver);
-        }
-
-        Log::Log *log() override
-        {
-            return Log::get_log(*mReceiver);
-        }
-
         Behavior::StatePtr mBehavior;
-        std::optional<NodeReceiver<NodeBase>> mReceiver;
-        ArgumentList mResult;
     };
 
     LibraryNode::LibraryNode(NodeGraph &graph, BehaviorHandle behavior)
@@ -193,7 +189,7 @@ namespace NodeGraph {
 
     BehaviorError LibraryNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
     {
-        retVal = static_cast<LibraryInterpretData *>(data.get())->mResult[providerIndex];
+        retVal = static_cast<LibraryInterpretData *>(data.get())->mRec.mResult[providerIndex];
         return {};
     }
 

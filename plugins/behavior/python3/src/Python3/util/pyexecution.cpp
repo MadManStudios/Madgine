@@ -326,9 +326,9 @@ namespace Scripting {
 
         void ExecutionState::start()
         {
-            Python3Lock lock { log(), stopToken() };
+            Python3Lock lock { Log::get_log(*this), Execution::get_stop_token(*this) };
 
-            Python3Debugger::Guard guard { debugLocation() };
+            Python3Debugger::Guard guard { Execution::get_debug_location(*this) };
 
             std::visit(overloaded {
                            [this](CodeObject code) {

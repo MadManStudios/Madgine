@@ -86,12 +86,11 @@ namespace NodeGraph {
         std::vector<std::unique_ptr<NodeInterpreterData>> mData;
     };
 
-    template <typename _Rec>
-    struct NodeInterpreterState : NodeInterpreterStateBase, Execution::base_state<_Rec> {
+    template <typename Rec>
+    struct NodeInterpreterState : Execution::VirtualState<Rec, NodeInterpreterStateBase> {
 
         NodeInterpreterState(Rec &&rec, const NodeGraph *graph, NodeGraphLoader::Handle handle)
-            : NodeInterpreterStateBase { graph, std::move(handle) }
-            , Execution::base_state<Rec>(std::forward<Rec>(rec))
+            : Execution::VirtualState<Rec, NodeInterpreterStateBase> { std::forward<Rec>(rec), graph, std::move(handle) }            
         {
         }
 
@@ -115,21 +114,6 @@ namespace NodeGraph {
         {
             mDebugLocation.stepOut(Execution::get_debug_location(mRec));
             this->mRec.set_value(std::move(result));
-        }
-
-        std::stop_token stopToken() override
-        {
-            return Execution::get_stop_token(mRec);
-        }
-
-        Debug::ParentLocation *debugLocation() override
-        {
-            return Execution::get_debug_location(mRec);
-        }
-
-        Log::Log *log() override
-        {
-            return Engine::Log::get_log(mRec);
         }
 
         BehaviorError getBinding(std::string_view name, ValueType &out) override

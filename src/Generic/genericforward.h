@@ -72,11 +72,11 @@ namespace Execution {
 
     struct Lifetime;
 
-    template <typename R, typename... V>
+    template <typename R, typename VPack, auto... cpo>
     struct VirtualReceiverBaseEx;
 
     template <typename R, typename... V>
-    using VirtualReceiverBase = VirtualReceiverBaseEx<make_type_pack_t<R>, V...>;
+    using VirtualReceiverBase = VirtualReceiverBaseEx<make_type_pack_t<R>, type_pack<V...>>;
 
     template <typename... _Ty>
     struct SignalStub;

@@ -85,7 +85,7 @@ namespace Scene {
             mBoneIndexMapping = mAnimationList->generateBoneMappings(entity()->getComponent<Scene::Entity::Skeleton>()->get());
 
             scene()->addAnimation(this);
-            mStopCallback.start(stopToken(), *this);
+            mStopCallback.start(Execution::get_stop_token(*this), *this);
         }
 
         void AnimationState::finish()

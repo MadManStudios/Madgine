@@ -7,8 +7,11 @@
 namespace Engine {
 namespace Execution {
 
+    template <typename... Ty>
+    using ConnectionReceiver = VirtualReceiverBase<GenericResult, Ty...>;
+
     template <typename Stub, typename... Ty>
-    struct Connection : VirtualReceiverBase<GenericResult, Ty...> {
+    struct Connection : ConnectionReceiver<Ty...> {
 
         Connection(Stub *stub)
             : mStub(stub)
@@ -31,7 +34,7 @@ namespace Execution {
     };
 
     template <typename Stub, typename Rec, typename... Ty>
-    struct StoppableConnection : VirtualStateEx<Rec, Connection<Stub, Ty...>, type_pack<GenericResult>, Ty...> {
+    struct StoppableConnection : VirtualState<Rec, Connection<Stub, Ty...>> {
 
         struct callback {
             callback(StoppableConnection<Stub, Rec, Ty...> *con)
@@ -48,7 +51,7 @@ namespace Execution {
         };
 
         StoppableConnection(Rec &&rec, Stub *stub)
-            : Execution::VirtualStateEx<Rec, Connection<Stub, Ty...>, type_pack<GenericResult>, Ty...>(std::forward<Rec>(rec), stub)
+            : Execution::VirtualState<Rec, Connection<Stub, Ty...>>(std::forward<Rec>(rec), stub)
             , mCallback(Execution::get_stop_token(this->mRec), callback { this })
         {
         }

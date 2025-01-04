@@ -1,28 +1,30 @@
 #pragma once
 
+#include "Generic/delayedconstruct.h"
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/virtualstate.h"
-#include "Generic/delayedconstruct.h"
 #include "Generic/genericresult.h"
 
 namespace Engine {
 
+using KeyValueReceiver = Execution::VirtualReceiverBaseEx<type_pack<GenericResult>, type_pack<const ArgumentList &>, Execution::get_stop_token>;
+
 struct KeyValueSenderStateBase {
-    virtual void connect(Execution::VirtualStoppableReceiverBase<GenericResult, const ArgumentList &> &receiver) = 0;
+    virtual void connect(KeyValueReceiver &receiver) = 0;
     virtual void start() = 0;
 };
 
 template <typename Sender>
 struct KeyValueSenderState : KeyValueSenderStateBase {
 
-    using State = Execution::connect_result_t<Sender, Execution::VirtualStoppableReceiverBase<GenericResult, const ArgumentList &> &>;
+    using State = Execution::connect_result_t<Sender, KeyValueReceiver &>;
 
     KeyValueSenderState(Sender &&sender)
         : mState(std::forward<Sender>(sender))
     {
     }
 
-    virtual void connect(Execution::VirtualStoppableReceiverBase<GenericResult, const ArgumentList &> &receiver) override
+    virtual void connect(KeyValueReceiver &receiver) override
     {
         mState.template emplace<State>(DelayedConstruct<State> {
             [&, sender { std::forward<Sender>(std::get<Sender>(mState)) }]() mutable { return Execution::connect(std::move(sender), receiver); } });
@@ -58,9 +60,9 @@ struct KeyValueSender {
     KeyValueSender &operator=(KeyValueSender &&) = default;
 
     template <typename Rec>
-    struct state : Execution::VirtualStoppableState<Rec, GenericResult, const ArgumentList &> {
+    struct state : Execution::VirtualState<Rec, KeyValueReceiver> {
         state(Rec &&rec, std::shared_ptr<KeyValueSenderStateBase> state)
-            : Execution::VirtualStoppableState<Rec, GenericResult, const ArgumentList &>(std::forward<Rec>(rec))
+            : Execution::VirtualState<Rec, KeyValueReceiver>(std::forward<Rec>(rec))
             , mState(std::move(state))
         {
             mState->connect(*this);

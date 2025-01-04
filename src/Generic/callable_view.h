@@ -38,6 +38,6 @@ private:
 };
 
 template <typename Signature>
-using CallableView = typename CallableTraits<Signature>::template instance<CallableViewImpl>::type;
+using CallableView = typename CallableTraits<Signature>::template instance<CallableViewImpl>;
 
 }

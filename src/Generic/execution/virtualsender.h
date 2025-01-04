@@ -35,7 +35,7 @@ namespace Execution {
     template <typename State, typename R, typename... V, typename Rec, typename... Args>
     auto make_virtual_state(Rec &&rec, Args &&...args)
     {
-        return VirtualStateEx<Rec, State, make_type_pack_t<R>, V...> { std::forward<Rec>(rec), std::forward<Args>(args)... };
+        return VirtualStateEx<Rec, State, make_type_pack_t<R>, type_pack<V...>> { std::forward<Rec>(rec), std::forward<Args>(args)... };
     }
 
     template <typename State, typename R, typename... V, typename... Args>

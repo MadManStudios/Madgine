@@ -68,6 +68,6 @@ namespace __generic_impl__ {
 
 
 template <typename F>
-using Closure = typename CallableTraits<F>::template instance<__generic_impl__::ClosureImpl>::type;
+using Closure = typename CallableTraits<F>::template instance<__generic_impl__::ClosureImpl>;
 
 }

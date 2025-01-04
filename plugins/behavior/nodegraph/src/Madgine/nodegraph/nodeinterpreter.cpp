@@ -62,7 +62,7 @@ namespace NodeGraph {
                 receiver.set_value();
             }
         },
-            receiver.stopToken(), Debug::ContinuationType::Flow);
+            Execution::get_stop_token(receiver), Debug::ContinuationType::Flow);
     }
 
     BehaviorError NodeInterpreterStateBase::read(ValueType &retVal, Pin pin)

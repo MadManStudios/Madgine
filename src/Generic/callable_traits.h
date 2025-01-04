@@ -16,9 +16,7 @@ struct CallableType {
     static constexpr size_t argument_count = sizeof...(_Ty) + (is_member_function ? 1 : 0);
 
     template <template <typename, typename, typename...> typename C, typename... Args>
-    struct instance {
-        using type = C<Args..., R, T, _Ty...>;
-    };
+    using instance = C<Args..., R, T, _Ty...>;    
 };
 
 namespace __generic_impl__ {

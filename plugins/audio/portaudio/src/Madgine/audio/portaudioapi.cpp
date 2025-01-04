@@ -255,7 +255,7 @@ namespace Audio {
         }
         PortAudioStream &stream = mApi->fetchStream(mBuffer->mInfo);
         stream.play(*this);
-        mStopCallback.start(stopToken(), stream);
+        mStopCallback.start(Execution::get_stop_token(*this), stream);
     }
 
     bool PlaybackState::stop_cb::operator()()
