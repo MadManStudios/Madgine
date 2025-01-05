@@ -15,7 +15,7 @@
 
 #include "Modules/threading/taskqueue.h"
 
-#include "Generic/execution/lifetime.h"
+#include "Madgine/debug/debuggablelifetime.h"
 
 namespace Engine {
 namespace Window {
@@ -69,7 +69,7 @@ namespace Window {
         void startLifetime();
         void endLifetime();
 
-        Execution::Lifetime<> &lifetime();
+        Debug::DebuggableLifetime<> &lifetime();
 
         /**
      * @name Components
@@ -130,7 +130,7 @@ namespace Window {
 
         Threading::TaskQueue mTaskQueue;
 
-        Execution::Lifetime<> mLifetime;
+        DEBUGGABLE_LIFETIME(mLifetime);
 
         MainWindowComponentContainer<std::set<Placeholder<0>, MainWindowComponentComparator>> mComponents;
 

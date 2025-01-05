@@ -66,7 +66,7 @@ DEFAULT_SENDER_NODE_BEGIN(Connect, connect_helper_t {}, Engine::NodeGraph::NodeR
 SENDER_NODE_END(Connect)
 
 struct stop_when_helper_t {
-    auto operator()(auto &&reader, auto &&sender) const
+    auto operator()(Engine::Execution::Sender auto &&reader, Engine::Execution::Sender auto &&sender) const
     {
         return Engine::Execution::let_value(std::move(reader), [sender { std::move(sender) }](Engine::KeyValueSender trigger) mutable {
             return Engine::Execution::stop_when(std::move(sender), std::move(trigger));

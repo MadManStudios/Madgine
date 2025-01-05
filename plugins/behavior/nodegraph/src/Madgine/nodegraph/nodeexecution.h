@@ -127,6 +127,8 @@ namespace NodeGraph {
 
     template <uint32_t flowOutIndex>
     struct NodeSender {
+        using is_sender = void;
+
         using result_type = BehaviorError;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
@@ -153,6 +155,9 @@ namespace NodeGraph {
     template <typename... T>
     struct NodeReader {
         using Signature = Execution::signature<T...>;
+
+        
+        using is_sender = void;
 
         using result_type = BehaviorError;
         template <template <typename...> typename Tuple>

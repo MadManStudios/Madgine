@@ -253,7 +253,7 @@ namespace Execution {
         using is_sender = void;
     };
 
-    template <typename Sender>
+    template <Sender Sender>
     struct algorithm_sender : base_sender {
         using result_type = typename std::decay_t<Sender>::result_type;
         template <template <typename...> typename Tuple>

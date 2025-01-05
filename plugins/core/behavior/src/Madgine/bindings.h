@@ -124,7 +124,7 @@ struct with_binding_t {
         F mBinding;
     };
 
-    template <typename Inner, typename F>
+    template <Execution::Sender Inner, typename F>
     struct sender : Execution::algorithm_sender<Inner> {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
@@ -136,7 +136,7 @@ struct with_binding_t {
     };
 
     
-    template <typename Sender, typename F>
+    template <Execution::Sender Sender, typename F>
     friend auto tag_invoke(with_binding_t, Sender &&inner, F &&binding)
     {
         return sender<Sender, F> { { {}, std::forward<Sender>(inner) }, std::forward<F>(binding) };

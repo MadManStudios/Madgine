@@ -102,6 +102,7 @@ namespace Scene {
         Entity::Entity(SceneContainer &container, const std::string &name)
             : mName(name)
             , mContainer(container)
+            , mLifetime(&container.lifetime())
         {
             startLifetime();
         }

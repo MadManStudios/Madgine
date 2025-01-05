@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../manuallifetime.h"
 #include "handle.h"
 
 namespace Engine {
@@ -8,6 +9,7 @@ template <typename T>
 struct Generator {
 
     struct promise_type {
+
         Generator get_return_object()
         {
             return { CoroutineHandle<promise_type>::fromPromise(*this) };
@@ -20,7 +22,7 @@ struct Generator {
 
         std::suspend_always yield_value(const T &t)
         {
-            mValue = &t;
+            construct(mValue, t);
             return {};
         }
 
@@ -35,7 +37,7 @@ struct Generator {
             return {};
         }
 
-        const T *mValue = nullptr;
+        ManualLifetime<const T &> mValue = std::nullopt;
     };
 
     Generator(CoroutineHandle<promise_type> handle)
@@ -43,40 +45,71 @@ struct Generator {
     {
     }
 
+    Generator(Generator &&) = default;
+
+    ~Generator() noexcept
+    {
+        if (mHandle && !mHandle.done()) {
+            destruct(mHandle->mValue);
+        }
+    }
+
     struct iterator {
+        using difference_type = std::ptrdiff_t;
+        using value_type = std::remove_reference_t<T>;
+        using reference_type = const T&;
+
+        iterator(Generator<T> &gen)
+            : mGen(&gen)
+        {
+        }
+
         struct end_token {
         };
 
-        constexpr bool operator==(const end_token&) const {
-            return mGen.done();
+        constexpr bool operator==(const end_token &) const
+        {
+            return mGen->done();
         }
 
-        void operator++() {
-            mGen.next();
+        iterator &operator++()
+        {
+            mGen->next();
+            return *this;
         }
 
-        const T& operator*() const {
-            return mGen.get();
+        void operator++(int)
+        {
+            mGen->next();
         }
 
-        Generator<T> &mGen;
+        const T &operator*() const
+        {
+            return mGen->get();
+        }
+
+    private:
+        Generator<T> *mGen; //TODO: Store pointer to promise type directly?
     };
 
-    iterator begin() {
+    iterator begin()
+    {
         return { *this };
     }
 
-    static constexpr typename iterator::end_token end() {
+    static constexpr typename iterator::end_token end()
+    {
         return {};
     }
 
     const T &get()
     {
-        return *mHandle->mValue;
+        return mHandle->mValue;
     }
 
     bool next()
     {
+        destruct(mHandle->mValue);
         mHandle.resume();
         return !mHandle.done();
     }

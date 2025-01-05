@@ -106,7 +106,7 @@ namespace Input {
 
         UIManager &mUI;
 
-        Execution::Lifetime<> mLifetime;
+        DEBUGGABLE_LIFETIME(mLifetime);
 
         const WidgetType mType;
     };

@@ -75,7 +75,7 @@ namespace Input {
         mLifetime.end();
     }
 
-    Execution::Lifetime<> &UIManager::lifetime()
+    Debug::DebuggableLifetime<> &UIManager::lifetime()
     {
         return mLifetime;
     }

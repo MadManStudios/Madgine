@@ -136,21 +136,16 @@ namespace Tools {
             },
             [&](auto &other) {
                 int columns = ImGui::TableGetColumnCount();
-                assert(columns == 0 || columns == 2);
+                assert(columns == 2);
 
-                if (columns == 2)
-                    ImGui::TableNextColumn();
+                ImGui::TableNextColumn();
 
                 ImGui::Indent();
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text(id);
                 ImGui::Unindent();
 
-                if (columns == 0)
-                    ImGui::SameLine();
-                else {
-                    ImGui::TableNextColumn();
-                }
+                ImGui::TableNextColumn();
 
                 ImGui::PushID(id.data());
 
@@ -227,6 +222,8 @@ namespace Tools {
 
             if (generic)
                 ImGui::SameLine();
+        } else if (scope.mType) {
+            ImGui::TextDisabled(scope.mType->mTypeName);
         }
 
         if (generic) {
@@ -354,13 +351,7 @@ namespace Tools {
             for (auto vValue : range) {
                 ImGui::TableNextRow();
                 ValueType value = vValue;
-                std::string key = std::to_string(i);
-                if (value.is<ScopePtr>()) {
-                    key = "[" + std::to_string(i) + "] " + value.as<ScopePtr>().name() + "##" + key;
-                } else if (value.is<OwnedScopePtr>()) {
-                    key = "[" + std::to_string(i) + "] " + value.as<OwnedScopePtr>().name() + "##" + key;
-                }
-                std::pair<bool, bool> modified = drawValue(key, value, editable, false);
+                std::pair<bool, bool> modified = drawValue("[" + std::to_string(i) + "]", value, editable, false);
                 if (modified.first)
                     vValue = value;
                 changed |= modified.first || (modified.second && !range.isReference());

@@ -26,6 +26,8 @@
 
 #include "scenecontainer.h"
 
+#include "Madgine/debug/debuggablelifetime.h"
+
 namespace Engine {
 namespace Scene {
     struct MADGINE_SCENE_EXPORT SceneManager : App::GlobalAPI<SceneManager> {
@@ -67,6 +69,8 @@ namespace Scene {
                 
         void startLifetime() override;
         void endLifetime();
+
+        Debug::DebuggableLifetime<get_binding_d> &lifetime(); 
 
         template <typename Sender>
         void addBehavior(Sender &&sender)
@@ -114,7 +118,7 @@ namespace Scene {
         friend struct SceneContainer;
 
         Threading::DataMutex mMutex;
-        Execution::Lifetime<get_binding_d> mLifetime;
+        DEBUGGABLE_LIFETIME(mLifetime, get_binding_d);
 
         IntervalClock<Threading::CustomTimepoint> mSimulationClock;
         IntervalClock<Threading::CustomTimepoint> mAnimationClock;

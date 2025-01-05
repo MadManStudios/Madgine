@@ -61,6 +61,7 @@ namespace Scene {
 
     SceneManager::SceneManager(App::Application &app)
         : VirtualScope(app)
+        , mLifetime(&app.lifetime())
         , mSceneComponents(*this)
         , mMutex("SceneData")
         , mFrameClock(std::chrono::steady_clock::now())
@@ -259,5 +260,9 @@ namespace Scene {
         mLifetime.end();
     }
 
+    Debug::DebuggableLifetime<get_binding_d> &SceneManager::lifetime()
+    {
+        return mLifetime;
+    }
 }
 }

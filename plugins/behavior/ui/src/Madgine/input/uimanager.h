@@ -14,11 +14,13 @@
 
 #include "Modules/threading/madgineobject.h"
 
-#include "Generic/execution/lifetime.h"
+#include "Madgine/debug/debuggablelifetime.h"
 
 namespace Engine {
 namespace Input {
     struct MADGINE_UI_EXPORT UIManager : Threading::MadgineObject<UIManager> {
+
+        using Self = UIManager;
 
         UIManager(App::Application &app, Window::MainWindow &window);
         UIManager(const UIManager &) = delete;
@@ -57,7 +59,7 @@ namespace Input {
         void startLifetime();
         void endLifetime();
 
-        Execution::Lifetime<> &lifetime();
+        Debug::DebuggableLifetime<> &lifetime();
 
         App::Application &app() const;
         Window::MainWindow &window() const;
@@ -68,7 +70,7 @@ namespace Input {
         App::Application &mApp;
         Window::MainWindow &mWindow;
 
-        Execution::Lifetime<> mLifetime;
+        DEBUGGABLE_LIFETIME(mLifetime);
 
     public:
         HandlerContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>> mHandlers;        

@@ -169,4 +169,83 @@ struct ManualLifetime {
     bool mAlive = false;
 };
 
+template <typename T>
+struct ManualLifetime<T&> {
+
+    ManualLifetime(std::nullopt_t)        
+    {
+    }
+
+    template <DecayedNoneOf<ManualLifetime<T>> Arg>
+    ManualLifetime(Arg &&arg)
+        : mData(static_cast<T&>(std::forward<Arg>(arg)))
+    {
+    }
+
+    ManualLifetime(const ManualLifetime &)
+    {
+        throw 0;
+    }
+
+    ManualLifetime(ManualLifetime &&)
+    {
+        throw 0;
+    }
+
+    ~ManualLifetime() { assert(!mData); };
+
+    operator T &() const
+    {
+        assert(mData);
+        return *mData;
+    }
+
+    T *operator&() const
+    {
+        assert(mData);
+        return mData;
+    }
+
+    T &unsafeAccess() const
+    {
+        return *mData;
+    }
+
+    ManualLifetime &operator=(T &t)
+    {
+        assert(mData && t.mData);
+        mData = &t;
+        return *this;
+    }
+
+    ManualLifetime &operator=(ManualLifetime &&t)
+    {
+        assert(mData && t.mData);
+        mData = t.mData;
+        return *this;
+    }
+
+    template <typename Arg>
+    friend auto tag_invoke(construct_t, ManualLifetime &object, Arg &&arg)
+    {
+        assert(!object.mData);        
+        object.mData = &static_cast<T&>(std::forward<Arg>(arg));
+    }
+
+    friend auto tag_invoke(destruct_t, ManualLifetime &object)
+    {
+        assert(object.mData);
+        object.mData = nullptr;        
+    }
+
+    /* template <typename CPO, typename... Args>
+    friend auto tag_invoke(CPO cpo, ManualLifetime& object, Args &&...args) 
+        -> tag_invoke_result_t<CPO, T&, Args...>
+    {
+        return tag_invoke(cpo, static_cast<T &>(object), std::forward<Args>(args)...);
+    }*/
+
+    T *mData = nullptr;
+};
+
 }

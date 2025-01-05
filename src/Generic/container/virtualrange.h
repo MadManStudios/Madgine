@@ -193,7 +193,6 @@ namespace __generic_impl__ {
     struct VirtualRangeBase {
         virtual ~VirtualRangeBase() = default;
         virtual VirtualIterator<RefT> begin(std::shared_ptr<VirtualRangeBase<RefT>> self) = 0;
-        virtual size_t size() const = 0;
         virtual VirtualIterator<RefT> insert(const VirtualIterator<RefT> &where, std::shared_ptr<VirtualRangeBase<RefT>> self) = 0;
         virtual VirtualIterator<RefT> insert(const VirtualSentinel &where, std::shared_ptr<VirtualRangeBase<RefT>> self) = 0;
         virtual bool isReference() const = 0;
@@ -224,11 +223,6 @@ namespace __generic_impl__ {
         virtual VirtualIterator<RefT> begin(std::shared_ptr<VirtualRangeBase<RefT>> self) override
         {
             return { std::make_unique<IteratorImpl>(mContainer.begin(), mContainer.end(), std::move(self)) };
-        }
-
-        virtual size_t size() const override
-        {
-            return mContainer.size();
         }
 
         virtual VirtualIterator<RefT> insert(const VirtualIterator<RefT> &where, std::shared_ptr<VirtualRangeBase<RefT>> self) override
@@ -323,11 +317,6 @@ struct VirtualRange {
     VirtualSentinel end() const
     {
         return {};
-    }
-
-    size_t size() const
-    {
-        return mRange->size();
     }
 
     VirtualIterator<RefT> insert(const VirtualIterator<RefT> &where)

@@ -17,7 +17,7 @@
 
 #include "Generic/projections.h"
 
-#include "Generic/execution/lifetime.h"
+#include "Madgine/debug/debuggablelifetime.h"
 
 namespace Engine {
 namespace Widgets {
@@ -88,7 +88,7 @@ namespace Widgets {
         bool dragging(const WidgetBase *widget);
         void abortDrag(WidgetBase *widget);
 
-        Execution::Lifetime<> &lifetime();
+        Debug::DebuggableLifetime<> &lifetime();
 
         using RenderPass::addDependency;
         using RenderPass::removeDependency;
@@ -127,7 +127,7 @@ namespace Widgets {
 
         std::vector<WidgetBase *> mModalWidgetList;
 
-        Execution::Lifetime<> mLifetime;
+        DEBUGGABLE_LIFETIME(mLifetime);
 
         struct WidgetManagerData;
         std::unique_ptr<WidgetManagerData> mData;

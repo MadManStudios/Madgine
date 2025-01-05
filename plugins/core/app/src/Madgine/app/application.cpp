@@ -112,7 +112,7 @@ namespace App {
         return &mTaskQueue;
     }
 
-    Execution::Lifetime<> &Application::lifetime()
+    Debug::DebuggableLifetime<> &Application::lifetime()
     {
         return mLifetime;
     }

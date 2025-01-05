@@ -38,6 +38,7 @@ namespace Scene {
 
     SceneContainer::SceneContainer(SceneManager &sceneMgr)
         : mManager(sceneMgr)        
+        , mLifetime(&sceneMgr.lifetime())
     {
         startLifetime();
     }
@@ -131,6 +132,11 @@ namespace Scene {
     void SceneContainer::endLifetime()
     {
         mLifetime.end();
+    }
+
+    Debug::DebuggableLifetime<get_binding_d> &SceneContainer::lifetime()
+    {
+        return mLifetime;
     }
 
     Execution::SignalStub<const RefcountedContainer<std::deque<Entity::Entity>>::iterator &, int> &SceneContainer::entitiesSignal()

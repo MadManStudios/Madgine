@@ -9,3 +9,5 @@ add_plugin(App Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/applib.h)
 
 target_link_libraries(App PUBLIC Meta Modules)
 
+target_link_plugins(App Debugger)
+

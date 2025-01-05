@@ -241,7 +241,7 @@ namespace Window {
         mLifetime.end();
     }
 
-    Execution::Lifetime<> &MainWindow::lifetime()
+    Debug::DebuggableLifetime<> &MainWindow::lifetime()
     {
         return mLifetime;
     }

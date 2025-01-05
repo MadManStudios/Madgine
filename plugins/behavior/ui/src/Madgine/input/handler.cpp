@@ -21,6 +21,7 @@ namespace Input {
         : mWidgetName(widgetName)
         , mUI(ui)
         , mType(type)
+        , mLifetime(&ui.lifetime())
     {
     }
 

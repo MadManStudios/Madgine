@@ -13,5 +13,8 @@ namespace Debug {
 
     enum class ContinuationType;
 
+    template <auto...>
+    struct DebuggableLifetime;
+
 }
 }

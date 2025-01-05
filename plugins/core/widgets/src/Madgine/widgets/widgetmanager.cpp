@@ -89,6 +89,7 @@ namespace Widgets {
 
     WidgetManager::WidgetManager(Window::MainWindow &window)
         : MainWindowComponent(window, 20)
+        , mLifetime(&window.lifetime())
         , mData(std::make_unique<WidgetManagerData>())
     {
     }
@@ -723,7 +724,7 @@ namespace Widgets {
         }
     }
 
-    Execution::Lifetime<> &WidgetManager::lifetime()
+    Debug::DebuggableLifetime<> &WidgetManager::lifetime()
     {
         return mLifetime;
     }

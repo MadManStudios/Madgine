@@ -14,7 +14,7 @@
 
 #include "Generic/customfunctors.h"
 
-#include "Generic/execution/lifetime.h"
+#include "Madgine/debug/debuggablelifetime.h"
 
 #include "Madgine/debug/debuggablesender.h"
 
@@ -135,7 +135,7 @@ namespace Scene {
 
             SceneContainer &mContainer;
 
-            Execution::Lifetime<get_binding_d> mLifetime;
+            DEBUGGABLE_LIFETIME(mLifetime, get_binding_d);
 
             std::vector<Debug::ContextInfo *> mBehaviorContexts;
 

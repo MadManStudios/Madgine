@@ -95,6 +95,8 @@ namespace Tools {
     template <typename F, typename Tuple>
     struct DialogSender {
 
+        using is_sender = void;
+
         using result_type = void;
         template <template <typename...> typename Variant>
         using value_types = typename Engine::to_type_pack<Tuple>::template prepend<DialogResult>::template instantiate<Variant>;

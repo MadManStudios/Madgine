@@ -2,6 +2,10 @@
 
 #include "Generic/genericresult.h"
 
+#include "concepts.h"
+
+#include "virtualstate.h"
+
 namespace Engine {
 namespace Execution {
 
@@ -24,7 +28,7 @@ namespace Execution {
             assert(previous == 0);
         }
 
-        template <typename Sender>
+        template <Sender Sender>
         void attach(Sender &&sender)
         {
             unsigned int count = mCount;

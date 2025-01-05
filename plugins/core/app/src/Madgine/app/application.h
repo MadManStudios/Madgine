@@ -8,7 +8,7 @@
 
 #include "Modules/threading/taskqueue.h"
 
-#include "Generic/execution/lifetime.h"
+#include "Madgine/debug/debuggablelifetime.h"
 
 namespace Engine {
 namespace App {
@@ -20,6 +20,8 @@ namespace App {
      * It also creates a TaskQueue for game logic tasks.
     */
     struct MADGINE_APP_EXPORT Application : Threading::MadgineObject<Application> {
+        using Self = Application;
+
         Application();
         ~Application();
 
@@ -36,7 +38,7 @@ namespace App {
         void startLifetime();
         void endLifetime();
 
-        Execution::Lifetime<> &lifetime();
+        Debug::DebuggableLifetime<> &lifetime();
 
         static Application &getSingleton();
         static Application *getSingletonPtr();
@@ -54,7 +56,7 @@ namespace App {
     private:
         Threading::TaskQueue mTaskQueue;
 
-        Execution::Lifetime<> mLifetime;
+        DEBUGGABLE_LIFETIME(mLifetime);
 
     public:
         GlobalAPIContainer<std::vector<Placeholder<0>>> mGlobalAPIs;
