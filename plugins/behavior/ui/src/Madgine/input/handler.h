@@ -31,10 +31,12 @@ namespace Input {
         virtual ~HandlerBase() = default;
 
         virtual void onMouseVisibilityChanged(bool b);
+                                                                
+        virtual void startLifetime();
+        void endLifetime();
 
-        void onUpdate();
         Widgets::WidgetBase *widget() const;
-        virtual void setWidget(Widgets::WidgetBase *w);
+        void setWidget(Widgets::WidgetBase *w);
 
         virtual void sizeChanged();
 
@@ -104,7 +106,7 @@ namespace Input {
 
         UIManager &mUI;
 
-        Execution::Lifetime mLifetime;
+        Execution::Lifetime<> mLifetime;
 
         const WidgetType mType;
     };

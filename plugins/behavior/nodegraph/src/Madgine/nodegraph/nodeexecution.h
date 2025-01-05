@@ -22,8 +22,6 @@ namespace NodeGraph {
         BehaviorError read(const NodeBase &node, ValueType &retVal, uint32_t dataInIndex, uint32_t group = 0);
 
         void write(const NodeBase &node, const ValueType &v, uint32_t dataOutIndex, uint32_t group = 0);
-
-        BehaviorError getBinding(std::string_view name, ValueType &out);
     };
 
     template <typename Node>

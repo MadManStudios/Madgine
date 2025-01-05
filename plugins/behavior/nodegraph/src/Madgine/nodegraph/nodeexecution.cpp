@@ -22,11 +22,6 @@ namespace NodeGraph {
         mInterpreter.write(pin, v);
     }
 
-    BehaviorError NodeInterpretHandleBase::getBinding(std::string_view name, ValueType &out)
-    {        
-        return mInterpreter.getBinding(name, out);
-    }
-
     void continueExecution(NodeInterpreterStateBase &interpreter, const NodeBase &node, BehaviorReceiver &receiver, NodeDebugLocation &location)
     {
         Pin pin = node.flowOutTarget(0);

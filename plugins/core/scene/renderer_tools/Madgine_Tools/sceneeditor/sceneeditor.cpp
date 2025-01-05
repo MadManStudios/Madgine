@@ -372,7 +372,7 @@ namespace Tools {
 
         if (ImGui::BeginPopupCompoundContextItem()) {
             if (ImGui::MenuItem(IMGUI_ICON_X " Delete", "del")) {
-                node.mEntity->remove();
+                node.mEntity->endLifetime();
             }
             ImGui::EndPopup();
         }
@@ -485,10 +485,10 @@ namespace Tools {
         }
 
         for (Debug::ContextInfo *context : entity->behaviorContexts()) {
-            std::optional<Debug::ContinuationControl> control = getTool<DebuggerView>().contextControls(*context);
+            std::optional<Debug::ContinuationMode> control = getTool<DebuggerView>().contextControls(*context);
             getTool<DebuggerView>().renderDebugContext(context);
             if (control)
-                context->control(*control);
+                context->continueExecution(*control);
         }
 
         getTool<BehaviorTool>().DrawBehaviorList(entity->behaviors());

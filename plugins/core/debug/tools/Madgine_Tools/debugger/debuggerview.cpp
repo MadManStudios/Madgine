@@ -118,19 +118,19 @@ namespace Tools {
         }
     }
 
-    std::optional<Debug::ContinuationControl> DebuggerView::contextControls(Debug::ContextInfo &context)
+    std::optional<Debug::ContinuationMode> DebuggerView::contextControls(Debug::ContextInfo &context)
     {
-        std::optional<Debug::ContinuationControl> mode;
+        std::optional<Debug::ContinuationMode> mode;
         if (context.alive()) {
             ImGui::PushID(&context);
             if (!context.isPaused())
                 ImGui::BeginDisabled();
             if (ImGui::Button(IMGUI_ICON_PLAY)) {
-                mode = Debug::ContinuationControl::Resume;
+                mode = context.resume();
             }
             ImGui::SameLine(0, 0);
             if (ImGui::Button(IMGUI_ICON_STEP)) {
-                mode = Debug::ContinuationControl::Step;
+                mode = context.step();
             }
             if (!context.isPaused())
                 ImGui::EndDisabled();
@@ -138,13 +138,13 @@ namespace Tools {
                 ImGui::BeginDisabled();
             ImGui::SameLine(0, 0);
             if (ImGui::Button(IMGUI_ICON_PAUSE)) {
-                mode = Debug::ContinuationControl::Pause;
+                mode = context.pause();
             }
             if (context.isPaused())
                 ImGui::EndDisabled();
             ImGui::SameLine(0, 0);
             if (ImGui::Button(IMGUI_ICON_STOP)) {
-                mode = Debug::ContinuationControl::Stop;
+                mode = context.stop();
             }
             
             ImGui::PopID();
@@ -169,7 +169,7 @@ namespace Tools {
         }
         ImGui::End();
 
-        std::optional<Debug::ContinuationControl> continuation;
+        std::optional<Debug::ContinuationMode> continuation;
         Debug::DebugLocation *prevSelected = mSelectedLocation;
         mSelectedLocation = nullptr;
 
@@ -216,7 +216,7 @@ namespace Tools {
         ImGui::End();
 
         if (continuation)
-            mSelectedContext->control(*continuation);
+            mSelectedContext->continueExecution(*continuation);
     }
 
     void DebuggerView::renderMenu()

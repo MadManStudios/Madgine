@@ -398,7 +398,7 @@ namespace Widgets {
     {
     }
 
-    Execution::Lifetime &WidgetBase::lifetime()
+    Execution::Lifetime<> &WidgetBase::lifetime()
     {
         return mManager.lifetime();
     }

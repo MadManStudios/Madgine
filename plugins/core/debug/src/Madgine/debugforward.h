@@ -7,6 +7,11 @@ namespace Debug {
     struct ContextInfo;
     struct DebugLocation;
     struct ParentLocation;
+    struct DebugListener;
+
+    enum class ContinuationMode;
+
+    enum class ContinuationType;
 
 }
 }

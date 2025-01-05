@@ -15,6 +15,8 @@
 
 #include "Modules/threading/taskqueue.h"
 
+#include "Generic/execution/lifetime.h"
+
 namespace Engine {
 namespace Window {
 
@@ -63,6 +65,11 @@ namespace Window {
         ///@}
 
         Threading::Task<void> renderLoop();
+
+        void startLifetime();
+        void endLifetime();
+
+        Execution::Lifetime<> &lifetime();
 
         /**
      * @name Components
@@ -122,6 +129,8 @@ namespace Window {
         const WindowSettings &mSettings;
 
         Threading::TaskQueue mTaskQueue;
+
+        Execution::Lifetime<> mLifetime;
 
         MainWindowComponentContainer<std::set<Placeholder<0>, MainWindowComponentComparator>> mComponents;
 

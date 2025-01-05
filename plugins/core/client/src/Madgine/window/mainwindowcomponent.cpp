@@ -40,6 +40,10 @@ namespace Window {
         return true;
     }
 
+    void MainWindowComponentBase::startLifetime()
+    {
+    }
+
     Threading::Task<bool> MainWindowComponentBase::init()
     {
         mWindow.getRenderWindow()->addRenderPass(this);

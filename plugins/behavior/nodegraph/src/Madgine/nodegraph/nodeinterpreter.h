@@ -115,11 +115,6 @@ namespace NodeGraph {
             mDebugLocation.stepOut(Execution::get_debug_location(mRec));
             this->mRec.set_value(std::move(result));
         }
-
-        BehaviorError getBinding(std::string_view name, ValueType &out) override
-        {
-            return get_binding_d(mRec, name, out);
-        }
     };
 
     struct NodeInterpreterSender : Execution::base_sender {

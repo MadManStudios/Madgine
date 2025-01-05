@@ -75,7 +75,7 @@ namespace NodeGraph {
                 retVal = mArguments.at(pin.mIndex);
                 return {};
             } else {
-                return getBinding(mGraph->mInputBindings[pin.mIndex].mDescriptor.mName, retVal);
+                return get_binding_d(*this, mGraph->mInputBindings[pin.mIndex].mDescriptor.mName, retVal);
             }
         } else {
             return mGraph->node(pin.mNode)->interpretRead(*this, retVal, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);

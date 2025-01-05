@@ -35,39 +35,18 @@ namespace Input {
 
     Threading::Task<bool> HandlerBase::init()
     {
-        mLifetime.start();
         co_return true;
     }
 
     Threading::Task<void> HandlerBase::finalize()
     {
-        mLifetime.end();
-        co_await mLifetime;
         mWidget = nullptr;
         co_return;
     }
 
     void HandlerBase::setWidget(Widgets::WidgetBase *widget)
     {
-        if (mWidget != widget) {
-            mLifetime.end();
-            mLifetime.start();
-
-            widget->manager().lifetime().attach(mLifetime);
-
-            mWidget = widget;
-
-            if (mWidget) {
-                mLifetime.attach(mWidget->pointerMoveEvent().connect(&HandlerBase::injectPointerMove, this));
-                mLifetime.attach(mWidget->pointerClickEvent().connect(&HandlerBase::injectPointerClick, this));
-                mLifetime.attach(mWidget->dragBeginEvent().connect(&HandlerBase::injectDragBegin, this));
-                mLifetime.attach(mWidget->dragMoveEvent().connect(&HandlerBase::injectDragMove, this));
-                mLifetime.attach(mWidget->dragEndEvent().connect(&HandlerBase::injectDragEnd, this));
-                mLifetime.attach(mWidget->axisEvent().connect(&HandlerBase::injectAxisEvent, this));
-                mLifetime.attach(mWidget->keyEvent().connect(&HandlerBase::injectKeyPress, this));
-                mWidget->setAcceptsPointerEvents(true);
-            }
-        }
+        mWidget = widget;
     }
 
     void HandlerBase::injectPointerMove(const PointerEventArgs &evt)
@@ -158,9 +137,27 @@ namespace Input {
     {
     }
 
-    void HandlerBase::onUpdate()
+    void HandlerBase::startLifetime()
     {
-        setWidget(mUI.window().getWindowComponent<Widgets::WidgetManager>().getWidget(mWidgetName));
+        mUI.lifetime().attach(mLifetime);
+
+        mWidget = mUI.window().getWindowComponent<Widgets::WidgetManager>().getWidget(mWidgetName);
+
+        if (mWidget) {
+            mLifetime.attach(mWidget->pointerMoveEvent().connect(&HandlerBase::injectPointerMove, this));
+            mLifetime.attach(mWidget->pointerClickEvent().connect(&HandlerBase::injectPointerClick, this));
+            mLifetime.attach(mWidget->dragBeginEvent().connect(&HandlerBase::injectDragBegin, this));
+            mLifetime.attach(mWidget->dragMoveEvent().connect(&HandlerBase::injectDragMove, this));
+            mLifetime.attach(mWidget->dragEndEvent().connect(&HandlerBase::injectDragEnd, this));
+            mLifetime.attach(mWidget->axisEvent().connect(&HandlerBase::injectAxisEvent, this));
+            mLifetime.attach(mWidget->keyEvent().connect(&HandlerBase::injectKeyPress, this));
+            mWidget->setAcceptsPointerEvents(true);
+        }
+    }
+
+    void HandlerBase::endLifetime()
+    {
+        mLifetime.end();
     }
 
     Widgets::WidgetBase *HandlerBase::widget() const

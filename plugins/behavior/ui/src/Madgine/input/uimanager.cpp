@@ -16,8 +16,6 @@
 
 #include "Madgine/app/application.h"
 
-#include "Madgine/widgets/widgetmanager.h"
-
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 
 METATABLE_BEGIN(Engine::Input::UIManager)
@@ -46,16 +44,14 @@ namespace Input {
 
     Threading::Task<bool> UIManager::init()
     {
-        Widgets::WidgetManager &mgr = mWindow.getWindowComponent<Widgets::WidgetManager>();
+        co_await mWindow.state();
 
-        co_await mgr.state();
-
-        Execution::detach(mgr.updatedSignal().connect([this] { onUpdate(); }));
+        //Execution::detach(mgr.updatedSignal().connect([this] { onUpdate(); })); TODO
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callInit();
 
-        onUpdate();
+        startLifetime();
 
         co_return true;
     }
@@ -64,6 +60,24 @@ namespace Input {
     {
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callFinalize();
+    }
+
+    void UIManager::startLifetime()
+    {
+        mWindow.lifetime().attach(mLifetime);
+
+        for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
+            handler->startLifetime();
+    }
+
+    void UIManager::endLifetime()
+    {
+        mLifetime.end();
+    }
+
+    Execution::Lifetime<> &UIManager::lifetime()
+    {
+        return mLifetime;
     }
 
     App::Application &UIManager::app() const
@@ -79,12 +93,6 @@ namespace Input {
     void UIManager::shutdown()
     {
         mWindow.shutdown();
-    }
-
-    void UIManager::onUpdate()
-    {
-        for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
-            handler->onUpdate();
     }
 
     void UIManager::clear()

@@ -27,9 +27,9 @@ std::string_view MainMenuHandler::key() const
     return "MainMenuHandler";
 }
 
-void MainMenuHandler::setWidget(Engine::Widgets::WidgetBase *w)
+void MainMenuHandler::startLifetime()
 {
-    Engine::Input::HandlerBase::setWidget(w);
+    HandlerBase::startLifetime();
     if (widget()) {
         setupButton("StartGameButton", &MainMenuHandler::startGame, this);
     }

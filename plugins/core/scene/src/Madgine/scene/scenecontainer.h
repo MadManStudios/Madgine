@@ -29,6 +29,9 @@ namespace Scene {
         void createEntityAsyncImpl(Serialize::GenericMessageReceiver receiver, const std::string &name = "",
             std::function<void(Entity::Entity &)> init = {});
         ASYNC_STUB(createEntityAsync, createEntityAsyncImpl, Serialize::make_message_sender<Entity::EntityPtr>);
+                                
+        void startLifetime();
+        void endLifetime();
 
         Entity::EntityPtr findEntity(const std::string &name);
         void remove(Entity::Entity *e);
@@ -51,7 +54,7 @@ namespace Scene {
     private:
         friend struct Entity::Entity;
 
-        Execution::Lifetime mLifetime;
+        Execution::Lifetime<get_binding_d> mLifetime;
 
         SceneManager &mManager;
 

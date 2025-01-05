@@ -113,7 +113,7 @@ decltype(auto) ValueType_as(const ValueType &v)
     } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
         return ValueType_as_impl<FlagsHolder>(v).safe_cast<T>();
     } else {
-        using Ty = resolveCustomScopePtr_t<T, true>;   
+        using Ty = resolveCustomScopePtr_t<T, true>;
         if constexpr (Pointer<Ty>) {
             return scope_cast<std::remove_pointer_t<Ty>>(ValueType_as_impl<ScopePtr>(v));
         } else {
@@ -171,8 +171,8 @@ decltype(auto) convert_ValueType(T &&t)
 }
 
 template <typename T>
-    requires(ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>)
-META_EXPORT void to_ValueType_impl(ValueType &v, T &&t);
+requires(ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>)
+    META_EXPORT void to_ValueType_impl(ValueType &v, T &&t);
 
 template <typename T>
 void to_ValueType(ValueType &v, T &&t)
@@ -185,7 +185,11 @@ void to_ValueType(ValueType &v, T &&t)
 }
 
 struct ValueTypeRef {
-    ValueType &mRef;
+
+    ValueTypeRef(ValueType &ref)
+        : mRef(ref)
+    {
+    }
 
     operator ValueType &()
     {
@@ -198,6 +202,9 @@ struct ValueTypeRef {
         to_ValueType(mRef, std::forward<T>(v));
         return *this;
     }
+
+private:
+    ValueType &mRef;
 };
 
 }

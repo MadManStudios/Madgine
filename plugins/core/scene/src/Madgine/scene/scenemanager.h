@@ -64,6 +64,9 @@ namespace Scene {
         }
         SceneComponentBase &getComponent(size_t i);
         size_t getComponentCount();
+                
+        void startLifetime() override;
+        void endLifetime();
 
         template <typename Sender>
         void addBehavior(Sender &&sender)
@@ -111,7 +114,7 @@ namespace Scene {
         friend struct SceneContainer;
 
         Threading::DataMutex mMutex;
-        Execution::Lifetime mLifetime;
+        Execution::Lifetime<get_binding_d> mLifetime;
 
         IntervalClock<Threading::CustomTimepoint> mSimulationClock;
         IntervalClock<Threading::CustomTimepoint> mAnimationClock;

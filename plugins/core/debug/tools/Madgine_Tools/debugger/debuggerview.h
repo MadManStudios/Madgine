@@ -6,6 +6,8 @@
 
 #include "Madgine/debug/debugger.h"
 
+#include "Madgine/debug/debuglistener.h"
+
 struct ImVec2;
 struct ImDrawList;
 
@@ -55,7 +57,7 @@ namespace Tools {
 
         const Debug::DebugLocation *visualizeDebugLocation(const Debug::ContextInfo *context, const Debug::DebugLocation *location, const Debug::DebugLocation *inlineLocation);
 
-        std::optional<Debug::ContinuationControl> contextControls(Debug::ContextInfo &context);
+        std::optional<Debug::ContinuationMode> contextControls(Debug::ContextInfo &context);
 
     private:
         Debug::Debugger &mDebugger;

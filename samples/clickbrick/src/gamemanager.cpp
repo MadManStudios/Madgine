@@ -88,9 +88,9 @@ Engine::Threading::Task<void> GameManager::finalize()
     co_await HandlerBase::finalize();
 }
 
-void GameManager::setWidget(Engine::Widgets::WidgetBase *w)
+void GameManager::startLifetime()
 {
-    HandlerBase::setWidget(w);
+    HandlerBase::startLifetime();
 
     if (widget()) {
         mGameWindow = widget()->getChildRecursive<Engine::Widgets::SceneWindow>("GameView");
@@ -168,7 +168,7 @@ void GameManager::onPointerClick(const Engine::Input::PointerEventArgs &evt)
     }*/
 
     if (hit) {
-        hit->remove();
+        hit->endLifetime();
         modScore(1);
     }
 }
@@ -238,7 +238,7 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, E
         loop = t->mPosition.length() < 10.5f;
     }
 
-    e->remove();
+    e->endLifetime();
 
     co_return;
 }

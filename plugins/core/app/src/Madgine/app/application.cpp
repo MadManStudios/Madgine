@@ -7,6 +7,8 @@
 
 #include "globalapibase.h"
 
+#include "Modules/threading/awaitables/awaitablesender.h"
+
 METATABLE_BEGIN(Engine::App::Application)
 MEMBER(mGlobalAPIs)
 METATABLE_END(Engine::App::Application)
@@ -53,7 +55,9 @@ namespace App {
         for (const std::unique_ptr<GlobalAPIBase> &api : mGlobalAPIs) {
             if (!co_await api->callInit())
                 co_return false;
-        }
+        }        
+
+        startLifetime();
 
         co_return true;
     }
@@ -64,6 +68,8 @@ namespace App {
     */
     Threading::Task<void> Application::finalize()
     {
+        co_await mLifetime.end();
+
         for (const std::unique_ptr<GlobalAPIBase> &api : mGlobalAPIs) {
             co_await api->callFinalize();
         }
@@ -104,6 +110,25 @@ namespace App {
     Threading::TaskQueue *Application::taskQueue()
     {
         return &mTaskQueue;
+    }
+
+    Execution::Lifetime<> &Application::lifetime()
+    {
+        return mLifetime;
+    }
+
+    void Application::startLifetime()
+    {
+        mLifetime.start();
+
+        for (const std::unique_ptr<GlobalAPIBase> &api : mGlobalAPIs) {
+            api->startLifetime();
+        }
+    }
+
+    void Application::endLifetime()
+    {
+        mLifetime.end();
     }
 }
 

@@ -49,6 +49,9 @@ namespace Widgets {
 
         virtual Threading::Task<bool> init() override;
         virtual Threading::Task<void> finalize() override;
+                                                                
+        void startLifetime() override;
+        void endLifetime();
 
         WidgetBase *currentRoot();
 
@@ -77,8 +80,6 @@ namespace Widgets {
         virtual void onResize(const Rect2i &space) override;
         virtual void render(Render::RenderTarget *target, size_t iteration) override;
 
-        Execution::SignalStub<> &updatedSignal();
-
         Resources::ImageLoader::Resource *getImage(std::string_view name);
 
         const Atlas2::Entry *lookUpImage(Resources::ImageLoader::Resource *image);
@@ -87,7 +88,7 @@ namespace Widgets {
         bool dragging(const WidgetBase *widget);
         void abortDrag(WidgetBase *widget);
 
-        Execution::Lifetime &lifetime();
+        Execution::Lifetime<> &lifetime();
 
         using RenderPass::addDependency;
         using RenderPass::removeDependency;
@@ -126,9 +127,7 @@ namespace Widgets {
 
         std::vector<WidgetBase *> mModalWidgetList;
 
-        Execution::Signal<> mUpdatedSignal;
-
-        Execution::Lifetime mLifetime;
+        Execution::Lifetime<> mLifetime;
 
         struct WidgetManagerData;
         std::unique_ptr<WidgetManagerData> mData;

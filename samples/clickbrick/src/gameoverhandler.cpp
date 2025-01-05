@@ -27,9 +27,9 @@ namespace ClickBrick {
         return "GameOverHandler";
     }
 
-    void GameOverHandler::setWidget(Engine::Widgets::WidgetBase *w)
+    void GameOverHandler::startLifetime()
     {
-        Engine::Input::HandlerBase::setWidget(w);
+        HandlerBase::startLifetime();
         if (widget()) {
             mLifetime.attach(widget()->pointerClickEvent().connect(&GameOverHandler::restartGame, this));
             mScoreLabel = widget()->getChildRecursive<Engine::Widgets::Label>("ScoreLabel");

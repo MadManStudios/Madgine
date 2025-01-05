@@ -92,17 +92,13 @@ namespace Scene {
             }
         });
 
-        mLifetime.start();
+        startLifetime();
 
         co_return true;
     }
 
     Threading::Task<void> SceneManager::finalize()
     {
-        mLifetime.end();
-
-        co_await mLifetime;
-
         //assert(mEntities.empty());
         //assert(mLocalEntities.empty());
 
@@ -183,8 +179,8 @@ namespace Scene {
 
     void SceneManager::clear()
     {
-        mLifetime.end();
-        mLifetime.start();
+        endLifetime();
+        startLifetime();
     }
 
     void SceneManager::pause()
@@ -248,6 +244,19 @@ namespace Scene {
     {
         std::unique_lock lock { mAnimationMutex };
         return std::erase(mAnimationStates, animation) == 1;
+    }
+
+    void SceneManager::startLifetime()
+    {
+        mApp.lifetime().attach(mLifetime | with_constant_binding<"Scene">(this));
+        for (ContainerData& container : kvValues(mContainers)) {
+            container.mContainer.startLifetime();
+        }
+    }
+
+    void SceneManager::endLifetime()
+    {
+        mLifetime.end();
     }
 
 }

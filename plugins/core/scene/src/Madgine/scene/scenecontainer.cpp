@@ -39,8 +39,7 @@ namespace Scene {
     SceneContainer::SceneContainer(SceneManager &sceneMgr)
         : mManager(sceneMgr)        
     {
-        mLifetime.start();
-        mManager.mLifetime.attach(mLifetime);
+        startLifetime();
     }
 
     Entity::EntityPtr SceneContainer::findEntity(const std::string &name)
@@ -122,6 +121,16 @@ namespace Scene {
                     | Execution::then(std::move(toPtr))
                     | Execution::then_receiver(std::move(receiver)));
         }));
+    }
+
+    void SceneContainer::startLifetime()
+    {
+        mManager.mLifetime.attach(mLifetime);
+    }
+
+    void SceneContainer::endLifetime()
+    {
+        mLifetime.end();
     }
 
     Execution::SignalStub<const RefcountedContainer<std::deque<Entity::Entity>>::iterator &, int> &SceneContainer::entitiesSignal()

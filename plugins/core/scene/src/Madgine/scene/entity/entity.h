@@ -40,8 +40,9 @@ namespace Scene {
             ~Entity();
 
             Entity &operator=(Entity &&other);
-
-            void remove();
+                                                        
+            void startLifetime();
+            void endLifetime();
 
             const std::string &key() const;
 
@@ -105,7 +106,7 @@ namespace Scene {
             void addBehavior(Sender &&sender)
             {
                 Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-                mLifetime.attach(std::forward<Sender>(sender) | with_constant_binding<"Entity">(this) | with_constant_binding<"Scene">(&sceneMgr()) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
+                mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
                 mBehaviorContexts.emplace_back(context);
             }
 
@@ -134,7 +135,7 @@ namespace Scene {
 
             SceneContainer &mContainer;
 
-            Execution::Lifetime mLifetime;
+            Execution::Lifetime<get_binding_d> mLifetime;
 
             std::vector<Debug::ContextInfo *> mBehaviorContexts;
 

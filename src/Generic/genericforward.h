@@ -70,6 +70,7 @@ enum class AccessMode {
 
 namespace Execution {
 
+    template <auto... cpos>
     struct Lifetime;
 
     template <typename R, typename VPack, auto... cpo>

@@ -33,24 +33,11 @@ struct BehaviorAwaitableReceiver : Execution::execution_receiver<> {
         mState->set_error(std::forward<R>(result)...);
     }
 
-    template <typename O>
-    friend BehaviorError tag_invoke(get_binding_d_t, BehaviorAwaitableReceiver &rec, std::string_view name, O &out)
+    template <typename CPO, typename... Args>
+    requires(is_tag_invocable_v<CPO, BehaviorReceiver &, Args...>) friend auto tag_invoke(CPO f, BehaviorAwaitableReceiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
+        -> tag_invoke_result_t<CPO, BehaviorReceiver &, Args...>
     {
-        ValueType v;
-        BehaviorError error = rec.mBehavior->mReceiver->getBinding(name, v);
-        if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS })
-            out = v.as<O>();
-        return error;
-    }
-
-    friend std::stop_token tag_invoke(Execution::get_stop_token_t, BehaviorAwaitableReceiver &rec)
-    {
-        return Execution::get_stop_token(*rec.mBehavior->mReceiver);
-    }
-
-    friend Debug::ParentLocation *tag_invoke(Execution::get_debug_location_t, BehaviorAwaitableReceiver &rec)
-    {
-        return &rec.mBehavior->mDebugLocation;
+        return tag_invoke(f, *rec.mBehavior->mReceiver, std::forward<Args>(args)...);
     }
 
     BehaviorAwaitableSender<Sender> *mState;

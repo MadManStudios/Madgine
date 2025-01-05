@@ -22,6 +22,10 @@ namespace App {
         return mApp.taskQueue();
     }
 
+    void GlobalAPIBase::startLifetime()
+    {
+    }
+
     Application &GlobalAPIBase::app()
     {
         return mApp;

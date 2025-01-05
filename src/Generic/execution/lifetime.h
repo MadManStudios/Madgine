@@ -5,7 +5,12 @@
 namespace Engine {
 namespace Execution {
 
+    template <auto... cpos>
     struct Lifetime {
+
+        Lifetime() {
+            mStopSource.request_stop();
+        }
 
         ~Lifetime()
         {
@@ -29,11 +34,14 @@ namespace Execution {
             }
         }
 
-        void end()
+        struct ended_sender;
+
+        ended_sender end()
         {
             assert(mCount > 0);
             if (mStopSource.request_stop())
                 decreaseCount();
+            return { *this };
         }
 
         bool running() const
@@ -53,8 +61,26 @@ namespace Execution {
             return state<Rec>(std::forward<Rec>(rec), lifetime);
         }
 
+        struct ended_sender {
+            using is_sender = void;
+
+            using result_type = GenericResult;
+            template <template <typename...> typename Tuple>
+            using value_types = Tuple<>;
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, ended_sender &&sender, Rec &&rec)
+            {
+                return ended_state<Rec>(std::forward<Rec>(rec), sender.mLifetime);
+            }
+
+            Lifetime &mLifetime;
+        };
+
     private:
-        void setReceiver(VirtualReceiverBase<GenericResult> *receiver)
+        using LifetimeReceiver = VirtualReceiverBaseEx<type_pack<GenericResult>, type_pack<>, cpos...>;
+
+        void setReceiver(LifetimeReceiver *receiver)
         {
             increaseCount();
             assert(!mReceiver);
@@ -109,20 +135,26 @@ namespace Execution {
                 return {};
             }
 
-            friend auto tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)
+            friend std::stop_token tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)
             {
-                return rec.mToken;
+                return rec.mState->mLifetime.mStopSource.get_token();
+            }
+
+            template <typename CPO, typename... Args>
+            requires(is_tag_invocable_v<CPO, LifetimeReceiver &, Args...>) friend auto tag_invoke(CPO f, attach_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, LifetimeReceiver &, Args...>)
+                -> tag_invoke_result_t<CPO, LifetimeReceiver &, Args...>
+            {
+                return tag_invoke(f, *rec.mState->mLifetime.mReceiver, std::forward<Args>(args)...);
             }
 
             attach_state<Sender> *mState;
-            std::stop_token mToken;
         };
 
         template <typename Sender>
         struct attach_state {
             attach_state(Sender &&sender, Lifetime &lifetime)
-                : mState(connect(std::forward<Sender>(sender), attach_receiver<Sender> { {}, this, lifetime.mStopSource.get_token() }))
-                , mLifetime(lifetime)
+                : mLifetime(lifetime)
+                , mState(connect(std::forward<Sender>(sender), attach_receiver<Sender> { {}, this }))
             {
             }
             void start()
@@ -131,15 +163,14 @@ namespace Execution {
                 mState.start();
             }
 
-            connect_result_t<Sender, attach_receiver<Sender>> mState;
             Lifetime &mLifetime;
+            connect_result_t<Sender, attach_receiver<Sender>> mState;
         };
 
         template <typename Rec>
-        struct state : VirtualReceiverBase<GenericResult> {
-            state(Rec &&rec, Lifetime &lifetime)
-                : mRec(std::forward<Rec>(rec))
-                , mCallback(get_stop_token(mRec), callback { lifetime })
+        struct ended_state : VirtualState<Rec, LifetimeReceiver> {
+            ended_state(Rec &&rec, Lifetime &lifetime)
+                : VirtualState<Rec, LifetimeReceiver>(std::forward<Rec>(rec))
                 , mLifetime(lifetime)
             {
             }
@@ -149,19 +180,21 @@ namespace Execution {
                 mLifetime.setReceiver(this);
             }
 
-            virtual void set_value() override
+            Lifetime &mLifetime;
+        };
+
+        template <typename Rec>
+        struct state : ended_state<Rec> {
+            state(Rec &&rec, Lifetime &lifetime)
+                : ended_state<Rec>(std::forward<Rec>(rec), lifetime)
+                , mCallback(get_stop_token(mRec), callback { lifetime })
             {
-                mRec.set_value();
             }
 
-            virtual void set_error(GenericResult result) override
+            void start()
             {
-                mRec.set_error(result);
-            }
-
-            virtual void set_done() override
-            {
-                mRec.set_done();
+                mLifetime.start();
+                ended_state::start();
             }
 
             struct callback {
@@ -173,14 +206,12 @@ namespace Execution {
                 Lifetime &mLifetime;
             };
 
-            Rec mRec;
             std::stop_callback<callback> mCallback;
-            Lifetime &mLifetime;
         };
 
         std::stop_source mStopSource;
         std::atomic<uint32_t> mCount = 0;
-        VirtualReceiverBase<GenericResult> *mReceiver = nullptr;
+        LifetimeReceiver *mReceiver = nullptr;
     };
 
 }

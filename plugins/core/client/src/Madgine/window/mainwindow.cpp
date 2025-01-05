@@ -29,6 +29,8 @@
 
 #include "layoutloader.h"
 
+#include "Modules/threading/awaitables/awaitablesender.h"
+
 namespace Engine {
 namespace Window {
     static bool filterComponent(const std::unique_ptr<MainWindowComponentBase> &comp)
@@ -180,6 +182,8 @@ namespace Window {
 
         mTaskQueue.queueTask(renderLoop());
 
+        startLifetime();
+
         co_return true;
     }
 
@@ -189,6 +193,8 @@ namespace Window {
     */
     Threading::Task<void> MainWindow::finalize()
     {
+        co_await mLifetime.end();
+
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
             co_await comp->callFinalize();
         }
@@ -220,6 +226,24 @@ namespace Window {
             now += (1000000us / 1200);
             co_await 0ms;
         }
+    }
+
+    void MainWindow::startLifetime()
+    {
+        mLifetime.start();
+        for (const std::unique_ptr<MainWindowComponentBase> &comp : components()) {
+            comp->startLifetime();
+        }
+    }
+
+    void MainWindow::endLifetime()
+    {
+        mLifetime.end();
+    }
+
+    Execution::Lifetime<> &MainWindow::lifetime()
+    {
+        return mLifetime;
     }
 
     /**

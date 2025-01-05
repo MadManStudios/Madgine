@@ -103,10 +103,7 @@ namespace Scene {
             : mName(name)
             , mContainer(container)
         {
-            mLifetime.start();
-            container.mLifetime.attach(Execution::sequence(mLifetime, container.mutex().locked(AccessMode::WRITE, [this]() {
-                mContainer.remove(this);
-            })));
+            startLifetime();
         }
 
         Entity::~Entity()
@@ -210,9 +207,15 @@ namespace Scene {
             it->mHandle.mIndex = newIndex.mIndex;
         }
 
-        void Entity::remove()
+        void Entity::startLifetime()
         {
-            //mSceneManager.remove(this);
+            mContainer.mLifetime.attach(Execution::sequence(mLifetime | with_constant_binding<"Entity">(this), mContainer.mutex().locked(AccessMode::WRITE, [this]() {
+                mContainer.remove(this);
+            })));
+        }
+
+        void Entity::endLifetime()
+        {
             mLifetime.end();
         }
 

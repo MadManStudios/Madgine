@@ -54,6 +54,8 @@ namespace Window {
 
         virtual bool includeInLayout() const;
 
+        virtual void startLifetime();
+
     protected:
         virtual Threading::Task<bool> init();
         virtual Threading::Task<void> finalize();

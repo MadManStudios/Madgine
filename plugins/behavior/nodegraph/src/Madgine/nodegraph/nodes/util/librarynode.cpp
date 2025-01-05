@@ -70,17 +70,6 @@ namespace NodeGraph {
             mBehavior->start();
         }
 
-        BehaviorError getBinding(std::string_view name, ValueType &ref) override
-        {
-            for (uint32_t i = 0; i < mRec.mReceiver->mNode.dataInCount(1); ++i) {
-                if (mRec.mReceiver->mNode.dataInName(i, 1) == name) {
-                    return mRec.mReceiver->read(ref, i, 1);
-                }
-            }
-            throw 0;
-            //return false;
-        }
-
         Behavior::StatePtr mBehavior;
     };
 

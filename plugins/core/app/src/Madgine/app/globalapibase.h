@@ -26,6 +26,8 @@ namespace App {
 
         Threading::TaskQueue *taskQueue() const;
 
+        virtual void startLifetime();
+
     protected:
         virtual Threading::Task<bool> init();
         virtual Threading::Task<void> finalize();

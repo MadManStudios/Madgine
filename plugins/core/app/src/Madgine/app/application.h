@@ -8,6 +8,8 @@
 
 #include "Modules/threading/taskqueue.h"
 
+#include "Generic/execution/lifetime.h"
+
 namespace Engine {
 namespace App {
 
@@ -31,6 +33,11 @@ namespace App {
 
         Threading::TaskQueue *taskQueue();
 
+        void startLifetime();
+        void endLifetime();
+
+        Execution::Lifetime<> &lifetime();
+
         static Application &getSingleton();
         static Application *getSingletonPtr();
 
@@ -46,6 +53,8 @@ namespace App {
 
     private:
         Threading::TaskQueue mTaskQueue;
+
+        Execution::Lifetime<> mLifetime;
 
     public:
         GlobalAPIContainer<std::vector<Placeholder<0>>> mGlobalAPIs;

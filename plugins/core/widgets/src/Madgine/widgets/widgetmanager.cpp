@@ -116,17 +116,13 @@ namespace Widgets {
         }
 #endif
 
-        mLifetime.start();
+        startLifetime();
 
         co_return true;
     }
 
     Threading::Task<void> WidgetManager::finalize()
     {
-        mLifetime.end();
-
-        co_await mLifetime;
-
         mTopLevelWidgets.clear();
 
         mData->mAtlas.reset();
@@ -136,6 +132,16 @@ namespace Widgets {
         co_await MainWindowComponentBase::finalize();
 
         co_return;
+    }
+
+    void WidgetManager::startLifetime()
+    {
+        mWindow.lifetime().attach(mLifetime);
+    }
+
+    void WidgetManager::endLifetime()
+    {
+        mLifetime.end();
     }
 
     template <typename WidgetType>
@@ -679,11 +685,6 @@ namespace Widgets {
         }
     }
 
-    Execution::SignalStub<> &WidgetManager::updatedSignal()
-    {
-        return mUpdatedSignal;
-    }
-
     Resources::ImageLoader::Resource *WidgetManager::getImage(std::string_view name)
     {
         return mData->mAtlas.getImage(name);
@@ -706,7 +707,6 @@ namespace Widgets {
                 topLevel->applyGeometry(Vector3 { Vector2 { getScreenSpace().mSize }, Window::platformCapabilities.mScalingFactor });
             }
             openStartupWidget();
-            mUpdatedSignal.emit();
         }
     }
 
@@ -723,7 +723,7 @@ namespace Widgets {
         }
     }
 
-    Execution::Lifetime &WidgetManager::lifetime()
+    Execution::Lifetime<> &WidgetManager::lifetime()
     {
         return mLifetime;
     }

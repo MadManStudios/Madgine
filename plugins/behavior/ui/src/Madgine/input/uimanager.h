@@ -14,6 +14,8 @@
 
 #include "Modules/threading/madgineobject.h"
 
+#include "Generic/execution/lifetime.h"
+
 namespace Engine {
 namespace Input {
     struct MADGINE_UI_EXPORT UIManager : Threading::MadgineObject<UIManager> {
@@ -51,17 +53,22 @@ namespace Input {
 
         Threading::Task<bool> init();
         Threading::Task<void> finalize();
+                                                                
+        void startLifetime();
+        void endLifetime();
+
+        Execution::Lifetime<> &lifetime();
 
         App::Application &app() const;
         Window::MainWindow &window() const;
 
         void shutdown();
 
-        void onUpdate();
-
     private:
         App::Application &mApp;
         Window::MainWindow &mWindow;
+
+        Execution::Lifetime<> mLifetime;
 
     public:
         HandlerContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>> mHandlers;        

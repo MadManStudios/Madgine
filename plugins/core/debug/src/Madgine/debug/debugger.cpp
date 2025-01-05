@@ -6,6 +6,8 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
+#include "debuglistener.h"
+
 UNIQUECOMPONENT(Engine::Debug::Debugger)
 
 METATABLE_BEGIN(Engine::Debug::Debugger)
@@ -17,27 +19,6 @@ namespace Debug {
     std::string_view Debugger::key() const
     {
         return "Debugger";
-    }
-
-    void DebugLocation::stepInto(ParentLocation *parent)
-    {
-        mContext = parent->mContext;
-        std::unique_lock guard { mContext->mMutex };
-        assert(!parent->mChild);
-        parent->mChild = this;
-    }
-
-    void DebugLocation::stepOut(ParentLocation *parent)
-    {
-        std::unique_lock guard { mContext->mMutex };
-        assert(parent->mChild == this);
-        assert(!mChild);
-        parent->mChild = nullptr;
-    }
-
-    bool DebugLocation::wantsPause(ContinuationType type) const
-    {
-        return Debugger::getSingleton().wantsPause(this, type);
     }
 
     std::deque<ContextInfo> &Debugger::infos()
@@ -86,45 +67,28 @@ namespace Debug {
         }
     }
 
-    void ContextInfo::control(ContinuationControl control)
-    {
-        switch (control) {
-        case ContinuationControl::Resume:
-            resume();
-            break;
-        case ContinuationControl::Step:
-            step();
-            break;
-        case ContinuationControl::Pause:
-            pause();
-            break;
-        case ContinuationControl::Stop:
-            stop();
-            break;
-        }
-    }
-
-    void ContextInfo::resume()
+    ContinuationMode ContextInfo::resume()
     {
         mPauseRequested = false;
-        continueExecution(ContinuationMode::Continue);
+        return ContinuationMode::Continue;
     }
 
-    void ContextInfo::step()
+    ContinuationMode ContextInfo::step()
     {
         mPauseRequested = true;
-        continueExecution(ContinuationMode::Continue);
+        return ContinuationMode::Continue;
     }
 
-    void ContextInfo::pause()
+    std::nullopt_t ContextInfo::pause()
     {
         mPauseRequested = true;
+        return std::nullopt;
     }
 
-    void ContextInfo::stop()
+    ContinuationMode ContextInfo::stop()
     {
         mStopRequested = true;
-        continueExecution(ContinuationMode::Abort);
+        return ContinuationMode::Abort;
     }
 
     bool ContextInfo::alive() const
@@ -182,13 +146,5 @@ namespace Debug {
         operator()(ContinuationMode::Abort);
     }
 
-    DebugLocation *ParentLocation::currentLocation() const
-    {
-        if (!mChild)
-            return nullptr;
-        if (!mChild->mChild)
-            return mChild;
-        return mChild->currentLocation();
-    }
 }
 }

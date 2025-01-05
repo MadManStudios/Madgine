@@ -153,7 +153,7 @@ namespace Widgets {
             lifetime().attach(std::forward<Sender>(sender) | with_constant_binding<"Widget">(this) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
             mBehaviorContexts.emplace_back(context);
         }
-        Execution::Lifetime &lifetime();
+        Execution::Lifetime<> &lifetime();
 
         const std::vector<Debug::ContextInfo *> &behaviorContexts();
 

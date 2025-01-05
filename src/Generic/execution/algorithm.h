@@ -914,12 +914,12 @@ namespace Execution {
         template <typename Rec, typename... Sender>
         struct state;
 
-        template <typename Tag, typename State>
+        template <typename Tag, typename Rec, typename... Sender>
         struct receiver {
 
             template <typename CPO, typename... Args>
             friend auto tag_invoke(CPO f, receiver &rec, Args &&...args)
-                -> tag_invoke_result_t<CPO, typename State::Rec &, Args...>
+                -> tag_invoke_result_t<CPO, Rec &, Args...>
             {
                 return f(rec.mState->mRec, std::forward<Args>(args)...);
             }
@@ -941,14 +941,14 @@ namespace Execution {
                 mState->set_error(Tag {}, std::forward<R>(result)...);
             }
 
-            State *mState;
+            state<Rec, Sender...> *mState;
         };
 
         template <typename Rec, typename... Sender>
         struct state : base_state<Rec> {
 
             template <size_t I>
-            using inner_rec = receiver<inner_tag<I>, state>;
+            using inner_rec = receiver<inner_tag<I>, Rec, Sender...>;
 
             template <size_t... Is>
             static auto stateTupleHelper(std::index_sequence<Is...>) -> std::variant<std::monostate, connect_result_t<Sender, inner_rec<Is>>...> { }
@@ -970,7 +970,7 @@ namespace Execution {
                     mStates.template emplace<1>(
                                DelayedConstruct<std::variant_alternative_t<1, StateVariant>> {
                                    [this]() {
-                                       return Execution::connect(std::forward<std::tuple_element_t<0, std::tuple<Sender...>>>(std::get<0>(mSenders)), receiver<inner_tag<0>, state> { this });
+                                       return Execution::connect(std::forward<std::tuple_element_t<0, std::tuple<Sender...>>>(std::get<0>(mSenders)), inner_rec<0> { this });
                                    } })
                         .start();
                 }
@@ -985,7 +985,7 @@ namespace Execution {
                     mStates.template emplace<I + 1 + 1>(
                                DelayedConstruct<std::variant_alternative_t<I + 1 + 1, StateVariant>> {
                                    [this]() {
-                                       return Execution::connect(std::forward<std::tuple_element_t<I + 1, std::tuple<Sender...>>>(std::get<I + 1>(mSenders)), receiver<inner_tag<I + 1>, state> { this });
+                                       return Execution::connect(std::forward<std::tuple_element_t<I + 1, std::tuple<Sender...>>>(std::get<I + 1>(mSenders)), inner_rec<I + 1> { this });
                                    } })
                         .start();
                 }

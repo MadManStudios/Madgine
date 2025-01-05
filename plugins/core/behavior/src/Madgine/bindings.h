@@ -6,12 +6,17 @@
 #include "behaviorerror.h"
 
 #include "Meta/keyvalue/valuetype_desc.h"
+#include "Meta/keyvalue/valuetype_forward.h"
+
+#include "Generic/callable_view.h"
 
 namespace Engine {
 
 struct get_binding_d_t {
-    template <typename V, typename O>
-    requires(!is_tag_invocable_v<get_binding_d_t, V &, std::string_view, O &>) auto operator()(V &v, std::string_view name, O &out) const
+    using signature = BehaviorError(std::string_view, ValueTypeRef);
+
+    template <typename T>
+    requires(!is_tag_invocable_v<get_binding_d_t, T&, std::string_view, ValueTypeRef>) auto operator()(T &t, std::string_view name, ValueTypeRef out) const
     {
         std::string errorMsg = "Binding \""s + std::string { name } + "\" not found.";
         return BehaviorError {
@@ -19,13 +24,15 @@ struct get_binding_d_t {
             errorMsg };        
     }
 
-    template <typename V, typename O>
-    requires(is_tag_invocable_v<get_binding_d_t, V &, std::string_view, O &>) auto operator()(V &v, std::string_view name, O &out) const
-        noexcept(is_nothrow_tag_invocable_v<get_binding_d_t, V &, std::string_view, O &>)
-            -> tag_invoke_result_t<get_binding_d_t, V &, std::string_view, O &>
+    template <typename T>
+    requires(is_tag_invocable_v<get_binding_d_t, T &, std::string_view, ValueTypeRef>) auto operator()(T &t, std::string_view name, ValueTypeRef out) const
+        noexcept(is_nothrow_tag_invocable_v<get_binding_d_t, T &, std::string_view, ValueTypeRef>)
+            -> tag_invoke_result_t<get_binding_d_t, T &, std::string_view, ValueTypeRef>
     {
-        return tag_invoke(*this, v, name, out);
+        return tag_invoke(*this, t, name, out);
     }
+
+    MADGINE_BEHAVIOR_EXPORT static BehaviorError type_erased(CallableView<BehaviorError(ValueType &)> cb);
 };
 
 inline constexpr get_binding_d_t get_binding_d;
@@ -33,18 +40,28 @@ inline constexpr get_binding_d_t get_binding_d;
 template <fixed_string Name>
 struct get_binding_t {
 
-    template <typename V, typename O>
-    requires(!is_tag_invocable_v<get_binding_t, V, O &>) decltype(auto) operator()(V &&v, O &out) const
+    template <typename T, typename O>
+    requires(!is_tag_invocable_v<get_binding_t, T, O &>) decltype(auto) operator()(T &&t, O &out) const
     {
-        return get_binding_d(std::forward<V>(v), Name, out);
+        if constexpr (std::same_as<O, ValueType> || std::same_as<O, ValueTypeRef>) {
+            return get_binding_d(std::forward<T>(t), Name, out);
+        } else {
+            auto f = [&](ValueType &v) {
+                BehaviorError result = get_binding_d(std::forward<T>(t), Name, v);
+                if (result.mResult == GenericResult::SUCCESS)
+                    out = ValueType_as<O>(v);
+                return result;
+            };
+            return get_binding_d_t::type_erased(CallableView<BehaviorError(ValueType &)> { f });
+        }
     }
 
-    template <typename V, typename O>
-    requires(is_tag_invocable_v<get_binding_t, V, O &>) auto operator()(V &&v, O &out) const
-        noexcept(is_nothrow_tag_invocable_v<get_binding_t, V, O &>)
-            -> tag_invoke_result_t<get_binding_t, V, O &>
+    template <typename T, typename O>
+    requires(is_tag_invocable_v<get_binding_t, T, O &>) auto operator()(T &&t, O &out) const
+        noexcept(is_nothrow_tag_invocable_v<get_binding_t, T, O &>)
+            -> tag_invoke_result_t<get_binding_t, T, O &>
     {
-        return tag_invoke(*this, std::forward<V>(v), out);
+        return tag_invoke(*this, std::forward<T>(t), out);
     }
 };
 
@@ -95,8 +112,7 @@ struct with_binding_t {
     template <typename Rec, typename F>
     struct receiver : Execution::algorithm_receiver<Rec> {
 
-        template <typename O>
-        friend auto tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, O &out)
+        friend auto tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, ValueTypeRef out)
         {
             if (name == Name) {
                 return rec.mBinding(out);

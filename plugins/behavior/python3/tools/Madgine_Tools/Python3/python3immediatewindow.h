@@ -3,7 +3,7 @@
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 
-#include "Madgine/debug/debugger.h"
+#include "Madgine/debug/debuglistener.h"
 
 #include "Madgine_Tools/texteditor/interactiveprompt.h"
 
