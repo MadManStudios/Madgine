@@ -75,7 +75,7 @@ namespace Debug {
         void addListener(DebugListener *listener);
         void removeListener(DebugListener *listener);
 
-        bool wantsPause(const DebugLocation *location, ContinuationType type);
+        bool wantsPause(const DebugLocation &location, ContinuationType type);
 
     private:
         std::deque<ContextInfo> mContexts;

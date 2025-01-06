@@ -484,14 +484,9 @@ namespace Tools {
             entity->removeComponent(componentToRemove);
         }
 
-        for (Debug::ContextInfo *context : entity->behaviorContexts()) {
-            std::optional<Debug::ContinuationMode> control = getTool<DebuggerView>().contextControls(*context);
-            getTool<DebuggerView>().renderDebugContext(context);
-            if (control)
-                context->continueExecution(*control);
-        }
+        getTool<DebuggerView>().renderLifetime(entity->lifetime());
 
-        getTool<BehaviorTool>().DrawBehaviorList(entity->behaviors());
+        getTool<BehaviorTool>().drawBehaviorList(entity->behaviors());
 
         if (Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> t = entity->getComponent<Scene::Entity::Transform>()) {
             constexpr Color4 colors[] = {

@@ -263,12 +263,7 @@ namespace Tools {
         }
 
         if (ImGui::CollapsingHeader("Behaviors")) {
-            for (Debug::ContextInfo *context : mWidget->behaviorContexts()) {
-                std::optional<Debug::ContinuationMode> control = mInspector.getTool<DebuggerView>().contextControls(*context);
-                mInspector.getTool<DebuggerView>().renderDebugContext(context);
-                if (control)
-                    context->continueExecution(*control);
-            }
+            mInspector.getTool<DebuggerView>().renderLifetime(mWidget->lifetime());
         }
 
         bool showParameters = false;

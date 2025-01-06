@@ -35,20 +35,22 @@ SERIALIZETABLE_END(Engine::Tools::BehaviorTool)
 namespace Engine {
 namespace Tools {
 
-    const Debug::DebugLocation *visualizeCoroutineLocation(DebuggerView *view, const Debug::ContextInfo *context, const CoroutineLocation *location, const Debug::DebugLocation *inlineLocation)
+    const Debug::DebugLocation *visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const CoroutineLocation &location, const Debug::DebugLocation *inlineLocation)
     {
         const char *name = "<unknown>";
 #ifndef NDEBUG
-        Debug::FullStackTrace trace = location->mStacktrace.calculateReadable();
+        Debug::FullStackTrace trace = location.mStacktrace.calculateReadable();
         if (!trace.empty()) {
             name = trace[0].mFunction;
         }
 #endif
         ImGui::BeginGroupPanel(name);
-        const Debug::DebugLocation *content = view->visualizeDebugLocation(context, location->mChild, inlineLocation);
+        const Debug::DebugLocation *content = nullptr;
+        if (location.mChild)
+            content = view.visualizeDebugLocation(context, *location.mChild, inlineLocation);
         ImGui::EndGroupPanel();
 
-        return content == location->mChild ? location : content;
+        return content == location.mChild ? &location : content;
     }
 
     BehaviorTool::BehaviorTool(ImRoot &root)
@@ -75,7 +77,7 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    void BehaviorTool::DrawBehaviorList(BehaviorList &list)
+    void BehaviorTool::drawBehaviorList(BehaviorList &list)
     {
         std::erase_if(list.mEntries, [this](BehaviorList::Entry &entry) {
             ImGui::BeginGroupPanel(entry.mHandle.name().data());

@@ -20,6 +20,8 @@
 
 #include "Madgine/debug/debuggablesender.h"
 
+#include "Madgine/debug/debuggablelifetime.h"
+
 UNIQUECOMPONENT(Engine::Tools::DebuggerView);
 
 METATABLE_BEGIN_BASE(Engine::Tools::DebuggerView, Engine::Tools::ToolBase)
@@ -53,15 +55,12 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    const Debug::DebugLocation *DebuggerView::visualizeDebugLocation(const Debug::ContextInfo *context, const Debug::DebugLocation *location, const Debug::DebugLocation *inlineLocation)
+    const Debug::DebugLocation *DebuggerView::visualizeDebugLocation(const Debug::ContextInfo &context, const Debug::DebugLocation &location, const Debug::DebugLocation *inlineLocation)
     {
-        if (!location)
-            return nullptr;
-
-        if (const Execution::SenderLocation *senderLocation = dynamic_cast<const Execution::SenderLocation *>(location)) {
+        if (const Execution::SenderLocation *senderLocation = dynamic_cast<const Execution::SenderLocation *>(&location)) {
             const Debug::DebugLocation *subLocation = nullptr;
 
-            auto visitor = [this, context, location, inlineLocation, &subLocation](const Execution::StateDescriptor &desc) {
+            auto visitor = [this, &context, &location, inlineLocation, &subLocation](const Execution::StateDescriptor &desc) {
                 float startY = ImGui::GetCursorScreenPos().y;
 
                 std::visit(overloaded { [](const Execution::State::Text &text) {
@@ -82,8 +81,9 @@ namespace Tools {
                                [](const Execution::State::PopDisabled &) {
                                    ImGui::EndDisabled();
                                },
-                               [this, context, location, inlineLocation, &subLocation](const Execution::State::SubLocation &) {
-                                   subLocation = visualizeDebugLocation(context, location->mChild, inlineLocation);
+                               [this, &context, &location, inlineLocation, &subLocation](const Execution::State::SubLocation &) {
+                                   if (location.mChild)
+                                    subLocation = visualizeDebugLocation(context, *location.mChild, inlineLocation);
                                },
                                [](const Execution::State::Breakpoint &bp) {
                                    float offset = 0.0f;
@@ -110,11 +110,11 @@ namespace Tools {
             return subLocation;
         } else {
             for (auto debugVisualizer : mDebugLocationVisualizers) {
-                auto [matched, child] = debugVisualizer(this, context, location, inlineLocation);
+                auto [matched, child] = debugVisualizer(*this, context, location, inlineLocation);
                 if (matched)
                     return child;
             }
-            ImGui::Text("Unknown ["s + typeid(*location).name() + "]");
+            ImGui::Text("Unknown ["s + typeid(location).name() + "]");
             return nullptr;
         }
     }
@@ -189,7 +189,7 @@ namespace Tools {
                     location = location->mChild;
                 }
 
-                renderDebugContext(mSelectedContext);
+                renderDebugContext(*mSelectedContext);
             }
         }
         ImGui::End();
@@ -225,19 +225,19 @@ namespace Tools {
         ToolBase::renderMenu();
     }
 
-    void DebuggerView::renderDebugContext(const Debug::ContextInfo *context)
+    void DebuggerView::renderDebugContext(const Debug::ContextInfo &context)
     {
-        std::unique_lock guard { context->mMutex };
+        std::unique_lock guard { context.mMutex };
         if (BeginDebuggablePanel("Debug Context")) {
-            const Debug::DebugLocation *child = visualizeDebugLocation(context, context->mChild, nullptr);
+            const Debug::DebugLocation *child = visualizeDebugLocation(context, *context.mChild, nullptr);
             assert(!child); //Parents that allow inline rendering need to take care of child rendering.
             EndDebuggablePanel();
         }
-        if (context->isPaused()) {
-            std::string arguments = context->getArguments();
+        if (context.isPaused()) {
+            std::string arguments = context.getArguments();
 
             if (!arguments.empty()) {
-                Debug::ContinuationType type = context->continuationType();
+                Debug::ContinuationType type = context.continuationType();
                 switch (type) {
                 case Debug::ContinuationType::Cancelled:
                 case Debug::ContinuationType::Error:
@@ -261,6 +261,16 @@ namespace Tools {
         }
     }
 
+    void DebuggerView::renderLifetime(Debug::DebuggableLifetimeBase &lifetime)
+    {
+        for (Debug::ContextInfo &context : lifetime.debugContexts()) {
+            std::optional<Debug::ContinuationMode> control = contextControls(context);
+            renderDebugContext(context);
+            if (control)
+                context.continueExecution(*control);
+        }
+    }
+
     void DebuggerView::setCurrentContext(Debug::ContextInfo &context)
     {
         mSelectedContext = &context;
@@ -271,7 +281,7 @@ namespace Tools {
         setCurrentContext(context);
     }
 
-    bool DebuggerView::wantsPause(const Debug::DebugLocation *location, Debug::ContinuationType type)
+    bool DebuggerView::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type)
     {
         return false;
     }

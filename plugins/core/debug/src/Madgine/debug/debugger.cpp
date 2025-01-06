@@ -113,9 +113,9 @@ namespace Debug {
         return mCallback.type();
     }
 
-    bool Debugger::wantsPause(const DebugLocation *location, ContinuationType type)
+    bool Debugger::wantsPause(const DebugLocation &location, ContinuationType type)
     {
-        bool pause = location->mContext->mPauseRequested || location->mContext->mStopRequested;
+        bool pause = location.mContext->mPauseRequested || location.mContext->mStopRequested;
 
         for (DebugListener *listener : mListeners) {
             pause |= listener->wantsPause(location, type);

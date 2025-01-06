@@ -17,8 +17,12 @@ namespace Debug {
 
         virtual ScopePtr owner() = 0;
 
+        const std::vector<std::reference_wrapper<ContextInfo>> &debugContexts();
+
     protected:
         DebuggableLifetimeBase(std::nullopt_t);
+
+        std::vector<std::reference_wrapper<ContextInfo>> mDebugContexts;
 
     private:
         DebuggableLifetimeBase *mParent = nullptr;
@@ -36,7 +40,9 @@ namespace Debug {
         template <Execution::Sender Sender>
         void attach(Sender &&sender)
         {
-            mLifetime.attach(std::forward<Sender>(sender));
+            Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
+            mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Execution::with_sub_debug_location(&context));
+            mDebugContexts.emplace_back(context);
         }
 
         void start()

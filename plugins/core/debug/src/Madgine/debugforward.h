@@ -16,5 +16,7 @@ namespace Debug {
     template <auto...>
     struct DebuggableLifetime;
 
+    struct DebuggableLifetimeBase;
+
 }
 }

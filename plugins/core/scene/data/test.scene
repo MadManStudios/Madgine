@@ -2,10 +2,21 @@
     <mEntities>
         <Entity name="Madgine_AutoGen_Name_1" syncId=258>
             <mComponents>
+                <Component name="Transform" serId=1>
+                    <mParent>0</mParent>
+                    <mPosition>[0, 0, 0]</mPosition>
+                    <mScale>[1, 1, 1]</mScale>
+                    <mOrientation>
+                        <Element>0</Element>
+                        <Element>0</Element>
+                        <Element>0</Element>
+                        <Element>1</Element>
+                    </mOrientation>
+                </Component>
             </mComponents>
-            <mBehaviors serId=1>
+            <mBehaviors serId=2>
                 <mEntries>
-                    <Native/Rotate serId=2>
+                    <Native/Rotate serId=3>
                     </Native/Rotate>
                 </mEntries>
             </mBehaviors>

@@ -124,8 +124,6 @@ namespace Scene {
         IntervalClock<Threading::CustomTimepoint> mAnimationClock;
         IntervalClock<std::chrono::steady_clock::time_point> mFrameClock;
 
-        std::vector<Debug::ContextInfo *> mBehaviorContexts;
-
         std::mutex mAnimationMutex;
         std::vector<Entity::AnimationState *> mAnimationStates;
 

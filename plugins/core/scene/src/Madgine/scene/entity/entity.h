@@ -44,6 +44,8 @@ namespace Scene {
             void startLifetime();
             void endLifetime();
 
+            Debug::DebuggableLifetime<get_binding_d> &lifetime();
+
             const std::string &key() const;
 
             const std::string &name() const;
@@ -105,12 +107,8 @@ namespace Scene {
             template <typename Sender>
             void addBehavior(Sender &&sender)
             {
-                Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-                mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
-                mBehaviorContexts.emplace_back(context);
+                mLifetime.attach(std::forward<Sender>(sender) | Log::log_error());                
             }
-
-            const std::vector<Debug::ContextInfo *> &behaviorContexts();
 
             void handleEntityEvent(const typename std::set<EntityComponentOwningHandle<EntityComponentBase>>::iterator &it, int op);
 
@@ -136,8 +134,6 @@ namespace Scene {
             SceneContainer &mContainer;
 
             DEBUGGABLE_LIFETIME(mLifetime, get_binding_d);
-
-            std::vector<Debug::ContextInfo *> mBehaviorContexts;
 
             BehaviorList mBehaviors;
         };

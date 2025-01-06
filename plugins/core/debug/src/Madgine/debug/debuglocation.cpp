@@ -36,7 +36,7 @@ namespace Debug {
 
     bool DebugLocation::wantsPause(ContinuationType type) const
     {
-        return Debugger::getSingleton().wantsPause(this, type);
+        return Debugger::getSingleton().wantsPause(*this, type);
     }
 
 

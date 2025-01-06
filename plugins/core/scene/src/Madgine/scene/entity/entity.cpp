@@ -213,11 +213,17 @@ namespace Scene {
             mContainer.mLifetime.attach(Execution::sequence(mLifetime | with_constant_binding<"Entity">(this), mContainer.mutex().locked(AccessMode::WRITE, [this]() {
                 mContainer.remove(this);
             })));
+            mBehaviors.instantiate(mLifetime);
         }
 
         void Entity::endLifetime()
         {
             mLifetime.end();
+        }
+
+        Debug::DebuggableLifetime<get_binding_d> &Entity::lifetime()
+        {
+            return mLifetime;
         }
 
         Serialize::StreamResult Entity::readComponent(Serialize::FormattedSerializeStream &in, EntityComponentOwningHandle<EntityComponentBase> &handle)
@@ -256,11 +262,6 @@ namespace Scene {
         SceneManager &Entity::sceneMgr() const
         {
             return mContainer.sceneMgr();
-        }
-
-        const std::vector<Debug::ContextInfo *> &Entity::behaviorContexts()
-        {
-            return mBehaviorContexts;
         }
 
         EntityComponentPtr<EntityComponentBase> Entity::Helper::operator()(const EntityComponentOwningHandle<EntityComponentBase> &p) const

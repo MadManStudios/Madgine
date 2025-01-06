@@ -82,6 +82,11 @@ namespace Debug {
         }
     }
 
+    const std::vector<std::reference_wrapper<ContextInfo>> &DebuggableLifetimeBase::debugContexts()
+    {
+        return mDebugContexts;
+    }
+
 }
 }
 

@@ -49,10 +49,10 @@ UNIQUECOMPONENT(Engine::Tools::Python3ImmediateWindow)
 namespace Engine {
 namespace Tools {
 
-    const Debug::DebugLocation *visualizeDebugLocation(DebuggerView *view, const Debug::ContextInfo *context, const Scripting::Python3::Python3DebugLocation *location, const Debug::DebugLocation *inlineLocation)
+    const Debug::DebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Scripting::Python3::Python3DebugLocation &location, const Debug::DebugLocation *inlineLocation)
     {
         Scripting::Python3::Python3Lock lock;
-        ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode2(location->mFrame)->co_filename));
+        ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode2(location.mFrame)->co_filename));
         if (ImGui::TreeNode("Code")) {
 
             if (ImGui::BeginTable("Code", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_SizingFixedFit)) {
@@ -61,11 +61,11 @@ namespace Tools {
                 ImGui::TableSetupColumn("Source", ImGuiTableColumnFlags_WidthStretch);
 
                 Scripting::Python3::PyModulePtr inspect { "inspect" };
-                Scripting::Python3::PyObjectPtr sourcelines = PyObject_CallFunctionObjArgs(inspect.get("getsourcelines"), location->mFrame, NULL);
+                Scripting::Python3::PyObjectPtr sourcelines = PyObject_CallFunctionObjArgs(inspect.get("getsourcelines"), location.mFrame, NULL);
                 Scripting::Python3::PyListPtr sources = Scripting::Python3::PyListPtr::fromBorrowed(PyTuple_GetItem(sourcelines, 0));
                 size_t baseLine = PyLong_AsLong(PyTuple_GetItem(sourcelines, 1));
 
-                ImGui::PushFont(view->getTool<TextEditor>().font());
+                ImGui::PushFont(view.getTool<TextEditor>().font());
 
                 for (PyObject *line : sources) {
                     ImGui::TableNextRow();
@@ -75,9 +75,9 @@ namespace Tools {
 
                     float startY = ImGui::GetCursorScreenPos().y;
 
-                    ImGui::Text(PyUnicode_AsUTF8(line));
+                    ImGui::Text("%s", PyUnicode_AsUTF8(line));
 
-                    if (baseLine == location->lineNr()) {
+                    if (baseLine == location.lineNr()) {
                         DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY) - 7.0f);
                     }
 
@@ -146,10 +146,10 @@ namespace Tools {
         return "Python3ImmediateWindow";
     }
 
-    bool Python3ImmediateWindow::wantsPause(const Debug::DebugLocation *location, Debug::ContinuationType type)
+    bool Python3ImmediateWindow::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type)
     {
 
-        const Scripting::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Scripting::Python3::Python3DebugLocation *>(location);
+        const Scripting::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Scripting::Python3::Python3DebugLocation *>(&location);
 
         if (pyLocation) {
             const Filesystem::Path &path = pyLocation->file();

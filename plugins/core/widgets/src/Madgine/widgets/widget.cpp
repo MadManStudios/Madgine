@@ -403,11 +403,6 @@ namespace Widgets {
         return mManager.lifetime();
     }
 
-    const std::vector<Debug::ContextInfo *> &WidgetBase::behaviorContexts()
-    {
-        return mBehaviorContexts;
-    }
-
     Serialize::StreamResult WidgetBase::readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget)
     {
         return mManager.readWidget(in, widget, this);

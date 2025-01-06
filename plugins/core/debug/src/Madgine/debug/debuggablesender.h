@@ -210,9 +210,6 @@ namespace Execution {
         return with_query_value(get_debug_location, std::move(location));
     };
 
-    template <typename Sender>
-    using DebuggableSender = decltype(std::declval<Sender>() | with_debug_location());
-
     template <typename T>
     concept is_debuggable = tag_invocable<get_debug_location_t, T &>;
 

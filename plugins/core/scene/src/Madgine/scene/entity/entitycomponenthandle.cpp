@@ -31,20 +31,20 @@ namespace Scene {
 
         void entityComponentOwningHelperWrite(Serialize::FormattedSerializeStream &out, const EntityComponentHandle<EntityComponentBase> &index, const char *name, CallerHierarchyBasePtr hierarchy)
         {
-            const SceneManager *mgr = hierarchy;
-            mgr->entityComponentList(index.mType).writeState(index, out, name, hierarchy);
+            const SceneContainer *container = hierarchy;
+            container->sceneMgr().entityComponentList(index.mType).writeState(index, out, name, hierarchy);
         }
 
         Serialize::StreamResult entityComponentOwningHelperRead(Serialize::FormattedSerializeStream &in, const EntityComponentHandle<EntityComponentBase> &index, const char *name, CallerHierarchyBasePtr hierarchy)
         {
-            SceneManager *mgr = hierarchy;
-            return mgr->entityComponentList(index.mType).readState(index, in, name, hierarchy);
+            SceneContainer *container = hierarchy;
+            return container->sceneMgr().entityComponentList(index.mType).readState(index, in, name, hierarchy);
         }
 
         Serialize::StreamResult entityComponentOwningHelperApplyMap(Serialize::FormattedSerializeStream &in, EntityComponentHandle<EntityComponentBase> &index, bool success, CallerHierarchyBasePtr hierarchy)
         {
-            SceneManager *mgr = hierarchy;
-            return mgr->entityComponentList(index.mType).applyMap(index, in, success, hierarchy);
+            SceneContainer *container = hierarchy;
+            return container->sceneMgr().entityComponentList(index.mType).applyMap(index, in, success, hierarchy);
         }
 
         void entityComponentOwningHelperSetSynced(EntityComponentHandle<EntityComponentBase> &index, bool synced, CallerHierarchyBasePtr hierarchy)

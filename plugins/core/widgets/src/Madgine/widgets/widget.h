@@ -148,14 +148,10 @@ namespace Widgets {
 
         template <typename Sender>
         void addBehavior(Sender &&sender)
-        {
-            Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-            lifetime().attach(std::forward<Sender>(sender) | with_constant_binding<"Widget">(this) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
-            mBehaviorContexts.emplace_back(context);
+        {            
+            lifetime().attach(std::forward<Sender>(sender) | with_constant_binding<"Widget">(this) | Log::log_error());
         }
         Debug::DebuggableLifetime<> &lifetime();
-
-        const std::vector<Debug::ContextInfo *> &behaviorContexts();
 
         bool mVisible = true;
         std::string mName = "Unnamed";
@@ -200,8 +196,6 @@ namespace Widgets {
 
         Matrix3 mPos = Matrix3::ZERO;
         Matrix3 mSize = Matrix3::IDENTITY;
-
-        std::vector<Debug::ContextInfo *> mBehaviorContexts;
     };
 
     template <typename T>

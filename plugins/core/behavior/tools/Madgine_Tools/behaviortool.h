@@ -15,7 +15,7 @@ namespace Tools {
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
 
-        void DrawBehaviorList(BehaviorList &list);
+        void drawBehaviorList(BehaviorList &list);
 
         std::string_view key() const override;
 

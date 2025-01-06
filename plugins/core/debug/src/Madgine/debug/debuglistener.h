@@ -5,7 +5,7 @@ namespace Debug {
 
 	
     struct DebugListener {
-        virtual bool wantsPause(const DebugLocation *location, ContinuationType type)
+        virtual bool wantsPause(const DebugLocation &location, ContinuationType type)
         {
             return false;
         }
