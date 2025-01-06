@@ -82,7 +82,7 @@ namespace Execution {
         };
 
     private:
-        using LifetimeReceiver = VirtualReceiverBaseEx<type_pack<GenericResult>, type_pack<>, cpos...>;
+        using LifetimeReceiver = VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...>;
 
         void setReceiver(LifetimeReceiver *receiver)
         {
@@ -191,14 +191,14 @@ namespace Execution {
         struct state : ended_state<Rec> {
             state(Rec &&rec, Lifetime &lifetime)
                 : ended_state<Rec>(std::forward<Rec>(rec), lifetime)
-                , mCallback(get_stop_token(mRec), callback { lifetime })
+                , mCallback(get_stop_token(this->mRec), callback { lifetime })
             {
             }
 
             void start()
             {
-                mLifetime.start();
-                ended_state::start();
+                this->mLifetime.start();
+                ended_state<Rec>::start();
             }
 
             struct callback {

@@ -94,7 +94,10 @@ namespace NodeGraph {
     {
         ArgumentList arguments { dataInCount() };
         for (size_t i = 0; i < dataInCount(); ++i) {
-            NodeInterpretHandle<NodeBase> { interpreter, *this }.read(arguments[i], i);
+            BehaviorError error = NodeInterpretHandle<NodeBase> { interpreter, *this }.read(arguments[i], i);
+            if (error.mResult != GenericResult::SUCCESS) {
+                return error;
+            }
         }
         mFunction->mFunctionPtr(mFunction, retVal, arguments);
         return {};

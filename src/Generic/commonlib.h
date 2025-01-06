@@ -95,7 +95,7 @@
 
 #define DLL_EXPORT_VARIABLE(qualifier, Type, ns, Name, Init, ...) \
     template <>                                                        \
-    extern DLL_EXPORT qualifier Type ns Name##_instance<__VA_ARGS__> = Init;
+    DLL_EXPORT qualifier Type ns Name##_instance<__VA_ARGS__> = Init;
 
 #define DLL_IMPORT_VARIABLE2(Type, Name, ...) \
     template <__VA_ARGS__>                    \

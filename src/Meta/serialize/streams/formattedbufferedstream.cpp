@@ -73,7 +73,7 @@ namespace Serialize {
     {
         assert(mId);
         STREAM_PROPAGATE_ERROR(mFormatter->endMessageRead());
-        mFormatter->stream().skipWs();
+        STREAM_PROPAGATE_ERROR(mFormatter->stream().skipWs());
         mFormatter->stream().clear();
         if (static_cast<message_streambuf &>(mFormatter->stream().buffer()).endMessageRead() > 0) {
             printf("Message not fully read!");

@@ -96,23 +96,23 @@ namespace NodeGraph {
 
         void start()
         {
-            mDebugLocation.stepInto(Execution::get_debug_location(mRec));
+            this->mDebugLocation.stepInto(Execution::get_debug_location(this->mRec));
             NodeInterpreterStateBase::start();
         }
 
         virtual void set_done() override
         {
-            mDebugLocation.stepOut(Execution::get_debug_location(mRec));
-            mRec.set_done();
+            this->mDebugLocation.stepOut(Execution::get_debug_location(this->mRec));
+            this->mRec.set_done();
         }
         virtual void set_error(BehaviorError r) override
         {
-            mDebugLocation.stepOut(Execution::get_debug_location(mRec));
+            this->mDebugLocation.stepOut(Execution::get_debug_location(this->mRec));
             this->mRec.set_error(std::move(r));
         }
         virtual void set_value(ArgumentList result) override
         {
-            mDebugLocation.stepOut(Execution::get_debug_location(mRec));
+            this->mDebugLocation.stepOut(Execution::get_debug_location(this->mRec));
             this->mRec.set_value(std::move(result));
         }
     };

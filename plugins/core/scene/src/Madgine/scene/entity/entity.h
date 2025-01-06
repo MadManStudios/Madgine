@@ -33,7 +33,7 @@ namespace Scene {
 
             //Entity(const Entity &, bool local);
             //            Entity(Entity &&, bool local);
-            Entity(Entity &&) = default;
+            Entity(Entity &&) = delete;
 
             Entity(SceneContainer &container, const std::string &name);
             Entity(const Entity &) = delete;

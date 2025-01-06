@@ -197,6 +197,7 @@ namespace Input {
         case WidgetType::ROOT_WIDGET:
             mWidget->manager().swapCurrentRoot(mWidget);
             break;
+
         }
     }
 

@@ -99,7 +99,7 @@ namespace Tools {
                 StringUtil::StreamJoiner join { out, "|" };
                 for (size_t i = 0; i < conditions.size(); ++i) {
                     if (conditional & (1 << i)) {
-                        join.next() << conditions[i]->mName.empty() ? "<>" : conditions[i]->mName;
+                        join.next() << (conditions[i]->mName.empty() ? "<>" : conditions[i]->mName);
                     }
                 }
                 

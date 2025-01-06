@@ -72,13 +72,12 @@ struct BehaviorAwaitableSender {
             if (mResult.is_value()) {
                 return false;
             } else if (mResult.is_error()) {
-                mResult.reproduce_error(mBehavior.promise());
+                mResult.reproduce_error(mBehavior.promise());                
             } else {
                 mBehavior.promise().set_done();
             }
-        } else {
-            return true;
-        }
+        } 
+        return true;
     }
 
     Execution::ValueStorage<Sender> await_resume()

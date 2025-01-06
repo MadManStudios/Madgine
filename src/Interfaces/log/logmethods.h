@@ -45,24 +45,43 @@ namespace Log {
 #define LOG_WARNING_ONCE(s) ONCE(LOG_WARNING(s))
 #define LOG_ERROR_ONCE(s) ONCE(LOG_ERROR(s))
 
-    struct log_for_t {
+    struct get_file_name_t {
         template <typename T>
-        friend auto tag_invoke(log_for_t, MessageType lvl, T &value, Log *log)
+        friend auto tag_invoke(get_file_name_t, T &t)
         {
-            return LogDummy { lvl, nullptr, 0, log };
+            return nullptr;
         }
 
         template <typename T>
-            requires tag_invocable<log_for_t, MessageType, T &, Log *>
-        auto operator()(MessageType lvl, T &value, Log *log = nullptr) const
-            noexcept(is_nothrow_tag_invocable_v<log_for_t, MessageType, T &, Log *>)
-                -> tag_invoke_result_t<log_for_t, MessageType, T &, Log *>
+        requires tag_invocable<get_file_name_t, T &>
+        auto operator()(T &value) const
+            noexcept(is_nothrow_tag_invocable_v<get_file_name_t, T &>)
+                -> tag_invoke_result_t<get_file_name_t, T &>
         {
-            return tag_invoke(*this, lvl, value, log);
+            return tag_invoke(*this, value);
         }
     };
 
-    inline constexpr log_for_t log_for;
+    inline constexpr get_file_name_t get_file_name;
+
+    struct get_line_nr_t {
+        template <typename T>
+        friend size_t tag_invoke(get_line_nr_t, T &t)
+        {
+            return 0;
+        }
+
+        template <typename T>
+        requires tag_invocable<get_line_nr_t, T &>
+        auto operator()(T &value) const
+            noexcept(is_nothrow_tag_invocable_v<get_line_nr_t, T &>)
+                -> tag_invoke_result_t<get_line_nr_t, T &>
+        {
+            return tag_invoke(*this, value);
+        }
+    };
+
+    inline constexpr get_line_nr_t get_line_nr;
 
     struct get_log_t {
 

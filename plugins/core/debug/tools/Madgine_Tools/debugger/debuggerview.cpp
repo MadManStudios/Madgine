@@ -88,12 +88,13 @@ namespace Tools {
                                [](const Execution::State::Breakpoint &bp) {
                                    float offset = 0.0f;
                                    switch (bp.mAlignment) {
-
                                    case Execution::State::Breakpoint::Alignment::Center:
                                        offset = -9.0f;
                                        break;
                                    case Execution::State::Breakpoint::Alignment::Bottom:
                                        offset = -18.0f;
+                                       break;
+                                   default:
                                        break;
                                    }
                                    DrawBreakpoint(ImGui::GetCursorScreenPos().y + offset);
@@ -146,7 +147,7 @@ namespace Tools {
             if (ImGui::Button(IMGUI_ICON_STOP)) {
                 mode = context.stop();
             }
-            
+
             ImGui::PopID();
         }
         return mode;
@@ -247,6 +248,8 @@ namespace Tools {
                     ImGui::PushStyleColor(ImGuiCol_Border, { 0.0f, 0.78f, 1.0f, 1.0f });
                     //ImGui::PushStyleColor(ImGuiCol_Text, { 0.0f, 0.78f, 1.0f, 1.0f });
                     break;
+                case Debug::ContinuationType::Flow:
+                    break;
                 }
                 ImGui::BeginGroupPanel();
                 ImGui::Text(arguments);
@@ -306,7 +309,7 @@ namespace Tools {
         ImDrawList *draw_list = ImGui::GetWindowDrawList();
         float x = sDebugStartX;
         y += 7.0f;
-        draw_list->AddCircle({ x + 7.0f, y }, 7.0f, IM_COL32(155, 155, 155, 155));        
+        draw_list->AddCircle({ x + 7.0f, y }, 7.0f, IM_COL32(155, 155, 155, 155));
     }
 }
 }

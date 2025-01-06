@@ -22,8 +22,8 @@ namespace Scene {
 
             bool updateRender(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame, Matrix4 *matrices);
 
-            virtual Entity *entity() = 0;
-            virtual SceneManager *scene() = 0;
+            Entity *entity();
+            SceneManager *scene();
 
             struct stop_cb {
                 stop_cb(AnimationState &state)

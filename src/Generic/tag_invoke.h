@@ -3,6 +3,7 @@
 #include <type_traits>
 #include <utility>
 #include "callable_traits.h"
+#include "auto_pack.h"
 
 namespace _tag_invoke {
 void tag_invoke();
@@ -76,9 +77,13 @@ using is_nothrow_tag_invocable = std::bool_constant<is_nothrow_tag_invocable_v<C
 template <typename CPO, typename... Args>
 concept tag_invocable = (sizeof(_tag_invoke::try_tag_invoke<CPO, Args...>(0)) == sizeof(_tag_invoke::yes_type));
 
-template <typename CPO, typename Base, typename R, std::same_as<void> T, typename... V>
+template <typename CPO_holder, typename Base, typename R, std::same_as<void> T, typename... V>
 struct VirtualCPOBaseHelper : Base {
     using Base::Base;
+
+    using CPO = decltype(CPO_holder::value);
+
+    using mapped_cpos = typename Base::mapped_cpos::template append<CPO_holder::value>;
 
     virtual R v_tag_invoke(CPO _cpo, V... v) = 0;
 
@@ -90,7 +95,7 @@ struct VirtualCPOBaseHelper : Base {
 };
 
 template <auto cpo, typename Base>
-using VirtualCPOBase = typename Engine::CallableTraits<decltype(cpo)::signature>::instance<VirtualCPOBaseHelper, decltype(cpo), Base>;
+using VirtualCPOBase = typename Engine::CallableTraits<typename decltype(cpo)::signature>::template instance<VirtualCPOBaseHelper, Engine::auto_holder<cpo>, Base>;
 
 
 template <typename CPO, typename Proj, typename Base, typename R, std::same_as<void> T, typename... V>
@@ -103,4 +108,16 @@ struct VirtualCPOImplHelper : Base {
 };
 
 template <auto cpo, auto proj, typename Base>
-using VirtualCPOImpl = typename Engine::CallableTraits<decltype(cpo)::signature>::instance<VirtualCPOImplHelper, decltype(cpo), Engine::auto_holder<proj>, Base>;
+using VirtualCPOImpl = typename Engine::CallableTraits<typename decltype(cpo)::signature>::template instance<VirtualCPOImplHelper, decltype(cpo), Engine::auto_holder<proj>, Base>;
+
+template <auto proj>
+struct VirtualCPOsImplHelper {
+    template<auto cpo, typename Base>
+    using type = VirtualCPOImpl<cpo, proj, Base>;
+};
+
+template <typename Base, auto... cpos>
+using VirtualCPOsBase = typename Engine::auto_pack<cpos...>::template fold<VirtualCPOBase, Base>;
+
+template <auto proj, typename Base>
+using VirtualCPOsImpl = typename Base::mapped_cpos::template fold<VirtualCPOsImplHelper<proj>::template type, Base>;

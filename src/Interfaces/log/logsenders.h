@@ -12,7 +12,7 @@ namespace Log {
             void set_error(R &&...errors)
             {
                 ([this](R &error) {
-                    LogDummy out = log_for(MessageType::ERROR_TYPE, error, get_log(this->mRec));
+                    LogDummy out { MessageType::ERROR_TYPE, get_file_name(error), get_line_nr(error), get_log(this->mRec) };
                     if constexpr (requires(std::ostream & o) { o << error; }) {
                         out << error;
                     } else {
@@ -20,7 +20,8 @@ namespace Log {
                     }
                 }(errors),
                     ...);
-                this->mRec.set_error(std::forward<R>(errors)...);
+                //this->mRec.set_error(std::forward<R>(errors)...); 
+                this->mRec.set_done();//Is this ok?
             }
         };
 

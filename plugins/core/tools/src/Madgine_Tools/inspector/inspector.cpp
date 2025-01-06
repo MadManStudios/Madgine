@@ -223,7 +223,7 @@ namespace Tools {
             if (generic)
                 ImGui::SameLine();
         } else if (scope.mType) {
-            ImGui::TextDisabled(scope.mType->mTypeName);
+            ImGui::TextDisabled("%s", scope.mType->mTypeName);
         }
 
         if (generic) {

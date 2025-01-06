@@ -66,9 +66,9 @@ namespace Debug {
     };
 
     template <typename OffsetPtr, typename CPOs>
-    struct DebuggableLifetimeImpl : CPOs::instantiate<DebuggableLifetime> {
+    struct DebuggableLifetimeImpl : CPOs::template instantiate<DebuggableLifetime> {
 
-        using CPOs::instantiate<DebuggableLifetime>::instantiate;
+        using CPOs::template instantiate<DebuggableLifetime>::instantiate;
 
         void startLifetime() override
         {

@@ -16,7 +16,8 @@ namespace Execution {
         ~VirtualReceiverBaseEx() = default;
 
         using value_types = type_pack<V...>;
-        using cpos = auto_pack<>;
+        using result_types = type_pack<>;
+        using mapped_cpos = auto_pack<>;
 
     public:
         virtual void set_done() = 0;
@@ -31,8 +32,7 @@ namespace Execution {
     };
 
     template <typename RPack, typename VPack, auto cpo, auto... cpos>
-    struct VirtualReceiverBaseEx<RPack, VPack, cpo, cpos...> : VirtualCPOBase<cpo, VirtualReceiverBaseEx<RPack, VPack, cpos...>> {
-        using cpos = auto_pack<cpo, cpos...>;
+    struct VirtualReceiverBaseEx<RPack, VPack, cpo, cpos...> : VirtualCPOsBase<VirtualReceiverBaseEx<RPack, VPack>, cpo, cpos...> {
     };
 
     template <typename R, typename... V>
@@ -82,21 +82,8 @@ namespace Execution {
         }
     };
 
-    template <typename Rec, typename Base, typename RPack, typename VPack, auto cpo, auto... cpos>
-    struct VirtualStateEx<Rec, Base, RPack, VPack, cpo, cpos...> : VirtualCPOImpl<cpo, Execution::get_receiver, VirtualStateEx<Rec, Base, RPack, VPack, cpos...>> {
-        using VirtualCPOImpl<cpo, Execution::get_receiver, VirtualStateEx<Rec, Base, RPack, VPack, cpos...>>::VirtualCPOImpl;
-    };
-
-    template <typename Rec, typename Base, typename RPack, typename VPack>
-    struct VirtualStateHelper : Base {
-        using Base::Base;
-
-        template <auto... cpos>
-        using type = VirtualStateEx<Rec, Base, RPack, VPack, cpos...>;
-    };
-
     template <typename Rec, typename Base>
-    using VirtualState = typename Base::cpos::instantiate<VirtualStateHelper<Rec, Base, typename Base::result_types, typename Base::value_types>::template type>;
+    using VirtualState = VirtualCPOsImpl<Execution::get_receiver, VirtualStateEx<Rec, Base, typename Base::result_types, typename Base::value_types>>;
 
 }
 }

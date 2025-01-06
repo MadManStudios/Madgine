@@ -31,7 +31,7 @@ namespace Serialize {
 
     StreamResult IniFormatter::beginPrimitiveRead(const char *name, uint8_t typeId)
     {
-        mStream.skipWs(true);
+        STREAM_PROPAGATE_ERROR(mStream.skipWs(true));
         std::string prefix;
         STREAM_PROPAGATE_ERROR(mStream.readUntil(prefix, "="));
         if (name && StringUtil::substr(prefix, 0, -1) != name)
@@ -68,7 +68,7 @@ namespace Serialize {
     {
         uint32_t size = 0;
         if (sized) {
-            mStream.skipWs(true);
+            STREAM_PROPAGATE_ERROR(mStream.skipWs(true));
             FORMATTER_EXPECT("size=");
             STREAM_PROPAGATE_ERROR(read(size));
         }

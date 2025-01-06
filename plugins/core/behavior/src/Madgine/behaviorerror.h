@@ -12,11 +12,12 @@ struct MADGINE_BEHAVIOR_EXPORT [[nodiscard]] BehaviorError {
 
     MADGINE_BEHAVIOR_EXPORT friend std::ostream &operator<<(std::ostream &out, const BehaviorError &error);
 
-    MADGINE_BEHAVIOR_EXPORT friend Log::LogDummy tag_invoke(Log::log_for_t, Log::MessageType lvl, BehaviorError &error, Log::Log *log);
+    MADGINE_BEHAVIOR_EXPORT friend const char *tag_invoke(Log::get_file_name_t, BehaviorError &error);
+    MADGINE_BEHAVIOR_EXPORT friend size_t tag_invoke(Log::get_line_nr_t, BehaviorError &error);
 
     BehaviorResult mResult;
     const char *mFile = nullptr;
-    int mLineNumber = 0, mPosition = 0;
+    size_t mLineNumber = 0, mPosition = 0;
     std::string mMsg;
     std::string mNotes;
 };

@@ -66,11 +66,11 @@ namespace Threading {
                 if constexpr (std::same_as<std::invoke_result_t<F>, void>) {
                     mF();
                     mMutex->unlockImpl(this);
-                    mRec.set_value();
+                    this->mRec.set_value();
                 } else {
                     auto &&result = mF();
                     mMutex->unlockImpl(this);
-                    mRec.set_value(std::forward<decltype(result)>(result));
+                    this->mRec.set_value(std::forward<decltype(result)>(result));
                 }
             }
 
