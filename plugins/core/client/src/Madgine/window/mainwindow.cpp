@@ -246,6 +246,16 @@ namespace Window {
         return mLifetime;
     }
 
+    void MainWindow::addListener(MainWindowListener *listener)
+    {
+        mListeners.push_back(listener);
+    }
+
+    void MainWindow::removeListener(MainWindowListener *listener)
+    {
+        std::erase(mListeners, listener);
+    }
+
     /**
      * @brief 
      * @param i 
@@ -499,6 +509,17 @@ namespace Window {
         if (Serialize::FormattedSerializeStream out = mgr.openWrite(Filesystem::appDataPath() / "mainwindow.ini", Serialize::Formats::ini)) {
             write(out, mOsWindow->data(), "data");
         }
+    }
+
+    void MainWindow::onActivate(bool active)
+    {
+        if (active) {
+            startLifetime();
+        } else {
+            endLifetime();
+        }
+        for (MainWindowListener *listener : mListeners)
+            listener->onActivate(active);
     }
 
     void MainWindow::sTestScreens(size_t n)

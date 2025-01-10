@@ -51,6 +51,8 @@ namespace Input {
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callInit();
 
+        mWindow.addListener(this);
+
         startLifetime();
 
         co_return true;
@@ -58,13 +60,17 @@ namespace Input {
 
     Threading::Task<void> UIManager::finalize()
     {
+        endLifetime();
+
+        mWindow.removeListener(this);
+
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callFinalize();
     }
 
     void UIManager::startLifetime()
     {
-        mWindow.lifetime().attach(mLifetime);
+        mLifetime.start();
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             handler->startLifetime();
@@ -78,6 +84,14 @@ namespace Input {
     Debug::DebuggableLifetime<> &UIManager::lifetime()
     {
         return mLifetime;
+    }
+
+    void UIManager::onActivate(bool active)
+    {
+        if (active)
+            startLifetime();
+        else
+            endLifetime();
     }
 
     App::Application &UIManager::app() const

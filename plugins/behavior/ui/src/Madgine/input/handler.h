@@ -82,6 +82,8 @@ namespace Input {
         template <typename... Ty>
         Widgets::Button *setupButton(std::string_view name, Ty &&...args)
         {
+            if (!mWidget)
+                return nullptr;
             Widgets::Button *button = mWidget->getChildRecursive<Widgets::Button>(name);
             if (button)
                 mLifetime.attach(button->clickEvent().connect(std::forward<Ty>(args)...));

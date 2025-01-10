@@ -17,6 +17,8 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
+#include "mainwindowlistener.h"
+
 namespace Engine {
 namespace Window {
 
@@ -70,6 +72,9 @@ namespace Window {
         void endLifetime();
 
         Debug::DebuggableLifetime<> &lifetime();
+
+        void addListener(MainWindowListener *listener);
+        void removeListener(MainWindowListener *listener);
 
         /**
      * @name Components
@@ -125,6 +130,8 @@ namespace Window {
 
         void storeWindowData();
 
+        void onActivate(bool active);
+
     private:
         const WindowSettings &mSettings;
 
@@ -139,6 +146,8 @@ namespace Window {
         OSWindow *mOsWindow = nullptr;
         Render::RenderContextSelector mRenderContext;
         std::unique_ptr<Render::RenderTarget> mRenderWindow;
+
+        std::vector<MainWindowListener *> mListeners;
     };
 
 }

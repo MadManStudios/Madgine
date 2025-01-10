@@ -16,9 +16,11 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
+#include "Madgine/window/mainwindowlistener.h"
+
 namespace Engine {
 namespace Input {
-    struct MADGINE_UI_EXPORT UIManager : Threading::MadgineObject<UIManager> {
+    struct MADGINE_UI_EXPORT UIManager : Threading::MadgineObject<UIManager>, Window::MainWindowListener {
 
         using Self = UIManager;
 
@@ -60,6 +62,8 @@ namespace Input {
         void endLifetime();
 
         Debug::DebuggableLifetime<> &lifetime();
+
+        void onActivate(bool active) override;
 
         App::Application &app() const;
         Window::MainWindow &window() const;
