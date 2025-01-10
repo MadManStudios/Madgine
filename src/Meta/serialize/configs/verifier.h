@@ -38,9 +38,9 @@ namespace Serialize {
     };
 
     template <auto f>
-    using ParentVerifier = typename FunctionCapture<ParentVerifierImpl, f>::type;
+    using ParentVerifier = FunctionCapture<ParentVerifierImpl, f>;
     template <auto f>
-    using CustomVerifier = typename FunctionCapture<CustomVerifierImpl, f>::type;
+    using CustomVerifier = FunctionCapture<CustomVerifierImpl, f>;
 
     template <typename... Configs>
     using VerifierSelector = ConfigSelectorDefault<VerifierCategory, DefaultVerifier, Configs...>;
