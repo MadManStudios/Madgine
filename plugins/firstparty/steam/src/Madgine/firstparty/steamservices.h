@@ -29,11 +29,6 @@ namespace FirstParty {
         /////////// STATS        
 
         Threading::Task<bool> ingestStatTask(const char *name, const char *leaderboardName, int32_t value) override;
-        void requestCurrentStats();
-
-        Threading::TaskPromise<bool> mStatsRequestedPromise;
-        Threading::TaskFuture<bool> mStatsRequestedFuture;
-        STEAM_CALLBACK(SteamServices, onUserStatsReceived, UserStatsReceived_t);
 
         /////////// ACHIEVEMENTS
 

@@ -47,8 +47,6 @@ namespace FirstParty {
                 co_await 10ms;
             }
         });
-
-        requestCurrentStats();
     }
 
     SteamServices::~SteamServices()
@@ -118,9 +116,6 @@ namespace FirstParty {
 
     Threading::Task<bool> SteamServices::ingestStatTask(const char *name, const char *leaderboardName, int32_t value)
     {
-        if (!co_await mStatsRequestedFuture)
-            co_return false;
-
         if (!SteamUserStats()->SetStat(name, value))
             co_return false;
 
@@ -137,23 +132,8 @@ namespace FirstParty {
         co_return success &&payload.m_bSuccess;
     }
 
-    void SteamServices::requestCurrentStats()
-    {
-        mStatsRequestedFuture = mStatsRequestedPromise.get_future();
-        if (!SteamUserStats()->RequestCurrentStats())
-            mStatsRequestedPromise.set_value(false);
-    }
-
-    void SteamServices::onUserStatsReceived(UserStatsReceived_t *info)
-    {
-        mStatsRequestedPromise.set_value(info->m_eResult == EResult::k_EResultOK);
-    }
-
     Threading::Task<bool> SteamServices::unlockAchievementTask(const char *name)
     {
-        if (!co_await mStatsRequestedFuture)
-            co_return false;
-
         if (!SteamUserStats()->SetAchievement(name))
             co_return false;
 
