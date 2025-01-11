@@ -46,7 +46,7 @@
 
 UNIQUECOMPONENT(ClickBrick::GameManager)
 
-METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Input::HandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Input::WidgetHandlerBase)
 MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
@@ -56,7 +56,7 @@ NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<floa
 namespace ClickBrick {
 
 GameManager::GameManager(Engine::Input::UIManager &ui)
-    : Engine::Input::Handler<GameManager>(ui, "GameView")
+    : Engine::Input::WidgetHandler<GameManager>(ui, "GameView")
     , mSceneMgr(ui.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
     , mSceneRenderer(ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>(), &mCamera, 50)
     , mSceneClock(mSceneMgr.clock().now())
@@ -78,19 +78,19 @@ Engine::Threading::Task<bool> GameManager::init()
 
     mUI.app().taskQueue()->queueTask(updateApp());
 
-    co_return co_await HandlerBase::init();
+    co_return co_await WidgetHandlerBase::init();
 }
 
 Engine::Threading::Task<void> GameManager::finalize()
 {
     mGameRenderTarget.reset();
 
-    co_await HandlerBase::finalize();
+    co_await WidgetHandlerBase::finalize();
 }
 
 void GameManager::startLifetime()
 {
-    HandlerBase::startLifetime();
+    WidgetHandlerBase::startLifetime();
 
     if (widget()) {
         mGameWindow = widget()->getChildRecursive<Engine::Widgets::SceneWindow>("GameView");

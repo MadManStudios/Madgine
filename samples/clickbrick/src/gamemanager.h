@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine/input/handler.h"
+#include "Madgine/input/widgethandler.h"
 
 #include "Madgine/render/camera.h"
 
@@ -16,7 +16,7 @@
 
 namespace ClickBrick {
 
-    struct GameManager : Engine::Input::Handler<GameManager> {
+    struct GameManager : Engine::Input::WidgetHandler<GameManager> {
 
         GameManager(Engine::Input::UIManager &ui);
 

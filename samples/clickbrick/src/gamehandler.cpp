@@ -8,13 +8,13 @@
 
 UNIQUECOMPONENT(ClickBrick::GameHandler)
 
-METATABLE_BEGIN_BASE(ClickBrick::GameHandler, Engine::Input::HandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::GameHandler, Engine::Input::WidgetHandlerBase)
 METATABLE_END(ClickBrick::GameHandler)
 
 namespace ClickBrick {
 
 GameHandler::GameHandler(Engine::Input::UIManager &ui)
-    : Engine::Input::Handler<GameHandler>(ui, "Ingame", Engine::Input::HandlerBase::WidgetType::ROOT_WIDGET)
+    : Engine::Input::WidgetHandler<GameHandler>(ui, "Ingame", Engine::Input::WidgetHandlerBase::WidgetType::ROOT_WIDGET)
 {
 }
 

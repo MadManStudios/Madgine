@@ -12,5 +12,8 @@ namespace Input {
     template <typename T>
     using Handler = VirtualScope<T, HandlerComponent<T>>;
 
+    template <typename T>
+    using WidgetHandler = VirtualScope<T, HandlerComponent<T, WidgetHandlerBase>>;
+
 }
 }

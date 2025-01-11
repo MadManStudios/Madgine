@@ -12,13 +12,13 @@
 
 UNIQUECOMPONENT(ClickBrick::GameOverHandler)
 
-METATABLE_BEGIN_BASE(ClickBrick::GameOverHandler, Engine::Input::HandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::GameOverHandler, Engine::Input::WidgetHandlerBase)
 METATABLE_END(ClickBrick::GameOverHandler)
 
 namespace ClickBrick {
 
     GameOverHandler::GameOverHandler(Engine::Input::UIManager &ui)
-    : Engine::Input::Handler<GameOverHandler>(ui, "GameOver", Engine::Input::HandlerBase::WidgetType::MODAL_OVERLAY)
+    : Engine::Input::WidgetHandler<GameOverHandler>(ui, "GameOver", Engine::Input::WidgetHandlerBase::WidgetType::MODAL_OVERLAY)
     {
     }
 
@@ -29,7 +29,7 @@ namespace ClickBrick {
 
     void GameOverHandler::startLifetime()
     {
-        HandlerBase::startLifetime();
+        WidgetHandlerBase::startLifetime();
         if (widget()) {
             mLifetime.attach(widget()->pointerClickEvent().connect(&GameOverHandler::restartGame, this));
             mScoreLabel = widget()->getChildRecursive<Engine::Widgets::Label>("ScoreLabel");
