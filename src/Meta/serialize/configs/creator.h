@@ -98,7 +98,7 @@ namespace Serialize {
         static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple<T> &result)
         {
             if constexpr (std::is_const_v<T>) {
-                return read<std::remove_const_t<T>>(in, std::get<0>(result), nullptr);
+                return readState<std::remove_const_t<T>>(in, std::get<0>(result), nullptr);
             } else {
                 return {};
             }
@@ -108,7 +108,7 @@ namespace Serialize {
         static void writeCreationData(FormattedSerializeStream &out, const T &t, const char *name = "Item")
         {
             if constexpr (std::is_const_v<T>) {
-                write<std::remove_const_t<T>>(out, t, name);
+                writeState<std::remove_const_t<T>>(out, t, name);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Serialize {
             using T = std::ranges::range_value_t<C>;
             writeCreationData<T>(out, t);
             if constexpr (!std::is_const_v<T>) {
-                write<T>(out, t, "Item");
+                writeState<T>(out, t, "Item");
             }
         }
 
@@ -131,7 +131,7 @@ namespace Serialize {
             bool success;
             it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
             if constexpr (!std::is_const_v<T>) {
-                STREAM_PROPAGATE_ERROR(read(in, *it, "Item"));
+                STREAM_PROPAGATE_ERROR(readState(in, *it, "Item"));
             }
             assert(success);
             return {};
@@ -199,11 +199,11 @@ namespace Serialize {
                 if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
 
                     std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(readState(in, temp, nullptr, hierarchy));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
                     it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(readState(in, *it, nullptr, hierarchy));
                 }
                 assert(success);
                 return {};
@@ -266,11 +266,11 @@ namespace Serialize {
                 STREAM_PROPAGATE_ERROR(readCreationData(in, tuple, hierarchy));
                 if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
                     std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(*tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(readState(in, temp, nullptr, hierarchy));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
                     it = TupleUnpacker::invokeFlatten(emplace, success, op, where, std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(readState(in, *it, nullptr, hierarchy));
                 }
                 assert(success);
                 return {};
@@ -301,7 +301,7 @@ namespace Serialize {
             static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &arg, const CallerHierarchyBasePtr &hierarchy)
             {
                 const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg, hierarchy);
-                write<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
+                writeState<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
             }
 
             template <typename Op>

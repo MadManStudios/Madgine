@@ -10,12 +10,7 @@
 
 using namespace Engine::Serialize;
 
-struct PODDataType {
-    int i = 1;
-    float f = 2.0f;
-};
-
-struct ComplexDataType : SerializableDataUnit {
+struct ComplexDataType {
 
     ComplexDataType(int i = 2, float f = 4.0f, std::string s = "default", bool b = true)
         : i(i)
@@ -77,8 +72,6 @@ struct TestUnit : TopLevelUnit<TestUnit> {
     SERIALIZABLE_CONTAINER(complexList1, std::list<ComplexDataType>);
     SERIALIZABLE_CONTAINER(complexList2, std::list<ComplexDataType>);
     SERIALIZABLE_CONTAINER(complexList3, std::list<ComplexDataType>);
-
-    PODDataType pod;
 
     Engine::ByteBuffer bytes;
 };

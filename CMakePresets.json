@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 8,
   "cmakeMinimumRequired": {
     "major": 3,
     "minor": 22,
@@ -79,10 +79,6 @@
         "INTERFACES_ENABLE_DEBUG_LOGGING": {
           "type": "BOOL",
           "value": "ON"
-        },
-        "GooglePlay_Config": {
-          "type": "FILEPATH",
-          "value": "${sourceDir}/test/configs/games-ids.xml"
         }
       },
       "toolchainFile": "cmake/toolchains/android.cmake",

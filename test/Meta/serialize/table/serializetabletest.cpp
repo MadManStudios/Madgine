@@ -48,7 +48,7 @@ TEST(Serialize_Table, Test1)
     t1.s.j = 2;
 
     stream1.beginMessageWrite();
-    serializeTable<TestStruct>().writeState(&t1, stream1);
+    write(stream1, t1, "Test");    
     stream1.endMessageWrite();
     stream1.sendMessages();
 
@@ -57,7 +57,7 @@ TEST(Serialize_Table, Test1)
     FormattedBufferedStream::MessageReadMarker msg;
     HANDLE_STREAM_RESULT(stream2.beginMessageRead(msg));
     ASSERT_TRUE(msg);
-    HANDLE_STREAM_RESULT(serializeTable<TestStruct>().readState(&t2, stream2));
+    HANDLE_STREAM_RESULT(read(stream2, t2, "Test"));
     HANDLE_STREAM_RESULT(msg.end());
 
     ASSERT_EQ(t1.i, t2.i);

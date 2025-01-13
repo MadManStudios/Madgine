@@ -83,22 +83,22 @@ namespace Serialize {
     {
         STREAM_PROPAGATE_ERROR(stream.beginHeaderRead());
         UnitId objectId;
-        STREAM_PROPAGATE_ERROR(read(stream, objectId, "Object"));
+        STREAM_PROPAGATE_ERROR(readState(stream, objectId, "Object"));
 
         if (objectId == SERIALIZE_MANAGER) {
             ParticipantId id;
             Command cmd;
-            STREAM_PROPAGATE_ERROR(read(stream, cmd, "Command"));
+            STREAM_PROPAGATE_ERROR(readState(stream, cmd, "Command"));
             STREAM_PROPAGATE_ERROR(stream.endHeaderRead());
             switch (cmd) {
             case SET_ID:
                 assert(mSlaveStream && &stream == &*mSlaveStream);
-                STREAM_PROPAGATE_ERROR(read(stream, id, "Id"));
+                STREAM_PROPAGATE_ERROR(readState(stream, id, "Id"));
                 stream.setId(id);
                 break;
             case SEND_NAME_MAPPINGS: {
                 std::vector<std::pair<std::string, UnitId>> ids;
-                STREAM_PROPAGATE_ERROR(read(stream, ids, "Mappings"));
+                STREAM_PROPAGATE_ERROR(readState(stream, ids, "Mappings"));
                 for (const auto &[name, id] : ids) {
                     mTopLevelUnitNameMappings.at(name)->setStaticSlaveId(id);
                 }
@@ -111,10 +111,10 @@ namespace Serialize {
             SyncableUnitBase *object;
             STREAM_PROPAGATE_ERROR(convertPtr(stream, objectId, object));
             MessageType type;
-            STREAM_PROPAGATE_ERROR(read(stream, type, "MessageType"));
+            STREAM_PROPAGATE_ERROR(readState(stream, type, "MessageType"));
             MessageId transactionId;
             if (type == MessageType::ACTION || type == MessageType::ERROR || type == MessageType::FUNCTION_ACTION || type == MessageType::FUNCTION_ERROR)
-                STREAM_PROPAGATE_ERROR(read(stream, transactionId, "TransactionId"));
+                STREAM_PROPAGATE_ERROR(readState(stream, transactionId, "TransactionId"));
             STREAM_PROPAGATE_ERROR(stream.endHeaderRead());
 
             switch (type) {

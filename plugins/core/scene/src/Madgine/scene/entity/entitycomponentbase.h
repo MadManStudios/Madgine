@@ -20,7 +20,7 @@ namespace Scene {
         struct EntityComponentActionPayload {            
             size_t mComponentIndex;
             OffsetPtr mOffset;
-            const Serialize::SerializableDataUnit *mComponent;
+            const void *mComponent;
             void *mData;
         };
 
@@ -28,10 +28,6 @@ namespace Scene {
             using Container = CompactContainer<EntityComponentContainerImpl<std::vector>, EntityComponentRelocateFunctor>;
 
             EntityComponentBase(const ObjectPtr &initTable);
-        };
-
-        struct MADGINE_SCENE_EXPORT SerializableEntityComponentBase : Serialize::SerializableDataUnit, EntityComponentBase {
-            SerializableEntityComponentBase(const ObjectPtr &initTable = {});
         };
 
         struct MADGINE_SCENE_EXPORT SyncableEntityComponentBase : Serialize::SerializableUnitBase, EntityComponentBase {
@@ -54,7 +50,7 @@ namespace Scene {
             void writeAction(Ty *field, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, Args &&...args) const
             {
                 size_t componentIndex = std::remove_pointer_t<decltype(field->parent())>::component_index();
-                OffsetPtr offset { static_cast<const SerializableDataUnit *>(this), field };
+                OffsetPtr offset { this, field };
                 typename Ty::action_payload data { std::forward<Args>(args)... };
                 writeAction(offset, componentIndex, &data, answerTarget, answerId, {});
             }
@@ -62,7 +58,7 @@ namespace Scene {
             template <typename Ty, typename... Args>
             void writeRequest(Ty *field, Serialize::ParticipantId requester, Serialize::MessageId requesterTransactionId, Args &&...args) const
             {
-                OffsetPtr offset { static_cast<const SerializableDataUnit *>(this), field };
+                OffsetPtr offset { this, field };
                 typename Ty::request_payload data { std::forward<Args>(args)... };
                 writeRequest(offset, &data, requester, requesterTransactionId);
             }
@@ -70,7 +66,7 @@ namespace Scene {
             template <typename Ty, typename... Args>
             void writeRequest(Ty *field, Serialize::GenericMessageReceiver receiver, Args &&...args) const
             {
-                OffsetPtr offset { static_cast<const SerializableDataUnit *>(this), field };
+                OffsetPtr offset { this, field };
                 typename Ty::request_payload data { std::forward<Args>(args)... };
                 writeRequest(offset, &data, 0, 0, std::move(receiver));
             }

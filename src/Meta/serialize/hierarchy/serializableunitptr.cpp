@@ -17,7 +17,7 @@ namespace Serialize {
     {
         if (out.isMaster(AccessMode::WRITE) && out.data() && !(flags & StateTransmissionFlags_SkipId)) {
             out.beginExtendedWrite(name, 1);
-            write(out, mUnit, "serId");
+            Serialize::writeState(out, *this, "serId");
         }
 
         out.beginCompoundWrite(name);
@@ -30,13 +30,13 @@ namespace Serialize {
         if (!in.isMaster(AccessMode::READ) && in.data() && !(flags & StateTransmissionFlags_SkipId)) {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
             SerializableUnitBase *idHelper;
-            STREAM_PROPAGATE_ERROR(read(in, idHelper, "serId"));
+            STREAM_PROPAGATE_ERROR(Serialize::readState(in, idHelper, "serId"));
             uint32_t id = reinterpret_cast<uintptr_t>(idHelper) >> 2;
             SerializableUnitList &list = in.serializableList();
             if (list.size() <= id)
                 list.resize(id + 1);
             assert(!list[id]);
-            list[id] = unit();
+            list[id] = *this;
         }
 
         STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
@@ -46,7 +46,7 @@ namespace Serialize {
 
     void SerializableDataPtr::setActive(bool active, bool existenceChanged) const
     {
-        //assert(mSynced == active);
+        // assert(mSynced == active);
         mType->setActive(unit(), active, existenceChanged);
     }
 
@@ -55,7 +55,7 @@ namespace Serialize {
         assert(!in.isMaster(AccessMode::READ));
 
         STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
-        SerializableUnitBase *idHelper;
+        uint32_t idHelper;
         STREAM_PROPAGATE_ERROR(read(in, idHelper, "serId"));
 
         STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
@@ -68,9 +68,9 @@ namespace Serialize {
     {
     }
 
-    SerializableDataUnit *SerializableDataPtr::unit() const
+    void *SerializableDataPtr::unit() const
     {
-        return const_cast<SerializableDataUnit *>(mUnit);
+        return const_cast<void *>(mUnit);
     }
 
     const SerializableUnitBase *SerializableUnitConstPtr::unit() const
@@ -85,7 +85,7 @@ namespace Serialize {
 
     bool SerializableUnitConstPtr::isActive(OffsetPtr offset) const
     {
-        //TODO: Maybe save lookup -> enforce order of elements in memory
+        // TODO: Maybe save lookup -> enforce order of elements in memory
         return mType->getIndex(offset) < unit()->mActiveIndex;
     }
 
@@ -106,16 +106,16 @@ namespace Serialize {
         return mType->applyMap(unit(), in, success, hierarchy);
     }
 
-    void SerializableUnitPtr::setSynced(bool b) const
+    void SerializableUnitPtr::setSynced(bool b, const CallerHierarchyBasePtr &hierarchy) const
     {
         assert(unit()->mSynced != b);
         unit()->mSynced = b;
-        mType->setSynced(unit(), b);
+        mType->setSynced(unit(), b, hierarchy);
     }
 
     void SerializableUnitPtr::setActive(bool active, bool existenceChanged) const
     {
-        //assert(mSynced == active);
+        // assert(mSynced == active);
         mType->setActive(unit(), active, existenceChanged);
     }
 

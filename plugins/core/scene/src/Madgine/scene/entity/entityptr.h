@@ -39,6 +39,9 @@ namespace Scene {
 
             friend struct Serialize::Operations<EntityPtr>;
 
+            META_EXPORT friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &unit, Serialize::FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy);
+
+
         private:
             union {
                 BitPtr<Entity, 2> mEntity = nullptr;
@@ -54,8 +57,6 @@ namespace Serialize {
     struct MADGINE_SCENE_EXPORT Operations<Scene::Entity::EntityPtr> {
         static StreamResult read(FormattedSerializeStream &in, Scene::Entity::EntityPtr &ptr, const char *name = nullptr);
         static void write(Serialize::FormattedSerializeStream &out, const Scene::Entity::EntityPtr &ptr, const char *name = nullptr);
-
-        static StreamResult applyMap(FormattedSerializeStream &in, Scene::Entity::EntityPtr &ptr, bool success);
     };
 
 }

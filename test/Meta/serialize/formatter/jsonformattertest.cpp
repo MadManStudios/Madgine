@@ -60,7 +60,6 @@ TEST(Serialize_Formatter, JSON)
     ],
     "complexList3" : [
     ],
-    "pod" : [1,2],
     "bytes" : "SGVsbG8gV29ybGQh"
 })");
 }
@@ -111,7 +110,6 @@ TEST(Serialize_Formatter, JSON_InvalidParse)
     ],
     "complexList3" : [
     ],
-    "pod" : [1,2],
     "bytes" : "SGVsbG8gV29ybGQh"
 })");
 
@@ -170,7 +168,6 @@ TEST(Serialize_Formatter, JSON_ExtendedOrder)
     ],
     "complexList3" : [
     ],
-    "pod" : [1,2],
     "bytes" : "SGVsbG8gV29ybGQh"
 })");
 

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "hierarchy/serializableunitptr.h"
-#include "hierarchy/syncableunit.h"
+//#include "hierarchy/serializableunitptr.h"
+//#include "hierarchy/syncableunit.h"
 #include "streams/streamresult.h"
+#include "primitivetypes.h"
 
 namespace Engine {
 namespace Serialize {
@@ -15,7 +16,7 @@ namespace Serialize {
 
     template <typename...>
     struct StreamVisitorBase {
-        virtual StreamResult visit(PrimitiveHolder<SerializableDataUnit>, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const = 0;
+        virtual StreamResult visit(PrimitiveHolder<SerializableDataPtr>, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const = 0;
         virtual StreamResult visit(PrimitiveHolder<SyncableUnitBase>, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const = 0;
     };
 
@@ -35,14 +36,15 @@ namespace Serialize {
         {
         }
 
-        StreamResult visit(PrimitiveHolder<SerializableDataUnit> holder, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const override
+        StreamResult visit(PrimitiveHolder<SerializableDataPtr> holder, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const override
         {
             if constexpr (requires {
                               mF(holder, in, name, tags);
                           }) {
                 return mF(holder, in, name, tags);
             } else {
-                return SerializableDataPtr::visitStream(holder.mTable, in, name, *this);
+                //return SerializableDataPtr::visitStream(holder.mTable, in, name, *this);
+                throw "TODO";
             }
         }
 
@@ -53,7 +55,8 @@ namespace Serialize {
                           }) {
                 return mF(holder, in, name, tags);
             } else {
-                return SyncableUnitBase::visitStream(holder.mTable, in, name, *this);
+                //return SyncableUnitBase::visitStream(holder.mTable, in, name, *this);
+                throw "TODO";
             }
         }
 

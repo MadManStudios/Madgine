@@ -82,7 +82,10 @@ namespace NodeGraph {
         this->setup();
 
         Execution::detach(mBehavior.state().sender() | Execution::then([this](bool success) {
-            mBindings = mBehavior.bindings();
+            if (success)
+                mBindings = mBehavior.bindings();
+            else
+                LOG_ERROR("TODO");
         }));
     }
 

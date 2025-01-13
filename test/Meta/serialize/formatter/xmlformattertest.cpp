@@ -62,10 +62,6 @@ TEST(Serialize_Formatter, XML)
     </complexList2>
     <complexList3>
     </complexList3>
-    <pod>
-        <Element>1</Element>
-        <Element>2</Element>
-    </pod>
     <bytes>SGVsbG8gV29ybGQh</bytes>
 </unit1>
 )");
@@ -178,10 +174,6 @@ TEST(Serialize_Formatter, XML_ExtendedOrder)
     </complexList2>
     <complexList3>
     </complexList3>
-    <pod>
-        <Element>1</Element>
-        <Element>2</Element>
-    </pod>
     <bytes>SGVsbG8gV29ybGQh</bytes>
 </unit1>)");
 

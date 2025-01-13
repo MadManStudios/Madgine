@@ -10,19 +10,19 @@ namespace Serialize {
         const char *mFieldName;
         OffsetPtr (*mOffset)() = nullptr;
 
-        void (*mWriteState)(const SerializableDataUnit *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
-        StreamResult (*mReadState)(SerializableDataUnit *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
+        void (*mWriteState)(const void *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
+        StreamResult (*mReadState)(void *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
 
-        StreamResult (*mReadAction)(SerializableDataUnit *, FormattedBufferedStream &, PendingRequest &) = nullptr;
-        StreamResult (*mReadRequest)(SerializableDataUnit *, FormattedBufferedStream &, MessageId) = nullptr;
+        StreamResult (*mReadAction)(void *, FormattedBufferedStream &, PendingRequest &) = nullptr;
+        StreamResult (*mReadRequest)(void *, FormattedBufferedStream &, MessageId) = nullptr;
 
-        StreamResult (*mApplySerializableMap)(SerializableDataUnit *, FormattedSerializeStream &, bool, CallerHierarchyBasePtr) = nullptr;
-        void (*mSetDataSynced)(SerializableDataUnit *, bool) = nullptr;
-        void (*mSetActive)(SerializableDataUnit *, bool, bool) = nullptr;
-        void (*mSetParent)(SerializableDataUnit *) = nullptr;
+        StreamResult (*mApplySerializableMap)(void *, FormattedSerializeStream &, bool, CallerHierarchyBasePtr) = nullptr;
+        void (*mSetDataSynced)(void *, bool, const CallerHierarchyBasePtr &hierarchy) = nullptr;
+        void (*mSetActive)(void *, bool, bool) = nullptr;
+        void (*mSetParent)(void *) = nullptr;
 
-        void (*mWriteAction)(const SerializableDataUnit *, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *) = nullptr;
-        void (*mWriteRequest)(const SerializableDataUnit *, FormattedBufferedStream &out, void *) = nullptr;
+        void (*mWriteAction)(const void *, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *) = nullptr;
+        void (*mWriteRequest)(const void *, FormattedBufferedStream &out, void *) = nullptr;
 
         StreamResult (*mVisitStream)(FormattedSerializeStream &, const char *, const StreamVisitor &) = nullptr;
     };

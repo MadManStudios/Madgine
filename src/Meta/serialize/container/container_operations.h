@@ -30,7 +30,7 @@ namespace Serialize {
             } else {
                 for (T &t : physical(op)) {
                     if (Filter::filter(t))
-                        STREAM_PROPAGATE_ERROR(Serialize::read(in, t, "Item"));
+                        STREAM_PROPAGATE_ERROR(Serialize::readState(in, t, "Item"));
                 }
             }
 
@@ -67,32 +67,10 @@ namespace Serialize {
             out.endContainerWrite(name);
         }
 
-        static StreamResult applyMap(FormattedSerializeStream &in, C &c, bool success, const CallerHierarchyBasePtr &hierarchy = {})
-        {
-            for (auto &t : physical(c)) {
-                STREAM_PROPAGATE_ERROR(Serialize::applyMap(in, t, success, hierarchy));
-            }
-            return {};
-        }
-
-        static void setSynced(C &c, bool b)
-        {
-            for (auto &&t : physical(c)) {
-                Serialize::setSynced(t, b);
-            }
-        }
-
         static void setActive(C &c, bool active, bool existenceChanged)
         {
             for (auto &t : physical(c)) {
                 Serialize::setActive(t, active, existenceChanged);
-            }
-        }
-
-        static void setParent(C &c, SerializableUnitBase *parent)
-        {
-            for (auto &t : physical(c)) {
-                Serialize::setParent(t, parent);
             }
         }
 
@@ -120,9 +98,6 @@ namespace Serialize {
             Serialize::write<int32_t>(out, std::distance(c.begin(), it), "it");
         }
     };
-
-    template <typename C>
-    concept SerializeRange = std::ranges::range<C> && !PrimitiveType<C>;
 
     template <SerializeRange C, typename... Configs>
     struct Operations<C, Configs...> : ContainerOperations<C, Configs...> {

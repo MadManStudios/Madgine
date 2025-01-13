@@ -8,8 +8,6 @@
 
 #include "Modules/threading/madgineobject.h"
 
-#include "Meta/serialize/hierarchy/serializabledataunit.h"
-
 #include "Modules/uniquecomponent/uniquecomponentcontainer.h"
 #include "Modules/uniquecomponent/uniquecomponentselector.h"
 
@@ -48,7 +46,6 @@ namespace Window {
      *      
     */
     struct MADGINE_CLIENT_EXPORT MainWindow : WindowEventListener,
-                                              Serialize::SerializableDataUnit,
                                               Threading::MadgineObject<MainWindow> {
         SERIALIZABLEUNIT(MainWindow)
 

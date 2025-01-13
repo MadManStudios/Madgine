@@ -54,8 +54,6 @@ FIELD(complexList1, CustomCreator<&readList1, &writeList1>)
 FIELD(complexList2)
 FIELD(complexList3)
 
-FIELD(pod)
-
 FIELD(bytes)
 
 SYNCFUNCTION(foo)

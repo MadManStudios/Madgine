@@ -20,18 +20,21 @@ namespace Serialize {
         int64_t,
         float,
         SyncableUnitBase *,
-        SerializableDataUnit *,
+        SerializableDataPtr,
         std::string,
         ByteBuffer,
         Void,
         Vector2,
         Vector3,
         Vector4,
+        Vector2i,
         Matrix3,
         EnumTag,
         FlagsTag,
         Color3,
-        Color4>;
+        Color4,
+        Quaternion,
+        std::chrono::nanoseconds>;
 
     template <typename T, typename = void>
     struct PrimitiveReducer {
@@ -44,11 +47,16 @@ namespace Serialize {
     };
 
     template <typename T>
-    concept SerializableUnitPtrHelper = !std::convertible_to<T, const SyncableUnitBase *> && std::convertible_to<T, const SerializableDataUnit *>;
+    concept SerializableUnitPtrHelper = !std::convertible_to<T, const SyncableUnitBase *> && std::is_pointer_v<T>;
 
     template <SerializableUnitPtrHelper T>
     struct PrimitiveReducer<T> {
-        typedef SerializableDataUnit *type;
+        typedef SerializableDataPtr type;
+    };
+
+    template <>
+    struct PrimitiveReducer<SerializableDataConstPtr> {
+        typedef SerializableDataPtr type;
     };
 
     template <Enum T>
@@ -86,6 +94,11 @@ namespace Serialize {
         typedef std::string type;
     };
 
+    template <typename _Rep, typename _Period>
+    struct PrimitiveReducer<std::chrono::duration<_Rep, _Period>> {
+        typedef std::chrono::nanoseconds type;
+    };
+
     template <typename T>
     const constexpr size_t PrimitiveTypeIndex_v = SerializePrimitives::index<uint8_t, typename PrimitiveReducer<T>::type>;
 
@@ -97,7 +110,7 @@ namespace Serialize {
     };
 
     template <>
-    struct PrimitiveHolder<SerializableDataUnit> {
+    struct PrimitiveHolder<SerializableDataPtr> {
         const SerializeTable *mTable;
     };
 
@@ -115,6 +128,6 @@ namespace Serialize {
     struct PrimitiveHolder<FlagsTag> {
         const EnumMetaTable *mTable;
     };
-    
+
 }
 }

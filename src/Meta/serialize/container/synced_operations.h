@@ -97,11 +97,6 @@ namespace Serialize {
             Serialize::write(out, synced.mData, name);
         }
 
-        static void setSynced(Synced<T, Observer, OffsetPtr> &synced, bool b)
-        {
-            Serialize::setSynced(synced.mData, b);
-        }
-
         static void setActive(Synced<T, Observer, OffsetPtr> &synced, bool active, bool existenceChanged)
         {
             if (!active) {
@@ -113,16 +108,6 @@ namespace Serialize {
                 if (synced.mData != T {})
                     synced.Observer::operator()(synced.mData, T {});
             }
-        }
-
-        static StreamResult applyMap(FormattedSerializeStream &in, Synced<T, Observer, OffsetPtr> &synced, bool success)
-        {
-            return Serialize::applyMap(in, synced.mData, success);
-        }
-
-        static void setParent(Synced<T, Observer, OffsetPtr> &synced, SerializableUnitBase *parent)
-        {
-            Serialize::setParent(synced.mData, parent);
         }
 
         static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)

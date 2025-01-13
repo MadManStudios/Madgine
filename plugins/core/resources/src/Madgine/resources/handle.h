@@ -3,13 +3,11 @@
 #include "Modules/threading/task.h"
 #include "Modules/threading/taskfuture.h"
 
-#include "Meta/serialize/hierarchy/serializabledataunit.h"
-
 namespace Engine {
 namespace Resources {
 
     template <typename Loader, typename Data>
-    struct Handle : Serialize::SerializableDataUnit {
+    struct Handle {
 
         Handle() = default;
 

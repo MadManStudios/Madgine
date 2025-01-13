@@ -4,6 +4,8 @@
 
 #include "Generic/execution/lifetime.h"
 
+#include "debuggablesender.h"
+
 namespace Engine {
 namespace Debug {
 

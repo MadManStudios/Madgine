@@ -1,9 +1,10 @@
 #pragma once
 
+#include "continuation.h"
+
 namespace Engine {
 namespace Debug {
 
-	
     struct MADGINE_DEBUGGER_EXPORT ParentLocation {
 
         DebugLocation *currentLocation() const;
@@ -23,7 +24,7 @@ namespace Debug {
         template <typename F, typename... Args>
         void yield(F &&callback, std::stop_token st, ContinuationType type, Args &&...args)
         {
-            mContext->suspend({ std::forward<F>(callback), type, std::forward<Args>(args)... }, std::move(st));
+            yieldImpl({ std::forward<F>(callback), type, std::forward<Args>(args)... }, std::move(st));
         }
 
         template <typename F, typename... Args>
@@ -35,8 +36,10 @@ namespace Debug {
                 std::forward<F>(callback)(ContinuationMode::Continue, std::forward<Args>(args)...);
             }
         }
-    };
 
+    private:
+        void yieldImpl(Continuation cont, std::stop_token st);
+    };
 
 }
 }

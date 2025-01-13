@@ -35,7 +35,6 @@ namespace Serialize {
         void writeState(FormattedSerializeStream &out, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0) const;
         StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0);
 
-        StreamResult applyMap(FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy = {});
         void setActive(bool active, bool existenceChanged);
 
         static StreamResult visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
@@ -93,6 +92,10 @@ namespace Serialize {
         friend struct TableInitializer;
         friend struct SerializableUnitConstPtr;
         friend struct SerializableUnitPtr;
+        friend struct SerializableDataPtr;
+
+        META_EXPORT friend StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy);
+        friend StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
 
         DERIVE_FRIEND(customUnitPtr)
         SerializableUnitPtr customUnitPtr();
@@ -242,7 +245,7 @@ namespace Serialize {
         template <typename Ty, typename... Args>
         void writeAction(Ty *field, ParticipantId answerTarget, MessageId answerId, Args &&...args) const
         {
-            OffsetPtr offset { static_cast<const SerializableDataUnit *>(this), field };
+            OffsetPtr offset { static_cast<const T *>(this), field };
             typename Ty::action_payload data { std::forward<Args>(args)... };
             _Base::writeAction(offset, &data, answerTarget, answerId, {});
         }
@@ -251,7 +254,7 @@ namespace Serialize {
         template <typename Ty, typename... Args>
         void writeRequest(Ty *field, ParticipantId requester, MessageId requesterTransactionId, Args &&...args) const
         {
-            OffsetPtr offset { static_cast<const SerializableDataUnit *>(this), field };
+            OffsetPtr offset { static_cast<const T *>(this), field };
             typename Ty::request_payload data { std::forward<Args>(args)... };
             _Base::writeRequest(offset, &data, requester, requesterTransactionId);
         }
@@ -259,7 +262,7 @@ namespace Serialize {
         template <typename Ty, typename... Args>
         void writeRequest(Ty *field, GenericMessageReceiver receiver, Args &&...args) const
         {
-            OffsetPtr offset { static_cast<const SerializableDataUnit *>(this), field };
+            OffsetPtr offset { static_cast<const T *>(this), field };
             typename Ty::request_payload data { std::forward<Args>(args)... };
             _Base::writeRequest(offset, &data, 0, 0, std::move(receiver));
         }
@@ -268,7 +271,7 @@ namespace Serialize {
         template <typename Ty, typename... Args>
         void writeRequestResponse(Ty *field, ParticipantId answerTarget, MessageId answerId, Args &&...args) const
         {
-            OffsetPtr offset { static_cast<const SerializableDataUnit *>(this), field };
+            OffsetPtr offset { static_cast<const T *>(this), field };
             typename Ty::action_payload data { std::forward<Args>(args)... };
             _Base::writeRequestResponse(offset, &data, answerTarget, answerId);
         }

@@ -75,9 +75,7 @@ namespace Scene {
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {
-            Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-            mLifetime.attach(std::forward<Sender>(sender) | with_constant_binding<"Scene">(this) | Execution::with_debug_location<Execution::SenderLocation>() | Execution::with_sub_debug_location(context) | Log::log_error());
-            mBehaviorContexts.emplace_back(context);
+            mLifetime.attach(std::forward<Sender>(sender) | with_constant_binding<"Scene">(this) | Log::log_error());
         }
 
         void addAnimation(Entity::AnimationState *animation);

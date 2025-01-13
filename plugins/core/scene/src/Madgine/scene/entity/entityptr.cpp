@@ -95,7 +95,7 @@ namespace Scene {
         }
 
         /*EntityPtr::operator bool() const
-        {            
+        {
             return get();
         }*/
 
@@ -140,6 +140,18 @@ namespace Scene {
             assert(mHoldsRef);
             return { SceneContainer::ControlBlock::fromPtr(mEntity) };
         }
+
+        Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &ptr, Serialize::FormattedSerializeStream &in, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            uintptr_t v = reinterpret_cast<uintptr_t &>(ptr);
+            if (v & static_cast<uintptr_t>(Serialize::UnitIdTag::SYNCABLE)) {
+                Entity *dummy = reinterpret_cast<Entity *>(v);
+                STREAM_PROPAGATE_ERROR(Serialize::apply_map(dummy, in, success));
+                ptr = dummy;
+            }
+            return {};
+        }
+
     }
 }
 namespace Serialize {
@@ -148,24 +160,13 @@ namespace Serialize {
     {
         Scene::Entity::Entity *dummy;
         STREAM_PROPAGATE_ERROR(Serialize::read(in, dummy, name));
-        reinterpret_cast<uintptr_t&>(ptr) = reinterpret_cast<uintptr_t>(dummy);
+        reinterpret_cast<uintptr_t &>(ptr) = reinterpret_cast<uintptr_t>(dummy);
         return {};
     }
 
     void Operations<Scene::Entity::EntityPtr>::write(FormattedSerializeStream &out, const Scene::Entity::EntityPtr &ptr, const char *name)
     {
         Serialize::write(out, ptr.get(), name);
-    }
-
-    StreamResult Operations<Scene::Entity::EntityPtr>::applyMap(Serialize::FormattedSerializeStream &in, Scene::Entity::EntityPtr &ptr, bool success)
-    {
-        uintptr_t v = reinterpret_cast<uintptr_t&>(ptr);
-        if (v & static_cast<uintptr_t>(UnitIdTag::SYNCABLE)) {
-            Scene::Entity::Entity *dummy = reinterpret_cast<Scene::Entity::Entity *>(v);
-            STREAM_PROPAGATE_ERROR(Serialize::applyMap(in, dummy, success));
-            ptr = dummy;
-        }
-        return {};
     }
 
 }

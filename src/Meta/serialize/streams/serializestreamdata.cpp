@@ -35,6 +35,9 @@ namespace Serialize {
 
     SerializableUnitMap &SerializeStreamData::serializableMap()
     {
+        if (!mSerializableMap) {
+
+        }
         assert(mSerializableMap);
         return *mSerializableMap;
     }

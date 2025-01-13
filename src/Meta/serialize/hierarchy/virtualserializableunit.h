@@ -30,8 +30,8 @@ namespace Serialize {
         }
     };
 
-    template <typename _Base = SerializableDataUnit, typename... _Bases>
-    struct DLL_EXPORT VirtualSerializableDataBase : _Base, _Bases... {
+    template <typename _Base = void>
+    struct DLL_EXPORT VirtualSerializableDataBase : _Base {
 
         using _Base::_Base;
 
@@ -45,11 +45,11 @@ namespace Serialize {
         virtual ~VirtualData() = default;
         virtual SerializableDataPtr customUnitPtr() override
         {
-            return { this, &serializeTable<decayed_t<T>>() };
+            return { static_cast<decayed_t<T>*>(this), &serializeTable<decayed_t<T>>() };
         }
         virtual SerializableDataConstPtr customUnitPtr() const override
         {
-            return { this, &serializeTable<decayed_t<T>>() };
+            return { static_cast<const decayed_t<T> *>(this), &serializeTable<decayed_t<T>>() };
         }
     };
 

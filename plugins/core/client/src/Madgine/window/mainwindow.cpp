@@ -57,6 +57,17 @@ FIELD(mComponents,
     Serialize::CustomFilter<Engine::Window::filterComponent>)
 SERIALIZETABLE_END(Engine::Window::MainWindow)
 
+SERIALIZETABLE_BEGIN(Engine::Window::WindowData)
+FIELD(mPosition)
+FIELD(mSize)
+FIELD(mMaximized)
+SERIALIZETABLE_END(Engine::Window::WindowData)
+
+SERIALIZETABLE_BEGIN(Engine::InterfacesVector)
+FIELD(x)
+FIELD(y)
+SERIALIZETABLE_END(Engine::InterfacesVector)
+
 namespace Engine {
 namespace Window {
 

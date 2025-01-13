@@ -887,7 +887,7 @@ namespace NodeGraph {
         STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Node", 1));
 
         std::string name;
-        STREAM_PROPAGATE_ERROR(read(in, name, "type"));
+        STREAM_PROPAGATE_ERROR(readState(in, name, "type"));
 
         bool isNativeNode = NodeRegistry::sComponentsByName().contains(name);
         BehaviorHandle libraryBehavior;
@@ -952,7 +952,7 @@ namespace NodeGraph {
     {
         out.beginExtendedWrite("Node", 1);
 
-        write(out, node->className(), "type");
+        writeState(out, node->className(), "type");
 
         return "Node";
     }

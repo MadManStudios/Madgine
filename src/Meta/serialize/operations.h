@@ -26,24 +26,194 @@
 namespace Engine {
 namespace Serialize {
 
-    META_EXPORT StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out);
-    META_EXPORT StreamResult convertSerializablePtr(FormattedSerializeStream &in, uint32_t id, SerializableDataUnit *&out);
+    META_EXPORT StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
+    META_EXPORT StreamResult convertSerializablePtr(FormattedSerializeStream &in, uint32_t id, SerializableDataPtr &out);
 
-    template <typename T, typename... Configs>
-    StreamResult applyMap(FormattedSerializeStream &in, T &t, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
-    {
-        if constexpr (requires { &Operations<T, Configs...>::applyMap; })
-            return TupleUnpacker::invoke(Operations<T, Configs...>::applyMap, in, t, success, hierarchy);
-        else
+    template <typename C>
+    concept SerializeRange = std::ranges::range<C> && !PrimitiveType<C>;
+
+    struct set_parent_t {
+
+        template <SerializeRange C>
+        friend void tag_invoke(set_parent_t cpo, C &c, SerializableUnitBase *parent)
+        {
+            for (auto &t : physical(c)) {
+                cpo(t, parent);
+            }
+        }
+
+        template <typename T>
+            requires tag_invocable<set_parent_t, T &, SerializableUnitBase *>
+        friend void tag_invoke(set_parent_t cpo, const std::unique_ptr<T> &p, SerializableUnitBase *parent)
+        {
+            tag_invoke(cpo, *p, parent);
+        }
+
+        template <typename T>
+            requires(!is_tag_invocable_v<set_parent_t, T &, void *>)
+        void operator()(T &t, void *parent) const
+        {
+        }
+
+        template <typename T>
+            requires(!is_tag_invocable_v<set_parent_t, T &, SerializableUnitBase *>)
+        void operator()(T &t, SerializableUnitBase *parent) const
+        {
+        }
+
+        template <typename T>
+        auto operator()(T &item, SerializableUnitBase *parent) const
+            noexcept(is_nothrow_tag_invocable_v<set_parent_t, T &, SerializableUnitBase *>)
+                -> tag_invoke_result_t<set_parent_t, T &, SerializableUnitBase *>
+        {
+            return tag_invoke(*this, item, parent);
+        }
+    };
+
+    inline constexpr set_parent_t set_parent;
+
+    struct apply_map_t {
+        template <typename T>
+        friend StreamResult tag_invoke(apply_map_t cpo, T *&p, FormattedSerializeStream &in, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            if (success) {
+                uint32_t ptr = reinterpret_cast<uintptr_t>(p);
+                if (ptr & 0x3) {
+                    switch (static_cast<UnitIdTag>(ptr & 0x3)) {
+                    case UnitIdTag::SYNCABLE:
+                        if constexpr (std::derived_from<T, SyncableUnitBase>) {
+                            UnitId id = (ptr >> 2);
+                            SyncableUnitBase *unit;
+                            const SerializeTable *type;
+                            STREAM_PROPAGATE_ERROR(convertSyncablePtr(in, id, unit, type));
+                            if (type != &serializeTable<T>())
+                                throw 0;
+                            p = static_cast<T *>(unit);
+                        } else {
+                            throw 0;
+                        }
+                        break;
+                    case UnitIdTag::SERIALIZABLE:
+                        if constexpr (!std::derived_from<T, SyncableUnitBase>) {
+                            uint32_t id = (ptr >> 2);
+                            SerializableDataPtr unit;
+                            STREAM_PROPAGATE_ERROR(convertSerializablePtr(in, id, unit));
+                            static_assert(!std::same_as<T, SerializableUnitBase>);
+                            if (unit.mType != &serializeTable<T>())
+                                throw 0;
+                            p = static_cast<T *>(unit.unit());
+                        } else {
+                            throw 0;
+                        }
+                        break;
+                    default:
+                        throw 0;
+                    }
+                }
+            } else {
+                p = nullptr;
+            }
             return {};
-    }
+        }
 
-    template <typename T, typename... Configs>
-    void setSynced(T &t, bool b, CallerHierarchyBasePtr hierarchy)
-    {
-        if constexpr (requires { &Operations<T, Configs...>::setSynced; })
-            TupleUnpacker::invoke(Operations<T, Configs...>::setSynced, t, b, hierarchy);
-    }
+        template <typename... Ty>
+        friend StreamResult tag_invoke(apply_map_t cpo, std::tuple<Ty...> &t, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            return TupleUnpacker::accumulate(
+                t, [&](auto &e, StreamResult r) {
+                    STREAM_PROPAGATE_ERROR(std::move(r));
+                    return cpo(e, in, success, hierarchy);
+                },
+                StreamResult {});
+        }
+
+        template <typename T1, typename T2>
+        friend StreamResult tag_invoke(apply_map_t cpo, std::pair<T1, T2> &p, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            STREAM_PROPAGATE_ERROR(cpo(p.first, in, success, hierarchy));
+            return cpo(p.second, in, success, hierarchy);
+        }
+
+        template <SerializeRange C>
+        friend StreamResult tag_invoke(apply_map_t cpo, C &c, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            for (auto &t : physical(c)) {
+                STREAM_PROPAGATE_ERROR(cpo(t, in, success, hierarchy));
+            }
+            return {};
+        }
+
+        template <PrimitiveType T>
+            requires(!std::is_const_v<T>)
+        friend StreamResult tag_invoke(apply_map_t cpo, T &t, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            return {};
+        }
+
+        template <typename T>
+            requires std::is_const_v<T>
+        friend StreamResult tag_invoke(apply_map_t cpo, T &t, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            return {};
+        }
+
+        template <typename T>
+        friend StreamResult tag_invoke(apply_map_t cpo, const std::unique_ptr<T> &p, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            return cpo(*p, in, success, hierarchy);
+        }
+
+        template <typename T>
+            requires(!tag_invocable<apply_map_t, T &, FormattedSerializeStream &, bool, const CallerHierarchyBasePtr &>)
+        StreamResult operator()(T &t, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {}) const
+        {
+            return SerializableDataPtr { &t }.applyMap(in, success, hierarchy);
+        }
+
+        template <typename T>
+        auto operator()(T &item, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {}) const
+            noexcept(is_nothrow_tag_invocable_v<apply_map_t, T &, FormattedSerializeStream &, bool, const CallerHierarchyBasePtr &>)
+                -> tag_invoke_result_t<apply_map_t, T &, FormattedSerializeStream &, bool, const CallerHierarchyBasePtr &>
+        {
+            return tag_invoke(*this, item, in, success, hierarchy);
+        }
+    };
+
+    inline constexpr apply_map_t apply_map;
+
+    struct set_synced_t {
+
+        template <SerializeRange C>
+        friend void tag_invoke(set_synced_t cpo, C &c, bool b, const CallerHierarchyBasePtr &hierarchy)
+        {
+            for (auto &t : physical(c)) {
+                cpo(t, b, hierarchy);
+            }
+        }
+
+        template <typename T>
+            requires tag_invocable<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>
+        friend void tag_invoke(set_synced_t cpo, const std::unique_ptr<T> &p, bool b, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            tag_invoke(cpo, *p, b, hierarchy);
+        }
+
+        template <typename T>
+            requires(!is_tag_invocable_v<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>)
+        void operator()(T &t, bool b, const CallerHierarchyBasePtr &hierarchy = {}) const
+        {
+        }
+
+        template <typename T>
+        auto operator()(T &item, bool b, const CallerHierarchyBasePtr &hierarchy = {}) const
+            noexcept(is_nothrow_tag_invocable_v<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>)
+                -> tag_invoke_result_t<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>
+        {
+            return tag_invoke(*this, item, b, hierarchy);
+        }
+    };
+
+    inline constexpr set_synced_t set_synced;
 
     template <typename T, typename... Configs>
     void setActive(T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy)
@@ -52,16 +222,10 @@ namespace Serialize {
             TupleUnpacker::invoke(Operations<T, Configs...>::setActive, t, active, existenceChanged, hierarchy);
     }
 
-    template <typename T>
-    void setParent(T &t, SerializableDataUnit *parent)
+    template <typename... Configs, typename T>
+    StreamResult readState(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
     {
-    }
-
-    template <typename T, typename... Configs>
-    void setParent(T &t, SerializableUnitBase *parent)
-    {
-        if constexpr (requires { &Operations<T, Configs...>::setParent; })
-            Operations<T, Configs...>::setParent(t, parent);
+        return TupleUnpacker::invoke(Operations<T, Configs...>::read, in, t, name, hierarchy, flags);
     }
 
     template <typename T, typename... Configs>
@@ -72,11 +236,11 @@ namespace Serialize {
         if (flags & StateTransmissionFlags_Activation)
             setActive(t, false, false);
 
-        StreamResult result = TupleUnpacker::invoke(Operations<T, Configs...>::read, in, t, name, hierarchy, flags);
+        StreamResult result = readState<Configs...>(in, t, name, hierarchy, flags);
 
         if (flags & StateTransmissionFlags_ApplyMap) {
             assert(in.manager());
-            STREAM_PROPAGATE_ERROR(applyMap(in, t, result.mState == StreamState::OK));
+            STREAM_PROPAGATE_ERROR(apply_map(t, in, result.mState == StreamState::OK));
         }
 
         if (flags & StateTransmissionFlags_Activation)
@@ -86,11 +250,17 @@ namespace Serialize {
     }
 
     template <typename T, typename... Configs>
+    void writeState(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
+    {
+        TupleUnpacker::invoke(Operations<T, Configs...>::write, out, t, name, hierarchy, flags);
+    }
+
+    template <typename T, typename... Configs>
     void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
     {
         SerializableMapHolder holder { out };
 
-        TupleUnpacker::invoke(Operations<T, Configs...>::write, out, t, name, hierarchy, flags);
+        writeState<T, Configs...>(out, t, name, hierarchy);
     }
 
     template <typename T, typename... Configs>
@@ -140,18 +310,19 @@ namespace Serialize {
         requires(!Reference<F> && !PrimitiveType<TargetCompound>)
     StreamResult scanCompound(FormattedSerializeStream &in, const char *name, F &&callback)
     {
-        using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, SerializableDataUnit>;
+        using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, SerializableDataPtr>;
         const StreamVisitor *genericVisitor;
         StreamVisitorImpl visitor {
             [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags) -> StreamResult {
                 if (holder.mTable == &serializeTable<TargetCompound>()) {
                     return callback(stream, name);
                 } else {
-                    if constexpr (std::same_as<BaseType, SyncableUnitBase>) {
-                        return SyncableUnitBase::visitStream(holder.mTable, stream, name, *genericVisitor);
-                    } else {
-                        return SerializableDataPtr::visitStream(holder.mTable, stream, name, *genericVisitor);
-                    }
+                    //if constexpr (std::same_as<BaseType, SyncableUnitBase>) {
+                        // return SyncableUnitBase::visitStream(holder.mTable, stream, name, *genericVisitor);
+                        throw "TODO";
+                    //} else {
+                        //return SerializableDataPtr::visitStream(holder.mTable, stream, name, *genericVisitor);
+                   // }
                 }
             }
         };
@@ -171,13 +342,9 @@ namespace Serialize {
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
                 return t.readState(in, name, hierarchy, flags);
-            } else if constexpr (std::derived_from<T, SerializableDataUnit>) {
+            } else  {
                 return SerializableDataPtr { &t }.readState(in, name, hierarchy, flags);
-            } else if constexpr (TupleUnpacker::Tuplefyable<T>) {
-                return Operations<decltype(TupleUnpacker::toTuple(std::declval<T &>())), Configs...>::read(in, TupleUnpacker::toTuple(t), name, hierarchy);
-            } else {
-                static_assert(dependent_bool<T, false>::value, "Invalid Type");
-            }
+            } 
         }
 
         static void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
@@ -189,78 +356,9 @@ namespace Serialize {
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
                 t.writeState(out, name, hierarchy, flags);
-            } else if constexpr (std::derived_from<T, SerializableDataUnit>) {
+            } else {
                 SerializableDataConstPtr { &t }.writeState(out, name, CallerHierarchyPtr { hierarchy }, flags);
-            } else if constexpr (TupleUnpacker::Tuplefyable<T>) {
-                Operations<decltype(TupleUnpacker::toTuple(std::declval<T &>())), Configs...>::write(out, TupleUnpacker::toTuple(t), name, hierarchy);
-            } else {
-                static_assert(dependent_bool<T, false>::value, "Invalid Type");
-            }
-        }
-
-        static StreamResult applyMap(FormattedSerializeStream &in, T &item, bool success, CallerHierarchyBasePtr hierarchy = {})
-        {
-            if constexpr (Pointer<T>) {
-                if (success) {
-                    static_assert(std::derived_from<std::remove_pointer_t<T>, SerializableDataUnit>);
-                    uint32_t ptr = reinterpret_cast<uintptr_t>(item);
-                    if (ptr & 0x3) {
-                        switch (static_cast<UnitIdTag>(ptr & 0x3)) {
-                        case UnitIdTag::SYNCABLE:
-                            if constexpr (std::derived_from<std::remove_pointer_t<T>, SyncableUnitBase>) {
-                                UnitId id = (ptr >> 2);
-                                SyncableUnitBase *unit;
-                                STREAM_PROPAGATE_ERROR(convertSyncablePtr(in, id, unit));
-                                item = static_cast<T>(unit);
-                            } else {
-                                throw 0;
-                            }
-                            break;
-                        case UnitIdTag::SERIALIZABLE:
-                            if constexpr (!std::derived_from<std::remove_pointer_t<T>, SyncableUnitBase>) {
-                                uint32_t id = (ptr >> 2);
-                                SerializableDataUnit *unit;
-                                STREAM_PROPAGATE_ERROR(convertSerializablePtr(in, id, unit));
-                                item = static_cast<T>(unit);
-                            } else {
-                                throw 0;
-                            }
-                            break;
-                        default:
-                            throw 0;
-                        }
-                    }
-                } else {
-                    item = nullptr;
-                }
-                return {};
-            } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                return item.applyMap(in, success, hierarchy);
-            } else if constexpr (std::derived_from<T, SerializableDataUnit>) {
-                return SerializableDataPtr { &item }.applyMap(in, success, hierarchy);
-            } else if constexpr (TupleUnpacker::Tuplefyable<T>) {
-                return TupleUnpacker::accumulate(
-                    TupleUnpacker::toTuple(item), [&](auto &t, StreamResult r) {
-                        STREAM_PROPAGATE_ERROR(std::move(r));
-                        return Operations<std::remove_reference_t<decltype(t)>>::applyMap(in, t, success, hierarchy);
-                    },
-                    StreamResult {});
-            } else {
-                // static_assert(isPrimitiveType_v<T>, "Invalid Type");
-                return {};
-            }
-        }
-
-        static void setSynced(T &item, bool b)
-        {
-            if constexpr (std::derived_from<T, SerializableUnitBase>) {
-                SerializableUnitPtr { &item }.setSynced(b);
-            } else if constexpr (std::derived_from<T, SerializableDataUnit>) {
-            } else if constexpr (TupleUnpacker::Tuplefyable<T>) {
-                TupleUnpacker::forEach(TupleUnpacker::toTuple(item), [&](auto &t) {
-                    Serialize::setSynced(t, b);
-                });
-            }
+            } 
         }
 
         static void setActive(T &item, bool active, bool existenceChanged)
@@ -269,23 +367,8 @@ namespace Serialize {
                 item.setActive(active, existenceChanged);
             } else if constexpr (std::derived_from<T, SerializableUnitBase>) {
                 SerializableUnitPtr { &item }.setActive(active, existenceChanged);
-            } else if constexpr (std::derived_from<T, SerializableDataUnit>) {
+            } else if constexpr (!PrimitiveType<T> && !std::is_const_v<T>){
                 SerializableDataPtr { &item }.setActive(active, existenceChanged);
-            } else if constexpr (TupleUnpacker::Tuplefyable<T>) {
-                TupleUnpacker::forEach(TupleUnpacker::toTuple(item), [&](auto &t) {
-                    Serialize::setActive(t, active, existenceChanged);
-                });
-            }
-        }
-
-        static void setParent(T &item, SerializableUnitBase *parent)
-        {
-            if constexpr (std::derived_from<T, SerializableUnitBase>) {
-                SerializableUnitPtr { &item }.setParent(parent);
-            } else if constexpr (TupleUnpacker::Tuplefyable<T>) {
-                TupleUnpacker::forEach(TupleUnpacker::toTuple(item), [&](auto &t) {
-                    Serialize::setParent(t, parent);
-                });
             }
         }
 
@@ -303,13 +386,9 @@ namespace Serialize {
                 return visitor.visit(PrimitiveHolder<typename PrimitiveReducer<T>::type> {}, in, name, tags);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
                 return visitor.visit(PrimitiveHolder<SyncableUnitBase> { &serializeTable<T>() }, in, name, tags);
-            } else if constexpr (std::derived_from<T, SerializableDataUnit>) {
-                return visitor.visit(PrimitiveHolder<SerializableDataUnit> { &serializeTable<T>() }, in, name, tags);
-            } else if constexpr (TupleUnpacker::Tuplefyable<T>) {
-                return Operations<decltype(TupleUnpacker::toTuple(std::declval<T &>())), Configs...>::visitStream(in, name, visitor);
             } else {
-                static_assert(dependent_bool<T, false>::value, "Invalid Type");
-            }
+                return visitor.visit(PrimitiveHolder<SerializableDataPtr> { &serializeTable<T>() }, in, name, tags);
+            } 
         }
     };
 
@@ -326,11 +405,6 @@ namespace Serialize {
             Operations<T, Configs...>::write(out, *p, name, hierarchy);
         }
 
-        static StreamResult applyMap(FormattedSerializeStream &in, const std::unique_ptr<T> &p, bool success)
-        {
-            return Operations<T, Configs...>::applyMap(in, *p, success);
-        }
-
         static void setSynced(const std::unique_ptr<T> &p, bool b)
         {
             Operations<T, Configs...>::setSynced(*p, b);
@@ -339,11 +413,6 @@ namespace Serialize {
         static void setActive(const std::unique_ptr<T> &p, bool active, bool existenceChanged)
         {
             Operations<T, Configs...>::setActive(*p, active, existenceChanged);
-        }
-
-        static void setParent(const std::unique_ptr<T> &p, SerializableUnitBase *parent)
-        {
-            Operations<T, Configs...>::setParent(*p, parent);
         }
 
         static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
@@ -365,7 +434,7 @@ namespace Serialize {
             STREAM_PROPAGATE_ERROR(TupleUnpacker::accumulate(
                 t, [&](auto &e, StreamResult r) {
                     STREAM_PROPAGATE_ERROR(std::move(r));
-                    return Serialize::read(in, e, nullptr, hierarchy);
+                    return Serialize::readState(in, e, nullptr, hierarchy);
                 },
                 StreamResult {}));
             return in.endContainerRead(name);
@@ -375,19 +444,9 @@ namespace Serialize {
         {
             out.beginContainerWrite(name);
             TupleUnpacker::forEach(t, [&](const auto &e) {
-                Serialize::write(out, e, "Element", hierarchy);
+                Serialize::writeState(out, e, "Element", hierarchy);
             });
             out.endContainerWrite(name);
-        }
-
-        static StreamResult applyMap(FormattedSerializeStream &in, std::tuple<Ty...> &t, bool success, const CallerHierarchyBasePtr &hierarchy = {})
-        {
-            return TupleUnpacker::accumulate(
-                t, [&](auto &e, StreamResult r) {
-                    STREAM_PROPAGATE_ERROR(std::move(r));
-                    return Serialize::applyMap(in, e, success, hierarchy);
-                },
-                StreamResult {});
         }
 
         struct VisitHelper {
@@ -483,23 +542,6 @@ namespace Serialize {
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<U>(in, nullptr, visitor));
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<V>(in, nullptr, visitor));
             return in.endCompoundRead(name);
-        }
-    };
-
-    template <typename Rep, typename Period, typename... Configs>
-    struct Operations<std::chrono::duration<Rep, Period>, Configs...> {
-
-        static StreamResult read(FormattedSerializeStream &in, std::chrono::duration<Rep, Period> &d, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
-        {
-            uint64_t value;
-            STREAM_PROPAGATE_ERROR(Serialize::read<uint64_t>(in, value, name, hierarchy));
-            d = std::chrono::duration_cast<std::chrono::duration<Rep, Period>>(std::chrono::nanoseconds { value });
-            return {};
-        }
-
-        static void write(FormattedSerializeStream &out, const std::chrono::duration<Rep, Period> &d, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
-        {
-            Serialize::write<uint64_t>(out, std::chrono::duration_cast<std::chrono::nanoseconds>(d).count(), name, hierarchy);
         }
     };
 

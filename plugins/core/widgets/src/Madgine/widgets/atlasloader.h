@@ -7,12 +7,12 @@
 
 #include "Meta/math/atlas2.h"
 
-#include "Meta/serialize/hierarchy/serializabledataunit.h"
+#include "Meta/serialize/hierarchy/serializableunit.h"
 
 namespace Engine {
 namespace Widgets {
        
-    struct PreprocessedUIAtlas : Serialize::SerializableDataUnit {
+    struct PreprocessedUIAtlas {
         SERIALIZABLEUNIT(PreprocessedUIAtlas);
 
         void insert(const std::map<std::string, Resources::ImageLoader::Handle> &images);

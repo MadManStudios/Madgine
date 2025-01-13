@@ -199,7 +199,7 @@ namespace Serialize {
         const char *annotator1Name = sAnnotator1Names[desc.mType];
         if (annotator1Name) {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead(nullptr, 1));
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, desc.mAnnotator1, annotator1Name));
+            STREAM_PROPAGATE_ERROR(Serialize::readState(in, desc.mAnnotator1, annotator1Name));
         }
         if (desc.mType != Widgets::PropertyType::CONDITIONAL) {
             STREAM_PROPAGATE_ERROR(in.readPrimitive(values.emplace_back(), nullptr));

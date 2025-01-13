@@ -45,7 +45,7 @@ struct ParameterTupleInstance : ParameterTupleBase {
         return TupleUnpacker::accumulate(
             mTuple, [&](auto &e, Serialize::StreamResult r) {
                 STREAM_PROPAGATE_ERROR(std::move(r));
-                return Serialize::read(in, e, nullptr);
+                return Serialize::readState(in, e, nullptr);
             },
             Serialize::StreamResult {});
     }
@@ -53,7 +53,7 @@ struct ParameterTupleInstance : ParameterTupleBase {
     virtual void write(Serialize::FormattedSerializeStream &out) override
     {
         TupleUnpacker::forEach(mTuple, [&](const auto &e) {
-            Serialize::write(out, e, "Item");
+            Serialize::writeState(out, e, "Item");
         });
     }
 
@@ -134,6 +134,10 @@ struct MADGINE_BEHAVIOR_EXPORT ParameterTuple {
 
 private:
     friend struct Serialize::Operations<ParameterTuple>;
+
+    friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, ParameterTuple& tuple, Serialize::FormattedSerializeStream& in, bool success, const CallerHierarchyBasePtr& hierarchy = {}) {
+        return {};
+    }
 
     std::unique_ptr<ParameterTupleBase> mTuple;
 };

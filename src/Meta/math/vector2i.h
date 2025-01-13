@@ -3,8 +3,6 @@
 namespace Engine {
 
 struct Vector2i {
-    using is_aggregate = void;
-
     int x, y;
 
     Vector2i() = default;

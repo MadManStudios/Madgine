@@ -6,7 +6,7 @@
 #include "Generic/functor.h"
 #include "Generic/memberoffsetptr.h"
 #include "serializable.h"
-#include "unithelper.h"
+#include "../operations.h"
 
 namespace Engine {
 namespace Serialize {
@@ -54,7 +54,7 @@ namespace Serialize {
             : Base(std::move(other))
             , mActiveIterator(hasEndIterator ? _traits::toPositionHandle(*this, Base::end()) : std::move(other.mActiveIterator))
         {
-            setParent(*this, OffsetPtr::parent(this));
+            set_parent(*this, OffsetPtr::parent(this));
             other.Base::clear();
             other.mActiveIterator = _traits::toPositionHandle(other, other.Base::begin());
         }
@@ -70,7 +70,7 @@ namespace Serialize {
             bool hasEndIterator = other.mActiveIterator == _traits::toPositionHandle(other, other.Base::end());
             Base::operator=(std::move(other));
             mActiveIterator = hasEndIterator ? _traits::toPositionHandle(*this, Base::end()) : std::move(other.mActiveIterator);
-            setParent(*this, OffsetPtr::parent(this));
+            set_parent(*this, OffsetPtr::parent(this));
             other.Base::clear();
             other.mActiveIterator = _traits::toPositionHandle(other, other.Base::begin());
             return *this;
@@ -203,10 +203,12 @@ namespace Serialize {
             }
         }
 
-        void setSynced(bool synced)
+        
+        template <typename T>
+        friend void tag_invoke(set_synced_t cpo, SerializableContainerImpl& c, bool b, const CallerHierarchyBasePtr &hierarchy)
         {
-            for (auto &e : physical()) {
-                Serialize::setSynced(e, synced, CallerHierarchyPtr { OffsetPtr::parent(this) });
+            for (auto &e : c.physical()) {
+                cpo(e, b, CallerHierarchyPtr { OffsetPtr::parent(&c) });
             }
         }
 
@@ -279,7 +281,7 @@ namespace Serialize {
                 }
                 if (mInserted) {
                     if (this->mContainer.isSynced())
-                        Serialize::setSynced(*mIt, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        Serialize::set_synced(*mIt, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                 }
                 if (this->mContainer.isItemActive(mIt)) {
                     this->mContainer.Observer::operator()(mIt, (mInserted ? AFTER : ABORTED) | EMPLACE);
@@ -336,7 +338,7 @@ namespace Serialize {
                     bool inserted = std::get<1>(handle);
                     if (inserted) {
                         if (this->mContainer.isSynced())
-                            Serialize::setSynced(*it, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                            Serialize::set_synced(*it, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                     }
                     if (this->mContainer.isItemActive(it)) {
                         this->mContainer.Observer::operator()(it, (inserted ? AFTER : ABORTED) | EMPLACE);
@@ -358,7 +360,7 @@ namespace Serialize {
                 : Operation(c)
             {
                 if (this->mContainer.isSynced()) {
-                    Serialize::setSynced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                    Serialize::set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                 }
                 if (this->mContainer.isItemActive(it)) {
                     this->mContainer.Observer::operator()(it, BEFORE | DEACTIVATE_ITEM);
@@ -397,7 +399,7 @@ namespace Serialize {
             {
                 if (this->mContainer.isSynced()) {
                     for (iterator it = from; it != to; ++it) {
-                        Serialize::setSynced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        Serialize::set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                     }
                 }
                 for (iterator it = from; it != to && this->mContainer.isItemActive(it); ++it) {
@@ -437,7 +439,7 @@ namespace Serialize {
                 , mControlled(controlled)
             {
                 if (this->mContainer.isSynced()) {
-                    this->mContainer.setSynced(false);
+                    set_synced(this->mContainer, false);
                 }
 
                 if (this->mContainer.isActive()) {
@@ -450,7 +452,7 @@ namespace Serialize {
             ~_ResetOperation()
             {
                 if (this->mContainer.isSynced()) {
-                    this->mContainer.setSynced(true);
+                    set_synced(this->mContainer, true);
                 }
                 if (mWasActive) {
                     this->mContainer.setActive(true, !mControlled, mControlled);
@@ -502,7 +504,7 @@ namespace Serialize {
                 position_handle newHandle = _traits::toPositionHandle(*this, it);
                 if (_traits::next(*this, newHandle) == mActiveIterator && !this->isActive())
                     mActiveIterator = newHandle;
-                setParent(*it, OffsetPtr::parent(this));
+                set_parent(*it, OffsetPtr::parent(this));
             }
             return it;
         }

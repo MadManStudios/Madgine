@@ -62,7 +62,7 @@ struct MemberOffsetPtrWrapper {
         return P::value.parent(static_cast<const member_type *>(child));
     }
 
-    template <typename _T, typename _M = member_type>
+    template <typename _T = parent_type, typename _M = member_type>
     static OffsetPtr offset()
     {
         return P::value.template offset<_T, _M>();

@@ -4,8 +4,6 @@
 
 #include "Madgine/fontloader/fontloader.h"
 
-#include "Meta/serialize/hierarchy/serializabledataunit.h"
-
 #include "Meta/math/atlas2.h"
 #include "Meta/math/color4.h"
 #include "Meta/math/rect2.h"

@@ -12,9 +12,6 @@
 METATABLE_BEGIN(Engine::Scene::Entity::EntityComponentBase)
 METATABLE_END(Engine::Scene::Entity::EntityComponentBase)
 
-SERIALIZETABLE_BEGIN(Engine::Scene::Entity::SerializableEntityComponentBase)
-SERIALIZETABLE_END(Engine::Scene::Entity::SerializableEntityComponentBase)
-
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::SyncableEntityComponentBase)
 SERIALIZETABLE_END(Engine::Scene::Entity::SyncableEntityComponentBase)
 
@@ -23,11 +20,6 @@ namespace Scene {
     namespace Entity {
 
         EntityComponentBase::EntityComponentBase(const ObjectPtr &initTable)
-        {
-        }
-
-        SerializableEntityComponentBase::SerializableEntityComponentBase(const ObjectPtr &initTable)
-            : EntityComponentBase(initTable)
         {
         }
 

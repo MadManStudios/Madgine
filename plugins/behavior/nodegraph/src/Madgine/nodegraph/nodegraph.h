@@ -14,7 +14,7 @@ namespace NodeGraph {
         bool mIgnoreTarget = false;
     };
 
-    struct MADGINE_NODEGRAPH_EXPORT NodeGraph : Serialize::SerializableDataUnit {
+    struct MADGINE_NODEGRAPH_EXPORT NodeGraph {
 
         SERIALIZABLEUNIT(NodeGraph)
 
@@ -86,7 +86,7 @@ namespace NodeGraph {
 
         std::string mLayoutData;
 
-        struct InputBinding : Serialize::SerializableDataUnit {
+        struct InputBinding {
             BindingDescriptor mDescriptor { "Unnamed", ExtendedValueTypeIndex { ExtendedValueTypeEnum::GenericType } };
             std::vector<Pin> mTargets;
         };

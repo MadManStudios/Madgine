@@ -7,6 +7,9 @@
 #include "Generic/bytebuffer.h"
 #include "../math/color4.h"
 #include "../math/matrix4.h"
+#include "../math/quaternion.h"
+
+#include "hierarchy/serializableunitptr.h"
 
 #include "streams/formattedserializestream.h"
 
@@ -46,16 +49,21 @@ namespace Serialize {
     template META_EXPORT StreamResult visitSkipPrimitive<int64_t>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<float>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<SyncableUnitBase *>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<SerializableDataUnit *>(FormattedSerializeStream &, const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<SerializableDataPtr>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<std::string>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<ByteBuffer>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Void>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Vector2>(FormattedSerializeStream &, const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Vector2i>(FormattedSerializeStream &, const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Quaternion>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Vector3>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Vector4>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Matrix3>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Color3>(FormattedSerializeStream &, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Color4>(FormattedSerializeStream &, const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<std::chrono::nanoseconds>(FormattedSerializeStream &, const char *);
+
+
 
 }
 }

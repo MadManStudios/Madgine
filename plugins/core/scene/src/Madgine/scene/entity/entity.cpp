@@ -27,49 +27,49 @@ using namespace Engine::Serialize;
 static constexpr Serializer sComponentSynchronizer {
     "ComponentSynchronizer",
     nullptr,
-    [](const SerializableDataUnit *, FormattedSerializeStream &, const char *, Engine::CallerHierarchyBasePtr) {
+    [](const void *, FormattedSerializeStream &, const char *, Engine::CallerHierarchyBasePtr) {
     },
-    [](SerializableDataUnit *, FormattedSerializeStream &, const char *, Engine::CallerHierarchyBasePtr) -> StreamResult {
+    [](void *, FormattedSerializeStream &, const char *, Engine::CallerHierarchyBasePtr) -> StreamResult {
         throw 0;
         return {};
     },
-    [](SerializableDataUnit *unit, FormattedBufferedStream &in, PendingRequest &request) -> StreamResult {
+    [](void *unit, FormattedBufferedStream &in, PendingRequest &request) -> StreamResult {
         std::string name;
         STREAM_PROPAGATE_ERROR(read(in, name, "name"));
         auto it = Engine::Scene::Entity::EntityComponentRegistry::sComponentsByName().find(name);
         if (it == Engine::Scene::Entity::EntityComponentRegistry::sComponentsByName().end())
             return STREAM_INTEGRITY_ERROR(in) << "Received message for component '" << name << "', which is not registered.";
-        Engine::Scene::Entity::Entity *entity = static_cast<Engine::Scene::Entity::Entity *>(unit);
+        Engine::Scene::Entity::Entity *entity = unit_cast<Engine::Scene::Entity::Entity *>(unit);
         Engine::Scene::Entity::EntityComponentPtr<Engine::Scene::Entity::EntityComponentBase> component = entity->getComponent(it->second);
         if (!component)
             return STREAM_INTEGRITY_ERROR(in) << "Received message for component '" << name << "', which is not a component of this Entity.";
         SerializableDataPtr serializedComponent = component.getSerialized();
         return serializedComponent.mType->readAction(serializedComponent.unit(), in, request);
     },
-    [](SerializableDataUnit *, FormattedBufferedStream &, MessageId) -> StreamResult {
+    [](void *, FormattedBufferedStream &, MessageId) -> StreamResult {
         throw 0;
         return {};
     },
-    [](SerializableDataUnit *, FormattedSerializeStream &, bool, Engine::CallerHierarchyBasePtr) -> StreamResult {
+    [](void *, FormattedSerializeStream &, bool, Engine::CallerHierarchyBasePtr) -> StreamResult {
         return {};
     },
-    [](SerializableDataUnit *, bool) {
+    [](void *, bool, const Engine::CallerHierarchyBasePtr &hierarchy) {
     },
-    [](SerializableDataUnit *, bool, bool) {
+    [](void *, bool, bool) {
     },
-    [](SerializableDataUnit *) {
+    [](void *) {
     },
-    [](const SerializableDataUnit *unit, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *data) {
+    [](const void *unit, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *data) {
         Engine::Scene::Entity::EntityComponentActionPayload &payload = *static_cast<Engine::Scene::Entity::EntityComponentActionPayload *>(data);
         for (FormattedBufferedStream &stream : outStreams) {
             write(stream, Engine::Scene::Entity::EntityComponentRegistry::sComponentName(payload.mComponentIndex), "name");
         }
-        const Engine::Scene::Entity::Entity *entity = static_cast<const Engine::Scene::Entity::Entity *>(unit);
+        const Engine::Scene::Entity::Entity *entity = unit_cast<const Engine::Scene::Entity::Entity *>(unit);
         const SerializeTable *type = entity->sceneMgr().entityComponentList(payload.mComponentIndex).serializeTable();
         uint16_t index = type->getIndex(payload.mOffset);
         type->writeAction(payload.mComponent, index, outStreams, payload.mData);
     },
-    [](const SerializableDataUnit *, FormattedBufferedStream &out, void *) { throw 0; }
+    [](const void *, FormattedBufferedStream &out, void *) { throw 0; }
 };
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)
@@ -230,7 +230,7 @@ namespace Scene {
         {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Component", 1));
             std::string name;
-            STREAM_PROPAGATE_ERROR(read(in, name, "name"));
+            STREAM_PROPAGATE_ERROR(Serialize::readState(in, name, "name"));
             uint32_t i = EntityComponentRegistry::sComponentsByName().at(name);
             handle = sceneMgr().entityComponentList(i).emplace({}, this);
             return {};

@@ -128,7 +128,7 @@ namespace Scene {
 
             void setSynced(const EntityComponentHandle<EntityComponentBase> &index, bool synced) override final
             {
-                Serialize::setSynced(get_component(mData.at(index.mIndex)), synced);
+                Serialize::set_synced(get_component(mData.at(index.mIndex)), synced);
             }
 
             void setActive(const EntityComponentHandle<EntityComponentBase> &index, bool active, bool existenceChanged) override final

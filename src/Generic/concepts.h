@@ -75,9 +75,4 @@ concept DecayedNoneOf = NoneOf<std::decay_t<T>, Ty...>;
 template <typename T>
 concept Reference = std::is_reference_v<T> || InstanceOf<T, std::reference_wrapper>;
 
-template <typename T>
-concept Aggregate = std::is_aggregate_v<T> || requires {
-    typename T::is_aggregate;
-};
-
 }

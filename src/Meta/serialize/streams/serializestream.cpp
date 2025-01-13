@@ -9,6 +9,8 @@
 
 #include "Meta/base64/base64.h"
 
+#include "../hierarchy/serializableunitptr.h"
+
 namespace Engine {
 namespace Serialize {
 
@@ -149,14 +151,14 @@ namespace Serialize {
         return {};
     }
 
-    StreamResult SerializeStream::read(SerializableDataUnit *&p)
+    StreamResult SerializeStream::read(SerializableDataPtr &p)
     {
         uint32_t ptr;
         STREAM_PROPAGATE_ERROR(read(ptr));
         assert(ptr <= (std::numeric_limits<uint32_t>::max() >> 2));
         if (ptr)
             ptr = (ptr << 2) | static_cast<uint32_t>(UnitIdTag::SERIALIZABLE);
-        p = reinterpret_cast<SerializableDataUnit *>(ptr);
+        p.mUnit = reinterpret_cast<void *>(ptr);
         return {};
     }
 
@@ -171,14 +173,14 @@ namespace Serialize {
         return {};
     }
 
-    StreamResult SerializeStream::operator>>(SerializableDataUnit *&p)
+    StreamResult SerializeStream::operator>>(SerializableDataPtr &p)
     {
         uint32_t ptr;
         STREAM_PROPAGATE_ERROR(operator>>(ptr));
         assert(ptr <= (std::numeric_limits<uint32_t>::max() >> 2));
         if (ptr)
             ptr = (ptr << 2) | static_cast<uint32_t>(UnitIdTag::SERIALIZABLE);
-        p = reinterpret_cast<SerializableDataUnit *>(ptr);
+        p.mUnit = reinterpret_cast<void *>(ptr);
         return {};
     }
 
@@ -225,7 +227,7 @@ namespace Serialize {
         Stream::write(SerializeManager::convertPtr(*this, p));
     }
 
-    void SerializeStream::write(const SerializableDataUnit *p)
+    void SerializeStream::write(SerializableDataConstPtr p)
     {
         uint32_t id = 0;
         if (p) {
@@ -241,7 +243,7 @@ namespace Serialize {
         Stream::operator<<(SerializeManager::convertPtr(*this, p));
         return *this;
     }
-    SerializeStream &SerializeStream::operator<<(const SerializableDataUnit *p)
+    SerializeStream &SerializeStream::operator<<(SerializableDataConstPtr p)
     {
         uint32_t id = 0;
         if (p) {

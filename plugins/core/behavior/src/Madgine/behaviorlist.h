@@ -2,10 +2,11 @@
 
 #include "behaviorhandle.h"
 #include "parametertuple.h"
+#include "behavior.h"
 
 namespace Engine {
 
-struct MADGINE_BEHAVIOR_EXPORT BehaviorList : Serialize::SerializableDataUnit {
+struct MADGINE_BEHAVIOR_EXPORT BehaviorList {
 
     void addBehavior(BehaviorHandle handle);
 
@@ -16,7 +17,7 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorList : Serialize::SerializableDataUnit {
         }
     }
 
-    struct Entry : Serialize::SerializableDataUnit {
+    struct Entry {
         Entry(BehaviorHandle handle);
 
         BehaviorHandle mHandle;

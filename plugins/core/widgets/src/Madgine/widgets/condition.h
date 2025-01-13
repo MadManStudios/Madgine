@@ -2,8 +2,6 @@
 
 #include "Generic/enum.h"
 
-#include "Meta/serialize/hierarchy/serializabledataunit.h"
-
 namespace Engine {
 namespace Widgets {
     
@@ -20,7 +18,7 @@ namespace Widgets {
         GREATER_OR_EQUAL,
         LESS_OR_EQUAL);
         
-    struct Condition : Serialize::SerializableDataUnit {
+    struct Condition {
         std::string mName;
 
         Formula mFormula;

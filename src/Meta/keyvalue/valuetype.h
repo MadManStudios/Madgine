@@ -78,8 +78,8 @@ struct META_EXPORT ValueType {
     bool operator==(const V &v) const
     {
         return visit([&]<typename U>(const U &u) {
-            if constexpr (has_operator_Equal<U, V>)
-                return u == v;
+            if constexpr (has_operator_Equal<V, U>)
+                return v == u;
             else
                 return false;
         });

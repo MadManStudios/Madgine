@@ -136,6 +136,11 @@ namespace Filesystem {
 
         size_t size = fileSize.QuadPart;
 
+        if (size == 0) {
+            set_value({});
+            return;
+        }
+
         std::unique_ptr<void, Functor<sFreeBuffer>> buffer { VirtualAlloc(NULL, size, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE) };
 
         assert(buffer);

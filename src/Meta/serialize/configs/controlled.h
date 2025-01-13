@@ -30,12 +30,12 @@ namespace Serialize {
 
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Item", 1));
             MakeOwning_t<typename comparator_traits<Cmp>::type> key;
-            STREAM_PROPAGATE_ERROR(read(in, key, "key"));
+            STREAM_PROPAGATE_ERROR(readState(in, key, "key"));
             it = std::ranges::find(physical(op), key, &comparator_traits<Cmp>::to_cmp_type);
             if (it == physical(op).end())
                 return STREAM_UNKNOWN_ERROR(in) << "Missing item of name '" << key << "' in controlled container";
 
-            return read(in, *it, "Item");
+            return readState(in, *it, "Item");
         }
 
         template <typename C>
@@ -51,7 +51,7 @@ namespace Serialize {
                 const SerializeTable *type = nullptr;
                 STREAM_PROPAGATE_ERROR(staticTypeResolve(type, key));
                 assert(type);
-                return visitor.visit(PrimitiveHolder<SerializableDataUnit> {type}, in, "Item", {});                
+                return visitor.visit(PrimitiveHolder<SerializableDataPtr> { type }, in, "Item", {});                
             }            
         }
 

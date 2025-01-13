@@ -59,7 +59,7 @@ namespace Serialize {
     {
         if (out.isMaster(AccessMode::WRITE) && out.data() && !(flags & StateTransmissionFlags_SkipId)) {
             out.beginExtendedWrite(name, 1);
-            write(out, mMasterId, "syncId");
+            Serialize::writeState(out, mMasterId, "syncId");
         }
         customUnitPtr().writeState(out, name, hierarchy, flags | StateTransmissionFlags_SkipId);
     }
@@ -69,18 +69,13 @@ namespace Serialize {
         if (!in.isMaster(AccessMode::READ) && in.data() && !(flags & StateTransmissionFlags_SkipId)) {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
             UnitId id;
-            STREAM_PROPAGATE_ERROR(read(in, id, "syncId"));
+            STREAM_PROPAGATE_ERROR(Serialize::readState(in, id, "syncId"));
 
             if (in.manager() && in.manager()->getSlaveStreamData() == in.data()) {
                 setSlaveId(id, in.manager());
             }
         }
         return customUnitPtr().readState(in, name, hierarchy, flags | StateTransmissionFlags_SkipId);
-    }
-
-    StreamResult SyncableUnitBase::applyMap(FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy)
-    {
-        return mType->applyMap(this, in, success, hierarchy);
     }
 
     void SyncableUnitBase::setActive(bool active, bool existenceChanged)
@@ -316,7 +311,7 @@ namespace Serialize {
     {
         uint16_t index = mType->getIndex(offset);
         std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> streams = getMasterActionMessageTargets(this, answerTarget, answerId, targets);
-        mType->writeAction(this, index, streams, data);
+        mType->writeAction(static_cast<const SerializableUnitBase*>(this), index, streams, data);
         for (FormattedBufferedStream &stream : streams)
             stream.endMessageWrite();
     }
@@ -325,7 +320,7 @@ namespace Serialize {
     {
         uint16_t index = mType->getIndex(offset);
         FormattedBufferedStream &stream = getSlaveRequestMessageTarget(this);
-        mType->writeRequest(this, index, stream, data);
+        mType->writeRequest(static_cast<const SerializableUnitBase *>(this), index, stream, data);
         stream.endMessageWrite(requester, requesterTransactionId, std::move(receiver));
     }
 
@@ -337,6 +332,11 @@ namespace Serialize {
             mType->writeAction(this, index, { stream }, data);
             stream.endMessageWrite();
         }
+    }
+
+    StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, FormattedSerializeStream &in, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
+    {
+        return unit.mType->applyMap(&unit, in, success, hierarchy);
     }
 
 }

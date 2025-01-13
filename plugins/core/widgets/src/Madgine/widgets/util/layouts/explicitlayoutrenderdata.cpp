@@ -10,6 +10,11 @@ MEMBER(mSizingPolicy)
 MEMBER(mFactor)
 METATABLE_END(Engine::Widgets::ExplicitLayoutConfig)
 
+SERIALIZETABLE_BEGIN(Engine::Widgets::ExplicitLayoutConfig)
+FIELD(mSizingPolicy)
+FIELD(mFactor)
+SERIALIZETABLE_END(Engine::Widgets::ExplicitLayoutConfig)
+
 namespace Engine {
 namespace Widgets {
 

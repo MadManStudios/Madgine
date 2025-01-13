@@ -47,6 +47,16 @@
 
 RESOURCELOADER(Engine::Render::FontLoader)
 
+SERIALIZETABLE_BEGIN(Engine::Rect2i)
+FIELD(mTopLeft)
+FIELD(mSize)
+SERIALIZETABLE_END(Engine::Rect2i)
+
+SERIALIZETABLE_BEGIN(Engine::Atlas2::Entry)
+FIELD(mArea)
+FIELD(mFlipped)
+SERIALIZETABLE_END(Engine::Atlas2::Entry)
+
 namespace Engine {
 namespace Render {
 

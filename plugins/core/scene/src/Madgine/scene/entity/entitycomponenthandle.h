@@ -199,6 +199,16 @@ namespace Scene {
             {
                 mHandle.relocate(index);
             }
+
+            friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t&, Scene::Entity::EntityComponentOwningHandle<T> &handle, Serialize::FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy)
+            {
+                return entityComponentOwningHelperApplyMap(in, handle.mHandle, success, hierarchy);
+            }
+
+            friend void tag_invoke(const Serialize::set_synced_t &, Scene::Entity::EntityComponentOwningHandle<T> &handle, bool synced, CallerHierarchyBasePtr hierarchy)
+            {
+                entityComponentOwningHelperSetSynced(handle.mHandle, synced, hierarchy);
+            }
         };
 
     }
@@ -223,15 +233,6 @@ namespace Serialize {
         static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
         {
             return SerializableDataPtr::visitStream<T>(in, name, visitor);
-        }
-
-        static StreamResult applyMap(FormattedSerializeStream& in, Scene::Entity::EntityComponentOwningHandle<T>& handle, bool success, CallerHierarchyBasePtr hierarchy) {
-            return entityComponentOwningHelperApplyMap(in, handle.mHandle, success, hierarchy);
-        }
-
-        static void setSynced(Scene::Entity::EntityComponentOwningHandle<T> &handle, bool synced, CallerHierarchyBasePtr hierarchy)
-        {
-            entityComponentOwningHelperSetSynced(handle.mHandle, synced, hierarchy);
         }
 
         static void setActive(Scene::Entity::EntityComponentOwningHandle<T> &handle, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy)

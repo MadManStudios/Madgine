@@ -55,7 +55,6 @@ using KeyValueVirtualSequenceRange = VirtualRange<ValueType, Functor_to_ValueTyp
 
 namespace Serialize {
     struct SerializeStream;
-    struct SerializableDataUnit;
     struct SerializableUnitBase;
     struct SyncableUnitBase;
     struct TopLevelUnitBase;
@@ -114,8 +113,8 @@ namespace Serialize {
     struct SerializeTable;
 
     using SyncableUnitMap = std::map<UnitId, SyncableUnitBase *>;
-    using SerializableUnitMap = std::map<const SerializableDataUnit *, uint32_t>;
-    using SerializableUnitList = std::vector<SerializableDataUnit *>;
+    using SerializableUnitMap = std::map<SerializableDataConstPtr, uint32_t>;
+    using SerializableUnitList = std::vector<SerializableDataPtr>;
 
     struct SerializableMapHolder;
     struct SerializableListHolder;
@@ -153,10 +152,11 @@ namespace Serialize {
         struct SyncFunctionTable;
     }
 
+    struct apply_map_t;
+    struct set_synced_t;
+
     template <typename T, typename... Configs>
     void setActive(T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {});
-    template <typename T, typename... Configs>
-    void setSynced(T &t, bool b, CallerHierarchyBasePtr hierarchy = {});
     template <typename T, typename... Configs>
     StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
 

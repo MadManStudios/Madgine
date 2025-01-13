@@ -78,7 +78,7 @@ namespace Scene {
     {
         STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Entity", 1));
         mgr = *this;
-        return read(in, name, "name");
+        return Serialize::readState(in, name, "name");
     }
 
     std::tuple<SceneContainer &, std::string> SceneContainer::createEntityData(const std::string &name)

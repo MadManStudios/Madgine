@@ -7,12 +7,12 @@
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>-1</Element>
-                            <Element>0</Element>
-                            <Element>1</Element>
-                        </Element>
+                    <Item serId=3>
+                        <mSource serId=4>
+                            <mNode>-1</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>1</mGroup>
+                        </mSource>
                     </Item>
                 </Item>
             </mDataInPins>
@@ -21,35 +21,35 @@
                 </Item>
             </mDataOutPins>
         </Node>
-        <Node type="Connect" serId=3>
+        <Node type="Connect" serId=5>
             <mFlowOutPins>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>-1</Element>
-                            <Element>0</Element>
-                            <Element>0</Element>
-                        </Element>
+                    <Item serId=6>
+                        <mTarget serId=7>
+                            <mNode>-1</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
                     </Item>
                 </Item>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>4</Element>
-                            <Element>0</Element>
-                            <Element>0</Element>
-                        </Element>
+                    <Item serId=8>
+                        <mTarget serId=9>
+                            <mNode>4</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
                     </Item>
                 </Item>
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>1</Element>
-                            <Element>0</Element>
-                            <Element>0</Element>
-                        </Element>
+                    <Item serId=10>
+                        <mSource serId=11>
+                            <mNode>1</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
                     </Item>
                 </Item>
             </mDataInPins>
@@ -58,20 +58,20 @@
                 </Item>
             </mDataOutPins>
         </Node>
-        <Node type="Native/play_sound" serId=4>
+        <Node type="Native/play_sound" serId=12>
             <mParameters>
-                <Item serId=5>
+                <Item serId=13>
                     <Name>sample</Name>
                 </Item>
             </mParameters>
             <mFlowOutPins>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>-1</Element>
-                            <Element>-1</Element>
-                            <Element>0</Element>
-                        </Element>
+                    <Item serId=14>
+                        <mTarget serId=15>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
                     </Item>
                 </Item>
             </mFlowOutPins>
@@ -86,35 +86,35 @@
                 </Item>
             </mDataOutPins>
         </Node>
-        <Node type="StopWhen" serId=6>
+        <Node type="StopWhen" serId=16>
             <mFlowOutPins>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>-1</Element>
-                            <Element>-1</Element>
-                            <Element>0</Element>
-                        </Element>
+                    <Item serId=17>
+                        <mTarget serId=18>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
                     </Item>
                 </Item>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>3</Element>
-                            <Element>0</Element>
-                            <Element>0</Element>
-                        </Element>
+                    <Item serId=19>
+                        <mTarget serId=20>
+                            <mNode>3</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
                     </Item>
                 </Item>
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>5</Element>
-                            <Element>0</Element>
-                            <Element>0</Element>
-                        </Element>
+                    <Item serId=21>
+                        <mSource serId=22>
+                            <mNode>5</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
                     </Item>
                 </Item>
             </mDataInPins>
@@ -123,19 +123,19 @@
                 </Item>
             </mDataOutPins>
         </Node>
-        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerLeave" serId=7>
+        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerLeave" serId=23>
             <mFlowOutPins>
                 <Item>
                 </Item>
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item>
-                        <Element>
-                            <Element>-1</Element>
-                            <Element>0</Element>
-                            <Element>1</Element>
-                        </Element>
+                    <Item serId=24>
+                        <mSource serId=25>
+                            <mNode>-1</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>1</mGroup>
+                        </mSource>
                     </Item>
                 </Item>
             </mDataInPins>
@@ -146,24 +146,24 @@
         </Node>
     </mNodes>
     <mFlowOutPins>
-        <Item>
-            <Element>
-                <Element>2</Element>
-                <Element>0</Element>
-                <Element>0</Element>
-            </Element>
+        <Item serId=26>
+            <mTarget serId=27>
+                <mNode>2</mNode>
+                <mIndex>0</mIndex>
+                <mGroup>0</mGroup>
+            </mTarget>
         </Item>
     </mFlowOutPins>
     <mDataInPins>
     </mDataInPins>
     <mDataOutPins>
     </mDataOutPins>
-    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":203,"y":-183}},"node:180000":{"location":{"x":566,"y":-61}},"node:2147483645":{"location":{"x":310,"y":-601}},"node:2147483646":{"location":{"x":17,"y":-601}},"node:240000":{"location":{"x":396,"y":-89}},"node:300000":{"location":{"x":28,"y":-61}},"node:60000":{"location":{"x":27,"y":-141}}},"selection":["node:2147483646"],"view":{"scroll":{"x":17.1410102844238281,"y":-600.42333984375},"visible_rect":{"max":{"x":334.141021728515625,"y":-9.42333984375},"min":{"x":17.1410102844238281,"y":-600.42333984375}},"zoom":1}}</mLayoutData>
+    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":203,"y":-183}},"node:180000":{"location":{"x":566,"y":-61}},"node:2147483645":{"location":{"x":331,"y":-601}},"node:2147483646":{"location":{"x":-5,"y":-601}},"node:240000":{"location":{"x":396,"y":-89}},"node:300000":{"location":{"x":28,"y":-61}},"node:60000":{"location":{"x":27,"y":-141}}},"selection":["node:2147483646"],"view":{"scroll":{"x":-4.45337295532226562,"y":-598.39141845703125},"visible_rect":{"max":{"x":355.750518798828125,"y":-9.42330741882324219},"min":{"x":-4.46849441528320312,"y":-600.42327880859375}},"zoom":0.996615886688232422}}</mLayoutData>
     <mInputBindings>
-        <Item serId=8>
-            <mDescriptor>
-                <Element>Widget</Element>
-                <Element>Engine::Widgets::WidgetBase*</Element>
+        <Item serId=28>
+            <mDescriptor serId=29>
+                <mName>Widget</mName>
+                <mType>Engine::Widgets::WidgetBase*</mType>
             </mDescriptor>
         </Item>
     </mInputBindings>

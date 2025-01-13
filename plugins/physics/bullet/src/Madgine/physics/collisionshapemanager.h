@@ -43,6 +43,10 @@ namespace Physics {
 
             friend struct Serialize::Operations<InstanceHandle>;
 
+            friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, InstanceHandle& handle, Serialize::FormattedSerializeStream&, bool success, const CallerHierarchyBasePtr&) {
+                return {};
+            }
+
         private:
             CollisionShapeInstancePtr mInstance;
         };

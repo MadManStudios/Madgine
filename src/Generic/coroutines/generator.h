@@ -10,6 +10,8 @@ struct Generator {
 
     struct promise_type {
 
+        promise_type() = default;
+
         Generator get_return_object()
         {
             return { CoroutineHandle<promise_type>::fromPromise(*this) };
@@ -43,7 +45,7 @@ struct Generator {
     Generator(CoroutineHandle<promise_type> handle)
         : mHandle(std::move(handle))
     {
-    }
+    }    
 
     Generator(Generator &&) = default;
 
