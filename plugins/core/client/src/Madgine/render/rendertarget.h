@@ -5,8 +5,6 @@
 #include "Madgine/render/vertex.h"
 #include "renderdata.h"
 
-#include "Generic/bits/array.h"
-
 namespace Engine {
 namespace Render {
 

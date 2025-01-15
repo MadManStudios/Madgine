@@ -183,7 +183,7 @@ namespace Tools {
     bool Python3ImmediateWindow::interpret(std::string_view command)
     {
         Execution::detach(mEnv->execute(command)
-            | Log::log_error()
+            | Log::log_result()
             | Execution::finally([this]() {
                   mPrompt->resume();
               })

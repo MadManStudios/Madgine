@@ -526,7 +526,7 @@ namespace Tools {
 
                 if (ImGui::MenuItem("Debug", "", false)) {
                     Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-                    Execution::detach(Behavior { mGraph.interpret() } | Execution::then([](ArgumentList) { LOG("SUCCESS"); }) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_error());
+                    Execution::detach(Behavior { mGraph.interpret() } | Execution::then([](ArgumentList) { LOG("SUCCESS"); }) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_result());
                 }
 
                 ImGui::Separator();

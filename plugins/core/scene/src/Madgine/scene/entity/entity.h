@@ -101,7 +101,7 @@ namespace Scene {
             template <typename Sender>
             void addBehavior(Sender &&sender)
             {
-                mLifetime.attach(std::forward<Sender>(sender) | Log::log_error());                
+                mLifetime.attach(std::forward<Sender>(sender) | Log::log_result());                
             }
 
             void handleEntityEvent(const typename std::set<EntityComponentOwningHandle<EntityComponentBase>>::iterator &it, int op);

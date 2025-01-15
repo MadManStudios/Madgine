@@ -39,7 +39,7 @@ namespace Scene {
 
             friend struct Serialize::Operations<EntityPtr>;
 
-            META_EXPORT friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &unit, Serialize::FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy);
+            friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &unit, Serialize::FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy);
 
 
         private:

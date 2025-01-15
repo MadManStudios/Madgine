@@ -233,7 +233,7 @@ namespace Execution {
 
                     location->mIndex += operation_increment;
 
-                    location->pass([=](Debug::ContinuationMode mode, V &&...value) mutable {
+                    location->pass([=, this](Debug::ContinuationMode mode, V &&...value) mutable {
                         location->mIndex += stop_increment;
                         switch (mode) {
                         case Debug::ContinuationMode::Continue:
@@ -257,7 +257,7 @@ namespace Execution {
 
                     location->mIndex += operation_increment;
 
-                    location->pass([=](Debug::ContinuationMode mode) {
+                    location->pass([=, this](Debug::ContinuationMode mode) {
                         location->mIndex += stop_increment;
                         this->mRec.set_done();
                     },
@@ -275,7 +275,7 @@ namespace Execution {
 
                     location->mIndex += operation_increment;
 
-                    location->pass([=](Debug::ContinuationMode mode, R &&...result) mutable {
+                    location->pass([=, this](Debug::ContinuationMode mode, R &&...result) mutable {
                         location->mIndex += stop_increment;
                         switch (mode) {                        
                         case Debug::ContinuationMode::Continue:
@@ -314,7 +314,7 @@ namespace Execution {
                 if constexpr (increment == 0) {
                     mState.start();
                 } else {
-                    location->pass([=](Debug::ContinuationMode mode) {
+                    location->pass([=, this](Debug::ContinuationMode mode) {
                         location->mIndex += increment;
                         mState.start();
                     },

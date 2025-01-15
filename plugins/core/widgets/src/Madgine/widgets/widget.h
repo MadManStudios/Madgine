@@ -149,7 +149,7 @@ namespace Widgets {
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {            
-            lifetime().attach(std::forward<Sender>(sender) | with_constant_binding<"Widget">(this) | Log::log_error());
+            lifetime().attach(std::forward<Sender>(sender) | with_constant_binding<"Widget">(this) | Log::log_result());
         }
         Debug::DebuggableLifetime<> &lifetime();
 

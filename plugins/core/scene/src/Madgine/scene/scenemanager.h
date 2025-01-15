@@ -62,7 +62,7 @@ namespace Scene {
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {
-            mLifetime.attach(std::forward<Sender>(sender) | with_constant_binding<"Scene">(this) | Log::log_error());
+            mLifetime.attach(std::forward<Sender>(sender) | with_constant_binding<"Scene">(this) | Log::log_result());
         }
 
         void addAnimation(Entity::AnimationState *animation);
