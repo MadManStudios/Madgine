@@ -2,8 +2,6 @@
 
 #include "task.h"
 
-#include "customclock.h"
-
 #if ENABLE_TASK_TRACKING
 #    include "../debug/tasktracking/tasktracker.h"
 #endif

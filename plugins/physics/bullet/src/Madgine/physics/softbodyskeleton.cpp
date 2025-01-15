@@ -84,8 +84,7 @@ namespace Physics {
         std::unique_ptr<btSoftBody> mSoftBody;
     };
 
-    SoftBodySkeleton::SoftBodySkeleton(const ObjectPtr &data)
-        : NamedComponent(data)
+    SoftBodySkeleton::SoftBodySkeleton()
     {
         mData = std::make_unique<Data>();
     }

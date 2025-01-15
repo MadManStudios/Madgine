@@ -1,7 +1,7 @@
 #include "../metalib.h"
 
 #include "scopeiterator.h"
-#include "typedscopeptr.h"
+#include "scopeptr.h"
 #include "scopefield.h"
 
 #include "metatable.h"

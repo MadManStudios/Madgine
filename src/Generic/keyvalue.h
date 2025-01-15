@@ -1,7 +1,6 @@
 #pragma once
 
 #include "comparator_traits.h"
-#include "functor.h"
 
 namespace Engine {
 

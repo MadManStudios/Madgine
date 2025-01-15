@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/type_pack.h"
-
 namespace Engine {
 namespace Serialize {
 

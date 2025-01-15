@@ -15,6 +15,46 @@ namespace Window {
         float mScalingFactor;
     };
 
+    
+    struct NoEvent { };
+
+    struct ResizeEvent {
+        InterfacesVector mSize;
+    };
+
+    struct CloseEvent {
+    };
+
+    struct RepaintEvent {
+    };
+
+    struct KeyPressEvent {
+        Input::KeyEventArgs mEvent;
+    };
+
+    struct KeyReleaseEvent {
+        Input::KeyEventArgs mEvent;
+    };
+
+    struct PointerPressEvent {
+        Input::PointerEventArgs mEvent;
+    };
+
+    struct PointerReleaseEvent {
+        Input::PointerEventArgs mEvent;
+    };
+
+    struct PointerMoveEvent {
+        Input::PointerEventArgs mEvent;
+    };
+
+    struct AxisEvent {
+        Input::AxisEventArgs mEvent;
+    };
+
+    using WindowEvent = std::variant<NoEvent, ResizeEvent, CloseEvent, RepaintEvent, KeyPressEvent, KeyReleaseEvent, PointerPressEvent, PointerReleaseEvent, PointerMoveEvent, AxisEvent>;
+
+
     INTERFACES_EXPORT extern const PlatformCapabilities platformCapabilities;
 
     struct INTERFACES_EXPORT OSWindow {

@@ -5,6 +5,8 @@
 
 #include "Madgine/nativebehaviorcollector.h"
 
+#include "Generic/execution/stop_callback.h"
+
 namespace Engine {
 namespace Scene {
     namespace Entity {

@@ -19,7 +19,7 @@
 
 #include "objectptr.h"
 
-#include "typedscopeptr.h"
+#include "scopeptr.h"
 
 #include "ownedscopeptr.h"
 

@@ -5,8 +5,6 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 #include "Madgine/skeletonloader/skeletondescriptor.h"
 
 #include "Madgine/resources/resourcemanager.h"
@@ -26,15 +24,6 @@ SERIALIZETABLE_END(Engine::Scene::Entity::Skeleton)
 namespace Engine {
 namespace Scene {
     namespace Entity {
-
-        Skeleton::Skeleton(const ObjectPtr &data)
-            : NamedComponent(data)
-        {
-            Engine::ValueType v;
-            if (data.getValue(v, "skeleton") && v.is<std::string>()) {
-                setName(v.as<std::string>());
-            }
-        }
 
         const Render::SkeletonDescriptor *Skeleton::data() const
         {

@@ -2,7 +2,7 @@
 
 #include "Generic/container/container_api.h"
 #include "Generic/container/freelistcontainer.h"
-#include "Meta/keyvalue/typedscopeptr.h"
+#include "Meta/keyvalue/scopeptr.h"
 #include "Meta/serialize/hierarchy/serializableunitptr.h"
 #include "entitycomponentcollector.h"
 #include "entitycomponentcontainer.h"
@@ -98,9 +98,9 @@ namespace Scene {
                 return get_entity_ptr(mData.at(index));
             }
 
-            EntityComponentOwningHandle<EntityComponentBase> emplace(const ObjectPtr &table, Entity *entity) override final
+            EntityComponentOwningHandle<EntityComponentBase> emplace(Entity *entity) override final
             {   
-                typename Vector::iterator it = Engine::emplace(mData, mData.end(), table, entity);
+                typename Vector::iterator it = Engine::emplace(mData, mData.end(), T{}, entity);
                 uint32_t index = container_traits<Vector>::toHandle(mData, it);
                 return { { index, static_cast<uint32_t>(UniqueComponent::component_index<T>()) } };
             }

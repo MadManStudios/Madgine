@@ -1,6 +1,5 @@
 #pragma once
 
-#include "auto_pack.h"
 #include "callable_traits.h"
 #include "defaultassign.h"
 

@@ -19,20 +19,14 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        EntityComponentBase::EntityComponentBase(const ObjectPtr &initTable)
-        {
-        }
-
-        SyncableEntityComponentBase::SyncableEntityComponentBase(const ObjectPtr &initTable)
-            : EntityComponentBase(initTable)
+        SyncableEntityComponentBase::SyncableEntityComponentBase()
         {
             //This should never be thrown. Provide an Entity* to your component.
             throw 0;
         }
 
-        SyncableEntityComponentBase::SyncableEntityComponentBase(const ObjectPtr &initTable, Entity *entity)
-            : EntityComponentBase(initTable)
-            , mEntity(entity)
+        SyncableEntityComponentBase::SyncableEntityComponentBase(Entity *entity)
+            :mEntity(entity)
         {
         }
 

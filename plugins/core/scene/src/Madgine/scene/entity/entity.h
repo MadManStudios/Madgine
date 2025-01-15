@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Meta/keyvalue/objectptr.h"
-
 #include "Meta/serialize/container/serializablecontainer.h"
 
 #include "Meta/serialize/hierarchy/syncableunit.h"
@@ -16,11 +14,7 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
-#include "Madgine/debug/debuggablesender.h"
-
 #include "Interfaces/log/logsenders.h"
-
-#include "Madgine/behavior.h"
 
 #include "Madgine/behaviorlist.h"
 
@@ -51,9 +45,9 @@ namespace Scene {
             const std::string &name() const;
 
             template <typename T>
-            EntityComponentPtr<T> addComponent(const ObjectPtr &table = {})
+            EntityComponentPtr<T> addComponent()
             {
-                return EntityComponentPtr<T> { addComponent(UniqueComponent::component_index<T>(), table) };
+                return EntityComponentPtr<T> { addComponent(UniqueComponent::component_index<T>()) };
             }
 
             template <typename T>
@@ -97,8 +91,8 @@ namespace Scene {
             bool hasComponent(size_t i);
             bool hasComponent(std::string_view name);
 
-            EntityComponentPtr<EntityComponentBase> addComponent(std::string_view name, const ObjectPtr &table = {});
-            EntityComponentPtr<EntityComponentBase> addComponent(size_t i, const ObjectPtr &table = {});
+            EntityComponentPtr<EntityComponentBase> addComponent(std::string_view name);
+            EntityComponentPtr<EntityComponentBase> addComponent(size_t i);
             void removeComponent(std::string_view name);
             void removeComponent(size_t i);
             void clearComponents();

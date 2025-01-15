@@ -25,17 +25,6 @@ SERIALIZETABLE_END(Engine::Scene::Entity::Mesh)
 namespace Engine {
 namespace Scene {
     namespace Entity {
-        Mesh::Mesh(const ObjectPtr &data)
-            : NamedComponent(data)
-        {
-            Engine::ValueType v;
-            if (data.getValue(v, "mesh") && v.is<std::string>()) {
-                setName(v.as<std::string>());
-            }
-            if (data.getValue(v, "material") && v.is<int>()) {
-                setMaterial(v.as<int>());
-            }
-        }
 
         const Render::GPUMeshData *Mesh::data() const
         {

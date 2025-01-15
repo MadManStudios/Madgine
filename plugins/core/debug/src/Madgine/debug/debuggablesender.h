@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Generic/execution/statedescriptor.h"
-#include "debugger.h"
+#include "debuglocation.h"
+#include "Generic/callable_view.h"
 //#include "Meta/keyvalue/valuetype.h"
 
 namespace Engine {

@@ -167,18 +167,18 @@ namespace Scene {
             return hasComponent(EntityComponentRegistry::sComponentsByName().at(name));
         }
 
-        EntityComponentPtr<EntityComponentBase> Entity::addComponent(std::string_view name, const ObjectPtr &table)
+        EntityComponentPtr<EntityComponentBase> Entity::addComponent(std::string_view name)
         {
-            return addComponent(EntityComponentRegistry::sComponentsByName().at(name), table);
+            return addComponent(EntityComponentRegistry::sComponentsByName().at(name));
         }
 
-        EntityComponentPtr<EntityComponentBase> Entity::addComponent(size_t i, const ObjectPtr &table)
+        EntityComponentPtr<EntityComponentBase> Entity::addComponent(size_t i)
         {
             auto it = mComponents.physical().find(i);
             if (it != mComponents.physical().end()) {
                 return { *it, &sceneMgr() };
             } else {
-                auto it = mComponents.emplace(sceneMgr().entityComponentList(i).emplace(table, this));
+                auto it = mComponents.emplace(sceneMgr().entityComponentList(i).emplace(this));
                 return EntityComponentPtr<EntityComponentBase> { *it, &sceneMgr() };
             }
         }
@@ -232,7 +232,7 @@ namespace Scene {
             std::string name;
             STREAM_PROPAGATE_ERROR(Serialize::readState(in, name, "name"));
             uint32_t i = EntityComponentRegistry::sComponentsByName().at(name);
-            handle = sceneMgr().entityComponentList(i).emplace({}, this);
+            handle = sceneMgr().entityComponentList(i).emplace(this);
             return {};
         }
 

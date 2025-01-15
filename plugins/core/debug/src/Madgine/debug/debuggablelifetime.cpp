@@ -8,6 +8,8 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
+#include "debugger.h"
+
 METATABLE_BEGIN(Engine::Debug::DebuggableLifetimeBase)
 READONLY_PROPERTY(Owner, owner)
 READONLY_PROPERTY(Children, children)
@@ -85,6 +87,12 @@ namespace Debug {
     const std::vector<std::reference_wrapper<ContextInfo>> &DebuggableLifetimeBase::debugContexts()
     {
         return mDebugContexts;
+    }
+
+    ParentLocation* DebuggableLifetimeBase::createContext() {
+        ContextInfo &context = Debugger::getSingleton().createContext();
+        mDebugContexts.emplace_back(context);
+        return &context;
     }
 
 }

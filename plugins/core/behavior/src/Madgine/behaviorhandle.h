@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Modules/uniquecomponent/uniquecomponent.h"
-#include "Modules/uniquecomponent/uniquecomponentdefine.h"
-
 #include "Modules/threading/taskfuture.h"
 
 #include "Generic/opaqueptr.h"

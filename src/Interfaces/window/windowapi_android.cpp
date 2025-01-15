@@ -357,12 +357,12 @@ namespace Window {
     {
     }
 
-    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
+    OSWindow *sCreateWindow(const WindowSettings &settings)
     {
         sNativeWindow.wait();
 
         assert(!sWindow);
-        sWindow.emplace(sNativeWindow, listener);
+        sWindow.emplace(sNativeWindow);
 
         return &*sWindow;
     }

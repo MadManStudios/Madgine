@@ -9,7 +9,7 @@
 
 #include "Meta/math/matrix3.h"
 
-#include "Meta/keyvalue/typedscopeptr.h"
+#include "Meta/keyvalue/scopeptr.h"
 
 #include "Meta/keyvalue/boundapifunction.h"
 

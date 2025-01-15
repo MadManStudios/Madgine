@@ -18,7 +18,7 @@
 #include "util/pyobjectutil.h"
 #include "util/pyownedscopeptr.h"
 #include "util/pyscopeiterator.h"
-#include "util/pytypedscopeptr.h"
+#include "util/pyscopeptr.h"
 #include "util/pyvirtualiterator.h"
 #include "util/pyvirtualrange.h"
 #include "util/pysender.h"

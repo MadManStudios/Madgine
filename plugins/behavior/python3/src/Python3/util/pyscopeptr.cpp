@@ -1,6 +1,6 @@
 #include "../python3lib.h"
 
-#include "pytypedscopeptr.h"
+#include "pyscopeptr.h"
 
 #include "Meta/keyvalue/scopeiterator.h"
 

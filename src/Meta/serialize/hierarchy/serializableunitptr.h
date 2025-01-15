@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/callerhierarchy.h"
-#include "Generic/closure.h"
 #include "serializetable_forward.h"
 
 #include "../streams/streamresult.h"

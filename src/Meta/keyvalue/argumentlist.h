@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/container/emplace.h"
-
 namespace Engine {
 
 struct META_EXPORT ArgumentList {

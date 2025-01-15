@@ -2,18 +2,6 @@
 
 #include "behaviorerror.h"
 
-#include "Generic/execution/virtualsender.h"
-
-#include "Generic/execution/sender.h"
-
-#include "Meta/keyvalue/virtualscope.h"
-
-#include "Generic/execution/algorithm.h"
-
-#include "bindings.h"
-
-//#include "Meta/keyvalue/valuetype.h"
-
 #include "Interfaces/debug/stacktrace.h"
 
 #include "Generic/delayedconstruct.h"
@@ -21,6 +9,8 @@
 #include "Madgine/debug/debuggablesender.h"
 
 #include "behaviorreceiver.h"
+
+#include "Generic/functor.h"
 
 namespace Engine {
 

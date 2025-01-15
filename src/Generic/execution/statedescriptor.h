@@ -2,8 +2,6 @@
 
 #include "algorithm.h"
 
-#include "../callable_view.h"
-
 namespace Engine {
 namespace Execution {
 

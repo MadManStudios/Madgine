@@ -609,16 +609,6 @@ namespace NodeGraph {
         return node(target.mNode)->dataOutName(target.mIndex, target.mGroup);
     }
 
-    ExtendedValueTypeDesc NodeGraph::resolveVariableType(std::string_view name) const
-    {
-        ExtendedValueTypeDesc type = { ExtendedValueTypeEnum::GenericType };
-        for (const std::unique_ptr<NodeBase> &node : mNodes) {
-            if (node->resolveVariableType(type, name))
-                return type;
-        }
-        return type;
-    }
-
     void NodeGraph::connectFlow(Pin source, Pin target)
     {
         if (!target.mNode) {

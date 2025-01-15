@@ -1,9 +1,5 @@
 #pragma once
 
-#include "../tag_invoke.h"
-
-#include "../fixed_string.h"
-
 namespace Engine {
 namespace Execution {
 
@@ -285,20 +281,6 @@ namespace Execution {
     
     template <typename T>
     using is_stream = is_instance<T, stream>;
-
-    template <fixed_string Name>
-    struct variable_name_tag;
-
-    template <fixed_string Name>
-    using variable_type = TaggedPlaceholder<variable_name_tag<Name>, 0>;
-
-    template <size_t I>
-    struct dynamic_argument_type {
-        static constexpr size_t index = I;
-    };
-
-    template <fixed_string Name, typename T>
-    struct variable;
 
 
 }

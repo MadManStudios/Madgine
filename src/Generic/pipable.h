@@ -1,6 +1,5 @@
 #pragma once
 
-#include "functor.h"
 #include "lift.h"
 
 namespace Engine {

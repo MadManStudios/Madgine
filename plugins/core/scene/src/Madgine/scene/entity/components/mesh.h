@@ -9,7 +9,6 @@ namespace Scene {
     namespace Entity {
 
         struct MADGINE_SCENE_EXPORT Mesh : EntityComponent<Mesh> {
-            Mesh(const ObjectPtr &init);
 
             std::string_view getName() const;
             void setName(std::string_view name);

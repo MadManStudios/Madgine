@@ -16,7 +16,7 @@ namespace Physics {
 
         using Container = FreeListContainer<Scene::Entity::EntityComponentContainerImpl<std::deque>, Scene::Entity::EntityComponentFreeListConfig<RigidBody>>;
 
-        RigidBody(const ObjectPtr &data = {});
+        RigidBody();
         RigidBody(RigidBody &&other);
         ~RigidBody();
 

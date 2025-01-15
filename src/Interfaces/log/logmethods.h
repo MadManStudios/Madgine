@@ -2,8 +2,6 @@
 
 #include "messagetype.h"
 
-#include "Generic/tag_invoke.h"
-
 namespace Engine {
 namespace Log {
 

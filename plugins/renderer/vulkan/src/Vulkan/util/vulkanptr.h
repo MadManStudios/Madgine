@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/functor.h"
+
 namespace Engine {
 namespace Render {
 

@@ -14,7 +14,7 @@
 #include "pylistptr.h"
 #include "pyownedscopeptr.h"
 #include "pyscopeiterator.h"
-#include "pytypedscopeptr.h"
+#include "pyscopeptr.h"
 #include "pyvirtualiterator.h"
 #include "pyvirtualrange.h"
 #include "pysender.h"

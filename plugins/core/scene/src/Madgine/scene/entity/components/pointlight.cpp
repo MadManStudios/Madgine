@@ -23,10 +23,7 @@ SERIALIZETABLE_END(Engine::Scene::Entity::PointLight)
 namespace Engine {
 namespace Scene {
     namespace Entity {
-        PointLight::PointLight(const ObjectPtr &data)
-            : NamedComponent(data)
-        {
-        }
+
     }
 }
 }

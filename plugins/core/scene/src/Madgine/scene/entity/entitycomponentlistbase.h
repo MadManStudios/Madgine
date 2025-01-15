@@ -18,7 +18,7 @@ namespace Scene {
             virtual void init(const EntityComponentHandle<EntityComponentBase> &index, Entity *entity) = 0;
             virtual void finalize(const EntityComponentHandle<EntityComponentBase> &index, Entity *entity) = 0;
             virtual Entity *getEntity(const EntityComponentHandle<EntityComponentBase> &index) const = 0; 
-            virtual EntityComponentOwningHandle<EntityComponentBase> emplace(const ObjectPtr &table, Entity *entity) = 0;
+            virtual EntityComponentOwningHandle<EntityComponentBase> emplace(Entity *entity) = 0;
             virtual void erase(const EntityComponentHandle<EntityComponentBase> &index) = 0;
             virtual bool empty() = 0;
             virtual void clear() = 0;

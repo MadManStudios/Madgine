@@ -1,18 +1,14 @@
 #pragma once
 
-#include "Generic/callerhierarchy.h"
-
 #include "Generic/makeowning.h"
 
 #include "Generic/customfunctors.h"
 
 #include "Generic/container/emplace.h"
 
-#include "Generic/closure.h"
-
 #include "../streams/formattedserializestream.h"
 
-#include "../hierarchy/serializableunitptr.h"
+#include "Generic/functor.h"
 
 namespace Engine {
 namespace Serialize {

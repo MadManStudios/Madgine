@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Meta/keyvalue/objectptr.h"
 #include "Meta/serialize/hierarchy/serializableunit.h"
 
 #include "Modules/uniquecomponent/uniquecomponent.h"
@@ -26,15 +25,13 @@ namespace Scene {
 
         struct MADGINE_SCENE_EXPORT EntityComponentBase {
             using Container = CompactContainer<EntityComponentContainerImpl<std::vector>, EntityComponentRelocateFunctor>;
-
-            EntityComponentBase(const ObjectPtr &initTable);
         };
 
         struct MADGINE_SCENE_EXPORT SyncableEntityComponentBase : Serialize::SerializableUnitBase, EntityComponentBase {
             using Container = CompactContainer<std::vector<Placeholder<0>>, EntityComponentRelocateFunctor>;
 
-            SyncableEntityComponentBase(const ObjectPtr &initTable);
-            SyncableEntityComponentBase(const ObjectPtr &initTable, Entity *entity);
+            SyncableEntityComponentBase();
+            SyncableEntityComponentBase(Entity *entity);
 
             bool isMaster() const;
 

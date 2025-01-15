@@ -20,10 +20,6 @@ SERIALIZETABLE_END(Engine::Scene::Entity::Material)
 namespace Engine {
 namespace Scene {
     namespace Entity {
-        Material::Material(const ObjectPtr &data)
-            : NamedComponent(data)
-        {
-        }
 
         const Render::GPUMeshData::Material *Material::get() const
         {

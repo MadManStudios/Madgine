@@ -3,6 +3,8 @@
 #include "../configs/filter.h"
 #include "../primitivetypes.h"
 #include "../streams/comparestreamid.h"
+#include "Generic/container/containerevent.h"
+#include "../configs/requestpolicy.h"
 
 namespace Engine {
 namespace Serialize {

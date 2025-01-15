@@ -78,8 +78,6 @@ namespace NodeGraph {
 
         static PinDesc pinFromId(uint32_t id);
 
-        virtual bool resolveVariableType(ExtendedValueTypeDesc &type, std::string_view name) const { return false; }
-
         virtual void onFlowOutUpdate(Pin source, EdgeEvent event);
         virtual void onDataInUpdate(Pin target, EdgeEvent event);
         virtual void onDataOutUpdate(Pin source, EdgeEvent event);

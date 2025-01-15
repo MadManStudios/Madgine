@@ -7,7 +7,7 @@
 
 #include "Meta/keyvalue/boundapifunction.h"
 #include "Meta/keyvalue/functiontable.h"
-#include "Meta/keyvalue/typedscopeptr.h"
+#include "Meta/keyvalue/scopeptr.h"
 
 #include "Meta/keyvalue/valuetype.h"
 

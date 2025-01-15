@@ -41,28 +41,3 @@ add_tools(Client ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/clienttoolsli
 
 target_link_plugins(ClientTools Tools)
 
-
-#[===[
-project(ClientNodes)
-set(sources "")
-FolderSources(sources "" nodes)
-	FolderSources(sources nodes Madgine clientnodesforward.h clientnodeslib.h)
-		FolderSources(sources Madgine client)
-			FolderSources(sources client nodes gpubuffernode.cpp gpubuffernode.h framebuffernode.cpp framebuffernode.h meshrenderernode.cpp meshrenderernode.h rasterizernode.cpp rasterizernode.h renderpassnode.cpp renderpassnode.h renderpipelinenode.cpp renderpipelinenode.h rendertexturenode.cpp rendertexturenode.h shadercodegenerator.cpp shadercodegenerator.h)
-
-add_plugin(ClientNodes Madgine Core ${sources} PRECOMPILED_HEADER nodes/Madgine/clientnodeslib.h SOURCE_ROOT nodes)
-
-target_link_plugins(ClientNodes Client NodeGraph)
-
-
-project(ClientNodesTools)
-set(sources "")
-FolderSources(sources "" nodes_tools)
-	FolderSources(sources nodes_tools Madgine clientnodestoolsforward.h clientnodestoolslib.h)
-		FolderSources(sources Madgine client)
-			FolderSources(sources client nodes noderenderertester.cpp noderenderertester.h)
-
-add_tools(ClientNodes ${sources} PRECOMPILED_HEADER nodes_tools/Madgine/clientnodestoolslib.h SOURCE_ROOT nodes_tools)
-
-target_link_plugins(ClientNodesTools Tools ClientTools)
-]===]

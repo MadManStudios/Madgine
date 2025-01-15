@@ -4,8 +4,6 @@
 #include "Meta/keyvalue/argumentlist.h"
 #include "behaviorerror.h"
 
-#include "Meta/keyvalue/valuetype_forward.h"
-
 #include "bindings.h"
 
 #include "Madgine/debug/debuggablesender.h"

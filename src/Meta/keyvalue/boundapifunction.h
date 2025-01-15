@@ -1,7 +1,7 @@
 #pragma once
 
 #include "apifunction.h"
-#include "typedscopeptr.h"
+#include "scopeptr.h"
 
 
 namespace Engine {

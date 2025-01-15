@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/typedscopeptr.h"
+#include "Meta/keyvalue/scopeptr.h"
 
 namespace Engine {
 namespace Scripting {

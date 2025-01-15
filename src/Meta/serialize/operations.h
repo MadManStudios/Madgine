@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Generic/container/containerevent.h"
+
 #include "configs/configselector.h"
 #include "configs/creator.h"
 #include "configs/guard.h"
-#include "configs/requestpolicy.h"
 #include "configs/tags.h"
 
 #include "hierarchy/serializableunitptr.h"
@@ -14,8 +13,6 @@
 #include "Generic/container/atomiccontaineroperation.h"
 
 #include "container/physical.h"
-
-#include "streams/pendingrequest.h"
 
 #include "hierarchy/statetransmissionflags.h"
 

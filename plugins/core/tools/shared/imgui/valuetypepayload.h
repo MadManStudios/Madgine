@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Meta/keyvalue/typedscopeptr.h"
 #include "Meta/keyvalue/valuetype.h"
 
 namespace ImGui {

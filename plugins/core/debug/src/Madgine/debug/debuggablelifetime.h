@@ -6,6 +6,8 @@
 
 #include "debuggablesender.h"
 
+#include "Meta/keyvalue/scopeptr.h"
+
 namespace Engine {
 namespace Debug {
 
@@ -24,7 +26,7 @@ namespace Debug {
     protected:
         DebuggableLifetimeBase(std::nullopt_t);
 
-        std::vector<std::reference_wrapper<ContextInfo>> mDebugContexts;
+        ParentLocation *createContext();
 
     private:
         DebuggableLifetimeBase *mParent = nullptr;
@@ -32,6 +34,8 @@ namespace Debug {
         DebuggableLifetimeBase *mNext = nullptr;
         DebuggableLifetimeBase *mFirstChild = nullptr;
         DebuggableLifetimeBase *mLastChild = nullptr;
+
+        std::vector<std::reference_wrapper<ContextInfo>> mDebugContexts;
     };
 
     template <auto... cpos>
@@ -42,9 +46,7 @@ namespace Debug {
         template <Execution::Sender Sender>
         void attach(Sender &&sender)
         {
-            Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
-            mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Execution::with_sub_debug_location(&context));
-            mDebugContexts.emplace_back(context);
+            mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Execution::with_sub_debug_location(createContext()));
         }
 
         void start()

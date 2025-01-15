@@ -13,26 +13,11 @@ namespace NodeGraph {
     struct DefaultConfig {
         static constexpr bool constant = false;
         using dynamicVariableNames = Engine::type_pack<>;
-        using exposedVariables = Engine::type_pack<>;
     };
 
     struct ConstantConfig {
         static constexpr bool constant = true;
         using dynamicVariableNames = Engine::type_pack<>;
-        using exposedVariables = Engine::type_pack<>;
-    };
-
-    /* struct VariableConfig {
-        static constexpr bool constant = true;
-        using dynamicVariableNames = Engine::type_pack<Engine::auto_holder<Engine::fixed_string { "Name" }>>;
-        using exposedVariables = Engine::type_pack<Engine::Execution::variable<Engine::fixed_string { "Name" }, Engine::ValueType>>;
-    };
-    */
-    template <bool isConstant>
-    struct VariableAccessConfig {
-        static constexpr bool constant = isConstant;
-        using dynamicVariableNames = Engine::type_pack<Engine::auto_holder<Engine::fixed_string { "Name" }>>;
-        using exposedVariables = Engine::type_pack<>;
     };
 
 }
@@ -53,9 +38,6 @@ namespace NodeGraph {
 
 #define DEFAULT_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::NodeGraph::DefaultConfig, __VA_ARGS__)
 #define CONSTANT_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::NodeGraph::ConstantConfig, __VA_ARGS__)
-//#define VARIABLE_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::NodeGraph::VariableConfig, __VA_ARGS__)
-#define CONSTANT_VARIABLE_ACCESS_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::NodeGraph::VariableAccessConfig<true>, __VA_ARGS__)
-//#define DEFAULT_VARIABLE_ACCESS_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::NodeGraph::VariableAccessConfig<false>, __VA_ARGS__)
 
 #define DYNAMIC_NAME(Name)                                       \
     PROPERTY(Name, getDynamicName<#Name>, setDynamicName<#Name>) \

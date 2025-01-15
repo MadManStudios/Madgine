@@ -47,9 +47,7 @@ SERIALIZETABLE_END(Engine::Physics::RigidBody)
 namespace Engine {
 namespace Physics {
 
-    RigidBody::RigidBody(const ObjectPtr &data)
-        : NamedComponent(data)
-
+    RigidBody::RigidBody()
     {
         mData = std::make_unique<Data>(this);
     }

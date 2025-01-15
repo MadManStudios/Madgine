@@ -2,7 +2,7 @@
 
 #include "Meta/metalib.h"
 
-#include "Meta/keyvalue/typedscopeptr.h"
+#include "Meta/keyvalue/scopeptr.h"
 #include "Meta/keyvalue/metatable_impl.h"
 
 struct Foo {

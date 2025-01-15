@@ -4,11 +4,9 @@
 #include "Meta/keyvalue/metatable.h"
 #include "Meta/serialize/streams/streamresult.h"
 
-#include "Meta/serialize/streams/formattedserializestream.h"
-
 #include "Meta/serialize/operations.h"
 
-#include "Meta/keyvalue/typedscopeptr.h"
+#include "Meta/keyvalue/scopeptr.h"
 
 namespace Engine {
 

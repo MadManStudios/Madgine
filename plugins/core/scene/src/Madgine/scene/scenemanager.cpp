@@ -2,13 +2,9 @@
 
 #include "scenemanager.h"
 
-#include "Meta/serialize/hierarchy/serializableids.h"
-
 #include "scenecomponentbase.h"
 
 #include "Madgine/app/application.h"
-
-#include "Modules/debug/profiler/profile.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
@@ -25,9 +21,6 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
-
-#include "Generic/execution/algorithm.h"
-#include "Generic/execution/promise.h"
 
 #include "behavior/animation.h"
 #include "entity/components/skeleton.h"

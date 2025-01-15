@@ -14,6 +14,8 @@
 
 #include "Madgine/resources/sender.h"
 
+#include "Generic/execution/stop_callback.h"
+
 METATABLE_BEGIN_BASE(Engine::Audio::PortAudioApi, Engine::Audio::AudioApi)
 METATABLE_END(Engine::Audio::PortAudioApi)
 

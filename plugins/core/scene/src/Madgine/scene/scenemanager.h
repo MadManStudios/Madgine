@@ -8,17 +8,9 @@
 
 #include "Modules/threading/datamutex.h"
 
-#include "scenecomponentbase.h"
-
 #include "Modules/uniquecomponent/uniquecomponentcontainer.h"
 
 #include "entity/entitycomponentcollector.h"
-
-#include "Generic/keyvalue.h"
-
-#include "Generic/container/concatIt.h"
-
-#include "Meta/math/vector3.h"
 
 #include "Generic/intervalclock.h"
 
@@ -53,11 +45,6 @@ namespace Scene {
         IntervalClock<Threading::CustomTimepoint> &animationClock();
 
         SceneContainer &container(std::string_view name);
-
-        /* decltype(auto) entities()
-        {
-            return concatIt(mEntities, mLocalEntities) | std::views::transform(EntityHelper {});
-        }*/
 
         template <typename T>
         T &getComponent()

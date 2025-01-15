@@ -2,13 +2,10 @@
 
 #include "execution/concepts.h"
 #include "execution/statedescriptor.h"
-#include "genericresult.h"
 
 #include "execution/stop_callback.h"
 
 #include "execution/algorithm.h"
-
-#include "callable_view.h"
 
 namespace Engine {
 

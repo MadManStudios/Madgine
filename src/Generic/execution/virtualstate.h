@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Generic/type_pack.h"
-#include "Generic/auto_pack.h"
-
 #include "Generic/execution/concepts.h"
+
+#include "Generic/virtual_invoke.h"
 
 namespace Engine {
 namespace Execution {

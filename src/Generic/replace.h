@@ -1,7 +1,5 @@
 #pragma once
 
-#include "type_pack.h"
-
 namespace Engine {
 
 struct DefaultTag;
