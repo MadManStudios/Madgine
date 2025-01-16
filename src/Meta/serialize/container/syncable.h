@@ -4,13 +4,15 @@
 
 #include "../streams/pendingrequest.h"
 
+#include "../streams/writemessage.h"
+
 namespace Engine {
 namespace Serialize {
 
-    META_EXPORT FormattedBufferedStream &getSlaveRequestMessageTarget(const SyncableUnitBase *unit);
-    META_EXPORT std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
+    META_EXPORT WriteMessage getSlaveRequestMessageTarget(const SyncableUnitBase *unit, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver);
+    META_EXPORT std::vector<WriteMessage> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
         const std::set<ParticipantId> &targets = {});
-    META_EXPORT void beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedBufferedStream &stream, MessageId id);
+    META_EXPORT WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id);
 
 
     struct META_EXPORT SyncableBase {
@@ -19,15 +21,15 @@ namespace Serialize {
     template <typename OffsetPtr>
     struct Syncable : SyncableBase {
 
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterActionMessageTargets(ParticipantId answerTarget = 0, MessageId answerId = 0,
+        std::vector<WriteMessage> getMasterActionMessageTargets(ParticipantId answerTarget = 0, MessageId answerId = 0,
             const std::set<ParticipantId> &targets = {}) const
         {
             return getMasterActionMessageTargets(parent(), answerTarget, answerId, targets);
         }
 
-        FormattedBufferedStream &getSlaveRequestMessageTarget() const
+        WriteMessage getSlaveRequestMessageTarget(ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver = {}) const
         {
-            return Serialize::getSlaveRequestMessageTarget(parent());
+            return Serialize::getSlaveRequestMessageTarget(parent(), requester, requestId, std::move(receiver));
         }
 
         ParticipantId participantId()
@@ -59,12 +61,12 @@ namespace Serialize {
             parent()->writeRequestResponse(static_cast<const typename OffsetPtr::member_type *>(this), answerTarget, answerId, std::forward<Args>(args)...);
         }
 
-        void beginRequestResponseMessage(FormattedBufferedStream &stream, MessageId id) const
+        WriteMessage beginRequestResponseMessage(FormattedMessageStream &stream, MessageId id) const
         {
-            Serialize::beginRequestResponseMessage(parent(), stream, id);
+            return Serialize::beginRequestResponseMessage(parent(), stream, id);
         }
 
-        FormattedBufferedStream &getRequestResponseTarget(ParticipantId stream, MessageId id) const
+        WriteMessage getRequestResponseTarget(ParticipantId stream, MessageId id) const
         {
             return getMasterRequestResponseTarget(parent(), stream, id);
         }

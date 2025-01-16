@@ -19,9 +19,9 @@ namespace Engine {
 namespace Serialize {
 
     void META_EXPORT writeFunctionAction(SyncableUnitBase *unit, uint16_t index, const void *args, const std::set<ParticipantId> &targets, ParticipantId answerTarget, MessageId answerId);
-    void META_EXPORT writeFunctionResult(SyncableUnitBase *unit, uint16_t index, const void *result, FormattedBufferedStream &target, MessageId answerId);
+    void META_EXPORT writeFunctionResult(SyncableUnitBase *unit, uint16_t index, const void *result, FormattedMessageStream &target, MessageId answerId);
     void META_EXPORT writeFunctionRequest(SyncableUnitBase *unit, uint16_t index, FunctionType type, const void *args, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver = {});
-    void META_EXPORT writeFunctionError(SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedBufferedStream &target, MessageId answerId);
+    void META_EXPORT writeFunctionError(SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedMessageStream &target, MessageId answerId);
     StreamResult META_EXPORT readState(const SerializeTable *table, void *unit, FormattedSerializeStream &in, StateTransmissionFlags flags, CallerHierarchyBasePtr hierarchy);
 
     namespace __serialize_impl__ {
@@ -60,10 +60,10 @@ namespace Serialize {
                     (unit->*Setter)(nullptr);
                     return read(in, unit->*P, name, CallerHierarchyPtr { hierarchy.append(unit) });
                 },
-                [](SyncableUnitBase *unit, FormattedBufferedStream &in, PendingRequest *request) -> StreamResult {
+                [](SyncableUnitBase *unit, FormattedMessageStream &in, PendingRequest *request) -> StreamResult {
                     throw "Unsupported";
                 },
-                [](SyncableUnitBase *unit, FormattedBufferedStream &inout, MessageId id) -> StreamResult {
+                [](SyncableUnitBase *unit, FormattedMessageStream &inout, MessageId id) -> StreamResult {
                     throw "Unsupported";
                 },
                 [](void *_unit, FormattedSerializeStream &in, bool success) -> StreamResult {
@@ -87,10 +87,10 @@ namespace Serialize {
                 },
                 [](void *unit) {
                 },
-                [](const SyncableUnitBase *unit, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *data) {
+                [](const SyncableUnitBase *unit, const std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> &outStreams, void *data) {
                     throw "Unsupported";
                 },
-                [](const SyncableUnitBase *_unit, FormattedBufferedStream &out, void *data) {
+                [](const SyncableUnitBase *_unit, FormattedMessageStream &out, void *data) {
                     throw "Unsupported";
                 },
                 [](size_t, FormattedSerializeStream &, const char *, const StreamVisitor &) -> StreamResult {
@@ -130,10 +130,10 @@ namespace Serialize {
                     TupleUnpacker::invoke(Setter, unit, std::move(dummy), hierarchy);
                     return {};
                 },
-                [](void *unit, FormattedBufferedStream &in, PendingRequest &request) -> StreamResult {
+                [](void *unit, FormattedMessageStream &in, PendingRequest &request) -> StreamResult {
                     throw "Unsupported";
                 },
-                [](void *unit, FormattedBufferedStream &inout, MessageId id) -> StreamResult {
+                [](void *unit, FormattedMessageStream &inout, MessageId id) -> StreamResult {
                     throw "Unsupported";
                 },
                 [](void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) {
@@ -145,10 +145,10 @@ namespace Serialize {
                 },
                 [](void *unit) {
                 },
-                [](const void *unit, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *data) {
+                [](const void *unit, const std::vector<WriteMessage> &outStreams, void *data) {
                     throw "Unsupported";
                 },
-                [](const void *_unit, FormattedBufferedStream &out, void *data) {
+                [](const void *_unit, FormattedMessageStream &out, void *data) {
                     throw "Unsupported";
                 },
                 [](FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor) -> StreamResult {
@@ -177,14 +177,14 @@ namespace Serialize {
                     Unit *unit = unit_cast<Unit *>(_unit);
                     return readState<Configs...>(in, unit->*P, name, CallerHierarchyPtr { hierarchy.append(unit) });
                 },
-                [](void *_unit, FormattedBufferedStream &in, PendingRequest &request) -> StreamResult {
+                [](void *_unit, FormattedMessageStream &in, PendingRequest &request) -> StreamResult {
                     if constexpr (std::derived_from<T, SyncableBase>) {
                         Unit *unit = unit_cast<Unit *>(_unit);
                         return readAction<T, ParentConfigs..., Configs...>(unit->*P, in, request, CallerHierarchyPtr { CallerHierarchy { unit } });
                     } else
                         throw "Unsupported";
                 },
-                [](void *_unit, FormattedBufferedStream &inout, MessageId id) -> StreamResult {
+                [](void *_unit, FormattedMessageStream &inout, MessageId id) -> StreamResult {
                     if constexpr (std::derived_from<T, SyncableBase>) {
                         Unit *unit = unit_cast<Unit *>(_unit);
                         return readRequest<T, ParentConfigs..., Configs...>(unit->*P, inout, id, CallerHierarchyPtr { CallerHierarchy { unit } });
@@ -205,7 +205,7 @@ namespace Serialize {
                 [](void *unit) {
                     set_parent(unit_cast<Unit *>(unit)->*P, unit_cast<Unit*>(unit));
                 },
-                [](const void *_unit, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *data) {
+                [](const void *_unit, const std::vector<WriteMessage> &outStreams, void *data) {
                     if constexpr (std::derived_from<T, SyncableBase>) {
                         const Unit *unit = unit_cast<const Unit *>(_unit);
                         typename T::action_payload &payload = *static_cast<typename T::action_payload *>(data);
@@ -213,7 +213,7 @@ namespace Serialize {
                     } else
                         throw "Unsupported";
                 },
-                [](const void *_unit, FormattedBufferedStream &out, void *data) {
+                [](const void *_unit, FormattedMessageStream &out, void *data) {
                     if constexpr (std::derived_from<T, SyncableBase>) {
                         const Unit *unit = unit_cast<const Unit *>(_unit);
                         typename T::request_payload &payload = *static_cast<typename T::request_payload *>(data);
@@ -236,16 +236,16 @@ namespace Serialize {
             using Tuple = typename traits::decay_argument_types::as_tuple;
 
             return {
-                [](const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, const void *args) {
+                [](const std::vector<WriteMessage> &outStreams, const void *args) {
                     const Tuple &argTuple = *static_cast<const Tuple *>(args);
-                    for (FormattedBufferedStream &out : outStreams) {
+                    for (FormattedMessageStream &out : outStreams) {
                         write(out, argTuple, "Args");
                     }
                 },
-                [](FormattedBufferedStream &out, const void *result) {
+                [](FormattedMessageStream &out, const void *result) {
                     write(out, *static_cast<const R *>(result), "Result");
                 },
-                [](SyncableUnitBase *unit, FormattedBufferedStream &in, uint16_t index, FunctionType type, PendingRequest &request) {
+                [](SyncableUnitBase *unit, FormattedMessageStream &in, uint16_t index, FunctionType type, PendingRequest &request) {
                     switch (type) {
                     case CALL: {
                         Tuple args;
@@ -259,7 +259,7 @@ namespace Serialize {
                         R result;
                         STREAM_PROPAGATE_ERROR(read(in, result, "Result"));
                         if (request.mRequesterTransactionId) {
-                            FormattedBufferedStream &out = getMasterRequestResponseTarget(unit, request.mRequester);
+                            FormattedMessageStream &out = getMasterRequestResponseTarget(unit, request.mRequester);
                             writeFunctionResult(unit, index, &result, out, request.mRequesterTransactionId);
                         }
                         request.mReceiver.set_value(result);
@@ -267,7 +267,7 @@ namespace Serialize {
                     }
                     return StreamResult {};
                 },
-                [](SyncableUnitBase *_unit, FormattedBufferedStream &in, uint16_t index, FunctionType type, MessageId id) {
+                [](SyncableUnitBase *_unit, FormattedMessageStream &in, uint16_t index, FunctionType type, MessageId id) {
                     T *unit = static_cast<T *>(_unit);
                     Tuple args;
                     STREAM_PROPAGATE_ERROR(read(in, args, "Args"));

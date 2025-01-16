@@ -8,7 +8,7 @@ namespace Serialize {
 
     template <typename T, typename Observer, typename OffsetPtr>
     struct Operations<Synced<T, Observer, OffsetPtr>> {        
-        static StreamResult readRequest(Synced<T, Observer, OffsetPtr> &synced, FormattedBufferedStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
+        static StreamResult readRequest(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
         {
             if (synced.isMaster()) {
                 typename Synced<T, Observer, OffsetPtr>::Operation op;
@@ -35,20 +35,19 @@ namespace Serialize {
                 }
                 synced.notify(old, inout.id(), id);
             } else {
-                FormattedBufferedStream &out = synced.getSlaveRequestMessageTarget(inout.id(), id);
-                out.stream().pipe(inout.stream());
-                out.endMessageWrite();
+                WriteMessage msg = synced.getSlaveRequestMessageTarget(inout.id(), id);
+                msg.stream().pipe(inout.stream());                
             }
             return {};
         }
 
-        static void writeRequest(const Synced<T, Observer, OffsetPtr> &synced, FormattedBufferedStream &out, Synced<T, Observer, OffsetPtr>::request_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+        static void writeRequest(const Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &out, Synced<T, Observer, OffsetPtr>::request_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
         {
             Serialize::write(out, payload.mOperation, nullptr);
             Serialize::write(out, payload.mValue, nullptr);
         }
 
-        static StreamResult readAction(Synced<T, Observer, OffsetPtr> &synced, FormattedBufferedStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
+        static StreamResult readAction(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
         {
             typename Synced<T, Observer, OffsetPtr>::Operation op;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, op, nullptr));
@@ -76,9 +75,9 @@ namespace Serialize {
             return {};
         }
 
-        static void writeAction(const Synced<T, Observer, OffsetPtr> &synced, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, Synced<T, Observer, OffsetPtr>::action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+        static void writeAction(const Synced<T, Observer, OffsetPtr> &synced, const std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> &outStreams, Synced<T, Observer, OffsetPtr>::action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
         {            
-            for (FormattedBufferedStream &out : outStreams) {
+            for (FormattedMessageStream &out : outStreams) {
                 Serialize::write(out, payload.mOperation, nullptr);
                 Serialize::write(out, payload.mValue, nullptr);
             }

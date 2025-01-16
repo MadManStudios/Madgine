@@ -4,7 +4,7 @@
 
 #include "networkbuffer.h"
 
-#include "Meta/serialize/streams/formattedbufferedstream.h"
+#include "Meta/serialize/streams/formattedmessagestream.h"
 
 #include "Meta/serialize/streams/syncstreamdata.h"
 

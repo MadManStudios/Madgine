@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../streams/pendingrequest.h"
 #include "Generic/offsetptr.h"
 #include "serializableunit.h"
 
@@ -32,12 +33,12 @@ namespace Serialize {
 
         static StreamResult visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
 
-        StreamResult readAction(FormattedBufferedStream &in, PendingRequest &request);
-        StreamResult readRequest(FormattedBufferedStream &in, MessageId id);
+        StreamResult readAction(FormattedMessageStream &in, PendingRequest &request);
+        StreamResult readRequest(FormattedMessageStream &in, MessageId id);
 
-        StreamResult readFunctionAction(FormattedBufferedStream &in, PendingRequest &request);
-        StreamResult readFunctionRequest(FormattedBufferedStream &in, MessageId id);
-        StreamResult readFunctionError(FormattedBufferedStream &in, PendingRequest &request);
+        StreamResult readFunctionAction(FormattedMessageStream &in, PendingRequest &request);
+        StreamResult readFunctionRequest(FormattedMessageStream &in, MessageId id);
+        StreamResult readFunctionError(FormattedMessageStream &in, PendingRequest &request);
 
         UnitId slaveId() const;
         UnitId masterId() const;
@@ -45,13 +46,13 @@ namespace Serialize {
 
         bool isMaster() const;
 
-        friend META_EXPORT FormattedBufferedStream &getSlaveRequestMessageTarget(const SyncableUnitBase *unit);
-        friend META_EXPORT std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
+        friend META_EXPORT WriteMessage getSlaveRequestMessageTarget(const SyncableUnitBase *unit, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver);
+        friend META_EXPORT std::vector<WriteMessage> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
             const std::set<ParticipantId> &targets);
-        friend META_EXPORT FormattedBufferedStream &getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId);
-        friend META_EXPORT FormattedBufferedStream &getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget);
+        friend META_EXPORT WriteMessage getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId);
+        friend META_EXPORT FormattedMessageStream &getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget);
 
-        friend META_EXPORT void beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedBufferedStream &stream, MessageId id);
+        friend META_EXPORT WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id);
 
     protected:
         void setSlaveId(UnitId id, SerializeManager *mgr);
@@ -61,22 +62,22 @@ namespace Serialize {
         UnitId moveMasterId(UnitId newId = 0);
 
         friend META_EXPORT void writeFunctionAction(SyncableUnitBase *unit, uint16_t index, const void *args, const std::set<ParticipantId> &targets, ParticipantId answerTarget, MessageId answerId);
-        friend META_EXPORT void writeFunctionResult(SyncableUnitBase *unit, uint16_t index, const void *result, FormattedBufferedStream &target, MessageId answerId);
+        friend META_EXPORT void writeFunctionResult(SyncableUnitBase *unit, uint16_t index, const void *result, FormattedMessageStream &target, MessageId answerId);
         friend META_EXPORT void writeFunctionRequest(SyncableUnitBase *unit, uint16_t index, FunctionType type, const void *args, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver);
-        friend META_EXPORT void writeFunctionError(SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedBufferedStream &target, MessageId answerId);
+        friend META_EXPORT void writeFunctionError(SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedMessageStream &target, MessageId answerId);
 
         void writeFunctionAction(uint16_t index, const void *args, const std::set<ParticipantId> &targets = {}, ParticipantId answerTarget = 0, MessageId answerId = 0);
-        void writeFunctionResult(uint16_t index, const void *result, FormattedBufferedStream &target, MessageId answerId);
+        void writeFunctionResult(uint16_t index, const void *result, FormattedMessageStream &target, MessageId answerId);
         void writeFunctionRequest(uint16_t index, FunctionType type, const void *args, ParticipantId requester = 0, MessageId requesterTransactionId = 0, GenericMessageReceiver receiver = {});
-        void writeFunctionError(uint16_t index, MessageResult error, FormattedBufferedStream &target, MessageId answerId);
+        void writeFunctionError(uint16_t index, MessageResult error, FormattedMessageStream &target, MessageId answerId);
 
         void writeAction(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId, const std::set<ParticipantId> &targets = {}) const;
         void writeRequest(OffsetPtr offset, void *data, ParticipantId requester = 0, MessageId requesterTransactionId = 0, GenericMessageReceiver receiver = {}) const;
         void writeRequestResponse(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId) const;
 
     private:
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterMessageTargets(const std::set<ParticipantId> &targets = {}) const;
-        FormattedBufferedStream &getSlaveMessageTarget() const;
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> getMasterMessageTargets(const std::set<ParticipantId> &targets = {}) const;
+        FormattedMessageStream &getSlaveMessageTarget() const;
 
         void clearSlaveId(SerializeManager *mgr);
 
@@ -88,7 +89,7 @@ namespace Serialize {
         friend struct SerializableDataPtr;
 
         META_EXPORT friend StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy);
-        friend StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
+        friend META_EXPORT StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
 
         DERIVE_FRIEND(customUnitPtr)
         SerializableUnitPtr customUnitPtr();
@@ -190,7 +191,7 @@ namespace Serialize {
         }
 
         template <auto f, typename... Args>
-        requires std::constructible_from<typename Callable<f>::traits::decay_argument_types::as_tuple, Args...>
+            requires std::constructible_from<typename Callable<f>::traits::decay_argument_types::as_tuple, Args...>
         void notify(Args &&...args)
         {
             assert(this->isMaster());

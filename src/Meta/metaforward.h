@@ -67,7 +67,10 @@ namespace Serialize {
     struct SerializeStreamData;
     struct SyncStreamData;
     struct FormattedSerializeStream;
-    struct FormattedBufferedStream;
+    struct FormattedMessageStream;
+
+    struct ReadMessage;
+    struct WriteMessage;
 
     template <typename T>
     struct Syncable;

@@ -5,6 +5,8 @@
 #include "../streams/comparestreamid.h"
 #include "Generic/container/containerevent.h"
 #include "../configs/requestpolicy.h"
+#include "../streams/pendingrequest.h"
+#include "../streams/writemessage.h"
 
 namespace Engine {
 namespace Serialize {
@@ -187,9 +189,9 @@ namespace Serialize {
         }
 
         //TODO: Maybe move loop out of this function
-        static void writeAction(const C &c, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+        static void writeAction(const C &c, const std::vector<WriteMessage> &outStreams, action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
         {
-            for (FormattedBufferedStream &out : outStreams) {
+            for (FormattedMessageStream &out : outStreams) {
                 std::visit(overloaded {
                                [&](typename C::emplace_action_t &&emplace) {
                                    Serialize::write(out, EMPLACE, "operation");
@@ -228,16 +230,15 @@ namespace Serialize {
                 request.mReceiver.set_value(it);
             } else {
                 if (request.mRequesterTransactionId) {
-                    FormattedBufferedStream &out = c.getRequestResponseTarget(request.mRequester, request.mRequesterTransactionId);
-                    Serialize::write(out, op, "operation");
-                    out.endMessageWrite();
+                    WriteMessage msg = c.getRequestResponseTarget(request.mRequester, request.mRequesterTransactionId);
+                    Serialize::write(msg, op, "operation");                    
                 }
                 request.mReceiver.set_error(MessageResult::REJECTED);
             }
             return {};
         }
 
-        static void writeRequest(const C &c, FormattedBufferedStream &out, request_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+        static void writeRequest(const C &c, FormattedMessageStream &out, request_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
         {
             if (RequestPolicy::sCallByMasterOnly)
                 throw 0;
@@ -271,7 +272,7 @@ namespace Serialize {
                 std::move(payload));
         }
 
-        static StreamResult readRequest(C &c, FormattedBufferedStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
+        static StreamResult readRequest(C &c, FormattedMessageStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
         {
             bool accepted = !RequestPolicy::sCallByMasterOnly;
 
@@ -280,19 +281,17 @@ namespace Serialize {
 
             if (!accepted) {
                 if (id) {
-                    c.beginRequestResponseMessage(inout, id);
-                    Serialize::write(inout, op | ABORTED, "operation");
-                    inout.endMessageWrite();
+                    auto msg = c.beginRequestResponseMessage(inout, id);
+                    Serialize::write(msg, op | ABORTED, "operation");
                 }
             } else {
                 if (c.isMaster()) {
                     std::ranges::iterator_t<C> it;
                     STREAM_PROPAGATE_ERROR(performOperation(c, op, inout, it, inout.id(), id, hierarchy));
                 } else {
-                    FormattedBufferedStream &out = c.getSlaveRequestMessageTarget();
+                    WriteMessage out = c.getSlaveRequestMessageTarget(inout.id(), id);
                     Serialize::write(out, op, "operation");
                     out.stream().pipe(inout.stream());
-                    out.endMessageWrite(inout.id(), id);
                 }
             }
             return {};

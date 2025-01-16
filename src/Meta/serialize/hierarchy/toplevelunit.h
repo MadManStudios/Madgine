@@ -13,7 +13,7 @@ namespace Serialize {
         void sync();
         void unsync();
 
-        FormattedBufferedStream &getSlaveMessageTarget() const;
+        FormattedMessageStream &getSlaveMessageTarget() const;
 
         const std::vector<SyncManager *> &getManagers() const;
         SyncManager *getSlaveManager() const;
@@ -30,7 +30,7 @@ namespace Serialize {
         ASYNC_STUB(receiveState, receiveStateImpl, Execution::make_simple_virtual_sender<bool>);
         void stateReadDone();
 
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterMessageTargets() const;
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> getMasterMessageTargets() const;
 
     private:
         std::vector<SyncManager *> mManagers;

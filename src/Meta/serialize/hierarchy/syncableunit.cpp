@@ -12,6 +12,8 @@
 
 #include "../operations.h"
 
+#include "../streams/writemessage.h"
+
 namespace Engine {
 namespace Serialize {
 
@@ -92,32 +94,32 @@ namespace Serialize {
         return SerializableDataPtr::visitStream(table, in, name, visitor);
     }
 
-    StreamResult SyncableUnitBase::readAction(FormattedBufferedStream &in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readAction(FormattedMessageStream &in, PendingRequest &request)
     {
         return mType->readAction(this, in, request);
     }
 
-    StreamResult SyncableUnitBase::readRequest(FormattedBufferedStream &in, MessageId id)
+    StreamResult SyncableUnitBase::readRequest(FormattedMessageStream &in, MessageId id)
     {
         return mType->readRequest(this, in, id);
     }
 
-    std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> SyncableUnitBase::getMasterMessageTargets(const std::set<ParticipantId> &targets) const
+    std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> SyncableUnitBase::getMasterMessageTargets(const std::set<ParticipantId> &targets) const
     {
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> result;
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> result;
         if (mSynced) {
             result = mTopLevel->getMasterMessageTargets();
             if (!targets.empty()) {
                 std::erase_if(result,
-                    [&](FormattedBufferedStream &stream) { return !targets.contains(stream.id()); });
+                    [&](FormattedMessageStream &stream) { return !targets.contains(stream.id()); });
             }
         }
         return result;
     }
 
-    FormattedBufferedStream &getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget)
+    FormattedMessageStream &getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget)
     {
-        for (FormattedBufferedStream &out : unit->getMasterMessageTargets()) {
+        for (FormattedMessageStream &out : unit->getMasterMessageTargets()) {
             if (out.id() == answerTarget) {
                 return out;
             }
@@ -125,7 +127,7 @@ namespace Serialize {
         throw 0;
     }
 
-    FormattedBufferedStream &SyncableUnitBase::getSlaveMessageTarget() const
+    FormattedMessageStream &SyncableUnitBase::getSlaveMessageTarget() const
     {
         assert(mSynced);
         return mTopLevel->getSlaveMessageTarget();
@@ -200,137 +202,133 @@ namespace Serialize {
 
     void SyncableUnitBase::writeFunctionAction(uint16_t index, const void *args, const std::set<ParticipantId> &targets, ParticipantId answerTarget, MessageId answerId)
     {
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> outStreams = getMasterMessageTargets(targets);
-        for (FormattedBufferedStream &out : outStreams) {
-            out.beginMessageWrite();
-            SyncManager::writeActionHeader(out, this, MessageType::FUNCTION_ACTION, out.id() == answerTarget ? answerId : 0);
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> outStreams = getMasterMessageTargets(targets);
+        std::vector<WriteMessage> messages;
+        for (FormattedMessageStream &out : outStreams) {
+            auto msg = out.beginMessageWrite();
+            SyncManager::writeActionHeader(msg, this, MessageType::FUNCTION_ACTION, out.id() == answerTarget ? answerId : 0);
+            messages.push_back(std::move(msg));
         }
-        mType->writeFunctionArguments(outStreams, index, CALL, args);
-        for (FormattedBufferedStream &out : outStreams) {
-            out.endMessageWrite();
-        }
+        mType->writeFunctionArguments(messages, index, CALL, args);
     }
 
-    void SyncableUnitBase::writeFunctionResult(uint16_t index, const void *result, FormattedBufferedStream &target, MessageId answerId)
+    void SyncableUnitBase::writeFunctionResult(uint16_t index, const void *result, FormattedMessageStream &target, MessageId answerId)
     {
         assert(answerId != 0);
-        target.beginMessageWrite();
-        SyncManager::writeActionHeader(target, this, MessageType::FUNCTION_ACTION, answerId);
-        mType->writeFunctionResult(target, index, result);
-        target.endMessageWrite();
+        auto msg = target.beginMessageWrite();
+        SyncManager::writeActionHeader(msg, this, MessageType::FUNCTION_ACTION, answerId);
+        mType->writeFunctionResult(target, index, result);        
     }
 
     void SyncableUnitBase::writeFunctionRequest(uint16_t index, FunctionType type, const void *args, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver)
     {
-        FormattedBufferedStream &out = getSlaveMessageTarget();
-        out.beginMessageWrite();
-        SyncManager::writeHeader(out, this, MessageType::FUNCTION_REQUEST);
-        mType->writeFunctionArguments({ out }, index, type, args);
-        out.endMessageWrite(requester, requesterTransactionId, std::move(receiver));
+        FormattedMessageStream &out = getSlaveMessageTarget();
+        auto msg = out.beginMessageWrite(requester, requesterTransactionId, std::move(receiver));
+        SyncManager::writeHeader(msg, this, MessageType::FUNCTION_REQUEST);
+        std::vector<WriteMessage> dummy;
+        dummy.push_back(std::move(msg));
+        mType->writeFunctionArguments(dummy, index, type, args);
     }
 
-    void SyncableUnitBase::writeFunctionError(uint16_t index, MessageResult error, FormattedBufferedStream &target, MessageId answerId)
+    void SyncableUnitBase::writeFunctionError(uint16_t index, MessageResult error, FormattedMessageStream &target, MessageId answerId)
     {
         assert(answerId != 0);
-        target.beginMessageWrite();
-        SyncManager::writeActionHeader(target, this, MessageType::FUNCTION_ERROR, answerId);
+        auto msg = target.beginMessageWrite();
+        SyncManager::writeActionHeader(msg, this, MessageType::FUNCTION_ERROR, answerId);
         mType->writeFunctionError(target, index, error);
-        target.endMessageWrite();
     }
 
-    StreamResult SyncableUnitBase::readFunctionAction(FormattedBufferedStream &in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readFunctionAction(FormattedMessageStream &in, PendingRequest &request)
     {
         return mType->readFunctionAction(this, in, request);
     }
 
-    StreamResult SyncableUnitBase::readFunctionRequest(FormattedBufferedStream &in, MessageId id)
+    StreamResult SyncableUnitBase::readFunctionRequest(FormattedMessageStream &in, MessageId id)
     {
         return mType->readFunctionRequest(this, in, id);
     }
 
-    StreamResult SyncableUnitBase::readFunctionError(FormattedBufferedStream &in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readFunctionError(FormattedMessageStream &in, PendingRequest &request)
     {
         return mType->readFunctionError(this, in, request);
     }
 
-    std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
+    std::vector<WriteMessage> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
         const std::set<ParticipantId> &targets)
     {
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> result = unit->getMasterMessageTargets();
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> streams = unit->getMasterMessageTargets();
+        std::vector<WriteMessage> result;
         if (targets.empty()) {
-            for (FormattedBufferedStream &out : result) {
-                out.beginMessageWrite();
-                SyncManager::writeActionHeader(out, unit, MessageType::ACTION, out.id() == answerTarget ? answerId : 0);
+            for (FormattedMessageStream &out : streams) {
+                auto msg = out.beginMessageWrite();
+                SyncManager::writeActionHeader(msg, unit, MessageType::ACTION, out.id() == answerTarget ? answerId : 0);
+                result.push_back(std::move(msg));
             }
         } else {
             auto it1 = result.begin();
             auto it2 = targets.begin();
             while (it1 != result.end() && it2 != targets.end()) {
-                FormattedBufferedStream &out = *it1;
+                FormattedMessageStream &out = *it1;
                 while (*it2 < out.id()) {
                     throw 0; //LOG_WARNING("Specific Target not in MessageTargetList!");
                     ++it2;
                 }
                 if (*it2 == out.id()) {
-                    out.beginMessageWrite();
-                    SyncManager::writeActionHeader(out, unit, MessageType::ACTION, out.id() == answerTarget ? answerId : 0);
-                    ++it2;
-                    ++it1;
-                } else {
-                    it1 = result.erase(it1);
-                }
+                    auto msg = out.beginMessageWrite();
+                    SyncManager::writeActionHeader(msg, unit, MessageType::ACTION, out.id() == answerTarget ? answerId : 0);
+                    result.push_back(std::move(msg));
+                    ++it2;                    
+                } 
+                ++it1;
             }
-            result.erase(it1, result.end());
         }
 
         return result;
     }
 
-    FormattedBufferedStream &getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId)
+    WriteMessage getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId)
     {
-        FormattedBufferedStream &out = getMasterRequestResponseTarget(unit, answerTarget);
-        beginRequestResponseMessage(unit, out, answerId);
-        return out;
+        FormattedMessageStream &out = getMasterRequestResponseTarget(unit, answerTarget);
+        return beginRequestResponseMessage(unit, out, answerId);
     }
 
-    FormattedBufferedStream &getSlaveRequestMessageTarget(const SyncableUnitBase *unit)
+    WriteMessage getSlaveRequestMessageTarget(const SyncableUnitBase *unit, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
     {
-        FormattedBufferedStream &out = unit->getSlaveMessageTarget();
-        out.beginMessageWrite();
-        SyncManager::writeHeader(out, unit, MessageType::REQUEST);
-        return out;
+        FormattedMessageStream &out = unit->getSlaveMessageTarget();
+        auto msg = out.beginMessageWrite(requester, requestId, std::move(receiver));
+        SyncManager::writeHeader(msg, unit, MessageType::REQUEST);
+        return msg;
     }
 
-    void beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedBufferedStream &stream, MessageId id)
+    WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id)
     {
-        stream.beginMessageWrite();
-        SyncManager::writeActionHeader(stream, unit, MessageType::ACTION, id);
+        auto msg = stream.beginMessageWrite();
+        SyncManager::writeActionHeader(msg, unit, MessageType::ACTION, id);
+        return msg;
     }
 
     void SyncableUnitBase::writeAction(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId, const std::set<ParticipantId> &targets) const
     {
         uint16_t index = mType->getIndex(offset);
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> streams = getMasterActionMessageTargets(this, answerTarget, answerId, targets);
-        mType->writeAction(static_cast<const SerializableUnitBase*>(this), index, streams, data);
-        for (FormattedBufferedStream &stream : streams)
-            stream.endMessageWrite();
+        std::vector<WriteMessage> messages = getMasterActionMessageTargets(this, answerTarget, answerId, targets);
+        mType->writeAction(static_cast<const SerializableUnitBase *>(this), index, messages, data);
     }
 
     void SyncableUnitBase::writeRequest(OffsetPtr offset, void *data, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver) const
     {
         uint16_t index = mType->getIndex(offset);
-        FormattedBufferedStream &stream = getSlaveRequestMessageTarget(this);
-        mType->writeRequest(static_cast<const SerializableUnitBase *>(this), index, stream, data);
-        stream.endMessageWrite(requester, requesterTransactionId, std::move(receiver));
+        WriteMessage msg = getSlaveRequestMessageTarget(this, requester, requesterTransactionId, std::move(receiver));
+        mType->writeRequest(static_cast<const SerializableUnitBase *>(this), index, msg, data);
     }
 
     void SyncableUnitBase::writeRequestResponse(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId) const
     {
         if (answerTarget != 0) {
             uint16_t index = mType->getIndex(offset);
-            FormattedBufferedStream &stream = Serialize::getMasterRequestResponseTarget(this, answerTarget, answerId);
-            mType->writeAction(this, index, { stream }, data);
-            stream.endMessageWrite();
+            WriteMessage msg = Serialize::getMasterRequestResponseTarget(this, answerTarget, answerId);
+            std::vector<WriteMessage> dummy;
+            dummy.push_back(std::move(msg));
+            mType->writeAction(this, index, dummy, data);            
         }
     }
 

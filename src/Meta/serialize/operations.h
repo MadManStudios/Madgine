@@ -8,7 +8,7 @@
 
 #include "hierarchy/serializableunitptr.h"
 
-#include "streams/formattedbufferedstream.h"
+#include "streams/formattedmessagestream.h"
 
 #include "Generic/container/atomiccontaineroperation.h"
 
@@ -261,26 +261,26 @@ namespace Serialize {
     }
 
     template <typename T, typename... Configs>
-    StreamResult readAction(T &t, FormattedBufferedStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
+    StreamResult readAction(T &t, FormattedMessageStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
     {
         auto guard = GuardSelector<Configs...>::guard(hierarchy);
         return Operations<T, Configs...>::readAction(t, in, request, hierarchy);
     }
 
     template <typename T, typename... Configs>
-    StreamResult readRequest(T &t, FormattedBufferedStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
+    StreamResult readRequest(T &t, FormattedMessageStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
     {
         return Operations<T, Configs...>::readRequest(t, inout, id, hierarchy);
     }
 
     template <typename T, typename... Configs, typename Payload>
-    void writeAction(const T &t, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, Payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+    void writeAction(const T &t, const std::vector<WriteMessage> &outStreams, Payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
     {
         Operations<T, Configs...>::writeAction(t, outStreams, std::forward<Payload>(payload), hierarchy);
     }
 
     template <typename T, typename... Configs, typename Payload>
-    void writeRequest(const T &t, FormattedBufferedStream &out, Payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+    void writeRequest(const T &t, FormattedMessageStream &out, Payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
     {
         Operations<T, Configs...>::writeRequest(t, out, std::forward<Payload>(payload), hierarchy);
     }

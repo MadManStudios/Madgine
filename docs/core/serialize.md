@@ -58,15 +58,15 @@ SerializeTables are defined within a `BEGIN`/`END` pair. The definition shall no
 
 The serialization library is stream based. The stream system is based on the C++ `<iostream>` system. This means that every `std::basic_streambuf` implementation can be used to define the way the data is stored/retrieved. The only difference is that the streams used in the library are holding a `std::unique_ptr` to their stream buffer as opposed to a raw pointer in the STL. This makes it possible to define a cheap move operation on streams, which is very useful in different scenarios.
 
-There exist multiple internal stream types, but the important user facing stream types are FormattedSerializeStream and FormattedBufferedStream.
+There exist multiple internal stream types, but the important user facing stream types are FormattedSerializeStream and FormattedMessageStream.
 
 ### FormattedSerializeStream
 
 The FormattedSerializeStream combines two features of serialization: The format and the storage. Storage is provided by a `std::unique_ptr<std::basic_streambuf>` as mentioned above. The Formatter is also provided by a unique pointer and provides an implementation to the Formatter interface. This interface is designed to allow arbitrary data formats with the only restriction being that all serialized data must appear in order according to the unit hierarchy. The engine comes with a few predefined Formatters: type-checked binary, unchecked binary, XML, JSON and Ini.
 
-### FormattedBufferedStream
+### FormattedMessageStream
 
-The FormattedBufferedStream behaves the same as a FormattedSerializeStream with the only exception, that the used stream buffer has to inherit from `message_streambuf`. This converts the stream into a message based stream, which is necessary for synchronization. Using the wrapper type `buffered_streambuf` any `std::basic_streambuf` can be used as a `message_streambuf`.
+The FormattedMessageStream behaves the same as a FormattedSerializeStream with the only exception, that the used stream buffer has to inherit from `message_streambuf`. This converts the stream into a message based stream, which is necessary for synchronization. Using the wrapper type `buffered_streambuf` any `std::basic_streambuf` can be used as a `message_streambuf`.
 
 ## Managers
 

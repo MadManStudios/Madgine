@@ -33,7 +33,7 @@ static constexpr Serializer sComponentSynchronizer {
         throw 0;
         return {};
     },
-    [](void *unit, FormattedBufferedStream &in, PendingRequest &request) -> StreamResult {
+    [](void *unit, FormattedMessageStream &in, PendingRequest &request) -> StreamResult {
         std::string name;
         STREAM_PROPAGATE_ERROR(read(in, name, "name"));
         auto it = Engine::Scene::Entity::EntityComponentRegistry::sComponentsByName().find(name);
@@ -46,7 +46,7 @@ static constexpr Serializer sComponentSynchronizer {
         SerializableDataPtr serializedComponent = component.getSerialized();
         return serializedComponent.mType->readAction(serializedComponent.unit(), in, request);
     },
-    [](void *, FormattedBufferedStream &, MessageId) -> StreamResult {
+    [](void *, FormattedMessageStream &, MessageId) -> StreamResult {
         throw 0;
         return {};
     },
@@ -59,9 +59,9 @@ static constexpr Serializer sComponentSynchronizer {
     },
     [](void *) {
     },
-    [](const void *unit, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *data) {
+    [](const void *unit, const std::vector<WriteMessage> &outStreams, void *data) {
         Engine::Scene::Entity::EntityComponentActionPayload &payload = *static_cast<Engine::Scene::Entity::EntityComponentActionPayload *>(data);
-        for (FormattedBufferedStream &stream : outStreams) {
+        for (FormattedMessageStream &stream : outStreams) {
             write(stream, Engine::Scene::Entity::EntityComponentRegistry::sComponentName(payload.mComponentIndex), "name");
         }
         const Engine::Scene::Entity::Entity *entity = unit_cast<const Engine::Scene::Entity::Entity *>(unit);
@@ -69,7 +69,7 @@ static constexpr Serializer sComponentSynchronizer {
         uint16_t index = type->getIndex(payload.mOffset);
         type->writeAction(payload.mComponent, index, outStreams, payload.mData);
     },
-    [](const void *, FormattedBufferedStream &out, void *) { throw 0; }
+    [](const void *, FormattedMessageStream &out, void *) { throw 0; }
 };
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)

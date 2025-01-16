@@ -7,6 +7,8 @@
 
 #include "../testManager.h"
 
+#include "Meta/serialize/streams/readmessage.h"
+
 using namespace Engine::Serialize;
 using namespace std::chrono_literals;
 
@@ -38,23 +40,24 @@ TEST(Serialize_Table, Test1)
 
     Buffer buffer;
     HANDLE_MGR_RESULT(mgr1, mgr1.setMasterBuffer(buffer));
-    FormattedBufferedStream &stream1 = mgr1.getMasterStream(1);
+    FormattedMessageStream &stream1 = mgr1.getMasterStream(1);
     mgr1.sendMessages();
     HANDLE_MGR_RECEIVER(mgr2.setSlaveBuffer(receiver, buffer));
-    FormattedBufferedStream &stream2 = *mgr2.getSlaveStream();
+    FormattedMessageStream &stream2 = *mgr2.getSlaveStream();
 
     TestStruct t1;
     t1.i = 1;
     t1.s.j = 2;
 
-    stream1.beginMessageWrite();
-    write(stream1, t1, "Test");    
-    stream1.endMessageWrite();
+    {
+        auto msg = stream1.beginMessageWrite();
+        write(stream1, t1, "Test");        
+    }
     stream1.sendMessages();
 
     TestStruct t2;
 
-    FormattedBufferedStream::MessageReadMarker msg;
+    ReadMessage msg;
     HANDLE_STREAM_RESULT(stream2.beginMessageRead(msg));
     ASSERT_TRUE(msg);
     HANDLE_STREAM_RESULT(read(stream2, t2, "Test"));

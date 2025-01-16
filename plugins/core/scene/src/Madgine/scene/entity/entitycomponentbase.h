@@ -39,7 +39,7 @@ namespace Scene {
             void writeAction(OffsetPtr offset, size_t componentIndex, void *data, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, const std::set<Serialize::ParticipantId> &targets = {}) const;
             void writeRequest(OffsetPtr offset, void *data, Serialize::ParticipantId requester = 0, Serialize::MessageId requesterTransactionId = 0, Serialize::GenericMessageReceiver receiver = {}) const;
         
-            Serialize::FormattedBufferedStream &getSlaveRequestMessageTarget() const;
+            Serialize::WriteMessage getSlaveRequestMessageTarget() const;
 
 
             

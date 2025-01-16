@@ -59,8 +59,8 @@ namespace Serialize {
         void writeState(const void *unit, FormattedSerializeStream &out, CallerHierarchyBasePtr hierarchy = {}) const;
         StreamResult readState(void *unit, FormattedSerializeStream &in, StateTransmissionFlags flags = 0, CallerHierarchyBasePtr hierarchy = {}) const;
 
-        StreamResult readAction(void *unit, FormattedBufferedStream &in, PendingRequest &request) const;
-        StreamResult readRequest(void *unit, FormattedBufferedStream &in, MessageId id) const;
+        StreamResult readAction(void *unit, FormattedMessageStream &in, PendingRequest &request) const;
+        StreamResult readRequest(void *unit, FormattedMessageStream &in, MessageId id) const;
 
         StreamResult applyMap(void *unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) const;
         void setSynced(SerializableUnitBase *unit, bool b, const CallerHierarchyBasePtr &hierarchy = {}) const;
@@ -68,8 +68,8 @@ namespace Serialize {
         void setActive(SerializableUnitBase *unit, bool active, bool existenceChanged) const;
         void setParent(SerializableUnitBase *unit) const;
 
-        void writeAction(const void *unit, uint16_t index, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, void *data) const;
-        void writeRequest(const void *unit, uint16_t index, FormattedBufferedStream &out, void *data) const;
+        void writeAction(const void *unit, uint16_t index, const std::vector<WriteMessage> &outStreams, void *data) const;
+        void writeRequest(const void *unit, uint16_t index, FormattedMessageStream &out, void *data) const;
 
         StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor) const;
 
@@ -78,12 +78,12 @@ namespace Serialize {
 
         const SyncFunction &getFunction(uint16_t index) const;
 
-        void writeFunctionArguments(const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, uint16_t index, FunctionType type, const void *args) const;
-        void writeFunctionResult(FormattedBufferedStream &out, uint16_t index, const void *args) const;
-        void writeFunctionError(FormattedBufferedStream &out, uint16_t index, MessageResult error) const;
-        StreamResult readFunctionAction(SyncableUnitBase *unit, FormattedBufferedStream &in, PendingRequest &request) const;
-        StreamResult readFunctionRequest(SyncableUnitBase *unit, FormattedBufferedStream &in, MessageId id) const;
-        StreamResult readFunctionError(SyncableUnitBase *unit, FormattedBufferedStream &in, PendingRequest &request) const;
+        void writeFunctionArguments(const std::vector<WriteMessage> &outStreams, uint16_t index, FunctionType type, const void *args) const;
+        void writeFunctionResult(FormattedMessageStream &out, uint16_t index, const void *args) const;
+        void writeFunctionError(FormattedMessageStream &out, uint16_t index, MessageResult error) const;
+        StreamResult readFunctionAction(SyncableUnitBase *unit, FormattedMessageStream &in, PendingRequest &request) const;
+        StreamResult readFunctionRequest(SyncableUnitBase *unit, FormattedMessageStream &in, MessageId id) const;
+        StreamResult readFunctionError(SyncableUnitBase *unit, FormattedMessageStream &in, PendingRequest &request) const;
     };
 
 }

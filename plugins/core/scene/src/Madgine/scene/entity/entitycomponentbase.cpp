@@ -43,10 +43,8 @@ namespace Scene {
             payload.mComponent = this;
             payload.mData = data;
 
-            std::set<std::reference_wrapper<Serialize::FormattedBufferedStream>, Serialize::CompareStreamId> streams = getMasterActionMessageTargets(mEntity, answerTarget, answerId, targets);
+            std::vector<Serialize::WriteMessage> streams = getMasterActionMessageTargets(mEntity, answerTarget, answerId, targets);
             mEntity->serializeType()->writeAction(mEntity, 1, streams, &payload);
-            for (Serialize::FormattedBufferedStream &stream : streams)
-                stream.endMessageWrite();
         }
 
         void Engine::Scene::Entity::SyncableEntityComponentBase::writeRequest(OffsetPtr offset, void *data, Serialize::ParticipantId requester, Serialize::MessageId requesterTransactionId, Serialize::GenericMessageReceiver receiver) const
@@ -54,7 +52,7 @@ namespace Scene {
             throw 0;
         }
 
-        Serialize::FormattedBufferedStream &Engine::Scene::Entity::SyncableEntityComponentBase::getSlaveRequestMessageTarget() const
+        Serialize::WriteMessage Engine::Scene::Entity::SyncableEntityComponentBase::getSlaveRequestMessageTarget() const
         {
             throw 0;
         }

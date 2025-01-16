@@ -81,7 +81,7 @@ namespace FirstParty {
         if (id == SteamUser()->GetSteamID())
             return SerializeManager::sLocalMasterParticipantId;
 
-        for (const Serialize::FormattedBufferedStream& out : getMasterMessageTargets()) {
+        for (const Serialize::FormattedMessageStream& out : getMasterMessageTargets()) {
             if (static_cast<SteamStreamData*>(out.data())->user() == id) {
                 return out.id();
             }
@@ -95,7 +95,7 @@ namespace FirstParty {
         SyncManager::removeSlaveStream(reason);
     }
 
-    std::map<Serialize::ParticipantId, Serialize::FormattedBufferedStream>::iterator SteamSyncManager::removeMasterStream(std::map<Serialize::ParticipantId, Serialize::FormattedBufferedStream>::iterator it, Serialize::SyncManagerResult reason)
+    std::map<Serialize::ParticipantId, Serialize::FormattedMessageStream>::iterator SteamSyncManager::removeMasterStream(std::map<Serialize::ParticipantId, Serialize::FormattedMessageStream>::iterator it, Serialize::SyncManagerResult reason)
     {
         SteamStreamData *data = static_cast<SteamStreamData*>(it->second.data());
 

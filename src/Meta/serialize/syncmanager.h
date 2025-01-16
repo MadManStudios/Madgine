@@ -10,7 +10,7 @@
 
 #include "streams/comparestreamid.h"
 
-#include "streams/formattedbufferedstream.h"
+#include "streams/formattedmessagestream.h"
 
 #include "Generic/execution/virtualsender.h"
 
@@ -37,16 +37,16 @@ namespace Serialize {
         void removeTopLevelItem(TopLevelUnitBase *unit);
         void moveTopLevelItem(TopLevelUnitBase *oldUnit, TopLevelUnitBase *newUnit);
 
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterMessageTargets();
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> getMasterMessageTargets();
 
-        FormattedBufferedStream &getSlaveMessageTarget();
+        FormattedMessageStream &getSlaveMessageTarget();
 
         std::vector<ParticipantId> getMasterParticipantIds();
         size_t clientCount() const;
 
-        static void writeHeader(FormattedBufferedStream &stream, const SyncableUnitBase *unit, MessageType type);
-        static void writeActionHeader(FormattedBufferedStream &stream, const SyncableUnitBase *unit, MessageType type, MessageId id);
-        StreamResult readMessage(FormattedBufferedStream &stream, MessageId id);
+        static void writeHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type);
+        static void writeActionHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type, MessageId id);
+        StreamResult readMessage(ReadMessage &msg, FormattedMessageStream &stream);
 
         void receiveMessages(int msgCount = -1, TimeOut timeout = {});
         void sendMessages();
@@ -57,10 +57,10 @@ namespace Serialize {
         static ParticipantId getParticipantId(SyncManager *manager);
 
     protected:
-        StreamResult receiveMessages(FormattedBufferedStream &stream, int &msgCount, TimeOut timeout = {});
+        StreamResult receiveMessages(FormattedMessageStream &stream, int &msgCount, TimeOut timeout = {});
 
-        FormattedBufferedStream *getSlaveStream();
-        FormattedBufferedStream &getMasterStream(ParticipantId id);
+        FormattedMessageStream *getSlaveStream();
+        FormattedMessageStream &getMasterStream(ParticipantId id);
 
         void removeAllStreams();
         void setSlaveStreamImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, Format format, std::unique_ptr<message_streambuf> buffer, TimeOut timeout = {}, std::unique_ptr<SyncStreamData> data = {});
@@ -70,11 +70,11 @@ namespace Serialize {
 
         SyncManagerResult addMasterStream(Format format, std::unique_ptr<message_streambuf> buffer, std::unique_ptr<SyncStreamData> data = {});
         SyncManagerResult moveMasterStream(ParticipantId streamId, SyncManager *target);
-        virtual std::map<ParticipantId, FormattedBufferedStream>::iterator removeMasterStream(std::map<ParticipantId, FormattedBufferedStream>::iterator it, SyncManagerResult reason = SyncManagerResult::UNKNOWN_ERROR);
+        virtual std::map<ParticipantId, FormattedMessageStream>::iterator removeMasterStream(std::map<ParticipantId, FormattedMessageStream>::iterator it, SyncManagerResult reason = SyncManagerResult::UNKNOWN_ERROR);
 
         const std::set<TopLevelUnitBase *> &getTopLevelUnits() const;
 
-        void sendState(FormattedBufferedStream &stream, SyncableUnitBase *unit);
+        void sendState(FormattedMessageStream &stream, SyncableUnitBase *unit);
 
         void setError(SyncableUnitBase *unit, PendingRequest &pending, MessageResult error);
 
@@ -85,8 +85,8 @@ namespace Serialize {
         size_t mReceivingCounter;
 
     private:
-        std::map<ParticipantId, FormattedBufferedStream> mMasterStreams;
-        std::optional<FormattedBufferedStream> mSlaveStream;
+        std::map<ParticipantId, FormattedMessageStream> mMasterStreams;
+        std::optional<FormattedMessageStream> mSlaveStream;
 
         std::set<TopLevelUnitBase *> mTopLevelUnits; //TODO: Sort by MasterId
 
