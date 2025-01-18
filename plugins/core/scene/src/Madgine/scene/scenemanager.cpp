@@ -61,6 +61,7 @@ namespace Scene {
         , mAnimationClock(mClock.now())
         , mSimulationClock(mClock.now())
     {
+        pause();
     }
 
     SceneManager::~SceneManager()
@@ -242,7 +243,7 @@ namespace Scene {
 
     void SceneManager::startLifetime()
     {
-        mApp.lifetime().attach(mLifetime | with_constant_binding<"Scene">(this));
+        mApp.lifetime().attach(mLifetime | Execution::after([this]() { unpause(); }) | Execution::finally([this]() { pause(); }) | with_constant_binding<"Scene">(this));
         for (ContainerData& container : kvValues(mContainers)) {
             container.mContainer.startLifetime();
         }

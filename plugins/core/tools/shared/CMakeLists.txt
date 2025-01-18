@@ -15,3 +15,11 @@ add_notices(ImGui
 add_subdirectory(im3d)
 set_target_properties(Im3D PROPERTIES EXCLUDE_FROM_ALL TRUE)
 
+
+add_subdirectory(NodeEditor)
+
+add_notices(imgui_node_editor 
+	READABLE_NAME "ImGui Node Editor" 
+	LICENSE_FILE NodeEditor/LICENSE 
+	CREDITS "Nodegraph-Editor: Node Editor in ImGui - https://github.com/thedmd/imgui-node-editor")
+

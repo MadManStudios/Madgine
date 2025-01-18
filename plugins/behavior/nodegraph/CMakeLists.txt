@@ -1,7 +1,5 @@
 Project(NodeGraph)
 
-add_subdirectory(shared)
-
 set(sources "")
 FolderSources(sources "" src)
 	FolderSources(sources src Madgine nodegraphforward.h nodegraphlib.h)

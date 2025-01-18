@@ -14,8 +14,9 @@ target_link_plugins(Debugger Root)
 set(sources "")
 FolderSources(sources "" tools)
 	FolderSources(sources tools Madgine_Tools)
-		FolderSources(sources Madgine_Tools debugger debuggerview.cpp debuggerview.h)			
+		FolderSources(sources Madgine_Tools debugger debuggerview.cpp debuggerview.h lifetimecontrol.cpp lifetimecontrol.h)			
 
 add_tools(Debugger ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/debugtoolslib.h)
 
 target_link_plugins(DebuggerTools Tools)
+target_link_libraries(DebuggerTools PUBLIC imgui_node_editor Trees)

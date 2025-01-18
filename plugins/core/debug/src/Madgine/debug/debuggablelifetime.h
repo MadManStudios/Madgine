@@ -13,9 +13,11 @@ namespace Debug {
 
     struct MADGINE_DEBUGGER_EXPORT DebuggableLifetimeBase {
         DebuggableLifetimeBase(DebuggableLifetimeBase *parent = nullptr);
-
+        ~DebuggableLifetimeBase();
+        
         virtual void startLifetime() = 0;
         virtual void endLifetime() = 0;
+        virtual bool running() = 0;
 
         Generator<DebuggableLifetimeBase &> children();
 
@@ -57,6 +59,11 @@ namespace Debug {
         auto end()
         {
             return mLifetime.end();
+        }
+
+        bool running()
+        {
+            return mLifetime.running();
         }
 
         using is_sender = void;

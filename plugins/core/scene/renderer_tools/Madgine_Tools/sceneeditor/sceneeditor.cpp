@@ -80,7 +80,7 @@ namespace Tools {
         mInspector = &mRoot.getTool<Inspector>();
         mSceneViews.emplace_back(std::make_unique<SceneView>(this, mWindow.getRenderer()));
 
-        mSceneMgr->pause();
+        //mSceneMgr->pause();
         mMode = STOP;
 
         mStartBuffer.resize(65536);

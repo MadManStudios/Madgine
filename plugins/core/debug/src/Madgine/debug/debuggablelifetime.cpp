@@ -44,12 +44,16 @@ namespace Debug {
         {
             return {};
         }
+        bool running() override
+        {
+            return true;
+        }
     };
 
     Threading::WorkgroupLocal<RootLifetime> sRoot;
     Threading::WorkgroupLocal<bool> sInitialized;
 
-    DebuggableLifetimeBase *getRoot()
+    MADGINE_DEBUGGER_EXPORT DebuggableLifetimeBase *getRoot()
     {
         if (!sInitialized) {
             sInitialized = true;
@@ -69,6 +73,21 @@ namespace Debug {
             mParent->mFirstChild = this;
         }
         mParent->mLastChild = this;
+    }
+
+    DebuggableLifetimeBase::~DebuggableLifetimeBase()
+    {
+        if (mParent) {
+            if (mParent->mLastChild == this)
+                mParent->mLastChild = mNext;
+            if (mParent->mFirstChild == this)
+                mParent->mFirstChild = mPrev;
+
+            if (mPrev)
+                mPrev->mNext = mNext;
+            if (mNext)
+                mNext->mPrev = mPrev;
+        }
     }
 
     DebuggableLifetimeBase::DebuggableLifetimeBase(std::nullopt_t)

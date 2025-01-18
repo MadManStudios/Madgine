@@ -181,6 +181,88 @@ namespace Execution {
 
     inline constexpr then_t then;
 
+    struct after_t {
+
+        template <typename Inner, typename Rec, typename T>
+        struct state {
+
+            using State = connect_result_t<Inner, Rec>;
+
+            state(Inner &&inner, Rec &&rec, T &&func)
+                : mFunc(std::forward<T>(func))
+                , mState(connect(std::forward<Inner>(inner), std::forward<Rec>(rec)))
+            {
+            }
+
+            void start()
+            {
+                mFunc();
+                mState.start();
+            }
+
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, state &state, Args &&...args)
+                -> tag_invoke_result_t<CPO, State &, Args...>
+            {
+                return f(state.mState, std::forward<Args>(args)...);
+            }
+            T mFunc;
+            State mState;
+        };
+
+        template <Sender Sender, typename T>
+        struct sender : algorithm_sender<Sender> {
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
+            {
+                return state<Sender, Rec, T> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mFunc) };
+            }
+
+            T mFunc;
+        };
+
+        template <Sender Sender, typename T>
+        friend auto tag_invoke(after_t, Sender &&inner, T &&func)
+        {
+            return sender<Sender, T> { { {}, std::forward<Sender>(inner) }, std::forward<T>(func) };
+        }
+
+        template <typename Sender, typename T>
+            requires tag_invocable<after_t, Sender, T>
+        auto operator()(Sender &&sender, T &&func) const
+            noexcept(is_nothrow_tag_invocable_v<after_t, Sender, T>)
+                -> tag_invoke_result_t<after_t, Sender, T>
+        {
+            return tag_invoke(*this, std::forward<Sender>(sender), std::forward<T>(func));
+        }
+
+        template <typename T>
+        auto operator()(T &&func) const
+        {
+            return pipable_from_right(*this, std::forward<T>(func));
+        }
+
+        template <typename T>
+        struct typed {
+            template <typename Sender>
+                requires tag_invocable<after_t, Sender, T>
+            auto operator()(Sender &&sender, T &&func = {}) const
+                noexcept(is_nothrow_tag_invocable_v<after_t, Sender, T>)
+                    -> tag_invoke_result_t<after_t, Sender, T>
+            {
+                return tag_invoke(after_t {}, std::forward<Sender>(sender), std::forward<T>(func));
+            }
+
+            auto operator()(T &&func = {}) const
+            {
+                return pipable_from_right(after_t {}, std::forward<T>(func));
+            }
+        };
+    };
+
+    inline constexpr after_t after;
+
     struct onError_t {
 
         template <typename Rec, typename T>
@@ -228,7 +310,6 @@ namespace Execution {
         {
             return pipable_from_right(*this, std::forward<T>(onError));
         }
-
     };
 
     inline constexpr onError_t onError;
@@ -1574,7 +1655,7 @@ namespace Execution {
             Rec mRec;
             std::stop_source mStopSource;
             inner_state mInnerState;
-            stop_state mStopState;            
+            stop_state mStopState;
             // stop_callback<> mPropagateCallback;
             std::atomic_flag mFinished;
         };
