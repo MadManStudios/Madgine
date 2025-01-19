@@ -1,3 +1,0 @@
-\page Physics Physics
-
-# Physics

@@ -1,4 +1,0 @@
-\page Resources Resources
-
-# Resources
-

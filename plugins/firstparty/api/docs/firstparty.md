@@ -1,3 +1,0 @@
-\page FirstParty FirstParty
-
-# FirstParty

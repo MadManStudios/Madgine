@@ -1,4 +1,0 @@
-\page Base Base
-
-# Base
-

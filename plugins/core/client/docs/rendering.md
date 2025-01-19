@@ -1,3 +1,0 @@
-\page Rendering Rendering
-
-# Rendering

@@ -1,3 +1,0 @@
-\page Server Server
-
-# Server
