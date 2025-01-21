@@ -19,7 +19,7 @@ if (DOXYGEN_FOUND)
         USES_TERMINAL)
 
     add_custom_target(sphinx
-        COMMAND doxysphinx build docs doc docs/doxygen
+        COMMAND doxysphinx build docs doc/docs docs/doxygen
         COMMAND sphinx-build -b html . doc -c docs
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Generating documentation with Sphinx including doxygen output"

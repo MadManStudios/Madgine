@@ -32,14 +32,13 @@ The Madgine is licensed under the MIT License, see [LICENSE.md](@ref License) fo
 
 .. toctree::
 
-   /LICENSE
-   CODE_OF_CONDUCT
-   core/gettingstarted
-   core/architecture
-   core/features
-   core/core
    
+   
+   gettingstarted
+   usermanual
+   programming
+   developers
 
    plugins
 
-   /docs/doxygen/index
+   /LICENSE

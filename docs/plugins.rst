@@ -5,5 +5,5 @@ Plugins
 .. toctree::
    :glob:
    
-   /plugins/core/**
+   /plugins/**/docs/*
    

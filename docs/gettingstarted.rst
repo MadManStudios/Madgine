@@ -1,7 +1,5 @@
-\page Manual Getting Started 
-
-Building the Engine
-===================
+Getting Started
+===============
 
 Full article: 
 \subpage Build
