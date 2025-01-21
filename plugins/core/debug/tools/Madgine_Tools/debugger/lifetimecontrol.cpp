@@ -18,6 +18,8 @@
 
 #include "Madgine/trees/treeformat.h"
 
+#include "Madgine_Tools/renderer/imroot.h"
+
 UNIQUECOMPONENT(Engine::Tools::LifetimeControl);
 
 METATABLE_BEGIN_BASE(Engine::Tools::LifetimeControl, Engine::Tools::ToolBase)
@@ -29,7 +31,7 @@ SERIALIZETABLE_END(Engine::Tools::LifetimeControl)
 namespace Engine {
 
 namespace Debug {
-    DebuggableLifetimeBase *getRoot();
+    DebuggableLifetimeBase &getRootLifetime();
 }
 
 namespace Tools {
@@ -134,9 +136,29 @@ namespace Tools {
         }
     }
 
+    void LifetimeControl::update()
+    {
+        ToolBase::update();
+        renderToolbar();
+    }
+
     void LifetimeControl::render()
     {
+        renderTreeView();
+    }
 
+    void LifetimeControl::renderMenu()
+    {
+        ToolBase::renderMenu();
+    }
+
+    std::string_view LifetimeControl::key() const
+    {
+        return "Lifetime Control";
+    }
+
+    void LifetimeControl::renderTreeView()
+    {
         if (ImGui::Begin("Lifetime Control", &mVisible)) {
 
             ImVec2 oldViewportPos = ImGui::GetCurrentContext()->MouseViewport->Pos;
@@ -149,7 +171,7 @@ namespace Tools {
 
             ed::Begin("Node editor");
 
-            Debug::DebuggableLifetimeBase &root = *Debug::getRoot();
+            Debug::DebuggableLifetimeBase &root = Debug::getRootLifetime();
 
             for (Debug::DebuggableLifetimeBase &child : root.children())
                 renderLifetime(child);
@@ -186,14 +208,17 @@ namespace Tools {
         ImGui::End();
     }
 
-    void LifetimeControl::renderMenu()
+    void LifetimeControl::renderToolbar()
     {
-        ToolBase::renderMenu();
-    }
+        ImGuiWindowClass window_class;
+        window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar;
+        ImGui::SetNextWindowClass(&window_class);
+        if (ImGui::Begin("Lifetime Control - Toolbar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
+            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Up, 0.01f, true, ImGuiCond_FirstUseEver);
 
-    std::string_view LifetimeControl::key() const
-    {
-        return "Lifetime Control";
+            controls(Debug::getRootLifetime());
+        }
+        ImGui::End();
     }
 
 }

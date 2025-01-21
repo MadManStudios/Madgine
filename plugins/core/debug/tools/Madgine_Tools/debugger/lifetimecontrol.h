@@ -22,10 +22,14 @@ namespace Tools {
         virtual Threading::Task<bool> init() override;
         virtual Threading::Task<void> finalize() override;
 
+        virtual void update() override;
         virtual void render() override;
         virtual void renderMenu() override;
 
         std::string_view key() const override;
+
+        void renderTreeView();
+        void renderToolbar();
 
     private:
         std::unique_ptr<ed::EditorContext, void (*)(ed::EditorContext *)> mEditor = { nullptr, nullptr };

@@ -100,7 +100,6 @@ namespace Tools {
         auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
         updateEntityCache();
         renderHierarchy();
-        renderToolbar();
         renderSelection();
         std::erase_if(mSceneViews, [](const std::unique_ptr<SceneView> &view) { return !view->render(); });
         im3DInteractions();
@@ -306,45 +305,6 @@ namespace Tools {
 
             for (EntityNode &entity : mEntityCache)
                 renderHierarchyEntity(entity);
-        }
-        ImGui::End();
-    }
-
-    void SceneEditor::renderToolbar()
-    {
-        ImGuiWindowClass window_class;
-        window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar;
-        ImGui::SetNextWindowClass(&window_class);
-        if (ImGui::Begin("SceneEditor - Toolbar", &mVisible, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Up, 0.01f, true, ImGuiCond_FirstUseEver);
-
-            auto pre = [](bool b) { if (b) ImGui::BeginDisabled(); };
-            auto post = [](bool b) { if (b) ImGui::EndDisabled(); };
-
-            bool b = mMode == PLAY;
-            pre(b);
-            if (ImGui::Button(mMode == PAUSE ? "Resume" : IMGUI_ICON_PLAY)) {
-                play();
-            }
-            post(b);
-
-            ImGui::SameLine(0, 0);
-
-            b = mMode == PAUSE || mMode == STOP;
-            pre(b);
-            if (ImGui::Button(IMGUI_ICON_PAUSE)) {
-                pause();
-            }
-            post(b);
-
-            ImGui::SameLine(0, 0);
-
-            b = mMode == STOP;
-            pre(b);
-            if (ImGui::Button(IMGUI_ICON_STOP)) {
-                stop();
-            }
-            post(b);
         }
         ImGui::End();
     }

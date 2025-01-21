@@ -46,24 +46,28 @@ namespace Debug {
         }
         bool running() override
         {
-            return true;
+            for (DebuggableLifetimeBase& child : children()) {
+                if (child.running())
+                    return true;
+            }
+            return false;
         }
     };
 
     Threading::WorkgroupLocal<RootLifetime> sRoot;
     Threading::WorkgroupLocal<bool> sInitialized;
 
-    MADGINE_DEBUGGER_EXPORT DebuggableLifetimeBase *getRoot()
+    MADGINE_DEBUGGER_EXPORT DebuggableLifetimeBase &getRootLifetime()
     {
         if (!sInitialized) {
             sInitialized = true;
             KeyValueRegistry::registerWorkGroupLocal("Lifetimes", &sRoot);
         }
-        return &sRoot;
+        return sRoot;
     }
 
     DebuggableLifetimeBase::DebuggableLifetimeBase(DebuggableLifetimeBase *parent)
-        : mParent(parent ? parent : getRoot())
+        : mParent(parent ? parent : &getRootLifetime())
         , mPrev(mParent->mLastChild)
     {
         if (mParent->mLastChild) {
