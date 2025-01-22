@@ -27,7 +27,7 @@ namespace Input {
         virtual void startLifetime();
 
         Widgets::WidgetBase *widget() const;
-        void setWidget(Widgets::WidgetBase *w);
+        virtual void setWidget(Widgets::WidgetBase *w);
 
         virtual void sizeChanged();
 
@@ -52,6 +52,8 @@ namespace Input {
 
         bool dragging() const;
 
+        void abortDrag();
+
         template <typename... Ty>
         Widgets::Button *setupButton(std::string_view name, Ty &&...args)
         {
@@ -62,18 +64,6 @@ namespace Input {
                 mLifetime.attach(button->clickEvent().connect(std::forward<Ty>(args)...));
             return button;
         }
-
-    public:
-        void injectPointerMove(const PointerEventArgs &evt);
-        void injectPointerClick(const PointerEventArgs &evt);
-        void injectDragBegin(const PointerEventArgs &evt);
-        void injectDragMove(const PointerEventArgs &evt);
-        void injectDragEnd(const PointerEventArgs &evt);
-        void injectDragAbort();
-        bool injectKeyPress(const KeyEventArgs &evt);
-        void injectAxisEvent(const AxisEventArgs &evt);
-
-        void abortDrag();
 
     protected:
         std::string_view mWidgetName;

@@ -12,6 +12,24 @@ namespace FirstParty {
     template <typename F>
     using InfoTypeHelper = decltype(infoTypeHelper(std::declval<F>()));
 
+    template <auto f, typename R, typename Rec, typename... Args>
+    struct eos_state {
+        void start()
+        {
+            TupleUnpacker::invokeFromTuple([this](Args... args) {
+                f(std::forward<Args>(args)..., this, &eos_state::callback);
+            },
+                std::move(mArgs));
+        }
+        static void callback(const R *result)
+        {
+            eos_state *self = static_cast<eos_state *>(result->ClientData);
+            self->mRec.set_value(*result);
+        }
+        Rec mRec;
+        std::tuple<Args...> mArgs;
+    };
+
     template <auto f, typename... Args>
     auto EOS_sender(Args &&...args)
     {
@@ -21,23 +39,7 @@ namespace FirstParty {
         using R = InfoTypeHelper<C>;
         return Execution::make_sender<GenericResult, R>(
             [args = std::tuple<Args...> { std::forward<Args>(args)... }]<typename Rec>(Rec &&rec) mutable {
-                struct state {
-                    void start()
-                    {
-                        TupleUnpacker::invokeFromTuple([this](Args... args) {
-                            f(std::forward<Args>(args)..., this, &state::callback);
-                        },
-                            std::move(mArgs));
-                    }
-                    static void callback(const R *result)
-                    {
-                        state *self = static_cast<state *>(result->ClientData);
-                        self->mRec.set_value(*result);
-                    }
-                    Rec mRec;
-                    std::tuple<Args...> mArgs;
-                };
-                return state {
+                return eos_state<f, R, Rec, Args...> {
                     std::forward<Rec>(rec), std::move(args)
                 };
             });

@@ -13,14 +13,14 @@ namespace Execution {
     template <typename Stub, typename... Ty>
     struct Connection : ConnectionReceiver<Ty...> {
 
-        Connection(Stub *stub)
+        Connection(Stub &stub)
             : mStub(stub)
         {
         }
 
         void start()
         {
-            mStub->enqueue(this);
+            mStub.enqueue(this);
         }
 
     protected:
@@ -29,7 +29,7 @@ namespace Execution {
         template <typename>
         friend struct ConnectionQueue;
 
-        Stub *mStub;
+        Stub &mStub;
         std::atomic<Connection<Stub, Ty...> *> mNext = nullptr;
     };
 
@@ -50,7 +50,7 @@ namespace Execution {
             StoppableConnection<Stub, Rec, Ty...> *mCon;
         };
 
-        StoppableConnection(Rec &&rec, Stub *stub)
+        StoppableConnection(Rec &&rec, Stub &stub)
             : Execution::VirtualState<Rec, Connection<Stub, Ty...>>(std::forward<Rec>(rec), stub)
             , mCallback(Execution::get_stop_token(this->mRec), callback { this })
         {
@@ -66,7 +66,7 @@ namespace Execution {
 
         void stop()
         {
-            if (this->mStub->extract(this))
+            if (this->mStub.extract(this))
                 this->set_done();
         }
 
@@ -83,15 +83,13 @@ namespace Execution {
         using is_sender = void;
 
         template <typename Rec>
-        friend auto tag_invoke(Execution::connect_t, ConnectionSender<Stub, Ty...> &&sender, Rec &&rec)
+        friend auto tag_invoke(Execution::connect_t, Stub &stub, Rec &&rec)
         {
             if constexpr (Execution::has_stop_token<Rec>)
-                return StoppableConnection<Stub, Rec, Ty...> { std::forward<Rec>(rec), sender.mStub };
+                return StoppableConnection<Stub, Rec, Ty...> { std::forward<Rec>(rec), stub };
             else
-                return Execution::make_virtual_state<Connection<Stub, Ty...>, GenericResult, Ty...>(std::forward<Rec>(rec), sender.mStub);
+                return Execution::make_virtual_state<Connection<Stub, Ty...>, GenericResult, Ty...>(std::forward<Rec>(rec), stub);
         }
-
-        Stub *mStub;
     };
 
 }

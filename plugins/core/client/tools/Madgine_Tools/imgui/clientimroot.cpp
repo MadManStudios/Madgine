@@ -74,15 +74,13 @@ namespace Tools {
     static void DestroyImGuiToolWindow(ImGuiViewport *vp)
     {
         if (vp->PlatformUserData) {
-            ImGuiIO &io = ImGui::GetIO();
-            Window::MainWindow *topLevel = static_cast<Window::MainWindow *>(io.BackendPlatformUserData);
-
             Window::ToolWindow *toolWindow = static_cast<Window::ToolWindow *>(vp->PlatformUserData);
             vp->PlatformUserData = nullptr;
             vp->PlatformHandle = nullptr;
             vp->PlatformHandleRaw = nullptr;
-            topLevel->destroyToolWindow(toolWindow);
+            toolWindow->close();
 
+            ImGuiIO &io = ImGui::GetIO();
             static_cast<ClientImRoot *>(io.UserData)->removeViewportMapping(toolWindow->getRenderer());
         }
     }

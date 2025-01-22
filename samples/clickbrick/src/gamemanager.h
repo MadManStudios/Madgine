@@ -25,7 +25,7 @@ namespace ClickBrick {
 
         virtual std::string_view key() const override;
 
-        virtual void startLifetime() override;
+        virtual void setWidget(Engine::Widgets::WidgetBase *widget) override;
 
         Engine::Threading::Task<void> updateApp();
 

@@ -18,6 +18,8 @@
 
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 
+#include "Modules/threading/awaitables/awaitablesender.h"
+
 METATABLE_BEGIN(Engine::Input::UIManager)
 MEMBER(mHandlers)
 METATABLE_END(Engine::Input::UIManager)
@@ -61,6 +63,7 @@ namespace Input {
     Threading::Task<void> UIManager::finalize()
     {
         endLifetime();
+        co_await mLifetime.finished();
 
         mWindow.removeListener(this);
 
@@ -70,7 +73,7 @@ namespace Input {
 
     void UIManager::startLifetime()
     {
-        mLifetime.start();
+        Execution::detach(mLifetime);
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             handler->startLifetime();

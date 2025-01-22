@@ -27,7 +27,7 @@ namespace Window {
 
     void ToolWindow::close()
     {
-        //TODO
+        mParent.destroyToolWindow(this);
     }
 
     OSWindow *ToolWindow::osWindow()

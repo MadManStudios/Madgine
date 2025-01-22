@@ -55,7 +55,7 @@ namespace Scene {
         size_t getComponentCount();
                 
         void startLifetime() override;
-        void endLifetime();
+        bool endLifetime();
 
         Debug::DebuggableLifetime<get_binding_d> &lifetime(); 
 

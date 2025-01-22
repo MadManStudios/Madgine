@@ -31,46 +31,6 @@ namespace Input {
         mWidget = widget;
     }
 
-    void WidgetHandlerBase::injectPointerMove(const PointerEventArgs &evt)
-    {
-        onPointerMove(evt);
-    }
-
-    void WidgetHandlerBase::injectPointerClick(const PointerEventArgs &evt)
-    {
-        onPointerClick(evt);
-    }
-
-    void WidgetHandlerBase::injectDragBegin(const PointerEventArgs &evt)
-    {
-        onDragBegin(evt);
-    }
-
-    void WidgetHandlerBase::injectDragMove(const PointerEventArgs &evt)
-    {
-        onDragMove(evt);
-    }
-
-    void WidgetHandlerBase::injectDragEnd(const PointerEventArgs &evt)
-    {
-        onDragEnd(evt);
-    }
-
-    void WidgetHandlerBase::injectDragAbort()
-    {
-        onDragAbort();
-    }
-
-    bool WidgetHandlerBase::injectKeyPress(const KeyEventArgs &evt)
-    {
-        return onKeyPress(evt);
-    }
-
-    void WidgetHandlerBase::injectAxisEvent(const AxisEventArgs &evt)
-    {
-        onAxisEvent(evt);
-    }
-
     void WidgetHandlerBase::abortDrag()
     {
         if (mWidget)
@@ -119,16 +79,18 @@ namespace Input {
     {
         HandlerBase::startLifetime();
 
-        mWidget = mUI.window().getWindowComponent<Widgets::WidgetManager>().getWidget(mWidgetName);
+        Widgets::WidgetBase *widget = mUI.window().getWindowComponent<Widgets::WidgetManager>().getWidget(mWidgetName);
+        if (widget != mWidget)
+            setWidget(widget);
 
         if (mWidget) {
-            mLifetime.attach(mWidget->pointerMoveEvent().connect(&WidgetHandlerBase::injectPointerMove, this));
-            mLifetime.attach(mWidget->pointerClickEvent().connect(&WidgetHandlerBase::injectPointerClick, this));
-            mLifetime.attach(mWidget->dragBeginEvent().connect(&WidgetHandlerBase::injectDragBegin, this));
-            mLifetime.attach(mWidget->dragMoveEvent().connect(&WidgetHandlerBase::injectDragMove, this));
-            mLifetime.attach(mWidget->dragEndEvent().connect(&WidgetHandlerBase::injectDragEnd, this));
-            mLifetime.attach(mWidget->axisEvent().connect(&WidgetHandlerBase::injectAxisEvent, this));
-            mLifetime.attach(mWidget->keyEvent().connect(&WidgetHandlerBase::injectKeyPress, this));
+            mLifetime.attach(mWidget->pointerMoveEvent().connect(&WidgetHandlerBase::onPointerMove, this));
+            mLifetime.attach(mWidget->pointerClickEvent().connect(&WidgetHandlerBase::onPointerClick, this));
+            mLifetime.attach(mWidget->dragBeginEvent().connect(&WidgetHandlerBase::onDragBegin, this));
+            mLifetime.attach(mWidget->dragMoveEvent().connect(&WidgetHandlerBase::onDragMove, this));
+            mLifetime.attach(mWidget->dragEndEvent().connect(&WidgetHandlerBase::onDragEnd, this));
+            mLifetime.attach(mWidget->axisEvent().connect(&WidgetHandlerBase::onAxisEvent, this));
+            mLifetime.attach(mWidget->keyEvent().connect(&WidgetHandlerBase::onKeyPress, this));
             mWidget->setAcceptsPointerEvents(true);
         }
     }

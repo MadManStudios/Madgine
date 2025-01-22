@@ -204,7 +204,8 @@ namespace Window {
     */
     Threading::Task<void> MainWindow::finalize()
     {
-        co_await mLifetime.end();
+        mLifetime.end();
+        co_await mLifetime.finished();
 
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
             co_await comp->callFinalize();
@@ -241,7 +242,7 @@ namespace Window {
 
     void MainWindow::startLifetime()
     {
-        mLifetime.start();
+        Execution::detach(mLifetime);
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components()) {
             comp->startLifetime();
         }

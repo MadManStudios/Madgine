@@ -69,9 +69,9 @@ namespace Threading {
             return std::get<0>(*mFlag);
         }
 
-        auto sender()
+        auto &sender()
         {
-            return mFlag.sender();
+            return mFlag;
         }
     };
 
@@ -114,9 +114,9 @@ namespace Threading {
             assert(mFlag.isSet());
         }
 
-        auto sender()
+        auto &sender()
         {
-            return mFlag.sender();
+            return mFlag;
         }
     };
 

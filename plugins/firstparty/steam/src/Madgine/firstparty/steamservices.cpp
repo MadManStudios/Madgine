@@ -220,7 +220,7 @@ namespace FirstParty {
         SteamMatchmaking()->SetLobbyGameServer(mCurrentLobby, 0, 0, SteamUser()->GetSteamID());
         
         if (playerCount > 1)
-            co_await mSyncManager.playersConnected().sender();
+            co_await mSyncManager.playersConnected();
         
         leaveLobby();
 

@@ -88,16 +88,16 @@ Engine::Threading::Task<void> GameManager::finalize()
     co_await WidgetHandlerBase::finalize();
 }
 
-void GameManager::startLifetime()
+void GameManager::setWidget(Engine::Widgets::WidgetBase *widget)
 {
-    WidgetHandlerBase::startLifetime();
+    WidgetHandlerBase::setWidget(widget);
 
-    if (widget()) {
-        mGameWindow = widget()->getChildRecursive<Engine::Widgets::SceneWindow>("GameView");
+    if (widget) {
+        mGameWindow = widget->getChildRecursive<Engine::Widgets::SceneWindow>("GameView");
         mGameWindow->setRenderSource(mGameRenderTarget.get());
 
-        mScoreLabel = widget()->getChildRecursive<Engine::Widgets::Label>("Score");
-        mLifeLabel = widget()->getChildRecursive<Engine::Widgets::Label>("Life");
+        mScoreLabel = widget->getChildRecursive<Engine::Widgets::Label>("Score");
+        mLifeLabel = widget->getChildRecursive<Engine::Widgets::Label>("Life");
 
     } else {
         mGameWindow = nullptr;

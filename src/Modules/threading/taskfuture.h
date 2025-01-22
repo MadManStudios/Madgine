@@ -55,7 +55,7 @@ namespace Threading {
             return mState->is_ready();
         }
 
-        auto sender() const 
+        auto &sender() const 
         {
             return mState->sender();
         }

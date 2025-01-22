@@ -3,6 +3,7 @@
 #include <steam/steam_api.h>
 
 #include "Meta/serialize/streams/message_streambuf.h"
+#include "Generic/functor.h"
 
 namespace Engine {
 namespace FirstParty {

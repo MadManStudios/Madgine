@@ -28,10 +28,10 @@
 UNIQUECOMPONENT(Engine::Scene::SceneManager);
 
 METATABLE_BEGIN(Engine::Scene::SceneManager)
-//TODO
-//SYNCABLEUNIT_MEMBERS()
+// TODO
+// SYNCABLEUNIT_MEMBERS()
 MEMBER(mSceneComponents)
-//MEMBER(mContainers)
+// MEMBER(mContainers)
 METATABLE_END(Engine::Scene::SceneManager)
 
 /* static Engine::Threading::DataMutex::Lock static_lock(Engine::Scene::SceneManager *mgr)
@@ -94,8 +94,8 @@ namespace Scene {
 
     Threading::Task<void> SceneManager::finalize()
     {
-        //assert(mEntities.empty());
-        //assert(mLocalEntities.empty());
+        // assert(mEntities.empty());
+        // assert(mLocalEntities.empty());
 
         for (const std::unique_ptr<SceneComponentBase> &component : mSceneComponents) {
             co_await component->callFinalize();
@@ -166,16 +166,15 @@ namespace Scene {
             }
         }
 
-        for (Entity::AnimationState* state : doneAnimations) {
+        for (Entity::AnimationState *state : doneAnimations) {
             state->finish();
         }
-
     }
 
     void SceneManager::clear()
     {
-        endLifetime();
-        startLifetime();
+        if (endLifetime())
+            startLifetime();
     }
 
     void SceneManager::pause()
@@ -244,14 +243,14 @@ namespace Scene {
     void SceneManager::startLifetime()
     {
         mApp.lifetime().attach(mLifetime | Execution::after([this]() { unpause(); }) | Execution::finally([this]() { pause(); }) | with_constant_binding<"Scene">(this));
-        for (ContainerData& container : kvValues(mContainers)) {
+        for (ContainerData &container : kvValues(mContainers)) {
             container.mContainer.startLifetime();
         }
     }
 
-    void SceneManager::endLifetime()
+    bool SceneManager::endLifetime()
     {
-        mLifetime.end();
+        return mLifetime.end();
     }
 
     Debug::DebuggableLifetime<get_binding_d> &SceneManager::lifetime()

@@ -113,14 +113,14 @@ namespace Widgets {
         Execution::SignalStub<const Input::PointerEventArgs &> &pointerEnterEvent();
         auto pointerEnterSender()
         {
-            return mPointerEnterSignal.sender() | Execution::then([](const Input::PointerEventArgs &args) {
+            return mPointerEnterSignal | Execution::then([](const Input::PointerEventArgs &args) {
                 return 3;
             });
         }
         Execution::SignalStub<const Input::PointerEventArgs &> &pointerLeaveEvent();
         auto pointerLeaveSender()
         {
-            return mPointerLeaveSignal.sender() | Execution::then([](const Input::PointerEventArgs &args) {
+            return mPointerLeaveSignal | Execution::then([](const Input::PointerEventArgs &args) {
                 return 3;
             });
         }

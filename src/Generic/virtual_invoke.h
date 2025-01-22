@@ -10,7 +10,7 @@ struct VirtualCPOBaseHelper : Base {
 
     using mapped_cpos = typename Base::mapped_cpos::template append<CPO_holder::value>;
 
-    virtual R v_tag_invoke(CPO _cpo, V... v) = 0;
+    virtual R v_tag_invoke(CPO _cpo, V... v) = 0;    
 
     template <typename... Args>
     friend auto tag_invoke(CPO _cpo, VirtualCPOBaseHelper &base, Args &&...args)

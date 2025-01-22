@@ -25,12 +25,6 @@ namespace Scene {
             const EntityComponentHandle<EntityComponentBase> &handle() const;
 
             explicit operator EntityComponentHandle<EntityComponentBase>() const;
-
-            /*const EntityPtr &entity() const
-            {
-                return mEntity;
-            }*/
-
             SceneManager *sceneMgr() const;
 
             uint32_t type() const;
@@ -74,11 +68,6 @@ namespace Scene {
             }
 
             explicit operator EntityComponentHandle<const EntityComponentBase>() const;
-
-            /*const EntityPtr &entity() const
-            {
-                return mEntity;
-            }*/
 
             SceneManager *sceneMgr() const
             {
@@ -163,11 +152,6 @@ namespace Scene {
             {
                 return mHandle == handle;
             }
-
-            /*const EntityPtr &entity() const
-            {
-                return mEntity;
-            }*/
 
             SceneManager *sceneMgr() const
             {

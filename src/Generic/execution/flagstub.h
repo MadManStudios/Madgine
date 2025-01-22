@@ -10,7 +10,7 @@ namespace Engine {
 namespace Execution {
 
     template <typename... Ty>
-    struct FlagStub {
+    struct FlagStub : ConnectionSender<FlagStub<Ty...>, Ty...> {
         template <typename... Args>
         FlagStub(Args &&...args)
             : mValue(std::forward<Args>(args)...)
@@ -32,11 +32,6 @@ namespace Execution {
         {
             std::lock_guard guard { mStack.mutex() };
             return *mValue;
-        }
-
-        ConnectionSender<FlagStub<Ty...>, Ty...> sender()
-        {
-            return ConnectionSender<FlagStub<Ty...>, Ty...> { this };
         }
 
         void enqueue(Connection<FlagStub<Ty...>, Ty...> *con)

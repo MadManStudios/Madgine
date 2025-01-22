@@ -51,12 +51,7 @@ namespace Debug {
             mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Execution::with_sub_debug_location(createContext()));
         }
 
-        void start()
-        {
-            mLifetime.start();
-        }
-
-        auto end()
+        bool end()
         {
             return mLifetime.end();
         }
@@ -64,6 +59,11 @@ namespace Debug {
         bool running()
         {
             return mLifetime.running();
+        }
+
+        auto &finished()
+        {
+            return mLifetime.finished();
         }
 
         using is_sender = void;

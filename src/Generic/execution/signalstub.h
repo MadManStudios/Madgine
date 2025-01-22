@@ -10,7 +10,7 @@ namespace Engine {
 namespace Execution {
 
     template <typename... Ty>
-    struct SignalStub {
+    struct SignalStub : ConnectionSender<SignalStub<Ty...>, Ty...> {
         SignalStub() = default;
 
         SignalStub(const SignalStub<Ty...> &other)
@@ -32,12 +32,7 @@ namespace Execution {
         template <typename T>
         auto connect(T &&slot)
         {
-            return sender() | Execution::then(TupleUnpacker::wrap(std::forward<T>(slot))) | Execution::repeat;
-        }
-
-        ConnectionSender<SignalStub<Ty...>, Ty...> sender()
-        {
-            return ConnectionSender<SignalStub<Ty...>, Ty...> { this };
+            return *this | Execution::then(TupleUnpacker::wrap(std::forward<T>(slot))) | Execution::repeat;
         }
 
         void enqueue(Connection<SignalStub<Ty...>, Ty...> *con)
