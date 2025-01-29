@@ -7,7 +7,7 @@ namespace Engine {
 
 namespace Render {
 
-    struct MADGINE_CLIENT_EXPORT RenderData {
+    struct MADGINE_RENDER_EXPORT RenderData {
 
         Threading::TaskFuture<RenderFuture> update(RenderContext *context);
 

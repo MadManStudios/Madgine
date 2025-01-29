@@ -6,7 +6,7 @@
 namespace Engine {
 namespace Tools {
 
-    struct MADGINE_CLIENT_TOOLS_EXPORT RenderContextTool : public ToolVirtualBase<RenderContextTool> {
+    struct MADGINE_RENDER_TOOLS_EXPORT RenderContextTool : public ToolVirtualBase<RenderContextTool> {
 
         SERIALIZABLEUNIT(RenderContextTool)
 

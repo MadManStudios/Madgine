@@ -1,5 +1,5 @@
 #include "opengllib.h"
-#include "Madgine/window/mainwindow.h"
+
 #include "openglrenderwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"

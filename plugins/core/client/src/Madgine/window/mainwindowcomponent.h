@@ -10,7 +10,7 @@
 
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
-#include "../render/renderpass.h"
+#include "Madgine/render/renderpass.h"
 
 namespace Engine {
 namespace Window {

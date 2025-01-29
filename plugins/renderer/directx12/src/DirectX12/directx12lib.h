@@ -5,7 +5,7 @@
 #include "Madgine/meshloaderlib.h"
 #include "Madgine/pipelineloaderlib.h"
 #include "Madgine/textureloaderlib.h"
-#include "Madgine/clientlib.h"
+#include "Madgine/renderlib.h"
 
 #if defined(DirectX12_EXPORTS)
 #    define MADGINE_DIRECTX12_EXPORT DLL_EXPORT

@@ -4,21 +4,18 @@
 
 #include "Meta/metalib.h"
 #include "Modules/moduleslib.h"
-#include "Madgine/renderlib.h"
 
 #include "Madgine/fontloaderlib.h"
 #include "Madgine/pipelineloaderlib.h"
 #include "Madgine/debuglib.h"
 
-#if defined(Client_EXPORTS)
-#    define MADGINE_CLIENT_EXPORT DLL_EXPORT
+#if defined(Render_EXPORTS)
+#    define MADGINE_RENDER_EXPORT DLL_EXPORT
 #else
-#    define MADGINE_CLIENT_EXPORT DLL_IMPORT
+#    define MADGINE_RENDER_EXPORT DLL_IMPORT
 #endif
 
-#include "clientconfig.h"
-
-#include "clientforward.h"
+#include "renderforward.h"
 
 #include "Madgine/render/renderforward.h"
 

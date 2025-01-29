@@ -19,7 +19,7 @@
 namespace Engine {
 namespace Render {
 
-    struct MADGINE_CLIENT_EXPORT RenderContext {
+    struct MADGINE_RENDER_EXPORT RenderContext {
         RenderContext(Threading::TaskQueue *queue);
         virtual ~RenderContext();
 

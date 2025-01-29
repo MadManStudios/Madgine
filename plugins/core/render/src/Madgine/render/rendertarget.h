@@ -8,7 +8,7 @@
 namespace Engine {
 namespace Render {
 
-    struct MADGINE_CLIENT_EXPORT RenderTarget : RenderData {
+    struct MADGINE_RENDER_EXPORT RenderTarget : RenderData {
         RenderTarget(RenderContext *context, bool global, std::string name, bool flipFlop = false, RenderTarget *blitSource = nullptr);
         RenderTarget(const RenderTarget &) = delete;
         RenderTarget(RenderTarget &&) = default;

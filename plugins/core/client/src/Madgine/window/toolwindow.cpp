@@ -6,9 +6,9 @@
 
 #include "Interfaces/window/windowapi.h"
 
-#include "../render/rendercontext.h"
+#include "Madgine/render/rendercontext.h"
 
-#include "../render/rendertarget.h"
+#include "Madgine/render/rendertarget.h"
 
 namespace Engine {
 namespace Window {

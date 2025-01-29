@@ -1,4 +1,4 @@
-#include "../clientlib.h"
+#include "../renderlib.h"
 
 #include "rendercontextcollector.h"
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"

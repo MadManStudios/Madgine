@@ -24,7 +24,7 @@ FolderSources(sources src Vulkan vulkanforward.h vulkanlib.h vulkanmeshdata.h vu
 
 add_plugin(Vulkan Madgine Renderer ${sources} PRECOMPILED_HEADER src/Vulkan/vulkanlib.h)
 
-target_link_libraries(Vulkan PRIVATE Client ${VULKAN_DEPENDENCIES})
+target_link_libraries(Vulkan PRIVATE Render ${VULKAN_DEPENDENCIES})
 
 if (WINDOWS)
 	target_compile_definitions(Vulkan PRIVATE VK_USE_PLATFORM_WIN32_KHR)
@@ -38,7 +38,7 @@ FolderSources(sources "" tools)
 
 add_tools(Vulkan ${sources} PRECOMPILED_HEADER tools/Vulkan_Tools/vulkantoolslib.h)
 
-target_link_plugins(VulkanTools ClientTools)
+target_link_plugins(VulkanTools RenderTools)
 target_link_libraries(VulkanTools PRIVATE ${VULKAN_DEPENDENCIES})
 
 add_shadergen_target(Vulkan -SPIRV)

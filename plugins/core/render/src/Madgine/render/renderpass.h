@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Render {
 
-    struct MADGINE_CLIENT_EXPORT RenderPass : RenderDebuggable {
+    struct MADGINE_RENDER_EXPORT RenderPass : RenderDebuggable {
         virtual ~RenderPass() = default;
 
         virtual void setup(RenderTarget *target) { }

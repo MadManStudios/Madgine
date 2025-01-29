@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Madgine_Tools/rendertoolslib.h"
 #include "Madgine_Tools/clienttoolslib.h"
 #include "Madgine/scenerendererlib.h"
 #include "Madgine_Tools/debugtoolslib.h"

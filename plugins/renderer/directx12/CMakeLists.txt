@@ -15,7 +15,7 @@ FolderSources(sources src DirectX12 directx12forward.h directx12lib.h directx12m
 
 add_plugin(DirectX12 Madgine Renderer ${sources} PRECOMPILED_HEADER src/DirectX12/directx12lib.h)
 
-target_link_libraries(DirectX12 PRIVATE d3d12 dxgi dxguid Client dxcompiler)
+target_link_libraries(DirectX12 PRIVATE d3d12 dxgi dxguid Render dxcompiler)
 
 add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PROPERTY:ShaderGen,BINARY_DIR>/shadergen/dxcompiler.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
@@ -33,7 +33,7 @@ FolderSources(sources "" tools)
 
 add_tools(DirectX12 ${sources} PRECOMPILED_HEADER tools/DirectX12_Tools/directx12toolslib.h)
 
-target_link_plugins(DirectX12Tools ClientTools)
+target_link_plugins(DirectX12Tools RenderTools)
 target_link_libraries(DirectX12Tools PRIVATE d3d12 dxgi dxcompiler)
 
 add_shadergen_target(DirectX12 -HLSL12)

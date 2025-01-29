@@ -11,10 +11,6 @@
 #include "Madgine_Tools/tasktracker/tasktracker.h"
 #endif
 
-#include "Madgine_Tools/imgui/clientimroot.h"
-
-#include "Madgine/window/mainwindow.h"
-
 #include "DirectX12/directx12rendercontext.h"
 
 #include "imgui/imgui.h"

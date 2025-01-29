@@ -8,7 +8,7 @@
 
 #include "mainwindow.h"
 
-#include "../render/rendertarget.h"
+#include "Madgine/render/rendertarget.h"
 
 METATABLE_BEGIN(Engine::Window::MainWindowComponentBase)
 METATABLE_END(Engine::Window::MainWindowComponentBase)

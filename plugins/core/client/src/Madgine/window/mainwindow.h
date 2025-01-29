@@ -2,7 +2,7 @@
 
 #include "Interfaces/window/windoweventlistener.h"
 
-#include "../render/rendercontextcollector.h"
+#include "Madgine/render/rendercontextcollector.h"
 
 #include "mainwindowcomponentcollector.h"
 
