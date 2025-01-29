@@ -1,22 +1,21 @@
-#include "../uilib.h"
+#include "handlerlib.h"
+
+#include "Madgine/behavior.h"
 #include "handler.h"
-#include "Madgine/widgets/widget.h"
-#include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
-#include "uimanager.h"
+#include "handlermanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-DEFINE_UNIQUE_COMPONENT(Engine::Input, Handler)
+DEFINE_UNIQUE_COMPONENT(Engine, Handler)
 
-METATABLE_BEGIN(Engine::Input::HandlerBase)
-METATABLE_END(Engine::Input::HandlerBase)
+METATABLE_BEGIN(Engine::HandlerBase)
+METATABLE_END(Engine::HandlerBase)
 
 namespace Engine {
-namespace Input {
-    HandlerBase::HandlerBase(UIManager &ui)
+    HandlerBase::HandlerBase(HandlerManager &ui)
         : mUI(ui)
         , mLifetime(&ui.lifetime())
     {
@@ -56,5 +55,4 @@ namespace Input {
         return mUI.viewTaskQueue();
     }
 
-}
 }

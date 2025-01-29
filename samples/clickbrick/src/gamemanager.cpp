@@ -29,7 +29,7 @@
 
 #include "Madgine/render/rendertarget.h"
 
-#include "Madgine/input/uimanager.h"
+#include "Madgine/handlermanager.h"
 
 #include "Madgine/window/mainwindow.h"
 
@@ -46,7 +46,7 @@
 
 UNIQUECOMPONENT(ClickBrick::GameManager)
 
-METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Input::WidgetHandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Widgets::WidgetHandlerBase)
 MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
@@ -55,8 +55,8 @@ NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<floa
 
 namespace ClickBrick {
 
-GameManager::GameManager(Engine::Input::UIManager &ui)
-    : Engine::Input::WidgetHandler<GameManager>(ui, "GameView")
+GameManager::GameManager(Engine::HandlerManager &ui)
+    : Engine::Widgets::WidgetHandler<GameManager>(ui, "GameView")
     , mSceneMgr(ui.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
     , mSceneRenderer(ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>(), &mCamera, 50)
     , mSceneClock(mSceneMgr.clock().now())

@@ -6,5 +6,4 @@ add_subdirectory(app)
 add_subdirectory(server)
 add_subdirectory(behavior)
 add_subdirectory(client)
-add_subdirectory(scene)
-add_subdirectory(widgets)
+

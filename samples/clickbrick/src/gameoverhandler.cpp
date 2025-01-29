@@ -12,13 +12,13 @@
 
 UNIQUECOMPONENT(ClickBrick::GameOverHandler)
 
-METATABLE_BEGIN_BASE(ClickBrick::GameOverHandler, Engine::Input::WidgetHandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::GameOverHandler, Engine::Widgets::WidgetHandlerBase)
 METATABLE_END(ClickBrick::GameOverHandler)
 
 namespace ClickBrick {
 
-    GameOverHandler::GameOverHandler(Engine::Input::UIManager &ui)
-    : Engine::Input::WidgetHandler<GameOverHandler>(ui, "GameOver", Engine::Input::WidgetHandlerBase::WidgetType::MODAL_OVERLAY)
+    GameOverHandler::GameOverHandler(Engine::HandlerManager &ui)
+    : Engine::Widgets::WidgetHandler<GameOverHandler>(ui, "GameOver", Engine::Widgets::WidgetHandlerBase::WidgetType::MODAL_OVERLAY)
     {
     }
 

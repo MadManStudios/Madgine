@@ -1,17 +1,17 @@
 #pragma once
 
-#include "handlercollector.h"
+#include "Madgine/handlercollector.h"
 
 #include "Interfaces/input/inputevents.h"
 
 #include "Madgine/widgets/button.h"
 
-#include "handler.h"
+#include "Madgine/handler.h"
 
 namespace Engine {
-namespace Input {
+namespace Widgets {
 
-    struct MADGINE_UI_EXPORT WidgetHandlerBase : HandlerBase {
+    struct MADGINE_WIDGETHANDLER_EXPORT WidgetHandlerBase : HandlerBase {
         SERIALIZABLEUNIT(WidgetHandlerBase)
 
         enum class WidgetType {
@@ -21,7 +21,7 @@ namespace Input {
             ROOT_WIDGET
         };
 
-        WidgetHandlerBase(UIManager &ui, std::string_view widgetName, WidgetType type = WidgetType::DEFAULT_WIDGET);
+        WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName, WidgetType type = WidgetType::DEFAULT_WIDGET);
         virtual ~WidgetHandlerBase() = default;
 
         virtual void startLifetime();
@@ -38,17 +38,17 @@ namespace Input {
         bool isRootWindow() const;
 
     protected:
-        virtual void onPointerMove(const PointerEventArgs &me);
-        virtual void onPointerClick(const PointerEventArgs &me);
+        virtual void onPointerMove(const Input::PointerEventArgs &me);
+        virtual void onPointerClick(const Input::PointerEventArgs &me);
 
-        virtual void onDragBegin(const PointerEventArgs &me);
-        virtual void onDragMove(const PointerEventArgs &me);
-        virtual void onDragEnd(const PointerEventArgs &me);
+        virtual void onDragBegin(const Input::PointerEventArgs &me);
+        virtual void onDragMove(const Input::PointerEventArgs &me);
+        virtual void onDragEnd(const Input::PointerEventArgs &me);
         virtual void onDragAbort();
 
-        virtual bool onKeyPress(const KeyEventArgs &evt);
+        virtual bool onKeyPress(const Input::KeyEventArgs &evt);
 
-        virtual void onAxisEvent(const AxisEventArgs &evt);
+        virtual void onAxisEvent(const Input::AxisEventArgs &evt);
 
         bool dragging() const;
 
@@ -71,7 +71,11 @@ namespace Input {
 
         const WidgetType mType;
     };
+
+    
+    template <typename T>
+    using WidgetHandler = VirtualScope<T, HandlerComponent<T, WidgetHandlerBase>>;
 }
 }
 
-REGISTER_TYPE(Engine::Input::WidgetHandlerBase)
+REGISTER_TYPE(Engine::Widgets::WidgetHandlerBase)

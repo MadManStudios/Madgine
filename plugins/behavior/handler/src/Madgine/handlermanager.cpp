@@ -1,6 +1,6 @@
-#include "../uilib.h"
+#include "handlerlib.h"
 
-#include "uimanager.h"
+#include "handlermanager.h"
 
 #include "Madgine/window/mainwindow.h"
 
@@ -20,17 +20,15 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-METATABLE_BEGIN(Engine::Input::UIManager)
+METATABLE_BEGIN(Engine::HandlerManager)
 MEMBER(mHandlers)
-METATABLE_END(Engine::Input::UIManager)
+METATABLE_END(Engine::HandlerManager)
 
 namespace Engine {
 
-namespace Input {
-
     static std::chrono::milliseconds fixedUpdateInterval = 15ms;
 
-    UIManager::UIManager(App::Application &app, Window::MainWindow &window)
+    HandlerManager::HandlerManager(App::Application &app, Window::MainWindow &window)
         : mApp(app)
         , mWindow(window)
         , mHandlers(*this)
@@ -40,11 +38,11 @@ namespace Input {
             [this]() { return callFinalize(); });
     }
 
-    UIManager::~UIManager()
+    HandlerManager::~HandlerManager()
     {
     }
 
-    Threading::Task<bool> UIManager::init()
+    Threading::Task<bool> HandlerManager::init()
     {
         co_await mWindow.state();
 
@@ -60,7 +58,7 @@ namespace Input {
         co_return true;
     }
 
-    Threading::Task<void> UIManager::finalize()
+    Threading::Task<void> HandlerManager::finalize()
     {
         endLifetime();
         co_await mLifetime.finished();
@@ -71,7 +69,7 @@ namespace Input {
             co_await handler->callFinalize();
     }
 
-    void UIManager::startLifetime()
+    void HandlerManager::startLifetime()
     {
         Execution::detach(mLifetime);
 
@@ -79,17 +77,17 @@ namespace Input {
             handler->startLifetime();
     }
 
-    void UIManager::endLifetime()
+    void HandlerManager::endLifetime()
     {
         mLifetime.end();
     }
 
-    Debug::DebuggableLifetime<> &UIManager::lifetime()
+    Debug::DebuggableLifetime<> &HandlerManager::lifetime()
     {
         return mLifetime;
     }
 
-    void UIManager::onActivate(bool active)
+    void HandlerManager::onActivate(bool active)
     {
         if (active)
             startLifetime();
@@ -97,29 +95,29 @@ namespace Input {
             endLifetime();
     }
 
-    App::Application &UIManager::app() const
+    App::Application &HandlerManager::app() const
     {
         return mApp;
     }
 
-    Window::MainWindow &UIManager::window() const
+    Window::MainWindow &HandlerManager::window() const
     {
         return mWindow;
     }
 
-    void UIManager::shutdown()
+    void HandlerManager::shutdown()
     {
         mWindow.shutdown();
     }
 
-    void UIManager::clear()
+    void HandlerManager::clear()
     {
         /*while (!mModalWindowList.empty()) {
             closeModalWindow(mModalWindowList.top());
         }*/
     }
 
-    void UIManager::hideCursor(bool keep)
+    void HandlerManager::hideCursor(bool keep)
     {
         if (!isCursorVisible())
             return;
@@ -134,7 +132,7 @@ namespace Input {
             h->onMouseVisibilityChanged(false);
     }
 
-    void UIManager::showCursor()
+    void HandlerManager::showCursor()
     {
         if (isCursorVisible())
             return;
@@ -153,12 +151,12 @@ namespace Input {
             h->onMouseVisibilityChanged(true);
     }
 
-    bool UIManager::isCursorVisible() const
+    bool HandlerManager::isCursorVisible() const
     {
         return /* mGUI.isCursorVisible()*/ true;
     }
 
-    std::set<HandlerBase *> UIManager::getHandlers()
+    std::set<HandlerBase *> HandlerManager::getHandlers()
     {
         std::set<HandlerBase *> result;
         for (const std::unique_ptr<HandlerBase> &h : mHandlers) {
@@ -167,25 +165,24 @@ namespace Input {
         return result;
     }
 
-    std::string_view UIManager::key() const
+    std::string_view HandlerManager::key() const
     {
         return "UI";
     }
 
-    HandlerBase &UIManager::getHandler(size_t i)
+    HandlerBase &HandlerManager::getHandler(size_t i)
     {
         return mHandlers.get(i);
     }
 
-    Threading::TaskQueue *UIManager::viewTaskQueue() const
+    Threading::TaskQueue *HandlerManager::viewTaskQueue() const
     {
         return mWindow.taskQueue();
     }
 
-    Threading::TaskQueue *UIManager::modelTaskQueue() const
+    Threading::TaskQueue *HandlerManager::modelTaskQueue() const
     {
         return mApp.taskQueue();
     }
 
-}
 }

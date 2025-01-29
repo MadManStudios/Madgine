@@ -12,13 +12,13 @@
 
 UNIQUECOMPONENT(ClickBrick::MainMenuHandler)
 
-METATABLE_BEGIN_BASE(ClickBrick::MainMenuHandler, Engine::Input::WidgetHandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::MainMenuHandler, Engine::Widgets::WidgetHandlerBase)
 METATABLE_END(ClickBrick::MainMenuHandler)
 
 namespace ClickBrick {
 
-MainMenuHandler::MainMenuHandler(Engine::Input::UIManager &ui)
-    : Engine::Input::WidgetHandler<MainMenuHandler>(ui, "MainMenu", Engine::Input::WidgetHandlerBase::WidgetType::ROOT_WIDGET)
+MainMenuHandler::MainMenuHandler(Engine::HandlerManager &ui)
+    : Engine::Widgets::WidgetHandler<MainMenuHandler>(ui, "MainMenu", Engine::Widgets::WidgetHandlerBase::WidgetType::ROOT_WIDGET)
 {
 }
 

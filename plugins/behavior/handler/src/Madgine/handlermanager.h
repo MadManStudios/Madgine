@@ -19,15 +19,14 @@
 #include "Madgine/window/mainwindowlistener.h"
 
 namespace Engine {
-namespace Input {
-    struct MADGINE_UI_EXPORT UIManager : Threading::MadgineObject<UIManager>, Window::MainWindowListener {
+struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerManager>, Window::MainWindowListener {
 
-        using Self = UIManager;
+        using Self = HandlerManager;
 
-        UIManager(App::Application &app, Window::MainWindow &window);
-        UIManager(const UIManager &) = delete;
+        HandlerManager(App::Application &app, Window::MainWindow &window);
+        HandlerManager(const HandlerManager &) = delete;
 
-        ~UIManager();
+        ~HandlerManager();
 
         void clear();
 
@@ -85,6 +84,5 @@ namespace Input {
 
     };
 }
-}
 
-REGISTER_TYPE(Engine::Input::UIManager)
+REGISTER_TYPE(Engine::HandlerManager)

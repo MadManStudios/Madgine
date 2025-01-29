@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Madgine/input/widgethandler.h"
+#include "Madgine/widgets/widgethandler.h"
 
 namespace ClickBrick {
 
-    struct GameHandler : Engine::Input::WidgetHandler<GameHandler> {
+    struct GameHandler : Engine::Widgets::WidgetHandler<GameHandler> {
 
-        GameHandler(Engine::Input::UIManager &ui);        
+        GameHandler(Engine::HandlerManager &ui);        
 
         virtual std::string_view key() const override;		    
 

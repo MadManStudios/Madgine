@@ -8,4 +8,4 @@ FolderSources(sources "" src mainmenuhandler.cpp mainmenuhandler.h gamehandler.c
 
 add_plugin(ClickBrick ClickBrick Game ${sources} PRECOMPILED_HEADER src/clickbricklib.h)
 
-target_link_plugins(ClickBrick UI SceneRenderer NodeGraph)
+target_link_plugins(ClickBrick SceneRenderer NodeGraph WidgetHandler)

@@ -11,12 +11,11 @@
 #include "Madgine/debug/debuggablelifetime.h"
 
 namespace Engine {
-namespace Input {
 
-    struct MADGINE_UI_EXPORT HandlerBase : VirtualScopeBase<>, Threading::MadgineObject<HandlerBase> {
+    struct MADGINE_HANDLER_EXPORT HandlerBase : VirtualScopeBase<>, Threading::MadgineObject<HandlerBase> {
         SERIALIZABLEUNIT(HandlerBase)
 
-        HandlerBase(UIManager &ui);
+        HandlerBase(HandlerManager &ui);
         virtual ~HandlerBase() = default;
 
         virtual void onMouseVisibilityChanged(bool b);
@@ -44,11 +43,10 @@ namespace Input {
         friend struct MadgineObject<HandlerBase>;
 
     protected:
-        UIManager &mUI;
+        HandlerManager &mUI;
 
         DEBUGGABLE_LIFETIME(mLifetime);        
     };
 }
-}
 
-REGISTER_TYPE(Engine::Input::HandlerBase)
+REGISTER_TYPE(Engine::HandlerBase)

@@ -1,6 +1,6 @@
 #include "Madgine/applib.h"
 #include "Madgine/clientlib.h"
-#include "Madgine/uilib.h"
+#include "Madgine/handlerlib.h"
 
 #include "launcher.h"
 
@@ -10,7 +10,7 @@
 #include "Madgine/window/mainwindow.h"
 #include "Modules/threading/scheduler.h"
 
-#include "Madgine/input/uimanager.h"
+#include "Madgine/handlermanager.h"
 
 #include "launcherconfig.h"
 
@@ -38,7 +38,7 @@ int launch(Engine::Closure<void(Engine::App::Application &, Engine::Window::Main
     if (callback)
         callback(app, window);
 
-    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Input::UIManager> ui { "UI", app, window };
+    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::HandlerManager> ui { "HandlerManager", app, window };
 
     FIX_LOCAL Engine::Threading::Scheduler scheduler;
     int result = scheduler.go();

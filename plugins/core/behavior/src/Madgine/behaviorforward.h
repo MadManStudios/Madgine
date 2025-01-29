@@ -19,4 +19,7 @@ struct Binding;
 
 struct BindingDescriptor;
 
+struct HandlerBase;
+struct HandlerManager;
+
 }

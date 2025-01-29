@@ -1,21 +1,21 @@
-#include "../uilib.h"
+#include "../widgethandlerlib.h"
 #include "Madgine/widgets/widget.h"
 #include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
 #include "widgethandler.h"
-#include "uimanager.h"
+#include "Madgine/handlermanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-METATABLE_BEGIN_BASE(Engine::Input::WidgetHandlerBase, Engine::Input::HandlerBase)
+METATABLE_BEGIN_BASE(Engine::Widgets::WidgetHandlerBase, Engine::HandlerBase)
 PROPERTY(Widget, widget, setWidget)
-METATABLE_END(Engine::Input::WidgetHandlerBase)
+METATABLE_END(Engine::Widgets::WidgetHandlerBase)
 
 namespace Engine {
-namespace Input {
-    WidgetHandlerBase::WidgetHandlerBase(UIManager &ui, std::string_view widgetName, WidgetType type)
+namespace Widgets {
+    WidgetHandlerBase::WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName, WidgetType type)
         : HandlerBase(ui)
         , mWidgetName(widgetName)
         , mType(type)
@@ -37,23 +37,23 @@ namespace Input {
             mWidget->abortDrag();
     }
 
-    void WidgetHandlerBase::onPointerMove(const PointerEventArgs &me)
+    void WidgetHandlerBase::onPointerMove(const Input::PointerEventArgs &me)
     {
     }
 
-    void WidgetHandlerBase::onPointerClick(const PointerEventArgs &me)
+    void WidgetHandlerBase::onPointerClick(const Input::PointerEventArgs &me)
     {
     }
 
-    void WidgetHandlerBase::onDragBegin(const PointerEventArgs &me)
+    void WidgetHandlerBase::onDragBegin(const Input::PointerEventArgs &me)
     {
     }
 
-    void WidgetHandlerBase::onDragMove(const PointerEventArgs &me)
+    void WidgetHandlerBase::onDragMove(const Input::PointerEventArgs &me)
     {
     }
 
-    void WidgetHandlerBase::onDragEnd(const PointerEventArgs &me)
+    void WidgetHandlerBase::onDragEnd(const Input::PointerEventArgs &me)
     {
     }
 
@@ -61,12 +61,12 @@ namespace Input {
     {
     }
 
-    bool WidgetHandlerBase::onKeyPress(const KeyEventArgs &evt)
+    bool WidgetHandlerBase::onKeyPress(const Input::KeyEventArgs &evt)
     {
         return false;
     }
 
-    void WidgetHandlerBase::onAxisEvent(const AxisEventArgs &evt)
+    void WidgetHandlerBase::onAxisEvent(const Input::AxisEventArgs &evt)
     {
     }
 

@@ -11,10 +11,19 @@ FolderSources(sources "" src)
 			FolderSources(sources widgets util colortintrenderdata.cpp multilinetextrenderdata.cpp renderdata.cpp scalableimagerenderdata.cpp tabbarrenderdata.cpp textrenderdata.cpp widgetsrenderdata.cpp)
 				FolderSources(sources util layouts explicitlayoutrenderdata.cpp uniformlayoutrenderdata.cpp)
 
-add_plugin(Widgets Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/widgetslib.h)
+add_plugin(Widgets Madgine Misc ${sources} PRECOMPILED_HEADER src/Madgine/widgetslib.h)
 
 target_link_plugins(Widgets Client Behavior)
 
+
+set(sources "")
+FolderSources(sources "" handler)
+	FolderSources(sources handler Madgine)
+		FolderSources(sources Madgine widgets widgethandler.cpp widgethandler.h)
+
+add_plugin(WidgetHandler Madgine Misc ${sources} SOURCE_ROOT handler)
+
+target_link_plugins(WidgetHandler Widgets Handler)
 
 set(sources "")
 FolderSources(sources "" tools)
