@@ -44,7 +44,6 @@ namespace FirstParty {
         void leaveMatch() override;
         bool isLobbyOwner() const override;
 
-        void setLobbyInfoCallback(LobbyInfoCallback cb) override;
         void setLobbyProperty(std::string_view key, std::string_view value) override;
 
         void updateLobbyInfo();
@@ -55,8 +54,7 @@ namespace FirstParty {
 
         CSteamID mCurrentLobby;
         MatchmakingCallback mCurrentMatchmakingCallback;
-        SessionStartedCallback mSessionStartedCallback;
-        LobbyInfoCallback mLobbyInfoCallback;        
+        SessionStartedCallback mSessionStartedCallback;  
         
 
         SteamSyncManager mSyncManager;

@@ -8,6 +8,8 @@
 
 #include "Generic/closure.h"
 
+#include "Generic/execution/value.h"
+
 namespace Engine {
 namespace FirstParty {
 
@@ -79,7 +81,6 @@ namespace FirstParty {
 
         using MatchmakingCallback = Closure<Serialize::Format(FirstPartySyncManager&)>;
         using SessionStartedCallback = Closure<void(std::vector<PlayerInfo>)>;
-        using LobbyInfoCallback = Closure<void(const LobbyInfo &)>;
 
         Threading::TaskFuture<std::vector<Lobby>> getLobbyList();
         virtual Threading::Task<std::vector<Lobby>> getLobbyListTask() = 0;
@@ -92,9 +93,11 @@ namespace FirstParty {
 
         Threading::TaskFuture<ServerInfo> startMatch();
         virtual Threading::Task<ServerInfo> startMatchTask() = 0;
-
-        virtual void setLobbyInfoCallback(LobbyInfoCallback cb) = 0;        
+    
         virtual void setLobbyProperty(std::string_view key, std::string_view value) = 0;
+
+        Execution::ValueStub<LobbyInfo> &lobbyInfo();
+        Execution::Value<LobbyInfo> mLobbyInfo;
 
         virtual bool isLobbyOwner() const = 0;
         virtual void leaveLobby() = 0;

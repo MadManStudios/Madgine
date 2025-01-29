@@ -88,7 +88,7 @@ namespace Execution {
             if constexpr (Execution::has_stop_token<Rec>)
                 return StoppableConnection<Stub, Rec, Ty...> { std::forward<Rec>(rec), stub };
             else
-                return Execution::make_virtual_state<Connection<Stub, Ty...>, GenericResult, Ty...>(std::forward<Rec>(rec), stub);
+                return Execution::VirtualState<Rec, Connection<Stub, Ty...>>(std::forward<Rec>(rec), stub);
         }
     };
 

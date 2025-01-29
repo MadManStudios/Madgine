@@ -11,7 +11,7 @@ namespace Filesystem {
     INTERFACES_EXPORT size_t pendingIOOperationCount();
 
     inline auto readFileAsync(const Path& path) {
-        return Execution::make_virtual_sender<AsyncFileReadState, GenericResult, ByteBuffer>(path);
+        return Execution::make_virtual_sender<AsyncFileReadState>(path);
     }
     using AsyncFileRead = std::invoke_result_t<decltype(readFileAsync), Path>;
 

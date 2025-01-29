@@ -52,7 +52,7 @@ namespace Leaderboards {
     };    
     inline auto getLeaderboard(std::string_view id, int accessmode, int referenceRank, int rangeBegin, int rangeEnd)
     {
-        return Engine::Execution::make_virtual_sender<ScoresState, std::string, Scores>(std::move(id), std::move(accessmode), std::move(referenceRank), std::move(rangeBegin), std::move(rangeEnd));
+        return Engine::Execution::make_virtual_sender<ScoresState>(std::move(id), std::move(accessmode), std::move(referenceRank), std::move(rangeBegin), std::move(rangeEnd));
     }
     MADGINE_PLAY_SERVICES_EXPORT void submitScoreImpl(Engine::Execution::VirtualReceiverBase<std::string> &rec, std::string_view leaderboardId, int32_t score, std::string_view name);
     inline auto submitScore(std::string_view leaderboardId, int32_t score, std::string_view name)

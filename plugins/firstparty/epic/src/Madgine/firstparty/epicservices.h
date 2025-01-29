@@ -73,7 +73,6 @@ namespace FirstParty {
         void leaveMatch() override;
         bool isLobbyOwner() const override;
 
-        void setLobbyInfoCallback(LobbyInfoCallback cb) override;
         void setLobbyProperty(std::string_view key, std::string_view value) override;
 
         //////////////////

@@ -210,7 +210,7 @@ namespace FirstParty {
         ServerInfo server;
         server.mPlayers = getLobbyPlayers();
         std::vector<CSteamID> players;
-        for (int i = 0; i < playerCount; ++i) {            
+        for (int i = 0; i < playerCount; ++i) {
             players.emplace_back(SteamMatchmaking()->GetLobbyMemberByIndex(mCurrentLobby, i));
         }
 
@@ -218,14 +218,13 @@ namespace FirstParty {
         mSyncManager.listen(playerCount - 1, format);
 
         SteamMatchmaking()->SetLobbyGameServer(mCurrentLobby, 0, 0, SteamUser()->GetSteamID());
-        
+
         if (playerCount > 1)
             co_await mSyncManager.playersConnected();
-        
+
         leaveLobby();
 
-        
-        for (size_t i = 0; i < playerCount; ++i) {            
+        for (size_t i = 0; i < playerCount; ++i) {
             server.mIds.emplace_back(mSyncManager.resolvePlayerId(players[i]));
         }
 
@@ -257,13 +256,6 @@ namespace FirstParty {
         return SteamUser()->GetSteamID() == SteamMatchmaking()->GetLobbyOwner(mCurrentLobby);
     }
 
-    void SteamServices::setLobbyInfoCallback(LobbyInfoCallback cb)
-    {
-        mLobbyInfoCallback = std::move(cb);
-
-        updateLobbyInfo();
-    }
-
     void SteamServices::setLobbyProperty(std::string_view key, std::string_view value)
     {
         if (!mCurrentLobby.IsValid())
@@ -275,16 +267,14 @@ namespace FirstParty {
     void SteamServices::updateLobbyInfo()
     {
         if (mCurrentLobby.IsValid()) {
-            if (mLobbyInfoCallback) {
-                LobbyInfo lobbyInfo;
-                lobbyInfo.mPlayers = getLobbyPlayers();
-                lobbyInfo.mProperties = getLobbyProperties(mCurrentLobby);
-                mLobbyInfoCallback(lobbyInfo);
-            }
+            LobbyInfo lobbyInfo;
+            lobbyInfo.mPlayers = getLobbyPlayers();
+            lobbyInfo.mProperties = getLobbyProperties(mCurrentLobby);
+            mLobbyInfoSignal.emplace(std::move(lobbyInfo));
 
-            //if (mLobbyRunning != running) {
-            //    onMatchStarted();
-            //}
+            // if (mLobbyRunning != running) {
+            //     onMatchStarted();
+            // }
         }
     }
 

@@ -494,11 +494,6 @@ namespace FirstParty {
         throw 0;
     }
 
-    void EpicServices::setLobbyInfoCallback(LobbyInfoCallback cb)
-    {
-        throw 0;
-    }
-
     void Engine::FirstParty::EpicServices::setLobbyProperty(std::string_view key, std::string_view value)
     {
         throw 0;

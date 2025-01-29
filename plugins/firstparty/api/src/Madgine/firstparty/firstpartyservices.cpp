@@ -54,5 +54,10 @@ namespace FirstParty {
         return mRoot.taskQueue()->queueTask(startMatchTask());
     }
 
+    Execution::ValueStub<LobbyInfo> &FirstPartyServices::lobbyInfo()
+    {
+        return mLobbyInfo;
+    }
+
 }
 }
