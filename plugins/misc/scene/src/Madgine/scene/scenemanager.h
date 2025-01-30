@@ -22,7 +22,8 @@
 
 namespace Engine {
 namespace Scene {
-    struct MADGINE_SCENE_EXPORT SceneManager : App::GlobalAPI<SceneManager> {
+    struct MADGINE_SCENE_EXPORT SceneManager : Serialize::TopLevelUnit<SceneManager>,
+                                               App::GlobalAPI<SceneManager> {
 
         using Self = SceneManager;
 
@@ -115,7 +116,7 @@ namespace Scene {
         Entity::EntityComponentListContainer<std::vector<Placeholder<0>>> mEntityComponentLists;
 
     public:
-        MEMBER_OFFSET_CONTAINER(mSceneComponents, , SceneComponentContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>>);
+        MEMBER_OFFSET_CONTAINER(mSceneComponents, , SceneComponentContainer<Serialize::SerializableContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>, NoOpFunctor>>);
 
         struct ContainerData {
             ContainerData(SceneManager &manager);

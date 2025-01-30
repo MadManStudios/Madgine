@@ -7,19 +7,19 @@ namespace UniqueComponent {
 
     template <typename... Annotations>
     struct GroupedAnnotation : Annotations...{
-        template <typename T>
-        GroupedAnnotation(type_holder_t<T> t)
-            : Annotations(t)...
+        template <typename T, typename ActualType>
+        GroupedAnnotation(type_holder_t<T> t, type_holder_t<ActualType> at)
+            : Annotations(t, at)...
         {
         }
     };
 
     template <typename R, typename... Args>
 	struct ConstructorImpl {
-        template <typename T>
-        ConstructorImpl(type_holder_t<T>)
+        template <typename T, typename ActualType>
+        ConstructorImpl(type_holder_t<T>, type_holder_t<ActualType>)
             : mCtor([](Args &&...args) -> R{
-                return std::make_unique<T>(std::forward<Args>(args)...);
+                return std::make_unique<ActualType>(std::forward<Args>(args)...);
             })
         {
         }
@@ -38,8 +38,8 @@ namespace UniqueComponent {
 
     template <typename R, typename... Args>
 	struct FactoryImpl {
-        template <typename T>
-        FactoryImpl(type_holder_t<T>)
+        template <typename T, typename ActualType>
+        FactoryImpl(type_holder_t<T>, type_holder_t<ActualType>)
             : mFactory(T::factory)
         {
         }

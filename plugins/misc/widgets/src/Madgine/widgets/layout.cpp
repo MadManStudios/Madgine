@@ -58,15 +58,17 @@ namespace Widgets {
             int col = pos.mColumn;
             int row = pos.mRow;
 
-            if (cols.size() <= col) {
-                cols.resize(col + 1);
+            if (cols.size() < col + pos.mColumnSpan) {
+                cols.resize(col + pos.mColumnSpan);
             }
-            if (rows.size() <= row) {
-                rows.resize(row + 1);
+            if (rows.size() < row + pos.mRowSpan) {
+                rows.resize(row + pos.mRowSpan);
             }
 
-            cols[col].mConstraints = max(cols[col].mConstraints, size.mConstraints.mWidth);
-            rows[row].mConstraints = max(rows[row].mConstraints, size.mConstraints.mHeight);
+            for (size_t i = 0; i < pos.mColumnSpan; ++i)
+                cols[col + i].mConstraints = max(cols[col + i].mConstraints, size.mConstraints.mWidth / pos.mColumnSpan);
+            for (size_t i = 0; i < pos.mRowSpan; ++i)
+            rows[row + i].mConstraints = max(rows[row + i].mConstraints, size.mConstraints.mHeight / pos.mRowSpan);
         }
 
         SizeConstraints width;
@@ -103,13 +105,28 @@ namespace Widgets {
             LayoutPos pos = reinterpret_cast<LayoutPos &>(matrixPos);
             LayoutSize size = reinterpret_cast<LayoutSize &>(matrixSize);
 
-            LayoutAxisElement &col = cols[pos.mColumn];
-            LayoutAxisElement &row = rows[pos.mRow];
+            float width = 0.0f;
+            float height = 0.0f;
+            for (size_t i = 0; i < pos.mColumnSpan; ++i)
+                width += cols[pos.mColumn + i].mConstraints.apply(colFactor);
+            for (size_t i = 0; i < pos.mRowSpan; ++i)
+                height += rows[pos.mRow + i].mConstraints.apply(rowFactor);
 
-            Vector2 absolutePosition = getAbsolutePosition() + Vector2 { col.mOffset, row.mOffset };
+
+
+            Vector2 absolutePosition = getAbsolutePosition() + Vector2 { 
+                cols[pos.mColumn].mOffset, 
+                rows[pos.mRow].mOffset
+            };
+            if (size.mConstraints.mWidth.mMax < width) {
+                absolutePosition.x += pos.mXAlign * (width - size.mConstraints.mWidth.mMax);
+            }
+            if (size.mConstraints.mHeight.mMax < height){
+                absolutePosition.y += pos.mYAlign * (height - size.mConstraints.mHeight.mMax);
+            }
             Vector3 absoluteSize = {
-                std::min(col.mConstraints.apply(colFactor), size.mConstraints.mWidth.mMax),
-                std::min(row.mConstraints.apply(rowFactor), size.mConstraints.mHeight.mMax),
+                std::min(width, size.mConstraints.mWidth.mMax),
+                std::min(height, size.mConstraints.mHeight.mMax),
                 getAbsoluteSize().z
             };
 

@@ -25,7 +25,7 @@
 #include "behavior/animation.h"
 #include "entity/components/skeleton.h"
 
-UNIQUECOMPONENT(Engine::Scene::SceneManager);
+UNIQUECOMPONENT(Engine::Serialize::NoParent<Engine::Scene::SceneManager>);
 
 METATABLE_BEGIN(Engine::Scene::SceneManager)
 // TODO
@@ -34,15 +34,9 @@ MEMBER(mSceneComponents)
 // MEMBER(mContainers)
 METATABLE_END(Engine::Scene::SceneManager)
 
-/* static Engine::Threading::DataMutex::Lock static_lock(Engine::Scene::SceneManager *mgr)
-{
-    return mgr->mutex().lock(Engine::AccessMode::WRITE);
-}
-
-SERIALIZETABLE_BEGIN(Engine::Scene::SceneManager,
-    Engine::Serialize::CallableGuard<&static_lock>)
+SERIALIZETABLE_BEGIN(Engine::Scene::SceneManager)
 FIELD(mSceneComponents, Serialize::ControlledConfig<KeyCompare<std::unique_ptr<Engine::Scene::SceneComponentBase>>>)
-SERIALIZETABLE_END(Engine::Scene::SceneManager)*/
+SERIALIZETABLE_END(Engine::Scene::SceneManager)
 
 namespace Engine {
 namespace Scene {

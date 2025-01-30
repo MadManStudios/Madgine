@@ -20,7 +20,7 @@ namespace Execution {
             ~CallbackDelay()
             {
                 while (Connection<ValueStub<_Ty...>, _Ty...> *current = mStack.pop()) {
-                    TupleUnpacker::invokeExpand(&Connection<ValueStub<_Ty...>, _Ty...>::set_value, current, *mValue->mValue);
+                    TupleUnpacker::invokeExpand(&Connection<ValueStub<_Ty...>, _Ty...>::set_value, current, mValue->mValue);
                 }
             }
 

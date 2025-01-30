@@ -88,12 +88,12 @@ namespace UniqueComponent {
 
         struct CollectorInfo : CollectorInfoBase {
 
-            template <typename T>
+            template <typename T, typename ActualType>
             size_t registerComponent()
             {
 
                 LOG("Registering Component: " << typeName<T>());
-                mComponents.emplace_back(type_holder<T>);
+                mComponents.emplace_back(type_holder<T>, type_holder<ActualType>);
                 std::vector<const TypeInfo *> elementInfos;
                 elementInfos.push_back(&typeInfo<T>);
                 if constexpr (has_typename_VBase<T>) {
@@ -193,11 +193,11 @@ namespace UniqueComponent {
     struct NamedRegistry : Registry<_Base, _Annotations...> {
 
         struct CollectorInfo : Registry<_Base, _Annotations...>::CollectorInfo {
-            template <typename T>
+            template <typename T, typename ActualType>
             size_t registerComponent()
             {
                 this->mComponentNames.emplace_back(T::componentName());
-                return Registry<_Base, _Annotations...>::CollectorInfo::template registerComponent<T>();
+                return Registry<_Base, _Annotations...>::CollectorInfo::template registerComponent<T, ActualType>();
             }
 
             void unregisterComponent(size_t i)

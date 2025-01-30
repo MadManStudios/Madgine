@@ -41,7 +41,7 @@ namespace Execution {
         template <typename T>
         auto bind(T &&slot)
         {
-            TupleUnpacker::invoke(slot, mValue);
+            TupleUnpacker::invokeFromTuple(slot, mValue);
             return *this | Execution::then(TupleUnpacker::wrap(std::forward<T>(slot))) | Execution::repeat;
         }
 

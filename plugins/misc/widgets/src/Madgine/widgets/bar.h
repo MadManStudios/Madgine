@@ -8,9 +8,12 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Bar() = default;
 
-        virtual void setRatio(float f);
+        void vertices(WidgetsRenderData &renderData, size_t layer) override;
 
         virtual WidgetClass getClass() const override;
+
+        float mRatio = 0.0f;
+        Color4 mColor;
     };
 }
 }

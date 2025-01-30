@@ -24,8 +24,8 @@ struct BehaviorFactoryBase {
 };
 
 struct BehaviorFactoryAnnotation {
-    template <typename T>
-    BehaviorFactoryAnnotation(type_holder_t<T>)
+    template <typename T, typename ActualType>
+    BehaviorFactoryAnnotation(type_holder_t<T>, type_holder_t<ActualType>)
         : mFactory(&T::sFactory)
     {
     }

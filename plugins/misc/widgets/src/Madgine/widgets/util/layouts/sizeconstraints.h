@@ -8,7 +8,7 @@ namespace Widgets {
         float mPreferred = 0.0f;
         float mMax = 0.0f;
 
-        SizeConstraints operator*(int n) const
+        SizeConstraints operator*(float n) const
         {
             return {
                 mMin * n,
@@ -23,6 +23,15 @@ namespace Widgets {
                 mMin + f,
                 mPreferred + f,
                 mMax + f
+            };
+        }
+
+        SizeConstraints operator/(float d) const
+        {
+            return {
+                mMin / d,
+                mPreferred / d,
+                mMax / d
             };
         }
 

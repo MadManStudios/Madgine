@@ -18,8 +18,8 @@ namespace UniqueComponent {
         using T = _T;
         using _Base::_Base;
 
-        template <typename Col>
-        struct Registrator : Col::template ComponentRegistrator<T> {
+        template <typename ActualType>
+        struct Registrator : ActualType::Collector::template ComponentRegistrator<T, ActualType> {
             Registrator()
             {
                 if (!_Base::preg())
@@ -75,12 +75,12 @@ namespace UniqueComponent {
             return _reg<T>().index();
         }
         
-        template <typename Col>
-        using Registrator = typename Col::template ComponentRegistrator<T>;
+        template <typename ActualType>
+        using Registrator = typename ActualType::Collector::template ComponentRegistrator<T, ActualType>;
     };
 
-#    define UNIQUECOMPONENT(Type) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type::Collector>, Engine::UniqueComponent::, _reg, , {}, Type)
-#    define UNIQUECOMPONENT2(Type, ext) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Collector::ComponentRegistrator<Type>, Engine::UniqueComponent::, _reg, ext, {}, Type)
+#    define UNIQUECOMPONENT(Type) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, , {}, Type::T)
+#    define UNIQUECOMPONENT2(Type, ext) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, ext, {}, Type::T)
 
 #    define VIRTUALUNIQUECOMPONENTBASE(Name) DLL_EXPORT_VARIABLE2(, Engine::UniqueComponent::IndexHolder *, Engine::UniqueComponent::, _preg, nullptr, Name)
 

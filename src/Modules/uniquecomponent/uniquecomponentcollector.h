@@ -41,10 +41,10 @@ namespace UniqueComponent {
         typename Registry::CollectorInfo mInfo;
 
     public:
-        template <typename T>
+        template <typename T, typename ActualType>
         struct ComponentRegistrator : IndexHolder {
             ComponentRegistrator()
-                : IndexHolder { PLUGIN_LOCAL(sInstance)().mInfo.template registerComponent<T>(), PLUGIN_LOCAL(sInstance)().mInfo.mBaseIndex }
+                : IndexHolder { PLUGIN_LOCAL(sInstance)().mInfo.template registerComponent<T, ActualType>(), PLUGIN_LOCAL(sInstance)().mInfo.mBaseIndex }
             {
             }
 

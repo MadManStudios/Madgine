@@ -22,8 +22,8 @@ struct NativeBehaviorInfo {
 DLL_IMPORT_VARIABLE(const NativeBehaviorInfo *, nativeBehaviorInfo, typename);
 
 struct NativeBehaviorAnnotation {
-    template <typename T>
-    NativeBehaviorAnnotation(type_holder_t<T>)
+    template <typename T, typename ActualType>
+    NativeBehaviorAnnotation(type_holder_t<T>, type_holder_t<ActualType>)
         : mInfo(*nativeBehaviorInfo<T>)
     {
     }

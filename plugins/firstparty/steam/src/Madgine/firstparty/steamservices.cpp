@@ -270,7 +270,7 @@ namespace FirstParty {
             LobbyInfo lobbyInfo;
             lobbyInfo.mPlayers = getLobbyPlayers();
             lobbyInfo.mProperties = getLobbyProperties(mCurrentLobby);
-            mLobbyInfoSignal.emplace(std::move(lobbyInfo));
+            mLobbyInfo.set(std::move(lobbyInfo));
 
             // if (mLobbyRunning != running) {
             //     onMatchStarted();
