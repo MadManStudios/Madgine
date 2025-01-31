@@ -4,7 +4,6 @@
 #include "Madgine/renderlib.h"
 #include "Madgine/textureloaderlib.h"
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/pipelineloaderlib.h"
 
 #if defined(RenderTools_EXPORTS)
 #    define MADGINE_RENDER_TOOLS_EXPORT DLL_EXPORT

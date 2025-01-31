@@ -12,11 +12,11 @@ namespace Engine {
 namespace Render {
 
 
-    struct MADGINE_PIPELINELOADER_EXPORT PipelineLoader : Resources::VirtualResourceLoaderBase<PipelineLoader, Pipeline, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
+    struct MADGINE_RENDER_EXPORT PipelineLoader : Resources::VirtualResourceLoaderBase<PipelineLoader, Pipeline, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
 
         using Base = Resources::VirtualResourceLoaderBase<PipelineLoader, Pipeline, std::list<Placeholder<0>>, Threading::WorkGroupStorage>;
 
-        struct MADGINE_PIPELINELOADER_EXPORT Instance {
+        struct MADGINE_RENDER_EXPORT Instance {
 
             Instance() = default;
             Instance(std::unique_ptr<PipelineInstance> ptr);

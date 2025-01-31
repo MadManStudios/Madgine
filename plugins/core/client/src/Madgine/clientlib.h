@@ -7,7 +7,6 @@
 #include "Madgine/renderlib.h"
 
 #include "Madgine/fontloaderlib.h"
-#include "Madgine/pipelineloaderlib.h"
 #include "Madgine/debuglib.h"
 
 #if defined(Client_EXPORTS)

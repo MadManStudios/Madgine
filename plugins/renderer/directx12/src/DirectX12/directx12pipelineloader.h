@@ -2,7 +2,7 @@
 
 #include "Madgine/resources/resourceloader.h"
 
-#include "Madgine/pipelineloader/pipelineloader.h"
+#include "Madgine/render/pipelineloader.h"
 
 #include "util/directx12pipeline.h"
 

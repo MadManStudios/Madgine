@@ -33,6 +33,58 @@ struct Color4 {
     {
     }
 
+    static constexpr Color4 fromHSV(float h, float s, float v, float a = 1.0f) {        
+        if (s == 0.0f) {
+            // gray
+            return { v, v, v, a };
+        }
+
+        h = fmodf(h, 1.0f) / (60.0f / 360.0f);
+        int i = (int)h;
+        float f = h - (float)i;
+        float p = v * (1.0f - s);
+        float q = v * (1.0f - s * f);
+        float t = v * (1.0f - s * (1.0f - f));
+
+        float r;
+        float g;
+        float b;
+        switch (i) {
+        case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+        case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+        case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+        case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+        case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+        case 5:
+        default:
+            r = v;
+            g = p;
+            b = q;
+            break;
+        }
+        return { r, g, b, a };
+    }
+
     constexpr operator Vector4() const
     {
         const auto toLinear = [](float x) {

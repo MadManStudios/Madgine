@@ -21,6 +21,11 @@ namespace Render {
     struct RenderData;
     struct RenderDebuggable;
     struct Camera;
+
+    enum ShaderType {
+        VertexShader,
+        PixelShader
+    };
     
 }
 

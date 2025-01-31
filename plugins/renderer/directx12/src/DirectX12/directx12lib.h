@@ -3,7 +3,6 @@
 /// @cond
 
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/pipelineloaderlib.h"
 #include "Madgine/textureloaderlib.h"
 #include "Madgine/renderlib.h"
 

@@ -18,7 +18,7 @@ namespace Render {
         bool depthChecking = true;
     };
 
-    struct MADGINE_PIPELINELOADER_EXPORT PipelineInstance {
+    struct MADGINE_RENDER_EXPORT PipelineInstance {
         PipelineInstance(const PipelineConfiguration &config)
         {
         }

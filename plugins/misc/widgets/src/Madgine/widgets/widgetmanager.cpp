@@ -6,7 +6,7 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine/meshloader/gpumeshloader.h"
-#include "Madgine/pipelineloader/pipelineloader.h"
+#include "Madgine/render/pipelineloader.h"
 
 #include "widget.h"
 

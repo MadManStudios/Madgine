@@ -13,7 +13,7 @@
 
 #include "Generic/intervalclock.h"
 
-#include "Madgine/pipelineloader/pipelineloader.h"
+#include "Madgine/render/pipelineloader.h"
 
 #include "Madgine/textureloader/textureloader.h"
 

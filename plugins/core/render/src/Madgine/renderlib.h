@@ -4,9 +4,9 @@
 
 #include "Meta/metalib.h"
 #include "Modules/moduleslib.h"
-
+#include "Madgine/codegen/codegenlib.h"
+#include "Madgine/meshloaderlib.h"
 #include "Madgine/fontloaderlib.h"
-#include "Madgine/pipelineloaderlib.h"
 #include "Madgine/debuglib.h"
 
 #if defined(Render_EXPORTS)

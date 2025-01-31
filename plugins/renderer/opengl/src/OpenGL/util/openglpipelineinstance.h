@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine/pipelineloader/pipelineinstance.h"
+#include "Madgine/render/pipelineinstance.h"
 
 #include "openglbuffer.h"
 
