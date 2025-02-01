@@ -6,7 +6,7 @@
 
 #include "Generic/execution/virtualsender.h"
 
-#include "Madgine/audioloader/audioloader.h"
+#include "audioloader.h"
 
 #include "Madgine/behavior.h"
 

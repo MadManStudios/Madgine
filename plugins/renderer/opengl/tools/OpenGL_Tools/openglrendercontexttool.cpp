@@ -14,7 +14,7 @@
 #include "Madgine/imageloaderlib.h"
 #include "Madgine/imageloader/imageloader.h"
 
-#include "Madgine/fontloader/fontloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 
 #include "Madgine/imageloader/imagedata.h"
 

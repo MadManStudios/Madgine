@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
+#include "Madgine/resources/virtualresourceloader.h"
 
 #include "gpumeshdata.h"
 
@@ -37,9 +37,6 @@ namespace Render {
 
         virtual void reset(GPUMeshData &data) = 0;
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture*> textures) = 0;
-        virtual void destroyResourceBlock(UniqueResourceBlock &block) = 0;
-    
         Handle mQuad;
     };
 

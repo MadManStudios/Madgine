@@ -16,9 +16,6 @@ namespace Render {
 
         virtual void reset(GPUMeshData &data) override;
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture*> textures) override;
-        virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
-
         virtual Threading::TaskQueue *loadingTaskQueue() const override;
     };
 }

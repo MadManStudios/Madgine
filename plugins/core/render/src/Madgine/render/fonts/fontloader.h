@@ -9,7 +9,7 @@
 namespace Engine {
 namespace Render {
 	
-	struct MADGINE_FONTLOADER_EXPORT FontLoader : Resources::ResourceLoader<FontLoader, Font, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
+	struct MADGINE_RENDER_EXPORT FontLoader : Resources::ResourceLoader<FontLoader, Font, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
         FontLoader();
 
 		Threading::Task<bool> loadImpl(Font &font, ResourceDataInfo &info);

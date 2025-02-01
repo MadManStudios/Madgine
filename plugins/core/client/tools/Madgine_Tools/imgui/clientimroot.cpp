@@ -29,7 +29,7 @@
 
 #include "Madgine_Tools/toolbase.h"
 
-#include "Madgine/fontloader/fontloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 
 #include "Madgine/resources/resourcemanager.h"
 

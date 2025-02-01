@@ -3,7 +3,6 @@
 /// @cond
 
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/textureloaderlib.h"
 #include "Madgine/renderlib.h"
 
 #if defined(DirectX12_EXPORTS)

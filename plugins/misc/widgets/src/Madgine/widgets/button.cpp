@@ -9,7 +9,7 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/fontloader/fontloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 
 #include "Madgine/imageloader/imageloader.h"
 

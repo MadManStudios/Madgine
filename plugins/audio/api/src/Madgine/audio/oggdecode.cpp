@@ -1,4 +1,4 @@
-#include "../audioloaderlib.h"
+#include "../audiolib.h"
 
 #include "oggdecode.h"
 

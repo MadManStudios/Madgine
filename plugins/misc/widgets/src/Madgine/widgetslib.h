@@ -4,7 +4,6 @@
 
 #include "Madgine/clientlib.h"
 #include "Madgine/imageloaderlib.h"
-#include "Madgine/fontloaderlib.h"
 #include "Madgine/meshloaderlib.h"
 #include "Madgine/behaviorlib.h"
 

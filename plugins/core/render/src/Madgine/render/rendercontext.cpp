@@ -8,7 +8,7 @@
 
 #include "rendertarget.h"
 
-#include "Madgine/fontloader/fontloader.h"
+#include "fonts/fontloader.h"
 
 #include "Modules/debug/profiler/profile.h"
 

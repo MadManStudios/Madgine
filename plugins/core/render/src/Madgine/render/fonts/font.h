@@ -2,7 +2,7 @@
 
 #include "Meta/math/vector2i.h"
 
-#include "Madgine/textureloader/textureloader.h"
+#include "../textureloader.h"
 
 #include "glyph.h"
 

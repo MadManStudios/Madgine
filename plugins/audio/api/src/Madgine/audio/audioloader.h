@@ -9,10 +9,10 @@ namespace Audio {
 
     struct AudioBuffer;
 
-    struct MADGINE_AUDIOLOADER_EXPORT AudioLoader : Resources::ResourceLoader<AudioLoader, AudioBuffer> {
+    struct MADGINE_AUDIO_EXPORT AudioLoader : Resources::ResourceLoader<AudioLoader, AudioBuffer> {
 
         struct Interface : ResourceLoader::Interface {
-            struct MADGINE_AUDIOLOADER_EXPORT Resource : ResourceLoader::Interface::Resource {
+            struct MADGINE_AUDIO_EXPORT Resource : ResourceLoader::Interface::Resource {
                 using ResourceLoader::Interface::Resource::Resource;
 
                 Stream readAsStream(AudioInfo &info);

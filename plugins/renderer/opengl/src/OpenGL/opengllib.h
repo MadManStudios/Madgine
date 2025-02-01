@@ -4,7 +4,6 @@
 
 #include "Madgine/renderlib.h"
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/textureloaderlib.h"
 
 #if defined(OpenGL_EXPORTS)
 #    define MADGINE_OPENGL_EXPORT DLL_EXPORT

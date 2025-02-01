@@ -2,7 +2,7 @@
 
 #include "Madgine/resources/resourceloader.h"
 
-#include "Madgine/textureloader/textureloader.h"
+#include "Madgine/render/textureloader.h"
 
 #include "util/directx12texture.h"
 

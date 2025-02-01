@@ -15,7 +15,7 @@
 
 #include "Madgine/render/pipelineloader.h"
 
-#include "Madgine/textureloader/textureloader.h"
+#include "Madgine/render/textureloader.h"
 
 struct ImGuiDockNode;
 struct ImGuiViewport;

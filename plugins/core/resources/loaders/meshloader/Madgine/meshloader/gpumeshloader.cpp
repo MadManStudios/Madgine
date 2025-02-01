@@ -49,10 +49,6 @@ namespace Render {
 
     void GPUMeshLoader::reset(GPUMeshData &data)
     {
-        for (GPUMeshData::Material &gpuMat : data.mMaterials) {
-            if (gpuMat.mResourceBlock)
-                destroyResourceBlock(gpuMat.mResourceBlock);
-        }
         data.mMaterials.clear();
     }
 
@@ -70,28 +66,6 @@ namespace Render {
             data.mElementCount = mesh.mVertices.mSize / mesh.mVertexSize;
         } else {
             data.mElementCount = mesh.mIndices.size();
-        }
-
-        for (const MeshData::Material &mat : mesh.mMaterials) {
-            GPUMeshData::Material &gpuMat = data.mMaterials.emplace_back();
-            gpuMat.mName = mat.mName;
-            gpuMat.mDiffuseColor = mat.mDiffuseColor;
-
-            std::vector<Threading::TaskFuture<bool>> futures;
-
-            futures.push_back(gpuMat.mDiffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));
-
-            futures.push_back(gpuMat.mEmissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
-
-            for (Threading::TaskFuture<bool> &fut : futures) {
-                bool result = co_await fut;
-                if (!result) {
-                    LOG_ERROR("Missing Materials!");
-                    co_return false;
-                }
-            }
-
-            gpuMat.mResourceBlock = createResourceBlock({ &*gpuMat.mDiffuseTexture, &*gpuMat.mEmissiveTexture });
         }
 
         co_return true;

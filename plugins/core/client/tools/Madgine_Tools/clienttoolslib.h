@@ -2,7 +2,6 @@
 
 #include "Madgine_Tools/toolslib.h"
 #include "Madgine/clientlib.h"
-#include "Madgine/textureloaderlib.h"
 #include "Madgine/meshloaderlib.h"
 
 #if defined(ClientTools_EXPORTS)

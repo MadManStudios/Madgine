@@ -3,7 +3,7 @@
 #include "Madgine/resources/resourceloader.h"
 
 #include "Madgine/imageloader/imageloader.h"
-#include "Madgine/textureloader/textureloader.h"
+#include "Madgine/render/textureloader.h"
 
 #include "Meta/math/atlas2.h"
 

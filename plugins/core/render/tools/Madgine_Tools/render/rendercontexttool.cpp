@@ -11,7 +11,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
 
-#include "Madgine/fontloader/fontloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 
 #include "Madgine/render/camera.h"
 #include "Madgine/render/rendercontext.h"

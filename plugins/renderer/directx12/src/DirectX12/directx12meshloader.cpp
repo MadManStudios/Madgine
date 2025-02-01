@@ -36,24 +36,46 @@ namespace Render {
         if (!mesh.mIndices.empty())
             data.mIndices.setData(mesh.mIndices, D3D12_RESOURCE_STATE_INDEX_BUFFER);
 
-        co_return co_await GPUMeshLoader::generate(_data, mesh);
+        if (!co_await GPUMeshLoader::generate(_data, mesh))
+            co_return false;
+
+        
+        for (const MeshData::Material &mat : mesh.mMaterials) {
+            GPUMeshData::Material &gpuMat = data.mMaterials.emplace_back();
+            gpuMat.mName = mat.mName;
+            gpuMat.mDiffuseColor = mat.mDiffuseColor;
+
+            std::vector<Threading::TaskFuture<bool>> futures;
+
+            TextureLoader::Handle &diffuseTexture = data.mTextureCache.emplace_back();
+            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));
+            TextureLoader::Handle &emissiveTexture = data.mTextureCache.emplace_back();
+            futures.push_back(emissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
+
+            for (Threading::TaskFuture<bool> &fut : futures) {
+                bool result = co_await fut;
+                if (!result) {
+                    LOG_ERROR("Missing Materials!");
+                    co_return false;
+                }
+            }
+
+            gpuMat.mResourceBlock = DirectX12RenderContext::getSingleton().createResourceBlock({ &*diffuseTexture, &*emissiveTexture });
+        }
+
+        co_return true;
     }
 
     void DirectX12MeshLoader::reset(GPUMeshData &data)
     {
         static_cast<DirectX12MeshData&>(data).mVertices.reset();
         static_cast<DirectX12MeshData &>(data).mIndices.reset();
+        static_cast<DirectX12MeshData &>(data).mTextureCache.clear();
+        for (GPUMeshData::Material &gpuMat : data.mMaterials) {
+            if (gpuMat.mResourceBlock)
+                DirectX12RenderContext::getSingleton().destroyResourceBlock(gpuMat.mResourceBlock);
+        }
         GPUMeshLoader::reset(data);
-    }
-
-    UniqueResourceBlock DirectX12MeshLoader::createResourceBlock(std::vector<const Texture*> textures)
-    {
-        return DirectX12RenderContext::getSingleton().createResourceBlock(std::move(textures));
-    }
-
-    void DirectX12MeshLoader::destroyResourceBlock(UniqueResourceBlock &block)
-    {
-        DirectX12RenderContext::getSingleton().destroyResourceBlock(block);
     }
 
     Threading::TaskQueue *DirectX12MeshLoader::loadingTaskQueue() const

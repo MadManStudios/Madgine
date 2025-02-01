@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Madgine/resourceslib.h"
-#include "Madgine/textureloaderlib.h"
 
 #if defined(MeshLoader_EXPORTS)
 #    define MADGINE_MESHLOADER_EXPORT DLL_EXPORT

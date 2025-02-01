@@ -16,7 +16,7 @@
 
 #include "Meta/math/quaternion.h"
 
-#include "Madgine/fontloader/glyph.h"
+#include "Madgine/render/fonts/glyph.h"
 
 #include "Meta/math/transformation.h"
 

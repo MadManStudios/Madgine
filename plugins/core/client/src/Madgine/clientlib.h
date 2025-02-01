@@ -6,7 +6,6 @@
 #include "Modules/moduleslib.h"
 #include "Madgine/renderlib.h"
 
-#include "Madgine/fontloaderlib.h"
 #include "Madgine/debuglib.h"
 
 #if defined(Client_EXPORTS)

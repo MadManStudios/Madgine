@@ -10,4 +10,4 @@ add_plugin(MeshLoader Madgine Utility ${sources} PRECOMPILED_HEADER Madgine/mesh
 
 target_link_libraries(MeshLoader PRIVATE assimp)
 
-target_link_plugins(MeshLoader TextureLoader)
+target_link_plugins(MeshLoader Resources)

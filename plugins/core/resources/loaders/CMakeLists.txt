@@ -1,10 +1,5 @@
 
-if (NOT IOS)
-	add_subdirectory(audioloader)
-endif()
 add_subdirectory(imageloader)
-add_subdirectory(textureloader)
 add_subdirectory(meshloader)
-add_subdirectory(fontloader)
 add_subdirectory(skeletonloader)
 add_subdirectory(animationloader)

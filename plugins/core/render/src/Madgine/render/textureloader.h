@@ -23,11 +23,11 @@ namespace Render {
 		MIN_NEAREST
 	};
 
-    struct MADGINE_TEXTURELOADER_EXPORT TextureLoader : Resources::VirtualResourceLoaderBase<TextureLoader, Texture, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
+    struct MADGINE_RENDER_EXPORT TextureLoader : Resources::VirtualResourceLoaderBase<TextureLoader, Texture, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
 
         using Base = Resources::VirtualResourceLoaderBase<TextureLoader, Texture, std::list<Placeholder<0>>, Threading::WorkGroupStorage>;
 
-        struct MADGINE_TEXTURELOADER_EXPORT Ptr : Base::Ptr {
+        struct MADGINE_RENDER_EXPORT Ptr : Base::Ptr {
 
             using Base::Ptr::Ptr;
             Ptr(Base::Ptr ptr)
@@ -42,7 +42,7 @@ namespace Render {
             void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data, TextureLoader *loader = &TextureLoader::getSingleton());
         };
 
-        struct MADGINE_TEXTURELOADER_EXPORT Handle : Base::Handle {
+        struct MADGINE_RENDER_EXPORT Handle : Base::Handle {
 
             using Base::Handle::Handle;
             Handle(Base::Handle handle)

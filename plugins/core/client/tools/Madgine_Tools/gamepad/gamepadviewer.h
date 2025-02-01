@@ -3,7 +3,7 @@
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 
-#include "Madgine/textureloader/textureloader.h"
+#include "Madgine/render/textureloader.h"
 
 namespace Engine {
 namespace Tools {

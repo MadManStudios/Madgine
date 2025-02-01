@@ -4,7 +4,6 @@
 
 #include "Madgine/renderlib.h"
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/textureloaderlib.h"
 
 #if defined(Vulkan_EXPORTS)
 #    define MADGINE_VULKAN_EXPORT DLL_EXPORT

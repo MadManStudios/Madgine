@@ -2,7 +2,7 @@
 
 #include "renderdata.h"
 
-#include "Madgine/fontloader/fontloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 
 #include "Meta/math/atlas2.h"
 #include "Meta/math/color4.h"

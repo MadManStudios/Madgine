@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Meta/math/boundingbox.h"
-#include "Madgine/textureloader/textureloader.h"
 #include "Madgine/render/vertexformat.h"
+#include "Madgine/render/resourceblock.h"
 
 namespace Engine {
 namespace Render {
@@ -11,8 +11,6 @@ namespace Render {
         struct Material {
             std::string mName;
             UniqueResourceBlock mResourceBlock;
-            TextureLoader::Handle mDiffuseTexture;
-            TextureLoader::Handle mEmissiveTexture;
             Vector4 mDiffuseColor = Vector4::UNIT_SCALE;
         };
         std::vector<Material> mMaterials;

@@ -3,5 +3,7 @@
 namespace Engine {
 namespace Audio {
 
+	struct AudioInfo;
+
 }
 }
