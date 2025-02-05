@@ -27,7 +27,7 @@ namespace Render {
         }
 #endif
 
-        mBlock.mResources[0].mHandle = mTextureHandle;
+        mBlock.mResources[0].mHandle = mTextureHandle.as<GLuint>();
         mBlock.mResources[0].mTarget = target();
         mResourceBlock.setupAs<OpenGLResourceBlock<1> *>() = &mBlock;
 
@@ -156,7 +156,7 @@ namespace Render {
 
     void OpenGLTexture::bind() const
     {
-        glBindTexture(target(), mTextureHandle);
+        glBindTexture(target(), mTextureHandle.as<GLuint>());
         GL_CHECK();
     }
 

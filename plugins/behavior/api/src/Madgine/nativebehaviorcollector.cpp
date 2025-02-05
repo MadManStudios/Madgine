@@ -43,45 +43,45 @@ void NativeBehaviorFactory::release(UniqueOpaquePtr &ptr) const
 
 std::string_view NativeBehaviorFactory::name(const UniqueOpaquePtr &handle) const
 {
-    const NativeBehaviorInfo *info = handle;
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo*>();
     return info->name();
 }
 
 Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const
 {
-    const NativeBehaviorInfo *info = handle;
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
     return info->create(args);
 }
 
 Threading::TaskFuture<ParameterTuple> NativeBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
 {
-    const NativeBehaviorInfo *info = handle;
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
     return info->createParameters();
 }
 
 ParameterTuple NativeBehaviorFactory::createDummyParameters(const UniqueOpaquePtr &handle) const
 {
-    const NativeBehaviorInfo *info = handle;
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
     return info->createParameters();
 }
 
 std::vector<ValueTypeDesc> NativeBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
 {
-    const NativeBehaviorInfo *info = handle;
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
     auto types = info->parameterTypes();
     return { types.begin(), types.end() };
 }
 
 std::vector<ValueTypeDesc> NativeBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
 {
-    const NativeBehaviorInfo *info = handle;
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
     auto types = info->resultTypes();
     return { types.begin(), types.end() };
 }
 
 std::vector<BindingDescriptor> NativeBehaviorFactory::bindings(const UniqueOpaquePtr &handle) const
 {
-    const NativeBehaviorInfo *info = handle;
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
     auto bindings = info->bindings();
     return { bindings.begin(), bindings.end() };
 }

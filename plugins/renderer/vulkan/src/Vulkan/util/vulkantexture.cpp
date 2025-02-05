@@ -154,7 +154,7 @@ namespace Render {
         VK_CHECK(result);
 
         VkMemoryRequirements memRequirements;
-        vkGetImageMemoryRequirements(GetDevice(), mTextureHandle, &memRequirements);
+        vkGetImageMemoryRequirements(GetDevice(), image(), &memRequirements);
 
         VkMemoryAllocateInfo allocInfo {};
         allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
@@ -164,7 +164,7 @@ namespace Render {
         result = vkAllocateMemory(GetDevice(), &allocInfo, nullptr, &mDeviceMemory);
         VK_CHECK(result);
 
-        vkBindImageMemory(GetDevice(), mTextureHandle, mDeviceMemory, 0);
+        vkBindImageMemory(GetDevice(), image(), mDeviceMemory, 0);
 
         VulkanRenderContext &context = VulkanRenderContext::getSingleton();
 
@@ -194,7 +194,7 @@ namespace Render {
             memcpy(ptr, data.mData, static_cast<size_t>(imageSize));
             vkUnmapMemory(GetDevice(), stagingBufferMemory);
 
-            transitionImageLayout(commandBuffer, mTextureHandle, vFormat, aspectMask, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+            transitionImageLayout(commandBuffer, image(), vFormat, aspectMask, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
             VkBufferImageCopy region {};
             region.bufferOffset = 0;
@@ -215,15 +215,15 @@ namespace Render {
             vkCmdCopyBufferToImage(
                 commandBuffer,
                 stagingBuffer,
-                mTextureHandle,
+                image(),
                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                 1,
                 &region);
 
-            transitionImageLayout(commandBuffer, mTextureHandle, vFormat, aspectMask, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            transitionImageLayout(commandBuffer, image(), vFormat, aspectMask, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
         } else {
-            transitionImageLayout(commandBuffer, mTextureHandle, vFormat, aspectMask, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            transitionImageLayout(commandBuffer, image(), vFormat, aspectMask, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         }
         vkEndCommandBuffer(commandBuffer);
 
@@ -237,7 +237,7 @@ namespace Render {
 
         vkFreeCommandBuffers(GetDevice(), context.mCommandPool, 1, &commandBuffer);
 
-        viewInfo.image = mTextureHandle;
+        viewInfo.image = image();
 
         result = vkCreateImageView(GetDevice(), &viewInfo, nullptr, &mImageView);
         VK_CHECK(result);
@@ -377,7 +377,7 @@ namespace Render {
             memcpy(ptr, data.mData, static_cast<size_t>(imageSize));
             vkUnmapMemory(GetDevice(), stagingBufferMemory);
 
-            transitionImageLayout(commandBuffer, mTextureHandle, vFormat, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+            transitionImageLayout(commandBuffer, image(), vFormat, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
             VkBufferImageCopy region {};
             region.bufferOffset = 0;
@@ -398,15 +398,15 @@ namespace Render {
             vkCmdCopyBufferToImage(
                 commandBuffer,
                 stagingBuffer,
-                mTextureHandle,
+                image(),
                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                 1,
                 &region);
 
-            transitionImageLayout(commandBuffer, mTextureHandle, vFormat, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            transitionImageLayout(commandBuffer, image(), vFormat, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
         } else {
-            transitionImageLayout(commandBuffer, mTextureHandle, vFormat, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            transitionImageLayout(commandBuffer, image(), vFormat, VK_IMAGE_ASPECT_COLOR_BIT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         }
         vkEndCommandBuffer(commandBuffer);
 
@@ -428,7 +428,7 @@ namespace Render {
 
     VkImage VulkanTexture::image() const
     {
-        return mTextureHandle;
+        return mTextureHandle.as<VkImage>();
     }
 
     VkFormat VulkanTexture::format() const
@@ -453,7 +453,7 @@ namespace Render {
 
     void VulkanTexture::transition(VkCommandBuffer commandList, VkImageLayout oldLayout, VkImageLayout newLayout)
     {
-        transitionImageLayout(commandList, mTextureHandle, format(), VK_IMAGE_ASPECT_COLOR_BIT, oldLayout, newLayout);
+        transitionImageLayout(commandList, image(), format(), VK_IMAGE_ASPECT_COLOR_BIT, oldLayout, newLayout);
     }
 }
 }

@@ -48,10 +48,10 @@ struct UniqueOpaquePtr {
     }
 
     template <typename T>
-    operator T() const
+    T &as()
     {
         assert(mPtr);
-        return (T)(mPtr);
+        return reinterpret_cast<T &>(mPtr);
     }
 
     template <typename T>

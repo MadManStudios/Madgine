@@ -28,8 +28,8 @@ namespace Render {
 
         void createShaderResourceView(OffsetPtr descriptorHandle) const;
 
-        operator ID3D12Resource *() const;     
-        operator ReleasePtr<ID3D12Resource>() const;
+        ID3D12Resource *resource() const;
+        ReleasePtr<ID3D12Resource> resourcePtr() const;
 
         void setName(std::string_view name);
 

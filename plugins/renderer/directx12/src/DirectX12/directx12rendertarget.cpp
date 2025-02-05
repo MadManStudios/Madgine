@@ -66,7 +66,7 @@ namespace Render {
                 mDepthStencilViews[i] = DirectX12RenderContext::getSingleton().mDepthStencilDescriptorHeap.allocate();
             if (target)
                 *target = i;
-            GetDevice()->CreateDepthStencilView(mDepthTexture, &dsvDesc, DirectX12RenderContext::getSingleton().mDepthStencilDescriptorHeap.cpuHandle(mDepthStencilViews[i]));
+            GetDevice()->CreateDepthStencilView(mDepthTexture.resource(), &dsvDesc, DirectX12RenderContext::getSingleton().mDepthStencilDescriptorHeap.cpuHandle(mDepthStencilViews[i]));
             DX12_CHECK();
         }
     }
@@ -79,16 +79,16 @@ namespace Render {
     {
         RenderTarget::beginFrame();
 
-        mCommandList.Transition(mDepthTexture, mDepthTexture.readStateFlags(), D3D12_RESOURCE_STATE_DEPTH_WRITE);
+        mCommandList.Transition(mDepthTexture.resource(), mDepthTexture.readStateFlags(), D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
-        mCommandList.attachResource(mDepthTexture.operator ReleasePtr<ID3D12Resource>());
+        mCommandList.attachResource(mDepthTexture.resourcePtr());
 
         for (RenderPass *pass : renderPasses()) {
             for (RenderData *data : pass->dependencies()) {
                 DirectX12RenderTexture *tex = dynamic_cast<DirectX12RenderTexture *>(data);
                 if (tex) {
                     for (const DirectX12Texture &texture : tex->textures())
-                        mCommandList.attachResource(texture.operator ReleasePtr<ID3D12Resource>());
+                        mCommandList.attachResource(texture.resourcePtr());
                 }
                 context()->mGraphicsQueue.wait(data->lastFrame());
             }
@@ -132,7 +132,7 @@ namespace Render {
     RenderFuture DirectX12RenderTarget::endFrame()
     {
 
-        mCommandList.Transition(mDepthTexture, D3D12_RESOURCE_STATE_DEPTH_WRITE, mDepthTexture.readStateFlags());
+        mCommandList.Transition(mDepthTexture.resource(), D3D12_RESOURCE_STATE_DEPTH_WRITE, mDepthTexture.readStateFlags());
 
         return RenderTarget::endFrame();
     }

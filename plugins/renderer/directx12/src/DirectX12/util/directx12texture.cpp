@@ -54,7 +54,8 @@ namespace Render {
         textureDesc.MipLevels = 1;
         textureDesc.SampleDesc.Count = samples;
         textureDesc.SampleDesc.Quality = 0;
-        textureDesc.Flags = isRenderTarget ? D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET : isDepthTarget ? D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL : D3D12_RESOURCE_FLAG_NONE;
+        textureDesc.Flags = isRenderTarget ? D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET : isDepthTarget ? D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL
+                                                                                                     : D3D12_RESOURCE_FLAG_NONE;
 
         D3D12_CLEAR_VALUE clear {};
         clear.Format = clearFormat;
@@ -72,7 +73,7 @@ namespace Render {
         case TextureType_2D:
         case TextureType_2DMultiSample: {
             textureDesc.DepthOrArraySize = 1;
-            textureDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;            
+            textureDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
             break;
         }
         case TextureType_Cube:
@@ -95,7 +96,7 @@ namespace Render {
 
         if (data.mData) {
             assert(!isRenderTarget && mType != TextureType_Cube);
-            const UINT64 uploadBufferSize = GetRequiredIntermediateSize(mTextureHandle, 0, 1);
+            const UINT64 uploadBufferSize = GetRequiredIntermediateSize(resource(), 0, 1);
 
             heapDesc = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
             auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(uploadBufferSize);
@@ -116,8 +117,8 @@ namespace Render {
 
             DirectX12CommandList list = DirectX12RenderContext::getSingleton().fetchCommandList(D3D12_COMMAND_LIST_TYPE_DIRECT);
 
-            UpdateSubresources(list, mTextureHandle, uploadHeap, 0, 0, 1, &subResourceDesc);
-            list.Transition(mTextureHandle, D3D12_RESOURCE_STATE_COPY_DEST, readStateFlags());
+            UpdateSubresources(list, resource(), uploadHeap, 0, 0, 1, &subResourceDesc);
+            list.Transition(resource(), D3D12_RESOURCE_STATE_COPY_DEST, readStateFlags());
 
             list.attachResource(std::move(uploadHeap));
             list.execute();
@@ -227,13 +228,13 @@ namespace Render {
 
         DirectX12CommandList list = DirectX12RenderContext::getSingleton().fetchCommandList(D3D12_COMMAND_LIST_TYPE_DIRECT);
 
-        list.Transition(mTextureHandle, readStateFlags(), D3D12_RESOURCE_STATE_COPY_DEST);
+        list.Transition(resource(), readStateFlags(), D3D12_RESOURCE_STATE_COPY_DEST);
 
-        CD3DX12_TEXTURE_COPY_LOCATION Dst(mTextureHandle, 0);
+        CD3DX12_TEXTURE_COPY_LOCATION Dst(resource(), 0);
         CD3DX12_TEXTURE_COPY_LOCATION Src(uploadHeap, layout);
         list->CopyTextureRegion(&Dst, offset.x, offset.y, 0, &Src, nullptr);
 
-        list.Transition(mTextureHandle, D3D12_RESOURCE_STATE_COPY_DEST, readStateFlags());
+        list.Transition(resource(), D3D12_RESOURCE_STATE_COPY_DEST, readStateFlags());
 
         list.attachResource(std::move(uploadHeap));
 
@@ -283,25 +284,25 @@ namespace Render {
             std::terminate();
         }
 
-        GetDevice()->CreateShaderResourceView(mTextureHandle, &shaderResourceViewDesc, DirectX12RenderContext::getSingleton().mDescriptorHeap.cpuHandle(descriptorHandle));
+        GetDevice()->CreateShaderResourceView(resource(), &shaderResourceViewDesc, DirectX12RenderContext::getSingleton().mDescriptorHeap.cpuHandle(descriptorHandle));
         DX12_CHECK();
     }
 
-    DirectX12Texture::operator ID3D12Resource *() const
+    ID3D12Resource *DirectX12Texture::resource() const
     {
-        return mTextureHandle;
+        return mTextureHandle.as<ID3D12Resource*>();
     }
 
-    DirectX12Texture::operator ReleasePtr<ID3D12Resource>() const
+    ReleasePtr<ID3D12Resource> DirectX12Texture::resourcePtr() const
     {
-        ID3D12Resource *res = mTextureHandle;
+        ID3D12Resource *res = resource();
         res->AddRef();
         return ReleasePtr<ID3D12Resource> { res };
     }
 
     void DirectX12Texture::setName(std::string_view name)
     {
-        static_cast<ID3D12Resource *>(mTextureHandle)->SetName(StringUtil::toWString(name).c_str());
+        resource()->SetName(StringUtil::toWString(name).c_str());
     }
 
     D3D12_RESOURCE_STATES DirectX12Texture::readStateFlags() const

@@ -56,6 +56,8 @@ struct Generator {
         }
     }
 
+    Generator &operator=(Generator &&) = default;
+
     struct iterator {
         using difference_type = std::ptrdiff_t;
         using value_type = std::remove_reference_t<T>;

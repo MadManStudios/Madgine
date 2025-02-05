@@ -389,7 +389,7 @@ namespace Render {
         };
 
         return {
-            std::unique_ptr<void, Deleter> { uploadAllocation.mAddress, { buffer.mPtr.mOffset, buffer.mBuffer, this, uploadAllocation.mSize } }, uploadAllocation.mSize
+            std::unique_ptr<void, Deleter> { uploadAllocation.mAddress, { buffer.mPtr.mOffset, buffer.mBuffer.as<ID3D12Resource *>(), this, uploadAllocation.mSize } }, uploadAllocation.mSize
         };
     }
 
