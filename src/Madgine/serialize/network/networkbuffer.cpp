@@ -13,6 +13,11 @@ namespace Network {
     {
     }
 
+    SocketAddress NetworkBuffer::getAddress() const
+    {
+        return mSocket.address();
+    }
+
     std::streamsize NetworkBuffer::xsgetn(char *buf, std::streamsize len)
     {
         int result = mSocket.recv(buf, len);

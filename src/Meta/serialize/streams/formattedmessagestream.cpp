@@ -24,7 +24,7 @@ namespace Serialize {
 
     WriteMessage FormattedMessageStream::beginMessageWrite(ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
     {
-        return { this, requester, requestId, std::move(receiver) };
+        return { *this, requester, requestId, std::move(receiver) };
     }
 
     

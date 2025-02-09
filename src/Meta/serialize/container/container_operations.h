@@ -92,14 +92,14 @@ namespace Serialize {
         static StreamResult readIterator(FormattedSerializeStream &in, C &c, typename C::iterator &it)
         {
             int32_t dist;
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, dist, "it"));
+            STREAM_PROPAGATE_ERROR(Serialize::readState(in, dist, "it"));
             it = std::next(c.begin(), dist);
             return {};
         }
 
         static void writeIterator(FormattedSerializeStream &out, const C &c, const typename C::const_iterator &it)
         {
-            Serialize::write<int32_t>(out, std::distance(c.begin(), it), "it");
+            Serialize::writeState<int32_t>(out, std::distance(c.begin(), it), "it");
         }
     };
 
@@ -194,23 +194,23 @@ namespace Serialize {
             for (FormattedMessageStream &out : outStreams) {
                 std::visit(overloaded {
                                [&](typename C::emplace_action_t &&emplace) {
-                                   Serialize::write(out, EMPLACE, "operation");
+                                   Serialize::writeState(out, EMPLACE, "operation");
                                    if constexpr (!container_traits<C>::sorted) {
                                        Base::writeIterator(out, c, emplace.mIt);
                                    }
                                    TupleUnpacker::invoke(&Creator::template writeItem<C>, out, *emplace.mIt, hierarchy);
                                },
                                [&](typename C::erase_t &&erase) {
-                                   Serialize::write(out, ERASE, "operation");
+                                   Serialize::writeState(out, ERASE, "operation");
                                    Base::writeIterator(out, c, erase.mWhere);
                                },
                                [&](typename C::erase_range_t &&erase) {
-                                   Serialize::write(out, ERASE_RANGE, "operation");
+                                   Serialize::writeState(out, ERASE_RANGE, "operation");
                                    Base::writeIterator(out, c, erase.mFrom);
                                    Base::writeIterator(out, c, erase.mTo);
                                },
                                [&](typename C::reset_t &&reset) {
-                                   Serialize::write(out, RESET, "operation");
+                                   Serialize::writeState(out, RESET, "operation");
                                    Base::write(out, c, "content", hierarchy);
                                } },
                     std::move(payload));
@@ -220,7 +220,7 @@ namespace Serialize {
         static StreamResult readAction(C &c, FormattedSerializeStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
         {
             ContainerEvent op;
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, op, "operation"));
+            STREAM_PROPAGATE_ERROR(Serialize::readState(in, op, "operation"));
 
             bool accepted = (op & ~MASK) != ABORTED;
 
@@ -245,27 +245,27 @@ namespace Serialize {
 
             std::visit(overloaded {
                            [&](typename C::emplace_request_t &&emplace) {
-                               Serialize::write(out, EMPLACE, "operation");
+                               Serialize::writeState(out, EMPLACE, "operation");
                                if constexpr (!container_traits<C>::sorted) {
                                    Base::writeIterator(out, c, emplace.mWhere);
                                }
                                TupleUnpacker::invoke(&Creator::template writeItem<C>, out, emplace.mDummy, hierarchy);
                            },
                            [&](typename C::erase_t &&erase) {
-                               Serialize::write(out, ERASE, "operation");
+                               Serialize::writeState(out, ERASE, "operation");
                                Base::writeIterator(out, c, erase.mWhere);
                            },
                            [&](typename C::erase_range_t &&erase) {
-                               Serialize::write(out, ERASE_RANGE, "operation");
+                               Serialize::writeState(out, ERASE_RANGE, "operation");
                                Base::writeIterator(out, c, erase.mFrom);
                                Base::writeIterator(out, c, erase.mTo);
                            },
                            [&](typename C::reset_t &&reset) {
-                               Serialize::write(out, RESET, "operation");
+                               Serialize::writeState(out, RESET, "operation");
                                Base::write(out, c, "content", hierarchy);
                            },
                            [&](typename C::reset_to_request_t &&reset) {
-                               Serialize::write(out, RESET, "operation");
+                               Serialize::writeState(out, RESET, "operation");
                                //Base::write(out, reset.mNewData, "content", hierarchy);
                                throw "TODO";
                            } },

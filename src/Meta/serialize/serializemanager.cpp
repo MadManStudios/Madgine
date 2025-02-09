@@ -16,7 +16,7 @@ namespace Serialize {
     static std::mutex sMasterMappingMutex;
     static SyncableUnitMap sMasterMappings;
     static UnitId sNextUnitId = RESERVED_ID_COUNT;
-    static std::atomic<ParticipantId> sRunningStreamId = SerializeManager::sLocalMasterParticipantId;
+    static std::atomic<ParticipantId> sRunningStreamId = sLocalMasterParticipantId;
 
     SerializeManager::SerializeManager(const std::string &name)
         : mName(name)

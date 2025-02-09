@@ -9,14 +9,15 @@
 namespace Engine {
 namespace Serialize {
 
-	WriteMessage::WriteMessage(FormattedMessageStream *stream, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
-        : mStream(stream)
+	WriteMessage::WriteMessage(FormattedMessageStream &stream, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
+        : mStream(&stream)
         , mRequester(requester)
         , mRequestId(requestId)
         , mReceiver(std::move(receiver))
+        , mHolder(stream)
     {
-        stream->buffer().beginMessageWrite();
-        stream->mFormatter->beginMessageWrite();
+        stream.buffer().beginMessageWrite();
+        stream.mFormatter->beginMessageWrite();
     }
 
     WriteMessage::WriteMessage(WriteMessage &&other)
@@ -24,6 +25,7 @@ namespace Serialize {
         , mRequester(other.mRequester)
         , mRequestId(other.mRequestId)
         , mReceiver(std::move(other.mReceiver))
+        , mHolder(std::move(other.mHolder))
     {
     }
 

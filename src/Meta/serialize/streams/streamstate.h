@@ -12,8 +12,6 @@ namespace Serialize {
         INTEGRITY_ERROR,
         PARSE_ERROR,
         CLOSED_BY_USER,
-        SEND_FAILURE,
-        RECEIVE_FAILURE,
         REJECTED,
         CONNECTION_LOST)
 

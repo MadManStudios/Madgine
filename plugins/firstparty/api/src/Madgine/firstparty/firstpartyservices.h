@@ -79,7 +79,7 @@ namespace FirstParty {
 
         ///////// MATCHMAKING
 
-        using MatchmakingCallback = Closure<Serialize::Format(FirstPartySyncManager&)>;
+        using MatchmakingCallback = Closure<Serialize::Format(Serialize::SyncManager&)>;
         using SessionStartedCallback = Closure<void(std::vector<PlayerInfo>)>;
 
         Threading::TaskFuture<std::vector<Lobby>> getLobbyList();

@@ -3,9 +3,9 @@
 namespace Engine {
 namespace Serialize {
 
-    struct META_EXPORT SerializeStreamData {    
+    struct META_EXPORT SerializeStreamData {
         SerializeStreamData(SerializeManager &mgr, ParticipantId id);
-        SerializeStreamData(SerializeStreamData &&) = delete;        
+        SerializeStreamData(SerializeStreamData &&) = delete;
         virtual ~SerializeStreamData();
 
         void setManager(SerializeManager *mgr);
@@ -25,10 +25,8 @@ namespace Serialize {
         SerializeManager *mManager = nullptr;
         ParticipantId mId = 0;
 
-        union {
-            SerializableUnitMap *mSerializableMap = nullptr;
-            SerializableUnitList *mSerializableList;
-        };
+        SerializableUnitMap *mSerializableMap = nullptr;
+        SerializableUnitList *mSerializableList = nullptr;
     };
 
 }

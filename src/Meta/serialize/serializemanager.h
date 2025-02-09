@@ -7,8 +7,6 @@ namespace Serialize {
 
     struct META_EXPORT SerializeManager {
 
-		static constexpr ParticipantId sLocalMasterParticipantId = 1;
-
         SerializeManager(const std::string &name);
         SerializeManager(const SerializeManager &) = delete;
         SerializeManager(SerializeManager &&) noexcept;

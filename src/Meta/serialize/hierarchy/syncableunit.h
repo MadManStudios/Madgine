@@ -3,6 +3,7 @@
 #include "../streams/pendingrequest.h"
 #include "Generic/offsetptr.h"
 #include "serializableunit.h"
+#include "syncfunction.h"
 
 namespace Engine {
 namespace Serialize {
@@ -191,7 +192,7 @@ namespace Serialize {
         }
 
         template <auto f, typename... Args>
-            requires std::constructible_from<typename Callable<f>::traits::decay_argument_types::as_tuple, Args...>
+            requires std::constructible_from<typename SyncFunctionTraits<typename Callable<f>::traits>::decay_argument_types::as_tuple, Args...>
         void notify(Args &&...args)
         {
             assert(this->isMaster());
@@ -202,21 +203,23 @@ namespace Serialize {
 
         template <auto f, typename... Args>
         auto query(Args &&...args)
+            requires std::constructible_from<typename SyncFunctionTraits<typename Callable<f>::traits>::decay_argument_types::as_tuple, Args...>
         {
-            using traits = typename Callable<f>::traits;
+            using traits = SyncFunctionTraits<typename Callable<f>::traits>;
             using R = typename traits::return_type;
+            using Tuple = traits::decay_argument_types::as_tuple;
             return make_message_sender<R>(
                 [this](auto &receiver, Args &&...args2) {
-                    if (this->isMaster()) {
-                        if constexpr (std::same_as<decltype((static_cast<T *>(this)->*f)(std::forward<Args>(args)...)), void>) {
-                            (static_cast<T *>(this)->*f)(std::forward<Args>(args2)...);
+                    Tuple args { std::forward<Args>(args2)... };
+                    if (this->isMaster()) {                        
+                        if constexpr (std::same_as<decltype(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { 1 }))), void>) {
+                            TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { sLocalMasterParticipantId })); // TODO: Constant
                             receiver.set_value();
                         } else {
-                            receiver.set_value((static_cast<T *>(this)->*f)(std::forward<Args>(args2)...));
+                            receiver.set_value(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { sLocalMasterParticipantId })));
                         }
                     } else {
-                        typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args2)... };
-                        this->writeFunctionRequest(functionIndex<f>, QUERY, &argTuple, 0, 0, receiver);
+                        this->writeFunctionRequest(functionIndex<f>, QUERY, &args, 0, 0, receiver);
                     }
                 },
                 std::forward<Args>(args)...);
@@ -224,13 +227,15 @@ namespace Serialize {
 
         template <auto f, typename... Args>
         void command(Args &&...args)
+            requires std::constructible_from<typename SyncFunctionTraits<typename Callable<f>::traits>::decay_argument_types::as_tuple, Args...>
         {
-            using traits = typename Callable<f>::traits;
+            using traits = SyncFunctionTraits<typename Callable<f>::traits>;
             using R = typename traits::return_type;
+            using Tuple = typename traits::decay_argument_types::as_tuple;
+            Tuple argTuple { std::forward<Args>(args)... };
             if (this->isMaster()) {
-                (static_cast<T *>(this)->*f)(std::forward<Args>(args)...);
-            } else {
-                typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args)... };
+                TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argTuple), { sLocalMasterParticipantId }));
+            } else {                 
                 this->writeFunctionRequest(functionIndex<f>, QUERY, &argTuple);
             }
         }

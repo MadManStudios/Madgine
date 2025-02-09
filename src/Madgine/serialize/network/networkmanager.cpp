@@ -142,5 +142,12 @@ namespace Network {
         return NetworkManagerResult::SOCKET_ERROR;
     }
 
+    SocketAddress NetworkManager::getAddress(Serialize::ParticipantId id)
+    {
+        Serialize::FormattedMessageStream &stream = getMasterStream(id);
+        NetworkBuffer &buffer = static_cast<NetworkBuffer &>(static_cast<Serialize::buffered_streambuf &>(stream.stream().buffer()).buffer());
+        return buffer.getAddress();
+    }
+
 }
 }

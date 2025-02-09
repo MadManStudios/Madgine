@@ -108,6 +108,7 @@ namespace Serialize {
         SYNCABLE = 1,
         SERIALIZABLE = 2
     };
+    constexpr ParticipantId sLocalMasterParticipantId = 1;
 
     struct message_streambuf;
 
@@ -163,6 +164,8 @@ namespace Serialize {
     template <typename T, typename... Configs>
     StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
 
+    template <typename T, typename... Configs>
+    void writeState(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0);
 }
 
 struct Vector2;

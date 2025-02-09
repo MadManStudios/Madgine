@@ -230,7 +230,7 @@ namespace Serialize {
         template <auto f, typename... Configs>
         constexpr SyncFunction syncFunction()
         {
-            using traits = typename Callable<f>::traits;
+            using traits = SyncFunctionTraits<typename Callable<f>::traits>;
             using R = patch_void_t<typename traits::return_type>;
             using T = typename traits::class_type;
             using Tuple = typename traits::decay_argument_types::as_tuple;
@@ -239,25 +239,25 @@ namespace Serialize {
                 [](const std::vector<WriteMessage> &outStreams, const void *args) {
                     const Tuple &argTuple = *static_cast<const Tuple *>(args);
                     for (FormattedMessageStream &out : outStreams) {
-                        write(out, argTuple, "Args");
+                        writeState(out, argTuple, "Args");
                     }
                 },
                 [](FormattedMessageStream &out, const void *result) {
-                    write(out, *static_cast<const R *>(result), "Result");
+                    writeState(out, *static_cast<const R *>(result), "Result");
                 },
                 [](SyncableUnitBase *unit, FormattedMessageStream &in, uint16_t index, FunctionType type, PendingRequest &request) {
                     switch (type) {
                     case CALL: {
                         Tuple args;
-                        STREAM_PROPAGATE_ERROR(read(in, args, "Args"));
+                        STREAM_PROPAGATE_ERROR(readState(in, args, "Args"));
                         STREAM_PROPAGATE_ERROR(apply_map(args, in, true));
                         writeFunctionAction(unit, index, &args, {}, request.mRequester, request.mRequesterTransactionId);
-                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, static_cast<T *>(unit), args);
+                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.id() }));
                         request.mReceiver.set_value(result);
                     } break;
                     case QUERY: {
                         R result;
-                        STREAM_PROPAGATE_ERROR(read(in, result, "Result"));
+                        STREAM_PROPAGATE_ERROR(readState(in, result, "Result"));
                         if (request.mRequesterTransactionId) {
                             FormattedMessageStream &out = getMasterRequestResponseTarget(unit, request.mRequester);
                             writeFunctionResult(unit, index, &result, out, request.mRequesterTransactionId);
@@ -270,15 +270,16 @@ namespace Serialize {
                 [](SyncableUnitBase *_unit, FormattedMessageStream &in, uint16_t index, FunctionType type, MessageId id) {
                     T *unit = static_cast<T *>(_unit);
                     Tuple args;
-                    STREAM_PROPAGATE_ERROR(read(in, args, "Args"));
+                    STREAM_PROPAGATE_ERROR(readState(in, args, "Args"));
                     STREAM_PROPAGATE_ERROR(apply_map(args, in, true));
                     ParticipantId answerId = in.id();
-                    if (!TupleUnpacker::invokeExpand(VerifierSelector<Configs...>::verify, CallerHierarchyPtr { CallerHierarchy { unit } }, answerId, args)) {
+                    SyncFunctionContext context { answerId };
+                    if (!TupleUnpacker::invokeExpand(VerifierSelector<Configs...>::verify, CallerHierarchyPtr { CallerHierarchy { unit } }, context, args)) {
                         writeFunctionError(unit, index, MessageResult::REJECTED, in, id);
                     } else if (unit->isMaster()) {
                         if (type == CALL)
                             writeFunctionAction(unit, index, &args, {}, answerId, id);
-                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, unit, args);
+                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, unit, traits::patchArgs(std::move(args), context));
                         if (type == QUERY && id != 0)
                             writeFunctionResult(unit, index, &result, in, id);
                     } else {

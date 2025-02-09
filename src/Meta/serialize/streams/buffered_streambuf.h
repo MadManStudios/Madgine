@@ -29,6 +29,8 @@ namespace Serialize {
         MessageId beginMessageReadImpl() override;
         std::streamsize endMessageReadImpl() override;
 
+        std::basic_streambuf<char> &buffer() const;
+
     protected:
         pos_type seekoff(off_type off, std::ios_base::seekdir dir,
             std::ios_base::openmode mode = std::ios_base::in) override;

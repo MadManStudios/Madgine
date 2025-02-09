@@ -26,6 +26,7 @@ namespace Network {
         void connectImpl(Execution::VirtualReceiverBase<type_pack<NetworkManagerResult, Serialize::SyncManagerResult>> &receiver, std::string_view url, int portNr, Serialize::Format format, TimeOut timeout = {});
         ASYNC_STUB(connect, connectImpl, Execution::make_simple_virtual_sender<type_pack<NetworkManagerResult, Serialize::SyncManagerResult>>);
         
+        SocketAddress getAddress(Serialize::ParticipantId id);
 
         void close();
 

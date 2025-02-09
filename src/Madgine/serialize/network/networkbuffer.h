@@ -10,6 +10,8 @@ namespace Network {
         NetworkBuffer(NetworkBuffer &&other) noexcept = delete;
         virtual ~NetworkBuffer();
 
+        SocketAddress getAddress() const;
+
     protected:        
         //void handleError() override;
 

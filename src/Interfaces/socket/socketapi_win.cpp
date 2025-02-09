@@ -55,6 +55,31 @@ void Socket::close()
     mSocket = Invalid_Socket;
 }
 
+SocketAddress Socket::address() const {
+    sockaddr address;    
+    char ext[16];
+    int length = sizeof(sockaddr) + sizeof(ext);
+    if (getpeername(mSocket, &address, &length))
+        return {};
+
+    char buffer[256];
+    switch (address.sa_family) {
+    case AF_INET:
+        inet_ntop(AF_INET, &reinterpret_cast<sockaddr_in&>(address).sin_addr,
+            buffer, 256);
+        break;
+
+    case AF_INET6:
+        inet_ntop(AF_INET6, &reinterpret_cast<sockaddr_in6&>(address).sin6_addr,
+            buffer, 256);
+        break;
+
+    default:
+        return {};
+    }
+    return buffer;
+}
+
 int Socket::send(const char *buf, size_t len) const
 {
     return ::send(mSocket, buf, static_cast<int>(len), 0);

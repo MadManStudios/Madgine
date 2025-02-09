@@ -79,7 +79,7 @@ namespace FirstParty {
     Serialize::ParticipantId SteamSyncManager::resolvePlayerId(CSteamID id)
     {
         if (id == SteamUser()->GetSteamID())
-            return SerializeManager::sLocalMasterParticipantId;
+            return Serialize::sLocalMasterParticipantId;
 
         for (const Serialize::FormattedMessageStream& out : getMasterMessageTargets()) {
             if (static_cast<SteamStreamData*>(out.data())->user() == id) {

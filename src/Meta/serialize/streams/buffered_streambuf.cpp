@@ -130,14 +130,14 @@ namespace Serialize {
             mBufferedSendMsgs.pop();
             int num = mBuffer->sputn(msg.mData.data(), msg.mData.size());
             if (num != msg.mData.size()) {
-                throw 0;
+                return STREAM_CONNECTION_LOST_ERROR() << "Connection lost sending messages";                
             }
 #if ENABLE_MESSAGE_LOGGING
             MessageLogger::log(this, std::move(msg));
 #endif
         }
         if (mBuffer->pubsync() < 0)
-            throw 0;
+            return STREAM_CONNECTION_LOST_ERROR() << "Connection lost flushing messages";
         return {};
     }
 
@@ -147,14 +147,14 @@ namespace Serialize {
             assert(mBytesToRead > 0);
             std::streamsize avail = mBuffer->in_avail();
             if (avail < 0) {
-                throw 0;
+                return STREAM_CONNECTION_LOST_ERROR() << "Connection lost polling";
             } else if (avail > 0) {
                 if (avail > mBytesToRead) {
                     avail = mBytesToRead;
                 }
                 int num = mBuffer->sgetn(reinterpret_cast<char *>(&mReceiveMessageHeader + 1) - mBytesToRead, avail);
                 if (num != avail) {
-                    throw 0;
+                    return STREAM_CONNECTION_LOST_ERROR() << "Connection lost reading messages";
                 }
                 mBytesToRead -= num;
                 if (mBytesToRead == 0) {
@@ -169,19 +169,24 @@ namespace Serialize {
         if (!mRecBuffer.empty() && mBytesToRead > 0) {
             std::streamsize avail = mBuffer->in_avail();
             if (avail < 0) {
-                throw 0;
+                return STREAM_CONNECTION_LOST_ERROR() << "Connection lost polling";
             } else if (avail > 0) {
                 if (avail > mBytesToRead) {
                     avail = mBytesToRead;
                 }
                 int num = mBuffer->sgetn(mRecBuffer.data() + mReceiveMessageHeader.mMsgSize - mBytesToRead, avail);
                 if (num != avail) {
-                    throw 0;
+                    return STREAM_CONNECTION_LOST_ERROR() << "Connection lost reading messages";
                 }
                 mBytesToRead -= num;
             }
         }
         return {};
+    }
+
+    std::basic_streambuf<char> &buffered_streambuf::buffer() const
+    {
+        return *mBuffer;
     }
 
 }

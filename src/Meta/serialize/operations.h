@@ -131,6 +131,15 @@ namespace Serialize {
             return cpo(p.second, in, success, hierarchy);
         }
 
+        template <typename T>
+        friend StreamResult tag_invoke(apply_map_t cpo, std::optional<T> &o, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            if (o)
+                return cpo(*o, in, success, hierarchy);
+            else
+                return {};
+        }
+
         template <SerializeRange C>
         friend StreamResult tag_invoke(apply_map_t cpo, C &c, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
         {
@@ -247,7 +256,7 @@ namespace Serialize {
     }
 
     template <typename T, typename... Configs>
-    void writeState(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
+    void writeState(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy, StateTransmissionFlags flags)
     {
         TupleUnpacker::invoke(Operations<T, Configs...>::write, out, t, name, hierarchy, flags);
     }
@@ -520,16 +529,16 @@ namespace Serialize {
         static StreamResult read(FormattedSerializeStream &in, std::pair<U, V> &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
         {
             STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
-            STREAM_PROPAGATE_ERROR(Serialize::read<U>(in, t.first, nullptr, hierarchy));
-            STREAM_PROPAGATE_ERROR(Serialize::read<V>(in, t.second, nullptr, hierarchy));
+            STREAM_PROPAGATE_ERROR(Serialize::readState<U>(in, t.first, nullptr, hierarchy));
+            STREAM_PROPAGATE_ERROR(Serialize::readState<V>(in, t.second, nullptr, hierarchy));
             return in.endCompoundRead(name);
         }
 
         static void write(FormattedSerializeStream &out, const std::pair<U, V> &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
         {
             out.beginCompoundWrite(name);
-            Serialize::write<U>(out, t.first, "First", hierarchy);
-            Serialize::write<V>(out, t.second, "Second", hierarchy);
+            Serialize::writeState<U>(out, t.first, "First", hierarchy);
+            Serialize::writeState<V>(out, t.second, "Second", hierarchy);
             out.endCompoundWrite(name);
         }
 
@@ -539,6 +548,38 @@ namespace Serialize {
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<U>(in, nullptr, visitor));
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<V>(in, nullptr, visitor));
             return in.endCompoundRead(name);
+        }
+    };
+
+    template <typename T, typename... Configs>
+    struct Operations<std::optional<T>, Configs...> {
+
+        static StreamResult read(FormattedSerializeStream &in, std::optional<T> &p, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
+            bool hasValue;
+            STREAM_PROPAGATE_ERROR(readState(in, hasValue, "value"));
+            if (!hasValue) {
+                p.reset();
+                in.beginCompoundRead(name);
+                in.endCompoundRead(name);
+                return {};
+            } else {
+                p.emplace();
+                return readState(in, *p, name, hierarchy);
+            }            
+        }
+
+        static void write(FormattedSerializeStream &out, const std::optional<T> &p, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
+        {
+            out.beginExtendedWrite(name, 1);
+            writeState(out, p.has_value(), "value", hierarchy);
+            if (p) {
+                writeState(out, *p, name, hierarchy);
+            } else {
+                out.beginCompoundWrite(name);
+                out.endCompoundWrite(name);
+            }
         }
     };
 

@@ -163,7 +163,7 @@ namespace Serialize {
 
     ParticipantId SyncableUnitBase::participantId() const
     {
-        return mTopLevel ? mTopLevel->participantId() : SerializeManager::sLocalMasterParticipantId;
+        return mTopLevel ? mTopLevel->participantId() : sLocalMasterParticipantId;
     }
 
     void SyncableUnitBase::setSlaveId(UnitId id, SerializeManager *mgr)

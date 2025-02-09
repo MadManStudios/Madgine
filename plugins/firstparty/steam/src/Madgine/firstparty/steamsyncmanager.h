@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine/firstparty/firstpartysyncmanager.h"
+#include "Meta/serialize/syncmanager.h"
 
 #include <steam/steam_api.h>
 
@@ -9,8 +9,8 @@
 namespace Engine {
 namespace FirstParty {
 
-    struct SteamSyncManager : FirstPartySyncManager {
-        using FirstPartySyncManager::FirstPartySyncManager;
+    struct SteamSyncManager : Serialize::SyncManager {
+        using Serialize::SyncManager::SyncManager;
 
         void setup();
 

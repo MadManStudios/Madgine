@@ -3,10 +3,7 @@
 namespace Engine {
 namespace FirstParty {
 
-	struct PlayerInfo;
+	struct SteamSyncManager;
 
-	struct ServerInfo;
-
-	struct Lobby;
 }
 }

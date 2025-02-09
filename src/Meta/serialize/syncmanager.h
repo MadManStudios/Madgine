@@ -41,8 +41,9 @@ namespace Serialize {
 
         FormattedMessageStream &getSlaveMessageTarget();
 
-        std::vector<ParticipantId> getMasterParticipantIds();
+        std::set<ParticipantId> clients();
         size_t clientCount() const;
+        
 
         static void writeHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type);
         static void writeActionHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type, MessageId id);

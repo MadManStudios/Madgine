@@ -6,6 +6,8 @@
 
 namespace Engine {
 
+using SocketAddress = std::string;
+
 ENUM_BASE(SocketAPIResult, GenericResult,
     WOULD_BLOCK,
     TIMEOUT,
@@ -31,6 +33,8 @@ struct INTERFACES_EXPORT Socket {
     SocketAPIResult connect(std::string_view url, int portNr);
 
     void close();
+
+    SocketAddress address() const;
 
     int send(const char *buf, size_t len) const;
     int recv(char *buf, size_t len) const;

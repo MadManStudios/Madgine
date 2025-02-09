@@ -10,7 +10,7 @@ namespace Serialize {
     struct DefaultVerifier {
         using Category = VerifierCategory;
 
-        static bool verify(const CallerHierarchyBasePtr &hierarchy, ParticipantId requester)
+        static bool verify(const CallerHierarchyBasePtr &hierarchy, SyncFunctionContext context)
         {
             return true;
         }

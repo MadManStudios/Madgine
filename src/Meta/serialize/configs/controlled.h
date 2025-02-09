@@ -18,8 +18,8 @@ namespace Serialize {
         static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &t)
         {
             out.beginExtendedWrite("Item", 1);
-            write(out, comparator_traits<Cmp>::to_cmp_type(t), "key");
-            write(out, t, "Item");
+            writeState(out, comparator_traits<Cmp>::to_cmp_type(t), "key");
+            writeState(out, t, "Item");
         }
 
         template <typename Op>

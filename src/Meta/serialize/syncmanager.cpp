@@ -67,17 +67,17 @@ namespace Serialize {
     void SyncManager::writeHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type)
     {
         msg.beginHeaderWrite();
-        write(msg, SerializeManager::convertPtr(static_cast<FormattedSerializeStream&>(msg).stream(), unit), "Object");
-        write(msg, type, "MessageType");
+        writeState(msg, SerializeManager::convertPtr(static_cast<FormattedSerializeStream&>(msg).stream(), unit), "Object");
+        writeState(msg, type, "MessageType");
         msg.endHeaderWrite();
     }
 
     void SyncManager::writeActionHeader(WriteMessage &stream, const SyncableUnitBase *unit, MessageType type, MessageId id)
     {
         stream.beginHeaderWrite();
-        write(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
-        write(stream, type, "MessageType");
-        write(stream, id, "TransactionId");
+        writeState(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
+        writeState(stream, type, "MessageType");
+        writeState(stream, id, "TransactionId");
         stream.endHeaderWrite();
     }
 
@@ -134,7 +134,7 @@ namespace Serialize {
                 break;
             case MessageType::STATE:
                 assert(object->mType->mIsTopLevelUnit);
-                STREAM_PROPAGATE_ERROR(read(stream, *object, "State", {}, StateTransmissionFlags_ApplyMap | StateTransmissionFlags_Activation));
+                STREAM_PROPAGATE_ERROR(readState(stream, *object, "State", {}, StateTransmissionFlags_ApplyMap | StateTransmissionFlags_Activation));
                 static_cast<TopLevelUnitBase *>(object)->stateReadDone();
                 for (FormattedMessageStream &out : mMasterStreams | std::views::transform(projectionPairSecond)) {
                     sendState(out, object);
@@ -366,23 +366,23 @@ namespace Serialize {
         {
             auto msg = stream.beginMessageWrite();
             msg.beginHeaderWrite();
-            write<UnitId>(msg, SERIALIZE_MANAGER, "Object");
-            write(msg, SET_ID, "Command");
+            writeState<UnitId>(msg, SERIALIZE_MANAGER, "Object");
+            writeState(msg, SET_ID, "Command");
             msg.endHeaderWrite();
-            write(msg, stream.id(), "Id");
+            writeState(msg, stream.id(), "Id");
         }
 
         {
             auto msg = stream.beginMessageWrite();
             msg.beginHeaderWrite();
-            write<UnitId>(msg, SERIALIZE_MANAGER, "Object");
-            write(msg, SEND_NAME_MAPPINGS, "Command");
+            writeState<UnitId>(msg, SERIALIZE_MANAGER, "Object");
+            writeState(msg, SEND_NAME_MAPPINGS, "Command");
             msg.endHeaderWrite();
             std::vector<std::pair<std::string_view, UnitId>> ids;
             std::ranges::transform(mTopLevelUnitNameMappings, std::back_inserter(ids), [](const std::pair<const std::string, TopLevelUnitBase *> &p) {
                 return std::pair<std::string_view, UnitId> { p.first, p.second->masterId() };
             });
-            write(msg, ids, "Mappings");
+            writeState(msg, ids, "Mappings");
         }
 
         for (TopLevelUnitBase *unit : mTopLevelUnits) {
@@ -531,12 +531,11 @@ namespace Serialize {
         return {};
     }
 
-    std::vector<ParticipantId> SyncManager::getMasterParticipantIds()
+    std::set<ParticipantId> SyncManager::clients()
     {
-        std::vector<ParticipantId> result;
-        result.reserve(mMasterStreams.size());
+        std::set<ParticipantId> result;        
         for (const FormattedMessageStream &stream : mMasterStreams | std::views::transform(projectionPairSecond)) {
-            result.push_back(stream.id());
+            result.insert(stream.id());
         }
         return result;
     }
@@ -599,10 +598,10 @@ namespace Serialize {
     {
         auto msg = stream.beginMessageWrite();
         msg.beginHeaderWrite();
-        write(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
-        write<MessageType>(stream, MessageType::STATE, "MessageType");
+        writeState(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
+        writeState<MessageType>(stream, MessageType::STATE, "MessageType");
         msg.endHeaderWrite();
-        write(stream, *unit, "State");
+        writeState(stream, *unit, "State");
     }
 
     std::unique_ptr<SyncStreamData> SyncManager::createStreamData(ParticipantId id)

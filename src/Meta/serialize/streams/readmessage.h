@@ -1,14 +1,12 @@
 #pragma once
 
+#include "serializablemapholder.h"
+
 namespace Engine {
 namespace Serialize {
 
     struct META_EXPORT ReadMessage {
-        ReadMessage(MessageId id = 0, Formatter *formatter = nullptr)
-            : mId(id)
-            , mFormatter(formatter)
-        {
-        }
+        ReadMessage(MessageId id = 0, Formatter *formatter = nullptr);
         ReadMessage(ReadMessage &&other) = default;
         ~ReadMessage();
 
@@ -25,6 +23,8 @@ namespace Serialize {
 
         MessageId mId;
         Formatter *mFormatter;
+
+        SerializableListHolder mHolder;
     };
 
 }

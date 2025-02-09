@@ -11,6 +11,12 @@
 namespace Engine {
 namespace Serialize {
 
+    ReadMessage::ReadMessage(MessageId id, Formatter *formatter)
+        : mId(id)
+        , mFormatter(formatter)
+        , mHolder(formatter ? formatter->stream().data() : nullptr)
+    {
+    }
 	
     ReadMessage::~ReadMessage()
     {
@@ -21,6 +27,7 @@ namespace Serialize {
         assert(!mId);
         mId = std::exchange(other.mId, 0);
         mFormatter = std::move(other.mFormatter);
+        mHolder = std::move(other.mHolder);
         return *this;
     }
 
@@ -35,6 +42,7 @@ namespace Serialize {
         }
         mFormatter = nullptr;
         mId = 0;
+        mHolder = {};
         return {};
     }
 
