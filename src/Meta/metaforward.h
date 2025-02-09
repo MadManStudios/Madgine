@@ -98,8 +98,6 @@ namespace Serialize {
 
     struct CreatorCategory;
 
-    typedef int StateTransmissionFlags;
-
     typedef uint32_t ParticipantId;
     typedef uint32_t MessageId;
     typedef uint32_t UnitId;
@@ -165,7 +163,9 @@ namespace Serialize {
     StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
 
     template <typename T, typename... Configs>
-    void writeState(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0);
+    void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
+    template <typename T, typename... Configs>
+    StreamResult read(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
 }
 
 struct Vector2;

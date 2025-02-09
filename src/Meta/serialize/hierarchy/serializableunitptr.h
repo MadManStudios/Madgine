@@ -73,7 +73,7 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        void writeState(FormattedSerializeStream &out, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0) const;
+        void writeState(FormattedSerializeStream &out, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
 
         const void *mUnit = nullptr;
         const SerializeTable *mType = nullptr;
@@ -130,7 +130,7 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0) const;
+        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
 
         StreamResult applyMap(FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) const;
 
@@ -251,7 +251,7 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0) const;
+        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
 
         void setSynced(bool b, const CallerHierarchyBasePtr &hierarchy = {}) const;
         void setActive(bool active, bool existenceChanged) const;

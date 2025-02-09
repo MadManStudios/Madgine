@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../hierarchy/serializableunitptr.h"
+
 namespace Engine {
 namespace Serialize {
 
@@ -25,8 +27,8 @@ namespace Serialize {
         SerializeManager *mManager = nullptr;
         ParticipantId mId = 0;
 
-        SerializableUnitMap *mSerializableMap = nullptr;
-        SerializableUnitList *mSerializableList = nullptr;
+        SerializableUnitMap mSerializableMap;
+        SerializableUnitList mSerializableList;
     };
 
 }

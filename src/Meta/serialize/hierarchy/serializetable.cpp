@@ -42,7 +42,7 @@ namespace Serialize {
         unit->writeFunctionError(index, error, target, answerId);
     }
 
-    StreamResult META_EXPORT readState(const SerializeTable *table, void *unit, FormattedSerializeStream &in, StateTransmissionFlags flags, CallerHierarchyBasePtr hierarchy)
+    StreamResult META_EXPORT readState(const SerializeTable *table, void *unit, FormattedSerializeStream &in, CallerHierarchyBasePtr hierarchy)
     {
         if (in.supportsNameLookup()) {
             std::string name;
@@ -87,15 +87,15 @@ namespace Serialize {
         }
     }
 
-    StreamResult SerializeTable::readState(void *unit, FormattedSerializeStream &in, StateTransmissionFlags flags, CallerHierarchyBasePtr hierarchy) const
+    StreamResult SerializeTable::readState(void *unit, FormattedSerializeStream &in, CallerHierarchyBasePtr hierarchy) const
     {
-        return mReadState(this, unit, in, flags, hierarchy);
+        return mReadState(this, unit, in, hierarchy);
     }
 
     StreamResult SerializeTable::readAction(void *unit, FormattedMessageStream &in, PendingRequest &request) const
     {
         uint16_t index;
-        STREAM_PROPAGATE_ERROR(Serialize::readState(in, index, "index"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index"));
         return get(index).mReadAction(unit, in, request);
     }
 
@@ -187,7 +187,7 @@ namespace Serialize {
     void SerializeTable::writeAction(const void *unit, uint16_t index, const std::vector<WriteMessage> &outStreams, void *data) const
     {
         for (const WriteMessage &out : outStreams) {
-            Serialize::writeState(out, index, "index");
+            Serialize::write(out, index, "index");
         }
         get(index).mWriteAction(unit, outStreams, data);
     }
@@ -309,16 +309,16 @@ namespace Serialize {
     void SerializeTable::writeFunctionArguments(const std::vector<WriteMessage> &outStreams, uint16_t index, FunctionType type, const void *args) const
     {
         for (const WriteMessage &out : outStreams) {
-            Serialize::writeState(out, index, "index");
-            Serialize::writeState(out, type, "functionType");
+            Serialize::write(out, index, "index");
+            Serialize::write(out, type, "functionType");
         }
         getFunction(index).mWriteFunctionArguments(outStreams, args);
     }
 
     void SerializeTable::writeFunctionResult(FormattedMessageStream &out, uint16_t index, const void *args) const
     {
-        Serialize::writeState(out, index, "index");
-        Serialize::writeState(out, QUERY, "functionType");
+        Serialize::write(out, index, "index");
+        Serialize::write(out, QUERY, "functionType");
         getFunction(index).mWriteFunctionResult(out, args);
     }
 
@@ -330,25 +330,25 @@ namespace Serialize {
     StreamResult SerializeTable::readFunctionAction(SyncableUnitBase *unit, FormattedMessageStream &in, PendingRequest &request) const
     {
         uint16_t index;
-        STREAM_PROPAGATE_ERROR(Serialize::readState(in, index, "index"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index"));
         FunctionType type;
-        STREAM_PROPAGATE_ERROR(Serialize::readState(in, type, "functionType"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "functionType"));
         return getFunction(index).mReadFunctionAction(unit, in, index, type, request);
     }
 
     StreamResult SerializeTable::readFunctionRequest(SyncableUnitBase *unit, FormattedMessageStream &in, MessageId id) const
     {
         uint16_t index;
-        STREAM_PROPAGATE_ERROR(Serialize::readState(in, index, "index"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index"));
         FunctionType type;
-        STREAM_PROPAGATE_ERROR(Serialize::readState(in, type, "functionType"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "functionType"));
         return getFunction(index).mReadFunctionRequest(unit, in, index, type, id);
     }
 
     StreamResult SerializeTable::readFunctionError(SyncableUnitBase *unit, FormattedMessageStream &in, PendingRequest &request) const
     {
         MessageResult error;
-        STREAM_PROPAGATE_ERROR(Serialize::readState(in, error, "error"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, error, "error"));
         request.mReceiver.set_error(error);
         return {};
     }

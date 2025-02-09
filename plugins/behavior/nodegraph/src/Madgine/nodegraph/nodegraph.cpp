@@ -103,7 +103,7 @@ namespace NodeGraph {
         if (Filesystem::exists(path)) {
             Filesystem::FileManager mgr("Graph-Serializer");
             Serialize::FormattedSerializeStream in = mgr.openRead(path, Serialize::Formats::xml);
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, *this, "Graph", {}, Serialize::StateTransmissionFlags_ApplyMap));
+            STREAM_PROPAGATE_ERROR(Serialize::readState(in, *this, "Graph", {}));
 
             for (NodeBase *node : mNodes | std::views::transform(projectionUniquePtrToPtr)) {
                 size_t maxGroupCount = std::max({ node->flowOutGroupCount(),
@@ -877,7 +877,7 @@ namespace NodeGraph {
         STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Node", 1));
 
         std::string name;
-        STREAM_PROPAGATE_ERROR(readState(in, name, "type"));
+        STREAM_PROPAGATE_ERROR(read(in, name, "type"));
 
         bool isNativeNode = NodeRegistry::sComponentsByName().contains(name);
         BehaviorHandle libraryBehavior;
@@ -942,7 +942,7 @@ namespace NodeGraph {
     {
         out.beginExtendedWrite("Node", 1);
 
-        writeState(out, node->className(), "type");
+        write(out, node->className(), "type");
 
         return "Node";
     }

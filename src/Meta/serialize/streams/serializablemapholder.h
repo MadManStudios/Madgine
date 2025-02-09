@@ -10,7 +10,6 @@ namespace Serialize {
         SerializableMapHolder(SerializableMapHolder &&);
         ~SerializableMapHolder();
 
-        SerializableUnitMap mMap;    
         SerializeStreamData *mData = nullptr;
     };
 
@@ -22,8 +21,7 @@ namespace Serialize {
         ~SerializableListHolder();
 
         SerializableListHolder &operator=(SerializableListHolder &&);
-
-        SerializableUnitList mList;
+        
         SerializeStreamData *mData = nullptr;
     };
 

@@ -67,17 +67,17 @@ namespace Serialize {
     void SyncManager::writeHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type)
     {
         msg.beginHeaderWrite();
-        writeState(msg, SerializeManager::convertPtr(static_cast<FormattedSerializeStream&>(msg).stream(), unit), "Object");
-        writeState(msg, type, "MessageType");
+        write(msg, SerializeManager::convertPtr(static_cast<FormattedSerializeStream&>(msg).stream(), unit), "Object");
+        write(msg, type, "MessageType");
         msg.endHeaderWrite();
     }
 
     void SyncManager::writeActionHeader(WriteMessage &stream, const SyncableUnitBase *unit, MessageType type, MessageId id)
     {
         stream.beginHeaderWrite();
-        writeState(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
-        writeState(stream, type, "MessageType");
-        writeState(stream, id, "TransactionId");
+        write(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
+        write(stream, type, "MessageType");
+        write(stream, id, "TransactionId");
         stream.endHeaderWrite();
     }
 
@@ -85,22 +85,22 @@ namespace Serialize {
     {
         STREAM_PROPAGATE_ERROR(msg.beginHeaderRead());
         UnitId objectId;
-        STREAM_PROPAGATE_ERROR(readState(stream, objectId, "Object"));
+        STREAM_PROPAGATE_ERROR(read(stream, objectId, "Object"));
 
         if (objectId == SERIALIZE_MANAGER) {
             ParticipantId id;
             Command cmd;
-            STREAM_PROPAGATE_ERROR(readState(stream, cmd, "Command"));
+            STREAM_PROPAGATE_ERROR(read(stream, cmd, "Command"));
             STREAM_PROPAGATE_ERROR(msg.endHeaderRead());
             switch (cmd) {
             case SET_ID:
                 assert(mSlaveStream && &stream == &*mSlaveStream);
-                STREAM_PROPAGATE_ERROR(readState(stream, id, "Id"));
+                STREAM_PROPAGATE_ERROR(read(stream, id, "Id"));
                 stream.setId(id);
                 break;
             case SEND_NAME_MAPPINGS: {
                 std::vector<std::pair<std::string, UnitId>> ids;
-                STREAM_PROPAGATE_ERROR(readState(stream, ids, "Mappings"));
+                STREAM_PROPAGATE_ERROR(read(stream, ids, "Mappings"));
                 for (const auto &[name, id] : ids) {
                     mTopLevelUnitNameMappings.at(name)->setStaticSlaveId(id);
                 }
@@ -113,10 +113,10 @@ namespace Serialize {
             SyncableUnitBase *object;
             STREAM_PROPAGATE_ERROR(convertPtr(stream, objectId, object));
             MessageType type;
-            STREAM_PROPAGATE_ERROR(readState(stream, type, "MessageType"));
+            STREAM_PROPAGATE_ERROR(read(stream, type, "MessageType"));
             MessageId transactionId;
             if (type == MessageType::ACTION || type == MessageType::ERROR || type == MessageType::FUNCTION_ACTION || type == MessageType::FUNCTION_ERROR)
-                STREAM_PROPAGATE_ERROR(readState(stream, transactionId, "TransactionId"));
+                STREAM_PROPAGATE_ERROR(read(stream, transactionId, "TransactionId"));
             STREAM_PROPAGATE_ERROR(msg.endHeaderRead());
 
             switch (type) {
@@ -134,7 +134,7 @@ namespace Serialize {
                 break;
             case MessageType::STATE:
                 assert(object->mType->mIsTopLevelUnit);
-                STREAM_PROPAGATE_ERROR(readState(stream, *object, "State", {}, StateTransmissionFlags_ApplyMap | StateTransmissionFlags_Activation));
+                STREAM_PROPAGATE_ERROR(readState(stream, *object, "State", {}));
                 static_cast<TopLevelUnitBase *>(object)->stateReadDone();
                 for (FormattedMessageStream &out : mMasterStreams | std::views::transform(projectionPairSecond)) {
                     sendState(out, object);
@@ -366,23 +366,23 @@ namespace Serialize {
         {
             auto msg = stream.beginMessageWrite();
             msg.beginHeaderWrite();
-            writeState<UnitId>(msg, SERIALIZE_MANAGER, "Object");
-            writeState(msg, SET_ID, "Command");
+            write<UnitId>(msg, SERIALIZE_MANAGER, "Object");
+            write(msg, SET_ID, "Command");
             msg.endHeaderWrite();
-            writeState(msg, stream.id(), "Id");
+            write(msg, stream.id(), "Id");
         }
 
         {
             auto msg = stream.beginMessageWrite();
             msg.beginHeaderWrite();
-            writeState<UnitId>(msg, SERIALIZE_MANAGER, "Object");
-            writeState(msg, SEND_NAME_MAPPINGS, "Command");
+            write<UnitId>(msg, SERIALIZE_MANAGER, "Object");
+            write(msg, SEND_NAME_MAPPINGS, "Command");
             msg.endHeaderWrite();
             std::vector<std::pair<std::string_view, UnitId>> ids;
             std::ranges::transform(mTopLevelUnitNameMappings, std::back_inserter(ids), [](const std::pair<const std::string, TopLevelUnitBase *> &p) {
                 return std::pair<std::string_view, UnitId> { p.first, p.second->masterId() };
             });
-            writeState(msg, ids, "Mappings");
+            write(msg, ids, "Mappings");
         }
 
         for (TopLevelUnitBase *unit : mTopLevelUnits) {
@@ -598,10 +598,10 @@ namespace Serialize {
     {
         auto msg = stream.beginMessageWrite();
         msg.beginHeaderWrite();
-        writeState(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
-        writeState<MessageType>(stream, MessageType::STATE, "MessageType");
+        write(stream, SerializeManager::convertPtr(stream.stream(), unit), "Object");
+        write<MessageType>(stream, MessageType::STATE, "MessageType");
         msg.endHeaderWrite();
-        writeState(stream, *unit, "State");
+        write(stream, *unit, "State");
     }
 
     std::unique_ptr<SyncStreamData> SyncManager::createStreamData(ParticipantId id)

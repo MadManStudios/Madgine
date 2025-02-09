@@ -43,7 +43,7 @@ struct ParameterTupleInstance : ParameterTupleBase {
         return TupleUnpacker::accumulate(
             mTuple, [&](auto &e, Serialize::StreamResult r) {
                 STREAM_PROPAGATE_ERROR(std::move(r));
-                return Serialize::readState(in, e, nullptr);
+                return Serialize::read(in, e, nullptr);
             },
             Serialize::StreamResult {});
     }
@@ -51,7 +51,7 @@ struct ParameterTupleInstance : ParameterTupleBase {
     virtual void write(Serialize::FormattedSerializeStream &out) override
     {
         TupleUnpacker::forEach(mTuple, [&](const auto &e) {
-            Serialize::writeState(out, e, "Item");
+            Serialize::write(out, e, "Item");
         });
     }
 

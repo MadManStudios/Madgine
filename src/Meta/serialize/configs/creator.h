@@ -25,7 +25,7 @@ namespace Serialize {
         static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple<T> &result, const char *name = "Item")
         {
             if constexpr (std::is_const_v<T>) {
-                return readState<std::remove_const_t<T>>(in, std::get<0>(result), name);
+                return read<std::remove_const_t<T>>(in, std::get<0>(result), name);
             } else {
                 return {};
             }
@@ -35,7 +35,7 @@ namespace Serialize {
         static void writeCreationData(FormattedSerializeStream &out, const T &t, const char *name = "Item")
         {
             if constexpr (std::is_const_v<T>) {
-                writeState<std::remove_const_t<T>>(out, t, name);
+                write<std::remove_const_t<T>>(out, t, name);
             }
         }
 
@@ -47,12 +47,12 @@ namespace Serialize {
                 out.beginCompoundWrite("Item");
                 writeCreationData<typename T::first_type>(out, t.first, "Key");
                 writeCreationData<typename T::second_type>(out, t.second, "Value");
-                writeState<typename T::first_type>(out, t.first, "Key");
-                writeState<typename T::second_type>(out, t.second, "Value");
+                write<typename T::first_type>(out, t.first, "Key");
+                write<typename T::second_type>(out, t.second, "Value");
                 out.endCompoundWrite("Item");
             } else {
                 writeCreationData<T>(out, t);
-                writeState<T>(out, t, "Item");
+                write<T>(out, t, "Item");
             }
         }
 
@@ -68,8 +68,8 @@ namespace Serialize {
                 bool success;
                 it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
                 assert(success);
-                STREAM_PROPAGATE_ERROR(readState(in, it->first, "Key"));
-                STREAM_PROPAGATE_ERROR(readState(in, it->second, "Value"));
+                STREAM_PROPAGATE_ERROR(read(in, it->first, "Key"));
+                STREAM_PROPAGATE_ERROR(read(in, it->second, "Value"));
                 return in.endCompoundRead("Item");                
 
             } else {
@@ -78,7 +78,7 @@ namespace Serialize {
                 bool success;
                 it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
                 assert(success);
-                STREAM_PROPAGATE_ERROR(readState(in, *it, "Item"));
+                STREAM_PROPAGATE_ERROR(read(in, *it, "Item"));
                 return {};
             }
         }
@@ -116,8 +116,8 @@ namespace Serialize {
             out.beginCompoundWrite("Item");
             using T = std::ranges::range_value_t<C>;
             writeCreationData<T>(out, t);
-            writeState<typename T::first_type>(out, t.first, "Key");
-            writeState<typename T::second_type>(out, t.second, "Value");
+            write<typename T::first_type>(out, t.first, "Key");
+            write<typename T::second_type>(out, t.second, "Value");
             out.endCompoundWrite("Item");
         }
 
@@ -131,8 +131,8 @@ namespace Serialize {
             bool success;
             it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
             assert(success);
-            STREAM_PROPAGATE_ERROR(readState<typename T::first_type>(in, it->first, "Key"));
-            STREAM_PROPAGATE_ERROR(readState<typename T::second_type>(in, it->second, "Value"));
+            STREAM_PROPAGATE_ERROR(read<typename T::first_type>(in, it->first, "Key"));
+            STREAM_PROPAGATE_ERROR(read<typename T::second_type>(in, it->second, "Value"));
             return in.endCompoundRead(nullptr);
         }
 
@@ -212,11 +212,11 @@ namespace Serialize {
                 if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
 
                     std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(readState(in, temp, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
                     it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(readState(in, *it, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
                 }
                 assert(success);
                 return {};
@@ -279,11 +279,11 @@ namespace Serialize {
                 STREAM_PROPAGATE_ERROR(readCreationData(in, tuple, hierarchy));
                 if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
                     std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(*tuple));
-                    STREAM_PROPAGATE_ERROR(readState(in, temp, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
                     it = TupleUnpacker::invokeFlatten(emplace, success, op, where, std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(readState(in, *it, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
                 }
                 assert(success);
                 return {};
@@ -314,7 +314,7 @@ namespace Serialize {
             static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &arg, const CallerHierarchyBasePtr &hierarchy)
             {
                 const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg, hierarchy);
-                writeState<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
+                write<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
             }
 
             template <typename Op>

@@ -230,7 +230,7 @@ namespace Scene {
         {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Component", 1));
             std::string name;
-            STREAM_PROPAGATE_ERROR(Serialize::readState(in, name, "name"));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, name, "name"));
             uint32_t i = EntityComponentRegistry::sComponentsByName().at(name);
             handle = sceneMgr().entityComponentList(i).emplace(this);
             return {};

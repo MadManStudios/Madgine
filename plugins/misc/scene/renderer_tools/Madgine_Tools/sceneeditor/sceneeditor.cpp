@@ -256,7 +256,7 @@ namespace Tools {
 
         Filesystem::FileManager mgr { "Scene" };
         Serialize::FormattedSerializeStream in = mgr.openRead(mCurrentSceneFile, Serialize::Formats::xml);
-        Serialize::StreamResult result = Serialize::read(in, mSceneMgr->container("Default"), nullptr, {}, Serialize::StateTransmissionFlags_ApplyMap | Serialize::StateTransmissionFlags_Activation);
+        Serialize::StreamResult result = Serialize::readState(in, mSceneMgr->container("Default"), nullptr, {});
         if (result.mState != Serialize::StreamState::OK) {
             LOG_ERROR(*result.mError);
         }

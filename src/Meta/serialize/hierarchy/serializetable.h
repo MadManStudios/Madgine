@@ -51,13 +51,13 @@ namespace Serialize {
         const char *mTypeName;
         SerializeTableCallbacks mCallbacks;
         const SerializeTable &(*mBaseType)();
-        StreamResult (*mReadState)(const SerializeTable *, void *, FormattedSerializeStream &, StateTransmissionFlags, CallerHierarchyBasePtr);
+        StreamResult (*mReadState)(const SerializeTable *, void *, FormattedSerializeStream &, CallerHierarchyBasePtr);
         const Serializer *mFields;
         const SyncFunction *mFunctions;
         bool mIsTopLevelUnit;
 
         void writeState(const void *unit, FormattedSerializeStream &out, CallerHierarchyBasePtr hierarchy = {}) const;
-        StreamResult readState(void *unit, FormattedSerializeStream &in, StateTransmissionFlags flags = 0, CallerHierarchyBasePtr hierarchy = {}) const;
+        StreamResult readState(void *unit, FormattedSerializeStream &in, CallerHierarchyBasePtr hierarchy = {}) const;
 
         StreamResult readAction(void *unit, FormattedMessageStream &in, PendingRequest &request) const;
         StreamResult readRequest(void *unit, FormattedMessageStream &in, MessageId id) const;

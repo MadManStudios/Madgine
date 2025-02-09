@@ -68,14 +68,14 @@ namespace Serialize {
     StreamResult Operations<ExtendedValueTypeDesc>::read(FormattedSerializeStream &in, ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
     {
         std::string type;
-        STREAM_PROPAGATE_ERROR(Serialize::readState(in, type, name, hierarchy));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, name, hierarchy));
         //TODO
         return {};
     }
 
     void Operations<ExtendedValueTypeDesc>::write(FormattedSerializeStream &out, const ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
     {
-        Serialize::writeState(out, t.toString(), name, hierarchy);
+        Serialize::write(out, t.toString(), name, hierarchy);
     }
 
     StreamResult Operations<ExtendedValueTypeDesc>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)

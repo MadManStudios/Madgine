@@ -65,8 +65,8 @@ namespace Serialize {
 #define STREAM_CONNECTION_LOST_ERROR(...) STREAM_ERROR(::Engine::Serialize::StreamState::CONNECTION_LOST, __VA_ARGS__)
 #define STREAM_UNKNOWN_ERROR(...) STREAM_ERROR(::Engine::Serialize::StreamState::UNKNOWN_ERROR, __VA_ARGS__)
 
-#define STREAM_PROPAGATE_ERROR(expr)                                                                                \
-    if (::Engine::Serialize::StreamResult _result = (expr); _result.mState != ::Engine::Serialize::StreamState::OK) \
+#define STREAM_PROPAGATE_ERROR(...)                                                                                \
+    if (::Engine::Serialize::StreamResult _result = (__VA_ARGS__); _result.mState != ::Engine::Serialize::StreamState::OK) \
     return _result
 
     META_EXPORT StreamState streamError(std::ios::iostate state, std::ostringstream &out);

@@ -13,11 +13,11 @@
 namespace Engine {
 namespace Serialize {
 
-    void SerializableDataConstPtr::writeState(FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy, StateTransmissionFlags flags) const
+    void SerializableDataConstPtr::writeState(FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy, bool skipId) const
     {
-        if (out.isMaster(AccessMode::WRITE) && out.data() && !(flags & StateTransmissionFlags_SkipId)) {
+        if (out.isMaster(AccessMode::WRITE) && out.data() && !skipId) {
             out.beginExtendedWrite(name, 1);
-            Serialize::writeState(out, *this, "serId");
+            Serialize::write(out, *this, "serId");
         }
 
         out.beginCompoundWrite(name);
@@ -25,12 +25,12 @@ namespace Serialize {
         out.endCompoundWrite(name);
     }
 
-    StreamResult SerializableDataPtr::readState(FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy, StateTransmissionFlags flags) const
+    StreamResult SerializableDataPtr::readState(FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy, bool skipId) const
     {
-        if (!in.isMaster(AccessMode::READ) && in.data() && !(flags & StateTransmissionFlags_SkipId)) {
+        if (!in.isMaster(AccessMode::READ) && in.data() && !skipId) {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
             SerializableUnitBase *idHelper;
-            STREAM_PROPAGATE_ERROR(Serialize::readState(in, idHelper, "serId"));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, idHelper, "serId"));
             uint32_t id = reinterpret_cast<uintptr_t>(idHelper) >> 2;
             SerializableUnitList &list = in.serializableList();
             if (list.size() <= id)
@@ -40,7 +40,7 @@ namespace Serialize {
         }
 
         STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
-        STREAM_PROPAGATE_ERROR(mType->readState(unit(), in, flags, hierarchy));
+        STREAM_PROPAGATE_ERROR(mType->readState(unit(), in, hierarchy));
         return in.endCompoundRead(name);
     }
 
@@ -89,9 +89,9 @@ namespace Serialize {
         return mType->getIndex(offset) < unit()->mActiveIndex;
     }
 
-    StreamResult SerializableUnitPtr::readState(FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy, StateTransmissionFlags flags) const
+    StreamResult SerializableUnitPtr::readState(FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy, bool skipId) const
     {
-        return SerializableDataPtr { unit(), mType }.readState(in, name, hierarchy, flags);
+        return SerializableDataPtr { unit(), mType }.readState(in, name, hierarchy, skipId);
     }
 
     void SerializableUnitPtr::setParent(SerializableUnitBase *parent) const

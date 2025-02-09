@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "configs/configselector.h"
 #include "configs/creator.h"
 #include "configs/guard.h"
@@ -228,45 +227,31 @@ namespace Serialize {
             TupleUnpacker::invoke(Operations<T, Configs...>::setActive, t, active, existenceChanged, hierarchy);
     }
 
-    template <typename... Configs, typename T>
-    StreamResult readState(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
-    {
-        return TupleUnpacker::invoke(Operations<T, Configs...>::read, in, t, name, hierarchy, flags);
-    }
-
     template <typename T, typename... Configs>
-    StreamResult read(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
+    StreamResult readState(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
     {
-        SerializableListHolder holder { in };
+        setActive(t, false, false);
 
-        if (flags & StateTransmissionFlags_Activation)
-            setActive(t, false, false);
+        StreamResult result = read(in, t, name, hierarchy);
 
-        StreamResult result = readState<Configs...>(in, t, name, hierarchy, flags);
+        assert(in.manager());
+        STREAM_PROPAGATE_ERROR(apply_map(t, in, result.mState == StreamState::OK));
 
-        if (flags & StateTransmissionFlags_ApplyMap) {
-            assert(in.manager());
-            STREAM_PROPAGATE_ERROR(apply_map(t, in, result.mState == StreamState::OK));
-        }
-
-        if (flags & StateTransmissionFlags_Activation)
-            setActive(t, true, false);
+        setActive(t, true, false);
 
         return result;
     }
 
     template <typename T, typename... Configs>
-    void writeState(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy, StateTransmissionFlags flags)
+    StreamResult read(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
     {
-        TupleUnpacker::invoke(Operations<T, Configs...>::write, out, t, name, hierarchy, flags);
+        return TupleUnpacker::invoke(Operations<T, Configs...>::read, in, t, name, hierarchy);
     }
 
     template <typename T, typename... Configs>
-    void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
+    void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
     {
-        SerializableMapHolder holder { out };
-
-        writeState<T, Configs...>(out, t, name, hierarchy);
+        TupleUnpacker::invoke(Operations<T, Configs...>::write, out, t, name, hierarchy);
     }
 
     template <typename T, typename... Configs>
@@ -323,12 +308,12 @@ namespace Serialize {
                 if (holder.mTable == &serializeTable<TargetCompound>()) {
                     return callback(stream, name);
                 } else {
-                    //if constexpr (std::same_as<BaseType, SyncableUnitBase>) {
-                        // return SyncableUnitBase::visitStream(holder.mTable, stream, name, *genericVisitor);
-                        throw "TODO";
+                    // if constexpr (std::same_as<BaseType, SyncableUnitBase>) {
+                    //  return SyncableUnitBase::visitStream(holder.mTable, stream, name, *genericVisitor);
+                    throw "TODO";
                     //} else {
-                        //return SerializableDataPtr::visitStream(holder.mTable, stream, name, *genericVisitor);
-                   // }
+                    // return SerializableDataPtr::visitStream(holder.mTable, stream, name, *genericVisitor);
+                    // }
                 }
             }
         };
@@ -338,7 +323,7 @@ namespace Serialize {
 
     template <typename T, typename... Configs>
     struct Operations {
-        static StreamResult read(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
+        static StreamResult read(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
         {
             if constexpr (std::is_const_v<T>) {
                 // Don't do anything here
@@ -347,13 +332,13 @@ namespace Serialize {
                 return in.readPrimitive(t, name);
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                return t.readState(in, name, hierarchy, flags);
-            } else  {
-                return SerializableDataPtr { &t }.readState(in, name, hierarchy, flags);
-            } 
+                return t.readState(in, name, hierarchy);
+            } else {
+                return SerializableDataPtr { &t }.readState(in, name, hierarchy);
+            }
         }
 
-        static void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {}, StateTransmissionFlags flags = 0)
+        static void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
         {
             if constexpr (std::is_const_v<T>) {
                 // Don't do anything here
@@ -361,10 +346,10 @@ namespace Serialize {
                 out.writePrimitive(t, name);
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                t.writeState(out, name, hierarchy, flags);
+                t.writeState(out, name, hierarchy);
             } else {
-                SerializableDataConstPtr { &t }.writeState(out, name, CallerHierarchyPtr { hierarchy }, flags);
-            } 
+                SerializableDataConstPtr { &t }.writeState(out, name, CallerHierarchyPtr { hierarchy });
+            }
         }
 
         static void setActive(T &item, bool active, bool existenceChanged)
@@ -373,7 +358,7 @@ namespace Serialize {
                 item.setActive(active, existenceChanged);
             } else if constexpr (std::derived_from<T, SerializableUnitBase>) {
                 SerializableUnitPtr { &item }.setActive(active, existenceChanged);
-            } else if constexpr (!PrimitiveType<T> && !std::is_const_v<T>){
+            } else if constexpr (!PrimitiveType<T> && !std::is_const_v<T>) {
                 SerializableDataPtr { &item }.setActive(active, existenceChanged);
             }
         }
@@ -394,7 +379,7 @@ namespace Serialize {
                 return visitor.visit(PrimitiveHolder<SyncableUnitBase> { &serializeTable<T>() }, in, name, tags);
             } else {
                 return visitor.visit(PrimitiveHolder<SerializableDataPtr> { &serializeTable<T>() }, in, name, tags);
-            } 
+            }
         }
     };
 
@@ -440,7 +425,7 @@ namespace Serialize {
             STREAM_PROPAGATE_ERROR(TupleUnpacker::accumulate(
                 t, [&](auto &e, StreamResult r) {
                     STREAM_PROPAGATE_ERROR(std::move(r));
-                    return Serialize::readState(in, e, nullptr, hierarchy);
+                    return Serialize::read(in, e, nullptr, hierarchy);
                 },
                 StreamResult {}));
             return in.endContainerRead(name);
@@ -450,7 +435,7 @@ namespace Serialize {
         {
             out.beginContainerWrite(name);
             TupleUnpacker::forEach(t, [&](const auto &e) {
-                Serialize::writeState(out, e, "Element", hierarchy);
+                Serialize::write(out, e, "Element", hierarchy);
             });
             out.endContainerWrite(name);
         }
@@ -529,16 +514,16 @@ namespace Serialize {
         static StreamResult read(FormattedSerializeStream &in, std::pair<U, V> &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
         {
             STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
-            STREAM_PROPAGATE_ERROR(Serialize::readState<U>(in, t.first, nullptr, hierarchy));
-            STREAM_PROPAGATE_ERROR(Serialize::readState<V>(in, t.second, nullptr, hierarchy));
+            STREAM_PROPAGATE_ERROR(Serialize::read<U>(in, t.first, nullptr, hierarchy));
+            STREAM_PROPAGATE_ERROR(Serialize::read<V>(in, t.second, nullptr, hierarchy));
             return in.endCompoundRead(name);
         }
 
         static void write(FormattedSerializeStream &out, const std::pair<U, V> &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
         {
             out.beginCompoundWrite(name);
-            Serialize::writeState<U>(out, t.first, "First", hierarchy);
-            Serialize::writeState<V>(out, t.second, "Second", hierarchy);
+            Serialize::write<U>(out, t.first, "First", hierarchy);
+            Serialize::write<V>(out, t.second, "Second", hierarchy);
             out.endCompoundWrite(name);
         }
 
@@ -558,7 +543,7 @@ namespace Serialize {
         {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
             bool hasValue;
-            STREAM_PROPAGATE_ERROR(readState(in, hasValue, "value"));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, hasValue, "value"));
             if (!hasValue) {
                 p.reset();
                 in.beginCompoundRead(name);
@@ -566,16 +551,16 @@ namespace Serialize {
                 return {};
             } else {
                 p.emplace();
-                return readState(in, *p, name, hierarchy);
-            }            
+                return Serialize::read(in, *p, name, hierarchy);
+            }
         }
 
         static void write(FormattedSerializeStream &out, const std::optional<T> &p, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
         {
             out.beginExtendedWrite(name, 1);
-            writeState(out, p.has_value(), "value", hierarchy);
+            Serialize::write(out, p.has_value(), "value", hierarchy);
             if (p) {
-                writeState(out, *p, name, hierarchy);
+                write(out, *p, name, hierarchy);
             } else {
                 out.beginCompoundWrite(name);
                 out.endCompoundWrite(name);

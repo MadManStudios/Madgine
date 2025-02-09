@@ -57,27 +57,27 @@ namespace Serialize {
         return *this;
     }
 
-    void SyncableUnitBase::writeState(FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy, StateTransmissionFlags flags) const
+    void SyncableUnitBase::writeState(FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy) const
     {
-        if (out.isMaster(AccessMode::WRITE) && out.data() && !(flags & StateTransmissionFlags_SkipId)) {
+        if (out.isMaster(AccessMode::WRITE) && out.data()) {
             out.beginExtendedWrite(name, 1);
-            Serialize::writeState(out, mMasterId, "syncId");
+            Serialize::write(out, mMasterId, "syncId");
         }
-        customUnitPtr().writeState(out, name, hierarchy, flags | StateTransmissionFlags_SkipId);
+        customUnitPtr().writeState(out, name, hierarchy, true);
     }
 
-    StreamResult SyncableUnitBase::readState(FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy, StateTransmissionFlags flags)
+    StreamResult SyncableUnitBase::readState(FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy)
     {
-        if (!in.isMaster(AccessMode::READ) && in.data() && !(flags & StateTransmissionFlags_SkipId)) {
+        if (!in.isMaster(AccessMode::READ) && in.data()) {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
             UnitId id;
-            STREAM_PROPAGATE_ERROR(Serialize::readState(in, id, "syncId"));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, id, "syncId"));
 
             if (in.manager() && in.manager()->getSlaveStreamData() == in.data()) {
                 setSlaveId(id, in.manager());
             }
         }
-        return customUnitPtr().readState(in, name, hierarchy, flags | StateTransmissionFlags_SkipId);
+        return customUnitPtr().readState(in, name, hierarchy, true);
     }
 
     void SyncableUnitBase::setActive(bool active, bool existenceChanged)

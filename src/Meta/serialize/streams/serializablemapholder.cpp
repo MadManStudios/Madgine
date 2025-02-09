@@ -15,26 +15,19 @@ namespace Serialize {
         : mData(out.data())
     {
         if (mData) {
-            assert(!mData->mSerializableMap);
-            mData->mSerializableMap = &mMap;
+            assert(mData->mSerializableMap.empty());
         }
     }
 
     SerializableMapHolder::SerializableMapHolder(SerializableMapHolder &&other)
-        : mMap(std::move(other.mMap))
-        , mData(std::exchange(other.mData, nullptr))
+        : mData(std::exchange(other.mData, nullptr))
     {
-        if (mData) {
-            assert(mData->mSerializableMap == &other.mMap);
-            mData->mSerializableMap = &mMap;
-        }
     }
 
     SerializableMapHolder::~SerializableMapHolder()
     {
         if (mData) {
-            assert(mData->mSerializableMap == &mMap);
-            mData->mSerializableMap = nullptr;
+            mData->mSerializableMap.clear();
         }
     }
 
@@ -42,8 +35,7 @@ namespace Serialize {
         : mData(data)
     {
         if (mData) {
-            assert(!mData->mSerializableList);
-            mData->mSerializableList = &mList;
+            assert(mData->mSerializableList.empty());            
         }
     }
 
@@ -55,23 +47,13 @@ namespace Serialize {
     SerializableListHolder::~SerializableListHolder()
     {
         if (mData) {
-            assert(mData->mSerializableList == &mList);
-            mData->mSerializableList = nullptr;
+            mData->mSerializableList.clear();
         }
     }
 
     SerializableListHolder &SerializableListHolder::operator=(SerializableListHolder &&other)        
     {
         std::swap(mData, other.mData);
-        std::swap(mList, other.mList);
-        if (mData) {
-            assert(mData->mSerializableList == &other.mList);
-            mData->mSerializableList = &mList;
-        }
-        if (other.mData) {
-            assert(other.mData->mSerializableList == &mList);
-            other.mData->mSerializableList = &other.mList;
-        }
         return *this;
     }
 

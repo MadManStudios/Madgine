@@ -29,17 +29,12 @@ namespace Serialize {
 
     SerializableUnitList &SerializeStreamData::serializableList()
     {
-        assert(mSerializableList);
-        return *mSerializableList;
+        return mSerializableList;
     }
 
     SerializableUnitMap &SerializeStreamData::serializableMap()
     {
-        if (!mSerializableMap) {
-
-        }
-        assert(mSerializableMap);
-        return *mSerializableMap;
+        return mSerializableMap;
     }
 
     bool SerializeStreamData::isMaster()
