@@ -78,6 +78,9 @@ namespace Log {
         case MessageType::ERROR_TYPE:
             type = "Error    :";
             break;
+        case MessageType::FATAL_TYPE:
+            type = "Fatal    :";
+            break;
         }
 
         char s[30];

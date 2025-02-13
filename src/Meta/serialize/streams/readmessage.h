@@ -7,7 +7,6 @@ namespace Serialize {
 
     struct META_EXPORT ReadMessage {
         ReadMessage(MessageId id = 0, Formatter *formatter = nullptr);
-        ReadMessage(ReadMessage &&other) = default;
         ~ReadMessage();
 
         ReadMessage &operator=(ReadMessage &&other);

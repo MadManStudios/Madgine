@@ -55,7 +55,7 @@ namespace NodeGraph {
 
         location.mNode = node;
 
-        location.pass([=, &receiver, &location](Debug::ContinuationMode mode) {
+        location.pass([=, this, &receiver, &location](Debug::ContinuationMode mode) {
             if (pin && pin.mNode) {
                 node->interpret({ *this, *node, receiver, location }, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
             } else {

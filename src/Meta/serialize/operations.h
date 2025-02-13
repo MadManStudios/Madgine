@@ -546,8 +546,8 @@ namespace Serialize {
             STREAM_PROPAGATE_ERROR(Serialize::read(in, hasValue, "value"));
             if (!hasValue) {
                 p.reset();
-                in.beginCompoundRead(name);
-                in.endCompoundRead(name);
+                STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
+                STREAM_PROPAGATE_ERROR(in.endCompoundRead(name));
                 return {};
             } else {
                 p.emplace();

@@ -33,7 +33,7 @@ namespace Serialize {
     };
 
     template <typename Traits>
-    using SyncFunctionTraits = SyncFunctionTraitsHelper<Traits, Traits::decay_argument_types>;
+    using SyncFunctionTraits = SyncFunctionTraitsHelper<Traits, typename Traits::decay_argument_types>;
 
 }
 }

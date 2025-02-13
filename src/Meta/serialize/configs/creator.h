@@ -62,7 +62,7 @@ namespace Serialize {
             using T = std::remove_reference_t<std::ranges::range_reference_t<Op>>;
             if constexpr (InstanceOf<T, std::pair>) {
                 STREAM_PROPAGATE_ERROR(in.beginCompoundRead("Item"));
-                std::tuple<std::piecewise_construct_t, ArgsTuple<T::first_type>, ArgsTuple<T::second_type>> tuple;
+                std::tuple<std::piecewise_construct_t, ArgsTuple<typename T::first_type>, ArgsTuple<typename T::second_type>> tuple;
                 STREAM_PROPAGATE_ERROR(readCreationData<typename T::first_type>(in, std::get<1>(tuple), "Key"));
                 STREAM_PROPAGATE_ERROR(readCreationData<typename T::second_type>(in, std::get<2>(tuple), "Value"));
                 bool success;

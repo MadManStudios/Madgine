@@ -162,7 +162,7 @@ namespace Execution {
             {
                 if (mCount.fetch_sub(1) == 1) {
                     mLifetime.decreaseCount();
-                    set_value();
+                    this->set_value();
                 }
             }
 
