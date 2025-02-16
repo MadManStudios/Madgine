@@ -5,6 +5,8 @@ namespace Engine {
 namespace Widgets {
     struct WidgetManager;
 
+    struct WidgetDescriptor;
+
 	struct WidgetBase;
     struct Bar;
     struct Button;
@@ -22,8 +24,6 @@ namespace Widgets {
     struct GeometrySourceInfo;
 
     struct WidgetsRenderData;
-
-    FORWARD_ENUM(WidgetClass);
 
 }
 

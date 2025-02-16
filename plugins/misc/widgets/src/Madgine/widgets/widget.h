@@ -3,7 +3,6 @@
 #include "Meta/math/matrix3.h"
 
 #include "Generic/execution/signal.h"
-#include "widgetclass.h"
 
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
@@ -42,7 +41,7 @@ namespace Widgets {
 
         virtual ~WidgetBase();
 
-        virtual WidgetClass getClass() const;
+        virtual std::string getClass() const;
 
         WidgetManager &manager();
         const std::string &key() const;
@@ -68,7 +67,11 @@ namespace Widgets {
         virtual void updateChildrenGeometry();
         Geometry calculateGeometry(uint16_t activeConditions, GeometrySourceInfo *source = nullptr);
 
-        WidgetBase *createChild(WidgetClass _class);
+        template <typename WidgetType = WidgetBase>
+        WidgetType* createChild() {
+            return static_cast<WidgetType *>(createChildByDescriptor(type_holder<WidgetType>));
+        }
+        WidgetBase *createChildByDescriptor(const WidgetDescriptor &desc);
         void clearChildren();
 
         WidgetBase *getChildRecursive(std::string_view name);

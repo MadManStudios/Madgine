@@ -19,7 +19,7 @@ namespace Widgets {
 
         void vertices(WidgetsRenderData &renderData, size_t layer) override;
 
-        virtual WidgetClass getClass() const override;
+        virtual std::string getClass() const override;
 
         virtual void sizeChanged(const Vector3 &pixelSize) override;
 

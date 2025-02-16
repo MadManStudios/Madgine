@@ -37,9 +37,9 @@ namespace Widgets {
         float mOffset;
     };
 
-    WidgetClass Layout::getClass() const
+    std::string Layout::getClass() const
     {
-        return WidgetClass::LAYOUT;
+        return "Layout";
     }
 
     void Layout::updateChildrenGeometry()

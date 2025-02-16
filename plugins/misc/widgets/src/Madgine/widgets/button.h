@@ -25,7 +25,7 @@ namespace Widgets {
 
         void vertices(WidgetsRenderData &renderData, size_t layer) override;
 
-        virtual WidgetClass getClass() const override;
+        virtual std::string getClass() const override;
 
         TextRenderData mTextRenderData;
         ScalableImageRenderData mImageRenderData;     

@@ -33,9 +33,9 @@ namespace Widgets {
         mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
     }
 
-    WidgetClass Image::getClass() const
+    std::string Image::getClass() const
     {
-        return WidgetClass::IMAGE;
+        return "Image";
     }
 
 }

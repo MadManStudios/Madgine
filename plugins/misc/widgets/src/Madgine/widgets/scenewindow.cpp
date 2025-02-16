@@ -37,6 +37,9 @@ namespace Widgets {
 
     void SceneWindow::vertices(WidgetsRenderData &renderData, size_t layer)
     {
+        if (!mSource)
+            return;
+
         Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
         Vector3 size = getAbsoluteSize();
 
@@ -59,9 +62,9 @@ namespace Widgets {
             mSource->resize(pixelSize.xy().floor());
     }
 
-    WidgetClass SceneWindow::getClass() const
+    std::string SceneWindow::getClass() const
     {
-        return WidgetClass::SCENEWINDOW;
+        return "SceneWindow";
     }
 
 }

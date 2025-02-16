@@ -4,15 +4,6 @@
 
 #include "widgetmanager.h"
 
-#include "bar.h"
-#include "button.h"
-#include "checkbox.h"
-#include "combobox.h"
-#include "image.h"
-#include "label.h"
-#include "scenewindow.h"
-#include "textbox.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
@@ -164,9 +155,9 @@ namespace Widgets {
         return geometry;
     }
 
-    WidgetClass WidgetBase::getClass() const
+    std::string WidgetBase::getClass() const
     {
-        return WidgetClass::WIDGET;
+        return "Widget";
     }
 
     void WidgetBase::destroy()
@@ -182,9 +173,9 @@ namespace Widgets {
         return mName;
     }
 
-    WidgetBase *WidgetBase::createChild(WidgetClass _class)
+    WidgetBase *WidgetBase::createChildByDescriptor(const WidgetDescriptor &desc)
     {
-        return mChildren.emplace_back(mManager.createWidgetByClass(_class, this)).get();
+        return mChildren.emplace_back(mManager.createWidgetByDescriptor(desc, this)).get();
     }
 
     void WidgetBase::clearChildren()

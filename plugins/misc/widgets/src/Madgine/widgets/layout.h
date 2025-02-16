@@ -9,7 +9,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Layout() = default;
 
-        WidgetClass getClass() const override;
+        std::string getClass() const override;
 
         void updateChildrenGeometry() override;
     };

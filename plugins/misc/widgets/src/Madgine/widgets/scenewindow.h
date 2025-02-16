@@ -13,7 +13,7 @@ namespace Widgets {
 
         void setRenderSource(Render::RenderTarget *source);
 
-        virtual WidgetClass getClass() const override;
+        virtual std::string getClass() const override;
 
     protected:
         void sizeChanged(const Vector3 &pixelSize) override;

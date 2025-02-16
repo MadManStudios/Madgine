@@ -10,19 +10,6 @@
 
 #include "widget.h"
 
-#include "bar.h"
-#include "button.h"
-#include "checkbox.h"
-#include "combobox.h"
-#include "image.h"
-#include "label.h"
-#include "scenewindow.h"
-#include "tabbar.h"
-#include "tablewidget.h"
-#include "textbox.h"
-#include "textedit.h"
-#include "layout.h"
-
 #include "Madgine/imageloader/imagedata.h"
 
 #include "Madgine/window/mainwindow.h"
@@ -46,6 +33,8 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
+#include "widgetloader.h"
+
 NAMED_UNIQUECOMPONENT(WidgetManager, Engine::Widgets::WidgetManager)
 
 METATABLE_BEGIN(Engine::Widgets::WidgetManager)
@@ -60,22 +49,6 @@ SERIALIZETABLE_END(Engine::Widgets::WidgetManager)
 
 namespace Engine {
 namespace Widgets {
-
-    static constexpr const char *sTags[] = {
-        "Widget",
-        "SceneWindow",
-        "Combobox",
-        "Checkbox",
-        "Textbox",
-        "Button",
-        "Label",
-        "Bar",
-        "Image",
-        "TableWidget",
-        "TabBar",
-        "TextEdit",
-        "Layout"
-    };
 
     static float sDragDistanceThreshold = 5.0f;
     static std::chrono::steady_clock::duration sDragTimeThreshold = 20ms;
@@ -103,6 +76,10 @@ namespace Widgets {
     {
         if (!co_await MainWindowComponentBase::init())
             co_return false;
+
+        for (const auto &[name, res] : WidgetLoader::getSingleton()) {
+            WidgetLoader::load(name).info()->setPersistent(true);
+        }
 
         mData->mPipeline.create({ .vs = "widgets", .ps = "widgets", .bufferSizes = { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) } });
 
@@ -145,10 +122,20 @@ namespace Widgets {
         mLifetime.end();
     }
 
-    template <typename WidgetType>
-    std::unique_ptr<WidgetType> WidgetManager::create(WidgetBase *parent)
+    WidgetBase *WidgetManager::createTopLevel()
     {
-        std::unique_ptr<WidgetType> w = std::make_unique<WidgetType>(*this, parent);
+        std::unique_ptr<WidgetBase> p = std::make_unique<WidgetBase>(*this);
+        WidgetBase *w = p.get();
+        w->hide();
+        w->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+
+        mTopLevelWidgets.emplace_back(std::move(p));
+        return w;
+    }
+
+    std::unique_ptr<WidgetBase> WidgetManager::createWidgetByDescriptor(const WidgetDescriptor &desc, WidgetBase *parent)
+    {
+        std::unique_ptr<WidgetBase> w = desc.create(*this, parent);
         if (!parent) {
             w->hide();
         }
@@ -156,70 +143,20 @@ namespace Widgets {
         return w;
     }
 
-    template std::unique_ptr<WidgetBase> WidgetManager::create<WidgetBase>(WidgetBase *);
-    template std::unique_ptr<Bar> WidgetManager::create<Bar>(WidgetBase *);
-    template std::unique_ptr<Checkbox> WidgetManager::create<Checkbox>(WidgetBase *);
-    template std::unique_ptr<Label> WidgetManager::create<Label>(WidgetBase *);
-    template std::unique_ptr<Button> WidgetManager::create<Button>(WidgetBase *);
-    template std::unique_ptr<Combobox> WidgetManager::create<Combobox>(WidgetBase *);
-    template std::unique_ptr<Textbox> WidgetManager::create<Textbox>(WidgetBase *);
-    template std::unique_ptr<SceneWindow> WidgetManager::create<SceneWindow>(WidgetBase *);
-    template std::unique_ptr<Image> WidgetManager::create<Image>(WidgetBase *);
-    template std::unique_ptr<TableWidget> WidgetManager::create<TableWidget>(WidgetBase *);
-    template std::unique_ptr<TextEdit> WidgetManager::create<TextEdit>(WidgetBase *);
-    template std::unique_ptr<Layout> WidgetManager::create<Layout>(WidgetBase *);
-
-    template <typename WidgetType>
-    WidgetType *WidgetManager::createTopLevel()
-    {
-        std::unique_ptr<WidgetType> p = create<WidgetType>();
-        WidgetType *w = p.get();
-        mTopLevelWidgets.emplace_back(std::move(p));
-        return w;
-    }
-
-    template DLL_EXPORT WidgetBase *WidgetManager::createTopLevel<WidgetBase>();
-
-    std::unique_ptr<WidgetBase> WidgetManager::createWidgetByClass(WidgetClass _class, WidgetBase *parent)
-    {
-        switch (_class) {
-        case WidgetClass::WIDGET:
-            return create<WidgetBase>(parent);
-        case WidgetClass::BAR:
-            return create<Bar>(parent);
-        case WidgetClass::CHECKBOX:
-            return create<Checkbox>(parent);
-        case WidgetClass::LABEL:
-            return create<Label>(parent);
-        case WidgetClass::BUTTON:
-            return create<Button>(parent);
-        case WidgetClass::COMBOBOX:
-            return create<Combobox>(parent);
-        case WidgetClass::TEXTBOX:
-            return create<Textbox>(parent);
-        case WidgetClass::SCENEWINDOW:
-            return create<SceneWindow>(parent);
-        case WidgetClass::IMAGE:
-            return create<Image>(parent);
-        case WidgetClass::TABLEWIDGET:
-            return create<TableWidget>(parent);
-        case WidgetClass::TABBAR:
-            return create<TabBar>(parent);
-        case WidgetClass::TEXTEDIT:
-            return create<TextEdit>(parent);
-        case WidgetClass::LAYOUT:
-            return create<Layout>(parent);
-        default:
-            std::terminate();
-        }
-    }
-
     Serialize::StreamResult WidgetManager::readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent)
     {
-        WidgetClass _class;
-        STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class, sTags));
+        std::string _class;
+        STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class));
 
-        widget = createWidgetByClass(_class, parent);
+        WidgetLoader::Handle desc;
+        Threading::TaskFuture<bool> result = desc.load(_class);
+
+        if (!result.get()) {
+            return STREAM_UNKNOWN_ERROR(in) << "Widget class '" << _class << "' not found!";
+        }
+
+        widget = createWidgetByDescriptor(*desc, parent);
+
         return {};
     }
 
@@ -230,56 +167,15 @@ namespace Widgets {
 
     const char *WidgetManager::writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const
     {
-        return Serialize::beginExtendedTypedWrite(out, widget->getClass(), sTags);
+        return Serialize::beginExtendedTypedWrite(out, widget->getClass());
     }
 
     Serialize::StreamResult WidgetManager::scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in)
     {
-        WidgetClass _class;
-        STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class, sTags));
-        switch (_class) {
-        case WidgetClass::WIDGET:
-            out = &serializeTable<WidgetBase>();
-            break;
-        case WidgetClass::BAR:
-            out = &serializeTable<Bar>();
-            break;
-        case WidgetClass::CHECKBOX:
-            out = &serializeTable<Checkbox>();
-            break;
-        case WidgetClass::LABEL:
-            out = &serializeTable<Label>();
-            break;
-        case WidgetClass::BUTTON:
-            out = &serializeTable<Button>();
-            break;
-        case WidgetClass::COMBOBOX:
-            out = &serializeTable<Combobox>();
-            break;
-        case WidgetClass::TEXTBOX:
-            out = &serializeTable<Textbox>();
-            break;
-        case WidgetClass::SCENEWINDOW:
-            out = &serializeTable<SceneWindow>();
-            break;
-        case WidgetClass::IMAGE:
-            out = &serializeTable<Image>();
-            break;
-        case WidgetClass::TABLEWIDGET:
-            out = &serializeTable<TableWidget>();
-            break;
-        case WidgetClass::TABBAR:
-            out = &serializeTable<TabBar>();
-            break;
-        case WidgetClass::TEXTEDIT:
-            out = &serializeTable<TextEdit>();
-            break;
-        case WidgetClass::LAYOUT:
-            out = &serializeTable<Layout>();
-            break;
-        default:
-            std::terminate();
-        }
+        std::string _class;
+        STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class));
+        WidgetLoader::Handle desc = WidgetLoader::load(_class);
+        out = desc->serializeTable();
         return {};
     }
 
@@ -522,7 +418,7 @@ namespace Widgets {
     void WidgetManager::unregisterWidget(WidgetBase *w)
     {
         /* auto count = */ std::erase(mWidgets, w);
-        //assert(count == 1);
+        // assert(count == 1);
     }
 
     void WidgetManager::resetPointerState()
@@ -648,7 +544,7 @@ namespace Widgets {
                 parameters->hasDistanceField = false;
                 parameters->hasTexture = false;
             }
-             
+
             if (mData->mAtlas.resource())
                 mData->mPipeline->bindResources(target, 2, mData->mAtlas.resource());
 

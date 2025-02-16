@@ -72,9 +72,9 @@ namespace Widgets {
         }
     }
 
-    WidgetClass TabBar::getClass() const
+    std::string TabBar::getClass() const
     {
-        return WidgetClass::TABBAR;
+        return "TabBar";
     }
 
     uint32_t TabBar::tabCount() const

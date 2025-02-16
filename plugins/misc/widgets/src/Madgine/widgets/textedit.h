@@ -33,7 +33,7 @@ namespace Widgets {
 
         virtual void sizeChanged(const Vector3 &pixelSize) override;
 
-        virtual WidgetClass getClass() const override;
+        virtual std::string getClass() const override;
 
         void onActivate(bool b);
 

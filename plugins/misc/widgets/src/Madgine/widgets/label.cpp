@@ -18,9 +18,9 @@ SERIALIZETABLE_END(Engine::Widgets::Label)
 namespace Engine {
 namespace Widgets {
 
-    WidgetClass Label::getClass() const
+    std::string Label::getClass() const
     {
-        return WidgetClass::LABEL;
+        return "Label";
     }
 
     void Label::vertices(WidgetsRenderData &renderData, size_t layer)

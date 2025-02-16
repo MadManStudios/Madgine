@@ -30,7 +30,7 @@ namespace Widgets {
 
         AreaView<std::string, 2> content();
 
-        virtual WidgetClass getClass() const override;
+        virtual std::string getClass() const override;
 
         virtual void vertices(WidgetsRenderData &renderData, size_t layer) override;
 

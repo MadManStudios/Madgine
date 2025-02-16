@@ -20,8 +20,6 @@
 
 #include "Meta/serialize/streams/serializestream.h"
 
-#include "Madgine/widgets/widgetclass.h"
-
 #include "Madgine/widgets/widgetmanager.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
@@ -29,6 +27,8 @@
 #include "Generic/coroutines/generator.h"
 
 #include "Madgine_Tools/imguiicons.h"
+
+#include "Madgine/widgets/widgetloader.h"
 
 UNIQUECOMPONENT(Engine::Tools::GuiEditor);
 
@@ -81,7 +81,7 @@ namespace Tools {
                     }
                 }
                 if (ImGui::Button("Create Layout")) {
-                    mWidgetManager->createTopLevel<>();
+                    mWidgetManager->createTopLevel();
                 }
 
                 ImGui::EndMenu();
@@ -102,12 +102,11 @@ namespace Tools {
     void renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color, ImDrawList *drawList)
     {
         ImGuiIO &io = ImGui::GetIO();
-        
+
         Vector3 absoluteSize = widget->getAbsoluteSize();
         Vector2 absolutePos = widget->getAbsolutePosition() + Vector2 { screenOffset };
 
         Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
-              
 
         drawList->AddRect(bounds.topLeft() / io.DisplayFramebufferScale, bounds.bottomRight() / io.DisplayFramebufferScale, color);
     }
@@ -146,7 +145,7 @@ namespace Tools {
 
                 Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
 
-                background->AddRect(bounds.topLeft() / io.DisplayFramebufferScale, bounds.bottomRight() / io.DisplayFramebufferScale, IM_COL32(255, 255, 255, 255));                
+                background->AddRect(bounds.topLeft() / io.DisplayFramebufferScale, bounds.bottomRight() / io.DisplayFramebufferScale, IM_COL32(255, 255, 255, 255));
 
                 if (!io.WantCaptureMouse) {
 
@@ -341,7 +340,7 @@ namespace Tools {
                 mSelected->render();
             }
 
-            //io.WantCaptureMouse = true;
+            // io.WantCaptureMouse = true;
         }
         ImGui::End();
     }
@@ -360,9 +359,12 @@ namespace Tools {
 
         if (ImGui::BeginPopupCompoundContextItem()) {
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Child Widget")) {
-                for (Widgets::WidgetClass c : Widgets::WidgetClass::values()) {
-                    if (ImGui::MenuItem(std::string { c.toString() }.c_str())) {
-                        w->createChild(c);
+                for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
+                    if (ImGui::MenuItem(name.c_str())) {
+                        Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
+                        desc.info()->loadingTask().then([desc, w](bool) {
+                            w->createChildByDescriptor(*desc);
+                        });
                     }
                 }
                 ImGui::EndMenu();
@@ -416,10 +418,11 @@ namespace Tools {
             if (root) {
                 if (ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::BeginMenu(IMGUI_ICON_PLUS " New Widget")) {
-                        for (Widgets::WidgetClass c : Widgets::WidgetClass::values()) {
-                            if (ImGui::MenuItem(std::string { c.toString() }.c_str())) {
-                                root->createChild(c);
-                            }
+                        for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
+                            Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
+                            desc.info()->loadingTask().then([desc, root](bool) {
+                                root->createChildByDescriptor(*desc);
+                            });
                         }
                         ImGui::EndMenu();
                     }

@@ -95,9 +95,9 @@ namespace Widgets {
         mClicked.emit();
     }
 
-    WidgetClass Button::getClass() const
+    std::string Button::getClass() const
     {
-        return WidgetClass::BUTTON;
+        return "Button";
     }
 
 }

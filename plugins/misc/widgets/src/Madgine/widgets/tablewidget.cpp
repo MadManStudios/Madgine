@@ -100,9 +100,9 @@ namespace Widgets {
         return { mCellData.data(), { columnCount(), rowCount() } };
     }
 
-    WidgetClass TableWidget::getClass() const
+    std::string TableWidget::getClass() const
     {
-        return WidgetClass::TABLEWIDGET;
+        return "TableWidget";
     }
 
     void TableWidget::vertices(WidgetsRenderData &renderData, size_t layer)

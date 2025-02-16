@@ -58,8 +58,7 @@ namespace Widgets {
         void clear();
 
         void destroyTopLevel(WidgetBase *w);
-        template <typename WidgetType = WidgetBase>
-        WidgetType *createTopLevel();
+        WidgetBase *createTopLevel();
 
         decltype(auto) widgets()
         {
@@ -100,7 +99,7 @@ namespace Widgets {
 
         void resetPointerState();
 
-        std::unique_ptr<WidgetBase> createWidgetByClass(WidgetClass _class, WidgetBase *parent = nullptr);
+        std::unique_ptr<WidgetBase> createWidgetByDescriptor(const WidgetDescriptor &desc, WidgetBase *parent = nullptr);
         Serialize::StreamResult readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent);
         Serialize::StreamResult readWidgetStub(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);
         const char *writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;

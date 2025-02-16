@@ -93,9 +93,9 @@ namespace Widgets {
         }
     }
 
-    WidgetClass Textbox::getClass() const
+    std::string Textbox::getClass() const
     {
-        return WidgetClass::TEXTBOX;
+        return "Textbox";
     }
 
     void Textbox::injectPointerClick(const Input::PointerEventArgs &arg)

@@ -10,7 +10,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Label() = default;
 
-        virtual WidgetClass getClass() const override;
+        virtual std::string getClass() const override;
 
         void vertices(WidgetsRenderData &renderData, size_t layer) override;
 

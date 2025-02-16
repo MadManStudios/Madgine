@@ -38,9 +38,9 @@ namespace Widgets {
         
     }
 
-    WidgetClass Bar::getClass() const
+    std::string Bar::getClass() const
     {
-        return WidgetClass::BAR;
+        return "Bar";
     }
 
 }
