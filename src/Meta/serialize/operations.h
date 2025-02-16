@@ -560,7 +560,7 @@ namespace Serialize {
             out.beginExtendedWrite(name, 1);
             Serialize::write(out, p.has_value(), "value", hierarchy);
             if (p) {
-                write(out, *p, name, hierarchy);
+                Serialize::write(out, *p, name, hierarchy);
             } else {
                 out.beginCompoundWrite(name);
                 out.endCompoundWrite(name);
