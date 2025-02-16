@@ -31,7 +31,7 @@ namespace FirstParty {
     GooglePlayServices::GooglePlayServices(Root::Root &root)
         : FirstPartyServicesImpl<GooglePlayServices>(root)
     {
-        PlayServices::setup();        
+        mInitialized = PlayServices::setup();        
     }
 
     GooglePlayServices::~GooglePlayServices()

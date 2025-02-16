@@ -17,7 +17,6 @@
 #include "Meta/serialize/formats.h"
 
 METATABLE_BEGIN_BASE(Engine::FirstParty::MockupServices, Engine::FirstParty::FirstPartyServices)
-READONLY_PROPERTY(Initialized, mInitialized)
 METATABLE_END(Engine::FirstParty::MockupServices)
 
 UNIQUECOMPONENT(Engine::FirstParty::MockupServices)

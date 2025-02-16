@@ -7,6 +7,7 @@
 #include "Meta/keyvalue/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::FirstParty::FirstPartyServices)
+READONLY_PROPERTY(Initialized, mInitialized)
 METATABLE_END(Engine::FirstParty::FirstPartyServices)
 
 VIRTUALUNIQUECOMPONENTBASE(Engine::FirstParty::FirstPartyServices)
@@ -17,6 +18,11 @@ namespace FirstParty {
     FirstPartyServices::FirstPartyServices(Root::Root &root)
         : VirtualRootComponentBase(root)
     {
+    }
+
+    bool FirstPartyServices::isConnected()
+    {
+        return is_instantiated() && getSingleton().mInitialized;
     }
 
     Threading::TaskFuture<Leaderboard> FirstPartyServices::getLeaderboard(const char *name, Leaderboard::AccessMode accessmode, Leaderboard::ReferenceRank referenceRank, int32_t rangeBegin, int32_t rangeEnd)

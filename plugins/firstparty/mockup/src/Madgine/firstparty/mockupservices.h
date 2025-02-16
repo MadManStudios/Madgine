@@ -70,7 +70,6 @@ namespace FirstParty {
 
         //////////////////
 
-        bool mInitialized = false;
         Serialize::NoParent<MockupClientState> mState;
         Network::NetworkManager mSyncManager;
     };

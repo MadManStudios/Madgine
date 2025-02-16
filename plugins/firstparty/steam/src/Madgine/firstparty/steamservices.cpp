@@ -19,7 +19,6 @@
 #include "Generic/execution/execution.h"
 
 METATABLE_BEGIN_BASE(Engine::FirstParty::SteamServices, Engine::FirstParty::FirstPartyServices)
-READONLY_PROPERTY(Initialized, mInitialized)
 METATABLE_END(Engine::FirstParty::SteamServices)
 
 UNIQUECOMPONENT(Engine::FirstParty::SteamServices)

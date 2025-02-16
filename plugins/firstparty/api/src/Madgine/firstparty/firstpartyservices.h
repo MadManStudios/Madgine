@@ -24,7 +24,7 @@ namespace FirstParty {
             FRIENDS,
             GLOBAL
         };
-        
+
         struct Entry {
             uintptr_t mUserId;
             std::string mDisplayName;
@@ -58,6 +58,8 @@ namespace FirstParty {
 
         FirstPartyServices(Root::Root &root);
 
+        static bool isConnected();
+
         ///////// IDENTITY
 
         virtual std::string currentUserName() const = 0;
@@ -79,7 +81,7 @@ namespace FirstParty {
 
         ///////// MATCHMAKING
 
-        using MatchmakingCallback = Closure<Serialize::Format(Serialize::SyncManager&)>;
+        using MatchmakingCallback = Closure<Serialize::Format(Serialize::SyncManager &)>;
         using SessionStartedCallback = Closure<void(std::vector<PlayerInfo>)>;
 
         Threading::TaskFuture<std::vector<Lobby>> getLobbyList();
@@ -93,7 +95,7 @@ namespace FirstParty {
 
         Threading::TaskFuture<ServerInfo> startMatch();
         virtual Threading::Task<ServerInfo> startMatchTask() = 0;
-    
+
         virtual void setLobbyProperty(std::string_view key, std::string_view value) = 0;
 
         Execution::ValueStub<LobbyInfo> &lobbyInfo();
@@ -102,6 +104,9 @@ namespace FirstParty {
         virtual bool isLobbyOwner() const = 0;
         virtual void leaveLobby() = 0;
         virtual void leaveMatch() = 0;
+
+
+        bool mInitialized = false;
     };
 
     template <typename T>

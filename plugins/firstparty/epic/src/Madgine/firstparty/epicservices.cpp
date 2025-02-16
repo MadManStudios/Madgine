@@ -23,7 +23,6 @@
 #include "Modules/threading/awaitables/awaitablesender.h"
 
 METATABLE_BEGIN_BASE(Engine::FirstParty::EpicServices, Engine::FirstParty::FirstPartyServices)
-READONLY_PROPERTY(Initialized, mInitialized)
 METATABLE_END(Engine::FirstParty::EpicServices)
 
 UNIQUECOMPONENT(Engine::FirstParty::EpicServices)

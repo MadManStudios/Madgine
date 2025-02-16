@@ -77,8 +77,6 @@ namespace FirstParty {
 
         //////////////////
 
-        bool mInitialized = false;
-
         EOS_HPlatform mPlatformHandle = nullptr;
         EOS_HAuth mAuthInterface = nullptr;
         EOS_HConnect mConnectInterface = nullptr;
