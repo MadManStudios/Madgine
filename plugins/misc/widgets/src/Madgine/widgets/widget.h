@@ -154,7 +154,7 @@ namespace Widgets {
         {            
             lifetime().attach(std::forward<Sender>(sender) | with_constant_binding<"Widget">(this) | Log::log_result());
         }
-        Debug::DebuggableLifetime<> &lifetime();
+        Debug::DebuggableLifetime<get_binding_d> &lifetime();
 
         bool mVisible = true;
         std::string mName = "Unnamed";

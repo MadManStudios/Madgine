@@ -171,9 +171,15 @@ namespace Resources {
         template <typename C = Ctor>
         static Resource *getOrCreateManual(std::string_view name, const Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
         {
-            return &loader->mResources.try_emplace(
-                                          std::string { name }, std::string { name }, path, Interface::template toCtor<T>(std::forward<C>(ctor)))
-                        .first->second;
+            auto pib = loader->mResources.try_emplace(
+                std::string { name }, std::string { name }, path, Interface::template toCtor<T>(std::forward<C>(ctor)));
+
+            Resource *resource = &pib.first->second;
+            if (pib.second) {
+                loader->resourceAdded(resource);
+            }
+
+            return resource;
         }
 
         static Handle create(Resource *resource, Filesystem::FileEventType event = Filesystem::FileEventType::FILE_CREATED, T *loader = nullptr)
@@ -235,7 +241,7 @@ namespace Resources {
             if (!ptr)
                 return;
 
-            queueUnload(Threading::make_task(&T::unloadImpl, std::move(loader), *ptr).then([ptr { std::move(ptr) }]() mutable { ptr.reset(); }), loader->loadingTaskQueue());            
+            queueUnload(Threading::make_task(&T::unloadImpl, std::move(loader), *ptr).then([ptr { std::move(ptr) }]() mutable { ptr.reset(); }), loader->loadingTaskQueue());
         }
 
         static void resetHandle(const Handle &handle, T *loader = nullptr)
@@ -251,7 +257,8 @@ namespace Resources {
                 queueUnload(task.then([&data { *loader->mData }, handle { getData(handle)->mHolder }]() {
                     typename traits::iterator it = traits::toIterator(data, handle);
                     data.erase(it);
-                }), loader->loadingTaskQueue());
+                }),
+                    loader->loadingTaskQueue());
 
                 if ((typename traits::handle) * resource->mData == handle.mData)
                     *resource->mData = {};

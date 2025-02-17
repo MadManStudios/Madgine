@@ -43,8 +43,8 @@ namespace Resources {
             return mCollector.get(i);
         }
 
-        bool init();
-        void finalize();
+        Threading::Task<bool> init();
+        Threading::Task<void> finalize();
 
         ResourceLoaderContainer<std::vector<Placeholder<0>>> mCollector;
 

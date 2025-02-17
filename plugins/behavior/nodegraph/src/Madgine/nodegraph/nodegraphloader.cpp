@@ -74,7 +74,7 @@ namespace NodeGraph {
         return graph.name();
     }
 
-    Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const
+    Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
     {
         const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
         return graph.interpret();
@@ -109,6 +109,11 @@ namespace NodeGraph {
         const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
         auto bindings = graph->mInputBindings | std::views::transform(&NodeGraph::InputBinding::mDescriptor);
         return { bindings.begin(), bindings.end() };
+    }
+
+    size_t NodeGraphBehaviorFactory::subBehaviorCount(const UniqueOpaquePtr &handle) const
+    {
+        return 0;
     }
 
 }

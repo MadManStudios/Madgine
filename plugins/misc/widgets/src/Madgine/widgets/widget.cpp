@@ -389,7 +389,7 @@ namespace Widgets {
     {
     }
 
-    Debug::DebuggableLifetime<> &WidgetBase::lifetime()
+    Debug::DebuggableLifetime<get_binding_d> &WidgetBase::lifetime()
     {
         return mManager.lifetime();
     }

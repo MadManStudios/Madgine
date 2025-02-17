@@ -362,9 +362,7 @@ namespace Tools {
                 for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
                     if (ImGui::MenuItem(name.c_str())) {
                         Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
-                        desc.info()->loadingTask().then([desc, w](bool) {
-                            w->createChildByDescriptor(*desc);
-                        });
+                        w->createChildByDescriptor(*desc);
                     }
                 }
                 ImGui::EndMenu();
@@ -419,10 +417,10 @@ namespace Tools {
                 if (ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::BeginMenu(IMGUI_ICON_PLUS " New Widget")) {
                         for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
-                            Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
-                            desc.info()->loadingTask().then([desc, root](bool) {
-                                root->createChildByDescriptor(*desc);
-                            });
+                            if (ImGui::MenuItem(name.c_str())) {
+                                Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
+                                root->createChildByDescriptor(*desc);                                
+                            }
                         }
                         ImGui::EndMenu();
                     }

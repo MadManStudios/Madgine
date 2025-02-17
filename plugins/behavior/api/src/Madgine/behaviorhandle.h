@@ -4,6 +4,8 @@
 
 #include "Generic/opaqueptr.h"
 
+#include "behavior.h"
+
 namespace Engine {
 
 struct MADGINE_BEHAVIOR_EXPORT BehaviorHandle {
@@ -17,13 +19,14 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorHandle {
     BehaviorHandle &operator=(const BehaviorHandle &other);
     BehaviorHandle &operator=(BehaviorHandle &&other);
 
-    Behavior create(const ParameterTuple &args) const;
+    Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors = {}) const;
     Threading::TaskFuture<bool> state() const;
     Threading::TaskFuture<ParameterTuple> createParameters() const;
     ParameterTuple createDummyParameters() const;
     std::vector<ValueTypeDesc> parameterTypes() const;
     std::vector<ValueTypeDesc> resultTypes() const;
     std::vector<BindingDescriptor> bindings() const;    
+    size_t subBehaviorCount() const;
     
     std::string_view name() const;
 

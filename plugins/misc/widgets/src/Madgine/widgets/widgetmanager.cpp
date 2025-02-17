@@ -77,10 +77,6 @@ namespace Widgets {
         if (!co_await MainWindowComponentBase::init())
             co_return false;
 
-        for (const auto &[name, res] : WidgetLoader::getSingleton()) {
-            WidgetLoader::load(name).info()->setPersistent(true);
-        }
-
         mData->mPipeline.create({ .vs = "widgets", .ps = "widgets", .bufferSizes = { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) } });
 
         if (!co_await mData->mAtlas.createTexture())
@@ -114,7 +110,7 @@ namespace Widgets {
 
     void WidgetManager::startLifetime()
     {
-        mWindow.lifetime().attach(mLifetime);
+        mWindow.lifetime().attach(mLifetime | with_constant_binding<"WidgetManager">(this));
     }
 
     void WidgetManager::endLifetime()
@@ -479,6 +475,19 @@ namespace Widgets {
         widget->hide();
     }
 
+    void WidgetManager::openOverlay(WidgetBase *widget)
+    {
+        mOverlays.push_back(widget);
+        widget->show();
+        widget->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+    }
+
+    void WidgetManager::closeOverlay(WidgetBase *widget)
+    {
+        widget->hide();
+        std::erase(mOverlays, widget);
+    }
+
     void WidgetManager::openStartupWidget()
     {
         if (mStartupWidget)
@@ -569,6 +578,12 @@ namespace Widgets {
                 q.emplace(w, ++layer);
             }
         }
+        ++layer;
+        for (Widgets::WidgetBase *w : mOverlays) {
+            if (w->mVisible) {
+                q.emplace(w, layer);
+            }
+        }
         while (!q.empty()) {
             auto [w, l] = q.front();
             q.pop();
@@ -601,7 +616,7 @@ namespace Widgets {
     {
         if (active) {
             for (WidgetBase *topLevel : widgets()) {
-                topLevel->applyGeometry(Vector3 { Vector2 { getScreenSpace().mSize }, Window::platformCapabilities.mScalingFactor });
+                topLevel->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
             }
             openStartupWidget();
         }
@@ -620,7 +635,7 @@ namespace Widgets {
         }
     }
 
-    Debug::DebuggableLifetime<> &WidgetManager::lifetime()
+    Debug::DebuggableLifetime<get_binding_d> &WidgetManager::lifetime()
     {
         return mLifetime;
     }

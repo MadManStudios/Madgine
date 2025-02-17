@@ -202,7 +202,7 @@ namespace Scripting {
             return file.name();
         }
 
-        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const
+        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
         {
             const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             Python3Lock lock;
@@ -240,6 +240,11 @@ namespace Scripting {
         {
             const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return {};
+        }
+
+        size_t Python3BehaviorFactory::subBehaviorCount(const UniqueOpaquePtr &handle) const
+        {
+            return 0;
         }
 
     }

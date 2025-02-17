@@ -172,19 +172,27 @@ namespace Resources {
         mEnumerated = true;
     }
 
-    bool ResourceManager::init()
+    Threading::Task<bool> ResourceManager::init()
     {
         enumerateResources();
+
+        for (const std::unique_ptr<ResourceLoaderBase> &loader : mCollector) {
+            co_await loader->callInit();
+        }
 
         if (!Root::Root::getSingleton().toolMode())
             taskQueue()->queueTask(update());
 
-        return true;
+        co_return true;
     }
 
-    void ResourceManager::finalize()
+    Threading::Task<void> ResourceManager::finalize()
     {
         mFileWatcher.clear();
+
+        for (const std::unique_ptr<ResourceLoaderBase> &loader : mCollector) {
+            co_await loader->callFinalize();
+        }
     }
 
     Filesystem::Path ResourceManager::findResourceFile(const std::string &fileName)

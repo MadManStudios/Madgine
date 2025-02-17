@@ -58,9 +58,26 @@ namespace NodeGraph {
 
     struct LibraryInterpretData : NodeInterpreterData, Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver> {
 
-        LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args)
+        static std::vector<Behavior> buildSubBehaviors(size_t count)
+        {
+            std::vector<Behavior> result;
+            /* std::array<Behavior (*)(), 5> ctors = {
+                []() -> Behavior { return NodeSender<0> {}; },
+                []() -> Behavior { return NodeSender<1> {}; },
+                []() -> Behavior { return NodeSender<2> {}; },
+                []() -> Behavior { return NodeSender<3> {}; },
+                []() -> Behavior { return NodeSender<4> {}; }
+            };
+            assert(count < ctors.size());
+            for (size_t i = 0; i < count; ++i) {
+                result.push_back(ctors[i]);
+            }*/
+            return result;
+        }
+
+        LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args, size_t subBehaviorCount)
             : Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver>(LibraryInterpretReceiver {})
-            , mBehavior(type.create(args).connect(*this))
+            , mBehavior(type.create(args, buildSubBehaviors(subBehaviorCount)).connect(*this))
         {
         }
 
@@ -79,12 +96,12 @@ namespace NodeGraph {
         , mParameters(mBehavior.createDummyParameters())
         , mFullClassName(mBehavior.toString())
     {
-        this->setup();
-
         Execution::detach(mBehavior.state().sender() | Execution::then([this](bool success) {
-            if (success)
+            if (success) {
                 mBindings = mBehavior.bindings();
-            else
+                mSubBehaviorCount = mBehavior.subBehaviorCount();
+                this->setup();
+            } else
                 LOG_ERROR("TODO");
         }));
     }
@@ -118,9 +135,25 @@ namespace NodeGraph {
         return 1;
     }
 
+    uint32_t LibraryNode::flowOutGroupCount() const
+    {
+        return 2;
+    }
+
     uint32_t LibraryNode::flowOutBaseCount(uint32_t group) const
     {
-        return 1;
+        if (group == 0)
+            return 1;
+        else
+            return mSubBehaviorCount;
+    }
+
+    std::string_view LibraryNode::flowOutName(uint32_t index, uint32_t group) const
+    {
+        if (group == 0)
+            return NodeBase::flowOutName(index, group);
+        else
+            return "Sub Behavior";
     }
 
     uint32_t LibraryNode::dataInGroupCount() const
@@ -171,7 +204,7 @@ namespace NodeGraph {
 
     void LibraryNode::setupInterpret(NodeInterpreterStateBase &interpreter, std::unique_ptr<NodeInterpreterData> &data) const
     {
-        data = std::make_unique<LibraryInterpretData>(mBehavior, mParameters);
+        data = std::make_unique<LibraryInterpretData>(mBehavior, mParameters, mSubBehaviorCount);
     }
 
     void LibraryNode::interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const

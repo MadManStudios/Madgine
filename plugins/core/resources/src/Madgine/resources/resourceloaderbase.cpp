@@ -18,6 +18,16 @@ namespace Resources {
     {
     }
 
+    Threading::Task<bool> ResourceLoaderBase::init()
+    {
+        co_return true;
+    }
+
+    Threading::Task<void> ResourceLoaderBase::finalize()
+    {
+        co_return;
+    }
+
     Threading::Task<BakeResult> ResourceLoaderBase::bakeResources(std::vector<Filesystem::Path> &resources, const Filesystem::Path &intermediateDir)
     {
         co_return BakeResult::NOTHING_TO_DO;

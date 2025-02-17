@@ -2,6 +2,7 @@
 
 #include "Meta/keyvalue/virtualscope.h"
 #include "Modules/threading/task.h"
+#include "Modules/threading/madgineobject.h"
 #include "Generic/genericresult.h"
 
 namespace Engine {
@@ -16,7 +17,7 @@ namespace Resources {
         bool mInplaceReload = false;
     };
 
-    struct MADGINE_RESOURCES_EXPORT ResourceLoaderBase : VirtualScopeBase<> {
+    struct MADGINE_RESOURCES_EXPORT ResourceLoaderBase : VirtualScopeBase<>, Threading::MadgineObject<ResourceLoaderBase>{
 
         using Resource = ResourceBase;
 
@@ -25,6 +26,9 @@ namespace Resources {
         virtual ~ResourceLoaderBase() = default;
 
         ResourceLoaderBase &operator=(const ResourceLoaderBase &) = delete;
+
+        virtual Threading::Task<bool> init();
+        virtual Threading::Task<void> finalize();
 
         virtual Threading::Task<BakeResult> bakeResources(std::vector<Filesystem::Path> &resources, const Filesystem::Path &intermediateDir);
         

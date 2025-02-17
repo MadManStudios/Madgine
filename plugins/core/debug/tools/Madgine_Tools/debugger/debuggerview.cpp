@@ -83,7 +83,7 @@ namespace Tools {
                                },
                                [this, &context, &location, inlineLocation, &subLocation](const Execution::State::SubLocation &) {
                                    if (location.mChild)
-                                    subLocation = visualizeDebugLocation(context, *location.mChild, inlineLocation);
+                                       subLocation = visualizeDebugLocation(context, *location.mChild, inlineLocation);
                                },
                                [](const Execution::State::Breakpoint &bp) {
                                    float offset = 0.0f;
@@ -101,9 +101,9 @@ namespace Tools {
                                } },
                     desc);
 
-                //if (current && !location->mChild) {
-                //    DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY) - 7.0f);
-                //}
+                // if (current && !location->mChild) {
+                //     DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY) - 7.0f);
+                // }
             };
             senderLocation->visit(CallableView<void(const Execution::StateDescriptor &)> { visitor });
 
@@ -228,10 +228,12 @@ namespace Tools {
     void DebuggerView::renderDebugContext(const Debug::ContextInfo &context)
     {
         std::unique_lock guard { context.mMutex };
-        if (BeginDebuggablePanel("Debug Context")) {
-            const Debug::DebugLocation *child = visualizeDebugLocation(context, *context.mChild, nullptr);
-            assert(!child); //Parents that allow inline rendering need to take care of child rendering.
-            EndDebuggablePanel();
+        if (context.mChild) {
+            if (BeginDebuggablePanel("Debug Context")) {
+                const Debug::DebugLocation *child = visualizeDebugLocation(context, *context.mChild, nullptr);
+                assert(!child); // Parents that allow inline rendering need to take care of child rendering.
+                EndDebuggablePanel();
+            }
         }
         if (context.isPaused()) {
             std::string arguments = context.getArguments();
@@ -242,11 +244,11 @@ namespace Tools {
                 case Debug::ContinuationType::Cancelled:
                 case Debug::ContinuationType::Error:
                     ImGui::PushStyleColor(ImGuiCol_Border, { 1.0f, 0.0f, 0.0f, 1.0f });
-                    //ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 0.0f, 0.0f, 1.0f });
+                    // ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 0.0f, 0.0f, 1.0f });
                     break;
                 case Debug::ContinuationType::Return:
                     ImGui::PushStyleColor(ImGuiCol_Border, { 0.0f, 0.78f, 1.0f, 1.0f });
-                    //ImGui::PushStyleColor(ImGuiCol_Text, { 0.0f, 0.78f, 1.0f, 1.0f });
+                    // ImGui::PushStyleColor(ImGuiCol_Text, { 0.0f, 0.78f, 1.0f, 1.0f });
                     break;
                 case Debug::ContinuationType::Flow:
                     break;

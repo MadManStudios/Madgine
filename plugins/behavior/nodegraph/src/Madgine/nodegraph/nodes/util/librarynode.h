@@ -23,7 +23,9 @@ namespace NodeGraph {
 
         uint32_t flowInCount(uint32_t group) const override;
 
+        uint32_t flowOutGroupCount() const override;
         uint32_t flowOutBaseCount(uint32_t group) const override;
+        std::string_view flowOutName(uint32_t index, uint32_t group = 0) const override;
 
         uint32_t dataInGroupCount() const override;
         uint32_t dataInBaseCount(uint32_t group) const override;
@@ -44,6 +46,7 @@ namespace NodeGraph {
     public:
         ParameterTuple mParameters;
         std::vector<BindingDescriptor> mBindings;
+        size_t mSubBehaviorCount = 0;
     };
 
 }

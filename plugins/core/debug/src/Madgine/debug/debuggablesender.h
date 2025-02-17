@@ -174,7 +174,7 @@ namespace Execution {
             }
         };
 
-        template <typename Sender>
+        template <Sender Sender>
         struct sender : algorithm_sender<Sender> {
 
             template <typename Rec>

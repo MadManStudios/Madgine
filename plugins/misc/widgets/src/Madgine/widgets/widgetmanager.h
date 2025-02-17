@@ -19,6 +19,8 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
+#include "Madgine/bindings.h"
+
 namespace Engine {
 namespace Widgets {
 
@@ -36,6 +38,8 @@ namespace Widgets {
         void closeModalWidget(WidgetBase *widget);
         void openWidget(WidgetBase *widget);
         void closeWidget(WidgetBase *widget);
+        void openOverlay(WidgetBase *widget);
+        void closeOverlay(WidgetBase *widget);
 
         bool isHovered(WidgetBase *w);
         WidgetBase *hoveredWidget();
@@ -87,7 +91,7 @@ namespace Widgets {
         bool dragging(const WidgetBase *widget);
         void abortDrag(WidgetBase *widget);
 
-        Debug::DebuggableLifetime<> &lifetime();
+        Debug::DebuggableLifetime<get_binding_d> &lifetime();
 
         using RenderPass::addDependency;
         using RenderPass::removeDependency;
@@ -125,8 +129,9 @@ namespace Widgets {
         WidgetBase *mCurrentRoot = nullptr;
 
         std::vector<WidgetBase *> mModalWidgetList;
+        std::vector<WidgetBase *> mOverlays;
 
-        DEBUGGABLE_LIFETIME(mLifetime);
+        DEBUGGABLE_LIFETIME(mLifetime, get_binding_d);
 
         struct WidgetManagerData;
         std::unique_ptr<WidgetManagerData> mData;

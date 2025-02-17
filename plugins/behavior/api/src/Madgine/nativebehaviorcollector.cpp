@@ -47,10 +47,10 @@ std::string_view NativeBehaviorFactory::name(const UniqueOpaquePtr &handle) cons
     return info->name();
 }
 
-Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const
+Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
 {
     const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
-    return info->create(args);
+    return info->create(args, std::move(behaviors));
 }
 
 Threading::TaskFuture<ParameterTuple> NativeBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
@@ -84,6 +84,12 @@ std::vector<BindingDescriptor> NativeBehaviorFactory::bindings(const UniqueOpaqu
     const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
     auto bindings = info->bindings();
     return { bindings.begin(), bindings.end() };
+}
+
+size_t NativeBehaviorFactory::subBehaviorCount(const UniqueOpaquePtr &handle) const
+{
+    const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
+    return info->subBehaviorCount();
 }
 
 }

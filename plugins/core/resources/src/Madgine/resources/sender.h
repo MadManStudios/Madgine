@@ -22,6 +22,7 @@ namespace Resources {
                 , mState(Execution::connect(std::forward<Sender>(sender), this->mRec))
             {
             }
+            state(state &&) = delete;
 
             void start()
             {

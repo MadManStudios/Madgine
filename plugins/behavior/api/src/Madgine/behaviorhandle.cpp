@@ -52,9 +52,9 @@ BehaviorHandle &BehaviorHandle::operator=(BehaviorHandle &&other)
     return *this;
 }
 
-Behavior BehaviorHandle::create(const ParameterTuple &args) const
+Behavior BehaviorHandle::create(const ParameterTuple &args, std::vector<Behavior> behaviors) const
 {
-    return BehaviorFactoryRegistry::get(mIndex).mFactory->create(mHandle, args);
+    return BehaviorFactoryRegistry::get(mIndex).mFactory->create(mHandle, args, std::move(behaviors));
 }
 
 Threading::TaskFuture<bool> BehaviorHandle::state() const
@@ -85,6 +85,11 @@ std::vector<ValueTypeDesc> BehaviorHandle::resultTypes() const
 std::vector<BindingDescriptor> BehaviorHandle::bindings() const
 {
     return BehaviorFactoryRegistry::get(mIndex).mFactory->bindings(mHandle);
+}
+
+size_t Engine::BehaviorHandle::subBehaviorCount() const
+{
+    return BehaviorFactoryRegistry::get(mIndex).mFactory->subBehaviorCount(mHandle);
 }
 
 std::string_view BehaviorHandle::name() const

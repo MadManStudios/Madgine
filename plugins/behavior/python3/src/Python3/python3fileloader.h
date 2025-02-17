@@ -51,12 +51,13 @@ namespace Scripting {
             Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const override;
             void release(UniqueOpaquePtr &ptr) const override;
             std::string_view name(const UniqueOpaquePtr &handle) const override;
-            Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args) const override;
+            Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
             Threading::TaskFuture<ParameterTuple> createParameters(const UniqueOpaquePtr &handle) const override;
             ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const override;
             std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
             std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
             std::vector<BindingDescriptor> bindings(const UniqueOpaquePtr &handle) const override;
+            size_t subBehaviorCount(const UniqueOpaquePtr &handle) const override;
         };
 
     }

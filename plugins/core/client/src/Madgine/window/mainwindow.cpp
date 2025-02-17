@@ -87,17 +87,18 @@ namespace Window {
     /**
      * @brief Creates a MainWindow and sets up its TaskQueue
      * @param settings settings for the creation of OSWindow
-     * 
-     * The settings are stored by reference. Instantiates all MainWindowComponents. 
+     *
+     * The settings are stored by reference. Instantiates all MainWindowComponents.
      * Initialization/Deinitialization-tasks of the MadgineObject are registered as
      * setup steps in the TaskQueue. render() is registered as repeated task to the
-     * TaskQueue. 
-    */
+     * TaskQueue.
+     */
     MainWindow::MainWindow(const WindowSettings &settings)
         : mSettings(settings)
         , mTaskQueue("FrameLoop", true)
         , mComponents(*this)
         , mRenderContext(&mTaskQueue)
+        , mFrameClock(std::chrono::steady_clock::now())
     {
         mTaskQueue.addSetupSteps(
             [this]() { return callInit(); },
@@ -105,8 +106,8 @@ namespace Window {
     }
 
     /**
-     * @brief default destructor 
-    */
+     * @brief default destructor
+     */
     MainWindow::~MainWindow() = default;
 
     void MainWindow::saveLayout(const Filesystem::Path &path)
@@ -149,9 +150,9 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Threading::Task<bool> MainWindow::init()
     {
         WindowSettings settings = mSettings;
@@ -189,7 +190,7 @@ namespace Window {
             co_return false;
 #endif
 
-        //applyClientSpaceResize();
+        // applyClientSpaceResize();
 
         mTaskQueue.queueTask(renderLoop());
 
@@ -199,9 +200,9 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Threading::Task<void> MainWindow::finalize()
     {
         mLifetime.end();
@@ -227,7 +228,8 @@ namespace Window {
     Threading::Task<void> MainWindow::renderLoop()
     {
         std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
-        while (mTaskQueue.running()) {            
+        while (mTaskQueue.running()) {
+            mFrameClock.tick(std::chrono::steady_clock::now());
             co_await mRenderContext->render();
             {
                 PROFILE_NAMED("Window Update");
@@ -258,6 +260,11 @@ namespace Window {
         return mLifetime;
     }
 
+    IntervalClock<> &MainWindow::clock()
+    {
+        return mFrameClock;
+    }
+
     void MainWindow::addListener(MainWindowListener *listener)
     {
         mListeners.push_back(listener);
@@ -269,29 +276,29 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param i 
-     * @return 
-    */
+     * @brief
+     * @param i
+     * @return
+     */
     MainWindowComponentBase &MainWindow::getWindowComponent(size_t i)
     {
         return mComponents.get(i);
     }
 
     /**
-     * @brief 
-     * @param settings 
-     * @return 
-    */
+     * @brief
+     * @param settings
+     * @return
+     */
     ToolWindow *MainWindow::createToolWindow(const WindowSettings &settings)
     {
         return &mToolWindows.emplace_back(*this, settings);
     }
 
     /**
-     * @brief 
-     * @param w 
-    */
+     * @brief
+     * @param w
+     */
     void MainWindow::destroyToolWindow(ToolWindow *w)
     {
         auto it = std::ranges::find(mToolWindows, w, projectionAddressOf);
@@ -300,9 +307,9 @@ namespace Window {
     }
 
     /**
-     * @brief Returns a pointer to the OSWindow 
+     * @brief Returns a pointer to the OSWindow
      * @return the OSWindow
-    */
+     */
     OSWindow *MainWindow::osWindow() const
     {
         return mOsWindow;
@@ -311,7 +318,7 @@ namespace Window {
     /**
      * @brief Returns a pointer to the RenderContext
      * @return the RenderContext
-    */
+     */
     Render::RenderContext *MainWindow::getRenderer()
     {
         return mRenderContext;
@@ -320,7 +327,7 @@ namespace Window {
     /**
      * @brief Returns the pointer to the RenderWindow
      * @return the RenderWindow
-    */
+     */
     Render::RenderTarget *MainWindow::getRenderWindow()
     {
         return mRenderWindow.get();
@@ -329,24 +336,24 @@ namespace Window {
     /**
      * @brief Returns a pointer to the TaskQueue
      * @return the TaskQueue
-    */
+     */
     Threading::TaskQueue *MainWindow::taskQueue()
     {
         return &mTaskQueue;
     }
 
     /**
-     * @brief 
-    */
+     * @brief
+     */
     void MainWindow::shutdown()
     {
         mTaskQueue.stop();
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Rect2i MainWindow::getScreenSpace()
     {
         if (!mOsWindow)
@@ -359,9 +366,9 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param component 
-    */
+     * @brief
+     * @param component
+     */
     void MainWindow::applyClientSpaceResize(MainWindowComponentBase *component)
     {
         if (!mOsWindow)
@@ -389,10 +396,10 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param arg 
-     * @return 
-    */
+     * @brief
+     * @param arg
+     * @return
+     */
     bool MainWindow::injectKeyPress(const Input::KeyEventArgs &arg)
     {
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
@@ -405,10 +412,10 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param arg 
-     * @return 
-    */
+     * @brief
+     * @param arg
+     * @return
+     */
     bool MainWindow::injectKeyRelease(const Input::KeyEventArgs &arg)
     {
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
@@ -419,10 +426,10 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param arg 
-     * @return 
-    */
+     * @brief
+     * @param arg
+     * @return
+     */
     bool MainWindow::injectPointerPress(const Input::PointerEventArgs &arg)
     {
         InterfacesVector storedWindowPosition = arg.windowPosition;
@@ -436,10 +443,10 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param arg 
-     * @return 
-    */
+     * @brief
+     * @param arg
+     * @return
+     */
     bool MainWindow::injectPointerRelease(const Input::PointerEventArgs &arg)
     {
         InterfacesVector storedWindowPosition = arg.windowPosition;
@@ -453,10 +460,10 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param arg 
-     * @return 
-    */
+     * @brief
+     * @param arg
+     * @return
+     */
     bool MainWindow::injectPointerMove(const Input::PointerEventArgs &arg)
     {
         InterfacesVector storedWindowPosition = arg.windowPosition;
@@ -470,10 +477,10 @@ namespace Window {
     }
 
     /**
-     * @brief 
-     * @param arg 
-     * @return 
-    */
+     * @brief
+     * @param arg
+     * @return
+     */
     bool MainWindow::injectAxisEvent(const Input::AxisEventArgs &arg)
     {
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
@@ -485,8 +492,8 @@ namespace Window {
     }
 
     /**
-     * @brief 
-    */
+     * @brief
+     */
     void MainWindow::onClose()
     {
         storeWindowData();
@@ -495,16 +502,16 @@ namespace Window {
     }
 
     /**
-     * @brief 
-    */
+     * @brief
+     */
     void MainWindow::onRepaint()
     {
     }
 
     /**
-     * @brief 
-     * @param size 
-    */
+     * @brief
+     * @param size
+     */
     void MainWindow::onResize(const InterfacesVector &size)
     {
         mRenderWindow->resize({ size.x, size.y });
@@ -512,8 +519,8 @@ namespace Window {
     }
 
     /**
-     * @brief 
-    */
+     * @brief
+     */
     void MainWindow::storeWindowData()
     {
         Filesystem::FileManager mgr { "MainWindow-Layout" };
