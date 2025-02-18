@@ -10,7 +10,7 @@ struct VirtualCPOBaseHelper : Base {
 
     using mapped_cpos = typename Base::mapped_cpos::template append<CPO_holder::value>;
 
-    virtual R v_tag_invoke(CPO _cpo, V... v) = 0;    
+    virtual R v_tag_invoke(CPO _cpo, V... v) = 0;
 
     template <typename... Args>
     friend auto tag_invoke(CPO _cpo, VirtualCPOBaseHelper &base, Args &&...args)
@@ -22,27 +22,24 @@ struct VirtualCPOBaseHelper : Base {
 template <auto cpo, typename Base>
 using VirtualCPOBase = typename Engine::CallableTraits<typename decltype(cpo)::signature>::template instance<VirtualCPOBaseHelper, Engine::auto_holder<cpo>, Base>;
 
-
-template <typename CPO, typename Proj, typename Base, typename R, std::same_as<void> T, typename... V>
+template <typename CPO, typename Base, typename R, std::same_as<void> T, typename... V>
 struct VirtualCPOImplHelper : Base {
     using Base::Base;
 
-    virtual R v_tag_invoke(CPO _cpo, V... v) override {
-        return _cpo(Proj::value(*this), std::forward<V>(v)...);
+    virtual R v_tag_invoke(CPO _cpo, V... v) override
+    {
+        return _cpo(this->mRec, std::forward<V>(v)...);
     }
 };
 
-template <auto cpo, auto proj, typename Base>
-using VirtualCPOImpl = typename Engine::CallableTraits<typename decltype(cpo)::signature>::template instance<VirtualCPOImplHelper, decltype(cpo), Engine::auto_holder<proj>, Base>;
+template <auto cpo, typename Base>
+using VirtualCPOImpl = typename Engine::CallableTraits<typename decltype(cpo)::signature>::template instance<VirtualCPOImplHelper, decltype(cpo), Base>;
 
-template <auto proj>
-struct VirtualCPOsImplHelper {
-    template<auto cpo, typename Base>
-    using type = VirtualCPOImpl<cpo, proj, Base>;
-};
+template <auto cpo, typename Base>
+using VirtualCPOsImplHelper = VirtualCPOImpl<cpo, Base>;
 
 template <typename Base, auto... cpos>
 using VirtualCPOsBase = typename Engine::auto_pack<cpos...>::template fold<VirtualCPOBase, Base>;
 
-template <auto proj, typename Base>
-using VirtualCPOsImpl = typename Base::mapped_cpos::template fold<VirtualCPOsImplHelper<proj>::template type, Base>;
+template <typename Base>
+using VirtualCPOsImpl = typename Base::mapped_cpos::template fold<VirtualCPOsImplHelper, Base>;

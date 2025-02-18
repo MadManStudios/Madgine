@@ -60,11 +60,6 @@ namespace Execution {
             this->mRec.set_value(std::forward<V>(v)...);
         }
 
-        friend Rec &tag_invoke(Execution::get_receiver_t, VirtualStateEx &state)
-        {
-            return state.mRec;
-        }
-
         Rec mRec;
     };
 
@@ -82,7 +77,7 @@ namespace Execution {
     };
 
     template <typename Rec, typename Base>
-    using VirtualState = VirtualCPOsImpl<Execution::get_receiver, VirtualStateEx<Rec, Base, typename Base::result_types, typename Base::value_types>>;
+    using VirtualState = VirtualCPOsImpl<VirtualStateEx<Rec, Base, typename Base::result_types, typename Base::value_types>>;
 
 }
 }

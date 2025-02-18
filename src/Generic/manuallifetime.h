@@ -154,13 +154,6 @@ struct ManualLifetime {
         object.mAlive = false;
     }
 
-    /* template <typename CPO, typename... Args>
-    friend auto tag_invoke(CPO cpo, ManualLifetime& object, Args &&...args) 
-        -> tag_invoke_result_t<CPO, T&, Args...>
-    {
-        return tag_invoke(cpo, static_cast<T &>(object), std::forward<Args>(args)...);
-    }*/
-
     union {
         T mData;
     };
@@ -236,13 +229,6 @@ struct ManualLifetime<T&> {
         assert(object.mData);
         object.mData = nullptr;        
     }
-
-    /* template <typename CPO, typename... Args>
-    friend auto tag_invoke(CPO cpo, ManualLifetime& object, Args &&...args) 
-        -> tag_invoke_result_t<CPO, T&, Args...>
-    {
-        return tag_invoke(cpo, static_cast<T &>(object), std::forward<Args>(args)...);
-    }*/
 
     T *mData = nullptr;
 };

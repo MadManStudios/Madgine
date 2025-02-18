@@ -42,7 +42,7 @@ namespace NodeGraph {
         friend BehaviorError tag_invoke(get_binding_t<Name>, NodeInterpretHandle &handle, O &out)
         {
             ValueType v;
-            BehaviorError error = handle.getBinding(handle.mNode.template getDynamicName<Name>(), v);
+            BehaviorError error = handle.getBinding(Name, v);
             if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS })
                 out = v.as<O>();
             return error;

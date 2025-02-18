@@ -63,9 +63,10 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
     template <template <typename...> typename Tuple>
     using value_types = Tuple<ArgumentList>;
 
-    template <typename Rec>
-    friend auto tag_invoke(Execution::connect_t, Behavior &&behavior, Rec &&rec)
+    template <typename Rec, std::same_as<Behavior> T> //Necessary to prevent implicit conversion
+    friend auto tag_invoke(Execution::connect_t, T &&behavior, Rec &&rec)
     {
+        assert(behavior.mState);
         return VirtualBehaviorState<Rec, state> { std::forward<Rec>(rec), std::move(behavior.mState) };
     }
 

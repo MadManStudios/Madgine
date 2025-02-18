@@ -12,13 +12,16 @@ namespace Resources {
             Handle mHandle;
         };
 
-        template <typename Sender, typename Handle, typename Rec>
-        struct state : Execution::base_state<receiver<Rec, Handle>> {
+        template <typename Sender, typename Handle, typename _Rec>
+        struct state : Execution::base_state<receiver<_Rec, Handle>> {
 
-            using State = Execution::connect_result_t<Sender, receiver<Rec, Handle> &>;
+            using InnerRec = _Rec;
+            using Rec = receiver<InnerRec, Handle>;
 
-            state(Sender &&sender, Rec &&rec, Handle &&handle)
-                : Execution::base_state<receiver<Rec, Handle>> { { std::forward<Rec>(rec), std::forward<Handle>(handle) } }
+            using State = Execution::connect_result_t<Sender, Rec &>;
+
+            state(Sender &&sender, InnerRec &&rec, Handle &&handle)
+                : Execution::base_state<Rec> { { std::forward<InnerRec>(rec), std::forward<Handle>(handle) } }
                 , mState(Execution::connect(std::forward<Sender>(sender), this->mRec))
             {
             }
@@ -39,20 +42,6 @@ namespace Resources {
                 } else {
                     Root::Root::getSingleton().taskQueue()->queueTask(fut.then(handler));
                 }
-            }
-
-            template <typename CPO, typename... Args>
-            friend auto tag_invoke(CPO f, state &state, Args &&...args)
-                -> tag_invoke_result_t<CPO, State &, Args...>
-            {
-                return f(state.mState, std::forward<Args>(args)...);
-            }
-
-            template <typename CPO, typename... Args>
-            friend auto tag_invoke(CPO f, const state &state, Args &&...args)
-                -> tag_invoke_result_t<CPO, const State &, Args...>
-            {
-                return f(state.mState, std::forward<Args>(args)...);
             }
 
             State mState;

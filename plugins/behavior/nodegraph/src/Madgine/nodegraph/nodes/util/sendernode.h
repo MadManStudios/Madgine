@@ -395,12 +395,6 @@ namespace NodeGraph {
                 destruct(mReceiver);
             }
 
-            template <fixed_string Name>
-            std::string_view getDynamicName()
-            {
-                return Execution::get_context(Execution::get_receiver(mState)).mNode.template getDynamicName<Name>();
-            }
-
             ValueType read(uint32_t providerIndex, uint32_t group) const
             {
                 return mResults[group][providerIndex];

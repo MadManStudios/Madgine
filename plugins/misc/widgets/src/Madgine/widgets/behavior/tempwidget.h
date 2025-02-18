@@ -10,6 +10,7 @@ namespace Widgets {
     Behavior tempWidget(WidgetLoader::Handle desc, Behavior behavior);
 
     struct TempWidgetState : BehaviorReceiver {
+
         TempWidgetState(WidgetLoader::Handle desc, Behavior behavior);
         ~TempWidgetState();
 
@@ -17,7 +18,18 @@ namespace Widgets {
 
     private:
         WidgetLoader::Handle mDesc;
-        Behavior mBehavior;
+
+        struct receiver : Execution::algorithm_receiver<BehaviorReceiver &> {
+            void set_value(ArgumentList args);
+            void set_error(BehaviorError error);
+            void set_done();
+
+            TempWidgetState &mState;
+        };
+
+        using state = Execution::connect_result_t<Behavior, receiver>;
+        state mState;
+
         std::unique_ptr<WidgetBase> mWidget;
     };
 

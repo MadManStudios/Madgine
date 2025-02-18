@@ -39,10 +39,6 @@ namespace NodeGraph {
 #define DEFAULT_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::NodeGraph::DefaultConfig, __VA_ARGS__)
 #define CONSTANT_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::NodeGraph::ConstantConfig, __VA_ARGS__)
 
-#define DYNAMIC_NAME(Name)                                       \
-    PROPERTY(Name, getDynamicName<#Name>, setDynamicName<#Name>) \
-    ENCAPSULATED_FIELD(Name, getDynamicName<#Name>, setDynamicName<#Name>)
-
 #define ARGUMENT(Name, Index)                                \
     PROPERTY(Name, getArguments<Index>, setArguments<Index>) \
     ENCAPSULATED_FIELD(Name, getArguments<Index>, setArguments<Index>)

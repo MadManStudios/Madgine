@@ -55,7 +55,7 @@ namespace Widgets {
 
     TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Behavior behavior)
         : mDesc(std::move(desc))
-        , mBehavior(std::move(behavior))
+        , mState(Execution::connect(std::move(behavior), receiver { *this, *this }))
     {
     }
 
@@ -64,7 +64,7 @@ namespace Widgets {
     }
 
     void TempWidgetState::start()
-    {
+    {        
         WidgetManager *mgr;
         BehaviorError error = get_binding<"WidgetManager">(*this, mgr);
         if (error.mResult != BehaviorResult::SUCCESS) {
@@ -72,12 +72,41 @@ namespace Widgets {
             return;
         }
 
-        mWidget = mDesc->create(*mgr);
+        if (!mWidget) {
+            mWidget = mDesc->create(*mgr);
+        }
         mgr->openOverlay(mWidget.get());
-        mgr->lifetime().attach(std::move(mBehavior) | Execution::then([this, mgr]() {
-            mgr->closeOverlay(mWidget.get());
-            set_value();
-        }));
+        mState.start();
+    }
+
+    void TempWidgetState::receiver::set_value(ArgumentList args)
+    {
+        WidgetManager *mgr;
+        BehaviorError error = get_binding<"WidgetManager">(*this, mgr);
+        assert(error.mResult == BehaviorResult::SUCCESS);
+
+        mgr->closeOverlay(mState.mWidget.get());
+        algorithm_receiver::set_value(std::move(args));
+    }
+
+    void TempWidgetState::receiver::set_error(BehaviorError error)
+    {
+        WidgetManager *mgr;
+        BehaviorError result = get_binding<"WidgetManager">(*this, mgr);
+        assert(result.mResult == BehaviorResult::SUCCESS);
+
+        mgr->closeOverlay(mState.mWidget.get());
+        algorithm_receiver::set_error(std::move(error));
+    }
+
+    void TempWidgetState::receiver::set_done()
+    {
+        WidgetManager *mgr;
+        BehaviorError error = get_binding<"WidgetManager">(*this, mgr);
+        assert(error.mResult == BehaviorResult::SUCCESS);
+
+        mgr->closeOverlay(mState.mWidget.get());
+        algorithm_receiver::set_done();
     }
 
 }

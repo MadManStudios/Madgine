@@ -183,8 +183,10 @@ namespace Execution {
 
     struct after_t {
 
-        template <typename Inner, typename Rec, typename T>
+        template <typename Inner, typename _Rec, typename T>
         struct state {
+
+            using Rec = _Rec;
 
             using State = connect_result_t<Inner, Rec>;
 
@@ -200,12 +202,6 @@ namespace Execution {
                 mState.start();
             }
 
-            template <typename CPO, typename... Args>
-            friend auto tag_invoke(CPO f, state &state, Args &&...args)
-                -> tag_invoke_result_t<CPO, State &, Args...>
-            {
-                return f(state.mState, std::forward<Args>(args)...);
-            }
             T mFunc;
             State mState;
         };
@@ -1644,11 +1640,6 @@ namespace Execution {
                         mResult.reproduce(mRec);
                     }
                 }
-            }
-
-            friend const Rec &tag_invoke(get_receiver_t, const state &state)
-            {
-                return state.mRec;
             }
 
             ResultStorage<Inner> mResult;
