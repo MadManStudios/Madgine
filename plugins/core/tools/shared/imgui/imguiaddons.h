@@ -77,6 +77,15 @@ struct IMGUI_API ValueTypeDrawer {
     static bool draw(Engine::Color4 &c);
     static bool draw(const Engine::Color4 &c);
     static bool draw(const Engine::KeyValueSender &s);
+    template <typename Rep, typename Ratio>
+    static bool draw(std::chrono::duration<Rep, Ratio>& d) {
+        std::chrono::nanoseconds ns = std::chrono::duration_cast<std::chrono::duration<Rep, Ratio>>(d);
+        if (draw(ns)) {
+            d = std::chrono::duration_cast<std::chrono::nanoseconds>(ns);
+            return true;
+        }
+        return false;
+    }
     static bool draw(std::chrono::nanoseconds &d);
     static bool draw(const std::chrono::nanoseconds &d);
     static bool draw(Engine::ExtendedValueTypeDesc &t);
