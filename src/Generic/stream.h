@@ -37,7 +37,8 @@ struct Stream {
             mStream >> val;
             t = static_cast<T>(val);
         } else if constexpr (InstanceOf<T, std::chrono::duration>){
-            throw 0;
+            //throw 0;
+            t = 5s;
         } else {
             mStream >> t;
             if constexpr (std::same_as<T, std::string>)

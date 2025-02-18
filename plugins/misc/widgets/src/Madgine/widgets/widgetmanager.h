@@ -21,6 +21,8 @@
 
 #include "Madgine/bindings.h"
 
+#include "Generic/intervalclock.h"
+
 namespace Engine {
 namespace Widgets {
 
@@ -93,6 +95,8 @@ namespace Widgets {
 
         Debug::DebuggableLifetime<get_binding_d> &lifetime();
 
+        IntervalClock<> &clock();
+
         using RenderPass::addDependency;
         using RenderPass::removeDependency;
 
@@ -132,6 +136,8 @@ namespace Widgets {
         std::vector<WidgetBase *> mOverlays;
 
         DEBUGGABLE_LIFETIME(mLifetime, get_binding_d);
+
+        IntervalClock<> mFrameClock;
 
         struct WidgetManagerData;
         std::unique_ptr<WidgetManagerData> mData;

@@ -12,7 +12,7 @@ DEFAULT_SENDER_NODE_BEGIN(ForEach, Engine::Execution::for_each, std::vector<int>
 ARGUMENT(Arguments, 0)
 SENDER_NODE_END(ForEach)
 
-DEFAULT_SENDER_NODE_BEGIN(LetValue, Engine::Execution::let_value, Engine::NodeGraph::NodeReader<Engine::ValueType>, Engine::NodeGraph::NodeRouter<0, Engine::ValueType>)
+DEFAULT_SENDER_NODE_BEGIN(LetValue, Engine::Execution::let_value, Engine::NodeGraph::NodeReader<Engine::ValueType>, Engine::NodeGraph::NodeRouter<1, Engine::ValueType>)
 SENDER_NODE_END(LetValue)
 
 CONSTANT_SENDER_NODE_BEGIN(Add, Engine::Execution::reduce_stream, Engine::NodeGraph::NodeStream<int>, std::integral_constant<int, 0>, Engine::NodeGraph::Add)
@@ -57,7 +57,7 @@ struct connect_helper_t {
     auto operator()(auto &&reader, auto &&algorithm) const
     {
         return Engine::Execution::let_value(std::move(reader), [algorithm { std::move(algorithm) }](Engine::KeyValueSender sender) mutable {
-            return algorithm(sender) | Engine::Execution::repeat;
+            return algorithm(std::move(sender)) | Engine::Execution::repeat;
         });
     }
 };
@@ -74,7 +74,7 @@ struct stop_when_helper_t {
     }
 };
 
-DEFAULT_SENDER_NODE_BEGIN(StopWhen, stop_when_helper_t {}, Engine::NodeGraph::NodeReader<Engine::KeyValueSender>, Engine::NodeGraph::NodeSender<0>)
+DEFAULT_SENDER_NODE_BEGIN(StopWhen, stop_when_helper_t {}, Engine::NodeGraph::NodeReader<Engine::KeyValueSender>, Engine::NodeGraph::NodeSender<1>)
 SENDER_NODE_END(StopWhen)
 
 /*using SequenceNode = Engine::NodeGraph::SenderNode<Engine::Execution::sequence, false, Engine::type_pack<>, Engine::type_pack<>, Engine::Execution::recursive<Engine::NodeGraph::NodeSender<1>>>;

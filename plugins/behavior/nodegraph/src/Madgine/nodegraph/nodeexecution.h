@@ -43,7 +43,7 @@ namespace NodeGraph {
         {
             ValueType v;
             BehaviorError error = handle.getBinding(handle.mNode.template getDynamicName<Name>(), v);
-            if (error.mResult == BehaviorResult{BehaviorResult::SUCCESS})
+            if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS })
                 out = v.as<O>();
             return error;
         }
@@ -83,6 +83,38 @@ namespace NodeGraph {
         }
     };
 
+    template <typename Node>
+    struct NodeReceiverWrapper {
+
+        template <typename Sender>
+        struct sender : Execution::algorithm_sender<Sender> {
+            template <typename Rec>
+            friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
+            {
+                return Execution::connect(std::forward<Sender>(sender.mSender) | Execution::with_query_value(Execution::get_context, std::move(sender.mHandle)), std::forward<Rec>(rec));
+            }
+
+            NodeInterpretHandle<Node> mHandle;
+        };
+
+        template <typename Inner>
+        auto operator()(Inner &&inner) const
+        {
+            return sender<Inner> { { {}, std::forward<Inner>(inner) }, std::move(mHandle) };
+        }
+
+        template <typename Inner>
+        friend auto operator|(Inner &&inner, NodeReceiverWrapper &&wrapper)
+        {
+            return sender<Inner> { { {}, std::forward<Inner>(inner) }, std::move(wrapper.mHandle) };
+        }
+
+        NodeInterpretHandle<Node> mHandle;
+    };
+
+    template <typename Node>
+    NodeReceiverWrapper(NodeInterpretHandle<Node>) -> NodeReceiverWrapper<Node>;
+
     struct MADGINE_NODEGRAPH_EXPORT NodeCodegenHandle : CodeGen::CodeGen_Context {
         const NodeBase *mNode;
         CodeGenerator &mGenerator;
@@ -92,16 +124,20 @@ namespace NodeGraph {
 
     using NodeCodegenReceiver = Execution::execution_receiver<NodeCodegenHandle>;
 
-    template <uint32_t flowOutIndex, typename Rec>
+    template <uint32_t flowOutGroup, typename Rec>
     struct NodeState : VirtualBehaviorState<Rec> {
 
-        using VirtualBehaviorState<Rec>::VirtualBehaviorState;
+        NodeState(Rec &&rec, uint32_t flowOutIndex)
+            : VirtualBehaviorState<Rec> { std::forward<Rec>(rec) }
+            , mFlowOutIndex { flowOutIndex }
+        {
+        }
 
         void start()
         {
             mDebugLocation.stepInto(Execution::get_debug_location(this->mRec));
-            auto &handle = Execution::get_context(this->mRec);
-            handle.mInterpreter.branch(*this, handle.mNode.flowOutTarget(0, flowOutIndex), mDebugLocation);
+            const auto &handle = Execution::get_context(this->mRec);
+            handle.mInterpreter.branch(*this, handle.mNode.flowOutTarget(mFlowOutIndex, flowOutGroup), mDebugLocation);
         }
 
         void set_value(ArgumentList args) override
@@ -122,10 +158,11 @@ namespace NodeGraph {
             VirtualBehaviorState<Rec>::set_done();
         }
 
+        uint32_t mFlowOutIndex = 0;
         NodeDebugLocation mDebugLocation = &Execution::get_context(this->mRec).mInterpreter;
     };
 
-    template <uint32_t flowOutIndex>
+    template <uint32_t flowOutGroup>
     struct NodeSender {
         using is_sender = void;
 
@@ -136,7 +173,7 @@ namespace NodeGraph {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, NodeSender &&sender, Rec &&rec)
         {
-            return NodeState<flowOutIndex, Rec> { std::forward<Rec>(rec) };
+            return NodeState<flowOutGroup, Rec> { std::forward<Rec>(rec), sender.mFlowOutIndex };
         }
 
         template <typename Rec>
@@ -150,13 +187,15 @@ namespace NodeGraph {
             };
             return state { std::forward<Rec>(rec) };
         }
+
+        uint32_t mFlowOutIndex = 0;
     };
 
     template <typename... T>
     struct NodeReader {
         using Signature = Execution::signature<T...>;
 
-        
+
         using is_sender = void;
 
         using result_type = BehaviorError;
@@ -238,7 +277,7 @@ namespace NodeGraph {
         size_t mBaseIndex = 0;
     };
 
-    template <size_t flowOutIndex, typename... Arguments>
+    template <uint32_t flowOutGroup, typename... Arguments>
     struct NodeRouter {
 
         using Signature = Execution::signature<Arguments...>;
@@ -246,24 +285,24 @@ namespace NodeGraph {
         template <typename... Args>
         auto operator()(Args &&...args)
         {
-            if (mResults.size() <= flowOutIndex)
-                mResults.resize(flowOutIndex + 1);
-            mResults[flowOutIndex] = { std::forward<Args>(args)... };
-            return NodeSender<flowOutIndex> {};
+            if (mResults.size() <= flowOutGroup)
+                mResults.resize(flowOutGroup + 1);
+            mResults[flowOutGroup] = { std::forward<Args>(args)... };
+            return NodeSender<flowOutGroup> {};
         }
         std::vector<NodeResults> &mResults;
     };
 
-    template <size_t flowOutIndex>
+    template <uint32_t flowOutGroup>
     struct NodeAlgorithm {
 
         using Signature = Execution::signature<>;
 
         template <typename Rec>
-        struct receiver : NodeState<flowOutIndex, Rec> {
+        struct receiver : NodeState<flowOutGroup, Rec> {
 
             receiver(Rec &&rec, std::vector<NodeResults> &results)
-                : NodeState<flowOutIndex, Rec>(std::forward<Rec>(rec))
+                : NodeState<flowOutGroup, Rec>(std::forward<Rec>(rec), 0)
                 , mResults(results)
             {
             }
@@ -271,9 +310,9 @@ namespace NodeGraph {
             template <typename... Args>
             void set_value(Args &&...args)
             {
-                if (mResults.size() <= flowOutIndex)
-                    mResults.resize(flowOutIndex + 1);
-                mResults[flowOutIndex] = { std::forward<Args>(args)... };
+                if (mResults.size() <= flowOutGroup)
+                    mResults.resize(flowOutGroup + 1);
+                mResults[flowOutGroup] = { std::forward<Args>(args)... };
                 this->start();
             }
 

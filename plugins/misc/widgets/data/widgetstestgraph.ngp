@@ -58,16 +58,14 @@
                 </Item>
             </mDataOutPins>
         </Node>
-        <Node type="Native/play_sound" serId=12>
+        <Node type="Native/Wait_Frame" serId=12>
             <mParameters>
-                <Item serId=13>
-                    <Name>sample</Name>
-                </Item>
+                <Item>5000000000ns</Item>
             </mParameters>
             <mFlowOutPins>
                 <Item>
-                    <Item serId=14>
-                        <mTarget serId=15>
+                    <Item serId=13>
+                        <mTarget serId=14>
                             <mNode>-1</mNode>
                             <mIndex>-1</mIndex>
                             <mGroup>0</mGroup>
@@ -88,11 +86,11 @@
                 </Item>
             </mDataOutPins>
         </Node>
-        <Node type="StopWhen" serId=16>
+        <Node type="StopWhen" serId=15>
             <mFlowOutPins>
                 <Item>
-                    <Item serId=17>
-                        <mTarget serId=18>
+                    <Item serId=16>
+                        <mTarget serId=17>
                             <mNode>-1</mNode>
                             <mIndex>-1</mIndex>
                             <mGroup>0</mGroup>
@@ -100,9 +98,9 @@
                     </Item>
                 </Item>
                 <Item>
-                    <Item serId=19>
-                        <mTarget serId=20>
-                            <mNode>3</mNode>
+                    <Item serId=18>
+                        <mTarget serId=19>
+                            <mNode>6</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>0</mGroup>
                         </mTarget>
@@ -111,8 +109,8 @@
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item serId=21>
-                        <mSource serId=22>
+                    <Item serId=20>
+                        <mSource serId=21>
                             <mNode>5</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>0</mGroup>
@@ -125,15 +123,15 @@
                 </Item>
             </mDataOutPins>
         </Node>
-        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerLeave" serId=23>
+        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerLeave" serId=22>
             <mFlowOutPins>
                 <Item>
                 </Item>
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item serId=24>
-                        <mSource serId=25>
+                    <Item serId=23>
+                        <mSource serId=24>
                             <mNode>-1</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>1</mGroup>
@@ -146,10 +144,47 @@
                 </Item>
             </mDataOutPins>
         </Node>
+        <Node type="Native/temp_widget" serId=25>
+            <mParameters>
+                <Item serId=26>
+                    <Name>test</Name>
+                </Item>
+            </mParameters>
+            <mFlowOutPins>
+                <Item>
+                    <Item serId=27>
+                        <mTarget serId=28>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
+                    </Item>
+                </Item>
+                <Item>
+                    <Item serId=29>
+                        <mTarget serId=30>
+                            <mNode>3</mNode>
+                            <mIndex>0</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
+                    </Item>
+                </Item>
+            </mFlowOutPins>
+            <mDataInPins>
+                <Item>
+                </Item>
+                <Item>
+                </Item>
+            </mDataInPins>
+            <mDataOutPins>
+                <Item>
+                </Item>
+            </mDataOutPins>
+        </Node>
     </mNodes>
     <mFlowOutPins>
-        <Item serId=26>
-            <mTarget serId=27>
+        <Item serId=31>
+            <mTarget serId=32>
                 <mNode>2</mNode>
                 <mIndex>0</mIndex>
                 <mGroup>0</mGroup>
@@ -160,12 +195,12 @@
     </mDataInPins>
     <mDataOutPins>
     </mDataOutPins>
-    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":203,"y":-183}},"node:180000":{"location":{"x":566,"y":-61}},"node:2147483645":{"location":{"x":331,"y":-601}},"node:2147483646":{"location":{"x":-5,"y":-601}},"node:240000":{"location":{"x":396,"y":-89}},"node:300000":{"location":{"x":28,"y":-61}},"node:60000":{"location":{"x":27,"y":-141}}},"selection":["node:2147483646"],"view":{"scroll":{"x":-4.45337295532226562,"y":-598.39141845703125},"visible_rect":{"max":{"x":355.750518798828125,"y":-9.42330741882324219},"min":{"x":-4.46849441528320312,"y":-600.42327880859375}},"zoom":0.996615886688232422}}</mLayoutData>
+    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":203,"y":-183}},"node:180000":{"location":{"x":790,"y":-21}},"node:2147483645":{"location":{"x":732,"y":-323}},"node:2147483646":{"location":{"x":266,"y":-323}},"node:240000":{"location":{"x":396,"y":-89}},"node:300000":{"location":{"x":28,"y":-61}},"node:360000":{"location":{"x":556,"y":-57}},"node:420000":{"location":{"x":204,"y":167}},"node:60000":{"location":{"x":27,"y":-141}}},"selection":null,"view":{"scroll":{"x":199.573715209960938,"y":-241.931655883789062},"visible_rect":{"max":{"x":756.76507568359375,"y":418.75787353515625},"min":{"x":266.09832763671875,"y":-322.575592041015625}},"zoom":0.749999940395355225}}</mLayoutData>
     <mInputBindings>
-        <Item serId=28>
-            <mDescriptor serId=29>
+        <Item serId=33>
+            <mDescriptor serId=34>
                 <mName>Widget</mName>
-                <mType>Engine::Widgets::WidgetBase*</mType>
+                <mType>Engine::ValueType</mType>
             </mDescriptor>
         </Item>
     </mInputBindings>

@@ -37,7 +37,7 @@ namespace Widgets {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, TempWidgetSender &&sender, Rec &&rec)
         {
-            return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mDesc), std::move(sender.mBehaviors) };
+            return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mDesc), std::move(sender.mBehavior) };
         }
 
         static constexpr size_t debug_start_increment = 1;
@@ -45,19 +45,17 @@ namespace Widgets {
         static constexpr size_t debug_stop_increment = 1;
 
         WidgetLoader::Handle mDesc;
-        std::vector<Behavior> mBehaviors;
+        Behavior mBehavior;
     };
 
     Behavior tempWidget(WidgetLoader::Handle desc, Behavior behavior)
     {
-        std::vector<Behavior> behaviors;
-        behaviors.push_back(std::move(behavior));
-        return TempWidgetSender { {}, WidgetLoader::Handle { desc }, std::move(behaviors) } | Resources::with_handle(WidgetLoader::Handle { desc });
+        return TempWidgetSender { {}, WidgetLoader::Handle { desc }, std::move(behavior) } | Resources::with_handle(WidgetLoader::Handle { desc });
     }
 
-    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, std::vector<Behavior> behaviors)
+    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Behavior behavior)
         : mDesc(std::move(desc))
-        , mBehaviors(std::move(behaviors))
+        , mBehavior(std::move(behavior))
     {
     }
 
@@ -76,7 +74,7 @@ namespace Widgets {
 
         mWidget = mDesc->create(*mgr);
         mgr->openOverlay(mWidget.get());
-        mgr->lifetime().attach(mgr->window().clock().wait(1s) | Execution::then([this, mgr]() {
+        mgr->lifetime().attach(std::move(mBehavior) | Execution::then([this, mgr]() {
             mgr->closeOverlay(mWidget.get());
             set_value();
         }));

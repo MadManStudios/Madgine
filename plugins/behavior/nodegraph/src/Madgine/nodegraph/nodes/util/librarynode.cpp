@@ -58,26 +58,18 @@ namespace NodeGraph {
 
     struct LibraryInterpretData : NodeInterpreterData, Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver> {
 
-        static std::vector<Behavior> buildSubBehaviors(size_t count)
+        static std::vector<Behavior> buildSubBehaviors(uint32_t count, const NodeInterpretHandle<LibraryNode> &handle)
         {
             std::vector<Behavior> result;
-            /* std::array<Behavior (*)(), 5> ctors = {
-                []() -> Behavior { return NodeSender<0> {}; },
-                []() -> Behavior { return NodeSender<1> {}; },
-                []() -> Behavior { return NodeSender<2> {}; },
-                []() -> Behavior { return NodeSender<3> {}; },
-                []() -> Behavior { return NodeSender<4> {}; }
-            };
-            assert(count < ctors.size());
-            for (size_t i = 0; i < count; ++i) {
-                result.push_back(ctors[i]);
-            }*/
+            for (uint32_t i = 0; i < count; ++i) {
+                result.push_back(NodeSender<1> {i} | NodeReceiverWrapper { handle });
+            }
             return result;
         }
 
-        LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args, size_t subBehaviorCount)
+        LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args, uint32_t subBehaviorCount, const NodeInterpretHandle<LibraryNode> &handle)
             : Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver>(LibraryInterpretReceiver {})
-            , mBehavior(type.create(args, buildSubBehaviors(subBehaviorCount)).connect(*this))
+            , mBehavior(type.create(args, buildSubBehaviors(subBehaviorCount, handle)).connect(*this))
         {
         }
 
@@ -204,7 +196,7 @@ namespace NodeGraph {
 
     void LibraryNode::setupInterpret(NodeInterpreterStateBase &interpreter, std::unique_ptr<NodeInterpreterData> &data) const
     {
-        data = std::make_unique<LibraryInterpretData>(mBehavior, mParameters, mSubBehaviorCount);
+        data = std::make_unique<LibraryInterpretData>(mBehavior, mParameters, mSubBehaviorCount, NodeInterpretHandle{ interpreter, *this });
     }
 
     void LibraryNode::interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const

@@ -341,7 +341,7 @@ namespace NodeGraph {
             }
         }
 
-        for (uint32_t group = 0; group < node->mFlowOutPins.size(); ++group) {
+        for (uint32_t group = 0; group < node->mDataProviderPins.size(); ++group) {
             pin = 0;
             size = node->mDataProviderPins[group].size();
             while (pin < size) {

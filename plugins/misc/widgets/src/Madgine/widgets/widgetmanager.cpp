@@ -64,6 +64,7 @@ namespace Widgets {
         : MainWindowComponent(window, 20)
         , mLifetime(&window.lifetime())
         , mData(std::make_unique<WidgetManagerData>())
+        , mFrameClock(std::chrono::steady_clock::now())
     {
     }
 
@@ -506,6 +507,8 @@ namespace Widgets {
 
     void WidgetManager::render(Render::RenderTarget *target, size_t iteration)
     {
+        mFrameClock.tick(std::chrono::steady_clock::now());
+
         if (!mData->mPipeline.available())
             return;
 
@@ -638,6 +641,11 @@ namespace Widgets {
     Debug::DebuggableLifetime<get_binding_d> &WidgetManager::lifetime()
     {
         return mLifetime;
+    }
+
+    IntervalClock<> &WidgetManager::clock()
+    {
+        return mFrameClock;
     }
 
 }

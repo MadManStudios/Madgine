@@ -98,7 +98,6 @@ namespace Window {
         , mTaskQueue("FrameLoop", true)
         , mComponents(*this)
         , mRenderContext(&mTaskQueue)
-        , mFrameClock(std::chrono::steady_clock::now())
     {
         mTaskQueue.addSetupSteps(
             [this]() { return callInit(); },
@@ -229,7 +228,6 @@ namespace Window {
     {
         std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
         while (mTaskQueue.running()) {
-            mFrameClock.tick(std::chrono::steady_clock::now());
             co_await mRenderContext->render();
             {
                 PROFILE_NAMED("Window Update");
@@ -258,11 +256,6 @@ namespace Window {
     Debug::DebuggableLifetime<> &MainWindow::lifetime()
     {
         return mLifetime;
-    }
-
-    IntervalClock<> &MainWindow::clock()
-    {
-        return mFrameClock;
     }
 
     void MainWindow::addListener(MainWindowListener *listener)

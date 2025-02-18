@@ -17,8 +17,6 @@
 
 #include "mainwindowlistener.h"
 
-#include "Generic/intervalclock.h"
-
 namespace Engine {
 namespace Window {
 
@@ -71,8 +69,6 @@ namespace Window {
         void endLifetime();
 
         Debug::DebuggableLifetime<> &lifetime();
-
-        IntervalClock<> &clock();
 
         void addListener(MainWindowListener *listener);
         void removeListener(MainWindowListener *listener);
@@ -139,8 +135,6 @@ namespace Window {
         Threading::TaskQueue mTaskQueue;
 
         DEBUGGABLE_LIFETIME(mLifetime);
-
-        IntervalClock<> mFrameClock;
 
         MainWindowComponentContainer<std::set<Placeholder<0>, MainWindowComponentComparator>> mComponents;
 

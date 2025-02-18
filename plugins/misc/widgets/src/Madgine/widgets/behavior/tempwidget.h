@@ -10,14 +10,14 @@ namespace Widgets {
     Behavior tempWidget(WidgetLoader::Handle desc, Behavior behavior);
 
     struct TempWidgetState : BehaviorReceiver {
-        TempWidgetState(WidgetLoader::Handle desc, std::vector<Behavior> behaviors);
+        TempWidgetState(WidgetLoader::Handle desc, Behavior behavior);
         ~TempWidgetState();
 
         void start();
 
     private:
         WidgetLoader::Handle mDesc;
-        std::vector<Behavior> mBehaviors;
+        Behavior mBehavior;
         std::unique_ptr<WidgetBase> mWidget;
     };
 

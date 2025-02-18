@@ -46,7 +46,7 @@ namespace NodeGraph {
     public:
         ParameterTuple mParameters;
         std::vector<BindingDescriptor> mBindings;
-        size_t mSubBehaviorCount = 0;
+        uint32_t mSubBehaviorCount = 0;
     };
 
 }
