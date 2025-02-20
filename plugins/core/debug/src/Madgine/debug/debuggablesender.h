@@ -1,29 +1,14 @@
 #pragma once
 
-#include "Generic/callable_view.h"
-#include "Generic/execution/statedescriptor.h"
-#include "debuglocation.h"
+#include "senderlocation.h"
 // #include "Meta/keyvalue/valuetype.h"
 
 namespace Engine {
 namespace Execution {
 
-    struct MADGINE_DEBUGGER_EXPORT SenderLocation : Debug::DebugLocation {
-        SenderLocation(Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> state);
-
-        std::string toString() const override;
-        std::map<std::string_view, ValueType> localVariables() const override;
-        bool wantsPause(Debug::ContinuationType type) const override;
-
-        void visit(CallableView<void(const Execution::StateDescriptor &)> visitor) const;
-
-        Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> mState;
-        size_t mIndex = 0;
-    };
-
     struct get_debug_location_t {
 
-        using signature = Debug::DebugLocation *();
+        using signature = Debug::ParentLocation *();
 
         template <typename T>
             requires(!tag_invocable<get_debug_location_t, T &>)
@@ -75,6 +60,7 @@ namespace Execution {
         }
     }
 
+    template <typename Location>
     struct with_debug_location_t {
 
         template <typename Sender, typename _Rec>
@@ -100,7 +86,7 @@ namespace Execution {
                 mState->set_error(std::forward<R>(result)...);
             }
 
-            friend SenderLocation *tag_invoke(get_debug_location_t, receiver &rec)
+            friend Location *tag_invoke(get_debug_location_t, receiver &rec)
             {
                 return &rec.mState->mLocation;
             }
@@ -123,9 +109,10 @@ namespace Execution {
 
             using State = connect_result_t<Sender, Rec>;
 
-            state(Sender &&sender, InnerRec &&rec)
+            template <typename... Args>
+            state(Sender &&sender, InnerRec &&rec, Args&&... args)
                 : mRec(std::forward<InnerRec>(rec))
-                , mLocation([this, info { visit_sender(sender) }](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(mState, info, std::move(visitor)); })
+                , mLocation([this, info { visit_sender(sender) }](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(mState, info, std::move(visitor)); }, std::forward<Args>(args)...)
                 , mState { connect(std::forward<Sender>(sender), Rec { this }) }
             {
             }
@@ -134,7 +121,6 @@ namespace Execution {
 
             void start()
             {
-                mLocation.mIndex = 0;
                 mLocation.stepInto(get_debug_location(mRec));
                 mState.start();
             }
@@ -160,42 +146,46 @@ namespace Execution {
             }
 
             InnerRec mRec;
-            SenderLocation mLocation;
+            Location mLocation;
             State mState;
         };
 
-        template <Sender Sender>
+        template <Sender Sender, typename... Args>
         struct sender : algorithm_sender<Sender> {
 
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec) };
+                return TupleUnpacker::constructExpand<state<Sender, Rec>>(std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::move(sender.mArgs));
             }
+
+            std::tuple<Args...> mArgs;
         };
 
-        template <Sender Sender>
-        friend auto tag_invoke(with_debug_location_t, Sender &&inner)
+        template <Sender Sender, typename... Args>
+        friend auto tag_invoke(with_debug_location_t, Sender &&inner, Args&&... args)
         {
-            return sender<Sender> { { {}, std::forward<Sender>(inner) } };
+            return sender<Sender, Args...> { { {}, std::forward<Sender>(inner) }, { std::forward<Args>(args)... } };
         }
 
-        template <Sender Sender>
-            requires tag_invocable<with_debug_location_t, Sender>
-        auto operator()(Sender &&sender) const
-            noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender>)
-                -> tag_invoke_result_t<with_debug_location_t, Sender>
+        template <Sender Sender, typename... Args>
+            requires tag_invocable<with_debug_location_t, Sender, Args...>
+        auto operator()(Sender &&sender, Args &&... args) const
+            noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender, Args...>)
+                -> tag_invoke_result_t<with_debug_location_t, Sender, Args...>
         {
-            return tag_invoke(*this, std::forward<Sender>(sender));
+            return tag_invoke(*this, std::forward<Sender>(sender), std::forward<Args>(args)...);
         }
 
-        auto operator()() const
+        template <typename... Args>
+        auto operator()(Args&&... args) const
         {
-            return pipable_from_right(*this);
+            return pipable_from_right(*this, std::forward<Args>(args)...);
         }
     };
 
-    inline constexpr with_debug_location_t with_debug_location;
+    template <typename Location>
+    inline constexpr with_debug_location_t<Location> with_debug_location;
 
     inline constexpr auto with_sub_debug_location = [](auto *location) {
         return with_query_value(get_debug_location, std::move(location));
@@ -221,8 +211,8 @@ namespace Execution {
                 if constexpr (operation_increment == 0 && stop_increment == 0) {
                     this->mState.mRec.set_value(std::forward<V>(value)...);
                 } else {
-                    assert(dynamic_cast<SenderLocation *>(static_cast<Debug::DebugLocation *>(get_debug_location(this->mState.mRec))));
-                    SenderLocation *location = static_cast<SenderLocation *>(get_debug_location(this->mState.mRec));
+                    assert(dynamic_cast<Debug::SenderLocation *>(static_cast<Debug::DebugLocation *>(get_debug_location(this->mState.mRec))));
+                    Debug::SenderLocation *location = static_cast<Debug::SenderLocation *>(get_debug_location(this->mState.mRec));
 
                     location->mIndex += operation_increment;
 
@@ -246,7 +236,7 @@ namespace Execution {
                 if constexpr (operation_increment == 0 && stop_increment == 0) {
                     this->mState.mRec.set_done();
                 } else {
-                    SenderLocation *location = get_debug_location(this->mState.mRec);
+                    Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
                     location->mIndex += operation_increment;
 
@@ -264,7 +254,7 @@ namespace Execution {
                 if constexpr (operation_increment == 0 && stop_increment == 0) {
                     this->mState.mRec.set_error(std::forward<R>(result)...);
                 } else {
-                    SenderLocation *location = get_debug_location(this->mState.mRec);
+                    Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
                     location->mIndex += operation_increment;
 
@@ -338,7 +328,7 @@ namespace Execution {
             bool mBreakpointSet = false;
         };
 
-        template <typename Sender>
+        template <Sender Sender>
         struct sender : algorithm_sender<Sender> {
 
             template <is_debuggable Rec>

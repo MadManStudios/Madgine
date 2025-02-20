@@ -25,6 +25,7 @@ namespace NodeGraph {
     struct LibraryInterpretReceiver {
         void set_value(ArgumentList values)
         {
+            mBehavior.reset();
             mResult = std::move(values);
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
             mReceiver.reset();
@@ -33,6 +34,7 @@ namespace NodeGraph {
 
         void set_error(BehaviorError result)
         {
+            mBehavior.reset();
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
             mReceiver.reset();
             receiver.set_error(std::move(result));
@@ -40,6 +42,7 @@ namespace NodeGraph {
 
         void set_done()
         {
+            mBehavior.reset();
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
             mReceiver.reset();
             receiver.set_done();
@@ -53,6 +56,7 @@ namespace NodeGraph {
         }
 
         std::optional<NodeReceiver<NodeBase>> mReceiver;
+        Behavior::StatePtr mBehavior;
         ArgumentList mResult;
     };
 
@@ -62,24 +66,27 @@ namespace NodeGraph {
         {
             std::vector<Behavior> result;
             for (uint32_t i = 0; i < count; ++i) {
-                result.push_back(NodeSender<1> {i} | NodeReceiverWrapper { handle });
+                result.push_back(NodeSender<1> { i } | NodeReceiverWrapper { handle });
             }
             return result;
         }
 
-        LibraryInterpretData(BehaviorHandle type, const ParameterTuple &args, uint32_t subBehaviorCount, const NodeInterpretHandle<LibraryNode> &handle)
+        LibraryInterpretData(BehaviorHandle type)
             : Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver>(LibraryInterpretReceiver {})
-            , mBehavior(type.create(args, buildSubBehaviors(subBehaviorCount, handle)).connect(*this))
+            , mType(type)
         {
         }
 
-        void start(NodeReceiver<NodeBase> receiver)
+        void start(NodeReceiver<NodeBase> receiver, const ParameterTuple &args)
         {
+            NodeInterpretHandle<LibraryNode> handle { receiver.mInterpreter, static_cast<const LibraryNode &>(receiver.mNode) };
+
             mRec.mReceiver.emplace(std::move(receiver));
-            mBehavior->start();
+            mRec.mBehavior = mType.create(args, buildSubBehaviors(mType.subBehaviorCount(), handle)).connect(*this);
+            mRec.mBehavior->start();
         }
 
-        Behavior::StatePtr mBehavior;
+        BehaviorHandle mType;
     };
 
     LibraryNode::LibraryNode(NodeGraph &graph, BehaviorHandle behavior)
@@ -196,12 +203,12 @@ namespace NodeGraph {
 
     void LibraryNode::setupInterpret(NodeInterpreterStateBase &interpreter, std::unique_ptr<NodeInterpreterData> &data) const
     {
-        data = std::make_unique<LibraryInterpretData>(mBehavior, mParameters, mSubBehaviorCount, NodeInterpretHandle{ interpreter, *this });
+        data = std::make_unique<LibraryInterpretData>(mBehavior);
     }
 
     void LibraryNode::interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const
     {
-        static_cast<LibraryInterpretData *>(data.get())->start(std::move(receiver));
+        static_cast<LibraryInterpretData *>(data.get())->start(std::move(receiver), mParameters);
     }
 
     BehaviorError LibraryNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const

@@ -314,4 +314,12 @@ struct META_EXPORT Matrix3 {
     // for faster access
     friend struct Matrix4;
 };
+
+
+constexpr Matrix3 lerp(const Matrix3 &m1, const Matrix3 &m2, float ratio)
+{
+    return (1.0f - ratio) * m1 + ratio * m2;
+}
+
+
 }

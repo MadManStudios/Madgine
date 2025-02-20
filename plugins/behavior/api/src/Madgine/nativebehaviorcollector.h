@@ -38,7 +38,7 @@ DECLARE_NAMED_UNIQUE_COMPONENT(Engine, NativeBehavior, NativeBehaviorInfo, Engin
 
 namespace Engine {
 
-template <typename T>
+template <fixed_string Name, typename T>
 struct InputParameter {
 };
 
@@ -46,7 +46,7 @@ struct SubBehavior {
 };
 
 template <typename T>
-using is_parameter = is_instance<decayed_t<T>, InputParameter>;
+using is_parameter = is_instance_auto1<decayed_t<T>, InputParameter>;
 
 template <typename T>
 using is_sub_behavior = std::is_same<T, SubBehavior>;
@@ -55,17 +55,23 @@ template <typename T>
 using is_value = std::negation<std::disjunction<is_parameter<T>, is_sub_behavior<T>>>;
 
 template <typename T>
-struct get_type {
-    using type = T;
-};
+struct get_type;
 
-template <typename T>
-struct get_type<InputParameter<T>> {
+template <typename T, auto Name>
+struct get_type<InputParameter<Name, T>> {
     using type = T;
 };
 
 template <typename T>
 using get_type_t = typename get_type<T>::type;
+
+template <typename T>
+struct get_name;
+
+template <typename T, auto Name>
+struct get_name<InputParameter<Name, T>> {
+    static constexpr auto value = Name;
+};
 
 template <typename T, auto Factory, typename... Arguments>
 struct NativeBehavior : NativeBehaviorComponent<T, NativeBehaviorInfo> {
@@ -75,6 +81,7 @@ struct NativeBehavior : NativeBehaviorComponent<T, NativeBehaviorInfo> {
     using subbehavior_arguments = typename argument_types::template filter<is_sub_behavior>;
     using value_arguments = typename argument_types::template filter<is_value>;
     using parameter_argument_tuple = typename parameter_arguments::template transform<get_type_t>::template instantiate<std::tuple>;
+    using parameter_argument_names = typename parameter_arguments::template value_transform<get_name>;
 
     template <uint32_t I>
     static auto buildArgs(const std::tuple<> &parameters, type_pack<> args, std::vector<Behavior> behaviors)
@@ -127,7 +134,7 @@ struct NativeBehavior : NativeBehaviorComponent<T, NativeBehaviorInfo> {
 
     virtual ParameterTuple createParameters() const override
     {
-        return parameter_argument_tuple {};
+        return { parameter_argument_tuple {}, parameter_argument_names {} };
     }
 
     virtual std::string_view name() const override

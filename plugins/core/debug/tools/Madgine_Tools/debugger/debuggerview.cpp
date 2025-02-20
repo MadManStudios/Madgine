@@ -20,6 +20,8 @@
 
 #include "Madgine/debug/debuggablesender.h"
 
+#include "Madgine/debug/debuglocationsplitter.h"
+
 #include "Madgine/debug/debuggablelifetime.h"
 
 UNIQUECOMPONENT(Engine::Tools::DebuggerView);
@@ -57,7 +59,7 @@ namespace Tools {
 
     const Debug::DebugLocation *DebuggerView::visualizeDebugLocation(const Debug::ContextInfo &context, const Debug::DebugLocation &location, const Debug::DebugLocation *inlineLocation)
     {
-        if (const Execution::SenderLocation *senderLocation = dynamic_cast<const Execution::SenderLocation *>(&location)) {
+        if (const Debug::SenderLocation *senderLocation = dynamic_cast<const Debug::SenderLocation *>(&location)) {
             const Debug::DebugLocation *subLocation = nullptr;
 
             auto visitor = [this, &context, &location, inlineLocation, &subLocation](const Execution::StateDescriptor &desc) {
@@ -106,6 +108,23 @@ namespace Tools {
                 // }
             };
             senderLocation->visit(CallableView<void(const Execution::StateDescriptor &)> { visitor });
+
+            return subLocation;
+        } else if (const Debug::DebugLocationSplitter *splitterLocation = dynamic_cast<const Debug::DebugLocationSplitter *>(&location)) {
+            const Debug::DebugLocation *subLocation = nullptr;
+            
+            if (splitterLocation->mChild)
+                visualizeDebugLocation(context, *splitterLocation->mChild, inlineLocation);
+
+            for (const Debug::ParentLocation &channel : splitterLocation->channels()) {
+                if (channel.mChild) {
+                    const Debug::DebugLocation *subLocation2 = visualizeDebugLocation(context, *channel.mChild, inlineLocation);
+                    if (subLocation2) {
+                        assert(!subLocation);
+                        subLocation = subLocation2;
+                    }
+                }
+            }
 
             return subLocation;
         } else {

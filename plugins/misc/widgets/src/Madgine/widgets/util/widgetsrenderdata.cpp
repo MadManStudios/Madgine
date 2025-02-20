@@ -106,16 +106,19 @@ namespace Widgets {
 
     void WidgetsRenderData::renderQuad(Vector3 pos, Vector2 size, Color4 color, TextureSettings tex, Vector2 topLeftUV, Vector2 bottomRightUV, bool flippedUV)
     {
+        color.a *= mAlpha;
         mVertexData[tex].renderQuad(pos, size, mClipRect, color, topLeftUV, bottomRightUV, flippedUV);
     }
 
     void WidgetsRenderData::renderQuadUV(Vector3 pos, Vector2 size, Color4 color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV)
     {
+        color.a *= mAlpha;
         mVertexData[tex].renderQuadUV(pos, size, mClipRect, color, rect, textureSize, flippedUV);
     }
 
     void WidgetsRenderData::renderLine(const Line3 &line, Color4 color)
     {
+        color.a *= mAlpha;
         mLineData.renderLine(line, mClipRect, color);
     }
 
@@ -142,6 +145,11 @@ namespace Widgets {
         };
         mClipRect = { pos, size };
         return keep;
+    }
+
+    void WidgetsRenderData::setAlpha(float alpha)
+    {
+        mAlpha = alpha;
     }
 
 }

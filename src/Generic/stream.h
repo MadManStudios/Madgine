@@ -44,19 +44,19 @@ struct Stream {
                 mStream.setstate(std::ios_base::failbit);
             } else {
                 rep.pop_back();
-                long long ratio = 1;
+                long long ratio = 1000000000;
                 switch (rep.back()) {
                 case 'm':
-                    ratio = 1000;
-                    break;
-                case 'n':
-                    ratio = 1000000000;
-                    break;
-                case 'u':
                     ratio = 1000000;
                     break;
+                case 'n':
+                    ratio = 1;
+                    break;
+                case 'u':
+                    ratio = 1000;
+                    break;
                 }
-                if (ratio != 1) {
+                if (ratio != 1000000000) {
                     rep.pop_back();
                 }
                 long long count;
@@ -64,7 +64,7 @@ struct Stream {
                 if (result.ptr != rep.data() + rep.size()) {
                     mStream.setstate(std::ios_base::failbit);
                 } else {
-                    t = std::chrono::nanoseconds { count * 1000000000 / ratio };
+                    t = std::chrono::nanoseconds { count * ratio };
                 }
             }
         } else {

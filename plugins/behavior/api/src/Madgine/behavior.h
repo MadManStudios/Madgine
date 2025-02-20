@@ -20,7 +20,7 @@ concept UntypedBehavior = Execution::Sender<T>;
 template <typename T, typename R>
 concept TypedBehavior = UntypedBehavior<T>;
 
-template <typename Algorithm>
+template <Execution::Sender Sender>
 struct SenderBehaviorState;
 
 struct CoroutineBehaviorState;
@@ -33,7 +33,7 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
     Behavior() = default;
     Behavior(StatePtr state);
 
-    template <typename Sender>
+    template <Execution::Sender Sender>
     Behavior(Sender &&sender)
         : mState(new SenderBehaviorState<Sender>(std::forward<Sender>(sender)))
     {
@@ -63,7 +63,7 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
     template <template <typename...> typename Tuple>
     using value_types = Tuple<ArgumentList>;
 
-    template <typename Rec, std::same_as<Behavior> T> //Necessary to prevent implicit conversion
+    template <typename Rec, std::same_as<Behavior> T> // Necessary to prevent implicit conversion
     friend auto tag_invoke(Execution::connect_t, T &&behavior, Rec &&rec)
     {
         assert(behavior.mState);
@@ -83,7 +83,7 @@ struct BehaviorStateBase {
     virtual void destroy()
     {
         delete this;
-    }    
+    }
 };
 
 template <typename Sender>
@@ -143,10 +143,10 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     BehaviorReceiver *mReceiver = nullptr;
 };
 
-template <typename Sender>
+template <Execution::Sender Sender>
 struct SenderBehaviorState : BehaviorStateBase {
 
-    using State = Execution::connect_result_t<typename Execution::with_debug_location_t::sender<Sender>, BehaviorReceiver&>;
+    using State = Execution::connect_result_t<typename Execution::with_debug_location_t<Debug::SenderLocation>::sender<Sender>, BehaviorReceiver &>;
 
     SenderBehaviorState(Sender &&sender)
         : mData(std::forward<Sender>(sender))
@@ -157,7 +157,7 @@ struct SenderBehaviorState : BehaviorStateBase {
     {
         Sender sender = std::forward<Sender>(std::get<Sender>(mData));
         mData.template emplace<State>(
-            DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(), rec); } });
+            DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location<Debug::SenderLocation>(), rec); } });
     }
 
     void start() override

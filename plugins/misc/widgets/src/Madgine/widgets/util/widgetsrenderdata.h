@@ -42,6 +42,8 @@ namespace Widgets {
         };
         WidgetsRenderDataClipRectKeep pushClipRect(Vector2 pos, Vector2 size);
 
+        void setAlpha(float alpha);
+
     private:
         std::map<TextureSettings, WidgetsVertexData> mVertexData;
         WidgetsLinesData mLineData;
@@ -49,6 +51,7 @@ namespace Widgets {
             { 0.0f, 0.0f },
             { std::numeric_limits<float>::max(), std::numeric_limits<float>::max() }
         };
+        float mAlpha = 1.0f;
     };
 
 }

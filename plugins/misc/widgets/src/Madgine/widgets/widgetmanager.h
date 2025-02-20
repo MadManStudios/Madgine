@@ -71,7 +71,12 @@ namespace Widgets {
             return mTopLevelWidgets | std::views::transform(projectionUniquePtrToPtr);
         }
 
-        Generator<std::pair<WidgetBase *, size_t>> visibleWidgets();
+        struct WidgetRenderInfo {
+            WidgetBase *mWidget;
+            size_t mLayer;
+            float mOpacity;
+        };
+        Generator<WidgetRenderInfo> visibleWidgets();
 
         WidgetBase *mStartupWidget = nullptr;
         void openStartupWidget();

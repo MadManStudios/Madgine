@@ -159,7 +159,7 @@ namespace Tools {
             }
 
             pinId = 0;
-            for (const NodeGraph::NodeGraph::InputBinding& binding : mGraph.mInputBindings) {
+            for (const NodeGraph::NodeGraph::InputBinding &binding : mGraph.mInputBindings) {
                 if (DataProviderPin(binding.mDescriptor.mName.c_str(), 0, pinId, 1, binding.mDescriptor.mType, NodeGraph::NodeExecutionMask::ALL, !binding.mTargets.empty()))
                     hoveredPin = binding.mDescriptor.mType;
                 ++pinId;
@@ -319,9 +319,9 @@ namespace Tools {
 
             ImVec2 popupPosition = ImGui::GetMousePos();
             ed::Suspend();
-            /*if (ed::ShowNodeContextMenu(&contextNodeId))                
+            /*if (ed::ShowNodeContextMenu(&contextNodeId))
             else if (ed::ShowPinContextMenu(&contextPinId))
-            else if (ed::ShowLinkContextMenu(&contextLinkId))                
+            else if (ed::ShowLinkContextMenu(&contextLinkId))
             else */
             if (ed::ShowBackgroundContextMenu()) {
                 mPopupPosition = popupPosition;
@@ -526,7 +526,12 @@ namespace Tools {
 
                 if (ImGui::MenuItem("Debug", "", false)) {
                     Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
-                    Execution::detach(Behavior { mGraph.interpret() } | Execution::then([](ArgumentList) { LOG("SUCCESS"); }) | Execution::with_debug_location() | Execution::with_sub_debug_location(context) | Log::log_result());
+                    Execution::detach(
+                        Behavior { mGraph.interpret() }
+                        | Execution::then([](ArgumentList) { LOG("SUCCESS"); })
+                        | Execution::with_debug_location<Debug::SenderLocation>()
+                        | Execution::with_sub_debug_location(context)
+                        | Log::log_result());
                 }
 
                 ImGui::Separator();
@@ -536,7 +541,6 @@ namespace Tools {
 
                 ImGui::EndMenu();
             }
-
         }
     }
 
@@ -579,7 +583,7 @@ namespace Tools {
 
     bool NodeGraphEditor::saveImpl(std::string_view view)
     {
-        //verify();
+        // verify();
 
         if (mInitialLoad) {
             mInitialLoad = false;
@@ -652,7 +656,7 @@ namespace Tools {
                 std::swap(inputPin, outputPin);
             }
 
-            //make this a < check
+            // make this a < check
             if (inputPin.mPin.mNode == outputPin.mPin.mNode) {
                 ed::RejectNewItem(ImColor(255, 0, 0), 2.0f);
                 return;

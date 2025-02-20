@@ -93,7 +93,7 @@ namespace Execution {
         };
 
         std::atomic<uint8_t> mState;
-        ManualLifetime<std::stop_callback<inner_callback>> mCallback = std::nullopt;
+        ManualLifetime<std::stop_callback<inner_callback>> mCallback;
     };
 }
 }

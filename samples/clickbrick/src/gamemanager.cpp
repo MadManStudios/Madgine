@@ -51,7 +51,7 @@ MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
 NATIVE_BEHAVIOR(ClickBrick_Test, ClickBrick::Test)
-NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<float>, Engine::InputParameter<Engine::Vector3>, Engine::InputParameter<Engine::Quaternion>)
+NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<"Speed", float>, Engine::InputParameter<"Direction", Engine::Vector3>, Engine::InputParameter<"Rotation", Engine::Quaternion>)
 
 namespace ClickBrick {
 

@@ -57,6 +57,9 @@ namespace Widgets {
         void setPos(const Matrix3 &pos);
         const Matrix3 &getPos() const;
 
+        void setOpacity(float opacity);
+        float opacity() const;
+
         Vector3 getAbsoluteSize() const;
         Vector2 getAbsolutePosition() const;
         void setAbsoluteSize(const Vector3 &size);
@@ -191,6 +194,8 @@ namespace Widgets {
 
         Vector2 mAbsolutePos;
         Vector3 mAbsoluteSize;
+
+        float mOpacity = 1.0f;
 
         bool mAcceptsPointerEvents;
         bool mAllowsDragging;

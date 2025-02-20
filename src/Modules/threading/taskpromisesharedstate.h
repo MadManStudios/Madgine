@@ -53,7 +53,7 @@ namespace Threading {
 
         void set_value(T val)
         {
-            ManualLifetime<typename Execution::Flag<T>::CallbackDelay> cb = std::nullopt;
+            ManualLifetime<typename Execution::Flag<T>::CallbackDelay> cb;
             {
                 std::lock_guard guard { mMutex };
                 construct(cb, mFlag.emplace(std::move(val)));
@@ -190,7 +190,7 @@ namespace Threading {
         }
 
     private:
-        ManualLifetime<S> mState = std::nullopt;
+        ManualLifetime<S> mState;
         std::atomic_flag mFlag;
         TaskHandle mTask;
         std::shared_ptr<TaskPromiseSharedState<T>> mPromiseState;

@@ -34,10 +34,16 @@ struct BehaviorAwaitableReceiver : Execution::execution_receiver<> {
     }
 
     template <typename CPO, typename... Args>
-    requires(is_tag_invocable_v<CPO, BehaviorReceiver &, Args...>) friend auto tag_invoke(CPO f, BehaviorAwaitableReceiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
+        requires(is_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
+    friend auto tag_invoke(CPO f, BehaviorAwaitableReceiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
         -> tag_invoke_result_t<CPO, BehaviorReceiver &, Args...>
     {
         return tag_invoke(f, *rec.mBehavior->mReceiver, std::forward<Args>(args)...);
+    }
+
+    friend CoroutineLocation *tag_invoke(Execution::get_debug_location_t, BehaviorAwaitableReceiver &rec)
+    {
+        return &rec.mBehavior->mDebugLocation;
     }
 
     BehaviorAwaitableSender<Sender> *mState;
@@ -49,7 +55,7 @@ struct BehaviorAwaitableSender {
 
     auto buildState(Sender &&sender, CoroutineBehaviorState *state)
     {
-        return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(), BehaviorAwaitableReceiver<Sender> { {}, this, state });
+        return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location<Debug::SenderLocation>(), BehaviorAwaitableReceiver<Sender> { {}, this, state });
     }
 
     using S = std::invoke_result_t<decltype(&BehaviorAwaitableSender::buildState), BehaviorAwaitableSender, Sender, nullptr_t>;
@@ -72,11 +78,11 @@ struct BehaviorAwaitableSender {
             if (mResult.is_value()) {
                 return false;
             } else if (mResult.is_error()) {
-                mResult.reproduce_error(mBehavior.promise());                
+                mResult.reproduce_error(mBehavior.promise());
             } else {
                 mBehavior.promise().set_done();
             }
-        } 
+        }
         return true;
     }
 

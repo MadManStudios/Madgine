@@ -1,15 +1,21 @@
 #include "../debuglib.h"
 
-#include "debuggablesender.h"
+#include "senderlocation.h"
 
 #include "Meta/keyvalue/valuetype.h"
 
 namespace Engine {
-namespace Execution {
+namespace Debug {
 
     SenderLocation::SenderLocation(Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> state)
         : mState(std::move(state))
     {
+    }
+
+    void SenderLocation::stepInto(Debug::ParentLocation *parent)
+    {
+        mIndex = 0;
+        Debug::DebugLocation::stepInto(parent);
     }
 
     std::string SenderLocation::toString() const

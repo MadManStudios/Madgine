@@ -215,4 +215,4 @@ namespace Scene {
 }
 }
 
-NATIVE_BEHAVIOR(entity_animation, Engine::Scene::Entity::animation, Engine::InputParameter<Engine::Render::AnimationLoader::Handle>, Engine::InputParameter<std::string>)
+NATIVE_BEHAVIOR(entity_animation, Engine::Scene::Entity::animation, Engine::InputParameter<"Handle", Engine::Render::AnimationLoader::Handle>, Engine::InputParameter<"Animation", std::string>)

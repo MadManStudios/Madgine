@@ -8,4 +8,4 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-NATIVE_BEHAVIOR(Rotate, Engine::Scene::rotate, Engine::InputParameter<Engine::Vector3>, Engine::InputParameter<float>)
+NATIVE_BEHAVIOR(Rotate, Engine::Scene::rotate, Engine::InputParameter<"Axis", Engine::Vector3>, Engine::InputParameter<"Speed", float>)

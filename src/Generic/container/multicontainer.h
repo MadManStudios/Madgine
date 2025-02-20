@@ -175,6 +175,11 @@ struct MultiContainer {
         return { { std::get<Container<Ty>>(mData).emplace(std::get<typename Container<Ty>::const_iterator>(where.mIt), std::forward<Args>(args))... } };
     }
 
+    iterator emplace(const const_iterator &where)
+    {
+        return { { std::get<Container<Ty>>(mData).emplace(std::get<typename Container<Ty>::const_iterator>(where.mIt))... } };
+    }
+
     template <typename It, typename... Args>
     friend iterator tag_invoke(emplace_t, bool &success, MultiContainer<Container, Ty...> &self, const It &where, Args &&...args)
     {

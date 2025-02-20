@@ -64,7 +64,7 @@ namespace Widgets {
     }
 
     void TempWidgetState::start()
-    {        
+    {
         WidgetManager *mgr;
         BehaviorError error = get_binding<"WidgetManager">(*this, mgr);
         if (error.mResult != BehaviorResult::SUCCESS) {
@@ -72,11 +72,15 @@ namespace Widgets {
             return;
         }
 
-        if (!mWidget) {
-            mWidget = mDesc->create(*mgr);
-        }
+        assert(!mWidget);
+        mWidget = mDesc->create(*mgr);
         mgr->openOverlay(mWidget.get());
         mState.start();
+    }
+
+    WidgetBase *TempWidgetState::widget()
+    {
+        return mWidget.get();
     }
 
     void TempWidgetState::receiver::set_value(ArgumentList args)
@@ -112,4 +116,4 @@ namespace Widgets {
 }
 }
 
-NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::InputParameter<Engine::Widgets::WidgetLoader::Handle>, Engine::SubBehavior)
+NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::InputParameter<"Class", Engine::Widgets::WidgetLoader::Handle>, Engine::SubBehavior)

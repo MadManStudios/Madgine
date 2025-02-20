@@ -31,4 +31,4 @@ namespace Audio {
 }
 }
 
-NATIVE_BEHAVIOR(play_sound, Engine::Audio::play_sound, Engine::InputParameter<Engine::Audio::AudioLoader::Handle>)
+NATIVE_BEHAVIOR(play_sound, Engine::Audio::play_sound, Engine::InputParameter<"buffer", Engine::Audio::AudioLoader::Handle>)

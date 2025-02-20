@@ -517,7 +517,8 @@ namespace Widgets {
         WidgetsRenderData renderData;
         auto keep = renderData.pushClipRect(Vector2::ZERO, Vector2 { mClientSpace.mSize });
 
-        for (auto [w, layer] : visibleWidgets()) {
+        for (auto [w, layer, opacity] : visibleWidgets()) {
+            renderData.setAlpha(opacity);
             w->vertices(renderData, layer);
         }
 
@@ -570,33 +571,33 @@ namespace Widgets {
         }
     }
 
-    Generator<std::pair<WidgetBase *, size_t>> WidgetManager::visibleWidgets()
+    Generator<WidgetManager::WidgetRenderInfo> WidgetManager::visibleWidgets()
     {
-        std::queue<std::pair<Widgets::WidgetBase *, size_t>> q;
+        std::queue<WidgetRenderInfo> q;
         if (mCurrentRoot)
-            q.emplace(mCurrentRoot, 0);
+            q.emplace(mCurrentRoot, 0, mCurrentRoot->opacity());
         int layer = 0;
         for (Widgets::WidgetBase *w : mModalWidgetList) {
             if (w->mVisible) {
-                q.emplace(w, ++layer);
+                q.emplace(w, ++layer, w->opacity());
             }
         }
         ++layer;
         for (Widgets::WidgetBase *w : mOverlays) {
             if (w->mVisible) {
-                q.emplace(w, layer);
+                q.emplace(w, layer, w->opacity());
             }
         }
         while (!q.empty()) {
-            auto [w, l] = q.front();
+            auto [w, l, o] = q.front();
             q.pop();
 
             for (Widgets::WidgetBase *c : w->children()) {
                 if (c->mVisible)
-                    q.emplace(c, l);
+                    q.emplace(c, l, c->opacity() * o);
             }
 
-            co_yield { w, l };
+            co_yield { w, l, o };
         }
     }
 

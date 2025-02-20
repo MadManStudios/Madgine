@@ -22,15 +22,22 @@ struct ParameterTupleBase {
 
 template <typename... Ty>
 struct ParameterTupleInstance : ParameterTupleBase {
-
     ParameterTupleInstance(std::tuple<Ty...> tuple)
         : mTuple(std::move(tuple))
     {
     }
 
+    std::tuple<Ty...> mTuple;
+};
+
+template <typename Names, typename... Ty>
+struct TypedParameterTupleInstance : ParameterTupleInstance<Ty...> {
+
+    using ParameterTupleInstance<Ty...>::ParameterTupleInstance;
+
     virtual std::unique_ptr<ParameterTupleBase> clone() override
     {
-        return std::make_unique<ParameterTupleInstance<Ty...>>(mTuple);
+        return std::make_unique<TypedParameterTupleInstance<Names, Ty...>>(mTuple);
     }
 
     virtual ScopePtr customScopePtr() override
@@ -50,12 +57,10 @@ struct ParameterTupleInstance : ParameterTupleBase {
 
     virtual void write(Serialize::FormattedSerializeStream &out) override
     {
-        TupleUnpacker::forEach(mTuple, [&](const auto &e) {
-            Serialize::write(out, e, "Item");
-        });
+        [this, &out] <size_t... Is>(auto_pack<Is...>) {
+            (Serialize::write(out, std::get<Is>(mTuple), Names::template get<Is>.c_str()), ...);
+        }(index_pack_for<Ty...> {});
     }
-
-    std::tuple<Ty...> mTuple;
 
     static const MetaTable *sMetaTablePtr;
 
@@ -63,30 +68,32 @@ struct ParameterTupleInstance : ParameterTupleBase {
     static void sGetter(ValueType &retVal, const ScopePtr &scope)
     {
         assert(scope.mType == &sMetaTable);
-        to_ValueType(retVal, std::get<T>(static_cast<ParameterTupleInstance *>(scope.mScope)->mTuple));
+        to_ValueType(retVal, std::get<T>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple));
     }
 
     template <typename T>
     static void sSetter(const ScopePtr &scope, const ValueType &val)
     {
         assert(scope.mType == &sMetaTable);
-        std::get<T>(static_cast<ParameterTupleInstance *>(scope.mScope)->mTuple) = ValueType_as<T>(val);
+        std::get<T>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple) = ValueType_as<T>(val);
     }
 
-    static const constexpr std::pair<const char *, Accessor> sMembers[] = {
-        { "Item", { &sGetter<Ty>, &sSetter<Ty>, toValueTypeDesc<Ty>() } }...,
-        { nullptr, { nullptr, nullptr, ExtendedValueTypeDesc { ExtendedValueTypeEnum::GenericType } } }
-    };
+    static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<std::pair<const char *, Accessor>, sizeof...(Ty) + 1>
+    {
+        return { { { Names::template get<Is>.c_str(), { &sGetter<Ty>, &sSetter<Ty>, toValueTypeDesc<Ty>() } }...,
+            { nullptr, { nullptr, nullptr, ExtendedValueTypeDesc { ExtendedValueTypeEnum::GenericType } } } } };
+    }
+    (index_pack_for<Ty...> {});
 
     static const constexpr MetaTable sMetaTable {
         &sMetaTablePtr,
         "<ParameterTuple>",
-        sMembers
+        sMembers.data()
     };
 };
 
-template <typename... Ty>
-const MetaTable *ParameterTupleInstance<Ty...>::sMetaTablePtr = &ParameterTupleInstance<Ty...>::sMetaTable;
+template <typename Names, typename... Ty>
+const MetaTable *TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr = &TypedParameterTupleInstance<Names, Ty...>::sMetaTable;
 
 struct MADGINE_BEHAVIOR_EXPORT ParameterTuple {
 
@@ -96,9 +103,9 @@ struct MADGINE_BEHAVIOR_EXPORT ParameterTuple {
     {
     }
 
-    template <typename... Ty>
-    ParameterTuple(std::tuple<Ty...> parameters)
-        : mTuple(std::make_unique<ParameterTupleInstance<Ty...>>(std::move(parameters)))
+    template <typename... Ty, auto... Names>
+    ParameterTuple(std::tuple<Ty...> parameters, auto_pack<Names...>)
+        : mTuple(std::make_unique<TypedParameterTupleInstance<auto_pack<Names...>, Ty...>>(std::move(parameters)))
     {
     }
 
@@ -133,7 +140,8 @@ struct MADGINE_BEHAVIOR_EXPORT ParameterTuple {
 private:
     friend struct Serialize::Operations<ParameterTuple>;
 
-    friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, ParameterTuple& tuple, Serialize::FormattedSerializeStream& in, bool success, const CallerHierarchyBasePtr& hierarchy = {}) {
+    friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, ParameterTuple &tuple, Serialize::FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+    {
         return {};
     }
 

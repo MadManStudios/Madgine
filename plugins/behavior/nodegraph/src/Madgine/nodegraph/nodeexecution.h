@@ -13,6 +13,8 @@
 
 #include "Madgine/codegen/fromsender.h"
 
+#include "Madgine/debug/debuglocationsplitter.h"
+
 namespace Engine {
 namespace NodeGraph {
 
@@ -168,7 +170,7 @@ namespace NodeGraph {
 
         using result_type = BehaviorError;
         template <template <typename...> typename Tuple>
-        using value_types = Tuple<>;
+        using value_types = Tuple<ArgumentList>;
 
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, NodeSender &&sender, Rec &&rec)
@@ -365,6 +367,51 @@ namespace NodeGraph {
         }
 
         size_t mIndex = 0;
+    };
+
+    template <uint32_t flowOutGroup>
+    struct NodeRange {
+
+        using value_type = Debug::debug_channel_t::sender<NodeSender<flowOutGroup>>;
+
+        NodeRange(uint32_t size)
+            : mSize(size)
+        {
+        }
+
+        uint32_t size() const
+        {
+            return mSize;
+        }
+
+        struct iterator {
+
+            constexpr bool operator!=(const iterator& other) const {
+                return mIndex != other.mIndex;
+            }
+
+            void operator++() {
+                ++mIndex;
+            }
+
+            auto operator*() {
+                return NodeSender<flowOutGroup> { mIndex } | Debug::debug_channel(mIndex);
+            }
+
+            uint32_t mIndex;
+        };
+
+        iterator begin() {
+            return { 0 };
+        }
+        
+        iterator end() {
+            return { mSize };
+        }
+
+
+        uint32_t mSize;
+
     };
 
 }

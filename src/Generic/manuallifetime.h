@@ -31,17 +31,7 @@ inline constexpr construct_t construct;
 template <typename T>
 struct ManualLifetime {
 
-    ManualLifetime(std::nullopt_t)
-        : mAlive(false)
-    {
-    }
-
-    template <DecayedNoneOf<ManualLifetime<T>>... Args>
-    ManualLifetime(Args &&...args)
-        : mData(std::forward<Args>(args)...)
-        , mAlive(true)
-    {
-    }
+    ManualLifetime() {}
 
     ManualLifetime(const ManualLifetime &)
     {
@@ -131,14 +121,14 @@ struct ManualLifetime {
         mData = std::forward<T>(t);
         return *this;
     }
-
+    
     ManualLifetime &operator=(ManualLifetime &&t)
     {
         assert(mAlive && t.mAlive);
         mData = std::move(t.mData);
         return *this;
     }
-
+    
     template <typename... Args>
     friend auto tag_invoke(construct_t, ManualLifetime &object, Args &&...args)
     {

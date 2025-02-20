@@ -225,19 +225,19 @@ public:
     template <typename... Ty>
     friend iterator tag_invoke(emplace_t, bool &success, FreeListContainer<C, DataTraits> &self, const const_iterator &where, Ty &&...args)
     {
-        typename internal_traits::iterator freeListIterator = internal_traits::toIterator(self.mContainer, self.mFreeListHead);
+        typename internal_traits::iterator it = internal_traits::toIterator(self.mContainer, self.mFreeListHead);
 
-        assert(where.it() == self.mContainer.end() || where.it() == freeListIterator);
+        assert(where.it() == self.mContainer.end() || where.it() == it);
         ++self.mSize;
-        typename internal_traits::iterator it;
-        if (freeListIterator == self.mContainer.end()) {
-            it = Engine::emplace(success, self.mContainer, where.it(), std::forward<Ty>(args)...);
+
+        if (it == self.mContainer.end()) {
+            it = Engine::emplace(success, self.mContainer, where.it());
+            construct(*it, std::forward<Ty>(args)...);
             self.mFreeListHead = internal_traits::toPositionHandle(self.mContainer, self.mContainer.end());
         } else {
-            it = freeListIterator;
-            self.mFreeListHead = self.emplace(*freeListIterator, std::forward<Ty>(args)...);
-            success = true;
+            self.mFreeListHead = self.emplace(*it, std::forward<Ty>(args)...);
         }
+        success = true;
         return { it, self.mContainer };
     }
 

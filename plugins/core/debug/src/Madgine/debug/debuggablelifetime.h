@@ -48,7 +48,7 @@ namespace Debug {
         template <Execution::Sender Sender>
         void attach(Sender &&sender)
         {
-            mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Execution::with_sub_debug_location(createContext()));
+            mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location<SenderLocation>() | Execution::with_sub_debug_location(createContext()));
         }
 
         bool end()

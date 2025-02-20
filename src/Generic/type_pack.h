@@ -48,6 +48,8 @@ struct type_pack<> {
     using transform_index = type_pack<>;
     template <template <typename, size_t> typename F, size_t offset = 0>
     using transform_with_index = type_pack<>;
+    template <template <typename> typename F>
+    using value_transform = auto_pack<>;
 
     template <typename T>
     using unique = T;
@@ -87,7 +89,8 @@ struct type_pack<Head, Ty...> {
         };
 
         template <typename... Ty2, typename T>
-        requires type_pack<Ty2...>::template contains<T> struct is_or_contains<type_pack<Ty2...>, T> : is_or_contains<T, T> {
+            requires type_pack<Ty2...>::template
+        contains<T> struct is_or_contains<type_pack<Ty2...>, T> : is_or_contains<T, T> {
         };
     };
 
@@ -116,6 +119,8 @@ struct type_pack<Head, Ty...> {
     using transform_index = typename Tail::template transform_index<F, offset + 1>::template prepend<F<offset>>;
     template <template <typename, size_t> typename F, size_t offset = 0>
     using transform_with_index = typename Tail::template transform_with_index<F, offset + 1>::template prepend<F<Head, offset>>;
+    template <template <typename> typename F>
+    using value_transform = auto_pack<F<Head>::value, F<Ty>::value...>;
 
     template <template <typename...> typename Wrapper>
     using instantiate = Wrapper<Head, Ty...>;

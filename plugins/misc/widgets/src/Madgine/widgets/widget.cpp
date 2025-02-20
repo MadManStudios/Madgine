@@ -16,6 +16,7 @@ READONLY_PROPERTY(Children, children)
 MEMBER(mName)
 READONLY_PROPERTY(Pos, getPos)
 READONLY_PROPERTY(Size, getSize)
+MEMBER(mOpacity)
 READONLY_PROPERTY(PointerEnter, pointerEnterSender)
 READONLY_PROPERTY(PointerLeave, pointerLeaveSender)
 MEMBER(mVisible)
@@ -27,6 +28,7 @@ FIELD(mChildren, Serialize::ParentCreator<&Engine::Widgets::WidgetBase::readWidg
 FIELD(mName)
 FIELD(mPos)
 FIELD(mSize)
+FIELD(mOpacity)
 FIELD(mConditions)
 FIELD(mProperties)
 SERIALIZETABLE_END(Engine::Widgets::WidgetBase)
@@ -71,6 +73,16 @@ namespace Widgets {
         return mPos;
     }
 
+    void WidgetBase::setOpacity(float opacity)
+    {
+        mOpacity = opacity;
+    }
+
+    float WidgetBase::opacity() const
+    {
+        return mOpacity;
+    }
+
     Vector3 WidgetBase::getAbsoluteSize() const
     {
         return mAbsoluteSize;
@@ -100,7 +112,7 @@ namespace Widgets {
         if (mParent)
             applyGeometry(mParent->getAbsoluteSize(), mParent->getAbsolutePosition());
         else
-            applyGeometry(Vector3 { Vector2 { manager().getScreenSpace().mSize }, 1.0f });
+            applyGeometry(Vector3 { Vector2 { manager().getClientSpace().mSize }, 1.0f });
     }
 
     void WidgetBase::applyGeometry(const Vector3 &parentSize, const Vector2 &parentPos)

@@ -372,7 +372,7 @@ namespace Execution {
             T mAcc;
             F mReducer;
 
-            ManualLifetime<State> mState = std::nullopt;
+            ManualLifetime<State> mState;
         };
 
         template <typename Stream, typename T, typename F>
@@ -700,7 +700,7 @@ namespace Execution {
             C mC;
             iterator mIt;
             std::atomic_flag mFlag;
-            ManualLifetime<inner_state_t> mState = std::nullopt;
+            ManualLifetime<inner_state_t> mState;
         };
 
         template <typename C, typename F>
@@ -828,47 +828,30 @@ namespace Execution {
         struct state;
 
         template <size_t I, typename Rec, typename Is, typename... Sender>
-        struct receiver : algorithm_receiver<Rec &> {
+        struct receiver {
 
             template <typename... V>
             void set_value(V &&...value)
             {
-                mState->template set_value<I>(this->mRec, std::forward<V>(value)...);
+                mState->template set_value<I>(std::forward<V>(value)...);
             }
 
             void set_done()
             {
-                mState->set_done(this->mRec);
+                mState->set_done();
             }
 
             template <typename... R>
             void set_error(R &&...result)
             {
-                mState->set_error(this->mRec, std::forward<R>(result)...);
+                mState->set_error(std::forward<R>(result)...);
             }
 
             state<Rec, Is, Sender...> *mState;
         };
 
         template <size_t I, typename Sender, typename Rec, typename Is, typename... Senders>
-        struct inner_state {
-
-            using State = connect_result_t<Sender, receiver<I, Rec, Is, Senders...>>;
-
-            inner_state(auto &&ctor)
-                : mState { ctor() }
-            {
-            }
-
-            ~inner_state() { }
-
-            void start()
-            {
-                mState.start();
-            }
-
-            State mState;
-        };
+        using inner_state = connect_result_t<Sender, receiver<I, Rec, Is, Senders...>>;
 
         template <typename Rec, size_t... Is, typename... Sender>
         struct state<Rec, std::index_sequence<Is...>, Sender...> : base_state<Rec> {
@@ -878,7 +861,7 @@ namespace Execution {
 
             state(Rec &&rec, Sender &&...senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
-                , mStates { [&]() { return connect(std::forward<Sender>(senders), receiver<Is, Rec, std::index_sequence<Is...>, Sender...> { this->mRec, this }); }... }
+                , mStates { [&]() { return connect(std::forward<Sender>(senders), receiver<Is, Rec, std::index_sequence<Is...>, Sender...> { this }); }... }
             {
             }
 
@@ -889,45 +872,45 @@ namespace Execution {
                 mCompleteCount = 0;
                 mState = OK;
                 TupleUnpacker::forEach(mStates, [](auto &state) { state.start(); });
-                mark_complete(this->mRec);
+                mark_complete();
             }
 
             template <size_t I, typename V>
-            void set_value(Rec &rec, V &&value)
+            void set_value(V &&value)
             {
                 if (mState == OK)
                     std::get<I>(mValues) = std::forward<V>(value);
-                mark_complete(rec);
+                mark_complete();
             }
 
-            void set_done(Rec &rec)
+            void set_done()
             {
                 mState = DONE;
-                mark_complete(rec);
+                mark_complete();
             }
 
-            void set_error(Rec &rec, patch_void_t<R> result)
+            void set_error(patch_void_t<R> result)
             {
                 State expected = OK;
                 if (mState.compare_exchange_strong(expected, ERROR)) {
                     mResult = result;
                 }
-                mark_complete(rec);
+                mark_complete();
             }
 
-            void mark_complete(Rec &rec)
+            void mark_complete()
             {
                 size_t count = mCompleteCount.fetch_add(1);
                 if (count == sizeof...(Is)) {
                     switch (mState) {
                     case OK:
-                        TupleUnpacker::invokeFromTuple(LIFT(rec.set_value, &), Tuple { std::move(mValues) });
+                        TupleUnpacker::invokeFromTuple(LIFT(mRec.set_value, &), Tuple { std::move(mValues) });
                         break;
                     case ERROR:
-                        rec.set_error(mResult);
+                        mRec.set_error(std::move(mResult));
                         break;
                     case DONE:
-                        rec.set_done();
+                        mRec.set_done();
                         break;
                     default:
                         throw 0;
@@ -966,7 +949,7 @@ namespace Execution {
         template <typename... Sender>
         friend auto tag_invoke(when_all_t, Sender &&...senders)
         {
-            return sender<Sender...> { { std::move(senders)... } };
+            return sender<Sender...> { { std::forward<Sender>(senders)... } };
         }
 
         template <typename... S>
@@ -980,6 +963,165 @@ namespace Execution {
     };
 
     inline constexpr when_all_t when_all;
+
+    struct when_all_range_t {
+
+        template <typename Rec, typename Sender>
+        struct state;
+
+        template <typename Rec, typename Sender>
+        struct receiver {
+
+            template <typename... V>
+            void set_value(V &&...value)
+            {
+                mState->set_value(mIndex, std::forward<V>(value)...);
+            }
+
+            void set_done()
+            {
+                mState->set_done();
+            }
+
+            template <typename... R>
+            void set_error(R &&...result)
+            {
+                mState->set_error(std::forward<R>(result)...);
+            }
+
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, receiver &rec, Args &&...args)
+                -> tag_invoke_result_t<CPO, Rec &, Args...>
+            {
+                return f(rec.mState->mRec, std::forward<Args>(args)...);
+            }
+
+
+            size_t mIndex;
+            state<Rec, Sender> *mState;
+        };
+
+        template <typename Rec, typename Sender>
+        struct state : base_state<Rec> {
+
+            using inner_state = connect_result_t<Sender, receiver<Rec, Sender>>;
+
+            using Values = std::vector<typename Sender::value_types<identity>>;
+            using R = typename Sender::result_type;
+
+            template <typename R>
+            state(Rec &&rec, R &&range)
+                : base_state<Rec> { std::forward<Rec>(rec) }
+                , mStates(std::make_unique<ManualLifetime<inner_state>[]>(range.size()))
+                , mValues(range.size())
+                , mSize(range.size())
+            {
+                size_t i = 0;
+                for (auto &&sender : range) {
+                    construct(mStates[i], DelayedConstruct<inner_state> { [&, this, i]() { return connect(std::forward<decltype(sender)>(sender), receiver<Rec, Sender> { i, this }); } });              
+                    ++i;
+                }
+            }
+
+            ~state() {
+                std::ranges::for_each(std::span { mStates.get(), mSize }, destruct);
+            }
+
+            void start()
+            {
+                mCompleteCount = 0;
+                mState = OK;
+                std::ranges::for_each(std::span { mStates.get(), mSize }, [](auto &state) { state->start(); });
+                mark_complete();
+            }
+
+            template <typename V>
+            void set_value(size_t index, V &&value)
+            {
+                if (mState == OK)
+                    mValues[index] = std::forward<V>(value);
+                mark_complete();
+            }
+
+            void set_done()
+            {
+                mState = DONE;
+                mark_complete();
+            }
+
+            void set_error(patch_void_t<R> result)
+            {
+                State expected = OK;
+                if (mState.compare_exchange_strong(expected, ERROR)) {
+                    mResult = std::move(result);
+                }
+                mark_complete();
+            }
+
+            void mark_complete()
+            {
+                size_t count = mCompleteCount.fetch_add(1);
+                if (count == mSize) {
+                    switch (mState) {
+                    case OK:
+                        mRec.set_value(std::move(mValues));
+                        break;
+                    case ERROR:
+                        mRec.set_error(std::move(mResult));
+                        break;
+                    case DONE:
+                        mRec.set_done();
+                        break;
+                    default:
+                        throw 0;
+                    }
+                }
+            }
+
+            std::unique_ptr<ManualLifetime<inner_state>[]> mStates;
+            patch_void_t<R> mResult;
+            Values mValues;
+            size_t mSize;
+            enum State { OK,
+                ERROR,
+                DONE };
+            std::atomic<State> mState = OK;
+            std::atomic<size_t> mCompleteCount = 0;
+        };
+
+        template <typename R>
+        struct sender : base_sender {
+
+            using result_type = typename R::value_type::result_type;
+            template <template <typename...> typename Tuple>
+            using value_types = Tuple<std::vector<typename R::value_type::value_types<identity>>>;
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
+            {
+                return state<Rec, R::value_type>(std::forward<Rec>(rec), std::forward<R>(sender.mRange));
+            };
+
+            R mRange;
+        };
+
+        template <typename R>
+        friend auto tag_invoke(when_all_range_t, R &&range)
+        {
+            return sender<R> { {}, std::forward<R>(range) };
+        }
+
+        template <typename R>
+            requires tag_invocable<when_all_range_t, R>
+        auto operator()(R &&range) const
+            noexcept(is_nothrow_tag_invocable_v<when_all_range_t, R>)
+                -> tag_invoke_result_t<when_all_range_t, R>
+        {
+            return tag_invoke(*this, std::forward<R>(range));
+        }
+    };
+
+    inline constexpr when_all_range_t when_all_range;
 
     struct sequence_t {
 
@@ -1217,8 +1359,8 @@ namespace Execution {
             }
 
             F mF;
-            ManualLifetime<Tuple> mValue = std::nullopt;
-            ManualLifetime<inner_state> mInnerState = std::nullopt;
+            ManualLifetime<Tuple> mValue;
+            ManualLifetime<inner_state> mInnerState;
         };
 
         template <Sender Sender, typename F>
@@ -1605,7 +1747,7 @@ namespace Execution {
             void set_value(V &&...values)
             {
                 if (mStopSource.request_stop()) {
-                    mResult.set_value(/* std::forward<V>(values)...*/);
+                    mResult.set_value(std::forward<V>(values)...);
                 }
                 signal();
             }
