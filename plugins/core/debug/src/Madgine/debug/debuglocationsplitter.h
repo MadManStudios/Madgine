@@ -12,7 +12,10 @@ namespace Debug {
     struct MADGINE_DEBUGGER_EXPORT DebugLocationSplitter : DebugLocation {
 
         DebugLocationSplitter(size_t channelCount);
-        DebugLocationSplitter(auto &&, size_t channelCount) : DebugLocationSplitter(channelCount) { }
+        DebugLocationSplitter(auto &&, size_t channelCount)
+            : DebugLocationSplitter(channelCount)
+        {
+        }
 
         ParentLocation *channel(size_t index);
 
@@ -75,6 +78,27 @@ namespace Debug {
     };
 
     inline constexpr debug_channel_t debug_channel;
+
+    struct when_all_t {
+        template <typename... Sender>
+        auto operator()(Sender &&...sender) const
+        {
+            return [&]<size_t... Is>(auto_pack<Is...>) {
+                return Execution::when_all((std::forward<Sender>(sender) | debug_channel(Is))...) | Execution::with_debug_location<DebugLocationSplitter>(sizeof...(Sender));
+            }(index_pack_for<Sender...> {});
+        }
+    };
+    inline constexpr when_all_t when_all;
+
+    struct when_all_range_t {
+        template <typename R>
+        auto operator()(R &&range) const
+        {
+            size_t size = range.size();
+            return Execution::when_all_range(std::forward<R>(range)) | Execution::with_debug_location<DebugLocationSplitter>(std::move(size));
+        }
+    };
+    inline constexpr when_all_range_t when_all_range;
 
 }
 }

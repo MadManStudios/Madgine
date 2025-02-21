@@ -847,6 +847,13 @@ namespace Execution {
                 mState->set_error(std::forward<R>(result)...);
             }
 
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, receiver &rec, Args &&...args)
+                -> tag_invoke_result_t<CPO, Rec &, Args...>
+            {
+                return f(rec.mState->mRec, std::forward<Args>(args)...);
+            }
+
             state<Rec, Is, Sender...> *mState;
         };
 
@@ -861,7 +868,10 @@ namespace Execution {
 
             state(Rec &&rec, Sender &&...senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
-                , mStates { [&]() { return connect(std::forward<Sender>(senders), receiver<Is, Rec, std::index_sequence<Is...>, Sender...> { this }); }... }
+                , mStates { 
+                    DelayedConstruct<inner_state<Is, Sender, Rec, std::index_sequence<Is...>, Sender...>> {
+                        [&]() { return connect(std::forward<Sender>(senders), receiver<Is, Rec, std::index_sequence<Is...>, Sender...> { this }); } }...
+                }
             {
             }
 
@@ -904,13 +914,13 @@ namespace Execution {
                 if (count == sizeof...(Is)) {
                     switch (mState) {
                     case OK:
-                        TupleUnpacker::invokeFromTuple(LIFT(mRec.set_value, &), Tuple { std::move(mValues) });
+                        TupleUnpacker::invokeFromTuple(LIFT(this->mRec.set_value, &), Tuple { std::move(mValues) });
                         break;
                     case ERROR:
-                        mRec.set_error(std::move(mResult));
+                        this->mRec.set_error(std::move(mResult));
                         break;
                     case DONE:
-                        mRec.set_done();
+                        this->mRec.set_done();
                         break;
                     default:
                         throw 0;
@@ -931,7 +941,7 @@ namespace Execution {
         };
 
         template <typename... Sender>
-        struct sender {
+        struct sender : base_sender {
 
             using result_type = typename first_t<Sender...>::result_type;
             template <template <typename...> typename Tuple>
@@ -949,7 +959,7 @@ namespace Execution {
         template <typename... Sender>
         friend auto tag_invoke(when_all_t, Sender &&...senders)
         {
-            return sender<Sender...> { { std::forward<Sender>(senders)... } };
+            return sender<Sender...> { {}, { std::forward<Sender>(senders)... } };
         }
 
         template <typename... S>
@@ -996,7 +1006,6 @@ namespace Execution {
                 return f(rec.mState->mRec, std::forward<Args>(args)...);
             }
 
-
             size_t mIndex;
             state<Rec, Sender> *mState;
         };
@@ -1006,7 +1015,7 @@ namespace Execution {
 
             using inner_state = connect_result_t<Sender, receiver<Rec, Sender>>;
 
-            using Values = std::vector<typename Sender::value_types<identity>>;
+            using Values = std::vector<typename Sender::template value_types<identity>>;
             using R = typename Sender::result_type;
 
             template <typename R>
@@ -1018,12 +1027,13 @@ namespace Execution {
             {
                 size_t i = 0;
                 for (auto &&sender : range) {
-                    construct(mStates[i], DelayedConstruct<inner_state> { [&, this, i]() { return connect(std::forward<decltype(sender)>(sender), receiver<Rec, Sender> { i, this }); } });              
+                    construct(mStates[i], DelayedConstruct<inner_state> { [&, this, i]() { return connect(std::forward<decltype(sender)>(sender), receiver<Rec, Sender> { i, this }); } });
                     ++i;
                 }
             }
 
-            ~state() {
+            ~state()
+            {
                 std::ranges::for_each(std::span { mStates.get(), mSize }, destruct);
             }
 
@@ -1064,13 +1074,13 @@ namespace Execution {
                 if (count == mSize) {
                     switch (mState) {
                     case OK:
-                        mRec.set_value(std::move(mValues));
+                        this->mRec.set_value(std::move(mValues));
                         break;
                     case ERROR:
-                        mRec.set_error(std::move(mResult));
+                        this->mRec.set_error(std::move(mResult));
                         break;
                     case DONE:
-                        mRec.set_done();
+                        this->mRec.set_done();
                         break;
                     default:
                         throw 0;
@@ -1094,7 +1104,7 @@ namespace Execution {
 
             using result_type = typename R::value_type::result_type;
             template <template <typename...> typename Tuple>
-            using value_types = Tuple<std::vector<typename R::value_type::value_types<identity>>>;
+            using value_types = Tuple<std::vector<typename R::value_type::template value_types<identity>>>;
 
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
