@@ -154,6 +154,8 @@ namespace Serialize {
                     return STREAM_PARSE_ERROR(mStream, mBinary) << "Syntax error";
                 if (name && prefix != "<" + std::string(name) + ">")
                     return STREAM_PARSE_ERROR(mStream, mBinary) << "Expected: '" << name << "'";
+                if (!name && prefix[1] == '/')
+                    return STREAM_PARSE_ERROR(mStream, mBinary) << "Expected unnamed primitive";
                 STREAM_PROPAGATE_ERROR(mStream.readN(prefix, prefix.size() - 1));
             } else {
                 mCurrentExtended = false;
