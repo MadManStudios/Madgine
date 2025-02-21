@@ -28,6 +28,7 @@ namespace Debug {
 
     ContextInfo &Debugger::createContext()
     {
+        std::unique_lock lock { mMutex };
         return mContexts.emplace_back();
     }
 

@@ -175,6 +175,7 @@ namespace Tools {
     void DebuggerView::render()
     {
         if (ImGui::Begin("Debug Contexts")) {
+            std::unique_lock lock { mDebugger.mMutex };
             for (Debug::ContextInfo &info : mDebugger.infos()) {
                 std::ostringstream descriptor;
                 descriptor << "Context";

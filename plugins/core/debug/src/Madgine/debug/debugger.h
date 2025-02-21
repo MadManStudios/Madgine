@@ -77,9 +77,11 @@ namespace Debug {
 
         bool wantsPause(const DebugLocation &location, ContinuationType type);
 
+        mutable std::mutex mMutex;
+
     private:
         std::deque<ContextInfo> mContexts;
-        std::vector<DebugListener *> mListeners;
+        std::vector<DebugListener *> mListeners;        
     };
 
 }
