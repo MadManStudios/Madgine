@@ -298,6 +298,7 @@ namespace Serialize {
             CallerHierarchyPtr newHierarchyPtr = newHierarchy;
 
             auto guard = GuardSelector<Configs...>::guard(newHierarchyPtr);
+            (void)guard;
             return Serialize::readState(table, unit, in, newHierarchyPtr);
         }
     }

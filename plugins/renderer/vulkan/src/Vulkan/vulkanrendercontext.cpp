@@ -133,8 +133,6 @@ namespace Render {
         VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME
     };
 
-    static constexpr uint32_t sMaxFramesInFlight = 3;
-
     bool checkValidationLayerSupport()
     {
         uint32_t layerCount;

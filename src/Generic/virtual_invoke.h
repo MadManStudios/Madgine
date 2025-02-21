@@ -26,6 +26,7 @@ template <typename CPO, typename Base, typename R, std::same_as<void> T, typenam
 struct VirtualCPOImplHelper : Base {
     using Base::Base;
 
+    using Base::v_tag_invoke;
     virtual R v_tag_invoke(CPO _cpo, V... v) override
     {
         return _cpo(this->mRec, std::forward<V>(v)...);

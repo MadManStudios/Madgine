@@ -230,7 +230,6 @@ namespace Serialize {
             requires std::constructible_from<typename SyncFunctionTraits<typename Callable<f>::traits>::decay_argument_types::as_tuple, Args...>
         {
             using traits = SyncFunctionTraits<typename Callable<f>::traits>;
-            using R = typename traits::return_type;
             using Tuple = typename traits::decay_argument_types::as_tuple;
             Tuple argTuple { std::forward<Args>(args)... };
             if (this->isMaster()) {

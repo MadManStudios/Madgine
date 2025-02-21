@@ -54,7 +54,7 @@ namespace Tools {
 
             ImGui::Unindent();
         }
-        return false;
+        return changed;
     }
 
     void LauncherTool::loadConfiguration(const Filesystem::Path &config)

@@ -553,7 +553,7 @@ bool SelectValueTypeType(T &t)
 {
     T desc = Engine::toValueTypeDesc<Ty>();
 
-    bool result;
+    bool result = false;
 
     if constexpr (std::same_as<Ty, Engine::OwnedScopePtr>) {
         if (ImGui::BeginMenu("OwnedScopePtr")) {

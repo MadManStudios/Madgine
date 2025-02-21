@@ -140,7 +140,7 @@ struct ManualLifetime {
     friend auto tag_invoke(destruct_t, ManualLifetime &object)
     {
         assert(object.mAlive);
-        object.mData.~T();
+        object.mData.T::~T();
         object.mAlive = false;
     }
 

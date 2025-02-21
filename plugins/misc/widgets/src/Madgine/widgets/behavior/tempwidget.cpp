@@ -57,9 +57,9 @@ namespace Widgets {
 
     TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior behavior)
         : mDesc(std::move(desc))
+        , mState(Execution::connect(std::move(behavior), receiver { { *this }, *this }))
         , mPos(std::move(pos))
-        , mSize(std::move(size))
-        , mState(Execution::connect(std::move(behavior), receiver { *this, *this }))
+        , mSize(std::move(size))        
     {
     }
 

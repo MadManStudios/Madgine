@@ -22,8 +22,8 @@ namespace Render {
 
     DirectX12RenderTarget::DirectX12RenderTarget(DirectX12RenderContext *context, bool global, std::string name, TextureType type, size_t samples, bool flipFlop, RenderTarget *blitSource)
         : RenderTarget(context, global, name, flipFlop, blitSource)
-        , mDepthTexture(type, false, FORMAT_D24, samples)
         , mSamples(samples)
+        , mDepthTexture(type, false, FORMAT_D24, samples)
     {
     }
 

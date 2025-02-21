@@ -70,6 +70,7 @@ namespace Execution {
 
         using result_type = R;
 
+        using VirtualStateEx<Rec, Base, type_pack<ExtraR...>, VPack>::set_error;
         virtual void set_error(R r) override
         {
             this->mRec.set_error(std::forward<R>(r));

@@ -409,7 +409,7 @@ namespace NodeGraph {
                 if (!data) {
                     data = std::make_unique<InterpretData>();
                 }
-                static_cast<InterpretData *>(data.get())->start({ receiver.mInterpreter, static_cast<const SenderNode<Config, Algorithm, Arguments...> &>(receiver.mNode), receiver.mReceiver, receiver.mDebugLocation }, mArguments);
+                static_cast<InterpretData *>(data.get())->start({ { receiver.mInterpreter, static_cast<const SenderNode<Config, Algorithm, Arguments...> &>(receiver.mNode) }, receiver.mReceiver, receiver.mDebugLocation }, mArguments);
             } else {
                 throw 0;
             }

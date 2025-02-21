@@ -22,9 +22,9 @@ namespace Render {
         Texture(Texture &&other)
             : mType(other.mType)
             , mFormat(other.mFormat)
-            , mSize(other.mSize)
             , mTextureHandle(std::move(other.mTextureHandle))
             , mResourceBlock(std::move(other.mResourceBlock))
+            , mSize(other.mSize)
         {
         }
 

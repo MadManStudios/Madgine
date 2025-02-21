@@ -12,8 +12,8 @@
 namespace Engine {
 namespace Tools {
     ToolBase::ToolBase(ImRoot &root, bool visible)
-        : mRoot(root)
-        , mVisible(visible)
+        : mVisible(visible)
+        , mRoot(root)
     {
     }
 

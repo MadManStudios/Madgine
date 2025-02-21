@@ -9,6 +9,12 @@ namespace Resources {
 
         template <typename Rec, typename Handle>
         struct receiver : Execution::algorithm_receiver<Rec> {
+            receiver(Rec &&rec, Handle &&handle)
+                : Execution::algorithm_receiver<Rec>(std::forward<Rec>(rec))
+                , mHandle(std::forward<Handle>(handle))
+            {
+            }
+
             Handle mHandle;
         };
 
@@ -66,7 +72,7 @@ namespace Resources {
         }
 
         template <typename Sender, typename Handle>
-        requires tag_invocable<with_handle_t, Sender, Handle>
+            requires tag_invocable<with_handle_t, Sender, Handle>
         auto operator()(Sender &&sender, Handle &&handle) const
             noexcept(is_nothrow_tag_invocable_v<with_handle_t, Sender, Handle>)
                 -> tag_invoke_result_t<with_handle_t, Sender, Handle>

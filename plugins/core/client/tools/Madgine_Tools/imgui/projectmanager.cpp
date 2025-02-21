@@ -103,6 +103,9 @@ namespace Tools {
 
                 ImGui::End();
 
+                if (openNewConfigPopup)
+                    ImGui::OpenPopup("NewConfig");
+
                 if (ImGui::BeginPopup("NewConfig")) {
                     if (ImGui::MenuItem("Create New")) {
                     }

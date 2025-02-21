@@ -16,16 +16,19 @@ struct get_binding_d_t {
     using signature = BehaviorError(std::string_view, ValueTypeRef);
 
     template <typename T>
-    requires(!is_tag_invocable_v<get_binding_d_t, T&, std::string_view, ValueTypeRef>) auto operator()(T &t, std::string_view name, ValueTypeRef out) const
+        requires(!is_tag_invocable_v<get_binding_d_t, T &, std::string_view, ValueTypeRef>)
+    auto operator()(T &t, std::string_view name, ValueTypeRef out) const
     {
         std::string errorMsg = "Binding \""s + std::string { name } + "\" not found.";
         return BehaviorError {
             BehaviorResult::UNKNOWN_ERROR,
-            errorMsg };        
+            errorMsg
+        };
     }
 
     template <typename T>
-    requires(is_tag_invocable_v<get_binding_d_t, T &, std::string_view, ValueTypeRef>) auto operator()(T &t, std::string_view name, ValueTypeRef out) const
+        requires(is_tag_invocable_v<get_binding_d_t, T &, std::string_view, ValueTypeRef>)
+    auto operator()(T &t, std::string_view name, ValueTypeRef out) const
         noexcept(is_nothrow_tag_invocable_v<get_binding_d_t, T &, std::string_view, ValueTypeRef>)
             -> tag_invoke_result_t<get_binding_d_t, T &, std::string_view, ValueTypeRef>
     {
@@ -41,7 +44,8 @@ template <fixed_string Name>
 struct get_binding_t {
 
     template <typename T, typename O>
-    requires(!is_tag_invocable_v<get_binding_t, T, O &>) decltype(auto) operator()(T &&t, O &out) const
+        requires(!is_tag_invocable_v<get_binding_t, T, O &>)
+    decltype(auto) operator()(T &&t, O &out) const
     {
         if constexpr (std::same_as<O, ValueType> || std::same_as<O, ValueTypeRef>) {
             return get_binding_d(std::forward<T>(t), Name, out);
@@ -57,7 +61,8 @@ struct get_binding_t {
     }
 
     template <typename T, typename O>
-    requires(is_tag_invocable_v<get_binding_t, T, O &>) auto operator()(T &&t, O &out) const
+        requires(is_tag_invocable_v<get_binding_t, T, O &>)
+    auto operator()(T &&t, O &out) const
         noexcept(is_nothrow_tag_invocable_v<get_binding_t, T, O &>)
             -> tag_invoke_result_t<get_binding_t, T, O &>
     {
@@ -77,7 +82,7 @@ struct Binding {
             std::conditional_t<std::is_reference_v<T>, OutRef<std::remove_reference_t<T>>, T> result;
 
             BehaviorError error = get_binding<Name>(this->mRec, result);
-            if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS }){
+            if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS }) {
                 this->mRec.set_value(std::forward<T>(result));
             } else {
                 this->mRec.set_error(std::move(error));
@@ -112,6 +117,12 @@ struct with_binding_t {
     template <typename Rec, typename F>
     struct receiver : Execution::algorithm_receiver<Rec> {
 
+        receiver(Rec &&rec, F &&binding)
+            : Execution::algorithm_receiver<Rec>(std::forward<Rec>(rec))
+            , mBinding(std::forward<F>(binding))
+        {
+        }
+
         friend auto tag_invoke(get_binding_d_t, receiver &rec, std::string_view name, ValueTypeRef out)
         {
             if (name == Name) {
@@ -135,7 +146,6 @@ struct with_binding_t {
         F mBinding;
     };
 
-    
     template <Execution::Sender Sender, typename F>
     friend auto tag_invoke(with_binding_t, Sender &&inner, F &&binding)
     {
@@ -143,7 +153,7 @@ struct with_binding_t {
     }
 
     template <typename Sender, typename F>
-    requires tag_invocable<with_binding_t, Sender, F>
+        requires tag_invocable<with_binding_t, Sender, F>
     auto operator()(Sender &&sender, F &&binding) const
         noexcept(is_nothrow_tag_invocable_v<with_binding_t, Sender, F>)
             -> tag_invoke_result_t<with_binding_t, Sender, F>
@@ -156,7 +166,6 @@ struct with_binding_t {
     {
         return pipable_from_right(*this, std::forward<F>(binding));
     }
-
 };
 
 template <fixed_string Name>

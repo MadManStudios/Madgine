@@ -94,6 +94,12 @@ namespace Execution {
         template <typename Rec, typename T>
         struct receiver : algorithm_receiver<Rec> {
 
+            receiver(Rec &&rec, T &&transform)
+                : algorithm_receiver<Rec> { std::forward<Rec>(rec) }
+                , mTransform(std::forward<T>(transform))
+            {
+            }
+
             template <typename... V>
             void set_value(V &&...values)
             {
@@ -421,6 +427,12 @@ namespace Execution {
         template <typename Rec, typename F>
         struct receiver : algorithm_receiver<Rec> {
 
+            receiver(Rec &&rec, F &&f)
+                : algorithm_receiver<Rec>(std::forward<Rec>(rec))
+                , mFinally(std::forward<F>(f))
+            {
+            }
+
             template <typename... V>
             void set_value(V &&...values)
             {
@@ -507,6 +519,12 @@ namespace Execution {
 
         template <typename Sender, typename Rec1, typename Rec2>
         struct receiver : algorithm_receiver<Rec2> {
+
+            receiver(Rec2 &&rec, state<Sender, Rec1, Rec2> *state)
+                : algorithm_receiver<Rec2> { std::forward<Rec2>(rec) }
+                , mState(state)
+            {
+            }
 
             template <typename... V>
             void set_value(V &&...value)
@@ -604,6 +622,12 @@ namespace Execution {
 
         template <typename Rec, typename C, typename F>
         struct receiver : algorithm_receiver<Rec &> {
+
+            receiver(Rec &rec, state<Rec, C, F> *state)
+                : algorithm_receiver<Rec &>(rec)
+                , mState(state)
+            {
+            }
 
             template <typename... V>
             void set_value(V &&...value)
@@ -868,7 +892,7 @@ namespace Execution {
 
             state(Rec &&rec, Sender &&...senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
-                , mStates { 
+                , mStates {
                     DelayedConstruct<inner_state<Is, Sender, Rec, std::index_sequence<Is...>, Sender...>> {
                         [&]() { return connect(std::forward<Sender>(senders), receiver<Is, Rec, std::index_sequence<Is...>, Sender...> { this }); } }...
                 }
@@ -1109,7 +1133,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return state<Rec, R::value_type>(std::forward<Rec>(rec), std::forward<R>(sender.mRange));
+                return state<Rec, typename R::value_type>(std::forward<Rec>(rec), std::forward<R>(sender.mRange));
             };
 
             R mRange;
@@ -1289,6 +1313,12 @@ namespace Execution {
 
         template <typename Rec, typename Sender, typename F, typename QualifiedRec, typename... Tags>
         struct receiver : algorithm_receiver<QualifiedRec> {
+
+            receiver(QualifiedRec &&rec, state<Rec, Sender, F> *state)
+                : algorithm_receiver<QualifiedRec>(std::forward<QualifiedRec>(rec))
+                , mState(state)
+            {
+            }
 
             template <typename... V>
             void set_value(V &&...value)
@@ -1614,6 +1644,12 @@ namespace Execution {
 
         template <typename Rec, typename CPO, typename T>
         struct receiver : algorithm_receiver<Rec> {
+
+            receiver(Rec &&rec, T &&queryResult)
+                : algorithm_receiver<Rec>(std::forward<Rec>(rec))
+                , mQueryResult(std::forward<T>(queryResult))
+            {
+            }
 
             friend T tag_invoke(CPO, receiver &rec)
             {

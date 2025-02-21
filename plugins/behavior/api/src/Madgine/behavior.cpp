@@ -66,7 +66,7 @@ void CoroutineBehaviorState::FinalSuspend::await_suspend(std::coroutine_handle<C
 
 void CoroutineBehaviorState::FinalSuspend::await_resume() noexcept
 {
-    throw 0;
+    std::terminate();
 }
 
 CoroutineBehaviorState::FinalSuspend CoroutineBehaviorState::final_suspend() noexcept

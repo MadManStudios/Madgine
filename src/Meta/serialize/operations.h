@@ -302,7 +302,7 @@ namespace Serialize {
     StreamResult scanCompound(FormattedSerializeStream &in, const char *name, F &&callback)
     {
         using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, SerializableDataPtr>;
-        const StreamVisitor *genericVisitor;
+        //const StreamVisitor *genericVisitor;
         StreamVisitorImpl visitor {
             [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags) -> StreamResult {
                 if (holder.mTable == &serializeTable<TargetCompound>()) {
@@ -317,7 +317,7 @@ namespace Serialize {
                 }
             }
         };
-        genericVisitor = &visitor;
+        //genericVisitor = &visitor;
         return visitStream<Compound>(in, name, visitor);
     }
 

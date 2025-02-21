@@ -37,7 +37,7 @@ struct TypedParameterTupleInstance : ParameterTupleInstance<Ty...> {
 
     virtual std::unique_ptr<ParameterTupleBase> clone() override
     {
-        return std::make_unique<TypedParameterTupleInstance<Names, Ty...>>(mTuple);
+        return std::make_unique<TypedParameterTupleInstance<Names, Ty...>>(this->mTuple);
     }
 
     virtual ScopePtr customScopePtr() override
@@ -48,7 +48,7 @@ struct TypedParameterTupleInstance : ParameterTupleInstance<Ty...> {
     virtual Serialize::StreamResult read(Serialize::FormattedSerializeStream &in) override
     {
         return TupleUnpacker::accumulate(
-            mTuple, [&](auto &e, Serialize::StreamResult r) {
+            this->mTuple, [&](auto &e, Serialize::StreamResult r) {
                 STREAM_PROPAGATE_ERROR(std::move(r));
                 return Serialize::read(in, e, nullptr);
             },
@@ -58,29 +58,29 @@ struct TypedParameterTupleInstance : ParameterTupleInstance<Ty...> {
     virtual void write(Serialize::FormattedSerializeStream &out) override
     {
         [this, &out] <size_t... Is>(auto_pack<Is...>) {
-            (Serialize::write(out, std::get<Is>(mTuple), Names::template get<Is>.c_str()), ...);
+            (Serialize::write(out, std::get<Is>(this->mTuple), Names::template get<Is>.c_str()), ...);
         }(index_pack_for<Ty...> {});
     }
 
     static const MetaTable *sMetaTablePtr;
 
-    template <typename T>
+    template <size_t I>
     static void sGetter(ValueType &retVal, const ScopePtr &scope)
     {
         assert(scope.mType == &sMetaTable);
-        to_ValueType(retVal, std::get<T>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple));
+        to_ValueType(retVal, std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple));
     }
 
-    template <typename T>
+    template <size_t I, typename T>
     static void sSetter(const ScopePtr &scope, const ValueType &val)
     {
         assert(scope.mType == &sMetaTable);
-        std::get<T>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple) = ValueType_as<T>(val);
+        std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple) = ValueType_as<T>(val);
     }
 
     static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<std::pair<const char *, Accessor>, sizeof...(Ty) + 1>
     {
-        return { { { Names::template get<Is>.c_str(), { &sGetter<Ty>, &sSetter<Ty>, toValueTypeDesc<Ty>() } }...,
+        return { { { Names::template get<Is>.c_str(), { &sGetter<Is>, &sSetter<Is, Ty>, toValueTypeDesc<Ty>() } }...,
             { nullptr, { nullptr, nullptr, ExtendedValueTypeDesc { ExtendedValueTypeEnum::GenericType } } } } };
     }
     (index_pack_for<Ty...> {});
