@@ -15,6 +15,7 @@ namespace Widgets {
         virtual std::string getClass() const override;
 
         ScalableImageRenderData mImageRenderData;
+        Color4 mColor = { 1.0f, 1.0f, 1.0f, 1.0f };
     };
 }
 }

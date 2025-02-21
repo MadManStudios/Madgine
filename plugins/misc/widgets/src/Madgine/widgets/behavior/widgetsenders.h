@@ -27,8 +27,8 @@ namespace Widgets {
         return wait_frame(0s, manager);
     };
 
-    Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
-    Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
+    MADGINE_WIDGETS_EXPORT Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
+    MADGINE_WIDGETS_EXPORT Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
 
 }
 }

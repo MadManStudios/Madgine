@@ -37,7 +37,7 @@ namespace Widgets {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, TempWidgetSender &&sender, Rec &&rec)
         {
-            return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mDesc), std::move(sender.mBehavior) };
+            return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mDesc), std::move(sender.mPos), std::move(sender.mSize), std::move(sender.mBehavior) };
         }
 
         static constexpr size_t debug_start_increment = 1;
@@ -45,16 +45,20 @@ namespace Widgets {
         static constexpr size_t debug_stop_increment = 1;
 
         WidgetLoader::Handle mDesc;
+        Matrix3 mPos;
+        Matrix3 mSize;
         Behavior mBehavior;
     };
 
-    Behavior tempWidget(WidgetLoader::Handle desc, Behavior behavior)
+    Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior behavior)
     {
-        return TempWidgetSender { {}, WidgetLoader::Handle { desc }, std::move(behavior) } | Resources::with_handle(WidgetLoader::Handle { desc });
+        return TempWidgetSender { {}, WidgetLoader::Handle { desc }, pos, size, std::move(behavior) } | Resources::with_handle(WidgetLoader::Handle { desc });
     }
 
-    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Behavior behavior)
+    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior behavior)
         : mDesc(std::move(desc))
+        , mPos(std::move(pos))
+        , mSize(std::move(size))
         , mState(Execution::connect(std::move(behavior), receiver { *this, *this }))
     {
     }
@@ -74,6 +78,8 @@ namespace Widgets {
 
         assert(!mWidget);
         mWidget = mDesc->create(*mgr);
+        mWidget->setPos(mPos);
+        mWidget->setSize(mSize);
         mgr->openOverlay(mWidget.get());
         mState.start();
     }
@@ -116,4 +122,4 @@ namespace Widgets {
 }
 }
 
-NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::InputParameter<"Class", Engine::Widgets::WidgetLoader::Handle>, Engine::SubBehavior)
+NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::InputParameter<"Class", Engine::Widgets::WidgetLoader::Handle>, Engine::InputParameter<"Position", Engine::Matrix3>, Engine::InputParameter<"Size", Engine::Matrix3>, Engine::SubBehavior)

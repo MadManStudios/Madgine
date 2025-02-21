@@ -97,7 +97,7 @@ namespace Widgets {
 
         for (WidgetBase *child : children()) {
 
-            Geometry geometry = child->calculateGeometry(child->fetchActiveConditions());
+            Geometry geometry = child->getGeometry();
 
             Matrix3 matrixPos = geometry.mPos.Transpose();
             Matrix3 matrixSize = geometry.mSize.Transpose();

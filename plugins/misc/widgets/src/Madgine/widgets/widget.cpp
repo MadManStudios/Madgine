@@ -117,10 +117,15 @@ namespace Widgets {
 
     void WidgetBase::applyGeometry(const Vector3 &parentSize, const Vector2 &parentPos)
     {
-        Geometry geometry = calculateGeometry(fetchActiveConditions());
+        Geometry geometry = getGeometry();
 
         setAbsolutePosition((geometry.mPos * parentSize).xy() + parentPos);
         setAbsoluteSize(geometry.mSize * parentSize);
+    }
+
+    Geometry WidgetBase::getGeometry()
+    {
+        return calculateGeometry(fetchActiveConditions());
     }
 
     void WidgetBase::updateChildrenGeometry()

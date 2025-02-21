@@ -12,10 +12,12 @@
 
 METATABLE_BEGIN_BASE(Engine::Widgets::Image, Engine::Widgets::WidgetBase)
 NAMED_MEMBER(Image, mImageRenderData)
+MEMBER(mColor)
 METATABLE_END(Engine::Widgets::Image)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::Image, Engine::Widgets::WidgetBase)
 FIELD(mImageRenderData)
+FIELD(mColor)
 SERIALIZETABLE_END(Engine::Widgets::Image)
 
 namespace Engine {
@@ -30,7 +32,7 @@ namespace Widgets {
         Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
         Vector3 size = getAbsoluteSize();
 
-        mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
+        mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, mColor);
     }
 
     std::string Image::getClass() const

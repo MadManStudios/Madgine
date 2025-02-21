@@ -67,8 +67,7 @@ namespace Widgets {
 
         void applyGeometry();
         void applyGeometry(const Vector3 &parentSize, const Vector2 &parentPos = Vector2::ZERO);
-        virtual void updateChildrenGeometry();
-        Geometry calculateGeometry(uint16_t activeConditions, GeometrySourceInfo *source = nullptr);
+        Geometry getGeometry();
 
         template <typename WidgetType = WidgetBase>
         WidgetType* createChild() {
@@ -143,6 +142,8 @@ namespace Widgets {
 
         uint16_t fetchActiveConditions(std::vector<Condition *> *conditions = nullptr);
 
+        Geometry calculateGeometry(uint16_t activeConditions, GeometrySourceInfo *source = nullptr);
+        
         void addConditional(uint16_t mask);
         PropertyRange conditionals();
 
@@ -175,6 +176,8 @@ namespace Widgets {
         uint16_t fetchActiveConditionsImpl(std::vector<Condition *> &conditions);
 
         bool evalCondition(Condition &cond);
+
+        virtual void updateChildrenGeometry();
 
     protected:
         void destroyChild(WidgetBase *w);

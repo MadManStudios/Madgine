@@ -23,8 +23,10 @@ namespace Widgets {
         : Widget(mgr, parent)
     {
         std::unique_ptr<Label> label = std::make_unique<Label>(mgr, this);
-        label->mTextRenderData.setFontName("OpenSans-Regular");
-        label->mText = "Hello World!";
+        label->mTextRenderData.setFontName("OpenSans-Bold");
+        label->mText = "-15";
+        label->mTextRenderData.mFontSize = 20;
+        label->mTextRenderData.mColor = { 1.0f, 0.0f, 0.0f, 1.0f };
         mTemplateWidgets.push_back(std::move(label));
     }
 

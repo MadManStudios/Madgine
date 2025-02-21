@@ -7,11 +7,11 @@
 namespace Engine {
 namespace Widgets {
 
-    Behavior tempWidget(WidgetLoader::Handle desc, Behavior behavior);
+    MADGINE_WIDGETS_EXPORT Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior behavior);
 
     struct TempWidgetState : BehaviorReceiver {
 
-        TempWidgetState(WidgetLoader::Handle desc, Behavior behavior);
+        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior behavior);
         ~TempWidgetState();
 
         void start();
@@ -42,6 +42,8 @@ namespace Widgets {
         state mState;
 
         std::unique_ptr<WidgetBase> mWidget;
+        Matrix3 mPos;
+        Matrix3 mSize;
     };
 
 }

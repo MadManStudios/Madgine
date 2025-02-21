@@ -63,6 +63,8 @@
                 <Class serId=13>
                     <Name>test</Name>
                 </Class>
+                <Position>[0, 0, 0, 0, 0, 0, 0, 0, 0]</Position>
+                <Size>[1, 0, 0, 0, 1, 0, 0, 0, 1]</Size>
             </mParameters>
             <mFlowOutPins>
                 <Item>
@@ -219,8 +221,8 @@
         </Node>
         <Node type="Native/Animate_Move" serId=38>
             <mParameters>
-                <Distance>[0, 1.03696e-43, 0, 1.03696e-43, -0.2, 1.03696e-43, 0, 8.18358e-43, 0]</Distance>
-                <Duration>3000000000ns</Duration>
+                <Distance>[0, 1.03696e-43, 0, 1.03696e-43, -0.1, 1.03696e-43, 0, 8.18358e-43, 0]</Distance>
+                <Duration>1500000000ns</Duration>
             </mParameters>
             <mFlowOutPins>
                 <Item>
@@ -260,7 +262,7 @@
     </mDataInPins>
     <mDataOutPins>
     </mDataOutPins>
-    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":203,"y":-183}},"node:180000":{"location":{"x":588,"y":-57}},"node:2147483645":{"location":{"x":1414,"y":-192}},"node:2147483646":{"location":{"x":737,"y":-192}},"node:240000":{"location":{"x":396,"y":-89}},"node:300000":{"location":{"x":28,"y":-61}},"node:360000":{"location":{"x":860,"y":11}},"node:420000":{"location":{"x":1084,"y":-9}},"node:480000":{"location":{"x":1084,"y":103}},"node:60000":{"location":{"x":27,"y":-141}}},"selection":["node:420000"],"view":{"scroll":{"x":737.888916015625,"y":-191.330596923828125},"visible_rect":{"max":{"x":1438.888916015625,"y":364.669403076171875},"min":{"x":737.888916015625,"y":-191.330596923828125}},"zoom":1}}</mLayoutData>
+    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":395,"y":-303}},"node:180000":{"location":{"x":568,"y":-302}},"node:2147483645":{"location":{"x":940,"y":-471}},"node:2147483646":{"location":{"x":263,"y":-471}},"node:240000":{"location":{"x":394,"y":-204}},"node:300000":{"location":{"x":235,"y":-185}},"node:360000":{"location":{"x":588,"y":-205}},"node:420000":{"location":{"x":812,"y":-243}},"node:480000":{"location":{"x":812,"y":-130}},"node:60000":{"location":{"x":235,"y":-265}}},"selection":null,"view":{"scroll":{"x":263.888885498046875,"y":-470.6636962890625},"visible_rect":{"max":{"x":964.888916015625,"y":85.3363037109375},"min":{"x":263.888885498046875,"y":-470.6636962890625}},"zoom":1}}</mLayoutData>
     <mInputBindings>
         <Item serId=43>
             <mDescriptor serId=44>
