@@ -525,10 +525,12 @@ namespace Window {
 
     void MainWindow::onActivate(bool active)
     {
-        if (active) {
-            startLifetime();
-        } else {
-            endLifetime();
+        if (state().is_ready()) {
+            if (active) {
+                startLifetime();
+            } else {
+                endLifetime();
+            }
         }
         for (MainWindowListener *listener : mListeners)
             listener->onActivate(active);
