@@ -28,7 +28,7 @@ namespace Render {
 
     Threading::ImmediateTask<RenderFuture> ShadowSceneRenderData::render(RenderContext *context)
     {
-        co_await mScene.scene()->mutex().locked(AccessMode::READ, [this, context]() {
+        co_await mScene.scene()->mutex().locked(AccessMode::READ, [this]() {
             //TODO Culling
 
             for (auto &[key, transforms] : mInstances)
