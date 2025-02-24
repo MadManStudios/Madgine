@@ -107,8 +107,8 @@ namespace Tools {
             file.include(1, fixInclude(reg->named_type_info()->mHeaderPath, bin));
 
             for (UniqueComponent::CollectorInfoBase *collector : *reg) {
-                for (const std::vector<const TypeInfo *> &typeInfos : collector->mElementInfos) {
-                    const TypeInfo *ti = typeInfos.front();
+                for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo*> &typeInfos : collector->mElementInfos) {
+                    const TypeInfo *ti = typeInfos.first.front();
                     if (ti != &typeInfo<PluginManager> && ti != &typeInfo<PluginExporter>) {
                         file.beginCondition("BUILD_"s + collector->mBinary->mName);
                         file.include(1, fixInclude(ti->mHeaderPath, collector->mBinary));
@@ -134,11 +134,11 @@ std::vector<)"
 
             for (UniqueComponent::CollectorInfoBase *collector : *reg) {
                 file.beginCondition("BUILD_"s + collector->mBinary->mName);
-                for (const std::vector<const TypeInfo *> &typeInfos : collector->mElementInfos) {
-                    const TypeInfo *ti = typeInfos.front();
+                for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo*> &typeInfos : collector->mElementInfos) {
+                    const TypeInfo *ti = typeInfos.first.front();
                     if (ti != &typeInfo<PluginManager> && ti != &typeInfo<PluginExporter>)
-                        file << "		type_holder<"
-                             << ti->mFullName << ">,\n";
+                        file << "		{ type_holder<"
+                             << ti->mFullName << ">, type_holder<" << typeInfos.second->mFullName << "> },\n";
                 }
                 file.endCondition("BUILD_"s + collector->mBinary->mName);
             }
@@ -159,9 +159,9 @@ std::vector<)"
                      << collector->mBaseInfo->mTypeName << "_"
                      << collector->mBinary->mName << " = ACC;\n";
                 size_t i = 0;
-                for (const std::vector<const TypeInfo *> &typeInfos : collector->mElementInfos) {
-                    if (typeInfos.front() != &typeInfo<PluginManager> && typeInfos.front() != &typeInfo<PluginExporter>) {
-                        for (const TypeInfo *typeInfo : typeInfos) {
+                for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo*> &typeInfos : collector->mElementInfos) {
+                    if (typeInfos.first.front() != &typeInfo<PluginManager> && typeInfos.first.front() != &typeInfo<PluginExporter>) {
+                        for (const TypeInfo *typeInfo : typeInfos.first) {
                             while (typeInfo) {
                                 file << R"(template <>
 size_t UniqueComponent::component_index<)"
@@ -197,8 +197,8 @@ const std::map<std::string_view, IndexType<uint32_t>> &)"
                 for (UniqueComponent::CollectorInfoBase *collector : *reg) {
                     file.beginCondition("BUILD_"s + collector->mBinary->mName);
                     size_t i = 0;
-                    for (const std::vector<const TypeInfo *> &typeInfos : collector->mElementInfos) {
-                        const TypeInfo *ti = typeInfos.front();
+                    for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo*> &typeInfos : collector->mElementInfos) {
+                        const TypeInfo *ti = typeInfos.first.front();
                         if (ti != &typeInfo<PluginManager> && ti != &typeInfo<PluginExporter>)
                             file << R"(		{")" << collector->mComponentNames[i] << R"(", CollectorBaseIndex_)"
                                  << collector->mBaseInfo->mTypeName << "_"

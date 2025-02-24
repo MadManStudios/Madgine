@@ -20,7 +20,7 @@ namespace UniqueComponent {
         const TypeInfo *mRegistryInfo;
         const TypeInfo *mBaseInfo;
         const Plugins::BinaryInfo *mBinary;
-        std::vector<std::vector<const TypeInfo *>> mElementInfos;
+        std::vector<std::pair<std::vector<const TypeInfo *>, const TypeInfo*>> mElementInfos;
         IndexType<size_t> mBaseIndex;
         std::vector<std::string_view> mComponentNames;
     };
@@ -99,14 +99,14 @@ namespace UniqueComponent {
                 if constexpr (has_typename_VBase<T>) {
                     elementInfos.push_back(&typeInfo<typename T::VBase>);
                 }
-                mElementInfos.emplace_back(std::move(elementInfos));
+                mElementInfos.emplace_back(std::move(elementInfos), &typeInfo<ActualType>);
                 return mComponents.size() - 1;
             }
 
             void unregisterComponent(size_t i)
             {
                 //mComponents[i] = nullptr; ??
-                mElementInfos[i].clear();
+                mElementInfos[i].first.clear();
             }
 
             std::vector<Annotations> mComponents;

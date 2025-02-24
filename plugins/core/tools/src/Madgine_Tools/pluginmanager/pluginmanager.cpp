@@ -137,8 +137,8 @@ namespace Tools {
                                 for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
                                     for (UniqueComponent::CollectorInfoBase *info : *reg) {
                                         if (info->mBinary == binInfo && ImGui::TreeNode(info->mBaseInfo->mTypeName.data(), "%.*s", static_cast<int>(info->mBaseInfo->mTypeName.size()), info->mBaseInfo->mTypeName.data())) {
-                                            for (const std::vector<const TypeInfo *> &components : info->mElementInfos) {
-                                                ImGui::Text(components.front()->mTypeName);
+                                            for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo*> &components : info->mElementInfos) {
+                                                ImGui::Text(components.first.front()->mTypeName);
                                             }
                                             ImGui::TreePop();
                                         }
