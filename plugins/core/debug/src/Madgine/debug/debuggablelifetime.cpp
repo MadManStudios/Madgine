@@ -83,9 +83,9 @@ namespace Debug {
     {
         if (mParent) {
             if (mParent->mLastChild == this)
-                mParent->mLastChild = mNext;
+                mParent->mLastChild = mPrev;
             if (mParent->mFirstChild == this)
-                mParent->mFirstChild = mPrev;
+                mParent->mFirstChild = mNext;
 
             if (mPrev)
                 mPrev->mNext = mNext;
