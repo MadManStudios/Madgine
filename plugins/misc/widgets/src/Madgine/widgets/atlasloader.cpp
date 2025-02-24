@@ -21,6 +21,12 @@
 
 #include "Generic/areaview.h"
 
+#include "Madgine/resources/resourcemanager.h"
+
+#include "Modules/threading/awaitables/awaitabletimepoint.h"
+
+#include "widgetloader.h"
+
 RESOURCELOADER(Engine::Widgets::AtlasLoader)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::PreprocessedUIAtlas)
@@ -287,6 +293,12 @@ namespace Widgets {
 
     Threading::Task<Resources::BakeResult> AtlasLoader::bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir)
     {
+
+        for (auto &[name, res] : WidgetLoader::getSingleton()) {
+            co_await res.loadData().info()->loadingTask();
+        }
+
+
         std::vector<Filesystem::Path> filesToAdd;
         for (Filesystem::Path path : resourcesToBake) {
             if (path.extension() == ".layout") {

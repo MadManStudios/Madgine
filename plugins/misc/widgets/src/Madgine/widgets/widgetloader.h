@@ -2,6 +2,7 @@
 
 #include "Madgine/resources/resourceloader.h"
 #include "compoundwidget.h"
+#include "Meta/serialize/hierarchy/serializetable_forward.h"
 
 namespace Engine {
 namespace Widgets {
@@ -18,6 +19,7 @@ namespace Widgets {
             : mCtor([](WidgetManager &manager, WidgetBase *parent, const WidgetDescriptor *desc) -> std::unique_ptr<WidgetBase> {
                 return std::make_unique<WidgetType>(manager, parent);
             })
+            , mSerializeTable(&::serializeTable<WidgetType>())
         {
         }
 

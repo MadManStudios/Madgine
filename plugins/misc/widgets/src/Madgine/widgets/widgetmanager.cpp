@@ -91,6 +91,10 @@ namespace Widgets {
         }
 #endif
 
+        for (auto &[name, res] : WidgetLoader::getSingleton()) {
+            co_await res.loadData().info()->loadingTask();
+        }
+
         startLifetime();
 
         co_return true;
