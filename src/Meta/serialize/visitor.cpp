@@ -4,6 +4,8 @@
 
 #include "streams/streamresult.h"
 
+#include "hierarchy/syncableunit.h"
+
 #include "Generic/bytebuffer.h"
 #include "../math/color4.h"
 #include "../math/matrix4.h"
@@ -36,6 +38,11 @@ namespace Serialize {
     {
         FlagsHolder dummy { table };
         return in.readPrimitive<FlagsHolder>(dummy, name);        
+    }
+
+    StreamResult visitSyncableUnit(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    {
+        return SyncableUnitBase::visitStream(table, in, name, visitor);
     }
 
     template META_EXPORT StreamResult visitSkipPrimitive<bool>(FormattedSerializeStream &, const char *);

@@ -5,6 +5,7 @@ namespace Serialize {
 
     struct EnumTag;
     struct FlagsTag;
+    struct DataTag;
 
     using SerializePrimitives = type_pack<
         bool,
@@ -108,7 +109,7 @@ namespace Serialize {
     };
 
     template <>
-    struct PrimitiveHolder<SerializableDataPtr> {
+    struct PrimitiveHolder<DataTag> {
         const SerializeTable *mTable;
     };
 

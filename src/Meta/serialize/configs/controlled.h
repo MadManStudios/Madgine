@@ -51,7 +51,7 @@ namespace Serialize {
                 const SerializeTable *type = nullptr;
                 STREAM_PROPAGATE_ERROR(staticTypeResolve(type, key));
                 assert(type);
-                return visitor.visit(PrimitiveHolder<SerializableDataPtr> { type }, in, "Item", {});                
+                return visitor.visit(PrimitiveHolder<DataTag> { type }, in, "Item", {});                
             }            
         }
 

@@ -301,23 +301,22 @@ namespace Serialize {
         requires(!Reference<F> && !PrimitiveType<TargetCompound>)
     StreamResult scanCompound(FormattedSerializeStream &in, const char *name, F &&callback)
     {
-        using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, SerializableDataPtr>;
-        //const StreamVisitor *genericVisitor;
+        using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, DataTag>;
+        const StreamVisitor *genericVisitor;
         StreamVisitorImpl visitor {
             [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags) -> StreamResult {
                 if (holder.mTable == &serializeTable<TargetCompound>()) {
                     return callback(stream, name);
                 } else {
-                    // if constexpr (std::same_as<BaseType, SyncableUnitBase>) {
-                    //  return SyncableUnitBase::visitStream(holder.mTable, stream, name, *genericVisitor);
-                    throw "TODO";
-                    //} else {
-                    // return SerializableDataPtr::visitStream(holder.mTable, stream, name, *genericVisitor);
-                    // }
+                    if constexpr (std::same_as<BaseType, SyncableUnitBase>) {
+                        return BaseType::visitStream(holder.mTable, stream, name, *genericVisitor);
+                    } else {
+                        return SerializableDataPtr::visitStream(holder.mTable, stream, name, *genericVisitor);
+                    }
                 }
             }
         };
-        //genericVisitor = &visitor;
+        genericVisitor = &visitor;
         return visitStream<Compound>(in, name, visitor);
     }
 
@@ -378,7 +377,7 @@ namespace Serialize {
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
                 return visitor.visit(PrimitiveHolder<SyncableUnitBase> { &serializeTable<T>() }, in, name, tags);
             } else {
-                return visitor.visit(PrimitiveHolder<SerializableDataPtr> { &serializeTable<T>() }, in, name, tags);
+                return visitor.visit(PrimitiveHolder<DataTag> { &serializeTable<T>() }, in, name, tags);
             }
         }
     };

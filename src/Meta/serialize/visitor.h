@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "hierarchy/serializableunitptr.h"
+#include "hierarchy/serializableunitptr.h"
 //#include "hierarchy/syncableunit.h"
 #include "streams/streamresult.h"
 #include "primitivetypes.h"
@@ -13,10 +13,11 @@ namespace Serialize {
 
     META_EXPORT StreamResult visitSkipEnum(const EnumMetaTable *table, FormattedSerializeStream &in, const char *name);
     META_EXPORT StreamResult visitSkipFlags(const EnumMetaTable *table, FormattedSerializeStream &in, const char *name);
+    META_EXPORT StreamResult visitSyncableUnit(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
 
     template <typename...>
     struct StreamVisitorBase {
-        virtual StreamResult visit(PrimitiveHolder<SerializableDataPtr>, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const = 0;
+        virtual StreamResult visit(PrimitiveHolder<DataTag>, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const = 0;
         virtual StreamResult visit(PrimitiveHolder<SyncableUnitBase>, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const = 0;
     };
 
@@ -36,15 +37,14 @@ namespace Serialize {
         {
         }
 
-        StreamResult visit(PrimitiveHolder<SerializableDataPtr> holder, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const override
+        StreamResult visit(PrimitiveHolder<DataTag> holder, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const override
         {
             if constexpr (requires {
                               mF(holder, in, name, tags);
                           }) {
                 return mF(holder, in, name, tags);
             } else {
-                //return SerializableDataPtr::visitStream(holder.mTable, in, name, *this);
-                throw "TODO";
+                return SerializableDataPtr::visitStream(holder.mTable, in, name, *this);                
             }
         }
 
@@ -55,8 +55,7 @@ namespace Serialize {
                           }) {
                 return mF(holder, in, name, tags);
             } else {
-                //return SyncableUnitBase::visitStream(holder.mTable, in, name, *this);
-                throw "TODO";
+                return visitSyncableUnit(holder.mTable, in, name, *this);
             }
         }
 
