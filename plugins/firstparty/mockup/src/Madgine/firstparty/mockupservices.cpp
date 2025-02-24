@@ -161,6 +161,8 @@ namespace FirstParty {
     void MockupServices::leaveMatch()
     {
         mState.leaveMatch();
+        mSyncManager.close();
+        mSyncManager.clearTopLevelItems();
     }
 
     bool MockupServices::isLobbyOwner() const
