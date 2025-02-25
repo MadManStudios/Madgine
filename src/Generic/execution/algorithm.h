@@ -887,7 +887,7 @@ namespace Execution {
         template <typename Rec, size_t... Is, typename... Sender>
         struct state<Rec, std::index_sequence<Is...>, Sender...> : base_state<Rec> {
 
-            using Tuple = std::tuple<typename Sender::template value_types<identity>...>;
+            using Tuple = std::tuple<typename Sender::template value_types<std::tuple>...>;
             using R = typename first_t<Sender...>::result_type;
 
             state(Rec &&rec, Sender &&...senders)
@@ -909,11 +909,11 @@ namespace Execution {
                 mark_complete();
             }
 
-            template <size_t I, typename V>
-            void set_value(V &&value)
+            template <size_t I, typename... V>
+            void set_value(V &&...values)
             {
                 if (mState == OK)
-                    std::get<I>(mValues) = std::forward<V>(value);
+                    std::get<I>(mValues) = { std::forward<V>(values)... };
                 mark_complete();
             }
 
@@ -954,8 +954,8 @@ namespace Execution {
 
             std::tuple<inner_state<Is, Sender, Rec, std::index_sequence<Is...>, Sender...>...> mStates;
             patch_void_t<R> mResult;
-            template <typename V>
-            using helper = std::conditional_t<std::is_reference_v<V>, OutRef<std::remove_reference_t<V>>, V>;
+            template <typename... V>
+            using helper = std::tuple<std::conditional_t<std::is_reference_v<V>, OutRef<std::remove_reference_t<V>>, V>...>;
             std::tuple<typename Sender::template value_types<helper>...> mValues;
             enum State { OK,
                 ERROR,
@@ -969,7 +969,7 @@ namespace Execution {
 
             using result_type = typename first_t<Sender...>::result_type;
             template <template <typename...> typename Tuple>
-            using value_types = Tuple<typename Sender::template value_types<identity>...>;
+            using value_types = Tuple<typename Sender::template value_types<std::tuple>...>;
 
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
