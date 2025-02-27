@@ -31,14 +31,14 @@ namespace Widgets {
         image->mImageRenderData.setImageName("Explosion", &manager());
         image->mName = "Background";
 
-        Label *label = image->createChild<Label>();
+        /* Label *label = image->createChild<Label>();
         label->mName = "Damage";
         label->mTextRenderData.setFontName("OpenSans-Bold");
         label->mText = "-15";
         label->mTextRenderData.mFontSize = 12;
         label->mTextRenderData.mColor = { 1.0f, 0.0f, 0.0f, 1.0f };
         label->setSizeValue(7, 0.02f);
-        label->setSizeValue(8, 0);
+        label->setSizeValue(8, 0);*/
         mTemplateWidgets.push_back(std::move(image));
     }
 

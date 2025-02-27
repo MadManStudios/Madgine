@@ -403,9 +403,11 @@ namespace Widgets {
         size_t oldLayer = renderData.layer();
 
         for (const std::unique_ptr<WidgetBase> &c : mChildren) {
-            renderData.setAlpha(oldAlpha * c->opacity());
-            renderData.setLayer(oldLayer + 1);
-            c->render(renderData);
+            if (c->mVisible) {
+                renderData.setAlpha(oldAlpha * c->opacity());
+                renderData.setLayer(oldLayer + 1);
+                c->render(renderData);
+            }
         }
 
         renderData.setAlpha(oldAlpha);

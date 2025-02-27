@@ -30,7 +30,7 @@ namespace Widgets {
         const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
 
         if (blankEntry) {
-            renderData.renderQuadUV(pos, { mRatio * size.x, size.y }, color, {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
+            renderData.renderQuadUV(pos, { clamp(mRatio, 0.0f, 1.0f) * size.x, size.y }, color, {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
         }
 
         WidgetBase::render(renderData);
