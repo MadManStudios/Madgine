@@ -30,11 +30,11 @@ namespace Widgets {
 
         AreaView<std::string, 2> content();
 
-        virtual std::string getClass() const override;
+        std::string getClass() const override;
 
-        virtual void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
-        virtual void sizeChanged(const Vector3 &pixelSize) override;
+        void sizeChanged(const Vector3 &pixelSize) override;
 
         Execution::SignalStub<IndexType<uint32_t>> &selectedRowChanged();
         IndexType<uint32_t> selectedRow() const;

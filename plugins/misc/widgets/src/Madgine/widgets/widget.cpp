@@ -200,11 +200,6 @@ namespace Widgets {
         mChildren.clear();
     }
 
-    size_t WidgetBase::depth(size_t layer)
-    {
-        return mParent ? mParent->depth(layer) + 1 : 20 * layer;
-    }
-
     WidgetManager &WidgetBase::manager()
     {
         return mManager;
@@ -402,8 +397,19 @@ namespace Widgets {
         return min.x <= point.x && min.y <= point.y && max.x >= point.x && max.y >= point.y;
     }
 
-    void WidgetBase::vertices(WidgetsRenderData &renderData, size_t layer)
+    void WidgetBase::render(WidgetsRenderData &renderData)
     {
+        float oldAlpha = renderData.alpha();
+        size_t oldLayer = renderData.layer();
+
+        for (const std::unique_ptr<WidgetBase> &c : mChildren) {
+            renderData.setAlpha(oldAlpha * c->opacity());
+            renderData.setLayer(oldLayer + 1);
+            c->render(renderData);
+        }
+
+        renderData.setAlpha(oldAlpha);
+        renderData.setLayer(oldLayer);
     }
 
     Debug::DebuggableLifetime<get_binding_d> &WidgetBase::lifetime()

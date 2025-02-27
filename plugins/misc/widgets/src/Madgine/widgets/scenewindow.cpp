@@ -35,15 +35,17 @@ namespace Widgets {
             manager().removeDependency(mSource);
     }
 
-    void SceneWindow::vertices(WidgetsRenderData &renderData, size_t layer)
+    void SceneWindow::render(WidgetsRenderData &renderData)
     {
-        if (!mSource)
-            return;
+        if (mSource) {
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
-        Vector3 size = getAbsoluteSize();
+            Vector2 pos = getAbsolutePosition();
+            Vector3 size = getAbsoluteSize();
 
-        renderData.renderQuad(pos, size.xy(), { 1.0f, 1.0f, 1.0f, 1.0f }, { mSource->texture()->resource() });
+            renderData.renderQuad(pos, size.xy(), { 1.0f, 1.0f, 1.0f, 1.0f }, { mSource->texture()->resource() });
+        }
+
+        WidgetBase::render(renderData);
     }
 
     void SceneWindow::setRenderSource(Render::RenderTarget *source)

@@ -23,9 +23,9 @@ namespace Widgets {
         void setEnabled(bool enabled);
         bool isEnabled() const;
 
-        void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
-        virtual std::string getClass() const override;
+        std::string getClass() const override;
 
         TextRenderData mTextRenderData;
         ScalableImageRenderData mImageRenderData;     

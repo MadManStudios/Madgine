@@ -138,7 +138,7 @@ namespace Widgets {
 
         bool containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend = 0.0f) const;
 
-        virtual void vertices(WidgetsRenderData &renderData, size_t layer = 0);
+        virtual void render(WidgetsRenderData &renderData);
 
         uint16_t fetchActiveConditions(std::vector<Condition *> *conditions = nullptr);
 
@@ -170,8 +170,6 @@ namespace Widgets {
         const char *writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;
 
         virtual void sizeChanged(const Vector3 &pixelSize);
-
-        size_t depth(size_t layer);
 
         uint16_t fetchActiveConditionsImpl(std::vector<Condition *> &conditions);
 

@@ -8,7 +8,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Bar() = default;
 
-        void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
         virtual std::string getClass() const override;
 

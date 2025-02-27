@@ -20,11 +20,9 @@ SERIALIZETABLE_END(Engine::Widgets::Bar)
 namespace Engine {
 namespace Widgets {
 
-    void Bar::vertices(WidgetsRenderData &renderData, size_t layer)
+    void Bar::render(WidgetsRenderData &renderData)
     {
-        
-
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
+        Vector2 pos = getAbsolutePosition();
         Vector3 size = getAbsoluteSize();
 
         Color4 color = mColor;
@@ -35,7 +33,7 @@ namespace Widgets {
             renderData.renderQuadUV(pos, { mRatio * size.x, size.y }, color, {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
         }
 
-        
+        WidgetBase::render(renderData);
     }
 
     std::string Bar::getClass() const

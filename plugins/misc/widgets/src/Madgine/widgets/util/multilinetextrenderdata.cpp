@@ -21,12 +21,12 @@ namespace Widgets {
         return mLines;
     }
 
-    void MultilineTextRenderData::render(WidgetsRenderData &renderData, Vector3 pos, Vector3 size, int cursorIndex) const
+    void MultilineTextRenderData::render(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, int cursorIndex) const
     {
         renderText(renderData, mLines, pos, size.xy(), mFont, size.z * mFontSize, mColor, mPivot, cursorIndex);
     }
 
-    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, Vector3 pos, Vector3 size, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, Color4 color)
+    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, Color4 color)
     {
         renderSelection(renderData, mLines, pos, size.xy(), mFont, size.z * mFontSize, mPivot, entry, selectionStart, selectionEnd, color);
     }
@@ -41,7 +41,7 @@ namespace Widgets {
         return calculateTotalHeight(mLines.size(), mFont, z * mFontSize);
     }
 
-    void MultilineTextRenderData::renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector3 pos, Vector2 size, const Render::Font *font, float fontSize, Color4 color, Vector2 pivot, int cursorIndex)
+    void MultilineTextRenderData::renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Color4 color, Vector2 pivot, int cursorIndex)
     {
         float scale = fontSize / 64.0f;
 
@@ -58,7 +58,7 @@ namespace Widgets {
         }
     }
 
-    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector3 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, Color4 color)
+    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, Color4 color)
     {
         if (selectionStart > selectionEnd)
             std::swap(selectionStart, selectionEnd);
@@ -77,6 +77,8 @@ namespace Widgets {
         const char *textBegin = lines.front().mBegin;
         const char *selectionStartPtr = textBegin + selectionStart;
         const char *selectionEndPtr = textBegin + selectionEnd;
+
+        renderData.setSubLayer(1);
 
         for (const Line &line : lines) {
             float cursorX = (size.x - line.mWidth) * pivot.x;
@@ -112,7 +114,7 @@ namespace Widgets {
             float startY = originY - ref.mBearing.y * scale;
 
             renderData.renderQuadUV(
-                { pos.x + startX, pos.y + startY, pos.z + 0.4f }, { endX - startX, height }, color, {}, entry.mArea, { 2048, 2048 }, entry.mFlipped);
+                { pos.x + startX, pos.y + startY }, { endX - startX, height }, color, {}, entry.mArea, { 2048, 2048 }, entry.mFlipped);
         }
     }
 

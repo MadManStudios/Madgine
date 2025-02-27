@@ -23,16 +23,18 @@ SERIALIZETABLE_END(Engine::Widgets::Image)
 namespace Engine {
 namespace Widgets {
 
-    void Image::vertices(WidgetsRenderData &renderData, size_t layer)
+    void Image::render(WidgetsRenderData &renderData)
     {
         const Atlas2::Entry* entry = manager().lookUpImage(mImageRenderData.image());
         if (!entry)
             return;
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
+        Vector2 pos = getAbsolutePosition();
         Vector3 size = getAbsoluteSize();
 
         mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, mColor);
+
+        WidgetBase::render(renderData);
     }
 
     std::string Image::getClass() const

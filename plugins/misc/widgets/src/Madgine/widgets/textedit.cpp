@@ -114,35 +114,37 @@ namespace Widgets {
         mEditable = b;
     }
 
-    void TextEdit::vertices(WidgetsRenderData &renderData, size_t layer)
+    void TextEdit::render(WidgetsRenderData &renderData)
     {
         const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
-        if (!entry)
-            return;
+        if (entry) {
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
-        Vector3 size = getAbsoluteSize();
+            Vector2 pos = getAbsolutePosition();
+            Vector3 size = getAbsoluteSize();
 
-        mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
+            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
 
-        if (mTextRenderData.available()) {
-            if (mTextRenderData.lines().empty() && !mText.empty())
-                mTextRenderData.updateText(mText, getAbsoluteTextSize());
+            if (mTextRenderData.available()) {
+                if (mTextRenderData.lines().empty() && !mText.empty())
+                    mTextRenderData.updateText(mText, getAbsoluteTextSize());
 
-            Vector3 textPos { pos.xy() + mBorder, pos.z };
-            Vector3 textSize = getAbsoluteTextSize();
-            auto keep = renderData.pushClipRect(textPos.xy(), textSize.xy());
-            Vector3 scrolledPos { textPos.x, textPos.y - mVerticalScroll, pos.z };
+                Vector2 textPos = pos + mBorder;
+                Vector3 textSize = getAbsoluteTextSize();
+                auto keep = renderData.pushClipRect(textPos, textSize.xy());
+                Vector2 scrolledPos { textPos.x, textPos.y - mVerticalScroll };
 
-            mTextRenderData.render(renderData, scrolledPos, textSize, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);
-            if (mState.select_start != mState.select_end) {
-                const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
-                if (blankEntry) {
-                    Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
-                    mTextRenderData.renderSelection(renderData, scrolledPos, textSize, *blankEntry, mState.select_start, mState.select_end, color);
+                mTextRenderData.render(renderData, scrolledPos, textSize, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);
+                if (mState.select_start != mState.select_end) {
+                    const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
+                    if (blankEntry) {
+                        Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
+                        mTextRenderData.renderSelection(renderData, scrolledPos, textSize, *blankEntry, mState.select_start, mState.select_end, color);
+                    }
                 }
             }
         }
+
+        WidgetBase::render(renderData);
     }
 
     void TextEdit::sizeChanged(const Vector3 &pixelSize)

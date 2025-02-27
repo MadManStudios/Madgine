@@ -5,8 +5,8 @@
 
 #include "Meta/math/color4.h"
 
-#include "Meta/math/rect2i.h"
 #include "Meta/math/rect2.h"
+#include "Meta/math/rect2i.h"
 
 namespace Engine {
 namespace Widgets {
@@ -25,14 +25,13 @@ namespace Widgets {
     };
 
     struct WidgetsRenderData {
-        
 
-        void renderQuad(Vector3 pos, Vector2 size, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f }, TextureSettings tex = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false);
-        void renderQuadUV(Vector3 pos, Vector2 size, Color4 color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV = false);
+        void renderQuad(Vector2 pos, Vector2 size, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f }, TextureSettings tex = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false, bool transparentContent = false);
+        void renderQuadUV(Vector2 pos, Vector2 size, Color4 color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV = false, bool transparentContent = false);
 
-        void renderLine(const Line3 &line, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
+        void renderLine(const Line2 &line, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
 
-        const std::map<TextureSettings, WidgetsVertexData> &vertexData() const;
+        const std::map<size_t, std::map<TextureSettings, WidgetsVertexData>> &vertexData() const;
         const std::vector<Vertex> &lineVertices() const;
 
         struct WidgetsRenderDataClipRectKeep {
@@ -43,15 +42,27 @@ namespace Widgets {
         WidgetsRenderDataClipRectKeep pushClipRect(Vector2 pos, Vector2 size);
 
         void setAlpha(float alpha);
+        float alpha() const;
+
+        void setLayer(size_t layer);
+        size_t layer() const;
+
+        void setSubLayer(size_t layer);
+        size_t subLayer() const;
+
+    protected:
+        WidgetsVertexData &vertexData(const TextureSettings &tex, bool transparentContent);
 
     private:
-        std::map<TextureSettings, WidgetsVertexData> mVertexData;
+        std::map<size_t, std::map<TextureSettings, WidgetsVertexData>> mVertexData;
         WidgetsLinesData mLineData;
         Rect2 mClipRect {
             { 0.0f, 0.0f },
             { std::numeric_limits<float>::max(), std::numeric_limits<float>::max() }
         };
         float mAlpha = 1.0f;
+        size_t mLayer = 0;
+        size_t mSubLayer = 0;
     };
 
 }

@@ -49,9 +49,9 @@ namespace Widgets {
         return mImage;
     }
 
-    void ScalableImageRenderData::renderImage(WidgetsRenderData &renderData, Vector3 pos, Vector2 size, const Atlas2::Entry &entry, Color4 color)
+    void ScalableImageRenderData::renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector2 size, const Atlas2::Entry &entry, Color4 color)
     {
-        Vector3 posOuter = pos;
+        Vector2 posOuter = pos;
 
         Vector2 topLeftUV = Vector2 { entry.mArea.mTopLeft + Vector2i { 1, 1 } } / (2048.f /* * mData->mUIAtlasSize*/);
         Vector2 uvSize = Vector2 { entry.mArea.mSize - Vector2i { 2, 2 } } / (2048.f /* * mData->mUIAtlasSize*/);
@@ -87,28 +87,28 @@ namespace Widgets {
         renderData.renderQuad(pos, size, color, {}, topLeftUV, bottomRightUV);
 
         if (mLeftBorder > 0)
-            renderData.renderQuad({ posOuter.x, pos.y, pos.z }, { static_cast<float>(mLeftBorder), size.y }, color, {}, { topLeftUVOuter.x, topLeftUV.y }, { topLeftUV.x, bottomRightUV.y });
+            renderData.renderQuad({ posOuter.x, pos.y }, { static_cast<float>(mLeftBorder), size.y }, color, {}, { topLeftUVOuter.x, topLeftUV.y }, { topLeftUV.x, bottomRightUV.y });
 
         if (mTopBorder > 0)
-            renderData.renderQuad({ pos.x, posOuter.y, pos.z }, { size.x, static_cast<float>(mTopBorder) }, color, {}, { topLeftUV.x, topLeftUVOuter.y }, { bottomRightUV.x, topLeftUV.y });
+            renderData.renderQuad({ pos.x, posOuter.y }, { size.x, static_cast<float>(mTopBorder) }, color, {}, { topLeftUV.x, topLeftUVOuter.y }, { bottomRightUV.x, topLeftUV.y });
 
         if (mRightBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, pos.y, pos.z }, { static_cast<float>(mRightBorder), size.y }, color, {}, { bottomRightUV.x, topLeftUV.y }, { bottomRightUVOuter.x, bottomRightUV.y });
+            renderData.renderQuad({ pos.x + size.x, pos.y }, { static_cast<float>(mRightBorder), size.y }, color, {}, { bottomRightUV.x, topLeftUV.y }, { bottomRightUVOuter.x, bottomRightUV.y });
 
         if (mBottomBorder > 0)
-            renderData.renderQuad({ pos.x, pos.y + size.y, pos.z }, { size.x, static_cast<float>(mBottomBorder) }, color, {}, { topLeftUV.x, bottomRightUV.y }, { bottomRightUV.x, bottomRightUVOuter.y });
+            renderData.renderQuad({ pos.x, pos.y + size.y }, { size.x, static_cast<float>(mBottomBorder) }, color, {}, { topLeftUV.x, bottomRightUV.y }, { bottomRightUV.x, bottomRightUVOuter.y });
 
         if (mLeftBorder > 0 && mTopBorder > 0)
             renderData.renderQuad(posOuter, { static_cast<float>(mLeftBorder), static_cast<float>(mTopBorder) }, color, {}, topLeftUVOuter, topLeftUV);
 
         if (mRightBorder > 0 && mBottomBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, pos.y + size.y, pos.z }, { static_cast<float>(mRightBorder), static_cast<float>(mBottomBorder) }, color, {}, bottomRightUV, bottomRightUVOuter);
+            renderData.renderQuad({ pos.x + size.x, pos.y + size.y }, { static_cast<float>(mRightBorder), static_cast<float>(mBottomBorder) }, color, {}, bottomRightUV, bottomRightUVOuter);
 
         if (mLeftBorder > 0 && mBottomBorder > 0)
-            renderData.renderQuad({ posOuter.x, pos.y + size.y, pos.z }, { static_cast<float>(mLeftBorder), static_cast<float>(mBottomBorder) }, color, {}, { topLeftUVOuter.x, bottomRightUV.y }, { topLeftUV.x, bottomRightUVOuter.y });
+            renderData.renderQuad({ posOuter.x, pos.y + size.y }, { static_cast<float>(mLeftBorder), static_cast<float>(mBottomBorder) }, color, {}, { topLeftUVOuter.x, bottomRightUV.y }, { topLeftUV.x, bottomRightUVOuter.y });
 
         if (mRightBorder > 0 && mTopBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, posOuter.y, pos.z }, { static_cast<float>(mRightBorder), static_cast<float>(mTopBorder) }, color, {}, { bottomRightUV.x, topLeftUVOuter.y }, { bottomRightUVOuter.x, topLeftUV.y });
+            renderData.renderQuad({ pos.x + size.x, posOuter.y }, { static_cast<float>(mRightBorder), static_cast<float>(mTopBorder) }, color, {}, { bottomRightUV.x, topLeftUVOuter.y }, { bottomRightUVOuter.x, topLeftUV.y });
     }
 
 }

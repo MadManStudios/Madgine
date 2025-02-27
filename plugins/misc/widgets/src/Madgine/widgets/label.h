@@ -10,9 +10,9 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Label() = default;
 
-        virtual std::string getClass() const override;
+        std::string getClass() const override;
 
-        void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
         TextRenderData mTextRenderData;
         std::string mText;

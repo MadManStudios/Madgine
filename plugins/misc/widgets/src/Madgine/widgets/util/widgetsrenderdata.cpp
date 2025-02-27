@@ -15,8 +15,8 @@ namespace Widgets {
             std::swap(bottomRightUV.x, bottomRightUV.y);
         }
 
-        //clipping
-        // boundary checks
+        // clipping
+        //  boundary checks
         if (
             pos.x + size.x < clipRect.mTopLeft.x
             || pos.y + size.y < clipRect.mTopLeft.y
@@ -104,25 +104,25 @@ namespace Widgets {
         mLineVertices.push_back({ line.mPointB, color, { 0, 0 } });
     }
 
-    void WidgetsRenderData::renderQuad(Vector3 pos, Vector2 size, Color4 color, TextureSettings tex, Vector2 topLeftUV, Vector2 bottomRightUV, bool flippedUV)
+    void WidgetsRenderData::renderQuad(Vector2 pos, Vector2 size, Color4 color, TextureSettings tex, Vector2 topLeftUV, Vector2 bottomRightUV, bool flippedUV, bool transparentContent)
     {
         color.a *= mAlpha;
-        mVertexData[tex].renderQuad(pos, size, mClipRect, color, topLeftUV, bottomRightUV, flippedUV);
+        vertexData(tex, transparentContent || color.a < 1.0f).renderQuad(Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, topLeftUV, bottomRightUV, flippedUV);
     }
 
-    void WidgetsRenderData::renderQuadUV(Vector3 pos, Vector2 size, Color4 color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV)
+    void WidgetsRenderData::renderQuadUV(Vector2 pos, Vector2 size, Color4 color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV, bool transparentContent)
     {
         color.a *= mAlpha;
-        mVertexData[tex].renderQuadUV(pos, size, mClipRect, color, rect, textureSize, flippedUV);
+        vertexData(tex, transparentContent || color.a < 1.0f).renderQuadUV(Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, rect, textureSize, flippedUV);
     }
 
-    void WidgetsRenderData::renderLine(const Line3 &line, Color4 color)
+    void WidgetsRenderData::renderLine(const Line2 &line, Color4 color)
     {
         color.a *= mAlpha;
-        mLineData.renderLine(line, mClipRect, color);
+        mLineData.renderLine({ Vector3 { line.mPointA, 10.0f * mLayer + mSubLayer }, Vector3 { line.mPointB, 10.0f * mLayer + mSubLayer } }, mClipRect, color);
     }
 
-    const std::map<TextureSettings, WidgetsVertexData> &WidgetsRenderData::vertexData() const
+    const std::map<size_t, std::map<TextureSettings, WidgetsVertexData>> &WidgetsRenderData::vertexData() const
     {
         return mVertexData;
     }
@@ -147,9 +147,40 @@ namespace Widgets {
         return keep;
     }
 
+    WidgetsVertexData &WidgetsRenderData::vertexData(const TextureSettings &tex, bool transparentContent)
+    {
+        return mVertexData[transparentContent ? 10 * mLayer + mSubLayer : 0][tex];
+    }
+
     void WidgetsRenderData::setAlpha(float alpha)
     {
         mAlpha = alpha;
+    }
+
+    float WidgetsRenderData::alpha() const
+    {
+        return mAlpha;
+    }
+
+    void WidgetsRenderData::setLayer(size_t layer)
+    {
+        mLayer = layer;
+        mSubLayer = 0;
+    }
+
+    size_t WidgetsRenderData::layer() const
+    {
+        return mLayer;
+    }
+
+    void WidgetsRenderData::setSubLayer(size_t layer)
+    {
+        mSubLayer = layer;
+    }
+
+    size_t WidgetsRenderData::subLayer() const
+    {
+        return mSubLayer;
     }
 
 }

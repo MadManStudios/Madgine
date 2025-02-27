@@ -9,11 +9,11 @@ namespace Widgets {
 
         virtual ~SceneWindow();
 
-        virtual void vertices(WidgetsRenderData &renderData, size_t layer) override;        
+        void render(WidgetsRenderData &renderData) override;        
 
         void setRenderSource(Render::RenderTarget *source);
 
-        virtual std::string getClass() const override;
+        std::string getClass() const override;
 
     protected:
         void sizeChanged(const Vector3 &pixelSize) override;

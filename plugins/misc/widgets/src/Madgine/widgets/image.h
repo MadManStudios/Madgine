@@ -10,9 +10,9 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Image() = default;
 
-        void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
-        virtual std::string getClass() const override;
+        std::string getClass() const override;
 
         ScalableImageRenderData mImageRenderData;
         Color4 mColor = { 1.0f, 1.0f, 1.0f, 1.0f };

@@ -29,7 +29,7 @@ namespace Widgets {
 
         void setEditable(bool b);
 
-        void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
         virtual void sizeChanged(const Vector3 &pixelSize) override;
 

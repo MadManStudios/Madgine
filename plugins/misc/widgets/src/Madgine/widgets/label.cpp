@@ -23,15 +23,17 @@ namespace Widgets {
         return "Label";
     }
 
-    void Label::vertices(WidgetsRenderData &renderData, size_t layer)
+    void Label::render(WidgetsRenderData &renderData)
     {
-        if (!mTextRenderData.available())
-            return;
+        if (mTextRenderData.available()) {
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
-        Vector3 size = getAbsoluteSize();
+            Vector2 pos = getAbsolutePosition();
+            Vector3 size = getAbsoluteSize();
 
-        mTextRenderData.render(renderData, mText, pos, size);
+            mTextRenderData.render(renderData, mText, pos, size);
+        }
+
+        WidgetBase::render(renderData);
     }
 
 }

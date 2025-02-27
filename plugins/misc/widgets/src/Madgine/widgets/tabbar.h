@@ -17,11 +17,11 @@ namespace Widgets {
 
         Execution::SignalStub<uint32_t> &selectedTabChangedEvent();
 
-        void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
-        virtual std::string getClass() const override;
+        std::string getClass() const override;
 
-        virtual void sizeChanged(const Vector3 &pixelSize) override;
+        void sizeChanged(const Vector3 &pixelSize) override;
 
         uint32_t tabCount() const;
         void setTabCount(uint32_t count);

@@ -521,9 +521,27 @@ namespace Widgets {
         WidgetsRenderData renderData;
         auto keep = renderData.pushClipRect(Vector2::ZERO, Vector2 { mClientSpace.mSize });
 
-        for (auto [w, layer, opacity] : visibleWidgets()) {
-            renderData.setAlpha(opacity);
-            w->vertices(renderData, layer);
+        if (mCurrentRoot) {
+            renderData.setAlpha(mCurrentRoot->opacity());
+            renderData.setLayer(0);
+            mCurrentRoot->render(renderData);
+        }
+
+        int layer = 0;
+        for (Widgets::WidgetBase *w : mModalWidgetList) {
+            if (w->mVisible) {
+                renderData.setAlpha(w->opacity());
+                renderData.setLayer(20 * ++layer);
+                w->render(renderData);
+            }
+        }
+        ++layer;
+        for (Widgets::WidgetBase *w : mOverlays) {
+            if (w->mVisible) {
+                renderData.setAlpha(w->opacity());
+                renderData.setLayer(20 * layer);
+                w->render(renderData);
+            }
         }
 
         {
@@ -532,28 +550,30 @@ namespace Widgets {
             perApp->screenSize = Vector2 { mClientSpace.mSize };
         }
 
-        for (auto &[tex, vertexData] : renderData.vertexData()) {
-            if (vertexData.mTriangleVertices.empty())
-                continue;
+        for (auto &[layer, layerData] : renderData.vertexData()) {
+            for (auto &[tex, vertexData] : layerData) {
+                if (vertexData.mTriangleVertices.empty())
+                    continue;
 
-            {
-                auto parameters = mData->mPipeline->mapParameters<WidgetsPerObject>(2);
-                parameters->hasDistanceField = bool(tex.mFlags & TextureFlag_IsDistanceField);
-                parameters->hasTexture = true;
+                {
+                    auto parameters = mData->mPipeline->mapParameters<WidgetsPerObject>(2);
+                    parameters->hasDistanceField = bool(tex.mFlags & TextureFlag_IsDistanceField);
+                    parameters->hasTexture = true;
+                }
+
+                {
+                    auto vertices = mData->mPipeline->mapVertices<Vertex[]>(target, vertexData.mTriangleVertices.size());
+                    std::ranges::copy(vertexData.mTriangleVertices, vertices.mData);
+                }
+
+                if (tex.mResource)
+                    mData->mPipeline->bindResources(target, 2, tex.mResource);
+                else
+                    mData->mPipeline->bindResources(target, 2, mData->mAtlas.resource());
+
+                mData->mPipeline->setGroupSize(3);
+                mData->mPipeline->render(target);
             }
-
-            {
-                auto vertices = mData->mPipeline->mapVertices<Vertex[]>(target, vertexData.mTriangleVertices.size());
-                std::ranges::copy(vertexData.mTriangleVertices, vertices.mData);
-            }
-
-            if (tex.mResource)
-                mData->mPipeline->bindResources(target, 2, tex.mResource);
-            else
-                mData->mPipeline->bindResources(target, 2, mData->mAtlas.resource());
-
-            mData->mPipeline->setGroupSize(3);
-            mData->mPipeline->render(target);
         }
         if (!renderData.lineVertices().empty()) {
             {
@@ -572,36 +592,6 @@ namespace Widgets {
 
             mData->mPipeline->setGroupSize(2);
             mData->mPipeline->render(target);
-        }
-    }
-
-    Generator<WidgetManager::WidgetRenderInfo> WidgetManager::visibleWidgets()
-    {
-        std::queue<WidgetRenderInfo> q;
-        if (mCurrentRoot)
-            q.emplace(mCurrentRoot, 0, mCurrentRoot->opacity());
-        int layer = 0;
-        for (Widgets::WidgetBase *w : mModalWidgetList) {
-            if (w->mVisible) {
-                q.emplace(w, ++layer, w->opacity());
-            }
-        }
-        ++layer;
-        for (Widgets::WidgetBase *w : mOverlays) {
-            if (w->mVisible) {
-                q.emplace(w, layer, w->opacity());
-            }
-        }
-        while (!q.empty()) {
-            auto [w, l, o] = q.front();
-            q.pop();
-
-            for (Widgets::WidgetBase *c : w->children()) {
-                if (c->mVisible)
-                    q.emplace(c, l, c->opacity() * o);
-            }
-
-            co_yield { w, l, o };
         }
     }
 

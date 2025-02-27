@@ -70,27 +70,29 @@ namespace Widgets {
     {
     }
 
-    void Textbox::vertices(WidgetsRenderData &renderData, size_t layer)
+    void Textbox::render(WidgetsRenderData &renderData)
     {
         const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
-        if (!entry)
-            return;
+        if (entry) {
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
-        Vector3 size = getAbsoluteSize();
+            Vector2 pos = getAbsolutePosition();
+            Vector3 size = getAbsoluteSize();
 
-        mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
+            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
 
-        if (mTextRenderData.available()) {
-            mTextRenderData.render(renderData, mText, pos, size, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);
-            if (mState.select_start != mState.select_end) {
-                const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
-                if (blankEntry) {
-                    Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
-                    mTextRenderData.renderSelection(renderData, mText, pos, size, *blankEntry, mState.select_start, mState.select_end, color);
+            if (mTextRenderData.available()) {
+                mTextRenderData.render(renderData, mText, pos, size, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);
+                if (mState.select_start != mState.select_end) {
+                    const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
+                    if (blankEntry) {
+                        Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
+                        mTextRenderData.renderSelection(renderData, mText, pos, size, *blankEntry, mState.select_start, mState.select_end, color);
+                    }
                 }
             }
         }
+
+        WidgetBase::render(renderData);
     }
 
     std::string Textbox::getClass() const

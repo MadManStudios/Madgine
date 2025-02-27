@@ -21,14 +21,14 @@ namespace Widgets {
 
         void setEditable(bool b);
 
-        void vertices(WidgetsRenderData &renderData, size_t layer) override;
+        void render(WidgetsRenderData &renderData) override;
 
-        virtual std::string getClass() const override;
+        std::string getClass() const override;
 
-        virtual void injectPointerClick(const Input::PointerEventArgs &arg) override;
-        virtual void injectDragBegin(const Input::PointerEventArgs &arg) override;
-        virtual void injectDragMove(const Input::PointerEventArgs &arg) override;
-        virtual bool injectKeyPress(const Input::KeyEventArgs &arg) override;
+        void injectPointerClick(const Input::PointerEventArgs &arg) override;
+        void injectDragBegin(const Input::PointerEventArgs &arg) override;
+        void injectDragMove(const Input::PointerEventArgs &arg) override;
+        bool injectKeyPress(const Input::KeyEventArgs &arg) override;
 
         void layoutRow(StbTexteditRow *row, size_t i);
         float calculateWidth(size_t i, size_t n);

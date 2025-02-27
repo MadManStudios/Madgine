@@ -35,41 +35,45 @@ namespace Widgets {
         return mSelectedTabChanged;
     }
 
-    void TabBar::vertices(WidgetsRenderData &renderData, size_t layer)
+    void TabBar::render(WidgetsRenderData &renderData)
     {
-        if (!mTextRenderData.available())
-            return;
-        const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
-        if (!entry)
-            return;
+        if (mTextRenderData.available()) {
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
-        Vector3 size = getAbsoluteSize();
+            const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
+            if (entry) {
 
-        for (size_t tabIndex = 0; tabIndex < tabCount(); ++tabIndex) {
+                Vector2 pos = getAbsolutePosition();
+                Vector3 size = getAbsoluteSize();
 
-            auto [xPos, xSize] = mTabBarRenderData.getElementDimensions(tabIndex);
+                for (size_t tabIndex = 0; tabIndex < tabCount(); ++tabIndex) {
 
-            Vector3 tabPos {
-                pos.x + xPos,
-                pos.y,
-                pos.z + 0.4f
-            };
-            Vector3 tabSize {
-                xSize,
-                size.y,
-                size.z
-            };
+                    auto [xPos, xSize] = mTabBarRenderData.getElementDimensions(tabIndex);
 
-            Color4 color = mColorTintRenderData.mNormalColor;
-            if (mHoveredTab == tabIndex)
-                color = mColorTintRenderData.mHighlightedColor;
-            else if (mSelectedTab == tabIndex)
-                color = mColorTintRenderData.mPressedColor;
+                    Vector2 tabPos {
+                        pos.x + xPos,
+                        pos.y
+                    };
+                    Vector3 tabSize {
+                        xSize,
+                        size.y,
+                        size.z
+                    };
 
-            mImageRenderData.renderImage(renderData, tabPos, tabSize.xy(), *entry, color);
-            mTextRenderData.render(renderData, mTabNames[tabIndex], tabPos, tabSize);
+                    Color4 color = mColorTintRenderData.mNormalColor;
+                    if (mHoveredTab == tabIndex)
+                        color = mColorTintRenderData.mHighlightedColor;
+                    else if (mSelectedTab == tabIndex)
+                        color = mColorTintRenderData.mPressedColor;
+
+                    renderData.setSubLayer(0);
+                    mImageRenderData.renderImage(renderData, tabPos, tabSize.xy(), *entry, color);
+                    renderData.setSubLayer(1);
+                    mTextRenderData.render(renderData, mTabNames[tabIndex], tabPos, tabSize);
+                }
+            }
         }
+
+        WidgetBase::render(renderData);
     }
 
     std::string TabBar::getClass() const

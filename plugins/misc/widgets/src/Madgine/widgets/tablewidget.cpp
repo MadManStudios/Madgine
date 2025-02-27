@@ -29,7 +29,7 @@ SERIALIZETABLE_END(Engine::Widgets::TableWidget)
 namespace Engine {
 namespace Widgets {
 
-    TableWidget::TableWidget(WidgetManager &manager, WidgetBase *parent) 
+    TableWidget::TableWidget(WidgetManager &manager, WidgetBase *parent)
         : Widget(manager, parent, { .acceptsPointerEvents = true })
     {
     }
@@ -105,73 +105,74 @@ namespace Widgets {
         return "TableWidget";
     }
 
-    void TableWidget::vertices(WidgetsRenderData &renderData, size_t layer)
+    void TableWidget::render(WidgetsRenderData &renderData)
     {
-        if (!mTextRenderData.available())
-            return;
+        if (mTextRenderData.available()) {
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
-        Vector3 size = getAbsoluteSize();
+            Vector2 pos = getAbsolutePosition();
+            Vector3 size = getAbsoluteSize();            
+            renderData.setSubLayer(1);
 
-        auto keep = renderData.pushClipRect(pos.xy(), size.xy());
+            auto keep = renderData.pushClipRect(pos, size.xy());
 
-        if (mNeedResize)
-            sizeChanged(size);
+            if (mNeedResize)
+                sizeChanged(size);
 
-        float fullWidth = mVerticalLayoutRenderData.fullSize();
-        float fullHeight = mHorizontalLayoutRenderData.fullSize(mRowCount);
+            float fullWidth = mVerticalLayoutRenderData.fullSize();
+            float fullHeight = mHorizontalLayoutRenderData.fullSize(mRowCount);
 
-        const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
+            const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
 
-        AreaView<std::string, 2> view { mCellData.data(), { columnCount(), mRowCount } };
+            AreaView<std::string, 2> view { mCellData.data(), { columnCount(), mRowCount } };
 
-        for (size_t row = 0; row < mRowCount; ++row) {
-            for (size_t col = 0; col < columnCount(); ++col) {
-                auto [cellPos, cellSize] = GridLayoutRenderData::getCellContentDimensions(mHorizontalLayoutRenderData, mVerticalLayoutRenderData, row, col);
+            for (size_t row = 0; row < mRowCount; ++row) {
+                for (size_t col = 0; col < columnCount(); ++col) {
+                    auto [cellPos, cellSize] = GridLayoutRenderData::getCellContentDimensions(mHorizontalLayoutRenderData, mVerticalLayoutRenderData, row, col);
 
-                cellSize.z = size.z;
-                mTextRenderData.render(renderData, view[row][col], pos + cellPos, cellSize);
-            }
-            auto [rowPos, rowSize] = mHorizontalLayoutRenderData.getElementDimensions(row);
+                    cellSize.z = size.z;
+                    mTextRenderData.render(renderData, view[row][col], pos + cellPos, cellSize);
+                }
+                auto [rowPos, rowSize] = mHorizontalLayoutRenderData.getElementDimensions(row);
 
-            if (blankEntry) {
-                Color4 color = mSelectionRenderData.mNormalColor;
+                if (blankEntry) {
+                    Color4 color = mSelectionRenderData.mNormalColor;
 
-                if (mHoveredRow == row) {
-                    color = mSelectionRenderData.mHighlightedColor;
-                } else if (mSelectedRow == row) {
-                    color = mSelectionRenderData.mSelectedColor;
+                    if (mHoveredRow == row) {
+                        color = mSelectionRenderData.mHighlightedColor;
+                    } else if (mSelectedRow == row) {
+                        color = mSelectionRenderData.mSelectedColor;
+                    }
+
+                    renderData.setSubLayer(0);
+                    renderData.renderQuadUV({ pos.x, pos.y + rowPos }, { fullWidth, rowSize }, color, {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
+                    renderData.setSubLayer(1);
                 }
 
-                renderData.renderQuadUV({ pos.x, pos.y + rowPos, pos.z + 0.1f }, { fullWidth, rowSize }, color, {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
+                if (row + 1 < mRowCount) {
+                    float y = rowPos + rowSize;
+                    Line2 line {
+                        { pos.x,
+                            pos.y + y },
+                        { pos.x + fullWidth,
+                            pos.y + y }
+                    };
+                    renderData.renderLine(line);
+                }
             }
 
-            if (row + 1 < mRowCount) {
-                float y = rowPos + rowSize;
-                Line3 line {
-                    { pos.x,
-                        pos.y + y,
-                        pos.z + 0.4f },
-                    { pos.x + fullWidth,
-                        pos.y + y,
-                        pos.z + 0.4f }
+            for (size_t col = 1; col < mColumnConfigs.size(); ++col) {
+                auto [x, _] = mVerticalLayoutRenderData.getElementDimensions(col);
+                Line2 line {
+                    { pos.x + x,
+                        pos.y },
+                    { pos.x + x,
+                        pos.y + fullHeight }
                 };
                 renderData.renderLine(line);
             }
         }
 
-        for (size_t col = 1; col < mColumnConfigs.size(); ++col) {
-            auto [x, _] = mVerticalLayoutRenderData.getElementDimensions(col);
-            Line3 line {
-                { pos.x + x,
-                    pos.y,
-                    pos.z + 0.4f },
-                { pos.x + x,
-                    pos.y + fullHeight,
-                    pos.z + 0.4f }
-            };
-            renderData.renderLine(line);
-        }
+        WidgetBase::render(renderData);
     }
 
     void TableWidget::sizeChanged(const Vector3 &pixelSize)

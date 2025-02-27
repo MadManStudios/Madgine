@@ -52,11 +52,11 @@ namespace Widgets {
         return mEnabled;
     }
 
-    void Button::vertices(WidgetsRenderData &renderData, size_t layer)
+    void Button::render(WidgetsRenderData &renderData)
     {
         const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
 
-        Vector3 pos { getAbsolutePosition(), static_cast<float>(depth(layer)) };
+        Vector2 pos = getAbsolutePosition();
         Vector3 size = getAbsoluteSize();
 
         Color4 color = mEnabled ? (mHovered ? mColorTintRenderData.mHighlightedColor : mColorTintRenderData.mNormalColor)
@@ -69,6 +69,8 @@ namespace Widgets {
         if (mTextRenderData.available()) {
             mTextRenderData.render(renderData, mText, pos, size);
         }
+
+        WidgetBase::render(renderData);
     }
 
     void Button::injectPointerEnter(const Input::PointerEventArgs &arg)
