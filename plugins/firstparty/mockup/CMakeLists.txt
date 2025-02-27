@@ -26,6 +26,7 @@ target_link_plugins(MockupServices FirstParty)
 
 target_link_libraries(MockupServices PRIVATE MockupLib)
 
+get_target_property(exclude MockupServices EXCLUDE_FROM_ALL)
 
 
 set(sources "")
@@ -37,3 +38,5 @@ FolderSources(sources src Madgine)
 add_workspace_executable(MockupServer ${sources})
 
 target_link_libraries(MockupServer PRIVATE MockupLib)
+
+set_target_properties(MockupServer MockupLib PROPERTIES EXCLUDE_FROM_ALL ${exclude})
