@@ -24,14 +24,20 @@ namespace Scene {
         };
 
         struct MADGINE_SCENE_EXPORT EntityComponentBase {
-            using Container = CompactContainer<EntityComponentContainerImpl<std::vector>, EntityComponentRelocateFunctor>;
-        };
-
-        struct MADGINE_SCENE_EXPORT SyncableEntityComponentBase : Serialize::SerializableUnitBase, EntityComponentBase {
             using Container = CompactContainer<std::vector<Placeholder<0>>, EntityComponentRelocateFunctor>;
 
-            SyncableEntityComponentBase();
-            SyncableEntityComponentBase(Entity *entity);
+            EntityComponentBase(Entity *entity);
+
+            Entity *entity() const;
+
+        private:
+            NulledPtr<Entity> mEntity;
+        };
+
+        struct MADGINE_SCENE_EXPORT SyncableEntityComponentBase : EntityComponentBase, Serialize::SerializableUnitBase {
+            using Container = CompactContainer<std::vector<Placeholder<0>>, EntityComponentRelocateFunctor>;
+
+            using EntityComponentBase::EntityComponentBase;
 
             bool isMaster() const;
 
@@ -68,23 +74,9 @@ namespace Scene {
                 writeRequest(offset, &data, 0, 0, std::move(receiver));
             }
 
-
-
-            friend auto &tag_invoke(get_component_t, auto &comp)
-            {
-                return comp;
-            }
-
-            friend auto &tag_invoke(get_entity_ptr_t, auto &comp)
-            {
-                return comp.mEntity;
-            }
-
             template <typename T>
             friend struct Serialize::Syncable;
 
-        private:
-            NulledPtr<Entity> mEntity;
         };
     }
 }

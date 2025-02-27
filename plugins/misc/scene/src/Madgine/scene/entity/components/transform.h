@@ -15,9 +15,8 @@ namespace Scene {
 
             SERIALIZABLEUNIT(Transform)
 
-            using Container = FreeListContainer<EntityComponentContainerImpl<std::deque>, EntityComponentFreeListConfig<Transform>>;
+            using Container = FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Transform>>;
 
-            Transform() = default;
             using EntityComponent<Transform>::EntityComponent;
 
             Transform(Transform &&) = default;

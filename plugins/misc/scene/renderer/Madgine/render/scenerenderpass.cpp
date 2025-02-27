@@ -127,7 +127,7 @@ namespace Render {
             }
 
             for (size_t i = 0; i < perFrame->pointLightCount; ++i) {
-                Scene::Entity::Transform *t = lights.getEntity(i)->getComponent<Scene::Entity::Transform>();
+                Scene::Entity::Transform *t = lights[i].entity()->getComponent<Scene::Entity::Transform>();
                 if (t) {
                     float range = lights[i].mRange;
                     perFrame->pointLights[i].light.position = (v * Vector4 { t->mPosition, 1.0f }).xyz();

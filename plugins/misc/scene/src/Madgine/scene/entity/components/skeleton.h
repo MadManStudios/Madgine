@@ -12,6 +12,8 @@ namespace Scene {
 
         struct MADGINE_SCENE_EXPORT Skeleton : EntityComponent<Skeleton> {
 
+            using EntityComponent<Skeleton>::EntityComponent;
+
             std::string_view getName() const;
             void setName(std::string_view name);
 

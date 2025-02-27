@@ -157,11 +157,11 @@ namespace Physics {
                     mData->mWorld.synchronizeMotionStates();
                 }
 
-                for (const auto &[body, _] : mSceneMgr.entityComponentList<RigidBody>()) {
+                for (auto &body : mSceneMgr.entityComponentList<RigidBody>()) {
                     body.update();
                 }
 
-                for (const auto &[body, _] : mSceneMgr.entityComponentList<SoftBodySkeleton>()) {
+                for (auto &body : mSceneMgr.entityComponentList<SoftBodySkeleton>()) {
                     body.update();
                 }
             });

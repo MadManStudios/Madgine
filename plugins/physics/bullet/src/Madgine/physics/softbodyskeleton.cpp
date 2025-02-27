@@ -72,7 +72,7 @@ namespace Physics {
 
         void remove()
         {
-            if (mSoftBody->getUserIndex()) {                
+            if (mSoftBody->getUserIndex()) {
                 mMgr->world().removeSoftBody(mSoftBody.get());
                 mSoftBody->setUserIndex(0);
             }
@@ -84,7 +84,8 @@ namespace Physics {
         std::unique_ptr<btSoftBody> mSoftBody;
     };
 
-    SoftBodySkeleton::SoftBodySkeleton()
+    SoftBodySkeleton::SoftBodySkeleton(Scene::Entity::Entity *entity)
+        : Scene::Entity::EntityComponent<SoftBodySkeleton>(entity)        
     {
         mData = std::make_unique<Data>();
     }
@@ -95,14 +96,14 @@ namespace Physics {
 
     SoftBodySkeleton &SoftBodySkeleton::operator=(SoftBodySkeleton &&) = default;
 
-    void SoftBodySkeleton::init(Scene::Entity::Entity *entity)
+    void SoftBodySkeleton::init()
     {
-        mData->setup(this, &entity->sceneMgr().getComponent<PhysicsManager>(), entity->addComponent<Scene::Entity::Transform>());
+        mData->setup(this, &entity()->sceneMgr().getComponent<PhysicsManager>(), entity()->addComponent<Scene::Entity::Transform>());
 
         mData->add();
     }
 
-    void SoftBodySkeleton::finalize(Scene::Entity::Entity *entity)
+    void SoftBodySkeleton::finalize()
     {
         mData->remove();
     }

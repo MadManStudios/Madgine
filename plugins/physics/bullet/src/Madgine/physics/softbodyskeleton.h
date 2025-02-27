@@ -11,24 +11,22 @@ class btSoftBody;
 namespace Engine {
 namespace Physics {
 
-    struct MADGINE_BULLET_EXPORT SoftBodySkeleton : Engine::Scene::Entity::EntityComponent<SoftBodySkeleton> {
+    struct MADGINE_BULLET_EXPORT SoftBodySkeleton : Scene::Entity::EntityComponent<SoftBodySkeleton> {
         SERIALIZABLEUNIT(SoftBodySkeleton)
 
-        SoftBodySkeleton();
+        SoftBodySkeleton(Scene::Entity::Entity *entity);
         SoftBodySkeleton(SoftBodySkeleton &&other);
         ~SoftBodySkeleton();
 
         SoftBodySkeleton &operator=(SoftBodySkeleton &&other);
 
-        void init(Scene::Entity::Entity *entity);
-        void finalize(Scene::Entity::Entity *entity);
+        void init();
+        void finalize();
 
         void update();
 
         btSoftBody *get();
         void activate();
-
-        Scene::Entity::Transform *transform();
 
         void attach(RigidBody *rigidbody, size_t index, const Engine::Vector3 &offset = Engine::Vector3::ZERO);
 

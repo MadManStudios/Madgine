@@ -34,7 +34,7 @@ namespace Render {
             for (auto &[key, transforms] : mInstances)
                 transforms.clear();
 
-            for (const auto &[mesh, e] : mScene.scene()->entityComponentList<Scene::Entity::Mesh>().data()) {
+            for (const auto &mesh : mScene.scene()->entityComponentList<Scene::Entity::Mesh>().data()) {
                 if (!mesh.isVisible())
                     continue;
 
@@ -42,11 +42,11 @@ namespace Render {
                 if (!meshData)
                     continue;
 
-                Scene::Entity::Transform *transform = e->getComponent<Scene::Entity::Transform>();
+                Scene::Entity::Transform *transform = mesh.entity()->getComponent<Scene::Entity::Transform>();
                 if (!transform)
                     continue;
 
-                Scene::Entity::Skeleton *skeleton = e->getComponent<Scene::Entity::Skeleton>();
+                Scene::Entity::Skeleton *skeleton = mesh.entity()->getComponent<Scene::Entity::Skeleton>();
                 Engine::Render::GPUPtr<Matrix4[]> bones;
                 if (skeleton)
                     bones = skeleton->mBoneMatrices;

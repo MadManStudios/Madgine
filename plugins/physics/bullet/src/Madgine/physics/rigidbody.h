@@ -14,24 +14,23 @@ namespace Physics {
     struct MADGINE_BULLET_EXPORT RigidBody : Scene::Entity::EntityComponent<RigidBody> {
         SERIALIZABLEUNIT(RigidBody)
 
-        using Container = FreeListContainer<Scene::Entity::EntityComponentContainerImpl<std::deque>, Scene::Entity::EntityComponentFreeListConfig<RigidBody>>;
+        using Container = FreeListContainer<std::deque<Placeholder<0>>, Scene::Entity::EntityComponentFreeListConfig<RigidBody>>;
 
-        RigidBody();
+        RigidBody(Scene::Entity::Entity *entity);
         RigidBody(RigidBody &&other);
         ~RigidBody();
 
         RigidBody &operator=(RigidBody &&other);
 
-        void init(Scene::Entity::Entity *entity);
-        void finalize(Scene::Entity::Entity *entity);
+        void init();
+        void finalize();
 
         void update();
 
         btRigidBody *get();
         const btRigidBody *get() const;
         void activate();
-
-        Scene::Entity::EntityPtr entity();
+        
         Scene::Entity::Transform *transform();
 
         float mass() const;

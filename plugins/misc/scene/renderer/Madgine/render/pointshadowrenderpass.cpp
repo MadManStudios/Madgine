@@ -61,7 +61,7 @@ namespace Render {
 
         //TODO Culling
 
-        Scene::Entity::Entity *entity = lights.getEntity(mIndex);
+        Scene::Entity::Entity *entity = lights[mIndex].entity();
         Scene::Entity::Transform *transform = entity->getComponent<Scene::Entity::Transform>();
         if (!transform)
             return;

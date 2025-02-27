@@ -11,13 +11,15 @@
 
 #include "entitycomponentptr.h"
 
+#include "entitycomponentbase.h"
+
 namespace Engine {
 namespace Scene {
     namespace Entity {
 
         void entityComponentHelperWrite(Serialize::FormattedSerializeStream &out, const EntityComponentHandle<EntityComponentBase> &index, const char *name, const SceneManager *mgr)
         {
-            write(out, mgr->entityComponentList(index.mType).getEntity(index), name);
+            write(out, mgr->entityComponentList(index.mType).get(index)->entity(), name);
         }
 
         Serialize::StreamResult entityComponentHelperRead(Serialize::FormattedSerializeStream &in, EntityComponentHandle<EntityComponentBase> &index, const char *name, SceneManager *mgr)

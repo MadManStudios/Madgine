@@ -11,9 +11,8 @@
 namespace Engine {
 namespace Physics {
 
-    RigidBody::Data::Data(RigidBody *component, Scene::Entity::Entity *entity, Scene::Entity::Transform *transform)
+    RigidBody::Data::Data(RigidBody *component, Scene::Entity::Transform *transform)
         : mRigidBody(btRigidBody::btRigidBodyConstructionInfo { 0.0f, this, nullptr, { 0.0f, 0.0f, 0.0f } })
-        , mEntity(entity)
         , mTransform(transform)
     {
         mRigidBody.setUserPointer(component);

@@ -192,8 +192,9 @@ namespace Scene {
         {
             auto it = mComponents.find(i);
             assert(it != mComponents.physical().end());
-            sceneMgr().entityComponentList(i).erase(*it);
+            EntityComponentHandle<EntityComponentBase> handle = *it;
             mComponents.erase(it);
+            sceneMgr().entityComponentList(i).erase(handle);            
         }
 
         void Entity::clearComponents()
@@ -251,10 +252,10 @@ namespace Scene {
             case AFTER | RESET:
                 throw "TODO";
             case AFTER | EMPLACE:
-                sceneMgr().entityComponentList(it->mHandle.mType).init(*it, this);
+                sceneMgr().entityComponentList(it->mHandle.mType).init(*it);
                 break;
             case BEFORE | ERASE:
-                sceneMgr().entityComponentList(it->mHandle.mType).finalize(*it, this);
+                sceneMgr().entityComponentList(it->mHandle.mType).finalize(*it);
                 break;
             }
         }
