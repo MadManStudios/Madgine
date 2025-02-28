@@ -160,7 +160,7 @@ namespace FirstParty {
     {
         assert(!mCurrentLobby.IsValid());
 
-        LobbyCreated_t result = (co_await steam_sender<LobbyCreated_t>(SteamMatchmaking()->CreateLobby(k_ELobbyTypePublic, 2))).value();
+        LobbyCreated_t result = (co_await steam_sender<LobbyCreated_t>(SteamMatchmaking()->CreateLobby(k_ELobbyTypePublic, 7))).value();
 
         if (result.m_eResult != k_EResultOK) {
             LOG_ERROR("Error creating Steam Lobby: " << result.m_eResult);
