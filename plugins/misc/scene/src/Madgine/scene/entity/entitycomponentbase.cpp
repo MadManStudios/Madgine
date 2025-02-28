@@ -51,7 +51,7 @@ namespace Scene {
             throw 0;
         }
 
-        Serialize::WriteMessage Engine::Scene::Entity::SyncableEntityComponentBase::getSlaveRequestMessageTarget() const
+        Serialize::WriteMessage getSlaveRequestMessageTarget(const EntityComponentBase *unit, Serialize::ParticipantId requester, Serialize::MessageId requestId, Serialize::GenericMessageReceiver receiver)
         {
             throw 0;
         }

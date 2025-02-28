@@ -227,7 +227,8 @@ namespace Serialize {
 
         if (unit->mSynced) {
             if (mSlaveStream) {
-                unit->receiveState(receiver, this);
+                unit->receiveStateImpl(receiver, this);
+                return;
             } else {
                 for (FormattedMessageStream &stream : mMasterStreams | std::views::transform(projectionPairSecond)) {
                     this->sendState(stream, unit);

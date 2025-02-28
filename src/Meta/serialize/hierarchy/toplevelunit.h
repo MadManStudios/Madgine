@@ -1,6 +1,7 @@
 #pragma once
 
 #include "syncableunit.h"
+#include "../syncmanager.h"
 
 namespace Engine {
 namespace Serialize {
@@ -26,8 +27,8 @@ namespace Serialize {
         ParticipantId participantId() const;
 
         void setStaticSlaveId(UnitId slaveId);
-        void receiveStateImpl(Execution::VirtualReceiverBase<bool> &receiver, SyncManager *mgr);
-        ASYNC_STUB(receiveState, receiveStateImpl, Execution::make_simple_virtual_sender<bool>);
+        void receiveStateImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, SyncManager *mgr);
+        ASYNC_STUB(receiveState, receiveStateImpl, Execution::make_simple_virtual_sender<SyncManagerResult>);
         void stateReadDone();
 
         std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> getMasterMessageTargets() const;
@@ -39,7 +40,7 @@ namespace Serialize {
 
         friend struct SyncManager;
 
-        Execution::VirtualReceiverBase<bool> *mReceivingMasterState = nullptr;
+        Execution::VirtualReceiverBase<SyncManagerResult> *mReceivingMasterState = nullptr;
     };
 
     template <typename T>

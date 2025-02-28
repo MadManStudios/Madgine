@@ -191,7 +191,7 @@ namespace Serialize {
                     } else
                         throw "Unsupported";
                 },
-                [](void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) {
+                [](void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) -> StreamResult {
                     Unit *unit = unit_cast<Unit *>(_unit);
                     return apply_map(unit->*P, in, success, CallerHierarchyPtr { hierarchy.append(unit) });
                 },

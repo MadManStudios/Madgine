@@ -230,7 +230,7 @@ namespace Serialize {
                 request.mReceiver.set_value(it);
             } else {
                 if (request.mRequesterTransactionId) {
-                    WriteMessage msg = c.getRequestResponseTarget(request.mRequester, request.mRequesterTransactionId);
+                    WriteMessage msg = getRequestResponseTarget(&c, request.mRequester, request.mRequesterTransactionId);
                     Serialize::write(msg, op, "operation");                    
                 }
                 request.mReceiver.set_error(MessageResult::REJECTED);
@@ -281,7 +281,7 @@ namespace Serialize {
 
             if (!accepted) {
                 if (id) {
-                    auto msg = c.beginRequestResponseMessage(inout, id);
+                    auto msg = beginRequestResponseMessage(&c, inout, id);
                     Serialize::write(msg, op | ABORTED, "operation");
                 }
             } else {
@@ -289,7 +289,7 @@ namespace Serialize {
                     std::ranges::iterator_t<C> it;
                     STREAM_PROPAGATE_ERROR(performOperation(c, op, inout, it, inout.id(), id, hierarchy));
                 } else {
-                    WriteMessage out = c.getSlaveRequestMessageTarget(inout.id(), id);
+                    WriteMessage out = getSlaveRequestMessageTarget(&c, inout.id(), id);
                     Serialize::write(out, op, "operation");
                     out.stream().pipe(inout.stream());
                 }

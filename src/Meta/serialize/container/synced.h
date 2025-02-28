@@ -107,17 +107,19 @@ namespace Serialize {
             }
         }
 
-        friend void tag_invoke(set_parent_t cpo, Synced &synced, SerializableUnitBase *parent)
+        friend auto tag_invoke(set_parent_t cpo, Synced &synced, SerializableUnitBase *parent)
+            requires(tag_invocable<set_parent_t, T &, SerializableUnitBase *>)
         {
-            tag_invoke(cpo, synced.mData, parent);
+            return tag_invoke(cpo, synced.mData, parent);
         }
 
-        friend void tag_invoke(apply_map_t cpo, Synced &synced, FormattedSerializeStream &in, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
+        friend StreamResult tag_invoke(apply_map_t cpo, Synced &synced, FormattedSerializeStream &in, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
         {
-            tag_invoke(cpo, synced.mData, in, success, hierarchy);
+            return tag_invoke(cpo, synced.mData, in, success, hierarchy);
         }
                 
-        friend void tag_invoke(set_synced_t cpo, Synced &synced, bool b, const CallerHierarchyBasePtr &hierarchy)
+        friend auto tag_invoke(set_synced_t cpo, Synced &synced, bool b, const CallerHierarchyBasePtr &hierarchy)
+            requires(tag_invocable<set_parent_t, T &, bool, const CallerHierarchyBasePtr &>)
         {
             tag_invoke(cpo, synced.mData, b, hierarchy);
         }

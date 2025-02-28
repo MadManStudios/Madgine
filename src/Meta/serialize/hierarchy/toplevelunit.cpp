@@ -65,7 +65,7 @@ namespace Serialize {
             setSlaveId(slaveId, mSlaveManager);
     }
 
-    void TopLevelUnitBase::receiveStateImpl(Execution::VirtualReceiverBase<bool> &receiver, SyncManager *mgr)
+    void TopLevelUnitBase::receiveStateImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, SyncManager *mgr)
     {
         if (mStaticSlaveId)
             setSlaveId(mStaticSlaveId, mgr);
@@ -76,7 +76,7 @@ namespace Serialize {
     void TopLevelUnitBase::stateReadDone()
     {
         assert(mReceivingMasterState);
-        Execution::VirtualReceiverBase<bool> *rec = std::exchange(mReceivingMasterState, nullptr);
+        Execution::VirtualReceiverBase<SyncManagerResult> *rec = std::exchange(mReceivingMasterState, nullptr);
         rec->set_value();
     }
 

@@ -21,15 +21,15 @@ namespace Serialize {
     template <typename OffsetPtr>
     struct Syncable : SyncableBase {
 
-        std::vector<WriteMessage> getMasterActionMessageTargets(ParticipantId answerTarget = 0, MessageId answerId = 0,
-            const std::set<ParticipantId> &targets = {}) const
+        friend std::vector<WriteMessage> getMasterActionMessageTargets(const Syncable<OffsetPtr> *syncable, ParticipantId answerTarget = 0, MessageId answerId = 0,
+            const std::set<ParticipantId> &targets = {})
         {
-            return getMasterActionMessageTargets(parent(), answerTarget, answerId, targets);
+            return getMasterActionMessageTargets(OffsetPtr::parent(syncable), answerTarget, answerId, targets);
         }
 
-        WriteMessage getSlaveRequestMessageTarget(ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver = {}) const
+        friend WriteMessage getSlaveRequestMessageTarget(const Syncable<OffsetPtr> *syncable, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver = {})
         {
-            return Serialize::getSlaveRequestMessageTarget(parent(), requester, requestId, std::move(receiver));
+            return getSlaveRequestMessageTarget(OffsetPtr::parent(syncable), requester, requestId, std::move(receiver));
         }
 
         ParticipantId participantId()
@@ -61,14 +61,14 @@ namespace Serialize {
             parent()->writeRequestResponse(static_cast<const typename OffsetPtr::member_type *>(this), answerTarget, answerId, std::forward<Args>(args)...);
         }
 
-        WriteMessage beginRequestResponseMessage(FormattedMessageStream &stream, MessageId id) const
+        friend WriteMessage beginRequestResponseMessage(const Syncable<OffsetPtr> *syncable, FormattedMessageStream &stream, MessageId id)
         {
-            return Serialize::beginRequestResponseMessage(parent(), stream, id);
+            return beginRequestResponseMessage(OffsetPtr::parent(syncable), stream, id);
         }
 
-        WriteMessage getRequestResponseTarget(ParticipantId stream, MessageId id) const
+        friend WriteMessage getRequestResponseTarget(const Syncable<OffsetPtr> *syncable, ParticipantId stream, MessageId id)
         {
-            return getMasterRequestResponseTarget(parent(), stream, id);
+            return getMasterRequestResponseTarget(OffsetPtr::parent(syncable), stream, id);
         }
 
         bool isMaster() const
