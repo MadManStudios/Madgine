@@ -1410,7 +1410,7 @@ namespace Execution {
             using inner_sender_t = typename Sender::template value_types<helper>;
 
             template <template <typename...> typename Tuple>
-            using value_types = typename inner_sender_t::template value_types<Tuple>;
+            using value_types = typename std::remove_reference_t<inner_sender_t>::template value_types<Tuple>;
 
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
