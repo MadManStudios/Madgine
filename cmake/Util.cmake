@@ -85,14 +85,19 @@ else()
 endif()
 
 if (GCC OR CLANG)
-	add_compile_options(-Wno-extra-qualification -Wno-instantiation-after-specialization -Wno-dll-attribute-on-redeclaration -Wno-pragma-pack -Wno-undefined-var-template)	
+	add_compile_options(
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-extra-qualification>
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-instantiation-after-specialization>
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-dll-attribute-on-redeclaration> 
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-pragma-pack> 
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-undefined-var-template>)	
 	if (CLANG AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 15)
-		add_compile_options(-Wno-deprecated-non-prototype)
+		add_compile_options($<$<COMPILE_LANGUAGE:CXX,C>:-Wno-deprecated-non-prototype>)
 	endif ()
 	if (NOT MSVC)
 		add_compile_options(-Wall -fpermissive)
 	else ()
-		add_compile_options(-Wno-microsoft-cast)
+		add_compile_options($<$<COMPILE_LANGUAGE:CXX,C>:-Wno-microsoft-cast>)
 	endif()
 	if (EMSCRIPTEN) #TODO add more
 		set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
