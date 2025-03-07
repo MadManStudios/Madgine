@@ -49,10 +49,15 @@ namespace FirstParty {
         std::map<std::string, std::string> mProperties;
     };
 
-    struct ServerInfo {
+    struct SessionInfo {
         std::vector<PlayerInfo> mPlayers;
+    };
+
+    struct ServerInfo {
+        SessionInfo mSession;
         std::vector<Serialize::ParticipantId> mIds;
     };
+
 
     struct MADGINE_FIRST_PARTY_EXPORT FirstPartyServices : Root::VirtualRootComponentBase<FirstPartyServices> {
 
@@ -82,24 +87,24 @@ namespace FirstParty {
         ///////// MATCHMAKING
 
         using MatchmakingCallback = Closure<Serialize::Format(Serialize::SyncManager &)>;
-        using SessionStartedCallback = Closure<void(std::vector<PlayerInfo>)>;
+        using SessionStartedCallback = Closure<void(SessionInfo)>;
 
         Threading::TaskFuture<std::vector<Lobby>> getLobbyList();
         virtual Threading::Task<std::vector<Lobby>> getLobbyListTask() = 0;
 
-        Threading::TaskFuture<std::optional<Lobby>> createLobby(MatchmakingCallback cb, SessionStartedCallback sessionCb = {}, std::map<std::string, std::string> properties = {});
-        virtual Threading::Task<std::optional<Lobby>> createLobbyTask(MatchmakingCallback cb, SessionStartedCallback sessionCb = {}, std::map<std::string, std::string> properties = {}) = 0;
+        Threading::TaskFuture<std::optional<Lobby>> createLobby(size_t maxPlayerCount, MatchmakingCallback cb, SessionStartedCallback sessionCb = {}, std::map<std::string, std::string> properties = {});
+        virtual Threading::Task<std::optional<Lobby>> createLobbyTask(size_t maxPlayerCount, MatchmakingCallback cb, SessionStartedCallback sessionCb = {}, std::map<std::string, std::string> properties = {}) = 0;
 
         Threading::TaskFuture<std::optional<Lobby>> joinLobby(uint64_t id, MatchmakingCallback cb, SessionStartedCallback sessionCb);
         virtual Threading::Task<std::optional<Lobby>> joinLobbyTask(uint64_t id, MatchmakingCallback cb, SessionStartedCallback sessionCb) = 0;
 
-        Threading::TaskFuture<ServerInfo> startMatch();
-        virtual Threading::Task<ServerInfo> startMatchTask() = 0;
+        Threading::TaskFuture<std::optional<ServerInfo>> startMatch();
+        virtual Threading::Task<std::optional<ServerInfo>> startMatchTask() = 0;
 
         virtual void setLobbyProperty(std::string_view key, std::string_view value) = 0;
 
-        Execution::ValueStub<LobbyInfo> &lobbyInfo();
-        Execution::Value<LobbyInfo> mLobbyInfo;
+        Execution::ValueStub<std::optional<LobbyInfo>> &lobbyInfo();
+        Execution::Value<std::optional<LobbyInfo>> mLobbyInfo;
 
         virtual bool isLobbyOwner() const = 0;
         virtual void leaveLobby() = 0;

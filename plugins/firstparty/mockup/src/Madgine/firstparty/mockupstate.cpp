@@ -22,9 +22,13 @@ FIELD(mName)
 SERIALIZETABLE_END(Engine::FirstParty::PlayerInfo)
 
 SERIALIZETABLE_BEGIN(Engine::FirstParty::ServerInfo)
-FIELD(mPlayers)
+FIELD(mSession)
 FIELD(mIds)
 SERIALIZETABLE_END(Engine::FirstParty::ServerInfo)
+
+SERIALIZETABLE_BEGIN(Engine::FirstParty::SessionInfo)
+FIELD(mPlayers)
+SERIALIZETABLE_END(Engine::FirstParty::SessionInfo)
 
 SERIALIZETABLE_BEGIN(Engine::FirstParty::MockupState)
 SYNCFUNCTION(getLobbyListImpl)
@@ -58,7 +62,7 @@ namespace FirstParty {
         throw 0;
     }
 
-    std::vector<PlayerInfo> MockupState::startMatchImpl(Serialize::SyncFunctionContext context)
+    SessionInfo MockupState::startMatchImpl(Serialize::SyncFunctionContext context)
     {
         throw 0;
     }
@@ -68,7 +72,7 @@ namespace FirstParty {
         throw 0;
     }
 
-    std::optional<Lobby> MockupState::createLobbyImpl(Serialize::SyncFunctionContext context, std::map<std::string, std::string> properties)
+    std::optional<Lobby> MockupState::createLobbyImpl(Serialize::SyncFunctionContext context, size_t maxPlayerCount, std::map<std::string, std::string> properties)
     {
         throw 0;
     }
@@ -103,7 +107,7 @@ namespace FirstParty {
         throw 0;
     }
 
-    void MockupState::sendServerAddressImpl(SocketAddress address, std::vector<PlayerInfo> players)
+    void MockupState::sendServerAddressImpl(SocketAddress address, SessionInfo session)
     {
         throw 0;
     }
@@ -113,7 +117,7 @@ namespace FirstParty {
         co_return (co_await query<&MockupState::getLobbyListImpl>()).value();
     }
 
-    Threading::Task<std::vector<PlayerInfo>> MockupState::startMatch()
+    Threading::Task<SessionInfo> MockupState::startMatch()
     {
         co_return (co_await query<&MockupState::startMatchImpl>()).value();
     }
@@ -123,9 +127,9 @@ namespace FirstParty {
         co_return (co_await query<&MockupState::joinLobbyImpl>(id)).value();
     }
 
-    Threading::Task<std::optional<Lobby>> MockupState::createLobby(std::map<std::string, std::string> properties)
+    Threading::Task<std::optional<Lobby>> MockupState::createLobby(size_t maxPlayerCount, std::map<std::string, std::string> properties)
     {
-        co_return (co_await query<&MockupState::createLobbyImpl>(properties)).value();
+        co_return (co_await query<&MockupState::createLobbyImpl>(maxPlayerCount, properties)).value();
     }
 
     Threading::Task<bool> MockupState::unlockAchievement(std::string_view name)
@@ -158,9 +162,9 @@ namespace FirstParty {
         notify_some<&MockupState::updateLobbyInfoImpl>(targets, std::move(info));
     }
 
-    void MockupState::sendServerAddress(const std::set<Serialize::ParticipantId> &targets, SocketAddress address, std::vector<PlayerInfo> players)
+    void MockupState::sendServerAddress(const std::set<Serialize::ParticipantId> &targets, SocketAddress address, SessionInfo session)
     {
-        notify_some<&MockupState::sendServerAddressImpl>(targets, std::move(address), std::move(players));
+        notify_some<&MockupState::sendServerAddressImpl>(targets, std::move(address), std::move(session));
     }
 
 }

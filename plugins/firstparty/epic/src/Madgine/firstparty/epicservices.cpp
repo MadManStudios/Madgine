@@ -463,7 +463,7 @@ namespace FirstParty {
         throw 0;
     }
 
-    Threading::Task<std::optional<Lobby>> EpicServices::createLobbyTask(MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
+    Threading::Task<std::optional<Lobby>> EpicServices::createLobbyTask(size_t maxPlayerCount, MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
     {
         throw 0;
     }
@@ -473,7 +473,7 @@ namespace FirstParty {
         throw 0;
     }
 
-    Threading::Task<ServerInfo> EpicServices::startMatchTask()
+    Threading::Task<std::optional<ServerInfo>> EpicServices::startMatchTask()
     {
         throw 0;
     }

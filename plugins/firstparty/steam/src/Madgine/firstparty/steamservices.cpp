@@ -156,11 +156,11 @@ namespace FirstParty {
         co_return std::move(lobbies);
     }
 
-    Threading::Task<std::optional<Lobby>> SteamServices::createLobbyTask(MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
+    Threading::Task<std::optional<Lobby>> SteamServices::createLobbyTask(size_t maxPlayerCount, MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
     {
         assert(!mCurrentLobby.IsValid());
 
-        LobbyCreated_t result = (co_await steam_sender<LobbyCreated_t>(SteamMatchmaking()->CreateLobby(k_ELobbyTypePublic, 7))).value();
+        LobbyCreated_t result = (co_await steam_sender<LobbyCreated_t>(SteamMatchmaking()->CreateLobby(k_ELobbyTypePublic, maxPlayerCount))).value();
 
         if (result.m_eResult != k_EResultOK) {
             LOG_ERROR("Error creating Steam Lobby: " << result.m_eResult);
@@ -199,15 +199,16 @@ namespace FirstParty {
         co_return Lobby { result.m_ulSteamIDLobby };
     }
 
-    Threading::Task<ServerInfo> SteamServices::startMatchTask()
+    Threading::Task<std::optional<ServerInfo>> SteamServices::startMatchTask()
     {
-        assert(mCurrentLobby.IsValid());
-        assert(isLobbyOwner());
+        if (!mCurrentLobby.IsValid() || !isLobbyOwner()) {
+            co_return {};
+        }
 
         int playerCount = SteamMatchmaking()->GetNumLobbyMembers(mCurrentLobby);
 
         ServerInfo server;
-        server.mPlayers = getLobbyPlayers();
+        server.mSession.mPlayers = getLobbyPlayers();
         std::vector<CSteamID> players;
         for (int i = 0; i < playerCount; ++i) {
             players.emplace_back(SteamMatchmaking()->GetLobbyMemberByIndex(mCurrentLobby, i));
@@ -219,7 +220,7 @@ namespace FirstParty {
         SteamMatchmaking()->SetLobbyGameServer(mCurrentLobby, 0, 0, SteamUser()->GetSteamID());
 
         if (mSessionStartedCallback)
-            mSessionStartedCallback(server.mPlayers);
+            mSessionStartedCallback(server.mSession);
 
         if (playerCount > 1)
             co_await mSyncManager.playersConnected();
@@ -289,7 +290,7 @@ namespace FirstParty {
 
             Execution::detach(mSyncManager.connect(serverID, format) | Execution::then([this]() {
                 if (mSessionStartedCallback)
-                    mSessionStartedCallback(getLobbyPlayers());
+                    mSessionStartedCallback({ getLobbyPlayers() });
 
                 leaveLobby();
             }));

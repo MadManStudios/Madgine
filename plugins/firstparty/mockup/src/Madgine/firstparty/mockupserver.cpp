@@ -60,12 +60,12 @@ namespace FirstParty {
             return { view.begin(), view.end() };
         }
 
-        std::vector<PlayerInfo> startMatchImpl(Serialize::SyncFunctionContext context) override
+        SessionInfo startMatchImpl(Serialize::SyncFunctionContext context) override
         {
-            std::vector<PlayerInfo> result;
+            SessionInfo result;
 
             auto it = findLobby(context.mCallerId);
-            std::ranges::transform(it->second.mMembers, std::back_inserter(result), [](Serialize::ParticipantId id) { return PlayerInfo { std::to_string(id) }; });
+            std::ranges::transform(it->second.mMembers, std::back_inserter(result.mPlayers), [](Serialize::ParticipantId id) { return PlayerInfo { std::to_string(id) }; });
             
             it->second.mMembers.erase(context.mCallerId);
             sendServerAddress(it->second.mMembers, mNetwork.getAddress(context.mCallerId), result);
@@ -83,7 +83,7 @@ namespace FirstParty {
             return toLobby(*it);
         }
 
-        std::optional<Lobby> createLobbyImpl(Serialize::SyncFunctionContext context, std::map<std::string, std::string> properties) override
+        std::optional<Lobby> createLobbyImpl(Serialize::SyncFunctionContext context, size_t maxPlayerCount, std::map<std::string, std::string> properties) override
         {
             auto pib = mLobbies.try_emplace(mRunningId++, context.mCallerId, std::move(properties));
             assert(pib.second);

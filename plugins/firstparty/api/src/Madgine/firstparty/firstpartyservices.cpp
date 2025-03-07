@@ -45,9 +45,9 @@ namespace FirstParty {
         return mRoot.taskQueue()->queueTask(getLobbyListTask());
     }
 
-    Threading::TaskFuture<std::optional<Lobby>> FirstPartyServices::createLobby(MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
+    Threading::TaskFuture<std::optional<Lobby>> FirstPartyServices::createLobby(size_t maxPlayerCount, MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
     {
-        return mRoot.taskQueue()->queueTask(createLobbyTask(std::move(cb), std::move(sessionCb), std::move(properties)));
+        return mRoot.taskQueue()->queueTask(createLobbyTask(maxPlayerCount, std::move(cb), std::move(sessionCb), std::move(properties)));
     }
 
     Threading::TaskFuture<std::optional<Lobby>> FirstPartyServices::joinLobby(uint64_t id, MatchmakingCallback cb, SessionStartedCallback sessionCb)
@@ -55,12 +55,12 @@ namespace FirstParty {
         return mRoot.taskQueue()->queueTask(joinLobbyTask(id, std::move(cb), std::move(sessionCb)));
     }
 
-    Threading::TaskFuture<ServerInfo> FirstPartyServices::startMatch()
+    Threading::TaskFuture<std::optional<ServerInfo>> FirstPartyServices::startMatch()
     {
         return mRoot.taskQueue()->queueTask(startMatchTask());
     }
 
-    Execution::ValueStub<LobbyInfo> &FirstPartyServices::lobbyInfo()
+    Execution::ValueStub<std::optional<LobbyInfo>> &FirstPartyServices::lobbyInfo()
     {
         return mLobbyInfo;
     }

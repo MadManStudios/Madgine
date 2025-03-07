@@ -44,9 +44,9 @@ namespace FirstParty {
         mServices.updateLobbyInfo(std::move(info));
     }
 
-    void MockupClientState::sendServerAddressImpl(SocketAddress address, std::vector<PlayerInfo> players)
+    void MockupClientState::sendServerAddressImpl(SocketAddress address, SessionInfo session)
     {
-        mServices.connectToServer(std::move(address), std::move(players));
+        mServices.connectToServer(std::move(address), std::move(session));
     }
 
     MockupServices::MockupServices(Root::Root &root)
@@ -101,9 +101,9 @@ namespace FirstParty {
         co_return co_await mState.getLobbyList();
     }
 
-    Threading::Task<std::optional<Lobby>> MockupServices::createLobbyTask(MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
+    Threading::Task<std::optional<Lobby>> MockupServices::createLobbyTask(size_t maxPlayerCount, MatchmakingCallback cb, SessionStartedCallback sessionCb, std::map<std::string, std::string> properties)
     {
-        std::optional<Lobby> lobby = co_await mState.createLobby(properties);
+        std::optional<Lobby> lobby = co_await mState.createLobby(maxPlayerCount, properties);
 
         if (lobby) {
             mCurrentMatchmakingCallback = std::move(cb);
@@ -125,17 +125,17 @@ namespace FirstParty {
         co_return lobby;
     }
 
-    Threading::Task<ServerInfo> MockupServices::startMatchTask()
+    Threading::Task<std::optional<ServerInfo>> MockupServices::startMatchTask()
     {
         Serialize::Format format = mCurrentMatchmakingCallback(mSyncManager);
         mSyncManager.startServer(12348);
 
-        std::vector<PlayerInfo> players = co_await mState.startMatch();
+        SessionInfo session = co_await mState.startMatch();
 
         if (mSessionStartedCallback)
-            mSessionStartedCallback(players);
+            mSessionStartedCallback(session);
 
-        size_t playerCount = players.size();
+        size_t playerCount = session.mPlayers.size();
 
         while (mSyncManager.clientCount() < playerCount - 1) {
             mSyncManager.acceptConnections(format, playerCount - 1 - mSyncManager.clientCount());
@@ -147,10 +147,8 @@ namespace FirstParty {
         std::set<Serialize::ParticipantId> clients = mSyncManager.clients();
         clients.insert(Serialize::sLocalMasterParticipantId);
 
-        co_return {
-            players,
-            { clients.begin(), clients.end() }
-        };
+        co_return { { session.mPlayers,
+            { clients.begin(), clients.end() } } };
     }
 
     void MockupServices::leaveLobby()
@@ -180,13 +178,13 @@ namespace FirstParty {
         mLobbyInfo.set(std::move(info));
     }
 
-    void MockupServices::connectToServer(SocketAddress address, std::vector<PlayerInfo> players)
+    void MockupServices::connectToServer(SocketAddress address, SessionInfo session)
     {
         Serialize::Format format = mCurrentMatchmakingCallback(mSyncManager);
 
-        Execution::detach(mSyncManager.connect(address, 12348, format) | Execution::then([this, players { std::move(players) }]() mutable {
+        Execution::detach(mSyncManager.connect(address, 12348, format) | Execution::then([this, session { std::move(session) }]() mutable {
             if (mSessionStartedCallback)
-                mSessionStartedCallback(std::move(players));
+                mSessionStartedCallback(std::move(session));
 
             leaveLobby();
         }));
