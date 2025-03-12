@@ -115,7 +115,7 @@ namespace Execution {
 
             friend std::stop_token tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)
             {
-                return rec.mState->mReceiver.mStopSource.get_token();
+                return rec.mState->mReceiver.mStopToken;
             }
 
             template <typename CPO, typename... Args>
@@ -150,6 +150,7 @@ namespace Execution {
 
             LifetimeReceiver(Lifetime &lifetime)
                 : mLifetime(lifetime)
+                , mStopToken(mStopSource.get_token())
             {
             }
 
@@ -168,6 +169,7 @@ namespace Execution {
 
             std::atomic<uint32_t> mCount = 1;
             std::stop_source mStopSource;
+            std::stop_token mStopToken;
             Lifetime &mLifetime;
         };
 
