@@ -47,9 +47,11 @@ namespace Render {
 
             std::vector<Threading::TaskFuture<bool>> futures;
 
-            TextureLoader::Handle &diffuseTexture = data.mTextureCache.emplace_back();
-            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));
-            TextureLoader::Handle &emissiveTexture = data.mTextureCache.emplace_back();
+            data.mTextureCache.emplace_back();
+            data.mTextureCache.emplace_back();
+            TextureLoader::Handle &diffuseTexture = data.mTextureCache[data.mTextureCache.size() - 2];
+            TextureLoader::Handle &emissiveTexture = data.mTextureCache[data.mTextureCache.size() - 1];
+            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));            
             futures.push_back(emissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
 
             for (Threading::TaskFuture<bool> &fut : futures) {

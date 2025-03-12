@@ -95,14 +95,18 @@ namespace Render {
             };
 
             Matrix4 v = rotationMatrices[iteration] * TranslationMatrix(-transform->mPosition);
+            
+            {
+                auto instanceData = mPipeline->mapTempBuffer<PointShadowInstanceData[]>(1, instance.second.size());
 
-            std::ranges::transform(instance.second, std::back_inserter(instanceData), [&](const ShadowSceneRenderData::ObjectData &o) {
-                Matrix4 mv = v * o.mTransform;
-                return PointShadowInstanceData {
-                    mv.Transpose(),                    
-                    o.mBones
-                };
-            });
+                std::ranges::transform(instance.second, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData &o) {
+                    Matrix4 mv = v * o.mTransform;
+                    return PointShadowInstanceData {
+                        mv.Transpose(),
+                        o.mBones
+                    };
+                });
+            }
 
             mPipeline->bindMesh(target, meshData);
             mPipeline->renderInstanced(target, instance.second.size());
