@@ -477,48 +477,49 @@ namespace Tools {
                     create();
                 }
                 if (ImGui::MenuItem("Open Graph")) {
-                    Execution::detach(mRoot.dialog(
-                                          [](std::string &selection) {
-                                              bool alreadyClicked = false;
+                    mRoot.dialogs().show(
+                        []() -> Dialog<std::string> {
+                            std::string selection;
+                            bool alreadyClicked = false;
 
-                                              ImGui::BeginChild("GraphList", { 0.0f, -ImGui::GetFrameHeightWithSpacing() });
+                            DialogSettings settings { .acceptText = "Open" };
 
-                                              for (const std::pair<std::string_view, ScopePtr> &res : NodeGraph::NodeGraphLoader::getSingleton().typedResources()) {
+                            do {
+                                ImGui::BeginChild("GraphList", { 0.0f, -ImGui::GetFrameHeightWithSpacing() });
 
-                                                  bool selected = selection == res.first;
+                                for (const std::pair<std::string_view, ScopePtr> &res : NodeGraph::NodeGraphLoader::getSingleton().typedResources()) {
 
-                                                  if (ImGui::Selectable(res.first.data(), selected)) {
-                                                      selection = res.first;
-                                                  }
+                                    bool selected = selection == res.first;
 
-                                                  if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)) {
-                                                      selection = res.first;
-                                                      alreadyClicked = true;
-                                                  }
-                                              }
+                                    if (ImGui::Selectable(res.first.data(), selected)) {
+                                        selection = res.first;
+                                    }
 
-                                              ImGui::EndChild();
+                                    if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)) {
+                                        selection = res.first;
+                                        alreadyClicked = true;
+                                    }
+                                }
 
-                                              return DialogFlags { .acceptPossible = !selection.empty(), .implicitlyAccepted = alreadyClicked };
-                                          },
-                                          std::make_tuple(""s),
-                                          { .acceptText = "Open" })
-                        | Execution::then(
-                            [this](DialogResult result, const std::string &selection) {
-                                if (result == DialogResult::Accepted)
-                                    load(selection);
-                            }));
+                                ImGui::EndChild();
+
+                                settings.acceptPossible = !selection.empty();
+                            } while (!alreadyClicked && (co_yield settings));
+
+                            co_return selection;
+                        }(),
+                        [this](const std::string &selection) {
+                            load(selection);
+                        });
                 }
                 if (ImGui::MenuItem("Save Graph", "", false)) {
                     if (mFilePath.empty()) {
-                        Execution::detach(mRoot.filePicker(true)
-                            | Execution::then(
-                                [this](DialogResult result, const Filesystem::Path &path) {
-                                    if (result == DialogResult::Accepted) {
-                                        mFilePath = path;
-                                        save();
-                                    }
-                                }));
+                        mRoot.dialogs().show(
+                            mRoot.filePicker(true),
+                            [this](const Filesystem::Path &path) {
+                                mFilePath = path;
+                                save();
+                            });
                     } else {
                         save();
                     }

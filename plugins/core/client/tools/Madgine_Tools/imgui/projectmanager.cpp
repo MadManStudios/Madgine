@@ -111,13 +111,11 @@ namespace Tools {
                     }
 
                     if (ImGui::MenuItem("Open Existing")) {
-                        Execution::detach(
-                            mRoot.directoryPicker()
-                            | Execution::then([this](DialogResult result, const Filesystem::Path &path) {
-                                  if (result == DialogResult::Accepted) {
-                                      setCurrentConfig(path);
-                                  }
-                              }));
+                        mRoot.dialogs().show(
+                            mRoot.directoryPicker(),
+                            [this](const Filesystem::Path &path) {
+                                setCurrentConfig(path);
+                            });
                     }
                     if (ImGui::MenuItem("Copy Config")) {
                     }
@@ -153,12 +151,11 @@ namespace Tools {
                     currentSelectionPath = mProjectRoot.absolute();
                 }
 
-                Execution::detach(mRoot.directoryPicker()
-                    | Execution::then([this](DialogResult result, const Filesystem::Path &selected) {
-                          if (result == DialogResult::Accepted) {
-                              setProjectRoot(selected);
-                          }
-                      }));
+                mRoot.dialogs().show(
+                    mRoot.directoryPicker(),
+                    [this](const Filesystem::Path &selected) {
+                        setProjectRoot(selected);
+                    });
             }
 
             ImGui::Separator();
@@ -166,13 +163,15 @@ namespace Tools {
             if (mProjectRoot.empty())
                 ImGui::BeginDisabled();
             if (ImGui::MenuItem("New Layout...")) {
-                Execution::detach(mRoot.dialog([](std::string &layoutName) {
-                    ImGui::InputText("Name", &layoutName);
-                    return DialogFlags { .acceptPossible = !layoutName.empty() };
-                }, std::make_tuple(""s)) | Execution::then([this](DialogResult result, const std::string &layoutName) {
-                    if (result == DialogResult::Accepted)
+                mRoot.dialogs().show([]() -> Dialog<std::string> {
+                    std::string layoutName;
+                    do {
+                        ImGui::InputText("Name", &layoutName);
+                    } while (co_yield DialogSettings { .acceptPossible = !layoutName.empty() });
+                    co_return layoutName; }(),
+                    [this](const std::string &layoutName) {
                         setLayout(layoutName);
-                }));
+                    });
             }
             if (ImGui::MenuItem("Save Layout")) {
                 save();
@@ -241,7 +240,7 @@ namespace Tools {
         if (mProjectRoot != root) {
 
             if (!mProjectRoot.empty()) {
-                //Resources::ResourceManager::getSingleton().unregisterResourceLocation(mProjectRoot);
+                // Resources::ResourceManager::getSingleton().unregisterResourceLocation(mProjectRoot);
             }
 
             mProjectRoot = root;

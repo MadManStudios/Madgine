@@ -125,7 +125,7 @@ namespace Filesystem {
             return true;
         const char *c = p.data();
         if (p[0] != '.') {
-            if (!std::isalnum(p[0]) && p[0] != '_')
+            if (!std::isalnum(p[0]) && p[0] != '_' && p[0] != '$')
                 return false;
             if (p.size() == 1)
                 return true;

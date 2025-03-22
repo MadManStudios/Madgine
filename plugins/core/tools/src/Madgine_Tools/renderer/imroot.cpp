@@ -225,19 +225,33 @@ namespace Tools {
         }
     }
 
-    DialogFlags ImRoot::directoryPickerImpl(Filesystem::Path &path, Filesystem::Path &selected)
+    Dialog<Filesystem::Path> ImRoot::directoryPicker(Filesystem::Path path, Filesystem::Path selected)
     {
-        DialogFlags flags;
-        ImGui::DirectoryPicker(path, selected);
-        return flags;
+        DialogSettings settings { .acceptText = "Open" };
+        do {            
+            ImGui::DirectoryPicker(path, selected);
+        } while (co_yield settings);
+        co_return selected;
     }
 
-    DialogFlags ImRoot::filePickerImpl(bool allowNewFile, Filesystem::Path &path, Filesystem::Path &selected)
+    Dialog<Filesystem::Path> ImRoot::filePicker(bool allowNewFile, Filesystem::Path path, Filesystem::Path selected)
     {
-        DialogFlags flags;
-        ImGui::FilePicker(path, selected, &flags.implicitlyAccepted);
-        flags.acceptPossible = !selected.empty() && (allowNewFile || Filesystem::exists(selected));
-        return flags;
+        DialogSettings settings
+        {
+            .acceptText = allowNewFile ? "Save" : "Open",
+            .declineText = "Cancel"
+        };
+        bool implicitlyAccepted = false;
+        do {
+            ImGui::FilePicker(path, selected, &implicitlyAccepted);
+            settings.acceptPossible = !selected.empty() && (allowNewFile || Filesystem::exists(selected));
+        } while (!implicitlyAccepted && (co_yield settings));
+        co_return selected;
+    }
+
+    DialogContainer &ImRoot::dialogs()
+    {
+        return mDialogContainer;
     }
 
 }

@@ -40,26 +40,13 @@ namespace Tools {
 
         virtual Threading::TaskQueue *taskQueue() const = 0;
 
-        template <typename F, typename Tuple>
-        auto dialog(F &&f, Tuple &&tuple, const DialogSettings &settings = {})
-        {
-            return DialogSender { settings, &mDialogContainer, std::forward<F>(f), std::forward<Tuple>(tuple) };
-        }
+        DialogContainer &dialogs();
 
-        auto directoryPicker()
-        {
-            return DialogSender { { .acceptText = "Open" }, &mDialogContainer, [this, path { Filesystem::Path {} }](Filesystem::Path &selected) mutable { return directoryPickerImpl(path, selected); }, std::make_tuple(Filesystem::Path {}) };
-        }
+        Dialog<Filesystem::Path> directoryPicker(Filesystem::Path path = {}, Filesystem::Path selected = {});
+        Dialog<Filesystem::Path> filePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});
 
-        auto filePicker(bool allowNewFile = false)
-        {
-            return DialogSender { { .acceptText = allowNewFile ? "Save" : "Open" }, &mDialogContainer, [this, path { Filesystem::Path {} }, allowNewFile](Filesystem::Path &selected) mutable { return filePickerImpl(allowNewFile, path, selected); }, std::make_tuple(Filesystem::Path {}) };
-        }
 
-    protected:
-        DialogFlags directoryPickerImpl(Filesystem::Path &path, Filesystem::Path &selected);
-        DialogFlags filePickerImpl(bool allowNewFile, Filesystem::Path &path, Filesystem::Path &selected);
-
+    protected:        
         unsigned int mDockSpaceId;
 
     private:

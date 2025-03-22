@@ -3,118 +3,185 @@
 #include "Generic/enum.h"
 #include "Generic/execution/concepts.h"
 #include "Generic/type_pack.h"
-
+#include "Generic/closure.h"
 
 namespace Engine {
 namespace Tools {
 
     ENUM(DialogResult,
         Accepted,
-        Declined)
-
-    struct DialogFlags {
-        bool acceptPossible = true;
-        bool implicitlyAccepted = false;
-    };
-
-    struct DialogStateBase;
-
-    struct MADGINE_TOOLS_EXPORT DialogContainer {
-        void push(DialogStateBase *dialog);
-        void pop(DialogStateBase *dialog);
-
-        void render();
-
-        DialogStateBase *mHead = nullptr;
-    };
+        Declined,
+        Canceled)
 
     struct DialogSettings {
         bool showAccept = true;
-        bool showDecline = false;
-        bool showCancel = true;
+        bool showDecline = true;
+        bool showCancel = false;
         std::string acceptText = "Yes";
         std::string declineText = "No";
         std::string cancelText = "Cancel";
+        bool acceptPossible = true;
 
         std::string header = "";
     };
 
-    struct MADGINE_TOOLS_EXPORT DialogStateBase {
+    struct DialogDeclined { };
+    constexpr DialogDeclined dialogDeclined;
 
-        DialogStateBase(DialogSettings settings, DialogContainer *targetContainer);
+    struct DialogPromise;
 
-        void start();
+    struct MADGINE_TOOLS_EXPORT DialogContainer {
+        DialogContainer() = default;
+        DialogContainer(const DialogContainer &) = delete;
+
+        DialogContainer &operator=(const DialogContainer &) = delete;
+
+        void show(CoroutineHandle<DialogPromise> dialog);
+
+        template <typename Dialog, typename F>
+        void show(Dialog dialog, F &&f)
+        {
+            dialog.setCallback(std::forward<F>(f));
+            show(std::move(dialog.mHandle));
+        }
 
         void render();
 
     protected:
-        virtual DialogFlags renderContent() = 0;
-        virtual void close(DialogResult) = 0;
-        virtual void cancel() = 0;
+        bool renderHeader();
+        std::optional<DialogResult> renderFooter(DialogSettings settings);
 
     private:
-        DialogSettings mSettings;
-        friend struct DialogContainer;
-        DialogContainer *mTargetContainer;
-
-        DialogStateBase *mNext = nullptr;
+        std::vector<CoroutineHandle<DialogPromise>> mDialogs;
     };
 
-    template <typename Rec, typename F, typename Tuple>
-    struct DialogState : Execution::base_state<Rec>, DialogStateBase {
+    template <typename... T>
+    struct Dialog;
+    template <typename... T>
+    struct AwaitableDialog;
 
-        DialogState(Rec &&rec, DialogSettings settings, DialogContainer *targetContainer, F &&f, Tuple &&tuple)
-            : Execution::base_state<Rec>(std::forward<Rec>(rec))
-            , DialogStateBase { std::move(settings), targetContainer }
-            , mF(std::forward<F>(f))
-            , mTuple(std::forward<Tuple>(tuple))
+    struct DialogPromise {
+        DialogPromise()
         {
         }
 
-        DialogFlags renderContent() override
+        std::suspend_always initial_suspend() noexcept
         {
-            return TupleUnpacker::invokeExpand(mF, mTuple);
+            return {};
         }
 
-        void close(DialogResult result) override
+        struct YieldSuspender {
+            constexpr bool await_ready() const noexcept
+            {
+                return false;
+            }
+
+            void await_suspend(CoroutineHandle<DialogPromise> self) const noexcept
+            {
+                *mPromise.mOutHandle = std::move(self);
+            }
+            constexpr bool await_resume() const noexcept { return !mPromise.mDone; }
+
+            DialogPromise &mPromise;
+        };
+
+        struct FinalSuspender {
+            constexpr bool await_ready() const noexcept
+            {
+                return !mResume;
+            }
+
+            void await_suspend(CoroutineHandle<DialogPromise> self) noexcept
+            {
+                self->mTargetContainer->show(std::move(mResume));                
+            }
+            constexpr void await_resume() const noexcept {  }
+
+            CoroutineHandle<DialogPromise> mResume;
+        };
+
+        YieldSuspender yield_value(const DialogSettings &settings)
         {
-            DialogStateBase::close(result);
-            TupleUnpacker::invokeExpand(LIFT(this->mRec.set_value, this), result, std::move(mTuple));
+            *mOutSettings = settings;
+            return { *this };
         }
 
-        void cancel() override
+        void unhandled_exception()
         {
-            DialogStateBase::cancel();
-            this->mRec.set_done();
+            throw 0;
         }
 
-        F mF;
-        Tuple mTuple;
+        std::optional<DialogResult> mDone;
+        DialogSettings *mOutSettings = nullptr;
+        CoroutineHandle<DialogPromise> *mOutHandle = nullptr;
+        CoroutineHandle<DialogPromise> mResume;
+        DialogContainer *mTargetContainer = nullptr;
     };
 
-    template <typename F, typename Tuple>
-    struct DialogSender {
+    template <typename... T>
+    struct AwaitableDialog {
 
-        using is_sender = void;
-
-        using result_type = void;
-        template <template <typename...> typename Variant>
-        using value_types = typename Engine::to_type_pack<Tuple>::template prepend<DialogResult>::template instantiate<Variant>;
-
-        template <typename Rec>
-        friend auto tag_invoke(Engine::Execution::connect_t, DialogSender &&sender, Rec &&rec)
+        bool await_ready() const
         {
-            return DialogState<Rec, F, Tuple> { std::forward<Rec>(rec), std::move(sender.mSettings), sender.mTargetContainer, std::forward<F>(sender.mF), std::forward<Tuple>(sender.mTuple) };
+            return false;
         }
 
-        DialogSettings mSettings;
-        DialogContainer *mTargetContainer;
-        F mF;
-        Tuple mTuple;
+        void await_suspend(CoroutineHandle<DialogPromise> other)
+        {
+            mDialog.setCallback([this](T... values) { mResult = { std::forward<T>(values)... }; });
+            DialogContainer *container = other->mTargetContainer;
+            mDialog.mHandle->mResume = std::move(other);
+            container->show(std::move(mDialog.mHandle));
+        }
+
+        auto await_resume()
+        {
+            return std::move(mResult);
+        }
+
+        Dialog<T...> mDialog;
+        std::optional<std::tuple<T...>> mResult;
     };
 
-    template <typename F, typename Tuple>
-    DialogSender(DialogSettings, DialogContainer *, F &&, Tuple &&) -> DialogSender<F, Tuple>;
+    template <typename... T>
+    struct Dialog {
+        struct promise_type : DialogPromise {
+
+            Dialog<T...> get_return_object()
+            {
+                return { CoroutineHandle<promise_type>::fromPromise(*this) };
+            }
+
+            void return_value(std::tuple<T...> value)
+            {
+                if (!mDone)
+                    mDone = DialogResult::Accepted;                                
+                if (*mDone == DialogResult::Accepted)
+                    TupleUnpacker::invokeFromTuple(mCallback, value);
+                
+            }
+
+            FinalSuspender final_suspend() noexcept
+            {
+                assert(mDone && *mDone != DialogResult::Canceled);                    
+                return { std::move(mResume) };
+            }
+
+            Closure<void(T...)> mCallback;
+        };
+
+        AwaitableDialog<T...> operator co_await() && {
+            return { std::move(*this) };
+        }
+
+        template <typename F>
+        void setCallback(F &&f)
+        {
+            mHandle->mCallback = std::forward<F>(f);
+        }
+
+        CoroutineHandle<promise_type> mHandle;
+    };
 
 }
 }

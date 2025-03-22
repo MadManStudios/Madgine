@@ -48,7 +48,7 @@ UNIQUECOMPONENT(Engine::Tools::SceneEditor);
 
 METATABLE_BEGIN_BASE(Engine::Tools::SceneEditor, Engine::Tools::ToolBase)
 READONLY_PROPERTY(Views, views)
-//READONLY_PROPERTY(CurrentScene, currentSceneFile)
+// READONLY_PROPERTY(CurrentScene, currentSceneFile)
 METATABLE_END(Engine::Tools::SceneEditor)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::SceneEditor, Engine::Tools::ToolBase)
@@ -80,7 +80,7 @@ namespace Tools {
         mInspector = &mRoot.getTool<Inspector>();
         mSceneViews.emplace_back(std::make_unique<SceneView>(this, mWindow.getRenderer()));
 
-        //mSceneMgr->pause();
+        // mSceneMgr->pause();
         mMode = STOP;
 
         mStartBuffer.resize(65536);
@@ -116,12 +116,11 @@ namespace Tools {
                 bool isStopped = mMode == STOP;
 
                 if (ImGui::MenuItem("Open", nullptr, nullptr, isStopped)) {
-                    Execution::detach(mRoot.filePicker()
-                        | Execution::then([this](DialogResult result, const Filesystem::Path &path) {
-                              if (result == DialogResult::Accepted) {
-                                  openScene(path);
-                              }
-                          }));
+                    mRoot.dialogs().show(
+                        mRoot.filePicker(),
+                        [this](const Filesystem::Path &path) {
+                            openScene(path);
+                        });
                 }
 
                 if (ImGui::MenuItem("Save", nullptr, nullptr, isStopped)) {
@@ -210,9 +209,9 @@ namespace Tools {
             return;
 
         if (mMode == STOP) {
-            //Memory::MemoryManager mgr { "Tmp" };
-            //Serialize::FormattedSerializeStream out = mgr.openWrite(mStartBuffer, Serialize::Formats::safebinary);
-            //Serialize::write(out, *mSceneMgr, "Scene");
+            // Memory::MemoryManager mgr { "Tmp" };
+            // Serialize::FormattedSerializeStream out = mgr.openWrite(mStartBuffer, Serialize::Formats::safebinary);
+            // Serialize::write(out, *mSceneMgr, "Scene");
         }
 
         mSceneMgr->unpause();
@@ -237,12 +236,12 @@ namespace Tools {
             mSceneMgr->pause();
         mMode = STOP;
 
-        //Memory::MemoryManager mgr { "Tmp" };
-        //Serialize::FormattedSerializeStream in = mgr.openRead(mStartBuffer, Serialize::Formats::safebinary);
-        //Serialize::StreamResult result = Serialize::read(in, *mSceneMgr, nullptr, {}, Serialize::StateTransmissionFlags_ApplyMap | Serialize::StateTransmissionFlags_Activation);
-        //if (result.mState != Serialize::StreamState::OK) {
-        //LOG_ERROR(*result.mError);
-        //}
+        // Memory::MemoryManager mgr { "Tmp" };
+        // Serialize::FormattedSerializeStream in = mgr.openRead(mStartBuffer, Serialize::Formats::safebinary);
+        // Serialize::StreamResult result = Serialize::read(in, *mSceneMgr, nullptr, {}, Serialize::StateTransmissionFlags_ApplyMap | Serialize::StateTransmissionFlags_Activation);
+        // if (result.mState != Serialize::StreamState::OK) {
+        // LOG_ERROR(*result.mError);
+        // }
     }
 
     void SceneEditor::openScene(const Filesystem::Path &p)
@@ -252,7 +251,7 @@ namespace Tools {
 
         mCurrentSceneFile = p;
 
-        //auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
+        // auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
 
         Filesystem::FileManager mgr { "Scene" };
         Serialize::FormattedSerializeStream in = mgr.openRead(mCurrentSceneFile, Serialize::Formats::xml);
@@ -525,10 +524,10 @@ namespace Tools {
 
     void SceneEditor::updateEntityCache()
     {
-        //Update + Remove deleted Entities
+        // Update + Remove deleted Entities
         mEntityCache.remove_if([this](EntityNode &node) { return updateEntityCache(node); });
 
-        //Add missing Entities
+        // Add missing Entities
         for (Scene::Entity::EntityPtr entity : mSceneMgr->container("Default").entities()) {
             if (!mEntityMapping.count(entity))
                 createEntityMapping(std::move(entity));
@@ -616,11 +615,11 @@ namespace Tools {
 
     void SceneEditor::saveScenePopup()
     {
-        Execution::detach(mRoot.filePicker(true) | Execution::then([this](DialogResult result, const Filesystem::Path &path) {
-            if (result == DialogResult::Accepted) {
+        mRoot.dialogs().show(
+            mRoot.filePicker(true),
+            [this](const Filesystem::Path &path) {
                 saveScene(path);
-            }
-        }));
+            });        
     }
 }
 }

@@ -1028,9 +1028,20 @@ bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &s
 {
     bool changed = BeginFilesystemPicker(path, selection);
 
-    if (ImGui::BeginChild("CurrentFolder", { 0.0f, -ImGui::GetFrameHeightWithSpacing() })) {
+    if (ImGui::BeginTable("CurrentFolder", 1, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable)) {
+
+        ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_NoHide);
+        // ImGui::TableSetupColumn("Total time");
+        // ImGui::TableSetupColumn("Rel. Time (parent)");
+        // ImGui::TableSetupColumn("Rel. Time (total)");
+        ImGui::TableSetupScrollFreeze(0, 1);
+        ImGui::TableHeadersRow();
 
         for (Engine::Filesystem::FileQueryResult result : Engine::Filesystem::listDirs(path)) {
+
+            ImGui::TableNextRow();
+
+            ImGui::TableNextColumn();
 
             bool selected = selection == result.path();
 
@@ -1045,9 +1056,9 @@ bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &s
                 changed = true;
             }
         }
+        ImGui::EndTable();
     }
 
-    ImGui::EndChild();
 
     return changed;
 }
