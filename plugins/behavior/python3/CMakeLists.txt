@@ -38,7 +38,7 @@ FolderSources(sources "" tools)
 
 add_tools(Python3 ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/Python3/python3toolslib.h)
 
-target_link_plugins(Python3Tools Tools TextEditor DebuggerTools)
+target_link_plugins(Python3Tools TextEditor DebuggerTools)
 
 
 

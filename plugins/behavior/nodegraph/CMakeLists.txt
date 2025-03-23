@@ -21,5 +21,5 @@ FolderSources(sources "" tools)
 
 add_tools(NodeGraph ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/nodegraphtoolslib.h)
 
-target_link_plugins(NodeGraphTools Tools DebuggerTools BehaviorTools)
+target_link_plugins(NodeGraphTools DebuggerTools BehaviorTools)
 target_link_libraries(NodeGraphTools PUBLIC imgui_node_editor)

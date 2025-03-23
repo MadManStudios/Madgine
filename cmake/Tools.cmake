@@ -20,7 +20,7 @@ macro(add_tools targetProject)
 	add_plugin(${targetProject}Tools ${base} Tools ${TOOL_CONFIG_UNPARSED_ARGUMENTS} SOURCE_ROOT ${TOOL_CONFIG_SOURCE_ROOT})
 
 	if (NOT TOOL_CONFIG_NO_DEFAULT_LINK)
-		target_link_plugins(${targetProject}Tools ${targetProject})
+		target_link_plugins(${targetProject}Tools ${targetProject} Tools)
 	endif()
 
 	set_target_properties(${targetProject} PROPERTIES TOOLS_NAME ${targetProject}Tools)

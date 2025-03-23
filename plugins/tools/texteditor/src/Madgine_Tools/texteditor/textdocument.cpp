@@ -4,8 +4,6 @@
 
 #include "imgui/imgui.h"
 
-#include "Madgine/resources/resourcemanager.h"
-
 #include "texteditor.h"
 
 #include "Interfaces/filesystem/fsapi.h"
@@ -15,7 +13,7 @@ namespace Tools {
 
     TextDocument::TextDocument(Filesystem::Path path, TextEditor *editor)
         : mPath(std::move(path))
-        , mEditor(Resources::ResourceManager::getSingleton().findResourceFile("zep.cfg").str(), sPixelScale())
+        , mEditor("C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\texteditor\\data\\zep.cfg", sPixelScale())
     {
         auto &display = static_cast<Zep::ZepDisplay_ImGui &>(mEditor.GetDisplay());
 

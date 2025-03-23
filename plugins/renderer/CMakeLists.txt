@@ -1,3 +1,4 @@
+add_subdirectory(api)
 
 if (NOT NO_OPENGL_SUPPORT)
 	add_subdirectory(opengl)

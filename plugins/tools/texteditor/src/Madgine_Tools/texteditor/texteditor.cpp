@@ -8,8 +8,6 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Madgine/resources/resourcemanager.h"
-
 UNIQUECOMPONENT(Engine::Tools::TextEditor)
 
 
@@ -47,7 +45,8 @@ namespace Tools {
         if (!co_await ToolBase::init())
             co_return false;
 
-        auto fontPath = Resources::ResourceManager::getSingleton().findResourceFile("CascadiaMono.ttf");
+        //TODO
+        auto fontPath = "C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\texteditor\\data\\CascadiaMono.tft";
 
         mFontPixelHeight = (int)dpi_pixel_height_from_point_size(sFontSize, sPixelScale().y);
 
@@ -64,7 +63,7 @@ namespace Tools {
         cfg.OversampleH = 4;
         cfg.OversampleV = 4;
 
-        mFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), float(mFontPixelHeight), &cfg, ranges.Data);
+        mFont = io.Fonts->AddFontFromFileTTF(fontPath, float(mFontPixelHeight), &cfg, ranges.Data);
         
         co_return true;
     }

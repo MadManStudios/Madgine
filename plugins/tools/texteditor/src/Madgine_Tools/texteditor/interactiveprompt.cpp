@@ -69,7 +69,7 @@ namespace Tools {
     };
 
     InteractivePrompt::InteractivePrompt(TextEditor *editor, Interpreter *interpreter)
-        : mEditor(Resources::ResourceManager::getSingleton().findResourceFile("repl.cfg").str(), sPixelScale())
+        : mEditor("", sPixelScale())
         , mInterpreter(interpreter)
     {
         auto &display = static_cast<Zep::ZepDisplay_ImGui &>(mEditor.GetDisplay());

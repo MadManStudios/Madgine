@@ -9,7 +9,7 @@ FolderSources(sources src Madgine_Tools texteditorlib.h texteditorforward.h)
 		
 add_plugin(TextEditor Madgine Tools ${sources} PRECOMPILED_HEADER src/Madgine_Tools/texteditorlib.h)
 
-target_link_plugins(TextEditor Tools Resources)
+target_link_plugins(TextEditor Tools)
 
 target_link_libraries(TextEditor PUBLIC Zep)
 

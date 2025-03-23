@@ -75,7 +75,7 @@ FolderSources(sources "" tools)
 
 add_tools(${MADGINE_BINARY_NAME} ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/launchertoolslib.h NO_DEFAULT_LINK)
 
-target_link_plugins(${MADGINE_BINARY_NAME}Tools Tools ClientTools)
+target_link_plugins(${MADGINE_BINARY_NAME}Tools ClientTools)
 
 
 target_depend_on_all_plugins(${MADGINE_BINARY_NAME})

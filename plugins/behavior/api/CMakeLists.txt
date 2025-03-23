@@ -16,4 +16,4 @@ FolderSources(sources "" tools)
 
 add_tools(Behavior ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/behaviortoolslib.h)
 
-target_link_plugins(BehaviorTools Tools Behavior DebuggerTools)
+target_link_plugins(BehaviorTools Behavior DebuggerTools)
