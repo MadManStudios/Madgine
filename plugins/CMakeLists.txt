@@ -16,7 +16,6 @@ add_subdirectory(behavior)
 add_subdirectory(misc)
 
 add_subdirectory(audio)
-add_subdirectory(firstparty)
 
 
 
