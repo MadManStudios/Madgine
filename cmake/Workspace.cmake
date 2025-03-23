@@ -276,10 +276,6 @@ endmacro()
 
 set (globbing_expr "${CMAKE_CURRENT_LIST_DIR}/platform/*.cmake")
 
-if (MADGINE_EXTERNAL_FILE_HIERARCHY)
-	list(APPEND globbing_expr "${MADGINE_EXTERNAL_FILE_HIERARCHY}/cmake/platform/*.cmake")
-endif()
-
 file(GLOB platforms ${globbing_expr})
 
 foreach(platform ${platforms})

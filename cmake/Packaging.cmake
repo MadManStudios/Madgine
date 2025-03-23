@@ -27,7 +27,7 @@ endif ()
 
 macro(enable_packaging)
 
-	if (EXISTS LICENSE.md)
+	if (EXISTS LICENSE.rst)
 		install(FILES LICENSE.rst DESTINATION . RENAME LICENSE)
 	endif()
 
@@ -96,16 +96,3 @@ function(collect_custom_dependencies target name binary)
 	endforeach()
 
 endfunction(collect_custom_dependencies)
-
-macro(collect_data target)
-
-	if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/data)
-		if (NOT MADGINE_CONFIGURATION AND (NOT BUILD_SHARED_LIBS OR MADGINE_FORCE_DATA_COLLECT))
-			add_custom_target(
-				${target}_copy_data ALL 				
-				COMMAND ${CMAKE_COMMAND} -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}/data -DTARGET=${CMAKE_BINARY_DIR}/data -P ${workspace_file_dir}/util/flatcopy.cmake				
-			)
-		endif()
-	endif()
-
-endmacro()

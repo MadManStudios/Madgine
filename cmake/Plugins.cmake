@@ -56,7 +56,7 @@ endif ()
 
 macro(add_plugin name base type)
 
-	set(options NO_DATA_COPY)
+	set(options)
 	set(oneValueArgs)
 	set(multiValueArgs EXTERNAL_DEPS)
 	cmake_parse_arguments(PLUGIN_CONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})	
@@ -70,10 +70,6 @@ macro(add_plugin name base type)
 		FOLDER "Plugins")
 
 	generate_binary_info(${name})
-
-	if (NOT PLUGIN_CONFIG_NO_DATA_COPY)
-		collect_data(${name})		
-	endif()
 
 	compile_shaders(${name})
 

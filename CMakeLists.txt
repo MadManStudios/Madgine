@@ -63,6 +63,7 @@ include(Plugins)
 include(Tools)
 include(Testing)
 include(Legal)
+include(Dependencies)
 
 set (CPACK_NSIS_MODIFY_PATH ON)
 set (CPACK_PACKAGE_VENDOR "MadMan Studios")
@@ -80,9 +81,7 @@ add_subdirectory(plugins)
 
 add_subdirectory(samples)
 
-if (MADGINE_EXTERNAL_FILE_HIERARCHY)
-	add_subdirectory(${MADGINE_EXTERNAL_FILE_HIERARCHY} External)
-endif()
+resolve_dependencies()
 
 set (LAUNCHER_LOCATION ${CMAKE_CURRENT_LIST_DIR}/launcher CACHE INTERNAL "")
 function(create_launcher MADGINE_BINARY_NAME)
