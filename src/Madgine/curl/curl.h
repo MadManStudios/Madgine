@@ -55,7 +55,7 @@ namespace Engine {
 
         void set_value() override
         {
-            mRec.set_value(std::move(mResult));
+            this->mRec.set_value(std::move(this->mResult));
         }
     };
 

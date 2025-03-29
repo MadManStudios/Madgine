@@ -58,7 +58,7 @@ namespace Engine {
     {
         size_t oldSize = mResult.size();
         mResult.resize(oldSize + nmemb);
-        memcpy_s(mResult.data() + oldSize, nmemb, buffer, nmemb);
+        memcpy(mResult.data() + oldSize, buffer, nmemb);
     }
 
     CurlManager::CurlManager()

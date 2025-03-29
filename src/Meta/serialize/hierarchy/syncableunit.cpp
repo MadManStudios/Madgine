@@ -117,16 +117,6 @@ namespace Serialize {
         return result;
     }
 
-    FormattedMessageStream &getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget)
-    {
-        for (FormattedMessageStream &out : unit->getMasterMessageTargets()) {
-            if (out.id() == answerTarget) {
-                return out;
-            }
-        }
-        throw 0;
-    }
-
     FormattedMessageStream &SyncableUnitBase::getSlaveMessageTarget() const
     {
         assert(mSynced);
@@ -288,8 +278,12 @@ namespace Serialize {
 
     WriteMessage getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId)
     {
-        FormattedMessageStream &out = getMasterRequestResponseTarget(unit, answerTarget);
-        return beginRequestResponseMessage(unit, out, answerId);
+        for (FormattedMessageStream &out : unit->getMasterMessageTargets()) {
+            if (out.id() == answerTarget) {
+                return beginRequestResponseMessage(unit, out, answerId);
+            }
+        }
+        throw 0;
     }
 
     WriteMessage getSlaveRequestMessageTarget(const SyncableUnitBase *unit, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
