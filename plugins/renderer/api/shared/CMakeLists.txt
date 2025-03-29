@@ -2,6 +2,7 @@
 	
 set(DISABLE_FORCE_DEBUG_POSTFIX ON)
 set(FT_DISABLE_ZLIB ON CACHE BOOL "" FORCE)
+set(FT_DISABLE_BROTLI ON CACHE BOOL "" FORCE)
 #comment definition of FT_CONFIG_OPTION_USE_ZLIB out in ftconfig.h
 add_subdirectory(freetype-2.12.1)
 set_target_properties(freetype PROPERTIES EXCLUDE_FROM_ALL TRUE)

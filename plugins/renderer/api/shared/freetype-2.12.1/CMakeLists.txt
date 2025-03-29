@@ -347,11 +347,11 @@ if (HARFBUZZ_FOUND)
     "/\\* +(#define +FT_CONFIG_OPTION_USE_HARFBUZZ) +\\*/" "\\1"
     FTOPTION_H "${FTOPTION_H}")
 endif ()
-if (BROTLIDEC_FOUND)
-  string(REGEX REPLACE
-    "/\\* +(#define +FT_CONFIG_OPTION_USE_BROTLI) +\\*/" "\\1"
-    FTOPTION_H "${FTOPTION_H}")
-endif ()
+#if (BROTLIDEC_FOUND)
+#  string(REGEX REPLACE
+#    "/\\* +(#define +FT_CONFIG_OPTION_USE_BROTLI) +\\*/" "\\1"
+#    FTOPTION_H "${FTOPTION_H}")
+#endif ()
 
 set(FTOPTION_H_NAME "${PROJECT_BINARY_DIR}/include/freetype/config/ftoption.h")
 if (EXISTS "${FTOPTION_H_NAME}")
@@ -528,12 +528,12 @@ if (HarfBuzz_FOUND)
   target_include_directories(freetype PRIVATE ${HarfBuzz_INCLUDE_DIRS})
   list(APPEND PKGCONFIG_REQUIRES_PRIVATE "harfbuzz >= ${HARFBUZZ_MIN_VERSION}")
 endif ()
-if (BROTLIDEC_FOUND)
-  target_link_libraries(freetype PRIVATE ${BROTLIDEC_LIBRARIES})
-  target_compile_definitions(freetype PRIVATE ${BROTLIDEC_DEFINITIONS})
-  target_include_directories(freetype PRIVATE ${BROTLIDEC_INCLUDE_DIRS})
-  list(APPEND PKGCONFIG_REQUIRES_PRIVATE "libbrotlidec")
-endif ()
+#if (BROTLIDEC_FOUND)
+#  target_link_libraries(freetype PRIVATE ${BROTLIDEC_LIBRARIES})
+#  target_compile_definitions(freetype PRIVATE ${BROTLIDEC_DEFINITIONS})
+#  target_include_directories(freetype PRIVATE ${BROTLIDEC_INCLUDE_DIRS})
+#  list(APPEND PKGCONFIG_REQUIRES_PRIVATE "libbrotlidec")
+#endif ()
 
 
 # Installation

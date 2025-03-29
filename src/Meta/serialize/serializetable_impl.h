@@ -23,6 +23,7 @@ namespace Serialize {
     void META_EXPORT writeFunctionRequest(SyncableUnitBase *unit, uint16_t index, FunctionType type, const void *args, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver = {});
     void META_EXPORT writeFunctionError(SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedMessageStream &target, MessageId answerId);
     StreamResult META_EXPORT readState(const SerializeTable *table, void *unit, FormattedSerializeStream &in, CallerHierarchyBasePtr hierarchy);
+    WriteMessage META_EXPORT getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId = 0);
 
     namespace __serialize_impl__ {
 
@@ -259,7 +260,7 @@ namespace Serialize {
                         R result;
                         STREAM_PROPAGATE_ERROR(read(in, result, "Result"));
                         if (request.mRequesterTransactionId) {
-                            FormattedMessageStream &out = getMasterRequestResponseTarget(unit, request.mRequester);
+                            WriteMessage out = getMasterRequestResponseTarget(unit, request.mRequester);
                             writeFunctionResult(unit, index, &result, out, request.mRequesterTransactionId);
                         }
                         request.mReceiver.set_value(result);
