@@ -193,12 +193,12 @@ namespace Tools {
                 return { std::move(mResume) };
             }
 
-            template <typename T>
-            decltype(auto) await_transform(T &&t) {
-                if constexpr (std::same_as<T, const get_settings_t&>) {
+            template <typename A>
+            decltype(auto) await_transform(A &&a) {
+                if constexpr (std::same_as<A, const get_settings_t&>) {
                     return get_settings_helper_t { *this };
                 } else {
-                    return std::forward<T>(t);
+                    return std::forward<A>(a);
                 }
             }
 

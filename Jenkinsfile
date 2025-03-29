@@ -8,12 +8,12 @@ def toolchains = [
 		],
 	"osx": [			
 			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DENABLE_ARC=False -DDEPLOYMENT_TARGET=11.0 -DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/osx.h",
+			args : "-DENABLE_ARC=False -DDEPLOYMENT_TARGET=15.0 -DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/osx.h",
 			artifacts : ['bin/*', 'data/*']
 		],
 	"ios": [
 			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchains/ios.cmake -DPLATFORM=SIMULATOR64 -DENABLE_ARC=False -DDEPLOYMENT_TARGET=11.0",
+			args : "-DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchains/ios.cmake -DPLATFORM=SIMULATOR64 -DENABLE_ARC=False -DDEPLOYMENT_TARGET=15.0",
 			artifacts : ['bin/*']
 		],
 	"linux": [

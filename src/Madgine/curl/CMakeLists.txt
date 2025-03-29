@@ -15,9 +15,9 @@ add_notices(libcurl_shared
 	
 set(sources curl.cpp curl.h)
 	
-add_workspace_library(Curl ${sources} SOURCE_ROOT ../..)
+add_workspace_library(MadgineCurl ${sources} SOURCE_ROOT ../..)
 
-target_link_libraries(Curl PRIVATE libcurl)
-target_link_libraries(Curl PUBLIC Generic)
+target_link_libraries(MadgineCurl PRIVATE libcurl)
+target_link_libraries(MadgineCurl PUBLIC Generic)
 
-install_to_workspace(Madgine EXPORT_LIB TARGETS Curl)
+install_to_workspace(Madgine EXPORT_LIB TARGETS MadgineCurl)
