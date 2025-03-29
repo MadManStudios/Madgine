@@ -20,8 +20,7 @@ namespace Tools {
 
         std::string_view key() const override;
 
-    private:
-        Render::DirectX12Texture mImageTexture;
+    private:        
     };
 
 }

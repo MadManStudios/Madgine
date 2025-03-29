@@ -64,7 +64,7 @@ namespace Execution {
         ErrorStorageImpl() = delete;
 
         static constexpr bool is_void = true;
-        
+
         void reproduce(auto &rec)
         {
             throw 0;
@@ -91,10 +91,10 @@ namespace Execution {
         }
     };
 
-    template <typename Sender>
-    struct ResultStorage {
-                
-        static constexpr bool can_have_error = !ErrorStorage<Sender>::is_void;
+    template <typename Value, typename Error>
+    struct ResultStorageImpl {
+
+        static constexpr bool can_have_error = !Error::is_void;
 
         void reproduce(auto &rec)
         {
@@ -106,7 +106,7 @@ namespace Execution {
 
         void reproduce_error(auto &rec)
         {
-            std::get<ErrorStorage<Sender>>(mState).reproduce(rec);
+            std::get<Error>(mState).reproduce(rec);
         }
 
         bool is_null() const
@@ -116,12 +116,12 @@ namespace Execution {
 
         bool is_value() const
         {
-            return std::holds_alternative<ValueStorage<Sender>>(mState);
+            return std::holds_alternative<Value>(mState);
         }
 
         bool is_error() const
         {
-            return std::holds_alternative<ErrorStorage<Sender>>(mState);
+            return std::holds_alternative<Error>(mState);
         }
 
         bool is_done() const
@@ -133,14 +133,14 @@ namespace Execution {
         void set_value(V &&...v)
         {
             assert(std::holds_alternative<NullStorage>(mState));
-            mState.template emplace<ValueStorage<Sender>>(std::forward<V>(v)...);
+            mState.template emplace<Value>(std::forward<V>(v)...);
         }
 
         template <typename... R>
         void set_error(R &&...r)
         {
             assert(std::holds_alternative<NullStorage>(mState));
-            mState.template emplace<ErrorStorage<Sender>>(std::forward<R>(r)...);
+            mState.template emplace<Error>(std::forward<R>(r)...);
         }
 
         void set_done()
@@ -149,18 +149,21 @@ namespace Execution {
             mState.template emplace<DoneStorage>();
         }
 
-        ValueStorage<Sender> value() &&
+        Value value() &&
         {
-            return std::move(std::get<ValueStorage<Sender>>(mState));
+            return std::move(std::get<Value>(mState));
         }
 
-        ErrorStorage<Sender> error() &&
+        Error error() &&
         {
-            return std::move(std::get<ErrorStorage<Sender>>(mState));
+            return std::move(std::get<Error>(mState));
         }
 
-        std::variant<NullStorage, ValueStorage<Sender>, ErrorStorage<Sender>, DoneStorage> mState;
+        std::variant<NullStorage, Value, Error, DoneStorage> mState;
     };
+
+    template <typename Sender>
+    using ResultStorage = ResultStorageImpl<ValueStorage<Sender>, ErrorStorage<Sender>>;
 
 }
 }

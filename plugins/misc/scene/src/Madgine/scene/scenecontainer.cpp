@@ -12,9 +12,9 @@
 #include "Meta/serialize/container/noparent.h"
 
 METATABLE_BEGIN(Engine::Scene::SceneContainer)
-//TODO
-//SYNCABLEUNIT_MEMBERS()
-//READONLY_PROPERTY(entities, entities)
+// TODO
+// SYNCABLEUNIT_MEMBERS()
+// READONLY_PROPERTY(entities, entities)
 METATABLE_END(Engine::Scene::SceneContainer)
 
 using Helper = Engine::Serialize::NoParent<Engine::Scene::SceneContainer>;
@@ -37,7 +37,7 @@ namespace Engine {
 namespace Scene {
 
     SceneContainer::SceneContainer(SceneManager &sceneMgr)
-        : mManager(sceneMgr)        
+        : mManager(sceneMgr)
         , mLifetime(&sceneMgr.lifetime())
     {
         startLifetime();
@@ -98,8 +98,8 @@ namespace Scene {
     Entity::EntityPtr SceneContainer::createEntity(const std::string &name,
         const std::function<void(Entity::Entity &)> &init)
     {
-        auto toPtr = [this](const typename RefcountedContainer<std::deque<Entity::Entity>>::iterator &it) {            
-            return Entity::EntityPtr { &*it};
+        auto toPtr = [this](const typename RefcountedContainer<std::deque<Entity::Entity>>::iterator &it) {
+            return Entity::EntityPtr { &*it };
         };
         if (init)
             return toPtr(TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_init, this), mEntities.end(), init, createEntityData(name)));
@@ -112,15 +112,15 @@ namespace Scene {
         Execution::detach(mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }, receiver { std::move(receiver) }]() mutable {
             auto toPtr = [](const typename RefcountedContainer<std::deque<Entity::Entity>>::iterator &it) { return Entity::EntityPtr { &*it }; };
             if (init)
-                Execution::detach(
+                Execution::detach_with_receiver(
                     TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_init_async, this), mEntities.end(), init, createEntityData(name))
-                    | Execution::then(std::move(toPtr))
-                    | Execution::then_receiver(std::move(receiver)));
+                        | Execution::then(std::move(toPtr)),
+                    std::move(receiver));
             else
-                Execution::detach(
+                Execution::detach_with_receiver(
                     TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name))
-                    | Execution::then(std::move(toPtr))
-                    | Execution::then_receiver(std::move(receiver)));
+                        | Execution::then(std::move(toPtr)),
+                    std::move(receiver));
         }));
     }
 

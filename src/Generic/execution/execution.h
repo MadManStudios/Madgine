@@ -57,6 +57,67 @@ namespace Execution {
 
     inline constexpr detach_t detach;
 
+    struct detach_with_receiver_t {
+
+        template <typename Sender, typename Rec>
+        struct state;
+
+        template <typename Sender, typename Rec>
+        struct receiver : execution_receiver<> {
+
+            template <typename... V>
+            void set_value(V &&...v)
+            {
+                mRec.set_value(std::forward<V>(v)...);
+                delete mState;
+            }
+            void set_done()
+            {
+                mRec.set_done();
+                delete mState;
+            }
+            template <typename... R>
+            void set_error(R &&... r)
+            {
+                mRec.set_error(std::forward<R>(r)...);
+                delete mState;
+            }
+
+            template <typename CPO, typename... Args>
+                requires(is_tag_invocable_v<CPO, Rec &, Args...>)
+            friend auto tag_invoke(CPO f, receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, Rec &, Args...>)
+                -> tag_invoke_result_t<CPO, Rec &, Args...>
+            {
+                return tag_invoke(f, rec.mRec, std::forward<Args>(args)...);
+            }
+
+            Rec mRec;
+            state<Sender, Rec> *mState;
+        };
+
+        template <typename Sender, typename Rec>
+        struct state {
+            state(Sender &&sender, Rec &&rec)
+                : mState(connect(std::forward<Sender>(sender), receiver<Sender, Rec> { {}, std::forward<Rec>(rec), this }))
+            {
+            }
+            void start()
+            {
+                mState.start();
+            }
+
+            connect_result_t<Sender, receiver<Sender, Rec>> mState;
+        };
+
+        template <typename Sender, typename Rec>
+        void operator()(Sender &&sender, Rec &&rec) const
+        {
+            (new state<Sender, Rec> { std::forward<Sender>(sender), std::forward<Rec>(rec) })->start();
+        }
+    };
+
+    inline constexpr detach_with_receiver_t detach_with_receiver;
+
     struct sync_expect_t {
 
         template <typename Sender>
@@ -66,7 +127,7 @@ namespace Execution {
         struct receiver : execution_receiver<> {
 
             template <typename... V>
-            void set_value(V &&... v)
+            void set_value(V &&...v)
             {
                 mState->mResult.set_value(std::forward<V>(v)...);
                 mState->mFinished = true;
@@ -95,7 +156,6 @@ namespace Execution {
             void start()
             {
                 mState.start();
-
             }
 
             ResultStorage<Sender> mResult;
@@ -135,7 +195,7 @@ namespace Execution {
                 mState->mFinished.test_and_set();
             }
             template <typename... R>
-            void set_error(R&&...r)
+            void set_error(R &&...r)
             {
                 mState->mResult.set_error(std::forward<R>(r)...);
                 mState->mFinished.test_and_set();
