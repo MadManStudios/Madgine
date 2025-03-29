@@ -58,7 +58,7 @@ namespace Serialize {
     };
 
 #define STREAM_ERROR(Type, ...) \
-    ::Engine::Serialize::StreamResultBuilder { Type, __VA_ARGS__, __FILE__, __LINE__ }
+    ::Engine::Serialize::StreamResultBuilder { Type, __VA_ARGS__ __VA_OPT__(,) __FILE__, __LINE__ }
 #define STREAM_PARSE_ERROR(...) STREAM_ERROR(::Engine::Serialize::StreamState::PARSE_ERROR, __VA_ARGS__)
 #define STREAM_PERMISSION_ERROR(...) STREAM_ERROR(::Engine::Serialize::StreamState::PERMISSION_ERROR, __VA_ARGS__)
 #define STREAM_INTEGRITY_ERROR(...) STREAM_ERROR(::Engine::Serialize::StreamState::INTEGRITY_ERROR, __VA_ARGS__)
