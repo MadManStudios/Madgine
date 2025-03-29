@@ -217,6 +217,8 @@ namespace Resources {
                 updateResource(event.mType, event.mPath, mResourcePaths.at(event.mPath), loaderByExtension);
             }
 
+            mCurl.update();
+
             co_await 1s;
         }
     }
@@ -309,6 +311,11 @@ namespace Resources {
         if (firstEnd == first.str().end() || secondEnd == second.str().end())
             return false;
         return first < second;
+    }
+
+    CurlManager &ResourceManager::curl()
+    {
+        return mCurl;
     }
 
 }

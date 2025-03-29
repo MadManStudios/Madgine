@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Madgine/curl/curllib.h"
 #include "Modules/moduleslib.h"
 #include "Madgine/codegen/codegenlib.h"
 

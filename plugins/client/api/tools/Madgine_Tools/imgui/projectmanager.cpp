@@ -164,10 +164,12 @@ namespace Tools {
                 ImGui::BeginDisabled();
             if (ImGui::MenuItem("New Layout...")) {
                 mRoot.dialogs().show([]() -> Dialog<std::string> {
+                    DialogSettings &settings = co_await get_settings;
                     std::string layoutName;
                     do {
                         ImGui::InputText("Name", &layoutName);
-                    } while (co_yield DialogSettings { .acceptPossible = !layoutName.empty() });
+                        settings.acceptPossible = !layoutName.empty();
+                    } while (co_yield settings);
                     co_return layoutName; }(),
                     [this](const std::string &layoutName) {
                         setLayout(layoutName);

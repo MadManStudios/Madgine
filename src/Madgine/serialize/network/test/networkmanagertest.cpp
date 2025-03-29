@@ -28,7 +28,7 @@ TEST(NetworkManager, Connect)
     NetworkManager client("testNetworkClient");
 
     TestReceiver<NetworkManagerResult> receiver;
-    Engine::Execution::detach(client.connect("127.0.0.1", 1234, Formats::safebinary, 4s) | Engine::Execution::then_receiver(receiver));
+    Engine::Execution::detach_with_receiver(client.connect("127.0.0.1", 1234, Formats::safebinary, 4s), receiver);
     EXPECT_EQ(future.get(), NetworkManagerResult::SUCCESS);
     server.sendMessages();
     client.receiveMessages(-1, 1s);

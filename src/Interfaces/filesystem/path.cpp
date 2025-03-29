@@ -126,7 +126,7 @@ namespace Filesystem {
         for (size_t i = 0; i < size; ++i) {
             if (isSeparator(mPath[i])) {
                 if (!hadSeparator) {
-                    hadSeparator = true;
+                    hadSeparator = lastElement.empty() || lastElement.back() != ':';
                     if (lastElement == ".." && canGoUp) {
                         --cursor;
                         cursor = mPath.rfind('/', cursor - 1) + 1;
@@ -213,6 +213,16 @@ namespace Filesystem {
         } else {
             return {};
         }
+    }
+
+    std::string_view Path::protocol() const
+    {
+        size_t separator = mPath.find("://");
+        std::string_view protocol;
+        if (separator != std::string::npos) {
+            protocol = std::string_view { mPath.c_str(), separator };
+        }
+        return protocol;
     }
 
     bool Path::isAbsolute() const

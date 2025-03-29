@@ -56,6 +56,8 @@ namespace Tools {
 
         virtual Threading::TaskQueue *taskQueue() const override;
 
+        void Image(const Filesystem::Path &path, Vector2i image_size = {-1, -1}) override;
+
         void addRenderTarget(Render::RenderTarget *target);
         void removeRenderTarget(Render::RenderTarget *target);
 
@@ -77,6 +79,11 @@ namespace Tools {
 
         Render::PipelineLoader::Instance mPipeline;
         Render::TextureLoader::Ptr mFontTexture;
+
+        struct CachedImage {
+            Render::TextureLoader::Handle mHandle;
+        };
+        std::map<Filesystem::Path, CachedImage> mImageCache;
     };
 
 }

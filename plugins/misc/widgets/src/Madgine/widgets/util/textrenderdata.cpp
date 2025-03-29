@@ -111,7 +111,7 @@ namespace Widgets {
 
         bool useSmallSize = fontSize < 32;
 
-        TextureSettings tex { font->mTexture->resource(), useSmallSize ? 0 : TextureFlag_IsDistanceField };
+        TextureSettings tex { font->mTexture->resourceBlock(), useSmallSize ? 0 : TextureFlag_IsDistanceField };
 
         const Render::Glyph &ref = font->mGlyphs['D'];
 

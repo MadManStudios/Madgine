@@ -38,6 +38,7 @@ namespace Filesystem {
         Path filename() const;
         std::string_view stem() const;
         std::string_view extension() const;
+        std::string_view protocol() const;
 
         bool isAbsolute() const;
         bool isRelative() const;

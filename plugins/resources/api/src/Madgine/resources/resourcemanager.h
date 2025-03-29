@@ -11,6 +11,8 @@
 #include "Madgine/root/rootcomponentcollector.h"
 #include "Madgine/root/rootcomponentbase.h"
 
+#include "Madgine/curl/curl.h"
+
 namespace Engine {
 namespace Resources {
     struct MADGINE_RESOURCES_EXPORT ResourceManager : Root::RootComponent<ResourceManager>, Threading::MadgineObject<ResourceManager>
@@ -58,6 +60,8 @@ namespace Resources {
 
         std::map<Filesystem::Path, std::vector<ResourceBase*>> buildResourceList();
 
+        CurlManager &curl();
+
     private:
         void updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority);
         void updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension);
@@ -74,6 +78,8 @@ namespace Resources {
         };
 
         Filesystem::FileWatcher mFileWatcher;
+
+        CurlManager mCurl;
 
         std::map<Filesystem::Path, int, SubDirCompare> mResourcePaths;
 

@@ -46,7 +46,7 @@ namespace Tools {
             co_return false;
 
         //TODO
-        auto fontPath = "C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\texteditor\\data\\CascadiaMono.tft";
+        auto fontPath = "C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\texteditor\\data\\CascadiaMono.ttf";
 
         mFontPixelHeight = (int)dpi_pixel_height_from_point_size(sFontSize, sPixelScale().y);
 

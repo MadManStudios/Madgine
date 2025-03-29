@@ -124,14 +124,25 @@ namespace Filesystem {
         if (p.empty())
             return true;
         const char *c = p.data();
-        if (p[0] != '.') {
-            if (!std::isalnum(p[0]) && p[0] != '_' && p[0] != '$')
+        size_t size = p.size();
+        size_t protocol = p.find("://");
+        if (protocol != std::string::npos) {
+            c += protocol + 3;
+            size -= protocol + 3;
+            for (size_t i = 0; i < protocol; ++i) {
+                if (!std::isalnum(p[i]))
+                    return false;
+            }
+        }
+        
+        if (c[0] != '.') {
+            if (!std::isalnum(c[0]) && c[0] != '_' && c[0] != '$')
                 return false;
-            if (p.size() == 1)
+            if (size == 1)
                 return true;
-            if (!std::isalnum(p[1]) && !isSeparator(p[1]) && !std::ispunct(p[1]) && p[1] != ':')
+            if (!std::isalnum(p[1]) && !isSeparator(c[1]) && !std::ispunct(c[1]) && c[1] != ':')
                 return false;
-            c = p.data() + 2;
+            c = c + 2;
         }
         for (; c < p.data() + p.size(); ++c) {
             unsigned char uc = *c;
@@ -141,7 +152,6 @@ namespace Filesystem {
                 || uc == ':'
                 || uc == '"'
                 || uc == '|'
-                || uc == '?'
                 || uc == '*')
                 return false;
         }

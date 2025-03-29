@@ -8,6 +8,8 @@
 
 #include "Interfaces/filesystem/path.h"
 
+#include "Meta/math/vector2i.h"
+
 namespace Engine {
 
 struct MadgineObjectState;
@@ -45,6 +47,7 @@ namespace Tools {
         Dialog<Filesystem::Path> directoryPicker(Filesystem::Path path = {}, Filesystem::Path selected = {});
         Dialog<Filesystem::Path> filePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});
 
+        virtual void Image(const Filesystem::Path &path, Vector2i image_size = { -1, -1 }) = 0;
 
     protected:        
         unsigned int mDockSpaceId;

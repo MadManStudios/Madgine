@@ -41,6 +41,8 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
+#include "Madgine/imageloader/imageloader.h"
+
 METATABLE_BEGIN_BASE(Engine::Tools::ClientImRoot, Engine::Tools::ImRoot)
 METATABLE_END(Engine::Tools::ClientImRoot)
 
@@ -194,7 +196,7 @@ namespace Tools {
             main_viewport->PlatformHandle = mWindow.osWindow();
         }
 
-        //Input
+        // Input
         io.KeyMap[ImGuiKey_Tab] = Input::Key::Tabulator;
         io.KeyMap[ImGuiKey_LeftArrow] = Input::Key::LeftArrow;
         io.KeyMap[ImGuiKey_RightArrow] = Input::Key::RightArrow;
@@ -210,7 +212,7 @@ namespace Tools {
         io.KeyMap[ImGuiKey_Space] = Input::Key::Space;
         io.KeyMap[ImGuiKey_Enter] = Input::Key::Return;
         io.KeyMap[ImGuiKey_Escape] = Input::Key::Escape;
-        //io.KeyMap[ImGuiKey_KeyPadEnter] = Input::Key::Return;
+        // io.KeyMap[ImGuiKey_KeyPadEnter] = Input::Key::Return;
         io.KeyMap[ImGuiKey_A] = Input::Key::A;
         io.KeyMap[ImGuiKey_C] = Input::Key::C;
         io.KeyMap[ImGuiKey_V] = Input::Key::V;
@@ -258,7 +260,7 @@ namespace Tools {
         ImFontConfig config;
         config.MergeMode = true;
         config.FontBuilderFlags |= ImGuiFreeTypeBuilderFlags_LoadColor;
-        //config.GlyphMinAdvanceX = 13.0f;
+        // config.GlyphMinAdvanceX = 13.0f;
         config.GlyphOffset = { 0.0f, 3.0f * Window::platformCapabilities.mScalingFactor };
         config.FontDataOwnedByAtlas = false;
 
@@ -274,7 +276,7 @@ namespace Tools {
         io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
         co_await mFontTexture.createTask(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { width, height }, { pixels, static_cast<size_t>(width * height * 4) });
 
-        io.Fonts->SetTexID(mFontTexture->resource());
+        io.Fonts->SetTexID(mFontTexture->resourceBlock());
 
         io.FontGlobalScale = 1.0f / Window::platformCapabilities.mScalingFactor;
 
@@ -300,6 +302,7 @@ namespace Tools {
         ImGui::DestroyContext();
 
         mFontTexture.reset();
+        mImageCache.clear();
 
         co_await MainWindowComponentBase::finalize();
 
@@ -372,7 +375,7 @@ namespace Tools {
             setCentralNode();
 
             ImGuiViewport *main_viewport = ImGui::GetMainViewport();
-            main_viewport->Flags |= ImGuiViewportFlags_NoRendererClear; //TODO: Is that necessary every Frame?
+            main_viewport->Flags |= ImGuiViewportFlags_NoRendererClear; // TODO: Is that necessary every Frame?
 
             if (!(ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)) {
                 ImGui::Render();
@@ -555,9 +558,9 @@ namespace Tools {
         else
             io.MousePos = Vector2 { static_cast<float>(arg.windowPosition.x), static_cast<float>(arg.windowPosition.y) } / io.DisplayFramebufferScale;
 
-        //LOG(io.MousePos.x << ", " << io.MousePos.y);
+        // LOG(io.MousePos.x << ", " << io.MousePos.y);
 
-        //LOG(arg.scrollWheel);
+        // LOG(arg.scrollWheel);
 
         return io.WantCaptureMouse;
     }
@@ -609,6 +612,29 @@ namespace Tools {
     Threading::TaskQueue *ClientImRoot::taskQueue() const
     {
         return mWindow.taskQueue();
+    }
+
+    void ClientImRoot::Image(const Filesystem::Path &path, Vector2i image_size)
+    {
+        std::string_view name = path.stem();
+
+        CachedImage &image = mImageCache[path];
+        if (!image.mHandle) {
+            Resources::ImageLoader::getOrCreateManual(name, path);
+            image.mHandle.loadFromImage(name, Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
+        }
+
+        if (image.mHandle.available()) {
+            const Render::Texture &tex = *image.mHandle;
+
+            if (image_size.x == -1 || image_size.y == -1) {
+                image_size = tex.size();
+            }
+
+            ImGui::Image((void *)tex.resourceBlock(), image_size);
+        } else {
+            ImGui::Spinner(path.stem().data(), 15, 6, ImGui::GetColorU32(ImGuiCol_ButtonHovered));
+        }
     }
 
 }

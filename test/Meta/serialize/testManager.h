@@ -30,7 +30,7 @@ struct BufferedTestBuf : std::basic_streambuf<char> {
     }
 
     /*virtual void handleError() override
-    {        
+    {
     }*/
 
     virtual std::streamsize xsgetn(char *buffer, std::streamsize count) override
@@ -98,7 +98,7 @@ struct TestBuf : std::basic_streambuf<char> {
         if (mBuffer.mWrittenCount[index] > (egptr() - eback())) {
             setg(eback(), gptr(), eback() + mBuffer.mWrittenCount[index]);
             std::basic_streambuf<char>::int_type c = *gptr();
-            //gbump(1);
+            // gbump(1);
             return c;
         }
         return traits_type::eof();
@@ -117,9 +117,8 @@ struct TestManager : SyncManager {
         TestReceiver<Engine::Serialize::SyncManagerResult> &receiver, Buffer &buffer, Engine::Serialize::Format format = Engine::Serialize::Formats::safebinary)
     {
         std::unique_ptr<buffered_streambuf> buf = std::make_unique<buffered_streambuf>(std::make_unique<BufferedTestBuf>(buffer, false));
-        Engine::Execution::detach(
-            setSlaveStream(format, std::move(buf), 1s, std::make_unique<SyncStreamData>(*this, 0))
-            | Engine::Execution::then_receiver(receiver));
+        Engine::Execution::detach_with_receiver(
+            setSlaveStream(format, std::move(buf), 1s, std::make_unique<SyncStreamData>(*this, 0)), receiver);
         receiveMessages(-1, 1s);
     }
 

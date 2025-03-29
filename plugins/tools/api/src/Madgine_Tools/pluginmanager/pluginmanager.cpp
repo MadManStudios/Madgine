@@ -23,6 +23,12 @@
 
 #    include "Modules/ini/inisection.h"
 
+#    include "Generic/execution/execution.h"
+
+#    include "Modules/threading/awaitables/awaitablesender.h"
+
+#include "../renderer/imroot.h"
+
 UNIQUECOMPONENT(Engine::Tools::PluginManager);
 
 namespace Engine {
@@ -39,9 +45,54 @@ namespace Tools {
         ImGui::SetNextWindowSize({ 550, 400 }, ImGuiCond_FirstUseEver);
         if (ImGui::Begin("Plugin Manager", &mVisible)) {
 
-            ImGui::TextColored(ImColor(255, 40, 40, 255), "Changes are only applied on restart!");
+            if (ImGui::BeginTabBar("Plugin settings")) {
+                if (ImGui::BeginTabItem("Selection")) {
 
-            renderPluginSelection(false);
+                    ImGui::TextColored(ImColor(255, 40, 40, 255), "Changes are only applied on restart!");
+
+                    renderPluginSelection(false);
+
+                    ImGui::EndTabItem();
+                }
+                if (ImGui::BeginTabItem("Hub")) {
+
+                    ImGui::TextColored(ImColor(255, 40, 40, 255), "Changes are only applied on rebuild!");
+
+                    if (ImGui::Button("Test")) {
+                        mLifetime.attach(mCurl.request<JsonParser>("https://api.github.com/orgs/MadManStudios/repos", { "Accept: application/vnd.github+json", "User-Agent: Madgine" }) | Execution::then([this](JsonObject result) {
+                            // LOG(result);
+                            mSources.clear();
+                            for (JsonObject &repo : result.asList()) {
+                                PluginSource &source = mSources.emplace_back();
+                                source.mIcon = repo.asObject()["owner"].asObject()["avatar_url"].asString();
+                                source.mName = repo.asObject()["name"].asString();
+                            }
+                        }));
+                    }
+
+                    if (ImGui::BeginTable("Sources", 3, ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_SizingFixedFit)) {
+
+                        ImGui::TableSetupColumn("Icon", 0);
+                        ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthStretch);
+                        ImGui::TableSetupColumn("NoIdea", 0);
+
+                        for (PluginSource &source : mSources) {
+                            ImGui::TableNextRow();
+                            ImGui::TableNextColumn();
+                            mRoot.Image(source.mIcon, { 64, 64 });
+                            ImGui::TableNextColumn();
+                            ImGui::Text(source.mName);
+                            ImGui::TableNextColumn();
+                            ImGui::Button("Activate");
+                        }
+
+                        ImGui::EndTable();
+                    }
+
+                    ImGui::EndTabItem();
+                }
+                ImGui::EndTabBar();
+            }
         }
         ImGui::End();
     }
@@ -133,7 +184,7 @@ namespace Tools {
                                 for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
                                     for (UniqueComponent::CollectorInfoBase *info : *reg) {
                                         if (info->mBinary == binInfo && ImGui::TreeNode(info->mBaseInfo->mTypeName.data(), "%.*s", static_cast<int>(info->mBaseInfo->mTypeName.size()), info->mBaseInfo->mTypeName.data())) {
-                                            for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo*> &components : info->mElementInfos) {
+                                            for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo *> &components : info->mElementInfos) {
                                                 ImGui::Text(components.first.front()->mTypeName);
                                             }
                                             ImGui::TreePop();
@@ -156,7 +207,27 @@ namespace Tools {
 
     Threading::Task<bool> PluginManager::init()
     {
-        co_return co_await ToolBase::init();
+        if (!co_await ToolBase::init())
+            co_return false;
+
+        Execution::detach(mLifetime);
+
+        co_return true;
+    }
+
+    Threading::Task<void> PluginManager::finalize()
+    {
+        mLifetime.end();
+        co_await mLifetime.finished();
+
+        co_await ToolBase::finalize();
+    }
+
+    void PluginManager::update()
+    {
+        ToolBase::update();
+
+        mCurl.update();
     }
 
     std::string_view PluginManager::key() const

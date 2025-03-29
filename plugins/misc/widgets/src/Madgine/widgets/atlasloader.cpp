@@ -125,7 +125,7 @@ namespace Widgets {
 
     Render::ResourceBlock UIAtlas::resource()
     {
-        return mTexture->resource();
+        return mTexture->resourceBlock();
     }
 
     void UIAtlas::expand()

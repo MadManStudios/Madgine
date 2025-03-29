@@ -42,7 +42,7 @@ namespace Widgets {
             Vector2 pos = getAbsolutePosition();
             Vector3 size = getAbsoluteSize();
 
-            renderData.renderQuad(pos, size.xy(), { 1.0f, 1.0f, 1.0f, 1.0f }, { mSource->texture()->resource() });
+            renderData.renderQuad(pos, size.xy(), { 1.0f, 1.0f, 1.0f, 1.0f }, { mSource->texture()->resourceBlock() });
         }
 
         WidgetBase::render(renderData);

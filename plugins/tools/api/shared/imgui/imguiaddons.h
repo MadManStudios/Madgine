@@ -266,6 +266,8 @@ bool EnumCombo(const char *name, E *val)
 
 IMGUI_API void MakeTabVisible(const char *name);
 
+IMGUI_API bool Spinner(const char *label, float radius, int thickness, const ImU32 &color);
+
 using Unit = std::pair<size_t, const char *>;
 
 static constexpr Unit sByteUnits[] {

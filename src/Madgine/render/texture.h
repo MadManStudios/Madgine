@@ -43,7 +43,7 @@ namespace Render {
             return mTextureHandle;
         }
 
-        ResourceBlock resource() const
+        ResourceBlock resourceBlock() const
         {
             return mResourceBlock;
         }
