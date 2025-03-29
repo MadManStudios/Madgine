@@ -24,5 +24,6 @@ add_plugin(Tools Madgine Tools ${sources} PRECOMPILED_HEADER src/Madgine_Tools/t
 
 target_link_plugins(Tools)
 
-target_link_libraries(Tools PUBLIC ImGui Im3D CodeGen)
+target_link_libraries(Tools PUBLIC ImGui Im3D CodeGen Curl)
+
 

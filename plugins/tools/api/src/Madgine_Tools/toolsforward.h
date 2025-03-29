@@ -7,6 +7,9 @@ namespace Tools {
     struct Inspector;
 
     struct SceneEditor;
+
+    template <typename... T>
+    struct Dialog;
 }
 }
 

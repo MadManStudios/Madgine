@@ -60,7 +60,8 @@ namespace Tools {
 
                                 TemplateEngine::Parser parser { path };
 
-                                DialogSettings settings;
+                                DialogSettings &settings = co_await get_settings;
+                                settings.header = "Generate 'Test'";
                                 do {
                                     if (ImGui::BeginTable("fields", 2, ImGuiTableFlags_Resizable)) {
                                         for (auto &[key, value] : parser.fields()) {

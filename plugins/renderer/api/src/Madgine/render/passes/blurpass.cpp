@@ -44,9 +44,9 @@ namespace Render {
         }
 
         if (iteration == 0) {
-            mPipeline->bindResources(target, 2, mInput->texture(mInputIndex)->resource());
+            mPipeline->bindResources(target, 2, mInput->texture(mInputIndex)->resourceBlock());
         } else {
-            mPipeline->bindResources(target, 2, target->texture(1)->resource());
+            mPipeline->bindResources(target, 2, target->texture(1)->resourceBlock());
         }
 
         mPipeline->renderQuad(target);

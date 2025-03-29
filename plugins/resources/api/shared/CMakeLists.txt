@@ -13,3 +13,6 @@ add_notices(assimp
 	READABLE_NAME "Asset Importer" 
 	LICENSE_FILE assimp-5.2.5/LICENSE 
 	CREDITS "Model-Loading: Open Asset Import Library (assimp) - https://github.com/assimp/assimp")
+
+
+	

@@ -7,6 +7,20 @@
 namespace Engine {
 namespace Tools {
 
+    void DialogSettings::accept() {
+        result = DialogResult::Accepted;
+    }
+
+    void DialogSettings::decline()
+    {
+        result = DialogResult::Declined;
+    }
+
+    void DialogSettings::cancel()
+    {
+        result = DialogResult::Canceled;
+    }
+
     void DialogContainer::show(CoroutineHandle<DialogPromise> dialog)
     {
         dialog->mTargetContainer = this;
@@ -18,30 +32,30 @@ namespace Tools {
         std::vector<CoroutineHandle<DialogPromise>> dialogs = std::move(mDialogs);
 
         for (CoroutineHandle<DialogPromise> &dialog : dialogs) {
-            if (renderHeader()) {
-                DialogSettings settings;
-                dialog->mOutSettings = &settings;
+            if (renderHeader(dialog->mSettings)) {                
                 CoroutineHandle<DialogPromise> continuation;
                 dialog->mOutHandle = &continuation;
+                DialogSettings backup = dialog->mSettings;
                 dialog.release().resume();
-                std::optional<DialogResult> done = renderFooter(settings);
-                if (continuation) {
-                    if (done) {
-                        if (*done != DialogResult::Canceled) {
-                            continuation->mDone = *done;
+                DialogSettings &settings = continuation ? continuation->mSettings : backup;
+                renderFooter(settings);
+                if (continuation) {       
+                    if (settings.result) {
+                        if (*settings.result != DialogResult::Canceled) {                            
                             continuation.release().resume();
                         }
                     } else {
                         mDialogs.push_back(std::move(continuation));
                     }
                 }
+
             }
         }
     }
 
-    bool DialogContainer::renderHeader()
+    bool DialogContainer::renderHeader(DialogSettings &settings)
     {
-        std::string header = " "; // mSettings.header.empty() ? " " : mSettings.header;
+        std::string header = settings.header;
 
         ImGui::PushID(this);
         ImGui::OpenPopup(header.c_str());
@@ -58,19 +72,17 @@ namespace Tools {
         }
     }
 
-    std::optional<DialogResult> DialogContainer::renderFooter(DialogSettings settings)
+    void DialogContainer::renderFooter(DialogSettings &settings)
     {
         ImGui::BeginHorizontal("Buttons");
 
         ImGui::Spring();
 
-        std::optional<DialogResult> result;
-
         if (settings.showAccept) {
             if (!settings.acceptPossible)
                 ImGui::BeginDisabled();
             if (ImGui::Button(settings.acceptText.c_str())) {
-                result = DialogResult::Accepted;
+                settings.accept();
             }
             if (!settings.acceptPossible)
                 ImGui::EndDisabled();
@@ -78,13 +90,13 @@ namespace Tools {
 
         if (settings.showDecline) {
             if (ImGui::Button(settings.declineText.c_str())) {
-                result = DialogResult::Declined;
+                settings.decline();
             }
         }
 
         if (settings.showCancel) {
             if (ImGui::Button(settings.cancelText.c_str())) {
-                result = DialogResult::Canceled;
+                settings.cancel();
             }
         }
 
@@ -93,8 +105,6 @@ namespace Tools {
 
         ImGui::EndPopup();
         ImGui::PopID();
-
-        return result;
     }
 
 }

@@ -23,6 +23,7 @@ namespace Resources {
     ImageLoader::ImageLoader()
         : ResourceLoader({ ".png", ".jpg" })
     {
+        getOrCreateManual("Test", "https://avatars.githubusercontent.com/u/202794897?v=4", {}, this);
     }
 
     Threading::Task<bool> ImageLoader::loadImpl(ImageData &data, ResourceDataInfo &info)

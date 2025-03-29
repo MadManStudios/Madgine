@@ -7,6 +7,10 @@
 
 #include "Modules/ini/inifile.h"
 
+#include "Generic/execution/lifetime.h"
+
+#include "Madgine/curl/curl.h"
+
 namespace Engine {
 namespace Tools {
 
@@ -15,20 +19,37 @@ namespace Tools {
 
         PluginManager(ImRoot &root);
 
-        virtual void render() override;
-        virtual bool renderConfiguration(const Filesystem::Path &config) override;
-        virtual void loadConfiguration(const Filesystem::Path &config) override;
-        virtual void saveConfiguration(const Filesystem::Path &config) override;
+        void render() override;
+        bool renderConfiguration(const Filesystem::Path &config) override;
+        void loadConfiguration(const Filesystem::Path &config) override;
+        void saveConfiguration(const Filesystem::Path &config) override;
 
         bool renderPluginSelection(bool isConfiguration);
 
-        virtual Threading::Task<bool> init() override;
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
+
+        void update() override;
 
         std::string_view key() const override;
 
     private:
         Plugins::PluginManager &mManager;
         Ini::IniFile mCurrentConfiguration;
+
+        struct PluginSource {
+            Filesystem::Path mIcon;
+            std::string mName;
+        };
+        std::vector<PluginSource> mSources;
+        struct Icon {
+            bool mFetching = false;
+            std::string mContent;
+        };
+        std::map<std::string, Icon> mIconCache;
+
+        Execution::Lifetime<> mLifetime;
+        CurlManager mCurl;
     };
 
 }

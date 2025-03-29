@@ -22,6 +22,10 @@
 
 #include "Madgine/imageloader/imagedata.h"
 
+#include "Madgine/render/textureloader.h"
+
+#include "Madgine_Tools/renderer/imroot.h"
+
 UNIQUECOMPONENT(Engine::Tools::DirectX12RenderContextTool);
 
 METATABLE_BEGIN_BASE(Engine::Tools::DirectX12RenderContextTool, Engine::Tools::RenderContextTool)
@@ -40,16 +44,9 @@ namespace Tools {
 
     Threading::Task<bool> DirectX12RenderContextTool::init()
     {
-        mImageTexture = { Render::TextureType_2D, false, Render::FORMAT_RGBA8_SRGB, { 100, 100 } };
 
         getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](Resources::ImageLoader::Resource *image) {
-            Resources::ImageLoader::Handle data = image->loadData();
-            data.info()->setPersistent(true);
-
-            if (data.available()) {
-                mImageTexture.setData(data->mSize, data->mBuffer);
-                ImGui::Image((void *)mImageTexture.resource(), data->mSize);
-            }
+            mRoot.Image(image->path());
             return false;
         });
 
@@ -62,8 +59,6 @@ namespace Tools {
 
     Threading::Task<void> DirectX12RenderContextTool::finalize()
     {
-        mImageTexture.reset();
-
         co_await RenderContextTool::finalize();
     }
 
