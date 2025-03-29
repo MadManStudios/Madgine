@@ -25,6 +25,13 @@ namespace Debug {
             mStats.start();
         }
 
+        ProfilerThread::ProfilerThread(const char *name)
+            : mStats(name)
+        {
+            mCurrent = &mStats;
+            mStats.start();
+        }
+
         ProfilerThread::~ProfilerThread()
         {
             mStats.stop();

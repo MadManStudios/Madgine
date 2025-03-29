@@ -17,9 +17,9 @@ namespace UniqueComponent {
 
     CollectorManager::CollectorManager(Plugins::PluginManager &pluginMgr)
     {
-        for (const auto &[name, section] : pluginMgr) {
-            for (const auto &[name, plugin] : section) {
-                if (plugin.isLoaded()) {
+        for (const auto &section : pluginMgr) {
+            for (const auto &plugin : section) {
+                if (plugin.isLoaded(pluginMgr.selection())) {
                     for (RegistryBase *reg : registryRegistry()) {
                         reg->onPluginLoad(plugin.info());
                     }

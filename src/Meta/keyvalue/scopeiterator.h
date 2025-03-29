@@ -7,7 +7,7 @@ namespace Engine {
 
 struct META_EXPORT ScopeIterator {
 
-    ScopeIterator(TypedScopePtr scope, const std::pair<const char *, Accessor> *pointer);
+    ScopeIterator(ScopePtr scope, const std::pair<const char *, Accessor> *pointer);
 
     bool operator==(const ScopeIterator &other) const;
 
@@ -23,7 +23,7 @@ struct META_EXPORT ScopeIterator {
 private:
     void checkDerived();
 
-    TypedScopePtr mScope;
+    ScopePtr mScope;
     const MetaTable *mCurrentTable;
     const std::pair<const char *, Accessor> *mPointer;
 };

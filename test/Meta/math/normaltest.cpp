@@ -15,14 +15,14 @@ TEST(Math, Normals)
 
     Quaternion q = Quaternion::FromDegrees({ 45, 90, 0 });
     Quaternion q1 = Quaternion::FromDegrees({ 0, 90, 0 });
-    Quaternion q2 = Quaternion::FromDegrees({ 0, 0, -45 });
+    Quaternion q2 = Quaternion::FromDegrees({ 0, 0, 45 });
 
     Matrix3 ref = q.toMatrix();
     Matrix3 ref1 = q1.toMatrix();
     Matrix3 ref2 = q2.toMatrix();
 
-    EXPECT_EQ(q2 * q1, q);
-    EXPECT_TRUE((ref2 * ref1).equalsWithEpsilon(ref));
+    EXPECT_EQ(q1 * q2, q);
+    EXPECT_TRUE((ref1 * ref2).equalsWithEpsilon(ref));
 
 
     Matrix4 m = TransformMatrix(Vector3::ZERO, Vector3::UNIT_SCALE, q);

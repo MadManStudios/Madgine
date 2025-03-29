@@ -3,6 +3,9 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        flatDir {
+            dirs("@CMAKE_BINARY_DIR@/android_extensions")
+        }
     }
 }
 dependencyResolutionManagement {

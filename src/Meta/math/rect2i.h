@@ -7,6 +7,9 @@ namespace Engine {
 struct Rect2i {
     Vector2i mTopLeft, mSize;
 
+    Vector2i bottomRight() const {
+        return mTopLeft + mSize;
+    }
 };
 
 }

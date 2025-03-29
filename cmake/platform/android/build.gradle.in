@@ -10,6 +10,7 @@ android {
         applicationId "com.@PROJECT_NAME@.@target@"
         minSdkVersion @ANDROID_PLATFORM_LEVEL@
         targetSdkVersion @ANDROID_PLATFORM_LEVEL@
+        multiDexEnabled = true
     }
 
 
@@ -38,8 +39,26 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            jniLibs.srcDirs = ['@CMAKE_CURRENT_BINARY_DIR@/bin/', '@CMAKE_ANDROID_NDK@/sources/cxx-stl/llvm-libc++/libs/']
+            jniLibs.srcDirs = ['@CMAKE_CURRENT_BINARY_DIR@/bin/', '@CMAKE_ANDROID_NDK@/sources/cxx-stl/llvm-libc++/libs/' @ANDROID_ADDITIONAL_DEPENDENCIES@]
 			assets.srcDirs = ['@CMAKE_BINARY_DIR@/data/']
+            res.srcDirs = ['@MADGINE_CONFIGURATION@/res' @ANDROID_ADDITIONAL_RESOURCES@]
+            java.srcDirs = [@ANDROID_ADDITIONAL_SOURCES@]
         }
     }
+
+    packagingOptions{
+        jniLibs{
+            useLegacyPackaging true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+  implementation "com.google.android.gms:play-services-games-v2:+"
 }

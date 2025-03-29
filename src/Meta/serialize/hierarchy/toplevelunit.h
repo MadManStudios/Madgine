@@ -1,11 +1,12 @@
 #pragma once
 
 #include "syncableunit.h"
+#include "../syncmanager.h"
 
 namespace Engine {
 namespace Serialize {
     struct META_EXPORT TopLevelUnitBase : SyncableUnitBase {
-        TopLevelUnitBase(UnitId staticId = 0);
+        TopLevelUnitBase(UnitId masterId = 0);
         TopLevelUnitBase(const TopLevelUnitBase &other);
         TopLevelUnitBase(TopLevelUnitBase &&other) noexcept;
         ~TopLevelUnitBase();
@@ -13,7 +14,7 @@ namespace Serialize {
         void sync();
         void unsync();
 
-        FormattedBufferedStream &getSlaveMessageTarget() const;
+        FormattedMessageStream &getSlaveMessageTarget() const;
 
         const std::vector<SyncManager *> &getManagers() const;
         SyncManager *getSlaveManager() const;
@@ -25,15 +26,21 @@ namespace Serialize {
 
         ParticipantId participantId() const;
 
-        void setStaticSlaveId(UnitId staticId);
-        void initSlaveId(SyncManager *mgr);
+        void setStaticSlaveId(UnitId slaveId);
+        void receiveStateImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, SyncManager *mgr);
+        ASYNC_STUB(receiveState, receiveStateImpl, Execution::make_simple_virtual_sender<SyncManagerResult>);
+        void stateReadDone();
 
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterMessageTargets() const;
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> getMasterMessageTargets() const;
 
     private:
         std::vector<SyncManager *> mManagers;
         SyncManager *mSlaveManager = nullptr;
-        UnitId mStaticSlaveId;
+        UnitId mStaticSlaveId = 0;
+
+        friend struct SyncManager;
+
+        Execution::VirtualReceiverBase<SyncManagerResult> *mReceivingMasterState = nullptr;
     };
 
     template <typename T>

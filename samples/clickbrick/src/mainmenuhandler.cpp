@@ -12,13 +12,13 @@
 
 UNIQUECOMPONENT(ClickBrick::MainMenuHandler)
 
-METATABLE_BEGIN_BASE(ClickBrick::MainMenuHandler, Engine::Input::HandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::MainMenuHandler, Engine::Widgets::WidgetHandlerBase)
 METATABLE_END(ClickBrick::MainMenuHandler)
 
 namespace ClickBrick {
 
-MainMenuHandler::MainMenuHandler(Engine::Input::UIManager &ui)
-    : Engine::Input::Handler<MainMenuHandler>(ui, "MainMenu", Engine::Input::HandlerBase::WidgetType::ROOT_WIDGET)
+MainMenuHandler::MainMenuHandler(Engine::HandlerManager &ui)
+    : Engine::Widgets::WidgetHandler<MainMenuHandler>(ui, "MainMenu", Engine::Widgets::WidgetHandlerBase::WidgetType::ROOT_WIDGET)
 {
 }
 
@@ -27,11 +27,11 @@ std::string_view MainMenuHandler::key() const
     return "MainMenuHandler";
 }
 
-void MainMenuHandler::setWidget(Engine::Widgets::WidgetBase *w)
+void MainMenuHandler::startLifetime()
 {
-    Engine::Input::HandlerBase::setWidget(w);
+    WidgetHandlerBase::startLifetime();
     if (widget()) {
-        widget()->getChildRecursive<Engine::Widgets::Button>("StartGameButton")->clickEvent().connect(&MainMenuHandler::startGame, this, &mConStore);
+        setupButton("StartGameButton", &MainMenuHandler::startGame, this);
     }
 }
 

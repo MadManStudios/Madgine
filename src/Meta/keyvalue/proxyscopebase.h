@@ -1,12 +1,12 @@
 #pragma once
 
-#include "typedscopeptr.h"
+#include "scopeptr.h"
 
 namespace Engine {
 
 struct META_EXPORT ProxyScopeBase {
     inline virtual ~ProxyScopeBase() = default;
-    virtual TypedScopePtr proxyScopePtr() = 0;
+    virtual ScopePtr proxyScopePtr() = 0;
 };
 
 template <typename T>
@@ -16,7 +16,7 @@ struct ScopeWrapper : ProxyScopeBase, T {
         : T(std::forward<Args>(args)...)
     {
     }
-    virtual TypedScopePtr proxyScopePtr() override
+    virtual ScopePtr proxyScopePtr() override
     {
         return static_cast<T*>(this);
     }

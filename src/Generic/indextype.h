@@ -8,89 +8,102 @@ struct IndexType {
     using value_type = T;
     static constexpr T sInvalid = invalid;
 
-    IndexType(T index = invalid)
+    constexpr IndexType(T index = invalid)
         : mIndex(index)
     {
     }
 
-    IndexType(const IndexType &) = default;
+    constexpr IndexType(const IndexType &) = default;
 
-    IndexType(IndexType &&other)
+    constexpr IndexType(IndexType &&other)
         : mIndex(std::exchange(other.mIndex, invalid))
     {
     }
 
     template <std::convertible_to<T> U>
-    IndexType(IndexType<U> other)
+    constexpr IndexType(IndexType<U> other)
         : mIndex(other)
     {
     }
 
-    IndexType &operator=(T t)
+    constexpr IndexType &operator=(T t)
     {
         assert(t != invalid);
         mIndex = t;
         return *this;
     }
 
-    IndexType &operator=(const IndexType &) = default;
+    constexpr IndexType &operator=(const IndexType &) = default;
 
-    IndexType& operator=(IndexType&& other) {
+    constexpr IndexType &operator=(IndexType &&other)
+    {
         mIndex = std::exchange(other.mIndex, invalid);
         return *this;
     }
 
-    void operator++()
+    constexpr void operator++()
     {
         assert(mIndex != invalid);
         ++mIndex;
     }
-    void operator--()
+    constexpr void operator--()
     {
         assert(mIndex != invalid);
         --mIndex;
     }
-    IndexType &operator+=(T s)
+    constexpr IndexType &operator+=(T s)
     {
         assert(mIndex != invalid);
         mIndex += s;
         return *this;
     }
-    IndexType &operator-=(T s)
+    constexpr IndexType &operator-=(T s)
     {
         assert(mIndex != invalid);
         mIndex -= s;
         return *this;
     }
 
-    bool operator==(const IndexType &other) const
+    constexpr bool operator==(const IndexType &other) const
     {
         return mIndex == other.mIndex;
     }
 
     template <std::constructible_from<T> U>
-    bool operator==(const U &other) const
+    constexpr bool operator==(const U &other) const
     {
         return mIndex == other;
     }
+        
+    template <std::constructible_from<T> U>
+    friend constexpr bool operator==(const U &other, const IndexType &self)
+    {
+        return self.mIndex == other;
+    }
 
     template <std::constructible_from<T> U>
-    bool operator!=(const U &other) const
+    constexpr bool operator==(const IndexType<U> &other) const
+    {
+        return mIndex == other.mIndex;
+    }
+
+    template <std::constructible_from<T> U>
+    constexpr bool operator!=(const U &other) const
     {
         return mIndex != other;
     }
 
-    void reset()
+    constexpr void reset()
     {
         mIndex = invalid;
     }
 
-    operator T() const
+    constexpr operator T() const
     {
         return mIndex;
     }
 
-    explicit operator bool() const
+    explicit constexpr operator bool() const
     {
         return mIndex != invalid;
     }
@@ -113,7 +126,6 @@ struct IndexType {
         return in;
     }
 
-private:
     T mIndex;
 };
 

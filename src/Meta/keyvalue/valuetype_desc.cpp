@@ -19,6 +19,19 @@ std::string_view ValueTypeIndex::toString() const
     }
 }
 
+std::string_view ValueTypeIndex::toTypeName() const
+{
+    switch (mIndex) {
+#define VALUETYPE_SEP
+#define VALUETYPE_TYPE(Name, Storage, ...) \
+    case ValueTypeEnum::Name##Value:       \
+        return #Storage;
+#include "valuetypedefinclude.h"
+    default:
+        std::terminate();
+    }
+}
+
 bool ValueTypeDesc::canAccept(const ValueTypeDesc &valueType)
 {
     if (mType != valueType.mType)
@@ -42,6 +55,18 @@ std::string ValueTypeDesc::toString() const
         return (*mSecondary.mMetaTable)->mTypeName;
     default:
         return std::string { mType.toString() };
+    }
+}
+
+std::string ValueTypeDesc::toTypeName() const
+{
+    switch (mType) {
+    case ValueTypeEnum::ScopeValue:
+        return mSecondary.mMetaTable ? std::string { (*mSecondary.mMetaTable)->mTypeName } + "*" : "<no-type>";
+    case ValueTypeEnum::OwnedScopeValue:
+        return (*mSecondary.mMetaTable)->mTypeName;
+    default:
+        return std::string { mType.toTypeName() };
     }
 }
 

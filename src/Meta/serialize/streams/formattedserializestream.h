@@ -52,7 +52,7 @@ namespace Serialize {
 
         explicit operator bool() const;
 
-        SerializeStreamData *data();
+        SerializeStreamData *data() const;
 
         bool isMaster(AccessMode mode);
 

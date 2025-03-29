@@ -18,7 +18,7 @@ struct META_EXPORT OwnedScopePtr {
     template <typename T>
     requires (!std::same_as<std::decay_t<T>, OwnedScopePtr> && !InstanceOf<std::decay_t<T>, std::shared_ptr>)
     explicit OwnedScopePtr(T &&t)
-        : mScope(std::make_shared<ScopeWrapper<std::remove_reference_t<T>>>(std::forward<T>(t)))
+        : mScope(std::make_shared<ScopeWrapper<std::decay_t<T>>>(std::forward<T>(t)))
     {
     }
 
@@ -35,13 +35,7 @@ struct META_EXPORT OwnedScopePtr {
 
     bool operator==(const OwnedScopePtr &other) const;
 
-    TypedScopePtr get() const;
-
-    template <typename T>
-    T &safe_cast() const
-    {
-        return *get().safe_cast<T>();
-    }
+    ScopePtr get() const;
 
     void construct(const MetaTable *type);
 

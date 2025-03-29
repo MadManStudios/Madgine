@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/delayedconstruct.h"
+
 namespace Engine {
 namespace Serialize {
 
@@ -9,9 +11,9 @@ namespace Serialize {
     struct Guard {
         using Category = GuardCategory;
 
-        static auto guard(const CallerHierarchyBasePtr &hierarchy)
+        static auto guard(const CallerHierarchyBasePtr &hierarchy) -> std::tuple<decltype(Guards::guard(hierarchy))...>
         {
-            return std::make_tuple(Guards::guard(hierarchy)...);
+            return std::make_tuple(DelayedConstruct<decltype(Guards::guard(hierarchy))> { [&]() { return Guards::guard(hierarchy); } }...);
         }
     };
 
@@ -26,7 +28,7 @@ namespace Serialize {
     };
 
     template <typename... Configs>
-    using GuardSelector = ConfigGroupSelector<GuardCategory, Guard, Configs...>;
+    using GuardSelector = typename ConfigGroupSelector<GuardCategory, Configs...>::template instantiate<Guard>;
 
 }
 }

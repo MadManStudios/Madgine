@@ -23,10 +23,13 @@ namespace Serialize {
 
         virtual ~buffered_streambuf();
 
-        MessageId beginMessageWriteImpl() override;
-        void endMessageWriteImpl() override;
+        void beginMessageWriteImpl() override;
+        MessageId endMessageWriteImpl() override;
 
         MessageId beginMessageReadImpl() override;
+        std::streamsize endMessageReadImpl() override;
+
+        std::basic_streambuf<char> &buffer() const;
 
     protected:
         pos_type seekoff(off_type off, std::ios_base::seekdir dir,
@@ -36,10 +39,9 @@ namespace Serialize {
 
         int_type overflow(int c = EOF) override;
 
-        int sync() override;
         void extend();
-        std::streamsize receiveMessages();
-        std::streamsize sendMessages();
+        StreamResult receiveMessages() override;
+        StreamResult sendMessages() override;
 
     private:
         //read

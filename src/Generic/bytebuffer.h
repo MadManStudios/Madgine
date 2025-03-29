@@ -13,10 +13,16 @@ struct ByteBufferDataAccessor {
 
     template <typename T, typename D>
     auto operator()(const std::unique_ptr<T, D> &p) { return p.get(); }
+
+    template <typename T, size_t Size>
+    const T *operator()(const T (&a)[Size]) { return a; }
 };
 struct ByteBufferSizeAccessor {
     template <typename T>
     size_t operator()(const std::vector<T> &v) { return v.size() * sizeof(T); }
+
+    template <typename T, size_t Size>
+    size_t operator()(const T (&)[Size]) { return Size * sizeof(T); }
 };
 
 /**
@@ -28,21 +34,26 @@ struct ByteBufferImpl {
 
     ByteBufferImpl() = default;
 
-    template <typename T, typename SizeAccessor = ByteBufferSizeAccessor, typename DataAccessor = ByteBufferDataAccessor>
-    requires(!Pointer<std::remove_reference_t<T>> && !std::convertible_to<SizeAccessor, size_t> && !std::convertible_to<DataAccessor, const void *>)
-        ByteBufferImpl(T &&t, SizeAccessor &&sizeAccess = {}, DataAccessor &&dataAccess = {})
+    template <typename T>
+    requires(requires(T &t) {
+        ByteBufferSizeAccessor {}(t);
+        ByteBufferDataAccessor {}(t);
+    })
+        ByteBufferImpl(T &&t)
         : mKeep(std::forward<T>(t))
-        , mSize(TupleUnpacker::invoke(std::forward<SizeAccessor>(sizeAccess), mKeep.as<T>()))
-        , mData(TupleUnpacker::invoke(std::forward<DataAccessor>(dataAccess), mKeep.as<T>()))
+        , mSize(ByteBufferSizeAccessor {}(mKeep.as<T>()))
+        , mData(ByteBufferDataAccessor {}(mKeep.as<T>()))
     {
     }
 
-    template <typename T, typename DataAccessor = ByteBufferDataAccessor>
-    requires(!Pointer<std::remove_reference_t<T>> && !std::convertible_to<DataAccessor, const void *>)
-        ByteBufferImpl(T &&t, size_t size, DataAccessor &&dataAccess = {})
+    template <typename T>
+    requires(requires(T &t) {        
+        ByteBufferDataAccessor {}(t);
+    })
+        ByteBufferImpl(T &&t, size_t size)
         : mKeep(std::forward<T>(t))
         , mSize(size)
-        , mData(TupleUnpacker::invoke(std::forward<DataAccessor>(dataAccess), mKeep.as<T>()))
+        , mData(ByteBufferDataAccessor {}(mKeep.as<T>()))
     {
     }
 
@@ -85,7 +96,10 @@ struct ByteBufferImpl {
 
     Data *end() const
     {
-        return mData + mSize;
+        if constexpr (std::same_as<std::remove_const_t<Data>, void>)
+            return static_cast<const std::byte *>(mData) + mSize;
+        else
+            return mData + mSize;
     }
 
     Data *operator->() const
@@ -117,9 +131,18 @@ struct ByteBufferImpl<Data[]> : ByteBufferImpl<Data> {
     {
         return this->mData[index];
     }
+
+    size_t elementCount() const
+    {
+        assert(this->mSize % sizeof(Data) == 0);
+        return this->mSize / sizeof(Data);
+    }
 };
 
 using ByteBuffer = ByteBufferImpl<const void>;
 using WritableByteBuffer = ByteBufferImpl<void>;
+
+template <typename T>
+ByteBufferImpl(std::vector<T>) -> ByteBufferImpl<T[]>;
 
 }

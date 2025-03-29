@@ -3,9 +3,7 @@
 /// @cond
 
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/pipelineloaderlib.h"
-#include "Madgine/textureloaderlib.h"
-#include "Madgine/clientlib.h"
+#include "Madgine/renderlib.h"
 
 #if defined(DirectX12_EXPORTS)
 #    define MADGINE_DIRECTX12_EXPORT DLL_EXPORT
@@ -22,56 +20,30 @@
 #include <pix.h>
 #include "d3dx12.h"
 #include <dxcapi.h>
+#include <comdef.h>
 
-MADGINE_DIRECTX12_EXPORT void dx12Dump(HRESULT result);
+MADGINE_DIRECTX12_EXPORT void dx12Dump(HRESULT result, const char *file, size_t line);
 MADGINE_DIRECTX12_EXPORT bool checkDevice(HRESULT &result);
 
-#define MADGINE_DIRECTX12_USE_SINGLE_COMMAND_LIST 0
-
-inline void dx12Check(HRESULT result = 0)
+inline void dx12Check(const char *file, size_t line, HRESULT result = 0)
 {
     if (FAILED(result) || !checkDevice(result)) {
-        LOG("DX12-Error: "
-            << "?");
-        dx12Dump(result);
+        _com_error error { result };
+        LOG_FATAL("DX12-Error (" << result << "): " << error.ErrorMessage());
+        dx12Dump(result, file, line);
         std::terminate();
     }
 }
 
-#define DX12_CHECK(...) dx12Check(__VA_ARGS__)
+#define DX12_CHECK(...) dx12Check(__FILE__, __LINE__ __VA_OPT__(,) __VA_ARGS__)
 
-//#define DX12_LOG(x) LOG("DX12: " << x)
-#define DX12_LOG(x)
+#define DX12_LOG(x) LOG_DEBUG("DX12: " << x)
+//#define DX12_LOG(x)
 
 #include "Generic/offsetptr.h"
 
-struct ReleaseDeleter {
-    template <typename T>
-    void operator()(T *ptr)
-    {
-        ptr->Release();
-    }
-};
-template <typename T>
-struct ReleasePtr : std::unique_ptr<T, ReleaseDeleter> {
-    using std::unique_ptr<T, ReleaseDeleter>::unique_ptr;
-
-    T **operator&()
-    {
-        assert(!*this);
-        return reinterpret_cast<T **>(this);
-    }
-
-    T *const *operator&() const
-    {
-        return reinterpret_cast<T *const *>(this);
-    }
-
-    operator T *() const
-    {
-        return this->get();
-    }
-};
+#include "Interfaces/helpers/win_ptrs.h"
+#include "Interfaces/helpers/win_wstring.h"
 
 constexpr D3D12_CPU_DESCRIPTOR_HANDLE operator+(D3D12_CPU_DESCRIPTOR_HANDLE handle, Engine::OffsetPtr offset)
 {

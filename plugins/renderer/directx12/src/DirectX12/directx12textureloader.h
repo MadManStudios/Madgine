@@ -2,7 +2,7 @@
 
 #include "Madgine/resources/resourceloader.h"
 
-#include "Madgine/textureloader/textureloader.h"
+#include "Madgine/render/textureloader.h"
 
 #include "util/directx12texture.h"
 
@@ -14,11 +14,13 @@ namespace Render {
 
         bool loadImpl(DirectX12Texture &tex, ResourceDataInfo &info);
         void unloadImpl(DirectX12Texture &tex);
-        bool create(Texture &texture, TextureType type, DataFormat format) override;
+        bool create(Texture &texture, TextureType type, TextureFormat format) override;
 
-		virtual void setData(Texture &tex, Vector2i size, const ByteBuffer &data) override;
+        virtual void setData(Texture &tex, Vector2i size, const ByteBuffer &data) override;
         virtual void setSubData(Texture &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) override;
-	};
+
+        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+    };
 }
 }
 

@@ -62,20 +62,4 @@ struct ObservableContainer : C, Observer {
     }
 };
 
-template <typename C, typename Observer>
-struct container_traits<ObservableContainer<C, Observer>> : container_traits<C> {
-    typedef ObservableContainer<C, Observer> container;
-
-    using _traits = container_traits<C>;
-
-    typedef typename _traits::iterator iterator;
-    typedef typename _traits::const_iterator const_iterator;
-
-    template <typename... _Ty>
-    static typename _traits::emplace_return emplace(container &c, const iterator &where, _Ty &&... args)
-    {
-        return c.emplace(where, std::forward<_Ty>(args)...);
-    }
-};
-
 }

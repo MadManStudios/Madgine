@@ -1,0 +1,41 @@
+#include "blur.sl"
+
+cbuffer Data : register(b0)
+{
+	BlurData data;
+}
+
+Texture2D input : register(t0, space2);
+
+SamplerState texSampler : register(s0);
+
+struct PixelShaderInput {
+    float4 position : SV_Position;
+    float2 texCoord : TEXCOORD0;
+};
+
+static float weight[5] = { 0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216 };
+
+float4 main(PixelShaderInput IN)
+    : SV_TARGET
+{		
+    float2 tex_offset = 1.0 / data.textureSize; // gets size of single texel
+    float3 result = input.Sample(texSampler, IN.texCoord).rgb * weight[0]; // current fragment's contribution
+    if(data.horizontal)
+    {
+        for(int i = 1; i < 5; ++i)
+        {
+            result += input.Sample(texSampler, IN.texCoord + float2(tex_offset.x * i, 0.0)).rgb * weight[i];
+            result += input.Sample(texSampler, IN.texCoord - float2(tex_offset.x * i, 0.0)).rgb * weight[i];
+        }
+    }
+    else
+    {
+        for(int i = 1; i < 5; ++i)
+        {
+            result += input.Sample(texSampler, IN.texCoord + float2(0.0, tex_offset.y * i)).rgb * weight[i];
+            result += input.Sample(texSampler, IN.texCoord - float2(0.0, tex_offset.y * i)).rgb * weight[i];
+        }
+    }
+    return float4(result, 1.0);
+}

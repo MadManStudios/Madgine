@@ -250,6 +250,16 @@ namespace Window {
             }(icon)));*/
         }
 
+        std::string OSWindow::getClipboardString()
+        {
+            return "";
+        }
+
+        bool OSWindow::setClipboardString(std::string_view s)
+        {
+            return true;
+        }
+
     private:
         InterfacesVector mSize;
 

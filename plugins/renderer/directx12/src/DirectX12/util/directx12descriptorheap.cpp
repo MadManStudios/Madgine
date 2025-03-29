@@ -14,50 +14,54 @@ namespace Render {
         ZeroMemory(&desc, sizeof(D3D12_DESCRIPTOR_HEAP_DESC));
         desc.Type = type;
         desc.NodeMask = 0;
-        desc.NumDescriptors = 100;
+        desc.NumDescriptors = 1000;
         desc.Flags = type == D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
         HRESULT hr = GetDevice()->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&mHeap));
+        DX12_CHECK(hr);
+
+
+        ZeroMemory(&desc, sizeof(D3D12_DESCRIPTOR_HEAP_DESC));
+        desc.Type = type;
+        desc.NodeMask = 0;
+        desc.NumDescriptors = 1;
+        desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+
+        hr = GetDevice()->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&mUploadHeap));
         DX12_CHECK(hr);
     }
 
     DirectX12DescriptorHeap::~DirectX12DescriptorHeap()
     {
-        if (mHeap) {
-            mHeap->Release();
-            mHeap = nullptr;
-        }
     }
 
     DirectX12DescriptorHeap &DirectX12DescriptorHeap::operator=(DirectX12DescriptorHeap &&other)
     {
         std::swap(mHeap, other.mHeap);
+        std::swap(mUploadHeap, other.mUploadHeap);
         std::swap(mIndex, other.mIndex);
         std::swap(mType, other.mType);
         return *this;
     }
 
-    OffsetPtr DirectX12DescriptorHeap::allocate()
+    OffsetPtr DirectX12DescriptorHeap::allocate(size_t count)
     {
-        UINT handleSize = GetDevice()->GetDescriptorHandleIncrementSize(mType);
-
         size_t index;
-        if (mFreeList.empty()) {
-            assert(mIndex < 100);
+        if (count > 1 || mFreeList.empty()) {
             index = mIndex;
-            ++mIndex;
+            mIndex += count;
+            assert(mIndex <= 1000);
         } else {
             index = mFreeList.back();
             mFreeList.pop_back();
         }
 
-        return OffsetPtr { index * handleSize };
+        return OffsetPtr { index };
     }
 
     void DirectX12DescriptorHeap::deallocate(OffsetPtr handle)
     {
-        UINT handleSize = GetDevice()->GetDescriptorHandleIncrementSize(mType);
-        mFreeList.push_back(handle.offset() / handleSize);
+        mFreeList.push_back(handle.offset());
     }
 
     void DirectX12DescriptorHeap::deallocate(D3D12_GPU_DESCRIPTOR_HANDLE handle)
@@ -67,7 +71,8 @@ namespace Render {
 
     D3D12_CPU_DESCRIPTOR_HANDLE DirectX12DescriptorHeap::cpuHandle(OffsetPtr index)
     {
-        return mHeap->GetCPUDescriptorHandleForHeapStart() + index;
+        UINT handleSize = GetDevice()->GetDescriptorHandleIncrementSize(mType);
+        return mHeap->GetCPUDescriptorHandleForHeapStart() + index * handleSize;
     }
 
     D3D12_CPU_DESCRIPTOR_HANDLE DirectX12DescriptorHeap::cpuHandle(D3D12_GPU_DESCRIPTOR_HANDLE handle)
@@ -77,12 +82,20 @@ namespace Render {
 
     D3D12_GPU_DESCRIPTOR_HANDLE DirectX12DescriptorHeap::gpuHandle(OffsetPtr index)
     {
-        return mHeap->GetGPUDescriptorHandleForHeapStart() + index;
+        UINT handleSize = GetDevice()->GetDescriptorHandleIncrementSize(mType);
+        return mHeap->GetGPUDescriptorHandleForHeapStart() + index * handleSize;
     }
 
     OffsetPtr DirectX12DescriptorHeap::fromGpuHandle(D3D12_GPU_DESCRIPTOR_HANDLE handle)
     {
-        return handle - mHeap->GetGPUDescriptorHandleForHeapStart();
+        UINT handleSize = GetDevice()->GetDescriptorHandleIncrementSize(mType);
+        return (handle - mHeap->GetGPUDescriptorHandleForHeapStart()) / handleSize;
+    }
+
+    void DirectX12DescriptorHeap::addShaderResourceView(OffsetPtr index, ID3D12Resource *resource, const D3D12_SHADER_RESOURCE_VIEW_DESC *desc)
+    {
+        GetDevice()->CreateShaderResourceView(resource, desc, mUploadHeap->GetCPUDescriptorHandleForHeapStart());
+        GetDevice()->CopyDescriptorsSimple(1, cpuHandle(index), mUploadHeap->GetCPUDescriptorHandleForHeapStart(), mType);
     }
 
     ID3D12DescriptorHeap *DirectX12DescriptorHeap::resource() const

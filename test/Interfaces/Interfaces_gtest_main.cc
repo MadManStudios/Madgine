@@ -28,7 +28,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Interfaces/interfaceslib.h"
-#include "Interfaces/filesystem/api.h"
+#include "Interfaces/filesystem/fsapi.h"
 #include "gtest/gtest.h"
 #include <stdio.h>
 

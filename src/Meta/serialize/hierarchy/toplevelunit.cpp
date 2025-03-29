@@ -10,11 +10,9 @@
 
 namespace Engine {
 namespace Serialize {
-    TopLevelUnitBase::TopLevelUnitBase(UnitId staticId)
-        : SyncableUnitBase(staticId)
-        , mStaticSlaveId(staticId)
+    TopLevelUnitBase::TopLevelUnitBase(UnitId masterId)
+        : SyncableUnitBase(masterId)
     {
-        assert(staticId == 0 || (staticId >= BEGIN_STATIC_ID_SPACE && staticId < RESERVED_ID_COUNT));
         mTopLevel = this;
     }
 
@@ -60,25 +58,35 @@ namespace Serialize {
         return SyncManager::getParticipantId(mSlaveManager);
     }
 
-    void TopLevelUnitBase::setStaticSlaveId(
-        UnitId staticId)
+    void TopLevelUnitBase::setStaticSlaveId(UnitId slaveId)
     {
-        assert(staticId == 0 || (staticId >= BEGIN_STATIC_ID_SPACE /* && staticId < RESERVED_ID_COUNT*/));
-        mStaticSlaveId = staticId;
+        mStaticSlaveId = slaveId;
+        if (mReceivingMasterState)
+            setSlaveId(slaveId, mSlaveManager);
     }
 
-    void TopLevelUnitBase::initSlaveId(SyncManager *mgr)
+    void TopLevelUnitBase::receiveStateImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, SyncManager *mgr)
     {
-        setSlaveId(mStaticSlaveId ? mStaticSlaveId : masterId(), mgr);
+        if (mStaticSlaveId)
+            setSlaveId(mStaticSlaveId, mgr);
+        assert(!mReceivingMasterState);
+        mReceivingMasterState = &receiver;
     }
 
-    std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> TopLevelUnitBase::getMasterMessageTargets() const
+    void TopLevelUnitBase::stateReadDone()
+    {
+        assert(mReceivingMasterState);
+        Execution::VirtualReceiverBase<SyncManagerResult> *rec = std::exchange(mReceivingMasterState, nullptr);
+        rec->set_value();
+    }
+
+    std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> TopLevelUnitBase::getMasterMessageTargets() const
     {
         //TODO: maybe return std::vector
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> result;
+        std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> result;
         for (SyncManager *mgr : mManagers) {
-            const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &targets = mgr->getMasterMessageTargets();
-            std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> temp;
+            const std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> &targets = mgr->getMasterMessageTargets();
+            std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> temp;
             set_union(result.begin(), result.end(), targets.begin(), targets.end(), inserter(temp, temp.begin()),
                 CompareStreamId {});
             temp.swap(result);
@@ -86,7 +94,7 @@ namespace Serialize {
         return result;
     }
 
-    FormattedBufferedStream &TopLevelUnitBase::getSlaveMessageTarget() const
+    FormattedMessageStream &TopLevelUnitBase::getSlaveMessageTarget() const
     {
         assert(mSlaveManager);
         return mSlaveManager->getSlaveMessageTarget();
@@ -127,7 +135,7 @@ namespace Serialize {
         if (isMaster) {
             assert(mSlaveManager == mgr);
             mSlaveManager = nullptr;
-        }else{
+        } else {
             if (mSlaveManager)
                 return false;
             mSlaveManager = mgr;

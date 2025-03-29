@@ -7,7 +7,7 @@ namespace Serialize {
 
     using ctype = std::ctype<char>;
 
-    std::array<ctype::mask, 256> generateMask(ctype::mask mask, std::initializer_list<std::tuple<char, ctype::mask, ctype::mask>> specialCharacters = {});
+    META_EXPORT std::array<ctype::mask, 256> generateMask(ctype::mask mask, std::initializer_list<std::tuple<char, ctype::mask, ctype::mask>> specialCharacters = {});
 
     struct META_EXPORT Formatter {
 

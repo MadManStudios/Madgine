@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Generic/type_pack.h"
-
 namespace Engine {
 namespace Serialize {
 
     struct EnumTag;
+    struct FlagsTag;
+    struct DataTag;
 
     using SerializePrimitives = type_pack<
         bool,
@@ -19,14 +19,21 @@ namespace Serialize {
         int64_t,
         float,
         SyncableUnitBase *,
-        SerializableDataUnit *,
+        SerializableDataPtr,
         std::string,
         ByteBuffer,
         Void,
+        Vector2,
         Vector3,
         Vector4,
+        Vector2i,
         Matrix3,
-        EnumTag>;
+        EnumTag,
+        FlagsTag,
+        Color3,
+        Color4,
+        Quaternion,
+        std::chrono::nanoseconds>;
 
     template <typename T, typename = void>
     struct PrimitiveReducer {
@@ -39,11 +46,16 @@ namespace Serialize {
     };
 
     template <typename T>
-    concept SerializableUnitPtrHelper = !std::convertible_to<T, const SyncableUnitBase *> && std::convertible_to<T, const SerializableDataUnit *>;
+    concept SerializableUnitPtrHelper = !std::convertible_to<T, const SyncableUnitBase *> && std::is_pointer_v<T>;
 
     template <SerializableUnitPtrHelper T>
     struct PrimitiveReducer<T> {
-        typedef SerializableDataUnit *type;
+        typedef SerializableDataPtr type;
+    };
+
+    template <>
+    struct PrimitiveReducer<SerializableDataConstPtr> {
+        typedef SerializableDataPtr type;
     };
 
     template <Enum T>
@@ -56,6 +68,21 @@ namespace Serialize {
         typedef EnumTag type;
     };
 
+    template <>
+    struct PrimitiveReducer<EnumHolder> {
+        typedef EnumTag type;
+    };
+
+    template <typename T>
+    struct PrimitiveReducer<Flags<T>> {
+        typedef FlagsTag type;
+    };
+
+    template <>
+    struct PrimitiveReducer<FlagsHolder> {
+        typedef FlagsTag type;
+    };
+
     template <typename T, T invalid>
     struct PrimitiveReducer<IndexType<T, invalid>> {
         typedef T type;
@@ -66,10 +93,40 @@ namespace Serialize {
         typedef std::string type;
     };
 
+    template <typename _Rep, typename _Period>
+    struct PrimitiveReducer<std::chrono::duration<_Rep, _Period>> {
+        typedef std::chrono::nanoseconds type;
+    };
+
     template <typename T>
     const constexpr size_t PrimitiveTypeIndex_v = SerializePrimitives::index<uint8_t, typename PrimitiveReducer<T>::type>;
 
     template <typename T>
     concept PrimitiveType = SerializePrimitives::contains<typename PrimitiveReducer<T>::type>;
+
+    template <typename T>
+    struct PrimitiveHolder {
+    };
+
+    template <>
+    struct PrimitiveHolder<DataTag> {
+        const SerializeTable *mTable;
+    };
+
+    template <>
+    struct PrimitiveHolder<SyncableUnitBase> {
+        const SerializeTable *mTable;
+    };
+
+    template <>
+    struct PrimitiveHolder<EnumTag> {
+        const EnumMetaTable *mTable;
+    };
+
+    template <>
+    struct PrimitiveHolder<FlagsTag> {
+        const EnumMetaTable *mTable;
+    };
+
 }
 }

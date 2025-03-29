@@ -8,7 +8,7 @@ struct META_EXPORT KeyValueFunction {
     template <typename R, typename... Args, size_t... I>
     static void unpackHelper(void (*f)(), ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
     {
-        to_ValueType<true>(retVal, invoke_patch_void<std::monostate>(reinterpret_cast<R (*)(Args...)>(f), ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I))...));
+        to_ValueType(retVal, invoke_patch_void<std::monostate>(reinterpret_cast<R (*)(Args...)>(f), ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I))...));
     }
 
     template <typename R, typename... Args>

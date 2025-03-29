@@ -1,5 +1,5 @@
 #include "opengllib.h"
-#include "Madgine/window/mainwindow.h"
+
 #include "openglrenderwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
@@ -33,11 +33,25 @@ namespace Window {
 }
 #elif ANDROID || EMSCRIPTEN
 #    include <EGL/egl.h>
-namespace Engine {
-namespace Window {
-    extern EGLDisplay sDisplay;
-}
-}
+
+EGLDisplay sDisplay = EGL_NO_DISPLAY;
+
+static struct DisplayGuard {
+    DisplayGuard()
+    {
+        sDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+        if (sDisplay != EGL_NO_DISPLAY) {
+            if (!eglInitialize(sDisplay, nullptr, nullptr))
+                sDisplay = EGL_NO_DISPLAY;
+        }
+    }
+
+    ~DisplayGuard()
+    {
+        if (sDisplay != EGL_NO_DISPLAY)
+            eglTerminate(sDisplay);
+    }
+} sDisplayGuard;
 
 #    define X(VAL)    \
         {             \
@@ -62,7 +76,7 @@ static constexpr struct {
     X(EGL_NATIVE_RENDERABLE),
     X(EGL_NATIVE_VISUAL_ID),
     X(EGL_NATIVE_VISUAL_TYPE),
-    //X(EGL_PRESERVED_RESOURCES),
+    // X(EGL_PRESERVED_RESOURCES),
     X(EGL_SAMPLE_BUFFERS),
     X(EGL_SAMPLES),
     // X(EGL_STENCIL_BITS),
@@ -100,23 +114,23 @@ namespace Render {
         if (id == 131169 || id == 131185 || id == 131218 || id == 131204)
             return;
 
-        Util::MessageType lvl;
+        Log::MessageType lvl;
         switch (severity) {
         case GL_DEBUG_SEVERITY_HIGH:
-            lvl = Util::MessageType::ERROR_TYPE;
+            lvl = Log::MessageType::ERROR_TYPE;
             break;
         case GL_DEBUG_SEVERITY_MEDIUM:
-            lvl = Util::MessageType::WARNING_TYPE;
+            lvl = Log::MessageType::WARNING_TYPE;
             break;
         case GL_DEBUG_SEVERITY_LOW:
-            lvl = Util::MessageType::INFO_TYPE;
+            lvl = Log::MessageType::INFO_TYPE;
             break;
         case GL_DEBUG_SEVERITY_NOTIFICATION:
-            lvl = Util::MessageType::DEBUG_TYPE;
+            lvl = Log::MessageType::DEBUG_TYPE;
             break;
         }
 
-        Util::LogDummy cout(lvl);
+        Log::LogDummy cout(lvl);
         cout << "Debug message (" << id << "): " << message << "\n";
 
         switch (source) {
@@ -182,7 +196,7 @@ namespace Render {
 #elif LINUX
         glXMakeCurrent(Window::sDisplay(), None, NULL);
 #elif ANDROID || EMSCRIPTEN
-        eglMakeCurrent(Window::sDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+        eglMakeCurrent(sDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 #elif OSX
         OSXBridge::resetContext();
 #elif IOS
@@ -190,12 +204,11 @@ namespace Render {
 #endif
     }
 
-    void makeCurrent(Window::OSWindow *window, ContextHandle context)
+    void makeCurrent(SurfaceHandle surface, ContextHandle context)
     {
         GL_LOG("Setting Context: " << context);
 #if WINDOWS
-        HDC windowDC = GetDC((HWND)window->mHandle);
-        if (!wglMakeCurrent(windowDC, context)) {
+        if (!wglMakeCurrent(surface, context)) {
             LOG_ERROR("Error-Code: " << GetLastError());
             std::terminate();
         }
@@ -205,8 +218,7 @@ namespace Render {
             std::terminate();
         }
 #elif ANDROID || EMSCRIPTEN
-        EGLSurface surface = (EGLSurface)window->mHandle;
-        if (!eglMakeCurrent(Window::sDisplay, surface, surface, context)) {
+        if (!eglMakeCurrent(sDisplay, surface, surface, context)) {
             LOG_ERROR("Error-Code: " << eglGetError());
             std::terminate();
         }
@@ -217,14 +229,14 @@ namespace Render {
 #endif
     }
 
-    void swapBuffers(Window::OSWindow *window, ContextHandle context)
+    void swapBuffers(SurfaceHandle surface, ContextHandle context)
     {
 #if WINDOWS
-        SwapBuffers(GetDC((HWND)window->mHandle));
+        SwapBuffers(surface);
 #elif LINUX
         glXSwapBuffers(Window::sDisplay(), window->mHandle);
 #elif ANDROID || EMSCRIPTEN
-        eglSwapBuffers(Window::sDisplay, (EGLSurface)window->mHandle);
+        eglSwapBuffers(sDisplay, context);
 #elif OSX
         OSXBridge::swapBuffers(context);
 #elif IOS
@@ -245,7 +257,7 @@ namespace Render {
 
         EGLint numConfigs;
 
-        return eglChooseConfig(Window::sDisplay, attribs, nullptr, 0, &numConfigs);
+        return eglChooseConfig(sDisplay, attribs, nullptr, 0, &numConfigs);
 #    else
         return glTexImage2DMultisample;
 #    endif
@@ -254,16 +266,14 @@ namespace Render {
 #endif
     }
 
-    ContextHandle createContext(Window::OSWindow *window, size_t samples, ContextHandle reusedContext, bool setup)
+    ContextHandle createContext(SurfaceHandle surface, size_t samples, ContextHandle reusedContext, bool setup)
     {
 
 #if WINDOWS
-        HDC windowDC = GetDC((HWND)window->mHandle);
-
         PIXELFORMATDESCRIPTOR pfd = {
             sizeof(PIXELFORMATDESCRIPTOR),
             1,
-            PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER, //Flags
+            PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER, // Flags
             PFD_TYPE_RGBA, // The kind of framebuffer. RGBA or palette.
             32, // Colordepth of the framebuffer.
             0, 0, 0, 0, 0, 0,
@@ -300,13 +310,13 @@ namespace Render {
             };
 
             UINT numFormats;
-            bool result = wglChoosePixelFormatARB(windowDC, piAttribIList, pfAttribFList, 1, &format, &numFormats);
+            bool result = wglChoosePixelFormatARB(surface, piAttribIList, pfAttribFList, 1, &format, &numFormats);
             assert(result);
             assert(numFormats > 0);
         } else {
-            format = ChoosePixelFormat(windowDC, &pfd);
+            format = ChoosePixelFormat(surface, &pfd);
         }
-        SetPixelFormat(windowDC, format, &pfd);
+        SetPixelFormat(surface, format, &pfd);
 
         HGLRC context;
         if (reusedContext) {
@@ -319,9 +329,9 @@ namespace Render {
                     0
                 };
 
-                context = wglCreateContextAttribsARB(windowDC, NULL, attribs);
+                context = wglCreateContextAttribsARB(surface, NULL, attribs);
             } else {
-                context = wglCreateContext(windowDC);
+                context = wglCreateContext(surface);
             }
         }
 
@@ -364,26 +374,26 @@ namespace Render {
             EGLConfig config;
             EGLint numConfigs;
 
-            if (!eglChooseConfig(Window::sDisplay, attribs, &config, 1, &numConfigs)) {
+            if (!eglChooseConfig(sDisplay, attribs, &config, 1, &numConfigs)) {
                 LOG_ERROR("Could not find suitable EGL configuration");
 
-                bool result = eglGetConfigs(Window::sDisplay, NULL, 0, &numConfigs);
+                bool result = eglGetConfigs(sDisplay, NULL, 0, &numConfigs);
                 assert(result);
 
                 LOG("Number of EGL configuration: " << numConfigs);
 
                 std::unique_ptr<EGLConfig[]> configs = std::make_unique<EGLConfig[]>(numConfigs);
 
-                result = eglGetConfigs(Window::sDisplay, configs.get(), numConfigs, &numConfigs);
+                result = eglGetConfigs(sDisplay, configs.get(), numConfigs, &numConfigs);
                 assert(result);
 
                 for (int i = 0; i < numConfigs; i++) {
-                    Util::LogDummy out { Engine::Util::MessageType::INFO_TYPE };
+                    Log::LogDummy out { Log::MessageType::INFO_TYPE };
                     out << "Configuration:\n";
                     EGLConfig config = configs[i];
                     for (int j = 0; j < sizeof(eglAttributeNames) / sizeof(eglAttributeNames[0]); j++) {
                         EGLint value = -1;
-                        result = eglGetConfigAttrib(Window::sDisplay, config, eglAttributeNames[j].attribute, &value);
+                        result = eglGetConfigAttrib(sDisplay, config, eglAttributeNames[j].attribute, &value);
                         if (result) {
                             out << " " << eglAttributeNames[j].name << " = " << value << "\n";
                         }
@@ -392,7 +402,7 @@ namespace Render {
                 std::terminate();
             }
 
-            context = eglCreateContext(Window::sDisplay, config, /*sharedContext*/ nullptr, contextAttribs);
+            context = eglCreateContext(sDisplay, config, /*sharedContext*/ nullptr, contextAttribs);
             if (!context) {
                 LOG_ERROR("eglCreateContext - ErrorCode: " << eglGetError());
             }
@@ -404,7 +414,7 @@ namespace Render {
         if (reusedContext) {
             context = reusedContext;
         } else {
-            context = OSXBridge::createContext(window);
+            context = OSXBridge::createContext(surface);
         }
 
 #elif IOS
@@ -419,7 +429,7 @@ namespace Render {
 #endif
 
         if (!reusedContext) {
-            makeCurrent(window, context);
+            makeCurrent(surface, context);
         }
 
         if (!reusedContext && setup) {
@@ -440,23 +450,27 @@ namespace Render {
             GL_CHECK();
 #endif
 
-            //Pos
+            // Pos
             glVertexAttrib3f(0, 0, 0, 0);
             GL_CHECK();
-            //Pos2
-            glVertexAttrib2f(1, 0, 0);
+            glVertexAttrib1f(1, 1);
+            // Pos2
+            glVertexAttrib2f(2, 0, 0);
             GL_CHECK();
-            //Color
-            glVertexAttrib4f(3, 1, 1, 1, 1);
+            // Normal
+            glVertexAttrib3f(3, 0, 0, 0);
             GL_CHECK();
-            //UV
-            glVertexAttrib2f(4, 0, 0);
+            // Color
+            glVertexAttrib4f(4, 1, 1, 1, 1);
             GL_CHECK();
-            //BoneIndices
-            glVertexAttribI4i(5, 0, 0, 0, 0);
+            // UV
+            glVertexAttrib2f(5, 0, 0);
             GL_CHECK();
-            //Weights
-            glVertexAttrib4f(6, 0, 0, 0, 0);
+            // BoneIndices
+            glVertexAttribI4i(6, 0, 0, 0, 0);
+            GL_CHECK();
+            // Weights
+            glVertexAttrib4f(7, 0, 0, 0, 0);
             GL_CHECK();
 
             glEnable(GL_BLEND);
@@ -470,7 +484,7 @@ namespace Render {
             GL_CHECK();
             glDepthFunc(GL_LESS);
             GL_CHECK();
-            //glDepthRange(0.0, 1.0);
+            // glDepthRange(0.0, 1.0);
 
             if (glGetString) {
                 const GLubyte *val;
@@ -492,15 +506,13 @@ namespace Render {
         return context;
     }
 
-    void destroyContext(Window::OSWindow *window, ContextHandle context, bool reusedContext)
+    void destroyContext(SurfaceHandle surface, ContextHandle context, bool reusedContext)
     {
         if (!reusedContext)
             resetContext();
 
 #if WINDOWS
-        HDC device = GetDC((HWND)window->mHandle);
-
-        ReleaseDC((HWND)window->mHandle, device);
+        ReleaseDC(WindowFromDC(surface), surface);
 
         if (!reusedContext)
             wglDeleteContext(context);
@@ -509,7 +521,7 @@ namespace Render {
             glXDestroyContext(Window::sDisplay(), context);
 #elif ANDROID || EMSCRIPTEN
         if (!reusedContext)
-            eglDestroyContext(Window::sDisplay, context);
+            eglDestroyContext(sDisplay, context);
 #elif OSX
         if (!reusedContext)
             OSXBridge::destroyContext(context);
@@ -526,7 +538,16 @@ namespace Render {
                 Engine::Window::WindowSettings settings;
                 settings.mHidden = true;
                 Window::OSWindow *tmp = Window::sCreateWindow(settings, nullptr);
-                ContextHandle context = createContext(tmp, 1, nullptr, false);
+#    if WINDOWS
+                SurfaceHandle surface = GetDC((HWND)tmp->mHandle);
+#    elif LINUX
+                SurfaceHandle surface = tmp->mHandle;
+#    elif OSX
+                SurfaceHandle surface = tmp;
+#    else
+#        error "Unsupported Platform!"
+#    endif
+                ContextHandle context = createContext(surface, 1, nullptr, false);
 
 #    if WINDOWS
                 wglCreateContextAttribsARB = reinterpret_cast<PFNWGLCREATECONTEXTATTRIBSARBPROC>(wglGetProcAddress("wglCreateContextAttribsARB"));
@@ -538,7 +559,7 @@ namespace Render {
                 bool result = gladLoadGL();
                 assert(result);
 
-                destroyContext(tmp, context);
+                destroyContext(surface, context);
                 tmp->destroy();
             });
         }
@@ -547,6 +568,15 @@ namespace Render {
 
     OpenGLRenderContext::OpenGLRenderContext(Threading::TaskQueue *queue)
         : Component(queue)
+        , mBufferAllocator(mBufferMemoryHeap)
+        , mTempAllocator(mTempMemoryHeap)
+#if OPENGL_ES
+        , mTempMemoryHeap(GL_UNIFORM_BUFFER)
+#    if EMSCRIPTEN
+        , mTempIndexMemoryHeap(GL_ELEMENT_ARRAY_BUFFER)
+        , mTempIndexAllocator(mTempIndexMemoryHeap)
+#    endif
+#endif
     {
     }
 
@@ -584,26 +614,51 @@ namespace Render {
         return window;
     }
 
-    void OpenGLRenderContext::unloadAllResources()
+    Threading::Task<void> OpenGLRenderContext::unloadAllResources()
     {
-        RenderContext::unloadAllResources();
+        co_await RenderContext::unloadAllResources();
 
         for (std::pair<const std::string, OpenGLPipelineLoader::Resource> &res : OpenGLPipelineLoader::getSingleton()) {
-            res.second.forceUnload();
+            co_await res.second.forceUnload();
         }
 
         for (std::pair<const std::string, OpenGLTextureLoader::Resource> &res : OpenGLTextureLoader::getSingleton()) {
-            res.second.forceUnload();
+            co_await res.second.forceUnload();
         }
 
         for (std::pair<const std::string, OpenGLMeshLoader::Resource> &res : OpenGLMeshLoader::getSingleton()) {
-            res.second.forceUnload();
+            co_await res.second.forceUnload();
         }
     }
 
     bool OpenGLRenderContext::supportsMultisampling() const
     {
         return checkMultisampling();
+    }
+
+    template <size_t I = 1>
+    struct ResourceBlockBuffer {
+        size_t mSize;
+        const Texture *mTexture[I];
+    };
+
+    UniqueResourceBlock OpenGLRenderContext::createResourceBlock(std::vector<const Texture *> textures)
+    {
+        std::unique_ptr<OpenGLResourceBlock<4>> ptr = std::make_unique<OpenGLResourceBlock<4>>();
+        ptr->mSize = textures.size();
+        for (size_t i = 0; i < textures.size(); ++i) {
+            ptr->mResources[i].mHandle = textures[i]->handle();
+            ptr->mResources[i].mTarget = static_cast<const OpenGLTexture *>(textures[i])->target();
+        }
+
+        UniqueResourceBlock block;
+        block.setupAs<std::unique_ptr<OpenGLResourceBlock<4>>>() = std::move(ptr);
+        return block;
+    }
+
+    void OpenGLRenderContext::destroyResourceBlock(UniqueResourceBlock &block)
+    {
+        block.release<std::unique_ptr<OpenGLResourceBlock<4>>>();
     }
 
     static constexpr GLenum vTypes[] = {
@@ -617,71 +672,60 @@ namespace Render {
         GL_FLOAT
     };
 
-    void OpenGLRenderContext::bindFormat(VertexFormat format)
+    void OpenGLRenderContext::bindFormat(VertexFormat format, size_t bufferOffset)
     {
-        assert(!format.has(0) || !format.has(1));
+#if !OPENGL_ES || OPENGL_ES >= 31
 
-#if !OPENGL_ES || OPENGL_ES >= 310
-#    if !OPENGL_ES
-        if (glVertexAttribFormat) {
-#    endif
-            auto pib = mVAOs.try_emplace(format, create);
-            pib.first->second.bind();
-            if (!pib.second)
-                return;
-
-            GLuint offset = 0;
-            for (size_t i = 0; i < VertexElements::size; ++i) {
-                size_t attribIndex = i > 0 ? i - 1 : 0;
-                if (format.has(i)) {
-                    if (vTypes[i] == GL_FLOAT)
-                        glVertexAttribFormat(attribIndex, sVertexElementSizes[i] / 4, vTypes[i], GL_FALSE, offset);
-                    else
-                        glVertexAttribIFormat(attribIndex, sVertexElementSizes[i] / 4, vTypes[i], offset);
-                    GL_CHECK();
-                    glVertexAttribBinding(attribIndex, 0);
-                    GL_CHECK();
-                    glEnableVertexAttribArray(attribIndex);
-                    offset += sVertexElementSizes[i];
-                } else {
-                    //glDisableVertexAttribArray(attribIndex);
-                }
-            }
-
+        auto pib = mVAOs.try_emplace(format, create);
+        pib.first->second.bind();
+        if (!pib.second)
             return;
-#    if !OPENGL_ES
-        }
-#    endif
-#endif
 
-        GLuint stride = 0;
+        GLuint offset = 0;
         for (size_t i = 0; i < VertexElements::size; ++i) {
-            if (format.has(i))
-                stride += sVertexElementSizes[i];
-        }
-
-        const std::byte *offset = 0;
-        for (size_t i = 0; i < VertexElements::size; ++i) {
-            size_t attribIndex = i > 0 ? i - 1 : 0;
             if (format.has(i)) {
                 if (vTypes[i] == GL_FLOAT)
-                    glVertexAttribPointer(attribIndex, sVertexElementSizes[i] / 4, vTypes[i], GL_FALSE, stride, offset);
+                    glVertexAttribFormat(i, sVertexElementSizes[i] / 4, vTypes[i], GL_FALSE, offset);
                 else
-                    glVertexAttribIPointer(attribIndex, sVertexElementSizes[i] / 4, vTypes[i], stride, offset);
+                    glVertexAttribIFormat(i, sVertexElementSizes[i] / 4, vTypes[i], offset);
                 GL_CHECK();
-                glEnableVertexAttribArray(attribIndex);
+                glVertexAttribBinding(i, 0);
+                GL_CHECK();
+                glEnableVertexAttribArray(i);
                 offset += sVertexElementSizes[i];
             } else {
-                glDisableVertexAttribArray(attribIndex);
+                // glDisableVertexAttribArray(attribIndex);
             }
         }
-        if (format.has(0) || format.has(1))
-            glEnableVertexAttribArray(0);
+
+#else
+
+        GLuint stride = format.stride();
+
+        const std::byte *offset = reinterpret_cast<const std::byte *>(bufferOffset);
+        for (size_t i = 0; i < VertexElements::size; ++i) {
+            if (format.has(i)) {
+                if (vTypes[i] == GL_FLOAT)
+                    glVertexAttribPointer(i, sVertexElementSizes[i] / 4, vTypes[i], GL_FALSE, stride, offset);
+                else
+                    glVertexAttribIPointer(i, sVertexElementSizes[i] / 4, vTypes[i], stride, offset);
+                GL_CHECK();
+                glEnableVertexAttribArray(i);
+                offset += sVertexElementSizes[i];
+            } else {
+                glDisableVertexAttribArray(i);
+            }
+        }
+
+        for (size_t i = 0; i < 8; ++i) {
+            glDisableVertexAttribArray(VertexElements::size + i);
+        }
+#endif
     }
 
     void OpenGLRenderContext::unbindFormat()
     {
-#if !OPENGL_ES || OPENGL_ES >= 310
+#if !OPENGL_ES || OPENGL_ES >= 31
         glBindVertexArray(0);
         GL_CHECK();
 #endif

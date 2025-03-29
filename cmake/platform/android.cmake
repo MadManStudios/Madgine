@@ -6,7 +6,11 @@ include (Plugins)
 
 if (ANDROID)
 
-	set (Android_List_dir ${CMAKE_CURRENT_LIST_DIR})
+	set (Android_List_dir ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
+
+	set (ANDROID_DEPENDENCIES "" CACHE INTERNAL "")
+	set (ANDROID_RESOURCES "" CACHE INTERNAL "")
+	set (ANDROID_SOURCES "" CACHE INTERNAL "")
 
 	if (NOT ANDROID_SDK)
 		MESSAGE(SEND_ERROR "No ANDROID_SDK location provided!")
@@ -39,8 +43,24 @@ if (ANDROID)
 
 		string(REGEX REPLACE "\\\\" "\\\\\\\\" ANDROID_SDK_ESCAPED "${ANDROID_SDK}")
 
+		if (ANDROID_DEPENDENCIES)
+			list(JOIN ANDROID_DEPENDENCIES "', '" ANDROID_ADDITIONAL_DEPENDENCIES)
+			set(ANDROID_ADDITIONAL_DEPENDENCIES ", '${ANDROID_ADDITIONAL_DEPENDENCIES}'")			
+		endif()
+		
+		if (ANDROID_SOURCES)
+			list(JOIN ANDROID_SOURCES "', '" ANDROID_ADDITIONAL_SOURCES)
+			set(ANDROID_ADDITIONAL_SOURCES "'${ANDROID_ADDITIONAL_SOURCES}'")			
+		endif()
+
+		if (ANDROID_RESOURCES)
+			list(JOIN ANDROID_RESOURCES "', '" ANDROID_ADDITIONAL_RESOURCES)
+			set(ANDROID_ADDITIONAL_RESOURCES ", '${ANDROID_ADDITIONAL_RESOURCES}'")			
+		endif()
+
 		configure_file(${Android_List_dir}/android/build.gradle.in build.gradle @ONLY)
 		configure_file(${Android_List_dir}/android/local.properties.in local.properties @ONLY)
+		configure_file(${Android_List_dir}/android/gradle.properties.in gradle.properties @ONLY)
 		configure_file(${Android_List_dir}/android/AndroidManifest.xml.in AndroidManifest.xml.in @ONLY)
 		configure_file(${Android_List_dir}/android/settings.gradle.in settings.gradle @ONLY)
 		file(GENERATE OUTPUT AndroidManifest.xml INPUT ${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml.in)

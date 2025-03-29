@@ -7,7 +7,7 @@ namespace Engine {
 struct Vector3i {
     int x, y, z;
 
-    Vector3i() {}
+    Vector3i() { }
 
     constexpr Vector3i(const int iX, const int iY, const int iZ)
         : x(iX)
@@ -22,7 +22,7 @@ struct Vector3i {
         , z(afCoordinate[2])
     {
     }
-        
+
     explicit Vector3i(const Vector2i &xy, const float z)
         : x(xy.x)
         , y(xy.y)
@@ -42,7 +42,7 @@ struct Vector3i {
         z += other.z;
         return *this;
     }
-    
+
     constexpr bool operator==(const Vector3i &other) const
     {
         return x == other.x && y == other.y && z == other.z;
@@ -96,13 +96,9 @@ struct Vector3i {
         for (int i = 0; i < 3; ++i) {
             in >> v[i];
             in >> c;
-            if (i != 2) {
-                if (c != ',')
-                    std::terminate();
-            } else {
-                if (c != ']')
-                    std::terminate();
-            }
+            char expectedChar = (i == 2) ? ']' : ',';
+            if (c != expectedChar)
+                std::terminate();
         }
         return in;
     }

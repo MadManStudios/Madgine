@@ -2,7 +2,7 @@
 
 #include "Meta/metalib.h"
 
-#include "Meta/serialize/formatter/unsafebinaryformatter.h"
+#include "Meta/serialize/formats.h"
 
 #include "formattertestbase.h"
 
@@ -11,5 +11,5 @@ using namespace std::chrono_literals;
 
 TEST(Serialize_Formatter, UnsafeBinary)
 {
-    FormatterBaseTest<UnsafeBinaryFormatter>();
+    FormatterBaseTest(Formats::unsafebinary);
 }

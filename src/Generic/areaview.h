@@ -29,7 +29,7 @@ struct AreaView {
         size_t acc = 0;
         for (int i = Dim - 1; i >= 0; --i) {
             size_t axis = mAxisMapping[i];
-            assert(topLeft[i] < mSizes[axis]);
+            assert(topLeft[i] <= mSizes[axis]);
             acc *= mFullSizes[axis];
             if (!mFlipped[axis]) {
                 acc += topLeft[i];
@@ -96,59 +96,76 @@ struct AreaView {
         return acc;
     }
 
-    struct iterator {
+    template <bool isConst>
+    struct IteratorImpl {
 
-        using iterator_category = std::forward_iterator_tag;
-        using value_type = T;
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = const_if<isConst, T>;
         using difference_type = ptrdiff_t;
         using pointer = void;
-        using reference = T &;
+        using reference = const_if<isConst, T> &;
 
-        iterator() = default;
+        using ViewType = const_if<isConst, AreaView<T, Dim, Storage>>;
 
-        iterator(AreaView<T, Dim, Storage> *view)
+        IteratorImpl() = default;
+
+        IteratorImpl(ViewType *view)
             : mView(view)
         {
             mIndices.fill(0);
         }
 
-        iterator(AreaView<T, Dim, Storage> *view, const std::array<size_t, Dim> &indices)
+        IteratorImpl(ViewType *view, const std::array<size_t, Dim> &indices)
             : mView(view)
             , mIndices(indices)
         {
         }
 
-        T &operator*() const
+        reference operator*() const
         {
             return mView->at(mIndices);
         }
 
-        iterator &operator++()
+        IteratorImpl &operator++()
         {
             ++mIndices[0];
-            validate();
+            validateIncrement();
             return *this;
         }
 
-        iterator operator++(int)
+        IteratorImpl operator++(int)
         {
-            iterator copy = *this;
+            IteratorImpl copy = *this;
             ++*this;
             return copy;
         }
 
-        bool operator==(const iterator &other) const
+        IteratorImpl &operator--()
+        {
+            validateDecrement();
+            --mIndices[0];
+            return *this;
+        }
+
+        IteratorImpl operator--(int)
+        {
+            IteratorImpl copy = *this;
+            --*this;
+            return copy;
+        }
+
+        bool operator==(const IteratorImpl &other) const
         {
             return mView == other.mView && mIndices == other.mIndices;
         }
 
-        bool operator!=(const iterator &other) const
+        bool operator!=(const IteratorImpl &other) const
         {
             return !(*this == other);
         }
 
     private:
-        void validate()
+        void validateIncrement()
         {
             if constexpr (Dim == 1) {
                 assert(mIndices[0] <= mView->mSizes[mView->mAxisMapping[0]]);
@@ -167,67 +184,33 @@ struct AreaView {
             }
         }
 
-    private:
-        AreaView<T, Dim, Storage> *mView = nullptr;
-        std::array<size_t, Dim> mIndices;
-    };
-
-    struct const_iterator {
-
-        using iterator_category = std::forward_iterator_tag;
-        using value_type = const T;
-        using difference_type = ptrdiff_t;
-        using pointer = void;
-        using reference = const T &;
-
-        const_iterator(const AreaView<T, Dim> *view)
-            : mView(view)
+        void validateDecrement()
         {
-            mIndices.fill(0);
-        }
-
-        const_iterator(const AreaView<T, Dim> *view, const std::array<size_t, Dim> &indices)
-            : mView(view)
-            , mIndices(indices)
-        {
-        }
-
-        const T &operator*()
-        {
-            return mView->at(mIndices);
-        }
-
-        void operator++()
-        {
-            ++mIndices[0];
-            validate();
-        }
-
-        bool operator!=(const const_iterator &other)
-        {
-            return mView != other.mView || mIndices != other.mIndices;
-        }
-
-    private:
-        void validate()
-        {
-            assert(mIndices[Dim - 1] < mView->mSizes[mView->mAxisMapping[Dim - 1]]);
-            for (size_t i = 0; i < Dim - 1; ++i) {
-                size_t axis = mView->mAxisMapping[i];
-                assert(mIndices[i] <= mView->mSizes[axis]);
-                if (mIndices[i] == mView->mSizes[axis]) {
-                    mIndices[i] = 0;
-                    ++mIndices[i + 1];
-                } else {
-                    break;
+            if constexpr (Dim == 1) {
+                assert(mIndices[0] > 0);
+            } else {
+                for (size_t i = 0; i < Dim - 1; ++i) {
+                    size_t axis = mView->mAxisMapping[i];
+                    if (mIndices[i] == 0) {
+                        assert(mIndices[i + 1] > 0);
+                        mIndices[i] = mView->mSizes[axis];
+                        --mIndices[i + 1];
+                    } else {
+                        break;
+                    }
                 }
             }
         }
 
     private:
-        const AreaView<T, Dim, Storage> *mView;
+        ViewType *mView = nullptr;
         std::array<size_t, Dim> mIndices;
     };
+
+    using iterator = IteratorImpl<false>;
+    using const_iterator = IteratorImpl<true>;
+    using reverse_iterator = std::reverse_iterator<iterator>;
+    using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     iterator begin()
     {
@@ -253,6 +236,26 @@ struct AreaView {
         endSizes.fill(0);
         endSizes[Dim - 1] = mSizes[mAxisMapping[Dim - 1]];
         return { this, endSizes };
+    }
+
+    reverse_iterator rbegin()
+    {
+        return reverse_iterator { end() };
+    }
+
+    reverse_iterator rend()
+    {
+        return reverse_iterator { begin() };
+    }
+
+    const_reverse_iterator rbegin() const
+    {
+        return const_reverse_iterator { end() };
+    }
+
+    const_reverse_iterator rend() const
+    {
+        return const_reverse_iterator { begin() };
     }
 
 private:

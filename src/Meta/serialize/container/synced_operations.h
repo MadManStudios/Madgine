@@ -3,9 +3,12 @@
 namespace Engine {
 namespace Serialize {
 
+    DERIVE_OPERATOR(PlusAssign, +=)
+    DERIVE_OPERATOR(MinusAssign, -=)
+
     template <typename T, typename Observer, typename OffsetPtr>
     struct Operations<Synced<T, Observer, OffsetPtr>> {        
-        static StreamResult readRequest(Synced<T, Observer, OffsetPtr> &synced, FormattedBufferedStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
+        static StreamResult readRequest(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
         {
             if (synced.isMaster()) {
                 typename Synced<T, Observer, OffsetPtr>::Operation op;
@@ -18,13 +21,13 @@ namespace Serialize {
                     synced.mData = value;
                     break;
                 case Synced<T, Observer, OffsetPtr>::Operation::ADD:
-                    if constexpr (has_function_PlusAssign_v<T>)
+                    if constexpr (has_operator_PlusAssign<T, T>)
                         synced.mData += value;
                     else
                         throw 0;
                     break;
                 case Synced<T, Observer, OffsetPtr>::Operation::SUB:
-                    if constexpr (has_function_MinusAssign_v<T>)
+                    if constexpr (has_operator_MinusAssign<T, T>)
                         synced.mData -= value;
                     else
                         throw 0;
@@ -32,22 +35,19 @@ namespace Serialize {
                 }
                 synced.notify(old, inout.id(), id);
             } else {
-                FormattedBufferedStream &out = synced.getSlaveRequestMessageTarget(inout.id(), id);
-                out.stream().pipe(inout.stream());
-                out.endMessageWrite();
+                WriteMessage msg = getSlaveRequestMessageTarget(&synced, inout.id(), id);
+                msg.stream().pipe(inout.stream());                
             }
             return {};
         }
 
-        static void writeRequest(const Synced<T, Observer, OffsetPtr> &synced, FormattedBufferedStream &out, const void *_data, const CallerHierarchyBasePtr &hierarchy = {})
+        static void writeRequest(const Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &out, Synced<T, Observer, OffsetPtr>::request_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
         {
-            const std::pair<Synced<T, Observer, OffsetPtr>::Operation, T> &data = *static_cast<const std::pair<Synced<T, Observer, OffsetPtr>::Operation, T> *>(_data);
-            Serialize::write(out, data.first, nullptr);
-            Serialize::write(out, data.second, nullptr);
-            out.endMessageWrite();
+            Serialize::write(out, payload.mOperation, nullptr);
+            Serialize::write(out, payload.mValue, nullptr);
         }
 
-        static StreamResult readAction(Synced<T, Observer, OffsetPtr> &synced, FormattedBufferedStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
+        static StreamResult readAction(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
         {
             typename Synced<T, Observer, OffsetPtr>::Operation op;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, op, nullptr));
@@ -59,13 +59,13 @@ namespace Serialize {
                 synced.mData = value;
                 break;
             case Synced<T, Observer, OffsetPtr>::Operation::ADD:
-                if constexpr (has_function_PlusAssign_v<T>)
+                if constexpr (has_operator_PlusAssign<T, T>)
                     synced.mData += value;
                 else
                     throw 0;
                 break;
             case Synced<T, Observer, OffsetPtr>::Operation::SUB:
-                if constexpr (has_function_MinusAssign_v<T>)
+                if constexpr (has_operator_MinusAssign<T, T>)
                     synced.mData -= value;
                 else
                     throw 0;
@@ -75,13 +75,11 @@ namespace Serialize {
             return {};
         }
 
-        static void writeAction(const Synced<T, Observer, OffsetPtr> &synced, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, const void *_data, const CallerHierarchyBasePtr &hierarchy = {})
-        {
-            const std::pair<Synced<T, Observer, OffsetPtr>::Operation, T> &data = *static_cast<const std::pair<Synced<T, Observer, OffsetPtr>::Operation, T> *>(_data);
-            for (FormattedBufferedStream &out : outStreams) {
-                Serialize::write(out, data.first, nullptr);
-                Serialize::write(out, data.second, nullptr);
-                out.endMessageWrite();
+        static void writeAction(const Synced<T, Observer, OffsetPtr> &synced, const std::vector<WriteMessage> &outStreams, Synced<T, Observer, OffsetPtr>::action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+        {            
+            for (const WriteMessage &out : outStreams) {
+                Serialize::write(out, payload.mOperation, nullptr);
+                Serialize::write(out, payload.mValue, nullptr);
             }
         }
 
@@ -98,11 +96,6 @@ namespace Serialize {
             Serialize::write(out, synced.mData, name);
         }
 
-        static void setSynced(Synced<T, Observer, OffsetPtr> &synced, bool b)
-        {
-            Serialize::setSynced(synced.mData, b);
-        }
-
         static void setActive(Synced<T, Observer, OffsetPtr> &synced, bool active, bool existenceChanged)
         {
             if (!active) {
@@ -116,14 +109,9 @@ namespace Serialize {
             }
         }
 
-        static StreamResult applyMap(FormattedSerializeStream &in, Synced<T, Observer, OffsetPtr> &synced, bool success)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
         {
-            return Serialize::applyMap(in, synced.mData, success);
-        }
-
-        static void setParent(Synced<T, Observer, OffsetPtr> &synced, SerializableUnitBase *parent)
-        {
-            Serialize::setParent(synced.mData, parent);
+            return Serialize::visitStream<T>(in, name, visitor);
         }
 
     };

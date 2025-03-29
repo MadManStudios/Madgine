@@ -15,6 +15,46 @@ namespace Window {
         float mScalingFactor;
     };
 
+    
+    struct NoEvent { };
+
+    struct ResizeEvent {
+        InterfacesVector mSize;
+    };
+
+    struct CloseEvent {
+    };
+
+    struct RepaintEvent {
+    };
+
+    struct KeyPressEvent {
+        Input::KeyEventArgs mEvent;
+    };
+
+    struct KeyReleaseEvent {
+        Input::KeyEventArgs mEvent;
+    };
+
+    struct PointerPressEvent {
+        Input::PointerEventArgs mEvent;
+    };
+
+    struct PointerReleaseEvent {
+        Input::PointerEventArgs mEvent;
+    };
+
+    struct PointerMoveEvent {
+        Input::PointerEventArgs mEvent;
+    };
+
+    struct AxisEvent {
+        Input::AxisEventArgs mEvent;
+    };
+
+    using WindowEvent = std::variant<NoEvent, ResizeEvent, CloseEvent, RepaintEvent, KeyPressEvent, KeyReleaseEvent, PointerPressEvent, PointerReleaseEvent, PointerMoveEvent, AxisEvent>;
+
+
     INTERFACES_EXPORT extern const PlatformCapabilities platformCapabilities;
 
     struct INTERFACES_EXPORT OSWindow {
@@ -44,7 +84,6 @@ namespace Window {
         void show();
         bool isMinimized();
         bool isMaximized();
-        bool isFullscreen();
 
         void focus();
         bool hasFocus();
@@ -65,13 +104,16 @@ namespace Window {
 
         void setCursorIcon(Input::CursorIcon icon);
 
-        const uintptr_t mHandle;
+        //Clipboard
+        static std::string getClipboardString();
+        static bool setClipboardString(std::string_view s);
+
+        uintptr_t mHandle;
 
     protected:
         void onResize(const InterfacesVector &size)
         {
-            if (size.x > 0 && size.y > 0)
-                mListener->onResize(size);
+            mListener->onResize(size);
         }
 
         void onClose()
@@ -87,14 +129,10 @@ namespace Window {
         //Input
         bool injectKeyPress(const Input::KeyEventArgs &arg)
         {
-            if (arg.scancode == Input::Key::Shift)
-                return false;
             return mListener->injectKeyPress(arg);
         }
         bool injectKeyRelease(const Input::KeyEventArgs &arg)
         {
-            if (arg.scancode == Input::Key::Shift)
-                return false;
             return mListener->injectKeyRelease(arg);
         }
         bool injectPointerPress(const Input::PointerEventArgs &arg)

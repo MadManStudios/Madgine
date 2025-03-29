@@ -1,1 +1,0 @@
-\page LogViewerManual Log Viewer

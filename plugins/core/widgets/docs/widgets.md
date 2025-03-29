@@ -1,4 +1,0 @@
-\page Widgets Widgets
-
-# Widgets
-

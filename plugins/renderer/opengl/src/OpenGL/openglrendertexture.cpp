@@ -8,10 +8,12 @@
 
 #include "openglrendercontext.h"
 
+#include "Meta/math/matrix4.h"
+
 namespace Engine {
 namespace Render {
 
-    GLenum toGLFormat(DataFormat format)
+    GLenum toGLFormat(TextureFormat format)
     {
         switch (format) {
         case FORMAT_RGBA8:
@@ -25,162 +27,69 @@ namespace Render {
         }
     }
 
-    void attachFramebufferTexture(GLenum attachment, OpenGLTexture &tex, TextureType type, size_t j)
+    void attachFramebufferTexture(GLenum attachment, const OpenGLTexture &tex, size_t j)
     {
 #if CUBE_FRAMEBUFFER
-#if !OPENGL_ES
-        if (glFramebufferTexture){
-#endif
-            assert(j == 0);
-            glFramebufferTexture(GL_FRAMEBUFFER, attachment, tex.mTextureHandle, 0);
+#    if !OPENGL_ES
+        if (glFramebufferTexture) {
+#    endif
+            glFramebufferTexture(GL_FRAMEBUFFER, attachment, tex.handle(), 0);
             GL_CHECK();
-#if !OPENGL_ES
-        }
-        else
-#endif
+#    if !OPENGL_ES
+        } else
+#    endif
 #endif
 #if OPENGL_ES < 32
         {
             GLenum target = tex.target();
-            if (type == TextureType_Cube) {
+            if (target == GL_TEXTURE_CUBE_MAP) {
                 target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + j;
-            } else {
-                assert(j == 0);
             }
 
-            glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, target, tex.mTextureHandle, 0);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, target, tex.handle(), 0);
             GL_CHECK();
         }
 #endif
     }
 
     OpenGLRenderTexture::OpenGLRenderTexture(OpenGLRenderContext *context, const Vector2i &size, const RenderTextureConfig &config)
-        : OpenGLRenderTarget(context, false, config.mName, config.mIterations)
+        : OpenGLRenderTarget(context, false, config.mName, config.mFlipFlop, config.mBlitSource)
         , mSamples(context->supportsMultisampling() ? config.mSamples : 1)
         , mSize { 0, 0 }
+        , mType(config.mType)
+        , mCreateDepthTexture(config.mCreateDepthBufferView)
     {
-        TextureType type = config.mType;
-        if (type == TextureType_2DMultiSample && !context->supportsMultisampling())
-            type = TextureType_2D;
+        if (mType == TextureType_2DMultiSample && !context->supportsMultisampling())
+            mType = TextureType_2D;
 
         bool createDepthBufferView = config.mCreateDepthBufferView;
 
-        size_t bufferCount = config.mIterations > 1 && mSamples == 1 ? 2 : 1;
-        size_t framebufferCount = bufferCount;
-#if OPENGL_ES < 32
-#if !OPENGL_ES
-        if (!glFramebufferTexture)
-#endif
-        {
-            if (type == TextureType_Cube) {
-                assert(framebufferCount == 1);
-                framebufferCount = 6;
-                createDepthBufferView = true;
-            }
-        }
-#endif
-
-        glGenFramebuffers(framebufferCount, mFramebuffers);
-        GL_CHECK();
+        size_t bufferCount = config.mFlipFlop ? 2 : 1;
+        mFramebufferCount = getFramebufferCount(&createDepthBufferView);
 
         for (size_t i = 0; i < config.mTextureCount * bufferCount; ++i) {
-            OpenGLTexture &tex = mTextures.emplace_back(type, config.mFormat);
-            tex.setWrapMode(GL_CLAMP_TO_EDGE);
-            tex.setFilter(GL_NEAREST);
+            OpenGLTexture &tex = mTextures.emplace_back(mType, config.mFormat, config.mSamples);
         }
 
-        if (createDepthBufferView) {
-            mDepthTexture = { type, FORMAT_D32, mSamples };
-            if (type == TextureType_Cube) {
-                mDepthTexture.setWrapMode(GL_CLAMP_TO_EDGE);
-                mDepthTexture.setFilter(GL_NEAREST);
-            }
+        if (mCreateDepthTexture) {
+            mDepthTexture = { mType, FORMAT_D32, mSamples };
         } else {
             glGenRenderbuffers(1, &mDepthRenderbuffer);
             GL_CHECK();
         }
 
-        if (mSamples > 1) {
-            mMultisampledTextures.resize(config.mTextureCount);
-            glGenTextures(config.mTextureCount, mMultisampledTextures.data());
-            GL_CHECK();
-            glGenFramebuffers(1, &mMultisampledFramebuffer);
-            GL_CHECK();
-        }
-
         resize(size);
-
-        for (size_t j = 0; j < framebufferCount; ++j) {
-
-#if MULTISAMPLING
-            if (mSamples > 1) {
-                glBindFramebuffer(GL_FRAMEBUFFER, mMultisampledFramebuffer);
-                GL_CHECK();
-                for (size_t i = 0; i < config.mTextureCount; ++i) {
-                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, mTextures[i].mTextureHandle, 0);
-                    GL_CHECK();
-                }
-                glBindFramebuffer(GL_FRAMEBUFFER, mFramebuffers[0]);
-                GL_CHECK();
-                for (size_t i = 0; i < config.mTextureCount; ++i) {
-                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D_MULTISAMPLE, mMultisampledTextures[i], 0);
-                    GL_CHECK();
-                }
-            } else
-#endif
-            {
-                glBindFramebuffer(GL_FRAMEBUFFER, mFramebuffers[j]);
-                GL_CHECK();
-                for (size_t i = 0; i < config.mTextureCount; ++i) {
-                    attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, mTextures[i * bufferCount + j], type, j);
-                }
-            }
-
-            if (createDepthBufferView) {
-                attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, type, j);
-            } else {
-                glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
-                GL_CHECK();
-                glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mDepthRenderbuffer);
-                GL_CHECK();
-            }
-
-            GLenum DrawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
-            assert(config.mTextureCount <= array_size(DrawBuffers));
-            glDrawBuffers(config.mTextureCount, DrawBuffers);
-            GL_CHECK();
-
-            if (GLenum check = glCheckFramebufferStatus(GL_FRAMEBUFFER); check != GL_FRAMEBUFFER_COMPLETE) {
-                if (check == 0){
-                    GL_CHECK();
-                }else{
-                LOG_ERROR("Incomplete Framebuffer Status: " << check << " (depth-texture: " << createDepthBufferView << ")");
-                glDump();
-                }
-                std::terminate();
-            }
-
-            glBindRenderbuffer(GL_RENDERBUFFER, 0);
-            GL_CHECK();
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            GL_CHECK();
-        }
     }
 
     OpenGLRenderTexture::~OpenGLRenderTexture()
     {
-        glDeleteFramebuffers(mFramebuffers[1] != 0 ? 2 : 1, mFramebuffers);
+        for (auto &[offsets, framebuffers] : mFramebuffers)
+            for (GLuint framebuffer : framebuffers)
+                if (framebuffer != 0)
+                    glDeleteFramebuffers(1, &framebuffer);
         GL_CHECK();
         if (mDepthRenderbuffer) {
             glDeleteRenderbuffers(1, &mDepthRenderbuffer);
-            GL_CHECK();
-        }
-        if (mMultisampledFramebuffer) {
-            glDeleteFramebuffers(1, &mMultisampledFramebuffer);
-            GL_CHECK();
-        }
-        if (!mMultisampledTextures.empty()) {
-            glDeleteTextures(mMultisampledTextures.size(), mMultisampledTextures.data());
             GL_CHECK();
         }
     }
@@ -197,23 +106,13 @@ namespace Render {
 
         assert(width > 0 && height > 0);
 
-        for (OpenGLTexture &tex : mTextures)
+        for (OpenGLTexture &tex : mTextures) {
             tex.setData({ width, height }, {});
-
-#if MULTISAMPLING
-        for (size_t i = 0; i < mMultisampledTextures.size(); ++i) {
-            glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, mMultisampledTextures[i]);
-            GL_CHECK();
-#if OPENGL_ES
-            glTexStorage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, mSamples, mHDR ? GL_RGBA16F : GL_RGBA, width, height, GL_TRUE);
-#else
-            glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, mSamples, mHDR ? GL_RGBA16F : GL_RGBA, width, height, GL_TRUE);
-#endif
-            GL_CHECK();
+            if (mType != TextureType_2DMultiSample) {
+                tex.setWrapMode(GL_CLAMP_TO_EDGE);
+                tex.setFilter(GL_NEAREST);
+            }
         }
-        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-        GL_CHECK();
-#endif
 
         if (mDepthRenderbuffer) {
             glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
@@ -228,68 +127,256 @@ namespace Render {
             glBindRenderbuffer(GL_RENDERBUFFER, 0);
             GL_CHECK();
         }
-        if (mDepthTexture) {
-            mDepthTexture.resize({ width, height });
+        if (mCreateDepthTexture) {
+            mDepthTexture.setData({ width, height }, {});
+            if (mType == TextureType_Cube) {
+                mDepthTexture.setWrapMode(GL_CLAMP_TO_EDGE);
+                mDepthTexture.setFilter(GL_NEAREST);
+            }
         }
+
+        size_t framebufferCount = getFramebufferCount();
+        for (auto &[offsets, framebuffers] : mFramebuffers) {
+            for (size_t j = 0; j < framebufferCount; ++j) {
+
+                glBindFramebuffer(GL_FRAMEBUFFER, framebuffers[j]);
+                GL_CHECK();
+                for (size_t i = 0; i < textureCount(); ++i) {
+                    const OpenGLTexture &tex = mTextures[offsets[i] * textureCount() + i];
+                    attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
+                }
+
+                if (mCreateDepthTexture) {
+                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
+                } else {
+                    glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
+                    GL_CHECK();
+                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mDepthRenderbuffer);
+                    GL_CHECK();
+                }
+            }
+        }
+
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        GL_CHECK();
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        GL_CHECK();
 
         return true;
     }
 
-    void OpenGLRenderTexture::beginIteration(size_t iteration) const
+    void OpenGLRenderTexture::beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, mFramebuffers[iteration % 2]);
-        GL_CHECK();
+        auto pib = mFramebuffers.try_emplace(mFlipFlopIndices);
+        auto it = pib.first;
+        if (pib.second) {
+            glGenFramebuffers(mFramebufferCount, it->second.data());
+            GL_CHECK();
 
-        OpenGLRenderTarget::beginIteration(iteration);
-    }
+            for (size_t j = 0; j < mFramebufferCount; ++j) {
 
-    void OpenGLRenderTexture::endIteration(size_t iteration) const
-    {
-        OpenGLRenderTarget::endIteration(iteration);
+                glBindFramebuffer(GL_FRAMEBUFFER, it->second[j]);
+                GL_CHECK();
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        GL_CHECK();
+                for (size_t i = 0; i < textureCount(); ++i) {
+                    const OpenGLTexture &tex = mTextures[mFlipFlopIndices[i] * textureCount() + i];
+                    attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
+                }
 
-        if (mSamples > 1) {
-            for (size_t i = 0; i < mTextures.size(); ++i) {
-                glBindFramebuffer(GL_READ_FRAMEBUFFER, mFramebuffers[0]);
+                if (mCreateDepthTexture) {
+                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
+                } else {
+                    glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
+                    GL_CHECK();
+                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mDepthRenderbuffer);
+                    GL_CHECK();
+                }
+
+                GLenum DrawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
+                assert(textureCount() <= array_size(DrawBuffers));
+                glDrawBuffers(textureCount(), DrawBuffers);
                 GL_CHECK();
-                glReadBuffer(GL_COLOR_ATTACHMENT0 + i);
-                GL_CHECK();
-                glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mMultisampledFramebuffer);
-                GL_CHECK();
-                GLenum attachment = GL_COLOR_ATTACHMENT0 + i;
-                glDrawBuffers(1, &attachment);
-                GL_CHECK();
-                glBlitFramebuffer(0, 0, mSize.x, mSize.y, 0, 0, mSize.x, mSize.y, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-                GL_CHECK();
-                glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
-                GL_CHECK();
-                glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+
+                if (GLenum check = glCheckFramebufferStatus(GL_FRAMEBUFFER); check != GL_FRAMEBUFFER_COMPLETE) {
+                    if (check == 0) {
+                        GL_CHECK();
+                    } else {
+                        LOG_ERROR("Incomplete Framebuffer Status: " << check);
+                        glDump();
+                    }
+                    std::terminate();
+                }
+
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
                 GL_CHECK();
             }
         }
 
+        glBindFramebuffer(GL_FRAMEBUFFER, it->second[targetSubresourceIndex]);
+        GL_CHECK();
+
+        OpenGLRenderTarget::beginIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
-    TextureDescriptor OpenGLRenderTexture::texture(size_t index, size_t iteration) const
+    void OpenGLRenderTexture::endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const
     {
-        if (iteration == std::numeric_limits<size_t>::max())
-            iteration = iterations();
+        OpenGLRenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
 
-        int bufferCount = iterations() > 1 ? 2 : 1;
-        int offset = iterations() > 1 ? 1 - iteration % 2 : 0;
-        return mTextures[bufferCount * index + offset].descriptor();
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        GL_CHECK();
+    }
+
+    void OpenGLRenderTexture::beginFrame()
+    {
+        auto it = mFramebuffers.find(mFlipFlopIndices);
+        if (it != mFramebuffers.end()) {
+            glBindFramebuffer(GL_FRAMEBUFFER, it->second[0]);
+            GL_CHECK();
+        }
+
+        OpenGLRenderTarget::beginFrame();
+
+        if (mBlitSource)
+            blit(mBlitSource);
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        GL_CHECK();
+    }
+
+    RenderFuture OpenGLRenderTexture::endFrame()
+    {
+        return OpenGLRenderTarget::endFrame();
+    }
+
+    const OpenGLTexture *OpenGLRenderTexture::texture(size_t index) const
+    {
+        int offset = canFlipFlop() ? mFlipFlopIndices[index] : 0;
+        return &mTextures[textureCount() * offset + index];
     }
 
     size_t OpenGLRenderTexture::textureCount() const
     {
-        return mTextures.size();
+        int bufferCount = canFlipFlop() ? 2 : 1;
+        return mTextures.size() / bufferCount;
     }
 
-    TextureDescriptor OpenGLRenderTexture::depthTexture() const
+    const OpenGLTexture *OpenGLRenderTexture::depthTexture() const
     {
-        return mDepthTexture.descriptor();
+        return &mDepthTexture;
+    }
+
+    void OpenGLRenderTexture::blit(RenderTarget *input) const
+    {
+        OpenGLRenderTexture *inputTex = dynamic_cast<OpenGLRenderTexture *>(input);
+        assert(inputTex);
+
+        size_t count = std::min(textureCount(), inputTex->textureCount());
+
+        auto pib = mFramebuffers.try_emplace(mFlipFlopIndices);
+        auto it = pib.first;
+        if (pib.second) {
+            glGenFramebuffers(mFramebufferCount, it->second.data());
+            GL_CHECK();
+
+            for (size_t j = 0; j < mFramebufferCount; ++j) {
+
+                glBindFramebuffer(GL_FRAMEBUFFER, it->second[j]);
+                GL_CHECK();
+
+                for (size_t i = 0; i < textureCount(); ++i) {
+                    const OpenGLTexture &tex = mTextures[mFlipFlopIndices[i] * textureCount() + i];
+                    attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
+                }
+
+                if (mCreateDepthTexture) {
+                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
+                } else {
+                    glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
+                    GL_CHECK();
+                    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mDepthRenderbuffer);
+                    GL_CHECK();
+                }
+
+                GLenum DrawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
+                assert(textureCount() <= array_size(DrawBuffers));
+                glDrawBuffers(textureCount(), DrawBuffers);
+                GL_CHECK();
+
+                if (GLenum check = glCheckFramebufferStatus(GL_FRAMEBUFFER); check != GL_FRAMEBUFFER_COMPLETE) {
+                    if (check == 0) {
+                        GL_CHECK();
+                    } else {
+                        LOG_ERROR("Incomplete Framebuffer Status: " << check);
+                        glDump();
+                    }
+                    std::terminate();
+                }
+
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
+                GL_CHECK();
+            }
+        }
+
+        for (size_t i = 0; i < mFramebufferCount; ++i) {
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, it->second[i]);
+            GL_CHECK();
+            glBindFramebuffer(GL_READ_FRAMEBUFFER, inputTex->mFramebuffers[inputTex->mFlipFlopIndices][i]);
+            GL_CHECK();
+
+            for (size_t j = 0; j < count; ++j) {
+                GLenum attachment = GL_COLOR_ATTACHMENT0 + j;
+                glReadBuffer(attachment);
+                GL_CHECK();
+#if !OPENGL_ES
+                glDrawBuffer(attachment);
+#else
+                glDrawBuffers(1, &attachment);
+#endif
+                GL_CHECK();
+                glBlitFramebuffer(0, 0, inputTex->mSize.x, inputTex->mSize.y, 0, 0, mSize.x, mSize.y, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+                GL_CHECK();
+            }
+        }
+
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+        GL_CHECK();
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+        GL_CHECK();
+    }
+
+    Matrix4 OpenGLRenderTexture::getClipSpaceMatrix() const
+    {
+        return Matrix4 { 1, 0, 0, 0,
+            0, -1, 0, 0,
+            0, 0, 2, -1,
+            0, 0, 0, 1 };
+    }
+
+    size_t OpenGLRenderTexture::getFramebufferCount(bool *emulateCube) const
+    {
+        size_t count = 1;
+
+#if OPENGL_ES < 32
+#    if !OPENGL_ES
+        if (!glFramebufferTexture)
+#    endif
+        {
+            if (mType == TextureType_Cube) {
+                assert(count == 1);
+                count = 6;
+                if (emulateCube)
+                    *emulateCube = true;
+            }
+        }
+#endif
+        return count;
+    }
+
+    void OpenGLRenderTexture::flipTextures(size_t startIndex, size_t count)
+    {
+        for (size_t i = 0; i < count; ++i) {
+            mFlipFlopIndices[startIndex + i] = mFlipFlopIndices[startIndex + i] ^ 1;
+        }
     }
 
     Vector2i OpenGLRenderTexture::size() const

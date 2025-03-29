@@ -1,5 +1,7 @@
 #include "../interfaceslib.h"
 
+#ifndef NDEBUG
+
 #include "traceback.h"
 
 namespace Engine{
@@ -26,3 +28,5 @@ namespace std {
 		return ss.str();
 	}
 }
+
+#endif

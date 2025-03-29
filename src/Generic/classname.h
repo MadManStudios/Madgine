@@ -1,7 +1,7 @@
 #pragma once
 
 #include "decay.h"
-#include "type_holder.h"
+#include "stringutil.h"
 
 #ifdef __GNUG__
 #    include <cxxabi.h>

@@ -2,6 +2,12 @@
 
 #if ENABLE_PLUGINS
 
+#    include "../ini/inifile.h"
+
+#    include "Generic/container/mutable_set.h"
+
+#    include "namecompare.h"
+
 namespace Engine {
 namespace Plugins {
 
@@ -10,28 +16,32 @@ namespace Plugins {
 
         PluginManager();
         PluginManager(const PluginManager &) = delete;
-        ~PluginManager();		
+        ~PluginManager();
 
         PluginManager &operator=(const PluginManager &) = delete;
 
-        int setup(bool loadCache, std::string_view programName, std::string_view configFile);
+        int setup(bool loadCache, std::string_view programName, const Filesystem::Path &configFile);
 
-        PluginSection &section(const std::string &name);
-        PluginSection &operator[](const std::string &name);
-        const PluginSection &at(const std::string &name) const;
+        PluginSection &section(std::string_view name);
+        PluginSection &operator[](std::string_view name);
+        const PluginSection &at(std::string_view name) const;
+        bool hasSection(std::string_view name) const;
 
-        Plugin *getPlugin(const std::string &name);
+        Plugin *getPlugin(std::string_view name);
 
-        std::map<std::string, PluginSection>::const_iterator begin() const;
-        std::map<std::string, PluginSection>::const_iterator end() const;
-        std::map<std::string, PluginSection>::iterator begin();
-        std::map<std::string, PluginSection>::iterator end();
+        mutable_set<PluginSection, NameCompare>::const_iterator begin() const;
+        mutable_set<PluginSection, NameCompare>::const_iterator end() const;
+        mutable_set<PluginSection, NameCompare>::iterator begin();
+        mutable_set<PluginSection, NameCompare>::iterator end();
 
         bool loadFromFile(const Filesystem::Path &p, bool withTools);
         void saveToFile(const Filesystem::Path &p, bool withTools);
 
         void saveSelection(Ini::IniFile &file, bool withTools);
         bool loadSelection(const Ini::IniFile &file, bool withTools);
+
+        const Ini::IniFile &selection() const;
+        Ini::IniFile &selection();
 
     protected:
         void setupSection(const std::string &name, bool exclusive, bool atleastOne);
@@ -41,7 +51,9 @@ namespace Plugins {
         friend struct PluginSection;
 
     private:
-        std::map<std::string, PluginSection> mSections;        
+        mutable_set<PluginSection, NameCompare> mSections;
+
+        Ini::IniFile mCurrentSelection;
 
         bool mUseCache = false;
     };
@@ -49,13 +61,5 @@ namespace Plugins {
 }
 
 }
-
-#define IF_PLUGIN(p) if (Engine::Plugins::PluginManager::getSingleton().isLoaded(#p))
-#define THROW_PLUGIN(errorMsg) throw errorMsg
-
-#else
-
-#define IF_PLUGIN(p) if constexpr (!Engine::streq("BUILD_" #p, STRINGIFY2(BUILD_##p)))
-#define THROW_PLUGIN(errorMsg) throw errorMsg
 
 #endif

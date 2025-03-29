@@ -12,9 +12,6 @@ namespace Render {
     OpenGLBuffer::OpenGLBuffer(GLenum target, const ByteBuffer &data)
         : mTarget(target)
     {
-        glGenBuffers(1, &mHandle);
-        GL_CHECK();
-
         setData(data);
     }
 
@@ -50,6 +47,22 @@ namespace Render {
         GL_CHECK();
     }
 
+    void OpenGLBuffer::bindVertex(size_t stride) const
+    {
+        assert(mTarget == GL_ARRAY_BUFFER);
+
+        bind();
+
+#if !OPENGL_ES || OPENGL_ES >= 31
+#    if !OPENGL_ES
+        if (glBindVertexBuffer)
+#    endif
+            glBindVertexBuffer(0, mHandle, 0, stride);
+#endif
+
+        GL_CHECK();
+    }
+
     void OpenGLBuffer::reset()
     {
         if (mHandle) {
@@ -62,10 +75,16 @@ namespace Render {
 
     void OpenGLBuffer::setData(const ByteBuffer &data)
     {
-        bind();
-        glBufferData(mTarget, data.mSize, data.mData, data.mData ? GL_STATIC_DRAW : GL_DYNAMIC_DRAW);
-        GL_CHECK();
         mSize = data.mSize;
+        if (mSize > 0) {
+            if (!mHandle) {
+                glGenBuffers(1, &mHandle);
+                GL_CHECK();
+            }
+            bind();
+            glBufferData(mTarget, data.mSize, data.mData, data.mData ? GL_STATIC_DRAW : GL_DYNAMIC_DRAW);
+            GL_CHECK();
+        }
     }
 
     void OpenGLBuffer::resize(size_t size)
@@ -73,68 +92,6 @@ namespace Render {
         if (size != mSize) {
             setData({ nullptr, size });
         }
-    }
-
-    WritableByteBuffer OpenGLBuffer::mapData(size_t offset, size_t size)
-    {
-
-        if (size == 0)
-            size = mSize;
-
-#if !WEBGL
-        struct UnmapDeleter {
-            OpenGLBuffer *mSelf;
-
-            void operator()(void *p)
-            {
-                mSelf->bind();
-                auto result = glUnmapBuffer(mSelf->mTarget);
-                assert(result);
-                GL_CHECK();
-            }
-        };
-        bind();
-        void *data = glMapBufferRange(mTarget, offset, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_RANGE_BIT);
-        GL_CHECK();
-        assert(data);
-
-        std::unique_ptr<void, UnmapDeleter> dataBuffer { data, { this } };
-
-        return { std::move(dataBuffer), size };
-#else
-        struct MapHelper {
-            std::unique_ptr<std::byte[]> mPtr;
-            OpenGLBuffer *mSelf;
-            size_t mOffset;
-            size_t mSize;
-
-            MapHelper(OpenGLBuffer *self, size_t offset, size_t size)
-                : mPtr(std::make_unique<std::byte[]>(size))
-                , mSelf(self)
-                , mOffset(offset)
-                , mSize(size)
-            {
-            }
-
-            MapHelper(MapHelper &&other)
-                : mPtr(std::move(other.mPtr))
-                , mSelf(other.mSelf)
-                , mOffset(other.mOffset)
-                , mSize(other.mSize)
-            {
-            }
-
-            ~MapHelper()
-            {
-                if (mPtr)
-                    mSelf->setSubData(mOffset, { mPtr.get(), mSize });
-            }
-        };
-
-        MapHelper dataBuffer { this, offset, size };
-
-        return { std::move(dataBuffer), size, dataBuffer.mPtr.get() };
-#endif
     }
 
     void OpenGLBuffer::setSubData(unsigned int offset, const ByteBuffer &data)

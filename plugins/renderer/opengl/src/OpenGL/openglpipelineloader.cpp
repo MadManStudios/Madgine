@@ -5,6 +5,7 @@
 #include "openglshaderloader.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine/codegen/codegen_shader.h"
 
@@ -12,15 +13,7 @@
 
 #include "util/openglpipelineinstance.h"
 
-VIRTUALUNIQUECOMPONENT(Engine::Render::OpenGLPipelineLoader);
-
-METATABLE_BEGIN_BASE(Engine::Render::OpenGLPipelineLoader, Engine::Render::PipelineLoader)
-MEMBER(mResources)
-METATABLE_END(Engine::Render::OpenGLPipelineLoader)
-
-METATABLE_BEGIN_BASE(Engine::Render::OpenGLPipelineLoader::Resource, Engine::Render::PipelineLoader::Resource)
-READONLY_PROPERTY(Data, dataPtr)
-METATABLE_END(Engine::Render::OpenGLPipelineLoader::Resource)
+VIRTUALRESOURCELOADERIMPL(Engine::Render::OpenGLPipelineLoader, Engine::Render::PipelineLoader);
 
 namespace Engine {
 namespace Render {
@@ -39,38 +32,32 @@ namespace Render {
         pipeline.reset();
     }
 
-    Threading::Task<bool> OpenGLPipelineLoader::create(Instance &instance, PipelineConfiguration config, bool dynamic)
+    Threading::Task<bool> OpenGLPipelineLoader::create(Instance &instance, PipelineConfiguration config)
     {
 
         char buffer[256];
 #if WINDOWS
-        sprintf_s(buffer, "%s|%s|%s", config.vs.data(), config.gs.data(), config.ps.data());
+        sprintf_s(buffer, "%s|%s", config.vs.data(), config.ps.data());
 #else
-        sprintf(buffer, "%s|%s|%s", config.vs.data(), config.gs.data(), config.ps.data());
+        sprintf(buffer, "%s|%s", config.vs.data(), config.ps.data());
 #endif
 
         Handle pipeline;
-        if (!co_await pipeline.create(buffer, {}, [&](OpenGLPipelineLoader *loader, OpenGLPipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
+        if (!co_await pipeline.create(buffer, {}, [vs { std::string { config.vs } }, ps { std::string { config.ps } }](OpenGLPipelineLoader *loader, OpenGLPipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
                 OpenGLShaderLoader::Handle vertexShader;
-                if (!co_await vertexShader.load(config.vs, VertexShader)) {
-                    LOG_ERROR("Failed to load VS '" << config.vs << "'!");
+                if (!co_await vertexShader.load(vs, VertexShader)) {
+                    LOG_ERROR("Failed to load VS '" << vs << "'!");
                     co_return false;
                 }
 
                 OpenGLShaderLoader::Handle pixelShader;
-                if (!co_await pixelShader.load(config.ps, PixelShader) && pixelShader) {
-                    LOG_ERROR("Failed to load PS '" << config.ps << "'!");
+                if (!ps.empty() && !co_await pixelShader.load(ps, PixelShader)) {
+                    LOG_ERROR("Failed to load PS '" << ps << "'!");
                     co_return false;
                 }
 
-                OpenGLShaderLoader::Handle geometryShader;
-                if (!co_await geometryShader.load(config.gs, GeometryShader) && geometryShader) {
-                    LOG_ERROR("Failed to load GS '" << config.gs << "'!");
-                    co_return false;
-                }
-
-                if (!pipeline.link(std::move(vertexShader), std::move(geometryShader), std::move(pixelShader))) {
-                    LOG_ERROR("Failed to link Program '" << config.vs << "|" << config.gs << "|" << config.ps
+                if (!pipeline.link(std::move(vertexShader), std::move(pixelShader))) {
+                    LOG_ERROR("Failed to link Program '" << vs << "|" << ps
                                                          << "'!");
                     co_return false;
                 }
@@ -79,7 +66,7 @@ namespace Render {
             }))
             co_return false;
 
-        instance = std::make_unique<OpenGLPipelineInstance>(config, std::move(pipeline));
+        instance = std::make_unique<OpenGLPipelineInstanceHandle>(config, std::move(pipeline));
 
         co_return true;
     }
@@ -88,35 +75,22 @@ namespace Render {
     {
         assert(file.mInstances.size() == 2);
 
-        char buffer[256];
-#if WINDOWS
-        sprintf_s(buffer, "%s|%s|%s", config.vs.data(), config.gs.data(), config.ps.data());
-#else
-        sprintf(buffer, "%s|%s|%s", config.vs.data(), config.gs.data(), config.ps.data());
-#endif
-
-        Handle pipeline;
-        if (!co_await pipeline.create(buffer, {}, [&](OpenGLPipelineLoader *loader, OpenGLPipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
-                OpenGLShaderLoader::Handle vertexShader;
-                if (!co_await vertexShader.create(config.vs, file, VertexShader)) {
+        Ptr pipeline;
+        if (!co_await pipeline.create([&](OpenGLPipelineLoader *loader, OpenGLPipeline &pipeline) -> Threading::Task<bool> {
+                OpenGLShaderLoader::Ptr vertexShader;
+                if (!co_await vertexShader.create(file, VertexShader)) {
                     LOG_ERROR("Failed to load VS '" << config.vs << "'!");
                     co_return false;
                 }
 
-                OpenGLShaderLoader::Handle pixelShader;
-                if (!co_await pixelShader.create(config.ps, file, PixelShader) && pixelShader) {
+                OpenGLShaderLoader::Ptr pixelShader;
+                if (!co_await pixelShader.create(file, PixelShader) && pixelShader) {
                     LOG_ERROR("Failed to load PS '" << config.ps << "'!");
                     co_return false;
                 }
 
-                /* OpenGLShaderLoader::Handle geometryShader;
-                if (!co_await geometryShader.create(config.gs, GeometryShader) && geometryShader) {
-                    LOG_ERROR("Failed to load GS '" << config.gs << "'!");
-                    co_return false;
-                }*/
-
-                if (!pipeline.link(std::move(vertexShader), {}, std::move(pixelShader))) {
-                    LOG_ERROR("Failed to link Program '" << config.vs << "|" << config.gs << "|" << config.ps
+                if (!pipeline.link(std::move(vertexShader), std::move(pixelShader))) {
+                    LOG_ERROR("Failed to link Program '" << config.vs << "|" << config.ps
                                                          << "'!");
                     co_return false;
                 }
@@ -125,11 +99,10 @@ namespace Render {
             }))
             co_return false;
 
-        instance = std::make_unique<OpenGLPipelineInstance>(config, std::move(pipeline));
+        instance = std::make_unique<OpenGLPipelineInstancePtr>(config, std::move(pipeline));
 
         co_return true;
     }
-
 
     Threading::TaskQueue *OpenGLPipelineLoader::loadingTaskQueue() const
     {

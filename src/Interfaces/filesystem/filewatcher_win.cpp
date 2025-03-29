@@ -2,11 +2,13 @@
 
 #if WINDOWS
 
-#    include "api.h"
+#    include "fsapi.h"
 
 #    include "filewatcher.h"
 
 #    include "Generic/coroutines/generator.h"
+
+#    include "../helpers/win_ptrs.h"
 
 #    define NOMINMAX
 #    include <Windows.h>
@@ -14,26 +16,6 @@
 namespace Engine {
 namespace Filesystem {
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-    static std::mutex sFilewatcherMutex;
-
-    struct SCOPED_HANDLE {
-        SCOPED_HANDLE(HANDLE handle)
-            : mHandle(handle)
-        {
-        }
-
-        ~SCOPED_HANDLE()
-        {
-            CloseHandle(mHandle);
-        }
-
-        operator HANDLE() const
-        {
-            return mHandle;
-        }
-
-        HANDLE mHandle;
-    };
 
     PFILE_NOTIFY_INFORMATION bump(PFILE_NOTIFY_INFORMATION p)
     {
@@ -45,8 +27,8 @@ namespace Filesystem {
 
         std::vector<FileEvent> result;
 
-        SCOPED_HANDLE dir = CreateFile(path.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OVERLAPPED, NULL);
-        SCOPED_HANDLE event = CreateEvent(NULL, true, false, path.c_str());
+        UniqueHandle dir = CreateFile(path.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OVERLAPPED, NULL);
+        UniqueHandle event = CreateEvent(NULL, true, false, path.c_str());
         assert(event);
 
         OVERLAPPED overlapped;
@@ -131,9 +113,9 @@ namespace Filesystem {
     {
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
         assert(isDir(path));
-        auto pib = mWatches.try_emplace(path, 0);
+        auto pib = mWatches.try_emplace(path);
         if (pib.second) {
-            pib.first->second = reinterpret_cast<uintptr_t>(&fileWatch(pib.first->first).release().release().promise());
+            pib.first->second.setupAs<Generator<std::vector<FileEvent>>>() = fileWatch(pib.first->first);
         }
 #    endif
     }
@@ -143,8 +125,8 @@ namespace Filesystem {
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
         auto it = mWatches.find(path);
         if (it != mWatches.end()) {
-            //cause destroy
-            Generator<std::vector<FileEvent>> { CoroutineHandle<Generator<std::vector<FileEvent>>::promise_type>::fromPromise(*reinterpret_cast<Generator<std::vector<FileEvent>>::promise_type *>(it->second)) };
+            // cause destroy
+            it->second.release<Generator<std::vector<FileEvent>>>();
             mWatches.erase(it);
         }
 #    endif
@@ -153,9 +135,9 @@ namespace Filesystem {
     void FileWatcher::clear()
     {
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-        for (const std::pair<const Path, uintptr_t> &handle : mWatches) {
-            //cause destroy
-            Generator<std::vector<FileEvent>> generator { CoroutineHandle<Generator<std::vector<FileEvent>>::promise_type>::fromPromise(*reinterpret_cast<Generator<std::vector<FileEvent>>::promise_type *>(handle.second)) };
+        for (std::pair<const Path, UniqueOpaquePtr> &handle : mWatches) {
+            // cause destroy
+            handle.second.release<Generator<std::vector<FileEvent>>>();            
         }
         mWatches.clear();
 #    endif
@@ -166,12 +148,11 @@ namespace Filesystem {
         std::vector<FileEvent> result;
 
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-        for (const std::pair<const Path, uintptr_t> &watch : mWatches) {
-            Generator<std::vector<FileEvent>> gen { CoroutineHandle<Generator<std::vector<FileEvent>>::promise_type>::fromPromise(*reinterpret_cast<Generator<std::vector<FileEvent>>::promise_type *>(watch.second)) };
+        for (std::pair<const Path, UniqueOpaquePtr> &watch : mWatches) {
+            Generator<std::vector<FileEvent>> &gen = watch.second.as<Generator<std::vector<FileEvent>>>();
             gen.next();
             const std::vector<FileEvent> &events = gen.get();
             std::ranges::copy(events, std::back_inserter(result));
-            gen.release().release();
         }
 #    endif
 

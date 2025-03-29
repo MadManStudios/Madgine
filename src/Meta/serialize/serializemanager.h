@@ -7,8 +7,6 @@ namespace Serialize {
 
     struct META_EXPORT SerializeManager {
 
-		static constexpr ParticipantId sLocalMasterParticipantId = 1;
-
         SerializeManager(const std::string &name);
         SerializeManager(const SerializeManager &) = delete;
         SerializeManager(SerializeManager &&) noexcept;
@@ -33,13 +31,15 @@ namespace Serialize {
 
 		SerializeStreamData *getSlaveStreamData();        
 
+        SerializeStream wrapStream(Stream stream, bool isSlave = false);
+
     protected:
         void setSlaveStreamData(SerializeStreamData *data);
 
-        std::unique_ptr<SerializeStreamData> createStreamData();
+        std::unique_ptr<SerializeStreamData> createStreamData(ParticipantId id = createStreamId());
         static ParticipantId createStreamId();
 
-		SyncableUnitBase *getByMasterId(UnitId unit);
+		static SyncableUnitBase *getByMasterId(UnitId unit);
 
         SyncableUnitMap mSlaveMappings;   
 

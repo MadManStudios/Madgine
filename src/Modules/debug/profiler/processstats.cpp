@@ -51,12 +51,18 @@ namespace Debug {
             if (mRunning == 0) {
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::nanoseconds duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - mStart);
-                Data d { duration, mStarted };
-                mData << d;
+                Data result = inject(duration, mStarted);
                 mStarted = 0;
-                return d;
+                return result;
             }
             return {};
+        }
+
+        ProcessStats::Data ProcessStats::inject(std::chrono::nanoseconds duration, size_t recursionCount)
+        {
+            Data d { duration, recursionCount };
+            mData << d;
+            return d;
         }
 
         std::pair<ProcessStats *const, ProcessStats::Data> *ProcessStats::updateChild(ProcessStats *child, const Data &data)

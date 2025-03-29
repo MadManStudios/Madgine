@@ -1,6 +1,6 @@
 #include "../interfaceslib.h"
 #include "path.h"
-#include "api.h"
+#include "fsapi.h"
 
 namespace Engine {
 namespace Filesystem {
@@ -150,7 +150,7 @@ namespace Filesystem {
                 --cursor;
                 size_t pos = mPath.rfind('/', cursor - 1);
                 if (pos != std::string::npos) {
-                    cursor = pos;
+                    cursor = std::max(pos, size_t { 1 });
                 } else {
                     cursor = 0;
                 }
@@ -223,6 +223,12 @@ namespace Filesystem {
     bool Path::isRelative() const
     {
         return !isAbsolute();
+    }
+
+    bool Path::isRelative(const Path &base) const
+    {
+        auto [firstEnd, secondEnd] = std::mismatch(mPath.begin(), mPath.end(), base.str().begin(), base.str().end());
+        return secondEnd == base.str().end();
     }
 
     void Path::clear()

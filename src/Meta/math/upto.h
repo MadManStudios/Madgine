@@ -5,7 +5,7 @@ namespace Engine {
 template <typename T, size_t Count>
 struct UpTo {
 
-    UpTo() = default;
+    UpTo() {};
 
     UpTo(std::initializer_list<T> elements)
     {
@@ -54,7 +54,6 @@ struct UpTo {
 
 private:
     union {
-        char _dummy;
         T mData[Count];
     };
 

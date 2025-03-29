@@ -4,90 +4,79 @@
 
 #include "../streams/pendingrequest.h"
 
+#include "../streams/writemessage.h"
+
 namespace Engine {
 namespace Serialize {
 
+    META_EXPORT WriteMessage getSlaveRequestMessageTarget(const SyncableUnitBase *unit, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver);
+    META_EXPORT std::vector<WriteMessage> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
+        const std::set<ParticipantId> &targets = {});
+    META_EXPORT WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id);
+
+
     struct META_EXPORT SyncableBase {
-        ~SyncableBase() = default;
-
-        /*virtual void readRequest(BufferedInOutStream &in) = 0;
-        virtual void readAction(SerializeInStream &in) = 0;*/
-
-    protected:
-        FormattedBufferedStream &getSlaveRequestMessageTarget(const SyncableUnitBase *parent, ParticipantId requester, MessageId requesterTransactionId, GenericMessagePromise promise) const;
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterActionMessageTargets(const SyncableUnitBase *parent, ParticipantId answerTarget, MessageId answerId,
-            const std::set<ParticipantId> &targets = {}) const;
-        FormattedBufferedStream &getMasterRequestResponseTarget(const SyncableUnitBase *parent, ParticipantId answerTarget, MessageId answerId) const;
-        ParticipantId participantId(const SerializableUnitBase *parent);
-
-        void writeAction(const SyncableUnitBase *parent, OffsetPtr offset, const void *data, ParticipantId answerTarget, MessageId answerId, const std::set<ParticipantId> &targets = {}) const;
-        void writeRequest(const SyncableUnitBase *parent, OffsetPtr offset, const void *data, ParticipantId requester, MessageId requesterTransactionId, GenericMessagePromise promise = {}) const;
-        void writeRequestResponse(const SyncableUnitBase *parent, OffsetPtr offset, const void *data, ParticipantId answerTarget, MessageId answerId) const;
-
-        void beginRequestResponseMessage(const SyncableUnitBase *parent, FormattedBufferedStream &stream, MessageId id) const;
-
-        bool isMaster(const SyncableUnitBase *parent) const;
     };
 
     template <typename OffsetPtr>
     struct Syncable : SyncableBase {
 
-        std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> getMasterActionMessageTargets(ParticipantId answerTarget = 0, MessageId answerId = 0,
-            const std::set<ParticipantId> &targets = {}) const
+        friend std::vector<WriteMessage> getMasterActionMessageTargets(const Syncable<OffsetPtr> *syncable, ParticipantId answerTarget = 0, MessageId answerId = 0,
+            const std::set<ParticipantId> &targets = {})
         {
-            return SyncableBase::getMasterActionMessageTargets(parent(), answerTarget, answerId, targets);
+            return getMasterActionMessageTargets(OffsetPtr::parent(syncable), answerTarget, answerId, targets);
         }
 
-        FormattedBufferedStream &getSlaveRequestMessageTarget(ParticipantId requester = 0, MessageId requesterTransactionId = 0, GenericMessagePromise promise = {}) const
+        friend WriteMessage getSlaveRequestMessageTarget(const Syncable<OffsetPtr> *syncable, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver = {})
         {
-            return SyncableBase::getSlaveRequestMessageTarget(parent(), requester, requesterTransactionId, std::move(promise));
+            return getSlaveRequestMessageTarget(OffsetPtr::parent(syncable), requester, requestId, std::move(receiver));
         }
 
         ParticipantId participantId()
         {
-            return SyncableBase::participantId(parent());
+            return parent()->participantId();
         }
 
-        void writeAction(const void *data, ParticipantId answerTarget = 0, MessageId answerId = 0, const std::set<ParticipantId> &targets = {}) const
+        template <typename... Args>
+        void writeAction(ParticipantId answerTarget, MessageId answerId, Args &&...args) const
         {
-            SyncableBase::writeAction(parent(), OffsetPtr::template offset<SerializableDataUnit>(), data, answerTarget, answerId, targets);
-        }
-        
-        void writeRequest(const void *data, ParticipantId requester = 0, MessageId requesterTransactionId = 0) const
-        {
-            SyncableBase::writeRequest(parent(), OffsetPtr::template offset<SerializableDataUnit>(), data, requester, requesterTransactionId);
+            parent()->writeAction(static_cast<const typename OffsetPtr::member_type *>(this), answerTarget, answerId, std::forward<Args>(args)...);
         }
 
-        template <typename T>
-        MessageFuture<T> writeRequest(const void *data, ParticipantId requester = 0, MessageId requesterTransactionId = 0) const
+        template <typename... Args>
+        void writeRequest(ParticipantId requester, MessageId requesterTransactionId, Args &&...args) const
         {
-            MessagePromise<T> p;
-            MessageFuture<T> f { Future<MessageData<T>>{ p.get_future() } };
-            SyncableBase::writeRequest(parent(), OffsetPtr::template offset<SerializableDataUnit>(), data, requester, requesterTransactionId, std::move(p));
-            return f;
+            parent()->writeRequest(static_cast<const typename OffsetPtr::member_type *>(this), requester, requesterTransactionId, std::forward<Args>(args)...);
         }
 
-        void writeRequestResponse(const void *data, ParticipantId answerTarget, MessageId answerId) const
+        template <typename... Args>
+        void writeRequest(GenericMessageReceiver receiver, Args &&...args) const
         {
-            SyncableBase::writeRequestResponse(parent(), OffsetPtr::template offset<SerializableDataUnit>(), data, answerTarget, answerId);
+            parent()->writeRequest(static_cast<const typename OffsetPtr::member_type *>(this), std::move(receiver), std::forward<Args>(args)...);
         }
 
-        void beginRequestResponseMessage(FormattedBufferedStream &stream, MessageId id) const
+        template <typename... Args>
+        void writeRequestResponse(ParticipantId answerTarget, MessageId answerId, Args &&...args) const
         {
-            SyncableBase::beginRequestResponseMessage(parent(), stream, id);
+            parent()->writeRequestResponse(static_cast<const typename OffsetPtr::member_type *>(this), answerTarget, answerId, std::forward<Args>(args)...);
         }
 
-        FormattedBufferedStream &getRequestResponseTarget(ParticipantId stream, MessageId id) const
+        friend WriteMessage beginRequestResponseMessage(const Syncable<OffsetPtr> *syncable, FormattedMessageStream &stream, MessageId id)
         {
-            return SyncableBase::getMasterRequestResponseTarget(parent(), stream, id);
+            return beginRequestResponseMessage(OffsetPtr::parent(syncable), stream, id);
+        }
+
+        friend WriteMessage getRequestResponseTarget(const Syncable<OffsetPtr> *syncable, ParticipantId stream, MessageId id)
+        {
+            return getMasterRequestResponseTarget(OffsetPtr::parent(syncable), stream, id);
         }
 
         bool isMaster() const
         {
-            return SyncableBase::isMaster(parent());
+            return parent()->isMaster();
         }
 
-        const SyncableUnitBase *parent() const
+        auto parent() const
         {
             return OffsetPtr::parent(this);
         }

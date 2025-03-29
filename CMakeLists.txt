@@ -1,4 +1,3 @@
-
 cmake_minimum_required (VERSION 3.8)
 
 cmake_policy(VERSION 3.18)
@@ -28,6 +27,32 @@ if (MADGINE_AS_SDK)
 	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} PARENT_SCOPE)
 endif(MADGINE_AS_SDK)
 
+set (MADGINE_CONFIGURATION "" CACHE FILEPATH "A directory containing configuration data for a release build of the engine")
+
+if (MADGINE_CONFIGURATION)
+	if (NOT EXISTS ${MADGINE_CONFIGURATION})
+		MESSAGE(FATAL_ERROR "The provided directory for MADGINE_CONFIGURATION does not exist: ${MADGINE_CONFIGURATION}")
+	endif ()
+	if (NOT IS_ABSOLUTE ${MADGINE_CONFIGURATION})
+		set (MADGINE_CONFIGURATION ${CMAKE_SOURCE_DIR}/${MADGINE_CONFIGURATION} CACHE FILEPATH "A directory containing configuration data for a release build of the engine" FORCE)
+	endif ()
+
+	file(GLOB configs "${MADGINE_CONFIGURATION}/*.cmake")
+	foreach(config ${configs})
+		message(STATUS "Adding configuration-code: ${config}")
+		include (${config})
+	endforeach()
+
+	include(util/ini)
+
+	file(GLOB inis "${MADGINE_CONFIGURATION}/*.ini")
+	foreach(ini ${inis})
+		get_filename_component(name ${ini} NAME_WE)
+		string(TOUPPER ${name} name)
+		read_ini_file(${ini} ${name})
+	endforeach()
+
+endif()
 
 
 include(Workspace)
@@ -37,6 +62,8 @@ include(util/Project)
 include(Plugins)
 include(Tools)
 include(Testing)
+include(Legal)
+include(Dependencies)
 
 set (CPACK_NSIS_MODIFY_PATH ON)
 set (CPACK_PACKAGE_VENDOR "MadMan Studios")
@@ -46,26 +73,38 @@ set (CPACK_PACKAGE_VENDOR "MadMan Studios")
 enable_packaging()
 
 
-add_subdirectory(src)
+add_subdirectory(util ${CMAKE_BINARY_DIR}/../util)
 
-add_subdirectory(shared)
+add_subdirectory(src)
 
 add_subdirectory(plugins)
 
 add_subdirectory(samples)
 
-if (MADGINE_EXTERNAL_FILE_HIERARCHY)
-	add_subdirectory(${MADGINE_EXTERNAL_FILE_HIERARCHY} External)
-endif()
+resolve_dependencies()
 
-if (MADGINE_AS_SDK)
-	set (LAUNCHER_LOCATION ${CMAKE_CURRENT_LIST_DIR}/launcher CACHE INTERNAL "")
-	function(create_launcher MADGINE_BINARY_NAME)
-		add_subdirectory(${LAUNCHER_LOCATION} launcher)
-	endfunction()
-else()
+set (LAUNCHER_LOCATION ${CMAKE_CURRENT_LIST_DIR}/launcher CACHE INTERNAL "")
+function(create_launcher MADGINE_BINARY_NAME)
+	if (TARGET MadgineTooling)
+		set_target_properties(MadgineTooling PROPERTIES BinaryName ${MADGINE_BINARY_NAME})
+	endif()
+	set(MADGINE_SERVER OFF)
+	add_subdirectory(${LAUNCHER_LOCATION} launcher)
+endfunction()
+function(create_server MADGINE_BINARY_NAME)
+	if (TARGET MadgineTooling)
+		set_target_properties(MadgineTooling PROPERTIES BinaryName ${MADGINE_BINARY_NAME})
+	endif()
+	set(MADGINE_SERVER ON)
+	add_subdirectory(${LAUNCHER_LOCATION} server)
+endfunction()
+
+if (NOT MADGINE_AS_SDK)
 	add_subdirectory(docs)
-	add_subdirectory(launcher)
+	create_launcher(MadgineLauncher)
+	if (MODULES_ENABLE_PLUGINS OR PLUGINSELECTION_Core_Server)		
+		create_server(MadgineServer)
+	endif()
 endif()
 
 

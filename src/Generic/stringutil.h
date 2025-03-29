@@ -1,5 +1,7 @@
 #pragma once
 
+#include "coroutines/generator.h"
+
 namespace Engine {
 namespace StringUtil {
 
@@ -20,7 +22,7 @@ namespace StringUtil {
 
     constexpr bool contains(std::string_view s, std::string_view content)
     {
-        return startsWith(s, content); //TODO!!
+        return s.find(content) != std::string_view::npos;
     }
 
     CONSTEXPR_ALGORITHM std::string_view trim(std::string_view s)
@@ -88,7 +90,8 @@ namespace StringUtil {
         return std::move(s);
     }
 
-    inline std::string toLower(std::string_view s) {
+    inline std::string toLower(std::string_view s)
+    {
         return toLower(std::string { s });
     }
 
@@ -98,23 +101,41 @@ namespace StringUtil {
         return std::move(s);
     }
 
-    inline std::wstring toWString(std::string_view input) {
-        std::wstring s;
-        std::ranges::copy(input, std::back_inserter(s));
-        return s;
-    }
+    template <typename Stream>
+    struct StreamJoiner {
+
+        StreamJoiner(Stream &out, const char *separator)
+            : mOut(out)
+            , mSeparator(separator)
+        {
+        }
+
+        Stream &next()
+        { 
+            if (mFirst) {
+                mFirst = false;
+            } else {
+                mOut << mSeparator;
+            }
+            return mOut;
+        }
+
+        bool empty() const {
+            return mFirst;
+        }
+
+        Stream &mOut;
+        const char *mSeparator;
+        bool mFirst = true;
+    };
 
     template <typename Cont>
     std::string join(Cont &&cont, const char *sep)
     {
         std::ostringstream ss;
-        bool first = true;
+        StreamJoiner out { ss, sep };
         for (auto &&element : cont) {
-            if (first)
-                first = false;
-            else
-                ss << sep;
-            ss << element;
+            out.next() << element;
         }
         return ss.str();
     }
@@ -139,6 +160,23 @@ namespace StringUtil {
             pivot = newPivot + 1;
         }
         return result;
+    }
+
+    inline Generator<std::string_view> tokenize(std::string_view string, char token)
+    {
+        size_t pivot = 0;
+        while (pivot < string.size()) {
+            while (isspace(string[pivot]))
+                ++pivot;
+            size_t newPivot = string.find(token, pivot);
+            if (newPivot == std::string_view::npos)
+                newPivot = string.size();
+            size_t actualEnd = newPivot;
+            while (actualEnd > pivot && isspace(string[actualEnd - 1]))
+                --actualEnd;
+            co_yield string.substr(pivot, actualEnd - pivot);
+            pivot = newPivot + 1;
+        }
     }
 
 }
@@ -182,7 +220,8 @@ constexpr bool strcpy_s(char *dest, size_t size, const char *source)
     return true;
 }
 
-constexpr std::strong_ordering strcmp(const char* first, const char* second) {
+constexpr std::strong_ordering strcmp(const char *first, const char *second)
+{
     while (*first || *second) {
         std::strong_ordering comp = *first <=> *second;
         if (comp != 0)

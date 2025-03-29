@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/type_pack.h"
-
 namespace Engine {
 namespace Serialize {
 
@@ -17,7 +15,7 @@ namespace Serialize {
     template <typename Category, typename Default, typename... Configs>
     using ConfigSelectorDefault = typename type_pack<Configs...>::template filter<CategoryChecker<Category>::template check>::template unpack_unique<Default>;
 
-    template <typename Category, template <typename...> typename Wrapper, typename... Configs>
-    using ConfigGroupSelector = typename type_pack<Configs...>::template filter<CategoryChecker<Category>::template check>::template instantiate<Wrapper>;
+    template <typename Category, typename... Configs>
+    using ConfigGroupSelector = typename type_pack<Configs...>::template filter<CategoryChecker<Category>::template check>;
 }
 }

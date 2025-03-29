@@ -2,7 +2,7 @@
 
 #include "Madgine/resources/resourceloader.h"
 
-#include "Madgine/pipelineloader/pipelineloader.h"
+#include "Madgine/render/pipelineloader.h"
 
 #include "util/openglpipeline.h"
 
@@ -14,7 +14,7 @@ namespace Render {
 
         bool loadImpl(OpenGLPipeline &pipeline, ResourceDataInfo &info);
         void unloadImpl(OpenGLPipeline &pipeline);
-        Threading::Task<bool> create(Instance &instance, PipelineConfiguration config, bool dynamic) override;
+        Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) override;
         Threading::Task<bool> create(Instance &instance, PipelineConfiguration config, CodeGen::ShaderFile file) override;
 
         virtual Threading::TaskQueue *loadingTaskQueue() const override;

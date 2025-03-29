@@ -15,15 +15,20 @@ bool checkDevice(HRESULT& result) {
     return true;
 }
 
-void dx12Dump(HRESULT result)
+void dx12Dump(HRESULT result, const char *file, size_t line)
 {
 
-    Engine::Util::LogDummy cout { Engine::Util::MessageType::INFO_TYPE };
+    Engine::Log::LogDummy cout { Engine::Log::MessageType::FATAL_TYPE, file, line };
 
+    if (file) {
+        cout << "  at " << file << "(" << line << ")\n";
+    }
     
     if (result == DXGI_ERROR_DEVICE_REMOVED) {
         HRESULT reason = GetDevice()->GetDeviceRemovedReason();
-        int i = 3;
+        _com_error error { reason };
+        cout << "Device Removal reason: \n"
+            << error.ErrorMessage();
     }
 
     cout << "DX12-State: ---------- \n";

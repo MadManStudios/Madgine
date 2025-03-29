@@ -7,7 +7,7 @@
 
 #include <Cocoa/Cocoa.h>
 
-#include "../main.h"
+#include "../main_compat.h"
 
 #if __has_feature(objc_arc)
 #error "ARC is on!"
@@ -37,5 +37,5 @@ int main(int argc, char * argv[])  {
         running = true;
         [NSApp activateIgnoringOtherApps:YES];
     
-    return desktopMain(argc, argv);
+    return desktopMain_compat(argc, argv);
 }

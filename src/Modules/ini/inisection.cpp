@@ -11,9 +11,16 @@ namespace Ini {
     {
     }
 
-    std::string &IniSection::operator[](const std::string &key)
+    std::string &IniSection::operator[](std::string_view key)
     {
-        return mValues[key];
+        return mValues[std::string{ key }];
+    }
+
+    std::string IniSection::operator[](std::string_view key) const
+    {
+        if (!mValues.contains(std::string { key }))
+            return "";
+        return mValues.at(std::string { key });
     }
 
     void IniSection::save(Stream &stream) const
@@ -29,6 +36,9 @@ namespace Ini {
         std::streampos save = stream.tell();
         std::string line;
         while (std::getline(stream.stream(), line)) {
+            if (line.empty()) {
+                continue;
+            }
             if (line.at(0) == '[') {
                 stream.seek(save);
                 return;
@@ -41,22 +51,22 @@ namespace Ini {
         }
     }
 
-    std::map<std::string, std::string>::iterator IniSection::begin()
+    std::map<std::string, std::string, std::less<>>::iterator IniSection::begin()
     {
         return mValues.begin();
     }
 
-    std::map<std::string, std::string>::iterator IniSection::end()
+    std::map<std::string, std::string, std::less<>>::iterator IniSection::end()
     {
         return mValues.end();
     }
 
-    std::map<std::string, std::string>::const_iterator IniSection::begin() const
+    std::map<std::string, std::string, std::less<>>::const_iterator IniSection::begin() const
     {
         return mValues.begin();
     }
 
-    std::map<std::string, std::string>::const_iterator IniSection::end() const
+    std::map<std::string, std::string, std::less<>>::const_iterator IniSection::end() const
     {
         return mValues.end();
     }

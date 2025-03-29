@@ -1,29 +1,32 @@
 #include "../../metalib.h"
 #include "message_streambuf.h"
+#include "streamresult.h"
 
 namespace Engine {
 namespace Serialize {
 
-    void message_streambuf::beginMessageWrite(ParticipantId requester, MessageId requestId, GenericMessagePromise promise)
+    void message_streambuf::beginMessageWrite()
     {
         assert(!pptr());
-        MessageId id = beginMessageWriteImpl();
+        beginMessageWriteImpl();
         assert(pptr());
-        if (requester || promise)
-            mPendingRequests.push_back({ id, requester, requestId, std::move(promise) });
     }
 
-    void message_streambuf::endMessageWrite()
+    void message_streambuf::endMessageWrite(ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
     {
         assert(pptr());
-        endMessageWriteImpl();
+        MessageId id = endMessageWriteImpl();
         setp(nullptr, nullptr);
+        if (requester || receiver)
+            mPendingRequests.push_back({ id, requester, requestId, std::move(receiver) });
     }
 
     MessageId message_streambuf::beginMessageRead()
     {
         assert(!egptr());
-        return beginMessageReadImpl();
+        MessageId result = beginMessageReadImpl();
+        assert(result == 0 || egptr());
+        return result;
     }
 
     std::streamsize message_streambuf::endMessageRead()
@@ -35,7 +38,7 @@ namespace Serialize {
 
     PendingRequest message_streambuf::getRequest(MessageId id)
     {
-        auto it = std::ranges::find_if(mPendingRequests, [&](const PendingRequest &r) { return r.mId == id; });
+        auto it = std::ranges::find(mPendingRequests, id, &PendingRequest::mId);
         if (it == mPendingRequests.end())
             return { id };
         else {
@@ -46,7 +49,9 @@ namespace Serialize {
     }
 
     std::streamsize message_streambuf::endMessageReadImpl() {
-        return showmanyc();
+        std::streamsize result = showmanyc();
+        setg(nullptr, nullptr, nullptr);
+        return result;
     }
 
 }

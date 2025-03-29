@@ -1,8 +1,6 @@
 #pragma once
 
 #include "comparator_traits.h"
-#include "container/transformIt.h"
-#include "functor.h"
 
 namespace Engine {
 
@@ -136,10 +134,34 @@ struct KeyValue<const std::unique_ptr<T, D>> {
 };
 
 template <typename T>
+struct KeyValue<std::reference_wrapper<T>> {
+    using Inner = KeyValue<T>;
+
+    static decltype(auto) value(std::reference_wrapper<T> ref) {
+        if constexpr (std::is_reference_v<decltype(Inner::value(ref.get()))>) {
+            return std::ref(Inner::value(ref.get()));
+        }else{
+            return Inner::value(ref.get());            
+        }
+    }
+
+    static decltype(auto) key(std::reference_wrapper<T> ref)
+    {
+        if constexpr (std::is_reference_v<decltype(Inner::key(ref.get()))>) {
+            return std::ref(Inner::key(ref.get()));
+        } else {
+            return Inner::key(ref.get());
+        }
+    }
+};
+
+template <typename T>
 decltype(auto) kvValue(T &&v)
 {
     return KeyValue<std::remove_reference_t<T>>::value(std::forward<T>(v));
 }
+
+constexpr auto projectionValue = LIFT(kvValue);
 
 template <typename T>
 decltype(auto) kvKey(T &&v)
@@ -150,15 +172,15 @@ decltype(auto) kvKey(T &&v)
 constexpr auto projectionKey = LIFT(kvKey);
 
 template <typename T>
-decltype(auto) kvValues(T &v)
+auto kvValues(T &v)
 {
-    return transformIt<Functor<kvValue<decltype(*v.begin())>>>(v);
+    return std::views::transform(v, projectionValue);
 }
 
 template <typename T>
-decltype(auto) kvKeys(T &v)
+auto kvKeys(T &v)
 {
-    return transformIt<Functor<kvKey<decltype(*v.begin())>>>(v);
+    return std::views::transform(v, projectionKey);
 }
 
 template <typename T>
@@ -194,7 +216,6 @@ struct KeyCompare {
 
 template <typename _Ty>
 struct comparator_traits<KeyCompare<_Ty>> {
-    typedef KeyCompare<_Ty> cmp_type;
     typedef KeyType_t<_Ty> type;
     typedef _Ty item_type;
 

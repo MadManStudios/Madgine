@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef NDEBUG
+
 #include "traceback.h"
 
 namespace Engine {
@@ -120,3 +122,5 @@ struct hash<Engine::Debug::FullStackTrace> {
     }
 };
 }
+
+#endif

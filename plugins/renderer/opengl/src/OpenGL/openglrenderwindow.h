@@ -2,7 +2,6 @@
 
 #include "Modules/threading/threadlocal.h"
 #include "openglrendertarget.h"
-#include "util/openglssbobuffer.h"
 
 namespace Engine {
 namespace Render {
@@ -11,32 +10,29 @@ namespace Render {
         OpenGLRenderWindow(OpenGLRenderContext *context, Window::OSWindow *w, size_t samples = 1, OpenGLRenderWindow *sharedContext = nullptr);
         ~OpenGLRenderWindow();
 
-        virtual void beginIteration(size_t iteration) const override;
-        virtual void endIteration(size_t iteration) const override;
+        virtual void beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
+        virtual void endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
 
-        virtual TextureDescriptor texture(size_t index, size_t iteration = std::numeric_limits<size_t>::max()) const override;
-        virtual size_t textureCount() const override;
-        virtual TextureDescriptor depthTexture() const override;
+        virtual bool skipFrame() override;
+        virtual void beginFrame() override;
+        virtual RenderFuture endFrame() override;
 
         virtual bool resizeImpl(const Vector2i &size) override;
         virtual Vector2i size() const override;
 
         ContextHandle mContext = 0;
 
+    protected:
+        SurfaceHandle getSurface() const;
+
     private:
         Window::OSWindow *mOsWindow;
         bool mReusedContext;
 
 #if OPENGL_ES
-        static THREADLOCAL(OpenGLSSBOBufferStorage *) sCurrentSSBOBuffer;
-        mutable std::optional<OpenGLSSBOBufferStorage> mSSBOBuffer;
-
-    public:
-        static OpenGLSSBOBufferStorage &getSSBOStorage()
-        {
-            assert(sCurrentSSBOBuffer);
-            return *sCurrentSSBOBuffer;
-        }
+#    if ANDROID || EMSCRIPTEN
+        EGLSurface mSurface = nullptr;
+#    endif
 #endif
     };
 

@@ -9,6 +9,8 @@
 
 #include "Meta/base64/base64.h"
 
+#include "../hierarchy/serializableunitptr.h"
+
 namespace Engine {
 namespace Serialize {
 
@@ -32,7 +34,7 @@ namespace Serialize {
         : Stream(std::move(other))
         , mData(std::move(other.mData))
     {
-        mData->setManager(mgr);
+        //mData->setManager(mgr);
     }
 
     SerializeStream::~SerializeStream() = default;
@@ -46,16 +48,18 @@ namespace Serialize {
 
     StreamResult SerializeStream::read(void *buffer, size_t size)
     {
-        Stream::read(buffer, size);
-        return checkState("read");
+        if (Stream::read(buffer, size) < 0) {
+            auto error = STREAM_ERROR(StreamState::OK, *this, true);
+            error.mType = streamError(state(), error.mMsg);
+            error.mMsg << "after read";
+            return error;
+        }
+        return {};
     }
 
     StreamResult SerializeStream::readN(std::string &buffer, size_t n)
     {
-        //assert(!format().mBinary);
-
-        skipWs();
-        STREAM_PROPAGATE_ERROR(checkState("skipWs"));
+        STREAM_PROPAGATE_ERROR(skipWs());        
 
         if (n == 0)
             return {};
@@ -66,10 +70,7 @@ namespace Serialize {
 
     StreamResult SerializeStream::readUntil(std::string &buffer, const char *delim)
     {
-        //assert(!format().mBinary);
-
-        skipWs();
-        STREAM_PROPAGATE_ERROR(checkState("skipWs"));
+        STREAM_PROPAGATE_ERROR(skipWs());
 
         buffer.resize(255);
         size_t i = 0;
@@ -150,14 +151,14 @@ namespace Serialize {
         return {};
     }
 
-    StreamResult SerializeStream::read(SerializableDataUnit *&p)
+    StreamResult SerializeStream::read(SerializableDataPtr &p)
     {
         uint32_t ptr;
         STREAM_PROPAGATE_ERROR(read(ptr));
         assert(ptr <= (std::numeric_limits<uint32_t>::max() >> 2));
         if (ptr)
             ptr = (ptr << 2) | static_cast<uint32_t>(UnitIdTag::SERIALIZABLE);
-        p = reinterpret_cast<SerializableDataUnit *>(ptr);
+        p.mUnit = reinterpret_cast<void *>(ptr);
         return {};
     }
 
@@ -172,14 +173,14 @@ namespace Serialize {
         return {};
     }
 
-    StreamResult SerializeStream::operator>>(SerializableDataUnit *&p)
+    StreamResult SerializeStream::operator>>(SerializableDataPtr &p)
     {
         uint32_t ptr;
         STREAM_PROPAGATE_ERROR(operator>>(ptr));
         assert(ptr <= (std::numeric_limits<uint32_t>::max() >> 2));
         if (ptr)
             ptr = (ptr << 2) | static_cast<uint32_t>(UnitIdTag::SERIALIZABLE);
-        p = reinterpret_cast<SerializableDataUnit *>(ptr);
+        p.mUnit = reinterpret_cast<void *>(ptr);
         return {};
     }
 
@@ -226,7 +227,7 @@ namespace Serialize {
         Stream::write(SerializeManager::convertPtr(*this, p));
     }
 
-    void SerializeStream::write(const SerializableDataUnit *p)
+    void SerializeStream::write(SerializableDataConstPtr p)
     {
         uint32_t id = 0;
         if (p) {
@@ -242,7 +243,7 @@ namespace Serialize {
         Stream::operator<<(SerializeManager::convertPtr(*this, p));
         return *this;
     }
-    SerializeStream &SerializeStream::operator<<(const SerializableDataUnit *p)
+    SerializeStream &SerializeStream::operator<<(SerializableDataConstPtr p)
     {
         uint32_t id = 0;
         if (p) {
@@ -274,7 +275,7 @@ namespace Serialize {
 
     SerializeStream &SerializeStream::operator<<(const ByteBuffer &b)
     {
-        return operator<<(Base64::encode(b));        
+        return operator<<(Base64::encode(b));
     }
 
     void SerializeStream::write(const Void &)
@@ -286,22 +287,14 @@ namespace Serialize {
         return *this;
     }
 
-    StreamResult SerializeStream::checkState(const char *op)
+    StreamResult SerializeStream::skipWs(bool overwrite)
     {
-        if (!*this) {
-            const char *msg;
-            if (state() & std::ios_base::badbit) {
-                msg = "Stream corrupt";
-            } else if (state() & std::ios_base::failbit) {
-                msg = "Operation failure";
-            } else if (state() & std::ios_base::eofbit) {
-                msg = "Unexpected EOF";
-            } else
-                throw 0;
-            return STREAM_PARSE_ERROR(*this, true) << msg << " after " << op;
-        } else {
-            return {};
+        if (!Stream::skipWs(overwrite)) {
+            auto error = STREAM_ERROR(StreamState::OK, *this, true);
+            error.mType = streamError(state(), error.mMsg);
+            error.mMsg << "after skipWs";
         }
+        return {};
     }
 
 }

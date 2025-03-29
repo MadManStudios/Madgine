@@ -4,7 +4,7 @@
 
 #include "boundingbox.h"
 #include "plane.h"
-#include "ray.h"
+#include "ray3.h"
 #include "sphere.h"
 #include "vector3.h"
 
@@ -12,14 +12,14 @@
 
 namespace Engine {
 
-float Distance(const Ray &ray, const Vector3 &point, float *rayClosestParameter)
+float Distance(const Ray3 &ray, const Vector3 &point, float *rayClosestParameter)
 {
     if (rayClosestParameter)
         *rayClosestParameter = ray.mDir.dotProduct(point - ray.mPoint);
     return ray.mDir.crossProduct(point - ray.mPoint).length();
 }
 
-UpTo<float, 2> Intersect(const Ray &ray, const Sphere &sphere)
+UpTo<float, 2> Intersect(const Ray3 &ray, const Sphere &sphere)
 {
     Vector3 oc = ray.mPoint - sphere.mCenter;
     float a = 1.0f/* ray.mDir.dotProduct(ray.mDir) */;
@@ -36,7 +36,7 @@ UpTo<float, 2> Intersect(const Ray &ray, const Sphere &sphere)
     return result;
 }
 
-UpTo<float, 2> Intersect(const Ray &ray, const BoundingBox &box)
+UpTo<float, 2> Intersect(const Ray3 &ray, const BoundingBox &box)
 {
     Plane minX { box.mMin, box.mDirX };
     Plane maxX { box.mMax, box.mDirX };
@@ -102,7 +102,7 @@ UpTo<float, 2> Intersect(const Ray &ray, const BoundingBox &box)
     return result;
 }
 
-UpTo<float, 1> Intersect(const Ray &ray, const Plane &plane)
+UpTo<float, 1> Intersect(const Ray3 &ray, const Plane &plane)
 {
     UpTo<float, 1> result;
 

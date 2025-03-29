@@ -1,7 +1,7 @@
 #pragma once
 
 #include "taskhandle.h"
-#include "taskpromise.h"
+#include "taskpromisesharedstate.h"
 
 namespace Engine {
 namespace Threading {
@@ -35,7 +35,7 @@ namespace Threading {
             return static_cast<bool>(mState);
         }
 
-        bool attached()
+        bool attached() const
         {
             return mState && mState->mAttached;
         }
@@ -55,29 +55,33 @@ namespace Threading {
             return mState->is_ready();
         }
 
-        bool await_ready() const
+        auto &sender() const 
         {
-            return is_ready();
+            return mState->sender();
         }
 
-        bool await_suspend(TaskHandle handle)
+        auto operator co_await() const
         {
-            return mState->then(std::move(handle));
+            return TaskFutureAwaitable<T> { mState };
         }
 
-        const T &await_resume() const
+        template <typename U>
+        ImmediateTask<U> then_task(Task<U> task)
         {
-            return get();
+            return [](Task<U> task, TaskFuture<T> fut) -> ImmediateTask<U> {
+                co_await fut;
+                co_return co_await std::move(task);
+            }(std::move(task), *this);
         }
 
         template <typename F>
-        auto then(F &&f, Threading::TaskQueue *queue)
+        auto then(F &&f)
         {
-            auto task = make_task(std::forward<F>(f), TaskFuture<T> { *this });
-            auto fut = task.get_future();
-            auto handle = task.assign(queue);
-            mState->then(std::move(handle));
-            return fut;
+            using WrappedTask = ImmediateTask<typename decltype(make_task(std::declval<F>(), std::declval<T>()))::T>;
+            return [](F f, TaskFuture<T> fut) -> WrappedTask {
+                const T &value = co_await fut;
+                co_await make_task(std::forward<F>(f), value);
+            }(std::forward<F>(f), *this);
         }
 
         const T &get() const
@@ -105,12 +109,17 @@ namespace Threading {
         {
         }
 
-        bool valid()
+        static TaskFuture make_ready()
+        {
+            return { std::make_shared<TaskPromiseSharedState<void>>(true) };
+        }
+
+        bool valid() const
         {
             return static_cast<bool>(mState);
         }
 
-        bool attached()
+        bool attached() const
         {
             return mState && mState->mAttached;
         }
@@ -127,32 +136,36 @@ namespace Threading {
 
         bool is_ready() const
         {
-            return !mState || mState->is_ready();
+            return mState->is_ready();
         }
 
-        bool await_ready() const
+        auto sender() const
         {
-            return is_ready();
+            return mState->sender();
+        }
+           
+        auto operator co_await() const
+        {
+            return TaskFutureAwaitable<void> { mState };
         }
 
-        bool await_suspend(TaskHandle handle)
+        template <typename U>
+        ImmediateTask<U> then_task(Task<U> task)
         {
-            return mState->then(std::move(handle));
-        }
-
-        void await_resume() const
-        {
-            assert(is_ready());
+            return [](Task<U> task, TaskFuture<void> fut) -> ImmediateTask<U> {
+                co_await fut;
+                co_return co_await std::move(task);
+            }(std::move(task), *this);
         }
 
         template <typename F>
-        auto then(F &&f, Threading::TaskQueue *queue)
+        auto then(F f)
         {
-            auto task = make_task(std::forward<F>(f));
-            auto fut = task.get_future();
-            auto handle = task.assign(queue);
-            mState->then(std::move(handle));
-            return fut;
+            using WrappedTask = ImmediateTask<typename decltype(make_task(std::declval<F>()))::T>;
+            return [](F f, TaskFuture<void> fut) -> WrappedTask {
+                co_await fut;
+                co_await make_task(std::forward<F>(f));
+            }(std::forward<F>(f), *this);
         }
 
     private:

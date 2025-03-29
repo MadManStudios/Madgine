@@ -168,12 +168,7 @@ namespace Window {
     {
         return false;
     }
-    
-        bool OSWindow::isFullscreen()
-    {
-        return false;
-    }
-    
+
         void OSWindow::update()
     {
         NSEvent* ev;
@@ -258,6 +253,16 @@ namespace Window {
                 throw 0;
             }
         }(icon)));*/
+    }
+    
+    std::string OSWindow::getClipboardString()
+    {
+        return "";
+    }
+
+    bool OSWindow::setClipboardString(std::string_view s)
+    {
+        return true;
     }
 
     WindowData OSWindow::data()

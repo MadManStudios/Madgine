@@ -5,17 +5,11 @@
 #include "util/opengltexture.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "openglrendercontext.h"
 
-VIRTUALUNIQUECOMPONENT(Engine::Render::OpenGLTextureLoader);
-
-METATABLE_BEGIN(Engine::Render::OpenGLTextureLoader)
-MEMBER(mResources)
-METATABLE_END(Engine::Render::OpenGLTextureLoader)
-
-METATABLE_BEGIN_BASE(Engine::Render::OpenGLTextureLoader::Resource, Engine::Render::TextureLoader::Resource)
-METATABLE_END(Engine::Render::OpenGLTextureLoader::Resource)
+RESOURCELOADER(Engine::Render::OpenGLTextureLoader);
 
 namespace Engine {
 namespace Render {
@@ -34,7 +28,7 @@ namespace Render {
         tex.reset();
     }
 
-    bool OpenGLTextureLoader::create(Texture &tex, TextureType type, DataFormat format)
+    bool OpenGLTextureLoader::create(Texture &tex, TextureType type, TextureFormat format)
     {
         static_cast<OpenGLTexture &>(tex) = OpenGLTexture { type, format };
 
@@ -43,7 +37,6 @@ namespace Render {
 
     void OpenGLTextureLoader::setData(Texture &tex, Vector2i size, const ByteBuffer &data)
     {
-        static_cast<OpenGLTexture &>(tex) = { TextureType_2D, DataFormat::FORMAT_RGBA8 };
         static_cast<OpenGLTexture &>(tex).setData(size, data);
     }
 

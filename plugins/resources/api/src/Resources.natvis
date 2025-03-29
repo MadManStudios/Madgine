@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+  <Type Name="Engine::Resources::Handle&lt;*&gt;">
+    <DisplayString>{mData->mInfo.mResource->mName}</DisplayString>
+    <Expand>
+        <ExpandedItem>mData->mData</ExpandedItem>
+        <Item Name="[Info]">mData->mInfo</Item>
+    </Expand>
+  </Type>
+
+</AutoVisualizer>

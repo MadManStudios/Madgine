@@ -1,31 +1,33 @@
 #pragma once
 
 #include "Interfaces/filesystem/path.h"
+#include "inisection.h"
 
 namespace Engine {
 namespace Ini {
 
     struct MODULES_EXPORT IniFile {
 
-        IniFile();        
+        IniFile();
         ~IniFile();
 
-		IniFile &operator=(const IniFile &) = delete;
-
-        IniSection &operator[](const std::string &key);
+        IniSection &operator[](std::string_view key);
+        const IniSection &at(std::string_view key) const;
+        bool hasSection(std::string_view key) const;
+        void removeSection(std::string_view key);
 
         void clear();
 
-        void saveToDisk(const Filesystem::Path &path) const;
+        bool saveToDisk(const Filesystem::Path &path) const;
         bool loadFromDisk(const Filesystem::Path &path);
 
-        std::map<std::string, IniSection>::iterator begin();
-        std::map<std::string, IniSection>::iterator end();
-        std::map<std::string, IniSection>::const_iterator begin() const;
-        std::map<std::string, IniSection>::const_iterator end() const;
+        std::map<std::string, IniSection, std::less<>>::iterator begin();
+        std::map<std::string, IniSection, std::less<>>::iterator end();
+        std::map<std::string, IniSection, std::less<>>::const_iterator begin() const;
+        std::map<std::string, IniSection, std::less<>>::const_iterator end() const;
 
     private:
-        std::map<std::string, IniSection> mSections;
+        std::map<std::string, IniSection, std::less<>> mSections;
     };
 
 }

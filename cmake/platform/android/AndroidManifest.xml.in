@@ -8,14 +8,17 @@
     <application
         android:allowBackup="false"
         android:label="com.@PROJECT_NAME@.$<TARGET_FILE_BASE_NAME:@target@>"
-        android:hasCode="false"
-        android:theme="@android:style/Theme.NoTitleBar">
+          android:hasCode="true"
+          android:extractNativeLibs="true"
+          android:theme="@android:style/Theme.NoTitleBar">
 
-        <!-- This name is resolved to com.example.myapp.MainActivity
+          <!-- This name is resolved to com.example.myapp.MainActivity
              based upon the package attribute -->
         <activity android:name="android.app.NativeActivity"
+                  android:icon="@mipmap/ic_launcher"
                   android:label="$<TARGET_FILE_BASE_NAME:@target@>"
-                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:configChanges="orientation|keyboardHidden|screenSize">
                 <meta-data android:name="android.app.lib_name"
                         android:value="$<TARGET_FILE_BASE_NAME:@target@>" />
                 <intent-filter>
@@ -23,6 +26,8 @@
                         <category android:name="android.intent.category.LAUNCHER" />
                 </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+                   android:value="@string/app_id"/>
     </application>
 
 </manifest>

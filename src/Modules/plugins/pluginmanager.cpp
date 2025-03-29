@@ -18,14 +18,16 @@
 
 #    include "../threading/workgroup.h"
 
-#    include "Interfaces/filesystem/api.h"
+#    include "Interfaces/filesystem/fsapi.h"
+
+#    include "binaryinfo.h"
 
 namespace Engine {
 namespace Plugins {
 
     static Filesystem::Path cacheFileName()
     {
-        return Filesystem::appDataPath() / ("plugins.cfg");
+        return Filesystem::appDataPath() / ("plugins.ini");
     }
 
     static PluginManager *sSingleton = nullptr;
@@ -49,12 +51,12 @@ namespace Plugins {
             auto file = result.path().filename();
             if (std::regex_match(file.str(), match, e)) {
                 std::string section = match[1];
-                mSections.try_emplace(section, *this, section);
+                mSections.emplace(*this, section);
             }
         }
     }
 
-    int PluginManager::setup(bool loadCache, std::string_view programName, std::string_view configFile)
+    int PluginManager::setup(bool loadCache, std::string_view programName, const Filesystem::Path &configFile)
     {
         mUseCache = loadCache;
 
@@ -78,14 +80,18 @@ namespace Plugins {
         }
 
         if (!programName.empty()) {
-            Plugin exe {"MadgineLauncher", nullptr, {}, "" };
-            exe.setLoaded(true);
-            exe.loadDependencies(*this);
-            exe.clearDependencies(*this);
+            Plugin exe { programName, nullptr, {}, "" };
+            exe.loadDependencies(*this, mCurrentSelection);
+
+            if (strlen(exe.info()->mToolsName) > 0) {
+                section("Tools").loadPlugin(exe.info()->mToolsName, mCurrentSelection);
+            }
+
+            exe.clearDependencies();
         }
 
         for (PluginSection &sec : kvValues(mSections)) {
-            sec.load();
+            sec.load(mCurrentSelection);
         }
 
         onUpdate();
@@ -103,23 +109,28 @@ namespace Plugins {
         }*/
     }
 
-    PluginSection &PluginManager::section(const std::string &name)
+    PluginSection &PluginManager::section(std::string_view name)
     {
-        auto pib = mSections.try_emplace(name, *this, name);
-        return pib.first->second;
+        auto pib = mSections.emplace(*this, name);
+        return *pib.first;
     }
 
-    PluginSection &PluginManager::operator[](const std::string &name)
+    PluginSection &PluginManager::operator[](std::string_view name)
     {
         return section(name);
     }
 
-    const PluginSection &PluginManager::at(const std::string &name) const
+    const PluginSection &PluginManager::at(std::string_view name) const
     {
-        return mSections.at(name);
+        return *mSections.find(name);
     }
 
-    Plugin *PluginManager::getPlugin(const std::string &name)
+    bool PluginManager::hasSection(std::string_view name) const
+    {
+        return mSections.contains(name);
+    }
+
+    Plugin *PluginManager::getPlugin(std::string_view name)
     {
         for (PluginSection &sec : kvValues(mSections)) {
             Plugin *p = sec.getPlugin(name);
@@ -129,42 +140,36 @@ namespace Plugins {
         return nullptr;
     }
 
-    std::map<std::string, PluginSection>::const_iterator PluginManager::begin() const
+    mutable_set<PluginSection, NameCompare>::const_iterator PluginManager::begin() const
     {
         return mSections.begin();
     }
 
-    std::map<std::string, PluginSection>::const_iterator PluginManager::end() const
+    mutable_set<PluginSection, NameCompare>::const_iterator PluginManager::end() const
     {
         return mSections.end();
     }
 
-    std::map<std::string, PluginSection>::iterator PluginManager::begin()
+    mutable_set<PluginSection, NameCompare>::iterator PluginManager::begin()
     {
         return mSections.begin();
     }
 
-    std::map<std::string, PluginSection>::iterator PluginManager::end()
+    mutable_set<PluginSection, NameCompare>::iterator PluginManager::end()
     {
         return mSections.end();
     }
 
     void PluginManager::saveSelection(Ini::IniFile &file, bool withTools)
     {
-        file.clear();
-        for (auto &[name, section] : mSections) {
-            if (!withTools && StringUtil::endsWith(name, "Tools"))
-                continue;
-            Ini::IniSection &iniSec = file[name];
-            for (std::pair<const std::string, Plugin> &p : section) {
-                iniSec[p.first] = p.second.isLoaded() ? "On" : "";
-            }
-        }
+        file = mCurrentSelection;
+        if (!withTools)
+            file.removeSection("Tools");
     }
 
     bool PluginManager::loadSelection(const Ini::IniFile &file, bool withTools)
     {
-
+        mCurrentSelection = file;
         for (const auto &[sectionName, section] : file) {
             for (const auto &[pluginName, state] : section) {
                 Plugin *plugin = getPlugin(pluginName);
@@ -172,18 +177,22 @@ namespace Plugins {
                     LOG("Could not find Plugin \"" << pluginName << "\"!");
                     continue;
                 }
-                plugin->setLoaded(!state.empty());
-                if (withTools) {
-                    Plugin *toolsPlugin = getPlugin(pluginName + "Tools");
-                    if (toolsPlugin) {
-                        toolsPlugin->setLoaded(!state.empty());
+                if (plugin->isLoaded(mCurrentSelection)) {
+                    if (withTools) {
+                        Plugin *toolsPlugin = getPlugin(pluginName + "Tools");
+                        if (toolsPlugin) {
+                            plugin = toolsPlugin;
+                            plugin->setLoaded(true, mCurrentSelection);
+                        }
                     }
+
+                    plugin->loadDependencies(*this, mCurrentSelection);
                 }
             }
         }
 
         for (PluginSection &sec : kvValues(mSections)) {
-            sec.loadAllDependencies();
+            sec.loadAllDependencies(mCurrentSelection);
         }
 
         return true;
@@ -220,8 +229,18 @@ namespace Plugins {
 
     void PluginManager::setupSection(const std::string &name, bool exclusive, bool atleastOne)
     {
-        auto pib = mSections.try_emplace(name, *this, name, exclusive, atleastOne);
+        auto pib = mSections.emplace(*this, name, exclusive, atleastOne);
         assert(pib.second);
+    }
+
+    const Ini::IniFile &PluginManager::selection() const
+    {
+        return mCurrentSelection;
+    }
+
+    Ini::IniFile &PluginManager::selection()
+    {
+        return mCurrentSelection;
     }
 
 }

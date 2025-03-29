@@ -2,20 +2,20 @@
 
 #if ENABLE_PLUGINS
 
-#include "Interfaces/filesystem/path.h"
+#    include "Interfaces/filesystem/path.h"
 
-#include "../threading/task.h"
+#    include "../threading/task.h"
 
-#include "Interfaces/dl/dlapi.h"
+#    include "Interfaces/dl/dlapi.h"
 
 namespace Engine {
 namespace Plugins {
     struct MODULES_EXPORT Plugin {
-        Plugin(std::string name, PluginSection *section = nullptr, std::string project = {});
-        Plugin(std::string name, PluginSection *section, std::string project, Filesystem::Path path);
+        Plugin(std::string_view name, PluginSection *section = nullptr, std::string_view project = {});
+        Plugin(std::string_view name, PluginSection *section, std::string_view project, Filesystem::Path path);
         ~Plugin();
 
-        const void *getSymbol(const std::string &name) const;
+        const void *getSymbol(std::string_view name) const;
 
         Filesystem::Path fullPath() const;
 
@@ -25,34 +25,36 @@ namespace Plugins {
 
         bool isDependencyOf(Plugin *p) const;
 
-		const std::string &name() const;
+        const std::string &name() const;
 
         PluginSection *section() const;
 
+        
+        void ensureModule(PluginManager &manager);
 
-        void setLoaded(bool loaded);
-        bool isLoaded() const;
+        void setLoaded(bool loaded, Ini::IniFile &file);
+        bool isLoaded(const Ini::IniFile &file) const;
 
-        void loadDependencies(PluginManager &manager);
-        void unloadDependents(PluginManager &manager);
+        void loadDependencies(PluginManager &manager, Ini::IniFile &file);
+        void unloadDependents(PluginManager &manager, Ini::IniFile &file);
+
+        std::vector<std::reference_wrapper<const Plugin>> dependencies() const;
+        std::vector<std::reference_wrapper<const Plugin>> dependents() const;
 
         friend struct PluginManager;
 
     protected:
-        void addDependency(PluginManager &manager, Plugin *dependency);
-        void removeDependency(PluginManager &manager, Plugin *dependency);
-        void addGroupDependency(PluginManager &manager, PluginSection *dependency);
-        void removeGroupDependency(PluginManager &manager, PluginSection *dependency);
-        void clearDependencies(PluginManager &manager);
+        void addDependency(Plugin *dependency);
+        void removeDependency(Plugin *dependency);
+        void addGroupDependency(PluginSection *dependency);
+        void removeGroupDependency(PluginSection *dependency);
+        void clearDependencies();
 
         void checkCircularDependency(Plugin *dependency);
         bool checkCircularDependency(Plugin *dependency, std::vector<std::string_view> &trace);
 
-        void ensureModule(PluginManager &manager);
-
     private:
         Dl::DlHandle mModule;
-        bool mIsLoaded = false;
 
         std::string mProject;
         PluginSection *mSection;

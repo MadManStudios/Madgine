@@ -273,18 +273,24 @@ struct META_EXPORT Matrix3 {
     {
         char c;
         in >> c;
-        if (c != '[')
-            std::terminate();
+        if (c != '[') {
+            in.setstate(std::ios_base::failbit);
+            return in;
+        }
         for (int x = 0; x < 3; ++x) {
             for (int y = 0; y < 3; ++y) {
                 in >> mat[x][y];
                 in >> c;
                 if (x != 2 || y != 2) {
-                    if (c != ',')
-                        std::terminate();
+                    if (c != ',') {
+                        in.setstate(std::ios_base::failbit);
+                        return in;
+                    }
                 } else {
-                    if (c != ']')
-                        std::terminate();
+                    if (c != ']') {
+                        in.setstate(std::ios_base::failbit);
+                        return in;
+                    }
                 }
             }
         }
@@ -314,4 +320,12 @@ struct META_EXPORT Matrix3 {
     // for faster access
     friend struct Matrix4;
 };
+
+
+constexpr Matrix3 lerp(const Matrix3 &m1, const Matrix3 &m2, float ratio)
+{
+    return (1.0f - ratio) * m1 + ratio * m2;
+}
+
+
 }

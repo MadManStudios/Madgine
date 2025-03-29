@@ -12,13 +12,13 @@
 
 UNIQUECOMPONENT(ClickBrick::GameOverHandler)
 
-METATABLE_BEGIN_BASE(ClickBrick::GameOverHandler, Engine::Input::HandlerBase)
+METATABLE_BEGIN_BASE(ClickBrick::GameOverHandler, Engine::Widgets::WidgetHandlerBase)
 METATABLE_END(ClickBrick::GameOverHandler)
 
 namespace ClickBrick {
 
-    GameOverHandler::GameOverHandler(Engine::Input::UIManager &ui)
-    : Engine::Input::Handler<GameOverHandler>(ui, "GameOver", Engine::Input::HandlerBase::WidgetType::MODAL_OVERLAY)
+    GameOverHandler::GameOverHandler(Engine::HandlerManager &ui)
+    : Engine::Widgets::WidgetHandler<GameOverHandler>(ui, "GameOver", Engine::Widgets::WidgetHandlerBase::WidgetType::MODAL_OVERLAY)
     {
     }
 
@@ -27,12 +27,19 @@ namespace ClickBrick {
         return "GameOverHandler";
     }
 
-    void GameOverHandler::setWidget(Engine::Widgets::WidgetBase *w)
+    void GameOverHandler::startLifetime()
     {
-        Engine::Input::HandlerBase::setWidget(w);
+        WidgetHandlerBase::startLifetime();
         if (widget()) {
-            widget()->pointerClickEvent().connect(&GameOverHandler::restartGame, this, &mConStore);
-            mScoreLabel = widget()->getChildRecursive<Engine::Widgets::Label>("ScoreLabel");
+            mLifetime.attach(widget()->pointerClickEvent().connect(&GameOverHandler::restartGame, this));
+        }
+    }
+
+    void ClickBrick::GameOverHandler::setWidget(Engine::Widgets::WidgetBase *widget)
+    {
+        WidgetHandlerBase::setWidget(widget);
+        if (widget) {         
+            mScoreLabel = widget->getChildRecursive<Engine::Widgets::Label>("ScoreLabel");
         } else {
             mScoreLabel = nullptr;
         }

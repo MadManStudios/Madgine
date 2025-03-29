@@ -17,7 +17,7 @@ struct META_EXPORT Frustum {
     Matrix4 getViewMatrix() const;
     Matrix4 getProjectionMatrix() const;
     Matrix4 getViewProjectionMatrix() const;
-    Ray toRay(const Vector2 &uv) const;
+    Ray3 toRay(const Vector2 &uv) const;
 };
 
 inline Frustum operator*(const Quaternion &q, const Frustum &f)

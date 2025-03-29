@@ -19,7 +19,7 @@ int main() {
 	Engine::Threading::WorkGroup group("MMOLobby-Server");
 	Engine::Root::Root root;
 
-	Engine::Util::StandardLog::setLogLevel(Engine::Util::MessageType::DEBUG_TYPE);
+	Engine::Log::StandardLog::setLogLevel(Engine::Log::MessageType::DEBUG_TYPE);
 
 	MMOLobby::Server server;
 

@@ -16,7 +16,7 @@ namespace Serialize {
     static std::mutex sMasterMappingMutex;
     static SyncableUnitMap sMasterMappings;
     static UnitId sNextUnitId = RESERVED_ID_COUNT;
-    static std::atomic<ParticipantId> sRunningStreamId = SerializeManager::sLocalMasterParticipantId;
+    static std::atomic<ParticipantId> sRunningStreamId = sLocalMasterParticipantId;
 
     SerializeManager::SerializeManager(const std::string &name)
         : mName(name)
@@ -60,7 +60,7 @@ namespace Serialize {
             id = ++sNextUnitId;
             sMasterMappings[id] = unit;
         } else {
-            assert(id >= BEGIN_STATIC_ID_SPACE);
+            assert(id >= BEGIN_USER_ID_SPACE);
             if (id >= RESERVED_ID_COUNT) {
                 bool b = sMasterMappings.try_emplace(id, unit).second;
                 assert(b);
@@ -77,7 +77,7 @@ namespace Serialize {
             assert(it->second != unit);
             it->second = unit;
         } else {
-            assert(id >= BEGIN_STATIC_ID_SPACE);
+            assert(id >= BEGIN_USER_ID_SPACE);
         }
         return id;
     }
@@ -90,7 +90,7 @@ namespace Serialize {
             assert(it->second == unit);
             sMasterMappings.erase(it);
         } else {
-            assert(id >= BEGIN_STATIC_ID_SPACE);
+            assert(id >= BEGIN_USER_ID_SPACE);
         }
     }
 
@@ -110,7 +110,7 @@ namespace Serialize {
         return unit == nullptr
             ? NULL_UNIT_ID
             : out.isMaster(AccessMode::WRITE) ? unit->masterId()
-                             : unit->slaveId();
+                                              : unit->slaveId();
     }
 
     StreamResult SerializeManager::convertPtr(SerializeStream &in,
@@ -122,11 +122,11 @@ namespace Serialize {
         }
         SyncableUnitBase *ptr = nullptr;
 
-        if (in.isMaster(AccessMode::READ)) { //TODO: Same branch????
-            ptr = in.manager()->getByMasterId(unit);
+        if (in.isMaster(AccessMode::READ)) {
+            ptr = getByMasterId(unit);
         } else {
-            auto it = sMasterMappings.find(unit);
-            if (it != sMasterMappings.end())
+            auto it = in.manager()->mSlaveMappings.find(unit);
+            if (it != in.manager()->mSlaveMappings.end())
                 ptr = it->second;
         }
         if (!ptr) {
@@ -141,6 +141,17 @@ namespace Serialize {
         return mSlaveStreamData;
     }
 
+    SerializeStream SerializeManager::wrapStream(Stream stream, bool isSlave)
+    {
+        std::unique_ptr<SerializeStreamData> data = createStreamData();
+        if (isSlave)
+            setSlaveStreamData(data.get());
+        return SerializeStream {
+            stream.release(),
+            std::move(data)
+        };
+    }
+
     void SerializeManager::setSlaveStreamData(SerializeStreamData *data)
     {
         if (mSlaveStreamData && data)
@@ -148,8 +159,9 @@ namespace Serialize {
         mSlaveStreamData = data;
     }
 
-    std::unique_ptr<SerializeStreamData> SerializeManager::createStreamData() {
-        return std::make_unique<SerializeStreamData>(*this, createStreamId());
+    std::unique_ptr<SerializeStreamData> SerializeManager::createStreamData(ParticipantId id)
+    {
+        return std::make_unique<SerializeStreamData>(*this, id);
     }
 
     ParticipantId SerializeManager::createStreamId() { return ++sRunningStreamId; }

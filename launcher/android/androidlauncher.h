@@ -5,6 +5,7 @@
 struct ANativeActivity;
 struct ANativeWindow;
 struct AInputQueue;
+struct ARect;
 
 namespace Engine {
 namespace Android {
@@ -19,6 +20,11 @@ namespace Android {
         void onDestroy();
         void onNativeWindowCreated(ANativeWindow *window);
         void onNativeWindowDestroyed(ANativeWindow *window);
+        void onNativeWindowResized(ANativeWindow *window);
+        void onConfigurationChanged();
+        void onContentRectChanged(const ARect *rect);
+        void onPause();
+        void onResume();
         void onInputQueueCreated(AInputQueue *queue);
         void onInputQueueDestroyed(AInputQueue *queue);
 

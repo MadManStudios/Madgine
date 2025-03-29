@@ -16,6 +16,6 @@ struct TestBase {
     virtual ~TestBase() = default;
 };
 
-DECLARE_UNIQUE_COMPONENT(Test, Test, TestBase, TestDriver &)
+DECLARE_UNIQUE_COMPONENT(Test, Test, TestBase, Engine::UniqueComponent::Constructor<TestDriver &>)
 
 REGISTER_TYPE(TestBase)

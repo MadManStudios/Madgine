@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine_Tools/clienttoolslib.h"
+#include "Madgine_Tools/rendertoolslib.h"
 #include "OpenGL/opengllib.h"
 
 #if defined(OpenGLTools_EXPORTS)

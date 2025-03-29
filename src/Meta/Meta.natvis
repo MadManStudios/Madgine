@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+    <Type Name="Engine::Serialize::VirtualData&lt;*,*&gt;" Inheritable="false">
+        <DisplayString>{*($T2*)this}</DisplayString>
+        <Expand>
+            <ExpandedItem>($T2*)this,nd</ExpandedItem>
+        </Expand>
+    </Type>
+    
+    <Type Name="Engine::VirtualScope&lt;*,*&gt;" Inheritable="false">
+        <DisplayString>{*($T2*)this}</DisplayString>
+        <Expand>
+            <ExpandedItem>($T2*)this,nd</ExpandedItem>
+        </Expand>
+    </Type>
+
+    <Type Name="Engine::Serialize::VirtualSerializableDataBase&lt;*,*&gt;" Inheritable="false">
+        <DisplayString>{*($T1*)this}</DisplayString>
+        <Expand>
+            <ExpandedItem>($T1*)this,nd</ExpandedItem>
+        </Expand>
+    </Type>
+    
+    <Type Name="Engine::VirtualScopeBase&lt;*&gt;" Inheritable="false">
+        <DisplayString>{*($T1*)this}</DisplayString>
+        <Expand>
+            <ExpandedItem>($T1*)this,nd</ExpandedItem>
+        </Expand>
+    </Type>
+            
+    <Type Name="Engine::Serialize::NoParent&lt;*&gt;" Inheritable="false">
+        <DisplayString>{*($T1*)this,nd}</DisplayString>
+        <Expand>
+            <ExpandedItem>($T1*)this,nd</ExpandedItem>
+        </Expand>
+    </Type>
+        
+    <Type Name="Engine::Serialize::SyncableUnit&lt;*,*&gt;" Inheritable="false">
+        <DisplayString>{*($T2*)this}</DisplayString>
+        <Expand>
+            <ExpandedItem>($T2*)this,nd</ExpandedItem>
+        </Expand>
+    </Type>
+    
+    <Type Name="Engine::Serialize::Synced&lt;*,*&gt;" Inheritable="false">
+        <DisplayString>{mData}</DisplayString>
+        <Expand>
+            <ExpandedItem>mData</ExpandedItem>
+        </Expand>
+    </Type>
+
+</AutoVisualizer>

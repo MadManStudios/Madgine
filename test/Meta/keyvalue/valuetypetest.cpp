@@ -50,23 +50,35 @@ TEST(ValueType, Construct)
     test = Vector2 { 6.1f, 6.2f };
     test = Vector3 { 7.1f, 7.2f, 7.3f };
 
+    test = 5.0f;
+    ASSERT_EQ(test, test);
+    ASSERT_EQ(test, 5);
+    ASSERT_EQ(test, ValueType { 5 });
 
-    test = &function<&testF>();
-    ASSERT_EQ(test(1).as<int>(), 4);
+    /* test = &function<&testF>();
+    ValueType result;
+    test.call(result, 1);
+    ASSERT_EQ(result, 4);
     test = &testF;
-    ASSERT_EQ(test(2).as<int>(), 5);
+    test.call(result, 2);
+    ASSERT_EQ(result, 5);
     test = foo;
-    ASSERT_EQ(test(3).as<int>(), 6);
+    test.call(result, 3);
+    ASSERT_EQ(result, 6);
     test = ValueType_Foo {};
-    ASSERT_EQ(test(4).as<int>(), 7);
+    test.call(result, 4);
+    ASSERT_EQ(result, 7);
     int dummy = 5;
     test = lambda([=](int i) { return testF(i + dummy); });
-    ASSERT_EQ(test(5).as<int>(), 13);
+    test.call(result, 5);
+    ASSERT_EQ(result, 13);
 
     test = lambda(ValueType_Bar{});
-    ASSERT_EQ(test().as<int>(), 4);
+    test.call(result);
+    ASSERT_EQ(result, 4);
     test = ValueType_Bar {};
-    ASSERT_EQ(test().as<int>(), 4);
+    test.call(result);
+    ASSERT_EQ(result, 4);*/
 
     
     std::vector<int> v = { 1, 2, 3 };

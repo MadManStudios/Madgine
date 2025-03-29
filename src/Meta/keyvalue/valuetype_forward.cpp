@@ -2,6 +2,8 @@
 
 #include "keyvaluepair.h"
 
+#include "argumentlist.h"
+
 namespace Engine {
 
 ValueType &KeyValuePair_key(KeyValuePair &p)
@@ -9,7 +11,7 @@ ValueType &KeyValuePair_key(KeyValuePair &p)
     return p.mKey;
 }
 
-ValueTypeRef &KeyValuePair_value(KeyValuePair &p)
+ValueType &KeyValuePair_value(KeyValuePair &p)
 {
     return p.mValue;
 }
@@ -48,13 +50,7 @@ META_EXPORT ValueType_Return<T> ValueType_as_impl(const ValueType &v)
                                                                                                                                                 \
     template <>                                                                                                                                 \
     META_EXPORT void to_ValueType_impl<const std::decay_t<Type> &>(ValueType & v, const std::decay_t<Type> &t) { v = t; }                       \
-                                                                                                                                                \
-    template <>                                                                                                                                 \
-    META_EXPORT void to_ValueTypeRef_impl<std::decay_t<Type>>(ValueTypeRef & v, std::decay_t<Type> && t) { v = ValueTypeRef { std::move(t) }; } \
-                                                                                                                                                \
-    template <>                                                                                                                                 \
-    META_EXPORT void to_ValueTypeRef_impl<std::decay_t<Type> &>(ValueTypeRef & v, std::decay_t<Type> & t) { v = ValueTypeRef { t }; }           \
-                                                                                                                                                \
+                                                                                                                                  \
     template META_EXPORT ValueType_Return<std::decay_t<Type>> ValueType_as_impl<std::decay_t<Type>>(const ValueType &v);
 
 #define VALUETYPE_TYPE(Name, Storage, ...) FOR_EACH(VALUETYPE_IMPL, VALUETYPE_SEP, __VA_ARGS__)
@@ -75,15 +71,15 @@ META_EXPORT void to_ValueType_impl<ValueType &>(ValueType &v, ValueType &t)
 }
 
 template <>
-META_EXPORT void to_ValueTypeRef_impl<ValueType>(ValueTypeRef &v, ValueType &&t)
+META_EXPORT void to_ValueType_impl<const ValueType>(ValueType &v, const ValueType &&t)
 {
-    v = ValueTypeRef { std::move(t) };
+    v = std::move(t);
 }
 
 template <>
-META_EXPORT void to_ValueTypeRef_impl<ValueType &>(ValueTypeRef &v, ValueType &t)
+META_EXPORT void to_ValueType_impl<const ValueType &>(ValueType &v, const ValueType &t)
 {
-    v = ValueTypeRef { t };
+    v = t;
 }
 
 }

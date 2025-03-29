@@ -10,7 +10,7 @@ VALUETYPE_TYPE(UInt, uint64_t, uint64_t, uint32_t, uint16_t)
 VALUETYPE_SEP
 VALUETYPE_TYPE(Float, float, float)
 VALUETYPE_SEP
-VALUETYPE_TYPE(Scope, TypedScopePtr, const TypedScopePtr &)
+VALUETYPE_TYPE(Scope, ScopePtr, const ScopePtr &)
 VALUETYPE_SEP
 VALUETYPE_TYPE(OwnedScope, OwnedScopePtr, const OwnedScopePtr &)
 VALUETYPE_SEP
@@ -32,6 +32,10 @@ VALUETYPE_TYPE(Vector3i, Vector3i, const Vector3i &)
 VALUETYPE_SEP
 VALUETYPE_TYPE(Vector2i, Vector2i, const Vector2i &)
 VALUETYPE_SEP
+VALUETYPE_TYPE(Color3, Color3, const Color3 &)
+VALUETYPE_SEP
+VALUETYPE_TYPE(Color4, Color4, const Color4 &)
+VALUETYPE_SEP
 VALUETYPE_TYPE(KeyValueVirtualAssociativeRange, KeyValueVirtualAssociativeRange, const KeyValueVirtualAssociativeRange &)
 VALUETYPE_SEP
 VALUETYPE_TYPE(KeyValueVirtualSequenceRange, KeyValueVirtualSequenceRange, const KeyValueVirtualSequenceRange &)
@@ -45,3 +49,11 @@ VALUETYPE_SEP
 VALUETYPE_TYPE(Object, ObjectPtr, const ObjectPtr &)
 VALUETYPE_SEP
 VALUETYPE_TYPE(Enum, EnumHolder, const EnumHolder &)
+VALUETYPE_SEP
+VALUETYPE_TYPE(Flags, FlagsHolder, const FlagsHolder &)
+VALUETYPE_SEP
+VALUETYPE_TYPE(Sender, KeyValueSender, const KeyValueSender &)
+VALUETYPE_SEP
+VALUETYPE_TYPE(Duration, SINGLE_ARG(std::chrono::duration<uint64_t, std::nano>), std::chrono::nanoseconds, std::chrono::microseconds)
+VALUETYPE_SEP
+VALUETYPE_TYPE(Type, ExtendedValueTypeDesc, const ExtendedValueTypeDesc &, const ValueTypeDesc &)

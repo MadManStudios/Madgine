@@ -102,16 +102,39 @@ namespace Window {
         {
             EmscriptenWindow *_this = static_cast<EmscriptenWindow *>(userData);
 
+            _this->mKeyDown[Input::Key::Shift] = keyEvent->shiftKey;
+            _this->mKeyDown[Input::Key::Control] = keyEvent->ctrlKey;
+            _this->mKeyDown[Input::Key::Alt] = keyEvent->altKey;
+
             switch (eventType) {
             case EMSCRIPTEN_EVENT_KEYDOWN:
                 _this->mKeyDown[keyEvent->keyCode] = true;
-                return _this->injectKeyPress({ static_cast<Input::Key::Key>(keyEvent->code[0]), keyEvent->key[0] });
+                char text;
+                switch (keyEvent->keyCode) {
+                case Input::Key::Shift:
+                case Input::Key::Control:
+                case Input::Key::Alt:
+                    text = 0;
+                    break;
+                default:
+                    text = keyEvent->key[0];
+                }
+                return _this->injectKeyPress({ static_cast<Input::Key::Key>(keyEvent->keyCode), text, _this->controlKeyState() });
             case EMSCRIPTEN_EVENT_KEYUP:
                 _this->mKeyDown[keyEvent->keyCode] = false;
-                return _this->injectKeyRelease({ static_cast<Input::Key::Key>(keyEvent->code[0]), 0 });
+                return _this->injectKeyRelease({ static_cast<Input::Key::Key>(keyEvent->keyCode), 0, _this->controlKeyState() });
             }
 
             return EM_FALSE;
+        }
+
+        Input::ControlKeyState controlKeyState() const
+        {
+            return {
+                mKeyDown[Input::Key::Shift],
+                mKeyDown[Input::Key::Control],
+                mKeyDown[Input::Key::Alt]
+            };
         }
 
         InterfacesVector mSize;
@@ -129,7 +152,7 @@ namespace Window {
 
     InterfacesVector OSWindow::size()
     {
-        return static_cast<EmscriptenWindow*>(this)->mSize;
+        return static_cast<EmscriptenWindow *>(this)->mSize;
     }
 
     InterfacesVector OSWindow::renderSize()
@@ -179,11 +202,6 @@ namespace Window {
     bool OSWindow::isMaximized()
     {
         return true;
-    }
-
-    bool OSWindow::isFullscreen()
-    {
-        return false;
     }
 
     void OSWindow::focus()
@@ -254,6 +272,16 @@ namespace Window {
                     throw 0;
                 }
             }(icon)));*/
+    }
+
+    std::string OSWindow::getClipboardString()
+    {
+        return "";
+    }
+
+    bool OSWindow::setClipboardString(std::string_view s)
+    {
+        return true;
     }
 
     EM_BOOL eventCallback(int type, const EmscriptenUiEvent *event, void *userData)

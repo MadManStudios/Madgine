@@ -1,0 +1,40 @@
+#include "widgets.sl"
+
+cbuffer PerObject : register(b2)
+{ 
+    WidgetsPerObject object;
+}
+
+
+Texture2D tex : register(t0, space2);
+SamplerState texSampler : register(s0);
+
+struct PixelShaderInput {
+    float4 color : COLOR;
+	float2 uv : TEXCOORD;
+};
+
+float median(float r, float g, float b) {
+    return max(min(r, g), min(max(r, g), b));
+}
+
+float4 main(PixelShaderInput IN)
+    : SV_TARGET
+{
+    float4 texColor;
+	if (object.hasDistanceField){
+		float3 sample = tex.Sample(texSampler, IN.uv).rgb;
+		float sigDist = median(sample.r, sample.g, sample.b) - 0.5;				
+		float opacity = saturate(sigDist/fwidth(sigDist) + 0.5);
+		
+		if (opacity == 0.0){
+			discard;
+		}
+		texColor = opacity;
+	} else if (object.hasTexture) {
+		texColor = tex.Sample(texSampler, IN.uv);	
+	} else {
+		texColor = 1;
+	}
+    return IN.color * texColor;	
+}

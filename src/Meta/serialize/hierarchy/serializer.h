@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Generic/callerhierarchy.h"
+#include "Generic/closure.h"
 
 namespace Engine {
 namespace Serialize {
@@ -9,19 +10,21 @@ namespace Serialize {
         const char *mFieldName;
         OffsetPtr (*mOffset)() = nullptr;
 
-        void (*mWriteState)(const SerializableDataUnit *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
-        StreamResult (*mReadState)(SerializableDataUnit *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
+        void (*mWriteState)(const void *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
+        StreamResult (*mReadState)(void *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
 
-        StreamResult (*mReadAction)(SyncableUnitBase *, FormattedBufferedStream &, PendingRequest &) = nullptr;
-        StreamResult (*mReadRequest)(SyncableUnitBase *, FormattedBufferedStream &, MessageId) = nullptr;
+        StreamResult (*mReadAction)(void *, FormattedMessageStream &, PendingRequest &) = nullptr;
+        StreamResult (*mReadRequest)(void *, FormattedMessageStream &, MessageId) = nullptr;
 
-        StreamResult (*mApplySerializableMap)(SerializableDataUnit *, FormattedSerializeStream &, bool, CallerHierarchyBasePtr) = nullptr;
-        void (*mSetDataSynced)(SerializableDataUnit *, bool) = nullptr;
-        void (*mSetActive)(SerializableDataUnit *, bool, bool) = nullptr;
-        void (*mSetParent)(SerializableDataUnit *) = nullptr;
+        StreamResult (*mApplySerializableMap)(void *, FormattedSerializeStream &, bool, CallerHierarchyBasePtr) = nullptr;
+        void (*mSetDataSynced)(void *, bool, const CallerHierarchyBasePtr &hierarchy) = nullptr;
+        void (*mSetActive)(void *, bool, bool) = nullptr;
+        void (*mSetParent)(void *) = nullptr;
 
-        void (*mWriteAction)(const SyncableUnitBase *, const std::set<std::reference_wrapper<FormattedBufferedStream>, CompareStreamId> &outStreams, const void *) = nullptr;
-        void (*mWriteRequest)(const SyncableUnitBase *, FormattedBufferedStream &out, const void *) = nullptr;
+        void (*mWriteAction)(const void *, const std::vector<WriteMessage> &outStreams, void *) = nullptr;
+        void (*mWriteRequest)(const void *, FormattedMessageStream &out, void *) = nullptr;
+
+        StreamResult (*mVisitStream)(FormattedSerializeStream &, const char *, const StreamVisitor &) = nullptr;
     };
 
 }

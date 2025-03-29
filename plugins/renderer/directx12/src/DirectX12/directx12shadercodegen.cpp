@@ -20,28 +20,6 @@ namespace Render {
             { toValueTypeDesc<Matrix4>(), "float4x4" }
         };
 
-        std::string generateIncludeGuard(const Engine::BitArray<64> &conditionals, const std::vector<std::string> &conditionalTokenList)
-        {
-            if (conditionals == Engine::BitArray<64> {})
-                return "";
-
-            std::string result = "#if ";
-
-            bool first = true;
-
-            for (size_t i = 0; i < 64; ++i) {
-                if (conditionals[i]) {
-                    if (first)
-                        first = false;
-                    else
-                        result += " && ";
-                    result += "defined(" + conditionalTokenList[i] + ")";
-                }
-            }
-
-            return result + "\n";
-        }
-
         void generateType(std::ostream &stream, const CodeGen::Type &type)
         {
             std::visit(overloaded {
@@ -51,7 +29,7 @@ namespace Render {
                            [&](CodeGen::Struct *structInfo) {
                                stream << structInfo->mName;
                            } },
-                type);
+                type.mBaseType);
         }
 
         void generate(std::ostream &stream, const CodeGen::Statement &statement);
@@ -89,17 +67,18 @@ namespace Render {
 
         void generate(std::ostream &stream, const CodeGen::Assignment &statement)
         {
-            stream << statement.mVariableName << " = ";
-            generate(stream, *statement.mStatement);
+            generate(stream, statement.mTarget);
+            stream << " = ";
+            generate(stream, statement.mStatement);
         }
 
         void generate(std::ostream &stream, const CodeGen::Return &statement)
         {
             stream << "return ";
-            generate(stream, *statement.mStatement);
+            generate(stream, statement.mStatement);
         }
 
-        void generate(std::ostream &stream, const CodeGen::VariableRead &statement)
+        void generate(std::ostream &stream, const CodeGen::VariableAccess &statement)
         {
             stream << statement.mVariableName;
         }
@@ -108,15 +87,15 @@ namespace Render {
         {
             generateType(stream, def.mVariable.mType);
             stream << " " << def.mVariable.mName;
-            if (!def.mDefaultValue.is<std::monostate>()) {
+            if (def.mInitializer) {
                 stream << " = ";
-                def.mDefaultValue.visit([&](const auto &part) { generate(stream, part); });
+                generate(stream, *def.mInitializer);
             }
         }
 
         void generate(std::ostream &stream, const CodeGen::MemberAccess &access)
         {
-            generate(stream, *access.mStatement);
+            generate(stream, access.mStatement);
             stream << "." << access.mMemberName;
         }
 
@@ -145,13 +124,9 @@ namespace Render {
                 throw 0;
             }
 
-            bool first = true;
+            StringUtil::StreamJoiner join { stream, opCode };
             for (const CodeGen::Statement &statement : op.mOperands) {
-                if (first)
-                    first = false;
-                else
-                    stream << opCode;
-                generate(stream, statement);
+                generate(join.next(), statement);
             }
 
             switch (op.mType) {
@@ -167,13 +142,9 @@ namespace Render {
         {
             generateType(stream, ctor.mType);
             stream << "(";
-            bool first = true;
+            StringUtil::StreamJoiner join { stream, "," };
             for (const CodeGen::Statement &statement : ctor.mArguments) {
-                if (first)
-                    first = false;
-                else
-                    stream << ",";
-                generate(stream, statement);
+                generate(join.next(), statement);
             }
             stream << ")";
         }
@@ -191,7 +162,7 @@ namespace Render {
         const char *guessSemantic(std::string_view name, bool rasterized)
         {
             if (name.find("pos") != std::string_view::npos)
-                return rasterized ? "SV_POSITION" : "POSITION";
+                return rasterized ? "SV_Position" : "POSITION";
             else if (name.find("col") != std::string_view::npos)
                 return "COLOR";
             else if (StringUtil::toLower(name).find("uv") != std::string::npos)
@@ -233,13 +204,12 @@ namespace Render {
                 if (structInfo.first == "VertexData") {
                     if (index == 0) {
                         stream << "struct VertexDataIn {\n";
-                        for (const CodeGen::Variable &arg : structInfo.second.mVariables) {
-                            stream << generateIncludeGuard(arg.mConditionals, file.mConditionalTokenList);
+                        for (const CodeGen::VariableDefinition &arg : structInfo.second.mVariables) {
+                            bool hasGuard = file.openCStyleGuard(stream, arg.mConditionals);
                             stream << "\t";
-                            generateType(stream, arg.mType);
-                            stream << " " << arg.mName << " : " << guessSemantic(arg.mName, false) << ";\n";
-                            if (arg.mConditionals != Engine::BitArray<64> {})
-                                stream << "#endif\n";
+                            generateType(stream, arg.mVariable.mType);
+                            stream << " " << arg.mVariable.mName << " : " << guessSemantic(arg.mVariable.mName, false) << ";\n";
+                            file.closeCStyleGuard(stream, hasGuard);
                         }
                         stream << "};\n";
                     } else {
@@ -256,16 +226,16 @@ namespace Render {
                     stream << "struct " << structInfo.second.mName;
                 stream << "{\n";
 
-                for (const CodeGen::Variable &arg : structInfo.second.mVariables) {
+                for (const CodeGen::VariableDefinition &arg : structInfo.second.mVariables) {
                     stream << "\t";
-                    for (const std::string &annotation : arg.mAnnotations) {
+                    for (const std::string &annotation : arg.mVariable.mAnnotations) {
 
                         stream << annotation << " ";
                     }
-                    generateType(stream, arg.mType);
-                    stream << " " << arg.mName;
+                    generateType(stream, arg.mVariable.mType);
+                    stream << " " << arg.mVariable.mName;
                     if (structInfo.second.mName == "RasterizerData" && !structInfo.second.mAnnotations.empty() && structInfo.second.mAnnotations.front() == "semantic")
-                        stream << " : " << guessSemantic(arg.mName, true);
+                        stream << " : " << guessSemantic(arg.mVariable.mName, true);
                     stream << ";\n";
                 }
                 stream << "};\n\n";
@@ -276,14 +246,10 @@ namespace Render {
                 std::string_view name = function.mName == "main" ? "mainImpl" : std::string_view { function.mName };
                 generateType(stream, function.mReturnType);
                 stream << " " << name << "(";
-                bool first = true;
+                StringUtil::StreamJoiner join { stream, "," };
                 for (const CodeGen::Variable &arg : function.mArguments) {
-                    generateType(stream, arg.mType);
-                    stream << " " << arg.mName;
-                    if (first)
-                        first = false;
-                    else
-                        stream << ",";
+                    generateType(join.next(), arg.mType);
+                    stream << " " << arg.mName;                    
                 }
                 stream << ")";
 
@@ -301,12 +267,12 @@ namespace Render {
             if (index == 0) {
                 stream << "RasterizerData main(VertexDataIn dataIn){\n";
                 stream << "\tVertexData IN;\n";
-                for (const CodeGen::Variable &inVar : file.mStructs.at("VertexData").mVariables) {
-                    stream << generateIncludeGuard(inVar.mConditionals, file.mConditionalTokenList);
-                    stream << "\tIN." << inVar.mName << " = dataIn." << inVar.mName << ";\n";
-                    if (inVar.mConditionals != Engine::BitArray<64> {}) {
+                for (const CodeGen::VariableDefinition &inVar : file.mStructs.at("VertexData").mVariables) {
+                    bool hasGuard = file.openCStyleGuard(stream, inVar.mConditionals);
+                    stream << "\tIN." << inVar.mVariable.mName << " = dataIn." << inVar.mVariable.mName << ";\n";
+                    if (hasGuard) {
                         stream << "#else\n";
-                        stream << "\tIN." << inVar.mName << " = " << guessDefault(inVar.mName) << ";\n";
+                        stream << "\tIN." << inVar.mVariable.mName << " = " << guessDefault(inVar.mVariable.mName) << ";\n";
                         stream << "#endif\n";
                     }
                 }

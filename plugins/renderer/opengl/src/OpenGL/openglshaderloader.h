@@ -20,14 +20,24 @@ namespace Render {
             {
             }
 
-            Threading::TaskFuture<bool> create(std::string_view name, const CodeGen::ShaderFile &file, ShaderType type, OpenGLShaderLoader *loader = &OpenGLShaderLoader::getSingleton());
             Threading::TaskFuture<bool> load(std::string_view name, ShaderType type, OpenGLShaderLoader *loader = &OpenGLShaderLoader::getSingleton());
+        };
+
+        struct Ptr : Base::Ptr {
+
+            using Base::Ptr::Ptr;
+            Ptr(Base::Ptr ptr)
+                : Base::Ptr(std::move(ptr))
+            {
+            }
+
+            Threading::TaskFuture<bool> create(const CodeGen::ShaderFile &file, ShaderType type, OpenGLShaderLoader *loader = &OpenGLShaderLoader::getSingleton());
         };
 
         bool loadImpl(OpenGLShader &shader, ResourceDataInfo &info);
         void unloadImpl(OpenGLShader &shader);
 
-        bool create(OpenGLShader &shader, Resource *res, const CodeGen::ShaderFile &file, ShaderType type);
+        bool create(OpenGLShader &shader, const CodeGen::ShaderFile &file, ShaderType type);
 
         bool loadFromSource(OpenGLShader &shader, std::string_view name, std::string source, ShaderType type, const Filesystem::Path &path = {});
 

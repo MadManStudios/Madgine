@@ -14,29 +14,41 @@ namespace Render {
         bool resizeImpl(const Vector2i &size) override;
         Vector2i size() const override;
 
-        virtual void beginIteration(size_t iteration) const override;
-        virtual void endIteration(size_t iteration) const override;
+        virtual void beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
+        virtual void endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
 
-        virtual TextureDescriptor texture(size_t index, size_t iteration = std::numeric_limits<size_t>::max()) const override;
+        virtual void beginFrame() override;
+        virtual RenderFuture endFrame() override;
+
+        virtual const OpenGLTexture *texture(size_t index) const override;
         virtual size_t textureCount() const override;
-        virtual TextureDescriptor depthTexture() const override;
+        virtual const OpenGLTexture *depthTexture() const override;
+
+        void blit(RenderTarget *input) const;
+
+        virtual Matrix4 getClipSpaceMatrix() const override;
+
+    protected:
+        size_t getFramebufferCount(bool *emulateCube = nullptr) const;
+
+        void flipTextures(size_t startIndex, size_t count) override;
 
     private:
-        GLuint mFramebuffers[6] = { 0 };
+        mutable std::map<BitArray<4>, std::array<GLuint, 6>> mFramebuffers;
         GLuint mDepthRenderbuffer = 0;
 
         OpenGLTexture mDepthTexture;
-
-
-        std::vector<GLuint> mMultisampledTextures;
-        GLuint mMultisampledFramebuffer = 0;
+        bool mCreateDepthTexture;
 
         size_t mSamples;
-        bool mHDR;
 
         std::vector<OpenGLTexture> mTextures;
 
         Vector2i mSize;
+
+        TextureType mType;
+
+        size_t mFramebufferCount;
     };
 
 }

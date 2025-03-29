@@ -29,4 +29,8 @@ struct META_EXPORT ApiFunction {
     const FunctionTable *mTable = nullptr;
 };
 
+template <auto f>
+struct TypedApiFunction {
+};
+
 }

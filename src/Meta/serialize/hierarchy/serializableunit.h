@@ -1,6 +1,8 @@
 #pragma once
 
-#include "serializabledataunit.h"
+#include "../operations.h"
+
+#include "Generic/linestruct.h"
 
 namespace Engine {
 namespace Serialize {
@@ -8,7 +10,16 @@ namespace Serialize {
 #define SERIALIZABLEUNIT_MEMBERS() \
     READONLY_PROPERTY(Synced, isSynced)
 
-    struct META_EXPORT SerializableUnitBase : SerializableDataUnit {
+    
+#define SERIALIZABLEUNIT(_Self)                                 \
+    template <typename Tag, size_t...>                          \
+    friend struct ::Engine::LineStruct;                         \
+    friend struct ::Engine::Serialize::SerializeTableCallbacks; \
+    DERIVE_FRIEND(onActivate, ::Engine::Serialize::)            \
+    using Self = _Self;
+
+
+    struct META_EXPORT SerializableUnitBase {
     protected:
         SerializableUnitBase();
         SerializableUnitBase(const SerializableUnitBase &other);
@@ -31,6 +42,18 @@ namespace Serialize {
         friend struct Serializable;
         friend struct SyncableUnitBase;
         friend struct SyncManager;
+
+        template <std::derived_from<SerializableUnitBase> T>
+        friend void tag_invoke(set_parent_t, T &unit, SerializableUnitBase *parent)
+        {
+            SerializableUnitPtr { &unit }.setParent(parent);
+        }
+                
+        template <std::derived_from<SerializableUnitBase> T>
+        friend void tag_invoke(set_synced_t cpo, T &unit, bool b, const CallerHierarchyBasePtr &hierarchy)
+        {
+            SerializableUnitPtr { &unit }.setSynced(b, hierarchy);
+        }
 
     private:
         const TopLevelUnitBase *mTopLevel = nullptr;

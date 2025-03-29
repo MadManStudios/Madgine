@@ -7,17 +7,9 @@
 #include "directx12rendercontext.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
-VIRTUALUNIQUECOMPONENT(Engine::Render::DirectX12TextureLoader);
-
-METATABLE_BEGIN(Engine::Render::DirectX12TextureLoader)
-MEMBER(mResources)
-METATABLE_END(Engine::Render::DirectX12TextureLoader)
-
-METATABLE_BEGIN_BASE(Engine::Render::DirectX12TextureLoader::Resource, Engine::Render::TextureLoader::Resource)
-METATABLE_END(Engine::Render::DirectX12TextureLoader::Resource)
-
-
+RESOURCELOADER(Engine::Render::DirectX12TextureLoader);
 
 namespace Engine {
 namespace Render {
@@ -36,7 +28,7 @@ namespace Render {
         tex.reset();
     }
 
-    bool DirectX12TextureLoader::create(Texture &tex, TextureType type, DataFormat format)
+    bool DirectX12TextureLoader::create(Texture &tex, TextureType type, TextureFormat format)
     {
         static_cast<DirectX12Texture &>(tex) = DirectX12Texture { type, false, format };
 
@@ -51,6 +43,11 @@ namespace Render {
     void DirectX12TextureLoader::setSubData(Texture &tex, Vector2i offset, Vector2i size, const ByteBuffer &data)
     {
         static_cast<DirectX12Texture &>(tex).setSubData(offset, size, data);
+    }
+
+    Threading::TaskQueue *DirectX12TextureLoader::loadingTaskQueue() const
+    {
+        return DirectX12RenderContext::renderQueue();
     }
 
 }

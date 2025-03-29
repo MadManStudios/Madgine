@@ -162,7 +162,8 @@ public:
         return *this;
     }
 
-    bool equalsWithEpsilon(const Vector3& other, float epsilon = floatZeroThreshold) {
+    bool equalsWithEpsilon(const Vector3 &other, float epsilon = floatZeroThreshold)
+    {
         return isEqual(x, other.x, epsilon) && isEqual(y, other.y, epsilon) && isEqual(z, other.z, epsilon);
     }
 
@@ -789,13 +790,9 @@ public:
         for (int i = 0; i < 3; ++i) {
             in >> v[i];
             in >> c;
-            if (i != 2) {
-                if (c != ',')
-                    std::terminate();
-            } else {
-                if (c != ']')
-                    std::terminate();
-            }
+            char expectedChar = (i == 2) ? ']' : ',';
+            if (c != expectedChar)
+                std::terminate();
         }
         return in;
     }

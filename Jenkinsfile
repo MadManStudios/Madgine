@@ -1,223 +1,47 @@
 properties([pipelineTriggers([githubPush()])])
 
-def axisList = [
-    [//toolchains
-		[
-			name : "clang-windows",
+def toolchains = [
+    "windows": [
 			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/mingw.cmake",
+			args : "-DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchains/mingw.cmake -DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/windows.h",
 			artifacts : ['bin/*', 'data/*']
 		],
-		[
-			name : "clang-osx",
+	"osx": [			
 			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DENABLE_ARC=False -DDEPLOYMENT_TARGET=11.0",
+			args : "-DENABLE_ARC=False -DDEPLOYMENT_TARGET=11.0 -DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/osx.h",
 			artifacts : ['bin/*', 'data/*']
 		],
-		[
-			name : "clang-ios",
+	"ios": [
 			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/ios.cmake -DPLATFORM=SIMULATOR64 -DENABLE_ARC=False -DDEPLOYMENT_TARGET=11.0",
-			artifacts : ['bin/**']
-		],
-		[
-			name : "clang-linux",
-			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "",
-			artifacts : ['bin/*', 'data/*']
-		],
-		[
-			name : "clang-android",
-			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/android.cmake -DANDROID_ABI=x86_64",
+			args : "-DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchains/ios.cmake -DPLATFORM=SIMULATOR64 -DENABLE_ARC=False -DDEPLOYMENT_TARGET=11.0",
 			artifacts : ['bin/*']
 		],
-		[
-			name : "clang-emscripten",
+	"linux": [
 			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/emscripten-wasm.cmake",
+			args : "-DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/linux.h",
+			artifacts : ['bin/*', 'data/*']
+		],
+	"android": [
+			dockerImage : 'schuetzo/linux-test-env:latest',
+			args : "-DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchains/android.cmake -DANDROID_ABI=x86_64 -DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/android.h",
+			artifacts : ['bin/*']
+		],
+	"emscripten": [			
+			dockerImage : 'schuetzo/linux-test-env:latest',
+			args : "-DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchains/emscripten-wasm.cmake",
 			artifacts : ['bin/*']
 		]
-	],           
-    [//configurations
-		[
-			name : "Debug"
-		],
-		[
-			name : "RelWithDebInfo"
-		]
-	]
-]   
+]     
 
-def staticConfigs = [
-	[
-		name : "OpenGL"
+def configs = [
+	"Plugins": [
+			args: "-DBUILD_SHARED_LIBS=ON"
+	],
+	"OpenGL": [
+			args: "-DMADGINE_CONFIGURATION=../../test/configs/OpenGL/ -DBUILD_SHARED_LIBS=OFF -DMADGINE_TOOLING_PRESET=clang-osx-Debug-Plugins"
 	]
 ]
 
-def tasks = [:]
-def comboBuilder
-
-def staticTask = {
-    // builds and returns the task for each combination
-
-    /* Map the entries back to a more readable format
-       the index will correspond to the position of this axis in axisList[] */
-    def toolchain = it[0]
-    def configuration = it[1]
-    def staticConfig = it[2]
-	
-    def name = toolchain.name + '-' + configuration.name + '-' + staticConfig.name
-	def parentName = toolchain.name + '-' + configuration.name  
-
-	def staticConfigFile = "../test/${staticConfig.name}_base.cfg"	
-
-	def archivePattern = toolchain.artifacts.collect{name + "/" + it}.join(",")
-
-    return {
-        // This is where the important work happens for each combination
-	    stage ("${name}") {
-			stage("generate config") {				
-				sh """
-				if ${params.fullBuild}; then
-					if [ -d "${name}" ]; then 
-						rm -Rf ${name};
-					fi
-				fi
-				mkdir -p ${name}
-				cd ${name}
-				if ../${parentName}/bin/MadgineLauncher -t \
-				--load-plugins ${staticConfigFile} \
-				--export-plugins plugins.cfg \
-				--no-plugin-cache ; then
-					echo "Success"
-				else
-					echo "generating failed! Falling back to repository version"
-					rsync -u ../test/${staticConfig.name}_tools.cfg plugins_tools.cfg
-					rsync -u ../test/components_${staticConfig.name}_tools.cpp components_plugins_tools.cpp
-				fi
-				"""
-			}
-			stage("cmake") {
-				sh """
-				cd ${name}
-				cmake .. \
-				-DCMAKE_BUILD_TYPE=${configuration.name} \
-				-DPLUGIN_DEFINITION_FILE=plugins_tools.cfg \
-				-DBUILD_SHARED_LIBS=OFF \
-				${toolchain.args} \
-				${cmake_args}
-				"""						
-			}
-			stage("build") {				
-				sh """
-				cd ${name}
-				make all
-				"""				
-			}
-			stage("Test") {
-				//docker.image(toolchain.dockerImage).inside {
-				//	sh """
-				//	cd ${name}
-				//	ctest --output-on-failure
-				//	"""
-				//}
-			}    
-			if (configuration.name == "RelWithDebInfo"){
-				stage("Archive") {
-					archiveArtifacts artifacts: "${archivePattern}"
-				} 
-			}
-        }
-    }
-}
-
-def task = {
-    // builds and returns the task for each combination
-
-    /* Map the entries back to a more readable format
-       the index will correspond to the position of this axis in axisList[] */
-    def toolchain = it[0]
-    def configuration = it[1]
-	
-    def name = toolchain.name + '-' + configuration.name  
-
-
-    return {
-        // This is where the important work happens for each combination
-	    stage ("${name}") {
-			if (toolchain.name != "clang-emscripten" && toolchain.name != "clang-ios" && toolchain.name != "clang-android") {
-				stage("cmake") {
-					sh """
-					if ${params.fullBuild}; then
-						if [ -d "${name}" ]; then 
-							rm -Rf ${name};
-						fi
-					fi
-					mkdir -p ${name}
-					cd ${name}
-					cmake .. \
-					-DCMAKE_BUILD_TYPE=${configuration.name} \
-					-DBUILD_SHARED_LIBS=ON \
-					${toolchain.args} \
-					${cmake_args}
-					"""
-				}
-				stage("build") {				
-					sh """
-					cd ${name}
-					make all
-					"""				
-				}
-				stage("Test") {
-					//docker.image(toolchain.dockerImage).inside {
-					//	sh """
-					//	cd ${name}
-					//	ctest --output-on-failure
-					//	"""
-					//}
-				}           
-			} else {
-				stage("dummy") {
-					sh """
-						echo "plugin build is not supported at the moment!"
-					"""
-				}
-			}
-
-			def staticTasks = [:]
-			def fillStatic = { def staticname, def args ->
-				staticTasks[staticname] = staticTask(args.collect())
-			}
-			comboBuilder([staticConfigs.clone()], 2, fillStatic, [toolchain, configuration], [toolchain.name, configuration.name])    
-
-			parallel staticTasks
-        }
-    }
-}
-
-/*
-    This is where the magic happens
-    recursively work through the axisList and build all combinations
-*/
-comboBuilder = { def axes, int level, def f, def comboEntry, def comboNames ->
-    for ( entry in axes[0] ) {
-        comboEntry[level] = entry
-		comboNames[level] = entry.name
-        if (axes.size() > 1 ) {
-            comboBuilder(axes.drop(1), level + 1, f, comboEntry, comboNames)
-        }
-        else {
-            f(comboNames.join("-"), comboEntry)
-        }
-    }
-}
-
-def fill = { def name, def args ->
-	tasks[name] = task(args.collect())
-}
-
-comboBuilder(axisList, 0, fill, [], [])    
 
 pipeline {
     agent any
@@ -226,6 +50,7 @@ pipeline {
         booleanParam(defaultValue: false, description: '', name: 'fullBuild')
 		booleanParam(defaultValue: false, description: '', name: 'timeTrace')
 		booleanParam(defaultValue: false, description: '', name: 'iwyu')
+		booleanParam(defaultValue: false, description: '', name: 'taskTracker')
     }
 
 	options{
@@ -241,29 +66,164 @@ pipeline {
 				"""
 			}
 	    }
-        stage ("Multiconfiguration Parallel Tasks") {
-	        steps {
-			    script {
-					cmake_args = "-DUSE_CMAKE_LOG=1 -DMODULES_ENABLE_TASK_TRACKING=ON"
+		stage("cmake") {
+			steps{
+				script {				
+					cmake_args = "-DUSE_CMAKE_LOG=1 "
 					if (params.timeTrace){
 						cmake_args = cmake_args + "-DCMAKE_CXX_FLAGS=-ftime-trace "
 					}
 					if (params.iwyu){
 						cmake_args = cmake_args + """-DCMAKE_CXX_INCLUDE_WHAT_YOU_USE="/home/jenkins/tools/usr/local/bin/include-what-you-use;-Xiwyu;--pch_in_code;-Xiwyu;--prefix_header_includes=remove" """
 					}
-				    parallel tasks
-			    }
-	        }
-        }
+					if (params.taskTracker){
+						cmake_args = cmake_args + "-DMODULES_ENABLE_TASK_TRACKING=ON "
+					}
+				}
+				sh """
+					mkdir -p build
+					cd build
+					if ${params.fullBuild}; then
+						if [ -d "clang-osx-Debug-Plugins" ]; then 
+							rm -Rf clang-osx-Debug-Plugins;
+						fi
+						if [ -d "util" ]; then 
+							rm -Rf util;
+						fi
+					fi
+					mkdir -p clang-osx-Debug-Plugins
+					cd clang-osx-Debug-Plugins
+					cmake ../.. \
+					-DCMAKE_BUILD_TYPE=Debug \
+					${toolchains.osx.args} \
+					${configs.Plugins.args} \
+					${cmake_args} > cmake.txt
+					cat cmake.txt
+				"""		
+			}
+		}
+		stage("build") {	
+			steps {
+				sh """
+					cd build
+					cd clang-osx-Debug-Plugins
+					make all
+				"""				
+			}
+		}
+		stage("Test") {
+			steps {
+				//docker.image(toolchain.dockerImage).inside {
+					sh """
+				#	cd clang-osx-Debug-Plugins
+				#	ctest --output-on-failure
+					"""
+				//}
+			}
+		}   
 		stage ("Doxygen") {
 			steps {
 				sh """
-					cd clang-osx-Debug
+					cd build
+					cd clang-osx-Debug-Plugins
 
 					make doxygen
 				"""
 			}
 		}
+        stage ("Multiconfiguration Parallel Tasks") {
+	        matrix {
+				axes {
+					axis {
+						name 'PLATFORM'
+						values 'windows', 'osx', 'ios', 'linux', 'android', 'emscripten'
+					}
+					axis {
+						name 'TYPE'
+						values 'Debug', 'RelWithDebInfo'
+					}
+					axis {
+						name 'CONFIG'
+						values 'Plugins', 'OpenGL'
+					}
+				}
+				excludes {
+                    exclude {
+                        axis {
+                            name 'CONFIG'
+                            values 'Plugins'
+                        }
+                        axis {
+                            name 'PLATFORM'
+                            values 'ios', 'android', 'emscripten'
+                        }
+                    }
+					exclude {
+                        axis {
+                            name 'PLATFORM'
+                            values 'ios', 'android', 'emscripten'
+                        }
+					}
+					exclude {
+                        axis {
+                            name 'CONFIG'
+                            values 'Plugins'
+                        }
+                        axis {
+                            name 'PLATFORM'
+                            values 'osx'
+                        }
+						axis {
+                            name 'TYPE'
+                            values 'Debug'
+                        }
+                    }
+                }
+				stages {
+					stage("cmake") {
+						steps{
+							sh """
+								mkdir -p build
+								cd build
+								if ${params.fullBuild}; then
+									if [ -d "clang-${PLATFORM}-${TYPE}-${CONFIG}" ]; then 
+										rm -Rf clang-${PLATFORM}-${TYPE}-${CONFIG};
+									fi
+								fi
+								mkdir -p clang-${PLATFORM}-${TYPE}-${CONFIG}
+								cd clang-${PLATFORM}-${TYPE}-${CONFIG}
+								cmake ../.. \
+								-DCMAKE_BUILD_TYPE=${TYPE} \
+								-DSKIP_UTIL_BUILD=ON \
+								${toolchains[PLATFORM].args} \
+								${configs[CONFIG].args} \
+								${cmake_args} > cmake.txt
+								cat cmake.txt
+							"""		
+						}
+					}
+					stage("build") {	
+						steps {
+							sh """
+								cd build
+								cd clang-${PLATFORM}-${TYPE}-${CONFIG}
+								make all
+							"""				
+						}
+					}
+					stage("Test") {
+						steps {
+							//docker.image(toolchain.dockerImage).inside {
+								sh """
+							#	cd clang-${PLATFORM}-${TYPE}-${CONFIG}
+							#	ctest --output-on-failure
+								"""
+							//}
+						}
+					}   
+				}
+	        }
+        }
     }
 
 	post {
@@ -280,7 +240,7 @@ pipeline {
 
 				mkdir -p /opt/homebrew/var/www/${env.BRANCH_NAME}/live
 
-				cp clang-emscripten-RelWithDebInfo-OpenGL/bin/MadgineLauncher_plugins_tools.* /opt/homebrew/var/www/${env.BRANCH_NAME}/live
+				#cp build/clang-emscripten-RelWithDebInfo-OpenGL/bin/MadgineLauncher_plugins_tools.* /opt/homebrew/var/www/${env.BRANCH_NAME}/live
 			"""
 		}
     }

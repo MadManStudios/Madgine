@@ -502,133 +502,8 @@ struct GenerationContainer : GenerationContainerBase, protected C {
         const GenerationContainer<C> *mVector;
     };
 
-    struct reverse_iterator {
-
-        using iterator_category = typename C::reverse_iterator::iterator_category;
-        using value_type = typename C::reverse_iterator::value_type;
-        using difference_type = typename C::reverse_iterator::difference_type;
-        using pointer = typename C::reverse_iterator::pointer;
-        using reference = typename C::reverse_iterator::reference;
-
-        ~reverse_iterator()
-        {
-            mVector->reset(mIndex);
-        }
-
-        reverse_iterator(const reverse_iterator &other)
-            : mIndex(other.mVector->copy(other.mIndex))
-            , mVector(other.mVector)
-        {
-        }
-
-        reverse_iterator(reverse_iterator &&) = default;
-
-        reverse_iterator(GenerationContainerIndex index, GenerationContainer<C> *vector)
-            : mIndex(std::move(index))
-            , mVector(vector)
-        {
-        }
-
-        reference operator*() const
-        {
-            return (*mVector)[mIndex];
-        }
-
-        pointer operator->() const
-        {
-            return &(*mVector)[mIndex];
-        }
-
-        reverse_iterator &operator++()
-        {
-            mVector->increment(mIndex, mVector->size(), -1);
-            return *this;
-        }
-
-        bool operator!=(const reverse_iterator &other)
-        {
-            assert(mVector == other.mVector);
-            mVector->update(mIndex);
-            mVector->update(other.mIndex);
-            return mIndex != other.mIndex;
-        }
-
-        ptrdiff_t operator-(const reverse_iterator &other)
-        {
-            assert(mVector == other.mVector);
-            mVector->update(mIndex);
-            mVector->update(other.mIndex);
-            return mVector->getIndex(other.mIndex, mVector->size()) - mVector->getIndex(mIndex, mVector->size());
-        }
-
-        GenerationContainerIndex copyIndex() const
-        {
-            return mVector->copy(mIndex);
-        }
-
-        mutable GenerationContainerIndex mIndex;
-        GenerationContainer<C> *mVector;
-    };
-
-    struct const_reverse_iterator {
-
-        using iterator_category = typename C::const_reverse_iterator::iterator_category;
-        using value_type = typename C::const_reverse_iterator::value_type;
-        using difference_type = typename C::const_reverse_iterator::difference_type;
-        using pointer = typename C::const_reverse_iterator::pointer;
-        using reference = typename C::const_reverse_iterator::reference;
-
-        ~const_reverse_iterator()
-        {
-            mVector->reset(mIndex);
-        }
-
-        const_reverse_iterator(const const_reverse_iterator &other)
-            : mIndex(other.mVector->copy(other.mIndex))
-            , mVector(other.mVector)
-        {
-        }
-
-        const_reverse_iterator(const_reverse_iterator &&) = default;
-
-        const_reverse_iterator(GenerationContainerIndex index, const GenerationContainer<C> *vector)
-            : mIndex(std::move(index))
-            , mVector(vector)
-        {
-        }
-
-        reference operator*() const
-        {
-            return (*mVector)[mIndex];
-        }
-
-        pointer operator->() const
-        {
-            return &(*mVector)[mIndex];
-        }
-
-        const_reverse_iterator &operator++()
-        {
-            mVector->increment(mIndex, mVector->size(), -1);
-            return *this;
-        }
-
-        bool operator!=(const const_reverse_iterator &other)
-        {
-            assert(mVector == other.mVector);
-            mVector->update(mIndex);
-            mVector->update(other.mIndex);
-            return mIndex != other.mIndex;
-        }
-
-        GenerationContainerIndex copyIndex() const
-        {
-            return mVector->copy(mIndex);
-        }
-
-        mutable GenerationContainerIndex mIndex;
-        const GenerationContainer<C> *mVector;
-    };
+    using reverse_iterator = std::reverse_iterator<iterator>;
+    using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     template <typename... Args>
     iterator emplace(Args &&... args)
@@ -802,56 +677,39 @@ struct container_traits<GenerationContainer<C>> {
     static constexpr const bool remove_invalidates_handles = true;
     static constexpr const bool is_fixed_size = false;
 
-    typedef GenerationContainer<C> container;
-    typedef typename container::iterator iterator;
-    typedef typename container::const_iterator const_iterator;
-    typedef typename container::reverse_iterator reverse_iterator;
-    typedef typename container::const_reverse_iterator const_reverse_iterator;
+    typedef typename GenerationContainer<C>::iterator iterator;
+    typedef typename GenerationContainer<C>::const_iterator const_iterator;
 
     typedef IndexType<size_t> handle;
     typedef IndexType<size_t> const_handle;
     typedef IndexType<size_t> position_handle;
     typedef IndexType<size_t> const_position_handle;
-    typedef typename container::value_type value_type;
 
     static_assert(sizeof(position_handle) <= sizeof(void *));
 
-    typedef iterator emplace_return;
-
-    template <typename... _Ty>
-    static emplace_return emplace(container &c, const const_iterator &where, _Ty &&... args)
-    {
-        return c.emplace(std::forward<_Ty>(args)...);
-    }
-
-    static bool was_emplace_successful(const emplace_return &)
-    {
-        return true;
-    }
-
-    static position_handle toPositionHandle(container &c, const iterator &it)
+    static position_handle toPositionHandle(GenerationContainer<C> &c, const iterator &it)
     {
         return std::distance(c.begin(), it);
     }
 
-    static handle toHandle(container &c, const position_handle &handle)
+    static handle toHandle(GenerationContainer<C> &c, const position_handle &handle)
     {
         return handle;
     }
 
-    static handle toHandle(container &c, const iterator &it)
+    static handle toHandle(GenerationContainer<C> &c, const iterator &it)
     {
         return std::distance(c.begin(), it);
     }
 
-    static void revalidateHandleAfterInsert(position_handle &handle, const container &c, const const_iterator &it)
+    static void revalidateHandleAfterInsert(position_handle &handle, const GenerationContainer<C> &c, const const_iterator &it)
     {
         size_t item = std::distance(c.begin(), it);
         if (item <= handle)
             ++handle;
     }
 
-    static void revalidateHandleAfterRemove(position_handle &handle, const container &c, const const_iterator &it, bool wasIn, size_t count = 1)
+    static void revalidateHandleAfterRemove(position_handle &handle, const GenerationContainer<C> &c, const const_iterator &it, bool wasIn, size_t count = 1)
     {
         size_t pivot = std::distance(c.begin(), it);
         if (wasIn) {
@@ -863,12 +721,12 @@ struct container_traits<GenerationContainer<C>> {
         }
     }
 
-    static iterator toIterator(container &c, const position_handle &handle)
+    static iterator toIterator(GenerationContainer<C> &c, const position_handle &handle)
     {
         return c.begin() + handle;
     }
 
-    static const_iterator toIterator(const container &c, const const_position_handle &handle)
+    static const_iterator toIterator(const GenerationContainer<C> &c, const const_position_handle &handle)
     {
         return c.begin() + handle;
     }

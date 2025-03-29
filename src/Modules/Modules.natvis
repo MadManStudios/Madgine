@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+  <Type Name="Engine::Threading::MadgineObject&lt;*&gt;" Inheritable="false">
+    <DisplayString>{*(MadgineObjectState*)this}</DisplayString>
+    <Expand>
+      <ExpandedItem>(MadgineObjectState*)this,nd</ExpandedItem>
+    </Expand>
+  </Type>
+
+  <Type Name="Engine::UniqueComponent::VirtualComponentBase&lt;*,*,*&gt;" Inheritable="false">
+    <DisplayString>{*($T3*)this}</DisplayString>
+    <Expand>
+      <ExpandedItem>($T3*)this,nd</ExpandedItem>
+    </Expand>
+  </Type>
+
+  <Type Name="Engine::UniqueComponent::Component&lt;*,*,*&gt;" Inheritable="false">
+    <DisplayString>{*($T3*)this}</DisplayString>
+    <Expand>
+      <ExpandedItem>($T3*)this,nd</ExpandedItem>
+    </Expand>
+  </Type>
+
+  <Type Name="Engine::Threading::AtomicTaskFuture&lt;*&gt;" Inheritable="false">
+    <DisplayString>{mState._Ptr._Storage._Value->mValue}</DisplayString>
+  </Type>
+
+  <Type Name="Engine::Threading::TaskFuture&lt;*&gt;" Inheritable="false">
+    <DisplayString Condition="mState._Ptr==nullptr">Invalid</DisplayString>
+    <DisplayString Condition="!mState._Ptr->mValue._Has_value">Pending</DisplayString>
+    <DisplayString>{mState._Ptr->mValue}</DisplayString>
+    <Expand>
+      <Synthetic Name="[Awaiters]" Condition="mState._Ptr!=nullptr">
+        <DisplayString>{mState._Ptr->mThenResumes}</DisplayString>
+        <Expand>
+          <ExpandedItem>mState._Ptr->mThenResumes</ExpandedItem>
+        </Expand>
+      </Synthetic>
+    </Expand>
+  </Type>
+  
+  <Type Name="Engine::Threading::TaskFuture&lt;void&gt;" Inheritable="false">
+    <DisplayString Condition="mState._Ptr==nullptr">Invalid</DisplayString>
+    <DisplayString>Ready</DisplayString>
+    <Expand>
+      <Synthetic Name="[Awaiters]" Condition="mState._Ptr!=nullptr">
+        <DisplayString>{mState._Ptr->mThenResumes}</DisplayString>
+        <Expand>
+          <ExpandedItem>mState._Ptr->mThenResumes</ExpandedItem>
+        </Expand>
+      </Synthetic>
+    </Expand>
+  </Type>
+
+</AutoVisualizer>

@@ -1,50 +1,74 @@
 <Layout serId=1>
     <mComponents>
-        <Item key="WidgetManager" serId=2>
-            <mStartupWidget>3</mStartupWidget>
+        <Item key="SceneMainWindowComponent" serId=2>
+        </Item>
+        <Item key="WidgetManager" serId=3>
+            <mStartupWidget>4</mStartupWidget>
             <mTopLevelWidgets>
-                <Widget type=WidgetClass::WIDGET serId=3>
+                <Widget serId=4>
                     <mChildren>
-                        <Widget type=WidgetClass::BUTTON serId=4>
+                        <Button serId=5>
                             <mText>StartGame</mText>
-                            <mTextRenderData serId=5>
+                            <mTextRenderData serId=6>
                                 <mFontSize>64</mFontSize>
-                                <mPivot>
-                                    <Element>0.5</Element>
-                                    <Element>0.5</Element>
-                                </mPivot>
+                                <mPivot>[0.5, 0.5]</mPivot>
+                                <mColor>(1, 1, 1, 1)</mColor>
                                 <mFont>OpenSans-Regular</mFont>
                             </mTextRenderData>
-                            <mImageRenderData serId=6>
+                            <mImageRenderData serId=7>
                                 <Image></Image>
                                 <mLeftBorder>0</mLeftBorder>
                                 <mTopBorder>0</mTopBorder>
                                 <mBottomBorder>0</mBottomBorder>
                                 <mRightBorder>0</mRightBorder>
                             </mImageRenderData>
+                            <mColorTintRenderData serId=8>
+                                <mNormalColor>(1, 1, 1, 1)</mNormalColor>
+                                <mHighlightedColor>(1.2, 1.2, 1.2, 1)</mHighlightedColor>
+                                <mPressedColor>(1.3, 1.3, 1.3, 1)</mPressedColor>
+                                <mSelectedColor>(1.1, 1.1, 1.1, 1)</mSelectedColor>
+                                <mDisabledColor>(0.4, 0.4, 0.4, 1)</mDisabledColor>
+                            </mColorTintRenderData>
+                            <mEnabled>true</mEnabled>
                             <mChildren>
                             </mChildren>
                             <mName>StartGameButton</mName>
                             <mPos>[0.25, 0, 0, 0, 0.2, 0, 0, 0, 0]</mPos>
                             <mSize>[0.5, 0, 0, 0, 0.1, 0, 0, 0, 1]</mSize>
-                        </Widget>
+                            <mConditions>
+                            </mConditions>
+                            <mProperties>
+                                <Conditional mask=1>
+                                    <Position index=0>0.4</Position>
+                                    <Size index=1>0.09</Size>
+                                </Conditional>
+                            </mProperties>
+                        </Button>
                     </mChildren>
                     <mName>MainMenu</mName>
                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                     <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                    <mConditions>
+                        <Item serId=9>
+                            <mName>Test</mName>
+                            <mFormula>Formula::W_MINUS_H</mFormula>
+                            <mOperator>Operator::GREATER</mOperator>
+                            <mReferenceValue>0</mReferenceValue>
+                        </Item>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
                 </Widget>
-                <Widget type=WidgetClass::WIDGET serId=7>
+                <Widget serId=10>
                     <mChildren>
-                        <Widget type=WidgetClass::SCENEWINDOW serId=8>
+                        <SceneWindow serId=11>
                             <mChildren>
-                                <Widget type=WidgetClass::LABEL serId=9>
+                                <Label serId=12>
                                     <mText>Score: 0</mText>
-                                    <mTextRenderData serId=10>
+                                    <mTextRenderData serId=13>
                                         <mFontSize>35</mFontSize>
-                                        <mPivot>
-                                            <Element>1</Element>
-                                            <Element>0</Element>
-                                        </mPivot>
+                                        <mPivot>[1, 0]</mPivot>
+                                        <mColor>(1, 1, 1, 1)</mColor>
                                         <mFont>OpenSans-Bold</mFont>
                                     </mTextRenderData>
                                     <mChildren>
@@ -52,15 +76,17 @@
                                     <mName>Score</mName>
                                     <mPos>[0.8, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                                     <mSize>[0.2, 0, 0, 0, 0, 40, 0, 0, 1]</mSize>
-                                </Widget>
-                                <Widget type=WidgetClass::LABEL serId=11>
+                                    <mConditions>
+                                    </mConditions>
+                                    <mProperties>
+                                    </mProperties>
+                                </Label>
+                                <Label serId=14>
                                     <mText>Life: -26</mText>
-                                    <mTextRenderData serId=12>
+                                    <mTextRenderData serId=15>
                                         <mFontSize>35</mFontSize>
-                                        <mPivot>
-                                            <Element>0</Element>
-                                            <Element>0</Element>
-                                        </mPivot>
+                                        <mPivot>[0, 0]</mPivot>
+                                        <mColor>(1, 1, 1, 1)</mColor>
                                         <mFont>OpenSans-Bold</mFont>
                                     </mTextRenderData>
                                     <mChildren>
@@ -68,27 +94,37 @@
                                     <mName>Life</mName>
                                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                                     <mSize>[0.2, 0, 0, 0, 0, 40, 0, 0, 1]</mSize>
-                                </Widget>
+                                    <mConditions>
+                                    </mConditions>
+                                    <mProperties>
+                                    </mProperties>
+                                </Label>
                             </mChildren>
                             <mName>GameView</mName>
                             <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                             <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
-                        </Widget>
+                            <mConditions>
+                            </mConditions>
+                            <mProperties>
+                            </mProperties>
+                        </SceneWindow>
                     </mChildren>
                     <mName>Ingame</mName>
                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                     <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
                 </Widget>
-                <Widget type=WidgetClass::WIDGET serId=13>
+                <Widget serId=16>
                     <mChildren>
-                        <Widget type=WidgetClass::LABEL serId=14>
+                        <Label serId=17>
                             <mText>Game Over</mText>
-                            <mTextRenderData serId=15>
+                            <mTextRenderData serId=18>
                                 <mFontSize>80</mFontSize>
-                                <mPivot>
-                                    <Element>0.5</Element>
-                                    <Element>0.5</Element>
-                                </mPivot>
+                                <mPivot>[0.5, 0.5]</mPivot>
+                                <mColor>(1, 1, 1, 1)</mColor>
                                 <mFont>OpenSans-Bold</mFont>
                             </mTextRenderData>
                             <mChildren>
@@ -96,15 +132,17 @@
                             <mName>GameOverLabel</mName>
                             <mPos>[0.2, 0, 0, 0, 0.4, 0, 0, 0, 0]</mPos>
                             <mSize>[0.6, 0, 0, 0, 0.11, 0, 0, 0, 1]</mSize>
-                        </Widget>
-                        <Widget type=WidgetClass::LABEL serId=16>
+                            <mConditions>
+                            </mConditions>
+                            <mProperties>
+                            </mProperties>
+                        </Label>
+                        <Label serId=19>
                             <mText>Your Score: 0</mText>
-                            <mTextRenderData serId=17>
+                            <mTextRenderData serId=20>
                                 <mFontSize>35</mFontSize>
-                                <mPivot>
-                                    <Element>0.5</Element>
-                                    <Element>0.5</Element>
-                                </mPivot>
+                                <mPivot>[0.5, 0.5]</mPivot>
+                                <mColor>(1, 1, 1, 1)</mColor>
                                 <mFont>OpenSans-Regular</mFont>
                             </mTextRenderData>
                             <mChildren>
@@ -112,15 +150,21 @@
                             <mName>ScoreLabel</mName>
                             <mPos>[0.3, 0, 0, 0, 0.55, 0, 0, 0, 0]</mPos>
                             <mSize>[0.4, 0, 0, 0, 0.05, 0, 0, 0, 1]</mSize>
-                        </Widget>
+                            <mConditions>
+                            </mConditions>
+                            <mProperties>
+                            </mProperties>
+                        </Label>
                     </mChildren>
                     <mName>GameOver</mName>
                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                     <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
                 </Widget>
             </mTopLevelWidgets>
-        </Item>
-        <Item key="ClientImRoot" serId=18>
         </Item>
     </mComponents>
 </Layout>

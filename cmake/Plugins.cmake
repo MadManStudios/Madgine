@@ -5,58 +5,49 @@ once()
 include(Workspace)
 include(util/ini)
 include(Packaging)
-
-set (PLUGIN_DEFINITION_FILE "" CACHE FILEPATH "Provide path to fixed plugin selection (optional)")
+include(Shaders)
+include(Tooling)
 
 set(MODULES_ENABLE_PLUGINS ON CACHE INTERNAL "")
-if (PLUGIN_DEFINITION_FILE)
-	set(MODULES_ENABLE_PLUGINS OFF CACHE INTERNAL "")
-	set(BUILD_SHARED_LIBS OFF CACHE BOOL "") #Provide default value OFF for given plugin config
-else()
-	set(BUILD_SHARED_LIBS ON CACHE BOOL "") #Provide default value ON for given plugin config
-endif()
+
+if (MADGINE_CONFIGURATION)	
+	if (NOT EXISTS ${MADGINE_CONFIGURATION}/plugins.ini)
+		MESSAGE(WARNING "You provided a configuration directory without a plugins.ini in it. If this was intended, ignore this warning.")
+	else()
+		set(MODULES_ENABLE_PLUGINS OFF CACHE INTERNAL "")
+		
+		MESSAGE(STATUS "Using ${MADGINE_CONFIGURATION}/plugins.ini for plugin selection.")
+	endif()
+endif ()
+
+
+set(BUILD_SHARED_LIBS ${MODULES_ENABLE_PLUGINS} CACHE BOOL "") #Provide default value OFF for given plugin config
 
 if (MODULES_ENABLE_PLUGINS AND NOT BUILD_SHARED_LIBS)
 	MESSAGE(FATAL_ERROR "Currently static builds with plugins are not supported!")
 endif()
 
 set(PLUGIN_LIST "" CACHE INTERNAL "")
-#set(PROJECTS_DEPENDING_ON_ALL_PLUGINS "" CACHE INTERNAL "")
 
 if (NOT MODULES_ENABLE_PLUGINS)
 
-	MESSAGE(STATUS ${PLUGIN_DEFINITION_FILE})
-
-	if (NOT IS_ABSOLUTE ${PLUGIN_DEFINITION_FILE})
-		set (PLUGIN_DEFINITION_FILE ${CMAKE_SOURCE_DIR}/${PLUGIN_DEFINITION_FILE})
-	endif()
-
-	if (NOT EXISTS ${PLUGIN_DEFINITION_FILE})
-		MESSAGE(FATAL_ERROR "Config file ${PLUGIN_DEFINITION_FILE} not found! Please set PLUGIN_DEFINITION_FILE to a proper file if using MODULES_ENABLE_PLUGINS.")
-	endif()
-
-	get_filename_component(extension ${PLUGIN_DEFINITION_FILE} EXT)
-	if (NOT extension STREQUAL ".cfg")
-		MESSAGE(FATAL_ERROR "PLUGIN_DEFINITION_FILE ${PLUGIN_DEFINITION_FILE} must have extension .cfg!")
-	endif()
-
-	get_filename_component(PLUGIN_DEFINITION_NAME ${PLUGIN_DEFINITION_FILE} NAME_WE)
-	get_filename_component(PLUGIN_DEFINITION_DIR ${PLUGIN_DEFINITION_FILE} DIRECTORY)	
-	set(PLUGIN_DEFINITION_NAME ${PLUGIN_DEFINITION_NAME} CACHE INTERNAL "")
-	set(PLUGIN_DEFINITION_DIR ${PLUGIN_DEFINITION_DIR} CACHE INTERNAL "")
-
-	function(get_static_config_file var name ext)
-		set(${var} "${PLUGIN_DEFINITION_DIR}/${name}_${PLUGIN_DEFINITION_NAME}${ext}" PARENT_SCOPE)
-	endfunction(get_static_config_file)
-
-	read_ini_file(${PLUGIN_DEFINITION_FILE} PLUGINSELECTION)
+	add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/components.cpp 
+		COMMAND ./${MADGINE_TOOLING_BINARY} 
+					-t
+					-npc
+					-lp ${MADGINE_CONFIGURATION}/plugins.ini
+					-epc ${CMAKE_BINARY_DIR}/components.cpp
+		WORKING_DIRECTORY ${MADGINE_TOOLING_WORKING_DIRECTORY}
+		DEPENDS MadgineTooling ${MADGINE_CONFIGURATION}/plugins.ini)
+	add_custom_target(GenerateComponentsSource DEPENDS ${CMAKE_BINARY_DIR}/components.cpp)
 
 	function(patch_toplevel_target target)
 		get_target_property(target_flag ${target} PATCH_TOPLEVEL)
 		if (NOT target_flag)
-			set_target_properties(${target} PROPERTIES PATCH_TOPLEVEL TRUE)
-			get_static_config_file(components_source components ".cpp")
-			target_sources(${target} PRIVATE ${components_source})
+			set_target_properties(${target} PROPERTIES PATCH_TOPLEVEL TRUE)		
+			set_property(SOURCE ${CMAKE_BINARY_DIR}/components.cpp PROPERTY GENERATED 1)
+			target_sources(${target} PRIVATE ${CMAKE_BINARY_DIR}/components.cpp)
+			add_dependencies(${target} GenerateComponentsSource)
 		endif()
 	endfunction(patch_toplevel_target)
 
@@ -65,9 +56,9 @@ endif ()
 
 macro(add_plugin name base type)
 
-	set(options NO_DATA_COPY)
+	set(options)
 	set(oneValueArgs)
-	set(multiValueArgs)
+	set(multiValueArgs EXTERNAL_DEPS)
 	cmake_parse_arguments(PLUGIN_CONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})	
 
 	add_workspace_library(${name} ${PLUGIN_CONFIG_UNPARSED_ARGUMENTS})
@@ -78,15 +69,13 @@ macro(add_plugin name base type)
 		PLUGIN_TYPE ${type}
 		FOLDER "Plugins")
 
-	if (NOT PLUGIN_CONFIG_NO_DATA_COPY)
-		collect_data(${name})
-	else()
-		generate_binary_info(${name})
-	endif()
+	generate_binary_info(${name})
+
+	compile_shaders(${name})
 
 	set(installPlugin TRUE)
 
-	if (NOT MODULES_ENABLE_PLUGINS AND NOT PLUGINSELECTION_${type}_${name})		
+	if (NOT MODULES_ENABLE_PLUGINS AND NOT PLUGINS_${type}_${name})		
 		MESSAGE (STATUS "Excluding Plugin '${name}' from ALL build.")
 		set_target_properties(${name} PROPERTIES EXCLUDE_FROM_ALL TRUE)
 		set(installPlugin FALSE)
@@ -96,6 +85,7 @@ macro(add_plugin name base type)
 
 	if (installPlugin)
 		install_to_workspace(${name} TARGETS ${name} EXPORT_LIB)
+		install_to_workspace(${name} TARGETS ${PLUGIN_CONFIG_EXTERNAL_DEPS})
 		export_to_workspace(${name})
 
 		cpack_add_component(${name} GROUP ${type})
@@ -109,12 +99,19 @@ endmacro(add_plugin)
 
 function(target_link_plugins target)
 
+	set(options NO_FATAL)
+	set(oneValueArgs)
+	set(multiValueArgs)
+	cmake_parse_arguments(DEPENDENCIES "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})	
+
 	get_target_property(plugin_dependencies ${target} PLUGIN_DEPENDENCIES)
 	if (NOT plugin_dependencies)
 		set(plugin_dependencies)
 	endif()
 
-	foreach(plugin ${ARGN})
+	get_target_property(excludeSelf ${target} EXCLUDE_FROM_ALL)
+
+	foreach(plugin ${DEPENDENCIES_UNPARSED_ARGUMENTS})
 
 		get_target_property(exclude ${plugin} EXCLUDE_FROM_ALL)
 		if (NOT exclude)
@@ -122,7 +119,9 @@ function(target_link_plugins target)
 			list(APPEND plugin_dependencies ${plugin})
 			#MESSAGE(STATUS "Linking ${plugin} to ${target}")
 		else()
-			#MESSAGE(STATUS "Not linking ${plugin} to ${target}")
+			if (NOT excludeSelf AND NOT DEPENDENCIES_NO_FATAL)
+				MESSAGE(FATAL_ERROR "Trying to link ${plugin} to ${target}, but ${plugin} is not enabled in the plugin configuration.")
+			endif()
 		endif()
 
 	endforeach()
@@ -160,7 +159,7 @@ endfunction(target_link_plugin_groups)
 function(target_depend_on_all_plugins target)
 	
 	if (NOT MODULES_ENABLE_PLUGINS)
-		target_link_plugins(${target} ${PLUGIN_LIST})
+		target_link_plugins(${target} ${PLUGIN_LIST} NO_FATAL)
 	else()
 		add_dependencies(${target} ${PLUGIN_LIST})
 	endif()

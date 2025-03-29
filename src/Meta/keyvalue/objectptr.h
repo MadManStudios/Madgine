@@ -11,8 +11,11 @@ struct META_EXPORT ObjectPtr {
 
     void setValue(std::string_view name, const ValueType &value);
     bool getValue(ValueType &retVal, std::string_view name) const;
+    std::map<std::string_view, ValueType> values() const;
 
     void call(ValueType &retVal, const ArgumentList &args) const;
+
+    std::string descriptor() const;
 
     void reset();
     ObjectInstance *get();

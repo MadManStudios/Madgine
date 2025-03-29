@@ -6,6 +6,9 @@
 
 #include "Meta/serialize/configs/creator.h"
 
+#include "Generic/execution/algorithm.h"
+#include "Generic/execution/execution.h"
+
 SERIALIZETABLE_BEGIN(ComplexDataType)
 SERIALIZETABLE_END(ComplexDataType)
 
@@ -51,20 +54,24 @@ FIELD(complexList1, CustomCreator<&readList1, &writeList1>)
 FIELD(complexList2)
 FIELD(complexList3)
 
-FIELD(pod)
-
 FIELD(bytes)
 
-SYNCFUNCTION(fooImpl)
+SYNCFUNCTION(foo)
+SYNCFUNCTION(bar)
 
 SERIALIZETABLE_END(TestUnit)
 
-Engine::Serialize::MessageFuture<int> TestUnit::call(int i)
+void TestUnit::call_void(int i, TestReceiver<Engine::Serialize::MessageResult> &rec)
 {
-    return TopLevelUnit<TestUnit>::call<&TestUnit::fooImpl>(i);
+    Engine::Execution::detach(Engine::Execution::then_receiver(TopLevelUnit<TestUnit>::call<&TestUnit::bar>(i), rec));
 }
 
-Engine::Serialize::MessageFuture<int> TestUnit::query(int i)
+void TestUnit::call(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec)
 {
-    return TopLevelUnit<TestUnit>::query<&TestUnit::fooImpl>(i);
+    Engine::Execution::detach(Engine::Execution::then_receiver(TopLevelUnit<TestUnit>::call<&TestUnit::foo>(i), rec));
+}
+
+void TestUnit::query(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec)
+{
+    Engine::Execution::detach(Engine::Execution::then_receiver(TopLevelUnit<TestUnit>::query<&TestUnit::foo>(i), rec));
 }

@@ -79,14 +79,14 @@ struct RefcountedContainer {
             return mDeadFlag;
         }
 
-        static bool isFree(const ControlBlock &block)
+        static bool isFree(const ManualLifetime<ControlBlock> &block)
         {
-            return block.mFree;
+            return block.unsafeAccess().mFree;
         }
 
-        static uintptr_t *getLocation(ControlBlock &block)
+        static uintptr_t *getLocation(ManualLifetime<ControlBlock> &block)
         {
-            return &block.mBuffer;
+            return &block.unsafeAccess().mBuffer;
         }
 
     private:
@@ -139,12 +139,6 @@ public:
         {
         }
 
-        template <typename It2, typename Val2>
-        IteratorImpl(const Pib<IteratorImpl<It2, Val2, skipping>> &other)
-            : IteratorImpl(other.first)
-        {
-        }
-
         reference operator*() const
         {
             return *mIt;
@@ -152,7 +146,7 @@ public:
 
         pointer operator->() const
         {
-            return &*mIt;
+            return &static_cast<reference>(*mIt);
         }
 
         decltype(auto) get_block() const
@@ -235,9 +229,7 @@ public:
     };
 
     using iterator = IteratorImpl<typename internal_traits::iterator, value_type, true>;
-    using reverse_iterator = IteratorImpl<typename internal_traits::reverse_iterator, value_type, true>;
-    using const_iterator = IteratorImpl<typename internal_traits::const_iterator, const value_type, true>;
-    using const_reverse_iterator = IteratorImpl<typename internal_traits::const_reverse_iterator, const value_type, true>;
+    using const_iterator = IteratorImpl<typename internal_traits::const_iterator, const value_type, true>;    
 
     iterator begin()
     {
@@ -259,10 +251,8 @@ public:
         return { mData.end() };
     }
 
-    using refcounted_iterator = IteratorImpl<typename internal_container_type::iterator, ControlBlock, false>;
-    using refcounted_reverse_iterator = IteratorImpl<typename internal_container_type::reverse_iterator, ControlBlock, false>;
+    using refcounted_iterator = IteratorImpl<typename internal_container_type::iterator, ControlBlock, false>;    
     using refcounted_const_iterator = IteratorImpl<typename internal_container_type::const_iterator, const ControlBlock, false>;
-    using refcounted_const_reverse_iterator = IteratorImpl<typename internal_container_type::const_reverse_iterator, const ControlBlock, false>;
 
     refcounted_iterator refcounted_begin()
     {
@@ -284,10 +274,8 @@ public:
         return { mData.end() };
     }
 
-    using blocks_iterator = IteratorImpl<typename internal_container_type::nodes_iterator, ControlBlock, false>;
-    using blocks_reverse_iterator = IteratorImpl<typename internal_container_type::nodes_reverse_iterator, ControlBlock, false>;
+    using blocks_iterator = IteratorImpl<typename internal_container_type::nodes_iterator, ControlBlock, false>;    
     using blocks_const_iterator = IteratorImpl<typename internal_container_type::nodes_const_iterator, const ControlBlock, false>;
-    using blocks_const_reverse_iterator = IteratorImpl<typename internal_container_type::nodes_const_reverse_iterator, const ControlBlock, false>;
 
     blocks_iterator blocks_begin()
     {
@@ -359,10 +347,10 @@ public:
         return { *this };
     }
 
-    template <typename... Args>
-    Pib<iterator> emplace(const const_iterator &where, Args &&...args)
+    template <typename... Ty>
+    friend iterator tag_invoke(emplace_t, bool &success, RefcountedContainer<C> &self, const const_iterator &where, Ty &&...args)
     {
-        return mData.emplace(where.it(), std::forward<Args>(args)...);
+        return Engine::emplace(success, self.mData, where.it(), std::forward<Ty>(args)...);
     }
 
     void clear()
@@ -406,15 +394,14 @@ public:
         return mData.at(i);
     }
 
-    template <typename... Args>
-    value_type &emplace_back(Args &&...args)
-    {
-        return *emplace(end(), std::forward<Args>(args)...);
-    }
-
     size_t size() const
     {
         return mData.size();
+    }
+
+    bool empty() const
+    {
+        return mData.empty();
     }
 
 private:
@@ -444,67 +431,49 @@ struct underlying_container<RefcountedContainer<C>> {
 
 template <typename C>
 struct container_traits<RefcountedContainer<C>> : RefcountedContainer<C>::internal_traits {
+    
+    typedef typename RefcountedContainer<C>::iterator iterator;
+    typedef typename RefcountedContainer<C>::const_iterator const_iterator;
 
-    typedef typename C::value_type value_type;
-
-    typedef RefcountedContainer<C> container;
-    typedef typename container::iterator iterator;
-    typedef typename container::const_iterator const_iterator;
-    typedef typename container::reverse_iterator reverse_iterator;
-    typedef typename container::const_reverse_iterator const_reverse_iterator;
-
-    typedef Pib<iterator> emplace_return;
-
-    template <typename... _Ty>
-    static emplace_return emplace(container &c, const const_iterator &where, _Ty &&...args)
-    {
-        return c.emplace(where, std::forward<_Ty>(args)...);
-    }
-
-    static bool was_emplace_successful(const emplace_return &ret)
-    {
-        return ret.success();
-    }
-
-    static typename RefcountedContainer<C>::internal_traits::position_handle toPositionHandle(container &c, const iterator &it)
+    static typename RefcountedContainer<C>::internal_traits::position_handle toPositionHandle(RefcountedContainer<C> &c, const iterator &it)
     {
         return RefcountedContainer<C>::internal_traits::toPositionHandle(c.mData, it.it());
     }
 
-    static typename RefcountedContainer<C>::internal_traits::handle toHandle(container &c, const iterator &it)
+    static typename RefcountedContainer<C>::internal_traits::handle toHandle(RefcountedContainer<C> &c, const iterator &it)
     {
         return RefcountedContainer<C>::internal_traits::toHandle(c.mData, it.it());
     }
 
-    static void revalidateHandleAfterInsert(typename RefcountedContainer<C>::internal_traits::position_handle &handle, const container &c, const const_iterator &it)
+    static void revalidateHandleAfterInsert(typename RefcountedContainer<C>::internal_traits::position_handle &handle, const RefcountedContainer<C> &c, const const_iterator &it)
     {
         if (toIterator(c, handle) == it)
             RefcountedContainer<C>::internal_traits::revalidateHandleAfterInsert(handle, c.mData, it.it());
     }
 
-    static void revalidateHandleAfterRemove(typename RefcountedContainer<C>::internal_traits::position_handle &handle, const container &c, const const_iterator &it, bool wasIn, size_t count = 1)
+    static void revalidateHandleAfterRemove(typename RefcountedContainer<C>::internal_traits::position_handle &handle, const RefcountedContainer<C> &c, const const_iterator &it, bool wasIn, size_t count = 1)
     {
         /*size_t pivot = std::distance(c.begin(), it);
         if (pivot != handle)
             RefcountedContainer<C>::internal_traits::revalidateHandleAfterRemove(handle, c.mData, it.it(), wasIn, count);*/
     }
 
-    static iterator toIterator(container &c, const typename RefcountedContainer<C>::internal_traits::position_handle &handle)
+    static iterator toIterator(RefcountedContainer<C> &c, const typename RefcountedContainer<C>::internal_traits::position_handle &handle)
     {
         return { RefcountedContainer<C>::internal_traits::toIterator(c.mData, handle) };
     }
 
-    static const_iterator toIterator(const container &c, const typename RefcountedContainer<C>::internal_traits::const_position_handle &handle)
+    static const_iterator toIterator(const RefcountedContainer<C> &c, const typename RefcountedContainer<C>::internal_traits::const_position_handle &handle)
     {
         return { RefcountedContainer<C>::internal_traits::toIterator(c.mData, handle) };
     }
 
-    static typename RefcountedContainer<C>::internal_traits::position_handle next(container &c, const typename RefcountedContainer<C>::internal_traits::position_handle &handle)
+    static typename RefcountedContainer<C>::internal_traits::position_handle next(RefcountedContainer<C> &c, const typename RefcountedContainer<C>::internal_traits::position_handle &handle)
     {
         return toPositionHandle(c, ++toIterator(c, handle));
     }
 
-    static typename RefcountedContainer<C>::internal_traits::position_handle prev(container &c, const typename RefcountedContainer<C>::internal_traits::position_handle &handle)
+    static typename RefcountedContainer<C>::internal_traits::position_handle prev(RefcountedContainer<C> &c, const typename RefcountedContainer<C>::internal_traits::position_handle &handle)
     {
         return toPositionHandle(c, --toIterator(c, handle));
     }

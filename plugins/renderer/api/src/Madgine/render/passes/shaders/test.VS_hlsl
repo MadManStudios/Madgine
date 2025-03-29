@@ -1,0 +1,75 @@
+
+template<typename T>
+struct GPUPointer{
+    T value;
+};
+
+struct TextureHandle{
+    Texture2D value;
+
+    operator Texture2D(){
+    return value;
+    }
+};
+
+///////////////////////////////////
+
+struct Transform {  
+    float4x4 m;
+};
+
+struct TransformSignature {
+    GPUPointer<Transform> transform;
+};
+
+struct MeshSignature{
+    TextureHandle diffuse;
+    TextureHandle specular;
+    TextureHandle emissive;
+};
+
+//////////////////////////////////
+
+struct AppData {
+    float3 aPos : POSITION0;
+};
+
+struct VertexShaderOutput {
+    float4 position : SV_Position;
+    float2 texcoord : TEXCOORD0;
+};
+
+VertexShaderOutput mainImpl(AppData IN, MeshSignature mesh, TransformSignature transform)
+{
+    VertexShaderOutput OUT;
+
+    OUT.texcoord = (IN.aPos.xy * float2(1.0, -1.0) + float2(1.0, 1.0)) * 0.5;
+    OUT.position = mul(transform.transform.value.m, float4(IN.aPos, 1.0));  
+
+    return OUT;
+}
+
+
+//////////////////////////////////
+
+Texture2D MeshSignature_diffuse : register(t0);
+Texture2D MeshSignature_specular : register(t1);
+Texture2D MeshSignature_emissive : register(t2);
+
+cbuffer Transform : register(b0) {
+     Transform TransformSignature_transform;
+}
+
+VertexShaderOutput main(AppData IN)
+{
+    MeshSignature mesh;
+    mesh.diffuse.value = MeshSignature_diffuse;
+    mesh.specular.value = MeshSignature_specular;
+    mesh.emissive.value = MeshSignature_emissive;
+
+    TransformSignature transform;
+    transform.transform.value = TransformSignature_transform;
+
+    return mainImpl(IN, mesh, transform);
+}
+

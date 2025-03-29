@@ -47,7 +47,8 @@ if (NOT BUILD_SHARED_LIBS)
 	add_definitions(-DSTATIC_BUILD=1)
 endif()
 
-add_definitions(-DBINARY_OUT_DIR="${CMAKE_BINARY_DIR}")
+add_definitions(-DBINARY_DIR="${CMAKE_BINARY_DIR}")
+add_definitions(-DSOURCE_DIR="${CMAKE_SOURCE_DIR}")
 
  
 function(install_header name)    
@@ -171,10 +172,6 @@ macro(add_workspace_library name)
 		"${IWYU};-Xiwyu;--pch_in_code;-Xiwyu;--prefix_header_includes=remove;-Xiwyu;--max_line_length=200;--driver-mode=cl")
 	endif (IWYU)
 
-	foreach (hook ${WORKSPACE_HOOKS})
-		cmake_language(CALL ${hook} ${name})
-	endforeach()
-
 endmacro(add_workspace_library)
 
 macro(add_workspace_interface_library name)
@@ -227,34 +224,57 @@ function(install_interface_to_workspace name)
 
 endfunction(install_interface_to_workspace)
 
+function(get_dependencies list target)
 
-function(get_all_targets var)
-    set(targets)
-    get_all_targets_recursive(targets ${CMAKE_SOURCE_DIR})
-    set(${var} ${targets} PARENT_SCOPE)
-endfunction()
+	list(FIND ${list} ${target} found_target)
 
-macro(get_all_targets_recursive targets dir)
-    get_property(subdirectories DIRECTORY "${dir}" PROPERTY SUBDIRECTORIES)
-    foreach(subdir ${subdirectories})
-        get_all_targets_recursive(${targets} ${subdir})
-    endforeach()
+	if (found_target EQUAL -1)
+		list(APPEND ${list} ${target})
 
-    get_property(current_targets DIRECTORY ${dir} PROPERTY BUILDSYSTEM_TARGETS)
-    list(APPEND ${targets} ${current_targets})
+		get_target_property(dependencies ${target} MANUALLY_ADDED_DEPENDENCIES)
+
+		if (dependencies)
+			foreach(dep ${dependencies})
+				get_dependencies(${list} ${dep})
+			endforeach()
+		endif()
+
+		get_target_property(dependencies ${target} LINK_LIBRARIES)
+
+		if (dependencies)
+			foreach(dep ${dependencies})
+				if (TARGET ${dep})
+					get_dependencies(${list} ${dep})
+				endif()
+			endforeach()
+		endif()
+
+	endif()
+
+	set(${list} ${${list}} PARENT_SCOPE)
+
+endfunction(get_dependencies)
+
+
+SET(CMAKE_DEBUG_POSTFIX "" CACHE STRING "" FORCE) #Some libs set this value
+set(USE_MSVC_RUNTIME_LIBRARY_DLL ${BUILD_SHARED_LIBS} CACHE BOOL "" FORCE)
+
+macro(push_static)
+	set(OLD_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+	set(OLD_BUILD_TESTING ${BUILD_TESTING})
+
+	set(BUILD_SHARED_LIBS OFF)
+	set(BUILD_TESTING OFF)
 endmacro()
 
-macro (add_workspace_hook hook)
-	list(APPEND WORKSPACE_HOOKS ${hook})
+macro(pop_static)
+	set(BUILD_SHARED_LIBS ${OLD_BUILD_SHARED_LIBS})
+	set(BUILD_TESTING ${OLD_BUILD_TESTING})
 endmacro()
 
 #Iterate over all files in platform
 
 set (globbing_expr "${CMAKE_CURRENT_LIST_DIR}/platform/*.cmake")
-
-if (MADGINE_EXTERNAL_FILE_HIERARCHY)
-	list(APPEND globbing_expr "${MADGINE_EXTERNAL_FILE_HIERARCHY}/cmake/platform/*.cmake")
-endif()
 
 file(GLOB platforms ${globbing_expr})
 
@@ -262,5 +282,3 @@ foreach(platform ${platforms})
 	message(STATUS "Adding platform-code: ${platform}")
 	include (${platform})
 endforeach()
-
-

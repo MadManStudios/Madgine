@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../math/color3.h"
+#include "../math/color4.h"
 #include "../math/matrix3.h"
 #include "../math/matrix4.h"
 #include "../math/quaternion.h"
@@ -17,17 +19,21 @@
 
 #include "objectptr.h"
 
-#include "typedscopeptr.h"
+#include "scopeptr.h"
 
 #include "ownedscopeptr.h"
 
 #include "Generic/cow.h"
 #include "Generic/cowstring.h"
 
+#include "keyvaluesender.h"
+
 #include "valuetype_desc.h"
 #include "valuetype_forward.h"
 
 namespace Engine {
+
+DERIVE_OPERATOR(Equal, ==);
 
 struct META_EXPORT ValueType {
 
@@ -43,21 +49,9 @@ struct META_EXPORT ValueType {
 
     ValueType(ValueType &&other) noexcept;
 
-    template <typename T>
-    requires(!std::same_as<std::decay_t<T>, ValueType>) explicit ValueType(T &&v)
+    template <DecayedNoneOf<ValueType> T>
+    explicit ValueType(T &&v)
         : mUnion(std::in_place_index<static_cast<size_t>(static_cast<ValueTypeEnum>(toValueTypeIndex<std::decay_t<T>>()))>, std::forward<T>(v))
-    {
-    }
-
-    template <Enum T>
-    explicit ValueType(T val)
-        : ValueType(static_cast<std::underlying_type_t<T>>(val))
-    {
-    }
-
-    template <typename T>
-    explicit ValueType(T *val)
-        : ValueType(TypedScopePtr { val })
     {
     }
 
@@ -68,9 +62,11 @@ struct META_EXPORT ValueType {
     void operator=(const ValueType &other);
     void operator=(ValueType &&other);
 
-    template <typename T>
-    requires(!std::same_as<std::decay_t<T>, ValueType>) void operator=(T &&t)
+    template <DecayedNoneOf<ValueType> T>
+    void operator=(T &&t)
     {
+        static_assert(!requires { typename std::decay_t<T>::no_value_type; });
+
         constexpr size_t index = static_cast<size_t>(static_cast<ValueTypeEnum>(toValueTypeIndex<std::decay_t<T>>()));
         if (mUnion.index() == index)
             std::get<index>(mUnion) = std::forward<T>(t);
@@ -78,15 +74,21 @@ struct META_EXPORT ValueType {
             mUnion.emplace<index>(std::forward<T>(t));
     }
 
-    bool operator==(const ValueType &other) const;
-
-    bool operator!=(const ValueType &other) const;
-
-    ValueType operator()(const ArgumentList &args) const;
-    template <typename... Args>
-    ValueType operator()(Args &&...args)
+    template <typename V>
+    bool operator==(const V &v) const
     {
-        return (*this)({ ValueType { std::forward<Args>(args)... } });
+        return visit([&]<typename U>(const U &u) {
+            if constexpr (has_operator_Equal<V, U>)
+                return v == u;
+            else
+                return false;
+        });
+    }
+
+    template <typename T>
+    bool operator!=(const T &other) const
+    {
+        return !(*this == other);
     }
 
     std::string toShortString() const;
@@ -140,53 +142,14 @@ struct META_EXPORT ValueType {
     void setType(ValueTypeDesc type);
 
     void call(ValueType &retVal, const ArgumentList &args) const;
+    template <typename... Args>
+    void call(ValueType &retVal, Args &&...args)
+    {
+        return call(retVal, { ValueType { std::forward<Args>(args) }... });
+    }
 
 private:
     Union mUnion;
-};
-
-struct META_EXPORT ValueTypeRef {
-
-private:
-    template <typename T>
-    void *toPtrHelper(T &&val)
-    {
-        if constexpr (!std::is_reference_v<T> || std::is_const_v<std::remove_reference_t<T>>) {
-            return nullptr;
-        } else {
-            return &val;
-        }
-    }
-
-public:
-    ValueTypeRef() = default;
-
-    template <typename T>
-    explicit ValueTypeRef(T &&val)
-        : mValue(std::forward<T>(val))
-        , mData(toPtrHelper(convert_ValueType<false>(std::forward<T>(val))))
-    {
-    }
-
-    ValueTypeRef(const ValueTypeRef &) = delete;
-    ValueTypeRef(ValueTypeRef &&other);
-
-    ValueTypeRef &operator=(const ValueTypeRef &) = delete;
-    ValueTypeRef &operator=(ValueTypeRef &&);
-
-    const ValueType &value() const;
-
-    operator const ValueType &() const;
-
-    bool isEditable() const;
-
-    ValueTypeRef &operator=(const ValueType &v);
-
-    void call(ValueType &retVal, const ArgumentList &args) const;
-
-private:
-    ValueType mValue;
-    void *mData = nullptr;
 };
 
 template <typename T>
@@ -213,9 +176,9 @@ ValueType_Return<T> ValueType::as() const
         return static_cast<T>(std::get<std::underlying_type_t<T>>(mUnion));
     } else {
         if constexpr (Pointer<T>) {
-            return std::get<TypedScopePtr>(mUnion).safe_cast<std::remove_pointer_t<T>>();
+            return scope_cast<std::remove_pointer_t<T>>(std::get<ScopePtr>(mUnion));
         } else {
-            return std::get<OwnedScopePtr>(mUnion).safe_cast<T>();
+            return scope_cast<std::remove_reference_t<T>>(std::get<OwnedScopePtr>(mUnion));
         }
     }
     //static_assert(dependent_bool<T, false>::value, "Invalid target type for Valuetype cast provided!");

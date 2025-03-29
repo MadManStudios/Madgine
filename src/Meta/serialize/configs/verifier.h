@@ -1,43 +1,49 @@
 #pragma once
 
+#include "configselector.h"
+
 namespace Engine {
 namespace Serialize {
 
-struct VerifierCategory;
+    struct VerifierCategory;
 
-struct DefaultVerifier {
-    using Category = VerifierCategory;
-    
-    static bool verify(void *, ParticipantId requester)
-    {
-        return true;
-    }
-};
+    struct DefaultVerifier {
+        using Category = VerifierCategory;
 
-template <auto f, typename R, typename T, typename... Args>
-struct CustomVerifierImpl {
-    using Category = VerifierCategory;
+        static bool verify(const CallerHierarchyBasePtr &hierarchy, SyncFunctionContext context)
+        {
+            return true;
+        }
+    };
 
-    static bool verify(void *, Args... args)
-    {
-        return f(args...);
-    }
-};
+    template <auto f, typename R, typename T, typename... Args>
+    struct CustomVerifierImpl {
+        using Category = VerifierCategory;
 
-template <auto f, typename R, typename T, typename... Args>
-struct ParentVerifierImpl {
-    using Category = VerifierCategory;
+        static bool verify(const CallerHierarchyBasePtr &hierarchy, Args... args)
+        {
+            return f(args...);
+        }
+    };
 
-    static bool verify(T *parent, Args... args)
-    {
-        return (parent->*f)(args...);
-    }
-};
+    template <auto f, typename R, typename T, typename... Args>
+    struct ParentVerifierImpl {
+        using Category = VerifierCategory;
 
-template <auto f>
-using ParentVerifier = typename FunctionCapture<ParentVerifierImpl, f>::type;
-template <auto f>
-using CustomVerifier = typename FunctionCapture<CustomVerifierImpl, f>::type;
+        static bool verify(const CallerHierarchyBasePtr &hierarchy, Args... args)
+        {
+            T *parent = static_cast<T *>(hierarchy);
+            return (parent->*f)(args...);
+        }
+    };
+
+    template <auto f>
+    using ParentVerifier = FunctionCapture<ParentVerifierImpl, f>;
+    template <auto f>
+    using CustomVerifier = FunctionCapture<CustomVerifierImpl, f>;
+
+    template <typename... Configs>
+    using VerifierSelector = ConfigSelectorDefault<VerifierCategory, DefaultVerifier, Configs...>;
 
 }
 }

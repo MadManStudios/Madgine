@@ -4,6 +4,8 @@
 
 #include "path.h"
 
+#include "Generic/opaqueptr.h"
+
 namespace Engine {
 namespace Filesystem {
 
@@ -22,6 +24,8 @@ namespace Filesystem {
     struct INTERFACES_EXPORT FileWatcher {
 
         FileWatcher();
+        FileWatcher(const FileWatcher &) = delete;
+        FileWatcher(FileWatcher &&) = delete;
         ~FileWatcher();
 
         void addWatch(const Path &path);
@@ -33,7 +37,7 @@ namespace Filesystem {
         std::vector<FileEvent> fetchChangesReduced();
 
     private:
-        std::map<Path, uintptr_t> mWatches;
+        std::map<Path, UniqueOpaquePtr> mWatches;
     };
 
 }

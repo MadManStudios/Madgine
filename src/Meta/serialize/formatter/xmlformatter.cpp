@@ -154,13 +154,15 @@ namespace Serialize {
                     return STREAM_PARSE_ERROR(mStream, mBinary) << "Syntax error";
                 if (name && prefix != "<" + std::string(name) + ">")
                     return STREAM_PARSE_ERROR(mStream, mBinary) << "Expected: '" << name << "'";
+                if (!name && prefix[1] == '/')
+                    return STREAM_PARSE_ERROR(mStream, mBinary) << "Expected unnamed primitive";
                 STREAM_PROPAGATE_ERROR(mStream.readN(prefix, prefix.size() - 1));
             } else {
                 mCurrentExtended = false;
             }
             FORMATTER_EXPECT(">");
 
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds>) {
                 pushLocale(sLocaleBracket, false);                
             }
         }
@@ -191,7 +193,7 @@ namespace Serialize {
             }
         } else {
             const char *cPrefix = "</";
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds>) {
                 popLocale();
             }
             std::string prefix;
@@ -211,7 +213,7 @@ namespace Serialize {
         STREAM_PROPAGATE_ERROR(mStream.peekUntil(dummy, "> "));
         if (!dummy.empty()) {
             if (dummy[0] != '<')
-                throw 0;
+                return STREAM_PARSE_ERROR(mStream, mBinary) << "Expected: '<'";
             if (dummy[1] == '/')
                 return {};
             name = StringUtil::substr(dummy, 1, -1);

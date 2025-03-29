@@ -5,46 +5,33 @@
 #include "util/openglshader.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "openglshadercodegen.h"
 
-#include "Interfaces/filesystem/api.h"
-
-#include "Madgine/render/shadinglanguage/slloader.h"
-
-#include "Madgine/codegen/resolveincludes.h"
+#include "Interfaces/filesystem/fsapi.h"
 
 #include "openglrendercontext.h"
 
-UNIQUECOMPONENT(Engine::Render::OpenGLShaderLoader);
+UNIQUECOMPONENT(Engine::Render::OpenGLShaderLoader)
 
 METATABLE_BEGIN(Engine::Render::OpenGLShaderLoader)
+MEMBER(mResources)
 METATABLE_END(Engine::Render::OpenGLShaderLoader)
 
 METATABLE_BEGIN_BASE(Engine::Render::OpenGLShaderLoader::Resource, Engine::Resources::ResourceBase)
 METATABLE_END(Engine::Render::OpenGLShaderLoader::Resource)
 
+SERIALIZETABLE_BEGIN(Engine::Render::OpenGLShaderLoader::Handle)
+SERIALIZETABLE_END(Engine::Render::OpenGLShaderLoader::Handle)
+
 namespace Engine {
 namespace Render {
 
-    Threading::TaskFuture<bool> OpenGLShaderLoader::Handle::create(std::string_view name, const CodeGen::ShaderFile &file, ShaderType type, OpenGLShaderLoader *loader)
+    Threading::TaskFuture<bool> OpenGLShaderLoader::Ptr::create(const CodeGen::ShaderFile &file, ShaderType type, OpenGLShaderLoader *loader)
     {
-        std::string fullName { name };
-        if (fullName != Resources::ResourceBase::sUnnamed) {
-            switch (type) {
-            case ShaderType::PixelShader:
-                fullName += "_PS";
-                break;
-            case ShaderType::VertexShader:
-                fullName += "_VS";
-                break;
-            default:
-                throw 0;
-            }
-        }
-
-        return Base::Handle::create(
-            fullName, {}, [=, &file](OpenGLShaderLoader *loader, OpenGLShader &shader, OpenGLShaderLoader::ResourceDataInfo &info) { return loader->create(shader, info.resource(), file, type); }, loader);
+        return Base::Ptr::create(
+            [=, &file](OpenGLShaderLoader *loader, OpenGLShader &shader) { return loader->create(shader, file, type); }, loader);
     }
 
     Threading::TaskFuture<bool> OpenGLShaderLoader::Handle::load(std::string_view name, ShaderType type, OpenGLShaderLoader *loader)
@@ -56,9 +43,6 @@ namespace Render {
             break;
         case ShaderType::VertexShader:
             actualName += "_VS";
-            break;
-        case ShaderType::GeometryShader:
-            actualName += "_GS";
             break;
         default:
             throw 0;
@@ -87,8 +71,6 @@ namespace Render {
             type = ShaderType::VertexShader;
         else if (filename.ends_with("_PS"))
             type = ShaderType::PixelShader;
-        else if (filename.ends_with("_GS"))
-            type = ShaderType::GeometryShader;
         else
             throw 0;
 
@@ -102,25 +84,25 @@ namespace Render {
         shader.reset();
     }
 
-    bool OpenGLShaderLoader::create(OpenGLShader &shader, Resource *res, const CodeGen::ShaderFile &file, ShaderType type)
+    bool OpenGLShaderLoader::create(OpenGLShader &shader, const CodeGen::ShaderFile &file, ShaderType type)
     {
-        if (res->path().empty()) {
+        /* if (res->path().empty()) {
             Filesystem::Path dir = Filesystem::appDataPath() / "generated/shader/opengl";
 
             Filesystem::createDirectories(dir);
 
             res->setPath(dir / (std::string { res->name() } + (type == VertexShader ? "_VS" : "_PS") + ".glsl"));
-        }
+        }*/
 
         std::ostringstream ss;
         OpenGLShaderCodeGen::generate(ss, file, type);
 
-        {
+        /* {
             std::ofstream f { res->path() };
             f << ss.str();
-        }
+        }*/
 
-        return loadFromSource(shader, res->name(), ss.str(), type, res->path());
+        return loadFromSource(shader, "<generated>", ss.str(), type, "<generated>");
     }
 
     bool OpenGLShaderLoader::loadFromSource(OpenGLShader &shader, std::string_view name, std::string source, ShaderType type, const Filesystem::Path &path)
@@ -128,24 +110,6 @@ namespace Render {
         OpenGLShader tempShader { type };
 
         GLuint handle = tempShader.mHandle;
-
-        std::map<std::string, size_t> files {
-            { std::string { path.filename() }, 0 }
-        };
-
-        CodeGen::resolveIncludes(
-            source, [this, &files](const Filesystem::Path &path, size_t line, std::string_view filename) {
-                Resources::ResourceBase *res;
-
-                if (path.extension() == ".sl") {
-                    res = SlLoader::get(path.stem());
-                } else {
-                    res = get(path.stem(), this);
-                }
-
-                return "#line 1 " + std::to_string(files.at(path)) + "\n" + res->readAsText() + "\n#line " + std::to_string(line + 1) + " " + std::to_string(files.at(std::string { filename }));
-            },
-            path.filename().str(), files);
 
         const char *cSource = source.data();
 
@@ -157,7 +121,7 @@ namespace Render {
         glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(handle, 512, NULL, infoLog);
-            Engine::Util::LogDummy { Engine::Util::MessageType::ERROR_TYPE, path.c_str() }
+            Engine::Log::LogDummy { Engine::Log::MessageType::FATAL_TYPE, path.c_str() }
                 << "Compilation of " << (type == VertexShader ? "VS" : "PS")
                 << " Shader '" << name << "' failed:\n"
                 << infoLog;

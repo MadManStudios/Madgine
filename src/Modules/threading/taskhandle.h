@@ -12,10 +12,10 @@ namespace Threading {
         TaskHandle &operator=(const TaskHandle &) = delete;
         TaskHandle &operator=(TaskHandle &&);
 
-        TaskHandle(CoroutineHandle<TaskPromiseTypeBase> handle);
+        TaskHandle(CoroutineHandle<TaskSuspendablePromiseTypeBase> handle);
         template <typename T>
         TaskHandle(std::coroutine_handle<T> handle) noexcept
-            : mHandle(std::coroutine_handle<TaskPromiseTypeBase>::from_promise(handle.promise()))
+            : mHandle(std::coroutine_handle<TaskSuspendablePromiseTypeBase>::from_promise(handle.promise()))
         {
         }
         ~TaskHandle();
@@ -23,7 +23,7 @@ namespace Threading {
         void operator()();
         void resumeInQueue();
 
-        std::coroutine_handle<TaskPromiseTypeBase> release();
+        std::coroutine_handle<TaskSuspendablePromiseTypeBase> release();
 
         TaskQueue *queue() const;
 
@@ -32,7 +32,7 @@ namespace Threading {
         explicit operator bool() const;
 
     private:
-        std::coroutine_handle<TaskPromiseTypeBase> mHandle;
+        std::coroutine_handle<TaskSuspendablePromiseTypeBase> mHandle;
     };
 
 }

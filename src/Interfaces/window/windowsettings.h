@@ -7,7 +7,6 @@ namespace Window {
         InterfacesVector mPosition = { -1, -1 };
         InterfacesVector mSize = { 800, 600 };
         bool mMaximized = false;
-        bool mFullScreen = false;
     };
 
     struct WindowSettings {
@@ -21,6 +20,8 @@ namespace Window {
         bool mHeadless = false;
 
         bool mRestoreGeometry = true;
+
+        uintptr_t mIcon = 0;
     };
 
 }

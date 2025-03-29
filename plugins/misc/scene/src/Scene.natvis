@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+    <Type Name="Engine::Scene::Entity::EntityComponentList&lt;*&gt;">
+        <DisplayString>Select Component with given Index</DisplayString>
+        <Expand>
+            <IndexListItems>
+                <Size>mData.mData._Myfirst._Val.size()</Size>
+                 <ValueNode>mData.mData._Myfirst._Val[$i]</ValueNode>
+            </IndexListItems>
+        </Expand>
+    </Type>
+    
+    <Type Name="Engine::Scene::Entity::EntityComponentList&lt;Engine::Scene::Entity::Transform&gt;">
+        <DisplayString>Select Component with given Index</DisplayString>
+        <Expand> 
+            <IndexListItems>
+                <Size>mData.mContainer.mData._Myfirst._Val._Mypair._Myval2._Mysize</Size>
+                 <ValueNode>mData.mContainer.mData._Myfirst._Val[$i]</ValueNode>
+            </IndexListItems>
+        </Expand>
+    </Type>
+
+    <Type Name="Engine::Scene::Entity::Entity">
+        <DisplayString>{mName,na}</DisplayString>        
+        <DisplayString Condition="mLocal">{mName} (local)</DisplayString>        
+        <Expand> 
+            <CustomListItems MaxItemsPerView="5000">
+                 <Variable Name="current" InitialValue="mComponents._Mypair._Myval2._Myval2._Myhead->_Parent" />
+                 <Variable Name="stack" InitialValue="0" />
+                 <Variable Name="nextStack" InitialValue="0" />
+                 <Variable Name="index" InitialValue="(Plugin_Madgine_Core_Scene.dll!Engine::UniqueComponent::CollectorInfoBase **)nullptr" />
+                 <Variable Name="name" InitialValue="(const char*)mName._Mypair._Myval2._Bx._Ptr,na" />
+
+                <Size>mComponents._Mypair._Myval2._Myval2._Mysize</Size>
+                <Loop>
+                      <Break Condition="current->_Isnil==1"/>
+
+                      <If Condition="stack % 3 == 0">
+                            <If Condition="current->_Left->_Isnil==1">                                
+                                <Exec>stack = stack + 1</Exec>
+                            </If>
+                            <Else>
+                                <Exec>current = current->_Left</Exec>
+                                <Exec>nextStack = 3 * (stack + 1)</Exec>
+                            </Else>
+                      </If>
+                      <If Condition="stack % 3 == 1">
+                            <Exec>index = Plugin_Madgine_Core_Scene.dll!__registry_helper_7.mLoadedCollectors._Mypair._Myval2._Mylast</Exec>
+                            <Loop>
+                                <Exec>--index</Exec>
+                                <If Condition="(*index)->mBaseIndex.mIndex &lt;= current->_Myval.mHandle.mType.mIndex">
+                                    <Exec>name = (*index)->mComponentNames[current->_Myval.mHandle.mType.mIndex - (*index)->mBaseIndex.mIndex].data()</Exec>
+                                    <If Condition="dynamic_cast&lt;Plugin_Madgine_Core_Scene.dll!Engine::Scene::Entity::EntityComponentList&lt;Engine::Scene::Entity::Transform&gt;*&gt;(mSceneManager.mEntityComponentLists[current->_Myval.mHandle.mType.mIndex]._Mypair._Myval2) != nullptr">
+                                        <Item Name="[{name,nasb}]">((Plugin_Madgine_Core_Scene.dll!Engine::Scene::Entity::EntityComponentList&lt;Engine::Scene::Entity::Transform&gt;&amp;)(*mSceneManager.mEntityComponentLists[current->_Myval.mHandle.mType.mIndex]))[current->_Myval.mHandle.mIndex.mIndex]</Item>                                      
+                                        <Break />
+                                    </If> 
+                                    <If Condition="dynamic_cast&lt;Plugin_Madgine_Core_Scene.dll!Engine::Scene::Entity::EntityComponentList&lt;Engine::Scene::Entity::Mesh&gt;*&gt;(mSceneManager.mEntityComponentLists[current->_Myval.mHandle.mType.mIndex]._Mypair._Myval2) != nullptr">
+                                         <Item Name="[{name,nasb}]">((Plugin_Madgine_Core_Scene.dll!Engine::Scene::Entity::EntityComponentList&lt;Engine::Scene::Entity::Mesh&gt;&amp;)(*mSceneManager.mEntityComponentLists[current->_Myval.mHandle.mType.mIndex]))[current->_Myval.mHandle.mIndex.mIndex]</Item>
+                                         <Break />
+                                    </If>
+                                        <Item Name="[{name,nasb}, {current->_Myval.mHandle.mIndex.mIndex}]">(*mSceneManager.mEntityComponentLists[current->_Myval.mHandle.mType.mIndex])</Item>                                        
+                                    <Break />
+                                </If>                                
+                            </Loop>
+                            
+                            <If Condition="current->_Right->_Isnil==1">                                
+                                <Exec>stack = stack + 1</Exec>
+                            </If>
+                            <If Condition="current->_Right->_Isnil==0">
+                                <Exec>current = current->_Right</Exec>
+                                <Exec>nextStack = 3 * (stack + 1)</Exec>
+                            </If>
+                       </If>
+                       <If Condition="stack % 3 == 2">
+                            <Exec>current = current->_Parent</Exec>
+                            <Exec>nextStack = stack / 3</Exec>
+                        </If>
+                        <Exec>stack = nextStack</Exec>
+                </Loop>
+            </CustomListItems>
+        </Expand>
+    </Type>
+
+    <Type Name="Engine::Scene::Entity::EntityPtr">
+        <DisplayString Condition="((mHoldsRef.mHolder &gt;&gt; 1) &amp; 1) == 0">Invalid</DisplayString>
+        <DisplayString Condition="((Engine::Scene::SceneManager::ControlBlock*)((uintptr_t)(mEntity.mPtr) &gt;&gt; 2 &lt;&lt; 2))->mDeadFlag">Dead</DisplayString>
+        <DisplayString>{*((Engine::Scene::Entity::Entity*)((uintptr_t)(mEntity.mPtr) &gt;&gt; 2 &lt;&lt; 2))}</DisplayString>        
+        <Expand>
+            <ExpandedItem Condition="((mHoldsRef.mHolder &gt;&gt; 1) &amp; 1) == 1 &amp;&amp; !((Engine::Scene::SceneManager::ControlBlock*)((uintptr_t)(mEntity.mPtr) &gt;&gt; 2 &lt;&lt; 2))->mDeadFlag">mEntity</ExpandedItem>
+        </Expand>
+    </Type>
+</AutoVisualizer>

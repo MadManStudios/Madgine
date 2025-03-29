@@ -1,0 +1,18 @@
+struct AppData {
+    float3 aPos : POSITION0;
+};
+
+struct VertexShaderOutput {
+    float4 position : SV_Position;
+    float2 texcoord : TEXCOORD0;
+};
+
+VertexShaderOutput main(AppData IN)
+{
+    VertexShaderOutput OUT;
+
+    OUT.texcoord = (IN.aPos.xy * float2(1.0, -1.0) + float2(1.0, 1.0)) * 0.5;
+    OUT.position = float4(IN.aPos, 1.0);
+
+    return OUT;
+}

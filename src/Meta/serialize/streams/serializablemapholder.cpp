@@ -6,47 +6,55 @@
 
 #include "serializestreamdata.h"
 
+#include "../hierarchy/serializableunitptr.h"
+
 namespace Engine {
 namespace Serialize {
 
     SerializableMapHolder::SerializableMapHolder(FormattedSerializeStream &out)
         : mData(out.data())
     {
-        if (mData){
-            if (!mData->mSerializableMap) {
-                mData->mSerializableMap = &mMap;
-            } else {
-                mData = nullptr;
-            }
+        if (mData) {
+            assert(mData->mSerializableMap.empty());
         }
+    }
+
+    SerializableMapHolder::SerializableMapHolder(SerializableMapHolder &&other)
+        : mData(std::exchange(other.mData, nullptr))
+    {
     }
 
     SerializableMapHolder::~SerializableMapHolder()
     {
         if (mData) {
-            assert(mData->mSerializableMap == &mMap);
-            mData->mSerializableMap = nullptr;
+            mData->mSerializableMap.clear();
+        }
+    }
+
+    SerializableListHolder::SerializableListHolder(SerializeStreamData *data)
+        : mData(data)
+    {
+        if (mData) {
+            assert(mData->mSerializableList.empty());            
         }
     }
 
     SerializableListHolder::SerializableListHolder(FormattedSerializeStream &in)
-        : mData(in.data())
+        : SerializableListHolder(in.data())
     {
-        if (mData){
-            if (!mData->mSerializableList) {
-                mData->mSerializableList = &mList;
-            } else {
-                mData = nullptr;
-            }
-        }
     }
 
     SerializableListHolder::~SerializableListHolder()
     {
         if (mData) {
-            assert(mData->mSerializableList == &mList);
-            mData->mSerializableList = nullptr;
+            mData->mSerializableList.clear();
         }
+    }
+
+    SerializableListHolder &SerializableListHolder::operator=(SerializableListHolder &&other)        
+    {
+        std::swap(mData, other.mData);
+        return *this;
     }
 
 }

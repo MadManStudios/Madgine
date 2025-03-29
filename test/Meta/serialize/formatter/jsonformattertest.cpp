@@ -2,16 +2,22 @@
 
 #include "Meta/metalib.h"
 
-#include "Meta/serialize/formatter/jsonformatter.h"
+#include "Meta/serialize/formats.h"
 
 #include "formattertestbase.h"
+
+#include "../testunit.h"
+#include "../testManager.h"
+#include "Meta/serialize/container/noparent.h"
+#include "Meta/serialize/streams/formattedserializestream.h"
+#include "Meta/serialize/operations.h"
 
 using namespace Engine::Serialize;
 using namespace std::chrono_literals;
 
 TEST(Serialize_Formatter, JSON)
 {
-    FormatterBaseTest<JSONFormatter>(R"("unit1" : {
+    FormatterBaseTest(Formats::json, R"("unit1" : {
     "list1" : [1,2,3],
     "list2" : [4,5],
     "set1" : [6,7,8,9],
@@ -54,7 +60,6 @@ TEST(Serialize_Formatter, JSON)
     ],
     "complexList3" : [
     ],
-    "pod" : [1,2],
     "bytes" : "SGVsbG8gV29ybGQh"
 })");
 }
@@ -105,13 +110,12 @@ TEST(Serialize_Formatter, JSON_InvalidParse)
     ],
     "complexList3" : [
     ],
-    "pod" : [1,2],
     "bytes" : "SGVsbG8gV29ybGQh"
 })");
 
     NoParent<TestUnit> unit;
 
-    FormattedSerializeStream in { std::make_unique<JSONFormatter>(), SerializeStream { std::move(file) } };
+    FormattedSerializeStream in { Formats::json(), SerializeStream { std::move(file) } };
 
     StreamResult result = read(in, unit, nullptr);
     ASSERT_EQ(result.mState, StreamState::PARSE_ERROR);
@@ -164,13 +168,12 @@ TEST(Serialize_Formatter, JSON_ExtendedOrder)
     ],
     "complexList3" : [
     ],
-    "pod" : [1,2],
     "bytes" : "SGVsbG8gV29ybGQh"
 })");
 
     NoParent<TestUnit> unit;
 
-    FormattedSerializeStream in { std::make_unique<JSONFormatter>(), SerializeStream { std::move(file) } };
+    FormattedSerializeStream in { Formats::json(), SerializeStream { std::move(file) } };
 
     HANDLE_STREAM_RESULT(read(in, unit, nullptr));
     ASSERT_EQ(unit.complexList1.front().i, 2);

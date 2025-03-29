@@ -26,6 +26,6 @@
 
 
 #include "interfacesforward.h"
-#include "util/utilmethods.h"
+#include "log/logmethods.h"
 
 /// @endcond

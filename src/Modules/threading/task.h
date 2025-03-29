@@ -1,32 +1,51 @@
 #pragma once
 
 #include "Generic/coroutines/handle.h"
-#include "taskfuture.h"
+#include "taskpromise.h"
 
 namespace Engine {
 namespace Threading {
 
+    template <typename>
+    struct is_task : std::false_type {
+    };
 
-    template <typename T, typename Immediate>
+    template <typename T, bool I>
+    struct is_task<Task<T, I>> : std::true_type {
+    };
+
+    template <typename T>
+    concept IsTask = is_task<T>::value;
+
+    template <typename _T, bool Immediate>
     struct [[nodiscard]] Task {
 
-        static_assert(!InstanceOf<T, Task>);
+        using T = _T;
 
-        struct promise_type : TaskPromise<T> {
+        static_assert(!IsTask<T>);
+
+        struct promise_type : TaskSuspendablePromise<T> {
+
+            promise_type()
+                : TaskSuspendablePromise<T>(Immediate)
+            {
+            }
+
             Task<T, Immediate> get_return_object()
             {
                 return { CoroutineHandle<promise_type>::fromPromise(*this) };
             }
         };
 
-        template <typename T2, typename I>
+        template <typename T2, bool I>
         friend struct Task;
 
-        template <typename I>
+        Task() = default;
+
+        template <bool I>
         Task(Task<T, I> &&other)
             : mHandle(std::move(other.mHandle))
             , mState(std::move(other.mState))
-            , mImmediate(other.mImmediate)
         {
         }
 
@@ -57,12 +76,14 @@ namespace Threading {
 
         TaskHandle assign(TaskQueue *queue)
         {
+            TaskHandle handle;
             if (mHandle) {
                 mHandle->setQueue(queue);
+                bool immediate = mHandle->immediate();
+                handle = { std::move(mHandle) };
+                if (immediate)
+                    handle();
             }
-            TaskHandle handle { std::move(mHandle) };
-            if (mImmediate)
-                handle();
             return handle;
         }
 
@@ -76,7 +97,7 @@ namespace Threading {
             mHandle->setQueue(handle.queue());
             mHandle->then_return(std::move(handle));
 #if MODULES_ENABLE_TASK_TRACKING
-            Debug::Threading::onEnter(mHandle.get(), mHandle->queue());
+            Debug::Tasks::onEnter(mHandle.get(), mHandle->queue());
 #endif
             return mHandle.get();
         }
@@ -86,14 +107,21 @@ namespace Threading {
             return mState->get();
         }
 
+        template <typename F>
+        Task<std::invoke_result_t<F>, Immediate> then(F&& f) &&{
+            return [](F f, Task task) -> Task<std::invoke_result_t<F>, Immediate>{
+                co_await std::move(task);
+                f();
+            }(std::forward<F>(f), std::move(*this));
+        }
+
     private:
-        CoroutineHandle<TaskPromise<T>> mHandle;
+        CoroutineHandle<TaskSuspendablePromise<T>> mHandle;
         std::shared_ptr<TaskPromiseSharedState<T>> mState;
-        bool mImmediate = Immediate {};
     };
 
     template <typename T>
-    using ImmediateTask = Task<T, std::true_type>;
+    using ImmediateTask = Task<T, true>;
 
     template <typename T>
     Task<T> make_ready_task(T &&val)
@@ -101,7 +129,6 @@ namespace Threading {
         return { std::make_shared<TaskPromiseSharedState<T>>(std::forward<T>(val)) };
     }
 
-    
     template <typename F, typename... Args>
     auto make_task(F f, Args &&...args)
     {
@@ -109,8 +136,14 @@ namespace Threading {
 
         using R = std::invoke_result_t<F, Args...>;
 
-        if constexpr (InstanceOf<R, Task>) {
-            return std::invoke(std::move(f), std::forward<Args>(args)...);
+        if constexpr (IsTask<R>) {
+            if constexpr (sizeof(F) == 1) { //most likely captureless lambda
+                return std::invoke(std::move(f), std::forward<Args>(args)...);
+            } else {
+                return [](F f, Args... args) -> R { //keep f alive during the whole lifetime of the Task
+                    co_return co_await std::invoke(std::move(f), std::forward<Args>(args)...);
+                }(std::move(f), std::forward<Args>(args)...);
+            }
         } else {
             return [](F f, Args... args) -> Task<R> {
                 co_return std::invoke(std::move(f), std::forward<Args>(args)...);

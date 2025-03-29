@@ -59,7 +59,7 @@ namespace Input {
     }
 }
 
-namespace Util {
+namespace Log {
 
     struct Log;
 

@@ -2,11 +2,13 @@
 
 #if WINDOWS || !POSIX
 
-#include "dlapi.h"
+#    include "dlapi.h"
 
-#define NOMINMAX
-#include <Windows.h>
-#include <DbgHelp.h>
+#    define NOMINMAX
+#    include <Windows.h>
+#    ifndef NDEBUG
+#        include <DbgHelp.h>
+#    endif
 
 namespace Engine {
 namespace Dl {
@@ -23,13 +25,14 @@ namespace Dl {
         }
     }
 
-    DlHandle::~DlHandle(){
+    DlHandle::~DlHandle()
+    {
         close();
     }
 
     DlAPIResult DlHandle::open(std::string_view name)
     {
-#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) && 0
+#    if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) && 0
         static struct Guard {
             Guard()
             {
@@ -42,31 +45,33 @@ namespace Dl {
             UINT errorMode;
         } guard;
         SetErrorMode(SEM_FAILCRITICALERRORS);
-#endif
-        
+#    endif
+
         if (name.empty())
             mHandle = GetModuleHandle(nullptr);
         else
             mHandle = LoadLibrary(name.data());
 
-        if (!mHandle){
+        if (!mHandle) {
             DWORD error = GetLastError();
             return toResult(error, "DlHandle::open");
         }
-        
+
+#    ifndef NDEBUG
         SymRefreshModuleList(GetCurrentProcess());
+#    endif
 
         return DlAPIResult::SUCCESS;
     }
 
     DlAPIResult DlHandle::close()
     {
-        if (mHandle){
+        if (mHandle) {
             auto result = FreeLibrary((HINSTANCE)mHandle);
 
             if (!result)
                 return toResult(GetLastError(), "DlHandle::close");
-            
+
             mHandle = nullptr;
         }
         return DlAPIResult::SUCCESS;
@@ -74,7 +79,7 @@ namespace Dl {
 
     const void *DlHandle::getSymbol(std::string_view name) const
     {
-        return reinterpret_cast<const void*>(GetProcAddress((HINSTANCE)mHandle, name.data()));
+        return reinterpret_cast<const void *>(GetProcAddress((HINSTANCE)mHandle, name.data()));
     }
 
     Filesystem::Path DlHandle::fullPath(std::string_view symbolName) const

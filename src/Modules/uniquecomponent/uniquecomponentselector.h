@@ -5,12 +5,13 @@
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename Registry, typename __Base, typename... _Ty>
+    template <typename Registry>
     struct Selector {
         typedef typename Registry::Base Base;
 
-        Selector(_Ty... arg, size_t index = 0)
-            : mValue(Registry::sComponents().at(index)(arg...))
+        template <typename... Args>
+        Selector(Args&&... args)
+            : mValue(Registry::sComponents().at(0).construct(std::forward<Args>(args)...))
         {
         }
 

@@ -93,9 +93,9 @@
     template <ArgumentType T>                         \
     Type *Name = &Name##_instance<T>;
 
-#define DLL_EXPORT_VARIABLE(qualifier, Type, ns, Name, Init, Argument) \
+#define DLL_EXPORT_VARIABLE(qualifier, Type, ns, Name, Init, ...) \
     template <>                                                        \
-    extern DLL_EXPORT qualifier Type ns Name##_instance<Argument> = Init;
+    DLL_EXPORT qualifier Type ns Name##_instance<__VA_ARGS__> = Init;
 
 #define DLL_IMPORT_VARIABLE2(Type, Name, ...) \
     template <__VA_ARGS__>                    \

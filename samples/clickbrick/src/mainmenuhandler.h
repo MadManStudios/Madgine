@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Madgine/input/handler.h"
+#include "Madgine/widgets/widgethandler.h"
 
 namespace ClickBrick {
 
-    struct MainMenuHandler : Engine::Input::Handler<MainMenuHandler> {
+    struct MainMenuHandler : Engine::Widgets::WidgetHandler<MainMenuHandler> {
         SERIALIZABLEUNIT(MainMenuHandler)
 
-        MainMenuHandler(Engine::Input::UIManager &ui);
+        MainMenuHandler(Engine::HandlerManager &ui);
 
         virtual std::string_view key() const override;
 
-        virtual void setWidget(Engine::Widgets::WidgetBase *w) override;
+        virtual void startLifetime() override;
 
         void startGame();
     };

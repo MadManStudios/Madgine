@@ -28,9 +28,16 @@ namespace Threading {
         return dummy;
     }
 
+    static std::vector<std::function<void()>> &sThreadFinalizers()
+    {
+        static std::vector<std::function<void()>> dummy;
+        return dummy;
+    }
+
     WorkGroup::WorkGroup(std::string_view name)
         : mInstanceCounter(sWorkgroupInstanceCounter++)
         , mName(name.empty() ? "Workgroup_" + std::to_string(mInstanceCounter) : name)
+        , mState(WorkGroupState::INITIALIZING)
     {
 #if ENABLE_THREADING
         mThreads.push_back(std::this_thread::get_id());
@@ -59,6 +66,10 @@ namespace Threading {
 
     WorkGroup::~WorkGroup()
     {
+        for (const std::function<void()> &task : sThreadFinalizers()) {
+            task();
+        }
+
         WorkGroupStorage::finalize(false);
         WorkGroupStorage::finalize(true);
 
@@ -73,22 +84,72 @@ namespace Threading {
 #endif
     }
 
+    WorkGroupState WorkGroup::state() const
+    {
+        return { mState };
+    }
+
+    void WorkGroup::stop()
+    {
+        if (mState == WorkGroupState::INITIALIZING || mState == WorkGroupState::RUNNING)
+            setState(WorkGroupState::STOPPING);
+    }
+
     void WorkGroup::addThreadInitializer(std::function<void()> &&task)
     {
 #if ENABLE_THREADING
-        assert(mSubThreads.empty());
+        {
+            std::unique_lock lock { mThreadsMutex };
+            assert(mSubThreads.empty());
+        }
 #endif
         mThreadInitializers.emplace_back(std::move(task));
     }
 
-    void WorkGroup::addStaticThreadInitializer(std::function<void()> &&task)
+    void WorkGroup::addStaticThreadGuards(std::function<void()> &&init, std::function<void()> &&finalize)
     {
-        sThreadInitializers().emplace_back(std::move(task));
+        sThreadInitializers().emplace_back(std::move(init));
+        if (finalize)
+            sThreadFinalizers().emplace_back(std::move(finalize));
     }
 
     const std::string &WorkGroup::name() const
     {
         return mName;
+    }
+
+    void WorkGroup::update()
+    {
+#if ENABLE_THREADING
+        {
+            std::unique_lock lock { mThreadsMutex };
+            std::erase_if(mSubThreads,
+                [](std::future<int> &f) {
+                    bool result = f.wait_for(0ms) != std::future_status::timeout;
+                    if (result)
+                        f.get();
+                    return result;
+                });
+        }
+#endif
+
+        if (mState != WorkGroupState::RUNNING) {
+            for (TaskQueue *queue : mTaskQueues)
+                if (!queue->idle())
+                    return;
+
+            switch (mState) {
+            case WorkGroupState::INITIALIZING:
+                setState(WorkGroupState::RUNNING);
+                break;
+            case WorkGroupState::STOPPING:
+                setState(WorkGroupState::FINALIZING);
+                break;
+            case WorkGroupState::FINALIZING:
+                setState(WorkGroupState::DONE);
+                break;
+            }
+        }
     }
 
 #if ENABLE_THREADING
@@ -97,25 +158,18 @@ namespace Threading {
         return mSubThreads.empty();
     }
 
-    void WorkGroup::checkThreadStates()
-    {
-        std::erase_if(mSubThreads,
-            [](Future<int> &f) {
-                bool result = f.is_ready();
-                if (result)
-                    f.get();
-                return result;
-            });
-    }
-
     bool WorkGroup::contains(std::thread::id id) const
     {
+        std::unique_lock lock { mThreadsMutex };
         return std::ranges::find(mThreads, id) != mThreads.end();
     }
 
     void WorkGroup::initThread()
     {
-        mThreads.push_back(std::this_thread::get_id());
+        {
+            std::unique_lock lock { mThreadsMutex };
+            mThreads.push_back(std::this_thread::get_id());
+        }
 
         ThreadStorage::init(true);
         ThreadStorage::init(false);
@@ -137,11 +191,24 @@ namespace Threading {
         assert(sSelf == this);
         sSelf = nullptr;
 
+        for (const std::function<void()> &task : sThreadFinalizers()) {
+            task();
+        }
+
         ThreadStorage::finalize(false);
         ThreadStorage::finalize(true);
     }
-
 #endif
+
+    void WorkGroup::setState(WorkGroupState state)
+    {
+        LOG_DEBUG("Changing Workgroup state to " << state);
+        mState = state;
+#if !EMSCRIPTEN
+        for (TaskQueue *queue : mTaskQueues)
+            queue->notify();
+#endif
+    }
 
     WorkGroup &WorkGroup::self()
     {
@@ -167,7 +234,7 @@ namespace Threading {
         std::erase(mTaskQueues, taskQueue);
     }
 
-    const std::vector<TaskQueue *> WorkGroup::taskQueues() const
+    const std::vector<TaskQueue *> &WorkGroup::taskQueues() const
     {
         return mTaskQueues;
     }

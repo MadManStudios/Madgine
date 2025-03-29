@@ -17,6 +17,18 @@ using GenerationVector = GenerationContainer<std::vector<T>>;
 template <typename...>
 struct type_pack;
 
+template <typename T>
+struct make_type_pack {
+    using type = type_pack<T>;
+};
+template <typename... T>
+struct make_type_pack<type_pack<T...>> {
+    using type = type_pack<T...>;
+};
+template <typename T>
+using make_type_pack_t = typename make_type_pack<T>::type;
+
+
 struct CompoundAtomicOperation;
 
 struct MemberOffsetPtrTag;
@@ -39,6 +51,8 @@ struct EnumType;
 template <typename, typename>
 struct BaseEnum;
 struct EnumMetaTable;
+template <typename>
+struct Flags;
 
 template <typename>
 struct Generator;
@@ -53,5 +67,22 @@ enum class AccessMode {
     READ,
     WRITE
 };
+
+namespace Execution {
+
+    template <auto... cpos>
+    struct Lifetime;
+
+    template <typename R, typename VPack, auto... cpo>
+    struct VirtualReceiverBaseEx;
+
+    template <typename R, typename... V>
+    using VirtualReceiverBase = VirtualReceiverBaseEx<make_type_pack_t<R>, type_pack<V...>>;
+
+    template <typename... _Ty>
+    struct SignalStub;
+    template <typename T, typename... _Ty>
+    struct ConnectionInstance;
+}
 
 }

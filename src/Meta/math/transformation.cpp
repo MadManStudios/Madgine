@@ -2,9 +2,9 @@
 
 #include "transformation.h"
 
+#include "frustum.h"
 #include "matrix4.h"
 #include "quaternion.h"
-#include "frustum.h"
 
 namespace Engine {
 
@@ -14,7 +14,7 @@ Matrix4 TransformMatrix(const Vector3 &translate, const Vector3 &scale, const Qu
 }
 
 std::tuple<Vector3, Vector3, Quaternion> DecomposeTransformMatrix(const Matrix4 &transform)
-{    
+{
     Vector3 translation = transform.GetColumn(3).xyz();
     Matrix3 m3 = transform.ToMat3();
     Vector3 scale = { m3.GetColumn(0).length(), m3.GetColumn(1).length(), m3.GetColumn(2).length() };
@@ -45,14 +45,14 @@ Matrix4 ProjectionMatrix(const Frustum &frustum)
         p = {
             1 / r, 0, 0, 0,
             0, 1 / t, 0, 0,
-            0, 0, 2 / (far - near), -(far + near) / (far - near),
+            0, 0, 1 / (far - near), -1 * near / (far - near),
             0, 0, 0, 1
         };
     } else {
         p = {
             near / r, 0, 0, 0,
             0, near / t, 0, 0,
-            0, 0, (far + near) / (far - near), -2 * far * near / (far - near),
+            0, 0, far / (far - near), -1 * far * near / (far - near),
             0, 0, 1, 0
         };
     }
@@ -60,8 +60,9 @@ Matrix4 ProjectionMatrix(const Frustum &frustum)
     return p;
 }
 
-Matrix3 ExtractRotationMatrix(const Matrix3& m) {
-    
+Matrix3 ExtractRotationMatrix(const Matrix3 &m)
+{
+
     return m * ExtractScalingMatrix(m).Inverse();
 }
 

@@ -6,7 +6,7 @@ namespace Engine {
 namespace Filesystem {
 
     FileQueryState *createQueryState();
-    void destroyQueryState(FileQueryState *state);
+    INTERFACES_EXPORT void destroyQueryState(FileQueryState *state);
     struct FileQueryStateDeleter {
         void operator()(FileQueryState *state) { destroyQueryState(state); }
     };
@@ -63,6 +63,7 @@ namespace Filesystem {
 
         bool operator!=(const FileQueryIterator &other) const;
         bool operator==(const FileQuerySentinel &sen) const;
+        friend bool operator==(const FileQuerySentinel &sen, const FileQueryIterator &self);
         bool operator!=(const FileQuerySentinel &sen) const;
 
         void enterDir();

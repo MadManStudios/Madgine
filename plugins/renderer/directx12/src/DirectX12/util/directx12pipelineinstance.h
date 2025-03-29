@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine/pipelineloader/pipelineinstance.h"
+#include "Madgine/render/pipelineinstance.h"
 
 #include "../directx12pipelineloader.h"
 
@@ -11,30 +11,57 @@ namespace Render {
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12PipelineInstance : PipelineInstance {
 
-        DirectX12PipelineInstance(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline);
+        DirectX12PipelineInstance(const PipelineConfiguration &config, const DirectX12Pipeline *pipeline);
 
-        bool bind(ID3D12GraphicsCommandList *commandList, VertexFormat format, size_t groupSize) const;
+        bool bind(DirectX12RenderTarget *target, VertexFormat vertexFormat, size_t groupSize) const;
 
         virtual WritableByteBuffer mapParameters(size_t index) override;
+        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size) const override;
 
-        virtual void setInstanceData(const ByteBuffer &data) override;
+        virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh) const override;
+        virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const override;
+        virtual ByteBufferImpl<uint32_t> mapIndices(RenderTarget *target, size_t count) const override;
+        virtual void setGroupSize(size_t groupSize) const override;
 
-        virtual void setDynamicParameters(size_t index, const ByteBuffer &data) override;
+        virtual void render(RenderTarget *target) const override;
+        virtual void renderRange(RenderTarget *target, size_t elementCount, size_t vertexOffset, IndexType<size_t> indexOffset = {}) const override;
+        virtual void renderInstanced(RenderTarget *target, size_t count) const override;
 
-        virtual void renderMesh(const GPUMeshData *mesh, const Material *material = nullptr) const override;
-        virtual void renderMeshInstanced(size_t count, const GPUMeshData *mesh, const Material *material = nullptr) const override;
-
-        virtual void bindTextures(const std::vector<TextureDescriptor> &tex, size_t offset = 0) const override;        
+        
+        virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;        
 
     private:
-        std::array<ReleasePtr<ID3D12PipelineState>, 3> *mPipelines;
+        const DirectX12Pipeline *mPipeline;
 
-        std::vector<DirectX12Buffer> mConstantBuffers;
-        std::vector<DirectX12Buffer> mDynamicBuffers;
+        std::vector<size_t> mConstantBufferSizes;
+        std::vector<D3D12_GPU_VIRTUAL_ADDRESS> mConstantGPUAddresses;
 
-        DirectX12Buffer mInstanceBuffer;
+        bool mDepthChecking;
+
+        mutable std::vector<D3D12_GPU_VIRTUAL_ADDRESS> mTempGPUAddresses;
 
         DirectX12PipelineLoader::Handle mPipelineHandle;
+
+        mutable bool mHasIndices = false;
+        mutable UINT mElementCount;
+        mutable VertexFormat mFormat;
+        mutable size_t mGroupSize;
+    };
+
+    struct MADGINE_DIRECTX12_EXPORT DirectX12PipelineInstanceHandle : DirectX12PipelineInstance {
+
+        DirectX12PipelineInstanceHandle(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline);
+
+    private:
+        DirectX12PipelineLoader::Handle mPipelineHandle;
+    };
+
+    struct MADGINE_DIRECTX12_EXPORT DirectX12PipelineInstancePtr : DirectX12PipelineInstance {
+
+        DirectX12PipelineInstancePtr(const PipelineConfiguration &config, DirectX12PipelineLoader::Ptr pipeline);
+
+    private:
+        DirectX12PipelineLoader::Ptr mPipelinePtr;
     };
 
 }

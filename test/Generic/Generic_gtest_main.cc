@@ -29,7 +29,7 @@
 
 #include "Interfaces/interfaceslib.h"
 #include "Madgine/cli/clilib.h"
-#include "Interfaces/filesystem/api.h"
+#include "Interfaces/filesystem/fsapi.h"
 #include "Madgine/cli/cli.h"
 #include "gtest/gtest.h"
 #include <stdio.h>

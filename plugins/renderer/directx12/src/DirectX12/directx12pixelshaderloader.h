@@ -10,22 +10,22 @@ namespace Render {
     struct DirectX12PixelShaderLoader : Resources::ResourceLoader<DirectX12PixelShaderLoader, ReleasePtr<IDxcBlob>, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
         DirectX12PixelShaderLoader();
 
-        struct Handle : Base::Handle {
+        struct Ptr : Base::Ptr {
 
-            using Base::Handle::Handle;
-            Handle(Base::Handle handle)
-                : Base::Handle(std::move(handle))
+            using Base::Ptr::Ptr;
+            Ptr(Base::Ptr ptr)
+                : Base::Ptr(std::move(ptr))
             {
             }
 
-            Threading::TaskFuture<bool> create(std::string_view name, const CodeGen::ShaderFile &file, DirectX12PixelShaderLoader *loader = &DirectX12PixelShaderLoader::getSingleton());
+            Threading::TaskFuture<bool> create(const CodeGen::ShaderFile &file, DirectX12PixelShaderLoader *loader = &DirectX12PixelShaderLoader::getSingleton());
         };
 
 
         bool loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
         void unloadImpl(ReleasePtr<IDxcBlob> &shader);
 
-        bool create(ReleasePtr<IDxcBlob> &shader, Resource *res, const CodeGen::ShaderFile &file);
+        bool create(ReleasePtr<IDxcBlob> &shader, const CodeGen::ShaderFile &file);
 
         bool loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source);
 

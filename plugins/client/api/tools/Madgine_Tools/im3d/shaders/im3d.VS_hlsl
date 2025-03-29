@@ -1,0 +1,44 @@
+#include "im3d.sl"
+
+cbuffer PerApplication : register(b0)
+{
+    Im3DPerApplication app;
+}
+
+cbuffer PerObject : register(b2)
+{
+    Im3DPerObject object;
+}
+
+struct AppData {
+    float3 aPos : POSITION0;
+    float aW : POSITION1;
+    float2 aPos2 : POSITION2;
+    float3 aNormal : NORMAL;
+    float4 aColor : COLOR;
+    float2 aUV : TEXCOORD;
+};
+
+struct VertexShaderOutput {
+    float4 position : SV_Position;
+    float4 color : COLOR;
+    float2 uv : TEXCOORD0;
+};
+
+VertexShaderOutput main(AppData IN)
+{
+    VertexShaderOutput OUT;
+
+    float2 aPos2 = IN.aPos2;	
+    
+    OUT.position = mul(app.p, mul(object.mv, float4(IN.aPos, IN.aW)) + float4(aPos2, 0.0, 0.0));
+    OUT.position.z += OUT.position.w;
+    OUT.position.z /= 2;
+
+    
+    OUT.color = IN.aColor;
+
+	OUT.uv = IN.aUV;
+
+    return OUT;
+}

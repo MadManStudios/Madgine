@@ -75,24 +75,9 @@ namespace Serialize {
             write(out, mData, name);
         }
 
-        void setSynced(bool b)
-        {
-            Serialize::setSynced(mData, b);
-        }
-
         void setActive(bool active, bool existenceChanged)
         {
             Serialize::setActive(mData, active, existenceChanged);
-        }
-
-        StreamResult applyMap(FormattedSerializeStream &in, bool success)
-        {
-            return applyMap(in, mData, success);
-        }
-
-        void setParent(SerializableUnitBase *parent)
-        {
-            UnitHelper<T>::setItemParent(mData, parent);
         }
 
     private:

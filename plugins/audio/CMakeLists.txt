@@ -1,3 +1,4 @@
-if (NOT ANDROID AND NOT IOS AND NOT EMSCRIPTEN)
-	add_subdirectory(openal)
-endif ()
+
+add_subdirectory(api)
+add_subdirectory(portaudio)
+add_subdirectory(oboe)

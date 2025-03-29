@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine/pipelineloader/pipeline.h"
+#include "Madgine/render/pipeline.h"
 
 #include "../openglshaderloader.h"
 
@@ -15,13 +15,17 @@ namespace Render {
 
         OpenGLPipeline &operator=(OpenGLPipeline &&other);
 
-        bool link(typename OpenGLShaderLoader::Handle vertexShader, typename OpenGLShaderLoader::Handle geometryShader, typename OpenGLShaderLoader::Handle pixelShader = {});
+        bool link(typename OpenGLShaderLoader::Handle vertexShader, typename OpenGLShaderLoader::Handle pixelShader = {});
+        bool link(typename OpenGLShaderLoader::Ptr vertexShader, typename OpenGLShaderLoader::Ptr pixelShader = {});
 
         void reset();
 
         void bind() const;
 
         GLuint handle() const;
+
+    protected:
+        bool link(GLuint vertexShader, GLuint pixelShader);
 
     private:
         mutable GLuint mHandle = 0;

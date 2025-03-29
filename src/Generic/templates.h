@@ -61,15 +61,6 @@ struct transform_if<F, T, true> {
 template <template <typename> typename F, typename T, bool b>
 using transform_if_t = typename transform_if<F, T, b>::type;
 
-template <typename, template <typename...> typename>
-struct is_instance : std::false_type {
-};
-
-template <typename... T, template <typename...> typename U>
-struct is_instance<U<T...>, U> : std::true_type {
-    using argument_types = type_pack<T...>;
-};
-
 template <size_t add, typename Sequence>
 struct index_range_add;
 
@@ -86,36 +77,6 @@ constexpr size_t inheritance_offset()
 {
     return reinterpret_cast<uintptr_t>(static_cast<Base *>(reinterpret_cast<Derived *>(0x1))) - 1;
 }
-
-template <typename T, template <typename...> typename U>
-concept InstanceOf = is_instance<T, U>::value;
-
-template <typename T>
-concept Tuple = InstanceOf<T, std::tuple>;
-
-template <typename T>
-concept String = std::is_constructible_v<std::string, const T &> && std::is_constructible_v<T, const std::string &>;
-
-template <typename T>
-concept StringViewable = std::is_constructible_v<std::string_view, const T &>;
-
-template <typename T>
-concept Enum = std::is_enum_v<T>;
-
-template <typename T>
-concept Pointer = std::is_pointer_v<T> || std::is_null_pointer_v<T>;
-
-template <typename T>
-concept Function = std::is_function_v<T>;
-
-template <typename T>
-concept Unsigned = std::is_unsigned_v<T>;
-
-template <typename T, typename... Ty>
-concept OneOf = (std::same_as<T, Ty> || ...);
-
-template <typename T, typename... Ty>
-concept NoneOf = !OneOf<T, Ty...>;
 
 template <typename T>
 struct OutRef {
@@ -159,9 +120,49 @@ template <typename T, typename R = Void>
 using patch_void_t = std::conditional_t<std::same_as<T, void>, R, T>;
 
 template <auto a>
-struct auto_holder;
+struct auto_holder {
+    static constexpr auto value = a;
+};
+
+template <typename T>
+struct type_holder_t {
+    using type = T;
+};
+
+template <typename T>
+const constexpr type_holder_t<T> type_holder = {};
 
 template <auto f, auto g>
 concept FSameAs = std::same_as<auto_holder<f>, auto_holder<g>>;
+
+template <bool b, typename T>
+using const_if = std::conditional_t<b, const T, T>;
+
+template <typename T>
+decltype(auto) forward_ref(std::remove_reference_t<T> &t)
+{
+    if constexpr (Reference<T>) {
+        return std::ref(t);
+    } else {
+        return std::forward<T>(t);
+    }
+}
+
+template <typename T>
+decltype(auto) forward_ref(std::remove_reference_t<T> &&t)
+{
+    if constexpr (Reference<T>) {
+        return std::ref(t);
+    } else {
+        return std::forward<T>(t);
+    }
+}
+
+template <template <typename> typename Inner>
+struct Not {
+    template <typename T>
+    struct type : std::bool_constant<!Inner<T>::value> {
+    };
+};
 
 }

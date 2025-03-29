@@ -3,6 +3,8 @@
 
 #include "metatable.h"
 
+#include "Generic/execution/execution.h"
+
 namespace Engine {
 
 ValueType::ValueType()
@@ -39,44 +41,6 @@ void ValueType::operator=(ValueType &&other)
     mUnion = std::move(other.mUnion);
 }
 
-bool ValueType::operator==(const ValueType &other) const
-{
-    return mUnion == other.mUnion;
-}
-
-bool ValueType::operator!=(const ValueType &other) const
-{
-    return !(*this == other);
-}
-
-ValueType ValueType::operator()(const ArgumentList &args) const
-{
-    return visit(overloaded {
-        [&](const ApiFunction &function) {
-            ValueType result;
-            function(result, args);
-            return result;
-        },
-        [&](const KeyValueFunction &function) {
-            ValueType result;
-            function(result, args);
-            return result;
-        },
-        [&](const TypedScopePtr &scope) {
-            ValueType result;
-            scope.call(result, args);
-            return result;
-        },
-        [&](const OwnedScopePtr &scope) {
-            ValueType result;
-            scope.get().call(result, args);
-            return result;
-        },
-        [](const auto &) -> ValueType {
-            throw "calling operator is not supported";
-        } });
-}
-
 std::string ValueType::toShortString() const
 {
     return visit(overloaded {
@@ -89,7 +53,7 @@ std::string ValueType::toShortString() const
         [](std::monostate) {
             return "NULL"s;
         },
-        [](const TypedScopePtr &scope) {
+        [](const ScopePtr &scope) {
             return scope.name();
         },
         [](const OwnedScopePtr &scope) {
@@ -125,6 +89,16 @@ std::string ValueType::toShortString() const
             ss << v;
             return ss.str();
         },
+        [](const Color3 &c) {
+            std::ostringstream ss;
+            ss << c;
+            return ss.str();
+        },
+        [](const Color4 &c) {
+            std::ostringstream ss;
+            ss << c;
+            return ss.str();
+        },
         [](const Quaternion &q) {
             std::ostringstream ss;
             ss << q;
@@ -157,6 +131,20 @@ std::string ValueType::toShortString() const
         [](const EnumHolder &e) {
             return std::string { e.toString() };
         },
+        [](const FlagsHolder &f) {
+            std::stringstream ss;
+            ss << f;
+            return ss.str();
+        },
+        [](const KeyValueSender &s) {
+            return "<sender>"s;
+        },
+        [](std::chrono::duration<uint64_t, std::nano> dur) {
+            return "<duration>"s;
+        },
+        [](const ExtendedValueTypeDesc &type) {
+            return type.toString();
+        },
         [](const auto &v) {
             return std::to_string(v);
         } });
@@ -170,7 +158,7 @@ std::string ValueType::getTypeString() const
 bool ValueType::isReference() const
 {
     return visit(overloaded {
-        [](const TypedScopePtr &) {
+        [](const ScopePtr &) {
             return true;
         },
         [](const KeyValueVirtualSequenceRange &range) {
@@ -189,7 +177,7 @@ ValueTypeDesc ValueType::type() const
     ValueTypeIndex i = index();
     switch (i) {
     case ValueTypeEnum::ScopeValue: {
-        const MetaTable *table = as<TypedScopePtr>().mType;
+        const MetaTable *table = as<ScopePtr>().mType;
         return { i, table ? table->mSelf : nullptr };
     }
     default:
@@ -223,7 +211,7 @@ void ValueType::setType(ValueTypeDesc type)
         setTypeHelper(mUnion, type, std::make_index_sequence<std::variant_size_v<Union>>());
         switch (type.mType) {
         case ValueTypeEnum::ScopeValue:
-            std::get<TypedScopePtr>(mUnion).mType = *type.mSecondary.mMetaTable;
+            std::get<ScopePtr>(mUnion).mType = *type.mSecondary.mMetaTable;
             break;
         case ValueTypeEnum::ApiFunctionValue:
             std::get<ApiFunction>(mUnion).mTable = *type.mSecondary.mFunctionTable;
@@ -239,65 +227,29 @@ void ValueType::setType(ValueTypeDesc type)
 
 void ValueType::call(ValueType &retVal, const ArgumentList &args) const
 {
-    std::visit(overloaded {
-                   [&](const ObjectPtr &o) {
-                       o.call(retVal, args);
-                   },
-                   [](const auto &) {
-                       throw 0;
-                   } },
+    return std::visit(overloaded {
+                          [&](const ApiFunction &function) {
+                              return function(retVal, args);
+                          },
+                          [&](const KeyValueFunction &function) {
+                              return function(retVal, args);
+                          },
+                          [&](const BoundApiFunction &function) {
+                              return function(retVal, args);
+                          },
+                          [&](const ScopePtr &scope) {
+                              return scope.call(retVal, args);
+                          },
+                          [&](const OwnedScopePtr &scope) {
+                              return scope.get().call(retVal, args);
+                          },
+                          [&](const ObjectPtr &o) {
+                              return o.call(retVal, args);
+                          },
+                          [](const auto &) {
+                              throw "calling operator is not supported";
+                          } },
         mUnion);
-}
-
-ValueTypeRef::ValueTypeRef(ValueTypeRef &&other)
-    : mValue(std::move(other.mValue))
-    , mData(std::exchange(other.mData, nullptr))
-{
-}
-
-const ValueType &ValueTypeRef::value() const
-{
-    return mValue;
-}
-
-ValueTypeRef::operator const ValueType &() const
-{
-    return mValue;
-}
-
-bool ValueTypeRef::isEditable() const
-{
-    return mData != nullptr;
-}
-
-ValueTypeRef &ValueTypeRef::operator=(const ValueType &v)
-{
-    if (!v.type().canAccept(mValue.type()))
-        std::terminate();
-
-    mValue = v;
-    mValue.visit(overloaded {
-#define VALUETYPE_SEP ,
-#define VALUETYPE_TYPE(Name, Storage, T, ...)       \
-    [this](T t) {                                   \
-        *static_cast<std::decay_t<T> *>(mData) = t; \
-    }
-#include "valuetypedefinclude.h"
-    });
-
-    return *this;
-}
-
-ValueTypeRef &ValueTypeRef::operator=(ValueTypeRef &&other)
-{
-    mValue = std::move(other.mValue);
-    mData = std::exchange(other.mData, nullptr);
-    return *this;
-}
-
-void ValueTypeRef::call(ValueType &retVal, const ArgumentList &args) const
-{
-    return mValue.call(retVal, args);
 }
 
 DERIVE_OPERATOR(StreamOut, <<)
@@ -314,5 +266,4 @@ std::ostream &operator<<(std::ostream &stream,
 
     return stream;
 }
-
 }

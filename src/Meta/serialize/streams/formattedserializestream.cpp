@@ -22,7 +22,7 @@ namespace Serialize {
         return first < second.id();
     }
 
-    FormattedSerializeStream::FormattedSerializeStream(std::unique_ptr<Formatter> format, SerializeStream stream)
+    FormattedSerializeStream::FormattedSerializeStream(std::unique_ptr<Serialize::Formatter> format, SerializeStream stream)
         : mFormatter(std::move(format))
     {
         mFormatter->setupStream(std::move(stream));
@@ -94,7 +94,7 @@ namespace Serialize {
         return static_cast<bool>(mFormatter);
     }
 
-    SerializeStreamData *FormattedSerializeStream::data()
+    SerializeStreamData *FormattedSerializeStream::data() const
     {
         return mFormatter->stream().data();
     }

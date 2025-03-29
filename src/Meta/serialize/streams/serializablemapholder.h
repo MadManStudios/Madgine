@@ -7,21 +7,21 @@ namespace Serialize {
 
         SerializableMapHolder(FormattedSerializeStream &out);     
         SerializableMapHolder(const SerializableMapHolder &) = delete;
-        SerializableMapHolder(SerializableMapHolder &&) = delete;
+        SerializableMapHolder(SerializableMapHolder &&);
         ~SerializableMapHolder();
 
-        SerializableUnitMap mMap;    
         SerializeStreamData *mData = nullptr;
     };
 
     struct META_EXPORT SerializableListHolder {
-
+        SerializableListHolder(SerializeStreamData *data = nullptr);
         SerializableListHolder(FormattedSerializeStream &in);
         SerializableListHolder(const SerializableListHolder &) = delete;
         SerializableListHolder(SerializableListHolder &&) = delete;
         ~SerializableListHolder();
 
-        SerializableUnitList mList;
+        SerializableListHolder &operator=(SerializableListHolder &&);
+        
         SerializeStreamData *mData = nullptr;
     };
 

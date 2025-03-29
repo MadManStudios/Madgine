@@ -18,9 +18,10 @@ struct META_EXPORT Atlas2 {
     }
 
     void addBin(const Vector2i &origin);
+    void clear();
 
 	Entry insert(const Vector2i &size, const std::function<void()> &expand, bool allowFlip = true);
-    std::vector<Entry> insert(const std::vector<Vector2i> &sizes, const std::function<void()> &expand, bool allowFlip = true);
+    std::vector<Entry> insert(const std::span<Vector2i> &sizes, const std::function<void()> &expand, bool allowFlip = true);
 
 
 private:
@@ -33,7 +34,7 @@ private:
     std::tuple<float, int, bool> getScore(Bin &bin, const Vector2i &size, bool allowFlip);
     static Atlas2::Entry insertIntoBin(Bin &bin, const Vector2i &_size, int cornerIndex, bool flipped);
 
-    const Vector2i mBinSize;
+    Vector2i mBinSize;
     std::vector<Bin> mBins;
 };
 

@@ -81,7 +81,7 @@ namespace Debug {
 
         T average(size_t size) const
         {
-            return mCurrentTotal / min(max(size_t(1), mCount), size);
+            return mCurrentTotal / min(max(size_t { 1 }, mCount), size);
         }
 
         T mCurrentTotal, mMin, mMax, mTotal;

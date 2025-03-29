@@ -1,5 +1,7 @@
 #pragma once
 
+#include "bits/array.h"
+
 namespace Engine {
 
 struct EnumMetaTable {
@@ -40,6 +42,19 @@ struct EnumMetaTable {
         return stream << actualType << "::" << toString(value);
     }
 
+    std::ostream &printFlags(std::ostream &stream, BitArray<64> flags) const
+    {
+        StringUtil::StreamJoiner join { stream, "|" };        
+        for (int32_t v : values<int32_t>()) {
+            if (flags[v]) {
+                print(join.next(), v, mName);
+            }
+        }
+        if (join.empty())
+            stream << '0';
+        return stream;
+    }
+
     std::istream &read(std::istream &stream, int32_t &value, std::string_view actualType) const
     {
         std::istream::pos_type p = stream.tellg();
@@ -74,8 +89,31 @@ struct EnumMetaTable {
         return stream;
     }
 
+    std::istream &readFlags(std::istream &stream, BitArray<64> &flags) const
+    {
+        std::string s;
+        stream >> s;
+        flags = {};
+        if (s != "0") {
+            for (std::string_view e : StringUtil::tokenize(s, '|')) {
+                if (!e.starts_with(mName))
+                    throw 0;
+                e.remove_prefix(mName.size());
+                if (!e.starts_with("::"))
+                    throw 0;
+                e.remove_prefix(2);
+                int32_t v;
+                if (!fromString(e, v))
+                    throw 0;
+                flags[v] = true;
+            }
+        }
+        return stream;
+    }
+
     template <typename T>
-    Generator<T> values() const {
+    Generator<T> values() const
+    {
         int32_t val = mMin + 1;
         while (val < mMax) {
             co_yield static_cast<T>(val);
@@ -93,12 +131,17 @@ template <typename _Representation>
 struct EnumType : _Representation {
 
     using Representation = _Representation;
-    using BaseType = typename _Representation::EnumType;
+    using BaseType = typename Representation::EnumType;
 
     EnumType() = default;
 
     EnumType(BaseType value)
         : mValue(value)
+    {
+    }
+
+    explicit EnumType(typename Representation::underlying_type intValue)
+        : mValue(static_cast<BaseType>(intValue))
     {
     }
 
@@ -137,7 +180,8 @@ struct EnumType : _Representation {
         return Representation::sTable.mName;
     }
 
-    static Generator<BaseType> values() {
+    static Generator<BaseType> values()
+    {
         return Representation::sTable.template values<BaseType>();
     }
 
@@ -145,57 +189,48 @@ protected:
     BaseType mValue;
 };
 
-template <typename _Representation, typename Base>
-struct BaseEnum : EnumType<_Representation>, Base::Representation {
-private:
-    using EnumBase = EnumType<_Representation>;
-
+template <typename Base, typename _Representation>
+struct BaseEnum : Base, _Representation {
 public:
-    using BaseType = typename EnumBase::BaseType;
-
-    struct Representation : Base::Representation, EnumBase::Representation {
-    };
+    using Representation = _Representation;
+    using BaseType = typename Representation::EnumType;
+    using underlying_type = typename Base::underlying_type;
+    
 
     static constexpr int MIN = Base::MIN;
-    static constexpr int MAX = EnumBase::MAX;
+    static constexpr int MAX = BaseType::MAX;
     static constexpr int COUNT = MAX - MIN - 1;
 
-    using EnumBase::EnumBase;
+    using Base::Base;
 
-    //TODO: using might be enough
-
-    template <typename T>
-    requires std::constructible_from<Base, T>
-    BaseEnum(T v)
-        : EnumBase(static_cast<BaseType>(static_cast<typename Base::BaseType>(v)))
+    BaseEnum(BaseType base)
+        : Base(static_cast<typename Base::BaseType>(base))
     {
     }
 
-    template <typename T>
-    requires std::constructible_from<Base, T> bool operator==(T other) const
+    BaseEnum(Base base)
+        : Base(base)
     {
-        return toBase() == Base { other };
-    }
-
-    template <typename T>
-    requires std::constructible_from<Base, T> bool operator!=(T other) const
-    {
-        return toBase() != Base { other };
     }
 
     std::string_view toString() const
     {
-        return _Representation::sTable.toString(this->mValue);
+        return Representation::sTable.toString(this->mValue);
     }
 
-    friend std::ostream &operator<<(std::ostream &stream, const BaseEnum<_Representation, Base> &value)
+    friend std::ostream &operator<<(std::ostream &stream, const BaseEnum<Base, _Representation> &value)
     {
-        return _Representation::sTable.print(stream, value.mValue, EnumBase::sTypeName());
+        return Representation::sTable.print(stream, value.mValue, sTypeName());
     }
 
-    friend std::istream &operator>>(std::istream &stream, BaseEnum<_Representation, Base> &value)
+    friend std::istream &operator>>(std::istream &stream, BaseEnum<Base, _Representation> &value)
     {
-        return _Representation::sTable.read(stream, value.mValue, EnumBase::sTypeName());
+        return Representation::sTable.read(stream, value.mValue, sTypeName());
+    }
+
+    static std::string_view sTypeName()
+    {
+        return Representation::sTable.mName;
     }
 
 private:
@@ -207,14 +242,15 @@ private:
 
 }
 
-#define ENUM_REGISTRY(Name, MIN_VAL, Base, ...)                                                                                                              \
+#define ENUM_REGISTRY(Name, Type, MIN_VAL, Base, ...)                                                                                                        \
     struct Name##Representation {                                                                                                                            \
-        enum EnumType {                                                                                                                                      \
-            MIN = MIN_VAL,                                                                                                                                   \
-            __VA_ARGS__,                                                                                                                                     \
+        enum EnumType Type {                                                                                                                                 \
+            MIN = MIN_VAL __VA_OPT__(,)                                                                                                                                   \
+            __VA_ARGS__,                                                                                                                                      \
             MAX,                                                                                                                                             \
             COUNT = MAX - MIN - 1                                                                                                                            \
         };                                                                                                                                                   \
+        using underlying_type = std::underlying_type_t<EnumType>;                                                                                              \
         static inline const constexpr auto sIdentifiers = Engine::StringUtil::tokenize<static_cast<size_t>(Name##Representation::COUNT)>(#__VA_ARGS__, ','); \
         static inline const constexpr Engine::EnumMetaTable sTable {                                                                                         \
             Base, #Name, sIdentifiers.data(), MIN, MAX                                                                                                       \
@@ -232,12 +268,17 @@ private:
         return stream;                                                                                                                                       \
     }
 
-#define ENUM_BASE(Name, Base, ...)                                                 \
-    ENUM_REGISTRY(Name, Base::MAX - 1, &Base##Representation::sTable, __VA_ARGS__) \
-    using Name = Engine::BaseEnum<Name##Representation, Base>;
+#define ENUM_BASE(Name, Base, ...)                                                                        \
+    ENUM_REGISTRY(Name, : Base::underlying_type, Base::MAX - 1, &Base##Representation::sTable, __VA_ARGS__) \
+    using Name = Engine::BaseEnum<Base, Name##Representation>;
 
-#define ENUM(Name, ...)                           \
-    ENUM_REGISTRY(Name, -1, nullptr, __VA_ARGS__) \
+#define TYPED_ENUM(Name, Type, ...)                 \
+    ENUM_REGISTRY(Name,                             \
+                  : Type, -1, nullptr, __VA_ARGS__) \
+    using Name = Engine::EnumType<Name##Representation>;
+
+#define ENUM(Name, ...)                             \
+    ENUM_REGISTRY(Name, , -1, nullptr, __VA_ARGS__) \
     using Name = Engine::EnumType<Name##Representation>;
 
 #define FORWARD_ENUM(Name)       \

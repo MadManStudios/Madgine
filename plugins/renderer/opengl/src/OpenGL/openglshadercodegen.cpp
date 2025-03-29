@@ -51,7 +51,7 @@ namespace Render {
                            [&](CodeGen::Struct *structInfo) {
                                stream << structInfo->mName;
                            } },
-                type);
+                type.mBaseType);
         }
 
         void generate(std::ostream &stream, const CodeGen::Statement &statement);
@@ -89,17 +89,18 @@ namespace Render {
 
         void generate(std::ostream &stream, const CodeGen::Assignment &statement)
         {
-            stream << statement.mVariableName << " = ";
-            generate(stream, *statement.mStatement);
+            generate(stream, statement.mTarget);
+            stream << " = ";
+            generate(stream, statement.mStatement);
         }
 
         void generate(std::ostream &stream, const CodeGen::Return &statement)
         {
             stream << "return ";
-            generate(stream, *statement.mStatement);
+            generate(stream, statement.mStatement);
         }
 
-        void generate(std::ostream &stream, const CodeGen::VariableRead &statement)
+        void generate(std::ostream &stream, const CodeGen::VariableAccess &statement)
         {
             stream << statement.mVariableName;
         }
@@ -108,15 +109,15 @@ namespace Render {
         {
             generateType(stream, def.mVariable.mType);
             stream << " " << def.mVariable.mName;
-            if (!def.mDefaultValue.is<std::monostate>()) {
+            if (def.mInitializer) {
                 stream << " = ";
-                def.mDefaultValue.visit([&](const auto &part) { generate(stream, part); });
+                generate(stream, def.mInitializer);
             }
         }
 
         void generate(std::ostream &stream, const CodeGen::MemberAccess &access)
         {
-            generate(stream, *access.mStatement);
+            generate(stream, access.mStatement);
             stream << "." << access.mMemberName;
         }
 
@@ -198,10 +199,10 @@ namespace Render {
                 if (structInfo.first == "VertexData") {
                     if (type == VertexShader) {
                         uint32_t i = 0;
-                        for (const CodeGen::Variable &arg : structInfo.second.mVariables) {
+                        for (const CodeGen::VariableDefinition &arg : structInfo.second.mVariables) {
                             stream << "layout(location = " << i++ << ") in ";
-                            generateType(stream, arg.mType);
-                            stream << " " << arg.mName << ";\n";
+                            generateType(stream, arg.mVariable.mType);
+                            stream << " " << arg.mVariable.mName << ";\n";
                         }
                     } else {
                         continue;
@@ -219,14 +220,14 @@ namespace Render {
                 } else
                     stream << "struct";
                 stream << " " << structInfo.second.mName << "{\n";
-                for (const CodeGen::Variable &arg : structInfo.second.mVariables) {
+                for (const CodeGen::VariableDefinition &arg : structInfo.second.mVariables) {
                     stream << "\t";
                     /*for (const std::string &annotation : arg.mAnnotations) {
 
                         stream << annotation << " ";
                     }*/
-                    generateType(stream, arg.mType);
-                    stream << " " << arg.mName << ";\n";
+                    generateType(stream, arg.mVariable.mType);
+                    stream << " " << arg.mVariable.mName << ";\n";
                 }
                 stream << "};\n\n";
             }
@@ -265,8 +266,8 @@ namespace Render {
             stream << "void main(){\n";
             if (type == VertexShader) {
                 stream << "\tVertexData IN;\n";
-                for (const CodeGen::Variable &inVar : file.mStructs.at("VertexData").mVariables) {
-                    stream << "\tIN." << inVar.mName << " = " << inVar.mName << ";\n";
+                for (const CodeGen::VariableDefinition &inVar : file.mStructs.at("VertexData").mVariables) {
+                    stream << "\tIN." << inVar.mVariable.mName << " = " << inVar.mVariable.mName << ";\n";
                 }
                 stream << "\trasterizerData = mainImpl(IN);\n"
                        << "\tgl_Position = rasterizerData.pos;\n";

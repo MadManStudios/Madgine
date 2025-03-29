@@ -1,0 +1,37 @@
+#include "widgets.sl"
+
+cbuffer PerApplication : register(b0)
+{
+    WidgetsPerApplication app;
+}
+
+struct AppData {
+    float3 aPos : POSITION0;
+    float aW : POSITION1; //Remove once dxc allows mapping semantic names to locations for SPIR-V
+    float2 aPos2 : POSITION2; //-
+    float3 aNormal : NORMAL; //-
+    float4 aColor : COLOR;
+    float2 aUV : TEXCOORD;
+};
+
+struct VertexShaderOutput {
+    float4 color : COLOR;
+    float2 uv : TEXCOORD;
+    float4 position : SV_Position;
+};
+
+VertexShaderOutput main(AppData IN)
+{
+    VertexShaderOutput OUT;
+
+
+
+    OUT.position.xy = ((IN.aPos.xy / app.screenSize) * float2(2, -2)) - float2(1, -1);
+    OUT.position.z = 1.0 / (IN.aPos.z + 1.0);
+    OUT.position.w = 1.0;
+    OUT.position = mul(app.c, OUT.position);
+    OUT.color = IN.aColor;
+    OUT.uv = IN.aUV;
+
+    return OUT;
+}

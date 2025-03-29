@@ -6,7 +6,7 @@ namespace Engine {
 
 struct KeyValuePair {
     ValueType mKey;
-    ValueTypeRef mValue;
+    ValueType mValue;
 };
 
 }

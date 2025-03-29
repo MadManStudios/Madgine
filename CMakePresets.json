@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 8,
   "cmakeMinimumRequired": {
     "major": 3,
     "minor": 22,
@@ -17,15 +17,17 @@
       "cacheVariables": {
         "CMAKE_DEBUG_POSTFIX": "",
         "CMAKE_MINSIZEREL_POSTFIX": "",
-        "CMAKE_RELWITHDEBINFO_POSTFIX": "",
-        "BUILD_SHARED_LIBS": {
-          "type": "BOOL",
-          "value": "True"
-        }
+        "CMAKE_RELWITHDEBINFO_POSTFIX": ""
       },
       "architecture": {
         "strategy": "external",
         "value": "x64"
+      },
+      "warnings": {
+        "dev": false
+      },
+      "errors": {
+        "dev": false
       }
     },
     {
@@ -43,9 +45,25 @@
       "name": "emscripten",
       "inherits": "base",
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS": "-s WASM=1 -s USE_PTHREADS=0 -s -s ALLOW_MEMORY_GROWTH=1 -mtail-call",
-        "CMAKE_EXE_LINKER_FLAGS": "-s WASM=1 --emrun -s DEMANGLE_SUPPORT=1 -s USE_WEBGL2=1 -s ERROR_ON_UNDEFINED_SYMBOLS=1 -s ALLOW_MEMORY_GROWTH=1",
-        "CMAKE_SHARED_LINKER_FLAGS": "-s WASM=1 --emrun -s DEMANGLE_SUPPORT=1 -s USE_WEBGL2=1 -s SIDE_MODULE=1 -s EXPORT_ALL=1 -s ERROR_ON_UNDEFINED_SYMBOLS=1 -s ALLOW_MEMORY_GROWTH=1"
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "cmake/toolchains/emscripten-wasm.cmake"
+        },
+        "CMAKE_CXX_FLAGS": "-s USE_PTHREADS=0 -mtail-call -g",
+        "CMAKE_EXE_LINKER_FLAGS": "-s WASM=1 --emrun -s ERROR_ON_UNDEFINED_SYMBOLS=1 -s ALLOW_MEMORY_GROWTH=1 -s MIN_WEBGL_VERSION=2 -s MAX_WEBGL_VERSION=2 -sGL_ASSERTIONS=1 -sGL_DEBUG=1 -sEXCEPTION_DEBUG=1 -g",
+        "CMAKE_SHARED_LINKER_FLAGS": "-s WASM=1 --emrun -s SIDE_MODULE=1 -s EXPORT_ALL=1 -s ERROR_ON_UNDEFINED_SYMBOLS=1 -s ALLOW_MEMORY_GROWTH=1 -s MIN_WEBGL_VERSION=2 -s MAX_WEBGL_VERSION=2",
+        "MADGINE_PYTHON_ROOT": {
+          "type": "PATH",
+          "value": "C:/Users/Bub/Downloads/Python-3.13.0/Python-3.13.0"
+        },
+        "MADGINE_PYTHON_LIB": {
+          "type": "FILEPATH",
+          "value": "C:/Users/Bub/Downloads/Python-3.13.0/Python-3.13.0/cross-build/wasm32-emscripten/libpython3.13.a"
+        },
+        "MADGINE_PYTHON_MODULE_LIBS": {
+          "type": "STRING",
+          "value": "C:/Users/Bub/Downloads/Python-3.13.0/Python-3.13.0/cross-build/wasm32-emscripten/Modules/_decimal/libmpdec/libmpdec.a;C:/Users/Bub/Downloads/Python-3.13.0/Python-3.13.0/cross-build/wasm32-emscripten/Modules/_hacl/libHacl_Hash_SHA2.a;C:/Users/Bub/Downloads/Python-3.13.0/Python-3.13.0/cross-build/wasm32-emscripten/Modules/expat/libexpat.a;-sUSE_BZIP2;-sUSE_SQLITE3"
+        }
       },
       "toolchainFile": "cmake/toolchains/emscripten-wasm.cmake",
       "hidden": true
@@ -53,6 +71,16 @@
     {
       "name": "android",
       "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "cmake/toolchains/android.cmake"
+        },
+        "INTERFACES_ENABLE_DEBUG_LOGGING": {
+          "type": "BOOL",
+          "value": "ON"
+        }
+      },
       "toolchainFile": "cmake/toolchains/android.cmake",
       "hidden": true
     },
@@ -60,6 +88,12 @@
       "name": "android-armv7",
       "inherits": "android",
       "cacheVariables": { "ANDROID_ABI": "armeabi-v7a" },
+      "hidden": true
+    },
+    {
+      "name": "android-arm64",
+      "inherits": "android",
+      "cacheVariables": { "ANDROID_ABI": "arm64-v8a" },
       "hidden": true
     },
     {
@@ -71,15 +105,15 @@
     {
       "name": "OpenGL",
       "displayName": "-OpenGL",
-      "description": "Uses OpenGL config as plugin definition file",
+      "description": "Uses OpenGL config as madgine configuration",
       "cacheVariables": {
-        "PLUGIN_DEFINITION_FILE": {
+        "MADGINE_CONFIGURATION": {
           "type": "FILEPATH",
-          "value": "${sourceDir}/test/OpenGL.cfg"
+          "value": "${sourceDir}/test/configs/OpenGL"
         },
         "BUILD_SHARED_LIBS": {
           "type": "BOOL",
-          "value": "False"
+          "value": "OFF"
         }
       },
       "hidden": true
@@ -88,11 +122,47 @@
       "name": "OpenGL-Tools",
       "inherits": "OpenGL",
       "displayName": "-OpenGL (Tools)",
-      "description": "Uses OpenGL including Tools config as plugin definition file",
+      "description": "Uses OpenGL including Tools config as madgine configuration",
       "cacheVariables": {
-        "PLUGIN_DEFINITION_FILE": {
+        "MADGINE_CONFIGURATION": {
           "type": "FILEPATH",
-          "value": "${sourceDir}/test/OpenGL_tools.cfg"
+          "value": "${sourceDir}/test/configs/OpenGL_tools"
+        },
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": "OFF"
+        }
+      },
+      "hidden": true
+    },
+    {
+      "name": "Vulkan",
+      "displayName": "-Vulkan",
+      "description": "Uses Vulkan config as madgine configuration",
+      "cacheVariables": {
+        "MADGINE_CONFIGURATION": {
+          "type": "FILEPATH",
+          "value": "${sourceDir}/test/configs/Vulkan"
+        },
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": "OFF"
+        }
+      },
+      "hidden": true
+    },
+    {
+      "name": "Vulkan-Tools",
+      "displayName": "-Vulkan (Tools)",
+      "description": "Uses Vulkan including Tools config as madgine configuration",
+      "cacheVariables": {
+        "MADGINE_CONFIGURATION": {
+          "type": "FILEPATH",
+          "value": "${sourceDir}/test/configs/Vulkan_tools"
+        },
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": "OFF"
         }
       },
       "hidden": true
@@ -122,6 +192,14 @@
       "hidden": true
     },
     {
+      "name": "tracking",
+      "displayName": " (tracking)",
+      "cacheVariables": {
+        "MODULES_ENABLE_TASK_TRACKING": "ON"
+      },
+      "hidden": true
+    },
+    {
       "name": "Debug",
       "inherits": [ "base", "debug" ]
     },
@@ -136,6 +214,10 @@
     {
       "name": "Clang-Debug",
       "inherits": [ "clang", "debug" ]
+    },
+    {
+      "name": "Clang-Debug (Tracking)",
+      "inherits": [ "clang", "debug", "tracking" ]
     },
     {
       "name": "Clang-Debug-OpenGL",
@@ -194,52 +276,76 @@
       "inherits": [ "emscripten", "relwithdebinfo", "OpenGL-Tools" ]
     },
     {
-      "name": "Android-x64-Debug-OpenGL",
-      "inherits": [ "android-x64", "debug", "OpenGL" ]
+      "name": "Android-x64-Debug-Vulkan",
+      "inherits": [ "android-x64", "debug", "Vulkan" ]
     },
     {
-      "name": "Android-x64-Debug-OpenGL (Tools)",
-      "inherits": [ "android-x64", "debug", "OpenGL-Tools" ]
+      "name": "Android-x64-Debug-Vulkan (Tools)",
+      "inherits": [ "android-x64", "debug", "Vulkan-Tools" ]
     },
     {
-      "name": "Android-x64-Release-OpenGL",
-      "inherits": [ "android-x64", "release", "OpenGL" ]
+      "name": "Android-x64-Release-Vulkan",
+      "inherits": [ "android-x64", "release", "Vulkan" ]
     },
     {
-      "name": "Android-x64-Release-OpenGL (Tools)",
-      "inherits": [ "android-x64", "release", "OpenGL-Tools" ]
+      "name": "Android-x64-Release-Vulkan (Tools)",
+      "inherits": [ "android-x64", "release", "Vulkan-Tools" ]
     },
     {
-      "name": "Android-x64-RelWithDebInfo-OpenGL",
-      "inherits": [ "android-x64", "relwithdebinfo", "OpenGL" ]
+      "name": "Android-x64-RelWithDebInfo-Vulkan",
+      "inherits": [ "android-x64", "relwithdebinfo", "Vulkan" ]
     },
     {
-      "name": "Android-x64-RelWithDebInfo-OpenGL (Tools)",
-      "inherits": [ "android-x64", "relwithdebinfo", "OpenGL-Tools" ]
+      "name": "Android-x64-RelWithDebInfo-Vulkan (Tools)",
+      "inherits": [ "android-x64", "relwithdebinfo", "Vulkan-Tools" ]
     },
     {
-      "name": "Android-armv7-Debug-OpenGL",
-      "inherits": [ "android-armv7", "debug", "OpenGL" ]
+      "name": "Android-armv7-Debug-Vulkan",
+      "inherits": [ "android-armv7", "debug", "Vulkan" ]
     },
     {
-      "name": "Android-armv7-Debug-OpenGL (Tools)",
-      "inherits": [ "android-armv7", "debug", "OpenGL-Tools" ]
+      "name": "Android-armv7-Debug-Vulkan (Tools)",
+      "inherits": [ "android-armv7", "debug", "Vulkan-Tools" ]
     },
     {
-      "name": "Android-armv7-Release-OpenGL",
-      "inherits": [ "android-armv7", "release", "OpenGL" ]
+      "name": "Android-armv7-Release-Vulkan",
+      "inherits": [ "android-armv7", "release", "Vulkan" ]
     },
     {
-      "name": "Android-armv7-Release-OpenGL (Tools)",
-      "inherits": [ "android-armv7", "release", "OpenGL-Tools" ]
+      "name": "Android-armv7-Release-Vulkan (Tools)",
+      "inherits": [ "android-armv7", "release", "Vulkan-Tools" ]
     },
     {
-      "name": "Android-armv7-RelWithDebInfo-OpenGL",
-      "inherits": [ "android-armv7", "relwithdebinfo", "OpenGL" ]
+      "name": "Android-armv7-RelWithDebInfo-Vulkan",
+      "inherits": [ "android-armv7", "relwithdebinfo", "Vulkan" ]
     },
     {
-      "name": "Android-armv7-RelWithDebInfo-OpenGL (Tools)",
-      "inherits": [ "android-armv7", "relwithdebinfo", "OpenGL-Tools" ]
+      "name": "Android-armv7-RelWithDebInfo-Vulkan (Tools)",
+      "inherits": [ "android-armv7", "relwithdebinfo", "Vulkan-Tools" ]
+    },
+    {
+      "name": "Android-arm64-Debug-Vulkan",
+      "inherits": [ "android-arm64", "debug", "Vulkan" ]
+    },
+    {
+      "name": "Android-arm64-Debug-Vulkan (Tools)",
+      "inherits": [ "android-arm64", "debug", "Vulkan-Tools" ]
+    },
+    {
+      "name": "Android-arm64-Release-Vulkan",
+      "inherits": [ "android-arm64", "release", "Vulkan" ]
+    },
+    {
+      "name": "Android-arm64-Release-Vulkan (Tools)",
+      "inherits": [ "android-arm64", "release", "Vulkan-Tools" ]
+    },
+    {
+      "name": "Android-arm64-RelWithDebInfo-Vulkan",
+      "inherits": [ "android-arm64", "relwithdebinfo", "Vulkan" ]
+    },
+    {
+      "name": "Android-arm64-RelWithDebInfo-Vulkan (Tools)",
+      "inherits": [ "android-arm64", "relwithdebinfo", "Vulkan-Tools" ]
     }
   ],
   "buildPresets": [],

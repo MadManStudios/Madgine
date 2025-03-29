@@ -1,15 +1,104 @@
 #pragma once
 
-#include "Generic/callerhierarchy.h"
-
 #include "Generic/makeowning.h"
 
-#include "Generic/functor.h"
+#include "Generic/customfunctors.h"
+
+#include "Generic/container/emplace.h"
 
 #include "../streams/formattedserializestream.h"
 
+#include "Generic/functor.h"
+
 namespace Engine {
 namespace Serialize {
+
+    struct DefaultCreator {
+        using Category = CreatorCategory;
+
+        template <typename T>
+        using ArgsTuple = std::conditional_t<std::is_const_v<T>, std::tuple<std::remove_const_t<T>>, std::tuple<>>;
+
+        static const constexpr bool controlled = false;
+
+        template <typename T>
+        static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple<T> &result, const char *name = "Item")
+        {
+            if constexpr (std::is_const_v<T>) {
+                return read<std::remove_const_t<T>>(in, std::get<0>(result), name);
+            } else {
+                return {};
+            }
+        }
+
+        template <typename T>
+        static void writeCreationData(FormattedSerializeStream &out, const T &t, const char *name = "Item")
+        {
+            if constexpr (std::is_const_v<T>) {
+                write<std::remove_const_t<T>>(out, t, name);
+            }
+        }
+
+        template <typename C>
+        static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &t)
+        {
+            using T = std::ranges::range_value_t<C>;
+            if constexpr (InstanceOf<T, std::pair>) {
+                out.beginCompoundWrite("Item");
+                writeCreationData<typename T::first_type>(out, t.first, "Key");
+                writeCreationData<typename T::second_type>(out, t.second, "Value");
+                write<typename T::first_type>(out, t.first, "Key");
+                write<typename T::second_type>(out, t.second, "Value");
+                out.endCompoundWrite("Item");
+            } else {
+                writeCreationData<T>(out, t);
+                write<T>(out, t, "Item");
+            }
+        }
+
+        template <typename Op>
+        static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
+        {
+            using T = std::remove_reference_t<std::ranges::range_reference_t<Op>>;
+            if constexpr (InstanceOf<T, std::pair>) {
+                STREAM_PROPAGATE_ERROR(in.beginCompoundRead("Item"));
+                std::tuple<std::piecewise_construct_t, ArgsTuple<typename T::first_type>, ArgsTuple<typename T::second_type>> tuple;
+                STREAM_PROPAGATE_ERROR(readCreationData<typename T::first_type>(in, std::get<1>(tuple), "Key"));
+                STREAM_PROPAGATE_ERROR(readCreationData<typename T::second_type>(in, std::get<2>(tuple), "Value"));
+                bool success;
+                it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+                assert(success);
+                STREAM_PROPAGATE_ERROR(read(in, it->first, "Key"));
+                STREAM_PROPAGATE_ERROR(read(in, it->second, "Value"));
+                return in.endCompoundRead("Item");                
+
+            } else {
+                ArgsTuple<T> tuple;
+                STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
+                bool success;
+                it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+                assert(success);
+                STREAM_PROPAGATE_ERROR(read(in, *it, "Item"));
+                return {};
+            }
+        }
+
+        template <typename C>
+        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+        {
+            using T = std::remove_reference_t<std::ranges::range_reference_t<C>>;
+            ArgsTuple<T> tuple;
+            STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<T>(in, "Item", visitor));
+            return {};
+        }
+
+        template <typename Op>
+        static void clear(Op &op)
+        {
+            op.clear();
+        }
+    };
 
     template <typename KeyCreator, typename ValueCreator>
     struct KeyValueCreator {
@@ -22,25 +111,40 @@ namespace Serialize {
         using ArgsTuple = std::tuple<std::piecewise_construct_t, typename KeyCreator::template ArgsTuple<typename P::first_type>, typename ValueCreator::template ArgsTuple<typename P::second_type>>;
 
         template <typename C>
-        static void writeItem(FormattedSerializeStream &out, const typename container_traits<C>::value_type &t)
+        static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &t)
         {
             out.beginCompoundWrite("Item");
-            writeCreationData<typename container_traits<C>::value_type>(out, t);
-            write<typename container_traits<C>::value_type::first_type>(out, t.first, "Key");
-            write<typename container_traits<C>::value_type::second_type>(out, t.second, "Value");
+            using T = std::ranges::range_value_t<C>;
+            writeCreationData<T>(out, t);
+            write<typename T::first_type>(out, t.first, "Key");
+            write<typename T::second_type>(out, t.second, "Value");
             out.endCompoundWrite("Item");
         }
 
         template <typename Op>
-        static StreamResult readItem(FormattedSerializeStream &in, Op &op, typename container_traits<Op>::emplace_return &it, const typename container_traits<Op>::const_iterator &where)
+        static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
         {
             STREAM_PROPAGATE_ERROR(in.beginCompoundRead(nullptr));
-            ArgsTuple<typename container_traits<Op>::value_type> tuple;
-            STREAM_PROPAGATE_ERROR(readCreationData<typename container_traits<Op>::value_type>(in, tuple));
-            it = TupleUnpacker::invokeExpand(LIFT(container_traits<Op>::emplace), op, where, std::move(tuple));
-            assert(container_traits<Op>::was_emplace_successful(it));
-            STREAM_PROPAGATE_ERROR(read<typename container_traits<Op>::value_type::first_type>(in, it.first->first, "Key"));
-            STREAM_PROPAGATE_ERROR(read<typename container_traits<Op>::value_type::second_type>(in, it.first->second, "Value"));
+            using T = std::ranges::range_value_t<Op>;
+            ArgsTuple<T> tuple;
+            STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
+            bool success;
+            it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+            assert(success);
+            STREAM_PROPAGATE_ERROR(read<typename T::first_type>(in, it->first, "Key"));
+            STREAM_PROPAGATE_ERROR(read<typename T::second_type>(in, it->second, "Value"));
+            return in.endCompoundRead(nullptr);
+        }
+
+        template <typename C>
+        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+        {
+            STREAM_PROPAGATE_ERROR(in.beginCompoundRead(nullptr));
+            using T = std::ranges::range_value_t<C>;
+            ArgsTuple<T> tuple;
+            STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::first_type>(in, "Key", visitor));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::second_type>(in, "Value", visitor));
             return in.endCompoundRead(nullptr);
         }
 
@@ -56,57 +160,6 @@ namespace Serialize {
         {
             STREAM_PROPAGATE_ERROR(KeyCreator::template readCreationData<typename P::first_type>(in, std::get<1>(tuple)));
             return ValueCreator::template readCreationData<typename P::second_type>(in, std::get<2>(tuple));
-        }
-
-        template <typename Op>
-        static void clear(Op &op)
-        {
-            op.clear();
-        }
-    };
-
-    struct DefaultCreator {
-        using Category = CreatorCategory;
-
-        template <typename T>
-        using ArgsTuple = std::conditional_t<std::is_const_v<T>, std::tuple<std::remove_const_t<T>>, std::tuple<>>;
-
-        static const constexpr bool controlled = false;
-
-        template <typename T>
-        static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple<T> &result)
-        {
-            if constexpr (std::is_const_v<T>) {
-                return read<std::remove_const_t<T>>(in, std::get<0>(result), nullptr);
-            } else {
-                return {};
-            }
-        }
-
-        template <typename T>
-        static void writeCreationData(FormattedSerializeStream &out, const T &t, const char *name = "Item")
-        {
-            if constexpr (std::is_const_v<T>) {
-                write<std::remove_const_t<T>>(out, t, name);
-            }
-        }
-
-        template <typename C>
-        static void writeItem(FormattedSerializeStream &out, const typename container_traits<C>::value_type &t)
-        {
-            writeCreationData<typename container_traits<C>::value_type>(out, t);
-            write<typename container_traits<C>::value_type>(out, t, "Item");
-        }
-
-        template <typename Op>
-        static StreamResult readItem(FormattedSerializeStream &in, Op &op, typename container_traits<Op>::emplace_return &it, const typename container_traits<Op>::const_iterator &where)
-        {
-            ArgsTuple<typename container_traits<Op>::value_type> tuple;
-            STREAM_PROPAGATE_ERROR(readCreationData<typename container_traits<Op>::value_type>(in, tuple));
-            it = TupleUnpacker::invokeExpand(LIFT(container_traits<Op>::emplace), op, where, std::move(tuple));
-            STREAM_PROPAGATE_ERROR(read(in, *it, "Item"));
-            assert(container_traits<Op>::was_emplace_successful(it));
-            return {};
         }
 
         template <typename Op>
@@ -151,21 +204,30 @@ namespace Serialize {
             }
 
             template <typename Op>
-            static StreamResult readItem(FormattedSerializeStream &in, Op &op, typename container_traits<Op>::emplace_return &it, const typename container_traits<Op>::const_iterator &where, const CallerHierarchyBasePtr &hierarchy)
+            static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where, const CallerHierarchyBasePtr &hierarchy)
+            {
+                ArgsTuple tuple;
+                bool success;
+                STREAM_PROPAGATE_ERROR(readCreationData(in, tuple));
+                if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
+
+                    std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(tuple));
+                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
+                    it = emplace(success, op, where, std::move(temp));
+                } else {
+                    it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
+                }
+                assert(success);
+                return {};
+            }
+
+            template <typename C>
+            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
             {
                 ArgsTuple tuple;
                 STREAM_PROPAGATE_ERROR(readCreationData(in, tuple));
-                if constexpr (std::is_const_v<typename container_traits<Op>::value_type>) {
-
-                    std::remove_const_t<typename container_traits<Op>::value_type> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<typename container_traits<Op>::value_type>>(std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
-                    it = container_traits<Op>::emplace(op, where, std::move(temp));
-                } else {
-                    it = TupleUnpacker::invokeExpand(LIFT(container_traits<Op>::emplace), op, where, std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
-                }
-                assert(container_traits<Op>::was_emplace_successful(it));
-                return {};
+                return Serialize::visitStream<std::ranges::range_value_t<C>>(in, nullptr, visitor);
             }
 
             template <typename Arg>
@@ -175,10 +237,10 @@ namespace Serialize {
             }
 
             template <typename C>
-            static void writeItem(FormattedSerializeStream &out, const typename container_traits<C>::value_type &arg, const CallerHierarchyBasePtr &hierarchy)
+            static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &arg, const CallerHierarchyBasePtr &hierarchy)
             {
-                const char *name = writeCreationData<typename container_traits<C>::value_type>(out, arg, hierarchy);
-                write<typename container_traits<C>::value_type>(out, arg, name, hierarchy);
+                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg, hierarchy);
+                write<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
             }
 
             template <typename Op>
@@ -188,7 +250,7 @@ namespace Serialize {
             }
         };
 
-        template <auto reader, typename WriteFunctor, typename ClearFunctor, OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
+        template <auto reader, typename WriteFunctor, typename ClearFunctor, typename Scan, OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
         struct _ParentCreator {
 
             using Category = CreatorCategory;
@@ -210,20 +272,34 @@ namespace Serialize {
             }
 
             template <typename Op>
-            static StreamResult readItem(FormattedSerializeStream &in, Op &op, typename container_traits<Op>::emplace_return &it, const typename container_traits<Op>::const_iterator &where, const CallerHierarchyBasePtr &hierarchy)
+            static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where, const CallerHierarchyBasePtr &hierarchy)
             {
                 ArgsTuple tuple;
+                bool success;
                 STREAM_PROPAGATE_ERROR(readCreationData(in, tuple, hierarchy));
-                if constexpr (std::is_const_v<typename container_traits<Op>::value_type>) {
-                    std::remove_const_t<typename container_traits<Op>::value_type> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<typename container_traits<Op>::value_type>>(std::move(*tuple));
+                if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
+                    std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(*tuple));
                     STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
-                    it = container_traits<Op>::emplace(op, where, std::move(temp));
+                    it = emplace(success, op, where, std::move(temp));
                 } else {
-                    it = TupleUnpacker::invokeFlatten(LIFT(container_traits<Op>::emplace), op, where, std::move(tuple));
+                    it = TupleUnpacker::invokeFlatten(emplace, success, op, where, std::move(tuple));
                     STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
                 }
-                assert(container_traits<Op>::was_emplace_successful(it));
+                assert(success);
                 return {};
+            }
+
+            template <typename C>
+            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+            {
+                if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, nullptr_t>) {
+                    throw 0;
+                } else {
+                    const SerializeTable *type = nullptr;
+                    STREAM_PROPAGATE_ERROR(Scan::value(type, in));
+                    assert(type);
+                    return SerializableDataPtr::visitStream(type, in, nullptr, visitor);
+                }
             }
 
             template <typename Arg>
@@ -235,10 +311,10 @@ namespace Serialize {
             }
 
             template <typename C>
-            static void writeItem(FormattedSerializeStream &out, const typename container_traits<C>::value_type &arg, const CallerHierarchyBasePtr &hierarchy)
+            static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &arg, const CallerHierarchyBasePtr &hierarchy)
             {
-                const char *name = writeCreationData<typename container_traits<C>::value_type>(out, arg, hierarchy);
-                write<typename container_traits<C>::value_type>(out, arg, name, hierarchy);
+                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg, hierarchy);
+                write<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
             }
 
             template <typename Op>
@@ -251,11 +327,11 @@ namespace Serialize {
 
     }
 
-    template <auto reader, auto writer, auto clear = nullptr>
-    using ParentCreator = typename FunctionCapture<__serialize_impl__::_ParentCreator, reader, MemberFunctor<writer>, std::conditional_t<std::same_as<decltype(clear), std::nullptr_t>, __serialize_impl__::DefaultClear, UnpackingMemberFunctor<clear>>>::type;
+    template <auto reader, auto writer, auto clear = nullptr, auto scan = nullptr>
+    using ParentCreator = FunctionCapture<__serialize_impl__::_ParentCreator, reader, MemberFunctor<writer>, std::conditional_t<std::same_as<decltype(clear), std::nullptr_t>, __serialize_impl__::DefaultClear, UnpackingMemberFunctor<clear>>, auto_holder<scan>>;
 
     template <auto reader, auto writer, auto clear = nullptr>
-    using CustomCreator = typename FunctionCapture<__serialize_impl__::_CustomCreator, reader, Functor<writer>, std::conditional_t<std::same_as<decltype(clear), std::nullptr_t>, __serialize_impl__::DefaultClear, Functor<clear>>>::type;
+    using CustomCreator = FunctionCapture<__serialize_impl__::_CustomCreator, reader, Functor<writer>, std::conditional_t<std::same_as<decltype(clear), std::nullptr_t>, __serialize_impl__::DefaultClear, Functor<clear>>>;
 
     template <typename... Configs>
     using CreatorSelector = ConfigSelectorDefault<CreatorCategory, DefaultCreator, Configs...>;

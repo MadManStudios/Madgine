@@ -8,6 +8,7 @@ namespace Debug {
 
         struct MODULES_EXPORT ProfilerThread {
             ProfilerThread();
+            ProfilerThread(const char *name);
             ProfilerThread(const ProfilerThread &) = delete;
             ProfilerThread(ProfilerThread &&) = delete;
             ~ProfilerThread();

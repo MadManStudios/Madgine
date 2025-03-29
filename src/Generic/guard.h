@@ -1,11 +1,11 @@
 #pragma once
 
-#include "lambda.h"
+#include "closure.h"
 
 namespace Engine {
 
 struct Guard {
-    Guard(Lambda<void()> &&init, Lambda<void()> &&finalize = {})
+    Guard(Closure<void()> &&init, Closure<void()> &&finalize = {})
         : mFinalize(std::move(finalize))
     {
         if (init)
@@ -19,7 +19,7 @@ struct Guard {
     }
 
 private:
-    Lambda<void()> mFinalize;
+    Closure<void()> mFinalize;
 };
 
 }

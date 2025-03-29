@@ -16,10 +16,12 @@
 
 #    include "../threading/workgroup.h"
 
+#    include "binaryinfo.h"
+
 namespace Engine {
 namespace Plugins {
 
-    PluginSection::PluginSection(PluginManager &mgr, const std::string &name, bool exclusive, bool atleastOne)
+    PluginSection::PluginSection(PluginManager &mgr, std::string_view name, bool exclusive, bool atleastOne)
         : mName(name)
         , mMgr(mgr)
         , mAtleastOne(atleastOne)
@@ -32,7 +34,7 @@ namespace Plugins {
             if (std::regex_match(file.str(), match, e)) {
                 std::string project = match[1];
                 std::string name = match[2];
-                auto pib = mPlugins.try_emplace(name, name, this, project, result.path());
+                auto pib = mPlugins.emplace(name, this, project, result.path());
                 assert(pib.second);
             }
         }
@@ -41,6 +43,11 @@ namespace Plugins {
     PluginSection::~PluginSection()
     {
         //assert(mDependents.empty());
+    }
+
+    const std::string &PluginSection::name() const
+    {
+        return mName;
     }
 
     bool PluginSection::isAtleastOne() const
@@ -53,7 +60,7 @@ namespace Plugins {
         return mExclusive;
     }
 
-    bool PluginSection::load()
+    bool PluginSection::load(Ini::IniFile &file)
     {
         if (mAtleastOne) {
             if (mPlugins.empty()) {
@@ -61,70 +68,70 @@ namespace Plugins {
                 std::terminate();
             }
             for (Plugin &p : kvValues(mPlugins)) {
-                if (p.isLoaded())
+                if (p.isLoaded(file))
                     return true;
             }
-            return loadPlugin(&mPlugins.begin()->second);
+            return loadPlugin(&*mPlugins.begin(), file);
         }
         return true;
     }
 
-    bool PluginSection::unload()
+    bool PluginSection::unload(Ini::IniFile &file)
     {
         for (Plugin *p : mDependents) {
-            if (!p->section()->unloadPlugin(p))
+            if (!p->section()->unloadPlugin(p, file))
                 return true;
         }
 
         for (Plugin &p : kvValues(mPlugins)) {
-            if (unloadPlugin(&p))
+            if (unloadPlugin(&p, file))
                 return true;
         }
 
         return false;
     }
 
-    bool PluginSection::isLoaded(const std::string &name)
+    bool PluginSection::isLoaded(std::string_view name, Ini::IniFile &file)
     {
         auto it = mPlugins.find(name);
         if (it != mPlugins.end()) {
-            return it->second.isLoaded();
+            return it->isLoaded(file);
         }
         return false;
     }
 
-    bool PluginSection::loadPlugin(const std::string &name)
+    bool PluginSection::loadPlugin(std::string_view name, Ini::IniFile &file)
     {
         Plugin *plugin = getPlugin(name);
         if (!plugin)
             return false;
-        return loadPlugin(plugin);
+        return loadPlugin(plugin, file);
     }
 
-    bool PluginSection::unloadPlugin(const std::string &name)
+    bool PluginSection::unloadPlugin(std::string_view name, Ini::IniFile &file)
     {
         Plugin *plugin = getPlugin(name);
         if (!plugin)
             return false;
-        return unloadPlugin(plugin);
+        return unloadPlugin(plugin, file);
     }
 
-    bool PluginSection::loadPluginByFilename(const std::string &name)
+    bool PluginSection::loadPluginByFilename(std::string_view name, Ini::IniFile &file)
     {
-        auto pib = mPlugins.try_emplace(name, name);
+        auto pib = mPlugins.emplace(name);
         assert(pib.second);
-        return loadPlugin(&pib.first->second);
+        return loadPlugin(&*pib.first, file);
     }
 
-    Plugin *PluginSection::getPlugin(const std::string &name)
+    Plugin *PluginSection::getPlugin(std::string_view name)
     {
         auto it = mPlugins.find(name);
         if (it == mPlugins.end())
             return nullptr;
-        return &it->second;
+        return &*it;
     }
 
-    bool PluginSection::loadPlugin(Plugin *p, bool autoLoadTools)
+    bool PluginSection::loadPlugin(Plugin *p, Ini::IniFile &file, bool autoLoadTools)
     {
         assert(p->section() == this);
 
@@ -132,66 +139,66 @@ namespace Plugins {
             Plugin *unloadExclusive = nullptr;
 
             for (Plugin &p2 : kvValues(mPlugins)) {
-                if (&p2 != p && p2.isLoaded()) {
+                if (&p2 != p && p2.isLoaded(file)) {
                     assert(!unloadExclusive);
                     unloadExclusive = &p2;
                 }
             }
 
             if (unloadExclusive) {
-                unloadExclusive->unloadDependents(mMgr);
-                unloadExclusive->setLoaded(false);
+                unloadExclusive->unloadDependents(mMgr, file);
+                unloadExclusive->setLoaded(false, file);
             }
         }
 
-        p->setLoaded(true);
-        p->loadDependencies(mMgr);
+        p->setLoaded(true, file);
+        p->loadDependencies(mMgr, file);
 
-        PluginSection &toolsSection = mMgr.section("Tools");
-        Plugin *toolPlugin = toolsSection.getPlugin(p->name() + "Tools");
-        if (autoLoadTools && toolPlugin) {
-            return toolsSection.loadPlugin(toolPlugin);
+        
+        if (autoLoadTools && strlen(p->info()->mToolsName) > 0) {
+            PluginSection &toolsSection = mMgr.section("Tools");
+            return toolsSection.loadPlugin(p->info()->mToolsName, file);
         } else {
             mMgr.onUpdate();
             return true;
         }
     }
 
-    bool PluginSection::unloadPlugin(Plugin *p)
+    bool PluginSection::unloadPlugin(Plugin *p, Ini::IniFile &file)
     {
         assert(!mAtleastOne);
 
-        p->unloadDependents(mMgr);
-        p->setLoaded(false);
+        p->unloadDependents(mMgr, file);
+        p->setLoaded(false, file);
 
         return false;
     }
 
-    std::map<std::string, Plugin>::const_iterator PluginSection::begin() const
+    mutable_set<Plugin, NameCompare>::const_iterator PluginSection::begin() const
     {
         return mPlugins.begin();
     }
 
-    std::map<std::string, Plugin>::const_iterator PluginSection::end() const
+    mutable_set<Plugin, NameCompare>::const_iterator PluginSection::end() const
     {
         return mPlugins.end();
     }
 
-    std::map<std::string, Plugin>::iterator PluginSection::begin()
+    mutable_set<Plugin, NameCompare>::iterator PluginSection::begin()
     {
         return mPlugins.begin();
     }
 
-    std::map<std::string, Plugin>::iterator PluginSection::end()
+    mutable_set<Plugin, NameCompare>::iterator PluginSection::end()
     {
         return mPlugins.end();
     }
 
-    void PluginSection::loadAllDependencies()
+    void PluginSection::loadAllDependencies(Ini::IniFile &file)
     {
-        for (Plugin& p : kvValues(mPlugins)) {
-            if (p.isLoaded())
-                p.loadDependencies(mMgr);
+        for (Plugin &p : kvValues(mPlugins)) {
+            if (p.isLoaded(file))
+                p.loadDependencies(mMgr, file);
         }
     }
 
@@ -200,11 +207,11 @@ namespace Plugins {
         return mMgr;
     }
 
-    const void *PluginSection::getUniqueSymbol(const std::string &name) const
+    const void *PluginSection::getUniqueSymbol(std::string_view name) const
     {
         const void *symbol = nullptr;
-        for (const std::pair<const std::string, Plugin> &p : mPlugins) {
-            const void *s = p.second.getSymbol(name);
+        for (const Plugin &p : mPlugins) {
+            const void *s = p.getSymbol(name);
             if (s) {
                 if (symbol)
                     std::terminate();

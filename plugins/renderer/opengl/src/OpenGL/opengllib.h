@@ -2,10 +2,8 @@
 
 /// @cond
 
+#include "Madgine/renderlib.h"
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/pipelineloaderlib.h"
-#include "Madgine/textureloaderlib.h"
-#include "Madgine/clientlib.h"
 
 #if defined(OpenGL_EXPORTS)
 #    define MADGINE_OPENGL_EXPORT DLL_EXPORT
@@ -17,7 +15,7 @@
 
 #if !ANDROID && !EMSCRIPTEN && !IOS
 #    include "../glad/glad.h"
-#    define OPENGL_ES 0
+#    define OPENGL_ES 30
 #elif IOS
 #    include <OpenGLES/ES3/gl.h>
 #    define OPENGL_ES 30
@@ -42,23 +40,29 @@ inline void glCheck()
     int e = glGetError();
     if (e) {
         {
-            Engine::Util::LogDummy out { Engine::Util::MessageType::ERROR_TYPE };
+            std::stringstream out;
             out << "GL-Error: ";
             switch (e) {
                 CONSTANT_CASE(GL_INVALID_ENUM, out)
+                CONSTANT_CASE(GL_INVALID_VALUE, out)
                 CONSTANT_CASE(GL_INVALID_FRAMEBUFFER_OPERATION, out)
                 CONSTANT_CASE(GL_INVALID_OPERATION, out)
             default:
                 out << "UNKNOWN";
             }
             out << "(" << e << ")";
+            LOG_FATAL(out.str());
         }
         glDump();
         std::terminate();
     }
 }
 
-#define GL_CHECK() glCheck()
+#if !EMSCRIPTEN
+#    define GL_CHECK() glCheck()
+#else
+#    define GL_CHECK()
+#endif
 #define GL_LOG(x) LOG_DEBUG("GL: " << x)
 
 #if OPENGL_ES
@@ -78,8 +82,9 @@ inline void glCheck()
 #    define NOMINMAX
 #    include <Windows.h>
 
-#    undef NO_ERROR
+#    undef ERROR
 typedef HGLRC ContextHandle;
+typedef HDC SurfaceHandle;
 
 #elif LINUX
 
@@ -87,19 +92,24 @@ struct __GLXcontextRec;
 typedef struct __GLXcontextRec *GLXContext;
 
 typedef GLXContext ContextHandle;
+typedef uintptr_t SurfaceHandle;
 
 #elif ANDROID || EMSCRIPTEN
 
 typedef void *EGLContext;
+typedef void *EGLSurface;
 typedef EGLContext ContextHandle;
+typedef EGLSurface SurfaceHandle;
 
 #elif OSX
 
 typedef void *ContextHandle;
+typedef Engine::Window::OSWindow *SurfaceHandle;
 
 #elif IOS
 
 typedef void *ContextHandle;
+typedef Engine::Window::OSWindow *SurfaceHandle;
 
 #else
 

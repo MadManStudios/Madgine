@@ -1,0 +1,27 @@
+#include "pointshadow.sl"
+
+#include "light.hlsl"
+
+
+cbuffer PerApplication : register(b0)
+{
+	PointShadowPerApplication app;
+};
+
+
+struct PixelShaderInput {
+    float4 position : SV_Position;
+    float4 worldPos : POSITION;
+};
+
+float main(PixelShaderInput IN) : SV_DEPTH
+{
+    // get distance between fragment and light source
+    float lightDistance = length(IN.worldPos.xyz / IN.worldPos.w);
+    
+    // map to [0;1] range by dividing by far_plane
+    lightDistance = lightDistance / 100.0;
+    
+    // write this as modified depth
+    return lightDistance;
+}  

@@ -4,16 +4,19 @@
 
 #include "serializemanager.h"
 #include "streams/formattedserializestream.h"
+#include "hierarchy/syncableunit.h"
 
 namespace Engine {
 namespace Serialize {
 
-    StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out)
+    StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type)
     {
-        return SerializeManager::convertPtr(in.stream(), id, out);
+        STREAM_PROPAGATE_ERROR(SerializeManager::convertPtr(in.stream(), id, out));
+        type = out->mType;
+        return {};
     }
 
-    StreamResult convertSerializablePtr(FormattedSerializeStream &in, uint32_t id, SerializableDataUnit *&out)
+    StreamResult convertSerializablePtr(FormattedSerializeStream &in, uint32_t id, SerializableDataPtr &out)
     {
         if (id > in.serializableList().size())
             return STREAM_INTEGRITY_ERROR(in) << "Unknown Serializable Unit-Id (" << id << ") used!";

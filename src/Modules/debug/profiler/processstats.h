@@ -20,6 +20,8 @@ namespace Debug {
             bool start();
             std::optional<Data> stop();
 
+            Data inject(std::chrono::nanoseconds duration, size_t recursionCount = 1);
+
             std::pair<ProcessStats *const, Data> *updateChild(ProcessStats *child, const Data &data);
 
             const std::map<ProcessStats *, Data> &children() const;

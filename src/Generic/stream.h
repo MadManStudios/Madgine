@@ -24,7 +24,8 @@ struct Stream {
         delete mStream.rdbuf(nullptr);
     }
 
-    Stream& operator=(Stream&& other) {
+    Stream &operator=(Stream &&other)
+    {
         mStream.rdbuf(other.mStream.rdbuf(mStream.rdbuf()));
         return *this;
     }
@@ -36,6 +37,36 @@ struct Stream {
             /* std::underlying_type_t<T> */ int64_t val;
             mStream >> val;
             t = static_cast<T>(val);
+        } else if constexpr (InstanceOf<T, std::chrono::duration>) {
+            std::string rep;
+            mStream >> rep;
+            if (rep.back() != 's') {
+                mStream.setstate(std::ios_base::failbit);
+            } else {
+                rep.pop_back();
+                long long ratio = 1000000000;
+                switch (rep.back()) {
+                case 'm':
+                    ratio = 1000000;
+                    break;
+                case 'n':
+                    ratio = 1;
+                    break;
+                case 'u':
+                    ratio = 1000;
+                    break;
+                }
+                if (ratio != 1000000000) {
+                    rep.pop_back();
+                }
+                long long count;
+                auto result = std::from_chars(rep.data(), rep.data() + rep.size(), count);
+                if (result.ptr != rep.data() + rep.size()) {
+                    mStream.setstate(std::ios_base::failbit);
+                } else {
+                    t = std::chrono::nanoseconds { count * ratio };
+                }
+            }
         } else {
             mStream >> t;
             if constexpr (std::same_as<T, std::string>)
@@ -53,7 +84,7 @@ struct Stream {
         return std::istreambuf_iterator<char>();
     }
 
-    size_t read(void *buffer, size_t size)
+    std::streamsize read(void *buffer, size_t size)
     {
         mStream.read(static_cast<char *>(buffer), size);
         return mStream.gcount();
@@ -91,14 +122,16 @@ struct Stream {
         mStream.setstate(state);
     }
 
-    void skipWs(bool overwrite = false)
+    bool skipWs(bool overwrite = false)
     {
         if (overwrite || isSkipWs()) {
-            mStream >> std::ws;
+            return static_cast<bool>(mStream >> std::ws);
         }
+        return true;
     }
 
-    bool isSkipWs() const {
+    bool isSkipWs() const
+    {
         return mStream.flags() & std::ios_base::skipws;
     }
 
@@ -139,7 +172,8 @@ struct Stream {
         mStream << &in.buffer();
     }
 
-    std::iostream& stream() {
+    std::iostream &stream()
+    {
         return mStream;
     }
 
@@ -148,11 +182,13 @@ struct Stream {
         return *mStream.rdbuf();
     }
 
-    std::locale getloc() const {
+    std::locale getloc() const
+    {
         return mStream.getloc();
     }
 
-    std::locale imbue(const std::locale &loc) {
+    std::locale imbue(const std::locale &loc)
+    {
         return mStream.imbue(loc);
     }
 

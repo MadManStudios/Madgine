@@ -33,13 +33,13 @@ namespace Threading {
             mIndex = INVALID;
         }
 
-        T *operator->() { return &data(); }
+        T *operator->() { return std::addressof(data()); }
 
         T &operator*() { return data(); }
 
         operator T &() { return data(); }
 
-        T *operator&() { return &data(); }
+        T *operator&() { return std::addressof(data()); }
 
         Global<T, Storage> &operator=(const Global<T, Storage> &other)
         {

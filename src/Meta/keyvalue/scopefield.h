@@ -1,12 +1,12 @@
 #pragma once
 
-#include "typedscopeptr.h"
+#include "scopeptr.h"
 
 namespace Engine {
 
 struct META_EXPORT ScopeField {
 
-    ScopeField(const TypedScopePtr &ptr, const std::pair<const char *, Accessor> *pointer);
+    ScopeField(const ScopePtr &ptr, const std::pair<const char *, Accessor> *pointer);
 
     void value(ValueType &retVal) const;
 
@@ -15,10 +15,10 @@ struct META_EXPORT ScopeField {
     const char *key() const;
 
     bool isEditable() const;
-    bool isGeneric() const;
+    const ExtendedValueTypeDesc &type() const;
 
 private:
-    TypedScopePtr mScope;
+    ScopePtr mScope;
     const std::pair<const char *, Accessor> *mPointer;
 };
 

@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Generic/callerhierarchy.h"
 #include "Generic/enum.h"
 
 namespace Engine {
 
 struct ValueType;
-struct ValueTypeRef;
 struct KeyValuePair;
 
 template <typename T, typename Base>
@@ -17,20 +17,23 @@ struct MetaTable;
 struct ScopeIterator;
 struct Accessor;
 struct ScopeField;
-struct TypedScopePtr;
+struct ScopePtr;
 struct OwnedScopePtr;
 struct TypeInfo;
 struct ApiFunction;
 struct BoundApiFunction;
+template <auto f>
+struct TypedBoundApiFunction;
 struct FunctionTable;
 struct FunctionArgument;
 struct KeyValueFunction;
 struct EnumHolder;
-using ArgumentList = std::vector<ValueType>;
+struct FlagsHolder;
+struct KeyValueSender;
+struct ArgumentList;
 
 struct ExtendedValueTypeDesc;
 struct ValueTypeDesc;
-	
 
 struct ObjectInstance;
 struct ObjectPtr;
@@ -42,20 +45,16 @@ struct VirtualRange;
 
 enum KeyValueValueFlags : uint8_t;
 
-template <bool reference_to_ptr>
 struct Functor_to_KeyValuePair;
-template <bool reference_to_ptr>
-struct Functor_to_ValueTypeRef;
+struct Functor_to_ValueType;
 
 using KeyValueVirtualAssociativeIterator = VirtualIterator<KeyValuePair>;
-using KeyValueVirtualAssociativeRange = VirtualRange<KeyValuePair, Functor_to_KeyValuePair<true>>;
-using KeyValueVirtualSequenceIterator = VirtualIterator<ValueTypeRef>;
-using KeyValueVirtualSequenceRange = VirtualRange<ValueTypeRef, Functor_to_ValueTypeRef<true>>;
-    
+using KeyValueVirtualAssociativeRange = VirtualRange<KeyValuePair, Functor_to_KeyValuePair>;
+using KeyValueVirtualSequenceIterator = VirtualIterator<ValueType>;
+using KeyValueVirtualSequenceRange = VirtualRange<ValueType, Functor_to_ValueType>;
 
 namespace Serialize {
     struct SerializeStream;
-    struct SerializableDataUnit;
     struct SerializableUnitBase;
     struct SyncableUnitBase;
     struct TopLevelUnitBase;
@@ -68,28 +67,36 @@ namespace Serialize {
     struct SerializeStreamData;
     struct SyncStreamData;
     struct FormattedSerializeStream;
-    struct FormattedBufferedStream;
+    struct FormattedMessageStream;
+
+    struct ReadMessage;
+    struct WriteMessage;
+
+    template <typename T>
+    struct Syncable;
 
     struct StreamResult;
+    struct StreamVisitor;
 
     struct SerializableUnitPtr;
     struct SerializableUnitConstPtr;
     struct SerializableDataPtr;
     struct SerializableDataConstPtr;
 
-	struct Serializer;
+    struct Serializer;
     struct SyncFunction;
     struct SerializeTableCallbacks;
 
     struct Formatter;
+    using Format = std::unique_ptr<Formatter>(*)();
 
     struct CompareStreamId;
 
     struct PendingRequest;
 
-    struct CreatorCategory;
+    struct GenericMessageReceiver;
 
-    typedef int StateTransmissionFlags;
+    struct CreatorCategory;
 
     typedef uint32_t ParticipantId;
     typedef uint32_t MessageId;
@@ -99,9 +106,7 @@ namespace Serialize {
         SYNCABLE = 1,
         SERIALIZABLE = 2
     };
-
-
-
+    constexpr ParticipantId sLocalMasterParticipantId = 1;
 
     struct message_streambuf;
 
@@ -109,10 +114,9 @@ namespace Serialize {
 
     struct SerializeTable;
 
-    
     using SyncableUnitMap = std::map<UnitId, SyncableUnitBase *>;
-    using SerializableUnitMap = std::map<const SerializableDataUnit *, uint32_t>;
-    using SerializableUnitList = std::vector<SerializableDataUnit*>;
+    using SerializableUnitMap = std::map<SerializableDataConstPtr, uint32_t>;
+    using SerializableUnitList = std::vector<SerializableDataPtr>;
 
     struct SerializableMapHolder;
     struct SerializableListHolder;
@@ -121,9 +125,16 @@ namespace Serialize {
         STATE,
         ACTION,
         REQUEST,
+        ERROR,
         FUNCTION_ACTION,
-        FUNCTION_REQUEST
-    )
+        FUNCTION_REQUEST,
+        FUNCTION_ERROR)
+
+    ENUM(MessageResult,
+        OK,
+        REJECTED,
+        DATA_CORRUPTION,
+        SERVER_ERROR)
 
     enum FunctionType {
         QUERY,
@@ -131,7 +142,8 @@ namespace Serialize {
     };
 
     enum Command {
-        INITIAL_STATE_DONE
+        SET_ID,
+        SEND_NAME_MAPPINGS
     };
 
     template <typename, typename... Configs>
@@ -141,6 +153,19 @@ namespace Serialize {
         template <typename T>
         struct SyncFunctionTable;
     }
+
+    struct apply_map_t;
+    struct set_synced_t;
+
+    template <typename T, typename... Configs>
+    void setActive(T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {});
+    template <typename T, typename... Configs>
+    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
+
+    template <typename T, typename... Configs>
+    void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
+    template <typename T, typename... Configs>
+    StreamResult read(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
 }
 
 struct Vector2;
@@ -153,6 +178,10 @@ struct Vector2i;
 struct Vector3i;
 struct Vector4i;
 
+struct Color3;
+struct Color4;
+
+struct Rect2;
 struct Rect2i;
 
 struct Matrix3;
@@ -160,8 +189,13 @@ struct Matrix4;
 
 struct Quaternion;
 
+struct Line3;
+struct Line2;
+
+struct Ray2;
+struct Ray3;
+
 struct Frustum;
-struct Ray;
 struct Sphere;
 struct Plane;
 struct AABB;

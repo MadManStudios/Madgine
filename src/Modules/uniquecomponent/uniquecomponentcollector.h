@@ -9,11 +9,11 @@
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename Registry, typename __Base, typename... _Ty>
+    template <typename _Registry>
     struct Collector {
+        using Registry = _Registry;
+
         typedef typename Registry::Base Base;
-        typedef std::tuple<_Ty...> Ty;
-        typedef typename Registry::F F;
 
         Collector()
         {
@@ -30,33 +30,33 @@ namespace UniqueComponent {
 
         void operator=(const Collector &) = delete;
 
-        static Collector &sInstance();
+        static Collector &PLUGIN_LOCAL(sInstance)();
 
         size_t size() const
         {
-            return sInstance().mInfo.mComponents.size();
+            return PLUGIN_LOCAL(sInstance)().mInfo.mComponents.size();
         }
 
     private:
         typename Registry::CollectorInfo mInfo;
 
     public:
-        template <typename T>
+        template <typename T, typename ActualType>
         struct ComponentRegistrator : IndexHolder {
             ComponentRegistrator()
-                : IndexHolder { sInstance().mInfo.template registerComponent<T>(), sInstance().mInfo.mBaseIndex }
+                : IndexHolder { PLUGIN_LOCAL(sInstance)().mInfo.template registerComponent<T, ActualType>(), PLUGIN_LOCAL(sInstance)().mInfo.mBaseIndex }
             {
             }
 
             ~ComponentRegistrator()
             {
-                sInstance().mInfo.unregisterComponent(mIndex);
+                PLUGIN_LOCAL(sInstance)().mInfo.unregisterComponent(mIndex);
             }
         };
     };
 
-    template <typename Registry, typename __Base, typename... _Ty>
-    Collector<Registry, __Base, _Ty...> &Collector<Registry, __Base, _Ty...>::sInstance()
+    template <typename Registry>
+    Collector<Registry> &Collector<Registry>::PLUGIN_LOCAL(sInstance)()
     {
         static Collector dummy;
         return dummy;
@@ -70,11 +70,9 @@ namespace UniqueComponent {
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename Registry, typename __Base, typename... _Ty>
+    template <typename Registry>
     struct Collector {
         typedef typename Registry::Base Base;
-        typedef std::tuple<_Ty...> Ty;
-        typedef typename Registry::F F;
     };
 
 }

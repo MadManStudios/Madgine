@@ -147,8 +147,11 @@ SocketAPIResult Socket::open(int port)
     return SocketAPIResult::SUCCESS;
 }
 
-std::pair<Socket, SocketAPIResult> Socket::accept(TimeOut timeout) const
+SocketAPIResult Socket::accept(const Socket &from, TimeOut timeout)
 {
+    if (*this)
+        return SocketAPIResult::ALREADY_IN_USE;
+
     struct timeval tv;
     fd_set readfds;
 
@@ -165,26 +168,25 @@ std::pair<Socket, SocketAPIResult> Socket::accept(TimeOut timeout) const
     }
 
     FD_ZERO(&readfds);
-    FD_SET(mSocket, &readfds);
+    FD_SET(from.mSocket, &readfds);
 
-    int retval = select(mSocket + 1, &readfds, NULL, NULL, &tv);
+    int retval = select(from.mSocket + 1, &readfds, NULL, NULL, &tv);
     if (retval > 0) {
 #    if OSX || IOS
-        int socket = ::accept(mSocket, NULL, NULL);
+        int socket = ::accept(from.mSocket, NULL, NULL);
 #    else
-        int socket = accept4(mSocket, NULL, NULL, O_NONBLOCK);
+        int socket = accept4(from.mSocket, NULL, NULL, O_NONBLOCK);
 #    endif
         if (socket >= 0) {
-            Socket s;
-            s.mSocket = socket;
-            return { std::move(s), SocketAPIResult::SUCCESS };
+            mSocket = socket;
+            return SocketAPIResult::SUCCESS;
         } else
-            return { Socket {}, SocketAPI::getError("accept") };
+            return SocketAPI::getError("accept");
     } else {
         if (retval == 0)
-            return { Socket {}, SocketAPIResult::TIMEOUT };
+            return SocketAPIResult::TIMEOUT;
         else
-            return { Socket {}, SocketAPI::getError("select") };
+            return SocketAPI::getError("select");
     }
 }
 

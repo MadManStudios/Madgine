@@ -8,17 +8,6 @@
 
 #include "Interfaces/threading/threadapi.h"
 
-#if EMSCRIPTEN
-
-#    include <emscripten.h>
-
-void emscriptenLoop(void *scheduler)
-{
-    static_cast<Engine::Threading::Scheduler *>(scheduler)->singleLoop();
-}
-
-#endif
-
 namespace Engine {
 namespace Threading {
 
@@ -29,10 +18,7 @@ namespace Threading {
 
     int Scheduler::go()
     {
-#if EMSCRIPTEN
-        emscripten_set_main_loop_arg(&emscriptenLoop, this, 0, false);
-#else
-
+#if !EMSCRIPTEN
         Threading::TaskQueue *main_queue = nullptr;
 
         for (Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
@@ -51,18 +37,12 @@ namespace Threading {
                 mWorkgroup.createThread(&Scheduler::schedulerLoop, this, queue);
         }
 
-        setCurrentThreadName(mWorkgroup.name() + "_" + main_queue->name() + " (Main)");
+        setupThreadInfo(main_queue, " (Main)");
 
-        do {
-            std::chrono::steady_clock::time_point nextAvailableTaskTime = main_queue->update();
-            main_queue->waitForTasks(nextAvailableTaskTime);
-            mWorkgroup.checkThreadStates();
-            if (!main_queue->running() && main_queue->idle()) {
-                for (Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
-                    queue->stop();
-                }
-            }
-        } while (!main_queue->idle() || !mWorkgroup.singleThreaded());
+        while (mWorkgroup.state() != WorkGroupState::DONE || !mWorkgroup.singleThreaded()){
+            main_queue->update();
+            mWorkgroup.update();
+        }
 
         for (Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
             assert(queue->idle());
@@ -75,19 +55,20 @@ namespace Threading {
 #if !EMSCRIPTEN
     void Scheduler::schedulerLoop(Threading::TaskQueue *queue)
     {
-        setCurrentThreadName(mWorkgroup.name() + "_" + queue->name());
-        while (queue->running() || !queue->idle()) {
-            std::chrono::steady_clock::time_point nextAvailableTaskTime = queue->update();
-            queue->waitForTasks(nextAvailableTaskTime);
-        }        
+        setupThreadInfo(queue);
+        while (mWorkgroup.state() != WorkGroupState::DONE) {
+            queue->update();
+        }
+        assert(queue->idle());
     }
 #endif
 
-    void Scheduler::singleLoop()
+    void Scheduler::setupThreadInfo(Threading::TaskQueue *queue, std::string tags)
     {
-        for (Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
-            queue->update(1);
-        }
+#if MODULES_ENABLE_TASK_TRACKING
+        queue->mTracker.mThread = std::this_thread::get_id();
+#endif
+        setCurrentThreadName(mWorkgroup.name() + "_" + queue->name() + tags);
     }
 
 }

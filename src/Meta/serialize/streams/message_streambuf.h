@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pendingrequest.h"
+#include "streamresult.h"
 
 namespace Engine {
 namespace Serialize {
@@ -12,17 +13,20 @@ namespace Serialize {
 
         message_streambuf &operator=(const message_streambuf &) = delete;
 
-        void beginMessageWrite(ParticipantId requester = 0, MessageId requestId = 0, GenericMessagePromise promise = {});
-        void endMessageWrite();
+        void beginMessageWrite();
+        void endMessageWrite(ParticipantId requester = 0, MessageId requestId = 0, GenericMessageReceiver receiver = {});
 
         MessageId beginMessageRead();
         std::streamsize endMessageRead();
 
         PendingRequest getRequest(MessageId id);
 
+        virtual StreamResult sendMessages() = 0;
+        virtual StreamResult receiveMessages() = 0;
+
     protected:
-        virtual MessageId beginMessageWriteImpl() = 0;
-        virtual void endMessageWriteImpl() = 0;
+        virtual void beginMessageWriteImpl() = 0;
+        virtual MessageId endMessageWriteImpl() = 0;
 
         virtual MessageId beginMessageReadImpl() = 0;
         virtual std::streamsize endMessageReadImpl();

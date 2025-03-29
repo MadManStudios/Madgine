@@ -3,6 +3,7 @@
 #if WINDOWS
 
 #    include "rawinput_win.h"
+#include "../helpers/win_ptrs.h"
 
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
@@ -63,7 +64,7 @@ namespace Input {
         result = GetRawInputDeviceInfoA(device, RIDI_DEVICENAME, device_name, &name_size);
         assert(result > 0);
 
-        HANDLE hFile = CreateFileA(device_name, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
+        UniqueHandle hFile = CreateFileA(device_name, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
         assert(hFile != INVALID_HANDLE_VALUE);
 
         std::string manufacturer, product;
@@ -87,8 +88,6 @@ namespace Input {
         assert(result);
 
         //CHECK(SDL_HidD_GetPreparsedData(hFile, &device->preparsed_data));
-        CloseHandle(hFile);
-        hFile = INVALID_HANDLE_VALUE;
 
         sRawInputDevices.try_emplace(device, device, std::move(manufacturer), std::move(product), preparsedData);
     }

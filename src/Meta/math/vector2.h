@@ -28,6 +28,7 @@ THE SOFTWARE.
 #pragma once
 
 #include "vector2i.h"
+#include "common.h"
 
 namespace Engine {
 /** Standard 2-dimensional vector.
@@ -123,7 +124,7 @@ public:
 		@param
 		rkVector The other vector
 		*/
-    Vector2 &operator=(const Vector2 &rkVector)
+    constexpr Vector2 &operator=(const Vector2 &rkVector)
     {
         x = rkVector.x;
         y = rkVector.y;
@@ -150,7 +151,7 @@ public:
     }
 
     // arithmetic operations
-    Vector2 operator+(const Vector2 &rkVector) const
+    constexpr Vector2 operator+(const Vector2 &rkVector) const
     {
         return Vector2(
             x + rkVector.x,
@@ -171,14 +172,14 @@ public:
         };
     }
 
-    Vector2 operator*(const float fScalar) const
+    constexpr Vector2 operator*(const float fScalar) const
     {
         return Vector2(
             x * fScalar,
             y * fScalar);
     }
 
-    Vector2 operator*(const Vector2 &rhs) const
+    constexpr Vector2 operator*(const Vector2 &rhs) const
     {
         return Vector2(
             x * rhs.x,
@@ -228,14 +229,14 @@ public:
             fScalar / rkVector.y);
     }
 
-    friend Vector2 operator+(const Vector2 &lhs, const float rhs)
+    friend constexpr Vector2 operator+(const Vector2 &lhs, const float rhs)
     {
         return Vector2(
             lhs.x + rhs,
             lhs.y + rhs);
     }
 
-    friend Vector2 operator+(const float lhs, const Vector2 &rhs)
+    friend constexpr Vector2 operator+(const float lhs, const Vector2 &rhs)
     {
         return Vector2(
             lhs + rhs.x,
@@ -356,7 +357,7 @@ public:
     }
 
     /// @copydoc Vector3::normalise
-    float normalise()
+    constexpr float normalize()
     {
         float fLength = sqrtf(x * x + y * y);
 
@@ -482,10 +483,10 @@ public:
 
     /** As normalise, except that this vector is unaffected and the
 		normalised vector is returned as a copy. */
-    Vector2 normalisedCopy() const
+    Vector2 normalizedCopy() const
     {
         Vector2 ret = *this;
-        ret.normalise();
+        ret.normalize();
         return ret;
     }
 
@@ -555,17 +556,17 @@ public:
     {
         char c;
         in >> c;
-        if (c != '[')
-            std::terminate();
+        if (c != '[') {
+            in.setstate(std::ios_base::failbit);
+            return in;
+        }
         for (int i = 0; i < 2; ++i) {
             in >> v[i];
             in >> c;
-            if (i != 1) {
-                if (c != ',')
-                    std::terminate();
-            } else {
-                if (c != ']')
-                    std::terminate();
+            char expectedChar = (i == 1) ? ']' : ',';
+            if (c != expectedChar) {
+                in.setstate(std::ios_base::failbit);
+                return in;
             }
         }
         return in;
@@ -574,6 +575,28 @@ public:
     constexpr Vector2i floor() const
     {
         return { static_cast<int>(x), static_cast<int>(y) };
+    }
+};
+
+struct NormalizedVector2 : Vector2 {
+
+    constexpr NormalizedVector2(float x, float y)
+        : Vector2(x, y)
+    {
+        normalize();
+    }
+
+    constexpr NormalizedVector2(const Vector2 &v)
+        : Vector2(v)
+    {
+        normalize();
+    }
+
+    constexpr NormalizedVector2 &operator=(const Vector2 &v)
+    {
+        Vector2::operator=(v);
+        normalize();
+        return *this;
     }
 };
 

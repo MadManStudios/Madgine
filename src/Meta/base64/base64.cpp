@@ -75,7 +75,7 @@ namespace Base64 {
                 data[outIndex++] = buffer >> bitCount;
             }
         }
-        if (bitCount > 0)
+        if (outIndex < resultSize)
             data[outIndex++] = buffer << (8 - bitCount);
 
         assert(outIndex == resultSize);

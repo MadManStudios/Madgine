@@ -18,6 +18,8 @@ namespace Engine {
 			const char *mBinaryDir;
 			const char *mBinaryFileName;
 
+			const char *mToolsName;
+
 			const char *mPrecompiledHeaderPath;
 
 			const char **mPluginDependencies;

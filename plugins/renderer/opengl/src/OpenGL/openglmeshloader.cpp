@@ -5,31 +5,25 @@
 #include "openglmeshdata.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine/meshloader/meshdata.h"
 
 #include "openglrendercontext.h"
 
-
-VIRTUALUNIQUECOMPONENT(Engine::Render::OpenGLMeshLoader);
-
-METATABLE_BEGIN_BASE(Engine::Render::OpenGLMeshLoader, Engine::Render::GPUMeshLoader)
-MEMBER(mResources)
-METATABLE_END(Engine::Render::OpenGLMeshLoader)
-
-METATABLE_BEGIN_BASE(Engine::Render::OpenGLMeshLoader::Resource, Engine::Render::GPUMeshLoader::Resource)
-METATABLE_END(Engine::Render::OpenGLMeshLoader::Resource)
+VIRTUALRESOURCELOADERIMPL(Engine::Render::OpenGLMeshLoader, Engine::Render::GPUMeshLoader);
 
 namespace Engine {
 namespace Render {
 
     OpenGLMeshLoader::OpenGLMeshLoader()
     {
+        getOrCreateManual("quad", {}, {}, this);
         getOrCreateManual("Cube", {}, {}, this);
         getOrCreateManual("Plane", {}, {}, this);
     }
 
-    bool OpenGLMeshLoader::generate(GPUMeshData &_data, const MeshData &mesh)
+    Threading::Task<bool> OpenGLMeshLoader::generate(GPUMeshData &_data, const MeshData &mesh)
     {
         OpenGLMeshData &data = static_cast<OpenGLMeshData &>(_data);
 
@@ -38,30 +32,48 @@ namespace Render {
         if (!mesh.mIndices.empty())
             data.mIndices.setData(mesh.mIndices);
 
-        return GPUMeshLoader::generate(data, mesh);
-    }
+        if (!co_await GPUMeshLoader::generate(data, mesh))
+            co_return false;
+                
+        for (const MeshData::Material &mat : mesh.mMaterials) {
+            GPUMeshData::Material &gpuMat = data.mMaterials.emplace_back();
+            gpuMat.mName = mat.mName;
+            gpuMat.mDiffuseColor = mat.mDiffuseColor;
 
-    void OpenGLMeshLoader::update(GPUMeshData &_data, const MeshData &mesh)
-    {
-        OpenGLMeshData &data = static_cast<OpenGLMeshData &>(_data);
+            std::vector<Threading::TaskFuture<bool>> futures;
 
-        data.mVertices.resize(mesh.mVertices.mSize);
-        std::memcpy(data.mVertices.mapData().mData, mesh.mVertices.mData, mesh.mVertices.mSize);
+            TextureLoader::Handle &diffuseTexture = data.mTextureCache.emplace_back();
+            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));
+            TextureLoader::Handle &emissiveTexture = data.mTextureCache.emplace_back();
+            futures.push_back(emissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
 
-        if (!mesh.mIndices.empty()) {
-            data.mIndices.resize(mesh.mIndices.size() * sizeof(uint32_t));
-            std::memcpy(data.mIndices.mapData().mData, mesh.mIndices.data(), mesh.mIndices.size() * sizeof(uint32_t));
+            for (Threading::TaskFuture<bool> &fut : futures) {
+                bool result = co_await fut;
+                if (!result) {
+                    LOG_ERROR("Missing Materials!");
+                    co_return false;
+                }
+            }
+
+            gpuMat.mResourceBlock = OpenGLRenderContext::getSingleton().createResourceBlock({ &*diffuseTexture, &*emissiveTexture });
         }
 
-        GPUMeshLoader::update(data, mesh);
+        co_return true;
     }
 
     void OpenGLMeshLoader::reset(GPUMeshData &data)
     {
-        static_cast<OpenGLMeshData &>(data).reset();
+        static_cast<OpenGLMeshData &>(data).mVertices.reset();
+        static_cast<OpenGLMeshData &>(data).mIndices.reset();
+        static_cast<OpenGLMeshData &>(data).mTextureCache.clear();
+        for (GPUMeshData::Material &gpuMat : data.mMaterials) {
+            if (gpuMat.mResourceBlock)
+                OpenGLRenderContext::getSingleton().destroyResourceBlock(gpuMat.mResourceBlock);
+        }
+        GPUMeshLoader::reset(data);
     }
 
-        Threading::TaskQueue *OpenGLMeshLoader::loadingTaskQueue() const
+    Threading::TaskQueue *OpenGLMeshLoader::loadingTaskQueue() const
     {
         return OpenGLRenderContext::renderQueue();
     }

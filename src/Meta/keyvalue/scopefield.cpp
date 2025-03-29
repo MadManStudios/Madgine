@@ -6,7 +6,7 @@
 
 namespace Engine {
 
-ScopeField::ScopeField(const TypedScopePtr &ptr, const std::pair<const char *, Accessor> *pointer)
+ScopeField::ScopeField(const ScopePtr &ptr, const std::pair<const char *, Accessor> *pointer)
     : mScope(ptr)
     , mPointer(pointer)
 {
@@ -34,9 +34,9 @@ bool ScopeField::isEditable() const
     return mPointer->second.mSetter;
 }
 
-bool ScopeField::isGeneric() const
+const ExtendedValueTypeDesc &ScopeField::type() const
 {
-    return mPointer->second.mIsGeneric;
+    return mPointer->second.mType;
 }
 
 }

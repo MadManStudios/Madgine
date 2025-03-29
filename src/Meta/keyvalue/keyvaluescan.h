@@ -5,9 +5,9 @@
 namespace Engine {
 
 template <typename F>
-void kvScan(F &&f, const TypedScopePtr &scope, std::string_view name = {}, TypedScopePtr parent = {})
+void kvScan(F &&f, const ScopePtr &scope, std::string_view name = {}, ScopePtr parent = {})
 {
-    if constexpr (std::is_invocable_v<F, TypedScopePtr, std::string_view, TypedScopePtr>) {
+    if constexpr (std::is_invocable_v<F, ScopePtr, std::string_view, ScopePtr>) {
         f(scope, name, parent);
     }
 
@@ -19,9 +19,9 @@ void kvScan(F &&f, const TypedScopePtr &scope, std::string_view name = {}, Typed
 } 
     
 template <typename F, typename T>
-void kvScan(F &&f, const T &t, std::string_view name = {}, TypedScopePtr parent = {})
+void kvScan(F &&f, const T &t, std::string_view name = {}, ScopePtr parent = {})
 {
-    if constexpr (std::is_invocable_v<F, T, std::string_view, TypedScopePtr>) {
+    if constexpr (std::is_invocable_v<F, T, std::string_view, ScopePtr>) {
         f(t, name, parent);
     }
 }

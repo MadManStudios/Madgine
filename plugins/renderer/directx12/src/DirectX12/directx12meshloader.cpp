@@ -5,59 +5,84 @@
 #include "directx12meshdata.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/imageloaderlib.h"
 #include "Madgine/imageloader/imagedata.h"
 #include "Madgine/imageloader/imageloader.h"
+#include "Madgine/imageloaderlib.h"
 #include "Madgine/meshloader/meshdata.h"
 
 #include "directx12rendercontext.h"
 
-VIRTUALUNIQUECOMPONENT(Engine::Render::DirectX12MeshLoader);
-
-METATABLE_BEGIN_BASE(Engine::Render::DirectX12MeshLoader, Engine::Render::GPUMeshLoader)
-METATABLE_END(Engine::Render::DirectX12MeshLoader)
-
-METATABLE_BEGIN_BASE(Engine::Render::DirectX12MeshLoader::Resource, Engine::Render::GPUMeshLoader::Resource)
-METATABLE_END(Engine::Render::DirectX12MeshLoader::Resource)
+VIRTUALRESOURCELOADERIMPL(Engine::Render::DirectX12MeshLoader, Engine::Render::GPUMeshLoader);
 
 namespace Engine {
 namespace Render {
 
     DirectX12MeshLoader::DirectX12MeshLoader()
     {
+        getOrCreateManual("quad", {}, {}, this);
         getOrCreateManual("Cube", {}, {}, this);
         getOrCreateManual("Plane", {}, {}, this);
     }
 
-    bool DirectX12MeshLoader::generate(GPUMeshData &_data, const MeshData &mesh)
+    Threading::Task<bool> DirectX12MeshLoader::generate(GPUMeshData &_data, const MeshData &mesh)
     {
         DirectX12MeshData &data = static_cast<DirectX12MeshData &>(_data);
 
-        data.mVertices.setData(mesh.mVertices);
+        if (mesh.mVertices.mData)
+            data.mVertices.setData(mesh.mVertices, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
 
         if (!mesh.mIndices.empty())
-            data.mIndices.setData(mesh.mIndices);
+            data.mIndices.setData(mesh.mIndices, D3D12_RESOURCE_STATE_INDEX_BUFFER);
 
-        return GPUMeshLoader::generate(_data, mesh);
-    }
+        if (!co_await GPUMeshLoader::generate(_data, mesh))
+            co_return false;
 
-    void DirectX12MeshLoader::update(GPUMeshData &_data, const MeshData &mesh)
-    {
-        DirectX12MeshData &data = static_cast<DirectX12MeshData &>(_data);
+        
+        for (const MeshData::Material &mat : mesh.mMaterials) {
+            GPUMeshData::Material &gpuMat = data.mMaterials.emplace_back();
+            gpuMat.mName = mat.mName;
+            gpuMat.mDiffuseColor = mat.mDiffuseColor;
 
-        std::memcpy(data.mVertices.mapData(mesh.mVertices.mSize).mData, mesh.mVertices.mData, mesh.mVertices.mSize);
+            std::vector<Threading::TaskFuture<bool>> futures;
 
-        if (!mesh.mIndices.empty()) {
-            std::memcpy(data.mIndices.mapData(mesh.mIndices.size() * sizeof(unsigned short)).mData, mesh.mIndices.data(), mesh.mIndices.size() * sizeof(unsigned short));
+            data.mTextureCache.emplace_back();
+            data.mTextureCache.emplace_back();
+            TextureLoader::Handle &diffuseTexture = data.mTextureCache[data.mTextureCache.size() - 2];
+            TextureLoader::Handle &emissiveTexture = data.mTextureCache[data.mTextureCache.size() - 1];
+            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));            
+            futures.push_back(emissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
+
+            for (Threading::TaskFuture<bool> &fut : futures) {
+                bool result = co_await fut;
+                if (!result) {
+                    LOG_ERROR("Missing Materials!");
+                    co_return false;
+                }
+            }
+
+            gpuMat.mResourceBlock = DirectX12RenderContext::getSingleton().createResourceBlock({ &*diffuseTexture, &*emissiveTexture });
         }
 
-        GPUMeshLoader::update(data, mesh);
+        co_return true;
     }
 
     void DirectX12MeshLoader::reset(GPUMeshData &data)
     {
-        static_cast<DirectX12MeshData &>(data).reset();
+        static_cast<DirectX12MeshData&>(data).mVertices.reset();
+        static_cast<DirectX12MeshData &>(data).mIndices.reset();
+        static_cast<DirectX12MeshData &>(data).mTextureCache.clear();
+        for (GPUMeshData::Material &gpuMat : data.mMaterials) {
+            if (gpuMat.mResourceBlock)
+                DirectX12RenderContext::getSingleton().destroyResourceBlock(gpuMat.mResourceBlock);
+        }
+        GPUMeshLoader::reset(data);
+    }
+
+    Threading::TaskQueue *DirectX12MeshLoader::loadingTaskQueue() const
+    {
+        return DirectX12RenderContext::renderQueue();
     }
 
 }

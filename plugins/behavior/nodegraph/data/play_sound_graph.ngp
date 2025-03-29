@@ -1,0 +1,44 @@
+<Graph serId=1>
+    <mNodes>
+        <Node type="Native/play_sound" serId=2>
+            <mParameters>
+                <Item serId=3>
+                    <Name>click</Name>
+                </Item>
+            </mParameters>
+            <mFlowOutPins>
+                <Item>
+                    <Item>
+                        <Element>
+                            <Element>-1</Element>
+                            <Element>0</Element>
+                            <Element>0</Element>
+                        </Element>
+                    </Item>
+                </Item>
+            </mFlowOutPins>
+            <mDataInPins>
+                <Item>
+                </Item>
+            </mDataInPins>
+            <mDataOutPins>
+                <Item>
+                </Item>
+            </mDataOutPins>
+        </Node>
+    </mNodes>
+    <mFlowOutPins>
+        <Item>
+            <Element>
+                <Element>1</Element>
+                <Element>0</Element>
+                <Element>0</Element>
+            </Element>
+        </Item>
+    </mFlowOutPins>
+    <mDataInPins>
+    </mDataInPins>
+    <mDataOutPins>
+    </mDataOutPins>
+    <mLayoutData>{"nodes":{"node:2147483645":{"location":{"x":442,"y":0}},"node:2147483646":{"location":{"x":0,"y":0}},"node:60000":{"location":{"x":165,"y":172}}},"selection":["node:60000"],"view":{"scroll":{"x":0,"y":0},"visible_rect":{"max":{"x":466,"y":591},"min":{"x":0,"y":0}},"zoom":1}}</mLayoutData>
+</Graph>

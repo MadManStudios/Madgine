@@ -6,9 +6,10 @@
 #    endif
 #endif
 
-#if !__cpp_lib_ranges
-#    define __cpp_lib_ranges 201911L
+#ifdef COMPATIBILITY_CONFIG_HEADER
+#include COMPATIBILITY_CONFIG_HEADER
 #endif
+
 
 #include "concepts.h"
 #include "spaceship.h"
@@ -16,6 +17,8 @@
 #include "ranges.h"
 #include "atomic.h"
 #include "memory_resource.h"
+#include "bit.h"
+#include "stop_token.h"
 
 #if __cpp_lib_constexpr_algorithms >= 201806L
 #    define CONSTEXPR_ALGORITHM constexpr

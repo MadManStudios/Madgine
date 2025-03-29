@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef NDEBUG
+
 namespace Engine {
 namespace Debug {
     struct TraceBack {
@@ -50,3 +52,5 @@ struct hash<Engine::Debug::TraceBack> {
     }
 };
 }
+
+#endif

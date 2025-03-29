@@ -70,13 +70,19 @@ namespace Window {
                 case WM_SYSKEYDOWN:
                     mKeyDown[keycode] = std::numeric_limits<BYTE>::max();
                     WORD buffer;
-                    ToAscii(keycode, scancode, mKeyDown, &buffer, 0);
-                    injectKeyPress(Input::KeyEventArgs { keycode, static_cast<char>(buffer) });
+                    switch (keycode) {
+                    case Input::Key::Key::Return:
+                        buffer = '\n';
+                        break;
+                    default:
+                        ToAscii(keycode, scancode, mKeyDown, &buffer, 0);
+                    }
+                    injectKeyPress(Input::KeyEventArgs { keycode, static_cast<char>(buffer), controlKeyState() });
                     break;
                 case WM_KEYUP:
                 case WM_SYSKEYUP:
                     mKeyDown[keycode] = 0;
-                    injectKeyRelease(Input::KeyEventArgs { keycode, 0 });
+                    injectKeyRelease(Input::KeyEventArgs { keycode, 0, controlKeyState() });
                     break;
                 default:
                     LOG("Unknown KeyEvent " << msg);
@@ -84,7 +90,9 @@ namespace Window {
             } else {
                 switch (msg) {
                 case WM_SIZE:
-                    onResize({ LOWORD(lParam), HIWORD(lParam) });
+                    mMinimized = wParam == SIZE_MINIMIZED;
+                    if (lParam > 0)
+                        onResize({ LOWORD(lParam), HIWORD(lParam) });
                     break;
                 case WM_CLOSE:
                     onClose();
@@ -123,7 +131,6 @@ namespace Window {
                         ignore = true;
                     break;
                 case WM_SETCURSOR:
-                    ignore = true;
                     break;
                     //default:
                     //LOG_WARNING("Unhandled Event type: " << msg);
@@ -133,8 +140,18 @@ namespace Window {
             return true;
         }
 
+        Input::ControlKeyState controlKeyState() const
+        {
+            return {
+                (bool)mKeyDown[Input::Key::Shift],
+                (bool)mKeyDown[Input::Key::Control],
+                (bool)mKeyDown[Input::Key::Alt]
+            };
+        }
+
         BYTE mKeyDown[512];
         InterfacesVector mLastKnownMousePos;
+        bool mMinimized = false;
     };
 
     void OSWindow::update()
@@ -228,10 +245,7 @@ namespace Window {
 
     bool OSWindow::isMinimized()
     {
-        WINDOWPLACEMENT placement;
-        auto result = GetWindowPlacement((HWND)mHandle, &placement);
-        assert(result);
-        return placement.showCmd == SW_MINIMIZE;
+        return static_cast<WindowsWindow *>(this)->mMinimized;
     }
 
     bool OSWindow::isMaximized()
@@ -240,11 +254,6 @@ namespace Window {
         auto result = GetWindowPlacement((HWND)mHandle, &placement);
         assert(result);
         return placement.showCmd == SW_MAXIMIZE;
-    }
-
-    bool OSWindow::isFullscreen()
-    {
-        return false;
     }
 
     void OSWindow::focus()
@@ -314,18 +323,53 @@ namespace Window {
         }(icon)));
     }
 
+    std::string OSWindow::getClipboardString()
+    {
+        std::string result;
+        if (OpenClipboard(NULL)) {
+            HANDLE handle = GetClipboardData(CF_TEXT);
+            if (handle != NULL) {
+                result = (const char *)GlobalLock(handle);
+                GlobalUnlock(handle);
+            }
+            CloseClipboard();
+        }
+        return result;
+    }
+
+    bool OSWindow::setClipboardString(std::string_view s)
+    {
+        if (!OpenClipboard(NULL))
+            return false;
+
+        HGLOBAL handle = GlobalAlloc(GMEM_MOVEABLE, s.size() + 1);
+        if (handle == NULL) {
+            CloseClipboard();
+            return false;
+        }
+        char *buffer = (char *)GlobalLock(handle);
+        std::strncpy(buffer, s.data(), s.size());
+        GlobalUnlock(handle);
+        EmptyClipboard();
+        if (SetClipboardData(CF_TEXT, handle) == NULL) {
+            GlobalFree(handle);
+            CloseClipboard();
+            return false;
+        }
+        CloseClipboard();
+        return true;
+    }
+
     WindowData OSWindow::data()
     {
-        WINDOWPLACEMENT wndpl;
-        wndpl.length = sizeof(WINDOWPLACEMENT);
+        WINDOWPLACEMENT wndpl = { sizeof(WINDOWPLACEMENT) };
         GetWindowPlacement((HWND)mHandle, &wndpl);
 
         return {
             { wndpl.rcNormalPosition.left, wndpl.rcNormalPosition.top },
             { wndpl.rcNormalPosition.right - wndpl.rcNormalPosition.left,
                 wndpl.rcNormalPosition.bottom - wndpl.rcNormalPosition.top },
-            wndpl.showCmd == SW_MAXIMIZE,
-            isFullscreen()
+            wndpl.showCmd == SW_MAXIMIZE
         };
     }
 
@@ -362,7 +406,7 @@ namespace Window {
         if (!handle) {
             static const char *windowClass = CreateWindowClass();
 
-            DWORD style = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_SIZEBOX | WS_MAXIMIZEBOX;
+            DWORD style = WS_OVERLAPPEDWINDOW;
             if (settings.mHeadless) {
                 style = WS_POPUP;
             }
@@ -383,6 +427,13 @@ namespace Window {
                 nullptr);
             if (!handle)
                 return nullptr;
+        }
+
+        if (settings.mIcon) {
+            HICON icon = (HICON)LoadImage(GetModuleHandle(nullptr), (LPCSTR)settings.mIcon, IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR);
+            SendMessage(handle, WM_SETICON, ICON_SMALL, (LPARAM)icon);
+            SendMessage(handle, WM_SETICON, ICON_BIG, (LPARAM)icon);
+            //DestroyIcon(icon);
         }
 
         if (!settings.mHidden) {

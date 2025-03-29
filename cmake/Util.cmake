@@ -36,37 +36,47 @@ if (CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 if (WIN32)
-	set (WINDOWS 1)
+	set (WINDOWS 1 CACHE INTERNAL "")
 	cmake_log("Build Platform Windows")
 endif()
 
 if (CMAKE_ANDROID_ARCH_ABI)
-	set (ANDROID 1)
+	set (ANDROID 1 CACHE INTERNAL "")
 	cmake_log("Build Platform Android")
 endif()
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
-	set (LINUX 1)
+	set (LINUX 1 CACHE INTERNAL "")
 	cmake_log("Build Platform Linux")
 endif()
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
-	set (OSX 1)
+	set (OSX 1 CACHE INTERNAL "")
 	cmake_log("Build Platform OSX")
 endif() 
   
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-	set(GCC 1)
+	set(GCC 1 CACHE INTERNAL "")
 	cmake_log("Build Compiler Gcc")
 endif()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-	set(CLANG 1)
+	set(CLANG 1 CACHE INTERNAL "")
 	cmake_log("Build Compiler Clang")
 endif()
 
-set (CMAKE_CXX_VISIBILITY_PRESET hidden)
-set (CMAKE_C_VISIBILITY_PRESET hidden)
+if (CMAKE_CROSSCOMPILING)
+    if (CMAKE_HOST_WIN32)
+		set(HOST_EXECUTABLE_SUFFIX ".exe")
+    else()
+		set(HOST_EXECUTABLE_SUFFIX "")
+    endif()
+else()
+    set(HOST_EXECUTABLE_SUFFIX ${CMAKE_EXECUTABLE_SUFFIX})
+endif()
+
+#set (CMAKE_CXX_VISIBILITY_PRESET hidden)
+#set (CMAKE_C_VISIBILITY_PRESET hidden)
 
 if (ANDROID)
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -75,11 +85,19 @@ else()
 endif()
 
 if (GCC OR CLANG)
-	add_compile_options(-Wno-extra-qualification -Wno-instantiation-after-specialization -Wno-dll-attribute-on-redeclaration -Wno-pragma-pack -Wno-undefined-var-template)	
+	add_compile_options(
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-extra-qualification>
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-instantiation-after-specialization>
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-dll-attribute-on-redeclaration> 
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-pragma-pack> 
+		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-undefined-var-template>)	
+	if (CLANG AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 15)
+		add_compile_options($<$<COMPILE_LANGUAGE:CXX,C>:-Wno-deprecated-non-prototype>)
+	endif ()
 	if (NOT MSVC)
 		add_compile_options(-Wall -fpermissive)
 	else ()
-		add_compile_options(-Wno-microsoft-cast)
+		add_compile_options($<$<COMPILE_LANGUAGE:CXX,C>:-Wno-microsoft-cast>)
 	endif()
 	if (EMSCRIPTEN) #TODO add more
 		set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
@@ -115,6 +133,7 @@ if (MSVC)
 		foreach(variable ${variables})
 			if(${variable} MATCHES "/MD")
 				string(REGEX REPLACE "/MD" "/MT" ${variable} "${${variable}}")
+				set(${variable} "${${variable}}" CACHE INTERNAL "")
 			endif()
 		endforeach()
 	else()
@@ -124,10 +143,9 @@ if (MSVC)
 		foreach(variable ${variables})
 			if(${variable} MATCHES "/MT")
 				string(REGEX REPLACE "/MT" "/MD" ${variable} "${${variable}}")
+				set(${variable} "${${variable}}" CACHE INTERNAL "")
 			endif()
 		endforeach()
 	endif()
 endif()
-
-
 

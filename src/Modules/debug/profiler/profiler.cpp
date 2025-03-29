@@ -21,7 +21,7 @@ namespace Debug {
         THREADLOCAL(ProfilerThread) sThread;
         Threading::WorkgroupLocal<Profiler> sProfiler;
 #if ENABLE_THREADING
-        Guard _reg { []() { Threading::WorkGroup::addStaticThreadInitializer([]() { sProfiler->registerThread(&sThread); sThread->updateName(); }); }, []() {} };
+        Guard _reg { []() { Threading::WorkGroup::addStaticThreadGuards([]() { sProfiler->registerThread(&sThread); sThread->updateName(); }); }, []() {} };
 #endif
 
         Profiler::Profiler()

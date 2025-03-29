@@ -3,7 +3,12 @@
 #include "Generic/callerhierarchy.h"
 #include "serializetable_forward.h"
 
+#include "../streams/streamresult.h"
+
+#include "../primitivetypes.h"
+
 namespace Engine {
+struct ParameterTuple;
 namespace Serialize {
 
     DERIVE_FUNCTION(customUnitPtr)
@@ -12,22 +17,20 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableDataConstPtr(const T *t, std::true_type)
-            : SerializableDataConstPtr(t ? t->customUnitPtr() : SerializableDataConstPtr { nullptr, &serializeTable<decayed_t<T>>() })
+            : SerializableDataConstPtr(t ? t->customUnitPtr() : SerializableDataConstPtr { static_cast<const void*>(nullptr), &serializeTable<decayed_t<T>>() })
         {
         }
 
         template <typename T>
         SerializableDataConstPtr(const T *t, std::false_type)
-            : mUnit(t)
-            , mType(&serializeTable<decayed_t<T>>())
+            : SerializableDataConstPtr(t, &serializeTable<decayed_t<T>>())
         {
         }
 
     public:
         constexpr SerializableDataConstPtr() = default;
 
-        template <std::derived_from<SerializableDataUnit> T>
-        requires (!std::same_as<SerializableDataUnit, T>)
+        template <typename T>
         SerializableDataConstPtr(const T *t)
             : SerializableDataConstPtr(t, has_function_customUnitPtr<T> {})
         {
@@ -39,9 +42,14 @@ namespace Serialize {
         {
         }
 
-        SerializableDataConstPtr(const SerializableDataUnit *unit, const SerializeTable *type)
+        SerializableDataConstPtr(const void *unit, const SerializeTable *type)
             : mUnit(unit)
             , mType(type)
+        {
+        }
+
+        SerializableDataConstPtr(const SerializableUnitBase *unit, const SerializeTable *type)
+            : SerializableDataConstPtr(static_cast<const void *>(unit), type)
         {
         }
 
@@ -65,9 +73,9 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        void writeState(FormattedSerializeStream &out, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0) const;
+        void writeState(FormattedSerializeStream &out, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
 
-        const SerializableDataUnit *mUnit = nullptr;
+        const void *mUnit = nullptr;
         const SerializeTable *mType = nullptr;
     };
 
@@ -75,7 +83,7 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableDataPtr(T *t, std::true_type)
-            : SerializableDataPtr(t ? SerializableDataPtr { t->customUnitPtr() } : SerializableDataPtr { nullptr, &serializeTable<decayed_t<T>>() })
+            : SerializableDataPtr(t ? SerializableDataPtr { t->customUnitPtr() } : SerializableDataPtr { static_cast<void*>(nullptr), &serializeTable<decayed_t<T>>() })
         {
         }
 
@@ -88,8 +96,8 @@ namespace Serialize {
     public:
         constexpr SerializableDataPtr() = default;
 
-        template <std::derived_from<SerializableDataUnit> T>
-        requires (!std::same_as<SerializableDataUnit, T> && !std::is_const_v<T>)
+        template <typename T>
+            requires(!std::is_const_v<T>)
         SerializableDataPtr(T *t)
             : SerializableDataPtr(t, has_function_customUnitPtr<T> {})
         {
@@ -97,7 +105,12 @@ namespace Serialize {
 
         constexpr SerializableDataPtr(const SerializableDataPtr &other) = default;
 
-        SerializableDataPtr(SerializableDataUnit *unit, const SerializeTable *type)
+        SerializableDataPtr(SerializableUnitBase *unit, const SerializeTable *type)
+            : SerializableDataConstPtr(unit, type)
+        {
+        }
+
+        SerializableDataPtr(void *unit, const SerializeTable *type)
             : SerializableDataConstPtr(unit, type)
         {
         }
@@ -117,13 +130,20 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0) const;
+        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
 
         StreamResult applyMap(FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) const;
 
         void setActive(bool active, bool existenceChanged) const;
 
-        SerializableDataUnit *unit() const;
+        static StreamResult visitStream(const SerializeTable *type, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
+        template <typename T>
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        {
+            return visitStream(&serializeTable<decayed_t<T>>(), in, name, visitor);
+        }
+
+        void *unit() const;
     };
 
     struct META_EXPORT SerializableUnitConstPtr : SerializableDataConstPtr {
@@ -144,7 +164,7 @@ namespace Serialize {
         constexpr SerializableUnitConstPtr() = default;
 
         template <std::derived_from<SerializableUnitBase> T>
-        requires (!std::same_as<SerializableUnitBase, T>)
+            requires(!std::same_as<SerializableUnitBase, T>)
         SerializableUnitConstPtr(const T *t)
             : SerializableUnitConstPtr(t, has_function_customUnitPtr<T> {})
         {
@@ -204,7 +224,7 @@ namespace Serialize {
         constexpr SerializableUnitPtr() = default;
 
         template <std::derived_from<SerializableUnitBase> T>
-        requires (!std::same_as<SerializableUnitBase, T> && !std::is_const_v<T>)
+            requires(!std::same_as<SerializableUnitBase, T> && !std::is_const_v<T>)
         SerializableUnitPtr(T *t)
             : SerializableUnitPtr(t, has_function_customUnitPtr<T> {})
         {
@@ -231,13 +251,13 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, StateTransmissionFlags flags = 0) const;
+        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
 
-        void setSynced(bool b) const;
+        void setSynced(bool b, const CallerHierarchyBasePtr &hierarchy = {}) const;
         void setActive(bool active, bool existenceChanged) const;
         void setParent(SerializableUnitBase *parent) const;
 
-        SerializableUnitBase *unit() const;        
+        SerializableUnitBase *unit() const;
     };
 
 }

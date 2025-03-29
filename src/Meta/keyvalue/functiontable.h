@@ -20,7 +20,7 @@ struct FunctionTable {
 
 }
 
-DLL_IMPORT_VARIABLE2(const Engine::FunctionTable, function, auto F);
+DLL_IMPORT_VARIABLE(const Engine::FunctionTable, function, auto);
 
 namespace Engine {
 
@@ -33,11 +33,11 @@ template <auto F>
 struct FunctionTableRegistrator {
     FunctionTableRegistrator()
     {
-        registerFunction(function<F>());
+        registerFunction(*function<F>);
     }
     ~FunctionTableRegistrator()
     {
-        unregisterFunction(function<F>());
+        unregisterFunction(*function<F>);
     }
 };
 

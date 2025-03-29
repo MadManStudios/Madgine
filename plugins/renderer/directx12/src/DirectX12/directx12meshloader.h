@@ -12,11 +12,11 @@ namespace Render {
     struct MADGINE_DIRECTX12_EXPORT DirectX12MeshLoader : Resources::VirtualResourceLoaderImpl<DirectX12MeshLoader, DirectX12MeshData, GPUMeshLoader> {
         DirectX12MeshLoader();
 
-        virtual bool generate(GPUMeshData &data, const MeshData &mesh) override;
-
-        virtual void update(GPUMeshData &data, const MeshData &mesh) override;
+        virtual Threading::Task<bool> generate(GPUMeshData &data, const MeshData &mesh) override;
 
         virtual void reset(GPUMeshData &data) override;
+
+        virtual Threading::TaskQueue *loadingTaskQueue() const override;
     };
 }
 }

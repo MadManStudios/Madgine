@@ -239,6 +239,28 @@ struct Quaternion {
         o << "{" << q.x << ", " << q.y << ", " << q.z << ", " << q.w << "}";
         return o;
     }
+
+    friend std::istream &operator>>(std::istream &in, Quaternion &q)
+    {
+        float *v = &q.x;
+        char c;
+        in >> c;
+        if (c != '{')
+            std::terminate();
+        for (int i = 0; i < 4; ++i) {
+            in >> v[i];
+            in >> c;
+            if (i != 3) {
+                if (c != ',')
+                    std::terminate();
+            } else {
+                if (c != '}')
+                    std::terminate();
+            }
+        }
+        return in;
+    }
+
 };
 
 META_EXPORT Quaternion slerp(Quaternion q1, Quaternion q2, float ratio);

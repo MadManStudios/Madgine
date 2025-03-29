@@ -6,14 +6,11 @@
 
 #include "Generic/bytebuffer.h"
 
+#include "../../Generic/testreceiver.h"
+
 using namespace Engine::Serialize;
 
-struct PODDataType {
-    int i = 1;
-    float f = 2.0f;
-};
-
-struct ComplexDataType : SerializableDataUnit {
+struct ComplexDataType {
 
     ComplexDataType(int i = 2, float f = 4.0f, std::string s = "default", bool b = true)
         : i(i)
@@ -43,10 +40,15 @@ struct TestUnit : TopLevelUnit<TestUnit> {
     {
     }
 
-    int fooImpl(int i)
+    int foo(int i)
     {
         ++mCallCount;
         return i + 1;
+    }
+
+    void bar(int i)
+    {
+        ++mCallCount;
     }
 
     bool operator==(const TestUnit &other) const
@@ -57,8 +59,9 @@ struct TestUnit : TopLevelUnit<TestUnit> {
     int mData;
     int mCallCount = 0;
 
-    Engine::Serialize::MessageFuture<int> call(int i);
-    Engine::Serialize::MessageFuture<int> query(int i);
+    void call_void(int i, TestReceiver<Engine::Serialize::MessageResult> &rec);
+    void call(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec);
+    void query(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec);
 
     SERIALIZABLE_CONTAINER(list1, std::list<int>);
     SERIALIZABLE_CONTAINER(set1, std::set<int>);
@@ -69,8 +72,6 @@ struct TestUnit : TopLevelUnit<TestUnit> {
     SERIALIZABLE_CONTAINER(complexList1, std::list<ComplexDataType>);
     SERIALIZABLE_CONTAINER(complexList2, std::list<ComplexDataType>);
     SERIALIZABLE_CONTAINER(complexList3, std::list<ComplexDataType>);
-
-    PODDataType pod;
 
     Engine::ByteBuffer bytes;
 };

@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Madgine/pipelineloader/pipelineinstance.h"
+#include "Madgine/render/pipelineinstance.h"
 
 #include "openglbuffer.h"
-
-#include "openglssbobuffer.h"
 
 #include "../openglpipelineloader.h"
 
@@ -13,35 +11,54 @@ namespace Render {
 
     struct MADGINE_OPENGL_EXPORT OpenGLPipelineInstance : PipelineInstance {
 
-        OpenGLPipelineInstance(const PipelineConfiguration &config, OpenGLPipelineLoader::Handle pipeline);
+        OpenGLPipelineInstance(const PipelineConfiguration &config, GLuint pipeline);
 
-        void bind() const;
+        bool bind(VertexFormat format, size_t offset = 0) const;
 
         virtual WritableByteBuffer mapParameters(size_t index) override;
+        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size) const override;
 
-        virtual void setInstanceData(const ByteBuffer &data) override;
+        virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh) const override;
+        virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const override;
+        virtual ByteBufferImpl<uint32_t> mapIndices(RenderTarget *target, size_t count) const override;
+        virtual void setGroupSize(size_t groupSize) const override;
 
-        virtual void setDynamicParameters(size_t index, const ByteBuffer &data) override;
+        virtual void render(RenderTarget *target) const override;
+        virtual void renderRange(RenderTarget *target, size_t elementCount, size_t vertexOffset, IndexType<size_t> indexOffset = {}) const override;
+        virtual void renderInstanced(RenderTarget *target, size_t count) const override;
 
-        virtual void renderMesh(const GPUMeshData *mesh, const Material *material = nullptr) const override;
-        virtual void renderMeshInstanced(size_t count, const GPUMeshData *mesh, const Material *material = nullptr) const override;
-
-        virtual void bindTextures(const std::vector<TextureDescriptor> &tex, size_t offset = 0) const override;
-
-        void verify() const;
+        virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;
 
         mutable GLuint mHandle = 0;
-        std::vector<OpenGLBuffer> mUniformBuffers;
-#if !OPENGL_ES
-        std::vector<OpenGLBuffer> mShaderStorageBuffers;
-#else
-        std::vector<OpenGLSSBOBuffer> mShaderStorageBuffers;
-        mutable OpenGLBuffer mShaderStorageOffsetBuffer = { GL_UNIFORM_BUFFER };
-#endif
+        std::vector<size_t> mConstantBufferSizes;
+        bool mDepthChecking;
+        mutable GLenum mMode;
+        mutable bool mHasIndices = false;
+        mutable GLsizei mElementCount;
+        mutable size_t mIndexOffset = 0;
 
-        OpenGLBuffer mInstanceBuffer = GL_ARRAY_BUFFER;
+#if OPENGL_ES && OPENGL_ES < 32
+        mutable GLuint mBuffer;
+        mutable size_t mStride;
+        mutable size_t mBufferOffset;
+#    if OPENGL_ES < 31
+        mutable VertexFormat mFormat;
+#    endif
+#endif
+    };
+
+    struct MADGINE_OPENGL_EXPORT OpenGLPipelineInstanceHandle : OpenGLPipelineInstance {
+
+        OpenGLPipelineInstanceHandle(const PipelineConfiguration &config, OpenGLPipelineLoader::Handle pipeline);
 
         OpenGLPipelineLoader::Handle mPipeline;
+    };
+
+    struct MADGINE_OPENGL_EXPORT OpenGLPipelineInstancePtr : OpenGLPipelineInstance {
+
+        OpenGLPipelineInstancePtr(const PipelineConfiguration &config, OpenGLPipelineLoader::Ptr pipeline);
+
+        OpenGLPipelineLoader::Ptr mPipeline;
     };
 
 }

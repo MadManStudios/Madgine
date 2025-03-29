@@ -41,6 +41,7 @@ namespace Filesystem {
 
         bool isAbsolute() const;
         bool isRelative() const;
+        bool isRelative(const Path &base) const;
 
 		void clear();
         bool empty() const;

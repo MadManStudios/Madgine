@@ -19,34 +19,56 @@ struct type_pack;
 template <>
 struct type_pack<> {
 
-    template <typename T>
-    using append = type_pack<T>;
+    static constexpr const size_t size = 0;
+
+    using indices = std::index_sequence<>;
+
+    template <typename... T>
+    using append = type_pack<T...>;
     template <typename... T>
     using prepend = type_pack<T...>;
     template <bool Cond, typename T>
     using prepend_if = std::conditional_t<Cond, type_pack<T>, type_pack<>>;
+    template <typename Pack2>
+    using concat = Pack2;
 
-    template <template <typename> typename Filter>
+    template <template <typename...> typename Filter, typename... Args>
     using filter = type_pack<>;
 
     template <template <typename...> typename Wrapper>
     using instantiate = Wrapper<>;
+    template <template <typename, typename> typename Op, typename Init>
+    using fold = Init;
 
     using as_tuple = instantiate<std::tuple>;
+
+    template <template <typename> typename F>
+    using transform = type_pack<>;
+    template <template <size_t> typename F, size_t offset = 0>
+    using transform_index = type_pack<>;
+    template <template <typename, size_t> typename F, size_t offset = 0>
+    using transform_with_index = type_pack<>;
+    template <template <typename> typename F>
+    using value_transform = auto_pack<>;
 
     template <typename T>
     using unique = T;
 
     template <typename Default>
     using unpack_unique = Default;
+
+    template <size_t I>
+    using select = std::enable_if_t<dependent_bool<std::integral_constant<size_t, I>, false>::value>;
 };
 
 template <typename Head, typename... Ty>
 struct type_pack<Head, Ty...> {
 
+    using Tail = type_pack<Ty...>;
+
     struct helpers {
         template <size_t I>
-        struct recurse : type_pack<Ty...>::helpers::template recurse<I - 1> {
+        struct recurse : Tail::helpers::template recurse<I - 1> {
         };
 
         template <>
@@ -56,19 +78,19 @@ struct type_pack<Head, Ty...> {
 
         template <typename, typename T>
         struct is_or_contains : std::false_type {
-            template <typename IntType, typename... Tail>
-            static constexpr IntType index = 1 + type_pack<Tail...>::template index<IntType, T>;
+            template <typename IntType, typename...>
+            static constexpr IntType index = 1 + Tail::template index<IntType, T>;
         };
 
         template <typename T>
         struct is_or_contains<T, T> : std::true_type {
-            template <typename IntType, typename... Tail>
+            template <typename IntType, typename...>
             static constexpr IntType index = 0;
         };
 
         template <typename... Ty2, typename T>
-        requires type_pack<Ty2...>::template contains<T> 
-        struct is_or_contains<type_pack<Ty2...>, T> : is_or_contains<T, T> {
+            requires type_pack<Ty2...>::template
+        contains<T> struct is_or_contains<type_pack<Ty2...>, T> : is_or_contains<T, T> {
         };
     };
 
@@ -77,15 +99,12 @@ struct type_pack<Head, Ty...> {
     using indices = std::index_sequence_for<Head, Ty...>;
     static constexpr const size_t size = 1 + sizeof...(Ty);
 
-    template <template <typename> typename F>
-    using transform = type_pack<F<Head>, F<Ty>...>;
+    template <template <typename...> typename Filter, typename... Args>
+    using filter = typename Tail::template filter<Filter>::template prepend_if<Filter<Head, Args...>::value, Head>;
 
-    template <template <typename> typename Filter>
-    using filter = typename type_pack<Ty...>::template filter<Filter>::template prepend_if<Filter<Head>::value, Head>;
-
-    using pop_front = type_pack<Ty...>;
-    template <typename T>
-    using append = type_pack<Head, Ty..., T>;
+    using pop_front = Tail;
+    template <typename... T>
+    using append = type_pack<Head, Ty..., T...>;
     template <typename... T>
     using prepend = type_pack<T..., Head, Ty...>;
     template <bool Cond, typename T>
@@ -94,8 +113,19 @@ struct type_pack<Head, Ty...> {
     template <typename Pack2>
     using concat = typename Pack2::template prepend<Head, Ty...>;
 
+    template <template <typename> typename F>
+    using transform = type_pack<F<Head>, F<Ty>...>;
+    template <template <size_t> typename F, size_t offset = 0>
+    using transform_index = typename Tail::template transform_index<F, offset + 1>::template prepend<F<offset>>;
+    template <template <typename, size_t> typename F, size_t offset = 0>
+    using transform_with_index = typename Tail::template transform_with_index<F, offset + 1>::template prepend<F<Head, offset>>;
+    template <template <typename> typename F>
+    using value_transform = auto_pack<F<Head>::value, F<Ty>::value...>;
+
     template <template <typename...> typename Wrapper>
     using instantiate = Wrapper<Head, Ty...>;
+    template <template <typename, typename> typename Op, typename Init>
+    using fold = Op<Head, typename Tail::template fold<Op, Init>>;
 
     using as_tuple = instantiate<std::tuple>;
 
@@ -118,15 +148,17 @@ struct type_pack<Head, Ty...> {
     };
 
     template <typename Default = void>
-    using unpack_unique = typename type_pack<Ty...>::template unique<Head>;
+    using unpack_unique = typename Tail::template unique<Head>;
 };
-
 
 template <typename Pack>
 using type_pack_first = typename Pack::first;
 
 template <typename Pack>
 using type_pack_as_tuple = typename Pack::as_tuple;
+
+template <typename Pack1, typename Pack2>
+using type_pack_concat = typename Pack1::template concat<Pack2>;
 
 template <typename T>
 struct type_pack_appender {
@@ -149,5 +181,16 @@ namespace __generic_impl__ {
 
 template <typename T, size_t n>
 using type_pack_repeat_n_times = typename __generic_impl__::type_pack_repeat_n_times_helper<T, std::make_index_sequence<n>>::type;
+
+template <typename T>
+struct to_type_pack_helper;
+
+template <template <typename...> typename Outer, typename... Ty>
+struct to_type_pack_helper<Outer<Ty...>> {
+    using type = type_pack<Ty...>;
+};
+
+template <typename T>
+using to_type_pack = typename to_type_pack_helper<T>::type;
 
 }

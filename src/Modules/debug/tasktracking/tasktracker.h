@@ -5,10 +5,10 @@
 namespace Engine {
 namespace Debug {
 
-    namespace Threading {
+    namespace Tasks {
 
         MODULES_EXPORT void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, StackTrace<1> stacktrace);
-        MODULES_EXPORT void onDestroy(Engine::Threading::TaskPromiseTypeBase &promise);        
+        MODULES_EXPORT void onDestroy(Engine::Threading::TaskSuspendablePromiseTypeBase &promise);
 
         MODULES_EXPORT void onResume(const Engine::Threading::TaskHandle &handle);
         MODULES_EXPORT void onSuspend(Engine::Threading::TaskQueue *queue);
@@ -19,61 +19,42 @@ namespace Debug {
         struct MODULES_EXPORT TaskTracker {
 
             void onAssign(void *ident, StackTrace<1> stacktrace);
-            void onEnter(void *ident);
-            void onReturn(void *ident);
-            void onResume(void *ident);
-            void onSuspend();
+            void onEnter(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
+            void onReturn(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
+            void onResume(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
+            void onSuspend(std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onDestroy(void *ident);
+
+            TraceBack getTraceback(void *ident);
 
             struct Event {
                 enum Type {
-                    ASSIGN,
                     ENTER,
                     RETURN,
                     RESUME,
-                    SUSPEND,
-                    DESTROY
+                    SUSPEND
                 } mType;
+                void *mIdentifier;
                 std::chrono::high_resolution_clock::time_point mTimePoint = std::chrono::high_resolution_clock::now();
-                union {
-                    std::thread::id mThread;
-                    StackTrace<1> mStackTrace;
-                };
-                void *mIdentifier = nullptr;
 
-                Event(Type type, void *ident, StackTrace<1> stacktrace)
+                Event(Type type, void *ident = nullptr, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now())
                     : mType(type)
                     , mIdentifier(ident)
-                    , mStackTrace(stacktrace)
-                {
-                }
-
-                Event(Type type, void *ident, std::thread::id thread)
-                    : mType(type)
-                    , mIdentifier(ident)
-                    , mThread(thread)
-                {
-                }
-
-                Event(Type type, std::thread::id thread)
-                    : mType(type)
-                    , mThread(thread)
-                {
-                }
-
-                Event(Type type, void *ident)
-                    : mType(type)
-                    , mIdentifier(ident)                    
+                    , mTimePoint(timePoint)
                 {
                 }
             };
 
             const std::deque<Event> &events() const;
+            const std::map<void *, StackTrace<1>> tasksInFlight() const;
 
             std::mutex mMutex;
 
+            std::thread::id mThread;
+
         private:
-            std::deque<Event> mEvents;            
+            std::deque<Event> mEvents;
+            std::map<void *, StackTrace<1>> mTasksInFlight;
         };
 
     }

@@ -4,6 +4,8 @@
 
 #include "streamresult.h"
 
+#include "../hierarchy/serializableunitptr.h"
+
 namespace Engine {
 namespace Serialize {
 
@@ -46,42 +48,40 @@ namespace Serialize {
         }
 
         template <typename T>
-        requires std::convertible_to<T *, SerializableDataUnit *>
-            StreamResult read(T *&p)
+        StreamResult read(T *&p)
         {
             if constexpr (std::convertible_to<T *, SyncableUnitBase *>) {
                 SyncableUnitBase *unit;
                 STREAM_PROPAGATE_ERROR(read(unit));
                 p = reinterpret_cast<T *>(reinterpret_cast<uintptr_t>(unit));
             } else {
-                SerializableDataUnit *unit;
+                SerializableDataPtr unit;
                 STREAM_PROPAGATE_ERROR(read(unit));
-                p = reinterpret_cast<T *>(reinterpret_cast<uintptr_t>(unit));
+                p = reinterpret_cast<T *>(reinterpret_cast<uintptr_t>(unit.mUnit));
             }
             return {};
         }
 
         template <typename T>
-        requires std::convertible_to<T *, SerializableDataUnit *>
-            StreamResult operator>>(T *&p)
+        StreamResult operator>>(T *&p)
         {
             if constexpr (std::convertible_to<T *, SyncableUnitBase *>) {
                 SyncableUnitBase *unit;
                 STREAM_PROPAGATE_ERROR(operator>>(unit));
                 p = reinterpret_cast<T *>(reinterpret_cast<uintptr_t>(unit));
             } else {
-                SerializableDataUnit *unit;
+                SerializableDataPtr unit;
                 STREAM_PROPAGATE_ERROR(operator>>(unit));
-                p = reinterpret_cast<T *>(reinterpret_cast<uintptr_t>(unit));
+                p = reinterpret_cast<T *>(reinterpret_cast<uintptr_t>(unit.mUnit));
             }
             return {};
         }
 
         StreamResult read(SyncableUnitBase *&p);
-        StreamResult read(SerializableDataUnit *&p);
+        StreamResult read(SerializableDataPtr &p);
 
         StreamResult operator>>(SyncableUnitBase *&p);
-        StreamResult operator>>(SerializableDataUnit *&p);
+        StreamResult operator>>(SerializableDataPtr &p);
 
         StreamResult read(std::string &s);
         StreamResult read(String auto &s)
@@ -122,10 +122,10 @@ namespace Serialize {
         }
 
         void write(const SyncableUnitBase *p);
-        void write(const SerializableDataUnit *p);
+        void write(SerializableDataConstPtr);
 
         SerializeStream &operator<<(const SyncableUnitBase *);
-        SerializeStream &operator<<(const SerializableDataUnit *);
+        SerializeStream &operator<<(SerializableDataConstPtr);
 
         void write(const std::string_view &s);
         void write(const StringViewable auto &s)
@@ -147,8 +147,7 @@ namespace Serialize {
 
         SerializeStream &operator<<(const Void &);
 
-    protected:
-        StreamResult checkState(const char *op);
+        StreamResult skipWs(bool overwrite = false);
 
     protected:
         std::unique_ptr<SerializeStreamData> mData;

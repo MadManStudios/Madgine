@@ -26,11 +26,12 @@ if (NOT ANDROID AND NOT EMSCRIPTEN AND NOT IOS)
 	FolderSources(sources src glad glad.c glad.h)
 endif()
 FolderSources(sources src OpenGL openglforward.h opengllib.h openglmeshdata.h openglmeshloader.cpp openglmeshloader.h openglpipelineloader.cpp openglpipelineloader.h openglrendertexture.cpp openglrendertexture.h openglrenderwindow.cpp openglrenderwindow.h openglshaderloader.cpp openglshaderloader.h opengltextureloader.cpp opengltextureloader.h openglrendertarget.cpp openglrendertarget.h openglrendercontext.cpp openglrendercontext.h openglshadercodegen.cpp openglshadercodegen.h)
-	FolderSources(sources OpenGL util gldump.cpp openglbuffer.cpp openglbuffer.h openglshader.cpp openglshader.h openglssbobuffer.cpp openglssbobuffer.h opengltexture.cpp opengltexture.h openglvertexarray.cpp openglvertexarray.h openglpipeline.cpp openglpipeline.h openglpipelineinstance.cpp openglpipelineinstance.h)
+	FolderSources(sources OpenGL util gldump.cpp openglbuffer.cpp openglbuffer.h
+	openglheapallocator.cpp openglheapallocator.h openglshader.cpp openglshader.h opengltexture.cpp opengltexture.h openglvertexarray.cpp openglvertexarray.h openglpipeline.cpp openglpipeline.h openglpipelineinstance.cpp openglpipelineinstance.h)
 
 add_plugin(OpenGL Madgine Renderer ${sources} PRECOMPILED_HEADER src/OpenGL/opengllib.h)
 
-target_link_libraries(OpenGL PRIVATE ${OPENGL_LIBRARIES} Client)
+target_link_libraries(OpenGL PRIVATE ${OPENGL_LIBRARIES} Render)
 target_include_directories(OpenGL PRIVATE ${OPENGL_INCLUDE_DIR})
 
 if (OSX)
@@ -43,16 +44,18 @@ endif ()
 
 set(sources "")
 FolderSources(sources "" tools)
-	FolderSources(sources tools OpenGL_Tools opengltoolconfig.cpp opengltoolconfig.h opengltoolsforward.h opengltoolslib.h)
-		FolderSources(sources OpenGL_Tools imgui imgui_impl_opengl3.cpp imgui_impl_opengl3.h openglimroot.cpp openglimroot.h)
+	FolderSources(sources tools OpenGL_Tools openglrendercontexttool.cpp openglrendercontexttool.h opengltoolsforward.h opengltoolslib.h)
+		#FolderSources(sources OpenGL_Tools imgui imgui_impl_opengl3.cpp imgui_impl_opengl3.h openglimroot.cpp openglimroot.h)
 
 
 add_tools(OpenGL ${sources} PRECOMPILED_HEADER tools/OpenGL_Tools/opengltoolslib.h)
 
-target_link_plugins(OpenGLTools ClientTools)
+target_link_plugins(OpenGLTools RenderTools)
 target_link_libraries(OpenGLTools PRIVATE ${OPENGL_LIBRARIES})
 target_include_directories(OpenGLTools PRIVATE ${OPENGL_INCLUDE_DIR})
 
-if (BUILD_TESTING)
-	add_subdirectory(test)
+if (NOT ANDROID AND NOT IOS AND NOT OSX AND FALSE)
+	add_shadergen_target(OpenGL -GLSL)
+else()
+	add_shadergen_target(OpenGL -GLSLES)
 endif()

@@ -49,7 +49,7 @@ struct Proxy<T *, true> {
 
     T **operator&() { return &mPtr; }
 
-    operator T *() { return mPtr; }
+    operator T *&() { return mPtr; }
 
     Proxy<T *, true> &operator=(T *t)
     {

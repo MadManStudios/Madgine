@@ -1,192 +1,134 @@
 #pragma once
 
-#include "Generic/future.h"
-#include "Generic/lambda.h"
-#include "messageresult.h"
+#include "Generic/execution/sender.h"
+#include "Generic/execution/virtualsender.h"
+#include "Generic/execution/virtualstate.h"
+#include "Generic/forward_capture.h"
+#include "Generic/nulledptr.h"
 
 namespace Engine {
 namespace Serialize {
 
-    template <typename T>
-    struct MessageData {
-        MessageData() = default;
-        MessageData(T t)
-            : mData(std::move(t))
+    struct GenericMessageReceiver {
+
+        GenericMessageReceiver() = default;
+        GenericMessageReceiver(Execution::VirtualReceiverBase<MessageResult, const void *> &receiver)
+            : mPtr(&receiver)
         {
         }
-        MessageData(MessageResult result, std::optional<T> data = {})
-            : mResult(result)
-            , mData(std::move(data))
+        GenericMessageReceiver(GenericMessageReceiver &&) = default;
+        ~GenericMessageReceiver()
         {
+            assert(!mPtr);
         }
 
-        MessageResult get(T &result)
+        GenericMessageReceiver &operator=(GenericMessageReceiver &&) = default;
+
+        template <typename... V>
+        void set_value(const V &...v)
         {
-            if (mData)
-                result = *mData;
-            return mResult;
+            if (mPtr) {
+                std::tuple<const V &...> values { v... };
+                mPtr->set_value(&values);
+                mPtr.reset();
+            }
         }
-
-        operator T()
+        void set_done()
         {
-            return *mData;
+            if (mPtr) {
+                mPtr->set_done();
+                mPtr.reset();
+            }
         }
-
-        MessageResult mResult = MessageResult::OK;
-        std::optional<T> mData;
-    };
-
-    template <>
-    struct MessageData<void> {
-        MessageData() = default;
-        MessageData(MessageResult result)
-            : mResult(result)
+        void set_error(MessageResult result)
         {
-        }
-
-        MessageResult get()
-        {
-            return mResult;
-        }
-
-        MessageResult mResult = MessageResult::OK;
-    };
-
-    template <typename T>
-    using MessagePromise = std::promise<MessageData<T>>;
-
-    struct GenericMessagePromise {
-
-        GenericMessagePromise() = default;
-
-        template <typename T>
-        GenericMessagePromise(MessagePromise<T> promise)
-            : mPromiseCallback([promise { std::move(promise) }](MessageResult result, const void *data) mutable {
-                if constexpr (std::same_as<T, void>) {
-                    promise.set_value({ result });
-                } else if (data) {
-                    promise.set_value({ result, *static_cast<const T *>(data) });
-                } else {
-                    promise.set_value({ result, std::nullopt });
-                }
-            })
-        {
-        }
-
-        void setResult(MessageResult result)
-        {
-            if (mPromiseCallback)
-                mPromiseCallback(result, nullptr);
-        }
-        template <typename T>
-        void setValue(const T &t)
-        {
-            if (mPromiseCallback)
-                mPromiseCallback(MessageResult::OK, &t);
+            if (mPtr) {
+                mPtr->set_error(result);
+                mPtr.reset();
+            }
         }
 
         explicit operator bool() const
         {
-            return static_cast<bool>(mPromiseCallback);
-        }
-
-        Lambda<void(MessageResult, const void *)> mPromiseCallback;
-    };
-
-    template <typename T>
-    struct MessageFuture {
-
-        using type = T;
-
-        MessageFuture() = default;
-
-        MessageFuture(MessageFuture &&) = default;
-
-        MessageFuture(T t)
-            : mFuture(std::move(t))
-        {
-        }
-
-        MessageFuture(Future<MessageData<T>> future)
-            : mFuture(std::move(future))
-        {
-        }
-
-        MessageFuture &operator=(MessageFuture &&) = default;
-
-        MessageResult get(T &result)
-        {
-            return mFuture.get().get(result);
-        }
-
-        operator T()
-        {
-            return mFuture.get();
-        }
-
-        bool is_ready() const
-        {
-            return mFuture.is_ready();
-        }
-
-        template <typename F>
-        MessageFuture<std::invoke_result_t<F, T>> then(F &&f)
-        {
-            return Future<MessageData<std::invoke_result_t<F, T>>> { mFuture.then([f { std::forward<F>(f) }](MessageData<T> &&data) -> MessageData<std::invoke_result_t<F, T>> {
-                if (data.mData) {
-                    return { data.mResult, f(*data.mData) };
-                } else {
-                    return { data.mResult };
-                }
-            }) };
+            return mPtr;
         }
 
     private:
-        Future<MessageData<T>> mFuture;
+        NulledPtr<Execution::VirtualReceiverBase<MessageResult, const void *>> mPtr;
     };
 
-    template <>
-    struct MessageFuture<void> {
+    template <typename _Rec, typename... V>
+    struct MessageState : Execution::VirtualReceiverBase<MessageResult, const void *> {
+        using Rec = _Rec;
 
-        using type = void;
-
-        MessageFuture() = default;
-
-        MessageFuture(MessageFuture &&) = default;
-
-        MessageFuture(Void v)
-            : mFuture(MessageData<void> {})
+        MessageState(Rec &&rec)
+            : mRec(std::forward<Rec>(rec))
         {
         }
-
-        MessageFuture(Future<MessageData<void>> future)
-            : mFuture(std::move(future))
+        void set_value(V &&...value)
         {
+            mRec.set_value(std::forward<V>(value)...);
         }
-
-        MessageFuture &operator=(MessageFuture &&) = default;
-
-        MessageResult get()
+        virtual void set_value(const void *data) override final
         {
-            return mFuture.get().get();
+            assert(data);
+            TupleUnpacker::invokeFromTuple(LIFT(mRec.set_value, this), *static_cast<const std::tuple<const V &...>*>(data));
         }
-
-        bool is_ready() const
+        virtual void set_done() override final
         {
-            return mFuture.is_ready();
+            mRec.set_done();
         }
-
-    private:
-        Future<MessageData<void>> mFuture;
+        virtual void set_error(MessageResult result) override final
+        {
+            mRec.set_error(result);
+        }
+        Rec mRec;
     };
+
+    template <typename _Rec>
+    struct MessageState<_Rec, void> : Execution::VirtualReceiverBase<MessageResult, const void *> {
+        using Rec = _Rec;
+
+        MessageState(Rec &&rec)
+            : mRec(std::forward<Rec>(rec))
+        {
+        }
+        void set_value()
+        {
+            mRec.set_value();
+        }
+        virtual void set_value(const void *data) override final
+        {
+            assert(data);
+            mRec.set_value();
+        }
+        virtual void set_done() override final
+        {
+            mRec.set_done();
+        }
+        virtual void set_error(MessageResult result) override final
+        {
+            mRec.set_error(result);
+        }
+        Rec mRec;
+    };
+
+    template <typename... V, typename F, typename... Args>
+    auto make_message_sender(F &&f, Args &&...args)
+    {
+        return Execution::make_sender<MessageResult, V...>(
+            [f { forward_capture(std::forward<F>(f)) }, args = std::tuple<Args...> { std::forward<Args>(args)... }]<typename Rec>(Rec &&rec) mutable {
+                return Execution::make_simple_state<MessageState<Rec, V...>>(std::forward<F>(f), std::move(args), std::forward<Rec>(rec));
+            });
+    }
 
     struct PendingRequest {
 
-        PendingRequest(MessageId id = 0, ParticipantId requester = 0, MessageId requesterTransactionId = 0, GenericMessagePromise promise = {})
+        PendingRequest(MessageId id = 0, ParticipantId requester = 0, MessageId requesterTransactionId = 0, GenericMessageReceiver receiver = {})
             : mId(id)
             , mRequester(requester)
             , mRequesterTransactionId(requesterTransactionId)
-            , mPromise(std::move(promise))
+            , mReceiver(std::move(receiver))
         {
         }
 
@@ -194,7 +136,7 @@ namespace Serialize {
             : mId(std::exchange(other.mId, 0))
             , mRequester(std::exchange(other.mRequester, 0))
             , mRequesterTransactionId(std::exchange(other.mRequesterTransactionId, 0))
-            , mPromise(std::move(other.mPromise))
+            , mReceiver(std::move(other.mReceiver))
         {
         }
 
@@ -207,14 +149,14 @@ namespace Serialize {
             mId = std::exchange(other.mId, 0);
             mRequester = std::exchange(other.mRequester, 0);
             mRequesterTransactionId = std::exchange(other.mRequesterTransactionId, 0);
-            mPromise = std::move(other.mPromise);
+            std::swap(mReceiver, other.mReceiver);
             return *this;
         }
 
         MessageId mId = 0;
         ParticipantId mRequester = 0;
         MessageId mRequesterTransactionId = 0;
-        GenericMessagePromise mPromise;
+        GenericMessageReceiver mReceiver;
     };
 
 }

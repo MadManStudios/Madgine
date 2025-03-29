@@ -10,12 +10,25 @@ include(InstallRequiredSystemLibraries)
 
 include(GetPrerequisites)
 
+if (MADGINE_CONFIGURATION)
+	file(GLOB lists "${MADGINE_CONFIGURATION}/*.list")
 
+	add_custom_target(
+		copy_data ALL
+		COMMAND ${CMAKE_COMMAND} "-DLISTS=\"$<TARGET_PROPERTY:copy_data,DATA_LISTS>\"" -DTARGET=${CMAKE_BINARY_DIR}/data -DBINARY_DIR=${CMAKE_BINARY_DIR} -P ${workspace_file_dir}/util/listcopy.cmake
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+	)
+
+	set_target_properties(copy_data
+		PROPERTIES
+		DATA_LISTS "${lists}")
+
+endif ()
 
 macro(enable_packaging)
 
-	if (EXISTS LICENSE.md)
-		install(FILES LICENSE.md DESTINATION . RENAME LICENSE)
+	if (EXISTS LICENSE.rst)
+		install(FILES LICENSE.rst DESTINATION . RENAME LICENSE)
 	endif()
 
 	if (UNIX)
@@ -25,7 +38,7 @@ macro(enable_packaging)
 
 	set(CPACK_PACKAGE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/packages)
 	set(CPACK_PACKAGE_INSTALL_DIRECTORY ${PROJECT_NAME})
-	set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.md)
+	set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.rst)
 	set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 	#set(CPACK_NSIS_PACKAGE_NAME ${PROJECT_NAME}-${PROJECT_VERSION})
 	set(CPACK_NSIS_DISPLAY_NAME ${PROJECT_NAME})
@@ -83,22 +96,3 @@ function(collect_custom_dependencies target name binary)
 	endforeach()
 
 endfunction(collect_custom_dependencies)
-
-macro(collect_data target)
-
-	generate_binary_info(${target})
-
-	if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/data)
-
-		target_include_directories(${target} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/data>)
-
-		if (NOT BUILD_SHARED_LIBS OR MADGINE_FORCE_DATA_COLLECT)
-
-			add_custom_target(
-				${target}_copy_data ALL 				
-				COMMAND ${CMAKE_COMMAND} -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}/data -DTARGET=${CMAKE_BINARY_DIR}/data -P ${workspace_file_dir}/util/flatcopy.cmake				
-			)
-		endif()
-	endif()
-
-endmacro()

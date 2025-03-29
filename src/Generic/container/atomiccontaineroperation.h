@@ -64,6 +64,22 @@ struct AtomicContainerOperationBase {
         return mContainer.size();
     }
 
+    auto begin() {
+        return mContainer.begin();
+    }
+
+    auto begin() const {
+        return std::as_const(mContainer).begin();
+    }
+
+    auto end() {
+        return mContainer.end();
+    }
+
+    auto end() const {
+        return std::as_const(mContainer).end();
+    }
+
 protected:
     C &mContainer;
 };
@@ -78,19 +94,6 @@ struct AtomicContainerOperation : Op {
 template <typename Op>
 struct underlying_container<AtomicContainerOperation<Op>> {
     typedef typename Op::container_type type;
-};
-
-template <typename Op>
-struct container_traits<AtomicContainerOperation<Op>> : container_traits<typename Op::container_type> {
-    typedef AtomicContainerOperation<Op> container;
-
-    using _traits = container_traits<typename Op::container_type>;
-
-    template <typename... Args>
-    static typename _traits::emplace_return emplace(container &c, const typename _traits::const_iterator &where, Args &&...args)
-    {
-        return c.emplace(where, std::forward<Args>(args)...);
-    }
 };
 
 }

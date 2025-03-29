@@ -155,11 +155,6 @@ namespace Input {
             GP_RSB = 0x99,
         };
 
-        enum Modifiers : uint8_t {
-            Mod_Shift = 1 << 0,
-            Mod_Ctrl = 1 << 1,
-            Mod_Alt = 1 << 2
-        };
     }
 
     namespace MouseButton {
@@ -172,9 +167,16 @@ namespace Input {
         };
     }
 
+    struct ControlKeyState {
+        bool mShift = false;
+        bool mCtrl = false;
+        bool mAlt = false;
+    };
+
     struct KeyEventArgs {
         Key::Key scancode = static_cast<Key::Key>(0);
         char text = 0;
+        ControlKeyState mControlKeys;
     };
 
     struct PointerEventArgs {
@@ -194,7 +196,8 @@ namespace Input {
         {
         }
 
-        InterfacesVector windowPosition, screenPosition, moveDelta;
+        mutable InterfacesVector windowPosition;
+        InterfacesVector screenPosition, moveDelta;
         MouseButton::MouseButton button;
     };
 

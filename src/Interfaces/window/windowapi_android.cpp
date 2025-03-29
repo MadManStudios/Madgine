@@ -5,7 +5,6 @@
 #    include "windowapi.h"
 #    include "windowsettings.h"
 
-#    include <EGL/egl.h>
 #    include <android/input.h>
 #    include <android/native_window.h>
 
@@ -13,7 +12,9 @@
 
 #    include "../input/inputevents.h"
 
-#    include "../util/utilmethods.h"
+#    include "../log/logmethods.h"
+
+#    include <android/native_activity.h>
 
 namespace Engine {
 namespace Window {
@@ -23,38 +24,13 @@ namespace Window {
         3.0f
     };
 
-    DLL_EXPORT SystemVariable<ANativeWindow *> sNativeWindow = nullptr;
-
-    DLL_EXPORT EGLDisplay sDisplay = EGL_NO_DISPLAY;
-
-    DLL_EXPORT AInputQueue *sQueue = nullptr;
-
-    static struct DisplayGuard {
-        DisplayGuard()
-        {
-            sDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-            if (sDisplay != EGL_NO_DISPLAY) {
-                if (!eglInitialize(sDisplay, nullptr, nullptr))
-                    sDisplay = EGL_NO_DISPLAY;
-            }
-        }
-
-        ~DisplayGuard()
-        {
-            if (sDisplay != EGL_NO_DISPLAY)
-                eglTerminate(sDisplay);
-        }
-    } sDisplayGuard;
+    SystemVariable<ANativeWindow *> sNativeWindow = nullptr;
+    AInputQueue *sQueue = nullptr;
 
     struct AndroidWindow final : OSWindow {
-        AndroidWindow(EGLSurface surface, WindowEventListener *listener)
-            : OSWindow((uintptr_t)surface, listener)
+        AndroidWindow(ANativeWindow *window, WindowEventListener *listener)
+            : OSWindow((uintptr_t)window, listener)
         {
-            EGLint width;
-            EGLint height;
-            if (!eglQuerySurface(sDisplay, surface, EGL_WIDTH, &width) || !eglQuerySurface(sDisplay, surface, EGL_HEIGHT, &height))
-                std::terminate();
-            mSize = { width, height };
         }
 
         bool handleMotionEvent(const AInputEvent *event)
@@ -116,14 +92,101 @@ namespace Window {
             return handled;
         }
 
-        InterfacesVector mSize;
+        void onNativeWindowCreated(ANativeWindow *window)
+        {
+            assert(!sNativeWindow);
+            sNativeWindow = window;
+            if (this)
+                mHandle = (uintptr_t)window;
+        }
 
-        //Input
+        void onNativeWindowDestroyed(ANativeWindow *window)
+        {
+            assert(sNativeWindow == window);
+            sNativeWindow = nullptr;
+            if (this)
+                mHandle = 0;
+        }
+
+        void onNativeWindowResized(ANativeWindow *window)
+        {
+            mResizeNeeded.test_and_set();
+        }
+
+        void onConfigurationChanged()
+        {
+            mResizeNeeded.test_and_set();
+        }
+
+        void onContentRectChanged(const ARect *rect)
+        {
+            mContentPos = {
+                rect->left,
+                rect->top
+            };
+            mContentSize = {
+                rect->right - rect->left,
+                rect->bottom - rect->top
+            };
+        }
+
+        void onPause()
+        {
+            mMinimized = true;
+        }
+
+        void onResume()
+        {
+            mMinimized = false;
+        }
+
+        void onInputQueueCreated(AInputQueue *queue)
+        {
+            assert(!sQueue);
+            sQueue = queue;
+        }
+
+        void onInputQueueDestroyed(AInputQueue *queue)
+        {
+            assert(sQueue == queue);
+            sQueue = nullptr;
+        }
+
+        // Input
         InterfacesVector mLastKnownMousePos;
+
+        std::atomic_flag mResizeNeeded;
+        bool mMinimized = false;
+
+        InterfacesVector mContentPos;
+        InterfacesVector mContentSize;
     };
 
-    static std::unordered_map<EGLSurface, AndroidWindow>
-        sWindows;
+    static std::optional<AndroidWindow> sWindow;
+
+    template <auto f, typename... Args>
+    static void delegate(ANativeActivity *activity, Args... args)
+    {
+        (*sWindow.*f)(args...);
+    }
+
+    void setup(ANativeActivity *activity)
+    {
+        activity->callbacks->onNativeWindowCreated = delegate<&AndroidWindow::onNativeWindowCreated, ANativeWindow *>;
+        activity->callbacks->onNativeWindowDestroyed = delegate<&AndroidWindow::onNativeWindowDestroyed, ANativeWindow *>;
+        activity->callbacks->onNativeWindowResized = delegate<&AndroidWindow::onNativeWindowResized, ANativeWindow *>;
+        activity->callbacks->onConfigurationChanged = delegate<&AndroidWindow::onConfigurationChanged>;
+        activity->callbacks->onContentRectChanged = delegate<&AndroidWindow::onContentRectChanged, const ARect *>;
+        activity->callbacks->onPause = delegate<&AndroidWindow::onPause>;
+        activity->callbacks->onResume = delegate<&AndroidWindow::onResume>;
+        activity->callbacks->onInputQueueCreated = delegate<&AndroidWindow::onInputQueueCreated, AInputQueue *>;
+        activity->callbacks->onInputQueueDestroyed = delegate<&AndroidWindow::onInputQueueDestroyed, AInputQueue *>;
+    }
+
+    void forceResize()
+    {
+        sWindow->mResizeNeeded.test_and_set();
+    }
 
     void OSWindow::update()
     {
@@ -136,8 +199,7 @@ namespace Window {
                 bool handled = false;
                 switch (AInputEvent_getType(event)) {
                 case AINPUT_EVENT_TYPE_KEY:
-                    //TODO
-                    std::terminate();
+                    LOG_WARNING("Unhandled Key Event: " << AKeyEvent_getKeyCode(event));
                     break;
                 case AINPUT_EVENT_TYPE_MOTION:
                     handled = static_cast<AndroidWindow *>(this)->handleMotionEvent(event);
@@ -149,17 +211,24 @@ namespace Window {
                 AInputQueue_finishEvent(sQueue, event, handled);
             }
         }
+        if (static_cast<AndroidWindow *>(this)->mResizeNeeded.test() && sWindow->mHandle != 0) {
+            static_cast<AndroidWindow *>(this)->mResizeNeeded.clear();
+            onResize(size());
+        }
     }
 
     InterfacesVector OSWindow::size()
     {
-        return static_cast<AndroidWindow *>(this)->mSize;
+        ANativeWindow *window = reinterpret_cast<ANativeWindow *>(mHandle);
+        return {
+            ANativeWindow_getWidth(window),
+            ANativeWindow_getHeight(window)
+        };
     }
 
     InterfacesVector OSWindow::renderSize()
     {
-        //TODO
-        return size();
+        return static_cast<AndroidWindow *>(this)->mContentSize;
     }
 
     InterfacesVector OSWindow::pos()
@@ -169,12 +238,12 @@ namespace Window {
 
     InterfacesVector OSWindow::renderPos()
     {
-        return { 0, 0 };
+        return static_cast<AndroidWindow*>(this)->mContentPos;
     }
 
     void OSWindow::setSize(const InterfacesVector &size)
     {
-        static_cast<AndroidWindow *>(this)->mSize = size;
+        // static_cast<AndroidWindow *>(this)->mSize = size;
     }
 
     void OSWindow::setRenderSize(const InterfacesVector &size)
@@ -196,17 +265,12 @@ namespace Window {
 
     bool OSWindow::isMinimized()
     {
-        return false;
+        return static_cast<AndroidWindow *>(this)->mMinimized;
     }
 
     bool OSWindow::isMaximized()
     {
         return false;
-    }
-
-    bool OSWindow::isFullscreen()
-    {
-        return true;
     }
 
     void OSWindow::focus()
@@ -233,8 +297,7 @@ namespace Window {
 
     void OSWindow::destroy()
     {
-        eglDestroySurface(sDisplay, (EGLSurface)mHandle);
-        sWindows.erase((EGLSurface)mHandle);
+        sWindow.reset();
     }
 
     void OSWindow::setCursorIcon(Input::CursorIcon icon)
@@ -265,12 +328,22 @@ namespace Window {
             }(icon)));*/
     }
 
+    std::string OSWindow::getClipboardString()
+    {
+        return "";
+    }
+
+    bool OSWindow::setClipboardString(std::string_view s)
+    {
+        return true;
+    }
+
     WindowData OSWindow::data()
     {
         return {};
     }
 
-    //Input
+    // Input
     bool OSWindow::isKeyDown(Input::Key::Key key)
     {
         return false;
@@ -284,48 +357,14 @@ namespace Window {
     {
     }
 
-    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
+    OSWindow *sCreateWindow(const WindowSettings &settings)
     {
-        assert(sDisplay);
+        sNativeWindow.wait();
 
-        EGLSurface handle = (EGLSurface)settings.mHandle;
-        if (!handle) {
+        assert(!sWindow);
+        sWindow.emplace(sNativeWindow);
 
-            const EGLint attribs[] = {
-                EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-                EGL_BLUE_SIZE, 8,
-                EGL_GREEN_SIZE, 8,
-                EGL_RED_SIZE, 8,
-                EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-                EGL_CONFORMANT, EGL_OPENGL_ES2_BIT,
-                /* EGL_SAMPLE_BUFFERS, 1,*/
-                EGL_NONE
-            };
-
-            EGLConfig config;
-            EGLint numConfigs;
-            EGLint format;
-
-            if (!eglChooseConfig(sDisplay, attribs, &config, 1, &numConfigs))
-                return nullptr;
-
-            if (!eglGetConfigAttrib(sDisplay, config, EGL_NATIVE_VISUAL_ID, &format))
-                return nullptr;
-
-            sNativeWindow.wait();
-
-            ANativeWindow_setBuffersGeometry(sNativeWindow, 0, 0, format);
-
-            handle = eglCreateWindowSurface(sDisplay, config, sNativeWindow, 0);
-
-            if (!handle)
-                return nullptr;
-        }
-
-        auto pib = sWindows.try_emplace(handle, handle, listener);
-        assert(pib.second);
-
-        return &pib.first->second;
+        return &*sWindow;
     }
 
     std::vector<MonitorInfo> listMonitors()
@@ -337,7 +376,6 @@ namespace Window {
 
         return { info };
     }
-
 }
 }
 

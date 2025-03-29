@@ -8,6 +8,13 @@
 
 #include "Meta/serialize/streams/buffered_streambuf.h"
 
+#include "Generic/execution/algorithm.h"
+#include "Generic/execution/execution.h"
+
+#include "../../Generic/testreceiver.h"
+
+#include "Meta/serialize/formats.h"
+
 using namespace Engine::Serialize;
 
 struct Buffer {
@@ -106,29 +113,42 @@ struct TestManager : SyncManager {
     {
     }
 
-    SyncManagerResult setBuffer(Buffer &buffer, bool slave, bool shareState = true, std::unique_ptr<Engine::Serialize::Formatter> format = std::make_unique<Engine::Serialize::SafeBinaryFormatter>())
+    void setSlaveBuffer(
+        TestReceiver<Engine::Serialize::SyncManagerResult> &receiver, Buffer &buffer, Engine::Serialize::Format format = Engine::Serialize::Formats::safebinary)
     {
-        std::unique_ptr<buffered_streambuf> buf = std::make_unique<buffered_streambuf>(std::make_unique<BufferedTestBuf>(buffer, !slave));
-        if (slave) {
-            return setSlaveStream(FormattedBufferedStream { std::move(format), std::move(buf), std::make_unique<SyncStreamData>(*this, 0) }, shareState, std::chrono::milliseconds { 1000 });
-        } else {
-            return addMasterStream(FormattedBufferedStream { std::move(format), std::move(buf), std::make_unique<SyncStreamData>(*this, 1) }, shareState);
-        }
+        std::unique_ptr<buffered_streambuf> buf = std::make_unique<buffered_streambuf>(std::make_unique<BufferedTestBuf>(buffer, false));
+        Engine::Execution::detach(
+            setSlaveStream(format, std::move(buf), 1s, std::make_unique<SyncStreamData>(*this, 0))
+            | Engine::Execution::then_receiver(receiver));
+        receiveMessages(-1, 1s);
+    }
+
+    SyncManagerResult setMasterBuffer(
+        Buffer &buffer, Engine::Serialize::Format format = Engine::Serialize::Formats::safebinary)
+    {
+        std::unique_ptr<buffered_streambuf> buf = std::make_unique<buffered_streambuf>(std::make_unique<BufferedTestBuf>(buffer, true));
+        return addMasterStream(format, std::move(buf), std::make_unique<SyncStreamData>(*this, 1));
     }
 
     using SyncManager::getMasterStream;
     using SyncManager::getSlaveStream;
 };
 
-#define HANDLE_MGR_RESULT(mgr, ...) ASSERT_EQ(__VA_ARGS__, SyncManagerResult::SUCCESS) << mgr.fetchStreamError()
+#define HANDLE_MGR_RESULT(mgr, ...) ASSERT_EQ(__VA_ARGS__, SyncManagerResult::SUCCESS)
 #define HANDLE_STREAM_RESULT(...)                            \
     {                                                        \
         StreamResult result = __VA_ARGS__;                   \
         ASSERT_EQ(result.mState, StreamState::OK) << result; \
     }
-#define ASSERT_MESSAGEFUTURE_EQ(f, ...)             \
-    {                                               \
-        typename decltype(f)::type value;           \
-        ASSERT_EQ(f.get(value), MessageResult::OK); \
-        ASSERT_EQ(value, __VA_ARGS__);              \
+#define ASSERT_MESSAGEFUTURE_EQ(f, ...)   \
+    {                                     \
+        ASSERT_TRUE(f.mValue);            \
+        ASSERT_EQ(f.mValue, __VA_ARGS__); \
+    }
+#define HANDLE_MGR_RECEIVER(...)                  \
+    {                                             \
+        TestReceiver<SyncManagerResult> receiver; \
+        __VA_ARGS__;                              \
+        ASSERT_TRUE(receiver.mFinished);          \
+        ASSERT_TRUE(receiver.mHasValue);          \
     }

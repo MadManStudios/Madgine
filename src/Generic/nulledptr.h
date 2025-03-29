@@ -18,7 +18,8 @@ struct NulledPtr {
         mPtr = nullptr;
     }
 
-    NulledPtr& operator=(NulledPtr&& other) {
+    NulledPtr &operator=(NulledPtr &&other)
+    {
         mPtr = std::exchange(other.mPtr, nullptr);
         return *this;
     }
@@ -30,6 +31,11 @@ struct NulledPtr {
     T *operator->() const
     {
         return mPtr;
+    }
+
+    void reset()
+    {
+        mPtr = nullptr;
     }
 
 private:
