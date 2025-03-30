@@ -91,7 +91,6 @@ namespace Plugins {
 
     void Plugin::unloadDependents(PluginManager &manager, Ini::IniFile &file)
     {
-        assert(isLoaded(file));
         ensureModule(manager);
         for (Plugin *dep : mDependents) {
             if (dep->mSection->unloadPlugin(dep, file)) {
