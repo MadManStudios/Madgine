@@ -4,6 +4,11 @@ once()
 
 function(add_notices target)
 	
+	get_target_property(ALIASED_TARGET ${target} ALIASED_TARGET)
+	if (ALIASED_TARGET)
+		set(target ${ALIASED_TARGET})
+	endif()
+
 	set(options)
 	set(oneValueArgs LICENSE_FILE CREDITS READABLE_NAME)
 	set(multiValueArgs)
