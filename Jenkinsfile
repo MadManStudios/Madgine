@@ -127,7 +127,7 @@ pipeline {
 					cd build
 					cd clang-osx-Debug-Plugins
 
-					make doxygen
+					make sphinx
 				"""
 			}
 		}
