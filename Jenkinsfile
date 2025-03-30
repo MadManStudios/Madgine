@@ -234,9 +234,9 @@ pipeline {
 		}
 		success {
 			sh """
-				mkdir -p /opt/homebrew/var/www/${env.BRANCH_NAME}
+				mkdir -p /opt/homebrew/var/www/${env.BRANCH_NAME}				
 
-				cp -r doc/* /opt/homebrew/var/www/${env.BRANCH_NAME}
+				cp -r doc /opt/homebrew/var/www/${env.BRANCH_NAME}
 
 				mkdir -p /opt/homebrew/var/www/${env.BRANCH_NAME}/live
 
