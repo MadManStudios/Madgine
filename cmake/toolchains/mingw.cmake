@@ -1,7 +1,7 @@
 # Usage:
 # cmake .. -DLLVM_ARCH=aarch64 i686 or x86_64 -DLLVM_PREFIX=/path/to/llvm-mingw-prefix -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-llvm-mingw.cmake
 
-set(LLVM_PREFIX /Users/madman/Desktop/llvm-mingw-20220323-ucrt-macos-universal)
+set(LLVM_PREFIX /Users/madman/Desktop/llvm-mingw-20250319-ucrt-macos-universal)
 set(LLVM_ARCH x86_64)
 
 # the name of the target operating system
