@@ -8,7 +8,7 @@ def toolchains = [
 		],
 	"osx": [			
 			dockerImage : 'schuetzo/linux-test-env:latest',
-			args : "-DENABLE_ARC=False -DDEPLOYMENT_TARGET=15.0 -DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/osx.h",
+			args : "-DENABLE_ARC=False -DDEPLOYMENT_TARGET=15.2 -DGENERIC_COMPATIBILITY_CONFIG_HEADER=/Users/madman/compat/osx.h",
 			artifacts : ['bin/*', 'data/*']
 		],
 	"ios": [
