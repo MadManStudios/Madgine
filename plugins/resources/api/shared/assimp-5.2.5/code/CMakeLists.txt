@@ -1280,7 +1280,7 @@ if (MINGW)
     ARCHIVE_OUTPUT_NAME assimp
   )
   if (NOT BUILD_SHARED_LIBS)
-    TARGET_LINK_LIBRARIES ( assimp -static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lwinpthread ) # winpthread is for libminizip.
+    TARGET_LINK_LIBRARIES ( assimp -static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread ) # winpthread is for libminizip.
   endif ()
 endif()
 
