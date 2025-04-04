@@ -4,9 +4,13 @@
 #    define MADGINE_COMPATIBILITY_NEED_STOP_SOURCE __cpp_lib_jthread < 201911L
 #endif
 
-#if MADGINE_COMPATIBILITY_NEED_STOP_SOURCE
+#ifndef MADGINE_COMPATIBILITY_NEED_STOP_CALLBACK
+#    define MADGINE_COMPATIBILITY_NEED_STOP_CALLBACK __cpp_lib_jthread < 201911L
+#endif
 
 namespace std {
+
+#if MADGINE_COMPATIBILITY_NEED_STOP_SOURCE
 #    if __cpp_lib_jthread > 0L
 #        pragma message "Using fallback for std::stop_token. (__cpp_lib_jthread: " STRINGIFY2(__cpp_lib_jthread) ")"
 #    else
@@ -18,11 +22,6 @@ struct stop_token {
     {
         return false;
     }
-};
-template <typename F>
-struct stop_callback {
-    template <typename... T>
-    stop_callback(T &&...) { }
 };
 
 constexpr struct nostopstate_t {
@@ -47,5 +46,14 @@ struct stop_source {
         return false;
     }
 };
-}
 #endif
+
+#if MADGINE_COMPATIBILITY_NEED_STOP_CALLBACK
+template <typename F>
+struct stop_callback {
+    template <typename... T>
+    stop_callback(T &&...) { }
+};
+#endif
+
+}

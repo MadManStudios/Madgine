@@ -159,8 +159,25 @@ struct META_EXPORT Matrix3 {
     // arithmetic operations
     /** Matrix addition.
          */
-    Matrix3 &operator+=(const Matrix3 &rkMatrix);
-    Matrix3 operator+(const Matrix3 &rkMatrix) const;
+    constexpr Matrix3 &operator+=(const Matrix3 &rkMatrix)
+    {
+        m00 += rkMatrix.m00;
+        m01 += rkMatrix.m01;
+        m02 += rkMatrix.m02;
+        m10 += rkMatrix.m10;
+        m11 += rkMatrix.m11;
+        m12 += rkMatrix.m12;
+        m20 += rkMatrix.m20;
+        m21 += rkMatrix.m21;
+        m22 += rkMatrix.m22;
+        return *this;
+    }
+    constexpr Matrix3 operator+(const Matrix3 &rkMatrix) const
+    {
+        Matrix3 kSum = *this;
+        kSum += rkMatrix;
+        return kSum;
+    }
 
     /** Matrix subtraction.
          */

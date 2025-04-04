@@ -46,11 +46,8 @@ fixed_string(const char (&data)[Size]) -> fixed_string<Size - 1>;
 namespace detail {
     template <unsigned... digits>
     struct to_chars {
-        static const char value[];
+        static constexpr const char value[] = { ('0' + digits)..., 0 };
     };
-
-    template <unsigned... digits>
-    constexpr char to_chars<digits...>::value[] = { ('0' + digits)..., 0 };
 
     template <size_t rem, unsigned... digits>
     struct to_fixed_string_helper : to_fixed_string_helper<rem / 10, rem % 10, digits...> { };

@@ -4,8 +4,6 @@
 
 #include "imgui/imgui.h"
 
-#include "Madgine/resources/resourcemanager.h"
-
 #include "texteditor.h"
 
 #include <zep/mode_repl.h>

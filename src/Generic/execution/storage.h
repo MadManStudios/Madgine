@@ -21,9 +21,9 @@ namespace Execution {
 
     template <typename V>
     struct ValueStorageImpl<V> {
-        template <typename U>
-        ValueStorageImpl(U &&u)
-            : mValues(std::forward<U>(u))
+        template <typename... U>
+        ValueStorageImpl(U &&...u)
+            : mValues(std::forward<U>(u)...)
         {
         }
 
@@ -131,7 +131,7 @@ namespace Execution {
 
         template <typename... V>
         void set_value(V &&...v)
-        {
+        {            
             assert(std::holds_alternative<NullStorage>(mState));
             mState.template emplace<Value>(std::forward<V>(v)...);
         }

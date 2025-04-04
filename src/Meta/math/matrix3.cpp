@@ -75,27 +75,6 @@ bool Matrix3::equalsWithEpsilon(const Matrix3 &rkMatrix, float epsilon)
 }
 
 //-----------------------------------------------------------------------
-Matrix3 &Matrix3::operator+=(const Matrix3 &rkMatrix)
-{
-    m00 += rkMatrix.m00;
-    m01 += rkMatrix.m01;
-    m02 += rkMatrix.m02;
-    m10 += rkMatrix.m10;
-    m11 += rkMatrix.m11;
-    m12 += rkMatrix.m12;
-    m20 += rkMatrix.m20;
-    m21 += rkMatrix.m21;
-    m22 += rkMatrix.m22;
-    return *this;
-}
-
-Matrix3 Matrix3::operator+(const Matrix3 &rkMatrix) const
-{
-    Matrix3 kSum = *this;
-    kSum += rkMatrix;
-    return kSum;
-}
-//-----------------------------------------------------------------------
 Matrix3 &Matrix3::operator-=(const Matrix3 &rkMatrix)
 {
     m00 -= rkMatrix.m00;

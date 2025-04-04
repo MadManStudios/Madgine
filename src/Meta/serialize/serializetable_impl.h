@@ -163,7 +163,8 @@ namespace Serialize {
         {
             using traits = CallableTraits<decltype(P)>;
             using Unit = typename traits::class_type;
-            using T = std::decay_t<typename traits::return_type>;
+            using R = typename traits::return_type;
+            using T = std::decay_t<R>;
 
             return {
                 name,

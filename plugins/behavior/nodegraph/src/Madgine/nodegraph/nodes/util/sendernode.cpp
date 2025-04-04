@@ -59,7 +59,9 @@ struct connect_helper_t {
     auto operator()(auto &&reader, auto &&algorithm) const
     {
         return Engine::Execution::let_value(std::move(reader), [algorithm { std::move(algorithm) }](Engine::KeyValueSender sender) mutable {
-            return algorithm(std::move(sender)) | Engine::Execution::repeat;
+            return algorithm(std::move(sender)) | Engine::Execution::repeat | Engine::Execution::then([]() {
+                return Engine::ArgumentList {};
+            });
         });
     }
 };

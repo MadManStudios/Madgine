@@ -135,10 +135,14 @@ namespace NodeGraph {
         template <typename Signature>
         ExtendedValueTypeDesc signature_type(uint32_t index) const
         {
-            return [this, index]<typename... T>(type_pack<T...>) {
-                ExtendedValueTypeDesc types[] = { resolveType<T>()... };
-                return types[index];
-            }(Signature {});
+            if constexpr (Signature::size == 0) {
+                throw 0;
+            } else {
+                return [this, index]<typename... T>(type_pack<T...>) {
+                    ExtendedValueTypeDesc types[] = { resolveType<T>()... };
+                    return types[index];
+                }(Signature {});
+            }
         }
 
         template <typename Signature>
