@@ -40,7 +40,7 @@ namespace NodeGraph {
             NodeInterpretHandleBase::write(mNode, v, dataOutIndex, group);
         }
 
-        template <fixed_string Name, typename O>
+        /* template <fixed_string Name, typename O>
         friend BehaviorError tag_invoke(get_binding_t<Name>, NodeInterpretHandle &handle, O &out)
         {
             ValueType v;
@@ -48,7 +48,7 @@ namespace NodeGraph {
             if (error.mResult == BehaviorResult { BehaviorResult::SUCCESS })
                 out = v.as<O>();
             return error;
-        }
+        }*/
     };
 
     template <typename Node>
