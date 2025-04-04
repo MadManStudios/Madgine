@@ -30,6 +30,9 @@ namespace Serialize {
     struct StreamVisitor : SerializePrimitives::instantiate<StreamVisitorBase> {
     };
 
+    template <typename F, typename T>
+    concept StreamVisitable = std::invocable<F, PrimitiveHolder<T>, FormattedSerializeStream &, const char *, std::span<std::string_view>>;
+
     template <typename F, typename...>
     struct StreamVisitorImplHelper : StreamVisitor {
         StreamVisitorImplHelper(F &&f)
@@ -39,9 +42,7 @@ namespace Serialize {
 
         StreamResult visit(PrimitiveHolder<DataTag> holder, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const override
         {
-            if constexpr (requires {
-                              mF(holder, in, name, tags);
-                          }) {
+            if constexpr (StreamVisitable<F, DataTag>) {
                 return mF(holder, in, name, tags);
             } else {
                 return SerializableDataPtr::visitStream(holder.mTable, in, name, *this);                
@@ -50,9 +51,7 @@ namespace Serialize {
 
         StreamResult visit(PrimitiveHolder<SyncableUnitBase> holder, FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) const override
         {
-            if constexpr (requires {
-                              mF(holder, in, name, tags);
-                          }) {
+            if constexpr (StreamVisitable<F, SyncableUnitBase>) {
                 return mF(holder, in, name, tags);
             } else {
                 return visitSyncableUnit(holder.mTable, in, name, *this);
