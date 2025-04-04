@@ -5,39 +5,39 @@ namespace Engine {
 template <typename T = void>
 struct CoroutineHandle {
 
-    CoroutineHandle() = default;
+    CoroutineHandle() noexcept = default;
     CoroutineHandle(const CoroutineHandle &) = delete;
-    CoroutineHandle(CoroutineHandle &&other)
+    CoroutineHandle(CoroutineHandle &&other) noexcept
         : mHandle(std::exchange(other.mHandle, nullptr))
     {
     }
-    CoroutineHandle(std::coroutine_handle<T> handle)
+    CoroutineHandle(std::coroutine_handle<T> handle) noexcept
         : mHandle(handle)
     {
     }
     template <std::derived_from<T> U>
-    CoroutineHandle(std::coroutine_handle<U> handle)
+    CoroutineHandle(std::coroutine_handle<U> handle) noexcept
         : CoroutineHandle(CoroutineHandle<U> { handle })
     {
     }
     template <std::derived_from<T> U>
-    CoroutineHandle(CoroutineHandle<U> &&handle)
+    CoroutineHandle(CoroutineHandle<U> &&handle) noexcept
         : CoroutineHandle(fromPromise(handle.release().promise()))
     {
     }
-    ~CoroutineHandle()
+    ~CoroutineHandle() noexcept
     {
         reset();
     }
 
     CoroutineHandle &operator=(const CoroutineHandle &) = delete;
-    CoroutineHandle &operator=(CoroutineHandle &&other)
+    CoroutineHandle &operator=(CoroutineHandle &&other) noexcept
     {
         std::swap(mHandle, other.mHandle);
         return *this;
     }
 
-    std::coroutine_handle<T> release()
+    std::coroutine_handle<T> release() noexcept
     {
         return std::exchange(mHandle, nullptr);
     }
@@ -80,7 +80,7 @@ struct CoroutineHandle {
         return promise();
     }
 
-    explicit operator bool() const
+    explicit constexpr operator bool() const noexcept
     {
         return static_cast<bool>(mHandle);
     }

@@ -14,7 +14,6 @@ namespace Execution {
             requires(!tag_invocable<get_debug_location_t, T &>)
         auto operator()(T &t) const
         {
-            static_assert(std::same_as<T, void>);
             return nullptr;
         }
 
