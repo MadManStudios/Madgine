@@ -51,6 +51,7 @@ pipeline {
 		booleanParam(defaultValue: false, description: '', name: 'timeTrace')
 		booleanParam(defaultValue: false, description: '', name: 'iwyu')
 		booleanParam(defaultValue: false, description: '', name: 'taskTracker')
+		booleanParam(defaultValue: false, description: '', name: 'doxygen')
     }
 
 	options{
@@ -124,10 +125,12 @@ pipeline {
 		stage ("Doxygen") {
 			steps {
 				sh """
+				if ${params.doxygen}; then
 					cd build
 					cd clang-osx-Debug-Plugins
 
 					make sphinx
+				fi
 				"""
 			}
 		}
