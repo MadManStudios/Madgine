@@ -159,6 +159,8 @@ macro(add_workspace_library name)
 	
 		get_filename_component(abs_precompile_include ${LIB_CONFIG_PRECOMPILED_HEADER} ABSOLUTE)
 
+		cmake_log("Precompiling header ${abs_precompile_include} for target ${name}")
+
 		target_precompile_headers(${name} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${abs_precompile_include}> )
 
 		file(RELATIVE_PATH precompile_include ${abs_source_root} ${abs_precompile_include})

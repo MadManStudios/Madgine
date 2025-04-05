@@ -38,7 +38,7 @@ PROJECT_NAME           = Madgine - Doxygen Documentation
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = ${Madgine_VERSION}
+PROJECT_NUMBER         = $(MADGINE_VERSION)
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -867,9 +867,7 @@ WARN_LOGFILE           =
 
 INPUT                  = src/ \
                          plugins/ \
-                         launcher/launcher.h \
-                         $<TARGET_PROPERTY:Interfaces,BINARY_DIR>/interfacesconfig.h \
-                         $<TARGET_PROPERTY:Modules,BINARY_DIR>/modulesconfig.h
+                         launcher/launcher.h
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -2567,14 +2565,14 @@ INTERACTIVE_SVG        = YES
 # found. If left blank, it is assumed the dot tool can be found in the path.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-DOT_PATH               = "../../../../../../Program Files (x86)/Graphviz2.38/bin"
+DOT_PATH               = 
 
 # The DOTFILE_DIRS tag can be used to specify one or more directories that
 # contain dot files that are included in the documentation (see the \dotfile
 # command).
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-DOTFILE_DIRS           = ${CMAKE_BINARY_DIR}
+DOTFILE_DIRS           = 
 
 # The MSCFILE_DIRS tag can be used to specify one or more directories that
 # contain msc files that are included in the documentation (see the \mscfile
