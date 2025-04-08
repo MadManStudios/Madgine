@@ -57,7 +57,7 @@ namespace Serialize {
         }
     };
 
-#if _MSC_VER && 0
+#if _MSC_VER
 #    define STREAM_ERROR(Type, ...) \
         ::Engine::Serialize::StreamResultBuilder { Type, __VA_ARGS__, __FILE__, __LINE__ }
 #else
