@@ -84,7 +84,7 @@ jobs:
       run: >
         cmake -B ${{ github.workspace }}/build
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -DSKIP_UTIL_BUILD=ON
+        -MADGINE_SHADERGEN_PATH=ON
         -DUSE_CMAKE_LOG=1 
         ${{ fromJSON(needs.configuration.outputs.configs)[ matrix.config ] }}
         ${{ fromJSON(needs.configuration.outputs.toolchains)[matrix.platform] }}

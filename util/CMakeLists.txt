@@ -1,22 +1,24 @@
 include(ExternalProject)
 
-set(shadergenSourceDir ${CMAKE_CURRENT_SOURCE_DIR}/shadergen)
-set(shadergenBinaryDir ${CMAKE_CURRENT_BINARY_DIR}/shadergen)
-
 if (MADGINE_CONFIGURATION)
 	set (DEPENDS MadgineTooling)
 endif ()
 
+set (MADGINE_SHADERGEN_PATH "" CACHE FILEPATH "")
+
 add_executable(ShaderGen IMPORTED GLOBAL)
 
-if (NOT SKIP_UTIL_BUILD)
+if (MADGINE_SHADERGEN_PATH)
+	set(shadergenPath ${MADGINE_SHADERGEN_PATH})
+else()
+    cmake_path(GET CMAKE_BINARY_DIR PARENT_PATH GLOBAL_BINARIES)
+	set(shadergenPath ${GLOBAL_BINARIES}/shadergen/src/ShaderGen${HOST_EXECUTABLE_SUFFIX})
 	ExternalProject_Add(ShaderGenExt
-		PREFIX shadergen 
-		BINARY_DIR ${shadergenBinaryDir}/build
-		SOURCE_DIR ${shadergenSourceDir}
+		PREFIX ${GLOBAL_BINARIES}/shadergen 
+		GIT_REPOSITORY https://github.com/MadManStudios/MadgineShadergen.git
+		GIT_TAG main
 		CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release
-		BUILD_BYPRODUCTS ${shadergenBinaryDir}/ShaderGen${HOST_EXECUTABLE_SUFFIX}
-		BUILD_COMMAND ${CMAKE_COMMAND} --build . --target ShaderGen
+		BUILD_BYPRODUCTS ${shadergenPath}
 		BUILD_ALWAYS true
 		INSTALL_COMMAND ""
 		DEPENDS ${DEPENDS}
@@ -29,7 +31,7 @@ endif()
 
 set_target_properties(ShaderGen 
 	PROPERTIES ShaderGenTargets ""
-	IMPORTED_LOCATION ${shadergenBinaryDir}/ShaderGen${HOST_EXECUTABLE_SUFFIX})
+	IMPORTED_LOCATION ${shadergenPath})
 	
 function(add_shadergen_target target flag)
 

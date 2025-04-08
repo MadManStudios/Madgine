@@ -17,7 +17,7 @@ add_plugin(DirectX12 Madgine Renderer ${sources} PRECOMPILED_HEADER src/DirectX1
 
 target_link_libraries(DirectX12 PRIVATE d3d12 dxgi dxguid Render dxcompiler)
 
-add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PROPERTY:ShaderGen,BINARY_DIR>/shadergen/dxcompiler.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<PATH:GET_PARENT_PATH,$<TARGET_PROPERTY:ShaderGen,IMPORTED_LOCATION>>/dxcompiler.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 
 #Very hacky, but best solution I found
