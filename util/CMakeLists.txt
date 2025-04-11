@@ -1,33 +1,27 @@
 include(ExternalProject)
 
-if (MADGINE_CONFIGURATION)
-	set (DEPENDS MadgineTooling)
-endif ()
-
-set (MADGINE_SHADERGEN_PATH "" CACHE FILEPATH "")
-
 add_executable(ShaderGen IMPORTED GLOBAL)
 
-if (MADGINE_SHADERGEN_PATH)
-	set(shadergenPath ${MADGINE_SHADERGEN_PATH})
-else()
-    cmake_path(GET CMAKE_BINARY_DIR PARENT_PATH GLOBAL_BINARIES)
-	set(shadergenPath ${GLOBAL_BINARIES}/shadergen/src/ShaderGen${HOST_EXECUTABLE_SUFFIX})
-	ExternalProject_Add(ShaderGenExt
-		PREFIX ${GLOBAL_BINARIES}/shadergen 
-		GIT_REPOSITORY https://github.com/MadManStudios/MadgineShadergen.git
-		GIT_TAG main
-		CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release
-		BUILD_BYPRODUCTS ${shadergenPath}
-		BUILD_ALWAYS true
-		INSTALL_COMMAND ""
-		DEPENDS ${DEPENDS}
-		USES_TERMINAL_CONFIGURE true
-		USES_TERMINAL_BUILD true)
+set(endpoint)
 
-	add_dependencies(ShaderGen ShaderGenExt)	
+if (WINDOWS)
+	set(endpoint windows-latest)
+elseif (OSX)
+	set(endpoint macos-latest)
+elseif (LINUX)
+	set(endpoint ubunutu-latest)
+else()
+	MESSAGE(SEND_ERROR "Unknown host platform to fetch ShaderGen")
 endif()
 
+FetchContent_Declare(
+  ShaderGenExt 
+  URL https://github.com/MadManStudios/MadgineShadergen/releases/download/latest-main/${endpoint}.zip
+)
+
+FetchContent_MakeAvailable(ShaderGenExt)
+
+set(shadergenPath ${shadergenext_SOURCE_DIR}/ShaderGen${HOST_EXECUTABLE_SUFFIX})
 
 set_target_properties(ShaderGen 
 	PROPERTIES ShaderGenTargets ""
