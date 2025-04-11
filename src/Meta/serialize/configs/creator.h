@@ -158,8 +158,8 @@ namespace Serialize {
         template <typename P>
         static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple<P> &tuple)
         {
-            STREAM_PROPAGATE_ERROR(KeyCreator::template readCreationData<typename P::first_type>(in, std::get<1>(tuple)));
-            return ValueCreator::template readCreationData<typename P::second_type>(in, std::get<2>(tuple));
+            STREAM_PROPAGATE_ERROR(KeyCreator::template readCreationData<typename P::first_type>(in, std::get<1>(tuple), "Key"));
+            return ValueCreator::template readCreationData<typename P::second_type>(in, std::get<2>(tuple), "Value");
         }
 
         template <typename Op>
