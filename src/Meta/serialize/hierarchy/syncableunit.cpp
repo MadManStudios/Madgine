@@ -286,6 +286,16 @@ namespace Serialize {
         throw 0;
     }
 
+    FormattedMessageStream &getMasterFunctionRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget)
+    {
+        for (FormattedMessageStream &out : unit->getMasterMessageTargets()) {
+            if (out.id() == answerTarget) {
+                return out;
+            }
+        }
+        throw 0;
+    }
+
     WriteMessage getSlaveRequestMessageTarget(const SyncableUnitBase *unit, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
     {
         FormattedMessageStream &out = unit->getSlaveMessageTarget();
