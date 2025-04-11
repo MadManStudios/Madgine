@@ -16,7 +16,7 @@ endif()
 
 FetchContent_Declare(
   ShaderGenExt 
-  URL https://github.com/MadManStudios/MadgineShadergen/releases/download/latest-main/${endpoint}.zip
+  URL https://github.com/MadManStudios/MadgineShadergen/releases/latest/download/${endpoint}.zip
 )
 
 FetchContent_MakeAvailable(ShaderGenExt)
