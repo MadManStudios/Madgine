@@ -1,20 +1,3 @@
-find_package(WindowsSDK)
-
-if (NOT WINDOWSSDK_FOUND)
-	MESSAGE(STATUS "Could not locate Windows SDK! DirectX12 will be disabled")
-	return()
-endif()
-
-
-#Very hacky, but best solution I found
-cmake_path(GET CMAKE_RC_COMPILER PARENT_PATH windows_sdk_dir)
-
-if (NOT windows_sdk_dir)
-	MESSAGE(STATUS "Could not locate dxil in Windows SDK! DirectX12 will be disabled")
-	return()
-endif()
-
-
 Project(DirectX12)
 
 
@@ -29,8 +12,14 @@ target_link_libraries(DirectX12 PRIVATE d3d12 dxgi dxguid Render dxcompiler)
 
 add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<PATH:GET_PARENT_PATH,$<TARGET_PROPERTY:ShaderGen,IMPORTED_LOCATION>>/dxcompiler.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
+FetchContent_Declare(
+  DXC_DXIL 
+  URL https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.8.2502/dxc_2025_02_20.zip
+)
 
-add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${windows_sdk_dir}/dxil.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+FetchContent_MakeAvailable(DXC_DXIL)
+
+add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${dxc_dxil_SOURCE_DIR}/bin/x64/dxil.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 set(sources "")
 FolderSources(sources "" tools)
