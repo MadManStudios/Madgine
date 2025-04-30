@@ -30,9 +30,6 @@ jobs:
         \"linux\": \"ubuntu-latest\", 
         \"android\": \"ubuntu-latest\", 
         \"emscripten\": \"ubuntu-latest\"}"
-      configs: "{
-        \"OpenGL\": \"-DMADGINE_CONFIGURATION=test/configs/OpenGL/ -DBUILD_SHARED_LIBS=OFF _DMADGINE_TOOLING_PRESET=??\", 
-        \"Plugins\": \"-DBUILD_SHARED_LIBS=ON\"}"
       toolchains: "{
         \"windows\": \"\", 
         \"osx\": \"\", 
@@ -41,11 +38,89 @@ jobs:
         \"android\": \"\", 
         \"emscripten\": \"\"}"
     
-  build:
+  build-plugins:
   
     needs: configuration
 
+    runs-on: ${{ matrix.platform }}
+
+    
+    permissions:
+      contents: write
+
+
+    strategy:
+      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      fail-fast: false
+
+      # Set up a matrix to run the following 3 configurations:
+      # 1. <Windows, Release, latest MSVC compiler toolchain on the default runner image, default generator>
+      # 2. <Linux, Release, latest GCC compiler toolchain on the default runner image, default generator>
+      # 3. <Linux, Release, latest Clang compiler toolchain on the default runner image, default generator>
+      #
+      # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
+      matrix:
+        platform: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Patch Dependencies
+      run: |
+        echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: >
+        cmake -B ${{ github.workspace }}/build
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo
+        -DUSE_CMAKE_LOG=1 
+        -DBUILD_SHARED_LIBS=ON
+        -S ${{ github.workspace }}
+
+    - name: Build
+      # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      run: cmake --build ${{ github.workspace }}/build --config RelWithDebInfo --verbose
+
+    - name: Test
+      working-directory: ${{ github.workspace }}/build
+      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest --build-config RelWithDebInfo --output-on-failure
+
+    - name: Package
+      working-directory: ${{ github.workspace }}/build
+      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: cpack
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: latest
+        tag_name: latest-main
+        files: ${{ github.workspace }}/build/packages/*
+
+    - name: Pushing Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.platform }}
+        path: bin
+        overwrite: true
+
+  build-configs:
+  
+    needs: [configuration, build-plugins]
+
     runs-on: ${{ fromJSON(needs.configuration.outputs.platforms)[matrix.platform] }}    
+
+    
+    permissions:
+      contents: write
+
 
     strategy:
       # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
@@ -59,15 +134,8 @@ jobs:
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
         platform: [windows, osx, ios, linux, android, emscripten]
-        build_type: [Debug, RelWithDebInfo]
-        config: [Plugins, OpenGL]
         exclude:
-          - config: Plugins
-            platform: ios
-          - config: Plugins
-            platform: android
-          - config: Plugins
-            platform: emscripten
+          - platform: osx
           - platform: ios
           - platform: android
           - platform: emscripten
@@ -77,27 +145,37 @@ jobs:
       with:
         submodules: recursive
 
+    - name: Fetching Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        # Name of the artifact to download.
+        # If unspecified, all artifacts for the run are downloaded.
+        # Optional.
+        name: ${{ fromJSON(needs.configuration.outputs.platforms)[matrix.platform] }}    
+        path: tooling
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
         cmake -B ${{ github.workspace }}/build
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo
         -DUSE_CMAKE_LOG=1 
-        ${{ fromJSON(needs.configuration.outputs.configs)[ matrix.config ] }}
+        -DMADGINE_CONFIGURATION=test/configs/OpenGL/
+        -DBUILD_SHARED_LIBS=OFF 
+        -DMADGINE_TOOLING_PRESET=tooling
         ${{ fromJSON(needs.configuration.outputs.toolchains)[matrix.platform] }}
         -S ${{ github.workspace }}
 
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }} --verbose
+      run: cmake --build ${{ github.workspace }}/build --config RelWithDebInfo --verbose
 
     - name: Test
       working-directory: ${{ github.workspace }}/build
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest --build-config ${{ matrix.build_type }} --output-on-failure
+      run: ctest --build-config RelWithDebInfo --output-on-failure
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
@@ -110,5 +188,5 @@ jobs:
       with:
         name: latest
         tag_name: latest-main
-        files: ${{ github.workspace }}/build/packages/*.zip
+        files: ${{ github.workspace }}/build/packages/*
           
