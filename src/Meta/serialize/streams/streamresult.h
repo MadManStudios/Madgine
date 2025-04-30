@@ -25,7 +25,7 @@ namespace Serialize {
     struct META_EXPORT StreamResultBuilder {
         StreamState mType;
         SerializeStream *mStream = nullptr;
-        bool mBinary;
+        bool mBinary = true;
         const char *mFile;
         size_t mLine;
         std::ostringstream mMsg;
@@ -33,6 +33,7 @@ namespace Serialize {
         StreamResultBuilder(StreamState type, SerializeStream &stream, bool binary, const char *file, size_t line)
             : mType(type)
             , mStream(&stream)
+            , mBinary(binary)
             , mFile(file)
             , mLine(line)
         {
