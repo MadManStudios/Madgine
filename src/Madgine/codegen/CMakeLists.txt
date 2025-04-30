@@ -6,4 +6,4 @@ add_workspace_library(CodeGen ${sources} SOURCE_ROOT ../..)
 
 target_link_libraries(CodeGen PUBLIC Meta)
 
-install_to_workspace(Madgine EXPORT_LIB TARGETS CodeGen)
+install_to_workspace(CodeGen TARGETS CodeGen)

@@ -82,7 +82,7 @@ target_depend_on_all_plugins(${MADGINE_BINARY_NAME})
 
 generate_binary_info(${MADGINE_BINARY_NAME})
 
-install_to_workspace(Madgine TARGETS ${MADGINE_BINARY_NAME})
+install_to_workspace(${MADGINE_BINARY_NAME} TARGETS ${MADGINE_BINARY_NAME})
 
 write_notices(${MADGINE_BINARY_NAME})
 

@@ -5,9 +5,6 @@ once()
 include(Workspace)
 include(binaryinfo)
 
-set (CMAKE_INSTALL_DEBUG_LIBRARIES TRUE)
-include(InstallRequiredSystemLibraries)
-
 include(GetPrerequisites)
 
 if (MADGINE_CONFIGURATION)
@@ -27,6 +24,14 @@ endif ()
 
 macro(enable_packaging)
 
+	include(CPackComponent)
+	set(CMAKE_INSTALL_DEFAULT_COMPONENT_NAME "Trash")
+	set(CPACK_OUTPUT_CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/CPackConfig.cmake)
+
+endmacro()
+
+macro(packaging)
+
 	if (EXISTS LICENSE.rst)
 		install(FILES LICENSE.rst DESTINATION . RENAME LICENSE)
 	endif()
@@ -43,8 +48,8 @@ macro(enable_packaging)
 	#set(CPACK_NSIS_PACKAGE_NAME ${PROJECT_NAME}-${PROJECT_VERSION})
 	set(CPACK_NSIS_DISPLAY_NAME ${PROJECT_NAME})
 
-	include(CPackComponent)
 	include(CPack)
+	
 
 endmacro()
 

@@ -70,11 +70,11 @@ configure_pkg_config_file(vorbis.pc.in)
 configure_pkg_config_file(vorbisenc.pc.in)
 configure_pkg_config_file(vorbisfile.pc.in)
 
-install(
-    FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/vorbis.pc
-    ${CMAKE_CURRENT_BINARY_DIR}/vorbisenc.pc
-    ${CMAKE_CURRENT_BINARY_DIR}/vorbisfile.pc
-    DESTINATION
-    ${CMAKE_INSTALL_LIBDIR}/pkgconfig
-)
+#install(
+#    FILES
+#    ${CMAKE_CURRENT_BINARY_DIR}/vorbis.pc
+#    ${CMAKE_CURRENT_BINARY_DIR}/vorbisenc.pc
+#    ${CMAKE_CURRENT_BINARY_DIR}/vorbisfile.pc
+#    DESTINATION
+#    ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+#)

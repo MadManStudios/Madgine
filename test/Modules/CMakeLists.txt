@@ -11,8 +11,7 @@ target_link_libraries(TestShared PUBLIC Modules)
 
 generate_binary_info(TestShared)
 
-install_to_workspace(TestShared TARGETS TestShared EXPORT_LIB)
-export_to_workspace(TestShared)
+install_to_workspace(TestShared TARGETS TestShared)
 
 
 set(libASources "")

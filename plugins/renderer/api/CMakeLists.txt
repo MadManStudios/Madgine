@@ -12,9 +12,7 @@ FolderSources(sources "" src)
 				FolderSources(sources passes shaders bloom.PS_hlsl bloom.VS_hlsl blur.PS_hlsl blur.VS_hlsl)
 			FolderSources(sources render shadinglanguage sl_support_begin.h sl_support_end.h)
 		
-add_plugin(Render Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/renderlib.h)
-
-plugin_group(Renderer EXCLUSIVE ATLEAST_ONE)
+add_plugin(Render Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/renderlib.h EXTERNAL_DEPS freetype API_PLUGIN EXCLUSIVE ATLEAST_ONE)
 
 target_link_plugins(Render Debugger MeshLoader ImageLoader)
 target_link_plugin_groups(Render Renderer)

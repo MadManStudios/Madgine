@@ -7,7 +7,7 @@ FolderSources(sources "" src)
 	FolderSources(sources src Madgine clientforward.h clientlib.h)
 		FolderSources(sources Madgine window layoutloader.cpp layoutloader.h mainwindow.cpp mainwindow.h mainwindowcomponent.cpp mainwindowcomponent.h mainwindowcomponentcollector.cpp mainwindowcomponentcollector.h toolwindow.cpp toolwindow.h)
 
-add_plugin(Client Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/clientlib.h)
+add_plugin(Client Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/clientlib.h API_PLUGIN)
 
 target_link_plugins(Client Render)
 

@@ -6,7 +6,7 @@ FolderSources(sources "" Madgine meshloaderlib.h)
 	FolderSources(sources Madgine meshloader gpumeshdata.h gpumeshloader.cpp gpumeshloader.h meshdata.cpp meshdata.h meshloader.cpp meshloader.h)
 
 
-add_plugin(MeshLoader Madgine Utility ${sources} PRECOMPILED_HEADER Madgine/meshloaderlib.h SOURCE_ROOT . EXTERNAL_DEPS assimp)
+add_plugin(MeshLoader Madgine Resources ${sources} PRECOMPILED_HEADER Madgine/meshloaderlib.h SOURCE_ROOT .)
 
 target_link_libraries(MeshLoader PRIVATE assimp)
 

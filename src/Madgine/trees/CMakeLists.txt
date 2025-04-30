@@ -5,4 +5,4 @@ add_workspace_library(Trees ${sources} SOURCE_ROOT ../..)
 
 target_link_libraries(Trees PUBLIC Generic)
 
-install_to_workspace(Madgine EXPORT_LIB TARGETS Trees)
+install_to_workspace(Trees TARGETS Trees)

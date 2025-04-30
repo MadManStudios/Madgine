@@ -31,4 +31,4 @@ set_target_properties(lib_msdfgen PROPERTIES OUTPUT_NAME msdfgen)
 
 set_property(TARGET lib_msdfgen PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-install_to_workspace(Madgine EXPORT_LIB TARGETS lib_msdfgen)
+install_to_workspace(Madgine TARGETS lib_msdfgen)

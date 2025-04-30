@@ -13,6 +13,7 @@ if (BUILD_TESTING)
 	enable_testing()
 
 	set(BUILD_GMOCK OFF CACHE BOOL "Builds the googlemock subproject" FORCE)
+	set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 
 	add_subdirectory(test/googletest)
 

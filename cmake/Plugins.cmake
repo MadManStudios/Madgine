@@ -57,8 +57,8 @@ endif ()
 macro(add_plugin name base type)
 
 	set(options)
-	set(oneValueArgs)
-	set(multiValueArgs EXTERNAL_DEPS)
+	set(oneValueArgs INSTALL_COMPONENT)
+	set(multiValueArgs EXTERNAL_DEPS API_PLUGIN)
 	cmake_parse_arguments(PLUGIN_CONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})	
 
 	add_workspace_library(${name} ${PLUGIN_CONFIG_UNPARSED_ARGUMENTS})
@@ -84,11 +84,26 @@ macro(add_plugin name base type)
 	set(PLUGIN_LIST ${PLUGIN_LIST} ${name} CACHE INTERNAL "")	
 
 	if (installPlugin)
-		install_to_workspace(${name} TARGETS ${name} EXPORT_LIB)
-		install_to_workspace(${name} TARGETS ${PLUGIN_CONFIG_EXTERNAL_DEPS})
-		export_to_workspace(${name})
+		if (NOT PLUGIN_CONFIG_INSTALL_COMPONENT)
+			set(PLUGIN_CONFIG_INSTALL_COMPONENT ${name})
+		endif()
 
-		cpack_add_component(${name} GROUP ${type})
+		cpack_add_component_group(${type}Group
+					DISPLAY_NAME ${type})
+		if (("API_PLUGIN" IN_LIST PLUGIN_CONFIG_KEYWORDS_MISSING_VALUES) OR PLUGIN_CONFIG_API_PLUGIN)
+			plugin_group(${name} ${PLUGIN_CONFIG_API_PLUGIN})
+			cpack_add_component_group(${name}Group
+						DISPLAY_NAME ${name}
+						PARENT_GROUP ${type}Group)
+			cpack_add_component(${name}
+						DISPLAY_NAME API
+						GROUP ${name}Group)
+		else()
+			cpack_add_component(${PLUGIN_CONFIG_INSTALL_COMPONENT} GROUP ${type}Group)
+		endif()
+
+		install_to_workspace(${PLUGIN_CONFIG_INSTALL_COMPONENT} TARGETS ${name} ${PLUGIN_CONFIG_EXTERNAL_DEPS})
+		
 	endif()
 	
 	#foreach(project ${PROJECTS_DEPENDING_ON_ALL_PLUGINS})

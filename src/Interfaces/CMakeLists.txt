@@ -71,4 +71,4 @@ if (MSVC)
 	target_link_options(Interfaces PUBLIC "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/Interfaces.natvis")
 endif()
 
-install_to_workspace(Madgine TARGETS Interfaces EXPORT_LIB)
+install_to_workspace(Runtime TARGETS Interfaces)

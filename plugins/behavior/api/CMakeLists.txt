@@ -4,7 +4,7 @@ set(sources "")
 FolderSources(sources "" src)
 	FolderSources(sources src Madgine behaviorforward.h behaviorlib.h behavior.cpp behavior.h behaviorcollector.cpp behaviorcollector.h behaviorerror.cpp behaviorerror.h behaviorhandle.cpp behaviorhandle.h behaviorlist.cpp behaviorlist.h behaviorreceiver.cpp behaviorreceiver.h bindings.cpp nativebehaviorcollector.cpp nativebehaviorcollector.h parametertuple.cpp parametertuple.h)
 		
-add_plugin(Behavior Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/behaviorlib.h)
+add_plugin(Behavior Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/behaviorlib.h API_PLUGIN)
 
 target_link_libraries(Behavior PUBLIC Meta Modules)
 target_link_plugins(Behavior Debugger)

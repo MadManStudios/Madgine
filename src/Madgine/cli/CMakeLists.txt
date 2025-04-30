@@ -6,4 +6,4 @@ add_workspace_library(CLI ${sources} SOURCE_ROOT ../..)
 
 target_link_libraries(CLI PUBLIC Interfaces)
 
-install_to_workspace(Madgine EXPORT_LIB TARGETS CLI)
+install_to_workspace(CLI TARGETS CLI)

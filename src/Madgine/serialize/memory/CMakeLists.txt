@@ -6,4 +6,4 @@ add_workspace_library(MemorySerialize ${sources} SOURCE_ROOT ../../..)
 
 target_link_libraries(MemorySerialize PUBLIC Meta)
 
-install_to_workspace(Madgine EXPORT_LIB TARGETS MemorySerialize)
+install_to_workspace(MemorySerialize TARGETS MemorySerialize)
