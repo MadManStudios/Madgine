@@ -29,7 +29,7 @@ FolderSources(sources src OpenGL openglforward.h opengllib.h openglmeshdata.h op
 	FolderSources(sources OpenGL util gldump.cpp openglbuffer.cpp openglbuffer.h
 	openglheapallocator.cpp openglheapallocator.h openglshader.cpp openglshader.h opengltexture.cpp opengltexture.h openglvertexarray.cpp openglvertexarray.h openglpipeline.cpp openglpipeline.h openglpipelineinstance.cpp openglpipelineinstance.h)
 
-add_plugin(OpenGL Madgine Renderer ${sources} PRECOMPILED_HEADER src/OpenGL/opengllib.h)
+add_plugin(OpenGL Madgine Render ${sources} PRECOMPILED_HEADER src/OpenGL/opengllib.h)
 
 target_link_libraries(OpenGL PRIVATE ${OPENGL_LIBRARIES} Render)
 target_include_directories(OpenGL PRIVATE ${OPENGL_INCLUDE_DIR})

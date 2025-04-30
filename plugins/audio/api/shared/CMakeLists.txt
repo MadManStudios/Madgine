@@ -2,6 +2,10 @@
 push_static()
 
 if (NOT IOS AND NOT EMSCRIPTEN)
+
+	set(INSTALL_DOCS OFF CACHE BOOL "Install documentation" FORCE)
+	set(INSTALL_PKG_CONFIG_MODULE OFF CACHE BOOL "Install ogg.pc file" FORCE)
+	set(INSTALL_CMAKE_PACKAGE_MODULE OFF CACHE BOOL "Install CMake package configuration module" FORCE)
 	add_subdirectory(libogg-1.3.5)
 
 	#add_library(Ogg::ogg ALIAS ogg)

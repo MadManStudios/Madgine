@@ -48,7 +48,7 @@ endif()
 
 generate_binary_info(Modules)
 
-install_to_workspace(Madgine TARGETS Modules EXPORT_LIB)
+install_to_workspace(Runtime TARGETS Modules)
 
 target_compile_definitions(Modules PRIVATE 
 		PLUGIN_GROUP_DEFINITIONS=$<JOIN:$<TARGET_PROPERTY:Modules,PLUGIN_GROUP_DEFINITIONS>,,>)

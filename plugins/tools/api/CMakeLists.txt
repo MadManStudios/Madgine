@@ -20,7 +20,7 @@ endif()
 		FolderSources(sources Madgine_Tools testtool testtool.cpp testtool.h)
 	
 
-add_plugin(Tools Madgine Tools ${sources} PRECOMPILED_HEADER src/Madgine_Tools/toolslib.h)
+add_plugin(Tools Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine_Tools/toolslib.h API_PLUGIN)
 
 target_link_plugins(Tools)
 

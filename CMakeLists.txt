@@ -54,7 +54,6 @@ if (MADGINE_CONFIGURATION)
 
 endif()
 
-
 include(Workspace)
 include(Packaging)
 include(PrecompiledHeader)
@@ -65,15 +64,9 @@ include(Testing)
 include(Legal)
 include(Dependencies)
 
-set (CPACK_NSIS_MODIFY_PATH ON)
-set (CPACK_PACKAGE_VENDOR "MadMan Studios")
-
-#set (CPACK_PACKAGE_EXECUTABLES "Maditor;Maditor")
-
 enable_packaging()
 
-
-add_subdirectory(util ${CMAKE_BINARY_DIR}/../util)
+add_subdirectory(util)
 
 add_subdirectory(src)
 
@@ -113,8 +106,161 @@ if (BUILD_TESTING)
 endif()
 
 
-export_to_workspace(Madgine)
+set (CPACK_NSIS_MODIFY_PATH ON)
+set (CPACK_PACKAGE_VENDOR "MadMan Studios")
 
-cpack_add_component(Madgine REQUIRED)
+#set (CPACK_PACKAGE_EXECUTABLES "Maditor;Maditor")
 
-cpack_add_component_group(Renderer EXPANDED)
+
+cpack_add_component(MadgineLauncher REQUIRED)
+cpack_add_component(Runtime REQUIRED)
+
+get_cmake_property(CPACK_COMPONENTS_ALL COMPONENTS)
+list(REMOVE_ITEM CPACK_COMPONENTS_ALL "assimp_dev" "libassimp5.2.4" "libassimp5.2.4_dev" "Trash" "LibA" "LibB" "TestShared")
+
+
+cpack_add_component_group(APIGroup
+	DISPLAY_NAME API)			
+cpack_add_component_group(AudioGroup
+	DISPLAY_NAME Audio
+	PARENT_GROUP APIGroup)
+cpack_add_component(Audio
+	DISPLAY_NAME API
+	GROUP AudioGroup)
+cpack_add_component(PortAudioApi	
+	GROUP AudioGroup)
+cpack_add_component_group(CoreGroup
+	DISPLAY_NAME Core)			
+cpack_add_component_group(ClientGroup
+	DISPLAY_NAME Client
+	PARENT_GROUP CoreGroup)
+cpack_add_component(Client
+	DISPLAY_NAME API
+	GROUP ClientGroup
+	REQUIRED)		
+cpack_add_component_group(RootGroup
+	DISPLAY_NAME Root
+	PARENT_GROUP CoreGroup)
+cpack_add_component(Root
+	DISPLAY_NAME API
+	GROUP RootGroup
+	REQUIRED)		
+cpack_add_component_group(ServerGroup
+	DISPLAY_NAME Server
+	PARENT_GROUP CoreGroup)
+cpack_add_component(Server
+	DISPLAY_NAME API
+	GROUP ServerGroup)		
+cpack_add_component_group(AppGroup
+	DISPLAY_NAME App
+	PARENT_GROUP CoreGroup)
+cpack_add_component(App
+	DISPLAY_NAME API
+	GROUP AppGroup
+	REQUIRED)	
+cpack_add_component_group(ResourcesGroup
+	DISPLAY_NAME Resources
+	PARENT_GROUP CoreGroup)			
+cpack_add_component(Resources
+	DISPLAY_NAME API
+	GROUP ResourcesGroup
+	REQUIRED)		
+cpack_add_component(AnimationLoader
+	GROUP ResourcesGroup)		
+cpack_add_component(ImageLoader
+	GROUP ResourcesGroup
+	REQUIRED)		
+cpack_add_component(MeshLoader
+	GROUP ResourcesGroup
+	REQUIRED)		
+cpack_add_component(SkeletonLoader
+	GROUP ResourcesGroup)		
+cpack_add_component_group(BehaviorGroup
+	DISPLAY_NAME Behavior
+	PARENT_GROUP CoreGroup)
+cpack_add_component(Behavior
+	DISPLAY_NAME API
+	GROUP BehaviorGroup
+	REQUIRED)	
+cpack_add_component(NodeGraph	
+	GROUP BehaviorGroup)	
+cpack_add_component(Handler
+	GROUP BehaviorGroup
+	REQUIRED)	
+cpack_add_component_group(RenderGroup
+	DISPLAY_NAME Render
+	PARENT_GROUP CoreGroup)
+cpack_add_component(Render
+	DISPLAY_NAME API
+	GROUP RenderGroup
+	REQUIRED)	
+cpack_add_component(DirectX12
+	GROUP RenderGroup)	
+cpack_add_component(OpenGL
+	GROUP RenderGroup)	
+cpack_add_component(Vulkan
+	GROUP RenderGroup)	
+cpack_add_component_group(MiscGroup
+	DISPLAY_NAME Misc)
+cpack_add_component(Scene
+	GROUP MiscGroup)	
+cpack_add_component(SceneRenderer
+	GROUP MiscGroup)	
+cpack_add_component(Widgets
+	GROUP MiscGroup)	
+cpack_add_component(WidgetHandler
+	GROUP MiscGroup)	
+cpack_add_component_group(ToolsGroup
+	DISPLAY_NAME Tools)
+cpack_add_component(Tools
+	DISPLAY_NAME API
+	GROUP ToolsGroup
+	REQUIRED)	
+cpack_add_component(Templates	
+	GROUP ToolsGroup)	
+cpack_add_component(TextEditor	
+	GROUP ToolsGroup)	
+cpack_add_component_group(GameGroup
+	DISPLAY_NAME Game)
+cpack_add_component(ClickBrick
+	GROUP GameGroup)	
+cpack_add_component_group(DebugGroup
+	DISPLAY_NAME Debug
+	PARENT_GROUP CoreGroup)
+cpack_add_component(Debugger
+	DISPLAY_NAME API
+	GROUP DebugGroup
+	REQUIRED)	
+cpack_add_component_group(TestGroup
+	DISPLAY_NAME Test)
+cpack_add_component(LibA
+	GROUP TestGroup)	
+cpack_add_component(LibB
+	GROUP TestGroup)	
+cpack_add_component(CLI
+	HIDDEN)
+cpack_add_component(CodeGen
+	HIDDEN)
+cpack_add_component(Curl
+	HIDDEN)
+cpack_add_component(FilesystemSerialize
+	HIDDEN)
+cpack_add_component(Im3D
+	HIDDEN)
+cpack_add_component(ImGui
+	HIDDEN)
+cpack_add_component(MemorySerialize
+	HIDDEN)
+cpack_add_component(NetworkSerialize
+	HIDDEN)
+cpack_add_component(NodeEditor
+	HIDDEN)
+cpack_add_component(TemplateEngine
+	HIDDEN)
+cpack_add_component(Trees
+	HIDDEN)
+
+packaging()
+
+
+

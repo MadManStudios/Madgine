@@ -23,4 +23,4 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ImGui)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-install_to_workspace(Madgine EXPORT_LIB TARGETS ${PROJECT_NAME})
+install_to_workspace(NodeEditor TARGETS ${PROJECT_NAME})

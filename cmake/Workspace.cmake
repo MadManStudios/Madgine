@@ -62,30 +62,16 @@ endfunction(install_header)
 
 function(install_to_workspace name)
 
-	set(options EXPORT_LIB)
+	set(options)
 	set(oneValueArgs)
 	set(multiValueArgs TARGETS)
 	cmake_parse_arguments(OPTIONS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-	if (OPTIONS_EXPORT_LIB)
-		install(
-			TARGETS ${OPTIONS_TARGETS}
-			EXPORT ${name}
-			RUNTIME DESTINATION bin COMPONENT ${name}
-			LIBRARY DESTINATION lib COMPONENT ${name}
-			BUNDLE DESTINATION App COMPONENT ${name}
-			INCLUDES DESTINATION ${name}/include
-			ARCHIVE DESTINATION ${name}/lib COMPONENT ${name}			
-		)
-	else()
-		install(
-			TARGETS ${OPTIONS_TARGETS} 
-			EXPORT ${name}
-			RUNTIME DESTINATION bin COMPONENT ${name}
-			LIBRARY DESTINATION lib COMPONENT ${name}
-			BUNDLE DESTINATION App COMPONENT ${name}
-		)
-	endif()
+	install(
+		TARGETS ${OPTIONS_TARGETS} 
+		RUNTIME DESTINATION bin COMPONENT ${name}
+		BUNDLE DESTINATION App COMPONENT ${name}
+	)
 
 	foreach(target ${OPTIONS_TARGETS})
 		get_target_property(TARGET_SOURCE_DIR ${target} SOURCE_DIR)
@@ -93,24 +79,11 @@ function(install_to_workspace name)
 			install(DIRECTORY ${TARGET_SOURCE_DIR}/data DESTINATION . COMPONENT ${name})
 		endif()
 
-		target_include_directories(${target} INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${target}/include>)
+		#target_include_directories(${target} INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${target}/include>)
 	endforeach()
 
 endfunction(install_to_workspace)
 
-
-function(export_to_workspace name)
-
-	install_header(${name})
-
-    install(
-	    EXPORT ${name}
-	    FILE ${name}Config.cmake
-	    DESTINATION ${name}/lib/cmake/${name}
-		COMPONENT ${name}
-    )
-    
-endfunction(export_to_workspace)
 
 #Customization-point for different platforms (e.g. Android)
 macro(add_workspace_application name)
@@ -197,35 +170,6 @@ macro(add_workspace_interface_library name)
 endmacro(add_workspace_interface_library)
 
 
-function(install_interface_to_workspace name)
-
-	set(options)
-	set(oneValueArgs SOURCE_ROOT)
-	set(multiValueArgs TARGETS)
-	cmake_parse_arguments(OPTIONS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-		install(
-			TARGETS ${OPTIONS_TARGETS} 
-			EXPORT ${name}
-		)
-
-	if (NOT OPTIONS_SOURCE_ROOT)
-		MESSAGE(SEND_ERROR "Source directory must be always set for Interface Library installs. Use SOURCE_ROOT to specify it.")
-	endif()
-
-	foreach(target ${OPTIONS_TARGETS})
-		
-		get_filename_component(TARGET_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/${OPTIONS_SOURCE_ROOT} ABSOLUTE)
-
-		if (EXISTS ${TARGET_SOURCE_DIR}/data)
-			install(DIRECTORY ${TARGET_SOURCE_DIR}/data DESTINATION . COMPONENT ${name})
-		endif()
-
-		target_include_directories(${target} INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${target}/include>)
-	endforeach()
-
-endfunction(install_interface_to_workspace)
-
 function(get_dependencies list target)
 
 	list(FIND ${list} ${target} found_target)
@@ -265,12 +209,12 @@ macro(push_static)
 	set(OLD_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
 	set(OLD_BUILD_TESTING ${BUILD_TESTING})
 
-	set(BUILD_SHARED_LIBS OFF)
+	set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 	set(BUILD_TESTING OFF)
 endmacro()
 
 macro(pop_static)
-	set(BUILD_SHARED_LIBS ${OLD_BUILD_SHARED_LIBS})
+	set(BUILD_SHARED_LIBS ${OLD_BUILD_SHARED_LIBS} CACHE BOOL "" FORCE)
 	set(BUILD_TESTING ${OLD_BUILD_TESTING})
 endmacro()
 

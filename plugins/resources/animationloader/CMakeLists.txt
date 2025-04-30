@@ -7,7 +7,7 @@ FolderSources(sources "" Madgine animationloaderlib.h)
 
 
 
-add_plugin(AnimationLoader Madgine Utility ${sources} PRECOMPILED_HEADER Madgine/animationloaderlib.h SOURCE_ROOT . EXTERNAL_DEPS assimp)
+add_plugin(AnimationLoader Madgine Resources ${sources} PRECOMPILED_HEADER Madgine/animationloaderlib.h SOURCE_ROOT .)
 
 target_link_libraries(AnimationLoader PRIVATE assimp)
 

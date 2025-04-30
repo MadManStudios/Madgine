@@ -47,5 +47,5 @@ SET_TARGET_PROPERTIES( assimp_simpletextureddirectx11 PROPERTIES
 )
 
 INSTALL( TARGETS assimp_simpletextureddirectx11
-  DESTINATION "${ASSIMP_BIN_INSTALL_DIR}" COMPONENT assimp-dev
+  DESTINATION "${ASSIMP_BIN_INSTALL_DIR}" COMPONENT assimp_dev
 )

@@ -6,7 +6,7 @@ FolderSources(sources "" src)
 		FolderSources(sources Madgine debug debuggablelifetime.cpp debuggablelifetime.h debuggablesender.h debugger.cpp debugger.h debuglocation.cpp debuglocation.h debuglocationsplitter.cpp debuglocationsplitter.h senderlocation.cpp senderlocation.h)
 
 	
-add_plugin(Debugger Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/debuglib.h)
+add_plugin(Debugger Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/debuglib.h API_PLUGIN)
 
 target_link_plugins(Debugger Root)
 

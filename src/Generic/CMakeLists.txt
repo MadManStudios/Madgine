@@ -9,4 +9,3 @@ if (MSVC)
 	target_link_options(Generic INTERFACE "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/Generic.natvis")
 endif()
 
-install_interface_to_workspace(Madgine TARGETS Generic SOURCE_ROOT ..)
