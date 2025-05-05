@@ -72,7 +72,7 @@ jobs:
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
 
     - name: Install Dependencies
-      if: platform == 'macos-latest'
+      if: matrix.platform == 'macos-latest'
       run: |
         sudo apt-get install libx11-dev
 
