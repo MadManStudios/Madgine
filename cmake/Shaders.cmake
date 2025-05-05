@@ -50,7 +50,7 @@ macro(compile_shaders target)
             target_sources(${target} PRIVATE spirv/${name}${extension})
             install(DIRECTORY ${CMAKE_BINARY_DIR}/data DESTINATION .
                 COMPONENT ${target}
-                FILES_MATCHING PATTERN "${name}.*")
+                FILES_MATCHING REGEX "${name}[\\._].*")
         endif()
 
     endforeach()
