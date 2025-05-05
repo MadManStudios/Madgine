@@ -149,3 +149,7 @@ if (MSVC)
 	endif()
 endif()
 
+if (OSX)
+    # Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
+    LINK_DIRECTORIES(/usr/local/lib)
+endif()
