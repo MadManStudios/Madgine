@@ -38,7 +38,7 @@ macro(compile_shaders target)
                     ${CMAKE_CURRENT_SOURCE_DIR}/${source}       
                     spirv/${name}${extension}
                     ${CMAKE_BINARY_DIR}/data
-                    $<IF:$<CONFIG:DEBUG>,-g,>
+                    $<IF:$<CONFIG:DEBUG,RELWITHDEBINFO>,-g,>
                     $<TARGET_PROPERTY:ShaderGen,ShaderGenTargets>
                     -I "$<JOIN:$<TARGET_PROPERTY:${target},INCLUDE_DIRECTORIES>,;-I;>"
                 COMMAND_EXPAND_LISTS
