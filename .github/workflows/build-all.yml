@@ -71,6 +71,11 @@ jobs:
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
 
+    - name: Install Dependencies
+      if: platform == 'macos-latest'
+      run: |
+        sudo apt-get install libx11-dev
+
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
