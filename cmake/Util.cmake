@@ -110,7 +110,7 @@ if (MSVC)
 	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /ignore:4217")
 
 	if (NOT CLANG)
-		add_compile_options(/Zc:preprocessor)
+		add_compile_options($<$<COMPILE_LANGUAGE:C,CXX>:/Zc:preprocessor>)
 	endif()
  
 	# Set compiler options.
