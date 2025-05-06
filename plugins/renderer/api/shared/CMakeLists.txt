@@ -9,7 +9,7 @@ set_target_properties(freetype PROPERTIES EXCLUDE_FROM_ALL TRUE)
 
 add_notices(freetype 
 	READABLE_NAME FreeType
-	LICENSE_FILE freetype-2.12.1/docs/FTL.txt 
+	LICENSE_FILE freetype-2.12.1/docs/FTL.TXT 
 	CREDITS "Font-Loading: FreeType - https://freetype.org/")
 
 
