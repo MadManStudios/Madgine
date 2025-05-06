@@ -18,7 +18,7 @@ struct auto_pack<> {
     using fold = Init;
 
     template <size_t I>
-    static constexpr auto_pack<I> get;
+    static constexpr auto_pack<I> get {};
 };
 
 template <auto head, auto... tail>
