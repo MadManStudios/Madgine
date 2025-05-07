@@ -4,7 +4,7 @@ once()
 
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/data)
 
-macro(compile_shaders target)
+macro(compile_shaders target installComponent)
 
     get_property(sources TARGET ${target} PROPERTY SOURCES)
     
@@ -49,7 +49,7 @@ macro(compile_shaders target)
                 VERBATIM)
             target_sources(${target} PRIVATE spirv/${name}${extension})
             install(DIRECTORY ${CMAKE_BINARY_DIR}/data DESTINATION .
-                COMPONENT ${target}
+                COMPONENT ${installComponent}
                 FILES_MATCHING REGEX "${name}[\\._].*")
         endif()
 
