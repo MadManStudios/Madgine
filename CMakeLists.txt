@@ -15,9 +15,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE INTERNAL "")
 set(CMAKE_CXX_EXTENSIONS OFF CACHE INTERNAL "")
 
 
-project(Madgine VERSION 0.1.0)
-
-
 list(APPEND CMAKE_MODULE_PATH
 	"${CMAKE_CURRENT_SOURCE_DIR}/cmake"
 	"${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules"
@@ -53,6 +50,21 @@ if (MADGINE_CONFIGURATION)
 	endforeach()
 
 endif()
+
+
+
+if (DEFINED ENV{MADGINE_VERSION})
+	set (MADGINE_VERSION $ENV{MADGINE_VERSION})
+else()
+	include(util/GitVersion)
+	get_version_from_git(version)
+	set (MADGINE_VERSION ${version})
+endif()
+
+
+project(Madgine VERSION ${MADGINE_VERSION})
+
+
 
 include(Workspace)
 include(Packaging)
