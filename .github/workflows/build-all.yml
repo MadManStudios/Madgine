@@ -4,9 +4,9 @@ name: CMake on multiple platforms
 
 on:
   push:
-    branches: [ "dev" ]
-#  pull_request:
-#    branches: [ "master" ]
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   configuration:
@@ -146,8 +146,8 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ steps.version.outputs.version }}
+        name: ${{ steps.version.outputs.version_tag }}
+        tag_name: ${{ steps.version.outputs.version_tag }}
         files: ${{ github.workspace }}/build/packages/*
 
     - name: Pushing Artifacts
@@ -272,7 +272,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ steps.version.outputs.version }}
+        name: ${{ steps.version.outputs.version_tag }}
+        tag_name: ${{ steps.version.outputs.version_tag }}
         files: ${{ github.workspace }}/build/packages/*
           
