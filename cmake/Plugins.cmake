@@ -71,7 +71,11 @@ macro(add_plugin name base type)
 
 	generate_binary_info(${name})
 
-	compile_shaders(${name})
+	if (NOT PLUGIN_CONFIG_INSTALL_COMPONENT)
+		set(PLUGIN_CONFIG_INSTALL_COMPONENT ${name})
+	endif()
+
+	compile_shaders(${name} ${PLUGIN_CONFIG_INSTALL_COMPONENT})
 
 	set(installPlugin TRUE)
 
@@ -84,10 +88,6 @@ macro(add_plugin name base type)
 	set(PLUGIN_LIST ${PLUGIN_LIST} ${name} CACHE INTERNAL "")	
 
 	if (installPlugin)
-		if (NOT PLUGIN_CONFIG_INSTALL_COMPONENT)
-			set(PLUGIN_CONFIG_INSTALL_COMPONENT ${name})
-		endif()
-
 		cpack_add_component_group(${type}Group
 					DISPLAY_NAME ${type})
 		if (("API_PLUGIN" IN_LIST PLUGIN_CONFIG_KEYWORDS_MISSING_VALUES) OR PLUGIN_CONFIG_API_PLUGIN)
