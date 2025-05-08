@@ -45,11 +45,9 @@ namespace Window {
     struct LinuxWindow final : OSWindow {
         LinuxWindow(::Window hwnd, WindowEventListener *listener, const InterfacesVector &size)
             : OSWindow(hwnd, listener)
-            , mSize(size)            
+            , mSize(size)
         {
         }
-
-        virtual void update() override;
 
         static Input::MouseButton::MouseButton convertMouseButton(int button)
         {
@@ -89,8 +87,8 @@ namespace Window {
                 const XConfigureEvent &xce = e.xconfigure;
 
                 /* This event type is generated for a variety of
-					   happenings, so check whether the window has been
-					   resized. */
+                                           happenings, so check whether the window has been
+                                           resized. */
 
                 if (xce.width != mSize.x || xce.height != mSize.y) {
                     mSize = { xce.width, xce.height };
@@ -111,156 +109,6 @@ namespace Window {
             return true;
         }
 
-        virtual InterfacesVector size() override
-        {
-            return mSize;
-        }
-
-        virtual InterfacesVector renderSize() override
-        {
-            //TODO
-            return size();
-        }
-
-        virtual InterfacesVector pos() override
-        {
-            XWindowAttributes xwa;
-            XGetWindowAttributes(sDisplay(), mHandle, &xwa);
-            return { xwa.x, xwa.y };
-        }
-
-        virtual InterfacesVector renderPos() override
-        {
-            XWindowAttributes xwa;
-            XGetWindowAttributes(sDisplay(), mHandle, &xwa);
-            return { xwa.x + xwa.border_width, xwa.y + xwa.border_width };
-        }
-
-        virtual void setSize(const InterfacesVector &size) override
-        {
-            mSize = size;
-        }
-
-        virtual void setRenderSize(const InterfacesVector& size) override
-        {
-            //TODO
-            setSize(size);
-        }
-
-        virtual void setPos(const InterfacesVector &pos) override
-        {
-            //TODO
-        }
-
-        virtual void setRenderPos(const InterfacesVector &pos) override
-        {
-            //TODO
-        }
-
-        virtual void show() override
-        {
-        }
-
-        virtual bool isMinimized() override
-        {
-            return false;
-        }
-
-        virtual bool isMaximized() override
-        {
-            return false;
-        }
-
-        virtual bool isFullscreen() override
-        {
-            return false;
-        }
-
-        virtual void focus() override
-        {
-        }
-
-        virtual bool hasFocus() override
-        {
-            return true;
-        }
-
-        virtual void setTitle(const char *title) override
-        {
-        }
-
-        virtual std::string title() const override
-        {
-            return "";
-        }
-
-        virtual void close() override
-        {
-        }
-
-        virtual void destroy() override
-        {
-            XDestroyWindow(sDisplay(), mHandle);
-        }
-
-        using OSWindow::onClose;
-        using OSWindow::onRepaint;
-        using OSWindow::onResize;
-
-        //Input
-
-        virtual bool isKeyDown(Input::Key::Key key) override
-        {
-            return false;
-        }
-
-        virtual void captureInput() override
-        {
-        }
-
-        virtual void releaseInput() override
-        {
-        }
-
-        void OSWindow::setCursorIcon(Input::CursorIcon icon)
-        {
-            /*SetCursor(LoadCursor(NULL, [](Input::CursorIcon icon) {
-                switch (icon) {
-                case Input::CursorIcon::Arrow:
-                    return IDC_ARROW;
-                case Input::CursorIcon::TextInput:
-                    return IDC_IBEAM;
-                case Input::CursorIcon::ResizeAll:
-                    return IDC_SIZEALL;
-                case Input::CursorIcon::ResizeNS:
-                    return IDC_SIZENS;
-                case Input::CursorIcon::ResizeEW:
-                    return IDC_SIZEWE;
-                case Input::CursorIcon::ResizeNESW:
-                    return IDC_SIZENESW;
-                case Input::CursorIcon::ResizeNWSE:
-                    return IDC_SIZENWSE;
-                case Input::CursorIcon::Hand:
-                    return IDC_HAND;
-                case Input::CursorIcon::NotAllowed:
-                    return IDC_NO;
-                default:
-                    throw 0;
-                }
-            }(icon)));*/
-        }
-
-        std::string OSWindow::getClipboardString()
-        {
-            return "";
-        }
-
-        bool OSWindow::setClipboardString(std::string_view s)
-        {
-            return true;
-        }
-
-    private:
         InterfacesVector mSize;
 
         InterfacesVector mLastMousePosition;
@@ -268,9 +116,9 @@ namespace Window {
 
     static std::unordered_map<::Window, LinuxWindow> sWindows;
 
-    void LinuxWindow::update()
+    void OSWindow::update()
     {
-        //TODO: correct handling of different windows
+        // TODO: correct handling of different windows
         XEvent event;
         while (XPending(sDisplay())) {
             XNextEvent(sDisplay(), &event);
@@ -280,6 +128,149 @@ namespace Window {
                     sWindows.erase(it);
             }
         }
+    }
+
+    InterfacesVector OSWindow::size()
+    {
+        return static_cast<LinuxWindow*>(this)->mSize;
+    }
+
+    InterfacesVector OSWindow::renderSize()
+    {
+        // TODO
+        return size();
+    }
+
+    InterfacesVector OSWindow::pos()
+    {
+        XWindowAttributes xwa;
+        XGetWindowAttributes(sDisplay(), mHandle, &xwa);
+        return { xwa.x, xwa.y };
+    }
+
+    InterfacesVector OSWindow::renderPos()
+    {
+        XWindowAttributes xwa;
+        XGetWindowAttributes(sDisplay(), mHandle, &xwa);
+        return { xwa.x + xwa.border_width, xwa.y + xwa.border_width };
+    }
+
+    void OSWindow::setSize(const InterfacesVector &size)
+    {
+        static_cast<LinuxWindow*>(this)->mSize = size;
+    }
+
+    void OSWindow::setRenderSize(const InterfacesVector &size)
+    {
+        // TODO
+        setSize(size);
+    }
+
+    void OSWindow::setPos(const InterfacesVector &pos)
+    {
+        // TODO
+    }
+
+    void OSWindow::setRenderPos(const InterfacesVector &pos)
+    {
+        // TODO
+    }
+
+    void OSWindow::show()
+    {
+    }
+
+    bool OSWindow::isMinimized()
+    {
+        return false;
+    }
+
+    bool OSWindow::isMaximized()
+    {
+        return false;
+    }
+
+    void OSWindow::focus()
+    {
+    }
+
+    bool OSWindow::hasFocus()
+    {
+        return true;
+    }
+
+    void OSWindow::setTitle(const char *title)
+    {
+    }
+
+    std::string OSWindow::title() const
+    {
+        return "";
+    }
+
+    void OSWindow::close()
+    {
+    }
+
+    void OSWindow::destroy()
+    {
+        XDestroyWindow(sDisplay(), mHandle);
+    }
+
+    WindowData OSWindow::data()
+    {
+        return {};
+    }
+
+    bool OSWindow::isKeyDown(Input::Key::Key key)
+    {
+        return false;
+    }
+
+    void OSWindow::captureInput()
+    {
+    }
+
+    void OSWindow::releaseInput()
+    {
+    }
+
+    void OSWindow::setCursorIcon(Input::CursorIcon icon)
+    {
+        /*SetCursor(LoadCursor(NULL, [](Input::CursorIcon icon) {
+            switch (icon) {
+            case Input::CursorIcon::Arrow:
+                return IDC_ARROW;
+            case Input::CursorIcon::TextInput:
+                return IDC_IBEAM;
+            case Input::CursorIcon::ResizeAll:
+                return IDC_SIZEALL;
+            case Input::CursorIcon::ResizeNS:
+                return IDC_SIZENS;
+            case Input::CursorIcon::ResizeEW:
+                return IDC_SIZEWE;
+            case Input::CursorIcon::ResizeNESW:
+                return IDC_SIZENESW;
+            case Input::CursorIcon::ResizeNWSE:
+                return IDC_SIZENWSE;
+            case Input::CursorIcon::Hand:
+                return IDC_HAND;
+            case Input::CursorIcon::NotAllowed:
+                return IDC_NO;
+            default:
+                throw 0;
+            }
+        }(icon)));*/
+    }
+
+    std::string OSWindow::getClipboardString()
+    {
+        return "";
+    }
+
+    bool OSWindow::setClipboardString(std::string_view s)
+    {
+        return true;
     }
 
     OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
@@ -337,7 +328,7 @@ namespace Window {
         sBuffer.clear();
         for (int i = 0; i < XScreenCount(sDisplay()); ++i) {
             Screen *screen = XScreenOfDisplay(sDisplay(), i);
-            //TODO position
+            // TODO position
             sBuffer.push_back({ 0, 0, XWidthOfScreen(screen), XHeightOfScreen(screen) });
         }
     }
