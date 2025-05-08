@@ -118,7 +118,7 @@ struct with_binding_t {
     struct receiver : Execution::algorithm_receiver<Rec> {
 
         receiver(Rec &&rec, F &&binding)
-            : Execution::algorithm_receiver<Rec>(std::forward<Rec>(rec))
+            : Execution::algorithm_receiver<Rec> { std::forward<Rec>(rec) }
             , mBinding(std::forward<F>(binding))
         {
         }

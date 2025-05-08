@@ -53,15 +53,15 @@ struct BehaviorAwaitableReceiver : Execution::execution_receiver<> {
 template <typename Sender>
 struct BehaviorAwaitableSender {
 
-    auto buildState(Sender &&sender, CoroutineBehaviorState *state)
+    static auto buildState(BehaviorAwaitableSender *self, Sender &&sender, CoroutineBehaviorState *state)
     {
-        return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location<Debug::SenderLocation>(), BehaviorAwaitableReceiver<Sender> { {}, this, state });
+        return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location<Debug::SenderLocation>(), BehaviorAwaitableReceiver<Sender> { {}, self, state });
     }
 
-    using S = std::invoke_result_t<decltype(&BehaviorAwaitableSender::buildState), BehaviorAwaitableSender, Sender, nullptr_t>;
+    using S = std::invoke_result_t<decltype(&BehaviorAwaitableSender::buildState), BehaviorAwaitableSender*, Sender, std::nullptr_t>;
 
     BehaviorAwaitableSender(Sender &&sender, CoroutineBehaviorState *state)
-        : mState(buildState(std::forward<Sender>(sender), state))
+        : mState(buildState(this, std::forward<Sender>(sender), state))
     {
     }
 

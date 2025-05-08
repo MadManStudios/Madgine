@@ -10,6 +10,8 @@ namespace Scene {
 
         struct MADGINE_SCENE_EXPORT Material : EntityComponent<Material> {
 
+            using EntityComponent<Material>::EntityComponent;
+
             const Render::GPUMeshData::Material *get() const;
 
             Render::GPUMeshData::Material mMaterial;

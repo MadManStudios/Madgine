@@ -10,6 +10,8 @@ namespace Scene {
 
         struct MADGINE_SCENE_EXPORT PointLight : EntityComponent<PointLight> {
 
+            using EntityComponent<PointLight>::EntityComponent;
+
             uint32_t mRange = 10;
             Color3 mColor = { 1.0f, 1.0f, 1.0f };
         };

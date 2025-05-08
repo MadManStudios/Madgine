@@ -213,7 +213,7 @@ namespace Render {
             std::terminate();
         }
 #elif LINUX
-        if (!glXMakeCurrent(Window::sDisplay(), window->mHandle, context)) {
+        if (!glXMakeCurrent(Window::sDisplay(), surface, context)) {
             LOG_ERROR("Error-Code: " << errno);
             std::terminate();
         }
@@ -234,7 +234,7 @@ namespace Render {
 #if WINDOWS
         SwapBuffers(surface);
 #elif LINUX
-        glXSwapBuffers(Window::sDisplay(), window->mHandle);
+        glXSwapBuffers(Window::sDisplay(), surface);
 #elif ANDROID || EMSCRIPTEN
         eglSwapBuffers(sDisplay, context);
 #elif OSX

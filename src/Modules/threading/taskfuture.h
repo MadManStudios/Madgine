@@ -177,27 +177,28 @@ namespace Threading {
 
         TaskFuture<T> ensure()
         {
-            std::shared_ptr<TaskPromiseSharedState<T>> check = mState.load();
-            if (!check) {
-                std::shared_ptr<TaskPromiseSharedState<T>> state = std::make_shared<TaskPromiseSharedState<T>>();
-                if (mState.compare_exchange_strong(check, state))
-                    return state;
+            std::unique_lock lock { mMutex };
+            if (!mState) {
+                mState = std::make_shared<TaskPromiseSharedState<T>>();
             }
-            return check;
+            return mState;
         }
 
         TaskFuture<T> load() const
         {
-            return mState.load();
+            std::unique_lock lock { mMutex };
+            return mState;
         }
 
         void reset()
         {
-            mState.store({});
+            std::unique_lock lock { mMutex };
+            mState.reset();
         }
 
     private:
-        std::atomic<std::shared_ptr<TaskPromiseSharedState<T>>> mState;
+        mutable std::mutex mMutex;
+        std::shared_ptr<TaskPromiseSharedState<T>> mState;
     };
 
 }

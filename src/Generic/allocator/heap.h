@@ -13,7 +13,7 @@ struct HeapAllocator {
 
     static constexpr size_t goodSize = blockSize;
 
-    HeapAllocator(Parent parent = {})
+    HeapAllocator(Parent parent)
         : mParent(std::forward<Parent>(parent))
     {
     }
