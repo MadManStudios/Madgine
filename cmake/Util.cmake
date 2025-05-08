@@ -85,15 +85,18 @@ else()
 endif()
 
 if (GCC OR CLANG)
-	add_compile_options(
-		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-extra-qualification>
-		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-instantiation-after-specialization>
-		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-dll-attribute-on-redeclaration> 
-		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-pragma-pack> 
-		$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-undefined-var-template>)	
-	if (CLANG AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 15)
-		add_compile_options($<$<COMPILE_LANGUAGE:CXX,C>:-Wno-deprecated-non-prototype>)
-	endif ()
+	if (CLANG)
+		add_compile_options(
+			$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-extra-qualification>
+			$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-instantiation-after-specialization>
+			$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-dll-attribute-on-redeclaration> 
+			$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-pragma-pack> 
+			$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-undefined-var-template>)	
+		if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 15)
+			add_compile_options($<$<COMPILE_LANGUAGE:CXX,C>:-Wno-deprecated-non-prototype>)
+		endif ()
+	endif()
+	
 	if (NOT MSVC)
 		add_compile_options(-Wall -fpermissive)
 	else ()
