@@ -130,6 +130,7 @@ namespace Execution {
 
         Rec mRec;
 
+        //Workaround needed for GCC
         template <typename CPO, typename... Args, std::convertible_to<algorithm_receiver&> Self>
         requires(is_tag_invocable_v<CPO, Rec &, Args...>) friend decltype(auto) tag_invoke(CPO f, Self &&rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, Rec &, Args...>)
             ///-> tag_invoke_result_t<CPO, Rec &, Args...>
