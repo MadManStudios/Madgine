@@ -32,21 +32,34 @@ namespace Execution {
         return SimpleState<F, Tuple, State> { std::forward<F>(f), std::forward<Tuple>(args), std::forward<Args>(baseArgs)... };
     }
 
-    template <typename... Ty>
-    struct make_virtual_sender_helper {
-        template <typename F>
-        static auto make(F&& f) {
-            return make_sender<Ty...>(std::forward<F>(f));
-        } 
+    template <typename State, typename... Args>
+    struct VirtualSender {
+
+        VirtualSender(Args &&...args)
+            : mArgs(std::forward<Args>(args)...)
+        {
+        }
+
+        using result_type = State::result_types::first;
+        template <template <typename...> typename Tuple>
+        using value_types = typename State::value_types::template instantiate<Tuple>;
+
+        using is_sender = void;
+
+        template <typename Rec>
+        friend auto tag_invoke(connect_t, VirtualSender &&sender, Rec &&rec)
+        {
+            return TupleUnpacker::constructExpand<VirtualState<Rec, State>>(std::forward<Rec>(rec), std::move(sender.mArgs));
+        }
+
+        std::tuple<Args...> mArgs;
     };
 
+    
     template <typename State, typename... Args>
     auto make_virtual_sender(Args &&...args)
-    {        
-        return State::value_types::template prepend<typename State::result_types::first>::template instantiate<make_virtual_sender_helper>::make(
-            [args = std::tuple<Args...> { std::forward<Args>(args)... }]<typename Rec>(Rec &&rec) mutable {
-                return TupleUnpacker::constructExpand<VirtualState<Rec, State>>(std::forward<Rec>(rec), std::move(args));
-            });
+    {
+        return VirtualSender<State, Args...>(std::forward<Args>(args)...);
     }
 
     template <typename R, typename... V, typename F, typename... Args>

@@ -10,10 +10,10 @@ namespace Execution {
 
     struct detach_t {
 
-        template <typename Sender>
-        struct state;
+        struct state_base {
+            virtual ~state_base() = default;
+        };
 
-        template <typename Sender>
         struct receiver : execution_receiver<> {
 
             template <typename... V>
@@ -31,13 +31,13 @@ namespace Execution {
                 delete mState;
             }
 
-            state<Sender> *mState;
+            state_base *mState;
         };
 
         template <typename Sender>
-        struct state {
+        struct state : state_base {
             state(Sender &&sender)
-                : mState(connect(std::forward<Sender>(sender), receiver<Sender> { {}, this }))
+                : mState(connect(std::forward<Sender>(sender), receiver { {}, this }))
             {
             }
             void start()
@@ -45,7 +45,7 @@ namespace Execution {
                 mState.start();
             }
 
-            connect_result_t<Sender, receiver<Sender>> mState;
+            connect_result_t<Sender, receiver> mState;
         };
 
         template <typename Sender>
