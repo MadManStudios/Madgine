@@ -71,9 +71,8 @@ struct type_pack<Head, Ty...> {
         struct recurse : Tail::helpers::template recurse<I - 1> {
         };
 
-        template <size_t I> // Workaround for GCC. Replace with template <> struct recurse<0> once fixed
-            requires(I == 0)
-        struct recurse<I> {
+        template <>
+        struct recurse<0> {
             using type = Head;
         };
 
