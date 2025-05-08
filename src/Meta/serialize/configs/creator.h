@@ -292,7 +292,7 @@ namespace Serialize {
             template <typename C>
             static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
             {
-                if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, nullptr_t>) {
+                if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, std::nullptr_t>) {
                     throw 0;
                 } else {
                     const SerializeTable *type = nullptr;

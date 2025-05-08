@@ -428,7 +428,7 @@ namespace Execution {
         struct receiver : algorithm_receiver<Rec> {
 
             receiver(Rec &&rec, F &&f)
-                : algorithm_receiver<Rec>(std::forward<Rec>(rec))
+                : algorithm_receiver<Rec> { std::forward<Rec>(rec) }
                 , mFinally(std::forward<F>(f))
             {
             }
@@ -521,7 +521,7 @@ namespace Execution {
         struct receiver : algorithm_receiver<Rec &> {
 
             receiver(Rec &rec, state<Rec, C, F> *state)
-                : algorithm_receiver<Rec &>(rec)
+                : algorithm_receiver<Rec &> { rec }
                 , mState(state)
             {
             }
@@ -1212,7 +1212,7 @@ namespace Execution {
         struct receiver : algorithm_receiver<QualifiedRec> {
 
             receiver(QualifiedRec &&rec, state<Rec, Sender, F> *state)
-                : algorithm_receiver<QualifiedRec>(std::forward<QualifiedRec>(rec))
+                : algorithm_receiver<QualifiedRec> { std::forward<QualifiedRec>(rec) }
                 , mState(state)
             {
             }
@@ -1543,7 +1543,7 @@ namespace Execution {
         struct receiver : algorithm_receiver<Rec> {
 
             receiver(Rec &&rec, T &&queryResult)
-                : algorithm_receiver<Rec>(std::forward<Rec>(rec))
+                : algorithm_receiver<Rec> { std::forward<Rec>(rec) }
                 , mQueryResult(std::forward<T>(queryResult))
             {
             }

@@ -51,7 +51,7 @@ namespace Tools {
     protected:
         virtual Threading::Task<bool> init();
         virtual Threading::Task<void> finalize();
-        friend struct MadgineObject<ToolBase>;
+        friend struct Threading::MadgineObject<ToolBase>;
 
         bool mVisible = false;
 

@@ -10,7 +10,7 @@ namespace Resources {
         template <typename Rec, typename Handle>
         struct receiver : Execution::algorithm_receiver<Rec> {
             receiver(Rec &&rec, Handle &&handle)
-                : Execution::algorithm_receiver<Rec>(std::forward<Rec>(rec))
+                : Execution::algorithm_receiver<Rec> { std::forward<Rec>(rec) }
                 , mHandle(std::forward<Handle>(handle))
             {
             }

@@ -202,7 +202,7 @@ union ValueTypeSecondaryTypeInfo {
     {
     }
 
-    constexpr ValueTypeSecondaryTypeInfo(nullptr_t)
+    constexpr ValueTypeSecondaryTypeInfo(std::nullptr_t)
         : mDummy(nullptr)
     {
     }

@@ -36,7 +36,7 @@ struct BitPtr {
         return maskedPtr();
     }
 
-    bool operator==(nullptr_t) const
+    bool operator==(std::nullptr_t) const
     {
         return maskedPtr() == nullptr;
     }

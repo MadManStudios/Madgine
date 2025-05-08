@@ -4,6 +4,8 @@
 
 #include <curl/curl.h>
 
+#include <cstring>
+
 namespace Engine {
 
     CurlStateBase::CurlStateBase(CURLM *multiHandle, std::string url, std::vector<std::string> headers, size_t (*reader)(void *buffer, size_t size, size_t nmemb, void *self), void *self)
@@ -58,7 +60,7 @@ namespace Engine {
     {
         size_t oldSize = mResult.size();
         mResult.resize(oldSize + nmemb);
-        memcpy(mResult.data() + oldSize, buffer, nmemb);
+        std::memcpy(mResult.data() + oldSize, buffer, nmemb);
     }
 
     CurlManager::CurlManager()
