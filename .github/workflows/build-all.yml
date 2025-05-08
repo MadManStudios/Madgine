@@ -4,7 +4,7 @@ name: CMake on multiple platforms
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
   pull_request:
     branches: [ "master" ]
 
@@ -66,6 +66,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+        fetch-depth: 0
 
         
     - uses: paulhatch/semantic-version@v5.4.0
@@ -107,7 +108,7 @@ jobs:
 
 
     - name: Patch Dependencies
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.ref_name == 'master'
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
 
@@ -140,14 +141,14 @@ jobs:
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.ref_name == 'master'
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: cpack
 
     - name: Release
       uses: softprops/action-gh-release@v2
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.ref_name == 'master'
       with:
         name: ${{ steps.version.outputs.version_tag }}
         tag_name: ${{ steps.version.outputs.version_tag }}
@@ -193,6 +194,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+        fetch-depth: 0
         
     - name: Patch Dependencies
       if: github.event_name != 'pull_request'
@@ -273,14 +275,14 @@ jobs:
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.ref_name == 'master'
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: cpack
 
     - name: Release
       uses: softprops/action-gh-release@v2
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.ref_name == 'master'
       with:
         name: ${{ steps.version.outputs.version_tag }}
         tag_name: ${{ steps.version.outputs.version_tag }}
