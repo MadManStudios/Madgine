@@ -6,13 +6,11 @@ FolderSources(sources "" src)
 FolderSources(sources src DirectX12 directx12forward.h directx12lib.h directx12meshdata.h directx12meshloader.cpp directx12meshloader.h directx12pixelshaderloader.cpp directx12pixelshaderloader.h directx12pipelineloader.cpp directx12pipelineloader.h directx12rendertexture.cpp directx12rendertexture.h directx12renderwindow.cpp directx12renderwindow.h directx12vertexshaderloader.cpp directx12vertexshaderloader.h directx12textureloader.cpp directx12textureloader.h directx12rendertarget.cpp directx12rendertarget.h directx12rendercontext.cpp directx12rendercontext.h directx12shadercodegen.cpp directx12shadercodegen.h)
 	FolderSources(sources DirectX12 util dx12dump.cpp directx12buffer.cpp directx12buffer.h directx12commandallocator.cpp directx12commandallocator.h directx12commandlist.cpp directx12commandlist.h directx12descriptorheap.cpp directx12descriptorheap.h directx12heapallocator.cpp directx12heapallocator.h directx12texture.cpp directx12texture.h directx12pipeline.cpp directx12pipeline.h directx12pipelineinstance.cpp directx12pipelineinstance.h directx12queryheap.cpp directx12queryheap.h)
 
-add_plugin(DirectX12 Madgine Render ${sources} PRECOMPILED_HEADER src/DirectX12/directx12lib.h)
+add_plugin(DirectX12 Madgine Render ${sources} PRECOMPILED_HEADER src/DirectX12/directx12lib.h IMPORTED_DEPS dxcompiler)
+
+add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PROPERTY:dxcompiler,IMPORTED_LOCATION> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 target_link_libraries(DirectX12 PRIVATE d3d12 dxgi dxguid Render dxcompiler)
-
-add_custom_command(TARGET DirectX12 POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<PATH:GET_PARENT_PATH,$<TARGET_PROPERTY:ShaderGen,IMPORTED_LOCATION>>/dxcompiler.dll ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-
-install(FILES $<PATH:GET_PARENT_PATH,$<TARGET_PROPERTY:ShaderGen,IMPORTED_LOCATION>>/dxcompiler.dll DESTINATION bin COMPONENT DirectX12)
 
 set(sources "")
 FolderSources(sources "" tools)

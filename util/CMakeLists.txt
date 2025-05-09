@@ -40,3 +40,11 @@ function(add_shadergen_target target flag)
 	endif()
 
 endfunction(add_shadergen_target)
+
+
+add_library(dxcompiler SHARED IMPORTED GLOBAL)
+
+set_target_properties(dxcompiler 
+	PROPERTIES
+	IMPORTED_LOCATION ${shadergenext_SOURCE_DIR}/dxcompiler${CMAKE_SHARED_LIBRARY_SUFFIX}
+	IMPORTED_IMPLIB ${shadergenext_SOURCE_DIR}/dxcompiler${CMAKE_IMPORT_LIBRARY_SUFFIX})
