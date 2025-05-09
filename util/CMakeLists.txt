@@ -4,14 +4,14 @@ add_executable(ShaderGen IMPORTED GLOBAL)
 
 set(endpoint)
 
-if (WINDOWS)
+if (CMAKE_HOST_WIN32)
 	set(endpoint windows-latest)
-elseif (OSX)
+elseif ("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Darwin")
 	set(endpoint macos-latest)
-elseif (LINUX)
+elseif ("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Linux")
 	set(endpoint ubuntu-latest)
 else()
-	MESSAGE(SEND_ERROR "Unknown host platform to fetch ShaderGen")
+	MESSAGE(FATAL_ERROR "Unknown host platform to fetch ShaderGen")
 endif()
 
 FetchContent_Declare(

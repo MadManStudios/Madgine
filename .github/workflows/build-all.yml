@@ -36,7 +36,7 @@ jobs:
         \"ios\": \"\", 
         \"linux\": \"\", 
         \"android\": \"\", 
-        \"emscripten\": \"\"}"
+        \"emscripten\": \"--toolchain cmake/toolchains/emscripten-wasm.cmake\"}"
     
   build-plugins:
   
@@ -191,11 +191,10 @@ jobs:
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
         platform: [windows, osx, ios, linux, android, emscripten]
-        exclude:
+        exclude:          
           - platform: osx
           - platform: ios
           - platform: android
-          - platform: emscripten
 
     steps:
     - uses: actions/checkout@v4
@@ -213,8 +212,12 @@ jobs:
       run: |
         sudo apt-get install libx11-dev mesa-utils libgl1-mesa-dev
 
+    - name: Install Toolchain
+      if: matrix.platform == 'emscripten'
+      uses: mymindstorm/setup-emsdk@v14
+
     - name: Set up Clang
-      if: matrix.platform == 'latest'
+      if: matrix.platform == 'linux'
       uses: egor-tensin/setup-clang@v1
       with:
         version: latest
@@ -266,6 +269,11 @@ jobs:
         # Optional.
         name: ${{ fromJSON(needs.configuration.outputs.platforms)[matrix.platform] }}    
         path: tooling
+
+    - name: Changing Permissions
+      if: matrix.platform == 'linux' || matrix.platform == 'osx'
+      run: |
+        chmod +x tooling/MadgineLauncher
 
     - name: Configure CMake
       env:
