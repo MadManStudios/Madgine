@@ -58,7 +58,7 @@ macro(add_plugin name base type)
 
 	set(options)
 	set(oneValueArgs INSTALL_COMPONENT)
-	set(multiValueArgs EXTERNAL_DEPS API_PLUGIN)
+	set(multiValueArgs EXTERNAL_DEPS API_PLUGIN IMPORTED_DEPS)
 	cmake_parse_arguments(PLUGIN_CONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})	
 
 	add_workspace_library(${name} ${PLUGIN_CONFIG_UNPARSED_ARGUMENTS})
@@ -71,7 +71,9 @@ macro(add_plugin name base type)
 
 	generate_binary_info(${name})
 
-	if (NOT PLUGIN_CONFIG_INSTALL_COMPONENT)
+	if (MADGINE_CONFIGURATION)
+		set(PLUGIN_CONFIG_INSTALL_COMPONENT MadgineLauncher)
+	elseif (NOT PLUGIN_CONFIG_INSTALL_COMPONENT)
 		set(PLUGIN_CONFIG_INSTALL_COMPONENT ${name})
 	endif()
 
@@ -103,7 +105,8 @@ macro(add_plugin name base type)
 		endif()
 
 		install_to_workspace(${PLUGIN_CONFIG_INSTALL_COMPONENT} TARGETS ${name} ${PLUGIN_CONFIG_EXTERNAL_DEPS})
-		
+		install(IMPORTED_RUNTIME_ARTIFACTS ${PLUGIN_CONFIG_IMPORTED_DEPS} RUNTIME DESTINATION bin COMPONENT ${PLUGIN_CONFIG_INSTALL_COMPONENT})
+
 	endif()
 	
 	#foreach(project ${PROJECTS_DEPENDING_ON_ALL_PLUGINS})
