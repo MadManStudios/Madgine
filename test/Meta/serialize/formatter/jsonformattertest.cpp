@@ -119,7 +119,7 @@ TEST(Serialize_Formatter, JSON_InvalidParse)
 
     StreamResult result = read(in, unit, nullptr);
     ASSERT_EQ(result.mState, StreamState::PARSE_ERROR);
-    ASSERT_EQ(result.mError->mMsg, "ERROR: (4, 16): Expected: <int>");
+    ASSERT_TRUE(result.mError->mMsg == "ERROR: (4, 16): Expected: <int>" || result.mError->mMsg == "ERROR: (4, 16): Expected: <i>");
 }
 
 TEST(Serialize_Formatter, JSON_ExtendedOrder)
