@@ -4,15 +4,22 @@ once()
 
 if (MADGINE_CONFIGURATION)
 
-	set (MADGINE_TOOLING_PRESET "Clang-Debug" CACHE STRING "Specify preset to use to create the tooling binary")
+	set (MADGINE_PREBUILT_TOOLING "" CACHE PATH "Path to prebuilt tooling binaries")
 
-	add_custom_target(MadgineTooling ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/../${MADGINE_TOOLING_PRESET}
-		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-		USES_TERMINAL)
+	add_executable(MadgineTooling IMPORTED)	
 
-	set_target_properties(MadgineTooling PROPERTIES BinaryName MadgineLauncher)
+	if (MADGINE_PREBUILT_TOOLING)		
+		set_target_properties(MadgineTooling PROPERTIES IMPORTED_LOCATION ${MADGINE_PREBUILT_TOOLING}/MadgineLauncher${CMAKE_EXECUTABLE_SUFFIX})
+	else()
+		set (MADGINE_TOOLING_PRESET "Clang-Debug" CACHE STRING "Specify preset to use to create the tooling binary")
 
-	set (MADGINE_TOOLING_BINARY $<TARGET_PROPERTY:MadgineTooling,BinaryName>)
-	set (MADGINE_TOOLING_WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/../${MADGINE_TOOLING_PRESET}/bin)
+		add_custom_target(MadgineToolingBuild ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/../${MADGINE_TOOLING_PRESET}
+			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+			USES_TERMINAL)
+
+		add_dependencies(MadgineTooling MadgineToolingBuild)
+
+		set_target_properties(MadgineTooling PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/../${MADGINE_TOOLING_PRESET}/bin/MadgineLauncher${CMAKE_EXECUTABLE_SUFFIX})
+	endif()
 
 endif()
