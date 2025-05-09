@@ -207,6 +207,18 @@ jobs:
       if: github.event_name != 'pull_request'
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
+        
+    - name: Install Dependencies
+      if: matrix.platform == 'linux'
+      run: |
+        sudo apt-get install libx11-dev mesa-utils libgl1-mesa-dev
+
+    - name: Set up Clang
+      if: matrix.platform == 'latest'
+      uses: egor-tensin/setup-clang@v1
+      with:
+        version: latest
+        platform: x64
 
     - uses: paulhatch/semantic-version@v5.4.0
       id: version
