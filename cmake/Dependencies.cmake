@@ -4,8 +4,6 @@ once()
 
 include(FetchContent)
 
-set(FETCHCONTENT_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies CACHE FILEPATH "" FORCE)
-
 function(resolve_dependencies)
 
 	set(dependenciesFile ${CMAKE_SOURCE_DIR}/dependencies.txt)

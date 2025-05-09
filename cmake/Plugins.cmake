@@ -32,12 +32,11 @@ set(PLUGIN_LIST "" CACHE INTERNAL "")
 if (NOT MODULES_ENABLE_PLUGINS)
 
 	add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/components.cpp 
-		COMMAND ./${MADGINE_TOOLING_BINARY} 
+		COMMAND $<TARGET_FILE:MadgineTooling>
 					-t
 					-npc
 					-lp ${MADGINE_CONFIGURATION}/plugins.ini
 					-epc ${CMAKE_BINARY_DIR}/components.cpp
-		WORKING_DIRECTORY ${MADGINE_TOOLING_WORKING_DIRECTORY}
 		DEPENDS MadgineTooling ${MADGINE_CONFIGURATION}/plugins.ini)
 	add_custom_target(GenerateComponentsSource DEPENDS ${CMAKE_BINARY_DIR}/components.cpp)
 

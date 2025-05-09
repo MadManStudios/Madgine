@@ -32,13 +32,12 @@ if (MADGINE_CONFIGURATION)
 	list(FILTER local_lists INCLUDE REGEX ".*resources\.list")
 
 	add_custom_target(bake_resource_lists
-		COMMAND ./${MADGINE_TOOLING_BINARY} 
+		COMMAND $<TARGET_FILE:MadgineTooling>
 					-t
 					-npc
 					-lp ${MADGINE_CONFIGURATION}/plugins.ini
 					--bake ${local_lists}
 					--bake-output-list ${CMAKE_BINARY_DIR}/resources.list
-		WORKING_DIRECTORY ${MADGINE_TOOLING_WORKING_DIRECTORY}
 		DEPENDS MadgineTooling ${local_lists})
 
 	add_dependencies(copy_data bake_resource_lists)

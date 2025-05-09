@@ -278,7 +278,7 @@ jobs:
         -DUSE_CMAKE_LOG=1 
         -DMADGINE_CONFIGURATION=test/configs/OpenGL/
         -DBUILD_SHARED_LIBS=OFF 
-        -DMADGINE_TOOLING_PRESET=tooling
+        -DMADGINE_PREBUILT_TOOLING=tooling
         ${{ fromJSON(needs.configuration.outputs.toolchains)[matrix.platform] }}
         -S ${{ github.workspace }}
 
