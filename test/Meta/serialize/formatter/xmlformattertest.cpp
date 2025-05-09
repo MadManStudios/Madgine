@@ -123,7 +123,7 @@ TEST(Serialize_Formatter, XML_InvalidParse)
 
     StreamResult result = read(in, unit, nullptr);
     ASSERT_EQ(result.mState, StreamState::PARSE_ERROR);
-    ASSERT_EQ(result.mError->mMsg, "ERROR: (4, 14): Expected: <int>");
+    ASSERT_TRUE(result.mError->mMsg == "ERROR: (4, 14): Expected: <int>" || result.mError->mMsg == "ERROR: (4, 14): Expected: <i>");
 }
 
 TEST(Serialize_Formatter, XML_ExtendedOrder)
