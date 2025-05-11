@@ -11,7 +11,7 @@
 #include "Generic/execution/execution.h"
 #include "Generic/execution/algorithm.h"
 
-#include "Madgine/curl/curl.h"
+#include "Interfaces/fetch/fetchapi.h"
 
 #include "resourcemanager.h"
 
@@ -69,7 +69,7 @@ namespace Resources {
         std::string_view protocol = mPath.protocol();
 
         if (protocol == "http" || protocol == "https" || protocol == "ftp") {
-            Execution::detach_with_receiver(ResourceManager::getSingleton().curl().request<std::vector<std::byte>>(mPath, { mPath }), rec);       
+            Execution::detach_with_receiver(FetchSender<std::vector<std::byte>>(mPath, { mPath }), rec);       
             return;
         } else if (!protocol.empty()) {
             LOG_WARNING("Unrecognized file protocol '" << protocol << "'");

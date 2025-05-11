@@ -2,7 +2,6 @@
 
 /// @cond
 
-#include "Madgine/curl/curllib.h"
 #include "Madgine/rootlib.h"
 
 #if defined(Resources_EXPORTS)

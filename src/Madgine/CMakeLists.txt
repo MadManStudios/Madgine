@@ -8,5 +8,3 @@ add_subdirectory(serialize)
 add_subdirectory(cli)
 
 add_subdirectory(trees)
-
-add_subdirectory(curl)

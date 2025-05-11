@@ -1,5 +1,7 @@
 Project(Interfaces VERSION 1.0.0)
 
+add_subdirectory(shared)
+
 option(INTERFACES_ENABLE_PROFILER "Activates the builtin runtime-profiler." ON)
 option(INTERFACES_ENABLE_MEMTRACKING "Enables Memory Tracking for Heap-Allocations")
 
@@ -12,6 +14,7 @@ FolderSources(sources "" "" interfacesforward.h interfaceslib.h)
 	FolderSources(sources "" debug stacktrace.cpp stacktrace.h traceback.cpp traceback.h)
 		FolderSources(sources debug memory memory.cpp memory.h statsmemoryresource.cpp statsmemoryresource.h untrackedmemoryresource.cpp untrackedmemoryresource.h)
 	FolderSources(sources "" dl dlapi_unix.cpp dlapi_win.cpp dlapi.h runtime.cpp runtime.h runtime_unix.cpp runtime_win.cpp)
+	FolderSources(sources "" fetch fetchapi.h fetchapi.cpp fetchapi_curl.cpp fetchapi_emscripten.cpp)
 	FolderSources(sources "" filesystem async.h async_default.cpp async_win.cpp fsapi.cpp fsapi.h fsapi_android.cpp fsapi_emscripten.cpp fsapi_linux.cpp fsapi_osx.cpp fsapi_win.cpp filequery.cpp filequery_android.cpp filequery_emscripten.cpp filequery_linux.cpp filequery_osx.cpp filequery_ios.cpp filequery_win.cpp filequery.h filewatcher_win.cpp filewatcher_emscripten.cpp filewatcher_linux.cpp filewatcher_android.cpp filewatcher_osx.cpp filewatcher_ios.cpp filewatcher.cpp filewatcher.h path.cpp path.h)
 	FolderSources(sources "" helpers android_jni.cpp android_jni.h win_ptrs.cpp win_ptrs.h win_wstring.cpp win_wstring.h)
 	FolderSources(sources "" input rawinput_win.cpp rawinput_win.h)
@@ -69,6 +72,10 @@ endif (UNIX)
 
 if (MSVC)
 	target_link_options(Interfaces PUBLIC "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/Interfaces.natvis")
+endif()
+
+if (NOT EMSCRIPTEN)
+	target_link_libraries(Interfaces PRIVATE libcurl_static)
 endif()
 
 install_to_workspace(Runtime TARGETS Interfaces)
