@@ -203,12 +203,12 @@ jobs:
         fetch-depth: 0
         
     - name: Patch Dependencies
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.ref_name == 'master' && matrix.platform != 'emscripten'
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
         
     - name: Install Dependencies
-      if: matrix.platform == 'linux'
+      if: fromJSON(needs.configuration.outputs.platforms)[matrix.platform] == 'ubuntu-latest'
       run: |
         sudo apt-get install libx11-dev mesa-utils libgl1-mesa-dev
 
@@ -271,7 +271,7 @@ jobs:
         path: tooling
 
     - name: Changing Permissions
-      if: matrix.platform == 'linux' || matrix.platform == 'osx'
+      if: fromJSON(needs.configuration.outputs.platforms)[matrix.platform] == 'ubuntu-latest' || fromJSON(needs.configuration.outputs.platforms)[matrix.platform] == 'macos-latest'
       run: |
         chmod +x tooling/MadgineLauncher
 

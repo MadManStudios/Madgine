@@ -9,8 +9,6 @@
 
 #include "Generic/execution/lifetime.h"
 
-#include "Madgine/curl/curl.h"
-
 namespace Engine {
 namespace Tools {
 
@@ -29,8 +27,6 @@ namespace Tools {
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
 
-        void update() override;
-
         std::string_view key() const override;
 
     private:
@@ -48,8 +44,7 @@ namespace Tools {
         };
         std::map<std::string, Icon> mIconCache;
 
-        Execution::Lifetime<> mLifetime;
-        CurlManager mCurl;
+        Execution::Lifetime<> mLifetime;        
     };
 
 }

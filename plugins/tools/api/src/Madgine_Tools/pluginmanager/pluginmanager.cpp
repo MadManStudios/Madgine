@@ -27,7 +27,9 @@
 
 #    include "Modules/threading/awaitables/awaitablesender.h"
 
-#include "../renderer/imroot.h"
+#    include "Interfaces/fetch/fetchapi.h"
+
+#    include "../renderer/imroot.h"
 
 UNIQUECOMPONENT(Engine::Tools::PluginManager);
 
@@ -59,7 +61,7 @@ namespace Tools {
                     ImGui::TextColored(ImColor(255, 40, 40, 255), "Changes are only applied on rebuild!");
 
                     if (ImGui::Button("Test")) {
-                        mLifetime.attach(mCurl.request<JsonParser>("https://api.github.com/orgs/MadManStudios/repos", { "Accept: application/vnd.github+json", "User-Agent: Madgine" }) | Execution::then([this](JsonObject result) {
+                        mLifetime.attach(FetchSender<JsonParser>("https://api.github.com/orgs/MadManStudios/repos", { "Accept: application/vnd.github+json", "User-Agent: Madgine" }) | Execution::then([this](JsonObject result) {
                             // LOG(result);
                             mSources.clear();
                             for (JsonObject &repo : result.asList()) {
@@ -221,13 +223,6 @@ namespace Tools {
         co_await mLifetime.finished();
 
         co_await ToolBase::finalize();
-    }
-
-    void PluginManager::update()
-    {
-        ToolBase::update();
-
-        mCurl.update();
     }
 
     std::string_view PluginManager::key() const

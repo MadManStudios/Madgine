@@ -9,7 +9,7 @@ if (MADGINE_CONFIGURATION)
 	add_executable(MadgineTooling IMPORTED)	
 
 	if (MADGINE_PREBUILT_TOOLING)		
-		set_target_properties(MadgineTooling PROPERTIES IMPORTED_LOCATION ${MADGINE_PREBUILT_TOOLING}/MadgineLauncher${CMAKE_EXECUTABLE_SUFFIX})
+		set_target_properties(MadgineTooling PROPERTIES IMPORTED_LOCATION ${MADGINE_PREBUILT_TOOLING}/MadgineLauncher${HOST_EXECUTABLE_SUFFIX})
 	else()
 		set (MADGINE_TOOLING_PRESET "Clang-Debug" CACHE STRING "Specify preset to use to create the tooling binary")
 
@@ -19,7 +19,7 @@ if (MADGINE_CONFIGURATION)
 
 		add_dependencies(MadgineTooling MadgineToolingBuild)
 
-		set_target_properties(MadgineTooling PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/../${MADGINE_TOOLING_PRESET}/bin/MadgineLauncher${CMAKE_EXECUTABLE_SUFFIX})
+		set_target_properties(MadgineTooling PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/../${MADGINE_TOOLING_PRESET}/bin/MadgineLauncher${HOST_EXECUTABLE_SUFFIX})
 	endif()
 
 endif()
