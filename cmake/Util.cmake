@@ -130,7 +130,11 @@ if (MSVC)
 	endif()
 endif()
 
+set(CMAKE_MACOSX_RPATH TRUE)
+set(CMAKE_BUILD_RPATH_USE_ORIGIN TRUE)
 if (OSX)
-    # Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
+	# Why is this needed? Is it a bug?
+	set(CMAKE_SHARED_LIBRARY_RPATH_ORIGIN_TOKEN "@executable_path")
+	# Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
     LINK_DIRECTORIES(/opt/homebrew/lib)
 endif()
