@@ -69,13 +69,15 @@ namespace Tools {
         Filesystem::Path p = pStr;
         if (p.isRelative())
             p = Filesystem::Path { BINARY_DIR } / p;
-        return p.relative(binInfo->mSourceRoot).str();
+        Filesystem::Path r = p.relative(binInfo->mSourceRoot);
+        if (r.empty())
+            LOG_ERROR("Include Path '" << p << "' is not relative to source root '" << binInfo->mSourceRoot << "'");
+        return r.str();
     };
 
     void PluginExporter::exportStaticComponentHeader(const Filesystem::Path &outFile)
     {
         LOG("Exporting uniquecomponent configuration source file '" << outFile << "'");
-        LOG_WARNING("TODO: Export in alphabetical order to prevent changes in the version control.");
 
         std::set<const Plugins::BinaryInfo *> binaries;
 
@@ -102,14 +104,17 @@ namespace Tools {
         }
 
         for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
+            LOG("Exporting Registry: " << reg->named_type_info()->mTypeName);
             const Plugins::BinaryInfo *bin = reg->mBinary;
             file.beginCondition("BUILD_"s + bin->mName);
             file.include(1, fixInclude(reg->named_type_info()->mHeaderPath, bin));
 
             for (UniqueComponent::CollectorInfoBase *collector : *reg) {
+                LOG("   Exporting Collector for Plugin " << collector->mBinary->mName);
                 for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo*> &typeInfos : collector->mElementInfos) {
                     const TypeInfo *ti = typeInfos.first.front();
                     if (ti->mTypeName != "PluginManager" && ti != &typeInfo<PluginExporter>) {
+                        LOG("       Exporting Type: " << ti->mTypeName);
                         file.beginCondition("BUILD_"s + collector->mBinary->mName);
                         file.include(1, fixInclude(ti->mHeaderPath, collector->mBinary));
                         file.endCondition("BUILD_"s + collector->mBinary->mName);
