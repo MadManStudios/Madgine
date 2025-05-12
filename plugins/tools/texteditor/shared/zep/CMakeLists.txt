@@ -64,11 +64,11 @@ add_subdirectory(tests)
 add_subdirectory(demos)
 
 # Make the CMake bits that ensure find_package does the right thing
-install(EXPORT zep-targets
-    FILE zep-targets.cmake
-    NAMESPACE Zep::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/zep
-)
+#install(EXPORT zep-targets
+#    FILE zep-targets.cmake
+#    NAMESPACE Zep::
+#    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/zep
+#)
 
 include(CMakePackageConfigHelpers)
 
