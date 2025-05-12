@@ -19,7 +19,6 @@ namespace UniqueComponent {
         {
             mInfo.mRegistryInfo = &typeInfo<Registry>;
             mInfo.mBaseInfo = &typeInfo<Base>;
-            mInfo.mBinary = &Plugins::PLUGIN_LOCAL(binaryInfo);
             Registry::sInstance().addCollector(&mInfo);
         }
         Collector(const Collector &) = delete;
@@ -59,6 +58,7 @@ namespace UniqueComponent {
     Collector<Registry> &Collector<Registry>::PLUGIN_LOCAL(sInstance)()
     {
         static Collector dummy;
+        dummy.mInfo.mBinary = &Plugins::PLUGIN_LOCAL(binaryInfo);
         return dummy;
     }
 
