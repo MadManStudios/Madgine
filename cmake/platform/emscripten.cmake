@@ -53,5 +53,32 @@ if (EMSCRIPTEN)
 		endforeach()
 	endfunction(target_link_libraries)
 
+	function(install_to_workspace name)
+
+		set(options)
+		set(oneValueArgs)
+		set(multiValueArgs TARGETS)
+		cmake_parse_arguments(OPTIONS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+		foreach(target ${OPTIONS_TARGETS})
+			
+			get_target_property(SUFFIX ${target} SUFFIX)
+
+			if (SUFFIX STREQUAL ".html")
+				list(REMOVE_ITEM OPTIONS_TARGETS ${target})
+
+				install(
+					FILES 
+						$<TARGET_FILE:${target}>
+						$<TARGET_FILE_DIR:${target}>/$<TARGET_FILE_BASE_NAME:${target}>.data
+						$<TARGET_FILE_DIR:${target}>/$<TARGET_FILE_BASE_NAME:${target}>.wasm 
+						$<TARGET_FILE_DIR:${target}>/$<TARGET_FILE_BASE_NAME:${target}>.js 
+					DESTINATION bin 
+					COMPONENT ${name})
+			endif()
+
+		endforeach()
+
+	endfunction(install_to_workspace)
 
 endif()

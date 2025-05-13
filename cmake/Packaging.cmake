@@ -20,7 +20,9 @@ if (MADGINE_CONFIGURATION)
 		PROPERTIES
 		DATA_LISTS "${lists}")
 
-	install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
+	if (NOT EMSCRIPTEN)
+		install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
+	endif ()
 
 endif ()
 
