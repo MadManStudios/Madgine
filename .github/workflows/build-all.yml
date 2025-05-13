@@ -313,4 +313,29 @@ jobs:
         name: ${{ steps.version.outputs.version_tag }}
         tag_name: ${{ steps.version.outputs.version_tag }}
         files: ${{ github.workspace }}/build/packages/*
+      
+    - uses: actions/checkout@v4
+      if: matrix.platform == 'emscripten' && (github.ref_name == 'master' || github.ref_name == 'development')
+      with:
+        ref: 'gh-pages'
+        path: 'gh-pages'
+
+    - name: Copy static files into repository
+      if: matrix.platform == 'emscripten' && (github.ref_name == 'master' || github.ref_name == 'development')
+      run: |
+        cd gh-pages
+        rm -rf ${{ github.ref_name }} 
+        mkdir ${{ github.ref_name }} 
+        unzip ${{ github.workspace }}/build/packages/*.zip -d ${{ github.ref_name }} 
+
+    - name: "Updating gh-pages branch"
+      if: matrix.platform == 'emscripten' && (github.ref_name == 'master' || github.ref_name == 'development')
+      run: |
+        cd gh-pages
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add ${{ github.ref_name }} 
+        git commit -m "Updating emscripten binaries for branch ${{ github.ref_name }} "
+        git push
+
           
