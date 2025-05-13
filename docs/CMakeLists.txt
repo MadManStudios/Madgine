@@ -17,7 +17,7 @@ if (DOXYGEN_FOUND)
 
     add_custom_target(sphinx
         COMMAND doxysphinx build docs doc/docs docs/doxygen
-        COMMAND sphinx-build -b html . doc -c docs
+        COMMAND ${CMAKE_COMMAND} -E env MADGINE_VERSION=${MADGINE_VERSION}  sphinx-build -b html . doc -c docs
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Generating documentation with Sphinx including doxygen output"
         VERBATIM
@@ -26,7 +26,7 @@ if (DOXYGEN_FOUND)
     add_dependencies(sphinx doxygen)
 
     add_custom_target(sphinx_only
-        COMMAND sphinx-build -b html . doc -c docs
+        COMMAND ${CMAKE_COMMAND} -E env MADGINE_VERSION=${MADGINE_VERSION} sphinx-build -b html . doc -c docs
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Generating documentation with Sphinx"
         VERBATIM
