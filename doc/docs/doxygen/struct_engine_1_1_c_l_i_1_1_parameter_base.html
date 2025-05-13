@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::CLI::ParameterBase Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::CLI::ParameterBase Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_c_l_i_1_1_parameter_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parameterbase-struct-reference">
+<h1>ParameterBase Struct Reference<a class="headerlink" href="#parameterbase-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::CLI::ParameterBase Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_c_l_i.html">CLI</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html">ParameterBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_c_l_i_1_1_parameter_base-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::CLI::ParameterBase Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;parameterbase.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::CLI::ParameterBase:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_c_l_i_1_1_parameter_base__inherit__graph.svg" width="100%" height="424"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6946deceff231741eb3f9abf6ea442c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#a6946deceff231741eb3f9abf6ea442c9">ParameterBase</a> (size_t minArgumentCount, size_t maxArgumentCount, std::vector&lt; const char * &gt; <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#ae83069207ad79f563232f2a4fa315bf8">options</a>, const char *<a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#acb08e91608b506b956e613e67c58e1b5">help</a>=nullptr)</td></tr>
+<tr class="separator:a6946deceff231741eb3f9abf6ea442c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb08e91608b506b956e613e67c58e1b5"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#acb08e91608b506b956e613e67c58e1b5">help</a> ()</td></tr>
+<tr class="separator:acb08e91608b506b956e613e67c58e1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fb79309962c096904ec6b0e1492cf66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#a3fb79309962c096904ec6b0e1492cf66">init</a> ()</td></tr>
+<tr class="separator:a3fb79309962c096904ec6b0e1492cf66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae83069207ad79f563232f2a4fa315bf8"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; const char * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#ae83069207ad79f563232f2a4fa315bf8">options</a> ()</td></tr>
+<tr class="separator:ae83069207ad79f563232f2a4fa315bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2be6d4d49eeca8d91c0c62a0ec356d1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#aa2be6d4d49eeca8d91c0c62a0ec356d1">parse</a> (const std::vector&lt; std::string_view &gt; &amp;args)=0</td></tr>
+<tr class="separator:aa2be6d4d49eeca8d91c0c62a0ec356d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cbf16be7e88e73fe3fa73b62930572b"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_base.html#a6cbf16be7e88e73fe3fa73b62930572b">typeName</a> ()=0</td></tr>
+<tr class="separator:a6cbf16be7e88e73fe3fa73b62930572b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6946deceff231741eb3f9abf6ea442c9" name="a6946deceff231741eb3f9abf6ea442c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6946deceff231741eb3f9abf6ea442c9">&#9670;&#160;</a></span>ParameterBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::CLI::ParameterBase::ParameterBase </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>minArgumentCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>maxArgumentCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; const char * &gt;&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>help</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa2be6d4d49eeca8d91c0c62a0ec356d1" name="aa2be6d4d49eeca8d91c0c62a0ec356d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2be6d4d49eeca8d91c0c62a0ec356d1">&#9670;&#160;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::CLI::ParameterBase::parse </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::string_view &gt; &amp;&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#ac1c63ead414c2ef91861f1d81d9394ae">Engine::CLI::ParameterImpl&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#ac1c63ead414c2ef91861f1d81d9394ae">Engine::CLI::ParameterImpl&lt; std::string &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a36bf27f851beb0ee87cccc5b766ec811">Engine::CLI::ParameterImpl&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a36bf27f851beb0ee87cccc5b766ec811">Engine::CLI::ParameterImpl&lt; std::string &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#abf8dd2d7b1f585a14372c4d7acef0f1a">Engine::CLI::ParameterImpl&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#abf8dd2d7b1f585a14372c4d7acef0f1a">Engine::CLI::ParameterImpl&lt; std::string &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a87fc2c3f7cf174965284947bd3ffd777">Engine::CLI::ParameterImpl&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a87fc2c3f7cf174965284947bd3ffd777">Engine::CLI::ParameterImpl&lt; std::string &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a813d70f9753df23101c0814245d996ab">Engine::CLI::ParameterImpl&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a813d70f9753df23101c0814245d996ab">Engine::CLI::ParameterImpl&lt; std::string &gt;</a>, and <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl_3_01_enum_type_3_01_rep_01_4_01_4.html#ade7585eaed5a49bb79e768e7ca1ceaa4">Engine::CLI::ParameterImpl&lt; EnumType&lt; Rep &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a6cbf16be7e88e73fe3fa73b62930572b" name="a6cbf16be7e88e73fe3fa73b62930572b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cbf16be7e88e73fe3fa73b62930572b">&#9670;&#160;</a></span>typeName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char * Engine::CLI::ParameterBase::typeName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a81796b89aca74f43b0ea7785a3fc7962">Engine::CLI::ParameterImpl&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl.html#a81796b89aca74f43b0ea7785a3fc7962">Engine::CLI::ParameterImpl&lt; std::string &gt;</a>, and <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl_3_01_enum_type_3_01_rep_01_4_01_4.html#ab05fce539935ca034b7f7510d61da4bd">Engine::CLI::ParameterImpl&lt; EnumType&lt; Rep &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a3fb79309962c096904ec6b0e1492cf66" name="a3fb79309962c096904ec6b0e1492cf66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fb79309962c096904ec6b0e1492cf66">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::CLI::ParameterBase::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acb08e91608b506b956e613e67c58e1b5" name="acb08e91608b506b956e613e67c58e1b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb08e91608b506b956e613e67c58e1b5">&#9670;&#160;</a></span>help()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::CLI::ParameterBase::help </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_c_l_i_1_1_parameter_impl_3_01_enum_type_3_01_rep_01_4_01_4.html#af5e0f937c5ca3ab9e1114981da6acfcd">Engine::CLI::ParameterImpl&lt; EnumType&lt; Rep &gt; &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ae83069207ad79f563232f2a4fa315bf8" name="ae83069207ad79f563232f2a4fa315bf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae83069207ad79f563232f2a4fa315bf8">&#9670;&#160;</a></span>options()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; const char * &gt; &amp; Engine::CLI::ParameterBase::options </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Madgine/cli/<a class="el" href="parameterbase_8h.html">parameterbase.h</a></li>
+<li>src/Madgine/cli/<a class="el" href="parameterbase_8cpp.html">parameterbase.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,851 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Scene::Entity::EntityComponentListBase Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Scene::Entity::EntityComponentListBase Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entitycomponentlistbase-struct-reference">
+<h1>EntityComponentListBase Struct Reference<a class="headerlink" href="#entitycomponentlistbase-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Scene::Entity::EntityComponentListBase Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scene.html">Scene</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html">Entity</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">EntityComponentListBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Scene::Entity::EntityComponentListBase Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;entitycomponentlistbase.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4a6678a290336dcfe4279296cafb6e8b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a4a6678a290336dcfe4279296cafb6e8b">~EntityComponentListBase</a> ()=default</td></tr>
+<tr class="separator:a4a6678a290336dcfe4279296cafb6e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69adde13529cc83e38d598d7869b4911"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a69adde13529cc83e38d598d7869b4911">applyMap</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;in, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> success, <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> hierarchy)</td></tr>
+<tr class="separator:a69adde13529cc83e38d598d7869b4911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a7efe8efd8892959af8d186f4248fd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a51a7efe8efd8892959af8d186f4248fd">clear</a> ()=0</td></tr>
+<tr class="separator:a51a7efe8efd8892959af8d186f4248fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a691759bff94adf630e5dca4bdfd68873"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_owning_handle.html">EntityComponentOwningHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a691759bff94adf630e5dca4bdfd68873">emplace</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity</a> *entity)=0</td></tr>
+<tr class="separator:a691759bff94adf630e5dca4bdfd68873"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae4248eeba6a253153a9c5a64db1f3f2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#aae4248eeba6a253153a9c5a64db1f3f2">empty</a> ()=0</td></tr>
+<tr class="separator:aae4248eeba6a253153a9c5a64db1f3f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a497a0c6677488051f30f00818081f8e2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a497a0c6677488051f30f00818081f8e2">erase</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index)=0</td></tr>
+<tr class="separator:a497a0c6677488051f30f00818081f8e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6c4f5e6d94e0dc8f35966a920a6ab4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#abe6c4f5e6d94e0dc8f35966a920a6ab4">finalize</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index)=0</td></tr>
+<tr class="separator:abe6c4f5e6d94e0dc8f35966a920a6ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a042a15d6d622221b1f010dc13cad1cdb"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a042a15d6d622221b1f010dc13cad1cdb">get</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index) const =0</td></tr>
+<tr class="separator:a042a15d6d622221b1f010dc13cad1cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11d6b4b4971cae2acba5ab0e5e08b5c7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a11d6b4b4971cae2acba5ab0e5e08b5c7">get</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index)=0</td></tr>
+<tr class="separator:a11d6b4b4971cae2acba5ab0e5e08b5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a646e845cc8456b7537e84ab303a0f9ba"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_const_ptr.html">Serialize::SerializableDataConstPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a646e845cc8456b7537e84ab303a0f9ba">getSerialized</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index) const =0</td></tr>
+<tr class="separator:a646e845cc8456b7537e84ab303a0f9ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506271f751ac5ab4caa8b5e73a62c22a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">Serialize::SerializableDataPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a506271f751ac5ab4caa8b5e73a62c22a">getSerialized</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index)=0</td></tr>
+<tr class="separator:a506271f751ac5ab4caa8b5e73a62c22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad14c4f0ed82865f918c06f8bf1c709f9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#ad14c4f0ed82865f918c06f8bf1c709f9">getTyped</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index)=0</td></tr>
+<tr class="separator:ad14c4f0ed82865f918c06f8bf1c709f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51682a9cc980a7cdc3e1f0a17eec2d47"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a51682a9cc980a7cdc3e1f0a17eec2d47">init</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index)=0</td></tr>
+<tr class="separator:a51682a9cc980a7cdc3e1f0a17eec2d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9d2efa5290a3b80398af0afa50bb23a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#af9d2efa5290a3b80398af0afa50bb23a">readState</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;in, const char *name, <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> hierarchy)</td></tr>
+<tr class="separator:af9d2efa5290a3b80398af0afa50bb23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67ed0e83ec5034e4014d0d2817598ca"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">Serialize::SerializeTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#af67ed0e83ec5034e4014d0d2817598ca">serializeTable</a> () const =0</td></tr>
+<tr class="separator:af67ed0e83ec5034e4014d0d2817598ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a086c66e32de5f8ccd47665a2639cc91c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a086c66e32de5f8ccd47665a2639cc91c">setActive</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> active, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> existenceChanged)=0</td></tr>
+<tr class="separator:a086c66e32de5f8ccd47665a2639cc91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab37685957922cb15df4c1db6ac81f119"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#ab37685957922cb15df4c1db6ac81f119">setSynced</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> synced)=0</td></tr>
+<tr class="separator:ab37685957922cb15df4c1db6ac81f119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ab0e23973d7341d683ccf3ed3a7e06"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#ae0ab0e23973d7341d683ccf3ed3a7e06">size</a> () const =0</td></tr>
+<tr class="separator:ae0ab0e23973d7341d683ccf3ed3a7e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9f82693902e9f08d9dc14a7616a294"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a9c9f82693902e9f08d9dc14a7616a294">writeState</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;index, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;out, const char *name, <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> hierarchy) const</td></tr>
+<tr class="separator:a9c9f82693902e9f08d9dc14a7616a294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4a6678a290336dcfe4279296cafb6e8b" name="a4a6678a290336dcfe4279296cafb6e8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a6678a290336dcfe4279296cafb6e8b">&#9670;&#160;</a></span>~EntityComponentListBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Scene::Entity::EntityComponentListBase::~EntityComponentListBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a11d6b4b4971cae2acba5ab0e5e08b5c7" name="a11d6b4b4971cae2acba5ab0e5e08b5c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d6b4b4971cae2acba5ab0e5e08b5c7">&#9670;&#160;</a></span>get() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> * Engine::Scene::Entity::EntityComponentListBase::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a042a15d6d622221b1f010dc13cad1cdb" name="a042a15d6d622221b1f010dc13cad1cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a042a15d6d622221b1f010dc13cad1cdb">&#9670;&#160;</a></span>get() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> * Engine::Scene::Entity::EntityComponentListBase::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad14c4f0ed82865f918c06f8bf1c709f9" name="ad14c4f0ed82865f918c06f8bf1c709f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad14c4f0ed82865f918c06f8bf1c709f9">&#9670;&#160;</a></span>getTyped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> Engine::Scene::Entity::EntityComponentListBase::getTyped </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a506271f751ac5ab4caa8b5e73a62c22a" name="a506271f751ac5ab4caa8b5e73a62c22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a506271f751ac5ab4caa8b5e73a62c22a">&#9670;&#160;</a></span>getSerialized() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">Serialize::SerializableDataPtr</a> Engine::Scene::Entity::EntityComponentListBase::getSerialized </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a646e845cc8456b7537e84ab303a0f9ba" name="a646e845cc8456b7537e84ab303a0f9ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a646e845cc8456b7537e84ab303a0f9ba">&#9670;&#160;</a></span>getSerialized() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_const_ptr.html">Serialize::SerializableDataConstPtr</a> Engine::Scene::Entity::EntityComponentListBase::getSerialized </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af67ed0e83ec5034e4014d0d2817598ca" name="af67ed0e83ec5034e4014d0d2817598ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67ed0e83ec5034e4014d0d2817598ca">&#9670;&#160;</a></span>serializeTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">Serialize::SerializeTable</a> * Engine::Scene::Entity::EntityComponentListBase::serializeTable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51682a9cc980a7cdc3e1f0a17eec2d47" name="a51682a9cc980a7cdc3e1f0a17eec2d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51682a9cc980a7cdc3e1f0a17eec2d47">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Scene::Entity::EntityComponentListBase::init </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe6c4f5e6d94e0dc8f35966a920a6ab4" name="abe6c4f5e6d94e0dc8f35966a920a6ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6c4f5e6d94e0dc8f35966a920a6ab4">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Scene::Entity::EntityComponentListBase::finalize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a691759bff94adf630e5dca4bdfd68873" name="a691759bff94adf630e5dca4bdfd68873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a691759bff94adf630e5dca4bdfd68873">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_owning_handle.html">EntityComponentOwningHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; Engine::Scene::Entity::EntityComponentListBase::emplace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity</a> *&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a497a0c6677488051f30f00818081f8e2" name="a497a0c6677488051f30f00818081f8e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a497a0c6677488051f30f00818081f8e2">&#9670;&#160;</a></span>erase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Scene::Entity::EntityComponentListBase::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae4248eeba6a253153a9c5a64db1f3f2" name="aae4248eeba6a253153a9c5a64db1f3f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae4248eeba6a253153a9c5a64db1f3f2">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Scene::Entity::EntityComponentListBase::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51a7efe8efd8892959af8d186f4248fd" name="a51a7efe8efd8892959af8d186f4248fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51a7efe8efd8892959af8d186f4248fd">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Scene::Entity::EntityComponentListBase::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae0ab0e23973d7341d683ccf3ed3a7e06" name="ae0ab0e23973d7341d683ccf3ed3a7e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0ab0e23973d7341d683ccf3ed3a7e06">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t Engine::Scene::Entity::EntityComponentListBase::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab37685957922cb15df4c1db6ac81f119" name="ab37685957922cb15df4c1db6ac81f119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab37685957922cb15df4c1db6ac81f119">&#9670;&#160;</a></span>setSynced()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Scene::Entity::EntityComponentListBase::setSynced </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>synced</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a086c66e32de5f8ccd47665a2639cc91c" name="a086c66e32de5f8ccd47665a2639cc91c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a086c66e32de5f8ccd47665a2639cc91c">&#9670;&#160;</a></span>setActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Scene::Entity::EntityComponentListBase::setActive </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>active</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>existenceChanged</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9d2efa5290a3b80398af0afa50bb23a" name="af9d2efa5290a3b80398af0afa50bb23a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9d2efa5290a3b80398af0afa50bb23a">&#9670;&#160;</a></span>readState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> Engine::Scene::Entity::EntityComponentListBase::readState </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a>&#160;</td>
+          <td class="paramname"><em>hierarchy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9c9f82693902e9f08d9dc14a7616a294" name="a9c9f82693902e9f08d9dc14a7616a294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9f82693902e9f08d9dc14a7616a294">&#9670;&#160;</a></span>writeState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::Entity::EntityComponentListBase::writeState </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a>&#160;</td>
+          <td class="paramname"><em>hierarchy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69adde13529cc83e38d598d7869b4911" name="a69adde13529cc83e38d598d7869b4911"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69adde13529cc83e38d598d7869b4911">&#9670;&#160;</a></span>applyMap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> Engine::Scene::Entity::EntityComponentListBase::applyMap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a>&#160;</td>
+          <td class="paramname"><em>hierarchy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/misc/scene/src/Madgine/scene/entity/<a class="el" href="entitycomponentlistbase_8h.html">entitycomponentlistbase.h</a></li>
+<li>plugins/misc/scene/src/Madgine/scene/entity/<a class="el" href="entitycomponentlistbase_8cpp.html">entitycomponentlistbase.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

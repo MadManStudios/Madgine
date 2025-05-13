@@ -1,0 +1,1607 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::NodeGraph::NodeGraph Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::NodeGraph::NodeGraph Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_node_graph_1_1_node_graph.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nodegraph-struct-reference">
+<h1>NodeGraph Struct Reference<a class="headerlink" href="#nodegraph-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::NodeGraph::NodeGraph Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_node_graph.html">NodeGraph</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="struct_engine_1_1_node_graph_1_1_node_graph-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::NodeGraph::NodeGraph Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;nodegraph.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph_1_1_input_binding.html">InputBinding</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a54fc3b14d091a58f7a02509d7002f1ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a54fc3b14d091a58f7a02509d7002f1ad">NodeGraph</a> ()</td></tr>
+<tr class="separator:a54fc3b14d091a58f7a02509d7002f1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e6b091d15b67610b5a4da1e9eb8cf6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a5e6b091d15b67610b5a4da1e9eb8cf6b">NodeGraph</a> (const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;other)</td></tr>
+<tr class="separator:a5e6b091d15b67610b5a4da1e9eb8cf6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae25b6a0580b5360a6b63232dddf170b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ae25b6a0580b5360a6b63232dddf170b9">NodeGraph</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&amp;)</td></tr>
+<tr class="separator:ae25b6a0580b5360a6b63232dddf170b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c82d30c80f98bfc97cb6c79fbed5a3f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a7c82d30c80f98bfc97cb6c79fbed5a3f">~NodeGraph</a> ()</td></tr>
+<tr class="separator:a7c82d30c80f98bfc97cb6c79fbed5a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32bbb904abe6615387f805b71a486a91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a32bbb904abe6615387f805b71a486a91">addNode</a> (std::string_view name)</td></tr>
+<tr class="separator:a32bbb904abe6615387f805b71a486a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e7cae859c31729074c669a6693fd90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a60e7cae859c31729074c669a6693fd90">addNode</a> (std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6412fa9795e94dad9829633522e427cc">node</a>)</td></tr>
+<tr class="separator:a60e7cae859c31729074c669a6693fd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4e31fed5bc9244c1b0964f625243c45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ad4e31fed5bc9244c1b0964f625243c45">connectDataIn</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source)</td></tr>
+<tr class="separator:ad4e31fed5bc9244c1b0964f625243c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bdeeebfc0a7c7975ee58d7848c97a73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a3bdeeebfc0a7c7975ee58d7848c97a73">connectDataOut</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target)</td></tr>
+<tr class="separator:a3bdeeebfc0a7c7975ee58d7848c97a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6108121c79147e948eba3b7679db06f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ab6108121c79147e948eba3b7679db06f">connectFlow</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target)</td></tr>
+<tr class="separator:ab6108121c79147e948eba3b7679db06f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba28e067ff8853b0b60b489b21f8db57"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#aba28e067ff8853b0b60b489b21f8db57">dataInMask</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:aba28e067ff8853b0b60b489b21f8db57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6895aaab2b85160eec11e77e5a9fa9da"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6895aaab2b85160eec11e77e5a9fa9da">dataInName</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source)</td></tr>
+<tr class="separator:a6895aaab2b85160eec11e77e5a9fa9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace276895c1926fb44ded1940a8632d7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ace276895c1926fb44ded1940a8632d7c">dataInSource</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target)</td></tr>
+<tr class="separator:ace276895c1926fb44ded1940a8632d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade6d8c7cc1de89d34ee6e3de3fc542bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ade6d8c7cc1de89d34ee6e3de3fc542bb">dataInType</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:ade6d8c7cc1de89d34ee6e3de3fc542bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4040f3adf3796c439af23af7ef14b84"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ad4040f3adf3796c439af23af7ef14b84">dataOutMask</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:ad4040f3adf3796c439af23af7ef14b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa855b397086897ad6e24a7eb5f19cbc"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#afa855b397086897ad6e24a7eb5f19cbc">dataOutName</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target)</td></tr>
+<tr class="separator:afa855b397086897ad6e24a7eb5f19cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a72b5aab50f5ce571f5ffb677b79cf6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a0a72b5aab50f5ce571f5ffb677b79cf6">dataOutTarget</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source)</td></tr>
+<tr class="separator:a0a72b5aab50f5ce571f5ffb677b79cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e5fb3a0837b4aa6fc1e05e4cc8e7bf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6e5fb3a0837b4aa6fc1e05e4cc8e7bf9">dataOutType</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:a6e5fb3a0837b4aa6fc1e05e4cc8e7bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07b722928d3f390621afbf3105928eb1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a07b722928d3f390621afbf3105928eb1">dataProviderMask</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:a07b722928d3f390621afbf3105928eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f4ce012ae6018e4603c2c95a042d97"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ae5f4ce012ae6018e4603c2c95a042d97">dataProviderName</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target)</td></tr>
+<tr class="separator:ae5f4ce012ae6018e4603c2c95a042d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a678e022fb5e712ffa30063cd3a467824"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a678e022fb5e712ffa30063cd3a467824">dataProviderType</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:a678e022fb5e712ffa30063cd3a467824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cd6681a8c2f96bebc3ebbeac5f7caad"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a1cd6681a8c2f96bebc3ebbeac5f7caad">dataReceiverMask</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:a1cd6681a8c2f96bebc3ebbeac5f7caad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28562a4c84bf0bacf162066e9a639ea6"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a28562a4c84bf0bacf162066e9a639ea6">dataReceiverName</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source)</td></tr>
+<tr class="separator:a28562a4c84bf0bacf162066e9a639ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed03454e81e440d6dceb57541975c32a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#aed03454e81e440d6dceb57541975c32a">dataReceiverType</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:aed03454e81e440d6dceb57541975c32a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad71040c825cef9762eb66279e69a6793"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ad71040c825cef9762eb66279e69a6793">disconnectDataIn</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="struct_engine_1_1_node_graph_1_1_ignore.html">Ignore</a> ignore={})</td></tr>
+<tr class="separator:ad71040c825cef9762eb66279e69a6793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86fdaeae581617e23742168c99bd81b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a86fdaeae581617e23742168c99bd81b1">disconnectDataOut</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="struct_engine_1_1_node_graph_1_1_ignore.html">Ignore</a> ignore={})</td></tr>
+<tr class="separator:a86fdaeae581617e23742168c99bd81b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addb1fbfde5aae6fdf8a0b94a421fb1b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#addb1fbfde5aae6fdf8a0b94a421fb1b2">disconnectFlow</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="struct_engine_1_1_node_graph_1_1_ignore.html">Ignore</a> ignore={})</td></tr>
+<tr class="separator:addb1fbfde5aae6fdf8a0b94a421fb1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d0d3bb397bbc13bf2f4324de6acfd05"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a4d0d3bb397bbc13bf2f4324de6acfd05">flowInMask</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:a4d0d3bb397bbc13bf2f4324de6acfd05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ea0a77336953abdc884be500fbd6832"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a8ea0a77336953abdc884be500fbd6832">flowInName</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target)</td></tr>
+<tr class="separator:a8ea0a77336953abdc884be500fbd6832"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd9de516d395f134691a0f9d85670d6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a9cd9de516d395f134691a0f9d85670d6">flowOutMask</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true)</td></tr>
+<tr class="separator:a9cd9de516d395f134691a0f9d85670d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b15d7b74ae4eae4ec2eba426494a807"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a3b15d7b74ae4eae4ec2eba426494a807">flowOutName</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source)</td></tr>
+<tr class="separator:a3b15d7b74ae4eae4ec2eba426494a807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcbdb5a1360b910d2893d3a4aad6c559"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#abcbdb5a1360b910d2893d3a4aad6c559">flowOutTarget</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source)</td></tr>
+<tr class="separator:abcbdb5a1360b910d2893d3a4aad6c559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab337f71830ac9428173dc852f8c00bdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_sender.html">NodeInterpreterSender</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ab337f71830ac9428173dc852f8c00bdd">interpret</a> () const</td></tr>
+<tr class="separator:ab337f71830ac9428173dc852f8c00bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b39d7965f522e2b75cd67f373c3e679"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a2b39d7965f522e2b75cd67f373c3e679">loadFromFile</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path)</td></tr>
+<tr class="separator:a2b39d7965f522e2b75cd67f373c3e679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc1208da672aad3ab9718c63a953d1f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#abc1208da672aad3ab9718c63a953d1f8">node</a> (<a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t, 0 &gt; index)</td></tr>
+<tr class="separator:abc1208da672aad3ab9718c63a953d1f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6412fa9795e94dad9829633522e427cc"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6412fa9795e94dad9829633522e427cc">node</a> (<a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t, 0 &gt; index) const</td></tr>
+<tr class="separator:a6412fa9795e94dad9829633522e427cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc783c57dfaf5ea1738de6d427834f19"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#abc783c57dfaf5ea1738de6d427834f19">nodeIndex</a> (const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> *<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6412fa9795e94dad9829633522e427cc">node</a>) const</td></tr>
+<tr class="separator:abc783c57dfaf5ea1738de6d427834f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b150caaa881af3602d6cb589aa98dfd"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a5b150caaa881af3602d6cb589aa98dfd">nodes</a> () const</td></tr>
+<tr class="separator:a5b150caaa881af3602d6cb589aa98dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91760b5b1a532592f7b8e8fc6da89de3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a91760b5b1a532592f7b8e8fc6da89de3">onDataInRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a91760b5b1a532592f7b8e8fc6da89de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a1dafb61a3a1e6acdfa0131c60b8518"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a9a1dafb61a3a1e6acdfa0131c60b8518">onDataOutRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a9a1dafb61a3a1e6acdfa0131c60b8518"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0de53ab02a3f8ffe4db33ec1daed04a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a0de53ab02a3f8ffe4db33ec1daed04a6">onDataProviderRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a0de53ab02a3f8ffe4db33ec1daed04a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a134aabf45249ab102ec2f53500175e94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a134aabf45249ab102ec2f53500175e94">onDataReceiverRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a134aabf45249ab102ec2f53500175e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996f82ef9e8398e85553dc79c743b5a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a996f82ef9e8398e85553dc79c743b5a2">onFlowInRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a996f82ef9e8398e85553dc79c743b5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac01f58e11bafc3abb51bc8bd78606aec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ac01f58e11bafc3abb51bc8bd78606aec">onFlowOutRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:ac01f58e11bafc3abb51bc8bd78606aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cec1dda452741d84a20113d6547b080"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a2cec1dda452741d84a20113d6547b080">operator=</a> (const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;other)</td></tr>
+<tr class="separator:a2cec1dda452741d84a20113d6547b080"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2900614c4474d0fceb9cd7bf6fde25eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a2900614c4474d0fceb9cd7bf6fde25eb">removeNode</a> (uint32_t index)</td></tr>
+<tr class="separator:a2900614c4474d0fceb9cd7bf6fde25eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a864640aa08d7be5d81177bdc8fe64234"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a864640aa08d7be5d81177bdc8fe64234">resolveVariableType</a> (std::string_view name) const</td></tr>
+<tr class="separator:a864640aa08d7be5d81177bdc8fe64234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae04e0420ece3f65ad51f6efdfba519ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ae04e0420ece3f65ad51f6efdfba519ed">saveToFile</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path)</td></tr>
+<tr class="separator:ae04e0420ece3f65ad51f6efdfba519ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a4192d9dcea183fff859703c22cc89fff"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_in_pin_prototype.html">DataInPinPrototype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a4192d9dcea183fff859703c22cc89fff">mDataInPins</a></td></tr>
+<tr class="separator:a4192d9dcea183fff859703c22cc89fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8805b1c8d87a8fa339df65a6da215281"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_out_pin_prototype.html">DataOutPinPrototype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a8805b1c8d87a8fa339df65a6da215281">mDataOutPins</a></td></tr>
+<tr class="separator:a8805b1c8d87a8fa339df65a6da215281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a149868e207fecaea2127134e6520383f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_provider_pin_prototype.html">DataProviderPinPrototype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a149868e207fecaea2127134e6520383f">mDataProviderPins</a></td></tr>
+<tr class="separator:a149868e207fecaea2127134e6520383f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e4372d9772b58e27296042fc8b08a2a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_receiver_pin_prototype.html">DataReceiverPinPrototype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a2e4372d9772b58e27296042fc8b08a2a">mDataReceiverPins</a></td></tr>
+<tr class="separator:a2e4372d9772b58e27296042fc8b08a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0384357f304119b6c92759237b65563"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_flow_in_pin_prototype.html">FlowInPinPrototype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#aa0384357f304119b6c92759237b65563">mFlowInPins</a></td></tr>
+<tr class="separator:aa0384357f304119b6c92759237b65563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d24b84cd8d57645bd52f5f8edb22ecb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_flow_out_pin_prototype.html">FlowOutPinPrototype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a1d24b84cd8d57645bd52f5f8edb22ecb">mFlowOutPins</a></td></tr>
+<tr class="separator:a1d24b84cd8d57645bd52f5f8edb22ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98ade59a6646c083570bd178db8ffda"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph_1_1_input_binding.html">InputBinding</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ac98ade59a6646c083570bd178db8ffda">mInputBindings</a></td></tr>
+<tr class="separator:ac98ade59a6646c083570bd178db8ffda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa99e685c673f40407b5244c41cad3a3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#aaa99e685c673f40407b5244c41cad3a3">mLayoutData</a></td></tr>
+<tr class="separator:aaa99e685c673f40407b5244c41cad3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a66101e3de22d14ebe133e2e719ba5f93"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a66101e3de22d14ebe133e2e719ba5f93">createNode</a> (std::string_view name)</td></tr>
+<tr class="separator:a66101e3de22d14ebe133e2e719ba5f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d9727c1ab1ddb8491d073a8da28193b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6d9727c1ab1ddb8491d073a8da28193b">readNode</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;in, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; &amp;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6412fa9795e94dad9829633522e427cc">node</a>)</td></tr>
+<tr class="separator:a6d9727c1ab1ddb8491d073a8da28193b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedde34ee8f5d2c63540758ed54fee2f9"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#aedde34ee8f5d2c63540758ed54fee2f9">writeNode</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;out, const std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; &amp;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6412fa9795e94dad9829633522e427cc">node</a>) const</td></tr>
+<tr class="separator:aedde34ee8f5d2c63540758ed54fee2f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a54fc3b14d091a58f7a02509d7002f1ad" name="a54fc3b14d091a58f7a02509d7002f1ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54fc3b14d091a58f7a02509d7002f1ad">&#9670;&#160;</a></span>NodeGraph() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::NodeGraph::NodeGraph::NodeGraph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e6b091d15b67610b5a4da1e9eb8cf6b" name="a5e6b091d15b67610b5a4da1e9eb8cf6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e6b091d15b67610b5a4da1e9eb8cf6b">&#9670;&#160;</a></span>NodeGraph() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::NodeGraph::NodeGraph::NodeGraph </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae25b6a0580b5360a6b63232dddf170b9" name="ae25b6a0580b5360a6b63232dddf170b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae25b6a0580b5360a6b63232dddf170b9">&#9670;&#160;</a></span>NodeGraph() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::NodeGraph::NodeGraph::NodeGraph </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c82d30c80f98bfc97cb6c79fbed5a3f" name="a7c82d30c80f98bfc97cb6c79fbed5a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c82d30c80f98bfc97cb6c79fbed5a3f">&#9670;&#160;</a></span>~NodeGraph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::NodeGraph::NodeGraph::~NodeGraph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2cec1dda452741d84a20113d6547b080" name="a2cec1dda452741d84a20113d6547b080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cec1dda452741d84a20113d6547b080">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp; Engine::NodeGraph::NodeGraph::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b39d7965f522e2b75cd67f373c3e679" name="a2b39d7965f522e2b75cd67f373c3e679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b39d7965f522e2b75cd67f373c3e679">&#9670;&#160;</a></span>loadFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> Engine::NodeGraph::NodeGraph::loadFromFile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae04e0420ece3f65ad51f6efdfba519ed" name="ae04e0420ece3f65ad51f6efdfba519ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae04e0420ece3f65ad51f6efdfba519ed">&#9670;&#160;</a></span>saveToFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::saveToFile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60e7cae859c31729074c669a6693fd90" name="a60e7cae859c31729074c669a6693fd90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60e7cae859c31729074c669a6693fd90">&#9670;&#160;</a></span>addNode() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> * Engine::NodeGraph::NodeGraph::addNode </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt;&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32bbb904abe6615387f805b71a486a91" name="a32bbb904abe6615387f805b71a486a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32bbb904abe6615387f805b71a486a91">&#9670;&#160;</a></span>addNode() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> * Engine::NodeGraph::NodeGraph::addNode </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2900614c4474d0fceb9cd7bf6fde25eb" name="a2900614c4474d0fceb9cd7bf6fde25eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2900614c4474d0fceb9cd7bf6fde25eb">&#9670;&#160;</a></span>removeNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::removeNode </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b150caaa881af3602d6cb589aa98dfd" name="a5b150caaa881af3602d6cb589aa98dfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b150caaa881af3602d6cb589aa98dfd">&#9670;&#160;</a></span>nodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; &gt; &amp; Engine::NodeGraph::NodeGraph::nodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6412fa9795e94dad9829633522e427cc" name="a6412fa9795e94dad9829633522e427cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6412fa9795e94dad9829633522e427cc">&#9670;&#160;</a></span>node() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> * Engine::NodeGraph::NodeGraph::node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t, 0 &gt;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc1208da672aad3ab9718c63a953d1f8" name="abc1208da672aad3ab9718c63a953d1f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1208da672aad3ab9718c63a953d1f8">&#9670;&#160;</a></span>node() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> * Engine::NodeGraph::NodeGraph::node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t, 0 &gt;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc783c57dfaf5ea1738de6d427834f19" name="abc783c57dfaf5ea1738de6d427834f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc783c57dfaf5ea1738de6d427834f19">&#9670;&#160;</a></span>nodeIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::NodeGraph::NodeGraph::nodeIndex </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abcbdb5a1360b910d2893d3a4aad6c559" name="abcbdb5a1360b910d2893d3a4aad6c559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcbdb5a1360b910d2893d3a4aad6c559">&#9670;&#160;</a></span>flowOutTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> Engine::NodeGraph::NodeGraph::flowOutTarget </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace276895c1926fb44ded1940a8632d7c" name="ace276895c1926fb44ded1940a8632d7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace276895c1926fb44ded1940a8632d7c">&#9670;&#160;</a></span>dataInSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> Engine::NodeGraph::NodeGraph::dataInSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a72b5aab50f5ce571f5ffb677b79cf6" name="a0a72b5aab50f5ce571f5ffb677b79cf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a72b5aab50f5ce571f5ffb677b79cf6">&#9670;&#160;</a></span>dataOutTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> Engine::NodeGraph::NodeGraph::dataOutTarget </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed03454e81e440d6dceb57541975c32a" name="aed03454e81e440d6dceb57541975c32a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed03454e81e440d6dceb57541975c32a">&#9670;&#160;</a></span>dataReceiverType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeGraph::dataReceiverType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a678e022fb5e712ffa30063cd3a467824" name="a678e022fb5e712ffa30063cd3a467824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a678e022fb5e712ffa30063cd3a467824">&#9670;&#160;</a></span>dataProviderType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeGraph::dataProviderType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade6d8c7cc1de89d34ee6e3de3fc542bb" name="ade6d8c7cc1de89d34ee6e3de3fc542bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade6d8c7cc1de89d34ee6e3de3fc542bb">&#9670;&#160;</a></span>dataInType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeGraph::dataInType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e5fb3a0837b4aa6fc1e05e4cc8e7bf9" name="a6e5fb3a0837b4aa6fc1e05e4cc8e7bf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e5fb3a0837b4aa6fc1e05e4cc8e7bf9">&#9670;&#160;</a></span>dataOutType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeGraph::dataOutType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d0d3bb397bbc13bf2f4324de6acfd05" name="a4d0d3bb397bbc13bf2f4324de6acfd05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d0d3bb397bbc13bf2f4324de6acfd05">&#9670;&#160;</a></span>flowInMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::NodeGraph::NodeGraph::flowInMask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cd9de516d395f134691a0f9d85670d6" name="a9cd9de516d395f134691a0f9d85670d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd9de516d395f134691a0f9d85670d6">&#9670;&#160;</a></span>flowOutMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::NodeGraph::NodeGraph::flowOutMask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1cd6681a8c2f96bebc3ebbeac5f7caad" name="a1cd6681a8c2f96bebc3ebbeac5f7caad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cd6681a8c2f96bebc3ebbeac5f7caad">&#9670;&#160;</a></span>dataReceiverMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::NodeGraph::NodeGraph::dataReceiverMask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07b722928d3f390621afbf3105928eb1" name="a07b722928d3f390621afbf3105928eb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07b722928d3f390621afbf3105928eb1">&#9670;&#160;</a></span>dataProviderMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::NodeGraph::NodeGraph::dataProviderMask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba28e067ff8853b0b60b489b21f8db57" name="aba28e067ff8853b0b60b489b21f8db57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba28e067ff8853b0b60b489b21f8db57">&#9670;&#160;</a></span>dataInMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::NodeGraph::NodeGraph::dataInMask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4040f3adf3796c439af23af7ef14b84" name="ad4040f3adf3796c439af23af7ef14b84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4040f3adf3796c439af23af7ef14b84">&#9670;&#160;</a></span>dataOutMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::NodeGraph::NodeGraph::dataOutMask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ea0a77336953abdc884be500fbd6832" name="a8ea0a77336953abdc884be500fbd6832"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ea0a77336953abdc884be500fbd6832">&#9670;&#160;</a></span>flowInName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::NodeGraph::NodeGraph::flowInName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b15d7b74ae4eae4ec2eba426494a807" name="a3b15d7b74ae4eae4ec2eba426494a807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b15d7b74ae4eae4ec2eba426494a807">&#9670;&#160;</a></span>flowOutName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::NodeGraph::NodeGraph::flowOutName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28562a4c84bf0bacf162066e9a639ea6" name="a28562a4c84bf0bacf162066e9a639ea6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28562a4c84bf0bacf162066e9a639ea6">&#9670;&#160;</a></span>dataReceiverName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::NodeGraph::NodeGraph::dataReceiverName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5f4ce012ae6018e4603c2c95a042d97" name="ae5f4ce012ae6018e4603c2c95a042d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5f4ce012ae6018e4603c2c95a042d97">&#9670;&#160;</a></span>dataProviderName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::NodeGraph::NodeGraph::dataProviderName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6895aaab2b85160eec11e77e5a9fa9da" name="a6895aaab2b85160eec11e77e5a9fa9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6895aaab2b85160eec11e77e5a9fa9da">&#9670;&#160;</a></span>dataInName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::NodeGraph::NodeGraph::dataInName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa855b397086897ad6e24a7eb5f19cbc" name="afa855b397086897ad6e24a7eb5f19cbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa855b397086897ad6e24a7eb5f19cbc">&#9670;&#160;</a></span>dataOutName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::NodeGraph::NodeGraph::dataOutName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a864640aa08d7be5d81177bdc8fe64234" name="a864640aa08d7be5d81177bdc8fe64234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a864640aa08d7be5d81177bdc8fe64234">&#9670;&#160;</a></span>resolveVariableType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeGraph::resolveVariableType </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6108121c79147e948eba3b7679db06f" name="ab6108121c79147e948eba3b7679db06f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6108121c79147e948eba3b7679db06f">&#9670;&#160;</a></span>connectFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::connectFlow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4e31fed5bc9244c1b0964f625243c45" name="ad4e31fed5bc9244c1b0964f625243c45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4e31fed5bc9244c1b0964f625243c45">&#9670;&#160;</a></span>connectDataIn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::connectDataIn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3bdeeebfc0a7c7975ee58d7848c97a73" name="a3bdeeebfc0a7c7975ee58d7848c97a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bdeeebfc0a7c7975ee58d7848c97a73">&#9670;&#160;</a></span>connectDataOut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::connectDataOut </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="addb1fbfde5aae6fdf8a0b94a421fb1b2" name="addb1fbfde5aae6fdf8a0b94a421fb1b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addb1fbfde5aae6fdf8a0b94a421fb1b2">&#9670;&#160;</a></span>disconnectFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::disconnectFlow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_ignore.html">Ignore</a>&#160;</td>
+          <td class="paramname"><em>ignore</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad71040c825cef9762eb66279e69a6793" name="ad71040c825cef9762eb66279e69a6793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad71040c825cef9762eb66279e69a6793">&#9670;&#160;</a></span>disconnectDataIn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::disconnectDataIn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_ignore.html">Ignore</a>&#160;</td>
+          <td class="paramname"><em>ignore</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86fdaeae581617e23742168c99bd81b1" name="a86fdaeae581617e23742168c99bd81b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86fdaeae581617e23742168c99bd81b1">&#9670;&#160;</a></span>disconnectDataOut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::disconnectDataOut </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_ignore.html">Ignore</a>&#160;</td>
+          <td class="paramname"><em>ignore</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a996f82ef9e8398e85553dc79c743b5a2" name="a996f82ef9e8398e85553dc79c743b5a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a996f82ef9e8398e85553dc79c743b5a2">&#9670;&#160;</a></span>onFlowInRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::onFlowInRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac01f58e11bafc3abb51bc8bd78606aec" name="ac01f58e11bafc3abb51bc8bd78606aec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac01f58e11bafc3abb51bc8bd78606aec">&#9670;&#160;</a></span>onFlowOutRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::onFlowOutRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a134aabf45249ab102ec2f53500175e94" name="a134aabf45249ab102ec2f53500175e94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a134aabf45249ab102ec2f53500175e94">&#9670;&#160;</a></span>onDataReceiverRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::onDataReceiverRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0de53ab02a3f8ffe4db33ec1daed04a6" name="a0de53ab02a3f8ffe4db33ec1daed04a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de53ab02a3f8ffe4db33ec1daed04a6">&#9670;&#160;</a></span>onDataProviderRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::onDataProviderRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91760b5b1a532592f7b8e8fc6da89de3" name="a91760b5b1a532592f7b8e8fc6da89de3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91760b5b1a532592f7b8e8fc6da89de3">&#9670;&#160;</a></span>onDataInRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::onDataInRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a1dafb61a3a1e6acdfa0131c60b8518" name="a9a1dafb61a3a1e6acdfa0131c60b8518"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a1dafb61a3a1e6acdfa0131c60b8518">&#9670;&#160;</a></span>onDataOutRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::NodeGraph::NodeGraph::onDataOutRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab337f71830ac9428173dc852f8c00bdd" name="ab337f71830ac9428173dc852f8c00bdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab337f71830ac9428173dc852f8c00bdd">&#9670;&#160;</a></span>interpret()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_sender.html">NodeInterpreterSender</a> Engine::NodeGraph::NodeGraph::interpret </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66101e3de22d14ebe133e2e719ba5f93" name="a66101e3de22d14ebe133e2e719ba5f93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66101e3de22d14ebe133e2e719ba5f93">&#9670;&#160;</a></span>createNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; Engine::NodeGraph::NodeGraph::createNode </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6d9727c1ab1ddb8491d073a8da28193b" name="a6d9727c1ab1ddb8491d073a8da28193b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d9727c1ab1ddb8491d073a8da28193b">&#9670;&#160;</a></span>readNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> Engine::NodeGraph::NodeGraph::readNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aedde34ee8f5d2c63540758ed54fee2f9" name="aedde34ee8f5d2c63540758ed54fee2f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedde34ee8f5d2c63540758ed54fee2f9">&#9670;&#160;</a></span>writeNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * Engine::NodeGraph::NodeGraph::writeNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa0384357f304119b6c92759237b65563" name="aa0384357f304119b6c92759237b65563"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0384357f304119b6c92759237b65563">&#9670;&#160;</a></span>mFlowInPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_flow_in_pin_prototype.html">FlowInPinPrototype</a>&gt; Engine::NodeGraph::NodeGraph::mFlowInPins</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d24b84cd8d57645bd52f5f8edb22ecb" name="a1d24b84cd8d57645bd52f5f8edb22ecb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d24b84cd8d57645bd52f5f8edb22ecb">&#9670;&#160;</a></span>mFlowOutPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_flow_out_pin_prototype.html">FlowOutPinPrototype</a>&gt; Engine::NodeGraph::NodeGraph::mFlowOutPins</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e4372d9772b58e27296042fc8b08a2a" name="a2e4372d9772b58e27296042fc8b08a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4372d9772b58e27296042fc8b08a2a">&#9670;&#160;</a></span>mDataReceiverPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_receiver_pin_prototype.html">DataReceiverPinPrototype</a>&gt; Engine::NodeGraph::NodeGraph::mDataReceiverPins</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a149868e207fecaea2127134e6520383f" name="a149868e207fecaea2127134e6520383f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a149868e207fecaea2127134e6520383f">&#9670;&#160;</a></span>mDataProviderPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_provider_pin_prototype.html">DataProviderPinPrototype</a>&gt; Engine::NodeGraph::NodeGraph::mDataProviderPins</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4192d9dcea183fff859703c22cc89fff" name="a4192d9dcea183fff859703c22cc89fff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4192d9dcea183fff859703c22cc89fff">&#9670;&#160;</a></span>mDataInPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_in_pin_prototype.html">DataInPinPrototype</a>&gt; Engine::NodeGraph::NodeGraph::mDataInPins</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8805b1c8d87a8fa339df65a6da215281" name="a8805b1c8d87a8fa339df65a6da215281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8805b1c8d87a8fa339df65a6da215281">&#9670;&#160;</a></span>mDataOutPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_out_pin_prototype.html">DataOutPinPrototype</a>&gt; Engine::NodeGraph::NodeGraph::mDataOutPins</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa99e685c673f40407b5244c41cad3a3" name="aaa99e685c673f40407b5244c41cad3a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa99e685c673f40407b5244c41cad3a3">&#9670;&#160;</a></span>mLayoutData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::NodeGraph::NodeGraph::mLayoutData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac98ade59a6646c083570bd178db8ffda" name="ac98ade59a6646c083570bd178db8ffda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98ade59a6646c083570bd178db8ffda">&#9670;&#160;</a></span>mInputBindings</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph_1_1_input_binding.html">InputBinding</a>&gt; Engine::NodeGraph::NodeGraph::mInputBindings</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="nodegraph_8h.html">nodegraph.h</a></li>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="nodegraph_8cpp.html">nodegraph.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

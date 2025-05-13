@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Execution::let_value_t::state&amp;lt; Rec, Sender, F &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Execution::let_value_t::state&amp;lt; Rec, Sender, F &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_execution_1_1let__value__t_1_1state.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="state-lt-rec-sender-f-gt-struct-template-reference">
+<h1>state&amp;lt; Rec, Sender, F &amp;gt; Struct Template Reference<a class="headerlink" href="#state-lt-rec-sender-f-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Execution::let_value_t::state&lt; Rec, Sender, F &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_execution.html">Execution</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t.html">let_value_t</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">state</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_execution_1_1let__value__t_1_1state-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Execution::let_value_t::state&lt; Rec, Sender, F &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;algorithm.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Execution::let_value_t::state&lt; Rec, Sender, F &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_execution_1_1let__value__t_1_1state__inherit__graph.svg" width="178" height="168"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa249f4cbd97e29728ef9d84aa7bc03de"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#aa249f4cbd97e29728ef9d84aa7bc03de">base</a> = <a class="el" href="namespace_engine_1_1_execution.html#abf1da7e89b92a61faa2a475c4094d1cf">algorithm_state</a>&lt; Sender, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1receiver.html">receiver</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &gt; &gt;</td></tr>
+<tr class="separator:aa249f4cbd97e29728ef9d84aa7bc03de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5b6cf8221742c947e2f772df8dac9c"><td class="memTemplParams" colspan="2">template&lt;typename... V&gt; </td></tr>
+<tr class="memitem:aba5b6cf8221742c947e2f772df8dac9c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#aba5b6cf8221742c947e2f772df8dac9c">helper</a> = std::invoke_result_t&lt; F, V &amp;... &gt;</td></tr>
+<tr class="separator:aba5b6cf8221742c947e2f772df8dac9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae42a7a1362a9efcd9d863f7b4a22f4cd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#ae42a7a1362a9efcd9d863f7b4a22f4cd">inner_sender_t</a> = typename Sender::template value_types&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#aba5b6cf8221742c947e2f772df8dac9c">helper</a> &gt;</td></tr>
+<tr class="separator:ae42a7a1362a9efcd9d863f7b4a22f4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46705041264abbef12014c3e77caa290"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a46705041264abbef12014c3e77caa290">inner_state</a> = <a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#ae42a7a1362a9efcd9d863f7b4a22f4cd">inner_sender_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1receiver.html">receiver</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a> &gt; &gt;</td></tr>
+<tr class="separator:a46705041264abbef12014c3e77caa290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092102b047235d8ebf0198a7351b09ad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a092102b047235d8ebf0198a7351b09ad">Tuple</a> = typename Sender::template value_types&lt; std::tuple &gt;</td></tr>
+<tr class="separator:a092102b047235d8ebf0198a7351b09ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_struct_engine_1_1_execution_1_1algorithm__state__helper"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_execution_1_1algorithm__state__helper')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html">Engine::Execution::algorithm_state_helper&lt; State &gt;</a></td></tr>
+<tr class="memitem:af63abf14e4c2dd2a3aa90cb8b4f6719d inherit pub_types_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af63abf14e4c2dd2a3aa90cb8b4f6719d">InnerRec</a> = typename State::Rec</td></tr>
+<tr class="separator:af63abf14e4c2dd2a3aa90cb8b4f6719d inherit pub_types_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1e22f51c7063e90f52eba2a68a283ff inherit pub_types_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> = typename InnerRec::inner</td></tr>
+<tr class="separator:af1e22f51c7063e90f52eba2a68a283ff inherit pub_types_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a948344ae3a34d05a302b9524718a18e5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a948344ae3a34d05a302b9524718a18e5">state</a> (<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&amp;rec, Sender &amp;&amp;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">sender</a>, F &amp;&amp;f)</td></tr>
+<tr class="separator:a948344ae3a34d05a302b9524718a18e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34a7c7c8509a952f99ff7cb3df292c02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a34a7c7c8509a952f99ff7cb3df292c02">~state</a> ()</td></tr>
+<tr class="separator:a34a7c7c8509a952f99ff7cb3df292c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f2e23c777eae47e3f2300b1d5ab227"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a67f2e23c777eae47e3f2300b1d5ab227">cleanup</a> ()</td></tr>
+<tr class="separator:a67f2e23c777eae47e3f2300b1d5ab227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6154e04016aa1c7f9505178df1f176"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#add6154e04016aa1c7f9505178df1f176">set_done</a> (<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a>, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec)</td></tr>
+<tr class="separator:add6154e04016aa1c7f9505178df1f176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5b786cda4247b9047958c0f5d0cb70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#aab5b786cda4247b9047958c0f5d0cb70">set_done</a> (<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec)</td></tr>
+<tr class="separator:aab5b786cda4247b9047958c0f5d0cb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e85fd404edf665009a5c9b218086bcf"><td class="memTemplParams" colspan="2">template&lt;typename... R&gt; </td></tr>
+<tr class="memitem:a9e85fd404edf665009a5c9b218086bcf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a9e85fd404edf665009a5c9b218086bcf">set_error</a> (<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a>, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec, R &amp;&amp;...result)</td></tr>
+<tr class="separator:a9e85fd404edf665009a5c9b218086bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa62ad03f85af22b784b67cb0bcf4d956"><td class="memTemplParams" colspan="2">template&lt;typename... R&gt; </td></tr>
+<tr class="memitem:aa62ad03f85af22b784b67cb0bcf4d956"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#aa62ad03f85af22b784b67cb0bcf4d956">set_error</a> (<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec, R &amp;&amp;...result)</td></tr>
+<tr class="separator:aa62ad03f85af22b784b67cb0bcf4d956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9462eef0ad98a32bbe72c52a31637a70"><td class="memTemplParams" colspan="2">template&lt;typename... V2&gt; </td></tr>
+<tr class="memitem:a9462eef0ad98a32bbe72c52a31637a70"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a9462eef0ad98a32bbe72c52a31637a70">set_value</a> (<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a>, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec, V2 &amp;&amp;...values)</td></tr>
+<tr class="separator:a9462eef0ad98a32bbe72c52a31637a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c18d85cdc669b74d8ce43153f8c87ca"><td class="memTemplParams" colspan="2">template&lt;typename... V&gt; </td></tr>
+<tr class="memitem:a7c18d85cdc669b74d8ce43153f8c87ca"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a7c18d85cdc669b74d8ce43153f8c87ca">set_value</a> (<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec, V &amp;&amp;...values)</td></tr>
+<tr class="separator:a7c18d85cdc669b74d8ce43153f8c87ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html">Engine::Execution::algorithm_state_helper&lt; State &gt;</a></td></tr>
+<tr class="memitem:a11f74a7608940029a71decae9c3ee768 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename... Args&gt; </td></tr>
+<tr class="memitem:a11f74a7608940029a71decae9c3ee768 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#a11f74a7608940029a71decae9c3ee768">algorithm_state_helper</a> (Sender &amp;&amp;sender, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&amp;rec, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a11f74a7608940029a71decae9c3ee768 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf302d167cd21c6b6a25556c180a7d1 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#a2cf302d167cd21c6b6a25556c180a7d1">~algorithm_state_helper</a> ()</td></tr>
+<tr class="separator:a2cf302d167cd21c6b6a25556c180a7d1 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5b786cda4247b9047958c0f5d0cb70 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#aab5b786cda4247b9047958c0f5d0cb70">set_done</a> (<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec)</td></tr>
+<tr class="separator:aab5b786cda4247b9047958c0f5d0cb70 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa62ad03f85af22b784b67cb0bcf4d956 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memTemplParams" colspan="2">template&lt;typename... R&gt; </td></tr>
+<tr class="memitem:aa62ad03f85af22b784b67cb0bcf4d956 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#aa62ad03f85af22b784b67cb0bcf4d956">set_error</a> (<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec, R &amp;&amp;...result)</td></tr>
+<tr class="separator:aa62ad03f85af22b784b67cb0bcf4d956 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9517db56e2071a15e655ca1f0e7eb141 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memTemplParams" colspan="2">template&lt;typename... V&gt; </td></tr>
+<tr class="memitem:a9517db56e2071a15e655ca1f0e7eb141 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#a9517db56e2071a15e655ca1f0e7eb141">set_value</a> (<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;rec, V &amp;&amp;...value)</td></tr>
+<tr class="separator:a9517db56e2071a15e655ca1f0e7eb141 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ae4df8f47b2a41ce5d228ada9b080f7 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#a2ae4df8f47b2a41ce5d228ada9b080f7">start</a> ()</td></tr>
+<tr class="separator:a2ae4df8f47b2a41ce5d228ada9b080f7 inherit pub_methods_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aad7c94c91d43d6c61860c7790c1c8a7a"><td class="memItemLeft" align="right" valign="top">F&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#aad7c94c91d43d6c61860c7790c1c8a7a">mF</a></td></tr>
+<tr class="separator:aad7c94c91d43d6c61860c7790c1c8a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ee4923e430b631c406ef485d37cd82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a46705041264abbef12014c3e77caa290">inner_state</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a60ee4923e430b631c406ef485d37cd82">mInnerState</a></td></tr>
+<tr class="separator:a60ee4923e430b631c406ef485d37cd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f1c944622bc729ae8aa1fec4d45123"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a092102b047235d8ebf0198a7351b09ad">Tuple</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#ad8f1c944622bc729ae8aa1fec4d45123">mValue</a></td></tr>
+<tr class="separator:ad8f1c944622bc729ae8aa1fec4d45123"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_execution_1_1algorithm__state__helper"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_execution_1_1algorithm__state__helper')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html">Engine::Execution::algorithm_state_helper&lt; State &gt;</a></td></tr>
+<tr class="memitem:a02e165b41c6bf0486c210c51f404ac14 inherit pub_attribs_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memItemLeft" align="right" valign="top">State&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#a02e165b41c6bf0486c210c51f404ac14">mState</a></td></tr>
+<tr class="separator:a02e165b41c6bf0486c210c51f404ac14 inherit pub_attribs_struct_engine_1_1_execution_1_1algorithm__state__helper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="aa249f4cbd97e29728ef9d84aa7bc03de" name="aa249f4cbd97e29728ef9d84aa7bc03de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa249f4cbd97e29728ef9d84aa7bc03de">&#9670;&#160;</a></span>base</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::base =  <a class="el" href="namespace_engine_1_1_execution.html#abf1da7e89b92a61faa2a475c4094d1cf">algorithm_state</a>&lt;Sender, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1receiver.html">receiver</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba5b6cf8221742c947e2f772df8dac9c" name="aba5b6cf8221742c947e2f772df8dac9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba5b6cf8221742c947e2f772df8dac9c">&#9670;&#160;</a></span>helper</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<div class="memtemplate">
+template&lt;typename... V&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::helper =  std::invoke_result_t&lt;F, V &amp;...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae42a7a1362a9efcd9d863f7b4a22f4cd" name="ae42a7a1362a9efcd9d863f7b4a22f4cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae42a7a1362a9efcd9d863f7b4a22f4cd">&#9670;&#160;</a></span>inner_sender_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::inner_sender_t =  typename Sender::template value_types&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#aba5b6cf8221742c947e2f772df8dac9c">helper</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a092102b047235d8ebf0198a7351b09ad" name="a092102b047235d8ebf0198a7351b09ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a092102b047235d8ebf0198a7351b09ad">&#9670;&#160;</a></span>Tuple</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::Tuple =  typename Sender::template value_types&lt;std::tuple&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46705041264abbef12014c3e77caa290" name="a46705041264abbef12014c3e77caa290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46705041264abbef12014c3e77caa290">&#9670;&#160;</a></span>inner_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;<a class="el" href="classinner__state.html">::inner_state</a> =  <a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#ae42a7a1362a9efcd9d863f7b4a22f4cd">inner_sender_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1receiver.html">receiver</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F, <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a>&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a948344ae3a34d05a302b9524718a18e5" name="a948344ae3a34d05a302b9524718a18e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a948344ae3a34d05a302b9524718a18e5">&#9670;&#160;</a></span>state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Sender &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sender</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34a7c7c8509a952f99ff7cb3df292c02" name="a34a7c7c8509a952f99ff7cb3df292c02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34a7c7c8509a952f99ff7cb3df292c02">&#9670;&#160;</a></span>~state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::~<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">state</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7c18d85cdc669b74d8ce43153f8c87ca" name="a7c18d85cdc669b74d8ce43153f8c87ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c18d85cdc669b74d8ce43153f8c87ca">&#9670;&#160;</a></span>set_value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<div class="memtemplate">
+template&lt;typename... V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::set_value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a67f2e23c777eae47e3f2300b1d5ab227" name="a67f2e23c777eae47e3f2300b1d5ab227"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67f2e23c777eae47e3f2300b1d5ab227">&#9670;&#160;</a></span>cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::cleanup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9462eef0ad98a32bbe72c52a31637a70" name="a9462eef0ad98a32bbe72c52a31637a70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9462eef0ad98a32bbe72c52a31637a70">&#9670;&#160;</a></span>set_value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<div class="memtemplate">
+template&lt;typename... V2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::set_value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V2 &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add6154e04016aa1c7f9505178df1f176" name="add6154e04016aa1c7f9505178df1f176"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6154e04016aa1c7f9505178df1f176">&#9670;&#160;</a></span>set_done() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::set_done </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e85fd404edf665009a5c9b218086bcf" name="a9e85fd404edf665009a5c9b218086bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e85fd404edf665009a5c9b218086bcf">&#9670;&#160;</a></span>set_error() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<div class="memtemplate">
+template&lt;typename... R&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::set_error </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state_1_1inner__tag.html">inner_tag</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">R &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab5b786cda4247b9047958c0f5d0cb70" name="aab5b786cda4247b9047958c0f5d0cb70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab5b786cda4247b9047958c0f5d0cb70">&#9670;&#160;</a></span>set_done() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html">Engine::Execution::algorithm_state_helper</a>&lt; State &gt;::set_done </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&#160;</td>
+          <td class="paramname"><em>rec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa62ad03f85af22b784b67cb0bcf4d956" name="aa62ad03f85af22b784b67cb0bcf4d956"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa62ad03f85af22b784b67cb0bcf4d956">&#9670;&#160;</a></span>set_error() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+<div class="memtemplate">
+template&lt;typename... R&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html">Engine::Execution::algorithm_state_helper</a>&lt; State &gt;::set_error </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">R &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aad7c94c91d43d6c61860c7790c1c8a7a" name="aad7c94c91d43d6c61860c7790c1c8a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad7c94c91d43d6c61860c7790c1c8a7a">&#9670;&#160;</a></span>mF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">F <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::mF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8f1c944622bc729ae8aa1fec4d45123" name="ad8f1c944622bc729ae8aa1fec4d45123"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8f1c944622bc729ae8aa1fec4d45123">&#9670;&#160;</a></span>mValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a092102b047235d8ebf0198a7351b09ad">Tuple</a>&gt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::mValue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60ee4923e430b631c406ef485d37cd82" name="a60ee4923e430b631c406ef485d37cd82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60ee4923e430b631c406ef485d37cd82">&#9670;&#160;</a></span>mInnerState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a> , typename Sender , typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a46705041264abbef12014c3e77caa290">inner_state</a>&gt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html">Engine::Execution::let_value_t::state</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#af1e22f51c7063e90f52eba2a68a283ff">Rec</a>, Sender, F &gt;::mInnerState</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/execution/<a class="el" href="algorithm_8h.html">algorithm.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

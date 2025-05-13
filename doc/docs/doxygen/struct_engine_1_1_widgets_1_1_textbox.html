@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Widgets::Textbox Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Widgets::Textbox Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_widgets_1_1_textbox.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="textbox-struct-reference">
+<h1>Textbox Struct Reference<a class="headerlink" href="#textbox-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Widgets::Textbox Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_widgets.html">Widgets</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html">Textbox</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_widgets_1_1_textbox-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Widgets::Textbox Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;textbox.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Widgets::Textbox:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_widgets_1_1_textbox__inherit__graph.svg" width="182" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9958ef370109960aca320e0c7940443d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a9958ef370109960aca320e0c7940443d">Textbox</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html">WidgetManager</a> &amp;manager, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html">WidgetBase</a> *parent=nullptr)</td></tr>
+<tr class="separator:a9958ef370109960aca320e0c7940443d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0edb71d0bad93c2e8dd56409cb4a94cb"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a0edb71d0bad93c2e8dd56409cb4a94cb">~Textbox</a> ()=default</td></tr>
+<tr class="separator:a0edb71d0bad93c2e8dd56409cb4a94cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b7a25a7924b56792581a4e592be5824"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a9b7a25a7924b56792581a4e592be5824">calculateWidth</a> (size_t i, size_t n)</td></tr>
+<tr class="separator:a9b7a25a7924b56792581a4e592be5824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f510566e270c07fd9d7beb6b4ec0c0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a8f510566e270c07fd9d7beb6b4ec0c0a">editable</a> () const</td></tr>
+<tr class="separator:a8f510566e270c07fd9d7beb6b4ec0c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa36fb66f1884d751a09fe42884502881"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#aa36fb66f1884d751a09fe42884502881">getClass</a> () const override</td></tr>
+<tr class="separator:aa36fb66f1884d751a09fe42884502881"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc5cd3723b545627bb13680feff51690"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#abc5cd3723b545627bb13680feff51690">injectDragBegin</a> (const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;arg) override</td></tr>
+<tr class="separator:abc5cd3723b545627bb13680feff51690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5da42b5f355935f3d7f7a12698b9d86e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a5da42b5f355935f3d7f7a12698b9d86e">injectDragMove</a> (const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;arg) override</td></tr>
+<tr class="separator:a5da42b5f355935f3d7f7a12698b9d86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8169565828671873f0a8191fc23ff4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#aef8169565828671873f0a8191fc23ff4">injectKeyPress</a> (const <a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html">Input::KeyEventArgs</a> &amp;arg) override</td></tr>
+<tr class="separator:aef8169565828671873f0a8191fc23ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61078202b520637ac32a3bfeafa424a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a61078202b520637ac32a3bfeafa424a8">injectPointerClick</a> (const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;arg) override</td></tr>
+<tr class="separator:a61078202b520637ac32a3bfeafa424a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5dd669421dccec7c12c654783305369"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#ad5dd669421dccec7c12c654783305369">layoutRow</a> (<a class="el" href="struct_stb_textedit_row.html">StbTexteditRow</a> *row, size_t i)</td></tr>
+<tr class="separator:ad5dd669421dccec7c12c654783305369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21d67cdc405f466e526b000e418ccf41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a21d67cdc405f466e526b000e418ccf41">render</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;renderData) override</td></tr>
+<tr class="separator:a21d67cdc405f466e526b000e418ccf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af63d3d6c1d998d713b9d7a5246651305"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#af63d3d6c1d998d713b9d7a5246651305">setEditable</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> b)</td></tr>
+<tr class="separator:af63d3d6c1d998d713b9d7a5246651305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_virtual_scope"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_virtual_scope')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_virtual_scope.html">Engine::VirtualScope&lt; T, Base &gt;</a></td></tr>
+<tr class="memitem:a8eb04bc90993a62dde2f6e5acc85619e inherit pub_methods_struct_engine_1_1_virtual_scope"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope.html#a8eb04bc90993a62dde2f6e5acc85619e">customScopePtr</a> () override</td></tr>
+<tr class="separator:a8eb04bc90993a62dde2f6e5acc85619e inherit pub_methods_struct_engine_1_1_virtual_scope"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae14d52eebaa3e94377d7a5b1f6ca688e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope_base.html#ae14d52eebaa3e94377d7a5b1f6ca688e">customScopePtr</a> ()=0</td></tr>
+<tr class="separator:ae14d52eebaa3e94377d7a5b1f6ca688e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a00d8997dea22f860ec1575032be327fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_widgets_1_1_scalable_image_render_data.html">ScalableImageRenderData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a00d8997dea22f860ec1575032be327fc">mImageRenderData</a></td></tr>
+<tr class="separator:a00d8997dea22f860ec1575032be327fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae734290c5a4df179a4d3d5a06c8c993e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#ae734290c5a4df179a4d3d5a06c8c993e">mText</a></td></tr>
+<tr class="separator:ae734290c5a4df179a4d3d5a06c8c993e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99ef6925870113207328fb2f21323ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html">TextRenderData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#ae99ef6925870113207328fb2f21323ac">mTextRenderData</a></td></tr>
+<tr class="separator:ae99ef6925870113207328fb2f21323ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9958ef370109960aca320e0c7940443d" name="a9958ef370109960aca320e0c7940443d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9958ef370109960aca320e0c7940443d">&#9670;&#160;</a></span>Textbox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Widgets::Textbox::Textbox </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html">WidgetManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>manager</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html">WidgetBase</a> *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0edb71d0bad93c2e8dd56409cb4a94cb" name="a0edb71d0bad93c2e8dd56409cb4a94cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0edb71d0bad93c2e8dd56409cb4a94cb">&#9670;&#160;</a></span>~Textbox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Widgets::Textbox::~Textbox </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8f510566e270c07fd9d7beb6b4ec0c0a" name="a8f510566e270c07fd9d7beb6b4ec0c0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f510566e270c07fd9d7beb6b4ec0c0a">&#9670;&#160;</a></span>editable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Widgets::Textbox::editable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af63d3d6c1d998d713b9d7a5246651305" name="af63d3d6c1d998d713b9d7a5246651305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af63d3d6c1d998d713b9d7a5246651305">&#9670;&#160;</a></span>setEditable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::Textbox::setEditable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21d67cdc405f466e526b000e418ccf41" name="a21d67cdc405f466e526b000e418ccf41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21d67cdc405f466e526b000e418ccf41">&#9670;&#160;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::Textbox::render </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderData</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa36fb66f1884d751a09fe42884502881" name="aa36fb66f1884d751a09fe42884502881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa36fb66f1884d751a09fe42884502881">&#9670;&#160;</a></span>getClass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::Widgets::Textbox::getClass </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61078202b520637ac32a3bfeafa424a8" name="a61078202b520637ac32a3bfeafa424a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61078202b520637ac32a3bfeafa424a8">&#9670;&#160;</a></span>injectPointerClick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::Textbox::injectPointerClick </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc5cd3723b545627bb13680feff51690" name="abc5cd3723b545627bb13680feff51690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc5cd3723b545627bb13680feff51690">&#9670;&#160;</a></span>injectDragBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::Textbox::injectDragBegin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5da42b5f355935f3d7f7a12698b9d86e" name="a5da42b5f355935f3d7f7a12698b9d86e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5da42b5f355935f3d7f7a12698b9d86e">&#9670;&#160;</a></span>injectDragMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::Textbox::injectDragMove </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef8169565828671873f0a8191fc23ff4" name="aef8169565828671873f0a8191fc23ff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef8169565828671873f0a8191fc23ff4">&#9670;&#160;</a></span>injectKeyPress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Widgets::Textbox::injectKeyPress </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html">Input::KeyEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5dd669421dccec7c12c654783305369" name="ad5dd669421dccec7c12c654783305369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5dd669421dccec7c12c654783305369">&#9670;&#160;</a></span>layoutRow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::Textbox::layoutRow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_stb_textedit_row.html">StbTexteditRow</a> *&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b7a25a7924b56792581a4e592be5824" name="a9b7a25a7924b56792581a4e592be5824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b7a25a7924b56792581a4e592be5824">&#9670;&#160;</a></span>calculateWidth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Widgets::Textbox::calculateWidth </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae99ef6925870113207328fb2f21323ac" name="ae99ef6925870113207328fb2f21323ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae99ef6925870113207328fb2f21323ac">&#9670;&#160;</a></span>mTextRenderData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html">TextRenderData</a> Engine::Widgets::Textbox::mTextRenderData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae734290c5a4df179a4d3d5a06c8c993e" name="ae734290c5a4df179a4d3d5a06c8c993e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae734290c5a4df179a4d3d5a06c8c993e">&#9670;&#160;</a></span>mText</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::Widgets::Textbox::mText</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00d8997dea22f860ec1575032be327fc" name="a00d8997dea22f860ec1575032be327fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00d8997dea22f860ec1575032be327fc">&#9670;&#160;</a></span>mImageRenderData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_widgets_1_1_scalable_image_render_data.html">ScalableImageRenderData</a> Engine::Widgets::Textbox::mImageRenderData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/misc/widgets/src/Madgine/widgets/<a class="el" href="textbox_8h.html">textbox.h</a></li>
+<li>plugins/misc/widgets/src/Madgine/widgets/<a class="el" href="textbox_8cpp.html">textbox.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

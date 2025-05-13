@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::ArgumentList Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::ArgumentList Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_argument_list.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="argumentlist-struct-reference">
+<h1>ArgumentList Struct Reference<a class="headerlink" href="#argumentlist-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::ArgumentList Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_argument_list-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::ArgumentList Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;argumentlist.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a5363ec486b0e40eef887c47a64f97fe1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a5363ec486b0e40eef887c47a64f97fe1">value_type</a> = <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a></td></tr>
+<tr class="separator:a5363ec486b0e40eef887c47a64f97fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab9464bd5c4ec8a91dc07506d0e62866c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#ab9464bd5c4ec8a91dc07506d0e62866c">ArgumentList</a> ()</td></tr>
+<tr class="separator:ab9464bd5c4ec8a91dc07506d0e62866c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2daa55a172bd1a5310c06b524a6597c9"><td class="memTemplParams" colspan="2">template&lt;DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &gt;... Args&gt; </td></tr>
+<tr class="memitem:a2daa55a172bd1a5310c06b524a6597c9"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a2daa55a172bd1a5310c06b524a6597c9">ArgumentList</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a2daa55a172bd1a5310c06b524a6597c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a275d25c1dcfacb914e4f65309342e42e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a275d25c1dcfacb914e4f65309342e42e">ArgumentList</a> (<a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&amp;)</td></tr>
+<tr class="separator:a275d25c1dcfacb914e4f65309342e42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa3a4318849ff0974fc2d3fa2f44f418"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#aaa3a4318849ff0974fc2d3fa2f44f418">ArgumentList</a> (const <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;other)</td></tr>
+<tr class="separator:aaa3a4318849ff0974fc2d3fa2f44f418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2acc5b0a85144a5e6bfe5c7ee362d0bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a2acc5b0a85144a5e6bfe5c7ee362d0bb">ArgumentList</a> (size_t <a class="el" href="struct_engine_1_1_argument_list.html#a3f77d068953899c516f15066b17698db">size</a>)</td></tr>
+<tr class="separator:a2acc5b0a85144a5e6bfe5c7ee362d0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85759f72d3c111d4ed3709d2f54ccab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#af85759f72d3c111d4ed3709d2f54ccab">ArgumentList</a> (std::initializer_list&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; vals)</td></tr>
+<tr class="separator:af85759f72d3c111d4ed3709d2f54ccab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59b27f8d1f5b7409faab44aef86c4607"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a59b27f8d1f5b7409faab44aef86c4607">ArgumentList</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; vals)</td></tr>
+<tr class="separator:a59b27f8d1f5b7409faab44aef86c4607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a194a8430d5532886402235e35dfebcef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a194a8430d5532886402235e35dfebcef">~ArgumentList</a> ()</td></tr>
+<tr class="separator:a194a8430d5532886402235e35dfebcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad34be7778881229f6e480fbbc7d96d11"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#ad34be7778881229f6e480fbbc7d96d11">at</a> (size_t i) const</td></tr>
+<tr class="separator:ad34be7778881229f6e480fbbc7d96d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e971413fab232677472b589a53207be"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a9e971413fab232677472b589a53207be">begin</a> ()</td></tr>
+<tr class="separator:a9e971413fab232677472b589a53207be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a89cb2a7a3a14ec7b86d50f2732ab1a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a0a89cb2a7a3a14ec7b86d50f2732ab1a">begin</a> () const</td></tr>
+<tr class="separator:a0a89cb2a7a3a14ec7b86d50f2732ab1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afabe49fe9deb82283262c9e068c0ece1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#afabe49fe9deb82283262c9e068c0ece1">clear</a> ()</td></tr>
+<tr class="separator:afabe49fe9deb82283262c9e068c0ece1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a598c34e3ef4aa4e47e850a9a396e9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a53a598c34e3ef4aa4e47e850a9a396e9">end</a> ()</td></tr>
+<tr class="separator:a53a598c34e3ef4aa4e47e850a9a396e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a070833b59cd6e92fb250e9e576f85ed6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a070833b59cd6e92fb250e9e576f85ed6">end</a> () const</td></tr>
+<tr class="separator:a070833b59cd6e92fb250e9e576f85ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace3208e19b51d7c6233ede34b382a860"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#ace3208e19b51d7c6233ede34b382a860">insert</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator where, std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator from, std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator to)</td></tr>
+<tr class="separator:ace3208e19b51d7c6233ede34b382a860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f02900e20ccf94fd0877f5b778397ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a3f02900e20ccf94fd0877f5b778397ff">operator=</a> (<a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&amp;)</td></tr>
+<tr class="separator:a3f02900e20ccf94fd0877f5b778397ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51edd79966302acd4fd20e2b27572a55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a51edd79966302acd4fd20e2b27572a55">operator=</a> (const <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;)</td></tr>
+<tr class="separator:a51edd79966302acd4fd20e2b27572a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd78a5371a2df82b9deda78def4befaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#acd78a5371a2df82b9deda78def4befaf">operator[]</a> (size_t i)</td></tr>
+<tr class="separator:acd78a5371a2df82b9deda78def4befaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6098deee8e450de9d8c9dd0386a2c7d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#ac6098deee8e450de9d8c9dd0386a2c7d">operator[]</a> (size_t i) const</td></tr>
+<tr class="separator:ac6098deee8e450de9d8c9dd0386a2c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158e7360d1e87b2fc80c0cd65ecdff83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a158e7360d1e87b2fc80c0cd65ecdff83">push_back</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&amp;)</td></tr>
+<tr class="separator:a158e7360d1e87b2fc80c0cd65ecdff83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95e83e9df9c20f18d97b0c292d1b33d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a95e83e9df9c20f18d97b0c292d1b33d0">reserve</a> (size_t <a class="el" href="struct_engine_1_1_argument_list.html#a3f77d068953899c516f15066b17698db">size</a>)</td></tr>
+<tr class="separator:a95e83e9df9c20f18d97b0c292d1b33d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e0965d2099dab2404c30d6e66d53eca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a6e0965d2099dab2404c30d6e66d53eca">resize</a> (size_t <a class="el" href="struct_engine_1_1_argument_list.html#a3f77d068953899c516f15066b17698db">size</a>)</td></tr>
+<tr class="separator:a6e0965d2099dab2404c30d6e66d53eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f77d068953899c516f15066b17698db"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_argument_list.html#a3f77d068953899c516f15066b17698db">size</a> () const</td></tr>
+<tr class="separator:a3f77d068953899c516f15066b17698db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a5363ec486b0e40eef887c47a64f97fe1" name="a5363ec486b0e40eef887c47a64f97fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5363ec486b0e40eef887c47a64f97fe1">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_argument_list.html#a5363ec486b0e40eef887c47a64f97fe1">Engine::ArgumentList::value_type</a> =  <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab9464bd5c4ec8a91dc07506d0e62866c" name="ab9464bd5c4ec8a91dc07506d0e62866c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9464bd5c4ec8a91dc07506d0e62866c">&#9670;&#160;</a></span>ArgumentList() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::ArgumentList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af85759f72d3c111d4ed3709d2f54ccab" name="af85759f72d3c111d4ed3709d2f54ccab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af85759f72d3c111d4ed3709d2f54ccab">&#9670;&#160;</a></span>ArgumentList() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::ArgumentList </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;&#160;</td>
+          <td class="paramname"><em>vals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59b27f8d1f5b7409faab44aef86c4607" name="a59b27f8d1f5b7409faab44aef86c4607"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59b27f8d1f5b7409faab44aef86c4607">&#9670;&#160;</a></span>ArgumentList() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::ArgumentList </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;&#160;</td>
+          <td class="paramname"><em>vals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2acc5b0a85144a5e6bfe5c7ee362d0bb" name="a2acc5b0a85144a5e6bfe5c7ee362d0bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2acc5b0a85144a5e6bfe5c7ee362d0bb">&#9670;&#160;</a></span>ArgumentList() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::ArgumentList </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2daa55a172bd1a5310c06b524a6597c9" name="a2daa55a172bd1a5310c06b524a6597c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2daa55a172bd1a5310c06b524a6597c9">&#9670;&#160;</a></span>ArgumentList() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &gt;... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::ArgumentList </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa3a4318849ff0974fc2d3fa2f44f418" name="aaa3a4318849ff0974fc2d3fa2f44f418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa3a4318849ff0974fc2d3fa2f44f418">&#9670;&#160;</a></span>ArgumentList() <span class="overload">[6/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::ArgumentList </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a275d25c1dcfacb914e4f65309342e42e" name="a275d25c1dcfacb914e4f65309342e42e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a275d25c1dcfacb914e4f65309342e42e">&#9670;&#160;</a></span>ArgumentList() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::ArgumentList </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a194a8430d5532886402235e35dfebcef" name="a194a8430d5532886402235e35dfebcef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a194a8430d5532886402235e35dfebcef">&#9670;&#160;</a></span>~ArgumentList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ArgumentList::~ArgumentList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a51edd79966302acd4fd20e2b27572a55" name="a51edd79966302acd4fd20e2b27572a55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51edd79966302acd4fd20e2b27572a55">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp; Engine::ArgumentList::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f02900e20ccf94fd0877f5b778397ff" name="a3f02900e20ccf94fd0877f5b778397ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f02900e20ccf94fd0877f5b778397ff">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp; Engine::ArgumentList::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afabe49fe9deb82283262c9e068c0ece1" name="afabe49fe9deb82283262c9e068c0ece1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afabe49fe9deb82283262c9e068c0ece1">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ArgumentList::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6098deee8e450de9d8c9dd0386a2c7d" name="ac6098deee8e450de9d8c9dd0386a2c7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6098deee8e450de9d8c9dd0386a2c7d">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp; Engine::ArgumentList::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd78a5371a2df82b9deda78def4befaf" name="acd78a5371a2df82b9deda78def4befaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd78a5371a2df82b9deda78def4befaf">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp; Engine::ArgumentList::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95e83e9df9c20f18d97b0c292d1b33d0" name="a95e83e9df9c20f18d97b0c292d1b33d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95e83e9df9c20f18d97b0c292d1b33d0">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ArgumentList::reserve </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e0965d2099dab2404c30d6e66d53eca" name="a6e0965d2099dab2404c30d6e66d53eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e0965d2099dab2404c30d6e66d53eca">&#9670;&#160;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ArgumentList::resize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f77d068953899c516f15066b17698db" name="a3f77d068953899c516f15066b17698db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f77d068953899c516f15066b17698db">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::ArgumentList::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a158e7360d1e87b2fc80c0cd65ecdff83" name="a158e7360d1e87b2fc80c0cd65ecdff83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a158e7360d1e87b2fc80c0cd65ecdff83">&#9670;&#160;</a></span>push_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ArgumentList::push_back </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad34be7778881229f6e480fbbc7d96d11" name="ad34be7778881229f6e480fbbc7d96d11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad34be7778881229f6e480fbbc7d96d11">&#9670;&#160;</a></span>at()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp; Engine::ArgumentList::at </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace3208e19b51d7c6233ede34b382a860" name="ace3208e19b51d7c6233ede34b382a860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace3208e19b51d7c6233ede34b382a860">&#9670;&#160;</a></span>insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ArgumentList::insert </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e971413fab232677472b589a53207be" name="a9e971413fab232677472b589a53207be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e971413fab232677472b589a53207be">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::iterator Engine::ArgumentList::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53a598c34e3ef4aa4e47e850a9a396e9" name="a53a598c34e3ef4aa4e47e850a9a396e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a598c34e3ef4aa4e47e850a9a396e9">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::iterator Engine::ArgumentList::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a89cb2a7a3a14ec7b86d50f2732ab1a" name="a0a89cb2a7a3a14ec7b86d50f2732ab1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a89cb2a7a3a14ec7b86d50f2732ab1a">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator Engine::ArgumentList::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a070833b59cd6e92fb250e9e576f85ed6" name="a070833b59cd6e92fb250e9e576f85ed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a070833b59cd6e92fb250e9e576f85ed6">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;::const_iterator Engine::ArgumentList::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/keyvalue/<a class="el" href="argumentlist_8h.html">argumentlist.h</a></li>
+<li>src/Meta/keyvalue/<a class="el" href="argumentlist_8cpp.html">argumentlist.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

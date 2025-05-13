@@ -1,0 +1,1171 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Quaternion Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Quaternion Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_quaternion.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quaternion-struct-reference">
+<h1>Quaternion Struct Reference<a class="headerlink" href="#quaternion-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Quaternion Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_quaternion-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Quaternion Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;quaternion.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a125581d0800e71629236f47acfc5d9aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a125581d0800e71629236f47acfc5d9aa">Quaternion</a> ()</td></tr>
+<tr class="separator:a125581d0800e71629236f47acfc5d9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21058fc41a2d4dde049648fb47997138"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a21058fc41a2d4dde049648fb47997138">Quaternion</a> (float *const r)</td></tr>
+<tr class="separator:a21058fc41a2d4dde049648fb47997138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa51bdf09faec4c745b0cb64cdc4a3ff4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#aa51bdf09faec4c745b0cb64cdc4a3ff4">Quaternion</a> (float radian, const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;axis)</td></tr>
+<tr class="separator:aa51bdf09faec4c745b0cb64cdc4a3ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ed9ea9e962f2c731ef63b4f5bf1605"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a71ed9ea9e962f2c731ef63b4f5bf1605">Quaternion</a> (float <a class="el" href="struct_engine_1_1_quaternion.html#aa48ebed860bc6acd8ae3d4a953baab8b">x</a>, float <a class="el" href="struct_engine_1_1_quaternion.html#a7fd81dd74acf3dc9a956fdac0dc3b11b">y</a>, float <a class="el" href="struct_engine_1_1_quaternion.html#a8f7a99ac3bda3233f1a4bca73c0f022a">z</a>, float <a class="el" href="struct_engine_1_1_quaternion.html#a00797364b7f67ae1cdb248ca6c90ed78">w</a>)</td></tr>
+<tr class="separator:a71ed9ea9e962f2c731ef63b4f5bf1605"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3356863ae34e694bec94a68042bd21d2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a3356863ae34e694bec94a68042bd21d2">dotProduct</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other)</td></tr>
+<tr class="separator:a3356863ae34e694bec94a68042bd21d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd6b322453df5dd96bd108901ab5237"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a7dd6b322453df5dd96bd108901ab5237">inverse</a> () const</td></tr>
+<tr class="separator:a7dd6b322453df5dd96bd108901ab5237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96dd4276743299c511999a6256def31d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a96dd4276743299c511999a6256def31d">invert</a> ()</td></tr>
+<tr class="separator:a96dd4276743299c511999a6256def31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa230c1ffb58dbdc370fe138bb0e60044"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#aa230c1ffb58dbdc370fe138bb0e60044">normalize</a> ()</td></tr>
+<tr class="separator:aa230c1ffb58dbdc370fe138bb0e60044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33d1a75a721e1b21e66f7a0633163ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a33d1a75a721e1b21e66f7a0633163ad9">operator*</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other) const</td></tr>
+<tr class="separator:a33d1a75a721e1b21e66f7a0633163ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac90a8539e9aeb8667ca5307bcaaff3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a1ac90a8539e9aeb8667ca5307bcaaff3">operator*</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;dir) const</td></tr>
+<tr class="separator:a1ac90a8539e9aeb8667ca5307bcaaff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a91677652b4bea7a4f3ee154cea07c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a20a91677652b4bea7a4f3ee154cea07c">operator*</a> (float c)</td></tr>
+<tr class="separator:a20a91677652b4bea7a4f3ee154cea07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506ad40701f1850ad3c6e2348dfe960e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a506ad40701f1850ad3c6e2348dfe960e">operator*=</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other)</td></tr>
+<tr class="separator:a506ad40701f1850ad3c6e2348dfe960e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a326a6459d3ab9fe307a88c0423b78951"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a326a6459d3ab9fe307a88c0423b78951">operator*=</a> (float c)</td></tr>
+<tr class="separator:a326a6459d3ab9fe307a88c0423b78951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554bb5a5e4765a9396fabea1bb0969e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a554bb5a5e4765a9396fabea1bb0969e0">operator+</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other)</td></tr>
+<tr class="separator:a554bb5a5e4765a9396fabea1bb0969e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6941eec8dc1d02681e5d541edb18005e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a6941eec8dc1d02681e5d541edb18005e">operator+=</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other)</td></tr>
+<tr class="separator:a6941eec8dc1d02681e5d541edb18005e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b7ca24605325c083fa86ffcb4838ed5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a4b7ca24605325c083fa86ffcb4838ed5">operator-</a> () const</td></tr>
+<tr class="separator:a4b7ca24605325c083fa86ffcb4838ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34f4668fa93cb45224d3e7c234606fbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a34f4668fa93cb45224d3e7c234606fbf">operator-</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other)</td></tr>
+<tr class="separator:a34f4668fa93cb45224d3e7c234606fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30b5ad9133bbe04fafcd1cb5e19f0fb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a30b5ad9133bbe04fafcd1cb5e19f0fb5">operator-=</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other)</td></tr>
+<tr class="separator:a30b5ad9133bbe04fafcd1cb5e19f0fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49d78fb229b610abc54101c7ea505daf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a49d78fb229b610abc54101c7ea505daf">operator==</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;other) const</td></tr>
+<tr class="separator:a49d78fb229b610abc54101c7ea505daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61c482bd1debbda8610e4bb9f17b0ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#ab61c482bd1debbda8610e4bb9f17b0ce">toDegrees</a> () const</td></tr>
+<tr class="separator:ab61c482bd1debbda8610e4bb9f17b0ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5454c40074c7eca980b95ef79c127ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_matrix3.html">Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#ad5454c40074c7eca980b95ef79c127ca">toMatrix</a> () const</td></tr>
+<tr class="separator:ad5454c40074c7eca980b95ef79c127ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd4f1edd54ca7cc0fb6f74a3b11b0c30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#acd4f1edd54ca7cc0fb6f74a3b11b0c30">toRadian</a> () const</td></tr>
+<tr class="separator:acd4f1edd54ca7cc0fb6f74a3b11b0c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a0d06110e285d48c2dc6a27ff2904e8d9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a0d06110e285d48c2dc6a27ff2904e8d9">FromDegrees</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;angles)</td></tr>
+<tr class="separator:a0d06110e285d48c2dc6a27ff2904e8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac90b411fb37aef199fc24db4de4743c0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#ac90b411fb37aef199fc24db4de4743c0">FromDirection</a> (const <a class="el" href="struct_engine_1_1_normalized_vector3.html">NormalizedVector3</a> &amp;dir, const <a class="el" href="struct_engine_1_1_normalized_vector3.html">NormalizedVector3</a> &amp;up={ <a class="el" href="struct_engine_1_1_vector3.html#ac4caf44759796126a992aa8169514abc">Vector3::UNIT_Y</a> })</td></tr>
+<tr class="separator:ac90b411fb37aef199fc24db4de4743c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18154ae04918fd0ea9c92c5159c506a7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a18154ae04918fd0ea9c92c5159c506a7">FromMatrix</a> (const <a class="el" href="struct_engine_1_1_matrix3.html">Matrix3</a> &amp;m)</td></tr>
+<tr class="separator:a18154ae04918fd0ea9c92c5159c506a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab790f2f29d998bf895e8ea68554938c4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#ab790f2f29d998bf895e8ea68554938c4">FromRadian</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;angles)</td></tr>
+<tr class="separator:ab790f2f29d998bf895e8ea68554938c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a00797364b7f67ae1cdb248ca6c90ed78"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a00797364b7f67ae1cdb248ca6c90ed78">w</a></td></tr>
+<tr class="separator:a00797364b7f67ae1cdb248ca6c90ed78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa48ebed860bc6acd8ae3d4a953baab8b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#aa48ebed860bc6acd8ae3d4a953baab8b">x</a></td></tr>
+<tr class="separator:aa48ebed860bc6acd8ae3d4a953baab8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd81dd74acf3dc9a956fdac0dc3b11b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a7fd81dd74acf3dc9a956fdac0dc3b11b">y</a></td></tr>
+<tr class="separator:a7fd81dd74acf3dc9a956fdac0dc3b11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f7a99ac3bda3233f1a4bca73c0f022a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a8f7a99ac3bda3233f1a4bca73c0f022a">z</a></td></tr>
+<tr class="separator:a8f7a99ac3bda3233f1a4bca73c0f022a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a34071780e500a7d64d02a29a41fb6991"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a34071780e500a7d64d02a29a41fb6991">operator&lt;&lt;</a> (std::ostream &amp;o, const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;q)</td></tr>
+<tr class="separator:a34071780e500a7d64d02a29a41fb6991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f320200d287d9989a6d1a6fda4d0a75"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_quaternion.html#a2f320200d287d9989a6d1a6fda4d0a75">operator&gt;&gt;</a> (std::istream &amp;in, <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;q)</td></tr>
+<tr class="separator:a2f320200d287d9989a6d1a6fda4d0a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a125581d0800e71629236f47acfc5d9aa" name="a125581d0800e71629236f47acfc5d9aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a125581d0800e71629236f47acfc5d9aa">&#9670;&#160;</a></span>Quaternion() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Quaternion::Quaternion </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa51bdf09faec4c745b0cb64cdc4a3ff4" name="aa51bdf09faec4c745b0cb64cdc4a3ff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa51bdf09faec4c745b0cb64cdc4a3ff4">&#9670;&#160;</a></span>Quaternion() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Quaternion::Quaternion </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>radian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>axis</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71ed9ea9e962f2c731ef63b4f5bf1605" name="a71ed9ea9e962f2c731ef63b4f5bf1605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ed9ea9e962f2c731ef63b4f5bf1605">&#9670;&#160;</a></span>Quaternion() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Quaternion::Quaternion </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21058fc41a2d4dde049648fb47997138" name="a21058fc41a2d4dde049648fb47997138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21058fc41a2d4dde049648fb47997138">&#9670;&#160;</a></span>Quaternion() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Quaternion::Quaternion </td>
+          <td>(</td>
+          <td class="paramtype">float *const&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab790f2f29d998bf895e8ea68554938c4" name="ab790f2f29d998bf895e8ea68554938c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab790f2f29d998bf895e8ea68554938c4">&#9670;&#160;</a></span>FromRadian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::FromRadian </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>angles</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d06110e285d48c2dc6a27ff2904e8d9" name="a0d06110e285d48c2dc6a27ff2904e8d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d06110e285d48c2dc6a27ff2904e8d9">&#9670;&#160;</a></span>FromDegrees()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::FromDegrees </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>angles</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd4f1edd54ca7cc0fb6f74a3b11b0c30" name="acd4f1edd54ca7cc0fb6f74a3b11b0c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd4f1edd54ca7cc0fb6f74a3b11b0c30">&#9670;&#160;</a></span>toRadian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Quaternion::toRadian </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab61c482bd1debbda8610e4bb9f17b0ce" name="ab61c482bd1debbda8610e4bb9f17b0ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab61c482bd1debbda8610e4bb9f17b0ce">&#9670;&#160;</a></span>toDegrees()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Quaternion::toDegrees </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac90b411fb37aef199fc24db4de4743c0" name="ac90b411fb37aef199fc24db4de4743c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac90b411fb37aef199fc24db4de4743c0">&#9670;&#160;</a></span>FromDirection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::FromDirection </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_normalized_vector3.html">NormalizedVector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_normalized_vector3.html">NormalizedVector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>up</em> = <code>{&#160;<a class="el" href="struct_engine_1_1_vector3.html#ac4caf44759796126a992aa8169514abc">Vector3::UNIT_Y</a>&#160;}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a18154ae04918fd0ea9c92c5159c506a7" name="a18154ae04918fd0ea9c92c5159c506a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18154ae04918fd0ea9c92c5159c506a7">&#9670;&#160;</a></span>FromMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::FromMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_matrix3.html">Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a506ad40701f1850ad3c6e2348dfe960e" name="a506ad40701f1850ad3c6e2348dfe960e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a506ad40701f1850ad3c6e2348dfe960e">&#9670;&#160;</a></span>operator*=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Quaternion::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33d1a75a721e1b21e66f7a0633163ad9" name="a33d1a75a721e1b21e66f7a0633163ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33d1a75a721e1b21e66f7a0633163ad9">&#9670;&#160;</a></span>operator*() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6941eec8dc1d02681e5d541edb18005e" name="a6941eec8dc1d02681e5d541edb18005e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6941eec8dc1d02681e5d541edb18005e">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Quaternion::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a554bb5a5e4765a9396fabea1bb0969e0" name="a554bb5a5e4765a9396fabea1bb0969e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554bb5a5e4765a9396fabea1bb0969e0">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30b5ad9133bbe04fafcd1cb5e19f0fb5" name="a30b5ad9133bbe04fafcd1cb5e19f0fb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30b5ad9133bbe04fafcd1cb5e19f0fb5">&#9670;&#160;</a></span>operator-=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Quaternion::operator-= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34f4668fa93cb45224d3e7c234606fbf" name="a34f4668fa93cb45224d3e7c234606fbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34f4668fa93cb45224d3e7c234606fbf">&#9670;&#160;</a></span>operator-() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a326a6459d3ab9fe307a88c0423b78951" name="a326a6459d3ab9fe307a88c0423b78951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a326a6459d3ab9fe307a88c0423b78951">&#9670;&#160;</a></span>operator*=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Quaternion::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20a91677652b4bea7a4f3ee154cea07c" name="a20a91677652b4bea7a4f3ee154cea07c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a91677652b4bea7a4f3ee154cea07c">&#9670;&#160;</a></span>operator*() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::operator* </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3356863ae34e694bec94a68042bd21d2" name="a3356863ae34e694bec94a68042bd21d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3356863ae34e694bec94a68042bd21d2">&#9670;&#160;</a></span>dotProduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Quaternion::dotProduct </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a96dd4276743299c511999a6256def31d" name="a96dd4276743299c511999a6256def31d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96dd4276743299c511999a6256def31d">&#9670;&#160;</a></span>invert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Quaternion::invert </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7dd6b322453df5dd96bd108901ab5237" name="a7dd6b322453df5dd96bd108901ab5237"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd6b322453df5dd96bd108901ab5237">&#9670;&#160;</a></span>inverse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::inverse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5454c40074c7eca980b95ef79c127ca" name="ad5454c40074c7eca980b95ef79c127ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5454c40074c7eca980b95ef79c127ca">&#9670;&#160;</a></span>toMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_matrix3.html">Matrix3</a> Engine::Quaternion::toMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ac90a8539e9aeb8667ca5307bcaaff3" name="a1ac90a8539e9aeb8667ca5307bcaaff3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac90a8539e9aeb8667ca5307bcaaff3">&#9670;&#160;</a></span>operator*() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Quaternion::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>dir</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49d78fb229b610abc54101c7ea505daf" name="a49d78fb229b610abc54101c7ea505daf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49d78fb229b610abc54101c7ea505daf">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Quaternion::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b7ca24605325c083fa86ffcb4838ed5" name="a4b7ca24605325c083fa86ffcb4838ed5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b7ca24605325c083fa86ffcb4838ed5">&#9670;&#160;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> Engine::Quaternion::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa230c1ffb58dbdc370fe138bb0e60044" name="aa230c1ffb58dbdc370fe138bb0e60044"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa230c1ffb58dbdc370fe138bb0e60044">&#9670;&#160;</a></span>normalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Quaternion::normalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a34071780e500a7d64d02a29a41fb6991" name="a34071780e500a7d64d02a29a41fb6991"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34071780e500a7d64d02a29a41fb6991">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>o</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f320200d287d9989a6d1a6fda4d0a75" name="a2f320200d287d9989a6d1a6fda4d0a75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f320200d287d9989a6d1a6fda4d0a75">&#9670;&#160;</a></span>operator&gt;&gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream &amp; operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa48ebed860bc6acd8ae3d4a953baab8b" name="aa48ebed860bc6acd8ae3d4a953baab8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa48ebed860bc6acd8ae3d4a953baab8b">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Quaternion::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7fd81dd74acf3dc9a956fdac0dc3b11b" name="a7fd81dd74acf3dc9a956fdac0dc3b11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd81dd74acf3dc9a956fdac0dc3b11b">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Quaternion::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f7a99ac3bda3233f1a4bca73c0f022a" name="a8f7a99ac3bda3233f1a4bca73c0f022a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f7a99ac3bda3233f1a4bca73c0f022a">&#9670;&#160;</a></span>z</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Quaternion::z</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00797364b7f67ae1cdb248ca6c90ed78" name="a00797364b7f67ae1cdb248ca6c90ed78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00797364b7f67ae1cdb248ca6c90ed78">&#9670;&#160;</a></span>w</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Quaternion::w</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Meta/math/<a class="el" href="quaternion_8h.html">quaternion.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

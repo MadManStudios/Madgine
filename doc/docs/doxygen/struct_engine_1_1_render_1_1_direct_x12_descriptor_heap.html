@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::DirectX12DescriptorHeap Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::DirectX12DescriptorHeap Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="directx12descriptorheap-struct-reference">
+<h1>DirectX12DescriptorHeap Struct Reference<a class="headerlink" href="#directx12descriptorheap-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::DirectX12DescriptorHeap Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::DirectX12DescriptorHeap Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;directx12descriptorheap.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a73639724ce762fc4426344bd04df0a9c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a73639724ce762fc4426344bd04df0a9c">DirectX12DescriptorHeap</a> ()=default</td></tr>
+<tr class="separator:a73639724ce762fc4426344bd04df0a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4b7c1aaa065859dc61314a0fcb8438"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a3f4b7c1aaa065859dc61314a0fcb8438">DirectX12DescriptorHeap</a> (D3D12_DESCRIPTOR_HEAP_TYPE type)</td></tr>
+<tr class="separator:a3f4b7c1aaa065859dc61314a0fcb8438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8869a3e3c278647053024ba2e8ab87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a7d8869a3e3c278647053024ba2e8ab87">~DirectX12DescriptorHeap</a> ()</td></tr>
+<tr class="separator:a7d8869a3e3c278647053024ba2e8ab87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7937a03576acf23b132104ffa8f8741"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#aa7937a03576acf23b132104ffa8f8741">addShaderResourceView</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> index, ID3D12Resource *<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a0706682b539d36151f5b57dbdbd0c9eb">resource</a>, const D3D12_SHADER_RESOURCE_VIEW_DESC *desc)</td></tr>
+<tr class="separator:aa7937a03576acf23b132104ffa8f8741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaafa5d4f73b5faf7e0920fb55287a028"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#aaafa5d4f73b5faf7e0920fb55287a028">allocate</a> (size_t count=1)</td></tr>
+<tr class="separator:aaafa5d4f73b5faf7e0920fb55287a028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9dc1e4b667f8cb5275630c26cedc6f"><td class="memItemLeft" align="right" valign="top">D3D12_CPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a8b9dc1e4b667f8cb5275630c26cedc6f">cpuHandle</a> (D3D12_GPU_DESCRIPTOR_HANDLE handle)</td></tr>
+<tr class="separator:a8b9dc1e4b667f8cb5275630c26cedc6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a70dd8fafb011840d15508c4b1bfc6"><td class="memItemLeft" align="right" valign="top">D3D12_CPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a93a70dd8fafb011840d15508c4b1bfc6">cpuHandle</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> index)</td></tr>
+<tr class="separator:a93a70dd8fafb011840d15508c4b1bfc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04765b1300a8aa464386a233c7ac412b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a04765b1300a8aa464386a233c7ac412b">deallocate</a> (D3D12_GPU_DESCRIPTOR_HANDLE handle)</td></tr>
+<tr class="separator:a04765b1300a8aa464386a233c7ac412b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88978a68a9944153bad37abeaa02a7b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a88978a68a9944153bad37abeaa02a7b9">deallocate</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> handle)</td></tr>
+<tr class="separator:a88978a68a9944153bad37abeaa02a7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69ab330da1252bf003d4dc249db12bff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a69ab330da1252bf003d4dc249db12bff">fromGpuHandle</a> (D3D12_GPU_DESCRIPTOR_HANDLE handle)</td></tr>
+<tr class="separator:a69ab330da1252bf003d4dc249db12bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91dae61300b6aef161b8a39283fff744"><td class="memItemLeft" align="right" valign="top">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a91dae61300b6aef161b8a39283fff744">gpuHandle</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> index)</td></tr>
+<tr class="separator:a91dae61300b6aef161b8a39283fff744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bd221f3d161f7aa918d28857d258b44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a8bd221f3d161f7aa918d28857d258b44">operator=</a> (<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a8bd221f3d161f7aa918d28857d258b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0706682b539d36151f5b57dbdbd0c9eb"><td class="memItemLeft" align="right" valign="top">ID3D12DescriptorHeap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a0706682b539d36151f5b57dbdbd0c9eb">resource</a> () const</td></tr>
+<tr class="separator:a0706682b539d36151f5b57dbdbd0c9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a73639724ce762fc4426344bd04df0a9c" name="a73639724ce762fc4426344bd04df0a9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73639724ce762fc4426344bd04df0a9c">&#9670;&#160;</a></span>DirectX12DescriptorHeap() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::DirectX12DescriptorHeap::DirectX12DescriptorHeap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f4b7c1aaa065859dc61314a0fcb8438" name="a3f4b7c1aaa065859dc61314a0fcb8438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f4b7c1aaa065859dc61314a0fcb8438">&#9670;&#160;</a></span>DirectX12DescriptorHeap() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::DirectX12DescriptorHeap::DirectX12DescriptorHeap </td>
+          <td>(</td>
+          <td class="paramtype">D3D12_DESCRIPTOR_HEAP_TYPE&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d8869a3e3c278647053024ba2e8ab87" name="a7d8869a3e3c278647053024ba2e8ab87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d8869a3e3c278647053024ba2e8ab87">&#9670;&#160;</a></span>~DirectX12DescriptorHeap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::DirectX12DescriptorHeap::~DirectX12DescriptorHeap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8bd221f3d161f7aa918d28857d258b44" name="a8bd221f3d161f7aa918d28857d258b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd221f3d161f7aa918d28857d258b44">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> &amp; Engine::Render::DirectX12DescriptorHeap::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaafa5d4f73b5faf7e0920fb55287a028" name="aaafa5d4f73b5faf7e0920fb55287a028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaafa5d4f73b5faf7e0920fb55287a028">&#9670;&#160;</a></span>allocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> Engine::Render::DirectX12DescriptorHeap::allocate </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em> = <code>1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88978a68a9944153bad37abeaa02a7b9" name="a88978a68a9944153bad37abeaa02a7b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88978a68a9944153bad37abeaa02a7b9">&#9670;&#160;</a></span>deallocate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12DescriptorHeap::deallocate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04765b1300a8aa464386a233c7ac412b" name="a04765b1300a8aa464386a233c7ac412b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04765b1300a8aa464386a233c7ac412b">&#9670;&#160;</a></span>deallocate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12DescriptorHeap::deallocate </td>
+          <td>(</td>
+          <td class="paramtype">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a93a70dd8fafb011840d15508c4b1bfc6" name="a93a70dd8fafb011840d15508c4b1bfc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a70dd8fafb011840d15508c4b1bfc6">&#9670;&#160;</a></span>cpuHandle() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">D3D12_CPU_DESCRIPTOR_HANDLE Engine::Render::DirectX12DescriptorHeap::cpuHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b9dc1e4b667f8cb5275630c26cedc6f" name="a8b9dc1e4b667f8cb5275630c26cedc6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b9dc1e4b667f8cb5275630c26cedc6f">&#9670;&#160;</a></span>cpuHandle() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">D3D12_CPU_DESCRIPTOR_HANDLE Engine::Render::DirectX12DescriptorHeap::cpuHandle </td>
+          <td>(</td>
+          <td class="paramtype">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91dae61300b6aef161b8a39283fff744" name="a91dae61300b6aef161b8a39283fff744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91dae61300b6aef161b8a39283fff744">&#9670;&#160;</a></span>gpuHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">D3D12_GPU_DESCRIPTOR_HANDLE Engine::Render::DirectX12DescriptorHeap::gpuHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69ab330da1252bf003d4dc249db12bff" name="a69ab330da1252bf003d4dc249db12bff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69ab330da1252bf003d4dc249db12bff">&#9670;&#160;</a></span>fromGpuHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> Engine::Render::DirectX12DescriptorHeap::fromGpuHandle </td>
+          <td>(</td>
+          <td class="paramtype">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7937a03576acf23b132104ffa8f8741" name="aa7937a03576acf23b132104ffa8f8741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7937a03576acf23b132104ffa8f8741">&#9670;&#160;</a></span>addShaderResourceView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12DescriptorHeap::addShaderResourceView </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ID3D12Resource *&#160;</td>
+          <td class="paramname"><em>resource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const D3D12_SHADER_RESOURCE_VIEW_DESC *&#160;</td>
+          <td class="paramname"><em>desc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0706682b539d36151f5b57dbdbd0c9eb" name="a0706682b539d36151f5b57dbdbd0c9eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0706682b539d36151f5b57dbdbd0c9eb">&#9670;&#160;</a></span>resource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID3D12DescriptorHeap * Engine::Render::DirectX12DescriptorHeap::resource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/directx12/src/DirectX12/util/<a class="el" href="directx12descriptorheap_8h.html">directx12descriptorheap.h</a></li>
+<li>plugins/renderer/directx12/src/DirectX12/util/<a class="el" href="directx12descriptorheap_8cpp.html">directx12descriptorheap.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

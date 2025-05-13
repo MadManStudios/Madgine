@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Bounds Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Bounds Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_bounds.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bounds-struct-reference">
+<h1>Bounds Struct Reference<a class="headerlink" href="#bounds-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Bounds Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_bounds.html">Bounds</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_bounds-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Bounds Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;bounds.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac43f339a6704509d424537d5a0611845"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#ac43f339a6704509d424537d5a0611845">Bounds</a> (float <a class="el" href="struct_engine_1_1_bounds.html#aec833aad769b485052c968b16878c083">left</a>=0.f, float <a class="el" href="struct_engine_1_1_bounds.html#a2a6e8d9491a0d826d9d08cceb1b140ea">bottom</a>=0.f, float <a class="el" href="struct_engine_1_1_bounds.html#afc579c3978f7b92f8630cfd54f4b890e">right</a>=0.f, float <a class="el" href="struct_engine_1_1_bounds.html#a73dabcdbcb704b91cc8b1507e275e025">top</a>=0.f)</td></tr>
+<tr class="separator:ac43f339a6704509d424537d5a0611845"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6e8d9491a0d826d9d08cceb1b140ea"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a2a6e8d9491a0d826d9d08cceb1b140ea">bottom</a> () const</td></tr>
+<tr class="separator:a2a6e8d9491a0d826d9d08cceb1b140ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f0490ee890245e357c618de9ef6d488"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a4f0490ee890245e357c618de9ef6d488">bottomLeft</a> () const</td></tr>
+<tr class="separator:a4f0490ee890245e357c618de9ef6d488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7c5e1d25dfe6324e847044d0eec4fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a0e7c5e1d25dfe6324e847044d0eec4fb">bottomRight</a> () const</td></tr>
+<tr class="separator:a0e7c5e1d25dfe6324e847044d0eec4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7fc653c6ffb8a77064e2344f22ce373"><td class="memItemLeft" align="right" valign="top">std::array&lt; <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#ad7fc653c6ffb8a77064e2344f22ce373">corners</a> () const</td></tr>
+<tr class="separator:ad7fc653c6ffb8a77064e2344f22ce373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a34608b251e6cff2f56108b4fb31ec5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a0a34608b251e6cff2f56108b4fb31ec5">height</a> () const</td></tr>
+<tr class="separator:a0a34608b251e6cff2f56108b4fb31ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b983328cd33a5cb8354f03438ddc229"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a2b983328cd33a5cb8354f03438ddc229">isNull</a> () const</td></tr>
+<tr class="separator:a2b983328cd33a5cb8354f03438ddc229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec833aad769b485052c968b16878c083"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#aec833aad769b485052c968b16878c083">left</a> () const</td></tr>
+<tr class="separator:aec833aad769b485052c968b16878c083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93bcc3cef12dadeccbcceb80e91a9324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a93bcc3cef12dadeccbcceb80e91a9324">operator*</a> (const <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> &amp;v) const</td></tr>
+<tr class="separator:a93bcc3cef12dadeccbcceb80e91a9324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc579c3978f7b92f8630cfd54f4b890e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#afc579c3978f7b92f8630cfd54f4b890e">right</a> () const</td></tr>
+<tr class="separator:afc579c3978f7b92f8630cfd54f4b890e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c349520e718fa0dee135a96d79e49e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a68c349520e718fa0dee135a96d79e49e">size</a> () const</td></tr>
+<tr class="separator:a68c349520e718fa0dee135a96d79e49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73dabcdbcb704b91cc8b1507e275e025"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a73dabcdbcb704b91cc8b1507e275e025">top</a> () const</td></tr>
+<tr class="separator:a73dabcdbcb704b91cc8b1507e275e025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a279caaec177a3d3c826aa1a10bfb42a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#a279caaec177a3d3c826aa1a10bfb42a2">topLeft</a> () const</td></tr>
+<tr class="separator:a279caaec177a3d3c826aa1a10bfb42a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfaab59c1aa5c987682de01f98b9a583"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#abfaab59c1aa5c987682de01f98b9a583">topRight</a> () const</td></tr>
+<tr class="separator:abfaab59c1aa5c987682de01f98b9a583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2a7f9af8fb9990acd98a154560546a7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bounds.html#aa2a7f9af8fb9990acd98a154560546a7">width</a> () const</td></tr>
+<tr class="separator:aa2a7f9af8fb9990acd98a154560546a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac43f339a6704509d424537d5a0611845" name="ac43f339a6704509d424537d5a0611845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac43f339a6704509d424537d5a0611845">&#9670;&#160;</a></span>Bounds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Bounds::Bounds </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>left</em> = <code>0.f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>bottom</em> = <code>0.f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>right</em> = <code>0.f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>top</em> = <code>0.f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aec833aad769b485052c968b16878c083" name="aec833aad769b485052c968b16878c083"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec833aad769b485052c968b16878c083">&#9670;&#160;</a></span>left()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Bounds::left </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73dabcdbcb704b91cc8b1507e275e025" name="a73dabcdbcb704b91cc8b1507e275e025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73dabcdbcb704b91cc8b1507e275e025">&#9670;&#160;</a></span>top()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Bounds::top </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc579c3978f7b92f8630cfd54f4b890e" name="afc579c3978f7b92f8630cfd54f4b890e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc579c3978f7b92f8630cfd54f4b890e">&#9670;&#160;</a></span>right()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Bounds::right </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a6e8d9491a0d826d9d08cceb1b140ea" name="a2a6e8d9491a0d826d9d08cceb1b140ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6e8d9491a0d826d9d08cceb1b140ea">&#9670;&#160;</a></span>bottom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Bounds::bottom </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2a7f9af8fb9990acd98a154560546a7" name="aa2a7f9af8fb9990acd98a154560546a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2a7f9af8fb9990acd98a154560546a7">&#9670;&#160;</a></span>width()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Bounds::width </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a34608b251e6cff2f56108b4fb31ec5" name="a0a34608b251e6cff2f56108b4fb31ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a34608b251e6cff2f56108b4fb31ec5">&#9670;&#160;</a></span>height()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Bounds::height </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68c349520e718fa0dee135a96d79e49e" name="a68c349520e718fa0dee135a96d79e49e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68c349520e718fa0dee135a96d79e49e">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> Engine::Bounds::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f0490ee890245e357c618de9ef6d488" name="a4f0490ee890245e357c618de9ef6d488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f0490ee890245e357c618de9ef6d488">&#9670;&#160;</a></span>bottomLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> Engine::Bounds::bottomLeft </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a279caaec177a3d3c826aa1a10bfb42a2" name="a279caaec177a3d3c826aa1a10bfb42a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a279caaec177a3d3c826aa1a10bfb42a2">&#9670;&#160;</a></span>topLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> Engine::Bounds::topLeft </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e7c5e1d25dfe6324e847044d0eec4fb" name="a0e7c5e1d25dfe6324e847044d0eec4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7c5e1d25dfe6324e847044d0eec4fb">&#9670;&#160;</a></span>bottomRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> Engine::Bounds::bottomRight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abfaab59c1aa5c987682de01f98b9a583" name="abfaab59c1aa5c987682de01f98b9a583"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfaab59c1aa5c987682de01f98b9a583">&#9670;&#160;</a></span>topRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> Engine::Bounds::topRight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad7fc653c6ffb8a77064e2344f22ce373" name="ad7fc653c6ffb8a77064e2344f22ce373"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7fc653c6ffb8a77064e2344f22ce373">&#9670;&#160;</a></span>corners()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt; <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>, 4 &gt; Engine::Bounds::corners </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a93bcc3cef12dadeccbcceb80e91a9324" name="a93bcc3cef12dadeccbcceb80e91a9324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93bcc3cef12dadeccbcceb80e91a9324">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> Engine::Bounds::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b983328cd33a5cb8354f03438ddc229" name="a2b983328cd33a5cb8354f03438ddc229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b983328cd33a5cb8354f03438ddc229">&#9670;&#160;</a></span>isNull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Bounds::isNull </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/math/<a class="el" href="bounds_8h.html">bounds.h</a></li>
+<li>src/Meta/math/<a class="el" href="bounds_8cpp.html">bounds.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

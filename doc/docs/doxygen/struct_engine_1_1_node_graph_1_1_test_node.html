@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::NodeGraph::TestNode Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::NodeGraph::TestNode Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_node_graph_1_1_test_node.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testnode-struct-reference">
+<h1>TestNode Struct Reference<a class="headerlink" href="#testnode-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::NodeGraph::TestNode Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_node_graph.html">NodeGraph</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html">TestNode</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_node_graph_1_1_test_node-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::NodeGraph::TestNode Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;testnode.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::NodeGraph::TestNode:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_node_graph_1_1_test_node__inherit__graph.svg" width="194" height="403"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a02f1b5a1fe7cbf53cf9f6c28476063c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a02f1b5a1fe7cbf53cf9f6c28476063c7">TestNode</a> (const <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html">TestNode</a> &amp;other, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph)</td></tr>
+<tr class="separator:a02f1b5a1fe7cbf53cf9f6c28476063c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80f91356b378b5c118256e976ba12eaa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a80f91356b378b5c118256e976ba12eaa">TestNode</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph)</td></tr>
+<tr class="separator:a80f91356b378b5c118256e976ba12eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55792ef21db215c24e28ba8278890546"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a55792ef21db215c24e28ba8278890546">dataInBaseCount</a> (uint32_t group) const override</td></tr>
+<tr class="separator:a55792ef21db215c24e28ba8278890546"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4885b8aae395d29e29a253a2370cccae"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a4885b8aae395d29e29a253a2370cccae">dataInName</a> (uint32_t index, uint32_t group) const override</td></tr>
+<tr class="separator:a4885b8aae395d29e29a253a2370cccae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3660d30cf08edc664fb297c1e287d3b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#ae3660d30cf08edc664fb297c1e287d3b">dataInType</a> (uint32_t index, uint32_t group, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const override</td></tr>
+<tr class="separator:ae3660d30cf08edc664fb297c1e287d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051b2474b07d14b111ebea14a4c3679b"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a051b2474b07d14b111ebea14a4c3679b">dataOutBaseCount</a> (uint32_t group) const override</td></tr>
+<tr class="separator:a051b2474b07d14b111ebea14a4c3679b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50514c5c94c550fe816b08b343bfbdc7"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a50514c5c94c550fe816b08b343bfbdc7">dataOutName</a> (uint32_t index, uint32_t group) const override</td></tr>
+<tr class="separator:a50514c5c94c550fe816b08b343bfbdc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e87e7260701273aa547b711d24947d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a22e87e7260701273aa547b711d24947d">dataOutType</a> (uint32_t index, uint32_t group, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const override</td></tr>
+<tr class="separator:a22e87e7260701273aa547b711d24947d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89005cba30ca3e667c3e2bd4c78219f4"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a89005cba30ca3e667c3e2bd4c78219f4">flowInCount</a> (uint32_t group) const override</td></tr>
+<tr class="separator:a89005cba30ca3e667c3e2bd4c78219f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74cf8f31cd86d4c3230fafbade36d02"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#aa74cf8f31cd86d4c3230fafbade36d02">flowOutBaseCount</a> (uint32_t group) const override</td></tr>
+<tr class="separator:aa74cf8f31cd86d4c3230fafbade36d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48aa173d462ecd1c86d430784be0a601"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a48aa173d462ecd1c86d430784be0a601">interpret</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver.html">NodeReceiver</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; receiver, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;data, uint32_t flowIn, uint32_t group) const override</td></tr>
+<tr class="separator:a48aa173d462ecd1c86d430784be0a601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_node_graph_1_1_node"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_node_graph_1_1_node')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Engine::NodeGraph::Node&lt; TestNode &gt;</a></td></tr>
+<tr class="memitem:a008e770edb4b76076af25821d84ca96a inherit pub_methods_struct_engine_1_1_node_graph_1_1_node"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node.html#a008e770edb4b76076af25821d84ca96a">className</a> () const override final</td></tr>
+<tr class="separator:a008e770edb4b76076af25821d84ca96a inherit pub_methods_struct_engine_1_1_node_graph_1_1_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0826e26f8998548f6f22886a554a375 inherit pub_methods_struct_engine_1_1_node_graph_1_1_node"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node.html#ab0826e26f8998548f6f22886a554a375">clone</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph) const override</td></tr>
+<tr class="separator:ab0826e26f8998548f6f22886a554a375 inherit pub_methods_struct_engine_1_1_node_graph_1_1_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62b8a52920def3c514b09010d38ac03 inherit pub_methods_struct_engine_1_1_node_graph_1_1_node"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node.html#ac62b8a52920def3c514b09010d38ac03">name</a> () const override</td></tr>
+<tr class="separator:ac62b8a52920def3c514b09010d38ac03 inherit pub_methods_struct_engine_1_1_node_graph_1_1_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_virtual_data"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_virtual_data')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_virtual_data.html">Engine::Serialize::VirtualData&lt; T, _Base &gt;</a></td></tr>
+<tr class="memitem:a59620dea34e4048beb6d48e80c4207b8 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_data"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_data.html#a59620dea34e4048beb6d48e80c4207b8">~VirtualData</a> ()=default</td></tr>
+<tr class="separator:a59620dea34e4048beb6d48e80c4207b8 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae69456078e90911c0bca1b0ae4a3c9d5 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_data"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_const_ptr.html">SerializableDataConstPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_data.html#ae69456078e90911c0bca1b0ae4a3c9d5">customUnitPtr</a> () const override</td></tr>
+<tr class="separator:ae69456078e90911c0bca1b0ae4a3c9d5 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa29ab22a0f3d2f8472dece98ed28a8af inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_data"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_data.html#aa29ab22a0f3d2f8472dece98ed28a8af">customUnitPtr</a> () override</td></tr>
+<tr class="separator:aa29ab22a0f3d2f8472dece98ed28a8af inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4080aa7558545d734b7c0e8d490bd2e4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_const_ptr.html">SerializableDataConstPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html#a4080aa7558545d734b7c0e8d490bd2e4">customUnitPtr</a> () const =0</td></tr>
+<tr class="separator:a4080aa7558545d734b7c0e8d490bd2e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89ab97b888fa1bdff7c758e4eec8965"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html#aa89ab97b888fa1bdff7c758e4eec8965">customUnitPtr</a> ()=0</td></tr>
+<tr class="separator:aa89ab97b888fa1bdff7c758e4eec8965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a6ca6e336a31836dcbcfd44c112089ece"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a6ca6e336a31836dcbcfd44c112089ece">mDummy</a></td></tr>
+<tr class="separator:a6ca6e336a31836dcbcfd44c112089ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a80f91356b378b5c118256e976ba12eaa" name="a80f91356b378b5c118256e976ba12eaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80f91356b378b5c118256e976ba12eaa">&#9670;&#160;</a></span>TestNode() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::NodeGraph::TestNode::TestNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02f1b5a1fe7cbf53cf9f6c28476063c7" name="a02f1b5a1fe7cbf53cf9f6c28476063c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f1b5a1fe7cbf53cf9f6c28476063c7">&#9670;&#160;</a></span>TestNode() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::NodeGraph::TestNode::TestNode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html">TestNode</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a89005cba30ca3e667c3e2bd4c78219f4" name="a89005cba30ca3e667c3e2bd4c78219f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89005cba30ca3e667c3e2bd4c78219f4">&#9670;&#160;</a></span>flowInCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::TestNode::flowInCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa74cf8f31cd86d4c3230fafbade36d02" name="aa74cf8f31cd86d4c3230fafbade36d02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa74cf8f31cd86d4c3230fafbade36d02">&#9670;&#160;</a></span>flowOutBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::TestNode::flowOutBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55792ef21db215c24e28ba8278890546" name="a55792ef21db215c24e28ba8278890546"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55792ef21db215c24e28ba8278890546">&#9670;&#160;</a></span>dataInBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::TestNode::dataInBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4885b8aae395d29e29a253a2370cccae" name="a4885b8aae395d29e29a253a2370cccae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4885b8aae395d29e29a253a2370cccae">&#9670;&#160;</a></span>dataInName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::TestNode::dataInName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3660d30cf08edc664fb297c1e287d3b" name="ae3660d30cf08edc664fb297c1e287d3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3660d30cf08edc664fb297c1e287d3b">&#9670;&#160;</a></span>dataInType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::TestNode::dataInType </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a051b2474b07d14b111ebea14a4c3679b" name="a051b2474b07d14b111ebea14a4c3679b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a051b2474b07d14b111ebea14a4c3679b">&#9670;&#160;</a></span>dataOutBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::TestNode::dataOutBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50514c5c94c550fe816b08b343bfbdc7" name="a50514c5c94c550fe816b08b343bfbdc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50514c5c94c550fe816b08b343bfbdc7">&#9670;&#160;</a></span>dataOutName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::TestNode::dataOutName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a22e87e7260701273aa547b711d24947d" name="a22e87e7260701273aa547b711d24947d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e87e7260701273aa547b711d24947d">&#9670;&#160;</a></span>dataOutType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::TestNode::dataOutType </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48aa173d462ecd1c86d430784be0a601" name="a48aa173d462ecd1c86d430784be0a601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48aa173d462ecd1c86d430784be0a601">&#9670;&#160;</a></span>interpret()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::NodeGraph::TestNode::interpret </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver.html">NodeReceiver</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flowIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6ca6e336a31836dcbcfd44c112089ece" name="a6ca6e336a31836dcbcfd44c112089ece"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca6e336a31836dcbcfd44c112089ece">&#9670;&#160;</a></span>mDummy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::NodeGraph::TestNode::mDummy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/<a class="el" href="testnode_8h.html">testnode.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

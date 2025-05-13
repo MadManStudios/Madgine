@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Class Members &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Class Members" href="functions_e.html" />
+    <link rel="prev" title="Class Members" href="functions_c.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="annotated_classes.html">Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Madgine - Doxygen Documentation</a></li>
+          <li class="breadcrumb-item"><a href="annotated_classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="functions_class_members.html">Class Members</a></li>
+          <li class="breadcrumb-item"><a href="functions_all.html">All</a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Class Members</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/functions_d.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-members">
+<h1>Class Members<a class="headerlink" href="#class-members" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Class Members</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>data()&#160;:&#160;<a class="el" href="struct_engine_1_1_co_w_string.html#a34495d7341e10ddef306fcc6c22d4d73">Engine::CoWString</a>, <a class="el" href="struct_engine_1_1_debug_1_1_atomic___history.html#a80f29ae8ad294abd3d24b28511fdb10d">Engine::Debug::Atomic_History&lt; T, S &gt;</a>, <a class="el" href="struct_engine_1_1_debug_1_1_history.html#a83aa5e79909d9b2991a3f4e42b7b9681">Engine::Debug::History&lt; T, S &gt;</a></li>
+<li>Data&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_profiler_1_1_process_stats.html#af189077c5e8e1e83a3bcedd085af5ca0">Engine::Debug::Profiler::ProcessStats</a></li>
+<li>data()&#160;:&#160;<a class="el" href="struct_engine_1_1_matrix3.html#ad385237faa7513735906658a2e9408f5">Engine::Matrix3</a>, <a class="el" href="struct_engine_1_1_matrix4.html#ab8f2127d6417eef3b66701225081a9ac">Engine::Matrix4</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html#a5399343a190c8e80fab857ac6610d744">Engine::NodeGraph::NodeInterpreterStateBase</a>, <a class="el" href="struct_engine_1_1_render_1_1_scene_main_window_component.html#ac166f90c13fd1ab7c2559197e8788cce">Engine::Render::SceneMainWindowComponent</a></li>
+<li>Data&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_impl.html#acb13d15b3db4729868396e2546e59bf6">Engine::Resources::ResourceLoaderImpl&lt; T, _Data, _Base &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a3f2da9272ebb2b9e1c13b607196abe8f">Engine::Resources::ResourceLoaderInterface&lt; T, _Data, _Container, _Storage, _Base &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a27298f7212154b380298060bb400a343">Engine::Resources::VirtualResourceLoaderImpl&lt; T, _Data, _Base &gt;</a></li>
+<li>data()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list.html#a5cb9c8e1122908d250fc28cd673acdde">Engine::Scene::Entity::EntityComponentList&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_mesh.html#a276e20e09d708aef07ec0c93b4fa6962">Engine::Scene::Entity::Mesh</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_skeleton.html#add36d663bbf97ce49b8f41bd14882f4f">Engine::Scene::Entity::Skeleton</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a61eaec5832a8f0bac97b10d529969d01">Engine::Serialize::FormattedSerializeStream</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html#a6c5f2e8692fc13f35ff951c67796dfab">Engine::Serialize::SerializeStream</a>, <a class="el" href="struct_engine_1_1_threading_1_1_global.html#a28b78c970ff3a2b32a4eb3bb12822a88">Engine::Threading::Global&lt; T, Storage &gt;</a>, <a class="el" href="struct_engine_1_1_threading_1_1_global_3_01_t_01_5_00_01_storage_01_4.html#aa9ed86c43e421950794abd89bd61732c">Engine::Threading::Global&lt; T *, Storage &gt;</a>, <a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html#a183c1bb31c62fe185605f6204ff3b70b">Engine::Window::OSWindow</a></li>
+<li>DataContainer&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_impl.html#a738e0f167a56d0587de2b32883672fb4">Engine::Resources::ResourceLoaderImpl&lt; T, _Data, _Base &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#ae842908c9ce2dace5ce74c17a0110209">Engine::Resources::ResourceLoaderInterface&lt; T, _Data, _Container, _Storage, _Base &gt;</a></li>
+<li>dataInBaseCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_accessor_node.html#a2c67103dbfc7fc996073d3d581aa6472">Engine::NodeGraph::AccessorNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_function_node.html#ae939d254c2adf99dd7e3caffbee0f381">Engine::NodeGraph::FunctionNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html#a741c4ed0a7b4f0c123ea2f9dcdcbcb23">Engine::NodeGraph::LibraryNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#acfcae30ab89149e1fd0d69090f3e268b">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_pump_node.html#a07cf893209122f3bfacbc777d77802d1">Engine::NodeGraph::PumpNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a5652c869ab2daf535a60e6266c8821b5">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a55792ef21db215c24e28ba8278890546">Engine::NodeGraph::TestNode</a></li>
+<li>dataInBaseCountHelper()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a9694b724f7968297b42d011dc58f5834">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a></li>
+<li>dataInCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2170d27bc559e6ff98a8cd14550bd280">Engine::NodeGraph::NodeBase</a></li>
+<li>dataInDefault()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a92c7a3a50127793cdd06ba3560a1f49f">Engine::NodeGraph::NodeBase</a></li>
+<li>dataInGroupCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html#a121adcc1c39a4fbcdb238b2431f11700">Engine::NodeGraph::LibraryNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a1437c089fc5b893f4050230f70a87233">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#adf31a9ab6aba8ab97a933339d5991d26">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a></li>
+<li>dataInId()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a6dfa613a043dcffb88f784393f076072">Engine::NodeGraph::NodeBase</a></li>
+<li>dataInMask()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#a1f1a0412278b61fbcb689ecb0514bd18">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aab01ab0c675f46c70b813ee2466b1569">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#aba28e067ff8853b0b60b489b21f8db57">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataInName()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_accessor_node.html#aea2ca70612727876f903d31a437beb50">Engine::NodeGraph::AccessorNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_function_node.html#ad93dd79dfb8cd49b87e3578123a08b4a">Engine::NodeGraph::FunctionNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html#a1adab24822560c4f93396a2c7d891f56">Engine::NodeGraph::LibraryNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a192cb0dfcd3a3f93ff81a1321534282d">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6895aaab2b85160eec11e77e5a9fa9da">Engine::NodeGraph::NodeGraph</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a4885b8aae395d29e29a253a2370cccae">Engine::NodeGraph::TestNode</a></li>
+<li>dataInSource()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aa096fdfc51bb9035bc21df81f1c0f108">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ace276895c1926fb44ded1940a8632d7c">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataInType()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_accessor_node.html#aef44d4020f7cf955eb2cb2d41d825ec8">Engine::NodeGraph::AccessorNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_function_node.html#aa962a999f3dbdf0861570b70254e7e79">Engine::NodeGraph::FunctionNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html#a63ffa310170577d980bad4e234ee6b75">Engine::NodeGraph::LibraryNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a797d3496272766b21d534b42ece05240">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ade6d8c7cc1de89d34ee6e3de3fc542bb">Engine::NodeGraph::NodeGraph</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_pump_node.html#a34b5d3b73b4dbe5e1d918cf57e684ac5">Engine::NodeGraph::PumpNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a4fb7b9784dff3a6fe34093edc008cc56">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#ae3660d30cf08edc664fb297c1e287d3b">Engine::NodeGraph::TestNode</a></li>
+<li>dataInTypeHelper()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a3b5a8de65e00af2f1b20161932ac0bc7">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a></li>
+<li>dataInVariadic()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2efead73ed7ded9cbb5bf4ea3d7ee9eb">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a3adf9b145f23103b8e05a9d97237d094">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a></li>
+<li>DataMutex()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html#ae66a30befc2f7e6add80524986fcf751">Engine::Threading::DataMutex</a></li>
+<li>dataOutBaseCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a6f30c2c2ff267f8a87c1c22229f651f3">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_pump_node.html#af7140bfa2da9684ee97fdc6029cc22bb">Engine::NodeGraph::PumpNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a051b2474b07d14b111ebea14a4c3679b">Engine::NodeGraph::TestNode</a></li>
+<li>dataOutCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae3e3a6e97715d14644f87995c345b01f">Engine::NodeGraph::NodeBase</a></li>
+<li>dataOutGroupCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a153437816087f7dd0c74f1b711422ec8">Engine::NodeGraph::NodeBase</a></li>
+<li>dataOutId()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2478696a67225bb6a8ca9b0217c1aa83">Engine::NodeGraph::NodeBase</a></li>
+<li>dataOutMask()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#a786c457746b81fe78344b5e4e481468e">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2e111a28891468d689303c95a0697d25">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ad4040f3adf3796c439af23af7ef14b84">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataOutName()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a3f4be1c2c1a1439911f45c735d58a1fd">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#afa855b397086897ad6e24a7eb5f19cbc">Engine::NodeGraph::NodeGraph</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a50514c5c94c550fe816b08b343bfbdc7">Engine::NodeGraph::TestNode</a></li>
+<li>dataOutTarget()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a7293d567d0262fc3c4f1d4f0d01247d5">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a0a72b5aab50f5ce571f5ffb677b79cf6">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataOutType()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a5f3f9e8f403b8d14e52173810cc944d1">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a6e5fb3a0837b4aa6fc1e05e4cc8e7bf9">Engine::NodeGraph::NodeGraph</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_pump_node.html#a9c2cdf87df3a9aa9cab5a54c3a64e53a">Engine::NodeGraph::PumpNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html#a22e87e7260701273aa547b711d24947d">Engine::NodeGraph::TestNode</a></li>
+<li>dataOutVariadic()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a778c41667f9a9a76184cebb291a8a62c">Engine::NodeGraph::NodeBase</a></li>
+<li>dataProviderBaseCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_accessor_node.html#a26286217b0114ffc0827f5332fdd48d6">Engine::NodeGraph::AccessorNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_function_node.html#ab458ed46f5d51acdb51ae8cab6025c5e">Engine::NodeGraph::FunctionNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html#a2556e8b5b80989dccdcc01703587beae">Engine::NodeGraph::LibraryNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a8a73d889668cb30db456827e7159a596">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a9a1020d81e0c8572f952a983eba486d6">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a></li>
+<li>dataProviderCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a665f1e7c48a4db1aeb0ea967d3eb8d8f">Engine::NodeGraph::NodeBase</a></li>
+<li>dataProviderGroupCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a0e87386b28bcfa691260714ea3af8416">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a29846fd83dde96b155a1d2b336e63fb3">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a></li>
+<li>dataProviderId()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a321ff8ab2637f4a11c3a36430144e9d4">Engine::NodeGraph::NodeBase</a></li>
+<li>dataProviderMask()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#a1a134d96fd8c41b76a5aafcc21605edd">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a7be33ac8802bd84f4802ddaa04473910">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a07b722928d3f390621afbf3105928eb1">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataProviderName()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ac1cd68db8981d45bd414717885ce85c6">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ae5f4ce012ae6018e4603c2c95a042d97">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataProviderTargets()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ab2b342bc0bf332ee2e7422048860642c">Engine::NodeGraph::NodeBase</a></li>
+<li>dataProviderType()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_accessor_node.html#a6437ad7fff4e2417d216afb502065a72">Engine::NodeGraph::AccessorNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_function_node.html#ad26af62ae77947724d54884eef9aca1a">Engine::NodeGraph::FunctionNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html#a96985466053953893d8cadeb678c30d4">Engine::NodeGraph::LibraryNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ac466a391dc698f189a56bd836045125c">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a678e022fb5e712ffa30063cd3a467824">Engine::NodeGraph::NodeGraph</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html#a6a6e01191e44cbff6de23cd7d68d43ee">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;</a></li>
+<li>dataProviderVariadic()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae4d216302a7c6015ba8ef6c6c3338ef7">Engine::NodeGraph::NodeBase</a></li>
+<li>dataReceiverBaseCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ace1f7326e0b2a07e4a9833cf00be51ec">Engine::NodeGraph::NodeBase</a></li>
+<li>dataReceiverCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a00fde43d5f88fb1422cb6149738fb87d">Engine::NodeGraph::NodeBase</a></li>
+<li>dataReceiverGroupCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#afc85cf86ce0cea99f5861b646b1d444f">Engine::NodeGraph::NodeBase</a></li>
+<li>dataReceiverId()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aabb7dde4b14e905aeec40885837db9c1">Engine::NodeGraph::NodeBase</a></li>
+<li>dataReceiverMask()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#abb30cc387baf5269c5c065dbf23baad0">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a04336e53a175ebef223b0dafc25b7713">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a1cd6681a8c2f96bebc3ebbeac5f7caad">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataReceiverName()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#afdca245de664fbc7516aa7a944dca4fb">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a28562a4c84bf0bacf162066e9a639ea6">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataReceiverSources()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a84e265fde351e17caa53c6d201cd2184">Engine::NodeGraph::NodeBase</a></li>
+<li>dataReceiverType()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aa35309ba48c734f0affcab7fc0626610">Engine::NodeGraph::NodeBase</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#aed03454e81e440d6dceb57541975c32a">Engine::NodeGraph::NodeGraph</a></li>
+<li>dataReceiverVariadic()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a98ea65e5494c4aa2ed68c02e30d355cc">Engine::NodeGraph::NodeBase</a></li>
+<li>dataSize&#160;:&#160;<a class="el" href="struct_vk_specialization_info.html#a44f1f7b5ab92376e3423c388f505e36c">VkSpecializationInfo</a></li>
+<li>dead()&#160;:&#160;<a class="el" href="struct_engine_1_1_refcounted_container_1_1_control_block.html#a54c5955ab5c8ca781433fc691e8baf63">Engine::RefcountedContainer&lt; C &gt;::ControlBlock</a></li>
+<li>deallocate()&#160;:&#160;<a class="el" href="struct_engine_1_1_bucket_allocator_impl.html#a0dec50da414d93ce66ec9ebed1c69a55">Engine::BucketAllocatorImpl&lt; Parent, BucketStrategy &gt;</a>, <a class="el" href="struct_engine_1_1_bump_allocator.html#a17793b626a40eee8abd2a6348d2461e2">Engine::BumpAllocator&lt; Parent &gt;</a>, <a class="el" href="struct_engine_1_1_fixed_allocator.html#acd98e2f4eed31d5b2976c6a11c335b78">Engine::FixedAllocator&lt; Parent &gt;</a>, <a class="el" href="struct_engine_1_1_heap_allocator.html#ab0771e176feadcb1c7f73f54dab95d3e">Engine::HeapAllocator&lt; Parent, BlockSize, BlockCount &gt;</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a88978a68a9944153bad37abeaa02a7b9">Engine::Render::DirectX12DescriptorHeap</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#ad152ce736b18a85c44c6d8b171e4f08c">Engine::Render::DirectX12HeapAllocator</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html#a2936b2b23fbee44bfabd2f8de6b67818">Engine::Render::DirectX12MappedHeapAllocator</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_query_heap.html#adc39d293d8624c8fbdfb2dc25e7584f1">Engine::Render::DirectX12QueryHeap</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_heap_allocator.html#a9ddc24e05de7021035c07489c2a84515">Engine::Render::OpenGLHeapAllocator</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_mapped_heap_allocator.html#af8355314d069a489ef34a77e1ddea122">Engine::Render::OpenGLMappedHeapAllocator</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html#a47a237d45ed607161af566fa9982e8d5">Engine::Render::VulkanHeapAllocator</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html#a8cf625719a5bec5ed4e3a35362e46aa9">Engine::Render::VulkanMappedHeapAllocator</a>, <a class="el" href="struct_engine_1_1_tracked_allocator.html#ae209647891acff115482a5753f49a772">Engine::TrackedAllocator&lt; Parent &gt;</a></li>
+<li>deallocateAll()&#160;:&#160;<a class="el" href="struct_engine_1_1_bucket_allocator_impl.html#ae729353e76cef25ce13e6d31961da72e">Engine::BucketAllocatorImpl&lt; Parent, BucketStrategy &gt;</a>, <a class="el" href="struct_engine_1_1_bump_allocator.html#a1e85c3dccddeec5a9f5b55cf6cdb1353">Engine::BumpAllocator&lt; Parent &gt;</a>, <a class="el" href="struct_engine_1_1_fixed_allocator.html#ab7fc08075d886319da6ca3e0a83a9d1d">Engine::FixedAllocator&lt; Parent &gt;</a>, <a class="el" href="struct_engine_1_1_heap_allocator.html#a81f8e293845aa4e408c27edabef0af38">Engine::HeapAllocator&lt; Parent, BlockSize, BlockCount &gt;</a>, <a class="el" href="struct_engine_1_1_tracked_allocator.html#a03f72e9603ec4b7db06b70231c156fee">Engine::TrackedAllocator&lt; Parent &gt;</a></li>
+<li>deallocateBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ae0770bc58396307d968ad888991f27bc">Engine::Render::RenderContext</a></li>
+<li>deallocateBufferImpl()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a60dada91d6ebe355698bfd11354cbc0a">Engine::Render::DirectX12RenderContext</a>, <a class="el" href="struct_engine_1_1_render_1_1_render_context.html#afaa43903a07b6771d26047317f419759">Engine::Render::RenderContext</a></li>
+<li>deallocatePersistent()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_constant_buffer_heap.html#ae191ff4c24bf2c746d976a5fe2953992">Engine::Render::VulkanConstantBufferHeap</a></li>
+<li>deallocateTemp()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_constant_buffer_heap.html#a039de1b5568f6ed2d5575bca2b97a85c">Engine::Render::VulkanConstantBufferHeap</a></li>
+<li>debug_operation_increment&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_playback_sender.html#af4ab25d43335889b73096d25e13a2b10">Engine::Audio::PlaybackSender</a>, <a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a2711e4959420000facb956a2b098b3dc">Engine::IntervalClock&lt; Timepoint &gt;::sender&lt; Inner &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_sender.html#acffe8ae68230bfa39cc995b984f0a87f">Engine::NodeGraph::NodeInterpreterSender</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_sender.html#a90e1d4bdcda25d75df1ced131da75ca1">Engine::Scene::Entity::AnimationSender</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_temp_widget_sender.html#a3ecf909200b373a94056999bd2f7770c">Engine::Widgets::TempWidgetSender</a></li>
+<li>debug_start_increment&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_playback_sender.html#aa2df816bb0422090310f14e7c36ff5b3">Engine::Audio::PlaybackSender</a>, <a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a0badf3b10169708735bcb597cad62318">Engine::IntervalClock&lt; Timepoint &gt;::sender&lt; Inner &gt;</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_sender.html#a03b0e69ca103ad59f2627f08b224e053">Engine::Scene::Entity::AnimationSender</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_temp_widget_sender.html#a404d832dc25bb443544e5518638aa97d">Engine::Widgets::TempWidgetSender</a></li>
+<li>debug_stop_increment&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_playback_sender.html#a0ed332db0465b1533848174e45fc7c2f">Engine::Audio::PlaybackSender</a>, <a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a066047fe3a6ddcc0cca5e57c28090d9b">Engine::IntervalClock&lt; Timepoint &gt;::sender&lt; Inner &gt;</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_sender.html#a01924b529b2853c74c6a747530141715">Engine::Scene::Entity::AnimationSender</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_temp_widget_sender.html#ab4c0001b79b2de3919b4d0a451cabfbc">Engine::Widgets::TempWidgetSender</a></li>
+<li>debugCameras()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html#abf485eac5538d1b79e28a032d5cb9841">Engine::Render::RenderDebuggable</a>, <a class="el" href="struct_engine_1_1_render_1_1_scene_render_pass.html#ae6d6277045df22353970efb4d654607f">Engine::Render::SceneRenderPass</a></li>
+<li>debugContexts()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_debuggable_lifetime_base.html#aafa4108aca2fe7def97c3db60c0da5e7">Engine::Debug::DebuggableLifetimeBase</a></li>
+<li>debugFrustums()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html#af6d8e1464ac81cd70458eadf2f11f5d9">Engine::Render::RenderDebuggable</a>, <a class="el" href="struct_engine_1_1_render_1_1_shadow_render_pass.html#a0a2cf5e3d80161626304ab8b82bb1ca9">Engine::Render::ShadowRenderPass</a></li>
+<li>DEBUGGABLE_LIFETIME()&#160;:&#160;<a class="el" href="struct_engine_1_1_handler_base.html#ad5e802589e1e16038146277f33d1c7d9">Engine::HandlerBase</a></li>
+<li>DebuggableLifetimeBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_debuggable_lifetime.html#a20eec05b7da6f095918c48e3e6cfe51d">Engine::Debug::DebuggableLifetime&lt; cpos &gt;</a>, <a class="el" href="struct_engine_1_1_debug_1_1_debuggable_lifetime_base.html#a20eec05b7da6f095918c48e3e6cfe51d">Engine::Debug::DebuggableLifetimeBase</a></li>
+<li>Debugger&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a6a60c70c35469c44c97b20483675aade">Engine::Debug::ContextInfo</a>, <a class="el" href="struct_engine_1_1_debug_1_1_debugger.html#ab47affe3bc7a9c4815df473db0edee14">Engine::Debug::Debugger</a></li>
+<li>DebugLocationSplitter()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_debug_location_splitter.html#a9fea569eea5464d63d109faca0791d85">Engine::Debug::DebugLocationSplitter</a></li>
+<li>decay_argument_types&#160;:&#160;<a class="el" href="struct_engine_1_1_callable_type.html#aebbcad81e5c9916c538dba063bf93bd9">Engine::CallableType&lt; F, R, T, _Ty &gt;</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_sync_function_traits_helper_3_01_traits_00_01type__pack_3_01_syn69b0b05b12918a4420aff781c0a9e083.html#aee512f451288f1f01ec52c431f54f5df">Engine::Serialize::SyncFunctionTraitsHelper&lt; Traits, type_pack&lt; SyncFunctionContext, Args... &gt; &gt;</a></li>
+<li>decay_t&#160;:&#160;<a class="el" href="struct_engine_1_1_key_value_global.html#a935df7868114f3ae5a0e469e5a7d3e70">Engine::KeyValueGlobal&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_key_value_work_group_local.html#a52d074838ad3736ad670a72e25f28d6a">Engine::KeyValueWorkGroupLocal&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html#a01b4c4a89f7c038979561327d2766a90">Engine::NodeGraph::dynamic_value_type&lt; I &gt;</a></li>
+<li>decreaseTaskInFlightCount()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ad58b6c0ae2006f5a76ee8c3ecd0b1cc5">Engine::Threading::TaskQueue</a></li>
+<li>decRef()&#160;:&#160;<a class="el" href="struct_engine_1_1_refcounted_container_1_1_control_block.html#a34ab59776b8d076278abf7ddcb2815ea">Engine::RefcountedContainer&lt; C &gt;::ControlBlock</a>, <a class="el" href="struct_engine_1_1_resources_1_1_resource_data_info_base.html#a04527742a210ef6813966c86df89a973">Engine::Resources::ResourceDataInfoBase&lt; Interface &gt;</a></li>
+<li>delete_length&#160;:&#160;<a class="el" href="struct_stb_undo_record.html#ab73cd4d8554984e87743dee20945e360">StbUndoRecord</a></li>
+<li>deleteMasterId()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html#a61234a9d504f7634b0cf88169acf2168">Engine::Serialize::SerializeManager</a></li>
+<li>dependencies()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin.html#ae17091f033d7268b40a67469d3f26d4f">Engine::Plugins::Plugin</a>, <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a9bf8ab2e40afcee724591bfa21d5b8a6">Engine::Render::RenderPass</a></li>
+<li>dependencyCount&#160;:&#160;<a class="el" href="struct_vk_render_pass_create_info.html#af92fef215d0f8eb9a6dd67003283632c">VkRenderPassCreateInfo</a></li>
+<li>dependencyFlags&#160;:&#160;<a class="el" href="struct_vk_subpass_dependency.html#a626f1def4dbf219f6fbb428cc5b985e9">VkSubpassDependency</a></li>
+<li>dependents()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin.html#a7601851b3a23dd4c51266133a1d8a3a7">Engine::Plugins::Plugin</a></li>
+<li>depth&#160;:&#160;<a class="el" href="struct_vk_clear_depth_stencil_value.html#a8d331122372147ef1d19201488457f6c">VkClearDepthStencilValue</a>, <a class="el" href="struct_vk_extent3_d.html#a03dd923b9778c6d1a3117fc22b47ac49">VkExtent3D</a></li>
+<li>depthBiasClamp&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#adc4e126adbd9bd2eead47e086330a19f">VkPhysicalDeviceFeatures</a>, <a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#aed7b9b9e4918e82beb91d2656f40962c">VkPipelineRasterizationStateCreateInfo</a></li>
+<li>depthBiasConstantFactor&#160;:&#160;<a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#a0e9203bd52b493d47dacf4d9e4ca492f">VkPipelineRasterizationStateCreateInfo</a></li>
+<li>depthBiasEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#ae225ae723ceffb30c93f3e21416e33e6">VkPipelineRasterizationStateCreateInfo</a></li>
+<li>depthBiasSlopeFactor&#160;:&#160;<a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#ae18edc17d4975888b18d8708b98d07e5">VkPipelineRasterizationStateCreateInfo</a></li>
+<li>depthBounds&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#af39e3d89eac7d42643e7f905899f46c4">VkPhysicalDeviceFeatures</a></li>
+<li>depthBoundsTestEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_depth_stencil_state_create_info.html#a9ddab45848ba6b0f7618a834d5e43749">VkPipelineDepthStencilStateCreateInfo</a></li>
+<li>depthChecking&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html#a203382c29b3b10af239abf6bfab09d78">Engine::Render::PipelineConfiguration</a></li>
+<li>depthClamp&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#ad9e7b70ee2970df67d59e5d12165c543">VkPhysicalDeviceFeatures</a></li>
+<li>depthClampEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#ad9160c0abae1951ef48cede9ef42eeb4">VkPipelineRasterizationStateCreateInfo</a></li>
+<li>depthCompareOp&#160;:&#160;<a class="el" href="struct_vk_pipeline_depth_stencil_state_create_info.html#a41dada4bd6fa3347c4db10e589f34950">VkPipelineDepthStencilStateCreateInfo</a></li>
+<li>depthFailOp&#160;:&#160;<a class="el" href="struct_vk_stencil_op_state.html#af2a6effc3bcad8be7b86f0c96e5fc593">VkStencilOpState</a></li>
+<li>depthPitch&#160;:&#160;<a class="el" href="struct_vk_subresource_layout.html#a1db3c61ee800483057b48b3305ff37bb">VkSubresourceLayout</a></li>
+<li>depthStencil&#160;:&#160;<a class="el" href="union_vk_clear_value.html#a2aded22d92e8b027ebed2b5c1cbfd593">VkClearValue</a></li>
+<li>depthTestEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_depth_stencil_state_create_info.html#a20da5968e91fc09216a6c59d47c1f581">VkPipelineDepthStencilStateCreateInfo</a></li>
+<li>depthTexture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#aa88529c57b4490b152c159f9a9746be2">Engine::Render::DirectX12RenderTexture</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_texture.html#a96d5a7034ee673170dc2109e8f359d56">Engine::Render::OpenGLRenderTexture</a>, <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#adb6363e30e81167fcfef9f31124a9d2a">Engine::Render::RenderTarget</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#af9328cdefcae32f9587dc9e0642f71cd">Engine::Render::VulkanRenderTarget</a></li>
+<li>depthTextures()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_scene_main_window_component.html#a17f7563d15f469d66fe767749e941a8f">Engine::Render::SceneMainWindowComponent</a></li>
+<li>depthWriteEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_depth_stencil_state_create_info.html#a609295b0c445015b24cb50c8dd40cf97">VkPipelineDepthStencilStateCreateInfo</a></li>
+<li>description&#160;:&#160;<a class="el" href="struct_vk_layer_properties.html#ae4f91169683ceab3ae7cd5b52bc16c23">VkLayerProperties</a></li>
+<li>descriptor()&#160;:&#160;<a class="el" href="struct_engine_1_1_object_instance.html#aa06d9084c572bda442b19b9593cad979">Engine::ObjectInstance</a>, <a class="el" href="struct_engine_1_1_object_ptr.html#a0b5a1eb60e8969093f65770f97464b9e">Engine::ObjectPtr</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_object_instance.html#adc171b17276ff2c740d0714d83ae48e1">Engine::Scripting::Python3::PyObjectInstance</a></li>
+<li>descriptorCount&#160;:&#160;<a class="el" href="struct_vk_copy_descriptor_set.html#a8e6c8b4abec541a812690e22130910a7">VkCopyDescriptorSet</a>, <a class="el" href="struct_vk_descriptor_pool_size.html#a063411be91f66eed099f2cb8b82e7525">VkDescriptorPoolSize</a>, <a class="el" href="struct_vk_descriptor_set_layout_binding.html#a84fc0166fda3e367949ebeb7c134a7ed">VkDescriptorSetLayoutBinding</a>, <a class="el" href="struct_vk_write_descriptor_set.html#a9ab3ac2bd5372dbdf7c9823ac9599fd9">VkWriteDescriptorSet</a></li>
+<li>descriptorPool&#160;:&#160;<a class="el" href="struct_vk_descriptor_set_allocate_info.html#a54d71d3f3fcdeb2cc77d2e44d1cc1b18">VkDescriptorSetAllocateInfo</a></li>
+<li>descriptorSetCount&#160;:&#160;<a class="el" href="struct_vk_descriptor_set_allocate_info.html#a08d32682bc040616c0dc885cb751af48">VkDescriptorSetAllocateInfo</a></li>
+<li>descriptorTable()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#a52df8cd28db85e1bbabfbbf1a59ba99c">Engine::Render::DirectX12HeapAllocator</a></li>
+<li>descriptorType&#160;:&#160;<a class="el" href="struct_vk_descriptor_set_layout_binding.html#a92a78d34bb82f53d994d119e35309491">VkDescriptorSetLayoutBinding</a>, <a class="el" href="struct_vk_write_descriptor_set.html#af48ce9c69ff31d226e68f660840b7bab">VkWriteDescriptorSet</a></li>
+<li>deselect()&#160;:&#160;<a class="el" href="struct_engine_1_1_tools_1_1_scene_editor.html#a0384f8c8593556e872a791f3eecdc7ce">Engine::Tools::SceneEditor</a></li>
+<li>destroy()&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior_state_base.html#ad2121b9ca15e9b77bf19edeac127e74f">Engine::BehaviorStateBase</a>, <a class="el" href="struct_engine_1_1_coroutine_behavior_state.html#a04bba054777c7a70b86d1578085ca51a">Engine::CoroutineBehaviorState</a>, <a class="el" href="struct_engine_1_1_refcounted_container_1_1_control_block.html#aa657d698f13df4e9c2e37c6bc6463e81">Engine::RefcountedContainer&lt; C &gt;::ControlBlock</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a8a55b3e8a249f096990da814fff7cda1">Engine::Widgets::WidgetBase</a>, <a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html#a9cce8c75c628800444b90bdcb0bf1536">Engine::Window::OSWindow</a>, <a class="el" href="structstd_1_1coroutine__handle_3_01void_01_4.html#acb79b726370b6798aed549a201d2e2e0">std::coroutine_handle&lt; void &gt;</a></li>
+<li>destroyChild()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a35a4381200614db63ee5dc2b47d77056">Engine::Widgets::WidgetBase</a></li>
+<li>destroyResourceBlock()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#af6d321344b04233210597ec110677c21">Engine::Render::DirectX12RenderContext</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_context.html#ab7af56dbaf5b0be8af2fe8a0cf303126">Engine::Render::OpenGLRenderContext</a>, <a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a2640617c81ad5a93804ef6dd267c0bdd">Engine::Render::RenderContext</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a844e50274357767c1f17be80076bde51">Engine::Render::VulkanRenderContext</a></li>
+<li>destroyState()&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior.html#ace84da59b811cd4d0ad8ec2b0d757a1f">Engine::Behavior</a></li>
+<li>destroyToolWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a06864121bbcefbd23cb32248de80178e">Engine::Window::MainWindow</a></li>
+<li>destroyTopLevel()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#a054b9ca92046430aa2b5dd0ebdf4b42a">Engine::Widgets::WidgetManager</a></li>
+<li>detach()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_work_group_handle.html#a54ce0860684899e3dbeb12a3d630ca5a">Engine::Threading::WorkGroupHandle</a></li>
+<li>Determinant()&#160;:&#160;<a class="el" href="struct_engine_1_1_matrix3.html#a8d17f58fc75761aec5fee6557d791c0e">Engine::Matrix3</a></li>
+<li>deviceID&#160;:&#160;<a class="el" href="struct_vk_physical_device_properties.html#a76b75711d1a67dce3efaf93bbf9dd336">VkPhysicalDeviceProperties</a>, <a class="el" href="struct_vk_pipeline_cache_header_version_one.html#a293c5d4271e439a5245ef90a7d6c4f52">VkPipelineCacheHeaderVersionOne</a></li>
+<li>deviceMask&#160;:&#160;<a class="el" href="struct_vk_acquire_next_image_info_k_h_r.html#a7f90acd710a16ddc521a1cdec1ebf1ed">VkAcquireNextImageInfoKHR</a></li>
+<li>DeviceName&#160;:&#160;<a class="el" href="struct___g_p_u___d_e_v_i_c_e.html#a604bfab61f1a2c5d1e635837d369ba14">_GPU_DEVICE</a></li>
+<li>deviceName&#160;:&#160;<a class="el" href="struct_vk_physical_device_properties.html#a4b3f4be25466e0470e1f72d5c483f03e">VkPhysicalDeviceProperties</a></li>
+<li>DeviceString&#160;:&#160;<a class="el" href="struct___g_p_u___d_e_v_i_c_e.html#aff8b7920ccc85afcd6f325da6cdb0b73">_GPU_DEVICE</a></li>
+<li>deviceType&#160;:&#160;<a class="el" href="struct_vk_physical_device_properties.html#a7716dcdfa2845afc7834e3183cdd59ad">VkPhysicalDeviceProperties</a></li>
+<li>diameter()&#160;:&#160;<a class="el" href="struct_engine_1_1_a_a_b_b.html#a7b43f55d286750abc051ad23640e5a1b">Engine::AABB</a></li>
+<li>difference_type&#160;:&#160;<a class="el" href="struct_engine_1_1_area_view_1_1_iterator_impl.html#ad751af924050d5333fc363229ae1f6d2">Engine::AreaView&lt; T, Dim, Storage &gt;::IteratorImpl&lt; isConst &gt;</a>, <a class="el" href="struct_engine_1_1_bit_array_1_1const__pointer.html#aee5ea4ab3c4a0e33f2fddea3adfd91cb">Engine::BitArray&lt; Count, MemberSize, type &gt;::const_pointer</a>, <a class="el" href="struct_engine_1_1_bit_array_1_1pointer.html#ab14634c83f5fe83090c757fdfb9087c5">Engine::BitArray&lt; Count, MemberSize, type &gt;::pointer</a>, <a class="el" href="struct_engine_1_1_concat_it_container_1_1_concat_iterator.html#a75b1edec11ed04a08a5e649eb186665a">Engine::ConcatItContainer&lt; T &gt;::ConcatIterator&lt; It &gt;</a>, <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a05b1a7d5b21fe052feb916f7d381fffa">Engine::Filesystem::FileQueryIterator</a>, <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">Engine::FreeListContainer&lt; C, DataTraits &gt;::IteratorImpl&lt; It, _reference, _pointer &gt;</a>, <a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html#ab7d2050920a1f2a081fff06969f606e6">Engine::GenerationContainer&lt; C &gt;::const_iterator</a>, <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a97d1913798f363f62fed87c6fe11684e">Engine::GenerationContainer&lt; C &gt;::iterator</a>, <a class="el" href="struct_engine_1_1_generator_1_1iterator.html#a14280c8760ae94c56839e00cd7bc45e2">Engine::Generator&lt; T &gt;::iterator</a>, <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html#aeb4bdfd91f90c9f29b551f6fc3f15173">Engine::mutable_set&lt; T, Cmp &gt;::iterator_prototype&lt; It, isConst &gt;</a>, <a class="el" href="struct_engine_1_1_refcounted_container_1_1_iterator_impl.html#a72738d6ce0356424e69b429edc665c03">Engine::RefcountedContainer&lt; C &gt;::IteratorImpl&lt; It, Val, skipping &gt;</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_dict_ptr_1_1iterator.html#a7fa9b013a1000333a244646204cfe66d">Engine::Scripting::Python3::PyDictPtr::iterator</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_list_ptr_1_1iterator.html#ae28a7205c170c42d461ffd15eab3741a">Engine::Scripting::Python3::PyListPtr::iterator</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_object_iterator.html#a98c1cb3f2a9456dc8cbb761f44029a50">Engine::Scripting::Python3::PyObjectIterator</a>, <a class="el" href="struct_engine_1_1_virtual_iterator.html#a62df9b070b02b1b4555503e12a6b3e81">Engine::VirtualIterator&lt; RefT &gt;</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_property_iterator.html#ade23406a3e4dae301698cbc02be7e073">Engine::Widgets::PropertyIterator</a>, <a class="el" href="structstd_1_1ranges_1_1views_1_1_transform_view_1_1iterator__impl.html#a3cebfb7ce2e4a808ae9368f671f77196">std::ranges::views::TransformView&lt; R, F &gt;::iterator_impl&lt; QualifiedR &gt;</a></li>
+<li>DirectX12Buffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_buffer.html#a191457350c593c9e40c7888c786f989f">Engine::Render::DirectX12Buffer</a></li>
+<li>DirectX12CommandAllocator()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html#a35674eb0b2cd02431680b349fc50c884">Engine::Render::DirectX12CommandAllocator</a></li>
+<li>DirectX12CommandList()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#a6e01dec49db8b15339cc69fc6d1b64bf">Engine::Render::DirectX12CommandList</a></li>
+<li>DirectX12DescriptorHeap()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a73639724ce762fc4426344bd04df0a9c">Engine::Render::DirectX12DescriptorHeap</a></li>
+<li>DirectX12HeapAllocator()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#a87ea3103bfa98d867a14f257b75198f8">Engine::Render::DirectX12HeapAllocator</a></li>
+<li>DirectX12MappedHeapAllocator()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html#a1c5646812f48ccf24fa89972b8e6f72a">Engine::Render::DirectX12MappedHeapAllocator</a></li>
+<li>DirectX12MeshLoader()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mesh_loader.html#a68846aec4167475f83087dfd360d1d94">Engine::Render::DirectX12MeshLoader</a></li>
+<li>DirectX12PersistentBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_persistent_buffer.html#a8a2bc2b195ff4f826fb8d8af57ac9628">Engine::Render::DirectX12PersistentBuffer</a></li>
+<li>DirectX12PipelineInstance()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a63a5763232fcfc6aecebaf98a68a6f79">Engine::Render::DirectX12PipelineInstance</a></li>
+<li>DirectX12PipelineInstanceHandle()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance_handle.html#a81724cde87953bc12194ed986317d51d">Engine::Render::DirectX12PipelineInstanceHandle</a></li>
+<li>DirectX12PipelineInstancePtr()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance_ptr.html#a499babfaf8add7b031395ace9bf584a8">Engine::Render::DirectX12PipelineInstancePtr</a></li>
+<li>DirectX12PipelineLoader()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_loader.html#aca3d8347bee85cff5e4f703ea11ccb60">Engine::Render::DirectX12PipelineLoader</a></li>
+<li>DirectX12PixelShaderLoader()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pixel_shader_loader.html#adb1f4a91a83f200e33e2c33b7c64af1a">Engine::Render::DirectX12PixelShaderLoader</a></li>
+<li>DirectX12QueryHeap()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_query_heap.html#a200a1bc0112a0dde4d9afdb43bcc21ef">Engine::Render::DirectX12QueryHeap</a></li>
+<li>DirectX12RenderContext()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ace55d76772a1b7f349e0e0f29795a7ca">Engine::Render::DirectX12RenderContext</a></li>
+<li>DirectX12RenderTarget()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a021d0651c47a3367a0f8dfe1d2c44ba1">Engine::Render::DirectX12RenderTarget</a></li>
+<li>DirectX12RenderTexture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a14519e5734b33cf1ccd77bb0163ae22f">Engine::Render::DirectX12RenderTexture</a></li>
+<li>DirectX12RenderWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_window.html#a887b70e593994b7e132e1ef0b6fb5814">Engine::Render::DirectX12RenderWindow</a></li>
+<li>DirectX12Texture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html#a9e009b0a1999032ce4366fe8a9cdd7da">Engine::Render::DirectX12Texture</a></li>
+<li>DirectX12TextureLoader()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture_loader.html#a9f1e2bcabf292c564ab67611f1e97821">Engine::Render::DirectX12TextureLoader</a></li>
+<li>DirectX12VertexShaderLoader()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_vertex_shader_loader.html#ac001349928e85cd5e1a9a0cdd69be9c5">Engine::Render::DirectX12VertexShaderLoader</a></li>
+<li>disableSceneRendering()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_scene_main_window_component.html#a447b5c2649ed6968ed1229b57c01c958">Engine::Render::SceneMainWindowComponent</a></li>
+<li>disconnectDataIn()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#ad71040c825cef9762eb66279e69a6793">Engine::NodeGraph::NodeGraph</a></li>
+<li>disconnectDataOut()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a86fdaeae581617e23742168c99bd81b1">Engine::NodeGraph::NodeGraph</a></li>
+<li>disconnectFlow()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#addb1fbfde5aae6fdf8a0b94a421fb1b2">Engine::NodeGraph::NodeGraph</a></li>
+<li>discreteQueuePriorities&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a0804211689c3e315b9003d1ef6f510ba">VkPhysicalDeviceLimits</a></li>
+<li>distance()&#160;:&#160;<a class="el" href="struct_engine_1_1_vector2.html#aea8143e7f1e1c36454ebe33f29897a98">Engine::Vector2</a>, <a class="el" href="struct_engine_1_1_vector3.html#ab17e9e4795def740102f2080250b3fc6">Engine::Vector3</a>, <a class="el" href="struct_engine_1_1_vector4.html#a014aa5d2bc822c3683719a783d53da93">Engine::Vector4</a></li>
+<li>DIV&#160;:&#160;<a class="el" href="struct_code_gen_1_1_arith_operation.html#af6cb41f0229a5c7c8a564cb20f5b6cf1a58ce0c93b96c64f43374e9de6c4fe337">CodeGen::ArithOperation</a></li>
+<li>do_allocate()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_default_mem_resource.html#a6367b15ec5df621bd86f697cdac38938">Engine::Debug::DefaultMemResource</a></li>
+<li>do_deallocate()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_default_mem_resource.html#ae50c70b0bce318e7d911601fe95bcf05">Engine::Debug::DefaultMemResource</a></li>
+<li>do_is_equal()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_default_mem_resource.html#af45ec79c2b0af611d5cb235e7bd339e5">Engine::Debug::DefaultMemResource</a></li>
+<li>done()&#160;:&#160;<a class="el" href="struct_engine_1_1_coroutine_handle.html#ae21342f42f8b8faaf6fa159dbbadaa75">Engine::CoroutineHandle&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_coroutine_handle_3_01void_01_4.html#aa10b956f9d731671876ad4d6eb13efb6">Engine::CoroutineHandle&lt; void &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1reduce__stream__t_1_1state.html#a6c979a0ed576814162520ebfa3ba05fd">Engine::Execution::reduce_stream_t::state&lt; Rec, Stream, T, F &gt;</a></li>
+<li>DONE&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5abf5f8f28799c870142c45eac62d7e308">Engine::Execution::when_all_range_t::state&lt; Rec, Sender &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1when__all__t_1_1state_3_01_rec_00_01std_1_1index__sequence_3_01_i5deeaae98a74e3d08cd766130b7ce970.html#a9a511306d58958f6dcfcef6ea2bb1d40a0d44f39d211f337035adbe9fdd7f4f87">Engine::Execution::when_all_t::state&lt; Rec, std::index_sequence&lt; Is... &gt;, Sender... &gt;</a></li>
+<li>done()&#160;:&#160;<a class="el" href="struct_engine_1_1_generator.html#a90f6d82a8fe636554cac7eab01f05af0">Engine::Generator&lt; T &gt;</a>, <a class="el" href="structstd_1_1coroutine__handle_3_01void_01_4.html#aef6b0762a5a12c1998fb07f0223f5c77">std::coroutine_handle&lt; void &gt;</a></li>
+<li>dotProduct()&#160;:&#160;<a class="el" href="struct_engine_1_1_quaternion.html#a3356863ae34e694bec94a68042bd21d2">Engine::Quaternion</a>, <a class="el" href="struct_engine_1_1_vector2.html#a652f660c7b1a49eb039f31662216010f">Engine::Vector2</a>, <a class="el" href="struct_engine_1_1_vector3.html#ad2e1257d50d171db79d4283323b87ecb">Engine::Vector3</a>, <a class="el" href="struct_engine_1_1_vector4.html#a6af3102aa8d89de4efe28c031806b305">Engine::Vector4</a></li>
+<li>DoublyLinkedNodeBase&lt; PtrT &gt;&#160;:&#160;<a class="el" href="struct_engine_1_1_doubly_linked_node.html#aceed9802303ba615a3c32b0750790edc">Engine::DoublyLinkedNode&lt; PtrT &gt;</a></li>
+<li>DPAD&#160;:&#160;<a class="el" href="struct_engine_1_1_input_1_1_axis_event_args.html#a75afa9df5de479d9abb5fefa3fd72899a2468776dc6101e46fef1e2d95f92c2b9">Engine::Input::AxisEventArgs</a></li>
+<li>dragAbortEvent()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#aa057f78251a3e36990a4dd5cc06783d3">Engine::Widgets::WidgetBase</a></li>
+<li>dragBeginEvent()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a2cdf5ff3e0b60a98d44d541a8e5eca9e">Engine::Widgets::WidgetBase</a></li>
+<li>dragEndEvent()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a9542238e2c4f71498c7e35d5aae755b0">Engine::Widgets::WidgetBase</a></li>
+<li>dragging()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#ade96879bc1e689c413286ebe9c5a0841">Engine::Widgets::WidgetBase</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_handler_base.html#a87e55f6c44427f810b197f66bd511ab4">Engine::Widgets::WidgetHandlerBase</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#a69caa10c845378305518773baed455b3">Engine::Widgets::WidgetManager</a></li>
+<li>dragMoveEvent()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a8936f84733500edefc9037a1b0408e80">Engine::Widgets::WidgetBase</a></li>
+<li>drawIndirectFirstInstance&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a8ceb7c5bd2d4c360c01365490032649a">VkPhysicalDeviceFeatures</a></li>
+<li>driverVersion&#160;:&#160;<a class="el" href="struct_vk_physical_device_properties.html#ae70263a446763019a29137a648e79d67">VkPhysicalDeviceProperties</a></li>
+<li>dstAccessMask&#160;:&#160;<a class="el" href="struct_vk_buffer_memory_barrier.html#a48412ca586719e5a2bc0bcc6cd2772b6">VkBufferMemoryBarrier</a>, <a class="el" href="struct_vk_image_memory_barrier.html#a214f2b212d554249fcee99c49adf8084">VkImageMemoryBarrier</a>, <a class="el" href="struct_vk_memory_barrier.html#a71860149fad2b072df45c012e3cb208f">VkMemoryBarrier</a>, <a class="el" href="struct_vk_subpass_dependency.html#a01dfa39a4157ec8750ddb2397ba44c17">VkSubpassDependency</a></li>
+<li>dstAlphaBlendFactor&#160;:&#160;<a class="el" href="struct_vk_pipeline_color_blend_attachment_state.html#ac9484c233eb05b4913138f587b435d7a">VkPipelineColorBlendAttachmentState</a></li>
+<li>dstArrayElement&#160;:&#160;<a class="el" href="struct_vk_copy_descriptor_set.html#aa66c5783afa2bc5123243d0fb405a995">VkCopyDescriptorSet</a>, <a class="el" href="struct_vk_write_descriptor_set.html#a321c1fa5e66bf19f06264226013b951d">VkWriteDescriptorSet</a></li>
+<li>dstBinding&#160;:&#160;<a class="el" href="struct_vk_copy_descriptor_set.html#ac55585412078474d89032ad75731752b">VkCopyDescriptorSet</a>, <a class="el" href="struct_vk_write_descriptor_set.html#aeee72fa6913f6778c78f8e9299d9b008">VkWriteDescriptorSet</a></li>
+<li>dstColorBlendFactor&#160;:&#160;<a class="el" href="struct_vk_pipeline_color_blend_attachment_state.html#aa0d8bf142dc8968038b51a86303d7652">VkPipelineColorBlendAttachmentState</a></li>
+<li>dstOffset&#160;:&#160;<a class="el" href="struct_vk_buffer_copy.html#a7c9c74fb90218b019bb8a44a96de018b">VkBufferCopy</a>, <a class="el" href="struct_vk_image_copy.html#ab24e499569d5f5bccd4cdf2db2c2ac12">VkImageCopy</a>, <a class="el" href="struct_vk_image_resolve.html#aa39ef43c2fa64588f6c1382df887bafb">VkImageResolve</a></li>
+<li>dstOffsets&#160;:&#160;<a class="el" href="struct_vk_image_blit.html#ac64e48d3721c387846fee5163ffae465">VkImageBlit</a></li>
+<li>dstQueueFamilyIndex&#160;:&#160;<a class="el" href="struct_vk_buffer_memory_barrier.html#ad5afe87e84fbaa7ed636ee216b51c2c2">VkBufferMemoryBarrier</a>, <a class="el" href="struct_vk_image_memory_barrier.html#a76ef325d24e3ffba9d3299e3a341d72c">VkImageMemoryBarrier</a></li>
+<li>dstSet&#160;:&#160;<a class="el" href="struct_vk_copy_descriptor_set.html#a064349c3c0a17a45ed59a64032560cee">VkCopyDescriptorSet</a>, <a class="el" href="struct_vk_write_descriptor_set.html#a743919c1471d0bd0a7e1a21b55be4ff9">VkWriteDescriptorSet</a></li>
+<li>dstStageMask&#160;:&#160;<a class="el" href="struct_vk_subpass_dependency.html#afd65cc2fe8c02fe642856e8f5b36bef1">VkSubpassDependency</a></li>
+<li>dstSubpass&#160;:&#160;<a class="el" href="struct_vk_subpass_dependency.html#a835d6b8272d9688101d443a49eb840f8">VkSubpassDependency</a></li>
+<li>dstSubresource&#160;:&#160;<a class="el" href="struct_vk_image_blit.html#ae2711fcee93b06da8131e8f68ab28a90">VkImageBlit</a>, <a class="el" href="struct_vk_image_copy.html#ab0eae0bde779e2ec807e4709321bca68">VkImageCopy</a>, <a class="el" href="struct_vk_image_resolve.html#a43adf83684db4dc768fbe4fd82a76fdf">VkImageResolve</a></li>
+<li>dualSrcBlend&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#aa10e398ea2f82e8a6d4d9e874d389fcd">VkPhysicalDeviceFeatures</a></li>
+<li>dynamicStateCount&#160;:&#160;<a class="el" href="struct_vk_pipeline_dynamic_state_create_info.html#a85f5196fa977a127222d2ce5015cf0b9">VkPipelineDynamicStateCreateInfo</a></li>
+<li>dynamicVariableNames&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_constant_config.html#afe974af15188bed2508e347443e38333">Engine::NodeGraph::ConstantConfig</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html#ae904b9e1d3441d5ea60a98d6d319c6d9">Engine::NodeGraph::DefaultConfig</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="functions_c.html" class="btn btn-neutral float-left" title="Class Members" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions_e.html" class="btn btn-neutral float-right" title="Class Members" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

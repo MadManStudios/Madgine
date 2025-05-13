@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: CodeGen::CppFile Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: CodeGen::CppFile Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_code_gen_1_1_cpp_file.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cppfile-struct-reference">
+<h1>CppFile Struct Reference<a class="headerlink" href="#cppfile-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: CodeGen::CppFile Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_code_gen.html">CodeGen</a></li><li class="navelem"><a class="el" href="struct_code_gen_1_1_cpp_file.html">CppFile</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_code_gen_1_1_cpp_file-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">CodeGen::CppFile Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;codegen_cpp.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for CodeGen::CppFile:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_code_gen_1_1_cpp_file__inherit__graph.svg" width="138" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a85e5783a088ccf5ef4ebd4aa6b1c87a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a85e5783a088ccf5ef4ebd4aa6b1c87a6">CppFile</a> ()</td></tr>
+<tr class="separator:a85e5783a088ccf5ef4ebd4aa6b1c87a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa780726f2f000b4cf861c5527d2e07a9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#aa780726f2f000b4cf861c5527d2e07a9">CppFile</a> (const <a class="el" href="struct_code_gen_1_1_cpp_file.html">CppFile</a> &amp;)=delete</td></tr>
+<tr class="separator:aa780726f2f000b4cf861c5527d2e07a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab33420a9b01f1203736f5aa0eba857d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#ab33420a9b01f1203736f5aa0eba857d2">beginNamespace</a> (std::string_view ns)</td></tr>
+<tr class="separator:ab33420a9b01f1203736f5aa0eba857d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53b883b393f193f965832b6e1bc00834"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a53b883b393f193f965832b6e1bc00834">endNamespace</a> ()</td></tr>
+<tr class="separator:a53b883b393f193f965832b6e1bc00834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21020061edaae81f0c0e255bbaace1b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a21020061edaae81f0c0e255bbaace1b4">generate</a> (std::ostream &amp;stream)</td></tr>
+<tr class="separator:a21020061edaae81f0c0e255bbaace1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cbd1d0a993bbfe432331eab55a46528"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a9cbd1d0a993bbfe432331eab55a46528">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a> &amp;op)</td></tr>
+<tr class="separator:a9cbd1d0a993bbfe432331eab55a46528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbc07a7b2f70e7b91fbbd01a0e5bc1b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#acbc07a7b2f70e7b91fbbd01a0e5bc1b4">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_assignment.html">Assignment</a> &amp;assign)</td></tr>
+<tr class="separator:acbc07a7b2f70e7b91fbbd01a0e5bc1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb5e55e62cf2cc251e255c22d3bb6760"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#adb5e55e62cf2cc251e255c22d3bb6760">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_comment.html">Comment</a> &amp;c)</td></tr>
+<tr class="separator:adb5e55e62cf2cc251e255c22d3bb6760"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e3f1bf1a1fc74359e9388f4bee8618"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a09e3f1bf1a1fc74359e9388f4bee8618">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a> &amp;c)</td></tr>
+<tr class="separator:a09e3f1bf1a1fc74359e9388f4bee8618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac590a9a418cf3e8c89facb040cc5b056"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#ac590a9a418cf3e8c89facb040cc5b056">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_constructor.html">Constructor</a> &amp;con)</td></tr>
+<tr class="separator:ac590a9a418cf3e8c89facb040cc5b056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59891073e73ede402485a91ce8693275"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a59891073e73ede402485a91ce8693275">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CustomCodeBlock</a> &amp;block)</td></tr>
+<tr class="separator:a59891073e73ede402485a91ce8693275"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab515546c4262ba92799104bf5b2fb8ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#ab515546c4262ba92799104bf5b2fb8ea">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_for_each.html">ForEach</a> &amp;f)</td></tr>
+<tr class="separator:ab515546c4262ba92799104bf5b2fb8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30e075330a03768b9d29b557d457d5ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a30e075330a03768b9d29b557d457d5ee">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_member_access.html">MemberAccess</a> &amp;access)</td></tr>
+<tr class="separator:a30e075330a03768b9d29b557d457d5ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24537aedeedda98be8a0137310a31e62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a24537aedeedda98be8a0137310a31e62">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_namespace.html">Namespace</a> &amp;ns)</td></tr>
+<tr class="separator:a24537aedeedda98be8a0137310a31e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb2acc275d59a6e5967e76311bc30a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a0cb2acc275d59a6e5967e76311bc30a7">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_return.html">Return</a> &amp;ret)</td></tr>
+<tr class="separator:a0cb2acc275d59a6e5967e76311bc30a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8991ef7da4f5f51a9ccef5dd0500c95d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a8991ef7da4f5f51a9ccef5dd0500c95d">generate</a> (std::ostream &amp;stream, const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;s)</td></tr>
+<tr class="separator:a8991ef7da4f5f51a9ccef5dd0500c95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88dd9c51138ef5db6cf78b581768fd27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a88dd9c51138ef5db6cf78b581768fd27">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_type.html">Type</a> &amp;t)</td></tr>
+<tr class="separator:a88dd9c51138ef5db6cf78b581768fd27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affcbad329e1a7ad476cc613a353171f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#affcbad329e1a7ad476cc613a353171f9">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_variable_access.html">VariableAccess</a> &amp;access)</td></tr>
+<tr class="separator:affcbad329e1a7ad476cc613a353171f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad973b2acd62ee86d8a841eafb624c489"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#ad973b2acd62ee86d8a841eafb624c489">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_variable_definition.html">VariableDefinition</a> &amp;def)</td></tr>
+<tr class="separator:ad973b2acd62ee86d8a841eafb624c489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a538be90e777244d51961a25fcedd53a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a538be90e777244d51961a25fcedd53a4">include</a> (size_t level, std::string_view file)</td></tr>
+<tr class="separator:a538be90e777244d51961a25fcedd53a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9b3f25a0556994d0eabd859cf1b6326"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_code_gen_1_1_cpp_file.html">CppFile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#ad9b3f25a0556994d0eabd859cf1b6326">operator=</a> (const <a class="el" href="struct_code_gen_1_1_cpp_file.html">CppFile</a> &amp;)=delete</td></tr>
+<tr class="separator:ad9b3f25a0556994d0eabd859cf1b6326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b894f248674ad4660c7cdf66ffca4b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_cpp_file.html#a92b894f248674ad4660c7cdf66ffca4b">statement</a> (<a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> statement) override</td></tr>
+<tr class="separator:a92b894f248674ad4660c7cdf66ffca4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_code_gen_1_1_file"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_code_gen_1_1_file')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_code_gen_1_1_file.html">CodeGen::File</a></td></tr>
+<tr class="memitem:a48fa6cb771946bba6a79f0698fa32654 inherit pub_methods_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#a48fa6cb771946bba6a79f0698fa32654">addCustomCodeBlock</a> (std::string code)</td></tr>
+<tr class="separator:a48fa6cb771946bba6a79f0698fa32654 inherit pub_methods_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24c940cb3da97d56eb76f710252a2360 inherit pub_methods_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#a24c940cb3da97d56eb76f710252a2360">beginCondition</a> (std::string_view cond)</td></tr>
+<tr class="separator:a24c940cb3da97d56eb76f710252a2360 inherit pub_methods_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4c374020c3f5e2e20b148348192657c inherit pub_methods_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#ac4c374020c3f5e2e20b148348192657c">closeCStyleGuard</a> (std::ostream &amp;stream, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> wasOpened) const</td></tr>
+<tr class="separator:ac4c374020c3f5e2e20b148348192657c inherit pub_methods_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8916e51d890084ec25d6254657cd39e9 inherit pub_methods_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#a8916e51d890084ec25d6254657cd39e9">endCondition</a> (std::string_view cond)</td></tr>
+<tr class="separator:a8916e51d890084ec25d6254657cd39e9 inherit pub_methods_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae54fbc90a2f6238331abbdcc5d4a1cc6 inherit pub_methods_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#ae54fbc90a2f6238331abbdcc5d4a1cc6">openCStyleGuard</a> (std::ostream &amp;stream, const <a class="el" href="struct_engine_1_1_tiny_vector.html">Engine::TinyVector</a>&lt; <a class="el" href="struct_engine_1_1_bit_array.html">Engine::BitArray</a>&lt; 62 &gt; &gt; &amp;conditionals) const</td></tr>
+<tr class="separator:ae54fbc90a2f6238331abbdcc5d4a1cc6 inherit pub_methods_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a588517b80c59995468e0e064c1ef183f inherit pub_methods_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_code_gen_1_1_file_1_1_custom_code_builder.html">CustomCodeBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#a588517b80c59995468e0e064c1ef183f">operator&lt;&lt;</a> (std::string_view code)</td></tr>
+<tr class="separator:a588517b80c59995468e0e064c1ef183f inherit pub_methods_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4bec1d9212f19df9020341e813fbdfe inherit pub_methods_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#ac4bec1d9212f19df9020341e813fbdfe">statement</a> (<a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> statement)=0</td></tr>
+<tr class="separator:ac4bec1d9212f19df9020341e813fbdfe inherit pub_methods_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_struct_code_gen_1_1_file"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_code_gen_1_1_file')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_code_gen_1_1_file.html">CodeGen::File</a></td></tr>
+<tr class="memitem:a17d33cb23b75ff3afa30ef31434c9f25 inherit pub_attribs_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_bit_array.html">Engine::BitArray</a>&lt; 62 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#a17d33cb23b75ff3afa30ef31434c9f25">mConditionalsBitMask</a></td></tr>
+<tr class="separator:a17d33cb23b75ff3afa30ef31434c9f25 inherit pub_attribs_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a545826a7e65d220828c370b578f1244d inherit pub_attribs_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top">std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#a545826a7e65d220828c370b578f1244d">mConditionalsStack</a></td></tr>
+<tr class="separator:a545826a7e65d220828c370b578f1244d inherit pub_attribs_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa28c56c565027fc1ed2803aab8f444c1 inherit pub_attribs_struct_code_gen_1_1_file"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1_file.html#aa28c56c565027fc1ed2803aab8f444c1">mConditionalTokenList</a></td></tr>
+<tr class="separator:aa28c56c565027fc1ed2803aab8f444c1 inherit pub_attribs_struct_code_gen_1_1_file"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a85e5783a088ccf5ef4ebd4aa6b1c87a6" name="a85e5783a088ccf5ef4ebd4aa6b1c87a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85e5783a088ccf5ef4ebd4aa6b1c87a6">&#9670;&#160;</a></span>CppFile() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CodeGen::CppFile::CppFile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa780726f2f000b4cf861c5527d2e07a9" name="aa780726f2f000b4cf861c5527d2e07a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa780726f2f000b4cf861c5527d2e07a9">&#9670;&#160;</a></span>CppFile() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CodeGen::CppFile::CppFile </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_cpp_file.html">CppFile</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad9b3f25a0556994d0eabd859cf1b6326" name="ad9b3f25a0556994d0eabd859cf1b6326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9b3f25a0556994d0eabd859cf1b6326">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_code_gen_1_1_cpp_file.html">CppFile</a> &amp; CodeGen::CppFile::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_cpp_file.html">CppFile</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a538be90e777244d51961a25fcedd53a4" name="a538be90e777244d51961a25fcedd53a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a538be90e777244d51961a25fcedd53a4">&#9670;&#160;</a></span>include()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::include </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab33420a9b01f1203736f5aa0eba857d2" name="ab33420a9b01f1203736f5aa0eba857d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab33420a9b01f1203736f5aa0eba857d2">&#9670;&#160;</a></span>beginNamespace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::beginNamespace </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>ns</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53b883b393f193f965832b6e1bc00834" name="a53b883b393f193f965832b6e1bc00834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53b883b393f193f965832b6e1bc00834">&#9670;&#160;</a></span>endNamespace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::endNamespace </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a92b894f248674ad4660c7cdf66ffca4b" name="a92b894f248674ad4660c7cdf66ffca4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b894f248674ad4660c7cdf66ffca4b">&#9670;&#160;</a></span>statement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::statement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a>&#160;</td>
+          <td class="paramname"><em>statement</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_code_gen_1_1_file.html#ac4bec1d9212f19df9020341e813fbdfe">CodeGen::File</a>.</p>
+
+</div>
+</div>
+<a id="a21020061edaae81f0c0e255bbaace1b4" name="a21020061edaae81f0c0e255bbaace1b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21020061edaae81f0c0e255bbaace1b4">&#9670;&#160;</a></span>generate() <span class="overload">[1/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24537aedeedda98be8a0137310a31e62" name="a24537aedeedda98be8a0137310a31e62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24537aedeedda98be8a0137310a31e62">&#9670;&#160;</a></span>generate() <span class="overload">[2/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_namespace.html">Namespace</a> &amp;&#160;</td>
+          <td class="paramname"><em>ns</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59891073e73ede402485a91ce8693275" name="a59891073e73ede402485a91ce8693275"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59891073e73ede402485a91ce8693275">&#9670;&#160;</a></span>generate() <span class="overload">[3/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CustomCodeBlock</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="affcbad329e1a7ad476cc613a353171f9" name="affcbad329e1a7ad476cc613a353171f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affcbad329e1a7ad476cc613a353171f9">&#9670;&#160;</a></span>generate() <span class="overload">[4/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_variable_access.html">VariableAccess</a> &amp;&#160;</td>
+          <td class="paramname"><em>access</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad973b2acd62ee86d8a841eafb624c489" name="ad973b2acd62ee86d8a841eafb624c489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad973b2acd62ee86d8a841eafb624c489">&#9670;&#160;</a></span>generate() <span class="overload">[5/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_variable_definition.html">VariableDefinition</a> &amp;&#160;</td>
+          <td class="paramname"><em>def</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30e075330a03768b9d29b557d457d5ee" name="a30e075330a03768b9d29b557d457d5ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30e075330a03768b9d29b557d457d5ee">&#9670;&#160;</a></span>generate() <span class="overload">[6/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_member_access.html">MemberAccess</a> &amp;&#160;</td>
+          <td class="paramname"><em>access</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0cb2acc275d59a6e5967e76311bc30a7" name="a0cb2acc275d59a6e5967e76311bc30a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cb2acc275d59a6e5967e76311bc30a7">&#9670;&#160;</a></span>generate() <span class="overload">[7/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_return.html">Return</a> &amp;&#160;</td>
+          <td class="paramname"><em>ret</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acbc07a7b2f70e7b91fbbd01a0e5bc1b4" name="acbc07a7b2f70e7b91fbbd01a0e5bc1b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbc07a7b2f70e7b91fbbd01a0e5bc1b4">&#9670;&#160;</a></span>generate() <span class="overload">[8/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_assignment.html">Assignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>assign</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cbd1d0a993bbfe432331eab55a46528" name="a9cbd1d0a993bbfe432331eab55a46528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cbd1d0a993bbfe432331eab55a46528">&#9670;&#160;</a></span>generate() <span class="overload">[9/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a> &amp;&#160;</td>
+          <td class="paramname"><em>op</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac590a9a418cf3e8c89facb040cc5b056" name="ac590a9a418cf3e8c89facb040cc5b056"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac590a9a418cf3e8c89facb040cc5b056">&#9670;&#160;</a></span>generate() <span class="overload">[10/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_constructor.html">Constructor</a> &amp;&#160;</td>
+          <td class="paramname"><em>con</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a09e3f1bf1a1fc74359e9388f4bee8618" name="a09e3f1bf1a1fc74359e9388f4bee8618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09e3f1bf1a1fc74359e9388f4bee8618">&#9670;&#160;</a></span>generate() <span class="overload">[11/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a> &amp;&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb5e55e62cf2cc251e255c22d3bb6760" name="adb5e55e62cf2cc251e255c22d3bb6760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb5e55e62cf2cc251e255c22d3bb6760">&#9670;&#160;</a></span>generate() <span class="overload">[12/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_comment.html">Comment</a> &amp;&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab515546c4262ba92799104bf5b2fb8ea" name="ab515546c4262ba92799104bf5b2fb8ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab515546c4262ba92799104bf5b2fb8ea">&#9670;&#160;</a></span>generate() <span class="overload">[13/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_for_each.html">ForEach</a> &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8991ef7da4f5f51a9ccef5dd0500c95d" name="a8991ef7da4f5f51a9ccef5dd0500c95d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8991ef7da4f5f51a9ccef5dd0500c95d">&#9670;&#160;</a></span>generate() <span class="overload">[14/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88dd9c51138ef5db6cf78b581768fd27" name="a88dd9c51138ef5db6cf78b581768fd27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88dd9c51138ef5db6cf78b581768fd27">&#9670;&#160;</a></span>generate() <span class="overload">[15/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> CodeGen::CppFile::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_type.html">Type</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Madgine/codegen/<a class="el" href="codegen__cpp_8h.html">codegen_cpp.h</a></li>
+<li>src/Madgine/codegen/<a class="el" href="codegen__cpp_8cpp.html">codegen_cpp.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

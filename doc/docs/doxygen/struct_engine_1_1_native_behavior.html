@@ -1,0 +1,914 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::NativeBehavior&amp;lt; T, Factory, Arguments &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::NativeBehavior&amp;lt; T, Factory, Arguments &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_native_behavior.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nativebehavior-lt-t-factory-arguments-gt-struct-template-reference">
+<h1>NativeBehavior&amp;lt; T, Factory, Arguments &amp;gt; Struct Template Reference<a class="headerlink" href="#nativebehavior-lt-t-factory-arguments-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::NativeBehavior&lt; T, Factory, Arguments &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_native_behavior.html">NativeBehavior</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="struct_engine_1_1_native_behavior-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::NativeBehavior&lt; T, Factory, Arguments &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;nativebehaviorcollector.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::NativeBehavior&lt; T, Factory, Arguments &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_native_behavior__inherit__graph.svg" width="188" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8d33d1a00018f440cfe2bb05cc9cd7be"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a8d33d1a00018f440cfe2bb05cc9cd7be">argument_types</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; Arguments... &gt;</td></tr>
+<tr class="separator:a8d33d1a00018f440cfe2bb05cc9cd7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4f0bb52cc3957375b652ea537641173"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#ab4f0bb52cc3957375b652ea537641173">parameter_argument_names</a> = typename parameter_arguments::template value_transform&lt; <a class="el" href="struct_engine_1_1get__name.html">get_name</a> &gt;</td></tr>
+<tr class="separator:ab4f0bb52cc3957375b652ea537641173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8878cdc15d6355483e8252473eda709"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#ad8878cdc15d6355483e8252473eda709">parameter_argument_tuple</a> = typename parameter_arguments::template transform&lt; <a class="el" href="namespace_engine.html#a1434e3a28a28f8bbb38570ca92d4e6d5">get_type_t</a> &gt;::template instantiate&lt; std::tuple &gt;</td></tr>
+<tr class="separator:ad8878cdc15d6355483e8252473eda709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a7d77e1d77ac30dd697fba136dbe4c7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a8a7d77e1d77ac30dd697fba136dbe4c7">parameter_arguments</a> = typename argument_types::template filter&lt; <a class="el" href="namespace_engine.html#aca5086c70da2bed0c54c5562d62aacc2">is_parameter</a> &gt;</td></tr>
+<tr class="separator:a8a7d77e1d77ac30dd697fba136dbe4c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52fafbc15002b21c71a662504e8af7d3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a52fafbc15002b21c71a662504e8af7d3">Sender</a> = decltype(<a class="el" href="struct_engine_1_1_native_behavior.html#a5206d88f0979d6d05b26a08796b51b08">buildSender</a>(std::declval&lt; <a class="el" href="struct_engine_1_1_native_behavior.html#ad8878cdc15d6355483e8252473eda709">parameter_argument_tuple</a> &gt;(), std::declval&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt; &gt;()))</td></tr>
+<tr class="separator:a52fafbc15002b21c71a662504e8af7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe40de46cb5018d5324b45303afa663"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#adbe40de46cb5018d5324b45303afa663">subbehavior_arguments</a> = typename argument_types::template filter&lt; <a class="el" href="namespace_engine.html#ab544f452ecc4c8f132617b57e6efd79b">is_sub_behavior</a> &gt;</td></tr>
+<tr class="separator:adbe40de46cb5018d5324b45303afa663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9092713a48cfad7ea9c0a8425232cf"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#adb9092713a48cfad7ea9c0a8425232cf">value_arguments</a> = typename argument_types::template filter&lt; <a class="el" href="namespace_engine.html#ac9d58cbcce041c5bf70e73d4806bdb2f">is_value</a> &gt;</td></tr>
+<tr class="separator:adb9092713a48cfad7ea9c0a8425232cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a10706983ee109399858e5b8fe8770ba4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a10706983ee109399858e5b8fe8770ba4">NativeBehavior</a> (std::string_view <a class="el" href="struct_engine_1_1_native_behavior.html#a30e1f6c1eae22c2aea5900adc30c2408">name</a>)</td></tr>
+<tr class="separator:a10706983ee109399858e5b8fe8770ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad67eb525bc82a7923acc190fdf732d7f"><td class="memItemLeft" align="right" valign="top">std::span&lt; const <a class="el" href="struct_engine_1_1_binding_descriptor.html">BindingDescriptor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#ad67eb525bc82a7923acc190fdf732d7f">bindings</a> () const override</td></tr>
+<tr class="separator:ad67eb525bc82a7923acc190fdf732d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a859ba21a5d42723356294b693525e1a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a859ba21a5d42723356294b693525e1a4">create</a> (const <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> &amp;args, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt; behaviors) const override</td></tr>
+<tr class="separator:a859ba21a5d42723356294b693525e1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4ca101cf0712b60199f235bd72b5238"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#ac4ca101cf0712b60199f235bd72b5238">createParameters</a> () const override</td></tr>
+<tr class="separator:ac4ca101cf0712b60199f235bd72b5238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30e1f6c1eae22c2aea5900adc30c2408"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a30e1f6c1eae22c2aea5900adc30c2408">name</a> () const override</td></tr>
+<tr class="separator:a30e1f6c1eae22c2aea5900adc30c2408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f006cc7491ace799fd07f0be74e03c"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a81f006cc7491ace799fd07f0be74e03c">parameterTypes</a> () const override</td></tr>
+<tr class="separator:a81f006cc7491ace799fd07f0be74e03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f31155333f66210d934a800245d6630"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a9f31155333f66210d934a800245d6630">resultTypes</a> () const override</td></tr>
+<tr class="separator:a9f31155333f66210d934a800245d6630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a974890aa96150ae3b7c86723da931e05"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a974890aa96150ae3b7c86723da931e05">subBehaviorCount</a> () const override</td></tr>
+<tr class="separator:a974890aa96150ae3b7c86723da931e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a38c42282e4fcf196a02b65b637888e92"><td class="memTemplParams" colspan="2">template&lt;uint32_t I&gt; </td></tr>
+<tr class="memitem:a38c42282e4fcf196a02b65b637888e92"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a38c42282e4fcf196a02b65b637888e92">buildArgs</a> (const std::tuple&lt;&gt; &amp;parameters, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt; args, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt; behaviors)</td></tr>
+<tr class="separator:a38c42282e4fcf196a02b65b637888e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4b758c70c271e7e0e363c80d9ed223c"><td class="memTemplParams" colspan="2">template&lt;uint32_t I, typename... Vs, typename U , typename... Us&gt; </td></tr>
+<tr class="memitem:ac4b758c70c271e7e0e363c80d9ed223c"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#ac4b758c70c271e7e0e363c80d9ed223c">buildArgs</a> (std::tuple&lt; Vs... &gt; &amp;&amp;parameters, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; U, Us... &gt; args, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt; behaviors)</td></tr>
+<tr class="separator:ac4b758c70c271e7e0e363c80d9ed223c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5206d88f0979d6d05b26a08796b51b08"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a5206d88f0979d6d05b26a08796b51b08">buildSender</a> (<a class="el" href="struct_engine_1_1_native_behavior.html#ad8878cdc15d6355483e8252473eda709">parameter_argument_tuple</a> &amp;&amp;parameters, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt; behaviors)</td></tr>
+<tr class="separator:a5206d88f0979d6d05b26a08796b51b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ac5db16dab65896aad8c9b738b466c7aa"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#ac5db16dab65896aad8c9b738b466c7aa">mName</a></td></tr>
+<tr class="separator:ac5db16dab65896aad8c9b738b466c7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ac8f83b9438543123d026aa52ff47b9a2"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#ac8f83b9438543123d026aa52ff47b9a2">sBindings</a></td></tr>
+<tr class="separator:ac8f83b9438543123d026aa52ff47b9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87321c0b3e2d38483be783f015bcf35f"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#a87321c0b3e2d38483be783f015bcf35f">sParameterTypes</a></td></tr>
+<tr class="separator:a87321c0b3e2d38483be783f015bcf35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af57c48f8402450ae4339911b2fd3f03c"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_behavior.html#af57c48f8402450ae4339911b2fd3f03c">sResultTypes</a></td></tr>
+<tr class="separator:af57c48f8402450ae4339911b2fd3f03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a8d33d1a00018f440cfe2bb05cc9cd7be" name="a8d33d1a00018f440cfe2bb05cc9cd7be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d33d1a00018f440cfe2bb05cc9cd7be">&#9670;&#160;</a></span>argument_types</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::argument_types =  <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;Arguments...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a7d77e1d77ac30dd697fba136dbe4c7" name="a8a7d77e1d77ac30dd697fba136dbe4c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a7d77e1d77ac30dd697fba136dbe4c7">&#9670;&#160;</a></span>parameter_arguments</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameter_arguments =  typename argument_types::template filter&lt;<a class="el" href="namespace_engine.html#aca5086c70da2bed0c54c5562d62aacc2">is_parameter</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adbe40de46cb5018d5324b45303afa663" name="adbe40de46cb5018d5324b45303afa663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe40de46cb5018d5324b45303afa663">&#9670;&#160;</a></span>subbehavior_arguments</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::subbehavior_arguments =  typename argument_types::template filter&lt;<a class="el" href="namespace_engine.html#ab544f452ecc4c8f132617b57e6efd79b">is_sub_behavior</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb9092713a48cfad7ea9c0a8425232cf" name="adb9092713a48cfad7ea9c0a8425232cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9092713a48cfad7ea9c0a8425232cf">&#9670;&#160;</a></span>value_arguments</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::value_arguments =  typename argument_types::template filter&lt;<a class="el" href="namespace_engine.html#ac9d58cbcce041c5bf70e73d4806bdb2f">is_value</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8878cdc15d6355483e8252473eda709" name="ad8878cdc15d6355483e8252473eda709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8878cdc15d6355483e8252473eda709">&#9670;&#160;</a></span>parameter_argument_tuple</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameter_argument_tuple =  typename parameter_arguments::template transform&lt;<a class="el" href="namespace_engine.html#a1434e3a28a28f8bbb38570ca92d4e6d5">get_type_t</a>&gt;::template instantiate&lt;std::tuple&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab4f0bb52cc3957375b652ea537641173" name="ab4f0bb52cc3957375b652ea537641173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4f0bb52cc3957375b652ea537641173">&#9670;&#160;</a></span>parameter_argument_names</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameter_argument_names =  typename parameter_arguments::template value_transform&lt;<a class="el" href="struct_engine_1_1get__name.html">get_name</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52fafbc15002b21c71a662504e8af7d3" name="a52fafbc15002b21c71a662504e8af7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52fafbc15002b21c71a662504e8af7d3">&#9670;&#160;</a></span>Sender</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::Sender =  decltype(<a class="el" href="struct_engine_1_1_native_behavior.html#a5206d88f0979d6d05b26a08796b51b08">buildSender</a>(std::declval&lt;<a class="el" href="struct_engine_1_1_native_behavior.html#ad8878cdc15d6355483e8252473eda709">parameter_argument_tuple</a>&gt;(), std::declval&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_behavior.html">Behavior</a>&gt; &gt;()))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a10706983ee109399858e5b8fe8770ba4" name="a10706983ee109399858e5b8fe8770ba4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10706983ee109399858e5b8fe8770ba4">&#9670;&#160;</a></span>NativeBehavior()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::NativeBehavior </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a38c42282e4fcf196a02b65b637888e92" name="a38c42282e4fcf196a02b65b637888e92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38c42282e4fcf196a02b65b637888e92">&#9670;&#160;</a></span>buildArgs() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<div class="memtemplate">
+template&lt;uint32_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::buildArgs </td>
+          <td>(</td>
+          <td class="paramtype">const std::tuple&lt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt;&#160;</td>
+          <td class="paramname"><em>behaviors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac4b758c70c271e7e0e363c80d9ed223c" name="ac4b758c70c271e7e0e363c80d9ed223c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4b758c70c271e7e0e363c80d9ed223c">&#9670;&#160;</a></span>buildArgs() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<div class="memtemplate">
+template&lt;uint32_t I, typename... Vs, typename U , typename... Us&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::buildArgs </td>
+          <td>(</td>
+          <td class="paramtype">std::tuple&lt; Vs... &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; U, Us... &gt;&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt;&#160;</td>
+          <td class="paramname"><em>behaviors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5206d88f0979d6d05b26a08796b51b08" name="a5206d88f0979d6d05b26a08796b51b08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5206d88f0979d6d05b26a08796b51b08">&#9670;&#160;</a></span>buildSender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::buildSender </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_native_behavior.html#ad8878cdc15d6355483e8252473eda709">parameter_argument_tuple</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt;&#160;</td>
+          <td class="paramname"><em>behaviors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a859ba21a5d42723356294b693525e1a4" name="a859ba21a5d42723356294b693525e1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a859ba21a5d42723356294b693525e1a4">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::create </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> &amp;&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt;&#160;</td>
+          <td class="paramname"><em>behaviors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac4ca101cf0712b60199f235bd72b5238" name="ac4ca101cf0712b60199f235bd72b5238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4ca101cf0712b60199f235bd72b5238">&#9670;&#160;</a></span>createParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::createParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30e1f6c1eae22c2aea5900adc30c2408" name="a30e1f6c1eae22c2aea5900adc30c2408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30e1f6c1eae22c2aea5900adc30c2408">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a81f006cc7491ace799fd07f0be74e03c" name="a81f006cc7491ace799fd07f0be74e03c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f006cc7491ace799fd07f0be74e03c">&#9670;&#160;</a></span>parameterTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameterTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f31155333f66210d934a800245d6630" name="a9f31155333f66210d934a800245d6630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f31155333f66210d934a800245d6630">&#9670;&#160;</a></span>resultTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::resultTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad67eb525bc82a7923acc190fdf732d7f" name="ad67eb525bc82a7923acc190fdf732d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad67eb525bc82a7923acc190fdf732d7f">&#9670;&#160;</a></span>bindings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::span&lt; const <a class="el" href="struct_engine_1_1_binding_descriptor.html">BindingDescriptor</a> &gt; <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::bindings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a974890aa96150ae3b7c86723da931e05" name="a974890aa96150ae3b7c86723da931e05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a974890aa96150ae3b7c86723da931e05">&#9670;&#160;</a></span>subBehaviorCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::subBehaviorCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a87321c0b3e2d38483be783f015bcf35f" name="a87321c0b3e2d38483be783f015bcf35f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87321c0b3e2d38483be783f015bcf35f">&#9670;&#160;</a></span>sParameterTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::sParameterTypes</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
+<div class="line">        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="conceptstd_1_1same__as.html">std::same_as&lt;parameter_arguments, type_pack&lt;&gt;</a>&gt;) {</div>
+<div class="line">            <span class="keywordflow">return</span> std::span&lt;const ValueTypeDesc&gt; {};</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">            <span class="keywordflow">return</span> []&lt;<span class="keyword">typename</span>... P&gt;(<a class="code hl_struct" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;P...&gt;) {</div>
+<div class="line">                <span class="keywordflow">return</span> std::array&lt;<a class="code hl_struct" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a>, <span class="keyword">sizeof</span>...(P)&gt; {</div>
+<div class="line">                    toValueTypeDesc&lt;P&gt;()...</div>
+<div class="line">                };</div>
+<div class="line">            }(<span class="keyword">typename</span> parameter_arguments::template transform&lt;get_type_t&gt; {});</div>
+<div class="line">        }</div>
+<div class="line">    }()</div>
+<div class="ttc" id="aconceptstd_1_1same__as_html"><div class="ttname"><a href="conceptstd_1_1same__as.html">std::same_as</a></div><div class="ttdef"><b>Definition:</b> concepts.h:13</div></div>
+<div class="ttc" id="astruct_engine_1_1_value_type_desc_html"><div class="ttname"><a href="struct_engine_1_1_value_type_desc.html">Engine::ValueTypeDesc</a></div><div class="ttdef"><b>Definition:</b> valuetype_desc.h:246</div></div>
+<div class="ttc" id="astruct_engine_1_1type__pack_html"><div class="ttname"><a href="struct_engine_1_1type__pack.html">Engine::type_pack</a></div><div class="ttdef"><b>Definition:</b> genericforward.h:18</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af57c48f8402450ae4339911b2fd3f03c" name="af57c48f8402450ae4339911b2fd3f03c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af57c48f8402450ae4339911b2fd3f03c">&#9670;&#160;</a></span>sResultTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::sResultTypes</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
+<div class="line">        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="conceptstd_1_1same__as.html">std::same_as&lt;typename Sender::template value_types&lt;type_pack&gt;</a>, type_pack&lt;&gt;&gt;) {</div>
+<div class="line">            <span class="keywordflow">return</span> std::span&lt;const ValueTypeDesc&gt; {};</div>
+<div class="line">        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="conceptstd_1_1same__as.html">std::same_as&lt;typename Sender::template value_types&lt;type_pack&gt;</a>, <a class="code hl_struct" href="struct_engine_1_1type__pack.html">type_pack&lt;ArgumentList&gt;</a>&gt;) {</div>
+<div class="line">            <span class="keywordflow">return</span> std::span&lt;const ValueTypeDesc&gt; {};</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">            <span class="keywordflow">return</span> []&lt;<span class="keyword">typename</span>... <a class="code hl_enumvalue" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a926c61c0f8bcddd0ee373de639bc65ed">P</a>&gt;(type_pack&lt;<a class="code hl_enumvalue" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a926c61c0f8bcddd0ee373de639bc65ed">P</a>...&gt;) {</div>
+<div class="line">                <span class="keywordflow">return</span> std::array&lt;ValueTypeDesc, <span class="keyword">sizeof</span>...(P)&gt; {</div>
+<div class="line">                    toValueTypeDesc&lt;P&gt;()...</div>
+<div class="line">                };</div>
+<div class="line">            }(<span class="keyword">typename</span> Sender::template value_types&lt;type_pack&gt; {});</div>
+<div class="line">        }</div>
+<div class="line">    }()</div>
+<div class="ttc" id="anamespace_engine_1_1_input_1_1_key_html_ac2138c44352d486427576a0561382001a926c61c0f8bcddd0ee373de639bc65ed"><div class="ttname"><a href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a926c61c0f8bcddd0ee373de639bc65ed">Engine::Input::Key::P</a></div><div class="ttdeci">@ P</div><div class="ttdef"><b>Definition:</b> inputevents.h:61</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac8f83b9438543123d026aa52ff47b9a2" name="ac8f83b9438543123d026aa52ff47b9a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8f83b9438543123d026aa52ff47b9a2">&#9670;&#160;</a></span>sBindings</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::sBindings</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
+<div class="line">        <span class="keywordflow">return</span> std::span&lt;const BindingDescriptor&gt; {};</div>
+<div class="line">    }()</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac5db16dab65896aad8c9b738b466c7aa" name="ac5db16dab65896aad8c9b738b466c7aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5db16dab65896aad8c9b738b466c7aa">&#9670;&#160;</a></span>mName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view <a class="el" href="struct_engine_1_1_native_behavior.html">Engine::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::mName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>plugins/behavior/api/src/Madgine/<a class="el" href="nativebehaviorcollector_8h.html">nativebehaviorcollector.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

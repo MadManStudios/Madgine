@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyAssimp: Python bindings for libassimp &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../../../../../" id="documentation_options" src="../../../../../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../../docs/howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../docs/usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../../docs/doxygen/index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/doxygen/namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/doxygen/concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/doxygen/annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../../docs/doxygen/files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../../docs/doxygen/globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../../tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PyAssimp: Python bindings for libassimp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../../_sources/plugins/resources/api/shared/assimp-5.2.5/port/PyAssimp/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyassimp-python-bindings-for-libassimp">
+<h1>PyAssimp: Python bindings for libassimp<a class="headerlink" href="#pyassimp-python-bindings-for-libassimp" title="Permalink to this heading"></a></h1>
+<p>A simple Python wrapper for Assimp using <code class="docutils literal notranslate"><span class="pre">ctypes</span></code> to access the
+library. Requires Python &gt;= 2.6.</p>
+<p>Python 3 support is mostly here, but not well tested.</p>
+<p>Note that pyassimp is not complete. Many ASSIMP features are missing.</p>
+<section id="usage">
+<h2>USAGE<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<section id="complete-example-3d-viewer">
+<h3>Complete example: 3D viewer<a class="headerlink" href="#complete-example-3d-viewer" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pyassimp</span></code> comes with a simple 3D viewer that shows how to load and
+display a 3D model using a shader-based OpenGL pipeline.</p>
+<figure class="align-default" id="id1">
+<img alt="Screenshot" src="../../../../../../../_images/3d_viewer_screenshot.png" />
+<figcaption>
+<p><span class="caption-text">Screenshot</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To use it, from within <code class="docutils literal notranslate"><span class="pre">/port/PyAssimp</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd scripts
+$ python ./3D-viewer &lt;path to your model&gt;
+</pre></div>
+</div>
+<p>You can use this code as starting point in your applications.</p>
+</section>
+<section id="writing-your-own-code">
+<h3>Writing your own code<a class="headerlink" href="#writing-your-own-code" title="Permalink to this heading"></a></h3>
+<p>To get started with <code class="docutils literal notranslate"><span class="pre">pyassimp</span></code>, examine the simpler <code class="docutils literal notranslate"><span class="pre">sample.py</span></code>
+script in <code class="docutils literal notranslate"><span class="pre">scripts/</span></code>, which illustrates the basic usage. All Assimp
+data structures are wrapped using <code class="docutils literal notranslate"><span class="pre">ctypes</span></code>. All the data+length fields
+in Assimp’s data structures (such as <code class="docutils literal notranslate"><span class="pre">aiMesh::mNumVertices</span></code>,
+<code class="docutils literal notranslate"><span class="pre">aiMesh::mVertices</span></code>) are replaced by simple python lists, so you can
+call <code class="docutils literal notranslate"><span class="pre">len()</span></code> on them to get their respective size and access members
+using <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<p>For example, to load a file named <code class="docutils literal notranslate"><span class="pre">hello.3ds</span></code> and print the first
+vertex of the first mesh, you would do (proper error handling
+substituted by assertions …):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyassimp</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span>
+<span class="k">with</span> <span class="n">load</span><span class="p">(</span><span class="s1">&#39;hello.3ds&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">scene</span><span class="p">:</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">meshes</span><span class="p">)</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">meshes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Another example to list the ‘top nodes’ in a scene:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyassimp</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span>
+<span class="k">with</span> <span class="n">load</span><span class="p">(</span><span class="s1">&#39;hello.3ds&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">scene</span><span class="p">:</span>
+
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">scene</span><span class="o">.</span><span class="n">rootnode</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="install">
+<h2>INSTALL<a class="headerlink" href="#install" title="Permalink to this heading"></a></h2>
+<p>Install <code class="docutils literal notranslate"><span class="pre">pyassimp</span></code> by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py install
+</pre></div>
+</div>
+<p>PyAssimp requires a assimp dynamic library (<code class="docutils literal notranslate"><span class="pre">DLL</span></code> on windows, <code class="docutils literal notranslate"><span class="pre">.so</span></code>
+on linux, <code class="docutils literal notranslate"><span class="pre">.dynlib</span></code> on macOS) in order to work. The default search
+directories are:</p>
+<ul class="simple">
+<li><p>the current directory</p></li>
+<li><p>on linux additionally: <code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code>, <code class="docutils literal notranslate"><span class="pre">/usr/local/lib</span></code>,
+<code class="docutils literal notranslate"><span class="pre">/usr/lib/x86_64-linux-gnu</span></code></p></li>
+</ul>
+<p>To build that library, refer to the Assimp master <code class="docutils literal notranslate"><span class="pre">INSTALL</span></code>
+instructions. To look in more places, edit <code class="docutils literal notranslate"><span class="pre">./pyassimp/helper.py</span></code>.
+There’s an <code class="docutils literal notranslate"><span class="pre">additional_dirs</span></code> list waiting for your entries.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

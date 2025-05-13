@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::FreeListContainer&amp;lt; C, DataTraits &amp;gt;::IteratorImpl&amp;lt; It, _reference, _pointer &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::FreeListContainer&amp;lt; C, DataTraits &amp;gt;::IteratorImpl&amp;lt; It, _reference, _pointer &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_free_list_container_1_1_iterator_impl.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iteratorimpl-lt-it-reference-pointer-gt-struct-template-reference">
+<h1>IteratorImpl&amp;lt; It, _reference, _pointer &amp;gt; Struct Template Reference<a class="headerlink" href="#iteratorimpl-lt-it-reference-pointer-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::FreeListContainer&lt; C, DataTraits &gt;::IteratorImpl&lt; It, _reference, _pointer &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_free_list_container.html">FreeListContainer</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_free_list_container_1_1_iterator_impl-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::FreeListContainer&lt; C, DataTraits &gt;::IteratorImpl&lt; It, _reference, _pointer &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;freelistcontainer.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a15c9e3ab6712beb3bae88ad2a14d402b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">difference_type</a> = ptrdiff_t</td></tr>
+<tr class="separator:a15c9e3ab6712beb3bae88ad2a14d402b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28dbfe115ef2734f363f4a29555ef52b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a28dbfe115ef2734f363f4a29555ef52b">iterator_category</a> = typename It::iterator_category</td></tr>
+<tr class="separator:a28dbfe115ef2734f363f4a29555ef52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa19bce18251384c8197aa0f8082d21d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#aaa19bce18251384c8197aa0f8082d21d">pointer</a> = _pointer</td></tr>
+<tr class="separator:aaa19bce18251384c8197aa0f8082d21d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b40399ae149d9a8eb87cd80035e98b8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a4b40399ae149d9a8eb87cd80035e98b8">reference</a> = _reference</td></tr>
+<tr class="separator:a4b40399ae149d9a8eb87cd80035e98b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6f46a0163da3e9a0095103d3aa3c37"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a8c6f46a0163da3e9a0095103d3aa3c37">value_type</a> = typename C::value_type</td></tr>
+<tr class="separator:a8c6f46a0163da3e9a0095103d3aa3c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a217ccb4673b350adf5057345001de58b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a217ccb4673b350adf5057345001de58b">IteratorImpl</a> ()=default</td></tr>
+<tr class="separator:a217ccb4673b350adf5057345001de58b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a428147c43cd294703e1b7f5d2ecf25de"><td class="memTemplParams" colspan="2">template&lt;typename It2 , typename R2 , typename P2 &gt; </td></tr>
+<tr class="memitem:a428147c43cd294703e1b7f5d2ecf25de"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a428147c43cd294703e1b7f5d2ecf25de">IteratorImpl</a> (const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&lt; It2, R2, P2 &gt; &amp;other)</td></tr>
+<tr class="separator:a428147c43cd294703e1b7f5d2ecf25de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded734cbf8a75c4eb4a2146ee11e82e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#aded734cbf8a75c4eb4a2146ee11e82e1">IteratorImpl</a> (It <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a5bcf1f000f7d145d501a5512d34b68b0">it</a>, const <a class="el" href="struct_engine_1_1_free_list_container.html#a550fabade5618ef68c873a37dacb5964">internal_container_type</a> &amp;cont)</td></tr>
+<tr class="separator:aded734cbf8a75c4eb4a2146ee11e82e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9af858c49232ab314857730eb2866c9"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_free_list_container.html#a550fabade5618ef68c873a37dacb5964">internal_container_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#ae9af858c49232ab314857730eb2866c9">container</a> () const</td></tr>
+<tr class="separator:ae9af858c49232ab314857730eb2866c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bcf1f000f7d145d501a5512d34b68b0"><td class="memItemLeft" align="right" valign="top">const It &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a5bcf1f000f7d145d501a5512d34b68b0">it</a> () const</td></tr>
+<tr class="separator:a5bcf1f000f7d145d501a5512d34b68b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4722c57e7775364a7db978abfb15397"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#ae4722c57e7775364a7db978abfb15397">operator!=</a> (const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp;other) const</td></tr>
+<tr class="separator:ae4722c57e7775364a7db978abfb15397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1b87a67c2802c8da81077c39cd01a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a4b40399ae149d9a8eb87cd80035e98b8">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a8b1b87a67c2802c8da81077c39cd01a1">operator*</a> () const</td></tr>
+<tr class="separator:a8b1b87a67c2802c8da81077c39cd01a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41deff686fe81dc7ea789b72d0b94ebb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a41deff686fe81dc7ea789b72d0b94ebb">operator+</a> (<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">difference_type</a> diff) const</td></tr>
+<tr class="separator:a41deff686fe81dc7ea789b72d0b94ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf62eb8067e86d101d0023cfd383fb2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#abf62eb8067e86d101d0023cfd383fb2f">operator++</a> ()</td></tr>
+<tr class="separator:abf62eb8067e86d101d0023cfd383fb2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a424f3975a49a9a8d8471236652d691cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a424f3975a49a9a8d8471236652d691cc">operator++</a> (int)</td></tr>
+<tr class="separator:a424f3975a49a9a8d8471236652d691cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a585bb81a54f68917f078fb1e7a7677db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a585bb81a54f68917f078fb1e7a7677db">operator+=</a> (<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">difference_type</a> diff)</td></tr>
+<tr class="separator:a585bb81a54f68917f078fb1e7a7677db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43117ca58475d910a6e417db21774762"><td class="memTemplParams" colspan="2">template&lt;typename It2 , typename R2 , typename P2 &gt; </td></tr>
+<tr class="memitem:a43117ca58475d910a6e417db21774762"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">difference_type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a43117ca58475d910a6e417db21774762">operator-</a> (const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&lt; It2, R2, P2 &gt; &amp;other) const</td></tr>
+<tr class="separator:a43117ca58475d910a6e417db21774762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f07f08dfce603c37e20349b6622dbaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a6f07f08dfce603c37e20349b6622dbaa">operator--</a> ()</td></tr>
+<tr class="separator:a6f07f08dfce603c37e20349b6622dbaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c941e6ac56bc119788b0ab3f32ad376"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#aaa19bce18251384c8197aa0f8082d21d">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a6c941e6ac56bc119788b0ab3f32ad376">operator-&gt;</a> () const</td></tr>
+<tr class="separator:a6c941e6ac56bc119788b0ab3f32ad376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4f03be8efff8595e839ac789259c43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a1e4f03be8efff8595e839ac789259c43">operator==</a> (const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp;other) const</td></tr>
+<tr class="separator:a1e4f03be8efff8595e839ac789259c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a518fca042898fd34377c146f5c9463c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a518fca042898fd34377c146f5c9463c4">update</a> ()</td></tr>
+<tr class="separator:a518fca042898fd34377c146f5c9463c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81b4c9a0c143bd00db1d9972cc32ca5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a81b4c9a0c143bd00db1d9972cc32ca5b">updateBack</a> ()</td></tr>
+<tr class="separator:a81b4c9a0c143bd00db1d9972cc32ca5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a2edab4d1e1307f76a3e5213bb19e46ba"><td class="memTemplParams" colspan="2">template&lt;typename It2 , typename R2 , typename P2 &gt; </td></tr>
+<tr class="memitem:a2edab4d1e1307f76a3e5213bb19e46ba"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">IteratorImpl</a></td></tr>
+<tr class="separator:a2edab4d1e1307f76a3e5213bb19e46ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a28dbfe115ef2734f363f4a29555ef52b" name="a28dbfe115ef2734f363f4a29555ef52b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28dbfe115ef2734f363f4a29555ef52b">&#9670;&#160;</a></span>iterator_category</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::iterator_category =  typename It::iterator_category</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c6f46a0163da3e9a0095103d3aa3c37" name="a8c6f46a0163da3e9a0095103d3aa3c37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c6f46a0163da3e9a0095103d3aa3c37">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::value_type =  typename C::value_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15c9e3ab6712beb3bae88ad2a14d402b" name="a15c9e3ab6712beb3bae88ad2a14d402b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15c9e3ab6712beb3bae88ad2a14d402b">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::difference_type =  ptrdiff_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa19bce18251384c8197aa0f8082d21d" name="aaa19bce18251384c8197aa0f8082d21d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa19bce18251384c8197aa0f8082d21d">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::pointer =  _pointer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b40399ae149d9a8eb87cd80035e98b8" name="a4b40399ae149d9a8eb87cd80035e98b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b40399ae149d9a8eb87cd80035e98b8">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::reference =  _reference</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a217ccb4673b350adf5057345001de58b" name="a217ccb4673b350adf5057345001de58b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a217ccb4673b350adf5057345001de58b">&#9670;&#160;</a></span>IteratorImpl() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;::IteratorImpl&lt; It, _reference, _pointer &gt;::IteratorImpl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aded734cbf8a75c4eb4a2146ee11e82e1" name="aded734cbf8a75c4eb4a2146ee11e82e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aded734cbf8a75c4eb4a2146ee11e82e1">&#9670;&#160;</a></span>IteratorImpl() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;::IteratorImpl&lt; It, _reference, _pointer &gt;::IteratorImpl </td>
+          <td>(</td>
+          <td class="paramtype">It&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_free_list_container.html#a550fabade5618ef68c873a37dacb5964">internal_container_type</a> &amp;&#160;</td>
+          <td class="paramname"><em>cont</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a428147c43cd294703e1b7f5d2ecf25de" name="a428147c43cd294703e1b7f5d2ecf25de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a428147c43cd294703e1b7f5d2ecf25de">&#9670;&#160;</a></span>IteratorImpl() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<div class="memtemplate">
+template&lt;typename It2 , typename R2 , typename P2 &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;::IteratorImpl&lt; It, _reference, _pointer &gt;::IteratorImpl </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&lt; It2, R2, P2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8b1b87a67c2802c8da81077c39cd01a1" name="a8b1b87a67c2802c8da81077c39cd01a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b1b87a67c2802c8da81077c39cd01a1">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a4b40399ae149d9a8eb87cd80035e98b8">reference</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c941e6ac56bc119788b0ab3f32ad376" name="a6c941e6ac56bc119788b0ab3f32ad376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c941e6ac56bc119788b0ab3f32ad376">&#9670;&#160;</a></span>operator-&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#aaa19bce18251384c8197aa0f8082d21d">pointer</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43117ca58475d910a6e417db21774762" name="a43117ca58475d910a6e417db21774762"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43117ca58475d910a6e417db21774762">&#9670;&#160;</a></span>operator-()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<div class="memtemplate">
+template&lt;typename It2 , typename R2 , typename P2 &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">difference_type</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&lt; It2, R2, P2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41deff686fe81dc7ea789b72d0b94ebb" name="a41deff686fe81dc7ea789b72d0b94ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41deff686fe81dc7ea789b72d0b94ebb">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">difference_type</a>&#160;</td>
+          <td class="paramname"><em>diff</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a585bb81a54f68917f078fb1e7a7677db" name="a585bb81a54f68917f078fb1e7a7677db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a585bb81a54f68917f078fb1e7a7677db">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp; <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator+= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a15c9e3ab6712beb3bae88ad2a14d402b">difference_type</a>&#160;</td>
+          <td class="paramname"><em>diff</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4722c57e7775364a7db978abfb15397" name="ae4722c57e7775364a7db978abfb15397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4722c57e7775364a7db978abfb15397">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&lt; It, _reference, _pointer &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e4f03be8efff8595e839ac789259c43" name="a1e4f03be8efff8595e839ac789259c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4f03be8efff8595e839ac789259c43">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a>&lt; It, _reference, _pointer &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf62eb8067e86d101d0023cfd383fb2f" name="abf62eb8067e86d101d0023cfd383fb2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf62eb8067e86d101d0023cfd383fb2f">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp; <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a424f3975a49a9a8d8471236652d691cc" name="a424f3975a49a9a8d8471236652d691cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a424f3975a49a9a8d8471236652d691cc">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f07f08dfce603c37e20349b6622dbaa" name="a6f07f08dfce603c37e20349b6622dbaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f07f08dfce603c37e20349b6622dbaa">&#9670;&#160;</a></span>operator--()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a> &amp; <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::operator-- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a518fca042898fd34377c146f5c9463c4" name="a518fca042898fd34377c146f5c9463c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a518fca042898fd34377c146f5c9463c4">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a81b4c9a0c143bd00db1d9972cc32ca5b" name="a81b4c9a0c143bd00db1d9972cc32ca5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81b4c9a0c143bd00db1d9972cc32ca5b">&#9670;&#160;</a></span>updateBack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::updateBack </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5bcf1f000f7d145d501a5512d34b68b0" name="a5bcf1f000f7d145d501a5512d34b68b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bcf1f000f7d145d501a5512d34b68b0">&#9670;&#160;</a></span>it()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const It &amp; <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::it </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9af858c49232ab314857730eb2866c9" name="ae9af858c49232ab314857730eb2866c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9af858c49232ab314857730eb2866c9">&#9670;&#160;</a></span>container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_free_list_container.html#a550fabade5618ef68c873a37dacb5964">internal_container_type</a> &amp; <a class="el" href="struct_engine_1_1_free_list_container.html">Engine::FreeListContainer</a>&lt; C, DataTraits &gt;<a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html#a2edab4d1e1307f76a3e5213bb19e46ba">::IteratorImpl</a>&lt; It, _reference, _pointer &gt;::container </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a2edab4d1e1307f76a3e5213bb19e46ba" name="a2edab4d1e1307f76a3e5213bb19e46ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2edab4d1e1307f76a3e5213bb19e46ba">&#9670;&#160;</a></span>IteratorImpl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename DataTraits  = typename C::value_type&gt; </div>
+<div class="memtemplate">
+template&lt;typename It , typename _reference , typename _pointer &gt; </div>
+<div class="memtemplate">
+template&lt;typename It2 , typename R2 , typename P2 &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_free_list_container_1_1_iterator_impl.html">IteratorImpl</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/container/<a class="el" href="freelistcontainer_8h.html">freelistcontainer.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

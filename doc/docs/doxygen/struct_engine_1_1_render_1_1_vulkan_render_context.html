@@ -1,0 +1,1276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::VulkanRenderContext Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::VulkanRenderContext Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_vulkan_render_context.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vulkanrendercontext-struct-reference">
+<h1>VulkanRenderContext Struct Reference<a class="headerlink" href="#vulkanrendercontext-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::VulkanRenderContext Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_render_1_1_vulkan_render_context-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::VulkanRenderContext Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;vulkanrendercontext.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::VulkanRenderContext:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_vulkan_render_context__inherit__graph.svg" width="206" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae5bacb0d0ba0cb8dc6e38dad89423748"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ae5bacb0d0ba0cb8dc6e38dad89423748">VulkanRenderContext</a> (const <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> &amp;)=delete</td></tr>
+<tr class="separator:ae5bacb0d0ba0cb8dc6e38dad89423748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a719ffa96f5bcf57922752cf573c89fbe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a719ffa96f5bcf57922752cf573c89fbe">VulkanRenderContext</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *queue)</td></tr>
+<tr class="separator:a719ffa96f5bcf57922752cf573c89fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a07be639b4c8214dbe740551d73f621"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a7a07be639b4c8214dbe740551d73f621">~VulkanRenderContext</a> ()</td></tr>
+<tr class="separator:a7a07be639b4c8214dbe740551d73f621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c0e2349460a620b5256b43f5765f37e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a6c0e2349460a620b5256b43f5765f37e">allocateResourceBlock</a> (std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> * &gt; textures)</td></tr>
+<tr class="separator:a6c0e2349460a620b5256b43f5765f37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c8f15e5cb74d263b1d003e2c34b3d2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aa3c8f15e5cb74d263b1d003e2c34b3d2">beginFrame</a> () override</td></tr>
+<tr class="separator:aa3c8f15e5cb74d263b1d003e2c34b3d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb819384b837e00d8594d1c66ae1f0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a7cb819384b837e00d8594d1c66ae1f0a">createPipelineLayout</a> ()</td></tr>
+<tr class="separator:a7cb819384b837e00d8594d1c66ae1f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d7d1c07ce7de1e5c5b72ff862021488"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a4d7d1c07ce7de1e5c5b72ff862021488">createRenderTexture</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;size={ 1, 1 }, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config={}) override</td></tr>
+<tr class="separator:a4d7d1c07ce7de1e5c5b72ff862021488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4921cd5ecd560fa612528cd7f60a55cb"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a4921cd5ecd560fa612528cd7f60a55cb">createRenderWindow</a> (<a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *w, size_t samples) override</td></tr>
+<tr class="separator:a4921cd5ecd560fa612528cd7f60a55cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2eb212aa4cecb689486179ce9762cc7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aa2eb212aa4cecb689486179ce9762cc7">createResourceBlock</a> (std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> * &gt; textures) override</td></tr>
+<tr class="separator:aa2eb212aa4cecb689486179ce9762cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844e50274357767c1f17be80076bde51"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a844e50274357767c1f17be80076bde51">destroyResourceBlock</a> (<a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;block) override</td></tr>
+<tr class="separator:a844e50274357767c1f17be80076bde51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f8420481a6b8377a75c020e551869e7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a7f8420481a6b8377a75c020e551869e7">endFrame</a> () override</td></tr>
+<tr class="separator:a7f8420481a6b8377a75c020e551869e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7a5af552e6f0d83e2020f08ed1c2c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a2e7a5af552e6f0d83e2020f08ed1c2c0">ExecuteCommandList</a> (<a class="el" href="struct_engine_1_1_nulled_ptr.html">NulledPtr</a>&lt; std::remove_pointer_t&lt; <a class="el" href="vulkan_8h.html#ac45cc67c448b7eb97bc0ddc9d4ce2422">VkCommandBuffer</a> &gt; &gt; buffer, std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt; waitSemaphores, std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt; signalSemaphores, std::vector&lt; <a class="el" href="struct_engine_1_1_any.html">Any</a> &gt; attachedResources)</td></tr>
+<tr class="separator:a2e7a5af552e6f0d83e2020f08ed1c2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9cd2431b63c915675d8b9dbd144f6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_command_list.html">VulkanCommandList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a3e9cd2431b63c915675d8b9dbd144f6f">fetchCommandList</a> (std::string_view name, std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt; waitSemaphores={}, std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt; signalSemaphores={})</td></tr>
+<tr class="separator:a3e9cd2431b63c915675d8b9dbd144f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec696004947b5d1242d1766148e993cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aec696004947b5d1242d1766148e993cd">fetchTempDescriptorSet</a> ()</td></tr>
+<tr class="separator:aec696004947b5d1242d1766148e993cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2986a8afb5fe8a45ff6368bd027f0fa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a2986a8afb5fe8a45ff6368bd027f0fa0">freeResourceBlock</a> (<a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a> descriptorSet)</td></tr>
+<tr class="separator:a2986a8afb5fe8a45ff6368bd027f0fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a198c2b8e8bc6280430f279526227ea0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a198c2b8e8bc6280430f279526227ea0f">isFenceComplete</a> (uint64_t fenceValue)</td></tr>
+<tr class="separator:a198c2b8e8bc6280430f279526227ea0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62a0d8126f959d004bea8e73ff56748"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ac62a0d8126f959d004bea8e73ff56748">supportsMultisampling</a> () const override</td></tr>
+<tr class="separator:ac62a0d8126f959d004bea8e73ff56748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc2390484cb544fb07d58b620d9b24d6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#abc2390484cb544fb07d58b620d9b24d6">tempAllocatorMemoryQuota</a> () const</td></tr>
+<tr class="separator:abc2390484cb544fb07d58b620d9b24d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0102d326a5f9d43ce6be23d5394505c7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a0102d326a5f9d43ce6be23d5394505c7">unloadAllResources</a> () override</td></tr>
+<tr class="separator:a0102d326a5f9d43ce6be23d5394505c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8603ce51b6b2d039367a37fc67b29f07"><td class="memItemLeft" align="right" valign="top">static std::pair&lt; std::vector&lt; <a class="el" href="struct_vk_vertex_input_binding_description.html">VkVertexInputBindingDescription</a> &gt;, std::vector&lt; <a class="el" href="struct_vk_vertex_input_attribute_description.html">VkVertexInputAttributeDescription</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a8603ce51b6b2d039367a37fc67b29f07">createVertexLayout</a> (<a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format)</td></tr>
+<tr class="separator:a8603ce51b6b2d039367a37fc67b29f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a801b9847fa82670cfad4982ca110b053"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a801b9847fa82670cfad4982ca110b053">getSingleton</a> ()</td></tr>
+<tr class="separator:a801b9847fa82670cfad4982ca110b053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a5b4d1185f94c2d0c4dc624dfc63c62a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a5b4d1185f94c2d0c4dc624dfc63c62a0">mBufferAllocator</a></td></tr>
+<tr class="separator:a5b4d1185f94c2d0c4dc624dfc63c62a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa6494cbd2bd07ae80d6f4ec8013d0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#abaa6494cbd2bd07ae80d6f4ec8013d0d">mBufferMemoryHeap</a></td></tr>
+<tr class="separator:abaa6494cbd2bd07ae80d6f4ec8013d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d2627a0e9d1ea020820e7d61d702b9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::tuple&lt; uint64_t, <a class="el" href="vulkan_8h.html#ac45cc67c448b7eb97bc0ddc9d4ce2422">VkCommandBuffer</a>, std::vector&lt; <a class="el" href="struct_engine_1_1_any.html">Any</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a79d2627a0e9d1ea020820e7d61d702b9">mBufferPool</a></td></tr>
+<tr class="separator:a79d2627a0e9d1ea020820e7d61d702b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafbc0d9af343a2dc487a32c475decd49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a21ff0682f0f6a2a1be802e8c03aab754">VkCommandPool</a>, &amp;<a class="el" href="vulkan_8h.html#a93569a1cb27e11787362a5c0f37f6940">vkDestroyCommandPool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aafbc0d9af343a2dc487a32c475decd49">mCommandPool</a></td></tr>
+<tr class="separator:aafbc0d9af343a2dc487a32c475decd49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa40306c23d3ab428fb7c1df70319d901"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aa40306c23d3ab428fb7c1df70319d901">mConstantAllocator</a></td></tr>
+<tr class="separator:aa40306c23d3ab428fb7c1df70319d901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55596a08dab1b2523111229dac8e468b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_buffer.html">VulkanBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a55596a08dab1b2523111229dac8e468b">mConstantBuffer</a></td></tr>
+<tr class="separator:a55596a08dab1b2523111229dac8e468b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae116bbe8349435bc1fb124cdf4eefc89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ae116bbe8349435bc1fb124cdf4eefc89">mConstantMemoryHeap</a></td></tr>
+<tr class="separator:ae116bbe8349435bc1fb124cdf4eefc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0dbd8f1b12419bac21b860e8548a444"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ac0dbd8f1b12419bac21b860e8548a444">mDefaultResourceBlockDescriptorSet</a></td></tr>
+<tr class="separator:ac0dbd8f1b12419bac21b860e8548a444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bd784e65868d3c12c463ca302f1adb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a1bd784e65868d3c12c463ca302f1adb0">mDefaultTexture</a></td></tr>
+<tr class="separator:a1bd784e65868d3c12c463ca302f1adb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7478ae934ae78eeea562632e8245d149"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a81449ca3502a62a4ce7e9a3cbb983a7f">VkDescriptorPool</a>, &amp;<a class="el" href="vulkan_8h.html#ab24cde1990e17990009604a8142890d5">vkDestroyDescriptorPool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a7478ae934ae78eeea562632e8245d149">mDescriptorPool</a></td></tr>
+<tr class="separator:a7478ae934ae78eeea562632e8245d149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d3bd3bbf10b56966f345b9198eec7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a4e45830559e6238a2773989671d8c093">VkQueue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a96d3bd3bbf10b56966f345b9198eec7d">mGraphicsQueue</a></td></tr>
+<tr class="separator:a96d3bd3bbf10b56966f345b9198eec7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da8460fd53ce4505c7975142610d690"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a4da8460fd53ce4505c7975142610d690">mHeapDescriptorSetLayout</a></td></tr>
+<tr class="separator:a4da8460fd53ce4505c7975142610d690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab392cc35309774f01c55230b75e23a34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_queue_family_indices.html">QueueFamilyIndices</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ab392cc35309774f01c55230b75e23a34">mIndices</a></td></tr>
+<tr class="separator:ab392cc35309774f01c55230b75e23a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f68dff7902d8361150d6f8922de258d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a6f68dff7902d8361150d6f8922de258d">mLastCompletedFenceValue</a> = 5</td></tr>
+<tr class="separator:a6f68dff7902d8361150d6f8922de258d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff015ecd16d9419ba0d40982807cecb2"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aff015ecd16d9419ba0d40982807cecb2">mNextFenceValue</a></td></tr>
+<tr class="separator:aff015ecd16d9419ba0d40982807cecb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af51dcdd97b4c489f8581707e8aab57b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a8a6f8a2828afcedf2137378443f739e4">VkPipelineLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a7577a824f5167fc55f229c77433e31b8">vkDestroyPipelineLayout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#af51dcdd97b4c489f8581707e8aab57b0">mPipelineLayout</a></td></tr>
+<tr class="separator:af51dcdd97b4c489f8581707e8aab57b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27b53d11f8d715d9cf238d0cb9ce924f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a27b53d11f8d715d9cf238d0cb9ce924f">mResourceBlockDescriptorSetLayout</a></td></tr>
+<tr class="separator:a27b53d11f8d715d9cf238d0cb9ce924f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f216c793ec73dd178bb99c4123a34a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a3f216c793ec73dd178bb99c4123a34a2">mSamplerDescriptorSet</a></td></tr>
+<tr class="separator:a3f216c793ec73dd178bb99c4123a34a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73ff4b389c33e8c5e7d48ee9590b0961"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a73ff4b389c33e8c5e7d48ee9590b0961">mSamplerDescriptorSetLayout</a></td></tr>
+<tr class="separator:a73ff4b389c33e8c5e7d48ee9590b0961"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5582a71a1017ccc31d2f192debc24126"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a1aa27a6ea56bcd5fd5efcf06fe951cc5">VkSampler</a>, &amp;<a class="el" href="vulkan_8h.html#a1c3bf9ec47f5ac3f4f71b1fe76c3b249">vkDestroySampler</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a5582a71a1017ccc31d2f192debc24126">mSamplers</a> [2]</td></tr>
+<tr class="separator:a5582a71a1017ccc31d2f192debc24126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e6c3a041cef4bb9e907e0b22134da5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a>, &amp;<a class="el" href="vulkan_8h.html#a52aee50ef208ddc72e33487410a10eb1">vkDestroySemaphore</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a02e6c3a041cef4bb9e907e0b22134da5">mSemaphore</a></td></tr>
+<tr class="separator:a02e6c3a041cef4bb9e907e0b22134da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af90511b9b5532583e7b0db913f37caf3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_tracked_allocator.html">TrackedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt; <a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a> &amp; &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#af90511b9b5532583e7b0db913f37caf3">mTempAllocator</a></td></tr>
+<tr class="separator:af90511b9b5532583e7b0db913f37caf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38dba4f263c8278bb1370ffb876b5c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ac38dba4f263c8278bb1370ffb876b5c9">mTempBufferDescriptorSetLayout</a></td></tr>
+<tr class="separator:ac38dba4f263c8278bb1370ffb876b5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff30c9a118c58f2d4a70b665fab9c3c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::tuple&lt; uint64_t, <a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a6ff30c9a118c58f2d4a70b665fab9c3c">mTempDescriptorPool</a></td></tr>
+<tr class="separator:a6ff30c9a118c58f2d4a70b665fab9c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b576916b657b9383bd435d66c21add7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a4b576916b657b9383bd435d66c21add7">mTempMemoryHeap</a></td></tr>
+<tr class="separator:a4b576916b657b9383bd435d66c21add7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a16d9a3a20da4e6de74eabb1219117f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a8a16d9a3a20da4e6de74eabb1219117f">mUBODescriptorSetLayout</a></td></tr>
+<tr class="separator:a8a16d9a3a20da4e6de74eabb1219117f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab224d1243e5ce94f8a8388f9c61feca3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#ab44a58bbcc5fcde2dc5e86d4b3150506">BucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a> &amp; &gt;, 16, 64, 16 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ab224d1243e5ce94f8a8388f9c61feca3">mUploadAllocator</a></td></tr>
+<tr class="separator:ab224d1243e5ce94f8a8388f9c61feca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4b8d2122fe72a737c304ff4d94df112"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ac4b8d2122fe72a737c304ff4d94df112">mUploadHeap</a></td></tr>
+<tr class="separator:ac4b8d2122fe72a737c304ff4d94df112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a719ffa96f5bcf57922752cf573c89fbe" name="a719ffa96f5bcf57922752cf573c89fbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a719ffa96f5bcf57922752cf573c89fbe">&#9670;&#160;</a></span>VulkanRenderContext() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::VulkanRenderContext::VulkanRenderContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5bacb0d0ba0cb8dc6e38dad89423748" name="ae5bacb0d0ba0cb8dc6e38dad89423748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5bacb0d0ba0cb8dc6e38dad89423748">&#9670;&#160;</a></span>VulkanRenderContext() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::VulkanRenderContext::VulkanRenderContext </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a07be639b4c8214dbe740551d73f621" name="a7a07be639b4c8214dbe740551d73f621"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a07be639b4c8214dbe740551d73f621">&#9670;&#160;</a></span>~VulkanRenderContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::VulkanRenderContext::~VulkanRenderContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4921cd5ecd560fa612528cd7f60a55cb" name="a4921cd5ecd560fa612528cd7f60a55cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4921cd5ecd560fa612528cd7f60a55cb">&#9670;&#160;</a></span>createRenderWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::VulkanRenderContext::createRenderWindow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>samples</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d7d1c07ce7de1e5c5b72ff862021488" name="a4d7d1c07ce7de1e5c5b72ff862021488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d7d1c07ce7de1e5c5b72ff862021488">&#9670;&#160;</a></span>createRenderTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::VulkanRenderContext::createRenderTexture </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em> = <code>{&#160;1,&#160;1&#160;}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa3c8f15e5cb74d263b1d003e2c34b3d2" name="aa3c8f15e5cb74d263b1d003e2c34b3d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c8f15e5cb74d263b1d003e2c34b3d2">&#9670;&#160;</a></span>beginFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::VulkanRenderContext::beginFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f8420481a6b8377a75c020e551869e7" name="a7f8420481a6b8377a75c020e551869e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f8420481a6b8377a75c020e551869e7">&#9670;&#160;</a></span>endFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderContext::endFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c0e2349460a620b5256b43f5765f37e" name="a6c0e2349460a620b5256b43f5765f37e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c0e2349460a620b5256b43f5765f37e">&#9670;&#160;</a></span>allocateResourceBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a> Engine::Render::VulkanRenderContext::allocateResourceBlock </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> * &gt;&#160;</td>
+          <td class="paramname"><em>textures</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2986a8afb5fe8a45ff6368bd027f0fa0" name="a2986a8afb5fe8a45ff6368bd027f0fa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2986a8afb5fe8a45ff6368bd027f0fa0">&#9670;&#160;</a></span>freeResourceBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderContext::freeResourceBlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a>&#160;</td>
+          <td class="paramname"><em>descriptorSet</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2eb212aa4cecb689486179ce9762cc7" name="aa2eb212aa4cecb689486179ce9762cc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2eb212aa4cecb689486179ce9762cc7">&#9670;&#160;</a></span>createResourceBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> Engine::Render::VulkanRenderContext::createResourceBlock </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> * &gt;&#160;</td>
+          <td class="paramname"><em>textures</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a844e50274357767c1f17be80076bde51" name="a844e50274357767c1f17be80076bde51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844e50274357767c1f17be80076bde51">&#9670;&#160;</a></span>destroyResourceBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderContext::destroyResourceBlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e9cd2431b63c915675d8b9dbd144f6f" name="a3e9cd2431b63c915675d8b9dbd144f6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9cd2431b63c915675d8b9dbd144f6f">&#9670;&#160;</a></span>fetchCommandList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_command_list.html">VulkanCommandList</a> Engine::Render::VulkanRenderContext::fetchCommandList </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt;&#160;</td>
+          <td class="paramname"><em>waitSemaphores</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt;&#160;</td>
+          <td class="paramname"><em>signalSemaphores</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e7a5af552e6f0d83e2020f08ed1c2c0" name="a2e7a5af552e6f0d83e2020f08ed1c2c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e7a5af552e6f0d83e2020f08ed1c2c0">&#9670;&#160;</a></span>ExecuteCommandList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> Engine::Render::VulkanRenderContext::ExecuteCommandList </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_nulled_ptr.html">NulledPtr</a>&lt; std::remove_pointer_t&lt; <a class="el" href="vulkan_8h.html#ac45cc67c448b7eb97bc0ddc9d4ce2422">VkCommandBuffer</a> &gt; &gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt;&#160;</td>
+          <td class="paramname"><em>waitSemaphores</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a> &gt;&#160;</td>
+          <td class="paramname"><em>signalSemaphores</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_any.html">Any</a> &gt;&#160;</td>
+          <td class="paramname"><em>attachedResources</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec696004947b5d1242d1766148e993cd" name="aec696004947b5d1242d1766148e993cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec696004947b5d1242d1766148e993cd">&#9670;&#160;</a></span>fetchTempDescriptorSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a> Engine::Render::VulkanRenderContext::fetchTempDescriptorSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a198c2b8e8bc6280430f279526227ea0f" name="a198c2b8e8bc6280430f279526227ea0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a198c2b8e8bc6280430f279526227ea0f">&#9670;&#160;</a></span>isFenceComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::VulkanRenderContext::isFenceComplete </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>fenceValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0102d326a5f9d43ce6be23d5394505c7" name="a0102d326a5f9d43ce6be23d5394505c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0102d326a5f9d43ce6be23d5394505c7">&#9670;&#160;</a></span>unloadAllResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Render::VulkanRenderContext::unloadAllResources </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac62a0d8126f959d004bea8e73ff56748" name="ac62a0d8126f959d004bea8e73ff56748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac62a0d8126f959d004bea8e73ff56748">&#9670;&#160;</a></span>supportsMultisampling()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::VulkanRenderContext::supportsMultisampling </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a801b9847fa82670cfad4982ca110b053" name="a801b9847fa82670cfad4982ca110b053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a801b9847fa82670cfad4982ca110b053">&#9670;&#160;</a></span>getSingleton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> &amp; Engine::Render::VulkanRenderContext::getSingleton </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cb819384b837e00d8594d1c66ae1f0a" name="a7cb819384b837e00d8594d1c66ae1f0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cb819384b837e00d8594d1c66ae1f0a">&#9670;&#160;</a></span>createPipelineLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderContext::createPipelineLayout </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8603ce51b6b2d039367a37fc67b29f07" name="a8603ce51b6b2d039367a37fc67b29f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8603ce51b6b2d039367a37fc67b29f07">&#9670;&#160;</a></span>createVertexLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::vector&lt; <a class="el" href="struct_vk_vertex_input_binding_description.html">VkVertexInputBindingDescription</a> &gt;, std::vector&lt; <a class="el" href="struct_vk_vertex_input_attribute_description.html">VkVertexInputAttributeDescription</a> &gt; &gt; Engine::Render::VulkanRenderContext::createVertexLayout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc2390484cb544fb07d58b620d9b24d6" name="abc2390484cb544fb07d58b620d9b24d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc2390484cb544fb07d58b620d9b24d6">&#9670;&#160;</a></span>tempAllocatorMemoryQuota()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Render::VulkanRenderContext::tempAllocatorMemoryQuota </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a96d3bd3bbf10b56966f345b9198eec7d" name="a96d3bd3bbf10b56966f345b9198eec7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96d3bd3bbf10b56966f345b9198eec7d">&#9670;&#160;</a></span>mGraphicsQueue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#a4e45830559e6238a2773989671d8c093">VkQueue</a> Engine::Render::VulkanRenderContext::mGraphicsQueue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab392cc35309774f01c55230b75e23a34" name="ab392cc35309774f01c55230b75e23a34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab392cc35309774f01c55230b75e23a34">&#9670;&#160;</a></span>mIndices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_queue_family_indices.html">QueueFamilyIndices</a> Engine::Render::VulkanRenderContext::mIndices</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02e6c3a041cef4bb9e907e0b22134da5" name="a02e6c3a041cef4bb9e907e0b22134da5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e6c3a041cef4bb9e907e0b22134da5">&#9670;&#160;</a></span>mSemaphore</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">VkSemaphore</a>, &amp;<a class="el" href="vulkan_8h.html#a52aee50ef208ddc72e33487410a10eb1">vkDestroySemaphore</a>&gt; Engine::Render::VulkanRenderContext::mSemaphore</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f68dff7902d8361150d6f8922de258d" name="a6f68dff7902d8361150d6f8922de258d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f68dff7902d8361150d6f8922de258d">&#9670;&#160;</a></span>mLastCompletedFenceValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t Engine::Render::VulkanRenderContext::mLastCompletedFenceValue = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff015ecd16d9419ba0d40982807cecb2" name="aff015ecd16d9419ba0d40982807cecb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff015ecd16d9419ba0d40982807cecb2">&#9670;&#160;</a></span>mNextFenceValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t Engine::Render::VulkanRenderContext::mNextFenceValue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7478ae934ae78eeea562632e8245d149" name="a7478ae934ae78eeea562632e8245d149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7478ae934ae78eeea562632e8245d149">&#9670;&#160;</a></span>mDescriptorPool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a81449ca3502a62a4ce7e9a3cbb983a7f">VkDescriptorPool</a>, &amp;<a class="el" href="vulkan_8h.html#ab24cde1990e17990009604a8142890d5">vkDestroyDescriptorPool</a>&gt; Engine::Render::VulkanRenderContext::mDescriptorPool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aafbc0d9af343a2dc487a32c475decd49" name="aafbc0d9af343a2dc487a32c475decd49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafbc0d9af343a2dc487a32c475decd49">&#9670;&#160;</a></span>mCommandPool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a21ff0682f0f6a2a1be802e8c03aab754">VkCommandPool</a>, &amp;<a class="el" href="vulkan_8h.html#a93569a1cb27e11787362a5c0f37f6940">vkDestroyCommandPool</a>&gt; Engine::Render::VulkanRenderContext::mCommandPool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79d2627a0e9d1ea020820e7d61d702b9" name="a79d2627a0e9d1ea020820e7d61d702b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d2627a0e9d1ea020820e7d61d702b9">&#9670;&#160;</a></span>mBufferPool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::tuple&lt;uint64_t, <a class="el" href="vulkan_8h.html#ac45cc67c448b7eb97bc0ddc9d4ce2422">VkCommandBuffer</a>, std::vector&lt;<a class="el" href="struct_engine_1_1_any.html">Any</a>&gt; &gt; &gt; Engine::Render::VulkanRenderContext::mBufferPool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ff30c9a118c58f2d4a70b665fab9c3c" name="a6ff30c9a118c58f2d4a70b665fab9c3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff30c9a118c58f2d4a70b665fab9c3c">&#9670;&#160;</a></span>mTempDescriptorPool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::tuple&lt;uint64_t, <a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a>&gt; &gt; Engine::Render::VulkanRenderContext::mTempDescriptorPool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a16d9a3a20da4e6de74eabb1219117f" name="a8a16d9a3a20da4e6de74eabb1219117f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a16d9a3a20da4e6de74eabb1219117f">&#9670;&#160;</a></span>mUBODescriptorSetLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a>&gt; Engine::Render::VulkanRenderContext::mUBODescriptorSetLayout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4da8460fd53ce4505c7975142610d690" name="a4da8460fd53ce4505c7975142610d690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da8460fd53ce4505c7975142610d690">&#9670;&#160;</a></span>mHeapDescriptorSetLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a>&gt; Engine::Render::VulkanRenderContext::mHeapDescriptorSetLayout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac38dba4f263c8278bb1370ffb876b5c9" name="ac38dba4f263c8278bb1370ffb876b5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38dba4f263c8278bb1370ffb876b5c9">&#9670;&#160;</a></span>mTempBufferDescriptorSetLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a>&gt; Engine::Render::VulkanRenderContext::mTempBufferDescriptorSetLayout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27b53d11f8d715d9cf238d0cb9ce924f" name="a27b53d11f8d715d9cf238d0cb9ce924f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27b53d11f8d715d9cf238d0cb9ce924f">&#9670;&#160;</a></span>mResourceBlockDescriptorSetLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a>&gt; Engine::Render::VulkanRenderContext::mResourceBlockDescriptorSetLayout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73ff4b389c33e8c5e7d48ee9590b0961" name="a73ff4b389c33e8c5e7d48ee9590b0961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73ff4b389c33e8c5e7d48ee9590b0961">&#9670;&#160;</a></span>mSamplerDescriptorSetLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">VkDescriptorSetLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a4373c7ae64b94eb62178079bdd1e83ef">vkDestroyDescriptorSetLayout</a>&gt; Engine::Render::VulkanRenderContext::mSamplerDescriptorSetLayout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af51dcdd97b4c489f8581707e8aab57b0" name="af51dcdd97b4c489f8581707e8aab57b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af51dcdd97b4c489f8581707e8aab57b0">&#9670;&#160;</a></span>mPipelineLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a8a6f8a2828afcedf2137378443f739e4">VkPipelineLayout</a>, &amp;<a class="el" href="vulkan_8h.html#a7577a824f5167fc55f229c77433e31b8">vkDestroyPipelineLayout</a>&gt; Engine::Render::VulkanRenderContext::mPipelineLayout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0dbd8f1b12419bac21b860e8548a444" name="ac0dbd8f1b12419bac21b860e8548a444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0dbd8f1b12419bac21b860e8548a444">&#9670;&#160;</a></span>mDefaultResourceBlockDescriptorSet</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a> Engine::Render::VulkanRenderContext::mDefaultResourceBlockDescriptorSet</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5582a71a1017ccc31d2f192debc24126" name="a5582a71a1017ccc31d2f192debc24126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5582a71a1017ccc31d2f192debc24126">&#9670;&#160;</a></span>mSamplers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;<a class="el" href="vulkan_8h.html#a1aa27a6ea56bcd5fd5efcf06fe951cc5">VkSampler</a>, &amp;<a class="el" href="vulkan_8h.html#a1c3bf9ec47f5ac3f4f71b1fe76c3b249">vkDestroySampler</a>&gt; Engine::Render::VulkanRenderContext::mSamplers[2]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f216c793ec73dd178bb99c4123a34a2" name="a3f216c793ec73dd178bb99c4123a34a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f216c793ec73dd178bb99c4123a34a2">&#9670;&#160;</a></span>mSamplerDescriptorSet</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">VkDescriptorSet</a> Engine::Render::VulkanRenderContext::mSamplerDescriptorSet</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac4b8d2122fe72a737c304ff4d94df112" name="ac4b8d2122fe72a737c304ff4d94df112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4b8d2122fe72a737c304ff4d94df112">&#9670;&#160;</a></span>mUploadHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a> Engine::Render::VulkanRenderContext::mUploadHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab224d1243e5ce94f8a8388f9c61feca3" name="ab224d1243e5ce94f8a8388f9c61feca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab224d1243e5ce94f8a8388f9c61feca3">&#9670;&#160;</a></span>mUploadAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#ab44a58bbcc5fcde2dc5e86d4b3150506">BucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a> &amp;&gt;, 16, 64, 16&gt; Engine::Render::VulkanRenderContext::mUploadAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abaa6494cbd2bd07ae80d6f4ec8013d0d" name="abaa6494cbd2bd07ae80d6f4ec8013d0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaa6494cbd2bd07ae80d6f4ec8013d0d">&#9670;&#160;</a></span>mBufferMemoryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a> Engine::Render::VulkanRenderContext::mBufferMemoryHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b4d1185f94c2d0c4dc624dfc63c62a0" name="a5b4d1185f94c2d0c4dc624dfc63c62a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b4d1185f94c2d0c4dc624dfc63c62a0">&#9670;&#160;</a></span>mBufferAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::VulkanRenderContext::mBufferAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b576916b657b9383bd435d66c21add7" name="a4b576916b657b9383bd435d66c21add7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b576916b657b9383bd435d66c21add7">&#9670;&#160;</a></span>mTempMemoryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a> Engine::Render::VulkanRenderContext::mTempMemoryHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af90511b9b5532583e7b0db913f37caf3" name="af90511b9b5532583e7b0db913f37caf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af90511b9b5532583e7b0db913f37caf3">&#9670;&#160;</a></span>mTempAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_tracked_allocator.html">TrackedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt;<a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a> &amp;&gt; &gt; &gt; Engine::Render::VulkanRenderContext::mTempAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae116bbe8349435bc1fb124cdf4eefc89" name="ae116bbe8349435bc1fb124cdf4eefc89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae116bbe8349435bc1fb124cdf4eefc89">&#9670;&#160;</a></span>mConstantMemoryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a> Engine::Render::VulkanRenderContext::mConstantMemoryHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa40306c23d3ab428fb7c1df70319d901" name="aa40306c23d3ab428fb7c1df70319d901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40306c23d3ab428fb7c1df70319d901">&#9670;&#160;</a></span>mConstantAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::VulkanRenderContext::mConstantAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55596a08dab1b2523111229dac8e468b" name="a55596a08dab1b2523111229dac8e468b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55596a08dab1b2523111229dac8e468b">&#9670;&#160;</a></span>mConstantBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_buffer.html">VulkanBuffer</a> Engine::Render::VulkanRenderContext::mConstantBuffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1bd784e65868d3c12c463ca302f1adb0" name="a1bd784e65868d3c12c463ca302f1adb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bd784e65868d3c12c463ca302f1adb0">&#9670;&#160;</a></span>mDefaultTexture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> Engine::Render::VulkanRenderContext::mDefaultTexture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/vulkan/src/Vulkan/<a class="el" href="vulkanrendercontext_8h.html">vulkanrendercontext.h</a></li>
+<li>plugins/renderer/vulkan/src/Vulkan/<a class="el" href="vulkanrendercontext_8cpp.html">vulkanrendercontext.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: File Members &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="File Members" href="globals_enum.html" />
+    <link rel="prev" title="File Members" href="globals_type_t.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="files_files.html">Files</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Madgine - Doxygen Documentation</a></li>
+          <li class="breadcrumb-item"><a href="files_files.html">Files</a></li>
+          <li class="breadcrumb-item"><a href="globals_file_members.html">File Members</a></li>
+          <li class="breadcrumb-item"><a href="globals_type_typedefs.html">Typedefs</a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: File Members</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/globals_type_v.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="file-members">
+<h1>File Members<a class="headerlink" href="#file-members" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: File Members</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_v" name="index_v"></a>- v -</h3><ul>
+<li>VirtualCPOBase&#160;:&#160;<a class="el" href="virtual__invoke_8h.html#a28402470951bce11abf1fe61f6c20496">virtual_invoke.h</a></li>
+<li>VirtualCPOImpl&#160;:&#160;<a class="el" href="virtual__invoke_8h.html#a842202fc7cad06227e01fd772f4bdf6c">virtual_invoke.h</a></li>
+<li>VirtualCPOsBase&#160;:&#160;<a class="el" href="virtual__invoke_8h.html#a3deedcf4661ca0c22e87f78e4e55db5b">virtual_invoke.h</a></li>
+<li>VirtualCPOsImpl&#160;:&#160;<a class="el" href="virtual__invoke_8h.html#aad8e0baf213521a183eec772ad527068">virtual_invoke.h</a></li>
+<li>VirtualCPOsImplHelper&#160;:&#160;<a class="el" href="virtual__invoke_8h.html#a8d089b50a696ae57d38dce8524801b16">virtual_invoke.h</a></li>
+<li>VkAccessFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a1f1fc625bad42b3e5fe01097f1693ed1">vulkan.h</a></li>
+<li>VkAccessFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a203df1351a8a0a1bd4ed076d23d7a73c">vulkan.h</a></li>
+<li>VkAcquireNextImageInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a1f1d0989e0b38ab83e266e54f44a0121">vulkan.h</a></li>
+<li>VkAllocationCallbacks&#160;:&#160;<a class="el" href="vulkan_8h.html#ad81262c34caa3ad7db4411d07f298b1d">vulkan.h</a></li>
+<li>VkApplicationInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a975d94fae71169089805474d6f083f7c">vulkan.h</a></li>
+<li>VkAttachmentDescription&#160;:&#160;<a class="el" href="vulkan_8h.html#a566d5b9a57cdcf00b76347cdc3cba0fe">vulkan.h</a></li>
+<li>VkAttachmentDescriptionFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a42364d25156b9c8426745c2e9c40b9ac">vulkan.h</a></li>
+<li>VkAttachmentDescriptionFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a23ae23763ad87ed7be551b68334a96d3">vulkan.h</a></li>
+<li>VkAttachmentLoadOp&#160;:&#160;<a class="el" href="vulkan_8h.html#a4de34e73c9c9be3fd2cde9498c2597a8">vulkan.h</a></li>
+<li>VkAttachmentReference&#160;:&#160;<a class="el" href="vulkan_8h.html#a349c4ceee50a1d69de13f76aa792b638">vulkan.h</a></li>
+<li>VkAttachmentStoreOp&#160;:&#160;<a class="el" href="vulkan_8h.html#a96ca870461a3ed21e5ca1511228ca01e">vulkan.h</a></li>
+<li>VkBaseInStructure&#160;:&#160;<a class="el" href="vulkan_8h.html#a724263bc83afa95a444bfb33b2767840">vulkan.h</a></li>
+<li>VkBaseOutStructure&#160;:&#160;<a class="el" href="vulkan_8h.html#a3ff3a6b50f16323b3ef32feac2be2bf9">vulkan.h</a></li>
+<li>VkBindImageMemorySwapchainInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a94a5a7aac3c4983d58d7ac2f2457a621">vulkan.h</a></li>
+<li>VkBindSparseInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a8e41b56f72aa586c67b1b270a203a3e6">vulkan.h</a></li>
+<li>VkBlendFactor&#160;:&#160;<a class="el" href="vulkan_8h.html#afc33370481e40ad30222c2191f40a4c5">vulkan.h</a></li>
+<li>VkBlendOp&#160;:&#160;<a class="el" href="vulkan_8h.html#a60658aedc04a1d438dde5330d98fab75">vulkan.h</a></li>
+<li>VkBool32&#160;:&#160;<a class="el" href="vulkan_8h.html#ae5d9faf75f583010e32ee49087a15326">vulkan.h</a></li>
+<li>VkBorderColor&#160;:&#160;<a class="el" href="vulkan_8h.html#a4c98c872a61624b8e4309ffc0a559fa4">vulkan.h</a></li>
+<li>VkBuffer&#160;:&#160;<a class="el" href="vulkan_8h.html#a2bc5c9d299416af688c4ad2aa631d954">vulkan.h</a></li>
+<li>VkBufferCopy&#160;:&#160;<a class="el" href="vulkan_8h.html#abdd6b2dbd200afef2fe5686af3e6991e">vulkan.h</a></li>
+<li>VkBufferCreateFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#ab2655ae0315871c414e5bce80efcb9e1">vulkan.h</a></li>
+<li>VkBufferCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a312efa790c1484ff456083fa58fc4a00">vulkan.h</a></li>
+<li>VkBufferCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a873526e3ebb0f48cc3239438208a49b6">vulkan.h</a></li>
+<li>VkBufferImageCopy&#160;:&#160;<a class="el" href="vulkan_8h.html#a867e8c48ad345b6dbef0e23ce35c1f0e">vulkan.h</a></li>
+<li>VkBufferMemoryBarrier&#160;:&#160;<a class="el" href="vulkan_8h.html#aae53cc1d0dec17de87ac73e7127fdded">vulkan.h</a></li>
+<li>VkBufferUsageFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#aed9dbfc1c9ecc2ee563b3e591161e4e7">vulkan.h</a></li>
+<li>VkBufferUsageFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ab221f627433dcae79b6a004fc42b50a9">vulkan.h</a></li>
+<li>VkBufferView&#160;:&#160;<a class="el" href="vulkan_8h.html#a4ad674709489fbac6ba28212f615a50f">vulkan.h</a></li>
+<li>VkBufferViewCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a54d3dfded184b7245e1414e3711ed2f7">vulkan.h</a></li>
+<li>VkBufferViewCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a134f34df032f23cf08ba0e22ce8067da">vulkan.h</a></li>
+<li>VkClearAttachment&#160;:&#160;<a class="el" href="vulkan_8h.html#aed440b329394f72ae59c894e39049b13">vulkan.h</a></li>
+<li>VkClearColorValue&#160;:&#160;<a class="el" href="vulkan_8h.html#a34bec603d9de302bd47eeba9f219164d">vulkan.h</a></li>
+<li>VkClearDepthStencilValue&#160;:&#160;<a class="el" href="vulkan_8h.html#af5e595faab867fa5f48276e93d161ddd">vulkan.h</a></li>
+<li>VkClearRect&#160;:&#160;<a class="el" href="vulkan_8h.html#a76490a55245259ebe17c03ef8fef5511">vulkan.h</a></li>
+<li>VkClearValue&#160;:&#160;<a class="el" href="vulkan_8h.html#a877a2f79e4608152e63d69bc1f4aa2d1">vulkan.h</a></li>
+<li>VkColorComponentFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#aef1c604da63f1f0f03fc5204b510d0b5">vulkan.h</a></li>
+<li>VkColorComponentFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#aff92bc61be4ff1ab494153f8581843ad">vulkan.h</a></li>
+<li>VkColorSpaceKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#af840435b94004ed670c03480049fdbbd">vulkan.h</a></li>
+<li>VkCommandBuffer&#160;:&#160;<a class="el" href="vulkan_8h.html#ac45cc67c448b7eb97bc0ddc9d4ce2422">vulkan.h</a></li>
+<li>VkCommandBufferAllocateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ac55c0715e81f2c926ba5057a23c3a85b">vulkan.h</a></li>
+<li>VkCommandBufferBeginInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a118bafa3c5068fb5a30c4bfa16c908da">vulkan.h</a></li>
+<li>VkCommandBufferInheritanceInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a046978e078cd7c5bd3e4a3e6979393d6">vulkan.h</a></li>
+<li>VkCommandBufferLevel&#160;:&#160;<a class="el" href="vulkan_8h.html#a49ca421b42d9d115c9143f2160eae41d">vulkan.h</a></li>
+<li>VkCommandBufferResetFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#af98bb046fb3d3eb7ba6022201d612eba">vulkan.h</a></li>
+<li>VkCommandBufferResetFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#afb5e1d6f7931fa5e1e70dcd4c44eecaa">vulkan.h</a></li>
+<li>VkCommandBufferUsageFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#acdc5648d17ae052c28ebabb7b5de29cd">vulkan.h</a></li>
+<li>VkCommandBufferUsageFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ae7dfdf7d98b1669e49951c4b754dec4c">vulkan.h</a></li>
+<li>VkCommandPool&#160;:&#160;<a class="el" href="vulkan_8h.html#a21ff0682f0f6a2a1be802e8c03aab754">vulkan.h</a></li>
+<li>VkCommandPoolCreateFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a4dbac44601639ab8350d2d13b6b9a182">vulkan.h</a></li>
+<li>VkCommandPoolCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a46f31e87043d023a2bba8a807fb0626d">vulkan.h</a></li>
+<li>VkCommandPoolCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ae9734bfa790bd988647ef8356e97c7ac">vulkan.h</a></li>
+<li>VkCommandPoolResetFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#aa457d045a5a39c2f3b39d3956b95cfe3">vulkan.h</a></li>
+<li>VkCommandPoolResetFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a8e72953d99bcd2a8870efefce7024231">vulkan.h</a></li>
+<li>VkCompareOp&#160;:&#160;<a class="el" href="vulkan_8h.html#a420eb7f3e976dcdddf097481e64f5681">vulkan.h</a></li>
+<li>VkComponentMapping&#160;:&#160;<a class="el" href="vulkan_8h.html#a22aed122034a24b070a8abdb67a83328">vulkan.h</a></li>
+<li>VkComponentSwizzle&#160;:&#160;<a class="el" href="vulkan_8h.html#abfd6cf73c0046e3369bc13d822e67ec1">vulkan.h</a></li>
+<li>VkCompositeAlphaFlagBitsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#acf57c0dab89bb069416dee8b3fc9643f">vulkan.h</a></li>
+<li>VkCompositeAlphaFlagsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a5785daa813a7946f2e5eb93397932dde">vulkan.h</a></li>
+<li>VkComputePipelineCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a32f46b1dfe3db0c6e8c0f8358618eeef">vulkan.h</a></li>
+<li>VkCopyDescriptorSet&#160;:&#160;<a class="el" href="vulkan_8h.html#ad48033a96bea4914427951c9923ba171">vulkan.h</a></li>
+<li>VkCullModeFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a14ceb52f3ae1002e86ac8a084339cbed">vulkan.h</a></li>
+<li>VkCullModeFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ab56d74a86988de6d574f13287aa5a556">vulkan.h</a></li>
+<li>VkDebugMarkerMarkerInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a61b419c80a85004a2b7d56d87d21a1ff">vulkan.h</a></li>
+<li>VkDebugMarkerObjectNameInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a4133d32e517cc565dceb4cc3f8b3b466">vulkan.h</a></li>
+<li>VkDebugMarkerObjectTagInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a1539cd4be804a0c99be1be74a5c5fd07">vulkan.h</a></li>
+<li>VkDebugReportCallbackCreateInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#aa289221f7864bb26071cabde6f959488">vulkan.h</a></li>
+<li>VkDebugReportCallbackEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#acc81f6ce50aafe0ca902b35966eccd29">vulkan.h</a></li>
+<li>VkDebugReportFlagBitsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a7c20421a88c301da7c406b6ee881a359">vulkan.h</a></li>
+<li>VkDebugReportFlagsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#aca80bd4cdd90b6f1a500db16f5149e42">vulkan.h</a></li>
+<li>VkDebugReportObjectTypeEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#ab50b96727a654b90dcc74dcd020795ba">vulkan.h</a></li>
+<li>VkDebugUtilsLabelEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a8656ae7a2cb2f2db343401330f0c77b0">vulkan.h</a></li>
+<li>VkDebugUtilsMessageSeverityFlagBitsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a7b9bfdf1b5c6fae36159fd235dc3c9a6">vulkan.h</a></li>
+<li>VkDebugUtilsMessageSeverityFlagsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a5a8f41aedc1285e6f6582263172f93c0">vulkan.h</a></li>
+<li>VkDebugUtilsMessageTypeFlagBitsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#ae0ddb907e7cc552470f8f7a726f477c4">vulkan.h</a></li>
+<li>VkDebugUtilsMessageTypeFlagsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a7de62ded36eb6089f53545154f59da4a">vulkan.h</a></li>
+<li>VkDebugUtilsMessengerCallbackDataEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#abf9caa53a835626d0e2074a38da0b245">vulkan.h</a></li>
+<li>VkDebugUtilsMessengerCallbackDataFlagsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#ad97c765996f44f0a2a3e0184c5c86bc1">vulkan.h</a></li>
+<li>VkDebugUtilsMessengerCreateFlagsEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a33ddc87a7aa293d0c55cc92270900037">vulkan.h</a></li>
+<li>VkDebugUtilsMessengerCreateInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a34c097d33dd4b90c7755ad6e9b2809ea">vulkan.h</a></li>
+<li>VkDebugUtilsMessengerEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#aba42a3a315cedfa72ef05df8b1acae9d">vulkan.h</a></li>
+<li>VkDebugUtilsObjectNameInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a09a8d733bfbdcac17334090b4237ae2a">vulkan.h</a></li>
+<li>VkDebugUtilsObjectTagInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#ac8680b0b3391c3cc4b762b18a4902730">vulkan.h</a></li>
+<li>VkDependencyFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a846dbf0f2044d748b87c0f8b2f688203">vulkan.h</a></li>
+<li>VkDependencyFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a3acce80133cb9dcee2d584c2d7483029">vulkan.h</a></li>
+<li>VkDescriptorBufferInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ad83d87db5a12d06770c3e6edd90948fe">vulkan.h</a></li>
+<li>VkDescriptorImageInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a12f56a38636285016d6c8042062eb405">vulkan.h</a></li>
+<li>VkDescriptorPool&#160;:&#160;<a class="el" href="vulkan_8h.html#a81449ca3502a62a4ce7e9a3cbb983a7f">vulkan.h</a></li>
+<li>VkDescriptorPoolCreateFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a5e0ce8149ae1e9c6a83cc850abbe8218">vulkan.h</a></li>
+<li>VkDescriptorPoolCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ab8f367b79d515e720e836800f3a8245b">vulkan.h</a></li>
+<li>VkDescriptorPoolCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a97d0176699bcb061cf940a655886d412">vulkan.h</a></li>
+<li>VkDescriptorPoolResetFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ad809b1696c44e6314bc83a7e27767721">vulkan.h</a></li>
+<li>VkDescriptorPoolSize&#160;:&#160;<a class="el" href="vulkan_8h.html#ac4f2f72853f361c4762f36736679ee83">vulkan.h</a></li>
+<li>VkDescriptorSet&#160;:&#160;<a class="el" href="vulkan_8h.html#a777a84c27ec7022c32cce7c00e673892">vulkan.h</a></li>
+<li>VkDescriptorSetAllocateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#aaea09d615a4b11b675bae1c90d723f60">vulkan.h</a></li>
+<li>VkDescriptorSetLayout&#160;:&#160;<a class="el" href="vulkan_8h.html#a995d26e2441aaaa7f54fffae1d5341c3">vulkan.h</a></li>
+<li>VkDescriptorSetLayoutBinding&#160;:&#160;<a class="el" href="vulkan_8h.html#a3cfb39503bd6339adf43efb00f998e4f">vulkan.h</a></li>
+<li>VkDescriptorSetLayoutCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a28516ad58b79498a2b940d43b0607dd7">vulkan.h</a></li>
+<li>VkDescriptorSetLayoutCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ac429eb53271c9ece9551198ccd5c4187">vulkan.h</a></li>
+<li>VkDescriptorType&#160;:&#160;<a class="el" href="vulkan_8h.html#a1a0aa9523d82168cce72c66c485436a2">vulkan.h</a></li>
+<li>VkDevice&#160;:&#160;<a class="el" href="vulkan_8h.html#a6e9c08f343cc1f9bd6f7d4a3ddbc3442">vulkan.h</a></li>
+<li>VkDeviceAddress&#160;:&#160;<a class="el" href="vulkan_8h.html#ad7aa41a72974ff9cdf3c4d549efd3941">vulkan.h</a></li>
+<li>VkDeviceCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a47fbc227241b3061f4f6dee73402739f">vulkan.h</a></li>
+<li>VkDeviceCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ab7addb6c0cb5a5ba98ccbcf404d1067e">vulkan.h</a></li>
+<li>VkDeviceGroupPresentCapabilitiesKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a58090105211de6f02fa8f1f48169737f">vulkan.h</a></li>
+<li>VkDeviceGroupPresentInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#af0ac156a2ea7eec17279b2687741e93b">vulkan.h</a></li>
+<li>VkDeviceGroupPresentModeFlagBitsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a58a0ac9647007b00beceb042d837e175">vulkan.h</a></li>
+<li>VkDeviceGroupPresentModeFlagsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#ab65b78e140aefe720e0e053023027a11">vulkan.h</a></li>
+<li>VkDeviceGroupSwapchainCreateInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a0c23c5f8669db47b76aabb86d6359cdc">vulkan.h</a></li>
+<li>VkDeviceMemory&#160;:&#160;<a class="el" href="vulkan_8h.html#af5bdca42cb7ff5e31ff1f1722e6d9b14">vulkan.h</a></li>
+<li>VkDeviceQueueCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a688ca54b74fbcdd04bc6439ca2aa6019">vulkan.h</a></li>
+<li>VkDeviceQueueCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a3fd01b98607acf07016ec44c31c6aca5">vulkan.h</a></li>
+<li>VkDeviceSize&#160;:&#160;<a class="el" href="vulkan_8h.html#a459be4b1b89c972b0d6018bc483be9cc">vulkan.h</a></li>
+<li>VkDispatchIndirectCommand&#160;:&#160;<a class="el" href="vulkan_8h.html#a5cb10ad203d70573cd7be5bbc69aaefb">vulkan.h</a></li>
+<li>VkDrawIndexedIndirectCommand&#160;:&#160;<a class="el" href="vulkan_8h.html#a4f11b4310e66394dab68eb8577dd83f6">vulkan.h</a></li>
+<li>VkDrawIndirectCommand&#160;:&#160;<a class="el" href="vulkan_8h.html#a7dceb64ec7f69e10359c9585f55a6edf">vulkan.h</a></li>
+<li>VkDynamicState&#160;:&#160;<a class="el" href="vulkan_8h.html#a8a1c446c89c25f52c0ea1724e5bb927c">vulkan.h</a></li>
+<li>VkEvent&#160;:&#160;<a class="el" href="vulkan_8h.html#a28ee208d8a2401f822897bc586a342c6">vulkan.h</a></li>
+<li>VkEventCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a6f9da64c5256d2264a1fb950cb7da60f">vulkan.h</a></li>
+<li>VkEventCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a13ff863b917a2e417b53f93471bde985">vulkan.h</a></li>
+<li>VkExtensionProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#af624b76dba4a23388a91ee7590b2f8ba">vulkan.h</a></li>
+<li>VkExtent2D&#160;:&#160;<a class="el" href="vulkan_8h.html#aae49d786d5da9ec5463204b966fc4378">vulkan.h</a></li>
+<li>VkExtent3D&#160;:&#160;<a class="el" href="vulkan_8h.html#a7f828702768ddcc07daa6b8aca02335b">vulkan.h</a></li>
+<li>VkFence&#160;:&#160;<a class="el" href="vulkan_8h.html#a751e236567d060e16bbbfbcf8c6e04ae">vulkan.h</a></li>
+<li>VkFenceCreateFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a276a6fea9a4575fd5f70c84ef97bb1eb">vulkan.h</a></li>
+<li>VkFenceCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a5086e87694f4bf8b12ace7a3d5a929d7">vulkan.h</a></li>
+<li>VkFenceCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a0e1ffb682bea96c17ea5c4969542c657">vulkan.h</a></li>
+<li>VkFilter&#160;:&#160;<a class="el" href="vulkan_8h.html#a2d8367802e5aaa5e3a7551e2d698e943">vulkan.h</a></li>
+<li>VkFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#abb605a7700670dd8420cc3841b939444">vulkan.h</a></li>
+<li>VkFormat&#160;:&#160;<a class="el" href="vulkan_8h.html#ac945887510b6a719c574e45f447ce8b7">vulkan.h</a></li>
+<li>VkFormatFeatureFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#ac4ab1fce4c7d9c321a6c330dfab9b2e7">vulkan.h</a></li>
+<li>VkFormatFeatureFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a8f6c3cb203ed2eabe1f2093bf9c6352a">vulkan.h</a></li>
+<li>VkFormatProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#a460b8e6ad833ea46411c5793ba5be388">vulkan.h</a></li>
+<li>VkFramebuffer&#160;:&#160;<a class="el" href="vulkan_8h.html#a40763acf60cc86ce8a242f5d5a30b7d3">vulkan.h</a></li>
+<li>VkFramebufferCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a877dad2d3755d9b0916adf5ddce6c86d">vulkan.h</a></li>
+<li>VkFramebufferCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ade3fde431e6685a2d139b8210c322a80">vulkan.h</a></li>
+<li>VkFrontFace&#160;:&#160;<a class="el" href="vulkan_8h.html#ad510f55b48c6eed7b8a601419ed48547">vulkan.h</a></li>
+<li>VkGraphicsPipelineCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a810be57b1710ddc9b18450af7f23c0a7">vulkan.h</a></li>
+<li>VkImage&#160;:&#160;<a class="el" href="vulkan_8h.html#a070714dd9707b007a399fe31aefa1320">vulkan.h</a></li>
+<li>VkImageAspectFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a7ff6a58109aa6b929aab90651dea8d03">vulkan.h</a></li>
+<li>VkImageAspectFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a1dc6a69eefc5cddb8237b87d5c22d1ec">vulkan.h</a></li>
+<li>VkImageBlit&#160;:&#160;<a class="el" href="vulkan_8h.html#a5577a52222dc324835af50332c2af905">vulkan.h</a></li>
+<li>VkImageCopy&#160;:&#160;<a class="el" href="vulkan_8h.html#af7510984114ba728b2d88ed54521cdc2">vulkan.h</a></li>
+<li>VkImageCreateFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#ac4b7fb888359ab169c0fac3484daefb2">vulkan.h</a></li>
+<li>VkImageCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#abc3eb853d771500fd5a7f1340bf708cc">vulkan.h</a></li>
+<li>VkImageCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ad35dc46ba774137d765f9d6b25e1bc95">vulkan.h</a></li>
+<li>VkImageFormatProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#a9b59c408f37be9d2b879a61c1349c7c7">vulkan.h</a></li>
+<li>VkImageLayout&#160;:&#160;<a class="el" href="vulkan_8h.html#aea4155d46ed22f08dfa2d9bbdc861561">vulkan.h</a></li>
+<li>VkImageMemoryBarrier&#160;:&#160;<a class="el" href="vulkan_8h.html#a4b923048c216545396fef30786ae9cfd">vulkan.h</a></li>
+<li>VkImageResolve&#160;:&#160;<a class="el" href="vulkan_8h.html#aee87bc6a7d66a09682950611c16ef039">vulkan.h</a></li>
+<li>VkImageSubresource&#160;:&#160;<a class="el" href="vulkan_8h.html#a5a9164550d15b903b99176f63e3a331e">vulkan.h</a></li>
+<li>VkImageSubresourceLayers&#160;:&#160;<a class="el" href="vulkan_8h.html#a507ba75f8ec1f411b1e8ee8ae164c3ba">vulkan.h</a></li>
+<li>VkImageSubresourceRange&#160;:&#160;<a class="el" href="vulkan_8h.html#a496570aef4a8b106fcb58f1321e953ce">vulkan.h</a></li>
+<li>VkImageSwapchainCreateInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a7eb0cae4fe1b52255de79f7f3aa9d5c8">vulkan.h</a></li>
+<li>VkImageTiling&#160;:&#160;<a class="el" href="vulkan_8h.html#acb5507f9d4852d78f31640db84b6b764">vulkan.h</a></li>
+<li>VkImageType&#160;:&#160;<a class="el" href="vulkan_8h.html#ae863b80f8162eb25e06be4bebd1140e3">vulkan.h</a></li>
+<li>VkImageUsageFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#ae3150a09c6c2a79716f5ece2997417aa">vulkan.h</a></li>
+<li>VkImageUsageFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a2c990c0c189d0a9bd02c5d911d5cc5f7">vulkan.h</a></li>
+<li>VkImageView&#160;:&#160;<a class="el" href="vulkan_8h.html#ae680b5140a50547e5d5cdce269be7d56">vulkan.h</a></li>
+<li>VkImageViewCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a7aa85b9c99eaadffb86ccc846de92384">vulkan.h</a></li>
+<li>VkImageViewCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a69457fcd6cebb7c34ade6ec144bc8bca">vulkan.h</a></li>
+<li>VkImageViewType&#160;:&#160;<a class="el" href="vulkan_8h.html#a3ff72cc8689fce0fbef7ff69160af32e">vulkan.h</a></li>
+<li>VkIndexType&#160;:&#160;<a class="el" href="vulkan_8h.html#a4a99f55bbae7d47ad9110ac4a2a4cd55">vulkan.h</a></li>
+<li>VkInstance&#160;:&#160;<a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">vulkan.h</a></li>
+<li>VkInstanceCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a1e06dcac86ec15c432fc31d094e32460">vulkan.h</a></li>
+<li>VkInstanceCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a5101c96314f987a3bfbe144aa0d43134">vulkan.h</a></li>
+<li>VkInternalAllocationType&#160;:&#160;<a class="el" href="vulkan_8h.html#adc317de8672addfabf9347b2dc5bd805">vulkan.h</a></li>
+<li>VkLayerProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#ac7c79267b2d07b5dc8bad452058d3cd1">vulkan.h</a></li>
+<li>VkLayerSettingEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a738ffa1913e540808f4f5e6ba4eab8f5">vulkan.h</a></li>
+<li>VkLayerSettingsCreateInfoEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a41170ffe0310241b2bba3ff4dcfc3e51">vulkan.h</a></li>
+<li>VkLayerSettingTypeEXT&#160;:&#160;<a class="el" href="vulkan_8h.html#a23b1bf45c0077501a4ab7f4de23faa17">vulkan.h</a></li>
+<li>VkLogicOp&#160;:&#160;<a class="el" href="vulkan_8h.html#aed475591128c25fd81681e498fa80f48">vulkan.h</a></li>
+<li>VkMappedMemoryRange&#160;:&#160;<a class="el" href="vulkan_8h.html#a964e2f7a3eeb1f9687b2a5c5659c64e6">vulkan.h</a></li>
+<li>VkMemoryAllocateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a9e10feeaaa93409d4cb08204b14254f3">vulkan.h</a></li>
+<li>VkMemoryBarrier&#160;:&#160;<a class="el" href="vulkan_8h.html#aef136d770e68239531a346b32a3ea122">vulkan.h</a></li>
+<li>VkMemoryHeap&#160;:&#160;<a class="el" href="vulkan_8h.html#ae27f2664bd6dae8c15d39999c24f0e66">vulkan.h</a></li>
+<li>VkMemoryHeapFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#acbd645743cc6ae661de369442b79ea91">vulkan.h</a></li>
+<li>VkMemoryHeapFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a71c41128b70be858e391eafb20f5b362">vulkan.h</a></li>
+<li>VkMemoryMapFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a26daf6000c201fa8fd0043c2901e06ee">vulkan.h</a></li>
+<li>VkMemoryPropertyFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#abe41eea3e3009e7b06fe7ec257d2a321">vulkan.h</a></li>
+<li>VkMemoryPropertyFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a06f71178c68bf5712dbec35d6f124122">vulkan.h</a></li>
+<li>VkMemoryRequirements&#160;:&#160;<a class="el" href="vulkan_8h.html#a6d3965a6b0cf8a5fd25f8eb705f333d4">vulkan.h</a></li>
+<li>VkMemoryType&#160;:&#160;<a class="el" href="vulkan_8h.html#ab6eea4377b91c6d9306a266c4e38a032">vulkan.h</a></li>
+<li>VkObjectType&#160;:&#160;<a class="el" href="vulkan_8h.html#ac5d96d998ceb538091ef214e92413631">vulkan.h</a></li>
+<li>VkOffset2D&#160;:&#160;<a class="el" href="vulkan_8h.html#acec7b6e15407bed9a7e54193ae81e60e">vulkan.h</a></li>
+<li>VkOffset3D&#160;:&#160;<a class="el" href="vulkan_8h.html#a555d6a8a5317dc9dd7236b3421386e15">vulkan.h</a></li>
+<li>VkPhysicalDevice&#160;:&#160;<a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">vulkan.h</a></li>
+<li>VkPhysicalDeviceFeatures&#160;:&#160;<a class="el" href="vulkan_8h.html#a1b0a62d5be9cabc1e62caab98e688f9c">vulkan.h</a></li>
+<li>VkPhysicalDeviceLimits&#160;:&#160;<a class="el" href="vulkan_8h.html#adaab9ef6ca954fae2068d6797dc0b226">vulkan.h</a></li>
+<li>VkPhysicalDeviceMemoryProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#abab2a76b1f8701bd7591231daaa9ba3a">vulkan.h</a></li>
+<li>VkPhysicalDeviceProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#a4c0cb2931c77b28ccf93e8add4898230">vulkan.h</a></li>
+<li>VkPhysicalDeviceSparseProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#a7769b13f5fdf357c5754ee81ef468f9f">vulkan.h</a></li>
+<li>VkPhysicalDeviceTimelineSemaphoreFeatures&#160;:&#160;<a class="el" href="vulkan_8h.html#ae512716a86d4d3918b8bc1b2bf106b31">vulkan.h</a></li>
+<li>VkPhysicalDeviceTimelineSemaphoreFeaturesKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#ad3cb324b475157499b6b927f5bdd8ff7">vulkan.h</a></li>
+<li>VkPhysicalDeviceTimelineSemaphoreProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#abf1c719665720304c0cbfbde9c337d44">vulkan.h</a></li>
+<li>VkPhysicalDeviceTimelineSemaphorePropertiesKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a8b3170c5e9f7dde9c1886905ce102955">vulkan.h</a></li>
+<li>VkPhysicalDeviceType&#160;:&#160;<a class="el" href="vulkan_8h.html#a0f10f88670c7c6e64a15daeaa5b128b3">vulkan.h</a></li>
+<li>VkPipeline&#160;:&#160;<a class="el" href="vulkan_8h.html#ab751804468423c5c3658eb1f0691abe5">vulkan.h</a></li>
+<li>VkPipelineBindPoint&#160;:&#160;<a class="el" href="vulkan_8h.html#aef333a9be06cd737fa06d95585516c40">vulkan.h</a></li>
+<li>VkPipelineCache&#160;:&#160;<a class="el" href="vulkan_8h.html#a2362b6bb6cf78567ca6742193cfb5965">vulkan.h</a></li>
+<li>VkPipelineCacheCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#acde906ebb16a929d8937884bd07759bf">vulkan.h</a></li>
+<li>VkPipelineCacheCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a2083f6664e2deb0af8737ec4eed75228">vulkan.h</a></li>
+<li>VkPipelineCacheHeaderVersion&#160;:&#160;<a class="el" href="vulkan_8h.html#a911ef7f6beb0ca3de3be6d11ca341f86">vulkan.h</a></li>
+<li>VkPipelineCacheHeaderVersionOne&#160;:&#160;<a class="el" href="vulkan_8h.html#afa6597c32c78b65d7bbf5217100d8be8">vulkan.h</a></li>
+<li>VkPipelineColorBlendAttachmentState&#160;:&#160;<a class="el" href="vulkan_8h.html#aebd4b96a911e9ce38d3a7b52eb173dc0">vulkan.h</a></li>
+<li>VkPipelineColorBlendStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ad672363d89a9af412ea4bb587810a6e5">vulkan.h</a></li>
+<li>VkPipelineColorBlendStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a50d5a4b6acf9def98766ce368c5fbee3">vulkan.h</a></li>
+<li>VkPipelineCreateFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a0a75ff64d76903406d394d9d3240d943">vulkan.h</a></li>
+<li>VkPipelineCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a87b0207d3481f4380e8ea2685be03ff8">vulkan.h</a></li>
+<li>VkPipelineDepthStencilStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#aa8dcaab6799737ec96b43cae4e2c22e1">vulkan.h</a></li>
+<li>VkPipelineDepthStencilStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a6bcb6ec2a16472ce43cf58bf09941505">vulkan.h</a></li>
+<li>VkPipelineDynamicStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#af7840c21489c3925e7920a82b109fc89">vulkan.h</a></li>
+<li>VkPipelineDynamicStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ae316f42785dada25a3ec44c15bcde430">vulkan.h</a></li>
+<li>VkPipelineInputAssemblyStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#acd55e034458afa9b2598b3f435beed70">vulkan.h</a></li>
+<li>VkPipelineInputAssemblyStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#acb4b9a8f6570b07099e67519984ff45c">vulkan.h</a></li>
+<li>VkPipelineLayout&#160;:&#160;<a class="el" href="vulkan_8h.html#a8a6f8a2828afcedf2137378443f739e4">vulkan.h</a></li>
+<li>VkPipelineLayoutCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#aa05c3fc087a87f870ce2b250d7cf8807">vulkan.h</a></li>
+<li>VkPipelineLayoutCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a6e087c7ab0b543ecc9e455425368901e">vulkan.h</a></li>
+<li>VkPipelineMultisampleStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a47e21fc431ba3cf651ba1afe302467c1">vulkan.h</a></li>
+<li>VkPipelineMultisampleStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a15b7a93437d2d8ec6f3b031338031b85">vulkan.h</a></li>
+<li>VkPipelineRasterizationStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a5c2d6ee63c7797a624505a7daa0065dc">vulkan.h</a></li>
+<li>VkPipelineRasterizationStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a4fbf02687f5ea145404dd087b2264977">vulkan.h</a></li>
+<li>VkPipelineShaderStageCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#aa8eb48e28d0a0ce108bc7b2303baa828">vulkan.h</a></li>
+<li>VkPipelineShaderStageCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a54b2b2164d0c778ffa2d12e19e518500">vulkan.h</a></li>
+<li>VkPipelineStageFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#aca19aa07a280d38b86d3f474e5acfab1">vulkan.h</a></li>
+<li>VkPipelineStageFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a070802320aca9f30acc7fd240b512c17">vulkan.h</a></li>
+<li>VkPipelineTessellationStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#adda1ab8e15ed3cddd8296f3e2cca1d41">vulkan.h</a></li>
+<li>VkPipelineTessellationStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a5d1700c8741c5a72bb97b0dc3a7ce678">vulkan.h</a></li>
+<li>VkPipelineVertexInputStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a6a467f6ae671d70ef7e335b1ee47685f">vulkan.h</a></li>
+<li>VkPipelineVertexInputStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a42b50c10eb6bb76057d255eb99aa33b2">vulkan.h</a></li>
+<li>VkPipelineViewportStateCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a334c5176c676e0fadf67650007f7a2ac">vulkan.h</a></li>
+<li>VkPipelineViewportStateCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#abf4a43f379f7469b1db3e4207afa8884">vulkan.h</a></li>
+<li>VkPolygonMode&#160;:&#160;<a class="el" href="vulkan_8h.html#a38741490e2037bf1c3d0cb425f24b74b">vulkan.h</a></li>
+<li>VkPresentInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a117116e7b343befc9ff99c48f277acb6">vulkan.h</a></li>
+<li>VkPresentModeKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a3e660a3d401d1543ae200c0d48e6a32c">vulkan.h</a></li>
+<li>VkPrimitiveTopology&#160;:&#160;<a class="el" href="vulkan_8h.html#a0c38ac7034eb6b061497b63b28630a63">vulkan.h</a></li>
+<li>VkPushConstantRange&#160;:&#160;<a class="el" href="vulkan_8h.html#aac25b1a7cc49a4b5c596aa3ed56e7b44">vulkan.h</a></li>
+<li>VkQueryControlFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#aa10c68fa3eedc37ec26cc0d5cec741ee">vulkan.h</a></li>
+<li>VkQueryControlFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a8482b1d7703657daea1b07f6184e3197">vulkan.h</a></li>
+<li>VkQueryPipelineStatisticFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a9f0341a30f326969aa56248ae679ef15">vulkan.h</a></li>
+<li>VkQueryPipelineStatisticFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a532610acc7e8e317a47229315d9c1ed2">vulkan.h</a></li>
+<li>VkQueryPool&#160;:&#160;<a class="el" href="vulkan_8h.html#a0afc5f512826a3e45ff979d7ad91b83c">vulkan.h</a></li>
+<li>VkQueryPoolCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a47749f4b29f22f89e1843a2d10b153a6">vulkan.h</a></li>
+<li>VkQueryPoolCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a500a3fd0662792682fb8aa4f3588c434">vulkan.h</a></li>
+<li>VkQueryResultFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#abb54a93abfdcd30439ba78a028d8ce34">vulkan.h</a></li>
+<li>VkQueryResultFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ab98bb3d2e593c1e5f1fff5d1ed4ead06">vulkan.h</a></li>
+<li>VkQueryType&#160;:&#160;<a class="el" href="vulkan_8h.html#a9793d05bce0cb003b024711bfc18ee32">vulkan.h</a></li>
+<li>VkQueue&#160;:&#160;<a class="el" href="vulkan_8h.html#a4e45830559e6238a2773989671d8c093">vulkan.h</a></li>
+<li>VkQueueFamilyProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#aaedb9af5328c6c77a76476115931c078">vulkan.h</a></li>
+<li>VkQueueFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#af4bfe9666090fe89db5f00e533d1c69d">vulkan.h</a></li>
+<li>VkQueueFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a2ed8c47dc59863d3274ecd8dc1b43eed">vulkan.h</a></li>
+<li>VkRect2D&#160;:&#160;<a class="el" href="vulkan_8h.html#a57df3ef4ade6c5f62f8062ba279d0a1c">vulkan.h</a></li>
+<li>VkRenderPass&#160;:&#160;<a class="el" href="vulkan_8h.html#a1ed8a086d10fc50ad658d810b08475b5">vulkan.h</a></li>
+<li>VkRenderPassBeginInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a0b349bfe297475bd6c45d68ae67aefe7">vulkan.h</a></li>
+<li>VkRenderPassCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#abce1519ca9b3f2e4f157dbe8d3e36549">vulkan.h</a></li>
+<li>VkRenderPassCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a76ea01219939cf88dacb15c8ab5714f8">vulkan.h</a></li>
+<li>VkResult&#160;:&#160;<a class="el" href="vulkan_8h.html#a3ea68c823bd800bbb2ec2d3a445d7e13">vulkan.h</a></li>
+<li>VkSampleCountFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a50d42b2e9ed2df56b4eeb768e2abd874">vulkan.h</a></li>
+<li>VkSampleCountFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a0a644786c01109d10bfc04051e708ded">vulkan.h</a></li>
+<li>VkSampleMask&#160;:&#160;<a class="el" href="vulkan_8h.html#a264a1a8e0bde6ca26f582704e445cf60">vulkan.h</a></li>
+<li>VkSampler&#160;:&#160;<a class="el" href="vulkan_8h.html#a1aa27a6ea56bcd5fd5efcf06fe951cc5">vulkan.h</a></li>
+<li>VkSamplerAddressMode&#160;:&#160;<a class="el" href="vulkan_8h.html#a61c7e22cb575ecf517b82fb2e0d07b12">vulkan.h</a></li>
+<li>VkSamplerCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a0456aa912c9ee84bfa05236bbc94d5b3">vulkan.h</a></li>
+<li>VkSamplerCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a90448d4a5fa5e1d291fb326764d88888">vulkan.h</a></li>
+<li>VkSamplerMipmapMode&#160;:&#160;<a class="el" href="vulkan_8h.html#a64615847e85afcc5e5377f2b3edce47a">vulkan.h</a></li>
+<li>VkSemaphore&#160;:&#160;<a class="el" href="vulkan_8h.html#ace0d2d3a7c3cb2179b4bf6c88850d69e">vulkan.h</a></li>
+<li>VkSemaphoreCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a9c8e63bee1c2a80c077d27b572d1adf9">vulkan.h</a></li>
+<li>VkSemaphoreCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ad95e57d30afc270608ccf07b48170aa3">vulkan.h</a></li>
+<li>VkSemaphoreSignalInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a4414937d08f57d16fb0dba2c529bbd57">vulkan.h</a></li>
+<li>VkSemaphoreSignalInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#ad0d0e5b4d216c7814491f7f7bab2eac8">vulkan.h</a></li>
+<li>VkSemaphoreType&#160;:&#160;<a class="el" href="vulkan_8h.html#a68e151d75c62313f1dac8ce30baea63c">vulkan.h</a></li>
+<li>VkSemaphoreTypeCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ad59e239eddf95e19d427c437f32c3d46">vulkan.h</a></li>
+<li>VkSemaphoreTypeCreateInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a42492827010cfa769fc58c6ba9e74117">vulkan.h</a></li>
+<li>VkSemaphoreTypeKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a7de866de4a141c76dc44c234b39a318a">vulkan.h</a></li>
+<li>VkSemaphoreWaitFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a5962d84b166634653cc7051c2a67e0ab">vulkan.h</a></li>
+<li>VkSemaphoreWaitFlagBitsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#afaaf62f3099af9148398c69b82c37cca">vulkan.h</a></li>
+<li>VkSemaphoreWaitFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a687c1088da11666df0d3b01b75e760ec">vulkan.h</a></li>
+<li>VkSemaphoreWaitInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a54c4190f8d850e92f6d913271d8af056">vulkan.h</a></li>
+<li>VkSemaphoreWaitInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#ae9cc6e72fdfb743b9294145a6be0b7f3">vulkan.h</a></li>
+<li>VkShaderModule&#160;:&#160;<a class="el" href="vulkan_8h.html#a0a27b1b1624e8348f94a1b47f018f3eb">vulkan.h</a></li>
+<li>VkShaderModuleCreateFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a1366a17d518ccc83b4b429038d71a727">vulkan.h</a></li>
+<li>VkShaderModuleCreateInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#aa391ffb4209175ec8ce63c1daee4af6c">vulkan.h</a></li>
+<li>VkShaderStageFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a4672379376a76bd99f3af2caa061ddaf">vulkan.h</a></li>
+<li>VkShaderStageFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a930573a60f78bbf5a06d8ea370a0eba9">vulkan.h</a></li>
+<li>VkSharingMode&#160;:&#160;<a class="el" href="vulkan_8h.html#a6ab953ee8ff2086285e699bd1993e29b">vulkan.h</a></li>
+<li>VkSparseBufferMemoryBindInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#aff53bfdbec1f7cebe598101fa0597dd9">vulkan.h</a></li>
+<li>VkSparseImageFormatFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#ab1fdbbf732b5d06528f0c68cf3eaff11">vulkan.h</a></li>
+<li>VkSparseImageFormatFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ae9cbf2e4831413ccaa6482ee40e249e7">vulkan.h</a></li>
+<li>VkSparseImageFormatProperties&#160;:&#160;<a class="el" href="vulkan_8h.html#ad320112562946ab659998c84fa4629c9">vulkan.h</a></li>
+<li>VkSparseImageMemoryBind&#160;:&#160;<a class="el" href="vulkan_8h.html#a53c3e162564d28fc442b8df3879a8f45">vulkan.h</a></li>
+<li>VkSparseImageMemoryBindInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#ae5c195ee5ccff8016a7e538f16453b60">vulkan.h</a></li>
+<li>VkSparseImageMemoryRequirements&#160;:&#160;<a class="el" href="vulkan_8h.html#a12825fa343cf5407b8d9714f917e88b3">vulkan.h</a></li>
+<li>VkSparseImageOpaqueMemoryBindInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a0ed7a757154fbfae47ca7852df53c5ac">vulkan.h</a></li>
+<li>VkSparseMemoryBind&#160;:&#160;<a class="el" href="vulkan_8h.html#a07e74362958f1e000f499441009fddc6">vulkan.h</a></li>
+<li>VkSparseMemoryBindFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#abf967f722c1e10baba0a0de0896f611c">vulkan.h</a></li>
+<li>VkSparseMemoryBindFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ac232ee607dd6296d62189ff574b99618">vulkan.h</a></li>
+<li>VkSpecializationInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a128692c7c9c246a4f8e23f3dfa86f3c6">vulkan.h</a></li>
+<li>VkSpecializationMapEntry&#160;:&#160;<a class="el" href="vulkan_8h.html#aedf8cdedae930dc91c125dee5a84f42e">vulkan.h</a></li>
+<li>VkStencilFaceFlagBits&#160;:&#160;<a class="el" href="vulkan_8h.html#a57757b69a8ced8ee89c25dc23ff99876">vulkan.h</a></li>
+<li>VkStencilFaceFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#a4e95b5dd52db10957d7b2a71035b1fb1">vulkan.h</a></li>
+<li>VkStencilOp&#160;:&#160;<a class="el" href="vulkan_8h.html#ad684cfd5412142d6267c2a8c80f9ffc2">vulkan.h</a></li>
+<li>VkStencilOpState&#160;:&#160;<a class="el" href="vulkan_8h.html#a4f2196ee0a1a5b1d383f810302bbf858">vulkan.h</a></li>
+<li>VkStructureType&#160;:&#160;<a class="el" href="vulkan_8h.html#a3f7b8477b03081f563142a83e4232a06">vulkan.h</a></li>
+<li>VkSubmitInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#aa09a89d5d84d06a1aafeae3fe01bd5a1">vulkan.h</a></li>
+<li>VkSubpassContents&#160;:&#160;<a class="el" href="vulkan_8h.html#a95c7d3e773ce0a5295cd28c31f8732de">vulkan.h</a></li>
+<li>VkSubpassDependency&#160;:&#160;<a class="el" href="vulkan_8h.html#ae04e59974c7ae5ca25d9c85d58d7cf36">vulkan.h</a></li>
+<li>VkSubpassDescription&#160;:&#160;<a class="el" href="vulkan_8h.html#ad2c4631c61d8f15fd3e40c36bdc9745b">vulkan.h</a></li>
+<li>VkSubpassDescriptionFlags&#160;:&#160;<a class="el" href="vulkan_8h.html#ac6b3016a508165bf40f76d0b5d470158">vulkan.h</a></li>
+<li>VkSubresourceLayout&#160;:&#160;<a class="el" href="vulkan_8h.html#a08ebdeeda19074a8a805130731f4cf38">vulkan.h</a></li>
+<li>VkSurfaceCapabilitiesKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#afa1d749301f68b89c1af8c9deb874167">vulkan.h</a></li>
+<li>VkSurfaceFormatKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#af45186d1277ef9920ada85ee24497edc">vulkan.h</a></li>
+<li>VkSurfaceKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a09787d7da5f3146095ed80ceccc2d794">vulkan.h</a></li>
+<li>VkSurfaceTransformFlagBitsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a860aa9e69b1f7b55f032c35f21f36756">vulkan.h</a></li>
+<li>VkSurfaceTransformFlagsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#afb825247c17328ffbd4516cb2247cbf2">vulkan.h</a></li>
+<li>VkSwapchainCreateFlagBitsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a1331da74bf2e6c0c593ac6a23307f27b">vulkan.h</a></li>
+<li>VkSwapchainCreateFlagsKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a06b00377b09c3b2964ec8e58e94ce5d2">vulkan.h</a></li>
+<li>VkSwapchainCreateInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#aa5f730e80341aeb12f6413103bb828f2">vulkan.h</a></li>
+<li>VkSwapchainKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a84ee7092f3675fc88b0ef10dcf73ec67">vulkan.h</a></li>
+<li>VkSystemAllocationScope&#160;:&#160;<a class="el" href="vulkan_8h.html#af2b26a0d69b7692010156a0e37cb4899">vulkan.h</a></li>
+<li>VkTimelineSemaphoreSubmitInfo&#160;:&#160;<a class="el" href="vulkan_8h.html#a9954401668c844f7c3dc72251906c606">vulkan.h</a></li>
+<li>VkTimelineSemaphoreSubmitInfoKHR&#160;:&#160;<a class="el" href="vulkan_8h.html#a9cf1edf276fdb381d785b0754949f66f">vulkan.h</a></li>
+<li>VkVendorId&#160;:&#160;<a class="el" href="vulkan_8h.html#a13e8358dafabcf5402c2ea8765d6d007">vulkan.h</a></li>
+<li>VkVertexInputAttributeDescription&#160;:&#160;<a class="el" href="vulkan_8h.html#a449c4b3048616380b328c85453dfa8ca">vulkan.h</a></li>
+<li>VkVertexInputBindingDescription&#160;:&#160;<a class="el" href="vulkan_8h.html#a90ba251272974a7688957fcb5ec5a19e">vulkan.h</a></li>
+<li>VkVertexInputRate&#160;:&#160;<a class="el" href="vulkan_8h.html#aa3e1ba6e8a43da68f7ea2dd1cbd5f68b">vulkan.h</a></li>
+<li>VkViewport&#160;:&#160;<a class="el" href="vulkan_8h.html#afff5cbff713aa00af500a4ad00942237">vulkan.h</a></li>
+<li>VkWriteDescriptorSet&#160;:&#160;<a class="el" href="vulkan_8h.html#ae3e2a34ecf55415c587962c716dcc836">vulkan.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="globals_type_t.html" class="btn btn-neutral float-left" title="File Members" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="globals_enum.html" class="btn btn-neutral float-right" title="File Members" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

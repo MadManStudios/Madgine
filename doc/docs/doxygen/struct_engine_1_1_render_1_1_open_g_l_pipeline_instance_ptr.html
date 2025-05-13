@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::OpenGLPipelineInstancePtr Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::OpenGLPipelineInstancePtr Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_ptr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="openglpipelineinstanceptr-struct-reference">
+<h1>OpenGLPipelineInstancePtr Struct Reference<a class="headerlink" href="#openglpipelineinstanceptr-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::OpenGLPipelineInstancePtr Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_ptr.html">OpenGLPipelineInstancePtr</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_ptr-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::OpenGLPipelineInstancePtr Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;openglpipelineinstance.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::OpenGLPipelineInstancePtr:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_ptr__inherit__graph.svg" width="220" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad3af5790578cc75e9bca12c38441ac6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_ptr.html#ad3af5790578cc75e9bca12c38441ac6c">OpenGLPipelineInstancePtr</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a> &amp;config, OpenGLPipelineLoader::Ptr pipeline)</td></tr>
+<tr class="separator:ad3af5790578cc75e9bca12c38441ac6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html">Engine::Render::OpenGLPipelineInstance</a></td></tr>
+<tr class="memitem:a970d1e3b6597ee789d651ae1e8a4bd0e inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a970d1e3b6597ee789d651ae1e8a4bd0e">OpenGLPipelineInstance</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a> &amp;config, <a class="el" href="glad_8h.html#aa311c7f0d6ec4f1a33f9235c3651b86b">GLuint</a> pipeline)</td></tr>
+<tr class="separator:a970d1e3b6597ee789d651ae1e8a4bd0e inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6c3a681f0cce7204edffd6dea029a7 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#afe6c3a681f0cce7204edffd6dea029a7">bind</a> (<a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t offset=0) const</td></tr>
+<tr class="separator:afe6c3a681f0cce7204edffd6dea029a7 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9205869b2a1e53785c55754d6ce9186d inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a9205869b2a1e53785c55754d6ce9186d">bindMesh</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_mesh_data.html">GPUMeshData</a> *mesh) const override</td></tr>
+<tr class="separator:a9205869b2a1e53785c55754d6ce9186d inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71b7fb84d15828acbba0e7add52148e6 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a71b7fb84d15828acbba0e7add52148e6">bindResources</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t space, <a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a> block) const override</td></tr>
+<tr class="separator:a71b7fb84d15828acbba0e7add52148e6 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dbe89bd288743f057698f27ad9f87da inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a8dbe89bd288743f057698f27ad9f87da">mapIndices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count) const override</td></tr>
+<tr class="separator:a8dbe89bd288743f057698f27ad9f87da inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcd70ee208ccee4230a3470bdbf59b92 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#adcd70ee208ccee4230a3470bdbf59b92">mapParameters</a> (size_t index) override</td></tr>
+<tr class="separator:adcd70ee208ccee4230a3470bdbf59b92 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c4cd0596f4f352fa864a6f557b13a2 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#ae7c4cd0596f4f352fa864a6f557b13a2">mapTempBuffer</a> (size_t space, size_t size) const override</td></tr>
+<tr class="separator:ae7c4cd0596f4f352fa864a6f557b13a2 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2207b6ea4a17c99a3f516914f3865ff inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#af2207b6ea4a17c99a3f516914f3865ff">mapVertices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, <a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t count) const override</td></tr>
+<tr class="separator:af2207b6ea4a17c99a3f516914f3865ff inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dac70ad2fda6144190bd4608da676ed inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a1dac70ad2fda6144190bd4608da676ed">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target) const override</td></tr>
+<tr class="separator:a1dac70ad2fda6144190bd4608da676ed inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a186c42ab54cf1b38e36601c298568e74 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a186c42ab54cf1b38e36601c298568e74">renderInstanced</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count) const override</td></tr>
+<tr class="separator:a186c42ab54cf1b38e36601c298568e74 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af98e988c457794c4f981fa3607c7e13e inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#af98e988c457794c4f981fa3607c7e13e">renderRange</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t elementCount, size_t vertexOffset, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; indexOffset={}) const override</td></tr>
+<tr class="separator:af98e988c457794c4f981fa3607c7e13e inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3bb22358eaa12ffca0631d5c4caff38 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#ad3bb22358eaa12ffca0631d5c4caff38">setGroupSize</a> (size_t groupSize) const override</td></tr>
+<tr class="separator:ad3bb22358eaa12ffca0631d5c4caff38 inherit pub_methods_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_pipeline_instance')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">Engine::Render::PipelineInstance</a></td></tr>
+<tr class="memitem:aa0515ce5588c00978877c2cac3ec3996 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa0515ce5588c00978877c2cac3ec3996">PipelineInstance</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a> &amp;config)</td></tr>
+<tr class="separator:aa0515ce5588c00978877c2cac3ec3996 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f499a4113e3e946abf8590ff377d049 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a8f499a4113e3e946abf8590ff377d049">PipelineInstance</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;)=delete</td></tr>
+<tr class="separator:a8f499a4113e3e946abf8590ff377d049 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcab5d84a2a893aa841727b116080002 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#abcab5d84a2a893aa841727b116080002">~PipelineInstance</a> ()=default</td></tr>
+<tr class="separator:abcab5d84a2a893aa841727b116080002 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a587ef8925798df88a3996ae4ad53982e inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a587ef8925798df88a3996ae4ad53982e">bindMesh</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_mesh_data.html">GPUMeshData</a> *mesh) const =0</td></tr>
+<tr class="separator:a587ef8925798df88a3996ae4ad53982e inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4040de642c5e24338c74c7c8928f4094 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a4040de642c5e24338c74c7c8928f4094">bindResources</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t space, <a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a> block) const =0</td></tr>
+<tr class="separator:a4040de642c5e24338c74c7c8928f4094 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85c14e305ce85cdf9140a3e5cb2b24d inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa85c14e305ce85cdf9140a3e5cb2b24d">mapIndices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count) const =0</td></tr>
+<tr class="separator:aa85c14e305ce85cdf9140a3e5cb2b24d inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc45940d236082c367994db1a936bc7d inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:adc45940d236082c367994db1a936bc7d inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#adc45940d236082c367994db1a936bc7d">mapParameters</a> (size_t index)</td></tr>
+<tr class="separator:adc45940d236082c367994db1a936bc7d inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cd4a289ed680a84495b001e8231b6eb inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a5cd4a289ed680a84495b001e8231b6eb">mapParameters</a> (size_t index)=0</td></tr>
+<tr class="separator:a5cd4a289ed680a84495b001e8231b6eb inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e05fbcc4aae5a32a332dd93c3832536 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (!std::is_array_v&lt;T&gt;)</td></tr>
+<tr class="memitem:a3e05fbcc4aae5a32a332dd93c3832536 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a3e05fbcc4aae5a32a332dd93c3832536">mapTempBuffer</a> (size_t space)</td></tr>
+<tr class="separator:a3e05fbcc4aae5a32a332dd93c3832536 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d459594718dc2a953a637f1af09011 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires std::is_unbounded_array_v&lt;T&gt;</td></tr>
+<tr class="memitem:a19d459594718dc2a953a637f1af09011 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a19d459594718dc2a953a637f1af09011">mapTempBuffer</a> (size_t space, size_t count)</td></tr>
+<tr class="separator:a19d459594718dc2a953a637f1af09011 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7132332abf61f0093064922a52fac93 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ab7132332abf61f0093064922a52fac93">mapTempBuffer</a> (size_t space, size_t size) const =0</td></tr>
+<tr class="separator:ab7132332abf61f0093064922a52fac93 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0404ef986215ca66e8a76ece7ef5bed inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires std::is_unbounded_array_v&lt;T&gt;</td></tr>
+<tr class="memitem:aa0404ef986215ca66e8a76ece7ef5bed inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa0404ef986215ca66e8a76ece7ef5bed">mapVertices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count)</td></tr>
+<tr class="separator:aa0404ef986215ca66e8a76ece7ef5bed inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d882f29d9ccfdb05cde8cefe96d7490 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a0d882f29d9ccfdb05cde8cefe96d7490">mapVertices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, <a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t count) const =0</td></tr>
+<tr class="separator:a0d882f29d9ccfdb05cde8cefe96d7490 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae98742817831f3253f4ff3330164bedb inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ae98742817831f3253f4ff3330164bedb">operator=</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;)=delete</td></tr>
+<tr class="separator:ae98742817831f3253f4ff3330164bedb inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb9d959382d4edd3057d75ba876a61b inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#accb9d959382d4edd3057d75ba876a61b">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target) const =0</td></tr>
+<tr class="separator:accb9d959382d4edd3057d75ba876a61b inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa96e882c469d6588ab6840fc85f82265 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa96e882c469d6588ab6840fc85f82265">renderInstanced</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count) const =0</td></tr>
+<tr class="separator:aa96e882c469d6588ab6840fc85f82265 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e3c1bd0aec46703751751263096ad87 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6e3c1bd0aec46703751751263096ad87 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a6e3c1bd0aec46703751751263096ad87">renderInstanced</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, T &amp;&amp;instanceData) const</td></tr>
+<tr class="separator:a6e3c1bd0aec46703751751263096ad87 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac153ac0cb8f0dc87370f55689b5efe0b inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ac153ac0cb8f0dc87370f55689b5efe0b">renderQuad</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target) const</td></tr>
+<tr class="separator:ac153ac0cb8f0dc87370f55689b5efe0b inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac37037ffdc285b791432ee4456546107 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ac37037ffdc285b791432ee4456546107">renderRange</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t elementCount, size_t vertexOffset, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; indexOffset={}) const =0</td></tr>
+<tr class="separator:ac37037ffdc285b791432ee4456546107 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7f0219f35e86df37f24c063f4ebac7 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a3c7f0219f35e86df37f24c063f4ebac7">setGroupSize</a> (size_t groupSize) const =0</td></tr>
+<tr class="separator:a3c7f0219f35e86df37f24c063f4ebac7 inherit pub_methods_struct_engine_1_1_render_1_1_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1f85f79b11edce85b55b8ee3f887eb02"><td class="memItemLeft" align="right" valign="top">OpenGLPipelineLoader::Ptr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_ptr.html#a1f85f79b11edce85b55b8ee3f887eb02">mPipeline</a></td></tr>
+<tr class="separator:a1f85f79b11edce85b55b8ee3f887eb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html">Engine::Render::OpenGLPipelineInstance</a></td></tr>
+<tr class="memitem:a2e0126cfb5254f7448a495913bf4f54b inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a2e0126cfb5254f7448a495913bf4f54b">mConstantBufferSizes</a></td></tr>
+<tr class="separator:a2e0126cfb5254f7448a495913bf4f54b inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a516669042dc78eb35bef2835496bf9 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a2a516669042dc78eb35bef2835496bf9">mDepthChecking</a></td></tr>
+<tr class="separator:a2a516669042dc78eb35bef2835496bf9 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11e12e9353bac5922506be34142bc7a0 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="glad_8h.html#a9289d5b99dc1f27f01480360f2e18ae0">GLsizei</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a11e12e9353bac5922506be34142bc7a0">mElementCount</a></td></tr>
+<tr class="separator:a11e12e9353bac5922506be34142bc7a0 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed34ccbb20fdfb59c0d483c0a4ae2356 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="glad_8h.html#aa311c7f0d6ec4f1a33f9235c3651b86b">GLuint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#aed34ccbb20fdfb59c0d483c0a4ae2356">mHandle</a> = 0</td></tr>
+<tr class="separator:aed34ccbb20fdfb59c0d483c0a4ae2356 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92edeb2874a5ae708dcf6482f854a343 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a92edeb2874a5ae708dcf6482f854a343">mHasIndices</a> = false</td></tr>
+<tr class="separator:a92edeb2874a5ae708dcf6482f854a343 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b015f800de3e15bc00971c57a6f441f inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a7b015f800de3e15bc00971c57a6f441f">mIndexOffset</a> = 0</td></tr>
+<tr class="separator:a7b015f800de3e15bc00971c57a6f441f inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26fe21cf8dd1c06240baadf36e974e97 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a26fe21cf8dd1c06240baadf36e974e97">mMode</a></td></tr>
+<tr class="separator:a26fe21cf8dd1c06240baadf36e974e97 inherit pub_attribs_struct_engine_1_1_render_1_1_open_g_l_pipeline_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad3af5790578cc75e9bca12c38441ac6c" name="ad3af5790578cc75e9bca12c38441ac6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3af5790578cc75e9bca12c38441ac6c">&#9670;&#160;</a></span>OpenGLPipelineInstancePtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::OpenGLPipelineInstancePtr::OpenGLPipelineInstancePtr </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OpenGLPipelineLoader::Ptr&#160;</td>
+          <td class="paramname"><em>pipeline</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1f85f79b11edce85b55b8ee3f887eb02" name="a1f85f79b11edce85b55b8ee3f887eb02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f85f79b11edce85b55b8ee3f887eb02">&#9670;&#160;</a></span>mPipeline</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">OpenGLPipelineLoader::Ptr Engine::Render::OpenGLPipelineInstancePtr::mPipeline</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/opengl/src/OpenGL/util/<a class="el" href="openglpipelineinstance_8h.html">openglpipelineinstance.h</a></li>
+<li>plugins/renderer/opengl/src/OpenGL/util/<a class="el" href="openglpipelineinstance_8cpp.html">openglpipelineinstance.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

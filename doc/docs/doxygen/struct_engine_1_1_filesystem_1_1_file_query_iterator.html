@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Filesystem::FileQueryIterator Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Filesystem::FileQueryIterator Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_filesystem_1_1_file_query_iterator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="filequeryiterator-struct-reference">
+<h1>FileQueryIterator Struct Reference<a class="headerlink" href="#filequeryiterator-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Filesystem::FileQueryIterator Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_filesystem.html">Filesystem</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_filesystem_1_1_file_query_iterator-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Filesystem::FileQueryIterator Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;filequery.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a05b1a7d5b21fe052feb916f7d381fffa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a05b1a7d5b21fe052feb916f7d381fffa">difference_type</a> = int</td></tr>
+<tr class="separator:a05b1a7d5b21fe052feb916f7d381fffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ff27e463e254a72b6d63aaf85fff60"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a62ff27e463e254a72b6d63aaf85fff60">value_type</a> = <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_result.html">FileQueryResult</a></td></tr>
+<tr class="separator:a62ff27e463e254a72b6d63aaf85fff60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a8018d4332f143cfe87f2867b9beee647"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a8018d4332f143cfe87f2867b9beee647">FileQueryIterator</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query.html">FileQuery</a> *query)</td></tr>
+<tr class="separator:a8018d4332f143cfe87f2867b9beee647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35c0225e1e4c5a0bad053b3e2d69056"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#ac35c0225e1e4c5a0bad053b3e2d69056">FileQueryIterator</a> (<a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:ac35c0225e1e4c5a0bad053b3e2d69056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cdb97833aa11fc870f55c82707b87b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a9cdb97833aa11fc870f55c82707b87b7">~FileQueryIterator</a> ()</td></tr>
+<tr class="separator:a9cdb97833aa11fc870f55c82707b87b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebbac2b0af2b9e514c64aa84fb1f9757"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#aebbac2b0af2b9e514c64aa84fb1f9757">currentIsDir</a> ()</td></tr>
+<tr class="separator:aebbac2b0af2b9e514c64aa84fb1f9757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5ce6d3e38a00c205126f491a4f534d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#aa5ce6d3e38a00c205126f491a4f534d4">enterDir</a> ()</td></tr>
+<tr class="separator:aa5ce6d3e38a00c205126f491a4f534d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1717988cc80eea1af5ae7424b2ab79b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#ad1717988cc80eea1af5ae7424b2ab79b">leaveDir</a> ()</td></tr>
+<tr class="separator:ad1717988cc80eea1af5ae7424b2ab79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2941e2a37fb2899175467b3bf0034ee7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a2941e2a37fb2899175467b3bf0034ee7">operator!=</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;other) const</td></tr>
+<tr class="separator:a2941e2a37fb2899175467b3bf0034ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e005ba1133d672e75c41fbffd51a737"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a4e005ba1133d672e75c41fbffd51a737">operator!=</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_sentinel.html">FileQuerySentinel</a> &amp;sen) const</td></tr>
+<tr class="separator:a4e005ba1133d672e75c41fbffd51a737"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b03325b891918aeab91d2bd48b0c510"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_result.html">FileQueryResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a6b03325b891918aeab91d2bd48b0c510">operator*</a> () const</td></tr>
+<tr class="separator:a6b03325b891918aeab91d2bd48b0c510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63ee6ff95f170174779f6846b33c9948"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a63ee6ff95f170174779f6846b33c9948">operator++</a> ()</td></tr>
+<tr class="separator:a63ee6ff95f170174779f6846b33c9948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae226c3def8caea3e6bb548d686ac9ca5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#ae226c3def8caea3e6bb548d686ac9ca5">operator++</a> (int)</td></tr>
+<tr class="separator:ae226c3def8caea3e6bb548d686ac9ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ecf3cc11204a2673494df197abe8e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a24ecf3cc11204a2673494df197abe8e9">operator=</a> (<a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a24ecf3cc11204a2673494df197abe8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac027c3da4c8089acb609b89e430fd058"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#ac027c3da4c8089acb609b89e430fd058">operator==</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_sentinel.html">FileQuerySentinel</a> &amp;sen) const</td></tr>
+<tr class="separator:ac027c3da4c8089acb609b89e430fd058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a57b56db4bdbf0b0f9a7f93d80d742325"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a57b56db4bdbf0b0f9a7f93d80d742325">verify</a> ()</td></tr>
+<tr class="separator:a57b56db4bdbf0b0f9a7f93d80d742325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a82d98588d1150adedd93d50efceb2e01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a82d98588d1150adedd93d50efceb2e01">operator==</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_sentinel.html">FileQuerySentinel</a> &amp;sen, const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;self)</td></tr>
+<tr class="separator:a82d98588d1150adedd93d50efceb2e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a05b1a7d5b21fe052feb916f7d381fffa" name="a05b1a7d5b21fe052feb916f7d381fffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05b1a7d5b21fe052feb916f7d381fffa">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a05b1a7d5b21fe052feb916f7d381fffa">Engine::Filesystem::FileQueryIterator::difference_type</a> =  int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62ff27e463e254a72b6d63aaf85fff60" name="a62ff27e463e254a72b6d63aaf85fff60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62ff27e463e254a72b6d63aaf85fff60">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a62ff27e463e254a72b6d63aaf85fff60">Engine::Filesystem::FileQueryIterator::value_type</a> =  <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_result.html">FileQueryResult</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8018d4332f143cfe87f2867b9beee647" name="a8018d4332f143cfe87f2867b9beee647"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8018d4332f143cfe87f2867b9beee647">&#9670;&#160;</a></span>FileQueryIterator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Filesystem::FileQueryIterator::FileQueryIterator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query.html">FileQuery</a> *&#160;</td>
+          <td class="paramname"><em>query</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac35c0225e1e4c5a0bad053b3e2d69056" name="ac35c0225e1e4c5a0bad053b3e2d69056"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac35c0225e1e4c5a0bad053b3e2d69056">&#9670;&#160;</a></span>FileQueryIterator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Filesystem::FileQueryIterator::FileQueryIterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cdb97833aa11fc870f55c82707b87b7" name="a9cdb97833aa11fc870f55c82707b87b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cdb97833aa11fc870f55c82707b87b7">&#9670;&#160;</a></span>~FileQueryIterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Filesystem::FileQueryIterator::~FileQueryIterator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a24ecf3cc11204a2673494df197abe8e9" name="a24ecf3cc11204a2673494df197abe8e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24ecf3cc11204a2673494df197abe8e9">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp; Engine::Filesystem::FileQueryIterator::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b03325b891918aeab91d2bd48b0c510" name="a6b03325b891918aeab91d2bd48b0c510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b03325b891918aeab91d2bd48b0c510">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_result.html">FileQueryResult</a> Engine::Filesystem::FileQueryIterator::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63ee6ff95f170174779f6846b33c9948" name="a63ee6ff95f170174779f6846b33c9948"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63ee6ff95f170174779f6846b33c9948">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp; Engine::Filesystem::FileQueryIterator::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae226c3def8caea3e6bb548d686ac9ca5" name="ae226c3def8caea3e6bb548d686ac9ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae226c3def8caea3e6bb548d686ac9ca5">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Filesystem::FileQueryIterator::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2941e2a37fb2899175467b3bf0034ee7" name="a2941e2a37fb2899175467b3bf0034ee7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2941e2a37fb2899175467b3bf0034ee7">&#9670;&#160;</a></span>operator!=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Filesystem::FileQueryIterator::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac027c3da4c8089acb609b89e430fd058" name="ac027c3da4c8089acb609b89e430fd058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac027c3da4c8089acb609b89e430fd058">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Filesystem::FileQueryIterator::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_sentinel.html">FileQuerySentinel</a> &amp;&#160;</td>
+          <td class="paramname"><em>sen</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e005ba1133d672e75c41fbffd51a737" name="a4e005ba1133d672e75c41fbffd51a737"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e005ba1133d672e75c41fbffd51a737">&#9670;&#160;</a></span>operator!=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Filesystem::FileQueryIterator::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_sentinel.html">FileQuerySentinel</a> &amp;&#160;</td>
+          <td class="paramname"><em>sen</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5ce6d3e38a00c205126f491a4f534d4" name="aa5ce6d3e38a00c205126f491a4f534d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5ce6d3e38a00c205126f491a4f534d4">&#9670;&#160;</a></span>enterDir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Filesystem::FileQueryIterator::enterDir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1717988cc80eea1af5ae7424b2ab79b" name="ad1717988cc80eea1af5ae7424b2ab79b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1717988cc80eea1af5ae7424b2ab79b">&#9670;&#160;</a></span>leaveDir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Filesystem::FileQueryIterator::leaveDir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebbac2b0af2b9e514c64aa84fb1f9757" name="aebbac2b0af2b9e514c64aa84fb1f9757"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebbac2b0af2b9e514c64aa84fb1f9757">&#9670;&#160;</a></span>currentIsDir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Filesystem::FileQueryIterator::currentIsDir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57b56db4bdbf0b0f9a7f93d80d742325" name="a57b56db4bdbf0b0f9a7f93d80d742325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b56db4bdbf0b0f9a7f93d80d742325">&#9670;&#160;</a></span>verify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Filesystem::FileQueryIterator::verify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a82d98588d1150adedd93d50efceb2e01" name="a82d98588d1150adedd93d50efceb2e01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82d98588d1150adedd93d50efceb2e01">&#9670;&#160;</a></span>operator==</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_sentinel.html">FileQuerySentinel</a> &amp;&#160;</td>
+          <td class="paramname"><em>sen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html">FileQueryIterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>self</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Interfaces/filesystem/<a class="el" href="filequery_8h.html">filequery.h</a></li>
+<li>src/Interfaces/filesystem/<a class="el" href="filequery_8cpp.html">filequery.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

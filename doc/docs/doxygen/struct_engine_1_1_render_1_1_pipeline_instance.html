@@ -1,0 +1,978 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::PipelineInstance Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::PipelineInstance Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_pipeline_instance.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pipelineinstance-struct-reference">
+<h1>PipelineInstance Struct Reference<a class="headerlink" href="#pipelineinstance-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::PipelineInstance Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_render_1_1_pipeline_instance-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::PipelineInstance Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;pipelineinstance.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::PipelineInstance:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_pipeline_instance__inherit__graph.svg" width="100%" height="578"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa0515ce5588c00978877c2cac3ec3996"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa0515ce5588c00978877c2cac3ec3996">PipelineInstance</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a> &amp;config)</td></tr>
+<tr class="separator:aa0515ce5588c00978877c2cac3ec3996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f499a4113e3e946abf8590ff377d049"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a8f499a4113e3e946abf8590ff377d049">PipelineInstance</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;)=delete</td></tr>
+<tr class="separator:a8f499a4113e3e946abf8590ff377d049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcab5d84a2a893aa841727b116080002"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#abcab5d84a2a893aa841727b116080002">~PipelineInstance</a> ()=default</td></tr>
+<tr class="separator:abcab5d84a2a893aa841727b116080002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a587ef8925798df88a3996ae4ad53982e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a587ef8925798df88a3996ae4ad53982e">bindMesh</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_mesh_data.html">GPUMeshData</a> *mesh) const =0</td></tr>
+<tr class="separator:a587ef8925798df88a3996ae4ad53982e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4040de642c5e24338c74c7c8928f4094"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a4040de642c5e24338c74c7c8928f4094">bindResources</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t space, <a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a> block) const =0</td></tr>
+<tr class="separator:a4040de642c5e24338c74c7c8928f4094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85c14e305ce85cdf9140a3e5cb2b24d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa85c14e305ce85cdf9140a3e5cb2b24d">mapIndices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count) const =0</td></tr>
+<tr class="separator:aa85c14e305ce85cdf9140a3e5cb2b24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc45940d236082c367994db1a936bc7d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:adc45940d236082c367994db1a936bc7d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#adc45940d236082c367994db1a936bc7d">mapParameters</a> (size_t index)</td></tr>
+<tr class="separator:adc45940d236082c367994db1a936bc7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cd4a289ed680a84495b001e8231b6eb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a5cd4a289ed680a84495b001e8231b6eb">mapParameters</a> (size_t index)=0</td></tr>
+<tr class="separator:a5cd4a289ed680a84495b001e8231b6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e05fbcc4aae5a32a332dd93c3832536"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (!std::is_array_v&lt;T&gt;)</td></tr>
+<tr class="memitem:a3e05fbcc4aae5a32a332dd93c3832536"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a3e05fbcc4aae5a32a332dd93c3832536">mapTempBuffer</a> (size_t space)</td></tr>
+<tr class="separator:a3e05fbcc4aae5a32a332dd93c3832536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d459594718dc2a953a637f1af09011"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires std::is_unbounded_array_v&lt;T&gt;</td></tr>
+<tr class="memitem:a19d459594718dc2a953a637f1af09011"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a19d459594718dc2a953a637f1af09011">mapTempBuffer</a> (size_t space, size_t count)</td></tr>
+<tr class="separator:a19d459594718dc2a953a637f1af09011"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7132332abf61f0093064922a52fac93"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ab7132332abf61f0093064922a52fac93">mapTempBuffer</a> (size_t space, size_t size) const =0</td></tr>
+<tr class="separator:ab7132332abf61f0093064922a52fac93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0404ef986215ca66e8a76ece7ef5bed"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires std::is_unbounded_array_v&lt;T&gt;</td></tr>
+<tr class="memitem:aa0404ef986215ca66e8a76ece7ef5bed"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa0404ef986215ca66e8a76ece7ef5bed">mapVertices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count)</td></tr>
+<tr class="separator:aa0404ef986215ca66e8a76ece7ef5bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d882f29d9ccfdb05cde8cefe96d7490"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a0d882f29d9ccfdb05cde8cefe96d7490">mapVertices</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, <a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t count) const =0</td></tr>
+<tr class="separator:a0d882f29d9ccfdb05cde8cefe96d7490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae98742817831f3253f4ff3330164bedb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ae98742817831f3253f4ff3330164bedb">operator=</a> (const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;)=delete</td></tr>
+<tr class="separator:ae98742817831f3253f4ff3330164bedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb9d959382d4edd3057d75ba876a61b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#accb9d959382d4edd3057d75ba876a61b">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target) const =0</td></tr>
+<tr class="separator:accb9d959382d4edd3057d75ba876a61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa96e882c469d6588ab6840fc85f82265"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#aa96e882c469d6588ab6840fc85f82265">renderInstanced</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t count) const =0</td></tr>
+<tr class="separator:aa96e882c469d6588ab6840fc85f82265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e3c1bd0aec46703751751263096ad87"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6e3c1bd0aec46703751751263096ad87"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a6e3c1bd0aec46703751751263096ad87">renderInstanced</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, T &amp;&amp;instanceData) const</td></tr>
+<tr class="separator:a6e3c1bd0aec46703751751263096ad87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac153ac0cb8f0dc87370f55689b5efe0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ac153ac0cb8f0dc87370f55689b5efe0b">renderQuad</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target) const</td></tr>
+<tr class="separator:ac153ac0cb8f0dc87370f55689b5efe0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac37037ffdc285b791432ee4456546107"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#ac37037ffdc285b791432ee4456546107">renderRange</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t elementCount, size_t vertexOffset, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; indexOffset={}) const =0</td></tr>
+<tr class="separator:ac37037ffdc285b791432ee4456546107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7f0219f35e86df37f24c063f4ebac7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#a3c7f0219f35e86df37f24c063f4ebac7">setGroupSize</a> (size_t groupSize) const =0</td></tr>
+<tr class="separator:a3c7f0219f35e86df37f24c063f4ebac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa0515ce5588c00978877c2cac3ec3996" name="aa0515ce5588c00978877c2cac3ec3996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0515ce5588c00978877c2cac3ec3996">&#9670;&#160;</a></span>PipelineInstance() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::PipelineInstance::PipelineInstance </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f499a4113e3e946abf8590ff377d049" name="a8f499a4113e3e946abf8590ff377d049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f499a4113e3e946abf8590ff377d049">&#9670;&#160;</a></span>PipelineInstance() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::PipelineInstance::PipelineInstance </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abcab5d84a2a893aa841727b116080002" name="abcab5d84a2a893aa841727b116080002"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcab5d84a2a893aa841727b116080002">&#9670;&#160;</a></span>~PipelineInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Render::PipelineInstance::~PipelineInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae98742817831f3253f4ff3330164bedb" name="ae98742817831f3253f4ff3330164bedb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae98742817831f3253f4ff3330164bedb">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp; Engine::Render::PipelineInstance::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5cd4a289ed680a84495b001e8231b6eb" name="a5cd4a289ed680a84495b001e8231b6eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cd4a289ed680a84495b001e8231b6eb">&#9670;&#160;</a></span>mapParameters() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a> Engine::Render::PipelineInstance::mapParameters </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#aae363da66074e9a8786e40aae3b997ec">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#adcd70ee208ccee4230a3470bdbf59b92">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#ae4319c9d188c1c62e362ba8351c88249">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="adc45940d236082c367994db1a936bc7d" name="adc45940d236082c367994db1a936bc7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc45940d236082c367994db1a936bc7d">&#9670;&#160;</a></span>mapParameters() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt; Engine::Render::PipelineInstance::mapParameters </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7132332abf61f0093064922a52fac93" name="ab7132332abf61f0093064922a52fac93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7132332abf61f0093064922a52fac93">&#9670;&#160;</a></span>mapTempBuffer() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a> Engine::Render::PipelineInstance::mapTempBuffer </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a36fbda7d315f131407ca690e37d97c4a">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#ae7c4cd0596f4f352fa864a6f557b13a2">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#a1ff46cd757bf874b56f711c639d908eb">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="a3e05fbcc4aae5a32a332dd93c3832536" name="a3e05fbcc4aae5a32a332dd93c3832536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e05fbcc4aae5a32a332dd93c3832536">&#9670;&#160;</a></span>mapTempBuffer() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; <br />
+requires (!std::is_array_v&lt;T&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt; Engine::Render::PipelineInstance::mapTempBuffer </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19d459594718dc2a953a637f1af09011" name="a19d459594718dc2a953a637f1af09011"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19d459594718dc2a953a637f1af09011">&#9670;&#160;</a></span>mapTempBuffer() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; <br />
+requires std::is_unbounded_array_v&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt; Engine::Render::PipelineInstance::mapTempBuffer </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a587ef8925798df88a3996ae4ad53982e" name="a587ef8925798df88a3996ae4ad53982e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a587ef8925798df88a3996ae4ad53982e">&#9670;&#160;</a></span>bindMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::bindMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_mesh_data.html">GPUMeshData</a> *&#160;</td>
+          <td class="paramname"><em>mesh</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a331ac30aaf50c3e533781e01f3df1ae7">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a9205869b2a1e53785c55754d6ce9186d">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#ab73785fd2566ded57ce7faee49f06fe1">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="aa85c14e305ce85cdf9140a3e5cb2b24d" name="aa85c14e305ce85cdf9140a3e5cb2b24d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa85c14e305ce85cdf9140a3e5cb2b24d">&#9670;&#160;</a></span>mapIndices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; uint32_t &gt; Engine::Render::PipelineInstance::mapIndices </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a937faeb2d664355e9f798733373e729c">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a8dbe89bd288743f057698f27ad9f87da">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#a9149aabed1ab55f2e4e2ad829b2d512b">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="a0d882f29d9ccfdb05cde8cefe96d7490" name="a0d882f29d9ccfdb05cde8cefe96d7490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d882f29d9ccfdb05cde8cefe96d7490">&#9670;&#160;</a></span>mapVertices() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a> Engine::Render::PipelineInstance::mapVertices </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a564cb37f25d1904a304a41d47f725c18">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#af2207b6ea4a17c99a3f516914f3865ff">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#a44b6d6ec0cfc00a42459aa8423bc1f05">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="aa0404ef986215ca66e8a76ece7ef5bed" name="aa0404ef986215ca66e8a76ece7ef5bed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0404ef986215ca66e8a76ece7ef5bed">&#9670;&#160;</a></span>mapVertices() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; <br />
+requires std::is_unbounded_array_v&lt;T&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt; Engine::Render::PipelineInstance::mapVertices </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c7f0219f35e86df37f24c063f4ebac7" name="a3c7f0219f35e86df37f24c063f4ebac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c7f0219f35e86df37f24c063f4ebac7">&#9670;&#160;</a></span>setGroupSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::setGroupSize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>groupSize</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#ad003d76a3c7ff80099a66168bef992ac">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#ad3bb22358eaa12ffca0631d5c4caff38">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#aeecc7fcd60d08d4b6b99cbb3058029a2">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="accb9d959382d4edd3057d75ba876a61b" name="accb9d959382d4edd3057d75ba876a61b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accb9d959382d4edd3057d75ba876a61b">&#9670;&#160;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::render </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#aec1580af412c636545738ba928ec6edf">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a1dac70ad2fda6144190bd4608da676ed">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#a10f856a6045ca1cb7871308c03a9efd0">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="ac37037ffdc285b791432ee4456546107" name="ac37037ffdc285b791432ee4456546107"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac37037ffdc285b791432ee4456546107">&#9670;&#160;</a></span>renderRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::renderRange </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>elementCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>vertexOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt;&#160;</td>
+          <td class="paramname"><em>indexOffset</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a62f0d846e124570de74eb4d18ce01d3b">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#af98e988c457794c4f981fa3607c7e13e">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#a502dafa7903da86d27b4a7027c3cc2d8">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="aa96e882c469d6588ab6840fc85f82265" name="aa96e882c469d6588ab6840fc85f82265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa96e882c469d6588ab6840fc85f82265">&#9670;&#160;</a></span>renderInstanced() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::renderInstanced </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a4c665a146a00a7dcc6b69244f58eba4c">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a186c42ab54cf1b38e36601c298568e74">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#ab09db6143bb3a6b1002b22b5d7d62090">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<a id="a6e3c1bd0aec46703751751263096ad87" name="a6e3c1bd0aec46703751751263096ad87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e3c1bd0aec46703751751263096ad87">&#9670;&#160;</a></span>renderInstanced() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::renderInstanced </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>instanceData</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac153ac0cb8f0dc87370f55689b5efe0b" name="ac153ac0cb8f0dc87370f55689b5efe0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac153ac0cb8f0dc87370f55689b5efe0b">&#9670;&#160;</a></span>renderQuad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::renderQuad </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4040de642c5e24338c74c7c8928f4094" name="a4040de642c5e24338c74c7c8928f4094"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4040de642c5e24338c74c7c8928f4094">&#9670;&#160;</a></span>bindResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Render::PipelineInstance::bindResources </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a>&#160;</td>
+          <td class="paramname"><em>block</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html#a1cde24d7d143179de9e4a2d2674b0846">Engine::Render::DirectX12PipelineInstance</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html#a71b7fb84d15828acbba0e7add52148e6">Engine::Render::OpenGLPipelineInstance</a>, and <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#ae811a8928abc1d25ac6e22030f802f19">Engine::Render::VulkanPipelineInstance</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/api/src/Madgine/render/<a class="el" href="pipelineinstance_8h.html">pipelineinstance.h</a></li>
+<li>plugins/renderer/api/src/Madgine/render/<a class="el" href="pipelineloader_8cpp.html">pipelineloader.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

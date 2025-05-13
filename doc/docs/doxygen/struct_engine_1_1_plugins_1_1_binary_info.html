@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Plugins::BinaryInfo Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Plugins::BinaryInfo Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_plugins_1_1_binary_info.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="binaryinfo-struct-reference">
+<h1>BinaryInfo Struct Reference<a class="headerlink" href="#binaryinfo-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Plugins::BinaryInfo Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_plugins.html">Plugins</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">BinaryInfo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_plugins_1_1_binary_info-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Plugins::BinaryInfo Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;binaryinfo.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a958408ee0a2ca9c7a3db4b927a656847"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a958408ee0a2ca9c7a3db4b927a656847">mBinaryDir</a></td></tr>
+<tr class="separator:a958408ee0a2ca9c7a3db4b927a656847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca19b93b1f77b8109e2d519c27bd9322"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#aca19b93b1f77b8109e2d519c27bd9322">mBinaryFileName</a></td></tr>
+<tr class="separator:aca19b93b1f77b8109e2d519c27bd9322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a484ece1509af56d5a6bbf112e50e9731"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a484ece1509af56d5a6bbf112e50e9731">mMajorVersion</a></td></tr>
+<tr class="separator:a484ece1509af56d5a6bbf112e50e9731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2611688c2b1a5451e9d51a3b104fde67"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a2611688c2b1a5451e9d51a3b104fde67">mMinorVersion</a></td></tr>
+<tr class="separator:a2611688c2b1a5451e9d51a3b104fde67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8112b6f9ac1d0bd7d7355778f99436be"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a8112b6f9ac1d0bd7d7355778f99436be">mName</a></td></tr>
+<tr class="separator:a8112b6f9ac1d0bd7d7355778f99436be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90be50e88c3681d39a8f9523fcb3ddfe"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a90be50e88c3681d39a8f9523fcb3ddfe">mPatchNumber</a></td></tr>
+<tr class="separator:a90be50e88c3681d39a8f9523fcb3ddfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0ed9a1ac1c1c8569bd64382ab2c8f0"><td class="memItemLeft" align="right" valign="top">const char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a1d0ed9a1ac1c1c8569bd64382ab2c8f0">mPluginDependencies</a></td></tr>
+<tr class="separator:a1d0ed9a1ac1c1c8569bd64382ab2c8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaceaaa0d45e4cd5c244ff9ec75e9c141"><td class="memItemLeft" align="right" valign="top">const char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#aaceaaa0d45e4cd5c244ff9ec75e9c141">mPluginGroupDependencies</a></td></tr>
+<tr class="separator:aaceaaa0d45e4cd5c244ff9ec75e9c141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a3eb3bc02324e9fb1d0fec572c3de64"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a8a3eb3bc02324e9fb1d0fec572c3de64">mPrecompiledHeaderPath</a></td></tr>
+<tr class="separator:a8a3eb3bc02324e9fb1d0fec572c3de64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7971cf8a467f480f24fd78bc32cce955"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a7971cf8a467f480f24fd78bc32cce955">mProjectRoot</a></td></tr>
+<tr class="separator:a7971cf8a467f480f24fd78bc32cce955"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370190bcac710a399f7ba49f24638e7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_plugins_1_1_plugin.html">Plugin</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#a370190bcac710a399f7ba49f24638e7e">mSelf</a></td></tr>
+<tr class="separator:a370190bcac710a399f7ba49f24638e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace87fafc38cf13d39f9cd371e9e3985"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#aace87fafc38cf13d39f9cd371e9e3985">mSourceRoot</a></td></tr>
+<tr class="separator:aace87fafc38cf13d39f9cd371e9e3985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6832c27d7ea58c139440fb93a14e07"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html#aed6832c27d7ea58c139440fb93a14e07">mToolsName</a></td></tr>
+<tr class="separator:aed6832c27d7ea58c139440fb93a14e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a484ece1509af56d5a6bbf112e50e9731" name="a484ece1509af56d5a6bbf112e50e9731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a484ece1509af56d5a6bbf112e50e9731">&#9670;&#160;</a></span>mMajorVersion</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Plugins::BinaryInfo::mMajorVersion</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2611688c2b1a5451e9d51a3b104fde67" name="a2611688c2b1a5451e9d51a3b104fde67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2611688c2b1a5451e9d51a3b104fde67">&#9670;&#160;</a></span>mMinorVersion</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Plugins::BinaryInfo::mMinorVersion</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a90be50e88c3681d39a8f9523fcb3ddfe" name="a90be50e88c3681d39a8f9523fcb3ddfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90be50e88c3681d39a8f9523fcb3ddfe">&#9670;&#160;</a></span>mPatchNumber</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Plugins::BinaryInfo::mPatchNumber</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8112b6f9ac1d0bd7d7355778f99436be" name="a8112b6f9ac1d0bd7d7355778f99436be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8112b6f9ac1d0bd7d7355778f99436be">&#9670;&#160;</a></span>mName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Plugins::BinaryInfo::mName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7971cf8a467f480f24fd78bc32cce955" name="a7971cf8a467f480f24fd78bc32cce955"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7971cf8a467f480f24fd78bc32cce955">&#9670;&#160;</a></span>mProjectRoot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Plugins::BinaryInfo::mProjectRoot</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aace87fafc38cf13d39f9cd371e9e3985" name="aace87fafc38cf13d39f9cd371e9e3985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace87fafc38cf13d39f9cd371e9e3985">&#9670;&#160;</a></span>mSourceRoot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Plugins::BinaryInfo::mSourceRoot</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a958408ee0a2ca9c7a3db4b927a656847" name="a958408ee0a2ca9c7a3db4b927a656847"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a958408ee0a2ca9c7a3db4b927a656847">&#9670;&#160;</a></span>mBinaryDir</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Plugins::BinaryInfo::mBinaryDir</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca19b93b1f77b8109e2d519c27bd9322" name="aca19b93b1f77b8109e2d519c27bd9322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca19b93b1f77b8109e2d519c27bd9322">&#9670;&#160;</a></span>mBinaryFileName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Plugins::BinaryInfo::mBinaryFileName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed6832c27d7ea58c139440fb93a14e07" name="aed6832c27d7ea58c139440fb93a14e07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed6832c27d7ea58c139440fb93a14e07">&#9670;&#160;</a></span>mToolsName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Plugins::BinaryInfo::mToolsName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a3eb3bc02324e9fb1d0fec572c3de64" name="a8a3eb3bc02324e9fb1d0fec572c3de64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a3eb3bc02324e9fb1d0fec572c3de64">&#9670;&#160;</a></span>mPrecompiledHeaderPath</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Plugins::BinaryInfo::mPrecompiledHeaderPath</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d0ed9a1ac1c1c8569bd64382ab2c8f0" name="a1d0ed9a1ac1c1c8569bd64382ab2c8f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d0ed9a1ac1c1c8569bd64382ab2c8f0">&#9670;&#160;</a></span>mPluginDependencies</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char** Engine::Plugins::BinaryInfo::mPluginDependencies</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaceaaa0d45e4cd5c244ff9ec75e9c141" name="aaceaaa0d45e4cd5c244ff9ec75e9c141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaceaaa0d45e4cd5c244ff9ec75e9c141">&#9670;&#160;</a></span>mPluginGroupDependencies</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char** Engine::Plugins::BinaryInfo::mPluginGroupDependencies</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a370190bcac710a399f7ba49f24638e7e" name="a370190bcac710a399f7ba49f24638e7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a370190bcac710a399f7ba49f24638e7e">&#9670;&#160;</a></span>mSelf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_plugins_1_1_plugin.html">Plugin</a>* Engine::Plugins::BinaryInfo::mSelf</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Modules/plugins/<a class="el" href="binaryinfo_8h.html">binaryinfo.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

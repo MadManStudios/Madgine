@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::NodeGraph::dynamic_value_type&amp;lt; I &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::NodeGraph::dynamic_value_type&amp;lt; I &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_node_graph_1_1dynamic__value__type.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dynamic-value-type-lt-i-gt-struct-template-reference">
+<h1>dynamic_value_type&amp;lt; I &amp;gt; Struct Template Reference<a class="headerlink" href="#dynamic-value-type-lt-i-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::NodeGraph::dynamic_value_type&lt; I &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_node_graph.html">NodeGraph</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html">dynamic_value_type</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="struct_engine_1_1_node_graph_1_1dynamic__value__type-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::NodeGraph::dynamic_value_type&lt; I &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;sendernode.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::NodeGraph::dynamic_value_type&lt; I &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_node_graph_1_1dynamic__value__type__inherit__graph.svg" width="176" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a01b4c4a89f7c038979561327d2766a90"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html#a01b4c4a89f7c038979561327d2766a90">decay_t</a> = <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a></td></tr>
+<tr class="separator:a01b4c4a89f7c038979561327d2766a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b026d49accd3e20cb20dccaf818366c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html#a7b026d49accd3e20cb20dccaf818366c">no_value_type</a> = <a class="el" href="classvoid.html">void</a></td></tr>
+<tr class="separator:a7b026d49accd3e20cb20dccaf818366c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_struct_engine_1_1_value_type"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_value_type')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_value_type.html">Engine::ValueType</a></td></tr>
+<tr class="memitem:a5e67b16826e9657c966b80cf19ac841f inherit pub_types_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a5e67b16826e9657c966b80cf19ac841f">Union</a> = std::variant&lt; #define <a class="el" href="namespace_engine.html#a04816bdfff3c1dae9e9178957793b728acbafe90d8533e58256e29e4942ef8ad5">VALUETYPE_SEP</a> #define <a class="el" href="namespace_engine.html#a04816bdfff3c1dae9e9178957793b728a54ba452e34db0b7dcbb40b50816ac69d">VALUETYPE_TYPE</a>(Name, Storage,...) # 43 &quot;/github/workspace/src/Meta/keyvalue/valuetype.h&quot; 2 &gt;</td></tr>
+<tr class="separator:a5e67b16826e9657c966b80cf19ac841f inherit pub_types_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4271c16cc348db5fa1afa3ed1b3d47a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html#a4271c16cc348db5fa1afa3ed1b3d47a1">operator=</a> (const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;other)</td></tr>
+<tr class="separator:a4271c16cc348db5fa1afa3ed1b3d47a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704b3876a0c946ed254044ba740ec81f"><td class="memTemplParams" colspan="2">template&lt;DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; T&gt; </td></tr>
+<tr class="memitem:a704b3876a0c946ed254044ba740ec81f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html#a704b3876a0c946ed254044ba740ec81f">operator=</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a704b3876a0c946ed254044ba740ec81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0626d27aaf95334187a5caa8d210f6a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html#a0626d27aaf95334187a5caa8d210f6a6">operator=</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a0626d27aaf95334187a5caa8d210f6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_value_type"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_value_type')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_value_type.html">Engine::ValueType</a></td></tr>
+<tr class="memitem:ae382c83d8877f322e29e1c3330382868 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#ae382c83d8877f322e29e1c3330382868">ValueType</a> ()</td></tr>
+<tr class="separator:ae382c83d8877f322e29e1c3330382868 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1876b73f0cd419aec513b74b6df42ee1 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a1876b73f0cd419aec513b74b6df42ee1">ValueType</a> (const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;other)</td></tr>
+<tr class="separator:a1876b73f0cd419aec513b74b6df42ee1 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a353a47405b774483e6e3a5631ed6cc73 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; T&gt; </td></tr>
+<tr class="memitem:a353a47405b774483e6e3a5631ed6cc73 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a353a47405b774483e6e3a5631ed6cc73">ValueType</a> (T &amp;&amp;v)</td></tr>
+<tr class="separator:a353a47405b774483e6e3a5631ed6cc73 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54c06a1c98b4b4f190a7d8e267462dcd inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a54c06a1c98b4b4f190a7d8e267462dcd">ValueType</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a54c06a1c98b4b4f190a7d8e267462dcd inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad72b12bf842453e108be0d9ba5eaddf4 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#ad72b12bf842453e108be0d9ba5eaddf4">~ValueType</a> ()</td></tr>
+<tr class="separator:ad72b12bf842453e108be0d9ba5eaddf4 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56ef81ed0717c3ca5304a71744d3e824 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a56ef81ed0717c3ca5304a71744d3e824 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a6bb8280bfea9b41f8efba5be0ce342ae">ValueType_Return</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a56ef81ed0717c3ca5304a71744d3e824">as</a> () const</td></tr>
+<tr class="separator:a56ef81ed0717c3ca5304a71744d3e824 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a69382df41a6d464786f5bfc53057ba inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0a69382df41a6d464786f5bfc53057ba inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a6bb8280bfea9b41f8efba5be0ce342ae">ValueType_Return</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a0a69382df41a6d464786f5bfc53057ba">asDefault</a> (const T &amp;defaultValue)</td></tr>
+<tr class="separator:a0a69382df41a6d464786f5bfc53057ba inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8814ea0498071d1d930b170e943be562 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a8814ea0498071d1d930b170e943be562 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a8814ea0498071d1d930b170e943be562">call</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;retVal, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a8814ea0498071d1d930b170e943be562 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7544f26c2e8954805337014369471bcf inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a7544f26c2e8954805337014369471bcf">call</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;retVal, const <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;args) const</td></tr>
+<tr class="separator:a7544f26c2e8954805337014369471bcf inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a281b5c0560c31a22a4c896e1415844a6 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a281b5c0560c31a22a4c896e1415844a6">clear</a> ()</td></tr>
+<tr class="separator:a281b5c0560c31a22a4c896e1415844a6 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f980e4f3d1e1488836d2e97a606ed1 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a92f980e4f3d1e1488836d2e97a606ed1">getTypeString</a> () const</td></tr>
+<tr class="separator:a92f980e4f3d1e1488836d2e97a606ed1 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57590a4aa351527b13d392b41ba398d7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_value_type_index.html">ValueTypeIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a57590a4aa351527b13d392b41ba398d7">index</a> () const</td></tr>
+<tr class="separator:a57590a4aa351527b13d392b41ba398d7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5e2f1d3a5827bb6ac9ea1a5ea353fa inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:acc5e2f1d3a5827bb6ac9ea1a5ea353fa inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#acc5e2f1d3a5827bb6ac9ea1a5ea353fa">is</a> () const</td></tr>
+<tr class="separator:acc5e2f1d3a5827bb6ac9ea1a5ea353fa inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab06404db97a3e724eea1df7f6bb02bd7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#ab06404db97a3e724eea1df7f6bb02bd7">isReference</a> () const</td></tr>
+<tr class="separator:ab06404db97a3e724eea1df7f6bb02bd7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe30a89d63f9926abeb73fce12d25b58 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abe30a89d63f9926abeb73fce12d25b58 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#abe30a89d63f9926abeb73fce12d25b58">operator!=</a> (const T &amp;other) const</td></tr>
+<tr class="separator:abe30a89d63f9926abeb73fce12d25b58 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4271c16cc348db5fa1afa3ed1b3d47a1 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a4271c16cc348db5fa1afa3ed1b3d47a1">operator=</a> (const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;other)</td></tr>
+<tr class="separator:a4271c16cc348db5fa1afa3ed1b3d47a1 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704b3876a0c946ed254044ba740ec81f inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; T&gt; </td></tr>
+<tr class="memitem:a704b3876a0c946ed254044ba740ec81f inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a704b3876a0c946ed254044ba740ec81f">operator=</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a704b3876a0c946ed254044ba740ec81f inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0626d27aaf95334187a5caa8d210f6a6 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a0626d27aaf95334187a5caa8d210f6a6">operator=</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a0626d27aaf95334187a5caa8d210f6a6 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57c23d029fe630bc740fce3c188e4a89 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a57c23d029fe630bc740fce3c188e4a89 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a57c23d029fe630bc740fce3c188e4a89">operator==</a> (const V &amp;v) const</td></tr>
+<tr class="separator:a57c23d029fe630bc740fce3c188e4a89 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab32f5d6e80b43273d28285cf250d36a5 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#ab32f5d6e80b43273d28285cf250d36a5">setType</a> (<a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> <a class="el" href="struct_engine_1_1_value_type.html#a38cf6cbab9001153dd8dd54843768de7">type</a>)</td></tr>
+<tr class="separator:ab32f5d6e80b43273d28285cf250d36a5 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601b98a419c9d1b1f1350cbb10e06016 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a601b98a419c9d1b1f1350cbb10e06016">toShortString</a> () const</td></tr>
+<tr class="separator:a601b98a419c9d1b1f1350cbb10e06016 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38cf6cbab9001153dd8dd54843768de7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a38cf6cbab9001153dd8dd54843768de7">type</a> () const</td></tr>
+<tr class="separator:a38cf6cbab9001153dd8dd54843768de7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a258e681311b0767ebc406c55e18e393e inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a258e681311b0767ebc406c55e18e393e inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a258e681311b0767ebc406c55e18e393e">visit</a> (V &amp;&amp;visitor) &amp;</td></tr>
+<tr class="separator:a258e681311b0767ebc406c55e18e393e inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a3b9f76ce78b562fb0fa9c1832f7b7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a85a3b9f76ce78b562fb0fa9c1832f7b7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a85a3b9f76ce78b562fb0fa9c1832f7b7">visit</a> (V &amp;&amp;visitor) &amp;&amp;</td></tr>
+<tr class="separator:a85a3b9f76ce78b562fb0fa9c1832f7b7 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a001ea80f6dd17c6acab97871e163d8ea inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a001ea80f6dd17c6acab97871e163d8ea inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#a001ea80f6dd17c6acab97871e163d8ea">visit</a> (V &amp;&amp;visitor) const &amp;</td></tr>
+<tr class="separator:a001ea80f6dd17c6acab97871e163d8ea inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacccbedb787370bf021c9688bd052923 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:aacccbedb787370bf021c9688bd052923 inherit pub_methods_struct_engine_1_1_value_type"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_value_type.html#aacccbedb787370bf021c9688bd052923">visit</a> (V &amp;&amp;visitor) const &amp;&amp;</td></tr>
+<tr class="separator:aacccbedb787370bf021c9688bd052923 inherit pub_methods_struct_engine_1_1_value_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ab73e269ce7ab05272bff74dbee5fc3b8"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html#ab73e269ce7ab05272bff74dbee5fc3b8">index</a> = I</td></tr>
+<tr class="separator:ab73e269ce7ab05272bff74dbee5fc3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a01b4c4a89f7c038979561327d2766a90" name="a01b4c4a89f7c038979561327d2766a90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01b4c4a89f7c038979561327d2766a90">&#9670;&#160;</a></span>decay_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html">Engine::NodeGraph::dynamic_value_type</a>&lt; I &gt;::decay_t =  <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b026d49accd3e20cb20dccaf818366c" name="a7b026d49accd3e20cb20dccaf818366c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b026d49accd3e20cb20dccaf818366c">&#9670;&#160;</a></span>no_value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html">Engine::NodeGraph::dynamic_value_type</a>&lt; I &gt;::no_value_type =  <a class="el" href="classvoid.html">void</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4271c16cc348db5fa1afa3ed1b3d47a1" name="a4271c16cc348db5fa1afa3ed1b3d47a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4271c16cc348db5fa1afa3ed1b3d47a1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ValueType::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0626d27aaf95334187a5caa8d210f6a6" name="a0626d27aaf95334187a5caa8d210f6a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0626d27aaf95334187a5caa8d210f6a6">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ValueType::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a704b3876a0c946ed254044ba740ec81f" name="a704b3876a0c946ed254044ba740ec81f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a704b3876a0c946ed254044ba740ec81f">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+<div class="memtemplate">
+template&lt;DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ValueType::operator= </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab73e269ce7ab05272bff74dbee5fc3b8" name="ab73e269ce7ab05272bff74dbee5fc3b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab73e269ce7ab05272bff74dbee5fc3b8">&#9670;&#160;</a></span>index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html">Engine::NodeGraph::dynamic_value_type</a>&lt; I &gt;::index = I</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/util/<a class="el" href="sendernode_8h.html">sendernode.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

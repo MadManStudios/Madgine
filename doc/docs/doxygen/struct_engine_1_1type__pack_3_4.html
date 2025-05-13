@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::type_pack&amp;lt;&amp;gt; Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::type_pack&amp;lt;&amp;gt; Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1type__pack_3_4.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="type-pack-lt-gt-struct-reference">
+<h1>type_pack&amp;lt;&amp;gt; Struct Reference<a class="headerlink" href="#type-pack-lt-gt-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::type_pack&lt;&gt; Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1type__pack_3_4.html">type_pack&lt;&gt;</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="struct_engine_1_1type__pack_3_4-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::type_pack&lt;&gt; Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;type_pack.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a3d171d1b1e8adc1bc336996c35c48eb1"><td class="memTemplParams" colspan="2">template&lt;typename... T&gt; </td></tr>
+<tr class="memitem:a3d171d1b1e8adc1bc336996c35c48eb1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a3d171d1b1e8adc1bc336996c35c48eb1">append</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; T... &gt;</td></tr>
+<tr class="separator:a3d171d1b1e8adc1bc336996c35c48eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eeee2a78d8212300ef5d5d4f37058d2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a6eeee2a78d8212300ef5d5d4f37058d2">as_tuple</a> = <a class="el" href="struct_engine_1_1type__pack_3_4.html#a39239b21bc360c837ef1b1b806eca843">instantiate</a>&lt; std::tuple &gt;</td></tr>
+<tr class="separator:a6eeee2a78d8212300ef5d5d4f37058d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d97cdc6d11dd258bc7c5eee8593445b"><td class="memTemplParams" colspan="2">template&lt;typename Pack2 &gt; </td></tr>
+<tr class="memitem:a1d97cdc6d11dd258bc7c5eee8593445b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a1d97cdc6d11dd258bc7c5eee8593445b">concat</a> = Pack2</td></tr>
+<tr class="separator:a1d97cdc6d11dd258bc7c5eee8593445b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a760a640685954726090ed3eb32e89985"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Filter, typename... Args&gt; </td></tr>
+<tr class="memitem:a760a640685954726090ed3eb32e89985"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a760a640685954726090ed3eb32e89985">filter</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td></tr>
+<tr class="separator:a760a640685954726090ed3eb32e89985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4c0ba2eed11e56972cbf0ee519e9b27"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename, typename &gt; typename Op, typename Init &gt; </td></tr>
+<tr class="memitem:ac4c0ba2eed11e56972cbf0ee519e9b27"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#ac4c0ba2eed11e56972cbf0ee519e9b27">fold</a> = Init</td></tr>
+<tr class="separator:ac4c0ba2eed11e56972cbf0ee519e9b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a692e9b4470ee473674aa8290a0c2168c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a692e9b4470ee473674aa8290a0c2168c">indices</a> = std::index_sequence&lt;&gt;</td></tr>
+<tr class="separator:a692e9b4470ee473674aa8290a0c2168c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39239b21bc360c837ef1b1b806eca843"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Wrapper&gt; </td></tr>
+<tr class="memitem:a39239b21bc360c837ef1b1b806eca843"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a39239b21bc360c837ef1b1b806eca843">instantiate</a> = Wrapper&lt;&gt;</td></tr>
+<tr class="separator:a39239b21bc360c837ef1b1b806eca843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade6d67484f3db3cb31e2406d3ec62dd5"><td class="memTemplParams" colspan="2">template&lt;typename... T&gt; </td></tr>
+<tr class="memitem:ade6d67484f3db3cb31e2406d3ec62dd5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#ade6d67484f3db3cb31e2406d3ec62dd5">prepend</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; T... &gt;</td></tr>
+<tr class="separator:ade6d67484f3db3cb31e2406d3ec62dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe4e968d0ddeadc236d83478e56ec9cd"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Cond, typename T &gt; </td></tr>
+<tr class="memitem:afe4e968d0ddeadc236d83478e56ec9cd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#afe4e968d0ddeadc236d83478e56ec9cd">prepend_if</a> = std::conditional_t&lt; Cond, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt; &gt;</td></tr>
+<tr class="separator:afe4e968d0ddeadc236d83478e56ec9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eaa13879e4fe5c4d88a52a0e806e1c0"><td class="memTemplParams" colspan="2">template&lt;size_t I&gt; </td></tr>
+<tr class="memitem:a0eaa13879e4fe5c4d88a52a0e806e1c0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a0eaa13879e4fe5c4d88a52a0e806e1c0">select</a> = std::enable_if_t&lt; <a class="el" href="struct_engine_1_1dependent__bool.html">dependent_bool</a>&lt; std::integral_constant&lt; size_t, I &gt;, false &gt;::value &gt;</td></tr>
+<tr class="separator:a0eaa13879e4fe5c4d88a52a0e806e1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af859e1d5c098dcf54b545a6afeb824ee"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename F&gt; </td></tr>
+<tr class="memitem:af859e1d5c098dcf54b545a6afeb824ee"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#af859e1d5c098dcf54b545a6afeb824ee">transform</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td></tr>
+<tr class="separator:af859e1d5c098dcf54b545a6afeb824ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2c7044c6506e93e67ea2a194f2a84f6"><td class="memTemplParams" colspan="2">template&lt;template&lt; size_t &gt; typename F, size_t offset = 0&gt; </td></tr>
+<tr class="memitem:ab2c7044c6506e93e67ea2a194f2a84f6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#ab2c7044c6506e93e67ea2a194f2a84f6">transform_index</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td></tr>
+<tr class="separator:ab2c7044c6506e93e67ea2a194f2a84f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84989f2e13f3f39335b904b93dcdd481"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename, size_t &gt; typename F, size_t offset = 0&gt; </td></tr>
+<tr class="memitem:a84989f2e13f3f39335b904b93dcdd481"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a84989f2e13f3f39335b904b93dcdd481">transform_with_index</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td></tr>
+<tr class="separator:a84989f2e13f3f39335b904b93dcdd481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b633cec3cf1c9d322d697970c5f670d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7b633cec3cf1c9d322d697970c5f670d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a7b633cec3cf1c9d322d697970c5f670d">unique</a> = T</td></tr>
+<tr class="separator:a7b633cec3cf1c9d322d697970c5f670d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20193fe296917ff28a6df913e32f5d7"><td class="memTemplParams" colspan="2">template&lt;typename Default &gt; </td></tr>
+<tr class="memitem:af20193fe296917ff28a6df913e32f5d7"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#af20193fe296917ff28a6df913e32f5d7">unpack_unique</a> = Default</td></tr>
+<tr class="separator:af20193fe296917ff28a6df913e32f5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a978c040b2a9dd4b09cfbae3fc793b73d"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename F&gt; </td></tr>
+<tr class="memitem:a978c040b2a9dd4b09cfbae3fc793b73d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a978c040b2a9dd4b09cfbae3fc793b73d">value_transform</a> = <a class="el" href="struct_engine_1_1auto__pack.html">auto_pack</a>&lt;&gt;</td></tr>
+<tr class="separator:a978c040b2a9dd4b09cfbae3fc793b73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a8628c0374efce3c185c48f2e2733fa86"><td class="memItemLeft" align="right" valign="top">static constexpr const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a8628c0374efce3c185c48f2e2733fa86">size</a> = 0</td></tr>
+<tr class="separator:a8628c0374efce3c185c48f2e2733fa86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a692e9b4470ee473674aa8290a0c2168c" name="a692e9b4470ee473674aa8290a0c2168c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a692e9b4470ee473674aa8290a0c2168c">&#9670;&#160;</a></span>indices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::indices =  std::index_sequence&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d171d1b1e8adc1bc336996c35c48eb1" name="a3d171d1b1e8adc1bc336996c35c48eb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d171d1b1e8adc1bc336996c35c48eb1">&#9670;&#160;</a></span>append</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::append =  <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;T...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade6d67484f3db3cb31e2406d3ec62dd5" name="ade6d67484f3db3cb31e2406d3ec62dd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade6d67484f3db3cb31e2406d3ec62dd5">&#9670;&#160;</a></span>prepend</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::prepend =  <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;T...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe4e968d0ddeadc236d83478e56ec9cd" name="afe4e968d0ddeadc236d83478e56ec9cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe4e968d0ddeadc236d83478e56ec9cd">&#9670;&#160;</a></span>prepend_if</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Cond, typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::prepend_if =  std::conditional_t&lt;Cond, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d97cdc6d11dd258bc7c5eee8593445b" name="a1d97cdc6d11dd258bc7c5eee8593445b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d97cdc6d11dd258bc7c5eee8593445b">&#9670;&#160;</a></span>concat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Pack2 &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::concat =  Pack2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a760a640685954726090ed3eb32e89985" name="a760a640685954726090ed3eb32e89985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a760a640685954726090ed3eb32e89985">&#9670;&#160;</a></span>filter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename Filter, typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::filter =  <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39239b21bc360c837ef1b1b806eca843" name="a39239b21bc360c837ef1b1b806eca843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39239b21bc360c837ef1b1b806eca843">&#9670;&#160;</a></span>instantiate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename Wrapper&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::instantiate =  Wrapper&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac4c0ba2eed11e56972cbf0ee519e9b27" name="ac4c0ba2eed11e56972cbf0ee519e9b27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4c0ba2eed11e56972cbf0ee519e9b27">&#9670;&#160;</a></span>fold</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename, typename &gt; typename Op, typename Init &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::fold =  Init</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6eeee2a78d8212300ef5d5d4f37058d2" name="a6eeee2a78d8212300ef5d5d4f37058d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eeee2a78d8212300ef5d5d4f37058d2">&#9670;&#160;</a></span>as_tuple</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::as_tuple =  <a class="el" href="struct_engine_1_1type__pack_3_4.html#a39239b21bc360c837ef1b1b806eca843">instantiate</a>&lt;std::tuple&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af859e1d5c098dcf54b545a6afeb824ee" name="af859e1d5c098dcf54b545a6afeb824ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af859e1d5c098dcf54b545a6afeb824ee">&#9670;&#160;</a></span>transform</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename &gt; typename F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::transform =  <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab2c7044c6506e93e67ea2a194f2a84f6" name="ab2c7044c6506e93e67ea2a194f2a84f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2c7044c6506e93e67ea2a194f2a84f6">&#9670;&#160;</a></span>transform_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; size_t &gt; typename F, size_t offset = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::transform_index =  <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a84989f2e13f3f39335b904b93dcdd481" name="a84989f2e13f3f39335b904b93dcdd481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84989f2e13f3f39335b904b93dcdd481">&#9670;&#160;</a></span>transform_with_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename, size_t &gt; typename F, size_t offset = 0&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::transform_with_index =  <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a978c040b2a9dd4b09cfbae3fc793b73d" name="a978c040b2a9dd4b09cfbae3fc793b73d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a978c040b2a9dd4b09cfbae3fc793b73d">&#9670;&#160;</a></span>value_transform</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename &gt; typename F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::value_transform =  <a class="el" href="struct_engine_1_1auto__pack.html">auto_pack</a>&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b633cec3cf1c9d322d697970c5f670d" name="a7b633cec3cf1c9d322d697970c5f670d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b633cec3cf1c9d322d697970c5f670d">&#9670;&#160;</a></span>unique</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::unique =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af20193fe296917ff28a6df913e32f5d7" name="af20193fe296917ff28a6df913e32f5d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af20193fe296917ff28a6df913e32f5d7">&#9670;&#160;</a></span>unpack_unique</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Default &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::unpack_unique =  Default</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0eaa13879e4fe5c4d88a52a0e806e1c0" name="a0eaa13879e4fe5c4d88a52a0e806e1c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eaa13879e4fe5c4d88a52a0e806e1c0">&#9670;&#160;</a></span>select</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::select =  std::enable_if_t&lt;<a class="el" href="struct_engine_1_1dependent__bool.html">dependent_bool</a>&lt;std::integral_constant&lt;size_t, I&gt;, false&gt;::value&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8628c0374efce3c185c48f2e2733fa86" name="a8628c0374efce3c185c48f2e2733fa86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8628c0374efce3c185c48f2e2733fa86">&#9670;&#160;</a></span>size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const size_t <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::size = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="type__pack_8h.html">type_pack.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

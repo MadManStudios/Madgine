@@ -1,0 +1,1220 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/util/sendernode.cpp File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/util/sendernode.cpp File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/sendernode_8cpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plugins-behavior-nodegraph-src-madgine-nodegraph-nodes-util-sendernode-cpp-file-reference">
+<h1>plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/util/sendernode.cpp File Reference<a class="headerlink" href="#plugins-behavior-nodegraph-src-madgine-nodegraph-nodes-util-sendernode-cpp-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/util/sendernode.cpp File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_38c8d24aef3972a7f87b834274e76e31.html">plugins</a></li><li class="navelem"><a class="el" href="dir_730e86da1a00f4cd5a8ebc1b01c8a81f.html">behavior</a></li><li class="navelem"><a class="el" href="dir_686b9bcf8fd3ae3c95e2b1a125d56acf.html">nodegraph</a></li><li class="navelem"><a class="el" href="dir_7a06082889a54b78ffff72dedd59c595.html">src</a></li><li class="navelem"><a class="el" href="dir_8f90b9d3cec5b173300dc38bbfebfe2c.html">Madgine</a></li><li class="navelem"><a class="el" href="dir_4699e983506933b945fa2f69ce6eb295.html">nodegraph</a></li><li class="navelem"><a class="el" href="dir_12f4d6aad87753f2e37c21c12f9f24a8.html">nodes</a></li><li class="navelem"><a class="el" href="dir_6f7fa3b14d70f160d59d706bf8a050f2.html">util</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">sendernode.cpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+Include dependency graph for sendernode.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="sendernode_8cpp__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a17875df1f2ede78b6ddf61399e5eb1c2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a> = <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a>, connect_helper_t {}, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_reader.html">Engine::NodeGraph::NodeReader</a>&lt; <a class="el" href="struct_engine_1_1_key_value_sender.html">Engine::KeyValueSender</a> &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_algorithm.html">Engine::NodeGraph::NodeAlgorithm</a>&lt; 1 &gt; &gt;</td></tr>
+<tr class="separator:a17875df1f2ede78b6ddf61399e5eb1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd0eb258899d5234537fedc3b2abd319"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> = <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a>, <a class="el" href="namespace_engine_1_1_execution.html#af77fe2c5a4bc84afd3e464aa7e3a70cd">Engine::Execution::for_each</a>, std::vector&lt; int &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_router.html">Engine::NodeGraph::NodeRouter</a>&lt; 1, <a class="el" href="struct_engine_1_1_value_type.html">Engine::ValueType</a> &gt; &gt;</td></tr>
+<tr class="separator:acd0eb258899d5234537fedc3b2abd319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a91379c7463b579886757dcaf4853da"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a8a91379c7463b579886757dcaf4853da">StopWhenNode</a> = <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a>, stop_when_helper_t {}, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_reader.html">Engine::NodeGraph::NodeReader</a>&lt; <a class="el" href="struct_engine_1_1_key_value_sender.html">Engine::KeyValueSender</a> &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_sender.html">Engine::NodeGraph::NodeSender</a>&lt; 1 &gt; &gt;</td></tr>
+<tr class="separator:a8a91379c7463b579886757dcaf4853da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3a90f0d732c68ec18d2768146a85a982"><td class="memItemLeft" align="right" valign="top">AddNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a3a90f0d732c68ec18d2768146a85a982">METATABLE_BEGIN_BASE</a> (AddNode, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(AddNode</td></tr>
+<tr class="separator:a3a90f0d732c68ec18d2768146a85a982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16ead2cade7b8ae53f2646dbc6605ca9"><td class="memItemLeft" align="right" valign="top">BreakVector3Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a16ead2cade7b8ae53f2646dbc6605ca9">METATABLE_BEGIN_BASE</a> (BreakVector3Node, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(BreakVector3Node</td></tr>
+<tr class="separator:a16ead2cade7b8ae53f2646dbc6605ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add77f9b65b2fc8fd754c01a2d5ddcfa9"><td class="memItemLeft" align="right" valign="top">BreakVector4Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#add77f9b65b2fc8fd754c01a2d5ddcfa9">METATABLE_BEGIN_BASE</a> (BreakVector4Node, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(BreakVector4Node</td></tr>
+<tr class="separator:add77f9b65b2fc8fd754c01a2d5ddcfa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2f31990f2e6a48656d0ae2b12331772"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#ae2f31990f2e6a48656d0ae2b12331772">METATABLE_BEGIN_BASE</a> (<a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(<a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a></td></tr>
+<tr class="separator:ae2f31990f2e6a48656d0ae2b12331772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a30798a5cb9b97be1191e8944772608"><td class="memItemLeft" align="right" valign="top">DivideNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a3a30798a5cb9b97be1191e8944772608">METATABLE_BEGIN_BASE</a> (DivideNode, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(DivideNode</td></tr>
+<tr class="separator:a3a30798a5cb9b97be1191e8944772608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a288b983096ac3d39f06b4f3fcc3fd04a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a288b983096ac3d39f06b4f3fcc3fd04a">METATABLE_BEGIN_BASE</a> (<a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(<a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a></td></tr>
+<tr class="separator:a288b983096ac3d39f06b4f3fcc3fd04a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f8548ec2f1877d1117bd5f2f9e7776"><td class="memItemLeft" align="right" valign="top">JustNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#ae9f8548ec2f1877d1117bd5f2f9e7776">METATABLE_BEGIN_BASE</a> (JustNode, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(JustNode</td></tr>
+<tr class="separator:ae9f8548ec2f1877d1117bd5f2f9e7776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5efac0f4ba4927bd145cc0421516837"><td class="memItemLeft" align="right" valign="top">LetValueNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#af5efac0f4ba4927bd145cc0421516837">METATABLE_BEGIN_BASE</a> (LetValueNode, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(LetValueNode</td></tr>
+<tr class="separator:af5efac0f4ba4927bd145cc0421516837"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f7cad1eeb01e4b06ba6bad25df7d124"><td class="memItemLeft" align="right" valign="top">LogNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a7f7cad1eeb01e4b06ba6bad25df7d124">METATABLE_BEGIN_BASE</a> (LogNode, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(LogNode</td></tr>
+<tr class="separator:a7f7cad1eeb01e4b06ba6bad25df7d124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48fcc236c6c4ef1be4a2bdab439ffd6"><td class="memItemLeft" align="right" valign="top">MakeVector3Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#ad48fcc236c6c4ef1be4a2bdab439ffd6">METATABLE_BEGIN_BASE</a> (MakeVector3Node, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(MakeVector3Node</td></tr>
+<tr class="separator:ad48fcc236c6c4ef1be4a2bdab439ffd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07b4f8020015c4e09879da82eac615c5"><td class="memItemLeft" align="right" valign="top">Vector3To4Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a07b4f8020015c4e09879da82eac615c5">METATABLE_BEGIN_BASE</a> (Vector3To4Node, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(Vector3To4Node</td></tr>
+<tr class="separator:a07b4f8020015c4e09879da82eac615c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aedc132ccfb74894dbc79113f130cd4"><td class="memItemLeft" align="right" valign="top">WhenAllNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a5aedc132ccfb74894dbc79113f130cd4">METATABLE_BEGIN_BASE</a> (WhenAllNode, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>) <a class="el" href="serializetable__impl_8h.html#a159f0195ace0039d4a29d74bee55a522">SERIALIZETABLE_INHERIT_BEGIN</a>(WhenAllNode</td></tr>
+<tr class="separator:a5aedc132ccfb74894dbc79113f130cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a707f8df41ece1c3b94b503ffce29caff"><td class="memItemLeft" align="right" valign="top">AddNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a707f8df41ece1c3b94b503ffce29caff">METATABLE_END</a> (AddNode) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(AddNode) using DivideNode</td></tr>
+<tr class="separator:a707f8df41ece1c3b94b503ffce29caff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b69c0776e77b2c8199f02ebe70481eb"><td class="memItemLeft" align="right" valign="top">BreakVector3Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a1b69c0776e77b2c8199f02ebe70481eb">METATABLE_END</a> (BreakVector3Node) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(BreakVector3Node) using BreakVector4Node</td></tr>
+<tr class="separator:a1b69c0776e77b2c8199f02ebe70481eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a02f332d0b04b5823e48107f69cc0c"><td class="memItemLeft" align="right" valign="top">BreakVector4Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#ac3a02f332d0b04b5823e48107f69cc0c">METATABLE_END</a> (BreakVector4Node) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(BreakVector4Node) using MakeVector3Node</td></tr>
+<tr class="separator:ac3a02f332d0b04b5823e48107f69cc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb960f84b8b1dc97295d06952bd3b69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#accb960f84b8b1dc97295d06952bd3b69">METATABLE_END</a> (<a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(<a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>) <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> stop_when_helper_t = <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a> , <a class="el" href="namespace_engine_1_1_debug.html#a8445da610569d87890e37f341952e437">Engine::Debug::when_all_range</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_range.html">Engine::NodeGraph::NodeRange</a>&lt;1&gt; &gt;</td></tr>
+<tr class="separator:accb960f84b8b1dc97295d06952bd3b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0de0a561d2bfa21603d30b6316359e58"><td class="memItemLeft" align="right" valign="top">DivideNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a0de0a561d2bfa21603d30b6316359e58">METATABLE_END</a> (DivideNode) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(DivideNode) using LogNode</td></tr>
+<tr class="separator:a0de0a561d2bfa21603d30b6316359e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f3f4308f274698eb70c6b38369e371"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> setArguments&lt; 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a26f3f4308f274698eb70c6b38369e371">METATABLE_END</a> (<a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(<a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>) using LetValueNode</td></tr>
+<tr class="separator:a26f3f4308f274698eb70c6b38369e371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a549136f4d79e80db27b41398b49677f6"><td class="memItemLeft" align="right" valign="top">setArguments&lt; 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a549136f4d79e80db27b41398b49677f6">METATABLE_END</a> (JustNode) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(JustNode) using Vector3To4Node</td></tr>
+<tr class="separator:a549136f4d79e80db27b41398b49677f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a727fea018b4b86bd2368d745ae1473df"><td class="memItemLeft" align="right" valign="top">LetValueNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a727fea018b4b86bd2368d745ae1473df">METATABLE_END</a> (LetValueNode) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(LetValueNode) using AddNode</td></tr>
+<tr class="separator:a727fea018b4b86bd2368d745ae1473df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7451420e7425d133ba821976c8ab7c6"><td class="memItemLeft" align="right" valign="top">LogNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#aa7451420e7425d133ba821976c8ab7c6">METATABLE_END</a> (LogNode) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(LogNode) using JustNode</td></tr>
+<tr class="separator:aa7451420e7425d133ba821976c8ab7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22545851ec09052efec3f68ed9b29c8b"><td class="memItemLeft" align="right" valign="top">MakeVector3Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a22545851ec09052efec3f68ed9b29c8b">METATABLE_END</a> (MakeVector3Node) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(MakeVector3Node) <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> connect_helper_t</td></tr>
+<tr class="separator:a22545851ec09052efec3f68ed9b29c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba868db8f753c48d922b29e7cbdb60c9"><td class="memItemLeft" align="right" valign="top">Vector3To4Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#aba868db8f753c48d922b29e7cbdb60c9">METATABLE_END</a> (Vector3To4Node) <a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(Vector3To4Node) using BreakVector3Node</td></tr>
+<tr class="separator:aba868db8f753c48d922b29e7cbdb60c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc4de129fae46b2048792a2d76bdfee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a9cc4de129fae46b2048792a2d76bdfee">PROPERTY</a> (Arguments, getArguments&lt; 0 &gt;, setArguments&lt; 0 &gt;) <a class="el" href="serializetable__impl_8h.html#a27892ef8d36cc5544b5fdc6dcca5e3be">ENCAPSULATED_FIELD</a>(Arguments</td></tr>
+<tr class="separator:a9cc4de129fae46b2048792a2d76bdfee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5616616e24814a7f5335a56bf8e2d96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#aa5616616e24814a7f5335a56bf8e2d96">PROPERTY</a> (Value, getArguments&lt; 0 &gt;, setArguments&lt; 0 &gt;) <a class="el" href="serializetable__impl_8h.html#a27892ef8d36cc5544b5fdc6dcca5e3be">ENCAPSULATED_FIELD</a>(Value</td></tr>
+<tr class="separator:aa5616616e24814a7f5335a56bf8e2d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8718fd07518666ef49d767e6f8ac562d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a8718fd07518666ef49d767e6f8ac562d">REGISTER_TYPE</a> (AddNode) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(Add</td></tr>
+<tr class="separator:a8718fd07518666ef49d767e6f8ac562d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaeac3122796418333bf9b88408b86d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#aeaeac3122796418333bf9b88408b86d1">REGISTER_TYPE</a> (BreakVector3Node) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(BreakVector3</td></tr>
+<tr class="separator:aeaeac3122796418333bf9b88408b86d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a940dbe0090599e2eb850bdb32c447fa3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a940dbe0090599e2eb850bdb32c447fa3">REGISTER_TYPE</a> (BreakVector4Node) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(BreakVector4</td></tr>
+<tr class="separator:a940dbe0090599e2eb850bdb32c447fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32346995610ccda438d6c0bd4b8be808"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a32346995610ccda438d6c0bd4b8be808">REGISTER_TYPE</a> (<a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(Connect</td></tr>
+<tr class="separator:a32346995610ccda438d6c0bd4b8be808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa2c651a0fd058039312862ca2043b77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#afa2c651a0fd058039312862ca2043b77">REGISTER_TYPE</a> (DivideNode) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(Divide</td></tr>
+<tr class="separator:afa2c651a0fd058039312862ca2043b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b461582b881b99f3aa225c8685946e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a6b461582b881b99f3aa225c8685946e9">REGISTER_TYPE</a> (<a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(ForEach</td></tr>
+<tr class="separator:a6b461582b881b99f3aa225c8685946e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f230e802bf6aa52a28d86a26338ae79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a2f230e802bf6aa52a28d86a26338ae79">REGISTER_TYPE</a> (JustNode) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(Just</td></tr>
+<tr class="separator:a2f230e802bf6aa52a28d86a26338ae79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9f1d02a55e1563e1f47c2c94eb134ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#af9f1d02a55e1563e1f47c2c94eb134ce">REGISTER_TYPE</a> (LetValueNode) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(LetValue</td></tr>
+<tr class="separator:af9f1d02a55e1563e1f47c2c94eb134ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a377b44bb86c7cef61641a3a99e828d6f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a377b44bb86c7cef61641a3a99e828d6f">REGISTER_TYPE</a> (LogNode) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(Log</td></tr>
+<tr class="separator:a377b44bb86c7cef61641a3a99e828d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00794f7ccdeae7ca40f04fe82a54befb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a00794f7ccdeae7ca40f04fe82a54befb">REGISTER_TYPE</a> (MakeVector3Node) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(MakeVector3</td></tr>
+<tr class="separator:a00794f7ccdeae7ca40f04fe82a54befb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a3cc4c997e58e2725e3c9278187b5ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a2a3cc4c997e58e2725e3c9278187b5ac">REGISTER_TYPE</a> (Vector3To4Node) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(Vector3To4</td></tr>
+<tr class="separator:a2a3cc4c997e58e2725e3c9278187b5ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4176343b018fe53b4c5da086ef407dc8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a4176343b018fe53b4c5da086ef407dc8">REGISTER_TYPE</a> (WhenAllNode) <a class="el" href="uniquecomponent_8h.html#acf672dc43c032d499e0280feb3565995">NAMED_UNIQUECOMPONENT</a>(WhenAll</td></tr>
+<tr class="separator:a4176343b018fe53b4c5da086ef407dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a65e3db64cb0c37d6c377ffff238ae9d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sendernode_8cpp.html#a65e3db64cb0c37d6c377ffff238ae9d2">getArguments&lt; 0 &gt;</a></td></tr>
+<tr class="separator:a65e3db64cb0c37d6c377ffff238ae9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="acd0eb258899d5234537fedc3b2abd319" name="acd0eb258899d5234537fedc3b2abd319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd0eb258899d5234537fedc3b2abd319">&#9670;&#160;</a></span>ForEachNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> =  <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a> , <a class="el" href="namespace_engine_1_1_execution.html#af77fe2c5a4bc84afd3e464aa7e3a70cd">Engine::Execution::for_each</a>, std::vector&lt;int&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_router.html">Engine::NodeGraph::NodeRouter</a>&lt;1, <a class="el" href="struct_engine_1_1_value_type.html">Engine::ValueType</a>&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a17875df1f2ede78b6ddf61399e5eb1c2" name="a17875df1f2ede78b6ddf61399e5eb1c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17875df1f2ede78b6ddf61399e5eb1c2">&#9670;&#160;</a></span>ConnectNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a> =  <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a> , connect_helper_t {}, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_reader.html">Engine::NodeGraph::NodeReader</a>&lt;<a class="el" href="struct_engine_1_1_key_value_sender.html">Engine::KeyValueSender</a>&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_algorithm.html">Engine::NodeGraph::NodeAlgorithm</a>&lt;1&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a91379c7463b579886757dcaf4853da" name="a8a91379c7463b579886757dcaf4853da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a91379c7463b579886757dcaf4853da">&#9670;&#160;</a></span>StopWhenNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="sendernode_8cpp.html#a8a91379c7463b579886757dcaf4853da">StopWhenNode</a> =  <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a> , stop_when_helper_t {}, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_reader.html">Engine::NodeGraph::NodeReader</a>&lt;<a class="el" href="struct_engine_1_1_key_value_sender.html">Engine::KeyValueSender</a>&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_sender.html">Engine::NodeGraph::NodeSender</a>&lt;1&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6b461582b881b99f3aa225c8685946e9" name="a6b461582b881b99f3aa225c8685946e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b461582b881b99f3aa225c8685946e9">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[1/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a288b983096ac3d39f06b4f3fcc3fd04a" name="a288b983096ac3d39f06b4f3fcc3fd04a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a288b983096ac3d39f06b4f3fcc3fd04a">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[1/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cc4de129fae46b2048792a2d76bdfee" name="a9cc4de129fae46b2048792a2d76bdfee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cc4de129fae46b2048792a2d76bdfee">&#9670;&#160;</a></span>PROPERTY() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> PROPERTY </td>
+          <td>(</td>
+          <td class="paramtype">Arguments&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">getArguments&lt; 0 &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">setArguments&lt; 0 &gt;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26f3f4308f274698eb70c6b38369e371" name="a26f3f4308f274698eb70c6b38369e371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f3f4308f274698eb70c6b38369e371">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[1/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> setArguments&lt; 0 &gt; METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sendernode_8cpp.html#acd0eb258899d5234537fedc3b2abd319">ForEachNode</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9f1d02a55e1563e1f47c2c94eb134ce" name="af9f1d02a55e1563e1f47c2c94eb134ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9f1d02a55e1563e1f47c2c94eb134ce">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[2/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">LetValueNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af5efac0f4ba4927bd145cc0421516837" name="af5efac0f4ba4927bd145cc0421516837"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5efac0f4ba4927bd145cc0421516837">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[2/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LetValueNode METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">LetValueNode&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a727fea018b4b86bd2368d745ae1473df" name="a727fea018b4b86bd2368d745ae1473df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a727fea018b4b86bd2368d745ae1473df">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[2/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LetValueNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">LetValueNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8718fd07518666ef49d767e6f8ac562d" name="a8718fd07518666ef49d767e6f8ac562d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8718fd07518666ef49d767e6f8ac562d">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[3/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">AddNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a90f0d732c68ec18d2768146a85a982" name="a3a90f0d732c68ec18d2768146a85a982"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a90f0d732c68ec18d2768146a85a982">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[3/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AddNode METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">AddNode&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a707f8df41ece1c3b94b503ffce29caff" name="a707f8df41ece1c3b94b503ffce29caff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707f8df41ece1c3b94b503ffce29caff">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[3/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AddNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">AddNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa2c651a0fd058039312862ca2043b77" name="afa2c651a0fd058039312862ca2043b77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa2c651a0fd058039312862ca2043b77">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[4/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">DivideNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a30798a5cb9b97be1191e8944772608" name="a3a30798a5cb9b97be1191e8944772608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a30798a5cb9b97be1191e8944772608">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[4/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DivideNode METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">DivideNode&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0de0a561d2bfa21603d30b6316359e58" name="a0de0a561d2bfa21603d30b6316359e58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de0a561d2bfa21603d30b6316359e58">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[4/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DivideNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">DivideNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a377b44bb86c7cef61641a3a99e828d6f" name="a377b44bb86c7cef61641a3a99e828d6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a377b44bb86c7cef61641a3a99e828d6f">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[5/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">LogNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f7cad1eeb01e4b06ba6bad25df7d124" name="a7f7cad1eeb01e4b06ba6bad25df7d124"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f7cad1eeb01e4b06ba6bad25df7d124">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[5/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LogNode METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">LogNode&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7451420e7425d133ba821976c8ab7c6" name="aa7451420e7425d133ba821976c8ab7c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7451420e7425d133ba821976c8ab7c6">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[5/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LogNode <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">LogNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f230e802bf6aa52a28d86a26338ae79" name="a2f230e802bf6aa52a28d86a26338ae79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f230e802bf6aa52a28d86a26338ae79">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[6/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">JustNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9f8548ec2f1877d1117bd5f2f9e7776" name="ae9f8548ec2f1877d1117bd5f2f9e7776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9f8548ec2f1877d1117bd5f2f9e7776">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[6/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">JustNode METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">JustNode&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5616616e24814a7f5335a56bf8e2d96" name="aa5616616e24814a7f5335a56bf8e2d96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5616616e24814a7f5335a56bf8e2d96">&#9670;&#160;</a></span>PROPERTY() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROPERTY </td>
+          <td>(</td>
+          <td class="paramtype">Value&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">getArguments&lt; 0 &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">setArguments&lt; 0 &gt;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a549136f4d79e80db27b41398b49677f6" name="a549136f4d79e80db27b41398b49677f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a549136f4d79e80db27b41398b49677f6">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[6/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">setArguments&lt; 0 &gt; METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">JustNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a3cc4c997e58e2725e3c9278187b5ac" name="a2a3cc4c997e58e2725e3c9278187b5ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a3cc4c997e58e2725e3c9278187b5ac">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[7/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">Vector3To4Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07b4f8020015c4e09879da82eac615c5" name="a07b4f8020015c4e09879da82eac615c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07b4f8020015c4e09879da82eac615c5">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[7/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector3To4Node METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">Vector3To4Node&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba868db8f753c48d922b29e7cbdb60c9" name="aba868db8f753c48d922b29e7cbdb60c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba868db8f753c48d922b29e7cbdb60c9">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[7/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector3To4Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">Vector3To4Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeaeac3122796418333bf9b88408b86d1" name="aeaeac3122796418333bf9b88408b86d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaeac3122796418333bf9b88408b86d1">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[8/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">BreakVector3Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16ead2cade7b8ae53f2646dbc6605ca9" name="a16ead2cade7b8ae53f2646dbc6605ca9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16ead2cade7b8ae53f2646dbc6605ca9">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[8/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BreakVector3Node METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">BreakVector3Node&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1b69c0776e77b2c8199f02ebe70481eb" name="a1b69c0776e77b2c8199f02ebe70481eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b69c0776e77b2c8199f02ebe70481eb">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[8/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BreakVector3Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">BreakVector3Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a940dbe0090599e2eb850bdb32c447fa3" name="a940dbe0090599e2eb850bdb32c447fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a940dbe0090599e2eb850bdb32c447fa3">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[9/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">BreakVector4Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add77f9b65b2fc8fd754c01a2d5ddcfa9" name="add77f9b65b2fc8fd754c01a2d5ddcfa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add77f9b65b2fc8fd754c01a2d5ddcfa9">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[9/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BreakVector4Node METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">BreakVector4Node&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3a02f332d0b04b5823e48107f69cc0c" name="ac3a02f332d0b04b5823e48107f69cc0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a02f332d0b04b5823e48107f69cc0c">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[9/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BreakVector4Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">BreakVector4Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00794f7ccdeae7ca40f04fe82a54befb" name="a00794f7ccdeae7ca40f04fe82a54befb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00794f7ccdeae7ca40f04fe82a54befb">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[10/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">MakeVector3Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad48fcc236c6c4ef1be4a2bdab439ffd6" name="ad48fcc236c6c4ef1be4a2bdab439ffd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad48fcc236c6c4ef1be4a2bdab439ffd6">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[10/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MakeVector3Node METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">MakeVector3Node&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a22545851ec09052efec3f68ed9b29c8b" name="a22545851ec09052efec3f68ed9b29c8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22545851ec09052efec3f68ed9b29c8b">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[10/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MakeVector3Node <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype">MakeVector3Node&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32346995610ccda438d6c0bd4b8be808" name="a32346995610ccda438d6c0bd4b8be808"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32346995610ccda438d6c0bd4b8be808">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[11/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2f31990f2e6a48656d0ae2b12331772" name="ae2f31990f2e6a48656d0ae2b12331772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2f31990f2e6a48656d0ae2b12331772">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[11/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sendernode_8cpp.html#a8a91379c7463b579886757dcaf4853da">StopWhenNode</a> METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accb960f84b8b1dc97295d06952bd3b69" name="accb960f84b8b1dc97295d06952bd3b69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accb960f84b8b1dc97295d06952bd3b69">&#9670;&#160;</a></span>METATABLE_END() <span class="overload">[11/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sendernode_8cpp.html#a8a91379c7463b579886757dcaf4853da">StopWhenNode</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a> METATABLE_END </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sendernode_8cpp.html#a17875df1f2ede78b6ddf61399e5eb1c2">ConnectNode</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> = <a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">Engine::NodeGraph::SenderNode</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">Engine::NodeGraph::DefaultConfig</a> , <a class="el" href="namespace_engine_1_1_debug.html#a8445da610569d87890e37f341952e437">Engine::Debug::when_all_range</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_range.html">Engine::NodeGraph::NodeRange</a>&lt;1&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4176343b018fe53b4c5da086ef407dc8" name="a4176343b018fe53b4c5da086ef407dc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4176343b018fe53b4c5da086ef407dc8">&#9670;&#160;</a></span>REGISTER_TYPE() <span class="overload">[12/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TYPE </td>
+          <td>(</td>
+          <td class="paramtype">WhenAllNode&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5aedc132ccfb74894dbc79113f130cd4" name="a5aedc132ccfb74894dbc79113f130cd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aedc132ccfb74894dbc79113f130cd4">&#9670;&#160;</a></span>METATABLE_BEGIN_BASE() <span class="overload">[12/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WhenAllNode METATABLE_BEGIN_BASE </td>
+          <td>(</td>
+          <td class="paramtype">WhenAllNode&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">Engine::NodeGraph::NodeBase</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a65e3db64cb0c37d6c377ffff238ae9d2" name="a65e3db64cb0c37d6c377ffff238ae9d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65e3db64cb0c37d6c377ffff238ae9d2">&#9670;&#160;</a></span>getArguments&lt; 0 &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getArguments&lt; 0 &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

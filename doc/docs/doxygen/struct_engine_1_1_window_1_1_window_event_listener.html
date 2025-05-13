@@ -1,0 +1,528 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Window::WindowEventListener Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Window::WindowEventListener Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_window_1_1_window_event_listener.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="windoweventlistener-struct-reference">
+<h1>WindowEventListener Struct Reference<a class="headerlink" href="#windoweventlistener-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Window::WindowEventListener Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_window.html">Window</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html">WindowEventListener</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_window_1_1_window_event_listener-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Window::WindowEventListener Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;windoweventlistener.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Window::WindowEventListener:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_window_1_1_window_event_listener__inherit__graph.svg" width="419" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a83f2b4937fee44a32270d714435803f2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#a83f2b4937fee44a32270d714435803f2">injectAxisEvent</a> (const <a class="el" href="struct_engine_1_1_input_1_1_axis_event_args.html">Input::AxisEventArgs</a> &amp;arg)</td></tr>
+<tr class="separator:a83f2b4937fee44a32270d714435803f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2cc33d62a09260598f9a16aa8f930df"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#ab2cc33d62a09260598f9a16aa8f930df">injectKeyPress</a> (const <a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html">Input::KeyEventArgs</a> &amp;arg)</td></tr>
+<tr class="separator:ab2cc33d62a09260598f9a16aa8f930df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83d4a231fba29011d86b8e567ca83e86"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#a83d4a231fba29011d86b8e567ca83e86">injectKeyRelease</a> (const <a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html">Input::KeyEventArgs</a> &amp;arg)</td></tr>
+<tr class="separator:a83d4a231fba29011d86b8e567ca83e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4a74816cce28f8a15364f6c23650b76"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#ad4a74816cce28f8a15364f6c23650b76">injectPointerMove</a> (const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;arg)</td></tr>
+<tr class="separator:ad4a74816cce28f8a15364f6c23650b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ae3ae59b75fc3a3dc3bae3adaeb73e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#a50ae3ae59b75fc3a3dc3bae3adaeb73e">injectPointerPress</a> (const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;arg)</td></tr>
+<tr class="separator:a50ae3ae59b75fc3a3dc3bae3adaeb73e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a479a234464aee4f19b6f1e15f58dd1a1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#a479a234464aee4f19b6f1e15f58dd1a1">injectPointerRelease</a> (const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;arg)</td></tr>
+<tr class="separator:a479a234464aee4f19b6f1e15f58dd1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4164d8ff1e315b41e9d67b907990f018"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#a4164d8ff1e315b41e9d67b907990f018">onClose</a> ()</td></tr>
+<tr class="separator:a4164d8ff1e315b41e9d67b907990f018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15fd7bbd8173d79950300f4b3dd60067"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#a15fd7bbd8173d79950300f4b3dd60067">onRepaint</a> ()</td></tr>
+<tr class="separator:a15fd7bbd8173d79950300f4b3dd60067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ca2df3191be2bdd06ffd2378756983"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_window_1_1_window_event_listener.html#a52ca2df3191be2bdd06ffd2378756983">onResize</a> (const <a class="el" href="struct_engine_1_1_interfaces_vector.html">InterfacesVector</a> &amp;size)</td></tr>
+<tr class="separator:a52ca2df3191be2bdd06ffd2378756983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a52ca2df3191be2bdd06ffd2378756983" name="a52ca2df3191be2bdd06ffd2378756983"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ca2df3191be2bdd06ffd2378756983">&#9670;&#160;</a></span>onResize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Window::WindowEventListener::onResize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_interfaces_vector.html">InterfacesVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a8f6a86f13fe3a6098fcd3a2e7493693b">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#a7eb8ac23274574b0bf37fb7fd060f300">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="a4164d8ff1e315b41e9d67b907990f018" name="a4164d8ff1e315b41e9d67b907990f018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4164d8ff1e315b41e9d67b907990f018">&#9670;&#160;</a></span>onClose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Window::WindowEventListener::onClose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a5076b979889be1ed174d7a50a5fe432b">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#a895514bef371f55a2300cfa15ed9f5fe">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="a15fd7bbd8173d79950300f4b3dd60067" name="a15fd7bbd8173d79950300f4b3dd60067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15fd7bbd8173d79950300f4b3dd60067">&#9670;&#160;</a></span>onRepaint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Window::WindowEventListener::onRepaint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a9089f629d58c589972f9b903be6c5b98">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#ad1e1d204851714596a9958eae08a214d">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="ab2cc33d62a09260598f9a16aa8f930df" name="ab2cc33d62a09260598f9a16aa8f930df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2cc33d62a09260598f9a16aa8f930df">&#9670;&#160;</a></span>injectKeyPress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Window::WindowEventListener::injectKeyPress </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html">Input::KeyEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a3cac730f7f524b7fed54a013218ad065">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#a3d589a688e48e0d86a09e63d1da34baf">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="a83d4a231fba29011d86b8e567ca83e86" name="a83d4a231fba29011d86b8e567ca83e86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83d4a231fba29011d86b8e567ca83e86">&#9670;&#160;</a></span>injectKeyRelease()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Window::WindowEventListener::injectKeyRelease </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html">Input::KeyEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a6e5a28f112c260803650e0b954a2257b">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#a68c3123d70d197f1d5fe2a03058aec80">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="a50ae3ae59b75fc3a3dc3bae3adaeb73e" name="a50ae3ae59b75fc3a3dc3bae3adaeb73e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ae3ae59b75fc3a3dc3bae3adaeb73e">&#9670;&#160;</a></span>injectPointerPress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Window::WindowEventListener::injectPointerPress </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a9a8ac10a915e715b6e4617ee640cdaca">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#a8194907063a8d5600c0dbe571e1a0caa">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="a479a234464aee4f19b6f1e15f58dd1a1" name="a479a234464aee4f19b6f1e15f58dd1a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a479a234464aee4f19b6f1e15f58dd1a1">&#9670;&#160;</a></span>injectPointerRelease()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Window::WindowEventListener::injectPointerRelease </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a3304464983c9f8e98791eda741e63aa6">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#a346e3475808ed9b3986c7358d39c8958">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="ad4a74816cce28f8a15364f6c23650b76" name="ad4a74816cce28f8a15364f6c23650b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4a74816cce28f8a15364f6c23650b76">&#9670;&#160;</a></span>injectPointerMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Window::WindowEventListener::injectPointerMove </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Input::PointerEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#ac48345baee534092e2535e9e8f3ee6a1">Engine::Window::MainWindow</a>, and <a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#a4c81b688749ff5de40a3804ca621ab02">Engine::Window::ToolWindow</a>.</p>
+
+</div>
+</div>
+<a id="a83f2b4937fee44a32270d714435803f2" name="a83f2b4937fee44a32270d714435803f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83f2b4937fee44a32270d714435803f2">&#9670;&#160;</a></span>injectAxisEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Window::WindowEventListener::injectAxisEvent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_input_1_1_axis_event_args.html">Input::AxisEventArgs</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#aa6987d0af618bdfd9760a48e0aa8d683">Engine::Window::MainWindow</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Interfaces/window/<a class="el" href="windoweventlistener_8h.html">windoweventlistener.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

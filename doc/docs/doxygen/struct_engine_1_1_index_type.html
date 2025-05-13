@@ -1,0 +1,1006 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::IndexType&amp;lt; T, invalid &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::IndexType&amp;lt; T, invalid &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_index_type.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="indextype-lt-t-invalid-gt-struct-template-reference">
+<h1>IndexType&amp;lt; T, invalid &amp;gt; Struct Template Reference<a class="headerlink" href="#indextype-lt-t-invalid-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::IndexType&lt; T, invalid &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_index_type-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::IndexType&lt; T, invalid &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;indextype.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:acb16ab42e0159ab0193a765c14926c2d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#acb16ab42e0159ab0193a765c14926c2d">value_type</a> = T</td></tr>
+<tr class="separator:acb16ab42e0159ab0193a765c14926c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6b10bc7e7b076400638c353376f6f40f"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a6b10bc7e7b076400638c353376f6f40f">IndexType</a> (const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;)=default</td></tr>
+<tr class="separator:a6b10bc7e7b076400638c353376f6f40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac56dee698b203d8321477f8799962052"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ac56dee698b203d8321477f8799962052">IndexType</a> (<a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;&amp;other)</td></tr>
+<tr class="separator:ac56dee698b203d8321477f8799962052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3496f699332616f96c4f0a150e54662"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt; T &gt; U&gt; </td></tr>
+<tr class="memitem:ac3496f699332616f96c4f0a150e54662"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ac3496f699332616f96c4f0a150e54662">IndexType</a> (<a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; U &gt; other)</td></tr>
+<tr class="separator:ac3496f699332616f96c4f0a150e54662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61079f6f08c9c74db6f7e89a869ff283"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a61079f6f08c9c74db6f7e89a869ff283">IndexType</a> (T index=invalid)</td></tr>
+<tr class="separator:a61079f6f08c9c74db6f7e89a869ff283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d98e24b1e39fbb1ef557ea37846358c"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a4d98e24b1e39fbb1ef557ea37846358c">operator bool</a> () const</td></tr>
+<tr class="separator:a4d98e24b1e39fbb1ef557ea37846358c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b132c728f7a700a7ef82cdeea6c7ee"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a79b132c728f7a700a7ef82cdeea6c7ee">operator T</a> () const</td></tr>
+<tr class="separator:a79b132c728f7a700a7ef82cdeea6c7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cb9e18784dacd412ed52f54cb0573ed"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </td></tr>
+<tr class="memitem:a2cb9e18784dacd412ed52f54cb0573ed"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a2cb9e18784dacd412ed52f54cb0573ed">operator!=</a> (const U &amp;other) const</td></tr>
+<tr class="separator:a2cb9e18784dacd412ed52f54cb0573ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ad1a7abe4c79cd4dd84427f9b24ea4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#aa1ad1a7abe4c79cd4dd84427f9b24ea4">operator++</a> ()</td></tr>
+<tr class="separator:aa1ad1a7abe4c79cd4dd84427f9b24ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab970f3e2b49775dc4e911ea0baa11e29"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ab970f3e2b49775dc4e911ea0baa11e29">operator+=</a> (T s)</td></tr>
+<tr class="separator:ab970f3e2b49775dc4e911ea0baa11e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8b172f64baf2033dd164d59eda0a297"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ad8b172f64baf2033dd164d59eda0a297">operator--</a> ()</td></tr>
+<tr class="separator:ad8b172f64baf2033dd164d59eda0a297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37568119136463a301cd8716dc93c88e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a37568119136463a301cd8716dc93c88e">operator-=</a> (T s)</td></tr>
+<tr class="separator:a37568119136463a301cd8716dc93c88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3408cd9091ab8b489b4f2a93140f593d"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a3408cd9091ab8b489b4f2a93140f593d">operator=</a> (const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;)=default</td></tr>
+<tr class="separator:a3408cd9091ab8b489b4f2a93140f593d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74b2d61ecf61b1b5d779802da369b2d4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a74b2d61ecf61b1b5d779802da369b2d4">operator=</a> (<a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a74b2d61ecf61b1b5d779802da369b2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc63069857a559786be5dd6cfb29725e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#abc63069857a559786be5dd6cfb29725e">operator=</a> (T t)</td></tr>
+<tr class="separator:abc63069857a559786be5dd6cfb29725e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3c4c6d3e2eb1ec6b6aac4242714bf4b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ab3c4c6d3e2eb1ec6b6aac4242714bf4b">operator==</a> (const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;other) const</td></tr>
+<tr class="separator:ab3c4c6d3e2eb1ec6b6aac4242714bf4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade289564e021574199249e5c6cf5bdb8"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </td></tr>
+<tr class="memitem:ade289564e021574199249e5c6cf5bdb8"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ade289564e021574199249e5c6cf5bdb8">operator==</a> (const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; U &gt; &amp;other) const</td></tr>
+<tr class="separator:ade289564e021574199249e5c6cf5bdb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce9370b18a347192e287970d92670d2"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </td></tr>
+<tr class="memitem:a9ce9370b18a347192e287970d92670d2"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a9ce9370b18a347192e287970d92670d2">operator==</a> (const U &amp;other) const</td></tr>
+<tr class="separator:a9ce9370b18a347192e287970d92670d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a44eea3cda50b09cb90991846beae9f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a7a44eea3cda50b09cb90991846beae9f">reset</a> ()</td></tr>
+<tr class="separator:a7a44eea3cda50b09cb90991846beae9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ad65db014cad7872120f38f0a1a591c0b"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ad65db014cad7872120f38f0a1a591c0b">mIndex</a></td></tr>
+<tr class="separator:ad65db014cad7872120f38f0a1a591c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a7a165c221bd6f16f1c497b86aa8c8e58"><td class="memItemLeft" align="right" valign="top">static constexpr T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a7a165c221bd6f16f1c497b86aa8c8e58">sInvalid</a> = invalid</td></tr>
+<tr class="separator:a7a165c221bd6f16f1c497b86aa8c8e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ab4099490632229ad4565120d3e0f438f"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ab4099490632229ad4565120d3e0f438f">operator&lt;&lt;</a> (std::ostream &amp;out, const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;val)</td></tr>
+<tr class="separator:ab4099490632229ad4565120d3e0f438f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab82228122740f4ce000e43c9dbee7d1e"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </td></tr>
+<tr class="memitem:ab82228122740f4ce000e43c9dbee7d1e"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#ab82228122740f4ce000e43c9dbee7d1e">operator==</a> (const U &amp;other, const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;self)</td></tr>
+<tr class="separator:ab82228122740f4ce000e43c9dbee7d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9750d238f0345f4c9cd5bdb1ad93af61"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html#a9750d238f0345f4c9cd5bdb1ad93af61">operator&gt;&gt;</a> (std::istream &amp;in, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp;val)</td></tr>
+<tr class="separator:a9750d238f0345f4c9cd5bdb1ad93af61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="acb16ab42e0159ab0193a765c14926c2d" name="acb16ab42e0159ab0193a765c14926c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb16ab42e0159ab0193a765c14926c2d">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::value_type =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a61079f6f08c9c74db6f7e89a869ff283" name="a61079f6f08c9c74db6f7e89a869ff283"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61079f6f08c9c74db6f7e89a869ff283">&#9670;&#160;</a></span>IndexType() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::IndexType </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>index</em> = <code>invalid</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b10bc7e7b076400638c353376f6f40f" name="a6b10bc7e7b076400638c353376f6f40f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b10bc7e7b076400638c353376f6f40f">&#9670;&#160;</a></span>IndexType() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::IndexType </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac56dee698b203d8321477f8799962052" name="ac56dee698b203d8321477f8799962052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac56dee698b203d8321477f8799962052">&#9670;&#160;</a></span>IndexType() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::IndexType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3496f699332616f96c4f0a150e54662" name="ac3496f699332616f96c4f0a150e54662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3496f699332616f96c4f0a150e54662">&#9670;&#160;</a></span>IndexType() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt; T &gt; U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::IndexType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; U &gt;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="abc63069857a559786be5dd6cfb29725e" name="abc63069857a559786be5dd6cfb29725e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc63069857a559786be5dd6cfb29725e">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp; <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3408cd9091ab8b489b4f2a93140f593d" name="a3408cd9091ab8b489b4f2a93140f593d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3408cd9091ab8b489b4f2a93140f593d">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp; <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a74b2d61ecf61b1b5d779802da369b2d4" name="a74b2d61ecf61b1b5d779802da369b2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74b2d61ecf61b1b5d779802da369b2d4">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp; <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1ad1a7abe4c79cd4dd84427f9b24ea4" name="aa1ad1a7abe4c79cd4dd84427f9b24ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1ad1a7abe4c79cd4dd84427f9b24ea4">&#9670;&#160;</a></span>operator++()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8b172f64baf2033dd164d59eda0a297" name="ad8b172f64baf2033dd164d59eda0a297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8b172f64baf2033dd164d59eda0a297">&#9670;&#160;</a></span>operator--()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator-- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab970f3e2b49775dc4e911ea0baa11e29" name="ab970f3e2b49775dc4e911ea0baa11e29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab970f3e2b49775dc4e911ea0baa11e29">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp; <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a37568119136463a301cd8716dc93c88e" name="a37568119136463a301cd8716dc93c88e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37568119136463a301cd8716dc93c88e">&#9670;&#160;</a></span>operator-=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a> &amp; <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator-= </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3c4c6d3e2eb1ec6b6aac4242714bf4b" name="ab3c4c6d3e2eb1ec6b6aac4242714bf4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3c4c6d3e2eb1ec6b6aac4242714bf4b">&#9670;&#160;</a></span>operator==() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ce9370b18a347192e287970d92670d2" name="a9ce9370b18a347192e287970d92670d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ce9370b18a347192e287970d92670d2">&#9670;&#160;</a></span>operator==() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const U &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade289564e021574199249e5c6cf5bdb8" name="ade289564e021574199249e5c6cf5bdb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade289564e021574199249e5c6cf5bdb8">&#9670;&#160;</a></span>operator==() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; U &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2cb9e18784dacd412ed52f54cb0573ed" name="a2cb9e18784dacd412ed52f54cb0573ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cb9e18784dacd412ed52f54cb0573ed">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const U &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a44eea3cda50b09cb90991846beae9f" name="a7a44eea3cda50b09cb90991846beae9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a44eea3cda50b09cb90991846beae9f">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79b132c728f7a700a7ef82cdeea6c7ee" name="a79b132c728f7a700a7ef82cdeea6c7ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79b132c728f7a700a7ef82cdeea6c7ee">&#9670;&#160;</a></span>operator T()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator T </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d98e24b1e39fbb1ef557ea37846358c" name="a4d98e24b1e39fbb1ef557ea37846358c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d98e24b1e39fbb1ef557ea37846358c">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::operator <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="ab82228122740f4ce000e43c9dbee7d1e" name="ab82228122740f4ce000e43c9dbee7d1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab82228122740f4ce000e43c9dbee7d1e">&#9670;&#160;</a></span>operator==</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt; T &gt; U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> operator== </td>
+          <td>(</td>
+          <td class="paramtype">const U &amp;&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&#160;</td>
+          <td class="paramname"><em>self</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab4099490632229ad4565120d3e0f438f" name="ab4099490632229ad4565120d3e0f438f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4099490632229ad4565120d3e0f438f">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9750d238f0345f4c9cd5bdb1ad93af61" name="a9750d238f0345f4c9cd5bdb1ad93af61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9750d238f0345f4c9cd5bdb1ad93af61">&#9670;&#160;</a></span>operator&gt;&gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream &amp; operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; T, invalid &gt; &amp;&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7a165c221bd6f16f1c497b86aa8c8e58" name="a7a165c221bd6f16f1c497b86aa8c8e58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a165c221bd6f16f1c497b86aa8c8e58">&#9670;&#160;</a></span>sInvalid</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::sInvalid = invalid</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad65db014cad7872120f38f0a1a591c0b" name="ad65db014cad7872120f38f0a1a591c0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad65db014cad7872120f38f0a1a591c0b">&#9670;&#160;</a></span>mIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned T, T invalid = std::numeric_limits&lt;T&gt;::max()&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="struct_engine_1_1_index_type.html">Engine::IndexType</a>&lt; T, invalid &gt;::mIndex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="indextype_8h.html">indextype.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Scripting::Python3::Python3FileLoader Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Scripting::Python3::Python3FileLoader Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python3fileloader-struct-reference">
+<h1>Python3FileLoader Struct Reference<a class="headerlink" href="#python3fileloader-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Scripting::Python3::Python3FileLoader Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scripting.html">Scripting</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html">Python3</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html">Python3FileLoader</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Scripting::Python3::Python3FileLoader Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;python3fileloader.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Scripting::Python3::Python3FileLoader:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader__inherit__graph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a88ec32cbc3a0ad9e31a6d1dcd4bd374c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a88ec32cbc3a0ad9e31a6d1dcd4bd374c">Base</a> = <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader.html">Resources::ResourceLoader</a>&lt; <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html">Python3FileLoader</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a>, std::list&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt; &gt; &gt;</td></tr>
+<tr class="separator:a88ec32cbc3a0ad9e31a6d1dcd4bd374c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a19c60f4a1ac91c1c815404e0e133cb38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a19c60f4a1ac91c1c815404e0e133cb38">Python3FileLoader</a> ()</td></tr>
+<tr class="separator:a19c60f4a1ac91c1c815404e0e133cb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48dfd34e9d78b5b916ea6f94378a68b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a48dfd34e9d78b5b916ea6f94378a68b9">cleanup</a> ()</td></tr>
+<tr class="separator:a48dfd34e9d78b5b916ea6f94378a68b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0981dd460bd1ca0de77e70d4cd769480"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a0981dd460bd1ca0de77e70d4cd769480">create_module</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;result, <a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a> spec)</td></tr>
+<tr class="separator:a0981dd460bd1ca0de77e70d4cd769480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8135d58be4497f81b50bf163aa940e32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a8135d58be4497f81b50bf163aa940e32">exec_module</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;result, <a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a> module)</td></tr>
+<tr class="separator:a8135d58be4497f81b50bf163aa940e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13ae8f46db87676fc36f40bd4d25db90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a13ae8f46db87676fc36f40bd4d25db90">find_spec</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;result, std::string_view name, std::optional&lt; std::string_view &gt; import_path, <a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a> target_module)</td></tr>
+<tr class="separator:a13ae8f46db87676fc36f40bd4d25db90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a73396ff1c2980aefa689ab4c8148b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a29a73396ff1c2980aefa689ab4c8148b">loadImpl</a> (<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a> &amp;module, ResourceDataInfo &amp;info, Filesystem::FileEventType event)</td></tr>
+<tr class="separator:a29a73396ff1c2980aefa689ab4c8148b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85cb021795549471b75ca4bf77900f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#ab85cb021795549471b75ca4bf77900f1">setup</a> ()</td></tr>
+<tr class="separator:ab85cb021795549471b75ca4bf77900f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06bd0c6b82352b5b4badff70752efd05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a06bd0c6b82352b5b4badff70752efd05">unloadImpl</a> (<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a> &amp;module)</td></tr>
+<tr class="separator:a06bd0c6b82352b5b4badff70752efd05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a88ec32cbc3a0ad9e31a6d1dcd4bd374c" name="a88ec32cbc3a0ad9e31a6d1dcd4bd374c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88ec32cbc3a0ad9e31a6d1dcd4bd374c">&#9670;&#160;</a></span>Base</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a88ec32cbc3a0ad9e31a6d1dcd4bd374c">Engine::Scripting::Python3::Python3FileLoader::Base</a> =  <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader.html">Resources::ResourceLoader</a>&lt;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html">Python3FileLoader</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a>, std::list&lt;<a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt;0&gt; &gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a19c60f4a1ac91c1c815404e0e133cb38" name="a19c60f4a1ac91c1c815404e0e133cb38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19c60f4a1ac91c1c815404e0e133cb38">&#9670;&#160;</a></span>Python3FileLoader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Scripting::Python3::Python3FileLoader::Python3FileLoader </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab85cb021795549471b75ca4bf77900f1" name="ab85cb021795549471b75ca4bf77900f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85cb021795549471b75ca4bf77900f1">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scripting::Python3::Python3FileLoader::setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48dfd34e9d78b5b916ea6f94378a68b9" name="a48dfd34e9d78b5b916ea6f94378a68b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48dfd34e9d78b5b916ea6f94378a68b9">&#9670;&#160;</a></span>cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scripting::Python3::Python3FileLoader::cleanup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29a73396ff1c2980aefa689ab4c8148b" name="a29a73396ff1c2980aefa689ab4c8148b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29a73396ff1c2980aefa689ab4c8148b">&#9670;&#160;</a></span>loadImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; Engine::Scripting::Python3::Python3FileLoader::loadImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>module</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ResourceDataInfo &amp;&#160;</td>
+          <td class="paramname"><em>info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Filesystem::FileEventType&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a06bd0c6b82352b5b4badff70752efd05" name="a06bd0c6b82352b5b4badff70752efd05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06bd0c6b82352b5b4badff70752efd05">&#9670;&#160;</a></span>unloadImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scripting::Python3::Python3FileLoader::unloadImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>module</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13ae8f46db87676fc36f40bd4d25db90" name="a13ae8f46db87676fc36f40bd4d25db90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13ae8f46db87676fc36f40bd4d25db90">&#9670;&#160;</a></span>find_spec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scripting::Python3::Python3FileLoader::find_spec </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; std::string_view &gt;&#160;</td>
+          <td class="paramname"><em>import_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a>&#160;</td>
+          <td class="paramname"><em>target_module</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0981dd460bd1ca0de77e70d4cd769480" name="a0981dd460bd1ca0de77e70d4cd769480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0981dd460bd1ca0de77e70d4cd769480">&#9670;&#160;</a></span>create_module()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scripting::Python3::Python3FileLoader::create_module </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a>&#160;</td>
+          <td class="paramname"><em>spec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8135d58be4497f81b50bf163aa940e32" name="a8135d58be4497f81b50bf163aa940e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8135d58be4497f81b50bf163aa940e32">&#9670;&#160;</a></span>exec_module()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scripting::Python3::Python3FileLoader::exec_module </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a>&#160;</td>
+          <td class="paramname"><em>module</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/python3/src/Python3/<a class="el" href="python3fileloader_8h.html">python3fileloader.h</a></li>
+<li>plugins/behavior/python3/src/Python3/<a class="el" href="python3fileloader_8cpp.html">python3fileloader.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

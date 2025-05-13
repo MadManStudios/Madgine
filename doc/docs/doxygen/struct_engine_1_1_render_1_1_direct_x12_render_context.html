@@ -1,0 +1,1135 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::DirectX12RenderContext Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::DirectX12RenderContext Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_direct_x12_render_context.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="directx12rendercontext-struct-reference">
+<h1>DirectX12RenderContext Struct Reference<a class="headerlink" href="#directx12rendercontext-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::DirectX12RenderContext Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_render_1_1_direct_x12_render_context-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::DirectX12RenderContext Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;directx12rendercontext.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::DirectX12RenderContext:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_direct_x12_render_context__inherit__graph.svg" width="198" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ace55d76772a1b7f349e0e0f29795a7ca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ace55d76772a1b7f349e0e0f29795a7ca">DirectX12RenderContext</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *queue)</td></tr>
+<tr class="separator:ace55d76772a1b7f349e0e0f29795a7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38117404ce742c930e405d318c23c26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ab38117404ce742c930e405d318c23c26">~DirectX12RenderContext</a> ()</td></tr>
+<tr class="separator:ab38117404ce742c930e405d318c23c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ee90bbfab044f3e0362684cda1b0019"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_buffer.html">GPUBuffer</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a9ee90bbfab044f3e0362684cda1b0019">allocateBufferImpl</a> (size_t size) override</td></tr>
+<tr class="separator:a9ee90bbfab044f3e0362684cda1b0019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f779f3fdaa7a3634ce1e155c39f746f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a3f779f3fdaa7a3634ce1e155c39f746f">beginFrame</a> () override</td></tr>
+<tr class="separator:a3f779f3fdaa7a3634ce1e155c39f746f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ae852338ebe84c20ecdc07eac15200"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ad5ae852338ebe84c20ecdc07eac15200">createRenderTexture</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;size={ 1, 1 }, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config={}) override</td></tr>
+<tr class="separator:ad5ae852338ebe84c20ecdc07eac15200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc43dc22b3c636596073251cb30e3a2"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a7dc43dc22b3c636596073251cb30e3a2">createRenderWindow</a> (<a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *w, size_t samples) override</td></tr>
+<tr class="separator:a7dc43dc22b3c636596073251cb30e3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5671705b034c9a11bd9ab82e7f95c7d2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a5671705b034c9a11bd9ab82e7f95c7d2">createResourceBlock</a> (std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> * &gt; textures) override</td></tr>
+<tr class="separator:a5671705b034c9a11bd9ab82e7f95c7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c6903b559c3ced65b646e9cac2fcf73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1c6903b559c3ced65b646e9cac2fcf73">createRootSignature</a> ()</td></tr>
+<tr class="separator:a1c6903b559c3ced65b646e9cac2fcf73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60dada91d6ebe355698bfd11354cbc0a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a60dada91d6ebe355698bfd11354cbc0a">deallocateBufferImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_buffer.html">GPUBuffer</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; buffer) override</td></tr>
+<tr class="separator:a60dada91d6ebe355698bfd11354cbc0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d321344b04233210597ec110677c21"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#af6d321344b04233210597ec110677c21">destroyResourceBlock</a> (<a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;block) override</td></tr>
+<tr class="separator:af6d321344b04233210597ec110677c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a7b3f51a33e3f69d2d0e13e86e9a5b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a76a7b3f51a33e3f69d2d0e13e86e9a5b">endFrame</a> () override</td></tr>
+<tr class="separator:a76a7b3f51a33e3f69d2d0e13e86e9a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dcdf4eb22b6dfd27db50b1d8331ed0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html">DirectX12CommandList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a5dcdf4eb22b6dfd27db50b1d8331ed0a">fetchCommandList</a> (D3D12_COMMAND_LIST_TYPE type)</td></tr>
+<tr class="separator:a5dcdf4eb22b6dfd27db50b1d8331ed0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada4f92571ce4771b37bd6692ded97180"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ada4f92571ce4771b37bd6692ded97180">graphicsQueue</a> ()</td></tr>
+<tr class="separator:ada4f92571ce4771b37bd6692ded97180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1965ae9cb8c24d115c4c033a707110fb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1965ae9cb8c24d115c4c033a707110fb">mapBufferImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_buffer.html">GPUBuffer</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;buffer) override</td></tr>
+<tr class="separator:a1965ae9cb8c24d115c4c033a707110fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd11668774b3c9ad8bb80a5234f3f4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#adbd11668774b3c9ad8bb80a5234f3f4a">setupRootSignature</a> (ID3D12GraphicsCommandList *list)</td></tr>
+<tr class="separator:adbd11668774b3c9ad8bb80a5234f3f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f17c57ed234dc794d0291bc4f02103"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a84f17c57ed234dc794d0291bc4f02103">supportsMultisampling</a> () const override</td></tr>
+<tr class="separator:a84f17c57ed234dc794d0291bc4f02103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45ac00598f0f5d2bd99f5b6dd051b24b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a45ac00598f0f5d2bd99f5b6dd051b24b">unloadAllResources</a> () override</td></tr>
+<tr class="separator:a45ac00598f0f5d2bd99f5b6dd051b24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ae859beeaea493342755eed5fad489dca"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; D3D12_INPUT_ELEMENT_DESC &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ae859beeaea493342755eed5fad489dca">createVertexLayout</a> (<a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format)</td></tr>
+<tr class="separator:ae859beeaea493342755eed5fad489dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f9c9f8b223b3ea14eab8f45e0804fa6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a2f9c9f8b223b3ea14eab8f45e0804fa6">getSingleton</a> ()</td></tr>
+<tr class="separator:a2f9c9f8b223b3ea14eab8f45e0804fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a9dbbbe0ccc4e96296f882653defb993a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a9dbbbe0ccc4e96296f882653defb993a">mBufferAllocator</a></td></tr>
+<tr class="separator:a9dbbbe0ccc4e96296f882653defb993a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9836a1088b1846c4cdbf352ea804c45f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a9836a1088b1846c4cdbf352ea804c45f">mBufferMemoryHeap</a></td></tr>
+<tr class="separator:a9836a1088b1846c4cdbf352ea804c45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f135698ffac501bad60fa2f9efbd961"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a0f135698ffac501bad60fa2f9efbd961">mCallbackCookie</a></td></tr>
+<tr class="separator:a0f135698ffac501bad60fa2f9efbd961"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06c89ed2be538067c826ff8e8159d686"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a06c89ed2be538067c826ff8e8159d686">mComputeQueue</a></td></tr>
+<tr class="separator:a06c89ed2be538067c826ff8e8159d686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3924d358bbcb7fb641a83f1927fe1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1a3924d358bbcb7fb641a83f1927fe1b">mConstantAllocator</a></td></tr>
+<tr class="separator:a1a3924d358bbcb7fb641a83f1927fe1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdd550af1bbe6ec53901a2e49097e015"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_buffer.html">DirectX12Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#abdd550af1bbe6ec53901a2e49097e015">mConstantBuffer</a></td></tr>
+<tr class="separator:abdd550af1bbe6ec53901a2e49097e015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eec8cf54b45967b4f11c89ec5459d32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a3eec8cf54b45967b4f11c89ec5459d32">mConstantMemoryHeap</a></td></tr>
+<tr class="separator:a3eec8cf54b45967b4f11c89ec5459d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6579a5e2cf62194f3e9ff86fb6bbb377"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a6579a5e2cf62194f3e9ff86fb6bbb377">mCopyQueue</a></td></tr>
+<tr class="separator:a6579a5e2cf62194f3e9ff86fb6bbb377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0c8715f65d7899840970e73c3d35c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a7e0c8715f65d7899840970e73c3d35c3">mDepthStencilDescriptorHeap</a></td></tr>
+<tr class="separator:a7e0c8715f65d7899840970e73c3d35c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a509c636ec11da4c77f85a857a8eebd67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a509c636ec11da4c77f85a857a8eebd67">mDescriptorHeap</a></td></tr>
+<tr class="separator:a509c636ec11da4c77f85a857a8eebd67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ea65fda9316d9b98dfdf8f26dd0d795"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_release_ptr.html">ReleasePtr</a>&lt; IDXGIFactory4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a6ea65fda9316d9b98dfdf8f26dd0d795">mFactory</a></td></tr>
+<tr class="separator:a6ea65fda9316d9b98dfdf8f26dd0d795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e7237104f96fa2b69cd7d81638b82f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1e7237104f96fa2b69cd7d81638b82f2">mFrameFences</a> [2]</td></tr>
+<tr class="separator:a1e7237104f96fa2b69cd7d81638b82f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bc1ef307c4316e389228cb981bf744c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1bc1ef307c4316e389228cb981bf744c">mGraphicsQueue</a></td></tr>
+<tr class="separator:a1bc1ef307c4316e389228cb981bf744c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fa3c80dfba6d2acc8c33fbdc90e48b1"><td class="memItemLeft" align="right" valign="top">D3D12_FEATURE_DATA_D3D12_OPTIONS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a4fa3c80dfba6d2acc8c33fbdc90e48b1">mOptions</a></td></tr>
+<tr class="separator:a4fa3c80dfba6d2acc8c33fbdc90e48b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a623316f822579d1ad38e72c998922e34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt; <a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a623316f822579d1ad38e72c998922e34">mReadbackAllocator</a></td></tr>
+<tr class="separator:a623316f822579d1ad38e72c998922e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4724b937a4e0a9ed6724d7b5ccca096c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a4724b937a4e0a9ed6724d7b5ccca096c">mReadbackMemoryHeap</a> = D3D12_HEAP_TYPE_READBACK</td></tr>
+<tr class="separator:a4724b937a4e0a9ed6724d7b5ccca096c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4deed86c2f469ebb33a15f73af49379"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ab4deed86c2f469ebb33a15f73af49379">mRenderTargetDescriptorHeap</a></td></tr>
+<tr class="separator:ab4deed86c2f469ebb33a15f73af49379"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b767248ea37142fd625ddfb46878d5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_release_ptr.html">ReleasePtr</a>&lt; ID3D12RootSignature &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a6b767248ea37142fd625ddfb46878d5b">mRootSignature</a></td></tr>
+<tr class="separator:a6b767248ea37142fd625ddfb46878d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225cd5a64296ad40ef5f5a531ab2c29d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt; <a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a225cd5a64296ad40ef5f5a531ab2c29d">mTempAllocator</a></td></tr>
+<tr class="separator:a225cd5a64296ad40ef5f5a531ab2c29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9d102d0812c06ddf1ad17d505e99021"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ac9d102d0812c06ddf1ad17d505e99021">mTempMemoryHeap</a> = D3D12_HEAP_TYPE_UPLOAD</td></tr>
+<tr class="separator:ac9d102d0812c06ddf1ad17d505e99021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3ca71e39cd12202bb70ce36cdf042c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_query_heap.html">DirectX12QueryHeap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a5e3ca71e39cd12202bb70ce36cdf042c">mTimestampQueryHeap</a></td></tr>
+<tr class="separator:a5e3ca71e39cd12202bb70ce36cdf042c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7993279dbe88e7afe55928e2cef305aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#ab44a58bbcc5fcde2dc5e86d4b3150506">BucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt;, 16, 64, 16 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a7993279dbe88e7afe55928e2cef305aa">mUploadAllocator</a></td></tr>
+<tr class="separator:a7993279dbe88e7afe55928e2cef305aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4d0f8415030cf536a67c03c62e44a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a9b4d0f8415030cf536a67c03c62e44a3">mUploadHeap</a> = D3D12_HEAP_TYPE_UPLOAD</td></tr>
+<tr class="separator:a9b4d0f8415030cf536a67c03c62e44a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ace55d76772a1b7f349e0e0f29795a7ca" name="ace55d76772a1b7f349e0e0f29795a7ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace55d76772a1b7f349e0e0f29795a7ca">&#9670;&#160;</a></span>DirectX12RenderContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::DirectX12RenderContext::DirectX12RenderContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab38117404ce742c930e405d318c23c26" name="ab38117404ce742c930e405d318c23c26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab38117404ce742c930e405d318c23c26">&#9670;&#160;</a></span>~DirectX12RenderContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::DirectX12RenderContext::~DirectX12RenderContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7dc43dc22b3c636596073251cb30e3a2" name="a7dc43dc22b3c636596073251cb30e3a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dc43dc22b3c636596073251cb30e3a2">&#9670;&#160;</a></span>createRenderWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::DirectX12RenderContext::createRenderWindow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>samples</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5ae852338ebe84c20ecdc07eac15200" name="ad5ae852338ebe84c20ecdc07eac15200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ae852338ebe84c20ecdc07eac15200">&#9670;&#160;</a></span>createRenderTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::DirectX12RenderContext::createRenderTexture </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em> = <code>{&#160;1,&#160;1&#160;}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f779f3fdaa7a3634ce1e155c39f746f" name="a3f779f3fdaa7a3634ce1e155c39f746f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f779f3fdaa7a3634ce1e155c39f746f">&#9670;&#160;</a></span>beginFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::DirectX12RenderContext::beginFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a76a7b3f51a33e3f69d2d0e13e86e9a5b" name="a76a7b3f51a33e3f69d2d0e13e86e9a5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a7b3f51a33e3f69d2d0e13e86e9a5b">&#9670;&#160;</a></span>endFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderContext::endFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45ac00598f0f5d2bd99f5b6dd051b24b" name="a45ac00598f0f5d2bd99f5b6dd051b24b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45ac00598f0f5d2bd99f5b6dd051b24b">&#9670;&#160;</a></span>unloadAllResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Render::DirectX12RenderContext::unloadAllResources </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a84f17c57ed234dc794d0291bc4f02103" name="a84f17c57ed234dc794d0291bc4f02103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84f17c57ed234dc794d0291bc4f02103">&#9670;&#160;</a></span>supportsMultisampling()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::DirectX12RenderContext::supportsMultisampling </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ee90bbfab044f3e0362684cda1b0019" name="a9ee90bbfab044f3e0362684cda1b0019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ee90bbfab044f3e0362684cda1b0019">&#9670;&#160;</a></span>allocateBufferImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_buffer.html">GPUBuffer</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Render::DirectX12RenderContext::allocateBufferImpl </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60dada91d6ebe355698bfd11354cbc0a" name="a60dada91d6ebe355698bfd11354cbc0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60dada91d6ebe355698bfd11354cbc0a">&#9670;&#160;</a></span>deallocateBufferImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderContext::deallocateBufferImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_buffer.html">GPUBuffer</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1965ae9cb8c24d115c4c033a707110fb" name="a1965ae9cb8c24d115c4c033a707110fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1965ae9cb8c24d115c4c033a707110fb">&#9670;&#160;</a></span>mapBufferImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">WritableByteBuffer</a> Engine::Render::DirectX12RenderContext::mapBufferImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_buffer.html">GPUBuffer</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5671705b034c9a11bd9ab82e7f95c7d2" name="a5671705b034c9a11bd9ab82e7f95c7d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5671705b034c9a11bd9ab82e7f95c7d2">&#9670;&#160;</a></span>createResourceBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> Engine::Render::DirectX12RenderContext::createResourceBlock </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> * &gt;&#160;</td>
+          <td class="paramname"><em>textures</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6d321344b04233210597ec110677c21" name="af6d321344b04233210597ec110677c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6d321344b04233210597ec110677c21">&#9670;&#160;</a></span>destroyResourceBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderContext::destroyResourceBlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f9c9f8b223b3ea14eab8f45e0804fa6" name="a2f9c9f8b223b3ea14eab8f45e0804fa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f9c9f8b223b3ea14eab8f45e0804fa6">&#9670;&#160;</a></span>getSingleton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a> &amp; Engine::Render::DirectX12RenderContext::getSingleton </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c6903b559c3ced65b646e9cac2fcf73" name="a1c6903b559c3ced65b646e9cac2fcf73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c6903b559c3ced65b646e9cac2fcf73">&#9670;&#160;</a></span>createRootSignature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderContext::createRootSignature </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adbd11668774b3c9ad8bb80a5234f3f4a" name="adbd11668774b3c9ad8bb80a5234f3f4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd11668774b3c9ad8bb80a5234f3f4a">&#9670;&#160;</a></span>setupRootSignature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderContext::setupRootSignature </td>
+          <td>(</td>
+          <td class="paramtype">ID3D12GraphicsCommandList *&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5dcdf4eb22b6dfd27db50b1d8331ed0a" name="a5dcdf4eb22b6dfd27db50b1d8331ed0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dcdf4eb22b6dfd27db50b1d8331ed0a">&#9670;&#160;</a></span>fetchCommandList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html">DirectX12CommandList</a> Engine::Render::DirectX12RenderContext::fetchCommandList </td>
+          <td>(</td>
+          <td class="paramtype">D3D12_COMMAND_LIST_TYPE&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada4f92571ce4771b37bd6692ded97180" name="ada4f92571ce4771b37bd6692ded97180"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada4f92571ce4771b37bd6692ded97180">&#9670;&#160;</a></span>graphicsQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a> * Engine::Render::DirectX12RenderContext::graphicsQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae859beeaea493342755eed5fad489dca" name="ae859beeaea493342755eed5fad489dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae859beeaea493342755eed5fad489dca">&#9670;&#160;</a></span>createVertexLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; D3D12_INPUT_ELEMENT_DESC &gt; Engine::Render::DirectX12RenderContext::createVertexLayout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a509c636ec11da4c77f85a857a8eebd67" name="a509c636ec11da4c77f85a857a8eebd67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a509c636ec11da4c77f85a857a8eebd67">&#9670;&#160;</a></span>mDescriptorHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> Engine::Render::DirectX12RenderContext::mDescriptorHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab4deed86c2f469ebb33a15f73af49379" name="ab4deed86c2f469ebb33a15f73af49379"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4deed86c2f469ebb33a15f73af49379">&#9670;&#160;</a></span>mRenderTargetDescriptorHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> Engine::Render::DirectX12RenderContext::mRenderTargetDescriptorHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e0c8715f65d7899840970e73c3d35c3" name="a7e0c8715f65d7899840970e73c3d35c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0c8715f65d7899840970e73c3d35c3">&#9670;&#160;</a></span>mDepthStencilDescriptorHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> Engine::Render::DirectX12RenderContext::mDepthStencilDescriptorHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b767248ea37142fd625ddfb46878d5b" name="a6b767248ea37142fd625ddfb46878d5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b767248ea37142fd625ddfb46878d5b">&#9670;&#160;</a></span>mRootSignature</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_release_ptr.html">ReleasePtr</a>&lt;ID3D12RootSignature&gt; Engine::Render::DirectX12RenderContext::mRootSignature</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ea65fda9316d9b98dfdf8f26dd0d795" name="a6ea65fda9316d9b98dfdf8f26dd0d795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ea65fda9316d9b98dfdf8f26dd0d795">&#9670;&#160;</a></span>mFactory</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_release_ptr.html">ReleasePtr</a>&lt;IDXGIFactory4&gt; Engine::Render::DirectX12RenderContext::mFactory</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e3ca71e39cd12202bb70ce36cdf042c" name="a5e3ca71e39cd12202bb70ce36cdf042c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e3ca71e39cd12202bb70ce36cdf042c">&#9670;&#160;</a></span>mTimestampQueryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_query_heap.html">DirectX12QueryHeap</a> Engine::Render::DirectX12RenderContext::mTimestampQueryHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1bc1ef307c4316e389228cb981bf744c" name="a1bc1ef307c4316e389228cb981bf744c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bc1ef307c4316e389228cb981bf744c">&#9670;&#160;</a></span>mGraphicsQueue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a> Engine::Render::DirectX12RenderContext::mGraphicsQueue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6579a5e2cf62194f3e9ff86fb6bbb377" name="a6579a5e2cf62194f3e9ff86fb6bbb377"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6579a5e2cf62194f3e9ff86fb6bbb377">&#9670;&#160;</a></span>mCopyQueue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a> Engine::Render::DirectX12RenderContext::mCopyQueue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a06c89ed2be538067c826ff8e8159d686" name="a06c89ed2be538067c826ff8e8159d686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06c89ed2be538067c826ff8e8159d686">&#9670;&#160;</a></span>mComputeQueue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a> Engine::Render::DirectX12RenderContext::mComputeQueue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b4d0f8415030cf536a67c03c62e44a3" name="a9b4d0f8415030cf536a67c03c62e44a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b4d0f8415030cf536a67c03c62e44a3">&#9670;&#160;</a></span>mUploadHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> Engine::Render::DirectX12RenderContext::mUploadHeap = D3D12_HEAP_TYPE_UPLOAD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7993279dbe88e7afe55928e2cef305aa" name="a7993279dbe88e7afe55928e2cef305aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7993279dbe88e7afe55928e2cef305aa">&#9670;&#160;</a></span>mUploadAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#ab44a58bbcc5fcde2dc5e86d4b3150506">BucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt;, 16, 64, 16&gt; Engine::Render::DirectX12RenderContext::mUploadAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9836a1088b1846c4cdbf352ea804c45f" name="a9836a1088b1846c4cdbf352ea804c45f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9836a1088b1846c4cdbf352ea804c45f">&#9670;&#160;</a></span>mBufferMemoryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> Engine::Render::DirectX12RenderContext::mBufferMemoryHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9dbbbe0ccc4e96296f882653defb993a" name="a9dbbbe0ccc4e96296f882653defb993a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dbbbe0ccc4e96296f882653defb993a">&#9670;&#160;</a></span>mBufferAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::DirectX12RenderContext::mBufferAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9d102d0812c06ddf1ad17d505e99021" name="ac9d102d0812c06ddf1ad17d505e99021"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9d102d0812c06ddf1ad17d505e99021">&#9670;&#160;</a></span>mTempMemoryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> Engine::Render::DirectX12RenderContext::mTempMemoryHeap = D3D12_HEAP_TYPE_UPLOAD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a225cd5a64296ad40ef5f5a531ab2c29d" name="a225cd5a64296ad40ef5f5a531ab2c29d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a225cd5a64296ad40ef5f5a531ab2c29d">&#9670;&#160;</a></span>mTempAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt;<a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt; &gt; Engine::Render::DirectX12RenderContext::mTempAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4724b937a4e0a9ed6724d7b5ccca096c" name="a4724b937a4e0a9ed6724d7b5ccca096c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4724b937a4e0a9ed6724d7b5ccca096c">&#9670;&#160;</a></span>mReadbackMemoryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> Engine::Render::DirectX12RenderContext::mReadbackMemoryHeap = D3D12_HEAP_TYPE_READBACK</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a623316f822579d1ad38e72c998922e34" name="a623316f822579d1ad38e72c998922e34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a623316f822579d1ad38e72c998922e34">&#9670;&#160;</a></span>mReadbackAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt;<a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt; &gt; Engine::Render::DirectX12RenderContext::mReadbackAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3eec8cf54b45967b4f11c89ec5459d32" name="a3eec8cf54b45967b4f11c89ec5459d32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eec8cf54b45967b4f11c89ec5459d32">&#9670;&#160;</a></span>mConstantMemoryHeap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> Engine::Render::DirectX12RenderContext::mConstantMemoryHeap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a3924d358bbcb7fb641a83f1927fe1b" name="a1a3924d358bbcb7fb641a83f1927fe1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a3924d358bbcb7fb641a83f1927fe1b">&#9670;&#160;</a></span>mConstantAllocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::DirectX12RenderContext::mConstantAllocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abdd550af1bbe6ec53901a2e49097e015" name="abdd550af1bbe6ec53901a2e49097e015"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdd550af1bbe6ec53901a2e49097e015">&#9670;&#160;</a></span>mConstantBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_buffer.html">DirectX12Buffer</a> Engine::Render::DirectX12RenderContext::mConstantBuffer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f135698ffac501bad60fa2f9efbd961" name="a0f135698ffac501bad60fa2f9efbd961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f135698ffac501bad60fa2f9efbd961">&#9670;&#160;</a></span>mCallbackCookie</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD Engine::Render::DirectX12RenderContext::mCallbackCookie</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e7237104f96fa2b69cd7d81638b82f2" name="a1e7237104f96fa2b69cd7d81638b82f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e7237104f96fa2b69cd7d81638b82f2">&#9670;&#160;</a></span>mFrameFences</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> Engine::Render::DirectX12RenderContext::mFrameFences[2]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4fa3c80dfba6d2acc8c33fbdc90e48b1" name="a4fa3c80dfba6d2acc8c33fbdc90e48b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fa3c80dfba6d2acc8c33fbdc90e48b1">&#9670;&#160;</a></span>mOptions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">D3D12_FEATURE_DATA_D3D12_OPTIONS Engine::Render::DirectX12RenderContext::mOptions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/directx12/src/DirectX12/<a class="el" href="directx12rendercontext_8h.html">directx12rendercontext.h</a></li>
+<li>plugins/renderer/directx12/src/DirectX12/<a class="el" href="directx12rendercontext_8cpp.html">directx12rendercontext.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

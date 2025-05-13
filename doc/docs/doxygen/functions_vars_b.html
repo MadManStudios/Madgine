@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Class Members - Variables &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Class Members - Variables" href="functions_vars_c.html" />
+    <link rel="prev" title="Class Members - Variables" href="functions_vars.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="annotated_classes.html">Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Madgine - Doxygen Documentation</a></li>
+          <li class="breadcrumb-item"><a href="annotated_classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="functions_class_members.html">Class Members</a></li>
+          <li class="breadcrumb-item"><a href="functions_vars_variables.html">Variables</a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Class Members - Variables</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/functions_vars_b.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-members-variables">
+<h1>Class Members - Variables<a class="headerlink" href="#class-members-variables" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Class Members - Variables</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_b" name="index_b"></a>- b -</h3><ul>
+<li>b&#160;:&#160;<a class="el" href="struct_engine_1_1_color3.html#ad326d0efee32a790659d6afbed3605a3">Engine::Color3</a>, <a class="el" href="struct_engine_1_1_color4.html#a1dd50175038408dfb106486f0e002c2b">Engine::Color4</a>, <a class="el" href="struct_vk_component_mapping.html#af3dbd7b0e08cfa65950406efc3110b18">VkComponentMapping</a></li>
+<li>back&#160;:&#160;<a class="el" href="struct_vk_pipeline_depth_stencil_state_create_info.html#aacc81ba19a877741eed56644a2b92bc7">VkPipelineDepthStencilStateCreateInfo</a></li>
+<li>baseArrayLayer&#160;:&#160;<a class="el" href="struct_vk_clear_rect.html#ad8eb083eb7d6ae3609091816c51c5dff">VkClearRect</a>, <a class="el" href="struct_vk_image_subresource_layers.html#abd8123cdc5b047630d2eb6ac02094455">VkImageSubresourceLayers</a>, <a class="el" href="struct_vk_image_subresource_range.html#a21fb0bae8802aeb058296f203483f214">VkImageSubresourceRange</a></li>
+<li>baseline_y_delta&#160;:&#160;<a class="el" href="struct_stb_textedit_row.html#ad2d72b74b1a61e331949c7f7ec311880">StbTexteditRow</a></li>
+<li>baseMipLevel&#160;:&#160;<a class="el" href="struct_vk_image_subresource_range.html#a7faf0819f5ed8e997b3df16b4ac36738">VkImageSubresourceRange</a></li>
+<li>basePipelineHandle&#160;:&#160;<a class="el" href="struct_vk_compute_pipeline_create_info.html#a9089bd135f22c082443c6fa6c8a4715e">VkComputePipelineCreateInfo</a>, <a class="el" href="struct_vk_graphics_pipeline_create_info.html#aabfd578b941a827624d7c759ed358684">VkGraphicsPipelineCreateInfo</a></li>
+<li>basePipelineIndex&#160;:&#160;<a class="el" href="struct_vk_compute_pipeline_create_info.html#a4eabe74932db68353c927a8715e0d2f8">VkComputePipelineCreateInfo</a>, <a class="el" href="struct_vk_graphics_pipeline_create_info.html#a2205f94d9f1c968a196fe55c8297d216">VkGraphicsPipelineCreateInfo</a></li>
+<li>bindCount&#160;:&#160;<a class="el" href="struct_vk_sparse_buffer_memory_bind_info.html#a2a64ab339d6d4ce6f25b2883ea5a82e2">VkSparseBufferMemoryBindInfo</a>, <a class="el" href="struct_vk_sparse_image_memory_bind_info.html#a34b8939b216e27c8aecf79a6a8eead5e">VkSparseImageMemoryBindInfo</a>, <a class="el" href="struct_vk_sparse_image_opaque_memory_bind_info.html#ad193f6d9093db47bfbed87d0b28628a7">VkSparseImageOpaqueMemoryBindInfo</a></li>
+<li>binding&#160;:&#160;<a class="el" href="struct_vk_descriptor_set_layout_binding.html#a2aeffc41fe11fefb5a1e9e5e5c0b3a0f">VkDescriptorSetLayoutBinding</a>, <a class="el" href="struct_vk_vertex_input_attribute_description.html#ab39e6e4b3c397ddab347f6d8a77b396a">VkVertexInputAttributeDescription</a>, <a class="el" href="struct_vk_vertex_input_binding_description.html#a378394d57af0e5f586cf145c5909e56a">VkVertexInputBindingDescription</a></li>
+<li>bindingCount&#160;:&#160;<a class="el" href="struct_vk_descriptor_set_layout_create_info.html#aa38eea7ded0529815bc42c75162de0ea">VkDescriptorSetLayoutCreateInfo</a></li>
+<li>bitCount&#160;:&#160;<a class="el" href="struct_engine_1_1_extended_value_type_index.html#a93506565c009aedca86563119ff7c52a">Engine::ExtendedValueTypeIndex</a></li>
+<li>blendConstants&#160;:&#160;<a class="el" href="struct_vk_pipeline_color_blend_state_create_info.html#aa4c8f4c94c7421ca0be71a23f6df8945">VkPipelineColorBlendStateCreateInfo</a></li>
+<li>blendEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_color_blend_attachment_state.html#a562d3bd3ee822fcb21d107ffed091ea5">VkPipelineColorBlendAttachmentState</a></li>
+<li>blockCount&#160;:&#160;<a class="el" href="struct_engine_1_1_heap_allocator.html#a8a14b898be3edde041df001144e81efd">Engine::HeapAllocator&lt; Parent, BlockSize, BlockCount &gt;</a></li>
+<li>blockSize&#160;:&#160;<a class="el" href="struct_engine_1_1_heap_allocator.html#a598ec0741e7931a61c04e88b16ea703f">Engine::HeapAllocator&lt; Parent, BlockSize, BlockCount &gt;</a></li>
+<li>borderColor&#160;:&#160;<a class="el" href="struct_vk_sampler_create_info.html#a521892c5599b500e050d81b1960c42af">VkSamplerCreateInfo</a></li>
+<li>buffer&#160;:&#160;<a class="el" href="struct_vk_buffer_memory_barrier.html#a5f47ee20547d01d7b306d86dca75f263">VkBufferMemoryBarrier</a>, <a class="el" href="struct_vk_buffer_view_create_info.html#a564badafdd54f9bde16ad519c2149d12">VkBufferViewCreateInfo</a>, <a class="el" href="struct_vk_descriptor_buffer_info.html#a4316db45e6a60c7584b9dbe008f804bc">VkDescriptorBufferInfo</a>, <a class="el" href="struct_vk_sparse_buffer_memory_bind_info.html#aee92f1e5f09c54d0e6cfc480996c5a6d">VkSparseBufferMemoryBindInfo</a></li>
+<li>BUFFER_SIZE&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_ogg_decode_buf.html#ab88b64e542b103d44829f139f593b677">Engine::Audio::OggDecodeBuf</a></li>
+<li>bufferBindCount&#160;:&#160;<a class="el" href="struct_vk_bind_sparse_info.html#a6931c50ed543648319fd1426bb023492">VkBindSparseInfo</a></li>
+<li>bufferFeatures&#160;:&#160;<a class="el" href="struct_vk_format_properties.html#ad8516a7644ee6909a43c2c6ceaad766a">VkFormatProperties</a></li>
+<li>bufferImageGranularity&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a2b49932b20dad02dca835f0d0e94fe05">VkPhysicalDeviceLimits</a></li>
+<li>bufferImageHeight&#160;:&#160;<a class="el" href="struct_vk_buffer_image_copy.html#a28e0a2acdd3d977e039c09dafecc3103">VkBufferImageCopy</a></li>
+<li>bufferOffset&#160;:&#160;<a class="el" href="struct_vk_buffer_image_copy.html#af579242b1d8ebf7f665d57e49e84de4e">VkBufferImageCopy</a></li>
+<li>bufferRowLength&#160;:&#160;<a class="el" href="struct_vk_buffer_image_copy.html#a28986a0c23fbe74a1d2a0371cf0b5115">VkBufferImageCopy</a></li>
+<li>bufferSizes&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html#a8c7debd4620157972e3a346b0671712c">Engine::Render::PipelineConfiguration</a></li>
+<li>button&#160;:&#160;<a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html#ac30a032b4a73d432b14ff15d07a58669">Engine::Input::PointerEventArgs</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="functions_vars.html" class="btn btn-neutral float-left" title="Class Members - Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions_vars_c.html" class="btn btn-neutral float-right" title="Class Members - Variables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

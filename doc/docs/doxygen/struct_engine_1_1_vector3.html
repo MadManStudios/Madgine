@@ -1,0 +1,2521 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Vector3 Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Vector3 Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_vector3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vector3-struct-reference">
+<h1>Vector3 Struct Reference<a class="headerlink" href="#vector3-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Vector3 Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_vector3-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Vector3 Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Standard 3-dimensional vector.  
+ <a href="struct_engine_1_1_vector3.html#details">More...</a></p>
+
+<p><code>#include &lt;vector3.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Vector3:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_vector3__inherit__graph.svg" width="188" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a15ff99ea90ada391c64bc68311d68716"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a15ff99ea90ada391c64bc68311d68716">Vector3</a> ()=default</td></tr>
+<tr class="memdesc:a15ff99ea90ada391c64bc68311d68716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="struct_engine_1_1_vector3.html#a15ff99ea90ada391c64bc68311d68716">More...</a><br /></td></tr>
+<tr class="separator:a15ff99ea90ada391c64bc68311d68716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734f9474236b080aef4a8cd5c084b20b"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a734f9474236b080aef4a8cd5c084b20b">Vector3</a> (const float afCoordinate[3])</td></tr>
+<tr class="separator:a734f9474236b080aef4a8cd5c084b20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebdbd98bdbd38b7e76f3809eb37fe84a"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aebdbd98bdbd38b7e76f3809eb37fe84a">Vector3</a> (const float fX, const float fY, const float fZ)</td></tr>
+<tr class="separator:aebdbd98bdbd38b7e76f3809eb37fe84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba235ddca9e410b52f930a887bca731c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aba235ddca9e410b52f930a887bca731c">Vector3</a> (const float scaler)</td></tr>
+<tr class="separator:aba235ddca9e410b52f930a887bca731c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebb84dbd4d637eb5a785da2566d845db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aebb84dbd4d637eb5a785da2566d845db">Vector3</a> (const int afCoordinate[3])</td></tr>
+<tr class="separator:aebb84dbd4d637eb5a785da2566d845db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0d8abd918c56953f45247755286350"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a5b0d8abd918c56953f45247755286350">Vector3</a> (const <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> &amp;<a class="el" href="struct_engine_1_1_vector3.html#a285fef08cad506d3c053cdb4e69c3141">xy</a>, const float <a class="el" href="struct_engine_1_1_vector3.html#a3623963407734a7d7059d9840d58a7ea">z</a>)</td></tr>
+<tr class="separator:a5b0d8abd918c56953f45247755286350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955bd235a10fa788e6d954931cdc6a24"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a955bd235a10fa788e6d954931cdc6a24">Vector3</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;)=default</td></tr>
+<tr class="separator:a955bd235a10fa788e6d954931cdc6a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1783b110b107b080500f0b682e08bdfd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a1783b110b107b080500f0b682e08bdfd">Vector3</a> (const <a class="el" href="struct_engine_1_1_vector3i.html">Vector3i</a> &amp;v)</td></tr>
+<tr class="separator:a1783b110b107b080500f0b682e08bdfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e6e4e4e4b511f4771c28735d21ee2e3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a7e6e4e4e4b511f4771c28735d21ee2e3">Vector3</a> (float *const r)</td></tr>
+<tr class="separator:a7e6e4e4e4b511f4771c28735d21ee2e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ca77a7b55bd2b96aea29828d184b23f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a6ca77a7b55bd2b96aea29828d184b23f">absDotProduct</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;vec) const</td></tr>
+<tr class="memdesc:a6ca77a7b55bd2b96aea29828d184b23f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the absolute dot (scalar) product of this vector with another.  <a href="struct_engine_1_1_vector3.html#a6ca77a7b55bd2b96aea29828d184b23f">More...</a><br /></td></tr>
+<tr class="separator:a6ca77a7b55bd2b96aea29828d184b23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbfeee2fc37f81499b2f1af764ee3e86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#afbfeee2fc37f81499b2f1af764ee3e86">crossProduct</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="memdesc:afbfeee2fc37f81499b2f1af764ee3e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the cross-product of 2 vectors, i.e.  <a href="struct_engine_1_1_vector3.html#afbfeee2fc37f81499b2f1af764ee3e86">More...</a><br /></td></tr>
+<tr class="separator:afbfeee2fc37f81499b2f1af764ee3e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17e9e4795def740102f2080250b3fc6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ab17e9e4795def740102f2080250b3fc6">distance</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="memdesc:ab17e9e4795def740102f2080250b3fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the distance to another vector.  <a href="struct_engine_1_1_vector3.html#ab17e9e4795def740102f2080250b3fc6">More...</a><br /></td></tr>
+<tr class="separator:ab17e9e4795def740102f2080250b3fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2e1257d50d171db79d4283323b87ecb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ad2e1257d50d171db79d4283323b87ecb">dotProduct</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;vec) const</td></tr>
+<tr class="memdesc:ad2e1257d50d171db79d4283323b87ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the dot (scalar) product of this vector with another.  <a href="struct_engine_1_1_vector3.html#ad2e1257d50d171db79d4283323b87ecb">More...</a><br /></td></tr>
+<tr class="separator:ad2e1257d50d171db79d4283323b87ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0937b8ff7692f6b5ff82aa36c33cdfac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a0937b8ff7692f6b5ff82aa36c33cdfac">equalsWithEpsilon</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;other, float epsilon=<a class="el" href="namespace_engine.html#ab9beacf2af73ab3a2f81fbf5b603f710">floatZeroThreshold</a>)</td></tr>
+<tr class="separator:a0937b8ff7692f6b5ff82aa36c33cdfac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bb23c0c6b9e98a596992dcbe37ea8bb"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_vector3i.html">Vector3i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a7bb23c0c6b9e98a596992dcbe37ea8bb">floor</a> () const</td></tr>
+<tr class="separator:a7bb23c0c6b9e98a596992dcbe37ea8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d154bfaba33fb01d8f5d4a084c133ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a5d154bfaba33fb01d8f5d4a084c133ff">isZeroLength</a> () const</td></tr>
+<tr class="memdesc:a5d154bfaba33fb01d8f5d4a084c133ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this vector is zero length.  <a href="struct_engine_1_1_vector3.html#a5d154bfaba33fb01d8f5d4a084c133ff">More...</a><br /></td></tr>
+<tr class="separator:a5d154bfaba33fb01d8f5d4a084c133ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24560621682bbdc12f9465fb38d89fca"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a24560621682bbdc12f9465fb38d89fca">length</a> () const</td></tr>
+<tr class="memdesc:a24560621682bbdc12f9465fb38d89fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length (magnitude) of the vector.  <a href="struct_engine_1_1_vector3.html#a24560621682bbdc12f9465fb38d89fca">More...</a><br /></td></tr>
+<tr class="separator:a24560621682bbdc12f9465fb38d89fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e439e7d72c7ec6a7bd430fd801e2809"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a4e439e7d72c7ec6a7bd430fd801e2809">makeCeil</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;cmp)</td></tr>
+<tr class="memdesc:a4e439e7d72c7ec6a7bd430fd801e2809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets this vector's components to the maximum of its own and the ones of the passed in vector.  <a href="struct_engine_1_1_vector3.html#a4e439e7d72c7ec6a7bd430fd801e2809">More...</a><br /></td></tr>
+<tr class="separator:a4e439e7d72c7ec6a7bd430fd801e2809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46865f190b8bab80cc834e494b768445"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a46865f190b8bab80cc834e494b768445">makeFloor</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;cmp)</td></tr>
+<tr class="memdesc:a46865f190b8bab80cc834e494b768445"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the vector's scalar components are all greater that the ones of the vector it is compared against.  <a href="struct_engine_1_1_vector3.html#a46865f190b8bab80cc834e494b768445">More...</a><br /></td></tr>
+<tr class="separator:a46865f190b8bab80cc834e494b768445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8842e059cae0bc1e6dda5a74c359eb6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a8842e059cae0bc1e6dda5a74c359eb6a">midPoint</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;vec) const</td></tr>
+<tr class="memdesc:a8842e059cae0bc1e6dda5a74c359eb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector at a point half way between this and the passed in vector.  <a href="struct_engine_1_1_vector3.html#a8842e059cae0bc1e6dda5a74c359eb6a">More...</a><br /></td></tr>
+<tr class="separator:a8842e059cae0bc1e6dda5a74c359eb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453d8bcb963d2c480dd6a33ffd4ad7e0"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a453d8bcb963d2c480dd6a33ffd4ad7e0">normalize</a> ()</td></tr>
+<tr class="memdesc:a453d8bcb963d2c480dd6a33ffd4ad7e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalises the vector.  <a href="struct_engine_1_1_vector3.html#a453d8bcb963d2c480dd6a33ffd4ad7e0">More...</a><br /></td></tr>
+<tr class="separator:a453d8bcb963d2c480dd6a33ffd4ad7e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee95f7af755edfdd37d864924c1f5864"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aee95f7af755edfdd37d864924c1f5864">normalizedCopy</a> () const</td></tr>
+<tr class="memdesc:aee95f7af755edfdd37d864924c1f5864"><td class="mdescLeft">&#160;</td><td class="mdescRight">As normalise, except that this vector is unaffected and the normalised vector is returned as a copy.  <a href="struct_engine_1_1_vector3.html#aee95f7af755edfdd37d864924c1f5864">More...</a><br /></td></tr>
+<tr class="separator:aee95f7af755edfdd37d864924c1f5864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0698a1ca503de3f48691aedbdb4bec8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a0698a1ca503de3f48691aedbdb4bec8f">operator!=</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:a0698a1ca503de3f48691aedbdb4bec8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f8668b914d0bc666493b5a48c9eb59b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a8f8668b914d0bc666493b5a48c9eb59b">operator*</a> (const float fScalar) const</td></tr>
+<tr class="separator:a8f8668b914d0bc666493b5a48c9eb59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6349eb656f058d5b4a9bbf17fdda4b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aa6349eb656f058d5b4a9bbf17fdda4b4">operator*</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="separator:aa6349eb656f058d5b4a9bbf17fdda4b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a675e2fddf189a641a112dc5b2425a1f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a675e2fddf189a641a112dc5b2425a1f3">operator*=</a> (const float fScalar)</td></tr>
+<tr class="separator:a675e2fddf189a641a112dc5b2425a1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30fa22abf763afeb0af0296397276942"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a30fa22abf763afeb0af0296397276942">operator*=</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:a30fa22abf763afeb0af0296397276942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae09192da55327c3b4af906e88720001c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ae09192da55327c3b4af906e88720001c">operator+</a> () const</td></tr>
+<tr class="separator:ae09192da55327c3b4af906e88720001c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25aa5b60f17699c183b44f116757ebbd"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a25aa5b60f17699c183b44f116757ebbd">operator+</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:a25aa5b60f17699c183b44f116757ebbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7bde216757f291f8b8d25799fe9db0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ac7bde216757f291f8b8d25799fe9db0a">operator+=</a> (const float fScalar)</td></tr>
+<tr class="separator:ac7bde216757f291f8b8d25799fe9db0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab093e24ae9652cc76ef8f0ff6ce7cd5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ab093e24ae9652cc76ef8f0ff6ce7cd5c">operator+=</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:ab093e24ae9652cc76ef8f0ff6ce7cd5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4418ac19dd3ab46a8a7aa135bd059120"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a4418ac19dd3ab46a8a7aa135bd059120">operator-</a> () const</td></tr>
+<tr class="separator:a4418ac19dd3ab46a8a7aa135bd059120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bed1f1f99dc677cb39e7879c8b192f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a1bed1f1f99dc677cb39e7879c8b192f4">operator-</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:a1bed1f1f99dc677cb39e7879c8b192f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a845ad1f6468f4e4703f9662bae35a866"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a845ad1f6468f4e4703f9662bae35a866">operator-=</a> (const float fScalar)</td></tr>
+<tr class="separator:a845ad1f6468f4e4703f9662bae35a866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbab29dbc51b11c7b2e5ec7050eef3f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#abbab29dbc51b11c7b2e5ec7050eef3f8">operator-=</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:abbab29dbc51b11c7b2e5ec7050eef3f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2923345b5830b1de426036aefb993cf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a2923345b5830b1de426036aefb993cf9">operator/</a> (const float fScalar) const</td></tr>
+<tr class="separator:a2923345b5830b1de426036aefb993cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50c4fb7217abcc34d52bb6f8c75fbf01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a50c4fb7217abcc34d52bb6f8c75fbf01">operator/</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="separator:a50c4fb7217abcc34d52bb6f8c75fbf01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a896bd3d876a42b13d5ec995839fc77b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a896bd3d876a42b13d5ec995839fc77b0">operator/=</a> (const float fScalar)</td></tr>
+<tr class="separator:a896bd3d876a42b13d5ec995839fc77b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93ec61a8a7b0d2b6e576ad16097998e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a93ec61a8a7b0d2b6e576ad16097998e2">operator/=</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:a93ec61a8a7b0d2b6e576ad16097998e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac65531aa8e5d8e231fd37701d9a3c59e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ac65531aa8e5d8e231fd37701d9a3c59e">operator=</a> (const float fScaler)</td></tr>
+<tr class="separator:ac65531aa8e5d8e231fd37701d9a3c59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89dbac92c0bbb165fb4e7dc8a99f4a3d"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a89dbac92c0bbb165fb4e7dc8a99f4a3d">operator=</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector)=default</td></tr>
+<tr class="memdesc:a89dbac92c0bbb165fb4e7dc8a99f4a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the value of the other vector.  <a href="struct_engine_1_1_vector3.html#a89dbac92c0bbb165fb4e7dc8a99f4a3d">More...</a><br /></td></tr>
+<tr class="separator:a89dbac92c0bbb165fb4e7dc8a99f4a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a057890112f4fa10959cd3684a682e5aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a057890112f4fa10959cd3684a682e5aa">operator==</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:a057890112f4fa10959cd3684a682e5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08d491272b3dd1004d8ef4dff8c544b2"><td class="memItemLeft" align="right" valign="top">float &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a08d491272b3dd1004d8ef4dff8c544b2">operator[]</a> (const size_t i)</td></tr>
+<tr class="separator:a08d491272b3dd1004d8ef4dff8c544b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b935b2446565993605c11575223031"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ab4b935b2446565993605c11575223031">operator[]</a> (const size_t i) const</td></tr>
+<tr class="separator:ab4b935b2446565993605c11575223031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78b59647c49b66260c2f55061c972a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aa78b59647c49b66260c2f55061c972a9">perpendicular</a> () const</td></tr>
+<tr class="memdesc:aa78b59647c49b66260c2f55061c972a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a vector perpendicular to this vector (eg an 'up' vector).  <a href="struct_engine_1_1_vector3.html#aa78b59647c49b66260c2f55061c972a9">More...</a><br /></td></tr>
+<tr class="separator:aa78b59647c49b66260c2f55061c972a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed9ddd5780599f94b6e0abd339c4751"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aeed9ddd5780599f94b6e0abd339c4751">positionCloses</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rhs, float tolerance=1e-03f) const</td></tr>
+<tr class="memdesc:aeed9ddd5780599f94b6e0abd339c4751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this vector is within a positional tolerance of another vector, also take scale of the vectors into account.  <a href="struct_engine_1_1_vector3.html#aeed9ddd5780599f94b6e0abd339c4751">More...</a><br /></td></tr>
+<tr class="separator:aeed9ddd5780599f94b6e0abd339c4751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf1761817fa6062091f11b5564477d90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#abf1761817fa6062091f11b5564477d90">primaryAxis</a> () const</td></tr>
+<tr class="memdesc:abf1761817fa6062091f11b5564477d90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the primary (dominant) axis from this direction vector.  <a href="struct_engine_1_1_vector3.html#abf1761817fa6062091f11b5564477d90">More...</a><br /></td></tr>
+<tr class="separator:abf1761817fa6062091f11b5564477d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb2fb15aa8f64ea0f53757654851c333"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#abb2fb15aa8f64ea0f53757654851c333">ptr</a> ()</td></tr>
+<tr class="memdesc:abb2fb15aa8f64ea0f53757654851c333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer accessor for direct copying.  <a href="struct_engine_1_1_vector3.html#abb2fb15aa8f64ea0f53757654851c333">More...</a><br /></td></tr>
+<tr class="separator:abb2fb15aa8f64ea0f53757654851c333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ffef53beb4bd346ac6ea1afa33a3b3"><td class="memItemLeft" align="right" valign="top">const float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a72ffef53beb4bd346ac6ea1afa33a3b3">ptr</a> () const</td></tr>
+<tr class="memdesc:a72ffef53beb4bd346ac6ea1afa33a3b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer accessor for direct copying.  <a href="struct_engine_1_1_vector3.html#a72ffef53beb4bd346ac6ea1afa33a3b3">More...</a><br /></td></tr>
+<tr class="separator:a72ffef53beb4bd346ac6ea1afa33a3b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a0f933af015788ed3693da0594dfa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ac5a0f933af015788ed3693da0594dfa5">reflect</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;normal) const</td></tr>
+<tr class="memdesc:ac5a0f933af015788ed3693da0594dfa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a reflection vector to the plane with the given normal .  <a href="struct_engine_1_1_vector3.html#ac5a0f933af015788ed3693da0594dfa5">More...</a><br /></td></tr>
+<tr class="separator:ac5a0f933af015788ed3693da0594dfa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a689c23bbe27bbd307fe5a0c27c4d547a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a689c23bbe27bbd307fe5a0c27c4d547a">squaredDistance</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="memdesc:a689c23bbe27bbd307fe5a0c27c4d547a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the square of the distance to another vector.  <a href="struct_engine_1_1_vector3.html#a689c23bbe27bbd307fe5a0c27c4d547a">More...</a><br /></td></tr>
+<tr class="separator:a689c23bbe27bbd307fe5a0c27c4d547a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76456061f2e980c2dbf78df294a0a7ca"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a76456061f2e980c2dbf78df294a0a7ca">squaredLength</a> () const</td></tr>
+<tr class="memdesc:a76456061f2e980c2dbf78df294a0a7ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the square of the length(magnitude) of the vector.  <a href="struct_engine_1_1_vector3.html#a76456061f2e980c2dbf78df294a0a7ca">More...</a><br /></td></tr>
+<tr class="separator:a76456061f2e980c2dbf78df294a0a7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03f5a9cd2a9a23d5d25b122d50cbcf5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a03f5a9cd2a9a23d5d25b122d50cbcf5c">swap</a> (<a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a03f5a9cd2a9a23d5d25b122d50cbcf5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange the contents of this vector with another.  <a href="struct_engine_1_1_vector3.html#a03f5a9cd2a9a23d5d25b122d50cbcf5c">More...</a><br /></td></tr>
+<tr class="separator:a03f5a9cd2a9a23d5d25b122d50cbcf5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a285fef08cad506d3c053cdb4e69c3141"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a285fef08cad506d3c053cdb4e69c3141">xy</a> () const</td></tr>
+<tr class="memdesc:a285fef08cad506d3c053cdb4e69c3141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swizzle-like narrowing operations.  <a href="struct_engine_1_1_vector3.html#a285fef08cad506d3c053cdb4e69c3141">More...</a><br /></td></tr>
+<tr class="separator:a285fef08cad506d3c053cdb4e69c3141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1428d6e00b0d8ec82a2bf1f1ad8b2b27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a1428d6e00b0d8ec82a2bf1f1ad8b2b27">xyz</a> () const</td></tr>
+<tr class="separator:a1428d6e00b0d8ec82a2bf1f1ad8b2b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a63716d1dd912e0ddd8e4986bab501700"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a63716d1dd912e0ddd8e4986bab501700">x</a></td></tr>
+<tr class="separator:a63716d1dd912e0ddd8e4986bab501700"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34cb9dc227dd4dc1bf6e7eaca828ee60"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a34cb9dc227dd4dc1bf6e7eaca828ee60">y</a></td></tr>
+<tr class="separator:a34cb9dc227dd4dc1bf6e7eaca828ee60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3623963407734a7d7059d9840d58a7ea"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a3623963407734a7d7059d9840d58a7ea">z</a></td></tr>
+<tr class="separator:a3623963407734a7d7059d9840d58a7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ac792b417bc5d16fd53cc79e86e169d28"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ac792b417bc5d16fd53cc79e86e169d28">NEGATIVE_UNIT_X</a> [] { -1, 0, 0 }</td></tr>
+<tr class="separator:ac792b417bc5d16fd53cc79e86e169d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdb5dec2d26c32c1e67238c0094e1de1"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#acdb5dec2d26c32c1e67238c0094e1de1">NEGATIVE_UNIT_Y</a> [] { 0, -1, 0 }</td></tr>
+<tr class="separator:acdb5dec2d26c32c1e67238c0094e1de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bc0e889712191e5826305dc86e01e3f"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a6bc0e889712191e5826305dc86e01e3f">NEGATIVE_UNIT_Z</a> [] { 0, 0, -1 }</td></tr>
+<tr class="separator:a6bc0e889712191e5826305dc86e01e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c9be220df9d1df7bf4efcfb6168c13"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aa0c9be220df9d1df7bf4efcfb6168c13">UNIT_SCALE</a> [] { 1, 1, 1 }</td></tr>
+<tr class="separator:aa0c9be220df9d1df7bf4efcfb6168c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368841dab1e4574f97afcb0e40568421"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a368841dab1e4574f97afcb0e40568421">UNIT_X</a> [] { 1, 0, 0 }</td></tr>
+<tr class="separator:a368841dab1e4574f97afcb0e40568421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4caf44759796126a992aa8169514abc"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ac4caf44759796126a992aa8169514abc">UNIT_Y</a> [] { 0, 1, 0 }</td></tr>
+<tr class="separator:ac4caf44759796126a992aa8169514abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f6efc6b0b5c785e1213a2ef7808faaf"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a3f6efc6b0b5c785e1213a2ef7808faaf">UNIT_Z</a> [] { 0, 0, 1 }</td></tr>
+<tr class="separator:a3f6efc6b0b5c785e1213a2ef7808faaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7af3f15c2061007ae434ebcec2a93521"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a7af3f15c2061007ae434ebcec2a93521">ZERO</a> [] { 0, 0, 0 }</td></tr>
+<tr class="separator:a7af3f15c2061007ae434ebcec2a93521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aecbbf834ce8104c0eed8989a3a0d6530"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#aecbbf834ce8104c0eed8989a3a0d6530">operator*</a> (const float fScalar, const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:aecbbf834ce8104c0eed8989a3a0d6530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ef9abdf2ed599a507fffed14d49c3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a62ef9abdf2ed599a507fffed14d49c3c">operator+</a> (const float lhs, const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rhs)</td></tr>
+<tr class="separator:a62ef9abdf2ed599a507fffed14d49c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1c355cc11ea009027f6a96ae9fdd430"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ae1c355cc11ea009027f6a96ae9fdd430">operator+</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;lhs, const float rhs)</td></tr>
+<tr class="separator:ae1c355cc11ea009027f6a96ae9fdd430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab46c284cb5d33cff438f4cc325c5039d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#ab46c284cb5d33cff438f4cc325c5039d">operator-</a> (const float lhs, const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rhs)</td></tr>
+<tr class="separator:ab46c284cb5d33cff438f4cc325c5039d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546bfbb34a94330b0536526ac4c321e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a546bfbb34a94330b0536526ac4c321e3">operator-</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;lhs, const float rhs)</td></tr>
+<tr class="separator:a546bfbb34a94330b0536526ac4c321e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6853513cccbd24765f1f2dd3e840605a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a6853513cccbd24765f1f2dd3e840605a">operator/</a> (const float fScalar, const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:a6853513cccbd24765f1f2dd3e840605a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb9d2aa58f49f78c0535e5bf01190d7"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#afbb9d2aa58f49f78c0535e5bf01190d7">operator&lt;&lt;</a> (std::ostream &amp;o, const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="memdesc:afbb9d2aa58f49f78c0535e5bf01190d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for writing to a stream.  <a href="struct_engine_1_1_vector3.html#afbb9d2aa58f49f78c0535e5bf01190d7">More...</a><br /></td></tr>
+<tr class="separator:afbb9d2aa58f49f78c0535e5bf01190d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9456aa965368c4784ea881bfc1334ec3"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_vector3.html#a9456aa965368c4784ea881bfc1334ec3">operator&gt;&gt;</a> (std::istream &amp;in, <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="separator:a9456aa965368c4784ea881bfc1334ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Standard 3-dimensional vector. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>A direction in 3D space represented as distances along the 3 orthogonal axes (x, y, z). Note that positions, directions and scaling factors can be represented by a vector, depending on how you interpret the values. </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a15ff99ea90ada391c64bc68311d68716" name="a15ff99ea90ada391c64bc68311d68716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15ff99ea90ada391c64bc68311d68716">&#9670;&#160;</a></span>Vector3() <span class="overload">[1/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+<dl class="section note"><dt>Note</dt><dd>It does <b>NOT</b> initialize the vector for efficiency. </dd></dl>
+
+</div>
+</div>
+<a id="a955bd235a10fa788e6d954931cdc6a24" name="a955bd235a10fa788e6d954931cdc6a24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a955bd235a10fa788e6d954931cdc6a24">&#9670;&#160;</a></span>Vector3() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebdbd98bdbd38b7e76f3809eb37fe84a" name="aebdbd98bdbd38b7e76f3809eb37fe84a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebdbd98bdbd38b7e76f3809eb37fe84a">&#9670;&#160;</a></span>Vector3() <span class="overload">[3/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fZ</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a734f9474236b080aef4a8cd5c084b20b" name="a734f9474236b080aef4a8cd5c084b20b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a734f9474236b080aef4a8cd5c084b20b">&#9670;&#160;</a></span>Vector3() <span class="overload">[4/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>afCoordinate</em>[3]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebb84dbd4d637eb5a785da2566d845db" name="aebb84dbd4d637eb5a785da2566d845db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb84dbd4d637eb5a785da2566d845db">&#9670;&#160;</a></span>Vector3() <span class="overload">[5/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>afCoordinate</em>[3]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1783b110b107b080500f0b682e08bdfd" name="a1783b110b107b080500f0b682e08bdfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1783b110b107b080500f0b682e08bdfd">&#9670;&#160;</a></span>Vector3() <span class="overload">[6/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3i.html">Vector3i</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e6e4e4e4b511f4771c28735d21ee2e3" name="a7e6e4e4e4b511f4771c28735d21ee2e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e6e4e4e4b511f4771c28735d21ee2e3">&#9670;&#160;</a></span>Vector3() <span class="overload">[7/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">float *const&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba235ddca9e410b52f930a887bca731c" name="aba235ddca9e410b52f930a887bca731c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba235ddca9e410b52f930a887bca731c">&#9670;&#160;</a></span>Vector3() <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>scaler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b0d8abd918c56953f45247755286350" name="a5b0d8abd918c56953f45247755286350"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0d8abd918c56953f45247755286350">&#9670;&#160;</a></span>Vector3() <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Vector3::Vector3 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> &amp;&#160;</td>
+          <td class="paramname"><em>xy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a285fef08cad506d3c053cdb4e69c3141" name="a285fef08cad506d3c053cdb4e69c3141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a285fef08cad506d3c053cdb4e69c3141">&#9670;&#160;</a></span>xy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> Engine::Vector3::xy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swizzle-like narrowing operations. </p>
+
+</div>
+</div>
+<a id="a1428d6e00b0d8ec82a2bf1f1ad8b2b27" name="a1428d6e00b0d8ec82a2bf1f1ad8b2b27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1428d6e00b0d8ec82a2bf1f1ad8b2b27">&#9670;&#160;</a></span>xyz()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::xyz </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a03f5a9cd2a9a23d5d25b122d50cbcf5c" name="a03f5a9cd2a9a23d5d25b122d50cbcf5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03f5a9cd2a9a23d5d25b122d50cbcf5c">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Vector3::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Exchange the contents of this vector with another. </p>
+
+</div>
+</div>
+<a id="ab4b935b2446565993605c11575223031" name="ab4b935b2446565993605c11575223031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4b935b2446565993605c11575223031">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a08d491272b3dd1004d8ef4dff8c544b2" name="a08d491272b3dd1004d8ef4dff8c544b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08d491272b3dd1004d8ef4dff8c544b2">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float &amp; Engine::Vector3::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb2fb15aa8f64ea0f53757654851c333" name="abb2fb15aa8f64ea0f53757654851c333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb2fb15aa8f64ea0f53757654851c333">&#9670;&#160;</a></span>ptr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * Engine::Vector3::ptr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer accessor for direct copying. </p>
+
+</div>
+</div>
+<a id="a72ffef53beb4bd346ac6ea1afa33a3b3" name="a72ffef53beb4bd346ac6ea1afa33a3b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ffef53beb4bd346ac6ea1afa33a3b3">&#9670;&#160;</a></span>ptr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float * Engine::Vector3::ptr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer accessor for direct copying. </p>
+
+</div>
+</div>
+<a id="a89dbac92c0bbb165fb4e7dc8a99f4a3d" name="a89dbac92c0bbb165fb4e7dc8a99f4a3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89dbac92c0bbb165fb4e7dc8a99f4a3d">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assigns the value of the other vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rkVector</td><td>The other vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac65531aa8e5d8e231fd37701d9a3c59e" name="ac65531aa8e5d8e231fd37701d9a3c59e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac65531aa8e5d8e231fd37701d9a3c59e">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScaler</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0937b8ff7692f6b5ff82aa36c33cdfac" name="a0937b8ff7692f6b5ff82aa36c33cdfac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0937b8ff7692f6b5ff82aa36c33cdfac">&#9670;&#160;</a></span>equalsWithEpsilon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Vector3::equalsWithEpsilon </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>epsilon</em> = <code><a class="el" href="namespace_engine.html#ab9beacf2af73ab3a2f81fbf5b603f710">floatZeroThreshold</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a057890112f4fa10959cd3684a682e5aa" name="a057890112f4fa10959cd3684a682e5aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a057890112f4fa10959cd3684a682e5aa">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Vector3::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0698a1ca503de3f48691aedbdb4bec8f" name="a0698a1ca503de3f48691aedbdb4bec8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0698a1ca503de3f48691aedbdb4bec8f">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Vector3::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25aa5b60f17699c183b44f116757ebbd" name="a25aa5b60f17699c183b44f116757ebbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25aa5b60f17699c183b44f116757ebbd">&#9670;&#160;</a></span>operator+() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1bed1f1f99dc677cb39e7879c8b192f4" name="a1bed1f1f99dc677cb39e7879c8b192f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bed1f1f99dc677cb39e7879c8b192f4">&#9670;&#160;</a></span>operator-() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f8668b914d0bc666493b5a48c9eb59b" name="a8f8668b914d0bc666493b5a48c9eb59b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f8668b914d0bc666493b5a48c9eb59b">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa6349eb656f058d5b4a9bbf17fdda4b4" name="aa6349eb656f058d5b4a9bbf17fdda4b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6349eb656f058d5b4a9bbf17fdda4b4">&#9670;&#160;</a></span>operator*() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2923345b5830b1de426036aefb993cf9" name="a2923345b5830b1de426036aefb993cf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2923345b5830b1de426036aefb993cf9">&#9670;&#160;</a></span>operator/() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50c4fb7217abcc34d52bb6f8c75fbf01" name="a50c4fb7217abcc34d52bb6f8c75fbf01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50c4fb7217abcc34d52bb6f8c75fbf01">&#9670;&#160;</a></span>operator/() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae09192da55327c3b4af906e88720001c" name="ae09192da55327c3b4af906e88720001c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae09192da55327c3b4af906e88720001c">&#9670;&#160;</a></span>operator+() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator+ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4418ac19dd3ab46a8a7aa135bd059120" name="a4418ac19dd3ab46a8a7aa135bd059120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4418ac19dd3ab46a8a7aa135bd059120">&#9670;&#160;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::operator- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab093e24ae9652cc76ef8f0ff6ce7cd5c" name="ab093e24ae9652cc76ef8f0ff6ce7cd5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab093e24ae9652cc76ef8f0ff6ce7cd5c">&#9670;&#160;</a></span>operator+=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7bde216757f291f8b8d25799fe9db0a" name="ac7bde216757f291f8b8d25799fe9db0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7bde216757f291f8b8d25799fe9db0a">&#9670;&#160;</a></span>operator+=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abbab29dbc51b11c7b2e5ec7050eef3f8" name="abbab29dbc51b11c7b2e5ec7050eef3f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbab29dbc51b11c7b2e5ec7050eef3f8">&#9670;&#160;</a></span>operator-=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator-= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a845ad1f6468f4e4703f9662bae35a866" name="a845ad1f6468f4e4703f9662bae35a866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a845ad1f6468f4e4703f9662bae35a866">&#9670;&#160;</a></span>operator-=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator-= </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a675e2fddf189a641a112dc5b2425a1f3" name="a675e2fddf189a641a112dc5b2425a1f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a675e2fddf189a641a112dc5b2425a1f3">&#9670;&#160;</a></span>operator*=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30fa22abf763afeb0af0296397276942" name="a30fa22abf763afeb0af0296397276942"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30fa22abf763afeb0af0296397276942">&#9670;&#160;</a></span>operator*=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator*= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a896bd3d876a42b13d5ec995839fc77b0" name="a896bd3d876a42b13d5ec995839fc77b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a896bd3d876a42b13d5ec995839fc77b0">&#9670;&#160;</a></span>operator/=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator/= </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a93ec61a8a7b0d2b6e576ad16097998e2" name="a93ec61a8a7b0d2b6e576ad16097998e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93ec61a8a7b0d2b6e576ad16097998e2">&#9670;&#160;</a></span>operator/=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp; Engine::Vector3::operator/= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24560621682bbdc12f9465fb38d89fca" name="a24560621682bbdc12f9465fb38d89fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24560621682bbdc12f9465fb38d89fca">&#9670;&#160;</a></span>length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float Engine::Vector3::length </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the length (magnitude) of the vector. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This operation requires a square root and is expensive in terms of CPU operations. If you don't need to know the exact length (e.g. for just comparing lengths) use <a class="el" href="struct_engine_1_1_vector3.html#a76456061f2e980c2dbf78df294a0a7ca" title="Returns the square of the length(magnitude) of the vector.">squaredLength()</a> instead. </dd></dl>
+
+</div>
+</div>
+<a id="a76456061f2e980c2dbf78df294a0a7ca" name="a76456061f2e980c2dbf78df294a0a7ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76456061f2e980c2dbf78df294a0a7ca">&#9670;&#160;</a></span>squaredLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::squaredLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the square of the length(magnitude) of the vector. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This method is for efficiency - calculating the actual length of a vector requires a square root, which is expensive in terms of the operations required. This method returns the square of the length of the vector, i.e. the same as the length but before the square root is taken. Use this if you want to find the longest / shortest vector without incurring the square root. </dd></dl>
+
+</div>
+</div>
+<a id="ab17e9e4795def740102f2080250b3fc6" name="ab17e9e4795def740102f2080250b3fc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17e9e4795def740102f2080250b3fc6">&#9670;&#160;</a></span>distance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::distance </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the distance to another vector. </p>
+<dl class="section warning"><dt>Warning</dt><dd>This operation requires a square root and is expensive in terms of CPU operations. If you don't need to know the exact distance (e.g. for just comparing distances) use <a class="el" href="struct_engine_1_1_vector3.html#a689c23bbe27bbd307fe5a0c27c4d547a" title="Returns the square of the distance to another vector.">squaredDistance()</a> instead. </dd></dl>
+
+</div>
+</div>
+<a id="a689c23bbe27bbd307fe5a0c27c4d547a" name="a689c23bbe27bbd307fe5a0c27c4d547a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a689c23bbe27bbd307fe5a0c27c4d547a">&#9670;&#160;</a></span>squaredDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::squaredDistance </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the square of the distance to another vector. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This method is for efficiency - calculating the actual distance to another vector requires a square root, which is expensive in terms of the operations required. This method returns the square of the distance to another vector, i.e. the same as the distance but before the square root is taken. Use this if you want to find the longest / shortest distance without incurring the square root. </dd></dl>
+
+</div>
+</div>
+<a id="ad2e1257d50d171db79d4283323b87ecb" name="ad2e1257d50d171db79d4283323b87ecb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2e1257d50d171db79d4283323b87ecb">&#9670;&#160;</a></span>dotProduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::dotProduct </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the dot (scalar) product of this vector with another. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>The dot product can be used to calculate the angle between 2 vectors. If both are unit vectors, the dot product is the cosine of the angle; otherwise the dot product must be divided by the product of the lengths of both vectors to get the cosine of the angle. This result can further be used to calculate the distance of a point from a plane. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec</td><td>Vector with which to calculate the dot product (together with this one). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A float representing the dot product value. </dd></dl>
+
+</div>
+</div>
+<a id="a6ca77a7b55bd2b96aea29828d184b23f" name="a6ca77a7b55bd2b96aea29828d184b23f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca77a7b55bd2b96aea29828d184b23f">&#9670;&#160;</a></span>absDotProduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::absDotProduct </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the absolute dot (scalar) product of this vector with another. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This function work similar dotProduct, except it use absolute value of each component of the vector to computing. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec</td><td>Vector with which to calculate the absolute dot product (together with this one). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A float representing the absolute dot product value. </dd></dl>
+
+</div>
+</div>
+<a id="a453d8bcb963d2c480dd6a33ffd4ad7e0" name="a453d8bcb963d2c480dd6a33ffd4ad7e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453d8bcb963d2c480dd6a33ffd4ad7e0">&#9670;&#160;</a></span>normalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float Engine::Vector3::normalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Normalises the vector. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This method normalises the vector such that it's length / magnitude is 1. The result is called a unit vector. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function will not crash for zero-sized vectors, but there will be no changes made to their components. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The previous length of the vector. </dd></dl>
+
+</div>
+</div>
+<a id="afbfeee2fc37f81499b2f1af764ee3e86" name="afbfeee2fc37f81499b2f1af764ee3e86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbfeee2fc37f81499b2f1af764ee3e86">&#9670;&#160;</a></span>crossProduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::crossProduct </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the cross-product of 2 vectors, i.e. </p>
+<p >the vector that lies perpendicular to them both. </p><dl class="section remark"><dt>Remarks</dt><dd>The cross-product is normally used to calculate the normal vector of a plane, by calculating the cross-product of 2 non-equivalent vectors which lie on the plane (e.g. 2 edges of a triangle). </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rkVector</td><td>Vector which, together with this one, will be used to calculate the cross-product. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector which is the result of the cross-product. This vector will <b>NOT</b> be normalised, to maximise efficiency<ul>
+<li>call Vector3::normalise on the result if you wish this to be done. As for which side the resultant vector will be on, the returned vector will be on the side from which the arc from 'this' to rkVector is anticlockwise, e.g. UNIT_Y.crossProduct(UNIT_Z) = UNIT_X, whilst UNIT_Z.crossProduct(UNIT_Y) = -UNIT_X. This is because OGRE uses a right-handed coordinate system. </li>
+</ul>
+</dd></dl>
+<dl class="section user"><dt></dt><dd>For a clearer explanation, look a the left and the bottom edges of your monitor's screen. Assume that the first vector is the left edge and the second vector is the bottom edge, both of them starting from the lower-left corner of the screen. The resulting vector is going to be perpendicular to both of them and will go <em>inside</em> the screen, towards the cathode tube (assuming you're using a CRT monitor, of course). </dd></dl>
+
+</div>
+</div>
+<a id="a8842e059cae0bc1e6dda5a74c359eb6a" name="a8842e059cae0bc1e6dda5a74c359eb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8842e059cae0bc1e6dda5a74c359eb6a">&#9670;&#160;</a></span>midPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::midPoint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a vector at a point half way between this and the passed in vector. </p>
+
+</div>
+</div>
+<a id="a46865f190b8bab80cc834e494b768445" name="a46865f190b8bab80cc834e494b768445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46865f190b8bab80cc834e494b768445">&#9670;&#160;</a></span>makeFloor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Vector3::makeFloor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>cmp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the vector's scalar components are all greater that the ones of the vector it is compared against. </p>
+<p >Returns true if the vector's scalar components are all smaller that the ones of the vector it is compared against. Sets this vector's components to the minimum of its own and the ones of the passed in vector. </p><dl class="section remark"><dt>Remarks</dt><dd>'Minimum' in this case means the combination of the lowest value of x, y and z from both vectors. Lowest is taken just numerically, not magnitude, so -1 &lt; 0. </dd></dl>
+
+</div>
+</div>
+<a id="a4e439e7d72c7ec6a7bd430fd801e2809" name="a4e439e7d72c7ec6a7bd430fd801e2809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e439e7d72c7ec6a7bd430fd801e2809">&#9670;&#160;</a></span>makeCeil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Vector3::makeCeil </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>cmp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets this vector's components to the maximum of its own and the ones of the passed in vector. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>'Maximum' in this case means the combination of the highest value of x, y and z from both vectors. Highest is taken just numerically, not magnitude, so 1 &gt; -3. </dd></dl>
+
+</div>
+</div>
+<a id="aa78b59647c49b66260c2f55061c972a9" name="aa78b59647c49b66260c2f55061c972a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa78b59647c49b66260c2f55061c972a9">&#9670;&#160;</a></span>perpendicular()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::perpendicular </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generates a vector perpendicular to this vector (eg an 'up' vector). </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This method will return a vector which is perpendicular to this vector. There are an infinite number of possibilities but this method will guarantee to generate one of them. If you need more control you should use the <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> class. </dd></dl>
+
+</div>
+</div>
+<a id="a5d154bfaba33fb01d8f5d4a084c133ff" name="a5d154bfaba33fb01d8f5d4a084c133ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d154bfaba33fb01d8f5d4a084c133ff">&#9670;&#160;</a></span>isZeroLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Vector3::isZeroLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if this vector is zero length. </p>
+
+</div>
+</div>
+<a id="aee95f7af755edfdd37d864924c1f5864" name="aee95f7af755edfdd37d864924c1f5864"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee95f7af755edfdd37d864924c1f5864">&#9670;&#160;</a></span>normalizedCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::normalizedCopy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>As normalise, except that this vector is unaffected and the normalised vector is returned as a copy. </p>
+
+</div>
+</div>
+<a id="ac5a0f933af015788ed3693da0594dfa5" name="ac5a0f933af015788ed3693da0594dfa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5a0f933af015788ed3693da0594dfa5">&#9670;&#160;</a></span>reflect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::reflect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>normal</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates a reflection vector to the plane with the given normal . </p>
+<dl class="section remark"><dt>Remarks</dt><dd>NB assumes 'this' is pointing AWAY FROM the plane, invert if it is not. </dd></dl>
+
+</div>
+</div>
+<a id="aeed9ddd5780599f94b6e0abd339c4751" name="aeed9ddd5780599f94b6e0abd339c4751"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed9ddd5780599f94b6e0abd339c4751">&#9670;&#160;</a></span>positionCloses()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Vector3::positionCloses </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>tolerance</em> = <code>1e-03f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether this vector is within a positional tolerance of another vector, also take scale of the vectors into account. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The vector to compare with </td></tr>
+    <tr><td class="paramname">tolerance</td><td>The amount (related to the scale of vectors) that distance of the vector may vary by and still be considered close </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abf1761817fa6062091f11b5564477d90" name="abf1761817fa6062091f11b5564477d90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf1761817fa6062091f11b5564477d90">&#9670;&#160;</a></span>primaryAxis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> Engine::Vector3::primaryAxis </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extract the primary (dominant) axis from this direction vector. </p>
+
+</div>
+</div>
+<a id="a7bb23c0c6b9e98a596992dcbe37ea8bb" name="a7bb23c0c6b9e98a596992dcbe37ea8bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bb23c0c6b9e98a596992dcbe37ea8bb">&#9670;&#160;</a></span>floor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_vector3i.html">Vector3i</a> Engine::Vector3::floor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="aecbbf834ce8104c0eed8989a3a0d6530" name="aecbbf834ce8104c0eed8989a3a0d6530"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecbbf834ce8104c0eed8989a3a0d6530">&#9670;&#160;</a></span>operator*</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6853513cccbd24765f1f2dd3e840605a" name="a6853513cccbd24765f1f2dd3e840605a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6853513cccbd24765f1f2dd3e840605a">&#9670;&#160;</a></span>operator/</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>fScalar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkVector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1c355cc11ea009027f6a96ae9fdd430" name="ae1c355cc11ea009027f6a96ae9fdd430"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1c355cc11ea009027f6a96ae9fdd430">&#9670;&#160;</a></span>operator+ <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62ef9abdf2ed599a507fffed14d49c3c" name="a62ef9abdf2ed599a507fffed14d49c3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62ef9abdf2ed599a507fffed14d49c3c">&#9670;&#160;</a></span>operator+ <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a546bfbb34a94330b0536526ac4c321e3" name="a546bfbb34a94330b0536526ac4c321e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a546bfbb34a94330b0536526ac4c321e3">&#9670;&#160;</a></span>operator- <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab46c284cb5d33cff438f4cc325c5039d" name="ab46c284cb5d33cff438f4cc325c5039d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab46c284cb5d33cff438f4cc325c5039d">&#9670;&#160;</a></span>operator- <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afbb9d2aa58f49f78c0535e5bf01190d7" name="afbb9d2aa58f49f78c0535e5bf01190d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbb9d2aa58f49f78c0535e5bf01190d7">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>o</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function for writing to a stream. </p>
+
+</div>
+</div>
+<a id="a9456aa965368c4784ea881bfc1334ec3" name="a9456aa965368c4784ea881bfc1334ec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9456aa965368c4784ea881bfc1334ec3">&#9670;&#160;</a></span>operator&gt;&gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream &amp; operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a63716d1dd912e0ddd8e4986bab501700" name="a63716d1dd912e0ddd8e4986bab501700"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63716d1dd912e0ddd8e4986bab501700">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34cb9dc227dd4dc1bf6e7eaca828ee60" name="a34cb9dc227dd4dc1bf6e7eaca828ee60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34cb9dc227dd4dc1bf6e7eaca828ee60">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3623963407734a7d7059d9840d58a7ea" name="a3623963407734a7d7059d9840d58a7ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3623963407734a7d7059d9840d58a7ea">&#9670;&#160;</a></span>z</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Vector3::z</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7af3f15c2061007ae434ebcec2a93521" name="a7af3f15c2061007ae434ebcec2a93521"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7af3f15c2061007ae434ebcec2a93521">&#9670;&#160;</a></span>ZERO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::ZERO[] { 0, 0, 0 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a368841dab1e4574f97afcb0e40568421" name="a368841dab1e4574f97afcb0e40568421"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a368841dab1e4574f97afcb0e40568421">&#9670;&#160;</a></span>UNIT_X</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::UNIT_X[] { 1, 0, 0 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac4caf44759796126a992aa8169514abc" name="ac4caf44759796126a992aa8169514abc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4caf44759796126a992aa8169514abc">&#9670;&#160;</a></span>UNIT_Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::UNIT_Y[] { 0, 1, 0 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f6efc6b0b5c785e1213a2ef7808faaf" name="a3f6efc6b0b5c785e1213a2ef7808faaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f6efc6b0b5c785e1213a2ef7808faaf">&#9670;&#160;</a></span>UNIT_Z</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::UNIT_Z[] { 0, 0, 1 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac792b417bc5d16fd53cc79e86e169d28" name="ac792b417bc5d16fd53cc79e86e169d28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac792b417bc5d16fd53cc79e86e169d28">&#9670;&#160;</a></span>NEGATIVE_UNIT_X</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::NEGATIVE_UNIT_X[] { -1, 0, 0 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acdb5dec2d26c32c1e67238c0094e1de1" name="acdb5dec2d26c32c1e67238c0094e1de1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb5dec2d26c32c1e67238c0094e1de1">&#9670;&#160;</a></span>NEGATIVE_UNIT_Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::NEGATIVE_UNIT_Y[] { 0, -1, 0 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6bc0e889712191e5826305dc86e01e3f" name="a6bc0e889712191e5826305dc86e01e3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc0e889712191e5826305dc86e01e3f">&#9670;&#160;</a></span>NEGATIVE_UNIT_Z</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::NEGATIVE_UNIT_Z[] { 0, 0, -1 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0c9be220df9d1df7bf4efcfb6168c13" name="aa0c9be220df9d1df7bf4efcfb6168c13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c9be220df9d1df7bf4efcfb6168c13">&#9670;&#160;</a></span>UNIT_SCALE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Vector3::UNIT_SCALE[] { 1, 1, 1 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Meta/math/<a class="el" href="vector3_8h.html">vector3.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

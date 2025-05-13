@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: plugins/renderer/opengl/src/glad/khrplatform.h File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: plugins/renderer/opengl/src/glad/khrplatform.h File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/khrplatform_8h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plugins-renderer-opengl-src-glad-khrplatform-h-file-reference">
+<h1>plugins/renderer/opengl/src/glad/khrplatform.h File Reference<a class="headerlink" href="#plugins-renderer-opengl-src-glad-khrplatform-h-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: plugins/renderer/opengl/src/glad/khrplatform.h File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_38c8d24aef3972a7f87b834274e76e31.html">plugins</a></li><li class="navelem"><a class="el" href="dir_74d4e5f47262527cf6938c6017890522.html">renderer</a></li><li class="navelem"><a class="el" href="dir_3d41a4446253bd4211a295d312a1a5af.html">opengl</a></li><li class="navelem"><a class="el" href="dir_ec491287f7fd7640afcfc53ef60a5019.html">src</a></li><li class="navelem"><a class="el" href="dir_43a065b244170888b86a00c518b17ff3.html">glad</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">khrplatform.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+Include dependency graph for khrplatform.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="khrplatform_8h__incl.svg" width="167" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="khrplatform_8h__dep__incl.svg" width="167" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:afd38e339bdb8f65b1ac0c8f214c427e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#afd38e339bdb8f65b1ac0c8f214c427e5">KHRONOS_APIATTRIBUTES</a></td></tr>
+<tr class="separator:afd38e339bdb8f65b1ac0c8f214c427e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d0e04fe11e69b75470eb0a2a2546af3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a5d0e04fe11e69b75470eb0a2a2546af3">KHRONOS_APICALL</a></td></tr>
+<tr class="separator:a5d0e04fe11e69b75470eb0a2a2546af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6bea8ea37be81840add529306b32a8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#aff6bea8ea37be81840add529306b32a8">KHRONOS_APIENTRY</a></td></tr>
+<tr class="separator:aff6bea8ea37be81840add529306b32a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af23931754c6a5adf1892efe8933bf788"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#af23931754c6a5adf1892efe8933bf788">KHRONOS_MAX_ENUM</a>&#160;&#160;&#160;0x7FFFFFFF</td></tr>
+<tr class="separator:af23931754c6a5adf1892efe8933bf788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2005a9aed8272da688b4f4ea414531bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a2005a9aed8272da688b4f4ea414531bc">KHRONOS_SUPPORT_FLOAT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a2005a9aed8272da688b4f4ea414531bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5000aa7e3c9ca9d348b1d17326a35635"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a5000aa7e3c9ca9d348b1d17326a35635">KHRONOS_SUPPORT_INT64</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a5000aa7e3c9ca9d348b1d17326a35635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a1591fab40b33ac5df09dfe668d4c62fe"><td class="memItemLeft" align="right" valign="top">typedef float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a1591fab40b33ac5df09dfe668d4c62fe">khronos_float_t</a></td></tr>
+<tr class="separator:a1591fab40b33ac5df09dfe668d4c62fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea31402f1f8fad5bec8bdc4dd0919da9"><td class="memItemLeft" align="right" valign="top">typedef signed short int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#aea31402f1f8fad5bec8bdc4dd0919da9">khronos_int16_t</a></td></tr>
+<tr class="separator:aea31402f1f8fad5bec8bdc4dd0919da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af409d81dd359bf16ec33a34810a61b7c"><td class="memItemLeft" align="right" valign="top">typedef int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#af409d81dd359bf16ec33a34810a61b7c">khronos_int32_t</a></td></tr>
+<tr class="separator:af409d81dd359bf16ec33a34810a61b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55dc5b71f5c76458b3bfaa7621520796"><td class="memItemLeft" align="right" valign="top">typedef int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a55dc5b71f5c76458b3bfaa7621520796">khronos_int64_t</a></td></tr>
+<tr class="separator:a55dc5b71f5c76458b3bfaa7621520796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb103620f76ee8c038529cbf0375cfed"><td class="memItemLeft" align="right" valign="top">typedef signed char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#afb103620f76ee8c038529cbf0375cfed">khronos_int8_t</a></td></tr>
+<tr class="separator:afb103620f76ee8c038529cbf0375cfed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a182f27e517e990b263b51dc7b5f4ca3f"><td class="memItemLeft" align="right" valign="top">typedef signed long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a182f27e517e990b263b51dc7b5f4ca3f">khronos_intptr_t</a></td></tr>
+<tr class="separator:a182f27e517e990b263b51dc7b5f4ca3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bd045e2edc004c61c2586c7cbcff35d"><td class="memItemLeft" align="right" valign="top">typedef signed long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a8bd045e2edc004c61c2586c7cbcff35d">khronos_ssize_t</a></td></tr>
+<tr class="separator:a8bd045e2edc004c61c2586c7cbcff35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaec967d90a72559fa6aa12e0160743f8"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="khrplatform_8h.html#a55dc5b71f5c76458b3bfaa7621520796">khronos_int64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#aaec967d90a72559fa6aa12e0160743f8">khronos_stime_nanoseconds_t</a></td></tr>
+<tr class="separator:aaec967d90a72559fa6aa12e0160743f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99a2182846c1c18bb6629ac57ccbe178"><td class="memItemLeft" align="right" valign="top">typedef unsigned short int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a99a2182846c1c18bb6629ac57ccbe178">khronos_uint16_t</a></td></tr>
+<tr class="separator:a99a2182846c1c18bb6629ac57ccbe178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4a2ace0aee51dc1c2c9827b90a31cf"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a8c4a2ace0aee51dc1c2c9827b90a31cf">khronos_uint32_t</a></td></tr>
+<tr class="separator:a8c4a2ace0aee51dc1c2c9827b90a31cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c07fcf14a1c0f49618f9abd659a3c99"><td class="memItemLeft" align="right" valign="top">typedef uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a8c07fcf14a1c0f49618f9abd659a3c99">khronos_uint64_t</a></td></tr>
+<tr class="separator:a8c07fcf14a1c0f49618f9abd659a3c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab18f061b993d901e1161a4de18e8fc6b"><td class="memItemLeft" align="right" valign="top">typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#ab18f061b993d901e1161a4de18e8fc6b">khronos_uint8_t</a></td></tr>
+<tr class="separator:ab18f061b993d901e1161a4de18e8fc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5f63ab277fa98e81850e4d15f87c19b"><td class="memItemLeft" align="right" valign="top">typedef unsigned long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#ab5f63ab277fa98e81850e4d15f87c19b">khronos_uintptr_t</a></td></tr>
+<tr class="separator:ab5f63ab277fa98e81850e4d15f87c19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e1021b0953a3d0e673c83cc66c58164"><td class="memItemLeft" align="right" valign="top">typedef unsigned long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a0e1021b0953a3d0e673c83cc66c58164">khronos_usize_t</a></td></tr>
+<tr class="separator:a0e1021b0953a3d0e673c83cc66c58164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7643cf38bfc46e0d120a42d586639856"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="khrplatform_8h.html#a8c07fcf14a1c0f49618f9abd659a3c99">khronos_uint64_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a7643cf38bfc46e0d120a42d586639856">khronos_utime_nanoseconds_t</a></td></tr>
+<tr class="separator:a7643cf38bfc46e0d120a42d586639856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a0b823cfbc138820708978d43a5f26c64"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="khrplatform_8h.html#a0b823cfbc138820708978d43a5f26c64">khronos_boolean_enum_t</a> { <a class="el" href="khrplatform_8h.html#a0b823cfbc138820708978d43a5f26c64a37d68e7202b4d30f7742acebb50d1ba6">KHRONOS_FALSE</a> = 0
+, <a class="el" href="khrplatform_8h.html#a0b823cfbc138820708978d43a5f26c64a9275264520295ae24bc2033c05d6cb70">KHRONOS_TRUE</a> = 1
+, <a class="el" href="khrplatform_8h.html#a0b823cfbc138820708978d43a5f26c64a47d7d559cf039488acac78e797bc3cf9">KHRONOS_BOOLEAN_ENUM_FORCE_SIZE</a> = 0x7FFFFFFF
+ }</td></tr>
+<tr class="separator:a0b823cfbc138820708978d43a5f26c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a5d0e04fe11e69b75470eb0a2a2546af3" name="a5d0e04fe11e69b75470eb0a2a2546af3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d0e04fe11e69b75470eb0a2a2546af3">&#9670;&#160;</a></span>KHRONOS_APICALL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KHRONOS_APICALL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff6bea8ea37be81840add529306b32a8" name="aff6bea8ea37be81840add529306b32a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff6bea8ea37be81840add529306b32a8">&#9670;&#160;</a></span>KHRONOS_APIENTRY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KHRONOS_APIENTRY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd38e339bdb8f65b1ac0c8f214c427e5" name="afd38e339bdb8f65b1ac0c8f214c427e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd38e339bdb8f65b1ac0c8f214c427e5">&#9670;&#160;</a></span>KHRONOS_APIATTRIBUTES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KHRONOS_APIATTRIBUTES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5000aa7e3c9ca9d348b1d17326a35635" name="a5000aa7e3c9ca9d348b1d17326a35635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5000aa7e3c9ca9d348b1d17326a35635">&#9670;&#160;</a></span>KHRONOS_SUPPORT_INT64</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KHRONOS_SUPPORT_INT64&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2005a9aed8272da688b4f4ea414531bc" name="a2005a9aed8272da688b4f4ea414531bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2005a9aed8272da688b4f4ea414531bc">&#9670;&#160;</a></span>KHRONOS_SUPPORT_FLOAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KHRONOS_SUPPORT_FLOAT&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af23931754c6a5adf1892efe8933bf788" name="af23931754c6a5adf1892efe8933bf788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af23931754c6a5adf1892efe8933bf788">&#9670;&#160;</a></span>KHRONOS_MAX_ENUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KHRONOS_MAX_ENUM&#160;&#160;&#160;0x7FFFFFFF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="af409d81dd359bf16ec33a34810a61b7c" name="af409d81dd359bf16ec33a34810a61b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af409d81dd359bf16ec33a34810a61b7c">&#9670;&#160;</a></span>khronos_int32_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int32_t <a class="el" href="khrplatform_8h.html#af409d81dd359bf16ec33a34810a61b7c">khronos_int32_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c4a2ace0aee51dc1c2c9827b90a31cf" name="a8c4a2ace0aee51dc1c2c9827b90a31cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c4a2ace0aee51dc1c2c9827b90a31cf">&#9670;&#160;</a></span>khronos_uint32_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint32_t <a class="el" href="khrplatform_8h.html#a8c4a2ace0aee51dc1c2c9827b90a31cf">khronos_uint32_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55dc5b71f5c76458b3bfaa7621520796" name="a55dc5b71f5c76458b3bfaa7621520796"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55dc5b71f5c76458b3bfaa7621520796">&#9670;&#160;</a></span>khronos_int64_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int64_t <a class="el" href="khrplatform_8h.html#a55dc5b71f5c76458b3bfaa7621520796">khronos_int64_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c07fcf14a1c0f49618f9abd659a3c99" name="a8c07fcf14a1c0f49618f9abd659a3c99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c07fcf14a1c0f49618f9abd659a3c99">&#9670;&#160;</a></span>khronos_uint64_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint64_t <a class="el" href="khrplatform_8h.html#a8c07fcf14a1c0f49618f9abd659a3c99">khronos_uint64_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb103620f76ee8c038529cbf0375cfed" name="afb103620f76ee8c038529cbf0375cfed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb103620f76ee8c038529cbf0375cfed">&#9670;&#160;</a></span>khronos_int8_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef signed char <a class="el" href="khrplatform_8h.html#afb103620f76ee8c038529cbf0375cfed">khronos_int8_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab18f061b993d901e1161a4de18e8fc6b" name="ab18f061b993d901e1161a4de18e8fc6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab18f061b993d901e1161a4de18e8fc6b">&#9670;&#160;</a></span>khronos_uint8_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef unsigned char <a class="el" href="khrplatform_8h.html#ab18f061b993d901e1161a4de18e8fc6b">khronos_uint8_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea31402f1f8fad5bec8bdc4dd0919da9" name="aea31402f1f8fad5bec8bdc4dd0919da9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea31402f1f8fad5bec8bdc4dd0919da9">&#9670;&#160;</a></span>khronos_int16_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef signed short int <a class="el" href="khrplatform_8h.html#aea31402f1f8fad5bec8bdc4dd0919da9">khronos_int16_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99a2182846c1c18bb6629ac57ccbe178" name="a99a2182846c1c18bb6629ac57ccbe178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a2182846c1c18bb6629ac57ccbe178">&#9670;&#160;</a></span>khronos_uint16_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef unsigned short int <a class="el" href="khrplatform_8h.html#a99a2182846c1c18bb6629ac57ccbe178">khronos_uint16_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a182f27e517e990b263b51dc7b5f4ca3f" name="a182f27e517e990b263b51dc7b5f4ca3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a182f27e517e990b263b51dc7b5f4ca3f">&#9670;&#160;</a></span>khronos_intptr_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef signed long int <a class="el" href="khrplatform_8h.html#a182f27e517e990b263b51dc7b5f4ca3f">khronos_intptr_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5f63ab277fa98e81850e4d15f87c19b" name="ab5f63ab277fa98e81850e4d15f87c19b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5f63ab277fa98e81850e4d15f87c19b">&#9670;&#160;</a></span>khronos_uintptr_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef unsigned long int <a class="el" href="khrplatform_8h.html#ab5f63ab277fa98e81850e4d15f87c19b">khronos_uintptr_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8bd045e2edc004c61c2586c7cbcff35d" name="a8bd045e2edc004c61c2586c7cbcff35d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd045e2edc004c61c2586c7cbcff35d">&#9670;&#160;</a></span>khronos_ssize_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef signed long int <a class="el" href="khrplatform_8h.html#a8bd045e2edc004c61c2586c7cbcff35d">khronos_ssize_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e1021b0953a3d0e673c83cc66c58164" name="a0e1021b0953a3d0e673c83cc66c58164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e1021b0953a3d0e673c83cc66c58164">&#9670;&#160;</a></span>khronos_usize_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef unsigned long int <a class="el" href="khrplatform_8h.html#a0e1021b0953a3d0e673c83cc66c58164">khronos_usize_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1591fab40b33ac5df09dfe668d4c62fe" name="a1591fab40b33ac5df09dfe668d4c62fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1591fab40b33ac5df09dfe668d4c62fe">&#9670;&#160;</a></span>khronos_float_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef float <a class="el" href="khrplatform_8h.html#a1591fab40b33ac5df09dfe668d4c62fe">khronos_float_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7643cf38bfc46e0d120a42d586639856" name="a7643cf38bfc46e0d120a42d586639856"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7643cf38bfc46e0d120a42d586639856">&#9670;&#160;</a></span>khronos_utime_nanoseconds_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="khrplatform_8h.html#a8c07fcf14a1c0f49618f9abd659a3c99">khronos_uint64_t</a> <a class="el" href="khrplatform_8h.html#a7643cf38bfc46e0d120a42d586639856">khronos_utime_nanoseconds_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaec967d90a72559fa6aa12e0160743f8" name="aaec967d90a72559fa6aa12e0160743f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaec967d90a72559fa6aa12e0160743f8">&#9670;&#160;</a></span>khronos_stime_nanoseconds_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="khrplatform_8h.html#a55dc5b71f5c76458b3bfaa7621520796">khronos_int64_t</a> <a class="el" href="khrplatform_8h.html#aaec967d90a72559fa6aa12e0160743f8">khronos_stime_nanoseconds_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a0b823cfbc138820708978d43a5f26c64" name="a0b823cfbc138820708978d43a5f26c64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b823cfbc138820708978d43a5f26c64">&#9670;&#160;</a></span>khronos_boolean_enum_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="khrplatform_8h.html#a0b823cfbc138820708978d43a5f26c64">khronos_boolean_enum_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0b823cfbc138820708978d43a5f26c64a37d68e7202b4d30f7742acebb50d1ba6" name="a0b823cfbc138820708978d43a5f26c64a37d68e7202b4d30f7742acebb50d1ba6"></a>KHRONOS_FALSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0b823cfbc138820708978d43a5f26c64a9275264520295ae24bc2033c05d6cb70" name="a0b823cfbc138820708978d43a5f26c64a9275264520295ae24bc2033c05d6cb70"></a>KHRONOS_TRUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0b823cfbc138820708978d43a5f26c64a47d7d559cf039488acac78e797bc3cf9" name="a0b823cfbc138820708978d43a5f26c64a47d7d559cf039488acac78e797bc3cf9"></a>KHRONOS_BOOLEAN_ENUM_FORCE_SIZE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

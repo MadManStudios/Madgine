@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::ReferenceTuple&amp;lt; Ty &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::ReferenceTuple&amp;lt; Ty &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_reference_tuple.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="referencetuple-lt-ty-gt-struct-template-reference">
+<h1>ReferenceTuple&amp;lt; Ty &amp;gt; Struct Template Reference<a class="headerlink" href="#referencetuple-lt-ty-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::ReferenceTuple&lt; Ty &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_reference_tuple-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::ReferenceTuple&lt; Ty &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;referencetuple.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad9032daea70c763306f4ab432f30d8e7"><td class="memTemplParams" colspan="2">template&lt;typename... Ty2&gt; <br />
+requires (<a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt;Ty2 &amp;, <a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;&gt; &amp;&amp;...)</td></tr>
+<tr class="memitem:ad9032daea70c763306f4ab432f30d8e7"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#ad9032daea70c763306f4ab432f30d8e7">ReferenceTuple</a> (<a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; Ty2... &gt; data)</td></tr>
+<tr class="separator:ad9032daea70c763306f4ab432f30d8e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f4b2ae668b244329f044c3dab170618"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#a5f4b2ae668b244329f044c3dab170618">ReferenceTuple</a> (std::tuple&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;... &gt; data)</td></tr>
+<tr class="separator:a5f4b2ae668b244329f044c3dab170618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a849c3e6eed271b3fc5c7285abffbfc44"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#a849c3e6eed271b3fc5c7285abffbfc44">operator std::tuple&lt; Ty &amp;... &gt;</a> ()</td></tr>
+<tr class="separator:a849c3e6eed271b3fc5c7285abffbfc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0cda3fe245e40b7e563383834d0cdf8"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> *... &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#af0cda3fe245e40b7e563383834d0cdf8">operator&amp;</a> () const</td></tr>
+<tr class="separator:af0cda3fe245e40b7e563383834d0cdf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ad220e03933265047b201ff61d4ac80f4"><td class="memTemplParams" colspan="2">template&lt;size_t I&gt; </td></tr>
+<tr class="memitem:ad220e03933265047b201ff61d4ac80f4"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#ad220e03933265047b201ff61d4ac80f4">get</a> (const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> &amp;data)</td></tr>
+<tr class="separator:ad220e03933265047b201ff61d4ac80f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad220e03933265047b201ff61d4ac80f4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad220e03933265047b201ff61d4ac80f4"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#ad220e03933265047b201ff61d4ac80f4">get</a> (const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> &amp;data)</td></tr>
+<tr class="separator:ad220e03933265047b201ff61d4ac80f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb953d5fc2e6aa0a0c462b3fd1f95564"><td class="memTemplParams" colspan="2">template&lt;size_t I&gt; </td></tr>
+<tr class="memitem:abb953d5fc2e6aa0a0c462b3fd1f95564"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#abb953d5fc2e6aa0a0c462b3fd1f95564">get</a> (<a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> &amp;data)</td></tr>
+<tr class="separator:abb953d5fc2e6aa0a0c462b3fd1f95564"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb953d5fc2e6aa0a0c462b3fd1f95564"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abb953d5fc2e6aa0a0c462b3fd1f95564"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#abb953d5fc2e6aa0a0c462b3fd1f95564">get</a> (<a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> &amp;data)</td></tr>
+<tr class="separator:abb953d5fc2e6aa0a0c462b3fd1f95564"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5af2f3cc98f1b659f525be5aacce0e03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#a5af2f3cc98f1b659f525be5aacce0e03">swap</a> (const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> &amp;<a class="el" href="struct_engine_1_1first.html">first</a>, const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> &amp;second)</td></tr>
+<tr class="separator:a5af2f3cc98f1b659f525be5aacce0e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3523fcbc9de5b344aec212d52a55025"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:af3523fcbc9de5b344aec212d52a55025"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#af3523fcbc9de5b344aec212d52a55025">tag_invoke</a> (<a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>, <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> tuple, Args &amp;&amp;... args)</td></tr>
+<tr class="separator:af3523fcbc9de5b344aec212d52a55025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b8b2595ee25635f22be91d3513306eb"><td class="memTemplParams" colspan="2">template&lt;typename... Tuples&gt; </td></tr>
+<tr class="memitem:a4b8b2595ee25635f22be91d3513306eb"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#a4b8b2595ee25635f22be91d3513306eb">tag_invoke</a> (<a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>, <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> tuple, std::piecewise_construct_t, Tuples &amp;&amp;...tuples)</td></tr>
+<tr class="separator:a4b8b2595ee25635f22be91d3513306eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6bdbe7ada0b864af079b6ae328e2b97"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reference_tuple.html#ae6bdbe7ada0b864af079b6ae328e2b97">tag_invoke</a> (<a class="el" href="struct_engine_1_1destruct__t.html">destruct_t</a>, <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a> tuple)</td></tr>
+<tr class="separator:ae6bdbe7ada0b864af079b6ae328e2b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5f4b2ae668b244329f044c3dab170618" name="a5f4b2ae668b244329f044c3dab170618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f4b2ae668b244329f044c3dab170618">&#9670;&#160;</a></span>ReferenceTuple() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reference_tuple.html">Engine::ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::ReferenceTuple </td>
+          <td>(</td>
+          <td class="paramtype">std::tuple&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;... &gt;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9032daea70c763306f4ab432f30d8e7" name="ad9032daea70c763306f4ab432f30d8e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9032daea70c763306f4ab432f30d8e7">&#9670;&#160;</a></span>ReferenceTuple() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Ty2&gt; <br />
+requires (<a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt;Ty2 &amp;, <a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;&gt; &amp;&amp;...)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reference_tuple.html">Engine::ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::ReferenceTuple </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; Ty2... &gt;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a849c3e6eed271b3fc5c7285abffbfc44" name="a849c3e6eed271b3fc5c7285abffbfc44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a849c3e6eed271b3fc5c7285abffbfc44">&#9670;&#160;</a></span>operator std::tuple&lt; Ty &amp;... &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reference_tuple.html">Engine::ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::operator std::tuple&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;... &gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0cda3fe245e40b7e563383834d0cdf8" name="af0cda3fe245e40b7e563383834d0cdf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0cda3fe245e40b7e563383834d0cdf8">&#9670;&#160;</a></span>operator&amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> *... &gt; <a class="el" href="struct_engine_1_1_reference_tuple.html">Engine::ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::operator&amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="abb953d5fc2e6aa0a0c462b3fd1f95564" name="abb953d5fc2e6aa0a0c462b3fd1f95564"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb953d5fc2e6aa0a0c462b3fd1f95564">&#9670;&#160;</a></span>get <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad220e03933265047b201ff61d4ac80f4" name="ad220e03933265047b201ff61d4ac80f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad220e03933265047b201ff61d4ac80f4">&#9670;&#160;</a></span>get <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb953d5fc2e6aa0a0c462b3fd1f95564" name="abb953d5fc2e6aa0a0c462b3fd1f95564"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb953d5fc2e6aa0a0c462b3fd1f95564">&#9670;&#160;</a></span>get <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad220e03933265047b201ff61d4ac80f4" name="ad220e03933265047b201ff61d4ac80f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad220e03933265047b201ff61d4ac80f4">&#9670;&#160;</a></span>get <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5af2f3cc98f1b659f525be5aacce0e03" name="a5af2f3cc98f1b659f525be5aacce0e03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5af2f3cc98f1b659f525be5aacce0e03">&#9670;&#160;</a></span>swap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> swap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>second</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae6bdbe7ada0b864af079b6ae328e2b97" name="ae6bdbe7ada0b864af079b6ae328e2b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6bdbe7ada0b864af079b6ae328e2b97">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1destruct__t.html">destruct_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;&#160;</td>
+          <td class="paramname"><em>tuple</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3523fcbc9de5b344aec212d52a55025" name="af3523fcbc9de5b344aec212d52a55025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3523fcbc9de5b344aec212d52a55025">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;&#160;</td>
+          <td class="paramname"><em>tuple</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b8b2595ee25635f22be91d3513306eb" name="a4b8b2595ee25635f22be91d3513306eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8b2595ee25635f22be91d3513306eb">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Tuples&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reference_tuple.html">ReferenceTuple</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;&#160;</td>
+          <td class="paramname"><em>tuple</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::piecewise_construct_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Tuples &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>tuples</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="referencetuple_8h.html">referencetuple.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

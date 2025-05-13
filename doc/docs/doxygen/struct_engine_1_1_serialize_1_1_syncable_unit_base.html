@@ -1,0 +1,2006 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Serialize::SyncableUnitBase Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Serialize::SyncableUnitBase Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_serialize_1_1_syncable_unit_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="syncableunitbase-struct-reference">
+<h1>SyncableUnitBase Struct Reference<a class="headerlink" href="#syncableunitbase-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Serialize::SyncableUnitBase Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_serialize.html">Serialize</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_serialize_1_1_syncable_unit_base-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Serialize::SyncableUnitBase Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;syncableunit.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Serialize::SyncableUnitBase:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_serialize_1_1_syncable_unit_base__inherit__graph.svg" width="622" height="180"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6ab3b5edd8e4d76498261057e8f98ae0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a6ab3b5edd8e4d76498261057e8f98ae0">isMaster</a> () const</td></tr>
+<tr class="separator:a6ab3b5edd8e4d76498261057e8f98ae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf706f526379dfee750bd6579c60c1f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abf706f526379dfee750bd6579c60c1f0">masterId</a> () const</td></tr>
+<tr class="separator:abf706f526379dfee750bd6579c60c1f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada577c363bdd16e5d7f35b821db565eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ada577c363bdd16e5d7f35b821db565eb">participantId</a> () const</td></tr>
+<tr class="separator:ada577c363bdd16e5d7f35b821db565eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c58d48ae153aed5cd05da3a5e67188"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad0c58d48ae153aed5cd05da3a5e67188">readAction</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;request)</td></tr>
+<tr class="separator:ad0c58d48ae153aed5cd05da3a5e67188"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a583851273f5c42bec21114d2160fd436"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a583851273f5c42bec21114d2160fd436">readFunctionAction</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;request)</td></tr>
+<tr class="separator:a583851273f5c42bec21114d2160fd436"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec58cec03ae45b3213344cc5d512daa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#aec58cec03ae45b3213344cc5d512daa5">readFunctionError</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;request)</td></tr>
+<tr class="separator:aec58cec03ae45b3213344cc5d512daa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4c78cc58f81e1980d290000895aafcb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#af4c78cc58f81e1980d290000895aafcb">readFunctionRequest</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> id)</td></tr>
+<tr class="separator:af4c78cc58f81e1980d290000895aafcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a15f956f4bb9a0f069a86767a47524"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a02a15f956f4bb9a0f069a86767a47524">readRequest</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> id)</td></tr>
+<tr class="separator:a02a15f956f4bb9a0f069a86767a47524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a926f84d7e92bfc92deaddb4d75e5c7e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a926f84d7e92bfc92deaddb4d75e5c7e9">readState</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name=nullptr, <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> hierarchy={})</td></tr>
+<tr class="separator:a926f84d7e92bfc92deaddb4d75e5c7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4699949b518bbc97dd2a3b84458a4257"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a4699949b518bbc97dd2a3b84458a4257">setActive</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> active, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> existenceChanged)</td></tr>
+<tr class="separator:a4699949b518bbc97dd2a3b84458a4257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a184f42762b13bb2418f2468096013dd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a184f42762b13bb2418f2468096013dd7">slaveId</a> () const</td></tr>
+<tr class="separator:a184f42762b13bb2418f2468096013dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb4ca800193497b3e8b3f0177371e658"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abb4ca800193497b3e8b3f0177371e658">writeState</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;out, const char *name=nullptr, <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> hierarchy={}) const</td></tr>
+<tr class="separator:abb4ca800193497b3e8b3f0177371e658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">Engine::Serialize::SerializableUnitBase</a></td></tr>
+<tr class="memitem:ae7ef37190441d638663dbab009450114 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#ae7ef37190441d638663dbab009450114">isSynced</a> () const</td></tr>
+<tr class="separator:ae7ef37190441d638663dbab009450114 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad9386f40a8548fc0df307515d294e586"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad9386f40a8548fc0df307515d294e586">visitStream</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *table, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, const <a class="el" href="struct_engine_1_1_serialize_1_1_stream_visitor.html">StreamVisitor</a> &amp;visitor)</td></tr>
+<tr class="separator:ad9386f40a8548fc0df307515d294e586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae20a0154038cdd269e042681a13820e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ae20a0154038cdd269e042681a13820e3">SyncableUnitBase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:ae20a0154038cdd269e042681a13820e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad131915a96a1a9d51b8906c4aa040a7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad131915a96a1a9d51b8906c4aa040a7a">SyncableUnitBase</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:ad131915a96a1a9d51b8906c4aa040a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4a4a55ddaed11a35752271e7e0a1cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a3a4a4a55ddaed11a35752271e7e0a1cd">SyncableUnitBase</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abf706f526379dfee750bd6579c60c1f0">masterId</a>=0)</td></tr>
+<tr class="separator:a3a4a4a55ddaed11a35752271e7e0a1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f9d07e511e08aacfd3f68cbf5adf41a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a1f9d07e511e08aacfd3f68cbf5adf41a">~SyncableUnitBase</a> ()</td></tr>
+<tr class="separator:a1f9d07e511e08aacfd3f68cbf5adf41a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5487e745880117d83f817c718ddb7b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad5487e745880117d83f817c718ddb7b6">moveMasterId</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> newId=0)</td></tr>
+<tr class="separator:ad5487e745880117d83f817c718ddb7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7be9abfef17d031df80f887afb446ef0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a7be9abfef17d031df80f887afb446ef0">operator=</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:a7be9abfef17d031df80f887afb446ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fcda55bac0099ce3666cc939829e301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a1fcda55bac0099ce3666cc939829e301">operator=</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a1fcda55bac0099ce3666cc939829e301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a136ba194071189282d56148943fef894"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a136ba194071189282d56148943fef894">serializeType</a> () const</td></tr>
+<tr class="separator:a136ba194071189282d56148943fef894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a69e31befdbabad80d41ec4e9a2842"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ac5a69e31befdbabad80d41ec4e9a2842">setSlaveId</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> id, <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> *mgr)</td></tr>
+<tr class="separator:ac5a69e31befdbabad80d41ec4e9a2842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3de4771af74967068b1e43fc06e38b08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a3de4771af74967068b1e43fc06e38b08">writeAction</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> offset, <a class="el" href="classvoid.html">void</a> *data, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets={}) const</td></tr>
+<tr class="separator:a3de4771af74967068b1e43fc06e38b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f9b65cd6dcfa26073e79f1e9006c9cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a2f9b65cd6dcfa26073e79f1e9006c9cc">writeFunctionAction</a> (uint16_t index, const <a class="el" href="classvoid.html">void</a> *args, const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets={}, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget=0, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId=0)</td></tr>
+<tr class="separator:a2f9b65cd6dcfa26073e79f1e9006c9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc15e494111be26c538a45bc06533147"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#afc15e494111be26c538a45bc06533147">writeFunctionError</a> (uint16_t index, MessageResult error, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;target, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:afc15e494111be26c538a45bc06533147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a037fcefa37c01196bcd1fe5b5704e8e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a037fcefa37c01196bcd1fe5b5704e8e7">writeFunctionRequest</a> (uint16_t index, <a class="el" href="namespace_engine_1_1_serialize.html#a42e8d9340500ffbafda8c3f5e0e49448">FunctionType</a> type, const <a class="el" href="classvoid.html">void</a> *args, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester=0, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requesterTransactionId=0, <a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver={})</td></tr>
+<tr class="separator:a037fcefa37c01196bcd1fe5b5704e8e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b67e386e800d330a64edc0c467d6bec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a7b67e386e800d330a64edc0c467d6bec">writeFunctionResult</a> (uint16_t index, const <a class="el" href="classvoid.html">void</a> *result, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;target, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:a7b67e386e800d330a64edc0c467d6bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46abeefa23bbb9d52c635a540a0ef607"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a46abeefa23bbb9d52c635a540a0ef607">writeRequest</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> offset, <a class="el" href="classvoid.html">void</a> *data, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester=0, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requesterTransactionId=0, <a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver={}) const</td></tr>
+<tr class="separator:a46abeefa23bbb9d52c635a540a0ef607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886cdb3b8f5ae465c9c08c3dc76f47a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a886cdb3b8f5ae465c9c08c3dc76f47a4">writeRequestResponse</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> offset, <a class="el" href="classvoid.html">void</a> *data, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId) const</td></tr>
+<tr class="separator:a886cdb3b8f5ae465c9c08c3dc76f47a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">Engine::Serialize::SerializableUnitBase</a></td></tr>
+<tr class="memitem:a0fa16955997b4d0934321535f201c517 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#a0fa16955997b4d0934321535f201c517">SerializableUnitBase</a> ()</td></tr>
+<tr class="separator:a0fa16955997b4d0934321535f201c517 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee5ef2241ca56a270853e941405fcd40 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#aee5ef2241ca56a270853e941405fcd40">SerializableUnitBase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:aee5ef2241ca56a270853e941405fcd40 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91301f84074f296b0fe07745b74d7886 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#a91301f84074f296b0fe07745b74d7886">SerializableUnitBase</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a91301f84074f296b0fe07745b74d7886 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63aa3a9a9cb57da8035723a13f33453 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#ad63aa3a9a9cb57da8035723a13f33453">~SerializableUnitBase</a> ()</td></tr>
+<tr class="separator:ad63aa3a9a9cb57da8035723a13f33453 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3775b29f67d80c5e8293de966d33d290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#a3775b29f67d80c5e8293de966d33d290">operator=</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:a3775b29f67d80c5e8293de966d33d290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6db49e8d70e658cd0d5535b4da2290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#aed6db49e8d70e658cd0d5535b4da2290">operator=</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&amp;other)</td></tr>
+<tr class="separator:aed6db49e8d70e658cd0d5535b4da2290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ab09f22ca7ba26454c04895681e613ff3"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ab09f22ca7ba26454c04895681e613ff3">beginRequestResponseMessage</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;stream, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> id)</td></tr>
+<tr class="separator:ab09f22ca7ba26454c04895681e613ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b7c612a231e5773a28668c12faf24f"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a93b7c612a231e5773a28668c12faf24f">convertSyncablePtr</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, <a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> id, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&amp;out, const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&amp;type)</td></tr>
+<tr class="separator:a93b7c612a231e5773a28668c12faf24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f078044e6cadd5fa27eeae10062b26b"><td class="memItemLeft" align="right" valign="top">META_EXPORT std::vector&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a5f078044e6cadd5fa27eeae10062b26b">getMasterActionMessageTargets</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets)</td></tr>
+<tr class="separator:a5f078044e6cadd5fa27eeae10062b26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a239d26d2ec2964ae42b0bd60a868114a"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a239d26d2ec2964ae42b0bd60a868114a">getMasterFunctionRequestResponseTarget</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget)</td></tr>
+<tr class="separator:a239d26d2ec2964ae42b0bd60a868114a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abac353d6ae195bd7b309c552366e492d"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abac353d6ae195bd7b309c552366e492d">getMasterRequestResponseTarget</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:abac353d6ae195bd7b309c552366e492d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ef14adedc7b350fbd82a430aa1bd62"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a66ef14adedc7b350fbd82a430aa1bd62">getSlaveRequestMessageTarget</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requestId, <a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver)</td></tr>
+<tr class="separator:a66ef14adedc7b350fbd82a430aa1bd62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad9f713e42dbb8108156af54382a24d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#adad9f713e42dbb8108156af54382a24d">SerializableDataPtr</a></td></tr>
+<tr class="separator:adad9f713e42dbb8108156af54382a24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26cfb34157c01a4a6e278b1ba2412842"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a26cfb34157c01a4a6e278b1ba2412842">SerializableUnitConstPtr</a></td></tr>
+<tr class="separator:a26cfb34157c01a4a6e278b1ba2412842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79c8dc6851c49dfaa9af95d07b85647f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a79c8dc6851c49dfaa9af95d07b85647f">SerializableUnitPtr</a></td></tr>
+<tr class="separator:a79c8dc6851c49dfaa9af95d07b85647f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152e068a88bff662e34784ad3b847b47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a152e068a88bff662e34784ad3b847b47">SyncManager</a></td></tr>
+<tr class="separator:a152e068a88bff662e34784ad3b847b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4258347c1c1b72cec4192bfb26e721ce"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Base &gt; </td></tr>
+<tr class="memitem:a4258347c1c1b72cec4192bfb26e721ce"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a4258347c1c1b72cec4192bfb26e721ce">TableInitializer</a></td></tr>
+<tr class="separator:a4258347c1c1b72cec4192bfb26e721ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24c4c76b31146e139536d9eb9ed9c541"><td class="memItemLeft" align="right" valign="top">META_EXPORT friend <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a24c4c76b31146e139536d9eb9ed9c541">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;unit, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> success, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy)</td></tr>
+<tr class="separator:a24c4c76b31146e139536d9eb9ed9c541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39b98975cea199c66726445eb4172d9b"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a39b98975cea199c66726445eb4172d9b">writeFunctionAction</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, uint16_t index, const <a class="el" href="classvoid.html">void</a> *args, const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:a39b98975cea199c66726445eb4172d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28f61697748e8769bbae608a419ba7b4"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a28f61697748e8769bbae608a419ba7b4">writeFunctionError</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, uint16_t index, MessageResult error, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;target, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:a28f61697748e8769bbae608a419ba7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d2b8c85034a39ae9c88dd2a10c09660"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a9d2b8c85034a39ae9c88dd2a10c09660">writeFunctionRequest</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, uint16_t index, <a class="el" href="namespace_engine_1_1_serialize.html#a42e8d9340500ffbafda8c3f5e0e49448">FunctionType</a> type, const <a class="el" href="classvoid.html">void</a> *args, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requesterTransactionId, <a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver)</td></tr>
+<tr class="separator:a9d2b8c85034a39ae9c88dd2a10c09660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf134222a22016f4a009d99af5b9b128"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abf134222a22016f4a009d99af5b9b128">writeFunctionResult</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *unit, uint16_t index, const <a class="el" href="classvoid.html">void</a> *result, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;target, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:abf134222a22016f4a009d99af5b9b128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3a4a4a55ddaed11a35752271e7e0a1cd" name="a3a4a4a55ddaed11a35752271e7e0a1cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a4a4a55ddaed11a35752271e7e0a1cd">&#9670;&#160;</a></span>SyncableUnitBase() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::SyncableUnitBase::SyncableUnitBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td>
+          <td class="paramname"><em>masterId</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae20a0154038cdd269e042681a13820e3" name="ae20a0154038cdd269e042681a13820e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae20a0154038cdd269e042681a13820e3">&#9670;&#160;</a></span>SyncableUnitBase() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::SyncableUnitBase::SyncableUnitBase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad131915a96a1a9d51b8906c4aa040a7a" name="ad131915a96a1a9d51b8906c4aa040a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad131915a96a1a9d51b8906c4aa040a7a">&#9670;&#160;</a></span>SyncableUnitBase() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::SyncableUnitBase::SyncableUnitBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f9d07e511e08aacfd3f68cbf5adf41a" name="a1f9d07e511e08aacfd3f68cbf5adf41a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f9d07e511e08aacfd3f68cbf5adf41a">&#9670;&#160;</a></span>~SyncableUnitBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::SyncableUnitBase::~SyncableUnitBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7be9abfef17d031df80f887afb446ef0" name="a7be9abfef17d031df80f887afb446ef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7be9abfef17d031df80f887afb446ef0">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp; Engine::Serialize::SyncableUnitBase::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1fcda55bac0099ce3666cc939829e301" name="a1fcda55bac0099ce3666cc939829e301"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fcda55bac0099ce3666cc939829e301">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp; Engine::Serialize::SyncableUnitBase::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb4ca800193497b3e8b3f0177371e658" name="abb4ca800193497b3e8b3f0177371e658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb4ca800193497b3e8b3f0177371e658">&#9670;&#160;</a></span>writeState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a>&#160;</td>
+          <td class="paramname"><em>hierarchy</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a926f84d7e92bfc92deaddb4d75e5c7e9" name="a926f84d7e92bfc92deaddb4d75e5c7e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a926f84d7e92bfc92deaddb4d75e5c7e9">&#9670;&#160;</a></span>readState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::SyncableUnitBase::readState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a>&#160;</td>
+          <td class="paramname"><em>hierarchy</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4699949b518bbc97dd2a3b84458a4257" name="a4699949b518bbc97dd2a3b84458a4257"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4699949b518bbc97dd2a3b84458a4257">&#9670;&#160;</a></span>setActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::setActive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>active</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>existenceChanged</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9386f40a8548fc0df307515d294e586" name="ad9386f40a8548fc0df307515d294e586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9386f40a8548fc0df307515d294e586">&#9670;&#160;</a></span>visitStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::SyncableUnitBase::visitStream </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_stream_visitor.html">StreamVisitor</a> &amp;&#160;</td>
+          <td class="paramname"><em>visitor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0c58d48ae153aed5cd05da3a5e67188" name="ad0c58d48ae153aed5cd05da3a5e67188"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c58d48ae153aed5cd05da3a5e67188">&#9670;&#160;</a></span>readAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::SyncableUnitBase::readAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>request</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02a15f956f4bb9a0f069a86767a47524" name="a02a15f956f4bb9a0f069a86767a47524"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02a15f956f4bb9a0f069a86767a47524">&#9670;&#160;</a></span>readRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::SyncableUnitBase::readRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a583851273f5c42bec21114d2160fd436" name="a583851273f5c42bec21114d2160fd436"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a583851273f5c42bec21114d2160fd436">&#9670;&#160;</a></span>readFunctionAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::SyncableUnitBase::readFunctionAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>request</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af4c78cc58f81e1980d290000895aafcb" name="af4c78cc58f81e1980d290000895aafcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4c78cc58f81e1980d290000895aafcb">&#9670;&#160;</a></span>readFunctionRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::SyncableUnitBase::readFunctionRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec58cec03ae45b3213344cc5d512daa5" name="aec58cec03ae45b3213344cc5d512daa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec58cec03ae45b3213344cc5d512daa5">&#9670;&#160;</a></span>readFunctionError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::SyncableUnitBase::readFunctionError </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>request</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a184f42762b13bb2418f2468096013dd7" name="a184f42762b13bb2418f2468096013dd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a184f42762b13bb2418f2468096013dd7">&#9670;&#160;</a></span>slaveId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> Engine::Serialize::SyncableUnitBase::slaveId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf706f526379dfee750bd6579c60c1f0" name="abf706f526379dfee750bd6579c60c1f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf706f526379dfee750bd6579c60c1f0">&#9670;&#160;</a></span>masterId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> Engine::Serialize::SyncableUnitBase::masterId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada577c363bdd16e5d7f35b821db565eb" name="ada577c363bdd16e5d7f35b821db565eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada577c363bdd16e5d7f35b821db565eb">&#9670;&#160;</a></span>participantId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> Engine::Serialize::SyncableUnitBase::participantId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ab3b5edd8e4d76498261057e8f98ae0" name="a6ab3b5edd8e4d76498261057e8f98ae0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ab3b5edd8e4d76498261057e8f98ae0">&#9670;&#160;</a></span>isMaster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Serialize::SyncableUnitBase::isMaster </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5a69e31befdbabad80d41ec4e9a2842" name="ac5a69e31befdbabad80d41ec4e9a2842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5a69e31befdbabad80d41ec4e9a2842">&#9670;&#160;</a></span>setSlaveId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::setSlaveId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> *&#160;</td>
+          <td class="paramname"><em>mgr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a136ba194071189282d56148943fef894" name="a136ba194071189282d56148943fef894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a136ba194071189282d56148943fef894">&#9670;&#160;</a></span>serializeType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> * Engine::Serialize::SyncableUnitBase::serializeType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5487e745880117d83f817c718ddb7b6" name="ad5487e745880117d83f817c718ddb7b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5487e745880117d83f817c718ddb7b6">&#9670;&#160;</a></span>moveMasterId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> Engine::Serialize::SyncableUnitBase::moveMasterId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td>
+          <td class="paramname"><em>newId</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f9b65cd6dcfa26073e79f1e9006c9cc" name="a2f9b65cd6dcfa26073e79f1e9006c9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f9b65cd6dcfa26073e79f1e9006c9cc">&#9670;&#160;</a></span>writeFunctionAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeFunctionAction </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>targets</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>answerTarget</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b67e386e800d330a64edc0c467d6bec" name="a7b67e386e800d330a64edc0c467d6bec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b67e386e800d330a64edc0c467d6bec">&#9670;&#160;</a></span>writeFunctionResult()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeFunctionResult </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a037fcefa37c01196bcd1fe5b5704e8e7" name="a037fcefa37c01196bcd1fe5b5704e8e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a037fcefa37c01196bcd1fe5b5704e8e7">&#9670;&#160;</a></span>writeFunctionRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeFunctionRequest </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a42e8d9340500ffbafda8c3f5e0e49448">FunctionType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>requester</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>requesterTransactionId</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a>&#160;</td>
+          <td class="paramname"><em>receiver</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc15e494111be26c538a45bc06533147" name="afc15e494111be26c538a45bc06533147"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc15e494111be26c538a45bc06533147">&#9670;&#160;</a></span>writeFunctionError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeFunctionError </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MessageResult&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3de4771af74967068b1e43fc06e38b08" name="a3de4771af74967068b1e43fc06e38b08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de4771af74967068b1e43fc06e38b08">&#9670;&#160;</a></span>writeAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>answerTarget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>targets</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46abeefa23bbb9d52c635a540a0ef607" name="a46abeefa23bbb9d52c635a540a0ef607"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46abeefa23bbb9d52c635a540a0ef607">&#9670;&#160;</a></span>writeRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>requester</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>requesterTransactionId</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a>&#160;</td>
+          <td class="paramname"><em>receiver</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a886cdb3b8f5ae465c9c08c3dc76f47a4" name="a886cdb3b8f5ae465c9c08c3dc76f47a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a886cdb3b8f5ae465c9c08c3dc76f47a4">&#9670;&#160;</a></span>writeRequestResponse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::SyncableUnitBase::writeRequestResponse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>answerTarget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a152e068a88bff662e34784ad3b847b47" name="a152e068a88bff662e34784ad3b847b47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152e068a88bff662e34784ad3b847b47">&#9670;&#160;</a></span>SyncManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> SyncManager</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4258347c1c1b72cec4192bfb26e721ce" name="a4258347c1c1b72cec4192bfb26e721ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4258347c1c1b72cec4192bfb26e721ce">&#9670;&#160;</a></span>TableInitializer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Base &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_serialize_1_1_table_initializer.html">TableInitializer</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26cfb34157c01a4a6e278b1ba2412842" name="a26cfb34157c01a4a6e278b1ba2412842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26cfb34157c01a4a6e278b1ba2412842">&#9670;&#160;</a></span>SerializableUnitConstPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_const_ptr.html">SerializableUnitConstPtr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79c8dc6851c49dfaa9af95d07b85647f" name="a79c8dc6851c49dfaa9af95d07b85647f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c8dc6851c49dfaa9af95d07b85647f">&#9670;&#160;</a></span>SerializableUnitPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html">SerializableUnitPtr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adad9f713e42dbb8108156af54382a24d" name="adad9f713e42dbb8108156af54382a24d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad9f713e42dbb8108156af54382a24d">&#9670;&#160;</a></span>SerializableDataPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66ef14adedc7b350fbd82a430aa1bd62" name="a66ef14adedc7b350fbd82a430aa1bd62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66ef14adedc7b350fbd82a430aa1bd62">&#9670;&#160;</a></span>getSlaveRequestMessageTarget</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a> getSlaveRequestMessageTarget </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>requester</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>requestId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a>&#160;</td>
+          <td class="paramname"><em>receiver</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f078044e6cadd5fa27eeae10062b26b" name="a5f078044e6cadd5fa27eeae10062b26b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f078044e6cadd5fa27eeae10062b26b">&#9670;&#160;</a></span>getMasterActionMessageTargets</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT std::vector&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a> &gt; getMasterActionMessageTargets </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>answerTarget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>targets</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abac353d6ae195bd7b309c552366e492d" name="abac353d6ae195bd7b309c552366e492d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abac353d6ae195bd7b309c552366e492d">&#9670;&#160;</a></span>getMasterRequestResponseTarget</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a> getMasterRequestResponseTarget </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>answerTarget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a239d26d2ec2964ae42b0bd60a868114a" name="a239d26d2ec2964ae42b0bd60a868114a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a239d26d2ec2964ae42b0bd60a868114a">&#9670;&#160;</a></span>getMasterFunctionRequestResponseTarget</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp; getMasterFunctionRequestResponseTarget </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>answerTarget</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab09f22ca7ba26454c04895681e613ff3" name="ab09f22ca7ba26454c04895681e613ff3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab09f22ca7ba26454c04895681e613ff3">&#9670;&#160;</a></span>beginRequestResponseMessage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html">WriteMessage</a> beginRequestResponseMessage </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39b98975cea199c66726445eb4172d9b" name="a39b98975cea199c66726445eb4172d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39b98975cea199c66726445eb4172d9b">&#9670;&#160;</a></span>writeFunctionAction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="classvoid.html">void</a> writeFunctionAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>targets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>answerTarget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf134222a22016f4a009d99af5b9b128" name="abf134222a22016f4a009d99af5b9b128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf134222a22016f4a009d99af5b9b128">&#9670;&#160;</a></span>writeFunctionResult</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="classvoid.html">void</a> writeFunctionResult </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d2b8c85034a39ae9c88dd2a10c09660" name="a9d2b8c85034a39ae9c88dd2a10c09660"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d2b8c85034a39ae9c88dd2a10c09660">&#9670;&#160;</a></span>writeFunctionRequest</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="classvoid.html">void</a> writeFunctionRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a42e8d9340500ffbafda8c3f5e0e49448">FunctionType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>requester</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>requesterTransactionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a>&#160;</td>
+          <td class="paramname"><em>receiver</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28f61697748e8769bbae608a419ba7b4" name="a28f61697748e8769bbae608a419ba7b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28f61697748e8769bbae608a419ba7b4">&#9670;&#160;</a></span>writeFunctionError</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="classvoid.html">void</a> writeFunctionError </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MessageResult&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a>&#160;</td>
+          <td class="paramname"><em>answerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24c4c76b31146e139536d9eb9ed9c541" name="a24c4c76b31146e139536d9eb9ed9c541"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24c4c76b31146e139536d9eb9ed9c541">&#9670;&#160;</a></span>tag_invoke</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT friend <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>success</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>hierarchy</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a93b7c612a231e5773a28668c12faf24f" name="a93b7c612a231e5773a28668c12faf24f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b7c612a231e5773a28668c12faf24f">&#9670;&#160;</a></span>convertSyncablePtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> convertSyncablePtr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *&amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&amp;&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/serialize/hierarchy/<a class="el" href="syncableunit_8h.html">syncableunit.h</a></li>
+<li>src/Meta/serialize/hierarchy/<a class="el" href="syncableunit_8cpp.html">syncableunit.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

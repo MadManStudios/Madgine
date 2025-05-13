@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Scene::SceneManager Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Scene::SceneManager Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_scene_1_1_scene_manager.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scenemanager-struct-reference">
+<h1>SceneManager Struct Reference<a class="headerlink" href="#scenemanager-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Scene::SceneManager Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scene.html">Scene</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_scene_1_1_scene_manager-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Scene::SceneManager Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;scenemanager.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Scene::SceneManager:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_scene_1_1_scene_manager__inherit__graph.svg" width="408" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager_1_1_container_data.html">ContainerData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af6de75ce0b9ae150ffcebf0473fceff4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#af6de75ce0b9ae150ffcebf0473fceff4">Self</a> = <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a></td></tr>
+<tr class="separator:af6de75ce0b9ae150ffcebf0473fceff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac71801c3c6a1c15dc1a4380f5d7c2996"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ac71801c3c6a1c15dc1a4380f5d7c2996">SceneManager</a> (<a class="el" href="struct_engine_1_1_app_1_1_application.html">App::Application</a> &amp;app)</td></tr>
+<tr class="separator:ac71801c3c6a1c15dc1a4380f5d7c2996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec3d63bb308982427e5ec188a687a677"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aec3d63bb308982427e5ec188a687a677">SceneManager</a> (const <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;)=delete</td></tr>
+<tr class="separator:aec3d63bb308982427e5ec188a687a677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4828e354b1974e97f0645bef449e263"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aa4828e354b1974e97f0645bef449e263">~SceneManager</a> ()</td></tr>
+<tr class="separator:aa4828e354b1974e97f0645bef449e263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07e968661489718e4ee9196670b4775e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a07e968661489718e4ee9196670b4775e">addAnimation</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_state.html">Entity::AnimationState</a> *animation)</td></tr>
+<tr class="separator:a07e968661489718e4ee9196670b4775e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4ada39332bb523da84800168b10bf6"><td class="memTemplParams" colspan="2">template&lt;typename Sender &gt; </td></tr>
+<tr class="memitem:aeb4ada39332bb523da84800168b10bf6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aeb4ada39332bb523da84800168b10bf6">addBehavior</a> (Sender &amp;&amp;sender)</td></tr>
+<tr class="separator:aeb4ada39332bb523da84800168b10bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a589d15e1d6dfacf688e7c2af7505b1da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_custom_timepoint.html">Threading::CustomTimepoint</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a589d15e1d6dfacf688e7c2af7505b1da">animationClock</a> ()</td></tr>
+<tr class="separator:a589d15e1d6dfacf688e7c2af7505b1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a718b1792a80acb588a48878ea1742141"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a718b1792a80acb588a48878ea1742141">clear</a> ()</td></tr>
+<tr class="separator:a718b1792a80acb588a48878ea1742141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c9e84a128cdcf47126a78208df90d7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_threading_1_1_custom_clock.html">Threading::CustomClock</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aa8c9e84a128cdcf47126a78208df90d7">clock</a> () const</td></tr>
+<tr class="separator:aa8c9e84a128cdcf47126a78208df90d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78d33ebd608ff61643d76123ef7994d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a78d33ebd608ff61643d76123ef7994d8">container</a> (std::string_view name)</td></tr>
+<tr class="separator:a78d33ebd608ff61643d76123ef7994d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092e578e3d9fac38cd3d5f965dfdeac9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a092e578e3d9fac38cd3d5f965dfdeac9">endLifetime</a> ()</td></tr>
+<tr class="separator:a092e578e3d9fac38cd3d5f965dfdeac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9c1640be3602eccce6129b11d2c5ef"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9b9c1640be3602eccce6129b11d2c5ef"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list.html">Entity::EntityComponentList</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a9b9c1640be3602eccce6129b11d2c5ef">entityComponentList</a> ()</td></tr>
+<tr class="separator:a9b9c1640be3602eccce6129b11d2c5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adee93bc2b84bf7aeaacff85e578d52e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">Entity::EntityComponentListBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#adee93bc2b84bf7aeaacff85e578d52e0">entityComponentList</a> (size_t index)</td></tr>
+<tr class="separator:adee93bc2b84bf7aeaacff85e578d52e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a264db60c147dce54ee4d9e27b9be6e98"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">Entity::EntityComponentListBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a264db60c147dce54ee4d9e27b9be6e98">entityComponentList</a> (size_t index) const</td></tr>
+<tr class="separator:a264db60c147dce54ee4d9e27b9be6e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac00b989f33080f0e6b6598b99de9240"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aac00b989f33080f0e6b6598b99de9240"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aac00b989f33080f0e6b6598b99de9240">getComponent</a> ()</td></tr>
+<tr class="separator:aac00b989f33080f0e6b6598b99de9240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed899bf38382a2e4777a48dafb36e6c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html">SceneComponentBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aed899bf38382a2e4777a48dafb36e6c0">getComponent</a> (size_t i)</td></tr>
+<tr class="separator:aed899bf38382a2e4777a48dafb36e6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9f4fbd709d8d95ea95562f5a8c2548"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a8d9f4fbd709d8d95ea95562f5a8c2548">getComponentCount</a> ()</td></tr>
+<tr class="separator:a8d9f4fbd709d8d95ea95562f5a8c2548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a970a37db60b0dade24b991f931fd7962"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a970a37db60b0dade24b991f931fd7962">isPaused</a> () const</td></tr>
+<tr class="separator:a970a37db60b0dade24b991f931fd7962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8604879629d8fcbf481aa209cd93508"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ac8604879629d8fcbf481aa209cd93508">key</a> () const override</td></tr>
+<tr class="separator:ac8604879629d8fcbf481aa209cd93508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a8ecb9414d4754bbb63dccecca5304"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_debuggable_lifetime.html">Debug::DebuggableLifetime</a>&lt; <a class="el" href="namespace_engine.html#a766f695c252e571cc88eced9650b012e">get_binding_d</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ab7a8ecb9414d4754bbb63dccecca5304">lifetime</a> ()</td></tr>
+<tr class="separator:ab7a8ecb9414d4754bbb63dccecca5304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a06762a65e8376a1f8926495c9618b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a48a06762a65e8376a1f8926495c9618b">MEMBER_OFFSET_CONTAINER</a> (mSceneComponents,, SceneComponentContainer&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a94f3eb179cdabb78bc70a22f1d79a02e">Serialize::SerializableContainer</a>&lt; std::set&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt;, <a class="el" href="struct_engine_1_1_key_compare.html">KeyCompare</a>&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt; &gt; &gt;, <a class="el" href="struct_engine_1_1_no_op_functor.html">NoOpFunctor</a> &gt; &gt;)</td></tr>
+<tr class="separator:a48a06762a65e8376a1f8926495c9618b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b13befd8f7e4503b829073ca3eb1ca5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html">Threading::DataMutex</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a0b13befd8f7e4503b829073ca3eb1ca5">mutex</a> ()</td></tr>
+<tr class="separator:a0b13befd8f7e4503b829073ca3eb1ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7c24ecd9c00aef2019aeead7326db2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ad7c24ecd9c00aef2019aeead7326db2c">pause</a> ()</td></tr>
+<tr class="separator:ad7c24ecd9c00aef2019aeead7326db2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73d90aa1de018b3c1a951b6a0c8fa39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_custom_timepoint.html">Threading::CustomTimepoint</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ae73d90aa1de018b3c1a951b6a0c8fa39">simulationClock</a> ()</td></tr>
+<tr class="separator:ae73d90aa1de018b3c1a951b6a0c8fa39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b12c63ac5ffef2eb7cc156e3716f04d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a3b12c63ac5ffef2eb7cc156e3716f04d">startLifetime</a> () override</td></tr>
+<tr class="separator:a3b12c63ac5ffef2eb7cc156e3716f04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae83c5d2e4996f33fcdaeaf4803f1180a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ae83c5d2e4996f33fcdaeaf4803f1180a">stopAnimation</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_state.html">Entity::AnimationState</a> *animation)</td></tr>
+<tr class="separator:ae83c5d2e4996f33fcdaeaf4803f1180a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31435c00fa1df3d1697d7e03ad279da6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a31435c00fa1df3d1697d7e03ad279da6">unpause</a> ()</td></tr>
+<tr class="separator:a31435c00fa1df3d1697d7e03ad279da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f29d35495a4d1bcbb227fa824015e1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a1f29d35495a4d1bcbb227fa824015e1b">updateFrame</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a>[]&gt;(<a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a29549cb486193904f8b4cc031b7ad98f">Entity::SkeletonPtr</a>)&gt; callback)</td></tr>
+<tr class="separator:a1f29d35495a4d1bcbb227fa824015e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_virtual_scope"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_virtual_scope')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_virtual_scope.html">Engine::VirtualScope&lt; T, Base &gt;</a></td></tr>
+<tr class="memitem:a8eb04bc90993a62dde2f6e5acc85619e inherit pub_methods_struct_engine_1_1_virtual_scope"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope.html#a8eb04bc90993a62dde2f6e5acc85619e">customScopePtr</a> () override</td></tr>
+<tr class="separator:a8eb04bc90993a62dde2f6e5acc85619e inherit pub_methods_struct_engine_1_1_virtual_scope"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae14d52eebaa3e94377d7a5b1f6ca688e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope_base.html#ae14d52eebaa3e94377d7a5b1f6ca688e">customScopePtr</a> ()=0</td></tr>
+<tr class="separator:ae14d52eebaa3e94377d7a5b1f6ca688e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:abbd28641a3c9de3b35b55d8db6719604"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager_1_1_container_data.html">ContainerData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#abbd28641a3c9de3b35b55d8db6719604">mContainers</a></td></tr>
+<tr class="separator:abbd28641a3c9de3b35b55d8db6719604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a605c0b64267c4c07a353d10a2a8befa0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a605c0b64267c4c07a353d10a2a8befa0">finalize</a> () final</td></tr>
+<tr class="separator:a605c0b64267c4c07a353d10a2a8befa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa56dad54532ccd1accfd3d0e3031e51e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aa56dad54532ccd1accfd3d0e3031e51e">init</a> () final</td></tr>
+<tr class="separator:aa56dad54532ccd1accfd3d0e3031e51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html">Engine::Serialize::SyncableUnitEx&lt; T, _Base &gt;</a></td></tr>
+<tr class="memitem:aef5f36e522398141841ccd78ba2f563a inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; </td></tr>
+<tr class="memitem:aef5f36e522398141841ccd78ba2f563a inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#aef5f36e522398141841ccd78ba2f563a">call</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:aef5f36e522398141841ccd78ba2f563a inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b59c9972d45298597f957e45a3c953 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
+requires <a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</td></tr>
+<tr class="memitem:ac1b59c9972d45298597f957e45a3c953 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#ac1b59c9972d45298597f957e45a3c953">command</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:ac1b59c9972d45298597f957e45a3c953 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37c22a276e9b3a77c0394bdd399a8466 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
+requires <a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</td></tr>
+<tr class="memitem:a37c22a276e9b3a77c0394bdd399a8466 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a37c22a276e9b3a77c0394bdd399a8466">notify</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a37c22a276e9b3a77c0394bdd399a8466 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64f4e32f09a6fafe9b1069714206c579 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; </td></tr>
+<tr class="memitem:a64f4e32f09a6fafe9b1069714206c579 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a64f4e32f09a6fafe9b1069714206c579">notify_some</a> (const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a64f4e32f09a6fafe9b1069714206c579 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ab1c837b644f682e5ed78029921425c inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
+requires <a class="el" href="conceptstd_1_1constructible__from.html">std::constructible_from</a>&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</td></tr>
+<tr class="memitem:a5ab1c837b644f682e5ed78029921425c inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a5ab1c837b644f682e5ed78029921425c">query</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a5ab1c837b644f682e5ed78029921425c inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d817d8ca1ea7c842baee5861707a8c inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> , typename... Args&gt; </td></tr>
+<tr class="memitem:a19d817d8ca1ea7c842baee5861707a8c inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a19d817d8ca1ea7c842baee5861707a8c">writeAction</a> (<a class="el" href="class_engine_1_1_ty.html">Ty</a> *field, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:a19d817d8ca1ea7c842baee5861707a8c inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b68c79870a94335adcf76dab1f2f4c5 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> , typename... Args&gt; </td></tr>
+<tr class="memitem:a4b68c79870a94335adcf76dab1f2f4c5 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a4b68c79870a94335adcf76dab1f2f4c5">writeRequest</a> (<a class="el" href="class_engine_1_1_ty.html">Ty</a> *field, <a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:a4b68c79870a94335adcf76dab1f2f4c5 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0337417997b3c0e3aca3871eeb5763d inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> , typename... Args&gt; </td></tr>
+<tr class="memitem:aa0337417997b3c0e3aca3871eeb5763d inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#aa0337417997b3c0e3aca3871eeb5763d">writeRequest</a> (<a class="el" href="class_engine_1_1_ty.html">Ty</a> *field, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requesterTransactionId, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:aa0337417997b3c0e3aca3871eeb5763d inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d51e33a0169d1f6f8985836145c4e6 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> , typename... Args&gt; </td></tr>
+<tr class="memitem:a54d51e33a0169d1f6f8985836145c4e6 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a54d51e33a0169d1f6f8985836145c4e6">writeRequestResponse</a> (<a class="el" href="class_engine_1_1_ty.html">Ty</a> *field, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:a54d51e33a0169d1f6f8985836145c4e6 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_ex"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:afe373f251e264c4359002bf82ff7ac57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#afe373f251e264c4359002bf82ff7ac57">SceneContainer</a></td></tr>
+<tr class="separator:afe373f251e264c4359002bf82ff7ac57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="af6de75ce0b9ae150ffcebf0473fceff4" name="af6de75ce0b9ae150ffcebf0473fceff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6de75ce0b9ae150ffcebf0473fceff4">&#9670;&#160;</a></span>Self</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#af6de75ce0b9ae150ffcebf0473fceff4">Engine::Scene::SceneManager::Self</a> =  <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac71801c3c6a1c15dc1a4380f5d7c2996" name="ac71801c3c6a1c15dc1a4380f5d7c2996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac71801c3c6a1c15dc1a4380f5d7c2996">&#9670;&#160;</a></span>SceneManager() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Scene::SceneManager::SceneManager </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_app_1_1_application.html">App::Application</a> &amp;&#160;</td>
+          <td class="paramname"><em>app</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec3d63bb308982427e5ec188a687a677" name="aec3d63bb308982427e5ec188a687a677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec3d63bb308982427e5ec188a687a677">&#9670;&#160;</a></span>SceneManager() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Scene::SceneManager::SceneManager </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4828e354b1974e97f0645bef449e263" name="aa4828e354b1974e97f0645bef449e263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4828e354b1974e97f0645bef449e263">&#9670;&#160;</a></span>~SceneManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Scene::SceneManager::~SceneManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac8604879629d8fcbf481aa209cd93508" name="ac8604879629d8fcbf481aa209cd93508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8604879629d8fcbf481aa209cd93508">&#9670;&#160;</a></span>key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::Scene::SceneManager::key </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f29d35495a4d1bcbb227fa824015e1b" name="a1f29d35495a4d1bcbb227fa824015e1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f29d35495a4d1bcbb227fa824015e1b">&#9670;&#160;</a></span>updateFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneManager::updateFrame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a>[]&gt;(<a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a29549cb486193904f8b4cc031b7ad98f">Entity::SkeletonPtr</a>)&gt;&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a718b1792a80acb588a48878ea1742141" name="a718b1792a80acb588a48878ea1742141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a718b1792a80acb588a48878ea1742141">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneManager::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad7c24ecd9c00aef2019aeead7326db2c" name="ad7c24ecd9c00aef2019aeead7326db2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7c24ecd9c00aef2019aeead7326db2c">&#9670;&#160;</a></span>pause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneManager::pause </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a31435c00fa1df3d1697d7e03ad279da6" name="a31435c00fa1df3d1697d7e03ad279da6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31435c00fa1df3d1697d7e03ad279da6">&#9670;&#160;</a></span>unpause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Scene::SceneManager::unpause </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a970a37db60b0dade24b991f931fd7962" name="a970a37db60b0dade24b991f931fd7962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a970a37db60b0dade24b991f931fd7962">&#9670;&#160;</a></span>isPaused()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Scene::SceneManager::isPaused </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8c9e84a128cdcf47126a78208df90d7" name="aa8c9e84a128cdcf47126a78208df90d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8c9e84a128cdcf47126a78208df90d7">&#9670;&#160;</a></span>clock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_threading_1_1_custom_clock.html">Threading::CustomClock</a> &amp; Engine::Scene::SceneManager::clock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae73d90aa1de018b3c1a951b6a0c8fa39" name="ae73d90aa1de018b3c1a951b6a0c8fa39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae73d90aa1de018b3c1a951b6a0c8fa39">&#9670;&#160;</a></span>simulationClock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_custom_timepoint.html">Threading::CustomTimepoint</a> &gt; &amp; Engine::Scene::SceneManager::simulationClock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a589d15e1d6dfacf688e7c2af7505b1da" name="a589d15e1d6dfacf688e7c2af7505b1da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a589d15e1d6dfacf688e7c2af7505b1da">&#9670;&#160;</a></span>animationClock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_custom_timepoint.html">Threading::CustomTimepoint</a> &gt; &amp; Engine::Scene::SceneManager::animationClock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78d33ebd608ff61643d76123ef7994d8" name="a78d33ebd608ff61643d76123ef7994d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d33ebd608ff61643d76123ef7994d8">&#9670;&#160;</a></span>container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a> &amp; Engine::Scene::SceneManager::container </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aac00b989f33080f0e6b6598b99de9240" name="aac00b989f33080f0e6b6598b99de9240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac00b989f33080f0e6b6598b99de9240">&#9670;&#160;</a></span>getComponent() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; Engine::Scene::SceneManager::getComponent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed899bf38382a2e4777a48dafb36e6c0" name="aed899bf38382a2e4777a48dafb36e6c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed899bf38382a2e4777a48dafb36e6c0">&#9670;&#160;</a></span>getComponent() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html">SceneComponentBase</a> &amp; Engine::Scene::SceneManager::getComponent </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d9f4fbd709d8d95ea95562f5a8c2548" name="a8d9f4fbd709d8d95ea95562f5a8c2548"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d9f4fbd709d8d95ea95562f5a8c2548">&#9670;&#160;</a></span>getComponentCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Scene::SceneManager::getComponentCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b12c63ac5ffef2eb7cc156e3716f04d" name="a3b12c63ac5ffef2eb7cc156e3716f04d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b12c63ac5ffef2eb7cc156e3716f04d">&#9670;&#160;</a></span>startLifetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneManager::startLifetime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a092e578e3d9fac38cd3d5f965dfdeac9" name="a092e578e3d9fac38cd3d5f965dfdeac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a092e578e3d9fac38cd3d5f965dfdeac9">&#9670;&#160;</a></span>endLifetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Scene::SceneManager::endLifetime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7a8ecb9414d4754bbb63dccecca5304" name="ab7a8ecb9414d4754bbb63dccecca5304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7a8ecb9414d4754bbb63dccecca5304">&#9670;&#160;</a></span>lifetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_debuggable_lifetime.html">Debug::DebuggableLifetime</a>&lt; <a class="el" href="namespace_engine.html#a766f695c252e571cc88eced9650b012e">get_binding_d</a> &gt; &amp; Engine::Scene::SceneManager::lifetime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb4ada39332bb523da84800168b10bf6" name="aeb4ada39332bb523da84800168b10bf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb4ada39332bb523da84800168b10bf6">&#9670;&#160;</a></span>addBehavior()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Sender &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneManager::addBehavior </td>
+          <td>(</td>
+          <td class="paramtype">Sender &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sender</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07e968661489718e4ee9196670b4775e" name="a07e968661489718e4ee9196670b4775e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07e968661489718e4ee9196670b4775e">&#9670;&#160;</a></span>addAnimation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneManager::addAnimation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_state.html">Entity::AnimationState</a> *&#160;</td>
+          <td class="paramname"><em>animation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae83c5d2e4996f33fcdaeaf4803f1180a" name="ae83c5d2e4996f33fcdaeaf4803f1180a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae83c5d2e4996f33fcdaeaf4803f1180a">&#9670;&#160;</a></span>stopAnimation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Scene::SceneManager::stopAnimation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_state.html">Entity::AnimationState</a> *&#160;</td>
+          <td class="paramname"><em>animation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0b13befd8f7e4503b829073ca3eb1ca5" name="a0b13befd8f7e4503b829073ca3eb1ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b13befd8f7e4503b829073ca3eb1ca5">&#9670;&#160;</a></span>mutex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html">Threading::DataMutex</a> &amp; Engine::Scene::SceneManager::mutex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b9c1640be3602eccce6129b11d2c5ef" name="a9b9c1640be3602eccce6129b11d2c5ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b9c1640be3602eccce6129b11d2c5ef">&#9670;&#160;</a></span>entityComponentList() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list.html">Entity::EntityComponentList</a>&lt; T &gt; &amp; Engine::Scene::SceneManager::entityComponentList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adee93bc2b84bf7aeaacff85e578d52e0" name="adee93bc2b84bf7aeaacff85e578d52e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adee93bc2b84bf7aeaacff85e578d52e0">&#9670;&#160;</a></span>entityComponentList() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">Entity::EntityComponentListBase</a> &amp; Engine::Scene::SceneManager::entityComponentList </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a264db60c147dce54ee4d9e27b9be6e98" name="a264db60c147dce54ee4d9e27b9be6e98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a264db60c147dce54ee4d9e27b9be6e98">&#9670;&#160;</a></span>entityComponentList() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">Entity::EntityComponentListBase</a> &amp; Engine::Scene::SceneManager::entityComponentList </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa56dad54532ccd1accfd3d0e3031e51e" name="aa56dad54532ccd1accfd3d0e3031e51e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa56dad54532ccd1accfd3d0e3031e51e">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; Engine::Scene::SceneManager::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a605c0b64267c4c07a353d10a2a8befa0" name="a605c0b64267c4c07a353d10a2a8befa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a605c0b64267c4c07a353d10a2a8befa0">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Scene::SceneManager::finalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48a06762a65e8376a1f8926495c9618b" name="a48a06762a65e8376a1f8926495c9618b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48a06762a65e8376a1f8926495c9618b">&#9670;&#160;</a></span>MEMBER_OFFSET_CONTAINER()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Scene::SceneManager::MEMBER_OFFSET_CONTAINER </td>
+          <td>(</td>
+          <td class="paramtype">mSceneComponents&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SceneComponentContainer&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a94f3eb179cdabb78bc70a22f1d79a02e">Serialize::SerializableContainer</a>&lt; std::set&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt;, <a class="el" href="struct_engine_1_1_key_compare.html">KeyCompare</a>&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt; &gt; &gt;, <a class="el" href="struct_engine_1_1_no_op_functor.html">NoOpFunctor</a> &gt; &gt;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="afe373f251e264c4359002bf82ff7ac57" name="afe373f251e264c4359002bf82ff7ac57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe373f251e264c4359002bf82ff7ac57">&#9670;&#160;</a></span>SceneContainer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abbd28641a3c9de3b35b55d8db6719604" name="abbd28641a3c9de3b35b55d8db6719604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd28641a3c9de3b35b55d8db6719604">&#9670;&#160;</a></span>mContainers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager_1_1_container_data.html">ContainerData</a>&gt; Engine::Scene::SceneManager::mContainers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/misc/scene/src/Madgine/scene/<a class="el" href="scenemanager_8h.html">scenemanager.h</a></li>
+<li>plugins/misc/scene/src/Madgine/scene/<a class="el" href="scenemanager_8cpp.html">scenemanager.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

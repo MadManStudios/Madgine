@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::OpenGLTexture Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::OpenGLTexture Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_open_g_l_texture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="opengltexture-struct-reference">
+<h1>OpenGLTexture Struct Reference<a class="headerlink" href="#opengltexture-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::OpenGLTexture Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_render_1_1_open_g_l_texture-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::OpenGLTexture Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;opengltexture.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::OpenGLTexture:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_open_g_l_texture__inherit__graph.svg" width="218" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a593d1dd014ac1c25dbd36c06f67f7642"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a593d1dd014ac1c25dbd36c06f67f7642">OpenGLTexture</a> ()=default</td></tr>
+<tr class="separator:a593d1dd014ac1c25dbd36c06f67f7642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa68db0f6d8144fad446b901f836873d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#afa68db0f6d8144fad446b901f836873d">OpenGLTexture</a> (const <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;)=delete</td></tr>
+<tr class="separator:afa68db0f6d8144fad446b901f836873d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78503f898a44c52c567a2b0f4bfde964"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a78503f898a44c52c567a2b0f4bfde964">OpenGLTexture</a> (<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;&amp;)</td></tr>
+<tr class="separator:a78503f898a44c52c567a2b0f4bfde964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4694d2eb12bf3b9026eb249510dbc750"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a4694d2eb12bf3b9026eb249510dbc750">OpenGLTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#afa0fb72a5866ab3f254d030596c1984a">type</a>, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#ada2bf4b3db94354d25758ed6dab6cc9a">format</a>, size_t samples=1)</td></tr>
+<tr class="separator:a4694d2eb12bf3b9026eb249510dbc750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeae382927c095146fe19fe73c712e48a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#aeae382927c095146fe19fe73c712e48a">OpenGLTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#afa0fb72a5866ab3f254d030596c1984a">type</a>, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#ada2bf4b3db94354d25758ed6dab6cc9a">format</a>, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#a55b08ecd0082f6f2b51f5a8c98bae461">size</a>, size_t samples=1, const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;data={})</td></tr>
+<tr class="separator:aeae382927c095146fe19fe73c712e48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b3c5e190872f4a1fd020a11de4cfeb5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a5b3c5e190872f4a1fd020a11de4cfeb5">~OpenGLTexture</a> ()</td></tr>
+<tr class="separator:a5b3c5e190872f4a1fd020a11de4cfeb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e78e8d24c318e8a4bd1d243e52c386"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a80e78e8d24c318e8a4bd1d243e52c386">bind</a> () const</td></tr>
+<tr class="separator:a80e78e8d24c318e8a4bd1d243e52c386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71449e8dd0567f84dc513df690491f37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a71449e8dd0567f84dc513df690491f37">operator=</a> (<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;&amp;)</td></tr>
+<tr class="separator:a71449e8dd0567f84dc513df690491f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b382d6e21c6b3b5ec1fa18839af4df9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a5b382d6e21c6b3b5ec1fa18839af4df9">reset</a> ()</td></tr>
+<tr class="separator:a5b382d6e21c6b3b5ec1fa18839af4df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3521c07fe3aa11da7ddc4085fc5f3729"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a3521c07fe3aa11da7ddc4085fc5f3729">setData</a> (<a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#a55b08ecd0082f6f2b51f5a8c98bae461">size</a>, const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;data)</td></tr>
+<tr class="separator:a3521c07fe3aa11da7ddc4085fc5f3729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb55015e0b6174b1d7787d67d8bb9f27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#adb55015e0b6174b1d7787d67d8bb9f27">setFilter</a> (<a class="el" href="glad_8h.html#a5ac0f3c4d7fafd42b284b5487a791017">GLint</a> filter)</td></tr>
+<tr class="separator:adb55015e0b6174b1d7787d67d8bb9f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4169e41b922e75bfa66954008054306f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a4169e41b922e75bfa66954008054306f">setSubData</a> (<a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> offset, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#a55b08ecd0082f6f2b51f5a8c98bae461">size</a>, const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;data)</td></tr>
+<tr class="separator:a4169e41b922e75bfa66954008054306f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b04b9e175603d7739fbed06aec52b7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a3b04b9e175603d7739fbed06aec52b7c">setWrapMode</a> (<a class="el" href="glad_8h.html#a5ac0f3c4d7fafd42b284b5487a791017">GLint</a> mode)</td></tr>
+<tr class="separator:a3b04b9e175603d7739fbed06aec52b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e43cce4c0e7c571a466883b9dabce2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a5e43cce4c0e7c571a466883b9dabce2f">target</a> () const</td></tr>
+<tr class="separator:a5e43cce4c0e7c571a466883b9dabce2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_texture"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_texture')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Engine::Render::Texture</a></td></tr>
+<tr class="memitem:afa928598ca1456e8f9f0964ce5f5a75c inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#afa928598ca1456e8f9f0964ce5f5a75c">Texture</a> ()=default</td></tr>
+<tr class="separator:afa928598ca1456e8f9f0964ce5f5a75c inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ebdc5b0bed47b60d200cbb8e42ac08e inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a3ebdc5b0bed47b60d200cbb8e42ac08e">Texture</a> (<a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a3ebdc5b0bed47b60d200cbb8e42ac08e inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a705d3df5cbd07440722d18b633ac46e0 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a705d3df5cbd07440722d18b633ac46e0">Texture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#afa0fb72a5866ab3f254d030596c1984a">type</a>, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> <a class="el" href="struct_engine_1_1_render_1_1_texture.html#ada2bf4b3db94354d25758ed6dab6cc9a">format</a>, const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_texture.html#a55b08ecd0082f6f2b51f5a8c98bae461">size</a>={ 0, 0 })</td></tr>
+<tr class="separator:a705d3df5cbd07440722d18b633ac46e0 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada2bf4b3db94354d25758ed6dab6cc9a inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#ada2bf4b3db94354d25758ed6dab6cc9a">format</a> () const</td></tr>
+<tr class="separator:ada2bf4b3db94354d25758ed6dab6cc9a inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94b63aab25370e402389996ee22cbe91 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_texture_handle.html">TextureHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a94b63aab25370e402389996ee22cbe91">handle</a> () const</td></tr>
+<tr class="separator:a94b63aab25370e402389996ee22cbe91 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21692fb2749a696e5dcbe2e88ebcd270 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a21692fb2749a696e5dcbe2e88ebcd270">operator=</a> (<a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a21692fb2749a696e5dcbe2e88ebcd270 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c13ada07ea6127e57b99f2e5eba3fc inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a09c13ada07ea6127e57b99f2e5eba3fc">resourceBlock</a> () const</td></tr>
+<tr class="separator:a09c13ada07ea6127e57b99f2e5eba3fc inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55b08ecd0082f6f2b51f5a8c98bae461 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a55b08ecd0082f6f2b51f5a8c98bae461">size</a> () const</td></tr>
+<tr class="separator:a55b08ecd0082f6f2b51f5a8c98bae461 inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa0fb72a5866ab3f254d030596c1984a inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#afa0fb72a5866ab3f254d030596c1984a">type</a> () const</td></tr>
+<tr class="separator:afa0fb72a5866ab3f254d030596c1984a inherit pub_methods_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_render_1_1_texture"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_render_1_1_texture')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Engine::Render::Texture</a></td></tr>
+<tr class="memitem:a1b8a447e0d0fd93fd9f88b0d28478ef6 inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a1b8a447e0d0fd93fd9f88b0d28478ef6">mFormat</a></td></tr>
+<tr class="separator:a1b8a447e0d0fd93fd9f88b0d28478ef6 inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec4a7d1297d0469585c2fc267000281 inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#acec4a7d1297d0469585c2fc267000281">mResourceBlock</a></td></tr>
+<tr class="separator:acec4a7d1297d0469585c2fc267000281 inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cb64cfc980c51c96d711ff6f4acb9bf inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a5cb64cfc980c51c96d711ff6f4acb9bf">mSize</a> = { 0, 0 }</td></tr>
+<tr class="separator:a5cb64cfc980c51c96d711ff6f4acb9bf inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fa72a8cbbd6361051cd77af6558755d inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_unique_texture_handle.html">UniqueTextureHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#a6fa72a8cbbd6361051cd77af6558755d">mTextureHandle</a></td></tr>
+<tr class="separator:a6fa72a8cbbd6361051cd77af6558755d inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebf3bab175e543700856950c92579cb2 inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html#aebf3bab175e543700856950c92579cb2">mType</a></td></tr>
+<tr class="separator:aebf3bab175e543700856950c92579cb2 inherit pro_attribs_struct_engine_1_1_render_1_1_texture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aeae382927c095146fe19fe73c712e48a" name="aeae382927c095146fe19fe73c712e48a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeae382927c095146fe19fe73c712e48a">&#9670;&#160;</a></span>OpenGLTexture() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::OpenGLTexture::OpenGLTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>samples</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4694d2eb12bf3b9026eb249510dbc750" name="a4694d2eb12bf3b9026eb249510dbc750"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4694d2eb12bf3b9026eb249510dbc750">&#9670;&#160;</a></span>OpenGLTexture() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::OpenGLTexture::OpenGLTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>samples</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a593d1dd014ac1c25dbd36c06f67f7642" name="a593d1dd014ac1c25dbd36c06f67f7642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a593d1dd014ac1c25dbd36c06f67f7642">&#9670;&#160;</a></span>OpenGLTexture() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::OpenGLTexture::OpenGLTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa68db0f6d8144fad446b901f836873d" name="afa68db0f6d8144fad446b901f836873d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa68db0f6d8144fad446b901f836873d">&#9670;&#160;</a></span>OpenGLTexture() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::OpenGLTexture::OpenGLTexture </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78503f898a44c52c567a2b0f4bfde964" name="a78503f898a44c52c567a2b0f4bfde964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78503f898a44c52c567a2b0f4bfde964">&#9670;&#160;</a></span>OpenGLTexture() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::OpenGLTexture::OpenGLTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b3c5e190872f4a1fd020a11de4cfeb5" name="a5b3c5e190872f4a1fd020a11de4cfeb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b3c5e190872f4a1fd020a11de4cfeb5">&#9670;&#160;</a></span>~OpenGLTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::OpenGLTexture::~OpenGLTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a71449e8dd0567f84dc513df690491f37" name="a71449e8dd0567f84dc513df690491f37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71449e8dd0567f84dc513df690491f37">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp; Engine::Render::OpenGLTexture::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b382d6e21c6b3b5ec1fa18839af4df9" name="a5b382d6e21c6b3b5ec1fa18839af4df9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b382d6e21c6b3b5ec1fa18839af4df9">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::OpenGLTexture::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a80e78e8d24c318e8a4bd1d243e52c386" name="a80e78e8d24c318e8a4bd1d243e52c386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e78e8d24c318e8a4bd1d243e52c386">&#9670;&#160;</a></span>bind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::OpenGLTexture::bind </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3521c07fe3aa11da7ddc4085fc5f3729" name="a3521c07fe3aa11da7ddc4085fc5f3729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3521c07fe3aa11da7ddc4085fc5f3729">&#9670;&#160;</a></span>setData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::OpenGLTexture::setData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4169e41b922e75bfa66954008054306f" name="a4169e41b922e75bfa66954008054306f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4169e41b922e75bfa66954008054306f">&#9670;&#160;</a></span>setSubData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::OpenGLTexture::setSubData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e43cce4c0e7c571a466883b9dabce2f" name="a5e43cce4c0e7c571a466883b9dabce2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e43cce4c0e7c571a466883b9dabce2f">&#9670;&#160;</a></span>target()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a> Engine::Render::OpenGLTexture::target </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b04b9e175603d7739fbed06aec52b7c" name="a3b04b9e175603d7739fbed06aec52b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b04b9e175603d7739fbed06aec52b7c">&#9670;&#160;</a></span>setWrapMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::OpenGLTexture::setWrapMode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="glad_8h.html#a5ac0f3c4d7fafd42b284b5487a791017">GLint</a>&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb55015e0b6174b1d7787d67d8bb9f27" name="adb55015e0b6174b1d7787d67d8bb9f27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb55015e0b6174b1d7787d67d8bb9f27">&#9670;&#160;</a></span>setFilter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::OpenGLTexture::setFilter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="glad_8h.html#a5ac0f3c4d7fafd42b284b5487a791017">GLint</a>&#160;</td>
+          <td class="paramname"><em>filter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/opengl/src/OpenGL/util/<a class="el" href="opengltexture_8h.html">opengltexture.h</a></li>
+<li>plugins/renderer/opengl/src/OpenGL/util/<a class="el" href="opengltexture_8cpp.html">opengltexture.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

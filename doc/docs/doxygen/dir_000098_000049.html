@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: src/Modules -&amp;gt; Generic Relation &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: src/Modules -&amp;gt; Generic Relation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/dir_000098_000049.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-modules-gt-generic-relation">
+<h1>src/Modules -&amp;gt; Generic Relation<a class="headerlink" href="#src-modules-gt-generic-relation" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: src/Modules -&gt; Generic Relation</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_eeb7fcc90d516a232deaaf4de23f9c95.html">Modules</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="contents">
+<h3>Modules &rarr; Generic Relation</h3><table class="dirtab"><tr class="dirtab"><th class="dirtab">File in src/Modules</th><th class="dirtab">Includes file in src/Generic</th></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="dir_f8cf59e6cef3549e28104b96f39be706.html">awaitables</a>&#160;/&#160;<a class="el" href="src_2_modules_2threading_2awaitables_2awaitablesender_8h.html">awaitablesender.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="algorithm_8h.html">algorithm.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="dir_f8cf59e6cef3549e28104b96f39be706.html">awaitables</a>&#160;/&#160;<a class="el" href="src_2_modules_2threading_2awaitables_2awaitablesender_8h.html">awaitablesender.h</a></td><td class="dirtab"><a class="el" href="makeowning_8h.html">makeowning.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="dir_f8cf59e6cef3549e28104b96f39be706.html">awaitables</a>&#160;/&#160;<a class="el" href="src_2_modules_2threading_2awaitables_2awaitablesender_8h.html">awaitablesender.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="src_2_generic_2execution_2sender_8h.html">sender.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="dir_f8cf59e6cef3549e28104b96f39be706.html">awaitables</a>&#160;/&#160;<a class="el" href="src_2_modules_2threading_2awaitables_2awaitablesender_8h.html">awaitablesender.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="storage_8h.html">storage.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="dir_f8cf59e6cef3549e28104b96f39be706.html">awaitables</a>&#160;/&#160;<a class="el" href="src_2_modules_2threading_2awaitables_2awaitablesender_8h.html">awaitablesender.h</a></td><td class="dirtab"><a class="el" href="withresult_8h.html">withresult.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6804d7df32e4f6761df14bd0270abb4b.html">ini</a>&#160;/&#160;<a class="el" href="inisection_8cpp.html">inisection.cpp</a></td><td class="dirtab"><a class="el" href="stream_8h.html">stream.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_400b635383dd199b8946bb5e8981f327.html">plugins</a>&#160;/&#160;<a class="el" href="plugin_8cpp.html">plugin.cpp</a></td><td class="dirtab"><a class="el" href="projections_8h.html">projections.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_400b635383dd199b8946bb5e8981f327.html">plugins</a>&#160;/&#160;<a class="el" href="pluginmanager_8cpp.html">pluginmanager.cpp</a></td><td class="dirtab"><a class="el" href="keyvalue_8h.html">keyvalue.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_400b635383dd199b8946bb5e8981f327.html">plugins</a>&#160;/&#160;<a class="el" href="pluginmanager_8h.html">pluginmanager.h</a></td><td class="dirtab"><a class="el" href="dir_2350e5fd5a55bf3e7bd68ae782bbe457.html">container</a>&#160;/&#160;<a class="el" href="mutable__set_8h.html">mutable_set.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_400b635383dd199b8946bb5e8981f327.html">plugins</a>&#160;/&#160;<a class="el" href="pluginsection_8cpp.html">pluginsection.cpp</a></td><td class="dirtab"><a class="el" href="keyvalue_8h.html">keyvalue.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_400b635383dd199b8946bb5e8981f327.html">plugins</a>&#160;/&#160;<a class="el" href="pluginsection_8h.html">pluginsection.h</a></td><td class="dirtab"><a class="el" href="dir_2350e5fd5a55bf3e7bd68ae782bbe457.html">container</a>&#160;/&#160;<a class="el" href="mutable__set_8h.html">mutable_set.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_34a11c9de03c9a41f20ad862bfe31e8e.html">debug</a>&#160;/&#160;<a class="el" href="dir_d11f7850f312a40c316d309739750960.html">profiler</a>&#160;/&#160;<a class="el" href="profiler_8cpp.html">profiler.cpp</a></td><td class="dirtab"><a class="el" href="_generic_2guard_8h.html">guard.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="datamutex_8cpp.html">datamutex.cpp</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="execution_8h.html">execution.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="datamutex_8h.html">datamutex.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="execution_2concepts_8h.html">concepts.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="datamutex_8h.html">datamutex.h</a></td><td class="dirtab"><a class="el" href="genericresult_8h.html">genericresult.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="datamutex_8h.html">datamutex.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="connection_8h.html">connection.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="datamutex_8h.html">datamutex.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="dir_fcf1b5d5e1cb9d7c41eb587a4bc1386b.html">container</a>&#160;/&#160;<a class="el" href="queue_8h.html">queue.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="global_8h.html">global.h</a></td><td class="dirtab"><a class="el" href="any_8h.html">any.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="globalstorage_8h.html">globalstorage.h</a></td><td class="dirtab"><a class="el" href="proxy_8h.html">proxy.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="globalvariablemanager_8h.html">globalvariablemanager.h</a></td><td class="dirtab"><a class="el" href="any_8h.html">any.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="task_8h.html">task.h</a></td><td class="dirtab"><a class="el" href="dir_3ccb62ec3f46c56291d137f3b0a29f3a.html">coroutines</a>&#160;/&#160;<a class="el" href="src_2_generic_2coroutines_2handle_8h.html">handle.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="taskpromise_8h.html">taskpromise.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="execution_2concepts_8h.html">concepts.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="taskpromisesharedstate_8h.html">taskpromisesharedstate.h</a></td><td class="dirtab"><a class="el" href="dir_26dbcecd9f2d2cf13e620538a1552535.html">execution</a>&#160;/&#160;<a class="el" href="flag_8h.html">flag.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="threadlocal_8h.html">threadlocal.h</a></td><td class="dirtab"><a class="el" href="proxy_8h.html">proxy.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_6399664130b392e543fb604b65d1ca3b.html">threading</a>&#160;/&#160;<a class="el" href="threadstorage_8cpp.html">threadstorage.cpp</a></td><td class="dirtab"><a class="el" href="any_8h.html">any.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_8564d67ca19e40f9c2087cf4d9697dd5.html">uniquecomponent</a>&#160;/&#160;<a class="el" href="_modules_2uniquecomponent_2annotations_8h.html">annotations.h</a></td><td class="dirtab"><a class="el" href="replace_8h.html">replace.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_8564d67ca19e40f9c2087cf4d9697dd5.html">uniquecomponent</a>&#160;/&#160;<a class="el" href="indexholder_8h.html">indexholder.h</a></td><td class="dirtab"><a class="el" href="indextype_8h.html">indextype.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_8564d67ca19e40f9c2087cf4d9697dd5.html">uniquecomponent</a>&#160;/&#160;<a class="el" href="uniquecomponentcontainer_8h.html">uniquecomponentcontainer.h</a></td><td class="dirtab"><a class="el" href="dir_2350e5fd5a55bf3e7bd68ae782bbe457.html">container</a>&#160;/&#160;<a class="el" href="emplace_8h.html">emplace.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_8564d67ca19e40f9c2087cf4d9697dd5.html">uniquecomponent</a>&#160;/&#160;<a class="el" href="uniquecomponentdefine_8h.html">uniquecomponentdefine.h</a></td><td class="dirtab"><a class="el" href="replace_8h.html">replace.h</a></td></tr></table></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::VulkanTextureLoader Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::VulkanTextureLoader Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_vulkan_texture_loader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vulkantextureloader-struct-reference">
+<h1>VulkanTextureLoader Struct Reference<a class="headerlink" href="#vulkantextureloader-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::VulkanTextureLoader Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html">VulkanTextureLoader</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_render_1_1_vulkan_texture_loader-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::VulkanTextureLoader Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;vulkantextureloader.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::VulkanTextureLoader:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_vulkan_texture_loader__inherit__graph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aabf82ce9cd3dd8a57e7c4c6ea154e68b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#aabf82ce9cd3dd8a57e7c4c6ea154e68b">VulkanTextureLoader</a> ()</td></tr>
+<tr class="separator:aabf82ce9cd3dd8a57e7c4c6ea154e68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f436a401d8ee2e318a8ef30e56feec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#ae3f436a401d8ee2e318a8ef30e56feec">create</a> (<a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;texture, <a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format) override</td></tr>
+<tr class="separator:ae3f436a401d8ee2e318a8ef30e56feec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7286b8666ccee8276b57d4c3e9c0487"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#ab7286b8666ccee8276b57d4c3e9c0487">loadImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> &amp;tex, ResourceDataInfo &amp;info)</td></tr>
+<tr class="separator:ab7286b8666ccee8276b57d4c3e9c0487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a7f8fd2aa5aa14ce469c9e8c698537b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#a7a7f8fd2aa5aa14ce469c9e8c698537b">loadingTaskQueue</a> () const override</td></tr>
+<tr class="separator:a7a7f8fd2aa5aa14ce469c9e8c698537b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa00d566babb732009936678a670a1ab5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#aa00d566babb732009936678a670a1ab5">setData</a> (<a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;tex, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> size, const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;data) override</td></tr>
+<tr class="separator:aa00d566babb732009936678a670a1ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4199cfeef8314070fe5f17e9622b04d1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#a4199cfeef8314070fe5f17e9622b04d1">setSubData</a> (<a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;tex, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> offset, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> size, const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;data) override</td></tr>
+<tr class="separator:a4199cfeef8314070fe5f17e9622b04d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4352c8d2b7ec0ac1a9b48f87274d19d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#a4352c8d2b7ec0ac1a9b48f87274d19d1">unloadImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> &amp;tex)</td></tr>
+<tr class="separator:a4352c8d2b7ec0ac1a9b48f87274d19d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html">Engine::Resources::VirtualResourceLoaderImpl&lt; VulkanTextureLoader, VulkanTexture, TextureLoader &gt;</a></td></tr>
+<tr class="memitem:a35342cc273dee0d8e50e747445edb5c2 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual Base::OriginalPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a35342cc273dee0d8e50e747445edb5c2">createUnnamedVImpl</a> () override</td></tr>
+<tr class="separator:a35342cc273dee0d8e50e747445edb5c2 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639d3e60a1e1f05cb82bd6578598ca80 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual Base::Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a639d3e60a1e1f05cb82bd6578598ca80">getDataPtrVImpl</a> (const typename Base::OriginalHandle &amp;handle, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> verified) override</td></tr>
+<tr class="separator:a639d3e60a1e1f05cb82bd6578598ca80 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95ed35680738dc3d5a6cee3ad38a9c0 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual Base::ResourceDataInfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#ab95ed35680738dc3d5a6cee3ad38a9c0">getInfoVImpl</a> (const typename Base::OriginalHandle &amp;handle) override</td></tr>
+<tr class="separator:ab95ed35680738dc3d5a6cee3ad38a9c0 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae75214cd7eae5aa24b576f3a6cf570f2 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual Base::OriginalHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#ae75214cd7eae5aa24b576f3a6cf570f2">loadManualVImpl</a> (std::string_view name, const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path={}, typename Base::Ctor ctor={}) override</td></tr>
+<tr class="separator:ae75214cd7eae5aa24b576f3a6cf570f2 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7c6cb70419ce9e9e33963e9b860227 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual Base::OriginalHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a0e7c6cb70419ce9e9e33963e9b860227">loadVImpl</a> (std::string_view name) override</td></tr>
+<tr class="separator:a0e7c6cb70419ce9e9e33963e9b860227 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3110077457997ba3dcda419a725411b6 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual Base::OriginalHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a3110077457997ba3dcda419a725411b6">loadVImpl</a> (typename Base::Resource *resource) override</td></tr>
+<tr class="separator:a3110077457997ba3dcda419a725411b6 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ecb011a4c154e9799330b227fdb07be inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual Base::OriginalHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a6ecb011a4c154e9799330b227fdb07be">refreshHandleVImpl</a> (const typename Base::OriginalHandle &amp;handle) override</td></tr>
+<tr class="separator:a6ecb011a4c154e9799330b227fdb07be inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1740b17491b1b2ffbd543b9fcbadcc2d inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a1740b17491b1b2ffbd543b9fcbadcc2d">resetHandleVImpl</a> (const typename Base::OriginalHandle &amp;handle) override</td></tr>
+<tr class="separator:a1740b17491b1b2ffbd543b9fcbadcc2d inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8bebf9f620472fc70cf887427b69aa3 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#ae8bebf9f620472fc70cf887427b69aa3">unloadVImpl</a> (std::unique_ptr&lt; typename Base::Data &gt; data) override</td></tr>
+<tr class="separator:ae8bebf9f620472fc70cf887427b69aa3 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4bb279f7415ed2f6c337711f2e65f2 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a9b4bb279f7415ed2f6c337711f2e65f2">unloadVImpl</a> (typename Base::Resource *resource) override</td></tr>
+<tr class="separator:a9b4bb279f7415ed2f6c337711f2e65f2 inherit pub_methods_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html">Engine::Resources::VirtualResourceLoaderImpl&lt; VulkanTextureLoader, VulkanTexture, TextureLoader &gt;</a></td></tr>
+<tr class="memitem:afb623e65d1176ea56417b08d3e231705 inherit pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#afb623e65d1176ea56417b08d3e231705">Base</a> = TextureLoader</td></tr>
+<tr class="separator:afb623e65d1176ea56417b08d3e231705 inherit pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27298f7212154b380298060bb400a343 inherit pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a27298f7212154b380298060bb400a343">Data</a> = VulkanTexture</td></tr>
+<tr class="separator:a27298f7212154b380298060bb400a343 inherit pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4051b21f3fb40feab72332a040d0367 inherit pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#ae4051b21f3fb40feab72332a040d0367">Self</a> = <a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">UniqueComponent::VirtualComponentImpl</a>&lt; VulkanTextureLoader, <a class="el" href="struct_engine_1_1_virtual_scope.html">VirtualScope</a>&lt; VulkanTextureLoader, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_impl.html">ResourceLoaderImpl</a>&lt; VulkanTextureLoader, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a27298f7212154b380298060bb400a343">Data</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#afb623e65d1176ea56417b08d3e231705">Base</a> &gt; &gt;, TextureLoader &gt;</td></tr>
+<tr class="separator:ae4051b21f3fb40feab72332a040d0367 inherit pub_types_struct_engine_1_1_resources_1_1_virtual_resource_loader_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_unique_component_1_1_virtual_component_impl')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">Engine::UniqueComponent::VirtualComponentImpl&lt; _T, _Base, _VBase &gt;</a></td></tr>
+<tr class="memitem:a1fc9f9b5f22af59565ef26ac95288d56 inherit pub_types_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html#a1fc9f9b5f22af59565ef26ac95288d56">T</a> = _T</td></tr>
+<tr class="separator:a1fc9f9b5f22af59565ef26ac95288d56 inherit pub_types_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45fd1c3b85db2c93720df6633eb2ad40 inherit pub_types_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html#a45fd1c3b85db2c93720df6633eb2ad40">VBase</a> = _VBase</td></tr>
+<tr class="separator:a45fd1c3b85db2c93720df6633eb2ad40 inherit pub_types_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_struct_engine_1_1_unique_component_1_1_virtual_component_impl')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">Engine::UniqueComponent::VirtualComponentImpl&lt; _T, _Base, _VBase &gt;</a></td></tr>
+<tr class="memitem:a1fe903e69e072ede0164751afba00416 inherit pub_static_methods_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html#a1fe903e69e072ede0164751afba00416">component_index</a> ()</td></tr>
+<tr class="separator:a1fe903e69e072ede0164751afba00416 inherit pub_static_methods_struct_engine_1_1_unique_component_1_1_virtual_component_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aabf82ce9cd3dd8a57e7c4c6ea154e68b" name="aabf82ce9cd3dd8a57e7c4c6ea154e68b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf82ce9cd3dd8a57e7c4c6ea154e68b">&#9670;&#160;</a></span>VulkanTextureLoader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::VulkanTextureLoader::VulkanTextureLoader </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab7286b8666ccee8276b57d4c3e9c0487" name="ab7286b8666ccee8276b57d4c3e9c0487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7286b8666ccee8276b57d4c3e9c0487">&#9670;&#160;</a></span>loadImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::VulkanTextureLoader::loadImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> &amp;&#160;</td>
+          <td class="paramname"><em>tex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ResourceDataInfo &amp;&#160;</td>
+          <td class="paramname"><em>info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4352c8d2b7ec0ac1a9b48f87274d19d1" name="a4352c8d2b7ec0ac1a9b48f87274d19d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4352c8d2b7ec0ac1a9b48f87274d19d1">&#9670;&#160;</a></span>unloadImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanTextureLoader::unloadImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> &amp;&#160;</td>
+          <td class="paramname"><em>tex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3f436a401d8ee2e318a8ef30e56feec" name="ae3f436a401d8ee2e318a8ef30e56feec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3f436a401d8ee2e318a8ef30e56feec">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::VulkanTextureLoader::create </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa00d566babb732009936678a670a1ab5" name="aa00d566babb732009936678a670a1ab5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa00d566babb732009936678a670a1ab5">&#9670;&#160;</a></span>setData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanTextureLoader::setData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;&#160;</td>
+          <td class="paramname"><em>tex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4199cfeef8314070fe5f17e9622b04d1" name="a4199cfeef8314070fe5f17e9622b04d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4199cfeef8314070fe5f17e9622b04d1">&#9670;&#160;</a></span>setSubData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanTextureLoader::setSubData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> &amp;&#160;</td>
+          <td class="paramname"><em>tex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a7f8fd2aa5aa14ce469c9e8c698537b" name="a7a7f8fd2aa5aa14ce469c9e8c698537b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a7f8fd2aa5aa14ce469c9e8c698537b">&#9670;&#160;</a></span>loadingTaskQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> * Engine::Render::VulkanTextureLoader::loadingTaskQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/vulkan/src/Vulkan/<a class="el" href="vulkantextureloader_8h.html">vulkantextureloader.h</a></li>
+<li>plugins/renderer/vulkan/src/Vulkan/<a class="el" href="vulkantextureloader_8cpp.html">vulkantextureloader.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

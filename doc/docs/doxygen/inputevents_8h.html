@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: src/Interfaces/input/inputevents.h File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: src/Interfaces/input/inputevents.h File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/inputevents_8h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-interfaces-input-inputevents-h-file-reference">
+<h1>src/Interfaces/input/inputevents.h File Reference<a class="headerlink" href="#src-interfaces-input-inputevents-h-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: src/Interfaces/input/inputevents.h File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ce6405ba0afce575b27b3b998c1d24f9.html">Interfaces</a></li><li class="navelem"><a class="el" href="dir_d963fa8a251a8e8894f70a5672d5d417.html">input</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">inputevents.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="inputevents_8h__dep__incl.svg" width="100%" height="569"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_input_1_1_axis_event_args.html">Engine::Input::AxisEventArgs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_input_1_1_control_key_state.html">Engine::Input::ControlKeyState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html">Engine::Input::KeyEventArgs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html">Engine::Input::PointerEventArgs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html">Engine</a></td></tr>
+<tr class="memdesc:namespace_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace for the Madgine. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_input"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_input.html">Engine::Input</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_input_1_1_key"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_input_1_1_key.html">Engine::Input::Key</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_input_1_1_mouse_button"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_input_1_1_mouse_button.html">Engine::Input::MouseButton</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ac2138c44352d486427576a0561382001"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001">Engine::Input::Key::Key</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5993fef6bfc699cd881a41e3f253adac">Engine::Input::Key::Backspace</a> = 0x08
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001acd76de7d06b66c490211de70d938ccc5">Engine::Input::Key::Tabulator</a> = 0x09
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a4ce893fe20e8520544b8499075975710">Engine::Input::Key::Clear</a> = 0x0c
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a043188770b1befa097ce1272843fcc83">Engine::Input::Key::Return</a> = 0x0d
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9f9c678b59f615660b7d0f612ae00f95">Engine::Input::Key::Shift</a> = 0x10
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a7106ae910f0fd59b38c7a3ddb1624e7f">Engine::Input::Key::Control</a> = 0x11
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad78625eef93b3208e0b28edd36fc5038">Engine::Input::Key::Alt</a> = 0x12
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a1d9149bfcd9875fd301fc63703ec1e75">Engine::Input::Key::Pause</a> = 0x13
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a37e803d7bd7cf881bed6c693b74c4676">Engine::Input::Key::Capslock</a> = 0x14
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a15fe1f1cd75cec1cb2a48c3de253b848">Engine::Input::Key::Escape</a> = 0x1b
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a79e2132e198b0ef2ca8f2a6a6adb718b">Engine::Input::Key::PageUp</a> = 0x21
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001adfbb8e6202233be86f57c07209daf658">Engine::Input::Key::PageDown</a> = 0x22
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ae5f7e14f63bc7c1db4bf26a79240fd2c">Engine::Input::Key::End</a> = 0x23
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a14c3c401959e5eb10b92f79bbcc01649">Engine::Input::Key::Home</a> = 0x24
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a6125013984f59fe3cacdffdd39ae2830">Engine::Input::Key::LeftArrow</a> = 0x25
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a7b0fc6ebdbd90b219a7eef469da0ed56">Engine::Input::Key::UpArrow</a> = 0x26
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a0b19cc2a088a6700169425160dfdd5bb">Engine::Input::Key::RightArrow</a> = 0x27
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a70deec1130b808379664bfb8ffa7aab5">Engine::Input::Key::DownArrow</a> = 0x28
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a001fc9978e68cdc7686a03a507125e0b">Engine::Input::Key::Select</a> = 0x29
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ae6e4807cee9a29a5b002baddccb0de80">Engine::Input::Key::Print</a> = 0x2a
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a87e909b2b4c330d725eca2115a26797d">Engine::Input::Key::Execute</a> = 0x2b
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a62e4d09f3e4a54f3c961ecfd1d0e1edd">Engine::Input::Key::PrintScreen</a> = 0x2c
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a13383e4f5f61b8001ab91afb92788ee8">Engine::Input::Key::Insert</a> = 0x2d
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a4d230340e3defb7cbc3bea554a1ae9ac">Engine::Input::Key::Delete</a> = 0x2e
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9e1492c92f46c18cb6704f2b1f0fa234">Engine::Input::Key::Help</a> = 0x2f
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001af7c8aa22c8825cea0327cd022e5936a4">Engine::Input::Key::LWin</a> = 0x5b
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ab862905fe19c51f92e72036f06295d3f">Engine::Input::Key::RWin</a> = 0x5c
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5fe08740020e02e200ab9e46f281e9b9">Engine::Input::Key::NumLock</a> = 0x90
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001af58344d169d72ff3dbc7afa25c3b935e">Engine::Input::Key::ScrollLock</a> = 0x91
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a2fcb403766f96408071984e10b5a92bd">Engine::Input::Key::LShift</a> = 0xa0
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aced5b44ad80fb4e8cc785c90bf4df575">Engine::Input::Key::RShift</a> = 0xa1
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a6af3677b52175b616ac2d8c4d1220e5d">Engine::Input::Key::LControl</a> = 0xa2
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a0dbcbc9308b295855b1af9e6428ac836">Engine::Input::Key::RControl</a> = 0xa3
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001af14e60600a24f559ae1a72347f339d84">Engine::Input::Key::LAlt</a> = 0xa4
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a7337c96b0f934c7b98e4249828e23210">Engine::Input::Key::RAlt</a> = 0xa5
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad6f08944eb3d4b4f23424cfad29e60cb">Engine::Input::Key::Space</a> = 0x20
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aaa8216ba7b10b026f3543be563485aae">Engine::Input::Key::A</a> = 0x41
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9fd108ba0c608ecfc6afa50c1d4f4d18">Engine::Input::Key::B</a> = 0x42
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a8337930207d5f7435c21b0260d425389">Engine::Input::Key::C</a> = 0x43
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a039f7fb26273510cc2a5705b85ff1f64">Engine::Input::Key::D</a> = 0x44
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a76c54b8ca1cbbcdba5b6934d5e55f336">Engine::Input::Key::E</a> = 0x45
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a89dd7c5b39f5346b7e531396483c53f2">Engine::Input::Key::F</a> = 0x46
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a796af30b23e4cff68ea071764698648d">Engine::Input::Key::G</a> = 0x47
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a7c6a01706375315e4eff4c94bc1164a1">Engine::Input::Key::H</a> = 0x48
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9aa591991b5a967083b3f8d4063a6ded">Engine::Input::Key::I</a> = 0x49
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a87723b044e9c4275792ae2b6d1dd0bc9">Engine::Input::Key::J</a> = 0x4a
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a75e338cfeae4c84973a6b517cc498658">Engine::Input::Key::K</a> = 0x4b
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5f38dc3d604b654ea55f8d37a822116e">Engine::Input::Key::L</a> = 0x4c
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a3a051ffa6ae1530dab92116c320134eb">Engine::Input::Key::M</a> = 0x4d
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ab1cbcb6753aa1e4fe299c5a19cf3f93f">Engine::Input::Key::N</a> = 0x4e
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aed4702495d8bcfc47490455c5e58308e">Engine::Input::Key::O</a> = 0x4f
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a926c61c0f8bcddd0ee373de639bc65ed">Engine::Input::Key::P</a> = 0x50
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a900326539d3136dd157be39e9c0a4fea">Engine::Input::Key::Q</a> = 0x51
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ab9a8275df494b9a6bd442501e6daf5f1">Engine::Input::Key::R</a> = 0x52
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a49a7c151d6ad5cdd2dad6cc579131213">Engine::Input::Key::S</a> = 0x53
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002">Engine::Input::Key::T</a> = 0x54
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ae889a76f0341e5384f1945b047376674">Engine::Input::Key::U</a> = 0x55
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad2784d0e8485e7004d12b713dc78bc98">Engine::Input::Key::V</a> = 0x56
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad285dc3671c7f068b43969beac1d6fa6">Engine::Input::Key::W</a> = 0x57
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001adc743e8cdc32e67e383649a66df452db">Engine::Input::Key::X</a> = 0x58
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a951d8761dc77ec90fba98d89d1b549db">Engine::Input::Key::Y</a> = 0x59
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9056dab40e100e84bf66d97931a556c2">Engine::Input::Key::Z</a> = 0x5a
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad67162733e93d446d799424648e8bcf5">Engine::Input::Key::OEM1</a> = 0xba
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aba6ec22b0c6593d3baacbd567000dd3b">Engine::Input::Key::Plus</a> = 0xbb
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a48471084f82f3d18e4062b6950d2a00e">Engine::Input::Key::Comma</a> = 0xbc
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ab460ef81b5d91156c792b75dc5fc9d3f">Engine::Input::Key::Minus</a> = 0xbd
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ae78c50448b5e47fab26d33ec2719df6a">Engine::Input::Key::Period</a> = 0xbe
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ae9d24473f47b10d1fc36f3d32f66f227">Engine::Input::Key::OEM2</a> = 0xbf
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a529cd15307b2d6aa1b2fe66011d6854f">Engine::Input::Key::OEM3</a> = 0xc0
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001af050316ee6431acf711ac62de1608ec4">Engine::Input::Key::OEM4</a> = 0xdb
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a59f34b3262b833772f60aed76799ecba">Engine::Input::Key::OEM5</a> = 0xdc
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001afbbaaefd17b08b86ff4c389bcd4d30d5">Engine::Input::Key::OEM6</a> = 0xdd
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a0cf526fb5bee485214576f6126ebd56b">Engine::Input::Key::OEM7</a> = 0xde
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a7c2a8b362370067ca469c55a0109c7eb">Engine::Input::Key::OEM8</a> = 0xdf
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aa19f8947d1a5c6cc3c18bda925c4b86e">Engine::Input::Key::Alpha0</a> = 0x30
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a21a1329ae69e56a58cd504c8a477a835">Engine::Input::Key::Alpha1</a> = 0x31
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a06b5da664d227915abab539528215505">Engine::Input::Key::Alpha2</a> = 0x32
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a8b02acc208ba0e1ea1758165461c31d6">Engine::Input::Key::Alpha3</a> = 0x33
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a33a55b29d2f576163e40bceb25b17da5">Engine::Input::Key::Alpha4</a> = 0x34
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a06daa48c606b66431d5bc9b6309d88ce">Engine::Input::Key::Alpha5</a> = 0x35
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001abead6c7a47cfcb9e9820275bf264f8fd">Engine::Input::Key::Alpha6</a> = 0x36
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a147e2dbb34747dd05979c3f89fd327a9">Engine::Input::Key::Alpha7</a> = 0x37
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a0b143c077b32d19d2968798073d9f39e">Engine::Input::Key::Alpha8</a> = 0x38
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a4c8711214760dbeb395b4456496d0cfb">Engine::Input::Key::Alpha9</a> = 0x39
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a50d3de3d4ab3fb9ea1fe3f644b0fab76">Engine::Input::Key::Num0</a> = 0x60
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001acb6f7e55425d39710d6c05f570a4bf38">Engine::Input::Key::Num1</a> = 0x61
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a59c551dabae00108ce287eb1de774e5b">Engine::Input::Key::Num2</a> = 0x62
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a79fa2f17fe1524e348d06eb80597a628">Engine::Input::Key::Num3</a> = 0x63
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a49261c65aca4c1f2eaad644e20e884b9">Engine::Input::Key::Num4</a> = 0x64
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ae4df95addac68dcf9fa7d3540dab9934">Engine::Input::Key::Num5</a> = 0x65
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a64dba77fe04237d8263356bb43634ac4">Engine::Input::Key::Num6</a> = 0x66
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001acaf28028e7843b4375dde9e3e535fb6b">Engine::Input::Key::Num7</a> = 0x67
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a1f84c531860b02479423109e0af256e7">Engine::Input::Key::Num8</a> = 0x68
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad9304c5d22711f61d72c97e0468a313c">Engine::Input::Key::Num9</a> = 0x69
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aeabbbfc87d6bdea2317743646faf5900">Engine::Input::Key::NumMulitply</a> = 0x6a
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a4c16e6ffb0ce9808e290521b52f5c6a5">Engine::Input::Key::NumAdd</a> = 0x6b
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9d4f4a98f182c7b2c10dfe80f5bdf5c1">Engine::Input::Key::NumSeparator</a> = 0x6c
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a799d5830f2fa2ea8c382deec3f9c8c06">Engine::Input::Key::NumSubtract</a> = 0x6d
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a72519d3bf368d9c08f13f8c6c8242ada">Engine::Input::Key::NumDecimal</a> = 0x6e
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a76f43b8ef92921d90b09ce6d49a15171">Engine::Input::Key::NumDivide</a> = 0x6f
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a20b753ce49e726ecb1b42df4146ebbdc">Engine::Input::Key::F1</a> = 0x70
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a52ed1baa073ba21683298c7f40fb6d45">Engine::Input::Key::F2</a> = 0x71
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a30cf3ab65fc80db13044a3b18dee42f4">Engine::Input::Key::F3</a> = 0x72
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9755936d43fcac80604530ce8124fde6">Engine::Input::Key::F4</a> = 0x73
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a11c94c12aa927870fc7209109589313c">Engine::Input::Key::F5</a> = 0x74
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a797b8633555025f1685adac2fe812d1a">Engine::Input::Key::F6</a> = 0x75
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9d4c0c8fa6355cc6a8ec1a3dbe22be46">Engine::Input::Key::F7</a> = 0x76
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aba6e593c6cd88c6a319cfada0eb7718d">Engine::Input::Key::F8</a> = 0x77
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a95f76a2d421d13be469f402b1d010c54">Engine::Input::Key::F9</a> = 0x78
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad4e39d0f583a31204f964f1689bd5673">Engine::Input::Key::F10</a> = 0x79
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a2c204b4f1542f60cefe4d8fe2662f6a0">Engine::Input::Key::F11</a> = 0x7a
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001abe24b5b66e9af8db57a97a2a756c7126">Engine::Input::Key::F12</a> = 0x7b
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad777454f19cb66c5bedb46aef0bb1f85">Engine::Input::Key::F13</a> = 0x7c
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad9273a8a26bf875cf6635f895305e439">Engine::Input::Key::F14</a> = 0x7d
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a43dd55e1977f3afcc14cf346a9482330">Engine::Input::Key::F15</a> = 0x7e
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a0611a639dce4b20f45befa736fc1e21d">Engine::Input::Key::F16</a> = 0x7f
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a99624668acd5cfe9a0ef220a752ea1de">Engine::Input::Key::F17</a> = 0x80
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a67c0bc95c3ea930a8cda9e156dc9f0ca">Engine::Input::Key::F18</a> = 0x81
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001adeca4bbf37f2cd00229a07e13edc7e88">Engine::Input::Key::F19</a> = 0x82
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a95a1e5fc587e9db77eb53c0db7b2b20c">Engine::Input::Key::F20</a> = 0x83
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a98a39ba32d23267566a1763333886e3f">Engine::Input::Key::F21</a> = 0x84
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001aff048e6a80e297a811d94a3a44afbee4">Engine::Input::Key::F22</a> = 0x85
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ad039c9ba7f88b31c0312461c0ff77eb4">Engine::Input::Key::F23</a> = 0x86
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a1f8ddb33925bf6b6ad123b65ad1ffbe8">Engine::Input::Key::F24</a> = 0x87
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a023d6666fbb202913ae11b05cd5ff0e8">Engine::Input::Key::GP_A</a> = 0x88
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a8f0601832f1f49dbc7a6b8964f5d9cef">Engine::Input::Key::GP_B</a> = 0x89
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a1447daa161f4faf218c38d068a8d6f1a">Engine::Input::Key::GP_X</a> = 0x8A
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a9c00df9d932cbdfe899a69076d9b6f73">Engine::Input::Key::GP_Y</a> = 0x8B
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a99dd513433983c9b8523e16990740cc3">Engine::Input::Key::GP_LB</a> = 0x8C
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001ae57e263e7f39b2acb6bf3b6677e2908b">Engine::Input::Key::GP_RB</a> = 0x8D
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5310addfd0b054b3de78cb794152a0ab">Engine::Input::Key::GP_B1</a> = 0x8E
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a2db8c3cbd86816848012de709a1eb761">Engine::Input::Key::GP_B2</a> = 0x8F
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a3e4bc181b84279baab12719aae97de97">Engine::Input::Key::GP_LSB</a> = 0x98
+, <a class="el" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a7012cc6eaec5e70c724b4b0da41be77e">Engine::Input::Key::GP_RSB</a> = 0x99
+<br />
+ }</td></tr>
+<tr class="separator:ac2138c44352d486427576a0561382001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51aa938141f51099e2b7a4ce0194d5ae"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_input_1_1_mouse_button.html#a51aa938141f51099e2b7a4ce0194d5ae">Engine::Input::MouseButton::MouseButton</a> : unsigned char { <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_mouse_button.html#a51aa938141f51099e2b7a4ce0194d5aea19aa799f29d7d71eb50489bafcc6dbe5">Engine::Input::MouseButton::NO_BUTTON</a>
+, <a class="el" href="namespace_engine_1_1_input_1_1_mouse_button.html#a51aa938141f51099e2b7a4ce0194d5aea661ac8723edc610b6e03db704b3763b5">Engine::Input::MouseButton::LEFT_BUTTON</a>
+, <a class="el" href="namespace_engine_1_1_input_1_1_mouse_button.html#a51aa938141f51099e2b7a4ce0194d5aeadd585a7035fd875d0497ca9b67f8e2c5">Engine::Input::MouseButton::RIGHT_BUTTON</a>
+, <a class="el" href="namespace_engine_1_1_input_1_1_mouse_button.html#a51aa938141f51099e2b7a4ce0194d5aeaf159c0b5df4d37b7e2895bfe7b81db2b">Engine::Input::MouseButton::MIDDLE_BUTTON</a>
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_input_1_1_mouse_button.html#a51aa938141f51099e2b7a4ce0194d5aea17361b872de591dca3d60abc439c3dda">Engine::Input::MouseButton::BUTTON_COUNT</a>
+<br />
+ }</td></tr>
+<tr class="separator:a51aa938141f51099e2b7a4ce0194d5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

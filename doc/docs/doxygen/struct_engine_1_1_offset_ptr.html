@@ -1,0 +1,937 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::OffsetPtr Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::OffsetPtr Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_offset_ptr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="offsetptr-struct-reference">
+<h1>OffsetPtr Struct Reference<a class="headerlink" href="#offsetptr-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::OffsetPtr Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_offset_ptr-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::OffsetPtr Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;offsetptr.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a53e5d8deeeff80c3a4be80020363979f"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a53e5d8deeeff80c3a4be80020363979f">OffsetPtr</a> ()=default</td></tr>
+<tr class="separator:a53e5d8deeeff80c3a4be80020363979f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a228181b46c23e2db867341958129c2c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a228181b46c23e2db867341958129c2c3">OffsetPtr</a> (const <a class="el" href="classvoid.html">void</a> *from, const <a class="el" href="classvoid.html">void</a> *to)</td></tr>
+<tr class="separator:a228181b46c23e2db867341958129c2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d5e501070a228210597951f213f97b2"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Base &gt; </td></tr>
+<tr class="memitem:a4d5e501070a228210597951f213f97b2"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a4d5e501070a228210597951f213f97b2">OffsetPtr</a> (<a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; Base &gt;)</td></tr>
+<tr class="separator:a4d5e501070a228210597951f213f97b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12f995d2a49cd8227d58758d476a5c2c"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a12f995d2a49cd8227d58758d476a5c2c">OffsetPtr</a> (uintptr_t <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>)</td></tr>
+<tr class="separator:a12f995d2a49cd8227d58758d476a5c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b7efdd8b69183ed93be1e5f25581ac"><td class="memItemLeft" align="right" valign="top">constexpr uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a> () const</td></tr>
+<tr class="separator:ae4b7efdd8b69183ed93be1e5f25581ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18a226a84a38458063844305aeb99f62"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a18a226a84a38458063844305aeb99f62">operator bool</a> () const</td></tr>
+<tr class="separator:a18a226a84a38458063844305aeb99f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28272c6f6101bac1009841472280cdd6"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a28272c6f6101bac1009841472280cdd6">operator*</a> (uintptr_t factor) const</td></tr>
+<tr class="separator:a28272c6f6101bac1009841472280cdd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d8d62df9dfbf4a7ba7a559fa95e961c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a1d8d62df9dfbf4a7ba7a559fa95e961c">operator+</a> (uintptr_t <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>) const</td></tr>
+<tr class="separator:a1d8d62df9dfbf4a7ba7a559fa95e961c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158d717006bde943f6410a7779337714"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a158d717006bde943f6410a7779337714">operator+=</a> (uintptr_t <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>)</td></tr>
+<tr class="separator:a158d717006bde943f6410a7779337714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdb3220b8d270bbfab13cb8d333705d4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#afdb3220b8d270bbfab13cb8d333705d4">operator-</a> (uintptr_t <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>) const</td></tr>
+<tr class="separator:afdb3220b8d270bbfab13cb8d333705d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ab0d9cb81872320548bef1675244fa2"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a1ab0d9cb81872320548bef1675244fa2">operator/</a> (uintptr_t factor) const</td></tr>
+<tr class="separator:a1ab0d9cb81872320548bef1675244fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68a320d167a6173b8d1b563bf2c5cbfe"><td class="memItemLeft" align="right" valign="top">constexpr std::strong_ordering&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a68a320d167a6173b8d1b563bf2c5cbfe">operator&lt;=&gt;</a> (const <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &amp;other) const =default</td></tr>
+<tr class="separator:a68a320d167a6173b8d1b563bf2c5cbfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4966d388267297887010dd00ebd394e"><td class="memItemLeft" align="right" valign="top">constexpr std::strong_ordering&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#aa4966d388267297887010dd00ebd394e">operator&lt;=&gt;</a> (uintptr_t <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>) const</td></tr>
+<tr class="separator:aa4966d388267297887010dd00ebd394e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645262fa5650acd698c11e9faabac1bc"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a645262fa5650acd698c11e9faabac1bc">reset</a> ()</td></tr>
+<tr class="separator:a645262fa5650acd698c11e9faabac1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a8df7583c8d9cec7e4c06290df22d20c4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a8df7583c8d9cec7e4c06290df22d20c4">operator*</a> (uintptr_t factor, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> ptr)</td></tr>
+<tr class="separator:a8df7583c8d9cec7e4c06290df22d20c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c116f0e10b370ce8cda8a71b270645"><td class="memItemLeft" align="right" valign="top">constexpr const std::byte *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#ab4c116f0e10b370ce8cda8a71b270645">operator+</a> (const std::byte *p, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>)</td></tr>
+<tr class="separator:ab4c116f0e10b370ce8cda8a71b270645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfc5f186c562011b2f39d5cf4c24a74"><td class="memItemLeft" align="right" valign="top">constexpr std::byte *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a7cfc5f186c562011b2f39d5cf4c24a74">operator+</a> (std::byte *p, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>)</td></tr>
+<tr class="separator:a7cfc5f186c562011b2f39d5cf4c24a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6882cec201d8f093ae7e9f2e6d2b3e0d"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a6882cec201d8f093ae7e9f2e6d2b3e0d">operator+</a> (uintptr_t <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> ptr)</td></tr>
+<tr class="separator:a6882cec201d8f093ae7e9f2e6d2b3e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9ea72aa4f7551ade21ba3a707993679"><td class="memItemLeft" align="right" valign="top">constexpr const std::byte *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#aa9ea72aa4f7551ade21ba3a707993679">operator-</a> (const std::byte *p, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>)</td></tr>
+<tr class="separator:aa9ea72aa4f7551ade21ba3a707993679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f5f3b675e172fe14c86385f36b5663"><td class="memItemLeft" align="right" valign="top">constexpr std::byte *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a57f5f3b675e172fe14c86385f36b5663">operator-</a> (std::byte *p, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>)</td></tr>
+<tr class="separator:a57f5f3b675e172fe14c86385f36b5663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a364a380403cca18eb194a8a60351f649"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html#a364a380403cca18eb194a8a60351f649">operator-</a> (uintptr_t <a class="el" href="struct_engine_1_1_offset_ptr.html#ae4b7efdd8b69183ed93be1e5f25581ac">offset</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> ptr)</td></tr>
+<tr class="separator:a364a380403cca18eb194a8a60351f649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a53e5d8deeeff80c3a4be80020363979f" name="a53e5d8deeeff80c3a4be80020363979f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53e5d8deeeff80c3a4be80020363979f">&#9670;&#160;</a></span>OffsetPtr() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::OffsetPtr::OffsetPtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12f995d2a49cd8227d58758d476a5c2c" name="a12f995d2a49cd8227d58758d476a5c2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12f995d2a49cd8227d58758d476a5c2c">&#9670;&#160;</a></span>OffsetPtr() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::OffsetPtr::OffsetPtr </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d5e501070a228210597951f213f97b2" name="a4d5e501070a228210597951f213f97b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d5e501070a228210597951f213f97b2">&#9670;&#160;</a></span>OffsetPtr() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Base &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::OffsetPtr::OffsetPtr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; T &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; Base &gt;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a228181b46c23e2db867341958129c2c3" name="a228181b46c23e2db867341958129c2c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a228181b46c23e2db867341958129c2c3">&#9670;&#160;</a></span>OffsetPtr() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::OffsetPtr::OffsetPtr </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae4b7efdd8b69183ed93be1e5f25581ac" name="ae4b7efdd8b69183ed93be1e5f25581ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4b7efdd8b69183ed93be1e5f25581ac">&#9670;&#160;</a></span>offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uintptr_t Engine::OffsetPtr::offset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a645262fa5650acd698c11e9faabac1bc" name="a645262fa5650acd698c11e9faabac1bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a645262fa5650acd698c11e9faabac1bc">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classvoid.html">void</a> Engine::OffsetPtr::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68a320d167a6173b8d1b563bf2c5cbfe" name="a68a320d167a6173b8d1b563bf2c5cbfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68a320d167a6173b8d1b563bf2c5cbfe">&#9670;&#160;</a></span>operator&lt;=&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::strong_ordering Engine::OffsetPtr::operator&lt;=&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4966d388267297887010dd00ebd394e" name="aa4966d388267297887010dd00ebd394e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4966d388267297887010dd00ebd394e">&#9670;&#160;</a></span>operator&lt;=&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::strong_ordering Engine::OffsetPtr::operator&lt;=&gt; </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a18a226a84a38458063844305aeb99f62" name="a18a226a84a38458063844305aeb99f62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18a226a84a38458063844305aeb99f62">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::OffsetPtr::operator <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a158d717006bde943f6410a7779337714" name="a158d717006bde943f6410a7779337714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a158d717006bde943f6410a7779337714">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &amp; Engine::OffsetPtr::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d8d62df9dfbf4a7ba7a559fa95e961c" name="a1d8d62df9dfbf4a7ba7a559fa95e961c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d8d62df9dfbf4a7ba7a559fa95e961c">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> Engine::OffsetPtr::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afdb3220b8d270bbfab13cb8d333705d4" name="afdb3220b8d270bbfab13cb8d333705d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdb3220b8d270bbfab13cb8d333705d4">&#9670;&#160;</a></span>operator-()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> Engine::OffsetPtr::operator- </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28272c6f6101bac1009841472280cdd6" name="a28272c6f6101bac1009841472280cdd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28272c6f6101bac1009841472280cdd6">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> Engine::OffsetPtr::operator* </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>factor</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ab0d9cb81872320548bef1675244fa2" name="a1ab0d9cb81872320548bef1675244fa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ab0d9cb81872320548bef1675244fa2">&#9670;&#160;</a></span>operator/()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> Engine::OffsetPtr::operator/ </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>factor</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="ab4c116f0e10b370ce8cda8a71b270645" name="ab4c116f0e10b370ce8cda8a71b270645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4c116f0e10b370ce8cda8a71b270645">&#9670;&#160;</a></span>operator+ <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const std::byte * operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const std::byte *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9ea72aa4f7551ade21ba3a707993679" name="aa9ea72aa4f7551ade21ba3a707993679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9ea72aa4f7551ade21ba3a707993679">&#9670;&#160;</a></span>operator- <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const std::byte * operator- </td>
+          <td>(</td>
+          <td class="paramtype">const std::byte *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cfc5f186c562011b2f39d5cf4c24a74" name="a7cfc5f186c562011b2f39d5cf4c24a74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cfc5f186c562011b2f39d5cf4c24a74">&#9670;&#160;</a></span>operator+ <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::byte * operator+ </td>
+          <td>(</td>
+          <td class="paramtype">std::byte *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57f5f3b675e172fe14c86385f36b5663" name="a57f5f3b675e172fe14c86385f36b5663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57f5f3b675e172fe14c86385f36b5663">&#9670;&#160;</a></span>operator- <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::byte * operator- </td>
+          <td>(</td>
+          <td class="paramtype">std::byte *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6882cec201d8f093ae7e9f2e6d2b3e0d" name="a6882cec201d8f093ae7e9f2e6d2b3e0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6882cec201d8f093ae7e9f2e6d2b3e0d">&#9670;&#160;</a></span>operator+ <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>ptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a364a380403cca18eb194a8a60351f649" name="a364a380403cca18eb194a8a60351f649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a364a380403cca18eb194a8a60351f649">&#9670;&#160;</a></span>operator- <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>ptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8df7583c8d9cec7e4c06290df22d20c4" name="a8df7583c8d9cec7e4c06290df22d20c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8df7583c8d9cec7e4c06290df22d20c4">&#9670;&#160;</a></span>operator*</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
+          <td class="paramname"><em>factor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td>
+          <td class="paramname"><em>ptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="offsetptr_8h.html">offsetptr.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

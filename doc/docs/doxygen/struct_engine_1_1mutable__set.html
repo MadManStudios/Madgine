@@ -1,0 +1,776 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::mutable_set&amp;lt; T, Cmp &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::mutable_set&amp;lt; T, Cmp &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1mutable__set.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mutable-set-lt-t-cmp-gt-struct-template-reference">
+<h1>mutable_set&amp;lt; T, Cmp &amp;gt; Struct Template Reference<a class="headerlink" href="#mutable-set-lt-t-cmp-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::mutable_set&lt; T, Cmp &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1mutable__set.html">mutable_set</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1mutable__set-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::mutable_set&lt; T, Cmp &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;mutable_set.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::mutable_set&lt; T, Cmp &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1mutable__set__inherit__graph.svg" width="150" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aeb24bba5f3126a7b3b3980ad5d4996f0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#aeb24bba5f3126a7b3b3980ad5d4996f0">_traits</a> = <a class="el" href="struct_engine_1_1container__traits.html">container_traits</a>&lt; <a class="el" href="struct_engine_1_1mutable__set.html#a51a3ff225d6252c49971ffcc93d0c925">Base</a> &gt;</td></tr>
+<tr class="separator:aeb24bba5f3126a7b3b3980ad5d4996f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a3ff225d6252c49971ffcc93d0c925"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a51a3ff225d6252c49971ffcc93d0c925">Base</a> = std::set&lt; T, Cmp &gt;</td></tr>
+<tr class="separator:a51a3ff225d6252c49971ffcc93d0c925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1283903cecca8c1de016f80e5e3e3e55"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt; typename Base::const_iterator, true &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a></td></tr>
+<tr class="separator:a1283903cecca8c1de016f80e5e3e3e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04cf3fa4ec36d244904cc4b88b7d51c6"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt; typename Base::const_reverse_iterator, true &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a04cf3fa4ec36d244904cc4b88b7d51c6">const_reverse_iterator</a></td></tr>
+<tr class="separator:a04cf3fa4ec36d244904cc4b88b7d51c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a0fb02aec44d32a93b40e40b669b1b"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt; typename Base::iterator, false &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a></td></tr>
+<tr class="separator:a02a0fb02aec44d32a93b40e40b669b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3eb62dd8fc406d2a508fab5d68e3f34"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt; typename Base::reverse_iterator, false &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#ac3eb62dd8fc406d2a508fab5d68e3f34">reverse_iterator</a></td></tr>
+<tr class="separator:ac3eb62dd8fc406d2a508fab5d68e3f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a66f623b36389d3f7f93bb560d32c9905"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a66f623b36389d3f7f93bb560d32c9905">begin</a> ()</td></tr>
+<tr class="separator:a66f623b36389d3f7f93bb560d32c9905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2754a8f2452cda28526eb7d127072896"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a2754a8f2452cda28526eb7d127072896">begin</a> () const</td></tr>
+<tr class="separator:a2754a8f2452cda28526eb7d127072896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a896776a68e8217945fcacab62449e944"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a896776a68e8217945fcacab62449e944"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a896776a68e8217945fcacab62449e944">emplace</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a896776a68e8217945fcacab62449e944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a008a7c5c0ed02ae8513c3306308267f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a008a7c5c0ed02ae8513c3306308267f5">end</a> ()</td></tr>
+<tr class="separator:a008a7c5c0ed02ae8513c3306308267f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbebfcf88d3a701ac9fe7cd0e75e2bb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#afbebfcf88d3a701ac9fe7cd0e75e2bb9">end</a> () const</td></tr>
+<tr class="separator:afbebfcf88d3a701ac9fe7cd0e75e2bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b8c30ec528870ab30f15f7865fececf"><td class="memTemplParams" colspan="2">template&lt;typename Arg &gt; </td></tr>
+<tr class="memitem:a6b8c30ec528870ab30f15f7865fececf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a6b8c30ec528870ab30f15f7865fececf">find</a> (Arg &amp;&amp;arg)</td></tr>
+<tr class="separator:a6b8c30ec528870ab30f15f7865fececf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eb8959c5234ea3cec77c85157504c22"><td class="memTemplParams" colspan="2">template&lt;typename Arg &gt; </td></tr>
+<tr class="memitem:a6eb8959c5234ea3cec77c85157504c22"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a6eb8959c5234ea3cec77c85157504c22">find</a> (Arg &amp;&amp;arg) const</td></tr>
+<tr class="separator:a6eb8959c5234ea3cec77c85157504c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cab7fd873b9614f100cb3fa0a900934"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#ac3eb62dd8fc406d2a508fab5d68e3f34">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a3cab7fd873b9614f100cb3fa0a900934">rbegin</a> ()</td></tr>
+<tr class="separator:a3cab7fd873b9614f100cb3fa0a900934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5967510de1cc1c681aae32e2691ede19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a04cf3fa4ec36d244904cc4b88b7d51c6">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a5967510de1cc1c681aae32e2691ede19">rbegin</a> () const</td></tr>
+<tr class="separator:a5967510de1cc1c681aae32e2691ede19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e3633cfa5d7a6308ce7e8622e890d8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#ac3eb62dd8fc406d2a508fab5d68e3f34">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a1e3633cfa5d7a6308ce7e8622e890d8f">rend</a> ()</td></tr>
+<tr class="separator:a1e3633cfa5d7a6308ce7e8622e890d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0efa745c30dc4a2d2ece896336117ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a04cf3fa4ec36d244904cc4b88b7d51c6">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#ad0efa745c30dc4a2d2ece896336117ee">rend</a> () const</td></tr>
+<tr class="separator:ad0efa745c30dc4a2d2ece896336117ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a368f304fea01dc715c5593cabb74b428"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a368f304fea01dc715c5593cabb74b428"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1mutable__set.html#a368f304fea01dc715c5593cabb74b428">tag_invoke</a> (<a class="el" href="struct_engine_1_1emplace__t.html">emplace_t</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;success, <a class="el" href="struct_engine_1_1mutable__set.html">mutable_set</a>&lt; T, Cmp &gt; &amp;self, const <a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a> &amp;where, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a368f304fea01dc715c5593cabb74b428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a51a3ff225d6252c49971ffcc93d0c925" name="a51a3ff225d6252c49971ffcc93d0c925"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51a3ff225d6252c49971ffcc93d0c925">&#9670;&#160;</a></span>Base</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::Base =  std::set&lt;T, Cmp&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb24bba5f3126a7b3b3980ad5d4996f0" name="aeb24bba5f3126a7b3b3980ad5d4996f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb24bba5f3126a7b3b3980ad5d4996f0">&#9670;&#160;</a></span>_traits</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::_traits =  <a class="el" href="struct_engine_1_1container__traits.html">container_traits</a>&lt;<a class="el" href="struct_engine_1_1mutable__set.html#a51a3ff225d6252c49971ffcc93d0c925">Base</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02a0fb02aec44d32a93b40e40b669b1b" name="a02a0fb02aec44d32a93b40e40b669b1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02a0fb02aec44d32a93b40e40b669b1b">&#9670;&#160;</a></span>iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt;typename Base::iterator, false&gt; <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1283903cecca8c1de016f80e5e3e3e55" name="a1283903cecca8c1de016f80e5e3e3e55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1283903cecca8c1de016f80e5e3e3e55">&#9670;&#160;</a></span>const_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt;typename Base::const_iterator, true&gt; <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::const_iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3eb62dd8fc406d2a508fab5d68e3f34" name="ac3eb62dd8fc406d2a508fab5d68e3f34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3eb62dd8fc406d2a508fab5d68e3f34">&#9670;&#160;</a></span>reverse_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt;typename Base::reverse_iterator, false&gt; <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::reverse_iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04cf3fa4ec36d244904cc4b88b7d51c6" name="a04cf3fa4ec36d244904cc4b88b7d51c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04cf3fa4ec36d244904cc4b88b7d51c6">&#9670;&#160;</a></span>const_reverse_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1mutable__set_1_1iterator__prototype.html">iterator_prototype</a>&lt;typename Base::const_reverse_iterator, true&gt; <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::const_reverse_iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6b8c30ec528870ab30f15f7865fececf" name="a6b8c30ec528870ab30f15f7865fececf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b8c30ec528870ab30f15f7865fececf">&#9670;&#160;</a></span>find() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<div class="memtemplate">
+template&lt;typename Arg &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">Arg &amp;&amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6eb8959c5234ea3cec77c85157504c22" name="a6eb8959c5234ea3cec77c85157504c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eb8959c5234ea3cec77c85157504c22">&#9670;&#160;</a></span>find() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<div class="memtemplate">
+template&lt;typename Arg &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">Arg &amp;&amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a896776a68e8217945fcacab62449e944" name="a896776a68e8217945fcacab62449e944"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a896776a68e8217945fcacab62449e944">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; <a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66f623b36389d3f7f93bb560d32c9905" name="a66f623b36389d3f7f93bb560d32c9905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66f623b36389d3f7f93bb560d32c9905">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2754a8f2452cda28526eb7d127072896" name="a2754a8f2452cda28526eb7d127072896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2754a8f2452cda28526eb7d127072896">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a008a7c5c0ed02ae8513c3306308267f5" name="a008a7c5c0ed02ae8513c3306308267f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a008a7c5c0ed02ae8513c3306308267f5">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afbebfcf88d3a701ac9fe7cd0e75e2bb9" name="afbebfcf88d3a701ac9fe7cd0e75e2bb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbebfcf88d3a701ac9fe7cd0e75e2bb9">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3cab7fd873b9614f100cb3fa0a900934" name="a3cab7fd873b9614f100cb3fa0a900934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cab7fd873b9614f100cb3fa0a900934">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#ac3eb62dd8fc406d2a508fab5d68e3f34">reverse_iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5967510de1cc1c681aae32e2691ede19" name="a5967510de1cc1c681aae32e2691ede19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5967510de1cc1c681aae32e2691ede19">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a04cf3fa4ec36d244904cc4b88b7d51c6">const_reverse_iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e3633cfa5d7a6308ce7e8622e890d8f" name="a1e3633cfa5d7a6308ce7e8622e890d8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e3633cfa5d7a6308ce7e8622e890d8f">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#ac3eb62dd8fc406d2a508fab5d68e3f34">reverse_iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0efa745c30dc4a2d2ece896336117ee" name="ad0efa745c30dc4a2d2ece896336117ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0efa745c30dc4a2d2ece896336117ee">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a04cf3fa4ec36d244904cc4b88b7d51c6">const_reverse_iterator</a> <a class="el" href="struct_engine_1_1mutable__set.html">Engine::mutable_set</a>&lt; T, Cmp &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a368f304fea01dc715c5593cabb74b428" name="a368f304fea01dc715c5593cabb74b428"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a368f304fea01dc715c5593cabb74b428">&#9670;&#160;</a></span>tag_invoke</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Cmp &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1mutable__set.html#a02a0fb02aec44d32a93b40e40b669b1b">iterator</a> tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1emplace__t.html">emplace_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1mutable__set.html">mutable_set</a>&lt; T, Cmp &gt; &amp;&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1mutable__set.html#a1283903cecca8c1de016f80e5e3e3e55">const_iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/container/<a class="el" href="mutable__set_8h.html">mutable_set.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

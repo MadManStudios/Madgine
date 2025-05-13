@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Execution::ResultStorageImpl&amp;lt; Value, Error &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Execution::ResultStorageImpl&amp;lt; Value, Error &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_execution_1_1_result_storage_impl.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="resultstorageimpl-lt-value-error-gt-struct-template-reference">
+<h1>ResultStorageImpl&amp;lt; Value, Error &amp;gt; Struct Template Reference<a class="headerlink" href="#resultstorageimpl-lt-value-error-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Execution::ResultStorageImpl&lt; Value, Error &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_execution.html">Execution</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">ResultStorageImpl</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="struct_engine_1_1_execution_1_1_result_storage_impl-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Execution::ResultStorageImpl&lt; Value, Error &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;storage.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a213d285fc59cb0d945f7c21a97974ddf"><td class="memItemLeft" align="right" valign="top">Error&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a213d285fc59cb0d945f7c21a97974ddf">error</a> () &amp;&amp;</td></tr>
+<tr class="separator:a213d285fc59cb0d945f7c21a97974ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba207d40b7567fdc9fec2ed63ba846ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#aba207d40b7567fdc9fec2ed63ba846ad">is_done</a> () const</td></tr>
+<tr class="separator:aba207d40b7567fdc9fec2ed63ba846ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae586777c3821f9601a0bed92b48a9a7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#ae586777c3821f9601a0bed92b48a9a7c">is_error</a> () const</td></tr>
+<tr class="separator:ae586777c3821f9601a0bed92b48a9a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78d988f1890337a6d5f6d9aba21fcd6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a78d988f1890337a6d5f6d9aba21fcd6b">is_null</a> () const</td></tr>
+<tr class="separator:a78d988f1890337a6d5f6d9aba21fcd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a2328bfce940a8a1b038c647ffe702f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a7a2328bfce940a8a1b038c647ffe702f">is_value</a> () const</td></tr>
+<tr class="separator:a7a2328bfce940a8a1b038c647ffe702f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae288f251d8760fe7ccb36add64494263"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#ae288f251d8760fe7ccb36add64494263">reproduce</a> (auto &amp;rec)</td></tr>
+<tr class="separator:ae288f251d8760fe7ccb36add64494263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a975c49573d357674ccb577f1a9291b5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a975c49573d357674ccb577f1a9291b5d">reproduce_error</a> (auto &amp;rec)</td></tr>
+<tr class="separator:a975c49573d357674ccb577f1a9291b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4898ef2888d4d89c9bccbedd64033307"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a4898ef2888d4d89c9bccbedd64033307">set_done</a> ()</td></tr>
+<tr class="separator:a4898ef2888d4d89c9bccbedd64033307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9812a9d9d531de362f6906180bb95cc"><td class="memTemplParams" colspan="2">template&lt;typename... R&gt; </td></tr>
+<tr class="memitem:ae9812a9d9d531de362f6906180bb95cc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#ae9812a9d9d531de362f6906180bb95cc">set_error</a> (R &amp;&amp;...r)</td></tr>
+<tr class="separator:ae9812a9d9d531de362f6906180bb95cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c52aee68e07ee80a3079ecdec2da212"><td class="memTemplParams" colspan="2">template&lt;typename... V&gt; </td></tr>
+<tr class="memitem:a1c52aee68e07ee80a3079ecdec2da212"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a1c52aee68e07ee80a3079ecdec2da212">set_value</a> (V &amp;&amp;...v)</td></tr>
+<tr class="separator:a1c52aee68e07ee80a3079ecdec2da212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a568f995627489244039503761554874c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a568f995627489244039503761554874c">value</a> () &amp;&amp;</td></tr>
+<tr class="separator:a568f995627489244039503761554874c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a62618ef92b3255411a457b3017e75826"><td class="memItemLeft" align="right" valign="top">std::variant&lt; <a class="el" href="struct_engine_1_1_execution_1_1_null_storage.html">NullStorage</a>, <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error, <a class="el" href="struct_engine_1_1_execution_1_1_done_storage.html">DoneStorage</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a62618ef92b3255411a457b3017e75826">mState</a></td></tr>
+<tr class="separator:a62618ef92b3255411a457b3017e75826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ac753a8ae9c45a5b5cee1b5c4ccf51f02"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#ac753a8ae9c45a5b5cee1b5c4ccf51f02">can_have_error</a> = !Error::is_void</td></tr>
+<tr class="separator:ac753a8ae9c45a5b5cee1b5c4ccf51f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae288f251d8760fe7ccb36add64494263" name="ae288f251d8760fe7ccb36add64494263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae288f251d8760fe7ccb36add64494263">&#9670;&#160;</a></span>reproduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::reproduce </td>
+          <td>(</td>
+          <td class="paramtype">auto &amp;&#160;</td>
+          <td class="paramname"><em>rec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a975c49573d357674ccb577f1a9291b5d" name="a975c49573d357674ccb577f1a9291b5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a975c49573d357674ccb577f1a9291b5d">&#9670;&#160;</a></span>reproduce_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::reproduce_error </td>
+          <td>(</td>
+          <td class="paramtype">auto &amp;&#160;</td>
+          <td class="paramname"><em>rec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78d988f1890337a6d5f6d9aba21fcd6b" name="a78d988f1890337a6d5f6d9aba21fcd6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d988f1890337a6d5f6d9aba21fcd6b">&#9670;&#160;</a></span>is_null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::is_null </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a2328bfce940a8a1b038c647ffe702f" name="a7a2328bfce940a8a1b038c647ffe702f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a2328bfce940a8a1b038c647ffe702f">&#9670;&#160;</a></span>is_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::is_value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae586777c3821f9601a0bed92b48a9a7c" name="ae586777c3821f9601a0bed92b48a9a7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae586777c3821f9601a0bed92b48a9a7c">&#9670;&#160;</a></span>is_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::is_error </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba207d40b7567fdc9fec2ed63ba846ad" name="aba207d40b7567fdc9fec2ed63ba846ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba207d40b7567fdc9fec2ed63ba846ad">&#9670;&#160;</a></span>is_done()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::is_done </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c52aee68e07ee80a3079ecdec2da212" name="a1c52aee68e07ee80a3079ecdec2da212"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c52aee68e07ee80a3079ecdec2da212">&#9670;&#160;</a></span>set_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<div class="memtemplate">
+template&lt;typename... V&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::set_value </td>
+          <td>(</td>
+          <td class="paramtype">V &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9812a9d9d531de362f6906180bb95cc" name="ae9812a9d9d531de362f6906180bb95cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9812a9d9d531de362f6906180bb95cc">&#9670;&#160;</a></span>set_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<div class="memtemplate">
+template&lt;typename... R&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::set_error </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4898ef2888d4d89c9bccbedd64033307" name="a4898ef2888d4d89c9bccbedd64033307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4898ef2888d4d89c9bccbedd64033307">&#9670;&#160;</a></span>set_done()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::set_done </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a568f995627489244039503761554874c" name="a568f995627489244039503761554874c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a568f995627489244039503761554874c">&#9670;&#160;</a></span>value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a213d285fc59cb0d945f7c21a97974ddf" name="a213d285fc59cb0d945f7c21a97974ddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a213d285fc59cb0d945f7c21a97974ddf">&#9670;&#160;</a></span>error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Error <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::error </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac753a8ae9c45a5b5cee1b5c4ccf51f02" name="ac753a8ae9c45a5b5cee1b5c4ccf51f02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac753a8ae9c45a5b5cee1b5c4ccf51f02">&#9670;&#160;</a></span>can_have_error</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::can_have_error = !Error::is_void</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62618ef92b3255411a457b3017e75826" name="a62618ef92b3255411a457b3017e75826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62618ef92b3255411a457b3017e75826">&#9670;&#160;</a></span>mState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::variant&lt;<a class="el" href="struct_engine_1_1_execution_1_1_null_storage.html">NullStorage</a>, <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error, <a class="el" href="struct_engine_1_1_execution_1_1_done_storage.html">DoneStorage</a>&gt; <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::mState</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/execution/<a class="el" href="storage_8h.html">storage.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

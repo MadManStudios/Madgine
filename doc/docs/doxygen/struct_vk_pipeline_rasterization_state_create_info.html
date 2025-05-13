@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: VkPipelineRasterizationStateCreateInfo Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: VkPipelineRasterizationStateCreateInfo Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_vk_pipeline_rasterization_state_create_info.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vkpipelinerasterizationstatecreateinfo-struct-reference">
+<h1>VkPipelineRasterizationStateCreateInfo Struct Reference<a class="headerlink" href="#vkpipelinerasterizationstatecreateinfo-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: VkPipelineRasterizationStateCreateInfo Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_vk_pipeline_rasterization_state_create_info-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">VkPipelineRasterizationStateCreateInfo Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;vulkan.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a6f32e87491e0a6c05db249edf9cea731"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#ab56d74a86988de6d574f13287aa5a556">VkCullModeFlags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#a6f32e87491e0a6c05db249edf9cea731">cullMode</a></td></tr>
+<tr class="separator:a6f32e87491e0a6c05db249edf9cea731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed7b9b9e4918e82beb91d2656f40962c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#aed7b9b9e4918e82beb91d2656f40962c">depthBiasClamp</a></td></tr>
+<tr class="separator:aed7b9b9e4918e82beb91d2656f40962c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e9203bd52b493d47dacf4d9e4ca492f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#a0e9203bd52b493d47dacf4d9e4ca492f">depthBiasConstantFactor</a></td></tr>
+<tr class="separator:a0e9203bd52b493d47dacf4d9e4ca492f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae225ae723ceffb30c93f3e21416e33e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#ae5d9faf75f583010e32ee49087a15326">VkBool32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#ae225ae723ceffb30c93f3e21416e33e6">depthBiasEnable</a></td></tr>
+<tr class="separator:ae225ae723ceffb30c93f3e21416e33e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18edc17d4975888b18d8708b98d07e5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#ae18edc17d4975888b18d8708b98d07e5">depthBiasSlopeFactor</a></td></tr>
+<tr class="separator:ae18edc17d4975888b18d8708b98d07e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9160c0abae1951ef48cede9ef42eeb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#ae5d9faf75f583010e32ee49087a15326">VkBool32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#ad9160c0abae1951ef48cede9ef42eeb4">depthClampEnable</a></td></tr>
+<tr class="separator:ad9160c0abae1951ef48cede9ef42eeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda5266785a2db360de210e1ccd087ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a5c2d6ee63c7797a624505a7daa0065dc">VkPipelineRasterizationStateCreateFlags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#aeda5266785a2db360de210e1ccd087ec">flags</a></td></tr>
+<tr class="separator:aeda5266785a2db360de210e1ccd087ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac3e8642db47ecef442ae62e2a68c2d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#abe0dcd3132c6dffb67e049a325464057">VkFrontFace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#aac3e8642db47ecef442ae62e2a68c2d4">frontFace</a></td></tr>
+<tr class="separator:aac3e8642db47ecef442ae62e2a68c2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb795513d4331b707fdb6b782f870bb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#aabb795513d4331b707fdb6b782f870bb">lineWidth</a></td></tr>
+<tr class="separator:aabb795513d4331b707fdb6b782f870bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a4cce947d80d4e68bd5d329d281780b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classvoid.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#a4a4cce947d80d4e68bd5d329d281780b">pNext</a></td></tr>
+<tr class="separator:a4a4cce947d80d4e68bd5d329d281780b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9d93d1b7bb8af057cdcabd136fd20df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#ae5391455bad136bee64c06b8b85fb7c3">VkPolygonMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#ad9d93d1b7bb8af057cdcabd136fd20df">polygonMode</a></td></tr>
+<tr class="separator:ad9d93d1b7bb8af057cdcabd136fd20df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a059aa1f1cfe44fbf434491dafb811a2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#ae5d9faf75f583010e32ee49087a15326">VkBool32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#a059aa1f1cfe44fbf434491dafb811a2d">rasterizerDiscardEnable</a></td></tr>
+<tr class="separator:a059aa1f1cfe44fbf434491dafb811a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeddbeece787b3601842eec89ec1a433e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#aff9f2b99398eb80a2b5a146bc5534ce8">VkStructureType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#aeddbeece787b3601842eec89ec1a433e">sType</a></td></tr>
+<tr class="separator:aeddbeece787b3601842eec89ec1a433e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aeddbeece787b3601842eec89ec1a433e" name="aeddbeece787b3601842eec89ec1a433e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeddbeece787b3601842eec89ec1a433e">&#9670;&#160;</a></span>sType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#aff9f2b99398eb80a2b5a146bc5534ce8">VkStructureType</a> VkPipelineRasterizationStateCreateInfo::sType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a4cce947d80d4e68bd5d329d281780b" name="a4a4cce947d80d4e68bd5d329d281780b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a4cce947d80d4e68bd5d329d281780b">&#9670;&#160;</a></span>pNext</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classvoid.html">void</a>* VkPipelineRasterizationStateCreateInfo::pNext</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeda5266785a2db360de210e1ccd087ec" name="aeda5266785a2db360de210e1ccd087ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeda5266785a2db360de210e1ccd087ec">&#9670;&#160;</a></span>flags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#a5c2d6ee63c7797a624505a7daa0065dc">VkPipelineRasterizationStateCreateFlags</a> VkPipelineRasterizationStateCreateInfo::flags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9160c0abae1951ef48cede9ef42eeb4" name="ad9160c0abae1951ef48cede9ef42eeb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9160c0abae1951ef48cede9ef42eeb4">&#9670;&#160;</a></span>depthClampEnable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#ae5d9faf75f583010e32ee49087a15326">VkBool32</a> VkPipelineRasterizationStateCreateInfo::depthClampEnable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a059aa1f1cfe44fbf434491dafb811a2d" name="a059aa1f1cfe44fbf434491dafb811a2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a059aa1f1cfe44fbf434491dafb811a2d">&#9670;&#160;</a></span>rasterizerDiscardEnable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#ae5d9faf75f583010e32ee49087a15326">VkBool32</a> VkPipelineRasterizationStateCreateInfo::rasterizerDiscardEnable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9d93d1b7bb8af057cdcabd136fd20df" name="ad9d93d1b7bb8af057cdcabd136fd20df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9d93d1b7bb8af057cdcabd136fd20df">&#9670;&#160;</a></span>polygonMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#ae5391455bad136bee64c06b8b85fb7c3">VkPolygonMode</a> VkPipelineRasterizationStateCreateInfo::polygonMode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f32e87491e0a6c05db249edf9cea731" name="a6f32e87491e0a6c05db249edf9cea731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f32e87491e0a6c05db249edf9cea731">&#9670;&#160;</a></span>cullMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#ab56d74a86988de6d574f13287aa5a556">VkCullModeFlags</a> VkPipelineRasterizationStateCreateInfo::cullMode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aac3e8642db47ecef442ae62e2a68c2d4" name="aac3e8642db47ecef442ae62e2a68c2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac3e8642db47ecef442ae62e2a68c2d4">&#9670;&#160;</a></span>frontFace</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#abe0dcd3132c6dffb67e049a325464057">VkFrontFace</a> VkPipelineRasterizationStateCreateInfo::frontFace</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae225ae723ceffb30c93f3e21416e33e6" name="ae225ae723ceffb30c93f3e21416e33e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae225ae723ceffb30c93f3e21416e33e6">&#9670;&#160;</a></span>depthBiasEnable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#ae5d9faf75f583010e32ee49087a15326">VkBool32</a> VkPipelineRasterizationStateCreateInfo::depthBiasEnable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e9203bd52b493d47dacf4d9e4ca492f" name="a0e9203bd52b493d47dacf4d9e4ca492f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e9203bd52b493d47dacf4d9e4ca492f">&#9670;&#160;</a></span>depthBiasConstantFactor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VkPipelineRasterizationStateCreateInfo::depthBiasConstantFactor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed7b9b9e4918e82beb91d2656f40962c" name="aed7b9b9e4918e82beb91d2656f40962c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed7b9b9e4918e82beb91d2656f40962c">&#9670;&#160;</a></span>depthBiasClamp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VkPipelineRasterizationStateCreateInfo::depthBiasClamp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae18edc17d4975888b18d8708b98d07e5" name="ae18edc17d4975888b18d8708b98d07e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18edc17d4975888b18d8708b98d07e5">&#9670;&#160;</a></span>depthBiasSlopeFactor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VkPipelineRasterizationStateCreateInfo::depthBiasSlopeFactor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aabb795513d4331b707fdb6b782f870bb" name="aabb795513d4331b707fdb6b782f870bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabb795513d4331b707fdb6b782f870bb">&#9670;&#160;</a></span>lineWidth</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VkPipelineRasterizationStateCreateInfo::lineWidth</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>plugins/renderer/vulkan/src/glad/<a class="el" href="vulkan_8h.html">vulkan.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

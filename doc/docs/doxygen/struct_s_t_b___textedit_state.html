@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: STB_TexteditState Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: STB_TexteditState Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_s_t_b___textedit_state.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stb-texteditstate-struct-reference">
+<h1>STB_TexteditState Struct Reference<a class="headerlink" href="#stb-texteditstate-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: STB_TexteditState Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_s_t_b___textedit_state-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">STB_TexteditState Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;stb_textedit.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a7a1414f3286070306a5184f9473ccf9f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a7a1414f3286070306a5184f9473ccf9f">cursor</a></td></tr>
+<tr class="separator:a7a1414f3286070306a5184f9473ccf9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7ba5f610f5dc2d643bef0f223ada9c"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a0e7ba5f610f5dc2d643bef0f223ada9c">cursor_at_end_of_line</a></td></tr>
+<tr class="separator:a0e7ba5f610f5dc2d643bef0f223ada9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaca2d581ed565f86288038816274e007"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#aaca2d581ed565f86288038816274e007">has_preferred_x</a></td></tr>
+<tr class="separator:aaca2d581ed565f86288038816274e007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11a63150e95225aacd204d6ef160c0c0"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a11a63150e95225aacd204d6ef160c0c0">initialized</a></td></tr>
+<tr class="separator:a11a63150e95225aacd204d6ef160c0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af26029a4f1f76d043afd35072fabcb4b"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#af26029a4f1f76d043afd35072fabcb4b">insert_mode</a></td></tr>
+<tr class="separator:af26029a4f1f76d043afd35072fabcb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e43e8ac88a8c7f2bba645b333a8bdc7"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a1e43e8ac88a8c7f2bba645b333a8bdc7">padding1</a></td></tr>
+<tr class="separator:a1e43e8ac88a8c7f2bba645b333a8bdc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a708e49f23f79bb14c9b0f4ad03371"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#af5a708e49f23f79bb14c9b0f4ad03371">padding2</a></td></tr>
+<tr class="separator:af5a708e49f23f79bb14c9b0f4ad03371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c42530e4919171df25b1f00bb95a887"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a4c42530e4919171df25b1f00bb95a887">padding3</a></td></tr>
+<tr class="separator:a4c42530e4919171df25b1f00bb95a887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a527319df94e0fe262548fb48bebf3dea"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a527319df94e0fe262548fb48bebf3dea">preferred_x</a></td></tr>
+<tr class="separator:a527319df94e0fe262548fb48bebf3dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a352add1502f8e2f4e9043ab7114da61c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a352add1502f8e2f4e9043ab7114da61c">row_count_per_page</a></td></tr>
+<tr class="separator:a352add1502f8e2f4e9043ab7114da61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf8b1b1064770e4579c5bb8c4a41d8f0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#abf8b1b1064770e4579c5bb8c4a41d8f0">select_end</a></td></tr>
+<tr class="separator:abf8b1b1064770e4579c5bb8c4a41d8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d595403e0b6f99cd0163ee87f4344d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a74d595403e0b6f99cd0163ee87f4344d">select_start</a></td></tr>
+<tr class="separator:a74d595403e0b6f99cd0163ee87f4344d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63299aca2cb4e009dfa41cda5e651316"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a63299aca2cb4e009dfa41cda5e651316">single_line</a></td></tr>
+<tr class="separator:a63299aca2cb4e009dfa41cda5e651316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1f0366bbd57e01a4f49a720beb9ead"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_stb_undo_state.html">StbUndoState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_s_t_b___textedit_state.html#a7e1f0366bbd57e01a4f49a720beb9ead">undostate</a></td></tr>
+<tr class="separator:a7e1f0366bbd57e01a4f49a720beb9ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7a1414f3286070306a5184f9473ccf9f" name="a7a1414f3286070306a5184f9473ccf9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a1414f3286070306a5184f9473ccf9f">&#9670;&#160;</a></span>cursor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int STB_TexteditState::cursor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a74d595403e0b6f99cd0163ee87f4344d" name="a74d595403e0b6f99cd0163ee87f4344d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d595403e0b6f99cd0163ee87f4344d">&#9670;&#160;</a></span>select_start</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int STB_TexteditState::select_start</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf8b1b1064770e4579c5bb8c4a41d8f0" name="abf8b1b1064770e4579c5bb8c4a41d8f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf8b1b1064770e4579c5bb8c4a41d8f0">&#9670;&#160;</a></span>select_end</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int STB_TexteditState::select_end</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af26029a4f1f76d043afd35072fabcb4b" name="af26029a4f1f76d043afd35072fabcb4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af26029a4f1f76d043afd35072fabcb4b">&#9670;&#160;</a></span>insert_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::insert_mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a352add1502f8e2f4e9043ab7114da61c" name="a352add1502f8e2f4e9043ab7114da61c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a352add1502f8e2f4e9043ab7114da61c">&#9670;&#160;</a></span>row_count_per_page</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int STB_TexteditState::row_count_per_page</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e7ba5f610f5dc2d643bef0f223ada9c" name="a0e7ba5f610f5dc2d643bef0f223ada9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7ba5f610f5dc2d643bef0f223ada9c">&#9670;&#160;</a></span>cursor_at_end_of_line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::cursor_at_end_of_line</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11a63150e95225aacd204d6ef160c0c0" name="a11a63150e95225aacd204d6ef160c0c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11a63150e95225aacd204d6ef160c0c0">&#9670;&#160;</a></span>initialized</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::initialized</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaca2d581ed565f86288038816274e007" name="aaca2d581ed565f86288038816274e007"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaca2d581ed565f86288038816274e007">&#9670;&#160;</a></span>has_preferred_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::has_preferred_x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63299aca2cb4e009dfa41cda5e651316" name="a63299aca2cb4e009dfa41cda5e651316"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63299aca2cb4e009dfa41cda5e651316">&#9670;&#160;</a></span>single_line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::single_line</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e43e8ac88a8c7f2bba645b333a8bdc7" name="a1e43e8ac88a8c7f2bba645b333a8bdc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e43e8ac88a8c7f2bba645b333a8bdc7">&#9670;&#160;</a></span>padding1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::padding1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af5a708e49f23f79bb14c9b0f4ad03371" name="af5a708e49f23f79bb14c9b0f4ad03371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5a708e49f23f79bb14c9b0f4ad03371">&#9670;&#160;</a></span>padding2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::padding2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c42530e4919171df25b1f00bb95a887" name="a4c42530e4919171df25b1f00bb95a887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c42530e4919171df25b1f00bb95a887">&#9670;&#160;</a></span>padding3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char STB_TexteditState::padding3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a527319df94e0fe262548fb48bebf3dea" name="a527319df94e0fe262548fb48bebf3dea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a527319df94e0fe262548fb48bebf3dea">&#9670;&#160;</a></span>preferred_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float STB_TexteditState::preferred_x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e1f0366bbd57e01a4f49a720beb9ead" name="a7e1f0366bbd57e01a4f49a720beb9ead"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1f0366bbd57e01a4f49a720beb9ead">&#9670;&#160;</a></span>undostate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_stb_undo_state.html">StbUndoState</a> STB_TexteditState::undostate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>plugins/misc/widgets/src/Madgine/widgets/<a class="el" href="stb__textedit_8h.html">stb_textedit.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

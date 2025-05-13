@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::NodeGraph Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::NodeGraph Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/namespace_engine_1_1_node_graph.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nodegraph-namespace-reference">
+<h1>NodeGraph Namespace Reference<a class="headerlink" href="#nodegraph-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::NodeGraph Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_node_graph.html">NodeGraph</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">Engine::NodeGraph Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_accessor_node.html">AccessorNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_add.html">Add</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html">AutoMaskNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_break_vector3.html">BreakVector3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_break_vector4.html">BreakVector4</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_constant_config.html">ConstantConfig</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_data_in_pin_prototype.html">DataInPinPrototype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_data_out_pin_prototype.html">DataOutPinPrototype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_data_provider_pin_prototype.html">DataProviderPinPrototype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_data_receiver_pin_prototype.html">DataReceiverPinPrototype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_default_config.html">DefaultConfig</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_divide.html">Divide</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1dynamic__value__type.html">dynamic_value_type</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_flow_in_pin_prototype.html">FlowInPinPrototype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_flow_out_pin_prototype.html">FlowOutPinPrototype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_function_node.html">FunctionNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_ignore.html">Ignore</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_library_interpret_data.html">LibraryInterpretData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_library_interpret_receiver.html">LibraryInterpretReceiver</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html">LibraryNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_log.html">Log</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_make_vector3.html">MakeVector3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_algorithm.html">NodeAlgorithm</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_codegen_handle.html">NodeCodegenHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph_behavior_factory.html">NodeGraphBehaviorFactory</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph_loader.html">NodeGraphLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_sender.html">NodeInterpreterSender</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state.html">NodeInterpreterState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpret_handle.html">NodeInterpretHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpret_handle_base.html">NodeInterpretHandleBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_range.html">NodeRange</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_reader.html">NodeReader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver.html">NodeReceiver</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver_wrapper.html">NodeReceiverWrapper</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_router.html">NodeRouter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_sender.html">NodeSender</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_state.html">NodeState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_stream.html">NodeStream</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin_desc.html">PinDesc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_pump_node.html">PumpNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1remove__deductors__impl.html">remove_deductors_impl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1remove__deductors__impl_3_01_value_type_00_01_i_01_4.html">remove_deductors_impl&lt; ValueType, I &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node.html">SenderNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_test_node.html">TestNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_vector3_to4.html">Vector3To4</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a3f36302ed20b36ca2799dcd107f1958d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3f36302ed20b36ca2799dcd107f1958d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">is_algorithm</a> = <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt; <a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_algorithm.html">NodeAlgorithm</a> &gt;</td></tr>
+<tr class="separator:a3f36302ed20b36ca2799dcd107f1958d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ba37842b558a2da7aa5104937aa656d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8ba37842b558a2da7aa5104937aa656d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a8ba37842b558a2da7aa5104937aa656d">is_any_algorithm</a> = std::disjunction&lt; <a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">is_algorithm</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a845f8e6cd3f812aa7ff1c516f3ad091c">is_router</a>&lt; T &gt; &gt;</td></tr>
+<tr class="separator:a8ba37842b558a2da7aa5104937aa656d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae41be8fc56d5bb537eb955461b040ab6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae41be8fc56d5bb537eb955461b040ab6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#ae41be8fc56d5bb537eb955461b040ab6">is_pred_sender</a> = std::bool_constant&lt; <a class="el" href="struct_engine_1_1is__instance.html">is_instance</a>&lt; <a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_reader.html">NodeReader</a> &gt;::value||<a class="el" href="struct_engine_1_1is__instance.html">is_instance</a>&lt; <a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_stream.html">NodeStream</a> &gt;::value &gt;</td></tr>
+<tr class="separator:ae41be8fc56d5bb537eb955461b040ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd76d28d62fd29dc5c55709d90b3e95"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9dd76d28d62fd29dc5c55709d90b3e95"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a9dd76d28d62fd29dc5c55709d90b3e95">is_range</a> = <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt; <a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_range.html">NodeRange</a> &gt;</td></tr>
+<tr class="separator:a9dd76d28d62fd29dc5c55709d90b3e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a845f8e6cd3f812aa7ff1c516f3ad091c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a845f8e6cd3f812aa7ff1c516f3ad091c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a845f8e6cd3f812aa7ff1c516f3ad091c">is_router</a> = <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt; <a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_router.html">NodeRouter</a> &gt;</td></tr>
+<tr class="separator:a845f8e6cd3f812aa7ff1c516f3ad091c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeca71bbfd5153bb0237b15dd654b3293"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aeca71bbfd5153bb0237b15dd654b3293"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#aeca71bbfd5153bb0237b15dd654b3293">is_succ_sender</a> = <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt; <a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_sender.html">NodeSender</a> &gt;</td></tr>
+<tr class="separator:aeca71bbfd5153bb0237b15dd654b3293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4840800825ffd2140deb1360f5712c31"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4840800825ffd2140deb1360f5712c31"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a4840800825ffd2140deb1360f5712c31">is_value</a> = std::negation&lt; std::disjunction&lt; <a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">is_algorithm</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#ae41be8fc56d5bb537eb955461b040ab6">is_pred_sender</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#aeca71bbfd5153bb0237b15dd654b3293">is_succ_sender</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">is_algorithm</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a845f8e6cd3f812aa7ff1c516f3ad091c">is_router</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a9dd76d28d62fd29dc5c55709d90b3e95">is_range</a>&lt; T &gt; &gt; &gt;</td></tr>
+<tr class="separator:a4840800825ffd2140deb1360f5712c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f1ef3a19d08ba675be7c38b8da4c035"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a7f1ef3a19d08ba675be7c38b8da4c035">NodeCodegenReceiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1execution__receiver.html">Execution::execution_receiver</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_codegen_handle.html">NodeCodegenHandle</a> &gt;</td></tr>
+<tr class="separator:a7f1ef3a19d08ba675be7c38b8da4c035"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa40634bfb885bce334bd2793a6eed6ff"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt; </td></tr>
+<tr class="memitem:aa40634bfb885bce334bd2793a6eed6ff"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#aa40634bfb885bce334bd2793a6eed6ff">NodeExecutionReceiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1execution__receiver.html">Execution::execution_receiver</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpret_handle.html">NodeInterpretHandle</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt; &gt;</td></tr>
+<tr class="separator:aa40634bfb885bce334bd2793a6eed6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a7a6aa068a511237fbe82b6be05c5e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#ad3a7a6aa068a511237fbe82b6be05c5e">NodeResults</a> = <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a></td></tr>
+<tr class="separator:ad3a7a6aa068a511237fbe82b6be05c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5240abdc410b432b7cf8eb8d006ce96a"><td class="memTemplParams" colspan="2">template&lt;typename T , size_t I&gt; </td></tr>
+<tr class="memitem:a5240abdc410b432b7cf8eb8d006ce96a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a5240abdc410b432b7cf8eb8d006ce96a">remove_deductors</a> = typename <a class="el" href="struct_engine_1_1_node_graph_1_1remove__deductors__impl.html">remove_deductors_impl</a>&lt; T, I &gt;::type</td></tr>
+<tr class="separator:a5240abdc410b432b7cf8eb8d006ce96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a2856e5275fec9eebd7c2b0ea55769082"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a> { <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082a789261ff2b6ef12d02f872f1e2906dd6">CONNECT</a>
+, <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082aa97ea6db7faa862b0ee58c15bda0451c">DISCONNECT</a>
+ }</td></tr>
+<tr class="separator:a2856e5275fec9eebd7c2b0ea55769082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a780af30aa255fd0a3713486835079403"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a780af30aa255fd0a3713486835079403">NodeExecutionMask</a> { <a class="el" href="namespace_engine_1_1_node_graph.html#a780af30aa255fd0a3713486835079403ab1f0d42aed3adbbda5f5f2aeffe651ca">NONE</a> = 0b00
+, <a class="el" href="namespace_engine_1_1_node_graph.html#a780af30aa255fd0a3713486835079403a509261cabe65d5cfe3044cd38912bc41">CPU</a> = 0b01
+, <a class="el" href="namespace_engine_1_1_node_graph.html#a780af30aa255fd0a3713486835079403a7430b162df7cc6eff0dbda94a28a0fee">GPU</a> = 0b10
+, <a class="el" href="namespace_engine_1_1_node_graph.html#a780af30aa255fd0a3713486835079403a519b4fca0bc2d122b286f6a973eace96">ALL</a> = 0b11
+ }</td></tr>
+<tr class="separator:a780af30aa255fd0a3713486835079403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c39d79cdf9d0efb2bda06c7164a0dd7"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a5c39d79cdf9d0efb2bda06c7164a0dd7">PinDir</a> { <a class="el" href="namespace_engine_1_1_node_graph.html#a5c39d79cdf9d0efb2bda06c7164a0dd7aefeb369cccbd560588a756610865664c">In</a>
+, <a class="el" href="namespace_engine_1_1_node_graph.html#a5c39d79cdf9d0efb2bda06c7164a0dd7a7c147cda9e49590f6abe83d118b7353b">Out</a>
+ }</td></tr>
+<tr class="separator:a5c39d79cdf9d0efb2bda06c7164a0dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514eff5a99ff64ae792f9e6f5545e767"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a514eff5a99ff64ae792f9e6f5545e767">PinType</a> { <a class="el" href="namespace_engine_1_1_node_graph.html#a514eff5a99ff64ae792f9e6f5545e767af1a76f66cca677c6e628d9ca58a6c8fc">Flow</a>
+, <a class="el" href="namespace_engine_1_1_node_graph.html#a514eff5a99ff64ae792f9e6f5545e767af6068daa29dbb05a7ead1e3b5a48bbee">Data</a>
+, <a class="el" href="namespace_engine_1_1_node_graph.html#a514eff5a99ff64ae792f9e6f5545e767a67a633ca7b27b0975ef66627c660210e">DataInstance</a>
+ }</td></tr>
+<tr class="separator:a514eff5a99ff64ae792f9e6f5545e767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4241ff6b637d7ce75726859cba6f5498"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a4241ff6b637d7ce75726859cba6f5498">continueExecution</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;interpreter, const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &amp;node, <a class="el" href="struct_engine_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;receiver, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a> &amp;location)</td></tr>
+<tr class="separator:a4241ff6b637d7ce75726859cba6f5498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eaa7a4cbf3bcfa74c323a126543f5e8"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt; </td></tr>
+<tr class="memitem:a2eaa7a4cbf3bcfa74c323a126543f5e8"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html#a2eaa7a4cbf3bcfa74c323a126543f5e8">NodeReceiverWrapper</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpret_handle.html">NodeInterpretHandle</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt;) -&gt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver_wrapper.html">NodeReceiverWrapper</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt;</td></tr>
+<tr class="separator:a2eaa7a4cbf3bcfa74c323a126543f5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="aa40634bfb885bce334bd2793a6eed6ff" name="aa40634bfb885bce334bd2793a6eed6ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40634bfb885bce334bd2793a6eed6ff">&#9670;&#160;</a></span>NodeExecutionReceiver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#aa40634bfb885bce334bd2793a6eed6ff">Engine::NodeGraph::NodeExecutionReceiver</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1execution__receiver.html">Execution::execution_receiver</a>&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpret_handle.html">NodeInterpretHandle</a>&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a>&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f1ef3a19d08ba675be7c38b8da4c035" name="a7f1ef3a19d08ba675be7c38b8da4c035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f1ef3a19d08ba675be7c38b8da4c035">&#9670;&#160;</a></span>NodeCodegenReceiver</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#a7f1ef3a19d08ba675be7c38b8da4c035">Engine::NodeGraph::NodeCodegenReceiver</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1execution__receiver.html">Execution::execution_receiver</a>&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_codegen_handle.html">NodeCodegenHandle</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a845f8e6cd3f812aa7ff1c516f3ad091c" name="a845f8e6cd3f812aa7ff1c516f3ad091c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a845f8e6cd3f812aa7ff1c516f3ad091c">&#9670;&#160;</a></span>is_router</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#a845f8e6cd3f812aa7ff1c516f3ad091c">Engine::NodeGraph::is_router</a> = typedef <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt;<a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_router.html">NodeRouter</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f36302ed20b36ca2799dcd107f1958d" name="a3f36302ed20b36ca2799dcd107f1958d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f36302ed20b36ca2799dcd107f1958d">&#9670;&#160;</a></span>is_algorithm</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">Engine::NodeGraph::is_algorithm</a> = typedef <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt;<a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_algorithm.html">NodeAlgorithm</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae41be8fc56d5bb537eb955461b040ab6" name="ae41be8fc56d5bb537eb955461b040ab6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae41be8fc56d5bb537eb955461b040ab6">&#9670;&#160;</a></span>is_pred_sender</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#ae41be8fc56d5bb537eb955461b040ab6">Engine::NodeGraph::is_pred_sender</a> = typedef std::bool_constant&lt;<a class="el" href="struct_engine_1_1is__instance.html">is_instance</a>&lt;<a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_reader.html">NodeReader</a>&gt;::value || <a class="el" href="struct_engine_1_1is__instance.html">is_instance</a>&lt;<a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_stream.html">NodeStream</a>&gt;::value&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeca71bbfd5153bb0237b15dd654b3293" name="aeca71bbfd5153bb0237b15dd654b3293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeca71bbfd5153bb0237b15dd654b3293">&#9670;&#160;</a></span>is_succ_sender</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#aeca71bbfd5153bb0237b15dd654b3293">Engine::NodeGraph::is_succ_sender</a> = typedef <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt;<a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_sender.html">NodeSender</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9dd76d28d62fd29dc5c55709d90b3e95" name="a9dd76d28d62fd29dc5c55709d90b3e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd76d28d62fd29dc5c55709d90b3e95">&#9670;&#160;</a></span>is_range</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#a9dd76d28d62fd29dc5c55709d90b3e95">Engine::NodeGraph::is_range</a> = typedef <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt;<a class="el" href="namespace_engine.html#a11a6e2984bf7f2c81ca283d527e8080b">decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_range.html">NodeRange</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4840800825ffd2140deb1360f5712c31" name="a4840800825ffd2140deb1360f5712c31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4840800825ffd2140deb1360f5712c31">&#9670;&#160;</a></span>is_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#a4840800825ffd2140deb1360f5712c31">Engine::NodeGraph::is_value</a> = typedef std::negation&lt;std::disjunction&lt;<a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">is_algorithm</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#ae41be8fc56d5bb537eb955461b040ab6">is_pred_sender</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#aeca71bbfd5153bb0237b15dd654b3293">is_succ_sender</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">is_algorithm</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a845f8e6cd3f812aa7ff1c516f3ad091c">is_router</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a9dd76d28d62fd29dc5c55709d90b3e95">is_range</a>&lt;T&gt; &gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ba37842b558a2da7aa5104937aa656d" name="a8ba37842b558a2da7aa5104937aa656d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ba37842b558a2da7aa5104937aa656d">&#9670;&#160;</a></span>is_any_algorithm</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#a8ba37842b558a2da7aa5104937aa656d">Engine::NodeGraph::is_any_algorithm</a> = typedef std::disjunction&lt;<a class="el" href="namespace_engine_1_1_node_graph.html#a3f36302ed20b36ca2799dcd107f1958d">is_algorithm</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_node_graph.html#a845f8e6cd3f812aa7ff1c516f3ad091c">is_router</a>&lt;T&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5240abdc410b432b7cf8eb8d006ce96a" name="a5240abdc410b432b7cf8eb8d006ce96a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5240abdc410b432b7cf8eb8d006ce96a">&#9670;&#160;</a></span>remove_deductors</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t I&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#a5240abdc410b432b7cf8eb8d006ce96a">Engine::NodeGraph::remove_deductors</a> = typedef typename <a class="el" href="struct_engine_1_1_node_graph_1_1remove__deductors__impl.html">remove_deductors_impl</a>&lt;T, I&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad3a7a6aa068a511237fbe82b6be05c5e" name="ad3a7a6aa068a511237fbe82b6be05c5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a7a6aa068a511237fbe82b6be05c5e">&#9670;&#160;</a></span>NodeResults</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_node_graph.html#ad3a7a6aa068a511237fbe82b6be05c5e">Engine::NodeGraph::NodeResults</a> = typedef <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a780af30aa255fd0a3713486835079403" name="a780af30aa255fd0a3713486835079403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a780af30aa255fd0a3713486835079403">&#9670;&#160;</a></span>NodeExecutionMask</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_node_graph.html#a780af30aa255fd0a3713486835079403">Engine::NodeGraph::NodeExecutionMask</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a780af30aa255fd0a3713486835079403ab1f0d42aed3adbbda5f5f2aeffe651ca" name="a780af30aa255fd0a3713486835079403ab1f0d42aed3adbbda5f5f2aeffe651ca"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780af30aa255fd0a3713486835079403a509261cabe65d5cfe3044cd38912bc41" name="a780af30aa255fd0a3713486835079403a509261cabe65d5cfe3044cd38912bc41"></a>CPU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780af30aa255fd0a3713486835079403a7430b162df7cc6eff0dbda94a28a0fee" name="a780af30aa255fd0a3713486835079403a7430b162df7cc6eff0dbda94a28a0fee"></a>GPU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a780af30aa255fd0a3713486835079403a519b4fca0bc2d122b286f6a973eace96" name="a780af30aa255fd0a3713486835079403a519b4fca0bc2d122b286f6a973eace96"></a>ALL&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a5c39d79cdf9d0efb2bda06c7164a0dd7" name="a5c39d79cdf9d0efb2bda06c7164a0dd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c39d79cdf9d0efb2bda06c7164a0dd7">&#9670;&#160;</a></span>PinDir</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespace_engine_1_1_node_graph.html#a5c39d79cdf9d0efb2bda06c7164a0dd7">Engine::NodeGraph::PinDir</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5c39d79cdf9d0efb2bda06c7164a0dd7aefeb369cccbd560588a756610865664c" name="a5c39d79cdf9d0efb2bda06c7164a0dd7aefeb369cccbd560588a756610865664c"></a>In&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a5c39d79cdf9d0efb2bda06c7164a0dd7a7c147cda9e49590f6abe83d118b7353b" name="a5c39d79cdf9d0efb2bda06c7164a0dd7a7c147cda9e49590f6abe83d118b7353b"></a>Out&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a514eff5a99ff64ae792f9e6f5545e767" name="a514eff5a99ff64ae792f9e6f5545e767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514eff5a99ff64ae792f9e6f5545e767">&#9670;&#160;</a></span>PinType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespace_engine_1_1_node_graph.html#a514eff5a99ff64ae792f9e6f5545e767">Engine::NodeGraph::PinType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a514eff5a99ff64ae792f9e6f5545e767af1a76f66cca677c6e628d9ca58a6c8fc" name="a514eff5a99ff64ae792f9e6f5545e767af1a76f66cca677c6e628d9ca58a6c8fc"></a>Flow&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a514eff5a99ff64ae792f9e6f5545e767af6068daa29dbb05a7ead1e3b5a48bbee" name="a514eff5a99ff64ae792f9e6f5545e767af6068daa29dbb05a7ead1e3b5a48bbee"></a>Data&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a514eff5a99ff64ae792f9e6f5545e767a67a633ca7b27b0975ef66627c660210e" name="a514eff5a99ff64ae792f9e6f5545e767a67a633ca7b27b0975ef66627c660210e"></a>DataInstance&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a2856e5275fec9eebd7c2b0ea55769082" name="a2856e5275fec9eebd7c2b0ea55769082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2856e5275fec9eebd7c2b0ea55769082">&#9670;&#160;</a></span>EdgeEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">Engine::NodeGraph::EdgeEvent</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2856e5275fec9eebd7c2b0ea55769082a789261ff2b6ef12d02f872f1e2906dd6" name="a2856e5275fec9eebd7c2b0ea55769082a789261ff2b6ef12d02f872f1e2906dd6"></a>CONNECT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2856e5275fec9eebd7c2b0ea55769082aa97ea6db7faa862b0ee58c15bda0451c" name="a2856e5275fec9eebd7c2b0ea55769082aa97ea6db7faa862b0ee58c15bda0451c"></a>DISCONNECT&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a4241ff6b637d7ce75726859cba6f5498" name="a4241ff6b637d7ce75726859cba6f5498"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4241ff6b637d7ce75726859cba6f5498">&#9670;&#160;</a></span>continueExecution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MADGINE_NODEGRAPH_EXPORT <a class="el" href="classvoid.html">void</a> Engine::NodeGraph::continueExecution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>interpreter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a> &amp;&#160;</td>
+          <td class="paramname"><em>location</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2eaa7a4cbf3bcfa74c323a126543f5e8" name="a2eaa7a4cbf3bcfa74c323a126543f5e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eaa7a4cbf3bcfa74c323a126543f5e8">&#9670;&#160;</a></span>NodeReceiverWrapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver_wrapper.html">Engine::NodeGraph::NodeReceiverWrapper</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpret_handle.html">NodeInterpretHandle</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  <a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver_wrapper.html">NodeReceiverWrapper</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node.html">Node</a> &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Log Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Log Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/namespace_engine_1_1_log.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="log-namespace-reference">
+<h1>Log Namespace Reference<a class="headerlink" href="#log-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Log Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_log.html">Log</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Log Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_file_log_listener.html">FileLogListener</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1get__file__name__t.html">get_file_name_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1get__line__nr__t.html">get_line_nr_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1get__log__t.html">get_log_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html">Log</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1log__result__t.html">log_result_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log_dummy.html">LogDummy</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_standard_log.html">StandardLog</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ab5e710376f64f7a1564d910897420f00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#ab5e710376f64f7a1564d910897420f00">log</a> (std::string_view msg, MessageType level, const char *file, size_t line, <a class="el" href="struct_engine_1_1_log_1_1_log.html">Log</a> *log)</td></tr>
+<tr class="separator:ab5e710376f64f7a1564d910897420f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a857c584158cc0e0676a694c7ebbe388a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#a857c584158cc0e0676a694c7ebbe388a">setLog</a> (<a class="el" href="struct_engine_1_1_log_1_1_log.html">Log</a> *<a class="el" href="namespace_engine_1_1_log.html#ab5e710376f64f7a1564d910897420f00">log</a>)</td></tr>
+<tr class="separator:a857c584158cc0e0676a694c7ebbe388a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa9323b56aa80fe30d5dc6a873fc2680a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_log_1_1get__file__name__t.html">get_file_name_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#aa9323b56aa80fe30d5dc6a873fc2680a">get_file_name</a></td></tr>
+<tr class="separator:aa9323b56aa80fe30d5dc6a873fc2680a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a243eaca98cac3023fb55771f23b8205f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_log_1_1get__line__nr__t.html">get_line_nr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#a243eaca98cac3023fb55771f23b8205f">get_line_nr</a></td></tr>
+<tr class="separator:a243eaca98cac3023fb55771f23b8205f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7bd9cda9ef0046ff54e2ab3715de029"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_log_1_1get__log__t.html">get_log_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#ad7bd9cda9ef0046ff54e2ab3715de029">get_log</a></td></tr>
+<tr class="separator:ad7bd9cda9ef0046ff54e2ab3715de029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdef883c2c536d1dff533acf53f59c97"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_log_1_1log__result__t.html">log_result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#abdef883c2c536d1dff533acf53f59c97">log_result</a></td></tr>
+<tr class="separator:abdef883c2c536d1dff533acf53f59c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebbd879003ee3f1455bf8c7219f43a97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_log_1_1_standard_log.html">StandardLog</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#aebbd879003ee3f1455bf8c7219f43a97">sGlobalLog</a> {&quot;Default&quot;}</td></tr>
+<tr class="separator:aebbd879003ee3f1455bf8c7219f43a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3253606d66c32d1f05d0bba7acceac85"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#a3253606d66c32d1f05d0bba7acceac85">sListeners</a></td></tr>
+<tr class="separator:a3253606d66c32d1f05d0bba7acceac85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58fe8d9c536bfeebd029b915e95fbf0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_log_1_1_log.html">Log</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#a58fe8d9c536bfeebd029b915e95fbf0a">sLog</a> = &amp;<a class="el" href="namespace_engine_1_1_log.html#aebbd879003ee3f1455bf8c7219f43a97">sGlobalLog</a></td></tr>
+<tr class="separator:a58fe8d9c536bfeebd029b915e95fbf0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24c426162705ed454980ef8ebb00a384"><td class="memItemLeft" align="right" valign="top">MessageType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#a24c426162705ed454980ef8ebb00a384">sLogLevel</a> = MessageType::DEBUG_TYPE</td></tr>
+<tr class="separator:a24c426162705ed454980ef8ebb00a384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab705fabdf2777463fbcf25458ce72a4b"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_log.html#ab705fabdf2777463fbcf25458ce72a4b">with_log</a></td></tr>
+<tr class="separator:ab705fabdf2777463fbcf25458ce72a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a857c584158cc0e0676a694c7ebbe388a" name="a857c584158cc0e0676a694c7ebbe388a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a857c584158cc0e0676a694c7ebbe388a">&#9670;&#160;</a></span>setLog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INTERFACES_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Log::setLog </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_log_1_1_log.html">Log</a> *&#160;</td>
+          <td class="paramname"><em>log</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5e710376f64f7a1564d910897420f00" name="ab5e710376f64f7a1564d910897420f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5e710376f64f7a1564d910897420f00">&#9670;&#160;</a></span>log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INTERFACES_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Log::log </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MessageType&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_log_1_1_log.html">Log</a> *&#160;</td>
+          <td class="paramname"><em>log</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a3253606d66c32d1f05d0bba7acceac85" name="a3253606d66c32d1f05d0bba7acceac85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3253606d66c32d1f05d0bba7acceac85">&#9670;&#160;</a></span>sListeners</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt;<a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> *&gt; Engine::Log::sListeners</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebbd879003ee3f1455bf8c7219f43a97" name="aebbd879003ee3f1455bf8c7219f43a97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebbd879003ee3f1455bf8c7219f43a97">&#9670;&#160;</a></span>sGlobalLog</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_log_1_1_standard_log.html">StandardLog</a> Engine::Log::sGlobalLog {&quot;Default&quot;}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a58fe8d9c536bfeebd029b915e95fbf0a" name="a58fe8d9c536bfeebd029b915e95fbf0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58fe8d9c536bfeebd029b915e95fbf0a">&#9670;&#160;</a></span>sLog</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_log_1_1_log.html">Log</a> * Engine::Log::sLog = &amp;<a class="el" href="namespace_engine_1_1_log.html#aebbd879003ee3f1455bf8c7219f43a97">sGlobalLog</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9323b56aa80fe30d5dc6a873fc2680a" name="aa9323b56aa80fe30d5dc6a873fc2680a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9323b56aa80fe30d5dc6a873fc2680a">&#9670;&#160;</a></span>get_file_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_log_1_1get__file__name__t.html">get_file_name_t</a> Engine::Log::get_file_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a243eaca98cac3023fb55771f23b8205f" name="a243eaca98cac3023fb55771f23b8205f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a243eaca98cac3023fb55771f23b8205f">&#9670;&#160;</a></span>get_line_nr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_log_1_1get__line__nr__t.html">get_line_nr_t</a> Engine::Log::get_line_nr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad7bd9cda9ef0046ff54e2ab3715de029" name="ad7bd9cda9ef0046ff54e2ab3715de029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7bd9cda9ef0046ff54e2ab3715de029">&#9670;&#160;</a></span>get_log</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_log_1_1get__log__t.html">get_log_t</a> Engine::Log::get_log</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abdef883c2c536d1dff533acf53f59c97" name="abdef883c2c536d1dff533acf53f59c97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdef883c2c536d1dff533acf53f59c97">&#9670;&#160;</a></span>log_result</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_log_1_1log__result__t.html">log_result_t</a> Engine::Log::log_result</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab705fabdf2777463fbcf25458ce72a4b" name="ab705fabdf2777463fbcf25458ce72a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab705fabdf2777463fbcf25458ce72a4b">&#9670;&#160;</a></span>with_log</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::Log::with_log</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](Log *<a class="code hl_function" href="namespace_engine_1_1_log.html#ab5e710376f64f7a1564d910897420f00">log</a>) {</div>
+<div class="line">        <span class="keywordflow">return</span> Execution::with_query_value(get_log, std::move(log));</div>
+<div class="line">    }</div>
+<div class="ttc" id="anamespace_engine_1_1_log_html_ab5e710376f64f7a1564d910897420f00"><div class="ttname"><a href="namespace_engine_1_1_log.html#ab5e710376f64f7a1564d910897420f00">Engine::Log::log</a></div><div class="ttdeci">void log(std::string_view msg, MessageType level, const char *file, size_t line, Log *log)</div><div class="ttdef"><b>Definition:</b> logmethods.cpp:23</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a24c426162705ed454980ef8ebb00a384" name="a24c426162705ed454980ef8ebb00a384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24c426162705ed454980ef8ebb00a384">&#9670;&#160;</a></span>sLogLevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MessageType Engine::Log::sLogLevel = MessageType::DEBUG_TYPE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

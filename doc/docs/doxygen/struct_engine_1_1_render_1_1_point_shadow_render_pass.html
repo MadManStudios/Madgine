@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::PointShadowRenderPass Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::PointShadowRenderPass Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_point_shadow_render_pass.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pointshadowrenderpass-struct-reference">
+<h1>PointShadowRenderPass Struct Reference<a class="headerlink" href="#pointshadowrenderpass-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::PointShadowRenderPass Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html">PointShadowRenderPass</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_render_1_1_point_shadow_render_pass-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::PointShadowRenderPass Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;pointshadowrenderpass.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::PointShadowRenderPass:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_point_shadow_render_pass__inherit__graph.svg" width="234" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4c033c7f647604717a495acc71b6cfc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#a4c033c7f647604717a495acc71b6cfc5">PointShadowRenderPass</a> (size_t index, <a class="el" href="struct_engine_1_1_render_1_1_scene_main_window_component.html">SceneMainWindowComponent</a> &amp;scene, int <a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#ae9a8b40b07ea3d56b94fea4021197621">priority</a>)</td></tr>
+<tr class="separator:a4c033c7f647604717a495acc71b6cfc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74ad36ac070444dce934839defdeaea6"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#a74ad36ac070444dce934839defdeaea6">iterations</a> () const override</td></tr>
+<tr class="separator:a74ad36ac070444dce934839defdeaea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af39a710f885326dc26f8b66520d9f69e"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#af39a710f885326dc26f8b66520d9f69e">name</a> () const override</td></tr>
+<tr class="separator:af39a710f885326dc26f8b66520d9f69e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9a8b40b07ea3d56b94fea4021197621"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#ae9a8b40b07ea3d56b94fea4021197621">priority</a> () const override</td></tr>
+<tr class="separator:ae9a8b40b07ea3d56b94fea4021197621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8f68a5be16a1e47eab2697ebcdd3fe"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#aef8f68a5be16a1e47eab2697ebcdd3fe">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Render::RenderTarget</a> *target, size_t iteration) override</td></tr>
+<tr class="separator:aef8f68a5be16a1e47eab2697ebcdd3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af36f80874d5d0e792f955759c4e54f81"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#af36f80874d5d0e792f955759c4e54f81">setup</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target) override</td></tr>
+<tr class="separator:af36f80874d5d0e792f955759c4e54f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8283b2377e945dc4a9094dd9f76c42c8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#a8283b2377e945dc4a9094dd9f76c42c8">shutdown</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target) override</td></tr>
+<tr class="separator:a8283b2377e945dc4a9094dd9f76c42c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a699b0c0044ddd527d5a4f07b974c738a"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#a699b0c0044ddd527d5a4f07b974c738a">targetCount</a> (size_t) const override</td></tr>
+<tr class="separator:a699b0c0044ddd527d5a4f07b974c738a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2bc91e9e11e380f643e5c66ede68a47"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#ac2bc91e9e11e380f643e5c66ede68a47">targetSubresourceIndex</a> (size_t iteration) const override</td></tr>
+<tr class="separator:ac2bc91e9e11e380f643e5c66ede68a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_pass"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_pass')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">Engine::Render::RenderPass</a></td></tr>
+<tr class="memitem:a3f48f7106a87c14a82d178f691351a43 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a3f48f7106a87c14a82d178f691351a43">~RenderPass</a> ()=default</td></tr>
+<tr class="separator:a3f48f7106a87c14a82d178f691351a43 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf8ab2e40afcee724591bfa21d5b8a6 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a9bf8ab2e40afcee724591bfa21d5b8a6">dependencies</a> () const</td></tr>
+<tr class="separator:a9bf8ab2e40afcee724591bfa21d5b8a6 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf8d2bbdfba8e8147786f6a8e08c5206 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#adf8d2bbdfba8e8147786f6a8e08c5206">iterations</a> () const</td></tr>
+<tr class="separator:adf8d2bbdfba8e8147786f6a8e08c5206 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefee12ba047625b432159a8a5aab5db5 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aefee12ba047625b432159a8a5aab5db5">name</a> () const =0</td></tr>
+<tr class="separator:aefee12ba047625b432159a8a5aab5db5 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac96021959168efcbc341dc7f352cc211 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ac96021959168efcbc341dc7f352cc211">onTargetResize</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;size)</td></tr>
+<tr class="separator:ac96021959168efcbc341dc7f352cc211 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd05ac718ffecfc128d459bb9b55aa8 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a7bd05ac718ffecfc128d459bb9b55aa8">preRender</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt; &gt; &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a9bf8ab2e40afcee724591bfa21d5b8a6">dependencies</a>, <a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
+<tr class="separator:a7bd05ac718ffecfc128d459bb9b55aa8 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a258a0f93a9d9b43bfd3c6069ccd1f01b inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a258a0f93a9d9b43bfd3c6069ccd1f01b">priority</a> () const =0</td></tr>
+<tr class="separator:a258a0f93a9d9b43bfd3c6069ccd1f01b inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a0c6b902e087d5400550ae5840dd123 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a4a0c6b902e087d5400550ae5840dd123">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t iteration)=0</td></tr>
+<tr class="separator:a4a0c6b902e087d5400550ae5840dd123 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad611652b225be228decf1ce025fedba3 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ad611652b225be228decf1ce025fedba3">setup</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
+<tr class="separator:ad611652b225be228decf1ce025fedba3 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33b4f86699c1485077e744b74410d70e inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a33b4f86699c1485077e744b74410d70e">shutdown</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
+<tr class="separator:a33b4f86699c1485077e744b74410d70e inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac179ec9a3bb2a3d8c5e5b67d076a9887 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ac179ec9a3bb2a3d8c5e5b67d076a9887">swapFlipFlopTextures</a> (size_t iteration) const</td></tr>
+<tr class="separator:ac179ec9a3bb2a3d8c5e5b67d076a9887 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6074cb9edbe7ca80797849e852c55bc inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ab6074cb9edbe7ca80797849e852c55bc">targetCount</a> (size_t iteration) const</td></tr>
+<tr class="separator:ab6074cb9edbe7ca80797849e852c55bc inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9086e4e60606292e619020aacbe36f2 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aa9086e4e60606292e619020aacbe36f2">targetIndex</a> (size_t iteration) const</td></tr>
+<tr class="separator:aa9086e4e60606292e619020aacbe36f2 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95cd5c6422bb3a19171d6c7622283d32 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a95cd5c6422bb3a19171d6c7622283d32">targetSubresourceIndex</a> (size_t iteration) const</td></tr>
+<tr class="separator:a95cd5c6422bb3a19171d6c7622283d32 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_debuggable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html">Engine::Render::RenderDebuggable</a></td></tr>
+<tr class="memitem:abf485eac5538d1b79e28a032d5cb9841 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html#abf485eac5538d1b79e28a032d5cb9841">debugCameras</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="struct_engine_1_1_render_1_1_camera.html">Camera</a> &amp;, std::string_view)&gt; handler) const</td></tr>
+<tr class="separator:abf485eac5538d1b79e28a032d5cb9841 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d8e1464ac81cd70458eadf2f11f5d9 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html#af6d8e1464ac81cd70458eadf2f11f5d9">debugFrustums</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="struct_engine_1_1_frustum.html">Frustum</a> &amp;, std::string_view)&gt; handler) const</td></tr>
+<tr class="separator:af6d8e1464ac81cd70458eadf2f11f5d9 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_render_1_1_render_pass"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_render_1_1_render_pass')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">Engine::Render::RenderPass</a></td></tr>
+<tr class="memitem:a9bb814447635eeee9642f4c8213f4042 inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a9bb814447635eeee9642f4c8213f4042">addDependency</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a> *dep)</td></tr>
+<tr class="separator:a9bb814447635eeee9642f4c8213f4042 inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d63e477c496ea4e94de634f55943de inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a88d63e477c496ea4e94de634f55943de">removeDependency</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a> *dep)</td></tr>
+<tr class="separator:a88d63e477c496ea4e94de634f55943de inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4c033c7f647604717a495acc71b6cfc5" name="a4c033c7f647604717a495acc71b6cfc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c033c7f647604717a495acc71b6cfc5">&#9670;&#160;</a></span>PointShadowRenderPass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::PointShadowRenderPass::PointShadowRenderPass </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_scene_main_window_component.html">SceneMainWindowComponent</a> &amp;&#160;</td>
+          <td class="paramname"><em>scene</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af36f80874d5d0e792f955759c4e54f81" name="af36f80874d5d0e792f955759c4e54f81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af36f80874d5d0e792f955759c4e54f81">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::PointShadowRenderPass::setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ad611652b225be228decf1ce025fedba3">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="a8283b2377e945dc4a9094dd9f76c42c8" name="a8283b2377e945dc4a9094dd9f76c42c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8283b2377e945dc4a9094dd9f76c42c8">&#9670;&#160;</a></span>shutdown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::PointShadowRenderPass::shutdown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a33b4f86699c1485077e744b74410d70e">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="aef8f68a5be16a1e47eab2697ebcdd3fe" name="aef8f68a5be16a1e47eab2697ebcdd3fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef8f68a5be16a1e47eab2697ebcdd3fe">&#9670;&#160;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::PointShadowRenderPass::render </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Render::RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>iteration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a4a0c6b902e087d5400550ae5840dd123">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="ae9a8b40b07ea3d56b94fea4021197621" name="ae9a8b40b07ea3d56b94fea4021197621"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9a8b40b07ea3d56b94fea4021197621">&#9670;&#160;</a></span>priority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Render::PointShadowRenderPass::priority </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a258a0f93a9d9b43bfd3c6069ccd1f01b">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="a74ad36ac070444dce934839defdeaea6" name="a74ad36ac070444dce934839defdeaea6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74ad36ac070444dce934839defdeaea6">&#9670;&#160;</a></span>iterations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Render::PointShadowRenderPass::iterations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#adf8d2bbdfba8e8147786f6a8e08c5206">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="ac2bc91e9e11e380f643e5c66ede68a47" name="ac2bc91e9e11e380f643e5c66ede68a47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2bc91e9e11e380f643e5c66ede68a47">&#9670;&#160;</a></span>targetSubresourceIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Render::PointShadowRenderPass::targetSubresourceIndex </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>iteration</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a95cd5c6422bb3a19171d6c7622283d32">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="a699b0c0044ddd527d5a4f07b974c738a" name="a699b0c0044ddd527d5a4f07b974c738a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a699b0c0044ddd527d5a4f07b974c738a">&#9670;&#160;</a></span>targetCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Render::PointShadowRenderPass::targetCount </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ab6074cb9edbe7ca80797849e852c55bc">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="af39a710f885326dc26f8b66520d9f69e" name="af39a710f885326dc26f8b66520d9f69e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af39a710f885326dc26f8b66520d9f69e">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::Render::PointShadowRenderPass::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aefee12ba047625b432159a8a5aab5db5">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/misc/scene/renderer/Madgine/render/<a class="el" href="pointshadowrenderpass_8h.html">pointshadowrenderpass.h</a></li>
+<li>plugins/misc/scene/renderer/Madgine/render/<a class="el" href="pointshadowrenderpass_8cpp.html">pointshadowrenderpass.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1099 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Stream Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Stream Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_stream.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stream-struct-reference">
+<h1>Stream Struct Reference<a class="headerlink" href="#stream-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Stream Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_stream.html">Stream</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="struct_engine_1_1_stream-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Stream Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;stream.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Stream:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_stream__inherit__graph.svg" width="134" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7e0855344048a0ae00e4d792ca46a9cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a7e0855344048a0ae00e4d792ca46a9cf">Stream</a> ()</td></tr>
+<tr class="separator:a7e0855344048a0ae00e4d792ca46a9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64c2691c884a671dc27df9c2b4055a77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a64c2691c884a671dc27df9c2b4055a77">Stream</a> (std::unique_ptr&lt; std::streambuf &gt; <a class="el" href="struct_engine_1_1_stream.html#a28dfefea090f4f6491af09d189bef5f2">buffer</a>)</td></tr>
+<tr class="separator:a64c2691c884a671dc27df9c2b4055a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affb1cc1545a6f6c2fbb4d153e308f47a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#affb1cc1545a6f6c2fbb4d153e308f47a">Stream</a> (<a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&amp;other)</td></tr>
+<tr class="separator:affb1cc1545a6f6c2fbb4d153e308f47a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac97252ae0c4a41631b056301c7f79c54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#ac97252ae0c4a41631b056301c7f79c54">~Stream</a> ()</td></tr>
+<tr class="separator:ac97252ae0c4a41631b056301c7f79c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28dfefea090f4f6491af09d189bef5f2"><td class="memItemLeft" align="right" valign="top">std::streambuf &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a28dfefea090f4f6491af09d189bef5f2">buffer</a> () const</td></tr>
+<tr class="separator:a28dfefea090f4f6491af09d189bef5f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2b5a4e63551eabc3768c3f529fd8e0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#af2b5a4e63551eabc3768c3f529fd8e0c">clear</a> ()</td></tr>
+<tr class="separator:af2b5a4e63551eabc3768c3f529fd8e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9131c583d5116a9ed80d90fe09964f0"><td class="memItemLeft" align="right" valign="top">std::istreambuf_iterator&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#aa9131c583d5116a9ed80d90fe09964f0">end</a> ()</td></tr>
+<tr class="separator:aa9131c583d5116a9ed80d90fe09964f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf35954754c4eef2fcc0dc75d3851600"><td class="memItemLeft" align="right" valign="top">std::streamsize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#adf35954754c4eef2fcc0dc75d3851600">gcount</a> ()</td></tr>
+<tr class="separator:adf35954754c4eef2fcc0dc75d3851600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50568984fcbdfa194beae95130bfe6c1"><td class="memItemLeft" align="right" valign="top">std::locale&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a50568984fcbdfa194beae95130bfe6c1">getloc</a> () const</td></tr>
+<tr class="separator:a50568984fcbdfa194beae95130bfe6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eaccb6a3742ff391bcefb7a76db72de"><td class="memItemLeft" align="right" valign="top">std::locale&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a4eaccb6a3742ff391bcefb7a76db72de">imbue</a> (const std::locale &amp;loc)</td></tr>
+<tr class="separator:a4eaccb6a3742ff391bcefb7a76db72de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ade8014edf7e03697f119491923c7ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a4ade8014edf7e03697f119491923c7ef">isSkipWs</a> () const</td></tr>
+<tr class="separator:a4ade8014edf7e03697f119491923c7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf23e9cb9ce339f3b4c9f68f034aab2"><td class="memItemLeft" align="right" valign="top">std::istreambuf_iterator&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#afaf23e9cb9ce339f3b4c9f68f034aab2">iterator</a> ()</td></tr>
+<tr class="separator:afaf23e9cb9ce339f3b4c9f68f034aab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64ec0657860ac7b7bb747a8e82c5e1a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a64ec0657860ac7b7bb747a8e82c5e1a7">operator bool</a> () const</td></tr>
+<tr class="separator:a64ec0657860ac7b7bb747a8e82c5e1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4aecaaac19427f1bd3e9b3b9bb57ec3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af4aecaaac19427f1bd3e9b3b9bb57ec3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#af4aecaaac19427f1bd3e9b3b9bb57ec3">operator&lt;&lt;</a> (const T &amp;t)</td></tr>
+<tr class="separator:af4aecaaac19427f1bd3e9b3b9bb57ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6059d76517f5f53d767248e7233dbc47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a6059d76517f5f53d767248e7233dbc47">operator=</a> (<a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a6059d76517f5f53d767248e7233dbc47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcef2b121db08e61fe059308aeef17e1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:adcef2b121db08e61fe059308aeef17e1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#adcef2b121db08e61fe059308aeef17e1">operator&gt;&gt;</a> (T &amp;t)</td></tr>
+<tr class="separator:adcef2b121db08e61fe059308aeef17e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59410bc2331a6bc781a652cb8f6ef8e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a59410bc2331a6bc781a652cb8f6ef8e9">pipe</a> (<a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;in)</td></tr>
+<tr class="separator:a59410bc2331a6bc781a652cb8f6ef8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6cb1a3f5f9c3f15a4524ec2cfd5c7a"><td class="memItemLeft" align="right" valign="top">std::streamsize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#aff6cb1a3f5f9c3f15a4524ec2cfd5c7a">read</a> (<a class="el" href="classvoid.html">void</a> *<a class="el" href="struct_engine_1_1_stream.html#a28dfefea090f4f6491af09d189bef5f2">buffer</a>, size_t size)</td></tr>
+<tr class="separator:aff6cb1a3f5f9c3f15a4524ec2cfd5c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f9b2c99f73531a617223f6350c48a10"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; std::streambuf &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a1f9b2c99f73531a617223f6350c48a10">release</a> ()</td></tr>
+<tr class="separator:a1f9b2c99f73531a617223f6350c48a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27083d55a9f51b8b4d07a0e3a54abbdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a27083d55a9f51b8b4d07a0e3a54abbdf">seek</a> (<a class="el" href="namespace_engine.html#a818de93862634021c19ce3820d3f1a32">off_type</a> p, std::ios::seekdir dir)</td></tr>
+<tr class="separator:a27083d55a9f51b8b4d07a0e3a54abbdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c9ee9dddfc4acf6105c75f76810994"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a43c9ee9dddfc4acf6105c75f76810994">seek</a> (<a class="el" href="namespace_engine.html#a4371734c39a5a0405527b2d3bd4f7e02">pos_type</a> p)</td></tr>
+<tr class="separator:a43c9ee9dddfc4acf6105c75f76810994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c357f468723e64dca6fae10b1c20c9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a5c357f468723e64dca6fae10b1c20c9b">setState</a> (std::ios_base::iostate <a class="el" href="struct_engine_1_1_stream.html#a819b65a7d20615b61fc477b7ceec3f9e">state</a>)</td></tr>
+<tr class="separator:a5c357f468723e64dca6fae10b1c20c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d5da6564b5d5c04d92a3e715ae8adc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a3d5da6564b5d5c04d92a3e715ae8adc0">skipWs</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> overwrite=false)</td></tr>
+<tr class="separator:a3d5da6564b5d5c04d92a3e715ae8adc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a819b65a7d20615b61fc477b7ceec3f9e"><td class="memItemLeft" align="right" valign="top">std::ios_base::iostate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a819b65a7d20615b61fc477b7ceec3f9e">state</a> () const</td></tr>
+<tr class="separator:a819b65a7d20615b61fc477b7ceec3f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f540a55e57b85a8955d9ca915cb0a6"><td class="memItemLeft" align="right" valign="top">std::iostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#ae0f540a55e57b85a8955d9ca915cb0a6">stream</a> ()</td></tr>
+<tr class="separator:ae0f540a55e57b85a8955d9ca915cb0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a626ea63c55cfe4db024fa2bf94b9ff04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a4371734c39a5a0405527b2d3bd4f7e02">pos_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a626ea63c55cfe4db024fa2bf94b9ff04">tell</a> ()</td></tr>
+<tr class="separator:a626ea63c55cfe4db024fa2bf94b9ff04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf698d6c57e8f715175af3a9dcc75e2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4cf698d6c57e8f715175af3a9dcc75e2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a4cf698d6c57e8f715175af3a9dcc75e2">write</a> (const T &amp;t)</td></tr>
+<tr class="separator:a4cf698d6c57e8f715175af3a9dcc75e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad881f21608a9e2e4697ff8653175c1f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#ad881f21608a9e2e4697ff8653175c1f5">write</a> (const <a class="el" href="classvoid.html">void</a> *data, size_t count)</td></tr>
+<tr class="separator:ad881f21608a9e2e4697ff8653175c1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a1db5160c4260ef76e57fe1f33b2463c6"><td class="memItemLeft" align="right" valign="top">std::iostream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html#a1db5160c4260ef76e57fe1f33b2463c6">mStream</a></td></tr>
+<tr class="separator:a1db5160c4260ef76e57fe1f33b2463c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7e0855344048a0ae00e4d792ca46a9cf" name="a7e0855344048a0ae00e4d792ca46a9cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0855344048a0ae00e4d792ca46a9cf">&#9670;&#160;</a></span>Stream() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Stream::Stream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64c2691c884a671dc27df9c2b4055a77" name="a64c2691c884a671dc27df9c2b4055a77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64c2691c884a671dc27df9c2b4055a77">&#9670;&#160;</a></span>Stream() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Stream::Stream </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; std::streambuf &gt;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="affb1cc1545a6f6c2fbb4d153e308f47a" name="affb1cc1545a6f6c2fbb4d153e308f47a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affb1cc1545a6f6c2fbb4d153e308f47a">&#9670;&#160;</a></span>Stream() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Stream::Stream </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac97252ae0c4a41631b056301c7f79c54" name="ac97252ae0c4a41631b056301c7f79c54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac97252ae0c4a41631b056301c7f79c54">&#9670;&#160;</a></span>~Stream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Stream::~Stream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6059d76517f5f53d767248e7233dbc47" name="a6059d76517f5f53d767248e7233dbc47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6059d76517f5f53d767248e7233dbc47">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp; Engine::Stream::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adcef2b121db08e61fe059308aeef17e1" name="adcef2b121db08e61fe059308aeef17e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcef2b121db08e61fe059308aeef17e1">&#9670;&#160;</a></span>operator&gt;&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp; Engine::Stream::operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afaf23e9cb9ce339f3b4c9f68f034aab2" name="afaf23e9cb9ce339f3b4c9f68f034aab2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaf23e9cb9ce339f3b4c9f68f034aab2">&#9670;&#160;</a></span>iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istreambuf_iterator&lt; char &gt; Engine::Stream::iterator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9131c583d5116a9ed80d90fe09964f0" name="aa9131c583d5116a9ed80d90fe09964f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9131c583d5116a9ed80d90fe09964f0">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istreambuf_iterator&lt; char &gt; Engine::Stream::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff6cb1a3f5f9c3f15a4524ec2cfd5c7a" name="aff6cb1a3f5f9c3f15a4524ec2cfd5c7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff6cb1a3f5f9c3f15a4524ec2cfd5c7a">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::streamsize Engine::Stream::read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a626ea63c55cfe4db024fa2bf94b9ff04" name="a626ea63c55cfe4db024fa2bf94b9ff04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a626ea63c55cfe4db024fa2bf94b9ff04">&#9670;&#160;</a></span>tell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine.html#a4371734c39a5a0405527b2d3bd4f7e02">pos_type</a> Engine::Stream::tell </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf35954754c4eef2fcc0dc75d3851600" name="adf35954754c4eef2fcc0dc75d3851600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf35954754c4eef2fcc0dc75d3851600">&#9670;&#160;</a></span>gcount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::streamsize Engine::Stream::gcount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43c9ee9dddfc4acf6105c75f76810994" name="a43c9ee9dddfc4acf6105c75f76810994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43c9ee9dddfc4acf6105c75f76810994">&#9670;&#160;</a></span>seek() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Stream::seek </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine.html#a4371734c39a5a0405527b2d3bd4f7e02">pos_type</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27083d55a9f51b8b4d07a0e3a54abbdf" name="a27083d55a9f51b8b4d07a0e3a54abbdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27083d55a9f51b8b4d07a0e3a54abbdf">&#9670;&#160;</a></span>seek() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Stream::seek </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine.html#a818de93862634021c19ce3820d3f1a32">off_type</a>&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ios::seekdir&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a819b65a7d20615b61fc477b7ceec3f9e" name="a819b65a7d20615b61fc477b7ceec3f9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a819b65a7d20615b61fc477b7ceec3f9e">&#9670;&#160;</a></span>state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ios_base::iostate Engine::Stream::state </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2b5a4e63551eabc3768c3f529fd8e0c" name="af2b5a4e63551eabc3768c3f529fd8e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2b5a4e63551eabc3768c3f529fd8e0c">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Stream::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5c357f468723e64dca6fae10b1c20c9b" name="a5c357f468723e64dca6fae10b1c20c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c357f468723e64dca6fae10b1c20c9b">&#9670;&#160;</a></span>setState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Stream::setState </td>
+          <td>(</td>
+          <td class="paramtype">std::ios_base::iostate&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d5da6564b5d5c04d92a3e715ae8adc0" name="a3d5da6564b5d5c04d92a3e715ae8adc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d5da6564b5d5c04d92a3e715ae8adc0">&#9670;&#160;</a></span>skipWs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Stream::skipWs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>overwrite</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ade8014edf7e03697f119491923c7ef" name="a4ade8014edf7e03697f119491923c7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ade8014edf7e03697f119491923c7ef">&#9670;&#160;</a></span>isSkipWs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Stream::isSkipWs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af4aecaaac19427f1bd3e9b3b9bb57ec3" name="af4aecaaac19427f1bd3e9b3b9bb57ec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4aecaaac19427f1bd3e9b3b9bb57ec3">&#9670;&#160;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp; Engine::Stream::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad881f21608a9e2e4697ff8653175c1f5" name="ad881f21608a9e2e4697ff8653175c1f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad881f21608a9e2e4697ff8653175c1f5">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Stream::write </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4cf698d6c57e8f715175af3a9dcc75e2" name="a4cf698d6c57e8f715175af3a9dcc75e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cf698d6c57e8f715175af3a9dcc75e2">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Stream::write </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64ec0657860ac7b7bb747a8e82c5e1a7" name="a64ec0657860ac7b7bb747a8e82c5e1a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64ec0657860ac7b7bb747a8e82c5e1a7">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Stream::operator <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f9b2c99f73531a617223f6350c48a10" name="a1f9b2c99f73531a617223f6350c48a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f9b2c99f73531a617223f6350c48a10">&#9670;&#160;</a></span>release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; std::streambuf &gt; Engine::Stream::release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59410bc2331a6bc781a652cb8f6ef8e9" name="a59410bc2331a6bc781a652cb8f6ef8e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59410bc2331a6bc781a652cb8f6ef8e9">&#9670;&#160;</a></span>pipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Stream::pipe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae0f540a55e57b85a8955d9ca915cb0a6" name="ae0f540a55e57b85a8955d9ca915cb0a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f540a55e57b85a8955d9ca915cb0a6">&#9670;&#160;</a></span>stream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::iostream &amp; Engine::Stream::stream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28dfefea090f4f6491af09d189bef5f2" name="a28dfefea090f4f6491af09d189bef5f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28dfefea090f4f6491af09d189bef5f2">&#9670;&#160;</a></span>buffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::streambuf &amp; Engine::Stream::buffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50568984fcbdfa194beae95130bfe6c1" name="a50568984fcbdfa194beae95130bfe6c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50568984fcbdfa194beae95130bfe6c1">&#9670;&#160;</a></span>getloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::locale Engine::Stream::getloc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4eaccb6a3742ff391bcefb7a76db72de" name="a4eaccb6a3742ff391bcefb7a76db72de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eaccb6a3742ff391bcefb7a76db72de">&#9670;&#160;</a></span>imbue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::locale Engine::Stream::imbue </td>
+          <td>(</td>
+          <td class="paramtype">const std::locale &amp;&#160;</td>
+          <td class="paramname"><em>loc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1db5160c4260ef76e57fe1f33b2463c6" name="a1db5160c4260ef76e57fe1f33b2463c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1db5160c4260ef76e57fe1f33b2463c6">&#9670;&#160;</a></span>mStream</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::iostream Engine::Stream::mStream</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="stream_8h.html">stream.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

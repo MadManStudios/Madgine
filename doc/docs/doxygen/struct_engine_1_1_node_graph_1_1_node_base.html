@@ -1,0 +1,3298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::NodeGraph::NodeBase Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::NodeGraph::NodeBase Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_node_graph_1_1_node_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nodebase-struct-reference">
+<h1>NodeBase Struct Reference<a class="headerlink" href="#nodebase-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::NodeGraph::NodeBase Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_node_graph.html">NodeGraph</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_node_graph_1_1_node_base-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::NodeGraph::NodeBase Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;nodebase.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::NodeGraph::NodeBase:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_node_graph_1_1_node_base__inherit__graph.svg" width="194" height="403"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aba99c3ec258f6b6f6023254e348362e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aba99c3ec258f6b6f6023254e348362e7">NodeBase</a> (const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &amp;other, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph)</td></tr>
+<tr class="separator:aba99c3ec258f6b6f6023254e348362e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13556ad5b07b7cd94881e5779213cce3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a13556ad5b07b7cd94881e5779213cce3">NodeBase</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph)</td></tr>
+<tr class="separator:a13556ad5b07b7cd94881e5779213cce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde45156c05873c86182959c21fc8af8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#afde45156c05873c86182959c21fc8af8">~NodeBase</a> ()=default</td></tr>
+<tr class="separator:afde45156c05873c86182959c21fc8af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec5a2fc1944e459cf7f46a249d8bfb44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aec5a2fc1944e459cf7f46a249d8bfb44">addVariadicPin</a> (uint32_t group)</td></tr>
+<tr class="separator:aec5a2fc1944e459cf7f46a249d8bfb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00f7504f9c19952e4e3b5888e955e968"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a00f7504f9c19952e4e3b5888e955e968">className</a> () const =0</td></tr>
+<tr class="separator:a00f7504f9c19952e4e3b5888e955e968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99866ada582f6d40409d6d5d908f635d"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a99866ada582f6d40409d6d5d908f635d">clone</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph) const =0</td></tr>
+<tr class="separator:a99866ada582f6d40409d6d5d908f635d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2170d27bc559e6ff98a8cd14550bd280"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2170d27bc559e6ff98a8cd14550bd280">dataInCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a2170d27bc559e6ff98a8cd14550bd280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92c7a3a50127793cdd06ba3560a1f49f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a92c7a3a50127793cdd06ba3560a1f49f">dataInDefault</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a92c7a3a50127793cdd06ba3560a1f49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1437c089fc5b893f4050230f70a87233"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a1437c089fc5b893f4050230f70a87233">dataInGroupCount</a> () const</td></tr>
+<tr class="separator:a1437c089fc5b893f4050230f70a87233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab01ab0c675f46c70b813ee2466b1569"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aab01ab0c675f46c70b813ee2466b1569">dataInMask</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:aab01ab0c675f46c70b813ee2466b1569"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192cb0dfcd3a3f93ff81a1321534282d"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a192cb0dfcd3a3f93ff81a1321534282d">dataInName</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a192cb0dfcd3a3f93ff81a1321534282d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa096fdfc51bb9035bc21df81f1c0f108"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aa096fdfc51bb9035bc21df81f1c0f108">dataInSource</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:aa096fdfc51bb9035bc21df81f1c0f108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797d3496272766b21d534b42ece05240"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a797d3496272766b21d534b42ece05240">dataInType</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:a797d3496272766b21d534b42ece05240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2efead73ed7ded9cbb5bf4ea3d7ee9eb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2efead73ed7ded9cbb5bf4ea3d7ee9eb">dataInVariadic</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a2efead73ed7ded9cbb5bf4ea3d7ee9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e3a6e97715d14644f87995c345b01f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae3e3a6e97715d14644f87995c345b01f">dataOutCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:ae3e3a6e97715d14644f87995c345b01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a153437816087f7dd0c74f1b711422ec8"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a153437816087f7dd0c74f1b711422ec8">dataOutGroupCount</a> () const</td></tr>
+<tr class="separator:a153437816087f7dd0c74f1b711422ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e111a28891468d689303c95a0697d25"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2e111a28891468d689303c95a0697d25">dataOutMask</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:a2e111a28891468d689303c95a0697d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4be1c2c1a1439911f45c735d58a1fd"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a3f4be1c2c1a1439911f45c735d58a1fd">dataOutName</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a3f4be1c2c1a1439911f45c735d58a1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7293d567d0262fc3c4f1d4f0d01247d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a7293d567d0262fc3c4f1d4f0d01247d5">dataOutTarget</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a7293d567d0262fc3c4f1d4f0d01247d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f3f9e8f403b8d14e52173810cc944d1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a5f3f9e8f403b8d14e52173810cc944d1">dataOutType</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:a5f3f9e8f403b8d14e52173810cc944d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a778c41667f9a9a76184cebb291a8a62c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a778c41667f9a9a76184cebb291a8a62c">dataOutVariadic</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a778c41667f9a9a76184cebb291a8a62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a665f1e7c48a4db1aeb0ea967d3eb8d8f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a665f1e7c48a4db1aeb0ea967d3eb8d8f">dataProviderCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a665f1e7c48a4db1aeb0ea967d3eb8d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e87386b28bcfa691260714ea3af8416"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a0e87386b28bcfa691260714ea3af8416">dataProviderGroupCount</a> () const</td></tr>
+<tr class="separator:a0e87386b28bcfa691260714ea3af8416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7be33ac8802bd84f4802ddaa04473910"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a7be33ac8802bd84f4802ddaa04473910">dataProviderMask</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:a7be33ac8802bd84f4802ddaa04473910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1cd68db8981d45bd414717885ce85c6"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ac1cd68db8981d45bd414717885ce85c6">dataProviderName</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:ac1cd68db8981d45bd414717885ce85c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b342bc0bf332ee2e7422048860642c"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ab2b342bc0bf332ee2e7422048860642c">dataProviderTargets</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:ab2b342bc0bf332ee2e7422048860642c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac466a391dc698f189a56bd836045125c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ac466a391dc698f189a56bd836045125c">dataProviderType</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:ac466a391dc698f189a56bd836045125c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d216302a7c6015ba8ef6c6c3338ef7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae4d216302a7c6015ba8ef6c6c3338ef7">dataProviderVariadic</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:ae4d216302a7c6015ba8ef6c6c3338ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00fde43d5f88fb1422cb6149738fb87d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a00fde43d5f88fb1422cb6149738fb87d">dataReceiverCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a00fde43d5f88fb1422cb6149738fb87d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc85cf86ce0cea99f5861b646b1d444f"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#afc85cf86ce0cea99f5861b646b1d444f">dataReceiverGroupCount</a> () const</td></tr>
+<tr class="separator:afc85cf86ce0cea99f5861b646b1d444f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04336e53a175ebef223b0dafc25b7713"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a04336e53a175ebef223b0dafc25b7713">dataReceiverMask</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:a04336e53a175ebef223b0dafc25b7713"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdca245de664fbc7516aa7a944dca4fb"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#afdca245de664fbc7516aa7a944dca4fb">dataReceiverName</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:afdca245de664fbc7516aa7a944dca4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84e265fde351e17caa53c6d201cd2184"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a84e265fde351e17caa53c6d201cd2184">dataReceiverSources</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a84e265fde351e17caa53c6d201cd2184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa35309ba48c734f0affcab7fc0626610"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aa35309ba48c734f0affcab7fc0626610">dataReceiverType</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:aa35309ba48c734f0affcab7fc0626610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98ea65e5494c4aa2ed68c02e30d355cc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a98ea65e5494c4aa2ed68c02e30d355cc">dataReceiverVariadic</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a98ea65e5494c4aa2ed68c02e30d355cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae57d584458586871b72aba7a41025009"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae57d584458586871b72aba7a41025009">flowInCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:ae57d584458586871b72aba7a41025009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c9503f0c18d9a6f57f338701a8b67c"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a08c9503f0c18d9a6f57f338701a8b67c">flowInGroupCount</a> () const</td></tr>
+<tr class="separator:a08c9503f0c18d9a6f57f338701a8b67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d4c05c7d611dbe6a6c5eae87f2a70d3"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a6d4c05c7d611dbe6a6c5eae87f2a70d3">flowInMask</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:a6d4c05c7d611dbe6a6c5eae87f2a70d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a1304c9c8259f5ed04524fde4f7fd41"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a9a1304c9c8259f5ed04524fde4f7fd41">flowInName</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a9a1304c9c8259f5ed04524fde4f7fd41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28c05ec14dfe5bb7e3a2b3e6ee9bcc0d"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a28c05ec14dfe5bb7e3a2b3e6ee9bcc0d">flowInSources</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a28c05ec14dfe5bb7e3a2b3e6ee9bcc0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae39bdf75602156381b7dbbe6eedfeb33"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae39bdf75602156381b7dbbe6eedfeb33">flowOutCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:ae39bdf75602156381b7dbbe6eedfeb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8431315b5b3aa0dea3e3b8b287adfb"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aed8431315b5b3aa0dea3e3b8b287adfb">flowOutGroupCount</a> () const</td></tr>
+<tr class="separator:aed8431315b5b3aa0dea3e3b8b287adfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba17a8dc8fa93581c1c9057aa5eeb398"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aba17a8dc8fa93581c1c9057aa5eeb398">flowOutMask</a> (uint32_t index, uint32_t group=0, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> bidir=true) const</td></tr>
+<tr class="separator:aba17a8dc8fa93581c1c9057aa5eeb398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a369724cc9a15e35092afb1ad58d8a2c7"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a369724cc9a15e35092afb1ad58d8a2c7">flowOutName</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a369724cc9a15e35092afb1ad58d8a2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e804953f1dea643f9ba2c3914711c3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a6e804953f1dea643f9ba2c3914711c3a">flowOutTarget</a> (uint32_t index, uint32_t group=0) const</td></tr>
+<tr class="separator:a6e804953f1dea643f9ba2c3914711c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac58dd206f80fb6ec237a9af650053d5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aac58dd206f80fb6ec237a9af650053d5">flowOutVariadic</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:aac58dd206f80fb6ec237a9af650053d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39ac99601acec1e3ceb250f7d6987a4b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a39ac99601acec1e3ceb250f7d6987a4b">generate</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;generator, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;data, uint32_t flowIn, uint32_t group=0) const</td></tr>
+<tr class="separator:a39ac99601acec1e3ceb250f7d6987a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13f9d18eead1e2718c814fdacf27bcfc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a13f9d18eead1e2718c814fdacf27bcfc">generateRead</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;generator, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;data, uint32_t providerIndex, uint32_t group=0) const</td></tr>
+<tr class="separator:a13f9d18eead1e2718c814fdacf27bcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c0efe785a8522ee1ebee2fac8a2e57f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a5c0efe785a8522ee1ebee2fac8a2e57f">generateWrite</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;generator, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;data, uint32_t receiverIndex, uint32_t group=0) const</td></tr>
+<tr class="separator:a5c0efe785a8522ee1ebee2fac8a2e57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8ae4d3c0b009f5f2366863702abac5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a5d8ae4d3c0b009f5f2366863702abac5">interpret</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver.html">NodeReceiver</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; receiver, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;data, uint32_t flowIn, uint32_t group=0) const</td></tr>
+<tr class="separator:a5d8ae4d3c0b009f5f2366863702abac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83cb7a1e060dee59f8d583d2d315de1b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_behavior_error.html">BehaviorError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a83cb7a1e060dee59f8d583d2d315de1b">interpretRead</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;interpreter, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;retVal, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;data, uint32_t providerIndex, uint32_t group=0) const</td></tr>
+<tr class="separator:a83cb7a1e060dee59f8d583d2d315de1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f3a2c804b19c221098479d2c592d2ef"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a9f3a2c804b19c221098479d2c592d2ef">interpretWrite</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;interpreter, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;data, const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;v, uint32_t receiverIndex, uint32_t group=0) const</td></tr>
+<tr class="separator:a9f3a2c804b19c221098479d2c592d2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58dab5c56c38c367860a6385c45d29eb"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a58dab5c56c38c367860a6385c45d29eb">name</a> () const =0</td></tr>
+<tr class="separator:a58dab5c56c38c367860a6385c45d29eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af854fc08bc9ee2567a4767ca72a520eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#af854fc08bc9ee2567a4767ca72a520eb">onDataInRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:af854fc08bc9ee2567a4767ca72a520eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a183a5abda2a3efd174a018480cd360ce"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a183a5abda2a3efd174a018480cd360ce">onDataInUpdate</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a> event)</td></tr>
+<tr class="separator:a183a5abda2a3efd174a018480cd360ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4e64e05445887bdc377b6bd8b226be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a1e4e64e05445887bdc377b6bd8b226be">onDataOutRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a1e4e64e05445887bdc377b6bd8b226be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0ad8d3b62d05197d3f2cd1eca513167"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ad0ad8d3b62d05197d3f2cd1eca513167">onDataOutUpdate</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a> event)</td></tr>
+<tr class="separator:ad0ad8d3b62d05197d3f2cd1eca513167"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae10b8c806329ce8236caeb061ecbd26c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae10b8c806329ce8236caeb061ecbd26c">onDataProviderRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:ae10b8c806329ce8236caeb061ecbd26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd3fa4e2176c77a6c5619981afbc479"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a7dd3fa4e2176c77a6c5619981afbc479">onDataProviderUpdate</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a> event)</td></tr>
+<tr class="separator:a7dd3fa4e2176c77a6c5619981afbc479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32916d7b62c1c41b6ac559a68c858dc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a32916d7b62c1c41b6ac559a68c858dc6">onDataReceiverRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a32916d7b62c1c41b6ac559a68c858dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5fe72e82ecb3b90e4eee4eb9081f68f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ae5fe72e82ecb3b90e4eee4eb9081f68f">onDataReceiverUpdate</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a> event)</td></tr>
+<tr class="separator:ae5fe72e82ecb3b90e4eee4eb9081f68f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9940718df92cb5d29c2bcf9fa37210f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a9940718df92cb5d29c2bcf9fa37210f7">onFlowInRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a9940718df92cb5d29c2bcf9fa37210f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff33b7797811c0569f8feeaf9d390ce1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aff33b7797811c0569f8feeaf9d390ce1">onFlowInUpdate</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> target, <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a> event)</td></tr>
+<tr class="separator:aff33b7797811c0569f8feeaf9d390ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a770ef6f2eae547907d8eeb0fb9907b50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a770ef6f2eae547907d8eeb0fb9907b50">onFlowOutRemove</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a770ef6f2eae547907d8eeb0fb9907b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc6e3e20f57c6ddbaf40866b6717862f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#afc6e3e20f57c6ddbaf40866b6717862f">onFlowOutUpdate</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> source, <a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a> event)</td></tr>
+<tr class="separator:afc6e3e20f57c6ddbaf40866b6717862f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67fd93ad9f5d32678e3353b225da202c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a67fd93ad9f5d32678e3353b225da202c">onNodeReindex</a> (uint32_t oldIndex, uint32_t newIndex)</td></tr>
+<tr class="separator:a67fd93ad9f5d32678e3353b225da202c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4609acb09cbbd7836f636827fad859"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a0f4609acb09cbbd7836f636827fad859">removeDataInPin</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a0f4609acb09cbbd7836f636827fad859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe6038cd221b7640ab11129bea5fa84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aafe6038cd221b7640ab11129bea5fa84">removeDataOutPin</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:aafe6038cd221b7640ab11129bea5fa84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a0d03b8a8392852686b6c308dfa9c22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a5a0d03b8a8392852686b6c308dfa9c22">removeDataProviderPin</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a5a0d03b8a8392852686b6c308dfa9c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e54cc8715918d0a437e99c02d831cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a29e54cc8715918d0a437e99c02d831cd">removeDataReceiverPin</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a29e54cc8715918d0a437e99c02d831cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cc4586ec695c1c8fb1549312ca546e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2cc4586ec695c1c8fb1549312ca546e5">removeFlowInPin</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a2cc4586ec695c1c8fb1549312ca546e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd68c68e51b8d569fe556ddac3c550b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#abd68c68e51b8d569fe556ddac3c550b4">removeFlowOutPin</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:abd68c68e51b8d569fe556ddac3c550b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9879961225c4b0c370a307bdc581080f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a9879961225c4b0c370a307bdc581080f">removeVariadicPin</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a9879961225c4b0c370a307bdc581080f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f6b1a074af758f9d683dc83a7f39885"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a9f6b1a074af758f9d683dc83a7f39885">setupInterpret</a> (<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;interpreter, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;data) const</td></tr>
+<tr class="separator:a9f6b1a074af758f9d683dc83a7f39885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df79889e0735e5edb2729a9c68dcee5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a5df79889e0735e5edb2729a9c68dcee5">variadicPinCount</a> (uint32_t group) const</td></tr>
+<tr class="separator:a5df79889e0735e5edb2729a9c68dcee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html">Engine::Serialize::VirtualSerializableDataBase&lt; VirtualScopeBase&lt;&gt; &gt;</a></td></tr>
+<tr class="memitem:a4080aa7558545d734b7c0e8d490bd2e4 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_const_ptr.html">SerializableDataConstPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html#a4080aa7558545d734b7c0e8d490bd2e4">customUnitPtr</a> () const=0</td></tr>
+<tr class="separator:a4080aa7558545d734b7c0e8d490bd2e4 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89ab97b888fa1bdff7c758e4eec8965 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html#aa89ab97b888fa1bdff7c758e4eec8965">customUnitPtr</a> ()=0</td></tr>
+<tr class="separator:aa89ab97b888fa1bdff7c758e4eec8965 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_virtual_scope_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_virtual_scope_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_virtual_scope_base.html">Engine::VirtualScopeBase&lt; Base &gt;</a></td></tr>
+<tr class="memitem:ae14d52eebaa3e94377d7a5b1f6ca688e inherit pub_methods_struct_engine_1_1_virtual_scope_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope_base.html#ae14d52eebaa3e94377d7a5b1f6ca688e">customScopePtr</a> ()=0</td></tr>
+<tr class="separator:ae14d52eebaa3e94377d7a5b1f6ca688e inherit pub_methods_struct_engine_1_1_virtual_scope_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a6dfa613a043dcffb88f784393f076072"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a6dfa613a043dcffb88f784393f076072">dataInId</a> (uint32_t index, uint32_t group=0)</td></tr>
+<tr class="separator:a6dfa613a043dcffb88f784393f076072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2478696a67225bb6a8ca9b0217c1aa83"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a2478696a67225bb6a8ca9b0217c1aa83">dataOutId</a> (uint32_t index, uint32_t group=0)</td></tr>
+<tr class="separator:a2478696a67225bb6a8ca9b0217c1aa83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a321ff8ab2637f4a11c3a36430144e9d4"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a321ff8ab2637f4a11c3a36430144e9d4">dataProviderId</a> (uint32_t index, uint32_t group=0)</td></tr>
+<tr class="separator:a321ff8ab2637f4a11c3a36430144e9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb7dde4b14e905aeec40885837db9c1"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#aabb7dde4b14e905aeec40885837db9c1">dataReceiverId</a> (uint32_t index, uint32_t group=0)</td></tr>
+<tr class="separator:aabb7dde4b14e905aeec40885837db9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad92ff22e8d1f98a431f852eb6d4fe34c"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ad92ff22e8d1f98a431f852eb6d4fe34c">flowInId</a> (uint32_t index, uint32_t group=0)</td></tr>
+<tr class="separator:ad92ff22e8d1f98a431f852eb6d4fe34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a008cc901e755462cd344575b213f0641"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a008cc901e755462cd344575b213f0641">flowOutId</a> (uint32_t index, uint32_t group=0)</td></tr>
+<tr class="separator:a008cc901e755462cd344575b213f0641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e7ee770cc53986d5b57d8562d96754c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_node_graph_1_1_pin_desc.html">PinDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a5e7ee770cc53986d5b57d8562d96754c">pinFromId</a> (uint32_t id)</td></tr>
+<tr class="separator:a5e7ee770cc53986d5b57d8562d96754c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:acfcae30ab89149e1fd0d69090f3e268b"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#acfcae30ab89149e1fd0d69090f3e268b">dataInBaseCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:acfcae30ab89149e1fd0d69090f3e268b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f30c2c2ff267f8a87c1c22229f651f3"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a6f30c2c2ff267f8a87c1c22229f651f3">dataOutBaseCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a6f30c2c2ff267f8a87c1c22229f651f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a73d889668cb30db456827e7159a596"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a8a73d889668cb30db456827e7159a596">dataProviderBaseCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:a8a73d889668cb30db456827e7159a596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1f7326e0b2a07e4a9833cf00be51ec"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ace1f7326e0b2a07e4a9833cf00be51ec">dataReceiverBaseCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:ace1f7326e0b2a07e4a9833cf00be51ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af51cc1225d71e6b0aabc3482a58a30d1"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#af51cc1225d71e6b0aabc3482a58a30d1">flowOutBaseCount</a> (uint32_t group=0) const</td></tr>
+<tr class="separator:af51cc1225d71e6b0aabc3482a58a30d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867bb01979b96169d93068afad2aaa0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a867bb01979b96169d93068afad2aaa0c">setup</a> ()</td></tr>
+<tr class="separator:a867bb01979b96169d93068afad2aaa0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:af1b0d0256b2752264384a156bb61d68c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_in_pin_prototype.html">DataInPinPrototype</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#af1b0d0256b2752264384a156bb61d68c">mDataInPins</a></td></tr>
+<tr class="separator:af1b0d0256b2752264384a156bb61d68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a784704bb7a0339eca7878ed61fcce401"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_out_pin_prototype.html">DataOutPinPrototype</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a784704bb7a0339eca7878ed61fcce401">mDataOutPins</a></td></tr>
+<tr class="separator:a784704bb7a0339eca7878ed61fcce401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395961e506e5f631dc4026c848b14c18"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_provider_pin_prototype.html">DataProviderPinPrototype</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a395961e506e5f631dc4026c848b14c18">mDataProviderPins</a></td></tr>
+<tr class="separator:a395961e506e5f631dc4026c848b14c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7ebdc215e121abfd0c349efb2a9bf5a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_data_receiver_pin_prototype.html">DataReceiverPinPrototype</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#ac7ebdc215e121abfd0c349efb2a9bf5a">mDataReceiverPins</a></td></tr>
+<tr class="separator:ac7ebdc215e121abfd0c349efb2a9bf5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74e6052efacc41eaaf113c8ad86c807"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_flow_in_pin_prototype.html">FlowInPinPrototype</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#af74e6052efacc41eaaf113c8ad86c807">mFlowInPins</a></td></tr>
+<tr class="separator:af74e6052efacc41eaaf113c8ad86c807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e3308ce7dfed3508c16f87d465de2c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_flow_out_pin_prototype.html">FlowOutPinPrototype</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a02e3308ce7dfed3508c16f87d465de2c">mFlowOutPins</a></td></tr>
+<tr class="separator:a02e3308ce7dfed3508c16f87d465de2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a669172bc0a56977d1ee6a934a13fceb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a669172bc0a56977d1ee6a934a13fceb9">mGraph</a></td></tr>
+<tr class="separator:a669172bc0a56977d1ee6a934a13fceb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a39c3d6278baa01182caf59f9f03e68e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#a39c3d6278baa01182caf59f9f03e68e7">NodeGraph</a></td></tr>
+<tr class="separator:a39c3d6278baa01182caf59f9f03e68e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a13556ad5b07b7cd94881e5779213cce3" name="a13556ad5b07b7cd94881e5779213cce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13556ad5b07b7cd94881e5779213cce3">&#9670;&#160;</a></span>NodeBase() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NodeBase::NodeBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba99c3ec258f6b6f6023254e348362e7" name="aba99c3ec258f6b6f6023254e348362e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba99c3ec258f6b6f6023254e348362e7">&#9670;&#160;</a></span>NodeBase() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NodeBase::NodeBase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afde45156c05873c86182959c21fc8af8" name="afde45156c05873c86182959c21fc8af8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde45156c05873c86182959c21fc8af8">&#9670;&#160;</a></span>~NodeBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::NodeGraph::NodeBase::~NodeBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a58dab5c56c38c367860a6385c45d29eb" name="a58dab5c56c38c367860a6385c45d29eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58dab5c56c38c367860a6385c45d29eb">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00f7504f9c19952e4e3b5888e955e968" name="a00f7504f9c19952e4e3b5888e955e968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00f7504f9c19952e4e3b5888e955e968">&#9670;&#160;</a></span>className()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::className </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a08c9503f0c18d9a6f57f338701a8b67c" name="a08c9503f0c18d9a6f57f338701a8b67c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c9503f0c18d9a6f57f338701a8b67c">&#9670;&#160;</a></span>flowInGroupCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::flowInGroupCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae57d584458586871b72aba7a41025009" name="ae57d584458586871b72aba7a41025009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae57d584458586871b72aba7a41025009">&#9670;&#160;</a></span>flowInCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::flowInCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a1304c9c8259f5ed04524fde4f7fd41" name="a9a1304c9c8259f5ed04524fde4f7fd41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a1304c9c8259f5ed04524fde4f7fd41">&#9670;&#160;</a></span>flowInName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::flowInName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6d4c05c7d611dbe6a6c5eae87f2a70d3" name="a6d4c05c7d611dbe6a6c5eae87f2a70d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d4c05c7d611dbe6a6c5eae87f2a70d3">&#9670;&#160;</a></span>flowInMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::flowInMask </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#abe0c86588127fdf77321b79df0719b7b">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a28c05ec14dfe5bb7e3a2b3e6ee9bcc0d" name="a28c05ec14dfe5bb7e3a2b3e6ee9bcc0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28c05ec14dfe5bb7e3a2b3e6ee9bcc0d">&#9670;&#160;</a></span>flowInSources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> &gt; &amp; NodeBase::flowInSources </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad92ff22e8d1f98a431f852eb6d4fe34c" name="ad92ff22e8d1f98a431f852eb6d4fe34c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad92ff22e8d1f98a431f852eb6d4fe34c">&#9670;&#160;</a></span>flowInId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::flowInId </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed8431315b5b3aa0dea3e3b8b287adfb" name="aed8431315b5b3aa0dea3e3b8b287adfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed8431315b5b3aa0dea3e3b8b287adfb">&#9670;&#160;</a></span>flowOutGroupCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::flowOutGroupCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae39bdf75602156381b7dbbe6eedfeb33" name="ae39bdf75602156381b7dbbe6eedfeb33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae39bdf75602156381b7dbbe6eedfeb33">&#9670;&#160;</a></span>flowOutCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::flowOutCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a369724cc9a15e35092afb1ad58d8a2c7" name="a369724cc9a15e35092afb1ad58d8a2c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a369724cc9a15e35092afb1ad58d8a2c7">&#9670;&#160;</a></span>flowOutName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::flowOutName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba17a8dc8fa93581c1c9057aa5eeb398" name="aba17a8dc8fa93581c1c9057aa5eeb398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba17a8dc8fa93581c1c9057aa5eeb398">&#9670;&#160;</a></span>flowOutMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::flowOutMask </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#a2b5e33e09599b63b145c2e6418504230">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aac58dd206f80fb6ec237a9af650053d5" name="aac58dd206f80fb6ec237a9af650053d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac58dd206f80fb6ec237a9af650053d5">&#9670;&#160;</a></span>flowOutVariadic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::NodeGraph::NodeBase::flowOutVariadic </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e804953f1dea643f9ba2c3914711c3a" name="a6e804953f1dea643f9ba2c3914711c3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e804953f1dea643f9ba2c3914711c3a">&#9670;&#160;</a></span>flowOutTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> NodeBase::flowOutTarget </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a008cc901e755462cd344575b213f0641" name="a008cc901e755462cd344575b213f0641"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a008cc901e755462cd344575b213f0641">&#9670;&#160;</a></span>flowOutId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::flowOutId </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1437c089fc5b893f4050230f70a87233" name="a1437c089fc5b893f4050230f70a87233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1437c089fc5b893f4050230f70a87233">&#9670;&#160;</a></span>dataInGroupCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataInGroupCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2170d27bc559e6ff98a8cd14550bd280" name="a2170d27bc559e6ff98a8cd14550bd280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2170d27bc559e6ff98a8cd14550bd280">&#9670;&#160;</a></span>dataInCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataInCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a192cb0dfcd3a3f93ff81a1321534282d" name="a192cb0dfcd3a3f93ff81a1321534282d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192cb0dfcd3a3f93ff81a1321534282d">&#9670;&#160;</a></span>dataInName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::dataInName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab01ab0c675f46c70b813ee2466b1569" name="aab01ab0c675f46c70b813ee2466b1569"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab01ab0c675f46c70b813ee2466b1569">&#9670;&#160;</a></span>dataInMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataInMask </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#a1f1a0412278b61fbcb689ecb0514bd18">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a797d3496272766b21d534b42ece05240" name="a797d3496272766b21d534b42ece05240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a797d3496272766b21d534b42ece05240">&#9670;&#160;</a></span>dataInType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeBase::dataInType </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2efead73ed7ded9cbb5bf4ea3d7ee9eb" name="a2efead73ed7ded9cbb5bf4ea3d7ee9eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2efead73ed7ded9cbb5bf4ea3d7ee9eb">&#9670;&#160;</a></span>dataInVariadic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::NodeGraph::NodeBase::dataInVariadic </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a92c7a3a50127793cdd06ba3560a1f49f" name="a92c7a3a50127793cdd06ba3560a1f49f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92c7a3a50127793cdd06ba3560a1f49f">&#9670;&#160;</a></span>dataInDefault()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> NodeBase::dataInDefault </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa096fdfc51bb9035bc21df81f1c0f108" name="aa096fdfc51bb9035bc21df81f1c0f108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa096fdfc51bb9035bc21df81f1c0f108">&#9670;&#160;</a></span>dataInSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> NodeBase::dataInSource </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6dfa613a043dcffb88f784393f076072" name="a6dfa613a043dcffb88f784393f076072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dfa613a043dcffb88f784393f076072">&#9670;&#160;</a></span>dataInId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataInId </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a153437816087f7dd0c74f1b711422ec8" name="a153437816087f7dd0c74f1b711422ec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a153437816087f7dd0c74f1b711422ec8">&#9670;&#160;</a></span>dataOutGroupCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataOutGroupCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3e3a6e97715d14644f87995c345b01f" name="ae3e3a6e97715d14644f87995c345b01f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e3a6e97715d14644f87995c345b01f">&#9670;&#160;</a></span>dataOutCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataOutCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f4be1c2c1a1439911f45c735d58a1fd" name="a3f4be1c2c1a1439911f45c735d58a1fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f4be1c2c1a1439911f45c735d58a1fd">&#9670;&#160;</a></span>dataOutName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::dataOutName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e111a28891468d689303c95a0697d25" name="a2e111a28891468d689303c95a0697d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e111a28891468d689303c95a0697d25">&#9670;&#160;</a></span>dataOutMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataOutMask </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#a786c457746b81fe78344b5e4e481468e">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a5f3f9e8f403b8d14e52173810cc944d1" name="a5f3f9e8f403b8d14e52173810cc944d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f3f9e8f403b8d14e52173810cc944d1">&#9670;&#160;</a></span>dataOutType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeBase::dataOutType </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a778c41667f9a9a76184cebb291a8a62c" name="a778c41667f9a9a76184cebb291a8a62c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a778c41667f9a9a76184cebb291a8a62c">&#9670;&#160;</a></span>dataOutVariadic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::NodeGraph::NodeBase::dataOutVariadic </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7293d567d0262fc3c4f1d4f0d01247d5" name="a7293d567d0262fc3c4f1d4f0d01247d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7293d567d0262fc3c4f1d4f0d01247d5">&#9670;&#160;</a></span>dataOutTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> NodeBase::dataOutTarget </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2478696a67225bb6a8ca9b0217c1aa83" name="a2478696a67225bb6a8ca9b0217c1aa83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2478696a67225bb6a8ca9b0217c1aa83">&#9670;&#160;</a></span>dataOutId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataOutId </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc85cf86ce0cea99f5861b646b1d444f" name="afc85cf86ce0cea99f5861b646b1d444f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc85cf86ce0cea99f5861b646b1d444f">&#9670;&#160;</a></span>dataReceiverGroupCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataReceiverGroupCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00fde43d5f88fb1422cb6149738fb87d" name="a00fde43d5f88fb1422cb6149738fb87d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00fde43d5f88fb1422cb6149738fb87d">&#9670;&#160;</a></span>dataReceiverCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataReceiverCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afdca245de664fbc7516aa7a944dca4fb" name="afdca245de664fbc7516aa7a944dca4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdca245de664fbc7516aa7a944dca4fb">&#9670;&#160;</a></span>dataReceiverName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::dataReceiverName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04336e53a175ebef223b0dafc25b7713" name="a04336e53a175ebef223b0dafc25b7713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04336e53a175ebef223b0dafc25b7713">&#9670;&#160;</a></span>dataReceiverMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataReceiverMask </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#abb30cc387baf5269c5c065dbf23baad0">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa35309ba48c734f0affcab7fc0626610" name="aa35309ba48c734f0affcab7fc0626610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa35309ba48c734f0affcab7fc0626610">&#9670;&#160;</a></span>dataReceiverType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeBase::dataReceiverType </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98ea65e5494c4aa2ed68c02e30d355cc" name="a98ea65e5494c4aa2ed68c02e30d355cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98ea65e5494c4aa2ed68c02e30d355cc">&#9670;&#160;</a></span>dataReceiverVariadic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::NodeGraph::NodeBase::dataReceiverVariadic </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a84e265fde351e17caa53c6d201cd2184" name="a84e265fde351e17caa53c6d201cd2184"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84e265fde351e17caa53c6d201cd2184">&#9670;&#160;</a></span>dataReceiverSources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> &gt; &amp; NodeBase::dataReceiverSources </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aabb7dde4b14e905aeec40885837db9c1" name="aabb7dde4b14e905aeec40885837db9c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabb7dde4b14e905aeec40885837db9c1">&#9670;&#160;</a></span>dataReceiverId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataReceiverId </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e87386b28bcfa691260714ea3af8416" name="a0e87386b28bcfa691260714ea3af8416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e87386b28bcfa691260714ea3af8416">&#9670;&#160;</a></span>dataProviderGroupCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataProviderGroupCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a665f1e7c48a4db1aeb0ea967d3eb8d8f" name="a665f1e7c48a4db1aeb0ea967d3eb8d8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a665f1e7c48a4db1aeb0ea967d3eb8d8f">&#9670;&#160;</a></span>dataProviderCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataProviderCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac1cd68db8981d45bd414717885ce85c6" name="ac1cd68db8981d45bd414717885ce85c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1cd68db8981d45bd414717885ce85c6">&#9670;&#160;</a></span>dataProviderName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::NodeGraph::NodeBase::dataProviderName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7be33ac8802bd84f4802ddaa04473910" name="a7be33ac8802bd84f4802ddaa04473910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7be33ac8802bd84f4802ddaa04473910">&#9670;&#160;</a></span>dataProviderMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataProviderMask </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_node_graph_1_1_auto_mask_node.html#a1a134d96fd8c41b76a5aafcc21605edd">Engine::NodeGraph::AutoMaskNode&lt; Base &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ac466a391dc698f189a56bd836045125c" name="ac466a391dc698f189a56bd836045125c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac466a391dc698f189a56bd836045125c">&#9670;&#160;</a></span>dataProviderType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::NodeGraph::NodeBase::dataProviderType </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>bidir</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4d216302a7c6015ba8ef6c6c3338ef7" name="ae4d216302a7c6015ba8ef6c6c3338ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d216302a7c6015ba8ef6c6c3338ef7">&#9670;&#160;</a></span>dataProviderVariadic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::NodeGraph::NodeBase::dataProviderVariadic </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab2b342bc0bf332ee2e7422048860642c" name="ab2b342bc0bf332ee2e7422048860642c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2b342bc0bf332ee2e7422048860642c">&#9670;&#160;</a></span>dataProviderTargets()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a> &gt; &amp; NodeBase::dataProviderTargets </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a321ff8ab2637f4a11c3a36430144e9d4" name="a321ff8ab2637f4a11c3a36430144e9d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a321ff8ab2637f4a11c3a36430144e9d4">&#9670;&#160;</a></span>dataProviderId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t NodeBase::dataProviderId </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e7ee770cc53986d5b57d8562d96754c" name="a5e7ee770cc53986d5b57d8562d96754c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e7ee770cc53986d5b57d8562d96754c">&#9670;&#160;</a></span>pinFromId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin_desc.html">PinDesc</a> NodeBase::pinFromId </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc6e3e20f57c6ddbaf40866b6717862f" name="afc6e3e20f57c6ddbaf40866b6717862f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc6e3e20f57c6ddbaf40866b6717862f">&#9670;&#160;</a></span>onFlowOutUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onFlowOutUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a>&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a183a5abda2a3efd174a018480cd360ce" name="a183a5abda2a3efd174a018480cd360ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a183a5abda2a3efd174a018480cd360ce">&#9670;&#160;</a></span>onDataInUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataInUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a>&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0ad8d3b62d05197d3f2cd1eca513167" name="ad0ad8d3b62d05197d3f2cd1eca513167"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0ad8d3b62d05197d3f2cd1eca513167">&#9670;&#160;</a></span>onDataOutUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataOutUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a>&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff33b7797811c0569f8feeaf9d390ce1" name="aff33b7797811c0569f8feeaf9d390ce1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff33b7797811c0569f8feeaf9d390ce1">&#9670;&#160;</a></span>onFlowInUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onFlowInUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a>&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7dd3fa4e2176c77a6c5619981afbc479" name="a7dd3fa4e2176c77a6c5619981afbc479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd3fa4e2176c77a6c5619981afbc479">&#9670;&#160;</a></span>onDataProviderUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataProviderUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a>&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5fe72e82ecb3b90e4eee4eb9081f68f" name="ae5fe72e82ecb3b90e4eee4eb9081f68f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5fe72e82ecb3b90e4eee4eb9081f68f">&#9670;&#160;</a></span>onDataReceiverUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataReceiverUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_node_graph.html#a2856e5275fec9eebd7c2b0ea55769082">EdgeEvent</a>&#160;</td>
+          <td class="paramname"><em>event</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec5a2fc1944e459cf7f46a249d8bfb44" name="aec5a2fc1944e459cf7f46a249d8bfb44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec5a2fc1944e459cf7f46a249d8bfb44">&#9670;&#160;</a></span>addVariadicPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::addVariadicPin </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9879961225c4b0c370a307bdc581080f" name="a9879961225c4b0c370a307bdc581080f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9879961225c4b0c370a307bdc581080f">&#9670;&#160;</a></span>removeVariadicPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::removeVariadicPin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5df79889e0735e5edb2729a9c68dcee5" name="a5df79889e0735e5edb2729a9c68dcee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df79889e0735e5edb2729a9c68dcee5">&#9670;&#160;</a></span>variadicPinCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t NodeBase::variadicPinCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2cc4586ec695c1c8fb1549312ca546e5" name="a2cc4586ec695c1c8fb1549312ca546e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cc4586ec695c1c8fb1549312ca546e5">&#9670;&#160;</a></span>removeFlowInPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::removeFlowInPin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd68c68e51b8d569fe556ddac3c550b4" name="abd68c68e51b8d569fe556ddac3c550b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd68c68e51b8d569fe556ddac3c550b4">&#9670;&#160;</a></span>removeFlowOutPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::removeFlowOutPin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f4609acb09cbbd7836f636827fad859" name="a0f4609acb09cbbd7836f636827fad859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4609acb09cbbd7836f636827fad859">&#9670;&#160;</a></span>removeDataInPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::removeDataInPin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aafe6038cd221b7640ab11129bea5fa84" name="aafe6038cd221b7640ab11129bea5fa84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe6038cd221b7640ab11129bea5fa84">&#9670;&#160;</a></span>removeDataOutPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::removeDataOutPin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29e54cc8715918d0a437e99c02d831cd" name="a29e54cc8715918d0a437e99c02d831cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29e54cc8715918d0a437e99c02d831cd">&#9670;&#160;</a></span>removeDataReceiverPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::removeDataReceiverPin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a0d03b8a8392852686b6c308dfa9c22" name="a5a0d03b8a8392852686b6c308dfa9c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a0d03b8a8392852686b6c308dfa9c22">&#9670;&#160;</a></span>removeDataProviderPin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::removeDataProviderPin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9940718df92cb5d29c2bcf9fa37210f7" name="a9940718df92cb5d29c2bcf9fa37210f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9940718df92cb5d29c2bcf9fa37210f7">&#9670;&#160;</a></span>onFlowInRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onFlowInRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a770ef6f2eae547907d8eeb0fb9907b50" name="a770ef6f2eae547907d8eeb0fb9907b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a770ef6f2eae547907d8eeb0fb9907b50">&#9670;&#160;</a></span>onFlowOutRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onFlowOutRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af854fc08bc9ee2567a4767ca72a520eb" name="af854fc08bc9ee2567a4767ca72a520eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af854fc08bc9ee2567a4767ca72a520eb">&#9670;&#160;</a></span>onDataInRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataInRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e4e64e05445887bdc377b6bd8b226be" name="a1e4e64e05445887bdc377b6bd8b226be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4e64e05445887bdc377b6bd8b226be">&#9670;&#160;</a></span>onDataOutRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataOutRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32916d7b62c1c41b6ac559a68c858dc6" name="a32916d7b62c1c41b6ac559a68c858dc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32916d7b62c1c41b6ac559a68c858dc6">&#9670;&#160;</a></span>onDataReceiverRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataReceiverRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae10b8c806329ce8236caeb061ecbd26c" name="ae10b8c806329ce8236caeb061ecbd26c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae10b8c806329ce8236caeb061ecbd26c">&#9670;&#160;</a></span>onDataProviderRemove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onDataProviderRemove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a67fd93ad9f5d32678e3353b225da202c" name="a67fd93ad9f5d32678e3353b225da202c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67fd93ad9f5d32678e3353b225da202c">&#9670;&#160;</a></span>onNodeReindex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::onNodeReindex </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>oldIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>newIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f6b1a074af758f9d683dc83a7f39885" name="a9f6b1a074af758f9d683dc83a7f39885"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f6b1a074af758f9d683dc83a7f39885">&#9670;&#160;</a></span>setupInterpret()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::setupInterpret </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>interpreter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d8ae4d3c0b009f5f2366863702abac5" name="a5d8ae4d3c0b009f5f2366863702abac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d8ae4d3c0b009f5f2366863702abac5">&#9670;&#160;</a></span>interpret()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::interpret </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_receiver.html">NodeReceiver</a>&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flowIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83cb7a1e060dee59f8d583d2d315de1b" name="a83cb7a1e060dee59f8d583d2d315de1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83cb7a1e060dee59f8d583d2d315de1b">&#9670;&#160;</a></span>interpretRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_error.html">BehaviorError</a> NodeBase::interpretRead </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>interpreter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td>
+          <td class="paramname"><em>retVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>providerIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f3a2c804b19c221098479d2c592d2ef" name="a9f3a2c804b19c221098479d2c592d2ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f3a2c804b19c221098479d2c592d2ef">&#9670;&#160;</a></span>interpretWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::interpretWrite </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>interpreter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>receiverIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39ac99601acec1e3ceb250f7d6987a4b" name="a39ac99601acec1e3ceb250f7d6987a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39ac99601acec1e3ceb250f7d6987a4b">&#9670;&#160;</a></span>generate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::generate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
+          <td class="paramname"><em>generator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flowIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13f9d18eead1e2718c814fdacf27bcfc" name="a13f9d18eead1e2718c814fdacf27bcfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13f9d18eead1e2718c814fdacf27bcfc">&#9670;&#160;</a></span>generateRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a> NodeBase::generateRead </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
+          <td class="paramname"><em>generator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>providerIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5c0efe785a8522ee1ebee2fac8a2e57f" name="a5c0efe785a8522ee1ebee2fac8a2e57f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c0efe785a8522ee1ebee2fac8a2e57f">&#9670;&#160;</a></span>generateWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a> NodeBase::generateWrite </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
+          <td class="paramname"><em>generator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>receiverIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99866ada582f6d40409d6d5d908f635d" name="a99866ada582f6d40409d6d5d908f635d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99866ada582f6d40409d6d5d908f635d">&#9670;&#160;</a></span>clone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; Engine::NodeGraph::NodeBase::clone </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af51cc1225d71e6b0aabc3482a58a30d1" name="af51cc1225d71e6b0aabc3482a58a30d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af51cc1225d71e6b0aabc3482a58a30d1">&#9670;&#160;</a></span>flowOutBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::flowOutBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfcae30ab89149e1fd0d69090f3e268b" name="acfcae30ab89149e1fd0d69090f3e268b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfcae30ab89149e1fd0d69090f3e268b">&#9670;&#160;</a></span>dataInBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataInBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f30c2c2ff267f8a87c1c22229f651f3" name="a6f30c2c2ff267f8a87c1c22229f651f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f30c2c2ff267f8a87c1c22229f651f3">&#9670;&#160;</a></span>dataOutBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataOutBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace1f7326e0b2a07e4a9833cf00be51ec" name="ace1f7326e0b2a07e4a9833cf00be51ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace1f7326e0b2a07e4a9833cf00be51ec">&#9670;&#160;</a></span>dataReceiverBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataReceiverBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a73d889668cb30db456827e7159a596" name="a8a73d889668cb30db456827e7159a596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a73d889668cb30db456827e7159a596">&#9670;&#160;</a></span>dataProviderBaseCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t Engine::NodeGraph::NodeBase::dataProviderBaseCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>group</em> = <code>0</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a867bb01979b96169d93068afad2aaa0c" name="a867bb01979b96169d93068afad2aaa0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a867bb01979b96169d93068afad2aaa0c">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a39c3d6278baa01182caf59f9f03e68e7" name="a39c3d6278baa01182caf59f9f03e68e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39c3d6278baa01182caf59f9f03e68e7">&#9670;&#160;</a></span>NodeGraph</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a669172bc0a56977d1ee6a934a13fceb9" name="a669172bc0a56977d1ee6a934a13fceb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a669172bc0a56977d1ee6a934a13fceb9">&#9670;&#160;</a></span>mGraph</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html">NodeGraph</a>&amp; Engine::NodeGraph::NodeBase::mGraph</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02e3308ce7dfed3508c16f87d465de2c" name="a02e3308ce7dfed3508c16f87d465de2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e3308ce7dfed3508c16f87d465de2c">&#9670;&#160;</a></span>mFlowOutPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_flow_out_pin_prototype.html">FlowOutPinPrototype</a>&gt; &gt; Engine::NodeGraph::NodeBase::mFlowOutPins</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1b0d0256b2752264384a156bb61d68c" name="af1b0d0256b2752264384a156bb61d68c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1b0d0256b2752264384a156bb61d68c">&#9670;&#160;</a></span>mDataInPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_in_pin_prototype.html">DataInPinPrototype</a>&gt; &gt; Engine::NodeGraph::NodeBase::mDataInPins</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a784704bb7a0339eca7878ed61fcce401" name="a784704bb7a0339eca7878ed61fcce401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a784704bb7a0339eca7878ed61fcce401">&#9670;&#160;</a></span>mDataOutPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_out_pin_prototype.html">DataOutPinPrototype</a>&gt; &gt; Engine::NodeGraph::NodeBase::mDataOutPins</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a395961e506e5f631dc4026c848b14c18" name="a395961e506e5f631dc4026c848b14c18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395961e506e5f631dc4026c848b14c18">&#9670;&#160;</a></span>mDataProviderPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_provider_pin_prototype.html">DataProviderPinPrototype</a>&gt; &gt; Engine::NodeGraph::NodeBase::mDataProviderPins</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7ebdc215e121abfd0c349efb2a9bf5a" name="ac7ebdc215e121abfd0c349efb2a9bf5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ebdc215e121abfd0c349efb2a9bf5a">&#9670;&#160;</a></span>mDataReceiverPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_data_receiver_pin_prototype.html">DataReceiverPinPrototype</a>&gt; &gt; Engine::NodeGraph::NodeBase::mDataReceiverPins</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af74e6052efacc41eaaf113c8ad86c807" name="af74e6052efacc41eaaf113c8ad86c807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af74e6052efacc41eaaf113c8ad86c807">&#9670;&#160;</a></span>mFlowInPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_node_graph_1_1_flow_in_pin_prototype.html">FlowInPinPrototype</a>&gt; &gt; Engine::NodeGraph::NodeBase::mFlowInPins</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="nodebase_8h.html">nodebase.h</a></li>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="nodebase_8cpp.html">nodebase.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

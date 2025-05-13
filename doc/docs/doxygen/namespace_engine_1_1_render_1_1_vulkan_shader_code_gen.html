@@ -1,0 +1,877 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::VulkanShaderCodeGen Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::VulkanShaderCodeGen Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vulkanshadercodegen-namespace-reference">
+<h1>VulkanShaderCodeGen Namespace Reference<a class="headerlink" href="#vulkanshadercodegen-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::VulkanShaderCodeGen Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html">VulkanShaderCodeGen</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::VulkanShaderCodeGen Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a2050459a1841664fc6353c09c58a57d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a2050459a1841664fc6353c09c58a57d2">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_arith_operation.html">CodeGen::ArithOperation</a> &amp;op)</td></tr>
+<tr class="separator:a2050459a1841664fc6353c09c58a57d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58372001d4e20542d0eed405aef97c91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a58372001d4e20542d0eed405aef97c91">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_assignment.html">CodeGen::Assignment</a> &amp;statement)</td></tr>
+<tr class="separator:a58372001d4e20542d0eed405aef97c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44237da529ca415c8e2738c70ca7f268"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a44237da529ca415c8e2738c70ca7f268">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_constant.html">CodeGen::Constant</a> &amp;c)</td></tr>
+<tr class="separator:a44237da529ca415c8e2738c70ca7f268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dbd56e0ffe5d6cce8ef517b1231a187"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a3dbd56e0ffe5d6cce8ef517b1231a187">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_constructor.html">CodeGen::Constructor</a> &amp;ctor)</td></tr>
+<tr class="separator:a3dbd56e0ffe5d6cce8ef517b1231a187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a205a06d0ff564a1c7d289b8f13b780"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a1a205a06d0ff564a1c7d289b8f13b780">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CodeGen::CustomCodeBlock</a> &amp;block)</td></tr>
+<tr class="separator:a1a205a06d0ff564a1c7d289b8f13b780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1601cdbb546e6c263dfeb68c28c9c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a7e1601cdbb546e6c263dfeb68c28c9c9">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_member_access.html">CodeGen::MemberAccess</a> &amp;access)</td></tr>
+<tr class="separator:a7e1601cdbb546e6c263dfeb68c28c9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b63c3c3497d258921596eb9910b8081"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a8b63c3c3497d258921596eb9910b8081">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_namespace.html">CodeGen::Namespace</a> &amp;ns)</td></tr>
+<tr class="separator:a8b63c3c3497d258921596eb9910b8081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615d8076965788595b773f6cbc467eef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a615d8076965788595b773f6cbc467eef">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_return.html">CodeGen::Return</a> &amp;statement)</td></tr>
+<tr class="separator:a615d8076965788595b773f6cbc467eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad80e3652b2a8c69ae58163c4b049ae21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#ad80e3652b2a8c69ae58163c4b049ae21">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_shader_file.html">CodeGen::ShaderFile</a> &amp;file, uint32_t index)</td></tr>
+<tr class="separator:ad80e3652b2a8c69ae58163c4b049ae21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f34eed45dc860fc017b7a3593ea0cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a98f34eed45dc860fc017b7a3593ea0cd">generate</a> (std::ostream &amp;stream, const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a> &amp;statement)</td></tr>
+<tr class="separator:a98f34eed45dc860fc017b7a3593ea0cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19e5ae66d31d8f72f8378a630de53b39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a19e5ae66d31d8f72f8378a630de53b39">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_variable_access.html">CodeGen::VariableAccess</a> &amp;statement)</td></tr>
+<tr class="separator:a19e5ae66d31d8f72f8378a630de53b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce06cc32769d3210c2bf25e55ecf551"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#adce06cc32769d3210c2bf25e55ecf551">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_variable_definition.html">CodeGen::VariableDefinition</a> &amp;def)</td></tr>
+<tr class="separator:adce06cc32769d3210c2bf25e55ecf551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0e15e18b5bc8ee4943de69d8891ca90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#ab0e15e18b5bc8ee4943de69d8891ca90">generate</a> (std::ostream &amp;stream, const float &amp;f)</td></tr>
+<tr class="separator:ab0e15e18b5bc8ee4943de69d8891ca90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a4d5706365add7f930cb4bdadb354d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a93a4d5706365add7f930cb4bdadb354d">generate</a> (std::ostream &amp;stream, const std::string_view &amp;v)</td></tr>
+<tr class="separator:a93a4d5706365add7f930cb4bdadb354d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51aa2c4329704550ee97578614a2d567"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a51aa2c4329704550ee97578614a2d567"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a51aa2c4329704550ee97578614a2d567">generate</a> (std::ostream &amp;stream, const T &amp;v)</td></tr>
+<tr class="separator:a51aa2c4329704550ee97578614a2d567"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c4f154e0654772f7e75e17b62f07c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a91c4f154e0654772f7e75e17b62f07c3">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="separator:a91c4f154e0654772f7e75e17b62f07c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30726bf87469f9fe48034f0690a30e0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a30726bf87469f9fe48034f0690a30e0a">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_engine_1_1_vector4.html">Vector4</a> &amp;v)</td></tr>
+<tr class="separator:a30726bf87469f9fe48034f0690a30e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeffefa36ab2f525ff66a58eab00c755"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#abeffefa36ab2f525ff66a58eab00c755">generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_engine_1_1_void.html">Void</a> &amp;v)</td></tr>
+<tr class="separator:abeffefa36ab2f525ff66a58eab00c755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453c8815567dd08c18eb2fd9a4914670"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a453c8815567dd08c18eb2fd9a4914670">generateType</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_type.html">CodeGen::Type</a> &amp;type)</td></tr>
+<tr class="separator:a453c8815567dd08c18eb2fd9a4914670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b55b9c6a8781060eb291de44e1f0cd7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a9b55b9c6a8781060eb291de44e1f0cd7">guessDefault</a> (std::string_view name)</td></tr>
+<tr class="separator:a9b55b9c6a8781060eb291de44e1f0cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a617d5b81cde3c3ba733a57b304f709fe"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html#a617d5b81cde3c3ba733a57b304f709fe">guessSemantic</a> (std::string_view name, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> rasterized)</td></tr>
+<tr class="separator:a617d5b81cde3c3ba733a57b304f709fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a453c8815567dd08c18eb2fd9a4914670" name="a453c8815567dd08c18eb2fd9a4914670"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453c8815567dd08c18eb2fd9a4914670">&#9670;&#160;</a></span>generateType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generateType </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_type.html">CodeGen::Type</a> &amp;&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98f34eed45dc860fc017b7a3593ea0cd" name="a98f34eed45dc860fc017b7a3593ea0cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98f34eed45dc860fc017b7a3593ea0cd">&#9670;&#160;</a></span>generate() <span class="overload">[1/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a> &amp;&#160;</td>
+          <td class="paramname"><em>statement</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30726bf87469f9fe48034f0690a30e0a" name="a30726bf87469f9fe48034f0690a30e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30726bf87469f9fe48034f0690a30e0a">&#9670;&#160;</a></span>generate() <span class="overload">[2/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector4.html">Vector4</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91c4f154e0654772f7e75e17b62f07c3" name="a91c4f154e0654772f7e75e17b62f07c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91c4f154e0654772f7e75e17b62f07c3">&#9670;&#160;</a></span>generate() <span class="overload">[3/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abeffefa36ab2f525ff66a58eab00c755" name="abeffefa36ab2f525ff66a58eab00c755"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeffefa36ab2f525ff66a58eab00c755">&#9670;&#160;</a></span>generate() <span class="overload">[4/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_void.html">Void</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a93a4d5706365add7f930cb4bdadb354d" name="a93a4d5706365add7f930cb4bdadb354d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a4d5706365add7f930cb4bdadb354d">&#9670;&#160;</a></span>generate() <span class="overload">[5/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab0e15e18b5bc8ee4943de69d8891ca90" name="ab0e15e18b5bc8ee4943de69d8891ca90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0e15e18b5bc8ee4943de69d8891ca90">&#9670;&#160;</a></span>generate() <span class="overload">[6/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51aa2c4329704550ee97578614a2d567" name="a51aa2c4329704550ee97578614a2d567"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51aa2c4329704550ee97578614a2d567">&#9670;&#160;</a></span>generate() <span class="overload">[7/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a58372001d4e20542d0eed405aef97c91" name="a58372001d4e20542d0eed405aef97c91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58372001d4e20542d0eed405aef97c91">&#9670;&#160;</a></span>generate() <span class="overload">[8/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_assignment.html">CodeGen::Assignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>statement</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a615d8076965788595b773f6cbc467eef" name="a615d8076965788595b773f6cbc467eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615d8076965788595b773f6cbc467eef">&#9670;&#160;</a></span>generate() <span class="overload">[9/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_return.html">CodeGen::Return</a> &amp;&#160;</td>
+          <td class="paramname"><em>statement</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19e5ae66d31d8f72f8378a630de53b39" name="a19e5ae66d31d8f72f8378a630de53b39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19e5ae66d31d8f72f8378a630de53b39">&#9670;&#160;</a></span>generate() <span class="overload">[10/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_variable_access.html">CodeGen::VariableAccess</a> &amp;&#160;</td>
+          <td class="paramname"><em>statement</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adce06cc32769d3210c2bf25e55ecf551" name="adce06cc32769d3210c2bf25e55ecf551"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce06cc32769d3210c2bf25e55ecf551">&#9670;&#160;</a></span>generate() <span class="overload">[11/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_variable_definition.html">CodeGen::VariableDefinition</a> &amp;&#160;</td>
+          <td class="paramname"><em>def</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e1601cdbb546e6c263dfeb68c28c9c9" name="a7e1601cdbb546e6c263dfeb68c28c9c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1601cdbb546e6c263dfeb68c28c9c9">&#9670;&#160;</a></span>generate() <span class="overload">[12/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_member_access.html">CodeGen::MemberAccess</a> &amp;&#160;</td>
+          <td class="paramname"><em>access</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b63c3c3497d258921596eb9910b8081" name="a8b63c3c3497d258921596eb9910b8081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b63c3c3497d258921596eb9910b8081">&#9670;&#160;</a></span>generate() <span class="overload">[13/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_namespace.html">CodeGen::Namespace</a> &amp;&#160;</td>
+          <td class="paramname"><em>ns</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a205a06d0ff564a1c7d289b8f13b780" name="a1a205a06d0ff564a1c7d289b8f13b780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a205a06d0ff564a1c7d289b8f13b780">&#9670;&#160;</a></span>generate() <span class="overload">[14/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CodeGen::CustomCodeBlock</a> &amp;&#160;</td>
+          <td class="paramname"><em>block</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2050459a1841664fc6353c09c58a57d2" name="a2050459a1841664fc6353c09c58a57d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2050459a1841664fc6353c09c58a57d2">&#9670;&#160;</a></span>generate() <span class="overload">[15/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_arith_operation.html">CodeGen::ArithOperation</a> &amp;&#160;</td>
+          <td class="paramname"><em>op</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3dbd56e0ffe5d6cce8ef517b1231a187" name="a3dbd56e0ffe5d6cce8ef517b1231a187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dbd56e0ffe5d6cce8ef517b1231a187">&#9670;&#160;</a></span>generate() <span class="overload">[16/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_constructor.html">CodeGen::Constructor</a> &amp;&#160;</td>
+          <td class="paramname"><em>ctor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44237da529ca415c8e2738c70ca7f268" name="a44237da529ca415c8e2738c70ca7f268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44237da529ca415c8e2738c70ca7f268">&#9670;&#160;</a></span>generate() <span class="overload">[17/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_constant.html">CodeGen::Constant</a> &amp;&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a617d5b81cde3c3ba733a57b304f709fe" name="a617d5b81cde3c3ba733a57b304f709fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a617d5b81cde3c3ba733a57b304f709fe">&#9670;&#160;</a></span>guessSemantic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * Engine::Render::VulkanShaderCodeGen::guessSemantic </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>rasterized</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b55b9c6a8781060eb291de44e1f0cd7" name="a9b55b9c6a8781060eb291de44e1f0cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b55b9c6a8781060eb291de44e1f0cd7">&#9670;&#160;</a></span>guessDefault()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * Engine::Render::VulkanShaderCodeGen::guessDefault </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad80e3652b2a8c69ae58163c4b049ae21" name="ad80e3652b2a8c69ae58163c4b049ae21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad80e3652b2a8c69ae58163c4b049ae21">&#9670;&#160;</a></span>generate() <span class="overload">[18/18]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanShaderCodeGen::generate </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_code_gen_1_1_shader_file.html">CodeGen::ShaderFile</a> &amp;&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

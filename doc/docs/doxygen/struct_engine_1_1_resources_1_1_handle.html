@@ -1,0 +1,1137 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Resources::Handle&amp;lt; Loader, Data &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Resources::Handle&amp;lt; Loader, Data &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_resources_1_1_handle.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="handle-lt-loader-data-gt-struct-template-reference">
+<h1>Handle&amp;lt; Loader, Data &amp;gt; Struct Template Reference<a class="headerlink" href="#handle-lt-loader-data-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Resources::Handle&lt; Loader, Data &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_resources.html">Resources</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_resources_1_1_handle-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Resources::Handle&lt; Loader, Data &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;handle.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af1c5041903ea8b44a243cebc1358d4b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af1c5041903ea8b44a243cebc1358d4b2">Handle</a> ()=default</td></tr>
+<tr class="separator:af1c5041903ea8b44a243cebc1358d4b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6efea09a85bfac5470edb9c2db4ab77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#ad6efea09a85bfac5470edb9c2db4ab77">Handle</a> (const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;other)</td></tr>
+<tr class="separator:ad6efea09a85bfac5470edb9c2db4ab77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36dc84c4c7c214577a485b3035d357e1"><td class="memTemplParams" colspan="2">template&lt;typename Loader2 , typename Data2 &gt; </td></tr>
+<tr class="memitem:a36dc84c4c7c214577a485b3035d357e1"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a36dc84c4c7c214577a485b3035d357e1">Handle</a> (const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader2, Data2 &gt; &amp;other)</td></tr>
+<tr class="separator:a36dc84c4c7c214577a485b3035d357e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dfc182d9e57540185b9bb0778ed4a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#aa4dfc182d9e57540185b9bb0778ed4a1">Handle</a> (Data data)</td></tr>
+<tr class="separator:aa4dfc182d9e57540185b9bb0778ed4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3851f883d71c540986b4f533dec3852"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af3851f883d71c540986b4f533dec3852">Handle</a> (<a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;&amp;other)</td></tr>
+<tr class="separator:af3851f883d71c540986b4f533dec3852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2040fcb570403ca4108f8f22f0349ed9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a2040fcb570403ca4108f8f22f0349ed9">Handle</a> (typename Loader::Resource *res)</td></tr>
+<tr class="separator:a2040fcb570403ca4108f8f22f0349ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89201006b1e9764ccd482971b587e89a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a89201006b1e9764ccd482971b587e89a">~Handle</a> ()</td></tr>
+<tr class="separator:a89201006b1e9764ccd482971b587e89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a818b4e5e5b2117ce962b7b80a7893db3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a818b4e5e5b2117ce962b7b80a7893db3">available</a> () const</td></tr>
+<tr class="separator:a818b4e5e5b2117ce962b7b80a7893db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e897104f335e748f8d83fe3fdf1183c"><td class="memTemplParams" colspan="2">template&lt;typename C  = typename Loader::Ctor&gt; </td></tr>
+<tr class="memitem:a5e897104f335e748f8d83fe3fdf1183c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a5e897104f335e748f8d83fe3fdf1183c">create</a> (std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a>, const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path={}, C &amp;&amp;c={}, Loader *loader=&amp;Loader::getSingleton())</td></tr>
+<tr class="separator:a5e897104f335e748f8d83fe3fdf1183c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96ce9dcc5b6e2fc0cf5a51139257afa3"><td class="memTemplParams" colspan="2">template&lt;typename C  = typename Loader::Ctor&gt; </td></tr>
+<tr class="memitem:a96ce9dcc5b6e2fc0cf5a51139257afa3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a96ce9dcc5b6e2fc0cf5a51139257afa3">createTask</a> (std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a>, const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path={}, C &amp;&amp;c={}, Loader *loader=&amp;Loader::getSingleton())</td></tr>
+<tr class="separator:a96ce9dcc5b6e2fc0cf5a51139257afa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd8067b051df8658462bee627d7b1bed"><td class="memItemLeft" align="right" valign="top">Loader::Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#afd8067b051df8658462bee627d7b1bed">customScopePtr</a> () const</td></tr>
+<tr class="separator:afd8067b051df8658462bee627d7b1bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f1f4e6045da827d560fc4c37bcd0d0a"><td class="memItemLeft" align="right" valign="top">const Loader::Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a8f1f4e6045da827d560fc4c37bcd0d0a">getUnsafe</a> () const</td></tr>
+<tr class="separator:a8f1f4e6045da827d560fc4c37bcd0d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6b7bc5cf7f8e4904f5c383dda92cf0"><td class="memItemLeft" align="right" valign="top">Loader::ResourceDataInfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a5b6b7bc5cf7f8e4904f5c383dda92cf0">info</a> () const</td></tr>
+<tr class="separator:a5b6b7bc5cf7f8e4904f5c383dda92cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af93a1699965d0746426dc377e4162f5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af93a1699965d0746426dc377e4162f5a">load</a> (std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a>, Loader *loader=&amp;Loader::getSingleton())</td></tr>
+<tr class="separator:af93a1699965d0746426dc377e4162f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e71b29272d3a19e04e3d31526783246"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a6e71b29272d3a19e04e3d31526783246">loadSerialize</a> (std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a>)</td></tr>
+<tr class="separator:a6e71b29272d3a19e04e3d31526783246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67c54fd9432c9d74ca77cc0a7029e541"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a> () const</td></tr>
+<tr class="separator:a67c54fd9432c9d74ca77cc0a7029e541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af81ee4f7557e348409bc8e11b9a4109e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af81ee4f7557e348409bc8e11b9a4109e">operator bool</a> () const</td></tr>
+<tr class="separator:af81ee4f7557e348409bc8e11b9a4109e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77027a0e144070b21d3efad2052bd713"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a77027a0e144070b21d3efad2052bd713">operator const typename Loader::Data *</a> () const</td></tr>
+<tr class="separator:a77027a0e144070b21d3efad2052bd713"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6082513018c5fd75cd6e0c1dd6fbbb5"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#ac6082513018c5fd75cd6e0c1dd6fbbb5">operator*</a> () const</td></tr>
+<tr class="separator:ac6082513018c5fd75cd6e0c1dd6fbbb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcc9583abb7dca378a27194e742418a6"><td class="memItemLeft" align="right" valign="top">const auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#adcc9583abb7dca378a27194e742418a6">operator-&gt;</a> () const</td></tr>
+<tr class="separator:adcc9583abb7dca378a27194e742418a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad10330edbbc4fa8f9c528c08582288fc"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#ad10330edbbc4fa8f9c528c08582288fc">operator&lt;=&gt;</a> (const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;) const =default</td></tr>
+<tr class="separator:ad10330edbbc4fa8f9c528c08582288fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a302969b243abe7a0f88867252bb636f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a302969b243abe7a0f88867252bb636f7">operator=</a> (const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;other)</td></tr>
+<tr class="separator:a302969b243abe7a0f88867252bb636f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a020f6e010fe1392c541d36cd86b8b3ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a020f6e010fe1392c541d36cd86b8b3ac">operator=</a> (<a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a020f6e010fe1392c541d36cd86b8b3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aeed552ff1e61cbef522ff66e28dbeb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a3aeed552ff1e61cbef522ff66e28dbeb">operator=</a> (typename Loader::Resource *res)</td></tr>
+<tr class="separator:a3aeed552ff1e61cbef522ff66e28dbeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a633a8cfd2af6ca9a907a1b9c90719215"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a633a8cfd2af6ca9a907a1b9c90719215">refresh</a> () const</td></tr>
+<tr class="separator:a633a8cfd2af6ca9a907a1b9c90719215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcbd2e97cb0d54de0559bc20a2a1cc4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#afcbd2e97cb0d54de0559bc20a2a1cc4c">reset</a> ()</td></tr>
+<tr class="separator:afcbd2e97cb0d54de0559bc20a2a1cc4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d0a822fc8ecff2a7e1b2daf683be96"><td class="memItemLeft" align="right" valign="top">Loader::Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a98d0a822fc8ecff2a7e1b2daf683be96">resource</a> () const</td></tr>
+<tr class="separator:a98d0a822fc8ecff2a7e1b2daf683be96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ad01a7b2bec48bfe4beb50d4c0e4666be"><td class="memItemLeft" align="right" valign="top">Data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#ad01a7b2bec48bfe4beb50d4c0e4666be">mData</a> = {}</td></tr>
+<tr class="separator:ad01a7b2bec48bfe4beb50d4c0e4666be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af1c5041903ea8b44a243cebc1358d4b2" name="af1c5041903ea8b44a243cebc1358d4b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1c5041903ea8b44a243cebc1358d4b2">&#9670;&#160;</a></span>Handle() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::Handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6efea09a85bfac5470edb9c2db4ab77" name="ad6efea09a85bfac5470edb9c2db4ab77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6efea09a85bfac5470edb9c2db4ab77">&#9670;&#160;</a></span>Handle() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::Handle </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3851f883d71c540986b4f533dec3852" name="af3851f883d71c540986b4f533dec3852"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3851f883d71c540986b4f533dec3852">&#9670;&#160;</a></span>Handle() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::Handle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2040fcb570403ca4108f8f22f0349ed9" name="a2040fcb570403ca4108f8f22f0349ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2040fcb570403ca4108f8f22f0349ed9">&#9670;&#160;</a></span>Handle() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::Handle </td>
+          <td>(</td>
+          <td class="paramtype">typename Loader::Resource *&#160;</td>
+          <td class="paramname"><em>res</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4dfc182d9e57540185b9bb0778ed4a1" name="aa4dfc182d9e57540185b9bb0778ed4a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4dfc182d9e57540185b9bb0778ed4a1">&#9670;&#160;</a></span>Handle() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::Handle </td>
+          <td>(</td>
+          <td class="paramtype">Data&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a89201006b1e9764ccd482971b587e89a" name="a89201006b1e9764ccd482971b587e89a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89201006b1e9764ccd482971b587e89a">&#9670;&#160;</a></span>~Handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::~<a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a36dc84c4c7c214577a485b3035d357e1" name="a36dc84c4c7c214577a485b3035d357e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36dc84c4c7c214577a485b3035d357e1">&#9670;&#160;</a></span>Handle() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename Loader2 , typename Data2 &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::Handle </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader2, Data2 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a302969b243abe7a0f88867252bb636f7" name="a302969b243abe7a0f88867252bb636f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a302969b243abe7a0f88867252bb636f7">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a020f6e010fe1392c541d36cd86b8b3ac" name="a020f6e010fe1392c541d36cd86b8b3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020f6e010fe1392c541d36cd86b8b3ac">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3aeed552ff1e61cbef522ff66e28dbeb" name="a3aeed552ff1e61cbef522ff66e28dbeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aeed552ff1e61cbef522ff66e28dbeb">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">typename Loader::Resource *&#160;</td>
+          <td class="paramname"><em>res</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad10330edbbc4fa8f9c528c08582288fc" name="ad10330edbbc4fa8f9c528c08582288fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad10330edbbc4fa8f9c528c08582288fc">&#9670;&#160;</a></span>operator&lt;=&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator&lt;=&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6082513018c5fd75cd6e0c1dd6fbbb5" name="ac6082513018c5fd75cd6e0c1dd6fbbb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6082513018c5fd75cd6e0c1dd6fbbb5">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto &amp; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adcc9583abb7dca378a27194e742418a6" name="adcc9583abb7dca378a27194e742418a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcc9583abb7dca378a27194e742418a6">&#9670;&#160;</a></span>operator-&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a77027a0e144070b21d3efad2052bd713" name="a77027a0e144070b21d3efad2052bd713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77027a0e144070b21d3efad2052bd713">&#9670;&#160;</a></span>operator const typename Loader::Data *()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator const typename Loader::Data * </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a818b4e5e5b2117ce962b7b80a7893db3" name="a818b4e5e5b2117ce962b7b80a7893db3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a818b4e5e5b2117ce962b7b80a7893db3">&#9670;&#160;</a></span>available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f1f4e6045da827d560fc4c37bcd0d0a" name="a8f1f4e6045da827d560fc4c37bcd0d0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f1f4e6045da827d560fc4c37bcd0d0a">&#9670;&#160;</a></span>getUnsafe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Loader::Data * <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::getUnsafe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b6b7bc5cf7f8e4904f5c383dda92cf0" name="a5b6b7bc5cf7f8e4904f5c383dda92cf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b6b7bc5cf7f8e4904f5c383dda92cf0">&#9670;&#160;</a></span>info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Loader::ResourceDataInfo * <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::info </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98d0a822fc8ecff2a7e1b2daf683be96" name="a98d0a822fc8ecff2a7e1b2daf683be96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98d0a822fc8ecff2a7e1b2daf683be96">&#9670;&#160;</a></span>resource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Loader::Resource * <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::resource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a67c54fd9432c9d74ca77cc0a7029e541" name="a67c54fd9432c9d74ca77cc0a7029e541"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67c54fd9432c9d74ca77cc0a7029e541">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af81ee4f7557e348409bc8e11b9a4109e" name="af81ee4f7557e348409bc8e11b9a4109e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af81ee4f7557e348409bc8e11b9a4109e">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::operator <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af93a1699965d0746426dc377e4162f5a" name="af93a1699965d0746426dc377e4162f5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af93a1699965d0746426dc377e4162f5a">&#9670;&#160;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::load </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Loader *&#160;</td>
+          <td class="paramname"><em>loader</em> = <code>&amp;Loader::getSingleton()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e71b29272d3a19e04e3d31526783246" name="a6e71b29272d3a19e04e3d31526783246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e71b29272d3a19e04e3d31526783246">&#9670;&#160;</a></span>loadSerialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::loadSerialize </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e897104f335e748f8d83fe3fdf1183c" name="a5e897104f335e748f8d83fe3fdf1183c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e897104f335e748f8d83fe3fdf1183c">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename C  = typename Loader::Ctor&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::create </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>path</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>c</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Loader *&#160;</td>
+          <td class="paramname"><em>loader</em> = <code>&amp;Loader::getSingleton()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a96ce9dcc5b6e2fc0cf5a51139257afa3" name="a96ce9dcc5b6e2fc0cf5a51139257afa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96ce9dcc5b6e2fc0cf5a51139257afa3">&#9670;&#160;</a></span>createTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename C  = typename Loader::Ctor&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::createTask </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>path</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>c</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Loader *&#160;</td>
+          <td class="paramname"><em>loader</em> = <code>&amp;Loader::getSingleton()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcbd2e97cb0d54de0559bc20a2a1cc4c" name="afcbd2e97cb0d54de0559bc20a2a1cc4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcbd2e97cb0d54de0559bc20a2a1cc4c">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a633a8cfd2af6ca9a907a1b9c90719215" name="a633a8cfd2af6ca9a907a1b9c90719215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a633a8cfd2af6ca9a907a1b9c90719215">&#9670;&#160;</a></span>refresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd8067b051df8658462bee627d7b1bed" name="afd8067b051df8658462bee627d7b1bed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd8067b051df8658462bee627d7b1bed">&#9670;&#160;</a></span>customScopePtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Loader::Resource * <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::customScopePtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad01a7b2bec48bfe4beb50d4c0e4666be" name="ad01a7b2bec48bfe4beb50d4c0e4666be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad01a7b2bec48bfe4beb50d4c0e4666be">&#9670;&#160;</a></span>mData</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Data <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::mData = {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>plugins/resources/api/src/Madgine/resources/<a class="el" href="plugins_2resources_2api_2src_2_madgine_2resources_2handle_8h.html">handle.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

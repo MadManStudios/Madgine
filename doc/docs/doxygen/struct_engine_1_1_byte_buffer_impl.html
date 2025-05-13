@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::ByteBufferImpl&amp;lt; Data &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::ByteBufferImpl&amp;lt; Data &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_byte_buffer_impl.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bytebufferimpl-lt-data-gt-struct-template-reference">
+<h1>ByteBufferImpl&amp;lt; Data &amp;gt; Struct Template Reference<a class="headerlink" href="#bytebufferimpl-lt-data-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::ByteBufferImpl&lt; Data &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_byte_buffer_impl-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::ByteBufferImpl&lt; Data &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;bytebuffer.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::ByteBufferImpl&lt; Data &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_byte_buffer_impl__inherit__graph.svg" width="163" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a73545cb19309deafb64bd895db927ca1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a73545cb19309deafb64bd895db927ca1">ByteBufferImpl</a> ()=default</td></tr>
+<tr class="separator:a73545cb19309deafb64bd895db927ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4e70dd8a18f0215393e617e0c8eec3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a7e4e70dd8a18f0215393e617e0c8eec3">ByteBufferImpl</a> (Data *data, size_t size)</td></tr>
+<tr class="separator:a7e4e70dd8a18f0215393e617e0c8eec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d47afb3f1c06db66787c3f50d7abc84"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_size_accessor.html">ByteBufferSizeAccessor</a> {}(t); <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</td></tr>
+<tr class="memitem:a0d47afb3f1c06db66787c3f50d7abc84"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a0d47afb3f1c06db66787c3f50d7abc84">ByteBufferImpl</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a0d47afb3f1c06db66787c3f50d7abc84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1fa78a82084a3ff8fcd282c6534dbfe"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</td></tr>
+<tr class="memitem:ab1fa78a82084a3ff8fcd282c6534dbfe"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#ab1fa78a82084a3ff8fcd282c6534dbfe">ByteBufferImpl</a> (T &amp;&amp;t, size_t size)</td></tr>
+<tr class="separator:ab1fa78a82084a3ff8fcd282c6534dbfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d103af58561b0827f1da1897fba0c8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (!Pointer&lt;std::remove_reference_t&lt;T&gt;&gt;)</td></tr>
+<tr class="memitem:a97d103af58561b0827f1da1897fba0c8"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a97d103af58561b0827f1da1897fba0c8">ByteBufferImpl</a> (T &amp;&amp;t, size_t size, Data *data)</td></tr>
+<tr class="separator:a97d103af58561b0827f1da1897fba0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc66db761554c5ae489b240ecee48646"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#afc66db761554c5ae489b240ecee48646">begin</a> () const</td></tr>
+<tr class="separator:afc66db761554c5ae489b240ecee48646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac76b6ffb1685a40c0db9fcefa46e08cc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac76b6ffb1685a40c0db9fcefa46e08cc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#ac76b6ffb1685a40c0db9fcefa46e08cc">cast</a> () &amp;&amp;</td></tr>
+<tr class="separator:ac76b6ffb1685a40c0db9fcefa46e08cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ac170981aaf6a68ecfd22d725772e0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a2ac170981aaf6a68ecfd22d725772e0e">clear</a> ()</td></tr>
+<tr class="separator:a2ac170981aaf6a68ecfd22d725772e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38171a0c0200e5c4f684ebfb5212cdf1"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a38171a0c0200e5c4f684ebfb5212cdf1">end</a> () const</td></tr>
+<tr class="separator:a38171a0c0200e5c4f684ebfb5212cdf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42c41cf03df1835a35110529142e65e0"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a42c41cf03df1835a35110529142e65e0">operator-&gt;</a> () const</td></tr>
+<tr class="separator:a42c41cf03df1835a35110529142e65e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051585ab54ac6de79c5cbfdf75492aaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a051585ab54ac6de79c5cbfdf75492aaf">operator==</a> (const <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a> &amp;other) const</td></tr>
+<tr class="separator:a051585ab54ac6de79c5cbfdf75492aaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ad7cb1eb9d62e0457bb2837f25f0156b7"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#ad7cb1eb9d62e0457bb2837f25f0156b7">mData</a> = nullptr</td></tr>
+<tr class="separator:ad7cb1eb9d62e0457bb2837f25f0156b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a271387d6f0ee0e8a1324fa6b87ba03d0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html#a271387d6f0ee0e8a1324fa6b87ba03d0">mSize</a> = 0</td></tr>
+<tr class="separator:a271387d6f0ee0e8a1324fa6b87ba03d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Data&gt;<br />
+struct Engine::ByteBufferImpl&lt; Data &gt;</div><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a73545cb19309deafb64bd895db927ca1" name="a73545cb19309deafb64bd895db927ca1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73545cb19309deafb64bd895db927ca1">&#9670;&#160;</a></span>ByteBufferImpl() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::ByteBufferImpl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d47afb3f1c06db66787c3f50d7abc84" name="a0d47afb3f1c06db66787c3f50d7abc84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d47afb3f1c06db66787c3f50d7abc84">&#9670;&#160;</a></span>ByteBufferImpl() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; <br />
+requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_size_accessor.html">ByteBufferSizeAccessor</a> {}(t); <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::ByteBufferImpl </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1fa78a82084a3ff8fcd282c6534dbfe" name="ab1fa78a82084a3ff8fcd282c6534dbfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1fa78a82084a3ff8fcd282c6534dbfe">&#9670;&#160;</a></span>ByteBufferImpl() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; <br />
+requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::ByteBufferImpl </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97d103af58561b0827f1da1897fba0c8" name="a97d103af58561b0827f1da1897fba0c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d103af58561b0827f1da1897fba0c8">&#9670;&#160;</a></span>ByteBufferImpl() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; <br />
+requires (!Pointer&lt;std::remove_reference_t&lt;T&gt;&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::ByteBufferImpl </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Data *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e4e70dd8a18f0215393e617e0c8eec3" name="a7e4e70dd8a18f0215393e617e0c8eec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e4e70dd8a18f0215393e617e0c8eec3">&#9670;&#160;</a></span>ByteBufferImpl() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::ByteBufferImpl </td>
+          <td>(</td>
+          <td class="paramtype">Data *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2ac170981aaf6a68ecfd22d725772e0e" name="a2ac170981aaf6a68ecfd22d725772e0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ac170981aaf6a68ecfd22d725772e0e">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac76b6ffb1685a40c0db9fcefa46e08cc" name="ac76b6ffb1685a40c0db9fcefa46e08cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac76b6ffb1685a40c0db9fcefa46e08cc">&#9670;&#160;</a></span>cast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; T &gt; <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::cast </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc66db761554c5ae489b240ecee48646" name="afc66db761554c5ae489b240ecee48646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc66db761554c5ae489b240ecee48646">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data * <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a38171a0c0200e5c4f684ebfb5212cdf1" name="a38171a0c0200e5c4f684ebfb5212cdf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38171a0c0200e5c4f684ebfb5212cdf1">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data * <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a42c41cf03df1835a35110529142e65e0" name="a42c41cf03df1835a35110529142e65e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42c41cf03df1835a35110529142e65e0">&#9670;&#160;</a></span>operator-&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data * <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a051585ab54ac6de79c5cbfdf75492aaf" name="a051585ab54ac6de79c5cbfdf75492aaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a051585ab54ac6de79c5cbfdf75492aaf">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">ByteBufferImpl</a>&lt; Data &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a271387d6f0ee0e8a1324fa6b87ba03d0" name="a271387d6f0ee0e8a1324fa6b87ba03d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a271387d6f0ee0e8a1324fa6b87ba03d0">&#9670;&#160;</a></span>mSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::mSize = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad7cb1eb9d62e0457bb2837f25f0156b7" name="ad7cb1eb9d62e0457bb2837f25f0156b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7cb1eb9d62e0457bb2837f25f0156b7">&#9670;&#160;</a></span>mData</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Data &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* <a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl</a>&lt; Data &gt;::mData = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="bytebuffer_8h.html">bytebuffer.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1103 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: src/Generic/macros.h File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: src/Generic/macros.h File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/macros_8h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-generic-macros-h-file-reference">
+<h1>src/Generic/macros.h File Reference<a class="headerlink" href="#src-generic-macros-h-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: src/Generic/macros.h File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b37d33ceb7f5c107fb027d4db224bc89.html">Generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
+  <div class="headertitle"><div class="title">macros.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="macros_8h__dep__incl.svg" width="178" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:afa8e2e3e810314fe1640a87fd3cfb943"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#afa8e2e3e810314fe1640a87fd3cfb943">APPLY</a>(f, ...)&#160;&#160;&#160;f(__VA_ARGS__)</td></tr>
+<tr class="separator:afa8e2e3e810314fe1640a87fd3cfb943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88fa737059e67b4b17ec980e5877361e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a88fa737059e67b4b17ec980e5877361e">CONCAT</a>(a,  b)&#160;&#160;&#160;a##b</td></tr>
+<tr class="separator:a88fa737059e67b4b17ec980e5877361e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fef427b1927dac8bf612d1384f00503"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a2fef427b1927dac8bf612d1384f00503">CONCAT2</a>(a,  b)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a88fa737059e67b4b17ec980e5877361e">CONCAT</a>(a, b)</td></tr>
+<tr class="separator:a2fef427b1927dac8bf612d1384f00503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a118bfd4ec0b49f17e1d45c8151fc30d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a118bfd4ec0b49f17e1d45c8151fc30d9">CONSTANT_CASE</a>(name,  stream)</td></tr>
+<tr class="separator:a118bfd4ec0b49f17e1d45c8151fc30d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe142cb0616361126e8015a8da018ef4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#afe142cb0616361126e8015a8da018ef4">DEBUG_MACRO</a>(...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a6aadb0f3180238c2c04dc8af624f7b3c">DEBUG_MACRO2</a>(__VA_ARGS__)</td></tr>
+<tr class="separator:afe142cb0616361126e8015a8da018ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aadb0f3180238c2c04dc8af624f7b3c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a6aadb0f3180238c2c04dc8af624f7b3c">DEBUG_MACRO2</a>(...)&#160;&#160;&#160;static_assert(false, #__VA_ARGS__);</td></tr>
+<tr class="separator:a6aadb0f3180238c2c04dc8af624f7b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef3aefec14ac7b093adc5f297f0a7c30"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#aef3aefec14ac7b093adc5f297f0a7c30">EVAL</a>(x)&#160;&#160;&#160;x</td></tr>
+<tr class="separator:aef3aefec14ac7b093adc5f297f0a7c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95dfc80599f592f262b6d72516d365a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a1416b1a0b8676441a1b439b8586b09a8">SELECT_0</a>(__VA_ARGS__)</td></tr>
+<tr class="separator:a95dfc80599f592f262b6d72516d365a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613ffca246d79b0fcd5dc2407777ad5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a613ffca246d79b0fcd5dc2407777ad5c">FOR_EACH</a>(f,  sep, ...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#afa8e2e3e810314fe1640a87fd3cfb943">APPLY</a>(<a class="el" href="macros_8h.html#a2fef427b1927dac8bf612d1384f00503">CONCAT2</a>(FOR_EACH, <a class="el" href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a>(__VA_ARGS__)), f, sep, __VA_ARGS__)</td></tr>
+<tr class="separator:a613ffca246d79b0fcd5dc2407777ad5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba293e6968d5e9bd344b311b4514ae95"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#aba293e6968d5e9bd344b311b4514ae95">FOR_EACH1</a>(f,  sep,  a)&#160;&#160;&#160;f(a)</td></tr>
+<tr class="separator:aba293e6968d5e9bd344b311b4514ae95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a74b9f7fff0e8164b9c498ee491d55"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a55a74b9f7fff0e8164b9c498ee491d55">FOR_EACH2</a>(f,  sep,  a,  b)&#160;&#160;&#160;f(a) sep f(b)</td></tr>
+<tr class="separator:a55a74b9f7fff0e8164b9c498ee491d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969be3a0770794392093b7f4bacb5512"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a969be3a0770794392093b7f4bacb5512">FOR_EACH3</a>(f,  sep,  a,  b,  c)&#160;&#160;&#160;f(a) sep f(b) sep f(c)</td></tr>
+<tr class="separator:a969be3a0770794392093b7f4bacb5512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02bf9a66fdea06c7b732b6743226434f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a02bf9a66fdea06c7b732b6743226434f">FOR_EACH4</a>(f,  sep,  a,  b,  c,  d)&#160;&#160;&#160;f(a) sep f(b) sep f(c) sep f(d)</td></tr>
+<tr class="separator:a02bf9a66fdea06c7b732b6743226434f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c2d551e4a273aebff76cc9dcd843f20"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a6c2d551e4a273aebff76cc9dcd843f20">HEAD</a>(...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a1416b1a0b8676441a1b439b8586b09a8">SELECT_0</a>(__VA_ARGS__)</td></tr>
+<tr class="separator:a6c2d551e4a273aebff76cc9dcd843f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f1bac1b9225d9b290d41c1a85fdc73f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a>(...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a0b2e619bf926b4156785c2a7eaeb0ee5">SELECT_5</a>(__VA_ARGS__, 5, 4, 3, 2, 1, 0)</td></tr>
+<tr class="separator:a8f1bac1b9225d9b290d41c1a85fdc73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e8f64b2cdcc4bb3f81e0c0776bd3802"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a7e8f64b2cdcc4bb3f81e0c0776bd3802">SELECT</a>(n, ...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#afa8e2e3e810314fe1640a87fd3cfb943">APPLY</a>(<a class="el" href="macros_8h.html#a2fef427b1927dac8bf612d1384f00503">CONCAT2</a>(SELECT_, n), __VA_ARGS__)</td></tr>
+<tr class="separator:a7e8f64b2cdcc4bb3f81e0c0776bd3802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1416b1a0b8676441a1b439b8586b09a8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a1416b1a0b8676441a1b439b8586b09a8">SELECT_0</a>(a, ...)&#160;&#160;&#160;a</td></tr>
+<tr class="separator:a1416b1a0b8676441a1b439b8586b09a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ecb33f2cda052130caa1052e4ff7307"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a5ecb33f2cda052130caa1052e4ff7307">SELECT_1</a>(a,  b, ...)&#160;&#160;&#160;b</td></tr>
+<tr class="separator:a5ecb33f2cda052130caa1052e4ff7307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f0755473082f8a87f6b50565a54a50"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a81f0755473082f8a87f6b50565a54a50">SELECT_2</a>(a,  b,  c, ...)&#160;&#160;&#160;c</td></tr>
+<tr class="separator:a81f0755473082f8a87f6b50565a54a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db54bd85adf0987df2f9dd1886d6c00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a8db54bd85adf0987df2f9dd1886d6c00">SELECT_3</a>(a,  b,  c,  d, ...)&#160;&#160;&#160;d</td></tr>
+<tr class="separator:a8db54bd85adf0987df2f9dd1886d6c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea26dc0728c8c12196584ef3a673054e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#aea26dc0728c8c12196584ef3a673054e">SELECT_4</a>(a,  b,  c,  d,  e, ...)&#160;&#160;&#160;e</td></tr>
+<tr class="separator:aea26dc0728c8c12196584ef3a673054e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b2e619bf926b4156785c2a7eaeb0ee5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a0b2e619bf926b4156785c2a7eaeb0ee5">SELECT_5</a>(a,  b,  c,  d,  e,  f, ...)&#160;&#160;&#160;f</td></tr>
+<tr class="separator:a0b2e619bf926b4156785c2a7eaeb0ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa8624400132dca5f52f93deec70706b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>(...)&#160;&#160;&#160;__VA_ARGS__</td></tr>
+<tr class="separator:afa8624400132dca5f52f93deec70706b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df1d22fb5f09eccc23b9f399670cfd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a>(x)&#160;&#160;&#160;#x</td></tr>
+<tr class="separator:a6df1d22fb5f09eccc23b9f399670cfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc259137d0a4da60463934735edc34c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#accc259137d0a4da60463934735edc34c">STRINGIFY2</a>(a)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a>(a)</td></tr>
+<tr class="separator:accc259137d0a4da60463934735edc34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6cb068cced81bc66a75798647e851f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a6b6cb068cced81bc66a75798647e851f">TAIL</a>(a, ...)&#160;&#160;&#160;__VA_ARGS__</td></tr>
+<tr class="separator:a6b6cb068cced81bc66a75798647e851f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a6df1d22fb5f09eccc23b9f399670cfd7" name="a6df1d22fb5f09eccc23b9f399670cfd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6df1d22fb5f09eccc23b9f399670cfd7">&#9670;&#160;</a></span>STRINGIFY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STRINGIFY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;#x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accc259137d0a4da60463934735edc34c" name="accc259137d0a4da60463934735edc34c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accc259137d0a4da60463934735edc34c">&#9670;&#160;</a></span>STRINGIFY2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STRINGIFY2</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a>(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef3aefec14ac7b093adc5f297f0a7c30" name="aef3aefec14ac7b093adc5f297f0a7c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef3aefec14ac7b093adc5f297f0a7c30">&#9670;&#160;</a></span>EVAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVAL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa8e2e3e810314fe1640a87fd3cfb943" name="afa8e2e3e810314fe1640a87fd3cfb943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa8e2e3e810314fe1640a87fd3cfb943">&#9670;&#160;</a></span>APPLY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define APPLY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">f, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;f(__VA_ARGS__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88fa737059e67b4b17ec980e5877361e" name="a88fa737059e67b4b17ec980e5877361e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88fa737059e67b4b17ec980e5877361e">&#9670;&#160;</a></span>CONCAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONCAT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;a##b</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2fef427b1927dac8bf612d1384f00503" name="a2fef427b1927dac8bf612d1384f00503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fef427b1927dac8bf612d1384f00503">&#9670;&#160;</a></span>CONCAT2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONCAT2</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#a88fa737059e67b4b17ec980e5877361e">CONCAT</a>(a, b)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa8624400132dca5f52f93deec70706b" name="afa8624400132dca5f52f93deec70706b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa8624400132dca5f52f93deec70706b">&#9670;&#160;</a></span>SINGLE_ARG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SINGLE_ARG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;__VA_ARGS__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1416b1a0b8676441a1b439b8586b09a8" name="a1416b1a0b8676441a1b439b8586b09a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1416b1a0b8676441a1b439b8586b09a8">&#9670;&#160;</a></span>SELECT_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SELECT_0</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;a</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ecb33f2cda052130caa1052e4ff7307" name="a5ecb33f2cda052130caa1052e4ff7307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ecb33f2cda052130caa1052e4ff7307">&#9670;&#160;</a></span>SELECT_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SELECT_1</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;b</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a81f0755473082f8a87f6b50565a54a50" name="a81f0755473082f8a87f6b50565a54a50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f0755473082f8a87f6b50565a54a50">&#9670;&#160;</a></span>SELECT_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SELECT_2</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;c</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8db54bd85adf0987df2f9dd1886d6c00" name="a8db54bd85adf0987df2f9dd1886d6c00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8db54bd85adf0987df2f9dd1886d6c00">&#9670;&#160;</a></span>SELECT_3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SELECT_3</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">d, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;d</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea26dc0728c8c12196584ef3a673054e" name="aea26dc0728c8c12196584ef3a673054e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea26dc0728c8c12196584ef3a673054e">&#9670;&#160;</a></span>SELECT_4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SELECT_4</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">d, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">e, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;e</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0b2e619bf926b4156785c2a7eaeb0ee5" name="a0b2e619bf926b4156785c2a7eaeb0ee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b2e619bf926b4156785c2a7eaeb0ee5">&#9670;&#160;</a></span>SELECT_5</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SELECT_5</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">d, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">e, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">f, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95dfc80599f592f262b6d72516d365a9" name="a95dfc80599f592f262b6d72516d365a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95dfc80599f592f262b6d72516d365a9">&#9670;&#160;</a></span>FIRST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FIRST</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#a1416b1a0b8676441a1b439b8586b09a8">SELECT_0</a>(__VA_ARGS__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c2d551e4a273aebff76cc9dcd843f20" name="a6c2d551e4a273aebff76cc9dcd843f20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c2d551e4a273aebff76cc9dcd843f20">&#9670;&#160;</a></span>HEAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HEAD</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#a1416b1a0b8676441a1b439b8586b09a8">SELECT_0</a>(__VA_ARGS__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b6cb068cced81bc66a75798647e851f" name="a6b6cb068cced81bc66a75798647e851f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b6cb068cced81bc66a75798647e851f">&#9670;&#160;</a></span>TAIL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TAIL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;__VA_ARGS__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e8f64b2cdcc4bb3f81e0c0776bd3802" name="a7e8f64b2cdcc4bb3f81e0c0776bd3802"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e8f64b2cdcc4bb3f81e0c0776bd3802">&#9670;&#160;</a></span>SELECT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SELECT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">n, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#afa8e2e3e810314fe1640a87fd3cfb943">APPLY</a>(<a class="el" href="macros_8h.html#a2fef427b1927dac8bf612d1384f00503">CONCAT2</a>(SELECT_, n), __VA_ARGS__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba293e6968d5e9bd344b311b4514ae95" name="aba293e6968d5e9bd344b311b4514ae95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba293e6968d5e9bd344b311b4514ae95">&#9670;&#160;</a></span>FOR_EACH1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOR_EACH1</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">f, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sep, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;f(a)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55a74b9f7fff0e8164b9c498ee491d55" name="a55a74b9f7fff0e8164b9c498ee491d55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a74b9f7fff0e8164b9c498ee491d55">&#9670;&#160;</a></span>FOR_EACH2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOR_EACH2</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">f, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sep, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;f(a) sep f(b)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a969be3a0770794392093b7f4bacb5512" name="a969be3a0770794392093b7f4bacb5512"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969be3a0770794392093b7f4bacb5512">&#9670;&#160;</a></span>FOR_EACH3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOR_EACH3</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">f, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sep, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;f(a) sep f(b) sep f(c)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02bf9a66fdea06c7b732b6743226434f" name="a02bf9a66fdea06c7b732b6743226434f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02bf9a66fdea06c7b732b6743226434f">&#9670;&#160;</a></span>FOR_EACH4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOR_EACH4</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">f, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sep, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">d&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;f(a) sep f(b) sep f(c) sep f(d)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a613ffca246d79b0fcd5dc2407777ad5c" name="a613ffca246d79b0fcd5dc2407777ad5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a613ffca246d79b0fcd5dc2407777ad5c">&#9670;&#160;</a></span>FOR_EACH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FOR_EACH</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">f, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">sep, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#afa8e2e3e810314fe1640a87fd3cfb943">APPLY</a>(<a class="el" href="macros_8h.html#a2fef427b1927dac8bf612d1384f00503">CONCAT2</a>(FOR_EACH, <a class="el" href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a>(__VA_ARGS__)), f, sep, __VA_ARGS__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f1bac1b9225d9b290d41c1a85fdc73f" name="a8f1bac1b9225d9b290d41c1a85fdc73f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f1bac1b9225d9b290d41c1a85fdc73f">&#9670;&#160;</a></span>NUM_ARGS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NUM_ARGS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#a0b2e619bf926b4156785c2a7eaeb0ee5">SELECT_5</a>(__VA_ARGS__, 5, 4, 3, 2, 1, 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6aadb0f3180238c2c04dc8af624f7b3c" name="a6aadb0f3180238c2c04dc8af624f7b3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aadb0f3180238c2c04dc8af624f7b3c">&#9670;&#160;</a></span>DEBUG_MACRO2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUG_MACRO2</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;static_assert(false, #__VA_ARGS__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe142cb0616361126e8015a8da018ef4" name="afe142cb0616361126e8015a8da018ef4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe142cb0616361126e8015a8da018ef4">&#9670;&#160;</a></span>DEBUG_MACRO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUG_MACRO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#a6aadb0f3180238c2c04dc8af624f7b3c">DEBUG_MACRO2</a>(__VA_ARGS__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a118bfd4ec0b49f17e1d45c8151fc30d9" name="a118bfd4ec0b49f17e1d45c8151fc30d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a118bfd4ec0b49f17e1d45c8151fc30d9">&#9670;&#160;</a></span>CONSTANT_CASE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONSTANT_CASE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">stream&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">case</span> name:                      \</div>
+<div class="line">        stream &lt;&lt; #name;            \</div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

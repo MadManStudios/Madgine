@@ -1,0 +1,1233 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::GenerationContainer&amp;lt; C &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::GenerationContainer&amp;lt; C &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_generation_container.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generationcontainer-lt-c-gt-struct-template-reference">
+<h1>GenerationContainer&amp;lt; C &amp;gt; Struct Template Reference<a class="headerlink" href="#generationcontainer-lt-c-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::GenerationContainer&lt; C &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_generation_container.html">GenerationContainer</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_generation_container-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::GenerationContainer&lt; C &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;generationcontainer.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::GenerationContainer&lt; C &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_generation_container__inherit__graph.svg" width="302" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html">const_iterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a01b60ce55567d77e24580d7feaddcbd3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a01b60ce55567d77e24580d7feaddcbd3">const_pointer</a> = typename C::const_pointer</td></tr>
+<tr class="separator:a01b60ce55567d77e24580d7feaddcbd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aec4c839a0f147427faab85e0fee0ce"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a> = typename C::const_reference</td></tr>
+<tr class="separator:a6aec4c839a0f147427faab85e0fee0ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a654058e7333fc4bbb5b32bc4705ac97a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a654058e7333fc4bbb5b32bc4705ac97a">const_reverse_iterator</a> = std::reverse_iterator&lt; <a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html">const_iterator</a> &gt;</td></tr>
+<tr class="separator:a654058e7333fc4bbb5b32bc4705ac97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a381de4cb3ef1ffa6561c2d33a89537e8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a381de4cb3ef1ffa6561c2d33a89537e8">pointer</a> = typename C::pointer</td></tr>
+<tr class="separator:a381de4cb3ef1ffa6561c2d33a89537e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac18a1b22d64b9c81c99c19165d2d8989"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a> = typename C::reference</td></tr>
+<tr class="separator:ac18a1b22d64b9c81c99c19165d2d8989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98a0edaf414a7c17a5874814ef7fc3c9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a98a0edaf414a7c17a5874814ef7fc3c9">reverse_iterator</a> = std::reverse_iterator&lt; <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &gt;</td></tr>
+<tr class="separator:a98a0edaf414a7c17a5874814ef7fc3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64fd2d31f16c015e16dfc65441c0bec2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a64fd2d31f16c015e16dfc65441c0bec2">value_type</a> = typename C::value_type</td></tr>
+<tr class="separator:a64fd2d31f16c015e16dfc65441c0bec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad3afd351081da15f17174171171c418d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ad3afd351081da15f17174171171c418d">at</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index)</td></tr>
+<tr class="separator:ad3afd351081da15f17174171171c418d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7de659101b37d057fc99550d525e2a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ac7de659101b37d057fc99550d525e2a9">at</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index) const</td></tr>
+<tr class="separator:ac7de659101b37d057fc99550d525e2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad25fefd726bc62f5badca95be704d29d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ad25fefd726bc62f5badca95be704d29d">at</a> (size_t i)</td></tr>
+<tr class="separator:ad25fefd726bc62f5badca95be704d29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac91e766c46d266c2846563feb7e10f03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ac91e766c46d266c2846563feb7e10f03">at</a> (size_t i) const</td></tr>
+<tr class="separator:ac91e766c46d266c2846563feb7e10f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc05ea9f7b1114f37c8ef335db0656cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#adc05ea9f7b1114f37c8ef335db0656cb">begin</a> ()</td></tr>
+<tr class="separator:adc05ea9f7b1114f37c8ef335db0656cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ccc99e6295b7d312dade0555ac6e8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ad2ccc99e6295b7d312dade0555ac6e8f">begin</a> () const</td></tr>
+<tr class="separator:ad2ccc99e6295b7d312dade0555ac6e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0db0b9025369f56824bc07f18fedd933"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a0db0b9025369f56824bc07f18fedd933">clear</a> ()</td></tr>
+<tr class="separator:a0db0b9025369f56824bc07f18fedd933"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4df1ea4bcb61fd0688be988a58d28f1d"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a4df1ea4bcb61fd0688be988a58d28f1d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a4df1ea4bcb61fd0688be988a58d28f1d">emplace</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="separator:a4df1ea4bcb61fd0688be988a58d28f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae826598de4a505978f45ab23d42f08ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ae826598de4a505978f45ab23d42f08ff">empty</a> () const</td></tr>
+<tr class="separator:ae826598de4a505978f45ab23d42f08ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a801bece891633647be059c6df3cdaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a4a801bece891633647be059c6df3cdaf">end</a> ()</td></tr>
+<tr class="separator:a4a801bece891633647be059c6df3cdaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae50cf819f8956f1168b249bf09ae0654"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ae50cf819f8956f1168b249bf09ae0654">end</a> () const</td></tr>
+<tr class="separator:ae50cf819f8956f1168b249bf09ae0654"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a739a2243c1227122308aa9af96a47d25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a739a2243c1227122308aa9af96a47d25">erase</a> (const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;it)</td></tr>
+<tr class="separator:a739a2243c1227122308aa9af96a47d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a614bcc1f73da16a501e7dd394f353633"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a614bcc1f73da16a501e7dd394f353633">erase</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;it)</td></tr>
+<tr class="separator:a614bcc1f73da16a501e7dd394f353633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc1654f9aaeb19c14619a7e1df23698"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a0dc1654f9aaeb19c14619a7e1df23698">fetch</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index)</td></tr>
+<tr class="separator:a0dc1654f9aaeb19c14619a7e1df23698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe725f9b905deb49ec193b9802283506"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#afe725f9b905deb49ec193b9802283506">front</a> ()</td></tr>
+<tr class="separator:afe725f9b905deb49ec193b9802283506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a678cd3cb6e4d87ee0a45d2d29507b4f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a678cd3cb6e4d87ee0a45d2d29507b4f6">GenerationContainerBase</a> (const <a class="el" href="struct_engine_1_1_generation_container_base.html">GenerationContainerBase</a> &amp;)=delete</td></tr>
+<tr class="separator:a678cd3cb6e4d87ee0a45d2d29507b4f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae68fe7cc13cb4fe1238d30e033ccd67d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ae68fe7cc13cb4fe1238d30e033ccd67d">GenerationContainerBase</a> (<a class="el" href="struct_engine_1_1_generation_container_base.html">GenerationContainerBase</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ae68fe7cc13cb4fe1238d30e033ccd67d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5689fe1faa444ee7cd34d5809c9d0325"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a5689fe1faa444ee7cd34d5809c9d0325">GenerationContainerBase</a> (uint16_t bufferSize=64)</td></tr>
+<tr class="separator:a5689fe1faa444ee7cd34d5809c9d0325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a98af77655edc52d597a72fb0a75860"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a9a98af77655edc52d597a72fb0a75860">operator[]</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index)</td></tr>
+<tr class="separator:a9a98af77655edc52d597a72fb0a75860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c9f101ce1e768c272315792b45d1b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a53c9f101ce1e768c272315792b45d1b2">operator[]</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index) const</td></tr>
+<tr class="separator:a53c9f101ce1e768c272315792b45d1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad373eeb0033cae79fc073fb991958468"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ad373eeb0033cae79fc073fb991958468">operator[]</a> (size_t i)</td></tr>
+<tr class="separator:ad373eeb0033cae79fc073fb991958468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1253d3e604e9d6b641f1e0e548b6d93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#ae1253d3e604e9d6b641f1e0e548b6d93">operator[]</a> (size_t i) const</td></tr>
+<tr class="separator:ae1253d3e604e9d6b641f1e0e548b6d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49ab88c69c90bf0daaafce5a01224f53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a98a0edaf414a7c17a5874814ef7fc3c9">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a49ab88c69c90bf0daaafce5a01224f53">rbegin</a> ()</td></tr>
+<tr class="separator:a49ab88c69c90bf0daaafce5a01224f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bf93a4b2490dad6e1bf7aa345878cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a654058e7333fc4bbb5b32bc4705ac97a">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a33bf93a4b2490dad6e1bf7aa345878cf">rbegin</a> () const</td></tr>
+<tr class="separator:a33bf93a4b2490dad6e1bf7aa345878cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a689463d2a1a8b88e8e14487eb5c3eba0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a98a0edaf414a7c17a5874814ef7fc3c9">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a689463d2a1a8b88e8e14487eb5c3eba0">rend</a> ()</td></tr>
+<tr class="separator:a689463d2a1a8b88e8e14487eb5c3eba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a865dc9ecfdf267b6b2352153367688c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html#a654058e7333fc4bbb5b32bc4705ac97a">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a865dc9ecfdf267b6b2352153367688c4">rend</a> () const</td></tr>
+<tr class="separator:a865dc9ecfdf267b6b2352153367688c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e2c4b8c32fdb1da03a04e724a37dd28"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container.html#a0e2c4b8c32fdb1da03a04e724a37dd28">size</a> () const</td></tr>
+<tr class="separator:a0e2c4b8c32fdb1da03a04e724a37dd28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_generation_container_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_generation_container_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_generation_container_base.html">Engine::GenerationContainerBase</a></td></tr>
+<tr class="memitem:a678cd3cb6e4d87ee0a45d2d29507b4f6 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a678cd3cb6e4d87ee0a45d2d29507b4f6">GenerationContainerBase</a> (const <a class="el" href="struct_engine_1_1_generation_container_base.html">GenerationContainerBase</a> &amp;)=delete</td></tr>
+<tr class="separator:a678cd3cb6e4d87ee0a45d2d29507b4f6 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae68fe7cc13cb4fe1238d30e033ccd67d inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#ae68fe7cc13cb4fe1238d30e033ccd67d">GenerationContainerBase</a> (<a class="el" href="struct_engine_1_1_generation_container_base.html">GenerationContainerBase</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ae68fe7cc13cb4fe1238d30e033ccd67d inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5689fe1faa444ee7cd34d5809c9d0325 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a5689fe1faa444ee7cd34d5809c9d0325">GenerationContainerBase</a> (uint16_t bufferSize=64)</td></tr>
+<tr class="separator:a5689fe1faa444ee7cd34d5809c9d0325 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aede2f56de6704c2f96f61da3d80d491f inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#aede2f56de6704c2f96f61da3d80d491f">~GenerationContainerBase</a> ()</td></tr>
+<tr class="separator:aede2f56de6704c2f96f61da3d80d491f inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a424802b39d0bd38f47120acd6b7abae9 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a424802b39d0bd38f47120acd6b7abae9">copy</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;other) const</td></tr>
+<tr class="separator:a424802b39d0bd38f47120acd6b7abae9 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4674313b6435a59b7ea2e4e0fdd9d0dd inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a4674313b6435a59b7ea2e4e0fdd9d0dd">generate</a> (uint32_t index) const</td></tr>
+<tr class="separator:a4674313b6435a59b7ea2e4e0fdd9d0dd inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5315b16e96ca02098c09b82282a551b inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#ae5315b16e96ca02098c09b82282a551b">increment</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index, size_t size, ptrdiff_t diff=1) const</td></tr>
+<tr class="separator:ae5315b16e96ca02098c09b82282a551b inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06aca39b0b7f8dbfde3cf454becfbd47 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a06aca39b0b7f8dbfde3cf454becfbd47">reset</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index) const</td></tr>
+<tr class="separator:a06aca39b0b7f8dbfde3cf454becfbd47 inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae871abf290f66ccf6b6a2def238d9c5a inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#ae871abf290f66ccf6b6a2def238d9c5a">update</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index) const</td></tr>
+<tr class="separator:ae871abf290f66ccf6b6a2def238d9c5a inherit pub_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_generation_container_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_generation_container_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_generation_container_base.html">Engine::GenerationContainerBase</a></td></tr>
+<tr class="memitem:a3288ca49d336c83bcf4a49cc4ba94752 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a3288ca49d336c83bcf4a49cc4ba94752">getIndex</a> (const <a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index) const</td></tr>
+<tr class="separator:a3288ca49d336c83bcf4a49cc4ba94752 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d9b642de849afc66e2987a3f0117643 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a4d9b642de849afc66e2987a3f0117643">getIndex</a> (const <a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;index, uint32_t end) const</td></tr>
+<tr class="separator:a4d9b642de849afc66e2987a3f0117643 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78278fe7d82f12098835ae15f3ae47e8 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a78278fe7d82f12098835ae15f3ae47e8">onClear</a> ()</td></tr>
+<tr class="separator:a78278fe7d82f12098835ae15f3ae47e8 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c108f4a01451bdc01903ef65970869 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a99c108f4a01451bdc01903ef65970869">onErase</a> (uint32_t index)</td></tr>
+<tr class="separator:a99c108f4a01451bdc01903ef65970869 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff6a4bb1ca6f31c9a9d12a2ada50311 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_base.html#a0ff6a4bb1ca6f31c9a9d12a2ada50311">onSwapErase</a> (uint32_t index, uint32_t swapped)</td></tr>
+<tr class="separator:a0ff6a4bb1ca6f31c9a9d12a2ada50311 inherit pro_methods_struct_engine_1_1_generation_container_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a64fd2d31f16c015e16dfc65441c0bec2" name="a64fd2d31f16c015e16dfc65441c0bec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64fd2d31f16c015e16dfc65441c0bec2">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::value_type =  typename C::value_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac18a1b22d64b9c81c99c19165d2d8989" name="ac18a1b22d64b9c81c99c19165d2d8989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac18a1b22d64b9c81c99c19165d2d8989">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::reference =  typename C::reference</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6aec4c839a0f147427faab85e0fee0ce" name="a6aec4c839a0f147427faab85e0fee0ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aec4c839a0f147427faab85e0fee0ce">&#9670;&#160;</a></span>const_reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::const_reference =  typename C::const_reference</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a381de4cb3ef1ffa6561c2d33a89537e8" name="a381de4cb3ef1ffa6561c2d33a89537e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a381de4cb3ef1ffa6561c2d33a89537e8">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::pointer =  typename C::pointer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a01b60ce55567d77e24580d7feaddcbd3" name="a01b60ce55567d77e24580d7feaddcbd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01b60ce55567d77e24580d7feaddcbd3">&#9670;&#160;</a></span>const_pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::const_pointer =  typename C::const_pointer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98a0edaf414a7c17a5874814ef7fc3c9" name="a98a0edaf414a7c17a5874814ef7fc3c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98a0edaf414a7c17a5874814ef7fc3c9">&#9670;&#160;</a></span>reverse_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a654058e7333fc4bbb5b32bc4705ac97a" name="a654058e7333fc4bbb5b32bc4705ac97a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a654058e7333fc4bbb5b32bc4705ac97a">&#9670;&#160;</a></span>const_reverse_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::const_reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html">const_iterator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4df1ea4bcb61fd0688be988a58d28f1d" name="a4df1ea4bcb61fd0688be988a58d28f1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4df1ea4bcb61fd0688be988a58d28f1d">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a739a2243c1227122308aa9af96a47d25" name="a739a2243c1227122308aa9af96a47d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a739a2243c1227122308aa9af96a47d25">&#9670;&#160;</a></span>erase() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a614bcc1f73da16a501e7dd394f353633" name="a614bcc1f73da16a501e7dd394f353633"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a614bcc1f73da16a501e7dd394f353633">&#9670;&#160;</a></span>erase() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0db0b9025369f56824bc07f18fedd933" name="a0db0b9025369f56824bc07f18fedd933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0db0b9025369f56824bc07f18fedd933">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e2c4b8c32fdb1da03a04e724a37dd28" name="a0e2c4b8c32fdb1da03a04e724a37dd28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e2c4b8c32fdb1da03a04e724a37dd28">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae826598de4a505978f45ab23d42f08ff" name="ae826598de4a505978f45ab23d42f08ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae826598de4a505978f45ab23d42f08ff">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe725f9b905deb49ec193b9802283506" name="afe725f9b905deb49ec193b9802283506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe725f9b905deb49ec193b9802283506">&#9670;&#160;</a></span>front()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad373eeb0033cae79fc073fb991958468" name="ad373eeb0033cae79fc073fb991958468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad373eeb0033cae79fc073fb991958468">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1253d3e604e9d6b641f1e0e548b6d93" name="ae1253d3e604e9d6b641f1e0e548b6d93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1253d3e604e9d6b641f1e0e548b6d93">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a98af77655edc52d597a72fb0a75860" name="a9a98af77655edc52d597a72fb0a75860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a98af77655edc52d597a72fb0a75860">&#9670;&#160;</a></span>operator[]() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53c9f101ce1e768c272315792b45d1b2" name="a53c9f101ce1e768c272315792b45d1b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c9f101ce1e768c272315792b45d1b2">&#9670;&#160;</a></span>operator[]() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad25fefd726bc62f5badca95be704d29d" name="ad25fefd726bc62f5badca95be704d29d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad25fefd726bc62f5badca95be704d29d">&#9670;&#160;</a></span>at() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac91e766c46d266c2846563feb7e10f03" name="ac91e766c46d266c2846563feb7e10f03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac91e766c46d266c2846563feb7e10f03">&#9670;&#160;</a></span>at() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad3afd351081da15f17174171171c418d" name="ad3afd351081da15f17174171171c418d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3afd351081da15f17174171171c418d">&#9670;&#160;</a></span>at() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#ac18a1b22d64b9c81c99c19165d2d8989">reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7de659101b37d057fc99550d525e2a9" name="ac7de659101b37d057fc99550d525e2a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7de659101b37d057fc99550d525e2a9">&#9670;&#160;</a></span>at() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a6aec4c839a0f147427faab85e0fee0ce">const_reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc05ea9f7b1114f37c8ef335db0656cb" name="adc05ea9f7b1114f37c8ef335db0656cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc05ea9f7b1114f37c8ef335db0656cb">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a801bece891633647be059c6df3cdaf" name="a4a801bece891633647be059c6df3cdaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a801bece891633647be059c6df3cdaf">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad2ccc99e6295b7d312dade0555ac6e8f" name="ad2ccc99e6295b7d312dade0555ac6e8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2ccc99e6295b7d312dade0555ac6e8f">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html">const_iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae50cf819f8956f1168b249bf09ae0654" name="ae50cf819f8956f1168b249bf09ae0654"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae50cf819f8956f1168b249bf09ae0654">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html">const_iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49ab88c69c90bf0daaafce5a01224f53" name="a49ab88c69c90bf0daaafce5a01224f53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49ab88c69c90bf0daaafce5a01224f53">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a98a0edaf414a7c17a5874814ef7fc3c9">reverse_iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a689463d2a1a8b88e8e14487eb5c3eba0" name="a689463d2a1a8b88e8e14487eb5c3eba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a689463d2a1a8b88e8e14487eb5c3eba0">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a98a0edaf414a7c17a5874814ef7fc3c9">reverse_iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33bf93a4b2490dad6e1bf7aa345878cf" name="a33bf93a4b2490dad6e1bf7aa345878cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33bf93a4b2490dad6e1bf7aa345878cf">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a654058e7333fc4bbb5b32bc4705ac97a">const_reverse_iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a865dc9ecfdf267b6b2352153367688c4" name="a865dc9ecfdf267b6b2352153367688c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a865dc9ecfdf267b6b2352153367688c4">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html#a654058e7333fc4bbb5b32bc4705ac97a">const_reverse_iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0dc1654f9aaeb19c14619a7e1df23698" name="a0dc1654f9aaeb19c14619a7e1df23698"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc1654f9aaeb19c14619a7e1df23698">&#9670;&#160;</a></span>fetch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::fetch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> &amp;&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5689fe1faa444ee7cd34d5809c9d0325" name="a5689fe1faa444ee7cd34d5809c9d0325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5689fe1faa444ee7cd34d5809c9d0325">&#9670;&#160;</a></span>GenerationContainerBase() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::GenerationContainerBase::GenerationContainerBase </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>bufferSize</em> = <code>64</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a678cd3cb6e4d87ee0a45d2d29507b4f6" name="a678cd3cb6e4d87ee0a45d2d29507b4f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a678cd3cb6e4d87ee0a45d2d29507b4f6">&#9670;&#160;</a></span>GenerationContainerBase() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::GenerationContainerBase::GenerationContainerBase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_generation_container_base.html">GenerationContainerBase</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae68fe7cc13cb4fe1238d30e033ccd67d" name="ae68fe7cc13cb4fe1238d30e033ccd67d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae68fe7cc13cb4fe1238d30e033ccd67d">&#9670;&#160;</a></span>GenerationContainerBase() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::GenerationContainerBase::GenerationContainerBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_base.html">GenerationContainerBase</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/container/<a class="el" href="generationcontainer_8h.html">generationcontainer.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

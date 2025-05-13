@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Threading::TaskQueue Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Threading::TaskQueue Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_threading_1_1_task_queue.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="taskqueue-struct-reference">
+<h1>TaskQueue Struct Reference<a class="headerlink" href="#taskqueue-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Threading::TaskQueue Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_threading.html">Threading</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">TaskQueue</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_threading_1_1_task_queue-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Threading::TaskQueue Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;taskqueue.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue_1_1_scheduled_task.html">ScheduledTask</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7211dd33c6a399b0728b9f2fa7f2abca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a7211dd33c6a399b0728b9f2fa7f2abca">TaskQueue</a> (const std::string &amp;<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a5556ed10e1feee5fe59a07517bce0def">name</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#afe9795f9be683786c40cce30727cad8a">wantsMainThread</a>=false)</td></tr>
+<tr class="separator:a7211dd33c6a399b0728b9f2fa7f2abca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae956aa424abd887f8bc993aa8ec79a4f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ae956aa424abd887f8bc993aa8ec79a4f">~TaskQueue</a> ()</td></tr>
+<tr class="separator:ae956aa424abd887f8bc993aa8ec79a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5eefaabf20805ccc7c8b1366e239ba5"><td class="memTemplParams" colspan="2">template&lt;typename Init &gt; </td></tr>
+<tr class="memitem:ad5eefaabf20805ccc7c8b1366e239ba5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ad5eefaabf20805ccc7c8b1366e239ba5">addSetupSteps</a> (Init &amp;&amp;init)</td></tr>
+<tr class="separator:ad5eefaabf20805ccc7c8b1366e239ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade6e733cce7265ab911876610f57e3ad"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename Finalize &gt; </td></tr>
+<tr class="memitem:ade6e733cce7265ab911876610f57e3ad"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ade6e733cce7265ab911876610f57e3ad">addSetupSteps</a> (Init &amp;&amp;init, Finalize &amp;&amp;finalize)</td></tr>
+<tr class="separator:ade6e733cce7265ab911876610f57e3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58b6c0ae2006f5a76ee8c3ecd0b1cc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ad58b6c0ae2006f5a76ee8c3ecd0b1cc5">decreaseTaskInFlightCount</a> ()</td></tr>
+<tr class="separator:ad58b6c0ae2006f5a76ee8c3ecd0b1cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc72b57a29eea461c58049df2542f57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a8bc72b57a29eea461c58049df2542f57">idle</a> () const</td></tr>
+<tr class="separator:a8bc72b57a29eea461c58049df2542f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710256f4b8296bfef722e689ceedf90a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a710256f4b8296bfef722e689ceedf90a">increaseTaskInFlightCount</a> ()</td></tr>
+<tr class="separator:a710256f4b8296bfef722e689ceedf90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5556ed10e1feee5fe59a07517bce0def"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a5556ed10e1feee5fe59a07517bce0def">name</a> () const</td></tr>
+<tr class="separator:a5556ed10e1feee5fe59a07517bce0def"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28f7660ecb8e767573a1df793946a321"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a28f7660ecb8e767573a1df793946a321">notify</a> ()</td></tr>
+<tr class="separator:a28f7660ecb8e767573a1df793946a321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6b04dad54727bafca218c52d507bac7"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:ac6b04dad54727bafca218c52d507bac7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ac6b04dad54727bafca218c52d507bac7">queue</a> (F &amp;&amp;f, <a class="el" href="struct_engine_1_1_threading_1_1_task_qualifiers.html">TaskQualifiers</a> qualifiers={})</td></tr>
+<tr class="separator:ac6b04dad54727bafca218c52d507bac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb3a34e93fb6fe9ba3541cccaf5c4c18"><td class="memTemplParams" colspan="2">template&lt;typename T , <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Immediate&gt; </td></tr>
+<tr class="memitem:acb3a34e93fb6fe9ba3541cccaf5c4c18"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#acb3a34e93fb6fe9ba3541cccaf5c4c18">queueTask</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; T, Immediate &gt; task, <a class="el" href="struct_engine_1_1_threading_1_1_task_qualifiers.html">TaskQualifiers</a> qualifiers={})</td></tr>
+<tr class="separator:acb3a34e93fb6fe9ba3541cccaf5c4c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bb59e091b7b338d0fcbdb80660645d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a1bb59e091b7b338d0fcbdb80660645d1">running</a> () const</td></tr>
+<tr class="separator:a1bb59e091b7b338d0fcbdb80660645d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f448b26897e744da7450409cc3796e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a94f448b26897e744da7450409cc3796e">stop</a> ()</td></tr>
+<tr class="separator:a94f448b26897e744da7450409cc3796e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1df47a8dee2d63890f3855fbab5933c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#af1df47a8dee2d63890f3855fbab5933c">taskInFlightCount</a> () const</td></tr>
+<tr class="separator:af1df47a8dee2d63890f3855fbab5933c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9d5712daaf2b43c20ff12b9691c5d48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ac9d5712daaf2b43c20ff12b9691c5d48">update</a> (int taskCount=-1)</td></tr>
+<tr class="separator:ac9d5712daaf2b43c20ff12b9691c5d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9795f9be683786c40cce30727cad8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#afe9795f9be683786c40cce30727cad8a">wantsMainThread</a> () const</td></tr>
+<tr class="separator:afe9795f9be683786c40cce30727cad8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a251183e89ebd8fa23dac00e04f6479a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a251183e89ebd8fa23dac00e04f6479a1">addSetupStepTasks</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; init, <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; finalize={})</td></tr>
+<tr class="separator:a251183e89ebd8fa23dac00e04f6479a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a7e62a045a50e7e7005171a17d2f5fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a7a7e62a045a50e7e7005171a17d2f5fd">fetch</a> ()</td></tr>
+<tr class="separator:a7a7e62a045a50e7e7005171a17d2f5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad043aff7290e444568171f20ab6ce7a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ad043aff7290e444568171f20ab6ce7a7">patchSetupTask</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; init)</td></tr>
+<tr class="separator:ad043aff7290e444568171f20ab6ce7a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab62f96ad37a71bc8d4571a387a4dc94b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ab62f96ad37a71bc8d4571a387a4dc94b">queueHandle</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a> task, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> resume, <a class="el" href="struct_engine_1_1_threading_1_1_task_qualifiers.html">TaskQualifiers</a> qualifiers={})</td></tr>
+<tr class="separator:ab62f96ad37a71bc8d4571a387a4dc94b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1003c2963b4f4c0a13aef26d255d7429"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a1003c2963b4f4c0a13aef26d255d7429">queueInternal</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_queue_1_1_scheduled_task.html">ScheduledTask</a> tracker, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> resume)</td></tr>
+<tr class="separator:a1003c2963b4f4c0a13aef26d255d7429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a28e673aa68455b4a9267fbb82942d396"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a28e673aa68455b4a9267fbb82942d396">TaskHandle</a></td></tr>
+<tr class="separator:a28e673aa68455b4a9267fbb82942d396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae98b31349a732bddada051f67e4d80fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ae98b31349a732bddada051f67e4d80fe">TaskQualifiers</a></td></tr>
+<tr class="separator:ae98b31349a732bddada051f67e4d80fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7211dd33c6a399b0728b9f2fa7f2abca" name="a7211dd33c6a399b0728b9f2fa7f2abca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7211dd33c6a399b0728b9f2fa7f2abca">&#9670;&#160;</a></span>TaskQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Threading::TaskQueue::TaskQueue </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>wantsMainThread</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae956aa424abd887f8bc993aa8ec79a4f" name="ae956aa424abd887f8bc993aa8ec79a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae956aa424abd887f8bc993aa8ec79a4f">&#9670;&#160;</a></span>~TaskQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Threading::TaskQueue::~TaskQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac9d5712daaf2b43c20ff12b9691c5d48" name="ac9d5712daaf2b43c20ff12b9691c5d48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9d5712daaf2b43c20ff12b9691c5d48">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::update </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taskCount</em> = <code>-1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28f7660ecb8e767573a1df793946a321" name="a28f7660ecb8e767573a1df793946a321"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28f7660ecb8e767573a1df793946a321">&#9670;&#160;</a></span>notify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::notify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acb3a34e93fb6fe9ba3541cccaf5c4c18" name="acb3a34e93fb6fe9ba3541cccaf5c4c18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb3a34e93fb6fe9ba3541cccaf5c4c18">&#9670;&#160;</a></span>queueTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Immediate&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; T &gt; Engine::Threading::TaskQueue::queueTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; T, Immediate &gt;&#160;</td>
+          <td class="paramname"><em>task</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_qualifiers.html">TaskQualifiers</a>&#160;</td>
+          <td class="paramname"><em>qualifiers</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6b04dad54727bafca218c52d507bac7" name="ac6b04dad54727bafca218c52d507bac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b04dad54727bafca218c52d507bac7">&#9670;&#160;</a></span>queue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::queue </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_qualifiers.html">TaskQualifiers</a>&#160;</td>
+          <td class="paramname"><em>qualifiers</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a710256f4b8296bfef722e689ceedf90a" name="a710256f4b8296bfef722e689ceedf90a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710256f4b8296bfef722e689ceedf90a">&#9670;&#160;</a></span>increaseTaskInFlightCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::increaseTaskInFlightCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad58b6c0ae2006f5a76ee8c3ecd0b1cc5" name="ad58b6c0ae2006f5a76ee8c3ecd0b1cc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad58b6c0ae2006f5a76ee8c3ecd0b1cc5">&#9670;&#160;</a></span>decreaseTaskInFlightCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::decreaseTaskInFlightCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1df47a8dee2d63890f3855fbab5933c" name="af1df47a8dee2d63890f3855fbab5933c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1df47a8dee2d63890f3855fbab5933c">&#9670;&#160;</a></span>taskInFlightCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Threading::TaskQueue::taskInFlightCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8bc72b57a29eea461c58049df2542f57" name="a8bc72b57a29eea461c58049df2542f57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bc72b57a29eea461c58049df2542f57">&#9670;&#160;</a></span>idle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Threading::TaskQueue::idle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5556ed10e1feee5fe59a07517bce0def" name="a5556ed10e1feee5fe59a07517bce0def"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5556ed10e1feee5fe59a07517bce0def">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; Engine::Threading::TaskQueue::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1bb59e091b7b338d0fcbdb80660645d1" name="a1bb59e091b7b338d0fcbdb80660645d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb59e091b7b338d0fcbdb80660645d1">&#9670;&#160;</a></span>running()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Threading::TaskQueue::running </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a94f448b26897e744da7450409cc3796e" name="a94f448b26897e744da7450409cc3796e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94f448b26897e744da7450409cc3796e">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe9795f9be683786c40cce30727cad8a" name="afe9795f9be683786c40cce30727cad8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe9795f9be683786c40cce30727cad8a">&#9670;&#160;</a></span>wantsMainThread()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Threading::TaskQueue::wantsMainThread </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade6e733cce7265ab911876610f57e3ad" name="ade6e733cce7265ab911876610f57e3ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade6e733cce7265ab911876610f57e3ad">&#9670;&#160;</a></span>addSetupSteps() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Init , typename Finalize &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::addSetupSteps </td>
+          <td>(</td>
+          <td class="paramtype">Init &amp;&amp;&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Finalize &amp;&amp;&#160;</td>
+          <td class="paramname"><em>finalize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5eefaabf20805ccc7c8b1366e239ba5" name="ad5eefaabf20805ccc7c8b1366e239ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5eefaabf20805ccc7c8b1366e239ba5">&#9670;&#160;</a></span>addSetupSteps() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Init &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::addSetupSteps </td>
+          <td>(</td>
+          <td class="paramtype">Init &amp;&amp;&#160;</td>
+          <td class="paramname"><em>init</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab62f96ad37a71bc8d4571a387a4dc94b" name="ab62f96ad37a71bc8d4571a387a4dc94b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab62f96ad37a71bc8d4571a387a4dc94b">&#9670;&#160;</a></span>queueHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::queueHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a>&#160;</td>
+          <td class="paramname"><em>task</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>resume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_qualifiers.html">TaskQualifiers</a>&#160;</td>
+          <td class="paramname"><em>qualifiers</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1003c2963b4f4c0a13aef26d255d7429" name="a1003c2963b4f4c0a13aef26d255d7429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1003c2963b4f4c0a13aef26d255d7429">&#9670;&#160;</a></span>queueInternal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::queueInternal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue_1_1_scheduled_task.html">ScheduledTask</a>&#160;</td>
+          <td class="paramname"><em>tracker</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>resume</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a251183e89ebd8fa23dac00e04f6479a1" name="a251183e89ebd8fa23dac00e04f6479a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a251183e89ebd8fa23dac00e04f6479a1">&#9670;&#160;</a></span>addSetupStepTasks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskQueue::addSetupStepTasks </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td>
+          <td class="paramname"><em>finalize</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad043aff7290e444568171f20ab6ce7a7" name="ad043aff7290e444568171f20ab6ce7a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad043aff7290e444568171f20ab6ce7a7">&#9670;&#160;</a></span>patchSetupTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; Engine::Threading::TaskQueue::patchSetupTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td>
+          <td class="paramname"><em>init</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a7e62a045a50e7e7005171a17d2f5fd" name="a7a7e62a045a50e7e7005171a17d2f5fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a7e62a045a50e7e7005171a17d2f5fd">&#9670;&#160;</a></span>fetch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a> Engine::Threading::TaskQueue::fetch </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a28e673aa68455b4a9267fbb82942d396" name="a28e673aa68455b4a9267fbb82942d396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e673aa68455b4a9267fbb82942d396">&#9670;&#160;</a></span>TaskHandle</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae98b31349a732bddada051f67e4d80fe" name="ae98b31349a732bddada051f67e4d80fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae98b31349a732bddada051f67e4d80fe">&#9670;&#160;</a></span>TaskQualifiers</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_qualifiers.html">TaskQualifiers</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Modules/threading/<a class="el" href="taskqueue_8h.html">taskqueue.h</a></li>
+<li>src/Modules/threading/<a class="el" href="taskqueue_8cpp.html">taskqueue.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

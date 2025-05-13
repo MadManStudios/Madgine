@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Class Members - Functions &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Class Members - Functions" href="functions_func_m.html" />
+    <link rel="prev" title="Class Members - Functions" href="functions_func_k.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="annotated_classes.html">Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Madgine - Doxygen Documentation</a></li>
+          <li class="breadcrumb-item"><a href="annotated_classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="functions_class_members.html">Class Members</a></li>
+          <li class="breadcrumb-item"><a href="functions_func_functions.html">Functions</a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Class Members - Functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/functions_func_l.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-members-functions">
+<h1>Class Members - Functions<a class="headerlink" href="#class-members-functions" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Class Members - Functions</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_l" name="index_l"></a>- l -</h3><ul>
+<li>LambdaHolder()&#160;:&#160;<a class="el" href="struct_engine_1_1_lambda_holder.html#ad31cd67df9793c63ed7bae42ab525810">Engine::LambdaHolder&lt; Functor &gt;</a></li>
+<li>lastFrame()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a263068e2788bfd71831464a93054bdc3">Engine::Render::RenderData</a></li>
+<li>lastTick()&#160;:&#160;<a class="el" href="struct_engine_1_1_interval_clock.html#a492ddb5c0533a395105a8ab14c69378e">Engine::IntervalClock&lt; Timepoint &gt;</a></li>
+<li>layer()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html#a20fcd613db68f22021d15f649c5d2751">Engine::Widgets::WidgetsRenderData</a></li>
+<li>LayoutLoader()&#160;:&#160;<a class="el" href="struct_engine_1_1_window_1_1_layout_loader.html#a06b819a453388c7dfb1adce702504359">Engine::Window::LayoutLoader</a></li>
+<li>layoutRow()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#ad5dd669421dccec7c12c654783305369">Engine::Widgets::Textbox</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_text_edit.html#a50e90d38c17d980d8384556e476a909f">Engine::Widgets::TextEdit</a></li>
+<li>leaveDir()&#160;:&#160;<a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#ad1717988cc80eea1af5ae7424b2ab79b">Engine::Filesystem::FileQueryIterator</a></li>
+<li>left()&#160;:&#160;<a class="el" href="struct_engine_1_1_bounds.html#aec833aad769b485052c968b16878c083">Engine::Bounds</a>, <a class="el" href="struct_engine_1_1_rect2.html#af37c5483744121067c145e3104d5840e">Engine::Rect2</a></li>
+<li>leftLine()&#160;:&#160;<a class="el" href="struct_engine_1_1_rect2.html#a25f568161898b245c57f74db52c57655">Engine::Rect2</a></li>
+<li>length()&#160;:&#160;<a class="el" href="struct_engine_1_1_line2.html#a071eeb007fa30085757738db680f9097">Engine::Line2</a>, <a class="el" href="struct_engine_1_1_vector2.html#ab6d75d1bc91e754624ab7221925831ea">Engine::Vector2</a>, <a class="el" href="struct_engine_1_1_vector3.html#a24560621682bbdc12f9465fb38d89fca">Engine::Vector3</a>, <a class="el" href="struct_engine_1_1_vector4.html#ac75be8b43dc3086fbb80229c589615d4">Engine::Vector4</a></li>
+<li>LibraryInterpretData()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_library_interpret_data.html#a2ed00003595a5a63e6c51874dbf8ae06">Engine::NodeGraph::LibraryInterpretData</a></li>
+<li>LibraryNode()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_library_node.html#a8c88bc17a521dc22eb711aeada658eef">Engine::NodeGraph::LibraryNode</a></li>
+<li>lifetime()&#160;:&#160;<a class="el" href="struct_engine_1_1_app_1_1_application.html#a3f2b2ae89588d0da0ac56b14437e402e">Engine::App::Application</a></li>
+<li>Lifetime()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a018f05c0becb4022c2cf9a07c3c96a92">Engine::Execution::Lifetime&lt; cpos &gt;</a></li>
+<li>lifetime()&#160;:&#160;<a class="el" href="struct_engine_1_1_handler_manager.html#aa99262480baf3d63440acf08966714bc">Engine::HandlerManager</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a564029fc6f4f57f7542fdabbb2a70e3e">Engine::Scene::Entity::Entity</a>, <a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#abe9d2f7ec5e9fe5f52474118e93d10d8">Engine::Scene::SceneContainer</a>, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ab7a8ecb9414d4754bbb63dccecca5304">Engine::Scene::SceneManager</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#ac982cf1535ec4bcdfae0e58dfec32b84">Engine::Widgets::WidgetBase</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#ab11e00eb6f0275510c562d1891521f61">Engine::Widgets::WidgetManager</a>, <a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a0eff5714a39c1bf36fce3244f2ee6ffb">Engine::Window::MainWindow</a></li>
+<li>lineNr()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a880450052aa00d892c0607ec8504e309">Engine::Scripting::Python3::Python3DebugLocation</a></li>
+<li>lines()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_multiline_text_render_data.html#a9c6917395ee10bad5c3c020c5b18eaa9">Engine::Widgets::MultilineTextRenderData</a></li>
+<li>lineVertices()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html#a0e81697253280f596761b93aa71e4115">Engine::Widgets::WidgetsRenderData</a></li>
+<li>link()&#160;:&#160;<a class="el" href="struct_engine_1_1_doubly_linked_node_base.html#af681e8c37c5c6f5789f88f7bc48a1c15">Engine::DoublyLinkedNodeBase&lt; PtrT &gt;</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline.html#a13c5dcd14a74ccdc662a88b61ca8cef7">Engine::Render::DirectX12Pipeline</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline.html#a87b89fe6a3ad930b341d77af7f491dd2">Engine::Render::OpenGLPipeline</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a0cac69e79c47417c702626741bda0ec7">Engine::Render::VulkanPipeline</a></li>
+<li>listen:&#160;:&#160;<a class="el" href="interface_cocoa___window_listener.html#a31805a67bcfa3298d1ff02c8bb449daa">Cocoa_WindowListener</a></li>
+<li>LitSceneRenderData()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_lit_scene_render_data.html#a891daf2cc3a7b4f58b7e6668f471d832">Engine::Render::LitSceneRenderData</a></li>
+<li>load()&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior_factory_base.html#a5962ce4c5325e5e47bce57726363d4b6">Engine::BehaviorFactoryBase</a>, <a class="el" href="struct_engine_1_1_ini_1_1_ini_section.html#a2ffdd0456fe2f98be24afaff1eec710b">Engine::Ini::IniSection</a>, <a class="el" href="struct_engine_1_1_native_behavior_factory.html#a704e0c40de6baf46c794f8846e44ef14">Engine::NativeBehaviorFactory</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph_behavior_factory.html#a2069e60066e50846383f63daa14d81a6">Engine::NodeGraph::NodeGraphBehaviorFactory</a>, <a class="el" href="struct_engine_1_1_plugins_1_1_plugin_section.html#ab4fd86768347e1479c0dc0c185aecd89">Engine::Plugins::PluginSection</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_shader_loader_1_1_handle.html#af0009efb7d2ea6f2b72ee0eb51966430">Engine::Render::OpenGLShaderLoader::Handle</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html#ab011fca783e4918fdf35b00d540172a1">Engine::Render::VulkanShaderLoader::Handle</a>, <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af93a1699965d0746426dc377e4162f5a">Engine::Resources::Handle&lt; Loader, Data &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_impl.html#aec773947a6e91f16bc840e278e47b6be">Engine::Resources::ResourceLoaderImpl&lt; T, _Data, _Base &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a41e61ce0e5f190a23c7ad77b06782e85">Engine::Resources::VirtualResourceLoaderBase&lt; T, _Data, _Container, _Storage &gt;</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_behavior_factory.html#a072b6ea97368142f1686925777334e02">Engine::Scripting::Python3::Python3BehaviorFactory</a>, <a class="el" href="struct_engine_1_1_threading_1_1_atomic_task_future.html#a7b7e158f1050f42aab27c283d0c5a1e5">Engine::Threading::AtomicTaskFuture&lt; T &gt;</a>, <a class="el" href="structstd_1_1atomic_3_01std_1_1shared__ptr_3_01_t_01_4_01_4.html#a9441a5dd2af1e236117d0f6e9d820982">std::atomic&lt; std::shared_ptr&lt; T &gt; &gt;</a></li>
+<li>loadAllDependencies()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin_section.html#a51550a802c0d304ea76d106b59e04ae9">Engine::Plugins::PluginSection</a></li>
+<li>loadData()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource.html#a8454d79b4fc25a2395033f8947d64093">Engine::Resources::Resource&lt; Loader &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface_1_1_resource.html#a49d85cc73da9a093a0c0c0f58b5193d0">Engine::Resources::ResourceLoaderInterface&lt; T, _Data, _Container, _Storage, _Base &gt;::Resource</a></li>
+<li>loadDependencies()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin.html#abab1edb59b214ed0284b30778504c9f3">Engine::Plugins::Plugin</a></li>
+<li>loadFromDisk()&#160;:&#160;<a class="el" href="struct_engine_1_1_ini_1_1_ini_file.html#aed29ddd7ad128f443015dd79e0228c0a">Engine::Ini::IniFile</a></li>
+<li>loadFromFile()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a2b39d7965f522e2b75cd67f373c3e679">Engine::NodeGraph::NodeGraph</a>, <a class="el" href="struct_engine_1_1_plugins_1_1_plugin_manager.html#a0db96ba0f2cb93e6d119e95a28044591">Engine::Plugins::PluginManager</a></li>
+<li>loadFromImage()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_texture_loader_1_1_handle.html#ae0dcd81dfc0699f3f4d5fb7faa667d28">Engine::Render::TextureLoader::Handle</a></li>
+<li>loadFromSource()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pixel_shader_loader.html#abb4330c717d433f4b598e78048ae4042">Engine::Render::DirectX12PixelShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_vertex_shader_loader.html#a247ec483e42e340bd1891e1cce31ff30">Engine::Render::DirectX12VertexShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_shader_loader.html#a3d36ae490e67b7b493d6a17b7c51a5e9">Engine::Render::OpenGLShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader.html#a49693bf45f9e28c5b9c149d5b8e53127">Engine::Render::VulkanShaderLoader</a></li>
+<li>loadImpl()&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_audio_loader.html#a08391eac0617f39d0be2829344474421">Engine::Audio::AudioLoader</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph_loader.html#aaf92b1d3b1bcc280d567263e9430884a">Engine::NodeGraph::NodeGraphLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_animation_loader.html#af76e2921ab4698a36e78a7e4a6e13887">Engine::Render::AnimationLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_loader.html#aa6ca735d873178d3384d1879fec1d4b3">Engine::Render::DirectX12PipelineLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pixel_shader_loader.html#af550f4d4256fb09699d472503fb576ea">Engine::Render::DirectX12PixelShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture_loader.html#a67290fa8ee8d903bd18db503522f3887">Engine::Render::DirectX12TextureLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_vertex_shader_loader.html#ab36a6a1ac4cf3b513b71e40b85a51fce">Engine::Render::DirectX12VertexShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#a4f97d158ff33cd3609bfdcc12bc0e698">Engine::Render::FontLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_mesh_loader.html#a3b47b5b30e7cc13b4fac9dbd6928ad45">Engine::Render::GPUMeshLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_mesh_loader.html#a25ba25e9c24ae29e8eb6c3a75359c081">Engine::Render::MeshLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_loader.html#acc1fbf16f9068e09c67db2a23e760b29">Engine::Render::OpenGLPipelineLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_shader_loader.html#a0ad07cd0f25fdcc7676198e30024b1fc">Engine::Render::OpenGLShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture_loader.html#a75fc48e57484c4fff106b604cc03b59b">Engine::Render::OpenGLTextureLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_skeleton_loader.html#a3ddf232af4fbac55cce6557c35e223c1">Engine::Render::SkeletonLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_loader.html#a03ec459f6d29f0e68f62c01db698ebfb">Engine::Render::VulkanPipelineLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader.html#ab5250a9a6277e3f38d46a5289857b28d">Engine::Render::VulkanShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#ab7286b8666ccee8276b57d4c3e9c0487">Engine::Render::VulkanTextureLoader</a>, <a class="el" href="struct_engine_1_1_resources_1_1_image_loader.html#ad1700fd7fdb0188f68a2e918298e2f43">Engine::Resources::ImageLoader</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_file_loader.html#a29a73396ff1c2980aefa689ab4c8148b">Engine::Scripting::Python3::Python3FileLoader</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_atlas_loader.html#abf11044d189fe8751d82f3b89e181f99">Engine::Widgets::AtlasLoader</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_loader.html#af1eae96fa01e540df45be88035dc8087">Engine::Widgets::WidgetLoader</a>, <a class="el" href="struct_engine_1_1_window_1_1_layout_loader.html#a4c643300a13c5223173eeb617b3dadf4">Engine::Window::LayoutLoader</a></li>
+<li>loadingTask()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_data_info_base.html#a254ed0ac14283b03da7af7e0626460b8">Engine::Resources::ResourceDataInfoBase&lt; Interface &gt;</a></li>
+<li>loadingTaskQueue()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mesh_loader.html#aee70c40aa11bf0a945b21f991fcc753a">Engine::Render::DirectX12MeshLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_loader.html#abcf0cf84e7952b2434b7490158c93966">Engine::Render::DirectX12PipelineLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pixel_shader_loader.html#a644f5c19b4c8ece09f2d5c6d18d3b4e8">Engine::Render::DirectX12PixelShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture_loader.html#aa85b6427fb6f85a1483988ec3dc4fe99">Engine::Render::DirectX12TextureLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_vertex_shader_loader.html#adefacf1aa42007f34d9c90a5d42c044b">Engine::Render::DirectX12VertexShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#a47d7fa177e77fea40d0e5d269122f183">Engine::Render::FontLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_mesh_loader.html#a50c256ba1f27808ad44b063548abff1d">Engine::Render::OpenGLMeshLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_loader.html#ad3aefb265ee679f5a2a7a99ea53acfa8">Engine::Render::OpenGLPipelineLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_shader_loader.html#a3ad3b345b7a7d09eeb2ee5af68ae9800">Engine::Render::OpenGLShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture_loader.html#a6823d012a70328d059a72170fc75b2f9">Engine::Render::OpenGLTextureLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_mesh_loader.html#a483f7332e2dea70440f4721debcda619">Engine::Render::VulkanMeshLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_loader.html#a56c3400db8c59d4aa8e00ca64afc2db1">Engine::Render::VulkanPipelineLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader.html#ae7af94d725f489c53234c5e8b7d51cc9">Engine::Render::VulkanShaderLoader</a>, <a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html#a7a7f8fd2aa5aa14ce469c9e8c698537b">Engine::Render::VulkanTextureLoader</a>, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#a61e5e69a8025a5ed5d54a8b5815b3e74">Engine::Resources::ResourceLoaderBase</a></li>
+<li>loadLayout()&#160;:&#160;<a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a7e08a25ef00c98855c1e13a55d84a2ff">Engine::Window::MainWindow</a></li>
+<li>loadManual()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_impl.html#ad99751049ba359f0f967fe6803a69a9b">Engine::Resources::ResourceLoaderImpl&lt; T, _Data, _Base &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a1868b03f3bd9447f2ee78e4b0be6e57f">Engine::Resources::VirtualResourceLoaderBase&lt; T, _Data, _Container, _Storage &gt;</a></li>
+<li>loadManualVImpl()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a37c305da44eb9a69e9fb00fd432399c5">Engine::Resources::VirtualResourceLoaderBase&lt; T, _Data, _Container, _Storage &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#ae75214cd7eae5aa24b576f3a6cf570f2">Engine::Resources::VirtualResourceLoaderImpl&lt; T, _Data, _Base &gt;</a></li>
+<li>loadPlugin()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin_section.html#aac8c8858ec83e084eb84152c05e2cbc6">Engine::Plugins::PluginSection</a></li>
+<li>loadPluginByFilename()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin_section.html#a3b9b775364ecdc53087dd81916411f23">Engine::Plugins::PluginSection</a></li>
+<li>loadSelection()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin_manager.html#acd66285fa53f63595c36e5481e977033">Engine::Plugins::PluginManager</a></li>
+<li>loadSerialize()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a6e71b29272d3a19e04e3d31526783246">Engine::Resources::Handle&lt; Loader, Data &gt;</a></li>
+<li>loadUnnamed()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_impl.html#a05ab785cdba100d2683414a33862cb75">Engine::Resources::ResourceLoaderImpl&lt; T, _Data, _Base &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a50219221ac50c1a499c1224df8233203">Engine::Resources::VirtualResourceLoaderBase&lt; T, _Data, _Container, _Storage &gt;</a></li>
+<li>loadUnnamedTask()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_impl.html#a6b57048070793e5d4d93616d01dfccdf">Engine::Resources::ResourceLoaderImpl&lt; T, _Data, _Base &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a3163797c997696a295a9ada27490ad02">Engine::Resources::VirtualResourceLoaderBase&lt; T, _Data, _Container, _Storage &gt;</a></li>
+<li>loadVImpl()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a8365d6e24a460b4a1119e0e003795419">Engine::Resources::VirtualResourceLoaderBase&lt; T, _Data, _Container, _Storage &gt;</a>, <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_impl.html#a0e7c6cb70419ce9e9e33963e9b860227">Engine::Resources::VirtualResourceLoaderImpl&lt; T, _Data, _Base &gt;</a></li>
+<li>localVariable()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_thread_storage.html#a9d6a1b8034f4aa26ea0318c75b98659d">Engine::Threading::ThreadStorage</a>, <a class="el" href="struct_engine_1_1_threading_1_1_work_group_storage.html#a4c6807b0399867e3de57c988fa9b0106">Engine::Threading::WorkGroupStorage</a></li>
+<li>localVariables()&#160;:&#160;<a class="el" href="struct_engine_1_1_coroutine_location.html#a74a1a47800ed35559c7a6d86002d8c79">Engine::CoroutineLocation</a>, <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a861ce0abc9dab4b7915255b67bdf5b07">Engine::Debug::DebugLocation</a>, <a class="el" href="struct_engine_1_1_debug_1_1_debug_location_splitter.html#acd6fb181710ce7121383c7f7273d3866">Engine::Debug::DebugLocationSplitter</a>, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a2a5eb7f4ef5642f29d85f9f28a68598b">Engine::Debug::SenderLocation</a>, <a class="el" href="struct_engine_1_1_node_graph_1_1_node_debug_location.html#aeaa31fda16bf28cefe3c8a996ce87818">Engine::NodeGraph::NodeDebugLocation</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a216ea0cf1d4921dba3645c2b28329624">Engine::Scripting::Python3::Python3DebugLocation</a></li>
+<li>lock()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_environment.html#a4111d3dc17f8138fbd706b382c06251d">Engine::Scripting::Python3::Python3Environment</a>, <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html#a35f3089383bbd247cca6b573fc894c4b">Engine::Threading::DataMutex</a></li>
+<li>Lock()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock.html#a138fc25cc89ee96409ab1aa620661ec9">Engine::Threading::DataMutex::Lock</a></li>
+<li>locked()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html#abb6194f50bc206bdf4f0548f57d19aff">Engine::Threading::DataMutex</a></li>
+<li>lockImpl()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html#a88ab3b772a5003e18bd47ba760aeaa00">Engine::Threading::DataMutex</a></li>
+<li>lockRead()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html#a9c3de6617fec421b7975fd09fd0e325c">Engine::Threading::DataMutex</a></li>
+<li>LockState()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock_state.html#a742e881637fbe64d209803808724dca2">Engine::Threading::DataMutex::LockState</a></li>
+<li>lockWrite()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html#a06434c30f824d03c6c8534f5bdff6763">Engine::Threading::DataMutex</a></li>
+<li>log()&#160;:&#160;<a class="el" href="struct_engine_1_1_log_1_1_log.html#a545614c47137d12e63613fee2d023885">Engine::Log::Log</a>, <a class="el" href="struct_engine_1_1_log_1_1_standard_log.html#ac6444e9c5c3f49548bacafb3bf0d5a6c">Engine::Log::StandardLog</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_stream_redirect.html#a12f730763a676709583f0d88696130e5">Engine::Scripting::Python3::Python3StreamRedirect</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_unlock.html#a1e64764371b227cb0befe0b9c1e36652">Engine::Scripting::Python3::Python3Unlock</a>, <a class="el" href="struct_engine_1_1_server_1_1_server_log.html#aff75063ed48ade84ca58df3ea80ff97f">Engine::Server::ServerLog</a></li>
+<li>LogDummy()&#160;:&#160;<a class="el" href="struct_engine_1_1_log_1_1_log_dummy.html#ab95099877990e1be8723ad8f3b8e7565">Engine::Log::LogDummy</a></li>
+<li>lookupFieldName()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a34cd2e6f03ceb54e39975851c5e71b05">Engine::Serialize::FormattedSerializeStream</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a4741fc4b0ac17c68cd9a7a7e663fd342">Engine::Serialize::Formatter</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_ini_formatter.html#a50ef9e14d990699fa9a35ea8dbbe09cd">Engine::Serialize::IniFormatter</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_j_s_o_n_formatter.html#ada4f13a7159e19a3b52f7e8eb49d15a1">Engine::Serialize::JSONFormatter</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a105be371f281785ae481ae74214b8784">Engine::Serialize::XMLFormatter</a></li>
+<li>lookUpImage()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_u_i_atlas.html#a4803b0361cadca721bf9ea14d2e854aa">Engine::Widgets::UIAtlas</a>, <a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#a1c393973a78c9f541e7c222a8f0cded8">Engine::Widgets::WidgetManager</a></li>
+<li>loop()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1for__each__t_1_1state.html#a0c8b38a4e8be4b950cffadc047c08577">Engine::Execution::for_each_t::state&lt; Rec, C, F &gt;</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="functions_func_k.html" class="btn btn-neutral float-left" title="Class Members - Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions_func_m.html" class="btn btn-neutral float-right" title="Class Members - Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

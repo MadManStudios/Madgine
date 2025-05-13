@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Class Members - Variables &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Class Members - Variables" href="functions_vars_t.html" />
+    <link rel="prev" title="Class Members - Variables" href="functions_vars_r.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="annotated_classes.html">Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Madgine - Doxygen Documentation</a></li>
+          <li class="breadcrumb-item"><a href="annotated_classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="functions_class_members.html">Class Members</a></li>
+          <li class="breadcrumb-item"><a href="functions_vars_variables.html">Variables</a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Class Members - Variables</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/functions_vars_s.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-members-variables">
+<h1>Class Members - Variables<a class="headerlink" href="#class-members-variables" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Class Members - Variables</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+&#160;
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>safebinary&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_formats.html#af866af7a32349c2dc871259e5dac5f97">Engine::Serialize::Formats</a></li>
+<li>sampleCounts&#160;:&#160;<a class="el" href="struct_vk_image_format_properties.html#a95bad888d49ebfe7215563415b9d8a61">VkImageFormatProperties</a></li>
+<li>sampledImageColorSampleCounts&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a19cb7c6fe790920748f2a1965de09ff9">VkPhysicalDeviceLimits</a></li>
+<li>sampledImageDepthSampleCounts&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#adb9874d79dfd5e0abd56505e538aa872">VkPhysicalDeviceLimits</a></li>
+<li>sampledImageIntegerSampleCounts&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a0e17e2fbbcb1ad30977a133c97923e4d">VkPhysicalDeviceLimits</a></li>
+<li>sampledImageStencilSampleCounts&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#ad338ae08da9568cc78e563f239a554bc">VkPhysicalDeviceLimits</a></li>
+<li>sampler&#160;:&#160;<a class="el" href="struct_vk_descriptor_image_info.html#ab5068889e63a2867462e8eb23b2e26c1">VkDescriptorImageInfo</a></li>
+<li>samplerAnisotropy&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a0e091299c47559f595eaae554c39f6d7">VkPhysicalDeviceFeatures</a></li>
+<li>sampleRateShading&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a1be9b07b1aaee9255fe1822e313deb63">VkPhysicalDeviceFeatures</a></li>
+<li>samples&#160;:&#160;<a class="el" href="struct_vk_attachment_description.html#a6c7483a29f390afd4eb79484cb6aa6cb">VkAttachmentDescription</a>, <a class="el" href="struct_vk_image_create_info.html#a8771ce56c0eca0bd7e82327e244da132">VkImageCreateInfo</a></li>
+<li>sampleShadingEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_multisample_state_create_info.html#a62e55fc63838f70adc07fc6be9e697b9">VkPipelineMultisampleStateCreateInfo</a></li>
+<li>sBindings&#160;:&#160;<a class="el" href="struct_engine_1_1_native_behavior.html#ac8f83b9438543123d026aa52ff47b9a2">Engine::NativeBehavior&lt; T, Factory, Arguments &gt;</a></li>
+<li>sCallByMasterOnly&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_request_policy_type.html#aadefce2403b2b3e9b6d87f613e724f20">Engine::Serialize::RequestPolicyType&lt; callByMasterOnly &gt;</a></li>
+<li>scancode&#160;:&#160;<a class="el" href="struct_engine_1_1_input_1_1_key_event_args.html#a25a4e78545ab4c8d9885b76b1cd7adc7">Engine::Input::KeyEventArgs</a></li>
+<li>scissorCount&#160;:&#160;<a class="el" href="struct_vk_pipeline_viewport_state_create_info.html#a2df305600d79467f2c5783c041e3871c">VkPipelineViewportStateCreateInfo</a></li>
+<li>sCount&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_variable_store.html#abcfa75fa1a5ef9c633b0b652330c75e0">Engine::Threading::VariableStore</a></li>
+<li>screenPosition&#160;:&#160;<a class="el" href="struct_engine_1_1_input_1_1_pointer_event_args.html#afd6ced0afb09086c513b634cdbf420c8">Engine::Input::PointerEventArgs</a></li>
+<li>select_end&#160;:&#160;<a class="el" href="struct_s_t_b___textedit_state.html#abf8b1b1064770e4579c5bb8c4a41d8f0">STB_TexteditState</a></li>
+<li>select_start&#160;:&#160;<a class="el" href="struct_s_t_b___textedit_state.html#a74d595403e0b6f99cd0163ee87f4344d">STB_TexteditState</a></li>
+<li>semaphore&#160;:&#160;<a class="el" href="struct_vk_acquire_next_image_info_k_h_r.html#a6aa7b13d3a3335925209b4ec2a57c8c3">VkAcquireNextImageInfoKHR</a>, <a class="el" href="struct_vk_semaphore_signal_info.html#a679155051cbf1854d91296e2a3b5c968">VkSemaphoreSignalInfo</a></li>
+<li>semaphoreCount&#160;:&#160;<a class="el" href="struct_vk_semaphore_wait_info.html#a501d2a1192186d313ef17aabb1d0901f">VkSemaphoreWaitInfo</a></li>
+<li>semaphoreType&#160;:&#160;<a class="el" href="struct_vk_semaphore_type_create_info.html#a28d80f8b0179e5a8965e21db65d3bda1">VkSemaphoreTypeCreateInfo</a></li>
+<li>Sender&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1finally__t.html#a93a5d9a0ef3bd24c995dc223b2bbf6de">Engine::Execution::finally_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1finally__t_1_1typed.html#a3146c5e375b30dd38c4e2166c90ce38a">Engine::Execution::finally_t::typed&lt; F &gt;</a></li>
+<li>setLayoutCount&#160;:&#160;<a class="el" href="struct_vk_pipeline_layout_create_info.html#a87a9d16869086f3962964fabef8143bc">VkPipelineLayoutCreateInfo</a></li>
+<li>settingCount&#160;:&#160;<a class="el" href="struct_vk_layer_settings_create_info_e_x_t.html#a0ad45fd69c8798af0d80bd6f67afef31">VkLayerSettingsCreateInfoEXT</a></li>
+<li>sFactory&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior_factory.html#a8d8008ce7052b40a23465ed5497ee5b1">Engine::BehaviorFactory&lt; T &gt;</a></li>
+<li>sFontGlyphCount&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_font.html#a75f67fbbede22eeb45d18476eb141022">Engine::Render::Font</a></li>
+<li>shaderClipDistance&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a144361ed3a519cbb9c8970f055d65c7e">VkPhysicalDeviceFeatures</a></li>
+<li>shaderCullDistance&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a118300f1db01bdff32b135fb3e1f1bd7">VkPhysicalDeviceFeatures</a></li>
+<li>shaderFloat64&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a33ea0de7cbad82691df090bc7d0694a2">VkPhysicalDeviceFeatures</a></li>
+<li>shaderImageGatherExtended&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#ade272d27fb8d194d474fe48d9f4aa470">VkPhysicalDeviceFeatures</a></li>
+<li>shaderInt16&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a7228b8f37fbd68d534a73c06c8c890e7">VkPhysicalDeviceFeatures</a></li>
+<li>shaderInt64&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a9d9db672015bcf09cdcd44448885d47c">VkPhysicalDeviceFeatures</a></li>
+<li>shaderResourceMinLod&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a1794c0adcb0d5548c8d8cc0f8021b4e3">VkPhysicalDeviceFeatures</a></li>
+<li>shaderResourceResidency&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a7d9c3c421fd2d007655c91efbad866f7">VkPhysicalDeviceFeatures</a></li>
+<li>shaderSampledImageArrayDynamicIndexing&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a7c668c769d410974026c78875e14f0b2">VkPhysicalDeviceFeatures</a></li>
+<li>shaderStorageBufferArrayDynamicIndexing&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a0e6d5867fc09f7aa9b602d7774580962">VkPhysicalDeviceFeatures</a></li>
+<li>shaderStorageImageArrayDynamicIndexing&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a9ca2d55ba93f1403d6c9de4c3a0bbee5">VkPhysicalDeviceFeatures</a></li>
+<li>shaderStorageImageExtendedFormats&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#ac57485695bbb750c65b2b824cd50a245">VkPhysicalDeviceFeatures</a></li>
+<li>shaderStorageImageMultisample&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a478fe1bc03335330b773ea3ff9282eea">VkPhysicalDeviceFeatures</a></li>
+<li>shaderStorageImageReadWithoutFormat&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#ad5cbcd092356dc8ee3b3825825cc8912">VkPhysicalDeviceFeatures</a></li>
+<li>shaderStorageImageWriteWithoutFormat&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a85d72e44076f51cecda354fcddf9c9ce">VkPhysicalDeviceFeatures</a></li>
+<li>shaderTessellationAndGeometryPointSize&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#ad57506b6bf4f235294fee4cff08ed6ed">VkPhysicalDeviceFeatures</a></li>
+<li>shaderUniformBufferArrayDynamicIndexing&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#add97e122a17da723503cca3245f61da2">VkPhysicalDeviceFeatures</a></li>
+<li>shape&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1msdfgen_1_1_ft_context.html#a32d92aa6ec7ca12d7fc243300b6de22c">Engine::Render::msdfgen::FtContext</a></li>
+<li>sharingMode&#160;:&#160;<a class="el" href="struct_vk_buffer_create_info.html#af1031ba4cf71b074286289771884fb10">VkBufferCreateInfo</a>, <a class="el" href="struct_vk_image_create_info.html#a025cab2baf5b10873b054fdb6af6b851">VkImageCreateInfo</a></li>
+<li>sIdentifiers&#160;:&#160;<a class="el" href="struct_engine_1_1_generic_result_representation.html#a8685953224d9d72d0296cdc216177b35">Engine::GenericResultRepresentation</a></li>
+<li>signalSemaphoreCount&#160;:&#160;<a class="el" href="struct_vk_bind_sparse_info.html#a54da18d16a8692948172d62bd40b390d">VkBindSparseInfo</a>, <a class="el" href="struct_vk_submit_info.html#a86c49ef4e4c6b783a7eb91a0765eac32">VkSubmitInfo</a></li>
+<li>signalSemaphoreValueCount&#160;:&#160;<a class="el" href="struct_vk_timeline_semaphore_submit_info.html#a021d4d87317187db3f45311fdcf27412">VkTimelineSemaphoreSubmitInfo</a></li>
+<li>single_line&#160;:&#160;<a class="el" href="struct_s_t_b___textedit_state.html#a63299aca2cb4e009dfa41cda5e651316">STB_TexteditState</a></li>
+<li>sInvalid&#160;:&#160;<a class="el" href="struct_engine_1_1_index_type.html#a7a165c221bd6f16f1c497b86aa8c8e58">Engine::IndexType&lt; T, invalid &gt;</a></li>
+<li>size&#160;:&#160;<a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html#a9acd80b238529ecbab6f96c81181db72">Engine::type_pack&lt; Head, Ty... &gt;</a>, <a class="el" href="struct_engine_1_1type__pack_3_4.html#a8628c0374efce3c185c48f2e2733fa86">Engine::type_pack&lt;&gt;</a>, <a class="el" href="struct_vk_buffer_copy.html#a847b88d61b3db83a02d829795b2d55ac">VkBufferCopy</a>, <a class="el" href="struct_vk_buffer_create_info.html#a230f56cdd2cce941ed343cec0756e59f">VkBufferCreateInfo</a>, <a class="el" href="struct_vk_buffer_memory_barrier.html#a4d89542ea50a92ef9b9a7b1923fd5fc0">VkBufferMemoryBarrier</a>, <a class="el" href="struct_vk_mapped_memory_range.html#a7fb4a547e80bbc613cbf6ff6db332ac6">VkMappedMemoryRange</a>, <a class="el" href="struct_vk_memory_heap.html#ad5f8ce2a45e7e69ca91677cc28fcd05c">VkMemoryHeap</a>, <a class="el" href="struct_vk_memory_requirements.html#acb2a3220318b8988556bb04ae7924057">VkMemoryRequirements</a>, <a class="el" href="struct_vk_push_constant_range.html#a38e27b85b0bb7045c8b2ef339e43ad69">VkPushConstantRange</a>, <a class="el" href="struct_vk_sparse_memory_bind.html#a784c20bcb04d44e598408ba4c0f9474d">VkSparseMemoryBind</a>, <a class="el" href="struct_vk_specialization_map_entry.html#a4faac6cf7076c2a3764dbf92a6693f83">VkSpecializationMapEntry</a>, <a class="el" href="struct_vk_subresource_layout.html#af7dc232a742d6e14459165557e9ae980">VkSubresourceLayout</a></li>
+<li>skip&#160;:&#160;<a class="el" href="structstbi__io__callbacks.html#a257aac5480a90a6c4b8fbe86c1b01068">stbi_io_callbacks</a></li>
+<li>sMaxInitOrder&#160;:&#160;<a class="el" href="struct_engine_1_1_handler_manager.html#a7ceb54c69a0857d4758a2a548e537723">Engine::HandlerManager</a></li>
+<li>sMembers&#160;:&#160;<a class="el" href="struct_engine_1_1_typed_parameter_tuple_instance.html#a557fa98237e9ace1cbd5704f1dd3a57a">Engine::TypedParameterTupleInstance&lt; Names, Ty &gt;</a></li>
+<li>sMetaTable&#160;:&#160;<a class="el" href="struct_engine_1_1_typed_parameter_tuple_instance.html#a8563c76f82aa3a9ea54cb6aa77a41391">Engine::TypedParameterTupleInstance&lt; Names, Ty &gt;</a></li>
+<li>sMetaTablePtr&#160;:&#160;<a class="el" href="struct_engine_1_1_typed_parameter_tuple_instance.html#a9dafc4c16885256e29b9409d8a7fd393">Engine::TypedParameterTupleInstance&lt; Names, Ty &gt;</a></li>
+<li>sParameterTypes&#160;:&#160;<a class="el" href="struct_engine_1_1_native_behavior.html#a87321c0b3e2d38483be783f015bcf35f">Engine::NativeBehavior&lt; T, Factory, Arguments &gt;</a></li>
+<li>sparseAddressSpaceSize&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a86f0228baa5ceb840dbf90b1e2f2d1e0">VkPhysicalDeviceLimits</a></li>
+<li>sparseBinding&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a17b30b7203379bf1d0d81a041553159d">VkPhysicalDeviceFeatures</a></li>
+<li>sparseProperties&#160;:&#160;<a class="el" href="struct_vk_physical_device_properties.html#a39c0a2c6cce5e681f3cdb93a7d8ed7a0">VkPhysicalDeviceProperties</a></li>
+<li>sparseResidency16Samples&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a50eeaebe8d082564f9727769aeb31b7b">VkPhysicalDeviceFeatures</a></li>
+<li>sparseResidency2Samples&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a309991ee91787c76ad7881a17f5de263">VkPhysicalDeviceFeatures</a></li>
+<li>sparseResidency4Samples&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#a8014312e8721552d6c5b2a66c3ca595b">VkPhysicalDeviceFeatures</a></li>
+<li>sparseResidency8Samples&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#afa39027c89b1e72c53e00be3ea7ada1d">VkPhysicalDeviceFeatures</a></li>
+<li>sparseResidencyAliased&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#af9ed846d550e0bbf14d79ba05eb999d8">VkPhysicalDeviceFeatures</a></li>
+<li>sparseResidencyBuffer&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#afb1c9859fe4c595ed4f09ed82df9c0c9">VkPhysicalDeviceFeatures</a></li>
+<li>sparseResidencyImage2D&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#aa163cb2c12dde204de32d0c65009241e">VkPhysicalDeviceFeatures</a></li>
+<li>sparseResidencyImage3D&#160;:&#160;<a class="el" href="struct_vk_physical_device_features.html#acdb2ed8d2df7869daa302143204712c2">VkPhysicalDeviceFeatures</a></li>
+<li>specVersion&#160;:&#160;<a class="el" href="struct_vk_extension_properties.html#a01a82d9d30bf7a2a936426344ad146ac">VkExtensionProperties</a>, <a class="el" href="struct_vk_layer_properties.html#a2b18e49ab4f50a67f301fb9840e0cddc">VkLayerProperties</a></li>
+<li>srcAccessMask&#160;:&#160;<a class="el" href="struct_vk_buffer_memory_barrier.html#a16fffe61eacd0c703667e9aa8179d518">VkBufferMemoryBarrier</a>, <a class="el" href="struct_vk_image_memory_barrier.html#aa88b3a47cf80e795f550f68454b531ec">VkImageMemoryBarrier</a>, <a class="el" href="struct_vk_memory_barrier.html#a79b075e5dd1819daf9767e328368a630">VkMemoryBarrier</a>, <a class="el" href="struct_vk_subpass_dependency.html#a9d1504fc31142c4fb9355e3c0064d55b">VkSubpassDependency</a></li>
+<li>srcAlphaBlendFactor&#160;:&#160;<a class="el" href="struct_vk_pipeline_color_blend_attachment_state.html#adf81dc5c03a70ceb3da024c43971c530">VkPipelineColorBlendAttachmentState</a></li>
+<li>srcArrayElement&#160;:&#160;<a class="el" href="struct_vk_copy_descriptor_set.html#a35a87a7ea5b2703155794e4c45b90f2a">VkCopyDescriptorSet</a></li>
+<li>srcBinding&#160;:&#160;<a class="el" href="struct_vk_copy_descriptor_set.html#a19d9b2de52d67ca8ae164ed85c2b6005">VkCopyDescriptorSet</a></li>
+<li>srcColorBlendFactor&#160;:&#160;<a class="el" href="struct_vk_pipeline_color_blend_attachment_state.html#ae9411837ba08398ca6f169cacd032cd1">VkPipelineColorBlendAttachmentState</a></li>
+<li>srcOffset&#160;:&#160;<a class="el" href="struct_vk_buffer_copy.html#ad143d1b86939d0dc145eaafdb06f52b3">VkBufferCopy</a>, <a class="el" href="struct_vk_image_copy.html#a98fe25f1deb142efe4f26c0e0b541a43">VkImageCopy</a>, <a class="el" href="struct_vk_image_resolve.html#a63bd8615e05cfd703025e2b6f2b012e1">VkImageResolve</a></li>
+<li>srcOffsets&#160;:&#160;<a class="el" href="struct_vk_image_blit.html#ab2ca7781f44adfd4866ba4146dd66fdf">VkImageBlit</a></li>
+<li>srcQueueFamilyIndex&#160;:&#160;<a class="el" href="struct_vk_buffer_memory_barrier.html#a74e81e51af52fce7c5379a41dc4c6b14">VkBufferMemoryBarrier</a>, <a class="el" href="struct_vk_image_memory_barrier.html#ade7211babf80f28fca2d7c127bf500d3">VkImageMemoryBarrier</a></li>
+<li>srcSet&#160;:&#160;<a class="el" href="struct_vk_copy_descriptor_set.html#a5201600e8b94e4d3f2fd7c65de9c4c60">VkCopyDescriptorSet</a></li>
+<li>srcStageMask&#160;:&#160;<a class="el" href="struct_vk_subpass_dependency.html#a936108acad17f1cc017ad6e04c72e630">VkSubpassDependency</a></li>
+<li>srcSubpass&#160;:&#160;<a class="el" href="struct_vk_subpass_dependency.html#a7cb3a42d5f46a6e7261afd6de6adb1e0">VkSubpassDependency</a></li>
+<li>srcSubresource&#160;:&#160;<a class="el" href="struct_vk_image_blit.html#ab54fd1017cf1d060a7427036e3f80e00">VkImageBlit</a>, <a class="el" href="struct_vk_image_copy.html#aaaad50075b6078ace7a50f213e253232">VkImageCopy</a>, <a class="el" href="struct_vk_image_resolve.html#a64094f57d5f8e8a4d6a2fd319d33cd46">VkImageResolve</a></li>
+<li>sResultTypes&#160;:&#160;<a class="el" href="struct_engine_1_1_native_behavior.html#af57c48f8402450ae4339911b2fd3f03c">Engine::NativeBehavior&lt; T, Factory, Arguments &gt;</a></li>
+<li>sSelf&#160;:&#160;<a class="el" href="struct_engine_1_1_unique_component_1_1_registry.html#a306f74170d41d5af16b9558d752e4857">Engine::UniqueComponent::Registry&lt; _Base, _Annotations &gt;</a></li>
+<li>sTable&#160;:&#160;<a class="el" href="struct_engine_1_1_generic_result_representation.html#aabff98a63cb3a7dcf06e1936bb6a1fe4">Engine::GenericResultRepresentation</a></li>
+<li>stage&#160;:&#160;<a class="el" href="struct_vk_compute_pipeline_create_info.html#a4771703e46235156a47c1b3388b9a384">VkComputePipelineCreateInfo</a>, <a class="el" href="struct_vk_pipeline_shader_stage_create_info.html#ad5cbefa3e37f2ff27650d3d81934111a">VkPipelineShaderStageCreateInfo</a></li>
+<li>stageCount&#160;:&#160;<a class="el" href="struct_vk_graphics_pipeline_create_info.html#a410dacfcdb79d9aeee6780d7c276dc55">VkGraphicsPipelineCreateInfo</a></li>
+<li>stageFlags&#160;:&#160;<a class="el" href="struct_vk_descriptor_set_layout_binding.html#ac76b188d77b608817d46be4d4fa98705">VkDescriptorSetLayoutBinding</a>, <a class="el" href="struct_vk_push_constant_range.html#af0457f11100ccf789f542b66ccb3056b">VkPushConstantRange</a></li>
+<li>standardSampleLocations&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a6ec5a7a5c29ee36f49dc31d02da08361">VkPhysicalDeviceLimits</a></li>
+<li>stencil&#160;:&#160;<a class="el" href="struct_vk_clear_depth_stencil_value.html#a14c6eca3495f84365acee74b3be9ef79">VkClearDepthStencilValue</a></li>
+<li>stencilLoadOp&#160;:&#160;<a class="el" href="struct_vk_attachment_description.html#af125487d4ff77f199696c472975d8673">VkAttachmentDescription</a></li>
+<li>stencilStoreOp&#160;:&#160;<a class="el" href="struct_vk_attachment_description.html#a6a6153acac6c941e5a2f35999d68c4f0">VkAttachmentDescription</a></li>
+<li>stencilTestEnable&#160;:&#160;<a class="el" href="struct_vk_pipeline_depth_stencil_state_create_info.html#a8e26bdba13a12d6355542571e1433e1d">VkPipelineDepthStencilStateCreateInfo</a></li>
+<li>stop_increment&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1tracked__t_1_1receiver.html#aaf3c46196d309022549e14ce43a4357c">Engine::Execution::tracked_t::receiver&lt; Rec, Sender &gt;</a></li>
+<li>storageImageSampleCounts&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a91edcbc3a69d98b8a651f7a03407a62f">VkPhysicalDeviceLimits</a></li>
+<li>storeOp&#160;:&#160;<a class="el" href="struct_vk_attachment_description.html#a9f6e3b9dc464d07886d9b56df9608066">VkAttachmentDescription</a></li>
+<li>strictLines&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a180cbcc56f5a40ae2230fce32448208c">VkPhysicalDeviceLimits</a></li>
+<li>stride&#160;:&#160;<a class="el" href="struct_vk_vertex_input_binding_description.html#abc0a14c1a0f549015376095734e7022c">VkVertexInputBindingDescription</a></li>
+<li>sType&#160;:&#160;<a class="el" href="struct_vk_acquire_next_image_info_k_h_r.html#a10728f679b2a9072ff7778d76d2dfaf2">VkAcquireNextImageInfoKHR</a>, <a class="el" href="struct_vk_application_info.html#a6b96ef7ca4e33961238a841c59f01eb2">VkApplicationInfo</a>, <a class="el" href="struct_vk_base_in_structure.html#a91dbe55ddd43f2e6bbd641ec97662968">VkBaseInStructure</a>, <a class="el" href="struct_vk_base_out_structure.html#a1b9c12aa0b79dfa96396c1592a502a12">VkBaseOutStructure</a>, <a class="el" href="struct_vk_bind_image_memory_swapchain_info_k_h_r.html#a8c0d73b85ec0d9f1e541ecba06520a2b">VkBindImageMemorySwapchainInfoKHR</a>, <a class="el" href="struct_vk_bind_sparse_info.html#acf620491199cfc5de44c7cdf29c82638">VkBindSparseInfo</a>, <a class="el" href="struct_vk_buffer_create_info.html#abbcc2195cc25c4143aefe46fed163981">VkBufferCreateInfo</a>, <a class="el" href="struct_vk_buffer_memory_barrier.html#ab40e918614923884e64432f724b47a98">VkBufferMemoryBarrier</a>, <a class="el" href="struct_vk_buffer_view_create_info.html#abf431eafa1120679e0f4aa35bf97a1ad">VkBufferViewCreateInfo</a>, <a class="el" href="struct_vk_command_buffer_allocate_info.html#aa3690ba29d32736364209f7a8053e4cc">VkCommandBufferAllocateInfo</a>, <a class="el" href="struct_vk_command_buffer_begin_info.html#a84e25a52283c43bbb206170caab0586c">VkCommandBufferBeginInfo</a>, <a class="el" href="struct_vk_command_buffer_inheritance_info.html#a0778107f21a647212a3e0766e1a9c2f1">VkCommandBufferInheritanceInfo</a>, <a class="el" href="struct_vk_command_pool_create_info.html#a93f0eb252db1738f973375d0c33769ec">VkCommandPoolCreateInfo</a>, <a class="el" href="struct_vk_compute_pipeline_create_info.html#a6763500b0659609a6c495093ca855a4e">VkComputePipelineCreateInfo</a>, <a class="el" href="struct_vk_copy_descriptor_set.html#a6b3e64ea171033927c07ed17124a15cf">VkCopyDescriptorSet</a>, <a class="el" href="struct_vk_debug_marker_marker_info_e_x_t.html#adf794c7d5d1d9d5eddd70082b9d88164">VkDebugMarkerMarkerInfoEXT</a>, <a class="el" href="struct_vk_debug_marker_object_name_info_e_x_t.html#a082a71b17d6b34e9de293ce4b8673a7a">VkDebugMarkerObjectNameInfoEXT</a>, <a class="el" href="struct_vk_debug_marker_object_tag_info_e_x_t.html#a2a9f55d17ae14007e80c44d5647560f8">VkDebugMarkerObjectTagInfoEXT</a>, <a class="el" href="struct_vk_debug_report_callback_create_info_e_x_t.html#a8ff7ea0360e6db0d2bee7b6164e37c0a">VkDebugReportCallbackCreateInfoEXT</a>, <a class="el" href="struct_vk_debug_utils_label_e_x_t.html#a01827f2856b0752277456998de445593">VkDebugUtilsLabelEXT</a>, <a class="el" href="struct_vk_debug_utils_messenger_callback_data_e_x_t.html#a71e9058fd8d86546d5e1e2ef85151972">VkDebugUtilsMessengerCallbackDataEXT</a>, <a class="el" href="struct_vk_debug_utils_messenger_create_info_e_x_t.html#a4cfd81e29fee7efde72c53b97faa0681">VkDebugUtilsMessengerCreateInfoEXT</a>, <a class="el" href="struct_vk_debug_utils_object_name_info_e_x_t.html#aed4696154609493b195d87e846d2e27f">VkDebugUtilsObjectNameInfoEXT</a>, <a class="el" href="struct_vk_debug_utils_object_tag_info_e_x_t.html#ada7fa235a8a9f6ae798ea9978388843e">VkDebugUtilsObjectTagInfoEXT</a>, <a class="el" href="struct_vk_descriptor_pool_create_info.html#a08aeadb4ed508b233e94df1e3155a84a">VkDescriptorPoolCreateInfo</a>, <a class="el" href="struct_vk_descriptor_set_allocate_info.html#a2ba811f9c23f3a535b3a18da107a5ed9">VkDescriptorSetAllocateInfo</a>, <a class="el" href="struct_vk_descriptor_set_layout_create_info.html#a0770b2121e45b2294d074a31930db571">VkDescriptorSetLayoutCreateInfo</a>, <a class="el" href="struct_vk_device_create_info.html#afe08d1b35bad12a2aa96fa7961bc34c6">VkDeviceCreateInfo</a>, <a class="el" href="struct_vk_device_group_present_capabilities_k_h_r.html#a7f45c78fe88d6aeb6bfc0846312a28f5">VkDeviceGroupPresentCapabilitiesKHR</a>, <a class="el" href="struct_vk_device_group_present_info_k_h_r.html#a091654bdd880018099fa8cdb0ac86aac">VkDeviceGroupPresentInfoKHR</a>, <a class="el" href="struct_vk_device_group_swapchain_create_info_k_h_r.html#af3a4e4639dce62756c21b8d850a3133e">VkDeviceGroupSwapchainCreateInfoKHR</a>, <a class="el" href="struct_vk_device_queue_create_info.html#ae7eb733b7cdc7938117bc2c7664a7b1c">VkDeviceQueueCreateInfo</a>, <a class="el" href="struct_vk_event_create_info.html#ab47cc454ff85ad83e9a480627eb69877">VkEventCreateInfo</a>, <a class="el" href="struct_vk_fence_create_info.html#adc52c9555adc6d3d3d377686b3fc6878">VkFenceCreateInfo</a>, <a class="el" href="struct_vk_framebuffer_create_info.html#a42acf535fdc19466f6580fbe7ca9b539">VkFramebufferCreateInfo</a>, <a class="el" href="struct_vk_graphics_pipeline_create_info.html#ad678fd1cc7211cb52170785dee959c84">VkGraphicsPipelineCreateInfo</a>, <a class="el" href="struct_vk_image_create_info.html#ac55852316bcd80098ac5ba7ba8f1f2e0">VkImageCreateInfo</a>, <a class="el" href="struct_vk_image_memory_barrier.html#abebc87a9860c12538f246d8a03346305">VkImageMemoryBarrier</a>, <a class="el" href="struct_vk_image_swapchain_create_info_k_h_r.html#a265b4986a4f9f737642ebea20d7509b0">VkImageSwapchainCreateInfoKHR</a>, <a class="el" href="struct_vk_image_view_create_info.html#a70b7a7702c535a0af1426f6a55d48903">VkImageViewCreateInfo</a>, <a class="el" href="struct_vk_instance_create_info.html#a32a7ba8e8c99307d41b0375fe40d0dc1">VkInstanceCreateInfo</a>, <a class="el" href="struct_vk_layer_settings_create_info_e_x_t.html#a278d0b8ac92017e6102c1b3a213c120c">VkLayerSettingsCreateInfoEXT</a>, <a class="el" href="struct_vk_mapped_memory_range.html#ad4a24753707a06975ddc4de0f5fa6111">VkMappedMemoryRange</a>, <a class="el" href="struct_vk_memory_allocate_info.html#a22fbbb0478ef090166205bd5d37fbcf7">VkMemoryAllocateInfo</a>, <a class="el" href="struct_vk_memory_barrier.html#a009343c923f7ddfb6d7ec5481efd3b71">VkMemoryBarrier</a>, <a class="el" href="struct_vk_physical_device_timeline_semaphore_features.html#ad4598d9607f40a65099cfbae32b157e1">VkPhysicalDeviceTimelineSemaphoreFeatures</a>, <a class="el" href="struct_vk_physical_device_timeline_semaphore_properties.html#a8120dbe9c24695cac96e0f24d92a8168">VkPhysicalDeviceTimelineSemaphoreProperties</a>, <a class="el" href="struct_vk_pipeline_cache_create_info.html#a734e6589e48fa13f4fb15abdf50cc80a">VkPipelineCacheCreateInfo</a>, <a class="el" href="struct_vk_pipeline_color_blend_state_create_info.html#ad7729689dd4b0b27a9ab84312cade07b">VkPipelineColorBlendStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_depth_stencil_state_create_info.html#a954db670e43f27988eee8466bc1d964d">VkPipelineDepthStencilStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_dynamic_state_create_info.html#a8ce13604021868c0887a47fadae314b6">VkPipelineDynamicStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_input_assembly_state_create_info.html#a3c108c90c267b5c8312dd312264cf68a">VkPipelineInputAssemblyStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_layout_create_info.html#a23efee7f7ff08eafe634e239b34e36c6">VkPipelineLayoutCreateInfo</a>, <a class="el" href="struct_vk_pipeline_multisample_state_create_info.html#a59a24f0ef89a47938e4aa7aba564c0d0">VkPipelineMultisampleStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_rasterization_state_create_info.html#aeddbeece787b3601842eec89ec1a433e">VkPipelineRasterizationStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_shader_stage_create_info.html#a5cafa13c2f71b6752cab032e0f21da9d">VkPipelineShaderStageCreateInfo</a>, <a class="el" href="struct_vk_pipeline_tessellation_state_create_info.html#adbaf1944f544582f7734105bea70a5f7">VkPipelineTessellationStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_vertex_input_state_create_info.html#a7ad5b11e976544407d4bc28b19a048ac">VkPipelineVertexInputStateCreateInfo</a>, <a class="el" href="struct_vk_pipeline_viewport_state_create_info.html#ab0929fde2526aec2bffdf2297ccec1f3">VkPipelineViewportStateCreateInfo</a>, <a class="el" href="struct_vk_present_info_k_h_r.html#aca8bc80315c412aed81a8ca085c03a31">VkPresentInfoKHR</a>, <a class="el" href="struct_vk_query_pool_create_info.html#a9c22e6529495e88a8fc2a66427e29f47">VkQueryPoolCreateInfo</a>, <a class="el" href="struct_vk_render_pass_begin_info.html#ada9aa3bedec22e154164b4b3f02e0b60">VkRenderPassBeginInfo</a>, <a class="el" href="struct_vk_render_pass_create_info.html#a3e8070a38623072cda4de2ad78278271">VkRenderPassCreateInfo</a>, <a class="el" href="struct_vk_sampler_create_info.html#adfff6bb0248631ad0d6d663645621392">VkSamplerCreateInfo</a>, <a class="el" href="struct_vk_semaphore_create_info.html#a2a830522875c4127b0c25d46b32b90c3">VkSemaphoreCreateInfo</a>, <a class="el" href="struct_vk_semaphore_signal_info.html#a287bda2c7f6ee5a7224fc6ec5fc4f933">VkSemaphoreSignalInfo</a>, <a class="el" href="struct_vk_semaphore_type_create_info.html#a9d8861dd4ef9a44b4c6a1ced1fc75538">VkSemaphoreTypeCreateInfo</a>, <a class="el" href="struct_vk_semaphore_wait_info.html#a0b88dd840faf48e833fa1f086bc17be9">VkSemaphoreWaitInfo</a>, <a class="el" href="struct_vk_shader_module_create_info.html#aa0adaaec5dcb274d56b9979cfd3172ab">VkShaderModuleCreateInfo</a>, <a class="el" href="struct_vk_submit_info.html#aee3cc5c2a1fb144a0476fa8baa835571">VkSubmitInfo</a>, <a class="el" href="struct_vk_swapchain_create_info_k_h_r.html#a6f9fe0a8cf225081177fe05c59662d1b">VkSwapchainCreateInfoKHR</a>, <a class="el" href="struct_vk_timeline_semaphore_submit_info.html#a3bd9a46734e8811db54280bd071cb742">VkTimelineSemaphoreSubmitInfo</a>, <a class="el" href="struct_vk_write_descriptor_set.html#a489fabfc07ab70afcd6ef570b6b57013">VkWriteDescriptorSet</a></li>
+<li>subpass&#160;:&#160;<a class="el" href="struct_vk_command_buffer_inheritance_info.html#ab979e2e8f6fdde9ceacba965ba912173">VkCommandBufferInheritanceInfo</a>, <a class="el" href="struct_vk_graphics_pipeline_create_info.html#a8fb2115cbda51edc5247766c0e733acf">VkGraphicsPipelineCreateInfo</a></li>
+<li>subpassCount&#160;:&#160;<a class="el" href="struct_vk_render_pass_create_info.html#a8abf948a7091b4bdc4616f7835170970">VkRenderPassCreateInfo</a></li>
+<li>subPixelInterpolationOffsetBits&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a14a9c03c8b8de61ed1ff08f94b24b0cf">VkPhysicalDeviceLimits</a></li>
+<li>subPixelPrecisionBits&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#aee77b32da968ff1d111305e7d02ed62e">VkPhysicalDeviceLimits</a></li>
+<li>subresource&#160;:&#160;<a class="el" href="struct_vk_sparse_image_memory_bind.html#a6190ca0fc24295b9acec192cdc219d88">VkSparseImageMemoryBind</a></li>
+<li>subresourceRange&#160;:&#160;<a class="el" href="struct_vk_image_memory_barrier.html#adaeae63762c399088ecb92004f9a397b">VkImageMemoryBarrier</a>, <a class="el" href="struct_vk_image_view_create_info.html#a05556fac7de23918d583834a81f2292f">VkImageViewCreateInfo</a></li>
+<li>subTexelPrecisionBits&#160;:&#160;<a class="el" href="struct_vk_physical_device_limits.html#a10f9ad11b5df2adfdbb5871c4f819658">VkPhysicalDeviceLimits</a></li>
+<li>supportedCompositeAlpha&#160;:&#160;<a class="el" href="struct_vk_surface_capabilities_k_h_r.html#a2e6595b76489db1fc66dbee7ef516d0f">VkSurfaceCapabilitiesKHR</a></li>
+<li>supportedTransforms&#160;:&#160;<a class="el" href="struct_vk_surface_capabilities_k_h_r.html#a99e67b7df1abb403a129ce8685ad6fc8">VkSurfaceCapabilitiesKHR</a></li>
+<li>supportedUsageFlags&#160;:&#160;<a class="el" href="struct_vk_surface_capabilities_k_h_r.html#ae4f22707cc514ba0c8170443af3c2846">VkSurfaceCapabilitiesKHR</a></li>
+<li>surface&#160;:&#160;<a class="el" href="struct_vk_swapchain_create_info_k_h_r.html#a76c1033ebf7bcd956d30b04de47fc231">VkSwapchainCreateInfoKHR</a></li>
+<li>swapchain&#160;:&#160;<a class="el" href="struct_vk_acquire_next_image_info_k_h_r.html#aa4bd74de43ba8505bb8a52dedcbc9ab0">VkAcquireNextImageInfoKHR</a>, <a class="el" href="struct_vk_bind_image_memory_swapchain_info_k_h_r.html#a874c9a9179bf86b978ad6590030817e7">VkBindImageMemorySwapchainInfoKHR</a>, <a class="el" href="struct_vk_image_swapchain_create_info_k_h_r.html#a4e4d3fae5723021db83c69eeb0100b44">VkImageSwapchainCreateInfoKHR</a></li>
+<li>swapchainCount&#160;:&#160;<a class="el" href="struct_vk_device_group_present_info_k_h_r.html#a431b5594e7790293edf82ba7c50fb343">VkDeviceGroupPresentInfoKHR</a>, <a class="el" href="struct_vk_present_info_k_h_r.html#a37a3f089773c0b2a6bc985892aa9cfe2">VkPresentInfoKHR</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="functions_vars_r.html" class="btn btn-neutral float-left" title="Class Members - Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions_vars_t.html" class="btn btn-neutral float-right" title="Class Members - Variables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

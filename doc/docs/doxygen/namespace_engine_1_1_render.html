@@ -1,0 +1,2146 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/namespace_engine_1_1_render.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="render-namespace-reference">
+<h1>Render Namespace Reference<a class="headerlink" href="#render-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine_1_1_render_1_1_direct_x12_shader_code_gen"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_direct_x12_shader_code_gen.html">DirectX12ShaderCodeGen</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render_1_1_i_o_s_bridge"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_i_o_s_bridge.html">IOSBridge</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render_1_1msdfgen"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1msdfgen.html">msdfgen</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html">OpenGLShaderCodeGen</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render_1_1_o_s_x_bridge"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_o_s_x_bridge.html">OSXBridge</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render_1_1_vulkan_shader_code_gen"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_vulkan_shader_code_gen.html">VulkanShaderCodeGen</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_animation_bone.html">AnimationBone</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_animation_descriptor.html">AnimationDescriptor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_animation_list.html">AnimationList</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_animation_loader.html">AnimationLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_bloom_pass.html">BloomPass</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_blur_pass.html">BlurPass</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_bone.html">Bone</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_camera.html">Camera</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_constant_values.html">ConstantValues</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1create__t.html">create_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_data_future.html">DataFuture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_buffer.html">DirectX12Buffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html">DirectX12CommandList</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mesh_data.html">DirectX12MeshData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mesh_loader.html">DirectX12MeshLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_persistent_buffer.html">DirectX12PersistentBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline.html">DirectX12Pipeline</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance.html">DirectX12PipelineInstance</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance_handle.html">DirectX12PipelineInstanceHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_instance_ptr.html">DirectX12PipelineInstancePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pipeline_loader.html">DirectX12PipelineLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_pixel_shader_loader.html">DirectX12PixelShaderLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_query_heap.html">DirectX12QueryHeap</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html">DirectX12RenderTarget</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html">DirectX12RenderTexture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_window.html">DirectX12RenderWindow</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture_loader.html">DirectX12TextureLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_vertex_shader_loader.html">DirectX12VertexShaderLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_environment.html">Environment</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font.html">Font</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font_loader.html">FontLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_glyph.html">Glyph</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_buffer.html">GPUBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_mesh_data.html">GPUMeshData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_mesh_loader.html">GPUMeshLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_key_frame.html">KeyFrame</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_lit_scene_render_data.html">LitSceneRenderData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_mesh_data.html">MeshData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_mesh_loader.html">MeshLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_buffer.html">OpenGLBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_heap_allocator.html">OpenGLHeapAllocator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_mapped_heap_allocator.html">OpenGLMappedHeapAllocator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_mesh_data.html">OpenGLMeshData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_mesh_loader.html">OpenGLMeshLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline.html">OpenGLPipeline</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance.html">OpenGLPipelineInstance</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_handle.html">OpenGLPipelineInstanceHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_instance_ptr.html">OpenGLPipelineInstancePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline_loader.html">OpenGLPipelineLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_context.html">OpenGLRenderContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_target.html">OpenGLRenderTarget</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_texture.html">OpenGLRenderTexture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_window.html">OpenGLRenderWindow</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_resource_block.html">OpenGLResourceBlock</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_shader.html">OpenGLShader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_shader_loader.html">OpenGLShaderLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture_loader.html">OpenGLTextureLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_open_g_l_vertex_array.html">OpenGLVertexArray</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline.html">Pipeline</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_descriptor.html">PipelineDescriptor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html">PipelineInstance</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader.html">PipelineLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html">PointShadowRenderPass</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_queue_family_indices.html">QueueFamilyIndices</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html">RenderDebuggable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_resource_block_buffer.html">ResourceBlockBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_main_window_component.html">SceneMainWindowComponent</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html">SceneRenderData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_pass.html">SceneRenderPass</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_shadow_render_pass.html">ShadowRenderPass</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_shadow_scene_render_data.html">ShadowSceneRenderData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_skeleton_descriptor.html">SkeletonDescriptor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_skeleton_loader.html">SkeletonLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_swap_chain_support_details.html">SwapChainSupportDetails</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture_handle.html">TextureHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_texture_loader.html">TextureLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_unique_texture_handle.html">UniqueTextureHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_indices.html">VertexBoneIndices</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_weights.html">VertexBoneWeights</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_pos2.html">VertexPos2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_pos_w.html">VertexPosW</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_buffer.html">VulkanBuffer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_command_list.html">VulkanCommandList</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_constant_buffer_heap.html">VulkanConstantBufferHeap</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_heap_allocator.html">VulkanHeapAllocator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_mapped_heap_allocator.html">VulkanMappedHeapAllocator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_mesh_data.html">VulkanMeshData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_mesh_loader.html">VulkanMeshLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html">VulkanPipeline</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html">VulkanPipelineInstance</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance_handle.html">VulkanPipelineInstanceHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance_ptr.html">VulkanPipelineInstancePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_loader.html">VulkanPipelineLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html">VulkanRenderTarget</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html">VulkanRenderTexture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_window.html">VulkanRenderWindow</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader.html">VulkanShaderLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture_loader.html">VulkanTextureLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:af8bf6522b9cb51f895a4aabcc26a588a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af8bf6522b9cb51f895a4aabcc26a588a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#af8bf6522b9cb51f895a4aabcc26a588a">GPUArrayPtr</a> = <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; T[]&gt;</td></tr>
+<tr class="separator:af8bf6522b9cb51f895a4aabcc26a588a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a868a8eb8f2eef3e389d755d192db17dd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a868a8eb8f2eef3e389d755d192db17dd">QuaternionKeyFrame</a> = <a class="el" href="struct_engine_1_1_render_1_1_key_frame.html">KeyFrame</a>&lt; <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &gt;</td></tr>
+<tr class="separator:a868a8eb8f2eef3e389d755d192db17dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50cb6392f53a7495b36bb34cc29937f6"><td class="memItemLeft" align="right" valign="top">typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a50cb6392f53a7495b36bb34cc29937f6">RenderPassFlags</a></td></tr>
+<tr class="separator:a50cb6392f53a7495b36bb34cc29937f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbae3541f66ab8ce9f283f6718234b5e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#acbae3541f66ab8ce9f283f6718234b5e">VectorKeyFrame</a> = <a class="el" href="struct_engine_1_1_render_1_1_key_frame.html">KeyFrame</a>&lt; <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &gt;</td></tr>
+<tr class="separator:acbae3541f66ab8ce9f283f6718234b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a999ae5150cec3c09d2c039995f9e9017"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a999ae5150cec3c09d2c039995f9e9017">Vertex</a> = <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a> &gt;</td></tr>
+<tr class="separator:a999ae5150cec3c09d2c039995f9e9017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8b0bcc239464838148230ad9ba6df52"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aa8b0bcc239464838148230ad9ba6df52">Vertex2</a> = <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos2.html">VertexPos2</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a> &gt;</td></tr>
+<tr class="separator:aa8b0bcc239464838148230ad9ba6df52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3322bcff736c2bffd80e3114ec357b50"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a3322bcff736c2bffd80e3114ec357b50">Vertex3</a> = <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a> &gt;</td></tr>
+<tr class="separator:a3322bcff736c2bffd80e3114ec357b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39c8cca471d0763480e5088cd9eb2ffc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a39c8cca471d0763480e5088cd9eb2ffc">Vertex4</a> = <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_indices.html">VertexBoneIndices</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_weights.html">VertexBoneWeights</a> &gt;</td></tr>
+<tr class="separator:a39c8cca471d0763480e5088cd9eb2ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2ba02a42b4887054f1122da6da4c987"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aa2ba02a42b4887054f1122da6da4c987">Vertex5</a> = <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_indices.html">VertexBoneIndices</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_weights.html">VertexBoneWeights</a> &gt;</td></tr>
+<tr class="separator:aa2ba02a42b4887054f1122da6da4c987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a430dc4bc19c09e989ccfe02c06e4862c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a430dc4bc19c09e989ccfe02c06e4862c">VertexElements</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos_w.html">VertexPosW</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos2.html">VertexPos2</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_indices.html">VertexBoneIndices</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_weights.html">VertexBoneWeights</a> &gt;</td></tr>
+<tr class="separator:a430dc4bc19c09e989ccfe02c06e4862c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef999500f2e2f43fd56081a7818ede1f"><td class="memTemplParams" colspan="2">template&lt;typename T , auto D&gt; </td></tr>
+<tr class="memitem:aef999500f2e2f43fd56081a7818ede1f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aef999500f2e2f43fd56081a7818ede1f">VulkanPtr2</a> = <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; T, D, <a class="el" href="namespace_engine_1_1_render.html#a2bb122550f4f340d4a72ab2ede88a8b6">vulkanDeleter2</a>&lt; T, D &gt; &gt;</td></tr>
+<tr class="separator:aef999500f2e2f43fd56081a7818ede1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a871950bbc05e1571445cf0e3807bad89"><td class="memTemplParams" colspan="2">template&lt;typename T , auto D&gt; </td></tr>
+<tr class="memitem:a871950bbc05e1571445cf0e3807bad89"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a871950bbc05e1571445cf0e3807bad89">VulkanPtr3</a> = <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; T, D, <a class="el" href="namespace_engine_1_1_render.html#adef21a6872f79f0e296dfa64fcd4ee3a">vulkanDeleter3</a>&lt; T, D &gt; &gt;</td></tr>
+<tr class="separator:a871950bbc05e1571445cf0e3807bad89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a6dd835fe3dbc77647b64247f0b2d8fe1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a6dd835fe3dbc77647b64247f0b2d8fe1">MinMode</a> { <a class="el" href="namespace_engine_1_1_render.html#a6dd835fe3dbc77647b64247f0b2d8fe1a6618c0fa9b5baa1ba5cd2253a6d01f2b">MIN_NEAREST</a>
+ }</td></tr>
+<tr class="separator:a6dd835fe3dbc77647b64247f0b2d8fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade81bec341611fc1da152816cf387025"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ade81bec341611fc1da152816cf387025">RenderPassFlags_</a> { <a class="el" href="namespace_engine_1_1_render.html#ade81bec341611fc1da152816cf387025aab1d42f68d6ce920a08eeaefe92aa422">RenderPassFlags_None</a> = 0
+, <a class="el" href="namespace_engine_1_1_render.html#ade81bec341611fc1da152816cf387025a59d91fb435994412618225ff1af7cd79">RenderPassFlags_NoLighting</a> = 1 &lt;&lt; 0
+, <a class="el" href="namespace_engine_1_1_render.html#ade81bec341611fc1da152816cf387025a5b27e07b1558cc3586b117d684b49f15">RenderPassFlags_NoPerspective</a> = 1 &lt;&lt; 1
+, <a class="el" href="namespace_engine_1_1_render.html#ade81bec341611fc1da152816cf387025a11cadef3fd532d60af603c95b6679ddf">RenderPassFlags_DistanceField</a> = 1 &lt;&lt; 2
+ }</td></tr>
+<tr class="separator:ade81bec341611fc1da152816cf387025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca15bb3bf29d2afc8394dca2a093a6d4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4">ShaderType</a> { <a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4a135b1e94bf1ba081bb41edba2307b36d">VertexShader</a>
+, <a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4a2cfa34286d5de9864670eaa8a3463aff">PixelShader</a>
+ }</td></tr>
+<tr class="separator:aca15bb3bf29d2afc8394dca2a093a6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4f85580b5cfb0cb84748f6f4b47153f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> { <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153fa555b08528ceaf344ddfc7e2f0661e7e5">FORMAT_RGBA8</a>
+, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153fa7fcf5df1c5a9ff1047111433975e62be">FORMAT_RGBA8_SRGB</a>
+, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153fa4db10a4fcc359ccd5026cbbbd13f8360">FORMAT_RGBA16F</a>
+, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153fa302ec1e3dc433ea50887a5e2ace64b37">FORMAT_R32F</a>
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153faf59779d673077d6d6021766cde4a8fb1">FORMAT_D24</a>
+, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153faefaca57fd95d7a6f39b503dae1c28520">FORMAT_D32</a>
+<br />
+ }</td></tr>
+<tr class="separator:ad4f85580b5cfb0cb84748f6f4b47153f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a12599617d3227875517fefba34a691"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> { <a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691a21afee2bb62d357e551112c3a63c5d7a">TextureType_2D</a>
+, <a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691ac832d31671ae691aff9449d14fb0c8d4">TextureType_2DMultiSample</a>
+, <a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691ad78fe17e19218ef21e9cd5ba8e7e83a9">TextureType_Cube</a>
+ }</td></tr>
+<tr class="separator:a9a12599617d3227875517fefba34a691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab03c8acd9f56965e2c897001279899f7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ab03c8acd9f56965e2c897001279899f7">WrapMode</a> { <a class="el" href="namespace_engine_1_1_render.html#ab03c8acd9f56965e2c897001279899f7a5b29841b5fcead3b78fca1615a0e3908">WRAP_CLAMP_TO_EDGE</a>
+ }</td></tr>
+<tr class="separator:ab03c8acd9f56965e2c897001279899f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a37b61784b30ce7e460157842de312cc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a37b61784b30ce7e460157842de312cc5">assimpCalculateTransformMatrix</a> (aiNode *node)</td></tr>
+<tr class="separator:a37b61784b30ce7e460157842de312cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adea3027335eabade2b4c2b9e13d9c50c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#adea3027335eabade2b4c2b9e13d9c50c">assimpConvertMatrix</a> (const aiMatrix4x4 &amp;m)</td></tr>
+<tr class="separator:adea3027335eabade2b4c2b9e13d9c50c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f44951bda99785bca4f916fcfc8d730"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a2f44951bda99785bca4f916fcfc8d730"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a2f44951bda99785bca4f916fcfc8d730">assimpTraverseTree</a> (const aiNode *node, const F &amp;f, <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a> m)</td></tr>
+<tr class="separator:a2f44951bda99785bca4f916fcfc8d730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14cb281b24875b2e8e6ba18d2befa20"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:af14cb281b24875b2e8e6ba18d2befa20"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#af14cb281b24875b2e8e6ba18d2befa20">assimpTraverseTree</a> (const aiScene *scene, const F &amp;f, const <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a> &amp;m=<a class="el" href="struct_engine_1_1_matrix4.html#a1369b93e0e82294f6c1b25756f7c1e17">Matrix4::IDENTITY</a>)</td></tr>
+<tr class="separator:af14cb281b24875b2e8e6ba18d2befa20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac06a495a793f8394093e2bc29a359599"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ac06a495a793f8394093e2bc29a359599">attachFramebufferTexture</a> (<a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a> attachment, const <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;tex, size_t j)</td></tr>
+<tr class="separator:ac06a495a793f8394093e2bc29a359599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c86e9022ad4f775bf4b4effb9ba6fa3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a7c86e9022ad4f775bf4b4effb9ba6fa3">checkValidationLayerSupport</a> ()</td></tr>
+<tr class="separator:a7c86e9022ad4f775bf4b4effb9ba6fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae90b937b1d3b1407757c6990f1630f42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_vk_extent2_d.html">VkExtent2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ae90b937b1d3b1407757c6990f1630f42">chooseSwapExtent</a> (const <a class="el" href="struct_vk_surface_capabilities_k_h_r.html">VkSurfaceCapabilitiesKHR</a> &amp;capabilities, const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;size)</td></tr>
+<tr class="separator:ae90b937b1d3b1407757c6990f1630f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a1e2de2806ad631869c20b06b53b81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#acfe074f0be1b52a106d074c7ac6851c9">VkPresentModeKHR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a43a1e2de2806ad631869c20b06b53b81">chooseSwapPresentMode</a> (const std::vector&lt; <a class="el" href="vulkan_8h.html#acfe074f0be1b52a106d074c7ac6851c9">VkPresentModeKHR</a> &gt; &amp;availablePresentModes)</td></tr>
+<tr class="separator:a43a1e2de2806ad631869c20b06b53b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a206716c54b6cbd045d9f08f476ca993c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_vk_surface_format_k_h_r.html">VkSurfaceFormatKHR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a206716c54b6cbd045d9f08f476ca993c">chooseSwapSurfaceFormat</a> (const std::vector&lt; <a class="el" href="struct_vk_surface_format_k_h_r.html">VkSurfaceFormatKHR</a> &gt; &amp;availableFormats)</td></tr>
+<tr class="separator:a206716c54b6cbd045d9f08f476ca993c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c020da01a264c02d9ff9520e26dd0cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a8c020da01a264c02d9ff9520e26dd0cc">createBuffer</a> (<a class="el" href="vulkan_8h.html#a459be4b1b89c972b0d6018bc483be9cc">VkDeviceSize</a> size, <a class="el" href="vulkan_8h.html#ab221f627433dcae79b6a004fc42b50a9">VkBufferUsageFlags</a> usage, <a class="el" href="vulkan_8h.html#a06f71178c68bf5712dbec35d6f124122">VkMemoryPropertyFlags</a> properties, <a class="el" href="vulkan_8h.html#a2bc5c9d299416af688c4ad2aa631d954">VkBuffer</a> *buffer, <a class="el" href="vulkan_8h.html#af5bdca42cb7ff5e31ff1f1722e6d9b14">VkDeviceMemory</a> *bufferMemory)</td></tr>
+<tr class="separator:a8c020da01a264c02d9ff9520e26dd0cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49667c56dafe0feb6117b326d6ce868c"><td class="memItemLeft" align="right" valign="top">ContextHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a49667c56dafe0feb6117b326d6ce868c">createContext</a> (SurfaceHandle surface, size_t samples, ContextHandle reusedContext, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> setup)</td></tr>
+<tr class="separator:a49667c56dafe0feb6117b326d6ce868c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74b161bd5c1699facc6501dab3b4f798"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_environment.html">Environment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a74b161bd5c1699facc6501dab3b4f798">createEnvironment</a> ()</td></tr>
+<tr class="separator:a74b161bd5c1699facc6501dab3b4f798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1743ba10ca58c90d0b73b8832b28d325"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#aef999500f2e2f43fd56081a7818ede1f">VulkanPtr2</a>&lt; <a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a>, <a class="el" href="namespace_engine_1_1_render.html#afb03dbef5e22242a54eceb48af88a496">destroyInstance</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a1743ba10ca58c90d0b73b8832b28d325">createInstance</a> ()</td></tr>
+<tr class="separator:a1743ba10ca58c90d0b73b8832b28d325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae30fe1c1fd29cc8744a7e9a8051d788"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aae30fe1c1fd29cc8744a7e9a8051d788">destroyContext</a> (SurfaceHandle surface, ContextHandle context, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> reusedContext)</td></tr>
+<tr class="separator:aae30fe1c1fd29cc8744a7e9a8051d788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb03dbef5e22242a54eceb48af88a496"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#afb03dbef5e22242a54eceb48af88a496">destroyInstance</a> (<a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a> instance, <a class="el" href="struct_vk_allocation_callbacks.html">VkAllocationCallbacks</a> *pAllocator)</td></tr>
+<tr class="separator:afb03dbef5e22242a54eceb48af88a496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dc34d342faa4a42265eca5dc039a7fd"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a9dc34d342faa4a42265eca5dc039a7fd">findMemoryType</a> (uint32_t typeFilter, <a class="el" href="vulkan_8h.html#a06f71178c68bf5712dbec35d6f124122">VkMemoryPropertyFlags</a> properties)</td></tr>
+<tr class="separator:a9dc34d342faa4a42265eca5dc039a7fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27c3b1f9c6261fc3e81562af528ab144"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_queue_family_indices.html">QueueFamilyIndices</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a27c3b1f9c6261fc3e81562af528ab144">findQueueFamilies</a> (<a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a> device)</td></tr>
+<tr class="separator:a27c3b1f9c6261fc3e81562af528ab144"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7ce6b5111cc071a34e2222a0d18e553"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aa7ce6b5111cc071a34e2222a0d18e553">getCPUFrequency</a> ()</td></tr>
+<tr class="separator:aa7ce6b5111cc071a34e2222a0d18e553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab60ae1719e7baa3cf54459bbb4b43de1"><td class="memItemLeft" align="right" valign="top">ID3D12Device *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ab60ae1719e7baa3cf54459bbb4b43de1">GetDevice</a> ()</td></tr>
+<tr class="separator:ab60ae1719e7baa3cf54459bbb4b43de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e57ab39e506bc02ca111bb205dae6d9"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_render_1_1_environment.html">Environment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a6e57ab39e506bc02ca111bb205dae6d9">getEnvironment</a> ()</td></tr>
+<tr class="separator:a6e57ab39e506bc02ca111bb205dae6d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac185a2f94a48796a07032a70575981a1"><td class="memItemLeft" align="right" valign="top">MADGINE_VULKAN_EXPORT <a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ac185a2f94a48796a07032a70575981a1">GetInstance</a> ()</td></tr>
+<tr class="separator:ac185a2f94a48796a07032a70575981a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec8a26a577cdae4aae8d1578523a28b"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a6ec8a26a577cdae4aae8d1578523a28b">GetLatestPixelProfile</a> ()</td></tr>
+<tr class="separator:a6ec8a26a577cdae4aae8d1578523a28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90e7a547c54fa55d001a90fd0f590f5"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aa90e7a547c54fa55d001a90fd0f590f5">GetLatestVertexProfile</a> ()</td></tr>
+<tr class="separator:aa90e7a547c54fa55d001a90fd0f590f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4857c941b215cbfdbf09aec61ebb032d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a4857c941b215cbfdbf09aec61ebb032d">GetPhysicalDevice</a> ()</td></tr>
+<tr class="separator:a4857c941b215cbfdbf09aec61ebb032d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89bf77ff630adad8bce72c606fcf8518"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a89bf77ff630adad8bce72c606fcf8518">isDeviceSuitable</a> (<a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a> device)</td></tr>
+<tr class="separator:a89bf77ff630adad8bce72c606fcf8518"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4229ad73728ffadad737f4a6ab59d127"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a4229ad73728ffadad737f4a6ab59d127"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a4229ad73728ffadad737f4a6ab59d127">loadVertices</a> (<a class="el" href="struct_engine_1_1_render_1_1_mesh_data.html">MeshData</a> &amp;mesh, <a class="el" href="struct_engine_1_1_render_1_1_mesh_loader.html">MeshLoader</a> &amp;loader, const aiScene *scene, std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_mesh_data_1_1_material.html">MeshData::Material</a> &gt; materials)</td></tr>
+<tr class="separator:a4229ad73728ffadad737f4a6ab59d127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0abc8dd7360f2ade6d62fef72937d7c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a0abc8dd7360f2ade6d62fef72937d7c9">makeCurrent</a> (SurfaceHandle surface, ContextHandle context)</td></tr>
+<tr class="separator:a0abc8dd7360f2ade6d62fef72937d7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221bcfaae4b449c73817b20e5b46ed05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_swap_chain_support_details.html">SwapChainSupportDetails</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a221bcfaae4b449c73817b20e5b46ed05">querySwapChainSupport</a> (<a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a> device, <a class="el" href="vulkan_8h.html#a09787d7da5f3146095ed80ceccc2d794">VkSurfaceKHR</a> surface)</td></tr>
+<tr class="separator:a221bcfaae4b449c73817b20e5b46ed05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac394a7b91464d7e18d15faa19af3af66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ac394a7b91464d7e18d15faa19af3af66">resetContext</a> ()</td></tr>
+<tr class="separator:ac394a7b91464d7e18d15faa19af3af66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae064c4dee8123f49ea31864bf78d141d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ae064c4dee8123f49ea31864bf78d141d">selectPhysicalDevice</a> (<a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a> instance)</td></tr>
+<tr class="separator:ae064c4dee8123f49ea31864bf78d141d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced1b1f4284236db2772ad4470921a26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aced1b1f4284236db2772ad4470921a26">swapBuffers</a> (SurfaceHandle surface, ContextHandle context)</td></tr>
+<tr class="separator:aced1b1f4284236db2772ad4470921a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c585d92508a7832a50e9948ce0693d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a48c585d92508a7832a50e9948ce0693d">toGLFormat</a> (<a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format)</td></tr>
+<tr class="separator:a48c585d92508a7832a50e9948ce0693d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1fdf4eef1a233a9a895db8f9a475cc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aa1fdf4eef1a233a9a895db8f9a475cc2">toGLType</a> (<a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4">ShaderType</a> type)</td></tr>
+<tr class="separator:aa1fdf4eef1a233a9a895db8f9a475cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7755cdd87d7f8ed0ec1af97d861a3033"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a7755cdd87d7f8ed0ec1af97d861a3033">transitionImageLayout</a> (<a class="el" href="vulkan_8h.html#ac45cc67c448b7eb97bc0ddc9d4ce2422">VkCommandBuffer</a> commandList, <a class="el" href="vulkan_8h.html#a070714dd9707b007a399fe31aefa1320">VkImage</a> image, <a class="el" href="vulkan_8h.html#ad61b5b94a526d0f9ae0db97072cf6b3f">VkFormat</a> format, <a class="el" href="vulkan_8h.html#a1dc6a69eefc5cddb8237b87d5c22d1ec">VkImageAspectFlags</a> aspectMask, <a class="el" href="vulkan_8h.html#a10d9a29817e871a926df1834c7ccd88c">VkImageLayout</a> oldLayout, <a class="el" href="vulkan_8h.html#a10d9a29817e871a926df1834c7ccd88c">VkImageLayout</a> newLayout)</td></tr>
+<tr class="separator:a7755cdd87d7f8ed0ec1af97d861a3033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef503eb78ef020a73033065c1439430"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#adef503eb78ef020a73033065c1439430">uniformAlignment</a> ()</td></tr>
+<tr class="separator:adef503eb78ef020a73033065c1439430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f1efc4826c41bf4078a1f61090dce85"><td class="memTemplParams" colspan="2">template&lt;typename T , auto D&gt; </td></tr>
+<tr class="memitem:a9f1efc4826c41bf4078a1f61090dce85"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a9f1efc4826c41bf4078a1f61090dce85">vulkanDeleter</a> (T p)</td></tr>
+<tr class="separator:a9f1efc4826c41bf4078a1f61090dce85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bb122550f4f340d4a72ab2ede88a8b6"><td class="memTemplParams" colspan="2">template&lt;typename T , auto D&gt; </td></tr>
+<tr class="memitem:a2bb122550f4f340d4a72ab2ede88a8b6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a2bb122550f4f340d4a72ab2ede88a8b6">vulkanDeleter2</a> (T p)</td></tr>
+<tr class="separator:a2bb122550f4f340d4a72ab2ede88a8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef21a6872f79f0e296dfa64fcd4ee3a"><td class="memTemplParams" colspan="2">template&lt;typename T , auto D&gt; </td></tr>
+<tr class="memitem:adef21a6872f79f0e296dfa64fcd4ee3a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#adef21a6872f79f0e296dfa64fcd4ee3a">vulkanDeleter3</a> (T p)</td></tr>
+<tr class="separator:adef21a6872f79f0e296dfa64fcd4ee3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a079475f8a74d85cc2e003ae6b1ae7cb6"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename R , typename... Args&gt; </td></tr>
+<tr class="memitem:a079475f8a74d85cc2e003ae6b1ae7cb6"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a079475f8a74d85cc2e003ae6b1ae7cb6">vulkanDeviceStub</a> (Args... args)</td></tr>
+<tr class="separator:a079475f8a74d85cc2e003ae6b1ae7cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f85477a8997fc90247ddcb699bc925b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename R , typename... Args&gt; </td></tr>
+<tr class="memitem:a3f85477a8997fc90247ddcb699bc925b"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a3f85477a8997fc90247ddcb699bc925b">vulkanInstanceStub</a> (Args... args)</td></tr>
+<tr class="separator:a3f85477a8997fc90247ddcb699bc925b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a393b982bead09a71335fc60814b21ac2"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename R , typename... Args&gt; </td></tr>
+<tr class="memitem:a393b982bead09a71335fc60814b21ac2"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a393b982bead09a71335fc60814b21ac2">vulkanInstanceStub</a> (<a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a> instance, Args... args)</td></tr>
+<tr class="separator:a393b982bead09a71335fc60814b21ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a9437fd9ff84a6cf93f820f7de0d87f8b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_render_1_1create__t.html">Engine::Render::create_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a9437fd9ff84a6cf93f820f7de0d87f8b">create</a></td></tr>
+<tr class="separator:a9437fd9ff84a6cf93f820f7de0d87f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa885073378ce9bd79f820b313f228c14"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; const char * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#aa885073378ce9bd79f820b313f228c14">deviceExtensions</a></td></tr>
+<tr class="separator:aa885073378ce9bd79f820b313f228c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c1e19a9f0fb234a01e5811f3886b4d"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; const char * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a36c1e19a9f0fb234a01e5811f3886b4d">extensions</a></td></tr>
+<tr class="separator:a36c1e19a9f0fb234a01e5811f3886b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b637853ed72ed7bad978bdc9a6650f1"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; const char * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a7b637853ed72ed7bad978bdc9a6650f1">layers</a></td></tr>
+<tr class="separator:a7b637853ed72ed7bad978bdc9a6650f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af695fdc3456faf0a1353431819e0382c"><td class="memItemLeft" align="right" valign="top">constexpr FLOAT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#af695fdc3456faf0a1353431819e0382c">sClearColor</a> [4] = { 0.033f, 0.073f, 0.073f, 1.0f }</td></tr>
+<tr class="separator:af695fdc3456faf0a1353431819e0382c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2101c48aff42566b2f67f0307d2a938d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a2101c48aff42566b2f67f0307d2a938d">sContext</a> = nullptr</td></tr>
+<tr class="separator:a2101c48aff42566b2f67f0307d2a938d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5218fc5284feec45164b226d25cb6ec7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#aba42a3a315cedfa72ef05df8b1acae9d">VkDebugUtilsMessengerEXT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a5218fc5284feec45164b226d25cb6ec7">sDebugMessenger</a></td></tr>
+<tr class="separator:a5218fc5284feec45164b226d25cb6ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ff0f81392da33a56e15dcabb5dedffe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt; <a class="el" href="struct_release_ptr.html">ReleasePtr</a>&lt; ID3D12Device &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a4ff0f81392da33a56e15dcabb5dedffe">sDevice</a></td></tr>
+<tr class="separator:a4ff0f81392da33a56e15dcabb5dedffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ae53a46c20bbecda89c22eec08d5229"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#a9ae53a46c20bbecda89c22eec08d5229">sSingleton</a> = nullptr</td></tr>
+<tr class="separator:a9ae53a46c20bbecda89c22eec08d5229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="af8bf6522b9cb51f895a4aabcc26a588a" name="af8bf6522b9cb51f895a4aabcc26a588a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8bf6522b9cb51f895a4aabcc26a588a">&#9670;&#160;</a></span>GPUArrayPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#af8bf6522b9cb51f895a4aabcc26a588a">Engine::Render::GPUArrayPtr</a> = typedef <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt;T[]&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50cb6392f53a7495b36bb34cc29937f6" name="a50cb6392f53a7495b36bb34cc29937f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50cb6392f53a7495b36bb34cc29937f6">&#9670;&#160;</a></span>RenderPassFlags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int <a class="el" href="namespace_engine_1_1_render.html#a50cb6392f53a7495b36bb34cc29937f6">Engine::Render::RenderPassFlags</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a430dc4bc19c09e989ccfe02c06e4862c" name="a430dc4bc19c09e989ccfe02c06e4862c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a430dc4bc19c09e989ccfe02c06e4862c">&#9670;&#160;</a></span>VertexElements</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#a430dc4bc19c09e989ccfe02c06e4862c">Engine::Render::VertexElements</a> = typedef <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos_w.html">VertexPosW</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos2.html">VertexPos2</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_indices.html">VertexBoneIndices</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_weights.html">VertexBoneWeights</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a999ae5150cec3c09d2c039995f9e9017" name="a999ae5150cec3c09d2c039995f9e9017"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a999ae5150cec3c09d2c039995f9e9017">&#9670;&#160;</a></span>Vertex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#a999ae5150cec3c09d2c039995f9e9017">Engine::Render::Vertex</a> = typedef <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8b0bcc239464838148230ad9ba6df52" name="aa8b0bcc239464838148230ad9ba6df52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8b0bcc239464838148230ad9ba6df52">&#9670;&#160;</a></span>Vertex2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#aa8b0bcc239464838148230ad9ba6df52">Engine::Render::Vertex2</a> = typedef <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos2.html">VertexPos2</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3322bcff736c2bffd80e3114ec357b50" name="a3322bcff736c2bffd80e3114ec357b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3322bcff736c2bffd80e3114ec357b50">&#9670;&#160;</a></span>Vertex3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#a3322bcff736c2bffd80e3114ec357b50">Engine::Render::Vertex3</a> = typedef <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39c8cca471d0763480e5088cd9eb2ffc" name="a39c8cca471d0763480e5088cd9eb2ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39c8cca471d0763480e5088cd9eb2ffc">&#9670;&#160;</a></span>Vertex4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#a39c8cca471d0763480e5088cd9eb2ffc">Engine::Render::Vertex4</a> = typedef <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_color.html">VertexColor</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_indices.html">VertexBoneIndices</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_weights.html">VertexBoneWeights</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2ba02a42b4887054f1122da6da4c987" name="aa2ba02a42b4887054f1122da6da4c987"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2ba02a42b4887054f1122da6da4c987">&#9670;&#160;</a></span>Vertex5</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#aa2ba02a42b4887054f1122da6da4c987">Engine::Render::Vertex5</a> = typedef <a class="el" href="struct_engine_1_1_compound.html">Compound</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vertex_pos.html">VertexPos</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_normal.html">VertexNormal</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_u_v.html">VertexUV</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_indices.html">VertexBoneIndices</a>, <a class="el" href="struct_engine_1_1_render_1_1_vertex_bone_weights.html">VertexBoneWeights</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef999500f2e2f43fd56081a7818ede1f" name="aef999500f2e2f43fd56081a7818ede1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef999500f2e2f43fd56081a7818ede1f">&#9670;&#160;</a></span>VulkanPtr2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#aef999500f2e2f43fd56081a7818ede1f">Engine::Render::VulkanPtr2</a> = typedef <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;T, D, <a class="el" href="namespace_engine_1_1_render.html#a2bb122550f4f340d4a72ab2ede88a8b6">vulkanDeleter2</a>&lt;T, D&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a871950bbc05e1571445cf0e3807bad89" name="a871950bbc05e1571445cf0e3807bad89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a871950bbc05e1571445cf0e3807bad89">&#9670;&#160;</a></span>VulkanPtr3</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#a871950bbc05e1571445cf0e3807bad89">Engine::Render::VulkanPtr3</a> = typedef <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt;T, D, <a class="el" href="namespace_engine_1_1_render.html#adef21a6872f79f0e296dfa64fcd4ee3a">vulkanDeleter3</a>&lt;T, D&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acbae3541f66ab8ce9f283f6718234b5e" name="acbae3541f66ab8ce9f283f6718234b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbae3541f66ab8ce9f283f6718234b5e">&#9670;&#160;</a></span>VectorKeyFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#acbae3541f66ab8ce9f283f6718234b5e">Engine::Render::VectorKeyFrame</a> = typedef <a class="el" href="struct_engine_1_1_render_1_1_key_frame.html">KeyFrame</a>&lt;<a class="el" href="struct_engine_1_1_vector3.html">Vector3</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a868a8eb8f2eef3e389d755d192db17dd" name="a868a8eb8f2eef3e389d755d192db17dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a868a8eb8f2eef3e389d755d192db17dd">&#9670;&#160;</a></span>QuaternionKeyFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_render.html#a868a8eb8f2eef3e389d755d192db17dd">Engine::Render::QuaternionKeyFrame</a> = typedef <a class="el" href="struct_engine_1_1_render_1_1_key_frame.html">KeyFrame</a>&lt;<a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ade81bec341611fc1da152816cf387025" name="ade81bec341611fc1da152816cf387025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade81bec341611fc1da152816cf387025">&#9670;&#160;</a></span>RenderPassFlags_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_render.html#ade81bec341611fc1da152816cf387025">Engine::Render::RenderPassFlags_</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ade81bec341611fc1da152816cf387025aab1d42f68d6ce920a08eeaefe92aa422" name="ade81bec341611fc1da152816cf387025aab1d42f68d6ce920a08eeaefe92aa422"></a>RenderPassFlags_None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ade81bec341611fc1da152816cf387025a59d91fb435994412618225ff1af7cd79" name="ade81bec341611fc1da152816cf387025a59d91fb435994412618225ff1af7cd79"></a>RenderPassFlags_NoLighting&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ade81bec341611fc1da152816cf387025a5b27e07b1558cc3586b117d684b49f15" name="ade81bec341611fc1da152816cf387025a5b27e07b1558cc3586b117d684b49f15"></a>RenderPassFlags_NoPerspective&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ade81bec341611fc1da152816cf387025a11cadef3fd532d60af603c95b6679ddf" name="ade81bec341611fc1da152816cf387025a11cadef3fd532d60af603c95b6679ddf"></a>RenderPassFlags_DistanceField&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a9a12599617d3227875517fefba34a691" name="a9a12599617d3227875517fefba34a691"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a12599617d3227875517fefba34a691">&#9670;&#160;</a></span>TextureType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">Engine::Render::TextureType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9a12599617d3227875517fefba34a691a21afee2bb62d357e551112c3a63c5d7a" name="a9a12599617d3227875517fefba34a691a21afee2bb62d357e551112c3a63c5d7a"></a>TextureType_2D&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a9a12599617d3227875517fefba34a691ac832d31671ae691aff9449d14fb0c8d4" name="a9a12599617d3227875517fefba34a691ac832d31671ae691aff9449d14fb0c8d4"></a>TextureType_2DMultiSample&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a9a12599617d3227875517fefba34a691ad78fe17e19218ef21e9cd5ba8e7e83a9" name="a9a12599617d3227875517fefba34a691ad78fe17e19218ef21e9cd5ba8e7e83a9"></a>TextureType_Cube&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ad4f85580b5cfb0cb84748f6f4b47153f" name="ad4f85580b5cfb0cb84748f6f4b47153f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4f85580b5cfb0cb84748f6f4b47153f">&#9670;&#160;</a></span>TextureFormat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">Engine::Render::TextureFormat</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad4f85580b5cfb0cb84748f6f4b47153fa555b08528ceaf344ddfc7e2f0661e7e5" name="ad4f85580b5cfb0cb84748f6f4b47153fa555b08528ceaf344ddfc7e2f0661e7e5"></a>FORMAT_RGBA8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4f85580b5cfb0cb84748f6f4b47153fa7fcf5df1c5a9ff1047111433975e62be" name="ad4f85580b5cfb0cb84748f6f4b47153fa7fcf5df1c5a9ff1047111433975e62be"></a>FORMAT_RGBA8_SRGB&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4f85580b5cfb0cb84748f6f4b47153fa4db10a4fcc359ccd5026cbbbd13f8360" name="ad4f85580b5cfb0cb84748f6f4b47153fa4db10a4fcc359ccd5026cbbbd13f8360"></a>FORMAT_RGBA16F&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4f85580b5cfb0cb84748f6f4b47153fa302ec1e3dc433ea50887a5e2ace64b37" name="ad4f85580b5cfb0cb84748f6f4b47153fa302ec1e3dc433ea50887a5e2ace64b37"></a>FORMAT_R32F&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4f85580b5cfb0cb84748f6f4b47153faf59779d673077d6d6021766cde4a8fb1" name="ad4f85580b5cfb0cb84748f6f4b47153faf59779d673077d6d6021766cde4a8fb1"></a>FORMAT_D24&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4f85580b5cfb0cb84748f6f4b47153faefaca57fd95d7a6f39b503dae1c28520" name="ad4f85580b5cfb0cb84748f6f4b47153faefaca57fd95d7a6f39b503dae1c28520"></a>FORMAT_D32&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ab03c8acd9f56965e2c897001279899f7" name="ab03c8acd9f56965e2c897001279899f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab03c8acd9f56965e2c897001279899f7">&#9670;&#160;</a></span>WrapMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_render.html#ab03c8acd9f56965e2c897001279899f7">Engine::Render::WrapMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab03c8acd9f56965e2c897001279899f7a5b29841b5fcead3b78fca1615a0e3908" name="ab03c8acd9f56965e2c897001279899f7a5b29841b5fcead3b78fca1615a0e3908"></a>WRAP_CLAMP_TO_EDGE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a6dd835fe3dbc77647b64247f0b2d8fe1" name="a6dd835fe3dbc77647b64247f0b2d8fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dd835fe3dbc77647b64247f0b2d8fe1">&#9670;&#160;</a></span>MinMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_render.html#a6dd835fe3dbc77647b64247f0b2d8fe1">Engine::Render::MinMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6dd835fe3dbc77647b64247f0b2d8fe1a6618c0fa9b5baa1ba5cd2253a6d01f2b" name="a6dd835fe3dbc77647b64247f0b2d8fe1a6618c0fa9b5baa1ba5cd2253a6d01f2b"></a>MIN_NEAREST&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="aca15bb3bf29d2afc8394dca2a093a6d4" name="aca15bb3bf29d2afc8394dca2a093a6d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca15bb3bf29d2afc8394dca2a093a6d4">&#9670;&#160;</a></span>ShaderType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4">Engine::Render::ShaderType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aca15bb3bf29d2afc8394dca2a093a6d4a135b1e94bf1ba081bb41edba2307b36d" name="aca15bb3bf29d2afc8394dca2a093a6d4a135b1e94bf1ba081bb41edba2307b36d"></a>VertexShader&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aca15bb3bf29d2afc8394dca2a093a6d4a2cfa34286d5de9864670eaa8a3463aff" name="aca15bb3bf29d2afc8394dca2a093a6d4a2cfa34286d5de9864670eaa8a3463aff"></a>PixelShader&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6ec8a26a577cdae4aae8d1578523a28b" name="a6ec8a26a577cdae4aae8d1578523a28b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec8a26a577cdae4aae8d1578523a28b">&#9670;&#160;</a></span>GetLatestPixelProfile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::wstring Engine::Render::GetLatestPixelProfile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab60ae1719e7baa3cf54459bbb4b43de1" name="ab60ae1719e7baa3cf54459bbb4b43de1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab60ae1719e7baa3cf54459bbb4b43de1">&#9670;&#160;</a></span>GetDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MADGINE_VULKAN_EXPORT <a class="el" href="vulkan_8h.html#a6e9c08f343cc1f9bd6f7d4a3ddbc3442">VkDevice</a> Engine::Render::GetDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa90e7a547c54fa55d001a90fd0f590f5" name="aa90e7a547c54fa55d001a90fd0f590f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa90e7a547c54fa55d001a90fd0f590f5">&#9670;&#160;</a></span>GetLatestVertexProfile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::wstring Engine::Render::GetLatestVertexProfile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7ce6b5111cc071a34e2222a0d18e553" name="aa7ce6b5111cc071a34e2222a0d18e553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7ce6b5111cc071a34e2222a0d18e553">&#9670;&#160;</a></span>getCPUFrequency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Engine::Render::getCPUFrequency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac394a7b91464d7e18d15faa19af3af66" name="ac394a7b91464d7e18d15faa19af3af66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac394a7b91464d7e18d15faa19af3af66">&#9670;&#160;</a></span>resetContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::resetContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0abc8dd7360f2ade6d62fef72937d7c9" name="a0abc8dd7360f2ade6d62fef72937d7c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0abc8dd7360f2ade6d62fef72937d7c9">&#9670;&#160;</a></span>makeCurrent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::makeCurrent </td>
+          <td>(</td>
+          <td class="paramtype">SurfaceHandle&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ContextHandle&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aced1b1f4284236db2772ad4470921a26" name="aced1b1f4284236db2772ad4470921a26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced1b1f4284236db2772ad4470921a26">&#9670;&#160;</a></span>swapBuffers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::swapBuffers </td>
+          <td>(</td>
+          <td class="paramtype">SurfaceHandle&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ContextHandle&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49667c56dafe0feb6117b326d6ce868c" name="a49667c56dafe0feb6117b326d6ce868c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49667c56dafe0feb6117b326d6ce868c">&#9670;&#160;</a></span>createContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ContextHandle Engine::Render::createContext </td>
+          <td>(</td>
+          <td class="paramtype">SurfaceHandle&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>samples</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ContextHandle&#160;</td>
+          <td class="paramname"><em>reusedContext</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>setup</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae30fe1c1fd29cc8744a7e9a8051d788" name="aae30fe1c1fd29cc8744a7e9a8051d788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae30fe1c1fd29cc8744a7e9a8051d788">&#9670;&#160;</a></span>destroyContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::destroyContext </td>
+          <td>(</td>
+          <td class="paramtype">SurfaceHandle&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ContextHandle&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>reusedContext</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48c585d92508a7832a50e9948ce0693d" name="a48c585d92508a7832a50e9948ce0693d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48c585d92508a7832a50e9948ce0693d">&#9670;&#160;</a></span>toGLFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a> Engine::Render::toGLFormat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac06a495a793f8394093e2bc29a359599" name="ac06a495a793f8394093e2bc29a359599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac06a495a793f8394093e2bc29a359599">&#9670;&#160;</a></span>attachFramebufferTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::attachFramebufferTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a>&#160;</td>
+          <td class="paramname"><em>attachment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html">OpenGLTexture</a> &amp;&#160;</td>
+          <td class="paramname"><em>tex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adef503eb78ef020a73033065c1439430" name="adef503eb78ef020a73033065c1439430"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adef503eb78ef020a73033065c1439430">&#9670;&#160;</a></span>uniformAlignment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Render::uniformAlignment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1fdf4eef1a233a9a895db8f9a475cc2" name="aa1fdf4eef1a233a9a895db8f9a475cc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1fdf4eef1a233a9a895db8f9a475cc2">&#9670;&#160;</a></span>toGLType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="glad_8h.html#a7efd7809e1632cdae75603fd1fee61c0">GLenum</a> Engine::Render::toGLType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4">ShaderType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9dc34d342faa4a42265eca5dc039a7fd" name="a9dc34d342faa4a42265eca5dc039a7fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dc34d342faa4a42265eca5dc039a7fd">&#9670;&#160;</a></span>findMemoryType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Engine::Render::findMemoryType </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>typeFilter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a06f71178c68bf5712dbec35d6f124122">VkMemoryPropertyFlags</a>&#160;</td>
+          <td class="paramname"><em>properties</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c020da01a264c02d9ff9520e26dd0cc" name="a8c020da01a264c02d9ff9520e26dd0cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c020da01a264c02d9ff9520e26dd0cc">&#9670;&#160;</a></span>createBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::createBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a459be4b1b89c972b0d6018bc483be9cc">VkDeviceSize</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#ab221f627433dcae79b6a004fc42b50a9">VkBufferUsageFlags</a>&#160;</td>
+          <td class="paramname"><em>usage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a06f71178c68bf5712dbec35d6f124122">VkMemoryPropertyFlags</a>&#160;</td>
+          <td class="paramname"><em>properties</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a2bc5c9d299416af688c4ad2aa631d954">VkBuffer</a> *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#af5bdca42cb7ff5e31ff1f1722e6d9b14">VkDeviceMemory</a> *&#160;</td>
+          <td class="paramname"><em>bufferMemory</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac185a2f94a48796a07032a70575981a1" name="ac185a2f94a48796a07032a70575981a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac185a2f94a48796a07032a70575981a1">&#9670;&#160;</a></span>GetInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MADGINE_VULKAN_EXPORT <a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a> Engine::Render::GetInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f1efc4826c41bf4078a1f61090dce85" name="a9f1efc4826c41bf4078a1f61090dce85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f1efc4826c41bf4078a1f61090dce85">&#9670;&#160;</a></span>vulkanDeleter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::vulkanDeleter </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2bb122550f4f340d4a72ab2ede88a8b6" name="a2bb122550f4f340d4a72ab2ede88a8b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bb122550f4f340d4a72ab2ede88a8b6">&#9670;&#160;</a></span>vulkanDeleter2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::vulkanDeleter2 </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adef21a6872f79f0e296dfa64fcd4ee3a" name="adef21a6872f79f0e296dfa64fcd4ee3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adef21a6872f79f0e296dfa64fcd4ee3a">&#9670;&#160;</a></span>vulkanDeleter3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::vulkanDeleter3 </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a079475f8a74d85cc2e003ae6b1ae7cb6" name="a079475f8a74d85cc2e003ae6b1ae7cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a079475f8a74d85cc2e003ae6b1ae7cb6">&#9670;&#160;</a></span>vulkanDeviceStub()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename R , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">R Engine::Render::vulkanDeviceStub </td>
+          <td>(</td>
+          <td class="paramtype">Args...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f85477a8997fc90247ddcb699bc925b" name="a3f85477a8997fc90247ddcb699bc925b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f85477a8997fc90247ddcb699bc925b">&#9670;&#160;</a></span>vulkanInstanceStub() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename R , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">R Engine::Render::vulkanInstanceStub </td>
+          <td>(</td>
+          <td class="paramtype">Args...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a393b982bead09a71335fc60814b21ac2" name="a393b982bead09a71335fc60814b21ac2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a393b982bead09a71335fc60814b21ac2">&#9670;&#160;</a></span>vulkanInstanceStub() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename R , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">R Engine::Render::vulkanInstanceStub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a>&#160;</td>
+          <td class="paramname"><em>instance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7755cdd87d7f8ed0ec1af97d861a3033" name="a7755cdd87d7f8ed0ec1af97d861a3033"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7755cdd87d7f8ed0ec1af97d861a3033">&#9670;&#160;</a></span>transitionImageLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::transitionImageLayout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#ac45cc67c448b7eb97bc0ddc9d4ce2422">VkCommandBuffer</a>&#160;</td>
+          <td class="paramname"><em>commandList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a070714dd9707b007a399fe31aefa1320">VkImage</a>&#160;</td>
+          <td class="paramname"><em>image</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#ad61b5b94a526d0f9ae0db97072cf6b3f">VkFormat</a>&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a1dc6a69eefc5cddb8237b87d5c22d1ec">VkImageAspectFlags</a>&#160;</td>
+          <td class="paramname"><em>aspectMask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a10d9a29817e871a926df1834c7ccd88c">VkImageLayout</a>&#160;</td>
+          <td class="paramname"><em>oldLayout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a10d9a29817e871a926df1834c7ccd88c">VkImageLayout</a>&#160;</td>
+          <td class="paramname"><em>newLayout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c86e9022ad4f775bf4b4effb9ba6fa3" name="a7c86e9022ad4f775bf4b4effb9ba6fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c86e9022ad4f775bf4b4effb9ba6fa3">&#9670;&#160;</a></span>checkValidationLayerSupport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::checkValidationLayerSupport </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb03dbef5e22242a54eceb48af88a496" name="afb03dbef5e22242a54eceb48af88a496"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb03dbef5e22242a54eceb48af88a496">&#9670;&#160;</a></span>destroyInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::destroyInstance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a>&#160;</td>
+          <td class="paramname"><em>instance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_vk_allocation_callbacks.html">VkAllocationCallbacks</a> *&#160;</td>
+          <td class="paramname"><em>pAllocator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1743ba10ca58c90d0b73b8832b28d325" name="a1743ba10ca58c90d0b73b8832b28d325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1743ba10ca58c90d0b73b8832b28d325">&#9670;&#160;</a></span>createInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_render.html#aef999500f2e2f43fd56081a7818ede1f">VulkanPtr2</a>&lt; <a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a>, <a class="el" href="namespace_engine_1_1_render.html#afb03dbef5e22242a54eceb48af88a496">destroyInstance</a> &gt; Engine::Render::createInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27c3b1f9c6261fc3e81562af528ab144" name="a27c3b1f9c6261fc3e81562af528ab144"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27c3b1f9c6261fc3e81562af528ab144">&#9670;&#160;</a></span>findQueueFamilies()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_queue_family_indices.html">QueueFamilyIndices</a> Engine::Render::findQueueFamilies </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a>&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a89bf77ff630adad8bce72c606fcf8518" name="a89bf77ff630adad8bce72c606fcf8518"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89bf77ff630adad8bce72c606fcf8518">&#9670;&#160;</a></span>isDeviceSuitable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::isDeviceSuitable </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a>&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae064c4dee8123f49ea31864bf78d141d" name="ae064c4dee8123f49ea31864bf78d141d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae064c4dee8123f49ea31864bf78d141d">&#9670;&#160;</a></span>selectPhysicalDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a> Engine::Render::selectPhysicalDevice </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a6d9f7e27148712f2c97db45ca6991547">VkInstance</a>&#160;</td>
+          <td class="paramname"><em>instance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a74b161bd5c1699facc6501dab3b4f798" name="a74b161bd5c1699facc6501dab3b4f798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74b161bd5c1699facc6501dab3b4f798">&#9670;&#160;</a></span>createEnvironment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_environment.html">Environment</a> Engine::Render::createEnvironment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e57ab39e506bc02ca111bb205dae6d9" name="a6e57ab39e506bc02ca111bb205dae6d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e57ab39e506bc02ca111bb205dae6d9">&#9670;&#160;</a></span>getEnvironment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_render_1_1_environment.html">Environment</a> &amp; Engine::Render::getEnvironment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4857c941b215cbfdbf09aec61ebb032d" name="a4857c941b215cbfdbf09aec61ebb032d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4857c941b215cbfdbf09aec61ebb032d">&#9670;&#160;</a></span>GetPhysicalDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MADGINE_VULKAN_EXPORT <a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a> Engine::Render::GetPhysicalDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a221bcfaae4b449c73817b20e5b46ed05" name="a221bcfaae4b449c73817b20e5b46ed05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a221bcfaae4b449c73817b20e5b46ed05">&#9670;&#160;</a></span>querySwapChainSupport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_swap_chain_support_details.html">SwapChainSupportDetails</a> Engine::Render::querySwapChainSupport </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a3586f545aff0ff062d7a58ac83b90ecf">VkPhysicalDevice</a>&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="vulkan_8h.html#a09787d7da5f3146095ed80ceccc2d794">VkSurfaceKHR</a>&#160;</td>
+          <td class="paramname"><em>surface</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a206716c54b6cbd045d9f08f476ca993c" name="a206716c54b6cbd045d9f08f476ca993c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a206716c54b6cbd045d9f08f476ca993c">&#9670;&#160;</a></span>chooseSwapSurfaceFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_vk_surface_format_k_h_r.html">VkSurfaceFormatKHR</a> Engine::Render::chooseSwapSurfaceFormat </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="struct_vk_surface_format_k_h_r.html">VkSurfaceFormatKHR</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>availableFormats</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae90b937b1d3b1407757c6990f1630f42" name="ae90b937b1d3b1407757c6990f1630f42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae90b937b1d3b1407757c6990f1630f42">&#9670;&#160;</a></span>chooseSwapExtent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_vk_extent2_d.html">VkExtent2D</a> Engine::Render::chooseSwapExtent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_vk_surface_capabilities_k_h_r.html">VkSurfaceCapabilitiesKHR</a> &amp;&#160;</td>
+          <td class="paramname"><em>capabilities</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43a1e2de2806ad631869c20b06b53b81" name="a43a1e2de2806ad631869c20b06b53b81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a1e2de2806ad631869c20b06b53b81">&#9670;&#160;</a></span>chooseSwapPresentMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#acfe074f0be1b52a106d074c7ac6851c9">VkPresentModeKHR</a> Engine::Render::chooseSwapPresentMode </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="vulkan_8h.html#acfe074f0be1b52a106d074c7ac6851c9">VkPresentModeKHR</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>availablePresentModes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adea3027335eabade2b4c2b9e13d9c50c" name="adea3027335eabade2b4c2b9e13d9c50c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adea3027335eabade2b4c2b9e13d9c50c">&#9670;&#160;</a></span>assimpConvertMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a> Engine::Render::assimpConvertMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const aiMatrix4x4 &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a37b61784b30ce7e460157842de312cc5" name="a37b61784b30ce7e460157842de312cc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37b61784b30ce7e460157842de312cc5">&#9670;&#160;</a></span>assimpCalculateTransformMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a> Engine::Render::assimpCalculateTransformMatrix </td>
+          <td>(</td>
+          <td class="paramtype">aiNode *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f44951bda99785bca4f916fcfc8d730" name="a2f44951bda99785bca4f916fcfc8d730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f44951bda99785bca4f916fcfc8d730">&#9670;&#160;</a></span>assimpTraverseTree() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::assimpTraverseTree </td>
+          <td>(</td>
+          <td class="paramtype">const aiNode *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const F &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a>&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af14cb281b24875b2e8e6ba18d2befa20" name="af14cb281b24875b2e8e6ba18d2befa20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af14cb281b24875b2e8e6ba18d2befa20">&#9670;&#160;</a></span>assimpTraverseTree() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::assimpTraverseTree </td>
+          <td>(</td>
+          <td class="paramtype">const aiScene *&#160;</td>
+          <td class="paramname"><em>scene</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const F &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em> = <code><a class="el" href="struct_engine_1_1_matrix4.html#a1369b93e0e82294f6c1b25756f7c1e17">Matrix4::IDENTITY</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4229ad73728ffadad737f4a6ab59d127" name="a4229ad73728ffadad737f4a6ab59d127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4229ad73728ffadad737f4a6ab59d127">&#9670;&#160;</a></span>loadVertices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::loadVertices </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_mesh_data.html">MeshData</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_mesh_loader.html">MeshLoader</a> &amp;&#160;</td>
+          <td class="paramname"><em>loader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const aiScene *&#160;</td>
+          <td class="paramname"><em>scene</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_mesh_data_1_1_material.html">MeshData::Material</a> &gt;&#160;</td>
+          <td class="paramname"><em>materials</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a2101c48aff42566b2f67f0307d2a938d" name="a2101c48aff42566b2f67f0307d2a938d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2101c48aff42566b2f67f0307d2a938d">&#9670;&#160;</a></span>sContext</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *&gt; Engine::Render::sContext = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9437fd9ff84a6cf93f820f7de0d87f8b" name="a9437fd9ff84a6cf93f820f7de0d87f8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9437fd9ff84a6cf93f820f7de0d87f8b">&#9670;&#160;</a></span>create</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_render_1_1create__t.html">Engine::Render::create_t</a> Engine::Render::create</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ff0f81392da33a56e15dcabb5dedffe" name="a4ff0f81392da33a56e15dcabb5dedffe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ff0f81392da33a56e15dcabb5dedffe">&#9670;&#160;</a></span>sDevice</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt; <a class="el" href="namespace_engine_1_1_render.html#aef999500f2e2f43fd56081a7818ede1f">VulkanPtr2</a>&lt; <a class="el" href="vulkan_8h.html#a6e9c08f343cc1f9bd6f7d4a3ddbc3442">VkDevice</a>, &amp;<a class="el" href="vulkan_8h.html#a3cf842cee45b6d36709875bf98e642b5">vkDestroyDevice</a> &gt; &gt; Engine::Render::sDevice</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ae53a46c20bbecda89c22eec08d5229" name="a9ae53a46c20bbecda89c22eec08d5229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ae53a46c20bbecda89c22eec08d5229">&#9670;&#160;</a></span>sSingleton</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> * &gt; Engine::Render::sSingleton = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af695fdc3456faf0a1353431819e0382c" name="af695fdc3456faf0a1353431819e0382c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af695fdc3456faf0a1353431819e0382c">&#9670;&#160;</a></span>sClearColor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr FLOAT Engine::Render::sClearColor[4] = { 0.033f, 0.073f, 0.073f, 1.0f }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b637853ed72ed7bad978bdc9a6650f1" name="a7b637853ed72ed7bad978bdc9a6650f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b637853ed72ed7bad978bdc9a6650f1">&#9670;&#160;</a></span>layers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;const char *&gt; Engine::Render::layers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">        <span class="stringliteral">&quot;VK_LAYER_KHRONOS_validation&quot;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a36c1e19a9f0fb234a01e5811f3886b4d" name="a36c1e19a9f0fb234a01e5811f3886b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36c1e19a9f0fb234a01e5811f3886b4d">&#9670;&#160;</a></span>extensions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;const char *&gt; Engine::Render::extensions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">        <a class="code hl_define" href="vulkan_8h.html#a82f64c1f925ccbe1a0ddc38f23e0d5da">VK_EXT_DEBUG_UTILS_EXTENSION_NAME</a>,</div>
+<div class="line">        <a class="code hl_define" href="vulkan_8h.html#a56003de0b35f43ece2a98194089ec033">VK_KHR_SURFACE_EXTENSION_NAME</a></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">    }</div>
+<div class="ttc" id="avulkan_8h_html_a56003de0b35f43ece2a98194089ec033"><div class="ttname"><a href="vulkan_8h.html#a56003de0b35f43ece2a98194089ec033">VK_KHR_SURFACE_EXTENSION_NAME</a></div><div class="ttdeci">#define VK_KHR_SURFACE_EXTENSION_NAME</div><div class="ttdef"><b>Definition:</b> vulkan.h:183</div></div>
+<div class="ttc" id="avulkan_8h_html_a82f64c1f925ccbe1a0ddc38f23e0d5da"><div class="ttname"><a href="vulkan_8h.html#a82f64c1f925ccbe1a0ddc38f23e0d5da">VK_EXT_DEBUG_UTILS_EXTENSION_NAME</a></div><div class="ttdeci">#define VK_EXT_DEBUG_UTILS_EXTENSION_NAME</div><div class="ttdef"><b>Definition:</b> vulkan.h:178</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa885073378ce9bd79f820b313f228c14" name="aa885073378ce9bd79f820b313f228c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa885073378ce9bd79f820b313f228c14">&#9670;&#160;</a></span>deviceExtensions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;const char *&gt; Engine::Render::deviceExtensions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">        <a class="code hl_define" href="vulkan_8h.html#ae5e5ccac716be6d6d467f48da81e0261">VK_KHR_SWAPCHAIN_EXTENSION_NAME</a>,</div>
+<div class="line">        <a class="code hl_define" href="vulkan_8h.html#ad12801896d5869f7af4c15006d71337d">VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME</a></div>
+<div class="line">    }</div>
+<div class="ttc" id="avulkan_8h_html_ad12801896d5869f7af4c15006d71337d"><div class="ttname"><a href="vulkan_8h.html#ad12801896d5869f7af4c15006d71337d">VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME</a></div><div class="ttdeci">#define VK_KHR_TIMELINE_SEMAPHORE_EXTENSION_NAME</div><div class="ttdef"><b>Definition:</b> vulkan.h:187</div></div>
+<div class="ttc" id="avulkan_8h_html_ae5e5ccac716be6d6d467f48da81e0261"><div class="ttname"><a href="vulkan_8h.html#ae5e5ccac716be6d6d467f48da81e0261">VK_KHR_SWAPCHAIN_EXTENSION_NAME</a></div><div class="ttdeci">#define VK_KHR_SWAPCHAIN_EXTENSION_NAME</div><div class="ttdef"><b>Definition:</b> vulkan.h:185</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5218fc5284feec45164b226d25cb6ec7" name="a5218fc5284feec45164b226d25cb6ec7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5218fc5284feec45164b226d25cb6ec7">&#9670;&#160;</a></span>sDebugMessenger</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="vulkan_8h.html#aba42a3a315cedfa72ef05df8b1acae9d">VkDebugUtilsMessengerEXT</a> Engine::Render::sDebugMessenger</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

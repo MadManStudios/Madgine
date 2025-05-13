@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serialization &amp; Synchronization &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Threads &amp; Asynchronous Execution" href="threading.html" />
+    <link rel="prev" title="Plugins &amp; Unique Components" href="pluginsystem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="features.html">Core Features</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../doxygen/index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="features.html">Core Features</a></li>
+      <li class="breadcrumb-item active">Serialization &amp; Synchronization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/core/serialize.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>page Serialize Serialization &amp; Synchronization</p>
+<section id="serialization-synchronization">
+<h1>Serialization &amp; Synchronization<a class="headerlink" href="#serialization-synchronization" title="Permalink to this heading"></a></h1>
+<p>Serialization is built into the engine core itself. The serialization library splits data layout, storage and format into separate units, allowing full flexibility in serialization. For example, the same meta information can be used to serialize to the filesystem in human readable form or over the network in binary form. The library is built for object-oriented design, storing meta information for each class. Synchronization is happening in a server-client model.</p>
+<p>## Fundamental Data Types</p>
+<p>The serialization library supports a set of fundamental types:
+- fundamental C++ types
+- ByteBuffers
+- strings
+- pointers to serializable classes
+- void (useful for template code)</p>
+<p>All serialized data has to be a compound of the fundamental data types</p>
+<p>## Unit Hierarchy</p>
+<p>A compound type is called a unit. To keep the memory overhead of the serialization system minimal there exist multiple different types of serializable units, with different capabilities. They each inherit from it’s predecessor. To make a type serializable it has to inherit from one of the unit types and define a SerializeTable (see below).</p>
+<p>### Data Units</p>
+<p>Data Units are the minimal base class. They do not carry any information and therefor do not increase the size of the type (due to empty base optimization). The SerializableDataUnit class can be seen as a simple tag.</p>
+<p>### Serializable Units</p>
+<p>Serializable Units store additional information. They store an index indicating the current activation progress (see State Replication/Activation). They also store a flag showing whether the unit is synchronized at the moment. Note that for this to be set no actual synchronization has to be setup. It only marks the unit as initialized and ready for synchronization. Also it stores a pointer to its own top-level unit. The last two pieces of data are not needed by the serializable unit itself, but rather have to be propagated through the hierarchy to allow syncable units to function properly.</p>
+<p>### Syncable Units</p>
+<p>Syncable Units store a pair of ids that uniquely identify the unit to all participants of the synchronization. Furthermore, it stores the type of the unit in form of a pointer to its SerializeTable. If marked synchronized, syncable units will communicate all changes to synchronized members with all associated servers/clients.</p>
+<p>### Top-Level Units</p>
+<p>Synchronization replicates an object hierarchy between multiple machines and keeps the state of those objects synchronized on all participating servers/clients. To have better control of what exactly is synchronized all units that need to be synchronized need to be the child of a top-level unit. SyncManagers are used to configure which top-level units are to be synchronized which way.</p>
+<p>## SerializeTables</p>
+<p>SerializeTables are similar to VTables a constant representation of a serializable/synchronizable type. They are defined in the <cite>.cpp</cite> of a type and describe all members of that type. When invoking a serialize instruction, the type system is able to retrieve the correct SerializeTable for the operation. For synchronization this type information is not always statically available, which is why syncable units store their SerializeTable pointer internally. An example table could look like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">SERIALIZETABLE_BEGIN(My::Namespace::Unit)</span>
+<span class="pre">FIELD(Name)</span>
+<span class="pre">ENCAPSULATED_FIELD(Task,</span> <span class="pre">getCurrentTask,</span> <span class="pre">setCurrentTask)</span>
+<span class="pre">ENCAPSULATED_POINTER(AttackTarget,</span> <span class="pre">getAttackTarget,</span> <span class="pre">setAttackTarget)</span>
+<span class="pre">SYNCFUNCTION(takeDamage)</span>
+<span class="pre">SERIALIZETABLE_END(My::Namespace::Unit)</span>
+<span class="pre">`</span></code></p>
+<p>SerializeTables are defined within a <cite>BEGIN</cite>/<cite>END</cite> pair. The definition shall not be put inside of a namespace. The most commonly used entries of a SerializeTable are shown in the example:
+- <cite>FIELD(&lt;name&gt;)</cite> adds the member variable <cite>&lt;name&gt;</cite> to the table. Serialization is performed according to the variable type.
+- <cite>ENCAPSULATED_FIELD(&lt;name&gt;, &lt;getter&gt;, &lt;setter&gt;)</cite> adds the field <cite>&lt;name&gt;</cite> to the table. On Serialization the value returned by the <cite>&lt;getter&gt;</cite> function is serialized and on Deserialization that value is fed back to the <cite>&lt;setter&gt;</cite> function.
+- <cite>ENCAPSULATED_POINTER(&lt;name&gt;, &lt;getter&gt;, &lt;setter&gt;)</cite> behaves like <cite>ENCAPSULATED_FIELD</cite> with one exception. <cite>&lt;name&gt;</cite> has to be a pointer variable of the described type. This is necessary, because the system needs to store some intermediary data when serialization pointers.
+- <cite>SYNCFUNCTION(&lt;name&gt;)</cite> adds the function <cite>&lt;name&gt;</cite> to the list of synchronizable functions, which can be requested from clients and broadcast from servers to all clients.</p>
+<p>## Streams</p>
+<p>The serialization library is stream based. The stream system is based on the C++ <cite>&lt;iostream&gt;</cite> system. This means that every <cite>std::basic_streambuf</cite> implementation can be used to define the way the data is stored/retrieved. The only difference is that the streams used in the library are holding a <cite>std::unique_ptr</cite> to their stream buffer as opposed to a raw pointer in the STL. This makes it possible to define a cheap move operation on streams, which is very useful in different scenarios.</p>
+<p>There exist multiple internal stream types, but the important user facing stream types are FormattedSerializeStream and FormattedMessageStream.</p>
+<p>### FormattedSerializeStream</p>
+<p>The FormattedSerializeStream combines two features of serialization: The format and the storage. Storage is provided by a <cite>std::unique_ptr&lt;std::basic_streambuf&gt;</cite> as mentioned above. The Formatter is also provided by a unique pointer and provides an implementation to the Formatter interface. This interface is designed to allow arbitrary data formats with the only restriction being that all serialized data must appear in order according to the unit hierarchy. The engine comes with a few predefined Formatters: type-checked binary, unchecked binary, XML, JSON and Ini.</p>
+<p>### FormattedMessageStream</p>
+<p>The FormattedMessageStream behaves the same as a FormattedSerializeStream with the only exception, that the used stream buffer has to inherit from <cite>message_streambuf</cite>. This converts the stream into a message based stream, which is necessary for synchronization. Using the wrapper type <cite>buffered_streambuf</cite> any <cite>std::basic_streambuf</cite> can be used as a <cite>message_streambuf</cite>.</p>
+<p>## Managers</p>
+<p>Managers serve multiple purposes. On the one hand, they store some additional data needed for synchronization. On the other hand, they are responsible for organizing and setting up streams. It is common practice to define a manager for a given storage type (e.g. NetworkSerializeManager, FilesystemSerializeManager, MemorySerializeManager). There exist two types of Managers:
+- A SerializeManager stores the id mapping for the unit hierarchy.
+- A SyncManager inherits from SerializeManager and additionally stores a list of its associated top-level units.</p>
+<p>## State Replication</p>
+<p>When dealing with serialization/synchronization there exist multiple semantical states of data:
+- The physical state is the actual data stored in memory at any given time.
+- The user state is what has been made visible to the user through activation.
+- The remote state is the data source/target for serialization or the server/client for synchronization.</p>
+<p>![serializestates](img/serializestates.svg)</p>
+<p>The <cite>synced</cite> attribute of a unit is only relevant for synchronization uses. During serialization/deserialization the physical state is stored into the remote state or read from respectively. In a synchronization scenario the flag <cite>synced</cite> indicates wether the unit is currently synchronized with a remote state. This operation can occur atomically from the user perspective as all data can be transferred from one state into the other without any user code interfering. Similarily, the <cite>active</cite> flag indicates a link between the user state and the physical state. This link is much harder to maintain as the user will be updated about any changes via callbacks, which might in turn perform arbitrary changes to the data itself. Due to the callbacks the updating of the user state can not happen atomically. Therefore, the activation link has to be well defined.</p>
+<p>### Activation</p>
+<p>Activation is only relevant during deserialization as serialization is not changing any state. The necessary steps for deserialization are as follows:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Deactivate the object hierarchy:</dt><dd><ol class="arabic simple">
+<li><dl class="simple">
+<dt>while active index &gt; 0:</dt><dd><ol class="arabic simple">
+<li><p>decrement active child index</p></li>
+<li><p>recursively deactivate last active child (1.)</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Invoke deactivation callbacks</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Read into the physical state from the remote state</p></li>
+<li><dl class="simple">
+<dt>Activate the object hierarchy:</dt><dd><ol class="arabic simple">
+<li><p>Invoke activation callbacks</p></li>
+<li><dl class="simple">
+<dt>while active index &lt; child count:</dt><dd><ol class="arabic simple">
+<li><p>recursively activate first inactive child (3.)</p></li>
+<li><p>increment active child index</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<p>Note that compound units/containers store an index indicating activation progress. For that reason the activation state of an object can only be queried from its parent. <cite>SerializableContainer::end()</cite> returns an iterator defined by the activation index. This means that during activation only parts of the container are visible to the user. When operating on an object, callbacks are only called, if the object is active at that moment. If an object is inserted into a container before the activation index, it will be activated immediately and callbacks are invoked. If it is inserted after the activation index, nothing will be done. If the parent is currently deactivated/deactivating, no callback would be necessary at all. If the parent is currently activating, the index will be incremented further and ultimately activate the newly inserted object.</p>
+<p>The activation system removes many constraints that would otherwise be necessary within the callback implementations. Still, changes to a container/unit during deserialization should be treated with great caution as they could lead to state inconsistencies.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pluginsystem.html" class="btn btn-neutral float-left" title="Plugins &amp; Unique Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="threading.html" class="btn btn-neutral float-right" title="Threads &amp; Asynchronous Execution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

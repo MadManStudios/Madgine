@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: plugins/behavior/python3/src/Python3/util/pyobjectutil.h File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: plugins/behavior/python3/src/Python3/util/pyobjectutil.h File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/pyobjectutil_8h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plugins-behavior-python3-src-python3-util-pyobjectutil-h-file-reference">
+<h1>plugins/behavior/python3/src/Python3/util/pyobjectutil.h File Reference<a class="headerlink" href="#plugins-behavior-python3-src-python3-util-pyobjectutil-h-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: plugins/behavior/python3/src/Python3/util/pyobjectutil.h File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_38c8d24aef3972a7f87b834274e76e31.html">plugins</a></li><li class="navelem"><a class="el" href="dir_730e86da1a00f4cd5a8ebc1b01c8a81f.html">behavior</a></li><li class="navelem"><a class="el" href="dir_a9ff606b9f3801f4413d93ed30fb82ff.html">python3</a></li><li class="navelem"><a class="el" href="dir_6ee92aafa61edc4fe6978c3f15b1b05e.html">src</a></li><li class="navelem"><a class="el" href="dir_6ca745c7d7ee39eb5ceadd08521cd194.html">Python3</a></li><li class="navelem"><a class="el" href="dir_a020b659b6abc6a6bcab5c298e6cd98d.html">util</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">pyobjectutil.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="pyobjectutil_8h__dep__incl.svg" width="100%" height="415"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html">Engine</a></td></tr>
+<tr class="memdesc:namespace_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace for the Madgine. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_scripting"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting.html">Engine::Scripting</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_scripting_1_1_python3"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html">Engine::Scripting::Python3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a85531b4b3627d60b62b5feb06ba73655"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a85531b4b3627d60b62b5feb06ba73655">Engine::Scripting::Python3::fromPyObject</a> (BehaviorReceiver &amp;receiver, PyObject *obj)</td></tr>
+<tr class="separator:a85531b4b3627d60b62b5feb06ba73655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a160326b74c484835c81aae1707f7fafb"><td class="memItemLeft" align="right" valign="top">ValueType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a160326b74c484835c81aae1707f7fafb">Engine::Scripting::Python3::fromPyObject</a> (PyObject *obj)</td></tr>
+<tr class="separator:a160326b74c484835c81aae1707f7fafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6dac795db437edad91ed64175690687"><td class="memTemplParams" colspan="2">template&lt;typename T , auto p&gt; </td></tr>
+<tr class="memitem:af6dac795db437edad91ed64175690687"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#af6dac795db437edad91ed64175690687">Engine::Scripting::Python3::PyDealloc</a> (PyObject *self)</td></tr>
+<tr class="separator:af6dac795db437edad91ed64175690687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefa916df9c035165d63cddccbeae385e"><td class="memTemplParams" colspan="2">template&lt;typename T , typename V &gt; </td></tr>
+<tr class="memitem:aefa916df9c035165d63cddccbeae385e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#aefa916df9c035165d63cddccbeae385e">Engine::Scripting::Python3::PyDealloc</a> (V(T::*p), PyObject *self)</td></tr>
+<tr class="separator:aefa916df9c035165d63cddccbeae385e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade49fadfaf2c2540f32205971b8660c7"><td class="memItemLeft" align="right" valign="top">ExtendedValueTypeDesc&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#ade49fadfaf2c2540f32205971b8660c7">Engine::Scripting::Python3::PyToValueTypeDesc</a> (PyObject *obj)</td></tr>
+<tr class="separator:ade49fadfaf2c2540f32205971b8660c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0de83aa34fa408d495b4f790cfd42bf6"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a0de83aa34fa408d495b4f790cfd42bf6">Engine::Scripting::Python3::toPyObject</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> b)</td></tr>
+<tr class="separator:a0de83aa34fa408d495b4f790cfd42bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87cf3fc2847b24973946a19dff27abf4"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a87cf3fc2847b24973946a19dff27abf4">Engine::Scripting::Python3::toPyObject</a> (const ApiFunction &amp;function)</td></tr>
+<tr class="separator:a87cf3fc2847b24973946a19dff27abf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae824ec88ade5f745d9d655bbc6dc5758"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#ae824ec88ade5f745d9d655bbc6dc5758">Engine::Scripting::Python3::toPyObject</a> (const BoundApiFunction &amp;function)</td></tr>
+<tr class="separator:ae824ec88ade5f745d9d655bbc6dc5758"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a260f67925b0f418e93337f71ba92ed0e"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a260f67925b0f418e93337f71ba92ed0e">Engine::Scripting::Python3::toPyObject</a> (const CoW&lt; Matrix3 &gt; &amp;m)</td></tr>
+<tr class="separator:a260f67925b0f418e93337f71ba92ed0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c37e003e5a37c8fa44b5fd8a98c504"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#ad0c37e003e5a37c8fa44b5fd8a98c504">Engine::Scripting::Python3::toPyObject</a> (const CoW&lt; Matrix4 &gt; &amp;m)</td></tr>
+<tr class="separator:ad0c37e003e5a37c8fa44b5fd8a98c504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a059b37d2f444b24398fc29c745d7884a"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a059b37d2f444b24398fc29c745d7884a">Engine::Scripting::Python3::toPyObject</a> (const CoWString &amp;s)</td></tr>
+<tr class="separator:a059b37d2f444b24398fc29c745d7884a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b379e41118d7e628134650744fecb0b"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a6b379e41118d7e628134650744fecb0b">Engine::Scripting::Python3::toPyObject</a> (const EnumHolder &amp;e)</td></tr>
+<tr class="separator:a6b379e41118d7e628134650744fecb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11ee9f6c7dce5a26ee4b3084e5c33056"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a11ee9f6c7dce5a26ee4b3084e5c33056">Engine::Scripting::Python3::toPyObject</a> (const FlagsHolder &amp;f)</td></tr>
+<tr class="separator:a11ee9f6c7dce5a26ee4b3084e5c33056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab104b1f64726132705dd01ca002d8414"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#ab104b1f64726132705dd01ca002d8414">Engine::Scripting::Python3::toPyObject</a> (const KeyValueFunction &amp;f)</td></tr>
+<tr class="separator:ab104b1f64726132705dd01ca002d8414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20c5c9ebd7588bcae07718b1a33fab1"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#ad20c5c9ebd7588bcae07718b1a33fab1">Engine::Scripting::Python3::toPyObject</a> (const KeyValueSender &amp;s)</td></tr>
+<tr class="separator:ad20c5c9ebd7588bcae07718b1a33fab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a750777c796ebe934fc4452c5483ee"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a22a750777c796ebe934fc4452c5483ee">Engine::Scripting::Python3::toPyObject</a> (const KeyValueVirtualAssociativeRange &amp;range)</td></tr>
+<tr class="separator:a22a750777c796ebe934fc4452c5483ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc948bb5fd3c62c8e931dfd7049f50a3"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#acc948bb5fd3c62c8e931dfd7049f50a3">Engine::Scripting::Python3::toPyObject</a> (const KeyValueVirtualSequenceRange &amp;range)</td></tr>
+<tr class="separator:acc948bb5fd3c62c8e931dfd7049f50a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d95938d80ba8813412cb37623040ed1"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a2d95938d80ba8813412cb37623040ed1">Engine::Scripting::Python3::toPyObject</a> (const ObjectPtr &amp;o)</td></tr>
+<tr class="separator:a2d95938d80ba8813412cb37623040ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae3dd8e6e49d832c98d8c64f8027610c"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#aae3dd8e6e49d832c98d8c64f8027610c">Engine::Scripting::Python3::toPyObject</a> (const OwnedScopePtr &amp;scope)</td></tr>
+<tr class="separator:aae3dd8e6e49d832c98d8c64f8027610c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac46d8f87858d49ef9b80d419f4f8d4d"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#aac46d8f87858d49ef9b80d419f4f8d4d">Engine::Scripting::Python3::toPyObject</a> (const Quaternion &amp;q)</td></tr>
+<tr class="separator:aac46d8f87858d49ef9b80d419f4f8d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89b841e8e8b8bf1aa37afe609ec0ef33"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a89b841e8e8b8bf1aa37afe609ec0ef33">Engine::Scripting::Python3::toPyObject</a> (const ScopeIterator &amp;it)</td></tr>
+<tr class="separator:a89b841e8e8b8bf1aa37afe609ec0ef33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c7d99132a1f550e00ed2ce216111652"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a0c7d99132a1f550e00ed2ce216111652">Engine::Scripting::Python3::toPyObject</a> (const ScopePtr &amp;scope)</td></tr>
+<tr class="separator:a0c7d99132a1f550e00ed2ce216111652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb89b5fd57bbd8d2f7afb2034214b77c"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#adb89b5fd57bbd8d2f7afb2034214b77c">Engine::Scripting::Python3::toPyObject</a> (const ValueType &amp;val)</td></tr>
+<tr class="separator:adb89b5fd57bbd8d2f7afb2034214b77c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acedd4c7c6055bd19c492f1c938b54ba6"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#acedd4c7c6055bd19c492f1c938b54ba6">Engine::Scripting::Python3::toPyObject</a> (const ValueTypeDesc &amp;t)</td></tr>
+<tr class="separator:acedd4c7c6055bd19c492f1c938b54ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86647dee67de685f80eb411cb8b73410"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a86647dee67de685f80eb411cb8b73410">Engine::Scripting::Python3::toPyObject</a> (const Vector2 &amp;v)</td></tr>
+<tr class="separator:a86647dee67de685f80eb411cb8b73410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f1b1ff473e518a30c129ea5f4eb87e"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a21f1b1ff473e518a30c129ea5f4eb87e">Engine::Scripting::Python3::toPyObject</a> (const Vector2i &amp;v)</td></tr>
+<tr class="separator:a21f1b1ff473e518a30c129ea5f4eb87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d76361a99d5a9450fc94e7fb2af100"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#aa9d76361a99d5a9450fc94e7fb2af100">Engine::Scripting::Python3::toPyObject</a> (const Vector3 &amp;v)</td></tr>
+<tr class="separator:aa9d76361a99d5a9450fc94e7fb2af100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4438a2c03101caad11943fef2347ec8a"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a4438a2c03101caad11943fef2347ec8a">Engine::Scripting::Python3::toPyObject</a> (const Vector3i &amp;v)</td></tr>
+<tr class="separator:a4438a2c03101caad11943fef2347ec8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c89af8986fe36cdbe5ac0c8f0469e0"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a17c89af8986fe36cdbe5ac0c8f0469e0">Engine::Scripting::Python3::toPyObject</a> (const Vector4 &amp;v)</td></tr>
+<tr class="separator:a17c89af8986fe36cdbe5ac0c8f0469e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa19877b332d4d32ecef04203b33fff27"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#aa19877b332d4d32ecef04203b33fff27">Engine::Scripting::Python3::toPyObject</a> (const Vector4i &amp;v)</td></tr>
+<tr class="separator:aa19877b332d4d32ecef04203b33fff27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9fba5c24a985ce513b7dfd6e7f379b"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#acd9fba5c24a985ce513b7dfd6e7f379b">Engine::Scripting::Python3::toPyObject</a> (const VirtualIterator&lt; KeyValuePair &gt; &amp;it)</td></tr>
+<tr class="separator:acd9fba5c24a985ce513b7dfd6e7f379b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af82ca6fcedc5ad2b4d2bfe04ab0c9f98"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#af82ca6fcedc5ad2b4d2bfe04ab0c9f98">Engine::Scripting::Python3::toPyObject</a> (const VirtualIterator&lt; ValueType &gt; &amp;it)</td></tr>
+<tr class="separator:af82ca6fcedc5ad2b4d2bfe04ab0c9f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3faee5f766898b4588860b4ea6b4057"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#aa3faee5f766898b4588860b4ea6b4057">Engine::Scripting::Python3::toPyObject</a> (float f)</td></tr>
+<tr class="separator:aa3faee5f766898b4588860b4ea6b4057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6479b6bb65518fd4496bf504b23ff83d"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a6479b6bb65518fd4496bf504b23ff83d">Engine::Scripting::Python3::toPyObject</a> (int i)</td></tr>
+<tr class="separator:a6479b6bb65518fd4496bf504b23ff83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e21325ffe5dd9e9e651070ce39579e4"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#a1e21325ffe5dd9e9e651070ce39579e4">Engine::Scripting::Python3::toPyObject</a> (std::chrono::nanoseconds d)</td></tr>
+<tr class="separator:a1e21325ffe5dd9e9e651070ce39579e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad09069d440b830f38274403782bb44ab"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#ad09069d440b830f38274403782bb44ab">Engine::Scripting::Python3::toPyObject</a> (std::monostate)</td></tr>
+<tr class="separator:ad09069d440b830f38274403782bb44ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad12d8167067c515617a78c2f5c0c3fa3"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html#ad12d8167067c515617a78c2f5c0c3fa3">Engine::Scripting::Python3::toPyObject</a> (uint64_t i)</td></tr>
+<tr class="separator:ad12d8167067c515617a78c2f5c0c3fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

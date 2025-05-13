@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Scene Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Scene Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/namespace_engine_1_1_scene.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scene-namespace-reference">
+<h1>Scene Namespace Reference<a class="headerlink" href="#scene-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Scene Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scene.html">Scene</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Scene Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine_1_1_scene_1_1_entity"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html">Entity</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html">SceneComponentBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:af92996aedd718c1ab8956fdab5616944"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> = <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Entity&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> * &gt;</td></tr>
+<tr class="separator:af92996aedd718c1ab8956fdab5616944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19931bf3268623dc598b4c231f71d2d1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> = <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> * &gt;</td></tr>
+<tr class="separator:a19931bf3268623dc598b4c231f71d2d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe524036e3f758bb916794b48f039ddd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abe524036e3f758bb916794b48f039ddd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#abe524036e3f758bb916794b48f039ddd">SceneComponent</a> = <a class="el" href="struct_engine_1_1_virtual_scope.html">VirtualScope</a>&lt; T, <a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Serialize::SyncableUnit</a>&lt; T, SceneComponentComponent&lt; T &gt; &gt; &gt;</td></tr>
+<tr class="separator:abe524036e3f758bb916794b48f039ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc56f55066a0f68206efe253f8be8c80"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:acc56f55066a0f68206efe253f8be8c80"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#acc56f55066a0f68206efe253f8be8c80">VirtualSceneComponentBase</a> = <a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Serialize::SyncableUnit</a>&lt; T, SceneComponentVirtualBase&lt; T &gt; &gt;</td></tr>
+<tr class="separator:acc56f55066a0f68206efe253f8be8c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a040b8cdeed134854d1b1e8900134073a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Base &gt; </td></tr>
+<tr class="memitem:a040b8cdeed134854d1b1e8900134073a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a040b8cdeed134854d1b1e8900134073a">VirtualSceneComponentImpl</a> = <a class="el" href="struct_engine_1_1_virtual_scope.html">VirtualScope</a>&lt; T, <a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Serialize::SyncableUnit</a>&lt; T, <a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">UniqueComponent::VirtualComponentImpl</a>&lt; T, Base &gt; &gt; &gt;</td></tr>
+<tr class="separator:a040b8cdeed134854d1b1e8900134073a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a892027f5cdb7dfb1cfb4781bd5b32924"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a892027f5cdb7dfb1cfb4781bd5b32924">entityBinding</a></td></tr>
+<tr class="separator:a892027f5cdb7dfb1cfb4781bd5b32924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95c367ed083ea70780c0314897472a5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab95c367ed083ea70780c0314897472a5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#ab95c367ed083ea70780c0314897472a5">get_component</a> = [](<a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> entity = {}) { return entity | <a class="el" href="namespace_engine_1_1_execution.html#adbddad51d8bad6c47e49229587b76ad1">Execution::then</a>([](<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> *e) { return e-&gt;getComponent&lt;T&gt;(); }); }</td></tr>
+<tr class="separator:ab95c367ed083ea70780c0314897472a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa3f2989338465bf7a1ba9cdc185e3ab"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#aaa3f2989338465bf7a1ba9cdc185e3ab">rotate</a></td></tr>
+<tr class="separator:aaa3f2989338465bf7a1ba9cdc185e3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a604da434343e415a05f5ade8dd34df58"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a604da434343e415a05f5ade8dd34df58">sceneBinding</a></td></tr>
+<tr class="separator:a604da434343e415a05f5ade8dd34df58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b7793967872db21d52a9f6522fdb99a"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">wait_simulation</a></td></tr>
+<tr class="separator:a1b7793967872db21d52a9f6522fdb99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64d96d147ec00535ea2c781685ac1f64"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">yield_simulation</a></td></tr>
+<tr class="separator:a64d96d147ec00535ea2c781685ac1f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="af92996aedd718c1ab8956fdab5616944" name="af92996aedd718c1ab8956fdab5616944"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af92996aedd718c1ab8956fdab5616944">&#9670;&#160;</a></span>EntityBinding</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Entity&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> * &gt; <a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">Engine::Scene::EntityBinding</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19931bf3268623dc598b4c231f71d2d1" name="a19931bf3268623dc598b4c231f71d2d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19931bf3268623dc598b4c231f71d2d1">&#9670;&#160;</a></span>SceneBinding</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> * &gt; <a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">Engine::Scene::SceneBinding</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe524036e3f758bb916794b48f039ddd" name="abe524036e3f758bb916794b48f039ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe524036e3f758bb916794b48f039ddd">&#9670;&#160;</a></span>SceneComponent</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_scene.html#abe524036e3f758bb916794b48f039ddd">Engine::Scene::SceneComponent</a> = typedef <a class="el" href="struct_engine_1_1_virtual_scope.html">VirtualScope</a>&lt;T, <a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Serialize::SyncableUnit</a>&lt;T, SceneComponentComponent&lt;T&gt; &gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc56f55066a0f68206efe253f8be8c80" name="acc56f55066a0f68206efe253f8be8c80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc56f55066a0f68206efe253f8be8c80">&#9670;&#160;</a></span>VirtualSceneComponentBase</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_scene.html#acc56f55066a0f68206efe253f8be8c80">Engine::Scene::VirtualSceneComponentBase</a> = typedef <a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Serialize::SyncableUnit</a>&lt;T, SceneComponentVirtualBase&lt;T&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a040b8cdeed134854d1b1e8900134073a" name="a040b8cdeed134854d1b1e8900134073a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a040b8cdeed134854d1b1e8900134073a">&#9670;&#160;</a></span>VirtualSceneComponentImpl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Base &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_scene.html#a040b8cdeed134854d1b1e8900134073a">Engine::Scene::VirtualSceneComponentImpl</a> = typedef <a class="el" href="struct_engine_1_1_virtual_scope.html">VirtualScope</a>&lt;T, <a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Serialize::SyncableUnit</a>&lt;T, <a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">UniqueComponent::VirtualComponentImpl</a>&lt;T, Base&gt; &gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a892027f5cdb7dfb1cfb4781bd5b32924" name="a892027f5cdb7dfb1cfb4781bd5b32924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892027f5cdb7dfb1cfb4781bd5b32924">&#9670;&#160;</a></span>entityBinding</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> Engine::Scene::entityBinding</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a604da434343e415a05f5ade8dd34df58" name="a604da434343e415a05f5ade8dd34df58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a604da434343e415a05f5ade8dd34df58">&#9670;&#160;</a></span>sceneBinding</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> Engine::Scene::sceneBinding</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1b7793967872db21d52a9f6522fdb99a" name="a1b7793967872db21d52a9f6522fdb99a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b7793967872db21d52a9f6522fdb99a">&#9670;&#160;</a></span>wait_simulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::Scene::wait_simulation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](std::chrono::steady_clock::duration duration, <a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> entity = {}) {</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_struct" href="struct_engine_1_1_interval_clock.html">IntervalClock&lt;Threading::CustomTimepoint&gt;::wait</a>(entity | Execution::then(&amp;SceneManager::simulationClock), duration);</div>
+<div class="line">    }</div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a19931bf3268623dc598b4c231f71d2d1"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">Engine::Scene::SceneBinding</a></div><div class="ttdeci">Binding&lt;&quot;Scene&quot;, SceneManager * &gt; SceneBinding</div><div class="ttdef"><b>Definition:</b> scenesenders.h:19</div></div>
+<div class="ttc" id="astruct_engine_1_1_interval_clock_html"><div class="ttname"><a href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a></div><div class="ttdef"><b>Definition:</b> intervalclock.h:17</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a64d96d147ec00535ea2c781685ac1f64" name="a64d96d147ec00535ea2c781685ac1f64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64d96d147ec00535ea2c781685ac1f64">&#9670;&#160;</a></span>yield_simulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::Scene::yield_simulation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](<a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> scene = {}) {</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_variable" href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">wait_simulation</a>(0s, scene);</div>
+<div class="line">    }</div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a1b7793967872db21d52a9f6522fdb99a"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">Engine::Scene::wait_simulation</a></div><div class="ttdeci">constexpr auto wait_simulation</div><div class="ttdef"><b>Definition:</b> scenesenders.h:22</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab95c367ed083ea70780c0314897472a5" name="ab95c367ed083ea70780c0314897472a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95c367ed083ea70780c0314897472a5">&#9670;&#160;</a></span>get_component</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::Scene::get_component = [](<a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> entity = {}) { return entity | <a class="el" href="namespace_engine_1_1_execution.html#adbddad51d8bad6c47e49229587b76ad1">Execution::then</a>([](<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> *e) { return e-&gt;getComponent&lt;T&gt;(); }); }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa3f2989338465bf7a1ba9cdc185e3ab" name="aaa3f2989338465bf7a1ba9cdc185e3ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa3f2989338465bf7a1ba9cdc185e3ab">&#9670;&#160;</a></span>rotate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::Scene::rotate</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](Vector3 axis, <span class="keywordtype">float</span> speed) {</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_variable" href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">yield_simulation</a>() | Execution::let_value([=](std::chrono::microseconds timeSinceLastFrame) {</div>
+<div class="line">            <span class="keywordflow">return</span> get_component&lt;Entity::Transform&gt;() | Execution::then([=](Entity::Transform *transform) {</div>
+<div class="line">                transform-&gt;mOrientation *= Quaternion { timeSinceLastFrame.count() * 0.000001f * speed, axis };</div>
+<div class="line">            });</div>
+<div class="line">        }) | Execution::repeat;</div>
+<div class="line">    }</div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a64d96d147ec00535ea2c781685ac1f64"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">Engine::Scene::yield_simulation</a></div><div class="ttdeci">constexpr auto yield_simulation</div><div class="ttdef"><b>Definition:</b> scenesenders.h:26</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,887 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::DirectX12RenderTexture Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::DirectX12RenderTexture Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_render_1_1_direct_x12_render_texture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="directx12rendertexture-struct-reference">
+<h1>DirectX12RenderTexture Struct Reference<a class="headerlink" href="#directx12rendertexture-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::DirectX12RenderTexture Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html">DirectX12RenderTexture</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="struct_engine_1_1_render_1_1_direct_x12_render_texture-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::DirectX12RenderTexture Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;directx12rendertexture.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::DirectX12RenderTexture:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_direct_x12_render_texture__inherit__graph.svg" width="203" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a14519e5734b33cf1ccd77bb0163ae22f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a14519e5734b33cf1ccd77bb0163ae22f">DirectX12RenderTexture</a> (<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a8412036fefebe307e8e67ed94c797524">context</a>, const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a7a84c4506db9cebf370c8a7371d8d3a0">size</a>, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config)</td></tr>
+<tr class="separator:a14519e5734b33cf1ccd77bb0163ae22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ddfccc5d08c33d887ba15c984f82c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a24ddfccc5d08c33d887ba15c984f82c0">~DirectX12RenderTexture</a> ()</td></tr>
+<tr class="separator:a24ddfccc5d08c33d887ba15c984f82c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace44c2614fdb6580dacc0a3d03601d1e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#ace44c2614fdb6580dacc0a3d03601d1e">beginFrame</a> () override</td></tr>
+<tr class="separator:ace44c2614fdb6580dacc0a3d03601d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafadf872f0b813382845b82abd0df6f8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#aafadf872f0b813382845b82abd0df6f8">beginIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:aafadf872f0b813382845b82abd0df6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addea61933a9394591e4188575c07598a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#addea61933a9394591e4188575c07598a">blit</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *input) const</td></tr>
+<tr class="separator:addea61933a9394591e4188575c07598a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa88529c57b4490b152c159f9a9746be2"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#aa88529c57b4490b152c159f9a9746be2">depthTexture</a> () const override</td></tr>
+<tr class="separator:aa88529c57b4490b152c159f9a9746be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef81b98fcd83fd937f6de903aeace97"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#adef81b98fcd83fd937f6de903aeace97">endFrame</a> () override</td></tr>
+<tr class="separator:adef81b98fcd83fd937f6de903aeace97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a178df8494e8eb33f42934d4ba1346215"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a178df8494e8eb33f42934d4ba1346215">endIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:a178df8494e8eb33f42934d4ba1346215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a522842cd9f13711b3e37cabf11af86fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a522842cd9f13711b3e37cabf11af86fc">resizeImpl</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a7a84c4506db9cebf370c8a7371d8d3a0">size</a>) override</td></tr>
+<tr class="separator:a522842cd9f13711b3e37cabf11af86fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a84c4506db9cebf370c8a7371d8d3a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a7a84c4506db9cebf370c8a7371d8d3a0">size</a> () const override</td></tr>
+<tr class="separator:a7a84c4506db9cebf370c8a7371d8d3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf065f6c64403fa7212ba5214a2c48bb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#acf065f6c64403fa7212ba5214a2c48bb">skipFrame</a> () override</td></tr>
+<tr class="separator:acf065f6c64403fa7212ba5214a2c48bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2836914a63a693264fa9efda8dadffb8"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a2836914a63a693264fa9efda8dadffb8">texture</a> (size_t index) const override</td></tr>
+<tr class="separator:a2836914a63a693264fa9efda8dadffb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1ffdfae217a2c7269e06a1dde29c0b6"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#ab1ffdfae217a2c7269e06a1dde29c0b6">textureCount</a> () const override</td></tr>
+<tr class="separator:ab1ffdfae217a2c7269e06a1dde29c0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ef52ed978ab7ef2497856fc082e91fb"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a5ef52ed978ab7ef2497856fc082e91fb">textures</a> () const</td></tr>
+<tr class="separator:a5ef52ed978ab7ef2497856fc082e91fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html">Engine::Render::DirectX12RenderTarget</a></td></tr>
+<tr class="memitem:a021d0651c47a3367a0f8dfe1d2c44ba1 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a021d0651c47a3367a0f8dfe1d2c44ba1">DirectX12RenderTarget</a> (<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a8412036fefebe307e8e67ed94c797524">context</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> global, std::string <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a0873448c0238810865cf1f8ccbc81697">name</a>, <a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, size_t <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#ae5f96831c88ae9fce057956ae8ef37f8">samples</a>=1, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> flipFlop=false, <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2747fa885cc2bd1888164ed5cbaaeacd">blitSource</a>=nullptr)</td></tr>
+<tr class="separator:a021d0651c47a3367a0f8dfe1d2c44ba1 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2abb1730bafc2145e7b1971314a7ec86 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a2abb1730bafc2145e7b1971314a7ec86">~DirectX12RenderTarget</a> ()</td></tr>
+<tr class="separator:a2abb1730bafc2145e7b1971314a7ec86 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf316a28b7440c76880dc925e735a835 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#abf316a28b7440c76880dc925e735a835">beginFrame</a> () override</td></tr>
+<tr class="separator:abf316a28b7440c76880dc925e735a835 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c32ad34d05a5e74e6cf3859afbb0178 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a4c32ad34d05a5e74e6cf3859afbb0178">beginIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:a4c32ad34d05a5e74e6cf3859afbb0178 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab190685e8a016221331634e33f40f27 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#aab190685e8a016221331634e33f40f27">clearDepthBuffer</a> () override</td></tr>
+<tr class="separator:aab190685e8a016221331634e33f40f27 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8412036fefebe307e8e67ed94c797524 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a8412036fefebe307e8e67ed94c797524">context</a> () const</td></tr>
+<tr class="separator:a8412036fefebe307e8e67ed94c797524 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac08618dc8947b2b5633a80b39ee042 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a6ac08618dc8947b2b5633a80b39ee042">endFrame</a> () override</td></tr>
+<tr class="separator:a6ac08618dc8947b2b5633a80b39ee042 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bdab4b9f16bfb09f6f5b81c9f9d1e00 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a2bdab4b9f16bfb09f6f5b81c9f9d1e00">endIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:a2bdab4b9f16bfb09f6f5b81c9f9d1e00 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a2a0f6b55ff718ef1ff3e0c185adba2 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a0a2a0f6b55ff718ef1ff3e0c185adba2">popAnnotation</a> () override</td></tr>
+<tr class="separator:a0a2a0f6b55ff718ef1ff3e0c185adba2 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0573d3ae3b2d95d60561a90abb66108f inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a0573d3ae3b2d95d60561a90abb66108f">pushAnnotation</a> (const char *tag) override</td></tr>
+<tr class="separator:a0573d3ae3b2d95d60561a90abb66108f inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f96831c88ae9fce057956ae8ef37f8 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#ae5f96831c88ae9fce057956ae8ef37f8">samples</a> () const</td></tr>
+<tr class="separator:ae5f96831c88ae9fce057956ae8ef37f8 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38918887375cc60f6ce55cb1724e08ff inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a38918887375cc60f6ce55cb1724e08ff">setRenderSpace</a> (const <a class="el" href="struct_engine_1_1_rect2i.html">Rect2i</a> &amp;space) override</td></tr>
+<tr class="separator:a38918887375cc60f6ce55cb1724e08ff inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45d1ff0616fbd9adfaa72be0c1a9bd08 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a45d1ff0616fbd9adfaa72be0c1a9bd08">setScissorsRect</a> (const <a class="el" href="struct_engine_1_1_rect2i.html">Rect2i</a> &amp;space) override</td></tr>
+<tr class="separator:a45d1ff0616fbd9adfaa72be0c1a9bd08 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c8192aff3a5c870b58c7cd8dd06163 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#aa1c8192aff3a5c870b58c7cd8dd06163">setup</a> (std::vector&lt; std::array&lt; <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>, 6 &gt; &gt; targetViews, const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a772ce55b14b490a7284483174320b0d1">size</a>)</td></tr>
+<tr class="separator:aa1c8192aff3a5c870b58c7cd8dd06163 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b088eb1d3eeb5f878e51ba349a1569d inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a0b088eb1d3eeb5f878e51ba349a1569d">shutdown</a> ()</td></tr>
+<tr class="separator:a0b088eb1d3eeb5f878e51ba349a1569d inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30df2bfab32d5ea0698055c1e5079306 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a30df2bfab32d5ea0698055c1e5079306">textureFormat</a> (size_t index=0) const</td></tr>
+<tr class="separator:a30df2bfab32d5ea0698055c1e5079306 inherit pub_methods_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_target"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_target')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Engine::Render::RenderTarget</a></td></tr>
+<tr class="memitem:ac626203a369c26235cefc4e44f312b08 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac626203a369c26235cefc4e44f312b08">RenderTarget</a> (const <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &amp;)=delete</td></tr>
+<tr class="separator:ac626203a369c26235cefc4e44f312b08 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c8d043fa3498d1bc1fa0facdbd98dd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ab0c8d043fa3498d1bc1fa0facdbd98dd">RenderTarget</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ad2395ca58380ea839954230afa16efca">context</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> global, std::string <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a0873448c0238810865cf1f8ccbc81697">name</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> flipFlop=false, <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2747fa885cc2bd1888164ed5cbaaeacd">blitSource</a>=nullptr)</td></tr>
+<tr class="separator:ab0c8d043fa3498d1bc1fa0facdbd98dd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a499990b5e234abef69b31ca12919bfb8 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a499990b5e234abef69b31ca12919bfb8">RenderTarget</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a499990b5e234abef69b31ca12919bfb8 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20fe88691669b697b4779be732536573 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a20fe88691669b697b4779be732536573">~RenderTarget</a> ()</td></tr>
+<tr class="separator:a20fe88691669b697b4779be732536573 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb368199097f37374e1c30996e322d82 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#abb368199097f37374e1c30996e322d82">addRenderPass</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> *pass)</td></tr>
+<tr class="separator:abb368199097f37374e1c30996e322d82 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ff776af1d09a65b1ef98380966bb81 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ae5ff776af1d09a65b1ef98380966bb81">beginFrame</a> ()</td></tr>
+<tr class="separator:ae5ff776af1d09a65b1ef98380966bb81 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1080b1d0ae1d3bde2283c3a2e059b242 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a1080b1d0ae1d3bde2283c3a2e059b242">beginIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const</td></tr>
+<tr class="separator:a1080b1d0ae1d3bde2283c3a2e059b242 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2747fa885cc2bd1888164ed5cbaaeacd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2747fa885cc2bd1888164ed5cbaaeacd">blitSource</a> () const</td></tr>
+<tr class="separator:a2747fa885cc2bd1888164ed5cbaaeacd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16fc99c5c2848abd47d1bde86b41d2c1 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a16fc99c5c2848abd47d1bde86b41d2c1">canFlipFlop</a> () const</td></tr>
+<tr class="separator:a16fc99c5c2848abd47d1bde86b41d2c1 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25e721c5dd8e8d285678fe8af65e5e04 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a25e721c5dd8e8d285678fe8af65e5e04">clearDepthBuffer</a> ()=0</td></tr>
+<tr class="separator:a25e721c5dd8e8d285678fe8af65e5e04 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2395ca58380ea839954230afa16efca inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ad2395ca58380ea839954230afa16efca">context</a> () const</td></tr>
+<tr class="separator:ad2395ca58380ea839954230afa16efca inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb6363e30e81167fcfef9f31124a9d2a inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#adb6363e30e81167fcfef9f31124a9d2a">depthTexture</a> () const</td></tr>
+<tr class="separator:adb6363e30e81167fcfef9f31124a9d2a inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7071a75cedfe22adaf15e8a5cc63728e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a7071a75cedfe22adaf15e8a5cc63728e">endFrame</a> ()</td></tr>
+<tr class="separator:a7071a75cedfe22adaf15e8a5cc63728e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb092c7134d57cf8335132dfa84002e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a8eb092c7134d57cf8335132dfa84002e">endIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const</td></tr>
+<tr class="separator:a8eb092c7134d57cf8335132dfa84002e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c60a06463cc94f5e24ea98344e4c178 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a7c60a06463cc94f5e24ea98344e4c178">getClipSpaceMatrix</a> () const</td></tr>
+<tr class="separator:a7c60a06463cc94f5e24ea98344e4c178 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0873448c0238810865cf1f8ccbc81697 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a0873448c0238810865cf1f8ccbc81697">name</a> () const</td></tr>
+<tr class="separator:a0873448c0238810865cf1f8ccbc81697 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9bdbe66f93b4b51fd760550089093f7 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ae9bdbe66f93b4b51fd760550089093f7">popAnnotation</a> ()=0</td></tr>
+<tr class="separator:ae9bdbe66f93b4b51fd760550089093f7 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f085594aa1733a009c437cf17012fae inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a1f085594aa1733a009c437cf17012fae">pushAnnotation</a> (const char *tag)=0</td></tr>
+<tr class="separator:a1f085594aa1733a009c437cf17012fae inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680a8a8b22a4b275accea3e342f4f4b9 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a680a8a8b22a4b275accea3e342f4f4b9">removeRenderPass</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> *pass)</td></tr>
+<tr class="separator:a680a8a8b22a4b275accea3e342f4f4b9 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0afbe0f2aff671b107c4495b8b9101 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2b0afbe0f2aff671b107c4495b8b9101">renderPasses</a> ()</td></tr>
+<tr class="separator:a2b0afbe0f2aff671b107c4495b8b9101 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc9b7e92937cdef54889521ee2480f5 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aabc9b7e92937cdef54889521ee2480f5">renderPasses</a> () const</td></tr>
+<tr class="separator:aabc9b7e92937cdef54889521ee2480f5 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c16daa8985afc28c32419c7342abab2 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a8c16daa8985afc28c32419c7342abab2">resize</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a772ce55b14b490a7284483174320b0d1">size</a>)</td></tr>
+<tr class="separator:a8c16daa8985afc28c32419c7342abab2 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf22330fd38d0556effa03a7b5230a79 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aaf22330fd38d0556effa03a7b5230a79">resizeImpl</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a772ce55b14b490a7284483174320b0d1">size</a>)=0</td></tr>
+<tr class="separator:aaf22330fd38d0556effa03a7b5230a79 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37e21a13db7817a5be3f95a2b1eed2d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aa37e21a13db7817a5be3f95a2b1eed2d">setRenderSpace</a> (const <a class="el" href="struct_engine_1_1_rect2i.html">Rect2i</a> &amp;space)=0</td></tr>
+<tr class="separator:aa37e21a13db7817a5be3f95a2b1eed2d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3263c5d62bbcd82f29f98512ba662b34 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a3263c5d62bbcd82f29f98512ba662b34">setScissorsRect</a> (const <a class="el" href="struct_engine_1_1_rect2i.html">Rect2i</a> &amp;space)=0</td></tr>
+<tr class="separator:a3263c5d62bbcd82f29f98512ba662b34 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772ce55b14b490a7284483174320b0d1 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a772ce55b14b490a7284483174320b0d1">size</a> () const =0</td></tr>
+<tr class="separator:a772ce55b14b490a7284483174320b0d1 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19ffa9a1f2f74c7c7f81853116e3834d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a19ffa9a1f2f74c7c7f81853116e3834d">skipFrame</a> ()</td></tr>
+<tr class="separator:a19ffa9a1f2f74c7c7f81853116e3834d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba3c9c6a150ff30236c38b758c5e424 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_engine_1_1_render_1_1_texture.html">Texture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a3ba3c9c6a150ff30236c38b758c5e424">texture</a> (size_t index=0) const</td></tr>
+<tr class="separator:a3ba3c9c6a150ff30236c38b758c5e424 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23a9dd5501a65dd5993588b1470e369 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac23a9dd5501a65dd5993588b1470e369">textureCount</a> () const</td></tr>
+<tr class="separator:ac23a9dd5501a65dd5993588b1470e369 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_data"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_data')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_data.html">Engine::Render::RenderData</a></td></tr>
+<tr class="memitem:a263068e2788bfd71831464a93054bdc3 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a263068e2788bfd71831464a93054bdc3">lastFrame</a> () const</td></tr>
+<tr class="separator:a263068e2788bfd71831464a93054bdc3 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a153f8656c9c5bba3fa459690ba877035 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a153f8656c9c5bba3fa459690ba877035">update</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
+<tr class="separator:a153f8656c9c5bba3fa459690ba877035 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a64b8c6aad770bee49bc7083e75673570"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a64b8c6aad770bee49bc7083e75673570">flipTextures</a> (size_t startIndex, size_t count) override</td></tr>
+<tr class="separator:a64b8c6aad770bee49bc7083e75673570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa310263a05fa308edb0f706a781c514"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#afa310263a05fa308edb0f706a781c514">resizeBuffers</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a7a84c4506db9cebf370c8a7371d8d3a0">size</a>)</td></tr>
+<tr class="separator:afa310263a05fa308edb0f706a781c514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_render_1_1_render_target"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_render_1_1_render_target')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Engine::Render::RenderTarget</a></td></tr>
+<tr class="memitem:a909fdb20d6cde2c078c4a616b4e0a9c0 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a909fdb20d6cde2c078c4a616b4e0a9c0">flipTextures</a> (size_t startIndex, size_t count)</td></tr>
+<tr class="separator:a909fdb20d6cde2c078c4a616b4e0a9c0 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53ec031a5cb44377be1c401ad2abf46 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ab53ec031a5cb44377be1c401ad2abf46">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ad2395ca58380ea839954230afa16efca">context</a>) override</td></tr>
+<tr class="separator:ab53ec031a5cb44377be1c401ad2abf46 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955982d57bac58ed4a1c44e2402c23f0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a955982d57bac58ed4a1c44e2402c23f0">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)=0</td></tr>
+<tr class="separator:a955982d57bac58ed4a1c44e2402c23f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html">Engine::Render::DirectX12RenderTarget</a></td></tr>
+<tr class="memitem:a28b775fafae8d2e08267679eef59fc5f inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">D3D12_BLEND_DESC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a28b775fafae8d2e08267679eef59fc5f">mBlendState</a></td></tr>
+<tr class="separator:a28b775fafae8d2e08267679eef59fc5f inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde6928a69622f4de3f8b517f3805d7e inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html">DirectX12CommandList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#abde6928a69622f4de3f8b517f3805d7e">mCommandList</a></td></tr>
+<tr class="separator:abde6928a69622f4de3f8b517f3805d7e inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5c1f7ce78d97d4bbfe51297e8e640f9 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">D3D12_DEPTH_STENCIL_DESC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#aa5c1f7ce78d97d4bbfe51297e8e640f9">mDepthStencilStateDesc</a></td></tr>
+<tr class="separator:aa5c1f7ce78d97d4bbfe51297e8e640f9 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c81ed9700ca32d0a95149b4b062c4e inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#aa2c81ed9700ca32d0a95149b4b062c4e">mDepthStencilViews</a> [6]</td></tr>
+<tr class="separator:aa2c81ed9700ca32d0a95149b4b062c4e inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4bb51b2fefea97c5935549b9bd9e82 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#abe4bb51b2fefea97c5935549b9bd9e82">mDepthTexture</a></td></tr>
+<tr class="separator:abe4bb51b2fefea97c5935549b9bd9e82 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35ee6b1909c98689693ca1203c0c4ae9 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">D3D12_RASTERIZER_DESC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a35ee6b1909c98689693ca1203c0c4ae9">mRasterizerDesc</a></td></tr>
+<tr class="separator:a35ee6b1909c98689693ca1203c0c4ae9 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a060b86816ed34d8aad390abf4115bad0 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">D3D12_RESOURCE_STATES&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a060b86816ed34d8aad390abf4115bad0">mResourceState</a></td></tr>
+<tr class="separator:a060b86816ed34d8aad390abf4115bad0 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f9c160026fcae94d9d58e46c3e5458e inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a4f9c160026fcae94d9d58e46c3e5458e">mSamples</a></td></tr>
+<tr class="separator:a4f9c160026fcae94d9d58e46c3e5458e inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b109bb93c6dca6ad499fb5cf28e358 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::array&lt; <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>, 6 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#ab7b109bb93c6dca6ad499fb5cf28e358">mTargetViews</a></td></tr>
+<tr class="separator:ab7b109bb93c6dca6ad499fb5cf28e358 inherit pub_attribs_struct_engine_1_1_render_1_1_direct_x12_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_render_1_1_render_target"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_render_1_1_render_target')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Engine::Render::RenderTarget</a></td></tr>
+<tr class="memitem:aa75e36912c84ca342f2ccda70b92efc1 inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aa75e36912c84ca342f2ccda70b92efc1">mBlitSource</a></td></tr>
+<tr class="separator:aa75e36912c84ca342f2ccda70b92efc1 inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e5ceb670f7ef9e667ac867fd492224f inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a7e5ceb670f7ef9e667ac867fd492224f">mContext</a></td></tr>
+<tr class="separator:a7e5ceb670f7ef9e667ac867fd492224f inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe9a9e5481337d26a3816378d09bb0a inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_bit_array.html">BitArray</a>&lt; 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a9fe9a9e5481337d26a3816378d09bb0a">mFlipFlopIndices</a></td></tr>
+<tr class="separator:a9fe9a9e5481337d26a3816378d09bb0a inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a14519e5734b33cf1ccd77bb0163ae22f" name="a14519e5734b33cf1ccd77bb0163ae22f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14519e5734b33cf1ccd77bb0163ae22f">&#9670;&#160;</a></span>DirectX12RenderTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::DirectX12RenderTexture::DirectX12RenderTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html">DirectX12RenderContext</a> *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24ddfccc5d08c33d887ba15c984f82c0" name="a24ddfccc5d08c33d887ba15c984f82c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24ddfccc5d08c33d887ba15c984f82c0">&#9670;&#160;</a></span>~DirectX12RenderTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::DirectX12RenderTexture::~DirectX12RenderTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a522842cd9f13711b3e37cabf11af86fc" name="a522842cd9f13711b3e37cabf11af86fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a522842cd9f13711b3e37cabf11af86fc">&#9670;&#160;</a></span>resizeImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::DirectX12RenderTexture::resizeImpl </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aaf22330fd38d0556effa03a7b5230a79">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a7a84c4506db9cebf370c8a7371d8d3a0" name="a7a84c4506db9cebf370c8a7371d8d3a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a84c4506db9cebf370c8a7371d8d3a0">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> Engine::Render::DirectX12RenderTexture::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a772ce55b14b490a7284483174320b0d1">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="acf065f6c64403fa7212ba5214a2c48bb" name="acf065f6c64403fa7212ba5214a2c48bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf065f6c64403fa7212ba5214a2c48bb">&#9670;&#160;</a></span>skipFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Render::DirectX12RenderTexture::skipFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a19ffa9a1f2f74c7c7f81853116e3834d">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="ace44c2614fdb6580dacc0a3d03601d1e" name="ace44c2614fdb6580dacc0a3d03601d1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace44c2614fdb6580dacc0a3d03601d1e">&#9670;&#160;</a></span>beginFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderTexture::beginFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#abf316a28b7440c76880dc925e735a835">Engine::Render::DirectX12RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="adef81b98fcd83fd937f6de903aeace97" name="adef81b98fcd83fd937f6de903aeace97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adef81b98fcd83fd937f6de903aeace97">&#9670;&#160;</a></span>endFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> Engine::Render::DirectX12RenderTexture::endFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a6ac08618dc8947b2b5633a80b39ee042">Engine::Render::DirectX12RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="aafadf872f0b813382845b82abd0df6f8" name="aafadf872f0b813382845b82abd0df6f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafadf872f0b813382845b82abd0df6f8">&#9670;&#160;</a></span>beginIteration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderTexture::beginIteration </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetSubresourceIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a4c32ad34d05a5e74e6cf3859afbb0178">Engine::Render::DirectX12RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a178df8494e8eb33f42934d4ba1346215" name="a178df8494e8eb33f42934d4ba1346215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a178df8494e8eb33f42934d4ba1346215">&#9670;&#160;</a></span>endIteration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderTexture::endIteration </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetSubresourceIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a2bdab4b9f16bfb09f6f5b81c9f9d1e00">Engine::Render::DirectX12RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a2836914a63a693264fa9efda8dadffb8" name="a2836914a63a693264fa9efda8dadffb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2836914a63a693264fa9efda8dadffb8">&#9670;&#160;</a></span>texture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a> * Engine::Render::DirectX12RenderTexture::texture </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a3ba3c9c6a150ff30236c38b758c5e424">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="ab1ffdfae217a2c7269e06a1dde29c0b6" name="ab1ffdfae217a2c7269e06a1dde29c0b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1ffdfae217a2c7269e06a1dde29c0b6">&#9670;&#160;</a></span>textureCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Render::DirectX12RenderTexture::textureCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac23a9dd5501a65dd5993588b1470e369">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="aa88529c57b4490b152c159f9a9746be2" name="aa88529c57b4490b152c159f9a9746be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa88529c57b4490b152c159f9a9746be2">&#9670;&#160;</a></span>depthTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a> * Engine::Render::DirectX12RenderTexture::depthTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#adb6363e30e81167fcfef9f31124a9d2a">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="addea61933a9394591e4188575c07598a" name="addea61933a9394591e4188575c07598a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addea61933a9394591e4188575c07598a">&#9670;&#160;</a></span>blit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderTexture::blit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ef52ed978ab7ef2497856fc082e91fb" name="a5ef52ed978ab7ef2497856fc082e91fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ef52ed978ab7ef2497856fc082e91fb">&#9670;&#160;</a></span>textures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html">DirectX12Texture</a> &gt; &amp; Engine::Render::DirectX12RenderTexture::textures </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa310263a05fa308edb0f706a781c514" name="afa310263a05fa308edb0f706a781c514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa310263a05fa308edb0f706a781c514">&#9670;&#160;</a></span>resizeBuffers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderTexture::resizeBuffers </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64b8c6aad770bee49bc7083e75673570" name="a64b8c6aad770bee49bc7083e75673570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64b8c6aad770bee49bc7083e75673570">&#9670;&#160;</a></span>flipTextures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12RenderTexture::flipTextures </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>startIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a909fdb20d6cde2c078c4a616b4e0a9c0">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/directx12/src/DirectX12/<a class="el" href="directx12rendertexture_8h.html">directx12rendertexture.h</a></li>
+<li>plugins/renderer/directx12/src/DirectX12/<a class="el" href="directx12rendertexture_8cpp.html">directx12rendertexture.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

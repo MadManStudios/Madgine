@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Threading::TaskFuture&amp;lt; T &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Threading::TaskFuture&amp;lt; T &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_threading_1_1_task_future.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="taskfuture-lt-t-gt-struct-template-reference">
+<h1>TaskFuture&amp;lt; T &amp;gt; Struct Template Reference<a class="headerlink" href="#taskfuture-lt-t-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Threading::TaskFuture&lt; T &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_threading.html">Threading</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_threading_1_1_task_future-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Threading::TaskFuture&lt; T &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;taskfuture.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2104fbf79c3ba250fa38282000eb6945"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a2104fbf79c3ba250fa38282000eb6945">TaskFuture</a> ()=default</td></tr>
+<tr class="separator:a2104fbf79c3ba250fa38282000eb6945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87aee52d29441be41594ffc346fc0a25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a87aee52d29441be41594ffc346fc0a25">TaskFuture</a> (const <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp;)=default</td></tr>
+<tr class="separator:a87aee52d29441be41594ffc346fc0a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c674c347dcc0368c175f04464a0047"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a19c674c347dcc0368c175f04464a0047">TaskFuture</a> (std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_shared_state.html">TaskPromiseSharedState</a>&lt; T &gt; &gt; state)</td></tr>
+<tr class="separator:a19c674c347dcc0368c175f04464a0047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9c3d210e292235d70272a877eb0fbf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#af9c3d210e292235d70272a877eb0fbf3">TaskFuture</a> (T val)</td></tr>
+<tr class="separator:af9c3d210e292235d70272a877eb0fbf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ba011b2a2e06692860acb66e26f0786"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a0ba011b2a2e06692860acb66e26f0786">TaskFuture</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a0ba011b2a2e06692860acb66e26f0786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a257ac2c7c41ab9972dadd3234ce1a59e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a257ac2c7c41ab9972dadd3234ce1a59e">attached</a> () const</td></tr>
+<tr class="separator:a257ac2c7c41ab9972dadd3234ce1a59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772516766993228a5c9b6429a5d44a7d"><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a772516766993228a5c9b6429a5d44a7d">get</a> () const</td></tr>
+<tr class="separator:a772516766993228a5c9b6429a5d44a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af73b3dc43521f7a298039242054782c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#af73b3dc43521f7a298039242054782c5">is_ready</a> () const</td></tr>
+<tr class="separator:af73b3dc43521f7a298039242054782c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc5ca578ad4ffa685c533a5c6c8ef9b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a8bc5ca578ad4ffa685c533a5c6c8ef9b">operator co_await</a> () const</td></tr>
+<tr class="separator:a8bc5ca578ad4ffa685c533a5c6c8ef9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa786f7d474bb6b7e4395ae89d86a3314"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#aa786f7d474bb6b7e4395ae89d86a3314">operator const T &amp;</a> () const</td></tr>
+<tr class="separator:aa786f7d474bb6b7e4395ae89d86a3314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace62dac6f68d084ec6985233704f9568"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#ace62dac6f68d084ec6985233704f9568">operator=</a> (const <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp;)=default</td></tr>
+<tr class="separator:ace62dac6f68d084ec6985233704f9568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20bf2cbcee2a68ce0afab11f4222a4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#af20bf2cbcee2a68ce0afab11f4222a4b">operator=</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:af20bf2cbcee2a68ce0afab11f4222a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab816a97d3a6ac658b74a09aa265d6ac2"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_shared_state.html">TaskPromiseSharedState</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#ab816a97d3a6ac658b74a09aa265d6ac2">release</a> ()</td></tr>
+<tr class="separator:ab816a97d3a6ac658b74a09aa265d6ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fe0a36dcbc95f50e1cafb13a600412"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#aa2fe0a36dcbc95f50e1cafb13a600412">reset</a> ()</td></tr>
+<tr class="separator:aa2fe0a36dcbc95f50e1cafb13a600412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab16d0e6c7adc9904ad9a7d4fefef0123"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#ab16d0e6c7adc9904ad9a7d4fefef0123">sender</a> () const</td></tr>
+<tr class="separator:ab16d0e6c7adc9904ad9a7d4fefef0123"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dfb3145fd7a5511fb74235a093ac543"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a7dfb3145fd7a5511fb74235a093ac543"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a7dfb3145fd7a5511fb74235a093ac543">then</a> (F &amp;&amp;f)</td></tr>
+<tr class="separator:a7dfb3145fd7a5511fb74235a093ac543"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fb533b2fc047b3d2ff9560b2602bd4b"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a4fb533b2fc047b3d2ff9560b2602bd4b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">ImmediateTask</a>&lt; U &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a4fb533b2fc047b3d2ff9560b2602bd4b">then_task</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; U &gt; task)</td></tr>
+<tr class="separator:a4fb533b2fc047b3d2ff9560b2602bd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1129fd9fd64e2278717d735e30e09c75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html#a1129fd9fd64e2278717d735e30e09c75">valid</a> () const</td></tr>
+<tr class="separator:a1129fd9fd64e2278717d735e30e09c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2104fbf79c3ba250fa38282000eb6945" name="a2104fbf79c3ba250fa38282000eb6945"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2104fbf79c3ba250fa38282000eb6945">&#9670;&#160;</a></span>TaskFuture() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::TaskFuture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9c3d210e292235d70272a877eb0fbf3" name="af9c3d210e292235d70272a877eb0fbf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9c3d210e292235d70272a877eb0fbf3">&#9670;&#160;</a></span>TaskFuture() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::TaskFuture </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19c674c347dcc0368c175f04464a0047" name="a19c674c347dcc0368c175f04464a0047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19c674c347dcc0368c175f04464a0047">&#9670;&#160;</a></span>TaskFuture() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::TaskFuture </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_shared_state.html">TaskPromiseSharedState</a>&lt; T &gt; &gt;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87aee52d29441be41594ffc346fc0a25" name="a87aee52d29441be41594ffc346fc0a25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87aee52d29441be41594ffc346fc0a25">&#9670;&#160;</a></span>TaskFuture() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::TaskFuture </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ba011b2a2e06692860acb66e26f0786" name="a0ba011b2a2e06692860acb66e26f0786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ba011b2a2e06692860acb66e26f0786">&#9670;&#160;</a></span>TaskFuture() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::TaskFuture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ace62dac6f68d084ec6985233704f9568" name="ace62dac6f68d084ec6985233704f9568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace62dac6f68d084ec6985233704f9568">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af20bf2cbcee2a68ce0afab11f4222a4b" name="af20bf2cbcee2a68ce0afab11f4222a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af20bf2cbcee2a68ce0afab11f4222a4b">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a> &amp; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1129fd9fd64e2278717d735e30e09c75" name="a1129fd9fd64e2278717d735e30e09c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1129fd9fd64e2278717d735e30e09c75">&#9670;&#160;</a></span>valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a257ac2c7c41ab9972dadd3234ce1a59e" name="a257ac2c7c41ab9972dadd3234ce1a59e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a257ac2c7c41ab9972dadd3234ce1a59e">&#9670;&#160;</a></span>attached()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::attached </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2fe0a36dcbc95f50e1cafb13a600412" name="aa2fe0a36dcbc95f50e1cafb13a600412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2fe0a36dcbc95f50e1cafb13a600412">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab816a97d3a6ac658b74a09aa265d6ac2" name="ab816a97d3a6ac658b74a09aa265d6ac2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab816a97d3a6ac658b74a09aa265d6ac2">&#9670;&#160;</a></span>release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_shared_state.html">TaskPromiseSharedState</a>&lt; T &gt; &gt; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af73b3dc43521f7a298039242054782c5" name="af73b3dc43521f7a298039242054782c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af73b3dc43521f7a298039242054782c5">&#9670;&#160;</a></span>is_ready()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::is_ready </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab16d0e6c7adc9904ad9a7d4fefef0123" name="ab16d0e6c7adc9904ad9a7d4fefef0123"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab16d0e6c7adc9904ad9a7d4fefef0123">&#9670;&#160;</a></span>sender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::sender </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8bc5ca578ad4ffa685c533a5c6c8ef9b" name="a8bc5ca578ad4ffa685c533a5c6c8ef9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bc5ca578ad4ffa685c533a5c6c8ef9b">&#9670;&#160;</a></span>operator co_await()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::operator co_await </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4fb533b2fc047b3d2ff9560b2602bd4b" name="a4fb533b2fc047b3d2ff9560b2602bd4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fb533b2fc047b3d2ff9560b2602bd4b">&#9670;&#160;</a></span>then_task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">ImmediateTask</a>&lt; U &gt; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::then_task </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; U &gt;&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7dfb3145fd7a5511fb74235a093ac543" name="a7dfb3145fd7a5511fb74235a093ac543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dfb3145fd7a5511fb74235a093ac543">&#9670;&#160;</a></span>then()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::then </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a772516766993228a5c9b6429a5d44a7d" name="a772516766993228a5c9b6429a5d44a7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a772516766993228a5c9b6429a5d44a7d">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa786f7d474bb6b7e4395ae89d86a3314" name="aa786f7d474bb6b7e4395ae89d86a3314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa786f7d474bb6b7e4395ae89d86a3314">&#9670;&#160;</a></span>operator const T &amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Engine::Threading::TaskFuture</a>&lt; T &gt;::operator const T &amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Modules/threading/<a class="el" href="taskfuture_8h.html">taskfuture.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Serialize::SyncStreamData Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Serialize::SyncStreamData Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_serialize_1_1_sync_stream_data.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="syncstreamdata-struct-reference">
+<h1>SyncStreamData Struct Reference<a class="headerlink" href="#syncstreamdata-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Serialize::SyncStreamData Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_serialize.html">Serialize</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html">SyncStreamData</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_serialize_1_1_sync_stream_data-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Serialize::SyncStreamData Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;syncstreamdata.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Serialize::SyncStreamData:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_serialize_1_1_sync_stream_data__inherit__graph.svg" width="151" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4f1f7bbe97144b568408e07d76593d16"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html#a4f1f7bbe97144b568408e07d76593d16">SyncStreamData</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html">SyncStreamData</a> &amp;)=delete</td></tr>
+<tr class="separator:a4f1f7bbe97144b568408e07d76593d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af132d592b451a294728e7eaf1887c7d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html#af132d592b451a294728e7eaf1887c7d9">SyncStreamData</a> (SyncManager &amp;mgr, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a3b1f1a417d3a4064d27fb9e3905f4cf4">id</a>=0)</td></tr>
+<tr class="separator:af132d592b451a294728e7eaf1887c7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277f95ae3758d9f31695e181ab261c39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html#a277f95ae3758d9f31695e181ab261c39">SyncStreamData</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html">SyncStreamData</a> &amp;&amp;) noexcept=delete</td></tr>
+<tr class="separator:a277f95ae3758d9f31695e181ab261c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4ab7ac3319d9c3cf9ff7e2c1c8e7ef"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html#a0d4ab7ac3319d9c3cf9ff7e2c1c8e7ef">~SyncStreamData</a> ()=default</td></tr>
+<tr class="separator:a0d4ab7ac3319d9c3cf9ff7e2c1c8e7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96afc2a8660f7873ce3006a291478aaa"><td class="memItemLeft" align="right" valign="top">SyncManager *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html#a96afc2a8660f7873ce3006a291478aaa">manager</a> ()</td></tr>
+<tr class="separator:a96afc2a8660f7873ce3006a291478aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html">Engine::Serialize::SerializeStreamData</a></td></tr>
+<tr class="memitem:ae12c2dc9f3af3c9e5204d50f2b167e15 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#ae12c2dc9f3af3c9e5204d50f2b167e15">SerializeStreamData</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> &amp;mgr, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a3b1f1a417d3a4064d27fb9e3905f4cf4">id</a>)</td></tr>
+<tr class="separator:ae12c2dc9f3af3c9e5204d50f2b167e15 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac715cdbceb684ed1894301e64d4ac89f inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#ac715cdbceb684ed1894301e64d4ac89f">SerializeStreamData</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html">SerializeStreamData</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ac715cdbceb684ed1894301e64d4ac89f inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc24e48d2438ee3ad0af64cb054c7e1 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a9cc24e48d2438ee3ad0af64cb054c7e1">~SerializeStreamData</a> ()</td></tr>
+<tr class="separator:a9cc24e48d2438ee3ad0af64cb054c7e1 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b1f1a417d3a4064d27fb9e3905f4cf4 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a3b1f1a417d3a4064d27fb9e3905f4cf4">id</a> () const</td></tr>
+<tr class="separator:a3b1f1a417d3a4064d27fb9e3905f4cf4 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0445fe533d71b4bb23455c82f97429aa inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a0445fe533d71b4bb23455c82f97429aa">isMaster</a> ()</td></tr>
+<tr class="separator:a0445fe533d71b4bb23455c82f97429aa inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9beceb4c06f792380250332cf06f158a inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a9beceb4c06f792380250332cf06f158a">manager</a> ()</td></tr>
+<tr class="separator:a9beceb4c06f792380250332cf06f158a inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b228aba18c8b9e2b83a3bc7eb995a80 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a518c5a6141e5b99931367ab45d0b67af">SerializableUnitList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a2b228aba18c8b9e2b83a3bc7eb995a80">serializableList</a> ()</td></tr>
+<tr class="separator:a2b228aba18c8b9e2b83a3bc7eb995a80 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae573c09a38d887df4ee0bd18bb55b1eb inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a04782520b48766bb80cb63551c03dc29">SerializableUnitMap</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#ae573c09a38d887df4ee0bd18bb55b1eb">serializableMap</a> ()</td></tr>
+<tr class="separator:ae573c09a38d887df4ee0bd18bb55b1eb inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f4ceba50fd234f8daba175f5ef21655 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a5f4ceba50fd234f8daba175f5ef21655">setId</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a3b1f1a417d3a4064d27fb9e3905f4cf4">id</a>)</td></tr>
+<tr class="separator:a5f4ceba50fd234f8daba175f5ef21655 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9af87e1661bc70d2ed279a8308278718 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a9af87e1661bc70d2ed279a8308278718">setManager</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> *mgr)</td></tr>
+<tr class="separator:a9af87e1661bc70d2ed279a8308278718 inherit pub_methods_struct_engine_1_1_serialize_1_1_serialize_stream_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af132d592b451a294728e7eaf1887c7d9" name="af132d592b451a294728e7eaf1887c7d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af132d592b451a294728e7eaf1887c7d9">&#9670;&#160;</a></span>SyncStreamData() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::SyncStreamData::SyncStreamData </td>
+          <td>(</td>
+          <td class="paramtype">SyncManager &amp;&#160;</td>
+          <td class="paramname"><em>mgr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>id</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f1f7bbe97144b568408e07d76593d16" name="a4f1f7bbe97144b568408e07d76593d16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f1f7bbe97144b568408e07d76593d16">&#9670;&#160;</a></span>SyncStreamData() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::SyncStreamData::SyncStreamData </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html">SyncStreamData</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a277f95ae3758d9f31695e181ab261c39" name="a277f95ae3758d9f31695e181ab261c39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a277f95ae3758d9f31695e181ab261c39">&#9670;&#160;</a></span>SyncStreamData() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::SyncStreamData::SyncStreamData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html">SyncStreamData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d4ab7ac3319d9c3cf9ff7e2c1c8e7ef" name="a0d4ab7ac3319d9c3cf9ff7e2c1c8e7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4ab7ac3319d9c3cf9ff7e2c1c8e7ef">&#9670;&#160;</a></span>~SyncStreamData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Serialize::SyncStreamData::~SyncStreamData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a96afc2a8660f7873ce3006a291478aaa" name="a96afc2a8660f7873ce3006a291478aaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96afc2a8660f7873ce3006a291478aaa">&#9670;&#160;</a></span>manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SyncManager * Engine::Serialize::SyncStreamData::manager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/serialize/streams/<a class="el" href="syncstreamdata_8h.html">syncstreamdata.h</a></li>
+<li>src/Meta/serialize/streams/<a class="el" href="syncstreamdata_8cpp.html">syncstreamdata.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

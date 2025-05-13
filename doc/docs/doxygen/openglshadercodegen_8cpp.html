@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: plugins/renderer/opengl/src/OpenGL/openglshadercodegen.cpp File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: plugins/renderer/opengl/src/OpenGL/openglshadercodegen.cpp File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/openglshadercodegen_8cpp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plugins-renderer-opengl-src-opengl-openglshadercodegen-cpp-file-reference">
+<h1>plugins/renderer/opengl/src/OpenGL/openglshadercodegen.cpp File Reference<a class="headerlink" href="#plugins-renderer-opengl-src-opengl-openglshadercodegen-cpp-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: plugins/renderer/opengl/src/OpenGL/openglshadercodegen.cpp File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_38c8d24aef3972a7f87b834274e76e31.html">plugins</a></li><li class="navelem"><a class="el" href="dir_74d4e5f47262527cf6938c6017890522.html">renderer</a></li><li class="navelem"><a class="el" href="dir_3d41a4446253bd4211a295d312a1a5af.html">opengl</a></li><li class="navelem"><a class="el" href="dir_ec491287f7fd7640afcfc53ef60a5019.html">src</a></li><li class="navelem"><a class="el" href="dir_cd5d8232ba9caa6b69760d1e295639af.html">OpenGL</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">openglshadercodegen.cpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+Include dependency graph for openglshadercodegen.cpp:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="openglshadercodegen_8cpp__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html">Engine</a></td></tr>
+<tr class="memdesc:namespace_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace for the Madgine. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html">Engine::Render</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html">Engine::Render::OpenGLShaderCodeGen</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ada6dfad6daaa88f068607c39c3f5afbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#ada6dfad6daaa88f068607c39c3f5afbb">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_arith_operation.html">CodeGen::ArithOperation</a> &amp;op)</td></tr>
+<tr class="separator:ada6dfad6daaa88f068607c39c3f5afbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a641fb176c02a6e970b0242dedbc9481c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a641fb176c02a6e970b0242dedbc9481c">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_assignment.html">CodeGen::Assignment</a> &amp;statement)</td></tr>
+<tr class="separator:a641fb176c02a6e970b0242dedbc9481c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8549851892d878fe4c799a0d37ce6f4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a8549851892d878fe4c799a0d37ce6f4c">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_constant.html">CodeGen::Constant</a> &amp;c)</td></tr>
+<tr class="separator:a8549851892d878fe4c799a0d37ce6f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16a6603e5e35ea88a7089a5193faf67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#ac16a6603e5e35ea88a7089a5193faf67">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_constructor.html">CodeGen::Constructor</a> &amp;ctor)</td></tr>
+<tr class="separator:ac16a6603e5e35ea88a7089a5193faf67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a457a14ee95b118ca100d055440419e75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a457a14ee95b118ca100d055440419e75">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CodeGen::CustomCodeBlock</a> &amp;block)</td></tr>
+<tr class="separator:a457a14ee95b118ca100d055440419e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a524d1647fcb9487e28c7c9ba6b4ebe28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a524d1647fcb9487e28c7c9ba6b4ebe28">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_member_access.html">CodeGen::MemberAccess</a> &amp;access)</td></tr>
+<tr class="separator:a524d1647fcb9487e28c7c9ba6b4ebe28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8cdcf573c05c3a7cbd08d8718150db2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#ae8cdcf573c05c3a7cbd08d8718150db2">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_namespace.html">CodeGen::Namespace</a> &amp;ns)</td></tr>
+<tr class="separator:ae8cdcf573c05c3a7cbd08d8718150db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5af983d3c1bc3281e7f6ae63901c3450"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a5af983d3c1bc3281e7f6ae63901c3450">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_return.html">CodeGen::Return</a> &amp;statement)</td></tr>
+<tr class="separator:a5af983d3c1bc3281e7f6ae63901c3450"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a90898413dcab6c9533a15e3a23886e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a0a90898413dcab6c9533a15e3a23886e">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_shader_file.html">CodeGen::ShaderFile</a> &amp;file, ShaderType type)</td></tr>
+<tr class="separator:a0a90898413dcab6c9533a15e3a23886e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58a329b3692b26c349968423f2f71daf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a58a329b3692b26c349968423f2f71daf">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a> &amp;statement)</td></tr>
+<tr class="separator:a58a329b3692b26c349968423f2f71daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a350f3cf2bc23e624ccfc62aa2c21bcea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a350f3cf2bc23e624ccfc62aa2c21bcea">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_variable_access.html">CodeGen::VariableAccess</a> &amp;statement)</td></tr>
+<tr class="separator:a350f3cf2bc23e624ccfc62aa2c21bcea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eff71068de367b2b564b9dd637e48e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a1eff71068de367b2b564b9dd637e48e3">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_variable_definition.html">CodeGen::VariableDefinition</a> &amp;def)</td></tr>
+<tr class="separator:a1eff71068de367b2b564b9dd637e48e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a672f0af12e07b4759b8e5baa8781ed17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a672f0af12e07b4759b8e5baa8781ed17">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const float &amp;f)</td></tr>
+<tr class="separator:a672f0af12e07b4759b8e5baa8781ed17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d1970fa77ae92574b4cc76a2fa55553"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a1d1970fa77ae92574b4cc76a2fa55553">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const std::string_view &amp;v)</td></tr>
+<tr class="separator:a1d1970fa77ae92574b4cc76a2fa55553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2a5b584f034b898eedffefd1fb05b2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aac2a5b584f034b898eedffefd1fb05b2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#aac2a5b584f034b898eedffefd1fb05b2">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const T &amp;v)</td></tr>
+<tr class="separator:aac2a5b584f034b898eedffefd1fb05b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d24ad6cca20160c73d8b2d5a08d75dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a2d24ad6cca20160c73d8b2d5a08d75dc">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const Vector3 &amp;v)</td></tr>
+<tr class="separator:a2d24ad6cca20160c73d8b2d5a08d75dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abca4e4e29c9d5cde3a4db443bc3d11ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#abca4e4e29c9d5cde3a4db443bc3d11ee">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const Vector4 &amp;v)</td></tr>
+<tr class="separator:abca4e4e29c9d5cde3a4db443bc3d11ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b4fa604cb72ea1d218de9d5232aa5f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a1b4fa604cb72ea1d218de9d5232aa5f5">Engine::Render::OpenGLShaderCodeGen::generate</a> (std::ostream &amp;stream, const Void &amp;v)</td></tr>
+<tr class="separator:a1b4fa604cb72ea1d218de9d5232aa5f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae2801093bd69384581b296f6af6999"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render_1_1_open_g_l_shader_code_gen.html#a0ae2801093bd69384581b296f6af6999">Engine::Render::OpenGLShaderCodeGen::generateType</a> (std::ostream &amp;stream, const <a class="el" href="struct_code_gen_1_1_type.html">CodeGen::Type</a> &amp;type)</td></tr>
+<tr class="separator:a0ae2801093bd69384581b296f6af6999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,721 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Scene::SceneComponentBase Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Scene::SceneComponentBase Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_scene_1_1_scene_component_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scenecomponentbase-struct-reference">
+<h1>SceneComponentBase Struct Reference<a class="headerlink" href="#scenecomponentbase-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Scene::SceneComponentBase Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scene.html">Scene</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html">SceneComponentBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_scene_1_1_scene_component_base-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Scene::SceneComponentBase Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;scenecomponentbase.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Scene::SceneComponentBase:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_scene_1_1_scene_component_base__inherit__graph.svg" width="100%" height="446"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a06c3c8c5f3db3524a11126e2035ac3bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a06c3c8c5f3db3524a11126e2035ac3bc">SceneComponentBase</a> (<a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;<a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a96d2063a40bd82320898236af5d5c4cf">sceneMgr</a>)</td></tr>
+<tr class="separator:a06c3c8c5f3db3524a11126e2035ac3bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac434adf7961748255f772d0658877964"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#ac434adf7961748255f772d0658877964">~SceneComponentBase</a> ()=default</td></tr>
+<tr class="separator:ac434adf7961748255f772d0658877964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f77382c581f0f2442f8d339757f0095"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4f77382c581f0f2442f8d339757f0095"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a4f77382c581f0f2442f8d339757f0095">getGlobalAPIComponent</a> ()</td></tr>
+<tr class="separator:a4f77382c581f0f2442f8d339757f0095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b685826609c67aa78556289f7eea8a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_app_1_1_global_a_p_i_base.html">App::GlobalAPIBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a5b685826609c67aa78556289f7eea8a1">getGlobalAPIComponent</a> (size_t i)</td></tr>
+<tr class="separator:a5b685826609c67aa78556289f7eea8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac684363af7044f121e6e0f23479dd28b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac684363af7044f121e6e0f23479dd28b"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#ac684363af7044f121e6e0f23479dd28b">getSceneComponent</a> ()</td></tr>
+<tr class="separator:ac684363af7044f121e6e0f23479dd28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a151e02bb24aca409cf524bdda09aabbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html">SceneComponentBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a151e02bb24aca409cf524bdda09aabbb">getSceneComponent</a> (size_t i)</td></tr>
+<tr class="separator:a151e02bb24aca409cf524bdda09aabbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af54f95b27dbad45b89fcbbd03b048ce4"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#af54f95b27dbad45b89fcbbd03b048ce4">key</a> () const</td></tr>
+<tr class="separator:af54f95b27dbad45b89fcbbd03b048ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d2063a40bd82320898236af5d5c4cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a96d2063a40bd82320898236af5d5c4cf">sceneMgr</a> () const</td></tr>
+<tr class="separator:a96d2063a40bd82320898236af5d5c4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a229cc2f3e5269b33242027f0acaed730"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a229cc2f3e5269b33242027f0acaed730">taskQueue</a> () const</td></tr>
+<tr class="separator:a229cc2f3e5269b33242027f0acaed730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae216aa0c6f65a2a1b3e07b8530e749e1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#ae216aa0c6f65a2a1b3e07b8530e749e1">updateFrame</a> (std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame)</td></tr>
+<tr class="separator:ae216aa0c6f65a2a1b3e07b8530e749e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_virtual_scope_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_virtual_scope_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_virtual_scope_base.html">Engine::VirtualScopeBase&lt; Base &gt;</a></td></tr>
+<tr class="memitem:ae14d52eebaa3e94377d7a5b1f6ca688e inherit pub_methods_struct_engine_1_1_virtual_scope_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope_base.html#ae14d52eebaa3e94377d7a5b1f6ca688e">customScopePtr</a> ()=0</td></tr>
+<tr class="separator:ae14d52eebaa3e94377d7a5b1f6ca688e inherit pub_methods_struct_engine_1_1_virtual_scope_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">Engine::Serialize::SyncableUnitBase</a></td></tr>
+<tr class="memitem:a6ab3b5edd8e4d76498261057e8f98ae0 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a6ab3b5edd8e4d76498261057e8f98ae0">isMaster</a> () const</td></tr>
+<tr class="separator:a6ab3b5edd8e4d76498261057e8f98ae0 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf706f526379dfee750bd6579c60c1f0 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abf706f526379dfee750bd6579c60c1f0">masterId</a> () const</td></tr>
+<tr class="separator:abf706f526379dfee750bd6579c60c1f0 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada577c363bdd16e5d7f35b821db565eb inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ada577c363bdd16e5d7f35b821db565eb">participantId</a> () const</td></tr>
+<tr class="separator:ada577c363bdd16e5d7f35b821db565eb inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c58d48ae153aed5cd05da3a5e67188 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad0c58d48ae153aed5cd05da3a5e67188">readAction</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;request)</td></tr>
+<tr class="separator:ad0c58d48ae153aed5cd05da3a5e67188 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a583851273f5c42bec21114d2160fd436 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a583851273f5c42bec21114d2160fd436">readFunctionAction</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;request)</td></tr>
+<tr class="separator:a583851273f5c42bec21114d2160fd436 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec58cec03ae45b3213344cc5d512daa5 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#aec58cec03ae45b3213344cc5d512daa5">readFunctionError</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html">PendingRequest</a> &amp;request)</td></tr>
+<tr class="separator:aec58cec03ae45b3213344cc5d512daa5 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4c78cc58f81e1980d290000895aafcb inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#af4c78cc58f81e1980d290000895aafcb">readFunctionRequest</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> id)</td></tr>
+<tr class="separator:af4c78cc58f81e1980d290000895aafcb inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a15f956f4bb9a0f069a86767a47524 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a02a15f956f4bb9a0f069a86767a47524">readRequest</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;in, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> id)</td></tr>
+<tr class="separator:a02a15f956f4bb9a0f069a86767a47524 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a926f84d7e92bfc92deaddb4d75e5c7e9 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a926f84d7e92bfc92deaddb4d75e5c7e9">readState</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name=nullptr, <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> hierarchy={})</td></tr>
+<tr class="separator:a926f84d7e92bfc92deaddb4d75e5c7e9 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4699949b518bbc97dd2a3b84458a4257 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a4699949b518bbc97dd2a3b84458a4257">setActive</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> active, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> existenceChanged)</td></tr>
+<tr class="separator:a4699949b518bbc97dd2a3b84458a4257 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a184f42762b13bb2418f2468096013dd7 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a184f42762b13bb2418f2468096013dd7">slaveId</a> () const</td></tr>
+<tr class="separator:a184f42762b13bb2418f2468096013dd7 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb4ca800193497b3e8b3f0177371e658 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abb4ca800193497b3e8b3f0177371e658">writeState</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;out, const char *name=nullptr, <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> hierarchy={}) const</td></tr>
+<tr class="separator:abb4ca800193497b3e8b3f0177371e658 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">Engine::Serialize::SerializableUnitBase</a></td></tr>
+<tr class="memitem:ae7ef37190441d638663dbab009450114 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#ae7ef37190441d638663dbab009450114">isSynced</a> () const</td></tr>
+<tr class="separator:ae7ef37190441d638663dbab009450114 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_threading_1_1_madgine_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html">Engine::Threading::MadgineObject&lt; SceneComponentBase &gt;</a></td></tr>
+<tr class="memitem:a7f961a0e1fb888abeefec69330433b0b inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a7f961a0e1fb888abeefec69330433b0b">callFinalize</a> ()</td></tr>
+<tr class="separator:a7f961a0e1fb888abeefec69330433b0b inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7e2b8dcec964a2e0c63914970ead44 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a8b7e2b8dcec964a2e0c63914970ead44">callInit</a> ()</td></tr>
+<tr class="separator:a8b7e2b8dcec964a2e0c63914970ead44 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
+<tr class="memitem:a58fd57e0dc3b8883599040a374216065 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a58fd57e0dc3b8883599040a374216065">isInitialized</a> ()</td></tr>
+<tr class="separator:a58fd57e0dc3b8883599040a374216065 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ddeebc3ec5f65954475998971698894 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a2ddeebc3ec5f65954475998971698894">state</a> ()</td></tr>
+<tr class="separator:a2ddeebc3ec5f65954475998971698894 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0a2c102ecae43389dc3517d5e2d31dda"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a0a2c102ecae43389dc3517d5e2d31dda">finalize</a> ()</td></tr>
+<tr class="separator:a0a2c102ecae43389dc3517d5e2d31dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b9ce908908f22cfb1d8b12e11cd809"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a12b9ce908908f22cfb1d8b12e11cd809">init</a> ()</td></tr>
+<tr class="separator:a12b9ce908908f22cfb1d8b12e11cd809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">Engine::Serialize::SyncableUnitBase</a></td></tr>
+<tr class="memitem:ae20a0154038cdd269e042681a13820e3 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ae20a0154038cdd269e042681a13820e3">SyncableUnitBase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:ae20a0154038cdd269e042681a13820e3 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad131915a96a1a9d51b8906c4aa040a7a inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad131915a96a1a9d51b8906c4aa040a7a">SyncableUnitBase</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:ad131915a96a1a9d51b8906c4aa040a7a inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4a4a55ddaed11a35752271e7e0a1cd inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a3a4a4a55ddaed11a35752271e7e0a1cd">SyncableUnitBase</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abf706f526379dfee750bd6579c60c1f0">masterId</a>=0)</td></tr>
+<tr class="separator:a3a4a4a55ddaed11a35752271e7e0a1cd inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f9d07e511e08aacfd3f68cbf5adf41a inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a1f9d07e511e08aacfd3f68cbf5adf41a">~SyncableUnitBase</a> ()</td></tr>
+<tr class="separator:a1f9d07e511e08aacfd3f68cbf5adf41a inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5487e745880117d83f817c718ddb7b6 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad5487e745880117d83f817c718ddb7b6">moveMasterId</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> newId=0)</td></tr>
+<tr class="separator:ad5487e745880117d83f817c718ddb7b6 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7be9abfef17d031df80f887afb446ef0 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a7be9abfef17d031df80f887afb446ef0">operator=</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:a7be9abfef17d031df80f887afb446ef0 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fcda55bac0099ce3666cc939829e301 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a1fcda55bac0099ce3666cc939829e301">operator=</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a1fcda55bac0099ce3666cc939829e301 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a136ba194071189282d56148943fef894 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a136ba194071189282d56148943fef894">serializeType</a> () const</td></tr>
+<tr class="separator:a136ba194071189282d56148943fef894 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a69e31befdbabad80d41ec4e9a2842 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ac5a69e31befdbabad80d41ec4e9a2842">setSlaveId</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a> id, <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> *mgr)</td></tr>
+<tr class="separator:ac5a69e31befdbabad80d41ec4e9a2842 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3de4771af74967068b1e43fc06e38b08 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a3de4771af74967068b1e43fc06e38b08">writeAction</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> offset, <a class="el" href="classvoid.html">void</a> *data, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets={}) const</td></tr>
+<tr class="separator:a3de4771af74967068b1e43fc06e38b08 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f9b65cd6dcfa26073e79f1e9006c9cc inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a2f9b65cd6dcfa26073e79f1e9006c9cc">writeFunctionAction</a> (uint16_t index, const <a class="el" href="classvoid.html">void</a> *args, const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets={}, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget=0, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId=0)</td></tr>
+<tr class="separator:a2f9b65cd6dcfa26073e79f1e9006c9cc inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc15e494111be26c538a45bc06533147 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#afc15e494111be26c538a45bc06533147">writeFunctionError</a> (uint16_t index, MessageResult error, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;target, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:afc15e494111be26c538a45bc06533147 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a037fcefa37c01196bcd1fe5b5704e8e7 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a037fcefa37c01196bcd1fe5b5704e8e7">writeFunctionRequest</a> (uint16_t index, <a class="el" href="namespace_engine_1_1_serialize.html#a42e8d9340500ffbafda8c3f5e0e49448">FunctionType</a> type, const <a class="el" href="classvoid.html">void</a> *args, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester=0, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requesterTransactionId=0, <a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver={})</td></tr>
+<tr class="separator:a037fcefa37c01196bcd1fe5b5704e8e7 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b67e386e800d330a64edc0c467d6bec inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a7b67e386e800d330a64edc0c467d6bec">writeFunctionResult</a> (uint16_t index, const <a class="el" href="classvoid.html">void</a> *result, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_message_stream.html">FormattedMessageStream</a> &amp;target, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId)</td></tr>
+<tr class="separator:a7b67e386e800d330a64edc0c467d6bec inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46abeefa23bbb9d52c635a540a0ef607 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a46abeefa23bbb9d52c635a540a0ef607">writeRequest</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> offset, <a class="el" href="classvoid.html">void</a> *data, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester=0, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requesterTransactionId=0, <a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver={}) const</td></tr>
+<tr class="separator:a46abeefa23bbb9d52c635a540a0ef607 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886cdb3b8f5ae465c9c08c3dc76f47a4 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a886cdb3b8f5ae465c9c08c3dc76f47a4">writeRequestResponse</a> (<a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> offset, <a class="el" href="classvoid.html">void</a> *data, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId) const</td></tr>
+<tr class="separator:a886cdb3b8f5ae465c9c08c3dc76f47a4 inherit pro_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">Engine::Serialize::SerializableUnitBase</a></td></tr>
+<tr class="memitem:a0fa16955997b4d0934321535f201c517 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#a0fa16955997b4d0934321535f201c517">SerializableUnitBase</a> ()</td></tr>
+<tr class="separator:a0fa16955997b4d0934321535f201c517 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee5ef2241ca56a270853e941405fcd40 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#aee5ef2241ca56a270853e941405fcd40">SerializableUnitBase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:aee5ef2241ca56a270853e941405fcd40 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91301f84074f296b0fe07745b74d7886 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#a91301f84074f296b0fe07745b74d7886">SerializableUnitBase</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a91301f84074f296b0fe07745b74d7886 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63aa3a9a9cb57da8035723a13f33453 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#ad63aa3a9a9cb57da8035723a13f33453">~SerializableUnitBase</a> ()</td></tr>
+<tr class="separator:ad63aa3a9a9cb57da8035723a13f33453 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3775b29f67d80c5e8293de966d33d290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#a3775b29f67d80c5e8293de966d33d290">operator=</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;other)</td></tr>
+<tr class="separator:a3775b29f67d80c5e8293de966d33d290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6db49e8d70e658cd0d5535b4da2290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#aed6db49e8d70e658cd0d5535b4da2290">operator=</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> &amp;&amp;other)</td></tr>
+<tr class="separator:aed6db49e8d70e658cd0d5535b4da2290 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
+<tr class="memitem:adc0d30618c88b1348697944a0409a8ff inherit pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#adc0d30618c88b1348697944a0409a8ff">~MadgineObjectState</a> ()</td></tr>
+<tr class="separator:adc0d30618c88b1348697944a0409a8ff inherit pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6ffb57d156f448fcd74aeca705b3e481"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a6ffb57d156f448fcd74aeca705b3e481">mSceneMgr</a></td></tr>
+<tr class="separator:a6ffb57d156f448fcd74aeca705b3e481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
+<tr class="memitem:a973f1761d25a9970ccf6f48c019927f0 inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_atomic_task_future.html">Threading::AtomicTaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a973f1761d25a9970ccf6f48c019927f0">mState</a></td></tr>
+<tr class="separator:a973f1761d25a9970ccf6f48c019927f0 inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dc0b798d3cdd9d075bef9d161d9419c inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">const std::type_info *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a9dc0b798d3cdd9d075bef9d161d9419c">mTypeInfo</a> = nullptr</td></tr>
+<tr class="separator:a9dc0b798d3cdd9d075bef9d161d9419c inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a39e2d774c0e3f216084ffb396add0d47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#a39e2d774c0e3f216084ffb396add0d47">MadgineObject&lt; SceneComponentBase &gt;</a></td></tr>
+<tr class="separator:a39e2d774c0e3f216084ffb396add0d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">Engine::Serialize::SyncableUnitBase</a></td></tr>
+<tr class="memitem:ad9386f40a8548fc0df307515d294e586 inherit pub_static_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#ad9386f40a8548fc0df307515d294e586">visitStream</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *table, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, const <a class="el" href="struct_engine_1_1_serialize_1_1_stream_visitor.html">StreamVisitor</a> &amp;visitor)</td></tr>
+<tr class="separator:ad9386f40a8548fc0df307515d294e586 inherit pub_static_methods_struct_engine_1_1_serialize_1_1_syncable_unit_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac434adf7961748255f772d0658877964" name="ac434adf7961748255f772d0658877964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac434adf7961748255f772d0658877964">&#9670;&#160;</a></span>~SceneComponentBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Scene::SceneComponentBase::~SceneComponentBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a06c3c8c5f3db3524a11126e2035ac3bc" name="a06c3c8c5f3db3524a11126e2035ac3bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06c3c8c5f3db3524a11126e2035ac3bc">&#9670;&#160;</a></span>SceneComponentBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Scene::SceneComponentBase::SceneComponentBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>sceneMgr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a96d2063a40bd82320898236af5d5c4cf" name="a96d2063a40bd82320898236af5d5c4cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96d2063a40bd82320898236af5d5c4cf">&#9670;&#160;</a></span>sceneMgr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp; Engine::Scene::SceneComponentBase::sceneMgr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae216aa0c6f65a2a1b3e07b8530e749e1" name="ae216aa0c6f65a2a1b3e07b8530e749e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae216aa0c6f65a2a1b3e07b8530e749e1">&#9670;&#160;</a></span>updateFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneComponentBase::updateFrame </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::microseconds&#160;</td>
+          <td class="paramname"><em>frameTimeSinceLastFrame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::microseconds&#160;</td>
+          <td class="paramname"><em>sceneTimeSinceLastFrame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af54f95b27dbad45b89fcbbd03b048ce4" name="af54f95b27dbad45b89fcbbd03b048ce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af54f95b27dbad45b89fcbbd03b048ce4">&#9670;&#160;</a></span>key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::Scene::SceneComponentBase::key </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac684363af7044f121e6e0f23479dd28b" name="ac684363af7044f121e6e0f23479dd28b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac684363af7044f121e6e0f23479dd28b">&#9670;&#160;</a></span>getSceneComponent() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; Engine::Scene::SceneComponentBase::getSceneComponent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a151e02bb24aca409cf524bdda09aabbb" name="a151e02bb24aca409cf524bdda09aabbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a151e02bb24aca409cf524bdda09aabbb">&#9670;&#160;</a></span>getSceneComponent() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html">SceneComponentBase</a> &amp; Engine::Scene::SceneComponentBase::getSceneComponent </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f77382c581f0f2442f8d339757f0095" name="a4f77382c581f0f2442f8d339757f0095"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f77382c581f0f2442f8d339757f0095">&#9670;&#160;</a></span>getGlobalAPIComponent() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; Engine::Scene::SceneComponentBase::getGlobalAPIComponent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b685826609c67aa78556289f7eea8a1" name="a5b685826609c67aa78556289f7eea8a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b685826609c67aa78556289f7eea8a1">&#9670;&#160;</a></span>getGlobalAPIComponent() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_app_1_1_global_a_p_i_base.html">App::GlobalAPIBase</a> &amp; Engine::Scene::SceneComponentBase::getGlobalAPIComponent </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a229cc2f3e5269b33242027f0acaed730" name="a229cc2f3e5269b33242027f0acaed730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a229cc2f3e5269b33242027f0acaed730">&#9670;&#160;</a></span>taskQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> * Engine::Scene::SceneComponentBase::taskQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12b9ce908908f22cfb1d8b12e11cd809" name="a12b9ce908908f22cfb1d8b12e11cd809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12b9ce908908f22cfb1d8b12e11cd809">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; Engine::Scene::SceneComponentBase::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a2c102ecae43389dc3517d5e2d31dda" name="a0a2c102ecae43389dc3517d5e2d31dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a2c102ecae43389dc3517d5e2d31dda">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Scene::SceneComponentBase::finalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a39e2d774c0e3f216084ffb396add0d47" name="a39e2d774c0e3f216084ffb396add0d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39e2d774c0e3f216084ffb396add0d47">&#9670;&#160;</a></span>MadgineObject&lt; SceneComponentBase &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> MadgineObject&lt; <a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html">SceneComponentBase</a> &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6ffb57d156f448fcd74aeca705b3e481" name="a6ffb57d156f448fcd74aeca705b3e481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ffb57d156f448fcd74aeca705b3e481">&#9670;&#160;</a></span>mSceneMgr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a>&amp; Engine::Scene::SceneComponentBase::mSceneMgr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/misc/scene/src/Madgine/scene/<a class="el" href="scenecomponentbase_8h.html">scenecomponentbase.h</a></li>
+<li>plugins/misc/scene/src/Madgine/scene/<a class="el" href="scenecomponentbase_8cpp.html">scenecomponentbase.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

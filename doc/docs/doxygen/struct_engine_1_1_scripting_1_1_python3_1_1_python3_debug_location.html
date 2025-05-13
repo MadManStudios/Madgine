@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Scripting::Python3::Python3DebugLocation Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Scripting::Python3::Python3DebugLocation Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python3debuglocation-struct-reference">
+<h1>Python3DebugLocation Struct Reference<a class="headerlink" href="#python3debuglocation-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Scripting::Python3::Python3DebugLocation Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scripting.html">Scripting</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_scripting_1_1_python3.html">Python3</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html">Python3DebugLocation</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Scripting::Python3::Python3DebugLocation Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;python3debugger.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Scripting::Python3::Python3DebugLocation:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location__inherit__graph.svg" width="220" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9d9aba8df63ae88b3aa66d5013d3ea4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a9d9aba8df63ae88b3aa66d5013d3ea4b">file</a> () const</td></tr>
+<tr class="separator:a9d9aba8df63ae88b3aa66d5013d3ea4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a880450052aa00d892c0607ec8504e309"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a880450052aa00d892c0607ec8504e309">lineNr</a> () const</td></tr>
+<tr class="separator:a880450052aa00d892c0607ec8504e309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a216ea0cf1d4921dba3645c2b28329624"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a216ea0cf1d4921dba3645c2b28329624">localVariables</a> () const override</td></tr>
+<tr class="separator:a216ea0cf1d4921dba3645c2b28329624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73558ab70853bfc1352cb4feaa3a81ab"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a73558ab70853bfc1352cb4feaa3a81ab">module</a> () const</td></tr>
+<tr class="separator:a73558ab70853bfc1352cb4feaa3a81ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e292fbb0a4d6393b0b92e03d7b85f15"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a9e292fbb0a4d6393b0b92e03d7b85f15">toString</a> () const override</td></tr>
+<tr class="separator:a9e292fbb0a4d6393b0b92e03d7b85f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa102aedb04d7624f47c6add7e4c3858a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#aa102aedb04d7624f47c6add7e4c3858a">wantsPause</a> (<a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">Debug::ContinuationType</a> type) const override</td></tr>
+<tr class="separator:aa102aedb04d7624f47c6add7e4c3858a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_debug_1_1_debug_location')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">Engine::Debug::DebugLocation</a></td></tr>
+<tr class="memitem:a21db918d53c8a36dd0e9b872ce57da63 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a21db918d53c8a36dd0e9b872ce57da63">~DebugLocation</a> ()=default</td></tr>
+<tr class="separator:a21db918d53c8a36dd0e9b872ce57da63 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a861ce0abc9dab4b7915255b67bdf5b07 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memItemLeft" align="right" valign="top">virtual std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a861ce0abc9dab4b7915255b67bdf5b07">localVariables</a> () const =0</td></tr>
+<tr class="separator:a861ce0abc9dab4b7915255b67bdf5b07 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c0c0e2f6f70e49250217bf4ad0fb83 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:ab4c0c0e2f6f70e49250217bf4ad0fb83 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#ab4c0c0e2f6f70e49250217bf4ad0fb83">pass</a> (F &amp;&amp;callback, <a class="el" href="structstd_1_1stop__token.html">std::stop_token</a> st, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> forceStop=false, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:ab4c0c0e2f6f70e49250217bf4ad0fb83 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce345cadc8121570c71988a925e7da3 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a9ce345cadc8121570c71988a925e7da3">stepInto</a> (<a class="el" href="struct_engine_1_1_debug_1_1_parent_location.html">ParentLocation</a> *parent)</td></tr>
+<tr class="separator:a9ce345cadc8121570c71988a925e7da3 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe17696879485d9a8d4e256c1110cf3e inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#afe17696879485d9a8d4e256c1110cf3e">stepOut</a> (<a class="el" href="struct_engine_1_1_debug_1_1_parent_location.html">ParentLocation</a> *parent)</td></tr>
+<tr class="separator:afe17696879485d9a8d4e256c1110cf3e inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8988903c7749df4da8073216548d50da inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a8988903c7749df4da8073216548d50da">toString</a> () const =0</td></tr>
+<tr class="separator:a8988903c7749df4da8073216548d50da inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5864ebae99fe9fdfa829e7bdfc62b476 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a5864ebae99fe9fdfa829e7bdfc62b476">wantsPause</a> (<a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type) const =0</td></tr>
+<tr class="separator:a5864ebae99fe9fdfa829e7bdfc62b476 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95b907c65a74d5a11707f2a34141b2a6 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a95b907c65a74d5a11707f2a34141b2a6 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a95b907c65a74d5a11707f2a34141b2a6">yield</a> (F &amp;&amp;callback, <a class="el" href="structstd_1_1stop__token.html">std::stop_token</a> st, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a95b907c65a74d5a11707f2a34141b2a6 inherit pub_methods_struct_engine_1_1_debug_1_1_debug_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_debug_1_1_parent_location"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_debug_1_1_parent_location')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_debug_1_1_parent_location.html">Engine::Debug::ParentLocation</a></td></tr>
+<tr class="memitem:a83ed124a102789d92d0e1c5e43740c11 inherit pub_methods_struct_engine_1_1_debug_1_1_parent_location"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_parent_location.html#a83ed124a102789d92d0e1c5e43740c11">currentLocation</a> () const</td></tr>
+<tr class="separator:a83ed124a102789d92d0e1c5e43740c11 inherit pub_methods_struct_engine_1_1_debug_1_1_parent_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a0b2388d188f153b92ef65b52ae9b7519"><td class="memItemLeft" align="right" valign="top"><a class="el" href="python3compat_8h.html#a90b0d338e18b17577b6cc0d59024411d">PyFrameObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debug_location.html#a0b2388d188f153b92ef65b52ae9b7519">mFrame</a> = nullptr</td></tr>
+<tr class="separator:a0b2388d188f153b92ef65b52ae9b7519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_debug_1_1_parent_location"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_debug_1_1_parent_location')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_debug_1_1_parent_location.html">Engine::Debug::ParentLocation</a></td></tr>
+<tr class="memitem:abebb89f3f6c4b8f49e6b912bb54d93c4 inherit pub_attribs_struct_engine_1_1_debug_1_1_parent_location"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_parent_location.html#abebb89f3f6c4b8f49e6b912bb54d93c4">mChild</a> = nullptr</td></tr>
+<tr class="separator:abebb89f3f6c4b8f49e6b912bb54d93c4 inherit pub_attribs_struct_engine_1_1_debug_1_1_parent_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae15ed66ae729c5c7b1a8c8a51e71e06f inherit pub_attribs_struct_engine_1_1_debug_1_1_parent_location"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_parent_location.html#ae15ed66ae729c5c7b1a8c8a51e71e06f">mContext</a> = nullptr</td></tr>
+<tr class="separator:ae15ed66ae729c5c7b1a8c8a51e71e06f inherit pub_attribs_struct_engine_1_1_debug_1_1_parent_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9e292fbb0a4d6393b0b92e03d7b85f15" name="a9e292fbb0a4d6393b0b92e03d7b85f15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e292fbb0a4d6393b0b92e03d7b85f15">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::Scripting::Python3::Python3DebugLocation::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a8988903c7749df4da8073216548d50da">Engine::Debug::DebugLocation</a>.</p>
+
+</div>
+</div>
+<a id="a216ea0cf1d4921dba3645c2b28329624" name="a216ea0cf1d4921dba3645c2b28329624"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a216ea0cf1d4921dba3645c2b28329624">&#9670;&#160;</a></span>localVariables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; Engine::Scripting::Python3::Python3DebugLocation::localVariables </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a861ce0abc9dab4b7915255b67bdf5b07">Engine::Debug::DebugLocation</a>.</p>
+
+</div>
+</div>
+<a id="aa102aedb04d7624f47c6add7e4c3858a" name="aa102aedb04d7624f47c6add7e4c3858a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa102aedb04d7624f47c6add7e4c3858a">&#9670;&#160;</a></span>wantsPause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Scripting::Python3::Python3DebugLocation::wantsPause </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">Debug::ContinuationType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a5864ebae99fe9fdfa829e7bdfc62b476">Engine::Debug::DebugLocation</a>.</p>
+
+</div>
+</div>
+<a id="a9d9aba8df63ae88b3aa66d5013d3ea4b" name="a9d9aba8df63ae88b3aa66d5013d3ea4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d9aba8df63ae88b3aa66d5013d3ea4b">&#9670;&#160;</a></span>file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> Engine::Scripting::Python3::Python3DebugLocation::file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73558ab70853bfc1352cb4feaa3a81ab" name="a73558ab70853bfc1352cb4feaa3a81ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73558ab70853bfc1352cb4feaa3a81ab">&#9670;&#160;</a></span>module()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::Scripting::Python3::Python3DebugLocation::module </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a880450052aa00d892c0607ec8504e309" name="a880450052aa00d892c0607ec8504e309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a880450052aa00d892c0607ec8504e309">&#9670;&#160;</a></span>lineNr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Scripting::Python3::Python3DebugLocation::lineNr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0b2388d188f153b92ef65b52ae9b7519" name="a0b2388d188f153b92ef65b52ae9b7519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b2388d188f153b92ef65b52ae9b7519">&#9670;&#160;</a></span>mFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3compat_8h.html#a90b0d338e18b17577b6cc0d59024411d">PyFrameObject</a>* Engine::Scripting::Python3::Python3DebugLocation::mFrame = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/python3/src/Python3/<a class="el" href="python3debugger_8h.html">python3debugger.h</a></li>
+<li>plugins/behavior/python3/src/Python3/<a class="el" href="python3debugger_8cpp.html">python3debugger.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

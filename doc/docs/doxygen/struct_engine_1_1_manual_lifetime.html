@@ -1,0 +1,938 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::ManualLifetime&amp;lt; T &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::ManualLifetime&amp;lt; T &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_manual_lifetime.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="manuallifetime-lt-t-gt-struct-template-reference">
+<h1>ManualLifetime&amp;lt; T &amp;gt; Struct Template Reference<a class="headerlink" href="#manuallifetime-lt-t-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::ManualLifetime&lt; T &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_manual_lifetime-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::ManualLifetime&lt; T &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;manuallifetime.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aefc40844bea8175194ff58a57146c235"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#aefc40844bea8175194ff58a57146c235">ManualLifetime</a> ()</td></tr>
+<tr class="separator:aefc40844bea8175194ff58a57146c235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91f73b907e5f70a06fb241892955c7f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a91f73b907e5f70a06fb241892955c7f7">ManualLifetime</a> (const <a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp;)</td></tr>
+<tr class="separator:a91f73b907e5f70a06fb241892955c7f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be1efdd2ffd39f1dfd92824e2b3368c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a1be1efdd2ffd39f1dfd92824e2b3368c">ManualLifetime</a> (<a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp;&amp;)</td></tr>
+<tr class="separator:a1be1efdd2ffd39f1dfd92824e2b3368c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3829261f2154772daa215a8cd586febc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a3829261f2154772daa215a8cd586febc">~ManualLifetime</a> ()</td></tr>
+<tr class="separator:a3829261f2154772daa215a8cd586febc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac52cbabdb9475d5acef2f31d4eae4b36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#ac52cbabdb9475d5acef2f31d4eae4b36">operator const T &amp;</a> () const</td></tr>
+<tr class="separator:ac52cbabdb9475d5acef2f31d4eae4b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60a7924438599c6843f2b776f2c9a5f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a60a7924438599c6843f2b776f2c9a5f2">operator T&amp;</a> () &amp;</td></tr>
+<tr class="separator:a60a7924438599c6843f2b776f2c9a5f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a520bcaf07c01f10ce2acc43bfd4d07f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a520bcaf07c01f10ce2acc43bfd4d07f8">operator T&amp;&amp;</a> () &amp;&amp;</td></tr>
+<tr class="separator:a520bcaf07c01f10ce2acc43bfd4d07f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cde3978bc8085803a15447fa4fdab6c"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; <br />
+requires <a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt;T, U&gt;</td></tr>
+<tr class="memitem:a5cde3978bc8085803a15447fa4fdab6c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a5cde3978bc8085803a15447fa4fdab6c">operator U</a> () const</td></tr>
+<tr class="separator:a5cde3978bc8085803a15447fa4fdab6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6ec94cf8efff65bf85f390b552da32"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#add6ec94cf8efff65bf85f390b552da32">operator&amp;</a> ()</td></tr>
+<tr class="separator:add6ec94cf8efff65bf85f390b552da32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cad3f13de68bb5d4d170dc54b70f276"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a7cad3f13de68bb5d4d170dc54b70f276">operator&amp;</a> () const</td></tr>
+<tr class="separator:a7cad3f13de68bb5d4d170dc54b70f276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a515e65a86ec83e4f568a554db5a568f5"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a515e65a86ec83e4f568a554db5a568f5">operator*</a> ()</td></tr>
+<tr class="separator:a515e65a86ec83e4f568a554db5a568f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90d5137259e22b8fc84040809e3c2e46"><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a90d5137259e22b8fc84040809e3c2e46">operator*</a> () const</td></tr>
+<tr class="separator:a90d5137259e22b8fc84040809e3c2e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5ccd728775894bc36f18da5b08d7677"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#ab5ccd728775894bc36f18da5b08d7677">operator-&gt;</a> ()</td></tr>
+<tr class="separator:ab5ccd728775894bc36f18da5b08d7677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac06b8acab7c71b32e2a9fde0aceedffa"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#ac06b8acab7c71b32e2a9fde0aceedffa">operator-&gt;</a> () const</td></tr>
+<tr class="separator:ac06b8acab7c71b32e2a9fde0aceedffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a696f8a25aa6256039711db700254aa80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a696f8a25aa6256039711db700254aa80">operator=</a> (<a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp;&amp;t)</td></tr>
+<tr class="separator:a696f8a25aa6256039711db700254aa80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03ba10d6c5c0f232cd3885347d8f6e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#ad03ba10d6c5c0f232cd3885347d8f6e4">operator=</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:ad03ba10d6c5c0f232cd3885347d8f6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66a346e3cc5b77b6b0498541576650d8"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a66a346e3cc5b77b6b0498541576650d8">unsafeAccess</a> ()</td></tr>
+<tr class="separator:a66a346e3cc5b77b6b0498541576650d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69e01abad8078eccc293c76d5954322a"><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a69e01abad8078eccc293c76d5954322a">unsafeAccess</a> () const</td></tr>
+<tr class="separator:a69e01abad8078eccc293c76d5954322a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aa1235be2a7d56dbbb440470c194837be"><td class="memItemLeft" >union {</td></tr>
+<tr class="memitem:a4c0adf6cf75d8e9003a99ed21146f48a"><td class="memItemLeft" >&#160;&#160;&#160;T&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_manual_lifetime.html#a7a5da64b25c2855667e47d6f494a1e20">mData</a></td></tr>
+<tr class="separator:a4c0adf6cf75d8e9003a99ed21146f48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1235be2a7d56dbbb440470c194837be"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:aa1235be2a7d56dbbb440470c194837be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2329d6aa7d2fb0e8548cc4490f5d96f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a2329d6aa7d2fb0e8548cc4490f5d96f7">mAlive</a> = false</td></tr>
+<tr class="separator:a2329d6aa7d2fb0e8548cc4490f5d96f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ad7fb35122e556e8f0327439e35d61eac"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ad7fb35122e556e8f0327439e35d61eac"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#ad7fb35122e556e8f0327439e35d61eac">tag_invoke</a> (<a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>, <a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp;object, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:ad7fb35122e556e8f0327439e35d61eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282280146eb447ffa24b6a34bd914833"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html#a282280146eb447ffa24b6a34bd914833">tag_invoke</a> (<a class="el" href="struct_engine_1_1destruct__t.html">destruct_t</a>, <a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp;object)</td></tr>
+<tr class="separator:a282280146eb447ffa24b6a34bd914833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aefc40844bea8175194ff58a57146c235" name="aefc40844bea8175194ff58a57146c235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc40844bea8175194ff58a57146c235">&#9670;&#160;</a></span>ManualLifetime() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::ManualLifetime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91f73b907e5f70a06fb241892955c7f7" name="a91f73b907e5f70a06fb241892955c7f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91f73b907e5f70a06fb241892955c7f7">&#9670;&#160;</a></span>ManualLifetime() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::ManualLifetime </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1be1efdd2ffd39f1dfd92824e2b3368c" name="a1be1efdd2ffd39f1dfd92824e2b3368c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1be1efdd2ffd39f1dfd92824e2b3368c">&#9670;&#160;</a></span>ManualLifetime() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::ManualLifetime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3829261f2154772daa215a8cd586febc" name="a3829261f2154772daa215a8cd586febc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3829261f2154772daa215a8cd586febc">&#9670;&#160;</a></span>~ManualLifetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::~<a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a60a7924438599c6843f2b776f2c9a5f2" name="a60a7924438599c6843f2b776f2c9a5f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a7924438599c6843f2b776f2c9a5f2">&#9670;&#160;</a></span>operator T&amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator T&amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac52cbabdb9475d5acef2f31d4eae4b36" name="ac52cbabdb9475d5acef2f31d4eae4b36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac52cbabdb9475d5acef2f31d4eae4b36">&#9670;&#160;</a></span>operator const T &amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator const T &amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a520bcaf07c01f10ce2acc43bfd4d07f8" name="a520bcaf07c01f10ce2acc43bfd4d07f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a520bcaf07c01f10ce2acc43bfd4d07f8">&#9670;&#160;</a></span>operator T&amp;&amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator T&amp;&amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5cde3978bc8085803a15447fa4fdab6c" name="a5cde3978bc8085803a15447fa4fdab6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cde3978bc8085803a15447fa4fdab6c">&#9670;&#160;</a></span>operator U()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; <br />
+requires <a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt;T, U&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator U </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add6ec94cf8efff65bf85f390b552da32" name="add6ec94cf8efff65bf85f390b552da32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6ec94cf8efff65bf85f390b552da32">&#9670;&#160;</a></span>operator&amp;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator&amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cad3f13de68bb5d4d170dc54b70f276" name="a7cad3f13de68bb5d4d170dc54b70f276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cad3f13de68bb5d4d170dc54b70f276">&#9670;&#160;</a></span>operator&amp;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T * <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator&amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5ccd728775894bc36f18da5b08d7677" name="ab5ccd728775894bc36f18da5b08d7677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5ccd728775894bc36f18da5b08d7677">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac06b8acab7c71b32e2a9fde0aceedffa" name="ac06b8acab7c71b32e2a9fde0aceedffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac06b8acab7c71b32e2a9fde0aceedffa">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T * <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a515e65a86ec83e4f568a554db5a568f5" name="a515e65a86ec83e4f568a554db5a568f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a515e65a86ec83e4f568a554db5a568f5">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a90d5137259e22b8fc84040809e3c2e46" name="a90d5137259e22b8fc84040809e3c2e46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d5137259e22b8fc84040809e3c2e46">&#9670;&#160;</a></span>operator*() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66a346e3cc5b77b6b0498541576650d8" name="a66a346e3cc5b77b6b0498541576650d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66a346e3cc5b77b6b0498541576650d8">&#9670;&#160;</a></span>unsafeAccess() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::unsafeAccess </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69e01abad8078eccc293c76d5954322a" name="a69e01abad8078eccc293c76d5954322a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69e01abad8078eccc293c76d5954322a">&#9670;&#160;</a></span>unsafeAccess() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T &amp; <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::unsafeAccess </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad03ba10d6c5c0f232cd3885347d8f6e4" name="ad03ba10d6c5c0f232cd3885347d8f6e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad03ba10d6c5c0f232cd3885347d8f6e4">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp; <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a696f8a25aa6256039711db700254aa80" name="a696f8a25aa6256039711db700254aa80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a696f8a25aa6256039711db700254aa80">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a> &amp; <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="ad7fb35122e556e8f0327439e35d61eac" name="ad7fb35122e556e8f0327439e35d61eac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7fb35122e556e8f0327439e35d61eac">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a282280146eb447ffa24b6a34bd914833" name="a282280146eb447ffa24b6a34bd914833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a282280146eb447ffa24b6a34bd914833">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1destruct__t.html">destruct_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>object</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7a5da64b25c2855667e47d6f494a1e20" name="a7a5da64b25c2855667e47d6f494a1e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a5da64b25c2855667e47d6f494a1e20">&#9670;&#160;</a></span>mData</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::mData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1235be2a7d56dbbb440470c194837be" name="aa1235be2a7d56dbbb440470c194837be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1235be2a7d56dbbb440470c194837be">&#9670;&#160;</a></span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union  { ... }  <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::@11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2329d6aa7d2fb0e8548cc4490f5d96f7" name="a2329d6aa7d2fb0e8548cc4490f5d96f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2329d6aa7d2fb0e8548cc4490f5d96f7">&#9670;&#160;</a></span>mAlive</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_manual_lifetime.html">Engine::ManualLifetime</a>&lt; T &gt;::mAlive = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="manuallifetime_8h.html">manuallifetime.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

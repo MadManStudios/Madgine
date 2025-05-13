@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::IntervalClock&amp;lt; Timepoint &amp;gt;::sender&amp;lt; Inner &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::IntervalClock&amp;lt; Timepoint &amp;gt;::sender&amp;lt; Inner &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_interval_clock_1_1sender.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sender-lt-inner-gt-struct-template-reference">
+<h1>sender&amp;lt; Inner &amp;gt; Struct Template Reference<a class="headerlink" href="#sender-lt-inner-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::IntervalClock&lt; Timepoint &gt;::sender&lt; Inner &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_interval_clock_1_1sender-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::IntervalClock&lt; Timepoint &gt;::sender&lt; Inner &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;intervalclock.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::IntervalClock&lt; Timepoint &gt;::sender&lt; Inner &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_interval_clock_1_1sender__inherit__graph.svg" width="183" height="242"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aaf510154d65234ba850cb8edaf6b93aa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#aaf510154d65234ba850cb8edaf6b93aa">result_type</a> = typename Inner::result_type</td></tr>
+<tr class="separator:aaf510154d65234ba850cb8edaf6b93aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eb6968b9c048ff76d5a2b2abb309c84"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Tuple&gt; </td></tr>
+<tr class="memitem:a9eb6968b9c048ff76d5a2b2abb309c84"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a9eb6968b9c048ff76d5a2b2abb309c84">value_types</a> = Tuple&lt; std::chrono::microseconds &gt;</td></tr>
+<tr class="separator:a9eb6968b9c048ff76d5a2b2abb309c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_execution_1_1algorithm__sender')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html">Engine::Execution::algorithm_sender&lt; Inner &gt;</a></td></tr>
+<tr class="memitem:a4c9e571510667c43971f19e34f282a64 inherit pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html#a4c9e571510667c43971f19e34f282a64">result_type</a> = typename std::decay_t&lt; Sender &gt;::result_type</td></tr>
+<tr class="separator:a4c9e571510667c43971f19e34f282a64 inherit pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35729f4491d6e0839bae05c900acd5f1 inherit pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html#a35729f4491d6e0839bae05c900acd5f1">value_types</a> = typename std::decay_t&lt; Sender &gt;::template <a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html#a35729f4491d6e0839bae05c900acd5f1">value_types</a>&lt; Tuple &gt;</td></tr>
+<tr class="separator:a35729f4491d6e0839bae05c900acd5f1 inherit pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_struct_engine_1_1_execution_1_1base__sender"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_execution_1_1base__sender')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_execution_1_1base__sender.html">Engine::Execution::base_sender</a></td></tr>
+<tr class="memitem:abfeefc61b9b7a67bba2797ef53d656fd inherit pub_types_struct_engine_1_1_execution_1_1base__sender"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__sender.html#abfeefc61b9b7a67bba2797ef53d656fd">is_sender</a> = <a class="el" href="classvoid.html">void</a></td></tr>
+<tr class="separator:abfeefc61b9b7a67bba2797ef53d656fd inherit pub_types_struct_engine_1_1_execution_1_1base__sender"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1de82682717324c2200d1796c25813be"><td class="memItemLeft" align="right" valign="top">std::chrono::steady_clock::duration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a1de82682717324c2200d1796c25813be">mDuration</a></td></tr>
+<tr class="separator:a1de82682717324c2200d1796c25813be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_execution_1_1algorithm__sender"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_execution_1_1algorithm__sender')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html">Engine::Execution::algorithm_sender&lt; Inner &gt;</a></td></tr>
+<tr class="memitem:a1e2dd6bf63095b926a148a93e2b81b8f inherit pub_attribs_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memItemLeft" align="right" valign="top">Sender&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html#a1e2dd6bf63095b926a148a93e2b81b8f">mSender</a></td></tr>
+<tr class="separator:a1e2dd6bf63095b926a148a93e2b81b8f inherit pub_attribs_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a2711e4959420000facb956a2b098b3dc"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a2711e4959420000facb956a2b098b3dc">debug_operation_increment</a> = 1</td></tr>
+<tr class="separator:a2711e4959420000facb956a2b098b3dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0badf3b10169708735bcb597cad62318"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a0badf3b10169708735bcb597cad62318">debug_start_increment</a> = 1</td></tr>
+<tr class="separator:a0badf3b10169708735bcb597cad62318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066047fe3a6ddcc0cca5e57c28090d9b"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#a066047fe3a6ddcc0cca5e57c28090d9b">debug_stop_increment</a> = 1</td></tr>
+<tr class="separator:a066047fe3a6ddcc0cca5e57c28090d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ad9641faa56b03a3601fd437b803579a1"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
+<tr class="memitem:ad9641faa56b03a3601fd437b803579a1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#ad9641faa56b03a3601fd437b803579a1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>, <a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a> &amp;&amp;<a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a>, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="separator:ad9641faa56b03a3601fd437b803579a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae49bc7ffb51a6f454cf8721380a3bfdd"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html#ae49bc7ffb51a6f454cf8721380a3bfdd">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1visit__sender__t.html">Execution::visit_sender_t</a>, <a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a> &amp;<a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a>)</td></tr>
+<tr class="separator:ae49bc7ffb51a6f454cf8721380a3bfdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="aaf510154d65234ba850cb8edaf6b93aa" name="aaf510154d65234ba850cb8edaf6b93aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf510154d65234ba850cb8edaf6b93aa">&#9670;&#160;</a></span>result_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::sender&lt; Inner &gt;::result_type =  typename Inner::result_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9eb6968b9c048ff76d5a2b2abb309c84" name="a9eb6968b9c048ff76d5a2b2abb309c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eb6968b9c048ff76d5a2b2abb309c84">&#9670;&#160;</a></span>value_types</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+<div class="memtemplate">
+template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::sender&lt; Inner &gt;::value_types =  Tuple&lt;std::chrono::microseconds&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="ad9641faa56b03a3601fd437b803579a1" name="ad9641faa56b03a3601fd437b803579a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9641faa56b03a3601fd437b803579a1">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+<div class="memtemplate">
+template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a>&lt; Inner &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sender</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae49bc7ffb51a6f454cf8721380a3bfdd" name="ae49bc7ffb51a6f454cf8721380a3bfdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae49bc7ffb51a6f454cf8721380a3bfdd">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1visit__sender__t.html">Execution::visit_sender_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a>&lt; Inner &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sender</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0badf3b10169708735bcb597cad62318" name="a0badf3b10169708735bcb597cad62318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0badf3b10169708735bcb597cad62318">&#9670;&#160;</a></span>debug_start_increment</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::sender&lt; Inner &gt;::debug_start_increment = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2711e4959420000facb956a2b098b3dc" name="a2711e4959420000facb956a2b098b3dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2711e4959420000facb956a2b098b3dc">&#9670;&#160;</a></span>debug_operation_increment</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::sender&lt; Inner &gt;::debug_operation_increment = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a066047fe3a6ddcc0cca5e57c28090d9b" name="a066047fe3a6ddcc0cca5e57c28090d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a066047fe3a6ddcc0cca5e57c28090d9b">&#9670;&#160;</a></span>debug_stop_increment</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::sender&lt; Inner &gt;::debug_stop_increment = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1de82682717324c2200d1796c25813be" name="a1de82682717324c2200d1796c25813be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1de82682717324c2200d1796c25813be">&#9670;&#160;</a></span>mDuration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::chrono::steady_clock::duration <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::sender&lt; Inner &gt;::mDuration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/<a class="el" href="intervalclock_8h.html">intervalclock.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

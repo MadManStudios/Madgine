@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::UniqueComponent::NamedRegistry&amp;lt; _Base, _Annotations &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::UniqueComponent::NamedRegistry&amp;lt; _Base, _Annotations &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_unique_component_1_1_named_registry.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="namedregistry-lt-base-annotations-gt-struct-template-reference">
+<h1>NamedRegistry&amp;lt; _Base, _Annotations &amp;gt; Struct Template Reference<a class="headerlink" href="#namedregistry-lt-base-annotations-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::UniqueComponent::NamedRegistry&lt; _Base, _Annotations &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_unique_component.html">UniqueComponent</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">NamedRegistry</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_unique_component_1_1_named_registry-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::UniqueComponent::NamedRegistry&lt; _Base, _Annotations &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;uniquecomponentregistry.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::UniqueComponent::NamedRegistry&lt; _Base, _Annotations &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_unique_component_1_1_named_registry__inherit__graph.svg" width="238" height="242"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry_1_1_collector_info.html">CollectorInfo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae7bd03605c4329d4399e24784c37d871"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html#ae7bd03605c4329d4399e24784c37d871">NamedRegistry</a> ()</td></tr>
+<tr class="separator:ae7bd03605c4329d4399e24784c37d871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152740784433797db02709efa002c1bb"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html#a152740784433797db02709efa002c1bb">componentName</a> (uint32_t index)</td></tr>
+<tr class="separator:a152740784433797db02709efa002c1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152cef787ff295c9324fb8cd10a2bb2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html#a152cef787ff295c9324fb8cd10a2bb2a">onPluginLoad</a> (const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *bin)</td></tr>
+<tr class="separator:a152cef787ff295c9324fb8cd10a2bb2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_unique_component_1_1_registry_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html">Engine::UniqueComponent::RegistryBase</a></td></tr>
+<tr class="memitem:a88d320a569a5d05ef9ff7c0349cb9cb5 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a88d320a569a5d05ef9ff7c0349cb9cb5">RegistryBase</a> (const <a class="el" href="struct_engine_1_1_type_info.html">TypeInfo</a> *ti, const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *binary, const <a class="el" href="struct_engine_1_1_type_info.html">TypeInfo</a> *namedTi=nullptr)</td></tr>
+<tr class="separator:a88d320a569a5d05ef9ff7c0349cb9cb5 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1326d0ff16225be9ab6feb8c8a9be062 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a1326d0ff16225be9ab6feb8c8a9be062">~RegistryBase</a> ()</td></tr>
+<tr class="separator:a1326d0ff16225be9ab6feb8c8a9be062 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38884deb91b6156c58b42f1f9cecf0b inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_unique_component_1_1_collector_info_base.html">CollectorInfoBase</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#ac38884deb91b6156c58b42f1f9cecf0b">begin</a> ()</td></tr>
+<tr class="separator:ac38884deb91b6156c58b42f1f9cecf0b inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc6bd286760fdf9e457dd9c22d9d6ea7 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_unique_component_1_1_collector_info_base.html">CollectorInfoBase</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#afc6bd286760fdf9e457dd9c22d9d6ea7">end</a> ()</td></tr>
+<tr class="separator:afc6bd286760fdf9e457dd9c22d9d6ea7 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3492116bf37711c82b58264411561162 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_type_info.html">TypeInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a3492116bf37711c82b58264411561162">named_type_info</a> ()</td></tr>
+<tr class="separator:a3492116bf37711c82b58264411561162 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be1f038899af616bc972470b529486e inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a1be1f038899af616bc972470b529486e">onPluginLoad</a> (const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *)=0</td></tr>
+<tr class="separator:a1be1f038899af616bc972470b529486e inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d7ee1617eed4690478e6fc731d9e8e4 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a8d7ee1617eed4690478e6fc731d9e8e4">onPluginUnload</a> (const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *)=0</td></tr>
+<tr class="separator:a8d7ee1617eed4690478e6fc731d9e8e4 inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b6c1a9422f2559d262f612edcc7c71f inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_type_info.html">TypeInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a3b6c1a9422f2559d262f612edcc7c71f">type_info</a> ()</td></tr>
+<tr class="separator:a3b6c1a9422f2559d262f612edcc7c71f inherit pub_methods_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aa505fa539ca647331232418dfed23623"><td class="memItemLeft" align="right" valign="top">static std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html#aa505fa539ca647331232418dfed23623">sComponentName</a> (uint32_t index)</td></tr>
+<tr class="separator:aa505fa539ca647331232418dfed23623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6902404111ca79336fb9ecb0720e570d"><td class="memItemLeft" align="right" valign="top">static const std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html#a6902404111ca79336fb9ecb0720e570d">sComponentsByName</a> ()</td></tr>
+<tr class="separator:a6902404111ca79336fb9ecb0720e570d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a139b14ad81776964f401f9503409eb96"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">NamedRegistry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html#a139b14ad81776964f401f9503409eb96">sInstance</a> ()</td></tr>
+<tr class="separator:a139b14ad81776964f401f9503409eb96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html">Engine::UniqueComponent::RegistryBase</a></td></tr>
+<tr class="memitem:aceaba5737e9365b6bf46f85a664108a3 inherit pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#aceaba5737e9365b6bf46f85a664108a3">mBinary</a></td></tr>
+<tr class="separator:aceaba5737e9365b6bf46f85a664108a3 inherit pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0d244ec2ef8d331edbf2cc080bb0e7 inherit pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a7e0d244ec2ef8d331edbf2cc080bb0e7">mComponentsByName</a></td></tr>
+<tr class="separator:a7e0d244ec2ef8d331edbf2cc080bb0e7 inherit pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa6d245dc56b0f87ac204aa2dc286d64 inherit pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#afa6d245dc56b0f87ac204aa2dc286d64">mIsNamed</a> = false</td></tr>
+<tr class="separator:afa6d245dc56b0f87ac204aa2dc286d64 inherit pub_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_unique_component_1_1_registry_base')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html">Engine::UniqueComponent::RegistryBase</a></td></tr>
+<tr class="memitem:aa6e1dca25b41481086a46857a1c1f49a inherit pro_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_unique_component_1_1_collector_info_base.html">CollectorInfoBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#aa6e1dca25b41481086a46857a1c1f49a">mLoadedCollectors</a></td></tr>
+<tr class="separator:aa6e1dca25b41481086a46857a1c1f49a inherit pro_attribs_struct_engine_1_1_unique_component_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae7bd03605c4329d4399e24784c37d871" name="ae7bd03605c4329d4399e24784c37d871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7bd03605c4329d4399e24784c37d871">&#9670;&#160;</a></span>NamedRegistry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename _Base , typename... _Annotations&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>&lt; _Base, _Annotations &gt;::NamedRegistry </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a139b14ad81776964f401f9503409eb96" name="a139b14ad81776964f401f9503409eb96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a139b14ad81776964f401f9503409eb96">&#9670;&#160;</a></span>sInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename _Base , typename... _Annotations&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">NamedRegistry</a> &amp; <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>&lt; _Base, _Annotations &gt;::sInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6902404111ca79336fb9ecb0720e570d" name="a6902404111ca79336fb9ecb0720e570d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6902404111ca79336fb9ecb0720e570d">&#9670;&#160;</a></span>sComponentsByName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename _Base , typename... _Annotations&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t &gt; &gt; &amp; <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>&lt; _Base, _Annotations &gt;::sComponentsByName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a152740784433797db02709efa002c1bb" name="a152740784433797db02709efa002c1bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152740784433797db02709efa002c1bb">&#9670;&#160;</a></span>componentName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename _Base , typename... _Annotations&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>&lt; _Base, _Annotations &gt;::componentName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa505fa539ca647331232418dfed23623" name="aa505fa539ca647331232418dfed23623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa505fa539ca647331232418dfed23623">&#9670;&#160;</a></span>sComponentName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename _Base , typename... _Annotations&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::string_view <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>&lt; _Base, _Annotations &gt;::sComponentName </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a152cef787ff295c9324fb8cd10a2bb2a" name="a152cef787ff295c9324fb8cd10a2bb2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152cef787ff295c9324fb8cd10a2bb2a">&#9670;&#160;</a></span>onPluginLoad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename _Base , typename... _Annotations&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>&lt; _Base, _Annotations &gt;::onPluginLoad </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *&#160;</td>
+          <td class="paramname"><em>bin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a1be1f038899af616bc972470b529486e">Engine::UniqueComponent::RegistryBase</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Modules/<a class="el" href="modulesforward_8h.html">modulesforward.h</a></li>
+<li>src/Modules/uniquecomponent/<a class="el" href="uniquecomponentregistry_8h.html">uniquecomponentregistry.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

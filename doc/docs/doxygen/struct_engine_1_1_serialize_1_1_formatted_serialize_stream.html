@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Serialize::FormattedSerializeStream Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Serialize::FormattedSerializeStream Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_serialize_1_1_formatted_serialize_stream.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="formattedserializestream-struct-reference">
+<h1>FormattedSerializeStream Struct Reference<a class="headerlink" href="#formattedserializestream-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Serialize::FormattedSerializeStream Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_serialize.html">Serialize</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Serialize::FormattedSerializeStream Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;formattedserializestream.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Serialize::FormattedSerializeStream:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_serialize_1_1_formatted_serialize_stream__inherit__graph.svg" width="187" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af96ca7a545b88885529bc5a9f1df5c84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#af96ca7a545b88885529bc5a9f1df5c84">FormattedSerializeStream</a> ()=default</td></tr>
+<tr class="separator:af96ca7a545b88885529bc5a9f1df5c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2db636e2173f837a7360a56d3b7eaa6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a2db636e2173f837a7360a56d3b7eaa6b">FormattedSerializeStream</a> (std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Formatter</a> &gt; <a class="el" href="namespace_engine_1_1_serialize.html#ad38ef388576a5037e7715524fe016531">format</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html">SerializeStream</a> <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#aa7bbfd6153917f6deed91267b5999664">stream</a>)</td></tr>
+<tr class="separator:a2db636e2173f837a7360a56d3b7eaa6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc3b0bc3015380167eeaa560980c339f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#afc3b0bc3015380167eeaa560980c339f">beginCompoundRead</a> (const char *name)</td></tr>
+<tr class="separator:afc3b0bc3015380167eeaa560980c339f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd6dbd88b23b954a8884b0c312e3f00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a9cd6dbd88b23b954a8884b0c312e3f00">beginCompoundWrite</a> (const char *name)</td></tr>
+<tr class="separator:a9cd6dbd88b23b954a8884b0c312e3f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7525798bde46b05eeb2e23b8eae94a3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a7525798bde46b05eeb2e23b8eae94a3c">beginContainerRead</a> (const char *name, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> sized=true)</td></tr>
+<tr class="separator:a7525798bde46b05eeb2e23b8eae94a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76035af51810b4e0c432af18d48fd8c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a76035af51810b4e0c432af18d48fd8c6">beginContainerWrite</a> (const char *name, uint32_t size=std::numeric_limits&lt; uint32_t &gt;<a class="el" href="namespace_engine.html#a07ada8e7c016a8650e381e46cc37be41">::max</a>())</td></tr>
+<tr class="separator:a76035af51810b4e0c432af18d48fd8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8cc26a165a78f12301d4fadb3f65d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#aed8cc26a165a78f12301d4fadb3f65d9">beginExtendedRead</a> (const char *name, size_t count)</td></tr>
+<tr class="separator:aed8cc26a165a78f12301d4fadb3f65d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adebd0f23bd79d45222ed92797909a211"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#adebd0f23bd79d45222ed92797909a211">beginExtendedWrite</a> (const char *name, size_t count)</td></tr>
+<tr class="separator:adebd0f23bd79d45222ed92797909a211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61eaec5832a8f0bac97b10d529969d01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html">SerializeStreamData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a61eaec5832a8f0bac97b10d529969d01">data</a> () const</td></tr>
+<tr class="separator:a61eaec5832a8f0bac97b10d529969d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ee8ecb2d7f037eff7da2051fd55c59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#aa1ee8ecb2d7f037eff7da2051fd55c59">endCompoundRead</a> (const char *name)</td></tr>
+<tr class="separator:aa1ee8ecb2d7f037eff7da2051fd55c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbe81a7fa740477ace28cc1e4d05ae94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#abbe81a7fa740477ace28cc1e4d05ae94">endCompoundWrite</a> (const char *name)</td></tr>
+<tr class="separator:abbe81a7fa740477ace28cc1e4d05ae94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a320e36869f640cb43bfc460d2e9459a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a320e36869f640cb43bfc460d2e9459a2">endContainerRead</a> (const char *name)</td></tr>
+<tr class="separator:a320e36869f640cb43bfc460d2e9459a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bd2d8606864700e0041c9d8fbc4051"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a33bd2d8606864700e0041c9d8fbc4051">endContainerWrite</a> (const char *name)</td></tr>
+<tr class="separator:a33bd2d8606864700e0041c9d8fbc4051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d52101529e55c82c32003442bafe639"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a8d52101529e55c82c32003442bafe639">hasContainerItem</a> ()</td></tr>
+<tr class="separator:a8d52101529e55c82c32003442bafe639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0b134b9a24dba562ae5582a4181394e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#aa0b134b9a24dba562ae5582a4181394e">id</a> () const</td></tr>
+<tr class="separator:aa0b134b9a24dba562ae5582a4181394e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dce41087d5a070e576cc9b8e1dce329"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a1dce41087d5a070e576cc9b8e1dce329">isBinary</a> ()</td></tr>
+<tr class="separator:a1dce41087d5a070e576cc9b8e1dce329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73996a57780d786ca83d0b295cf52a3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a73996a57780d786ca83d0b295cf52a3e">isMaster</a> (<a class="el" href="namespace_engine.html#a37c5cc550995f4f14badf14d520dbad8">AccessMode</a> mode)</td></tr>
+<tr class="separator:a73996a57780d786ca83d0b295cf52a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34cd2e6f03ceb54e39975851c5e71b05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a34cd2e6f03ceb54e39975851c5e71b05">lookupFieldName</a> (std::string &amp;name)</td></tr>
+<tr class="separator:a34cd2e6f03ceb54e39975851c5e71b05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a563e4637c9502908ad40633f5bd5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a85a563e4637c9502908ad40633f5bd5e">manager</a> ()</td></tr>
+<tr class="separator:a85a563e4637c9502908ad40633f5bd5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6b65ecfde7ab3e9a55c80e222d425b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#aa6b65ecfde7ab3e9a55c80e222d425b3">operator bool</a> () const</td></tr>
+<tr class="separator:aa6b65ecfde7ab3e9a55c80e222d425b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4ce77bfbf8af335a5e6f5426866d22f"><td class="memTemplParams" colspan="2">template&lt;PrimitiveType T&gt; </td></tr>
+<tr class="memitem:ae4ce77bfbf8af335a5e6f5426866d22f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#ae4ce77bfbf8af335a5e6f5426866d22f">readPrimitive</a> (T &amp;t, const char *name)</td></tr>
+<tr class="separator:ae4ce77bfbf8af335a5e6f5426866d22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6e8b01d9c757be4d3c4dc63b2a8d145"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a518c5a6141e5b99931367ab45d0b67af">SerializableUnitList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#ac6e8b01d9c757be4d3c4dc63b2a8d145">serializableList</a> ()</td></tr>
+<tr class="separator:ac6e8b01d9c757be4d3c4dc63b2a8d145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae03fc3aa9273fc353817e55bbb09267f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#ae03fc3aa9273fc353817e55bbb09267f">setId</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#aa0b134b9a24dba562ae5582a4181394e">id</a>)</td></tr>
+<tr class="separator:ae03fc3aa9273fc353817e55bbb09267f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7bbfd6153917f6deed91267b5999664"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html">SerializeStream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#aa7bbfd6153917f6deed91267b5999664">stream</a> ()</td></tr>
+<tr class="separator:aa7bbfd6153917f6deed91267b5999664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4763e10fae2b83a4f38d44632f9b5514"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#a4763e10fae2b83a4f38d44632f9b5514">supportsNameLookup</a> () const</td></tr>
+<tr class="separator:a4763e10fae2b83a4f38d44632f9b5514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6b480a49cbd4c19770ba7ccdfb6f403"><td class="memTemplParams" colspan="2">template&lt;PrimitiveType T&gt; </td></tr>
+<tr class="memitem:ac6b480a49cbd4c19770ba7ccdfb6f403"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#ac6b480a49cbd4c19770ba7ccdfb6f403">writePrimitive</a> (const T &amp;t, const char *name)</td></tr>
+<tr class="separator:ac6b480a49cbd4c19770ba7ccdfb6f403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:afdbdb8e300ebe53bac99755a23ef47dd"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Formatter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html#afdbdb8e300ebe53bac99755a23ef47dd">mFormatter</a></td></tr>
+<tr class="separator:afdbdb8e300ebe53bac99755a23ef47dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af96ca7a545b88885529bc5a9f1df5c84" name="af96ca7a545b88885529bc5a9f1df5c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96ca7a545b88885529bc5a9f1df5c84">&#9670;&#160;</a></span>FormattedSerializeStream() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::FormattedSerializeStream::FormattedSerializeStream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2db636e2173f837a7360a56d3b7eaa6b" name="a2db636e2173f837a7360a56d3b7eaa6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2db636e2173f837a7360a56d3b7eaa6b">&#9670;&#160;</a></span>FormattedSerializeStream() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::FormattedSerializeStream::FormattedSerializeStream </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Formatter</a> &gt;&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html">SerializeStream</a>&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="adebd0f23bd79d45222ed92797909a211" name="adebd0f23bd79d45222ed92797909a211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adebd0f23bd79d45222ed92797909a211">&#9670;&#160;</a></span>beginExtendedWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::FormattedSerializeStream::beginExtendedWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cd6dbd88b23b954a8884b0c312e3f00" name="a9cd6dbd88b23b954a8884b0c312e3f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd6dbd88b23b954a8884b0c312e3f00">&#9670;&#160;</a></span>beginCompoundWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::FormattedSerializeStream::beginCompoundWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abbe81a7fa740477ace28cc1e4d05ae94" name="abbe81a7fa740477ace28cc1e4d05ae94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbe81a7fa740477ace28cc1e4d05ae94">&#9670;&#160;</a></span>endCompoundWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::FormattedSerializeStream::endCompoundWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed8cc26a165a78f12301d4fadb3f65d9" name="aed8cc26a165a78f12301d4fadb3f65d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed8cc26a165a78f12301d4fadb3f65d9">&#9670;&#160;</a></span>beginExtendedRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::FormattedSerializeStream::beginExtendedRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc3b0bc3015380167eeaa560980c339f" name="afc3b0bc3015380167eeaa560980c339f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc3b0bc3015380167eeaa560980c339f">&#9670;&#160;</a></span>beginCompoundRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::FormattedSerializeStream::beginCompoundRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1ee8ecb2d7f037eff7da2051fd55c59" name="aa1ee8ecb2d7f037eff7da2051fd55c59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1ee8ecb2d7f037eff7da2051fd55c59">&#9670;&#160;</a></span>endCompoundRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::FormattedSerializeStream::endCompoundRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a76035af51810b4e0c432af18d48fd8c6" name="a76035af51810b4e0c432af18d48fd8c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76035af51810b4e0c432af18d48fd8c6">&#9670;&#160;</a></span>beginContainerWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::FormattedSerializeStream::beginContainerWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em> = <code>std::numeric_limits&lt;uint32_t&gt;<a class="el" href="namespace_engine.html#a07ada8e7c016a8650e381e46cc37be41">::max</a>()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33bd2d8606864700e0041c9d8fbc4051" name="a33bd2d8606864700e0041c9d8fbc4051"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33bd2d8606864700e0041c9d8fbc4051">&#9670;&#160;</a></span>endContainerWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::FormattedSerializeStream::endContainerWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7525798bde46b05eeb2e23b8eae94a3c" name="a7525798bde46b05eeb2e23b8eae94a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7525798bde46b05eeb2e23b8eae94a3c">&#9670;&#160;</a></span>beginContainerRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::FormattedSerializeStream::beginContainerRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>sized</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a320e36869f640cb43bfc460d2e9459a2" name="a320e36869f640cb43bfc460d2e9459a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a320e36869f640cb43bfc460d2e9459a2">&#9670;&#160;</a></span>endContainerRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::FormattedSerializeStream::endContainerRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d52101529e55c82c32003442bafe639" name="a8d52101529e55c82c32003442bafe639"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d52101529e55c82c32003442bafe639">&#9670;&#160;</a></span>hasContainerItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Serialize::FormattedSerializeStream::hasContainerItem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34cd2e6f03ceb54e39975851c5e71b05" name="a34cd2e6f03ceb54e39975851c5e71b05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34cd2e6f03ceb54e39975851c5e71b05">&#9670;&#160;</a></span>lookupFieldName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::FormattedSerializeStream::lookupFieldName </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4763e10fae2b83a4f38d44632f9b5514" name="a4763e10fae2b83a4f38d44632f9b5514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4763e10fae2b83a4f38d44632f9b5514">&#9670;&#160;</a></span>supportsNameLookup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Serialize::FormattedSerializeStream::supportsNameLookup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6b480a49cbd4c19770ba7ccdfb6f403" name="ac6b480a49cbd4c19770ba7ccdfb6f403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b480a49cbd4c19770ba7ccdfb6f403">&#9670;&#160;</a></span>writePrimitive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;PrimitiveType T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::FormattedSerializeStream::writePrimitive </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4ce77bfbf8af335a5e6f5426866d22f" name="ae4ce77bfbf8af335a5e6f5426866d22f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4ce77bfbf8af335a5e6f5426866d22f">&#9670;&#160;</a></span>readPrimitive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;PrimitiveType T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::FormattedSerializeStream::readPrimitive </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa6b65ecfde7ab3e9a55c80e222d425b3" name="aa6b65ecfde7ab3e9a55c80e222d425b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6b65ecfde7ab3e9a55c80e222d425b3">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::FormattedSerializeStream::operator <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61eaec5832a8f0bac97b10d529969d01" name="a61eaec5832a8f0bac97b10d529969d01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61eaec5832a8f0bac97b10d529969d01">&#9670;&#160;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html">SerializeStreamData</a> * Engine::Serialize::FormattedSerializeStream::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73996a57780d786ca83d0b295cf52a3e" name="a73996a57780d786ca83d0b295cf52a3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73996a57780d786ca83d0b295cf52a3e">&#9670;&#160;</a></span>isMaster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Serialize::FormattedSerializeStream::isMaster </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine.html#a37c5cc550995f4f14badf14d520dbad8">AccessMode</a>&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1dce41087d5a070e576cc9b8e1dce329" name="a1dce41087d5a070e576cc9b8e1dce329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dce41087d5a070e576cc9b8e1dce329">&#9670;&#160;</a></span>isBinary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Serialize::FormattedSerializeStream::isBinary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae03fc3aa9273fc353817e55bbb09267f" name="ae03fc3aa9273fc353817e55bbb09267f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae03fc3aa9273fc353817e55bbb09267f">&#9670;&#160;</a></span>setId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::FormattedSerializeStream::setId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0b134b9a24dba562ae5582a4181394e" name="aa0b134b9a24dba562ae5582a4181394e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b134b9a24dba562ae5582a4181394e">&#9670;&#160;</a></span>id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> Engine::Serialize::FormattedSerializeStream::id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a85a563e4637c9502908ad40633f5bd5e" name="a85a563e4637c9502908ad40633f5bd5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a563e4637c9502908ad40633f5bd5e">&#9670;&#160;</a></span>manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html">SerializeManager</a> * Engine::Serialize::FormattedSerializeStream::manager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6e8b01d9c757be4d3c4dc63b2a8d145" name="ac6e8b01d9c757be4d3c4dc63b2a8d145"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6e8b01d9c757be4d3c4dc63b2a8d145">&#9670;&#160;</a></span>serializableList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_serialize.html#a518c5a6141e5b99931367ab45d0b67af">SerializableUnitList</a> &amp; Engine::Serialize::FormattedSerializeStream::serializableList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7bbfd6153917f6deed91267b5999664" name="aa7bbfd6153917f6deed91267b5999664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7bbfd6153917f6deed91267b5999664">&#9670;&#160;</a></span>stream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html">SerializeStream</a> &amp; Engine::Serialize::FormattedSerializeStream::stream </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afdbdb8e300ebe53bac99755a23ef47dd" name="afdbdb8e300ebe53bac99755a23ef47dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdbdb8e300ebe53bac99755a23ef47dd">&#9670;&#160;</a></span>mFormatter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Formatter</a>&gt; Engine::Serialize::FormattedSerializeStream::mFormatter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/serialize/streams/<a class="el" href="formattedserializestream_8h.html">formattedserializestream.h</a></li>
+<li>src/Meta/serialize/streams/<a class="el" href="formattedserializestream_8cpp.html">formattedserializestream.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

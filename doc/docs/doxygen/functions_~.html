@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Class Members &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Functions" href="functions_func_functions.html" />
+    <link rel="prev" title="Class Members" href="functions_z.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="annotated_classes.html">Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Madgine - Doxygen Documentation</a></li>
+          <li class="breadcrumb-item"><a href="annotated_classes.html">Classes</a></li>
+          <li class="breadcrumb-item"><a href="functions_class_members.html">Class Members</a></li>
+          <li class="breadcrumb-item"><a href="functions_all.html">All</a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Class Members</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/functions_~.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-members">
+<h1>Class Members<a class="headerlink" href="#class-members" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Class Members</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a id="index__7E" name="index__7E"></a>- ~ -</h3><ul>
+<li>~_InsertOperation()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___insert_operation.html#ad829d004147c33f47c98efe4bf7f8cf4">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;::_InsertOperation</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___insert_operation.html#add83bca2fc060575547218818c5c458e">Engine::Serialize::SyncableContainerImpl&lt; C, Observer, OffsetPtr &gt;::_InsertOperation</a></li>
+<li>~_MultiInsertOperation()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___multi_insert_operation.html#a98a349c28134e6bf2b3d65e3d23bd6ef">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;::_MultiInsertOperation</a></li>
+<li>~_RemoveOperation()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___remove_operation.html#af222a1fddcfc60ff655557cf58aa13d0">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;::_RemoveOperation</a></li>
+<li>~_RemoveRangeOperation()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___remove_range_operation.html#ade73de91b6307271161d5d90295a6471">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;::_RemoveRangeOperation</a></li>
+<li>~_ResetOperation()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___reset_operation.html#ae8001d742ddd8059b0daccd281e365d2">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;::_ResetOperation</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___reset_operation.html#aca5d05c47044440c1b4fca30e898bf62">Engine::Serialize::SyncableContainerImpl&lt; C, Observer, OffsetPtr &gt;::_ResetOperation</a></li>
+<li>~algorithm_state_helper()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1algorithm__state__helper.html#a2cf302d167cd21c6b6a25556c180a7d1">Engine::Execution::algorithm_state_helper&lt; State &gt;</a></li>
+<li>~Application()&#160;:&#160;<a class="el" href="struct_engine_1_1_app_1_1_application.html#aa048fb8ea49ff97aa3dde835c9736ac4">Engine::App::Application</a></li>
+<li>~ArgumentList()&#160;:&#160;<a class="el" href="struct_engine_1_1_argument_list.html#a194a8430d5532886402235e35dfebcef">Engine::ArgumentList</a></li>
+<li>~AsyncFileReadState()&#160;:&#160;<a class="el" href="struct_engine_1_1_filesystem_1_1_async_file_read_state.html#a73682684aca82aaa0e88c744de2e17ca">Engine::Filesystem::AsyncFileReadState</a></li>
+<li>~Bar()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_bar.html#a9961e58886114a24501e47a1f71964f6">Engine::Widgets::Bar</a></li>
+<li>~BehaviorHandle()&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior_handle.html#a602b6188e770b10e5a85cf8d08ecda06">Engine::BehaviorHandle</a></li>
+<li>~BehaviorStateBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior_state_base.html#ac3732f32a14d2b418027b6d3616b0df6">Engine::BehaviorStateBase</a></li>
+<li>~BitField()&#160;:&#160;<a class="el" href="struct_engine_1_1_bit_field.html#a833183606d01130be4a21ba396f9cb4c">Engine::BitField&lt; FreeBits, Size, Type &gt;</a></li>
+<li>~BitPair()&#160;:&#160;<a class="el" href="struct_engine_1_1_bit_pair.html#ad277e1fc26ab26ffaf8cdc20ae3c35cb">Engine::BitPair&lt; First, SecondSize, Second &gt;</a></li>
+<li>~BitUniquePtr()&#160;:&#160;<a class="el" href="struct_engine_1_1_bit_unique_ptr.html#a76fca8dd5830c011d77ee5898a5faac1">Engine::BitUniquePtr&lt; T &gt;</a></li>
+<li>~BitVariant()&#160;:&#160;<a class="el" href="struct_engine_1_1_bit_variant.html#a20a1be893f6b7c132bef320b6b53cb1e">Engine::BitVariant&lt; Ty &gt;</a></li>
+<li>~BloomPass()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_bloom_pass.html#aef2df7b2c31ca633fbd238570d9e27d2">Engine::Render::BloomPass</a></li>
+<li>~buffered_streambuf()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1buffered__streambuf.html#a554cfc50ea4088c5c153e30cc3710748">Engine::Serialize::buffered_streambuf</a></li>
+<li>~Button()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_button.html#a7d9a97379318ba8bf126eef1cc910eaa">Engine::Widgets::Button</a></li>
+<li>~CallbackDelay()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1_flag_1_1_callback_delay.html#aaaec5a4936b034a3b6905939c0e0f6b8">Engine::Execution::Flag&lt; _Ty &gt;::CallbackDelay</a>, <a class="el" href="struct_engine_1_1_execution_1_1_value_1_1_callback_delay.html#a9b1e98b5f5577854ee2053c9c9e7a3df">Engine::Execution::Value&lt; _Ty &gt;::CallbackDelay</a></li>
+<li>~Camera()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_camera.html#a4898a0c5141c8b515081690f285f14af">Engine::Render::Camera</a></li>
+<li>~Checkbox()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_checkbox.html#a6cfb7dc5f03cef34f7148537adc08db8">Engine::Widgets::Checkbox</a></li>
+<li>~CLICore()&#160;:&#160;<a class="el" href="struct_engine_1_1_c_l_i_1_1_c_l_i_core.html#a125445ebae8744561ec14f1cf5a354b4">Engine::CLI::CLICore</a></li>
+<li>~codegen_algorithm_state_helper()&#160;:&#160;<a class="el" href="struct_code_gen_1_1codegen__algorithm__state__helper.html#a81a2632878c90c57f285e0dcb7255127">CodeGen::codegen_algorithm_state_helper&lt; State &gt;</a></li>
+<li>~CodeGenerator()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator.html#abc91f2dba456c0c47e0fdb25b7920d1f">Engine::NodeGraph::CodeGenerator</a></li>
+<li>~CodeGeneratorData()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_code_generator_data.html#a7a7c3c57699abda377cd116ea89246ad">Engine::NodeGraph::CodeGeneratorData</a></li>
+<li>~Collector()&#160;:&#160;<a class="el" href="struct_engine_1_1_unique_component_1_1_collector.html#aa9a8ebd36ec1941e5fb3b3e638e7d7d6">Engine::UniqueComponent::Collector&lt; _Registry &gt;</a></li>
+<li>~Combobox()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_combobox.html#a95e96fb23722a443efc7bdc9443f229e">Engine::Widgets::Combobox</a></li>
+<li>~ComponentRegistrator()&#160;:&#160;<a class="el" href="struct_engine_1_1_unique_component_1_1_collector_1_1_component_registrator.html#a7fceab6bcc7df011ca71692194d5c36c">Engine::UniqueComponent::Collector&lt; _Registry &gt;::ComponentRegistrator&lt; T, ActualType &gt;</a></li>
+<li>~CompoundAtomicOperation()&#160;:&#160;<a class="el" href="struct_engine_1_1_compound_atomic_operation.html#a83bd55b653865c9ef87aad14376e50ea">Engine::CompoundAtomicOperation</a></li>
+<li>~ConnectionQueue()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1_connection_queue.html#a71658bc1784c83b1de4526da53ea157a">Engine::Execution::ConnectionQueue&lt; T &gt;</a></li>
+<li>~ConnectionStack()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1_connection_stack.html#abc2b7bb6240e72b10a6d66bb11e3d067">Engine::Execution::ConnectionStack&lt; T &gt;</a></li>
+<li>~const_iterator()&#160;:&#160;<a class="el" href="struct_engine_1_1_generation_container_1_1const__iterator.html#aede71d40dcd753b2f7e03fba4cffb377">Engine::GenerationContainer&lt; C &gt;::const_iterator</a></li>
+<li>~ControlBlock()&#160;:&#160;<a class="el" href="struct_engine_1_1_refcounted_container_1_1_control_block.html#adae6ec30667c9107808435adc1945dd0">Engine::RefcountedContainer&lt; C &gt;::ControlBlock</a></li>
+<li>~CoroutineHandle()&#160;:&#160;<a class="el" href="struct_engine_1_1_coroutine_handle.html#abf04f7beda581ebba475bbf476a115c8">Engine::CoroutineHandle&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_coroutine_handle_3_01void_01_4.html#acf9fd91481ef5473c68417cdfe22554e">Engine::CoroutineHandle&lt; void &gt;</a></li>
+<li>~CoWString()&#160;:&#160;<a class="el" href="struct_engine_1_1_co_w_string.html#a81acf258428b55843235705fb6b68559">Engine::CoWString</a></li>
+<li>~CurlManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_curl_manager.html#ac16d51523f1c58030abf789139127aea">Engine::CurlManager</a></li>
+<li>~CustomCodeBuilder()&#160;:&#160;<a class="el" href="struct_code_gen_1_1_file_1_1_custom_code_builder.html#a773e9710b42db04d2f18286ebbf37e7e">CodeGen::File::CustomCodeBuilder</a></li>
+<li>~DataMutex()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex.html#ae14d878ba5487f7b2bb2840ba6837c34">Engine::Threading::DataMutex</a></li>
+<li>~DebuggableLifetimeBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_debuggable_lifetime_base.html#ac0efe31e5851282c5c81b01283800ef6">Engine::Debug::DebuggableLifetimeBase</a></li>
+<li>~DebugLocation()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html#a21db918d53c8a36dd0e9b872ce57da63">Engine::Debug::DebugLocation</a></li>
+<li>~DirectX12Buffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_buffer.html#aa268e2bb7d86794d573e1e940b044570">Engine::Render::DirectX12Buffer</a></li>
+<li>~DirectX12CommandAllocator()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html#ab3364dc8f94a36249445d30aad0cce86">Engine::Render::DirectX12CommandAllocator</a></li>
+<li>~DirectX12CommandList()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#a4be34eb958a927bb8c9e921da8248ce1">Engine::Render::DirectX12CommandList</a></li>
+<li>~DirectX12DescriptorHeap()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html#a7d8869a3e3c278647053024ba2e8ab87">Engine::Render::DirectX12DescriptorHeap</a></li>
+<li>~DirectX12PersistentBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_persistent_buffer.html#a03996670b6e202de962259918662c3fa">Engine::Render::DirectX12PersistentBuffer</a></li>
+<li>~DirectX12QueryHeap()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_query_heap.html#a6268155036deb72c87ce1bed52d97d9a">Engine::Render::DirectX12QueryHeap</a></li>
+<li>~DirectX12RenderContext()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ab38117404ce742c930e405d318c23c26">Engine::Render::DirectX12RenderContext</a></li>
+<li>~DirectX12RenderTarget()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_target.html#a2abb1730bafc2145e7b1971314a7ec86">Engine::Render::DirectX12RenderTarget</a></li>
+<li>~DirectX12RenderTexture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_texture.html#a24ddfccc5d08c33d887ba15c984f82c0">Engine::Render::DirectX12RenderTexture</a></li>
+<li>~DirectX12RenderWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_window.html#aa0565b3e37e73b9ff41d90b9e7628c6a">Engine::Render::DirectX12RenderWindow</a></li>
+<li>~DirectX12Texture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_texture.html#a3677566a52efebf3684f9c5ebe32484f">Engine::Render::DirectX12Texture</a></li>
+<li>~Entity()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a3ca08c75aadcac670a8a8476d8b12563">Engine::Scene::Entity::Entity</a></li>
+<li>~EntityComponentListBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html#a4a6678a290336dcfe4279296cafb6e8b">Engine::Scene::Entity::EntityComponentListBase</a></li>
+<li>~EntityComponentPtrBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_ptr_base.html#aac53908024c738c84ea4ffa4a4706eb1">Engine::Scene::Entity::EntityComponentPtrBase&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_ptr_base_3_01const_01_entity_component_base_01_4.html#aab0c82a18bb13357dc82edd3f273002f">Engine::Scene::Entity::EntityComponentPtrBase&lt; const EntityComponentBase &gt;</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_ptr_base_3_01_entity_component_base_01_4.html#a1cf16dd9a30c298bfb56ce162046f85e">Engine::Scene::Entity::EntityComponentPtrBase&lt; EntityComponentBase &gt;</a></li>
+<li>~EntityPtr()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html#a895b5e9fe0218dde4ec1f207bd7ac28c">Engine::Scene::Entity::EntityPtr</a></li>
+<li>~ExecutionState()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_execution_state.html#a8b6ede52ff713eb5508642e5361b5da4">Engine::Scripting::Python3::ExecutionState</a></li>
+<li>~FetchStateBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_fetch_state_base.html#afe77c91d23d67d4ea7262a6e9a0ba281">Engine::FetchStateBase</a></li>
+<li>~FileManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_filesystem_1_1_file_manager.html#ae8c8062cc3ad7f30c66beb6d4f9af99e">Engine::Filesystem::FileManager</a></li>
+<li>~FileQueryHandle()&#160;:&#160;<a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_handle.html#a20d6c9d6ffa57f94e9f0826fbb1c90d1">Engine::Filesystem::FileQueryHandle</a></li>
+<li>~FileQueryIterator()&#160;:&#160;<a class="el" href="struct_engine_1_1_filesystem_1_1_file_query_iterator.html#a9cdb97833aa11fc870f55c82707b87b7">Engine::Filesystem::FileQueryIterator</a></li>
+<li>~FileWatcher()&#160;:&#160;<a class="el" href="struct_engine_1_1_filesystem_1_1_file_watcher.html#a598d8b739db0d145fb2ee15a3fdd522f">Engine::Filesystem::FileWatcher</a></li>
+<li>~FixedAllocator()&#160;:&#160;<a class="el" href="struct_engine_1_1_fixed_allocator.html#a2a6afa33ed4cbccc9fffac6321dc845e">Engine::FixedAllocator&lt; Parent &gt;</a></li>
+<li>~Formatter()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ae926f0022c48e714bb6dc5eace3d10ef">Engine::Serialize::Formatter</a></li>
+<li>~FreeListContainer()&#160;:&#160;<a class="el" href="struct_engine_1_1_free_list_container.html#af2733ba200b6de4505474d5f212179d2">Engine::FreeListContainer&lt; C, DataTraits &gt;</a></li>
+<li>~FunctionTableRegistrator()&#160;:&#160;<a class="el" href="struct_engine_1_1_function_table_registrator.html#accae2cfcf8bd6e70ba3d600f92d4a82b">Engine::FunctionTableRegistrator&lt; F &gt;</a></li>
+<li>~GenerationContainerBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_generation_container_base.html#aede2f56de6704c2f96f61da3d80d491f">Engine::GenerationContainerBase</a></li>
+<li>~GenerationContainerIndex()&#160;:&#160;<a class="el" href="struct_engine_1_1_generation_container_index.html#ad584900a16c7c4971fca138d55795d44">Engine::GenerationContainerIndex</a></li>
+<li>~Generator()&#160;:&#160;<a class="el" href="struct_engine_1_1_generator.html#a1848b77453dacb156a76b9ea0e655884">Engine::Generator&lt; T &gt;</a></li>
+<li>~GenericMessageReceiver()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html#a1cd6693ea7f4d82515d2bd123e795f51">Engine::Serialize::GenericMessageReceiver</a></li>
+<li>~Global()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_global.html#a74928654cda044710fad676d361104ee">Engine::Threading::Global&lt; T, Storage &gt;</a>, <a class="el" href="struct_engine_1_1_threading_1_1_global_3_01_t_01_5_00_01_storage_01_4.html#af517505e4c7d05ff92aa02457febfe94">Engine::Threading::Global&lt; T *, Storage &gt;</a></li>
+<li>~GlobalAPIBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_app_1_1_global_a_p_i_base.html#aacf509e951b1f751b9f75f658e4a56b1">Engine::App::GlobalAPIBase</a></li>
+<li>~Guard()&#160;:&#160;<a class="el" href="struct_engine_1_1_guard.html#aaee14a626686f8bdb2bdac9631a9a4cd">Engine::Guard</a>, <a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_debugger_1_1_guard.html#add6cd99ca964537c61799dc46c9ebb2d">Engine::Scripting::Python3::Python3Debugger::Guard</a></li>
+<li>~Handle()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a89201006b1e9764ccd482971b587e89a">Engine::Resources::Handle&lt; Loader, Data &gt;</a></li>
+<li>~HandlerBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_handler_base.html#a9d8be53095f6641fc28f96fb7da240f4">Engine::HandlerBase</a></li>
+<li>~HandlerManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_handler_manager.html#aceaa6f66597cee6a3737baf4bd7e05ed">Engine::HandlerManager</a></li>
+<li>~HeapAllocator()&#160;:&#160;<a class="el" href="struct_engine_1_1_heap_allocator.html#a0fabb44c33ebf965942963adf80ce79a">Engine::HeapAllocator&lt; Parent, BlockSize, BlockCount &gt;</a></li>
+<li>~Image()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_image.html#acab6f3518b03fbe0afa229d38d8c34f4">Engine::Widgets::Image</a></li>
+<li>~IndexHolder()&#160;:&#160;<a class="el" href="struct_engine_1_1_unique_component_1_1_index_holder.html#a82a64bdd0bdce51680bc3702adba3111">Engine::UniqueComponent::IndexHolder</a></li>
+<li>~IniFile()&#160;:&#160;<a class="el" href="struct_engine_1_1_ini_1_1_ini_file.html#aab44b68968f27381e147cacad3f07bac">Engine::Ini::IniFile</a></li>
+<li>~InterpretData()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_sender_node_1_1_interpret_data.html#a5a27c954f6b5a9efc3ebee17bf97949c">Engine::NodeGraph::SenderNode&lt; Config, Algorithm, Arguments &gt;::InterpretData</a></li>
+<li>~IOSWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_window_1_1_i_o_s_window.html#a7d83da00184c6e473f3d0741acc2fbfd">Engine::Window::IOSWindow</a></li>
+<li>~iterator()&#160;:&#160;<a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#adb2131ec9618add62c7f11380e381756">Engine::GenerationContainer&lt; C &gt;::iterator</a></li>
+<li>~KeyValueGlobal()&#160;:&#160;<a class="el" href="struct_engine_1_1_key_value_global.html#ab17aa9f54d69deb648e36f5351f40859">Engine::KeyValueGlobal&lt; T &gt;</a></li>
+<li>~KeyValueWorkGroupLocal()&#160;:&#160;<a class="el" href="struct_engine_1_1_key_value_work_group_local.html#a547f9b1c4674ac2c5d486018a5748e82">Engine::KeyValueWorkGroupLocal&lt; T &gt;</a></li>
+<li>~Label()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_label.html#a4e2c136b1ad2108a8d59ec60536e1aea">Engine::Widgets::Label</a></li>
+<li>~Layout()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_layout.html#a89ca14636d822e2c1e8e00df678620a8">Engine::Widgets::Layout</a></li>
+<li>~Lifetime()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#ac400c8b5aa079785bf19b5ec37093d71">Engine::Execution::Lifetime&lt; cpos &gt;</a></li>
+<li>~Lock()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock.html#aa309cbfc0a6d128544f8aee2c13bea59">Engine::Threading::DataMutex::Lock</a></li>
+<li>~Log()&#160;:&#160;<a class="el" href="struct_engine_1_1_log_1_1_log.html#aae01f69496e1c0023c5a103df5d684c0">Engine::Log::Log</a></li>
+<li>~LogDummy()&#160;:&#160;<a class="el" href="struct_engine_1_1_log_1_1_log_dummy.html#ac8542632d659230e700f3daf5cf22e76">Engine::Log::LogDummy</a></li>
+<li>~LogListener()&#160;:&#160;<a class="el" href="struct_engine_1_1_log_1_1_log_listener.html#ae62a0cfd47ed2ab62dbd3445937aeca2">Engine::Log::LogListener</a></li>
+<li>~MadgineObjectState()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#adc0d30618c88b1348697944a0409a8ff">Engine::Threading::MadgineObjectState</a></li>
+<li>~MainWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_window_1_1_main_window.html#a8b5f9a9d22abd1198a3ec87e2db15a8d">Engine::Window::MainWindow</a></li>
+<li>~MainWindowComponentBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_window_1_1_main_window_component_base.html#a782339fcac94574dee99d89618f014db">Engine::Window::MainWindowComponentBase</a></li>
+<li>~ManualLifetime()&#160;:&#160;<a class="el" href="struct_engine_1_1_manual_lifetime.html#a3829261f2154772daa215a8cd586febc">Engine::ManualLifetime&lt; T &gt;</a>, <a class="el" href="struct_engine_1_1_manual_lifetime_3_01_t_01_6_01_4.html#ac78fb26e4994d64820c932393d0b9e9f">Engine::ManualLifetime&lt; T &amp; &gt;</a></li>
+<li>~MemoryManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_memory_1_1_memory_manager.html#a3922c20fddc15b4ee4943e207c8cf1f0">Engine::Memory::MemoryManager</a></li>
+<li>~MemoryReadBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_memory_1_1_memory_read_buffer.html#a3bd4c739ba981882b636f83a33f64761">Engine::Memory::MemoryReadBuffer</a></li>
+<li>~MemoryWriteBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_memory_1_1_memory_write_buffer.html#a6d65e9c2d74e1a1bd0cb6087fc64793c">Engine::Memory::MemoryWriteBuffer</a></li>
+<li>~MetaTableRegistrator()&#160;:&#160;<a class="el" href="struct_engine_1_1_meta_table_registrator.html#a0a0d3097e552cae9bed2030c6efdb959">Engine::MetaTableRegistrator&lt; T &gt;</a></li>
+<li>~NetworkBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_network_1_1_network_buffer.html#a19f3061333e435c6ab9912cfe68d1d27">Engine::Network::NetworkBuffer</a></li>
+<li>~NodeBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_base.html#afde45156c05873c86182959c21fc8af8">Engine::NodeGraph::NodeBase</a></li>
+<li>~NodeGraph()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_graph.html#a7c82d30c80f98bfc97cb6c79fbed5a3f">Engine::NodeGraph::NodeGraph</a></li>
+<li>~NodeInterpreterData()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_data.html#a0ad99c07f799c0e38decf30fafc8b3ee">Engine::NodeGraph::NodeInterpreterData</a></li>
+<li>~NodeInterpreterStateBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_node_graph_1_1_node_interpreter_state_base.html#aa873a742d095b87662c5eece1551194a">Engine::NodeGraph::NodeInterpreterStateBase</a></li>
+<li>~NoParent()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_no_parent.html#ae3057b89e28c58e700a32320e43c121a">Engine::Serialize::NoParent&lt; T &gt;</a></li>
+<li>~NulledPtr()&#160;:&#160;<a class="el" href="struct_engine_1_1_nulled_ptr.html#a0d270d4cde3e2d8afb7cb442f1b6ca35">Engine::NulledPtr&lt; T &gt;</a></li>
+<li>~ObjectInstance()&#160;:&#160;<a class="el" href="struct_engine_1_1_object_instance.html#ab1ea18f7fe7d88502b722196eb2930ea">Engine::ObjectInstance</a></li>
+<li>~OboeApi()&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_oboe_api.html#a5416be423e0b4ee378441dcd5fe1abff">Engine::Audio::OboeApi</a></li>
+<li>~OggDecodeBuf()&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_ogg_decode_buf.html#a29ab7277c285591cfaaf2742c85e84ae">Engine::Audio::OggDecodeBuf</a></li>
+<li>~OpenGLBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_buffer.html#a60605c3c2cb848dc9f7102130a345df1">Engine::Render::OpenGLBuffer</a></li>
+<li>~OpenGLPipeline()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_pipeline.html#aa3dd7b462d3f09c391a59a97c3b42739">Engine::Render::OpenGLPipeline</a></li>
+<li>~OpenGLRenderContext()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_context.html#a0e571b6db58423fcea96229d4cb24a89">Engine::Render::OpenGLRenderContext</a></li>
+<li>~OpenGLRenderTarget()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_target.html#a626aa912302b27630fed094a84a64673">Engine::Render::OpenGLRenderTarget</a></li>
+<li>~OpenGLRenderTexture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_texture.html#ab9442cd65c6aab6f5700e464fc2e38bd">Engine::Render::OpenGLRenderTexture</a></li>
+<li>~OpenGLRenderWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_render_window.html#a933f883a09686a6132ff735599b02aef">Engine::Render::OpenGLRenderWindow</a></li>
+<li>~OpenGLShader()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_shader.html#abc872c83679dd44e5e63c55ae3370519">Engine::Render::OpenGLShader</a></li>
+<li>~OpenGLTexture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_texture.html#a5b3c5e190872f4a1fd020a11de4cfeb5">Engine::Render::OpenGLTexture</a></li>
+<li>~OpenGLVertexArray()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_open_g_l_vertex_array.html#a4e568aefa98347997b58bc443bf597bd">Engine::Render::OpenGLVertexArray</a></li>
+<li>~ParameterTupleBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_parameter_tuple_base.html#a224e242d51e23e61e0729b3d07cdef49">Engine::ParameterTupleBase</a></li>
+<li>~PendingRequest()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html#a4d7ac9bdd55431477d5a3929dfdd1263">Engine::Serialize::PendingRequest</a></li>
+<li>~PipelineInstance()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_pipeline_instance.html#abcab5d84a2a893aa841727b116080002">Engine::Render::PipelineInstance</a></li>
+<li>~Plugin()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin.html#a748b94370ecc410da8145f6e48f8b9c9">Engine::Plugins::Plugin</a></li>
+<li>~PluginManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin_manager.html#a491e33039e65ab11881d42e7e2049dc5">Engine::Plugins::PluginManager</a></li>
+<li>~PluginSection()&#160;:&#160;<a class="el" href="struct_engine_1_1_plugins_1_1_plugin_section.html#a3631e4f525ccc7604be6957933b104ee">Engine::Plugins::PluginSection</a></li>
+<li>~PortAudioApi()&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_port_audio_api.html#a4a53a18c2f5600c4f8296a04031eff23">Engine::Audio::PortAudioApi</a></li>
+<li>~PortAudioStream()&#160;:&#160;<a class="el" href="struct_engine_1_1_audio_1_1_port_audio_stream.html#a4e6a002425ee4846d45a1cbb0a0b729a">Engine::Audio::PortAudioStream</a></li>
+<li>~ProcessStats()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_profiler_1_1_process_stats.html#a62855ce6dc735ab69c02cffb30c15369">Engine::Debug::Profiler::ProcessStats</a></li>
+<li>~ProfileGuard()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_profiler_1_1_profile_guard.html#aecfe63be08a10c010aef534f29f14faf">Engine::Debug::Profiler::ProfileGuard&lt; T &gt;</a></li>
+<li>~Profiler()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_profiler_1_1_profiler.html#a1fd44bb209a1919ce30a4013b5584486">Engine::Debug::Profiler::Profiler</a></li>
+<li>~ProfilerThread()&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_profiler_1_1_profiler_thread.html#ac4462db455e62f083ccbc33b5f32f17a">Engine::Debug::Profiler::ProfilerThread</a></li>
+<li>~ProxyScopeBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_proxy_scope_base.html#ab1db152f4bdab1a640f0f3d2068b99bc">Engine::ProxyScopeBase</a></li>
+<li>~Ptr()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_ptr.html#a52b62b256fa49e6680ceb3f966f3d1c7">Engine::Resources::Ptr&lt; Loader, Data &gt;</a></li>
+<li>~PyObjectInstance()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_object_instance.html#ac00e3ebd6352f49a4f0cae33803b1424">Engine::Scripting::Python3::PyObjectInstance</a></li>
+<li>~PyObjectPtr()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_py_object_ptr.html#af186bb3ea97a3caff47f54677b6329ef">Engine::Scripting::Python3::PyObjectPtr</a></li>
+<li>~Python3InnerLock()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_inner_lock.html#ad0ffa270a038846f19db3b0da4e14b91">Engine::Scripting::Python3::Python3InnerLock</a></li>
+<li>~Python3Lock()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_lock.html#a56a608157c6eec51345dbcad93415109">Engine::Scripting::Python3::Python3Lock</a></li>
+<li>~Python3StreamRedirect()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_stream_redirect.html#ab5b3861e50a15b86466892f7d75c74ea">Engine::Scripting::Python3::Python3StreamRedirect</a></li>
+<li>~Python3Unlock()&#160;:&#160;<a class="el" href="struct_engine_1_1_scripting_1_1_python3_1_1_python3_unlock.html#a7961d3f4e2debfca612774461978798c">Engine::Scripting::Python3::Python3Unlock</a></li>
+<li>~ReadMessage()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_read_message.html#aa5cebc6e69521e15cc38a607c01c7234">Engine::Serialize::ReadMessage</a></li>
+<li>~Registrator()&#160;:&#160;<a class="el" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl_1_1_registrator.html#ae10e5c14214eba833044f16c4407fede">Engine::UniqueComponent::VirtualComponentImpl&lt; _T, _Base, _VBase &gt;::Registrator&lt; ActualType &gt;</a></li>
+<li>~RegistryBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_unique_component_1_1_registry_base.html#a1326d0ff16225be9ab6feb8c8a9be062">Engine::UniqueComponent::RegistryBase</a></li>
+<li>~RenderContext()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a110733ceb593ee90905e10f6f133d808">Engine::Render::RenderContext</a></li>
+<li>~RenderPass()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a3f48f7106a87c14a82d178f691351a43">Engine::Render::RenderPass</a></li>
+<li>~RenderTarget()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a20fe88691669b697b4779be732536573">Engine::Render::RenderTarget</a></li>
+<li>~ResourceBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_base.html#adcb2390cf2b0c269dd7060c5ccc2453a">Engine::Resources::ResourceBase</a></li>
+<li>~ResourceLoaderBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#af8f6fbea990bf643fd32afc884eb5408">Engine::Resources::ResourceLoaderBase</a></li>
+<li>~ResourceManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a649c78ca45fbf3f5d428cc0a816996c5">Engine::Resources::ResourceManager</a></li>
+<li>~Root()&#160;:&#160;<a class="el" href="struct_engine_1_1_root_1_1_root.html#a103cccebc64959313416fc664085c6bd">Engine::Root::Root</a></li>
+<li>~RootComponentBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_root_1_1_root_component_base.html#a4cef1c8f77560246e435de2c349054fb">Engine::Root::RootComponentBase</a></li>
+<li>~SceneComponentBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_scene_component_base.html#ac434adf7961748255f772d0658877964">Engine::Scene::SceneComponentBase</a></li>
+<li>~SceneMainWindowComponent()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_scene_main_window_component.html#af510f6fa958ce4106ac92a4a9c5c3664">Engine::Render::SceneMainWindowComponent</a></li>
+<li>~SceneManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#aa4828e354b1974e97f0645bef449e263">Engine::Scene::SceneManager</a></li>
+<li>~SceneRenderPass()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_scene_render_pass.html#aa7d0a9a9ebaad21415a6134592ea60af">Engine::Render::SceneRenderPass</a></li>
+<li>~SceneView()&#160;:&#160;<a class="el" href="struct_engine_1_1_tools_1_1_scene_view.html#a3a34d9962f1e5344feaab40b0c60451b">Engine::Tools::SceneView</a></li>
+<li>~SceneWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_scene_window.html#a41a005fc818166d5fab3ff402b4bac9e">Engine::Widgets::SceneWindow</a></li>
+<li>~SerializableListHolder()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_list_holder.html#ac8c3ca4c461b47f7ec67a321c4e63e19">Engine::Serialize::SerializableListHolder</a></li>
+<li>~SerializableMapHolder()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_map_holder.html#aeeee8dd9f2029d7bd961c572ff8c5684">Engine::Serialize::SerializableMapHolder</a></li>
+<li>~SerializableUnitBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html#ad63aa3a9a9cb57da8035723a13f33453">Engine::Serialize::SerializableUnitBase</a></li>
+<li>~SerializeManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_manager.html#a4e0c6d9cfddc4a38d5cb2283e81b20f6">Engine::Serialize::SerializeManager</a></li>
+<li>~SerializeStream()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html#a2d9c403bd338680b4938591a01afdbad">Engine::Serialize::SerializeStream</a></li>
+<li>~SerializeStreamData()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream_data.html#a9cc24e48d2438ee3ad0af64cb054c7e1">Engine::Serialize::SerializeStreamData</a></li>
+<li>~Server()&#160;:&#160;<a class="el" href="struct_engine_1_1_server_1_1_server.html#ae99c93208108e7294d86d937afd92bcd">Engine::Server::Server</a></li>
+<li>~ServerAPIBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_server_1_1_server_a_p_i_base.html#acfe12b3fec16a7f3cfd4926649926464">Engine::Server::ServerAPIBase</a></li>
+<li>~ServerLog()&#160;:&#160;<a class="el" href="struct_engine_1_1_server_1_1_server_log.html#a23c1571a4dcff659acca46716d1b1482">Engine::Server::ServerLog</a></li>
+<li>~state()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1for__each__t_1_1state.html#a2bd2cabd7e2093facb39d9fbbd47674b">Engine::Execution::for_each_t::state&lt; Rec, C, F &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1state.html#a34a7c7c8509a952f99ff7cb3df292c02">Engine::Execution::let_value_t::state&lt; Rec, Sender, F &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1repeat__t_1_1state.html#a95cadd1c92567cd5c31e12fec5a106f5">Engine::Execution::repeat_t::state&lt; Rec, Sender &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1sequence__t_1_1state.html#abc4a7be3c1053bc5f8909632d47e2a1e">Engine::Execution::sequence_t::state&lt; Rec, Sender &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1stop__when__t_1_1state.html#a6e501f341705f774bc03afa1f5e06b6b">Engine::Execution::stop_when_t::state&lt; Rec, Inner, Trigger &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1tracked__t_1_1state.html#af54b3a90df1dea69c5fb0302512247c0">Engine::Execution::tracked_t::state&lt; _Rec, Sender &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#abff9873981c949cc1864c333cc264b1f">Engine::Execution::when_all_range_t::state&lt; Rec, Sender &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1when__all__t_1_1state_3_01_rec_00_01std_1_1index__sequence_3_01_i5deeaae98a74e3d08cd766130b7ce970.html#aceaf7fc5d6025810f26d7b6384e03aaf">Engine::Execution::when_all_t::state&lt; Rec, std::index_sequence&lt; Is... &gt;, Sender... &gt;</a>, <a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t_1_1state.html#a7312bf4357501b95132a2f3a65dbb0dc">Engine::Execution::with_debug_location_t&lt; Location &gt;::state&lt; Sender, _Rec &gt;</a></li>
+<li>~state_base()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1detach__t_1_1state__base.html#a11ef2cadac9a75516ba1612a8c105871">Engine::Execution::detach_t::state_base</a></li>
+<li>~StatementVector()&#160;:&#160;<a class="el" href="struct_code_gen_1_1_statement_vector.html#a88c9303be60588ce243f8bebd43980e5">CodeGen::StatementVector</a></li>
+<li>~Stream()&#160;:&#160;<a class="el" href="struct_engine_1_1_stream.html#ac97252ae0c4a41631b056301c7f79c54">Engine::Stream</a></li>
+<li>~SyncableUnitBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a1f9d07e511e08aacfd3f68cbf5adf41a">Engine::Serialize::SyncableUnitBase</a></li>
+<li>~SyncStreamData()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_sync_stream_data.html#a0d4ab7ac3319d9c3cf9ff7e2c1c8e7ef">Engine::Serialize::SyncStreamData</a></li>
+<li>~System()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_system.html#a2bfbcaffd75da93fc8933e542fb93f04">Engine::Scene::Entity::System&lt; T, C &gt;</a></li>
+<li>~TabBar()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_tab_bar.html#a8c847921651bebd998135e3b14bce1fb">Engine::Widgets::TabBar</a></li>
+<li>~TableWidget()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_table_widget.html#a4103b93b0c43da02da9e1132d6ad269a">Engine::Widgets::TableWidget</a></li>
+<li>~TaskHandle()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html#a8dac1043de5b62276db934388e82ed62">Engine::Threading::TaskHandle</a></li>
+<li>~TaskPromiseSharedStateBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_promise_shared_state_base.html#a5076ba293902769a3054cd6a137c7352">Engine::Threading::TaskPromiseSharedStateBase</a></li>
+<li>~TaskPromiseTypeBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_promise_type_base.html#af71ef91a2fa3ccef7941ebb4e279155b">Engine::Threading::TaskPromiseTypeBase</a></li>
+<li>~TaskQueue()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ae956aa424abd887f8bc993aa8ec79a4f">Engine::Threading::TaskQueue</a></li>
+<li>~TaskSuspendablePromiseTypeBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_suspendable_promise_type_base.html#ad3cbfb9cbed27ed24ae1bb17ed3799ed">Engine::Threading::TaskSuspendablePromiseTypeBase</a></li>
+<li>~TempWidgetState()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_temp_widget_state.html#afab6d9fa9bde209b776e3f454d063f96">Engine::Widgets::TempWidgetState</a></li>
+<li>~Textbox()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_textbox.html#a0edb71d0bad93c2e8dd56409cb4a94cb">Engine::Widgets::Textbox</a></li>
+<li>~TextEdit()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_text_edit.html#a26bbb138e146800831d5df3a04e1bd6d">Engine::Widgets::TextEdit</a></li>
+<li>~ToolWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_window_1_1_tool_window.html#acd2638b59d5c85c68aa6051f84d35763">Engine::Window::ToolWindow</a></li>
+<li>~TopLevelUnitBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_top_level_unit_base.html#a7a02712d20b6da5ed9d9f40d647c666c">Engine::Serialize::TopLevelUnitBase</a></li>
+<li>~TrackedAllocator()&#160;:&#160;<a class="el" href="struct_engine_1_1_tracked_allocator.html#a787451f5545751fcddcfdd7fb8a7c78b">Engine::TrackedAllocator&lt; Parent &gt;</a></li>
+<li>~UniqueHandle()&#160;:&#160;<a class="el" href="struct_unique_handle.html#a506f18421bae48e3d097bf17fc809b18">UniqueHandle</a></li>
+<li>~UniqueOpaquePtr()&#160;:&#160;<a class="el" href="struct_engine_1_1_unique_opaque_ptr.html#a58c31c8ee683b198ecedc91eb5ff5ac8">Engine::UniqueOpaquePtr</a></li>
+<li>~UpTo()&#160;:&#160;<a class="el" href="struct_engine_1_1_up_to.html#a172ee13129f841f326872fc5bcffdbb0">Engine::UpTo&lt; T, Count &gt;</a></li>
+<li>~ValueType()&#160;:&#160;<a class="el" href="struct_engine_1_1_value_type.html#ad72b12bf842453e108be0d9ba5eaddf4">Engine::ValueType</a></li>
+<li>~VirtualData()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_virtual_data.html#a59620dea34e4048beb6d48e80c4207b8">Engine::Serialize::VirtualData&lt; T, _Base &gt;</a></li>
+<li>~VirtualReceiverBaseEx()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex_3_01type__pack_3_4_00_01type__pack_3_01_v_8_8_8_01_4_01_4.html#af9cbc6ca6f9a82b4966c6e245d975cf9">Engine::Execution::VirtualReceiverBaseEx&lt; type_pack&lt;&gt;, type_pack&lt; V... &gt; &gt;</a></li>
+<li>~VirtualUnit()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_virtual_unit.html#a6a0102b270be1af0f3f8c580233a7a2d">Engine::Serialize::VirtualUnit&lt; T, _Base &gt;</a></li>
+<li>~VulkanBuffer()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_buffer.html#a36290b3aa2c7cb0e7e5b999529514ce6">Engine::Render::VulkanBuffer</a></li>
+<li>~VulkanCommandList()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_command_list.html#a5c0dbb2c225362d0cd5898e58c9b0103">Engine::Render::VulkanCommandList</a></li>
+<li>~VulkanPipelineInstance()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline_instance.html#ac7b909895f95050274cbd3d9e41ed8af">Engine::Render::VulkanPipelineInstance</a></li>
+<li>~VulkanRenderContext()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a7a07be639b4c8214dbe740551d73f621">Engine::Render::VulkanRenderContext</a></li>
+<li>~VulkanRenderTarget()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#af614a11334ee805862d301a9d35713ad">Engine::Render::VulkanRenderTarget</a></li>
+<li>~VulkanRenderTexture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a6122d29d342fb2383d8f174af4090ae2">Engine::Render::VulkanRenderTexture</a></li>
+<li>~VulkanRenderWindow()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_window.html#a2f17fadb58d98ea33543df864589d3b8">Engine::Render::VulkanRenderWindow</a></li>
+<li>~VulkanTexture()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html#a3d4987639853240cd9c1c9a1e280231a">Engine::Render::VulkanTexture</a></li>
+<li>~WidgetBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a17cea91a048ad7bd615d6a02804abe2d">Engine::Widgets::WidgetBase</a></li>
+<li>~WidgetHandlerBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_handler_base.html#ac7d5fa712e9087a0efc7a93f37e7fef4">Engine::Widgets::WidgetHandlerBase</a></li>
+<li>~WidgetManager()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#a5657cef425725648efc52e940a516faa">Engine::Widgets::WidgetManager</a></li>
+<li>~WidgetsRenderDataClipRectKeep()&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data_1_1_widgets_render_data_clip_rect_keep.html#a12182d2bad8b7aa24cf7d56cb2c41642">Engine::Widgets::WidgetsRenderData::WidgetsRenderDataClipRectKeep</a></li>
+<li>~WorkGroup()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_work_group.html#acf1066433585f29ce44bf20144a65e2e">Engine::Threading::WorkGroup</a></li>
+<li>~WorkGroupHandle()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_work_group_handle.html#a88e2f6de7241869e16266fab6c4f2223">Engine::Threading::WorkGroupHandle</a></li>
+<li>~WriteMessage()&#160;:&#160;<a class="el" href="struct_engine_1_1_serialize_1_1_write_message.html#a5a9508ace306568d1c0297afca3a4cb7">Engine::Serialize::WriteMessage</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="functions_z.html" class="btn btn-neutral float-left" title="Class Members" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions_func_functions.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

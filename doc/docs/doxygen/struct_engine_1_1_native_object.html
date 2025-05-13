@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::NativeObject Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::NativeObject Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_native_object.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nativeobject-struct-reference">
+<h1>NativeObject Struct Reference<a class="headerlink" href="#nativeobject-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::NativeObject Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_native_object.html">NativeObject</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_native_object-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::NativeObject Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;nativeobject.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::NativeObject:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_native_object__inherit__graph.svg" width="154" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0dc78f876a4eb8b35918ef02cbf6333a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_native_object.html#a0dc78f876a4eb8b35918ef02cbf6333a">NativeObject</a> (std::map&lt; std::string, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a>, std::less&lt;&gt; &gt; data)</td></tr>
+<tr class="separator:a0dc78f876a4eb8b35918ef02cbf6333a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_object_ptr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_object_ptr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_object_ptr.html">Engine::ObjectPtr</a></td></tr>
+<tr class="memitem:aa63e613f68b15d7d47826cbecb412c33 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#aa63e613f68b15d7d47826cbecb412c33">ObjectPtr</a> ()=default</td></tr>
+<tr class="separator:aa63e613f68b15d7d47826cbecb412c33 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4576c757142b956148d8e68991bd05f4 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a4576c757142b956148d8e68991bd05f4">ObjectPtr</a> (const std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_object_instance.html">ObjectInstance</a> &gt; &amp;instance)</td></tr>
+<tr class="separator:a4576c757142b956148d8e68991bd05f4 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45df6b40468161d61d5e35ece8efda0 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#ab45df6b40468161d61d5e35ece8efda0">ObjectPtr</a> (std::monostate)</td></tr>
+<tr class="separator:ab45df6b40468161d61d5e35ece8efda0 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a050f164c1c432c2ce7475f48d5e99244 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a050f164c1c432c2ce7475f48d5e99244">call</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;retVal, const <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;args) const</td></tr>
+<tr class="separator:a050f164c1c432c2ce7475f48d5e99244 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b5a1eb60e8969093f65770f97464b9e inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a0b5a1eb60e8969093f65770f97464b9e">descriptor</a> () const</td></tr>
+<tr class="separator:a0b5a1eb60e8969093f65770f97464b9e inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56953d2218ccc157d4fe7d0cd554c39e inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_object_instance.html">ObjectInstance</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a56953d2218ccc157d4fe7d0cd554c39e">get</a> ()</td></tr>
+<tr class="separator:a56953d2218ccc157d4fe7d0cd554c39e inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d0a3b7f24b90713acef8c593529c416 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_object_instance.html">ObjectInstance</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a9d0a3b7f24b90713acef8c593529c416">get</a> () const</td></tr>
+<tr class="separator:a9d0a3b7f24b90713acef8c593529c416 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a744f5463e9e7ccfac7b9f271c51508 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a5a744f5463e9e7ccfac7b9f271c51508">getValue</a> (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;retVal, std::string_view name) const</td></tr>
+<tr class="separator:a5a744f5463e9e7ccfac7b9f271c51508 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6c9c56cdc25270bfe86b58c386936f5 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#ac6c9c56cdc25270bfe86b58c386936f5">operator bool</a> () const</td></tr>
+<tr class="separator:ac6c9c56cdc25270bfe86b58c386936f5 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70348937c5e606080e5a02b788a81004 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a70348937c5e606080e5a02b788a81004">operator==</a> (const <a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a> &amp;other) const</td></tr>
+<tr class="separator:a70348937c5e606080e5a02b788a81004 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc52f2c9fc9ac3052887412d7b112eea inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#adc52f2c9fc9ac3052887412d7b112eea">reset</a> ()</td></tr>
+<tr class="separator:adc52f2c9fc9ac3052887412d7b112eea inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa624dd28696cbd41e332eff48b94e483 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#aa624dd28696cbd41e332eff48b94e483">setValue</a> (std::string_view name, const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;value)</td></tr>
+<tr class="separator:aa624dd28696cbd41e332eff48b94e483 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09644f9a1e1bc788385f5e0bb85a1a48 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_object_ptr.html#a09644f9a1e1bc788385f5e0bb85a1a48">values</a> () const</td></tr>
+<tr class="separator:a09644f9a1e1bc788385f5e0bb85a1a48 inherit pub_methods_struct_engine_1_1_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0dc78f876a4eb8b35918ef02cbf6333a" name="a0dc78f876a4eb8b35918ef02cbf6333a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc78f876a4eb8b35918ef02cbf6333a">&#9670;&#160;</a></span>NativeObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::NativeObject::NativeObject </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; std::string, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a>, std::less&lt;&gt; &gt;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/keyvalue/<a class="el" href="nativeobject_8h.html">nativeobject.h</a></li>
+<li>src/Meta/keyvalue/<a class="el" href="nativeobject_8cpp.html">nativeobject.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

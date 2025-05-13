@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::BehaviorHandle Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::BehaviorHandle Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_behavior_handle.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="behaviorhandle-struct-reference">
+<h1>BehaviorHandle Struct Reference<a class="headerlink" href="#behaviorhandle-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::BehaviorHandle Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_behavior_handle-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::BehaviorHandle Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;behaviorhandle.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:abfc9f83e0ea0fa519499bcf57374b105"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#abfc9f83e0ea0fa519499bcf57374b105">BehaviorHandle</a> ()=default</td></tr>
+<tr class="separator:abfc9f83e0ea0fa519499bcf57374b105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75b83e1da17f44750b8b3ead218ebf2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a75b83e1da17f44750b8b3ead218ebf2f">BehaviorHandle</a> (<a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&amp;other)=default</td></tr>
+<tr class="separator:a75b83e1da17f44750b8b3ead218ebf2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26ff498a9fc2f2dbdc27f243928dd30c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a26ff498a9fc2f2dbdc27f243928dd30c">BehaviorHandle</a> (const <a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;other)</td></tr>
+<tr class="separator:a26ff498a9fc2f2dbdc27f243928dd30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe396691a917b52a9b86c86a75342509"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#abe396691a917b52a9b86c86a75342509">BehaviorHandle</a> (<a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t &gt; index, std::string_view <a class="el" href="struct_engine_1_1_behavior_handle.html#addb3ba59804eac804c2450ad63d3a8dd">name</a>)</td></tr>
+<tr class="separator:abe396691a917b52a9b86c86a75342509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a602b6188e770b10e5a85cf8d08ecda06"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a602b6188e770b10e5a85cf8d08ecda06">~BehaviorHandle</a> ()</td></tr>
+<tr class="separator:a602b6188e770b10e5a85cf8d08ecda06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a390051905378b285dd71bd26b47eb0b4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_binding_descriptor.html">BindingDescriptor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a390051905378b285dd71bd26b47eb0b4">bindings</a> () const</td></tr>
+<tr class="separator:a390051905378b285dd71bd26b47eb0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04eb25964b601db0a16a7296a1f32a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior.html">Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#aa04eb25964b601db0a16a7296a1f32a1">create</a> (const <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> &amp;args, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt; behaviors={}) const</td></tr>
+<tr class="separator:aa04eb25964b601db0a16a7296a1f32a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b36984548cdd9e0ac79d919c670252b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a4b36984548cdd9e0ac79d919c670252b">createDummyParameters</a> () const</td></tr>
+<tr class="separator:a4b36984548cdd9e0ac79d919c670252b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa358f399077c2145df13a733819c3c22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#aa358f399077c2145df13a733819c3c22">createParameters</a> () const</td></tr>
+<tr class="separator:aa358f399077c2145df13a733819c3c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7effa33200e0583e5c29050757fb8a4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a7effa33200e0583e5c29050757fb8a4e">fromString</a> (std::string_view s)</td></tr>
+<tr class="separator:a7effa33200e0583e5c29050757fb8a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addb3ba59804eac804c2450ad63d3a8dd"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#addb3ba59804eac804c2450ad63d3a8dd">name</a> () const</td></tr>
+<tr class="separator:addb3ba59804eac804c2450ad63d3a8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ddbdc8b85d8890f4a82925a8454a18b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a3ddbdc8b85d8890f4a82925a8454a18b">operator bool</a> () const</td></tr>
+<tr class="separator:a3ddbdc8b85d8890f4a82925a8454a18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cda33892387542adea94564194d333a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a3cda33892387542adea94564194d333a">operator=</a> (<a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a3cda33892387542adea94564194d333a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef1c95b69c4fc721f93acc832adba6c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#aef1c95b69c4fc721f93acc832adba6c1">operator=</a> (const <a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;other)</td></tr>
+<tr class="separator:aef1c95b69c4fc721f93acc832adba6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11f8b914a893891c883be1b3bafe601a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a11f8b914a893891c883be1b3bafe601a">parameterTypes</a> () const</td></tr>
+<tr class="separator:a11f8b914a893891c883be1b3bafe601a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cc52d88c5c320a3a28f7ae5e594199d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a8cc52d88c5c320a3a28f7ae5e594199d">resultTypes</a> () const</td></tr>
+<tr class="separator:a8cc52d88c5c320a3a28f7ae5e594199d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac92df02cab0829647acfeac229f33bd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#ac92df02cab0829647acfeac229f33bd5">state</a> () const</td></tr>
+<tr class="separator:ac92df02cab0829647acfeac229f33bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb320b70c748959f1383f3ad0edc0e52"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#adb320b70c748959f1383f3ad0edc0e52">subBehaviorCount</a> () const</td></tr>
+<tr class="separator:adb320b70c748959f1383f3ad0edc0e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a682e739d6fda31bebc21b86b1866c98c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a682e739d6fda31bebc21b86b1866c98c">toString</a> () const</td></tr>
+<tr class="separator:a682e739d6fda31bebc21b86b1866c98c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ae80f09789becaac65bd3fbaf76da93f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#ae80f09789becaac65bd3fbaf76da93f5">mHandle</a></td></tr>
+<tr class="separator:ae80f09789becaac65bd3fbaf76da93f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a005dff7f6d26914b40b9f868c21137da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_handle.html#a005dff7f6d26914b40b9f868c21137da">mIndex</a></td></tr>
+<tr class="separator:a005dff7f6d26914b40b9f868c21137da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abfc9f83e0ea0fa519499bcf57374b105" name="abfc9f83e0ea0fa519499bcf57374b105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfc9f83e0ea0fa519499bcf57374b105">&#9670;&#160;</a></span>BehaviorHandle() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::BehaviorHandle::BehaviorHandle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe396691a917b52a9b86c86a75342509" name="abe396691a917b52a9b86c86a75342509"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe396691a917b52a9b86c86a75342509">&#9670;&#160;</a></span>BehaviorHandle() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::BehaviorHandle::BehaviorHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t &gt;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26ff498a9fc2f2dbdc27f243928dd30c" name="a26ff498a9fc2f2dbdc27f243928dd30c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26ff498a9fc2f2dbdc27f243928dd30c">&#9670;&#160;</a></span>BehaviorHandle() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::BehaviorHandle::BehaviorHandle </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75b83e1da17f44750b8b3ead218ebf2f" name="a75b83e1da17f44750b8b3ead218ebf2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75b83e1da17f44750b8b3ead218ebf2f">&#9670;&#160;</a></span>BehaviorHandle() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::BehaviorHandle::BehaviorHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a602b6188e770b10e5a85cf8d08ecda06" name="a602b6188e770b10e5a85cf8d08ecda06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a602b6188e770b10e5a85cf8d08ecda06">&#9670;&#160;</a></span>~BehaviorHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::BehaviorHandle::~BehaviorHandle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aef1c95b69c4fc721f93acc832adba6c1" name="aef1c95b69c4fc721f93acc832adba6c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef1c95b69c4fc721f93acc832adba6c1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp; Engine::BehaviorHandle::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3cda33892387542adea94564194d333a" name="a3cda33892387542adea94564194d333a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cda33892387542adea94564194d333a">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp; Engine::BehaviorHandle::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_handle.html">BehaviorHandle</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa04eb25964b601db0a16a7296a1f32a1" name="aa04eb25964b601db0a16a7296a1f32a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa04eb25964b601db0a16a7296a1f32a1">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> Engine::BehaviorHandle::create </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> &amp;&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_behavior.html">Behavior</a> &gt;&#160;</td>
+          <td class="paramname"><em>behaviors</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac92df02cab0829647acfeac229f33bd5" name="ac92df02cab0829647acfeac229f33bd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac92df02cab0829647acfeac229f33bd5">&#9670;&#160;</a></span>state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; Engine::BehaviorHandle::state </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa358f399077c2145df13a733819c3c22" name="aa358f399077c2145df13a733819c3c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa358f399077c2145df13a733819c3c22">&#9670;&#160;</a></span>createParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> &gt; Engine::BehaviorHandle::createParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b36984548cdd9e0ac79d919c670252b" name="a4b36984548cdd9e0ac79d919c670252b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b36984548cdd9e0ac79d919c670252b">&#9670;&#160;</a></span>createDummyParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_parameter_tuple.html">ParameterTuple</a> Engine::BehaviorHandle::createDummyParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11f8b914a893891c883be1b3bafe601a" name="a11f8b914a893891c883be1b3bafe601a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11f8b914a893891c883be1b3bafe601a">&#9670;&#160;</a></span>parameterTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt; Engine::BehaviorHandle::parameterTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cc52d88c5c320a3a28f7ae5e594199d" name="a8cc52d88c5c320a3a28f7ae5e594199d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cc52d88c5c320a3a28f7ae5e594199d">&#9670;&#160;</a></span>resultTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt; Engine::BehaviorHandle::resultTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a390051905378b285dd71bd26b47eb0b4" name="a390051905378b285dd71bd26b47eb0b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a390051905378b285dd71bd26b47eb0b4">&#9670;&#160;</a></span>bindings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_engine_1_1_binding_descriptor.html">BindingDescriptor</a> &gt; Engine::BehaviorHandle::bindings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb320b70c748959f1383f3ad0edc0e52" name="adb320b70c748959f1383f3ad0edc0e52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb320b70c748959f1383f3ad0edc0e52">&#9670;&#160;</a></span>subBehaviorCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::BehaviorHandle::subBehaviorCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="addb3ba59804eac804c2450ad63d3a8dd" name="addb3ba59804eac804c2450ad63d3a8dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addb3ba59804eac804c2450ad63d3a8dd">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::BehaviorHandle::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a682e739d6fda31bebc21b86b1866c98c" name="a682e739d6fda31bebc21b86b1866c98c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a682e739d6fda31bebc21b86b1866c98c">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::BehaviorHandle::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7effa33200e0583e5c29050757fb8a4e" name="a7effa33200e0583e5c29050757fb8a4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7effa33200e0583e5c29050757fb8a4e">&#9670;&#160;</a></span>fromString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::BehaviorHandle::fromString </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ddbdc8b85d8890f4a82925a8454a18b" name="a3ddbdc8b85d8890f4a82925a8454a18b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ddbdc8b85d8890f4a82925a8454a18b">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::BehaviorHandle::operator <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a005dff7f6d26914b40b9f868c21137da" name="a005dff7f6d26914b40b9f868c21137da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a005dff7f6d26914b40b9f868c21137da">&#9670;&#160;</a></span>mIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt;uint32_t&gt; Engine::BehaviorHandle::mIndex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae80f09789becaac65bd3fbaf76da93f5" name="ae80f09789becaac65bd3fbaf76da93f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae80f09789becaac65bd3fbaf76da93f5">&#9670;&#160;</a></span>mHandle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> Engine::BehaviorHandle::mHandle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/api/src/Madgine/<a class="el" href="behaviorhandle_8h.html">behaviorhandle.h</a></li>
+<li>plugins/behavior/api/src/Madgine/<a class="el" href="behaviorhandle_8cpp.html">behaviorhandle.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

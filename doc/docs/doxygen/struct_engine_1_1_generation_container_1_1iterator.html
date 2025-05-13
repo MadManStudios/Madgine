@@ -1,0 +1,940 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::GenerationContainer&amp;lt; C &amp;gt;::iterator Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::GenerationContainer&amp;lt; C &amp;gt;::iterator Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_generation_container_1_1iterator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iterator-struct-reference">
+<h1>iterator Struct Reference<a class="headerlink" href="#iterator-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::GenerationContainer&lt; C &gt;::iterator Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_generation_container.html">GenerationContainer</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_generation_container_1_1iterator-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::GenerationContainer&lt; C &gt;::iterator Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;generationcontainer.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a97d1913798f363f62fed87c6fe11684e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a97d1913798f363f62fed87c6fe11684e">difference_type</a> = typename C::iterator::difference_type</td></tr>
+<tr class="separator:a97d1913798f363f62fed87c6fe11684e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c491c0ce334bfc83fe66f45ae2693d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a08c491c0ce334bfc83fe66f45ae2693d">iterator_category</a> = typename C::iterator::iterator_category</td></tr>
+<tr class="separator:a08c491c0ce334bfc83fe66f45ae2693d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad52e595045989e4cccc5bcd7d853f59d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#ad52e595045989e4cccc5bcd7d853f59d">pointer</a> = typename C::iterator::pointer</td></tr>
+<tr class="separator:ad52e595045989e4cccc5bcd7d853f59d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99a884e898ab363d6d027e47bb984d18"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a99a884e898ab363d6d027e47bb984d18">reference</a> = typename C::iterator::reference</td></tr>
+<tr class="separator:a99a884e898ab363d6d027e47bb984d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f4a5074e9127183c1f3a13697d0949f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a9f4a5074e9127183c1f3a13697d0949f">value_type</a> = typename C::iterator::value_type</td></tr>
+<tr class="separator:a9f4a5074e9127183c1f3a13697d0949f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa5ae5e134399e4ee33163be72e1e1ac5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#aa5ae5e134399e4ee33163be72e1e1ac5">iterator</a> ()=default</td></tr>
+<tr class="separator:aa5ae5e134399e4ee33163be72e1e1ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41099e68946f537c59e52f9ca27e0c24"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a41099e68946f537c59e52f9ca27e0c24">iterator</a> (const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;other)</td></tr>
+<tr class="separator:a41099e68946f537c59e52f9ca27e0c24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab6b16ffa3a161c4ed5b45bc0d3fc58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#acab6b16ffa3a161c4ed5b45bc0d3fc58">iterator</a> (<a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a22d26e83d8c079ba8e3bf1c10cf2b65d">index</a>, <a class="el" href="struct_engine_1_1_generation_container.html">GenerationContainer</a>&lt; C &gt; *vector)</td></tr>
+<tr class="separator:acab6b16ffa3a161c4ed5b45bc0d3fc58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e30c9c2cadcd1541ed0332499d0ca7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#ab1e30c9c2cadcd1541ed0332499d0ca7">iterator</a> (<a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:ab1e30c9c2cadcd1541ed0332499d0ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb2131ec9618add62c7f11380e381756"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#adb2131ec9618add62c7f11380e381756">~iterator</a> ()</td></tr>
+<tr class="separator:adb2131ec9618add62c7f11380e381756"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c963ce8a65db5858ca70a6d44822e49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a2c963ce8a65db5858ca70a6d44822e49">copyIndex</a> () const</td></tr>
+<tr class="separator:a2c963ce8a65db5858ca70a6d44822e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d26e83d8c079ba8e3bf1c10cf2b65d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a22d26e83d8c079ba8e3bf1c10cf2b65d">index</a> () const</td></tr>
+<tr class="separator:a22d26e83d8c079ba8e3bf1c10cf2b65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab8562bab112d324345eccb888192551"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#aab8562bab112d324345eccb888192551">operator!=</a> (const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;other) const</td></tr>
+<tr class="separator:aab8562bab112d324345eccb888192551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29dbe58530860fcf52bdf2c5575036a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a99a884e898ab363d6d027e47bb984d18">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a29dbe58530860fcf52bdf2c5575036a1">operator*</a> () const</td></tr>
+<tr class="separator:a29dbe58530860fcf52bdf2c5575036a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab43f043d39e27302bb69d988855a1678"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#ab43f043d39e27302bb69d988855a1678">operator+</a> (ptrdiff_t diff) const</td></tr>
+<tr class="separator:ab43f043d39e27302bb69d988855a1678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b4f6a8af96eaeee72997ca0676246f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a1b4f6a8af96eaeee72997ca0676246f6">operator++</a> ()</td></tr>
+<tr class="separator:a1b4f6a8af96eaeee72997ca0676246f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fb3bbd7e658f02d09371f52cd1afe3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a1fb3bbd7e658f02d09371f52cd1afe3c">operator+=</a> (ptrdiff_t diff)</td></tr>
+<tr class="separator:a1fb3bbd7e658f02d09371f52cd1afe3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61e745285515b3e9daddfac5235319ce"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a61e745285515b3e9daddfac5235319ce">operator-</a> (const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;other) const</td></tr>
+<tr class="separator:a61e745285515b3e9daddfac5235319ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c938361b67b8ef647271cd6b721a401"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#ad52e595045989e4cccc5bcd7d853f59d">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a2c938361b67b8ef647271cd6b721a401">operator-&gt;</a> () const</td></tr>
+<tr class="separator:a2c938361b67b8ef647271cd6b721a401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa49f5265552285e2173ee480b6308c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#afa49f5265552285e2173ee480b6308c8">operator=</a> (const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;other)</td></tr>
+<tr class="separator:afa49f5265552285e2173ee480b6308c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2205271f84e8c5c9508cf45314936587"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a2205271f84e8c5c9508cf45314936587">operator==</a> (const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;other) const</td></tr>
+<tr class="separator:a2205271f84e8c5c9508cf45314936587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a171566c5f603814ba31fc567f400f23e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a171566c5f603814ba31fc567f400f23e">update</a> () const</td></tr>
+<tr class="separator:a171566c5f603814ba31fc567f400f23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aed8bf3d20ad9665dace9341663ffb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a9aed8bf3d20ad9665dace9341663ffb4">valid</a> () const</td></tr>
+<tr class="separator:a9aed8bf3d20ad9665dace9341663ffb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a7f5c5cbb28a120d863d93dfc83f2b1a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a7f5c5cbb28a120d863d93dfc83f2b1a5">mIndex</a></td></tr>
+<tr class="separator:a7f5c5cbb28a120d863d93dfc83f2b1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9184ab6c715d413a6b85dc6dd4f669a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_generation_container.html">GenerationContainer</a>&lt; C &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#af9184ab6c715d413a6b85dc6dd4f669a">mVector</a> = nullptr</td></tr>
+<tr class="separator:af9184ab6c715d413a6b85dc6dd4f669a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a08c491c0ce334bfc83fe66f45ae2693d" name="a08c491c0ce334bfc83fe66f45ae2693d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c491c0ce334bfc83fe66f45ae2693d">&#9670;&#160;</a></span>iterator_category</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::iterator_category =  typename C::iterator::iterator_category</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f4a5074e9127183c1f3a13697d0949f" name="a9f4a5074e9127183c1f3a13697d0949f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f4a5074e9127183c1f3a13697d0949f">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::value_type =  typename C::iterator::value_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97d1913798f363f62fed87c6fe11684e" name="a97d1913798f363f62fed87c6fe11684e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d1913798f363f62fed87c6fe11684e">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::difference_type =  typename C::iterator::difference_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad52e595045989e4cccc5bcd7d853f59d" name="ad52e595045989e4cccc5bcd7d853f59d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad52e595045989e4cccc5bcd7d853f59d">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::pointer =  typename C::iterator::pointer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99a884e898ab363d6d027e47bb984d18" name="a99a884e898ab363d6d027e47bb984d18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a884e898ab363d6d027e47bb984d18">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::reference =  typename C::iterator::reference</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa5ae5e134399e4ee33163be72e1e1ac5" name="aa5ae5e134399e4ee33163be72e1e1ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5ae5e134399e4ee33163be72e1e1ac5">&#9670;&#160;</a></span>iterator() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::iterator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acab6b16ffa3a161c4ed5b45bc0d3fc58" name="acab6b16ffa3a161c4ed5b45bc0d3fc58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acab6b16ffa3a161c4ed5b45bc0d3fc58">&#9670;&#160;</a></span>iterator() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::iterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a>&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container.html">GenerationContainer</a>&lt; C &gt; *&#160;</td>
+          <td class="paramname"><em>vector</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41099e68946f537c59e52f9ca27e0c24" name="a41099e68946f537c59e52f9ca27e0c24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41099e68946f537c59e52f9ca27e0c24">&#9670;&#160;</a></span>iterator() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::iterator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1e30c9c2cadcd1541ed0332499d0ca7" name="ab1e30c9c2cadcd1541ed0332499d0ca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1e30c9c2cadcd1541ed0332499d0ca7">&#9670;&#160;</a></span>iterator() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::iterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb2131ec9618add62c7f11380e381756" name="adb2131ec9618add62c7f11380e381756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb2131ec9618add62c7f11380e381756">&#9670;&#160;</a></span>~iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::~iterator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a29dbe58530860fcf52bdf2c5575036a1" name="a29dbe58530860fcf52bdf2c5575036a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29dbe58530860fcf52bdf2c5575036a1">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#a99a884e898ab363d6d027e47bb984d18">reference</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c938361b67b8ef647271cd6b721a401" name="a2c938361b67b8ef647271cd6b721a401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c938361b67b8ef647271cd6b721a401">&#9670;&#160;</a></span>operator-&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html#ad52e595045989e4cccc5bcd7d853f59d">pointer</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa49f5265552285e2173ee480b6308c8" name="afa49f5265552285e2173ee480b6308c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa49f5265552285e2173ee480b6308c8">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp; <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1b4f6a8af96eaeee72997ca0676246f6" name="a1b4f6a8af96eaeee72997ca0676246f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b4f6a8af96eaeee72997ca0676246f6">&#9670;&#160;</a></span>operator++()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp; <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2205271f84e8c5c9508cf45314936587" name="a2205271f84e8c5c9508cf45314936587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2205271f84e8c5c9508cf45314936587">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab8562bab112d324345eccb888192551" name="aab8562bab112d324345eccb888192551"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab8562bab112d324345eccb888192551">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61e745285515b3e9daddfac5235319ce" name="a61e745285515b3e9daddfac5235319ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61e745285515b3e9daddfac5235319ce">&#9670;&#160;</a></span>operator-()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ptrdiff_t <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1fb3bbd7e658f02d09371f52cd1afe3c" name="a1fb3bbd7e658f02d09371f52cd1afe3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fb3bbd7e658f02d09371f52cd1afe3c">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> &amp; <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">ptrdiff_t&#160;</td>
+          <td class="paramname"><em>diff</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab43f043d39e27302bb69d988855a1678" name="ab43f043d39e27302bb69d988855a1678"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab43f043d39e27302bb69d988855a1678">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_1_1iterator.html">iterator</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">ptrdiff_t&#160;</td>
+          <td class="paramname"><em>diff</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a171566c5f603814ba31fc567f400f23e" name="a171566c5f603814ba31fc567f400f23e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a171566c5f603814ba31fc567f400f23e">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c963ce8a65db5858ca70a6d44822e49" name="a2c963ce8a65db5858ca70a6d44822e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c963ce8a65db5858ca70a6d44822e49">&#9670;&#160;</a></span>copyIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::copyIndex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a22d26e83d8c079ba8e3bf1c10cf2b65d" name="a22d26e83d8c079ba8e3bf1c10cf2b65d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22d26e83d8c079ba8e3bf1c10cf2b65d">&#9670;&#160;</a></span>index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9aed8bf3d20ad9665dace9341663ffb4" name="a9aed8bf3d20ad9665dace9341663ffb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aed8bf3d20ad9665dace9341663ffb4">&#9670;&#160;</a></span>valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::valid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7f5c5cbb28a120d863d93dfc83f2b1a5" name="a7f5c5cbb28a120d863d93dfc83f2b1a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5c5cbb28a120d863d93dfc83f2b1a5">&#9670;&#160;</a></span>mIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container_index.html">GenerationContainerIndex</a> <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::mIndex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9184ab6c715d413a6b85dc6dd4f669a" name="af9184ab6c715d413a6b85dc6dd4f669a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9184ab6c715d413a6b85dc6dd4f669a">&#9670;&#160;</a></span>mVector</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_generation_container.html">GenerationContainer</a>&lt;C&gt;* <a class="el" href="struct_engine_1_1_generation_container.html">Engine::GenerationContainer</a>&lt; C &gt;::iterator::mVector = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/container/<a class="el" href="generationcontainer_8h.html">generationcontainer.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

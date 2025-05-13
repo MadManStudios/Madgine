@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plugins &amp; Unique Components &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Serialization &amp; Synchronization" href="serialize.html" />
+    <link rel="prev" title="Logging" href="logging.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="features.html">Core Features</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../doxygen/index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="features.html">Core Features</a></li>
+      <li class="breadcrumb-item active">Plugins &amp; Unique Components</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/core/pluginsystem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>page Pluginsystem Plugins &amp; Unique Components</p>
+<section id="plugins-unique-components">
+<h1>Plugins &amp; Unique Components<a class="headerlink" href="#plugins-unique-components" title="Permalink to this heading"></a></h1>
+<p>Plugins are one of the core features that the whole framework is built around. Unique Components are a concept that is integrated with the classic notion of plugins to extend their functionality even more and making them easier to use.</p>
+<p>## Plugins</p>
+<p>Plugins are implemented traditionally using shared libraries. Changes in the plugin selection require a restart of the engine. The implementation contains a dependency tracker that is integrated with the CMake-System. Loading a plugin will automatically trigger a load of all dependency plugins that are linked to said plugin in CMake. Furthermore it is possible to group plugins in sections and mark them with any combination of <cite>exclusive</cite> and/or <cite>atleastOne</cite>. Those invariants will then be respected if other plugins of the same section are tried to be loaded. Looking up symbols of plugins by name is also supported but discouraged in favor of Unique Components (see below).</p>
+<p>### Plugin Definition Files</p>
+<p>When providing a <cite>MADGINE_CONFIGURATION</cite> folder (see /ref Build) a <cite>plugins.ini</cite> file can be put in that folder to determine which plugins should be enabled. If it is present, all dynamic plugin loading code will be excluded from the build and instead the provided configuration will be statically applied. Due to its static linking nature this option currently is only supported with the CMake option [<cite>BUILD_SHARED_LIBS</cite>][] being disabled. The easiest way to modify the plugin selection and any plugin configuration files is by using the subpage PluginManagerManual Tool.</p>
+<p>## Unique Components</p>
+<p>Unique Components are a way to avoid using possibly mangled name lookup on shared libraries in a plugin-based system. They allow code to be registered with the system by just writing it <strong>without editing any setup code</strong> somewhere in the engine. When exporting a plugin definition file, the plugin manager also generates a source file that contains the registered components for that configuration, removing most of the overhead introduced by the system in a static build.</p>
+<p>### How it works</p>
+<p>First of all a type of Unique Component has to be defined. This is done by defining a base class and registering this base class to the system. (e.g. the SceneManager registers SceneComponentBase to the system). By implementing a class derived from this base in a different plugin it will be registered to the Collector of the respective plugin. When the plugin is loaded, the derived class will be automatically added to a list if all classes inheriting the base class. This way you have at all times an up-to-date list of implementations of your Unique Component type. See subpage FirstUniqueComponent for more details.</p>
+<p>### How to use it</p>
+<p>The library comes with two kinds of accessors to use the registered types: Containers and Selectors. Containers will contain one instance of each registered type, while Selectors allow to pick one of them.</p>
+<p>### Disclaimer</p>
+<p>The implementation of this feature is highly compiler and linker specific and relies on behavior not defined by the standard. If you encounter a bug or try to use it on a new platform, please [file a bug][] (following this [guidelines][]).</p>
+<p>[Overview]: overview.md
+[Modules]: modules.md
+[file a bug]: <a class="reference external" href="https://github.com/MadManRises/Madgine/issues">https://github.com/MadManRises/Madgine/issues</a>
+[guidelines]: ../.github/ISSUE_TEMPLATE/bug_report.md</p>
+<p>[<cite>BUILD_SHARED_LIBS</cite>]: <a class="reference external" href="https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html">https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="logging.html" class="btn btn-neutral float-left" title="Logging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="serialize.html" class="btn btn-neutral float-right" title="Serialization &amp; Synchronization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

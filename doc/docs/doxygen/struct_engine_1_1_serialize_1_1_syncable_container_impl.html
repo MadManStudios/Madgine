@@ -1,0 +1,1183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Serialize::SyncableContainerImpl&amp;lt; C, Observer, OffsetPtr &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Serialize::SyncableContainerImpl&amp;lt; C, Observer, OffsetPtr &amp;gt; Struct Template Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_serialize_1_1_syncable_container_impl.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="syncablecontainerimpl-lt-c-observer-offsetptr-gt-struct-template-reference">
+<h1>SyncableContainerImpl&amp;lt; C, Observer, OffsetPtr &amp;gt; Struct Template Reference<a class="headerlink" href="#syncablecontainerimpl-lt-c-observer-offsetptr-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Serialize::SyncableContainerImpl&lt; C, Observer, OffsetPtr &gt; Struct Template Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_serialize.html">Serialize</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_serialize_1_1_syncable_container_impl-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Serialize::SyncableContainerImpl&lt; C, Observer, OffsetPtr &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;syncablecontainer.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Serialize::SyncableContainerImpl&lt; C, Observer, OffsetPtr &gt;:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_serialize_1_1_syncable_container_impl__inherit__graph.svg" width="100%" height="461"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___insert_operation.html">_InsertOperation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___remove_operation.html">_RemoveOperation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___remove_range_operation.html">_RemoveRangeOperation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___reset_operation.html">_ResetOperation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1emplace__action__t.html">emplace_action_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1emplace__request__t.html">emplace_request_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__range__t.html">erase_range_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__t.html">erase_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__t.html">reset_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__to__request__t.html">reset_to_request_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa581b95fb62f8eeeef3edb5f7bc4f211"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#aa581b95fb62f8eeeef3edb5f7bc4f211">_traits</a> = <a class="el" href="struct_engine_1_1container__traits.html">container_traits</a>&lt; C &gt;</td></tr>
+<tr class="separator:aa581b95fb62f8eeeef3edb5f7bc4f211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac617944b0143b5a6fea53d271a53bfed"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#ac617944b0143b5a6fea53d271a53bfed">action_payload</a> = std::variant&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1emplace__action__t.html">emplace_action_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__t.html">reset_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__t.html">erase_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__range__t.html">erase_range_t</a> &gt;</td></tr>
+<tr class="separator:ac617944b0143b5a6fea53d271a53bfed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d70860d05ecce9e6b41cfdb4c19f84a"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a2d70860d05ecce9e6b41cfdb4c19f84a">Base</a></td></tr>
+<tr class="separator:a2d70860d05ecce9e6b41cfdb4c19f84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ee31509c68f2d59dcfe0c34eeaa8533"><td class="memItemLeft" align="right" valign="top">typedef _traits::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a9ee31509c68f2d59dcfe0c34eeaa8533">const_iterator</a></td></tr>
+<tr class="separator:a9ee31509c68f2d59dcfe0c34eeaa8533"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae48878598f2a07a42423932e76685c9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#aae48878598f2a07a42423932e76685c9">container_t</a> = <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;</td></tr>
+<tr class="separator:aae48878598f2a07a42423932e76685c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d806f83ac3c00f14b6f28dec006477c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a9d806f83ac3c00f14b6f28dec006477c">InsertOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___insert_operation.html">_InsertOperation</a> &gt;</td></tr>
+<tr class="separator:a9d806f83ac3c00f14b6f28dec006477c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c98baf735dcf12bfd61954a242933e"><td class="memItemLeft" align="right" valign="top">typedef _traits::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a></td></tr>
+<tr class="separator:a35c98baf735dcf12bfd61954a242933e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8fd1f415d8b43cd15d79b918048827a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#ab8fd1f415d8b43cd15d79b918048827a">RemoveOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___remove_operation.html">_RemoveOperation</a> &gt;</td></tr>
+<tr class="separator:ab8fd1f415d8b43cd15d79b918048827a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac807d731b6c7f87e800b2b8be2af9e94"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#ac807d731b6c7f87e800b2b8be2af9e94">RemoveRangeOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___remove_range_operation.html">_RemoveRangeOperation</a> &gt;</td></tr>
+<tr class="separator:ac807d731b6c7f87e800b2b8be2af9e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6e72dc636571308fc6cddb22afbaf7b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#ad6e72dc636571308fc6cddb22afbaf7b">request_payload</a> = std::variant&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1emplace__request__t.html">emplace_request_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__t.html">reset_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__to__request__t.html">reset_to_request_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__t.html">erase_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__range__t.html">erase_range_t</a> &gt;</td></tr>
+<tr class="separator:ad6e72dc636571308fc6cddb22afbaf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac00c522611a029f8990e4b7c7bb2500a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#ac00c522611a029f8990e4b7c7bb2500a">ResetOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___reset_operation.html">_ResetOperation</a> &gt;</td></tr>
+<tr class="separator:ac00c522611a029f8990e4b7c7bb2500a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;</a></td></tr>
+<tr class="memitem:a266a3d2f270585974612aa9442aacc9a inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a266a3d2f270585974612aa9442aacc9a">Base</a> = C</td></tr>
+<tr class="separator:a266a3d2f270585974612aa9442aacc9a inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa231f449f823211802cb10511250bc inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">typedef _traits::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7aa231f449f823211802cb10511250bc">const_iterator</a></td></tr>
+<tr class="separator:a7aa231f449f823211802cb10511250bc inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b60b9bd6ed20bb35af83978ef296c2d inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a6b60b9bd6ed20bb35af83978ef296c2d">container</a> = <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;</td></tr>
+<tr class="separator:a6b60b9bd6ed20bb35af83978ef296c2d inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fab36b37f3bc80d7f7611aad0148c9b inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a0fab36b37f3bc80d7f7611aad0148c9b">InsertOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___insert_operation.html">_InsertOperation</a> &gt;</td></tr>
+<tr class="separator:a0fab36b37f3bc80d7f7611aad0148c9b inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d867ee669a8240d5e980c78d92ce3f9 inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">typedef _traits::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a></td></tr>
+<tr class="separator:a7d867ee669a8240d5e980c78d92ce3f9 inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ccdff74f151737db7bf93f298d375de inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a3ccdff74f151737db7bf93f298d375de">MultiInsertOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___multi_insert_operation.html">_MultiInsertOperation</a> &gt;</td></tr>
+<tr class="separator:a3ccdff74f151737db7bf93f298d375de inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8470072ebfb78ef006636a9b7fd3ffc3 inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">typedef _traits::position_handle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a8470072ebfb78ef006636a9b7fd3ffc3">position_handle</a></td></tr>
+<tr class="separator:a8470072ebfb78ef006636a9b7fd3ffc3 inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6407382369eb4558ab85466d23d185bb inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a6407382369eb4558ab85466d23d185bb">RemoveOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___remove_operation.html">_RemoveOperation</a> &gt;</td></tr>
+<tr class="separator:a6407382369eb4558ab85466d23d185bb inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9629a7b332f499aac916880d218f89df inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a9629a7b332f499aac916880d218f89df">RemoveRangeOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___remove_range_operation.html">_RemoveRangeOperation</a> &gt;</td></tr>
+<tr class="separator:a9629a7b332f499aac916880d218f89df inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae72c86f859559bff606877480361a458 inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#ae72c86f859559bff606877480361a458">ResetOperation</a> = <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl_1_1___reset_operation.html">_ResetOperation</a> &gt;</td></tr>
+<tr class="separator:ae72c86f859559bff606877480361a458 inherit pub_types_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a997cc1dddd85125758045611b6a965a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a997cc1dddd85125758045611b6a965a5">SyncableContainerImpl</a> ()=default</td></tr>
+<tr class="separator:a997cc1dddd85125758045611b6a965a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15d564809023821ecd7ff6b9c0423ea8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a15d564809023821ecd7ff6b9c0423ea8">SyncableContainerImpl</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a> &amp;other)=default</td></tr>
+<tr class="separator:a15d564809023821ecd7ff6b9c0423ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101cbec84b18e896614371ee0c6a277d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a101cbec84b18e896614371ee0c6a277d">SyncableContainerImpl</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a> &amp;&amp;other)=default</td></tr>
+<tr class="separator:a101cbec84b18e896614371ee0c6a277d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca94d2edf111c3cc202a63f74d5413af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#aca94d2edf111c3cc202a63f74d5413af">clear</a> ()</td></tr>
+<tr class="separator:aca94d2edf111c3cc202a63f74d5413af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1023658c1e84c8ca257c98a57359df"><td class="memTemplParams" colspan="2">template&lt;typename... _Ty&gt; </td></tr>
+<tr class="memitem:a7e1023658c1e84c8ca257c98a57359df"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a7e1023658c1e84c8ca257c98a57359df">emplace_async</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;where, _Ty &amp;&amp;...args)</td></tr>
+<tr class="separator:a7e1023658c1e84c8ca257c98a57359df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4753f4b19ce0b2ff7954ba762b5694d4"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename... _Ty&gt; </td></tr>
+<tr class="memitem:a4753f4b19ce0b2ff7954ba762b5694d4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a4753f4b19ce0b2ff7954ba762b5694d4">emplace_init</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;success, const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;where, Init &amp;&amp;init, _Ty &amp;&amp;...args)</td></tr>
+<tr class="separator:a4753f4b19ce0b2ff7954ba762b5694d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d94b68b80b2840d7efa3053f1810dc"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename... _Ty&gt; </td></tr>
+<tr class="memitem:ac0d94b68b80b2840d7efa3053f1810dc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#ac0d94b68b80b2840d7efa3053f1810dc">emplace_init</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;where, Init &amp;&amp;init, _Ty &amp;&amp;...args)</td></tr>
+<tr class="separator:ac0d94b68b80b2840d7efa3053f1810dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac052bc6d8d68fa4bdd96d9cb116cd5ee"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename... _Ty&gt; </td></tr>
+<tr class="memitem:ac052bc6d8d68fa4bdd96d9cb116cd5ee"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#ac052bc6d8d68fa4bdd96d9cb116cd5ee">emplace_init_async</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;where, Init &amp;&amp;init, _Ty &amp;&amp;...args)</td></tr>
+<tr class="separator:ac052bc6d8d68fa4bdd96d9cb116cd5ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed9ef188d52c53b42e4732901cd6fdf4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#aed9ef188d52c53b42e4732901cd6fdf4">erase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;from, const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;to)</td></tr>
+<tr class="separator:aed9ef188d52c53b42e4732901cd6fdf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bd7779ac71f76bf78e2fb2ec53370db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a4bd7779ac71f76bf78e2fb2ec53370db">erase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;it)</td></tr>
+<tr class="separator:a4bd7779ac71f76bf78e2fb2ec53370db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedbe3bf22acf21311b6762690a6cdecd"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#aedbe3bf22acf21311b6762690a6cdecd">erase_async</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;from, const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;to)</td></tr>
+<tr class="separator:aedbe3bf22acf21311b6762690a6cdecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e131b3a05fa2a983bd3fd4628e8d37a"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a7e131b3a05fa2a983bd3fd4628e8d37a">erase_async</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;where)</td></tr>
+<tr class="separator:a7e131b3a05fa2a983bd3fd4628e8d37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2d6820873ca4693287820964354878"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#aeb2d6820873ca4693287820964354878">operator=</a> (const typename <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a266a3d2f270585974612aa9442aacc9a">Base::Base</a> &amp;other)</td></tr>
+<tr class="separator:aeb2d6820873ca4693287820964354878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a773bdc8696db2acdc4e9197bc56ceacf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a773bdc8696db2acdc4e9197bc56ceacf">operator=</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&amp;other)</td></tr>
+<tr class="separator:a773bdc8696db2acdc4e9197bc56ceacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;</a></td></tr>
+<tr class="memitem:a2b3e7989b44fb58ede35280ce4a4c562 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a2b3e7989b44fb58ede35280ce4a4c562">SerializableContainerImpl</a> ()</td></tr>
+<tr class="separator:a2b3e7989b44fb58ede35280ce4a4c562 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62749e77daf4b96852f592bec620839e inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a62749e77daf4b96852f592bec620839e">SerializableContainerImpl</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a266a3d2f270585974612aa9442aacc9a">Base</a> &amp;c)</td></tr>
+<tr class="separator:a62749e77daf4b96852f592bec620839e inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6520cbc8c1fca726e2f3f2d5c40e44ef inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a6520cbc8c1fca726e2f3f2d5c40e44ef">SerializableContainerImpl</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a> &amp;other)</td></tr>
+<tr class="separator:a6520cbc8c1fca726e2f3f2d5c40e44ef inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b84f8e271b1094d05b7781e86b41579 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a1b84f8e271b1094d05b7781e86b41579">SerializableContainerImpl</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a1b84f8e271b1094d05b7781e86b41579 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73c195c699822868597c5ad80f0b4d2f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a73c195c699822868597c5ad80f0b4d2f">SerializableContainerImpl</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a> &amp;&amp;other, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> hasEndIterator)</td></tr>
+<tr class="separator:a73c195c699822868597c5ad80f0b4d2f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bc0ba61468ff4f78f364d6cf4bbcb10 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a5bc0ba61468ff4f78f364d6cf4bbcb10">begin</a> ()</td></tr>
+<tr class="separator:a5bc0ba61468ff4f78f364d6cf4bbcb10 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c39905fe68ccb5148a09d07b0e0b71 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7aa231f449f823211802cb10511250bc">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#ab0c39905fe68ccb5148a09d07b0e0b71">begin</a> () const</td></tr>
+<tr class="separator:ab0c39905fe68ccb5148a09d07b0e0b71 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e2d861ba879b5dc19ca5597d2d36447 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a4e2d861ba879b5dc19ca5597d2d36447">clear</a> ()</td></tr>
+<tr class="separator:a4e2d861ba879b5dc19ca5597d2d36447 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a4965e90270a4dcbeaf09c838553696 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename... _Ty&gt; </td></tr>
+<tr class="memitem:a2a4965e90270a4dcbeaf09c838553696 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a2a4965e90270a4dcbeaf09c838553696">emplace_init</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;success, const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;where, Init &amp;&amp;init, _Ty &amp;&amp;...args)</td></tr>
+<tr class="separator:a2a4965e90270a4dcbeaf09c838553696 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9cfab4cca4c20d6da4710ca6912d9d inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename... _Ty&gt; </td></tr>
+<tr class="memitem:a3e9cfab4cca4c20d6da4710ca6912d9d inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a3e9cfab4cca4c20d6da4710ca6912d9d">emplace_init</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;where, Init &amp;&amp;init, _Ty &amp;&amp;...args)</td></tr>
+<tr class="separator:a3e9cfab4cca4c20d6da4710ca6912d9d inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54576362f1e25c0ee446187b0a374917 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a54576362f1e25c0ee446187b0a374917">end</a> ()</td></tr>
+<tr class="separator:a54576362f1e25c0ee446187b0a374917 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac85fe827b95647ff9fb4bf1f7792f13f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7aa231f449f823211802cb10511250bc">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#ac85fe827b95647ff9fb4bf1f7792f13f">end</a> () const</td></tr>
+<tr class="separator:ac85fe827b95647ff9fb4bf1f7792f13f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47df667705efbae481f8f9a1a5768a0f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a47df667705efbae481f8f9a1a5768a0f">erase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;from, const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;to)</td></tr>
+<tr class="separator:a47df667705efbae481f8f9a1a5768a0f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95be09aac1a3bddd2e16aace53be56ff inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a95be09aac1a3bddd2e16aace53be56ff">erase</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;where)</td></tr>
+<tr class="separator:a95be09aac1a3bddd2e16aace53be56ff inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d07a59f377d4a270f189bc85d5ed85 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacestd_1_1ranges.html#af57f4ae964c5865cb5cb7bdad900397d">std::ranges::range_value_t</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a266a3d2f270585974612aa9442aacc9a">Base</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a46d07a59f377d4a270f189bc85d5ed85">extract</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;which)</td></tr>
+<tr class="separator:a46d07a59f377d4a270f189bc85d5ed85 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b5c0d212dd67c4a51719e62182a011f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_observer.html">Observer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a2b5c0d212dd67c4a51719e62182a011f">observer</a> ()</td></tr>
+<tr class="separator:a2b5c0d212dd67c4a51719e62182a011f inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb98360bb06bd7f578624689e21b2f5 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a0cb98360bb06bd7f578624689e21b2f5">operator=</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a266a3d2f270585974612aa9442aacc9a">Base</a> &amp;other)</td></tr>
+<tr class="separator:a0cb98360bb06bd7f578624689e21b2f5 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52279953bda3e5d047c26139c8558f51 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a52279953bda3e5d047c26139c8558f51">operator=</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a52279953bda3e5d047c26139c8558f51 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab42b84dda2320987987255a053e689ab inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">C &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#ab42b84dda2320987987255a053e689ab">physical</a> ()</td></tr>
+<tr class="separator:ab42b84dda2320987987255a053e689ab inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78bbccab4e3274b6004d8572ccf8f0f6 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">const C &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a78bbccab4e3274b6004d8572ccf8f0f6">physical</a> () const</td></tr>
+<tr class="separator:a78bbccab4e3274b6004d8572ccf8f0f6 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cc9e869361aad2e74c2b5e4282ad13e inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a0cc9e869361aad2e74c2b5e4282ad13e">setActive</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> active, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> existenceChange, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> controlled)</td></tr>
+<tr class="separator:a0cc9e869361aad2e74c2b5e4282ad13e inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89734061fef0cc86deb47416ee407b07 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a89734061fef0cc86deb47416ee407b07">size</a> () const</td></tr>
+<tr class="separator:a89734061fef0cc86deb47416ee407b07 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_serializable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_serializable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable.html">Engine::Serialize::Serializable&lt; OffsetPtr &gt;</a></td></tr>
+<tr class="memitem:a77572032e460c94803494beafe545c41 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable.html#a77572032e460c94803494beafe545c41">isActive</a> () const</td></tr>
+<tr class="separator:a77572032e460c94803494beafe545c41 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0f93cf93a27b9c59434e2bbbaa5451 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable.html#aba0f93cf93a27b9c59434e2bbbaa5451">isSynced</a> () const</td></tr>
+<tr class="separator:aba0f93cf93a27b9c59434e2bbbaa5451 inherit pub_methods_struct_engine_1_1_serialize_1_1_serializable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_no_op_functor"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_no_op_functor')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_no_op_functor.html">Engine::NoOpFunctor</a></td></tr>
+<tr class="memitem:ac3c5b92041aeee017432ea838f401ac8 inherit pub_methods_struct_engine_1_1_no_op_functor"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ac3c5b92041aeee017432ea838f401ac8 inherit pub_methods_struct_engine_1_1_no_op_functor"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_no_op_functor.html#ac3c5b92041aeee017432ea838f401ac8">operator()</a> (Args &amp;&amp;...)</td></tr>
+<tr class="separator:ac3c5b92041aeee017432ea838f401ac8 inherit pub_methods_struct_engine_1_1_no_op_functor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_syncable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html">Engine::Serialize::Syncable&lt; OffsetPtr &gt;</a></td></tr>
+<tr class="memitem:aeee6e615115cb8ebbb3d8d45567b598b inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#aeee6e615115cb8ebbb3d8d45567b598b">isMaster</a> () const</td></tr>
+<tr class="separator:aeee6e615115cb8ebbb3d8d45567b598b inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ad35123411d6fd93eb0214d3a9778ba inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#a9ad35123411d6fd93eb0214d3a9778ba">parent</a> () const</td></tr>
+<tr class="separator:a9ad35123411d6fd93eb0214d3a9778ba inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c97eba1d781e26a959a4715614ecef inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#a81c97eba1d781e26a959a4715614ecef">participantId</a> ()</td></tr>
+<tr class="separator:a81c97eba1d781e26a959a4715614ecef inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da9bb3cbf24f5b4f1f5e9cedc0188da inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a4da9bb3cbf24f5b4f1f5e9cedc0188da inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#a4da9bb3cbf24f5b4f1f5e9cedc0188da">writeAction</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:a4da9bb3cbf24f5b4f1f5e9cedc0188da inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d62c6fffefbb774ecbf3ac614db255 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ab2d62c6fffefbb774ecbf3ac614db255 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#ab2d62c6fffefbb774ecbf3ac614db255">writeRequest</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">GenericMessageReceiver</a> receiver, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:ab2d62c6fffefbb774ecbf3ac614db255 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdb59d497da569b2570fae7aaa9ec1f3 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:acdb59d497da569b2570fae7aaa9ec1f3 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#acdb59d497da569b2570fae7aaa9ec1f3">writeRequest</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> requester, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> requesterTransactionId, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:acdb59d497da569b2570fae7aaa9ec1f3 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae28810d6707a76ef91c5ce86c473de87 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ae28810d6707a76ef91c5ce86c473de87 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#ae28810d6707a76ef91c5ce86c473de87">writeRequestResponse</a> (<a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, Args &amp;&amp;...args) const</td></tr>
+<tr class="separator:ae28810d6707a76ef91c5ce86c473de87 inherit pub_methods_struct_engine_1_1_serialize_1_1_syncable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a32dba19a82e12fa855fc4a34ee87b899"><td class="memTemplParams" colspan="2">template&lt;typename... Ty&gt; </td></tr>
+<tr class="memitem:a32dba19a82e12fa855fc4a34ee87b899"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a32dba19a82e12fa855fc4a34ee87b899">tag_invoke</a> (<a class="el" href="struct_engine_1_1emplace__t.html">emplace_t</a>, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;success, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;self, const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;where, <a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;&amp;...args)</td></tr>
+<tr class="separator:a32dba19a82e12fa855fc4a34ee87b899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;</a></td></tr>
+<tr class="memitem:aeb2bc4b4f5f77bde38e404d567de9456 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#aeb2bc4b4f5f77bde38e404d567de9456">clear_intern</a> ()</td></tr>
+<tr class="separator:aeb2bc4b4f5f77bde38e404d567de9456 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1260c90c1651d68161c200bbb175009e inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memTemplParams" colspan="2">template&lt;typename... _Ty&gt; </td></tr>
+<tr class="memitem:a1260c90c1651d68161c200bbb175009e inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a1260c90c1651d68161c200bbb175009e">emplace_intern</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;success, const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7aa231f449f823211802cb10511250bc">const_iterator</a> &amp;where, _Ty &amp;&amp;...args)</td></tr>
+<tr class="separator:a1260c90c1651d68161c200bbb175009e inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a951c161cac933732fb3d71ec38a27ea1 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a951c161cac933732fb3d71ec38a27ea1">erase_intern</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;from, const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;to)</td></tr>
+<tr class="separator:a951c161cac933732fb3d71ec38a27ea1 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa33bb09219b3053a83ab7bd6041feb1b inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#aa33bb09219b3053a83ab7bd6041feb1b">erase_intern</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;it)</td></tr>
+<tr class="separator:aa33bb09219b3053a83ab7bd6041feb1b inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82f26c47f185f2b14fc568430b218260 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a82f26c47f185f2b14fc568430b218260">isItemActive</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a7d867ee669a8240d5e980c78d92ce3f9">iterator</a> &amp;it)</td></tr>
+<tr class="separator:a82f26c47f185f2b14fc568430b218260 inherit pro_methods_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_serialize_1_1_serializable_container_impl')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">Engine::Serialize::SerializableContainerImpl&lt; C, Observer, OffsetPtr &gt;</a></td></tr>
+<tr class="memitem:a0ee14f16c7223bfbaf1bb4e19996cac1 inherit pro_attribs_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a8470072ebfb78ef006636a9b7fd3ffc3">position_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a0ee14f16c7223bfbaf1bb4e19996cac1">mActiveIterator</a></td></tr>
+<tr class="separator:a0ee14f16c7223bfbaf1bb4e19996cac1 inherit pro_attribs_struct_engine_1_1_serialize_1_1_serializable_container_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="aa581b95fb62f8eeeef3edb5f7bc4f211" name="aa581b95fb62f8eeeef3edb5f7bc4f211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa581b95fb62f8eeeef3edb5f7bc4f211">&#9670;&#160;</a></span>_traits</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::_traits =  <a class="el" href="struct_engine_1_1container__traits.html">container_traits</a>&lt;C&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae48878598f2a07a42423932e76685c9" name="aae48878598f2a07a42423932e76685c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae48878598f2a07a42423932e76685c9">&#9670;&#160;</a></span>container_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::container_t =  <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt;C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2d70860d05ecce9e6b41cfdb4c19f84a" name="a2d70860d05ecce9e6b41cfdb4c19f84a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d70860d05ecce9e6b41cfdb4c19f84a">&#9670;&#160;</a></span>Base</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html">SerializableContainerImpl</a>&lt;C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>&gt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::Base</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35c98baf735dcf12bfd61954a242933e" name="a35c98baf735dcf12bfd61954a242933e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35c98baf735dcf12bfd61954a242933e">&#9670;&#160;</a></span>iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef _traits::iterator <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ee31509c68f2d59dcfe0c34eeaa8533" name="a9ee31509c68f2d59dcfe0c34eeaa8533"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ee31509c68f2d59dcfe0c34eeaa8533">&#9670;&#160;</a></span>const_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef _traits::const_iterator <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::const_iterator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6e72dc636571308fc6cddb22afbaf7b" name="ad6e72dc636571308fc6cddb22afbaf7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6e72dc636571308fc6cddb22afbaf7b">&#9670;&#160;</a></span>request_payload</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::request_payload =  std::variant&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1emplace__request__t.html">emplace_request_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__t.html">reset_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__to__request__t.html">reset_to_request_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__t.html">erase_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__range__t.html">erase_range_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac617944b0143b5a6fea53d271a53bfed" name="ac617944b0143b5a6fea53d271a53bfed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac617944b0143b5a6fea53d271a53bfed">&#9670;&#160;</a></span>action_payload</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::action_payload =  std::variant&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1emplace__action__t.html">emplace_action_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1reset__t.html">reset_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__t.html">erase_t</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1erase__range__t.html">erase_range_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d806f83ac3c00f14b6f28dec006477c" name="a9d806f83ac3c00f14b6f28dec006477c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d806f83ac3c00f14b6f28dec006477c">&#9670;&#160;</a></span>InsertOperation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::InsertOperation =  <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___insert_operation.html">_InsertOperation</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8fd1f415d8b43cd15d79b918048827a" name="ab8fd1f415d8b43cd15d79b918048827a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8fd1f415d8b43cd15d79b918048827a">&#9670;&#160;</a></span>RemoveOperation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::RemoveOperation =  <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___remove_operation.html">_RemoveOperation</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac807d731b6c7f87e800b2b8be2af9e94" name="ac807d731b6c7f87e800b2b8be2af9e94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac807d731b6c7f87e800b2b8be2af9e94">&#9670;&#160;</a></span>RemoveRangeOperation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::RemoveRangeOperation =  <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___remove_range_operation.html">_RemoveRangeOperation</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac00c522611a029f8990e4b7c7bb2500a" name="ac00c522611a029f8990e4b7c7bb2500a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac00c522611a029f8990e4b7c7bb2500a">&#9670;&#160;</a></span>ResetOperation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::ResetOperation =  <a class="el" href="struct_engine_1_1_atomic_container_operation.html">AtomicContainerOperation</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl_1_1___reset_operation.html">_ResetOperation</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a997cc1dddd85125758045611b6a965a5" name="a997cc1dddd85125758045611b6a965a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a997cc1dddd85125758045611b6a965a5">&#9670;&#160;</a></span>SyncableContainerImpl() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::SyncableContainerImpl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15d564809023821ecd7ff6b9c0423ea8" name="a15d564809023821ecd7ff6b9c0423ea8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d564809023821ecd7ff6b9c0423ea8">&#9670;&#160;</a></span>SyncableContainerImpl() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::SyncableContainerImpl </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a101cbec84b18e896614371ee0c6a277d" name="a101cbec84b18e896614371ee0c6a277d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a101cbec84b18e896614371ee0c6a277d">&#9670;&#160;</a></span>SyncableContainerImpl() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::SyncableContainerImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aeb2d6820873ca4693287820964354878" name="aeb2d6820873ca4693287820964354878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2d6820873ca4693287820964354878">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const typename <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_container_impl.html#a266a3d2f270585974612aa9442aacc9a">Base::Base</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a773bdc8696db2acdc4e9197bc56ceacf" name="a773bdc8696db2acdc4e9197bc56ceacf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a773bdc8696db2acdc4e9197bc56ceacf">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca94d2edf111c3cc202a63f74d5413af" name="aca94d2edf111c3cc202a63f74d5413af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca94d2edf111c3cc202a63f74d5413af">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e1023658c1e84c8ca257c98a57359df" name="a7e1023658c1e84c8ca257c98a57359df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1023658c1e84c8ca257c98a57359df">&#9670;&#160;</a></span>emplace_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... _Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::emplace_async </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Ty &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0d94b68b80b2840d7efa3053f1810dc" name="ac0d94b68b80b2840d7efa3053f1810dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0d94b68b80b2840d7efa3053f1810dc">&#9670;&#160;</a></span>emplace_init() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Init , typename... _Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::emplace_init </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Init &amp;&amp;&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Ty &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4753f4b19ce0b2ff7954ba762b5694d4" name="a4753f4b19ce0b2ff7954ba762b5694d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4753f4b19ce0b2ff7954ba762b5694d4">&#9670;&#160;</a></span>emplace_init() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Init , typename... _Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::emplace_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Init &amp;&amp;&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Ty &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac052bc6d8d68fa4bdd96d9cb116cd5ee" name="ac052bc6d8d68fa4bdd96d9cb116cd5ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac052bc6d8d68fa4bdd96d9cb116cd5ee">&#9670;&#160;</a></span>emplace_init_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Init , typename... _Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::emplace_init_async </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Init &amp;&amp;&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_Ty &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4bd7779ac71f76bf78e2fb2ec53370db" name="a4bd7779ac71f76bf78e2fb2ec53370db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bd7779ac71f76bf78e2fb2ec53370db">&#9670;&#160;</a></span>erase() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7e131b3a05fa2a983bd3fd4628e8d37a" name="a7e131b3a05fa2a983bd3fd4628e8d37a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e131b3a05fa2a983bd3fd4628e8d37a">&#9670;&#160;</a></span>erase_async() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::erase_async </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>where</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed9ef188d52c53b42e4732901cd6fdf4" name="aed9ef188d52c53b42e4732901cd6fdf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed9ef188d52c53b42e4732901cd6fdf4">&#9670;&#160;</a></span>erase() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aedbe3bf22acf21311b6762690a6cdecd" name="aedbe3bf22acf21311b6762690a6cdecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedbe3bf22acf21311b6762690a6cdecd">&#9670;&#160;</a></span>erase_async() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">Engine::Serialize::SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::erase_async </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a32dba19a82e12fa855fc4a34ee87b899" name="a32dba19a82e12fa855fc4a34ee87b899"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32dba19a82e12fa855fc4a34ee87b899">&#9670;&#160;</a></span>tag_invoke</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1emplace__t.html">emplace_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html#a35c98baf735dcf12bfd61954a242933e">iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/serialize/container/<a class="el" href="container__operations_8h.html">container_operations.h</a></li>
+<li>src/Meta/serialize/container/<a class="el" href="syncablecontainer_8h.html">syncablecontainer.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: src/Generic/tupleunpacker.h File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: src/Generic/tupleunpacker.h File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/tupleunpacker_8h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-generic-tupleunpacker-h-file-reference">
+<h1>src/Generic/tupleunpacker.h File Reference<a class="headerlink" href="#src-generic-tupleunpacker-h-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: src/Generic/tupleunpacker.h File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b37d33ceb7f5c107fb027d4db224bc89.html">Generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">tupleunpacker.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+Include dependency graph for tupleunpacker.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="tupleunpacker_8h__incl.svg" width="256" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html">Engine</a></td></tr>
+<tr class="memdesc:namespace_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace for the Madgine. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_tuple_unpacker"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html">Engine::TupleUnpacker</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concept_engine_1_1_tuple_unpacker_1_1unpackable.html">Engine::TupleUnpacker::unpackable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a83ef17b6c906ecf82ad8b2dbc22af04d"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , typename F , typename T &gt; </td></tr>
+<tr class="memitem:a83ef17b6c906ecf82ad8b2dbc22af04d"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a83ef17b6c906ecf82ad8b2dbc22af04d">Engine::TupleUnpacker::accumulate</a> (Tuple &amp;&amp;tuple, F &amp;&amp;f, T &amp;&amp;t)</td></tr>
+<tr class="separator:a83ef17b6c906ecf82ad8b2dbc22af04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac973201c92ee9d9a485b79af1a9548a3"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:ac973201c92ee9d9a485b79af1a9548a3"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ac973201c92ee9d9a485b79af1a9548a3">Engine::TupleUnpacker::construct</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:ac973201c92ee9d9a485b79af1a9548a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc3cb3a2c82b035bce7d26f975b3ed98"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:abc3cb3a2c82b035bce7d26f975b3ed98"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#abc3cb3a2c82b035bce7d26f975b3ed98">Engine::TupleUnpacker::constructExpand</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:abc3cb3a2c82b035bce7d26f975b3ed98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6807d3ebad206e7375764373fd0797fc"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Tuple &gt; </td></tr>
+<tr class="memitem:a6807d3ebad206e7375764373fd0797fc"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a6807d3ebad206e7375764373fd0797fc">Engine::TupleUnpacker::constructFromTuple</a> (Tuple &amp;&amp;args)</td></tr>
+<tr class="separator:a6807d3ebad206e7375764373fd0797fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753cd00526bece975c4d282577533c5a"><td class="memTemplParams" colspan="2">template&lt;typename T , size_t... S, typename Tuple &gt; </td></tr>
+<tr class="memitem:a753cd00526bece975c4d282577533c5a"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a753cd00526bece975c4d282577533c5a">Engine::TupleUnpacker::constructUnpackTuple</a> (Tuple &amp;&amp;args, std::index_sequence&lt; S... &gt;)</td></tr>
+<tr class="separator:a753cd00526bece975c4d282577533c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d01893b6e880bb2e588f936c7976056"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3d01893b6e880bb2e588f936c7976056"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a3d01893b6e880bb2e588f936c7976056">Engine::TupleUnpacker::ensureTuple</a> (T &amp;&amp;value)</td></tr>
+<tr class="separator:a3d01893b6e880bb2e588f936c7976056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6480fee6cf7c21f71916bc40ed4d7867"><td class="memTemplParams" colspan="2">template&lt;size_t I, typename Tuple &gt; </td></tr>
+<tr class="memitem:a6480fee6cf7c21f71916bc40ed4d7867"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a6480fee6cf7c21f71916bc40ed4d7867">Engine::TupleUnpacker::expand</a> (Tuple &amp;&amp;tuple)</td></tr>
+<tr class="separator:a6480fee6cf7c21f71916bc40ed4d7867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8126d1409fef43e30db15d0e6030eb3"><td class="memTemplParams" colspan="2">template&lt;size_t I, typename Tuple , size_t... S, size_t... T&gt; </td></tr>
+<tr class="memitem:af8126d1409fef43e30db15d0e6030eb3"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#af8126d1409fef43e30db15d0e6030eb3">Engine::TupleUnpacker::expand</a> (Tuple &amp;&amp;tuple, std::index_sequence&lt; S... &gt;, std::index_sequence&lt; T... &gt;)</td></tr>
+<tr class="separator:af8126d1409fef43e30db15d0e6030eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9798fbf4233bfb363f0b2fa5d6192834"><td class="memTemplParams" colspan="2">template&lt;typename NonTuple &gt; </td></tr>
+<tr class="memitem:a9798fbf4233bfb363f0b2fa5d6192834"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a9798fbf4233bfb363f0b2fa5d6192834">Engine::TupleUnpacker::flatten</a> (NonTuple &amp;&amp;t)</td></tr>
+<tr class="separator:a9798fbf4233bfb363f0b2fa5d6192834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2220fe69da78ce1e8cadfafd8ee1509"><td class="memTemplParams" colspan="2">template&lt;Tuple Tuple&gt; </td></tr>
+<tr class="memitem:ae2220fe69da78ce1e8cadfafd8ee1509"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ae2220fe69da78ce1e8cadfafd8ee1509">Engine::TupleUnpacker::flatten</a> (Tuple &amp;&amp;tuple)</td></tr>
+<tr class="separator:ae2220fe69da78ce1e8cadfafd8ee1509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff91323ad46d05cef5be5c9ae485c52c"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , size_t... Is&gt; </td></tr>
+<tr class="memitem:aff91323ad46d05cef5be5c9ae485c52c"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#aff91323ad46d05cef5be5c9ae485c52c">Engine::TupleUnpacker::flatten</a> (Tuple &amp;&amp;tuple, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:aff91323ad46d05cef5be5c9ae485c52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad0708a8a3f6caf757bd2e29f34e9cb"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , typename F &gt; </td></tr>
+<tr class="memitem:a3ad0708a8a3f6caf757bd2e29f34e9cb"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a3ad0708a8a3f6caf757bd2e29f34e9cb">Engine::TupleUnpacker::forEach</a> (Tuple &amp;&amp;t, F &amp;&amp;f)</td></tr>
+<tr class="separator:a3ad0708a8a3f6caf757bd2e29f34e9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba86371429ce6fbeb0119129cfd3d4d"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , typename F , size_t... Is&gt; </td></tr>
+<tr class="memitem:a5ba86371429ce6fbeb0119129cfd3d4d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a5ba86371429ce6fbeb0119129cfd3d4d">Engine::TupleUnpacker::forEach</a> (Tuple &amp;&amp;t, F &amp;&amp;f, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:a5ba86371429ce6fbeb0119129cfd3d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8953e51e16262d6af6524d0b28d5d7f"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:ae8953e51e16262d6af6524d0b28d5d7f"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ae8953e51e16262d6af6524d0b28d5d7f">Engine::TupleUnpacker::invoke</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:ae8953e51e16262d6af6524d0b28d5d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c0247a1114489fc3b7183d63e74fef6"><td class="memTemplParams" colspan="2">template&lt;typename R , typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a6c0247a1114489fc3b7183d63e74fef6"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a6c0247a1114489fc3b7183d63e74fef6">Engine::TupleUnpacker::invokeDefaultResult</a> (R &amp;&amp;defaultValue, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a6c0247a1114489fc3b7183d63e74fef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2ab6054332354319462fb75871b11df"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:af2ab6054332354319462fb75871b11df"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#af2ab6054332354319462fb75871b11df">Engine::TupleUnpacker::invokeExpand</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:af2ab6054332354319462fb75871b11df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06089e7d21759f00aff7564cf22128dc"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a06089e7d21759f00aff7564cf22128dc"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a06089e7d21759f00aff7564cf22128dc">Engine::TupleUnpacker::invokeFlatten</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a06089e7d21759f00aff7564cf22128dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acad6574d75f56aeb0a848304dabce8e6"><td class="memTemplParams" colspan="2">template&lt;typename F , typename Tuple &gt; <br />
+requires requires { unpackTuple(std::declval&lt;F&gt;(), std::declval&lt;Tuple&gt;(), make_index_pack&lt;callable_argument_count&lt;F&gt;(std::tuple_size&lt;std::remove_reference_t&lt;Tuple&gt;&gt;::value)&gt;()); }</td></tr>
+<tr class="memitem:acad6574d75f56aeb0a848304dabce8e6"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#acad6574d75f56aeb0a848304dabce8e6">Engine::TupleUnpacker::invokeFromTuple</a> (F &amp;&amp;f, Tuple &amp;&amp;args)</td></tr>
+<tr class="separator:acad6574d75f56aeb0a848304dabce8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e67e71d52a3f5324bb83e6c48dbbaf8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a2e67e71d52a3f5324bb83e6c48dbbaf8">Engine::TupleUnpacker::popFront</a> (std::tuple&lt;&gt;)=delete</td></tr>
+<tr class="separator:a2e67e71d52a3f5324bb83e6c48dbbaf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56ca71abc8758b15b66423b5af2511b5"><td class="memTemplParams" colspan="2">template&lt;typename Tuple &gt; </td></tr>
+<tr class="memitem:a56ca71abc8758b15b66423b5af2511b5"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a56ca71abc8758b15b66423b5af2511b5">Engine::TupleUnpacker::popFront</a> (Tuple &amp;&amp;tuple)</td></tr>
+<tr class="separator:a56ca71abc8758b15b66423b5af2511b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a4b8d26f388d5b579174bdad33134f1"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Ts, size_t... Is&gt; </td></tr>
+<tr class="memitem:a7a4b8d26f388d5b579174bdad33134f1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a7a4b8d26f388d5b579174bdad33134f1">Engine::TupleUnpacker::popFrontImpl</a> (const std::tuple&lt; T, Ts... &gt; &amp;tuple, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:a7a4b8d26f388d5b579174bdad33134f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae848795a390fe5f296d3d288b123f816"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Ts, size_t... Is&gt; </td></tr>
+<tr class="memitem:ae848795a390fe5f296d3d288b123f816"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ae848795a390fe5f296d3d288b123f816">Engine::TupleUnpacker::popFrontImpl</a> (std::tuple&lt; T, Ts... &gt; &amp;&amp;tuple, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:ae848795a390fe5f296d3d288b123f816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadda74cafab25384230c8cdf2e56be27"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Tuple &gt; </td></tr>
+<tr class="memitem:aadda74cafab25384230c8cdf2e56be27"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#aadda74cafab25384230c8cdf2e56be27">Engine::TupleUnpacker::prepend</a> (T &amp;&amp;val, Tuple &amp;&amp;tuple)</td></tr>
+<tr class="separator:aadda74cafab25384230c8cdf2e56be27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaaa68a1f526d55308bdfa980ec029fe"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Ts, size_t... Is&gt; </td></tr>
+<tr class="memitem:abaaa68a1f526d55308bdfa980ec029fe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#abaaa68a1f526d55308bdfa980ec029fe">Engine::TupleUnpacker::prependImpl</a> (T &amp;&amp;val, const std::tuple&lt; Ts... &gt; &amp;tuple, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:abaaa68a1f526d55308bdfa980ec029fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554dc0d928799a3ae9f37800987d1db1"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Ts, size_t... Is&gt; </td></tr>
+<tr class="memitem:a554dc0d928799a3ae9f37800987d1db1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a554dc0d928799a3ae9f37800987d1db1">Engine::TupleUnpacker::prependImpl</a> (T &amp;&amp;val, std::tuple&lt; Ts... &gt; &amp;&amp;tuple, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:a554dc0d928799a3ae9f37800987d1db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc5e6af2a72da6ced9ab51b28e6344b6"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , typename F &gt; </td></tr>
+<tr class="memitem:afc5e6af2a72da6ced9ab51b28e6344b6"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#afc5e6af2a72da6ced9ab51b28e6344b6">Engine::TupleUnpacker::select</a> (Tuple &amp;&amp;t, F &amp;&amp;f, size_t index)</td></tr>
+<tr class="separator:afc5e6af2a72da6ced9ab51b28e6344b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad67f5a74e86941198c974cf6452bfc0d"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , typename F , size_t... Is&gt; </td></tr>
+<tr class="memitem:ad67f5a74e86941198c974cf6452bfc0d"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ad67f5a74e86941198c974cf6452bfc0d">Engine::TupleUnpacker::select</a> (Tuple &amp;&amp;t, F &amp;&amp;f, size_t index, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:ad67f5a74e86941198c974cf6452bfc0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd6b1d940ffad3f7649de864736c094"><td class="memTemplParams" colspan="2">template&lt;typename... T&gt; </td></tr>
+<tr class="memitem:a9dd6b1d940ffad3f7649de864736c094"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; T &amp;... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a9dd6b1d940ffad3f7649de864736c094">Engine::TupleUnpacker::shiftTupleReference</a> (std::tuple&lt; T... &gt; &amp;tuple)</td></tr>
+<tr class="separator:a9dd6b1d940ffad3f7649de864736c094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb423738d2cc768440b99f6745905e09"><td class="memTemplParams" colspan="2">template&lt;typename... T, size_t... Is&gt; </td></tr>
+<tr class="memitem:acb423738d2cc768440b99f6745905e09"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; T &amp;... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#acb423738d2cc768440b99f6745905e09">Engine::TupleUnpacker::shiftTupleReference</a> (std::tuple&lt; T... &gt; &amp;tuple, std::index_sequence&lt; Is... &gt;)</td></tr>
+<tr class="separator:acb423738d2cc768440b99f6745905e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9a97b2ea8186b68ae6cfd4b932c3d8"><td class="memTemplParams" colspan="2">template&lt;typename Tuple &gt; </td></tr>
+<tr class="memitem:ade9a97b2ea8186b68ae6cfd4b932c3d8"><td class="memTemplItemLeft" align="right" valign="top">Tuple &amp;&amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ade9a97b2ea8186b68ae6cfd4b932c3d8">Engine::TupleUnpacker::shiftTupleReference</a> (Tuple &amp;&amp;tuple)</td></tr>
+<tr class="separator:ade9a97b2ea8186b68ae6cfd4b932c3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94d46017cfecdb2c89cf38eb8277aca3"><td class="memTemplParams" colspan="2">template&lt;typename F , typename Tuple , size_t... S&gt; <br />
+requires unpackable&lt;F, Tuple, S...&gt;</td></tr>
+<tr class="memitem:a94d46017cfecdb2c89cf38eb8277aca3"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a94d46017cfecdb2c89cf38eb8277aca3">Engine::TupleUnpacker::unpackTuple</a> (F &amp;&amp;f, Tuple &amp;&amp;args, auto_pack&lt; S... &gt;)</td></tr>
+<tr class="separator:a94d46017cfecdb2c89cf38eb8277aca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0833a590a5e6a9eabea888119236a216"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a0833a590a5e6a9eabea888119236a216"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a0833a590a5e6a9eabea888119236a216">Engine::TupleUnpacker::wrap</a> (F &amp;&amp;f)</td></tr>
+<tr class="separator:a0833a590a5e6a9eabea888119236a216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

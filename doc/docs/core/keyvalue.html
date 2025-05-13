@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeyValue &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="Core Features" href="features.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="features.html">Core Features</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../doxygen/index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../doxygen/files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../doxygen/globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="features.html">Core Features</a></li>
+      <li class="breadcrumb-item active">KeyValue</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/core/keyvalue.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>page Keyvalue Keyvalue</p>
+<section id="keyvalue">
+<h1>KeyValue<a class="headerlink" href="#keyvalue" title="Permalink to this heading"></a></h1>
+<p>KeyValue is the name of the Madgines reflection system. It provides additional type information that can be used to enable embedded scripting languages or tools to interact with the engines internal state. The two core elements of this system are the ValueType class, which allows to store almost anything in a type aware structure, and MetaTables, which are used to describe the attributes of a class. Almost all parts of the engine are implementing their MetaTables.</p>
+<p>## ValueType</p>
+<p>The strongly typed nature of C++ is a big selling point of the language, however it makes the design of a reflection system rather complicated. It presents the task to support all potential types in a fixed API. Scripting languages on the other hand use weakly typed variables, that can accept any value to store. To make C++ compatible with scripting languages and a generic reflection API KeyValue presents the ValueType class. It is a fully type aware structure that is still able to accept almost any C++ value you could come up with. This design reduces the necessary steps for embedding a new scripting language into the system to simply providing conversions from ValueType to the scripting type system and vice versa.</p>
+<p>The ValueType consists of one <cite>std::variant</cite> that can store one of the following types:
+- empty type (default value)
+- fundamental types (<cite>int</cite>, <cite>float</cite>, …)
+- strings
+- math types (<cite>Vector3</cite>, <cite>Matrix3</cite>, …)
+- functions
+- enums
+- associative/non-associative ranges of types in this list
+- implementations of the ObjectInstance interface (main use is to access scripting types from C++)
+- owning/non-owning instances of types with MetaTable</p>
+<p>note The size of a variant is determined by the size of it’s biggest potential type. Even though ValueTypes are not recommended to be used to store values persistently it is still a type that is used a lot within the engine. Therefore, it is space optimised in the following way: All variant types are required to take at most the size of two pointers in memory. Adding in the memory necessary for storing the currently held index this makes the size of a ValueType 24 bytes on 64-bit systems. Types that exceed that limitation (e.g. <cite>Matrix4</cite>) are implemented using heap allocation. (see implementation)</p>
+<p>## MetaTables</p>
+<p>The ValueType is able to represent most primitive objects in C++. To complement that MetaTables provide a way to specify the primitives that a compound type is composed of. They are implemented as descriptors (see /ref Meta) and do not require any modification to the class itself. Whenever a ValueType is assigned a value that is not recognized as anything else, it will assume that the type comes with it’s one MetaTable. If none is provided, a linker error will tell for which type a MetaTable is missing. The ValueType will store a pointer to the object alongside a pointer to it’s MetaTable. That way the type of an object is always accessible without storing it within the object itself. The MetaTable itself stores some information about the type - like name or base class - and a list of all accessible properties of that type. Properties can be of any type that a ValueType can hold. MetaTables are defined in the <cite>.cpp</cite> file of a type by convetion. An example table could look like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">METATABLE_BEGIN(My::Namespace::Unit)</span>
+<span class="pre">MEMBER(Name)</span>
+<span class="pre">READONLY_PROPERTY(Owner,</span> <span class="pre">owner)</span>
+<span class="pre">PROPERTY(Task,</span> <span class="pre">getCurrentTask,</span> <span class="pre">setCurrentTask)</span>
+<span class="pre">FUNCTION(takeDamage,</span> <span class="pre">damage)</span>
+<span class="pre">METATABLE_END(My::Namespace::Unit)</span>
+<span class="pre">`</span></code></p>
+<p>MetaTables are defined within a <cite>BEGIN</cite>/<cite>END</cite> pair. The definition shall not be put inside of a namespace. The most commonly used entries of a MetaTable are shown in the example:
+- <cite>MEMBER(&lt;name&gt;)</cite> adds the property <cite>&lt;name&gt;</cite> to the table. Reads and Writes are accessing the C++ variable <cite>&lt;name&gt;</cite>.
+- <cite>READONLY_PROPERTY(&lt;name&gt;, &lt;getter&gt;)</cite> adds the read-only property <cite>&lt;name&gt;</cite> to the table. Reads are accessing the C++ identifier <cite>&lt;getter&gt;</cite>, which can be a member or a member function. If it is a member function, its return value is used as the value of the property on read.
+- <cite>PROPERTY(&lt;name&gt;, &lt;getter&gt;, &lt;setter&gt;)</cite> adds the property <cite>&lt;name&gt;</cite> to the table. Reads behave the same as for <cite>READONLY_PROPERTY</cite>. Writes are accessing the C++ identifierr <cite>&lt;setter&gt;</cite>, which can be a member or a member function. If it is a member function, the value to be written is passed as the only argument to the function.
+- <cite>FUNCTION(&lt;name&gt;[, &lt;arg-name&gt;…])</cite> adds the read-only property <cite>&lt;name&gt;</cite> to the table. Reads return a BoundApiFunction, which holds a pointer to the function <cite>&lt;name&gt;</cite> and a pointer to the object for which the property was accessed. The <cite>&lt;arg-name&gt;</cite> list is necessary for proper diagnostics.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="features.html" class="btn btn-neutral float-left" title="Core Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="logging.html" class="btn btn-neutral float-right" title="Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

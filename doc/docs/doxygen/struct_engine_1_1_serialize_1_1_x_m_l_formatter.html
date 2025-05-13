@@ -1,0 +1,974 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Serialize::XMLFormatter Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Serialize::XMLFormatter Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_serialize_1_1_x_m_l_formatter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xmlformatter-struct-reference">
+<h1>XMLFormatter Struct Reference<a class="headerlink" href="#xmlformatter-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Serialize::XMLFormatter Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_serialize.html">Serialize</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html">XMLFormatter</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_serialize_1_1_x_m_l_formatter-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Serialize::XMLFormatter Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;xmlformatter.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Serialize::XMLFormatter:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_serialize_1_1_x_m_l_formatter__inherit__graph.svg" width="134" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a770e29a4caf81df6591891072e8d9161"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a770e29a4caf81df6591891072e8d9161">XMLFormatter</a> ()</td></tr>
+<tr class="separator:a770e29a4caf81df6591891072e8d9161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb2c0fbf0849ee0d428d6bfe5d61bf82"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#acb2c0fbf0849ee0d428d6bfe5d61bf82">beginCompoundRead</a> (const char *name) override</td></tr>
+<tr class="separator:acb2c0fbf0849ee0d428d6bfe5d61bf82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5344174eda5d6d3135c0f1fc70e54bd6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a5344174eda5d6d3135c0f1fc70e54bd6">beginCompoundWrite</a> (const char *name) override</td></tr>
+<tr class="separator:a5344174eda5d6d3135c0f1fc70e54bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7708efc6b14b1c7139f7752c7b69893e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a7708efc6b14b1c7139f7752c7b69893e">beginContainerRead</a> (const char *name, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> sized) override</td></tr>
+<tr class="separator:a7708efc6b14b1c7139f7752c7b69893e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfdd905ceb5cd4a4433c084d5b944353"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#acfdd905ceb5cd4a4433c084d5b944353">beginContainerWrite</a> (const char *name, uint32_t size) override</td></tr>
+<tr class="separator:acfdd905ceb5cd4a4433c084d5b944353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d615af8508058a70e5f0b29ef8c7cd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a79d615af8508058a70e5f0b29ef8c7cd">beginExtendedRead</a> (const char *name, size_t count) override</td></tr>
+<tr class="separator:a79d615af8508058a70e5f0b29ef8c7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a279fd7f75b0acd8d7206d2a5d32329cf"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a279fd7f75b0acd8d7206d2a5d32329cf">beginExtendedWrite</a> (const char *name, size_t count) override</td></tr>
+<tr class="separator:a279fd7f75b0acd8d7206d2a5d32329cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9718623e48d161cf27cb72e260353da2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a9718623e48d161cf27cb72e260353da2">beginPrimitiveRead</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId) override</td></tr>
+<tr class="separator:a9718623e48d161cf27cb72e260353da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d85a177affdc84551936ec0cb82ac4a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a7d85a177affdc84551936ec0cb82ac4a">beginPrimitiveWrite</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId) override</td></tr>
+<tr class="separator:a7d85a177affdc84551936ec0cb82ac4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1600ffff307a0d950a48689194c2cc10"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a1600ffff307a0d950a48689194c2cc10">endCompoundRead</a> (const char *name) override</td></tr>
+<tr class="separator:a1600ffff307a0d950a48689194c2cc10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab522e6b0b42a2d8495eeaac873489812"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#ab522e6b0b42a2d8495eeaac873489812">endCompoundWrite</a> (const char *name) override</td></tr>
+<tr class="separator:ab522e6b0b42a2d8495eeaac873489812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a0e6583e81d984cdf8fc67b1a10ee7b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a9a0e6583e81d984cdf8fc67b1a10ee7b">endContainerRead</a> (const char *name) override</td></tr>
+<tr class="separator:a9a0e6583e81d984cdf8fc67b1a10ee7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae901efbf281b4f3bb82223976902f141"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#ae901efbf281b4f3bb82223976902f141">endContainerWrite</a> (const char *name) override</td></tr>
+<tr class="separator:ae901efbf281b4f3bb82223976902f141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7614c2aca93ecf26ff2588666b3ab559"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a7614c2aca93ecf26ff2588666b3ab559">endPrimitiveRead</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId) override</td></tr>
+<tr class="separator:a7614c2aca93ecf26ff2588666b3ab559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add393cecf427b6b186007e000c7cb745"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#add393cecf427b6b186007e000c7cb745">endPrimitiveWrite</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId) override</td></tr>
+<tr class="separator:add393cecf427b6b186007e000c7cb745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a4aa07715719c97e845e29aa438b4fd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a7a4aa07715719c97e845e29aa438b4fd">hasContainerItem</a> () override</td></tr>
+<tr class="separator:a7a4aa07715719c97e845e29aa438b4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ac54304fde4bfad0fae392ba435a471"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a2ac54304fde4bfad0fae392ba435a471">indent</a> ()</td></tr>
+<tr class="separator:a2ac54304fde4bfad0fae392ba435a471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a105be371f281785ae481ae74214b8784"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a105be371f281785ae481ae74214b8784">lookupFieldName</a> (std::string &amp;name) override</td></tr>
+<tr class="separator:a105be371f281785ae481ae74214b8784"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a52180e5363e3d93a71935d585b0723"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_x_m_l_formatter.html#a5a52180e5363e3d93a71935d585b0723">setupStream</a> (std::iostream &amp;) override</td></tr>
+<tr class="separator:a5a52180e5363e3d93a71935d585b0723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_formatter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Engine::Serialize::Formatter</a></td></tr>
+<tr class="memitem:a955d4d8794a88a6192b6d03c5434c78b inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a955d4d8794a88a6192b6d03c5434c78b">Formatter</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> isBinary, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> supportNameLookup=false)</td></tr>
+<tr class="separator:a955d4d8794a88a6192b6d03c5434c78b inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae926f0022c48e714bb6dc5eace3d10ef inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ae926f0022c48e714bb6dc5eace3d10ef">~Formatter</a> ()=default</td></tr>
+<tr class="separator:ae926f0022c48e714bb6dc5eace3d10ef inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9643b5523bb172ecbe81e3e642d2aee4 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a9643b5523bb172ecbe81e3e642d2aee4">beginCompoundRead</a> (const char *name)</td></tr>
+<tr class="separator:a9643b5523bb172ecbe81e3e642d2aee4 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e8c64c21bc2ea07c9fd6ecdc7a9699 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ab1e8c64c21bc2ea07c9fd6ecdc7a9699">beginCompoundWrite</a> (const char *name)</td></tr>
+<tr class="separator:ab1e8c64c21bc2ea07c9fd6ecdc7a9699 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b94349aac7c1c33d496eba7fcdbdd6 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ad5b94349aac7c1c33d496eba7fcdbdd6">beginContainerRead</a> (const char *name, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> sized=true)</td></tr>
+<tr class="separator:ad5b94349aac7c1c33d496eba7fcdbdd6 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c989e3b10d68104731aa521425fcbc5 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a5c989e3b10d68104731aa521425fcbc5">beginContainerWrite</a> (const char *name, uint32_t size=std::numeric_limits&lt; uint32_t &gt;<a class="el" href="namespace_engine.html#a07ada8e7c016a8650e381e46cc37be41">::max</a>())</td></tr>
+<tr class="separator:a5c989e3b10d68104731aa521425fcbc5 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad623f28f0e77a8b5754af965bfb53cbb inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ad623f28f0e77a8b5754af965bfb53cbb">beginExtendedRead</a> (const char *name, size_t count)</td></tr>
+<tr class="separator:ad623f28f0e77a8b5754af965bfb53cbb inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b4b16a7c6ad21bd2bbaa729fef49ce3 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a3b4b16a7c6ad21bd2bbaa729fef49ce3">beginExtendedWrite</a> (const char *name, size_t count)</td></tr>
+<tr class="separator:a3b4b16a7c6ad21bd2bbaa729fef49ce3 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad471bd1b08b368e5dbe5b808c848c5bc inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ad471bd1b08b368e5dbe5b808c848c5bc">beginHeaderRead</a> ()</td></tr>
+<tr class="separator:ad471bd1b08b368e5dbe5b808c848c5bc inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7130b10c53691be19c6fe48daca49830 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a7130b10c53691be19c6fe48daca49830">beginHeaderWrite</a> ()</td></tr>
+<tr class="separator:a7130b10c53691be19c6fe48daca49830 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd27d961763002de103e028cea55a94 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a7dd27d961763002de103e028cea55a94">beginMessageRead</a> ()</td></tr>
+<tr class="separator:a7dd27d961763002de103e028cea55a94 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24beb2748ef4267480ebd6a573ba2fcc inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a24beb2748ef4267480ebd6a573ba2fcc">beginMessageWrite</a> ()</td></tr>
+<tr class="separator:a24beb2748ef4267480ebd6a573ba2fcc inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5064abae3e6c46371b81bf56e894d7bf inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a5064abae3e6c46371b81bf56e894d7bf">beginPrimitiveRead</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId)</td></tr>
+<tr class="separator:a5064abae3e6c46371b81bf56e894d7bf inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca226695f4edeb5a80389a1c9f3d27b7 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#aca226695f4edeb5a80389a1c9f3d27b7">beginPrimitiveWrite</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId)</td></tr>
+<tr class="separator:aca226695f4edeb5a80389a1c9f3d27b7 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a0699266c583b4f2d1673d8870f36ce inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a1a0699266c583b4f2d1673d8870f36ce">endCompoundRead</a> (const char *name)</td></tr>
+<tr class="separator:a1a0699266c583b4f2d1673d8870f36ce inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886cefb270723feb66b40d3c546a610e inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a886cefb270723feb66b40d3c546a610e">endCompoundWrite</a> (const char *name)</td></tr>
+<tr class="separator:a886cefb270723feb66b40d3c546a610e inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa963a3f23226148973fd5ff73aca7abc inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#aa963a3f23226148973fd5ff73aca7abc">endContainerRead</a> (const char *name)</td></tr>
+<tr class="separator:aa963a3f23226148973fd5ff73aca7abc inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e6a9225628080dedeaaafe5745e9fcd inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a9e6a9225628080dedeaaafe5745e9fcd">endContainerWrite</a> (const char *name)</td></tr>
+<tr class="separator:a9e6a9225628080dedeaaafe5745e9fcd inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bc76e6b4602def43f9d1807ef11ced3 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a2bc76e6b4602def43f9d1807ef11ced3">endHeaderRead</a> ()</td></tr>
+<tr class="separator:a2bc76e6b4602def43f9d1807ef11ced3 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab32df669dba5140a1f3215805170bbe0 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ab32df669dba5140a1f3215805170bbe0">endHeaderWrite</a> ()</td></tr>
+<tr class="separator:ab32df669dba5140a1f3215805170bbe0 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a258c560c88a215fb0eefc3e0c9e8d59b inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a258c560c88a215fb0eefc3e0c9e8d59b">endMessageRead</a> ()</td></tr>
+<tr class="separator:a258c560c88a215fb0eefc3e0c9e8d59b inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb66665919381a0cd489bb1718a76f0a inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#abb66665919381a0cd489bb1718a76f0a">endMessageWrite</a> ()</td></tr>
+<tr class="separator:abb66665919381a0cd489bb1718a76f0a inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce4ec4750359e349b86eb448869fc85 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a8ce4ec4750359e349b86eb448869fc85">endPrimitiveRead</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId)</td></tr>
+<tr class="separator:a8ce4ec4750359e349b86eb448869fc85 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc8b80bba27861c34fac8b7625bce95 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a4cc8b80bba27861c34fac8b7625bce95">endPrimitiveWrite</a> (const char *name, <a class="el" href="classuint8__t.html">uint8_t</a> typeId)</td></tr>
+<tr class="separator:a4cc8b80bba27861c34fac8b7625bce95 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ab44b239905cdee06ebcc078093d31 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a88ab44b239905cdee06ebcc078093d31">hasContainerItem</a> ()=0</td></tr>
+<tr class="separator:a88ab44b239905cdee06ebcc078093d31 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4741fc4b0ac17c68cd9a7a7e663fd342 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a4741fc4b0ac17c68cd9a7a7e663fd342">lookupFieldName</a> (std::string &amp;name)</td></tr>
+<tr class="separator:a4741fc4b0ac17c68cd9a7a7e663fd342 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade600a1fd63027b0e5ef5504c005ff6d inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ade600a1fd63027b0e5ef5504c005ff6d inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ade600a1fd63027b0e5ef5504c005ff6d">read</a> (T &amp;t)</td></tr>
+<tr class="separator:ade600a1fd63027b0e5ef5504c005ff6d inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b19f6e9ad39944654b36eeb9609cc4e inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a2b19f6e9ad39944654b36eeb9609cc4e">setupStream</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html">SerializeStream</a> <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a4b20b4b0f2a5548f396a064dd95c88ad">stream</a>)</td></tr>
+<tr class="separator:a2b19f6e9ad39944654b36eeb9609cc4e inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e8ee2b869d7446fd2c47e41ab6a8b1 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a54e8ee2b869d7446fd2c47e41ab6a8b1">setupStream</a> (std::iostream &amp;)</td></tr>
+<tr class="separator:a54e8ee2b869d7446fd2c47e41ab6a8b1 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b20b4b0f2a5548f396a064dd95c88ad inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html">SerializeStream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a4b20b4b0f2a5548f396a064dd95c88ad">stream</a> ()</td></tr>
+<tr class="separator:a4b20b4b0f2a5548f396a064dd95c88ad inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180b0ef801914322ef4f3e85f6119867 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a180b0ef801914322ef4f3e85f6119867 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a180b0ef801914322ef4f3e85f6119867">write</a> (const T &amp;t)</td></tr>
+<tr class="separator:a180b0ef801914322ef4f3e85f6119867 inherit pub_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_serialize_1_1_formatter"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_serialize_1_1_formatter')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Engine::Serialize::Formatter</a></td></tr>
+<tr class="memitem:a7d1262440a67aaa412c431229e98d08a inherit pub_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a7d1262440a67aaa412c431229e98d08a">mBinary</a></td></tr>
+<tr class="separator:a7d1262440a67aaa412c431229e98d08a inherit pub_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac29337f9490252cde6bec3a1dfc04c79 inherit pub_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ac29337f9490252cde6bec3a1dfc04c79">mSupportNameLookup</a></td></tr>
+<tr class="separator:ac29337f9490252cde6bec3a1dfc04c79 inherit pub_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_serialize_1_1_formatter"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_serialize_1_1_formatter')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Engine::Serialize::Formatter</a></td></tr>
+<tr class="memitem:a46923e3bfdcbde5f129afc692ca1d76f inherit pro_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a46923e3bfdcbde5f129afc692ca1d76f">expect</a> (std::string_view expected)</td></tr>
+<tr class="separator:a46923e3bfdcbde5f129afc692ca1d76f inherit pro_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abac4c80d5c21522db366b79dca3efda6 inherit pro_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#abac4c80d5c21522db366b79dca3efda6">popLocale</a> ()</td></tr>
+<tr class="separator:abac4c80d5c21522db366b79dca3efda6 inherit pro_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af29f13245f3e82e42a49233ce4326d53 inherit pro_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#af29f13245f3e82e42a49233ce4326d53">pushLocale</a> (const std::locale &amp;locale, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> skipWs)</td></tr>
+<tr class="separator:af29f13245f3e82e42a49233ce4326d53 inherit pro_methods_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_serialize_1_1_formatter"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_serialize_1_1_formatter')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html">Engine::Serialize::Formatter</a></td></tr>
+<tr class="memitem:ae876775dacbd81a1b070dd76756c70b7 inherit pro_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top">std::stack&lt; std::pair&lt; std::locale, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ae876775dacbd81a1b070dd76756c70b7">mLocaleStack</a></td></tr>
+<tr class="separator:ae876775dacbd81a1b070dd76756c70b7 inherit pro_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8d8b0d74d043ef686a5fe7ec21ea061 inherit pro_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serialize_stream.html">SerializeStream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#af8d8b0d74d043ef686a5fe7ec21ea061">mStream</a></td></tr>
+<tr class="separator:af8d8b0d74d043ef686a5fe7ec21ea061 inherit pro_attribs_struct_engine_1_1_serialize_1_1_formatter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a770e29a4caf81df6591891072e8d9161" name="a770e29a4caf81df6591891072e8d9161"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a770e29a4caf81df6591891072e8d9161">&#9670;&#160;</a></span>XMLFormatter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Serialize::XMLFormatter::XMLFormatter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5a52180e5363e3d93a71935d585b0723" name="a5a52180e5363e3d93a71935d585b0723"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a52180e5363e3d93a71935d585b0723">&#9670;&#160;</a></span>setupStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::setupStream </td>
+          <td>(</td>
+          <td class="paramtype">std::iostream &amp;&#160;</td>
+          <td class="paramname"><em>inout</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a54e8ee2b869d7446fd2c47e41ab6a8b1">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a279fd7f75b0acd8d7206d2a5d32329cf" name="a279fd7f75b0acd8d7206d2a5d32329cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a279fd7f75b0acd8d7206d2a5d32329cf">&#9670;&#160;</a></span>beginExtendedWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::beginExtendedWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a3b4b16a7c6ad21bd2bbaa729fef49ce3">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a5344174eda5d6d3135c0f1fc70e54bd6" name="a5344174eda5d6d3135c0f1fc70e54bd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5344174eda5d6d3135c0f1fc70e54bd6">&#9670;&#160;</a></span>beginCompoundWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::beginCompoundWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ab1e8c64c21bc2ea07c9fd6ecdc7a9699">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="ab522e6b0b42a2d8495eeaac873489812" name="ab522e6b0b42a2d8495eeaac873489812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab522e6b0b42a2d8495eeaac873489812">&#9670;&#160;</a></span>endCompoundWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::endCompoundWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a886cefb270723feb66b40d3c546a610e">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a79d615af8508058a70e5f0b29ef8c7cd" name="a79d615af8508058a70e5f0b29ef8c7cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d615af8508058a70e5f0b29ef8c7cd">&#9670;&#160;</a></span>beginExtendedRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::beginExtendedRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ad623f28f0e77a8b5754af965bfb53cbb">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="acb2c0fbf0849ee0d428d6bfe5d61bf82" name="acb2c0fbf0849ee0d428d6bfe5d61bf82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb2c0fbf0849ee0d428d6bfe5d61bf82">&#9670;&#160;</a></span>beginCompoundRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::beginCompoundRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a9643b5523bb172ecbe81e3e642d2aee4">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a1600ffff307a0d950a48689194c2cc10" name="a1600ffff307a0d950a48689194c2cc10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1600ffff307a0d950a48689194c2cc10">&#9670;&#160;</a></span>endCompoundRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::endCompoundRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a1a0699266c583b4f2d1673d8870f36ce">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a7d85a177affdc84551936ec0cb82ac4a" name="a7d85a177affdc84551936ec0cb82ac4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d85a177affdc84551936ec0cb82ac4a">&#9670;&#160;</a></span>beginPrimitiveWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::beginPrimitiveWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>typeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#aca226695f4edeb5a80389a1c9f3d27b7">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="add393cecf427b6b186007e000c7cb745" name="add393cecf427b6b186007e000c7cb745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add393cecf427b6b186007e000c7cb745">&#9670;&#160;</a></span>endPrimitiveWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::endPrimitiveWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>typeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a4cc8b80bba27861c34fac8b7625bce95">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a9718623e48d161cf27cb72e260353da2" name="a9718623e48d161cf27cb72e260353da2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9718623e48d161cf27cb72e260353da2">&#9670;&#160;</a></span>beginPrimitiveRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::beginPrimitiveRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>typeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a5064abae3e6c46371b81bf56e894d7bf">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a7614c2aca93ecf26ff2588666b3ab559" name="a7614c2aca93ecf26ff2588666b3ab559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7614c2aca93ecf26ff2588666b3ab559">&#9670;&#160;</a></span>endPrimitiveRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::endPrimitiveRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classuint8__t.html">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>typeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a8ce4ec4750359e349b86eb448869fc85">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a105be371f281785ae481ae74214b8784" name="a105be371f281785ae481ae74214b8784"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a105be371f281785ae481ae74214b8784">&#9670;&#160;</a></span>lookupFieldName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::lookupFieldName </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a4741fc4b0ac17c68cd9a7a7e663fd342">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="acfdd905ceb5cd4a4433c084d5b944353" name="acfdd905ceb5cd4a4433c084d5b944353"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfdd905ceb5cd4a4433c084d5b944353">&#9670;&#160;</a></span>beginContainerWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::beginContainerWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a5c989e3b10d68104731aa521425fcbc5">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="ae901efbf281b4f3bb82223976902f141" name="ae901efbf281b4f3bb82223976902f141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae901efbf281b4f3bb82223976902f141">&#9670;&#160;</a></span>endContainerWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Serialize::XMLFormatter::endContainerWrite </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a9e6a9225628080dedeaaafe5745e9fcd">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a7708efc6b14b1c7139f7752c7b69893e" name="a7708efc6b14b1c7139f7752c7b69893e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7708efc6b14b1c7139f7752c7b69893e">&#9670;&#160;</a></span>beginContainerRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::beginContainerRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>sized</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#ad5b94349aac7c1c33d496eba7fcdbdd6">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a9a0e6583e81d984cdf8fc67b1a10ee7b" name="a9a0e6583e81d984cdf8fc67b1a10ee7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a0e6583e81d984cdf8fc67b1a10ee7b">&#9670;&#160;</a></span>endContainerRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::XMLFormatter::endContainerRead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#aa963a3f23226148973fd5ff73aca7abc">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a7a4aa07715719c97e845e29aa438b4fd" name="a7a4aa07715719c97e845e29aa438b4fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a4aa07715719c97e845e29aa438b4fd">&#9670;&#160;</a></span>hasContainerItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Serialize::XMLFormatter::hasContainerItem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_serialize_1_1_formatter.html#a88ab44b239905cdee06ebcc078093d31">Engine::Serialize::Formatter</a>.</p>
+
+</div>
+</div>
+<a id="a2ac54304fde4bfad0fae392ba435a471" name="a2ac54304fde4bfad0fae392ba435a471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ac54304fde4bfad0fae392ba435a471">&#9670;&#160;</a></span>indent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::Serialize::XMLFormatter::indent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/serialize/formatter/<a class="el" href="xmlformatter_8h.html">xmlformatter.h</a></li>
+<li>src/Meta/serialize/formatter/<a class="el" href="xmlformatter_8cpp.html">xmlformatter.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

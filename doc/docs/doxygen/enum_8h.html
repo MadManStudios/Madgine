@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: src/Generic/enum.h File Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: src/Generic/enum.h File Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/enum_8h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-generic-enum-h-file-reference">
+<h1>src/Generic/enum.h File Reference<a class="headerlink" href="#src-generic-enum-h-file-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: src/Generic/enum.h File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b37d33ceb7f5c107fb027d4db224bc89.html">Generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
+  <div class="headertitle"><div class="title">enum.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><div class="dynheader">
+Include dependency graph for enum.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="enum_8h__incl.svg" width="146" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="enum_8h__dep__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_base_enum.html">Engine::BaseEnum&lt; Base, _Representation &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_meta_table.html">Engine::EnumMetaTable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_type.html">Engine::EnumType&lt; _Representation &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html">Engine</a></td></tr>
+<tr class="memdesc:namespace_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace for the Madgine. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a9f45f010de76e982a57b1b875fcb44e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enum_8h.html#a9f45f010de76e982a57b1b875fcb44e3">ENUM</a>(Name, ...)</td></tr>
+<tr class="separator:a9f45f010de76e982a57b1b875fcb44e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60a6575f10f23269cbcdcebb0de7352f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enum_8h.html#a60a6575f10f23269cbcdcebb0de7352f">ENUM_BASE</a>(Name,  Base, ...)</td></tr>
+<tr class="separator:a60a6575f10f23269cbcdcebb0de7352f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18dda78aaf44fa2c87043e965be5be7b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enum_8h.html#a18dda78aaf44fa2c87043e965be5be7b">ENUM_REGISTRY</a>(Name,  Type,  MIN_VAL,  Base, ...)</td></tr>
+<tr class="separator:a18dda78aaf44fa2c87043e965be5be7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3b637cc6c395f81bd689452fdc00dc4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enum_8h.html#ad3b637cc6c395f81bd689452fdc00dc4">FORWARD_ENUM</a>(Name)</td></tr>
+<tr class="separator:ad3b637cc6c395f81bd689452fdc00dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13e72ce0563cbf5b0ba27d97cc5ba446"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enum_8h.html#a13e72ce0563cbf5b0ba27d97cc5ba446">TYPED_ENUM</a>(Name,  Type, ...)</td></tr>
+<tr class="separator:a13e72ce0563cbf5b0ba27d97cc5ba446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a18dda78aaf44fa2c87043e965be5be7b" name="a18dda78aaf44fa2c87043e965be5be7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18dda78aaf44fa2c87043e965be5be7b">&#9670;&#160;</a></span>ENUM_REGISTRY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ENUM_REGISTRY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">MIN_VAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Base, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>Name##Representation {                                                                                                                            \</div>
+<div class="line">        <span class="keyword">enum</span> EnumType Type {                                                                                                                                 \</div>
+<div class="line">            MIN = MIN_VAL __VA_OPT__(,)                                                                                                                                   \</div>
+<div class="line">            __VA_ARGS__,                                                                                                                                      \</div>
+<div class="line">            MAX,                                                                                                                                             \</div>
+<div class="line">            COUNT = MAX - MIN - 1                                                                                                                            \</div>
+<div class="line">        };                                                                                                                                                   \</div>
+<div class="line">        <span class="keyword">using </span>underlying_type = std::underlying_type_t&lt;EnumType&gt;;                                                                                              \</div>
+<div class="line">        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> sIdentifiers = Engine::StringUtil::tokenize&lt;static_cast&lt;size_t&gt;(Name##Representation::COUNT)&gt;(#__VA_ARGS__, <span class="charliteral">&#39;,&#39;</span>); \</div>
+<div class="line">        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">constexpr</span> <a class="code hl_struct" href="struct_engine_1_1_enum_meta_table.html">Engine::EnumMetaTable</a> sTable {                                                                                         \</div>
+<div class="line">            Base, #Name, sIdentifiers.data(), MIN, MAX                                                                                                       \</div>
+<div class="line">        };                                                                                                                                                   \</div>
+<div class="line">    };                                                                                                                                                       \</div>
+<div class="line">    <span class="keyword">inline</span> std::ostream &amp;<a class="code hl_function" href="namespace_engine.html#addcb28fcaa4f2ef73ec7f742ebf72665">operator&lt;&lt;</a>(std::ostream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType value)                                                     \</div>
+<div class="line">    {                                                                                                                                                        \</div>
+<div class="line">        <span class="keywordflow">return</span> Name##Representation::sTable.print(stream, value, Name##Representation::sTable.mName);                                                        \</div>
+<div class="line">    }                                                                                                                                                        \</div>
+<div class="line">    <span class="keyword">inline</span> std::istream &amp;<a class="code hl_function" href="namespace_engine.html#a28644ea7c66292f8a6c34e09ea95ccde">operator&gt;&gt;</a>(std::istream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType &amp;value)                                                    \</div>
+<div class="line">    {                                                                                                                                                        \</div>
+<div class="line">        int32_t dummy;                                                                                                                                       \</div>
+<div class="line">        if (Name##Representation::sTable.<a class="code hl_function" href="namespace_engine_1_1_serialize.html#a9f5357d1fb4f72045c8db79d797e7082">read</a>(stream, dummy, Name##Representation::sTable.mName))                                                            \</div>
+<div class="line">            value = <span class="keyword">static_cast&lt;</span>typename Name##Representation::EnumType<span class="keyword">&gt;</span>(dummy);                                                                             \</div>
+<div class="line">        <span class="keywordflow">return</span> stream;                                                                                                                                       \</div>
+<div class="line">    }</div>
+<div class="ttc" id="anamespace_engine_1_1_serialize_html_a9f5357d1fb4f72045c8db79d797e7082"><div class="ttname"><a href="namespace_engine_1_1_serialize.html#a9f5357d1fb4f72045c8db79d797e7082">Engine::Serialize::read</a></div><div class="ttdeci">StreamResult read(FormattedSerializeStream &amp;in, T &amp;t, const char *name, const CallerHierarchyBasePtr &amp;hierarchy={})</div><div class="ttdef"><b>Definition:</b> operations.h:246</div></div>
+<div class="ttc" id="anamespace_engine_html_a28644ea7c66292f8a6c34e09ea95ccde"><div class="ttname"><a href="namespace_engine.html#a28644ea7c66292f8a6c34e09ea95ccde">Engine::operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;stream, typename GenericResultRepresentation::EnumType &amp;value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
+<div class="ttc" id="anamespace_engine_html_addcb28fcaa4f2ef73ec7f742ebf72665"><div class="ttname"><a href="namespace_engine.html#addcb28fcaa4f2ef73ec7f742ebf72665">Engine::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, typename GenericResultRepresentation::EnumType value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
+<div class="ttc" id="astruct_engine_1_1_enum_meta_table_html"><div class="ttname"><a href="struct_engine_1_1_enum_meta_table.html">Engine::EnumMetaTable</a></div><div class="ttdef"><b>Definition:</b> enum.h:7</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a60a6575f10f23269cbcdcebb0de7352f" name="a60a6575f10f23269cbcdcebb0de7352f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a6575f10f23269cbcdcebb0de7352f">&#9670;&#160;</a></span>ENUM_BASE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ENUM_BASE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Base, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="enum_8h.html#a18dda78aaf44fa2c87043e965be5be7b">ENUM_REGISTRY</a>(Name, : Base::underlying_type, Base::MAX - 1, &amp;Base##Representation::sTable, __VA_ARGS__) \</div>
+<div class="line">    <span class="keyword">using </span>Name = <a class="code hl_struct" href="struct_engine_1_1_base_enum.html">Engine::BaseEnum&lt;Base, Name##Representation&gt;</a>;</div>
+<div class="ttc" id="aenum_8h_html_a18dda78aaf44fa2c87043e965be5be7b"><div class="ttname"><a href="enum_8h.html#a18dda78aaf44fa2c87043e965be5be7b">ENUM_REGISTRY</a></div><div class="ttdeci">#define ENUM_REGISTRY(Name, Type, MIN_VAL, Base,...)</div><div class="ttdef"><b>Definition:</b> enum.h:245</div></div>
+<div class="ttc" id="astruct_engine_1_1_base_enum_html"><div class="ttname"><a href="struct_engine_1_1_base_enum.html">Engine::BaseEnum</a></div><div class="ttdef"><b>Definition:</b> enum.h:193</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a13e72ce0563cbf5b0ba27d97cc5ba446" name="a13e72ce0563cbf5b0ba27d97cc5ba446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13e72ce0563cbf5b0ba27d97cc5ba446">&#9670;&#160;</a></span>TYPED_ENUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TYPED_ENUM</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="enum_8h.html#a18dda78aaf44fa2c87043e965be5be7b">ENUM_REGISTRY</a>(Name,                             \</div>
+<div class="line">                  : Type, -1, <span class="keyword">nullptr</span>, __VA_ARGS__) \</div>
+<div class="line">    <span class="keyword">using </span>Name = <a class="code hl_struct" href="struct_engine_1_1_enum_type.html">Engine::EnumType&lt;Name##Representation&gt;</a>;</div>
+<div class="ttc" id="astruct_engine_1_1_enum_type_html"><div class="ttname"><a href="struct_engine_1_1_enum_type.html">Engine::EnumType</a></div><div class="ttdef"><b>Definition:</b> enum.h:131</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9f45f010de76e982a57b1b875fcb44e3" name="a9f45f010de76e982a57b1b875fcb44e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f45f010de76e982a57b1b875fcb44e3">&#9670;&#160;</a></span>ENUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ENUM</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="enum_8h.html#a18dda78aaf44fa2c87043e965be5be7b">ENUM_REGISTRY</a>(Name, , -1, <span class="keyword">nullptr</span>, __VA_ARGS__) \</div>
+<div class="line">    <span class="keyword">using </span>Name = <a class="code hl_struct" href="struct_engine_1_1_enum_type.html">Engine::EnumType&lt;Name##Representation&gt;</a>;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad3b637cc6c395f81bd689452fdc00dc4" name="ad3b637cc6c395f81bd689452fdc00dc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3b637cc6c395f81bd689452fdc00dc4">&#9670;&#160;</a></span>FORWARD_ENUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FORWARD_ENUM</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>Name##Representation; \</div>
+<div class="line">    <span class="keyword">using </span>Name = <a class="code hl_struct" href="struct_engine_1_1_enum_type.html">Engine::EnumType&lt;Name##Representation&gt;</a>;</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Tue May 13 2025 13:19:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
