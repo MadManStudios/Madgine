@@ -1,0 +1,14 @@
+prefix=/home/runner/work/_temp/02fdf6bf-7ff8-4a14-b7f5-1b58d80d143b/emsdk-main/upstream/emscripten/cache/sysroot
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: FreeType 2
+URL: https://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 24.3.18
+Requires:  
+Requires.private: 
+Libs: -L${libdir} -lfreetype 
+Libs.private: 
+Cflags: -I${includedir}/freetype2
