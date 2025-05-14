@@ -215,6 +215,14 @@ jobs:
       if: matrix.platform == 'emscripten'
       uses: mymindstorm/setup-emsdk@v14
 
+    - name: Install wasm-split
+      if: matrix.platform == 'emscripten'
+      uses: robinraju/release-downloader@v1
+      with:
+        repository: getsentry/symbolicator
+        latest: true
+        fileName: wasm-split-Linux-x86_64
+
     - name: Set up Clang
       if: matrix.platform == 'linux'
       uses: egor-tensin/setup-clang@v1
@@ -299,9 +307,15 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config RelWithDebInfo --output-on-failure
 
+    - name: Split debug information
+      if: matrix.platform == 'emscripten'
+      run: |
+        chmod +x wasm-split-Linux-x86_64
+        ./wasm-split-Linux-x86_64 ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -o ${{ github.workspace }}/build/bin/MadgineLauncher.wasm --strip
+
     - name: Package
       working-directory: ${{ github.workspace }}/build
-      if: github.event_name != 'pull_request' && github.ref_name == 'master'
+      if: github.event_name != 'pull_request' && (github.ref_name == 'master' || matrix.platform == 'emscripten')
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: cpack
@@ -315,13 +329,13 @@ jobs:
         files: ${{ github.workspace }}/build/packages/*
       
     - uses: actions/checkout@v4
-      if: matrix.platform == 'emscripten' && (github.ref_name == 'master' || github.ref_name == 'development')
+      if: matrix.platform == 'emscripten' && github.event_name == 'push'
       with:
         ref: 'gh-pages'
         path: 'gh-pages'
 
     - name: Copy static files into repository
-      if: matrix.platform == 'emscripten' && (github.ref_name == 'master' || github.ref_name == 'development')
+      if: matrix.platform == 'emscripten' && github.event_name == 'push'
       run: |
         cd gh-pages
         rm -rf ${{ github.ref_name }} 
@@ -329,7 +343,7 @@ jobs:
         unzip ${{ github.workspace }}/build/packages/*.zip -d ${{ github.ref_name }} 
 
     - name: "Updating gh-pages branch"
-      if: matrix.platform == 'emscripten' && (github.ref_name == 'master' || github.ref_name == 'development')
+      if: matrix.platform == 'emscripten' && github.event_name == 'push'
       run: |
         cd gh-pages
         git config user.name github-actions
