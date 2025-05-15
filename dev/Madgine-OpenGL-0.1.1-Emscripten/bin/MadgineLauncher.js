@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmphryjulxq.js
+// include: /tmp/tmp46kx10ek.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,10 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmphryjulxq.js
+// end include: /tmp/tmp46kx10ek.js
+// include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
+
+// end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
 
 
 var arguments_ = [];
@@ -8122,8 +8125,8 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  747136: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 747188: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); }
+  749024: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 749076: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); }
 };
 var wasmImports = {
   /** @export */
