@@ -27,6 +27,17 @@ function(resolve_dependencies)
 				
 				set(name ${CMAKE_MATCH_1})
 
+				set(path ${CMAKE_SOURCE_DIR}/../${name})
+				
+				if (IS_DIRECTORY ${path})
+				
+					string(TOUPPER ${name} name_uppercase)
+
+					MESSAGE(STATUS "Using locally cloned repository ${path} for ${name}")
+
+					set(FETCHCONTENT_SOURCE_DIR_${name_uppercase} ${path})
+				endif()
+
 				FetchContent_Declare(
 					${name}
 					GIT_REPOSITORY ${file}
