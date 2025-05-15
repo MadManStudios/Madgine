@@ -108,7 +108,6 @@ jobs:
 
 
     - name: Patch Dependencies
-      if: github.event_name != 'pull_request' && github.ref_name == 'master'
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
 
@@ -202,7 +201,6 @@ jobs:
         fetch-depth: 0
         
     - name: Patch Dependencies
-      if: github.event_name != 'pull_request' && github.ref_name == 'master' && matrix.platform != 'emscripten'
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
         
