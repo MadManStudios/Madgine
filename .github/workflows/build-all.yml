@@ -307,9 +307,14 @@ jobs:
 
     - name: Split debug information
       if: matrix.platform == 'emscripten'
+      env: 
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       run: |
         chmod +x wasm-split-Linux-x86_64
-        ./wasm-split-Linux-x86_64 ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -o ${{ github.workspace }}/build/bin/MadgineLauncher.wasm --strip
+        mkdir ${{ github.workspace }}/debug
+        ./wasm-split-Linux-x86_64 ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -o ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -d ${{ github.workspace }}/debug/MadgineLauncher.debug.wasm --strip
+        curl -sL https://sentry.io/get-cli/ | sh
+        sentry-cli debug-files upload -o madmanstudios -p madgine ${{ github.workspace }}/debug
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
