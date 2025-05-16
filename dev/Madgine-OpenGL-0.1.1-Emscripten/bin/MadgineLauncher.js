@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp46kx10ek.js
+// include: /tmp/tmpry8f0g_p.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmp46kx10ek.js
+// end include: /tmp/tmpry8f0g_p.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
 
 // end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
