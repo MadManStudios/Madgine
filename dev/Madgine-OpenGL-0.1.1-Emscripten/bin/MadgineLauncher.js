@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpnan1f77v.js
+// include: /tmp/tmpjk2ly3qw.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmpnan1f77v.js
+// end include: /tmp/tmpjk2ly3qw.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
 
 // end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
@@ -238,6 +238,7 @@ if (ENVIRONMENT_IS_WORKER) {
 // `/` should be present at the end if `scriptDirectory` is not empty
 var scriptDirectory = '';
 function locateFile(path) {
+  dbg('locateFile:', path, 'scriptDirectory:', scriptDirectory);
   if (Module['locateFile']) {
     return Module['locateFile'](path, scriptDirectory);
   }
@@ -434,6 +435,40 @@ var isFileURI = (filename) => filename.startsWith('file://');
 // include: runtime_exceptions.js
 // end include: runtime_exceptions.js
 // include: runtime_debug.js
+var runtimeDebug = true; // Switch to false at runtime to disable logging at the right times
+
+// Used by XXXXX_DEBUG settings to output debug messages.
+function dbg(...args) {
+  if (!runtimeDebug && typeof runtimeDebug != 'undefined') return;
+  // TODO(sbc): Make this configurable somehow.  Its not always convenient for
+  // logging to show up as warnings.
+  console.warn(...args);
+}
+
+var printObjectList = [];
+
+function prettyPrint(arg) {
+  if (typeof arg == 'undefined') return 'undefined';
+  if (typeof arg == 'boolean') arg = arg + 0;
+  if (!arg) return arg;
+  var index = printObjectList.indexOf(arg);
+  if (index >= 0) return '<' + arg + '|' + index + '>';
+  if (arg.toString() == '[object HTMLImageElement]') {
+    return arg + '\n\n';
+  }
+  if (arg.byteLength) {
+    return '{' + Array.prototype.slice.call(arg, 0, Math.min(arg.length, 400)) + '}';
+  }
+  if (typeof arg == 'function') {
+    return '<function>';
+  } else if (typeof arg == 'object') {
+    printObjectList.push(arg);
+    return '<' + arg + '|' + (printObjectList.length-1) + '>';
+  } else if (typeof arg == 'number') {
+    if (arg > 0) return ptrToString(arg) + ' (' + arg + ')';
+  }
+  return arg;
+}
 // end include: runtime_debug.js
 // include: memoryprofiler.js
 // end include: memoryprofiler.js
@@ -467,6 +502,7 @@ function preRun() {
 }
 
 function initRuntime() {
+  dbg('initRuntime');
   runtimeInitialized = true;
 
   // Begin ATINITS hooks
@@ -713,6 +749,7 @@ async function createWasm() {
   }
 
   wasmBinaryFile ??= findWasmBinary();
+  dbg('asynchronously preparing wasm');
     var result = await instantiateAsync(wasmBinary, wasmBinaryFile, info);
     var exports = receiveInstantiationResult(result);
     return exports;
@@ -4370,6 +4407,7 @@ async function createWasm() {
       // 2. "unwind", which is thrown by emscripten_unwind_to_js_event_loop() and others
       //    that wish to return to JS event loop.
       if (e instanceof ExitStatus || e == 'unwind') {
+        dbg(`handleException: unwinding: EXITSTATUS=${EXITSTATUS}`);
         return EXITSTATUS;
       }
       quit_(1, e);
@@ -4379,6 +4417,7 @@ async function createWasm() {
   var runtimeKeepaliveCounter = 0;
   var keepRuntimeAlive = () => noExitRuntime || runtimeKeepaliveCounter > 0;
   var _proc_exit = (code) => {
+      dbg(`proc_exit: ${code}`);
       EXITSTATUS = code;
       if (!keepRuntimeAlive()) {
         Module['onExit']?.(code);
@@ -4398,6 +4437,7 @@ async function createWasm() {
   
   var maybeExit = () => {
       if (!keepRuntimeAlive()) {
+        dbg(`maybeExit: calling exit() implicitly after user callback completed: ${EXITSTATUS}`);
         try {
           _exit(EXITSTATUS);
         } catch (e) {
@@ -5793,6 +5833,7 @@ async function createWasm() {
       var thisMainLoopId = MainLoop.currentlyRunningMainloop;
       function checkIsRunning() {
         if (thisMainLoopId < MainLoop.currentlyRunningMainloop) {
+          dbg('main loop exiting');
           
           maybeExit();
           return false;
@@ -5823,6 +5864,7 @@ async function createWasm() {
               MainLoop.remainingBlockers = (8*remaining + next)/9;
             }
           }
+          dbg(`main loop blocker "${blocker.name}" took '${Date.now() - start} ms`); //, left: ' + MainLoop.remainingBlockers);
           MainLoop.updateStatus();
   
           // catches pause/resume main loop from blocker execution
@@ -6045,6 +6087,7 @@ async function createWasm() {
   var growMemory = (size) => {
       var b = wasmMemory.buffer;
       var pages = ((size - b.byteLength + 65535) / 65536) | 0;
+      dbg(`growMemory: ${size} (+${size - b.byteLength} bytes / ${pages} pages)`);
       try {
         // round size grow request up to wasm page size (fixed 64KB per spec)
         wasmMemory.grow(pages); // .grow() takes a delta compared to the previous size
@@ -8340,6 +8383,7 @@ function callMain(args = []) {
 function run(args = arguments_) {
 
   if (runDependencies > 0) {
+    dbg('run() called, but dependencies remain, so not running');
     dependenciesFulfilled = run;
     return;
   }
@@ -8348,6 +8392,7 @@ function run(args = arguments_) {
 
   // a preRun added a dependency, run will be called later
   if (runDependencies > 0) {
+    dbg('run() called, but dependencies remain, so not running');
     dependenciesFulfilled = run;
     return;
   }
