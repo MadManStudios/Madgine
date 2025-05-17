@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp3kdd8e8i.js
+// include: /tmp/tmpnan1f77v.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmp3kdd8e8i.js
+// end include: /tmp/tmpnan1f77v.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
 
 // end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
@@ -238,7 +238,6 @@ if (ENVIRONMENT_IS_WORKER) {
 // `/` should be present at the end if `scriptDirectory` is not empty
 var scriptDirectory = '';
 function locateFile(path) {
-  dbg('locateFile:', path, 'scriptDirectory:', scriptDirectory);
   if (Module['locateFile']) {
     return Module['locateFile'](path, scriptDirectory);
   }
@@ -435,40 +434,6 @@ var isFileURI = (filename) => filename.startsWith('file://');
 // include: runtime_exceptions.js
 // end include: runtime_exceptions.js
 // include: runtime_debug.js
-var runtimeDebug = true; // Switch to false at runtime to disable logging at the right times
-
-// Used by XXXXX_DEBUG settings to output debug messages.
-function dbg(...args) {
-  if (!runtimeDebug && typeof runtimeDebug != 'undefined') return;
-  // TODO(sbc): Make this configurable somehow.  Its not always convenient for
-  // logging to show up as warnings.
-  console.warn(...args);
-}
-
-var printObjectList = [];
-
-function prettyPrint(arg) {
-  if (typeof arg == 'undefined') return 'undefined';
-  if (typeof arg == 'boolean') arg = arg + 0;
-  if (!arg) return arg;
-  var index = printObjectList.indexOf(arg);
-  if (index >= 0) return '<' + arg + '|' + index + '>';
-  if (arg.toString() == '[object HTMLImageElement]') {
-    return arg + '\n\n';
-  }
-  if (arg.byteLength) {
-    return '{' + Array.prototype.slice.call(arg, 0, Math.min(arg.length, 400)) + '}';
-  }
-  if (typeof arg == 'function') {
-    return '<function>';
-  } else if (typeof arg == 'object') {
-    printObjectList.push(arg);
-    return '<' + arg + '|' + (printObjectList.length-1) + '>';
-  } else if (typeof arg == 'number') {
-    if (arg > 0) return ptrToString(arg) + ' (' + arg + ')';
-  }
-  return arg;
-}
 // end include: runtime_debug.js
 // include: memoryprofiler.js
 // end include: memoryprofiler.js
@@ -502,7 +467,6 @@ function preRun() {
 }
 
 function initRuntime() {
-  dbg('initRuntime');
   runtimeInitialized = true;
 
   // Begin ATINITS hooks
@@ -619,76 +583,6 @@ function abort(what) {
   throw e;
 }
 
-// `abortWrapperDepth` counts the recursion level of the wrapper function so
-// that we only handle exceptions at the top level letting the exception
-// mechanics work uninterrupted at the inner level.  Additionally,
-// `abortWrapperDepth` is also manually incremented in callMain so that we know
-// to ignore exceptions from there since they're handled by callMain directly.
-var abortWrapperDepth = 0;
-
-function makeAbortWrapper(original) {
-  return (...args) => {
-    // Don't allow this function to be called if we're aborted!
-    if (ABORT) {
-      throw 'program has already aborted!';
-    }
-
-    abortWrapperDepth++;
-    try {
-      return original(...args);
-    } catch (e) {
-      if (
-        ABORT // rethrow exception if abort() was called in the original function call above
-        || abortWrapperDepth > 1 // rethrow exceptions not caught at the top level if exception catching is enabled; rethrow from exceptions from within callMain
-        || e === 'unwind'
-      ) {
-        throw e;
-      }
-
-      abort('unhandled exception: ' + [e, e.stack]);
-    }
-    finally {
-      abortWrapperDepth--;
-    }
-  }
-}
-
-// Instrument all the exported functions to:
-// - abort if an unhandled exception occurs
-// - throw an exception if someone tries to call them after the program has aborted
-// See settings.ABORT_ON_WASM_EXCEPTIONS for more info.
-function instrumentWasmExportsWithAbort(exports) {
-  // Override the exported functions with the wrappers and copy over any other symbols
-  var instExports = {};
-  for (var name in exports) {
-    var original = exports[name];
-    if (typeof original == 'function') {
-      instExports[name] = makeAbortWrapper(original);
-    } else {
-      instExports[name] = original;
-    }
-  }
-
-  return instExports;
-}
-
-function instrumentWasmTableWithAbort() {
-  // Override the wasmTable get function to return the wrappers
-  var realGet = wasmTable.get;
-  var wrapperCache = {};
-  wasmTable.get = (i) => {
-    var func = realGet.call(wasmTable, i);
-    var cached = wrapperCache[i];
-    if (!cached || cached.func !== func) {
-      cached = wrapperCache[i] = {
-        func,
-        wrapper: makeAbortWrapper(func)
-      }
-    }
-    return cached.wrapper;
-  };
-}
-
 var wasmBinaryFile;
 
 function findWasmBinary() {
@@ -778,8 +672,6 @@ async function createWasm() {
   function receiveInstance(instance, module) {
     wasmExports = instance.exports;
 
-    wasmExports = instrumentWasmExportsWithAbort(wasmExports);
-
     
 
     wasmMemory = wasmExports['memory'];
@@ -788,8 +680,6 @@ async function createWasm() {
 
     wasmTable = wasmExports['__indirect_function_table'];
     
-
-    instrumentWasmTableWithAbort();
 
     removeRunDependency('wasm-instantiate');
     return wasmExports;
@@ -823,7 +713,6 @@ async function createWasm() {
   }
 
   wasmBinaryFile ??= findWasmBinary();
-  dbg('asynchronously preparing wasm');
     var result = await instantiateAsync(wasmBinary, wasmBinaryFile, info);
     var exports = receiveInstantiationResult(result);
     return exports;
@@ -903,9 +792,6 @@ async function createWasm() {
       default: abort(`invalid type for setValue: ${type}`);
     }
   }
-
-  /** @type {WebAssembly.Table} */
-  var wasmTable;
 
   var UTF8Decoder = typeof TextDecoder != 'undefined' ? new TextDecoder() : undefined;
   
@@ -4484,7 +4370,6 @@ async function createWasm() {
       // 2. "unwind", which is thrown by emscripten_unwind_to_js_event_loop() and others
       //    that wish to return to JS event loop.
       if (e instanceof ExitStatus || e == 'unwind') {
-        dbg(`handleException: unwinding: EXITSTATUS=${EXITSTATUS}`);
         return EXITSTATUS;
       }
       quit_(1, e);
@@ -4494,7 +4379,6 @@ async function createWasm() {
   var runtimeKeepaliveCounter = 0;
   var keepRuntimeAlive = () => noExitRuntime || runtimeKeepaliveCounter > 0;
   var _proc_exit = (code) => {
-      dbg(`proc_exit: ${code}`);
       EXITSTATUS = code;
       if (!keepRuntimeAlive()) {
         Module['onExit']?.(code);
@@ -4514,7 +4398,6 @@ async function createWasm() {
   
   var maybeExit = () => {
       if (!keepRuntimeAlive()) {
-        dbg(`maybeExit: calling exit() implicitly after user callback completed: ${EXITSTATUS}`);
         try {
           _exit(EXITSTATUS);
         } catch (e) {
@@ -5187,7 +5070,6 @@ async function createWasm() {
   
   
   var GL = {
-  debug:true,
   counter:1,
   buffers:[],
   programs:[],
@@ -5302,47 +5184,7 @@ async function createWasm() {
           err(`GL spec section 6.4 error: vertex attribute data stride of ${stride} bytes should have been a multiple of the data type size that was used: GLenum ${dataType} has size of ${sizeBytes} bytes!`);
         }
       },
-  hookWebGLFunction:(f, glCtx) => {
-        var orig = glCtx[f];
-        var contextHandle = glCtx.canvas.GLctxObject.handle;
-        glCtx[f] = function(...args) {
-          var ret = orig.apply(this, args);
-          // Some GL functions take a view of the entire linear memory.  Replace
-          // such arguments with the string 'HEAP' to avoid serializing all of
-          // memory.
-          for (var i in args) {
-            if (ArrayBuffer.isView(args[i]) && args[i].byteLength === HEAPU8.byteLength) {
-              args[i] = 'HEAP';
-            }
-          }
-          err(`[ctx: ${contextHandle}]: ${f}(${args}) -> ${ret}`);
-          return ret;
-        };
-      },
-  hookWebGL:function(glCtx) {
-        glCtx ??= this.detectWebGLContext();
-        if (!glCtx) return;
-        if (!((typeof WebGLRenderingContext != 'undefined' && glCtx instanceof WebGLRenderingContext)
-              || (typeof WebGL2RenderingContext != 'undefined' && glCtx instanceof WebGL2RenderingContext))) {
-          return;
-        }
-  
-        if (glCtx.webGlTracerAlreadyHooked) return;
-        glCtx.webGlTracerAlreadyHooked = true;
-  
-        for (var f in glCtx) {
-          if (typeof glCtx[f] == 'function') {
-            this.hookWebGLFunction(f, glCtx);
-          }
-        }
-      },
   createContext:(/** @type {HTMLCanvasElement} */ canvas, webGLContextAttributes) => {
-  
-        var errorInfo = '?';
-        function onContextCreationError(event) {
-          errorInfo = event.statusMessage || errorInfo;
-        }
-        canvas.addEventListener('webglcontextcreationerror', onContextCreationError, false);
   
         // BUG: Workaround Safari WebGL issue: After successfully acquiring WebGL
         // context on a canvas, calling .getContext() will always return that
@@ -5365,15 +5207,9 @@ async function createWasm() {
   
         var ctx = canvas.getContext("webgl2", webGLContextAttributes);
   
-        canvas.removeEventListener('webglcontextcreationerror', onContextCreationError, false);
-        if (!ctx) {
-          dbg('Could not create canvas: ' + [errorInfo, JSON.stringify(webGLContextAttributes)]);
-          return 0;
-        }
+        if (!ctx) return 0;
   
         var handle = GL.registerContext(ctx, webGLContextAttributes);
-  
-        GL.hookWebGL(ctx);
   
         return handle;
       },
@@ -5396,16 +5232,9 @@ async function createWasm() {
           GL.initExtensions(context);
         }
   
-        if (webGLContextAttributes.renderViaOffscreenBackBuffer) {
-          dbg('renderViaOffscreenBackBuffer=true specified in WebGL context creation attributes, pass linker flag -sOFFSCREEN_FRAMEBUFFER to enable support!');
-        }
-  
         return handle;
       },
   makeContextCurrent:(contextHandle) => {
-        if (contextHandle && !GL.contexts[contextHandle]) {
-          dbg(`GL.makeContextCurrent() failed! WebGL context ${contextHandle} does not exist!`);
-        }
   
         // Active Emscripten GL layer context object.
         GL.currentContext = GL.contexts[contextHandle];
@@ -5964,7 +5793,6 @@ async function createWasm() {
       var thisMainLoopId = MainLoop.currentlyRunningMainloop;
       function checkIsRunning() {
         if (thisMainLoopId < MainLoop.currentlyRunningMainloop) {
-          dbg('main loop exiting');
           
           maybeExit();
           return false;
@@ -5995,7 +5823,6 @@ async function createWasm() {
               MainLoop.remainingBlockers = (8*remaining + next)/9;
             }
           }
-          dbg(`main loop blocker "${blocker.name}" took '${Date.now() - start} ms`); //, left: ' + MainLoop.remainingBlockers);
           MainLoop.updateStatus();
   
           // catches pause/resume main loop from blocker execution
@@ -6137,6 +5964,8 @@ async function createWasm() {
   
   var wasmTableMirror = [];
   
+  /** @type {WebAssembly.Table} */
+  var wasmTable;
   var getWasmTableEntry = (funcPtr) => {
       var func = wasmTableMirror[funcPtr];
       if (!func) {
@@ -6216,7 +6045,6 @@ async function createWasm() {
   var growMemory = (size) => {
       var b = wasmMemory.buffer;
       var pages = ((size - b.byteLength + 65535) / 65536) | 0;
-      dbg(`growMemory: ${size} (+${size - b.byteLength} bytes / ${pages} pages)`);
       try {
         // round size grow request up to wasm page size (fixed 64KB per spec)
         wasmMemory.grow(pages); // .grow() takes a delta compared to the previous size
@@ -6279,7 +6107,6 @@ async function createWasm() {
 
   var findCanvasEventTarget = findEventTarget;
   var _emscripten_set_canvas_element_size = (target, width, height) => {
-      dbg(`emscripten_set_canvas_element_size(target=${target},width=${width},height=${height}`);
       var canvas = findCanvasEventTarget(target);
       if (!canvas) return -4;
       canvas.width = width;
@@ -7268,8 +7095,6 @@ async function createWasm() {
   var _glCompileShader = (shader) => {
       GL.validateGLObjectID(GL.shaders, shader, 'glCompileShader', 'shader');
       GLctx.compileShader(GL.shaders[shader]);
-      var log = (GLctx.getShaderInfoLog(GL.shaders[shader]) || '').trim();
-      if (log) dbg(`glCompileShader: ${log}`);
     };
 
   var _glCreateProgram = () => {
@@ -7890,9 +7715,6 @@ async function createWasm() {
       GL.validateGLObjectID(GL.programs, program, 'glLinkProgram', 'program');
       program = GL.programs[program];
       GLctx.linkProgram(program);
-      var log = (GLctx.getProgramInfoLog(program) || '').trim();
-      if (log) dbg(`glLinkProgram: ${log}`);
-      if (program.uniformLocsById) dbg(`glLinkProgram invalidated ${Object.keys(program.uniformLocsById).length} uniform location mappings`);
       // Invalidate earlier computed uniform->ID mappings, those have now become stale
       program.uniformLocsById = 0; // Mark as null-like so that glGetUniformLocation() knows to populate this again.
       program.uniformSizeAndIdsByName = {};
@@ -8504,8 +8326,6 @@ function callMain(args = []) {
   HEAPU32[((argv_ptr)>>2)] = 0;
 
   try {
-    // See abortWrapperDepth in preamble.js!
-    abortWrapperDepth++;
 
     var ret = entryFunction(argc, argv);
 
@@ -8515,16 +8335,11 @@ function callMain(args = []) {
   } catch (e) {
     return handleException(e);
   }
-  finally {
-    // See abortWrapperDepth in preamble.js!
-    abortWrapperDepth--;
-  }
 }
 
 function run(args = arguments_) {
 
   if (runDependencies > 0) {
-    dbg('run() called, but dependencies remain, so not running');
     dependenciesFulfilled = run;
     return;
   }
@@ -8533,7 +8348,6 @@ function run(args = arguments_) {
 
   // a preRun added a dependency, run will be called later
   if (runDependencies > 0) {
-    dbg('run() called, but dependencies remain, so not running');
     dependenciesFulfilled = run;
     return;
   }
