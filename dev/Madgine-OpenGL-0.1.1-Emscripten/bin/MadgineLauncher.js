@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpslr8rb3t.js
+// include: /tmp/tmp3kdd8e8i.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmpslr8rb3t.js
+// end include: /tmp/tmp3kdd8e8i.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
 
 // end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
@@ -619,6 +619,76 @@ function abort(what) {
   throw e;
 }
 
+// `abortWrapperDepth` counts the recursion level of the wrapper function so
+// that we only handle exceptions at the top level letting the exception
+// mechanics work uninterrupted at the inner level.  Additionally,
+// `abortWrapperDepth` is also manually incremented in callMain so that we know
+// to ignore exceptions from there since they're handled by callMain directly.
+var abortWrapperDepth = 0;
+
+function makeAbortWrapper(original) {
+  return (...args) => {
+    // Don't allow this function to be called if we're aborted!
+    if (ABORT) {
+      throw 'program has already aborted!';
+    }
+
+    abortWrapperDepth++;
+    try {
+      return original(...args);
+    } catch (e) {
+      if (
+        ABORT // rethrow exception if abort() was called in the original function call above
+        || abortWrapperDepth > 1 // rethrow exceptions not caught at the top level if exception catching is enabled; rethrow from exceptions from within callMain
+        || e === 'unwind'
+      ) {
+        throw e;
+      }
+
+      abort('unhandled exception: ' + [e, e.stack]);
+    }
+    finally {
+      abortWrapperDepth--;
+    }
+  }
+}
+
+// Instrument all the exported functions to:
+// - abort if an unhandled exception occurs
+// - throw an exception if someone tries to call them after the program has aborted
+// See settings.ABORT_ON_WASM_EXCEPTIONS for more info.
+function instrumentWasmExportsWithAbort(exports) {
+  // Override the exported functions with the wrappers and copy over any other symbols
+  var instExports = {};
+  for (var name in exports) {
+    var original = exports[name];
+    if (typeof original == 'function') {
+      instExports[name] = makeAbortWrapper(original);
+    } else {
+      instExports[name] = original;
+    }
+  }
+
+  return instExports;
+}
+
+function instrumentWasmTableWithAbort() {
+  // Override the wasmTable get function to return the wrappers
+  var realGet = wasmTable.get;
+  var wrapperCache = {};
+  wasmTable.get = (i) => {
+    var func = realGet.call(wasmTable, i);
+    var cached = wrapperCache[i];
+    if (!cached || cached.func !== func) {
+      cached = wrapperCache[i] = {
+        func,
+        wrapper: makeAbortWrapper(func)
+      }
+    }
+    return cached.wrapper;
+  };
+}
+
 var wasmBinaryFile;
 
 function findWasmBinary() {
@@ -708,6 +778,8 @@ async function createWasm() {
   function receiveInstance(instance, module) {
     wasmExports = instance.exports;
 
+    wasmExports = instrumentWasmExportsWithAbort(wasmExports);
+
     
 
     wasmMemory = wasmExports['memory'];
@@ -716,6 +788,8 @@ async function createWasm() {
 
     wasmTable = wasmExports['__indirect_function_table'];
     
+
+    instrumentWasmTableWithAbort();
 
     removeRunDependency('wasm-instantiate');
     return wasmExports;
@@ -829,6 +903,9 @@ async function createWasm() {
       default: abort(`invalid type for setValue: ${type}`);
     }
   }
+
+  /** @type {WebAssembly.Table} */
+  var wasmTable;
 
   var UTF8Decoder = typeof TextDecoder != 'undefined' ? new TextDecoder() : undefined;
   
@@ -6060,8 +6137,6 @@ async function createWasm() {
   
   var wasmTableMirror = [];
   
-  /** @type {WebAssembly.Table} */
-  var wasmTable;
   var getWasmTableEntry = (funcPtr) => {
       var func = wasmTableMirror[funcPtr];
       if (!func) {
@@ -8429,6 +8504,8 @@ function callMain(args = []) {
   HEAPU32[((argv_ptr)>>2)] = 0;
 
   try {
+    // See abortWrapperDepth in preamble.js!
+    abortWrapperDepth++;
 
     var ret = entryFunction(argc, argv);
 
@@ -8437,6 +8514,10 @@ function callMain(args = []) {
     return ret;
   } catch (e) {
     return handleException(e);
+  }
+  finally {
+    // See abortWrapperDepth in preamble.js!
+    abortWrapperDepth--;
   }
 }
 
