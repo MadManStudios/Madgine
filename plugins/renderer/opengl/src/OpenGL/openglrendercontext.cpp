@@ -33,6 +33,7 @@ namespace Window {
 }
 #elif ANDROID || EMSCRIPTEN
 #    include <EGL/egl.h>
+#    include <EGL/eglext.h>
 
 EGLDisplay sDisplay = EGL_NO_DISPLAY;
 
@@ -361,6 +362,7 @@ namespace Render {
                 EGL_RED_SIZE, 8,
                 EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
                 EGL_CONFORMANT, EGL_OPENGL_ES2_BIT,
+                EGL_GL_COLORSPACE_KHR, EGL_GL_COLORSPACE_SRGB_KHR,
                 /* EGL_SAMPLE_BUFFERS, 1,
                 EGL_SAMPLES, static_cast<EGLint>(samples),*/
                 EGL_NONE
