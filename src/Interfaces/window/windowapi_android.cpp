@@ -46,9 +46,9 @@ namespace Window {
 
             switch (action & AMOTION_EVENT_ACTION_MASK) {
             case AMOTION_EVENT_ACTION_DOWN:
-                handled = injectPointerMove({ position, position,
+                injectPointerMove({ position, position,
                     position - mLastKnownMousePos });
-                handled |= injectPointerPress({ position, position,
+                handled = injectPointerPress({ position, position,
                     Input::MouseButton::LEFT_BUTTON });
                 break;
             case AMOTION_EVENT_ACTION_UP:
