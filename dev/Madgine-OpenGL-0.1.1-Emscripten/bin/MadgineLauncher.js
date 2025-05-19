@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp9dcxw604.js
+// include: /tmp/tmpsu9r5mmx.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmp9dcxw604.js
+// end include: /tmp/tmpsu9r5mmx.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
 
 /**
@@ -305,14 +305,14 @@ function getImage(url) {
 }
 
 function patchWebAssembly() {
-    if ('instantiate' in WebAssembly) {
-        const origInstantiate = WebAssembly.instantiate;
-        WebAssembly.instantiate = function instantiate(
+    if ('instantiateStreaming' in WebAssembly) {
+        const origInstantiateStreaming = WebAssembly.instantiateStreaming;
+        WebAssembly.instantiateStreaming = function instantiateStreaming(
             response,
             importObject,
         ) {
             return Promise.resolve(response).then(response => {
-                return origInstantiate(response, importObject).then(rv => {
+                return origInstantiateStreaming(response, importObject).then(rv => {
                     if (response.url) {
                         registerModule(rv.module, response.url);
                     }
@@ -339,13 +339,11 @@ function patchWebAssembly() {
     }
 }
 
+patchWebAssembly();
 
 const INTEGRATION_NAME = "Wasm"
     , _wasmIntegration = () => ({
         name: "Wasm",
-        setupOnce() {
-            patchWebAssembly()
-        },
         processEvent(e) {
             let t = !1;
             return e.exception?.values && e.exception.values.forEach((e => {
