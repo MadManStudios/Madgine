@@ -21,7 +21,7 @@ namespace Window {
         1.0f
     };
 
-    //DLL_EXPORT Threading::SystemVariable<ANativeWindow*> sNativeWindow = nullptr;
+    // DLL_EXPORT Threading::SystemVariable<ANativeWindow*> sNativeWindow = nullptr;
 
     DLL_EXPORT EGLDisplay sDisplay = EGL_NO_DISPLAY;
 
@@ -53,14 +53,18 @@ namespace Window {
                 std::terminate();
             mSize = { width, height };
 
-            //Input
+            // Input
             emscripten_set_mousemove_callback("#canvas", this, 0, EmscriptenWindow::handleMouseEvent);
 
             emscripten_set_mousedown_callback("#canvas", this, 0, EmscriptenWindow::handleMouseEvent);
             emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, this, 0, EmscriptenWindow::handleMouseEvent);
+            emscripten_set_wheel_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, EmscriptenWindow::handleWheelEvent);
 
             emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, EmscriptenWindow::handleKeyEvent);
             emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, EmscriptenWindow::handleKeyEvent);
+
+            emscripten_set_touchstart_callback("#canvas", this, 0, EmscriptenWindow::handleTouchEvent);
+            emscripten_set_touchend_callback("#canvas", this, 0, EmscriptenWindow::handleTouchEvent);
         }
 
         static Input::MouseButton::MouseButton convertMouseButton(unsigned short id)
@@ -128,6 +132,39 @@ namespace Window {
             return EM_FALSE;
         }
 
+        static EM_BOOL handleWheelEvent(int eventType, const EmscriptenWheelEvent *wheelEvent, void *userData)
+        {
+            EmscriptenWindow *_this = static_cast<EmscriptenWindow *>(userData);
+
+            switch (eventType) {
+            case EMSCRIPTEN_EVENT_WHEEL:
+                return _this->injectAxisEvent(Input::AxisEventArgs { Input::AxisEventArgs::WHEEL, static_cast<float>(wheelEvent->deltaY) });            
+            }
+
+            return EM_FALSE;
+        }
+
+        static EM_BOOL handleTouchEvent(int eventType, const EmscriptenTouchEvent *touchEvent, void *userData)
+        {
+            EmscriptenWindow *_this = static_cast<EmscriptenWindow *>(userData);
+
+            switch (eventType) {
+            case EMSCRIPTEN_EVENT_TOUCHMOVE:
+                _this->mLastMousePosition = { touchEvent->touches[0].targetX, touchEvent->touches[0].targetY };
+                return _this->injectPointerMove({ _this->mLastMousePosition, { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY },
+                    { /* touchEvent->touches[0].movementX, touchEvent->touches[0].movementY*/0, 0 } });
+            case EMSCRIPTEN_EVENT_TOUCHSTART:
+                _this->mLastMousePosition = { touchEvent->touches[0].targetX, touchEvent->touches[0].targetY };
+                return _this->injectPointerPress({ _this->mLastMousePosition, { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY },
+                    Input::MouseButton::LEFT_BUTTON });
+            case EMSCRIPTEN_EVENT_TOUCHEND:
+                return _this->injectPointerRelease({ _this->mLastMousePosition, { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY },
+                    Input::MouseButton::LEFT_BUTTON });
+            }
+
+            return EM_FALSE;
+        }
+
         Input::ControlKeyState controlKeyState() const
         {
             return {
@@ -140,7 +177,7 @@ namespace Window {
         InterfacesVector mSize;
         InterfacesVector mLastMousePosition;
 
-        //Input
+        // Input
         bool mKeyDown[512];
     };
 
@@ -157,7 +194,7 @@ namespace Window {
 
     InterfacesVector OSWindow::renderSize()
     {
-        //TODO
+        // TODO
         return size();
     }
 
@@ -232,7 +269,7 @@ namespace Window {
         sWindows.erase((EGLSurface)mHandle);
     }
 
-    //Input
+    // Input
     bool OSWindow::isKeyDown(Input::Key::Key key)
     {
         return static_cast<EmscriptenWindow *>(this)->mKeyDown[key];
@@ -322,9 +359,9 @@ namespace Window {
             if (!eglGetConfigAttrib(sDisplay, config, EGL_NATIVE_VISUAL_ID, &format))
                 return nullptr;
 
-            //sNativeWindow.wait();
+            // sNativeWindow.wait();
 
-            //ANativeWindow_setBuffersGeometry(sNativeWindow, 0, 0, format);
+            // ANativeWindow_setBuffersGeometry(sNativeWindow, 0, 0, format);
 
             handle = eglCreateWindowSurface(sDisplay, config, 0, 0);
             if (!handle)
