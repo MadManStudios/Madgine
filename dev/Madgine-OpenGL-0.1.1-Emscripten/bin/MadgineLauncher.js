@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpbtjqhimq.js
+// include: /tmp/tmp9dcxw604.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmpbtjqhimq.js
+// end include: /tmp/tmp9dcxw604.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
 
 /**
@@ -260,6 +260,7 @@ function getModuleInfo(module) {
 function registerModule(module, url) {
     const { buildId, debugFile } = getModuleInfo(module);
     if (buildId) {
+        console.log("Build ID: " + buildId);
         const oldIdx = getImage(url);
         if (oldIdx >= 0) {
             IMAGES.splice(oldIdx, 1);
