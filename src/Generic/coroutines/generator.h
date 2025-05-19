@@ -32,7 +32,7 @@ struct Generator {
         {
         }
 
-        void unhandled_exception() { }
+        void unhandled_exception() { throw; }
 
         std::suspend_always final_suspend() noexcept
         {

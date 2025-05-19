@@ -37,18 +37,5 @@ namespace Threading {
         mDestroyed = true;
     }
 
-    void TaskPromiseSharedStateBase::setException(std::exception_ptr exception)
-    {
-        std::lock_guard guard { mMutex };
-        mException = std::move(exception);
-    }
-
-    void TaskPromiseSharedStateBase::rethrowIfException()
-    {
-        if (mException) {
-            std::rethrow_exception(mException);
-        }
-    }
-
 }
 }
