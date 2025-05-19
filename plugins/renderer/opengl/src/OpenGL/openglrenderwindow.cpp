@@ -7,6 +7,7 @@
 
 #if ANDROID || EMSCRIPTEN
 #    include <EGL/egl.h>
+#    include <EGL/eglext.h>
 extern EGLDisplay sDisplay;
 
 #    if ANDROID
@@ -38,6 +39,7 @@ namespace Render {
             EGL_RED_SIZE, 8,
             EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
             EGL_CONFORMANT, EGL_OPENGL_ES2_BIT,
+            EGL_GL_COLORSPACE_KHR, EGL_GL_COLORSPACE_SRGB_KHR,
             /* EGL_SAMPLE_BUFFERS, 1,*/
             EGL_NONE
         };
@@ -75,14 +77,13 @@ namespace Render {
     }
 
     void OpenGLRenderWindow::beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const
-    {        
-        OpenGLRenderTarget::beginIteration(targetIndex, targetCount, targetSubresourceIndex);        
-
+    {
+        OpenGLRenderTarget::beginIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
     void OpenGLRenderWindow::endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const
     {
-        OpenGLRenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);        
+        OpenGLRenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
     bool OpenGLRenderWindow::skipFrame()
