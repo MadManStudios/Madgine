@@ -43,6 +43,13 @@ namespace Window {
     } sDisplayGuard;
 
     struct EmscriptenWindow final : OSWindow {
+
+        template <auto f, typename... Args>
+        static auto delegate(Args... args, void *userData)
+        {
+            return (static_cast<EmscriptenWindow *>(userData)->*f)(args...);
+        }
+
         EmscriptenWindow(EGLSurface surface, WindowEventListener *listener)
             : OSWindow((uintptr_t)surface, listener)
             , mKeyDown {}
@@ -53,18 +60,25 @@ namespace Window {
                 std::terminate();
             mSize = { width, height };
 
+            static constexpr auto MouseDelegate = delegate<&EmscriptenWindow::handleMouseEvent, int, const EmscriptenMouseEvent *>;
+            static constexpr auto WheelDelegate = delegate<&EmscriptenWindow::handleWheelEvent, int, const EmscriptenWheelEvent *>;
+            static constexpr auto KeyDelegate = delegate<&EmscriptenWindow::handleKeyEvent, int, const EmscriptenKeyboardEvent *>;
+            static constexpr auto TouchDelegate = delegate<&EmscriptenWindow::handleTouchEvent, int, const EmscriptenTouchEvent *>;
+
             // Input
-            emscripten_set_mousemove_callback("#canvas", this, 0, EmscriptenWindow::handleMouseEvent);
+            emscripten_set_mousemove_callback("#canvas", this, 0, MouseDelegate);
 
-            emscripten_set_mousedown_callback("#canvas", this, 0, EmscriptenWindow::handleMouseEvent);
-            emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, this, 0, EmscriptenWindow::handleMouseEvent);
-            emscripten_set_wheel_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, EmscriptenWindow::handleWheelEvent);
+            emscripten_set_mousedown_callback("#canvas", this, 0, MouseDelegate);
+            emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, this, 0, MouseDelegate);
+            emscripten_set_wheel_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, WheelDelegate);
 
-            emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, EmscriptenWindow::handleKeyEvent);
-            emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, EmscriptenWindow::handleKeyEvent);
+            emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, KeyDelegate);
+            emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, KeyDelegate);
 
-            emscripten_set_touchstart_callback("#canvas", this, 0, EmscriptenWindow::handleTouchEvent);
-            emscripten_set_touchend_callback("#canvas", this, 0, EmscriptenWindow::handleTouchEvent);
+            emscripten_set_touchmove_callback("#canvas", this, 0, TouchDelegate);
+
+            emscripten_set_touchstart_callback("#canvas", this, 0, TouchDelegate);
+            emscripten_set_touchend_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, this, 0, TouchDelegate);
         }
 
         static Input::MouseButton::MouseButton convertMouseButton(unsigned short id)
@@ -81,38 +95,43 @@ namespace Window {
             }
         }
 
-        static EM_BOOL handleMouseEvent(int eventType, const EmscriptenMouseEvent *mouseEvent, void *userData)
+        EM_BOOL handleMouseEvent(int eventType, const EmscriptenMouseEvent *mouseEvent)
         {
-            EmscriptenWindow *_this = static_cast<EmscriptenWindow *>(userData);
+            InterfacesVector position = { mouseEvent->targetX, mouseEvent->targetY };
+            InterfacesVector screenPosition = { mouseEvent->screenX, mouseEvent->screenY };
+
+            bool handled = false;
 
             switch (eventType) {
-            case EMSCRIPTEN_EVENT_MOUSEMOVE:
-                _this->mLastMousePosition = { mouseEvent->targetX, mouseEvent->targetY };
-                return _this->injectPointerMove({ _this->mLastMousePosition, { mouseEvent->screenX, mouseEvent->screenY },
+            case EMSCRIPTEN_EVENT_MOUSEMOVE:                
+                handled = injectPointerMove({ position, screenPosition,
                     { mouseEvent->movementX, mouseEvent->movementY } });
+                break;
             case EMSCRIPTEN_EVENT_MOUSEDOWN:
-                _this->mLastMousePosition = { mouseEvent->targetX, mouseEvent->targetY };
-                return _this->injectPointerPress({ _this->mLastMousePosition, { mouseEvent->screenX, mouseEvent->screenY },
+                handled = injectPointerPress({ position, screenPosition,
                     convertMouseButton(mouseEvent->button) });
+                break;
             case EMSCRIPTEN_EVENT_MOUSEUP:
-                return _this->injectPointerRelease({ _this->mLastMousePosition, { mouseEvent->screenX, mouseEvent->screenY },
+                handled = injectPointerRelease({ position, screenPosition,
                     convertMouseButton(mouseEvent->button) });
+                break;
             }
 
-            return EM_FALSE;
+            mLastMousePosition = position;
+
+            return handled;
         }
 
-        static EM_BOOL handleKeyEvent(int eventType, const EmscriptenKeyboardEvent *keyEvent, void *userData)
+        EM_BOOL handleKeyEvent(int eventType, const EmscriptenKeyboardEvent *keyEvent)
         {
-            EmscriptenWindow *_this = static_cast<EmscriptenWindow *>(userData);
 
-            _this->mKeyDown[Input::Key::Shift] = keyEvent->shiftKey;
-            _this->mKeyDown[Input::Key::Control] = keyEvent->ctrlKey;
-            _this->mKeyDown[Input::Key::Alt] = keyEvent->altKey;
+            mKeyDown[Input::Key::Shift] = keyEvent->shiftKey;
+            mKeyDown[Input::Key::Control] = keyEvent->ctrlKey;
+            mKeyDown[Input::Key::Alt] = keyEvent->altKey;
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_KEYDOWN:
-                _this->mKeyDown[keyEvent->keyCode] = true;
+                mKeyDown[keyEvent->keyCode] = true;
                 char text;
                 switch (keyEvent->keyCode) {
                 case Input::Key::Shift:
@@ -123,46 +142,49 @@ namespace Window {
                 default:
                     text = keyEvent->key[0];
                 }
-                return _this->injectKeyPress({ static_cast<Input::Key::Key>(keyEvent->keyCode), text, _this->controlKeyState() });
+                return injectKeyPress({ static_cast<Input::Key::Key>(keyEvent->keyCode), text, controlKeyState() });
             case EMSCRIPTEN_EVENT_KEYUP:
-                _this->mKeyDown[keyEvent->keyCode] = false;
-                return _this->injectKeyRelease({ static_cast<Input::Key::Key>(keyEvent->keyCode), 0, _this->controlKeyState() });
+                mKeyDown[keyEvent->keyCode] = false;
+                return injectKeyRelease({ static_cast<Input::Key::Key>(keyEvent->keyCode), 0, controlKeyState() });
             }
 
             return EM_FALSE;
         }
 
-        static EM_BOOL handleWheelEvent(int eventType, const EmscriptenWheelEvent *wheelEvent, void *userData)
+        EM_BOOL handleWheelEvent(int eventType, const EmscriptenWheelEvent *wheelEvent)
         {
-            EmscriptenWindow *_this = static_cast<EmscriptenWindow *>(userData);
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_WHEEL:
-                return _this->injectAxisEvent(Input::AxisEventArgs { Input::AxisEventArgs::WHEEL, static_cast<float>(wheelEvent->deltaY) });            
+                return injectAxisEvent(Input::AxisEventArgs { Input::AxisEventArgs::WHEEL, static_cast<float>(wheelEvent->deltaY) });
             }
 
             return EM_FALSE;
         }
 
-        static EM_BOOL handleTouchEvent(int eventType, const EmscriptenTouchEvent *touchEvent, void *userData)
+        EM_BOOL handleTouchEvent(int eventType, const EmscriptenTouchEvent *touchEvent)
         {
-            EmscriptenWindow *_this = static_cast<EmscriptenWindow *>(userData);
+            InterfacesVector position = { touchEvent->touches[0].targetX, touchEvent->touches[0].targetY };
+            InterfacesVector screenPosition = { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY };
+
+            bool handled = false;
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_TOUCHMOVE:
-                _this->mLastMousePosition = { touchEvent->touches[0].targetX, touchEvent->touches[0].targetY };
-                return _this->injectPointerMove({ _this->mLastMousePosition, { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY },
-                    { /* touchEvent->touches[0].movementX, touchEvent->touches[0].movementY*/0, 0 } });
+                handled = injectPointerMove({ position, screenPosition, position - mLastMousePosition });
+                break;
             case EMSCRIPTEN_EVENT_TOUCHSTART:
-                _this->mLastMousePosition = { touchEvent->touches[0].targetX, touchEvent->touches[0].targetY };
-                return _this->injectPointerPress({ _this->mLastMousePosition, { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY },
-                    Input::MouseButton::LEFT_BUTTON });
+                injectPointerMove({ position, screenPosition, position - mLastMousePosition });
+                handled = injectPointerPress({ position, screenPosition, Input::MouseButton::LEFT_BUTTON });
+                break;
             case EMSCRIPTEN_EVENT_TOUCHEND:
-                return _this->injectPointerRelease({ _this->mLastMousePosition, { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY },
-                    Input::MouseButton::LEFT_BUTTON });
+                handled = injectPointerRelease({ position, screenPosition, Input::MouseButton::LEFT_BUTTON });
+                break;
             }
 
-            return EM_FALSE;
+            mLastMousePosition = position;
+
+            return handled;
         }
 
         Input::ControlKeyState controlKeyState() const
@@ -400,7 +422,6 @@ namespace Window {
     {
         return {};
     }
-
 }
 }
 
