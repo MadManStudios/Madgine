@@ -114,7 +114,7 @@ namespace Tools {
 
         void unhandled_exception()
         {
-            throw 0;
+            throw;
         }
 
         DialogSettings mSettings;

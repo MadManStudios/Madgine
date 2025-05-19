@@ -82,7 +82,7 @@ void CoroutineBehaviorState::return_void()
 
 void CoroutineBehaviorState::unhandled_exception()
 {
-    throw 0;
+    throw;
 }
 
 void CoroutineBehaviorState::set_error(BehaviorError result)

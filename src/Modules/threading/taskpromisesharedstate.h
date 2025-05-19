@@ -12,7 +12,6 @@ namespace Threading {
         ~TaskPromiseSharedStateBase();
 
         std::mutex mMutex;
-        std::exception_ptr mException;
 
         bool mAttached;
         bool mDestroyed;
@@ -22,9 +21,6 @@ namespace Threading {
         void finalize();
 
         void notifyDestroyed();
-
-        void setException(std::exception_ptr exception);
-        void rethrowIfException();
     };
 
     template <typename T>
@@ -42,13 +38,13 @@ namespace Threading {
         bool valid()
         {
             std::lock_guard guard { mMutex };
-            return mFlag.isSet() || mException || !mDestroyed;
+            return mFlag.isSet() || !mDestroyed;
         }
 
         bool is_ready()
         {
             std::lock_guard guard { mMutex };
-            return mFlag.isSet() || mException;
+            return mFlag.isSet();
         }
 
         void set_value(T val)
@@ -64,7 +60,6 @@ namespace Threading {
         const T &get()
         {
             std::lock_guard guard { mMutex };
-            rethrowIfException();
             assert(mFlag.isSet());
             return std::get<0>(*mFlag);
         }
@@ -90,13 +85,13 @@ namespace Threading {
         bool valid()
         {
             std::lock_guard guard { mMutex };
-            return mFlag.isSet() || mException || !mDestroyed;
+            return mFlag.isSet() || !mDestroyed;
         }
 
         bool is_ready()
         {
             std::lock_guard guard { mMutex };
-            return mFlag.isSet() || mException;
+            return mFlag.isSet();
         }
 
         void set_value()
@@ -110,7 +105,6 @@ namespace Threading {
         void get()
         {
             std::lock_guard guard { mMutex };
-            rethrowIfException();
             assert(mFlag.isSet());
         }
 

@@ -79,10 +79,7 @@ namespace Threading {
 
         void unhandled_exception()
         {
-            if (mState)
-                mState->setException(std::current_exception());
-            else
-                throw;
+            throw;
         }
 
         void then_return(TaskHandle handle)
