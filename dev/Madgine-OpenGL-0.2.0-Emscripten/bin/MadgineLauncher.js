@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpz6ond9jv.js
+// include: /tmp/tmpv5kbjf26.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,12 +212,12 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmpz6ond9jv.js
-// include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
+// end include: /tmp/tmpv5kbjf26.js
+// include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
  * Minified by jsDelivr using Terser v5.39.0.
- * Original file: /npm/@sentry/wasm@9.19.0/build/npm/cjs/index.js
+ * Original file: /npm/9.19.0/build/npm/cjs/index.js
  *
  * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
  */
@@ -383,12 +383,17 @@ window.sentryOnLoad = function () {
     Sentry.init(
         {
             sendDefaultPii: !0,
-            release: "my-project-name@2.3.12",
+            release: "Madgine@0.2.0",
             integrations: [wasmIntegration()],
         })
 }
 
-!function (n, e, r, t, o, i, a, c, s) { for (var u = s, f = 0; f < document.scripts.length; f++)if (document.scripts[f].src.indexOf(i) > -1) { u && "no" === document.scripts[f].getAttribute("data-lazy") && (u = !1); break } var p = []; function l(n) { return "e" in n } function d(n) { return "p" in n } function _(n) { return "f" in n } var v = []; function y(n) { u && (l(n) || d(n) || _(n) && n.f.indexOf("capture") > -1 || _(n) && n.f.indexOf("showReportDialog") > -1) && L(), v.push(n) } function h() { y({ e: [].slice.call(arguments) }) } function g(n) { y({ p: n }) } function E() { try { n.SENTRY_SDK_SOURCE = "loader"; var e = n[o], i = e.init; e.init = function (o) { n.removeEventListener(r, h), n.removeEventListener(t, g); var a = c; for (var s in o) Object.prototype.hasOwnProperty.call(o, s) && (a[s] = o[s]); !function (n, e) { var r = n.integrations || []; if (!Array.isArray(r)) return; var t = r.map((function (n) { return n.name })); n.tracesSampleRate && -1 === t.indexOf("BrowserTracing") && (e.browserTracingIntegration ? r.push(e.browserTracingIntegration({ enableInp: !0 })) : e.BrowserTracing && r.push(new e.BrowserTracing)); (n.replaysSessionSampleRate || n.replaysOnErrorSampleRate) && -1 === t.indexOf("Replay") && (e.replayIntegration ? r.push(e.replayIntegration()) : e.Replay && r.push(new e.Replay)); n.integrations = r }(a, e), i(a) }, setTimeout((function () { return function (e) { try { "function" == typeof n.sentryOnLoad && (n.sentryOnLoad(), n.sentryOnLoad = void 0) } catch (n) { console.error("Error while calling `sentryOnLoad` handler:"), console.error(n) } try { for (var r = 0; r < p.length; r++)"function" == typeof p[r] && p[r](); p.splice(0); for (r = 0; r < v.length; r++) { _(i = v[r]) && "init" === i.f && e.init.apply(e, i.a) } m() || e.init(); var t = n.onerror, o = n.onunhandledrejection; for (r = 0; r < v.length; r++) { var i; if (_(i = v[r])) { if ("init" === i.f) continue; e[i.f].apply(e, i.a) } else l(i) && t ? t.apply(n, i.e) : d(i) && o && o.apply(n, [i.p]) } } catch (n) { console.error(n) } }(e) })) } catch (n) { console.error(n) } } var O = !1; function L() { if (!O) { O = !0; var n = e.scripts[0], r = e.createElement("script"); r.src = a, r.crossOrigin = "anonymous", r.addEventListener("load", E, { once: !0, passive: !0 }), n.parentNode.insertBefore(r, n) } } function m() { var e = n.__SENTRY__, r = void 0 !== e && e.version; return r ? !!e[r] : !(void 0 === e || !e.hub || !e.hub.getClient()) } n[o] = n[o] || {}, n[o].onLoad = function (n) { m() ? n() : p.push(n) }, n[o].forceLoad = function () { setTimeout((function () { L() })) }, ["init", "addBreadcrumb", "captureMessage", "captureException", "captureEvent", "configureScope", "withScope", "showReportDialog"].forEach((function (e) { n[o][e] = function () { y({ f: e, a: arguments }) } })), n.addEventListener(r, h), n.addEventListener(t, g), u || setTimeout((function () { L() })) }(window, document, "error", "unhandledrejection", "Sentry", 'f374f10cbc10297d79d8b7be16390381', 'https://browser.sentry-cdn.com/8.55.0/bundle.tracing.replay.min.js', { "dsn": "https://f374f10cbc10297d79d8b7be16390381@o4508897651785728.ingest.de.sentry.io/4508897675968592", "tracesSampleRate": 1, "replaysSessionSampleRate": 0.1, "replaysOnErrorSampleRate": 1 }, false);// end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-src/js/header.js
+Module.sentry_capture_event = function (message) {
+    Sentry.captureMessage(message);
+}
+
+!function (n, e, r, t, o, i, a, c, s) { for (var u = s, f = 0; f < document.scripts.length; f++)if (document.scripts[f].src.indexOf(i) > -1) { u && "no" === document.scripts[f].getAttribute("data-lazy") && (u = !1); break } var p = []; function l(n) { return "e" in n } function d(n) { return "p" in n } function _(n) { return "f" in n } var v = []; function y(n) { u && (l(n) || d(n) || _(n) && n.f.indexOf("capture") > -1 || _(n) && n.f.indexOf("showReportDialog") > -1) && L(), v.push(n) } function h() { y({ e: [].slice.call(arguments) }) } function g(n) { y({ p: n }) } function E() { try { n.SENTRY_SDK_SOURCE = "loader"; var e = n[o], i = e.init; e.init = function (o) { n.removeEventListener(r, h), n.removeEventListener(t, g); var a = c; for (var s in o) Object.prototype.hasOwnProperty.call(o, s) && (a[s] = o[s]); !function (n, e) { var r = n.integrations || []; if (!Array.isArray(r)) return; var t = r.map((function (n) { return n.name })); n.tracesSampleRate && -1 === t.indexOf("BrowserTracing") && (e.browserTracingIntegration ? r.push(e.browserTracingIntegration({ enableInp: !0 })) : e.BrowserTracing && r.push(new e.BrowserTracing)); (n.replaysSessionSampleRate || n.replaysOnErrorSampleRate) && -1 === t.indexOf("Replay") && (e.replayIntegration ? r.push(e.replayIntegration()) : e.Replay && r.push(new e.Replay)); n.integrations = r }(a, e), i(a) }, setTimeout((function () { return function (e) { try { "function" == typeof n.sentryOnLoad && (n.sentryOnLoad(), n.sentryOnLoad = void 0) } catch (n) { console.error("Error while calling `sentryOnLoad` handler:"), console.error(n) } try { for (var r = 0; r < p.length; r++)"function" == typeof p[r] && p[r](); p.splice(0); for (r = 0; r < v.length; r++) { _(i = v[r]) && "init" === i.f && e.init.apply(e, i.a) } m() || e.init(); var t = n.onerror, o = n.onunhandledrejection; for (r = 0; r < v.length; r++) { var i; if (_(i = v[r])) { if ("init" === i.f) continue; e[i.f].apply(e, i.a) } else l(i) && t ? t.apply(n, i.e) : d(i) && o && o.apply(n, [i.p]) } } catch (n) { console.error(n) } }(e) })) } catch (n) { console.error(n) } } var O = !1; function L() { if (!O) { O = !0; var n = e.scripts[0], r = e.createElement("script"); r.src = a, r.crossOrigin = "anonymous", r.addEventListener("load", E, { once: !0, passive: !0 }), n.parentNode.insertBefore(r, n) } } function m() { var e = n.__SENTRY__, r = void 0 !== e && e.version; return r ? !!e[r] : !(void 0 === e || !e.hub || !e.hub.getClient()) } n[o] = n[o] || {}, n[o].onLoad = function (n) { m() ? n() : p.push(n) }, n[o].forceLoad = function () { setTimeout((function () { L() })) }, ["init", "addBreadcrumb", "captureMessage", "captureException", "captureEvent", "configureScope", "withScope", "showReportDialog"].forEach((function (e) { n[o][e] = function () { y({ f: e, a: arguments }) } })), n.addEventListener(r, h), n.addEventListener(t, g), u || setTimeout((function () { L() })) }(window, document, "error", "unhandledrejection", "Sentry", 'f374f10cbc10297d79d8b7be16390381', 'https://browser.sentry-cdn.com/8.55.0/bundle.tracing.replay.min.js', { "dsn": "https://f374f10cbc10297d79d8b7be16390381@o4508897651785728.ingest.de.sentry.io/4508897675968592", "tracesSampleRate": 1, "replaysSessionSampleRate": 0.1, "replaysOnErrorSampleRate": 1 }, false);
+// end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 
 var arguments_ = [];
@@ -6619,6 +6624,125 @@ async function createWasm() {
 
   
   
+  
+  
+  var registerTouchEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
+      JSEvents.touchEvent ||= _malloc(1552);
+  
+      target = findEventTarget(target);
+  
+      var touchEventHandlerFunc = (e) => {
+        var t, touches = {}, et = e.touches;
+        // To ease marshalling different kinds of touches that browser reports (all touches are listed in e.touches,
+        // only changed touches in e.changedTouches, and touches on target at a.targetTouches), mark a boolean in
+        // each Touch object so that we can later loop only once over all touches we see to marshall over to Wasm.
+  
+        for (let t of et) {
+          // Browser might recycle the generated Touch objects between each frame (Firefox on Android), so reset any
+          // changed/target states we may have set from previous frame.
+          t.isChanged = t.onTarget = 0;
+          touches[t.identifier] = t;
+        }
+        // Mark which touches are part of the changedTouches list.
+        for (let t of e.changedTouches) {
+          t.isChanged = 1;
+          touches[t.identifier] = t;
+        }
+        // Mark which touches are part of the targetTouches list.
+        for (let t of e.targetTouches) {
+          touches[t.identifier].onTarget = 1;
+        }
+  
+        var touchEvent = JSEvents.touchEvent;
+        HEAPF64[((touchEvent)>>3)] = e.timeStamp;
+        HEAP8[touchEvent + 12] = e.ctrlKey;
+        HEAP8[touchEvent + 13] = e.shiftKey;
+        HEAP8[touchEvent + 14] = e.altKey;
+        HEAP8[touchEvent + 15] = e.metaKey;
+        var idx = touchEvent + 16;
+        var targetRect = getBoundingClientRect(target);
+        var numTouches = 0;
+        for (let t of Object.values(touches)) {
+          var idx32 = ((idx)>>2); // Pre-shift the ptr to index to HEAP32 to save code size
+          HEAP32[idx32 + 0] = t.identifier;
+          HEAP32[idx32 + 1] = t.screenX;
+          HEAP32[idx32 + 2] = t.screenY;
+          HEAP32[idx32 + 3] = t.clientX;
+          HEAP32[idx32 + 4] = t.clientY;
+          HEAP32[idx32 + 5] = t.pageX;
+          HEAP32[idx32 + 6] = t.pageY;
+          HEAP8[idx + 28] = t.isChanged;
+          HEAP8[idx + 29] = t.onTarget;
+          HEAP32[idx32 + 8] = t.clientX - (targetRect.left | 0);
+          HEAP32[idx32 + 9] = t.clientY - (targetRect.top  | 0);
+  
+          idx += 48;
+  
+          if (++numTouches > 31) {
+            break;
+          }
+        }
+        HEAP32[(((touchEvent)+(8))>>2)] = numTouches;
+  
+        if (getWasmTableEntry(callbackfunc)(eventTypeId, touchEvent, userData)) e.preventDefault();
+      };
+  
+      var eventHandler = {
+        target,
+        allowsDeferredCalls: eventTypeString == 'touchstart' || eventTypeString == 'touchend',
+        eventTypeString,
+        callbackfunc,
+        handlerFunc: touchEventHandlerFunc,
+        useCapture
+      };
+      return JSEvents.registerOrRemoveHandler(eventHandler);
+    };
+  var _emscripten_set_touchend_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) =>
+      registerTouchEventCallback(target, userData, useCapture, callbackfunc, 23, "touchend", targetThread);
+
+  var _emscripten_set_touchstart_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) =>
+      registerTouchEventCallback(target, userData, useCapture, callbackfunc, 22, "touchstart", targetThread);
+
+  
+  
+  
+  var registerWheelEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
+      JSEvents.wheelEvent ||= _malloc(96);
+  
+      // The DOM Level 3 events spec event 'wheel'
+      var wheelHandlerFunc = (e = event) => {
+        var wheelEvent = JSEvents.wheelEvent;
+        fillMouseEventData(wheelEvent, e, target);
+        HEAPF64[(((wheelEvent)+(64))>>3)] = e["deltaX"];
+        HEAPF64[(((wheelEvent)+(72))>>3)] = e["deltaY"];
+        HEAPF64[(((wheelEvent)+(80))>>3)] = e["deltaZ"];
+        HEAP32[(((wheelEvent)+(88))>>2)] = e["deltaMode"];
+        if (getWasmTableEntry(callbackfunc)(eventTypeId, wheelEvent, userData)) e.preventDefault();
+      };
+  
+      var eventHandler = {
+        target,
+        allowsDeferredCalls: true,
+        eventTypeString,
+        callbackfunc,
+        handlerFunc: wheelHandlerFunc,
+        useCapture
+      };
+      return JSEvents.registerOrRemoveHandler(eventHandler);
+    };
+  
+  var _emscripten_set_wheel_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) => {
+      target = findEventTarget(target);
+      if (!target) return -4;
+      if (typeof target.onwheel != 'undefined') {
+        return registerWheelEventCallback(target, userData, useCapture, callbackfunc, 9, "wheel", targetThread);
+      } else {
+        return -1;
+      }
+    };
+
+  
+  
   class HandleAllocator {
       allocated = [undefined];
       freelist = [];
@@ -8232,8 +8356,9 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  778040: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 778092: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); }
+  778040: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 778086: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 778138: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); }
 };
 var wasmImports = {
   /** @export */
@@ -8342,6 +8467,12 @@ var wasmImports = {
   emscripten_set_mouseup_callback_on_thread: _emscripten_set_mouseup_callback_on_thread,
   /** @export */
   emscripten_set_resize_callback_on_thread: _emscripten_set_resize_callback_on_thread,
+  /** @export */
+  emscripten_set_touchend_callback_on_thread: _emscripten_set_touchend_callback_on_thread,
+  /** @export */
+  emscripten_set_touchstart_callback_on_thread: _emscripten_set_touchstart_callback_on_thread,
+  /** @export */
+  emscripten_set_wheel_callback_on_thread: _emscripten_set_wheel_callback_on_thread,
   /** @export */
   emscripten_start_fetch: _emscripten_start_fetch,
   /** @export */
