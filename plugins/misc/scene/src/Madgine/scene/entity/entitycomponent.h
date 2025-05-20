@@ -24,10 +24,6 @@ namespace Scene {
 #define ENTITYCOMPONENTVIRTUALIMPL_IMPL(Name) \
     VIRTUALUNIQUECOMPONENT(Name)
 
-#define ENTITYCOMPONENT_IMPL(Name, Type) \
-    NAMED_UNIQUECOMPONENT(Name, Type)    \
-    UNIQUECOMPONENT2(Engine::Scene::Entity::EntityComponentList<Type>, _2)
-
     }
 }
 }

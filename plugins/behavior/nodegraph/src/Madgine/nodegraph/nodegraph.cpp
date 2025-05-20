@@ -869,7 +869,7 @@ namespace NodeGraph {
 
     std::unique_ptr<NodeBase> NodeGraph::createNode(std::string_view name)
     {
-        return NodeRegistry::get(NodeRegistry::sComponentsByName().at(name)).construct(*this);
+        return construct(NodeRegistry::get(NodeRegistry::sComponentsByName().at(name)), *this);
     }
 
     Serialize::StreamResult NodeGraph::readNode(Serialize::FormattedSerializeStream &in, std::unique_ptr<NodeBase> &node)

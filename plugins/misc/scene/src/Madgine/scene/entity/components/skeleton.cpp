@@ -11,7 +11,7 @@
 
 #include "Meta/math/transformation.h"
 
-ENTITYCOMPONENT_IMPL(Skeleton, Engine::Scene::Entity::Skeleton);
+NAMED_UNIQUECOMPONENT(Skeleton, Engine::Scene::Entity::Skeleton);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Skeleton)
 PROPERTY(Skeleton, get, set)

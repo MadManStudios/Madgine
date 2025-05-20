@@ -11,7 +11,7 @@ namespace UniqueComponent {
 
         template <typename... Args>
         Selector(Args&&... args)
-            : mValue(Registry::sComponents().at(0).construct(std::forward<Args>(args)...))
+            : mValue(construct(Registry::sComponents().at(0), std::forward<Args>(args)...))
         {
         }
 
