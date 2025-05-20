@@ -113,7 +113,8 @@ namespace Scene {
         std::mutex mAnimationMutex;
         std::vector<Entity::AnimationState *> mAnimationStates;
 
-        Entity::EntityComponentListContainer<std::vector<Placeholder<0>>> mEntityComponentLists;
+        //Entity::EntityComponentListContainer<std::vector<Placeholder<0>>> mEntityComponentLists;
+        UniqueComponent::Container<std::vector<std::unique_ptr<Entity::EntityComponentListBase>>, Entity::EntityComponentRegistry, Entity::EntityComponentListBase> mEntityComponentLists;
 
     public:
         MEMBER_OFFSET_CONTAINER(mSceneComponents, , SceneComponentContainer<Serialize::SerializableContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>, NoOpFunctor>>);

@@ -16,7 +16,7 @@ namespace Scene {
         DERIVE_FUNCTION(relocateComponent, const EntityComponentHandle<EntityComponentBase> &, Entity *)
 
         template <typename T>
-        struct EntityComponentList : EntityComponentListComponent<EntityComponentList<T>> {
+        struct EntityComponentList : EntityComponentListBase {
 
             using Vector = container_api<typename replace<typename T::Container>::template type<T>>;
 

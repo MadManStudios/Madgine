@@ -8,7 +8,7 @@
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 
-ENTITYCOMPONENT_IMPL(PointLight, Engine::Scene::Entity::PointLight);
+NAMED_UNIQUECOMPONENT(PointLight, Engine::Scene::Entity::PointLight);
 
 METATABLE_BEGIN(Engine::Scene::Entity::PointLight)
 MEMBER(mRange)

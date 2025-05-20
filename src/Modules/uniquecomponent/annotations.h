@@ -24,9 +24,9 @@ namespace UniqueComponent {
         {
         }
 
-        R construct(Args&&... args) const
+        friend auto tag_invoke(construct_t, const ConstructorImpl &object, Args &&...args)
         {
-            return mCtor(std::forward<Args>(args)...);
+            return object.mCtor(std::forward<Args>(args)...);
         }
 
         R (*mCtor)(Args&&...);

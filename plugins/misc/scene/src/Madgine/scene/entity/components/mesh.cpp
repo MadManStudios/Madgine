@@ -9,7 +9,7 @@
 
 #include "Meta/keyvalue/valuetype.h"
 
-ENTITYCOMPONENT_IMPL(Mesh, Engine::Scene::Entity::Mesh);
+NAMED_UNIQUECOMPONENT(Mesh, Engine::Scene::Entity::Mesh);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Mesh)
 MEMBER(mMesh)

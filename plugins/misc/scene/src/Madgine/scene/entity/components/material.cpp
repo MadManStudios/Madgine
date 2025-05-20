@@ -7,7 +7,7 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-ENTITYCOMPONENT_IMPL(Material, Engine::Scene::Entity::Material);
+NAMED_UNIQUECOMPONENT(Material, Engine::Scene::Entity::Material);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Material)
 MEMBER(mMaterial)

@@ -9,16 +9,14 @@
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename C, typename Registry>
+    template <typename C, typename Registry, typename _Base = Registry::Base>
     struct Container : C {
 
-        typedef typename Registry::Base Base;
+        using Base = _Base;
 
         template <typename... Args>
-        requires requires(typename Registry::Annotations &a, Args&&... args) {
-            a.construct(args...);
-        }
-        Container(Args&&... arg)
+            requires tag_invocable<construct_t, const typename Registry::Annotations, Args...>
+        Container(Args &&...arg)
         {
             size_t count = Registry::sComponents().size();
             mSortedComponents.reserve(count);
@@ -26,7 +24,7 @@ namespace UniqueComponent {
                 this->reserve(count);
             }
             for (const auto &annotations : Registry::sComponents()) {
-                auto p = annotations.construct(arg...);
+                auto p = construct(annotations, arg...);
                 mSortedComponents.push_back(p.get());
                 Engine::emplace(static_cast<C &>(*this), C::end(), std::move(p));
             }

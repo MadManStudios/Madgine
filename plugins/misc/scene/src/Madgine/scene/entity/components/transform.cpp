@@ -11,7 +11,7 @@
 
 
 
-ENTITYCOMPONENT_IMPL(Transform, Engine::Scene::Entity::Transform);
+NAMED_UNIQUECOMPONENT(Transform, Engine::Scene::Entity::Transform);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Transform)
 MEMBER(mPosition)
