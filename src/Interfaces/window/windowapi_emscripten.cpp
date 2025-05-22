@@ -381,10 +381,6 @@ namespace Window {
             if (!eglGetConfigAttrib(sDisplay, config, EGL_NATIVE_VISUAL_ID, &format))
                 return nullptr;
 
-            // sNativeWindow.wait();
-
-            // ANativeWindow_setBuffersGeometry(sNativeWindow, 0, 0, format);
-
             handle = eglCreateWindowSurface(sDisplay, config, 0, 0);
             if (!handle)
                 return nullptr;

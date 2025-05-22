@@ -113,7 +113,6 @@ namespace Scene {
         std::mutex mAnimationMutex;
         std::vector<Entity::AnimationState *> mAnimationStates;
 
-        //Entity::EntityComponentListContainer<std::vector<Placeholder<0>>> mEntityComponentLists;
         UniqueComponent::Container<std::vector<std::unique_ptr<Entity::EntityComponentListBase>>, Entity::EntityComponentRegistry, Entity::EntityComponentListBase> mEntityComponentLists;
 
     public:

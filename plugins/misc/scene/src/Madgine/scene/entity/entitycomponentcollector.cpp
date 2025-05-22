@@ -10,7 +10,7 @@ DEFINE_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent)
 
 namespace Engine {
 namespace Scene {
-    namespace Entity {       
+    namespace Entity {
 
         std::unique_ptr<EntityComponentListBase> tag_invoke(construct_t, const EntityComponentListAnnotation &object)
         {

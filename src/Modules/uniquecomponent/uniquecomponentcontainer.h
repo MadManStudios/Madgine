@@ -9,10 +9,8 @@
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename C, typename Registry, typename _Base = typename Registry::Base>
-    struct Container : C {
-
-        using Base = _Base;
+    template <typename C, typename Registry, typename Base = typename Registry::Base>
+    struct Container : C {        
 
         template <typename... Args>
             requires tag_invocable<construct_t, const typename Registry::Annotations, Args...>
