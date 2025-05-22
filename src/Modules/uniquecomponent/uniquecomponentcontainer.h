@@ -9,7 +9,7 @@
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename C, typename Registry, typename _Base = Registry::Base>
+    template <typename C, typename Registry, typename _Base = typename Registry::Base>
     struct Container : C {
 
         using Base = _Base;
@@ -49,8 +49,8 @@ namespace UniqueComponent {
     };
 }
 
-template <typename C, typename Registry>
-struct underlying_container<UniqueComponent::Container<C, Registry>> {
+template <typename C, typename Registry, typename Base>
+struct underlying_container<UniqueComponent::Container<C, Registry, Base>> {
     typedef C type;
 };
 
