@@ -25,13 +25,3 @@ namespace Scene {
 }
 
 DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent, EntityComponentBase, Engine::UniqueComponent::Constructor<Engine::Scene::Entity::Entity *>, Engine::Scene::Entity::EntityComponentListAnnotation)
-
-namespace Engine {
-namespace Scene {
-    namespace Entity {
-
-        // MADGINE_SCENE_EXPORT std::map<std::string_view, IndexRef> &sComponentsByName();
-
-    }
-}
-}
