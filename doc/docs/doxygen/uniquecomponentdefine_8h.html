@@ -172,7 +172,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.2.0</span>
    </div>
   </td>
  </tr>
@@ -272,20 +272,20 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span>ns {                                                                                                                                                                \</div>
-<div class="line">    <span class="keyword">using </span>prefix##Registry = registry&lt;__VA_ARGS__&gt;;                                                                                                                               \</div>
-<div class="line">    <span class="keyword">using </span>prefix##BaseRegistry = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_registry.html">Engine::UniqueComponent::Registry&lt;__VA_ARGS__&gt;</a>;                                                                                                  \</div>
-<div class="line">    <span class="keyword">using </span>prefix##Collector = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_collector.html">Engine::UniqueComponent::Collector&lt;prefix##Registry&gt;</a>;                                                                                  \</div>
-<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;                                                                                                                                                         \</div>
-<div class="line">    <span class="keyword">using </span>prefix##Container = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_container.html">Engine::UniqueComponent::Container&lt;typename Engine::replace&lt;C&gt;::template</a> type&lt;std::unique_ptr&lt;<a class="code hl_define" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)&gt;&gt;, prefix##Registry&gt;; \</div>
-<div class="line">    <span class="keyword">using </span>prefix##Selector = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_selector.html">Engine::UniqueComponent::Selector&lt;prefix##Registry&gt;</a>;                                                                                    \</div>
-<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Base = FIRST(__VA_ARGS__)&gt;                                                                                                                     \</div>
-<div class="line">    <span class="keyword">using </span>prefix##Component = component&lt;Engine::UniqueComponent::Component&lt;T, prefix##Collector, Base&gt;&gt;;                                                                          \</div>
-<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Base = FIRST(__VA_ARGS__)&gt;                                                                                                                     \</div>
-<div class="line">    <span class="keyword">using </span>prefix##VirtualBase = component&lt;Engine::UniqueComponent::VirtualComponentBase&lt;T, prefix##Collector, Base&gt;&gt;;                                                             \</div>
-<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Base&gt;                                                                                                                                          \</div>
-<div class="line">    <span class="keyword">using </span>prefix##VirtualImpl = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">Engine::UniqueComponent::VirtualComponentImpl&lt;T, Base&gt;</a>;                                                                                \</div>
-<div class="line">    }                                                                                                                                                                             \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span>ns {                                                                                                                                                                       \</div>
+<div class="line">    <span class="keyword">using </span>prefix##Registry = registry&lt;__VA_ARGS__&gt;;                                                                                                                                      \</div>
+<div class="line">    <span class="keyword">using </span>prefix##BaseRegistry = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_registry.html">Engine::UniqueComponent::Registry&lt;__VA_ARGS__&gt;</a>;                                                                                                         \</div>
+<div class="line">    <span class="keyword">using </span>prefix##Collector = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_collector.html">Engine::UniqueComponent::Collector&lt;prefix##Registry&gt;</a>;                                                                                                      \</div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;                                                                                                                                                                \</div>
+<div class="line">    <span class="keyword">using </span>prefix##Container = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_container.html">Engine::UniqueComponent::Container&lt;typename Engine::replace&lt;C&gt;::template</a> type&lt;std::unique_ptr&lt;<a class="code hl_define" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)&gt;&gt;, prefix##Registry, <a class="code hl_define" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)&gt;; \</div>
+<div class="line">    <span class="keyword">using </span>prefix##Selector = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_selector.html">Engine::UniqueComponent::Selector&lt;prefix##Registry&gt;</a>;                                                                                                        \</div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Base = FIRST(__VA_ARGS__)&gt;                                                                                                                            \</div>
+<div class="line">    <span class="keyword">using </span>prefix##Component = component&lt;Engine::UniqueComponent::Component&lt;T, prefix##Collector, Base&gt;&gt;;                                                                                 \</div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Base = FIRST(__VA_ARGS__)&gt;                                                                                                                            \</div>
+<div class="line">    <span class="keyword">using </span>prefix##VirtualBase = component&lt;Engine::UniqueComponent::VirtualComponentBase&lt;T, prefix##Collector, Base&gt;&gt;;                                                                    \</div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Base&gt;                                                                                                                                                 \</div>
+<div class="line">    <span class="keyword">using </span>prefix##VirtualImpl = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">Engine::UniqueComponent::VirtualComponentImpl&lt;T, Base&gt;</a>;                                                                                                  \</div>
+<div class="line">    }                                                                                                                                                                                    \</div>
 <div class="line">    REGISTER_TYPE(ns::prefix##Registry)</div>
 <div class="ttc" id="amacros_8h_html_a95dfc80599f592f262b6d72516d365a9"><div class="ttname"><a href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a></div><div class="ttdeci">#define FIRST(...)</div><div class="ttdef"><b>Definition:</b> macros.h:22</div></div>
 <div class="ttc" id="astruct_engine_1_1_unique_component_1_1_collector_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_collector.html">Engine::UniqueComponent::Collector</a></div><div class="ttdef"><b>Definition:</b> uniquecomponentcollector.h:13</div></div>
@@ -428,7 +428,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 13 2025 18:03:26 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri May 23 2025 10:11:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

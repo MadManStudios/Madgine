@@ -172,7 +172,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.2.0</span>
    </div>
   </td>
  </tr>
@@ -234,6 +234,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle_3_01_entity_component_base_01_4.html">EntityComponentHandle&lt; EntityComponentBase &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list.html">EntityComponentList</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_annotation.html">EntityComponentListAnnotation</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">EntityComponentListBase</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -314,6 +316,8 @@ Functions</h2></td></tr>
 <tr class="separator:add2b96882155d578d912a69fee758296"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a172247e875fba0412337c147c58c1eaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a172247e875fba0412337c147c58c1eaa">resolveEntityComponentHandle</a> (<a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> *sceneMgr, size_t index, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt; handle)</td></tr>
 <tr class="separator:a172247e875fba0412337c147c58c1eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd4615621b7a09bc5c0ca02297387e7"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">EntityComponentListBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a4dd4615621b7a09bc5c0ca02297387e7">tag_invoke</a> (<a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>, const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_annotation.html">EntityComponentListAnnotation</a> &amp;object)</td></tr>
+<tr class="separator:a4dd4615621b7a09bc5c0ca02297387e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d804f15a8d9a0f4d3d1511433dc105a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a6d804f15a8d9a0f4d3d1511433dc105a">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> &amp;ptr, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;in, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> success=true, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy={})</td></tr>
 <tr class="separator:a6d804f15a8d9a0f4d3d1511433dc105a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -522,6 +526,34 @@ template&lt;typename T , typename Base  = EntityComponentBase&gt; </div>
           <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_generic_message_receiver.html">Serialize::GenericMessageReceiver</a>&#160;</td>
           <td class="paramname"><em>receiver</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4dd4615621b7a09bc5c0ca02297387e7" name="a4dd4615621b7a09bc5c0ca02297387e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd4615621b7a09bc5c0ca02297387e7">&#9670;&#160;</a></span>tag_invoke() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">EntityComponentListBase</a> &gt; Engine::Scene::Entity::tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_annotation.html">EntityComponentListAnnotation</a> &amp;&#160;</td>
+          <td class="paramname"><em>object</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -870,7 +902,7 @@ template&lt;typename T , typename Base  = EntityComponentBase&gt; </div>
 </div>
 </div>
 <a id="a6d804f15a8d9a0f4d3d1511433dc105a" name="a6d804f15a8d9a0f4d3d1511433dc105a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d804f15a8d9a0f4d3d1511433dc105a">&#9670;&#160;</a></span>tag_invoke()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d804f15a8d9a0f4d3d1511433dc105a">&#9670;&#160;</a></span>tag_invoke() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -918,7 +950,7 @@ template&lt;typename T , typename Base  = EntityComponentBase&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 13 2025 18:03:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri May 23 2025 10:11:11 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

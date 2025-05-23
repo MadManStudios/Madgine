@@ -172,7 +172,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.1.1</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.2.0</span>
    </div>
   </td>
  </tr>
@@ -200,6 +200,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_unique_component_1_1_constructor_impl-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::UniqueComponent::ConstructorImpl&lt; R, Args &gt; Struct Template Reference</div></div>
 </div><!--header-->
@@ -212,13 +213,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad81a9e199ff2e177827e927dc2f0dad3"><td class="memTemplParams" colspan="2">template&lt;typename T , typename ActualType &gt; </td></tr>
 <tr class="memitem:ad81a9e199ff2e177827e927dc2f0dad3"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_constructor_impl.html#ad81a9e199ff2e177827e927dc2f0dad3">ConstructorImpl</a> (<a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; ActualType &gt;)</td></tr>
 <tr class="separator:ad81a9e199ff2e177827e927dc2f0dad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21d8570a90aca4f4089c7c401638dae0"><td class="memItemLeft" align="right" valign="top">R&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_constructor_impl.html#a21d8570a90aca4f4089c7c401638dae0">construct</a> (Args &amp;&amp;... args) const</td></tr>
-<tr class="separator:a21d8570a90aca4f4089c7c401638dae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2e39acf15d664c97acfe5c90d67caa5c"><td class="memItemLeft" align="right" valign="top">R(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_constructor_impl.html#a2e39acf15d664c97acfe5c90d67caa5c">mCtor</a> )(Args &amp;&amp;...)</td></tr>
 <tr class="separator:a2e39acf15d664c97acfe5c90d67caa5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a394f7d78a5afddc1ae8fab05616754c6"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_component_1_1_constructor_impl.html#a394f7d78a5afddc1ae8fab05616754c6">tag_invoke</a> (<a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>, const <a class="el" href="struct_engine_1_1_unique_component_1_1_constructor_impl.html">ConstructorImpl</a> &amp;object, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a394f7d78a5afddc1ae8fab05616754c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad81a9e199ff2e177827e927dc2f0dad3" name="ad81a9e199ff2e177827e927dc2f0dad3"></a>
@@ -261,9 +265,9 @@ template&lt;typename T , typename ActualType &gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a21d8570a90aca4f4089c7c401638dae0" name="a21d8570a90aca4f4089c7c401638dae0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21d8570a90aca4f4089c7c401638dae0">&#9670;&#160;</a></span>construct()</h2>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a394f7d78a5afddc1ae8fab05616754c6" name="a394f7d78a5afddc1ae8fab05616754c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a394f7d78a5afddc1ae8fab05616754c6">&#9670;&#160;</a></span>tag_invoke</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,16 +278,32 @@ template&lt;typename R , typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">R <a class="el" href="struct_engine_1_1_unique_component_1_1_constructor_impl.html">Engine::UniqueComponent::ConstructorImpl</a>&lt; R, Args &gt;::construct </td>
+          <td class="memname">auto tag_invoke </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_unique_component_1_1_constructor_impl.html">ConstructorImpl</a>&lt; R, Args &gt; &amp;&#160;</td>
+          <td class="paramname"><em>object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>args</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -313,7 +333,7 @@ template&lt;typename R , typename... Args&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 13 2025 18:03:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri May 23 2025 10:11:12 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
