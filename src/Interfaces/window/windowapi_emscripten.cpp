@@ -103,7 +103,7 @@ namespace Window {
             bool handled = false;
 
             switch (eventType) {
-            case EMSCRIPTEN_EVENT_MOUSEMOVE:                
+            case EMSCRIPTEN_EVENT_MOUSEMOVE:
                 handled = injectPointerMove({ position, screenPosition,
                     { mouseEvent->movementX, mouseEvent->movementY } });
                 break;
@@ -124,28 +124,144 @@ namespace Window {
 
         EM_BOOL handleKeyEvent(int eventType, const EmscriptenKeyboardEvent *keyEvent)
         {
+            using namespace Input::Key;
+
+            static std::map<std::string, Input::Key::Key> sKeys {
+                { "Backspace", Backspace },
+                { "Tab", Tabulator },
+                { "Delete", Clear },
+                { "Enter", Return },
+                { "Pause", Pause },
+                { "CapsLock", Capslock },
+                { "Escape", Escape },
+                { "PageUp", PageUp },
+                { "PageDown", PageDown },
+                { "End", End },
+                { "Home", Home },
+                { "ArrowLeft", LeftArrow },
+                { "ArrowUp", UpArrow },
+                { "ArrowRight", RightArrow },
+                { "ArrowDown", DownArrow },
+                { "PrintScreen", PrintScreen },
+                { "Insert", Insert },
+                { "Delete", Delete },
+                { "Help", Help },
+                { "MetaLeft", LWin },
+                { "MetaRight", RWin },
+                { "NumLock", NumLock },
+                { "ScrollLock", ScrollLock },
+                { "ShiftLeft", LShift },
+                { "ShiftRight", RShift },
+                { "ControlLeft", LControl },
+                { "ControlRight", RControl },
+                { "AltLeft", LAlt },
+                { "AltRight", RAlt },
+
+                // Alpha
+                { "Space", Space },
+                { "KeyA", A },
+                { "KeyB", B },
+                { "KeyC", C },
+                { "KeyD", D },
+                { "KeyE", E },
+                { "KeyF", F },
+                { "KeyG", G },
+                { "KeyH", H },
+                { "KeyI", I },
+                { "KeyJ", J },
+                { "KeyK", K },
+                { "KeyL", L },
+                { "KeyM", M },
+                { "KeyN", N },
+                { "KeyO", O },
+                { "KeyP", P },
+                { "KeyQ", Q },
+                { "KeyR", R },
+                { "KeyS", S },
+                { "KeyT", T },
+                { "KeyU", U },
+                { "KeyV", V },
+                { "KeyW", W },
+                { "KeyX", X },
+                { "KeyY", Y },
+                { "KeyZ", Z },
+
+                { "Semicolon", OEM1 }, // US-Layout: ;:
+                { "?", Plus },
+                { "Comma", Comma },
+                { "Minus", Minus },
+                { "Period", Period },
+                { "Slash", OEM2 }, // US-Layout: /?
+                { "Backquote", OEM3 }, // US-Layout: `~
+                { "BracketLeft", OEM4 }, // US-Layout: [{
+                { "Backslash", OEM5 }, // US-Layout: \|
+                { "BracketRight", OEM6 }, // US-Layout: ]}
+                { "Quote", OEM7 }, // US-Layout: '"
+
+                // Num
+                { "Digit0", Alpha0 },
+                { "Digit1", Alpha1 },
+                { "Digit2", Alpha2 },
+                { "Digit3", Alpha3 },
+                { "Digit4", Alpha4 },
+                { "Digit5", Alpha5 },
+                { "Digit6", Alpha6 },
+                { "Digit7", Alpha7 },
+                { "Digit8", Alpha8 },
+                { "Digit9", Alpha9 },
+
+                { "Numpad0", Num0 },
+                { "Numpad1", Num1 },
+                { "Numpad2", Num2 },
+                { "Numpad3", Num3 },
+                { "Numpad4", Num4 },
+                { "Numpad5", Num5 },
+                { "Numpad6", Num6 },
+                { "Numpad7", Num7 },
+                { "Numpad8", Num8 },
+                { "Numpad9", Num9 },
+
+                // Special
+                { "NumpadMultiply", NumMulitply },
+                { "NumpadAdd", NumAdd },
+                { "NumpadComma", NumSeparator },
+                { "NumpadSubtract", NumSubtract },
+                { "NumpadDecimal", NumDecimal },
+                { "NumpadDivide", NumDivide },
+
+                { "F1", F1 },
+                { "F2", F2 },
+                { "F3", F3 },
+                { "F4", F4 },
+                { "F5", F5 },
+                { "F6", F6 },
+                { "F7", F7 },
+                { "F8", F8 },
+                { "F9", F9 },
+                { "F10", F10 },
+                { "F11", F11 },
+                { "F12", F12 },
+            };
+
+            Input::Key::Key key = sKeys[keyEvent->code];
+
+            LOG(keyEvent->code << ": " << key);
 
             mKeyDown[Input::Key::Shift] = keyEvent->shiftKey;
             mKeyDown[Input::Key::Control] = keyEvent->ctrlKey;
             mKeyDown[Input::Key::Alt] = keyEvent->altKey;
 
+            char text = 0;
+
             switch (eventType) {
             case EMSCRIPTEN_EVENT_KEYDOWN:
-                mKeyDown[keyEvent->keyCode] = true;
-                char text;
-                switch (keyEvent->keyCode) {
-                case Input::Key::Shift:
-                case Input::Key::Control:
-                case Input::Key::Alt:
-                    text = 0;
-                    break;
-                default:
+                mKeyDown[key] = true;                
+                if (keyEvent->key[1] == '\0')
                     text = keyEvent->key[0];
-                }
-                return injectKeyPress({ static_cast<Input::Key::Key>(keyEvent->keyCode), text, controlKeyState() });
+                return injectKeyPress({ key, text, controlKeyState() });
             case EMSCRIPTEN_EVENT_KEYUP:
-                mKeyDown[keyEvent->keyCode] = false;
-                return injectKeyRelease({ static_cast<Input::Key::Key>(keyEvent->keyCode), 0, controlKeyState() });
+                mKeyDown[key] = false;
+                return injectKeyRelease({ key, text, controlKeyState() });
             }
 
             return EM_FALSE;
