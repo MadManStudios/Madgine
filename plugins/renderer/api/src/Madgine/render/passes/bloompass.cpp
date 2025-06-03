@@ -32,14 +32,9 @@ namespace Render {
 
     void BloomPass::setup(RenderTarget *target)
     {
-        mPipeline.create({ .vs = "bloom", .ps = "bloom", .bufferSizes = { sizeof(BloomData) } });
+        setupImpl(target, "bloom", "bloom", { sizeof(BloomData) });
 
         target->addRenderPass(&mBlur);
-    }
-
-    void BloomPass::shutdown(RenderTarget *target)
-    {
-        mPipeline.reset();
     }
 
     void BloomPass::render(RenderTarget *target, size_t iteration)

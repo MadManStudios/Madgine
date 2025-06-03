@@ -12,15 +12,14 @@ namespace Render {
     struct MADGINE_CLIENT_TOOLS_EXPORT Im3DRenderPass : RenderPass {
         Im3DRenderPass(Camera *camera, int priority);
 
-        virtual void render(RenderTarget *target, size_t iteration) override;
+        void setup(RenderTarget *target) override;
+        void render(RenderTarget *target, size_t iteration) override;
 
-        virtual int priority() const override;
+        int priority() const override;
 
-        virtual std::string_view name() const override;
+        std::string_view name() const override;
 
     private:
-        PipelineLoader::Instance mPipeline;
-
         Camera *mCamera;
 
         int mPriority;

@@ -187,5 +187,15 @@ namespace Render {
             mFlipFlopIndices[startIndex + i] = mFlipFlopIndices[startIndex + i] ^ 1;
     }
 
+    void RenderTarget::addPostProcessing(std::string_view processing)
+    {
+        mPostProcessing.emplace_back(processing);
+    }
+
+    const std::vector<std::string> &RenderTarget::postProcessing() const
+    {
+        return mPostProcessing;
+    }
+
 }
 }

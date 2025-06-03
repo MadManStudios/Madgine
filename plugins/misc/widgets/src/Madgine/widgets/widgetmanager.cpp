@@ -54,9 +54,6 @@ namespace Widgets {
     static std::chrono::steady_clock::duration sDragTimeThreshold = 20ms;
 
     struct WidgetManager::WidgetManagerData {
-
-        Render::PipelineLoader::Instance mPipeline;
-
         UIAtlas mAtlas;
     };
 
@@ -77,8 +74,6 @@ namespace Widgets {
     {
         if (!co_await MainWindowComponentBase::init())
             co_return false;
-
-        mData->mPipeline.create({ .vs = "widgets", .ps = "widgets", .bufferSizes = { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) } });
 
         if (!co_await mData->mAtlas.createTexture())
             co_return false;
@@ -105,8 +100,6 @@ namespace Widgets {
         mTopLevelWidgets.clear();
 
         mData->mAtlas.reset();
-
-        mData->mPipeline.reset();
 
         co_await MainWindowComponentBase::finalize();
 
@@ -513,7 +506,7 @@ namespace Widgets {
     {
         mFrameClock.tick(std::chrono::steady_clock::now());
 
-        if (!mData->mPipeline.available())
+        if (!mPipeline.available())
             return;
 
         MainWindowComponentBase::render(target, iteration);
@@ -545,7 +538,7 @@ namespace Widgets {
         }
 
         {
-            auto perApp = mData->mPipeline->mapParameters<WidgetsPerApplication>(0);
+            auto perApp = mPipeline->mapParameters<WidgetsPerApplication>(0);
             perApp->c = target->getClipSpaceMatrix();
             perApp->screenSize = Vector2 { mClientSpace.mSize };
         }
@@ -556,42 +549,42 @@ namespace Widgets {
                     continue;
 
                 {
-                    auto parameters = mData->mPipeline->mapParameters<WidgetsPerObject>(2);
+                    auto parameters = mPipeline->mapParameters<WidgetsPerObject>(2);
                     parameters->hasDistanceField = bool(tex.mFlags & TextureFlag_IsDistanceField);
                     parameters->hasTexture = true;
                 }
 
                 {
-                    auto vertices = mData->mPipeline->mapVertices<Vertex[]>(target, vertexData.mTriangleVertices.size());
+                    auto vertices = mPipeline->mapVertices<Vertex[]>(target, vertexData.mTriangleVertices.size());
                     std::ranges::copy(vertexData.mTriangleVertices, vertices.mData);
                 }
 
                 if (tex.mResource)
-                    mData->mPipeline->bindResources(target, 2, tex.mResource);
+                    mPipeline->bindResources(target, 2, tex.mResource);
                 else
-                    mData->mPipeline->bindResources(target, 2, mData->mAtlas.resource());
+                    mPipeline->bindResources(target, 2, mData->mAtlas.resource());
 
-                mData->mPipeline->setGroupSize(3);
-                mData->mPipeline->render(target);
+                mPipeline->setGroupSize(3);
+                mPipeline->render(target);
             }
         }
         if (!renderData.lineVertices().empty()) {
             {
-                auto parameters = mData->mPipeline->mapParameters<WidgetsPerObject>(2);
+                auto parameters = mPipeline->mapParameters<WidgetsPerObject>(2);
                 parameters->hasDistanceField = false;
                 parameters->hasTexture = false;
             }
 
             if (mData->mAtlas.resource())
-                mData->mPipeline->bindResources(target, 2, mData->mAtlas.resource());
+                mPipeline->bindResources(target, 2, mData->mAtlas.resource());
 
             {
-                auto vertices = mData->mPipeline->mapVertices<Vertex[]>(target, renderData.lineVertices().size());
+                auto vertices = mPipeline->mapVertices<Vertex[]>(target, renderData.lineVertices().size());
                 std::ranges::copy(renderData.lineVertices(), vertices.mData);
             }
 
-            mData->mPipeline->setGroupSize(2);
-            mData->mPipeline->render(target);
+            mPipeline->setGroupSize(2);
+            mPipeline->render(target);
         }
     }
 
@@ -641,6 +634,11 @@ namespace Widgets {
     IntervalClock<> &WidgetManager::clock()
     {
         return mFrameClock;
+    }
+
+    void WidgetManager::setup(Render::RenderTarget *target)
+    {
+        setupImpl(target, "widgets", "widgets", { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) });
     }
 
 }

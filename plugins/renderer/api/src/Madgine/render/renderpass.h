@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Modules/threading/taskfuture.h"
-#include "renderdebuggable.h"
 #include "Madgine/render/future.h"
+#include "Modules/threading/taskfuture.h"
+#include "pipelineloader.h"
+#include "renderdebuggable.h"
 
 namespace Engine {
 namespace Render {
@@ -11,7 +12,7 @@ namespace Render {
         virtual ~RenderPass() = default;
 
         virtual void setup(RenderTarget *target) { }
-        virtual void shutdown(RenderTarget *target) { }
+        virtual void shutdown(RenderTarget *target);
         virtual void render(RenderTarget *target, size_t iteration) = 0;
         void preRender(std::vector<Threading::TaskFuture<RenderFuture>> &dependencies, RenderContext *context);
 
@@ -31,6 +32,10 @@ namespace Render {
     protected:
         void addDependency(RenderData *dep);
         void removeDependency(RenderData *dep);
+
+        void setupImpl(RenderTarget *target, std::string_view vs, std::string_view ps, std::vector<size_t> bufferSizes, bool depthChecking = true);
+
+        PipelineLoader::Instance mPipeline;
 
     private:
         std::vector<RenderData *> mDependencies;

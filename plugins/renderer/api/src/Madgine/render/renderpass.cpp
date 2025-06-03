@@ -4,6 +4,8 @@
 
 #include "renderdata.h"
 
+#include "rendertarget.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::Render::RenderPass)
@@ -12,10 +14,15 @@ METATABLE_END(Engine::Render::RenderPass)
 namespace Engine {
 namespace Render {
 
+    void RenderPass::shutdown(RenderTarget *target)
+    {
+        mPipeline.reset();
+    }
+
     void RenderPass::preRender(std::vector<Threading::TaskFuture<RenderFuture>> &dependencies, RenderContext *context)
-    {        
+    {
         for (RenderData *dep : mDependencies)
-            dependencies.push_back(dep->update(context));        
+            dependencies.push_back(dep->update(context));
         for (const auto &fut : dependencies)
             assert(fut.valid());
     }
@@ -58,6 +65,11 @@ namespace Render {
     bool RenderPass::swapFlipFlopTextures(size_t iteration) const
     {
         return false;
+    }
+
+    void RenderPass::setupImpl(RenderTarget *target, std::string_view vs, std::string_view ps, std::vector<size_t> bufferSizes, bool depthChecking)
+    {
+        mPipeline.create({ .vs = vs, .ps = ps, .bufferSizes = std::move(bufferSizes), .postProcessing = target->postProcessing(), .depthChecking = depthChecking });
     }
 
 }

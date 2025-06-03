@@ -24,8 +24,6 @@ namespace Render {
         virtual std::string_view name() const override;
 
     private:
-        PipelineLoader::Instance mPipeline;
-
         ShadowSceneRenderData mData;
 
         size_t mIndex;
