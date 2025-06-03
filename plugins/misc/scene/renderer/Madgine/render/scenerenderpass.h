@@ -37,8 +37,6 @@ namespace Render {
         float mLightSquaredFactor = 75.0f;
 
     private:
-        PipelineLoader::Instance mPipeline;
-
         LitSceneRenderData mData;
 
         ShadowRenderPass mShadowPass;

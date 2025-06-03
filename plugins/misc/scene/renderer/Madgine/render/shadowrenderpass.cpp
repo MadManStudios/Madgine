@@ -16,7 +16,7 @@
 
 #include "scenemainwindowcomponent.h"
 
-//#include "Madgine/render/rendercontext.h"
+// #include "Madgine/render/rendercontext.h"
 
 #include "Madgine/render/shadinglanguage/sl_support_begin.h"
 #include "shaders/scene.sl"
@@ -33,7 +33,7 @@ namespace Render {
 
     void ShadowRenderPass::setup(RenderTarget *target)
     {
-        mPipeline.create({ .vs = "scene", .bufferSizes = { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) } });
+        setupImpl(target, "scene", "", { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
 
         addDependency(&mData);
     }
@@ -42,7 +42,7 @@ namespace Render {
     {
         removeDependency(&mData);
 
-        mPipeline.reset();
+        RenderPass::shutdown(target);
     }
 
     void ShadowRenderPass::render(Render::RenderTarget *target, size_t iteration)
@@ -102,7 +102,7 @@ namespace Render {
             mPipeline->bindMesh(target, meshData);
 
             mPipeline->renderInstanced(target, instance.second.size());
-            //mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);
+            // mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);
         }
     }
 

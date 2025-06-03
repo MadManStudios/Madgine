@@ -15,6 +15,7 @@ namespace Render {
         std::string_view vs;
         std::string_view ps;
         std::vector<size_t> bufferSizes;
+        std::vector<std::string> postProcessing;
         bool depthChecking = true;
     };
 

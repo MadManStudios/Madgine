@@ -77,7 +77,6 @@ namespace Tools {
 
         std::vector<Render::RenderTarget *> mRenderTargets;
 
-        Render::PipelineLoader::Instance mPipeline;
         Render::TextureLoader::Ptr mFontTexture;
 
         struct CachedImage {

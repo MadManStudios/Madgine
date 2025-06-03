@@ -48,8 +48,6 @@ namespace Render {
     {
     }
 
-    SceneRenderPass::SceneRenderPass(SceneRenderPass &&) = default;
-
     SceneRenderPass::~SceneRenderPass() = default;
 
     void SceneRenderPass::setup(RenderTarget *target)
@@ -58,7 +56,7 @@ namespace Render {
 
         mShadowMap->addRenderPass(&mShadowPass);
 
-        mPipeline.create({ .vs = "scene", .ps = "scene", .bufferSizes = { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) } });
+        setupImpl(target, "scene", "scene", { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
 
         addDependency(&mData);
         addDependency(mShadowMap.get());
@@ -79,7 +77,7 @@ namespace Render {
         removeDependency(mData.mScene.pointShadowTarget(1));
         removeDependency(mData.mScene.data());
 
-        mPipeline.reset();
+        RenderPass::shutdown(target);
 
         mShadowMap.reset();
 

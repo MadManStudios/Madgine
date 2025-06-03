@@ -19,7 +19,6 @@ namespace Tools {
 
     private:
         Render::GPUMeshLoader::Handle mMesh;
-        Render::PipelineLoader::Instance mPipeline;
 
         Render::Camera *mCamera;
 

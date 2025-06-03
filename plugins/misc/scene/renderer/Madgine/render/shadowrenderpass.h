@@ -32,8 +32,6 @@ namespace Render {
         virtual void debugFrustums(Closure<void(const Frustum &, std::string_view)> handler) const override;
 
     private:
-        PipelineLoader::Instance mPipeline;
-
         ShadowSceneRenderData mData;
 
         int mPriority;

@@ -80,8 +80,9 @@ namespace Widgets {
         virtual bool injectAxisEvent(const Input::AxisEventArgs &arg) override;
         virtual bool injectKeyPress(const Input::KeyEventArgs &arg) override;
 
-        virtual void onResize(const Rect2i &space) override;
-        virtual void render(Render::RenderTarget *target, size_t iteration) override;
+        void onResize(const Rect2i &space) override;
+        void setup(Render::RenderTarget *target) override;
+        void render(Render::RenderTarget *target, size_t iteration) override;
 
         Resources::ImageLoader::Resource *getImage(std::string_view name);
 

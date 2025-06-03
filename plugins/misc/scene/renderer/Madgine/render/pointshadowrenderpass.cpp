@@ -38,7 +38,7 @@ namespace Render {
 
     void PointShadowRenderPass::setup(RenderTarget *target)
     {
-        mPipeline.create({ .vs = "pointshadow", .ps = "pointshadow", .bufferSizes = { sizeof(PointShadowPerApplication), 0, 0 } });
+        setupImpl(target, "pointshadow", "pointshadow", { sizeof(PointShadowPerApplication), 0, 0 });
 
         addDependency(&mData);
     }
@@ -47,7 +47,7 @@ namespace Render {
     {
         removeDependency(&mData);
 
-        mPipeline.reset();
+        RenderPass::shutdown(target);
     }
 
     void PointShadowRenderPass::render(Render::RenderTarget *target, size_t iteration)
