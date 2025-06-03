@@ -87,8 +87,6 @@ namespace Tools {
         static_cast<ClientImRoot &>(mEditor->root()).addRenderTarget(mRenderTarget.get());
     }
 
-    SceneView::SceneView(SceneView &&) = default;
-
     SceneView::~SceneView()
     {
         static_cast<ClientImRoot &>(mEditor->root()).removeRenderTarget(mRenderTarget.get());

@@ -25,7 +25,11 @@ namespace Render {
         : mCamera(camera)
         , mPriority(priority)
     {
-        mPipeline.create({ .vs = "im3d", .ps = "im3d", .bufferSizes = { sizeof(Im3DPerApplication), 0, sizeof(Im3DPerObject) } });
+    }
+
+    void Im3DRenderPass::setup(RenderTarget *target)
+    {
+        setupImpl(target, "im3d", "im3d", { sizeof(Im3DPerApplication), 0, sizeof(Im3DPerObject) });
     }
 
     void Im3DRenderPass::render(RenderTarget *target, size_t iteration)

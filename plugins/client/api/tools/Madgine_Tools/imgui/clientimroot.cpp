@@ -342,7 +342,7 @@ namespace Tools {
     void ClientImRoot::setup(Render::RenderTarget *target)
     {
         if (mWindow.getRenderWindow() == target) {
-            mPipeline.create({ .vs = "imgui", .ps = "imgui", .bufferSizes = { sizeof(Matrix4) }, .depthChecking = false });
+            setupImpl(target, "imgui", "imgui", { sizeof(Matrix4) }, false);
         }
 
         MainWindowComponentBase::setup(target);
@@ -392,7 +392,7 @@ namespace Tools {
     void ClientImRoot::shutdown(Render::RenderTarget *target)
     {
         if (mWindow.getRenderWindow() == target) {
-            mPipeline.reset();
+            RenderPass::shutdown(target);
         }
     }
 
