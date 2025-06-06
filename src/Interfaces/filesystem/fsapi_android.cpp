@@ -245,11 +245,17 @@ namespace Filesystem {
         
     FileInfo fileInfo(const Path &path)
     {
+        FileInfo result;
+
         struct stat stats;
         stat(path.c_str(), &stats);
-        return {
-            static_cast<size_t>(stats.st_size)
-        };
+
+        result.mSize = static_cast<size_t>(stats.st_size);
+
+        std::chrono::seconds d { stats.st_mtim.tv_sec };
+        result.mLastModified = std::chrono::file_clock::time_point { d };
+
+        return result;
     }
 
 }

@@ -26,6 +26,8 @@ namespace Filesystem {
 
     bool isDir(const Path &p)
     {
+        if (!exists(p))
+            return false;
         return (GetFileAttributesA(p.c_str()) & FILE_ATTRIBUTE_DIRECTORY) != 0;
     }
 
@@ -208,13 +210,23 @@ namespace Filesystem {
 
     FileInfo fileInfo(const Path &path)
     {
+        FileInfo result;
+
         WIN32_FILE_ATTRIBUTE_DATA fad;
         if (!GetFileAttributesEx(path.c_str(), GetFileExInfoStandard, &fad))
             return { 0 }; // error condition, could call GetLastError to find out more
+
         LARGE_INTEGER size;
         size.HighPart = fad.nFileSizeHigh;
         size.LowPart = fad.nFileSizeLow;
-        return { static_cast<size_t>(size.QuadPart) };
+        result.mSize = size.QuadPart;
+
+        FILETIME ft = fad.ftLastAccessTime;
+        std::chrono::file_clock::duration d { (static_cast<int64_t>(ft.dwHighDateTime) << 32)
+            | ft.dwLowDateTime };
+        result.mLastModified = std::chrono::file_clock::time_point { d };        
+
+        return result;
     }
 
 }
