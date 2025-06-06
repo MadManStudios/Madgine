@@ -8,6 +8,7 @@ namespace Filesystem {
 
     struct FileInfo {
         size_t mSize;
+        std::chrono::file_clock::time_point mLastModified;
     };
 
     INTERFACES_EXPORT void setup(void *data = nullptr);
