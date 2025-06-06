@@ -16,6 +16,11 @@ namespace Execution {
             TupleUnpacker::invokeExpand(LIFT(rec.set_value, &), std::move(mValues));
         }
 
+        template <size_t I>
+        decltype(auto) get() {
+            return std::get<I>(mValues);
+        }
+
         std::tuple<V...> mValues;
     };
 
@@ -131,7 +136,7 @@ namespace Execution {
 
         template <typename... V>
         void set_value(V &&...v)
-        {            
+        {
             assert(std::holds_alternative<NullStorage>(mState));
             mState.template emplace<Value>(std::forward<V>(v)...);
         }
@@ -166,4 +171,17 @@ namespace Execution {
     using ResultStorage = ResultStorageImpl<ValueStorage<Sender>, ErrorStorage<Sender>>;
 
 }
+}
+
+namespace std {
+template <typename V1, typename V2, typename... V>
+struct tuple_size<Engine::Execution::ValueStorageImpl<V1, V2, V...>> : std::integral_constant<size_t, sizeof...(V) + 2> { };
+
+template <typename V1, typename... V>
+struct tuple_element<0, Engine::Execution::ValueStorageImpl<V1, V...>> {
+    using type = V1;
+};
+template <size_t I, typename V1, typename... V>
+struct tuple_element<I, Engine::Execution::ValueStorageImpl<V1, V...>> : tuple_element<I - 1, Engine::Execution::ValueStorageImpl<V...>> { };
+
 }
