@@ -15,7 +15,7 @@
 
 #if !ANDROID && !EMSCRIPTEN && !IOS
 #    include "../glad/glad.h"
-#    define OPENGL_ES 30
+//#    define OPENGL_ES 30
 #elif IOS
 #    include <OpenGLES/ES3/gl.h>
 #    define OPENGL_ES 30

@@ -29,6 +29,8 @@
 #include "imgui/imguiaddons.h"
 #include "imgui/misc/freetype/imgui_freetype.h"
 
+#include "imgui_hlsl.h"
+
 METATABLE_BEGIN_BASE(Engine::Tools::ClientImRoot, Engine::Tools::ImRoot)
 METATABLE_END(Engine::Tools::ClientImRoot)
 
@@ -370,7 +372,7 @@ namespace Tools {
     void ClientImRoot::setup(Render::RenderTarget *target)
     {
         if (mWindow.getRenderWindow() == target) {
-            setupImpl(target, "imgui", "imgui", { sizeof(Matrix4) }, false);
+            setupImpl(target, HLSL::imgui_VS, HLSL::imgui_PS, { sizeof(Matrix4) }, false);
         }
 
         MainWindowComponentBase::setup(target);

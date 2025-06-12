@@ -42,7 +42,7 @@ android {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             jniLibs.srcDirs = ['bin/', '@CMAKE_ANDROID_NDK@/sources/cxx-stl/llvm-libc++/libs/' @ANDROID_ADDITIONAL_DEPENDENCIES@]
-			assets.srcDirs = ['../MadgineLauncher/data/']
+			assets.srcDirs = ['../MadgineLauncher/assets/']
             res.srcDirs = ['@MADGINE_CONFIGURATION@/res' @ANDROID_ADDITIONAL_RESOURCES@]
             java.srcDirs = [@ANDROID_ADDITIONAL_SOURCES@]
         }

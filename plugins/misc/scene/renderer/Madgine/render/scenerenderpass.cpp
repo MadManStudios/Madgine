@@ -23,6 +23,8 @@
 
 #include "scenemainwindowcomponent.h"
 
+#include "scene_hlsl.h"
+
 METATABLE_BEGIN(Engine::Render::SceneRenderPass)
     MEMBER(mAmbientFactor)
     MEMBER(mDiffuseFactor)
@@ -51,7 +53,7 @@ namespace Render {
 
         mShadowMap->addRenderPass(&mShadowPass);
 
-        setupImpl(target, "scene", "scene", { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
+        setupImpl(target, HLSL::scene_VS, HLSL::scene_PS, { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
 
         addDependency(&mData);
         addDependency(mShadowMap.get());

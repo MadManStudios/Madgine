@@ -7,22 +7,26 @@
 namespace Engine {
 namespace Render {
 
-    bool VulkanPipeline::link(typename VulkanShaderLoader::Handle vertexShader, typename VulkanShaderLoader::Handle pixelShader)
+    bool VulkanPipeline::link(typename VulkanShaderLoader::Handle vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Handle pixelShader, std::string ps_entrypoint)
     {
         reset();
 
         mVertexShader = std::move(vertexShader);
+        mVsEntrypoint = vs_entrypoint;
         mPixelShader = std::move(pixelShader);
+        mPsEntrypoint = ps_entrypoint;
 
         return true;
     }
 
-    bool VulkanPipeline::link(typename VulkanShaderLoader::Ptr vertexShader, typename VulkanShaderLoader::Ptr pixelShader)
+    bool VulkanPipeline::link(typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint)
     {
         reset();
 
         mVertexShader = std::move(vertexShader);
+        mVsEntrypoint = vs_entrypoint;
         mPixelShader = std::move(pixelShader);
+        mPsEntrypoint = ps_entrypoint;
 
         return true;
     }
@@ -47,10 +51,10 @@ namespace Render {
                     variant);
             };
 
-            auto resolve = [](auto &variant) -> VkShaderModule {
+            auto resolve = [](auto &variant) -> const VulkanShader * {
                 return std::visit(
-                    [](const auto &handle) -> VkShaderModule {
-                        return handle ? *handle : nullptr;
+                    [](const auto &handle) -> const VulkanShader * {
+                        return handle ? &*handle : nullptr;
                     },
                     variant);
             };
@@ -67,16 +71,16 @@ namespace Render {
                 VkPipelineShaderStageCreateInfo &vertShaderStageInfo = shaderStages[count++];
                 vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
                 vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
-                vertShaderStageInfo.module = resolve(mVertexShader);
-                vertShaderStageInfo.pName = "main";
+                vertShaderStageInfo.module = resolve(mVertexShader)->mModule;
+                vertShaderStageInfo.pName = mVsEntrypoint.c_str();
             }
 
             if (resolve(mPixelShader)) {
                 VkPipelineShaderStageCreateInfo &fragShaderStageInfo = shaderStages[count++];
                 fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
                 fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-                fragShaderStageInfo.module = resolve(mPixelShader);
-                fragShaderStageInfo.pName = "main";
+                fragShaderStageInfo.module = resolve(mPixelShader)->mModule;
+                fragShaderStageInfo.pName = mPsEntrypoint.c_str();
             }
 
             std::vector<VkDynamicState> dynamicStates = {

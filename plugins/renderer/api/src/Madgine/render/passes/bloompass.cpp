@@ -10,6 +10,12 @@
 #include "shaders/bloom.sl"
 #include "../shadinglanguage/sl_support_end.h"
 
+#include "../shaderfileobject.h"
+#include "bloom_hlsl.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+
+#include "Madgine/render/texture.h"
 #include "../rendercontext.h"
 #include "../rendertarget.h"
 
@@ -32,7 +38,7 @@ namespace Render {
 
     void BloomPass::setup(RenderTarget *target)
     {
-        setupImpl(target, "bloom", "bloom", { sizeof(BloomData) });
+        setupImpl(target, HLSL::bloom_VS, HLSL::bloom_PS, { sizeof(BloomData) });
 
         target->addRenderPass(&mBlur);
     }
