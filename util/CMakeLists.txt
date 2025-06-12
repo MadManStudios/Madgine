@@ -24,7 +24,7 @@ FetchContent_MakeAvailable(ShaderGenExt)
 set(shadergenPath ${shadergenext_SOURCE_DIR}/ShaderGen${HOST_EXECUTABLE_SUFFIX})
 
 set_target_properties(ShaderGen 
-	PROPERTIES ShaderGenTargets ""
+	PROPERTIES ShaderGenTargets "-CPP"
 	IMPORTED_LOCATION ${shadergenPath})
 	
 function(add_shadergen_target target flag)
@@ -34,13 +34,18 @@ function(add_shadergen_target target flag)
 		add_dependencies(${target} ShaderGen)
 
 		get_target_property(targets ShaderGen ShaderGenTargets)
-		set (targets ${targets} ${flag})
+	    set (targets ${targets} ${flag})
 		list(REMOVE_DUPLICATES targets)
 		set_target_properties(ShaderGen PROPERTIES ShaderGenTargets "${targets}")
 	endif()
 
 endfunction(add_shadergen_target)
 
+if (ANDROID)
+	install(DIRECTORY ${CMAKE_BINARY_DIR}/shadercache DESTINATION assets COMPONENT MadgineLauncher)
+else()
+	install(DIRECTORY ${CMAKE_BINARY_DIR}/shadercache DESTINATION . COMPONENT MadgineLauncher)
+endif()
 
 add_library(dxcompiler SHARED IMPORTED GLOBAL)
 

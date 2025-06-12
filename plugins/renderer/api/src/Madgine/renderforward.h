@@ -26,6 +26,8 @@ namespace Render {
         PixelShader
     };
 
+    struct ShaderObjectBase;
+
 }
 
 }

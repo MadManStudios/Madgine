@@ -6,12 +6,15 @@
 
 #include "util/openglshader.h"
 
+#include "Madgine/render/shadercache.h"
+
 namespace Engine {
 namespace Render {
 
     struct OpenGLShaderLoader : Resources::ResourceLoader<OpenGLShaderLoader, OpenGLShader, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
         OpenGLShaderLoader();
 
+        
         struct Handle : Base::Handle {
 
             using Base::Handle::Handle;
@@ -20,24 +23,13 @@ namespace Render {
             {
             }
 
-            Threading::TaskFuture<bool> load(std::string_view name, ShaderType type, OpenGLShaderLoader *loader = &OpenGLShaderLoader::getSingleton());
+            Threading::TaskFuture<bool> load(ShaderObjectPtr object, ShaderType type, OpenGLShaderLoader *loader = &OpenGLShaderLoader::getSingleton());
         };
 
-        struct Ptr : Base::Ptr {
 
-            using Base::Ptr::Ptr;
-            Ptr(Base::Ptr ptr)
-                : Base::Ptr(std::move(ptr))
-            {
-            }
-
-            Threading::TaskFuture<bool> create(const CodeGen::ShaderFile &file, ShaderType type, OpenGLShaderLoader *loader = &OpenGLShaderLoader::getSingleton());
-        };
-
-        bool loadImpl(OpenGLShader &shader, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(OpenGLShader &shader, ResourceDataInfo &info);
+        Threading::Task<bool> generate(OpenGLShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object = {});
         void unloadImpl(OpenGLShader &shader);
-
-        bool create(OpenGLShader &shader, const CodeGen::ShaderFile &file, ShaderType type);
 
         bool loadFromSource(OpenGLShader &shader, std::string_view name, std::string source, ShaderType type, const Filesystem::Path &path = {});
 

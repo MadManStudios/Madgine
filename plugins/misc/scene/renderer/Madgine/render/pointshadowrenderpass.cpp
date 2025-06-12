@@ -22,6 +22,8 @@
 #include "shaders/pointshadow.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
 
+#include "pointshadow_hlsl.h"
+
 namespace Engine {
 namespace Render {
 
@@ -34,7 +36,7 @@ namespace Render {
 
     void PointShadowRenderPass::setup(RenderTarget *target)
     {
-        setupImpl(target, "pointshadow", "pointshadow", { sizeof(PointShadowPerApplication), 0, 0 });
+        setupImpl(target, HLSL::pointshadow_VS, HLSL::pointshadow_PS, { sizeof(PointShadowPerApplication), 0, 0 });
 
         addDependency(&mData);
     }

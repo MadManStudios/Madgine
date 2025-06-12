@@ -1,0 +1,72 @@
+#include "pointshadow.sl"
+
+#include "light.hlsl"
+
+
+cbuffer PerApplication : register(b0)
+{
+    PointShadowPerApplication app;
+};
+
+StructuredBuffer<PointShadowInstanceData> InstanceData : register(t0, space1);
+
+
+struct AppData
+{
+    float3 aPos : POSITION0;
+    float aW : POSITION1;
+    float2 aPos2 : POSITION2;
+    float3 aNormal : NORMAL;
+    float4 aColor : COLOR;
+    float2 aUV : TEXCOORD;
+    int4 aBoneIDs : BONEINDICES;
+    float4 aWeights : WEIGHTS;
+    uint instanceId : SV_InstanceID;
+};
+
+struct FragmentData
+{
+    float4 position : SV_Position;
+    float4 worldPos : POSITION;
+};
+
+
+export FragmentData pointshadow_VS(AppData IN)
+{
+    FragmentData OUT;
+
+    PointShadowInstanceData aInstance = InstanceData[IN.instanceId];
+
+    float2 aPos2 = IN.aPos2;
+    float4 aPos = float4(IN.aPos, IN.aW);
+	
+    float4 worldPos;
+
+	/*if (aInstance.bones.buffer() != 0){ 
+		float4x4 BoneTransform = aInstance.bones[IN.aBoneIDs[0]] * IN.aWeights[0]
+		+ aInstance.bones[IN.aBoneIDs[1]] * IN.aWeights[1]
+		+ aInstance.bones[IN.aBoneIDs[2]] * IN.aWeights[2]
+		+ aInstance.bones[IN.aBoneIDs[3]] * IN.aWeights[3];
+		worldPos = mul(aInstance.mv, mul(BoneTransform, aPos));
+	}else*/{
+        worldPos = mul(aInstance.mv, aPos);
+    }
+
+    OUT.worldPos = worldPos + float4(aPos2, 0.0, 0.0);
+
+    OUT.position = mul(app.p, OUT.worldPos);
+
+    return OUT;
+}
+
+export float pointshadow_PS(FragmentData IN) : SV_DEPTH
+{
+    // get distance between fragment and light source
+    float lightDistance = length(IN.worldPos.xyz / IN.worldPos.w);
+    
+    // map to [0;1] range by dividing by far_plane
+    lightDistance = lightDistance / 100.0;
+    
+    // write this as modified depth
+    return lightDistance;
+}

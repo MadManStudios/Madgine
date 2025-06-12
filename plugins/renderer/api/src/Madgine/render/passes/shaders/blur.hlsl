@@ -1,0 +1,58 @@
+#include "blur.sl"
+
+cbuffer Data : register(b0)
+{
+    BlurData data;
+}
+
+Texture2D input : register(t0, space2);
+
+SamplerState texSampler : register(s0);
+
+
+
+struct AppData
+{
+    float3 aPos : POSITION0;
+};
+
+struct FragmentData
+{
+    float4 position : SV_Position;
+    float2 texCoord : TEXCOORD0;
+};
+
+export FragmentData blur_VS(AppData IN)
+{
+    FragmentData OUT;
+
+    OUT.texCoord = (IN.aPos.xy * float2(1.0, -1.0) + float2(1.0, 1.0)) * 0.5;
+    OUT.position = float4(IN.aPos, 1.0);
+
+    return OUT;
+}
+
+static float weight[5] = { 0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216 };
+
+export float4 blur_PS(FragmentData IN) : SV_TARGET
+{
+    float2 tex_offset = 1.0 / data.textureSize; // gets size of single texel
+    float3 result = input.Sample(texSampler, IN.texCoord).rgb * weight[0]; // current fragment's contribution
+    if (data.horizontal)
+    {
+        for (int i = 1; i < 5; ++i)
+        {
+            result += input.Sample(texSampler, IN.texCoord + float2(tex_offset.x * i, 0.0)).rgb * weight[i];
+            result += input.Sample(texSampler, IN.texCoord - float2(tex_offset.x * i, 0.0)).rgb * weight[i];
+        }
+    }
+    else
+    {
+        for (int i = 1; i < 5; ++i)
+        {
+            result += input.Sample(texSampler, IN.texCoord + float2(0.0, tex_offset.y * i)).rgb * weight[i];
+            result += input.Sample(texSampler, IN.texCoord - float2(0.0, tex_offset.y * i)).rgb * weight[i];
+        }
+    }
+    return float4(result, 1.0);
+}

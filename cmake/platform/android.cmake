@@ -78,7 +78,7 @@ if (ANDROID)
 		foreach(target ${OPTIONS_TARGETS})
 			get_target_property(TARGET_SOURCE_DIR ${target} SOURCE_DIR)
 			if (EXISTS ${TARGET_SOURCE_DIR}/data)
-				install(DIRECTORY ${TARGET_SOURCE_DIR}/data DESTINATION . COMPONENT ${name})
+				install(DIRECTORY ${TARGET_SOURCE_DIR}/data DESTINATION assets COMPONENT ${name})
 			endif()
 
 			#target_include_directories(${target} INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${target}/include>)
