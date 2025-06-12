@@ -67,9 +67,9 @@ namespace Render {
         return false;
     }
 
-    void RenderPass::setupImpl(RenderTarget *target, std::string_view vs, std::string_view ps, std::vector<size_t> bufferSizes, bool depthChecking)
+    void RenderPass::setupImpl(RenderTarget *target, ShaderObjectPtr vs, ShaderObjectPtr ps, std::vector<size_t> bufferSizes, bool depthChecking)
     {
-        mPipeline.create({ .vs = vs, .ps = ps, .bufferSizes = std::move(bufferSizes), .postProcessing = target->postProcessing(), .depthChecking = depthChecking });
+        mPipeline.create({ .vs = vs, .ps = ps, .bufferSizes = std::move(bufferSizes), .depthChecking = depthChecking });
     }
 
 }

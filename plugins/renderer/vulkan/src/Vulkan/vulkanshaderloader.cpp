@@ -9,7 +9,6 @@
 
 #include "Interfaces/filesystem/fsapi.h"
 
-#include "vulkanshadercodegen.h"
 #include "vulkanrendercontext.h"
 
 UNIQUECOMPONENT(Engine::Render::VulkanShaderLoader)
@@ -37,30 +36,7 @@ namespace Render {
     {
     }
 
-    Threading::TaskFuture<bool> VulkanShaderLoader::Ptr::create(const CodeGen::ShaderFile &file, ShaderType type, VulkanShaderLoader *loader)
-    {
-        return Base::Ptr::create(
-            [=, &file](VulkanShaderLoader *loader, VulkanPtr<VkShaderModule, &vkDestroyShaderModule> &shader) { return loader->create(shader, file, type); }, loader);
-    }
-
-    Threading::TaskFuture<bool> VulkanShaderLoader::Handle::load(std::string_view name, ShaderType type, VulkanShaderLoader *loader)
-    {
-        std::string actualName { name };
-        switch (type) {
-        case ShaderType::PixelShader:
-            actualName += "_PS";
-            break;
-        case ShaderType::VertexShader:
-            actualName += "_VS";
-            break;
-        default:
-            throw 0;
-        }
-
-        return Base::Handle::load(actualName, loader);
-    }
-
-    bool VulkanShaderLoader::loadImpl(VulkanPtr<VkShaderModule, &vkDestroyShaderModule> &shader, ResourceDataInfo &info)
+    Threading::Task<bool> VulkanShaderLoader::loadImpl(VulkanShader &shader, ResourceDataInfo &info)
     {
         std::string_view filename = info.resource()->name();
 
@@ -72,46 +48,40 @@ namespace Render {
         else
             throw 0;
 
+        return generate(shader, info, type);
+    }
+
+    Threading::Task<bool> VulkanShaderLoader::generate(VulkanShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object)
+    {
+        const Filesystem::Path &p = info.resource()->path();
+
+        std::string entrypoint = "main";
+        if (object) {
+            entrypoint = object->entrypoint();
+            co_await ShaderCache::generate(p, object, "-SPIRV", type == VertexShader ? "vs_6_2" : "ps_6_2");
+        }
+
+        if (!Filesystem::exists(p))
+            co_return false;
+
         std::vector<unsigned char> source = info.resource()->readAsBlob();
 
-        return loadFromSource(shader, filename, std::move(source), type, info.resource()->path().stem());
+        co_return loadFromSource(shader, info.resource()->path().stem(), source, type, info.resource()->path());
     }
 
-    void VulkanShaderLoader::unloadImpl(VulkanPtr<VkShaderModule, &vkDestroyShaderModule> &shader)
+    void VulkanShaderLoader::unloadImpl(VulkanShader &shader)
     {
-        shader.reset();
+        shader.mModule.reset();
     }
 
-    bool VulkanShaderLoader::create(VulkanPtr<VkShaderModule, &vkDestroyShaderModule> &shader, const CodeGen::ShaderFile &file, ShaderType type)
-    {
-        /* if (res->path().empty()) {
-            Filesystem::Path dir = Filesystem::appDataPath() / "generated/shader/vulkan";
-
-            Filesystem::createDirectories(dir);
-
-            res->setPath(dir / (std::string { res->name() } + (type == VertexShader ? "_VS" : "_PS") + ".spirv"));
-        }*/
-
-        std::ostringstream ss;
-        VulkanShaderCodeGen::generate(ss, file, 1);
-
-        /* {
-            std::ofstream f { res->path() };
-            f << ss.str();
-        }*/
-        
-        //return loadFromSource(shader, "<generated>", ss.str(), type, "<generated>");
-        throw 0;
-    }
-
-    bool VulkanShaderLoader::loadFromSource(VulkanPtr<VkShaderModule, &vkDestroyShaderModule> &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Filesystem::Path &path)
+    bool VulkanShaderLoader::loadFromSource(VulkanShader &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Filesystem::Path &path)
     {
        
         VkShaderModuleCreateInfo createInfo {};
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.codeSize = source.size();
         createInfo.pCode = reinterpret_cast<const uint32_t *>(source.data());
-        VkResult result = vkCreateShaderModule(GetDevice(), &createInfo, nullptr, &shader);
+        VkResult result = vkCreateShaderModule(GetDevice(), &createInfo, nullptr, &shader.mModule);
         VK_CHECK(result);
 
         return true;
@@ -120,6 +90,11 @@ namespace Render {
     Threading::TaskQueue *VulkanShaderLoader::loadingTaskQueue() const
     {
         return VulkanRenderContext::renderQueue();
+    }
+
+    Threading::TaskFuture<bool> VulkanShaderLoader::Handle::load(ShaderObjectPtr object, ShaderType type, VulkanShaderLoader *loader)
+    {
+        return Base::Handle::create(object->name(), ShaderCache::directory() / (std::string { object->metadata().mPath.stem() } + "_" + (type == VertexShader ? "vs" : "ps") + ".spirv"), [object, type](VulkanShaderLoader *loader, VulkanShader &shader, ResourceDataInfo &info) { return loader->generate(shader, info, type, object); }, loader);
     }
 }
 }

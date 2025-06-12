@@ -5,6 +5,8 @@
 #include "pipelineloader.h"
 #include "renderdebuggable.h"
 
+#include "shaderobject.h"
+
 namespace Engine {
 namespace Render {
 
@@ -33,7 +35,7 @@ namespace Render {
         void addDependency(RenderData *dep);
         void removeDependency(RenderData *dep);
 
-        void setupImpl(RenderTarget *target, std::string_view vs, std::string_view ps, std::vector<size_t> bufferSizes, bool depthChecking = true);
+        void setupImpl(RenderTarget *target, ShaderObjectPtr vs, ShaderObjectPtr ps, std::vector<size_t> bufferSizes, bool depthChecking = true);
 
         PipelineLoader::Instance mPipeline;
 

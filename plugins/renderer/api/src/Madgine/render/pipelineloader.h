@@ -25,8 +25,6 @@ namespace Render {
 
             Threading::TaskFuture<bool> create(PipelineConfiguration config, PipelineLoader *loader = &PipelineLoader::getSingleton());
 
-            Threading::TaskFuture<bool> createGenerated(PipelineConfiguration config, CodeGen::ShaderFile file, PipelineLoader *loader = &PipelineLoader::getSingleton());
-            
 
             void reset();
 
@@ -43,7 +41,6 @@ namespace Render {
         PipelineLoader();
 
         virtual Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) = 0;
-        virtual Threading::Task<bool> create(Instance &instance, PipelineConfiguration config, CodeGen::ShaderFile file) = 0;
     };
 
 }

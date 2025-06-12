@@ -11,8 +11,8 @@ namespace Render {
 
     struct MADGINE_VULKAN_EXPORT VulkanPipeline : Pipeline {
 
-        bool link(typename VulkanShaderLoader::Handle vertexShader, typename VulkanShaderLoader::Handle pixelShader);
-        bool link(typename VulkanShaderLoader::Ptr vertexShader, typename VulkanShaderLoader::Ptr pixelShader);
+        bool link(typename VulkanShaderLoader::Handle vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Handle pixelShader, std::string ps_entrypoint);
+        bool link(typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint);
 
         VkPipeline get(VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking = true) const;
 
@@ -24,7 +24,9 @@ namespace Render {
         mutable std::array<std::array<std::array<VulkanPtr<VkPipeline, &vkDestroyPipeline>, 3>, 3>, 256> mPipelines;
 
         std::variant<typename VulkanShaderLoader::Handle, typename VulkanShaderLoader::Ptr> mVertexShader;
+        std::string mVsEntrypoint;
         std::variant<typename VulkanShaderLoader::Handle, typename VulkanShaderLoader::Ptr> mPixelShader;
+        std::string mPsEntrypoint;
     };
 
 }

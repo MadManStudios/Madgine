@@ -5,8 +5,6 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "directx12shadercodegen.h"
-
 #include "Interfaces/filesystem/fsapi.h"
 
 #include "directx12rendercontext.h"
@@ -31,17 +29,27 @@ namespace Render {
         //if(FAILED(hr)) Handle error
     }
 
-    Threading::TaskFuture<bool> DirectX12PixelShaderLoader::Ptr::create(const CodeGen::ShaderFile &file, DirectX12PixelShaderLoader *loader)
+    Threading::Task<bool> DirectX12PixelShaderLoader::loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info)
     {
-        return Base::Ptr::create(
-            [=, &file](DirectX12PixelShaderLoader *loader, ReleasePtr<IDxcBlob> &shader) { return loader->create(shader, file); }, loader);
+        return generate(shader, info);
     }
 
-    bool DirectX12PixelShaderLoader::loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info)
+    Threading::Task<bool> DirectX12PixelShaderLoader::generate(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object)
     {
+        const Filesystem::Path &p = info.resource()->path();
+
+        std::string entrypoint = "main";
+        if (object) {
+            entrypoint = object->entrypoint();
+            co_await ShaderCache::generate(p, object, "-HLSL12", "ps_6_2");
+        }
+
+        if (!Filesystem::exists(p))
+            co_return false;
+
         std::string source = info.resource()->readAsText();
 
-        return loadFromSource(shader, info.resource()->path().stem(), source);
+        co_return loadFromSource(shader, info.resource()->path().stem(), source, entrypoint);
     }
 
     void DirectX12PixelShaderLoader::unloadImpl(ReleasePtr<IDxcBlob> &shader)
@@ -49,28 +57,7 @@ namespace Render {
         shader.reset();
     }
 
-    bool DirectX12PixelShaderLoader::create(ReleasePtr<IDxcBlob> &shader, const CodeGen::ShaderFile &file)
-    {
-        /* if (res->path().empty()) {
-            Filesystem::Path dir = Filesystem::appDataPath() / "generated/shader/directx12";
-
-            Filesystem::createDirectories(dir);
-
-            res->setPath(dir / (std::string { res->name() } + ".PS_hlsl"));
-        }*/
-
-        std::ostringstream ss;
-        DirectX12ShaderCodeGen::generate(ss, file, 1);
-
-        /* {
-            std::ofstream f { res->path() };
-            f << ss.str();
-        }*/
-
-        return loadFromSource(shader, "<generated>", ss.str());
-    }
-
-    bool DirectX12PixelShaderLoader::loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source)
+    bool DirectX12PixelShaderLoader::loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint)
     {
         std::wstring profile = L"latest";
         if (profile == L"latest")
@@ -82,8 +69,9 @@ namespace Render {
         sourceBuffer.Encoding = CP_UTF8;
 
         std::vector<LPCWSTR> arguments;
+        std::wstring wentrypoint = StringUtil::toWString(entrypoint);
         arguments.push_back(L"-E");
-        arguments.push_back(L"main");
+        arguments.push_back(wentrypoint.c_str());
 
         arguments.push_back(L"-T");
         arguments.push_back(profile.c_str());
@@ -103,13 +91,13 @@ namespace Render {
         if (SUCCEEDED(hr))
             result->GetStatus(&hr);
         if (FAILED(hr)) {
-            LOG_ERROR("Loading of Shader '" << name << "' failed:");
+            LOG_FATAL("Loading of Shader '" << name << "' failed:");
 
             if (result) {
                 ReleasePtr<IDxcBlobUtf8> pErrorBlob;
                 hr = result->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&pErrorBlob), nullptr);
                 if (SUCCEEDED(hr) && pErrorBlob) {
-                    LOG_ERROR((char *)pErrorBlob->GetBufferPointer());
+                    LOG_FATAL((char *)pErrorBlob->GetBufferPointer());
                 }
             }
             return false;
@@ -129,6 +117,11 @@ namespace Render {
     Threading::TaskQueue *DirectX12PixelShaderLoader::loadingTaskQueue() const
     {
         return DirectX12RenderContext::renderQueue();
+    }
+
+    Threading::TaskFuture<bool> DirectX12PixelShaderLoader::Handle::load(ShaderObjectPtr object, DirectX12PixelShaderLoader *loader)
+    {
+        return Base::Handle::create(object->name(), ShaderCache::directory() / (std::string { object->metadata().mPath.stem() } + ".ps_hlsl12"), [object](DirectX12PixelShaderLoader *loader, ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info) { return loader->generate(shader, info, object); }, loader);
     }
 }
 }

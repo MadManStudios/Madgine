@@ -34,25 +34,21 @@ namespace Render {
 
     Threading::Task<bool> DirectX12PipelineLoader::create(Instance &instance, PipelineConfiguration config)
     {
+        std::string name = config.vs->name() + "|";
+        if (config.ps)
+            name += config.ps->name();
+
         Handle pipeline;
-
-        char buffer[256];
-#if WINDOWS
-        sprintf_s(buffer, "%s|%s", config.vs.data(), config.ps.data());
-#else
-        sprintf(buffer, "%s|%s", config.vs.data(), config.ps.data());
-#endif
-
-        if (!co_await pipeline.create(buffer, {}, [vs { std::string { config.vs } }, ps { std::string { config.ps } }](DirectX12PipelineLoader *loader, DirectX12Pipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
+        if (!co_await pipeline.create(name, {}, [config](DirectX12PipelineLoader *loader, DirectX12Pipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
                 pipeline.setName(info.resource()->name());
                 DirectX12VertexShaderLoader::Handle vertexShader;
-                if (!co_await vertexShader.load(vs)) {
-                    LOG_ERROR("Failed to load VS '" << vs << "'!");
+                if (!co_await vertexShader.load(config.vs)) {
+                    LOG_ERROR("Failed to load VS '" << config.vs << "'!");
                     co_return false;
                 }
                 DirectX12PixelShaderLoader::Handle pixelShader;
-                if (!ps.empty() && !co_await pixelShader.load(ps)) {
-                    LOG_ERROR("Failed to load PS '" << ps << "'!");
+                if (config.ps && !co_await pixelShader.load(config.ps)) {
+                    LOG_ERROR("Failed to load PS '" << config.ps << "'!");
                     co_return false;
                 }
                 co_return pipeline.link(std::move(vertexShader), std::move(pixelShader));
@@ -60,28 +56,6 @@ namespace Render {
             co_return false;
 
         instance = std::make_unique<DirectX12PipelineInstanceHandle>(config, std::move(pipeline));
-
-        co_return true;
-    }
-
-    Threading::Task<bool> DirectX12PipelineLoader::create(Instance &instance, PipelineConfiguration config, CodeGen::ShaderFile file)
-    {
-        assert(file.mInstances.size() == 2);
-
-        Ptr pipeline;
-
-        if (!co_await pipeline.create([file { std::move(file) }](DirectX12PipelineLoader *loader, DirectX12Pipeline &pipeline) -> Threading::Task<bool> {
-                DirectX12VertexShaderLoader::Ptr vertexShader;
-                if (!co_await vertexShader.create(file))
-                    co_return false;
-                DirectX12PixelShaderLoader::Ptr pixelShader;
-                if (!co_await pixelShader.create(file))
-                    co_return false;
-                co_return pipeline.link(std::move(vertexShader), std::move(pixelShader));
-            }))
-            co_return false;
-
-        instance = std::make_unique<DirectX12PipelineInstancePtr>(config, std::move(pipeline));
 
         co_return true;
     }

@@ -85,7 +85,8 @@ static constexpr struct {
     X(EGL_TRANSPARENT_TYPE),
     // X(EGL_TRANSPARENT_RED),
     // X(EGL_TRANSPARENT_GREEN),
-    // X(EGL_TRANSPARENT_BLUE)
+    // X(EGL_TRANSPARENT_BLUE),
+    X(EGL_GL_COLORSPACE_KHR)
 };
 #    undef X
 #elif OSX
@@ -402,6 +403,16 @@ namespace Render {
                     }
                 }
                 std::terminate();
+            }
+
+            Log::LogDummy out { Log::MessageType::DEBUG_TYPE };
+            out << "Configuration:\n";
+            for (int j = 0; j < sizeof(eglAttributeNames) / sizeof(eglAttributeNames[0]); j++) {
+                EGLint value = -1;
+                bool result = eglGetConfigAttrib(sDisplay, config, eglAttributeNames[j].attribute, &value);
+                if (result) {
+                    out << " " << eglAttributeNames[j].name << " = " << value << "\n";
+                }
             }
 
             context = eglCreateContext(sDisplay, config, /*sharedContext*/ nullptr, contextAttribs);

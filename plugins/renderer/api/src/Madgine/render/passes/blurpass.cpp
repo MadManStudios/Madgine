@@ -9,6 +9,9 @@
 
 #include "../rendercontext.h"
 
+#include "../shaderfileobject.h"
+#include "blur_hlsl.h"
+
 #include "../shadinglanguage/sl_support_begin.h"
 #include "shaders/blur.sl"
 #include "../shadinglanguage/sl_support_end.h"
@@ -24,7 +27,7 @@ namespace Render {
 
     void BlurPass::setup(RenderTarget *target)
     {
-        setupImpl(target, "blur", "blur", { sizeof(BlurData) });
+        setupImpl(target, HLSL::blur_VS, HLSL::blur_PS, { sizeof(BlurData) });
     }
 
     void BlurPass::render(RenderTarget *target, size_t iteration)

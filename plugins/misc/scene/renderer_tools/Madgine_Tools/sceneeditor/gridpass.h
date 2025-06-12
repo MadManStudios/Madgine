@@ -11,6 +11,8 @@ namespace Tools {
 
         GridPass(Render::Camera *camera, int priority);
 
+        void setup(Render::RenderTarget *target) override;
+
         virtual void render(Render::RenderTarget *target, size_t iteration) override;
 
         virtual int priority() const override;

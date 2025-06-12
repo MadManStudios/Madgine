@@ -6,30 +6,30 @@
 
 #include "Madgine/render/vertexformat.h"
 
+#include "Madgine/render/shadercache.h"
+
 namespace Engine {
 namespace Render {
 
     struct DirectX12VertexShaderLoader : Resources::ResourceLoader<DirectX12VertexShaderLoader, ReleasePtr<IDxcBlob>, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
         DirectX12VertexShaderLoader();
 
-        struct Ptr : Base::Ptr {
+        struct Handle : Base::Handle {
 
-            using Base::Ptr::Ptr;
-            Ptr(Base::Ptr ptr)
-                : Base::Ptr(std::move(ptr))
+            using Base::Handle::Handle;
+            Handle(Base::Handle handle)
+                : Base::Handle(std::move(handle))
             {
             }
 
-            Threading::TaskFuture<bool> create(const CodeGen::ShaderFile &file, DirectX12VertexShaderLoader *loader = &DirectX12VertexShaderLoader::getSingleton());
+            Threading::TaskFuture<bool> load(ShaderObjectPtr object, DirectX12VertexShaderLoader *loader = &DirectX12VertexShaderLoader::getSingleton());
         };
 
-
-        bool loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
+        Threading::Task<bool> generate(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object = {});
         void unloadImpl(ReleasePtr<IDxcBlob> &shader);
 
-        bool create(ReleasePtr<IDxcBlob> &shader, const CodeGen::ShaderFile &file);
-
-        bool loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source);
+        bool loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint);
 
         virtual Threading::TaskQueue *loadingTaskQueue() const override;
 

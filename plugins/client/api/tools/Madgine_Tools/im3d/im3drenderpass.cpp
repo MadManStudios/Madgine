@@ -18,6 +18,8 @@
 #include "shaders/im3d.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
 
+#include "im3d_hlsl.h"
+
 namespace Engine {
 namespace Render {
 
@@ -29,7 +31,7 @@ namespace Render {
 
     void Im3DRenderPass::setup(RenderTarget *target)
     {
-        setupImpl(target, "im3d", "im3d", { sizeof(Im3DPerApplication), 0, sizeof(Im3DPerObject) });
+        setupImpl(target, HLSL::im3d_VS, HLSL::im3d_PS, { sizeof(Im3DPerApplication), 0, sizeof(Im3DPerObject) });
     }
 
     void Im3DRenderPass::render(RenderTarget *target, size_t iteration)

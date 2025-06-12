@@ -42,13 +42,6 @@ namespace Render {
         return mState;
     }
 
-    Threading::TaskFuture<bool> PipelineLoader::Instance::createGenerated(PipelineConfiguration config, CodeGen::ShaderFile file, PipelineLoader *loader)
-    {
-        assert(!mState.valid());
-        mState = loader->loadingTaskQueue()->queueTask(loader->create(*this, std::move(config), std::move(file)));
-        return mState;
-    }
-
     bool PipelineLoader::Instance::available() const
     {
         return mState.valid() && mState.is_ready() && mState;

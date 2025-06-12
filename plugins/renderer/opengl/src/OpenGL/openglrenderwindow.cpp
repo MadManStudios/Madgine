@@ -59,7 +59,8 @@ namespace Render {
 
         mSurface = eglCreateWindowSurface(sDisplay, config, (ANativeWindow *)w->mHandle, 0);
         assert(mSurface);
-
+#    else
+        addPostProcessing("gammaCorrection");
 #    endif
 
 #endif
@@ -71,7 +72,7 @@ namespace Render {
     {
         destroyContext(getSurface(), mContext, mReusedContext);
 
-#if ANDROID || EMSCRIPTEN
+#if ANDROID
         eglDestroySurface(sDisplay, mSurface);
 #endif
     }
@@ -121,8 +122,10 @@ namespace Render {
         return GetDC((HWND)mOsWindow->mHandle);
 #elif LINUX
         return mOsWindow->mHandle;
-#elif ANDROID || EMSCRIPTEN
+#elif ANDROID
         return mSurface;
+#elif EMSCRIPTEN
+        return nullptr;
 #elif OSX
         return mOsWindow;
 #elif IOS

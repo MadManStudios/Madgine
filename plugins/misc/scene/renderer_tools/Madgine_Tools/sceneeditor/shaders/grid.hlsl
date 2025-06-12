@@ -1,0 +1,48 @@
+
+cbuffer PerFrame : register(b1)
+{
+    matrix vp;
+}
+
+struct AppData
+{
+    float3 aPos : POSITION0;
+    float aW : POSITION1;
+};
+
+struct FragmentData
+{
+    float4 pos : SV_Position;
+    float4 worldPos : POSITION;
+};
+
+export FragmentData grid_VS(AppData IN)
+{
+    FragmentData OUT;
+    OUT.worldPos = float4(IN.aPos, IN.aW);
+    OUT.pos = mul(vp, OUT.worldPos);
+    return OUT;
+}
+
+float3 _smoothstep(float edge0, float edge1, float3 x)
+{
+    float3 t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+    return t * t * (3.0 - 2.0 * t);
+}
+
+export float4 grid_PS(FragmentData IN) : SV_TARGET
+{
+    float4 col = float4(0.0, 0.0, 0.0, 0.0);
+
+    float3 coord = IN.worldPos.xyz / 1.0; //square size in world space
+    coord /= IN.worldPos.w;
+	
+    float3 fract = frac(coord); //fractional parts of squares
+	//interpolation, grad is smoothness of line gradients
+    float grad = 0.01;
+    float3 mult = _smoothstep(0.0, grad, fract) - _smoothstep(1.0 - grad, 1.0, fract);
+	//col = mix(float4(1.0,1.0,1.0,1.0), vec4(0.0,0.0,0.0,0.0), mult.x * mult.y * mult.z);
+    col = float4(0.7, 0.7, 0.7, clamp(1.0 - mult.x * mult.z, 0.0, 1.0));
+
+    return col;
+}
