@@ -30,7 +30,7 @@ namespace Render {
         bool mReusedContext;
 
 #if OPENGL_ES
-#    if ANDROID || EMSCRIPTEN
+#    if ANDROID
         EGLSurface mSurface = nullptr;
 #    endif
 #endif

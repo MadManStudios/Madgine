@@ -35,6 +35,8 @@
 
 #include "widgetloader.h"
 
+#include "widgets_hlsl.h"
+
 NAMED_UNIQUECOMPONENT(WidgetManager, Engine::Widgets::WidgetManager)
 
 METATABLE_BEGIN(Engine::Widgets::WidgetManager)
@@ -638,7 +640,7 @@ namespace Widgets {
 
     void WidgetManager::setup(Render::RenderTarget *target)
     {
-        setupImpl(target, "widgets", "widgets", { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) });
+        setupImpl(target, HLSL::widgets_VS, HLSL::widgets_PS, { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) });
     }
 
 }

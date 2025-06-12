@@ -4,6 +4,8 @@
 
 #include "Generic/bytebuffer.h"
 
+#include "shaderobject.h"
+
 namespace Engine {
 namespace Render {
 
@@ -12,10 +14,9 @@ namespace Render {
     struct ResourceBlock;
 
     struct PipelineConfiguration {
-        std::string_view vs;
-        std::string_view ps;
+        ShaderObjectPtr vs;        
+        ShaderObjectPtr ps;        
         std::vector<size_t> bufferSizes;
-        std::vector<std::string> postProcessing;
         bool depthChecking = true;
     };
 

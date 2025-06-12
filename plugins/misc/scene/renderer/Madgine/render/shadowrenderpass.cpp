@@ -22,6 +22,8 @@
 #include "shaders/scene.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
 
+#include "scene_hlsl.h"
+
 namespace Engine {
 namespace Render {
 
@@ -33,7 +35,7 @@ namespace Render {
 
     void ShadowRenderPass::setup(RenderTarget *target)
     {
-        setupImpl(target, "scene", "", { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
+        setupImpl(target, HLSL::scene_VS, {}, { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
 
         addDependency(&mData);
     }

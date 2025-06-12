@@ -20,6 +20,7 @@
 #include "shaders/grid.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
 
+#include "grid_hlsl.h"
 
 namespace Engine {
 namespace Tools {
@@ -28,11 +29,12 @@ namespace Tools {
         : mCamera(camera)
         , mPriority(priority)
     {
-
         mMesh.load("Plane");
+    }
 
-        mPipeline.create({ .vs = "grid", .ps = "grid", .bufferSizes = { 0, sizeof(GridPerFrame) } });
-
+    void GridPass::setup(Render::RenderTarget *target)
+    {
+        setupImpl(target, HLSL::grid_VS, HLSL::grid_PS, { 0, sizeof(GridPerFrame) });        
     }
 
     void GridPass::render(Render::RenderTarget *target, size_t iteration)
