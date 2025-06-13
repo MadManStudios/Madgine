@@ -271,8 +271,19 @@ namespace Window {
         {
 
             switch (eventType) {
-            case EMSCRIPTEN_EVENT_WHEEL:
-                return injectAxisEvent(Input::AxisEventArgs { Input::AxisEventArgs::WHEEL, static_cast<float>(wheelEvent->deltaY) });
+            case EMSCRIPTEN_EVENT_WHEEL: {
+                float delta = wheelEvent->deltaY;
+                switch (wheelEvent->deltaMode) {
+                case DOM_DELTA_PIXEL:
+                    break;
+                case DOM_DELTA_LINE:
+                    delta *= 32.0f;
+                    break;
+                case DOM_DELTA_PAGE:
+                    delta *= 1068.0f;
+                }
+                return injectAxisEvent(Input::AxisEventArgs { Input::AxisEventArgs::WHEEL, -delta / 120.0f });
+            }
             }
 
             return EM_FALSE;
