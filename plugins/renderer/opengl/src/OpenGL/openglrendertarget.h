@@ -7,7 +7,7 @@ namespace Render {
 
     struct MADGINE_OPENGL_EXPORT OpenGLRenderTarget : RenderTarget {
 
-        OpenGLRenderTarget(OpenGLRenderContext *context, bool global, std::string name, bool flipFlop = false, RenderTarget *blitSource = nullptr);
+        OpenGLRenderTarget(OpenGLRenderContext *context, bool global, std::string name, bool isSRGBTarget, bool flipFlop = false, RenderTarget *blitSource = nullptr);
         ~OpenGLRenderTarget();
 
         virtual void beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
@@ -27,6 +27,8 @@ namespace Render {
         virtual Matrix4 getClipSpaceMatrix() const override;
 
         OpenGLRenderContext *context() const;
+
+        bool mIsSRGBTarget;
     };
 
 }
