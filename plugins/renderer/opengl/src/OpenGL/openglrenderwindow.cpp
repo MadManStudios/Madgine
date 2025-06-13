@@ -19,7 +19,7 @@ namespace Engine {
 namespace Render {
 
     OpenGLRenderWindow::OpenGLRenderWindow(OpenGLRenderContext *context, Window::OSWindow *w, size_t samples, OpenGLRenderWindow *reusedResources)
-        : OpenGLRenderTarget(context, true, w->title())
+        : OpenGLRenderTarget(context, true, w->title(), true)
         , mOsWindow(w)
         , mReusedContext(reusedResources)
     {

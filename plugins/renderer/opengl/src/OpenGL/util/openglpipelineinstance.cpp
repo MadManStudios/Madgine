@@ -118,7 +118,14 @@ namespace Render {
         glBindVertexBuffer(0, mBuffer, mBufferOffset, mStride);
         GL_CHECK();
 #    endif
-#endif
+
+        int location = glGetUniformLocation(mHandle, "SRGB_FRAMEBUFFER");
+        GL_CHECK();
+        if (location != -1) {
+            glUniform1i(location, static_cast<OpenGLRenderTarget *>(target)->mIsSRGBTarget);
+            GL_CHECK();
+        }
+#endif        
 
         if (mHasIndices) {
             glDrawElements(mMode, mElementCount, GL_UNSIGNED_INT, reinterpret_cast<const void *>(mIndexOffset));
@@ -146,6 +153,13 @@ namespace Render {
         vertexOffset = 0;
         GL_CHECK();
 #    endif
+
+        int location = glGetUniformLocation(mHandle, "SRGB_FRAMEBUFFER");
+        GL_CHECK();
+        if (location != -1) {
+            glUniform1i(location, static_cast<OpenGLRenderTarget *>(target)->mIsSRGBTarget);
+            GL_CHECK();
+        }
 #endif
 
         if (mHasIndices) {
@@ -170,6 +184,13 @@ namespace Render {
         glBindVertexBuffer(0, mBuffer, mBufferOffset, mStride);
         GL_CHECK();
 #    endif
+
+        int location = glGetUniformLocation(mHandle, "SRGB_FRAMEBUFFER");
+        GL_CHECK();
+        if (location != -1) {
+            glUniform1i(location, static_cast<OpenGLRenderTarget *>(target)->mIsSRGBTarget);
+            GL_CHECK();
+        }
 #endif
 
         if (mHasIndices) {

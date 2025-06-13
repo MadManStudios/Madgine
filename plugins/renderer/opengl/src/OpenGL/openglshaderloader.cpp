@@ -54,11 +54,11 @@ namespace Render {
     OpenGLShaderLoader::OpenGLShaderLoader()
         : ResourceLoader({
 #if !OPENGL_ES
-            ".glsl"
+              ".glsl"
 #else
-            ".glsl_es"
+              ".glsl_es"
 #endif
-        })
+          })
     {
     }
 
@@ -111,7 +111,42 @@ namespace Render {
 
         GLuint handle = tempShader.mHandle;
 
-        const char *cSource = source.data();
+#if OPENGL_ES
+        if (type == PixelShader) {
+            auto out_var_SV_TARGET = source.find("out_var_SV_TARGET = ");
+            if (out_var_SV_TARGET != std::string::npos) {
+                auto entrypoint = source.find("void main()");
+                assert(entrypoint != std::string::npos && out_var_SV_TARGET > entrypoint);
+                auto eol = source.find(';', out_var_SV_TARGET);
+                assert(eol != std::string::npos);
+                ++eol;
+                source.insert(eol, R"(
+    if (SRGB_FRAMEBUFFER){
+        out_var_SV_TARGET = vec4(linearToSrgb(out_var_SV_TARGET.rgb).rgb, out_var_SV_TARGET.a);
+    })");          
+                source.insert(entrypoint, R"(uniform bool SRGB_FRAMEBUFFER;
+
+vec3 linearToSrgb(vec3 linearRGB) {
+  // Define constants for sRGB conversion
+  const float kLinearToSrgbCutoff = 0.0031308;
+  const float kLinearToSrgbScale = 1.055;
+  const float kLinearToSrgbOffset = -0.055;
+  const float kLinearToSrgbLinearScale = 12.92;
+
+  // Apply the sRGB transfer function
+  return mix(
+      pow(linearRGB, vec3(1.0 / 2.4)) * kLinearToSrgbScale + kLinearToSrgbOffset,
+      linearRGB * kLinearToSrgbLinearScale,
+      vec3(linearRGB.x < kLinearToSrgbCutoff, linearRGB.y < kLinearToSrgbCutoff, linearRGB.z < kLinearToSrgbCutoff)
+  );
+}
+
+)");
+            }
+        }
+#endif
+
+            const char *cSource = source.data();
 
         glShaderSource(handle, 1, &cSource, NULL);
         glCompileShader(handle);
