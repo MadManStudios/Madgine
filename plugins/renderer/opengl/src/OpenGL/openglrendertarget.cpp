@@ -41,6 +41,9 @@ namespace Render {
         glViewport(0, 0, static_cast<GLsizei>(screenSize.x), static_cast<GLsizei>(screenSize.y));
         GL_CHECK();
 
+        glScissor(0, 0, static_cast<GLsizei>(screenSize.x), static_cast<GLsizei>(screenSize.y));
+        GL_CHECK();
+
 #if ANDROID || EMSCRIPTEN
         if (!mIsWindow)
             glClearColor(0.033f, 0.073f, 0.073f, 1.0f);
@@ -72,11 +75,16 @@ namespace Render {
 
         glViewport(space.mTopLeft.x, screenSize.y - (space.mTopLeft.y + space.mSize.y), space.mSize.x, space.mSize.y);
         GL_CHECK();
+
+        glScissor(space.mTopLeft.x, screenSize.y - (space.mTopLeft.y + space.mSize.y), space.mSize.x, space.mSize.y);
+        GL_CHECK();
     }
 
     void OpenGLRenderTarget::setScissorsRect(const Rect2i &space)
     {
-        glScissor(space.mTopLeft.x, space.mTopLeft.y, space.mSize.x, space.mSize.y);
+        const Vector2i &screenSize = size();
+
+        glScissor(space.mTopLeft.x, screenSize.y - (space.mTopLeft.y + space.mSize.y), space.mSize.x, space.mSize.y);
         GL_CHECK();
     }
 
