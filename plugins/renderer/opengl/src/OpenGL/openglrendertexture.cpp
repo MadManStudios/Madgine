@@ -53,7 +53,7 @@ namespace Render {
     }
 
     OpenGLRenderTexture::OpenGLRenderTexture(OpenGLRenderContext *context, const Vector2i &size, const RenderTextureConfig &config)
-        : OpenGLRenderTarget(context, false, config.mName, config.mFormat == FORMAT_RGBA8_SRGB, config.mFlipFlop, config.mBlitSource)
+        : OpenGLRenderTarget(context, false, config.mName, config.mFormat == FORMAT_RGBA8_SRGB, false, config.mFlipFlop, config.mBlitSource)
         , mSamples(context->supportsMultisampling() ? config.mSamples : 1)
         , mSize { 0, 0 }
         , mType(config.mType)
