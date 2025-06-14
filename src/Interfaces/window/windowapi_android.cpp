@@ -27,6 +27,9 @@ namespace Window {
     SystemVariable<ANativeWindow *> sNativeWindow = nullptr;
     AInputQueue *sQueue = nullptr;
 
+    static constexpr float sTouchMoveThreshold = 10.0f;
+    static constexpr int64_t sTouchRightclickThreshold = 300000000.0;
+
     struct AndroidWindow final : OSWindow {
         AndroidWindow(ANativeWindow *window, WindowEventListener *listener)
             : OSWindow((uintptr_t)window, listener)
@@ -46,18 +49,26 @@ namespace Window {
 
             switch (action & AMOTION_EVENT_ACTION_MASK) {
             case AMOTION_EVENT_ACTION_DOWN:
-                injectPointerMove({ position, position,
-                    position - mLastKnownMousePos });
-                handled = injectPointerPress({ position, position,
-                    Input::MouseButton::LEFT_BUTTON });
+                mTouchStartPosition = position;
+                mTouchStartTimestamp = AMotionEvent_getEventTime(event);
+                mPendingTouch = true;
+                injectPointerMove({ position, position, position - mLastMousePosition });
                 break;
             case AMOTION_EVENT_ACTION_UP:
-                handled = injectPointerRelease({ position, position,
-                    Input::MouseButton::LEFT_BUTTON });
+                int64_t nanoseconds = AMotionEvent_getEventTime(event) - mTouchStartTimestamp;
+                Input::MouseButton::MouseButton button = nanoseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
+                if (mPendingTouch) {
+                    handled |= injectPointerPress({ mTouchStartPosition, mTouchStartPosition, button });
+                    mPendingTouch = false;
+                }
+                handled |= injectPointerRelease({ position, position, button });
                 break;
             case AMOTION_EVENT_ACTION_MOVE:
-                handled = injectPointerMove({ position, position,
-                    position - mLastKnownMousePos });
+                if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
+                    injectPointerPress({ mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
+                    mPendingTouch = false;
+                }
+                handled = injectPointerMove({ position, screenPosition, position - mLastMousePosition });
                 break;
             case AMOTION_EVENT_ACTION_CANCEL:
                 LOG("Motion Cancel");
@@ -154,6 +165,11 @@ namespace Window {
 
         // Input
         InterfacesVector mLastKnownMousePos;
+                
+        InterfacesVector mTouchStartScreenPosition;
+        InterfacesVector mTouchStartPosition;
+        bool mPendingTouch = false;
+        int64_t mTouchStartTimestamp;
 
         std::atomic_flag mResizeNeeded;
         bool mMinimized = false;

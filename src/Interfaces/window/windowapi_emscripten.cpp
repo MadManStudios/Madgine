@@ -25,6 +25,9 @@ namespace Window {
 
     DLL_EXPORT EGLDisplay sDisplay = EGL_NO_DISPLAY;
 
+    static constexpr float sTouchMoveThreshold = 10.0f;
+    static constexpr double sTouchRightclickThreshold = 300.0;
+
     static struct DisplayGuard {
         DisplayGuard()
         {
@@ -298,14 +301,27 @@ namespace Window {
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_TOUCHMOVE:
+                if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
+                    injectPointerPress({ mTouchStartPosition, mTouchStartScreenPosition, Input::MouseButton::LEFT_BUTTON });
+                    mPendingTouch = false;
+                }
                 handled = injectPointerMove({ position, screenPosition, position - mLastMousePosition });
                 break;
             case EMSCRIPTEN_EVENT_TOUCHSTART:
+                mTouchStartScreenPosition = screenPosition;
+                mTouchStartPosition = position;
+                mTouchStartTimestamp = touchEvent->timestamp;
+                mPendingTouch = true;
                 injectPointerMove({ position, screenPosition, position - mLastMousePosition });
-                handled = injectPointerPress({ position, screenPosition, Input::MouseButton::LEFT_BUTTON });
                 break;
             case EMSCRIPTEN_EVENT_TOUCHEND:
-                handled = injectPointerRelease({ position, screenPosition, Input::MouseButton::LEFT_BUTTON });
+                double milliseconds = touchEvent->timestamp - mTouchStartTimestamp;
+                Input::MouseButton::MouseButton button = milliseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
+                if (mPendingTouch) {
+                    handled |= injectPointerPress({ mTouchStartPosition, mTouchStartScreenPosition, button });
+                    mPendingTouch = false;
+                }
+                handled |= injectPointerRelease({ position, screenPosition, button });
                 break;
             }
 
@@ -325,6 +341,11 @@ namespace Window {
 
         InterfacesVector mSize;
         InterfacesVector mLastMousePosition;
+
+        InterfacesVector mTouchStartScreenPosition;
+        InterfacesVector mTouchStartPosition;
+        bool mPendingTouch = false;
+        double mTouchStartTimestamp;
 
         // Input
         bool mKeyDown[512];
