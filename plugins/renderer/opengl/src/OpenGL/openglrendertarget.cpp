@@ -11,9 +11,10 @@
 namespace Engine {
 namespace Render {
 
-    OpenGLRenderTarget::OpenGLRenderTarget(OpenGLRenderContext *context, bool global, std::string name, bool isSRGBTarget, bool flipFlop, RenderTarget *blitSource)
+    OpenGLRenderTarget::OpenGLRenderTarget(OpenGLRenderContext *context, bool global, std::string name, bool isSRGBTarget, bool isWindow, bool flipFlop, RenderTarget *blitSource)
         : RenderTarget(context, global, name, flipFlop, blitSource)
         , mIsSRGBTarget(isSRGBTarget)
+        , mIsWindow(isWindow)
     {
     }
 
@@ -40,11 +41,13 @@ namespace Render {
         glViewport(0, 0, static_cast<GLsizei>(screenSize.x), static_cast<GLsizei>(screenSize.y));
         GL_CHECK();
 
-#if !ANDROID && !EMSCRIPTEN
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-#else
-        glClearColor(0.033f, 0.073f, 0.073f, 1.0f);
+#if ANDROID || EMSCRIPTEN
+        if (!mIsWindow)
+            glClearColor(0.033f, 0.073f, 0.073f, 1.0f);
+        else
 #endif
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
         GL_CHECK();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         GL_CHECK();
