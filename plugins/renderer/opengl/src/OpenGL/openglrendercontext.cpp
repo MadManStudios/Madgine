@@ -488,6 +488,9 @@ namespace Render {
             GL_CHECK();
             // glDepthRange(0.0, 1.0);
 
+            glEnable(GL_SCISSOR_TEST);
+            GL_CHECK();
+
             if (glGetString) {
                 const GLubyte *val;
 #define GL_LOG_PROPERTY(name)         \
