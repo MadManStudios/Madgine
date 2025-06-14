@@ -55,6 +55,59 @@ UNIQUECOMPONENT(Engine::Tools::ClientImRoot)
 namespace Engine {
 namespace Tools {
 
+    static std::map<Input::Key::Key, ImGuiKey> sKeyMap {
+        { Input::Key::Tabulator, ImGuiKey_Tab },
+        { Input::Key::LeftArrow, ImGuiKey_LeftArrow },
+        { Input::Key::RightArrow, ImGuiKey_RightArrow },
+        { Input::Key::UpArrow, ImGuiKey_UpArrow },
+        { Input::Key::DownArrow, ImGuiKey_DownArrow },
+        { Input::Key::PageUp, ImGuiKey_PageUp },
+        { Input::Key::PageDown, ImGuiKey_PageDown },
+        { Input::Key::Home, ImGuiKey_Home },
+        { Input::Key::End, ImGuiKey_End },
+        { Input::Key::Insert, ImGuiKey_Insert },
+        { Input::Key::Delete, ImGuiKey_Delete },
+        { Input::Key::Backspace, ImGuiKey_Backspace },
+        { Input::Key::Space, ImGuiKey_Space },
+        { Input::Key::Return, ImGuiKey_Enter },
+        { Input::Key::Escape, ImGuiKey_Escape },
+        { Input::Key::LShift, ImGuiKey_LeftShift},
+        { Input::Key::Shift, ImGuiKey_LeftShift },
+        { Input::Key::RShift, ImGuiKey_RightShift },
+        { Input::Key::LAlt, ImGuiKey_LeftAlt },
+        { Input::Key::Alt, ImGuiKey_LeftAlt },
+        { Input::Key::RAlt, ImGuiKey_RightAlt },
+        { Input::Key::LControl, ImGuiKey_LeftCtrl },
+        { Input::Key::Control, ImGuiKey_LeftCtrl },
+        { Input::Key::RControl, ImGuiKey_RightCtrl },
+        { Input::Key::A, ImGuiKey_A },
+        { Input::Key::B, ImGuiKey_B },
+        { Input::Key::C, ImGuiKey_C },
+        { Input::Key::D, ImGuiKey_D },
+        { Input::Key::E, ImGuiKey_E },
+        { Input::Key::F, ImGuiKey_F },
+        { Input::Key::G, ImGuiKey_G },
+        { Input::Key::H, ImGuiKey_H },
+        { Input::Key::I, ImGuiKey_I },
+        { Input::Key::J, ImGuiKey_J },
+        { Input::Key::K, ImGuiKey_K },
+        { Input::Key::L, ImGuiKey_L },
+        { Input::Key::M, ImGuiKey_M },
+        { Input::Key::N, ImGuiKey_N },
+        { Input::Key::O, ImGuiKey_O },
+        { Input::Key::P, ImGuiKey_P },
+        { Input::Key::Q, ImGuiKey_Q },
+        { Input::Key::R, ImGuiKey_R },
+        { Input::Key::S, ImGuiKey_S },
+        { Input::Key::T, ImGuiKey_T },
+        { Input::Key::U, ImGuiKey_U },
+        { Input::Key::V, ImGuiKey_V },
+        { Input::Key::W, ImGuiKey_W },
+        { Input::Key::X, ImGuiKey_X },
+        { Input::Key::Y, ImGuiKey_Y },
+        { Input::Key::Z, ImGuiKey_Z },
+    };
+
     static void CreateImGuiToolWindow(ImGuiViewport *vp)
     {
 
@@ -195,30 +248,6 @@ namespace Tools {
             ImGuiViewport *main_viewport = ImGui::GetMainViewport();
             main_viewport->PlatformHandle = mWindow.osWindow();
         }
-
-        // Input
-        io.KeyMap[ImGuiKey_Tab] = Input::Key::Tabulator;
-        io.KeyMap[ImGuiKey_LeftArrow] = Input::Key::LeftArrow;
-        io.KeyMap[ImGuiKey_RightArrow] = Input::Key::RightArrow;
-        io.KeyMap[ImGuiKey_UpArrow] = Input::Key::UpArrow;
-        io.KeyMap[ImGuiKey_DownArrow] = Input::Key::DownArrow;
-        io.KeyMap[ImGuiKey_PageUp] = Input::Key::PageUp;
-        io.KeyMap[ImGuiKey_PageDown] = Input::Key::PageDown;
-        io.KeyMap[ImGuiKey_Home] = Input::Key::Home;
-        io.KeyMap[ImGuiKey_End] = Input::Key::End;
-        io.KeyMap[ImGuiKey_Insert] = Input::Key::Insert;
-        io.KeyMap[ImGuiKey_Delete] = Input::Key::Delete;
-        io.KeyMap[ImGuiKey_Backspace] = Input::Key::Backspace;
-        io.KeyMap[ImGuiKey_Space] = Input::Key::Space;
-        io.KeyMap[ImGuiKey_Enter] = Input::Key::Return;
-        io.KeyMap[ImGuiKey_Escape] = Input::Key::Escape;
-        // io.KeyMap[ImGuiKey_KeyPadEnter] = Input::Key::Return;
-        io.KeyMap[ImGuiKey_A] = Input::Key::A;
-        io.KeyMap[ImGuiKey_C] = Input::Key::C;
-        io.KeyMap[ImGuiKey_V] = Input::Key::V;
-        io.KeyMap[ImGuiKey_X] = Input::Key::X;
-        io.KeyMap[ImGuiKey_Y] = Input::Key::Y;
-        io.KeyMap[ImGuiKey_Z] = Input::Key::Z;
 
         Im3D::GetIO().mFetchFont = [](const char *fontName) {
             Render::FontLoader::Handle font;
@@ -508,14 +537,14 @@ namespace Tools {
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        io.KeysDown[arg.scancode] = true;
+        io.AddKeyEvent(sKeyMap.at(arg.scancode), true);
 
         if (arg.text > 0)
             io.AddInputCharacter(arg.text);
 
-        io.KeyShift = arg.mControlKeys.mShift;
-        io.KeyCtrl = arg.mControlKeys.mCtrl;
-        io.KeyAlt = arg.mControlKeys.mAlt;
+        // io.KeyShift = arg.mControlKeys.mShift;
+        // io.KeyCtrl = arg.mControlKeys.mCtrl;
+        // io.KeyAlt = arg.mControlKeys.mAlt;
 
         return io.WantCaptureKeyboard;
     }
@@ -524,11 +553,11 @@ namespace Tools {
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        io.KeysDown[arg.scancode] = false;
+        io.AddKeyEvent(sKeyMap.at(arg.scancode), false);
 
-        io.KeyShift = arg.mControlKeys.mShift;
-        io.KeyCtrl = arg.mControlKeys.mCtrl;
-        io.KeyAlt = arg.mControlKeys.mAlt;
+        // io.KeyShift = arg.mControlKeys.mShift;
+        // io.KeyCtrl = arg.mControlKeys.mCtrl;
+        // io.KeyAlt = arg.mControlKeys.mAlt;
 
         return io.WantCaptureKeyboard;
     }
@@ -536,7 +565,7 @@ namespace Tools {
     bool ClientImRoot::injectPointerPress(const Engine::Input::PointerEventArgs &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
-        io.MouseDown[arg.button - 1] = true;
+        io.AddMouseButtonEvent(arg.button - 1, true);
 
         return io.WantCaptureMouse;
     }
@@ -544,7 +573,7 @@ namespace Tools {
     bool ClientImRoot::injectPointerRelease(const Engine::Input::PointerEventArgs &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
-        io.MouseDown[arg.button - 1] = false;
+        io.AddMouseButtonEvent(arg.button - 1, false);
 
         return io.WantCaptureMouse;
     }
@@ -553,10 +582,13 @@ namespace Tools {
     {
         ImGuiIO &io = ImGui::GetIO();
 
+        Vector2 pos;
         if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            io.MousePos = Vector2 { static_cast<float>(arg.screenPosition.x), static_cast<float>(arg.screenPosition.y) } / io.DisplayFramebufferScale;
+            pos = Vector2 { static_cast<float>(arg.screenPosition.x), static_cast<float>(arg.screenPosition.y) } / io.DisplayFramebufferScale;
         else
-            io.MousePos = Vector2 { static_cast<float>(arg.windowPosition.x), static_cast<float>(arg.windowPosition.y) } / io.DisplayFramebufferScale;
+            pos = Vector2 { static_cast<float>(arg.windowPosition.x), static_cast<float>(arg.windowPosition.y) } / io.DisplayFramebufferScale;
+
+        io.AddMousePosEvent(pos.x, pos.y);
 
         // LOG(io.MousePos.x << ", " << io.MousePos.y);
 
@@ -570,7 +602,7 @@ namespace Tools {
         ImGuiIO &io = ImGui::GetIO();
         switch (arg.mAxisType) {
         case Input::AxisEventArgs::WHEEL:
-            io.MouseWheel += arg.mAxis1;
+            io.AddMouseWheelEvent(0.0f, arg.mAxis1);
             break;
         case Input::AxisEventArgs::Z:
             mZAxis = arg.mAxis1;
