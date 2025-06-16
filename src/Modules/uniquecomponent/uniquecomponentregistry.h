@@ -57,23 +57,23 @@ namespace UniqueComponent {
 
         std::vector<CollectorInfoBase *>::iterator begin()
         {
-            return mLoadedCollectors.begin();
+            return mCollectors.begin();
         }
 
         std::vector<CollectorInfoBase *>::iterator end()
         {
-            return mLoadedCollectors.end();
+            return mCollectors.end();
         }
         
         void addCollector(CollectorInfoBase *info)
         {
-            mUnloadedCollectors.push_back(info);
+            mCollectors.push_back(info);
         }
 
         void removeCollector(CollectorInfoBase *info)
         {
             // assert(std::find(mLoadedCollectors.begin(), mLoadedCollectors.end(), info) == mLoadedCollectors.end());
-            std::erase(mUnloadedCollectors, info);
+            std::erase(mCollectors, info);
         }
 
         const Plugins::BinaryInfo *mBinary;
@@ -82,8 +82,7 @@ namespace UniqueComponent {
         bool mIsNamed = false;
 
     protected:
-        std::vector<CollectorInfoBase *> mLoadedCollectors;
-        std::vector<CollectorInfoBase *> mUnloadedCollectors;
+        std::vector<CollectorInfoBase *> mCollectors;
 
     private:
         const TypeInfo *mTi;
@@ -146,38 +145,33 @@ namespace UniqueComponent {
 
         void onPluginLoad(const Plugins::BinaryInfo *bin)
         {
-            for (auto it = mUnloadedCollectors.begin(); it != mUnloadedCollectors.end();) {
-                CollectorInfo *info = static_cast<CollectorInfo*>(*it);
+            assert(!bin->mIsStub);
+            for (CollectorInfoBase *_info : mCollectors) {
+                CollectorInfo *info = static_cast<CollectorInfo*>(_info);
                 if (info->mBinary == bin) {
-                    mLoadedCollectors.push_back(info);
+                    assert(!info->mBaseIndex);
                     info->mBaseIndex = mComponents.size();
                     for (const Annotations &annotations : info->mComponents) {
                         mComponents.push_back(annotations);
                     }
-                    it = mUnloadedCollectors.erase(it);
-                } else {
-                    ++it;
                 }
             }
         }
 
         void onPluginUnload(const Plugins::BinaryInfo *bin)
         {
-            for (auto it = mLoadedCollectors.begin(); it != mLoadedCollectors.end();) {
-                CollectorInfo *info = static_cast<CollectorInfo *>(*it);
+            for (CollectorInfoBase *_info : mCollectors) {
+                CollectorInfo *info = static_cast<CollectorInfo *>(_info);
                 if (info->mBinary == bin) {
-                    mUnloadedCollectors.push_back(info);
-                    it = mLoadedCollectors.erase(it);
+                    assert(info->mBaseIndex);
                     mComponents.erase(mComponents.begin() + info->mBaseIndex, mComponents.begin() + info->mBaseIndex + info->mComponents.size());
 
-                    for (CollectorInfoBase *i : mLoadedCollectors) {
-                        if (i->mBaseIndex >= info->mBaseIndex)
+                    for (CollectorInfoBase *i : mCollectors) {
+                        if (i->mBaseIndex && i->mBaseIndex >= info->mBaseIndex)
                             i->mBaseIndex -= info->mComponents.size();
                     }
 
                     info->mBaseIndex.reset();
-                } else {
-                    ++it;
                 }
             }
         }
@@ -224,9 +218,9 @@ namespace UniqueComponent {
 
         std::string_view componentName(uint32_t index)
         {
-            for (CollectorInfoBase *info : this->mLoadedCollectors) {
+            for (CollectorInfoBase *info : this->mCollectors) {
                 assert(index >= info->mBaseIndex);
-                if (index < info->mBaseIndex + info->mComponentNames.size()) {
+                if (info->mBaseIndex && index < info->mBaseIndex + info->mComponentNames.size()) {
                     return info->mComponentNames[index - info->mBaseIndex];
                 }
             }
@@ -242,7 +236,7 @@ namespace UniqueComponent {
         {
             size_t counter = this->mComponentsByName.size();
 
-            for (CollectorInfoBase *info : this->mUnloadedCollectors) {
+            for (CollectorInfoBase *info : this->mCollectors) {
                 if (info->mBinary == bin) {
                     const std::vector<std::string_view> &names = static_cast<CollectorInfo *>(info)->mComponentNames;
                     for (std::string_view name : names) {
