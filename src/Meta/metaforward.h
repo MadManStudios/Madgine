@@ -75,6 +75,9 @@ namespace Serialize {
     template <typename T>
     struct Syncable;
 
+    template <typename T>
+    struct NoParent;
+
     struct StreamResult;
     struct StreamVisitor;
 

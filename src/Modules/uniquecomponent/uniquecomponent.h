@@ -99,7 +99,7 @@ namespace UniqueComponent {
         using T = _T;
     };
 
-    template <typename _T, typename Collector, typename _Base>
+    template <typename _T, typename _Collector, typename _Base>
     struct VirtualComponentBase : _Base {
         using _Base::_Base;
 
@@ -107,20 +107,22 @@ namespace UniqueComponent {
             return true;
         }
 
+        using Collector = _Collector;
         using T = _T;
     };
 
-    template <typename _T, typename Collector, typename _Base>
+    template <typename _T, typename _Collector, typename _Base>
     struct Component : _Base {
         using _Base::_Base;
 
+        using Collector = _Collector;
         using T = _T;
     };
 
 }
 }
 
-#    define UNIQUECOMPONENT(Type)
+#    define UNIQUECOMPONENT(Type) template Type::Collector::Registry::Annotations::GroupedAnnotation(Engine::type_holder_t<Type::T>, Engine::type_holder_t<Type>);
 #    define UNIQUECOMPONENT2(Name, ext)
 #    define VIRTUALUNIQUECOMPONENTBASE(Name)
 
