@@ -51,8 +51,6 @@ namespace Plugins {
             if (result == Dl::DlAPIResult::SUCCESS) {
                 const BinaryInfo *bin = info();
                 if (bin) {
-                    bin->mSelf = this;
-
                     for (const char **dep = bin->mPluginDependencies; *dep; ++dep) {
                         addDependency(manager.getPlugin(*dep));
                     }
