@@ -24,6 +24,8 @@ namespace Engine {
 
 			const char **mPluginDependencies;
             const char **mPluginGroupDependencies;
+
+			bool mIsStub;
 		};
 
 #if ENABLE_PLUGINS

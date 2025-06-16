@@ -3,8 +3,8 @@
 #include "Modules/plugins/binaryinfo.h"
 
 /*namespace Engine{
-	namespace Plugins {
-	*/
+        namespace Plugins {
+        */
 
 static const char *dependencies[] = { PLUGIN_DEPENDENCIES };
 static const char *groupDependencies[] = { PLUGIN_GROUP_DEPENDENCIES };
@@ -26,10 +26,16 @@ extern "C" DLL_EXPORT const Engine::Plugins::BinaryInfo PLUGIN_LOCAL(binaryInfo)
 
     PRECOMPILED_HEADER_PATH,
     dependencies,
-    groupDependencies
+    groupDependencies,
+
+#ifdef PLUGIN_STUBS
+    true
+#else
+    false
+#endif
 
 };
 
 /*
-	}
+        }
 }*/

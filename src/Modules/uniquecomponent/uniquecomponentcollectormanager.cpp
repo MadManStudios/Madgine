@@ -19,7 +19,7 @@ namespace UniqueComponent {
     {
         for (const auto &section : pluginMgr) {
             for (const auto &plugin : section) {
-                if (plugin.isLoaded(pluginMgr.selection())) {
+                if (plugin.isLoaded(pluginMgr.selection()) && !plugin.info()->mIsStub) {
                     for (RegistryBase *reg : registryRegistry()) {
                         reg->onPluginLoad(plugin.info());
                     }

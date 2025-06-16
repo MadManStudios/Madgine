@@ -55,12 +55,48 @@ endif ()
 
 macro(add_plugin name base type)
 
-	set(options)
-	set(oneValueArgs INSTALL_COMPONENT)
-	set(multiValueArgs EXTERNAL_DEPS API_PLUGIN IMPORTED_DEPS)
+	set(options STUB)
+	set(oneValueArgs INSTALL_COMPONENT PRECOMPILED_HEADER SOURCE_ROOT)
+	set(multiValueArgs EXTERNAL_DEPS API_PLUGIN IMPORTED_DEPS UNIQUE_COMPONENTS)
 	cmake_parse_arguments(PLUGIN_CONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})	
 
-	add_workspace_library(${name} ${PLUGIN_CONFIG_UNPARSED_ARGUMENTS})
+	if (PLUGIN_CONFIG_STUB)
+		set(args ${workspace_file_dir}/plugin_stub.cpp)
+	else()
+		set(args ${PLUGIN_CONFIG_UNPARSED_ARGUMENTS})		
+	endif()
+
+	if (PLUGIN_CONFIG_PRECOMPILED_HEADER)
+		set(args ${args} PRECOMPILED_HEADER ${PLUGIN_CONFIG_PRECOMPILED_HEADER})
+	endif()
+
+	if (PLUGIN_CONFIG_SOURCE_ROOT)
+		set(args ${args} SOURCE_ROOT ${PLUGIN_CONFIG_SOURCE_ROOT})
+	endif()
+
+	add_workspace_library(${name} ${args})
+
+	if (PLUGIN_CONFIG_STUB)
+		set(virtual_stub FALSE)
+		set(virtual_base)
+		set(stubs_registry)
+		set(stubs_acc)
+		foreach(element ${PLUGIN_CONFIG_UNIQUE_COMPONENTS})
+			if(element STREQUAL "VIRTUAL")
+				set(virtual_stub TRUE)
+			elseif(virtual_stub)
+				set(virtual_stub FALSE)
+				set(virtual_base ${element})
+			elseif(NOT stubs_registry)
+				set(stubs_registry ${element})
+			else()
+				set(stubs_acc "${stubs_acc}\nUNIQUECOMPONENT_STUB(${element}, ${stubs_registry}, ${virtual_base})")
+				set(stubs_registry )
+				set(virtual_base )
+			endif()
+		endforeach()
+		target_compile_definitions(${name} PRIVATE PLUGIN_STUBS=${stubs_acc})
+	endif()
 
 	set_target_properties(${name} PROPERTIES 
 		OUTPUT_NAME Plugin_${base}_${type}_${name}
@@ -107,7 +143,7 @@ macro(add_plugin name base type)
 		install(IMPORTED_RUNTIME_ARTIFACTS ${PLUGIN_CONFIG_IMPORTED_DEPS} RUNTIME DESTINATION bin COMPONENT ${PLUGIN_CONFIG_INSTALL_COMPONENT})
 
 	endif()
-	
+
 	#foreach(project ${PROJECTS_DEPENDING_ON_ALL_PLUGINS})
 	#	target_link_plugins(${project} ${name})
 	#endforeach()

@@ -148,6 +148,7 @@ namespace Tools {
                     const std::string &project = plugin.project();
 
                     bool loaded = plugin.isLoaded(file);
+                    plugin.ensureModule(mManager);
 
                     bool clicked = false;
                     std::string displayName { plugin.name() + " (" + project + ")" };
@@ -170,31 +171,29 @@ namespace Tools {
                         }
                     }
                     if (!isConfiguration && ImGui::EndTreeArrow()) {
-                        if (loaded) {
-                            const Plugins::BinaryInfo *binInfo = plugin.info();
+                        const Plugins::BinaryInfo *binInfo = plugin.info();
 
-                            const char **dep = binInfo->mPluginDependencies;
-                            if (*dep && ImGui::TreeNode("Dependencies")) {
-                                while (*dep) {
-                                    ImGui::Text("%s", *dep);
-                                    ++dep;
-                                }
-                                ImGui::TreePop();
+                        const char **dep = binInfo->mPluginDependencies;
+                        if (*dep && ImGui::TreeNode("Dependencies")) {
+                            while (*dep) {
+                                ImGui::Text("%s", *dep);
+                                ++dep;
                             }
+                            ImGui::TreePop();
+                        }
 
-                            if (ImGui::TreeNode("UniqueComponents")) {
-                                for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
-                                    for (UniqueComponent::CollectorInfoBase *info : *reg) {
-                                        if (info->mBinary == binInfo && ImGui::TreeNode(info->mBaseInfo->mTypeName.data(), "%.*s", static_cast<int>(info->mBaseInfo->mTypeName.size()), info->mBaseInfo->mTypeName.data())) {
-                                            for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo *> &components : info->mElementInfos) {
-                                                ImGui::Text(components.first.front()->mTypeName);
-                                            }
-                                            ImGui::TreePop();
+                        if (ImGui::TreeNode("UniqueComponents")) {
+                            for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
+                                for (UniqueComponent::CollectorInfoBase *info : *reg) {
+                                    if (info->mBinary == binInfo && ImGui::TreeNode(info->mBaseInfo->mTypeName.data(), "%.*s", static_cast<int>(info->mBaseInfo->mTypeName.size()), info->mBaseInfo->mTypeName.data())) {
+                                        for (const std::pair<std::vector<const TypeInfo *>, const TypeInfo *> &components : info->mElementInfos) {
+                                            ImGui::Text(components.first.front()->mTypeName);
                                         }
+                                        ImGui::TreePop();
                                     }
                                 }
-                                ImGui::TreePop();
                             }
+                            ImGui::TreePop();
                         }
                         ImGui::TreePop();
                     }
