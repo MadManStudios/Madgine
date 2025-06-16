@@ -64,6 +64,17 @@ namespace UniqueComponent {
         {
             return mLoadedCollectors.end();
         }
+        
+        void addCollector(CollectorInfoBase *info)
+        {
+            mUnloadedCollectors.push_back(info);
+        }
+
+        void removeCollector(CollectorInfoBase *info)
+        {
+            // assert(std::find(mLoadedCollectors.begin(), mLoadedCollectors.end(), info) == mLoadedCollectors.end());
+            std::erase(mUnloadedCollectors, info);
+        }
 
         const Plugins::BinaryInfo *mBinary;
 
@@ -72,6 +83,7 @@ namespace UniqueComponent {
 
     protected:
         std::vector<CollectorInfoBase *> mLoadedCollectors;
+        std::vector<CollectorInfoBase *> mUnloadedCollectors;
 
     private:
         const TypeInfo *mTi;
@@ -132,15 +144,10 @@ namespace UniqueComponent {
             return sInstance().mComponents[i];
         }
 
-        void addCollector(CollectorInfo *info)
-        {
-            mUnloadedCollectors.push_back(info);
-        }
-
         void onPluginLoad(const Plugins::BinaryInfo *bin)
         {
             for (auto it = mUnloadedCollectors.begin(); it != mUnloadedCollectors.end();) {
-                CollectorInfo *info = *it;
+                CollectorInfo *info = static_cast<CollectorInfo*>(*it);
                 if (info->mBinary == bin) {
                     mLoadedCollectors.push_back(info);
                     info->mBaseIndex = mComponents.size();
@@ -152,12 +159,6 @@ namespace UniqueComponent {
                     ++it;
                 }
             }
-        }
-
-        void removeCollector(CollectorInfoBase *info)
-        {
-            //assert(std::find(mLoadedCollectors.begin(), mLoadedCollectors.end(), info) == mLoadedCollectors.end());
-            std::erase(mUnloadedCollectors, info);
         }
 
         void onPluginUnload(const Plugins::BinaryInfo *bin)
@@ -185,8 +186,6 @@ namespace UniqueComponent {
         static inline Registry *sSelf = &sInstance(); //Keep to ensure instantiation of registry, even with no component/collector in it
 
         std::vector<Annotations> mComponents;
-
-        std::vector<CollectorInfo *> mUnloadedCollectors;
     };
 
     template <typename _Base, typename... _Annotations>
@@ -243,7 +242,7 @@ namespace UniqueComponent {
         {
             size_t counter = this->mComponentsByName.size();
 
-            for (typename Registry<_Base, _Annotations...>::CollectorInfo *info : this->mUnloadedCollectors) {
+            for (CollectorInfoBase *info : this->mUnloadedCollectors) {
                 if (info->mBinary == bin) {
                     const std::vector<std::string_view> &names = static_cast<CollectorInfo *>(info)->mComponentNames;
                     for (std::string_view name : names) {
