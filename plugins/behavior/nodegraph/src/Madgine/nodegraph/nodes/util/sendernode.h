@@ -62,8 +62,8 @@ namespace NodeGraph {
     template <typename T, size_t I>
     using remove_deductors = typename remove_deductors_impl<T, I>::type;
 
-    template <typename Config, auto Algorithm, typename... Arguments>
-    struct SenderNode : Node<SenderNode<Config, Algorithm, Arguments...>, AutoMaskNode<>> {
+    template <typename T, typename Config, auto Algorithm, typename... Arguments>
+    struct SenderNode : Node<T, AutoMaskNode<>> {
 
         using argument_types = type_pack<Arguments...>;
         using algorithms = typename argument_types::template filter<is_any_algorithm>;
@@ -81,27 +81,27 @@ namespace NodeGraph {
             return std::make_tuple();
         }
 
-        template <uint32_t I, typename... Vs, typename T, typename... Ts>
-        static auto buildArgs(const NodeBase &node, std::tuple<Vs...> &&values, type_pack<T, Ts...> args, std::vector<NodeResults> *results = nullptr)
+        template <uint32_t I, typename... Vs, typename Ty, typename... Ts>
+        static auto buildArgs(const NodeBase &node, std::tuple<Vs...> &&values, type_pack<Ty, Ts...> args, std::vector<NodeResults> *results = nullptr)
         {
-            if constexpr (is_range<T>::value) {
+            if constexpr (is_range<Ty>::value) {
                 return std::tuple_cat(
-                    std::make_tuple(T { node.flowOutCount(is_range<T>::value) }),
+                    std::make_tuple(Ty { node.flowOutCount(is_range<Ty>::value) }),
                     buildArgs<I>(node, std::move(values), type_pack<Ts...> {}, results));
-            } else if constexpr (is_pred_sender<T>::value) {
+            } else if constexpr (is_pred_sender<Ty>::value) {
                 return std::tuple_cat(
-                    std::make_tuple(T {}),
+                    std::make_tuple(Ty {}),
                     buildArgs<I>(node, std::move(values), type_pack<Ts...> {}, results));
-            } else if constexpr (is_succ_sender<T>::value) {
+            } else if constexpr (is_succ_sender<Ty>::value) {
                 return std::tuple_cat(
                     std::make_tuple(NodeSender<I + 1> {}),
                     buildArgs<I + 1>(node, std::move(values), type_pack<Ts...> {}, results));
-            } else if constexpr (is_router<T>::value) {
+            } else if constexpr (is_router<Ty>::value) {
                 assert(results);
                 return std::tuple_cat(
                     std::make_tuple(NodeRouter<I + 1> { *results }),
                     buildArgs<I + 1>(node, std::move(values), type_pack<Ts...> {}, results));
-            } else if constexpr (is_algorithm<T>::value) {
+            } else if constexpr (is_algorithm<Ty>::value) {
                 assert(results);
                 return std::tuple_cat(
                     std::make_tuple(NodeAlgorithm<I + 1> { *results }),
@@ -121,14 +121,14 @@ namespace NodeGraph {
                 return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(node, std::move(values), argument_types {}, results)) | Execution::with_debug_location<Debug::SenderLocation>();
         }
 
-        template <typename T>
+        template <typename Ty>
         ExtendedValueTypeDesc resolveType() const
         {
-            using decayedT = std::decay_t<T>;
+            using decayedT = std::decay_t<Ty>;
             if constexpr (InstanceOfA<decayedT, dynamic_value_type>) {
-                return getArguments<T::index>().type();
+                return getArguments<Ty::index>().type();
             } else {
-                return toValueTypeDesc<std::remove_reference_t<decayed_t<T>>>();
+                return toValueTypeDesc<std::remove_reference_t<decayed_t<Ty>>>();
             }
         }
 
@@ -138,8 +138,8 @@ namespace NodeGraph {
             if constexpr (Signature::size == 0) {
                 throw 0;
             } else {
-                return [this, index]<typename... T>(type_pack<T...>) {
-                    ExtendedValueTypeDesc types[] = { resolveType<T>()... };
+                return [this, index]<typename... Ty>(type_pack<Ty...>) {
+                    ExtendedValueTypeDesc types[] = { resolveType<Ty>()... };
                     return types[index];
                 }(Signature {});
             }
@@ -148,9 +148,9 @@ namespace NodeGraph {
         template <typename Signature>
         ExtendedValueTypeDesc stream_type(uint32_t index) const
         {
-            return [this, index]<typename... T>(type_pack<T...>) {
+            return [this, index]<typename... Ty>(type_pack<Ty...>) {
                 ExtendedValueTypeDesc types[] = {
-                    resolveType<T>()...
+                    resolveType<Ty>()...
                 };
                 return types[index % Signature::size];
             }(Signature {});
@@ -158,7 +158,7 @@ namespace NodeGraph {
 
         using Sender = decltype(buildSender(std::declval<NodeBase>(), std::declval<value_argument_tuple>()));
 
-        struct DummyReceiver : NodeExecutionReceiver<SenderNode<Config, Algorithm, Arguments...>> {
+        struct DummyReceiver : NodeExecutionReceiver<T> {
             template <typename... Args>
             void set_value(Args &&...args)
             {
@@ -180,20 +180,20 @@ namespace NodeGraph {
 
             template <typename CPO, typename... Args>
             friend auto tag_invoke(CPO f, DummyReceiver &receiver, Args &&...args)
-                -> tag_invoke_result_t<CPO, NodeExecutionReceiver<SenderNode<Config, Algorithm, Arguments...>> &, Args...>
+                -> tag_invoke_result_t<CPO, NodeExecutionReceiver<T> &, Args...>
             {
-                return f(static_cast<NodeExecutionReceiver<SenderNode<Config, Algorithm, Arguments...>> &>(receiver), std::forward<Args>(args)...);
+                return f(static_cast<NodeExecutionReceiver<T> &>(receiver), std::forward<Args>(args)...);
             }
         };
 
         SenderNode(NodeGraph &graph)
-            : Node<SenderNode<Config, Algorithm, Arguments...>, AutoMaskNode<>>(graph)
+            : Node<T, AutoMaskNode<>>(graph)
         {
             this->setup();
         }
 
         SenderNode(const SenderNode &other, NodeGraph &graph)
-            : Node<SenderNode<Config, Algorithm, Arguments...>, AutoMaskNode<>>(other, graph)
+            : Node<T, AutoMaskNode<>>(other, graph)
             , mArguments(other.mArguments)
         {
         }
@@ -340,7 +340,7 @@ namespace NodeGraph {
 
             struct Receiver {
                 InterpretData *mData;
-                NodeReceiver<SenderNode<Config, Algorithm, Arguments...>> mReceiver;
+                NodeReceiver<T> mReceiver;
 
                 template <typename... Args>
                 void set_value(Args &&...args)
@@ -348,28 +348,28 @@ namespace NodeGraph {
                     if (mData->mResults.empty())
                         mData->mResults.emplace_back();
                     mData->mResults.front() = { std::forward<Args>(args)... };
-                    NodeReceiver<SenderNode<Config, Algorithm, Arguments...>> rec = std::move(mReceiver);
+                    NodeReceiver<T> rec = std::move(mReceiver);
                     mData->cleanup();
                     rec.set_value();
                 }
 
                 void set_done()
                 {
-                    NodeReceiver<SenderNode<Config, Algorithm, Arguments...>> rec = std::move(mReceiver);
+                    NodeReceiver<T> rec = std::move(mReceiver);
                     mData->cleanup();
                     rec.set_done();
                 }
 
                 void set_error(BehaviorError result)
                 {
-                    NodeReceiver<SenderNode<Config, Algorithm, Arguments...>> rec = std::move(mReceiver);
+                    NodeReceiver<T> rec = std::move(mReceiver);
                     mData->cleanup();
                     rec.set_error(result);
                 }
 
                 template <typename CPO, typename... Args>
                 friend auto tag_invoke(CPO f, Receiver &receiver, Args &&...args)
-                    -> tag_invoke_result_t<CPO, NodeReceiver<SenderNode<Config, Algorithm, Arguments...>> &, Args...>
+                    -> tag_invoke_result_t<CPO, NodeReceiver<T> &, Args...>
                 {
                     return f(receiver.mReceiver, std::forward<Args>(args)...);
                 }
@@ -385,7 +385,7 @@ namespace NodeGraph {
             {
             }
 
-            void start(NodeReceiver<SenderNode<Config, Algorithm, Arguments...>> receiver, value_argument_tuple args)
+            void start(NodeReceiver<T> receiver, value_argument_tuple args)
             {               
                 const NodeBase &node = Execution::get_context(receiver).mNode;
                 construct(mState,
@@ -413,7 +413,7 @@ namespace NodeGraph {
                 if (!data) {
                     data = std::make_unique<InterpretData>();
                 }
-                static_cast<InterpretData *>(data.get())->start({ { receiver.mInterpreter, static_cast<const SenderNode<Config, Algorithm, Arguments...> &>(receiver.mNode) }, receiver.mReceiver, receiver.mDebugLocation }, mArguments);
+                static_cast<InterpretData *>(data.get())->start({ { receiver.mInterpreter, static_cast<const T &>(receiver.mNode) }, receiver.mReceiver, receiver.mDebugLocation }, mArguments);
             } else {
                 throw 0;
             }
@@ -423,7 +423,7 @@ namespace NodeGraph {
         {
             if constexpr (Config::constant) {
 
-                DummyReceiver rec { interpreter, *this };
+                DummyReceiver rec { interpreter, static_cast<const T&>(*this) };
 
                 auto state = Execution::connect(buildSender(*this, value_argument_tuple { mArguments }), rec);
 

@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "sendernode.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
@@ -23,13 +22,15 @@ namespace NodeGraph {
 }
 }
 
-#define SENDER_NODE_BEGIN(Name, Config, ...)                               \
-    using Name##Node = Engine::NodeGraph::SenderNode<Config, __VA_ARGS__>; \
-                                                                           \
-    REGISTER_TYPE(Name##Node)                                              \
-    NAMED_UNIQUECOMPONENT(Name, Name##Node)                                \
-                                                                           \
-    METATABLE_BEGIN_BASE(Name##Node, Engine::NodeGraph::NodeBase)          \
+#define SENDER_NODE_BEGIN(Name, Config, ...)                                              \
+    struct Name##Node : Engine::NodeGraph::SenderNode<Name##Node, Config, __VA_ARGS__> {  \
+        using Engine::NodeGraph::SenderNode<Name##Node, Config, __VA_ARGS__>::SenderNode; \
+    };                                                                                    \
+                                                                                          \
+    REGISTER_TYPE(Name##Node)                                                             \
+    NAMED_UNIQUECOMPONENT(Name, Name##Node)                                               \
+                                                                                          \
+    METATABLE_BEGIN_BASE(Name##Node, Engine::NodeGraph::NodeBase)                         \
     SERIALIZETABLE_INHERIT_BEGIN(Name##Node, Engine::NodeGraph::NodeBase)
 
 #define SENDER_NODE_END(Name) \
