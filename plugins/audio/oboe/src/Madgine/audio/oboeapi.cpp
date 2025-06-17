@@ -33,7 +33,7 @@ namespace Audio {
 
         AudioLoader::Handle mBuffer;
         OboeApi *mApi;
-        const void *mBuffer;
+        const void *mNext;
         const void *mEnd;
     };
 
@@ -65,7 +65,7 @@ namespace Audio {
         void play(PlaybackState &state)
         {
             assert(!mState);
-            state.mBuffer = state.mBuffer->mBuffer.begin();
+            state.mNext = state.mBuffer->mBuffer.begin();
             state.mEnd = state.mBuffer->mBuffer.end();
             mState = &state;            
             mStream->requestStart();
@@ -82,15 +82,15 @@ namespace Audio {
             int32_t numFrames) override
         {
             if (!Engine::Root::Root::getSingleton().taskQueue()->running()) {
-                OboeApi *api = static_cast<OboeApi *>(mState->mApi);
+                OboeApi *api = mState->mApi;
                 mState->set_done();
                 mState = nullptr;
                 api->reuseStream(shared_from_this());
                 return oboe::DataCallbackResult::Stop;
             }
 
-            const int16_t *source = static_cast<const int16_t *>(mBuffer);
-            unsigned long count = std::min<unsigned int>(numFrames, (static_cast<const int16_t *>(mEnd) - source) / audioStream->getChannelCount());
+            const int16_t *source = static_cast<const int16_t *>(mState->mNext);
+            unsigned long count = std::min<unsigned int>(numFrames, (static_cast<const int16_t *>(mState->mEnd) - source) / audioStream->getChannelCount());
 
             switch (audioStream->getFormat()) {
             case oboe::AudioFormat::I16: {
@@ -115,11 +115,11 @@ namespace Audio {
                 throw 0;
             }
 
-            mBuffer = source;
+            mState->mNext = source;
             if (count > 0) {
                 return oboe::DataCallbackResult::Continue;
             } else {
-                OboeApi *api = static_cast<OboeApi *>(mState->mApi);
+                OboeApi *api = mState->mApi;
                 mState->set_value();
                 mState = nullptr;
                 api->reuseStream(shared_from_this());

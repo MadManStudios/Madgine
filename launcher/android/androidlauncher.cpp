@@ -52,7 +52,7 @@ namespace Android {
 
         static Engine::Root::Root root;
 
-        launch([this](Engine::Window::MainWindow &mainWindow) { mWindow = &mainWindow; });
+        launch([this](Engine::App::Application &, Engine::Window::MainWindow &mainWindow) { mWindow = &mainWindow; });
 
         ANativeActivity_finish(activity);
     }
