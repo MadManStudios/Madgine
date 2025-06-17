@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmppqibqkq7.js
+// include: /tmp/tmpy_eux4cr.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmppqibqkq7.js
+// end include: /tmp/tmpy_eux4cr.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
@@ -383,7 +383,7 @@ window.sentryOnLoad = function () {
     Sentry.init(
         {
             sendDefaultPii: !0,
-            release: "Madgine@0.2.1",
+            release: "Madgine@0.3.0",
             integrations: [wasmIntegration()],
         })
 }
@@ -8359,9 +8359,9 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  782152: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 782198: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 782250: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); }
+  878312: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 878358: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 878410: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); }
 };
 var wasmImports = {
   /** @export */
