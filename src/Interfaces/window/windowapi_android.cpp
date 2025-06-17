@@ -52,9 +52,9 @@ namespace Window {
                 mTouchStartPosition = position;
                 mTouchStartTimestamp = AMotionEvent_getEventTime(event);
                 mPendingTouch = true;
-                injectPointerMove({ position, position, position - mLastMousePosition });
+                injectPointerMove({ position, position, position - mLastKnownMousePos });
                 break;
-            case AMOTION_EVENT_ACTION_UP:
+            case AMOTION_EVENT_ACTION_UP: {
                 int64_t nanoseconds = AMotionEvent_getEventTime(event) - mTouchStartTimestamp;
                 Input::MouseButton::MouseButton button = nanoseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
                 if (mPendingTouch) {
@@ -62,13 +62,14 @@ namespace Window {
                     mPendingTouch = false;
                 }
                 handled |= injectPointerRelease({ position, position, button });
+            }
                 break;
             case AMOTION_EVENT_ACTION_MOVE:
                 if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
                     injectPointerPress({ mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
                     mPendingTouch = false;
                 }
-                handled = injectPointerMove({ position, screenPosition, position - mLastMousePosition });
+                handled = injectPointerMove({ position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_CANCEL:
                 LOG("Motion Cancel");
@@ -373,12 +374,12 @@ namespace Window {
     {
     }
 
-    OSWindow *sCreateWindow(const WindowSettings &settings)
+    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
     {
         sNativeWindow.wait();
 
         assert(!sWindow);
-        sWindow.emplace(sNativeWindow);
+        sWindow.emplace(sNativeWindow, listener);
 
         return &*sWindow;
     }
