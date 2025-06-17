@@ -22,6 +22,3 @@ namespace Scene {
     }
 }
 }
-
-REGISTER_TYPE(Engine::Scene::Entity::Material);
-REGISTER_TYPE(Engine::Scene::Entity::EntityComponentList<Engine::Scene::Entity::Material>);

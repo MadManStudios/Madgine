@@ -55,7 +55,7 @@ namespace Widgets {
 
         virtual Threading::Task<bool> init() override;
         virtual Threading::Task<void> finalize() override;
-                                                                
+
         void startLifetime() override;
         void endLifetime();
 
@@ -141,7 +141,7 @@ namespace Widgets {
         struct WidgetManagerData;
         std::unique_ptr<WidgetManagerData> mData;
 
-        //Dragging
+        // Dragging
         Input::PointerEventArgs mDragStartEvent { { 0, 0 }, { 0, 0 }, Input::MouseButton::NO_BUTTON };
         bool mDragging = false;
         bool mDraggingAborted = false;
@@ -150,5 +150,3 @@ namespace Widgets {
 
 }
 }
-
-REGISTER_TYPE(Engine::Widgets::WidgetManager)

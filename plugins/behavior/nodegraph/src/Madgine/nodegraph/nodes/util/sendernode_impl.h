@@ -27,7 +27,6 @@ namespace NodeGraph {
         using Engine::NodeGraph::SenderNode<Name##Node, Config, __VA_ARGS__>::SenderNode; \
     };                                                                                    \
                                                                                           \
-    REGISTER_TYPE(Name##Node)                                                             \
     NAMED_UNIQUECOMPONENT(Name, Name##Node)                                               \
                                                                                           \
     METATABLE_BEGIN_BASE(Name##Node, Engine::NodeGraph::NodeBase)                         \

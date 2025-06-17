@@ -27,5 +27,3 @@ namespace Audio {
 
 }
 }
-
-REGISTER_TYPE(Engine::Audio::AudioLoader)

@@ -844,4 +844,3 @@ public:
 
 }
 
-REGISTER_TYPE(Engine::Vector4)

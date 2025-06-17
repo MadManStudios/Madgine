@@ -25,5 +25,3 @@ namespace Tools {
 
 }
 }
-
-REGISTER_TYPE(Engine::Tools::DirectX12RenderContextTool)

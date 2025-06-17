@@ -49,5 +49,3 @@ namespace Widgets {
     };
 }
 }
-
-REGISTER_TYPE(Engine::Widgets::TabBar)

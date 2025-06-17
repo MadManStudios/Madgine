@@ -68,5 +68,3 @@ namespace Window {
 
 }
 }
-
-REGISTER_TYPE(Engine::Window::MainWindowComponentBase)

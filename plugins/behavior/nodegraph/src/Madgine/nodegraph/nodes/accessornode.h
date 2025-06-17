@@ -35,5 +35,3 @@ namespace NodeGraph {
 
 }
 }
-
-REGISTER_TYPE(Engine::NodeGraph::AccessorNode)

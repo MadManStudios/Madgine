@@ -209,14 +209,8 @@ struct NativeBehaviorFactory : BehaviorFactory<NativeBehaviorFactory> {
 
 }
 
-DECLARE_BEHAVIOR_FACTORY(Engine::NativeBehaviorFactory)
-REGISTER_TYPE(Engine::NativeBehaviorInfo)
-
-#define NATIVE_BEHAVIOR_DECLARATION(Name) \
-    struct Name##NativeBehavior;          \
-    REGISTER_TYPE(Name##NativeBehavior)
-
 #define NATIVE_BEHAVIOR(Name, Sender, ...)                                                                                     \
+    struct Name##NativeBehavior;                                                                                               \
     struct Name##Linkage {                                                                                                     \
         template <typename... Args>                                                                                            \
         auto operator()(Args &&...args) const                                                                                  \

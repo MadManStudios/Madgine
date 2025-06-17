@@ -48,5 +48,3 @@ namespace Widgets {
 
 }
 }
-
-NATIVE_BEHAVIOR_DECLARATION(temp_widget)

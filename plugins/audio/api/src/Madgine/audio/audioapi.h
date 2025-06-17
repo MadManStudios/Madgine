@@ -34,7 +34,3 @@ namespace Audio {
     };
 }
 }
-
-REGISTER_TYPE(Engine::Audio::AudioApi)
-
-NATIVE_BEHAVIOR_DECLARATION(play_sound)

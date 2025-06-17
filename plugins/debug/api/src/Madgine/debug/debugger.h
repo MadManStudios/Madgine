@@ -86,5 +86,3 @@ namespace Debug {
 
 }
 }
-
-REGISTER_TYPE(Engine::Debug::Debugger)

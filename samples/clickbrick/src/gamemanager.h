@@ -62,8 +62,3 @@ namespace ClickBrick {
     Engine::Behavior Test(Engine::Scene::EntityBinding entity = {});
 
 }
-
-NATIVE_BEHAVIOR_DECLARATION(ClickBrick_Test)
-NATIVE_BEHAVIOR_DECLARATION(ClickBrick_Brick)
-
-REGISTER_TYPE(ClickBrick::GameManager)

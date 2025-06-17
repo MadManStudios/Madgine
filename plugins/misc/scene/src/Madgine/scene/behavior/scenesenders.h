@@ -32,6 +32,3 @@ namespace Scene {
 
 }
 }
-
-NATIVE_BEHAVIOR_DECLARATION(Yield_Simulation)
-NATIVE_BEHAVIOR_DECLARATION(Wait_Simulation)

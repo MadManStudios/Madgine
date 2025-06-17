@@ -77,5 +77,3 @@ namespace Widgets {
     using WidgetHandler = VirtualScope<T, HandlerComponent<T, WidgetHandlerBase>>;
 }
 }
-
-REGISTER_TYPE(Engine::Widgets::WidgetHandlerBase)

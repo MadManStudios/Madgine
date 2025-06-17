@@ -84,5 +84,3 @@ struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerM
 
     };
 }
-
-REGISTER_TYPE(Engine::HandlerManager)

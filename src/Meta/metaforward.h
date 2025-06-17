@@ -19,7 +19,6 @@ struct Accessor;
 struct ScopeField;
 struct ScopePtr;
 struct OwnedScopePtr;
-struct TypeInfo;
 struct ApiFunction;
 struct BoundApiFunction;
 template <auto f>

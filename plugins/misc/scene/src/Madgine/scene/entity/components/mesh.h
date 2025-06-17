@@ -41,6 +41,3 @@ namespace Scene {
     }
 }
 }
-
-REGISTER_TYPE(Engine::Scene::Entity::Mesh)
-REGISTER_TYPE(Engine::Scene::Entity::EntityComponentList<Engine::Scene::Entity::Mesh>)

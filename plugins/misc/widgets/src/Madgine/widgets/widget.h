@@ -214,5 +214,3 @@ namespace Widgets {
     };
 }
 }
-
-REGISTER_TYPE(Engine::Widgets::WidgetBase)

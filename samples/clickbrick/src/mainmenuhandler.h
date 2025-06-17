@@ -17,5 +17,3 @@ namespace ClickBrick {
     };
 
 }
-
-REGISTER_TYPE(ClickBrick::MainMenuHandler)

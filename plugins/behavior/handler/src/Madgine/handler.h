@@ -48,5 +48,3 @@ namespace Engine {
         DEBUGGABLE_LIFETIME(mLifetime);        
     };
 }
-
-REGISTER_TYPE(Engine::HandlerBase)

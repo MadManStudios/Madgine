@@ -21,6 +21,3 @@ namespace Scene {
     }
 }
 }
-
-REGISTER_TYPE(Engine::Scene::Entity::PointLight)
-REGISTER_TYPE(Engine::Scene::Entity::EntityComponentList<Engine::Scene::Entity::PointLight>)

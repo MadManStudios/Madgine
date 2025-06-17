@@ -19,5 +19,3 @@ namespace Root {
     };
 }
 }
-
-REGISTER_TYPE(Engine::Root::RootComponentBase)

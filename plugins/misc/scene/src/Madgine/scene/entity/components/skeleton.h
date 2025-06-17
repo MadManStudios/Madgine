@@ -41,6 +41,3 @@ namespace Scene {
     }
 }
 }
-
-REGISTER_TYPE(Engine::Scene::Entity::Skeleton)
-REGISTER_TYPE(Engine::Scene::Entity::EntityComponentList<Engine::Scene::Entity::Skeleton>)

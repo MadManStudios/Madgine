@@ -63,5 +63,3 @@ namespace App {
     };
 }
 }
-
-REGISTER_TYPE(Engine::App::Application)

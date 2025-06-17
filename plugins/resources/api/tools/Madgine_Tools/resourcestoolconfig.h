@@ -28,5 +28,3 @@ namespace Tools {
 
 }
 }
-
-REGISTER_TYPE(Engine::Tools::ResourcesToolConfig)

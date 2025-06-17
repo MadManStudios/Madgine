@@ -849,5 +849,3 @@ inline Vector3 slerp(const Vector3 &v1, const Vector3 &v2, float ratio)
 }
 
 }
-
-REGISTER_TYPE(Engine::Vector3)

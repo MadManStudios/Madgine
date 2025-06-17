@@ -168,5 +168,3 @@ struct SenderBehaviorState : BehaviorStateBase {
     std::variant<Sender, State> mData;
 };
 }
-
-REGISTER_TYPE(Engine::BehaviorStateBase);
