@@ -1,6 +1,6 @@
 #include "../interfaceslib.h"
 
-#if !EMSCRIPTEN
+#if !EMSCRIPTEN && !ANDROID
 
 #    include <curl/curl.h>
 

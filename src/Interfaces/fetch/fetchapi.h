@@ -2,120 +2,127 @@
 
 #include "Generic/execution/concepts.h"
 #include "Generic/opaqueptr.h"
+#include "Generic/genericresult.h"
 
 namespace Engine {
 
-    struct INTERFACES_EXPORT FetchStateBase {
+struct INTERFACES_EXPORT FetchStateBase {
     FetchStateBase(std::string url, std::vector<std::string> headers);
-        FetchStateBase(const FetchStateBase &) = delete;
-        FetchStateBase(FetchStateBase &&other) = delete;
-        ~FetchStateBase();
+    FetchStateBase(const FetchStateBase &) = delete;
+    FetchStateBase(FetchStateBase &&other) = delete;
+    ~FetchStateBase();
 
-        void start();
+    void start();
 
-        virtual void set_value() = 0;
+    virtual void set_value() = 0;
+    virtual void set_error(GenericResult error) = 0;
 
-        virtual void receive(const void *buffer, size_t count) = 0;
+    virtual void receive(const void *buffer, size_t count) = 0;
 
-        FetchStateBase &operator=(const FetchStateBase &) = delete;
-        FetchStateBase &operator=(FetchStateBase &&other) = delete;
+    FetchStateBase &operator=(const FetchStateBase &) = delete;
+    FetchStateBase &operator=(FetchStateBase &&other) = delete;
 
-        UniqueOpaquePtr mPtr1;
-        UniqueOpaquePtr mPtr2;
-    };
+    UniqueOpaquePtr mPtr1;
+    UniqueOpaquePtr mPtr2;
+};
 
-    template <typename T>
-    struct FetchImpl : FetchStateBase {
-        using FetchStateBase::FetchStateBase;
+template <typename T>
+struct FetchImpl : FetchStateBase {
+    using FetchStateBase::FetchStateBase;
 
-        void receive(const void *buffer, size_t nmemb) override;
+    void receive(const void *buffer, size_t nmemb) override;
 
-        T mResult;
-    };
+    T mResult;
+};
 
-    template <typename Rec, typename T>
-    struct FetchState : Execution::base_state<Rec>, FetchImpl<T> {
-        FetchState(Rec &&rec, std::string url, std::vector<std::string> headers)
-            : Execution::base_state<Rec>(std::forward<Rec>(rec))
-            , FetchImpl<T>(std::move(url), std::move(headers))
-        {
-        }
+template <typename Rec, typename T>
+struct FetchState : Execution::base_state<Rec>, FetchImpl<T> {
+    FetchState(Rec &&rec, std::string url, std::vector<std::string> headers)
+        : Execution::base_state<Rec>(std::forward<Rec>(rec))
+        , FetchImpl<T>(std::move(url), std::move(headers))
+    {
+    }
 
-        void set_value() override
-        {
-            this->mRec.set_value(std::move(this->mResult));
-        }
-    };
+    void set_value() override
+    {
+        this->mRec.set_value(std::move(this->mResult));
+    }
 
-    template <typename T>
-    struct FetchSender : Execution::base_sender {
+    void set_error(GenericResult error) override
+    {
+        this->mRec.set_error(std::move(error));
+    }
+};
 
-        template <template <typename...> typename Tuple>
-        using value_types = Tuple<T>;
-        using result_type = std::string;
+template <typename T>
+struct FetchSender : Execution::base_sender {
 
-        FetchSender(std::string url, std::vector<std::string> headers = {})
-            : mUrl(std::move(url))
-            , mHeaders(std::move(headers))
-        {
-        }
+    template <template <typename...> typename Tuple>
+    using value_types = Tuple<T>;
+    using result_type = GenericResult;
 
-        template <typename Rec>
-        friend auto tag_invoke(Execution::connect_t, FetchSender &&sender, Rec &&rec)
-        {
-            return FetchState<Rec, T> { std::forward<Rec>(rec), std::move(sender.mUrl), std::move(sender.mHeaders) };
-        }
+    FetchSender(std::string url, std::vector<std::string> headers = {})
+        : mUrl(std::move(url))
+        , mHeaders(std::move(headers))
+    {
+    }
 
-        std::string mUrl;
-        std::vector<std::string> mHeaders;
-    };
+    template <typename Rec>
+    friend auto tag_invoke(Execution::connect_t, FetchSender &&sender, Rec &&rec)
+    {
+        return FetchState<Rec, T> { std::forward<Rec>(rec), std::move(sender.mUrl), std::move(sender.mHeaders) };
+    }
 
-    struct JsonNull {
-    };
+    std::string mUrl;
+    std::vector<std::string> mHeaders;
+};
 
-    struct INTERFACES_EXPORT JsonObject {
+struct JsonNull {
+};
 
-        std::vector<JsonObject> &asList();
-        std::map<std::string, JsonObject> &asObject();
-        std::string &asString();
+struct INTERFACES_EXPORT JsonObject {
 
-        std::variant<
-            std::monostate,
-            std::vector<JsonObject>,
-            std::map<std::string, JsonObject>,
-            std::string,
-            int,
-            bool,
-            JsonNull>
-            mValue;
-    };
+    std::vector<JsonObject> &asList();
+    std::map<std::string, JsonObject> &asObject();
+    std::string &asString();
 
-    struct INTERFACES_EXPORT JsonParser {
-        JsonParser();
+    std::variant<
+        std::monostate,
+        std::vector<JsonObject>,
+        std::map<std::string, JsonObject>,
+        std::string,
+        int,
+        bool,
+        JsonNull>
+        mValue;
+};
 
-        operator JsonObject();
+struct INTERFACES_EXPORT JsonParser {
+    JsonParser();
 
-        JsonObject mRoot;
+    operator JsonObject();
 
-        void parse(std::string_view s);
+    JsonObject mRoot;
 
-    protected:
-        bool parse(const char *&c, const char *end, JsonObject &object);
+    void parse(std::string_view s);
 
-        bool parse(const char *&c, const char *end, std::vector<JsonObject> &list);
-        bool parse(const char *&c, const char *end, std::map<std::string, JsonObject> &object);
-        bool parse(const char *&c, const char *end, std::string &s, bool pop = true);
-        bool parse(const char *&c, const char *end, int &i);
-        bool parse(const char *&c, const char *end, bool &b);
-        bool parse(const char *&c, const char *end, std::monostate &);
-        bool parse(const char *&c, const char *end, JsonNull &);
+protected:
+    bool parse(const char *&c, const char *end, JsonObject &object);
 
-        bool skipWs(const char *&c, const char *end);
+    bool parse(const char *&c, const char *end, std::vector<JsonObject> &list);
+    bool parse(const char *&c, const char *end, std::map<std::string, JsonObject> &object);
+    bool parse(const char *&c, const char *end, std::string &s, bool pop = true);
+    bool parse(const char *&c, const char *end, int &i);
+    bool parse(const char *&c, const char *end, bool &b);
+    bool parse(const char *&c, const char *end, std::monostate &);
+    bool parse(const char *&c, const char *end, JsonNull &);
 
-        std::vector<JsonObject *> mStack;
-        std::string mBuffer;
-        bool mNeedSeparator = false;
-        bool mNeedStringOpen = false;
-    };
+    bool skipWs(const char *&c, const char *end);
+
+    std::vector<JsonObject *> mStack;
+    std::string mBuffer;
+    bool mNeedSeparator = false;
+    bool mNeedStringOpen = false;
+};
 
 }
