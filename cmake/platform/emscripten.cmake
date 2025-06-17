@@ -8,8 +8,6 @@ cmake_policy(SET CMP0004 NEW)
 set(emscripten_file_dir ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
 
 if (EMSCRIPTEN)
-	
-	set (MADGINE_FORCE_DATA_COLLECT ON CACHE INTERNAL "")
 
 	include(Plugins)
 

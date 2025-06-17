@@ -2,8 +2,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:versionCode="1"
-    android:versionName="1.0"
-    package="com.@PROJECT_NAME@.@target@">
+    android:versionName="1.0">
 
     <application
         android:allowBackup="false"
@@ -15,7 +14,6 @@
           <!-- This name is resolved to com.example.myapp.MainActivity
              based upon the package attribute -->
         <activity android:name="android.app.NativeActivity"
-                  android:icon="@mipmap/ic_launcher"
                   android:label="$<TARGET_FILE_BASE_NAME:@target@>"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                   android:configChanges="orientation|keyboardHidden|screenSize">

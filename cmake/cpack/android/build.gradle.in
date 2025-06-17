@@ -1,9 +1,11 @@
 plugins {
-    id 'com.android.application' version '7.2.1'
-    id 'com.android.library' version '7.2.1' apply false
+    id 'com.android.application' version '8.6.1'
+    id 'com.android.library' version '8.6.1' apply false
 }
 
 android {
+    namespace "com.@PROJECT_NAME@.@target@"
+
     compileSdkVersion @ANDROID_PLATFORM_LEVEL@
 
     defaultConfig {
@@ -30,7 +32,7 @@ android {
 
         applicationVariants.all { variant ->
             variant.outputs.all {
-                outputFileName = "../../../../../bin/@target@.apk"
+                outputFileName = "@target@.apk"
             }
         }
     }
@@ -39,8 +41,8 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            jniLibs.srcDirs = ['@CMAKE_CURRENT_BINARY_DIR@/bin/', '@CMAKE_ANDROID_NDK@/sources/cxx-stl/llvm-libc++/libs/' @ANDROID_ADDITIONAL_DEPENDENCIES@]
-			assets.srcDirs = ['@CMAKE_BINARY_DIR@/data/']
+            jniLibs.srcDirs = ['bin/', '@CMAKE_ANDROID_NDK@/sources/cxx-stl/llvm-libc++/libs/' @ANDROID_ADDITIONAL_DEPENDENCIES@]
+			assets.srcDirs = ['data/']
             res.srcDirs = ['@MADGINE_CONFIGURATION@/res' @ANDROID_ADDITIONAL_RESOURCES@]
             java.srcDirs = [@ANDROID_ADDITIONAL_SOURCES@]
         }
