@@ -1,7 +1,0 @@
-target remote localhost:2345
-python
-def start_jdb_to_unblock_app():
-  import subprocess
-  #subprocess.Popen('launch_jdb.bat', stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-start_jdb_to_unblock_app()
-end
