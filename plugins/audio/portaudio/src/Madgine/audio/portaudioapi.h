@@ -39,5 +39,3 @@ namespace Audio {
 
 }
 }
-
-REGISTER_TYPE(Engine::Audio::PortAudioApi)

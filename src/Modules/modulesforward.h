@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/fixed_string.h"
+
 namespace Engine {
 
 namespace UniqueComponent {
@@ -18,14 +20,15 @@ namespace UniqueComponent {
     struct VirtualComponentBase;
     template <typename T, typename Base, typename _VBase = Base>
     struct VirtualComponentImpl;
-    template <typename _Base, typename... Annotations>
+    template <fixed_string ti, fixed_string namedTi, const auto &header, typename _Base, typename... Annotations>
     struct Registry;
-    template <typename _Base, typename... Annotations>
+    template <fixed_string ti, fixed_string namedTi, const auto &header, typename _Base, typename... Annotations>
     struct NamedRegistry;
     template <typename Registry>
     struct Collector;
 
     struct RegistryBase;
+    struct TypeInfo;
 }
 
 namespace Debug {

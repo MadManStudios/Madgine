@@ -24,5 +24,3 @@ namespace Scene {
 
 }
 }
-
-NATIVE_BEHAVIOR_DECLARATION(Rotate)

@@ -44,7 +44,6 @@
 
 #include "callable_traits.h"
 #include "stringutil.h"
-#include "classname.h"
 
 #include "container/container_traits.h"
 #include "container/iterator_traits.h"

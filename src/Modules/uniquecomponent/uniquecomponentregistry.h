@@ -2,6 +2,7 @@
 
 #include "../plugins/binaryinfo.h"
 #include "annotations.h"
+#include "typeinfo.h"
 
 namespace Engine {
 namespace UniqueComponent {
@@ -17,10 +18,8 @@ namespace Engine {
 namespace UniqueComponent {
 
     struct MODULES_EXPORT CollectorInfoBase {
-        const TypeInfo *mRegistryInfo;
-        const TypeInfo *mBaseInfo;
         const Plugins::BinaryInfo *mBinary;
-        std::vector<std::pair<std::vector<const TypeInfo *>, const TypeInfo*>> mElementInfos;
+        std::vector<std::pair<std::vector<TypeInfo>, TypeInfo>> mElementInfos;
         IndexType<size_t> mBaseIndex;
         std::vector<std::string_view> mComponentNames;
     };
@@ -28,12 +27,13 @@ namespace UniqueComponent {
     MODULES_EXPORT std::vector<RegistryBase *> &registryRegistry();
 
     struct MODULES_EXPORT RegistryBase {
-        RegistryBase(const TypeInfo *ti, const Plugins::BinaryInfo *binary, const TypeInfo *namedTi = nullptr)
+        RegistryBase(const TypeInfo &ti, const TypeInfo &namedTi, const Plugins::BinaryInfo *binary, const char * (*header)())
             : mBinary(binary)
             , mTi(ti)
-            , mNamedTi(namedTi ? namedTi : ti)
+            , mNamedTi(namedTi)
+            , mHeader(header)
         {
-            LOG("Adding: " << ti->mTypeName);
+            LOG("Adding: " << ti.type_name());
             registryRegistry().push_back(this);
         }
 
@@ -45,12 +45,12 @@ namespace UniqueComponent {
         virtual void onPluginLoad(const Plugins::BinaryInfo *) = 0;
         virtual void onPluginUnload(const Plugins::BinaryInfo *) = 0;
 
-        const TypeInfo *type_info()
+        const TypeInfo &type_info()
         {
             return mTi;
         }
 
-        const TypeInfo *named_type_info()
+        const TypeInfo &named_type_info()
         {
             return mNamedTi;
         }
@@ -64,7 +64,7 @@ namespace UniqueComponent {
         {
             return mCollectors.end();
         }
-        
+
         void addCollector(CollectorInfoBase *info)
         {
             mCollectors.push_back(info);
@@ -77,6 +77,7 @@ namespace UniqueComponent {
         }
 
         const Plugins::BinaryInfo *mBinary;
+        const char *(*mHeader)();
 
         std::map<std::string_view, IndexType<uint32_t>> mComponentsByName;
         bool mIsNamed = false;
@@ -85,52 +86,51 @@ namespace UniqueComponent {
         std::vector<CollectorInfoBase *> mCollectors;
 
     private:
-        const TypeInfo *mTi;
-        const TypeInfo *mNamedTi;
+        TypeInfo mTi;
+        TypeInfo mNamedTi;
     };
 
     DLL_IMPORT_VARIABLE2(Registry, registry, typename Registry);
 
-    template <typename _Base, typename... _Annotations>
+    template <fixed_string ti, fixed_string namedTi, const auto &header, typename _Base, typename... _Annotations>
     struct Registry : RegistryBase {
 
         typedef _Base Base;
         using Annotations = GroupedAnnotation<typename replace<_Annotations>::template type<std::unique_ptr<Base>>...>;
 
         struct CollectorInfo : CollectorInfoBase {
-
             template <typename T, typename ActualType>
-            size_t registerComponent()
+            size_t registerComponent(const TypeInfo &info, const TypeInfo &actualTi)
             {
 
-                LOG("Registering Component: " << typeName<T>());
+                LOG("Registering Component: " << info.type_name());
                 mComponents.emplace_back(type_holder<T>, type_holder<ActualType>);
-                std::vector<const TypeInfo *> elementInfos;
-                elementInfos.push_back(&typeInfo<T>);
+                std::vector<TypeInfo> elementInfos;
+                elementInfos.push_back(info);
                 if constexpr (has_typename_VBase<T>) {
-                    elementInfos.push_back(&typeInfo<typename T::VBase>);
+                    elementInfos.push_back(typeInfo<typename T::VBase>());
                 }
-                mElementInfos.emplace_back(std::move(elementInfos), &typeInfo<ActualType>);
+                mElementInfos.emplace_back(std::move(elementInfos), actualTi);
                 return mComponents.size() - 1;
             }
 
             void unregisterComponent(size_t i)
             {
-                //mComponents[i] = nullptr; ??
+                // mComponents[i] = nullptr; ??
                 mElementInfos[i].first.clear();
             }
 
             std::vector<Annotations> mComponents;
         };
 
-        Registry(const TypeInfo *namedTi = nullptr)
-            : RegistryBase(&typeInfo<Registry>, &Plugins::PLUGIN_LOCAL(binaryInfo), namedTi)
+        Registry()
+            : RegistryBase(TypeInfo { ti }, TypeInfo { namedTi }, &Plugins::PLUGIN_LOCAL(binaryInfo), header)
         {
         }
 
         static Registry &sInstance()
         {
-            return registry<Registry<_Base, _Annotations...>>();
+            return registry<Registry<ti, namedTi, header, _Base, _Annotations...>>();
         }
 
         static std::vector<Annotations> &sComponents()
@@ -143,11 +143,16 @@ namespace UniqueComponent {
             return sInstance().mComponents[i];
         }
 
+        static constexpr TypeInfo type_info()
+        {
+            return std::string_view { ti };
+        }
+
         void onPluginLoad(const Plugins::BinaryInfo *bin)
         {
             assert(!bin->mIsStub);
             for (CollectorInfoBase *_info : mCollectors) {
-                CollectorInfo *info = static_cast<CollectorInfo*>(_info);
+                CollectorInfo *info = static_cast<CollectorInfo *>(_info);
                 if (info->mBinary == bin) {
                     assert(!info->mBaseIndex);
                     info->mBaseIndex = mComponents.size();
@@ -177,38 +182,38 @@ namespace UniqueComponent {
         }
 
     protected:
-        static inline Registry *sSelf = &sInstance(); //Keep to ensure instantiation of registry, even with no component/collector in it
+        static inline Registry *sSelf = &sInstance(); // Keep to ensure instantiation of registry, even with no component/collector in it
 
         std::vector<Annotations> mComponents;
     };
 
-    template <typename _Base, typename... _Annotations>
-    struct NamedRegistry : Registry<_Base, _Annotations...> {
+    template <fixed_string ti, fixed_string namedTi, const auto &header, typename _Base, typename... _Annotations>
+    struct NamedRegistry : Registry<ti, namedTi, header, _Base, _Annotations...> {
 
-        struct CollectorInfo : Registry<_Base, _Annotations...>::CollectorInfo {
+        struct CollectorInfo : Registry<ti, namedTi, header, _Base, _Annotations...>::CollectorInfo {
             template <typename T, typename ActualType>
-            size_t registerComponent()
+            size_t registerComponent(const TypeInfo &ti2, const TypeInfo &actualTi)
             {
                 this->mComponentNames.emplace_back(T::componentName());
-                return Registry<_Base, _Annotations...>::CollectorInfo::template registerComponent<T, ActualType>();
+                return Registry<ti, namedTi, header, _Base, _Annotations...>::CollectorInfo::template registerComponent<T, ActualType>(ti2, actualTi);
             }
 
             void unregisterComponent(size_t i)
             {
-                Registry<_Base, _Annotations...>::CollectorInfo::unregisterComponent(i);
+                Registry<ti, namedTi, header, _Base, _Annotations...>::CollectorInfo::unregisterComponent(i);
                 this->mComponentNames[i] = {};
             }
         };
 
         NamedRegistry()
-            : Registry<_Base, _Annotations...>(&typeInfo<NamedRegistry>)
+            : Registry<ti, namedTi, header, _Base, _Annotations...>()
         {
             this->mIsNamed = true;
         }
 
         static NamedRegistry &sInstance()
         {
-            return static_cast<NamedRegistry &>(registry<Registry<_Base, _Annotations...>>());
+            return static_cast<NamedRegistry &>(registry<Registry<ti, namedTi, header, _Base, _Annotations...>>());
         }
 
         static const std::map<std::string_view, IndexType<uint32_t>> &sComponentsByName()
@@ -246,7 +251,7 @@ namespace UniqueComponent {
                 }
             }
 
-            Registry<_Base, _Annotations...>::onPluginLoad(bin);
+            Registry<ti, namedTi, header, _Base, _Annotations...>::onPluginLoad(bin);
         }
     };
 
@@ -258,7 +263,7 @@ namespace UniqueComponent {
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename _Base, typename... _Annotations>
+    template <fixed_string ti, fixed_string namedTi, const auto &header, typename _Base, typename... _Annotations>
     struct Registry {
 
         typedef _Base Base;
@@ -272,8 +277,8 @@ namespace UniqueComponent {
         }
     };
 
-    template <typename _Base, typename... _Annotations>
-    struct NamedRegistry : Registry<_Base, _Annotations...> {
+    template <fixed_string ti, fixed_string namedTi, const auto &header, typename _Base, typename... _Annotations>
+    struct NamedRegistry : Registry<ti, namedTi, header, _Base, _Annotations...> {
 
         static const std::map<std::string_view, IndexType<uint32_t>> &sComponentsByName();
 

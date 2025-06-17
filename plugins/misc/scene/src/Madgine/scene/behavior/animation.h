@@ -77,5 +77,3 @@ namespace Scene {
     }
 }
 }
-
-NATIVE_BEHAVIOR_DECLARATION(entity_animation)

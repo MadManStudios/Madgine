@@ -17,8 +17,6 @@ namespace UniqueComponent {
 
         Collector()
         {
-            mInfo.mRegistryInfo = &typeInfo<Registry>;
-            mInfo.mBaseInfo = &typeInfo<Base>;
             Registry::sInstance().addCollector(&mInfo);
         }
         Collector(const Collector &) = delete;
@@ -42,8 +40,8 @@ namespace UniqueComponent {
     public:
         template <typename T, typename ActualType>
         struct ComponentRegistrator : IndexHolder {
-            ComponentRegistrator()
-                : IndexHolder { PLUGIN_LOCAL(sInstance)().mInfo.template registerComponent<T, ActualType>(), PLUGIN_LOCAL(sInstance)().mInfo.mBaseIndex }
+            ComponentRegistrator(std::string_view ti, std::string_view actualTi)
+                : IndexHolder { PLUGIN_LOCAL(sInstance)().mInfo.template registerComponent<T, ActualType>(ti, actualTi), PLUGIN_LOCAL(sInstance)().mInfo.mBaseIndex }
             {
             }
 

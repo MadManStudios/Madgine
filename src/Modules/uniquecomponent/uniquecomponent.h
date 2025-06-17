@@ -20,7 +20,8 @@ namespace UniqueComponent {
 
         template <typename ActualType>
         struct Registrator : ActualType::Collector::template ComponentRegistrator<T, ActualType> {
-            Registrator()
+            Registrator(std::string_view ti, std::string_view actualTi)
+                : ActualType::Collector::template ComponentRegistrator<T, ActualType>(ti, actualTi)
             {
                 if (!_Base::preg())
                     _Base::preg() = this;
@@ -74,16 +75,18 @@ namespace UniqueComponent {
         {
             return _reg<T>().index();
         }
-        
+
         template <typename ActualType>
         using Registrator = typename ActualType::Collector::template ComponentRegistrator<T, ActualType>;
     };
 
-#    define UNIQUECOMPONENT(Type) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, , {}, Type::T)
-#    define UNIQUECOMPONENT2(Type, ext) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, ext, {}, Type::T)
+#    define UNIQUECOMPONENT(Type) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, , SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(Type) }), Type::T)
+#    define UNIQUECOMPONENT2(Type, ext) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, ext, SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(Type) }), Type::T)
+#    define UNIQUECOMPONENT3(Type, ActualType) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<ActualType>, Engine::UniqueComponent::, _reg, , SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(ActualType) }), Type::T)
 
-#    define VIRTUALUNIQUECOMPONENTBASE(Name) DLL_EXPORT_VARIABLE2(, Engine::UniqueComponent::IndexHolder *, Engine::UniqueComponent::, _preg, nullptr, Name)
-
+#    define VIRTUALUNIQUECOMPONENTBASE(Name)                                                                            \
+        DLL_EXPORT_VARIABLE2(, Engine::UniqueComponent::IndexHolder *, Engine::UniqueComponent::, _preg, nullptr, Name) \
+        DLL_EXPORT_VARIABLE2(constexpr , const Engine::UniqueComponent::TypeInfo, , typeInfo, TYPE_INFO(Name), Name)
 
 }
 }
@@ -103,7 +106,8 @@ namespace UniqueComponent {
     struct VirtualComponentBase : _Base {
         using _Base::_Base;
 
-        static bool is_instantiated() {
+        static bool is_instantiated()
+        {
             return true;
         }
 
@@ -124,6 +128,7 @@ namespace UniqueComponent {
 
 #    define UNIQUECOMPONENT(Type) template Type::Collector::Registry::Annotations::GroupedAnnotation(Engine::type_holder_t<Type::T>, Engine::type_holder_t<Type>);
 #    define UNIQUECOMPONENT2(Name, ext)
+#    define UNIQUECOMPONENT3(Type, ActualType) template Type::Collector::Registry::Annotations::GroupedAnnotation(Engine::type_holder_t<Type>, Engine::type_holder_t<ActualType>);
 #    define VIRTUALUNIQUECOMPONENTBASE(Name)
 
 #endif

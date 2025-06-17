@@ -81,5 +81,3 @@ namespace Scene {
     }
 }
 }
-
-REGISTER_TYPE(Engine::Scene::Entity::EntityComponentBase)

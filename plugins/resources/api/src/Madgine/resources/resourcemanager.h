@@ -82,5 +82,3 @@ namespace Resources {
 
 }
 }
-
-REGISTER_TYPE(Engine::Resources::ResourceManager)

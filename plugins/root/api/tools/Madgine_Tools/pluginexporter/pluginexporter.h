@@ -22,6 +22,4 @@ namespace Tools {
 }
 }
 
-REGISTER_TYPE(Engine::Tools::PluginExporter)
-
 #endif

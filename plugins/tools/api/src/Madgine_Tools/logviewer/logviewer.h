@@ -66,5 +66,3 @@ namespace Tools {
 
 }
 }
-
-REGISTER_TYPE(Engine::Tools::LogViewer)

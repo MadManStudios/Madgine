@@ -13,7 +13,7 @@
 
 RESOURCELOADER(Engine::NodeGraph::NodeGraphLoader)
 
-DEFINE_BEHAVIOR_FACTORY(NodeGraph, Engine::NodeGraph::NodeGraphBehaviorFactory)
+BEHAVIOR_FACTORY(NodeGraph, Engine::NodeGraph::NodeGraphBehaviorFactory)
 
 namespace Engine {
 namespace NodeGraph {

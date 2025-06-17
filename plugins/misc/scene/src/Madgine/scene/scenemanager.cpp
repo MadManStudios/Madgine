@@ -25,7 +25,7 @@
 #include "behavior/animation.h"
 #include "entity/components/skeleton.h"
 
-UNIQUECOMPONENT(Engine::Serialize::NoParent<Engine::Scene::SceneManager>);
+UNIQUECOMPONENT3(Engine::Scene::SceneManager, Engine::Serialize::NoParent<Engine::Scene::SceneManager>);
 
 METATABLE_BEGIN(Engine::Scene::SceneManager)
 // TODO

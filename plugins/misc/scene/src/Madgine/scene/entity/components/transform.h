@@ -43,6 +43,3 @@ namespace Scene {
     }
 }
 }
-
-REGISTER_TYPE(Engine::Scene::Entity::Transform)
-REGISTER_TYPE(Engine::Scene::Entity::EntityComponentList<Engine::Scene::Entity::Transform>)

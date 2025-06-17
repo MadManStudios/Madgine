@@ -51,5 +51,3 @@ namespace Server {
 
 }
 }
-
-REGISTER_TYPE(Engine::Server::Server)

@@ -45,5 +45,3 @@ namespace Widgets {
 
 }
 }
-
-REGISTER_TYPE(Engine::Widgets::WidgetLoader)

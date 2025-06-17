@@ -12,8 +12,9 @@
 #    elif LINUX
 #        include <execinfo.h>
 #    elif ANDROID
-#        include <unwind.h>
+#        include <cxxabi.h>
 #        include <dlfcn.h>
+#        include <unwind.h>
 #    endif
 
 namespace Engine {
@@ -48,7 +49,7 @@ namespace Debug {
 
 #    endif
 
-    //TODO
+    // TODO
     struct DefaultMemResource : std::pmr::memory_resource {
         virtual void *do_allocate(std::size_t bytes, std::size_t alignment) override
         {

@@ -57,5 +57,3 @@ namespace Render {
 
 }
 }
-
-REGISTER_TYPE(Engine::Render::VulkanRenderWindow)

@@ -13,5 +13,3 @@ namespace ClickBrick {
     };
 
 }
-
-REGISTER_TYPE(ClickBrick::GameHandler)

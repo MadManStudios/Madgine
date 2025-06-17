@@ -49,10 +49,5 @@ T BehaviorFactory<T>::sFactory;
 
 }
 
-REGISTER_TYPE(Engine::BehaviorFactoryBase)
-
-#define DECLARE_BEHAVIOR_FACTORY(Factory) \
-    REGISTER_TYPE(Factory)
-
-#define DEFINE_BEHAVIOR_FACTORY(Name, Factory) \
+#define BEHAVIOR_FACTORY(Name, Factory) \
     NAMED_UNIQUECOMPONENT(Name, Factory)

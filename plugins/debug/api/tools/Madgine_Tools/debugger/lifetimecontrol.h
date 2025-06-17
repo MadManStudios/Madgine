@@ -37,5 +37,3 @@ namespace Tools {
 
 }
 }
-
-REGISTER_TYPE(Engine::Tools::LifetimeControl)

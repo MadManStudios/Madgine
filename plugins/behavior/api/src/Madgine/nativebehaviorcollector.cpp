@@ -9,7 +9,7 @@
 
 DEFINE_UNIQUE_COMPONENT(Engine, NativeBehavior)
 
-DEFINE_BEHAVIOR_FACTORY(Native, Engine::NativeBehaviorFactory)
+BEHAVIOR_FACTORY(Native, Engine::NativeBehaviorFactory)
 
 namespace Engine {
 

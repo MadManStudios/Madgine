@@ -32,5 +32,3 @@ namespace Audio {
 
 }
 }
-
-REGISTER_TYPE(Engine::Audio::OboeApi)

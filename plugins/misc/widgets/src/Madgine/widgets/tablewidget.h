@@ -72,5 +72,3 @@ namespace Widgets {
     };
 }
 }
-
-REGISTER_TYPE(Engine::Widgets::TableWidget)

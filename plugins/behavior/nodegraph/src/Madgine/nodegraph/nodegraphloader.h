@@ -49,9 +49,3 @@ namespace NodeGraph {
 
 }
 }
-
-
-DECLARE_BEHAVIOR_FACTORY(Engine::NodeGraph::NodeGraphBehaviorFactory)
-
-
-REGISTER_TYPE(Engine::NodeGraph::NodeGraphLoader)
