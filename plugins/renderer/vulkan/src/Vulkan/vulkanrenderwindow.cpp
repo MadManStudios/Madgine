@@ -10,6 +10,13 @@
 
 #if ANDROID
 #    include <vulkan/vulkan_android.h>
+#elif LINUX
+#    include <X11/Xlib.h>
+namespace Engine {
+namespace Window {
+    extern Display *sDisplay();
+}
+}
 #endif
 
 namespace Engine {
@@ -368,6 +375,14 @@ namespace Render {
         createInfo.window = (ANativeWindow *)mWindow->mHandle;
 
         VkResult result = vkCreateAndroidSurfaceKHR(GetInstance(), &createInfo, nullptr, &mSurface);
+        VK_CHECK(result);
+#elif LINUX
+        VkXlibSurfaceCreateInfoKHR createInfo {};
+        createInfo.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
+        createInfo.dpy = Window::sDisplay();
+        createInfo.window = mWindow->mHandle;
+
+        VkResult result = vkCreateXlibSurfaceKHR(GetInstance(), &createInfo, nullptr, &mSurface);
         VK_CHECK(result);
 #else
 #    error "Unsupported Platform!"

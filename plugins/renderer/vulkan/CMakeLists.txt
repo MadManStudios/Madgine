@@ -28,7 +28,9 @@ target_link_libraries(Vulkan PRIVATE Render ${VULKAN_DEPENDENCIES})
 
 if (WINDOWS)
 	target_compile_definitions(Vulkan PRIVATE VK_USE_PLATFORM_WIN32_KHR)
-endif (WINDOWS)
+elseif(LINUX)
+	target_compile_definitions(Vulkan PRIVATE VK_USE_PLATFORM_XLIB_KHR)
+endif ()
 
 set(sources "")
 FolderSources(sources "" tools)

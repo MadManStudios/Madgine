@@ -35,6 +35,10 @@ int GLAD_VK_KHR_timeline_semaphore = 0;
 int GLAD_VK_KHR_win32_surface = 0;
 
 #endif
+#if defined(VK_USE_PLATFORM_XLIB_KHR)
+int GLAD_VK_KHR_xlib_surface = 0;
+
+#endif
 
 
 
@@ -124,6 +128,10 @@ PFN_vkCreateSwapchainKHR glad_vkCreateSwapchainKHR = NULL;
 PFN_vkCreateWin32SurfaceKHR glad_vkCreateWin32SurfaceKHR = NULL;
 
 #endif
+#if defined(VK_USE_PLATFORM_XLIB_KHR)
+PFN_vkCreateXlibSurfaceKHR glad_vkCreateXlibSurfaceKHR = NULL;
+
+#endif
 PFN_vkDebugMarkerSetObjectNameEXT glad_vkDebugMarkerSetObjectNameEXT = NULL;
 PFN_vkDebugMarkerSetObjectTagEXT glad_vkDebugMarkerSetObjectTagEXT = NULL;
 PFN_vkDebugReportMessageEXT glad_vkDebugReportMessageEXT = NULL;
@@ -188,6 +196,10 @@ PFN_vkGetPhysicalDeviceSurfacePresentModesKHR glad_vkGetPhysicalDeviceSurfacePre
 PFN_vkGetPhysicalDeviceSurfaceSupportKHR glad_vkGetPhysicalDeviceSurfaceSupportKHR = NULL;
 #if defined(VK_USE_PLATFORM_WIN32_KHR)
 PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR glad_vkGetPhysicalDeviceWin32PresentationSupportKHR = NULL;
+
+#endif
+#if defined(VK_USE_PLATFORM_XLIB_KHR)
+PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR glad_vkGetPhysicalDeviceXlibPresentationSupportKHR = NULL;
 
 #endif
 PFN_vkGetPipelineCacheData glad_vkGetPipelineCacheData = NULL;
@@ -423,6 +435,14 @@ static void glad_vk_load_VK_KHR_win32_surface( GLADuserptrloadfunc load, void* u
 }
 
 #endif
+#if defined(VK_USE_PLATFORM_XLIB_KHR)
+static void glad_vk_load_VK_KHR_xlib_surface( GLADuserptrloadfunc load, void* userptr) {
+    if(!GLAD_VK_KHR_xlib_surface) return;
+    glad_vkCreateXlibSurfaceKHR = (PFN_vkCreateXlibSurfaceKHR) load(userptr, "vkCreateXlibSurfaceKHR");
+    glad_vkGetPhysicalDeviceXlibPresentationSupportKHR = (PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR) load(userptr, "vkGetPhysicalDeviceXlibPresentationSupportKHR");
+}
+
+#endif
 
 
 
@@ -564,8 +584,12 @@ static int glad_vk_find_extensions_vulkan( VkPhysicalDevice physical_device) {
     GLAD_VK_KHR_win32_surface = glad_vk_has_extension("VK_KHR_win32_surface", extension_count, extensions);
 
 #endif
+#if defined(VK_USE_PLATFORM_XLIB_KHR)
+    GLAD_VK_KHR_xlib_surface = glad_vk_has_extension("VK_KHR_xlib_surface", extension_count, extensions);
 
-    GLAD_UNUSED(glad_vk_has_extension);
+#endif
+
+    GLAD_UNUSED(&glad_vk_has_extension);
 
     glad_vk_free_extensions(extension_count, extensions);
 
@@ -624,6 +648,10 @@ int gladLoadVulkanUserPtr( VkPhysicalDevice physical_device, GLADuserptrloadfunc
     glad_vk_load_VK_KHR_timeline_semaphore(load, userptr);
 #if defined(VK_USE_PLATFORM_WIN32_KHR)
     glad_vk_load_VK_KHR_win32_surface(load, userptr);
+
+#endif
+#if defined(VK_USE_PLATFORM_XLIB_KHR)
+    glad_vk_load_VK_KHR_xlib_surface(load, userptr);
 
 #endif
 
