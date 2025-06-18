@@ -2,8 +2,8 @@
 
 
 if(NOT ANDROID_SDK)
-    if(DEFINED ENV{ANDROID_SDK})
-        file(TO_CMAKE_PATH "$ENV{ANDROID_SDK}" ANDROID_SDK)
+    if(DEFINED ENV{ANDROID_HOME})
+        file(TO_CMAKE_PATH "$ENV{ANDROID_HOME}" ANDROID_SDK)
     else()
         set(ANDROID_SDK "C:\\android-sdk")
     endif()
@@ -19,8 +19,8 @@ set(ANDROID_PLATFORM android-28) # API level
 #specify ANDROID_ABI in arguments
 
 if(NOT ANDROID_NDK)
-    if(DEFINED ENV{ANDROID_NDK})
-        file(TO_CMAKE_PATH "$ENV{ANDROID_NDK}" ANDROID_NDK)
+    if(DEFINED ENV{ANDROID_NDK_HOME})
+        file(TO_CMAKE_PATH "$ENV{ANDROID_NDK_HOME}" ANDROID_NDK)
     else()
         set(ANDROID_NDK ${ANDROID_SDK}/ndk-bundle)
     endif()
