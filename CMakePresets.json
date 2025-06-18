@@ -70,12 +70,6 @@
       "hidden": true
     },
     {
-      "name": "android-armv7",
-      "inherits": "android",
-      "cacheVariables": { "ANDROID_ABI": "armeabi-v7a" },
-      "hidden": true
-    },
-    {
       "name": "android-arm64",
       "inherits": "android",
       "cacheVariables": { "ANDROID_ABI": "arm64-v8a" },
@@ -283,30 +277,6 @@
     {
       "name": "Android-x64-RelWithDebInfo-Vulkan (Tools)",
       "inherits": [ "android-x64", "relwithdebinfo", "Vulkan-Tools" ]
-    },
-    {
-      "name": "Android-armv7-Debug-Vulkan",
-      "inherits": [ "android-armv7", "debug", "Vulkan" ]
-    },
-    {
-      "name": "Android-armv7-Debug-Vulkan (Tools)",
-      "inherits": [ "android-armv7", "debug", "Vulkan-Tools" ]
-    },
-    {
-      "name": "Android-armv7-Release-Vulkan",
-      "inherits": [ "android-armv7", "release", "Vulkan" ]
-    },
-    {
-      "name": "Android-armv7-Release-Vulkan (Tools)",
-      "inherits": [ "android-armv7", "release", "Vulkan-Tools" ]
-    },
-    {
-      "name": "Android-armv7-RelWithDebInfo-Vulkan",
-      "inherits": [ "android-armv7", "relwithdebinfo", "Vulkan" ]
-    },
-    {
-      "name": "Android-armv7-RelWithDebInfo-Vulkan (Tools)",
-      "inherits": [ "android-armv7", "relwithdebinfo", "Vulkan-Tools" ]
     },
     {
       "name": "Android-arm64-Debug-Vulkan",

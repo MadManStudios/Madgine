@@ -28,15 +28,25 @@ jobs:
         \"osx\": \"macos-latest\", 
         \"ios\": \"macos-latest\", 
         \"linux\": \"ubuntu-latest\", 
-        \"android\": \"ubuntu-latest\", 
+        \"android_arm64\": \"ubuntu-latest\", 
+        \"android_x64\": \"ubuntu-latest\", 
         \"emscripten\": \"ubuntu-latest\"}"
       toolchains: "{
         \"windows\": \"\", 
         \"osx\": \"\", 
         \"ios\": \"\", 
         \"linux\": \"\", 
-        \"android\": \"\", 
+        \"android_arm64\": \"--toolchain cmake/toolchains/android.cmake -DANDROID_ABI=arm64-v8a\", 
+        \"android_x64\": \"--toolchain cmake/toolchains/android.cmake -DANDROID_ABI=x86_64\", 
         \"emscripten\": \"--toolchain cmake/toolchains/emscripten-wasm.cmake\"}"
+      configs: "{
+        \"windows\": \"OpenGL\", 
+        \"osx\": \"OpenGL\", 
+        \"ios\": \"\", 
+        \"linux\": \"OpenGL\", 
+        \"android_arm64\": \"Vulkan\", 
+        \"android_x64\": \"Vulkan\", 
+        \"emscripten\": \"OpenGL\"}"
     
   build-plugins:
   
@@ -189,10 +199,9 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        platform: [windows, osx, ios, linux, android, emscripten]
+        platform: [windows, osx, ios, linux, android_arm64, android_x64, emscripten]
         exclude:          
           - platform: ios
-          - platform: android
 
     steps:
     - uses: actions/checkout@v4
@@ -214,6 +223,17 @@ jobs:
       uses: mymindstorm/setup-emsdk@v14
       with:
         version: '4.0.9'
+
+    - name: Install Toolchain
+      if: matrix.platform == 'android_arm64' || matrix.platform == 'android_x64'
+      uses: android-actions/setup-android@v3
+
+    - name: Install Toolchain
+      if: matrix.platform == 'android_arm64' || matrix.platform == 'android_x64'
+      uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r26d
+        link-to-sdk: true
 
     - name: Install wasm-split
       if: matrix.platform == 'emscripten'
@@ -291,7 +311,7 @@ jobs:
         cmake -B ${{ github.workspace }}/build
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
         -DUSE_CMAKE_LOG=1 
-        -DMADGINE_CONFIGURATION=test/configs/OpenGL/
+        -DMADGINE_CONFIGURATION=test/configs/${{ fromJSON(needs.configuration.outputs.configs)[matrix.platform] }}/
         -DBUILD_SHARED_LIBS=OFF 
         -DMADGINE_PREBUILT_TOOLING=tooling
         ${{ fromJSON(needs.configuration.outputs.toolchains)[matrix.platform] }}
