@@ -22,6 +22,13 @@
 
 #if ANDROID
 #    include <vulkan/vulkan_android.h>
+#elif LINUX
+#    include <X11/Xlib.h>
+namespace Engine {
+namespace Window {
+    extern Display *sDisplay();
+}
+}
 #endif
 
 UNIQUECOMPONENT(Engine::Render::VulkanRenderContext)
@@ -269,6 +276,11 @@ namespace Render {
         std::vector<VkQueueFamilyProperties> queueFamilies { queueFamilyCount };
         vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
+#if LINUX
+        Display *display = Window::sDisplay();
+        VisualID visualId = XVisualIDFromVisual(DefaultVisual(display, DefaultScreen(display)));
+#endif
+
         int i = 0;
         for (const auto &queueFamily : queueFamilies) {
             bool supportsGraphics = queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT;
@@ -276,6 +288,8 @@ namespace Render {
             bool supportsPresent = vkGetPhysicalDeviceWin32PresentationSupportKHR(device, i);
 #elif ANDROID
             bool supportsPresent = queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT;
+#elif LINUX
+            bool supportsPresent = vkGetPhysicalDeviceXlibPresentationSupportKHR(device, i, display, visualId);
 #else
 #    error "Unsupported Platform!"
 #endif
