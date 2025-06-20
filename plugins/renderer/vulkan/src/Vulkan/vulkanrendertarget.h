@@ -15,7 +15,7 @@ namespace Render {
         ~VulkanRenderTarget();
 
         void createRenderPass(size_t colorAttachmentCount, VkFormat format, VkImageLayout layout, bool createDepthBufferView, std::span<VkSubpassDependency> dependencies);
-        void setup(const Vector2i &size, bool createDepthBufferView = false);
+        void setup(const Vector2i &framebufferSize, const Vector2i &size, bool createDepthBufferView = false);
         void shutdown();
 
         void beginFrame() override;
@@ -45,6 +45,7 @@ namespace Render {
         VulkanCommandList mCommandList;
 
         Vector2i mSize;
+        Vector2i mBufferSize;
 
         VkFramebuffer mFramebuffer;
 

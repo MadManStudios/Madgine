@@ -505,9 +505,9 @@ namespace Window {
      * @brief
      * @param size
      */
-    void MainWindow::onResize(const InterfacesVector &size)
+    void MainWindow::onResize(const InterfacesVector &renderSize)
     {
-        mRenderWindow->resize({ size.x, size.y });
+        mRenderWindow->resize({ renderSize.x, renderSize.y });
         applyClientSpaceResize();
     }
 

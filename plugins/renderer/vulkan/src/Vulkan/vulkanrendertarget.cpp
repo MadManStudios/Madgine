@@ -88,39 +88,12 @@ namespace Render {
         VK_CHECK(result);
     }
 
-    void VulkanRenderTarget::setup(const Vector2i &size, bool createDepthBufferView)
+    void VulkanRenderTarget::setup(const Vector2i &framebufferSize, const Vector2i &size, bool createDepthBufferView)
     {
+        mBufferSize = framebufferSize;
         mSize = size;
 
-        mDepthTexture.setData(size, {});
-
-        VkImageCreateInfo imageInfo {};
-        imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-        imageInfo.imageType = VK_IMAGE_TYPE_2D;
-        imageInfo.extent.width = size.x;
-        imageInfo.extent.height = size.y;
-        imageInfo.extent.depth = 1;
-        imageInfo.mipLevels = 1;
-        imageInfo.arrayLayers = 1;
-        imageInfo.format = VK_FORMAT_D24_UNORM_S8_UINT;
-        imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-        imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-        imageInfo.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
-        if (createDepthBufferView)
-            imageInfo.usage |= VK_IMAGE_USAGE_SAMPLED_BIT;
-        imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-        imageInfo.samples = static_cast<VkSampleCountFlagBits>(mSamples);
-        imageInfo.flags = 0; // Optional
-
-        VkImageViewCreateInfo viewInfo {};
-        viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-        viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-        viewInfo.format = VK_FORMAT_D24_UNORM_S8_UINT;
-        viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
-        viewInfo.subresourceRange.baseMipLevel = 0;
-        viewInfo.subresourceRange.levelCount = 1;
-        viewInfo.subresourceRange.baseArrayLayer = 0;
-        viewInfo.subresourceRange.layerCount = 1;
+        mDepthTexture.setData(framebufferSize, {});
     }
 
     void VulkanRenderTarget::shutdown()
@@ -135,7 +108,7 @@ namespace Render {
         renderPassInfo.framebuffer = mFramebuffer;
 
         renderPassInfo.renderArea.offset = { 0, 0 };
-        renderPassInfo.renderArea.extent = { static_cast<uint32_t>(mSize.x), static_cast<uint32_t>(mSize.y) };
+        renderPassInfo.renderArea.extent = { static_cast<uint32_t>(mBufferSize.x), static_cast<uint32_t>(mBufferSize.y) };
 
         VkClearValue clearColors[2] { { { 1.0f, 1.0f, 1.0f, 1.0f } }, { { 0.033f, 0.073f, 0.073f, 1.0f } } };
         renderPassInfo.clearValueCount = 2;

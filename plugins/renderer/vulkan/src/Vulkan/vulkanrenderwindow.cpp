@@ -202,10 +202,10 @@ namespace Render {
         int sizeX = abs(mClipSpaceRotation[0][0] * space.mSize.x + mClipSpaceRotation[1][0] * space.mSize.y);
         int sizeY = abs(mClipSpaceRotation[0][1] * space.mSize.x + mClipSpaceRotation[1][1] * space.mSize.y);
 
-        if (x < 0)
-            x += mSize.x - sizeX;
-        if (y < 0)
-            y += mSize.y - sizeY;
+        if (mClipSpaceRotation[0][0] < 0 || mClipSpaceRotation[1][0] < 0)
+            x += mBufferSize.x - sizeX;
+        if (mClipSpaceRotation[0][1] < 0 || mClipSpaceRotation[1][1] < 0)
+            y += mBufferSize.y - sizeY;
 
         VkViewport viewport {};
         viewport.width = sizeX;
@@ -230,10 +230,10 @@ namespace Render {
         int sizeX = abs(mClipSpaceRotation[0][0] * space.mSize.x + mClipSpaceRotation[1][0] * space.mSize.y);
         int sizeY = abs(mClipSpaceRotation[0][1] * space.mSize.x + mClipSpaceRotation[1][1] * space.mSize.y);
 
-        if (x < 0)
-            x += mSize.x - sizeX;
-        if (y < 0)
-            y += mSize.y - sizeY;
+        if (mClipSpaceRotation[0][0] < 0 || mClipSpaceRotation[1][0] < 0)
+            x += mBufferSize.x - sizeX;
+        if(mClipSpaceRotation[0][1] < 0 || mClipSpaceRotation[1][1] < 0)
+            y += mBufferSize.y - sizeY;
 
         VkRect2D scissor {};
         scissor.offset = { x, y };
@@ -258,13 +258,10 @@ namespace Render {
 
     void VulkanRenderWindow::create(const Vector2i &size)
     {
-        mFramebuffers.clear();
-        mSwapChainImageViews.clear();
-        mSwapChainImages.clear();
-        mSwapChain.reset();        
-
         mSurfaceCapabilities = querySwapChainSupport(GetPhysicalDevice(), mSurface).capabilities;
         VkExtent2D extent = chooseSwapExtent(mSurfaceCapabilities, size);
+
+        LOG("Size: " << size.x << ", " << size.y << " Extent: " << extent.width << ", " << extent.height);
 
         uint32_t imageCount = mSurfaceCapabilities.minImageCount + 1;
         if (mSurfaceCapabilities.maxImageCount > 0 && imageCount > mSurfaceCapabilities.maxImageCount) {
@@ -308,22 +305,26 @@ namespace Render {
         createInfo2.presentMode = VK_PRESENT_MODE_FIFO_KHR;
         createInfo2.clipped = VK_TRUE;
 
-        createInfo2.oldSwapchain = VK_NULL_HANDLE;
+        createInfo2.oldSwapchain = mSwapChain.release();
 
         VkResult result = vkCreateSwapchainKHR(GetDevice(), &createInfo2, nullptr, &mSwapChain);
         VK_CHECK(result);
 
-        setup({ static_cast<int>(extent.width), static_cast<int>(extent.height) });
+        mBufferSize = { static_cast<int>(extent.width), static_cast<int>(extent.height) };
+        setup(mBufferSize, size);
 
         result = vkGetSwapchainImagesKHR(GetDevice(), mSwapChain, &imageCount, nullptr);
         VK_CHECK(result);
 
+        mSwapChainImages.clear();
         mSwapChainImages.resize(imageCount);
 
         result = vkGetSwapchainImagesKHR(GetDevice(), mSwapChain, &imageCount, mSwapChainImages.data());
         VK_CHECK(result);
 
+        mSwapChainImageViews.clear();
         mSwapChainImageViews.resize(imageCount);
+        mFramebuffers.clear();
         mFramebuffers.resize(imageCount);
         for (size_t i = 0; i < imageCount; ++i) {
             VkImageViewCreateInfo createInfo {};

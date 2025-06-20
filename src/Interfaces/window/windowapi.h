@@ -111,9 +111,9 @@ namespace Window {
         uintptr_t mHandle;
 
     protected:
-        void onResize(const InterfacesVector &size)
+        void onResize(const InterfacesVector &renderSize)
         {
-            mListener->onResize(size);
+            mListener->onResize(renderSize);
         }
 
         void onClose()
