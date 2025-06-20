@@ -230,7 +230,7 @@ namespace Window {
         }
         if (static_cast<AndroidWindow *>(this)->mResizeNeeded.test() && sWindow->mHandle != 0) {
             static_cast<AndroidWindow *>(this)->mResizeNeeded.clear();
-            onResize(size());
+            onResize(renderSize());
         }
     }
 

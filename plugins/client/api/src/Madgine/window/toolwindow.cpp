@@ -50,9 +50,9 @@ namespace Window {
         //update();
     }
 
-    void ToolWindow::onResize(const InterfacesVector &size)
+    void ToolWindow::onResize(const InterfacesVector &renderSize)
     {
-        mRenderWindow->resize({ size.x, size.y });
+        mRenderWindow->resize({ renderSize.x, renderSize.y });
     }
 
     bool ToolWindow::injectKeyPress(const Input::KeyEventArgs &arg)

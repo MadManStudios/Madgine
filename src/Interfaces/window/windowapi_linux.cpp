@@ -92,7 +92,7 @@ namespace Window {
 
                 if (xce.width != mSize.x || xce.height != mSize.y) {
                     mSize = { xce.width, xce.height };
-                    onResize(mSize);
+                    onResize(renderSize());
                 }
                 break;
             }

@@ -44,7 +44,7 @@ namespace Render {
         for (VulkanTexture &tex : mTextures) {
             tex.setData(size, {});
         }
-        setup(size, mCreateDepthBufferView);
+        setup(size, size, mCreateDepthBufferView);
 
         VkImageView views[5] { mDepthTexture.view() };
         for (size_t i = 0; i < mTextures.size(); ++i)

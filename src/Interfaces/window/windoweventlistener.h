@@ -7,7 +7,7 @@ namespace Engine {
 namespace Window {
 
     struct WindowEventListener {
-        virtual void onResize(const InterfacesVector &size) {};
+        virtual void onResize(const InterfacesVector &renderSize) {};
         virtual void onClose() {};
         virtual void onRepaint() {};
 
