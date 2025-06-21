@@ -309,7 +309,7 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: >
         cmake -B ${{ github.workspace }}/build
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo
+        -DCMAKE_BUILD_TYPE=Debug
         -DUSE_CMAKE_LOG=1 
         -DMADGINE_CONFIGURATION=test/configs/${{ fromJSON(needs.configuration.outputs.configs)[matrix.platform] }}/
         -DBUILD_SHARED_LIBS=OFF 
@@ -319,13 +319,13 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      run: cmake --build ${{ github.workspace }}/build --config RelWithDebInfo --verbose
+      run: cmake --build ${{ github.workspace }}/build --config Debug --verbose
 
     - name: Test
       working-directory: ${{ github.workspace }}/build
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest --build-config RelWithDebInfo --output-on-failure
+      run: ctest --build-config Debug --output-on-failure
 
     - name: Split debug information
       if: matrix.platform == 'emscripten'
