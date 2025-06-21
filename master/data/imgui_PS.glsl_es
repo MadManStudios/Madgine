@@ -9,11 +9,11 @@ uniform highp sampler2D texture4;
 
 in highp vec4 out_var_COLOR;
 in highp vec2 out_var_TEXCOORD;
-layout(location = 0) out highp vec4 out_var_SV_Target;
+layout(location = 0) out highp vec4 out_var_SV_TARGET;
 
 void main()
 {
-    out_var_SV_Target = vec4(pow(out_var_COLOR.xyz, vec3(2.2000000476837158203125)), out_var_COLOR.w) * texture(texture4, out_var_TEXCOORD);
+    out_var_SV_TARGET = vec4(pow(out_var_COLOR.xyz, vec3(2.2000000476837158203125)), out_var_COLOR.w) * texture(texture4, out_var_TEXCOORD);
 }
 
 
