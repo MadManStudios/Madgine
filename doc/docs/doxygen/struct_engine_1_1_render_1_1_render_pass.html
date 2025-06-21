@@ -172,7 +172,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.2.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.3.0</span>
    </div>
   </td>
  </tr>
@@ -200,6 +200,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="struct_engine_1_1_render_1_1_render_pass-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Render::RenderPass Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -233,8 +234,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4a0c6b902e087d5400550ae5840dd123"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad611652b225be228decf1ce025fedba3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ad611652b225be228decf1ce025fedba3">setup</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
 <tr class="separator:ad611652b225be228decf1ce025fedba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33b4f86699c1485077e744b74410d70e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a33b4f86699c1485077e744b74410d70e">shutdown</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
-<tr class="separator:a33b4f86699c1485077e744b74410d70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafea236add319940b82d47ee683153eb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aafea236add319940b82d47ee683153eb">shutdown</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
+<tr class="separator:aafea236add319940b82d47ee683153eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac179ec9a3bb2a3d8c5e5b67d076a9887"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ac179ec9a3bb2a3d8c5e5b67d076a9887">swapFlipFlopTextures</a> (size_t iteration) const</td></tr>
 <tr class="separator:ac179ec9a3bb2a3d8c5e5b67d076a9887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6074cb9edbe7ca80797849e852c55bc"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ab6074cb9edbe7ca80797849e852c55bc">targetCount</a> (size_t iteration) const</td></tr>
@@ -255,6 +256,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a9bb814447635eeee9642f4c8213f4042"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88d63e477c496ea4e94de634f55943de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a88d63e477c496ea4e94de634f55943de">removeDependency</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a> *dep)</td></tr>
 <tr class="separator:a88d63e477c496ea4e94de634f55943de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c88baa1ffb571130507784a1b71808"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ad5c88baa1ffb571130507784a1b71808">setupImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, std::string_view vs, std::string_view ps, std::vector&lt; size_t &gt; bufferSizes, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> depthChecking=true)</td></tr>
+<tr class="separator:ad5c88baa1ffb571130507784a1b71808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ab11687ad9479443010b07863d2da95a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader_1_1_instance.html">PipelineLoader::Instance</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ab11687ad9479443010b07863d2da95a5">mPipeline</a></td></tr>
+<tr class="separator:ab11687ad9479443010b07863d2da95a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3f48f7106a87c14a82d178f691351a43" name="a3f48f7106a87c14a82d178f691351a43"></a>
@@ -311,8 +319,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a33b4f86699c1485077e744b74410d70e" name="a33b4f86699c1485077e744b74410d70e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33b4f86699c1485077e744b74410d70e">&#9670;&#160;</a></span>shutdown()</h2>
+<a id="aafea236add319940b82d47ee683153eb" name="aafea236add319940b82d47ee683153eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafea236add319940b82d47ee683153eb">&#9670;&#160;</a></span>shutdown()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +329,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Render::RenderPass::shutdown </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::RenderPass::shutdown </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
           <td class="paramname"><em>target</em></td><td>)</td>
@@ -330,12 +338,12 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#a8283b2377e945dc4a9094dd9f76c42c8">Engine::Render::PointShadowRenderPass</a>, <a class="el" href="struct_engine_1_1_render_1_1_scene_render_pass.html#a6f6f76ae2a9e96496af13138d4375579">Engine::Render::SceneRenderPass</a>, <a class="el" href="struct_engine_1_1_render_1_1_shadow_render_pass.html#ab8c0a9c56de0caf64ac78b8c30cb41bf">Engine::Render::ShadowRenderPass</a>, <a class="el" href="struct_engine_1_1_render_1_1_bloom_pass.html#adc5404830f1ba9bd7d000f5ff5b55e44">Engine::Render::BloomPass</a>, and <a class="el" href="struct_engine_1_1_render_1_1_blur_pass.html#afdb5637895e827c050f8c70d9a96f38a">Engine::Render::BlurPass</a>.</p>
+<p>Reimplemented in <a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_pass.html#a8283b2377e945dc4a9094dd9f76c42c8">Engine::Render::PointShadowRenderPass</a>, <a class="el" href="struct_engine_1_1_render_1_1_scene_render_pass.html#a6f6f76ae2a9e96496af13138d4375579">Engine::Render::SceneRenderPass</a>, and <a class="el" href="struct_engine_1_1_render_1_1_shadow_render_pass.html#ab8c0a9c56de0caf64ac78b8c30cb41bf">Engine::Render::ShadowRenderPass</a>.</p>
 
 </div>
 </div>
@@ -695,6 +703,83 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad5c88baa1ffb571130507784a1b71808" name="ad5c88baa1ffb571130507784a1b71808"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5c88baa1ffb571130507784a1b71808">&#9670;&#160;</a></span>setupImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::RenderPass::setupImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>vs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>ps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; size_t &gt;&#160;</td>
+          <td class="paramname"><em>bufferSizes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>depthChecking</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab11687ad9479443010b07863d2da95a5" name="ab11687ad9479443010b07863d2da95a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab11687ad9479443010b07863d2da95a5">&#9670;&#160;</a></span>mPipeline</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader_1_1_instance.html">PipelineLoader::Instance</a> Engine::Render::RenderPass::mPipeline</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/renderer/api/src/Madgine/render/<a class="el" href="renderpass_8h.html">renderpass.h</a></li>
 <li>plugins/renderer/api/src/Madgine/render/<a class="el" href="renderpass_8cpp.html">renderpass.cpp</a></li>
@@ -702,7 +787,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 23 2025 10:11:11 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 21 2025 09:16:22 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

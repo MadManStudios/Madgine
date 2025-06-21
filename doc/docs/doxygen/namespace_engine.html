@@ -172,7 +172,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.2.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.3.0</span>
    </div>
   </td>
  </tr>
@@ -243,6 +243,8 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_engine_1_1_node_graph"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_node_graph.html">NodeGraph</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_engine_1_1_plugins"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_plugins.html">Plugins</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_process"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_process.html">Process</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_engine_1_1_render"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html">Render</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -877,8 +879,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_bound_api_function.html">TypedBoundApiFunction</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_parameter_tuple_instance.html">TypedParameterTupleInstance</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_info.html">TypeInfo</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1underlying__container.html">underlying_container</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1532,9 +1532,6 @@ requires (ValueTypePrimitive&lt;std::decay_t&lt;T&gt;&gt; || <a class="el" href=
 <tr class="separator:ae920d0241e7bc22f50c5269bf1d50daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaffa75b200a8965a148385bd81599a13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aaffa75b200a8965a148385bd81599a13">TranslationMatrix</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
 <tr class="separator:aaffa75b200a8965a148385bd81599a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a6db7dd57cb994efbf24677c77f88e0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a7a6db7dd57cb994efbf24677c77f88e0"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a7a6db7dd57cb994efbf24677c77f88e0">typeName</a> ()</td></tr>
-<tr class="separator:a7a6db7dd57cb994efbf24677c77f88e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa79542b0a29be7e1303f2cedb18c3367"><td class="memTemplParams" colspan="2">template&lt;typename T , typename D &gt; </td></tr>
 <tr class="memitem:aa79542b0a29be7e1303f2cedb18c3367"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aa79542b0a29be7e1303f2cedb18c3367">uniquePtrToPtr</a> (const std::unique_ptr&lt; T, D &gt; &amp;p)</td></tr>
 <tr class="separator:aa79542b0a29be7e1303f2cedb18c3367"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2868,33 +2865,6 @@ template&lt;typename T &gt; </div>
           <td> -&gt;  <a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">CallerHierarchyPtr</a>&lt; T &gt;</td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7a6db7dd57cb994efbf24677c77f88e0" name="a7a6db7dd57cb994efbf24677c77f88e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a6db7dd57cb994efbf24677c77f88e0">&#9670;&#160;</a></span>typeName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Engine::typeName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -6803,7 +6773,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 23 2025 10:11:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 21 2025 09:16:20 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

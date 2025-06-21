@@ -172,7 +172,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.2.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.3.0</span>
    </div>
   </td>
  </tr>
@@ -205,7 +205,7 @@ $(function() {
 <div class="textblock"><div class="dynheader">
 Include dependency graph for uniquecomponentdefine.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="uniquecomponentdefine_8h__incl.svg" width="210" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="uniquecomponentdefine_8h__incl.svg" width="331" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -217,7 +217,7 @@ This graph shows which files directly or indirectly include this file:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ae84d68ed8ecac95284f76e9982a91e61"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uniquecomponentdefine_8h.html#ae84d68ed8ecac95284f76e9982a91e61">DECLARE_NAMED_UNIQUE_COMPONENT</a>(ns,  prefix, ...)</td></tr>
+<tr class="memitem:ae84d68ed8ecac95284f76e9982a91e61"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uniquecomponentdefine_8h.html#ae84d68ed8ecac95284f76e9982a91e61">DECLARE_NAMED_UNIQUE_COMPONENT</a>(ns,  prefix, ...)&#160;&#160;&#160;    <a class="el" href="uniquecomponentdefine_8h.html#a8eb9aeb94b6ef8d211a8cf2be9ef06a3">DECLARE_UNIQUE_COMPONENT2</a>(ns, prefix, <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>, <a class="el" href="struct_engine_1_1_unique_component_1_1_named_component.html">Engine::UniqueComponent::NamedComponent</a>, __VA_ARGS__)</td></tr>
 <tr class="separator:ae84d68ed8ecac95284f76e9982a91e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c695f179234f2af3ab947aefe36382b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uniquecomponentdefine_8h.html#a0c695f179234f2af3ab947aefe36382b">DECLARE_UNIQUE_COMPONENT</a>(ns,  prefix, ...)&#160;&#160;&#160;<a class="el" href="uniquecomponentdefine_8h.html#a8eb9aeb94b6ef8d211a8cf2be9ef06a3">DECLARE_UNIQUE_COMPONENT2</a>(ns, prefix, <a class="el" href="struct_engine_1_1_unique_component_1_1_registry.html">Engine::UniqueComponent::Registry</a>, std::type_identity_t, __VA_ARGS__)</td></tr>
 <tr class="separator:a0c695f179234f2af3ab947aefe36382b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -273,8 +273,9 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span>ns {                                                                                                                                                                       \</div>
-<div class="line">    <span class="keyword">using </span>prefix##Registry = registry&lt;__VA_ARGS__&gt;;                                                                                                                                      \</div>
-<div class="line">    <span class="keyword">using </span>prefix##BaseRegistry = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_registry.html">Engine::UniqueComponent::Registry&lt;__VA_ARGS__&gt;</a>;                                                                                                         \</div>
+<div class="line">    <span class="keyword">constexpr</span> <span class="keyword">auto</span> prefix##Header() { <span class="keywordflow">return</span> __FILE__; }                                                                                                                          \</div>
+<div class="line">    <span class="keyword">using </span>prefix##Registry = registry&lt;<a class="code hl_define" href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a>(ns::prefix##BaseRegistry), <a class="code hl_define" href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a>(ns::prefix##Registry), prefix##Header, __VA_ARGS__&gt;;                                                \</div>
+<div class="line">    <span class="keyword">using </span>prefix##BaseRegistry = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_registry.html">Engine::UniqueComponent::Registry</a>&lt;<a class="code hl_define" href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a>(ns::prefix##BaseRegistry), <a class="code hl_define" href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a>(ns::prefix##Registry), prefix##Header, __VA_ARGS__&gt;;                   \</div>
 <div class="line">    <span class="keyword">using </span>prefix##Collector = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_collector.html">Engine::UniqueComponent::Collector&lt;prefix##Registry&gt;</a>;                                                                                                      \</div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> C&gt;                                                                                                                                                                \</div>
 <div class="line">    <span class="keyword">using </span>prefix##Container = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_container.html">Engine::UniqueComponent::Container&lt;typename Engine::replace&lt;C&gt;::template</a> type&lt;std::unique_ptr&lt;<a class="code hl_define" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)&gt;&gt;, prefix##Registry, <a class="code hl_define" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)&gt;; \</div>
@@ -285,12 +286,12 @@ Macros</h2></td></tr>
 <div class="line">    <span class="keyword">using </span>prefix##VirtualBase = component&lt;Engine::UniqueComponent::VirtualComponentBase&lt;T, prefix##Collector, Base&gt;&gt;;                                                                    \</div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Base&gt;                                                                                                                                                 \</div>
 <div class="line">    <span class="keyword">using </span>prefix##VirtualImpl = <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">Engine::UniqueComponent::VirtualComponentImpl&lt;T, Base&gt;</a>;                                                                                                  \</div>
-<div class="line">    }                                                                                                                                                                                    \</div>
-<div class="line">    REGISTER_TYPE(ns::prefix##Registry)</div>
+<div class="line">    }</div>
+<div class="ttc" id="amacros_8h_html_a6df1d22fb5f09eccc23b9f399670cfd7"><div class="ttname"><a href="macros_8h.html#a6df1d22fb5f09eccc23b9f399670cfd7">STRINGIFY</a></div><div class="ttdeci">#define STRINGIFY(x)</div><div class="ttdef"><b>Definition:</b> macros.h:3</div></div>
 <div class="ttc" id="amacros_8h_html_a95dfc80599f592f262b6d72516d365a9"><div class="ttname"><a href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a></div><div class="ttdeci">#define FIRST(...)</div><div class="ttdef"><b>Definition:</b> macros.h:22</div></div>
 <div class="ttc" id="astruct_engine_1_1_unique_component_1_1_collector_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_collector.html">Engine::UniqueComponent::Collector</a></div><div class="ttdef"><b>Definition:</b> uniquecomponentcollector.h:13</div></div>
 <div class="ttc" id="astruct_engine_1_1_unique_component_1_1_container_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_container.html">Engine::UniqueComponent::Container</a></div><div class="ttdef"><b>Definition:</b> uniquecomponentcontainer.h:13</div></div>
-<div class="ttc" id="astruct_engine_1_1_unique_component_1_1_registry_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_registry.html">Engine::UniqueComponent::Registry</a></div><div class="ttdef"><b>Definition:</b> uniquecomponentregistry.h:84</div></div>
+<div class="ttc" id="astruct_engine_1_1_unique_component_1_1_registry_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_registry.html">Engine::UniqueComponent::Registry</a></div><div class="ttdef"><b>Definition:</b> uniquecomponentregistry.h:96</div></div>
 <div class="ttc" id="astruct_engine_1_1_unique_component_1_1_selector_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_selector.html">Engine::UniqueComponent::Selector</a></div><div class="ttdef"><b>Definition:</b> uniquecomponentselector.h:9</div></div>
 <div class="ttc" id="astruct_engine_1_1_unique_component_1_1_virtual_component_impl_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_virtual_component_impl.html">Engine::UniqueComponent::VirtualComponentImpl</a></div><div class="ttdef"><b>Definition:</b> uniquecomponent.h:16</div></div>
 </div><!-- fragment -->
@@ -357,16 +358,11 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="uniquecomponentdefine_8h.html#a8eb9aeb94b6ef8d211a8cf2be9ef06a3">DECLARE_UNIQUE_COMPONENT2</a>(ns, prefix, <a class="el" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>, <a class="el" href="struct_engine_1_1_unique_component_1_1_named_component.html">Engine::UniqueComponent::NamedComponent</a>, __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="uniquecomponentdefine_8h.html#a8eb9aeb94b6ef8d211a8cf2be9ef06a3">DECLARE_UNIQUE_COMPONENT2</a>(ns, prefix, <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a>, <a class="code hl_struct" href="struct_engine_1_1_unique_component_1_1_named_component.html">Engine::UniqueComponent::NamedComponent</a>, __VA_ARGS__) \</div>
-<div class="line">    REGISTER_TYPE(ns::prefix##BaseRegistry)</div>
-<div class="ttc" id="astruct_engine_1_1_unique_component_1_1_named_component_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_named_component.html">Engine::UniqueComponent::NamedComponent</a></div><div class="ttdef"><b>Definition:</b> uniquecomponent.h:135</div></div>
-<div class="ttc" id="astruct_engine_1_1_unique_component_1_1_named_registry_html"><div class="ttname"><a href="struct_engine_1_1_unique_component_1_1_named_registry.html">Engine::UniqueComponent::NamedRegistry</a></div><div class="ttdef"><b>Definition:</b> uniquecomponentregistry.h:193</div></div>
-<div class="ttc" id="auniquecomponentdefine_8h_html_a8eb9aeb94b6ef8d211a8cf2be9ef06a3"><div class="ttname"><a href="uniquecomponentdefine_8h.html#a8eb9aeb94b6ef8d211a8cf2be9ef06a3">DECLARE_UNIQUE_COMPONENT2</a></div><div class="ttdeci">#define DECLARE_UNIQUE_COMPONENT2(ns, prefix, registry, component,...)</div><div class="ttdef"><b>Definition:</b> uniquecomponentdefine.h:7</div></div>
-</div><!-- fragment -->
+
 </div>
 </div>
 <a id="a8b89e2aeece3169265e5c7c4d147363e" name="a8b89e2aeece3169265e5c7c4d147363e"></a>
@@ -428,7 +424,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 23 2025 10:11:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 21 2025 09:16:20 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
