@@ -47,6 +47,9 @@ jobs:
         \"android_arm64\": \"Vulkan\", 
         \"android_x64\": \"Vulkan\", 
         \"emscripten\": \"OpenGL\"}"
+      versions: "{
+        \"push\": \"${major}.${minor}.${patch}\",
+        \"pull_request\": \"${major}.${minor}.${patch}rc\"}"
     
   build-plugins:
   
@@ -94,7 +97,7 @@ jobs:
         # A string which indicates the flags used by the `minor_pattern` regular expression. Supported flags: idgs
         minor_regexp_flags: ""
         # A string to determine the format of the version output
-        version_format: "${major}.${minor}.${patch}"
+        version_format: ${{ fromJSON(needs.configuration.outputs.versions)[github.event_name] }}
         # Optional path to check for changes. If any changes are detected in the path the
         # 'changed' output will true. Enter multiple paths separated by spaces.
         change_path: ""
@@ -157,14 +160,14 @@ jobs:
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
-      if: github.event_name != 'pull_request' && github.ref_name == 'master'
+      if: github.ref_name == 'master'
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: cpack
 
     - name: Release
       uses: softprops/action-gh-release@v2
-      if: github.event_name != 'pull_request' && github.ref_name == 'master'
+      if: github.ref_name == 'master'
       with:
         name: ${{ steps.version.outputs.version_tag }}
         tag_name: ${{ steps.version.outputs.version_tag }}
@@ -265,7 +268,7 @@ jobs:
         # A string which indicates the flags used by the `minor_pattern` regular expression. Supported flags: idgs
         minor_regexp_flags: ""
         # A string to determine the format of the version output
-        version_format: "${major}.${minor}.${patch}"
+        version_format: ${{ fromJSON(needs.configuration.outputs.versions)[github.event_name] }}
         # Optional path to check for changes. If any changes are detected in the path the
         # 'changed' output will true. Enter multiple paths separated by spaces.
         change_path: ""
@@ -340,14 +343,14 @@ jobs:
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
-      if: github.event_name != 'pull_request' && (github.ref_name == 'master' || matrix.platform == 'emscripten')
+      if: github.ref_name == 'master' || matrix.platform == 'emscripten'
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: cpack
 
     - name: Release
       uses: softprops/action-gh-release@v2
-      if: github.event_name != 'pull_request' && github.ref_name == 'master'
+      if: github.ref_name == 'master'
       with:
         name: ${{ steps.version.outputs.version_tag }}
         tag_name: ${{ steps.version.outputs.version_tag }}
