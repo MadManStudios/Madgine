@@ -141,7 +141,7 @@ namespace Render {
     void VulkanRenderTexture::createRenderPass()
     {
 
-        VkFormat vFormat;
+        VkFormat vFormat = VK_FORMAT_UNDEFINED;
         if (!mTextures.empty())
             vFormat = mTextures.front().format();
 
