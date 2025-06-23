@@ -96,10 +96,6 @@ namespace Render {
         mDepthTexture.setData(framebufferSize, {});
     }
 
-    void VulkanRenderTarget::shutdown()
-    {
-    }
-
     void VulkanRenderTarget::beginFrame()
     {
         VkRenderPassBeginInfo renderPassInfo {};

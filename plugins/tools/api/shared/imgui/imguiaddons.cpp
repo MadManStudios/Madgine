@@ -1373,7 +1373,6 @@ void SetWindowDockingDir(ImGuiID dockSpaceId, ImGuiDir dir, float ratio, bool ou
 
     ImGuiDockNode *node;
     ImGuiDockNode *centralNode = DockBuilderGetCentralNode(dockSpaceId);
-    bool dock = false;
 
     ImGuiAxis axis = (dir == ImGuiDir_Left || dir == ImGuiDir_Right) ? ImGuiAxis_X : ImGuiAxis_Y;
     int dirIndex = (dir == ImGuiDir_Left || dir == ImGuiDir_Up) ? 0 : 1;

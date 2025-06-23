@@ -31,7 +31,6 @@ namespace Render {
 
     VulkanRenderTexture::~VulkanRenderTexture()
     {
-        shutdown();
     }
 
     bool VulkanRenderTexture::resizeImpl(const Vector2i &size)

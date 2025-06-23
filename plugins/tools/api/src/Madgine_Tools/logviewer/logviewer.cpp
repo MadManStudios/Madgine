@@ -85,16 +85,11 @@ namespace Tools {
         if (ImGui::Begin("LogViewer", &mVisible)) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Down, 0.3f, true, ImGuiCond_FirstUseEver);
 
-            int mTotalMsgCount = 0;
-
             for (Log::MessageType type : Log::MessageType::values()) {
                 ImGui::PushStyleColor(ImGuiCol_Text, sColors[type].Value);
                 mIsDirty |= ImGui::Checkbox(sIcons[type], &mMsgFilters[type]);
                 ImGui::PopStyleColor();
                 ImGui::SameLine();
-
-                if (mMsgFilters[type])
-                    mTotalMsgCount += mMsgCounts[type];
             }
             mIsDirty |= ImGui::InputText("Filter", &mMessageWordFilter);
 

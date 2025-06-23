@@ -107,8 +107,6 @@ namespace Render {
 
     VulkanRenderWindow::~VulkanRenderWindow()
     {
-
-        shutdown();
     }
 
     bool VulkanRenderWindow::skipFrame()
@@ -260,8 +258,6 @@ namespace Render {
     {
         mSurfaceCapabilities = querySwapChainSupport(GetPhysicalDevice(), mSurface).capabilities;
         VkExtent2D extent = chooseSwapExtent(mSurfaceCapabilities, size);
-
-        LOG("Size: " << size.x << ", " << size.y << " Extent: " << extent.width << ", " << extent.height);
 
         uint32_t imageCount = mSurfaceCapabilities.minImageCount + 1;
         if (mSurfaceCapabilities.maxImageCount > 0 && imageCount > mSurfaceCapabilities.maxImageCount) {

@@ -71,10 +71,6 @@ namespace Render {
         }
     }
 
-    void DirectX12RenderTarget::shutdown()
-    {
-    }
-
     void DirectX12RenderTarget::beginFrame()
     {
         RenderTarget::beginFrame();

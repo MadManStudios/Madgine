@@ -27,7 +27,6 @@ namespace Render {
 
     DirectX12RenderTexture::~DirectX12RenderTexture()
     {
-        shutdown();
     }
 
     bool DirectX12RenderTexture::resizeImpl(const Vector2i &size)
