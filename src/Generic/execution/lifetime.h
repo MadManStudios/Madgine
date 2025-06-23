@@ -149,8 +149,8 @@ namespace Execution {
         struct LifetimeReceiver : VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...> {
 
             LifetimeReceiver(Lifetime &lifetime)
-                : mLifetime(lifetime)
-                , mStopToken(mStopSource.get_token())
+                : mStopToken(mStopSource.get_token())
+                , mLifetime(lifetime)
             {
             }
 

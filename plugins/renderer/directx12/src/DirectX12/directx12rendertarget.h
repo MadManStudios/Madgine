@@ -15,7 +15,6 @@ namespace Render {
         ~DirectX12RenderTarget();
 
         void setup(std::vector<std::array<OffsetPtr, 6>> targetViews, const Vector2i &size);
-        void shutdown();
 
         void beginFrame() override;
         RenderFuture endFrame() override;

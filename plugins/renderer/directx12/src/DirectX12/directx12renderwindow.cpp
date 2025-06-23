@@ -65,7 +65,6 @@ namespace Render {
 
     DirectX12RenderWindow::~DirectX12RenderWindow()
     {
-        shutdown();
     }
 
     bool DirectX12RenderWindow::skipFrame()

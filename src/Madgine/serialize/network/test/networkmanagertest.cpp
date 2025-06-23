@@ -17,8 +17,6 @@ TEST(NetworkManager, Connect)
 {
     NetworkManager server("testNetworkServer");
 
-    bool done = false;
-
     ASSERT_EQ(server.startServer(1234), NetworkManagerResult::SUCCESS) << "SocketAPI: " << server.getSocketAPIError();
 
 #if !EMSCRIPTEN

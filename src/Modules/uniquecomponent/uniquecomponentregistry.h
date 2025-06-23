@@ -29,9 +29,9 @@ namespace UniqueComponent {
     struct MODULES_EXPORT RegistryBase {
         RegistryBase(const TypeInfo &ti, const TypeInfo &namedTi, const Plugins::BinaryInfo *binary, const char * (*header)())
             : mBinary(binary)
-            , mTi(ti)
-            , mNamedTi(namedTi)
             , mHeader(header)
+            , mTi(ti)
+            , mNamedTi(namedTi)            
         {
             LOG("Adding: " << ti.type_name());
             registryRegistry().push_back(this);
