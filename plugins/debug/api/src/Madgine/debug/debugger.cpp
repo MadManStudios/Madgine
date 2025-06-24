@@ -8,6 +8,8 @@
 
 #include "debuglistener.h"
 
+#include "Generic/execution/stop_source.h"
+
 UNIQUECOMPONENT(Engine::Debug::Debugger)
 
 METATABLE_BEGIN(Engine::Debug::Debugger)
@@ -42,7 +44,7 @@ namespace Debug {
         std::erase(mListeners, listener);
     }
 
-    void ContextInfo::suspend(Continuation callback, std::stop_token st)
+    void ContextInfo::suspend(Continuation callback, Execution::StopToken st)
     {
         if (mStopRequested) {
             callback(ContinuationMode::Abort);
@@ -51,20 +53,19 @@ namespace Debug {
 
         for (DebugListener *listener : Debugger::getSingleton().mListeners)
             listener->onSuspend(*this, callback.type());
-        mCallback = std::move(callback);
-        int initialState = 0;
-        mPaused.compare_exchange_strong(initialState, 1);
-        assert(initialState == 0);
-        mStopCallback.start(std::move(st), stop_cb { this });
-        initialState = 1;
-        mPaused.compare_exchange_strong(initialState, 2);
+        mCallback = std::move(callback);        
+        mRunning.clear();
+        if (!st->registerCallback(this)) {
+            if (mRunning.test_and_set())
+                callback(ContinuationMode::Abort);
+        } 
     }
 
     void ContextInfo::continueExecution(ContinuationMode mode)
     {
-        int initialState = 2;
-        if (mPaused.compare_exchange_strong(initialState, 3)) {
-            mStopCallback.finish(mode);
+        if (!mRunning.test_and_set()) {
+            Closure<void(ContinuationMode)> callback = std::move(mContext->mCallback);
+            callback(mode);
         }
     }
 
@@ -99,7 +100,7 @@ namespace Debug {
 
     bool ContextInfo::isPaused() const
     {
-        return mPaused == 2;
+        return !mRunning.test();
     }
 
     std::string ContextInfo::getArguments() const
@@ -125,26 +126,12 @@ namespace Debug {
         return pause;
     }
 
-    bool ContextInfo::stop_cb::operator()() const
+    void ContextInfo::stopRequested()
     {
-        int initialState = 1;
-        if (mContext->mPaused.compare_exchange_strong(initialState, 3))
-            return true;
-        initialState = 2;
-        return mContext->mPaused.compare_exchange_strong(initialState, 3);
-    }
-
-    void ContextInfo::finally_cb::operator()(ContinuationMode mode) const
-    {
-        assert(mContext->mPaused == 3);
-        Closure<void(ContinuationMode)> callback = std::move(mContext->mCallback);
-        mContext->mPaused = 0;
-        callback(mode);
-    }
-
-    void ContextInfo::finally_cb::operator()(Execution::cancelled_t) const
-    {
-        operator()(ContinuationMode::Abort);
+        if (!mRunning.test_and_set()) {
+            Closure<void(ContinuationMode)> callback = std::move(mContext->mCallback);
+            callback(ContinuationMode::Abort);
+        }
     }
 
 }

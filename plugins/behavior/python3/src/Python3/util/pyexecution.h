@@ -35,7 +35,7 @@ namespace Scripting {
         void evalFrame(BehaviorReceiver &receiver, PyFramePtr frame);
         void evalFrames(BehaviorReceiver &receiver, std::vector<PyFramePtr> frames);
 
-        PyObject *suspend(Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log*, std::stop_token)> callback);
+        PyObject *suspend(Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, Execution::StopToken)> callback);
 
         MADGINE_PYTHON3_EXPORT BehaviorError fetchError();
 

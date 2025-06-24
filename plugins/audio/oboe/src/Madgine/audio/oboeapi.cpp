@@ -30,6 +30,7 @@ namespace Audio {
         }
 
         void start();
+        void stop();
 
         AudioLoader::Handle mBuffer;
         OboeApi *mApi;
@@ -138,6 +139,11 @@ namespace Audio {
     {
         std::shared_ptr<OboeStream> stream = mApi->fetchStream(mBuffer->mInfo);
         stream->play(*this);
+    }
+
+    void PlaybackState::stop()
+    {
+        throw 0;
     }
 
     OboeApi::OboeApi(Root::Root &root)

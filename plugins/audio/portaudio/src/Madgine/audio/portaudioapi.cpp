@@ -28,11 +28,12 @@ namespace Audio {
         PlaybackState(AudioLoader::Handle buffer, PortAudioApi *api)
             : mBuffer(std::move(buffer))
             , mApi(api)
-            , mStopCallback(this)
         {
         }
 
         void start();
+
+        void stop();
 
         friend auto tag_invoke(Execution::visit_state_t, PlaybackState &state, const auto &, auto &&visitor)
         {
@@ -53,42 +54,12 @@ namespace Audio {
 
         AudioLoader::Handle mBuffer;
         PortAudioApi *mApi;
+        PortAudioStream *mStream = nullptr;
 
         const void *mPtr;
         const void *mEnd;
 
         bool mLooping = false;
-
-        struct stop_cb {
-            stop_cb(PortAudioStream &stream)
-                : mStream(stream)
-            {
-            }
-
-            bool operator()();
-
-            PortAudioStream &mStream;
-        };
-
-        struct finally_cb {
-            finally_cb(PlaybackState *state)
-                : mState(state)
-            {
-            }
-
-            void operator()(Execution::cancelled_t)
-            {
-                mState->set_done();
-            }
-            void operator()()
-            {
-                mState->set_value();
-            }
-
-            PlaybackState *mState;
-        };
-
-        Execution::stop_callback<stop_cb, finally_cb> mStopCallback;
     };
 
     template <typename Rec>
@@ -220,7 +191,7 @@ namespace Audio {
         void finishedCallback()
         {
             PortAudioApi *api = static_cast<PortAudioApi *>(mState->mApi);
-            mState->mStopCallback.finish();
+            mState->set_value();
             mState = nullptr;
             api->reuseStream(*this);
         }
@@ -255,16 +226,15 @@ namespace Audio {
             set_value();
             return;
         }
-        PortAudioStream &stream = mApi->fetchStream(mBuffer->mInfo);
-        stream.play(*this);
-        mStopCallback.start(Execution::get_stop_token(*this), stream);
+        mStream = &mApi->fetchStream(mBuffer->mInfo);
+        mStream->play(*this);
     }
 
-    bool PlaybackState::stop_cb::operator()()
-    {
-        return mStream.abort();
+    void PlaybackState::stop() {
+        if (mStream->abort())
+            set_done();
     }
-
+        
     PortAudioApi::PortAudioApi(Root::Root &root)
         : AudioApiImpl<PortAudioApi>(root)
     {

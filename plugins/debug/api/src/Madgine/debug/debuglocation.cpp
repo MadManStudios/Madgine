@@ -39,7 +39,7 @@ namespace Debug {
         return Debugger::getSingleton().wantsPause(*this, type);
     }
 
-    void DebugLocation::yieldImpl(Continuation cont, std::stop_token st)
+    void DebugLocation::yieldImpl(Continuation cont, Execution::StopToken st)
     {
         mContext->suspend(std::move(cont), std::move(st));
     }

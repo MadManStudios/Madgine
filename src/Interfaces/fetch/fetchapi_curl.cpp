@@ -8,6 +8,8 @@
 
 #    include "fetchapi.h"
 
+#include "Generic/execution/stop_source.h"
+
 namespace Engine {
 
 struct CurlManager {
@@ -63,7 +65,7 @@ struct CurlManager {
 
     CURLM *mHandle = nullptr;
     std::thread mThread;
-    std::stop_source mStopSource;
+    Execution::StopSource mStopSource;
 };
 
 static CURLM *sHandle()
@@ -119,6 +121,11 @@ void FetchStateBase::start()
 {
     curl_multi_add_handle(sHandle(), mPtr1.as<CURL *>());
     curl_multi_wakeup(sHandle());
+}
+
+void FetchStateBase::stop()
+{
+    throw 0;
 }
 
 }

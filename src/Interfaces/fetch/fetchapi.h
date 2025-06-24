@@ -13,6 +13,7 @@ struct INTERFACES_EXPORT FetchStateBase {
     ~FetchStateBase();
 
     void start();
+    void stop();
 
     virtual void set_value() = 0;
     virtual void set_error(GenericResult error) = 0;

@@ -1,12 +1,17 @@
 #pragma once
 
-#include "Generic/genericresult.h"
+#include "../genericresult.h"
 
 #include "concepts.h"
 
 #include "virtualstate.h"
 
 #include "flag.h"
+
+#include "stop_callback.h"
+#include "stop_source.h"
+
+#include "stoppable.h"
 
 namespace Engine {
 namespace Execution {
@@ -28,7 +33,7 @@ namespace Execution {
         void attach(Sender &&sender)
         {
             if (mReceiver) {
-                (new attach_state<Sender> { std::forward<Sender>(sender), *mReceiver })->start();
+                (new attach_state<stoppable_t::sender<Sender>> { std::forward<Sender>(sender) | stoppable, *mReceiver })->start();
             }
         }
 
@@ -36,8 +41,7 @@ namespace Execution {
         {
             if (!mReceiver)
                 return false;
-            std::stop_source source = std::move(mReceiver->mStopSource); // Move to local variable in case stop deletes state
-            return source.request_stop();
+            return mReceiver->mStopSource.request_stop();
         }
 
         bool running() const
@@ -63,12 +67,14 @@ namespace Execution {
         }
 
     private:
-        void increaseCount() {
+        void increaseCount()
+        {
             mFinished.reset();
             ++mCount;
         }
 
-        void decreaseCount() {
+        void decreaseCount()
+        {
             if (mCount.fetch_sub(1) == 1) {
                 mFinished.emplace();
             }
@@ -113,7 +119,7 @@ namespace Execution {
                 return {};
             }
 
-            friend std::stop_token tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)
+            friend StopToken tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)
             {
                 return rec.mState->mReceiver.mStopToken;
             }
@@ -168,18 +174,18 @@ namespace Execution {
             }
 
             std::atomic<uint32_t> mCount = 1;
-            std::stop_source mStopSource;
-            std::stop_token mStopToken;
+            StopSource mStopSource;
+            StopToken mStopToken;
             Lifetime &mLifetime;
         };
 
         template <typename Rec>
-        struct state : VirtualState<Rec, LifetimeReceiver> {
+        struct state : VirtualState<Rec, LifetimeReceiver>, StopCallback {
             state(Rec &&rec, Lifetime &lifetime)
                 : VirtualState<Rec, LifetimeReceiver>(std::forward<Rec>(rec), lifetime)
-                , mPropagateCallback(get_stop_token(this->mRec), propagate_callback { *this })
-                , mStopCallback(this->mStopSource.get_token(), stop_callback { *this })
             {
+                bool registered = this->mStopSource.registerCallback(this);
+                assert(registered);
             }
 
             void start()
@@ -189,29 +195,17 @@ namespace Execution {
                 this->mLifetime.mReceiver = this;
             }
 
-            struct propagate_callback {
-                void operator()()
-                {
-                    std::stop_source source = std::move(mState.mStopSource); // Move to local variable in case stop deletes state
-                    source.request_stop();
-                }
+            void stop()
+            {
+                this->mStopSource.request_stop();            
+            }
 
-                state &mState;
-            };
-
-            struct stop_callback {
-                void operator()()
-                {
-                    assert(mState.mLifetime.mReceiver == &mState);
-                    mState.mLifetime.mReceiver = nullptr;
-                    mState.decreaseCount();
-                }
-
-                state &mState;
-            };
-
-            std::stop_callback<propagate_callback> mPropagateCallback;
-            std::stop_callback<stop_callback> mStopCallback;
+            void stopRequested() override
+            {
+                assert(this->mLifetime.mReceiver == this);
+                this->mLifetime.mReceiver = nullptr;
+                this->decreaseCount();
+            }
         };
 
         LifetimeReceiver *mReceiver = nullptr;

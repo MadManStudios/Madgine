@@ -4,6 +4,7 @@
 #include "../manuallifetime.h"
 #include "../pipable.h"
 #include "concepts.h"
+#include "stop_source.h"
 #include "storage.h"
 
 #undef ERROR
@@ -19,6 +20,10 @@ namespace Execution {
             void start()
             {
                 TupleUnpacker::invokeFromTuple(LIFT(this->mRec.set_value, this), mArgs);
+            }
+
+            void stop()
+            {
             }
 
             std::tuple<Args...> mArgs;
@@ -206,6 +211,11 @@ namespace Execution {
             {
                 mFunc();
                 mState.start();
+            }
+
+            void stop()
+            {
+                mState.stop();
             }
 
             T mFunc;
@@ -806,6 +816,11 @@ namespace Execution {
                 mark_complete();
             }
 
+            void stop()
+            {
+                TupleUnpacker::forEach(mStates, [](auto &state) { state.start(); });
+            }
+
             template <size_t I, typename... V>
             void set_value(V &&...values)
             {
@@ -1123,6 +1138,18 @@ namespace Execution {
                                    } })
                         .start();
                 }
+            }
+
+            void stop()
+            {
+                // TODO
+                std::visit([](auto &state) {
+                    if constexpr (std::same_as<decltype(state), std::monostate &>)
+                        throw 0;
+                    else
+                        state.stop();
+                },
+                    mStates);
             }
 
             template <size_t I, typename... V>
@@ -1729,7 +1756,7 @@ namespace Execution {
 
             ResultStorage<Inner> mResult;
             Rec mRec;
-            std::stop_source mStopSource;
+            StopSource mStopSource;
             inner_state mInnerState;
             stop_state mStopState;
             // stop_callback<> mPropagateCallback;

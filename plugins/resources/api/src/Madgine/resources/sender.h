@@ -50,6 +50,11 @@ namespace Resources {
                 }
             }
 
+            void stop()
+            {
+                mState.stop();
+            }
+
             State mState;
         };
 

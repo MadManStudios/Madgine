@@ -15,6 +15,7 @@ namespace Widgets {
         ~TempWidgetState();
 
         void start();
+        void stop();
 
         WidgetBase *widget();
 

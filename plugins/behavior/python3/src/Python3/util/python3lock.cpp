@@ -8,7 +8,7 @@ namespace Engine {
 namespace Scripting {
     namespace Python3 {
 
-        Python3Lock::Python3Lock(Log::Log *log, std::stop_token st)
+        Python3Lock::Python3Lock(Log::Log *log, Execution::StopToken st)
         {
             Python3Environment::lock(log, std::move(st));
         }
@@ -49,7 +49,7 @@ namespace Scripting {
             return mLog;
         }
 
-        std::stop_token Python3Unlock::st()
+        Execution::StopToken Python3Unlock::st()
         {
             return std::move(mStopToken);
         }

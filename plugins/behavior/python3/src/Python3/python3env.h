@@ -34,8 +34,8 @@ namespace Scripting {
 
             static PyGILState_STATE lock();
             static Log::Log *unlock(PyGILState_STATE state);
-            static void lock(Log::Log *log, std::stop_token st);
-            static std::pair<Log::Log *, std::stop_token> unlock();
+            static void lock(Log::Log *log, Execution::StopToken st);
+            static std::pair<Log::Log *, Execution::StopToken> unlock();
 
             static size_t totalRefCount();
 

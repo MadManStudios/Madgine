@@ -18,7 +18,6 @@
 #include "atomic.h"
 #include "memory_resource.h"
 #include "bit.h"
-#include "stop_token.h"
 
 #if __cpp_lib_constexpr_algorithms >= 201806L
 #    define CONSTEXPR_ALGORITHM constexpr

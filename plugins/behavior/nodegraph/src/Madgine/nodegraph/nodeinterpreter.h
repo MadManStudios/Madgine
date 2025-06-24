@@ -72,6 +72,7 @@ namespace NodeGraph {
         virtual std::vector<std::string_view> variables();*/
 
         void start();
+        void stop();
 
     protected:
         NodeDebugLocation mDebugLocation;

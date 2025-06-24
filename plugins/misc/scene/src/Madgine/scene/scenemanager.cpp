@@ -161,7 +161,7 @@ namespace Scene {
         }
 
         for (Entity::AnimationState *state : doneAnimations) {
-            state->finish();
+            state->set_value();
         }
     }
 

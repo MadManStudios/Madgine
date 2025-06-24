@@ -214,7 +214,7 @@ namespace Scripting {
         }
 
         static Python3StreamRedirect sStream;
-        static std::stop_token sStopToken;
+        static Execution::StopToken sStopToken;
 
         Python3Environment::Python3Environment(Root::Root &root)
             : RootComponent(root)
@@ -317,7 +317,7 @@ namespace Scripting {
             return result;
         }
 
-        void Python3Environment::lock(Log::Log *log, std::stop_token st)
+        void Python3Environment::lock(Log::Log *log, Execution::StopToken st)
         {
             // assert(PyGILState_Check() == 0);
             PyGILState_STATE handle = PyGILState_Ensure();
@@ -327,9 +327,9 @@ namespace Scripting {
             sStopToken = std::move(st);
         }
 
-        std::pair<Log::Log *, std::stop_token> Python3Environment::unlock()
+        std::pair<Log::Log *, Execution::StopToken> Python3Environment::unlock()
         {
-            std::pair<Log::Log *, std::stop_token> result { sStream.log(), std::move(sStopToken) };
+            std::pair<Log::Log *, Execution::StopToken> result { sStream.log(), std::move(sStopToken) };
             sStream.setLog({});
             assert(PyGILState_Check() == 1);
             PyGILState_Release(PyGILState_UNLOCKED);
