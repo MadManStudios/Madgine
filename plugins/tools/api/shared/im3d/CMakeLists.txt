@@ -8,4 +8,6 @@ target_include_directories(Im3D PUBLIC $<TARGET_PROPERTY:Render,INTERFACE_INCLUD
 
 target_link_libraries(Im3D PUBLIC ImGui)
 
-install_to_workspace(Im3D TARGETS Im3D)
+if (BUILD_SHARED_LIBS)
+	install_to_workspace(Im3D TARGETS Im3D)
+endif()
