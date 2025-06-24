@@ -83,6 +83,10 @@ namespace Execution {
     struct SignalStub;
     template <typename T, typename... _Ty>
     struct ConnectionInstance;
+
+    struct StopSource;
+    struct StopCallback;
+    using StopToken = StopSource*;
 }
 
 }

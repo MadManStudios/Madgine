@@ -60,6 +60,11 @@ namespace Threading {
                 }
             }
 
+            bool stop() {
+                throw 0;
+                return false;
+            }
+
             virtual void onLockAcquired() override
             {
                 if constexpr (std::same_as<std::invoke_result_t<F>, void>) {

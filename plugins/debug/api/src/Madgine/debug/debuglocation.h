@@ -22,13 +22,13 @@ namespace Debug {
         void stepInto(ParentLocation *parent);
         void stepOut(ParentLocation *parent);
         template <typename F, typename... Args>
-        void yield(F &&callback, std::stop_token st, ContinuationType type, Args &&...args)
+        void yield(F &&callback, Execution::StopToken st, ContinuationType type, Args &&...args)
         {
             yieldImpl({ std::forward<F>(callback), type, std::forward<Args>(args)... }, std::move(st));
         }
 
         template <typename F, typename... Args>
-        void pass(F &&callback, std::stop_token st, ContinuationType type, bool forceStop = false, Args &&...args)
+        void pass(F &&callback, Execution::StopToken st, ContinuationType type, bool forceStop = false, Args &&...args)
         {
             if (forceStop || wantsPause(type)) {
                 yield(std::forward<F>(callback), std::move(st), type, std::forward<Args>(args)...);
@@ -38,7 +38,7 @@ namespace Debug {
         }
 
     private:
-        void yieldImpl(Continuation cont, std::stop_token st);
+        void yieldImpl(Continuation cont, Execution::StopToken st);
     };
 
 }

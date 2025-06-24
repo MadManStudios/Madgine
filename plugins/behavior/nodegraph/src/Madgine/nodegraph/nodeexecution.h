@@ -142,6 +142,11 @@ namespace NodeGraph {
             handle.mInterpreter.branch(*this, handle.mNode.flowOutTarget(mFlowOutIndex, flowOutGroup), mDebugLocation);
         }
 
+        void stop()
+        {
+            throw 0;
+        }
+
         void set_value(ArgumentList args) override
         {
             mDebugLocation.stepOut(Execution::get_debug_location(this->mRec));

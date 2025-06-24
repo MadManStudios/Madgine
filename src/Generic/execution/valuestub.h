@@ -42,7 +42,7 @@ namespace Execution {
         auto bind(T &&slot)
         {
             TupleUnpacker::invokeFromTuple(slot, mValue);
-            return *this | Execution::then(TupleUnpacker::wrap(std::forward<T>(slot))) | Execution::repeat;
+            return *this | Execution::then(std::forward<T>(slot)) | Execution::repeat;
         }
 
     protected:

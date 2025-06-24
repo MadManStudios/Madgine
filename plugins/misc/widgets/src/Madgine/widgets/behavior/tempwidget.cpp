@@ -84,6 +84,11 @@ namespace Widgets {
         mState.start();
     }
 
+    void TempWidgetState::stop()
+    {
+        throw 0;
+    }
+
     WidgetBase *TempWidgetState::widget()
     {
         return mWidget.get();

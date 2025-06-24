@@ -159,6 +159,11 @@ namespace NodeGraph {
         branch(*this, 0, mDebugLocation);
     }
 
+    void NodeInterpreterStateBase::stop()
+    {
+        throw 0;
+    }
+
     bool NodeDebugLocation::wantsPause(Debug::ContinuationType type) const
     {
         return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);

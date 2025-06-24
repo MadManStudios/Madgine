@@ -44,6 +44,11 @@ void CoroutineBehaviorState::start()
     std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).resume();
 }
 
+void CoroutineBehaviorState::stop()
+{
+    throw 0;
+}
+
 void CoroutineBehaviorState::destroy()
 {
     std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).destroy();
@@ -141,6 +146,11 @@ Behavior::state::state(StatePtr state)
 void Behavior::state::start()
 {
     mState->start();
+}
+
+void Behavior::state::stop()
+{
+    mState->stop();
 }
 
 Behavior::StatePtr Behavior::connect(BehaviorReceiver &receiver)

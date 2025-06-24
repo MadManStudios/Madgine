@@ -58,9 +58,9 @@ namespace Execution {
     inline constexpr get_context_t get_context;
 
     struct unstoppable_token {
-        operator std::stop_token()
+        operator StopToken()
         {
-            return {};
+            return nullptr;
         }
 
         static constexpr bool stop_requested()
@@ -71,7 +71,7 @@ namespace Execution {
 
     struct get_stop_token_t {
 
-        using signature = std::stop_token();
+        using signature = StopToken();
 
         template <typename T>
         requires(!tag_invocable<get_stop_token_t, T &>) auto operator()(T &) const
@@ -183,6 +183,11 @@ namespace Execution {
         void start()
         {
             mState.start();
+        }
+
+        void stop()
+        {
+            mState.stop();
         }
 
         template <typename... V>

@@ -53,7 +53,7 @@ struct IntervalClock {
         {
         }
 
-        virtual void start(IntervalClock *clock)
+        void start(IntervalClock *clock)
         {
             mClock = clock;
             mWaitUntil = mClock->mLastTick + mDuration;
@@ -61,7 +61,7 @@ struct IntervalClock {
             mClock->mWaitStates.push_back(this);
         }
 
-        bool cancel()
+        bool stop()
         {
             std::lock_guard guard { mClock->mMutex };
             return std::erase(mClock->mWaitStates, this) == 1;
@@ -108,7 +108,6 @@ struct IntervalClock {
             : WaitState(duration)
             , Execution::base_state<Rec>(std::forward<Rec>(rec))
             , mInnerState(Execution::connect(std::forward<Inner>(inner), receiver<Rec &> { this->mRec, this }))
-            , mCallback(finally_cb { this->mRec })
         {
         }
 
@@ -117,20 +116,15 @@ struct IntervalClock {
             mInnerState.start();
         }
 
-        virtual void start(IntervalClock *clock) override
+        void stop()
         {
-            std::stop_token st = Execution::get_stop_token(this->mRec);
-            if (st.stop_requested()) {
+            if (WaitState::stop())
                 this->mRec.set_done();
-            } else {
-                WaitState::start(clock);
-                mCallback.start(std::move(st), stop_cb { this });
-            }
         }
 
         virtual void continueExecution(std::chrono::microseconds elapsed) override
         {
-            mCallback.finish(std::move(elapsed));
+            this->mRec.set_value(std::move(elapsed));
         }
 
         friend auto tag_invoke(Execution::visit_state_t, state &state, const std::chrono::steady_clock::duration &duration, auto &&visitor)
@@ -163,35 +157,7 @@ struct IntervalClock {
             }
         }
 
-        struct stop_cb {
-            bool operator()()
-            {
-                return mState->cancel();
-            }
-
-            WaitState *mState;
-        };
-
-        struct finally_cb {
-            void operator()(std::chrono::microseconds elapsed)
-            {
-                if (Execution::get_stop_token(mRec).stop_requested())
-                    mRec.set_done();
-                else
-                    mRec.set_value(std::move(elapsed));
-            }
-
-            void operator()(Execution::cancelled_t)
-            {
-                assert(Execution::get_stop_token(mRec).stop_requested());
-                mRec.set_done();
-            }
-
-            Rec &mRec;
-        };
-
         Execution::connect_result_t<Inner, receiver<Rec &>> mInnerState;
-        Execution::stop_callback<stop_cb, finally_cb> mCallback;
     };
 
     template <typename Inner>

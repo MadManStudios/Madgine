@@ -109,7 +109,7 @@ namespace Execution {
             using State = connect_result_t<Sender, Rec>;
 
             template <typename... Args>
-            state(Sender &&sender, InnerRec &&rec, Args&&... args)
+            state(Sender &&sender, InnerRec &&rec, Args &&...args)
                 : mRec(std::forward<InnerRec>(rec))
                 , mLocation([this, info { visit_sender(sender) }](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(mState, info, std::move(visitor)); }, std::forward<Args>(args)...)
                 , mState { connect(std::forward<Sender>(sender), Rec { this }) }
@@ -122,6 +122,11 @@ namespace Execution {
             {
                 mLocation.stepInto(get_debug_location(mRec));
                 mState.start();
+            }
+
+            void stop()
+            {
+                mState.stop();
             }
 
             template <typename... V>
@@ -162,14 +167,14 @@ namespace Execution {
         };
 
         template <Sender Sender, typename... Args>
-        friend auto tag_invoke(with_debug_location_t, Sender &&inner, Args&&... args)
+        friend auto tag_invoke(with_debug_location_t, Sender &&inner, Args &&...args)
         {
             return sender<Sender, Args...> { { {}, std::forward<Sender>(inner) }, { std::forward<Args>(args)... } };
         }
 
         template <Sender Sender, typename... Args>
             requires tag_invocable<with_debug_location_t, Sender, Args...>
-        auto operator()(Sender &&sender, Args &&... args) const
+        auto operator()(Sender &&sender, Args &&...args) const
             noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender, Args...>)
                 -> tag_invoke_result_t<with_debug_location_t, Sender, Args...>
         {
@@ -177,7 +182,7 @@ namespace Execution {
         }
 
         template <typename... Args>
-        auto operator()(Args&&... args) const
+        auto operator()(Args &&...args) const
         {
             return pipable_from_right(*this, std::forward<Args>(args)...);
         }
@@ -312,6 +317,11 @@ namespace Execution {
                     },
                         get_stop_token(mRec), Debug::ContinuationType::Flow, mBreakpointSet);
                 }
+            }
+
+            void stop()
+            {
+                mState.stop();
             }
 
             friend auto tag_invoke(visit_state_t, state &state, const auto &info, auto &&visitor)

@@ -53,6 +53,7 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
         state(StatePtr state);
 
         void start();
+        void stop();
 
         StatePtr mState;
     };
@@ -80,6 +81,7 @@ struct BehaviorStateBase {
 
     virtual void connect(BehaviorReceiver &rec) = 0;
     virtual void start() = 0;
+    virtual void stop() = 0;
     virtual void destroy()
     {
         delete this;
@@ -106,6 +108,7 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
 
     void connect(BehaviorReceiver &rec) override;
     void start() override;
+    void stop() override;
     void destroy() override;
 
     struct MADGINE_BEHAVIOR_EXPORT InitialSuspend {
@@ -163,6 +166,11 @@ struct SenderBehaviorState : BehaviorStateBase {
     void start() override
     {
         std::get<State>(mData).start();
+    }
+
+    void stop() override
+    {
+        std::get<State>(mData).stop();
     }
 
     std::variant<Sender, State> mData;

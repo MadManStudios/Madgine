@@ -7,7 +7,7 @@ namespace Scripting {
     namespace Python3 {
 
         struct MADGINE_PYTHON3_EXPORT Python3Lock {
-            Python3Lock(Log::Log *log = nullptr, std::stop_token st = {});
+            Python3Lock(Log::Log *log = nullptr, Execution::StopToken st = {});
             Python3Lock(const Python3Lock &) = delete;
             ~Python3Lock();
 
@@ -29,11 +29,11 @@ namespace Scripting {
             ~Python3Unlock();
 
             Log::Log *log();
-            std::stop_token st();
+            Execution::StopToken st();
 
         private:
             Log::Log *mLog;
-            std::stop_token mStopToken;
+            Execution::StopToken mStopToken;
         };
     }
 }

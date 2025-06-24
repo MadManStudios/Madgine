@@ -74,6 +74,11 @@ void FetchStateBase::start()
     emscripten_fetch(&data.mAttributes, data.mUrl.c_str());
 }
 
+void FetchStateBase::stop()
+{
+    throw 0;    
+}
+
 }
 
 #endif

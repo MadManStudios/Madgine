@@ -184,7 +184,7 @@ namespace Scripting {
                         break;
                     }
                     if (location->mLocation.wantsPause(Debug::ContinuationType::Flow)) {
-                        PyObject *suspendEx = suspend([frame, location](BehaviorReceiver &receiver, std::vector<PyFramePtr> frames, Log::Log *log, std::stop_token st) {
+                        PyObject *suspendEx = suspend([frame, location](BehaviorReceiver &receiver, std::vector<PyFramePtr> frames, Log::Log *log, Execution::StopToken st) {
                             _PyInterpreterFrame *frame = frames.front();
                             //++frame->prev_instr;
                             location->mLocation.yield([location, log, &receiver, st](Debug::ContinuationMode mode, std::vector<PyFramePtr> frames) mutable {

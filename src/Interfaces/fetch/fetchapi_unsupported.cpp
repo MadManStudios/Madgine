@@ -19,6 +19,11 @@ void FetchStateBase::start()
     set_error(GenericResult::UNKNOWN_ERROR);
 }
 
+void FetchStateBase::stop()
+{
+    throw 0;
+}
+
 }
 
 #endif

@@ -62,7 +62,6 @@ namespace Scene {
         AnimationState::AnimationState(Render::AnimationLoader::Handle handle, IndexType<uint32_t> index)
             : mAnimationList(std::move(handle))
             , mCurrentAnimation(index)
-            , mStopCallback(*this)
         {
         }
 
@@ -71,17 +70,12 @@ namespace Scene {
             mBoneIndexMapping = mAnimationList->generateBoneMappings(entity()->getComponent<Scene::Entity::Skeleton>()->get());
 
             scene()->addAnimation(this);
-            mStopCallback.start(Execution::get_stop_token(*this), *this);
         }
 
-        void AnimationState::finish()
+        void AnimationState::stop()
         {
-            mStopCallback.finish();
-        }
-
-        bool AnimationState::stop_cb::operator()()
-        {
-            return mState.scene()->stopAnimation(&mState);
+            if (scene()->stopAnimation(this))
+                set_done();
         }
 
         void AnimationState::step(float delta)

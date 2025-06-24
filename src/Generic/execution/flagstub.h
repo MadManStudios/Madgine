@@ -24,22 +24,24 @@ namespace Execution {
 
         bool isSet() const
         {
-            std::lock_guard guard { mStack.mutex() };
+            std::unique_lock guard { mStack.mutex() };
             return static_cast<bool>(mValue);
         }
 
         const std::tuple<Ty...> &operator*() const
         {
-            std::lock_guard guard { mStack.mutex() };
+            std::unique_lock guard { mStack.mutex() };
             return *mValue;
         }
 
         void enqueue(Connection<FlagStub<Ty...>, Ty...> *con)
         {
+            std::unique_lock guard { mStack.mutex() };
             if (mValue) {
+                guard.unlock();
                 TupleUnpacker::invokeExpand(&Connection<FlagStub<Ty...>, Ty...>::set_value, con, *mValue);
             } else {
-                mStack.push(con);
+                mStack.push(con, guard);
             }
         }
 

@@ -16,7 +16,7 @@ namespace Scene {
             AnimationState(Render::AnimationLoader::Handle handle, IndexType<uint32_t> index);
 
             void start();
-            void finish();
+            void stop();            
             
             void step(float delta);
             void setStep(float step);
@@ -26,37 +26,6 @@ namespace Scene {
 
             Entity *entity();
             SceneManager *scene();
-
-            struct stop_cb {
-                stop_cb(AnimationState &state)
-                    : mState(state)
-                {
-                }
-
-                bool operator()();
-
-                AnimationState &mState;
-            };
-
-            struct finally_cb {
-                finally_cb(AnimationState &state)
-                    : mState(state)
-                {
-                }
-
-                void operator()(Execution::cancelled_t)
-                {
-                    mState.set_done();
-                }
-                void operator()()
-                {
-                    mState.set_value();
-                }
-
-                AnimationState &mState;
-            };
-
-            Execution::stop_callback<stop_cb, finally_cb> mStopCallback;
 
             Render::AnimationLoader::Handle mAnimationList;
 

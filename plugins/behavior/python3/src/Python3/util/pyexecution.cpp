@@ -32,7 +32,7 @@ namespace Scripting {
         struct PySuspendException {
             PyObject **mStacktop;
             int mBlock;
-            Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, std::stop_token)> mCallback;
+            Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, Execution::StopToken)> mCallback;
             std::vector<PyFramePtr> mFrames;
         };
 
@@ -152,7 +152,7 @@ namespace Scripting {
                 assert(suspend.mStacktop == nullptr);
                 assert(suspend.mBlock == 0);
 
-                Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, std::stop_token)> callback = std::move(suspend.mCallback);
+                Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, Execution::StopToken)> callback = std::move(suspend.mCallback);
                 std::vector<PyFramePtr> suspendedFrames = std::move(suspend.mFrames);
 
                 Py_DECREF(result);
@@ -244,7 +244,7 @@ namespace Scripting {
             return sUnwindable;
         }
 
-        PyObject *suspend(Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, std::stop_token)> callback)
+        PyObject *suspend(Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, Execution::StopToken)> callback)
         {
             assert(stackUnwindable());
 
