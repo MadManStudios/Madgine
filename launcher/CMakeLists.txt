@@ -91,4 +91,16 @@ if (TARGET copy_data)
 	add_dependencies(${MADGINE_BINARY_NAME} copy_data)
 endif()
 
+if (MADGINE_CONFIGURATION)
+	set_target_properties(MadgineTooling PROPERTIES IMPORTED_LOCATION ${MADGINE_TOOLING_PREFIX}/${MADGINE_BINARY_NAME}${HOST_EXECUTABLE_SUFFIX})
+endif (MADGINE_CONFIGURATION)
+
+if (NOT TARGET MadgineLauncher)
+	if (ANDROID)
+		add_library(MadgineLauncher ALIAS ${MADGINE_BINARY_NAME})
+	else()
+		add_executable(Madginelauncher ALIAS ${MADGINE_BINARY_NAME})
+	endif()
+endif()
+
 
