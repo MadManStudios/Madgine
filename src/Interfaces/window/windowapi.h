@@ -101,6 +101,8 @@ namespace Window {
 
         void captureInput();
         void releaseInput();
+        void requestSoftwareKeyboard();
+        void releaseSoftwareKeyboard();
 
         void setCursorIcon(Input::CursorIcon icon);
 

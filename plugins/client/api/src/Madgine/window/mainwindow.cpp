@@ -228,6 +228,17 @@ namespace Window {
     {
         std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
         while (mTaskQueue.running()) {
+            bool wantSoftwareKeyboard = false;
+            for (const std::unique_ptr<MainWindowComponentBase> &comp : components()) {
+                wantSoftwareKeyboard |= comp->wantsSoftwareKeyboard();
+            }
+            if (mSoftwareKeyboardRequested != wantSoftwareKeyboard) {
+                mSoftwareKeyboardRequested = wantSoftwareKeyboard;
+                if (wantSoftwareKeyboard)
+                    mOsWindow->requestSoftwareKeyboard();
+                else
+                    mOsWindow->releaseSoftwareKeyboard();
+            }
             co_await mRenderContext->render();
             {
                 PROFILE_NAMED("Window Update");

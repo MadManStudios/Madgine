@@ -14,6 +14,8 @@
 
 #    include "../log/logmethods.h"
 
+#    include "../helpers/android_jni.h"
+
 #    include <android/native_activity.h>
 
 namespace Engine {
@@ -25,6 +27,7 @@ namespace Window {
     };
 
     SystemVariable<ANativeWindow *> sNativeWindow = nullptr;
+    ANativeActivity *sActivity = nullptr;
     AInputQueue *sQueue = nullptr;
 
     static constexpr float sTouchMoveThreshold = 10.0f;
@@ -62,8 +65,7 @@ namespace Window {
                     mPendingTouch = false;
                 }
                 handled |= injectPointerRelease({ position, position, button });
-            }
-                break;
+            } break;
             case AMOTION_EVENT_ACTION_MOVE:
                 if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
                     injectPointerPress({ mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
@@ -101,6 +103,147 @@ namespace Window {
             }
 
             mLastKnownMousePos = position;
+            return handled;
+        }
+
+        bool handleKeyEvent(const AInputEvent *event)
+        {
+            int32_t action = AKeyEvent_getAction(event);
+
+            static const std::map<int32_t, Input::Key::Key> sKeyMap {
+                { AKEYCODE_0, Input::Key::Alpha0 },
+                { AKEYCODE_1, Input::Key::Alpha1 },
+                { AKEYCODE_2, Input::Key::Alpha2 },
+                { AKEYCODE_3, Input::Key::Alpha3 },
+                { AKEYCODE_4, Input::Key::Alpha4 },
+                { AKEYCODE_5, Input::Key::Alpha5 },
+                { AKEYCODE_6, Input::Key::Alpha6 },
+                { AKEYCODE_7, Input::Key::Alpha7 },
+                { AKEYCODE_8, Input::Key::Alpha8 },
+                { AKEYCODE_9, Input::Key::Alpha9 },
+                { AKEYCODE_A, Input::Key::A },
+                { AKEYCODE_B, Input::Key::B },
+                { AKEYCODE_C, Input::Key::C },
+                { AKEYCODE_D, Input::Key::D },
+                { AKEYCODE_E, Input::Key::E },
+                { AKEYCODE_F, Input::Key::F },
+                { AKEYCODE_G, Input::Key::G },
+                { AKEYCODE_H, Input::Key::H },
+                { AKEYCODE_I, Input::Key::I },
+                { AKEYCODE_J, Input::Key::J },
+                { AKEYCODE_K, Input::Key::K },
+                { AKEYCODE_L, Input::Key::L },
+                { AKEYCODE_M, Input::Key::M },
+                { AKEYCODE_N, Input::Key::N },
+                { AKEYCODE_O, Input::Key::O },
+                { AKEYCODE_P, Input::Key::P },
+                { AKEYCODE_Q, Input::Key::Q },
+                { AKEYCODE_R, Input::Key::R },
+                { AKEYCODE_S, Input::Key::S },
+                { AKEYCODE_T, Input::Key::T },
+                { AKEYCODE_U, Input::Key::U },
+                { AKEYCODE_V, Input::Key::V },
+                { AKEYCODE_W, Input::Key::W },
+                { AKEYCODE_X, Input::Key::X },
+                { AKEYCODE_Y, Input::Key::Y },
+                { AKEYCODE_Z, Input::Key::Z },
+                { AKEYCODE_COMMA, Input::Key::Comma },
+                { AKEYCODE_PERIOD, Input::Key::Period },
+                { AKEYCODE_ALT_LEFT, Input::Key::LAlt },
+                { AKEYCODE_ALT_RIGHT, Input::Key::RAlt },
+                { AKEYCODE_SHIFT_LEFT, Input::Key::LShift },
+                { AKEYCODE_SHIFT_RIGHT, Input::Key::RShift },
+                { AKEYCODE_TAB, Input::Key::Tabulator },
+                { AKEYCODE_SPACE, Input::Key::Space },
+                { AKEYCODE_ENTER, Input::Key::Return },
+                { AKEYCODE_DEL, Input::Key::Backspace },
+                { AKEYCODE_MINUS, Input::Key::Minus },
+                { AKEYCODE_PLUS, Input::Key::Plus },
+                { AKEYCODE_PAGE_UP, Input::Key::PageUp },
+                { AKEYCODE_PAGE_DOWN, Input::Key::PageDown },
+                { AKEYCODE_BUTTON_A, Input::Key::GP_A },
+                { AKEYCODE_BUTTON_B, Input::Key::GP_B },
+                { AKEYCODE_BUTTON_X, Input::Key::GP_X },
+                { AKEYCODE_BUTTON_Y, Input::Key::GP_Y },
+                { AKEYCODE_BUTTON_L1, Input::Key::GP_LB },
+                { AKEYCODE_BUTTON_R1, Input::Key::GP_RB },
+                { AKEYCODE_BUTTON_L2, Input::Key::GP_LSB },
+                { AKEYCODE_BUTTON_R2, Input::Key::GP_RSB },
+                { AKEYCODE_BUTTON_START, Input::Key::GP_B1 },
+                { AKEYCODE_BUTTON_SELECT, Input::Key::GP_B2 },
+                { AKEYCODE_ESCAPE, Input::Key::Escape },
+                { AKEYCODE_FORWARD_DEL, Input::Key::Delete },
+                { AKEYCODE_CTRL_LEFT, Input::Key::LControl },
+                { AKEYCODE_CTRL_RIGHT, Input::Key::RControl },
+                { AKEYCODE_CAPS_LOCK, Input::Key::Capslock },
+                { AKEYCODE_SCROLL_LOCK, Input::Key::ScrollLock },
+                { AKEYCODE_META_LEFT, Input::Key::LWin },
+                { AKEYCODE_META_RIGHT, Input::Key::RWin },
+                { AKEYCODE_MOVE_HOME, Input::Key::Home },
+                { AKEYCODE_MOVE_END, Input::Key::End },
+                { AKEYCODE_INSERT, Input::Key::Insert },
+                { AKEYCODE_F1, Input::Key::F1 },
+                { AKEYCODE_F2, Input::Key::F2 },
+                { AKEYCODE_F3, Input::Key::F3 },
+                { AKEYCODE_F4, Input::Key::F4 },
+                { AKEYCODE_F5, Input::Key::F5 },
+                { AKEYCODE_F6, Input::Key::F6 },
+                { AKEYCODE_F7, Input::Key::F7 },
+                { AKEYCODE_F8, Input::Key::F8 },
+                { AKEYCODE_F9, Input::Key::F9 },
+                { AKEYCODE_F10, Input::Key::F10 },
+                { AKEYCODE_F11, Input::Key::F11 },
+                { AKEYCODE_F12, Input::Key::F12 },
+                { AKEYCODE_NUM_LOCK, Input::Key::NumLock },
+                { AKEYCODE_NUMPAD_0, Input::Key::Num0 },
+                { AKEYCODE_NUMPAD_1, Input::Key::Num1 },
+                { AKEYCODE_NUMPAD_2, Input::Key::Num2 },
+                { AKEYCODE_NUMPAD_3, Input::Key::Num3 },
+                { AKEYCODE_NUMPAD_4, Input::Key::Num4 },
+                { AKEYCODE_NUMPAD_5, Input::Key::Num5 },
+                { AKEYCODE_NUMPAD_6, Input::Key::Num6 },
+                { AKEYCODE_NUMPAD_7, Input::Key::Num7 },
+                { AKEYCODE_NUMPAD_8, Input::Key::Num8 },
+                { AKEYCODE_NUMPAD_9, Input::Key::Num9 },
+                { AKEYCODE_NUMPAD_DIVIDE, Input::Key::NumDivide },
+                { AKEYCODE_NUMPAD_MULTIPLY, Input::Key::NumMulitply },
+                { AKEYCODE_NUMPAD_SUBTRACT, Input::Key::NumSubtract },
+                { AKEYCODE_NUMPAD_ADD, Input::Key::NumAdd },
+                { AKEYCODE_NUMPAD_DOT, Input::Key::NumSeparator },
+                { AKEYCODE_NUMPAD_COMMA, Input::Key::NumSeparator },
+                { AKEYCODE_NUMPAD_ENTER, Input::Key::Return }
+            };
+
+            auto it = sKeyMap.find(AKeyEvent_getKeyCode(event));
+            if (it == sKeyMap.end()) {
+                LOG_ERROR("Unknown KeyCode: " << AKeyEvent_getKeyCode(event));
+                return false;
+            }
+            Input::Key::Key key = it->second;
+            jobject jevent = JNI::construct("android/view/KeyEvent", AInputEvent_getType(event), AKeyEvent_getKeyCode(event));
+            char text = 0;
+            if (JNI::callMemberFunction2(jevent, "isPrintingKey")) {
+                text = (char)JNI::callMemberFunction3(jevent, "getUnicodeChar", AKeyEvent_getMetaState(event));
+            }
+             
+
+            bool handled = false;
+
+            switch (action) {
+            case AKEY_EVENT_ACTION_DOWN:
+                handled = injectKeyPress({ key, text });
+                break;
+            case AKEY_EVENT_ACTION_UP:
+                handled = injectKeyRelease({ key, text });
+                break;
+            case AKEY_EVENT_ACTION_MULTIPLE:
+                LOG("Multiple Keys");
+                break;
+            default:
+                LOG_ERROR("Unknown Key Event Type: " << action);
+                break;
+            }
+
             return handled;
         }
 
@@ -166,7 +309,7 @@ namespace Window {
 
         // Input
         InterfacesVector mLastKnownMousePos;
-                
+
         InterfacesVector mTouchStartScreenPosition;
         InterfacesVector mTouchStartPosition;
         bool mPendingTouch = false;
@@ -189,6 +332,7 @@ namespace Window {
 
     void setup(ANativeActivity *activity)
     {
+        sActivity = activity;
         activity->callbacks->onNativeWindowCreated = delegate<&AndroidWindow::onNativeWindowCreated, ANativeWindow *>;
         activity->callbacks->onNativeWindowDestroyed = delegate<&AndroidWindow::onNativeWindowDestroyed, ANativeWindow *>;
         activity->callbacks->onNativeWindowResized = delegate<&AndroidWindow::onNativeWindowResized, ANativeWindow *>;
@@ -216,7 +360,7 @@ namespace Window {
                 bool handled = false;
                 switch (AInputEvent_getType(event)) {
                 case AINPUT_EVENT_TYPE_KEY:
-                    LOG_WARNING("Unhandled Key Event: " << AKeyEvent_getKeyCode(event));
+                    handled = static_cast<AndroidWindow *>(this)->handleKeyEvent(event);
                     break;
                 case AINPUT_EVENT_TYPE_MOTION:
                     handled = static_cast<AndroidWindow *>(this)->handleMotionEvent(event);
@@ -255,7 +399,7 @@ namespace Window {
 
     InterfacesVector OSWindow::renderPos()
     {
-        return static_cast<AndroidWindow*>(this)->mContentPos;
+        return static_cast<AndroidWindow *>(this)->mContentPos;
     }
 
     void OSWindow::setSize(const InterfacesVector &size)
@@ -372,6 +516,16 @@ namespace Window {
 
     void OSWindow::releaseInput()
     {
+    }
+
+    void OSWindow::requestSoftwareKeyboard()
+    {
+        ANativeActivity_showSoftInput(sActivity, ANATIVEACTIVITY_SHOW_SOFT_INPUT_IMPLICIT);
+    }
+
+    void OSWindow::releaseSoftwareKeyboard()
+    {
+        ANativeActivity_hideSoftInput(sActivity, ANATIVEACTIVITY_HIDE_SOFT_INPUT_IMPLICIT_ONLY);
     }
 
     OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)

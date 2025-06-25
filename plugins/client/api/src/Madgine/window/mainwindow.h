@@ -145,6 +145,8 @@ namespace Window {
         std::unique_ptr<Render::RenderTarget> mRenderWindow;
 
         std::vector<MainWindowListener *> mListeners;
+
+        bool mSoftwareKeyboardRequested = false;
     };
 
 }

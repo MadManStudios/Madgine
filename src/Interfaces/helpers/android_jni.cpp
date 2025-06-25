@@ -44,6 +44,11 @@ jobject activity()
     return sActivity;
 }
 
+JNIEnv *env()
+{
+    return sEnv;
+}
+
 void callStaticFunction(const char *className, const char *functionName, jobject object)
 {
     jclass clazz = static_cast<jclass>(sEnv->CallObjectMethod(gClassLoader, gFindClassMethod, sEnv->NewStringUTF(className)));
@@ -92,16 +97,40 @@ void callStaticFunction4(const char *className, const char *functionName, std::s
     sEnv->CallStaticVoidMethod(clazz, method, sEnv->NewStringUTF(string.data()), v1, v2, v3, v4, v5);
 }
 
-int callMemberFunction(jobject object, const char *functionName, JNIEnv *env)
+int callMemberFunction(jobject object, const char *functionName)
 {
-    jclass clazz = env->GetObjectClass(object);
-    jmethodID method = env->GetMethodID(clazz, functionName, "()I");
+    jclass clazz = sEnv->GetObjectClass(object);
+    jmethodID method = sEnv->GetMethodID(clazz, functionName, "()I");
     if (method == NULL) {
-        env->FatalError("method not found");
+        sEnv->FatalError("method not found");
     }
 
     // method execution
-    return env->CallIntMethod(object, method);
+    return sEnv->CallIntMethod(object, method);
+}
+
+bool callMemberFunction2(jobject object, const char *functionName)
+{
+    jclass clazz = sEnv->GetObjectClass(object);
+    jmethodID method = sEnv->GetMethodID(clazz, functionName, "()Z");
+    if (method == NULL) {
+        sEnv->FatalError("method not found");
+    }
+
+    // method execution
+    return sEnv->CallBooleanMethod(object, method);
+}
+
+bool callMemberFunction3(jobject object, const char *functionName, jint v)
+{
+    jclass clazz = sEnv->GetObjectClass(object);
+    jmethodID method = sEnv->GetMethodID(clazz, functionName, "(I)I");
+    if (method == NULL) {
+        sEnv->FatalError("method not found");
+    }
+
+    // method execution
+    return sEnv->CallIntMethod(object, method, v);
 }
 
 void registerNatives(const char *className, std::span<const JNINativeMethod> methods)
@@ -125,6 +154,15 @@ std::string getExceptionMessage(jthrowable ex, JNIEnv *env)
     std::string result = mstr;
     env->ReleaseStringUTFChars(message, mstr);
     return result;
+}
+
+jobject construct(const char *className, jint v1, jint v2)
+{
+    jclass clazz = sEnv->FindClass(className);
+    jmethodID ctor = sEnv->GetMethodID(clazz,
+        "<init>",
+        "(II)V");
+    return sEnv->NewObject(clazz, ctor, v1, v2);    
 }
 
 }

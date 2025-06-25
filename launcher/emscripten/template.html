@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="/Madgine.css">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;" />
     <title>MadgineLauncher</title>
     <style>
         .emscripten {
@@ -96,8 +97,9 @@
     <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
     </div>
+    <textarea id="input" autocapitalize="off" rows="1"></textarea>
     <div class="emscripten_border">
-        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
     </div>
     <hr />
     <!--<div class="emscripten">
@@ -155,6 +157,70 @@
                 canvas.addEventListener("webglcontextlost", function (e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
 
                 return canvas;
+            })(),
+            input: (function () {
+                var input = document.getElementById('input');
+
+                input.addEventListener('keydown', ev => {
+                    if (ev.which != 229) {
+                        const options = {
+                            code: ev.code,
+                            key: ev.key,
+                            keyCode: ev.keyCode,
+                            which: ev.which
+                        }
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keydown', options));
+                    }
+
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                });
+                input.addEventListener('keyup', ev => {
+                    if (ev.which != 229) {
+                        const options = {
+                            code: ev.code,
+                            key: ev.key,
+                            keyCode: ev.keyCode,
+                            which: ev.which
+                        }
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', options));
+                    }
+
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                });
+                input.addEventListener('input', ev => {
+                    const char = ev.data
+                    if (char) {
+                        const char_keycode = char.codePointAt(0)
+                        const upper_key = char.toUpperCase()
+                        const upper_keycode = upper_key.codePointAt(0)
+                        const down_up_options = {
+                            code: 'Key' + upper_key,
+                            key: char,
+                            keyCode: upper_keycode,
+                            which: upper_keycode,
+                        }
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keydown', down_up_options))
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keypress', {
+                            charCode: char_keycode,
+                            code: 'Key' + upper_key,
+                            key: char,
+                            keyCode: char_keycode,
+                            which: char_keycode,
+                        }))
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', down_up_options))
+                    }
+
+                    input.value = '';
+                    input.blur();
+                    input.focus();
+
+                    ev.preventDefault()
+                    ev.stopPropagation()
+                });
+
+                return input;
             })(),
             setStatus: function (text) {
                 if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };

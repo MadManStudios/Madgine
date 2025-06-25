@@ -48,6 +48,8 @@ namespace Tools {
         bool injectPointerMove(const Input::PointerEventArgs &arg) override;
         bool injectAxisEvent(const Engine::Input::AxisEventArgs &arg) override;
         
+        bool wantsSoftwareKeyboard() const override;
+
         void setCentralNode();
 
         Rect2i getChildClientSpace() override;

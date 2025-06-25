@@ -537,10 +537,15 @@ namespace Tools {
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        io.AddKeyEvent(sKeyMap.at(arg.scancode), true);
+        auto it = sKeyMap.find(arg.scancode);
+        if (it == sKeyMap.end()) {
+            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.scancode << ", text: " << arg.text);
+        } else {
+            io.AddKeyEvent(it->second, true);
 
-        if (arg.text > 0)
-            io.AddInputCharacter(arg.text);
+            if (arg.text > 0)
+                io.AddInputCharacter(arg.text);
+        }
 
         // io.KeyShift = arg.mControlKeys.mShift;
         // io.KeyCtrl = arg.mControlKeys.mCtrl;
@@ -553,7 +558,12 @@ namespace Tools {
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        io.AddKeyEvent(sKeyMap.at(arg.scancode), false);
+        auto it = sKeyMap.find(arg.scancode);
+        if (it == sKeyMap.end()) {
+            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.scancode << ", text: " << arg.text);
+        } else {
+            io.AddKeyEvent(it->second, false);
+        }
 
         // io.KeyShift = arg.mControlKeys.mShift;
         // io.KeyCtrl = arg.mControlKeys.mCtrl;
@@ -619,6 +629,13 @@ namespace Tools {
         }
 
         return io.WantCaptureMouse;
+    }
+
+    bool ClientImRoot::wantsSoftwareKeyboard() const
+    {
+        ImGuiIO &io = ImGui::GetIO();
+
+        return io.WantTextInput;
     }
 
     void ClientImRoot::setCentralNode()

@@ -13,7 +13,7 @@
 
           <!-- This name is resolved to com.example.myapp.MainActivity
              based upon the package attribute -->
-        <activity android:name="android.app.NativeActivity"
+        <activity android:name="com.Madgine.MadgineActivity"
                   android:icon="@mipmap/ic_launcher"
                   android:label="$<TARGET_FILE_BASE_NAME:@target@>"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
