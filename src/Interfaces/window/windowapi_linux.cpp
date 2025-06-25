@@ -235,6 +235,14 @@ namespace Window {
     {
     }
 
+    void OSWindow::requestSoftwareKeyboard()
+    {
+    }
+
+    void OSWindow::releaseSoftwareKeyboard()
+    {
+    }
+
     void OSWindow::setCursorIcon(Input::CursorIcon icon)
     {
         /*SetCursor(LoadCursor(NULL, [](Input::CursorIcon icon) {

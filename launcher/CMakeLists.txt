@@ -12,6 +12,10 @@ if (EMSCRIPTEN)
 endif(EMSCRIPTEN)
 if (ANDROID)
 	FolderSources(sources "" android android_main.cpp androidlauncher.cpp androidlauncher.h)
+	list(APPEND ANDROID_SOURCES
+		${CMAKE_CURRENT_SOURCE_DIR}/android/java/
+	)
+	set(ANDROID_SOURCES "${ANDROID_SOURCES}" CACHE INTERNAL "")
 endif(ANDROID)
 if (OSX)
     FolderSources(sources "" osx osx_main.mm)

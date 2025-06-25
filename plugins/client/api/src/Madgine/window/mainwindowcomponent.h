@@ -48,6 +48,8 @@ namespace Window {
         virtual bool injectPointerMove(const Input::PointerEventArgs &arg) { return false; }
         virtual bool injectAxisEvent(const Input::AxisEventArgs &arg) { return false; }
 
+        virtual bool wantsSoftwareKeyboard() const { return false; }
+
         const int mPriority;
 
         Threading::TaskQueue *taskQueue() const;

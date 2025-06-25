@@ -72,16 +72,26 @@ namespace Window {
             emscripten_set_mousemove_callback("#canvas", this, 0, MouseDelegate);
 
             emscripten_set_mousedown_callback("#canvas", this, 0, MouseDelegate);
-            emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, this, 0, MouseDelegate);
-            emscripten_set_wheel_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, WheelDelegate);
+            emscripten_set_mouseup_callback("#canvas", this, 0, MouseDelegate);
+            emscripten_set_wheel_callback("#canvas", this, 0, WheelDelegate);
 
-            emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, KeyDelegate);
-            emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, this, 0, KeyDelegate);
+            emscripten_set_keydown_callback("#canvas", this, 0, KeyDelegate);
+            emscripten_set_keyup_callback("#canvas", this, 0, KeyDelegate);
 
             emscripten_set_touchmove_callback("#canvas", this, 0, TouchDelegate);
 
             emscripten_set_touchstart_callback("#canvas", this, 0, TouchDelegate);
-            emscripten_set_touchend_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, this, 0, TouchDelegate);
+            emscripten_set_touchend_callback("#canvas", this, 0, TouchDelegate);
+        }
+
+        void focus()
+        {
+            if (mSoftwareKeyboardRequested)
+                EM_ASM(
+                    Module.input.focus(););
+            else
+                EM_ASM(
+                    Module.canvas.focus(););
         }
 
         static Input::MouseButton::MouseButton convertMouseButton(unsigned short id)
@@ -111,6 +121,7 @@ namespace Window {
                     { mouseEvent->movementX, mouseEvent->movementY } });
                 break;
             case EMSCRIPTEN_EVENT_MOUSEDOWN:
+                focus();
                 handled = injectPointerPress({ position, screenPosition,
                     convertMouseButton(mouseEvent->button) });
                 break;
@@ -246,7 +257,12 @@ namespace Window {
                 { "F12", F12 },
             };
 
-            Input::Key::Key key = sKeys[keyEvent->code];
+            auto it = keyEvent->code ? sKeys.find(keyEvent->code) : sKeys.end();
+            if (it == sKeys.end()) {
+                LOG_ERROR("Unknown key event! code: " << keyEvent->code << ", key: " << keyEvent->key << ", charCode: " << keyEvent->charCode << ", keyCode: " << keyEvent->keyCode << ", which: " << keyEvent->which);
+                return EM_FALSE;
+            }
+            Input::Key::Key key = it->second;
 
             LOG(keyEvent->code << ": " << key);
 
@@ -258,7 +274,7 @@ namespace Window {
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_KEYDOWN:
-                mKeyDown[key] = true;                
+                mKeyDown[key] = true;
                 if (keyEvent->key[1] == '\0')
                     text = keyEvent->key[0];
                 return injectKeyPress({ key, text, controlKeyState() });
@@ -308,6 +324,7 @@ namespace Window {
                 handled = injectPointerMove({ position, screenPosition, position - mLastMousePosition });
                 break;
             case EMSCRIPTEN_EVENT_TOUCHSTART:
+                focus();
                 mTouchStartScreenPosition = screenPosition;
                 mTouchStartPosition = position;
                 mTouchStartTimestamp = touchEvent->timestamp;
@@ -349,6 +366,8 @@ namespace Window {
 
         // Input
         bool mKeyDown[512];
+
+        bool mSoftwareKeyboardRequested = false;
     };
 
     static std::unordered_map<EGLSurface, EmscriptenWindow> sWindows;
@@ -451,6 +470,25 @@ namespace Window {
 
     void OSWindow::releaseInput()
     {
+    }
+
+    void OSWindow::requestSoftwareKeyboard()
+    {
+        static_cast<EmscriptenWindow *>(this)->mSoftwareKeyboardRequested = true;
+        EM_ASM(
+            if (document.activeElement == Module.canvas) {
+                Module.input.focus();
+            }
+        );        
+    }
+
+    void OSWindow::releaseSoftwareKeyboard()
+    {
+        static_cast<EmscriptenWindow *>(this)->mSoftwareKeyboardRequested = false;
+        EM_ASM(
+            if (document.activeElement == Module.input) {
+                Module.canvas.focus();
+            });     
     }
 
     void OSWindow::setCursorIcon(Input::CursorIcon icon)

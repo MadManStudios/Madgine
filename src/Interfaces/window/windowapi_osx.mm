@@ -163,6 +163,14 @@ namespace Window {
     {
         
     }
+        
+    void OSWindow::requestSoftwareKeyboard()
+    {
+    }
+
+    void OSWindow::releaseSoftwareKeyboard()
+    {
+    }
 
         bool OSWindow::isMaximized()
     {
