@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp8x08xghq.js
+// include: /tmp/tmp41ajio7z.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmp8x08xghq.js
+// end include: /tmp/tmp41ajio7z.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
@@ -8359,10 +8359,12 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  883656: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 883702: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 883754: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 883870: () => { Module.canvas.focus(); }
+  883688: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 883734: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 883786: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 883902: () => { Module.canvas.contentEditable = "true"; },  
+ 883942: () => { Module.canvas.contentEditable = "false"; },  
+ 883983: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
