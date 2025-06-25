@@ -96,7 +96,7 @@
     <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
     </div>
-    <div contenteditable="true" class="emscripten_border">
+    <div class="emscripten_border">
         <canvas contenteditable="true" class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
     </div>
     <hr />
@@ -156,6 +156,9 @@
 
                 return canvas;
             })(),
+            focusCanvas: function () {
+                Module.canvas.focus();
+            },
             setStatus: function (text) {
                 if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
                 if (text === Module.setStatus.last.text) return;
