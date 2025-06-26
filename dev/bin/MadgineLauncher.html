@@ -97,8 +97,8 @@
     <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
     </div>
+    <textarea id="input" autocapitalize="off" rows="1"></textarea>
     <div class="emscripten_border">
-        <textarea id="input" autocapitalize="off" rows="1"></textarea>
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
     </div>
     <hr />
@@ -162,29 +162,55 @@
                 var input = document.getElementById('input');
 
                 input.addEventListener('keydown', ev => {
-                    const options = {
-                        code: ev.code,
-                        key: ev.key,
-                        keyCode: ev.keyCode,
-                        which: ev.which
+                    if (ev.which != 229) {
+                        const options = {
+                            code: ev.code,
+                            key: ev.key,
+                            keyCode: ev.keyCode,
+                            which: ev.which
+                        }
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keydown', options));
                     }
-                    Module.canvas.dispatchEvent(new KeyboardEvent('keydown', options));
+
                     ev.preventDefault();
                     ev.stopPropagation();
                 });
                 input.addEventListener('keyup', ev => {
-                    const options = {
-                        code: ev.code,
-                        key: ev.key,
-                        keyCode: ev.keyCode,
-                        which: ev.which
+                    if (ev.which != 229) {
+                        const options = {
+                            code: ev.code,
+                            key: ev.key,
+                            keyCode: ev.keyCode,
+                            which: ev.which
+                        }
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', options));
                     }
-                    Module.canvas.dispatchEvent(new KeyboardEvent('keyup', options));
+
                     ev.preventDefault();
                     ev.stopPropagation();
                 });
                 input.addEventListener('input', ev => {
-                    console.log(ev);
+                    const char = ev.data
+                    if (char) {
+                        const char_keycode = char.codePointAt(0)
+                        const upper_key = char.toUpperCase()
+                        const upper_keycode = upper_key.codePointAt(0)
+                        const down_up_options = {
+                            code: 'Key' + upper_key,
+                            key: char,
+                            keyCode: upper_keycode,
+                            which: upper_keycode,
+                        }
+                        window.dispatchEvent(new KeyboardEvent('keydown', down_up_options))
+                        window.dispatchEvent(new KeyboardEvent('keypress', {
+                            charCode: char_keycode,
+                            code: 'Key' + upper_key,
+                            key: char,
+                            keyCode: char_keycode,
+                            which: char_keycode,
+                        }))
+                        window.dispatchEvent(new KeyboardEvent('keyup', down_up_options))
+                    }
 
                     input.value = '';
                     input.blur();
