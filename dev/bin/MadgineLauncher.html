@@ -201,15 +201,15 @@
                             keyCode: upper_keycode,
                             which: upper_keycode,
                         }
-                        window.dispatchEvent(new KeyboardEvent('keydown', down_up_options))
-                        window.dispatchEvent(new KeyboardEvent('keypress', {
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keydown', down_up_options))
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keypress', {
                             charCode: char_keycode,
                             code: 'Key' + upper_key,
                             key: char,
                             keyCode: char_keycode,
                             which: char_keycode,
                         }))
-                        window.dispatchEvent(new KeyboardEvent('keyup', down_up_options))
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', down_up_options))
                     }
 
                     input.value = '';
