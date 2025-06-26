@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp2p58x1wn.js
+// include: /tmp/tmp_d2gsnpo.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmp2p58x1wn.js
+// end include: /tmp/tmp_d2gsnpo.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
@@ -8362,9 +8362,10 @@ var ASM_CONSTS = {
   883912: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
  883958: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
  884010: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 884126: () => { Module.canvas.contentEditable = "true"; if (document.activeElement == Module.canvas) { Module.canvas.blur(); Module.canvas.focus(); } },  
- 884260: () => { Module.canvas.contentEditable = "false"; },  
- 884301: () => { Module.canvas.focus(); }
+ 884126: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 884197: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 884268: () => { Module.input.focus(); },  
+ 884290: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
