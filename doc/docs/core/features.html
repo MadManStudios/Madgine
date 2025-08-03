@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="KeyValue" href="keyvalue.html" />
-    <link rel="prev" title="Launcher" href="../../launcher/docs/launcher.html" /> 
+    <link rel="prev" title="Writing your first UniqueComponent" href="../howtos/firstUniqueComponent.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,33 +45,56 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#folder-hierarchy">Folder hierarchy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#core-libraries">Core Libraries</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generic.html">Generic</a></li>
-<li class="toctree-l4"><a class="reference internal" href="meta.html">Meta Information</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules.html">Modules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#build-configurations">Build Configurations</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#launcher">Launcher</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Core Features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="keyvalue.html">KeyValue</a></li>
-<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a></li>
-<li class="toctree-l3"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../doxygen/index.html">Madgine - Doxygen Documentation</a><ul>
@@ -98,7 +121,25 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
@@ -155,11 +196,61 @@
 <h1>Core Features<a class="headerlink" href="#core-features" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="keyvalue.html">KeyValue</a></li>
-<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#message-types">Message Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#default-log">Default Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pluginsystem.html#plugins">Plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html#plugin-definition-files">Plugin Definition Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pluginsystem.html#unique-components">Unique Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html#how-it-works">How it works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html#how-to-use-it">How to use it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html#disclaimer">Disclaimer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serialize.html#unit-hierarchy">Unit Hierarchy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html#data-units">Data Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html#serializable-units">Serializable Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html#syncable-units">Syncable Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html#top-level-units">Top-Level Units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serialize.html#streams">Streams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html#formattedserializestream">FormattedSerializeStream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html#formattedmessagestream">FormattedMessageStream</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="serialize.html#managers">Managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serialize.html#state-replication">State Replication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html#activation">Activation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="threading.html#threads">Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threading.html#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -168,7 +259,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../launcher/docs/launcher.html" class="btn btn-neutral float-left" title="Launcher" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../howtos/firstUniqueComponent.html" class="btn btn-neutral float-left" title="Writing your first UniqueComponent" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="keyvalue.html" class="btn btn-neutral float-right" title="KeyValue" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

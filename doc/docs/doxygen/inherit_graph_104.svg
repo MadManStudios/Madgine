@@ -11,11 +11,11 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="struct_engine_1_1_bucket_strategy_linear.html" target="_top" xlink:title=" ">
+<g id="a_node1"><a xlink:href="struct_engine_1_1_bucket_strategy_log.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="173,-41 0,-41 0,0 173,0 173,-41"/>
-<text text-anchor="start" x="8" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::BucketStrategyLinear</text>
+<text text-anchor="start" x="8" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::BucketStrategyLog</text>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; BucketSizeBegin, BucketSizeEnd,</text>
-<text text-anchor="middle" x="86.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00"> BucketSizeStep, condition &gt;</text>
+<text text-anchor="middle" x="86.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00"> BucketSizeFactor, condition &gt;</text>
 </a>
 </g>
 </g>

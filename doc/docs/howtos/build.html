@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="User Manual" href="../usermanual.html" />
-    <link rel="prev" title="Getting Started" href="../gettingstarted.html" /> 
+    <link rel="next" title="Writing your first UniqueComponent" href="firstUniqueComponent.html" />
+    <link rel="prev" title="How-Tos" href="../howtos.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,34 +44,57 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Build Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../core/generic.html">Generic</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../core/meta.html">Meta Information</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../core/modules.html">Modules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../core/interfaces.html">Interfaces</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../howtos.html">How-Tos</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-configurations">Build Configurations</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../doxygen/index.html">Madgine - Doxygen Documentation</a><ul>
@@ -98,7 +121,25 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
@@ -140,7 +181,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../gettingstarted.html">Getting Started</a></li>
+          <li class="breadcrumb-item"><a href="../programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="../howtos.html">How-Tos</a></li>
       <li class="breadcrumb-item active">Build Instructions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/docs/howtos/build.rst.txt" rel="nofollow"> View page source</a>
@@ -154,46 +196,58 @@
   <section id="build-instructions">
 <h1>Build Instructions<a class="headerlink" href="#build-instructions" title="Permalink to this heading"></a></h1>
 <p>This article describes all the neccessary steps to compile your first application with the Madgine.</p>
-<p>## Dependencies</p>
-<p>The Madgine is built using CMake. It can be downloaded [here](<a class="reference external" href="https://cmake.org/download/">https://cmake.org/download/</a>).
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>The Madgine is built using <a class="reference external" href="https://cmake.org/download/">CMake</a>.
 All source and library dependencies are included in the repository itself.
 A compiler supporting C++20 is necessary.</p>
-<p>## Setup The Madgine</p>
-<p>Download the source code from [GitHub](<a class="reference external" href="https://github.com/MadManRises/Madgine">https://github.com/MadManRises/Madgine</a>).</p>
+</section>
+<section id="setup-the-madgine">
+<h2>Setup The Madgine<a class="headerlink" href="#setup-the-madgine" title="Permalink to this heading"></a></h2>
+<p>Download the source code from <a class="reference external" href="https://github.com/MadManRises/Madgine">GitHub</a>.</p>
 <p>There are two ways to use and compile the engine.</p>
-<p>### Setup Build From The Repository</p>
+<section id="setup-build-from-the-repository">
+<h3>Setup Build From The Repository<a class="headerlink" href="#setup-build-from-the-repository" title="Permalink to this heading"></a></h3>
 <p>The first one being to build the project using CMake from the top-level folder of the engine. This is useful if you intend to modify the engine code itself. No further CMake scripts are needed.</p>
-<p>### Setup Build From An External Project</p>
-<p>The second method is to create a separate CMake project and reference the engine code from there. This allows you to separate your own work from the engine code, but keeps the benefit of building the engine source code together with your game/plugin code, allowing for better whole program optimization. All the necessary utility scripts for this method are provided. To setup the engine this way, create your own CMakeLists.txt for your game/plugin and add the following:
-<code class="docutils literal notranslate"><span class="pre">`cmake</span>
-<span class="pre">include(&lt;root</span> <span class="pre">folder</span> <span class="pre">of</span> <span class="pre">local</span> <span class="pre">madgine</span> <span class="pre">repository&gt;/cmake/MadgineSDK.cmake)</span>
-<span class="pre">`</span></code>
-To create the executable add the following line to the end of your CmakeLists.txt:
-<code class="docutils literal notranslate"><span class="pre">`cmake</span>
-<span class="pre">create_launcher(&lt;name&gt;)</span>
-<span class="pre">`</span></code></p>
-<p>## Generating Project Files</p>
+</section>
+<section id="setup-build-from-an-external-project">
+<h3>Setup Build From An External Project<a class="headerlink" href="#setup-build-from-an-external-project" title="Permalink to this heading"></a></h3>
+<p>The second method is to create a separate CMake project and reference the engine code from there. This allows you to separate your own work from the engine code, but keeps the benefit of building the engine source code together with your game/plugin code, allowing for better whole program optimization. All the necessary utility scripts for this method are provided. To setup the engine this way, create your own CMakeLists.txt for your game/plugin and add the following:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">&lt;root</span><span class="w"> </span><span class="s">folder</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">local</span><span class="w"> </span><span class="s">madgine</span><span class="w"> </span><span class="s">repository&gt;/cmake/MadgineSDK.cmake</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To create the executable add the following line to the end of your CmakeLists.txt:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">create_launcher</span><span class="p">(</span><span class="s">&lt;name&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="generating-project-files">
+<h2>Generating Project Files<a class="headerlink" href="#generating-project-files" title="Permalink to this heading"></a></h2>
 <p>Generate the build files using CMake for your preferred compiler/IDE or open the folder in IDEs that have direct CMake integration.</p>
-<p>## Build Configurations</p>
+</section>
+<section id="build-configurations">
+<h2>Build Configurations<a class="headerlink" href="#build-configurations" title="Permalink to this heading"></a></h2>
 <p>The default build settings lead to a project with the following properties:
-- Tools are included
-- Plugins are built as dynamic libraries
-- Plugin selection can be changed at any time</p>
-<p>Once a project needs to be destributed it is likely that some of those properties need to be changed. To do so the Madgine provides a configuration system. Build configurations are folders, that contain all configuration files for a specific build type. The type of files is not restricted and some plugins define their own rules and configuration options. The most common configuration file types are:
-- <cite>.ini</cite> files will be converted into CMake variables <cite>&lt;filename without extension&gt;_&lt;ini group&gt;_&lt;ini field name&gt;</cite>
-- <cite>.cmake</cite> files will be executed at CMake startup
-- <cite>.list</cite> files contain a list of paths to files that will be included in the packaged build</p>
-<p>To provide a configuration to CMake, set <cite>MADGINE_CONFIGURATION</cite> to the path of the desired configuration. Most plugins provide a built-in tool that allows to modify configurations through a UI.</p>
-<p>addtogroup Howtos
-ref Build</p>
+* Tools are included
+* Plugins are built as dynamic libraries
+* Plugin selection can be changed at any time</p>
+<p>Once a project needs to be destributed it is likely that some of those properties need to be changed. To do so the Madgine provides a configuration system. Build configurations are folders, that contain all configuration files for a specific build type. The type of files is not restricted and some plugins define their own rules and configuration options. The most common configuration file types are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.ini</span></code> files will be converted into CMake variables <code class="docutils literal notranslate"><span class="pre">&lt;filename</span> <span class="pre">without</span> <span class="pre">extension&gt;_&lt;ini</span> <span class="pre">group&gt;_&lt;ini</span> <span class="pre">field</span> <span class="pre">name&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.cmake</span></code> files will be executed at CMake startup</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.list</span></code> files contain a list of paths to files that will be included in the packaged build</p></li>
+</ul>
+<p>To provide a configuration to CMake, set <code class="docutils literal notranslate"><span class="pre">MADGINE_CONFIGURATION</span></code> to the path of the desired configuration. Most plugins provide a built-in tool that allows to modify configurations through a UI.</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../gettingstarted.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../usermanual.html" class="btn btn-neutral float-right" title="User Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../howtos.html" class="btn btn-neutral float-left" title="How-Tos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="firstUniqueComponent.html" class="btn btn-neutral float-right" title="Writing your first UniqueComponent" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

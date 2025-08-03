@@ -45,33 +45,56 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../howtos/build.html">Build Instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../usermanual.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#folder-hierarchy">Folder hierarchy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#core-libraries">Core Libraries</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generic.html">Generic</a></li>
-<li class="toctree-l4"><a class="reference internal" href="meta.html">Meta Information</a></li>
-<li class="toctree-l4"><a class="reference internal" href="modules.html">Modules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="interfaces.html">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#build-configurations">Build Configurations</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#launcher">Launcher</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="features.html">Core Features</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="keyvalue.html">KeyValue</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a></li>
-<li class="toctree-l3"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../doxygen/index.html">Madgine - Doxygen Documentation</a><ul>
@@ -98,7 +121,25 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
@@ -152,27 +193,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>page Logging Logging</p>
-<section id="logging">
+  <section id="logging">
 <h1>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h1>
 <p>Logging is an integral tool for development and debugging.</p>
-<p>## Message Types</p>
-<p>Logging messages are split into five severity groups:
-- Debugging <cite>LOG_DEBUG</cite>: Very detailed information (can cause performance decrease, when enabled)
-- Info <cite>LOG</cite>: General information/notifications
-- Warning <cite>LOG_WARNING</cite>: Potential issues
-- Error <cite>LOG_ERROR</cite>: Something went wrong
-- Fatal <cite>LOG_FATAL</cite>: The Engine is unable to recover from this error, often followed immediately by a crash</p>
-<p>## Building Log Messages</p>
-<p>To log an event from C++ use one of the Logging macros, depending on the severity of the event. The macro takes a sequence of message elements combined with the <cite>&lt;&lt;</cite> operator as argument, e.g.
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">LOG_WARNING(&quot;The</span> <span class="pre">value</span> <span class="pre">of</span> <span class="pre">my_value</span> <span class="pre">is</span> <span class="pre">&quot;</span> <span class="pre">&lt;&lt;</span> <span class="pre">my_value);</span>
-<span class="pre">`</span></code>
-All fundamental types can be logged this way. If you want to be able to log custom types this way, a freestanding <cite>operator&lt;&lt;</cite>, that takes an <cite>std::ostream&amp;</cite> as first parameter and your type as second parameter, needs to be provided. (See TODO)</p>
-<p>## Default Log</p>
-<p>By default the engine sets up a standard log on startup. It posts all messages to <cite>stdout</cite>. It is possible to globally overwrite the target log to direct the messages to a different place. Alternatively, individual messages can be written to a custom log backend instead. This can help to group log messages.</p>
-<p>## Log Listener</p>
-<p>Additionally, log listeners can be attached to logs to be notified of any messages. The subpage LogViewer is one of those listeners. It stores all received messages and provides a filterable and sortable graphical representation of all messages within the Engine.</p>
+<section id="message-types">
+<h2>Message Types<a class="headerlink" href="#message-types" title="Permalink to this heading"></a></h2>
+<p>Logging messages are split into five severity groups:</p>
+<ul class="simple">
+<li><p>Debugging <code class="docutils literal notranslate"><span class="pre">LOG_DEBUG</span></code>: Very detailed information (can cause performance decrease, when enabled)</p></li>
+<li><p>Info <code class="docutils literal notranslate"><span class="pre">LOG</span></code>: General information/notifications</p></li>
+<li><p>Warning <code class="docutils literal notranslate"><span class="pre">LOG_WARNING</span></code>: Potential issues</p></li>
+<li><p>Error <code class="docutils literal notranslate"><span class="pre">LOG_ERROR</span></code>: Something went wrong</p></li>
+<li><p>Fatal <code class="docutils literal notranslate"><span class="pre">LOG_FATAL</span></code>: The Engine is unable to recover from this error, often followed immediately by a crash</p></li>
+</ul>
+</section>
+<section id="building-log-messages">
+<h2>Building Log Messages<a class="headerlink" href="#building-log-messages" title="Permalink to this heading"></a></h2>
+<p>To log an event from C++ use one of the Logging macros, depending on the severity of the event. The macro takes a sequence of message elements combined with the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> operator as argument, e.g.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">LOG_WARNING</span><span class="p">(</span><span class="s">&quot;The value of my_value is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">my_value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>All fundamental types can be logged this way. If you want to be able to log custom types this way, a freestanding <code class="docutils literal notranslate"><span class="pre">operator&lt;&lt;</span></code>, that takes an <code class="docutils literal notranslate"><span class="pre">std::ostream&amp;</span></code> as first parameter and your type as second parameter, needs to be provided. (See TODO)</p>
+</section>
+<section id="default-log">
+<h2>Default Log<a class="headerlink" href="#default-log" title="Permalink to this heading"></a></h2>
+<p>By default the engine sets up a standard log on startup. It posts all messages to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>. It is possible to globally overwrite the target log to direct the messages to a different place. Alternatively, individual messages can be written to a custom log backend instead. This can help to group log messages.</p>
+</section>
+<section id="log-listener">
+<h2>Log Listener<a class="headerlink" href="#log-listener" title="Permalink to this heading"></a></h2>
+<p>Additionally, log listeners can be attached to logs to be notified of any messages. The <span class="xref std std-ref">LogViewer</span> is one of those listeners. It stores all received messages and provides a filterable and sortable graphical representation of all messages within the Engine.</p>
+</section>
 </section>
 
 

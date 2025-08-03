@@ -1,5 +1,3 @@
-\page Meta Meta
-
 Meta Information
 ================
 

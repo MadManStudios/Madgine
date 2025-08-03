@@ -2,6 +2,7 @@ Programmers Guide
 =================
 
 .. toctree::
-   core/architecture
+   howtos
    core/features
    /docs/doxygen/index
+   
