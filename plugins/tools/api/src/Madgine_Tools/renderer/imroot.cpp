@@ -227,7 +227,7 @@ namespace Tools {
 
     Dialog<Filesystem::Path> ImRoot::directoryPicker(Filesystem::Path path, Filesystem::Path selected)
     {
-        DialogSettings &settings = co_await get_settings;
+        DialogSettings &settings = co_await get_dialog_settings;
         settings.acceptText = "Open";
 
         do {            

@@ -35,7 +35,7 @@ namespace Tools {
 
     void LauncherTool::render()
     {
-        if (ImGui::Begin("LauncherTool", &mVisible)) {
+        if (beginDefaultWindow()) {
             std::string windowName = mMainWindow->osWindow()->title();
             if (ImGui::InputText("Window Title", &windowName))
                 mMainWindow->osWindow()->setTitle(windowName.c_str());

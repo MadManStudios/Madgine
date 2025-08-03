@@ -131,7 +131,7 @@ namespace Tools {
 
     void Python3ImmediateWindow::render()
     {
-        if (ImGui::Begin("Python3ImmediateWindow", &mVisible)) {
+        if (beginDefaultWindow()) {
 
             if (!mPrompt)
                 mPrompt = std::make_unique<InteractivePrompt>(&getTool<TextEditor>(), this);

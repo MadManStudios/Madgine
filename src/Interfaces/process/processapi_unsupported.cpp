@@ -24,6 +24,11 @@ namespace Process {
         set_error(GenericResult::UNKNOWN_ERROR);
     }
 
+    void execute(std::string_view command)
+    {
+        throw 0;
+    }
+
 }
 }
 

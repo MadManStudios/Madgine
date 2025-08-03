@@ -1,7 +1,7 @@
 #include "../interfaceslib.h"
 
-#include "fsapi.h"
 #include "filequery.h"
+#include "fsapi.h"
 
 namespace Engine {
 namespace Filesystem {
@@ -57,10 +57,11 @@ namespace Filesystem {
 
     FileQueryIterator &FileQueryIterator::operator++()
     {
-        if (mHandles.back().advance(*mBuffer))
-            verify();
-        else
-            leaveDir();
+        if (currentIsDir() && mQuery->mShowDirs && mQuery->mRecursive) {
+            enterDir();
+        } else {
+            increment();
+        }
         return *this;
     }
 
@@ -101,6 +102,9 @@ namespace Filesystem {
         if (handle) {
             mHandles.emplace_back(std::move(handle));
             verify();
+        } else {
+            if (!mHandles.empty())
+                increment();
         }
     }
 
@@ -108,24 +112,34 @@ namespace Filesystem {
     {
         mHandles.pop_back();
         if (!mHandles.empty())
-            ++(*this);
+            increment();
     }
 
     void FileQueryIterator::verify()
     {
         if (!mHandles.empty()) {
             if (currentIsDir()) {
-                if (mQuery->mRecursive) {
-                    enterDir();
-                } else if (!mQuery->mShowDirs) {
-                    ++(*this);
+                if (!mQuery->mShowDirs) {
+                    if (mQuery->mRecursive) {
+                        enterDir();
+                    } else {
+                        ++(*this);
+                    }
                 }
             } else {
                 if (!mQuery->mShowFiles) {
                     ++(*this);
                 }
-			}
+            }
         }
+    }
+
+    void FileQueryIterator::increment()
+    {
+        if (mHandles.back().advance(*mBuffer))
+            verify();
+        else
+            leaveDir();
     }
 
     bool FileQueryIterator::currentIsDir()
@@ -157,7 +171,6 @@ namespace Filesystem {
     {
         return mHandle->path() / filename(*mState);
     }
-
 
 }
 }

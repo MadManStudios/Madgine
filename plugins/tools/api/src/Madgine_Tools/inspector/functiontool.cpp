@@ -179,7 +179,7 @@ namespace Tools {
 
     void FunctionTool::render()
     {
-        if (ImGui::Begin("FunctionTool", &mVisible)) {
+        if (beginDefaultWindow()) {
             if (renderFunctionSelect(mCurrentFunction, mCurrentFunctionName, mCurrentArguments)) {
                 ValueType result;
                 mCurrentFunction(result, mCurrentArguments);

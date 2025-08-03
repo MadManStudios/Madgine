@@ -115,7 +115,7 @@ namespace Tools {
     {
         constexpr float borderSize = 10.0f;
 
-        if (ImGui::Begin("GuiEditor", &mVisible)) {
+        if (beginDefaultWindow()) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
 
             ImDrawList *background = ImGui::GetBackgroundDrawList(ImGui::GetMainViewport());

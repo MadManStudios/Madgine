@@ -41,7 +41,7 @@ namespace Tools {
 
     void KeyValueRegistry::render()
     {
-        if (ImGui::Begin("KeyValueRegistry", &mVisible)) {
+        if (beginDefaultWindow()) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Left, 0.2f, false, ImGuiCond_FirstUseEver);
 
             auto drawList = [this](const std::map<std::string_view, ScopePtr> &items) {

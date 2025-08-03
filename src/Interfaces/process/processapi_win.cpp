@@ -115,6 +115,11 @@ namespace Process {
         assert(result);
     }
 
+    void execute(std::string_view command) {
+        std::string cmd { command };
+        ShellExecute(0, nullptr, cmd.c_str(), nullptr, nullptr, SW_SHOW);
+    }
+
 }
 }
 

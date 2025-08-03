@@ -45,7 +45,7 @@ namespace Tools {
     void PluginManager::render()
     {
         ImGui::SetNextWindowSize({ 550, 400 }, ImGuiCond_FirstUseEver);
-        if (ImGui::Begin("Plugin Manager", &mVisible)) {
+        if (beginDefaultWindow()) {
 
             if (ImGui::BeginTabBar("Plugin settings")) {
                 if (ImGui::BeginTabItem("Selection")) {

@@ -159,7 +159,7 @@ namespace Tools {
 
     void LifetimeControl::renderTreeView()
     {
-        if (ImGui::Begin("Lifetime Control", &mVisible)) {
+        if (beginDefaultWindow()) {
 
             ImVec2 oldViewportPos = ImGui::GetCurrentContext()->MouseViewport->Pos;
             ImVec2 oldViewportSize = ImGui::GetCurrentContext()->MouseViewport->Size;
@@ -211,7 +211,7 @@ namespace Tools {
     void LifetimeControl::renderToolbar()
     {
         ImGuiWindowClass window_class;
-        window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar;
+        window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDocking;
         ImGui::SetNextWindowClass(&window_class);
         if (ImGui::Begin("Lifetime Control - Toolbar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Up, 0.01f, true, ImGuiCond_FirstUseEver);

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Madgine_Tools/toolscollector.h"
 #include "Madgine_Tools/toolbase.h"
+#include "Madgine_Tools/toolscollector.h"
 
 #include "Interfaces/filesystem/path.h"
 
@@ -19,14 +19,19 @@ namespace Tools {
         ProjectManager(ImRoot &root);
 
         virtual Threading::Task<bool> init() override;
-        
+
         virtual std::string_view key() const override;
 
-        virtual void render() override;
-        virtual void renderMenu() override;
-        virtual bool renderConfiguration(const Filesystem::Path &config) override;
-        virtual void loadConfiguration(const Filesystem::Path &config) override;
-        virtual void saveConfiguration(const Filesystem::Path &config) override;
+        void renderLandingPage();
+        void renderTips();
+        void renderSettingsPage();
+        void renderConfigurations();
+        void render() override;
+        void renderMenu() override;
+        bool renderConfiguration(const Filesystem::Path &config) override;
+        void loadConfiguration(const Filesystem::Path &config) override;
+        void saveConfiguration(const Filesystem::Path &config) override;
+        void renderSettings() override;
 
         const Filesystem::Path &projectRoot() const;
         const std::string &projectRootString() const;
@@ -40,23 +45,39 @@ namespace Tools {
 
         std::vector<std::string> projectLayouts() const;
 
+        std::vector<Tip> tips() override;
+
         void setCurrentConfig(const Filesystem::Path &config);
-        
+
         bool mShowConfigurations = false;
         bool mShowSettings = false;
 
+        bool mShowTipsOnStartup = true;
+
+    protected:
+        void createProjectDialog();
+        void openProjectDialog();
+
     private:
         std::set<Filesystem::Path> mConfigs;
-        Filesystem::Path mCurrentConfig;        
+        Filesystem::Path mCurrentConfig;
 
         bool mUnsavedConfiguration = false;
 
         Ini::IniFile mConfiguration;
 
+        
+        bool mShowTips = false;
+        bool mInitialized = false;
+
+        std::vector<Tip> mTips;
+        size_t mTipIndex = 0;
+
     private:
         Window::MainWindow *mWindow = nullptr;
         Filesystem::Path mProjectRoot;
         std::string mLayout;
+        Templates *mTemplates = nullptr;
     };
 
 }

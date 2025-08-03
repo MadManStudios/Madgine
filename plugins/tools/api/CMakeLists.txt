@@ -24,6 +24,10 @@ add_plugin(Tools Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine_Tools/to
 
 target_link_plugins(Tools)
 
-target_link_libraries(Tools PUBLIC ImGui Im3D CodeGen)
+target_link_libraries(Tools PUBLIC ImGui Im3D CodeGen TemplateEngine)
+
+target_compile_definitions(Tools PRIVATE 
+		TOOL_PROJECT_ROOT=\"Tools_SOURCE_DIR}\"
+	)
 
 

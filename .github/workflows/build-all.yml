@@ -49,7 +49,7 @@ jobs:
         \"emscripten\": \"OpenGL\"}"
       versions: "{
         \"push\": \"${major}.${minor}.${patch}\",
-        \"pull_request\": \"${major}.${minor}.${patch}rc\"}"
+        \"pull_request\": \"${major}.${minor}.${patch}\"}"
     
   build-plugins:
   

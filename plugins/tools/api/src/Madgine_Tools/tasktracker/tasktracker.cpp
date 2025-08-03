@@ -44,7 +44,7 @@ namespace Tools {
 
     void TaskTracker::render()
     {
-        if (ImGui::Begin("TaskTracker", &mVisible)) {
+        if (beginDefaultWindow()) {
 
             ImGui::Checkbox("Locked", &mLocked);
             if (!mLocked)

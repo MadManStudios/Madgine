@@ -15,6 +15,8 @@
 
 #include "imgui/imgui_internal.h"
 
+#include "Madgine_Tools/imguiicons.h"
+
 #include "Madgine/window/mainwindow.h"
 #include "clientimroot.h"
 
@@ -25,6 +27,8 @@
 #include "Generic/projections.h"
 
 #include "Madgine/window/layoutloader.h"
+
+#include "Madgine_Tools/templates/templates.h"
 
 METATABLE_BEGIN_BASE(Engine::Tools::ProjectManager, Engine::Tools::ToolBase)
 PROPERTY(ProjectRoot, projectRootString, setProjectRoot)
@@ -37,6 +41,7 @@ ENCAPSULATED_FIELD(Layout, layout, setLayout)
 FIELD(mShowConfigurations)
 FIELD(mShowSettings)
 FIELD(mConfigs)
+FIELD(mShowTipsOnStartup)
 SERIALIZETABLE_END(Engine::Tools::ProjectManager)
 
 UNIQUECOMPONENT(Engine::Tools::ProjectManager)
@@ -53,9 +58,20 @@ namespace Tools {
     {
         mWindow = &static_cast<const ClientImRoot &>(mRoot).window();
 
+        mTemplates = &getTool<Templates>();
+
         mWindow->taskQueue()->queue([this]() {
             load();
         });
+
+        for (ToolBase *tool : mRoot.tools() | std::views::transform(projectionUniquePtrToPtr)) {
+            if (tool->isEnabled()) {
+                std::vector<Tip> tips = tool->tips();
+                mTips.insert(mTips.end(), tips.begin(), tips.end());
+            }
+        }
+
+        mTipIndex = std::rand() % mTips.size();
 
         co_return co_await ToolBase::init();
     }
@@ -65,9 +81,100 @@ namespace Tools {
         return "ProjectManager";
     }
 
-    void ProjectManager::render()
+    void ProjectManager::renderLandingPage()
     {
+        ImGuiDockNode *centralNode = ImGui::DockBuilderGetCentralNode(mRoot.dockSpaceId());
+        if (mProjectRoot.empty() && centralNode->IsEmpty()) {
 
+            ImGui::SetNextWindowPos(centralNode->Pos, ImGuiCond_Always);
+            ImGui::SetNextWindowSize(centralNode->Size, ImGuiCond_Always);
+            if (ImGui::Begin("Landing Page", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize)) {
+                ImVec2 size = centralNode->Size;
+                size.y -= 20.0f;
+                ImGui::BeginVertical("vLanding", size);
+                ImGui::Spring();
+                ImGui::BeginHorizontal("aLanding");
+                ImGui::Text("Welcome to the Madgine!");
+                ImGui::EndHorizontal();
+                ImGui::Spring();
+                ImGui::BeginHorizontal("hLanding");
+
+                ImVec2 widget_size;
+                widget_size.x = floorf(ImGui::GetContentRegionAvail().x / 4);
+                widget_size.y = 150.0f;
+
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 2.0f);
+                ImGui::PushStyleColor(ImGuiCol_Button, { 0.2f, 0.2f, 0.2f, 0.5f });
+
+                ImGui::Spring();
+                if (ImGui::Button(IMGUI_ICON_FILE "\nCreate Project...", widget_size))
+                    createProjectDialog();
+                ImGui::Spring();
+                if (ImGui::Button(IMGUI_ICON_FOLDER "\nOpen Project...", widget_size))
+                    openProjectDialog();
+                ImGui::Spring();
+                ImGui::Button("Icon\nSomething", widget_size);
+                ImGui::Spring();
+
+                ImGui::PopStyleColor();
+                ImGui::PopStyleVar();
+
+                ImGui::EndHorizontal();
+                ImGui::Spring();
+                ImGui::BeginHorizontal("bLanding");
+                ImGui::Text("Below");
+                ImGui::EndHorizontal();
+                ImGui::Spring();
+                ImGui::EndVertical();
+            }
+            ImGui::End();
+        }
+    }
+
+    void ProjectManager::renderTips()
+    {
+        if (!mInitialized && ImGui::GetCurrentContext()->SettingsLoaded) {
+            mShowTips = mShowTipsOnStartup;
+            mInitialized = true;
+        }
+
+        if (mShowTips) {
+            Tip &tip = mTips[mTipIndex];
+
+            ImGui::SetNextWindowSize({ 500, 100 }, ImGuiCond_Always);
+            std::string title = tip.mTitle + "###Tip";
+            if (ImGui::Begin(title.c_str(), &mShowTips, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize)) {
+                ImGui::TextWrapped("%s", tip.mText.c_str());
+
+                ImGui::BeginHorizontal("Controls", { 480, 0 });
+                
+                ImGui::Checkbox("Show Tips on Startup", &mShowTipsOnStartup);
+                ImGui::Spring();
+                if (ImGui::Button("Next Tip")) {
+                    mTipIndex = (mTipIndex + 1) % mTips.size();
+                }
+
+                ImGui::EndHorizontal();
+            }
+            ImGui::End();
+        }
+    }
+
+    void ProjectManager::renderSettingsPage()
+    {
+        if (mShowSettings) {
+            if (ImGui::Begin("Settings", &mShowSettings)) {
+                for (ToolBase *tool : mRoot.tools() | std::views::transform(projectionUniquePtrToPtr)) {
+                    if (tool->isEnabled())
+                        tool->renderSettings();
+                }
+            }
+            ImGui::End();
+        }
+    }
+
+    void ProjectManager::renderConfigurations()
+    {
         if (mShowConfigurations) {
             if (ImGui::Begin("Project Configurations", &mShowConfigurations, mUnsavedConfiguration ? ImGuiWindowFlags_UnsavedDocument : 0)) {
 
@@ -124,16 +231,14 @@ namespace Tools {
                 }
             }
         }
+    }
 
-        if (mShowSettings) {
-            if (ImGui::Begin("Settings", &mShowSettings)) {
-                for (ToolBase *tool : mRoot.tools() | std::views::transform(projectionUniquePtrToPtr)) {
-                    if (tool->isEnabled())
-                        tool->renderSettings();
-                }
-                ImGui::End();
-            }
-        }
+    void ProjectManager::render()
+    {
+        renderConfigurations();
+        renderSettingsPage();
+        renderLandingPage();
+        renderTips();
     }
 
     void ProjectManager::renderMenu()
@@ -142,20 +247,11 @@ namespace Tools {
         if (ImGui::BeginMenu("Project")) {
 
             if (ImGui::MenuItem("New Project...")) {
-                throw 0;
+                createProjectDialog();
             }
 
             if (ImGui::MenuItem("Open Project...")) {
-                Filesystem::Path currentSelectionPath;
-                if (!mProjectRoot.empty()) {
-                    currentSelectionPath = mProjectRoot.absolute();
-                }
-
-                mRoot.dialogs().show(
-                    mRoot.directoryPicker(),
-                    [this](const Filesystem::Path &selected) {
-                        setProjectRoot(selected);
-                    });
+                openProjectDialog();
             }
 
             ImGui::Separator();
@@ -164,7 +260,7 @@ namespace Tools {
                 ImGui::BeginDisabled();
             if (ImGui::MenuItem("New Layout...")) {
                 mRoot.dialogs().show([]() -> Dialog<std::string> {
-                    DialogSettings &settings = co_await get_settings;
+                    DialogSettings &settings = co_await get_dialog_settings;
                     std::string layoutName;
                     do {
                         ImGui::InputText("Name", &layoutName);
@@ -227,6 +323,15 @@ namespace Tools {
         return changed;
     }
 
+    void ProjectManager::renderSettings()
+    {
+        ImGui::BeginGroupPanel("Project Manager");
+
+        ImGui::Checkbox("Show Tips on Startup", &mShowTipsOnStartup);
+
+        ImGui::EndGroupPanel();
+    }
+
     void ProjectManager::loadConfiguration(const Filesystem::Path &config)
     {
         mConfiguration.loadFromDisk(config / "client.ini");
@@ -271,6 +376,14 @@ namespace Tools {
         return result;
     }
 
+    std::vector<Tip> ProjectManager::tips()
+    {
+        return {
+            { "Documentation",
+                "Need more information? Right click tools in Editor to access their documentation." }
+        };
+    }
+
     void ProjectManager::setCurrentConfig(const Filesystem::Path &config)
     {
         mCurrentConfig = config;
@@ -279,6 +392,27 @@ namespace Tools {
             if (tool->isEnabled())
                 tool->loadConfiguration(mCurrentConfig);
         }
+    }
+
+    void ProjectManager::createProjectDialog()
+    {
+        mTemplates->showTemplateDialog("NewProject", [this](const Filesystem::Path &path) {
+            setProjectRoot(path);
+        });
+    }
+
+    void ProjectManager::openProjectDialog()
+    {
+        Filesystem::Path currentSelectionPath;
+        if (!mProjectRoot.empty()) {
+            currentSelectionPath = mProjectRoot.absolute();
+        }
+
+        mRoot.dialogs().show(
+            mRoot.directoryPicker(currentSelectionPath),
+            [this](const Filesystem::Path &selected) {
+                setProjectRoot(selected);
+            });
     }
 
     void ProjectManager::setLayout(const std::string &layout)

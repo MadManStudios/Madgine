@@ -1,5 +1,3 @@
-\page Modules Modules
-
 Modules
 =======
 

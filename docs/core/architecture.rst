@@ -1,6 +1,3 @@
-\page Architecture Architecture Overview
-
-
 Architecture Overview
 ==================
 
@@ -12,7 +9,6 @@ Folder hierarchy
 - launcher: executable/entry-point setup for all supported platforms
 - plugins: set of plugins grouped by functionality
 - samples: small working examples of using the framework
-- shared: middleware & feature libraries (note: not plugins)
 - src: core libraries
 - test: tests for core libraries
 
@@ -21,12 +17,14 @@ Core Libraries
 ~~~~~~~~~~~~~~~
 
 The framework is strongly plugin-oriented. It contains a set of core libraries that provide the necessary generic functionality needed in a working Madgine-Application:
-- \subpage Generic : header-only library. Mostly template code, including container traits
-- \subpage Interfaces : hardware/platform abstractions
-- \subpage Meta : reflection and serialization/synchronization library
-- \subpage Modules : threading and plugin functionality
+
+* :doc:`generic` : header-only library. Mostly template code, including container traits
+* :doc:`interfaces` : hardware/platform abstractions
+* :doc:`meta` : reflection and serialization/synchronization library
+* :doc:`modules` : threading and plugin functionality
 
 .. toctree::
+   :hidden:
    generic
    meta
    modules
@@ -35,7 +33,7 @@ The framework is strongly plugin-oriented. It contains a set of core libraries t
 
 This keeps the minimal footprint of the framework low and allows customizations to as much parts of the code as possible.
 
-![libraries](img/libraries.svg)
+.. image:: /docs/img/libraries.svg
 
 
 Source folder names & namespaces
