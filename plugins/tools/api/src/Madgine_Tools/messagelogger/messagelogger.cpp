@@ -44,7 +44,7 @@ namespace Tools {
 
     void MessageLogger::render()
     {
-        if (ImGui::Begin("MessageLogger", &mVisible)) {
+        if (beginDefaultWindow()) {
             for (const auto& [stream, data] : mLogger.mStreams) {
                 if (!Threading::WorkGroup::self().contains(data.mThread))
                     continue;

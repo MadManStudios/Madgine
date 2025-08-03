@@ -8,8 +8,15 @@
 
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
+typedef int ImGuiWindowFlags;
+
 namespace Engine {
 namespace Tools {
+
+    struct Tip {
+        std::string mTitle;
+        std::string mText;
+    };
 
     struct MADGINE_TOOLS_EXPORT ToolBase : Serialize::VirtualSerializableUnitBase<VirtualScopeBase<>, Serialize::SerializableUnitBase>, Threading::MadgineObject<ToolBase> {
         SERIALIZABLEUNIT(ToolBase)
@@ -28,8 +35,10 @@ namespace Tools {
         virtual void loadConfiguration(const Filesystem::Path &config);
         virtual void saveConfiguration(const Filesystem::Path &config);
 
+        virtual std::vector<Tip> tips();
+
         virtual std::string_view key() const = 0;
- 
+
         bool isVisible() const;
         void setVisible(bool v);
 
@@ -47,6 +56,8 @@ namespace Tools {
 
         Threading::TaskQueue *taskQueue() const;
 
+    protected:
+        bool beginDefaultWindow(const char *docTarget = nullptr, ImGuiWindowFlags flags = 0, const char *pluginSourceDir = PROJECT_ROOT);
 
     protected:
         virtual Threading::Task<bool> init();

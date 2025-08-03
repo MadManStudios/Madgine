@@ -54,7 +54,7 @@ namespace Tools {
 
     void TestTool::render()
     {
-        if (ImGui::Begin("TestTool", &mVisible)) {
+        if (beginDefaultWindow()) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
 
             if (ImGui::CollapsingHeader("ImGui")) {

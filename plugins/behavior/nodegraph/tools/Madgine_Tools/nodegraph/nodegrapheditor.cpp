@@ -482,7 +482,8 @@ namespace Tools {
                             std::string selection;
                             bool alreadyClicked = false;
 
-                            DialogSettings settings { .acceptText = "Open" };
+                            DialogSettings &settings = co_await get_dialog_settings;
+                            settings.acceptText = "Open";
 
                             do {
                                 ImGui::BeginChild("GraphList", { 0.0f, -ImGui::GetFrameHeightWithSpacing() });

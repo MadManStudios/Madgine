@@ -40,7 +40,7 @@ namespace Filesystem {
         operator Path() const;
         Path path() const;
     };
-        
+
     struct INTERFACES_EXPORT FileQuerySentinel {
 
         const FileQuery *mQuery;
@@ -73,13 +73,14 @@ namespace Filesystem {
 
     protected:
         void verify();
+    
+        void increment();
 
     private:
         std::vector<FileQueryHandle> mHandles;
         const FileQuery *mQuery;
         std::unique_ptr<FileQueryState, FileQueryStateDeleter> mBuffer;
     };
-
 
     struct INTERFACES_EXPORT FileQuery {
 

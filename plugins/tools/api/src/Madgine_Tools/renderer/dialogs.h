@@ -123,13 +123,13 @@ namespace Tools {
         DialogContainer *mTargetContainer = nullptr;
     };
 
-    struct get_settings_t {
+    struct get_dialog_settings_t {
         
     };
     
-    constexpr get_settings_t get_settings;
+    constexpr get_dialog_settings_t get_dialog_settings;
 
-    struct get_settings_helper_t {
+    struct get_dialog_settings_helper_t {
         constexpr bool await_ready() const noexcept
         {
             return true;
@@ -195,8 +195,8 @@ namespace Tools {
 
             template <typename A>
             decltype(auto) await_transform(A &&a) {
-                if constexpr (std::same_as<A, const get_settings_t&>) {
-                    return get_settings_helper_t { *this };
+                if constexpr (std::same_as<A, const get_dialog_settings_t&>) {
+                    return get_dialog_settings_helper_t { *this };
                 } else {
                     return std::forward<A>(a);
                 }

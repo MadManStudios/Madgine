@@ -31,5 +31,5 @@ FolderSources(sources "" tools)
 
 add_tools(Client ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/clienttoolslib.h)
 
-target_link_plugins(ClientTools Resources)
+target_link_plugins(ClientTools Resources Templates)
 

@@ -16,6 +16,8 @@ namespace Tools {
 
         std::string_view key() const override;
 
+        void showTemplateDialog(std::string_view name, Closure<void(const Filesystem::Path &)> cb = {});
+
     private:
         Inspector *mInspector;
     };

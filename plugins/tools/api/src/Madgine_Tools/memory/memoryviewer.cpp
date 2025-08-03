@@ -322,7 +322,7 @@ namespace Tools {
         float fixedWidth = (mShowAddress ? addressWidth : 0) + (mShowFile ? lineWidth : 0) + 2 * sizeWidth;
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2 { fixedWidth + 40, 0 });
-        if (ImGui::Begin("Memory Viewer", &mVisible)) {
+        if (beginDefaultWindow()) {
             ImGui::Value("Total Memory", static_cast<unsigned int>(mTracker.totalMemory()));
             ImGui::Value("Overhead Memory", static_cast<unsigned int>(mTracker.overhead()));
 

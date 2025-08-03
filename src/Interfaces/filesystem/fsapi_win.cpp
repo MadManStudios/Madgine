@@ -138,7 +138,7 @@ namespace Filesystem {
         }
         
         if (c[0] != '.') {
-            if (!std::isalnum(c[0]) && c[0] != '_' && c[0] != '$')
+            if (!std::isalnum(c[0]) && c[0] != '_' && c[0] != '$' && c[0] != '%')
                 return false;
             if (size == 1)
                 return true;

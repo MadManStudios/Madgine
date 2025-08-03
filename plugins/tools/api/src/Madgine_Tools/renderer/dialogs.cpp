@@ -63,7 +63,10 @@ namespace Tools {
         ImGui::SetNextWindowSize({ 500, 400 }, ImGuiCond_FirstUseEver);
         if (ImGui::BeginPopupModal(header.c_str())) {
 
-            ImGui::BeginVertical("Main");
+            ImVec2 size = ImGui::GetContentRegionAvail();
+            size.x -= 4.0f;
+            size.y -= 24.0f;
+            ImGui::BeginChild("Main", size);
 
             return true;
         } else {
@@ -74,6 +77,8 @@ namespace Tools {
 
     void DialogContainer::renderFooter(DialogSettings &settings)
     {
+        ImGui::EndChild();
+
         ImGui::BeginHorizontal("Buttons");
 
         ImGui::Spring();
@@ -101,7 +106,6 @@ namespace Tools {
         }
 
         ImGui::EndHorizontal();
-        ImGui::EndVertical();
 
         ImGui::EndPopup();
         ImGui::PopID();

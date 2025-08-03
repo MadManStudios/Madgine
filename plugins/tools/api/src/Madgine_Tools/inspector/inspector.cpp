@@ -52,9 +52,6 @@ namespace Tools {
 
     void Inspector::render()
     {
-        if (ImGui::Begin("Inspector", &mVisible)) {
-        }
-        ImGui::End();
     }
 
     bool Inspector::drawRemainingMembers(ScopePtr scope, std::set<std::string> &drawn)

@@ -57,7 +57,7 @@ namespace Tools {
 
     void RenderContextTool::render()
     {
-        if (ImGui::Begin("RenderContext - Tool", &mVisible)) {
+        if (beginDefaultWindow()) {
             ImGui::Checkbox("Show Debug Visualizers", &mRenderDebugVisualizations);
         }
         ImGui::End();

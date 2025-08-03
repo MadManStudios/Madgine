@@ -1,5 +1,3 @@
-\page Generic Generic
-
 Generic
 =======
 

@@ -36,7 +36,7 @@ void Parser::parse(Engine::Stream &s)
 
     for (char c : std::ranges::subrange { s.iterator(), s.end() }) {
         switch (c) {
-        case '$':
+        case '%':
             if (!openTag) {
                 openTag = true;
                 hasType = false;
@@ -48,10 +48,11 @@ void Parser::parse(Engine::Stream &s)
                 registerField(std::move(name), std::move(type));
             }
             break;
-        case ':':
+        case '#':
             if (openTag) {
                 hasType = true;
             }
+            break;
         default:
             if (openTag) {
                 if (hasType) {
@@ -82,7 +83,18 @@ void Parser::generateFiles(const Engine::Filesystem::Path &target) const
 
 void Parser::registerField(std::string name, std::string type)
 {
-    mFields[name].setType(Engine::toValueTypeDesc<std::string>());
+    Engine::ValueType &field = mFields[name];
+    Engine::ValueTypeDesc targetType;
+    if (type.empty() || type == "lc_string" || type == "uc_string" || type == "string")
+    {
+        targetType = Engine::toValueTypeDesc<std::string>();
+    } else {
+        LOG_ERROR("Unknown type: " << type);
+        return;
+    }
+    if (field.type().mType != Engine::ValueTypeEnum::NullValue && !field.type().canAccept(targetType))
+        LOG_ERROR("Incompatible types: " << field.type().toString() << " and " << targetType.toString());
+    field.setType(targetType);
 }
 
 std::string Parser::generate(std::string_view s) const
@@ -103,7 +115,7 @@ void Parser::generate(Engine::Stream &in, Engine::Stream &out) const
 
     for (char c : std::ranges::subrange { in.iterator(), in.end() }) {
         switch (c) {
-        case '$':
+        case '%':
             if (!openTag) {
                 openTag = true;
                 hasType = false;
@@ -114,10 +126,13 @@ void Parser::generate(Engine::Stream &in, Engine::Stream &out) const
                 out << mFields.at(name).as<std::string>();
             }
             break;
-        case ':':
+        case '#':
             if (openTag) {
                 hasType = true;
+            } else {
+                out << c;
             }
+            break;
         default:
             if (openTag) {
                 if (hasType) {

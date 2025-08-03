@@ -52,42 +52,10 @@ namespace Tools {
 
             if (ImGui::BeginMenu("Templates")) {
 
-                for (Filesystem::FileQueryResult dir : Filesystem::listDirs("C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\templates\\templates")) {
-                    if (ImGui::MenuItem(dir.path().filename().str().c_str())) {
-                        mRoot.dialogs().show(
-                            [](Templates *templates, Filesystem::Path path) -> Dialog<TemplateEngine::Parser, Filesystem::Path> {
-                                Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
-
-                                TemplateEngine::Parser parser { path };
-
-                                DialogSettings &settings = co_await get_settings;
-                                settings.header = "Generate 'Test'";
-                                do {
-                                    if (ImGui::BeginTable("fields", 2, ImGuiTableFlags_Resizable)) {
-                                        for (auto &[key, value] : parser.fields()) {
-                                            templates->mInspector->drawValue(key, value, true, false);
-                                        }
-                                        ImGui::EndTable();
-                                    }
-
-                                    std::string s = outputPath;
-                                    if (ImGui::InputText("Target", &s)) {
-                                        outputPath = s;
-                                    }
-                                    ImGui::SameLine();
-                                    if (ImGui::Button("...")) {
-                                        std::optional<std::tuple<Filesystem::Path>> result = co_await templates->mRoot.directoryPicker();
-                                        if (result) {
-                                            outputPath = std::get<0>(*result);
-                                        }
-                                    }
-
-                                } while (co_yield settings);
-                                co_return { std::move(parser), std::move(outputPath) };
-                            }(this, dir),
-                            [](const TemplateEngine::Parser &parser, const Filesystem::Path &outTarget) {
-                                parser.generateFiles(outTarget);
-                            });
+                for (Filesystem::FileQueryResult dir : Filesystem::listDirs(PROJECT_ROOT "/templates")) {
+                    std::string name = dir.path().filename().str();
+                    if (ImGui::MenuItem(name.c_str())) {
+                        showTemplateDialog(name);
                     }
                 }
 
@@ -99,6 +67,49 @@ namespace Tools {
     std::string_view Templates::key() const
     {
         return "Templates";
+    }
+
+    void Templates::showTemplateDialog(std::string_view name, Closure<void(const Filesystem::Path &)> cb)
+    {
+        Filesystem::Path dir = Filesystem::Path { PROJECT_ROOT "/templates" } / name;
+
+        mRoot.dialogs().show(
+            [](Templates *templates, Filesystem::Path path) -> Dialog<TemplateEngine::Parser, Filesystem::Path> {
+                Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
+
+                TemplateEngine::Parser parser { path };
+
+                DialogSettings &settings = co_await get_dialog_settings;
+                settings.header = "Generate 'Test'";
+                do {
+                    if (ImGui::BeginTable("fields", 2, ImGuiTableFlags_Resizable)) {
+                        for (auto &[key, value] : parser.fields()) {
+                            templates->mInspector->drawValue(key, value, true, false);
+                        }
+                        ImGui::EndTable();
+                    }
+
+                    ImGui::Text("Target:");
+                    std::string s = outputPath;
+                    if (ImGui::InputText("###Target", &s)) {
+                        outputPath = s;
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("...")) {
+                        std::optional<std::tuple<Filesystem::Path>> result = co_await templates->mRoot.directoryPicker();
+                        if (result) {
+                            outputPath = std::get<0>(*result);
+                        }
+                    }
+
+                } while (co_yield settings);
+                co_return { std::move(parser), std::move(outputPath) };
+            }(this, dir),
+            [cb { std::move(cb) }](const TemplateEngine::Parser &parser, const Filesystem::Path &outTarget) {
+                parser.generateFiles(outTarget);
+                if (cb)
+                    cb(outTarget);
+            });
     }
 
 }

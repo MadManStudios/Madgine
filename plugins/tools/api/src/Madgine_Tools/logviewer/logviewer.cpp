@@ -82,7 +82,7 @@ namespace Tools {
 
     void LogViewer::render()
     {
-        if (ImGui::Begin("LogViewer", &mVisible)) {
+        if (beginDefaultWindow("tools.html#log-viewer")) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Down, 0.3f, true, ImGuiCond_FirstUseEver);
 
             for (Log::MessageType type : Log::MessageType::values()) {

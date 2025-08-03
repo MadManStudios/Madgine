@@ -33,7 +33,7 @@ namespace Tools {
 
     void FileBrowser::render()
     {
-        if (ImGui::Begin("File Browser", &mVisible)) {
+        if (beginDefaultWindow()) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
             
             ImGui::FilePicker(mCurrentPath, mSelectedPath);

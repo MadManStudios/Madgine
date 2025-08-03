@@ -8,6 +8,9 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
+
+#include "Interfaces/process/processapi.h"
 
 namespace Engine {
 namespace Tools {
@@ -60,6 +63,11 @@ namespace Tools {
     {
     }
 
+    std::vector<Tip> ToolBase::tips()
+    {
+        return {};
+    }
+
     bool ToolBase::isVisible() const
     {
         return mVisible;
@@ -103,6 +111,28 @@ namespace Tools {
     Threading::Task<void> ToolBase::finalize()
     {
         co_return;
+    }
+
+    bool ToolBase::beginDefaultWindow(const char *docTarget, ImGuiWindowFlags flags, const char *pluginSourceDir)
+    {
+        if (ImGui::Begin(key().data(), &mVisible, flags)) {
+            if (docTarget) {
+                if (ImGui::BeginPopupCompoundContextWindow()) {
+                    if (ImGui::MenuItem("?")) {
+                        Filesystem::Path path { "https://madmanstudios.github.io/Madgine/doc" };
+                        Filesystem::Path pluginDir { pluginSourceDir };
+                        path /= pluginDir.relative(SOURCE_DIR);
+                        path /= "docs";
+                        path /= docTarget;
+
+                        Process::execute(path);
+                    }
+                    ImGui::EndPopup();
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
 }
