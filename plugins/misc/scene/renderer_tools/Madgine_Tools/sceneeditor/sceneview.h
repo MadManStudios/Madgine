@@ -11,8 +11,6 @@
 
 #include "gridpass.h"
 
-#include "Madgine/scene/entity/entitycomponentptr.h"
-
 #include "imgui/imguiaddons.h"
 
 namespace Engine {
@@ -39,7 +37,7 @@ namespace Tools {
         ImGui::InteractiveViewState mState;
         int mDraggedAxis;
         Ray3 mDragStartRay;
-        Engine::Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> mDragTransform;
+        Scene::Entity::Transform *mDragTransform;
         Matrix4 mDragStoredMatrix;
         Vector3 mDragStoredPosition;
         Vector3 mDragRelMousePosition;

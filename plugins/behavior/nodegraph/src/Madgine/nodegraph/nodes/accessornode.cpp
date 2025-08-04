@@ -27,11 +27,11 @@ SERIALIZETABLE_END(Engine::NodeGraph::AccessorNode)
 namespace Engine {
 namespace NodeGraph {
 
-    AccessorNode::AccessorNode(NodeGraph &graph, const MetaTable **type, const std::pair<const char *, Accessor> *accessor)
+    AccessorNode::AccessorNode(NodeGraph &graph, const MetaTable **type, const Accessor *accessor)
         : VirtualData(graph)
         , mType(type)
         , mAccessor(accessor)
-        , mFullClassName { "Accessor/"s + (*type)->mTypeName + "/" + accessor->first }
+        , mFullClassName { "Accessor/"s + (*type)->mTypeName + "/" + accessor->mName }
     {
         setup();
     }
@@ -46,7 +46,7 @@ namespace NodeGraph {
 
     std::string_view AccessorNode::name() const
     {
-        return mAccessor->first;
+        return mAccessor->mName;
     }
 
     std::string_view AccessorNode::className() const
@@ -81,7 +81,7 @@ namespace NodeGraph {
 
     ExtendedValueTypeDesc AccessorNode::dataProviderType(uint32_t index, uint32_t group, bool bidir) const
     {
-        return mAccessor->second.mType;
+        return mAccessor->mType;
     }
 
     BehaviorError AccessorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
@@ -90,7 +90,7 @@ namespace NodeGraph {
         if (BehaviorError error = NodeInterpretHandle<NodeBase> { interpreter, *this }.read(scope, 0); error.mResult != GenericResult::SUCCESS)
             return error;
 
-        mAccessor->second.mGetter(retVal, scope.as<ScopePtr>());
+        mAccessor->mGetter(mAccessor, retVal, scope.as<ScopePtr>());
         return {};
     }
 

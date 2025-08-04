@@ -883,7 +883,7 @@ namespace NodeGraph {
         BehaviorHandle libraryBehavior;
         bool isLibraryNode = libraryBehavior.fromString(name);
 
-        const std::pair<const char *, Accessor> *accessor = nullptr;
+        const Accessor *accessor = nullptr;
         const MetaTable *type = nullptr;
         if (StringUtil::startsWith(name, "Accessor/")) {
             std::string_view path = std::string_view { name }.substr(strlen("Accessor/"));
@@ -900,12 +900,12 @@ namespace NodeGraph {
             while (type) {
                 if (type->mTypeName == typeName) {
 
-                    for (accessor = type->mMembers; accessor->first; ++accessor) {
-                        if (accessor->first == accessorName) {
+                    for (accessor = type->mMembers; accessor->mName; ++accessor) {
+                        if (accessor->mName == accessorName) {
                             break;
                         }
                     }
-                    if (!accessor->first)
+                    if (!accessor->mName)
                         return STREAM_INTEGRITY_ERROR(in) << "No Member \"" << accessorName << "\" in type \"" << typeName << "\".";
                     break;
                 }
@@ -926,8 +926,8 @@ namespace NodeGraph {
         if (isNativeNode) {
             node = createNode(name);
         } else if (type && accessor) {
-            if (accessor->second.mType.mType == ValueTypeEnum::ApiFunctionValue || accessor->second.mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
-                node = std::make_unique<FunctionNode>(*this, *accessor->second.mType.mSecondary.mFunctionTable);
+            if (accessor->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
+                node = std::make_unique<FunctionNode>(*this, *accessor->mType.mSecondary.mFunctionTable);
             } else {
                 node = std::make_unique<AccessorNode>(*this, type->mSelf, accessor);
             }

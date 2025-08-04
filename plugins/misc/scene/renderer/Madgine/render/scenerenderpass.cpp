@@ -124,17 +124,19 @@ namespace Render {
                 perFrame->pointLightCount = 2;
             }
 
-            for (size_t i = 0; i < perFrame->pointLightCount; ++i) {
-                Scene::Entity::Transform *t = lights[i].entity()->getComponent<Scene::Entity::Transform>();
+            size_t i = 0;
+            for (Scene::Entity::PointLight &light : lights | std::ranges::views::take(2)) {
+                Scene::Entity::Transform *t = light.entity()->getComponent<Scene::Entity::Transform>();
                 if (t) {
-                    float range = lights[i].mRange;
+                    float range = light.mRange;
                     perFrame->pointLights[i].light.position = (v * Vector4 { t->mPosition, 1.0f }).xyz();
-                    perFrame->pointLights[i].light.color = lights[i].mColor;
+                    perFrame->pointLights[i].light.color = light.mColor;
                     perFrame->pointLights[i].light.constantFactor = mLightConstantFactor;
                     perFrame->pointLights[i].light.linearFactor = mLightLinearFactor / range;
                     perFrame->pointLights[i].light.squaredFactor = mLightSquaredFactor / (range * range);
                     perFrame->pointLights[i].caster.reprojectionMatrix = v.Inverse();
                 }
+                ++i;
             }
         }
 

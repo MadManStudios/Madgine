@@ -172,7 +172,7 @@ namespace Tools {
         return mHoveredAxis;
     }
 
-    const Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> &SceneEditor::hoveredTransform() const
+    Scene::Entity::Transform *const &SceneEditor::hoveredTransform() const
     {
         return mHoveredTransform;
     }
@@ -417,7 +417,7 @@ namespace Tools {
         }
 
         IndexType<uint32_t> componentToRemove;
-        for (const Scene::Entity::EntityComponentPtr<Scene::Entity::EntityComponentBase> &component : entity->components()) {
+        for (const Scene::Entity::EntityComponentHandle &component : entity->components()) {
             std::string label = std::string { component.name() };
             auto it = sComponentIcons.find(label);
             if (it != sComponentIcons.end())
@@ -434,7 +434,7 @@ namespace Tools {
 
             if (ImGui::BeginPopupCompoundContextItem()) {
                 if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { component.name() }).c_str())) {
-                    componentToRemove = component.type();
+                    componentToRemove = component.mType;
                 }
                 ImGui::EndPopup();
             }
@@ -447,7 +447,7 @@ namespace Tools {
 
         getTool<BehaviorTool>().drawBehaviorList(entity->behaviors());
 
-        if (Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> t = entity->getComponent<Scene::Entity::Transform>()) {
+        if (Scene::Entity::Transform *t = entity->getComponent<Scene::Entity::Transform>()) {
             constexpr Color4 colors[] = {
                 { 0.5f, 0, 0, 0.7f },
                 { 0, 0.5f, 0, 0.7f },
@@ -546,7 +546,7 @@ namespace Tools {
 
     void SceneEditor::createEntityMapping(Scene::Entity::EntityPtr e)
     {
-        Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> transform = e->getComponent<Scene::Entity::Transform>();
+        Scene::Entity::Transform *transform = e->getComponent<Scene::Entity::Transform>();
 
         Scene::Entity::EntityPtr parent;
 
@@ -576,14 +576,14 @@ namespace Tools {
     void SceneEditor::im3DInteractions()
     {
         for (EntityNode &node : mEntityCache) {
-            Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> transform = node.mEntity->getComponent<Engine::Scene::Entity::Transform>();
+            Scene::Entity::Transform *transform = node.mEntity->getComponent<Engine::Scene::Entity::Transform>();
             if (transform) {
                 bool selected = mSelectedEntity == node.mEntity;
 
                 if (ImGui::BeginDragDropTarget()) {
                     Scene::Entity::EntityPtr *newChild;
                     if (ImGui::AcceptDraggableValueType(newChild, nullptr, [](Scene::Entity::EntityPtr *child) { return (*child)->hasComponent<Scene::Entity::Transform>(); })) {
-                        Scene::Entity::EntityComponentPtr<Engine::Scene::Entity::Transform> childTransform = (*newChild)->getComponent<Engine::Scene::Entity::Transform>();
+                        Engine::Scene::Entity::Transform *childTransform = (*newChild)->getComponent<Engine::Scene::Entity::Transform>();
                         assert(childTransform);
                         childTransform->setParent(transform);
                     }

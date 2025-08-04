@@ -185,8 +185,8 @@ namespace Tools {
                 Render::GPUMeshLoader::Resource *resource;
                 if (ImGui::AcceptDraggableValueType(resource)) {
                     Scene::Entity::EntityPtr e = mEditor->sceneMgr().container("Default").createEntity();
-                    e->addComponent<Scene::Entity::Transform>().get()->mPosition = pos;
-                    e->addComponent<Scene::Entity::Mesh>().get()->set(resource);
+                    e->addComponent<Scene::Entity::Transform>()->mPosition = pos;
+                    e->addComponent<Scene::Entity::Mesh>()->set(resource);
                     mEditor->select(e);
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {
                     Render::GPUMeshLoader::Handle handle = resource->loadData();

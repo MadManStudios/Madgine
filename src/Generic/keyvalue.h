@@ -30,8 +30,7 @@ struct KeyValue {
 };
 
 template <typename T>
-concept HasKey = requires(T &t)
-{
+concept HasKey = requires(T &t) {
     t.key();
 };
 
@@ -77,7 +76,8 @@ struct KeyValue<T *const> {
 template <typename K, typename T>
 struct KeyValue<std::pair<K, T>> {
 
-    static T value(std::pair<K, T>&& p) {
+    static T value(std::pair<K, T> &&p)
+    {
         return std::move(p.second);
     }
 
@@ -137,11 +137,12 @@ template <typename T>
 struct KeyValue<std::reference_wrapper<T>> {
     using Inner = KeyValue<T>;
 
-    static decltype(auto) value(std::reference_wrapper<T> ref) {
+    static decltype(auto) value(std::reference_wrapper<T> ref)
+    {
         if constexpr (std::is_reference_v<decltype(Inner::value(ref.get()))>) {
             return std::ref(Inner::value(ref.get()));
-        }else{
-            return Inner::value(ref.get());            
+        } else {
+            return Inner::value(ref.get());
         }
     }
 
@@ -211,7 +212,6 @@ struct KeyCompare {
         else
             return kvKey(_Left) < kvKey(_Right);
     }
-
 };
 
 template <typename _Ty>

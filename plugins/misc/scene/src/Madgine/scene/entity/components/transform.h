@@ -5,8 +5,6 @@
 #include "Meta/math/quaternion.h"
 #include "Meta/math/vector3.h"
 
-#include "../entitycomponentptr.h"
-
 namespace Engine {
 namespace Scene {
     namespace Entity {
@@ -14,8 +12,6 @@ namespace Scene {
         struct MADGINE_SCENE_EXPORT Transform : EntityComponent<Transform> {
 
             SERIALIZABLEUNIT(Transform)
-
-            using Container = FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Transform>>;
 
             using EntityComponent<Transform>::EntityComponent;
 
@@ -37,8 +33,6 @@ namespace Scene {
         private:
             Transform *mParent = nullptr;
         };
-
-        using TransformPtr = EntityComponentPtr<Transform>;
 
     }
 }

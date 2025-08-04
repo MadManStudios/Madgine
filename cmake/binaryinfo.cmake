@@ -29,7 +29,7 @@ macro(generate_binary_info target)
 
 		
 		target_compile_definitions(${target} PRIVATE 
-			BINARY_DIR=\"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}\"
+			BINARY_BINARY_DIR=\"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}\"
 			BINARY_MAJOR_VERSION=${major_version}
 			BINARY_MINOR_VERSION=${minor_version}
 			BINARY_PATCH_NUMBER=${patch_number}

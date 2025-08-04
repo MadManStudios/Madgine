@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../plugins/binaryinfo.h"
+#include "Generic/closure.h"
 #include "annotations.h"
 #include "typeinfo.h"
 
@@ -18,20 +19,28 @@ namespace Engine {
 namespace UniqueComponent {
 
     struct MODULES_EXPORT CollectorInfoBase {
+        CollectorInfoBase() = default;
+        CollectorInfoBase(const CollectorInfoBase &) = delete;
+
+        CollectorInfoBase &operator=(const CollectorInfoBase &) = delete;
+
         const Plugins::BinaryInfo *mBinary;
         std::vector<std::pair<std::vector<TypeInfo>, TypeInfo>> mElementInfos;
         IndexType<size_t> mBaseIndex;
         std::vector<std::string_view> mComponentNames;
+
+        std::vector<Closure<void()>> mInitializers;
+        void init();
     };
 
     MODULES_EXPORT std::vector<RegistryBase *> &registryRegistry();
 
     struct MODULES_EXPORT RegistryBase {
-        RegistryBase(const TypeInfo &ti, const TypeInfo &namedTi, const Plugins::BinaryInfo *binary, const char * (*header)())
+        RegistryBase(const TypeInfo &ti, const TypeInfo &namedTi, const Plugins::BinaryInfo *binary, const char *(*header)())
             : mBinary(binary)
             , mHeader(header)
             , mTi(ti)
-            , mNamedTi(namedTi)            
+            , mNamedTi(namedTi)
         {
             LOG("Adding: " << ti.type_name());
             registryRegistry().push_back(this);
@@ -159,6 +168,7 @@ namespace UniqueComponent {
                     for (const Annotations &annotations : info->mComponents) {
                         mComponents.push_back(annotations);
                     }
+                    info->init();
                 }
             }
         }

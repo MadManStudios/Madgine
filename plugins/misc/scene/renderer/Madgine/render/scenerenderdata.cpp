@@ -31,7 +31,7 @@ namespace Render {
     Threading::ImmediateTask<RenderFuture> SceneRenderData::render(RenderContext *context)
     {
         co_await mScene.mutex().locked(Engine::AccessMode::READ, [this, context]() {
-            mScene.updateFrame([context](Scene::Entity::SkeletonPtr skeleton) {
+            mScene.updateFrame([context](Scene::Entity::Skeleton *skeleton) {
                 if (!skeleton->mBoneMatrices.mBuffer) {
                     skeleton->mBoneMatrices = context->allocateBuffer<Matrix4[]>(skeleton->data()->mBones.size());
                 }

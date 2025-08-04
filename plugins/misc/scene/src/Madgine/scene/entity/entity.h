@@ -8,8 +8,6 @@
 
 #include "Modules/uniquecomponent/component_index.h"
 
-#include "entitycomponentptr.h"
-
 #include "Generic/customfunctors.h"
 
 #include "Madgine/debug/debuggablelifetime.h"
@@ -17,6 +15,8 @@
 #include "Interfaces/log/logsenders.h"
 
 #include "Madgine/behaviorlist.h"
+
+#include "entitycomponenthandle.h"
 
 namespace Engine {
 namespace Scene {
@@ -45,9 +45,9 @@ namespace Scene {
             const std::string &name() const;
 
             template <typename T>
-            EntityComponentPtr<T> addComponent()
+            T *addComponent()
             {
-                return EntityComponentPtr<T> { addComponent(UniqueComponent::component_index<T>()) };
+                return static_cast<T*>(addComponent(UniqueComponent::component_index<T>()));
             }
 
             template <typename T>
@@ -57,29 +57,25 @@ namespace Scene {
             }
 
             template <typename T>
-            EntityComponentPtr<T> getComponent()
+            T* getComponent()
             {
-                return static_cast<EntityComponentPtr<T>>(getComponent(UniqueComponent::component_index<T>()));
+                return static_cast<T*>(getComponent(UniqueComponent::component_index<T>()));
             }
 
             template <typename T>
-            EntityComponentPtr<const T> getComponent() const
+            const T* getComponent() const
             {
-                return static_cast<EntityComponentPtr<const T>>(getComponent(UniqueComponent::component_index<T>()));
+                return static_cast<const T*>(getComponent(UniqueComponent::component_index<T>()));
             }
 
-            EntityComponentPtr<EntityComponentBase> getComponent(uint32_t i);
-            EntityComponentPtr<const EntityComponentBase> getComponent(uint32_t i) const;
-            EntityComponentPtr<EntityComponentBase> getComponent(std::string_view name);
-            EntityComponentPtr<const EntityComponentBase> getComponent(std::string_view name) const;
+            EntityComponentBase *getComponent(uint32_t i);
+            const EntityComponentBase *getComponent(uint32_t i) const;
+            EntityComponentBase *getComponent(std::string_view name);
+            const EntityComponentBase *getComponent(std::string_view name) const;
 
-            struct MADGINE_SCENE_EXPORT Helper {
-                Entity *mEntity;
-                EntityComponentPtr<EntityComponentBase> operator()(const EntityComponentOwningHandle<EntityComponentBase> &p) const;
-            };
-            decltype(auto) components()
+            const mutable_set<EntityComponentHandle, std::less<>> &components()
             {
-                return mComponents | std::views::transform(Helper { this });
+                return mComponents;
             }
 
             template <typename T>
@@ -91,12 +87,11 @@ namespace Scene {
             bool hasComponent(size_t i);
             bool hasComponent(std::string_view name);
 
-            EntityComponentPtr<EntityComponentBase> addComponent(std::string_view name);
-            EntityComponentPtr<EntityComponentBase> addComponent(size_t i);
+            EntityComponentBase *addComponent(std::string_view name);
+            EntityComponentBase *addComponent(size_t i);
             void removeComponent(std::string_view name);
             void removeComponent(size_t i);
-            void clearComponents();
-            void relocateComponent(EntityComponentHandle<EntityComponentBase> newIndex);
+            void clearComponents();            
 
             template <typename Sender>
             void addBehavior(Sender &&sender)
@@ -104,7 +99,7 @@ namespace Scene {
                 mLifetime.attach(std::forward<Sender>(sender) | Log::log_result());                
             }
 
-            void handleEntityEvent(const typename std::set<EntityComponentOwningHandle<EntityComponentBase>>::iterator &it, int op);
+            void handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op);
 
             SceneManager &sceneMgr() const;
 
@@ -120,10 +115,10 @@ namespace Scene {
             std::string mName;
 
         private:
-            Serialize::StreamResult readComponent(Serialize::FormattedSerializeStream &in, EntityComponentOwningHandle<EntityComponentBase> &handle);
-            const char *writeComponent(Serialize::FormattedSerializeStream &out, const EntityComponentOwningHandle<EntityComponentBase> &comp) const;
+            Serialize::StreamResult readComponent(Serialize::FormattedSerializeStream &in, uint32_t &type, EntityComponentBase*&ptr);
+            const char *writeComponent(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &p) const;
 
-            SERIALIZABLE_CONTAINER(mComponents, mutable_set<EntityComponentOwningHandle<EntityComponentBase>, std::less<>>, ParentFunctor<&Entity::handleEntityEvent>);
+            SERIALIZABLE_CONTAINER(mComponents, mutable_set<EntityComponentHandle, std::less<>>, ParentFunctor<&Entity::handleEntityEvent>);
 
             SceneContainer &mContainer;
 

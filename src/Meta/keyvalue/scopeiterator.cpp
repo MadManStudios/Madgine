@@ -10,13 +10,13 @@
 
 namespace Engine {
 
-ScopeIterator::ScopeIterator(ScopePtr scope, const std::pair<const char *, Accessor> *pointer)
+ScopeIterator::ScopeIterator(ScopePtr scope, const Accessor *pointer)
     : mScope(scope)
     , mCurrentTable(scope.mType)
     , mPointer(scope ? pointer : nullptr)
 {
     if (mPointer) {
-        checkDerived();
+        check();
     }
 }
 
@@ -26,9 +26,9 @@ bool ScopeIterator::operator==(const ScopeIterator &other) const
     if (mPointer == other.mPointer)
         return true;
     if (!mPointer)
-        return !other.mPointer->first;
+        return !other.mPointer->mName;
     else
-        return !mPointer->first;
+        return !mPointer->mName;
 }
 
 bool ScopeIterator::operator!=(const ScopeIterator &other) const
@@ -37,9 +37,9 @@ bool ScopeIterator::operator!=(const ScopeIterator &other) const
     if (mPointer == other.mPointer)
         return false;
     if (!mPointer)
-        return other.mPointer->first;
+        return other.mPointer->mName;
     else
-        return mPointer->first;
+        return mPointer->mName;
 }
 
 ScopeField ScopeIterator::operator*() const
@@ -56,14 +56,26 @@ void ScopeIterator::operator++()
 {
     assert(mPointer);
     ++mPointer;
-    checkDerived();
+    check();
 }
 
-void ScopeIterator::checkDerived()
+void ScopeIterator::check()
 {
-    while (!mPointer->first && mCurrentTable->mBase) {
-        mCurrentTable = *mCurrentTable->mBase;
-        mPointer = mCurrentTable->mMembers;
+    bool check = true;
+    while (check) {
+        check = false;
+        if (!mPointer->mName) {
+            if (mCurrentTable->mBase) {
+                mCurrentTable = *mCurrentTable->mBase;
+                mPointer = mCurrentTable->mMembers;
+                check = true;
+            }
+        } else {
+            if (mPointer->mCheck && !mPointer->mCheck(mPointer, mScope)) {
+                ++mPointer;
+                check = true;
+            }
+        }
     }
 }
 

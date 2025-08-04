@@ -34,6 +34,11 @@ namespace UniqueComponent {
             return PLUGIN_LOCAL(sInstance)().mInfo.mComponents.size();
         }
 
+        static void addInitializer(Closure<void()> initializer)
+        {
+            PLUGIN_LOCAL(sInstance)().mInfo.mInitializers.push_back(std::move(initializer));
+        }
+
     private:
         typename Registry::CollectorInfo mInfo;
 
@@ -47,7 +52,8 @@ namespace UniqueComponent {
 
             ~ComponentRegistrator()
             {
-                PLUGIN_LOCAL(sInstance)().mInfo.unregisterComponent(mIndex);
+                PLUGIN_LOCAL(sInstance)
+                ().mInfo.unregisterComponent(mIndex);
             }
         };
     };

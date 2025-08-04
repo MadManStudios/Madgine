@@ -28,11 +28,12 @@ namespace Render {
 
     Threading::ImmediateTask<RenderFuture> LitSceneRenderData::render(RenderContext *context)
     {
+
+        for (auto &[key, transforms] : mInstances)
+            transforms.clear();
+
         co_await mScene.scene()->mutex().locked(AccessMode::READ, [this, context]() {
             //TODO Culling
-
-            for (auto &[key, transforms] : mInstances)
-                transforms.clear();
 
             for (const auto &mesh : mScene.scene()->entityComponentList<Scene::Entity::Mesh>().data()) {
                 if (!mesh.isVisible())

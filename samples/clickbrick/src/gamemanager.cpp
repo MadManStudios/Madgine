@@ -130,7 +130,7 @@ void GameManager::spawnBrick()
 {
     Engine::Scene::Entity::EntityPtr brick = mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity();
 
-    Engine::Scene::Entity::Transform *t = brick->addComponent<Engine::Scene::Entity::Transform>().get();
+    Engine::Scene::Entity::Transform *t = brick->addComponent<Engine::Scene::Entity::Transform>();
     t->mScale = { 0.01f, 0.01f, 0.01f };
 
     Engine::Vector3 dir = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
@@ -141,7 +141,7 @@ void GameManager::spawnBrick()
     Engine::Quaternion q { static_cast<float>(rand()), orientation };
     t->mOrientation = q;
 
-    brick->addComponent<Engine::Scene::Entity::Mesh>().get()->setName("Brick");
+    brick->addComponent<Engine::Scene::Entity::Mesh>()->setName("Brick");
     brick->getComponent<Engine::Scene::Entity::Mesh>()->handle().info()->setPersistent(true);
 
     float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;

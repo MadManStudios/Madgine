@@ -36,8 +36,6 @@ namespace Scene {
             bool mIsVisible = true;
         };
 
-        using MeshPtr = EntityComponentPtr<Mesh>;
-
     }
 }
 }

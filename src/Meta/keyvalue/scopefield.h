@@ -6,7 +6,7 @@ namespace Engine {
 
 struct META_EXPORT ScopeField {
 
-    ScopeField(const ScopePtr &ptr, const std::pair<const char *, Accessor> *pointer);
+    ScopeField(const ScopePtr &ptr, const Accessor *pointer);
 
     void value(ValueType &retVal) const;
 
@@ -19,7 +19,7 @@ struct META_EXPORT ScopeField {
 
 private:
     ScopePtr mScope;
-    const std::pair<const char *, Accessor> *mPointer;
+    const Accessor *mPointer;
 };
 
 }

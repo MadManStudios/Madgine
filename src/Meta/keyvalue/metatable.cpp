@@ -10,8 +10,8 @@ namespace Engine {
 
 ScopeIterator MetaTable::find(std::string_view key, ScopePtr scope) const
 {
-    for (const std::pair<const char *, Accessor> *p = mMembers; p->first; ++p) {
-        if (key == p->first) {
+    for (const Accessor *p = mMembers; p->mName; ++p) {
+        if (key == p->mName) {
             return { scope, p };
         }
     }

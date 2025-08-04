@@ -31,12 +31,16 @@ METATABLE_BEGIN(Engine::Scene::SceneManager)
 // TODO
 // SYNCABLEUNIT_MEMBERS()
 MEMBER(mSceneComponents)
-// MEMBER(mContainers)
+MEMBER(mContainers)
 METATABLE_END(Engine::Scene::SceneManager)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::SceneManager)
 FIELD(mSceneComponents, Serialize::ControlledConfig<KeyCompare<std::unique_ptr<Engine::Scene::SceneComponentBase>>>)
 SERIALIZETABLE_END(Engine::Scene::SceneManager)
+
+METATABLE_BEGIN(Engine::Scene::SceneManager::ContainerData)
+PROXY(mContainer)
+METATABLE_END(Engine::Scene::SceneManager::ContainerData)
 
 namespace Engine {
 namespace Scene {
@@ -111,7 +115,7 @@ namespace Scene {
         return mMutex;
     }
 
-    void SceneManager::updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::SkeletonPtr)> callback)
+    void SceneManager::updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::Skeleton*)> callback)
     {
         std::chrono::microseconds frameTimeSinceLastFrame = mFrameClock.tick(std::chrono::steady_clock::now());
         std::chrono::microseconds sceneTimeSinceLastFrame = mAnimationClock.tick(mClock.now());
@@ -128,7 +132,7 @@ namespace Scene {
 
                 Entity::AnimationState *animation = *it;
 
-                Entity::SkeletonPtr skeleton = animation->entity()->getComponent<Scene::Entity::Skeleton>();
+                Entity::Skeleton* skeleton = animation->entity()->getComponent<Scene::Entity::Skeleton>();
 
                 const Render::SkeletonDescriptor *data = skeleton->data();
                 if (data) {

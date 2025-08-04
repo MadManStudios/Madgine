@@ -17,8 +17,6 @@ namespace Scene {
             Render::GPUMeshData::Material mMaterial;
         };
 
-        using MaterialPtr = EntityComponentPtr<Material>;
-
     }
 }
 }

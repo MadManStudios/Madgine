@@ -9,12 +9,7 @@ namespace Scene {
     namespace Entity {
         struct EntityPtr;
         template <typename T>
-        struct EntityComponentPtr;
-        template <typename T>
         struct EntityComponentList;
-        template <typename T>
-        struct EntityComponentOwningHandle;
-        template <typename T>
         struct EntityComponentHandle;
 
         struct Entity;
@@ -23,7 +18,6 @@ namespace Scene {
         struct Transform;
         struct Mesh;
         struct Skeleton;
-        using SkeletonPtr = EntityComponentPtr<Skeleton>;
 
         struct AnimationState;        
     }
