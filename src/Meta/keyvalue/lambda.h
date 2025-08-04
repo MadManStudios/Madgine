@@ -84,15 +84,15 @@ private:
         sArgs.data()
     };
 
-    static void sGetter(ValueType &retVal, const ScopePtr &scope)
+    static void sGetter(const Accessor *, ValueType &retVal, const ScopePtr &scope)
     {
         assert(scope.mType == &sMetaTable);
         to_ValueType(retVal, BoundApiFunction { &sFunctionTable, scope });
     }
 
-    static const constexpr std::pair<const char *, Accessor> sMembers[2] {
-        { "__call", { &sGetter, nullptr, toValueTypeDesc<BoundApiFunction>() } },
-        { nullptr, { nullptr, nullptr, ExtendedValueTypeDesc { ExtendedValueTypeEnum::GenericType } } }
+    static const constexpr Accessor sMembers[2] {
+        { "__call", nullptr, &sGetter, nullptr, toValueTypeDesc<BoundApiFunction>() },
+        {  }
     };
 
     static const constexpr MetaTable sMetaTable {

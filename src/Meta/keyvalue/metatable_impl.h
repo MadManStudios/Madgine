@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Generic/fixed_string.h"
+#include "Generic/guard.h"
 #include "Generic/linestruct.h"
 #include "accessor.h"
 #include "boundapifunction.h"
+#include "dynamicaccessorlist.h"
 #include "functiontable_impl.h"
 #include "metatable.h"
 #include "valuetype_forward.h"
@@ -22,22 +24,22 @@ template <size_t... Ids>
 using MetaTableCtorLineStruct = LineStruct<MetaTableCtorTag, Ids...>;
 
 template <typename Scope, auto Getter, auto Setter>
-constexpr Accessor property()
+constexpr Accessor property(const char *name)
 {
     using getter_traits = CallableTraits<decltype(Getter)>;
     using GetterScope = typename getter_traits::class_type;
     using T = typename getter_traits::return_type;
 
-    void (*setter)(const ScopePtr &, const ValueType &) = nullptr;
+    void (*setter)(const Accessor *, const ScopePtr &, const ValueType &) = nullptr;
 
     if constexpr (Setter != nullptr) {
         using setter_traits = CallableTraits<decltype(Setter)>;
         using SetterScope = typename setter_traits::class_type;
 
-        //TODO remove const in tuple types
-        //static_assert(std::is_same_v<typename setter_traits::argument_types, std::tuple<T>>);
+        // TODO remove const in tuple types
+        // static_assert(std::is_same_v<typename setter_traits::argument_types, std::tuple<T>>);
 
-        setter = [](const ScopePtr &scope, const ValueType &v) {
+        setter = [](const Accessor *, const ScopePtr &scope, const ValueType &v) {
             if constexpr (std::same_as<SetterScope, void>) {
                 using SetterScope = std::remove_pointer_t<typename setter_traits::argument_types::template select<0>>;
                 if constexpr (std::is_convertible_v<Scope &, SetterScope &>) {
@@ -53,7 +55,9 @@ constexpr Accessor property()
     }
 
     return {
-        [](ValueType &retVal, const ScopePtr &scope) {
+        name,
+        nullptr,
+        [](const Accessor *, ValueType &retVal, const ScopePtr &scope) {
             T value = [=]() -> T {
                 if constexpr (std::same_as<GetterScope, void>) {
                     using GetterScope = std::remove_pointer_t<typename getter_traits::argument_types::template select<0>>;
@@ -82,16 +86,16 @@ void setField(Scope *s, const T &t)
 }
 
 template <typename Scope, auto P>
-constexpr Accessor member()
+constexpr Accessor member(const char *name)
 {
     using traits = CallableTraits<decltype(P)>;
     using DerivedScope = typename traits::class_type;
     using T = std::remove_reference_t<typename traits::return_type>;
 
     if constexpr (std::is_const_v<DerivedScope> || !std::is_assignable_v<T &, const T &> || (std::ranges::range<T> && !String<T>)) {
-        return property<Scope, P, nullptr>();
+        return property<Scope, P, nullptr>(name);
     } else {
-        return property<Scope, P, &setField<P, DerivedScope, T>>();
+        return property<Scope, P, &setField<P, DerivedScope, T>>(name);
     }
 }
 
@@ -129,38 +133,67 @@ struct ctorHelper {
 #define METATABLE_BEGIN_EX(Idx, T) \
     METATABLE_BEGIN_BASE_EX(Idx, T, void)
 
-#define METATABLE_BEGIN_BASE_EX(Idx, T, Base)                                \
-    namespace Engine {                                                       \
-        START_STRUCT(MetaTableTag, Idx)                                      \
-        {                                                                    \
-            using BaseT = Base;                                              \
-            using Ty = T;                                                    \
-            static constexpr const bool base = true;                         \
-            constexpr const std::pair<const char *, Accessor> *data() const; \
-            static constexpr const fixed_string name = #T;                   \
-        };                                                                   \
-        START_STRUCT(MetaTableCtorTag, Idx)                                  \
-        {                                                                    \
-            using Ty = T;                                                    \
-            constexpr const Constructor *data() const;                       \
-            static constexpr const bool base = true;                         \
-        };                                                                   \
+#define METATABLE_BEGIN_BASE_EX(Idx, T, Base)              \
+    namespace Engine {                                     \
+        START_STRUCT(MetaTableTag, Idx)                    \
+        {                                                  \
+            using BaseT = Base;                            \
+            using Ty = T;                                  \
+            static constexpr const bool base = true;       \
+            constexpr const Accessor *data() const;        \
+            static constexpr const fixed_string name = #T; \
+        };                                                 \
+        START_STRUCT(MetaTableCtorTag, Idx)                \
+        {                                                  \
+            using Ty = T;                                  \
+            constexpr const Constructor *data() const;     \
+            static constexpr const bool base = true;       \
+        };                                                 \
     }
 
-#define METATABLE_ENTRY_EX(Idx, Name, Acc)                                  \
-    namespace Engine {                                                      \
-        LINE_STRUCT(MetaTableTag, Idx)                                      \
-        {                                                                   \
-            constexpr const std::pair<const char *, Accessor> *data() const \
-            {                                                               \
-                if constexpr (BASE_STRUCT(MetaTableTag, Idx)::base)         \
-                    return &mData;                                          \
-                else                                                        \
-                    return BASE_STRUCT(MetaTableTag, Idx)::data();          \
-            }                                                               \
-            static constexpr const bool base = false;                       \
-            std::pair<const char *, Accessor> mData = { Name, Acc };        \
-        };                                                                  \
+#define METATABLE_ENTRY_EX(Idx, Acc)                                \
+    namespace Engine {                                              \
+        LINE_STRUCT(MetaTableTag, Idx)                              \
+        {                                                           \
+            constexpr const Accessor *data() const                  \
+            {                                                       \
+                if constexpr (BASE_STRUCT(MetaTableTag, Idx)::base) \
+                    return &mData;                                  \
+                else                                                \
+                    return BASE_STRUCT(MetaTableTag, Idx)::data();  \
+            }                                                       \
+            static constexpr const bool base = false;               \
+            Accessor mData = Acc;                                   \
+        };                                                          \
+    }
+
+#define DYNAMIC_ENTRY_EX(Idx, Builder, Init)                        \
+    namespace Engine {                                              \
+        LINE_STRUCT(MetaTableTag, Idx)                              \
+        {                                                           \
+            void init() const                                       \
+            {                                                       \
+                mData.init();                                       \
+            }                                                       \
+                                                                    \
+            constexpr const Accessor *data() const                  \
+            {                                                       \
+                if constexpr (BASE_STRUCT(MetaTableTag, Idx)::base) \
+                    return mData.data();                            \
+                else                                                \
+                    return BASE_STRUCT(MetaTableTag, Idx)::data();  \
+            }                                                       \
+            static constexpr const bool base = false;               \
+            mutable DynamicAccessorList<Builder, Init> mData;       \
+        };                                                          \
+    }
+
+#define DYNAMIC_INITIALIZATION(T)     \
+    namespace Meta_##T                \
+    {                                 \
+        static Engine::Guard sInit {  \
+            []() { sMembers.init(); } \
+        };                            \
     }
 
 #define CONSTRUCTOR_EX(Idx, ...)                                        \
@@ -184,9 +217,21 @@ struct ctorHelper {
 #define METATABLE_END(T) \
     METATABLE_END_EX(, T)
 
-#define METATABLE_END_EX(Idx, T)                                                                                                                                                                                                                    \
-    METATABLE_ENTRY_EX(Idx, nullptr, SINGLE_ARG(Accessor { nullptr, nullptr, ExtendedValueTypeDesc { ExtendedValueTypeEnum::GenericType } }))                                                                                                       \
-    CONSTRUCTOR_EX(Idx, void)                                                                                                                                                                                                                       \
+#define METATABLE_DYNAMIC_END(Builder, Init, T) \
+    METATABLE_DYNAMIC_END_EX(, Builder, Init, T)
+
+#define METATABLE_END_EX(Idx, T)         \
+    METATABLE_ENTRY_EX(Idx, Accessor {}) \
+    CONSTRUCTOR_EX(Idx, void)            \
+    METATABLE_INSTANTIATION(Idx, T)
+
+#define METATABLE_DYNAMIC_END_EX(Idx, Builder, Init, T) \
+    DYNAMIC_ENTRY_EX(Idx, Builder, Init)                \
+    CONSTRUCTOR_EX(Idx, void)                           \
+    METATABLE_INSTANTIATION(Idx, T)                     \
+    DYNAMIC_INITIALIZATION(T)
+
+#define METATABLE_INSTANTIATION(Idx, T)                                                                                                                                                                                                             \
     namespace Meta_##T                                                                                                                                                                                                                              \
     {                                                                                                                                                                                                                                               \
         static constexpr GET_STRUCT(::Engine::MetaTableTag, Idx) sMembers = {};                                                                                                                                                                     \
@@ -199,7 +244,7 @@ struct ctorHelper {
     }
 
 #define NAMED_MEMBER_EX(Idx, Name, M) \
-    METATABLE_ENTRY_EX(Idx, STRINGIFY(Name), SINGLE_ARG(::Engine::member<Ty, &Ty::M>()))
+    METATABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::member<Ty, &Ty::M>(STRINGIFY(Name))))
 
 #define NAMED_MEMBER(Name, M) \
     NAMED_MEMBER_EX(, Name, M)
@@ -211,20 +256,20 @@ struct ctorHelper {
     MEMBER_EX(, M)
 
 #define READONLY_PROPERTY_EX(Idx, Name, Getter) \
-    METATABLE_ENTRY_EX(Idx, #Name, SINGLE_ARG(::Engine::property<Ty, &Ty::Getter, nullptr>()))
+    METATABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::property<Ty, &Ty::Getter, nullptr>(#Name)))
 
 #define READONLY_PROPERTY(Name, Getter) \
     READONLY_PROPERTY_EX(, Name, Getter)
 
 #define PROPERTY_EX(Idx, Name, Getter, Setter) \
-    METATABLE_ENTRY_EX(Idx, #Name, SINGLE_ARG(::Engine::property<Ty, &Ty::Getter, &Ty::Setter>()))
+    METATABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::property<Ty, &Ty::Getter, &Ty::Setter>(#Name)))
 
 #define PROPERTY(Name, Getter, Setter) \
     PROPERTY_EX(, Name, Getter, Setter)
 
 #define NAMED_FUNCTION_EX(Idx, Name, F, ...)                                                                                                                                                                                              \
     FUNCTIONTABLE_EX(BASE_STRUCT(::Engine::MetaTableTag, Idx)::name + "::" STRINGIFY(Name), ::Engine::MetaMemberFunctionTag<BASE_STRUCT(::Engine::MetaTableTag, Idx)::Ty>, BASE_STRUCT(::Engine::MetaTableTag, Idx)::Ty::F, #__VA_ARGS__) \
-    METATABLE_ENTRY_EX(Idx, STRINGIFY(Name), SINGLE_ARG(::Engine::property<Ty, &::Engine::method<&Ty::F>, nullptr>()))
+    METATABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::property<Ty, &::Engine::method<&Ty::F>, nullptr>(STRINGIFY(Name))))
 
 #define NAMED_FUNCTION(Name, F, ...) \
     NAMED_FUNCTION_EX(, Name, F, __VA_ARGS__)

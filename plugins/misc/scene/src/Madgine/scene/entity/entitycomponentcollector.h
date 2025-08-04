@@ -2,6 +2,8 @@
 
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
+#include "Meta/keyvalue/helper/annotations.h"
+
 namespace Engine {
 namespace Scene {
     namespace Entity {
@@ -24,4 +26,4 @@ namespace Scene {
 }
 }
 
-DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent, EntityComponentBase, Engine::UniqueComponent::Constructor<Engine::Scene::Entity::Entity *>, Engine::Scene::Entity::EntityComponentListAnnotation)
+DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent, EntityComponentBase, Engine::UniqueComponent::Constructor<Engine::Scene::Entity::Entity *>, Engine::Scene::Entity::EntityComponentListAnnotation, Engine::TypeAnnotation)

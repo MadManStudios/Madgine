@@ -25,7 +25,7 @@ struct META_EXPORT MetaTable {
         }
     }
 
-    constexpr MetaTable(const MetaTable **self, const char *name, const std::pair<const char *, Accessor> *members, const Constructor *constructors = nullptr, MoveAssign *moveAssign = nullptr)
+    constexpr MetaTable(const MetaTable **self, const char *name, const Accessor *members, const Constructor *constructors = nullptr, MoveAssign *moveAssign = nullptr)
         : mSelf(self)
         , mTypeName(name)
         , mBase(nullptr)
@@ -37,7 +37,7 @@ struct META_EXPORT MetaTable {
     }
 
     template <typename T, typename Base>
-    constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<Base>, const std::pair<const char *, Accessor> *members, const Constructor *constructors)
+    constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<Base>, const Accessor *members, const Constructor *constructors)
         : mSelf(&table<T>)
         , mTypeName(name)
         , mBase(&table<Base>)
@@ -49,7 +49,7 @@ struct META_EXPORT MetaTable {
     }
 
     template <typename T>
-    constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<void>, const std::pair<const char *, Accessor> *members, const Constructor *constructors)
+    constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<void>, const Accessor *members, const Constructor *constructors)
         : mSelf(&table<T>)
         , mTypeName(name)
         , mBase(nullptr)
@@ -79,7 +79,7 @@ struct META_EXPORT MetaTable {
     const char *mTypeName;
     const MetaTable **mBase;
     size_t (*mBaseOffset)();
-    const std::pair<const char *, Accessor> *mMembers;
+    const Accessor *mMembers;
     const Constructor *mConstructors;
     MoveAssign *mMoveAssign;
 

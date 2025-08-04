@@ -348,11 +348,11 @@ namespace Tools {
                         const MetaTable *type = sTypeList();
                         while (type) {
                             if (ImGui::BeginMenu(type->mTypeName)) {
-                                for (const std::pair<const char *, Accessor> *accessor = type->mMembers; accessor->first; ++accessor) {
-                                    if (ImGui::MenuItem(accessor->first)) {
+                                for (const Accessor *accessor = type->mMembers; accessor->mName; ++accessor) {
+                                    if (ImGui::MenuItem(accessor->mName)) {
                                         NodeGraph::NodeBase *node;
-                                        if (accessor->second.mType.mType == ValueTypeEnum::ApiFunctionValue || accessor->second.mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
-                                            node = mGraph.addNode(std::make_unique<NodeGraph::FunctionNode>(mGraph, *accessor->second.mType.mSecondary.mFunctionTable));
+                                        if (accessor->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
+                                            node = mGraph.addNode(std::make_unique<NodeGraph::FunctionNode>(mGraph, *accessor->mType.mSecondary.mFunctionTable));
                                         } else {
                                             node = mGraph.addNode(std::make_unique<NodeGraph::AccessorNode>(mGraph, type->mSelf, accessor));
                                         }

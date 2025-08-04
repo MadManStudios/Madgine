@@ -8,7 +8,7 @@ namespace NodeGraph {
 
     struct MADGINE_NODEGRAPH_EXPORT AccessorNode : Serialize::VirtualData<AccessorNode, VirtualScope<AccessorNode, NodeBase>> {
 
-        AccessorNode(NodeGraph &graph, const MetaTable **type, const std::pair<const char *, Accessor> *accessor);
+        AccessorNode(NodeGraph &graph, const MetaTable **type, const Accessor *accessor);
         AccessorNode(const AccessorNode &other, NodeGraph &graph);
 
         std::string_view name() const override;
@@ -28,7 +28,7 @@ namespace NodeGraph {
 
     private:
         const MetaTable **mType = nullptr;
-        const std::pair<const char *, Accessor> *mAccessor = nullptr;        
+        const Accessor *mAccessor = nullptr;        
 
         std::string mFullClassName;
     };

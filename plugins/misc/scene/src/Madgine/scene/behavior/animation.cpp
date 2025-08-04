@@ -11,8 +11,6 @@
 
 #include "../entity/entity.h"
 
-#include "../entity/entitycomponentptr.h"
-
 #include "transform.h"
 
 namespace Engine {

@@ -36,8 +36,6 @@ namespace Scene {
             bool mDirty = false;
         };
 
-        using SkeletonPtr = EntityComponentPtr<Skeleton>;
-
     }
 }
 }

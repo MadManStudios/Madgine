@@ -28,11 +28,11 @@ namespace Render {
 
     Threading::ImmediateTask<RenderFuture> ShadowSceneRenderData::render(RenderContext *context)
     {
+        for (auto &[key, transforms] : mInstances)
+            transforms.clear();
+
         co_await mScene.scene()->mutex().locked(AccessMode::READ, [this]() {
             //TODO Culling
-
-            for (auto &[key, transforms] : mInstances)
-                transforms.clear();
 
             for (const auto &mesh : mScene.scene()->entityComponentList<Scene::Entity::Mesh>().data()) {
                 if (!mesh.isVisible())

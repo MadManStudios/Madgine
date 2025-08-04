@@ -65,23 +65,23 @@ struct TypedParameterTupleInstance : ParameterTupleInstance<Ty...> {
     static const MetaTable *sMetaTablePtr;
 
     template <size_t I>
-    static void sGetter(ValueType &retVal, const ScopePtr &scope)
+    static void sGetter(const Accessor *, ValueType &retVal, const ScopePtr &scope)
     {
         assert(scope.mType == &sMetaTable);
         to_ValueType(retVal, std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple));
     }
 
     template <size_t I, typename T>
-    static void sSetter(const ScopePtr &scope, const ValueType &val)
+    static void sSetter(const Accessor *, const ScopePtr &scope, const ValueType &val)
     {
         assert(scope.mType == &sMetaTable);
         std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple) = ValueType_as<T>(val);
     }
 
-    static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<std::pair<const char *, Accessor>, sizeof...(Ty) + 1>
+    static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Accessor, sizeof...(Ty) + 1>
     {
-        return { { { Names::template get<Is>.c_str(), { &sGetter<Is>, &sSetter<Is, Ty>, toValueTypeDesc<Ty>() } }...,
-            { nullptr, { nullptr, nullptr, ExtendedValueTypeDesc { ExtendedValueTypeEnum::GenericType } } } } };
+        return { { { Names::template get<Is>.c_str(), nullptr, &sGetter<Is>, &sSetter<Is, Ty>, toValueTypeDesc<Ty>() }...,
+            { } } };
     }
     (index_pack_for<Ty...> {});
 

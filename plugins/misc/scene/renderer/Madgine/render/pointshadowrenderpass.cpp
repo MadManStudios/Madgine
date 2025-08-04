@@ -60,8 +60,9 @@ namespace Render {
             return;
 
         //TODO Culling
-
-        Scene::Entity::Entity *entity = lights[mIndex].entity();
+        auto it = lights.begin();
+        std::advance(it, mIndex);
+        Scene::Entity::Entity *entity = it->entity();
         Scene::Entity::Transform *transform = entity->getComponent<Scene::Entity::Transform>();
         if (!transform)
             return;

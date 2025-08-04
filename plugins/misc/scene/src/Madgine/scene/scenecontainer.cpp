@@ -14,7 +14,7 @@
 METATABLE_BEGIN(Engine::Scene::SceneContainer)
 // TODO
 // SYNCABLEUNIT_MEMBERS()
-// READONLY_PROPERTY(entities, entities)
+READONLY_PROPERTY(entities, entities)
 METATABLE_END(Engine::Scene::SceneContainer)
 
 using Helper = Engine::Serialize::NoParent<Engine::Scene::SceneContainer>;

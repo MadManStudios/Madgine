@@ -13,8 +13,6 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        DERIVE_FUNCTION(relocateComponent, const EntityComponentHandle<EntityComponentBase> &, Entity *)
-
         template <typename T>
         struct EntityComponentList : EntityComponentListBase {
 
@@ -30,29 +28,19 @@ namespace Scene {
                 return &mData;
             }
 
-            T *get(const EntityComponentHandle<EntityComponentBase> &index) override final
+            ScopePtr getTyped(EntityComponentBase *comp) override final
             {
-                return &mData.at(index.mIndex);
+                return static_cast<T*>(comp);
             }
 
-            const T *get(const EntityComponentHandle<EntityComponentBase> &index) const override final
+            Serialize::SerializableDataPtr getSerialized(EntityComponentBase *comp) override final
             {
-                return &mData.at(index.mIndex);
+                return static_cast<T*>(comp);
             }
 
-            ScopePtr getTyped(const EntityComponentHandle<EntityComponentBase> &index) override final
+            Serialize::SerializableDataConstPtr getSerialized(const EntityComponentBase *comp) const override final
             {
-                return &mData.at(index.mIndex);
-            }
-
-            Serialize::SerializableDataPtr getSerialized(const EntityComponentHandle<EntityComponentBase> &index) override final
-            {
-                return &mData.at(index.mIndex);
-            }
-
-            Serialize::SerializableDataConstPtr getSerialized(const EntityComponentHandle<EntityComponentBase> &index) const override final
-            {
-                return &mData.at(index.mIndex);
+                return static_cast<const T*>(comp);
             }
 
             const Serialize::SerializeTable *serializeTable() const override final
@@ -60,38 +48,27 @@ namespace Scene {
                 return &::serializeTable<T>();
             }
 
-            void init(const EntityComponentHandle<EntityComponentBase> &index) override final
+            void init(EntityComponentBase *comp) override final
             {
                 if constexpr (requires { &T::init; })
-                    mData.at(index.mIndex).init();
+                    static_cast<T*>(comp)->init();
             }
 
-            void finalize(const EntityComponentHandle<EntityComponentBase> &index) override final
+            void finalize(EntityComponentBase *comp) override final
             {
                 if constexpr (requires { &T::finalize; })
-                    mData.at(index.mIndex).finalize();
+                    static_cast<T *>(comp)->finalize();
             }
 
-            T *get(const EntityComponentHandle<T> &index)
-            {
-                return &mData.at(index.mIndex);
-            }
-
-            const T *get(const EntityComponentHandle<T> &index) const
-            {
-                return &mData.at(index.mIndex);
-            }
-
-            EntityComponentOwningHandle<EntityComponentBase> emplace(Entity *entity) override final
+            EntityComponentBase *emplace(Entity *entity) override final
             {   
                 typename Vector::iterator it = Engine::emplace(mData, mData.end(), entity);
-                uint32_t index = container_traits<Vector>::toHandle(mData, it);
-                return { { index, static_cast<uint32_t>(UniqueComponent::component_index<T>()) } };
+                return &*it;
             }
 
-            void erase(const EntityComponentHandle<EntityComponentBase> &index) override final
+            void erase(EntityComponentBase *comp) override final
             {
-                auto it = container_traits<Vector>::toIterator(mData, index.mIndex);
+                auto it = std::ranges::find_if(mData, [comp](auto &element) { return &element == comp; });                
                 mData.erase(it);
             }
 
@@ -110,14 +87,14 @@ namespace Scene {
                 return mData.size();
             }
 
-            void setSynced(const EntityComponentHandle<EntityComponentBase> &index, bool synced) override final
+            void setSynced(EntityComponentBase *comp, bool synced) override final
             {
-                Serialize::set_synced(mData.at(index.mIndex), synced);
+                Serialize::set_synced(*static_cast<T *>(comp), synced);
             }
 
-            void setActive(const EntityComponentHandle<EntityComponentBase> &index, bool active, bool existenceChanged) override final
+            void setActive(EntityComponentBase *comp, bool active, bool existenceChanged) override final
             {
-                Serialize::setActive(mData.at(index.mIndex), active, existenceChanged);
+                Serialize::setActive(*static_cast<T *>(comp), active, existenceChanged);
             }
 
             auto begin()

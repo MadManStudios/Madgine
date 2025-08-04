@@ -19,7 +19,7 @@ extern "C" DLL_EXPORT const Engine::Plugins::BinaryInfo PLUGIN_LOCAL(binaryInfo)
 
     PROJECT_ROOT,
     BINARY_SOURCE_ROOT,
-    BINARY_DIR,
+    BINARY_BINARY_DIR,
     BINARY_FILENAME,
 
     TOOLS_NAME,

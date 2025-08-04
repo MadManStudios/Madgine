@@ -216,7 +216,7 @@ namespace Tools {
             auto buf = std::make_unique<std::stringbuf>(mToolReadBuffer.str());
             Serialize::FormattedSerializeStream in { Serialize::Formats::ini(), { std::move(buf) } };
 
-            Serialize::StreamResult result = Serialize::SerializableUnitPtr { mToolReadTool }.readState(in, nullptr, {}, true);            
+            Serialize::StreamResult result = Serialize::SerializableUnitPtr { mToolReadTool }.readState(in, nullptr, {}, true);
             if (result.mState != Serialize::StreamState::OK) {
                 LOG_ERROR(result);
             }
@@ -230,7 +230,7 @@ namespace Tools {
         DialogSettings &settings = co_await get_dialog_settings;
         settings.acceptText = "Open";
 
-        do {            
+        do {
             ImGui::DirectoryPicker(path, selected);
         } while (co_yield settings);
         co_return selected;
@@ -238,11 +238,10 @@ namespace Tools {
 
     Dialog<Filesystem::Path> ImRoot::filePicker(bool allowNewFile, Filesystem::Path path, Filesystem::Path selected)
     {
-        DialogSettings settings
-        {
-            .acceptText = allowNewFile ? "Save" : "Open",
-            .declineText = "Cancel"
-        };
+        DialogSettings &settings = co_await get_dialog_settings;
+        settings.acceptText = allowNewFile ? "Save" : "Open";
+        settings.declineText = "Cancel";
+
         bool implicitlyAccepted = false;
         do {
             ImGui::FilePicker(path, selected, &implicitlyAccepted);

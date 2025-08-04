@@ -6,7 +6,7 @@
 
 namespace Engine {
 
-ScopeField::ScopeField(const ScopePtr &ptr, const std::pair<const char *, Accessor> *pointer)
+ScopeField::ScopeField(const ScopePtr &ptr, const Accessor *pointer)
     : mScope(ptr)
     , mPointer(pointer)
 {
@@ -15,28 +15,28 @@ ScopeField::ScopeField(const ScopePtr &ptr, const std::pair<const char *, Access
 
 void ScopeField::value(ValueType &retVal) const
 {
-    mPointer->second.mGetter(retVal, mScope);
+    mPointer->mGetter(mPointer, retVal, mScope);
 }
 
 ScopeField &ScopeField::operator=(const ValueType &v)
 {
-    mPointer->second.mSetter(mScope, v);
+    mPointer->mSetter(mPointer, mScope, v);
     return *this;
 }
 
 const char *ScopeField::key() const
 {
-    return mPointer->first;
+    return mPointer->mName;
 }
 
 bool ScopeField::isEditable() const
 {
-    return mPointer->second.mSetter;
+    return mPointer->mSetter;
 }
 
 const ExtendedValueTypeDesc &ScopeField::type() const
 {
-    return mPointer->second.mType;
+    return mPointer->mType;
 }
 
 }

@@ -12,6 +12,8 @@
 
 #include "Generic/offsetptr.h"
 
+#include "Generic/container/freelistcontainer.h"
+
 namespace Engine {
 namespace Scene {
     namespace Entity {
@@ -24,7 +26,7 @@ namespace Scene {
         };
 
         struct MADGINE_SCENE_EXPORT EntityComponentBase {
-            using Container = CompactContainer<std::vector<Placeholder<0>>, EntityComponentRelocateFunctor>;
+            using Container = FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
 
             EntityComponentBase(Entity *entity);
 
@@ -35,7 +37,7 @@ namespace Scene {
         };
 
         struct MADGINE_SCENE_EXPORT SyncableEntityComponentBase : EntityComponentBase, Serialize::SerializableUnitBase {
-            using Container = CompactContainer<std::vector<Placeholder<0>>, EntityComponentRelocateFunctor>;
+            using Container = FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
 
             using EntityComponentBase::EntityComponentBase;
 

@@ -379,7 +379,7 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
         if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
             return { { ValueTypeEnum::KeyValueVirtualSequenceRangeValue }, toValueTypeDesc<std::ranges::range_value_t<T>>() };
         else
-            return { { ValueTypeEnum::KeyValueVirtualAssociativeRangeValue }, toValueTypeDesc<KeyType_t<std::ranges::range_value_t<T>>>(), toValueTypeDesc<ValueType_t<std::ranges::range_value_t<T>>>() };
+            return { { ValueTypeEnum::KeyValueVirtualAssociativeRangeValue }, toValueTypeDesc<KeyType_t<std::ranges::range_reference_t<T>>>(), toValueTypeDesc<ValueType_t<std::ranges::range_reference_t<T>>>() };
     } else if constexpr (InstanceOfA<T, TypedBoundApiFunction>) {
         return { { ValueTypeEnum::BoundApiFunctionValue }, is_instance_auto<T, TypedBoundApiFunction>::arguments::value };
     } else if constexpr (Pointer<T>) {

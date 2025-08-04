@@ -1,7 +1,5 @@
 #include "../../scenelib.h"
 
-#include "entitycomponentptr.h"
-
 #include "entity.h"
 
 #include "../scenemanager.h"
@@ -18,10 +16,46 @@
 
 #include "Generic/execution/algorithm.h"
 
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+namespace Engine {
+
+constexpr auto componentBuilder()
+{
+    std::array<Accessor, 32> accessors;
+    
+    return accessors;
+}
+
+void componentInit(std::array<Accessor, 32>& accessors) {
+#if ENABLE_PLUGINS
+    Scene::Entity::EntityComponentCollector::addInitializer([&]() {
+#endif
+        size_t i = 0;
+        for (const auto &[name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {
+            accessors[i] = { name.data(),
+                [](const Accessor* self, const ScopePtr& entity) {
+                    return scope_cast<Scene::Entity::Entity>(entity)->hasComponent(self->mName);
+                },
+                [](const Accessor *self, ValueType &ret, const ScopePtr &entity) { 
+                    uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
+                    to_ValueType(ret, ScopePtr { scope_cast<Scene::Entity::Entity>(entity)->getComponent(index), *Scene::Entity::EntityComponentRegistry::get(index).mType });
+                },
+                nullptr,
+                ExtendedValueTypeDesc {
+                    ExtendedValueTypeIndex { ValueTypeEnum::ScopeValue }, Scene::Entity::EntityComponentRegistry::get(index).mType } };
+            i++;
+        }
+#if ENABLE_PLUGINS
+    });
+#endif
+}
+
+}
+
 METATABLE_BEGIN(Engine::Scene::Entity::Entity)
 NAMED_MEMBER(Name, mName)
-READONLY_PROPERTY(Components, components)
-METATABLE_END(Engine::Scene::Entity::Entity)
+METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::Entity)
 
 using namespace Engine::Serialize;
 static constexpr Serializer sComponentSynchronizer {
@@ -40,10 +74,10 @@ static constexpr Serializer sComponentSynchronizer {
         if (it == Engine::Scene::Entity::EntityComponentRegistry::sComponentsByName().end())
             return STREAM_INTEGRITY_ERROR(in) << "Received message for component '" << name << "', which is not registered.";
         Engine::Scene::Entity::Entity *entity = unit_cast<Engine::Scene::Entity::Entity *>(unit);
-        Engine::Scene::Entity::EntityComponentPtr<Engine::Scene::Entity::EntityComponentBase> component = entity->getComponent(it->second);
+        Engine::Scene::Entity::EntityComponentBase *component = entity->getComponent(it->second);
         if (!component)
             return STREAM_INTEGRITY_ERROR(in) << "Received message for component '" << name << "', which is not a component of this Entity.";
-        SerializableDataPtr serializedComponent = component.getSerialized();
+        SerializableDataPtr serializedComponent = entity->sceneMgr().entityComponentList(it->second).getSerialized(component);
         return serializedComponent.mType->readAction(serializedComponent.unit(), in, request);
     },
     [](void *, FormattedMessageStream &, MessageId) -> StreamResult {
@@ -97,7 +131,7 @@ namespace Scene {
             , mComponents(std::move(other.mComponents))
             , mSceneManager(other.mSceneManager)
         {
-        }*/        
+        }*/
 
         Entity::Entity(SceneContainer &container, const std::string &name)
             : mName(name)
@@ -131,28 +165,28 @@ namespace Scene {
             return mName;
         }
 
-        EntityComponentPtr<EntityComponentBase> Entity::getComponent(uint32_t i)
+        EntityComponentBase *Entity::getComponent(uint32_t i)
         {
             auto it = mComponents.physical().find(i);
             if (it == mComponents.physical().end())
-                return {};
-            return { *it, &sceneMgr() };
+                return nullptr;
+            return it->mComponent;
         }
 
-        EntityComponentPtr<const EntityComponentBase> Entity::getComponent(uint32_t i) const
+        const EntityComponentBase *Entity::getComponent(uint32_t i) const
         {
             auto it = mComponents.physical().find(i);
             if (it == mComponents.physical().end())
-                return {};
-            return { { *it }, &sceneMgr() };
+                return nullptr;
+            return it->mComponent;
         }
 
-        EntityComponentPtr<EntityComponentBase> Entity::getComponent(std::string_view name)
+        EntityComponentBase *Entity::getComponent(std::string_view name)
         {
             return getComponent(EntityComponentRegistry::sComponentsByName().at(name));
         }
 
-        EntityComponentPtr<const EntityComponentBase> Entity::getComponent(std::string_view name) const
+        const EntityComponentBase *Entity::getComponent(std::string_view name) const
         {
             return getComponent(EntityComponentRegistry::sComponentsByName().at(name));
         }
@@ -167,19 +201,19 @@ namespace Scene {
             return hasComponent(EntityComponentRegistry::sComponentsByName().at(name));
         }
 
-        EntityComponentPtr<EntityComponentBase> Entity::addComponent(std::string_view name)
+        EntityComponentBase *Entity::addComponent(std::string_view name)
         {
             return addComponent(EntityComponentRegistry::sComponentsByName().at(name));
         }
 
-        EntityComponentPtr<EntityComponentBase> Entity::addComponent(size_t i)
+        EntityComponentBase *Entity::addComponent(size_t i)
         {
             auto it = mComponents.physical().find(i);
             if (it != mComponents.physical().end()) {
-                return { *it, &sceneMgr() };
+                return it->mComponent;
             } else {
-                auto it = mComponents.emplace(sceneMgr().entityComponentList(i).emplace(this));
-                return EntityComponentPtr<EntityComponentBase> { *it, &sceneMgr() };
+                auto it = mComponents.emplace(i, sceneMgr().entityComponentList(i).emplace(this));
+                return it->mComponent;
             }
         }
 
@@ -192,21 +226,15 @@ namespace Scene {
         {
             auto it = mComponents.find(i);
             assert(it != mComponents.physical().end());
-            EntityComponentHandle<EntityComponentBase> handle = *it;
+            EntityComponentBase *comp = it->mComponent;
             mComponents.erase(it);
-            sceneMgr().entityComponentList(i).erase(handle);            
+            sceneMgr().entityComponentList(i).erase(comp);
         }
 
         void Entity::clearComponents()
         {
             while (!mComponents.empty())
-                removeComponent(mComponents.begin()->mHandle.mType);
-        }
-
-        void Entity::relocateComponent(EntityComponentHandle<EntityComponentBase> newIndex)
-        {
-            auto it = mComponents.find(newIndex.mType);
-            it->mHandle.mIndex = newIndex.mIndex;
+                removeComponent(mComponents.begin()->mType);
         }
 
         void Entity::startLifetime()
@@ -227,24 +255,24 @@ namespace Scene {
             return mLifetime;
         }
 
-        Serialize::StreamResult Entity::readComponent(Serialize::FormattedSerializeStream &in, EntityComponentOwningHandle<EntityComponentBase> &handle)
+        Serialize::StreamResult Entity::readComponent(Serialize::FormattedSerializeStream &in, uint32_t &type, EntityComponentBase *&ptr)
         {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Component", 1));
             std::string name;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, name, "name"));
-            uint32_t i = EntityComponentRegistry::sComponentsByName().at(name);
-            handle = sceneMgr().entityComponentList(i).emplace(this);
+            type = EntityComponentRegistry::sComponentsByName().at(name);
+            ptr = sceneMgr().entityComponentList(type).emplace(this);
             return {};
         }
 
-        const char *Entity::writeComponent(Serialize::FormattedSerializeStream &out, const EntityComponentOwningHandle<EntityComponentBase> &comp) const
+        const char *Entity::writeComponent(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &p) const
         {
             out.beginExtendedWrite("Component", 1);
-            write(out, EntityComponentRegistry::sComponentName(comp.mHandle.mType), "name");
+            write(out, EntityComponentRegistry::sComponentName(p.mType), "name");
             return "Component";
         }
 
-        void Entity::handleEntityEvent(const typename std::set<EntityComponentOwningHandle<EntityComponentBase>>::iterator &it, int op)
+        void Entity::handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op)
         {
             switch (op) {
             case BEFORE | RESET:
@@ -252,10 +280,10 @@ namespace Scene {
             case AFTER | RESET:
                 throw "TODO";
             case AFTER | EMPLACE:
-                sceneMgr().entityComponentList(it->mHandle.mType).init(*it);
+                sceneMgr().entityComponentList(it->mType).init(it->mComponent);
                 break;
             case BEFORE | ERASE:
-                sceneMgr().entityComponentList(it->mHandle.mType).finalize(*it);
+                sceneMgr().entityComponentList(it->mType).finalize(it->mComponent);
                 break;
             }
         }
@@ -265,10 +293,10 @@ namespace Scene {
             return mContainer.sceneMgr();
         }
 
-        EntityComponentPtr<EntityComponentBase> Entity::Helper::operator()(const EntityComponentOwningHandle<EntityComponentBase> &p) const
+        /* EntityComponentPtr<EntityComponentBase> Entity::Helper::operator()(const EntityComponentOwningHandle<EntityComponentBase> &p) const
         {
             return { p, &mEntity->sceneMgr() };
-        }
+        }*/
 
         BehaviorList &Entity::behaviors()
         {

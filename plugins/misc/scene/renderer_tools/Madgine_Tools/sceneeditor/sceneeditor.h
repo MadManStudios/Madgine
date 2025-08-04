@@ -8,8 +8,6 @@
 
 #include "Madgine/scene/entity/entityptr.h"
 
-#include "Madgine/scene/entity/entitycomponentptr.h"
-
 #include "Madgine/parametertuple.h"
 
 #include "Madgine/behaviorhandle.h"
@@ -41,7 +39,7 @@ namespace Tools {
         }
 
         int hoveredAxis() const;
-        const Engine::Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> &hoveredTransform() const;
+        Scene::Entity::Transform * const&hoveredTransform() const;
 
         void deselect();
         void select(Render::Camera *camera);
@@ -105,7 +103,7 @@ namespace Tools {
         void eraseNode(EntityNode &node);
 
         int mHoveredAxis = -1;
-        Engine::Scene::Entity::EntityComponentPtr<Scene::Entity::Transform> mHoveredTransform;
+        Scene::Entity::Transform *mHoveredTransform;
 
         struct {
             Scene::Entity::EntityPtr mTargetEntity;

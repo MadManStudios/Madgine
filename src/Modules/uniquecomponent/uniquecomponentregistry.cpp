@@ -14,6 +14,12 @@ namespace UniqueComponent {
         return dummy;
     }
 
+    void CollectorInfoBase::init() {
+        for (Closure<void()>& initializer : mInitializers) {
+            initializer();
+        }
+    }
+
 }
 } // namespace Engine
 
