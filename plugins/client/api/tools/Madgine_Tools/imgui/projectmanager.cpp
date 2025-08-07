@@ -1,7 +1,5 @@
 #include "../clienttoolslib.h"
 
-#ifndef MADGINE_MAINWINDOW_LAYOUT
-
 #include "projectmanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
@@ -83,6 +81,8 @@ namespace Tools {
         return "ProjectManager";
     }
 
+
+#ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::renderLandingPage()
     {
         ImGuiDockNode *centralNode = ImGui::DockBuilderGetCentralNode(mRoot.dockSpaceId());
@@ -132,6 +132,7 @@ namespace Tools {
             ImGui::End();
         }
     }
+#endif
 
     void ProjectManager::renderTips()
     {
@@ -239,15 +240,17 @@ namespace Tools {
     {
         renderConfigurations();
         renderSettingsPage();
-        renderLandingPage();
         renderTips();
+#ifndef MADGINE_MAINWINDOW_LAYOUT
+        renderLandingPage();
+#endif
     }
 
     void ProjectManager::renderMenu()
     {
 
         if (ImGui::BeginMenu("Project")) {
-
+#ifndef MADGINE_MAINWINDOW_LAYOUT
             if (ImGui::MenuItem("New Project...")) {
                 createProjectDialog();
             }
@@ -288,6 +291,7 @@ namespace Tools {
                 ImGui::EndDisabled();
 
             ImGui::Separator();
+    #endif
 
             ImGui::MenuItem("Configurations", "", &mShowConfigurations);
             ImGui::MenuItem("Settings", "", &mShowSettings);
@@ -344,6 +348,7 @@ namespace Tools {
         mConfiguration.saveToDisk(config / "client.ini");
     }
 
+#ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::setProjectRoot(const Filesystem::Path &root)
     {
         if (mProjectRoot != root) {
@@ -376,14 +381,6 @@ namespace Tools {
             }
         }
         return result;
-    }
-
-    std::vector<Tip> ProjectManager::tips()
-    {
-        return {
-            { "Documentation",
-                "Need more information? Right click tools in Editor to access their documentation." }
-        };
     }
 
     void ProjectManager::setCurrentConfig(const Filesystem::Path &config)
@@ -462,6 +459,16 @@ namespace Tools {
             mWindow->loadLayout(mLayout);
         }
     }
+#endif
+
+    std::vector<Tip> ProjectManager::tips()
+    {
+        return {
+            { "Documentation",
+                "Need more information? Right click tools in Editor to access their documentation." }
+        };
+    }
+
 
 }
 }
