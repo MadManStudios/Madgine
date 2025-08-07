@@ -22,7 +22,9 @@ namespace Tools {
 
         virtual std::string_view key() const override;
 
+#ifndef MADGINE_MAINWINDOW_LAYOUT
         void renderLandingPage();
+#endif
         void renderTips();
         void renderSettingsPage();
         void renderConfigurations();
@@ -33,6 +35,14 @@ namespace Tools {
         void saveConfiguration(const Filesystem::Path &config) override;
         void renderSettings() override;
 
+        std::vector<Tip> tips() override;
+
+        bool mShowConfigurations = false;
+        bool mShowSettings = false;
+
+        bool mShowTipsOnStartup = true;
+
+#ifndef MADGINE_MAINWINDOW_LAYOUT
         const Filesystem::Path &projectRoot() const;
         const std::string &projectRootString() const;
         const std::string &layout() const;
@@ -45,18 +55,16 @@ namespace Tools {
 
         std::vector<std::string> projectLayouts() const;
 
-        std::vector<Tip> tips() override;
-
         void setCurrentConfig(const Filesystem::Path &config);
-
-        bool mShowConfigurations = false;
-        bool mShowSettings = false;
-
-        bool mShowTipsOnStartup = true;
 
     protected:
         void createProjectDialog();
         void openProjectDialog();
+
+    private:
+        Filesystem::Path mProjectRoot;
+        std::string mLayout;
+#endif
 
     private:
         std::set<Filesystem::Path> mConfigs;
@@ -75,8 +83,6 @@ namespace Tools {
 
     private:
         Window::MainWindow *mWindow = nullptr;
-        Filesystem::Path mProjectRoot;
-        std::string mLayout;
         Templates *mTemplates = nullptr;
     };
 
