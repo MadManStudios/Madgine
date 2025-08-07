@@ -127,6 +127,7 @@ jobs:
     - name: Install Dependencies
       if: matrix.platform == 'ubuntu-latest'
       run: |
+        sudo apt-get update
         sudo apt-get install libx11-dev mesa-utils libgl1-mesa-dev
 
     - name: Set up Clang
@@ -219,6 +220,7 @@ jobs:
     - name: Install Dependencies
       if: fromJSON(needs.configuration.outputs.platforms)[matrix.platform] == 'ubuntu-latest'
       run: |
+        sudo apt-get update
         sudo apt-get install libx11-dev mesa-utils libgl1-mesa-dev
 
     - name: Install Toolchain
