@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef MADGINE_MAINWINDOW_LAYOUT
+
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 
@@ -82,3 +84,5 @@ namespace Tools {
 
 }
 }
+
+#endif
