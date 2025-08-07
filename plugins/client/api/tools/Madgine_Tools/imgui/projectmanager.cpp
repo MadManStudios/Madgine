@@ -1,5 +1,7 @@
 #include "../clienttoolslib.h"
 
+#ifndef MADGINE_MAINWINDOW_LAYOUT
+
 #include "projectmanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
@@ -463,3 +465,5 @@ namespace Tools {
 
 }
 }
+
+#endif
