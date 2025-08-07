@@ -472,5 +472,3 @@ namespace Tools {
 
 }
 }
-
-#endif
