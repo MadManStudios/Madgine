@@ -139,6 +139,9 @@ std::string ValueType::toShortString() const
         [](const KeyValueSender &s) {
             return "<sender>"s;
         },
+        [](const KeyValueBinding &b) {
+            return "<binding>"s;
+        },
         [](std::chrono::duration<uint64_t, std::nano> dur) {
             return "<duration>"s;
         },

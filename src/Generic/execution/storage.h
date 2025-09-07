@@ -42,6 +42,10 @@ namespace Execution {
             return std::forward<V>(std::get<0>(mValues));
         }
 
+        V get() {
+            return std::forward<V>(std::get<0>(mValues));
+        }
+
         std::tuple<V> mValues;
     };
 

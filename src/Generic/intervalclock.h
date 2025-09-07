@@ -7,6 +7,10 @@
 
 #include "execution/algorithm.h"
 
+#include "execution/binding.h"
+
+#include "genericresult.h"
+
 namespace Engine {
 
 namespace Execution {
@@ -53,9 +57,9 @@ struct IntervalClock {
         {
         }
 
-        void start(IntervalClock *clock)
+        void start(IntervalClock &clock)
         {
-            mClock = clock;
+            mClock = &clock;
             mWaitUntil = mClock->mLastTick + mDuration;
             std::lock_guard guard { mClock->mMutex };
             mClock->mWaitStates.push_back(this);
@@ -79,52 +83,35 @@ struct IntervalClock {
         Timepoint mWaitUntil;
     };
 
-    template <typename Rec>
-    struct receiver : Execution::algorithm_receiver<Rec> {
-
-        receiver(Rec &&rec, WaitState *state)
-            : Execution::algorithm_receiver<Rec> { std::forward<Rec>(rec) }
-            , mState(state)
-        {
-        }
-
-        void set_value(IntervalClock *clock)
-        {
-            mState->start(clock);
-        }
-
-        void set_value(IntervalClock &clock)
-        {
-            set_value(&clock);
-        }
-
-        WaitState *mState;
-    };
-
-    template <typename Inner, typename Rec>
+    template <Execution::Binding<IntervalClock&> Binding, typename Rec>
     struct state : WaitState, Execution::base_state<Rec> {
 
-        state(Inner &&inner, Rec &&rec, std::chrono::steady_clock::duration duration)
+        state(Binding &&binding, Rec &&rec, std::chrono::steady_clock::duration duration)
             : WaitState(duration)
             , Execution::base_state<Rec>(std::forward<Rec>(rec))
-            , mInnerState(Execution::connect(std::forward<Inner>(inner), receiver<Rec &> { this->mRec, this }))
+            , mBinding(std::forward<Binding>(binding))
         {
         }
 
         void start()
         {
-            mInnerState.start();
+            if (!Execution::access_binding(mBinding, [this](IntervalClock& clock) {
+                WaitState::start(clock);
+                })) {
+                throw 0;
+                //this->set_error();
+            }
         }
 
         void stop()
         {
             if (WaitState::stop())
-                this->mRec.set_done();
+                this->set_done();
         }
 
         virtual void continueExecution(std::chrono::microseconds elapsed) override
         {
-            this->mRec.set_value(std::move(elapsed));
+            this->set_value(std::move(elapsed));
         }
 
         friend auto tag_invoke(Execution::visit_state_t, state &state, const std::chrono::steady_clock::duration &duration, auto &&visitor)
@@ -157,20 +144,20 @@ struct IntervalClock {
             }
         }
 
-        Execution::connect_result_t<Inner, receiver<Rec &>> mInnerState;
+        Binding mBinding;
     };
 
-    template <typename Inner>
-    struct sender : Execution::algorithm_sender<Inner> {
+    template <Execution::Binding<IntervalClock &> Binding>
+    struct sender : Execution::base_sender {
 
-        using result_type = typename Inner::result_type;
+        using result_type = GenericResult;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<std::chrono::microseconds>;
 
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
         {
-            return state<Inner, Rec> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), sender.mDuration };
+            return state<Binding, Rec> { std::forward<Binding>(sender.mBinding), std::forward<Rec>(rec), sender.mDuration };
         }
 
         friend auto tag_invoke(Execution::visit_sender_t, sender &sender)
@@ -182,6 +169,7 @@ struct IntervalClock {
         static constexpr size_t debug_operation_increment = 1;
         static constexpr size_t debug_stop_increment = 1;
 
+        Binding mBinding;
         std::chrono::steady_clock::duration mDuration;
     };
 
@@ -192,13 +180,13 @@ struct IntervalClock {
 
     auto wait(std::chrono::steady_clock::duration duration)
     {
-        return sender<Execution::just_t::sender<IntervalClock *>> { { {}, Execution::just(this) }, duration };
+        return sender<Execution::ConstantBinding<IntervalClock &>> { {}, Execution::ConstantBinding<IntervalClock&> { *this }, duration };
     }
 
-    template <typename Sender>
-    static auto wait(Sender &&inner, std::chrono::steady_clock::duration duration)
+    template <Execution::Binding<IntervalClock &> Binding>
+    static auto wait(Binding &&self, std::chrono::steady_clock::duration duration)
     {
-        return sender<Sender> { { {}, std::forward<Sender>(inner) }, duration };
+        return sender<Binding> { {} , std::forward<Binding>(self), duration };
     }
 
     const Timepoint &lastTick() const

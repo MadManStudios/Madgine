@@ -449,6 +449,12 @@ bool ValueTypeDrawer::draw(const Engine::KeyValueSender &s)
     return false;
 }
 
+bool ValueTypeDrawer::draw(const Engine::KeyValueBinding &b)
+{
+    Text("<binding>");
+    return false;
+}
+
 bool ValueTypeDrawer::draw(std::chrono::nanoseconds &d)
 {
     int64_t count = d.count();

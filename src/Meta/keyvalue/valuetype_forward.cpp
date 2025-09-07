@@ -82,4 +82,12 @@ META_EXPORT void to_ValueType_impl<const ValueType &>(ValueType &v, const ValueT
     v = t;
 }
 
+
+void ValueType_erased(CallableView<void(ValueType &)> cb)
+{
+    ValueType v;
+    cb(v);
+}
+
+
 }

@@ -104,10 +104,10 @@ namespace NodeGraph {
         return {};
     }
 
-    std::vector<BindingDescriptor> NodeGraphBehaviorFactory::bindings(const UniqueOpaquePtr &handle) const
+    std::vector<NamedDescriptor> NodeGraphBehaviorFactory::namedInputs(const UniqueOpaquePtr &handle) const
     {
         const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
-        auto bindings = graph->mInputBindings | std::views::transform(&NodeGraph::InputBinding::mDescriptor);
+        auto bindings = graph->mNamedInputs | std::views::transform(&NodeGraph::NamedInput::mDescriptor);
         return { bindings.begin(), bindings.end() };
     }
 

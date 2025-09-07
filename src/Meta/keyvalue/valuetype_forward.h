@@ -16,6 +16,10 @@
 
 #include "Generic/execution/concepts.h"
 
+#include "Generic/execution/binding.h"
+
+#include "keyvaluebinding.h"
+
 namespace Engine {
 
 META_EXPORT ValueType &KeyValuePair_key(KeyValuePair &p);
@@ -70,6 +74,11 @@ struct ValueType_ReturnHelper<T *> {
     typedef T *type;
 };
 
+template <Execution::AnyBinding T>
+struct ValueType_ReturnHelper<T> {
+    typedef Execution::CallBinding<typename ValueType_ReturnHelper<typename T::type>::type (*)(const ValueType &), Execution::BindingPtr<ValueType>> type;
+};
+
 template <>
 struct ValueType_ReturnHelper<ValueType> {
     typedef ValueType type;
@@ -112,6 +121,8 @@ decltype(auto) ValueType_as(const ValueType &v)
         return ValueType_as_impl<EnumHolder>(v).safe_cast<T>();
     } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
         return ValueType_as_impl<FlagsHolder>(v).safe_cast<T>();
+    } else if constexpr (Execution::AnyBinding<T>) {
+        return (ValueType_as_impl<KeyValueBinding>(v)->*&ValueType_as<typename T::type>)();
     } else {
         using Ty = resolveCustomScopePtr_t<T, true>;
         if constexpr (Pointer<Ty>) {
@@ -152,6 +163,8 @@ decltype(auto) convert_ValueType(T &&t)
         return EnumHolder { std::forward<T>(t) };
     } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
         return FlagsHolder { std::forward<T>(t) };
+    } else if constexpr (Execution::AnyBinding<std::decay_t<T>>) {
+        return KeyValueBinding { std::forward<T>(t) };
     } else if constexpr (Execution::Sender<std::decay_t<T>>) {
         return KeyValueSender { std::forward<T>(t) };
     } else if constexpr (InstanceOfA<std::decay_t<T>, TypedBoundApiFunction>) {
@@ -171,8 +184,8 @@ decltype(auto) convert_ValueType(T &&t)
 }
 
 template <typename T>
-requires(ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>)
-    META_EXPORT void to_ValueType_impl(ValueType &v, T &&t);
+    requires(ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>)
+META_EXPORT void to_ValueType_impl(ValueType &v, T &&t);
 
 template <typename T>
 void to_ValueType(ValueType &v, T &&t)
@@ -206,5 +219,7 @@ struct ValueTypeRef {
 private:
     ValueType &mRef;
 };
+
+    META_EXPORT void ValueType_erased(CallableView<void(ValueType &)> cb);
 
 }

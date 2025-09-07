@@ -20,7 +20,7 @@
 
 #include "Interfaces/log/logsenders.h"
 
-#include "Madgine/bindings.h"
+#include "Madgine/named.h"
 
 #include "Madgine/debug/debuggablelifetime.h"
 
@@ -156,9 +156,9 @@ namespace Widgets {
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {            
-            lifetime().attach(std::forward<Sender>(sender) | with_constant_binding<"Widget">(this) | Log::log_result());
+            lifetime().attach(std::forward<Sender>(sender) | with_named<"Widget">(this) | Log::log_result());
         }
-        Debug::DebuggableLifetime<get_binding_d> &lifetime();
+        Debug::DebuggableLifetime<get_named_d> &lifetime();
 
         bool mVisible = true;
         std::string mName = "Unnamed";

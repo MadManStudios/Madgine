@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Generic/execution/algorithm.h"
-#include "Madgine/bindings.h"
+#include "Generic/execution/binding.h"
 #include "Generic/intervalclock.h"
+#include "Madgine/named.h"
 
 #include "../widget.h"
 
@@ -13,17 +14,17 @@
 namespace Engine {
 namespace Widgets {
 
-    using WidgetBinding = Binding<"Widget", WidgetBase *>;
+    using WidgetBinding = Named<"Widget", Execution::BindingPtr<WidgetBase *>>;
     constexpr WidgetBinding widgetBinding;
 
-    using WidgetManagerBinding = Binding<"WidgetManager", WidgetManager *>;
+    using WidgetManagerBinding = Named<"WidgetManager", Execution::ConstantBinding<WidgetManager *>>;
     constexpr WidgetManagerBinding widgetManagerBinding;
 
-    constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, WidgetManagerBinding manager = {}) {
-        return IntervalClock<>::wait(manager | Execution::then(&WidgetManager::clock), duration);
+    constexpr auto wait_frame = []<typename Binding = const WidgetManagerBinding &>(std::chrono::steady_clock::duration duration, Binding &&manager = widgetManagerBinding) {
+        return std::forward<Binding>(manager) | Execution::let_value([=](auto &&manager) { return IntervalClock<>::wait((std::forward<decltype(manager)>(manager)->*&WidgetManager::clock)(), duration); });
     };
 
-    constexpr auto yield_frame = [](WidgetManagerBinding manager = {}) {
+    constexpr auto yield_frame = []<typename Binding = const WidgetManagerBinding &>(Binding &&manager = widgetManagerBinding) {
         return wait_frame(0s, manager);
     };
 
@@ -32,4 +33,3 @@ namespace Widgets {
 
 }
 }
-

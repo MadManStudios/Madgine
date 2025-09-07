@@ -97,7 +97,7 @@ namespace NodeGraph {
     {
         Execution::detach(mBehavior.state().sender() | Execution::then([this](bool success) {
             if (success) {
-                mBindings = mBehavior.bindings();
+                mNamedInputs = mBehavior.namedInputs();
                 mSubBehaviorCount = mBehavior.subBehaviorCount();
                 this->setup();
             } else
@@ -110,7 +110,7 @@ namespace NodeGraph {
         , mBehavior(other.mBehavior)
         , mParameters(other.mParameters)
         , mFullClassName(other.mFullClassName)
-        , mBindings(other.mBindings)
+        , mNamedInputs(other.mNamedInputs)
     {
     }
 
@@ -165,7 +165,7 @@ namespace NodeGraph {
         if (group == 0) {
             return 0;
         } else {
-            return mBindings.size();
+            return mNamedInputs.size();
         }
     }
 
@@ -174,9 +174,9 @@ namespace NodeGraph {
         if (group == 0) {
             throw 0;
         } else {
-            if (index >= mBindings.size())
+            if (index >= mNamedInputs.size())
                 return "<unknown>";
-            return mBindings[index].mName;
+            return mNamedInputs[index].mName;
         }
     }
 
@@ -185,9 +185,9 @@ namespace NodeGraph {
         if (group == 0) {
             throw 0;
         } else {
-            if (index >= mBindings.size())
+            if (index >= mNamedInputs.size())
                 return { ExtendedValueTypeEnum::GenericType };
-            return mBindings[index].mType;
+            return mNamedInputs[index].mType;
         }
     }
 

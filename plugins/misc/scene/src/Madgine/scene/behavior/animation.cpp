@@ -11,7 +11,7 @@
 
 #include "../entity/entity.h"
 
-#include "transform.h"
+#include "../scenemanager.h"
 
 namespace Engine {
 
@@ -180,16 +180,12 @@ namespace Scene {
 
         Entity *AnimationState::entity()
         {
-            Entity *entity;
-            get_binding<"Entity">(*this, entity);
-            return entity;
+            return get_named<"Entity", Entity *>(*this).value();
         }
 
         SceneManager *AnimationState::scene()
         {
-            SceneManager *scene;
-            get_binding<"Scene">(*this, scene);
-            return scene;
+            return get_named<"Scene", SceneManager *>(*this).value();
         }
 
         Behavior animation(Render::AnimationLoader::Handle handle, Render::AnimationDescriptor *desc)

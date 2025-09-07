@@ -108,7 +108,7 @@ namespace Widgets {
 
     void WidgetManager::startLifetime()
     {
-        mWindow.lifetime().attach(mLifetime | with_constant_binding<"WidgetManager">(this));
+        mWindow.lifetime().attach(mLifetime | with_named<"WidgetManager">(this));
     }
 
     void WidgetManager::endLifetime()
@@ -626,7 +626,7 @@ namespace Widgets {
         }
     }
 
-    Debug::DebuggableLifetime<get_binding_d> &WidgetManager::lifetime()
+    Debug::DebuggableLifetime<get_named_d> &WidgetManager::lifetime()
     {
         return mLifetime;
     }

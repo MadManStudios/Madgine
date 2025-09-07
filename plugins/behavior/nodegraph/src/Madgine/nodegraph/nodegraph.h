@@ -4,7 +4,7 @@
 
 #include "nodebase.h"
 
-#include "Madgine/bindings.h"
+#include "Madgine/named.h"
 
 namespace Engine {
 namespace NodeGraph {
@@ -86,11 +86,11 @@ namespace NodeGraph {
 
         std::string mLayoutData;
 
-        struct InputBinding {
-            BindingDescriptor mDescriptor { "Unnamed", ExtendedValueTypeIndex { ExtendedValueTypeEnum::GenericType } };
+        struct NamedInput{
+            NamedDescriptor mDescriptor { "Unnamed", ExtendedValueTypeIndex { ExtendedValueTypeEnum::GenericType } };
             std::vector<Pin> mTargets;
         };
-        std::vector<InputBinding> mInputBindings;
+        std::vector<NamedInput> mNamedInputs;
 
         NodeInterpreterSender interpret() const;
 

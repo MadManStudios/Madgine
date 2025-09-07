@@ -159,9 +159,9 @@ namespace Tools {
             }
 
             pinId = 0;
-            for (const NodeGraph::NodeGraph::InputBinding &binding : mGraph.mInputBindings) {
-                if (DataProviderPin(binding.mDescriptor.mName.c_str(), 0, pinId, 1, binding.mDescriptor.mType, NodeGraph::NodeExecutionMask::ALL, !binding.mTargets.empty()))
-                    hoveredPin = binding.mDescriptor.mType;
+            for (const NodeGraph::NodeGraph::NamedInput &input: mGraph.mNamedInputs) {
+                if (DataProviderPin(input.mDescriptor.mName.c_str(), 0, pinId, 1, input.mDescriptor.mType, NodeGraph::NodeExecutionMask::ALL, !input.mTargets.empty()))
+                    hoveredPin = input.mDescriptor.mType;
                 ++pinId;
             }
 
@@ -416,7 +416,7 @@ namespace Tools {
                 ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
                 if (mSelectedInputs) {
                     if (ImGui::BeginTable("inputs", 2, ImGuiTableFlags_Resizable)) {
-                        KeyValueVirtualSequenceRange range { mGraph.mInputBindings };
+                        KeyValueVirtualSequenceRange range { mGraph.mNamedInputs };
                         mIsDirty |= getTool<Inspector>().drawValue("Inputs", range, true);
                         ImGui::EndTable();
                     }

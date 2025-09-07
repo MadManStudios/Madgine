@@ -79,10 +79,10 @@ std::vector<ValueTypeDesc> NativeBehaviorFactory::resultTypes(const UniqueOpaque
     return { types.begin(), types.end() };
 }
 
-std::vector<BindingDescriptor> NativeBehaviorFactory::bindings(const UniqueOpaquePtr &handle) const
+std::vector<NamedDescriptor> NativeBehaviorFactory::namedInputs(const UniqueOpaquePtr &handle) const
 {
     const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
-    auto bindings = info->bindings();
+    auto bindings = info->namedInputs();
     return { bindings.begin(), bindings.end() };
 }
 

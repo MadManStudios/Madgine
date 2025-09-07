@@ -7,11 +7,11 @@
 
 #include "Madgine/behaviorhandle.h"
 
-#include "Madgine/bindings.h"
+#include "Madgine/named.h"
 
 namespace Engine {
 namespace NodeGraph {
-
+    // TODO rename to BehaviorNode
     struct MADGINE_NODEGRAPH_EXPORT LibraryNode : Serialize::VirtualData<LibraryNode, VirtualScope<LibraryNode, NodeBase>> {
 
         LibraryNode(NodeGraph &graph, BehaviorHandle behavior);
@@ -45,7 +45,7 @@ namespace NodeGraph {
 
     public:
         ParameterTuple mParameters;
-        std::vector<BindingDescriptor> mBindings;
+        std::vector<NamedDescriptor> mNamedInputs;
         uint32_t mSubBehaviorCount = 0;
     };
 

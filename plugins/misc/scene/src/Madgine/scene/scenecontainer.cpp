@@ -134,7 +134,7 @@ namespace Scene {
         mLifetime.end();
     }
 
-    Debug::DebuggableLifetime<get_binding_d> &SceneContainer::lifetime()
+    Debug::DebuggableLifetime<get_named_d> &SceneContainer::lifetime()
     {
         return mLifetime;
     }

@@ -17,7 +17,7 @@ namespace Widgets {
 
     Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
     {
-        WidgetBase *widget = co_await widgetBinding;
+        WidgetBase *widget = co_await(co_await widgetBinding).get();
 
         Matrix3 start = widget->getPos();
         Matrix3 end = start + dist;
@@ -34,7 +34,7 @@ namespace Widgets {
 
     Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
     {
-        WidgetBase *widget = co_await widgetBinding;
+        WidgetBase *widget = co_await (co_await widgetBinding).get();
 
         float start = widget->opacity();
         float end = start + dist;

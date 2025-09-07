@@ -38,7 +38,7 @@ namespace Scene {
             void startLifetime();
             void endLifetime();
 
-            Debug::DebuggableLifetime<get_binding_d> &lifetime();
+            Debug::DebuggableLifetime<get_named_d> &lifetime();
 
             const std::string &key() const;
 
@@ -122,7 +122,7 @@ namespace Scene {
 
             SceneContainer &mContainer;
 
-            DEBUGGABLE_LIFETIME(mLifetime, get_binding_d);
+            DEBUGGABLE_LIFETIME(mLifetime, get_named_d);
 
             BehaviorList mBehaviors;
         };

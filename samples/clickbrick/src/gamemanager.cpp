@@ -204,7 +204,7 @@ void GameManager::start()
 Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity)
 {
 
-    Engine::Scene::Entity::Entity *e = co_await entity;
+    Engine::Scene::Entity::Entity *e = co_await (co_await entity).get();
 
     float qAcc = 1.0f;
     float qSpeed = 1.0f;
@@ -246,7 +246,7 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, E
 Engine::Behavior Test(Engine::Scene::EntityBinding entity)
 {
 
-    Engine::Scene::Entity::Entity *e = co_await entity;
+    Engine::Scene::Entity::Entity *e = co_await (co_await entity).get();
 
     bool loop = true;
     while (loop) {

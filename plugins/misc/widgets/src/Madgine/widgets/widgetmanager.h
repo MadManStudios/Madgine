@@ -19,7 +19,7 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
-#include "Madgine/bindings.h"
+#include "Madgine/named.h"
 
 #include "Generic/intervalclock.h"
 
@@ -92,7 +92,7 @@ namespace Widgets {
         bool dragging(const WidgetBase *widget);
         void abortDrag(WidgetBase *widget);
 
-        Debug::DebuggableLifetime<get_binding_d> &lifetime();
+        Debug::DebuggableLifetime<get_named_d> &lifetime();
 
         IntervalClock<> &clock();
 
@@ -134,7 +134,7 @@ namespace Widgets {
         std::vector<WidgetBase *> mModalWidgetList;
         std::vector<WidgetBase *> mOverlays;
 
-        DEBUGGABLE_LIFETIME(mLifetime, get_binding_d);
+        DEBUGGABLE_LIFETIME(mLifetime, get_named_d);
 
         IntervalClock<> mFrameClock;
 

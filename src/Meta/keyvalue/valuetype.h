@@ -27,6 +27,7 @@
 #include "Generic/cowstring.h"
 
 #include "keyvaluesender.h"
+#include "keyvaluebinding.h"
 
 #include "valuetype_desc.h"
 #include "valuetype_forward.h"

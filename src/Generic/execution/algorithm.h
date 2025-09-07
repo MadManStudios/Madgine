@@ -1272,8 +1272,8 @@ namespace Execution {
             };
             template <typename... V>
             using helper = std::invoke_result_t<F, V &...>;
-            using inner_sender_t = typename Sender::template value_types<helper>;
-            using Tuple = typename Sender::template value_types<std::tuple>;
+            using inner_sender_t = typename std::remove_reference_t<Sender>::template value_types<helper>;
+            using Tuple = typename std::remove_reference_t<Sender>::template value_types<std::tuple>;
             using inner_state = connect_result_t<inner_sender_t, receiver<Rec, Sender, F, Rec &, inner_tag>>;
 
             state(Rec &&rec, Sender &&sender, F &&f)
@@ -1331,7 +1331,7 @@ namespace Execution {
         struct sender : algorithm_sender<Sender> {
             template <typename... V>
             using helper = std::invoke_result_t<F, V...>;
-            using inner_sender_t = typename Sender::template value_types<helper>;
+            using inner_sender_t = typename std::remove_reference_t<Sender>::template value_types<helper>;
 
             template <template <typename...> typename Tuple>
             using value_types = typename std::remove_reference_t<inner_sender_t>::template value_types<Tuple>;

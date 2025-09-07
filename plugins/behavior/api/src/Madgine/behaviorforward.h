@@ -15,9 +15,9 @@ struct ParameterTuple;
 struct BehaviorFactoryBase;
 
 template <fixed_string Name, typename T>
-struct Binding;
+struct Named;
 
-struct BindingDescriptor;
+struct NamedDescriptor;
 
 struct HandlerBase;
 struct HandlerManager;

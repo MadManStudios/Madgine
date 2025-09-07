@@ -16,7 +16,7 @@ struct NativeBehaviorInfo {
     virtual std::string_view name() const = 0;
     virtual std::span<const ValueTypeDesc> parameterTypes() const = 0;
     virtual std::span<const ValueTypeDesc> resultTypes() const = 0;
-    virtual std::span<const BindingDescriptor> bindings() const = 0;
+    virtual std::span<const NamedDescriptor> namedInputs() const = 0;
     virtual size_t subBehaviorCount() const = 0;
 };
 
@@ -176,12 +176,12 @@ struct NativeBehavior : NativeBehaviorComponent<T, NativeBehaviorInfo> {
         return sResultTypes;
     }
 
-    static constexpr auto sBindings = []() {
-        return std::span<const BindingDescriptor> {};
+    static constexpr auto sNamed = []() {
+        return std::span<const NamedDescriptor> {};
     }();
-    std::span<const BindingDescriptor> bindings() const override
+    std::span<const NamedDescriptor> namedInputs() const override
     {
-        return sBindings;
+        return sNamed;
     }
 
     size_t subBehaviorCount() const override
@@ -203,7 +203,7 @@ struct NativeBehaviorFactory : BehaviorFactory<NativeBehaviorFactory> {
     ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const override;
     std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
     std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
-    std::vector<BindingDescriptor> bindings(const UniqueOpaquePtr &handle) const override;
+    std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;
     size_t subBehaviorCount(const UniqueOpaquePtr &handle) const override;
 };
 

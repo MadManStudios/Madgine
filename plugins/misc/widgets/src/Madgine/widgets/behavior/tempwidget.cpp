@@ -69,12 +69,11 @@ namespace Widgets {
 
     void TempWidgetState::start()
     {
-        WidgetManager *mgr;
-        BehaviorError error = get_binding<"WidgetManager">(*this, mgr);
-        if (error.mResult != BehaviorResult::SUCCESS) {
+        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
+        /* if (error.mResult != BehaviorResult::SUCCESS) {
             set_error(std::move(error));
             return;
-        }
+        }*/
 
         assert(!mWidget);
         mWidget = mDesc->create(*mgr);
@@ -96,9 +95,8 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_value(ArgumentList args)
     {
-        WidgetManager *mgr;
-        BehaviorError error = get_binding<"WidgetManager">(*this, mgr);
-        assert(error.mResult == BehaviorResult::SUCCESS);
+        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
+        //assert(error.mResult == BehaviorResult::SUCCESS);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_value(std::move(args));
@@ -106,9 +104,8 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_error(BehaviorError error)
     {
-        WidgetManager *mgr;
-        BehaviorError result = get_binding<"WidgetManager">(*this, mgr);
-        assert(result.mResult == BehaviorResult::SUCCESS);
+        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
+        // assert(error.mResult == BehaviorResult::SUCCESS);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_error(std::move(error));
@@ -116,9 +113,8 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_done()
     {
-        WidgetManager *mgr;
-        BehaviorError error = get_binding<"WidgetManager">(*this, mgr);
-        assert(error.mResult == BehaviorResult::SUCCESS);
+        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
+        // assert(error.mResult == BehaviorResult::SUCCESS);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_done();

@@ -82,9 +82,9 @@ std::vector<ValueTypeDesc> BehaviorHandle::resultTypes() const
     return BehaviorFactoryRegistry::get(mIndex).mFactory->resultTypes(mHandle);
 }
 
-std::vector<BindingDescriptor> BehaviorHandle::bindings() const
+std::vector<NamedDescriptor> BehaviorHandle::namedInputs() const
 {
-    return BehaviorFactoryRegistry::get(mIndex).mFactory->bindings(mHandle);
+    return BehaviorFactoryRegistry::get(mIndex).mFactory->namedInputs(mHandle);
 }
 
 size_t Engine::BehaviorHandle::subBehaviorCount() const

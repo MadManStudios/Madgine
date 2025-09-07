@@ -43,16 +43,16 @@ FIELD(mFlowOutPins)
 FIELD(mDataInPins)
 FIELD(mDataOutPins)
 FIELD(mLayoutData)
-FIELD(mInputBindings)
+FIELD(mNamedInputs)
 SERIALIZETABLE_END(Engine::NodeGraph::NodeGraph)
 
-METATABLE_BEGIN(Engine::NodeGraph::NodeGraph::InputBinding)
+METATABLE_BEGIN(Engine::NodeGraph::NodeGraph::NamedInput)
 MEMBER(mDescriptor)
-METATABLE_END(Engine::NodeGraph::NodeGraph::InputBinding)
+METATABLE_END(Engine::NodeGraph::NodeGraph::NamedInput)
 
-SERIALIZETABLE_BEGIN(Engine::NodeGraph::NodeGraph::InputBinding)
+SERIALIZETABLE_BEGIN(Engine::NodeGraph::NodeGraph::NamedInput)
 FIELD(mDescriptor)
-SERIALIZETABLE_END(Engine::NodeGraph::NodeGraph::InputBinding)
+SERIALIZETABLE_END(Engine::NodeGraph::NodeGraph::NamedInput)
 
 namespace Engine {
 namespace NodeGraph {
@@ -68,7 +68,7 @@ namespace NodeGraph {
         , mDataInPins(other.mDataInPins)
         , mDataOutPins(other.mDataOutPins)
         , mLayoutData(other.mLayoutData)
-        , mInputBindings(other.mInputBindings)
+        , mNamedInputs(other.mNamedInputs)
     {
         mNodes.reserve(other.mNodes.size());
         std::ranges::transform(other.mNodes, std::back_inserter(mNodes), [&](const std::unique_ptr<NodeBase> &node) { return node->clone(*this); });
@@ -87,7 +87,7 @@ namespace NodeGraph {
         mDataOutPins = other.mDataOutPins;
         mDataProviderPins = other.mDataProviderPins;
         mDataReceiverPins = other.mDataReceiverPins;
-        mInputBindings = other.mInputBindings;
+        mNamedInputs = other.mNamedInputs;
 
         mLayoutData = other.mLayoutData;
 
@@ -170,7 +170,7 @@ namespace NodeGraph {
                                         providerPins.resize(pin.mIndex + 1);
                                     providerPins[pin.mIndex] = DataProviderPinPrototype { { { nodeIndex(node), i, group } } };
                                 } else {
-                                    mInputBindings[pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
+                                    mNamedInputs[pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
                                 }
                             } else {
                                 NodeBase *targetNode = this->node(pin.mNode);
@@ -641,7 +641,7 @@ namespace NodeGraph {
                     mDataProviderPins.emplace_back();
                 mDataProviderPins[source.mIndex].mTargets.push_back(target);
             } else {
-                mInputBindings[source.mIndex].mTargets.push_back(target);
+                mNamedInputs[source.mIndex].mTargets.push_back(target);
             } 
         } else {
             node(source.mNode)->onDataProviderUpdate(source, CONNECT);

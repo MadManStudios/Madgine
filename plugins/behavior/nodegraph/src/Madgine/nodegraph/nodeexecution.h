@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Generic/execution/concepts.h"
-#include "Madgine/bindings.h"
+#include "Madgine/named.h"
 
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/execution.h"

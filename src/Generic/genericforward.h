@@ -87,6 +87,13 @@ namespace Execution {
     struct StopSource;
     struct StopCallback;
     using StopToken = StopSource*;
+
+    template <typename T>
+    struct BindingPtr;
+    template <typename T>
+    struct ConstantBinding;
+
+    struct BindingError;
 }
 
 }

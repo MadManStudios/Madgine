@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/execution/algorithm.h"
-#include "Madgine/bindings.h"
 
 #include "scenesenders.h"
 
@@ -16,8 +15,10 @@ namespace Scene {
 
     constexpr auto rotate = [](Vector3 axis, float speed) {
         return yield_simulation() | Execution::let_value([=](std::chrono::microseconds timeSinceLastFrame) {
-            return get_component<Entity::Transform>() | Execution::then([=](Entity::Transform *transform) {
-                transform->mOrientation *= Quaternion { timeSinceLastFrame.count() * 0.000001f * speed, axis };
+            return EntityBinding {} | Execution::let_value([=](auto &&entity) {
+                return ((std::forward<decltype(entity)>(entity)->*[](Entity::Entity *e) { return e->getComponent<Entity::Transform>(); })()->*[=](Entity::Transform *transform) {
+                    transform->mOrientation *= Quaternion { timeSinceLastFrame.count() * 0.000001f * speed, axis };
+                })();
             });
         }) | Execution::repeat;
     };

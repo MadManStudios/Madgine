@@ -17,6 +17,11 @@ BehaviorError::BehaviorError(BehaviorResult result, const std::string &msg, cons
 {
 }
 
+BehaviorError::BehaviorError(const Execution::BindingError &error)
+    : BehaviorError(BehaviorResult::UNKNOWN_ERROR, "Binding unavailable")
+{
+}
+
 std::ostream &operator<<(std::ostream &out, const BehaviorError &error)
 {
     return out << error.mResult << "\n"

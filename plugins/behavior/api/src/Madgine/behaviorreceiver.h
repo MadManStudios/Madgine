@@ -4,13 +4,13 @@
 #include "Meta/keyvalue/argumentlist.h"
 #include "behaviorerror.h"
 
-#include "bindings.h"
+#include "named.h"
 
 #include "Madgine/debug/debuggablesender.h"
 
 namespace Engine {
 
-struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBaseEx<type_pack<BehaviorError>, type_pack<ArgumentList>, Execution::get_stop_token, Execution::get_debug_location, Log::get_log, get_binding_d> {
+struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBaseEx<type_pack<BehaviorError>, type_pack<ArgumentList>, Execution::get_stop_token, Execution::get_debug_location, Log::get_log, get_named_d> {
     template <typename... Args>
     void set_value(Args &&...args)
     {

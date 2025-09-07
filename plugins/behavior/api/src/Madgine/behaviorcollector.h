@@ -20,7 +20,7 @@ struct BehaviorFactoryBase {
     virtual ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const = 0;
     virtual std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const = 0;
     virtual std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const = 0;
-    virtual std::vector<BindingDescriptor> bindings(const UniqueOpaquePtr &handle) const = 0;
+    virtual std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const = 0;
     virtual size_t subBehaviorCount(const UniqueOpaquePtr &handle) const = 0;
 };
 

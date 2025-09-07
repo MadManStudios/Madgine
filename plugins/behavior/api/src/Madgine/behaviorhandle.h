@@ -25,7 +25,7 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorHandle {
     ParameterTuple createDummyParameters() const;
     std::vector<ValueTypeDesc> parameterTypes() const;
     std::vector<ValueTypeDesc> resultTypes() const;
-    std::vector<BindingDescriptor> bindings() const;    
+    std::vector<NamedDescriptor> namedInputs() const;    
     size_t subBehaviorCount() const;
     
     std::string_view name() const;

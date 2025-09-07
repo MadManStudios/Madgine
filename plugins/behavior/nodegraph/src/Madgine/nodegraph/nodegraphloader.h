@@ -43,7 +43,7 @@ namespace NodeGraph {
         ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const override;
         std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
         std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
-        std::vector<BindingDescriptor> bindings(const UniqueOpaquePtr &handle) const override;
+        std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;
         size_t subBehaviorCount(const UniqueOpaquePtr &handle) const override;
     };
 

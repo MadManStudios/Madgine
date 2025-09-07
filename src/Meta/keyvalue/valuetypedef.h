@@ -57,3 +57,5 @@ VALUETYPE_SEP
 VALUETYPE_TYPE(Duration, SINGLE_ARG(std::chrono::duration<uint64_t, std::nano>), std::chrono::nanoseconds, std::chrono::microseconds)
 VALUETYPE_SEP
 VALUETYPE_TYPE(Type, ExtendedValueTypeDesc, const ExtendedValueTypeDesc &, const ValueTypeDesc &)
+VALUETYPE_SEP
+VALUETYPE_TYPE(Binding, KeyValueBinding, const KeyValueBinding &)
