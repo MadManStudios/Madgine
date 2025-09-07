@@ -40,7 +40,7 @@ struct BitVariant {
                     p->~Ty();
                 }...
             };
-            fs[i - 1](this, &other->mData);
+            fs[i - 1](this, &other.mData);
             other.mIndex = 0;
             mIndex = i;
         }
