@@ -18,17 +18,13 @@ template <typename T>
 using NamedStorage = Execution::ResultStorageImpl<Execution::ValueStorageImpl<T>, Execution::ErrorStorageImpl<BehaviorError>>;
 
 struct get_named_d_t {
-    using signature = BehaviorError(std::string_view, ValueTypeRef);
+    using signature = bool(std::string_view, ValueTypeRef);
 
     template <typename T>
         requires(!is_tag_invocable_v<get_named_d_t, T &, std::string_view, ValueTypeRef>)
     auto operator()(T &t, std::string_view name, ValueTypeRef out) const
     {
-        std::string errorMsg = "Binding \""s + std::string { name } + "\" not found.";
-        return BehaviorError {
-            BehaviorResult::UNKNOWN_ERROR,
-            errorMsg
-        };
+        return false;
     }
 
     template <typename T>
@@ -39,73 +35,103 @@ struct get_named_d_t {
     {
         return tag_invoke(*this, t, name, out);
     }
-
 };
 
 inline constexpr get_named_d_t get_named_d;
 
-template <fixed_string Name, typename T>
+template <fixed_string Name, typename V>
 struct get_named_t {
 
-    template <typename O>
-        requires(!is_tag_invocable_v<get_named_t, O>)
-    decltype(auto) operator()(O &&o) const
+    template <typename T, typename O>
+        requires(!is_tag_invocable_v<get_named_t, T, O>)
+    bool operator()(T &&context, O &o) const
     {
-        NamedStorage<ValueType_Return<T>> storage;
+        bool result;
         auto f = [&](ValueType &v) {
-            BehaviorError result = get_named_d(std::forward<O>(o), Name, v);
-            if (result.mResult == GenericResult::SUCCESS)
-                storage.set_value(ValueType_as<T>(v));
-            else
-                storage.set_error(result);
+            result = get_named_d(std::forward<T>(context), Name, v);
+            if (result)
+                o = ValueType_as<V>(v);
         };
         ValueType_erased(CallableView<void(ValueType &)> { f });
-        return storage;
+        return result;
     }
 
-    template <typename O>
-        requires(is_tag_invocable_v<get_named_t, O>)
-    auto operator()(O &&o) const
-        noexcept(is_nothrow_tag_invocable_v<get_named_t, O>)
-            -> tag_invoke_result_t<get_named_t, O>
+    template <typename T, typename O>
+        requires(is_tag_invocable_v<get_named_t, T, O>)
+    auto operator()(T &&context, O &&o) const
+        noexcept(is_nothrow_tag_invocable_v<get_named_t, T, O>)
+            -> tag_invoke_result_t<get_named_t, T, O>
     {
-        return tag_invoke(*this, std::forward<O>(o));
+        return tag_invoke(*this, std::forward<T>(context), std::forward<O>(o));
     }
 };
 
-template <fixed_string Name, typename T>
-inline constexpr get_named_t<Name, T> get_named;
+template <fixed_string Name, typename V>
+inline constexpr get_named_t<Name, V> get_named;
+
+template <fixed_string Name, typename T, typename F>
+struct NamedSender {
+
+    using is_sender = void;
+
+    using Inner = std::invoke_result_t<F, T &>;
+
+    using result_type = typename Inner::result_type;
+    template <template <typename...> typename Tuple>
+    using value_types = typename Inner::template value_types<Tuple>;
+
+    template <typename Rec>
+    friend auto tag_invoke(Execution::connect_t, NamedSender &&sender, Rec &&rec)
+    {
+        if (!sender.mValue.resolve(rec))
+            throw 0;
+        return Execution::connect(std::forward<F>(sender.mF)(*sender.mValue), std::forward<Rec>(rec));
+    }
+
+    Named<Name, T> mValue;
+    F mF;
+};
 
 template <fixed_string Name, typename T>
 struct Named {
-    template <typename Rec>
-    struct state : Execution::base_state<Rec> {
-        void start()
-        {
-            get_named<Name, T>(this->mRec).reproduce(this->mRec);
-        }
 
-        void stop()
-        {
-            throw 0;
-        }
-    };
-    
-    using is_sender = void;
-
-    using result_type = BehaviorError;
-    template <template <typename...> typename Tuple>
-    using value_types = Tuple<ValueType_Return<T>>;
-    
-    template <typename Rec>
-    friend auto tag_invoke(Execution::connect_t, const Named &sender, Rec &&rec)
+    bool resolve(auto &context)
     {
-        return state<Rec> { std::forward<Rec>(rec) };
+        if (!mValue) {
+            get_named<Name, T>(context, mValue);
+        }
+        return static_cast<bool>(mValue);
     }
-};
 
-template <fixed_string Name, typename T>
-inline constexpr Named<Name, T> named;
+    template <typename F>
+    auto sender(F &&algorithm)
+    {
+
+        return NamedSender<Name, T, F> { *this, std::forward<F>(algorithm) };
+    }
+
+    ValueType_Return<T> &operator->()
+    {
+        return *mValue;
+    }
+
+    ValueType_Return<T> &operator*()
+    {
+        return *mValue;
+    }
+
+    decltype(auto) operator->*(auto&& arg)
+    {
+        return *mValue->*std::forward<decltype(arg)>(arg);
+    }
+
+    operator ValueType_Return<T> &()
+    {
+        return *mValue;
+    }
+
+    std::optional<ValueType_Return<T>> mValue;
+};
 
 struct NamedDescriptor {
     std::string mName;
@@ -128,7 +154,7 @@ struct with_named_t {
         {
             if (name == Name) {
                 to_ValueType(out, rec.mValue);
-                return BehaviorError {};
+                return true;
             } else {
                 return get_named_d(rec.mRec, name, out);
             }

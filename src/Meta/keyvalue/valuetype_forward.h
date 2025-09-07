@@ -220,6 +220,4 @@ private:
     ValueType &mRef;
 };
 
-    META_EXPORT void ValueType_erased(CallableView<void(ValueType &)> cb);
-
 }

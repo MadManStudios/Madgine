@@ -14,17 +14,14 @@ namespace Engine {
 namespace Scene {
 
     using EntityBinding = Named<"Entity", Execution::BindingPtr<Entity::Entity *>>;
-    constexpr EntityBinding entityBinding;
-    
-    using SceneBinding = Named<"Scene", SceneManager *>;
-    constexpr SceneBinding sceneBinding;
+    using NamedSceneManager = Named<"Scene", SceneManager *>;
 
-    inline constexpr auto wait_simulation = []<typename Binding = const SceneBinding &>(std::chrono::steady_clock::duration duration, Binding &&scene = sceneBinding) {
-        return std::forward<Binding>(scene) | Execution::let_value([=](SceneManager *scene) { return scene->simulationClock().wait(duration); });
+    inline constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration, NamedSceneManager scene = {}) {
+        return scene.sender([=](SceneManager *mgr) { return mgr->simulationClock().wait(duration); });
     };
 
-    inline constexpr auto yield_simulation = []<typename Binding = const SceneBinding &>(Binding &&scene = sceneBinding) {
-        return wait_simulation(0s, std::forward<Binding>(scene));
+    inline constexpr auto yield_simulation = [](NamedSceneManager scene = {}) {
+        return wait_simulation(0s, scene);
     };
 
 }

@@ -75,7 +75,12 @@ namespace NodeGraph {
                 retVal = mArguments.at(pin.mIndex);
                 return {};
             } else {
-                return get_named_d(*this, mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName, retVal);
+                std::string_view name = mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName;
+                if (get_named_d(*this, name, retVal)) {
+                    return {};
+                } else {
+                    return BEHAVIOR_ERROR(BehaviorResult::UNKNOWN_ERROR) << "No input named '" << name << "' found";
+                }
             }
         } else {
             return mGraph->node(pin.mNode)->interpretRead(*this, retVal, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
@@ -168,6 +173,5 @@ namespace NodeGraph {
     {
         return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
     }
-
 }
 }

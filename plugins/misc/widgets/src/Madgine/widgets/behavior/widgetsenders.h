@@ -15,16 +15,13 @@ namespace Engine {
 namespace Widgets {
 
     using WidgetBinding = Named<"Widget", Execution::BindingPtr<WidgetBase *>>;
-    constexpr WidgetBinding widgetBinding;
+    using NamedWidgetManager = Named<"WidgetManager", WidgetManager *>;
 
-    using WidgetManagerBinding = Named<"WidgetManager", Execution::ConstantBinding<WidgetManager *>>;
-    constexpr WidgetManagerBinding widgetManagerBinding;
-
-    constexpr auto wait_frame = []<typename Binding = const WidgetManagerBinding &>(std::chrono::steady_clock::duration duration, Binding &&manager = widgetManagerBinding) {
-        return std::forward<Binding>(manager) | Execution::let_value([=](auto &&manager) { return IntervalClock<>::wait((std::forward<decltype(manager)>(manager)->*&WidgetManager::clock)(), duration); });
+    constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, NamedWidgetManager manager = {}) {
+        return manager.sender([=](auto &&manager) { return manager->clock().wait(duration); });
     };
 
-    constexpr auto yield_frame = []<typename Binding = const WidgetManagerBinding &>(Binding &&manager = widgetManagerBinding) {
+    constexpr auto yield_frame = [](NamedWidgetManager manager = {}) {
         return wait_frame(0s, manager);
     };
 

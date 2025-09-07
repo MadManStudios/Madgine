@@ -27,10 +27,10 @@ namespace Widgets {
             void set_error(BehaviorError error);
             void set_done();
 
-            friend BehaviorError tag_invoke(get_named_d_t, receiver& rec, std::string_view name, ValueTypeRef& out) {
+            friend bool tag_invoke(get_named_d_t, receiver& rec, std::string_view name, ValueTypeRef& out) {
                 if (name == "Widget") {
                     out = rec.mState.widget();
-                    return {};
+                    return true;
                 } else {
                     return get_named_d(rec.mRec, name, out);
                 }

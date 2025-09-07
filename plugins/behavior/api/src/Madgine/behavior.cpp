@@ -35,6 +35,11 @@ Behavior CoroutineBehaviorState::get_return_object()
 
 void CoroutineBehaviorState::connect(BehaviorReceiver &rec)
 {
+    if (mResolveNames) {
+        if (!mResolveNames(rec)) {
+            throw 0;
+        }
+    }
     mReceiver = &rec;
 }
 
@@ -82,7 +87,7 @@ CoroutineBehaviorState::FinalSuspend CoroutineBehaviorState::final_suspend() noe
 void CoroutineBehaviorState::return_void()
 {
     mDebugLocation.stepOut(Execution::get_debug_location(*mReceiver));
-    //mValue = void
+    // mValue = void
 }
 
 void CoroutineBehaviorState::unhandled_exception()
@@ -140,7 +145,6 @@ bool CoroutineLocation::wantsPause(Debug::ContinuationType type) const
 Behavior::state::state(StatePtr state)
     : mState(std::move(state))
 {
-    mState->connect(*this);
 }
 
 void Behavior::state::start()
@@ -151,6 +155,11 @@ void Behavior::state::start()
 void Behavior::state::stop()
 {
     mState->stop();
+}
+
+void Behavior::state::connect()
+{
+    mState->connect(*this);
 }
 
 Behavior::StatePtr Behavior::connect(BehaviorReceiver &receiver)

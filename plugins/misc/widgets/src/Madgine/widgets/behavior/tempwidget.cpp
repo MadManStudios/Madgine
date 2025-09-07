@@ -69,11 +69,9 @@ namespace Widgets {
 
     void TempWidgetState::start()
     {
-        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
-        /* if (error.mResult != BehaviorResult::SUCCESS) {
-            set_error(std::move(error));
-            return;
-        }*/
+        WidgetManager *mgr;
+        bool result = get_named<"WidgetManager", WidgetManager*>(*this, mgr);
+        assert(result);
 
         assert(!mWidget);
         mWidget = mDesc->create(*mgr);
@@ -95,8 +93,9 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_value(ArgumentList args)
     {
-        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
-        //assert(error.mResult == BehaviorResult::SUCCESS);
+        WidgetManager *mgr;
+        bool result = get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_value(std::move(args));
@@ -104,8 +103,9 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_error(BehaviorError error)
     {
-        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
-        // assert(error.mResult == BehaviorResult::SUCCESS);
+        WidgetManager *mgr;
+        bool result = get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_error(std::move(error));
@@ -113,8 +113,9 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_done()
     {
-        WidgetManager *mgr = get_named<"WidgetManager", WidgetManager *>(*this).value();
-        // assert(error.mResult == BehaviorResult::SUCCESS);
+        WidgetManager *mgr;
+        bool result = get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_done();

@@ -55,7 +55,19 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
         void start();
         void stop();
 
+    protected:
+        void connect();
+
         StatePtr mState;
+    };
+
+    template <typename Rec>
+    struct state_helper : VirtualBehaviorState<Rec, state> {
+        state_helper(Rec &&rec, StatePtr statePtr)
+            : VirtualBehaviorState<Rec, state>(std::forward<Rec>(rec), std::move(statePtr))
+        {
+            this->connect();
+        }
     };
 
     using is_sender = void;
@@ -68,7 +80,7 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
     friend auto tag_invoke(Execution::connect_t, T &&behavior, Rec &&rec)
     {
         assert(behavior.mState);
-        return VirtualBehaviorState<Rec, state> { std::forward<Rec>(rec), std::move(behavior.mState) };
+        return state_helper<Rec> { std::forward<Rec>(rec), std::move(behavior.mState) };
     }
 
     using promise_type = CoroutineBehaviorState;
@@ -103,6 +115,20 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::DebugLocation {
 };
 
 struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
+
+    template <typename... Args>
+    CoroutineBehaviorState(Args &&...args)
+    {
+        mResolveNames = [&](BehaviorReceiver &rec) {
+            return ([&]() { 
+                if constexpr (InstanceOfA1<std::remove_reference_t<Args>, Named>) {
+                    return args.resolve(rec);
+                } else {
+                    return true;
+                }
+                }() && ...);
+        };
+    }
 
     Behavior get_return_object();
 
@@ -144,6 +170,8 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     CoroutineLocation mDebugLocation;
 
     BehaviorReceiver *mReceiver = nullptr;
+
+    Closure<bool(BehaviorReceiver &)> mResolveNames;
 };
 
 template <Execution::Sender Sender>

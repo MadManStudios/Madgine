@@ -297,7 +297,6 @@ namespace Execution {
             state(Rec &&rec, Sender &&sender)
                 : mRec(std::forward<Rec>(rec))
                 , mState { tag_invoke(connect_t {}, std::forward<Sender>(sender), receiver<Rec, Sender> { *this }) }
-
             {
             }
 

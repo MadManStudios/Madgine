@@ -204,8 +204,6 @@ void GameManager::start()
 Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity)
 {
 
-    Engine::Scene::Entity::Entity *e = co_await (co_await entity).get();
-
     float qAcc = 1.0f;
     float qSpeed = 1.0f;
 
@@ -217,36 +215,37 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, E
 
         std::chrono::microseconds elapsedTime = co_await Engine::Scene::yield_simulation();
 
-        Engine::Scene::Entity::Transform *t = e->getComponent<Engine::Scene::Entity::Transform>();
+        co_await (entity->*[&](Engine::Scene::Entity::Entity *e) {  
+            Engine::Scene::Entity::Transform *t = e->getComponent<Engine::Scene::Entity::Transform>();
 
-        float ratio = std::chrono::duration_cast<std::chrono::duration<float>>(elapsedTime).count();
+            float ratio = std::chrono::duration_cast<std::chrono::duration<float>>(elapsedTime).count();
 
-        t->mPosition += speed * ratio * dir;
+            t->mPosition += speed * ratio * dir;
 
-        qAcc += qSpeed * 0.1f * ratio;
+            qAcc += qSpeed * 0.1f * ratio;
 
-        if (qAcc >= 1.0f) {
-            qAcc = 0.0f;
-            q0 = q1;
+            if (qAcc >= 1.0f) {
+                qAcc = 0.0f;
+                q0 = q1;
 
-            Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
-            q1 = { static_cast<float>(rand()), orientation };
-        }
+                Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+                q1 = { static_cast<float>(rand()), orientation };
+            }
 
-        t->mOrientation = Engine::slerp(q0, q1, qAcc);
+            t->mOrientation = Engine::slerp(q0, q1, qAcc);
 
-        loop = t->mPosition.length() < 10.5f;
+            loop = t->mPosition.length() < 10.5f;
+        })();
+        
     }
 
-    e->endLifetime();
+    co_await (entity->*&Engine::Scene::Entity::Entity::endLifetime)();
 
     co_return;
 }
 
 Engine::Behavior Test(Engine::Scene::EntityBinding entity)
 {
-
-    Engine::Scene::Entity::Entity *e = co_await (co_await entity).get();
 
     bool loop = true;
     while (loop) {

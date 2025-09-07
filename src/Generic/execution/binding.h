@@ -42,7 +42,7 @@ namespace Execution {
     struct BindingState : Execution::base_state<Rec> {
         BindingState(Binding &&binding, Rec &&rec)
             : Execution::base_state<Rec>(std::forward<Rec>(rec))
-            , mBinding(std::move(binding))
+            , mBinding(std::forward<Binding>(binding))
         {
         }
 
@@ -66,13 +66,39 @@ namespace Execution {
     struct MemberFunctionBinding;
 
     template <typename T>
-    struct ConstantBinding {
+    struct BindingBase {
         using type = T;
 
         using is_sender = void;
+
         using result_type = BindingError;
         template <template <typename...> typename Tuple>
-        using value_types = Tuple<type>;
+        using value_types = Tuple<std::remove_reference_t<type>>;
+    };
+
+    template <>
+    struct BindingBase<void> {
+        using type = void;
+
+        using is_sender = void;
+
+        using result_type = BindingError;
+        template <template <typename...> typename Tuple>
+        using value_types = Tuple<>;
+    };
+
+    template <typename T>
+    struct BindingBase<T*> {
+        using type = T*;        
+    };
+
+    template <typename T>
+    struct ConstantBinding : BindingBase<T> {        
+
+        ConstantBinding(T &&value)
+            : mValue(std::forward<T>(value))
+        {
+        }
 
         template <typename P>
         auto operator->*(P &&right) &&
@@ -104,15 +130,16 @@ namespace Execution {
     };
 
     template <typename F, typename... Args>
-    struct CallBinding {
+    struct CallBinding : BindingBase<std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>> {
 
-        using type = std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>;
+        using type = typename BindingBase<std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>>::type;
 
-        using is_sender = void;
-
-        using result_type = BindingError;
-        template <template <typename...> typename Tuple>
-        using value_types = std::conditional_t<std::same_as<type, void>, Tuple<>, Tuple<type>>;
+        template <typename... Args2>
+        CallBinding(F &&f, Args2&&... args)
+            : mF(std::forward<F>(f))
+            , mArgs(std::forward<Args2>(args)...)
+        {
+        }
 
         template <typename P>
         auto operator->*(P &&right) &&
@@ -176,20 +203,29 @@ namespace Execution {
             return binding.call<0>(std::forward<decltype(callback)>(callback));
         }
 
-        F mF;
-        std::tuple<Args...> mArgs;
+        std::remove_reference_t<F> mF;
+        std::tuple<std::remove_reference_t<Args>...> mArgs;
     };
 
     template <typename F>
     struct FunctionBinding {
 
+        template <typename T>
+        using MakeBinding = std::conditional_t<AnyBinding<T>, T, ConstantBinding<T>>;
+
         template <typename... Args>
         auto operator()(Args &&...args) &&
         {
-            return CallBinding { std::forward<F>(mF), std::tuple<Args...> { std::forward<Args>(args)... } };
+            return CallBinding<F, MakeBinding<Args>...> { std::forward<F>(mF), std::forward<Args>(args)... };
         }
 
-        F mF;
+        template <typename... Args>
+        auto operator()(Args &&...args) const &
+        {
+            return CallBinding<const F &, MakeBinding<Args>...> { mF, std::forward<Args>(args)... };
+        }
+
+        std::remove_reference_t<F> mF;
     };
 
     template <typename F, typename This>
@@ -201,8 +237,14 @@ namespace Execution {
             return std::move(mFunction)(std::move(mThis), std::forward<Args>(args)...);
         }
 
+        template <typename... Args>
+        auto operator()(Args &&...args) const &
+        {
+            return mFunction(mThis, std::forward<Args>(args)...);
+        }
+
         FunctionBinding<F> mFunction;
-        This mThis;
+        std::remove_reference_t<This> mThis;
     };
 
     template <typename T>
@@ -228,9 +270,7 @@ namespace Execution {
     };
 
     template <typename T>
-    struct BindingPtr {
-
-        using type = T;
+    struct BindingPtr : BindingBase<T> {
 
         BindingPtr() = default;
 

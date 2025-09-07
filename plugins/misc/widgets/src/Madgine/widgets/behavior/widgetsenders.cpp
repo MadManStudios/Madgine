@@ -17,36 +17,38 @@ namespace Widgets {
 
     Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
     {
-        WidgetBase *widget = co_await(co_await widgetBinding).get();
+        auto getPos = (widgetBinding->*&WidgetBase::getPos)();
+        auto setPos = widgetBinding->*&WidgetBase::setPos;
 
-        Matrix3 start = widget->getPos();
+        Matrix3 start = co_await getPos;
         Matrix3 end = start + dist;
 
         std::chrono::microseconds acc = 0ms;
 
         while (acc < duration) {
-            widget->setPos(lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
+            co_await setPos(lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
             acc += co_await yield_frame();
         }
 
-        widget->setPos(end);
+        co_await setPos(end);
     }
 
     Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
     {
-        WidgetBase *widget = co_await (co_await widgetBinding).get();
+        auto getOpacity = (widgetBinding->*&WidgetBase::opacity)();
+        auto setOpacity = widgetBinding->*&WidgetBase::setOpacity;
 
-        float start = widget->opacity();
+        float start = co_await getOpacity;
         float end = start + dist;
 
         std::chrono::microseconds acc = 0ms;
 
         while (acc < duration) {
-            widget->setOpacity(lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
+            co_await setOpacity(lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
             acc += co_await yield_frame();
         }
 
-        widget->setOpacity(end);
+        co_await setOpacity(end);
     }
 
 }
