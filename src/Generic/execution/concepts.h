@@ -134,7 +134,7 @@ namespace Execution {
         requires(is_tag_invocable_v<CPO, Rec &, Args...>) friend auto tag_invoke(CPO f, algorithm_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, Rec &, Args...>)
             -> tag_invoke_result_t<CPO, Rec &, Args...>
         {
-            return tag_invoke(f, rec.mRec, std::forward<Args>(args)...);
+            return f(rec.mRec, std::forward<Args>(args)...);
         }
     };
 

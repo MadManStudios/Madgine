@@ -4,7 +4,7 @@ set_target_properties(ImGui PROPERTIES EXCLUDE_FROM_ALL TRUE)
 target_include_directories(ImGui PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
 if (MSVC)
-	target_link_options(ImGui PUBLIC "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/imgui/misc/debuggers/imgui.natvis")
+	target_link_options(ImGui PRIVATE "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/imgui/misc/debuggers/imgui.natvis")
 endif ()
 
 add_notices(ImGui 

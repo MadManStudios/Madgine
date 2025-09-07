@@ -25,7 +25,7 @@ target_include_directories(Meta PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_
 target_link_libraries(Meta PUBLIC Generic)
 
 if (MSVC)
-	target_link_options(Meta PUBLIC "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/Meta.natvis")
+	target_link_options(Meta PRIVATE "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/Meta.natvis")
 endif()
 
 install_to_workspace(Runtime TARGETS Meta)

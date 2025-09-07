@@ -129,7 +129,7 @@ namespace Execution {
             friend auto tag_invoke(CPO f, attach_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, LifetimeReceiver &, Args...>)
                 -> tag_invoke_result_t<CPO, LifetimeReceiver &, Args...>
             {
-                return tag_invoke(f, rec.mState->mReceiver, std::forward<Args>(args)...);
+                return f(rec.mState->mReceiver, std::forward<Args>(args)...);
             }
 
             attach_state<Sender> *mState;

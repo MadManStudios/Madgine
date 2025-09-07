@@ -43,7 +43,7 @@ if (WINDOWS)
 endif()
 
 if (MSVC)
-	target_link_options(Modules PUBLIC "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/Modules.natvis")
+	target_link_options(Modules PRIVATE "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/Modules.natvis")
 endif()
 
 generate_binary_info(Modules)
