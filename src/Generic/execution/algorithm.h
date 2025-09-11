@@ -795,7 +795,7 @@ namespace Execution {
         struct state<Rec, std::index_sequence<Is...>, Sender...> : base_state<Rec> {
 
             using Tuple = std::tuple<typename Sender::template value_types<std::tuple>...>;
-            using R = typename first_t<Sender...>::result_type;
+            using R = std::common_type_t<typename Sender::result_type...>;
 
             state(Rec &&rec, Sender &&...senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
@@ -879,7 +879,7 @@ namespace Execution {
         template <typename... Sender>
         struct sender : base_sender {
 
-            using result_type = typename first_t<Sender...>::result_type;
+            using result_type = std::common_type_t<typename Sender::result_type...>;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<typename Sender::template value_types<std::tuple>...>;
 
