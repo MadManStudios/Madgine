@@ -121,7 +121,7 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     {
         mResolveNames = [&](BehaviorReceiver &rec) {
             return ([&]() { 
-                if constexpr (InstanceOfA1<std::remove_reference_t<Args>, Named>) {
+                if constexpr (requires { args.resolve(rec); }) {
                     return args.resolve(rec);
                 } else {
                     return true;

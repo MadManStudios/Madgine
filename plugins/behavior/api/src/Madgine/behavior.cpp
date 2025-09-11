@@ -35,16 +35,16 @@ Behavior CoroutineBehaviorState::get_return_object()
 
 void CoroutineBehaviorState::connect(BehaviorReceiver &rec)
 {
-    if (mResolveNames) {
-        if (!mResolveNames(rec)) {
-            throw 0;
-        }
-    }
     mReceiver = &rec;
 }
 
 void CoroutineBehaviorState::start()
 {
+    if (mResolveNames) {
+        if (!mResolveNames(*mReceiver)) {
+            throw 0;
+        }
+    }
     mDebugLocation.stepInto(Execution::get_debug_location(*mReceiver));
     std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).resume();
 }

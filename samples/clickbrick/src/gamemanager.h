@@ -14,6 +14,8 @@
 
 #include "Modules/threading/customclock.h"
 
+#include "Madgine/scene/behavior/scenesenders.h"
+
 namespace ClickBrick {
 
     struct GameManager : Engine::Widgets::WidgetHandler<GameManager> {

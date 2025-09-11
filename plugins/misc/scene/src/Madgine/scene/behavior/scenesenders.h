@@ -13,7 +13,16 @@
 namespace Engine {
 namespace Scene {
 
-    using EntityBinding = Named<"Entity", Execution::BindingPtr<Entity::Entity *>>;
+    struct EntityBinding : Named<"Entity", Execution::BindingPtr<Entity::Entity *>> {
+        template <typename F>
+        decltype(auto) sender(F &&f)
+        {
+            return Named<"Entity", Execution::BindingPtr<Entity::Entity *>>::sender([&](auto binding) {
+                return (binding->*std::forward<F>(f))();
+            });
+        }
+    };
+
     using NamedSceneManager = Named<"Scene", SceneManager *>;
 
     inline constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration, NamedSceneManager scene = {}) {
@@ -23,6 +32,5 @@ namespace Scene {
     inline constexpr auto yield_simulation = [](NamedSceneManager scene = {}) {
         return wait_simulation(0s, scene);
     };
-
 }
 }

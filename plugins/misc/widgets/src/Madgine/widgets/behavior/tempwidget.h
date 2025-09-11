@@ -29,7 +29,7 @@ namespace Widgets {
 
             friend bool tag_invoke(get_named_d_t, receiver& rec, std::string_view name, ValueTypeRef& out) {
                 if (name == "Widget") {
-                    out = rec.mState.widget();
+                    out = Execution::ConstantBinding { rec.mState.widget() };
                     return true;
                 } else {
                     return get_named_d(rec.mRec, name, out);

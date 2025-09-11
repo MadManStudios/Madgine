@@ -53,6 +53,10 @@ namespace Execution {
             }
         }
 
+        void stop()
+        {
+        }
+
         Binding mBinding;
     };
 

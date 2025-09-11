@@ -14,7 +14,15 @@
 namespace Engine {
 namespace Widgets {
 
-    using WidgetBinding = Named<"Widget", Execution::BindingPtr<WidgetBase *>>;
+    struct WidgetBinding : Named<"Widget", Execution::BindingPtr<WidgetBase *>> {
+        template <typename F>
+        decltype(auto) sender(F &&f)
+        {
+            return Named<"Widget", Execution::BindingPtr<WidgetBase *>>::sender([&](auto binding) {
+                return (binding->*std::forward<F>(f))();
+            });
+        }
+    };
     using NamedWidgetManager = Named<"WidgetManager", WidgetManager *>;
 
     constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, NamedWidgetManager manager = {}) {
