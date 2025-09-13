@@ -18,7 +18,7 @@ namespace Scene {
         decltype(auto) sender(F &&f)
         {
             return Named<"Entity", Execution::BindingPtr<Entity::Entity *>>::sender([&](auto binding) {
-                return (binding->*std::forward<F>(f))();
+                return (binding->*std::forward<F>(f))() | Execution::let_value([](auto &&sender) { return std::forward<decltype(sender)>(sender) | Execution::with_debug_location<Debug::SenderLocation>(); });
             });
         }
     };
@@ -26,7 +26,7 @@ namespace Scene {
     using NamedSceneManager = Named<"Scene", SceneManager *>;
 
     inline constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration, NamedSceneManager scene = {}) {
-        return scene.sender([=](SceneManager *mgr) { return mgr->simulationClock().wait(duration); });
+        return scene.sender([=](SceneManager *mgr) { return mgr->simulationClock().wait(duration) | Execution::with_debug_location<Debug::SenderLocation>(); });
     };
 
     inline constexpr auto yield_simulation = [](NamedSceneManager scene = {}) {
