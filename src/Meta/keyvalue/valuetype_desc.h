@@ -382,13 +382,16 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
             return { { ValueTypeEnum::KeyValueVirtualAssociativeRangeValue }, toValueTypeDesc<KeyType_t<std::ranges::range_reference_t<T>>>(), toValueTypeDesc<ValueType_t<std::ranges::range_reference_t<T>>>() };
     } else if constexpr (InstanceOfA<T, TypedBoundApiFunction>) {
         return { { ValueTypeEnum::BoundApiFunctionValue }, is_instance_auto<T, TypedBoundApiFunction>::arguments::value };
-    } else if constexpr (Pointer<T>) {
+    } else if constexpr (Pointer<T> || InstanceOf<T, std::reference_wrapper>) {
         if constexpr (Function<std::remove_pointer_t<T>>)
             // return { { ValueTypeEnum::ApiFunctionValue }, nullptr };
             throw 0;
         else if constexpr (std::same_as<std::remove_cv_t<std::remove_pointer_t<T>>, FunctionTable>)
             // return { { ValueTypeEnum::ApiFunctionValue }, nullptr };
             throw 0;
+        else if constexpr (InstanceOf<T, std::reference_wrapper>) {
+            return { { ValueTypeEnum::ScopeValue }, &table<resolveCustomScopePtr_t<typename T::type>> };
+        }
         else {
             return { { ValueTypeEnum::ScopeValue }, &table<std::remove_pointer_t<resolveCustomScopePtr_t<T>>> };
         }
