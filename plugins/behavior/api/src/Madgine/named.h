@@ -71,11 +71,13 @@ inline constexpr get_named_t<Name, V> get_named;
 
 template <typename _Rec, fixed_string Name, typename T, typename F>
 struct NamedState : Execution::base_state<_Rec> {
+    using Rec = _Rec;
+
     using Sender = std::invoke_result_t<F, ValueType_Return<T> &>;
 
     using State = Execution::connect_result_t<Sender, Rec &>;
 
-    NamedState(F &&f, Named<Name, T> &&value, Rec &&rec)
+    NamedState(F &&f, Named<Name, T> value, Rec &&rec)
         : Execution::base_state<Rec>(std::forward<Rec>(rec))
         , mState(std::forward<F>(f))
         , mValue(std::move(value))
@@ -83,22 +85,22 @@ struct NamedState : Execution::base_state<_Rec> {
     {
         if (mValue.mValue) {
             F f = std::forward<F>(std::get<F>(mState));
-            mState.emplace<State>(DelayedConstruct<State> {
-                [&]() { return Execution::connect(std::invoke(std::forward<F>(f), *mValue), mRec); } });
+            mState.template emplace<State>(DelayedConstruct<State> {
+                [&]() { return Execution::connect(std::invoke(std::forward<F>(f), *mValue), this->mRec); } });
         }
     }
 
     void start()
     {
         if (!mValue.mValue) {
-            if (!mValue.resolve(mRec)) {
+            if (!mValue.resolve(this->mRec)) {
                 throw 0;
                 //            mRec.set_error( { "Named value '" + std::string(Name) + "' not found" });
                 return;
             } else {
                 F f = std::forward<F>(std::get<F>(mState));
-                mState.emplace<State>(DelayedConstruct<State> {
-                    [&]() { return Execution::connect(std::invoke(std::forward<F>(f), *mValue), mRec); } });
+                mState.template emplace<State>(DelayedConstruct<State> {
+                    [&]() { return Execution::connect(std::invoke(std::forward<F>(f), *mValue), this->mRec); } });
             }
         }
         std::get<State>(mState).start();
@@ -128,6 +130,12 @@ struct NamedSender {
     friend auto tag_invoke(Execution::connect_t, NamedSender &&sender, Rec &&rec)
     {
         return NamedState<Rec, Name, T, F> { std::forward<F>(sender.mF), std::move(sender.mValue), std::forward<Rec>(rec) };
+    }
+
+    template <typename Rec>
+    friend auto tag_invoke(Execution::connect_t, NamedSender &sender, Rec &&rec)
+    {
+        return NamedState<Rec, Name, T, std::reference_wrapper<F>> { sender.mF, sender.mValue, std::forward<Rec>(rec) };
     }
 
     Named<Name, T> mValue;
