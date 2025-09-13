@@ -120,16 +120,15 @@ struct IntervalClock {
                 visitor(Execution::State::Text { "Yield" });
             } else {
                 std::string title;
-                /* if (dur.count() < 1000) {
-                    title = std::format("Waiting {} ns", dur.count());
-                } else if (dur.count() < 1000000) {
-                    title = std::format("Waiting {:.3f} us", std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(dur).count());
-                } else if (dur.count() < 1000000000) {
-                    title = std::format("Waiting {:.4f} ms", std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(dur).count());
+                if (duration.count() < 1000) {
+                    title = std::format("Waiting {} ns", duration.count());
+                } else if (duration.count() < 1000000) {
+                    title = std::format("Waiting {:.3f} us", std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(duration).count());
+                } else if (duration.count() < 1000000000) {
+                    title = std::format("Waiting {:.4f} ms", std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(duration).count());
                 } else {
-                    title = std::format("Waiting {:.4f} s", std::chrono::duration_cast<std::chrono::duration<float>>(dur).count());
-                }*/
-                title = "Waiting";
+                    title = std::format("Waiting {:.4f} s", std::chrono::duration_cast<std::chrono::duration<float>>(duration).count());
+                }
 
                 visitor(Execution::State::BeginBlock { title });
 
