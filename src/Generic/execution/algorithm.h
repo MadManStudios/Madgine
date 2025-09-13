@@ -148,6 +148,12 @@ namespace Execution {
                 return algorithm_state<Sender, receiver<Rec, T>> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mTransform) };
             }
 
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &sender, Rec &&rec)
+            {
+                return algorithm_state<Sender&, receiver<Rec, T&>> { sender.mSender, std::forward<Rec>(rec), sender.mTransform };
+            }
+
             T mTransform;
         };
 
@@ -697,7 +703,7 @@ namespace Execution {
 
             state<Rec, Sender> *mState;
         };
-
+        //TODO: Solve exponential template instantiation
         template <typename Rec, typename Sender>
         struct state : algorithm_state<Sender, receiver<Rec, Sender>> {
             using base = algorithm_state<Sender, receiver<Rec, Sender>>;
@@ -726,6 +732,12 @@ namespace Execution {
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
                 return state<Rec, Sender> { std::forward<Rec>(rec), std::forward<Sender>(sender.mSender) };
+            }
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &sender, Rec &&rec)
+            {
+                return state<Rec, Sender&> { std::forward<Rec>(rec), sender.mSender };
             }
         };
 
