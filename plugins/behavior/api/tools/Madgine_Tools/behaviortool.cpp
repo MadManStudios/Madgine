@@ -64,6 +64,10 @@ namespace Tools {
 
         mInspector = &getTool<Inspector>();
 
+        mInspector->addPreviewDefinition<BehaviorList>([this](BehaviorList *list) {
+            return drawBehaviorList(*list);
+        });
+
         co_return co_await ToolBase::init();
     }
 
@@ -77,9 +81,9 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    void BehaviorTool::drawBehaviorList(BehaviorList &list)
+    bool BehaviorTool::drawBehaviorList(BehaviorList &list)
     {
-        std::erase_if(list.mEntries, [this](BehaviorList::Entry &entry) {
+        return std::erase_if(list.mEntries, [this](BehaviorList::Entry &entry) {
             ImGui::BeginGroupPanel(entry.mHandle.name().data());
             ImGui::BeginTable("Entry", 2, ImGuiTableFlags_Resizable);
             mInspector->drawMembers(entry.mParameters.customScopePtr());
@@ -98,7 +102,7 @@ namespace Tools {
                 ImGui::EndPopup();
             }
             return remove;
-        });
+        }) > 0;
     }
 
     BehaviorHandle BehaviorSelector()

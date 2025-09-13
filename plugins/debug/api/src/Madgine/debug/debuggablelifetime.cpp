@@ -13,6 +13,7 @@
 METATABLE_BEGIN(Engine::Debug::DebuggableLifetimeBase)
 READONLY_PROPERTY(Owner, owner)
 READONLY_PROPERTY(Children, children)
+READONLY_PROPERTY(DebugContexts, debugContexts)
 METATABLE_END(Engine::Debug::DebuggableLifetimeBase)
 
 static_assert(std::input_or_output_iterator<Engine::Generator<Engine::Debug::DebuggableLifetimeBase &>::iterator>);

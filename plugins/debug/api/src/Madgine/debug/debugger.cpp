@@ -15,6 +15,10 @@ UNIQUECOMPONENT(Engine::Debug::Debugger)
 METATABLE_BEGIN(Engine::Debug::Debugger)
 METATABLE_END(Engine::Debug::Debugger)
 
+METATABLE_BEGIN(Engine::Debug::ContextInfo)
+READONLY_PROPERTY(Alive, alive)
+METATABLE_END(Engine::Debug::ContextInfo)
+
 namespace Engine {
 namespace Debug {
 

@@ -189,7 +189,7 @@ namespace Tools {
               })
             | Log::with_log(mPrompt.get())
             | Execution::with_debug_location<Debug::SenderLocation>()
-            | Execution::with_sub_debug_location(&Debug::Debugger::getSingleton().createContext()));
+            | Debug::with_debug_context());
         return false;
     }
 

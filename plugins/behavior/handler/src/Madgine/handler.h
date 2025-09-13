@@ -12,39 +12,41 @@
 
 namespace Engine {
 
-    struct MADGINE_HANDLER_EXPORT HandlerBase : VirtualScopeBase<>, Threading::MadgineObject<HandlerBase> {
-        SERIALIZABLEUNIT(HandlerBase)
+struct MADGINE_HANDLER_EXPORT HandlerBase : VirtualScopeBase<>, Threading::MadgineObject<HandlerBase> {
+    SERIALIZABLEUNIT(HandlerBase)
 
-        HandlerBase(HandlerManager &ui);
-        virtual ~HandlerBase() = default;
+    HandlerBase(HandlerManager &ui);
+    virtual ~HandlerBase() = default;
 
-        virtual void onMouseVisibilityChanged(bool b);
-                                                                
-        virtual void startLifetime();
-        void endLifetime();
+    virtual void onMouseVisibilityChanged(bool b);
 
-        virtual std::string_view key() const = 0;
+    virtual void startLifetime();
+    void endLifetime();
 
-        template <typename T>
-        T &getHandler()
-        {
-            return static_cast<T &>(getHandler(UniqueComponent::component_index<T>()));
-        }
+    virtual std::string_view key() const = 0;
 
-        HandlerBase &getHandler(size_t i);
+    template <typename T>
+    T &getHandler()
+    {
+        return static_cast<T &>(getHandler(UniqueComponent::component_index<T>()));
+    }
 
-        Threading::TaskQueue *viewTaskQueue() const;
-        Threading::TaskQueue *modelTaskQueue() const;
+    HandlerBase &getHandler(size_t i);
 
-    protected:
-        virtual Threading::Task<bool> init();
-        virtual Threading::Task<void> finalize();
+    Threading::TaskQueue *viewTaskQueue() const;
+    Threading::TaskQueue *modelTaskQueue() const;
 
-        friend struct MadgineObject<HandlerBase>;
+protected:
+    virtual Threading::Task<bool> init();
+    virtual Threading::Task<void> finalize();
 
-    protected:
-        HandlerManager &mUI;
+    Debug::DebuggableLifetimeBase &lifetimeBase();
 
-        DEBUGGABLE_LIFETIME(mLifetime);        
-    };
+    friend struct MadgineObject<HandlerBase>;
+
+protected:
+    HandlerManager &mUI;
+
+    DEBUGGABLE_LIFETIME(mLifetime);
+};
 }

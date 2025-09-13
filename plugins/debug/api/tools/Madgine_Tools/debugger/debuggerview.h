@@ -17,7 +17,7 @@ namespace Tools {
     bool BeginDebuggablePanel(const char *name);
     void EndDebuggablePanel();
     MADGINE_DEBUGGER_TOOLS_EXPORT void DrawDebugMarker(float y);
-    MADGINE_DEBUGGER_TOOLS_EXPORT void DrawBreakpoint(float y);
+    MADGINE_DEBUGGER_TOOLS_EXPORT bool Breakpoint(const Execution::State::Breakpoint &bp);
 
     struct MADGINE_DEBUGGER_TOOLS_EXPORT DebuggerView : Tool<DebuggerView>, Debug::DebugListener {
 
@@ -32,7 +32,7 @@ namespace Tools {
         virtual void render() override;
         virtual void renderMenu() override;
 
-        void renderDebugContext(const Debug::ContextInfo &context);
+        bool renderDebugContext(const Debug::ContextInfo &context);
         void renderLifetime(Debug::DebuggableLifetimeBase &lifetime);
 
         void setCurrentContext(Debug::ContextInfo &context);

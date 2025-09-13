@@ -2,6 +2,7 @@
 
 #include "behaviorlist.h"
 
+#include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 #include "Meta/serialize/helper/typedobjectserialize.h"
 
@@ -29,6 +30,9 @@ SERIALIZETABLE_END(Engine::BehaviorList)
 
 SERIALIZETABLE_BEGIN(Engine::BehaviorList::Entry)
 SERIALIZETABLE_END(Engine::BehaviorList::Entry)
+
+METATABLE_BEGIN(Engine::BehaviorList)
+METATABLE_END(Engine::BehaviorList)
 
 namespace Engine {
 

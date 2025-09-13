@@ -47,6 +47,10 @@ namespace Tools {
 
         mDebugger.addListener(this);
 
+        mInspector->addPreviewDefinition<Debug::ContextInfo>([this](Debug::ContextInfo *context) {
+            return renderDebugContext(*context);
+        });
+
         co_return co_await ToolBase::init();
     }
 
@@ -88,18 +92,7 @@ namespace Tools {
                                        subLocation = visualizeDebugLocation(context, *location.mChild, inlineLocation);
                                },
                                [](const Execution::State::Breakpoint &bp) {
-                                   float offset = 0.0f;
-                                   switch (bp.mAlignment) {
-                                   case Execution::State::Breakpoint::Alignment::Center:
-                                       offset = -9.0f;
-                                       break;
-                                   case Execution::State::Breakpoint::Alignment::Bottom:
-                                       offset = -18.0f;
-                                       break;
-                                   default:
-                                       break;
-                                   }
-                                   DrawBreakpoint(ImGui::GetCursorScreenPos().y + offset);
+                                   Breakpoint(bp);
                                } },
                     desc);
 
@@ -112,7 +105,7 @@ namespace Tools {
             return subLocation;
         } else if (const Debug::DebugLocationSplitter *splitterLocation = dynamic_cast<const Debug::DebugLocationSplitter *>(&location)) {
             const Debug::DebugLocation *subLocation = nullptr;
-            
+
             if (splitterLocation->mChild)
                 visualizeDebugLocation(context, *splitterLocation->mChild, inlineLocation);
 
@@ -245,7 +238,7 @@ namespace Tools {
         ToolBase::renderMenu();
     }
 
-    void DebuggerView::renderDebugContext(const Debug::ContextInfo &context)
+    bool DebuggerView::renderDebugContext(const Debug::ContextInfo &context)
     {
         std::unique_lock guard { context.mMutex };
         if (context.mChild) {
@@ -281,6 +274,7 @@ namespace Tools {
                 }
             }
         }
+        return false;
     }
 
     void DebuggerView::renderLifetime(Debug::DebuggableLifetimeBase &lifetime)
@@ -336,12 +330,40 @@ namespace Tools {
         draw_list->AddTriangleFilled({ x + 12.0f, y - 5.0f }, { x + 12.0f, y + 5.0f }, { x + 17.0f, y }, IM_COL32(255, 200, 10, 255));
     }
 
-    void DrawBreakpoint(float y)
+    bool Breakpoint(const Execution::State::Breakpoint &bp)
     {
+        float offset = 0.0f;
+        switch (bp.mAlignment) {
+        case Execution::State::Breakpoint::Alignment::Center:
+            offset = -9.0f;
+            break;
+        case Execution::State::Breakpoint::Alignment::Bottom:
+            offset = -18.0f;
+            break;
+        default:
+            break;
+        }
+
+        const float radius = 7.0f;
+        float x = sDebugStartX + radius;
+        float y = ImGui::GetCursorScreenPos().y + offset + radius;
+
+        bool hovered = false;
+
+        if (ImGui::ButtonBehavior({ { sDebugStartX, ImGui::GetCursorScreenPos().y + offset }, { sDebugStartX + 2.0f * radius, ImGui::GetCursorScreenPos().y + offset + 2.0f * radius } }, ImGui::GetID(&bp), &hovered, nullptr)) {
+            bp.mSet = !bp.mSet;
+            return true;
+        }
+
         ImDrawList *draw_list = ImGui::GetWindowDrawList();
-        float x = sDebugStartX;
-        y += 7.0f;
-        draw_list->AddCircle({ x + 7.0f, y }, 7.0f, IM_COL32(155, 155, 155, 155));
+                
+        if (!bp.mSet)
+            draw_list->AddCircle({ x, y }, 7.0f, IM_COL32(155, 155, 155, 155));
+        else
+            draw_list->AddCircleFilled({ x, y }, 7.0f, IM_COL32(255, 100, 100, 255));
+
+
+        return false;
     }
 }
 }

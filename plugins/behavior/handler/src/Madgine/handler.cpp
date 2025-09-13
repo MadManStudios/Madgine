@@ -1,8 +1,8 @@
 #include "handlerlib.h"
 
 #include "Madgine/behavior.h"
-#include "handler.h"
 #include "Madgine/window/mainwindow.h"
+#include "handler.h"
 #include "handlermanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
@@ -12,47 +12,53 @@
 DEFINE_UNIQUE_COMPONENT(Engine, Handler)
 
 METATABLE_BEGIN(Engine::HandlerBase)
+READONLY_PROPERTY(Lifetime, lifetimeBase)
 METATABLE_END(Engine::HandlerBase)
 
 namespace Engine {
-    HandlerBase::HandlerBase(HandlerManager &ui)
-        : mUI(ui)
-        , mLifetime(&ui.lifetime())
-    {
-    }
+HandlerBase::HandlerBase(HandlerManager &ui)
+    : mUI(ui)
+    , mLifetime(&ui.lifetime())
+{
+}
 
-    HandlerBase &HandlerBase::getHandler(size_t i)
-    {
-        return mUI.getHandler(i);
-    }
+HandlerBase &HandlerBase::getHandler(size_t i)
+{
+    return mUI.getHandler(i);
+}
 
-    Threading::Task<bool> HandlerBase::init()
-    {
-        co_return true;
-    }
+Threading::Task<bool> HandlerBase::init()
+{
+    co_return true;
+}
 
-    Threading::Task<void> HandlerBase::finalize()
-    {
-        co_return;
-    }
+Threading::Task<void> HandlerBase::finalize()
+{
+    co_return;
+}
 
-    void HandlerBase::onMouseVisibilityChanged(bool b)
-    {
-    }
+void HandlerBase::onMouseVisibilityChanged(bool b)
+{
+}
 
-    void HandlerBase::startLifetime()
-    {
-        mUI.lifetime().attach(mLifetime);
-    }
+void HandlerBase::startLifetime()
+{
+    mUI.lifetime().attach(mLifetime);
+}
 
-    void HandlerBase::endLifetime()
-    {
-        mLifetime.end();
-    }
+void HandlerBase::endLifetime()
+{
+    mLifetime.end();
+}
 
-    Threading::TaskQueue *HandlerBase::viewTaskQueue() const
-    {
-        return mUI.viewTaskQueue();
-    }
+Threading::TaskQueue *HandlerBase::viewTaskQueue() const
+{
+    return mUI.viewTaskQueue();
+}
+
+Debug::DebuggableLifetimeBase &HandlerBase::lifetimeBase()
+{
+    return mLifetime;
+}
 
 }

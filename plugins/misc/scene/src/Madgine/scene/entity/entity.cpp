@@ -55,6 +55,8 @@ void componentInit(std::array<Accessor, 32>& accessors) {
 
 METATABLE_BEGIN(Engine::Scene::Entity::Entity)
 NAMED_MEMBER(Name, mName)
+READONLY_PROPERTY(Behaviors, behaviors)
+READONLY_PROPERTY(Lifetime, lifetimeBase)
 METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::Entity)
 
 using namespace Engine::Serialize;
@@ -251,6 +253,11 @@ namespace Scene {
         }
 
         Debug::DebuggableLifetime<get_named_d> &Entity::lifetime()
+        {
+            return mLifetime;
+        }
+
+        Debug::DebuggableLifetimeBase& Entity::lifetimeBase()
         {
             return mLifetime;
         }
