@@ -6,7 +6,6 @@
 
 #include "Madgine/awaitables/awaitablesender.h"
 
-
 NATIVE_BEHAVIOR(Yield_Frame, Engine::Widgets::yield_frame)
 NATIVE_BEHAVIOR(Wait_Frame, Engine::Widgets::wait_frame, Engine::InputParameter<"Duration", std::chrono::steady_clock::duration>)
 NATIVE_BEHAVIOR(Animate_Move, Engine::Widgets::animate_move, Engine::InputParameter<"Distance", Engine::Matrix3>, Engine::InputParameter<"Duration", std::chrono::nanoseconds>)
@@ -27,7 +26,7 @@ namespace Widgets {
 
         while (acc < duration) {
             co_await setPos(lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
-            acc += co_await yield_frame();
+            acc += co_await yield_frame({}, duration, acc);
         }
 
         co_await setPos(end);
@@ -45,7 +44,7 @@ namespace Widgets {
 
         while (acc < duration) {
             co_await setOpacity(lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
-            acc += co_await yield_frame();
+            acc += co_await yield_frame({}, duration, acc);
         }
 
         co_await setOpacity(end);
@@ -53,5 +52,3 @@ namespace Widgets {
 
 }
 }
-
-

@@ -114,8 +114,10 @@ struct IntervalClock {
             this->set_value(std::move(elapsed));
         }
 
-        friend auto tag_invoke(Execution::visit_state_t, state &state, const std::chrono::steady_clock::duration &duration, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, state &state, const std::pair<std::chrono::steady_clock::duration, std::chrono::steady_clock::duration> &info, auto &&visitor)
         {
+            const auto &[duration, offset] = info;
+
             if (duration.count() == 0) {
                 visitor(Execution::State::Text { "Yield" });
             } else {
@@ -130,11 +132,11 @@ struct IntervalClock {
                     title = std::format("Waiting {:.4f} s", std::chrono::duration_cast<std::chrono::duration<float>>(duration).count());
                 }
 
-                visitor(Execution::State::BeginBlock { title });
+                visitor(Execution::State::BeginBlock { title });                
 
                 float progress = 0.0f;
 
-                std::chrono::steady_clock::duration remaining = std::chrono::duration_cast<std::chrono::steady_clock::duration>(state.mWaitUntil - state.mClock->lastTick());
+                std::chrono::steady_clock::duration remaining = std::chrono::duration_cast<std::chrono::steady_clock::duration>(state.mWaitUntil - state.mClock->lastTick()) + offset;
                 progress = 1.0f - (static_cast<float>(remaining.count()) / duration.count());
                 
                 visitor(Execution::State::Progress { progress });
@@ -161,7 +163,12 @@ struct IntervalClock {
 
         friend auto tag_invoke(Execution::visit_sender_t, sender &sender)
         {
-            return sender.mDuration;
+            std::chrono::steady_clock::duration duration = sender.mDurationOverride.count() < 0 ? sender.mDuration : sender.mDurationOverride;
+            
+            return std::make_pair(
+                duration,
+                duration - sender.mDuration - sender.mAcc
+            );
         }
 
         static constexpr size_t debug_start_increment = 1;
@@ -170,6 +177,8 @@ struct IntervalClock {
 
         Binding mBinding;
         std::chrono::steady_clock::duration mDuration;
+        std::chrono::steady_clock::duration mDurationOverride;
+        std::chrono::steady_clock::duration mAcc;
     };
 
     /* auto wait(Timepoint until)
@@ -177,9 +186,9 @@ struct IntervalClock {
         return sender { {}, this, until };
     }*/
 
-    auto wait(std::chrono::steady_clock::duration duration)
+    auto wait(std::chrono::steady_clock::duration duration, std::chrono::steady_clock::duration durationOverride = -1s, std::chrono::steady_clock::duration acc = 0s)
     {
-        return sender<Execution::ConstantBinding<IntervalClock &>> { {}, Execution::ConstantBinding<IntervalClock&> { *this }, duration };
+        return sender<Execution::ConstantBinding<IntervalClock &>> { {}, Execution::ConstantBinding<IntervalClock&> { *this }, duration, durationOverride, acc };
     }
 
     template <Execution::Binding<IntervalClock &> Binding>

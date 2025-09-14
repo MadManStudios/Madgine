@@ -25,12 +25,12 @@ namespace Widgets {
     };
     using NamedWidgetManager = Named<"WidgetManager", WidgetManager *>;
 
-    constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, NamedWidgetManager manager = {}) {
-        return manager.sender([=](auto &&manager) { return manager->clock().wait(duration) | Execution::with_debug_location<Debug::SenderLocation>(); });
+    constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, NamedWidgetManager manager = {}, std::chrono::steady_clock::duration durationOverride = -1s, std::chrono::steady_clock::duration acc = 0s) {
+        return manager.sender([=](auto &&manager) { return manager->clock().wait(duration, durationOverride, acc) | Execution::with_debug_location<Debug::SenderLocation>(); });
     };
 
-    constexpr auto yield_frame = [](NamedWidgetManager manager = {}) {
-        return wait_frame(0s, manager);
+    constexpr auto yield_frame = [](NamedWidgetManager manager = {}, std::chrono::steady_clock::duration duration = 0s, std::chrono::steady_clock::duration acc = 0s) {
+        return wait_frame(0s, manager, duration, acc);
     };
 
     MADGINE_WIDGETS_EXPORT Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
