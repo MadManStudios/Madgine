@@ -7,8 +7,9 @@
 namespace Engine {
 namespace Debug {
 
-    DebugLocationSplitter::DebugLocationSplitter(size_t channelCount)
+    DebugLocationSplitter::DebugLocationSplitter(size_t channelCount, std::string debugName)
         : mChildLocations(channelCount - 1)
+        , mDebugName(std::move(debugName))
     {
     }
 
@@ -32,7 +33,7 @@ namespace Debug {
 
     std::string DebugLocationSplitter::toString() const
     {
-        return "Splitter";
+        return mDebugName;
     }
 
     std::map<std::string_view, ValueType> DebugLocationSplitter::localVariables() const

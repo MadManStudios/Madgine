@@ -21,7 +21,7 @@ namespace Widgets {
         {
             visitor(Execution::State::BeginBlock { "Temp Widget" });
 
-            visitor(Execution::State::Text { "Dummy" });
+            visitor(Execution::State::SubLocation {});
 
             visitor(Execution::State::EndBlock {});
         }
@@ -83,7 +83,7 @@ namespace Widgets {
 
     void TempWidgetState::stop()
     {
-        throw 0;
+        mState.stop();
     }
 
     WidgetBase *TempWidgetState::widget()

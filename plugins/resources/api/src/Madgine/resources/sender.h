@@ -2,6 +2,8 @@
 
 #include "Madgine/root/root.h"
 
+#include "Generic/execution/statedescriptor.h"
+
 namespace Engine {
 namespace Resources {
 
@@ -55,6 +57,11 @@ namespace Resources {
                 mState.stop();
             }
 
+            friend auto tag_invoke(Execution::visit_state_t, state &state, const auto &info, auto &&visitor)
+            {
+                Execution::visit_state(state.mState, info, std::forward<decltype(visitor)>(visitor));
+            }
+
             State mState;
         };
 
@@ -65,6 +72,11 @@ namespace Resources {
             friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
             {
                 return state<Sender, Handle, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::forward<Handle>(sender.mHandle) };
+            }
+
+            friend decltype(auto) tag_invoke(Execution::visit_sender_t, sender &sender)
+            {
+                return Execution::visit_sender(sender.mSender);
             }
 
             Handle mHandle;

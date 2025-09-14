@@ -106,9 +106,9 @@ namespace Tools {
         } else if (const Debug::DebugLocationSplitter *splitterLocation = dynamic_cast<const Debug::DebugLocationSplitter *>(&location)) {
             const Debug::DebugLocation *subLocation = nullptr;
 
-            if (splitterLocation->mChild)
-                visualizeDebugLocation(context, *splitterLocation->mChild, inlineLocation);
+            assert(!splitterLocation->mChild);
 
+            ImGui::BeginGroupPanel(splitterLocation->toString().c_str());
             for (const Debug::ParentLocation &channel : splitterLocation->channels()) {
                 if (channel.mChild) {
                     const Debug::DebugLocation *subLocation2 = visualizeDebugLocation(context, *channel.mChild, inlineLocation);
@@ -118,6 +118,7 @@ namespace Tools {
                     }
                 }
             }
+            ImGui::EndGroupPanel();
 
             return subLocation;
         } else {

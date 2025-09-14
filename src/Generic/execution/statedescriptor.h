@@ -42,19 +42,21 @@ namespace Execution {
                 Top,
                 Center,
                 Bottom
-            } mAlignment = Alignment::Center;
+            } mAlignment
+                = Alignment::Center;
         };
     }
 
     struct visit_state_t {
         template <typename T, typename I, typename V>
-        requires(!tag_invocable<visit_state_t, T &, const I &, V>) auto operator()(T &, const I &, V &&visitor) const
+            requires(!tag_invocable<visit_state_t, T &, const I &, V>)
+        auto operator()(T &, const I &, V &&visitor) const
         {
             visitor(Execution::State::SubLocation {});
         }
 
         template <typename T, typename I, typename V>
-        requires tag_invocable<visit_state_t, T &, const I &, V>
+            requires tag_invocable<visit_state_t, T &, const I &, V>
         auto operator()(T &t, const I &info, V &&visitor) const
             noexcept(is_nothrow_tag_invocable_v<visit_state_t, T &, const I &, V>)
                 -> tag_invoke_result_t<visit_state_t, T &, const I &, V>
@@ -67,13 +69,14 @@ namespace Execution {
 
     struct visit_sender_t {
         template <typename T>
-        requires(!tag_invocable<visit_sender_t, T &>) auto operator()(T &) const
+            requires(!tag_invocable<visit_sender_t, T &>)
+        auto operator()(T &) const
         {
             return std::monostate {};
         }
 
         template <typename T>
-        requires tag_invocable<visit_sender_t, T &>
+            requires tag_invocable<visit_sender_t, T &>
         auto operator()(T &t) const
             noexcept(is_nothrow_tag_invocable_v<visit_sender_t, T &>)
                 -> tag_invoke_result_t<visit_sender_t, T &>
@@ -87,10 +90,15 @@ namespace Execution {
     template <typename... Sender>
     auto tag_invoke(visit_sender_t, sequence_t::sender<Sender...> &sender)
     {
-        TupleUnpacker::forEach(sender.mSenders, [&](auto &sender) {
-            visit_sender(sender);
+        return TupleUnpacker::forEach(sender.mSenders, [&](auto &sender) {
+            return visit_sender(sender);
         });
-        return std::monostate {};
+    }
+
+    template <typename V, typename Rec, typename... Sender>
+    void tag_invoke(visit_state_t, sequence_t::state<Rec, Sender...> &state, const auto &info, V &&visitor)
+    {
+        visitor(Execution::State::Text("Sequence - TODO"));
     }
 
 }
