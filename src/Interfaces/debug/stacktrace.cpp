@@ -121,7 +121,7 @@ namespace Debug {
         static struct Guard {
             Guard()
             {
-                auto result = SymSetOptions(SYMOPT_LOAD_LINES) && SymInitialize(GetCurrentProcess(), NULL, TRUE);
+                auto result = SymSetOptions(SYMOPT_LOAD_LINES | SYMOPT_DEBUG | SYMOPT_UNDNAME) && SymInitialize(GetCurrentProcess(), NULL, TRUE);
                 if (!result) {
                     int error = GetLastError();
                     (void)error;
