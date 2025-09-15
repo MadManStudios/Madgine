@@ -10,6 +10,8 @@
 
 #include "Generic/functor.h"
 
+#include "../visitor.h"
+
 namespace Engine {
 namespace Serialize {
 
@@ -184,7 +186,7 @@ namespace Serialize {
             }
         };
 
-        template <auto reader, typename WriteFunctor, typename ClearFunctor, OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
+        template <auto reader, typename WriteFunctor, typename ClearFunctor, typename Scan, OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
         struct _CustomCreator {
 
             using Category = CreatorCategory;
@@ -225,9 +227,16 @@ namespace Serialize {
             template <typename C>
             static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
             {
-                ArgsTuple tuple;
-                STREAM_PROPAGATE_ERROR(readCreationData(in, tuple));
-                return Serialize::visitStream<std::ranges::range_value_t<C>>(in, nullptr, visitor);
+                if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, std::nullptr_t>) {
+                    ArgsTuple tuple;
+                    STREAM_PROPAGATE_ERROR(readCreationData(in, tuple));
+                    return Serialize::visitStream<std::ranges::range_value_t<C>>(in, nullptr, visitor);
+                } else {
+                    const SerializeTable *type = nullptr;
+                    STREAM_PROPAGATE_ERROR(Scan::value(type, in));
+                    assert(type);
+                    return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {});
+                }
             }
 
             template <typename Arg>
@@ -298,7 +307,7 @@ namespace Serialize {
                     const SerializeTable *type = nullptr;
                     STREAM_PROPAGATE_ERROR(Scan::value(type, in));
                     assert(type);
-                    return SerializableDataPtr::visitStream(type, in, nullptr, visitor);
+                    return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {});
                 }
             }
 
@@ -330,8 +339,8 @@ namespace Serialize {
     template <auto reader, auto writer, auto clear = nullptr, auto scan = nullptr>
     using ParentCreator = FunctionCapture<__serialize_impl__::_ParentCreator, reader, MemberFunctor<writer>, std::conditional_t<std::same_as<decltype(clear), std::nullptr_t>, __serialize_impl__::DefaultClear, UnpackingMemberFunctor<clear>>, auto_holder<scan>>;
 
-    template <auto reader, auto writer, auto clear = nullptr>
-    using CustomCreator = FunctionCapture<__serialize_impl__::_CustomCreator, reader, Functor<writer>, std::conditional_t<std::same_as<decltype(clear), std::nullptr_t>, __serialize_impl__::DefaultClear, Functor<clear>>>;
+    template <auto reader, auto writer, auto clear = nullptr, auto scan = nullptr>
+    using CustomCreator = FunctionCapture<__serialize_impl__::_CustomCreator, reader, Functor<writer>, std::conditional_t<std::same_as<decltype(clear), std::nullptr_t>, __serialize_impl__::DefaultClear, Functor<clear>>, auto_holder<scan>>;
 
     template <typename... Configs>
     using CreatorSelector = ConfigSelectorDefault<CreatorCategory, DefaultCreator, Configs...>;
