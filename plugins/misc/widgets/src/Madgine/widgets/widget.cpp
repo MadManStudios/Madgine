@@ -190,7 +190,7 @@ namespace Widgets {
         return mName;
     }
 
-    WidgetBase *WidgetBase::createChildByDescriptor(const WidgetDescriptor &desc)
+    WidgetBase *WidgetBase::createChildByDescriptor(const WidgetLoader::Handle &desc)
     {
         return mChildren.emplace_back(mManager.createWidgetByDescriptor(desc, this)).get();
     }

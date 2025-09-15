@@ -127,7 +127,7 @@ namespace Widgets {
         return w;
     }
 
-    std::unique_ptr<WidgetBase> WidgetManager::createWidgetByDescriptor(const WidgetDescriptor &desc, WidgetBase *parent)
+    std::unique_ptr<WidgetBase> WidgetManager::createWidgetByDescriptor(const WidgetLoader::Handle &desc, WidgetBase *parent)
     {
         std::unique_ptr<WidgetBase> w = desc.create(*this, parent);
         if (!parent) {
@@ -149,7 +149,7 @@ namespace Widgets {
             return STREAM_UNKNOWN_ERROR(in) << "Widget class '" << _class << "' not found!";
         }
 
-        widget = createWidgetByDescriptor(*desc, parent);
+        widget = createWidgetByDescriptor(desc, parent);
 
         return {};
     }

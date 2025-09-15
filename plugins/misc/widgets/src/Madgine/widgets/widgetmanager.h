@@ -23,6 +23,8 @@
 
 #include "Generic/intervalclock.h"
 
+#include "widgetloader.h"
+
 namespace Engine {
 namespace Widgets {
 
@@ -99,6 +101,8 @@ namespace Widgets {
         using RenderPass::addDependency;
         using RenderPass::removeDependency;
 
+        static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in);
+
     protected:
         WidgetBase *getHoveredWidget(const Vector2 &pos, WidgetBase *current);
         WidgetBase *getHoveredWidgetUp(const Vector2 &pos, WidgetBase *current);
@@ -106,11 +110,10 @@ namespace Widgets {
 
         void resetPointerState();
 
-        std::unique_ptr<WidgetBase> createWidgetByDescriptor(const WidgetDescriptor &desc, WidgetBase *parent = nullptr);
+        std::unique_ptr<WidgetBase> createWidgetByDescriptor(const WidgetLoader::Handle &desc, WidgetBase *parent = nullptr);
         Serialize::StreamResult readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent);
         Serialize::StreamResult readWidgetStub(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);
         const char *writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;
-        static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in);
 
         template <typename WidgetType = WidgetBase>
         std::unique_ptr<WidgetType> create(WidgetBase *parent = nullptr);

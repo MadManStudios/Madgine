@@ -74,7 +74,7 @@ namespace Widgets {
         assert(result);
 
         assert(!mWidget);
-        mWidget = mDesc->create(*mgr);
+        mWidget = mDesc.create(*mgr);
         mWidget->setPos(mPos);
         mWidget->setSize(mSize);
         mgr->openOverlay(mWidget.get());

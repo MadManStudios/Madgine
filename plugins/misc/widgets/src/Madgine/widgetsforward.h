@@ -25,6 +25,8 @@ namespace Widgets {
 
     struct WidgetsRenderData;
 
+    struct WidgetTemplate;
+
 }
 
 }

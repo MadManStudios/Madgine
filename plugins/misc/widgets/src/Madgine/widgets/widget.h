@@ -24,6 +24,8 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
+#include "widgetloader.h"
+
 namespace Engine {
 namespace Widgets {
 
@@ -73,7 +75,7 @@ namespace Widgets {
         WidgetType* createChild() {
             return static_cast<WidgetType *>(createChildByDescriptor(type_holder<WidgetType>));
         }
-        WidgetBase *createChildByDescriptor(const WidgetDescriptor &desc);
+        WidgetBase *createChildByDescriptor(const WidgetLoader::Handle &desc);
         void clearChildren();
 
         WidgetBase *getChildRecursive(std::string_view name);

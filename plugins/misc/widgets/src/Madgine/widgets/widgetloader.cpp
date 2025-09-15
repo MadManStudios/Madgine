@@ -18,7 +18,16 @@
 #include "textedit.h"
 #include "widget.h"
 
+#include "widgetmanager.h"
+
+#include "Meta/serialize/helper/typedobjectserialize.h"
+
+#include "compoundwidget.h"
+
 RESOURCELOADER(Engine::Widgets::WidgetLoader)
+
+SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetTemplate)
+SERIALIZETABLE_END(Engine::Widgets::WidgetTemplate)
 
 namespace Engine {
 namespace Widgets {
@@ -56,23 +65,46 @@ namespace Widgets {
 
     Threading::Task<bool> WidgetLoader::loadImpl(WidgetDescriptor &descriptor, ResourceDataInfo &info)
     {
-        Serialize::SerializeManager mgr { "Atlas" };
+        std::vector<unsigned char> blob = info.resource()->readAsBlob();
+
+        Serialize::SerializeManager mgr { "WidgetLoader" };
         Serialize::FormattedSerializeStream stream { Serialize::Formats::xml(), mgr.wrapStream(info.resource()->readAsStream(), true) };
 
-        WidgetTemplate _template;
+        std::vector<WidgetData> widgets;
 
-        Serialize::StreamResult result = Serialize::read(stream, _template, "Widget");
-        if (result.mState != Serialize::StreamState::OK) {
-            LOG_ERROR(result);
-            co_return false;
+        #define HANDLE_RESULT(result) \
+            if (result.mState != Serialize::StreamState::OK) { \
+                LOG_ERROR(result); \
+                co_return false; \
+            }
+
+        HANDLE_RESULT(stream.beginContainerRead("Widgets"));
+
+        while (stream.hasContainerItem()) {
+            std::string _class;
+            HANDLE_RESULT(Serialize::beginExtendedTypedRead(stream, _class));
+            WidgetLoader::Handle desc;
+            if (!co_await desc.load(_class))
+                co_return false;
+
+            const Serialize::SerializeTable *table = desc->serializeTable();
+
+            WidgetData &data = widgets.emplace_back();
+            data.mType = strrchr(table->mTypeName, ':') + 1;
+            HANDLE_RESULT(Serialize::SerializableDataPtr::visitStream(table, stream, nullptr,
+                Serialize::StreamVisitorImpl { [&](Serialize::PrimitiveHolder<std::string> holder, Serialize::FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) {
+                    if (std::string_view { name } == "mName") {
+                        return Serialize::read(in, data.mName, name);
+                    }
+                    return Serialize::StreamResult {};
+                } }));
         }
 
+        HANDLE_RESULT(stream.endContainerRead("Widgets"));
+
+
         descriptor = {
-            [](WidgetManager &mgr, WidgetBase *parent, const WidgetDescriptor *desc) -> std::unique_ptr<WidgetBase> {
-                return std::make_unique<CompoundWidget>(mgr, desc->widgetTemplate(), parent);
-            },
-            nullptr,
-            std::move(_template)
+            std::make_unique<WidgetTemplate>(std::string { info.resource()->name() }, std::move(widgets))
         };
 
         co_return true;
@@ -83,9 +115,20 @@ namespace Widgets {
         co_return;
     }
 
-    std::unique_ptr<WidgetBase> WidgetDescriptor::create(WidgetManager &manager, WidgetBase *parent) const
+    WidgetDescriptor::WidgetDescriptor() = default;
+
+    WidgetDescriptor::WidgetDescriptor(std::unique_ptr<WidgetTemplate> _template)
+        : mSerializeTable(&_template->mSerializeTable)
+        , mMetaTable(&_template->mMetaTable)
+        , mTemplate(std::move(_template))
     {
-        return mCtor(manager, parent, this);
+    }
+
+    WidgetDescriptor::~WidgetDescriptor() = default;
+
+    const MetaTable *WidgetDescriptor::metaTable()
+    {
+        return mMetaTable;
     }
 
     const Serialize::SerializeTable *WidgetDescriptor::serializeTable()
@@ -93,9 +136,25 @@ namespace Widgets {
         return mSerializeTable;
     }
 
-    const WidgetTemplate &WidgetDescriptor::widgetTemplate() const
+    std::unique_ptr<WidgetBase> WidgetLoader::Handle::create(WidgetManager &manager, WidgetBase *parent) const
+    {
+        const WidgetDescriptor &desc = **this;
+        if (desc.widgetTemplate()) {
+            return std::make_unique<CompoundWidget>(manager, *this, parent);
+        } else {
+            return desc.create(manager, *this, parent);
+        }
+        
+    }
+
+    const std::unique_ptr<WidgetTemplate> &WidgetDescriptor::widgetTemplate() const
     {
         return mTemplate;
+    }
+
+    std::unique_ptr<WidgetBase> WidgetDescriptor::create(WidgetManager &manager, WidgetLoader::Handle handle, WidgetBase *parent) const
+    {
+        return mCtor(manager, parent, std::move(handle));
     }
 }
 }

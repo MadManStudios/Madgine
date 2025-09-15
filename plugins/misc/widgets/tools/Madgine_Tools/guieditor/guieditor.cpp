@@ -362,7 +362,7 @@ namespace Tools {
                 for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
                     if (ImGui::MenuItem(name.c_str())) {
                         Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
-                        w->createChildByDescriptor(*desc);
+                        w->createChildByDescriptor(desc);
                     }
                 }
                 ImGui::EndMenu();
@@ -419,7 +419,7 @@ namespace Tools {
                         for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
                             if (ImGui::MenuItem(name.c_str())) {
                                 Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
-                                root->createChildByDescriptor(*desc);                                
+                                root->createChildByDescriptor(desc);                                
                             }
                         }
                         ImGui::EndMenu();
