@@ -6,14 +6,16 @@
 
 #include "Madgine_Tools/toolbase.h"
 
+#include "widgetfile.h"
+
 namespace Engine {
 namespace Tools {
 
-    struct GuiEditor : public Tool<GuiEditor> {
+    struct WidgetEditor : public Tool<WidgetEditor> {
 
-        SERIALIZABLEUNIT(GuiEditor)
+        SERIALIZABLEUNIT(WidgetEditor)
 
-        GuiEditor(ImRoot &root);
+        WidgetEditor(ImRoot &root);
 
         virtual Threading::Task<bool> init() override;
         virtual Threading::Task<void> finalize() override;
@@ -33,6 +35,8 @@ namespace Tools {
         Widgets::WidgetManager *mWidgetManager = nullptr;
         WidgetSettings *mSelected = nullptr;
         std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;
+
+        std::vector<WidgetFile> mFiles;
 
         bool mMouseDown = false;
         bool mDragging = false;

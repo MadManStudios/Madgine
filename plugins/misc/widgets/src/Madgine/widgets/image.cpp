@@ -37,7 +37,7 @@ namespace Widgets {
         WidgetBase::render(renderData);
     }
 
-    std::string Image::getClass() const
+    const char *Image::getClass() const
     {
         return "Image";
     }

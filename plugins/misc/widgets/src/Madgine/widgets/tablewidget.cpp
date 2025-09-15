@@ -100,7 +100,7 @@ namespace Widgets {
         return { mCellData.data(), { columnCount(), rowCount() } };
     }
 
-    std::string TableWidget::getClass() const
+    const char *TableWidget::getClass() const
     {
         return "TableWidget";
     }

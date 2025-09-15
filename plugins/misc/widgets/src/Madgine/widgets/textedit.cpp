@@ -152,7 +152,7 @@ namespace Widgets {
         mTextRenderData.updateText(mText, getAbsoluteTextSize());
     }
 
-    std::string TextEdit::getClass() const
+    const char *TextEdit::getClass() const
     {
         return "TextEdit";
     }

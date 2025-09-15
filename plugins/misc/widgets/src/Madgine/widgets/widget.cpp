@@ -172,7 +172,7 @@ namespace Widgets {
         return geometry;
     }
 
-    std::string WidgetBase::getClass() const
+    const char *WidgetBase::getClass() const
     {
         return "Widget";
     }

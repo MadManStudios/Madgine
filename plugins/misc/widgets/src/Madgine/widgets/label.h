@@ -10,7 +10,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Label() = default;
 
-        std::string getClass() const override;
+        const char *getClass() const override;
 
         void render(WidgetsRenderData &renderData) override;
 

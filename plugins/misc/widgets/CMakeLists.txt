@@ -28,7 +28,7 @@ target_link_plugins(WidgetHandler Widgets Handler)
 set(sources "")
 FolderSources(sources "" tools)
 	FolderSources(sources tools Madgine_Tools)
-		FolderSources(sources Madgine_Tools guieditor guieditor.cpp guieditor.h widgetsettings.cpp widgetsettings.h)
+		FolderSources(sources Madgine_Tools widgeteditor widgeteditor.cpp widgeteditor.h widgetsettings.cpp widgetsettings.h widgetfile.cpp widgetfile.h)
 
 add_tools(Widgets ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/widgetstoolslib.h)
 

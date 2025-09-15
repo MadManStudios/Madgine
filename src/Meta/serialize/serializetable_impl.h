@@ -70,8 +70,7 @@ namespace Serialize {
                 },
                 [](void *_unit, FormattedSerializeStream &in, bool success) -> StreamResult {
                     Unit *unit = unit_cast<Unit *>(_unit);
-                    STREAM_PROPAGATE_ERROR(apply_map(unit->*P, in, success));
-                    return {};
+                    return apply_map(unit->*P, in, success);
                 },
                 [](void *unit, bool b) {
                 },
@@ -138,14 +137,14 @@ namespace Serialize {
                 [](void *unit, FormattedMessageStream &inout, MessageId id) -> StreamResult {
                     throw "Unsupported";
                 },
-                [](void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) {
+                [](const Serializer *, void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) {
                     return StreamResult {};
                 },
-                [](void *unit, bool b, const CallerHierarchyBasePtr &hierarchy) {
+                [](const Serialize::Serializer *serializer, void *unit, bool b, const CallerHierarchyBasePtr &hierarchy) {
                 },
-                [](void *unit, bool active, bool existenceChanged) {
+                [](const Serialize::Serializer *serializer, void *unit, bool active, bool existenceChanged) {
                 },
-                [](void *unit) {
+                [](const Serialize::Serializer *serializer, void *unit) {
                 },
                 [](const void *unit, const std::vector<WriteMessage> &outStreams, void *data) {
                     throw "Unsupported";
@@ -194,18 +193,18 @@ namespace Serialize {
                     } else
                         throw "Unsupported";
                 },
-                [](void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) -> StreamResult {
+                [](const Serializer *, void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) -> StreamResult {
                     Unit *unit = unit_cast<Unit *>(_unit);
                     return apply_map(unit->*P, in, success, CallerHierarchyPtr { hierarchy.append(unit) });
                 },
-                [](void *_unit, bool b, const CallerHierarchyBasePtr &hierarchy) {
+                [](const Serializer *, void *_unit, bool b, const CallerHierarchyBasePtr &hierarchy) {
                     Unit *unit = unit_cast<Unit *>(_unit);
                     set_synced(unit->*P, b, CallerHierarchyPtr { hierarchy.append(unit) });
                 },
-                [](void *unit, bool active, bool existenceChanged) {
+                [](const Serializer *, void *unit, bool active, bool existenceChanged) {
                     setActive<T, Configs...>(unit_cast<Unit *>(unit)->*P, active, existenceChanged);
                 },
-                [](void *unit) {
+                [](const Serializer *, void *unit) {
                     set_parent(unit_cast<Unit *>(unit)->*P, unit_cast<Unit*>(unit));
                 },
                 [](const void *_unit, const std::vector<WriteMessage> &outStreams, void *data) {

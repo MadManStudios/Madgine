@@ -64,7 +64,7 @@ namespace Widgets {
             mSource->resize(pixelSize.xy().floor());
     }
 
-    std::string SceneWindow::getClass() const
+    const char *SceneWindow::getClass() const
     {
         return "SceneWindow";
     }

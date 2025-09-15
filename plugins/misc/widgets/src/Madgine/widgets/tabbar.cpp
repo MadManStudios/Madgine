@@ -76,7 +76,7 @@ namespace Widgets {
         WidgetBase::render(renderData);
     }
 
-    std::string TabBar::getClass() const
+    const char *TabBar::getClass() const
     {
         return "TabBar";
     }

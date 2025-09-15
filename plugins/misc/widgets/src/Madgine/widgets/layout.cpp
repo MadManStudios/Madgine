@@ -37,7 +37,7 @@ namespace Widgets {
         float mOffset;
     };
 
-    std::string Layout::getClass() const
+    const char *Layout::getClass() const
     {
         return "Layout";
     }

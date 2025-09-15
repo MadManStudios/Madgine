@@ -111,7 +111,7 @@ namespace Serialize {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                STREAM_PROPAGATE_ERROR(it->mApplySerializableMap(unit, in, success, hierarchy));
+                STREAM_PROPAGATE_ERROR(it->mApplySerializableMap(it, unit, in, success, hierarchy));
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
@@ -123,7 +123,7 @@ namespace Serialize {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                it->mSetDataSynced(unit, b, hierarchy);
+                it->mSetDataSynced(it, unit, b, hierarchy);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
@@ -138,7 +138,7 @@ namespace Serialize {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                it->mSetActive(unit, active, existenceChanged);
+                it->mSetActive(it, unit, active, existenceChanged);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
@@ -163,7 +163,7 @@ namespace Serialize {
                     assert(unit->mActiveIndex > 0);
                     --unit->mActiveIndex;
                 }
-                it->mSetActive(unit, active, existenceChanged);
+                it->mSetActive(it, unit, active, existenceChanged);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
@@ -178,7 +178,7 @@ namespace Serialize {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                it->mSetParent(unit);
+                it->mSetParent(it, unit);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }

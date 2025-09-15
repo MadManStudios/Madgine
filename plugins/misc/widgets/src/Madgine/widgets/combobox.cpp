@@ -31,7 +31,7 @@ namespace Widgets {
         return std::string();
     }
 
-    std::string Combobox::getClass() const
+    const char *Combobox::getClass() const
     {
         return "Combobox";
     }

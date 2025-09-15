@@ -31,7 +31,7 @@ namespace Widgets {
         Serialize::SerializeManager serializeMgr { "CompoundWidget" };
         Serialize::FormattedSerializeStream stream { Serialize::Formats::xml(), serializeMgr.wrapStream(mDescriptor.resource()->readAsStream(), true) };
 
-        Serialize::StreamResult result = Serialize::read<std::vector<std::unique_ptr<WidgetBase>>, Serialize::ParentCreator<&CompoundWidget::readWidget, &CompoundWidget::writeWidget, nullptr, &WidgetManager::scanWidget>>(stream, mTemplateWidgets, "Widgets", CallerHierarchy<WidgetBase*> { this });
+        Serialize::StreamResult result = Serialize::read<std::vector<std::unique_ptr<WidgetBase>>, Serialize::ParentCreator<&CompoundWidget::readWidget, &CompoundWidget::writeWidget, nullptr, &WidgetManager::scanWidget>>(stream, mTemplateWidgets, "Widgets", CallerHierarchy<WidgetBase *> { this });
         if (result.mState != Serialize::StreamState::OK) {
             LOG_ERROR(result);
             throw 0;
@@ -115,8 +115,20 @@ namespace Widgets {
                     CompoundWidget *compound = static_cast<CompoundWidget *>(obj);
                     WidgetBase *w = compound->getTemplateWidget(name);
                     return Serialize::read(in, *w, name, hierarchy);
+                },
+                nullptr,
+                nullptr,
+                [](const Serialize::Serializer *serializer, void *obj, Serialize::FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr) -> Serialize::StreamResult {
+                    CompoundWidget *compound = static_cast<CompoundWidget *>(obj);
+                    WidgetBase *w = compound->getTemplateWidget(serializer->mFieldName);
+                    return Serialize::apply_map(*w, in, success);
+                },
+                nullptr,
+                [](const Serialize::Serializer *serializer, void *obj, bool active, bool existenceChanged) {
+                    CompoundWidget *compound = static_cast<CompoundWidget *>(obj);
+                    WidgetBase *w = compound->getTemplateWidget(serializer->mFieldName);
+                    Serialize::setActive(*w, active, existenceChanged);
                 }
-
             };
         }
 
@@ -146,6 +158,11 @@ namespace Widgets {
         accessors[widgets.size()] = { nullptr };
 
         return accessors;
+    }
+
+    const char *CompoundWidget::getClass() const
+    {
+        return mDescriptor.name().data();
     }
 
 }

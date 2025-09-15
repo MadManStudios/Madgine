@@ -43,7 +43,7 @@ namespace Widgets {
 
         virtual ~WidgetBase();
 
-        virtual std::string getClass() const;
+        virtual const char *getClass() const;
 
         WidgetManager &manager();
         const std::string &key() const;

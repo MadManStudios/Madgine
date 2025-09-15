@@ -10,7 +10,7 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        virtual std::string getClass() const override;
+        const char *getClass() const override;
 
         float mRatio = 0.0f;
         Color4 mColor;

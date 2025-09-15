@@ -86,14 +86,14 @@ static constexpr Serializer sComponentSynchronizer {
         throw 0;
         return {};
     },
-    [](void *, FormattedSerializeStream &, bool, Engine::CallerHierarchyBasePtr) -> StreamResult {
+    [](const Serializer *, void *, FormattedSerializeStream &, bool, Engine::CallerHierarchyBasePtr) -> StreamResult {
         return {};
     },
-    [](void *, bool, const Engine::CallerHierarchyBasePtr &hierarchy) {
+    [](const Serializer *, void *, bool, const Engine::CallerHierarchyBasePtr &hierarchy) {
     },
-    [](void *, bool, bool) {
+    [](const Serializer *, void *, bool, bool) {
     },
-    [](void *) {
+    [](const Serializer *, void *) {
     },
     [](const void *unit, const std::vector<WriteMessage> &outStreams, void *data) {
         Engine::Scene::Entity::EntityComponentActionPayload &payload = *static_cast<Engine::Scene::Entity::EntityComponentActionPayload *>(data);

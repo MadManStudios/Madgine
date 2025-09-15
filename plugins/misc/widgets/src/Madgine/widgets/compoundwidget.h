@@ -37,6 +37,8 @@ namespace Widgets {
 
         CompoundWidget(WidgetManager &mgr, WidgetLoader::Handle desc, WidgetBase *parent = nullptr);
 
+        const char *getClass() const override;
+
         void render(WidgetsRenderData &renderData) override;
         void updateChildrenGeometry() override;
 

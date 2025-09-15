@@ -14,7 +14,7 @@ namespace Widgets {
         virtual void setText(const std::string &s);
         virtual std::string getText();
 
-        virtual std::string getClass() const override;
+        const char *getClass() const override;
     };
 }
 }

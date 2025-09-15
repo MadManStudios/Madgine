@@ -23,7 +23,7 @@ namespace Widgets {
     {
     }
 
-    std::string Checkbox::getClass() const
+    const char *Checkbox::getClass() const
     {
         return "Checkbox";
     }

@@ -1,6 +1,6 @@
 #include "../widgetstoolslib.h"
 
-#include "guieditor.h"
+#include "widgeteditor.h"
 
 #include "Madgine_Tools/imgui/clientimroot.h"
 #include "imgui/imgui.h"
@@ -30,30 +30,30 @@
 
 #include "Madgine/widgets/widgetloader.h"
 
-UNIQUECOMPONENT(Engine::Tools::GuiEditor);
+UNIQUECOMPONENT(Engine::Tools::WidgetEditor);
 
-METATABLE_BEGIN_BASE(Engine::Tools::GuiEditor, Engine::Tools::ToolBase)
-METATABLE_END(Engine::Tools::GuiEditor)
+METATABLE_BEGIN_BASE(Engine::Tools::WidgetEditor, Engine::Tools::ToolBase)
+METATABLE_END(Engine::Tools::WidgetEditor)
 
-SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::GuiEditor, Engine::Tools::ToolBase)
-SERIALIZETABLE_END(Engine::Tools::GuiEditor)
+SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::WidgetEditor, Engine::Tools::ToolBase)
+SERIALIZETABLE_END(Engine::Tools::WidgetEditor)
 
 namespace Engine {
 namespace Tools {
 
-    GuiEditor::GuiEditor(ImRoot &root)
-        : Tool<GuiEditor>(root)
+    WidgetEditor::WidgetEditor(ImRoot &root)
+        : Tool<WidgetEditor>(root)
     {
     }
 
-    Threading::Task<bool> GuiEditor::init()
+    Threading::Task<bool> WidgetEditor::init()
     {
         mWidgetManager = &static_cast<const ClientImRoot &>(mRoot).window().getWindowComponent<Widgets::WidgetManager>();
 
         co_return co_await ToolBase::init();
     }
 
-    Threading::Task<void> GuiEditor::finalize()
+    Threading::Task<void> WidgetEditor::finalize()
     {
         mSettings.clear();
 
@@ -61,19 +61,19 @@ namespace Tools {
         co_return;
     }
 
-    void GuiEditor::render()
+    void WidgetEditor::render()
     {
         Widgets::WidgetBase *hoveredWidget = nullptr;
         renderHierarchy(&hoveredWidget);
         renderSelection(hoveredWidget);
     }
 
-    void GuiEditor::renderMenu()
+    void WidgetEditor::renderMenu()
     {
         ToolBase::renderMenu();
         if (mVisible) {
 
-            if (ImGui::BeginMenu("GuiEditor")) {
+            if (ImGui::BeginMenu("WidgetEditor")) {
 
                 for (Widgets::WidgetBase *w : mWidgetManager->widgets()) {
                     if (ImGui::MenuItem(w->key().c_str(), nullptr, w->mVisible)) {
@@ -89,14 +89,14 @@ namespace Tools {
         }
     }
 
-    void GuiEditor::update()
+    void WidgetEditor::update()
     {
         ToolBase::update();
     }
 
-    std::string_view GuiEditor::key() const
+    std::string_view WidgetEditor::key() const
     {
-        return "GuiEditor";
+        return "WidgetEditor";
     }
 
     void renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color, ImDrawList *drawList)
@@ -111,7 +111,7 @@ namespace Tools {
         drawList->AddRect(bounds.topLeft() / io.DisplayFramebufferScale, bounds.bottomRight() / io.DisplayFramebufferScale, color);
     }
 
-    void GuiEditor::renderSelection(Widgets::WidgetBase *hoveredWidget)
+    void WidgetEditor::renderSelection(Widgets::WidgetBase *hoveredWidget)
     {
         constexpr float borderSize = 10.0f;
 
@@ -345,7 +345,7 @@ namespace Tools {
         ImGui::End();
     }
 
-    bool GuiEditor::drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget)
+    bool WidgetEditor::drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget)
     {
         ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
         if (w->children().empty())
@@ -407,9 +407,9 @@ namespace Tools {
         return !aborted;
     }
 
-    void GuiEditor::renderHierarchy(Widgets::WidgetBase **hoveredWidget)
+    void WidgetEditor::renderHierarchy(Widgets::WidgetBase **hoveredWidget)
     {
-        if (ImGui::Begin("GuiEditor - Hierarchy", &mVisible)) {
+        if (ImGui::Begin("WidgetEditor - Hierarchy", &mVisible)) {
             ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Left, 0.2f, false, ImGuiCond_FirstUseEver);
 
             Widgets::WidgetBase *root = mWidgetManager->currentRoot();

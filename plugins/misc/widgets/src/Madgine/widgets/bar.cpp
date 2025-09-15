@@ -36,7 +36,7 @@ namespace Widgets {
         WidgetBase::render(renderData);
     }
 
-    std::string Bar::getClass() const
+    const char *Bar::getClass() const
     {
         return "Bar";
     }

@@ -11,7 +11,7 @@ namespace Widgets {
         virtual bool isChecked();
         virtual void setChecked(bool b);
 
-        virtual std::string getClass() const override;
+        const char *getClass() const override;
     };
 }
 }

@@ -18,7 +18,7 @@ SERIALIZETABLE_END(Engine::Widgets::Label)
 namespace Engine {
 namespace Widgets {
 
-    std::string Label::getClass() const
+    const char *Label::getClass() const
     {
         return "Label";
     }

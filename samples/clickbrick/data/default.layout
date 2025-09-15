@@ -35,6 +35,7 @@
                             <mName>StartGameButton</mName>
                             <mPos>[0.25, 0, 0, 0, 0.2, 0, 0, 0, 0]</mPos>
                             <mSize>[0.5, 0, 0, 0, 0.1, 0, 0, 0, 1]</mSize>
+                            <mOpacity>1</mOpacity>
                             <mConditions>
                             </mConditions>
                             <mProperties>
@@ -44,12 +45,45 @@
                                 </Conditional>
                             </mProperties>
                         </Button>
+                        <test serId=9>
+                            <Background serId=10>
+                                <mImageRenderData serId=11>
+                                    <Image></Image>
+                                    <mLeftBorder>0</mLeftBorder>
+                                    <mTopBorder>0</mTopBorder>
+                                    <mBottomBorder>0</mBottomBorder>
+                                    <mRightBorder>0</mRightBorder>
+                                </mImageRenderData>
+                                <mColor>(1, 1, 1, 1)</mColor>
+                                <mChildren>
+                                </mChildren>
+                                <mName>Background</mName>
+                                <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+                                <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                                <mOpacity>1</mOpacity>
+                                <mConditions>
+                                </mConditions>
+                                <mProperties>
+                                </mProperties>
+                            </Background>
+                            <mChildren>
+                            </mChildren>
+                            <mName>Unnamed</mName>
+                            <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+                            <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                            <mOpacity>1</mOpacity>
+                            <mConditions>
+                            </mConditions>
+                            <mProperties>
+                            </mProperties>
+                        </test>
                     </mChildren>
                     <mName>MainMenu</mName>
                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                     <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                    <mOpacity>1</mOpacity>
                     <mConditions>
-                        <Item serId=9>
+                        <Item serId=12>
                             <mName>Test</mName>
                             <mFormula>Formula::W_MINUS_H</mFormula>
                             <mOperator>Operator::GREATER</mOperator>
@@ -59,13 +93,13 @@
                     <mProperties>
                     </mProperties>
                 </Widget>
-                <Widget serId=10>
+                <Widget serId=13>
                     <mChildren>
-                        <SceneWindow serId=11>
+                        <SceneWindow serId=14>
                             <mChildren>
-                                <Label serId=12>
+                                <Label serId=15>
                                     <mText>Score: 0</mText>
-                                    <mTextRenderData serId=13>
+                                    <mTextRenderData serId=16>
                                         <mFontSize>35</mFontSize>
                                         <mPivot>[1, 0]</mPivot>
                                         <mColor>(1, 1, 1, 1)</mColor>
@@ -76,14 +110,15 @@
                                     <mName>Score</mName>
                                     <mPos>[0.8, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                                     <mSize>[0.2, 0, 0, 0, 0, 40, 0, 0, 1]</mSize>
+                                    <mOpacity>1</mOpacity>
                                     <mConditions>
                                     </mConditions>
                                     <mProperties>
                                     </mProperties>
                                 </Label>
-                                <Label serId=14>
+                                <Label serId=17>
                                     <mText>Life: -26</mText>
-                                    <mTextRenderData serId=15>
+                                    <mTextRenderData serId=18>
                                         <mFontSize>35</mFontSize>
                                         <mPivot>[0, 0]</mPivot>
                                         <mColor>(1, 1, 1, 1)</mColor>
@@ -94,6 +129,7 @@
                                     <mName>Life</mName>
                                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                                     <mSize>[0.2, 0, 0, 0, 0, 40, 0, 0, 1]</mSize>
+                                    <mOpacity>1</mOpacity>
                                     <mConditions>
                                     </mConditions>
                                     <mProperties>
@@ -103,6 +139,7 @@
                             <mName>GameView</mName>
                             <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                             <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                            <mOpacity>1</mOpacity>
                             <mConditions>
                             </mConditions>
                             <mProperties>
@@ -112,16 +149,17 @@
                     <mName>Ingame</mName>
                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                     <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                    <mOpacity>1</mOpacity>
                     <mConditions>
                     </mConditions>
                     <mProperties>
                     </mProperties>
                 </Widget>
-                <Widget serId=16>
+                <Widget serId=19>
                     <mChildren>
-                        <Label serId=17>
+                        <Label serId=20>
                             <mText>Game Over</mText>
-                            <mTextRenderData serId=18>
+                            <mTextRenderData serId=21>
                                 <mFontSize>80</mFontSize>
                                 <mPivot>[0.5, 0.5]</mPivot>
                                 <mColor>(1, 1, 1, 1)</mColor>
@@ -132,14 +170,15 @@
                             <mName>GameOverLabel</mName>
                             <mPos>[0.2, 0, 0, 0, 0.4, 0, 0, 0, 0]</mPos>
                             <mSize>[0.6, 0, 0, 0, 0.11, 0, 0, 0, 1]</mSize>
+                            <mOpacity>1</mOpacity>
                             <mConditions>
                             </mConditions>
                             <mProperties>
                             </mProperties>
                         </Label>
-                        <Label serId=19>
+                        <Label serId=22>
                             <mText>Your Score: 0</mText>
-                            <mTextRenderData serId=20>
+                            <mTextRenderData serId=23>
                                 <mFontSize>35</mFontSize>
                                 <mPivot>[0.5, 0.5]</mPivot>
                                 <mColor>(1, 1, 1, 1)</mColor>
@@ -150,6 +189,7 @@
                             <mName>ScoreLabel</mName>
                             <mPos>[0.3, 0, 0, 0, 0.55, 0, 0, 0, 0]</mPos>
                             <mSize>[0.4, 0, 0, 0, 0.05, 0, 0, 0, 1]</mSize>
+                            <mOpacity>1</mOpacity>
                             <mConditions>
                             </mConditions>
                             <mProperties>
@@ -159,6 +199,7 @@
                     <mName>GameOver</mName>
                     <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
                     <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+                    <mOpacity>1</mOpacity>
                     <mConditions>
                     </mConditions>
                     <mProperties>

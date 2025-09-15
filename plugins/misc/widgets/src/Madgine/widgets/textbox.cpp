@@ -95,7 +95,7 @@ namespace Widgets {
         WidgetBase::render(renderData);
     }
 
-    std::string Textbox::getClass() const
+    const char *Textbox::getClass() const
     {
         return "Textbox";
     }

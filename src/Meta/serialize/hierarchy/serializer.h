@@ -16,10 +16,10 @@ namespace Serialize {
         StreamResult (*mReadAction)(void *, FormattedMessageStream &, PendingRequest &) = nullptr;
         StreamResult (*mReadRequest)(void *, FormattedMessageStream &, MessageId) = nullptr;
 
-        StreamResult (*mApplySerializableMap)(void *, FormattedSerializeStream &, bool, CallerHierarchyBasePtr) = nullptr;
-        void (*mSetDataSynced)(void *, bool, const CallerHierarchyBasePtr &hierarchy) = nullptr;
-        void (*mSetActive)(void *, bool, bool) = nullptr;
-        void (*mSetParent)(void *) = nullptr;
+        StreamResult (*mApplySerializableMap)(const Serializer *, void *, FormattedSerializeStream &, bool, CallerHierarchyBasePtr) = nullptr;
+        void (*mSetDataSynced)(const Serialize::Serializer *serializer, void *, bool, const CallerHierarchyBasePtr &hierarchy) = nullptr;
+        void (*mSetActive)(const Serialize::Serializer *serializer, void *, bool, bool) = nullptr;
+        void (*mSetParent)(const Serialize::Serializer *serializer, void *) = nullptr;
 
         void (*mWriteAction)(const void *, const std::vector<WriteMessage> &outStreams, void *) = nullptr;
         void (*mWriteRequest)(const void *, FormattedMessageStream &out, void *) = nullptr;
