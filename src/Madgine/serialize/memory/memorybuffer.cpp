@@ -61,5 +61,43 @@ namespace Memory {
         return traits_type::eof();
     }
 
+    MemoryReadBuffer::pos_type MemoryReadBuffer::seekoff(off_type off, std::ios_base::seekdir dir,
+        std::ios_base::openmode mode) 
+    {
+        assert(mode & std::ios_base::in);
+
+        switch (dir) {
+        case std::ios_base::beg:
+            if (eback() + off > egptr())
+                return pos_type(off_type(-1));
+            setg(eback(), eback() + off, egptr());
+            break;
+        case std::ios_base::cur:
+            if (gptr() + off < eback() || gptr() + off > egptr())
+                return pos_type(off_type(-1));
+            setg(eback(), gptr() + off, egptr());
+            break;
+        case std::ios_base::end:
+            if (egptr() + off < eback())
+                return pos_type(off_type(-1));
+            setg(eback(), egptr() + off, egptr());
+            break;
+        default:
+            std::terminate();
+        }
+
+        return pos_type(off_type(gptr() - eback()));
+    }
+
+    MemoryReadBuffer::pos_type MemoryReadBuffer::seekpos(pos_type pos,
+        std::ios_base::openmode mode) 
+    {
+        assert(mode & std::ios_base::in);
+
+        setg(eback(), eback() + pos, egptr());
+
+        return pos_type(off_type(pos));
+    }
+
 }
 }

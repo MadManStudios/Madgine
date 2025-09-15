@@ -26,6 +26,9 @@ namespace Memory {
     protected:
         int_type underflow() override;
 
+        pos_type seekoff(off_type off, std::ios_base::seekdir way, std::ios_base::openmode which = std::ios_base::in) override;
+        pos_type seekpos(pos_type sp, std::ios_base::openmode which = std::ios_base::in) override;
+
     private:        
         ByteBuffer mReadBuffer;
     };
