@@ -297,7 +297,7 @@ namespace Serialize {
         } });
     }
 
-    template <typename Compound, typename TargetCompound, typename F>
+    template <typename Compound, typename TargetCompound, typename... Configs, typename F>
         requires(!Reference<F> && !PrimitiveType<TargetCompound>)
     StreamResult scanCompound(FormattedSerializeStream &in, const char *name, F &&callback)
     {
@@ -317,7 +317,7 @@ namespace Serialize {
             }
         };
         genericVisitor = &visitor;
-        return visitStream<Compound>(in, name, visitor);
+        return visitStream<Compound, Configs...>(in, name, visitor);
     }
 
     template <typename T, typename... Configs>
