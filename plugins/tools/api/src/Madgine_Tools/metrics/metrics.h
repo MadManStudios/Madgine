@@ -12,7 +12,6 @@ namespace Tools {
         Metrics(ImRoot &root);
 
         virtual void render() override;
-        virtual void renderStatus() override;
         virtual void update() override;
 
         std::string_view key() const override;

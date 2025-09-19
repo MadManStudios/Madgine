@@ -26,7 +26,7 @@ namespace Engine {
 namespace Render {
 
     GPUMeshLoader::GPUMeshLoader()
-        : VirtualResourceLoaderBase({ ".fbx", ".dae", ".stl" })
+        : VirtualResourceLoaderBase({ ".fbx", ".dae", ".stl" }, { .mIconName = "grid.png" })
     {
     }
 

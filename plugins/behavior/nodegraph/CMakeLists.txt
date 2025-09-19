@@ -17,9 +17,9 @@ target_link_libraries(NodeGraph PUBLIC FilesystemSerialize CodeGen )
 set(sources "")
 FolderSources(sources "" tools)
 	FolderSources(sources tools Madgine_Tools nodegraphtoolsforward.h nodegraphtoolslib.h)
-		FolderSources(sources Madgine_Tools nodegraph debugvisualizer.cpp debugvisualizer.h imguihelpers.cpp imguihelpers.h nodegrapheditor.cpp nodegrapheditor.h)
+		FolderSources(sources Madgine_Tools nodegraph debugvisualizer.cpp debugvisualizer.h imguihelpers.cpp imguihelpers.h nodegrapheditor.cpp nodegrapheditor.h nodegraphfile.cpp nodegraphfile.h)
 
 add_tools(NodeGraph ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/nodegraphtoolslib.h)
 
-target_link_plugins(NodeGraphTools DebuggerTools BehaviorTools)
+target_link_plugins(NodeGraphTools DebuggerTools BehaviorTools ResourcesTools)
 target_link_libraries(NodeGraphTools PUBLIC imgui_node_editor)

@@ -46,7 +46,7 @@ namespace Scripting {
     namespace Python3 {
 
         Python3FileLoader::Python3FileLoader()
-            : ResourceLoader({ ".py" }, { .mAutoLoad = true, .mInplaceReload = true })
+            : ResourceLoader({ ".py" }, { .mAutoLoad = true, .mInplaceReload = true, .mIconName = "Python-logo.png" })
         {
         }
 

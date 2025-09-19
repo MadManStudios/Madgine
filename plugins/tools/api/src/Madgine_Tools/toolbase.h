@@ -8,6 +8,9 @@
 
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
+#define IMGUI_DEFINE_MATH_OPERATORS
+#include "imgui/imgui.h"
+
 typedef int ImGuiWindowFlags;
 
 namespace Engine {
@@ -26,7 +29,6 @@ namespace Tools {
 
         virtual void render();
         virtual void renderMenu();
-        virtual void renderStatus();
         virtual bool renderConfiguration(const Filesystem::Path &config);
         virtual void renderSettings();
         virtual void renderMetrics();
@@ -57,7 +59,7 @@ namespace Tools {
         Threading::TaskQueue *taskQueue() const;
 
     protected:
-        bool beginDefaultWindow(const char *docTarget = nullptr, ImGuiWindowFlags flags = 0, const char *pluginSourceDir = PROJECT_ROOT);
+        bool beginDefaultWindow(ImGuiDir dockingDir = ImGuiDir_None, const char *docTarget = nullptr, ImGuiWindowFlags flags = 0, const char *pluginSourceDir = PROJECT_ROOT);
 
     protected:
         virtual Threading::Task<bool> init();

@@ -43,12 +43,6 @@ namespace Tools {
         ImGui::End();
     }
 
-    void Metrics::renderStatus()
-    {
-        ImGui::Text("%.2f FPS", mFramesPerSecond.average());
-        ImGui::Separator();
-    }
-
     void Metrics::update()
     {
         if (ImGui::GetIO().DeltaTime > 0.0f) {
@@ -60,6 +54,11 @@ namespace Tools {
         if (mTimeBank >= 0.5f) {
             mTimeBank = fmodf(mTimeBank, 0.5f);
             mFramesTrend << mFramesPerSecond.average();
+        }
+
+        if (ImGui::BeginStatus()) {
+            ImGui::Text("%.2f FPS", mFramesPerSecond.average());
+            ImGui::EndStatus();
         }
 
         ToolBase::update();

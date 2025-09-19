@@ -82,8 +82,7 @@ namespace Tools {
 
     void LogViewer::render()
     {
-        if (beginDefaultWindow("tools.html#log-viewer")) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Down, 0.3f, true, ImGuiCond_FirstUseEver);
+        if (beginDefaultWindow(ImGuiDir_Down, "tools.html#log-viewer")) {
 
             for (Log::MessageType type : Log::MessageType::values()) {
                 ImGui::PushStyleColor(ImGuiCol_Text, sColors[type].Value);
@@ -186,16 +185,16 @@ namespace Tools {
             }
         }
         ImGui::End();
-    }
 
-    void LogViewer::renderStatus()
-    {
-        for (Log::MessageType type : Log::MessageType::values()) {
-            if (mMsgCounts[type] > 0) {
-                ImGui::TextColored(sColors[type], "%s %d", sIcons[type], static_cast<int>(mMsgCounts[type]));
+        if (ImGui::BeginStatus()) {
+            for (Log::MessageType type : Log::MessageType::values()) {
+                if (mMsgCounts[type] > 0) {
+                    ImGui::TextColored(sColors[type], "%s %d", sIcons[type], static_cast<int>(mMsgCounts[type]));
+                }
             }
+            ImGui::Separator();
+            ImGui::EndStatus();
         }
-        ImGui::Separator();
     }
 
     void LogViewer::messageLogged(std::string_view message, Log::MessageType lml, const char *file, size_t line, Log::Log *log)

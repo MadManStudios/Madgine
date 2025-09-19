@@ -122,7 +122,7 @@ namespace Render {
     }
 
     FontLoader::FontLoader()
-        : ResourceLoader({ ".msdf", ".ttf" })
+        : ResourceLoader({ ".msdf", ".ttf" }, { .mIconName = "FontIcon.png" })
     {
     }
 

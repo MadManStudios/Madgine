@@ -132,6 +132,15 @@ namespace Resources {
             return i->loadingTask();
         }
 
+        Threading::TaskFuture<bool> load(typename Loader::Resource *resource, Loader *loader = &Loader::getSingleton())
+        {
+            *this = Loader::load(resource, loader);
+            typename Loader::ResourceDataInfo *i = info();
+            if (!i)
+                return false;
+            return i->loadingTask();
+        }
+
         Threading::TaskFuture<bool> loadSerialize(std::string_view name)
         {
             return load(name);

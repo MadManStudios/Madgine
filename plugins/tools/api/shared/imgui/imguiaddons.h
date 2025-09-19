@@ -229,7 +229,7 @@ struct FilesystemPickerOptions {
 IMGUI_API FilesystemPickerOptions *GetFilesystemPickerOptions();
 
 IMGUI_API bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const FilesystemPickerOptions &options = {});
-IMGUI_API bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, bool *clicked = nullptr, const FilesystemPickerOptions &options = {});
+IMGUI_API bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, bool *itemDoubleClicked = nullptr, const FilesystemPickerOptions &options = {});
 
 struct InteractiveViewState {
     bool mMouseDown[3] = { false, false, false };
@@ -268,6 +268,7 @@ bool EnumCombo(const char *name, E *val)
 IMGUI_API void MakeTabVisible(const char *name);
 
 IMGUI_API bool Spinner(const char *label, float radius, int thickness, const ImU32 &color);
+IMGUI_API void DrawSpinner(const ImVec2 &min, const ImVec2 &max, float radius, int thickness, const ImU32 &color);
 
 using Unit = std::pair<size_t, const char *>;
 
@@ -316,5 +317,8 @@ void PlotHistory(Engine::Debug::History<float, S> &data, const char *label, std:
         ImGui::EndTable();
     }
 }
+
+IMGUI_API bool BeginStatus();
+IMGUI_API void EndStatus();
 
 }

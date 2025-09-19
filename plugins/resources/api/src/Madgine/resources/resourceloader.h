@@ -132,7 +132,12 @@ namespace Resources {
             Resource *res = get(name, loader);
             if (!res)
                 return {};
-            return load(res, Filesystem::FileEventType::FILE_CREATED, loader);
+            return load(res, loader);
+        }
+
+        static Handle load(Resource *resource, T *loader = nullptr)
+        {
+            return load(resource, Filesystem::FileEventType::FILE_CREATED, loader);
         }
 
         static Resource *get(std::string_view name, T *loader = &getSingleton())
@@ -199,7 +204,7 @@ namespace Resources {
             return handle;
         }
 
-        static Handle load(Resource *resource, Filesystem::FileEventType event = Filesystem::FileEventType::FILE_CREATED, T *loader = nullptr)
+        static Handle load(Resource *resource, Filesystem::FileEventType event, T *loader = nullptr)
         {
             Handle handle { (typename traits::handle) * resource->mData };
 

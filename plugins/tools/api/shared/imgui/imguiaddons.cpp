@@ -4,7 +4,6 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imguiaddons.h"
 
-
 #include "../imgui/imgui_internal.h"
 
 #include "Meta/math/matrix3.h"
@@ -26,7 +25,7 @@
 
 #include "Modules/threading/threadlocal.h"
 
-//Engine::Threading::WorkgroupLocal<ImGuiContext *>
+// Engine::Threading::WorkgroupLocal<ImGuiContext *>
 THREADLOCAL(ImGuiContext *)
 sContext;
 
@@ -569,7 +568,7 @@ bool SelectValueTypeType(T &t)
                 desc = Engine::ValueTypeDesc { Engine::ValueTypeEnum::OwnedScopeValue, type->mSelf };
             ImGui::EndMenu();
         }
-    } else if constexpr (std::same_as<Ty, Engine::ScopePtr>){
+    } else if constexpr (std::same_as<Ty, Engine::ScopePtr>) {
         if (ImGui::BeginMenu("ScopePtr")) {
             const Engine::MetaTable *type;
             result = ScopeTypePicker(type);
@@ -779,9 +778,9 @@ void RightAlign(float size)
 {
     ImGuiWindow *window = GetCurrentWindow();
     float avail = ImGui::GetContentRegionAvail().x;
-    //ImGui::Dummy({ 0, 0 });
-    //ImGui::SameLine(avail - size);
-    //window->DC.CursorPos.x = window->Pos.x - window->Scroll.x + (avail - size) + window->DC.GroupOffset.x + window->DC.ColumnsOffset.x;
+    // ImGui::Dummy({ 0, 0 });
+    // ImGui::SameLine(avail - size);
+    // window->DC.CursorPos.x = window->Pos.x - window->Scroll.x + (avail - size) + window->DC.GroupOffset.x + window->DC.ColumnsOffset.x;
 }
 
 void RightAlignText(const char *s, ...)
@@ -1069,7 +1068,6 @@ bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &s
         ImGui::EndTable();
     }
 
-
     return changed;
 }
 
@@ -1078,7 +1076,7 @@ FilesystemPickerOptions *GetFilesystemPickerOptions()
     return &sFilesystemPickerOptions;
 }
 
-bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, bool *clicked, const FilesystemPickerOptions &options)
+bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, bool *itemDoubleClicked, const FilesystemPickerOptions &options)
 {
     bool changed = BeginFilesystemPicker(path, selection);
 
@@ -1092,9 +1090,9 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
     if (ImGui::BeginTable("CurrentFolder", 1, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable, size)) {
 
         ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_NoHide);
-        //ImGui::TableSetupColumn("Total time");
-        //ImGui::TableSetupColumn("Rel. Time (parent)");
-        //ImGui::TableSetupColumn("Rel. Time (total)");
+        // ImGui::TableSetupColumn("Total time");
+        // ImGui::TableSetupColumn("Rel. Time (parent)");
+        // ImGui::TableSetupColumn("Rel. Time (total)");
         ImGui::TableSetupScrollFreeze(0, 1);
         ImGui::TableHeadersRow();
 
@@ -1138,8 +1136,8 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
                     path = file.mPath;
                 } else {
                     selection = file.mPath;
-                    if (clicked)
-                        *clicked = true;
+                    if (itemDoubleClicked)
+                        *itemDoubleClicked = true;
                 }
             }
         }
@@ -1232,7 +1230,7 @@ void ImGui::BeginGroupPanel(const char *name, const ImVec2 &size)
 
     ImGui::BeginGroup();
 
-    //ImGui::GetWindowDrawList()->AddRect(labelMin, labelMax, IM_COL32(255, 0, 255, 255));
+    // ImGui::GetWindowDrawList()->AddRect(labelMin, labelMax, IM_COL32(255, 0, 255, 255));
 
     ImGui::PopStyleVar(2);
 
@@ -1267,7 +1265,7 @@ void ImGui::EndGroupPanel()
 
     ImGui::EndGroup();
 
-    //ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), IM_COL32(0, 255, 0, 64), 4.0f);
+    // ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), IM_COL32(0, 255, 0, 64), 4.0f);
 
     ImGui::EndGroup();
 
@@ -1279,7 +1277,7 @@ void ImGui::EndGroupPanel()
 
     auto itemMin = ImGui::GetItemRectMin();
     auto itemMax = ImGui::GetItemRectMax();
-    //ImGui::GetWindowDrawList()->AddRectFilled(itemMin, itemMax, IM_COL32(255, 0, 0, 64), 4.0f);
+    // ImGui::GetWindowDrawList()->AddRectFilled(itemMin, itemMax, IM_COL32(255, 0, 0, 64), 4.0f);
 
     auto labelRect = sGroupPanelLabelStack->back();
     sGroupPanelLabelStack->pop_back();
@@ -1467,10 +1465,23 @@ bool Spinner(const char *label, float radius, int thickness, const ImU32 &color)
     ImVec2 pos = window->DC.CursorPos;
     ImVec2 size((radius) * 2, (radius + style.FramePadding.y) * 2);
 
-    const ImRect bb(pos, ImVec2(pos.x + size.x, pos.y + size.y));
+    const ImRect bb(pos, pos + size);
     ItemSize(bb, style.FramePadding.y);
     if (!ItemAdd(bb, id))
         return false;
+
+    DrawSpinner(bb.Min, bb.Max, radius, thickness, color);
+
+    return true;
+}
+
+void DrawSpinner(const ImVec2 &min, const ImVec2 &max, float radius, int thickness, const ImU32 &color)
+{
+    ImGuiWindow *window = GetCurrentWindow();
+    if (window->SkipItems)
+        return;
+
+    ImGuiContext &g = *GImGui;
 
     // Render
     window->DrawList->PathClear();
@@ -1481,17 +1492,34 @@ bool Spinner(const char *label, float radius, int thickness, const ImU32 &color)
     const float a_min = IM_PI * 2.0f * ((float)start) / (float)num_segments;
     const float a_max = IM_PI * 2.0f * ((float)num_segments - 3) / (float)num_segments;
 
-    const ImVec2 centre = ImVec2(pos.x + radius, pos.y + radius + style.FramePadding.y);
+    const ImVec2 center = ImRect { min, max }.GetCenter();
 
     for (int i = 0; i < num_segments; i++) {
         const float a = a_min + ((float)i / (float)num_segments) * (a_max - a_min);
-        window->DrawList->PathLineTo(ImVec2(centre.x + ImCos(a + g.Time * 8) * radius,
-            centre.y + ImSin(a + g.Time * 8) * radius));
+        window->DrawList->PathLineTo(ImVec2(center.x + ImCos(a + g.Time * 8) * radius,
+            center.y + ImSin(a + g.Time * 8) * radius));
     }
 
     window->DrawList->PathStroke(color, false, thickness);
+}
 
-    return true;
+bool BeginStatus()
+{
+    if (BeginViewportSideBar("##MainStatusBar", GetMainViewport(), ImGuiDir_Down, GetFrameHeight(), ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar)) {
+        if (BeginMenuBar()) {
+            return true;
+        } else {
+            End();
+        }
+    }
+    return false;
+}
+
+void EndStatus()
+{
+    Separator();
+    EndMenuBar();
+    End();
 }
 
 }

@@ -59,14 +59,14 @@ METATABLE_END(Engine::Tools::NodeGraphEditor)
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::NodeGraphEditor, Engine::Tools::ToolBase)
 FIELD(mHierarchyVisible)
 FIELD(mNodeDetailsVisible)
-ENCAPSULATED_FIELD(Current, getCurrentName, load)
+// ENCAPSULATED_FIELD(Current, getCurrentName, load)
 SERIALIZETABLE_END(Engine::Tools::NodeGraphEditor)
 
 namespace Engine {
 namespace Tools {
 
     NodeGraphEditor::NodeGraphEditor(ImRoot &root)
-        : Tool<NodeGraphEditor>(root)
+        : Tool<NodeGraphEditor, ResourceEditor>(root)
     {
     }
 
@@ -76,7 +76,7 @@ namespace Tools {
 
         createEditor();
 
-        co_return co_await ToolBase::init();
+        co_return co_await ResourceEditor::init(NodeGraph::NodeGraphLoader::getSingleton(), "Node Graph");
     }
 
     Threading::Task<void> NodeGraphEditor::finalize()
@@ -96,23 +96,10 @@ namespace Tools {
 
     void NodeGraphEditor::renderEditor()
     {
-
-        ImGui::PushID(this);
-
-        std::string fileName;
-        if (!mFilePath.empty()) {
-            fileName = mFilePath.filename().str();
-        } else {
-            fileName = "Node graph";
-        }
-        fileName += "###editor";
-
-        ImGuiWindowFlags flags = ImGuiWindowFlags_NoScrollbar;
-        if (mIsDirty)
-            flags |= ImGuiWindowFlags_UnsavedDocument;
+        bool saveRequested = false;
 
         ImGui::SetNextWindowDockID(mRoot.dockSpaceId(), ImGuiCond_FirstUseEver);
-        if (ImGui::Begin(fileName.c_str(), &mVisible, flags)) {
+        if (BeginResourceFile(this, mFilePath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &mVisible, ImGuiWindowFlags_NoScrollbar)) {            
 
             ImVec2 topLeftScreen = ImGui::GetCursorScreenPos();
 
@@ -159,7 +146,7 @@ namespace Tools {
             }
 
             pinId = 0;
-            for (const NodeGraph::NodeGraph::NamedInput &input: mGraph.mNamedInputs) {
+            for (const NodeGraph::NodeGraph::NamedInput &input : mGraph.mNamedInputs) {
                 if (DataProviderPin(input.mDescriptor.mName.c_str(), 0, pinId, 1, input.mDescriptor.mType, NodeGraph::NodeExecutionMask::ALL, !input.mTargets.empty()))
                     hoveredPin = input.mDescriptor.mType;
                 ++pinId;
@@ -396,7 +383,6 @@ namespace Tools {
         }
         ImGui::End();
 
-        ImGui::PopID();
     }
 
     void NodeGraphEditor::renderHierarchy()
@@ -468,63 +454,10 @@ namespace Tools {
 
     void NodeGraphEditor::renderMenu()
     {
-        ToolBase::renderMenu();
+        ResourceEditor::renderMenu();
         if (mVisible) {
 
             if (ImGui::BeginMenu("Node Graph Editor")) {
-
-                if (ImGui::MenuItem("New Graph...")) {
-                    create();
-                }
-                if (ImGui::MenuItem("Open Graph")) {
-                    mRoot.dialogs().show(
-                        []() -> Dialog<std::string> {
-                            std::string selection;
-                            bool alreadyClicked = false;
-
-                            DialogSettings &settings = co_await get_dialog_settings;
-                            settings.acceptText = "Open";
-
-                            do {
-                                ImGui::BeginChild("GraphList", { 0.0f, -ImGui::GetFrameHeightWithSpacing() });
-
-                                for (const std::pair<std::string_view, ScopePtr> &res : NodeGraph::NodeGraphLoader::getSingleton().typedResources()) {
-
-                                    bool selected = selection == res.first;
-
-                                    if (ImGui::Selectable(res.first.data(), selected)) {
-                                        selection = res.first;
-                                    }
-
-                                    if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)) {
-                                        selection = res.first;
-                                        alreadyClicked = true;
-                                    }
-                                }
-
-                                ImGui::EndChild();
-
-                                settings.acceptPossible = !selection.empty();
-                            } while (!alreadyClicked && (co_yield settings));
-
-                            co_return selection;
-                        }(),
-                        [this](const std::string &selection) {
-                            load(selection);
-                        });
-                }
-                if (ImGui::MenuItem("Save Graph", "", false)) {
-                    if (mFilePath.empty()) {
-                        mRoot.dialogs().show(
-                            mRoot.filePicker(true),
-                            [this](const Filesystem::Path &path) {
-                                mFilePath = path;
-                                save();
-                            });
-                    } else {
-                        save();
-                    }
-                }
 
                 if (ImGui::MenuItem("Debug", "", false)) {
                     Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
@@ -551,31 +484,34 @@ namespace Tools {
         return "NodeGraphEditor";
     }
 
-    void NodeGraphEditor::save()
+    void NodeGraphEditor::save(const Filesystem::Path &path)
     {
+        mFilePath = path;
         mSaveQueued = true;
     }
 
-    void NodeGraphEditor::load(std::string_view name)
+    void NodeGraphEditor::open(Resources::ResourceBase *res)
     {
-        mRoot.taskQueue()->queueTask(mGraphHandle.load(name).then([this](bool b) {
+        auto callback = [this](bool b) {
             mEditor.reset();
             if (b) {
                 mGraph = *mGraphHandle;
                 mFilePath = mGraphHandle.info()->resource()->path();
-            } else
+            } else {
                 mGraph = {};
+                mFilePath.clear();
+            }
             createEditor();
-        }));
-    }
+        };
 
-    void NodeGraphEditor::create()
-    {
-        mEditor.reset();
-        mGraph = {};
-        mGraphHandle.reset();
-        mFilePath.clear();
-        createEditor();
+        if (res) {
+            mRoot.taskQueue()->queueTask(mGraphHandle.load(static_cast<NodeGraph::NodeGraphLoader::Resource *>(res)).then(std::move(callback)));
+        } else {
+            mGraphHandle.reset();
+            callback(false);
+        }
+
+        mVisible = true;
     }
 
     std::string_view NodeGraphEditor::getCurrentName() const

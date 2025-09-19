@@ -42,7 +42,7 @@ namespace Engine {
 namespace Tools {
 
     WidgetEditor::WidgetEditor(ImRoot &root)
-        : Tool<WidgetEditor>(root)
+        : Tool<WidgetEditor, ResourceEditor>(root)
     {
     }
 
@@ -50,14 +50,16 @@ namespace Tools {
     {
         mWidgetManager = &static_cast<const ClientImRoot &>(mRoot).window().getWindowComponent<Widgets::WidgetManager>();
 
-        co_return co_await ToolBase::init();
+        co_return co_await ResourceEditor::init(Widgets::WidgetLoader::getSingleton(), "Widget");
     }
 
     Threading::Task<void> WidgetEditor::finalize()
     {
         mSettings.clear();
 
-        co_await ToolBase::finalize();
+        mFiles.clear();
+
+        co_await ResourceEditor::finalize();
         co_return;
     }
 
@@ -70,7 +72,7 @@ namespace Tools {
 
     void WidgetEditor::renderMenu()
     {
-        ToolBase::renderMenu();
+        ResourceEditor::renderMenu();
         if (mVisible) {
 
             if (ImGui::BeginMenu("WidgetEditor")) {
@@ -89,14 +91,30 @@ namespace Tools {
         }
     }
 
+    Widgets::WidgetManager &WidgetEditor::manager()
+    {
+        return *mWidgetManager;
+    }
+
     void WidgetEditor::update()
     {
-        ToolBase::update();
+        std::erase_if(mFiles, [](std::pair<Widgets::WidgetLoader::Resource *const, WidgetFile> &p) {
+            return !p.second.render();
+        });
+
+        ResourceEditor::update();
     }
 
     std::string_view WidgetEditor::key() const
     {
         return "WidgetEditor";
+    }
+
+    void WidgetEditor::open(Resources::ResourceBase *res)
+    {
+        Widgets::WidgetLoader::Resource *widget = static_cast<Widgets::WidgetLoader::Resource *>(res);
+
+        mFiles.try_emplace(widget, *this, widget->loadData());
     }
 
     void renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color, ImDrawList *drawList)
@@ -108,15 +126,14 @@ namespace Tools {
 
         Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
 
-        drawList->AddRect(bounds.topLeft() / io.DisplayFramebufferScale, bounds.bottomRight() / io.DisplayFramebufferScale, color);
+        drawList->AddRect(ImVec2 { bounds.topLeft() } / io.DisplayFramebufferScale, ImVec2 { bounds.bottomRight() } / io.DisplayFramebufferScale, color);
     }
 
     void WidgetEditor::renderSelection(Widgets::WidgetBase *hoveredWidget)
     {
         constexpr float borderSize = 10.0f;
 
-        if (beginDefaultWindow()) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
+        if (beginDefaultWindow(ImGuiDir_Right)) {
 
             ImDrawList *background = ImGui::GetBackgroundDrawList(ImGui::GetMainViewport());
 
@@ -130,7 +147,7 @@ namespace Tools {
             ImGuiIO &io = ImGui::GetIO();
 
             Vector2 mouse = ImGui::GetMousePos();
-            Vector2 dragDistance = mouse - io.MouseClickedPos[0];
+            Vector2 dragDistance = mouse - Vector2 { io.MouseClickedPos[0] };
 
             if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
                 screenSpace.mTopLeft += mWidgetManager->getScreenSpace().mTopLeft;
@@ -145,7 +162,7 @@ namespace Tools {
 
                 Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
 
-                background->AddRect(bounds.topLeft() / io.DisplayFramebufferScale, bounds.bottomRight() / io.DisplayFramebufferScale, IM_COL32(255, 255, 255, 255));
+                background->AddRect(ImVec2 { bounds.topLeft() } / io.DisplayFramebufferScale, ImVec2 { bounds.bottomRight() } / io.DisplayFramebufferScale, IM_COL32(255, 255, 255, 255));
 
                 if (!io.WantCaptureMouse) {
 
@@ -234,7 +251,7 @@ namespace Tools {
 
                         Bounds bounds(pos.x, pos.y + size.y, pos.x + size.x, pos.y);
 
-                        background->AddRect(bounds.topLeft() / io.DisplayFramebufferScale, bounds.bottomRight() / io.DisplayFramebufferScale, IM_COL32(127, 127, 127, 255));
+                        background->AddRect(ImVec2 { bounds.topLeft() } / io.DisplayFramebufferScale, ImVec2 { bounds.bottomRight() } / io.DisplayFramebufferScale, IM_COL32(127, 127, 127, 255));
                     }
                 }
                 if (io.MouseReleased[0] && !mDragging) {

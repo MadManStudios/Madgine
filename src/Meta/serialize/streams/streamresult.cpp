@@ -19,19 +19,20 @@ namespace Serialize {
             std::ios_base::iostate state = in->state();
             in->clear();
 
-            mPosition = static_cast<int>(in->tell()) - in->gcount();
+            mPosition = static_cast<int>(in->tell());
 
             if (!binary) {
-                in->seek(0);
+                bool result = in->seek(0, std::ios_base::beg);
+                assert(result);
                 pos_type lastNewLine = 0;
                 mLineNumber = 1;
 
-                std::istreambuf_iterator it = in->iterator();
-                for (int i = 0; i < mPosition; ++i) {
-                    char c = *it++;
+                
+                for (std::istreambuf_iterator it = in->iterator(); static_cast<int>(in->tell()) <= mPosition; ++it) {
+                    char c = *it;
                     if (c == '\n') {
                         ++mLineNumber;
-                        lastNewLine = i;
+                        lastNewLine = in->tell();
                     }
                 }
                 mPosition -= lastNewLine;

@@ -48,6 +48,7 @@ namespace Tools {
         Dialog<Filesystem::Path> filePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});
 
         virtual void Image(const Filesystem::Path &path, Vector2i image_size = { -1, -1 }) = 0;
+        virtual void DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) = 0;
 
     protected:        
         unsigned int mDockSpaceId;

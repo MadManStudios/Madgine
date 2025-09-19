@@ -31,7 +31,7 @@ namespace Widgets {
         Serialize::SerializeManager serializeMgr { "CompoundWidget" };
         Serialize::FormattedSerializeStream stream { Serialize::Formats::xml(), serializeMgr.wrapStream(mDescriptor.resource()->readAsStream(), true) };
 
-        Serialize::StreamResult result = Serialize::read<std::vector<std::unique_ptr<WidgetBase>>, Serialize::ParentCreator<&CompoundWidget::readWidget, &CompoundWidget::writeWidget, nullptr, &WidgetManager::scanWidget>>(stream, mTemplateWidgets, "Widgets", CallerHierarchy<WidgetBase *> { this });
+        Serialize::StreamResult result = Serialize::read<std::vector<std::unique_ptr<WidgetBase>>, Serialize::ParentCreator<&CompoundWidget::readWidget, &CompoundWidget::writeWidget, nullptr, &WidgetManager::scanWidget>>(stream, mTemplateWidgets, "Widgets", CallerHierarchyBasePtr { CallerHierarchy<WidgetBase *> { this } }.append(&manager()));
         if (result.mState != Serialize::StreamState::OK) {
             LOG_ERROR(result);
             throw 0;

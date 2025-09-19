@@ -59,6 +59,7 @@ namespace Tools {
         virtual Threading::TaskQueue *taskQueue() const override;
 
         void Image(const Filesystem::Path &path, Vector2i image_size = {-1, -1}) override;
+        void DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) override;
 
         void addRenderTarget(Render::RenderTarget *target);
         void removeRenderTarget(Render::RenderTarget *target);

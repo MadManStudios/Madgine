@@ -17,13 +17,11 @@ namespace Tools {
 
         VulkanRenderContextTool(ImRoot &root);
 
-        virtual Threading::Task<bool> init() override;
-        virtual Threading::Task<void> finalize() override;
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
 
-        virtual void renderMetrics() override;
-        virtual void renderStatus() override;
-
-        virtual void update() override;
+        void update() override;
+        void renderMetrics() override;        
 
         std::string_view key() const override;
 

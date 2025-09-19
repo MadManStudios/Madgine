@@ -24,7 +24,7 @@ namespace Widgets {
         void renderLine(Line3 line, const Rect2 &clipRect, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
     };
 
-    struct WidgetsRenderData {
+    struct MADGINE_WIDGETS_EXPORT WidgetsRenderData {
 
         void renderQuad(Vector2 pos, Vector2 size, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f }, TextureSettings tex = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false, bool transparentContent = false);
         void renderQuadUV(Vector2 pos, Vector2 size, Color4 color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV = false, bool transparentContent = false);

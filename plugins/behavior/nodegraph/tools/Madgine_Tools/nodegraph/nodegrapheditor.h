@@ -6,12 +6,15 @@
 #include "Madgine/nodegraph/nodegraphloader.h"
 #include "Madgine/nodegraph/pins.h"
 
+#include "Madgine_Tools/resourceeditor.h"
+#include "nodegraphfile.h"
+
 namespace Engine {
 namespace Tools {
 
     namespace ed = ax::NodeEditor;
 
-    struct NodeGraphEditor : public Tool<NodeGraphEditor> {
+    struct NodeGraphEditor : public Tool<NodeGraphEditor, ResourceEditor> {
 
         SERIALIZABLEUNIT(NodeGraphEditor)
 
@@ -26,10 +29,11 @@ namespace Tools {
 
         std::string_view key() const override;
 
-        void save();
-        void load(std::string_view name);
-        void create();
+        void save(const Filesystem::Path &path);
+        void open(Resources::ResourceBase *res) override;
         std::string_view getCurrentName() const;
+
+
 
     protected:
         bool saveImpl(std::string_view view);

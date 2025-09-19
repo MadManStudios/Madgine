@@ -22,7 +22,7 @@ namespace Render {
     }
 
     DirectX12PixelShaderLoader::DirectX12PixelShaderLoader()
-        : ResourceLoader({ ".ps_hlsl12" })
+        : ResourceLoader({ ".ps_hlsl12" }, { .mIconName = "ShaderIcon.png" })
     {
         HRESULT hr = DxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&mLibrary));
         //if(FAILED(hr)) Handle error...

@@ -18,7 +18,7 @@ endif()
 
 set(sources "")
 FolderSources(sources "" tools)
-	FolderSources(sources tools Madgine_Tools resourcestoolconfig.cpp resourcestoolconfig.h resourcestoolsforward.h resourcestoolslib.h)
+	FolderSources(sources tools Madgine_Tools resourceeditor.cpp resourceeditor.h resourcestool.cpp resourcestool.h resourcestoolconfig.cpp resourcestoolconfig.h resourcestoolsforward.h resourcestoolslib.h)
 
 
 add_tools(Resources ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/resourcestoolslib.h)

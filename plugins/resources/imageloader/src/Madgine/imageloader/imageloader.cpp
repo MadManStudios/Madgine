@@ -43,6 +43,11 @@ namespace Resources {
         co_return;
     }
 
+    const Filesystem::Path &ImageLoader::iconPath(ResourceBase *res) const
+    {
+        return res->path();
+    }
+
     ByteBuffer ImageLoader::convertFromPNG(const ByteBuffer &data, Vector2i &outSize)
     {
         stbi_uc *ptr = stbi_load_from_memory(static_cast<const stbi_uc *>(data.mData), data.mSize,

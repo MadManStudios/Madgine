@@ -15,7 +15,6 @@ namespace Tools {
         ~LogViewer();
 
         virtual void render() override;
-        virtual void renderStatus() override;
 
         virtual void messageLogged(std::string_view message, Log::MessageType lml, const char *file, size_t line, Log::Log *log) override;
 

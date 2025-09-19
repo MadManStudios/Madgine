@@ -8,23 +8,31 @@
 
 #include "widgetfile.h"
 
+#include "Madgine_Tools/resourceeditor.h"
+
+#include "Madgine/widgets/widgetloader.h"
+
 namespace Engine {
 namespace Tools {
 
-    struct WidgetEditor : public Tool<WidgetEditor> {
+    struct WidgetEditor : public Tool<WidgetEditor, ResourceEditor> {
 
         SERIALIZABLEUNIT(WidgetEditor)
 
         WidgetEditor(ImRoot &root);
 
-        virtual Threading::Task<bool> init() override;
-        virtual Threading::Task<void> finalize() override;
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
 
-        virtual void render() override;
-        virtual void renderMenu() override;
-        virtual void update() override;
+        void render() override;
+        void renderMenu() override;
+        void update() override;
 
         std::string_view key() const override;
+
+        void open(Resources::ResourceBase *res) override;
+
+        Widgets::WidgetManager &manager();
 
     private:
         void renderSelection(Widgets::WidgetBase *hoveredWidget = nullptr);
@@ -34,9 +42,9 @@ namespace Tools {
     private:        
         Widgets::WidgetManager *mWidgetManager = nullptr;
         WidgetSettings *mSelected = nullptr;
-        std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;
+        std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;        
 
-        std::vector<WidgetFile> mFiles;
+        std::map<Widgets::WidgetLoader::Resource *, WidgetFile> mFiles;
 
         bool mMouseDown = false;
         bool mDragging = false;

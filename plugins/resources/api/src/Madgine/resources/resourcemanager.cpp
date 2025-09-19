@@ -195,11 +195,11 @@ namespace Resources {
         }
     }
 
-    Filesystem::Path ResourceManager::findResourceFile(const std::string &fileName)
+    Filesystem::Path ResourceManager::findResourceFile(std::string_view fileName)
     {
         for (const std::pair<const Filesystem::Path, int> &p : mResourcePaths) {
             for (Filesystem::Path p : Filesystem::listFilesRecursive(p.first)) {
-                if (p.filename() == fileName)
+                if (p.filename().str() == fileName)
                     return p;
             }
         }

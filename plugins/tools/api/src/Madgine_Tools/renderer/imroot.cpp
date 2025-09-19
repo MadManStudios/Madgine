@@ -141,17 +141,6 @@ namespace Tools {
             ImGui::EndMainMenuBar();
         }
 
-        if (ImGui::BeginViewportSideBar("##MainStatusBar", viewport, ImGuiDir_Down, ImGui::GetFrameHeight(), ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar)) {
-            if (ImGui::BeginMenuBar()) {
-                for (ToolBase *tool : mCollector | std::views::transform(projectionUniquePtrToPtr)) {
-                    if (tool->isEnabled())
-                        tool->renderStatus();
-                }
-                ImGui::EndMenuBar();
-            }
-            ImGui::End();
-        }
-
         finishToolRead();
 
         ImGui::SetNextWindowPos(viewport->WorkPos);

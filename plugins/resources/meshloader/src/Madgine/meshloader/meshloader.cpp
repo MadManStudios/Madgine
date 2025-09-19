@@ -23,7 +23,7 @@ namespace Engine {
 namespace Render {
 
     MeshLoader::MeshLoader()
-        : ResourceLoader({ ".fbx", ".dae", ".stl" })
+        : ResourceLoader({ ".fbx", ".dae", ".stl" }, { .mIconName = "grid.png" })
     {
         getOrCreateManual(
             "quad", {}, [](MeshLoader *loader, MeshData &data, MeshLoader::ResourceDataInfo &info) -> Threading::Task<bool> {

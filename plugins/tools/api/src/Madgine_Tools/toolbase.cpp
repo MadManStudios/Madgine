@@ -32,10 +32,6 @@ namespace Tools {
         }
     }
 
-    void ToolBase::renderStatus()
-    {
-    }
-
     bool ToolBase::renderConfiguration(const Filesystem::Path &config)
     {
         return false;
@@ -113,9 +109,14 @@ namespace Tools {
         co_return;
     }
 
-    bool ToolBase::beginDefaultWindow(const char *docTarget, ImGuiWindowFlags flags, const char *pluginSourceDir)
+    bool ToolBase::beginDefaultWindow(ImGuiDir dockingDir, const char *docTarget, ImGuiWindowFlags flags, const char *pluginSourceDir)
     {
         if (ImGui::Begin(key().data(), &mVisible, flags)) {
+
+            float ratio = 0.2f;
+
+            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), dockingDir, ratio, dockingDir == ImGuiDir_Down, ImGuiCond_FirstUseEver);
+
             if (docTarget) {
                 if (ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::MenuItem("?")) {

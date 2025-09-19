@@ -24,7 +24,7 @@ namespace NodeGraph {
     }
 
     NodeGraphLoader::NodeGraphLoader()
-        : ResourceLoader({ ".ngp" }, { .mAutoReload = true })
+        : ResourceLoader({ ".ngp" }, { .mAutoReload = true, .mIconName = "NodeGraph.png" })
     {
     }
 

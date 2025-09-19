@@ -41,7 +41,7 @@ namespace Widgets {
     }
 
     WidgetLoader::WidgetLoader()
-        : ResourceLoader({ ".widget" }, { .mAutoLoad = true })
+        : ResourceLoader({ ".widget" }, { .mAutoLoad = true, .mIconName = "WidgetIcon.png" })
     {
     }
 
@@ -95,8 +95,9 @@ namespace Widgets {
                 Serialize::StreamVisitorImpl { [&](Serialize::PrimitiveHolder<std::string> holder, Serialize::FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) {
                     if (std::string_view { name } == "mName") {
                         return Serialize::read(in, data.mName, name);
-                    }
-                    return Serialize::StreamResult {};
+                    } else {
+                        return Serialize::visitSkipPrimitive<std::string>(in, name);
+                    }                    
                 } }));
         }
 
@@ -125,6 +126,8 @@ namespace Widgets {
     }
 
     WidgetDescriptor::~WidgetDescriptor() = default;
+
+    WidgetDescriptor &WidgetDescriptor::operator=(WidgetDescriptor &&) noexcept = default;
 
     const MetaTable *WidgetDescriptor::metaTable()
     {

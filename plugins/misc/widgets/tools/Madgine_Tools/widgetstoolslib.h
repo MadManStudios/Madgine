@@ -5,6 +5,7 @@
 #include "Madgine/widgetslib.h"
 #include "Madgine_Tools/clienttoolslib.h"
 #include "Madgine_Tools/behaviortoolslib.h"
+#include "Madgine_Tools/resourcestoolslib.h"
 
 #if defined(WidgetsTools_EXPORTS)
 #    define MADGINE_WIDGETS_TOOLS_EXPORT DLL_EXPORT

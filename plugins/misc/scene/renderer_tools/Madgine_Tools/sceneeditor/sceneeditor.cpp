@@ -279,8 +279,7 @@ namespace Tools {
 
     void SceneEditor::renderSelection()
     {
-        if (beginDefaultWindow()) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
+        if (beginDefaultWindow(ImGuiDir_Right)) {
 
             if (mSelectedEntity)
                 renderEntity(mSelectedEntity);

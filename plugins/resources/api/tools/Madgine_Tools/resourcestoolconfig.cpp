@@ -23,6 +23,16 @@
 #include "Meta/keyvalue/valuetype.h"
 #include "Meta/keyvalue/scopefield.h"
 
+
+UNIQUECOMPONENT(Engine::Tools::ResourcesToolConfig);
+
+METATABLE_BEGIN_BASE(Engine::Tools::ResourcesToolConfig, Engine::Tools::ToolBase)
+METATABLE_END(Engine::Tools::ResourcesToolConfig)
+
+SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::ResourcesToolConfig, Engine::Tools::ToolBase)
+SERIALIZETABLE_END(Engine::Tools::ResourcesToolConfig)
+
+
 namespace Engine {
 namespace Tools {
 
@@ -118,11 +128,3 @@ namespace Tools {
 
 }
 }
-
-UNIQUECOMPONENT(Engine::Tools::ResourcesToolConfig);
-
-METATABLE_BEGIN_BASE(Engine::Tools::ResourcesToolConfig, Engine::Tools::ToolBase)
-METATABLE_END(Engine::Tools::ResourcesToolConfig)
-
-SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::ResourcesToolConfig, Engine::Tools::ToolBase)
-SERIALIZETABLE_END(Engine::Tools::ResourcesToolConfig)

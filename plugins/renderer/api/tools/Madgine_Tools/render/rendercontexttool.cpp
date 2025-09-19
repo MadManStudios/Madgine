@@ -55,12 +55,13 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    void RenderContextTool::render()
+    void RenderContextTool::renderSettings()
     {
-        if (beginDefaultWindow()) {
-            ImGui::Checkbox("Show Debug Visualizers", &mRenderDebugVisualizations);
-        }
-        ImGui::End();
+        ImGui::BeginGroupPanel("Renderer");
+        
+        ImGui::Checkbox("Show Debug Visualizers", &mRenderDebugVisualizations);
+        
+        ImGui::EndGroupPanel();
     }
 
     void RenderContextTool::update()

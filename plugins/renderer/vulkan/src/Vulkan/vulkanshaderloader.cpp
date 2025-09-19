@@ -33,7 +33,7 @@ namespace Render {
     }
 
     VulkanShaderLoader::VulkanShaderLoader()
-        : ResourceLoader({ ".spirv" })
+        : ResourceLoader({ ".spirv" }, { .mIconName = "ShaderIcon.png" })
     {
     }
 

@@ -2,10 +2,11 @@
 Project(ImageLoader)
 
 set(sources "")
-FolderSources(sources "" Madgine imageloaderlib.h)
-	FolderSources(sources Madgine imageloader imagedata.h imageloader.cpp imageloader.h)
+FolderSources(sources "" src)
+	FolderSources(sources src Madgine imageloaderlib.h)
+		FolderSources(sources Madgine imageloader imagedata.h imageloader.cpp imageloader.h)
 
 
-add_plugin(ImageLoader Madgine Resources ${sources} PRECOMPILED_HEADER Madgine/imageloaderlib.h SOURCE_ROOT .)
+add_plugin(ImageLoader Madgine Resources ${sources} PRECOMPILED_HEADER src/Madgine/imageloaderlib.h)
 
 target_link_plugins(ImageLoader Resources)

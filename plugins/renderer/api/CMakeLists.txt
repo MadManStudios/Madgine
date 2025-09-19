@@ -15,7 +15,7 @@ FolderSources(sources "" src)
 add_plugin(Render Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/renderlib.h EXTERNAL_DEPS freetype API_PLUGIN EXCLUSIVE ATLEAST_ONE)
 
 target_link_plugins(Render Debugger MeshLoader ImageLoader)
-target_link_plugin_groups(Render Renderer)
+target_link_plugin_groups(Render Render)
 
 target_link_libraries(Render PUBLIC RenderLib Meta Modules CodeGen FilesystemSerialize MemorySerialize)
 target_link_libraries(Render PRIVATE freetype lib_msdfgen)

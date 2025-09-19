@@ -19,6 +19,8 @@
 
 #include "Vulkan/vulkanrendercontext.h"
 
+#include "Madgine_Tools/renderer/imroot.h"
+
 UNIQUECOMPONENT(Engine::Tools::VulkanRenderContextTool);
 
 METATABLE_BEGIN_BASE(Engine::Tools::VulkanRenderContextTool, Engine::Tools::RenderContextTool)
@@ -71,13 +73,6 @@ namespace Tools {
         }
     }
 
-    void VulkanRenderContextTool::renderStatus()
-    {
-        float ratio = mTempBytesPerFrame.average() / Render::VulkanMappedHeapAllocator::goodSize;        
-        ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value , "O %.1f%%", 100.0f * ratio);        
-        ImGui::Separator();
-    }
-
     void VulkanRenderContextTool::update()
     {
         size_t totalTempBytes = Render::VulkanRenderContext::getSingleton().tempAllocatorMemoryQuota();
@@ -91,6 +86,13 @@ namespace Tools {
         if (mTimeBank >= 0.5f) {
             mTimeBank = fmodf(mTimeBank, 0.5f);
             mTempBytesPerFrameTrend << mTempBytesPerFrame.average();
+        }
+
+        if (ImGui::BeginStatus()) {
+            float ratio = mTempBytesPerFrame.average() / Render::VulkanMappedHeapAllocator::goodSize;
+            ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "O %.1f%%", 100.0f * ratio);
+            ImGui::Separator();
+            ImGui::EndStatus();
         }
 
         ToolBase::update();

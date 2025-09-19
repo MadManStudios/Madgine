@@ -36,7 +36,7 @@ namespace Engine {
 namespace Render {
 
     SkeletonLoader::SkeletonLoader()
-        : ResourceLoader({ ".fbx", ".dae" })
+        : ResourceLoader({ ".fbx", ".dae" }, { .mIconName = "skeleton.png" })
     {
     }
 

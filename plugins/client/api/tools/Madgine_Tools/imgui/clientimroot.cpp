@@ -547,9 +547,10 @@ namespace Tools {
                 io.AddInputCharacter(arg.text);
         }
 
-        // io.KeyShift = arg.mControlKeys.mShift;
-        // io.KeyCtrl = arg.mControlKeys.mCtrl;
-        // io.KeyAlt = arg.mControlKeys.mAlt;
+        io.AddKeyEvent(ImGuiMod_Ctrl, arg.mControlKeys.mCtrl);
+        io.AddKeyEvent(ImGuiMod_Shift, arg.mControlKeys.mShift);
+        io.AddKeyEvent(ImGuiMod_Alt, arg.mControlKeys.mAlt);
+        //io.AddKeyEvent(ImGuiMod_Super, al_key_down(&keys, ALLEGRO_KEY_LWIN) || al_key_down(&keys, ALLEGRO_KEY_RWIN));
 
         return io.WantCaptureKeyboard;
     }
@@ -565,9 +566,10 @@ namespace Tools {
             io.AddKeyEvent(it->second, false);
         }
 
-        // io.KeyShift = arg.mControlKeys.mShift;
-        // io.KeyCtrl = arg.mControlKeys.mCtrl;
-        // io.KeyAlt = arg.mControlKeys.mAlt;
+        io.AddKeyEvent(ImGuiMod_Ctrl, arg.mControlKeys.mCtrl);
+        io.AddKeyEvent(ImGuiMod_Shift, arg.mControlKeys.mShift);
+        io.AddKeyEvent(ImGuiMod_Alt, arg.mControlKeys.mAlt);
+        // io.AddKeyEvent(ImGuiMod_Super, al_key_down(&keys, ALLEGRO_KEY_LWIN) || al_key_down(&keys, ALLEGRO_KEY_RWIN));
 
         return io.WantCaptureKeyboard;
     }
@@ -683,6 +685,38 @@ namespace Tools {
             ImGui::Image((void *)tex.resourceBlock(), image_size);
         } else {
             ImGui::Spinner(path.stem().data(), 15, 6, ImGui::GetColorU32(ImGuiCol_ButtonHovered));
+        }
+    }
+
+    void ClientImRoot::DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size, float spinnerRadius)
+    {
+        std::string_view name = path.stem();
+
+        CachedImage &image = mImageCache[path];
+        if (!image.mHandle) {
+            Resources::ImageLoader::getOrCreateManual(name, path);
+            image.mHandle.loadFromImage(name, Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
+        }
+
+        if (image.mHandle.available()) {
+            const Render::Texture &tex = *image.mHandle;
+
+            if (image_size.x == -1 || image_size.y == -1) {
+                image_size = tex.size();
+            } else {
+                float ratio = static_cast<float>(tex.size().x) / tex.size().y;
+                if (ratio < 1.0f) {
+                    pos.x += (image_size.x - image_size.y * ratio) / 2;
+                    image_size.x = image_size.y * ratio;
+                } else {
+                    pos.y += (image_size.y - image_size.x / ratio) / 2;
+                    image_size.y = image_size.x / ratio;
+                }
+            }
+
+            ImGui::GetWindowDrawList()->AddImage((void *)tex.resourceBlock(), pos, pos + image_size);
+        } else {
+            ImGui::DrawSpinner(pos, pos + image_size, spinnerRadius, 6, ImGui::GetColorU32(ImGuiCol_ButtonHovered));
         }
     }
 

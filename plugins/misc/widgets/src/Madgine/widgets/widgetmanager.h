@@ -86,6 +86,8 @@ namespace Widgets {
         void setup(Render::RenderTarget *target) override;
         void render(Render::RenderTarget *target, size_t iteration) override;
 
+        void render(Render::RenderTarget *target, const WidgetsRenderData &renderData, const Vector2i &size);
+
         Resources::ImageLoader::Resource *getImage(std::string_view name);
 
         const Atlas2::Entry *lookUpImage(Resources::ImageLoader::Resource *image);

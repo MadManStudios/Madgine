@@ -58,7 +58,8 @@ namespace Render {
 #else
               ".glsl_es"
 #endif
-          })
+                         },
+              { .mIconName = "ShaderIcon.png" })
     {
     }
 

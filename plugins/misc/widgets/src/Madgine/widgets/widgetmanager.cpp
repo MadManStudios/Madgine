@@ -506,9 +506,6 @@ namespace Widgets {
     {
         mFrameClock.tick(std::chrono::steady_clock::now());
 
-        if (!mPipeline.available())
-            return;
-
         MainWindowComponentBase::render(target, iteration);
 
         WidgetsRenderData renderData;
@@ -537,10 +534,18 @@ namespace Widgets {
             }
         }
 
+        render(target, renderData, mClientSpace.mSize);
+    }
+
+    void WidgetManager::render(Render::RenderTarget *target, const WidgetsRenderData &renderData, const Vector2i &size)
+    {
+        if (!mPipeline.available())
+            return;
+
         {
             auto perApp = mPipeline->mapParameters<WidgetsPerApplication>(0);
             perApp->c = target->getClipSpaceMatrix();
-            perApp->screenSize = Vector2 { mClientSpace.mSize };
+            perApp->screenSize = Vector2 { size };
         }
 
         for (auto &[layer, layerData] : renderData.vertexData()) {

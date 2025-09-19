@@ -56,7 +56,7 @@ namespace Tools {
 
     void GamepadViewer::render()
     {
-        if (beginDefaultWindow(nullptr, ImGuiWindowFlags_NoScrollbar)) {
+        if (beginDefaultWindow(ImGuiDir_None, nullptr, ImGuiWindowFlags_NoScrollbar)) {
 
             const ImGuiStyle &Style = ImGui::GetStyle();
             ImDrawList *DrawList = ImGui::GetWindowDrawList();

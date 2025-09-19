@@ -5,6 +5,8 @@
 #include "Modules/threading/madgineobject.h"
 #include "Generic/genericresult.h"
 
+#include "Interfaces/filesystem/path.h"
+
 namespace Engine {
 namespace Resources {
 
@@ -15,6 +17,7 @@ namespace Resources {
         bool mAutoLoad = false;
         bool mAutoReload = true;
         bool mInplaceReload = false;
+        std::string mIconName;
     };
 
     struct MADGINE_RESOURCES_EXPORT ResourceLoaderBase : VirtualScopeBase<>, Threading::MadgineObject<ResourceLoaderBase>{
@@ -35,6 +38,8 @@ namespace Resources {
         virtual Threading::TaskQueue *loadingTaskQueue() const;
         
         const std::vector<std::string> &fileExtensions() const;
+
+        virtual const Filesystem::Path &iconPath(ResourceBase *res) const { return mIconPath; }
 
         size_t extensionIndex(std::string_view ext) const;
 
@@ -57,6 +62,8 @@ namespace Resources {
 
     protected:
         std::vector<std::string> mExtensions;
+
+        Filesystem::Path mIconPath;
 
         ResourceLoaderSettings mSettings;
     };

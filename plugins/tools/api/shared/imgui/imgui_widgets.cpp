@@ -6848,7 +6848,7 @@ bool ImGui::Selectable(const char* label, bool selected, ImGuiSelectableFlags fl
 
     bool hovered, held;
     bool pressed = ButtonBehavior(bb, id, &hovered, &held, button_flags);
-
+    bool pressed1 = pressed;
     // Multi-selection support (footer)
     if (is_multi_select)
     {

@@ -54,8 +54,7 @@ namespace Tools {
 
     void TestTool::render()
     {
-        if (beginDefaultWindow()) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Right, 0.2f, false, ImGuiCond_FirstUseEver);
+        if (beginDefaultWindow(ImGuiDir_Right)) {
 
             if (ImGui::CollapsingHeader("ImGui")) {
                 ImGui::DragFloat2("Scale", &ImGui::GetIO().DisplayFramebufferScale.x, 0.1f, 0.1f, 2.0f);

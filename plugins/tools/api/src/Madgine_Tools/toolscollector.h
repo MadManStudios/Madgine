@@ -11,8 +11,8 @@ DECLARE_UNIQUE_COMPONENT(Engine::Tools, Tools, ToolBase, Engine::UniqueComponent
 namespace Engine {
 namespace Tools {
 
-	template <typename T>
-	using Tool = Serialize::VirtualUnit<T, VirtualScope<T, ToolsComponent<T>>>;
+	template <typename T, typename Base = ToolBase>
+	using Tool = Serialize::VirtualUnit<T, VirtualScope<T, ToolsComponent<T, Base>>>;
 
 	template <typename T>
 	using ToolVirtualBase = ToolsVirtualBase<T>;

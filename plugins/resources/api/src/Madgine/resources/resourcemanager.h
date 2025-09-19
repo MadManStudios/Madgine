@@ -48,7 +48,7 @@ namespace Resources {
 
         ResourceLoaderContainer<std::vector<Placeholder<0>>> mCollector;
 
-        Filesystem::Path findResourceFile(const std::string &fileName);
+        Filesystem::Path findResourceFile(std::string_view fileName);
 
         Threading::Task<void> update();
 

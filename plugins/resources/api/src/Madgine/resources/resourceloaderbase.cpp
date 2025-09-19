@@ -20,6 +20,9 @@ namespace Resources {
 
     Threading::Task<bool> ResourceLoaderBase::init()
     {
+        if (!mSettings.mIconName.empty())
+            mIconPath = Resources::ResourceManager::getSingleton().findResourceFile(mSettings.mIconName);
+
         co_return true;
     }
 

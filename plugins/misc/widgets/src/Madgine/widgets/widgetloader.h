@@ -10,7 +10,7 @@ namespace Widgets {
     struct MADGINE_WIDGETS_EXPORT WidgetLoader : Resources::ResourceLoader<WidgetLoader, WidgetDescriptor> {
         WidgetLoader();
 
-        struct Handle : Base::Handle {
+        struct MADGINE_WIDGETS_EXPORT Handle : Base::Handle {
             using Base::Handle::Handle;
             Handle(Base::Handle handle)
                 : Base::Handle(std::move(handle))
@@ -26,7 +26,7 @@ namespace Widgets {
         Threading::Task<void> unloadImpl(WidgetDescriptor &descriptor);
     };
 
-    struct WidgetDescriptor {
+    struct MADGINE_WIDGETS_EXPORT WidgetDescriptor {
         WidgetDescriptor();
 
         WidgetDescriptor(std::unique_ptr<WidgetTemplate> _template);
@@ -41,7 +41,7 @@ namespace Widgets {
         }
         ~WidgetDescriptor();
 
-        WidgetDescriptor &operator=(WidgetDescriptor &&) noexcept = default;
+        WidgetDescriptor &operator=(WidgetDescriptor &&) noexcept;
 
         const MetaTable *metaTable();
         const Serialize::SerializeTable *serializeTable();
