@@ -8,15 +8,28 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
 
 #include "Interfaces/process/processapi.h"
 
 namespace Engine {
 namespace Tools {
-    ToolBase::ToolBase(ImRoot &root, bool visible)
-        : mVisible(visible)
-        , mRoot(root)
+
+    MADGINE_TOOLS_EXPORT extern const ImGuiWindowClass windowClass = []() {
+        ImGuiWindowClass topLevelClass;
+        topLevelClass.ClassId = 1;
+        topLevelClass.ViewportFlagsOverrideSet = ImGuiViewportFlags_NoAutoMerge;
+        topLevelClass.ViewportFlagsOverrideClear = ImGuiViewportFlags_NoDecoration | ImGuiViewportFlags_NoTaskBarIcon;
+        topLevelClass.ParentViewportId = 0; // Top level window
+        topLevelClass.DockingAllowUnclassed = false;
+        topLevelClass.DockingAlwaysTabBar = true;
+
+        return topLevelClass;
+    }();
+
+    ToolBase::ToolBase(ImRoot &root)
+        : mRoot(root)
     {
     }
 
@@ -109,16 +122,21 @@ namespace Tools {
         co_return;
     }
 
-    bool ToolBase::beginDefaultWindow(ImGuiDir dockingDir, const char *docTarget, ImGuiWindowFlags flags, const char *pluginSourceDir)
+    bool ToolBase::beginTool(const char *name, bool *open, ImGuiDir dockingDir, ImGuiWindowFlags flags, const char *docTarget, const char *pluginSourceDir)
     {
-        if (ImGui::Begin(key().data(), &mVisible, flags)) {
+        ImGui::SetNextWindowClass(&windowClass);
+        if (dockingDir == ImGuiDir_None)
+            ImGui::SetNextWindowDockID(ImGui::DockBuilderGetCentralNode(mRoot.rootDockSpaceId())->ID, ImGuiCond_FirstUseEver);
+
+        if (ImGui::Begin(name, open, flags)) {
 
             float ratio = 0.2f;
 
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), dockingDir, ratio, dockingDir == ImGuiDir_Down, ImGuiCond_FirstUseEver);
+            if (dockingDir != ImGuiDir_None)
+                ImGui::SetWindowDockingDir(mRoot.rootDockSpaceId(), dockingDir, ratio, dockingDir == ImGuiDir_Down, ImGuiCond_FirstUseEver);
 
             if (docTarget) {
-                if (ImGui::BeginPopupCompoundContextWindow()) {
+                if ((flags & ImGuiWindowFlags_MenuBar) ? ImGui::BeginMenuBar() : ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::MenuItem("?")) {
                         Filesystem::Path path { "https://madmanstudios.github.io/Madgine/doc" };
                         Filesystem::Path pluginDir { pluginSourceDir };
@@ -128,13 +146,106 @@ namespace Tools {
 
                         Process::execute(path);
                     }
-                    ImGui::EndPopup();
+                    (flags & ImGuiWindowFlags_MenuBar) ? ImGui::EndMenuBar() : ImGui::EndPopup();
                 }
             }
+
             return true;
         }
         return false;
     }
+
+    bool ToolBase::beginToolWindow(const char *name, bool *open, ImGuiWindowFlags flags, const char *docTarget, const char *pluginSourceDir)
+    {
+        bool visible = beginTool(name, open, ImGuiDir_None, flags, docTarget, pluginSourceDir);
+
+        ImGuiID dockId = ImGui::GetWindowDockID();
+        if (dockId == 0)
+            dockId = ImGui::GetID("Floating");
+        mDockSpaceId = ImHashStr(key().data(), 0, dockId);
+        ImGuiID lastDockId = (ImGuiID)std::exchange(*ImGui::GetStateStorage()->GetVoidPtrRef(ImGui::GetID("DockID")), (void *)mDockSpaceId);
+        if (lastDockId != 0 && lastDockId != mDockSpaceId) {
+            ImGuiDockNode *node = ImGui::DockBuilderGetNode(mDockSpaceId);
+            ImGuiDockNode *prevNode = ImGui::DockBuilderGetNode(lastDockId);
+            if (prevNode) {
+                if (!node) {
+                    // new node
+                    ImVector<const char *> remapping;
+                    std::vector<std::string> names;
+                    ImGuiContext &g = *GImGui;
+                    for (ImGuiWindow *window : g.Windows) {
+                        std::string name = window->Name;
+
+                        auto pos = name.find("##");
+                        if (pos == std::string::npos)
+                            continue;
+
+                        std::string trimmed = name.substr(0, pos);
+                        if (name != std::format("{}##{:x}", trimmed, lastDockId))
+                            continue;
+
+                        names.push_back(name);
+                        names.push_back(std::format("{}##{:x}", trimmed, mDockSpaceId));
+                    }
+                    for (const std::string &name : names) {
+                        remapping.push_back(name.c_str());
+                    }
+                    ImGui::DockBuilderCopyDockSpace(lastDockId, mDockSpaceId, &remapping);
+                    ImGui::DockBuilderFinish(mDockSpaceId);
+                }                
+            }
+
+            mRoot.mDockSpaces.try_emplace(lastDockId, 0);            
+        }
+
+        ++mRoot.mDockSpaces.try_emplace(mDockSpaceId, 0).first->second;
+
+        if (ImGui::GetCurrentWindow()->Hidden)
+            visible = false;
+
+        if (visible) {
+            ImGui::DockSpace(mDockSpaceId);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    bool ToolBase::beginToolPanel(const char *name, bool *open, ImGuiDir dockingDir, ImGuiWindowFlags flags, const char *docTarget, const char *pluginSourceDir)
+    {
+        return beginTool(name, open, dockingDir, flags, docTarget, pluginSourceDir);
+    }
+
+    bool ToolBase::beginSubPanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio, ImGuiWindowFlags flags)
+    {
+        assert(dockingDir != ImGuiDir_None);
+
+        std::string newName = std::format("{}##{:x}", name, mDockSpaceId);
+        if (ImGui::Begin(newName.c_str(), open, flags)) {
+            ImGui::SetWindowDockingDir(mDockSpaceId, dockingDir, ratio, false, ImGuiCond_FirstUseEver);
+            return true;
+        }
+        return false;
+    }
+
+    bool ToolBase::beginContent(ImGuiWindowFlags flags)
+    {
+        std::string name = std::format("Content##{:x}", mDockSpaceId);
+
+        ImGuiWindowClass window_class;
+        window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar;
+        ImGui::SetNextWindowClass(&window_class);
+
+        ImGui::SetNextWindowDockID(ImGui::DockBuilderGetCentralNode(mDockSpaceId)->ID, ImGuiCond_Appearing);
+        return ImGui::Begin(name.c_str(), nullptr, flags | ImGuiWindowFlags_NoMove);
+    }
+
+    ImGuiID ToolBase::dockSpaceId() const
+    {
+        return mDockSpaceId;
+    }
+
 }
 }
 

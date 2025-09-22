@@ -58,7 +58,7 @@ namespace Tools {
 
     void Profiler::render()
     {
-        if (beginDefaultWindow()) {
+        if (beginToolPanel("Profiler", &mVisible, ImGuiDir_Down)) {
             
              if (ImGui::BeginTable("cols", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable)) {
 

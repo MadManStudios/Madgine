@@ -54,7 +54,7 @@ namespace Tools {
 
     void TestTool::render()
     {
-        if (beginDefaultWindow(ImGuiDir_Right)) {
+        if (beginToolPanel("TestTool", &mVisible, ImGuiDir_Right)) {
 
             if (ImGui::CollapsingHeader("ImGui")) {
                 ImGui::DragFloat2("Scale", &ImGui::GetIO().DisplayFramebufferScale.x, 0.1f, 0.1f, 2.0f);

@@ -37,6 +37,8 @@ namespace Engine {
 
 namespace Tools {
 
+    extern const ImGuiWindowClass windowClass;
+
     void *ToolReadOpen(ImGuiContext *ctx, ImGuiSettingsHandler *handler, const char *name) // Read: Called when entering into a new ini entry e.g. "[Window][Name]"
     {
         ImRoot *root = static_cast<ImRoot *>(handler->UserData);
@@ -116,9 +118,13 @@ namespace Tools {
         }
     }
 
-    void ImRoot::render()
+    bool ImRoot::render()
     {
+        bool gameVisible = false;
+
         PROFILE_NAMED("ImGui - Rendering");
+
+        assert(mDockSpaces.empty());
 
         ImGuiIO &io = ImGui::GetIO();
 
@@ -147,22 +153,32 @@ namespace Tools {
         ImGui::SetNextWindowSize(viewport->WorkSize);
         ImGui::SetNextWindowViewport(viewport->ID);
 
-        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
+        ImGuiWindowFlags window_flags = 0;
         window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
         window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-        window_flags |= ImGuiWindowFlags_NoBackground;
+        // window_flags |= ImGuiWindowFlags_NoBackground;
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-        ImGui::Begin("Madgine Root Window", nullptr, window_flags);
-        ImGui::PopStyleVar(3);
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, { 0, 0, 0, 0 });
+        ImGui::Begin("Madgine Root Window", nullptr, window_flags | ImGuiWindowFlags_NoDocking);
 
         // DockSpace
-        ImGuiID dockspace_id = ImGui::GetID("MadgineDockSpace");
+        mRootDockSpaceId = ImGui::GetID("RootDockSpace");
+        mGameDockSpaceId = ImGui::GetID("GameDockSpace");
         ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
-        ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
-        mDockSpaceId = dockspace_id;
+        ImGui::DockSpace(mRootDockSpaceId, ImVec2(0.0f, 0.0f), dockspace_flags, &windowClass);
+
+        ImGui::SetNextWindowDockID(mRootDockSpaceId, ImGuiCond_Appearing);
+        ImGui::SetNextWindowClass(&windowClass);
+        if (ImGui::Begin("Game", nullptr, window_flags | ImGuiWindowFlags_MenuBar)) {
+            ImGui::DockSpace(mGameDockSpaceId, ImVec2(0.0f, 0.0f), dockspace_flags | ImGuiDockNodeFlags_NoDockingOverCentralNode);
+            gameVisible = true;
+        }
+        ImGui::End();
+        ImGui::PopStyleVar(3);
+        ImGui::PopStyleColor();
 
         for (ToolBase *tool : mCollector | std::views::transform(projectionUniquePtrToPtr)) {
             if (tool->isEnabled())
@@ -170,6 +186,26 @@ namespace Tools {
         }
 
         mDialogContainer.render();
+
+        for (const auto [id, count] : mDockSpaces) {
+            if (count == 0) {
+                ImGui::DockBuilderRemoveNode(id);
+
+                // Delete settings of old windows
+                // Rely on window name to ditch their .ini settings forever..
+                std::string suffix = std::format("##{:x}", id);
+                ImGuiContext &g = *GImGui;
+                for (ImGuiWindowSettings *settings = g.SettingsWindows.begin(); settings != NULL; settings = g.SettingsWindows.next_chunk(settings)) {
+                    if (settings->ID == 0)
+                        continue;
+                    const char *window_name = settings->GetName();
+                    if (StringUtil::endsWith(window_name, suffix)) {
+                        ImGui::ClearWindowSettings(window_name);
+                    }
+                }
+            }
+        }
+        mDockSpaces.clear();
 
         if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
             ImGui::End();
@@ -181,6 +217,8 @@ namespace Tools {
             ImGui::EndFrame();
 
         ImGui::UpdatePlatformWindows();
+
+        return gameVisible;
     }
 
     const std::vector<std::unique_ptr<ToolBase>> &ImRoot::tools()
@@ -193,9 +231,14 @@ namespace Tools {
         return mCollector.get(index);
     }
 
-    unsigned int ImRoot::dockSpaceId() const
+    unsigned int ImRoot::rootDockSpaceId() const
     {
-        return mDockSpaceId;
+        return mRootDockSpaceId;
+    }
+
+    unsigned int ImRoot::gameDockSpaceId() const
+    {
+        return mGameDockSpaceId;
     }
 
     void ImRoot::finishToolRead()

@@ -75,6 +75,10 @@ namespace Tools {
         }
     }
 
+    void RenderContextTool::renderMenu()
+    {
+    }
+
     std::string_view RenderContextTool::key() const
     {
         return "RenderContextTool";

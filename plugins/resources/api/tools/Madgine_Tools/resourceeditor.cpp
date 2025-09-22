@@ -17,10 +17,16 @@
 namespace Engine {
 namespace Tools {
 
+    MADGINE_TOOLS_EXPORT extern const ImGuiWindowClass windowClass;
+
+    ResourceEditor::ResourceEditor(ImRoot &root)
+        : ToolBase(root)
+    {
+        mVisible = true;
+    }
+
     void ResourceEditor::renderMenu()
     {
-        ToolBase::renderMenu();
-
         if (ImGui::BeginMenu("Resources")) {
 
             if (ImGui::BeginMenu("New...")) {
@@ -105,29 +111,26 @@ namespace Tools {
         } else {
             fileName = "<unnamed>";
         }
-        fileName += "##";
-        fileName += mType;
 
         if (isDirty)
             flags |= ImGuiWindowFlags_UnsavedDocument;
 
-        ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_None, 0.0f, false, ImGuiCond_FirstUseEver);
-        bool visible = ImGui::Begin(fileName.c_str(), open, flags);
+        ImGui::SetNextWindowDockID(mRoot.rootDockSpaceId(), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowClass(&windowClass);
+        bool visible = beginToolWindow(fileName.c_str(), open, flags | ImGuiWindowFlags_MenuBar);
         if (visible) {
 
-            if (mManager->lastFocusedEditor(this)) {
-                if (ImGui::BeginMainMenuBar()) {
-                    if (ImGui::BeginMenu("Resources")) {
-                        if (ImGui::MenuItem(("Save '"s + path.filename().str() + "'").c_str(), "Ctrl+S", false, isDirty && !path.empty()))
-                            save(path);
-                        if (ImGui::MenuItem("Save as...")) {
-                            mRoot.dialogs().show(
-                                mRoot.filePicker(true), std::move(save));
-                        }
-                        ImGui::EndMenu();
+            if (ImGui::BeginMenuBar()) {
+                if (ImGui::BeginMenu("File")) {
+                    if (ImGui::MenuItem(("Save '"s + path.filename().str() + "'").c_str(), "Ctrl+S", false, isDirty && !path.empty()))
+                        save(path);
+                    if (ImGui::MenuItem("Save as...")) {
+                        mRoot.dialogs().show(
+                            mRoot.filePicker(true), std::move(save));
                     }
-                    ImGui::EndMainMenuBar();
+                    ImGui::EndMenu();
                 }
+                ImGui::EndMenuBar();
             }
 
             if (ImGui::Shortcut(ImGuiKey_S | ImGuiMod_Ctrl)) {

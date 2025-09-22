@@ -10,9 +10,7 @@ namespace Tools {
     struct WidgetFile : Render::RenderPass {
 
         WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Handle handle);
-        ~WidgetFile();
-
-        bool render();
+        ~WidgetFile();        
 
         void save(const Filesystem::Path &path);
 
@@ -22,7 +20,7 @@ namespace Tools {
 
         std::string_view name() const override;
 
-    private:
+    //private: //TODO
         WidgetEditor &mEditor;
         Filesystem::Path mPath;
         bool mIsDirty = false;

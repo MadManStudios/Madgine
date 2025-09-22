@@ -50,8 +50,9 @@ namespace Engine {
 namespace Tools {
 
     ProjectManager::ProjectManager(ImRoot &root)
-        : Tool<ProjectManager>(root, true)
+        : Tool<ProjectManager>(root)
     {
+        mVisible = true;
     }
 
     Threading::Task<bool> ProjectManager::init()
@@ -83,7 +84,7 @@ namespace Tools {
 
     void ProjectManager::renderLandingPage()
     {
-        ImGuiDockNode *centralNode = ImGui::DockBuilderGetCentralNode(mRoot.dockSpaceId());
+        ImGuiDockNode *centralNode = ImGui::DockBuilderGetCentralNode(mRoot.rootDockSpaceId());
         if (mProjectRoot.empty() && centralNode->IsEmpty()) {
 
             ImGui::SetNextWindowPos(centralNode->Pos, ImGuiCond_Always);

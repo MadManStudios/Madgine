@@ -37,29 +37,7 @@ namespace Tools {
         static_cast<ClientImRoot &>(mEditor.root()).removeRenderTarget(mRenderTarget.get());
     }
 
-    bool WidgetFile::render()
-    {
-        bool open = true;
-
-        if (mEditor.BeginResourceFile(this, mPath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &open)) {
-
-            ImVec2 min = ImGui::GetWindowContentRegionMin();
-            ImVec2 max = ImGui::GetWindowContentRegionMax();
-            ImVec2 size = max - min;
-
-            if (mRenderTarget->size() != size) {
-                mRenderTarget->resize({ static_cast<int>(size.x), static_cast<int>(size.y) });
-                if (mWidget) {
-                    mWidget->applyGeometry(Vector3{ size, 1.0f });
-                }
-            }
-
-            ImGui::Image((void *)mRenderTarget->texture()->resourceBlock(), size);
-        }
-        ImGui::End();
-
-        return open;
-    }
+    
 
     void WidgetFile::save(const Filesystem::Path &path)
     {

@@ -152,6 +152,16 @@ namespace Tools {
         ToolBase::renderMenu();
     }
 
+    void LifetimeControl::format()
+    {
+        FormatTree format { Debug::getRootLifetime(), &Debug::DebuggableLifetimeBase::children };
+        format.format();
+        format.visit([](Debug::DebuggableLifetimeBase *lifetime, float x, float y) {
+            ImVec2 size = ed::GetNodeSize(reinterpret_cast<uintptr_t>(lifetime));
+            ed::SetNodePosition(reinterpret_cast<uintptr_t>(lifetime), { 270.0f * x - 0.5f * size.x, 100.0f * y - 0.5f * size.y });
+        });
+    }
+
     std::string_view LifetimeControl::key() const
     {
         return "Lifetime Control";
@@ -159,64 +169,69 @@ namespace Tools {
 
     void LifetimeControl::renderTreeView()
     {
-        if (beginDefaultWindow()) {
+        if (beginToolWindow("Lifetime Control", &mVisible)) {
 
-            ImVec2 oldViewportPos = ImGui::GetCurrentContext()->MouseViewport->Pos;
-            ImVec2 oldViewportSize = ImGui::GetCurrentContext()->MouseViewport->Size;
+            if (beginContent()) {
 
-            ImGui::GetCurrentContext()->MouseViewport->Pos = { -10000, -10000 };
-            ImGui::GetCurrentContext()->MouseViewport->Size = { 20000, 20000 };
+                ImVec2 oldViewportPos = ImGui::GetCurrentContext()->MouseViewport->Pos;
+                ImVec2 oldViewportSize = ImGui::GetCurrentContext()->MouseViewport->Size;
 
-            ed::SetCurrentEditor(mEditor.get());
+                ImGui::GetCurrentContext()->MouseViewport->Pos = { -10000, -10000 };
+                ImGui::GetCurrentContext()->MouseViewport->Size = { 20000, 20000 };
 
-            ed::Begin("Node editor");
+                ed::SetCurrentEditor(mEditor.get());
 
-            Debug::DebuggableLifetimeBase &root = Debug::getRootLifetime();
+                if (ImGui::IsWindowAppearing())
+                    format();
 
-            for (Debug::DebuggableLifetimeBase &child : root.children())
-                renderLifetime(child);
+                ed::Begin("Node editor");
 
-            ed::Suspend();
+                Debug::DebuggableLifetimeBase &root = Debug::getRootLifetime();
 
-            if (ed::ShowBackgroundContextMenu()) {
-                ImGui::OpenPopup("Context");
-            }
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
-            if (ImGui::BeginPopup("Context")) {
-                if (ImGui::MenuItem("Format")) {
-                    FormatTree format { root, &Debug::DebuggableLifetimeBase::children };
-                    format.format();
-                    format.visit([](Debug::DebuggableLifetimeBase *lifetime, float x, float y) {
-                        ImVec2 size = ed::GetNodeSize(reinterpret_cast<uintptr_t>(lifetime));
-                        ed::SetNodePosition(reinterpret_cast<uintptr_t>(lifetime), { 270.0f * x - 0.5f * size.x, 100.0f * y - 0.5f * size.y });
-                    });
-                    ed::NavigateToContent();
+                for (Debug::DebuggableLifetimeBase &child : root.children())
+                    renderLifetime(child);
+
+                ed::Suspend();
+
+                if (ed::ShowBackgroundContextMenu()) {
+                    ImGui::OpenPopup("Context");
                 }
-                ImGui::EndPopup();
+                ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+                if (ImGui::BeginPopup("Context")) {
+                    if (ImGui::MenuItem("Format")) {
+                        format();
+                        ed::NavigateToContent();
+                    }
+                    ImGui::EndPopup();
+                }
+                ImGui::PopStyleVar();
+
+                ed::Resume();
+
+                ed::End();
+
+                ed::SetCurrentEditor(nullptr);
+
+                ImGui::GetCurrentContext()->MouseViewport->Pos = oldViewportPos;
+                ImGui::GetCurrentContext()->MouseViewport->Size = oldViewportSize;
             }
-            ImGui::PopStyleVar();
-
-            ed::Resume();
-
-            ed::End();
-
-            ed::SetCurrentEditor(nullptr);
-
-            ImGui::GetCurrentContext()->MouseViewport->Pos = oldViewportPos;
-            ImGui::GetCurrentContext()->MouseViewport->Size = oldViewportSize;
+            ImGui::End();
         }
         ImGui::End();
     }
 
     void LifetimeControl::renderToolbar()
     {
-        ImGuiWindowClass window_class;
-        window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDocking;
-        ImGui::SetNextWindowClass(&window_class);
-        if (ImGui::Begin("Lifetime Control - Toolbar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Up, 0.01f, true, ImGuiCond_FirstUseEver);
+        if (ImGui::Begin("Game")) {
+            ImGuiWindowClass window_class;
+            window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDocking;
+            ImGui::SetNextWindowClass(&window_class);
+            if (ImGui::Begin("Lifetime Control - Toolbar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
+                ImGui::SetWindowDockingDir(mRoot.gameDockSpaceId(), ImGuiDir_Up, 0.01f, true, ImGuiCond_FirstUseEver);
 
-            controls(Debug::getRootLifetime());
+                controls(Debug::getRootLifetime());
+            }
+            ImGui::End();
         }
         ImGui::End();
     }

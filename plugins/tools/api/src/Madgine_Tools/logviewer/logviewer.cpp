@@ -65,9 +65,11 @@ namespace Tools {
     static constexpr std::array<ImColor, 5> sColors { { { 0.0f, 0.78f, 1.0f, 1.0f }, { 1.0f, 1.0f, 1.0f, 1.0f }, { 1.0f, 0.78f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 0.0f, 1.0f } } };
 
     LogViewer::LogViewer(ImRoot &root)
-        : Tool<LogViewer>(root, true)
+        : Tool<LogViewer>(root)
         , mWorkgroup(&Threading::WorkGroup::self())
     {
+        mVisible = true;
+
         for (Log::MessageType type : Log::MessageType::values()) {
             mMsgCounts[type] = 0;
             mMsgFilters[type] = true;
@@ -82,7 +84,7 @@ namespace Tools {
 
     void LogViewer::render()
     {
-        if (beginDefaultWindow(ImGuiDir_Down, "tools.html#log-viewer")) {
+        if (beginToolPanel("Log Viewer", &mVisible, ImGuiDir_Down, ImGuiWindowFlags_None, "tools.html#log-viewer")) {
 
             for (Log::MessageType type : Log::MessageType::values()) {
                 ImGui::PushStyleColor(ImGuiCol_Text, sColors[type].Value);
@@ -192,7 +194,6 @@ namespace Tools {
                     ImGui::TextColored(sColors[type], "%s %d", sIcons[type], static_cast<int>(mMsgCounts[type]));
                 }
             }
-            ImGui::Separator();
             ImGui::EndStatus();
         }
     }

@@ -12,11 +12,12 @@ namespace Tools {
 
         RenderContextTool(ImRoot &root);
 
-        virtual Threading::Task<bool> init() override;
-        virtual Threading::Task<void> finalize() override;
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
 
-        virtual void renderSettings() override;
-        virtual void update() override;
+        void renderSettings() override;
+        void update() override;
+        void renderMenu() override;
 
         std::string_view key() const override;
 

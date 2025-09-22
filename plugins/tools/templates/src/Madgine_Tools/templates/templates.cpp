@@ -46,19 +46,19 @@ namespace Tools {
 
     void Templates::renderMenu()
     {
-        ToolBase::renderMenu();
+        if (ImGui::IsKeyDown(ImGuiMod_Ctrl)) {
+            if (ImGui::BeginMenu("Dev")) {
+                if (ImGui::BeginMenu("Templates")) {
 
-        if (mVisible) {
-
-            if (ImGui::BeginMenu("Templates")) {
-
-                for (Filesystem::FileQueryResult dir : Filesystem::listDirs(PROJECT_ROOT "/templates")) {
-                    std::string name = dir.path().filename().str();
-                    if (ImGui::MenuItem(name.c_str())) {
-                        showTemplateDialog(name);
+                    for (Filesystem::FileQueryResult dir : Filesystem::listDirs(PROJECT_ROOT "/templates")) {
+                        std::string name = dir.path().filename().str();
+                        if (ImGui::MenuItem(name.c_str())) {
+                            showTemplateDialog(name);
+                        }
                     }
-                }
 
+                    ImGui::EndMenu();
+                }
                 ImGui::EndMenu();
             }
         }

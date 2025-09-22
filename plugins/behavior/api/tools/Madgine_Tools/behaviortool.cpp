@@ -105,6 +105,10 @@ namespace Tools {
         }) > 0;
     }
 
+    void BehaviorTool::renderMenu()
+    {
+    }
+
     BehaviorHandle BehaviorSelector()
     {
         BehaviorHandle result;

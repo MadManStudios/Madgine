@@ -17,6 +17,16 @@ namespace Tools {
     {
     }
 
+    void ImGuiDemo::renderMenu()
+    {
+        if (ImGui::IsKeyDown(ImGuiMod_Ctrl)) {
+            if (ImGui::BeginMenu("Dev")) {
+                ImGui::MenuItem("ImGui Demo", nullptr, &mVisible);
+                ImGui::EndMenu();
+            }
+        }
+    }
+
     void ImGuiDemo::render()
     {
         ImGui::ShowDemoWindow(&mVisible);

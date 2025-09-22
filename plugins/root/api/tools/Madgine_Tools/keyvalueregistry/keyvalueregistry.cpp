@@ -41,7 +41,7 @@ namespace Tools {
 
     void KeyValueRegistry::render()
     {
-        if (beginDefaultWindow(ImGuiDir_Right)) {
+        if (beginToolPanel("KeyValueRegistry", &mVisible, ImGuiDir_Right)) {
 
             auto drawList = [this](const std::map<std::string_view, ScopePtr> &items) {
                 for (const std::pair<const std::string_view, ScopePtr> &p : items) {

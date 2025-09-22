@@ -399,9 +399,8 @@ namespace Tools {
 
             mWindow.osWindow()->setCursorIcon(convertCursorIcon(ImGui::GetMouseCursor()));
 
-            ImRoot::render();
-
-            setCentralNode();
+            if (ImRoot::render())
+                setCentralNode();            
 
             ImGuiViewport *main_viewport = ImGui::GetMainViewport();
             main_viewport->Flags |= ImGuiViewportFlags_NoRendererClear; // TODO: Is that necessary every Frame?
@@ -646,7 +645,7 @@ namespace Tools {
 
         Vector2 oldSize = mAreaSize;
 
-        ImGuiDockNode *node = ImGui::DockBuilderGetCentralNode(mDockSpaceId);
+        ImGuiDockNode *node = ImGui::DockBuilderGetCentralNode(mGameDockSpaceId);
 
         if (node) {
             mAreaPos = Vector2 { node->Pos } * io.DisplayFramebufferScale;

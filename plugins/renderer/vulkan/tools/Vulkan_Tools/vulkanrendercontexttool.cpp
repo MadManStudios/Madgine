@@ -91,7 +91,6 @@ namespace Tools {
         if (ImGui::BeginStatus()) {
             float ratio = mTempBytesPerFrame.average() / Render::VulkanMappedHeapAllocator::goodSize;
             ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "O %.1f%%", 100.0f * ratio);
-            ImGui::Separator();
             ImGui::EndStatus();
         }
 

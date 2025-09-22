@@ -54,6 +54,10 @@ namespace Tools {
     {
     }
 
+    void Inspector::renderMenu()
+    {
+    }
+
     bool Inspector::drawRemainingMembers(ScopePtr scope, std::set<std::string> &drawn)
     {
         bool changed = false;

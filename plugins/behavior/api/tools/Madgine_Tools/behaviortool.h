@@ -17,6 +17,8 @@ namespace Tools {
 
         bool drawBehaviorList(BehaviorList &list);
 
+        void renderMenu() override;
+
         std::string_view key() const override;
 
     private:

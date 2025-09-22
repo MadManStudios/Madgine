@@ -56,7 +56,7 @@ namespace Tools {
 
     void GamepadViewer::render()
     {
-        if (beginDefaultWindow(ImGuiDir_None, nullptr, ImGuiWindowFlags_NoScrollbar)) {
+        if (beginToolPanel("Gamepad", &mVisible, ImGuiDir_None, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
 
             const ImGuiStyle &Style = ImGui::GetStyle();
             ImDrawList *DrawList = ImGui::GetWindowDrawList();
@@ -78,7 +78,7 @@ namespace Tools {
             ImVec2 cursor = window->DC.CursorPos;
 
             if (mGamepadTexture.available())
-                ImGui::Image((void *)mGamepadTexture->handle(), Canvas);
+                ImGui::Image((void *)mGamepadTexture->resourceBlock(), Canvas);
 
             size_t i = 0;
             constexpr float offsets[2][2] = {

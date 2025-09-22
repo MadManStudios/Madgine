@@ -23,10 +23,9 @@ namespace Tools {
 
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
-
-        void render() override;
+        
         void renderMenu() override;
-        void update() override;
+        void render() override;
 
         std::string_view key() const override;
 
@@ -35,9 +34,11 @@ namespace Tools {
         Widgets::WidgetManager &manager();
 
     private:
-        void renderSelection(Widgets::WidgetBase *hoveredWidget = nullptr);
-        void renderHierarchy(Widgets::WidgetBase **hoveredWidget = nullptr);
+        void renderSelection(ImGuiID dockspaceId, Widgets::WidgetBase *hoveredWidget = nullptr);
+        void renderHierarchy(ImGuiID dockspaceId, Widgets::WidgetBase **hoveredWidget = nullptr);
         bool drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget = nullptr);
+
+        bool renderWidget(WidgetFile &widget);
 
     private:        
         Widgets::WidgetManager *mWidgetManager = nullptr;

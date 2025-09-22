@@ -19,12 +19,14 @@ namespace Tools {
         LifetimeControl(ImRoot &root);
         LifetimeControl(const LifetimeControl &) = delete;
 
-        virtual Threading::Task<bool> init() override;
-        virtual Threading::Task<void> finalize() override;
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
 
-        virtual void update() override;
-        virtual void render() override;
-        virtual void renderMenu() override;
+        void update() override;
+        void render() override;
+        void renderMenu() override;
+
+        void format();
 
         std::string_view key() const override;
 

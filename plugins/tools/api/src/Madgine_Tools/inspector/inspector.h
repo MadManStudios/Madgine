@@ -17,7 +17,8 @@ namespace Tools {
         Inspector(const Inspector &) = delete;
         ~Inspector();
 
-        virtual void render() override;
+        void render() override;
+        void renderMenu() override;
 
         bool drawRemainingMembers(ScopePtr scope, std::set<std::string> &drawn);
         bool drawMember(ScopePtr parent, const ScopeIterator &it);

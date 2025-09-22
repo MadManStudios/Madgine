@@ -33,14 +33,9 @@ namespace Tools {
     {
     }
 
-    void LauncherTool::render()
+    void LauncherTool::renderMenu()
     {
-        if (beginDefaultWindow()) {
-            std::string windowName = mMainWindow->osWindow()->title();
-            if (ImGui::InputText("Window Title", &windowName))
-                mMainWindow->osWindow()->setTitle(windowName.c_str());
-        }
-        ImGui::End();
+
     }
 
     bool LauncherTool::renderConfiguration(const Filesystem::Path &config)

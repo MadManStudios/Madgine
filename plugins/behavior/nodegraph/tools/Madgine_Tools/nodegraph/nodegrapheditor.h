@@ -25,7 +25,6 @@ namespace Tools {
         virtual Threading::Task<void> finalize() override;
 
         virtual void render() override;
-        virtual void renderMenu() override;
 
         std::string_view key() const override;
 
@@ -46,7 +45,6 @@ namespace Tools {
         void verify();
 
         void renderHierarchy();
-        void renderEditor();
         void renderSelection();
 
 

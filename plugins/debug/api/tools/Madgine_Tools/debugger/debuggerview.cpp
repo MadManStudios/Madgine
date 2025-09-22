@@ -168,70 +168,75 @@ namespace Tools {
 
     void DebuggerView::render()
     {
-        if (ImGui::Begin("Debug Contexts")) {
-            std::unique_lock lock { mDebugger.mMutex };
-            for (Debug::ContextInfo &info : mDebugger.infos()) {
-                std::ostringstream descriptor;
-                descriptor << "Context";
-                if (!info.alive())
-                    descriptor << " (dead)";
-                else if (info.isPaused())
-                    descriptor << " (paused)";
-                if (ImGui::Selectable(descriptor.str().c_str(), mSelectedContext == &info)) {
-                    setCurrentContext(info);
+        if (beginToolWindow("Debugger", &mVisible)) {
+
+            if (beginSubPanel("Debug Contexts", nullptr, ImGuiDir_Left)) {                
+                std::unique_lock lock { mDebugger.mMutex };
+                for (Debug::ContextInfo &info : mDebugger.infos()) {
+                    std::ostringstream descriptor;
+                    descriptor << "Context";
+                    if (!info.alive())
+                        descriptor << " (dead)";
+                    else if (info.isPaused())
+                        descriptor << " (paused)";
+                    if (ImGui::Selectable(descriptor.str().c_str(), mSelectedContext == &info)) {
+                        setCurrentContext(info);
+                    }
                 }
             }
-        }
-        ImGui::End();
+            ImGui::End();
 
-        std::optional<Debug::ContinuationMode> continuation;
-        Debug::DebugLocation *prevSelected = mSelectedLocation;
-        mSelectedLocation = nullptr;
+            std::optional<Debug::ContinuationMode> continuation;
+            Debug::DebugLocation *prevSelected = mSelectedLocation;
+            mSelectedLocation = nullptr;
 
-        if (ImGui::Begin("Current Debug Context")) {
-            if (!mSelectedContext) {
-                ImGui::Text("No context selected!");
-            } else {
-                continuation = contextControls(*mSelectedContext);
+            ImGui::SetNextWindowDockID(ImGui::DockBuilderGetCentralNode(mDockSpaceId)->ID, ImGuiCond_Appearing);
+            if (beginContent()) {
+                if (!mSelectedContext) {
+                    ImGui::Text("No context selected!");
+                } else {
+                    continuation = contextControls(*mSelectedContext);
 
-                Debug::DebugLocation *location = mSelectedContext->mChild;
-                while (location) {
-                    if (!mSelectedLocation && prevSelected == location)
-                        mSelectedLocation = location;
-                    if (ImGui::Selectable(location->toString().c_str(), mSelectedLocation == location))
-                        mSelectedLocation = location;
-                    location = location->mChild;
-                }
-
-                renderDebugContext(*mSelectedContext);
-            }
-        }
-        ImGui::End();
-
-        if (ImGui::Begin("Locals")) {
-            if (!mSelectedContext) {
-                ImGui::Text("No context selected!");
-            } else if (!mSelectedContext->isPaused()) {
-                ImGui::Text("Context is not paused!");
-            } else if (!mSelectedLocation) {
-                ImGui::Text("No frame selected!");
-            } else {
-                if (ImGui::BeginTable("locals", 2, ImGuiTableFlags_Resizable)) {
-
-                    for (auto &[key, value] : mSelectedLocation->localVariables()) {
-                        ValueType v = value;
-                        if (mInspector->drawValue(key, v, value.isReference()).first)
-                            value = v;
+                    Debug::DebugLocation *location = mSelectedContext->mChild;
+                    while (location) {
+                        if (!mSelectedLocation && prevSelected == location)
+                            mSelectedLocation = location;
+                        if (ImGui::Selectable(location->toString().c_str(), mSelectedLocation == location))
+                            mSelectedLocation = location;
+                        location = location->mChild;
                     }
 
-                    ImGui::EndTable();
+                    renderDebugContext(*mSelectedContext);
                 }
             }
+            ImGui::End();
+
+            if (beginSubPanel("Locals", nullptr, ImGuiDir_Down)) {                
+                if (!mSelectedContext) {
+                    ImGui::Text("No context selected!");
+                } else if (!mSelectedContext->isPaused()) {
+                    ImGui::Text("Context is not paused!");
+                } else if (!mSelectedLocation) {
+                    ImGui::Text("No frame selected!");
+                } else {
+                    if (ImGui::BeginTable("locals", 2, ImGuiTableFlags_Resizable)) {
+
+                        for (auto &[key, value] : mSelectedLocation->localVariables()) {
+                            ValueType v = value;
+                            if (mInspector->drawValue(key, v, value.isReference()).first)
+                                value = v;
+                        }
+
+                        ImGui::EndTable();
+                    }
+                }
+            }
+            ImGui::End();
+
+            if (continuation)
+                mSelectedContext->continueExecution(*continuation);
         }
         ImGui::End();
-
-        if (continuation)
-            mSelectedContext->continueExecution(*continuation);
     }
 
     void DebuggerView::renderMenu()

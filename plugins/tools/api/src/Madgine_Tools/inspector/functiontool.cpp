@@ -179,11 +179,14 @@ namespace Tools {
 
     void FunctionTool::render()
     {
-        if (beginDefaultWindow()) {
-            if (renderFunctionSelect(mCurrentFunction, mCurrentFunctionName, mCurrentArguments)) {
-                ValueType result;
-                mCurrentFunction(result, mCurrentArguments);
+        if (beginToolWindow("FunctionTool", &mVisible)) {
+            if (beginContent()) {
+                if (renderFunctionSelect(mCurrentFunction, mCurrentFunctionName, mCurrentArguments)) {
+                    ValueType result;
+                    mCurrentFunction(result, mCurrentArguments);
+                }
             }
+            ImGui::End();
         }
         ImGui::End();
     }

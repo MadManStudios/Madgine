@@ -24,7 +24,7 @@ namespace Tools {
     struct MADGINE_TOOLS_EXPORT ToolBase : Serialize::VirtualSerializableUnitBase<VirtualScopeBase<>, Serialize::SerializableUnitBase>, Threading::MadgineObject<ToolBase> {
         SERIALIZABLEUNIT(ToolBase)
 
-        ToolBase(ImRoot &root, bool visible = false);
+        ToolBase(ImRoot &root);
         virtual ~ToolBase() = default;
 
         virtual void render();
@@ -58,8 +58,14 @@ namespace Tools {
 
         Threading::TaskQueue *taskQueue() const;
 
+        ImGuiID dockSpaceId() const;
+
     protected:
-        bool beginDefaultWindow(ImGuiDir dockingDir = ImGuiDir_None, const char *docTarget = nullptr, ImGuiWindowFlags flags = 0, const char *pluginSourceDir = PROJECT_ROOT);
+        bool beginTool(const char *name, bool *open, ImGuiDir dockingDir, ImGuiWindowFlags flags = 0, const char *docTarget = nullptr, const char *pluginSourceDir = PROJECT_ROOT);
+        bool beginToolWindow(const char *name, bool *open, ImGuiWindowFlags flags = 0, const char *docTarget = nullptr, const char *pluginSourceDir = PROJECT_ROOT);
+        bool beginToolPanel(const char *name, bool *open, ImGuiDir dockingDir, ImGuiWindowFlags flags = 0, const char *docTarget = nullptr, const char *pluginSourceDir = PROJECT_ROOT);
+        bool beginSubPanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio = 0.2f, ImGuiWindowFlags flags = 0);
+        bool beginContent(ImGuiWindowFlags flags = 0);
 
     protected:
         virtual Threading::Task<bool> init();
@@ -69,6 +75,8 @@ namespace Tools {
         bool mVisible = false;
 
         bool mEnabled = true;
+
+        ImGuiID mDockSpaceId = 0;
 
         ImRoot &mRoot;
     };

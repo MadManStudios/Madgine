@@ -69,7 +69,7 @@ namespace Tools {
 
     void ResourcesTool::render()
     {
-        if (beginDefaultWindow()) {
+        if (beginToolPanel("Resources", &mVisible, ImGuiDir_Down)) {
             int count = mResources.size();
 
             ImGuiIO &io = ImGui::GetIO();
@@ -283,6 +283,8 @@ namespace Tools {
 
     void ResourcesTool::renderMenu()
     {
+        ToolBase::renderMenu();
+
         if (ImGui::BeginMenu("Resources")) {
             if (ImGui::BeginMenu("New..."))
                 ImGui::EndMenu();

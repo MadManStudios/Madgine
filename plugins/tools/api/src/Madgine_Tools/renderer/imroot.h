@@ -31,9 +31,10 @@ namespace Tools {
             return static_cast<T &>(getTool(::Engine::UniqueComponent::component_index<T>()));
         }
 
-        void render();
+        bool render();
 
-        unsigned int dockSpaceId() const;
+        unsigned int rootDockSpaceId() const;
+        unsigned int gameDockSpaceId() const;
 
         std::stringstream mToolReadBuffer;
         ToolBase *mToolReadTool = nullptr;
@@ -50,8 +51,11 @@ namespace Tools {
         virtual void Image(const Filesystem::Path &path, Vector2i image_size = { -1, -1 }) = 0;
         virtual void DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) = 0;
 
+        std::map<unsigned int, size_t> mDockSpaces;
+
     protected:        
-        unsigned int mDockSpaceId;
+        unsigned int mRootDockSpaceId;
+        unsigned int mGameDockSpaceId;
 
     private:
         ToolsContainer<std::vector<Placeholder<0>>> mCollector;

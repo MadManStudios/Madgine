@@ -102,7 +102,7 @@ namespace Tools {
     {
         bool open = true;
 
-        ImGui::SetNextWindowDockID(mEditor->root().dockSpaceId(), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowDockID(mEditor->dockSpaceId(), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSizeConstraints({ 100, 100 }, { 1000000, 1000000 });
         if (ImGui::Begin(("SceneView##SceneView" + std::to_string(mIndex)).c_str(), &open)) {
 

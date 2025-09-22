@@ -97,50 +97,56 @@ namespace Tools {
 
     void SceneEditor::render()
     {
-        auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
-        updateEntityCache();
-        renderHierarchy();
-        renderSelection();
-        std::erase_if(mSceneViews, [](const std::unique_ptr<SceneView> &view) { return !view->render(); });
-        im3DInteractions();
-        handleInputs();
+        if (beginToolWindow("Scene", &mVisible, ImGuiWindowFlags_MenuBar)) {
+            
+            if (ImGui::BeginMenuBar()) {
+                if (ImGui::BeginMenu("SceneEditor")) {
+
+                    bool isStopped = mMode == STOP;
+
+                    if (ImGui::MenuItem("Open", nullptr, nullptr, isStopped)) {
+                        mRoot.dialogs().show(
+                            mRoot.filePicker(),
+                            [this](const Filesystem::Path &path) {
+                                openScene(path);
+                            });
+                    }
+
+                    if (ImGui::MenuItem("Save", nullptr, nullptr, isStopped)) {
+                        if (mCurrentSceneFile.empty())
+                            saveScenePopup();
+                        else
+                            saveScene(mCurrentSceneFile);
+                    }
+                    if (ImGui::MenuItem("Save As...", nullptr, nullptr, isStopped))
+                        saveScenePopup();
+
+                    ImGui::Separator();
+
+                    if (ImGui::MenuItem("Add View")) {
+                        mSceneViews.emplace_back(std::make_unique<SceneView>(this, mWindow.getRenderer()));
+                    }
+
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMenuBar();
+            }
+
+
+            auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
+            updateEntityCache();
+            renderHierarchy();
+            renderSelection();
+            std::erase_if(mSceneViews, [](const std::unique_ptr<SceneView> &view) { return !view->render(); });
+            im3DInteractions();
+            handleInputs();
+        }
+        ImGui::End();
     }
 
     void SceneEditor::renderMenu()
     {
         ToolBase::renderMenu();
-        if (mVisible) {
-
-            if (ImGui::BeginMenu("SceneEditor")) {
-
-                bool isStopped = mMode == STOP;
-
-                if (ImGui::MenuItem("Open", nullptr, nullptr, isStopped)) {
-                    mRoot.dialogs().show(
-                        mRoot.filePicker(),
-                        [this](const Filesystem::Path &path) {
-                            openScene(path);
-                        });
-                }
-
-                if (ImGui::MenuItem("Save", nullptr, nullptr, isStopped)) {
-                    if (mCurrentSceneFile.empty())
-                        saveScenePopup();
-                    else
-                        saveScene(mCurrentSceneFile);
-                }
-                if (ImGui::MenuItem("Save As...", nullptr, nullptr, isStopped))
-                    saveScenePopup();
-
-                ImGui::Separator();
-
-                if (ImGui::MenuItem("Add View")) {
-                    mSceneViews.emplace_back(std::make_unique<SceneView>(this, mWindow.getRenderer()));
-                }
-
-                ImGui::EndMenu();
-            }
-        }
     }
 
     void SceneEditor::renderSettings()
@@ -279,7 +285,7 @@ namespace Tools {
 
     void SceneEditor::renderSelection()
     {
-        if (beginDefaultWindow(ImGuiDir_Right)) {
+        if (beginSubPanel("Details", nullptr, ImGuiDir_Right)) {            
 
             if (mSelectedEntity)
                 renderEntity(mSelectedEntity);
@@ -291,8 +297,7 @@ namespace Tools {
 
     void SceneEditor::renderHierarchy()
     {
-        if (ImGui::Begin("SceneEditor - Hierarchy", &mVisible)) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Left, 0.2f, false, ImGuiCond_FirstUseEver);
+        if (beginSubPanel("Hierarchy", nullptr, ImGuiDir_Left)) {            
 
             if (ImGui::BeginPopupCompoundContextWindow()) {
                 if (ImGui::MenuItem(IMGUI_ICON_PLUS " New Entity")) {

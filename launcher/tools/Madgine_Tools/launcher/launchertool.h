@@ -12,16 +12,16 @@ namespace Tools {
 
         LauncherTool(ImRoot &root);
 
-        virtual void render() override;
-        virtual bool renderConfiguration(const Filesystem::Path &config) override;
-        virtual void loadConfiguration(const Filesystem::Path &config) override;
-        virtual void saveConfiguration(const Filesystem::Path &config) override;
+        void renderMenu() override;
+        bool renderConfiguration(const Filesystem::Path &config) override;
+        void loadConfiguration(const Filesystem::Path &config) override;
+        void saveConfiguration(const Filesystem::Path &config) override;
 
         std::string_view key() const override;
 
     protected:
-        virtual Threading::Task<bool> init() override;
-        virtual Threading::Task<void> finalize() override;
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
 
     private:
         Window::MainWindow *mMainWindow;

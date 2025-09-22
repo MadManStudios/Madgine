@@ -8,7 +8,7 @@ namespace Engine {
 namespace Tools {
 
     struct MADGINE_RESOURCES_TOOLS_EXPORT ResourceEditor : ToolBase {
-        using ToolBase::ToolBase;
+        ResourceEditor(ImRoot &root);
 
         void renderMenu() override;
 

@@ -33,7 +33,7 @@ namespace Tools {
 
     void FileBrowser::render()
     {
-        if (beginDefaultWindow()) {            
+        if (beginToolPanel("FileBrowser", &mVisible, ImGuiDir_Right)) {            
             ImGui::FilePicker(mCurrentPath, mSelectedPath);
         }
         ImGui::End();

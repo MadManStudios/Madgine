@@ -30,6 +30,10 @@
 
 #include "Madgine/widgets/widgetloader.h"
 
+#include "Madgine/render/rendertarget.h"
+
+#include "imgui/imgui_internal.h"
+
 UNIQUECOMPONENT(Engine::Tools::WidgetEditor);
 
 METATABLE_BEGIN_BASE(Engine::Tools::WidgetEditor, Engine::Tools::ToolBase)
@@ -63,31 +67,12 @@ namespace Tools {
         co_return;
     }
 
-    void WidgetEditor::render()
-    {
-        Widgets::WidgetBase *hoveredWidget = nullptr;
-        renderHierarchy(&hoveredWidget);
-        renderSelection(hoveredWidget);
-    }
-
     void WidgetEditor::renderMenu()
     {
         ResourceEditor::renderMenu();
         if (mVisible) {
 
-            if (ImGui::BeginMenu("WidgetEditor")) {
-
-                for (Widgets::WidgetBase *w : mWidgetManager->widgets()) {
-                    if (ImGui::MenuItem(w->key().c_str(), nullptr, w->mVisible)) {
-                        mWidgetManager->swapCurrentRoot(w);
-                    }
-                }
-                if (ImGui::Button("Create Layout")) {
-                    mWidgetManager->createTopLevel();
-                }
-
-                ImGui::EndMenu();
-            }
+            
         }
     }
 
@@ -96,13 +81,33 @@ namespace Tools {
         return *mWidgetManager;
     }
 
-    void WidgetEditor::update()
+    void WidgetEditor::render()
     {
-        std::erase_if(mFiles, [](std::pair<Widgets::WidgetLoader::Resource *const, WidgetFile> &p) {
-            return !p.second.render();
+        std::erase_if(mFiles, [this](std::pair<Widgets::WidgetLoader::Resource *const, WidgetFile> &p) {
+            return !renderWidget(p.second);
         });
 
-        ResourceEditor::update();
+        ResourceEditor::render();
+
+        if (ImGui::Begin("Game")) {
+            if (ImGui::BeginMenuBar()) {
+                if (ImGui::BeginMenu("WidgetEditor")) {
+
+                    for (Widgets::WidgetBase *w : mWidgetManager->widgets()) {
+                        if (ImGui::MenuItem(w->key().c_str(), nullptr, w->mVisible)) {
+                            mWidgetManager->swapCurrentRoot(w);
+                        }
+                    }
+                    if (ImGui::Button("Create Layout")) {
+                        mWidgetManager->createTopLevel();
+                    }
+
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMenuBar();
+            }
+        }
+        ImGui::End();
     }
 
     std::string_view WidgetEditor::key() const
@@ -129,11 +134,10 @@ namespace Tools {
         drawList->AddRect(ImVec2 { bounds.topLeft() } / io.DisplayFramebufferScale, ImVec2 { bounds.bottomRight() } / io.DisplayFramebufferScale, color);
     }
 
-    void WidgetEditor::renderSelection(Widgets::WidgetBase *hoveredWidget)
+    void WidgetEditor::renderSelection(ImGuiID dockspaceId, Widgets::WidgetBase *hoveredWidget)
     {
         constexpr float borderSize = 10.0f;
-
-        if (beginDefaultWindow(ImGuiDir_Right)) {
+        if (beginSubPanel("Details", &mVisible, ImGuiDir_Right)) {            
 
             ImDrawList *background = ImGui::GetBackgroundDrawList(ImGui::GetMainViewport());
 
@@ -424,10 +428,9 @@ namespace Tools {
         return !aborted;
     }
 
-    void WidgetEditor::renderHierarchy(Widgets::WidgetBase **hoveredWidget)
+    void WidgetEditor::renderHierarchy(ImGuiID dockspaceId, Widgets::WidgetBase **hoveredWidget)
     {
-        if (ImGui::Begin("WidgetEditor - Hierarchy", &mVisible)) {
-            ImGui::SetWindowDockingDir(mRoot.dockSpaceId(), ImGuiDir_Left, 0.2f, false, ImGuiCond_FirstUseEver);
+        if (beginSubPanel("Hierarchy", &mVisible, ImGuiDir_Left)) {            
 
             Widgets::WidgetBase *root = mWidgetManager->currentRoot();
             if (root) {
@@ -436,7 +439,7 @@ namespace Tools {
                         for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
                             if (ImGui::MenuItem(name.c_str())) {
                                 Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
-                                root->createChildByDescriptor(desc);                                
+                                root->createChildByDescriptor(desc);
                             }
                         }
                         ImGui::EndMenu();
@@ -457,6 +460,39 @@ namespace Tools {
             }
         }
         ImGui::End();
+    }
+
+    bool WidgetEditor::renderWidget(WidgetFile &widget)
+    {
+        bool open = true;
+
+        if (BeginResourceFile(this, widget.mPath, widget.mIsDirty, [&](const Filesystem::Path &path) { widget.save(path); }, &open)) {
+
+            if (beginContent()){
+
+                ImVec2 min = ImGui::GetWindowContentRegionMin();
+                ImVec2 max = ImGui::GetWindowContentRegionMax();
+                ImVec2 size = max - min;
+
+                if (widget.mRenderTarget->size() != size && size.x > 0 && size.y > 0) {
+                    widget.mRenderTarget->resize({ static_cast<int>(size.x), static_cast<int>(size.y) });
+                    if (widget.mWidget) {
+                        widget.mWidget->applyGeometry(Vector3 { size, 1.0f });
+                    }
+                }
+
+                ImGui::Image((void *)widget.mRenderTarget->texture()->resourceBlock(), size);
+            }
+            ImGui::End();
+
+            Widgets::WidgetBase *hoveredWidget = nullptr;
+            renderHierarchy(mDockSpaceId, &hoveredWidget);
+            renderSelection(mDockSpaceId, hoveredWidget);
+
+        }
+        ImGui::End();
+
+        return open;
     }
 
 }
