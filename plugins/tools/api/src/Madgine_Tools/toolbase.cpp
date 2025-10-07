@@ -163,7 +163,7 @@ namespace Tools {
         if (dockId == 0)
             dockId = ImGui::GetID("Floating");
         mDockSpaceId = ImHashStr(key().data(), 0, dockId);
-        ImGuiID lastDockId = (ImGuiID)std::exchange(*ImGui::GetStateStorage()->GetVoidPtrRef(ImGui::GetID("DockID")), (void *)mDockSpaceId);
+        ImGuiID lastDockId = (ImGuiID)std::exchange(*ImGui::GetStateStorage()->GetIntRef(ImGui::GetID("DockID")), (int)mDockSpaceId);
         if (lastDockId != 0 && lastDockId != mDockSpaceId) {
             ImGuiDockNode *node = ImGui::DockBuilderGetNode(mDockSpaceId);
             ImGuiDockNode *prevNode = ImGui::DockBuilderGetNode(lastDockId);

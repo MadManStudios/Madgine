@@ -118,7 +118,7 @@ namespace Tools {
 
             // Use custom selection adapter: store ID in selection (recommended)
             Selection.UserData = this;
-            Selection.AdapterIndexToStorageId = [](ImGuiSelectionBasicStorage *self_, int idx) { ResourcesTool* self = (ResourcesTool*)self_->UserData; return (ImGuiID)self->mResources[idx].mResource; };
+            Selection.AdapterIndexToStorageId = [](ImGuiSelectionBasicStorage *self_, int idx) { ResourcesTool* self = (ResourcesTool*)self_->UserData; return static_cast<ImGuiID>(reinterpret_cast<uintptr_t>(self->mResources[idx].mResource)); };
             Selection.ApplyRequests(ms_io);
 
             const bool want_delete = (ImGui::Shortcut(ImGuiKey_Delete, ImGuiInputFlags_Repeat) && (Selection.Size > 0)) || mDeleteRequested;
@@ -163,7 +163,7 @@ namespace Tools {
                         ImGui::SetCursorScreenPos(pos);
 
                         ImGui::SetNextItemSelectionUserData(item_idx);
-                        bool item_is_selected = Selection.Contains((ImGuiID)resource.mResource);
+                        bool item_is_selected = Selection.Contains(static_cast<ImGuiID>(reinterpret_cast<uintptr_t>(resource.mResource)));
                         bool item_is_visible = ImGui::IsRectVisible(layoutItemSize);
 
                         ImGui::Selectable("", item_is_selected, ImGuiSelectableFlags_None, layoutItemSize);
