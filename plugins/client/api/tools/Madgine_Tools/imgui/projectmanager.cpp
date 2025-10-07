@@ -209,8 +209,6 @@ namespace Tools {
                     }
                 }
 
-                ImGui::End();
-
                 if (openNewConfigPopup)
                     ImGui::OpenPopup("NewConfig");
 
@@ -231,6 +229,9 @@ namespace Tools {
                     ImGui::EndPopup();
                 }
             }
+
+            ImGui::End();
+
         }
     }
 
