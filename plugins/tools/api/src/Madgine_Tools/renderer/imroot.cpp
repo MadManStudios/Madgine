@@ -173,8 +173,20 @@ namespace Tools {
         ImGui::SetNextWindowDockID(mRootDockSpaceId, ImGuiCond_Appearing);
         ImGui::SetNextWindowClass(&windowClass);
         if (ImGui::Begin("Game", nullptr, window_flags | ImGuiWindowFlags_MenuBar)) {
-            ImGui::DockSpace(mGameDockSpaceId, ImVec2(0.0f, 0.0f), dockspace_flags | ImGuiDockNodeFlags_NoDockingOverCentralNode);
+            ImGui::DockSpace(mGameDockSpaceId, ImVec2(0.0f, 0.0f), dockspace_flags);
+
             gameVisible = true;
+
+            ImGui::SetNextWindowDockID(mGameDockSpaceId);
+            ImGuiWindowClass overlay_class;
+            overlay_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDocking;
+            ImGui::SetNextWindowClass(&overlay_class);
+            if (ImGui::Begin("GameOverlay", nullptr, window_flags)) {
+
+                if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered())
+                    ImGui::SetNextFrameWantCaptureMouse(false);
+            }
+            ImGui::End();
         }
         ImGui::End();
         ImGui::PopStyleVar(3);
