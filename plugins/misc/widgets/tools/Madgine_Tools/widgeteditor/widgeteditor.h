@@ -47,6 +47,9 @@ namespace Tools {
 
         std::map<Widgets::WidgetLoader::Resource *, WidgetFile> mFiles;
 
+        bool mHierarchyVisible = true;
+        bool mWidgetDetailsVisible = true;
+
         bool mMouseDown = false;
         bool mDragging = false;
         bool mDraggingLeft = false, mDraggingTop = false, mDraggingRight = false, mDraggingBottom = false;

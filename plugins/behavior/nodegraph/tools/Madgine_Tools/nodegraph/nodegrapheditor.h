@@ -52,8 +52,8 @@ namespace Tools {
 
     private:
         std::unique_ptr<ed::EditorContext, void (*)(ed::EditorContext *)> mEditor = { nullptr, nullptr };
-        bool mHierarchyVisible;
-        bool mNodeDetailsVisible;
+        bool mHierarchyVisible = true;
+        bool mNodeDetailsVisible = true;
 
         NodeGraph::NodeGraphLoader::Handle mGraphHandle;
         NodeGraph::NodeGraph mGraph;

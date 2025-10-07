@@ -129,6 +129,15 @@ namespace Tools {
 
                     ImGui::EndMenu();
                 }
+
+                if (ImGui::BeginMenu("Panels")) {
+
+                    ImGui::MenuItem("Hierarchy", nullptr, &mHierarchyVisible);
+                    ImGui::MenuItem("Entity Details", nullptr, &mEntityDetailsVisible);
+
+                    ImGui::EndMenu();
+                }
+
                 ImGui::EndMenuBar();
             }
 
@@ -136,7 +145,7 @@ namespace Tools {
             auto guard = mSceneMgr->mutex().lock(AccessMode::WRITE);
             updateEntityCache();
             renderHierarchy();
-            renderSelection();
+            renderDetails();
             std::erase_if(mSceneViews, [](const std::unique_ptr<SceneView> &view) { return !view->render(); });
             im3DInteractions();
             handleInputs();
@@ -283,33 +292,37 @@ namespace Tools {
         return ++mRunningViewIndex;
     }
 
-    void SceneEditor::renderSelection()
+    void SceneEditor::renderDetails()
     {
-        if (beginSubPanel("Details", nullptr, ImGuiDir_Right)) {            
+        if (mEntityDetailsVisible) {
+            if (beginSubPanel("Details", &mEntityDetailsVisible, ImGuiDir_Right)) {
 
-            if (mSelectedEntity)
-                renderEntity(mSelectedEntity);
-            if (mSelectedCamera)
-                renderCamera(mSelectedCamera);
+                if (mSelectedEntity)
+                    renderEntity(mSelectedEntity);
+                if (mSelectedCamera)
+                    renderCamera(mSelectedCamera);
+            }
+            ImGui::End();
         }
-        ImGui::End();
     }
 
     void SceneEditor::renderHierarchy()
     {
-        if (beginSubPanel("Hierarchy", nullptr, ImGuiDir_Left)) {            
+        if (mHierarchyVisible) {
+            if (beginSubPanel("Hierarchy", &mHierarchyVisible, ImGuiDir_Left)) {
 
-            if (ImGui::BeginPopupCompoundContextWindow()) {
-                if (ImGui::MenuItem(IMGUI_ICON_PLUS " New Entity")) {
-                    select(mSceneMgr->container("Default").createEntity());
+                if (ImGui::BeginPopupCompoundContextWindow()) {
+                    if (ImGui::MenuItem(IMGUI_ICON_PLUS " New Entity")) {
+                        select(mSceneMgr->container("Default").createEntity());
+                    }
+                    ImGui::EndPopup();
                 }
-                ImGui::EndPopup();
-            }
 
-            for (EntityNode &entity : mEntityCache)
-                renderHierarchyEntity(entity);
+                for (EntityNode &entity : mEntityCache)
+                    renderHierarchyEntity(entity);
+            }
+            ImGui::End();
         }
-        ImGui::End();
     }
 
     void SceneEditor::renderHierarchyEntity(EntityNode &node)

@@ -57,7 +57,7 @@ namespace Tools {
         int createViewIndex();
 
     private:
-        void renderSelection();
+        void renderDetails();
         void renderHierarchy();
         void renderEntity(Scene::Entity::EntityPtr &entity);
         void renderCamera(Render::Camera *camera);
@@ -72,6 +72,9 @@ namespace Tools {
         Window::MainWindow &mWindow;
 
         std::vector<std::unique_ptr<SceneView>> mSceneViews;
+
+        bool mHierarchyVisible = true;
+        bool mEntityDetailsVisible = true;
 
         Inspector *mInspector;
         Scene::SceneManager *mSceneMgr;

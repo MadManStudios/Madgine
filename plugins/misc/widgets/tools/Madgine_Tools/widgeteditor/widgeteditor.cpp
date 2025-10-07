@@ -136,8 +136,9 @@ namespace Tools {
 
     void WidgetEditor::renderSelection(ImGuiID dockspaceId, Widgets::WidgetBase *hoveredWidget)
     {
+        if (mWidgetDetailsVisible) {
         constexpr float borderSize = 10.0f;
-        if (beginSubPanel("Details", &mVisible, ImGuiDir_Right)) {            
+            if (beginSubPanel("Details", &mWidgetDetailsVisible, ImGuiDir_Right)) {
 
             ImDrawList *background = ImGui::GetBackgroundDrawList(ImGui::GetMainViewport());
 
@@ -365,6 +366,7 @@ namespace Tools {
         }
         ImGui::End();
     }
+    }
 
     bool WidgetEditor::drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget)
     {
@@ -430,7 +432,8 @@ namespace Tools {
 
     void WidgetEditor::renderHierarchy(ImGuiID dockspaceId, Widgets::WidgetBase **hoveredWidget)
     {
-        if (beginSubPanel("Hierarchy", &mVisible, ImGuiDir_Left)) {            
+        if (mHierarchyVisible) {
+            if (beginSubPanel("Hierarchy", &mHierarchyVisible, ImGuiDir_Left)) {
 
             Widgets::WidgetBase *root = mWidgetManager->currentRoot();
             if (root) {
@@ -461,6 +464,7 @@ namespace Tools {
         }
         ImGui::End();
     }
+    }
 
     bool WidgetEditor::renderWidget(WidgetFile &widget)
     {
@@ -468,7 +472,20 @@ namespace Tools {
 
         if (BeginResourceFile(this, widget.mPath, widget.mIsDirty, [&](const Filesystem::Path &path) { widget.save(path); }, &open)) {
 
-            if (beginContent()){
+            if (ImGui::BeginMenuBar()) {
+
+                if (ImGui::BeginMenu("Panels")) {
+
+                    ImGui::MenuItem("Hierarchy", nullptr, &mHierarchyVisible);
+                    ImGui::MenuItem("Entity Details", nullptr, &mWidgetDetailsVisible);
+
+                    ImGui::EndMenu();
+                }
+
+                ImGui::EndMenuBar();
+            }
+
+            if (beginContent()) {
 
                 ImVec2 min = ImGui::GetWindowContentRegionMin();
                 ImVec2 max = ImGui::GetWindowContentRegionMax();
