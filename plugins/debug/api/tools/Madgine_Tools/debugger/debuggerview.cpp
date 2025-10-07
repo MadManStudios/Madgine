@@ -190,7 +190,6 @@ namespace Tools {
             Debug::DebugLocation *prevSelected = mSelectedLocation;
             mSelectedLocation = nullptr;
 
-            ImGui::SetNextWindowDockID(ImGui::DockBuilderGetCentralNode(mDockSpaceId)->ID, ImGuiCond_Appearing);
             if (beginContent()) {
                 if (!mSelectedContext) {
                     ImGui::Text("No context selected!");
