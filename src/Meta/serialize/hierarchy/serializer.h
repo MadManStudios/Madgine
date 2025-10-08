@@ -24,7 +24,7 @@ namespace Serialize {
         void (*mWriteAction)(const void *, const std::vector<WriteMessage> &outStreams, void *) = nullptr;
         void (*mWriteRequest)(const void *, FormattedMessageStream &out, void *) = nullptr;
 
-        StreamResult (*mVisitStream)(FormattedSerializeStream &, const char *, const StreamVisitor &) = nullptr;
+        StreamResult (*mVisitStream)(FormattedSerializeStream &, const char *, const StreamVisitor &, size_t) = nullptr;
     };
 
 }

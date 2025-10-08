@@ -163,7 +163,7 @@ namespace Serialize {
     template <typename T, typename... Configs>
     void setActive(T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {});
     template <typename T, typename... Configs>
-    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
+    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth = 0);
 
     template <typename T, typename... Configs>
     void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});

@@ -46,7 +46,7 @@ namespace Serialize {
         });
     }
 
-    StreamResult Operations<ValueType>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    StreamResult Operations<ValueType>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
         ValueTypeEnum type;
@@ -56,9 +56,9 @@ namespace Serialize {
         return v.visit([&](auto &value) -> StreamResult {
             using T = std::remove_reference_t<decltype(value)>;
             if constexpr (PrimitiveType<T>) {
-                return Serialize::visitStream<T>(in, name, visitor);
+                return Serialize::visitStream<T>(in, name, visitor, depth);
             } else if constexpr (std::same_as<T, std::monostate>) {                
-                return Serialize::visitStream<Void>(in, name, visitor);
+                return Serialize::visitStream<Void>(in, name, visitor, depth);
             } else
                 throw 0;
         });
@@ -78,9 +78,9 @@ namespace Serialize {
         Serialize::write(out, t.toString(), name, hierarchy);
     }
 
-    StreamResult Operations<ExtendedValueTypeDesc>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    StreamResult Operations<ExtendedValueTypeDesc>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
-        return Serialize::visitStream<std::string>(in, name, visitor);
+        return Serialize::visitStream<std::string>(in, name, visitor, depth);
     }
 }
 }

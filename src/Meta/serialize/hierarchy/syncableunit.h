@@ -32,7 +32,7 @@ namespace Serialize {
 
         void setActive(bool active, bool existenceChanged);
 
-        static StreamResult visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
+        static StreamResult visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
 
         StreamResult readAction(FormattedMessageStream &in, PendingRequest &request);
         StreamResult readRequest(FormattedMessageStream &in, MessageId id);

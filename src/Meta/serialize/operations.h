@@ -280,44 +280,58 @@ namespace Serialize {
     }
 
     template <typename T, typename... Configs>
-    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
-        return Operations<T, Configs...>::visitStream(in, name, visitor);
+        return Operations<T, Configs...>::visitStream(in, name, visitor, depth);
+    }
+
+    template <typename... Configs, typename T>
+    StreamResult visitStream(PrimitiveHolder<T> holder, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+    {
+        auto tags = TagsSelector<Configs...>::getTags();
+        return visitor.visit(holder, in, name, tags, depth);
     }
 
     template <typename Compound, typename Primitive, typename F>
         requires(!Reference<F> && PrimitiveType<Primitive>)
-    StreamResult scanPrimitive(FormattedSerializeStream &in, const char *name, F &&callback)
+    StreamResult scanPrimitive(FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
-        return visitStream<Compound>(in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags) -> StreamResult {
+        return visitStream<Compound>(in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
             Primitive v;
             STREAM_PROPAGATE_ERROR(stream.readPrimitive(v, name));
-            callback(v, tags);
+            callback(v, name, tags, depth);
             return {};
-        } });
+        } }, depth);
+    }
+
+    template <typename Primitive, typename F, typename T>
+        requires(!Reference<F> && PrimitiveType<Primitive>)
+    StreamResult scanPrimitive(PrimitiveHolder<T> holder, FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
+    {
+        return visitStream(holder, in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
+            Primitive v;
+            STREAM_PROPAGATE_ERROR(stream.readPrimitive(v, name));
+            callback(v, name, tags, depth);
+            return {};
+        } },
+            depth);
     }
 
     template <typename Compound, typename TargetCompound, typename... Configs, typename F>
         requires(!Reference<F> && !PrimitiveType<TargetCompound>)
-    StreamResult scanCompound(FormattedSerializeStream &in, const char *name, F &&callback)
+    StreamResult scanCompound(FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
         using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, DataTag>;
-        const StreamVisitor *genericVisitor;
         StreamVisitorImpl visitor {
-            [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags) -> StreamResult {
+            [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<StreamResult> {
                 if (holder.mTable == &serializeTable<TargetCompound>()) {
-                    return callback(stream, name);
+                    return callback(stream, name, depth);
                 } else {
-                    if constexpr (std::same_as<BaseType, SyncableUnitBase>) {
-                        return BaseType::visitStream(holder.mTable, stream, name, *genericVisitor);
-                    } else {
-                        return SerializableDataPtr::visitStream(holder.mTable, stream, name, *genericVisitor);
-                    }
+                    return {};
                 }
             }
         };
-        genericVisitor = &visitor;
-        return visitStream<Compound, Configs...>(in, name, visitor);
+        return visitStream<Compound, Configs...>(in, name, visitor, depth);
     }
 
     template <typename T, typename... Configs>
@@ -362,22 +376,22 @@ namespace Serialize {
             }
         }
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             auto tags = TagsSelector<Configs...>::getTags();
             if constexpr (std::is_const_v<T>) {
                 // Don't do anything here
                 return {};
             } else if constexpr (InstanceOf<T, EnumType>) {
-                return visitor.visit(PrimitiveHolder<EnumTag> { &T::Representation::sTable }, in, name, tags);
+                return visitor.visit(PrimitiveHolder<EnumTag> { &T::Representation::sTable }, in, name, tags, depth);
             } else if constexpr (InstanceOf<T, Flags>) {
-                return visitor.visit(PrimitiveHolder<FlagsTag> { &T::Representation::sTable }, in, name, tags);
+                return visitor.visit(PrimitiveHolder<FlagsTag> { &T::Representation::sTable }, in, name, tags, depth);
             } else if constexpr (PrimitiveType<T>) {
-                return visitor.visit(PrimitiveHolder<typename PrimitiveReducer<T>::type> {}, in, name, tags);
+                return visitor.visit(PrimitiveHolder<typename PrimitiveReducer<T>::type> {}, in, name, tags, depth);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                return visitor.visit(PrimitiveHolder<SyncableUnitBase> { &serializeTable<T>() }, in, name, tags);
+                return visitor.visit(PrimitiveHolder<SyncableUnitBase> { &serializeTable<T>() }, in, name, tags, depth);
             } else {
-                return visitor.visit(PrimitiveHolder<DataTag> { &serializeTable<T>() }, in, name, tags);
+                return visitor.visit(PrimitiveHolder<DataTag> { &serializeTable<T>() }, in, name, tags, depth);
             }
         }
     };
@@ -405,9 +419,9 @@ namespace Serialize {
             Operations<T, Configs...>::setActive(*p, active, existenceChanged);
         }
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
-            return Operations<T, Configs...>::visitStream(in, name, visitor);
+            return Operations<T, Configs...>::visitStream(in, name, visitor, depth);
         }
     };
 
@@ -444,18 +458,19 @@ namespace Serialize {
             StreamResult operator()(StreamResult r)
             {
                 STREAM_PROPAGATE_ERROR(std::move(r));
-                return Serialize::visitStream<T>(in, nullptr, visitor);
+                return Serialize::visitStream<T>(in, nullptr, visitor, depth);
             }
 
             FormattedSerializeStream &in;
             const StreamVisitor &visitor;
+            size_t depth;
         };
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             STREAM_PROPAGATE_ERROR(in.beginContainerRead(name, false));
             STREAM_PROPAGATE_ERROR(TypeUnpacker::accumulate<type_pack<Ty...>>(
-                VisitHelper { in, visitor },
+                VisitHelper { in, visitor, depth + 1 },
                 StreamResult {}));
             return in.endContainerRead(name);
         }
@@ -490,18 +505,19 @@ namespace Serialize {
             StreamResult operator()(StreamResult r)
             {
                 STREAM_PROPAGATE_ERROR(std::move(r));
-                return Serialize::visitStream<T>(in, nullptr, visitor);
+                return Serialize::visitStream<T>(in, nullptr, visitor, depth);
             }
 
             FormattedSerializeStream &in;
             const StreamVisitor &visitor;
+            size_t depth;
         };
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             STREAM_PROPAGATE_ERROR(in.beginContainerRead(name, false));
             STREAM_PROPAGATE_ERROR(TypeUnpacker::accumulate<type_pack<Ty...>>(
-                VisitHelper { in, visitor },
+                VisitHelper { in, visitor, depth + 1 },
                 StreamResult {}));
             return in.endContainerRead(name);
         }
@@ -526,11 +542,11 @@ namespace Serialize {
             out.endCompoundWrite(name);
         }
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
-            STREAM_PROPAGATE_ERROR(Serialize::visitStream<U>(in, nullptr, visitor));
-            STREAM_PROPAGATE_ERROR(Serialize::visitStream<V>(in, nullptr, visitor));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<U>(in, nullptr, visitor, depth + 1));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<V>(in, nullptr, visitor, depth + 1));
             return in.endCompoundRead(name);
         }
     };

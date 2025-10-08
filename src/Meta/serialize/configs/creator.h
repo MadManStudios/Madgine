@@ -86,12 +86,12 @@ namespace Serialize {
         }
 
         template <typename C>
-        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
         {
             using T = std::remove_reference_t<std::ranges::range_reference_t<C>>;
             ArgsTuple<T> tuple;
             STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
-            STREAM_PROPAGATE_ERROR(Serialize::visitStream<T>(in, "Item", visitor));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<T>(in, "Item", visitor, depth));
             return {};
         }
 
@@ -139,14 +139,14 @@ namespace Serialize {
         }
 
         template <typename C>
-        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
         {
             STREAM_PROPAGATE_ERROR(in.beginCompoundRead(nullptr));
             using T = std::ranges::range_value_t<C>;
             ArgsTuple<T> tuple;
             STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
-            STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::first_type>(in, "Key", visitor));
-            STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::second_type>(in, "Value", visitor));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::first_type>(in, "Key", visitor, depth));
+            STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::second_type>(in, "Value", visitor, depth));
             return in.endCompoundRead(nullptr);
         }
 
@@ -225,17 +225,17 @@ namespace Serialize {
             }
 
             template <typename C>
-            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
             {
                 if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, std::nullptr_t>) {
                     ArgsTuple tuple;
                     STREAM_PROPAGATE_ERROR(readCreationData(in, tuple));
-                    return Serialize::visitStream<std::ranges::range_value_t<C>>(in, nullptr, visitor);
+                    return Serialize::visitStream<std::ranges::range_value_t<C>>(in, nullptr, visitor, depth);
                 } else {
                     const SerializeTable *type = nullptr;
                     STREAM_PROPAGATE_ERROR(Scan::value(type, in));
                     assert(type);
-                    return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {});
+                    return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {}, depth);
                 }
             }
 
@@ -299,7 +299,7 @@ namespace Serialize {
             }
 
             template <typename C>
-            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
             {
                 if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, std::nullptr_t>) {
                     throw 0;
@@ -307,7 +307,7 @@ namespace Serialize {
                     const SerializeTable *type = nullptr;
                     STREAM_PROPAGATE_ERROR(Scan::value(type, in));
                     assert(type);
-                    return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {});
+                    return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {}, depth);
                 }
             }
 

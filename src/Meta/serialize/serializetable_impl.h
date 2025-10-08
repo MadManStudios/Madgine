@@ -152,8 +152,8 @@ namespace Serialize {
                 [](const void *_unit, FormattedMessageStream &out, void *data) {
                     throw "Unsupported";
                 },
-                [](FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor) -> StreamResult {
-                    return Serialize::visitStream<T, Configs...>(in, name, visitor);
+                [](FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth) -> StreamResult {
+                    return Serialize::visitStream<T, Configs...>(in, name, visitor, depth);
                 }
             };
         }
@@ -223,8 +223,8 @@ namespace Serialize {
                     } else
                         throw "Unsupported";
                 },
-                [](FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor) -> StreamResult {
-                    return visitStream<T, Configs...>(in, name, visitor);
+                [](FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth) -> StreamResult {
+                    return visitStream<T, Configs...>(in, name, visitor, depth);
                 }
             };
         }

@@ -71,7 +71,7 @@ namespace Serialize {
         void writeAction(const void *unit, uint16_t index, const std::vector<WriteMessage> &outStreams, void *data) const;
         void writeRequest(const void *unit, uint16_t index, FormattedMessageStream &out, void *data) const;
 
-        StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor) const;
+        StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth) const;
 
         uint16_t getIndex(OffsetPtr offset) const;
         const Serializer &get(uint16_t index) const;

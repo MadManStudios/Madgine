@@ -40,9 +40,9 @@ namespace Serialize {
         return in.readPrimitive<FlagsHolder>(dummy, name);        
     }
 
-    StreamResult visitSyncableUnit(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    StreamResult visitSyncableUnit(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
-        return SyncableUnitBase::visitStream(table, in, name, visitor);
+        return SyncableUnitBase::visitStream(table, in, name, visitor, depth);
     }
 
     template META_EXPORT StreamResult visitSkipPrimitive<bool>(FormattedSerializeStream &, const char *);

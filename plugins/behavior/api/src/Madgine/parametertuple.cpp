@@ -31,7 +31,7 @@ namespace Serialize {
         out.endCompoundWrite(name);
     }
 
-    StreamResult Operations<ParameterTuple>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    StreamResult Operations<ParameterTuple>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         throw 0;
         return {};

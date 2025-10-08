@@ -136,11 +136,11 @@ namespace Serialize {
 
         void setActive(bool active, bool existenceChanged) const;
 
-        static StreamResult visitStream(const SerializeTable *type, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
+        static StreamResult visitStream(const SerializeTable *type, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
         template <typename T>
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
-            return visitStream(&serializeTable<decayed_t<T>>(), in, name, visitor);
+            return visitStream(&serializeTable<decayed_t<T>>(), in, name, visitor, depth);
         }
 
         void *unit() const;

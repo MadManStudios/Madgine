@@ -39,19 +39,19 @@ namespace Serialize {
         }
 
         template <typename C>
-        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
         {
             STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Item", 1));
             MakeOwning_t<typename comparator_traits<Cmp>::type> key;
             STREAM_PROPAGATE_ERROR(read(in, key, "key"));
             if constexpr (std::same_as<decltype(staticTypeResolve), std::nullptr_t>) {
                 using T = std::remove_reference_t<std::ranges::range_reference_t<C>>;
-                return Serialize::visitStream<T>(in, "Item", visitor);            
+                return Serialize::visitStream<T>(in, "Item", visitor, depth);            
             } else {
                 const SerializeTable *type = nullptr;
                 STREAM_PROPAGATE_ERROR(staticTypeResolve(type, key));
                 assert(type);
-                return visitor.visit(PrimitiveHolder<DataTag> { type }, in, "Item", {});                
+                return visitor.visit(PrimitiveHolder<DataTag> { type }, in, "Item", {}, depth);                
             }            
         }
 

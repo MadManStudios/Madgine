@@ -78,12 +78,12 @@ namespace Serialize {
             }
         }
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             STREAM_PROPAGATE_ERROR(in.beginContainerRead(name, !container_traits<C>::is_fixed_size));
 
             while (in.hasContainerItem()) {
-                STREAM_PROPAGATE_ERROR(Creator::template visitStream<C>(in, visitor));
+                STREAM_PROPAGATE_ERROR(Creator::template visitStream<C>(in, visitor, depth + 1));
             }
 
             return in.endContainerRead(name);

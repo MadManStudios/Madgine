@@ -154,7 +154,7 @@ namespace Serialize {
         static StreamResult read(Serialize::FormattedSerializeStream &in, ParameterTuple &tuple, const char *name);
         static void write(Serialize::FormattedSerializeStream &out, const ParameterTuple &tuple, const char *name);
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor);
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
     };
 }
 

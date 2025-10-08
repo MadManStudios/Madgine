@@ -50,7 +50,7 @@ namespace Serialize {
         mType->setActive(unit(), active, existenceChanged);
     }
 
-    StreamResult SerializableDataPtr::visitStream(const SerializeTable *type, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+    StreamResult SerializableDataPtr::visitStream(const SerializeTable *type, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         assert(!in.isMaster(AccessMode::READ));
 
@@ -59,7 +59,7 @@ namespace Serialize {
         STREAM_PROPAGATE_ERROR(read(in, idHelper, "serId"));
 
         STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
-        STREAM_PROPAGATE_ERROR(type->visitStream(in, visitor));
+        STREAM_PROPAGATE_ERROR(type->visitStream(in, visitor, depth));
         return in.endCompoundRead(name);
     }
 
