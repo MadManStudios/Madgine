@@ -11,6 +11,8 @@
 
 #include "geometry.h"
 
+#include "Interfaces/window/windowapi.h"
+
 METATABLE_BEGIN(Engine::Widgets::WidgetBase)
 READONLY_PROPERTY(Children, children)
 MEMBER(mName)
@@ -24,7 +26,7 @@ MEMBER(mConditions)
 METATABLE_END(Engine::Widgets::WidgetBase)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetBase)
-FIELD(mChildren, Serialize::ParentCreator<&Engine::Widgets::WidgetBase::readWidget, &Engine::Widgets::WidgetBase::writeWidget, nullptr, &Engine::Widgets::WidgetManager::scanWidget>)
+FIELD(mChildren, Engine::Widgets::WidgetBase::WidgetCreator)
 FIELD(mName)
 FIELD(mPos)
 FIELD(mSize)
@@ -42,8 +44,11 @@ namespace Widgets {
         , mParent(parent)
         , mAcceptsPointerEvents(config.acceptsPointerEvents || !parent)
         , mAllowsDragging(config.allowsDragging)
+        , mVisible(parent)
     {
         mManager.registerWidget(this);
+
+        applyGeometry(parent ? parent->getAbsoluteSize() : Vector3 { Vector2 { manager.mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
     }
 
     WidgetBase::~WidgetBase()
@@ -96,7 +101,7 @@ namespace Widgets {
     void WidgetBase::setAbsoluteSize(const Vector3 &size)
     {
         mAbsoluteSize = size;
-                
+
         sizeChanged(size);
 
         updateChildrenGeometry();
@@ -158,7 +163,6 @@ namespace Widgets {
                 break;
             }
         }
-
     }
 
     Geometry WidgetBase::calculateGeometry(uint16_t activeConditions, GeometrySourceInfo *source)
@@ -192,7 +196,7 @@ namespace Widgets {
 
     WidgetBase *WidgetBase::createChildByDescriptor(const WidgetLoader::Handle &desc)
     {
-        return mChildren.emplace_back(mManager.createWidgetByDescriptor(desc, this)).get();
+        return mChildren.emplace_back(desc.create(mManager, this)).get();
     }
 
     void WidgetBase::clearChildren()
@@ -300,12 +304,12 @@ namespace Widgets {
 
     void WidgetBase::injectPointerEnter(const Input::PointerEventArgs &arg)
     {
-        mPointerEnterSignal.emit(arg);        
+        mPointerEnterSignal.emit(arg);
     }
 
     void WidgetBase::injectPointerLeave(const Input::PointerEventArgs &arg)
     {
-        mPointerLeaveSignal.emit(arg);        
+        mPointerLeaveSignal.emit(arg);
     }
 
     void WidgetBase::injectDragBegin(const Input::PointerEventArgs &arg)
@@ -320,7 +324,7 @@ namespace Widgets {
 
     void WidgetBase::injectDragEnd(const Input::PointerEventArgs &arg)
     {
-        mDragEndSignal.emit(arg);        
+        mDragEndSignal.emit(arg);
     }
 
     void WidgetBase::injectDragAbort()
@@ -429,6 +433,11 @@ namespace Widgets {
         return mManager.writeWidget(out, widget);
     }
 
+    Serialize::StreamResult WidgetBase::scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in)
+    {
+        return WidgetManager::scanWidget(out, in);
+    }
+
     void WidgetBase::sizeChanged(const Vector3 &pixelSize)
     {
     }
@@ -512,8 +521,7 @@ namespace Widgets {
     {
         if (mask == 0) {
             mPos[index / 3][index % 3] = value;
-        }
-        else {
+        } else {
             mProperties.setConditional(mask, { PropertyType::POSITION, 0, index }, { value });
         }
         applyGeometry();
@@ -533,8 +541,7 @@ namespace Widgets {
     {
         if (mask == 0) {
             mSize[index / 3][index % 3] = value;
-        }
-        else {
+        } else {
             mProperties.setConditional(mask, { PropertyType::SIZE, 0, index }, { value });
         }
         applyGeometry();

@@ -33,7 +33,7 @@ namespace Widgets {
         SERIALIZABLEUNIT(WidgetManager)
 
         WidgetManager(Window::MainWindow &window);
-        WidgetManager(const WidgetManager &) = delete;
+        WidgetManager(const WidgetManager &sharedInstance);        
         ~WidgetManager();
 
         void swapCurrentRoot(std::string_view name);
@@ -112,13 +112,9 @@ namespace Widgets {
 
         void resetPointerState();
 
-        std::unique_ptr<WidgetBase> createWidgetByDescriptor(const WidgetLoader::Handle &desc, WidgetBase *parent = nullptr);
         Serialize::StreamResult readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent);
         Serialize::StreamResult readWidgetStub(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);
         const char *writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;
-
-        template <typename WidgetType = WidgetBase>
-        std::unique_ptr<WidgetType> create(WidgetBase *parent = nullptr);
 
         friend struct WidgetBase;
 
@@ -144,7 +140,7 @@ namespace Widgets {
         IntervalClock<> mFrameClock;
 
         struct WidgetManagerData;
-        std::unique_ptr<WidgetManagerData> mData;
+        std::shared_ptr<WidgetManagerData> mData;
 
         // Dragging
         Input::PointerEventArgs mDragStartEvent { { 0, 0 }, { 0, 0 }, Input::MouseButton::NO_BUTTON };

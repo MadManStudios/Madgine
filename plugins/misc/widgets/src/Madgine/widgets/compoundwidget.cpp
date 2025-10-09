@@ -27,15 +27,17 @@ namespace Widgets {
         : WidgetBase(mgr, parent)
         , mDescriptor(std::move(desc))
     {
-
+        // TODO move to resource thread
         Serialize::SerializeManager serializeMgr { "CompoundWidget" };
         Serialize::FormattedSerializeStream stream { Serialize::Formats::xml(), serializeMgr.wrapStream(mDescriptor.resource()->readAsStream(), true) };
 
-        Serialize::StreamResult result = Serialize::read<std::vector<std::unique_ptr<WidgetBase>>, Serialize::ParentCreator<&CompoundWidget::readWidget, &CompoundWidget::writeWidget, nullptr, &WidgetManager::scanWidget>>(stream, mTemplateWidgets, "Widgets", CallerHierarchyBasePtr { CallerHierarchy<WidgetBase *> { this } }.append(&manager()));
+        Serialize::StreamResult result = Serialize::read(stream, *this, "Widget", CallerHierarchyBasePtr { CallerHierarchy<WidgetBase *> { this } }.append(&manager()));
         if (result.mState != Serialize::StreamState::OK) {
             LOG_ERROR(result);
             throw 0;
         }
+
+        mTemplateWidgets = std::move(mChildren);
 
         // image->mImageRenderData.setImageName("Explosion", &manager());
     }
@@ -83,8 +85,6 @@ namespace Widgets {
     WidgetTemplate::WidgetTemplate(std::string name, std::vector<WidgetData> widgets)
         : mName(std::move(name))
         , mWidgets(std::move(widgets))
-        , mSerializers(serializers(mWidgets))
-        , mSerializeTable(mName.c_str(), type_holder<CompoundWidget>, &serializeTable<CompoundWidget>, Serialize::__serialize_impl__::readState<CompoundWidget>, mSerializers.get(), nullptr, false)
         , mAccessors(accessors(mWidgets))
         , mMetaTable(&mSelfTable, mName.c_str(), mAccessors.get())
     {
@@ -96,45 +96,6 @@ namespace Widgets {
     WidgetTemplate::~WidgetTemplate()
     {
         unregisterType(mMetaTable);
-    }
-
-    std::unique_ptr<Serialize::Serializer[]> WidgetTemplate::serializers(const std::vector<WidgetData> &widgets)
-    {
-        std::unique_ptr<Serialize::Serializer[]> serializers = std::make_unique<Serialize::Serializer[]>(widgets.size() + 1);
-
-        for (size_t i = 0; i < widgets.size(); ++i) {
-            serializers[i] = {
-                widgets[i].mName.c_str(),
-                nullptr,
-                [](const void *obj, Serialize::FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy) {
-                    const CompoundWidget *compound = static_cast<const CompoundWidget *>(obj);
-                    const WidgetBase *w = compound->getTemplateWidget(name);
-                    Serialize::write(out, *w, name, hierarchy);
-                },
-                [](void *obj, Serialize::FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy) {
-                    CompoundWidget *compound = static_cast<CompoundWidget *>(obj);
-                    WidgetBase *w = compound->getTemplateWidget(name);
-                    return Serialize::read(in, *w, name, hierarchy);
-                },
-                nullptr,
-                nullptr,
-                [](const Serialize::Serializer *serializer, void *obj, Serialize::FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr) -> Serialize::StreamResult {
-                    CompoundWidget *compound = static_cast<CompoundWidget *>(obj);
-                    WidgetBase *w = compound->getTemplateWidget(serializer->mFieldName);
-                    return Serialize::apply_map(*w, in, success);
-                },
-                nullptr,
-                [](const Serialize::Serializer *serializer, void *obj, bool active, bool existenceChanged) {
-                    CompoundWidget *compound = static_cast<CompoundWidget *>(obj);
-                    WidgetBase *w = compound->getTemplateWidget(serializer->mFieldName);
-                    Serialize::setActive(*w, active, existenceChanged);
-                }
-            };
-        }
-
-        serializers[widgets.size()] = { nullptr };
-
-        return serializers;
     }
 
     std::unique_ptr<Accessor[]> WidgetTemplate::accessors(const std::vector<WidgetData> &widgets)

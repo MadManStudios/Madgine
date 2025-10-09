@@ -20,14 +20,11 @@ namespace Widgets {
         WidgetTemplate(std::string name, std::vector<WidgetData> widgets);
         ~WidgetTemplate();
 
-        static std::unique_ptr<Serialize::Serializer[]> serializers(const std::vector<WidgetData> &widgets);
         static std::unique_ptr<Accessor[]> accessors(const std::vector<WidgetData> &widgets);
 
         std::string mName;
         std::vector<WidgetData> mWidgets;
 
-        std::unique_ptr<Serialize::Serializer[]> mSerializers;
-        Serialize::SerializeTable mSerializeTable;
         std::unique_ptr<Accessor[]> mAccessors;
         const MetaTable *mSelfTable = &mMetaTable;
         MetaTable mMetaTable;

@@ -33,26 +33,20 @@ namespace Tools {
 
         Widgets::WidgetManager &manager();
 
-    private:
-        void renderSelection(ImGuiID dockspaceId, Widgets::WidgetBase *hoveredWidget = nullptr);
-        void renderHierarchy(ImGuiID dockspaceId, Widgets::WidgetBase **hoveredWidget = nullptr);
-        bool drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget = nullptr);
+        static void renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color);
 
-        bool renderWidget(WidgetFile &widget);
+    private:
+
+        Widgets::WidgetBase *handleManagerInteractions(Widgets::WidgetManager &manager, const ImVec2 &pos);
 
     private:        
         Widgets::WidgetManager *mWidgetManager = nullptr;
-        WidgetSettings *mSelected = nullptr;
-        std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;        
 
+        friend struct WidgetFile;
         std::map<Widgets::WidgetLoader::Resource *, WidgetFile> mFiles;
 
         bool mHierarchyVisible = true;
         bool mWidgetDetailsVisible = true;
-
-        bool mMouseDown = false;
-        bool mDragging = false;
-        bool mDraggingLeft = false, mDraggingTop = false, mDraggingRight = false, mDraggingBottom = false;
     };
 
 }

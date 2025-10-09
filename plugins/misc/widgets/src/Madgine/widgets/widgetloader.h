@@ -50,7 +50,7 @@ namespace Widgets {
         std::unique_ptr<WidgetBase> create(WidgetManager &manager, WidgetLoader::Handle handle, WidgetBase *parent = nullptr) const;
 
     private:
-        const Serialize::SerializeTable *mSerializeTable = nullptr;
+        const Serialize::SerializeTable *mSerializeTable = &::serializeTable<CompoundWidget>();
         const MetaTable *mMetaTable = nullptr;
 
         std::unique_ptr<WidgetBase> (*mCtor)(WidgetManager &, WidgetBase *, WidgetLoader::Handle) = nullptr;

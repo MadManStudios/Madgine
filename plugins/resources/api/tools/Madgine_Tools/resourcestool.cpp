@@ -133,9 +133,7 @@ namespace Tools {
             ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(layoutSelectableSpacing, layoutSelectableSpacing));
 
             // Rendering parameters
-            const ImU32 icon_type_overlay_colors[3] = { 0, IM_COL32(200, 70, 70, 255), IM_COL32(70, 170, 70, 255) };
             const ImU32 icon_bg_color = ImGui::GetColorU32(ImGuiCol_MenuBarBg);
-            const ImVec2 icon_type_overlay_size = ImVec2(4.0f, 4.0f);
             const bool display_label = (layoutItemSize.x >= ImGui::CalcTextSize("999").x);
 
             const int column_count = layoutColumnCount;
@@ -151,10 +149,6 @@ namespace Tools {
                     const int item_max_idx_for_current_line = std::min((line_idx + 1) * column_count, count);
                     for (int item_idx = item_min_idx_for_current_line; item_idx < item_max_idx_for_current_line; ++item_idx) {
                         ResourceEntry &resource = mResources[item_idx];
-
-                        ResourceEditor *editor = nullptr;
-                        if (mEditors.contains(resource.mLoader))
-                            editor = mEditors.at(resource.mLoader);
 
                         ImGui::PushID(resource.mResource);
 

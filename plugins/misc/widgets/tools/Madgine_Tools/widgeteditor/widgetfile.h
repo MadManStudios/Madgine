@@ -4,31 +4,40 @@
 
 #include "Madgine/render/renderpass.h"
 
+#include "Madgine/widgets/widgetmanager.h"
+
 namespace Engine {
 namespace Tools {
 
-    struct WidgetFile : Render::RenderPass {
+    struct WidgetFile {
 
-        WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Handle handle);
+        WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Resource *resource);
         ~WidgetFile();        
 
         void save(const Filesystem::Path &path);
 
-        void render(Render::RenderTarget *target, size_t iteration) override;
+        void renderSelection(const ImVec2 &pos, Widgets::WidgetBase *hoveredWidget = nullptr);
+        void renderHierarchy(Widgets::WidgetBase **hoveredWidget = nullptr);
+        bool drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget = nullptr);
 
-        int priority() const override;
-
-        std::string_view name() const override;
+        bool render();
 
     //private: //TODO
         WidgetEditor &mEditor;
         Filesystem::Path mPath;
-        bool mIsDirty = false;
+        bool mIsDirty = true;
+
+        Widgets::WidgetManager mWidgetManager;
+        Widgets::WidgetBase *mTopLevel = nullptr;
+
+        WidgetSettings *mSelected = nullptr;
+        std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;        
 
         std::unique_ptr<Render::RenderTarget> mRenderTarget;
-        std::unique_ptr<Widgets::WidgetBase> mWidget;        
 
-        Widgets::WidgetLoader::Handle mHandle;
+        bool mMouseDown = false;
+        bool mDragging = false;
+        bool mDraggingLeft = false, mDraggingTop = false, mDraggingRight = false, mDraggingBottom = false;
     };
 
 }

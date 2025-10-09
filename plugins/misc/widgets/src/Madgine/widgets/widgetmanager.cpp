@@ -60,7 +60,15 @@ namespace Widgets {
     WidgetManager::WidgetManager(Window::MainWindow &window)
         : MainWindowComponent(window, 20)
         , mLifetime(&window.lifetime())
-        , mData(std::make_unique<WidgetManagerData>())
+        , mData(std::make_shared<WidgetManagerData>())
+        , mFrameClock(std::chrono::steady_clock::now())
+    {
+    }
+
+    WidgetManager::WidgetManager(const WidgetManager &sharedInstance)
+        : MainWindowComponent(sharedInstance.mWindow, 20)
+        , mLifetime(&mWindow.lifetime())
+        , mData(sharedInstance.mData)
         , mFrameClock(std::chrono::steady_clock::now())
     {
     }
@@ -120,20 +128,8 @@ namespace Widgets {
     {
         std::unique_ptr<WidgetBase> p = std::make_unique<WidgetBase>(*this);
         WidgetBase *w = p.get();
-        w->hide();
-        w->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
 
         mTopLevelWidgets.emplace_back(std::move(p));
-        return w;
-    }
-
-    std::unique_ptr<WidgetBase> WidgetManager::createWidgetByDescriptor(const WidgetLoader::Handle &desc, WidgetBase *parent)
-    {
-        std::unique_ptr<WidgetBase> w = desc.create(*this, parent);
-        if (!parent) {
-            w->hide();
-        }
-        w->applyGeometry(parent ? parent->getAbsoluteSize() : Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
         return w;
     }
 
@@ -149,7 +145,7 @@ namespace Widgets {
             return STREAM_UNKNOWN_ERROR(in) << "Widget class '" << _class << "' not found!";
         }
 
-        widget = createWidgetByDescriptor(desc, parent);
+        widget = desc.create(*this, parent);
 
         return {};
     }

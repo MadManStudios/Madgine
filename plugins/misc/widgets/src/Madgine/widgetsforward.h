@@ -20,6 +20,8 @@ namespace Widgets {
     struct TabBar;
     struct Layout;
 
+    struct CompoundWidget;
+
     struct Geometry;
     struct GeometrySourceInfo;
 

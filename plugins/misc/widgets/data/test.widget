@@ -1,8 +1,32 @@
-<Widgets>
-	<Image serId=1>
-		<mName>Background</mName>
-		<mImageRenderData serId=2>
-			<Image>Gamepad</Image>
-		</mImageRenderData>
-	</Image>
-</Widgets>
+<Widget serId=1>
+    <mChildren>
+        <Image serId=2>
+            <mImageRenderData serId=3>
+                <Image>Gamepad</Image>
+                <mLeftBorder>0</mLeftBorder>
+                <mTopBorder>0</mTopBorder>
+                <mBottomBorder>0</mBottomBorder>
+                <mRightBorder>0</mRightBorder>
+            </mImageRenderData>
+            <mColor>(1, 1, 1, 1)</mColor>
+            <mChildren>
+            </mChildren>
+            <mName>Background</mName>
+            <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+            <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+            <mOpacity>1</mOpacity>
+            <mConditions>
+            </mConditions>
+            <mProperties>
+            </mProperties>
+        </Image>
+    </mChildren>
+    <mName>Unnamed</mName>
+    <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+    <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+    <mOpacity>1</mOpacity>
+    <mConditions>
+    </mConditions>
+    <mProperties>
+    </mProperties>
+</Widget>

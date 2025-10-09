@@ -72,8 +72,9 @@ namespace Widgets {
         Geometry getGeometry();
 
         template <typename WidgetType = WidgetBase>
-        WidgetType* createChild() {
-            return static_cast<WidgetType *>(createChildByDescriptor(type_holder<WidgetType>));
+        WidgetType *createChild()
+        {
+            return static_cast<WidgetType *>(mChildren.emplace_back(std::make_unique<WidgetType>(mManager, this)).get());
         }
         WidgetBase *createChildByDescriptor(const WidgetLoader::Handle &desc);
         void clearChildren();
@@ -145,7 +146,7 @@ namespace Widgets {
         uint16_t fetchActiveConditions(std::vector<Condition *> *conditions = nullptr);
 
         Geometry calculateGeometry(uint16_t activeConditions, GeometrySourceInfo *source = nullptr);
-        
+
         void addConditional(uint16_t mask);
         PropertyRange conditionals();
 
@@ -157,7 +158,7 @@ namespace Widgets {
 
         template <typename Sender>
         void addBehavior(Sender &&sender)
-        {            
+        {
             lifetime().attach(std::forward<Sender>(sender) | with_named<"Widget">(this) | Log::log_result());
         }
         Debug::DebuggableLifetime<get_named_d> &lifetime();
@@ -170,6 +171,7 @@ namespace Widgets {
     protected:
         Serialize::StreamResult readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);
         const char *writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;
+        static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in);
 
         virtual void sizeChanged(const Vector3 &pixelSize);
 
@@ -188,12 +190,12 @@ namespace Widgets {
         Execution::Signal<const Input::AxisEventArgs &> mAxisEventSignal;
         Execution::Signal<const Input::KeyEventArgs &> mKeyPressSignal;
 
+        std::vector<std::unique_ptr<WidgetBase>> mChildren;
+
     private:
         WidgetManager &mManager;
 
-        WidgetBase *mParent;
-
-        std::vector<std::unique_ptr<WidgetBase>> mChildren;
+        WidgetBase *mParent;        
 
         Vector2 mAbsolutePos;
         Vector3 mAbsoluteSize;
@@ -207,6 +209,9 @@ namespace Widgets {
 
         Matrix3 mPos = Matrix3::ZERO;
         Matrix3 mSize = Matrix3::IDENTITY;
+
+    public:
+        using WidgetCreator = Serialize::ParentCreator<&WidgetBase::readWidget, &WidgetBase::writeWidget, nullptr, &WidgetBase::scanWidget>;
     };
 
     template <typename T>

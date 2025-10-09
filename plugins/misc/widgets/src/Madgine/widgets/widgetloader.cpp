@@ -72,37 +72,30 @@ namespace Widgets {
 
         std::vector<WidgetData> widgets;
 
-        #define HANDLE_RESULT(result) \
-            if (result.mState != Serialize::StreamState::OK) { \
-                LOG_ERROR(result); \
-                co_return false; \
+        Handle test;
+        co_await test.load("Image"); //TODO
+
+        Serialize::StreamVisitorImpl visitor {
+            [&](Serialize::PrimitiveHolder<Serialize::DataTag> holder, Serialize::FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<Serialize::StreamResult> {
+                if (depth != 2) {
+                    return {};
+                }
+                WidgetData &data = widgets.emplace_back();
+                data.mType = strrchr(holder.mTable->mTypeName, ':') + 1;
+                return Serialize::scanPrimitive<std::string>(holder, stream, name, [&](const std::string &s, const char *name, std::span<std::string_view> tags, size_t depth) {
+                    if (depth == 1 && std::string_view { name } == "mName") {
+                        data.mName = s;
+                    }
+                });
             }
+        };
 
-        HANDLE_RESULT(stream.beginContainerRead("Widgets"));
+        Serialize::StreamResult result = Serialize::visitStream<Widgets::WidgetBase>(stream, "Widget", visitor);
 
-        while (stream.hasContainerItem()) {
-            std::string _class;
-            HANDLE_RESULT(Serialize::beginExtendedTypedRead(stream, _class));
-            WidgetLoader::Handle desc;
-            if (!co_await desc.load(_class))
-                co_return false;
-
-            const Serialize::SerializeTable *table = desc->serializeTable();
-
-            WidgetData &data = widgets.emplace_back();
-            data.mType = strrchr(table->mTypeName, ':') + 1;
-            HANDLE_RESULT(Serialize::SerializableDataPtr::visitStream(table, stream, nullptr,
-                Serialize::StreamVisitorImpl { [&](Serialize::PrimitiveHolder<std::string> holder, Serialize::FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags) {
-                    if (std::string_view { name } == "mName") {
-                        return Serialize::read(in, data.mName, name);
-                    } else {
-                        return Serialize::visitSkipPrimitive<std::string>(in, name);
-                    }                    
-                } }));
+        if (result.mState != Serialize::StreamState::OK) {
+            LOG_ERROR(result);
+            co_return false;
         }
-
-        HANDLE_RESULT(stream.endContainerRead("Widgets"));
-
 
         descriptor = {
             std::make_unique<WidgetTemplate>(std::string { info.resource()->name() }, std::move(widgets))
@@ -119,8 +112,7 @@ namespace Widgets {
     WidgetDescriptor::WidgetDescriptor() = default;
 
     WidgetDescriptor::WidgetDescriptor(std::unique_ptr<WidgetTemplate> _template)
-        : mSerializeTable(&_template->mSerializeTable)
-        , mMetaTable(&_template->mMetaTable)
+        : mMetaTable(&_template->mMetaTable)
         , mTemplate(std::move(_template))
     {
     }
@@ -147,7 +139,6 @@ namespace Widgets {
         } else {
             return desc.create(manager, *this, parent);
         }
-        
     }
 
     const std::unique_ptr<WidgetTemplate> &WidgetDescriptor::widgetTemplate() const
