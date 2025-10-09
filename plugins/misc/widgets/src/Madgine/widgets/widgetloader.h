@@ -11,7 +11,11 @@ namespace Widgets {
         WidgetLoader();
 
         struct MADGINE_WIDGETS_EXPORT Handle : Base::Handle {
-            using Base::Handle::Handle;
+            
+            Handle();
+
+            Handle(Resource *res);
+
             Handle(Base::Handle handle)
                 : Base::Handle(std::move(handle))
             {
@@ -50,7 +54,7 @@ namespace Widgets {
         std::unique_ptr<WidgetBase> create(WidgetManager &manager, WidgetLoader::Handle handle, WidgetBase *parent = nullptr) const;
 
     private:
-        const Serialize::SerializeTable *mSerializeTable = &::serializeTable<CompoundWidget>();
+        const Serialize::SerializeTable *mSerializeTable;
         const MetaTable *mMetaTable = nullptr;
 
         std::unique_ptr<WidgetBase> (*mCtor)(WidgetManager &, WidgetBase *, WidgetLoader::Handle) = nullptr;

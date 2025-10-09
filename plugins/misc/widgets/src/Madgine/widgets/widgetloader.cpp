@@ -40,6 +40,13 @@ namespace Widgets {
             co_return true; }, &loader);
     }
 
+    WidgetLoader::Handle::Handle() = default;
+
+    WidgetLoader::Handle::Handle(Resource *res)
+        : Base::Handle(res)
+    {
+    }
+
     WidgetLoader::WidgetLoader()
         : ResourceLoader({ ".widget" }, { .mAutoLoad = true, .mIconName = "WidgetIcon.png" })
     {
@@ -73,7 +80,7 @@ namespace Widgets {
         std::vector<WidgetData> widgets;
 
         Handle test;
-        co_await test.load("Image"); //TODO
+        co_await test.load("Image"); // TODO
 
         Serialize::StreamVisitorImpl visitor {
             [&](Serialize::PrimitiveHolder<Serialize::DataTag> holder, Serialize::FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<Serialize::StreamResult> {
@@ -109,11 +116,15 @@ namespace Widgets {
         co_return;
     }
 
-    WidgetDescriptor::WidgetDescriptor() = default;
+    WidgetDescriptor::WidgetDescriptor()
+        : mSerializeTable(&::serializeTable<CompoundWidget>())
+    {
+    }
 
     WidgetDescriptor::WidgetDescriptor(std::unique_ptr<WidgetTemplate> _template)
         : mMetaTable(&_template->mMetaTable)
         , mTemplate(std::move(_template))
+        , mSerializeTable(&::serializeTable<CompoundWidget>())
     {
     }
 
