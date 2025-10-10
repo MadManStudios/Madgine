@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpj4hdcd2l.js
+// include: /tmp/tmpbcuz7rf_.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -208,11 +208,11 @@ Module['FS_createPath']("/", "data", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/Gamepad.jpg", "start": 349346, "end": 457802}, {"filename": "/data/OpenSans-Bold.msdf", "start": 457802, "end": 4669474}, {"filename": "/data/OpenSans-BoldItalic.ttf", "start": 4669474, "end": 4804582}, {"filename": "/data/OpenSans-ExtraBold.ttf", "start": 4804582, "end": 4934762}, {"filename": "/data/OpenSans-ExtraBoldItalic.ttf", "start": 4934762, "end": 5070450}, {"filename": "/data/OpenSans-Italic.ttf", "start": 5070450, "end": 5205830}, {"filename": "/data/OpenSans-Light.ttf", "start": 5205830, "end": 5335586}, {"filename": "/data/OpenSans-LightItalic.ttf", "start": 5335586, "end": 5471254}, {"filename": "/data/OpenSans-Regular.msdf", "start": 5471254, "end": 9682926}, {"filename": "/data/OpenSans-Semibold.ttf", "start": 9682926, "end": 9812642}, {"filename": "/data/OpenSans-SemiboldItalic.ttf", "start": 9812642, "end": 9948154}, {"filename": "/data/Planes.fbx", "start": 9948154, "end": 9982150}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 9982150, "end": 10272983}, {"filename": "/data/blank_white.png", "start": 10272983, "end": 10273102}, {"filename": "/data/bloom_PS.glsl_es", "start": 10273102, "end": 10273978}, {"filename": "/data/bloom_VS.glsl_es", "start": 10273978, "end": 10274284}, {"filename": "/data/blur_PS.glsl_es", "start": 10274284, "end": 10275901}, {"filename": "/data/blur_VS.glsl_es", "start": 10275901, "end": 10276207}, {"filename": "/data/default.atl", "start": 10276207, "end": 10276292}, {"filename": "/data/default.layout", "start": 10276292, "end": 10285293}, {"filename": "/data/default_tex.png", "start": 10285293, "end": 10285498}, {"filename": "/data/grid_PS.glsl_es", "start": 10285498, "end": 10286258}, {"filename": "/data/grid_VS.glsl_es", "start": 10286258, "end": 10286757}, {"filename": "/data/icons.ttf", "start": 10286757, "end": 10290221}, {"filename": "/data/im3d_PS.glsl_es", "start": 10290221, "end": 10291360}, {"filename": "/data/im3d_VS.glsl_es", "start": 10291360, "end": 10292439}, {"filename": "/data/imgui_PS.glsl_es", "start": 10292439, "end": 10292876}, {"filename": "/data/imgui_VS.glsl_es", "start": 10292876, "end": 10293494}, {"filename": "/data/mage.fbx", "start": 10293494, "end": 10396290}, {"filename": "/data/mage_animated.fbx", "start": 10396290, "end": 13147710}, {"filename": "/data/mage_attack.fbx", "start": 13147710, "end": 13394702}, {"filename": "/data/pointshadow_PS.glsl_es", "start": 13394702, "end": 13394989}, {"filename": "/data/pointshadow_VS.glsl_es", "start": 13394989, "end": 13396211}, {"filename": "/data/scene_PS.glsl_es", "start": 13396211, "end": 13403779}, {"filename": "/data/scene_VS.glsl_es", "start": 13403779, "end": 13406804}, {"filename": "/data/widgets_PS.glsl_es", "start": 13406804, "end": 13408026}, {"filename": "/data/widgets_VS.glsl_es", "start": 13408026, "end": 13408931}], "remote_package_size": 13408931});
+    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/Gamepad.jpg", "start": 349346, "end": 457802}, {"filename": "/data/OpenSans-Bold.msdf", "start": 457802, "end": 4669474}, {"filename": "/data/OpenSans-BoldItalic.ttf", "start": 4669474, "end": 4804582}, {"filename": "/data/OpenSans-ExtraBold.ttf", "start": 4804582, "end": 4934762}, {"filename": "/data/OpenSans-ExtraBoldItalic.ttf", "start": 4934762, "end": 5070450}, {"filename": "/data/OpenSans-Italic.ttf", "start": 5070450, "end": 5205830}, {"filename": "/data/OpenSans-Light.ttf", "start": 5205830, "end": 5335586}, {"filename": "/data/OpenSans-LightItalic.ttf", "start": 5335586, "end": 5471254}, {"filename": "/data/OpenSans-Regular.msdf", "start": 5471254, "end": 9682926}, {"filename": "/data/OpenSans-Semibold.ttf", "start": 9682926, "end": 9812642}, {"filename": "/data/OpenSans-SemiboldItalic.ttf", "start": 9812642, "end": 9948154}, {"filename": "/data/Planes.fbx", "start": 9948154, "end": 9982150}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 9982150, "end": 10272983}, {"filename": "/data/blank_white.png", "start": 10272983, "end": 10273102}, {"filename": "/data/bloom_PS.glsl_es", "start": 10273102, "end": 10273978}, {"filename": "/data/bloom_VS.glsl_es", "start": 10273978, "end": 10274284}, {"filename": "/data/blur_PS.glsl_es", "start": 10274284, "end": 10275901}, {"filename": "/data/blur_VS.glsl_es", "start": 10275901, "end": 10276207}, {"filename": "/data/default.atl", "start": 10276207, "end": 10276292}, {"filename": "/data/default.layout", "start": 10276292, "end": 10285293}, {"filename": "/data/default_tex.png", "start": 10285293, "end": 10285498}, {"filename": "/data/icons.ttf", "start": 10285498, "end": 10288962}, {"filename": "/data/mage.fbx", "start": 10288962, "end": 10391758}, {"filename": "/data/mage_animated.fbx", "start": 10391758, "end": 13143178}, {"filename": "/data/mage_attack.fbx", "start": 13143178, "end": 13390170}, {"filename": "/data/pointshadow_PS.glsl_es", "start": 13390170, "end": 13390457}, {"filename": "/data/pointshadow_VS.glsl_es", "start": 13390457, "end": 13391679}, {"filename": "/data/scene_PS.glsl_es", "start": 13391679, "end": 13399247}, {"filename": "/data/scene_VS.glsl_es", "start": 13399247, "end": 13402272}, {"filename": "/data/widgets_PS.glsl_es", "start": 13402272, "end": 13403494}, {"filename": "/data/widgets_VS.glsl_es", "start": 13403494, "end": 13404399}], "remote_package_size": 13404399});
 
   })();
 
-// end include: /tmp/tmpj4hdcd2l.js
+// end include: /tmp/tmpbcuz7rf_.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
@@ -7252,7 +7252,6 @@ async function createWasm() {
       return 0;
     };
 
-
   function _fd_close(fd) {
   try {
   
@@ -8359,13 +8358,12 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1086200: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1086246: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1086298: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1086414: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1086485: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1086556: () => { Module.input.focus(); },  
- 1086578: () => { Module.canvas.focus(); }
+  913160: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 913212: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 913328: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 913399: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 913470: () => { Module.input.focus(); },  
+ 913492: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
@@ -8488,8 +8486,6 @@ var wasmImports = {
   environ_get: _environ_get,
   /** @export */
   environ_sizes_get: _environ_sizes_get,
-  /** @export */
-  exit: _exit,
   /** @export */
   fd_close: _fd_close,
   /** @export */
