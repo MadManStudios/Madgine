@@ -126,7 +126,7 @@ namespace Threading {
 
         std::vector<TaskQueue *> mTaskQueues;
 
-        std::atomic<WorkGroupState::BaseType> mState;
+        std::atomic<WorkGroupState> mState;
     };
 }
 }

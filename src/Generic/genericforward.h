@@ -46,10 +46,8 @@ struct CoWString;
 template <typename T>
 struct CoW;
 
-template <typename>
-struct EnumType;
-template <typename, typename>
-struct BaseEnum;
+template <typename, typename...>
+struct EnumImpl;
 struct EnumMetaTable;
 template <typename>
 struct Flags;

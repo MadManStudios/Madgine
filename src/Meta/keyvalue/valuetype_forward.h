@@ -117,7 +117,7 @@ decltype(auto) ValueType_as(const ValueType &v)
             return ValueType_as_impl<KeyValueVirtualSequenceRange>(v).safe_cast<T>();
         else
             return ValueType_as_impl<KeyValueVirtualAssociativeRange>(v).safe_cast<T>();
-    } else if constexpr (InstanceOf<std::decay_t<T>, EnumType> || InstanceOf<std::decay_t<T>, BaseEnum>) {
+    } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
         return ValueType_as_impl<EnumHolder>(v).safe_cast<T>();
     } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
         return ValueType_as_impl<FlagsHolder>(v).safe_cast<T>();
@@ -159,7 +159,7 @@ decltype(auto) convert_ValueType(T &&t)
         } else {
             return static_cast<std::underlying_type_t<T>>(t);
         }
-    } else if constexpr (InstanceOf<std::decay_t<T>, EnumType> || InstanceOf<std::decay_t<T>, BaseEnum>) {
+    } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
         return EnumHolder { std::forward<T>(t) };
     } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
         return FlagsHolder { std::forward<T>(t) };

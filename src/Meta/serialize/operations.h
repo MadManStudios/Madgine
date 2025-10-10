@@ -382,7 +382,7 @@ namespace Serialize {
             if constexpr (std::is_const_v<T>) {
                 // Don't do anything here
                 return {};
-            } else if constexpr (InstanceOf<T, EnumType>) {
+            } else if constexpr (InstanceOf<T, EnumImpl>) {
                 return visitor.visit(PrimitiveHolder<EnumTag> { &T::Representation::sTable }, in, name, tags, depth);
             } else if constexpr (InstanceOf<T, Flags>) {
                 return visitor.visit(PrimitiveHolder<FlagsTag> { &T::Representation::sTable }, in, name, tags, depth);

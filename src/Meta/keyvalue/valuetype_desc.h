@@ -369,7 +369,7 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
         return { ExtendedValueTypeEnum::GenericType };
     } else if constexpr (InstanceOf<T, Flags>) {
         return { { ValueTypeEnum::FlagsValue }, &T::Representation::sTable };
-    } else if constexpr (InstanceOf<std::decay_t<T>, EnumType> || InstanceOf<std::decay_t<T>, BaseEnum>) {
+    } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
         return { { ValueTypeEnum::EnumValue }, &T::Representation::sTable };
     } else if constexpr (Execution::Sender<T>) {
         return { { ValueTypeEnum::SenderValue }, nullptr };

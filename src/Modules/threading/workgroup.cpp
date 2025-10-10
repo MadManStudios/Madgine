@@ -91,7 +91,7 @@ namespace Threading {
 
     void WorkGroup::stop()
     {
-        if (mState == WorkGroupState::INITIALIZING || mState == WorkGroupState::RUNNING)
+        if (mState.load() == WorkGroupState::INITIALIZING || mState.load() == WorkGroupState::RUNNING)
             setState(WorkGroupState::STOPPING);
     }
 
@@ -133,12 +133,12 @@ namespace Threading {
         }
 #endif
 
-        if (mState != WorkGroupState::RUNNING) {
+        if (mState.load() != WorkGroupState::RUNNING) {
             for (TaskQueue *queue : mTaskQueues)
                 if (!queue->idle())
                     return;
 
-            switch (mState) {
+            switch (mState.load()) {
             case WorkGroupState::INITIALIZING:
                 setState(WorkGroupState::RUNNING);
                 break;

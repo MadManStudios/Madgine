@@ -18,6 +18,12 @@
 #define SELECT_3(a, b, c, d, ...) d
 #define SELECT_4(a, b, c, d, e, ...) e
 #define SELECT_5(a, b, c, d, e, f, ...) f
+#define SELECT_6(a, b, c, d, e, f, g, ...) g
+#define SELECT_7(a, b, c, d, e, f, g, h, ...) h
+#define SELECT_8(a, b, c, d, e, f, g, h, i, ...) i
+#define SELECT_9(a, b, c, d, e, f, g, h, i, j, ...) j
+#define SELECT_10(a, b, c, d, e, f, g, h, i, j, k, ...) k
+
 
 #define FIRST(...) SELECT_0(__VA_ARGS__)
 #define HEAD(...) SELECT_0(__VA_ARGS__)
@@ -32,7 +38,7 @@
 
 #define FOR_EACH(f, sep, ...) APPLY(CONCAT2(FOR_EACH, NUM_ARGS(__VA_ARGS__)), f, sep, __VA_ARGS__)
 
-#define NUM_ARGS(...) SELECT_5(__VA_ARGS__, 5, 4, 3, 2, 1, 0)
+#define NUM_ARGS(...) SELECT_10(__VA_ARGS__ __VA_OPT__(,) 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 
 #define DEBUG_MACRO2(...) static_assert(false, #__VA_ARGS__);
 #define DEBUG_MACRO(...) DEBUG_MACRO2(__VA_ARGS__)

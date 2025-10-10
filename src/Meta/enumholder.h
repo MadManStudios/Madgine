@@ -4,15 +4,8 @@ namespace Engine {
 
 struct META_EXPORT EnumHolder {
 
-    template <typename Rep>
-    EnumHolder(EnumType<Rep> e)
-        : mValue(static_cast<int32_t>(e))
-        , mTable(&Rep::sTable)
-    {
-    }
-
-    template <typename Rep, typename Base>
-    EnumHolder(BaseEnum<Rep, Base> e)
+    template <typename Rep, typename... Reps>
+    EnumHolder(EnumImpl<Rep, Reps...> e)
         : mValue(static_cast<int32_t>(e))
         , mTable(&Rep::sTable)
     {

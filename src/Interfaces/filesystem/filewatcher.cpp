@@ -7,6 +7,8 @@ namespace Filesystem {
 
     std::vector<FileEvent> FileWatcher::fetchChangesReduced()
     {
+        static Filesystem::FileEventType::EnumType invalid = static_cast<Filesystem::FileEventType::EnumType>(Filesystem::FileEventType::MAX);
+
         std::vector<FileEvent> events = fetchChanges();
         for (auto it = events.rbegin(); it != events.rend(); ++it) {
             switch (it->mType) {
@@ -17,15 +19,15 @@ namespace Filesystem {
                         switch (it2->mType) {
                         case Filesystem::FileEventType::FILE_CREATED:
                             abort = true;
-                            it2->mType = Filesystem::FileEventType::MIN;
-                            it->mType = Filesystem::FileEventType::MIN;
+                            it2->mType = invalid;
+                            it->mType = invalid;
                             break;
                         case Filesystem::FileEventType::FILE_MODIFIED:
-                            it2->mType = Filesystem::FileEventType::MIN;
+                            it2->mType = invalid;
                             break;
                         case Filesystem::FileEventType::FILE_RENAMED:
                             it2->mType = Filesystem::FileEventType::FILE_DELETED;
-                            it->mType = Filesystem::FileEventType::MIN;
+                            it->mType = invalid;
                             it2->mPath = it2->mOldPath;
                             abort = true;
                             break;
@@ -61,7 +63,7 @@ namespace Filesystem {
             }
         }
 
-        std::erase_if(events, [](const Filesystem::FileEvent &event) { return event.mType == Filesystem::FileEventType::MIN; });
+        std::erase_if(events, [](const Filesystem::FileEvent &event) { return event.mType == invalid; });
 
         return events;
     }

@@ -64,7 +64,7 @@ namespace Serialize {
     };
 
     template <typename T>
-    struct PrimitiveReducer<EnumType<T>> {
+    struct PrimitiveReducer<EnumImpl<T>> {
         typedef EnumTag type;
     };
 

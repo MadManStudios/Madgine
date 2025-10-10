@@ -120,8 +120,8 @@ namespace CLI {
     };
 
     template <typename Rep>
-    struct ParameterImpl<EnumType<Rep>> : ParameterBase {
-        ParameterImpl(std::vector<const char *> options, EnumType<Rep> defaultValue, const char *help = nullptr)
+    struct ParameterImpl<EnumImpl<Rep>> : ParameterBase {
+        ParameterImpl(std::vector<const char *> options, EnumImpl<Rep> defaultValue, const char *help = nullptr)
             : ParameterBase(1, 1, std::move(options), help)
             , mValue(defaultValue)
         {
@@ -134,7 +134,7 @@ namespace CLI {
 
         const char *typeName() override
         {
-            return EnumType<Rep>::sTypeName().data();
+            return EnumImpl<Rep>::sTypeName().data();
         }
 
         std::string help() override
@@ -143,33 +143,33 @@ namespace CLI {
             ss << ParameterBase::help();
             ss << " [";
             StringUtil::StreamJoiner join { ss, ", " };
-            for (int i = EnumType<Rep>::MIN + 1; i < EnumType<Rep>::MAX; ++i) {
+            for (int i = EnumImpl<Rep>::MIN + 1; i < EnumImpl<Rep>::MAX; ++i) {
                 join.next() << Rep::sTable.toString(i);
             }
             ss << "].";
             return ss.str();
         }
 
-        const EnumType<Rep> &operator*()
+        const EnumImpl<Rep> &operator*()
         {
             init();
             return mValue;
         }
 
-        const EnumType<Rep> *operator->()
+        const EnumImpl<Rep> *operator->()
         {
             init();
             return &mValue;
         }
 
-        operator const EnumType<Rep> &()
+        operator const EnumImpl<Rep> &()
         {
             init();
             return mValue;
         }
 
     private:
-        EnumType<Rep> mValue;
+        EnumImpl<Rep> mValue;
     };
 
 }
