@@ -128,7 +128,7 @@ struct EnumMetaTable {
 };
 
 template <typename EnumType, typename... Representations>
-concept ValidEnumType = type_pack<typename Representations::EnumType...>::template contains<EnumType>;
+concept ValidEnumType = OneOf<EnumType, typename Representations::EnumType...>;
 
 template <typename _Representation, typename... Representations>
 struct EnumImpl : _Representation, Representations... {
