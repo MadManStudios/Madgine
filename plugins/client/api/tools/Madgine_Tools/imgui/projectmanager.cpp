@@ -31,16 +31,20 @@
 #include "Madgine_Tools/templates/templates.h"
 
 METATABLE_BEGIN_BASE(Engine::Tools::ProjectManager, Engine::Tools::ToolBase)
+#ifndef MADGINE_MAINWINDOW_LAYOUT
 PROPERTY(ProjectRoot, projectRootString, setProjectRoot)
 PROPERTY(Layout, layout, setLayout)
+#endif
 METATABLE_END(Engine::Tools::ProjectManager)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::ProjectManager, Engine::Tools::ToolBase)
+#ifndef MADGINE_MAINWINDOW_LAYOUT
 ENCAPSULATED_FIELD(ProjectRoot, projectRoot, setProjectRoot)
 ENCAPSULATED_FIELD(Layout, layout, setLayout)
 FIELD(mShowConfigurations)
-FIELD(mShowSettings)
 FIELD(mConfigs)
+#endif
+FIELD(mShowSettings)
 FIELD(mShowTipsOnStartup)
 SERIALIZETABLE_END(Engine::Tools::ProjectManager)
 
@@ -61,9 +65,11 @@ namespace Tools {
 
         mTemplates = &getTool<Templates>();
 
+#ifndef MADGINE_MAINWINDOW_LAYOUT
         mWindow->taskQueue()->queue([this]() {
             load();
         });
+#endif
 
         for (ToolBase *tool : mRoot.tools() | std::views::transform(projectionUniquePtrToPtr)) {
             if (tool->isEnabled()) {
@@ -82,17 +88,13 @@ namespace Tools {
         return "ProjectManager";
     }
 
-
 #ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::renderLandingPage()
-    {
-        ImGuiDockNode *centralNode = ImGui::DockBuilderGetCentralNode(mRoot.rootDockSpaceId());
-        if (mProjectRoot.empty() && centralNode->IsEmpty()) {
+    {        
+        if (mProjectRoot.empty()) {
 
-            ImGui::SetNextWindowPos(centralNode->Pos, ImGuiCond_Always);
-            ImGui::SetNextWindowSize(centralNode->Size, ImGuiCond_Always);
-            if (ImGui::Begin("Landing Page", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize)) {
-                ImVec2 size = centralNode->Size;
+            if (ImGui::Begin("GameOverlay")) {                
+                ImVec2 size = ImGui::GetWindowContentRegionMax() - ImGui::GetWindowContentRegionMin();
                 size.y -= 20.0f;
                 ImGui::BeginVertical("vLanding", size);
                 ImGui::Spring();
@@ -107,7 +109,7 @@ namespace Tools {
                 widget_size.y = 150.0f;
 
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 2.0f);
-                ImGui::PushStyleColor(ImGuiCol_Button, { 0.2f, 0.2f, 0.2f, 0.5f });
+                ImGui::PushStyleColor(ImGuiCol_Button, { 0.2f, 0.2f, 0.2f, 1.0f });
 
                 ImGui::Spring();
                 if (ImGui::Button(IMGUI_ICON_FILE "\nCreate Project...", widget_size))
@@ -129,49 +131,6 @@ namespace Tools {
                 ImGui::EndHorizontal();
                 ImGui::Spring();
                 ImGui::EndVertical();
-            }
-            ImGui::End();
-        }
-    }
-#endif
-
-    void ProjectManager::renderTips()
-    {
-        if (!mInitialized && ImGui::GetCurrentContext()->SettingsLoaded) {
-            mShowTips = mShowTipsOnStartup;
-            mInitialized = true;
-        }
-
-        if (mShowTips) {
-            Tip &tip = mTips[mTipIndex];
-
-            ImGui::SetNextWindowSize({ 500, 100 }, ImGuiCond_Always);
-            std::string title = tip.mTitle + "###Tip";
-            if (ImGui::Begin(title.c_str(), &mShowTips, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize)) {
-                ImGui::TextWrapped("%s", tip.mText.c_str());
-
-                ImGui::BeginHorizontal("Controls", { 480, 0 });
-                
-                ImGui::Checkbox("Show Tips on Startup", &mShowTipsOnStartup);
-                ImGui::Spring();
-                if (ImGui::Button("Next Tip")) {
-                    mTipIndex = (mTipIndex + 1) % mTips.size();
-                }
-
-                ImGui::EndHorizontal();
-            }
-            ImGui::End();
-        }
-    }
-
-    void ProjectManager::renderSettingsPage()
-    {
-        if (mShowSettings) {
-            if (ImGui::Begin("Settings", &mShowSettings)) {
-                for (ToolBase *tool : mRoot.tools() | std::views::transform(projectionUniquePtrToPtr)) {
-                    if (tool->isEnabled())
-                        tool->renderSettings();
-                }
             }
             ImGui::End();
         }
@@ -234,17 +193,59 @@ namespace Tools {
             }
 
             ImGui::End();
+        }
+    }
+#endif
 
+    void ProjectManager::renderTips()
+    {
+        if (!mInitialized && ImGui::GetCurrentContext()->SettingsLoaded) {
+            mShowTips = mShowTipsOnStartup;
+            mInitialized = true;
+        }
+
+        if (mShowTips) {
+            Tip &tip = mTips[mTipIndex];
+
+            ImGui::SetNextWindowSize({ 500, 100 }, ImGuiCond_Always);
+            std::string title = tip.mTitle + "###Tip";
+            if (ImGui::Begin(title.c_str(), &mShowTips, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize)) {
+                ImGui::TextWrapped("%s", tip.mText.c_str());
+
+                ImGui::BeginHorizontal("Controls", { 480, 0 });
+
+                ImGui::Checkbox("Show Tips on Startup", &mShowTipsOnStartup);
+                ImGui::Spring();
+                if (ImGui::Button("Next Tip")) {
+                    mTipIndex = (mTipIndex + 1) % mTips.size();
+                }
+
+                ImGui::EndHorizontal();
+            }
+            ImGui::End();
+        }
+    }
+
+    void ProjectManager::renderSettingsPage()
+    {
+        if (mShowSettings) {
+            if (ImGui::Begin("Settings", &mShowSettings)) {
+                for (ToolBase *tool : mRoot.tools() | std::views::transform(projectionUniquePtrToPtr)) {
+                    if (tool->isEnabled())
+                        tool->renderSettings();
+                }
+            }
+            ImGui::End();
         }
     }
 
     void ProjectManager::render()
     {
-        renderConfigurations();
         renderSettingsPage();
         renderTips();
 #ifndef MADGINE_MAINWINDOW_LAYOUT
         renderLandingPage();
+        renderConfigurations();
 #endif
     }
 
@@ -293,9 +294,9 @@ namespace Tools {
                 ImGui::EndDisabled();
 
             ImGui::Separator();
-    #endif
 
             ImGui::MenuItem("Configurations", "", &mShowConfigurations);
+#endif
             ImGui::MenuItem("Settings", "", &mShowSettings);
 
             ImGui::Separator();
@@ -311,7 +312,7 @@ namespace Tools {
     bool ProjectManager::renderConfiguration(const Filesystem::Path &config)
     {
         bool changed = false;
-
+#ifndef MADGINE_MAINWINDOW_LAYOUT
         if (ImGui::CollapsingHeader("Client")) {
             ImGui::Indent();
 
@@ -328,6 +329,7 @@ namespace Tools {
 
             ImGui::Unindent();
         }
+#endif
         return changed;
     }
 
@@ -340,6 +342,7 @@ namespace Tools {
         ImGui::EndGroupPanel();
     }
 
+#ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::loadConfiguration(const Filesystem::Path &config)
     {
         mConfiguration.loadFromDisk(config / "client.ini");
@@ -350,7 +353,6 @@ namespace Tools {
         mConfiguration.saveToDisk(config / "client.ini");
     }
 
-#ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::setProjectRoot(const Filesystem::Path &root)
     {
         if (mProjectRoot != root) {
@@ -470,7 +472,6 @@ namespace Tools {
                 "Need more information? Right click tools in Editor to access their documentation." }
         };
     }
-
 
 }
 }

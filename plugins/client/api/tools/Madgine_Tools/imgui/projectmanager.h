@@ -24,20 +24,21 @@ namespace Tools {
 
 #ifndef MADGINE_MAINWINDOW_LAYOUT
         void renderLandingPage();
+        void renderConfigurations();
+
+        void loadConfiguration(const Filesystem::Path &config) override;
+        void saveConfiguration(const Filesystem::Path &config) override;
+
 #endif
         void renderTips();
         void renderSettingsPage();
-        void renderConfigurations();
         void render() override;
         void renderMenu() override;
         bool renderConfiguration(const Filesystem::Path &config) override;
-        void loadConfiguration(const Filesystem::Path &config) override;
-        void saveConfiguration(const Filesystem::Path &config) override;
         void renderSettings() override;
 
         std::vector<Tip> tips() override;
 
-        bool mShowConfigurations = false;
         bool mShowSettings = false;
 
         bool mShowTipsOnStartup = true;
@@ -64,17 +65,18 @@ namespace Tools {
     private:
         Filesystem::Path mProjectRoot;
         std::string mLayout;
-#endif
 
-    private:
+        bool mShowConfigurations = false;
+
         std::set<Filesystem::Path> mConfigs;
         Filesystem::Path mCurrentConfig;
 
         bool mUnsavedConfiguration = false;
 
         Ini::IniFile mConfiguration;
+#endif
 
-        
+    private:
         bool mShowTips = false;
         bool mInitialized = false;
 
