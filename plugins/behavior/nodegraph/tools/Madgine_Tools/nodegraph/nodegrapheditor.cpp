@@ -38,7 +38,7 @@
 
 #include "Madgine_Tools/debugger/debuggerview.h"
 
-#include "Madgine/nodegraph/nodes/util/librarynode.h"
+#include "Madgine/nodegraph/nodes/librarynode.h"
 
 #include "imguihelpers.h"
 

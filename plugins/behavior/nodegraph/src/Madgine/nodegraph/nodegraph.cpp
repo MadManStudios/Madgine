@@ -25,7 +25,7 @@
 
 #include "nodeinterpreter.h"
 
-#include "nodes/util/librarynode.h"
+#include "nodes/librarynode.h"
 
 #include "Meta/serialize/formats.h"
 

@@ -1,4 +1,4 @@
-#include "../../../nodegraphlib.h"
+#include "../../nodegraphlib.h"
 
 #include "librarynode.h"
 
@@ -7,9 +7,9 @@
 
 #include "Meta/keyvalueutil/valuetypeserialize.h"
 
-#include "../../nodeinterpreter.h"
+#include "../nodeinterpreter.h"
 
-#include "../../nodeexecution.h"
+#include "../nodeexecution.h"
 
 METATABLE_BEGIN_BASE(Engine::NodeGraph::LibraryNode, Engine::NodeGraph::NodeBase)
 MEMBER(mParameters)

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../nodebase.h"
-#include "../../nodecollector.h"
+#include "../nodebase.h"
+#include "../nodecollector.h"
 
 #include "Madgine/parametertuple.h"
 

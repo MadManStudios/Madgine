@@ -4,8 +4,8 @@ set(sources "")
 FolderSources(sources "" src)
 	FolderSources(sources src Madgine nodegraphforward.h nodegraphlib.h)
 		FolderSources(sources Madgine nodegraph codegenerator.cpp codegenerator.h nodegraph.cpp nodegraph.h nodegraphloader.cpp nodegraphloader.h nodeexecution.cpp nodeexecution.h nodebase.cpp nodebase.h nodecollector.cpp nodecollector.h nodeinterpreter.cpp nodeinterpreter.h pins.cpp pins.h)
-			FolderSources(sources nodegraph nodes accessornode.cpp accessornode.h functionnode.cpp functionnode.h pumpnode.cpp pumpnode.h testnode.cpp testnode.h)
-				FolderSources(sources nodes util librarynode.cpp sendernode.cpp)
+			FolderSources(sources nodegraph nodes accessornode.cpp accessornode.h functionnode.cpp functionnode.h librarynode.cpp librarynode.h)
+				FolderSources(sources nodes util sendernode.cpp)
 			
 add_plugin(NodeGraph Madgine Behavior ${sources} PRECOMPILED_HEADER src/Madgine/nodegraphlib.h)
 

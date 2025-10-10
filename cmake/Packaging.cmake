@@ -52,7 +52,7 @@ macro(packaging)
 	elseif (UNIX)
 		set(CPACK_GENERATOR STGZ DEB)
 		set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_VENDOR})
-	endif(UNIX)
+	endif(OSX)
 
 	if (WINDOWS)
 		set(CPACK_GENERATOR NSIS)
