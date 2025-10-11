@@ -8,15 +8,15 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-UNIQUECOMPONENT(Engine::Tools::TextEditor)
+#include "Madgine_Tools/renderer/imroot.h"
 
+UNIQUECOMPONENT(Engine::Tools::TextEditor)
 
 METATABLE_BEGIN_BASE(Engine::Tools::TextEditor, Engine::Tools::ToolBase)
 METATABLE_END(Engine::Tools::TextEditor)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::TextEditor, Engine::Tools::ToolBase)
 SERIALIZETABLE_END(Engine::Tools::TextEditor)
-
 
 namespace Engine {
 namespace Tools {
@@ -30,14 +30,14 @@ namespace Tools {
         return inches * (pixelScaleY * 96.0f);
     }
 
-    Zep::NVec2f sPixelScale() {
+    Zep::NVec2f sPixelScale()
+    {
         return Zep::NVec2f { 1.0f };
     }
 
     TextEditor::TextEditor(ImRoot &root)
         : Tool<TextEditor>(root)
     {
-        
     }
 
     Threading::Task<bool> TextEditor::init()
@@ -45,8 +45,12 @@ namespace Tools {
         if (!co_await ToolBase::init())
             co_return false;
 
-        //TODO
-        auto fontPath = "C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\texteditor\\data\\CascadiaMono.ttf";
+        // TODO
+        auto fontPath = mRoot.findDataFile("CascadiaMono.ttf");
+        if (fontPath.empty()) {
+            LOG_ERROR("Unable to find font CascadiaMono.ttf");
+            co_return false;
+        }
 
         mFontPixelHeight = (int)dpi_pixel_height_from_point_size(sFontSize, sPixelScale().y);
 
@@ -63,15 +67,15 @@ namespace Tools {
         cfg.OversampleH = 4;
         cfg.OversampleV = 4;
 
-        mFont = io.Fonts->AddFontFromFileTTF(fontPath, float(mFontPixelHeight), &cfg, ranges.Data);
-        
+        mFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), float(mFontPixelHeight), &cfg, ranges.Data);
+
         co_return true;
     }
 
     void TextEditor::render()
     {
         ImGui::PushFont(mFont);
-        std::erase_if(mDocuments, [](auto &doc) { return !doc.second.render(); });        
+        std::erase_if(mDocuments, [](auto &doc) { return !doc.second.render(); });
         ImGui::PopFont();
     }
 

@@ -32,9 +32,9 @@ namespace Tools {
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
 
-        virtual void setup(Render::RenderTarget *target) override;
-        virtual void render(Render::RenderTarget *target, size_t iteration) override;
-        virtual void shutdown(Render::RenderTarget *target) override;
+        void setup(Render::RenderTarget *target) override;
+        void render(Render::RenderTarget *target, size_t iteration) override;
+        void shutdown(Render::RenderTarget *target) override;
 
         void renderViewport(Render::RenderTarget *target, ImGuiViewport *vp);
 
@@ -54,9 +54,11 @@ namespace Tools {
 
         Rect2i getChildClientSpace() override;
 
-        virtual bool includeInLayout() const override;
+        bool includeInLayout() const override;
 
-        virtual Threading::TaskQueue *taskQueue() const override;
+        Filesystem::Path findDataFile(std::string_view name) const override;
+
+        Threading::TaskQueue *taskQueue() const override;
 
         void Image(const Filesystem::Path &path, Vector2i image_size = {-1, -1}) override;
         void DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) override;

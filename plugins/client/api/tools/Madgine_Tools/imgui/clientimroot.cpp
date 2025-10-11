@@ -659,6 +659,11 @@ namespace Tools {
             mWindow.applyClientSpaceResize(this);
     }
 
+    Filesystem::Path ClientImRoot::findDataFile(std::string_view name) const
+    {
+        return Resources::ResourceManager::getSingleton().findResourceFile(name);
+    }
+
     Threading::TaskQueue *ClientImRoot::taskQueue() const
     {
         return mWindow.taskQueue();

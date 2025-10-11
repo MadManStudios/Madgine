@@ -41,6 +41,8 @@ namespace Tools {
 
         void finishToolRead();
 
+        virtual Filesystem::Path findDataFile(std::string_view name) const = 0;
+
         virtual Threading::TaskQueue *taskQueue() const = 0;
 
         DialogContainer &dialogs();
