@@ -36,10 +36,10 @@ namespace Widgets {
         std::vector<std::string> mTabNames;
 
     protected:
-        void injectPointerMove(const Input::PointerEventArgs &arg) override;
-        void injectPointerLeave(const Input::PointerEventArgs &arg) override;
+        void injectPointerMove(const Input::PointerMoveEvent &arg) override;
+        void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
 
-        void injectPointerClick(const Input::PointerEventArgs &arg) override;      
+        void injectPointerClick(const PointerClickEvent &arg) override;      
 
     private:
         Execution::Signal<uint32_t> mSelectedTabChanged;

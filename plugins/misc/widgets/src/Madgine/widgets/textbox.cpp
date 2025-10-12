@@ -100,36 +100,36 @@ namespace Widgets {
         return "Textbox";
     }
 
-    void Textbox::injectPointerClick(const Input::PointerEventArgs &arg)
+    void Textbox::injectPointerClick(const PointerClickEvent &arg)
     {
-        stb_textedit_click(this, &mState, arg.windowPosition.x, arg.windowPosition.y);
+        stb_textedit_click(this, &mState, arg.mWindowPosition.x, arg.mWindowPosition.y);
         WidgetBase::injectPointerClick(arg);
     }
 
-    void Textbox::injectDragBegin(const Input::PointerEventArgs &arg)
+    void Textbox::injectDragBegin(const DragBeginEvent &arg)
     {
-        stb_textedit_click(this, &mState, arg.windowPosition.x, arg.windowPosition.y);
+        stb_textedit_click(this, &mState, arg.mWindowPosition.x, arg.mWindowPosition.y);
         WidgetBase::injectDragBegin(arg);
     }
 
-    void Textbox::injectDragMove(const Input::PointerEventArgs &arg)
+    void Textbox::injectDragMove(const DragMoveEvent &arg)
     {
-        stb_textedit_drag(this, &mState, arg.windowPosition.x, arg.windowPosition.y);
+        stb_textedit_drag(this, &mState, arg.mWindowPosition.x, arg.mWindowPosition.y);
         WidgetBase::injectDragMove(arg);
     }
 
-    bool Textbox::injectKeyPress(const Input::KeyEventArgs &arg)
+    bool Textbox::injectKeyPress(const Input::KeyPressEvent &arg)
     {
-        if (std::isalnum(arg.text)
-            || arg.scancode == Input::Key::Control
-            || arg.scancode == Input::Key::LeftArrow
-            || arg.scancode == Input::Key::RightArrow
-            || arg.scancode == Input::Key::UpArrow
-            || arg.scancode == Input::Key::DownArrow
-            || arg.scancode == Input::Key::Backspace
-            || arg.scancode == Input::Key::Delete
-            || arg.scancode == Input::Key::Space) {
-            uint32_t val = (static_cast<uint16_t>(arg.scancode) << 8) | arg.text;
+        if (std::isalnum(arg.mText)
+            || arg.mScancode == Input::Key::Control
+            || arg.mScancode == Input::Key::LeftArrow
+            || arg.mScancode == Input::Key::RightArrow
+            || arg.mScancode == Input::Key::UpArrow
+            || arg.mScancode == Input::Key::DownArrow
+            || arg.mScancode == Input::Key::Backspace
+            || arg.mScancode == Input::Key::Delete
+            || arg.mScancode == Input::Key::Space) {
+            uint32_t val = (static_cast<uint16_t>(arg.mScancode) << 8) | arg.mText;
             stb_textedit_key(this, &mState, val);
         }
         return WidgetBase::injectKeyPress(arg);

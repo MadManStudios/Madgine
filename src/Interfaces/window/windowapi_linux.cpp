@@ -69,18 +69,18 @@ namespace Window {
             case MotionNotify: {
                 const XMotionEvent &xme = e.xmotion;
                 InterfacesVector mousePos { xme.x, xme.y };
-                injectPointerMove({ mousePos, { xme.x_root, xme.y_root }, mousePos - mLastMousePosition });
+                onEvent(Input::PointerMoveEvent{ mousePos, { xme.x_root, xme.y_root }, mousePos - mLastMousePosition });
                 mLastMousePosition = mousePos;
                 break;
             }
             case ButtonPress: {
                 const XButtonEvent &xbe = e.xbutton;
-                injectPointerPress({ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
+                onEvent(Input::PointerPressEvent{ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
                 break;
             }
             case ButtonRelease: {
                 const XButtonEvent &xbe = e.xbutton;
-                injectPointerRelease({ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
+                onEvent(Input::PointerReleaseEvent{ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
                 break;
             }
             case ConfigureNotify: {
@@ -92,14 +92,14 @@ namespace Window {
 
                 if (xce.width != mSize.x || xce.height != mSize.y) {
                     mSize = { xce.width, xce.height };
-                    onResize(renderSize());
+                    onEvent(ResizeEvent { renderSize() });
                 }
                 break;
             }
             case ClientMessage: {
                 const XClientMessageEvent &xcme = e.xclient;
                 if (xcme.data.l[0] == WM_DELETE_WINDOW) {
-                    onClose();
+                    onEvent(CloseEvent {});
                 }
                 break;
             }

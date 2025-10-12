@@ -55,23 +55,23 @@ namespace Window {
                 mTouchStartPosition = position;
                 mTouchStartTimestamp = AMotionEvent_getEventTime(event);
                 mPendingTouch = true;
-                injectPointerMove({ position, position, position - mLastKnownMousePos });
+                onEvent(Input::PointerMoveEvent{ position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_UP: {
                 int64_t nanoseconds = AMotionEvent_getEventTime(event) - mTouchStartTimestamp;
                 Input::MouseButton::MouseButton button = nanoseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
                 if (mPendingTouch) {
-                    handled |= injectPointerPress({ mTouchStartPosition, mTouchStartPosition, button });
+                    handled |= onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, button });
                     mPendingTouch = false;
                 }
-                handled |= injectPointerRelease({ position, position, button });
+                handled |= onEvent(Input::PointerReleaseEvent{ position, position, button });
             } break;
             case AMOTION_EVENT_ACTION_MOVE:
                 if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
-                    injectPointerPress({ mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
+                    onEvent(Input::PointerPressEvent{ mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
                     mPendingTouch = false;
                 }
-                handled = injectPointerMove({ position, position, position - mLastKnownMousePos });
+                handled = onEvent(Input::PointerMoveEvent{ position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_CANCEL:
                 LOG("Motion Cancel");
@@ -231,10 +231,10 @@ namespace Window {
 
             switch (action) {
             case AKEY_EVENT_ACTION_DOWN:
-                handled = injectKeyPress({ key, text });
+                handled = onEvent(Input::KeyPressEvent{ key, text });
                 break;
             case AKEY_EVENT_ACTION_UP:
-                handled = injectKeyRelease({ key, text });
+                handled = onEvent(Input::KeyReleaseEvent{ key, text });
                 break;
             case AKEY_EVENT_ACTION_MULTIPLE:
                 LOG("Multiple Keys");
@@ -374,7 +374,7 @@ namespace Window {
         }
         if (static_cast<AndroidWindow *>(this)->mResizeNeeded.test() && sWindow->mHandle != 0) {
             static_cast<AndroidWindow *>(this)->mResizeNeeded.clear();
-            onResize(renderSize());
+            onEvent(ResizeEvent { renderSize() });
         }
     }
 

@@ -28,19 +28,13 @@ namespace Input {
     };
 
     struct RawInputDevice {
-        enum Dir {
-            UP,
-            DOWN
-        };
-        
         RawInputDevice(HANDLE handle, std::string manufacturer, std::string product, PHIDP_PREPARSED_DATA preparsedData);
 
         CapData resolveValueCap(USAGE usage);
 
         CapData resolveButtonCap(USAGE usage);
 
-        bool fetchAxisEvent(AxisEventArgs &arg);
-        bool fetchKeyEvent(KeyEventArgs &arg, Dir &dir);
+        std::variant<NoEvent, AxisEvent, KeyPressEvent, KeyReleaseEvent> fetchEvent();        
 
         HANDLE mHandle;
         std::string mManufacturer;
@@ -51,14 +45,14 @@ namespace Input {
         std::vector<CapData> mCaps;
 
         struct ControlStick {
-            Input::AxisEventArgs::AxisType mType;
+            AxisEvent::AxisType mType;
             bool mChanged;
             float mAxis1, mAxis2;
         };
 
         std::vector<ControlStick> mControlSticks;
 
-        std::queue<std::pair<KeyEventArgs, Dir>> mKeyEvents;
+        std::queue<std::variant<KeyPressEvent, KeyReleaseEvent>> mKeyEvents;
         bool mButtonMask[16] = { 0 };
 
         struct ZAxis {

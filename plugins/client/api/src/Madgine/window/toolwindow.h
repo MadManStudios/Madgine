@@ -15,16 +15,8 @@ namespace Window {
 
         Render::RenderTarget *getRenderer();
 
-        bool injectKeyPress(const Input::KeyEventArgs &arg) override;
-        bool injectKeyRelease(const Input::KeyEventArgs &arg) override;
-        bool injectPointerPress(const Input::PointerEventArgs &arg) override;
-        bool injectPointerRelease(const Input::PointerEventArgs &arg) override;
-        bool injectPointerMove(const Input::PointerEventArgs &arg) override;
-
     protected:
-        void onClose() override;
-        void onRepaint() override;
-        void onResize(const InterfacesVector &size) override;
+        bool onWindowEvent(const WindowEvent &event) override;
 
     private:
         MainWindow &mParent;

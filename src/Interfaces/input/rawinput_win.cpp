@@ -164,8 +164,11 @@ namespace Input {
         for (size_t i = 0; i < 16; ++i) {
             USHORT index = i + 1;
             if (device.mButtonMask[i] != newButtonMask[i]) {
-                device.mKeyEvents.push({ KeyEventArgs { device.mCaps[index].mKey, 0 },
-                    newButtonMask[i] ? RawInputDevice::DOWN : RawInputDevice::UP });
+                if (newButtonMask[i]) {
+                    device.mKeyEvents.push(KeyPressEvent { device.mCaps[index].mKey, 0 });
+                } else {
+                    device.mKeyEvents.push(KeyReleaseEvent { device.mCaps[index].mKey, 0 });
+                }
                 device.mButtonMask[i] = newButtonMask[i];
             }
         }
@@ -197,8 +200,8 @@ namespace Input {
         , mPreparsedData(preparsedData)
         , mControlSticks(2)
     {
-        mControlSticks[0].mType = Input::AxisEventArgs::LEFT;
-        mControlSticks[1].mType = Input::AxisEventArgs::RIGHT;
+        mControlSticks[0].mType = AxisEvent::LEFT;
+        mControlSticks[1].mType = AxisEvent::RIGHT;
 
         HIDP_CAPS caps;
         auto result = sGetCaps(mPreparsedData, &caps);
@@ -281,45 +284,32 @@ namespace Input {
         return data;
     }
 
-    bool RawInputDevice::fetchAxisEvent(AxisEventArgs &arg)
+    std::variant<NoEvent, AxisEvent, KeyPressEvent, KeyReleaseEvent> RawInputDevice::fetchEvent()
     {
         for (ControlStick &stick : mControlSticks) {
             if (stick.mChanged) {
-                arg.mAxisType = stick.mType;
-                arg.mAxis1 = stick.mAxis1;
-                arg.mAxis2 = stick.mAxis2;
                 stick.mChanged = false;
-                return true;
+                return AxisEvent {stick.mType, stick.mAxis1, stick.mAxis2};
             }
         }
 
-        if (mZAxis.mChanged) {
-            arg.mAxisType = AxisEventArgs::Z;
-            arg.mAxis1 = mZAxis.mValue;
+        if (mZAxis.mChanged) {            
             mZAxis.mChanged = false;
-            return true;
+            return AxisEvent { AxisEvent::Z, mZAxis.mValue };
         }
 
         if (mDPad.mChanged) {
-            arg.mAxisType = AxisEventArgs::DPAD;
-            arg.mAxis1 = mDPad.mValue;
             mDPad.mChanged = false;
-            return true;
+            return AxisEvent { AxisEvent::DPAD, static_cast<float>(mDPad.mValue) };
         }
 
-        return false;
-    }
-
-    bool RawInputDevice::fetchKeyEvent(KeyEventArgs &arg, Dir &dir)
-    {
         if (!mKeyEvents.empty()) {
-            arg = mKeyEvents.front().first;
-            dir = mKeyEvents.front().second;
+            auto event = std::move(mKeyEvents.front());
             mKeyEvents.pop();
-            return true;
-        } else {
-            return false;
-        }
+            return std::visit([](const auto &ev) -> std::variant<NoEvent, AxisEvent, KeyPressEvent, KeyReleaseEvent> { return ev; }, event);
+        } 
+
+        return {};
     }
 
 }

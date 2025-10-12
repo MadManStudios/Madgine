@@ -40,45 +40,27 @@ namespace Window {
         return mRenderWindow.get();
     }
 
-    void ToolWindow::onClose()
+    bool ToolWindow::onWindowEvent(const WindowEvent &event)
     {
-        close();
+        return std::visit(overloaded {
+                              [this](const CloseEvent &) {
+                                  close();
+                                  return true;
+                              },
+                              [this](const RepaintEvent &) {
+                                  return true;
+                              },
+                              [this](const ResizeEvent &e) {
+                                  mRenderWindow->resize({ e.mSize.x, e.mSize.y });
+                                  return true;
+                              },
+                              [this](const auto& event) {
+                                  return mParent.onWindowEvent(event);                                  
+                              }
+                          },
+            event);
     }
 
-    void ToolWindow::onRepaint()
-    {
-        //update();
-    }
-
-    void ToolWindow::onResize(const InterfacesVector &renderSize)
-    {
-        mRenderWindow->resize({ renderSize.x, renderSize.y });
-    }
-
-    bool ToolWindow::injectKeyPress(const Input::KeyEventArgs &arg)
-    {
-        return mParent.injectKeyPress(arg);
-    }
-
-    bool ToolWindow::injectKeyRelease(const Input::KeyEventArgs &arg)
-    {
-        return mParent.injectKeyRelease(arg);
-    }
-
-    bool ToolWindow::injectPointerPress(const Input::PointerEventArgs &arg)
-    {
-        return mParent.injectPointerPress(arg);
-    }
-
-    bool ToolWindow::injectPointerRelease(const Input::PointerEventArgs &arg)
-    {
-        return mParent.injectPointerRelease(arg);
-    }
-
-    bool ToolWindow::injectPointerMove(const Input::PointerEventArgs &arg)
-    {
-        return mParent.injectPointerMove(arg);
-    }
 
 }
 }

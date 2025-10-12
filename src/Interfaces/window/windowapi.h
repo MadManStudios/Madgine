@@ -15,9 +15,6 @@ namespace Window {
         float mScalingFactor;
     };
 
-    
-    struct NoEvent { };
-
     struct ResizeEvent {
         InterfacesVector mSize;
     };
@@ -27,33 +24,6 @@ namespace Window {
 
     struct RepaintEvent {
     };
-
-    struct KeyPressEvent {
-        Input::KeyEventArgs mEvent;
-    };
-
-    struct KeyReleaseEvent {
-        Input::KeyEventArgs mEvent;
-    };
-
-    struct PointerPressEvent {
-        Input::PointerEventArgs mEvent;
-    };
-
-    struct PointerReleaseEvent {
-        Input::PointerEventArgs mEvent;
-    };
-
-    struct PointerMoveEvent {
-        Input::PointerEventArgs mEvent;
-    };
-
-    struct AxisEvent {
-        Input::AxisEventArgs mEvent;
-    };
-
-    using WindowEvent = std::variant<NoEvent, ResizeEvent, CloseEvent, RepaintEvent, KeyPressEvent, KeyReleaseEvent, PointerPressEvent, PointerReleaseEvent, PointerMoveEvent, AxisEvent>;
-
 
     INTERFACES_EXPORT extern const PlatformCapabilities platformCapabilities;
 
@@ -66,6 +36,16 @@ namespace Window {
         }
 
         void update();
+
+        uintptr_t intHandle() const
+        {
+            return mHandle;
+        }
+
+        void *ptrHandle() const
+        {
+            return reinterpret_cast<void *>(mHandle);
+        }
 
         InterfacesVector size();
 
@@ -96,7 +76,7 @@ namespace Window {
 
         WindowData data();
 
-        //Input
+        // Input
         bool isKeyDown(Input::Key::Key key);
 
         void captureInput();
@@ -106,55 +86,18 @@ namespace Window {
 
         void setCursorIcon(Input::CursorIcon icon);
 
-        //Clipboard
+        // Clipboard
         static std::string getClipboardString();
         static bool setClipboardString(std::string_view s);
 
-        uintptr_t mHandle;
+    protected:
+        bool onEvent(const WindowEvent &event)
+        {
+            return mListener->onWindowEvent(event);
+        }
 
     protected:
-        void onResize(const InterfacesVector &renderSize)
-        {
-            mListener->onResize(renderSize);
-        }
-
-        void onClose()
-        {
-            mListener->onClose();
-        }
-
-        void onRepaint()
-        {
-            mListener->onRepaint();
-        }
-
-        //Input
-        bool injectKeyPress(const Input::KeyEventArgs &arg)
-        {
-            return mListener->injectKeyPress(arg);
-        }
-        bool injectKeyRelease(const Input::KeyEventArgs &arg)
-        {
-            return mListener->injectKeyRelease(arg);
-        }
-        bool injectPointerPress(const Input::PointerEventArgs &arg)
-        {
-            captureInput();
-            return mListener->injectPointerPress(arg);
-        }
-        bool injectPointerRelease(const Input::PointerEventArgs &arg)
-        {
-            releaseInput();
-            return mListener->injectPointerRelease(arg);
-        }
-        bool injectPointerMove(const Input::PointerEventArgs &arg)
-        {
-            return mListener->injectPointerMove(arg);
-        }
-        bool injectAxisEvent(const Input::AxisEventArgs &arg)
-        {
-            return mListener->injectAxisEvent(arg);
-        }
+        uintptr_t mHandle;
 
     private:
         WindowEventListener *mListener;

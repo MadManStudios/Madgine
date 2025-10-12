@@ -102,20 +102,20 @@ namespace Widgets {
         mTabBarRenderData.update(tabCount(), { 0.0f, 1.0f, 100000.0f }, pixelSize.x);
     }
 
-    void TabBar::injectPointerMove(const Input::PointerEventArgs &arg)
+    void TabBar::injectPointerMove(const Input::PointerMoveEvent &arg)
     {
-        float x = arg.windowPosition.x;
+        float x = arg.mWindowPosition.x;
         mHoveredTab = mTabBarRenderData.elementIndex(x);
         WidgetBase::injectPointerMove(arg);
     }
 
-    void TabBar::injectPointerLeave(const Input::PointerEventArgs &arg)
+    void TabBar::injectPointerLeave(const Input::PointerMoveEvent &arg)
     {
         mHoveredTab.reset();
         WidgetBase::injectPointerLeave(arg);
     }
 
-    void TabBar::injectPointerClick(const Input::PointerEventArgs &arg)
+    void TabBar::injectPointerClick(const PointerClickEvent &arg)
     {
         assert(mHoveredTab);
         if (mSelectedTab != mHoveredTab) {

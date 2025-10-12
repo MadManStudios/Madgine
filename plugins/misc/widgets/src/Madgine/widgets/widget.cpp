@@ -292,37 +292,37 @@ namespace Widgets {
         return mAllowsDragging;
     }
 
-    void WidgetBase::injectPointerClick(const Input::PointerEventArgs &arg)
+    void WidgetBase::injectPointerClick(const PointerClickEvent &arg)
     {
         mPointerClickSignal.emit(arg);
     }
 
-    void WidgetBase::injectPointerMove(const Input::PointerEventArgs &arg)
+    void WidgetBase::injectPointerMove(const Input::PointerMoveEvent &arg)
     {
         mPointerMoveSignal.emit(arg);
     }
 
-    void WidgetBase::injectPointerEnter(const Input::PointerEventArgs &arg)
+    void WidgetBase::injectPointerEnter(const Input::PointerMoveEvent &arg)
     {
         mPointerEnterSignal.emit(arg);
     }
 
-    void WidgetBase::injectPointerLeave(const Input::PointerEventArgs &arg)
+    void WidgetBase::injectPointerLeave(const Input::PointerMoveEvent &arg)
     {
         mPointerLeaveSignal.emit(arg);
     }
 
-    void WidgetBase::injectDragBegin(const Input::PointerEventArgs &arg)
+    void WidgetBase::injectDragBegin(const DragBeginEvent &arg)
     {
         mDragBeginSignal.emit(arg);
     }
 
-    void WidgetBase::injectDragMove(const Input::PointerEventArgs &arg)
+    void WidgetBase::injectDragMove(const DragMoveEvent &arg)
     {
         mDragMoveSignal.emit(arg);
     }
 
-    void WidgetBase::injectDragEnd(const Input::PointerEventArgs &arg)
+    void WidgetBase::injectDragEnd(const DragEndEvent &arg)
     {
         mDragEndSignal.emit(arg);
     }
@@ -332,49 +332,55 @@ namespace Widgets {
         mDragAbortSignal.emit();
     }
 
-    bool WidgetBase::injectAxisEvent(const Input::AxisEventArgs &arg)
+    bool WidgetBase::injectAxisEvent(const Input::AxisEvent &arg)
     {
         mAxisEventSignal.emit(arg);
         return true;
     }
 
-    bool WidgetBase::injectKeyPress(const Input::KeyEventArgs &arg)
+    bool WidgetBase::injectKeyPress(const Input::KeyPressEvent &arg)
     {
         mKeyPressSignal.emit(arg);
         return true;
     }
 
-    Execution::SignalStub<const Input::PointerEventArgs &> &WidgetBase::pointerMoveEvent()
+    bool WidgetBase::injectKeyRelease(const Input::KeyReleaseEvent &arg)
+    {
+        mKeyReleaseSignal.emit(arg);
+        return true;
+    }
+
+    Execution::SignalStub<const Input::PointerMoveEvent &> &WidgetBase::pointerMoveEvent()
     {
         return mPointerMoveSignal;
     }
 
-    Execution::SignalStub<const Input::PointerEventArgs &> &WidgetBase::pointerClickEvent()
+    Execution::SignalStub<const PointerClickEvent &> &WidgetBase::pointerClickEvent()
     {
         return mPointerClickSignal;
     }
 
-    Execution::SignalStub<const Input::PointerEventArgs &> &WidgetBase::pointerEnterEvent()
+    Execution::SignalStub<const Input::PointerMoveEvent &> &WidgetBase::pointerEnterEvent()
     {
         return mPointerEnterSignal;
     }
 
-    Execution::SignalStub<const Input::PointerEventArgs &> &WidgetBase::pointerLeaveEvent()
+    Execution::SignalStub<const Input::PointerMoveEvent &> &WidgetBase::pointerLeaveEvent()
     {
         return mPointerLeaveSignal;
     }
 
-    Execution::SignalStub<const Input::PointerEventArgs &> &WidgetBase::dragBeginEvent()
+    Execution::SignalStub<const DragBeginEvent &> &WidgetBase::dragBeginEvent()
     {
         return mDragBeginSignal;
     }
 
-    Execution::SignalStub<const Input::PointerEventArgs &> &WidgetBase::dragMoveEvent()
+    Execution::SignalStub<const DragMoveEvent &> &WidgetBase::dragMoveEvent()
     {
         return mDragMoveSignal;
     }
 
-    Execution::SignalStub<const Input::PointerEventArgs &> &WidgetBase::dragEndEvent()
+    Execution::SignalStub<const DragEndEvent &> &WidgetBase::dragEndEvent()
     {
         return mDragEndSignal;
     }
@@ -384,14 +390,19 @@ namespace Widgets {
         return mDragAbortSignal;
     }
 
-    Execution::SignalStub<const Input::AxisEventArgs &> &WidgetBase::axisEvent()
+    Execution::SignalStub<const Input::AxisEvent&> &WidgetBase::axisEvent()
     {
         return mAxisEventSignal;
     }
 
-    Execution::SignalStub<const Input::KeyEventArgs &> &WidgetBase::keyEvent()
+    Execution::SignalStub<const Input::KeyPressEvent&> &WidgetBase::keyPressEvent()
     {
         return mKeyPressSignal;
+    }
+
+    Execution::SignalStub<const Input::KeyReleaseEvent &> &WidgetBase::keyReleaseEvent()
+    {
+        return mKeyReleaseSignal;
     }
 
     bool WidgetBase::containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend) const

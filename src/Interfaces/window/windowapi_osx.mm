@@ -73,7 +73,7 @@ namespace Window {
             return true;
         }*/
         
-        using OSWindow::onResize;
+        using OSWindow::onEvent;
         
         InterfacesVector mLastKnownMousePos;
         Cocoa_WindowListener *mListener;
@@ -196,19 +196,19 @@ namespace Window {
                     switch([ev type]){
                         case NSEventTypeMouseMoved:
                         case NSEventTypeLeftMouseDragged:
-                            injectPointerMove(Input::PointerEventArgs{
+                            onEvent(Input::PointerMoveEvent{
                                 windowPos,
                                 screenPos,
                                 windowPos - static_cast<OSXWindow*>(this)->mLastKnownMousePos });
                             static_cast<OSXWindow*>(this)->mLastKnownMousePos = windowPos;
                             break;
                         case NSEventTypeLeftMouseDown:
-                            injectPointerPress(Input::PointerEventArgs{
+                            onEvent(Input::PointerPressEvent{
                                 windowPos, screenPos, Input::MouseButton::LEFT_BUTTON
                             });
                             break;
                         case NSEventTypeLeftMouseUp:
-                            injectPointerRelease(Input::PointerEventArgs{
+                            onEvent(Input::PointerReleaseEvent{
                                 windowPos, screenPos, Input::MouseButton::LEFT_BUTTON
                             });
                             break;
@@ -286,12 +286,12 @@ namespace Window {
 - (void)listen:(Engine::Window::OSXWindow *)window
 {
     mWindow = window;
-    [reinterpret_cast<NSWindow*>(window->mHandle) setDelegate:self];
+    [static_cast<NSWindow*>(window->ptrHandle()) setDelegate:self];
 }
 
 - (void)windowDidResize:(NSNotification *)aNotification
 {
-    mWindow->onResize(mWindow->size());
+    mWindow->onEvent(Engine::Window::ResizeEvent{ mWindow->size()});
 }
 @end
 

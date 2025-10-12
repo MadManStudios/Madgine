@@ -544,9 +544,9 @@ namespace Render {
                 settings.mHidden = true;
                 Window::OSWindow *tmp = Window::sCreateWindow(settings, nullptr);
 #    if WINDOWS
-                SurfaceHandle surface = GetDC((HWND)tmp->mHandle);
+                SurfaceHandle surface = GetDC((HWND)tmp->ptrHandle());
 #    elif LINUX
-                SurfaceHandle surface = tmp->mHandle;
+                SurfaceHandle surface = tmp->intHandle();
 #    elif OSX
                 SurfaceHandle surface = tmp;
 #    else

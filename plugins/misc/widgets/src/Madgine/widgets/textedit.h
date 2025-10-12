@@ -37,12 +37,12 @@ namespace Widgets {
 
         void onActivate(bool b);
 
-        virtual void injectPointerClick(const Input::PointerEventArgs &arg) override;
-        virtual void injectDragBegin(const Input::PointerEventArgs &arg) override;
-        virtual void injectDragMove(const Input::PointerEventArgs &arg) override;
-        virtual bool injectKeyPress(const Input::KeyEventArgs &arg) override;
+        virtual void injectPointerClick(const PointerClickEvent &arg) override;
+        virtual void injectDragBegin(const DragBeginEvent &arg) override;
+        virtual void injectDragMove(const DragMoveEvent &arg) override;
+        virtual bool injectKeyPress(const Input::KeyPressEvent &arg) override;
 
-        virtual bool injectAxisEvent(const Input::AxisEventArgs &arg) override;
+        virtual bool injectAxisEvent(const Input::AxisEvent &arg) override;
 
         void layoutRow(StbTexteditRow *row, size_t i);
         float calculateWidth(size_t i, size_t n);

@@ -44,6 +44,8 @@
 
 #include "Madgine/scene/behavior/scenesenders.h"
 
+#include "Madgine/widgets/events.h"
+
 UNIQUECOMPONENT(ClickBrick::GameManager)
 
 METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Widgets::WidgetHandlerBase)
@@ -149,9 +151,9 @@ void GameManager::spawnBrick()
     brick->addBehavior(Brick(speed, dir, q));
 }
 
-void GameManager::onPointerClick(const Engine::Input::PointerEventArgs &evt)
+void GameManager::onPointerClick(const Engine::Widgets::PointerClickEvent &evt)
 {
-    Engine::Ray3 ray = mCamera.mousePointToRay(Engine::Vector2 { static_cast<float>(evt.windowPosition.x), static_cast<float>(evt.windowPosition.y) }, mGameWindow->getAbsoluteSize().xy());
+    Engine::Ray3 ray = mCamera.mousePointToRay(Engine::Vector2 { static_cast<float>(evt.mWindowPosition.x), static_cast<float>(evt.mWindowPosition.y) }, mGameWindow->getAbsoluteSize().xy());
 
     Engine::Scene::Entity::EntityPtr hit;
     float distance = std::numeric_limits<float>::max();

@@ -38,17 +38,18 @@ namespace Widgets {
         bool isRootWindow() const;
 
     protected:
-        virtual void onPointerMove(const Input::PointerEventArgs &me);
-        virtual void onPointerClick(const Input::PointerEventArgs &me);
+        virtual void onPointerMove(const Input::PointerMoveEvent &me);
+        virtual void onPointerClick(const PointerClickEvent &me);
 
-        virtual void onDragBegin(const Input::PointerEventArgs &me);
-        virtual void onDragMove(const Input::PointerEventArgs &me);
-        virtual void onDragEnd(const Input::PointerEventArgs &me);
+        virtual void onDragBegin(const DragBeginEvent &me);
+        virtual void onDragMove(const DragMoveEvent &me);
+        virtual void onDragEnd(const DragEndEvent &me);
         virtual void onDragAbort();
 
-        virtual bool onKeyPress(const Input::KeyEventArgs &evt);
+        virtual bool onKeyPress(const Input::KeyPressEvent &evt);
+        virtual bool onKeyRelease(const Input::KeyReleaseEvent &evt);
 
-        virtual void onAxisEvent(const Input::AxisEventArgs &evt);
+        virtual void onAxisEvent(const Input::AxisEvent &evt);
 
         bool dragging() const;
 

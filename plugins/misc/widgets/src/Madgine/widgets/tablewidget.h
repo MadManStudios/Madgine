@@ -40,7 +40,6 @@ namespace Widgets {
         IndexType<uint32_t> selectedRow() const;
         void setSelectedRow(IndexType<uint32_t> row);
 
-
         UniformLayoutRenderData mHorizontalLayoutRenderData;
         ExplicitLayoutRenderData mVerticalLayoutRenderData;
         TextRenderData mTextRenderData;
@@ -50,14 +49,13 @@ namespace Widgets {
     protected:
         IndexType<uint32_t> rowIndex(float y);
 
-        void injectPointerEnter(const Input::PointerEventArgs &arg) override;
-        void injectPointerLeave(const Input::PointerEventArgs &arg) override;
-        void injectPointerMove(const Input::PointerEventArgs &arg) override;
+        void injectPointerEnter(const Input::PointerMoveEvent &arg) override;
+        void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
+        void injectPointerMove(const Input::PointerMoveEvent &arg) override;
 
-        void injectPointerClick(const Input::PointerEventArgs &arg) override;
+        void injectPointerClick(const PointerClickEvent &arg) override;
 
     private:
-        
         std::vector<std::string> mCellData;
 
         uint32_t mRowCount = 0;

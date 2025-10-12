@@ -41,12 +41,13 @@ namespace Tools {
         void addViewportMapping(Render::RenderTarget *target, ImGuiViewport *vp);
         void removeViewportMapping(Render::RenderTarget *target);
 
-        bool injectKeyPress(const Input::KeyEventArgs &arg) override;
-        bool injectKeyRelease(const Input::KeyEventArgs &arg) override;
-        bool injectPointerPress(const Input::PointerEventArgs &arg) override;
-        bool injectPointerRelease(const Input::PointerEventArgs &arg) override;
-        bool injectPointerMove(const Input::PointerEventArgs &arg) override;
-        bool injectAxisEvent(const Engine::Input::AxisEventArgs &arg) override;
+        bool onWindowEvent(const Window::WindowEvent &arg) override;
+        bool injectKeyPress(const Input::KeyPressEvent &arg);
+        bool injectKeyRelease(const Input::KeyReleaseEvent &arg);
+        bool injectPointerPress(const Input::PointerPressEvent &arg);
+        bool injectPointerRelease(const Input::PointerReleaseEvent &arg);
+        bool injectPointerMove(const Input::PointerMoveEvent &arg);
+        bool injectAxisEvent(const Engine::Input::AxisEvent &arg);
         
         bool wantsSoftwareKeyboard() const override;
 

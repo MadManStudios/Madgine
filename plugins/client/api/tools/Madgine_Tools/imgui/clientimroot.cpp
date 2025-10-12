@@ -71,7 +71,7 @@ namespace Tools {
         { Input::Key::Space, ImGuiKey_Space },
         { Input::Key::Return, ImGuiKey_Enter },
         { Input::Key::Escape, ImGuiKey_Escape },
-        { Input::Key::LShift, ImGuiKey_LeftShift},
+        { Input::Key::LShift, ImGuiKey_LeftShift },
         { Input::Key::Shift, ImGuiKey_LeftShift },
         { Input::Key::RShift, ImGuiKey_RightShift },
         { Input::Key::LAlt, ImGuiKey_LeftAlt },
@@ -120,7 +120,7 @@ namespace Tools {
         Window::ToolWindow *window = topLevel->createToolWindow(settings);
         vp->PlatformUserData = window;
         vp->PlatformHandle = window->osWindow();
-        vp->PlatformHandleRaw = reinterpret_cast<void *>(window->osWindow()->mHandle);
+        vp->PlatformHandleRaw = window->osWindow()->ptrHandle();
 
         ClientImRoot *root = static_cast<ClientImRoot *>(io.UserData);
         root->addViewportMapping(window->getRenderer(), vp);
@@ -400,7 +400,7 @@ namespace Tools {
             mWindow.osWindow()->setCursorIcon(convertCursorIcon(ImGui::GetMouseCursor()));
 
             if (ImRoot::render())
-                setCentralNode();            
+                setCentralNode();
 
             ImGuiViewport *main_viewport = ImGui::GetMainViewport();
             main_viewport->Flags |= ImGuiViewportFlags_NoRendererClear; // TODO: Is that necessary every Frame?
@@ -532,35 +532,50 @@ namespace Tools {
         return false;
     }
 
-    bool ClientImRoot::injectKeyPress(const Engine::Input::KeyEventArgs &arg)
+    bool ClientImRoot::onWindowEvent(const Window::WindowEvent &arg)
+    {
+        return std::visit(overloaded {
+                              [&](const Window::ResizeEvent &e) { return false; },
+                              [&](const Window::CloseEvent &e) { return false; },
+                              [&](const Window::RepaintEvent &e) { return false; },
+                              [&](const Input::KeyPressEvent &e) { return injectKeyPress(e); },
+                              [&](const Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },
+                              [&](const Input::PointerPressEvent &e) { return injectPointerPress(e); },
+                              [&](const Input::PointerReleaseEvent &e) { return injectPointerRelease(e); },
+                              [&](const Input::PointerMoveEvent &e) { return injectPointerMove(e); },
+                              [&](const Input::AxisEvent &e) { return injectAxisEvent(e); } },
+            arg);
+    }
+
+    bool ClientImRoot::injectKeyPress(const Engine::Input::KeyPressEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        auto it = sKeyMap.find(arg.scancode);
+        auto it = sKeyMap.find(arg.mScancode);
         if (it == sKeyMap.end()) {
-            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.scancode << ", text: " << arg.text);
+            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.mScancode << ", text: " << arg.mText);
         } else {
             io.AddKeyEvent(it->second, true);
 
-            if (arg.text > 0)
-                io.AddInputCharacter(arg.text);
+            if (arg.mText > 0)
+                io.AddInputCharacter(arg.mText);
         }
 
         io.AddKeyEvent(ImGuiMod_Ctrl, arg.mControlKeys.mCtrl);
         io.AddKeyEvent(ImGuiMod_Shift, arg.mControlKeys.mShift);
         io.AddKeyEvent(ImGuiMod_Alt, arg.mControlKeys.mAlt);
-        //io.AddKeyEvent(ImGuiMod_Super, al_key_down(&keys, ALLEGRO_KEY_LWIN) || al_key_down(&keys, ALLEGRO_KEY_RWIN));
+        // io.AddKeyEvent(ImGuiMod_Super, al_key_down(&keys, ALLEGRO_KEY_LWIN) || al_key_down(&keys, ALLEGRO_KEY_RWIN));
 
         return io.WantCaptureKeyboard;
     }
 
-    bool ClientImRoot::injectKeyRelease(const Engine::Input::KeyEventArgs &arg)
+    bool ClientImRoot::injectKeyRelease(const Engine::Input::KeyReleaseEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        auto it = sKeyMap.find(arg.scancode);
+        auto it = sKeyMap.find(arg.mScancode);
         if (it == sKeyMap.end()) {
-            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.scancode << ", text: " << arg.text);
+            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.mScancode << ", text: " << arg.mText);
         } else {
             io.AddKeyEvent(it->second, false);
         }
@@ -573,31 +588,31 @@ namespace Tools {
         return io.WantCaptureKeyboard;
     }
 
-    bool ClientImRoot::injectPointerPress(const Engine::Input::PointerEventArgs &arg)
+    bool ClientImRoot::injectPointerPress(const Engine::Input::PointerPressEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
-        io.AddMouseButtonEvent(arg.button - 1, true);
+        io.AddMouseButtonEvent(arg.mButton - 1, true);
 
         return io.WantCaptureMouse;
     }
 
-    bool ClientImRoot::injectPointerRelease(const Engine::Input::PointerEventArgs &arg)
+    bool ClientImRoot::injectPointerRelease(const Engine::Input::PointerReleaseEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
-        io.AddMouseButtonEvent(arg.button - 1, false);
+        io.AddMouseButtonEvent(arg.mButton - 1, false);
 
         return io.WantCaptureMouse;
     }
 
-    bool ClientImRoot::injectPointerMove(const Engine::Input::PointerEventArgs &arg)
+    bool ClientImRoot::injectPointerMove(const Engine::Input::PointerMoveEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
 
         Vector2 pos;
         if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            pos = Vector2 { static_cast<float>(arg.screenPosition.x), static_cast<float>(arg.screenPosition.y) } / io.DisplayFramebufferScale;
+            pos = Vector2 { static_cast<float>(arg.mScreenPosition.x), static_cast<float>(arg.mScreenPosition.y) } / io.DisplayFramebufferScale;
         else
-            pos = Vector2 { static_cast<float>(arg.windowPosition.x), static_cast<float>(arg.windowPosition.y) } / io.DisplayFramebufferScale;
+            pos = Vector2 { static_cast<float>(arg.mWindowPosition.x), static_cast<float>(arg.mWindowPosition.y) } / io.DisplayFramebufferScale;
 
         io.AddMousePosEvent(pos.x, pos.y);
 
@@ -608,23 +623,23 @@ namespace Tools {
         return io.WantCaptureMouse;
     }
 
-    bool ClientImRoot::injectAxisEvent(const Engine::Input::AxisEventArgs &arg)
+    bool ClientImRoot::injectAxisEvent(const Engine::Input::AxisEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
         switch (arg.mAxisType) {
-        case Input::AxisEventArgs::WHEEL:
+        case Input::AxisEvent::WHEEL:
             io.AddMouseWheelEvent(0.0f, arg.mAxis1);
             break;
-        case Input::AxisEventArgs::Z:
+        case Input::AxisEvent::Z:
             mZAxis = arg.mAxis1;
             break;
-        case Input::AxisEventArgs::LEFT:
+        case Input::AxisEvent::LEFT:
             mLeftControllerStick = { arg.mAxis1, arg.mAxis2 };
             break;
-        case Input::AxisEventArgs::RIGHT:
+        case Input::AxisEvent::RIGHT:
             mRightControllerStick = { arg.mAxis1, arg.mAxis2 };
             break;
-        case Input::AxisEventArgs::DPAD:
+        case Input::AxisEvent::DPAD:
             mDPadState = arg.mAxis1;
             break;
         }

@@ -73,19 +73,19 @@ namespace Widgets {
         WidgetBase::render(renderData);
     }
 
-    void Button::injectPointerEnter(const Input::PointerEventArgs &arg)
+    void Button::injectPointerEnter(const Input::PointerMoveEvent &arg)
     {
         mHovered = true;
         WidgetBase::injectPointerEnter(arg);
     }
 
-    void Button::injectPointerLeave(const Input::PointerEventArgs &arg)
+    void Button::injectPointerLeave(const Input::PointerMoveEvent &arg)
     {
         mHovered = false;
         WidgetBase::injectPointerLeave(arg);
     }
 
-    void Button::injectPointerClick(const Input::PointerEventArgs &arg)
+    void Button::injectPointerClick(const PointerClickEvent &arg)
     {
         if (mEnabled)
             emitClicked();

@@ -118,9 +118,9 @@ namespace Render {
     SurfaceHandle OpenGLRenderWindow::getSurface() const
     {
 #if WINDOWS
-        return GetDC((HWND)mOsWindow->mHandle);
+        return GetDC((HWND)mOsWindow->ptrHandle());
 #elif LINUX
-        return mOsWindow->mHandle;
+        return mOsWindow->intHandle();
 #elif ANDROID || EMSCRIPTEN
         return mSurface;
 #elif OSX

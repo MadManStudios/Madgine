@@ -34,10 +34,10 @@ namespace Widgets {
         std::string mText;
 
     protected:
-        void injectPointerEnter(const Input::PointerEventArgs &arg) override;
-        void injectPointerLeave(const Input::PointerEventArgs &arg) override;
+        void injectPointerEnter(const Input::PointerMoveEvent &arg) override;
+        void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
 
-        void injectPointerClick(const Input::PointerEventArgs &arg) override;        
+        void injectPointerClick(const PointerClickEvent &arg) override;        
 
         void emitClicked();
 

@@ -3,7 +3,6 @@
 #if WINDOWS
 
 #    include "windowapi.h"
-#    include "windoweventlistener.h"
 #    include "windowsettings.h"
 
 #    include "../input/inputevents.h"
@@ -37,29 +36,29 @@ namespace Window {
                 InterfacesVector screenPos = windowPos + renderPos();
                 switch (msg) {
                 case WM_LBUTTONDOWN:
-                    injectPointerPress(Input::PointerEventArgs { windowPos, screenPos, Input::MouseButton::LEFT_BUTTON });
+                    onEvent(Input::PointerPressEvent { windowPos, screenPos, Input::MouseButton::LEFT_BUTTON });
                     break;
                 case WM_LBUTTONUP:
-                    injectPointerRelease(Input::PointerEventArgs { windowPos, screenPos, Input::MouseButton::LEFT_BUTTON });
+                    onEvent(Input::PointerReleaseEvent { windowPos, screenPos, Input::MouseButton::LEFT_BUTTON });
                     break;
                 case WM_RBUTTONDOWN:
-                    injectPointerPress(Input::PointerEventArgs { windowPos, screenPos, Input::MouseButton::RIGHT_BUTTON });
+                    onEvent(Input::PointerPressEvent { windowPos, screenPos, Input::MouseButton::RIGHT_BUTTON });
                     break;
                 case WM_RBUTTONUP:
-                    injectPointerRelease(Input::PointerEventArgs { windowPos, screenPos, Input::MouseButton::RIGHT_BUTTON });
+                    onEvent(Input::PointerReleaseEvent { windowPos, screenPos, Input::MouseButton::RIGHT_BUTTON });
                     break;
                 case WM_MBUTTONDOWN:
-                    injectPointerPress(Input::PointerEventArgs { windowPos, screenPos, Input::MouseButton::MIDDLE_BUTTON });
+                    onEvent(Input::PointerPressEvent { windowPos, screenPos, Input::MouseButton::MIDDLE_BUTTON });
                     break;
                 case WM_MBUTTONUP:
-                    injectPointerRelease(Input::PointerEventArgs { windowPos, screenPos, Input::MouseButton::MIDDLE_BUTTON });
+                    onEvent(Input::PointerReleaseEvent { windowPos, screenPos, Input::MouseButton::MIDDLE_BUTTON });
                     break;
                 case WM_MOUSEMOVE:
-                    injectPointerMove(Input::PointerEventArgs { windowPos, screenPos, windowPos - mLastKnownMousePos });
+                    onEvent(Input::PointerMoveEvent { windowPos, screenPos, windowPos - mLastKnownMousePos });
                     mLastKnownMousePos = windowPos;
                     break;
                 case WM_MOUSEWHEEL:
-                    injectAxisEvent(Input::AxisEventArgs { Input::AxisEventArgs::WHEEL, GET_WHEEL_DELTA_WPARAM(wParam) / float(WHEEL_DELTA) });
+                    onEvent(Input::AxisEvent { Input::AxisEvent::WHEEL, GET_WHEEL_DELTA_WPARAM(wParam) / float(WHEEL_DELTA) });
                     break;
                 }
             } else if (msg >= WM_KEYFIRST && msg <= WM_KEYLAST) {
@@ -77,12 +76,12 @@ namespace Window {
                     default:
                         ToAscii(keycode, scancode, mKeyDown, &buffer, 0);
                     }
-                    injectKeyPress(Input::KeyEventArgs { keycode, static_cast<char>(buffer), controlKeyState() });
+                    onEvent(Input::KeyPressEvent { keycode, static_cast<char>(buffer), controlKeyState() });
                     break;
                 case WM_KEYUP:
                 case WM_SYSKEYUP:
                     mKeyDown[keycode] = 0;
-                    injectKeyRelease(Input::KeyEventArgs { keycode, 0, controlKeyState() });
+                    onEvent(Input::KeyReleaseEvent { keycode, 0, controlKeyState() });
                     break;
                 default:
                     LOG("Unknown KeyEvent " << msg);
@@ -92,10 +91,10 @@ namespace Window {
                 case WM_SIZE:
                     mMinimized = wParam == SIZE_MINIMIZED;
                     if (lParam > 0)
-                        onResize({ LOWORD(lParam), HIWORD(lParam) });
+                        onEvent(ResizeEvent { LOWORD(lParam), HIWORD(lParam) });
                     break;
                 case WM_CLOSE:
-                    onClose();
+                    onEvent(CloseEvent {});
                     break;
                 case WM_DESTROY:
                     return false;
@@ -103,27 +102,20 @@ namespace Window {
                 case WM_PAINT: {
                     PAINTSTRUCT ps;
                     BeginPaint((HWND)mHandle, &ps);
-                    onRepaint();
+                    onEvent(RepaintEvent {});
                     EndPaint((HWND)mHandle, &ps);
                     break;
                 }
                 case WM_INPUT: {
                     Input::RawInputDevice &device = Input::handleRawInput((HRAWINPUT)lParam);
-                    Input::AxisEventArgs axis;
-                    while (device.fetchAxisEvent(axis))
-                        injectAxisEvent(axis);
-                    Input::KeyEventArgs key;
-                    Input::RawInputDevice::Dir dir;
-                    while (device.fetchKeyEvent(key, dir)) {
-                        switch (dir) {
-                        case Input::RawInputDevice::UP:
-                            injectKeyRelease(key);
-                            break;
-                        case Input::RawInputDevice::DOWN:
-                            injectKeyPress(key);
-                            break;
-                        }
-                    }
+                    
+                    auto event = device.fetchEvent();
+
+                    std::visit(overloaded {
+                                   [&](const Input::NoEvent &) {},
+                                   [&](const auto &event) { onEvent(event); }
+                               },
+                        event);
                     break;
                 }
                 case WM_SYSCOMMAND:
@@ -326,7 +318,7 @@ namespace Window {
             case Input::CursorIcon::NotAllowed:
                 return IDC_NO;
             default:
-                throw 0;
+                LOG_ERROR("Unhandled cursor icon: " << (int)icon);
             }
         }(icon)));
     }

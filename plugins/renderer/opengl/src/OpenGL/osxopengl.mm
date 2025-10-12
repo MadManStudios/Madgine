@@ -26,7 +26,7 @@ ContextHandle createContext(Window::OSWindow *window){
     
     NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
     NSOpenGLView *view = [[NSOpenGLView alloc] initWithFrame:NSRect{} pixelFormat:pixelFormat];
-    [reinterpret_cast<NSWindow*>(window->mHandle) setContentView:view];
+    [static_cast<NSWindow*>(window->ptrHandle()) setContentView:view];
     [[view openGLContext] setView:view];
     return [view openGLContext];
 }
@@ -44,7 +44,7 @@ void destroyContext(ContextHandle context) {
 }
 
 void swapBuffers(ContextHandle context) {
-    [reinterpret_cast<NSOpenGLContext*>(context) flushBuffer];
+    [static_cast<NSOpenGLContext*>(context) flushBuffer];
 }
 
 }

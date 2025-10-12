@@ -29,6 +29,11 @@ namespace Widgets {
 
     struct WidgetTemplate;
 
+    struct PointerClickEvent;
+    struct DragBeginEvent;
+    struct DragMoveEvent;
+    struct DragEndEvent;
+
 }
 
 }

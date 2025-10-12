@@ -162,47 +162,47 @@ namespace Widgets {
         mTextRenderData.updateText(mText, getAbsoluteTextSize());
     }
 
-    void TextEdit::injectPointerClick(const Input::PointerEventArgs &arg)
+    void TextEdit::injectPointerClick(const PointerClickEvent &arg)
     {
-        stb_textedit_click(this, &mState, arg.windowPosition.x, arg.windowPosition.y);
+        stb_textedit_click(this, &mState, arg.mWindowPosition.x, arg.mWindowPosition.y);
         WidgetBase::injectPointerClick(arg);
     }
 
-    void TextEdit::injectDragBegin(const Input::PointerEventArgs &arg)
+    void TextEdit::injectDragBegin(const DragBeginEvent &arg)
     {
-        stb_textedit_click(this, &mState, arg.windowPosition.x, arg.windowPosition.y);
+        stb_textedit_click(this, &mState, arg.mWindowPosition.x, arg.mWindowPosition.y);
         WidgetBase::injectDragBegin(arg);
     }
 
-    void TextEdit::injectDragMove(const Input::PointerEventArgs &arg)
+    void TextEdit::injectDragMove(const DragMoveEvent &arg)
     {
-        stb_textedit_drag(this, &mState, arg.windowPosition.x, arg.windowPosition.y);
+        stb_textedit_drag(this, &mState, arg.mWindowPosition.x, arg.mWindowPosition.y);
         WidgetBase::injectDragMove(arg);
     }
 
-    bool TextEdit::injectKeyPress(const Input::KeyEventArgs &arg)
+    bool TextEdit::injectKeyPress(const Input::KeyPressEvent &arg)
     {
         if (mEditable) {
-            if (std::isalnum(arg.text)
-                || arg.scancode == Input::Key::LeftArrow
-                || arg.scancode == Input::Key::RightArrow
-                || arg.scancode == Input::Key::UpArrow
-                || arg.scancode == Input::Key::DownArrow
-                || arg.scancode == Input::Key::Backspace
-                || arg.scancode == Input::Key::Delete
-                || arg.scancode == Input::Key::Space
-                || arg.scancode == Input::Key::Return) {
+            if (std::isalnum(arg.mText)
+                || arg.mScancode == Input::Key::LeftArrow
+                || arg.mScancode == Input::Key::RightArrow
+                || arg.mScancode == Input::Key::UpArrow
+                || arg.mScancode == Input::Key::DownArrow
+                || arg.mScancode == Input::Key::Backspace
+                || arg.mScancode == Input::Key::Delete
+                || arg.mScancode == Input::Key::Space
+                || arg.mScancode == Input::Key::Return) {
                 uint32_t val = (static_cast<uint32_t>(arg.mControlKeys.mAlt) << 18)
                     | (static_cast<uint32_t>(arg.mControlKeys.mCtrl) << 17)
                     | (static_cast<uint32_t>(arg.mControlKeys.mShift) << 16)
-                    | (static_cast<uint32_t>(arg.scancode) << 8)
-                    | arg.text;
+                    | (static_cast<uint32_t>(arg.mScancode) << 8)
+                    | arg.mText;
                 stb_textedit_key(this, &mState, val);
-            } else if (arg.mControlKeys.mCtrl && arg.scancode == Input::Key::V) {
+            } else if (arg.mControlKeys.mCtrl && arg.mScancode == Input::Key::V) {
                 std::string s = Window::OSWindow::getClipboardString();
                 stb_textedit_paste(this, &mState, s.c_str(), s.size());
                 mTextRenderData.updateText(mText, getAbsoluteTextSize());
-            } else if (arg.mControlKeys.mCtrl && arg.scancode == Input::Key::C) {
+            } else if (arg.mControlKeys.mCtrl && arg.mScancode == Input::Key::C) {
                 std::string_view s = mText;
                 int start = mState.select_start;
                 int end = mState.select_end;
@@ -217,9 +217,9 @@ namespace Widgets {
         return WidgetBase::injectKeyPress(arg);
     }
 
-    bool TextEdit::injectAxisEvent(const Input::AxisEventArgs &arg)
+    bool TextEdit::injectAxisEvent(const Input::AxisEvent &arg)
     {
-        if (arg.mAxisType == Input::AxisEventArgs::WHEEL) {
+        if (arg.mAxisType == Input::AxisEvent::WHEEL) {
             float textHeight = mTextRenderData.calculateTotalHeight(getAbsoluteTextSize().z);
             float maxScroll = max(textHeight - getAbsoluteTextSize().y, 0.0f);
             mVerticalScroll = clamp(mVerticalScroll - 50.0f * arg.mAxis1, 0.0f, maxScroll);

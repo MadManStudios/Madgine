@@ -117,16 +117,16 @@ namespace Window {
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_MOUSEMOVE:
-                handled = injectPointerMove({ position, screenPosition,
+                handled = onEvent(Input::PointerMoveEvent{ position, screenPosition,
                     { mouseEvent->movementX, mouseEvent->movementY } });
                 break;
             case EMSCRIPTEN_EVENT_MOUSEDOWN:
                 focus();
-                handled = injectPointerPress({ position, screenPosition,
+                handled = onEvent(Input::PointerPressEvent{ position, screenPosition,
                     convertMouseButton(mouseEvent->button) });
                 break;
             case EMSCRIPTEN_EVENT_MOUSEUP:
-                handled = injectPointerRelease({ position, screenPosition,
+                handled = onEvent(Input::PointerReleaseEvent{ position, screenPosition,
                     convertMouseButton(mouseEvent->button) });
                 break;
             }
@@ -277,10 +277,10 @@ namespace Window {
                 mKeyDown[key] = true;
                 if (keyEvent->key[1] == '\0')
                     text = keyEvent->key[0];
-                return injectKeyPress({ key, text, controlKeyState() });
+                return onEvent(Input::KeyPressEvent{ key, text, controlKeyState() });
             case EMSCRIPTEN_EVENT_KEYUP:
                 mKeyDown[key] = false;
-                return injectKeyRelease({ key, text, controlKeyState() });
+                return onEvent(Input::KeyReleaseEvent{ key, text, controlKeyState() });
             }
 
             return EM_FALSE;
@@ -301,7 +301,7 @@ namespace Window {
                 case DOM_DELTA_PAGE:
                     delta *= 1068.0f;
                 }
-                return injectAxisEvent(Input::AxisEventArgs { Input::AxisEventArgs::WHEEL, -delta / 120.0f });
+                return onEvent(Input::AxisEvent { Input::AxisEvent::WHEEL, -delta / 120.0f });
             }
             }
 
@@ -318,10 +318,10 @@ namespace Window {
             switch (eventType) {
             case EMSCRIPTEN_EVENT_TOUCHMOVE:
                 if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
-                    injectPointerPress({ mTouchStartPosition, mTouchStartScreenPosition, Input::MouseButton::LEFT_BUTTON });
+                    onEvent(Input::PointerPressEvent{ mTouchStartPosition, mTouchStartScreenPosition, Input::MouseButton::LEFT_BUTTON });
                     mPendingTouch = false;
                 }
-                handled = injectPointerMove({ position, screenPosition, position - mLastMousePosition });
+                handled = onEvent(Input::PointerMoveEvent{ position, screenPosition, position - mLastMousePosition });
                 break;
             case EMSCRIPTEN_EVENT_TOUCHSTART:
                 focus();
@@ -329,16 +329,16 @@ namespace Window {
                 mTouchStartPosition = position;
                 mTouchStartTimestamp = touchEvent->timestamp;
                 mPendingTouch = true;
-                injectPointerMove({ position, screenPosition, position - mLastMousePosition });
+                onEvent(Input::PointerMoveEvent{ position, screenPosition, position - mLastMousePosition });
                 break;
             case EMSCRIPTEN_EVENT_TOUCHEND:
                 double milliseconds = touchEvent->timestamp - mTouchStartTimestamp;
                 Input::MouseButton::MouseButton button = milliseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
                 if (mPendingTouch) {
-                    handled |= injectPointerPress({ mTouchStartPosition, mTouchStartScreenPosition, button });
+                    handled |= onEvent(Input::PointerPressEvent{ mTouchStartPosition, mTouchStartScreenPosition, button });
                     mPendingTouch = false;
                 }
-                handled |= injectPointerRelease({ position, screenPosition, button });
+                handled |= onEvent(Input::PointerReleaseEvent{ position, screenPosition, button });
                 break;
             }
 
@@ -493,30 +493,37 @@ namespace Window {
 
     void OSWindow::setCursorIcon(Input::CursorIcon icon)
     {
-        /*SetCursor(LoadCursor(NULL, [](Input::CursorIcon icon) {
-                switch (icon) {
-                case Input::CursorIcon::Arrow:
-                    return IDC_ARROW;
-                case Input::CursorIcon::TextInput:
-                    return IDC_IBEAM;
-                case Input::CursorIcon::ResizeAll:
-                    return IDC_SIZEALL;
-                case Input::CursorIcon::ResizeNS:
-                    return IDC_SIZENS;
-                case Input::CursorIcon::ResizeEW:
-                    return IDC_SIZEWE;
-                case Input::CursorIcon::ResizeNESW:
-                    return IDC_SIZENESW;
-                case Input::CursorIcon::ResizeNWSE:
-                    return IDC_SIZENWSE;
-                case Input::CursorIcon::Hand:
-                    return IDC_HAND;
-                case Input::CursorIcon::NotAllowed:
-                    return IDC_NO;
-                default:
-                    throw 0;
-                }
-            }(icon)));*/
+        switch (icon) {
+        case Input::CursorIcon::Arrow:
+            EM_ASM(document.body.style.cursor = 'default';);
+            break;
+        case Input::CursorIcon::TextInput:
+            EM_ASM(document.body.style.cursor = 'text';);
+            break;
+        case Input::CursorIcon::ResizeAll:
+            EM_ASM(document.body.style.cursor = 'move';);
+            break;
+        case Input::CursorIcon::ResizeNS:
+            EM_ASM(document.body.style.cursor = 'ns-resize';);
+            break;
+        case Input::CursorIcon::ResizeEW:
+            EM_ASM(document.body.style.cursor = 'ew-resize';);
+            break;
+        case Input::CursorIcon::ResizeNESW:
+            EM_ASM(document.body.style.cursor = 'nesw-resize';);
+            break;
+        case Input::CursorIcon::ResizeNWSE:
+            EM_ASM(document.body.style.cursor = 'nwse-resize';);
+            break;
+        case Input::CursorIcon::Hand:
+            EM_ASM(document.body.style.cursor = 'grab';);
+            break;
+        case Input::CursorIcon::NotAllowed:
+            EM_ASM(document.body.style.cursor = 'not-allowed';);
+            break;
+        default:
+            LOG_ERROR("Unhandled cursor icon: " << (int)icon);
+        }
     }
 
     std::string OSWindow::getClipboardString()

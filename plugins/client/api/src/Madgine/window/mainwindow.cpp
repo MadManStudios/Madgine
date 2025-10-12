@@ -399,127 +399,45 @@ namespace Window {
         }
     }
 
-    /**
-     * @brief
-     * @param arg
-     * @return
-     */
-    bool MainWindow::injectKeyPress(const Input::KeyEventArgs &arg)
+    bool MainWindow::onWindowEvent(const WindowEvent &event)
     {
-        for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
-            if (comp->injectKeyPress(arg))
-                return true;
-        }
-        /* if (arg.mControlKeys.mAlt && arg.scancode == Input::Key::Return)
-            mOsWindow->setFullscreen(!mOsWindow->isFullscreen());*/
-        return false;
-    }
-
-    /**
-     * @brief
-     * @param arg
-     * @return
-     */
-    bool MainWindow::injectKeyRelease(const Input::KeyEventArgs &arg)
-    {
-        for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
-            if (comp->injectKeyRelease(arg))
-                return true;
-        }
-        return false;
-    }
-
-    /**
-     * @brief
-     * @param arg
-     * @return
-     */
-    bool MainWindow::injectPointerPress(const Input::PointerEventArgs &arg)
-    {
-        InterfacesVector storedWindowPosition = arg.windowPosition;
-        for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
-            arg.windowPosition = storedWindowPosition - InterfacesVector { comp->getClientSpace().mTopLeft.x, comp->getClientSpace().mTopLeft.y };
-            if (comp->injectPointerPress(arg))
-                return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @brief
-     * @param arg
-     * @return
-     */
-    bool MainWindow::injectPointerRelease(const Input::PointerEventArgs &arg)
-    {
-        InterfacesVector storedWindowPosition = arg.windowPosition;
-        for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
-            arg.windowPosition = storedWindowPosition - InterfacesVector { comp->getClientSpace().mTopLeft.x, comp->getClientSpace().mTopLeft.y };
-            if (comp->injectPointerRelease(arg))
-                return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @brief
-     * @param arg
-     * @return
-     */
-    bool MainWindow::injectPointerMove(const Input::PointerEventArgs &arg)
-    {
-        InterfacesVector storedWindowPosition = arg.windowPosition;
-        for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
-            arg.windowPosition = storedWindowPosition - InterfacesVector { comp->getClientSpace().mTopLeft.x, comp->getClientSpace().mTopLeft.y };
-            if (comp->injectPointerMove(arg))
-                return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @brief
-     * @param arg
-     * @return
-     */
-    bool MainWindow::injectAxisEvent(const Input::AxisEventArgs &arg)
-    {
-        for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
-            if (comp->injectAxisEvent(arg))
-                return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @brief
-     */
-    void MainWindow::onClose()
-    {
-        storeWindowData();
-        mOsWindow = nullptr;
-        mTaskQueue.stop();
-    }
-
-    /**
-     * @brief
-     */
-    void MainWindow::onRepaint()
-    {
-    }
-
-    /**
-     * @brief
-     * @param size
-     */
-    void MainWindow::onResize(const InterfacesVector &renderSize)
-    {
-        mRenderWindow->resize({ renderSize.x, renderSize.y });
-        applyClientSpaceResize();
+        return std::visit(overloaded {
+                              [this](const ResizeEvent &event) {
+                                  mRenderWindow->resize({ event.mSize.x, event.mSize.y });
+                                  applyClientSpaceResize();
+                                  return true;
+                              },
+                              [this](const CloseEvent &event) {
+                                  for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
+                                      if (comp->onWindowEvent(event))
+                                          return true;
+                                  }
+                                  storeWindowData();
+                                  mOsWindow = nullptr;
+                                  mTaskQueue.stop();
+                                  return true;
+                              },
+                              [this](const RepaintEvent& event) {
+                                  for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
+                                      comp->onWindowEvent(event);
+                                  }
+                                  return false;
+                              },
+                              [this](const auto &event) {
+                                  InterfacesVector storedWindowPosition;
+                                  if constexpr (requires { event.mWindowPosition; }) {
+                                      storedWindowPosition = event.mWindowPosition;
+                                  }
+                                  for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
+                                      if constexpr (requires { event.mWindowPosition; }) {
+                                          event.mWindowPosition = storedWindowPosition - InterfacesVector { comp->getClientSpace().mTopLeft.x, comp->getClientSpace().mTopLeft.y };
+                                      }
+                                      if (comp->onWindowEvent(event))
+                                          return true;
+                                  }
+                                  return false;
+                              } },
+            event);
     }
 
     /**

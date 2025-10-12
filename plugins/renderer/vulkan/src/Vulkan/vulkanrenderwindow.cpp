@@ -111,13 +111,13 @@ namespace Render {
 
     bool VulkanRenderWindow::skipFrame()
     {
-        if (mWindow->mHandle == 0 && mSurface) {
+        if (!mWindow->ptrHandle() && mSurface) {
             mSwapChain.reset();
             mSurface.reset();
         }
         if (mWindow->isMinimized())
             return true;
-        if (mWindow->mHandle != 0 && !mSurface)
+        if (mWindow->ptrHandle() && !mSurface)
             createSurface();
         if (!mSurface)
             return true;
@@ -361,7 +361,7 @@ namespace Render {
 #if WINDOWS
         VkWin32SurfaceCreateInfoKHR createInfo {};
         createInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
-        createInfo.hwnd = (HWND)mWindow->mHandle;
+        createInfo.hwnd = (HWND)mWindow->ptrHandle();
         createInfo.hinstance = GetModuleHandle(nullptr);
 
         VkResult result = vkCreateWin32SurfaceKHR(GetInstance(), &createInfo, nullptr, &mSurface);
@@ -369,7 +369,7 @@ namespace Render {
 #elif ANDROID
         VkAndroidSurfaceCreateInfoKHR createInfo {};
         createInfo.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
-        createInfo.window = (ANativeWindow *)mWindow->mHandle;
+        createInfo.window = (ANativeWindow *)mWindow->ptrHandle();
 
         VkResult result = vkCreateAndroidSurfaceKHR(GetInstance(), &createInfo, nullptr, &mSurface);
         VK_CHECK(result);
@@ -377,7 +377,7 @@ namespace Render {
         VkXlibSurfaceCreateInfoKHR createInfo {};
         createInfo.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
         createInfo.dpy = Window::sDisplay();
-        createInfo.window = mWindow->mHandle;
+        createInfo.window = mWindow->intHandle();
 
         VkResult result = vkCreateXlibSurfaceKHR(GetInstance(), &createInfo, nullptr, &mSurface);
         VK_CHECK(result);

@@ -218,25 +218,25 @@ namespace Widgets {
         return index;
     }
 
-    void TableWidget::injectPointerEnter(const Input::PointerEventArgs &arg)
+    void TableWidget::injectPointerEnter(const Input::PointerMoveEvent &arg)
     {
-        mHoveredRow = rowIndex(arg.windowPosition.y);
+        mHoveredRow = rowIndex(arg.mWindowPosition.y);
         WidgetBase::injectPointerEnter(arg);
     }
 
-    void TableWidget::injectPointerLeave(const Input::PointerEventArgs &arg)
+    void TableWidget::injectPointerLeave(const Input::PointerMoveEvent &arg)
     {
         mHoveredRow.reset();
         WidgetBase::injectPointerLeave(arg);
     }
 
-    void TableWidget::injectPointerMove(const Input::PointerEventArgs &arg)
+    void TableWidget::injectPointerMove(const Input::PointerMoveEvent &arg)
     {
-        mHoveredRow = rowIndex(arg.windowPosition.y);
+        mHoveredRow = rowIndex(arg.mWindowPosition.y);
         WidgetBase::injectPointerMove(arg);
     }
 
-    void TableWidget::injectPointerClick(const Input::PointerEventArgs &arg)
+    void TableWidget::injectPointerClick(const PointerClickEvent &arg)
     {
         setSelectedRow(mHoveredRow);
         WidgetBase::injectPointerClick(arg);

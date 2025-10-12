@@ -27,12 +27,6 @@ namespace Debug {
 
 }
 
-namespace Window {
-    struct WindowEventListener;
-    struct OSWindow;
-    struct WindowSettings;
-}
-
 namespace Filesystem {
     struct Path;
     struct FileQuery;
@@ -46,9 +40,12 @@ namespace Dl {
 }
 
 namespace Input {
-    struct KeyEventArgs;
-    struct PointerEventArgs;
-    struct AxisEventArgs;
+    struct KeyPressEvent;
+    struct KeyReleaseEvent;
+    struct PointerPressEvent;
+    struct PointerReleaseEvent;
+    struct PointerMoveEvent;
+    struct AxisEvent;
 
     namespace MouseButton {
         enum MouseButton : unsigned char;
@@ -58,6 +55,22 @@ namespace Input {
         enum Key : uint8_t;
     }
 }
+
+
+namespace Window {
+    struct WindowEventListener;
+    struct OSWindow;
+    struct WindowSettings;
+
+    struct ResizeEvent;
+    struct CloseEvent;
+    struct RepaintEvent;
+
+    
+    using WindowEvent = std::variant</*Input::NoEvent, */ ResizeEvent, CloseEvent, RepaintEvent, Input::KeyPressEvent, Input::KeyReleaseEvent, Input::PointerPressEvent, Input::PointerReleaseEvent, Input::PointerMoveEvent, Input::AxisEvent>;
+
+}
+
 
 namespace Log {
 

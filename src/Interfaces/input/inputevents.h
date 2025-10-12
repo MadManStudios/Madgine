@@ -139,7 +139,7 @@ namespace Input {
             F23 = 0x86,
             F24 = 0x87,
 
-            //Gamepad in unassigned area
+            // Gamepad in unassigned area
             GP_A = 0x88,
             GP_B = 0x89,
             GP_X = 0x8A,
@@ -173,35 +173,36 @@ namespace Input {
         bool mAlt = false;
     };
 
-    struct KeyEventArgs {
-        Key::Key scancode = static_cast<Key::Key>(0);
-        char text = 0;
+    struct KeyPressEvent {
+        Key::Key mScancode = static_cast<Key::Key>(0);
+        char mText = 0;
         ControlKeyState mControlKeys;
     };
 
-    struct PointerEventArgs {
-        PointerEventArgs(const InterfacesVector &windowPos, const InterfacesVector &screenPos, MouseButton::MouseButton button)
-            : windowPosition(windowPos)
-            , screenPosition(screenPos)
-            , button(button)
-        {
-        }
-
-        PointerEventArgs(const InterfacesVector &windowPos, const InterfacesVector &screenPos, const InterfacesVector &move,
-            MouseButton::MouseButton button = MouseButton::NO_BUTTON)
-            : windowPosition(windowPos)
-            , screenPosition(screenPos)
-            , moveDelta(move)
-            , button(button)
-        {
-        }
-
-        mutable InterfacesVector windowPosition;
-        InterfacesVector screenPosition, moveDelta;
-        MouseButton::MouseButton button;
+    struct KeyReleaseEvent {
+        Key::Key mScancode = static_cast<Key::Key>(0);
+        char mText = 0;
+        ControlKeyState mControlKeys;
     };
 
-    struct AxisEventArgs {
+    struct PointerMoveEvent {
+        mutable InterfacesVector mWindowPosition;
+        InterfacesVector mScreenPosition, mMoveDelta;
+    };
+
+    struct PointerPressEvent {
+        mutable InterfacesVector mWindowPosition;
+        InterfacesVector mScreenPosition;
+        MouseButton::MouseButton mButton;
+    };
+
+    struct PointerReleaseEvent {
+        mutable InterfacesVector mWindowPosition;
+        InterfacesVector mScreenPosition;
+        MouseButton::MouseButton mButton;
+    };
+
+    struct AxisEvent {
 
         enum AxisType {
             LEFT,
@@ -211,18 +212,12 @@ namespace Input {
             DPAD
         };
 
-        AxisEventArgs() = default;
-
-        AxisEventArgs(AxisType type, float axis1, float axis2 = 0.0f)
-            : mAxisType(type)
-            , mAxis1(axis1)
-            , mAxis2(axis2)
-        {
-        }
-
         AxisType mAxisType;
         float mAxis1;
-        float mAxis2;
+        float mAxis2 = 0.0f;
     };
+
+    struct NoEvent { };
+
 }
 }

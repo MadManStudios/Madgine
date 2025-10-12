@@ -1,9 +1,9 @@
 #include "../widgethandlerlib.h"
+#include "widgethandler.h"
+#include "Madgine/handlermanager.h"
 #include "Madgine/widgets/widget.h"
 #include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
-#include "widgethandler.h"
-#include "Madgine/handlermanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
@@ -37,23 +37,23 @@ namespace Widgets {
             mWidget->abortDrag();
     }
 
-    void WidgetHandlerBase::onPointerMove(const Input::PointerEventArgs &me)
+    void WidgetHandlerBase::onPointerMove(const Input::PointerMoveEvent &me)
     {
     }
 
-    void WidgetHandlerBase::onPointerClick(const Input::PointerEventArgs &me)
+    void WidgetHandlerBase::onPointerClick(const PointerClickEvent &me)
     {
     }
 
-    void WidgetHandlerBase::onDragBegin(const Input::PointerEventArgs &me)
+    void WidgetHandlerBase::onDragBegin(const DragBeginEvent &me)
     {
     }
 
-    void WidgetHandlerBase::onDragMove(const Input::PointerEventArgs &me)
+    void WidgetHandlerBase::onDragMove(const DragMoveEvent &me)
     {
     }
 
-    void WidgetHandlerBase::onDragEnd(const Input::PointerEventArgs &me)
+    void WidgetHandlerBase::onDragEnd(const DragEndEvent &me)
     {
     }
 
@@ -61,12 +61,17 @@ namespace Widgets {
     {
     }
 
-    bool WidgetHandlerBase::onKeyPress(const Input::KeyEventArgs &evt)
+    bool WidgetHandlerBase::onKeyPress(const Input::KeyPressEvent &evt)
     {
         return false;
     }
 
-    void WidgetHandlerBase::onAxisEvent(const Input::AxisEventArgs &evt)
+    bool WidgetHandlerBase::onKeyRelease(const Input::KeyReleaseEvent &evt)
+    {
+        return false;
+    }
+
+    void WidgetHandlerBase::onAxisEvent(const Input::AxisEvent &evt)
     {
     }
 
@@ -90,7 +95,8 @@ namespace Widgets {
             mLifetime.attach(mWidget->dragMoveEvent().connect(&WidgetHandlerBase::onDragMove, this));
             mLifetime.attach(mWidget->dragEndEvent().connect(&WidgetHandlerBase::onDragEnd, this));
             mLifetime.attach(mWidget->axisEvent().connect(&WidgetHandlerBase::onAxisEvent, this));
-            mLifetime.attach(mWidget->keyEvent().connect(&WidgetHandlerBase::onKeyPress, this));
+            mLifetime.attach(mWidget->keyPressEvent().connect(&WidgetHandlerBase::onKeyPress, this));
+            mLifetime.attach(mWidget->keyReleaseEvent().connect(&WidgetHandlerBase::onKeyRelease, this));
             mWidget->setAcceptsPointerEvents(true);
         }
     }

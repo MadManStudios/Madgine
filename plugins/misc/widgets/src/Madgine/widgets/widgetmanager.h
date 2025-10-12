@@ -25,6 +25,8 @@
 
 #include "widgetloader.h"
 
+#include "events.h"
+
 namespace Engine {
 namespace Widgets {
 
@@ -33,7 +35,7 @@ namespace Widgets {
         SERIALIZABLEUNIT(WidgetManager)
 
         WidgetManager(Window::MainWindow &window);
-        WidgetManager(const WidgetManager &sharedInstance);        
+        WidgetManager(const WidgetManager &sharedInstance);
         ~WidgetManager();
 
         void swapCurrentRoot(std::string_view name);
@@ -76,11 +78,13 @@ namespace Widgets {
         WidgetBase *mStartupWidget = nullptr;
         void openStartupWidget();
 
-        virtual bool injectPointerPress(const Input::PointerEventArgs &arg) override;
-        virtual bool injectPointerRelease(const Input::PointerEventArgs &arg) override;
-        virtual bool injectPointerMove(const Input::PointerEventArgs &arg) override;
-        virtual bool injectAxisEvent(const Input::AxisEventArgs &arg) override;
-        virtual bool injectKeyPress(const Input::KeyEventArgs &arg) override;
+        bool onWindowEvent(const Window::WindowEvent &arg) override;
+        bool injectPointerPress(const Input::PointerPressEvent &arg);
+        bool injectPointerRelease(const Input::PointerReleaseEvent &arg);
+        bool injectPointerMove(const Input::PointerMoveEvent &arg);
+        bool injectAxisEvent(const Input::AxisEvent &arg);
+        bool injectKeyPress(const Input::KeyPressEvent &arg);
+        bool injectKeyRelease(const Input::KeyReleaseEvent &arg);
 
         void onResize(const Rect2i &space) override;
         void setup(Render::RenderTarget *target) override;
@@ -143,7 +147,7 @@ namespace Widgets {
         std::shared_ptr<WidgetManagerData> mData;
 
         // Dragging
-        Input::PointerEventArgs mDragStartEvent { { 0, 0 }, { 0, 0 }, Input::MouseButton::NO_BUTTON };
+        DragBeginEvent mDragStartEvent { { 0, 0 }, { 0, 0 }, Input::MouseButton::NO_BUTTON };
         bool mDragging = false;
         bool mDraggingAborted = false;
         std::chrono::steady_clock::time_point mDragStartTime;

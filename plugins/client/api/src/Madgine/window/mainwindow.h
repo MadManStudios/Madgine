@@ -34,17 +34,17 @@ namespace Window {
 
     /**
      * @brief The MainWindow manages multiple concepts relevant for client applications.
-     * 
+     *
      * The responsibilities of the class include:
-     *  - creation of an OSWindow   
+     *  - creation of an OSWindow
      *  - creation of a RenderContext and a RenderTarget for the OSWindow
      *  - creation of a TaskQueue for the render thread
      *  - creation & management of all MainWindowComponents
-     * 
+     *
      * The MainWindowComponents are ordered by priority. The order is relevant for input-event
      * propagation and render order.
-     *      
-    */
+     *
+     */
     struct MADGINE_CLIENT_EXPORT MainWindow : WindowEventListener,
                                               Threading::MadgineObject<MainWindow> {
         SERIALIZABLEUNIT(MainWindow)
@@ -56,8 +56,8 @@ namespace Window {
         bool loadLayout(std::string_view name);
 
         /**
-     * @name MadgineObject interface
-    */
+         * @name MadgineObject interface
+         */
         ///@{
         Threading::Task<bool> init();
         Threading::Task<void> finalize();
@@ -74,8 +74,8 @@ namespace Window {
         void removeListener(MainWindowListener *listener);
 
         /**
-     * @name Components
-    */
+         * @name Components
+         */
         ///@{
         auto &components()
         {
@@ -105,26 +105,12 @@ namespace Window {
         Threading::TaskQueue *taskQueue();
         void shutdown();
 
-           /**
-     * @name Input propagation
-    */
-        ///@{
-        bool injectKeyPress(const Input::KeyEventArgs &arg) override;
-        bool injectKeyRelease(const Input::KeyEventArgs &arg) override;
-        bool injectPointerPress(const Input::PointerEventArgs &arg) override;
-        bool injectPointerRelease(const Input::PointerEventArgs &arg) override;
-        bool injectPointerMove(const Input::PointerEventArgs &arg) override;
-        bool injectAxisEvent(const Input::AxisEventArgs &arg) override;
-        ///@}
+        bool onWindowEvent(const WindowEvent &event) override;
 
-        //TESTING
+        // TESTING
         static void sTestScreens(size_t n);
 
     protected:
-        void onClose() override;
-        void onRepaint() override;
-        void onResize(const InterfacesVector &size) override;
-
         void storeWindowData();
 
         void onActivate(bool active);
