@@ -82,209 +82,7 @@ namespace Tools {
     void WidgetFile::renderSelection(const ImVec2 &pos, Widgets::WidgetBase *hoveredWidget)
     {
         if (mEditor.mWidgetDetailsVisible) {
-            constexpr float borderSize = 10.0f;
             if (mEditor.beginSubPanel("Details", &mEditor.mWidgetDetailsVisible, ImGuiDir_Right)) {
-
-                ImDrawList *drawList = ImGui::GetForegroundDrawList();
-
-                Rect2i screenSpace = mWidgetManager.getClientSpace();
-                screenSpace.mTopLeft = { static_cast<int>(pos.x), static_cast<int>(pos.y) };
-
-                ImGuiIO &io = ImGui::GetIO();
-
-                Vector2 mouse = ImGui::GetMousePos();
-                Vector2 dragDistance = mouse - Vector2 { io.MouseClickedPos[0] };
-
-                if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-                    screenSpace.mTopLeft += mWidgetManager.getScreenSpace().mTopLeft;
-
-                bool acceptHover = true;
-
-                if (mSelected) {
-                    Widgets::WidgetBase *selectedWidget = mSelected->widget();
-
-                    Vector3 absoluteSize = selectedWidget->getAbsoluteSize();
-                    Vector2 absolutePos = selectedWidget->getAbsolutePosition() + Vector2 { screenSpace.mTopLeft };
-
-                    Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
-
-                    drawList->AddRect(ImVec2 { bounds.topLeft() } / io.DisplayFramebufferScale, ImVec2 { bounds.bottomRight() } / io.DisplayFramebufferScale, IM_COL32(255, 255, 255, 255));
-
-                    bool rightBorder = false, leftBorder = false, topBorder = false, bottomBorder = false;
-
-                    bool hoveredWithBorder = selectedWidget->containsPoint(mouse, screenSpace, borderSize);
-
-                    if (!mDragging && hoveredWithBorder) {
-
-                        leftBorder = abs(mouse.x - bounds.left()) < borderSize;
-                        rightBorder = abs(mouse.x - bounds.right()) < borderSize;
-                        topBorder = abs(mouse.y - bounds.top()) < borderSize;
-                        bottomBorder = abs(mouse.y - bounds.bottom()) < borderSize;
-
-                        if (mSelected->aspectRatio()) {
-                            if (topBorder || leftBorder) {
-                                leftBorder = !rightBorder;
-                                topBorder = !bottomBorder;
-                            }
-                            if (bottomBorder || rightBorder) {
-                                rightBorder = !leftBorder;
-                                bottomBorder = !topBorder;
-                            }
-                        }
-
-                        acceptHover &= (!rightBorder && !leftBorder && !topBorder && !bottomBorder);
-
-                        if (io.MouseClicked[0]) {
-                            mMouseDown = true;
-                            mDraggingLeft = leftBorder;
-                            mDraggingRight = rightBorder;
-                            mDraggingTop = topBorder;
-                            mDraggingBottom = bottomBorder;
-                        }
-                    }
-
-                    bool left = leftBorder || mDraggingLeft;
-                    bool right = rightBorder || mDraggingRight;
-                    bool top = topBorder || mDraggingTop;
-                    bool bottom = bottomBorder || mDraggingBottom;
-                    if (left || right) {
-                        if (top || bottom) {
-                            if (top == left) {
-                                ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNWSE);
-                            } else {
-                                ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNESW);
-                            }
-                        } else {
-                            ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW);
-                        }
-                    } else {
-                        if (top || bottom) {
-                            ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNS);
-                        } else {
-                            if (hoveredWithBorder && selectedWidget == mWidgetManager.hoveredWidget())
-                                ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeAll);
-                        }
-                    }
-
-                    if (mMouseDown && dragDistance.length() >= io.MouseDragThreshold && !mDragging) {
-                        mSelected->saveGeometry();
-                        mDragging = true;
-                    }
-                }
-
-                Widgets::WidgetBase *pointerEventTargetWidget = mWidgetManager.pointerEventTargetWidget();
-                if (pointerEventTargetWidget)
-                    WidgetEditor::renderWidgetBorders(pointerEventTargetWidget, screenSpace.mTopLeft, IM_COL32(127, 100, 10, 255));
-
-                Widgets::WidgetBase *focusedWidget = mWidgetManager.focusedWidget();
-                if (focusedWidget)
-                    WidgetEditor::renderWidgetBorders(focusedWidget, screenSpace.mTopLeft, IM_COL32(255, 200, 10, 255));
-
-                if (acceptHover && hoveredWidget) {
-                    WidgetSettings *hoveredSettings = &mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>()).first->second;
-
-                    if (!mDragging && hoveredSettings != mSelected) {
-                        WidgetEditor::renderWidgetBorders(hoveredWidget, screenSpace.mTopLeft, IM_COL32(127, 127, 127, 255));
-                    }
-
-                    if (io.MouseReleased[0] && !mDragging) {
-                        mSelected = hoveredSettings;
-                    }
-                }
-
-                if (mSelected) {
-
-                    enum ResizeMode {
-                        RELATIVE,
-                        ABSOLUTE
-                    };
-
-                    ResizeMode resizeMode = RELATIVE;
-                    if (io.KeyShift) {
-                        resizeMode = ABSOLUTE;
-                    }
-
-                    if (mDragging) {
-
-                        auto [pos, size] = mSelected->savedGeometry();
-
-                        Vector3 parentSize = mSelected->widget()->getParent() ? mSelected->widget()->getParent()->getAbsoluteSize() : Vector3 { Vector2 { screenSpace.mSize }, 1.0f };
-
-                        Vector2 relDragDistance = dragDistance / parentSize.xy();
-
-                        Matrix3 dragDistanceSize;
-
-                        switch (resizeMode) {
-                        case RELATIVE:
-                            dragDistanceSize = Matrix3 {
-                                relDragDistance.x, 0, 0,
-                                0, relDragDistance.y, 0,
-                                0, 0, 0
-                            };
-                            break;
-                        case ABSOLUTE:
-                            dragDistanceSize = Matrix3 {
-                                0, 0, dragDistance.x / parentSize.z,
-                                0, 0, dragDistance.y / parentSize.z,
-                                0, 0, 0
-                            };
-                            break;
-                        }
-
-                        if (!mDraggingLeft && !mDraggingRight && !mDraggingTop && !mDraggingBottom) {
-                            pos += dragDistanceSize;
-                        } else {
-                            Matrix3 dragDistancePos { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                            if (!mDraggingLeft && !mDraggingRight) {
-                                dragDistanceSize[0][0] = 0.0f;
-                                dragDistanceSize[0][2] = 0.0f;
-                                dragDistancePos[0][0] = 0.0f;
-                                dragDistancePos[0][2] = 0.0f;
-                            } else if (mDraggingLeft) {
-                                dragDistancePos[0][0] = dragDistanceSize[0][0];
-                                dragDistancePos[0][2] = dragDistanceSize[0][2];
-                                dragDistanceSize[0][0] *= -1.0f;
-                                dragDistanceSize[0][2] *= -1.0f;
-                            }
-                            if (!mDraggingTop && !mDraggingBottom) {
-                                dragDistanceSize[1][1] = 0.0f;
-                                dragDistanceSize[1][2] = 0.0f;
-                                dragDistancePos[1][1] = 0.0f;
-                                dragDistancePos[1][2] = 0.0f;
-                            } else if (mDraggingTop) {
-                                if (mSelected->aspectRatio()) {
-                                    dragDistancePos[1][0] = -dragDistanceSize[0][0];
-                                    dragDistancePos[1][1] = 0.0f;
-                                    dragDistancePos[1][2] = -dragDistanceSize[0][2];
-                                } else {
-                                    dragDistancePos[1][1] = dragDistanceSize[1][1];
-                                    dragDistancePos[1][2] = dragDistanceSize[1][2];
-                                }
-                                dragDistanceSize[1][1] *= -1.0f;
-                                dragDistanceSize[1][2] *= -1.0f;
-                            }
-
-                            pos += dragDistancePos;
-                            size += dragDistanceSize;
-                        }
-
-                        mSelected->setSize(size);
-                        mSelected->setPos(pos);
-
-                        if (io.MouseReleased[0]) {
-                            mSelected->applyGeometry();
-                            mDragging = false;
-                        }
-                    }
-
-                    if (io.MouseReleased[0]) {
-                        mMouseDown = false;
-                        mDraggingLeft = false;
-                        mDraggingRight = false;
-                        mDraggingTop = false;
-                        mDraggingBottom = false;
-                    }
-                }
 
                 if (mSelected) {
                     mSelected->render();
@@ -396,6 +194,8 @@ namespace Tools {
 
     bool WidgetFile::render()
     {
+        constexpr float borderSize = 10.0f;
+
         bool open = true;
 
         if (mEditor.BeginResourceFile(this, mPath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &open)) {
@@ -416,12 +216,13 @@ namespace Tools {
             }
 
             if (mEditor.beginContent()) {
+
                 pos = ImGui::GetWindowPos();
                 ImVec2 min = ImGui::GetWindowContentRegionMin();
                 ImVec2 max = ImGui::GetWindowContentRegionMax();
                 ImVec2 size = max - min;
                 pos += min;
-                InterfacesVector renderPos = mWidgetManager.window().osWindow()->renderPos();
+                InterfacesVector renderPos = static_cast<Window::OSWindow *>(ImGui::GetWindowViewport()->PlatformHandle)->renderPos();
                 pos -= { static_cast<float>(renderPos.x), static_cast<float>(renderPos.y) };
 
                 ImVec2 mousePos = ImGui::GetMousePos();
@@ -436,16 +237,217 @@ namespace Tools {
                 }
 
                 ImGui::Image((void *)mRenderTarget->texture()->resourceBlock(), size);
+
+                ImGui::GetWindowDrawList()->PushClipRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+
+                Widgets::WidgetBase *hoveredWidget = nullptr;
+                if (!mDragging)
+                    hoveredWidget = mEditor.handleManagerInteractions(mWidgetManager, pos);
+                if (hoveredWidget)
+                    mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>());
+                renderHierarchy(&hoveredWidget);
+                renderSelection(pos, hoveredWidget);
+
+                ImGuiIO &io = ImGui::GetIO();
+
+                Rect2i screenSpace = mWidgetManager.getClientSpace();
+                screenSpace.mTopLeft = { static_cast<int>(pos.x), static_cast<int>(pos.y) };
+
+                if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+                    screenSpace.mTopLeft += mWidgetManager.getScreenSpace().mTopLeft;
+
+                if (mSelected) {
+
+                    Vector2 mouse = ImGui::GetMousePos();
+                    Vector2 dragDistance = mouse - Vector2 { io.MouseClickedPos[0] };
+
+                    Widgets::WidgetBase *selectedWidget = mSelected->widget();
+
+                    mEditor.renderWidgetBorders(selectedWidget, screenSpace.mTopLeft, IM_COL32(255, 255, 255, 255));
+
+                    Vector3 absoluteSize = selectedWidget->getAbsoluteSize();
+                    Vector2 absolutePos = selectedWidget->getAbsolutePosition() + Vector2 { screenSpace.mTopLeft };
+
+                    Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
+
+                    bool rightBorder = false, leftBorder = false, topBorder = false, bottomBorder = false;
+
+                    bool hoveredWithBorder = selectedWidget->containsPoint(mouse, screenSpace, borderSize) && ImGui::IsWindowHovered();
+
+                    if (!mDragging && hoveredWithBorder) {
+
+                        leftBorder = abs(mouse.x - bounds.left()) < borderSize;
+                        rightBorder = abs(mouse.x - bounds.right()) < borderSize;
+                        topBorder = abs(mouse.y - bounds.top()) < borderSize;
+                        bottomBorder = abs(mouse.y - bounds.bottom()) < borderSize;
+
+                        if (mSelected->aspectRatio()) {
+                            if (topBorder || leftBorder) {
+                                leftBorder = !rightBorder;
+                                topBorder = !bottomBorder;
+                            }
+                            if (bottomBorder || rightBorder) {
+                                rightBorder = !leftBorder;
+                                bottomBorder = !topBorder;
+                            }
+                        }
+
+                        if (rightBorder || leftBorder || topBorder || bottomBorder) {
+                            hoveredWidget = selectedWidget;
+                        }
+
+                        if (io.MouseClicked[0]) {
+                            mMouseDown = true;
+                            mDraggingLeft = leftBorder;
+                            mDraggingRight = rightBorder;
+                            mDraggingTop = topBorder;
+                            mDraggingBottom = bottomBorder;
+                        }
+                    }
+
+                    bool left = leftBorder || mDraggingLeft;
+                    bool right = rightBorder || mDraggingRight;
+                    bool top = topBorder || mDraggingTop;
+                    bool bottom = bottomBorder || mDraggingBottom;
+                    if (left || right) {
+                        if (top || bottom) {
+                            if (top == left) {
+                                ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNWSE);
+                            } else {
+                                ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNESW);
+                            }
+                        } else {
+                            ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW);
+                        }
+                    } else {
+                        if (top || bottom) {
+                            ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNS);
+                        } else {
+                            if (hoveredWithBorder && selectedWidget == mWidgetManager.hoveredWidget())
+                                ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeAll);
+                        }
+                    }
+
+                    if (mMouseDown && dragDistance.length() >= io.MouseDragThreshold && !mDragging) {
+                        mSelected->saveGeometry();
+                        mDragging = true;
+                    }
+
+                    enum ResizeMode {
+                        RELATIVE,
+                        ABSOLUTE
+                    };
+
+                    ResizeMode resizeMode = RELATIVE;
+                    if (io.KeyShift) {
+                        resizeMode = ABSOLUTE;
+                    }
+
+                    if (mDragging) {
+
+                        auto [pos, size] = mSelected->savedGeometry();
+
+                        Vector3 parentSize = mSelected->widget()->getParent() ? mSelected->widget()->getParent()->getAbsoluteSize() : Vector3 { Vector2 { screenSpace.mSize }, 1.0f };
+
+                        Vector2 relDragDistance = dragDistance / parentSize.xy();
+
+                        Matrix3 dragDistanceSize;
+
+                        switch (resizeMode) {
+                        case RELATIVE:
+                            dragDistanceSize = Matrix3 {
+                                relDragDistance.x, 0, 0,
+                                0, relDragDistance.y, 0,
+                                0, 0, 0
+                            };
+                            break;
+                        case ABSOLUTE:
+                            dragDistanceSize = Matrix3 {
+                                0, 0, dragDistance.x / parentSize.z,
+                                0, 0, dragDistance.y / parentSize.z,
+                                0, 0, 0
+                            };
+                            break;
+                        }
+
+                        if (!mDraggingLeft && !mDraggingRight && !mDraggingTop && !mDraggingBottom) {
+                            pos += dragDistanceSize;
+                        } else {
+                            Matrix3 dragDistancePos { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                            if (!mDraggingLeft && !mDraggingRight) {
+                                dragDistanceSize[0][0] = 0.0f;
+                                dragDistanceSize[0][2] = 0.0f;
+                                dragDistancePos[0][0] = 0.0f;
+                                dragDistancePos[0][2] = 0.0f;
+                            } else if (mDraggingLeft) {
+                                dragDistancePos[0][0] = dragDistanceSize[0][0];
+                                dragDistancePos[0][2] = dragDistanceSize[0][2];
+                                dragDistanceSize[0][0] *= -1.0f;
+                                dragDistanceSize[0][2] *= -1.0f;
+                            }
+                            if (!mDraggingTop && !mDraggingBottom) {
+                                dragDistanceSize[1][1] = 0.0f;
+                                dragDistanceSize[1][2] = 0.0f;
+                                dragDistancePos[1][1] = 0.0f;
+                                dragDistancePos[1][2] = 0.0f;
+                            } else if (mDraggingTop) {
+                                if (mSelected->aspectRatio()) {
+                                    dragDistancePos[1][0] = -dragDistanceSize[0][0];
+                                    dragDistancePos[1][1] = 0.0f;
+                                    dragDistancePos[1][2] = -dragDistanceSize[0][2];
+                                } else {
+                                    dragDistancePos[1][1] = dragDistanceSize[1][1];
+                                    dragDistancePos[1][2] = dragDistanceSize[1][2];
+                                }
+                                dragDistanceSize[1][1] *= -1.0f;
+                                dragDistanceSize[1][2] *= -1.0f;
+                            }
+
+                            pos += dragDistancePos;
+                            size += dragDistanceSize;
+                        }
+
+                        mSelected->setSize(size);
+                        mSelected->setPos(pos);
+
+                        if (io.MouseReleased[0]) {
+                            mSelected->applyGeometry();
+                            mDragging = false;
+                        }
+                    }
+
+                    if (io.MouseReleased[0]) {
+                        mMouseDown = false;
+                        mDraggingLeft = false;
+                        mDraggingRight = false;
+                        mDraggingTop = false;
+                        mDraggingBottom = false;
+                    }
+                }
+
+                Widgets::WidgetBase *pointerEventTargetWidget = mWidgetManager.pointerEventTargetWidget();
+                if (pointerEventTargetWidget)
+                    WidgetEditor::renderWidgetBorders(pointerEventTargetWidget, screenSpace.mTopLeft, IM_COL32(127, 100, 10, 255));
+
+                Widgets::WidgetBase *focusedWidget = mWidgetManager.focusedWidget();
+                if (focusedWidget)
+                    WidgetEditor::renderWidgetBorders(focusedWidget, screenSpace.mTopLeft, IM_COL32(255, 200, 10, 255));
+
+                if (hoveredWidget) {
+                    WidgetSettings *hoveredSettings = &mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>()).first->second;
+
+                    if (!mDragging && hoveredSettings != mSelected) {
+                        WidgetEditor::renderWidgetBorders(hoveredWidget, screenSpace.mTopLeft, IM_COL32(127, 127, 127, 255));
+                    }
+
+                    if (io.MouseReleased[0] && !mDragging) {
+                        mSelected = hoveredSettings;
+                    }
+                }
+
+                ImGui::GetWindowDrawList()->PopClipRect();
             }
             ImGui::End();
-
-            Widgets::WidgetBase *hoveredWidget = nullptr;
-            if (!mDragging)
-                hoveredWidget = mEditor.handleManagerInteractions(mWidgetManager, pos);
-            if (hoveredWidget)
-                mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>());
-            renderHierarchy(&hoveredWidget);
-            renderSelection(pos, hoveredWidget);
         }
         ImGui::End();
 

@@ -81,9 +81,10 @@ namespace Tools {
 
         ResourceEditor::render();
 
-        handleManagerInteractions(*mWidgetManager, mWidgetManager->getClientSpace().mTopLeft);
-
         if (ImGui::Begin("Game")) {
+
+            handleManagerInteractions(*mWidgetManager, mWidgetManager->getClientSpace().mTopLeft);
+
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("WidgetEditor")) {
 
@@ -118,7 +119,7 @@ namespace Tools {
 
     void WidgetEditor::renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color)
     {
-        ImDrawList *drawList = ImGui::GetForegroundDrawList();
+        ImDrawList *drawList = ImGui::GetWindowDrawList();
 
         ImGuiIO &io = ImGui::GetIO();
 
@@ -135,7 +136,7 @@ namespace Tools {
         Widgets::WidgetBase *hoveredWidget = manager.hoveredWidget();
 
         WidgetSettings *hoveredSettings = nullptr;
-        if (hoveredWidget) {            
+        if (hoveredWidget) {
             Rect2i screenSpace = manager.getClientSpace();
             screenSpace.mTopLeft = { static_cast<int>(pos.x), static_cast<int>(pos.y) };
 
