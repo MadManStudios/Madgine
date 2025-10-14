@@ -58,7 +58,6 @@ namespace Input {
 
 
 namespace Window {
-    struct WindowEventListener;
     struct OSWindow;
     struct WindowSettings;
 
@@ -67,7 +66,7 @@ namespace Window {
     struct RepaintEvent;
 
     
-    using WindowEvent = std::variant</*Input::NoEvent, */ ResizeEvent, CloseEvent, RepaintEvent, Input::KeyPressEvent, Input::KeyReleaseEvent, Input::PointerPressEvent, Input::PointerReleaseEvent, Input::PointerMoveEvent, Input::AxisEvent>;
+    using WindowEvent = std::variant<ResizeEvent, CloseEvent, RepaintEvent, Input::KeyPressEvent, Input::KeyReleaseEvent, Input::PointerPressEvent, Input::PointerReleaseEvent, Input::PointerMoveEvent, Input::AxisEvent>;
 
 }
 

@@ -42,9 +42,13 @@ namespace Window {
         return sDisplayGuard.display;
     }
 
+    struct LinuxWindow;
+
+    extern std::unordered_map<::Window, LinuxWindow> sWindows;
+
     struct LinuxWindow final : OSWindow {
-        LinuxWindow(::Window hwnd, WindowEventListener *listener, const InterfacesVector &size)
-            : OSWindow(hwnd, listener)
+        LinuxWindow(::Window hwnd, const InterfacesVector &size)
+            : OSWindow(hwnd)
             , mSize(size)
         {
         }
@@ -65,6 +69,8 @@ namespace Window {
 
         bool handle(const XEvent &e)
         {
+            bool handled = true;
+
             switch (e.type) {
             case MotionNotify: {
                 const XMotionEvent &xme = e.xmotion;
@@ -104,9 +110,14 @@ namespace Window {
                 break;
             }
             case DestroyNotify:
-                return false;
+                sWindows.erase(mHandle);
+                break;
+            default:
+                handled = false;
+                break;
             }
-            return true;
+            return handled;
+
         }
 
         InterfacesVector mSize;
@@ -114,9 +125,9 @@ namespace Window {
         InterfacesVector mLastMousePosition;
     };
 
-    static std::unordered_map<::Window, LinuxWindow> sWindows;
+    std::unordered_map<::Window, LinuxWindow> sWindows;
 
-    void OSWindow::update()
+    void OSWindow::updateImpl()
     {
         // TODO: correct handling of different windows
         XEvent event;
@@ -124,8 +135,9 @@ namespace Window {
             XNextEvent(sDisplay(), &event);
             auto it = sWindows.find(event.xany.window);
             if (it != sWindows.end()) {
-                if (!it->second.handle(event))
-                    sWindows.erase(it);
+                if (!it->second.handle(event)) {
+
+                }
             }
         }
     }
@@ -281,7 +293,7 @@ namespace Window {
         return true;
     }
 
-    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
+    OSWindow *sCreateWindow(const WindowSettings &settings)
     {
         assert(sDisplay());
 
@@ -323,7 +335,7 @@ namespace Window {
             XWindowEvent(sDisplay(), handle, StructureNotifyMask, &event);
         } while (event.type != MapNotify);
 
-        auto pib = sWindows.try_emplace(handle, handle, listener, settings.mData.mSize);
+        auto pib = sWindows.try_emplace(handle, handle, settings.mData.mSize);
         assert(pib.second);
 
         return &pib.first->second;

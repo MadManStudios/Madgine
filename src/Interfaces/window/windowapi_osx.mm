@@ -32,8 +32,8 @@ namespace Window {
 
 
     struct OSXWindow : OSWindow {
-        OSXWindow(NSWindow *handle, WindowEventListener *listener)
-            : OSWindow((uintptr_t)handle, listener)
+        OSXWindow(NSWindow *handle)
+            : OSWindow((uintptr_t)handle)
             , mListener([[Cocoa_WindowListener alloc] init])
         {
             [mListener listen:this];
@@ -177,7 +177,7 @@ namespace Window {
         return false;
     }
 
-        void OSWindow::update()
+        void OSWindow::updateImpl()
     {
         NSEvent* ev;
         while (NULL != (ev = [NSApp nextEventMatchingMask: NSAnyEventMask untilDate: nil inMode: NSDefaultRunLoopMode dequeue: YES]))
@@ -300,7 +300,7 @@ namespace Window{
 
     static std::unordered_map<NSWindow *, OSXWindow> sWindows;
 
-    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
+    OSWindow *sCreateWindow(const WindowSettings &settings)
     {
         NSRect rect = NSMakeRect(0, 0, settings.mData.mSize.x, settings.mData.mSize.y);
         if (settings.mData.mPosition.x != -1 || settings.mData.mPosition.y != -1) {
@@ -343,7 +343,7 @@ namespace Window{
         [handle makeKeyAndOrderFront:nil];
         
         
-        auto pib = sWindows.try_emplace(handle, handle, listener);
+        auto pib = sWindows.try_emplace(handle, handle);
         assert(pib.second);
         
         return &pib.first->second;

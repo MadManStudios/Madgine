@@ -542,7 +542,7 @@ namespace Render {
             std::call_once(once, []() {
                 Engine::Window::WindowSettings settings;
                 settings.mHidden = true;
-                Window::OSWindow *tmp = Window::sCreateWindow(settings, nullptr);
+                Window::OSWindow *tmp = Window::sCreateWindow(settings);
 #    if WINDOWS
                 SurfaceHandle surface = GetDC((HWND)tmp->ptrHandle());
 #    elif LINUX

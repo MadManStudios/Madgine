@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Interfaces/window/windoweventlistener.h"
-
 #include "Madgine/render/rendercontextcollector.h"
 
 #include "mainwindowcomponentcollector.h"
@@ -45,8 +43,7 @@ namespace Window {
      * propagation and render order.
      *
      */
-    struct MADGINE_CLIENT_EXPORT MainWindow : WindowEventListener,
-                                              Threading::MadgineObject<MainWindow> {
+    struct MADGINE_CLIENT_EXPORT MainWindow : Threading::MadgineObject<MainWindow> {
         SERIALIZABLEUNIT(MainWindow)
 
         MainWindow(const WindowSettings &settings);
@@ -105,7 +102,7 @@ namespace Window {
         Threading::TaskQueue *taskQueue();
         void shutdown();
 
-        bool onWindowEvent(const WindowEvent &event) override;
+        bool onWindowEvent(const WindowEvent &event);
 
         // TESTING
         static void sTestScreens(size_t n);

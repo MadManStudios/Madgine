@@ -22,15 +22,21 @@ namespace Window {
         1.0f
     };
 
+    struct WindowsWindow;
+
+    extern std::unordered_map<HWND, WindowsWindow> sWindows;
+
     struct WindowsWindow final : OSWindow {
-        WindowsWindow(HWND hwnd, WindowEventListener *listener)
-            : OSWindow((uintptr_t)hwnd, listener)
+        WindowsWindow(HWND hwnd)
+            : OSWindow((uintptr_t)hwnd)
             , mKeyDown {}
         {
         }
 
-        bool handle(UINT msg, WPARAM wParam, LPARAM lParam, bool &ignore)
+        bool handle(UINT msg, WPARAM wParam, LPARAM lParam)
         {
+            bool handled = true;
+
             if (msg >= WM_MOUSEFIRST && msg <= WM_MOUSELAST) {
                 InterfacesVector windowPos = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
                 InterfacesVector screenPos = windowPos + renderPos();
@@ -97,7 +103,7 @@ namespace Window {
                     onEvent(CloseEvent {});
                     break;
                 case WM_DESTROY:
-                    return false;
+                    sWindows.erase((HWND)mHandle);
                     break;
                 case WM_PAINT: {
                     PAINTSTRUCT ps;
@@ -119,17 +125,18 @@ namespace Window {
                     break;
                 }
                 case WM_SYSCOMMAND:
-                    if (wParam == SC_KEYMENU)
-                        ignore = true;
+                    if (wParam != SC_KEYMENU)
+                        handled = false;
                     break;
                 case WM_SETCURSOR:
                     break;
-                    //default:
+                default:
+                    handled = false;
                     //LOG_WARNING("Unhandled Event type: " << msg);
                 }
             }
 
-            return true;
+            return handled;
         }
 
         Input::ControlKeyState controlKeyState() const
@@ -146,7 +153,7 @@ namespace Window {
         bool mMinimized = false;
     };
 
-    void OSWindow::update()
+    void OSWindow::updateImpl()
     {
         MSG msg;
         while (PeekMessage(&msg, (HWND)mHandle, 0U, 0U, PM_REMOVE)) {
@@ -400,7 +407,7 @@ namespace Window {
         return wcex.lpszClassName;
     }
 
-    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
+    OSWindow *sCreateWindow(const WindowSettings &settings)
     {
         HWND handle = (HWND)settings.mHandle;
         if (!handle) {
@@ -457,7 +464,7 @@ namespace Window {
 
         Input::setupRawInput(handle);
 
-        auto pib = sWindows.try_emplace(handle, handle, listener);
+        auto pib = sWindows.try_emplace(handle, handle);
         assert(pib.second);
 
         return &pib.first->second;
@@ -488,16 +495,17 @@ namespace Window {
 
     LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
-        bool ignore = false;
+        bool handled = false;
         auto it = sWindows.find(hwnd);
         if (it != sWindows.end()) {
             if (msg == WM_DISPLAYCHANGE) {
                 if (it == sWindows.begin())
                     updateMonitors();
-            } else if (!it->second.handle(msg, wParam, lParam, ignore))
-                sWindows.erase(it);
+            } else {
+                handled = it->second.handle(msg, wParam, lParam);
+            }
         }
-        if (ignore)
+        if (handled)
             return 0;
         return DefWindowProc(hwnd, msg, wParam, lParam);
     }

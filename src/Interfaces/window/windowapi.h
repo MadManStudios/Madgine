@@ -1,7 +1,5 @@
 #pragma once
 
-#include "windoweventlistener.h"
-
 #include "../input/cursoricons.h"
 #include "../input/inputevents.h"
 
@@ -29,13 +27,22 @@ namespace Window {
 
     struct INTERFACES_EXPORT OSWindow {
 
-        OSWindow(uintptr_t handle, WindowEventListener *listener)
+        OSWindow(uintptr_t handle)
             : mHandle(handle)
-            , mListener(listener)
         {
         }
 
-        void update();
+        std::optional<WindowEvent> update() {
+            if (mPendingEvents.empty()) {
+                updateImpl();
+            }
+            if (!mPendingEvents.empty()) {
+                WindowEvent event = mPendingEvents.front();
+                mPendingEvents.erase(mPendingEvents.begin());
+                return event;
+            }
+            return {};
+        }
 
         uintptr_t intHandle() const
         {
@@ -91,19 +98,21 @@ namespace Window {
         static bool setClipboardString(std::string_view s);
 
     protected:
-        bool onEvent(const WindowEvent &event)
+        void updateImpl();
+
+        void onEvent(const WindowEvent &event)
         {
-            return mListener->onWindowEvent(event);
+            mPendingEvents.push_back(event);
         }
 
     protected:
         uintptr_t mHandle;
 
-    private:
-        WindowEventListener *mListener;
+    private:        
+        std::vector<WindowEvent> mPendingEvents;
     };
 
-    INTERFACES_EXPORT OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener);
+    INTERFACES_EXPORT OSWindow *sCreateWindow(const WindowSettings &settings);
 
     struct MonitorInfo {
         InterfacesVector mPosition;

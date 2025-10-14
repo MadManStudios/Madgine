@@ -53,8 +53,8 @@ namespace Window {
             return (static_cast<EmscriptenWindow *>(userData)->*f)(args...);
         }
 
-        EmscriptenWindow(EGLSurface surface, WindowEventListener *listener)
-            : OSWindow((uintptr_t)surface, listener)
+        EmscriptenWindow(EGLSurface surface)
+            : OSWindow((uintptr_t)surface)
             , mKeyDown {}
         {
             EGLint width;
@@ -113,22 +113,24 @@ namespace Window {
             InterfacesVector position = { mouseEvent->targetX, mouseEvent->targetY };
             InterfacesVector screenPosition = { mouseEvent->screenX, mouseEvent->screenY };
 
-            bool handled = false;
+            bool handled = true;
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_MOUSEMOVE:
-                handled = onEvent(Input::PointerMoveEvent{ position, screenPosition,
+                onEvent(Input::PointerMoveEvent { position, screenPosition,
                     { mouseEvent->movementX, mouseEvent->movementY } });
                 break;
             case EMSCRIPTEN_EVENT_MOUSEDOWN:
                 focus();
-                handled = onEvent(Input::PointerPressEvent{ position, screenPosition,
+                onEvent(Input::PointerPressEvent { position, screenPosition,
                     convertMouseButton(mouseEvent->button) });
                 break;
             case EMSCRIPTEN_EVENT_MOUSEUP:
-                handled = onEvent(Input::PointerReleaseEvent{ position, screenPosition,
+                onEvent(Input::PointerReleaseEvent { position, screenPosition,
                     convertMouseButton(mouseEvent->button) });
                 break;
+            default:
+                handled = false;
             }
 
             mLastMousePosition = position;
@@ -272,22 +274,30 @@ namespace Window {
 
             char text = 0;
 
+            bool handled = true;
+
             switch (eventType) {
             case EMSCRIPTEN_EVENT_KEYDOWN:
                 mKeyDown[key] = true;
                 if (keyEvent->key[1] == '\0')
                     text = keyEvent->key[0];
-                return onEvent(Input::KeyPressEvent{ key, text, controlKeyState() });
+                onEvent(Input::KeyPressEvent { key, text, controlKeyState() });
+                break;
             case EMSCRIPTEN_EVENT_KEYUP:
                 mKeyDown[key] = false;
-                return onEvent(Input::KeyReleaseEvent{ key, text, controlKeyState() });
+                onEvent(Input::KeyReleaseEvent { key, text, controlKeyState() });
+                break;
+            default:
+                handled = false;
             }
 
-            return EM_FALSE;
+            return handled;
         }
 
         EM_BOOL handleWheelEvent(int eventType, const EmscriptenWheelEvent *wheelEvent)
         {
+
+            bool handled = true;
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_WHEEL: {
@@ -301,11 +311,13 @@ namespace Window {
                 case DOM_DELTA_PAGE:
                     delta *= 1068.0f;
                 }
-                return onEvent(Input::AxisEvent { Input::AxisEvent::WHEEL, -delta / 120.0f });
-            }
+                onEvent(Input::AxisEvent { Input::AxisEvent::WHEEL, -delta / 120.0f });
+            } break;
+            default:
+                handled = false;
             }
 
-            return EM_FALSE;
+            return handled;
         }
 
         EM_BOOL handleTouchEvent(int eventType, const EmscriptenTouchEvent *touchEvent)
@@ -313,15 +325,15 @@ namespace Window {
             InterfacesVector position = { touchEvent->touches[0].targetX, touchEvent->touches[0].targetY };
             InterfacesVector screenPosition = { touchEvent->touches[0].screenX, touchEvent->touches[0].screenY };
 
-            bool handled = false;
+            bool handled = true;
 
             switch (eventType) {
             case EMSCRIPTEN_EVENT_TOUCHMOVE:
                 if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
-                    onEvent(Input::PointerPressEvent{ mTouchStartPosition, mTouchStartScreenPosition, Input::MouseButton::LEFT_BUTTON });
+                    onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartScreenPosition, Input::MouseButton::LEFT_BUTTON });
                     mPendingTouch = false;
                 }
-                handled = onEvent(Input::PointerMoveEvent{ position, screenPosition, position - mLastMousePosition });
+                onEvent(Input::PointerMoveEvent { position, screenPosition, position - mLastMousePosition });
                 break;
             case EMSCRIPTEN_EVENT_TOUCHSTART:
                 focus();
@@ -329,17 +341,19 @@ namespace Window {
                 mTouchStartPosition = position;
                 mTouchStartTimestamp = touchEvent->timestamp;
                 mPendingTouch = true;
-                onEvent(Input::PointerMoveEvent{ position, screenPosition, position - mLastMousePosition });
+                onEvent(Input::PointerMoveEvent { position, screenPosition, position - mLastMousePosition });
                 break;
-            case EMSCRIPTEN_EVENT_TOUCHEND:
+            case EMSCRIPTEN_EVENT_TOUCHEND: {
                 double milliseconds = touchEvent->timestamp - mTouchStartTimestamp;
                 Input::MouseButton::MouseButton button = milliseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
                 if (mPendingTouch) {
-                    handled |= onEvent(Input::PointerPressEvent{ mTouchStartPosition, mTouchStartScreenPosition, button });
+                    onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartScreenPosition, button });
                     mPendingTouch = false;
                 }
-                handled |= onEvent(Input::PointerReleaseEvent{ position, screenPosition, button });
-                break;
+                onEvent(Input::PointerReleaseEvent { position, screenPosition, button });
+            } break;
+            default:
+                handled = false;
             }
 
             mLastMousePosition = position;
@@ -372,7 +386,7 @@ namespace Window {
 
     static std::unordered_map<EGLSurface, EmscriptenWindow> sWindows;
 
-    void OSWindow::update()
+    void OSWindow::updateImpl()
     {
     }
 
@@ -478,8 +492,7 @@ namespace Window {
         EM_ASM(
             if (document.activeElement == Module.canvas) {
                 Module.input.focus();
-            }
-        );        
+            });
     }
 
     void OSWindow::releaseSoftwareKeyboard()
@@ -488,7 +501,7 @@ namespace Window {
         EM_ASM(
             if (document.activeElement == Module.input) {
                 Module.canvas.focus();
-            });     
+            });
     }
 
     void OSWindow::setCursorIcon(Input::CursorIcon icon)
@@ -547,7 +560,7 @@ namespace Window {
         return true;
     }
 
-    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
+    OSWindow *sCreateWindow(const WindowSettings &settings)
     {
         assert(sDisplay);
 
@@ -579,7 +592,7 @@ namespace Window {
                 return nullptr;
         }
 
-        auto pib = sWindows.try_emplace(handle, handle, listener);
+        auto pib = sWindows.try_emplace(handle, handle);
         assert(pib.second);
 
         EmscriptenWindow *window = &pib.first->second;

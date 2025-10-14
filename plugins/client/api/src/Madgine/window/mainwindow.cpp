@@ -174,7 +174,7 @@ namespace Window {
             }
         }
 
-        mOsWindow = sCreateWindow(settings, this);
+        mOsWindow = sCreateWindow(settings);
         mRenderWindow = mRenderContext->createRenderWindow(mOsWindow);
 
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components()) {
@@ -242,10 +242,14 @@ namespace Window {
             co_await mRenderContext->render();
             {
                 PROFILE_NAMED("Window Update");
-                mOsWindow->update();
+                while (std::optional<WindowEvent> event = mOsWindow ? mOsWindow->update() : std::nullopt) {
+                    onWindowEvent(*event);
+                }
             }
             for (ToolWindow &window : mToolWindows)
-                window.osWindow()->update();
+                while (std::optional<WindowEvent> event = window.osWindow()->update()) {
+                    window.onWindowEvent(*event);
+                }
             now += (1000000us / 1200);
             co_await 0ms;
         }
@@ -413,6 +417,7 @@ namespace Window {
                                           return true;
                                   }
                                   storeWindowData();
+                                  mOsWindow->destroy();
                                   mOsWindow = nullptr;
                                   mTaskQueue.stop();
                                   return true;

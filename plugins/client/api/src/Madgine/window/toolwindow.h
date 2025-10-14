@@ -1,11 +1,9 @@
 #pragma once
 
-#include "Interfaces/window/windoweventlistener.h"
-
 namespace Engine {
 namespace Window {
 
-    struct MADGINE_CLIENT_EXPORT ToolWindow : WindowEventListener {    
+    struct MADGINE_CLIENT_EXPORT ToolWindow {    
         ToolWindow(MainWindow &parent, const WindowSettings &settings);
         virtual ~ToolWindow();
 
@@ -15,8 +13,7 @@ namespace Window {
 
         Render::RenderTarget *getRenderer();
 
-    protected:
-        bool onWindowEvent(const WindowEvent &event) override;
+        bool onWindowEvent(const WindowEvent &event);
 
     private:
         MainWindow &mParent;

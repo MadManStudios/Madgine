@@ -33,9 +33,13 @@ namespace Window {
     static constexpr float sTouchMoveThreshold = 10.0f;
     static constexpr int64_t sTouchRightclickThreshold = 300000000.0;
 
+    struct AndroidWindow;
+
+    extern std::optional<AndroidWindow> sWindow;
+
     struct AndroidWindow final : OSWindow {
-        AndroidWindow(ANativeWindow *window, WindowEventListener *listener)
-            : OSWindow((uintptr_t)window, listener)
+        AndroidWindow(ANativeWindow *window)
+            : OSWindow((uintptr_t)window)
         {
         }
 
@@ -48,7 +52,7 @@ namespace Window {
                 static_cast<int>(AMotionEvent_getY(event, pointer_index))
             };
 
-            bool handled = false;
+            bool handled = true;
 
             switch (action & AMOTION_EVENT_ACTION_MASK) {
             case AMOTION_EVENT_ACTION_DOWN:
@@ -61,17 +65,17 @@ namespace Window {
                 int64_t nanoseconds = AMotionEvent_getEventTime(event) - mTouchStartTimestamp;
                 Input::MouseButton::MouseButton button = nanoseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
                 if (mPendingTouch) {
-                    handled |= onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, button });
+                    onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, button });
                     mPendingTouch = false;
                 }
-                handled |= onEvent(Input::PointerReleaseEvent{ position, position, button });
+                onEvent(Input::PointerReleaseEvent{ position, position, button });
             } break;
             case AMOTION_EVENT_ACTION_MOVE:
                 if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
                     onEvent(Input::PointerPressEvent{ mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
                     mPendingTouch = false;
                 }
-                handled = onEvent(Input::PointerMoveEvent{ position, position, position - mLastKnownMousePos });
+                onEvent(Input::PointerMoveEvent{ position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_CANCEL:
                 LOG("Motion Cancel");
@@ -98,6 +102,7 @@ namespace Window {
                 LOG("Motion Hover Exit");
                 break;
             default:
+                handled = false;
                 LOG_ERROR("Unknown Motion Event Type: " << (action & AMOTION_EVENT_ACTION_MASK));
                 break;
             }
@@ -227,19 +232,20 @@ namespace Window {
             }
              
 
-            bool handled = false;
+            bool handled = true;
 
             switch (action) {
             case AKEY_EVENT_ACTION_DOWN:
-                handled = onEvent(Input::KeyPressEvent{ key, text });
+                onEvent(Input::KeyPressEvent{ key, text });
                 break;
             case AKEY_EVENT_ACTION_UP:
-                handled = onEvent(Input::KeyReleaseEvent{ key, text });
+                onEvent(Input::KeyReleaseEvent{ key, text });
                 break;
             case AKEY_EVENT_ACTION_MULTIPLE:
                 LOG("Multiple Keys");
                 break;
             default:
+                handled = false;
                 LOG_ERROR("Unknown Key Event Type: " << action);
                 break;
             }
@@ -259,8 +265,7 @@ namespace Window {
         {
             assert(sNativeWindow == window);
             sNativeWindow = nullptr;
-            if (this)
-                mHandle = 0;
+            sWindow.reset();
         }
 
         void onNativeWindowResized(ANativeWindow *window)
@@ -322,7 +327,7 @@ namespace Window {
         InterfacesVector mContentSize;
     };
 
-    static std::optional<AndroidWindow> sWindow;
+    std::optional<AndroidWindow> sWindow;
 
     template <auto f, typename... Args>
     static void delegate(ANativeActivity *activity, Args... args)
@@ -349,8 +354,12 @@ namespace Window {
         sWindow->mResizeNeeded.test_and_set();
     }
 
-    void OSWindow::update()
+    void OSWindow::updateImpl()
     {
+        if (static_cast<AndroidWindow *>(this)->mResizeNeeded.test() && sWindow->mHandle != 0) {
+            static_cast<AndroidWindow *>(this)->mResizeNeeded.clear();
+            onEvent(ResizeEvent { renderSize() });
+        }
         if (sQueue) {
             AInputEvent *event = NULL;
             while (AInputQueue_getEvent(sQueue, &event) >= 0) {
@@ -371,10 +380,6 @@ namespace Window {
                 }
                 AInputQueue_finishEvent(sQueue, event, handled);
             }
-        }
-        if (static_cast<AndroidWindow *>(this)->mResizeNeeded.test() && sWindow->mHandle != 0) {
-            static_cast<AndroidWindow *>(this)->mResizeNeeded.clear();
-            onEvent(ResizeEvent { renderSize() });
         }
     }
 
@@ -458,7 +463,8 @@ namespace Window {
 
     void OSWindow::destroy()
     {
-        sWindow.reset();
+        //sWindow.reset();
+        throw 0;
     }
 
     void OSWindow::setCursorIcon(Input::CursorIcon icon)
@@ -528,12 +534,12 @@ namespace Window {
         ANativeActivity_hideSoftInput(sActivity, ANATIVEACTIVITY_HIDE_SOFT_INPUT_IMPLICIT_ONLY);
     }
 
-    OSWindow *sCreateWindow(const WindowSettings &settings, WindowEventListener *listener)
+    OSWindow *sCreateWindow(const WindowSettings &settings)
     {
         sNativeWindow.wait();
 
         assert(!sWindow);
-        sWindow.emplace(sNativeWindow, listener);
+        sWindow.emplace(sNativeWindow);
 
         return &*sWindow;
     }

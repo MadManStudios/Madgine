@@ -15,7 +15,7 @@ namespace Window {
     ToolWindow::ToolWindow(MainWindow &parent, const WindowSettings &settings)
         : mParent(parent)
     {
-        mOsWindow = sCreateWindow(settings, this);
+        mOsWindow = sCreateWindow(settings);
 
         mRenderWindow = parent.getRenderer()->createRenderWindow(mOsWindow);
     }
