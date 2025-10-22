@@ -27,8 +27,6 @@
 #include "Meta/math/bounds.h"
 #include "imgui/imguiaddons.h"
 
-#include "Interfaces/window/windowapi.h"
-
 #include "Madgine_Tools/inspector/inspector.h"
 
 namespace Engine {
@@ -222,8 +220,8 @@ namespace Tools {
                 ImVec2 max = ImGui::GetWindowContentRegionMax();
                 ImVec2 size = max - min;
                 pos += min;
-                InterfacesVector renderPos = static_cast<Window::OSWindow *>(ImGui::GetWindowViewport()->PlatformHandle)->renderPos();
-                pos -= { static_cast<float>(renderPos.x), static_cast<float>(renderPos.y) };
+                ImVec2 renderPos = ImGui::GetWindowViewport()->Pos;
+                pos -= renderPos;
 
                 ImVec2 mousePos = ImGui::GetMousePos();
                 ImVec2 windowPos = mousePos - ImGui::GetWindowPos();
@@ -232,7 +230,7 @@ namespace Tools {
 
                 mWidgetManager.injectPointerMove({ { static_cast<int>(windowPos.x), static_cast<int>(windowPos.y) }, { static_cast<int>(mousePos.x), static_cast<int>(mousePos.y) }, { 0, 0 } });
 
-                if (mRenderTarget->resize(vSize)) {
+                if (vSize.x > 0 && vSize.y > 0 && mRenderTarget->resize(vSize)) {
                     mWidgetManager.onResize({ { 0, 0 }, vSize });
                 }
 
