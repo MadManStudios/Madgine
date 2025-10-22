@@ -16,7 +16,7 @@ struct EnumMetaTable {
         if (isBase(value)) {
             return mBase->toString(value);
         } else {
-            assert(value > mMin && value < mMax);
+            assert(value >= mMin && value < mMax);
             return mValueNames[value - mMin];
         }
     }
