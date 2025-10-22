@@ -191,12 +191,12 @@ namespace NodeGraph {
         }
     }
 
-    uint32_t LibraryNode::dataProviderBaseCount(uint32_t group) const
+    uint32_t LibraryNode::dataOutBaseCount(uint32_t group) const
     {
         return mBehavior.resultTypes().size();
     }
 
-    ExtendedValueTypeDesc LibraryNode::dataProviderType(uint32_t index, uint32_t group, bool bidir) const
+    ExtendedValueTypeDesc LibraryNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
     {
         return mBehavior.resultTypes()[index];
     }

@@ -242,75 +242,6 @@ namespace Tools {
         return ImGui::IsItemHovered();
     }
 
-    ImVec2 DataProviderPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
-    {
-        ImGui::Spring();
-        if (name) {
-            ImGui::TextUnformatted(name);
-            ImGui::Spring(0);
-        }
-        return DataInstancePinIcon(type, mask, connected);
-    }
-
-    bool DataProviderPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
-    {
-        int id = 60000 * nodeId + NodeGraph::NodeBase::dataProviderId(pinId, group);
-        ed::BeginPin(id, ed::PinKind::Output);
-
-        ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
-
-        ImVec2 pos = DataProviderPin(name, type, mask, connected);
-        //ed::PinPivotRect(pos, pos);
-
-        ImGui::EndHorizontal();
-
-        ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
-
-        //ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
-
-        ImVec2 pivot = rect.GetBR() - ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
-
-        ed::PinPivotRect(pivot, pivot);
-
-        ed::EndPin();
-        return ImGui::IsItemHovered();
-    }
-
-    ImVec2 DataReceiverPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
-    {
-        ImVec2 pos = DataInstancePinIcon(type, mask, connected);
-        if (name) {
-            ImGui::Spring(0);
-            ImGui::TextUnformatted(name);
-        }
-        ImGui::Spring();
-        return pos;
-    }
-
-    bool DataReceiverPin(const char *name, size_t nodeId, size_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
-    {
-        int id = 60000 * nodeId + NodeGraph::NodeBase::dataReceiverId(pinId, group);
-        ed::BeginPin(id, ed::PinKind::Input);
-
-        ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
-
-        ImVec2 pos = DataReceiverPin(name, type, mask, connected);
-        //ed::PinPivotRect(pos, pos);
-
-        ImGui::EndHorizontal();
-
-        ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
-
-        //ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
-
-        ImVec2 pivot = rect.GetTL() + ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
-
-        ed::PinPivotRect(pivot, pivot);
-
-        ed::EndPin();
-        return ImGui::IsItemHovered();
-    }
-
     void HoverPin(ExtendedValueTypeDesc type)
     {
         ImVec2 cursor = ImGui::GetCursorPos();
@@ -391,24 +322,9 @@ namespace Tools {
                     hoveredPin = type;
             }
 
-            if (dragPin && dragPin->mType == NodeGraph::PinType::DataInstance && node->dataInVariadic(group) && dragPin->mDir == NodeGraph::PinDir::Out) {
+            if (dragPin && dragPin->mType == NodeGraph::PinType::Data && node->dataInVariadic(group) && dragPin->mDir == NodeGraph::PinDir::Out) {
                 uint32_t index = node->dataInCount(group);
                 if (DataInPin(node->dataInName(index).data(), nodeId, index, group, *dragType, node->dataInMask(index, group), {}))
-                    hoveredPin = *dragType;
-            }
-        }
-
-        for (uint32_t group = 0; group < node->dataReceiverGroupCount(); ++group) {
-            for (uint32_t index = 0; index < node->dataReceiverCount(group); ++index) {
-                ExtendedValueTypeDesc type = node->dataReceiverType(index, group);
-
-                if (DataReceiverPin(node->dataReceiverName(index, group).data(), nodeId, index, group, type, node->dataReceiverMask(index, group), !node->dataReceiverSources(index, group).empty()))
-                    hoveredPin = type;
-            }
-
-            if (dragPin && dragPin->mType == NodeGraph::PinType::Data && node->dataReceiverVariadic(group) && dragPin->mDir == NodeGraph::PinDir::Out) {
-                uint32_t index = node->dataReceiverCount(group);
-                if (DataReceiverPin(node->dataReceiverName(index, group).data(), nodeId, index, group, *dragType, node->dataReceiverMask(index, group), false))
                     hoveredPin = *dragType;
             }
         }
@@ -437,34 +353,17 @@ namespace Tools {
             }
         }
 
-        for (uint32_t group = 0; group < node->dataOutGroupCount(); ++group) {
+         for (uint32_t group = 0; group < node->dataOutGroupCount(); ++group) {
             for (uint32_t index = 0; index < node->dataOutCount(group); ++index) {
-                NodeGraph::Pin source = node->dataOutTarget(index, group);
-
                 ExtendedValueTypeDesc type = node->dataOutType(index, group);
 
-                if (DataOutPin(node->dataOutName(index, group).data(), nodeId, index, group, type, node->dataOutMask(index, group), static_cast<bool>(source)))
+                if (DataOutPin(node->dataOutName(index, group).data(), nodeId, index, group, type, node->dataOutMask(index, group), !node->dataOutTargets(index, group).empty()))
                     hoveredPin = type;
             }
 
-            if (dragPin && dragPin->mType == NodeGraph::PinType::DataInstance && node->dataOutVariadic(group) && dragPin->mDir == NodeGraph::PinDir::In) {
+            if (dragPin && dragPin->mType == NodeGraph::PinType::Data && node->dataOutVariadic(group) && dragPin->mDir == NodeGraph::PinDir::Out) {
                 uint32_t index = node->dataOutCount(group);
-                if (DataOutPin(node->dataOutName(index).data(), nodeId, index, group, *dragType, node->dataOutMask(index, group), {}))
-                    hoveredPin = *dragType;
-            }
-        }
-
-        for (uint32_t group = 0; group < node->dataProviderGroupCount(); ++group) {
-            for (uint32_t index = 0; index < node->dataProviderCount(group); ++index) {
-                ExtendedValueTypeDesc type = node->dataProviderType(index, group);
-
-                if (DataProviderPin(node->dataProviderName(index, group).data(), nodeId, index, group, type, node->dataProviderMask(index, group), !node->dataProviderTargets(index, group).empty()))
-                    hoveredPin = type;
-            }
-
-            if (dragPin && dragPin->mType == NodeGraph::PinType::Data && node->dataProviderVariadic(group) && dragPin->mDir == NodeGraph::PinDir::Out) {
-                uint32_t index = node->dataProviderCount(group);
-                if (DataProviderPin(node->dataProviderName(index, group).data(), nodeId, index, group, *dragType, node->dataProviderMask(index, group), false))
+                if (DataOutPin(node->dataOutName(index, group).data(), nodeId, index, group, *dragType, node->dataOutMask(index, group), false))
                     hoveredPin = *dragType;
             }
         }
@@ -504,15 +403,7 @@ namespace Tools {
             for (uint32_t dataIndex = 0; dataIndex < node->dataInCount(group); ++dataIndex) {
                 if (NodeGraph::Pin source = node->dataInSource(dataIndex, group)) {
                     uint32_t id = 60000 * nodeId + NodeGraph::NodeBase::dataInId(dataIndex, group);
-                    ed::Link(id, 60000 * source.mNode + NodeGraph::NodeBase::dataProviderId(source.mIndex, source.mGroup), id, DataColor(node->dataInMask(dataIndex, group)));
-                }
-            }
-        }
-        for (uint32_t group = 0; group < node->dataOutGroupCount(); ++group) {
-            for (uint32_t dataIndex = 0; dataIndex < node->dataOutCount(group); ++dataIndex) {
-                if (NodeGraph::Pin target = node->dataOutTarget(dataIndex, group)) {
-                    uint32_t id = 60000 * nodeId + NodeGraph::NodeBase::dataOutId(dataIndex, group);
-                    ed::Link(id, id, 60000 * target.mNode + NodeGraph::NodeBase::dataReceiverId(target.mIndex, target.mGroup), DataColor(node->dataOutMask(dataIndex, group)));
+                    ed::Link(id, 60000 * source.mNode + NodeGraph::NodeBase::dataOutId(source.mIndex, source.mGroup), id, DataColor(node->dataInMask(dataIndex, group)));
                 }
             }
         }

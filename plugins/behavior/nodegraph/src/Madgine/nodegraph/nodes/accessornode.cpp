@@ -92,12 +92,12 @@ namespace NodeGraph {
         }
     }
 
-    uint32_t AccessorNode::dataProviderBaseCount(uint32_t group) const
+    uint32_t AccessorNode::dataOutBaseCount(uint32_t group) const
     {
         return 1;
     }
 
-    ExtendedValueTypeDesc AccessorNode::dataProviderType(uint32_t index, uint32_t group, bool bidir) const
+    ExtendedValueTypeDesc AccessorNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
     {
         if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
             return (*accessor()->mType.mSecondary.mFunctionTable)->mReturnType;

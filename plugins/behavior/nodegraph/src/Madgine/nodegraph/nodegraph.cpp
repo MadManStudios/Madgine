@@ -40,7 +40,6 @@ SERIALIZETABLE_BEGIN(Engine::NodeGraph::NodeGraph)
 FIELD(mNodes, Serialize::ParentCreator<&Engine::NodeGraph::NodeGraph::readNode, &Engine::NodeGraph::NodeGraph::writeNode>)
 FIELD(mFlowOutPins)
 FIELD(mDataInPins)
-FIELD(mDataOutPins)
 FIELD(mLayoutData)
 FIELD(mNamedInputs)
 SERIALIZETABLE_END(Engine::NodeGraph::NodeGraph)
@@ -62,8 +61,6 @@ namespace NodeGraph {
     NodeGraph::NodeGraph(const NodeGraph &other)
         : mFlowInPins(other.mFlowInPins)
         , mFlowOutPins(other.mFlowOutPins)
-        , mDataReceiverPins(other.mDataReceiverPins)
-        , mDataProviderPins(other.mDataProviderPins)
         , mDataInPins(other.mDataInPins)
         , mDataOutPins(other.mDataOutPins)
         , mLayoutData(other.mLayoutData)
@@ -84,8 +81,6 @@ namespace NodeGraph {
         mFlowOutPins = other.mFlowOutPins;
         mDataInPins = other.mDataInPins;
         mDataOutPins = other.mDataOutPins;
-        mDataProviderPins = other.mDataProviderPins;
-        mDataReceiverPins = other.mDataReceiverPins;
         mNamedInputs = other.mNamedInputs;
 
         mLayoutData = other.mLayoutData;
@@ -117,16 +112,9 @@ namespace NodeGraph {
                         assert(!variadicCount || variadicCount == count);
                         variadicCount = count;
                     }
-                    if (group < node->dataOutGroupCount() && node->dataOutVariadic(group)) {
-                        size_t count = node->dataOutCount(group) - node->dataOutBaseCount(group);
-                        assert(!variadicCount || variadicCount == count);
-                        variadicCount = count;
-                    }
                     if (variadicCount) {
-                        if (node->dataProviderVariadic(group))
-                            node->mDataProviderPins[group].resize(node->dataProviderBaseCount(group) + variadicCount);
-                        if (node->dataReceiverVariadic(group))
-                            node->mDataReceiverPins[group].resize(node->dataReceiverBaseCount(group) + variadicCount);
+                        if (node->dataOutVariadic(group))
+                            node->mDataOutPins[group].resize(node->dataOutBaseCount(group) + variadicCount);
                     }
                 }
             }
@@ -142,22 +130,13 @@ namespace NodeGraph {
             i = 0;
             for (DataInPinPrototype &dataIn : mDataInPins) {
                 if (dataIn.mSource) {
-                    this->node(dataIn.mSource.mNode)->mDataProviderPins[dataIn.mSource.mGroup][dataIn.mSource.mIndex].mTargets.push_back({ 0, i });
-                }
-                ++i;
-            }
-
-            i = 0;
-            for (DataOutPinPrototype &dataOut : mDataOutPins) {
-                if (dataOut.mTarget) {
-                    this->node(dataOut.mTarget.mNode)->mFlowInPins[dataOut.mTarget.mGroup][dataOut.mTarget.mIndex].mSources.push_back({ 0, i });
+                    this->node(dataIn.mSource.mNode)->mDataOutPins[dataIn.mSource.mGroup][dataIn.mSource.mIndex].mTargets.push_back({ 0, i });
                 }
                 ++i;
             }
 
             std::vector<std::optional<FlowInPinPrototype>> inFlows;
-            std::vector<std::optional<DataProviderPinPrototype>> providerPins;
-            std::vector<std::optional<DataReceiverPinPrototype>> receiverPins;
+            std::vector<std::optional<DataOutPinPrototype>> outPins;
             for (NodeBase *node : mNodes | std::views::transform(projectionUniquePtrToPtr)) {
                 for (uint32_t group = 0; group < node->dataInGroupCount(); ++group) {
                     for (uint32_t i = 0; i < node->dataInCount(group); ++i) {
@@ -165,37 +144,18 @@ namespace NodeGraph {
                         if (pin) {
                             if (!pin.mNode) {
                                 if (pin.mGroup == 0) {
-                                    if (providerPins.size() <= pin.mIndex)
-                                        providerPins.resize(pin.mIndex + 1);
-                                    providerPins[pin.mIndex] = DataProviderPinPrototype { { { nodeIndex(node), i, group } } };
+                                    if (outPins.size() <= pin.mIndex)
+                                        outPins.resize(pin.mIndex + 1);
+                                    outPins[pin.mIndex] = DataOutPinPrototype { { { nodeIndex(node), i, group } } };
                                 } else {
                                     mNamedInputs[pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
                                 }
                             } else {
                                 NodeBase *targetNode = this->node(pin.mNode);
-                                if (targetNode->dataProviderCount(pin.mGroup) <= pin.mIndex) {
+                                if (targetNode->dataOutCount(pin.mGroup) <= pin.mIndex) {
                                     node->mDataInPins[group][i].mSource = {};
                                 } else {
-                                    targetNode->mDataProviderPins[pin.mGroup][pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
-                                }
-                            }
-                        }
-                    }
-                }
-                for (uint32_t group = 0; group < node->dataOutGroupCount(); ++group) {
-                    for (uint32_t i = 0; i < node->dataOutCount(group); ++i) {
-                        Pin pin = node->dataOutTarget(i, group);
-                        if (pin) {
-                            if (!pin.mNode) {
-                                if (receiverPins.size() <= pin.mIndex)
-                                    receiverPins.resize(pin.mIndex + 1);
-                                receiverPins[pin.mIndex] = DataReceiverPinPrototype { { { nodeIndex(node), i, group } } };
-                            } else {
-                                NodeBase *targetNode = this->node(pin.mNode);
-                                if (targetNode->mDataReceiverPins[pin.mGroup].size() <= pin.mIndex) {
-                                    node->mDataOutPins[group][i].mTarget = {};
-                                } else {
-                                    targetNode->mDataReceiverPins[pin.mGroup][pin.mIndex].mSources.push_back({ nodeIndex(node), i, group });
+                                    targetNode->mDataOutPins[pin.mGroup][pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
                                 }
                             }
                         }
@@ -224,21 +184,15 @@ namespace NodeGraph {
             for (const std::optional<FlowInPinPrototype> &pin : inFlows) {
                 assert(pin);
             }
-            for (const std::optional<DataProviderPinPrototype> &pin : providerPins) {
-                assert(pin);
-            }
-            for (const std::optional<DataReceiverPinPrototype> &pin : receiverPins) {
+            for (const std::optional<DataOutPinPrototype> &pin : outPins) {
                 assert(pin);
             }
             mFlowInPins.clear();
             std::transform(std::make_move_iterator(inFlows.begin()), std::make_move_iterator(inFlows.end()), std::back_inserter(mFlowInPins),
                 [](std::optional<FlowInPinPrototype> &&pin) { return FlowInPinPrototype { std::move(*pin) }; });
-            mDataProviderPins.clear();
-            std::transform(std::make_move_iterator(providerPins.begin()), std::make_move_iterator(providerPins.end()), std::back_inserter(mDataProviderPins),
-                [](std::optional<DataProviderPinPrototype> &&pin) { return DataProviderPinPrototype { std::move(*pin) }; });
-            mDataReceiverPins.clear();
-            std::transform(std::make_move_iterator(receiverPins.begin()), std::make_move_iterator(receiverPins.end()), std::back_inserter(mDataReceiverPins),
-                [](std::optional<DataReceiverPinPrototype> &&pin) { return DataReceiverPinPrototype { std::move(*pin) }; });
+            mDataOutPins.clear();
+            std::transform(std::make_move_iterator(outPins.begin()), std::make_move_iterator(outPins.end()), std::back_inserter(mDataOutPins),
+                [](std::optional<DataOutPinPrototype> &&pin) { return DataOutPinPrototype { std::move(*pin) }; });
         }
         return {};
     }
@@ -305,51 +259,16 @@ namespace NodeGraph {
             }
         }
 
-        for (uint32_t group = 0; group < node->mDataReceiverPins.size(); ++group) {
-            pin = 0;
-            size = node->mDataReceiverPins[group].size();
-            while (pin < size) {
-                const DataReceiverPinPrototype &receiver = node->mDataReceiverPins[group][pin];
-                std::vector<Pin> sources = receiver.mSources;
-                for (const Pin &source : sources) {
-                    disconnectDataOut(source);
-                }
-                uint32_t newSize = node->mDataReceiverPins[group].size();
-                if (size == newSize)
-                    ++pin;
-                else
-                    size = newSize;
-            }
-        }
-
         for (uint32_t group = 0; group < node->mDataOutPins.size(); ++group) {
             pin = 0;
             size = node->mDataOutPins[group].size();
             while (pin < size) {
-                const DataOutPinPrototype &dataOut = node->mDataOutPins[group][pin];
-                if (dataOut.mTarget) {
-                    disconnectDataOut({ index, pin });
-                    uint32_t newSize = node->mDataOutPins[group].size();
-                    if (size == newSize)
-                        ++pin;
-                    else
-                        size = newSize;
-                } else {
-                    ++pin;
-                }
-            }
-        }
-
-        for (uint32_t group = 0; group < node->mDataProviderPins.size(); ++group) {
-            pin = 0;
-            size = node->mDataProviderPins[group].size();
-            while (pin < size) {
-                const DataProviderPinPrototype &provider = node->mDataProviderPins[group][pin];
+                const DataOutPinPrototype &provider = node->mDataOutPins[group][pin];
                 std::vector<Pin> targets = provider.mTargets;
                 for (const Pin &target : targets) {
-                    disconnectDataIn(target);
+                    disconnectData(target);
                 }
-                uint32_t newSize = node->mDataProviderPins[group].size();
+                uint32_t newSize = node->mDataOutPins[group].size();
                 if (size == newSize)
                     ++pin;
                 else
@@ -363,7 +282,7 @@ namespace NodeGraph {
             while (pin < size) {
                 const DataInPinPrototype &dataIn = node->mDataInPins[group][pin];
                 if (dataIn.mSource) {
-                    disconnectDataIn({ index, pin });
+                    disconnectData({ index, pin });
                     uint32_t newSize = node->mDataInPins[group].size();
                     if (size == newSize)
                         ++pin;
@@ -392,29 +311,8 @@ namespace NodeGraph {
             if (pin.mSource.mNode == oldIndex)
                 pin.mSource.mNode = index;
         }
+
         for (DataOutPinPrototype &pin : mDataOutPins) {
-            assert(pin.mTarget.mNode != index);
-            if (pin.mTarget.mNode == oldIndex)
-                pin.mTarget.mNode = index;
-        }
-
-        for (FlowInPinPrototype &pin : mFlowInPins) {
-            for (Pin &source : pin.mSources) {
-                assert(source.mNode != index);
-                if (source.mNode == oldIndex)
-                    source.mNode = index;
-            }
-        }
-
-        for (DataReceiverPinPrototype &pin : mDataReceiverPins) {
-            for (Pin &source : pin.mSources) {
-                assert(source.mNode != index);
-                if (source.mNode == oldIndex)
-                    source.mNode = index;
-            }
-        }
-
-        for (DataProviderPinPrototype &pin : mDataProviderPins) {
             for (Pin &target : pin.mTargets) {
                 assert(target.mNode != index);
                 if (target.mNode == oldIndex)
@@ -489,32 +387,13 @@ namespace NodeGraph {
         return mDataInPins[target.mIndex].mSource;
     }
 
-    Pin NodeGraph::dataOutTarget(Pin source)
-    {
-        if (source.mNode)
-            return node(source.mNode)->dataOutTarget(source.mIndex, source.mGroup);
-        if (source.mIndex == mDataOutPins.size())
-            return {};
-        return mDataOutPins[source.mIndex].mTarget;
-    }
-
-    ExtendedValueTypeDesc NodeGraph::dataReceiverType(Pin source, bool bidir)
-    {
-        if (source.mNode)
-            return node(source.mNode)->dataReceiverType(source.mIndex, source.mGroup, bidir);
-        if (!bidir || source.mIndex == mDataReceiverPins.size())
-            return { ExtendedValueTypeEnum::GenericType };
-        Pin target = mDataReceiverPins[source.mIndex].mSources.front();
-        return node(target.mNode)->dataOutType(target.mIndex, target.mGroup, false);
-    }
-
-    ExtendedValueTypeDesc NodeGraph::dataProviderType(Pin target, bool bidir)
+    ExtendedValueTypeDesc NodeGraph::dataOutType(Pin target, bool bidir)
     {
         if (target.mNode)
-            return node(target.mNode)->dataProviderType(target.mIndex, target.mGroup, bidir);
-        if (!bidir || target.mIndex == mDataProviderPins.size())
+            return node(target.mNode)->dataOutType(target.mIndex, target.mGroup, bidir);
+        if (!bidir || target.mIndex == mDataOutPins.size())
             return { ExtendedValueTypeEnum::GenericType };
-        Pin source = mDataProviderPins[target.mIndex].mTargets.front();
+        Pin source = mDataOutPins[target.mIndex].mTargets.front();
         return node(source.mNode)->dataInType(source.mIndex, source.mGroup, false);
     }
 
@@ -525,36 +404,16 @@ namespace NodeGraph {
         if (!bidir || source.mIndex == mDataInPins.size())
             return { ExtendedValueTypeEnum::GenericType };
         Pin target = mDataInPins[source.mIndex].mSource;
-        return node(target.mNode)->dataProviderType(target.mIndex, target.mGroup, false);
+        return node(target.mNode)->dataOutType(target.mIndex, target.mGroup, false);
     }
 
-    ExtendedValueTypeDesc NodeGraph::dataOutType(Pin target, bool bidir)
+    uint32_t NodeGraph::dataOutMask(Pin target, bool bidir)
     {
         if (target.mNode)
-            return node(target.mNode)->dataInType(target.mIndex, target.mGroup, bidir);
+            return node(target.mNode)->dataOutMask(target.mIndex, target.mGroup, bidir);
         if (!bidir || target.mIndex == mDataOutPins.size())
-            return { ExtendedValueTypeEnum::GenericType };
-        Pin source = mDataOutPins[target.mIndex].mTarget;
-        return node(source.mNode)->dataReceiverType(source.mIndex, source.mGroup, false);
-    }
-
-    uint32_t NodeGraph::dataReceiverMask(Pin source, bool bidir)
-    {
-        if (source.mNode)
-            return node(source.mNode)->dataReceiverMask(source.mIndex, source.mGroup, bidir);
-        if (!bidir || source.mIndex == mDataReceiverPins.size())
             return NodeExecutionMask::ALL;
-        Pin target = mDataReceiverPins[source.mIndex].mSources.front();
-        return node(target.mNode)->dataOutMask(target.mIndex, target.mGroup, false);
-    }
-
-    uint32_t NodeGraph::dataProviderMask(Pin target, bool bidir)
-    {
-        if (target.mNode)
-            return node(target.mNode)->dataProviderMask(target.mIndex, target.mGroup, bidir);
-        if (!bidir || target.mIndex == mDataProviderPins.size())
-            return NodeExecutionMask::ALL;
-        Pin source = mDataProviderPins[target.mIndex].mTargets.front();
+        Pin source = mDataOutPins[target.mIndex].mTargets.front();
         return node(source.mNode)->dataInMask(source.mIndex, source.mGroup, false);
     }
 
@@ -565,17 +424,7 @@ namespace NodeGraph {
         if (!bidir || source.mIndex == mDataInPins.size())
             return NodeExecutionMask::ALL;
         Pin target = mDataInPins[source.mIndex].mSource;
-        return node(target.mNode)->dataProviderMask(target.mIndex, target.mGroup, false);
-    }
-
-    uint32_t NodeGraph::dataOutMask(Pin target, bool bidir)
-    {
-        if (target.mNode)
-            return node(target.mNode)->dataOutMask(target.mIndex, target.mGroup, bidir);
-        if (!bidir || target.mIndex == mDataOutPins.size())
-            return NodeExecutionMask::ALL;
-        Pin source = mDataOutPins[target.mIndex].mTarget;
-        return node(source.mNode)->dataReceiverMask(source.mIndex, source.mGroup, false);
+        return node(target.mNode)->dataOutMask(target.mIndex, target.mGroup, false);
     }
 
     std::string_view NodeGraph::flowOutName(Pin source)
@@ -588,24 +437,14 @@ namespace NodeGraph {
         return node(target.mNode)->flowInName(target.mIndex, target.mGroup);
     }
 
-    std::string_view NodeGraph::dataReceiverName(Pin source)
+    std::string_view NodeGraph::dataOutName(Pin target)
     {
-        return node(source.mNode)->dataReceiverName(source.mIndex, source.mGroup);
-    }
-
-    std::string_view NodeGraph::dataProviderName(Pin target)
-    {
-        return target.mNode ? node(target.mNode)->dataProviderName(target.mIndex, target.mGroup) : "graphInput";
+        return target.mNode ? node(target.mNode)->dataOutName(target.mIndex, target.mGroup) : "graphInput";
     }
 
     std::string_view NodeGraph::dataInName(Pin source)
     {
         return node(source.mNode)->dataInName(source.mIndex, source.mGroup);
-    }
-
-    std::string_view NodeGraph::dataOutName(Pin target)
-    {
-        return node(target.mNode)->dataOutName(target.mIndex, target.mGroup);
     }
 
     void NodeGraph::connectFlow(Pin source, Pin target)
@@ -630,21 +469,21 @@ namespace NodeGraph {
         }
     }
 
-    void NodeGraph::connectDataIn(Pin target, Pin source)
+    void NodeGraph::connectData(Pin target, Pin source)
     {
         if (!source.mNode) {
             assert(source.mGroup < 2);
             if (source.mGroup == 0) {
-                assert(mDataProviderPins.size() >= source.mIndex);
-                if (mDataProviderPins.size() == source.mIndex)
-                    mDataProviderPins.emplace_back();
-                mDataProviderPins[source.mIndex].mTargets.push_back(target);
+                assert(mDataOutPins.size() >= source.mIndex);
+                if (mDataOutPins.size() == source.mIndex)
+                    mDataOutPins.emplace_back();
+                mDataOutPins[source.mIndex].mTargets.push_back(target);
             } else {
                 mNamedInputs[source.mIndex].mTargets.push_back(target);
             }
         } else {
-            node(source.mNode)->onDataProviderUpdate(source, CONNECT);
-            node(source.mNode)->mDataProviderPins[source.mGroup][source.mIndex].mTargets.push_back(target);
+            node(source.mNode)->onDataOutUpdate(source, CONNECT);
+            node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex].mTargets.push_back(target);
         }
 
         if (!target.mNode) {
@@ -654,28 +493,6 @@ namespace NodeGraph {
         } else {
             node(target.mNode)->onDataInUpdate(target, CONNECT);
             node(target.mNode)->mDataInPins[target.mGroup][target.mIndex].mSource = source;
-        }
-    }
-
-    void NodeGraph::connectDataOut(Pin source, Pin target)
-    {
-        if (!target.mNode) {
-            assert(mDataReceiverPins.size() >= target.mIndex);
-            if (mDataReceiverPins.size() == target.mIndex)
-                mDataReceiverPins.emplace_back();
-            mDataReceiverPins[source.mIndex].mSources.push_back(source);
-        } else {
-            node(target.mNode)->onDataReceiverUpdate(target, CONNECT);
-            node(target.mNode)->mDataReceiverPins[target.mGroup][target.mIndex].mSources.push_back(source);
-        }
-
-        if (!source.mNode) {
-            assert(mDataOutPins.size() <= source.mIndex);
-            if (mDataOutPins.size() == source.mIndex)
-                mDataOutPins.emplace_back(DataOutPinPrototype { target });
-        } else {
-            node(source.mNode)->onDataOutUpdate(source, CONNECT);
-            node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex].mTarget = target;
         }
     }
 
@@ -703,7 +520,7 @@ namespace NodeGraph {
             node(source.mNode)->onFlowOutUpdate(source, DISCONNECT);
     }
 
-    void NodeGraph::disconnectDataIn(Pin target, Ignore ignore)
+    void NodeGraph::disconnectData(Pin target, Ignore ignore)
     {
         Pin source;
         if (!target.mNode) {
@@ -716,44 +533,20 @@ namespace NodeGraph {
         }
 
         if (!source.mNode) {
-            std::erase(mDataProviderPins[source.mIndex].mTargets, target);
-            if (mDataProviderPins[source.mIndex].mTargets.empty()) {
-                onDataProviderRemove(source);
-                mDataProviderPins.erase(mDataProviderPins.begin() + source.mIndex);
+            std::erase(mDataOutPins[source.mIndex].mTargets, target);
+            if (mDataOutPins[source.mIndex].mTargets.empty()) {
+                onDataOutRemove(source);
+                mDataOutPins.erase(mDataOutPins.begin() + source.mIndex);
             }
         } else {
-            auto result = std::erase(node(source.mNode)->mDataProviderPins[source.mGroup][source.mIndex].mTargets, target);
+            auto result = std::erase(node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex].mTargets, target);
             assert(result == 1);
             if (!ignore.mIgnoreSource)
-                node(source.mNode)->onDataProviderUpdate(source, DISCONNECT);
+                node(source.mNode)->onDataOutUpdate(source, DISCONNECT);
         }
 
         if (target.mNode && !ignore.mIgnoreTarget)
             node(target.mNode)->onDataInUpdate(target, DISCONNECT);
-    }
-
-    void NodeGraph::disconnectDataOut(Pin source, Ignore ignore)
-    {
-        Pin target;
-        if (!source.mNode) {
-            target = mDataOutPins[source.mIndex].mTarget;
-            mDataOutPins.erase(mDataOutPins.begin() + source.mIndex);
-        } else {
-            target = node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex].mTarget;
-            node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex] = {};
-        }
-
-        if (!target.mNode) {
-            std::erase(mDataReceiverPins[target.mIndex].mSources, source);
-        } else {
-            /*auto result = */ std::erase(node(target.mNode)->mDataReceiverPins[target.mGroup][target.mIndex].mSources, source);
-            /* assert(result == 1);*/
-            if (!ignore.mIgnoreTarget)
-                node(target.mNode)->onDataReceiverUpdate(target, DISCONNECT);
-        }
-
-        if (source.mNode && !ignore.mIgnoreSource)
-            node(source.mNode)->onDataOutUpdate(source, DISCONNECT);
     }
 
     void NodeGraph::onFlowOutRemove(Pin pin)
@@ -798,7 +591,7 @@ namespace NodeGraph {
                 ptr->onDataInRemove(pin);
         }
 
-        for (DataProviderPinPrototype &provider : mDataProviderPins) {
+        for (DataOutPinPrototype &provider : mDataOutPins) {
             for (Pin &target : provider.mTargets) {
                 if (target.mNode == pin.mNode && target.mGroup == pin.mGroup) {
                     if (target && target.mIndex > pin.mIndex) {
@@ -814,41 +607,6 @@ namespace NodeGraph {
         for (const std::unique_ptr<NodeBase> &ptr : mNodes) {
             if (nodeIndex(ptr.get()) != pin.mNode)
                 ptr->onDataOutRemove(pin);
-        }
-
-        for (DataReceiverPinPrototype &receiver : mDataReceiverPins) {
-            for (Pin &source : receiver.mSources) {
-                if (source.mNode == pin.mNode && source.mGroup == pin.mGroup) {
-                    if (source && source.mIndex > pin.mIndex) {
-                        --source.mIndex;
-                    }
-                }
-            }
-        }
-    }
-
-    void NodeGraph::onDataReceiverRemove(Pin pin)
-    {
-        for (const std::unique_ptr<NodeBase> &ptr : mNodes) {
-            if (nodeIndex(ptr.get()) != pin.mNode)
-                ptr->onDataReceiverRemove(pin);
-        }
-
-        for (DataOutPinPrototype &outPin : mDataOutPins) {
-            Pin &target = outPin.mTarget;
-            if (target.mNode == pin.mNode && target.mGroup == pin.mGroup) {
-                if (target && target.mIndex > pin.mIndex) {
-                    --target.mIndex;
-                }
-            }
-        }
-    }
-
-    void NodeGraph::onDataProviderRemove(Pin pin)
-    {
-        for (const std::unique_ptr<NodeBase> &ptr : mNodes) {
-            if (nodeIndex(ptr.get()) != pin.mNode)
-                ptr->onDataProviderRemove(pin);
         }
 
         for (DataInPinPrototype &inPin : mDataInPins) {

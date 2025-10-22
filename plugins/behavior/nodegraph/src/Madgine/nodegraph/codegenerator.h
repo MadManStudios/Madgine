@@ -19,7 +19,6 @@ namespace NodeGraph {
         void generate(Pin pin);
 
         virtual CodeGen::Statement read(Pin pin);
-        virtual CodeGen::Statement write(Pin pin, CodeGen::Statement statement);
 
         virtual CodeGen::File &file() = 0;
 

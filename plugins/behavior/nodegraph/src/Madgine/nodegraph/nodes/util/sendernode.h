@@ -308,12 +308,12 @@ namespace NodeGraph {
             return variadic[group];
         }
 
-        uint32_t dataProviderGroupCount() const override
+        uint32_t dataOutGroupCount() const override
         {
             return 1 + algorithms::size;
         }
 
-        uint32_t dataProviderBaseCount(uint32_t group) const override
+        uint32_t dataOutBaseCount(uint32_t group) const override
         {
             static constexpr auto sizes = []<typename... InnerAlg>(type_pack<InnerAlg...>) {
                 return std::array {
@@ -324,7 +324,7 @@ namespace NodeGraph {
             return sizes[group];
         }
 
-        ExtendedValueTypeDesc dataProviderType(uint32_t index, uint32_t group, bool bidir = true) const override
+        ExtendedValueTypeDesc dataOutType(uint32_t index, uint32_t group, bool bidir = true) const override
         {
             static constexpr auto types = []<typename... InnerAlg>(type_pack<InnerAlg...>) {
                 return std::array {

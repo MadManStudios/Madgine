@@ -20,17 +20,10 @@ namespace NodeGraph {
                     }
                 }
             }
-            for (auto &group : this->mDataProviderPins) {
-                for (const DataProviderPinPrototype &pin : group) {
-                    for (Pin target : pin.mTargets) {
-                        mask &= this->mGraph.dataInMask(target, false);
-                    }
-                }
-            }
             for (auto &group : this->mDataOutPins) {
                 for (const DataOutPinPrototype &pin : group) {
-                    if (pin.mTarget) {
-                        mask &= this->mGraph.dataReceiverMask(pin.mTarget, false);
+                    for (Pin target : pin.mTargets) {
+                        mask &= this->mGraph.dataInMask(target, false);
                     }
                 }
             }
@@ -53,14 +46,7 @@ namespace NodeGraph {
             for (auto &group : this->mDataInPins) {
                 for (const DataInPinPrototype &pin : group) {
                     if (pin.mSource) {
-                        mask &= this->mGraph.dataProviderMask(pin.mSource, false);
-                    }
-                }
-            }
-            for (auto &group : this->mDataReceiverPins) {
-                for (const DataReceiverPinPrototype &pin : group) {
-                    for (Pin source : pin.mSources) {
-                        mask &= this->mGraph.dataOutMask(source, false);
+                        mask &= this->mGraph.dataOutMask(pin.mSource, false);
                     }
                 }
             }
@@ -89,17 +75,6 @@ namespace NodeGraph {
         {
             return outMask(0, 0, bidir);
         }
-
-        virtual uint32_t dataReceiverMask(uint32_t index, uint32_t group, bool bidir = true) const override
-        {
-            return inMask(0, 0, bidir);
-        }
-
-        virtual uint32_t dataProviderMask(uint32_t index, uint32_t group, bool bidir = true) const override
-        {
-            return outMask(0, 0, bidir);
-        }
-
 
     private:
     };

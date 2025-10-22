@@ -56,10 +56,8 @@ namespace NodeGraph {
         void branch(BehaviorReceiver &receiver, Pin pin, NodeDebugLocation &location);
 
         BehaviorError read(ValueType &retVal, Pin pin);
-        void write(Pin pin, const ValueType &v);
 
         BehaviorError read(ValueType &retVal, uint32_t dataProvider);
-        void write(uint32_t dataReceiver, const ValueType &v);
 
         const NodeGraph *graph() const;
 

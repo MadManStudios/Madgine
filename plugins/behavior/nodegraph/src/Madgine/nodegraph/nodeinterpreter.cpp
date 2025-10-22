@@ -87,19 +87,9 @@ namespace NodeGraph {
         }
     }
 
-    void NodeInterpreterStateBase::write(Pin pin, const ValueType &v)
-    {
-        mGraph->node(pin.mNode)->interpretWrite(*this, mData[pin.mNode - 1], v, pin.mIndex, pin.mGroup);
-    }
-
     BehaviorError NodeInterpreterStateBase::read(ValueType &retVal, uint32_t dataProvider)
     {
         return read(retVal, mGraph->mDataInPins[dataProvider].mSource);
-    }
-
-    void NodeInterpreterStateBase::write(uint32_t dataReceiver, const ValueType &v)
-    {
-        write(mGraph->mDataOutPins[dataReceiver].mTarget, v);
     }
 
     const NodeGraph *NodeInterpreterStateBase::graph() const

@@ -16,10 +16,6 @@
                     </Item>
                 </Item>
             </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
         </Node>
         <Node type="Connect" serId=5>
             <mFlowOutPins>
@@ -53,10 +49,6 @@
                     </Item>
                 </Item>
             </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
         </Node>
         <Node type="Native/temp_widget" serId=12>
             <mParameters>
@@ -91,11 +83,7 @@
                 </Item>
                 <Item>
                 </Item>
-            </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
+            </mDataInPins>            
         </Node>
         <Node type="StopWhen" serId=18>
             <mFlowOutPins>
@@ -129,10 +117,6 @@
                     </Item>
                 </Item>
             </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
         </Node>
         <Node type="Accessor/Engine::Widgets::WidgetBase/PointerLeave" serId=25>
             <mFlowOutPins>
@@ -150,10 +134,6 @@
                     </Item>
                 </Item>
             </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
         </Node>
         <Node type="WhenAll" serId=28>
             <mFlowOutPins>
@@ -185,10 +165,6 @@
             </mFlowOutPins>
             <mDataInPins>
             </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
         </Node>
         <Node type="Native/Animate_Opacity" serId=35>
             <mParameters>
@@ -214,10 +190,6 @@
                 <Item>
                 </Item>
             </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
         </Node>
         <Node type="Native/Animate_Move" serId=38>
             <mParameters>
@@ -243,10 +215,6 @@
                 <Item>
                 </Item>
             </mDataInPins>
-            <mDataOutPins>
-                <Item>
-                </Item>
-            </mDataOutPins>
         </Node>
     </mNodes>
     <mFlowOutPins>
@@ -260,8 +228,6 @@
     </mFlowOutPins>
     <mDataInPins>
     </mDataInPins>
-    <mDataOutPins>
-    </mDataOutPins>
     <mLayoutData>{"nodes":{"node:120000":{"location":{"x":395,"y":-303}},"node:180000":{"location":{"x":568,"y":-302}},"node:2147483645":{"location":{"x":1024,"y":-415}},"node:2147483646":{"location":{"x":187,"y":-415}},"node:240000":{"location":{"x":394,"y":-204}},"node:300000":{"location":{"x":235,"y":-185}},"node:360000":{"location":{"x":588,"y":-205}},"node:420000":{"location":{"x":812,"y":-243}},"node:480000":{"location":{"x":812,"y":-130}},"node:60000":{"location":{"x":235,"y":-265}}},"selection":null,"view":{"scroll":{"x":187.17877197265625,"y":-412.97064208984375},"visible_rect":{"max":{"x":1048.951904296875,"y":141.538497924804688},"min":{"x":187.854507446289062,"y":-414.461517333984375}},"zoom":0.996402859687805176}}</mLayoutData>
     <mNamedInputs>
         <Item serId=43>

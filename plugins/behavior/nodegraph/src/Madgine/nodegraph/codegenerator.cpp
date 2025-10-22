@@ -46,13 +46,5 @@ namespace NodeGraph {
         }
     }
 
-    CodeGen::Statement CodeGenerator::write(Pin pin, CodeGen::Statement statement)
-    {
-        if (pin)
-            return mGraph.node(pin.mNode)->generateWrite(*this, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
-        else
-            throw 0;
-    }
-
 }
 }

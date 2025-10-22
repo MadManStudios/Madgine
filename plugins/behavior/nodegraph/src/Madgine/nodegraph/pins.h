@@ -12,7 +12,8 @@ namespace NodeGraph {
         uint32_t mGroup = 0;
 
         explicit operator bool() const;
-        bool operator==(const Pin& other) {
+        bool operator==(const Pin &other)
+        {
             return mNode == other.mNode && mIndex == other.mIndex && mGroup == other.mGroup;
         }
     };
@@ -30,14 +31,6 @@ namespace NodeGraph {
     };
 
     struct DataOutPinPrototype {
-        Pin mTarget;
-    };
-
-    struct DataReceiverPinPrototype {        
-        std::vector<Pin> mSources;
-    };
-
-    struct DataProviderPinPrototype {
         std::vector<Pin> mTargets;
     };
 
@@ -48,8 +41,7 @@ namespace NodeGraph {
 
     enum class PinType {
         Flow,
-        Data,
-        DataInstance
+        Data
     };
 
     struct PinDesc {
@@ -57,15 +49,11 @@ namespace NodeGraph {
         PinType mType;
         Pin mPin;
 
-        bool isCompatible(const PinDesc& other) const {
-            if (mDir == other.mDir)
-                return false;
-            if (mType == PinType::Flow || other.mType == PinType::Flow)
-                return mType == other.mType;
-            return mType != other.mType;
+        bool isCompatible(const PinDesc &other) const
+        {
+            return mType == other.mType;
         }
     };
 
 }
 }
-

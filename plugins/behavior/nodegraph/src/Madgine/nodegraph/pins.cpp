@@ -12,10 +12,6 @@ SERIALIZETABLE_BEGIN(Engine::NodeGraph::DataInPinPrototype)
 FIELD(mSource)
 SERIALIZETABLE_END(Engine::NodeGraph::DataInPinPrototype)
 
-SERIALIZETABLE_BEGIN(Engine::NodeGraph::DataOutPinPrototype)
-FIELD(mTarget)
-SERIALIZETABLE_END(Engine::NodeGraph::DataOutPinPrototype)
-
 SERIALIZETABLE_BEGIN(Engine::NodeGraph::Pin)
 FIELD(mNode)
 FIELD(mIndex)

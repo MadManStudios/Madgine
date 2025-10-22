@@ -32,8 +32,8 @@ namespace NodeGraph {
         std::string_view dataInName(uint32_t index, uint32_t group) const override;
         ExtendedValueTypeDesc dataInType(uint32_t index, uint32_t group, bool bidir = true) const override;
 
-        uint32_t dataProviderBaseCount(uint32_t group) const override;
-        ExtendedValueTypeDesc dataProviderType(uint32_t index, uint32_t group = 0, bool bidir = true) const override;
+        uint32_t dataOutBaseCount(uint32_t group) const override;
+        ExtendedValueTypeDesc dataOutType(uint32_t index, uint32_t group = 0, bool bidir = true) const override;
 
         void setupInterpret(NodeInterpreterStateBase &interpreter, std::unique_ptr<NodeInterpreterData> &data) const override;
         void interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const override;

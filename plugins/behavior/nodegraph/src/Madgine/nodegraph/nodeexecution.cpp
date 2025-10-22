@@ -16,12 +16,6 @@ namespace NodeGraph {
         return mInterpreter.read(retVal, pin);
     }
 
-    void NodeInterpretHandleBase::write(const NodeBase &node, const ValueType &v, uint32_t dataOutIndex, uint32_t group)
-    {
-        Pin pin = node.dataOutTarget(dataOutIndex, group);
-        mInterpreter.write(pin, v);
-    }
-
     void continueExecution(NodeInterpreterStateBase &interpreter, const NodeBase &node, BehaviorReceiver &receiver, NodeDebugLocation &location)
     {
         Pin pin = node.flowOutTarget(0);

@@ -21,8 +21,6 @@ namespace NodeGraph {
     struct FlowOutPinPrototype;
     struct DataInPinPrototype;
     struct DataOutPinPrototype;
-    struct DataReceiverPinPrototype;
-    struct DataProviderPinPrototype;
 
     enum EdgeEvent {
         CONNECT,

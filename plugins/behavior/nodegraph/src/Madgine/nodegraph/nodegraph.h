@@ -39,48 +39,35 @@ namespace NodeGraph {
 
         Pin flowOutTarget(Pin source);
         Pin dataInSource(Pin target);
-        Pin dataOutTarget(Pin source);
 
-        ExtendedValueTypeDesc dataReceiverType(Pin source, bool bidir = true);
-        ExtendedValueTypeDesc dataProviderType(Pin target, bool bidir = true);
         ExtendedValueTypeDesc dataInType(Pin source, bool bidir = true);
         ExtendedValueTypeDesc dataOutType(Pin target, bool bidir = true);
 
         uint32_t flowInMask(Pin target, bool bidir = true);
         uint32_t flowOutMask(Pin source, bool bidir = true);
-        uint32_t dataReceiverMask(Pin source, bool bidir = true);
-        uint32_t dataProviderMask(Pin target, bool bidir = true);
         uint32_t dataInMask(Pin source, bool bidir = true);
         uint32_t dataOutMask(Pin target, bool bidir = true);
 
         std::string_view flowInName(Pin target);
         std::string_view flowOutName(Pin source);
-        std::string_view dataReceiverName(Pin source);
-        std::string_view dataProviderName(Pin target);
         std::string_view dataInName(Pin source);
         std::string_view dataOutName(Pin target);
 
         ExtendedValueTypeDesc resolveVariableType(std::string_view name) const;
 
         void connectFlow(Pin source, Pin target);
-        void connectDataIn(Pin target, Pin source);
-        void connectDataOut(Pin source, Pin target);
+        void connectData(Pin target, Pin source);
 
         void disconnectFlow(Pin source, Ignore ignore = {});
-        void disconnectDataIn(Pin target, Ignore ignore = {});
-        void disconnectDataOut(Pin source, Ignore ignore = {});
+        void disconnectData(Pin target, Ignore ignore = {});
 
         void onFlowInRemove(Pin pin);
         void onFlowOutRemove(Pin pin);
-        void onDataReceiverRemove(Pin pin);
-        void onDataProviderRemove(Pin pin);
         void onDataInRemove(Pin pin);
         void onDataOutRemove(Pin pin);
 
         std::vector<FlowInPinPrototype> mFlowInPins;
         std::vector<FlowOutPinPrototype> mFlowOutPins;
-        std::vector<DataReceiverPinPrototype> mDataReceiverPins;
-        std::vector<DataProviderPinPrototype> mDataProviderPins;
         std::vector<DataInPinPrototype> mDataInPins;
         std::vector<DataOutPinPrototype> mDataOutPins;
 
