@@ -49,7 +49,6 @@
 #include "Madgine_Tools/behaviortool.h"
 
 #include "Madgine/nodegraph/nodes/accessornode.h"
-#include "Madgine/nodegraph/nodes/functionnode.h"
 
 UNIQUECOMPONENT(Engine::Tools::NodeGraphEditor);
 
@@ -354,12 +353,7 @@ namespace Tools {
                                 if (ImGui::BeginMenu(type->mTypeName)) {
                                     for (const Accessor *accessor = type->mMembers; accessor->mName; ++accessor) {
                                         if (ImGui::MenuItem(accessor->mName)) {
-                                            NodeGraph::NodeBase *node;
-                                            if (accessor->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
-                                                node = mGraph.addNode(std::make_unique<NodeGraph::FunctionNode>(mGraph, *accessor->mType.mSecondary.mFunctionTable));
-                                            } else {
-                                                node = mGraph.addNode(std::make_unique<NodeGraph::AccessorNode>(mGraph, type->mSelf, accessor));
-                                            }
+                                            NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<NodeGraph::AccessorNode>(mGraph, "Accessor/"s + type->mTypeName + "/" + accessor->mName));
                                             ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
                                         }
                                     }

@@ -30,7 +30,6 @@
 #include "Meta/serialize/formats.h"
 
 #include "nodes/accessornode.h"
-#include "nodes/functionnode.h"
 
 #include "Meta/keyvalueutil/valuetypeserialize.h"
 
@@ -642,7 +641,7 @@ namespace NodeGraph {
                 mDataProviderPins[source.mIndex].mTargets.push_back(target);
             } else {
                 mNamedInputs[source.mIndex].mTargets.push_back(target);
-            } 
+            }
         } else {
             node(source.mNode)->onDataProviderUpdate(source, CONNECT);
             node(source.mNode)->mDataProviderPins[source.mGroup][source.mIndex].mTargets.push_back(target);
@@ -883,54 +882,19 @@ namespace NodeGraph {
         BehaviorHandle libraryBehavior;
         bool isLibraryNode = libraryBehavior.fromString(name);
 
-        const Accessor *accessor = nullptr;
-        const MetaTable *type = nullptr;
-        if (StringUtil::startsWith(name, "Accessor/")) {
-            std::string_view path = std::string_view { name }.substr(strlen("Accessor/"));
+        bool isAccessor = StringUtil::startsWith(name, "Accessor/");
 
-            auto pos = path.find("/");
-            if (pos == std::string_view::npos)
-                return STREAM_INTEGRITY_ERROR(in) << "No Accessor \"" << path << "\" available.\n"
-                                                  << "Make sure to check the loaded plugins.";
-
-            std::string_view typeName = path.substr(0, pos);
-            std::string_view accessorName = path.substr(pos + 1);
-
-            type = sTypeList();
-            while (type) {
-                if (type->mTypeName == typeName) {
-
-                    for (accessor = type->mMembers; accessor->mName; ++accessor) {
-                        if (accessor->mName == accessorName) {
-                            break;
-                        }
-                    }
-                    if (!accessor->mName)
-                        return STREAM_INTEGRITY_ERROR(in) << "No Member \"" << accessorName << "\" in type \"" << typeName << "\".";
-                    break;
-                }
-                type = type->mNext;
-            }
-            if (!type)
-                return STREAM_INTEGRITY_ERROR(in) << "No type \"" << typeName << "\" available.\n"
-                                                  << "Make sure to check the loaded plugins.";
-        }
-
-        if (!isNativeNode && !isLibraryNode && !accessor)
+        if (!isNativeNode && !isLibraryNode && !isAccessor)
             return STREAM_INTEGRITY_ERROR(in) << "No Node \"" << name << "\" available.\n"
                                               << "Make sure to check the loaded plugins.";
 
-        if (isNativeNode + isLibraryNode + !!accessor > 1)
+        if (isNativeNode + isLibraryNode + isAccessor > 1)
             return STREAM_INTEGRITY_ERROR(in) << "Multiple Nodes found with same name: " << name;
 
         if (isNativeNode) {
             node = createNode(name);
-        } else if (type && accessor) {
-            if (accessor->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
-                node = std::make_unique<FunctionNode>(*this, *accessor->mType.mSecondary.mFunctionTable);
-            } else {
-                node = std::make_unique<AccessorNode>(*this, type->mSelf, accessor);
-            }
+        } else if (isAccessor) {
+            node = std::make_unique<AccessorNode>(*this, name);
         } else {
             node = std::make_unique<LibraryNode>(*this, libraryBehavior);
         }

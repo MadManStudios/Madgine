@@ -8,12 +8,16 @@ namespace NodeGraph {
 
     struct MADGINE_NODEGRAPH_EXPORT AccessorNode : Serialize::VirtualData<AccessorNode, VirtualScope<AccessorNode, NodeBase>> {
 
-        AccessorNode(NodeGraph &graph, const MetaTable **type, const Accessor *accessor);
+        AccessorNode(NodeGraph &graph, std::string_view fullClassName);
         AccessorNode(const AccessorNode &other, NodeGraph &graph);
 
         std::string_view name() const override;
         std::string_view className() const override;
         std::unique_ptr<NodeBase> clone(NodeGraph &graph) const override;
+
+        uint32_t flowInCount(uint32_t group) const override;
+
+        uint32_t flowOutBaseCount(uint32_t group) const override;
 
         uint32_t dataInBaseCount(uint32_t group = 0) const override;
         std::string_view dataInName(uint32_t index, uint32_t group) const override;
@@ -26,10 +30,11 @@ namespace NodeGraph {
 
         CodeGen::Statement generateRead(CodeGenerator &generator, std::unique_ptr<CodeGeneratorData> &data, uint32_t providerIndex, uint32_t group = 0) const override;
 
-    private:
-        const MetaTable **mType = nullptr;
-        const Accessor *mAccessor = nullptr;        
+    protected:
+        const MetaTable *type() const;
+        const Accessor *accessor() const;
 
+    private:
         std::string mFullClassName;
     };
 
