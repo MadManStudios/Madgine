@@ -63,9 +63,9 @@ namespace Scene {
         std::string mName;
 
     private:
-        Serialize::StreamResult readEntity(Serialize::FormattedSerializeStream &in, OutRef<SceneContainer> &mgr, std::string &name);
+        Serialize::StreamResult readEntity(Serialize::CallerHierarchyFormattedSerializeStream in, OutRef<SceneContainer> &mgr, std::string &name);
         std::tuple<SceneContainer &, std::string> createEntityData(const std::string &name);
-        const char *writeEntity(Serialize::FormattedSerializeStream &out, const Entity::Entity &entity) const;
+        const char *writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::Entity &entity) const;
 
         SYNCABLE_CONTAINER(mEntities, EntityContainer, Execution::SignalFunctor<const EntityContainer::iterator &, int>);
 

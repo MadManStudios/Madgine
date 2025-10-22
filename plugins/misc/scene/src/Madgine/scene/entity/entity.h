@@ -118,8 +118,8 @@ namespace Scene {
             std::string mName;
 
         private:
-            Serialize::StreamResult readComponent(Serialize::FormattedSerializeStream &in, uint32_t &type, EntityComponentBase *&ptr);
-            const char *writeComponent(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &p) const;
+            Serialize::StreamResult readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, EntityComponentBase *&ptr);
+            const char *writeComponent(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &p) const;
 
             SERIALIZABLE_CONTAINER(mComponents, mutable_set<EntityComponentHandle, std::less<>>, ParentFunctor<&Entity::handleEntityEvent>);
 

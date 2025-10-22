@@ -22,53 +22,53 @@ namespace Engine {
 namespace Serialize {
 
     template <typename T>
-    StreamResult visitSkipPrimitive(FormattedSerializeStream &in, const char *name)
+    StreamResult visitSkipPrimitive(CallerHierarchyFormattedSerializeStream in, const char *name)
     {
         T dummy;
-        return in.readPrimitive<T>(dummy, name);
+        return in.mStream.readPrimitive<T>(dummy, name);
     }
 
-    StreamResult visitSkipEnum(const EnumMetaTable *table, FormattedSerializeStream &in, const char *name)
+    StreamResult visitSkipEnum(const EnumMetaTable *table, CallerHierarchyFormattedSerializeStream in, const char *name)
     {
         EnumHolder dummy { table };
-        return in.readPrimitive<EnumHolder>(dummy, name);        
+        return in.mStream.readPrimitive<EnumHolder>(dummy, name);        
     }
 
-    StreamResult visitSkipFlags(const EnumMetaTable *table, FormattedSerializeStream &in, const char *name)
+    StreamResult visitSkipFlags(const EnumMetaTable *table, CallerHierarchyFormattedSerializeStream in, const char *name)
     {
         FlagsHolder dummy { table };
-        return in.readPrimitive<FlagsHolder>(dummy, name);        
+        return in.mStream.readPrimitive<FlagsHolder>(dummy, name);        
     }
 
-    StreamResult visitSyncableUnit(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult visitSyncableUnit(const SerializeTable *table, CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         return SyncableUnitBase::visitStream(table, in, name, visitor, depth);
     }
 
-    template META_EXPORT StreamResult visitSkipPrimitive<bool>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<uint8_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<int8_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<uint16_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<int16_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<uint32_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<int32_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<uint64_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<int64_t>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<float>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<SyncableUnitBase *>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<SerializableDataPtr>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<std::string>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<ByteBuffer>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Void>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Vector2>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Vector2i>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Quaternion>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Vector3>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Vector4>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Matrix3>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Color3>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Color4>(FormattedSerializeStream &, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<std::chrono::nanoseconds>(FormattedSerializeStream &, const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<bool>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<uint8_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<int8_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<uint16_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<int16_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<uint32_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<int32_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<uint64_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<int64_t>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<float>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<SyncableUnitBase *>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<SerializableDataPtr>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<std::string>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<ByteBuffer>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Void>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Vector2>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Vector2i>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Quaternion>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Vector3>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Vector4>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Matrix3>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Color3>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Color4>(CallerHierarchyFormattedSerializeStream , const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<std::chrono::nanoseconds>(CallerHierarchyFormattedSerializeStream , const char *);
 
 
 

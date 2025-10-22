@@ -10,21 +10,21 @@ namespace Serialize {
         const char *mFieldName;
         OffsetPtr (*mOffset)() = nullptr;
 
-        void (*mWriteState)(const void *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
-        StreamResult (*mReadState)(void *, FormattedSerializeStream &, const char *, CallerHierarchyBasePtr) = nullptr;
+        void (*mWriteState)(const void *, CallerHierarchyFormattedSerializeStream, const char *) = nullptr;
+        StreamResult (*mReadState)(void *, CallerHierarchyFormattedSerializeStream, const char *) = nullptr;
 
-        StreamResult (*mReadAction)(void *, FormattedMessageStream &, PendingRequest &) = nullptr;
+        StreamResult (*mReadAction)(void *, CallerHierarchyFormattedSerializeStream, PendingRequest &) = nullptr;
         StreamResult (*mReadRequest)(void *, FormattedMessageStream &, MessageId) = nullptr;
 
-        StreamResult (*mApplySerializableMap)(const Serializer *, void *, FormattedSerializeStream &, bool, CallerHierarchyBasePtr) = nullptr;
+        StreamResult (*mApplySerializableMap)(const Serializer *, void *, CallerHierarchyFormattedSerializeStream, bool) = nullptr;
         void (*mSetDataSynced)(const Serialize::Serializer *serializer, void *, bool, const CallerHierarchyBasePtr &hierarchy) = nullptr;
         void (*mSetActive)(const Serialize::Serializer *serializer, void *, bool, bool) = nullptr;
         void (*mSetParent)(const Serialize::Serializer *serializer, void *) = nullptr;
 
         void (*mWriteAction)(const void *, const std::vector<WriteMessage> &outStreams, void *) = nullptr;
-        void (*mWriteRequest)(const void *, FormattedMessageStream &out, void *) = nullptr;
+        void (*mWriteRequest)(const void *, CallerHierarchyFormattedSerializeStream out, void *) = nullptr;
 
-        StreamResult (*mVisitStream)(FormattedSerializeStream &, const char *, const StreamVisitor &, size_t) = nullptr;
+        StreamResult (*mVisitStream)(CallerHierarchyFormattedSerializeStream, const char *, const StreamVisitor &, size_t) = nullptr;
     };
 
 }

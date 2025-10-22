@@ -24,7 +24,7 @@ namespace Serialize {
         static const constexpr bool controlled = false;
 
         template <typename T>
-        static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple<T> &result, const char *name = "Item")
+        static StreamResult readCreationData(CallerHierarchyFormattedSerializeStream in, ArgsTuple<T> &result, const char *name = "Item")
         {
             if constexpr (std::is_const_v<T>) {
                 return read<std::remove_const_t<T>>(in, std::get<0>(result), name);
@@ -34,7 +34,7 @@ namespace Serialize {
         }
 
         template <typename T>
-        static void writeCreationData(FormattedSerializeStream &out, const T &t, const char *name = "Item")
+        static void writeCreationData(CallerHierarchyFormattedSerializeStream out, const T &t, const char *name = "Item")
         {
             if constexpr (std::is_const_v<T>) {
                 write<std::remove_const_t<T>>(out, t, name);
@@ -42,16 +42,16 @@ namespace Serialize {
         }
 
         template <typename C>
-        static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &t)
+        static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &t)
         {
             using T = std::ranges::range_value_t<C>;
             if constexpr (InstanceOf<T, std::pair>) {
-                out.beginCompoundWrite("Item");
+                out.mStream.beginCompoundWrite("Item");
                 writeCreationData<typename T::first_type>(out, t.first, "Key");
                 writeCreationData<typename T::second_type>(out, t.second, "Value");
                 write<typename T::first_type>(out, t.first, "Key");
                 write<typename T::second_type>(out, t.second, "Value");
-                out.endCompoundWrite("Item");
+                out.mStream.endCompoundWrite("Item");
             } else {
                 writeCreationData<T>(out, t);
                 write<T>(out, t, "Item");
@@ -59,11 +59,11 @@ namespace Serialize {
         }
 
         template <typename Op>
-        static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
+        static StreamResult readItem(CallerHierarchyFormattedSerializeStream in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
         {
             using T = std::remove_reference_t<std::ranges::range_reference_t<Op>>;
             if constexpr (InstanceOf<T, std::pair>) {
-                STREAM_PROPAGATE_ERROR(in.beginCompoundRead("Item"));
+                STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead("Item"));
                 std::tuple<std::piecewise_construct_t, ArgsTuple<typename T::first_type>, ArgsTuple<typename T::second_type>> tuple;
                 STREAM_PROPAGATE_ERROR(readCreationData<typename T::first_type>(in, std::get<1>(tuple), "Key"));
                 STREAM_PROPAGATE_ERROR(readCreationData<typename T::second_type>(in, std::get<2>(tuple), "Value"));
@@ -72,7 +72,7 @@ namespace Serialize {
                 assert(success);
                 STREAM_PROPAGATE_ERROR(read(in, it->first, "Key"));
                 STREAM_PROPAGATE_ERROR(read(in, it->second, "Value"));
-                return in.endCompoundRead("Item");                
+                return in.mStream.endCompoundRead("Item");                
 
             } else {
                 ArgsTuple<T> tuple;
@@ -86,7 +86,7 @@ namespace Serialize {
         }
 
         template <typename C>
-        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const StreamVisitor &visitor, size_t depth)
         {
             using T = std::remove_reference_t<std::ranges::range_reference_t<C>>;
             ArgsTuple<T> tuple;
@@ -113,20 +113,20 @@ namespace Serialize {
         using ArgsTuple = std::tuple<std::piecewise_construct_t, typename KeyCreator::template ArgsTuple<typename P::first_type>, typename ValueCreator::template ArgsTuple<typename P::second_type>>;
 
         template <typename C>
-        static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &t)
+        static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &t)
         {
-            out.beginCompoundWrite("Item");
+            out.mStream.beginCompoundWrite("Item");
             using T = std::ranges::range_value_t<C>;
             writeCreationData<T>(out, t);
             write<typename T::first_type>(out, t.first, "Key");
             write<typename T::second_type>(out, t.second, "Value");
-            out.endCompoundWrite("Item");
+            out.mStream.endCompoundWrite("Item");
         }
 
         template <typename Op>
-        static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
+        static StreamResult readItem(CallerHierarchyFormattedSerializeStream in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
         {
-            STREAM_PROPAGATE_ERROR(in.beginCompoundRead(nullptr));
+            STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead(nullptr));
             using T = std::ranges::range_value_t<Op>;
             ArgsTuple<T> tuple;
             STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
@@ -135,30 +135,30 @@ namespace Serialize {
             assert(success);
             STREAM_PROPAGATE_ERROR(read<typename T::first_type>(in, it->first, "Key"));
             STREAM_PROPAGATE_ERROR(read<typename T::second_type>(in, it->second, "Value"));
-            return in.endCompoundRead(nullptr);
+            return in.mStream.endCompoundRead(nullptr);
         }
 
         template <typename C>
-        static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const StreamVisitor &visitor, size_t depth)
         {
-            STREAM_PROPAGATE_ERROR(in.beginCompoundRead(nullptr));
+            STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead(nullptr));
             using T = std::ranges::range_value_t<C>;
             ArgsTuple<T> tuple;
             STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::first_type>(in, "Key", visitor, depth));
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<typename T::second_type>(in, "Value", visitor, depth));
-            return in.endCompoundRead(nullptr);
+            return in.mStream.endCompoundRead(nullptr);
         }
 
         template <typename P>
-        static void writeCreationData(FormattedSerializeStream &out, const P &t)
+        static void writeCreationData(CallerHierarchyFormattedSerializeStream out, const P &t)
         {
             KeyCreator::template writeCreationData<typename P::first_type>(out, t.first, "Key");
             ValueCreator::template writeCreationData<typename P::second_type>(out, t.second, "Value");
         }
 
         template <typename P>
-        static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple<P> &tuple)
+        static StreamResult readCreationData(CallerHierarchyFormattedSerializeStream in, ArgsTuple<P> &tuple)
         {
             STREAM_PROPAGATE_ERROR(KeyCreator::template readCreationData<typename P::first_type>(in, std::get<1>(tuple), "Key"));
             return ValueCreator::template readCreationData<typename P::second_type>(in, std::get<2>(tuple), "Value");
@@ -195,7 +195,7 @@ namespace Serialize {
 
             using ArgsTuple = std::tuple<std::remove_const_t<std::remove_reference_t<_Ty>>...>;
 
-            static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple &result)
+            static StreamResult readCreationData(CallerHierarchyFormattedSerializeStream in, ArgsTuple &result)
             {
                 if constexpr (std::same_as<R, void>) {
                     TupleUnpacker::invokeExpand(reader, in, result);
@@ -206,7 +206,7 @@ namespace Serialize {
             }
 
             template <typename Op>
-            static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where, const CallerHierarchyBasePtr &hierarchy)
+            static StreamResult readItem(CallerHierarchyFormattedSerializeStream in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
             {
                 ArgsTuple tuple;
                 bool success;
@@ -214,18 +214,18 @@ namespace Serialize {
                 if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
 
                     std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
                     it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr));
                 }
                 assert(success);
                 return {};
             }
 
             template <typename C>
-            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
+            static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const StreamVisitor &visitor, size_t depth)
             {
                 if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, std::nullptr_t>) {
                     ArgsTuple tuple;
@@ -240,16 +240,16 @@ namespace Serialize {
             }
 
             template <typename Arg>
-            static const char *writeCreationData(FormattedSerializeStream &out, const Arg &arg, const CallerHierarchyBasePtr &hierarchy)
+            static const char *writeCreationData(CallerHierarchyFormattedSerializeStream out, const Arg &arg)
             {
                 return WriteFunctor {}(out, arg);
             }
 
             template <typename C>
-            static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &arg, const CallerHierarchyBasePtr &hierarchy)
+            static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &arg)
             {
-                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg, hierarchy);
-                write<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
+                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg);
+                write<std::ranges::range_value_t<C>>(out, arg, name);
             }
 
             template <typename Op>
@@ -268,9 +268,9 @@ namespace Serialize {
 
             using ArgsTuple = std::tuple<MakeOwning_t<_Ty>...>;
 
-            static StreamResult readCreationData(FormattedSerializeStream &in, ArgsTuple &result, const CallerHierarchyBasePtr &hierarchy)
+            static StreamResult readCreationData(CallerHierarchyFormattedSerializeStream in, ArgsTuple &result)
             {
-                T *parent = hierarchy;
+                T *parent = in.mHierarchy;
                 assert(parent);
                 if constexpr (std::same_as<R, void>) {
                     TupleUnpacker::invokeExpand(reader, parent, in, result);
@@ -281,25 +281,25 @@ namespace Serialize {
             }
 
             template <typename Op>
-            static StreamResult readItem(FormattedSerializeStream &in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where, const CallerHierarchyBasePtr &hierarchy)
+            static StreamResult readItem(CallerHierarchyFormattedSerializeStream in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
             {
                 ArgsTuple tuple;
                 bool success;
-                STREAM_PROPAGATE_ERROR(readCreationData(in, tuple, hierarchy));
+                STREAM_PROPAGATE_ERROR(readCreationData(in, tuple));
                 if constexpr (std::is_const_v<std::ranges::range_value_t<Op>>) {
                     std::remove_const_t<std::ranges::range_value_t<Op>> temp = TupleUnpacker::constructFromTuple<std::remove_const_t<std::ranges::range_value_t<Op>>>(std::move(*tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, temp, nullptr));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
                     it = TupleUnpacker::invokeFlatten(emplace, success, op, where, std::move(tuple));
-                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr, hierarchy));
+                    STREAM_PROPAGATE_ERROR(read(in, *it, nullptr));
                 }
                 assert(success);
                 return {};
             }
 
             template <typename C>
-            static StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth)
+            static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const StreamVisitor &visitor, size_t depth)
             {
                 if constexpr (std::same_as<std::remove_const_t<decltype(Scan::value)>, std::nullptr_t>) {
                     throw 0;
@@ -312,18 +312,18 @@ namespace Serialize {
             }
 
             template <typename Arg>
-            static const char *writeCreationData(FormattedSerializeStream &out, const Arg &arg, const CallerHierarchyBasePtr &hierarchy)
+            static const char *writeCreationData(CallerHierarchyFormattedSerializeStream out, const Arg &arg)
             {
-                const T *parent = hierarchy;
+                const T *parent = out.mHierarchy;
                 assert(parent);
                 return WriteFunctor {}(parent, out, arg);
             }
 
             template <typename C>
-            static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &arg, const CallerHierarchyBasePtr &hierarchy)
+            static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &arg)
             {
-                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg, hierarchy);
-                write<std::ranges::range_value_t<C>>(out, arg, name, hierarchy);
+                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg);
+                write<std::ranges::range_value_t<C>>(out, arg, name);
             }
 
             template <typename Op>

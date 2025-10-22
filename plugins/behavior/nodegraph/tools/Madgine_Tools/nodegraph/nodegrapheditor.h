@@ -9,6 +9,8 @@
 #include "Madgine_Tools/resourceeditor.h"
 #include "nodegraphfile.h"
 
+#include "Madgine/behaviorhandle.h"
+
 namespace Engine {
 namespace Tools {
 
@@ -68,6 +70,8 @@ namespace Tools {
         bool mSelectedInputs = false;
 
         Vector2 mPopupPosition;
+
+        BehaviorHandle mPendingLibraryBehavior;
 
         std::optional<NodeGraph::PinDesc> mDragPin;
         std::optional<ExtendedValueTypeDesc> mDragType;

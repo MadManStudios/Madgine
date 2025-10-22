@@ -17,21 +17,21 @@ ScopePtr ParameterTuple::customScopePtr()
 
 namespace Serialize {
 
-    StreamResult Operations<ParameterTuple>::read(Serialize::FormattedSerializeStream &in, ParameterTuple &tuple, const char *name)
+    StreamResult Operations<ParameterTuple>::read(Serialize::CallerHierarchyFormattedSerializeStream in, ParameterTuple &tuple, const char *name)
     {
-        STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
+        STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead(name));
         STREAM_PROPAGATE_ERROR(tuple.mTuple->read(in));
-        return in.endCompoundRead(name);
+        return in.mStream.endCompoundRead(name);
     }
 
-    void Operations<ParameterTuple>::write(Serialize::FormattedSerializeStream &out, const ParameterTuple &tuple, const char *name)
+    void Operations<ParameterTuple>::write(Serialize::CallerHierarchyFormattedSerializeStream out, const ParameterTuple &tuple, const char *name)
     {
-        out.beginCompoundWrite(name);
+        out.mStream.beginCompoundWrite(name);
         tuple.mTuple->write(out);
-        out.endCompoundWrite(name);
+        out.mStream.endCompoundWrite(name);
     }
 
-    StreamResult Operations<ParameterTuple>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult Operations<ParameterTuple>::visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         throw 0;
         return {};

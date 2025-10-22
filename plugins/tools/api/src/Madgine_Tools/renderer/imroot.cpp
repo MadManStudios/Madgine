@@ -73,7 +73,7 @@ namespace Tools {
             std::string name = std::string { tool->key() };
             out_buf->appendf("[Tool][%s]\n", name.c_str());
 
-            Serialize::SerializableUnitPtr { tool }.writeState(out, nullptr, {}, true);
+            Serialize::SerializableUnitPtr { tool }.writeState(out, nullptr, true);
             out_buf->append(outBuffer->str().c_str());
             outBuffer->str("");
 
@@ -260,7 +260,7 @@ namespace Tools {
             auto buf = std::make_unique<std::stringbuf>(mToolReadBuffer.str());
             Serialize::FormattedSerializeStream in { Serialize::Formats::ini(), { std::move(buf) } };
 
-            Serialize::StreamResult result = Serialize::SerializableUnitPtr { mToolReadTool }.readState(in, nullptr, {}, true);
+            Serialize::StreamResult result = Serialize::SerializableUnitPtr { mToolReadTool }.readState(in, nullptr, true);
             if (result.mState != Serialize::StreamState::OK) {
                 LOG_ERROR(result);
             }

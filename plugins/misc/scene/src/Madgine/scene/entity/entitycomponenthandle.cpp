@@ -15,22 +15,22 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        void entityComponentHelperWrite(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &index, const char *name, CallerHierarchyBasePtr hierarchy)
+        void entityComponentHelperWrite(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &index, const char *name)
         {
-            const SceneContainer *container = hierarchy;
-            container->sceneMgr().entityComponentList(index.mType).writeState(index.mComponent, out, name, hierarchy);
+            const SceneContainer *container = out.mHierarchy;
+            container->sceneMgr().entityComponentList(index.mType).writeState(index.mComponent, out, name);
         }
 
-        Serialize::StreamResult entityComponentHelperRead(Serialize::FormattedSerializeStream &in, const EntityComponentHandle &index, const char *name, CallerHierarchyBasePtr hierarchy)
+        Serialize::StreamResult entityComponentHelperRead(Serialize::CallerHierarchyFormattedSerializeStream in, const EntityComponentHandle &index, const char *name)
         {
-            SceneContainer *container = hierarchy;
-            return container->sceneMgr().entityComponentList(index.mType).readState(index.mComponent, in, name, hierarchy);
+            SceneContainer *container = in.mHierarchy;
+            return container->sceneMgr().entityComponentList(index.mType).readState(index.mComponent, in, name);
         }
 
-        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::FormattedSerializeStream &in, EntityComponentHandle &index, bool success, CallerHierarchyBasePtr hierarchy)
+        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::CallerHierarchyFormattedSerializeStream in, EntityComponentHandle &index, bool success)
         {
-            SceneContainer *container = hierarchy;
-            return container->sceneMgr().entityComponentList(index.mType).applyMap(index.mComponent, in, success, hierarchy);
+            SceneContainer *container = in.mHierarchy;
+            return container->sceneMgr().entityComponentList(index.mType).applyMap(index.mComponent, in, success);
         }
 
         void entityComponentHelperSetSynced(EntityComponentHandle &index, bool synced, CallerHierarchyBasePtr hierarchy)

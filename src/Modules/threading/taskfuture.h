@@ -80,7 +80,7 @@ namespace Threading {
             using WrappedTask = ImmediateTask<typename decltype(make_task(std::declval<F>(), std::declval<T>()))::T>;
             return [](F f, TaskFuture<T> fut) -> WrappedTask {
                 const T &value = co_await fut;
-                co_await make_task(std::forward<F>(f), value);
+                co_return co_await make_task(std::forward<F>(f), value);
             }(std::forward<F>(f), *this);
         }
 

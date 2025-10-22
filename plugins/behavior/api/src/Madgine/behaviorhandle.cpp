@@ -1,9 +1,8 @@
 #include "behaviorlib.h"
 
-
-#include "behaviorhandle.h"
-#include "behaviorcollector.h"
 #include "behavior.h"
+#include "behaviorcollector.h"
+#include "behaviorhandle.h"
 
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
@@ -13,7 +12,7 @@
 
 METATABLE_BEGIN(Engine::BehaviorHandle)
 CONSTRUCTOR()
-//MEMBER(mName)
+// MEMBER(mName)
 METATABLE_END(Engine::BehaviorHandle)
 
 namespace Engine {
@@ -32,15 +31,14 @@ BehaviorHandle::BehaviorHandle(const BehaviorHandle &other)
 
 BehaviorHandle::~BehaviorHandle()
 {
-    if (mHandle)
-        BehaviorFactoryRegistry::get(mIndex).mFactory->release(mHandle);
+    reset();
 }
 
 BehaviorHandle &BehaviorHandle::operator=(const BehaviorHandle &other)
 {
     if (mHandle)
         BehaviorFactoryRegistry::get(mIndex).mFactory->release(mHandle);
-    mIndex = other.mIndex;    
+    mIndex = other.mIndex;
     mHandle = BehaviorFactoryRegistry::get(mIndex).mFactory->load(other.name());
     return *this;
 }
@@ -50,6 +48,13 @@ BehaviorHandle &BehaviorHandle::operator=(BehaviorHandle &&other)
     std::swap(mIndex, other.mIndex);
     std::swap(mHandle, other.mHandle);
     return *this;
+}
+
+void BehaviorHandle::reset()
+{
+    if (mHandle)
+        BehaviorFactoryRegistry::get(mIndex).mFactory->release(mHandle);
+    mIndex.reset();
 }
 
 Behavior BehaviorHandle::create(const ParameterTuple &args, std::vector<Behavior> behaviors) const

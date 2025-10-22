@@ -27,19 +27,19 @@ namespace Serialize {
         SyncableUnitBase &operator=(SyncableUnitBase &&other);
 
     public:
-        void writeState(FormattedSerializeStream &out, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}) const;
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {});
+        void writeState(CallerHierarchyFormattedSerializeStream out, const char *name = nullptr) const;
+        StreamResult readState(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr);
 
         void setActive(bool active, bool existenceChanged);
 
-        static StreamResult visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult visitStream(const SerializeTable *table, CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
 
-        StreamResult readAction(FormattedMessageStream &in, PendingRequest &request);
+        StreamResult readAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request);
         StreamResult readRequest(FormattedMessageStream &in, MessageId id);
 
-        StreamResult readFunctionAction(FormattedMessageStream &in, PendingRequest &request);
+        StreamResult readFunctionAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request);
         StreamResult readFunctionRequest(FormattedMessageStream &in, MessageId id);
-        StreamResult readFunctionError(FormattedMessageStream &in, PendingRequest &request);
+        StreamResult readFunctionError(CallerHierarchyFormattedSerializeStream in, PendingRequest &request);
 
         UnitId slaveId() const;
         UnitId masterId() const;
@@ -88,7 +88,7 @@ namespace Serialize {
         friend struct SerializableUnitPtr;
         friend struct SerializableDataPtr;
 
-        META_EXPORT friend StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy);
+        META_EXPORT friend StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, CallerHierarchyFormattedSerializeStream in, bool success);
         friend META_EXPORT StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
 
         DERIVE_FRIEND(customUnitPtr)

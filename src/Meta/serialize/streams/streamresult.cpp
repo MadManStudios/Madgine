@@ -7,13 +7,25 @@
 namespace Engine {
 namespace Serialize {
 
+    StreamResult::StreamResult(StreamState state, std::unique_ptr<StreamError> error)
+        : mState(state)
+        , mError(std::move(error))
+    {
+    }
+
+    StreamResult::StreamResult(const StreamResult &other)
+        : mState(other.mState)
+        , mError(other.mError ? std::make_unique<StreamError>(*other.mError) : std::unique_ptr<StreamError>{})
+    {
+    }
+
     StreamError::StreamError(SerializeStream *in, bool binary, const std::string &msg, const char *file, size_t sourceLine)
     {
         std::ostringstream ss;
         std::ostringstream notes;
 
         ss << "ERROR: (";
-        
+
         if (in) {
 
             std::ios_base::iostate state = in->state();
@@ -27,7 +39,6 @@ namespace Serialize {
                 pos_type lastNewLine = 0;
                 mLineNumber = 1;
 
-                
                 for (std::istreambuf_iterator it = in->iterator(); static_cast<int>(in->tell()) <= mPosition; ++it) {
                     char c = *it;
                     if (c == '\n') {
@@ -46,7 +57,7 @@ namespace Serialize {
                 }
             }
             in->setState(state);
-        }        
+        }
 
         notes << "Note: in file '" << file << "':" << sourceLine << "\n";
 
@@ -54,8 +65,6 @@ namespace Serialize {
 
         mMsg = ss.str();
         mNotes = notes.str();
-
-        
     }
 
     std::ostream &operator<<(std::ostream &out, const StreamError &error)
@@ -75,6 +84,11 @@ namespace Serialize {
 
     StreamResultBuilder::StreamResultBuilder(StreamState type, FormattedSerializeStream &stream, const char *file, size_t line)
         : StreamResultBuilder(type, stream.stream(), stream.isBinary(), file, line)
+    {
+    }
+
+    StreamResultBuilder::StreamResultBuilder(StreamState type, CallerHierarchyFormattedSerializeStream stream, const char *file, size_t line)
+        : StreamResultBuilder(type, stream.mStream, file, line)
     {
     }
 

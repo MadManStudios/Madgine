@@ -14,8 +14,8 @@ struct ParameterTupleBase {
     virtual std::unique_ptr<ParameterTupleBase> clone() = 0;
     virtual ScopePtr customScopePtr() = 0;
 
-    virtual Serialize::StreamResult read(Serialize::FormattedSerializeStream &in) = 0;
-    virtual void write(Serialize::FormattedSerializeStream &out) = 0;
+    virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) = 0;
+    virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) = 0;
 
     virtual ~ParameterTupleBase() = default;
 };
@@ -45,7 +45,7 @@ struct TypedParameterTupleInstance : ParameterTupleInstance<Ty...> {
         return { this, &sMetaTable };
     }
 
-    virtual Serialize::StreamResult read(Serialize::FormattedSerializeStream &in) override
+    virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
     {
         return TupleUnpacker::accumulate(
             this->mTuple, [&](auto &e, Serialize::StreamResult r) {
@@ -55,7 +55,7 @@ struct TypedParameterTupleInstance : ParameterTupleInstance<Ty...> {
             Serialize::StreamResult {});
     }
 
-    virtual void write(Serialize::FormattedSerializeStream &out) override
+    virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
     {
         [this, &out] <size_t... Is>(auto_pack<Is...>) {
             (Serialize::write(out, std::get<Is>(this->mTuple), Names::template get<Is>.c_str()), ...);
@@ -140,7 +140,7 @@ struct MADGINE_BEHAVIOR_EXPORT ParameterTuple {
 private:
     friend struct Serialize::Operations<ParameterTuple>;
 
-    friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, ParameterTuple &tuple, Serialize::FormattedSerializeStream &in, bool success, const CallerHierarchyBasePtr &hierarchy = {})
+    friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, ParameterTuple &tuple, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
     {
         return {};
     }
@@ -151,10 +151,10 @@ private:
 namespace Serialize {
     template <>
     struct MADGINE_BEHAVIOR_EXPORT Operations<ParameterTuple> {
-        static StreamResult read(Serialize::FormattedSerializeStream &in, ParameterTuple &tuple, const char *name);
-        static void write(Serialize::FormattedSerializeStream &out, const ParameterTuple &tuple, const char *name);
+        static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, ParameterTuple &tuple, const char *name);
+        static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const ParameterTuple &tuple, const char *name);
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
     };
 }
 

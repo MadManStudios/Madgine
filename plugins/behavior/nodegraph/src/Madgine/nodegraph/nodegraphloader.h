@@ -27,7 +27,7 @@ namespace NodeGraph {
 
         NodeGraphLoader();
 
-        bool loadImpl(NodeGraph &graph, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(NodeGraph &graph, ResourceDataInfo &info);
         void unloadImpl(NodeGraph &graph);
 
     };

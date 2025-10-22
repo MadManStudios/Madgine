@@ -85,9 +85,9 @@ namespace Serialize {
 
     template <>
     struct Operations<Widgets::PropertyList> {
-        static StreamResult read(Serialize::FormattedSerializeStream &in, Widgets::PropertyList &list, const char *name);
-        static void write(Serialize::FormattedSerializeStream &out, Widgets::PropertyRange list, const char *name);
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream &in, Widgets::PropertyList &list, const char *name);
+        static void write(Serialize::CallerHierarchyFormattedSerializeStream &out, Widgets::PropertyRange list, const char *name);
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
     };
 }
 

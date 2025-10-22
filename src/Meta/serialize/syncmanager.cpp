@@ -134,7 +134,7 @@ namespace Serialize {
                 break;
             case MessageType::STATE:
                 assert(object->mType->mIsTopLevelUnit);
-                STREAM_PROPAGATE_ERROR(readState(stream, *object, "State", {}));
+                STREAM_PROPAGATE_ERROR(readState(stream, *object, "State"));
                 static_cast<TopLevelUnitBase *>(object)->stateReadDone();
                 for (FormattedMessageStream &out : mMasterStreams | std::views::transform(projectionPairSecond)) {
                     sendState(out, object);

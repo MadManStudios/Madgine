@@ -49,7 +49,7 @@ namespace Tools {
             Serialize::SerializeManager serializeMgr { "CompoundWidget" };
             Serialize::FormattedSerializeStream stream { Serialize::Formats::xml(), serializeMgr.wrapStream(resource->readAsStream(), true) };
 
-            Serialize::StreamResult result = Serialize::read(stream, *mTopLevel, "Widget", CallerHierarchy { &mWidgetManager });
+            Serialize::StreamResult result = Serialize::read({ stream, CallerHierarchy { &mWidgetManager } }, *mTopLevel, "Widget");
             if (result.mState != Serialize::StreamState::OK) {
                 LOG_ERROR(result);
                 throw 0;

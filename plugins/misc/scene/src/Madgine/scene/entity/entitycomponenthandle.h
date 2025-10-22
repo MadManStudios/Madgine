@@ -13,9 +13,9 @@ namespace Scene {
 
     namespace Entity {
 
-        void entityComponentHelperWrite(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &index, const char *name, CallerHierarchyBasePtr hierarchy);
-        Serialize::StreamResult entityComponentHelperRead(Serialize::FormattedSerializeStream &in, const EntityComponentHandle &index, const char *name, CallerHierarchyBasePtr hierarchy);
-        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::FormattedSerializeStream &in, EntityComponentHandle &index, bool success, CallerHierarchyBasePtr hierarchy);
+        void entityComponentHelperWrite(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &index, const char *name);
+        Serialize::StreamResult entityComponentHelperRead(Serialize::CallerHierarchyFormattedSerializeStream in, const EntityComponentHandle &index, const char *name);
+        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::CallerHierarchyFormattedSerializeStream in, EntityComponentHandle &index, bool success);
         void entityComponentHelperSetSynced(EntityComponentHandle &index, bool synced, CallerHierarchyBasePtr hierarchy);
         void entityComponentHelperSetActive(EntityComponentHandle &index, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy);
 
@@ -45,9 +45,9 @@ namespace Scene {
                 return mType <=> type;
             }
 
-            friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, EntityComponentHandle &handle, Serialize::FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy)
+            friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, EntityComponentHandle &handle, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
             {
-                return entityComponentHelperApplyMap(in, handle, success, hierarchy);
+                return entityComponentHelperApplyMap(in, handle, success);
             }
 
             friend void tag_invoke(const Serialize::set_synced_t &, EntityComponentHandle &handle, bool synced, CallerHierarchyBasePtr hierarchy)
@@ -65,17 +65,17 @@ namespace Serialize {
     template <typename... Configs>
     struct Operations<Scene::Entity::EntityComponentHandle, Configs...> {
 
-        static StreamResult read(Serialize::FormattedSerializeStream &in, Scene::Entity::EntityComponentHandle &handle, const char *name, CallerHierarchyBasePtr hierarchy)
+        static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, Scene::Entity::EntityComponentHandle &handle, const char *name)
         {
-            return entityComponentHelperRead(in, handle, name, hierarchy);
+            return entityComponentHelperRead(in, handle, name);
         }
 
-        static void write(Serialize::FormattedSerializeStream &out, const Scene::Entity::EntityComponentHandle &handle, const char *name, CallerHierarchyBasePtr hierarchy)
+        static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityComponentHandle &handle, const char *name)
         {
-            entityComponentHelperWrite(out, handle, name, hierarchy);
+            entityComponentHelperWrite(out, handle, name);
         }
 
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor)
         {
             throw 0;
             //return SerializableDataPtr::visitStream<T>(in, name, visitor);

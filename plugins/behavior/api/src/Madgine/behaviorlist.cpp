@@ -6,18 +6,18 @@
 #include "Meta/serialize/serializetable_impl.h"
 #include "Meta/serialize/helper/typedobjectserialize.h"
 
-Engine::Serialize::StreamResult readBehavior(Engine::Serialize::FormattedSerializeStream &in, Engine::BehaviorHandle &handle)
+Engine::Serialize::StreamResult readBehavior(Engine::Serialize::CallerHierarchyFormattedSerializeStream in, Engine::BehaviorHandle &handle)
 {
     std::string tag;
     STREAM_PROPAGATE_ERROR(Engine::Serialize::beginExtendedTypedRead(in, tag));
 
     if (!handle.fromString(tag)) {
-        return STREAM_INTEGRITY_ERROR(in) << "Unknown Behavior descriptor: " << tag;
+        return STREAM_INTEGRITY_ERROR(in.mStream) << "Unknown Behavior descriptor: " << tag;
     }
     return {};
 }
 
-const char *writeBehavior(Engine::Serialize::FormattedSerializeStream &out, const Engine::BehaviorList::Entry &entry)
+const char *writeBehavior(Engine::Serialize::CallerHierarchyFormattedSerializeStream out, const Engine::BehaviorList::Entry &entry)
 {
     static std::string dummy;
     dummy = entry.mHandle.toString();

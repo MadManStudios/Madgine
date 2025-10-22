@@ -74,9 +74,9 @@ namespace Scene {
         mEntities.erase(it);
     }
 
-    Serialize::StreamResult SceneContainer::readEntity(Serialize::FormattedSerializeStream &in, OutRef<SceneContainer> &mgr, std::string &name)
+    Serialize::StreamResult SceneContainer::readEntity(Serialize::CallerHierarchyFormattedSerializeStream in, OutRef<SceneContainer> &mgr, std::string &name)
     {
-        STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Entity", 1));
+        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Entity", 1));
         mgr = *this;
         return Serialize::read(in, name, "name");
     }
@@ -88,9 +88,9 @@ namespace Scene {
         return make_tuple(std::ref(*this), actualName);
     }
 
-    const char *SceneContainer::writeEntity(Serialize::FormattedSerializeStream &out, const Entity::Entity &entity) const
+    const char *SceneContainer::writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::Entity &entity) const
     {
-        out.beginExtendedWrite("Entity", 1);
+        out.mStream.beginExtendedWrite("Entity", 1);
         write(out, entity.name(), "name");
         return "Entity";
     }

@@ -92,12 +92,22 @@ namespace NodeGraph {
         return *this;
     }
 
-    Serialize::StreamResult NodeGraph::loadFromFile(const Filesystem::Path &path)
+    Threading::Task<Serialize::StreamResult> NodeGraph::loadFromFile(const Filesystem::Path &path)
     {
         if (Filesystem::exists(path)) {
             Filesystem::FileManager mgr("Graph-Serializer");
             Serialize::FormattedSerializeStream in = mgr.openRead(path, Serialize::Formats::xml);
-            STREAM_PROPAGATE_ERROR(Serialize::readState(in, *this, "Graph", {}));
+
+            std::vector<Threading::TaskFuture<bool>> futures;
+
+            Serialize::StreamResult result = Serialize::readState({ in, CallerHierarchy { std::ref(futures) } }, *this, "Graph");
+            if (result.mState != ::Engine::Serialize::StreamState::OK)
+                co_return std::move(result);
+
+            for (Threading::TaskFuture<bool> fut : futures) {
+                if (!co_await fut)
+                    co_return STREAM_UNKNOWN_ERROR(in) << "Failed to load node";
+            }
 
             for (NodeBase *node : mNodes | std::views::transform(projectionUniquePtrToPtr)) {
                 size_t maxGroupCount = std::max({ node->flowOutGroupCount(),
@@ -194,7 +204,7 @@ namespace NodeGraph {
             std::transform(std::make_move_iterator(outPins.begin()), std::make_move_iterator(outPins.end()), std::back_inserter(mDataOutPins),
                 [](std::optional<DataOutPinPrototype> &&pin) { return DataOutPinPrototype { std::move(*pin) }; });
         }
-        return {};
+        co_return {};
     }
 
     void NodeGraph::saveToFile(const Filesystem::Path &path)
@@ -629,9 +639,9 @@ namespace NodeGraph {
         return construct(NodeRegistry::get(NodeRegistry::sComponentsByName().at(name)), *this);
     }
 
-    Serialize::StreamResult NodeGraph::readNode(Serialize::FormattedSerializeStream &in, std::unique_ptr<NodeBase> &node)
+    Serialize::StreamResult NodeGraph::readNode(Serialize::CallerHierarchyFormattedSerializeStream in, std::unique_ptr<NodeBase> &node)
     {
-        STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Node", 1));
+        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Node", 1));
 
         std::string name;
         STREAM_PROPAGATE_ERROR(read(in, name, "type"));
@@ -644,7 +654,7 @@ namespace NodeGraph {
 
         if (!isNativeNode && !isLibraryNode && !isAccessor)
             return STREAM_INTEGRITY_ERROR(in) << "No Node \"" << name << "\" available.\n"
-                                              << "Make sure to check the loaded plugins.";
+                                                      << "Make sure to check the loaded plugins.";
 
         if (isNativeNode + isLibraryNode + isAccessor > 1)
             return STREAM_INTEGRITY_ERROR(in) << "Multiple Nodes found with same name: " << name;
@@ -654,15 +664,18 @@ namespace NodeGraph {
         } else if (isAccessor) {
             node = std::make_unique<AccessorNode>(*this, name);
         } else {
-            node = std::make_unique<LibraryNode>(*this, libraryBehavior);
+            Threading::TaskFuture<bool> fut;
+            node = std::make_unique<LibraryNode>(*this, libraryBehavior, fut);
+            std::vector<Threading::TaskFuture<bool>> &futures = static_cast<const std::reference_wrapper<std::vector<Threading::TaskFuture<bool>>> &>(in.mHierarchy);
+            futures.emplace_back(std::move(fut));
         }
 
         return {};
     }
 
-    const char *NodeGraph::writeNode(Serialize::FormattedSerializeStream &out, const std::unique_ptr<NodeBase> &node) const
+    const char *NodeGraph::writeNode(Serialize::CallerHierarchyFormattedSerializeStream out, const std::unique_ptr<NodeBase> &node) const
     {
-        out.beginExtendedWrite("Node", 1);
+        out.mStream.beginExtendedWrite("Node", 1);
 
         write(out, node->className(), "type");
 

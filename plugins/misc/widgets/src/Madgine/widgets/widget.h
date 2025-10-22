@@ -174,9 +174,9 @@ namespace Widgets {
         std::vector<Condition> mConditions;
 
     protected:
-        Serialize::StreamResult readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);
-        const char *writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;
-        static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in);
+        Serialize::StreamResult readWidget(Serialize::CallerHierarchyFormattedSerializeStream in, std::unique_ptr<WidgetBase> &widget);
+        const char *writeWidget(Serialize::CallerHierarchyFormattedSerializeStream out, const std::unique_ptr<WidgetBase> &widget) const;
+        static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::CallerHierarchyFormattedSerializeStream in);
 
         virtual void sizeChanged(const Vector3 &pixelSize);
 

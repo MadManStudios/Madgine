@@ -28,17 +28,17 @@ namespace NodeGraph {
     {
     }
 
-    bool NodeGraphLoader::loadImpl(NodeGraph &graph, ResourceDataInfo &info)
+    Threading::Task<bool> NodeGraphLoader::loadImpl(NodeGraph &graph, ResourceDataInfo &info)
     {
-        Serialize::StreamResult result = graph.loadFromFile(info.resource()->path());
+        Serialize::StreamResult result = co_await graph.loadFromFile(info.resource()->path());
 
         if (result.mState != Serialize::StreamState::OK) {
             LOG_ERROR("Error loading Nodegraph (" << info.resource()->path() << "):\n"
                                                   << result);
-            return false;
+            co_return false;
         }
 
-        return true;
+        co_return true;
     }
 
     void NodeGraphLoader::unloadImpl(NodeGraph &graph)

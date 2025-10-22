@@ -7,20 +7,21 @@ namespace Serialize {
 
     template <>
     struct META_EXPORT Operations<ValueType> {
-        static StreamResult read(FormattedSerializeStream &in, ValueType &v, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
-        static void write(FormattedSerializeStream &out, const ValueType &v, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);     
+        static StreamResult read(CallerHierarchyFormattedSerializeStream in, ValueType &v, const char *name);
+        static void write(CallerHierarchyFormattedSerializeStream out, const ValueType &v, const char *name);
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);     
     };   
 
     
     template <>
     struct META_EXPORT Operations<ExtendedValueTypeDesc> {
-        static StreamResult read(FormattedSerializeStream &in, ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
-        static void write(FormattedSerializeStream &out, const ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult read(CallerHierarchyFormattedSerializeStream in, ExtendedValueTypeDesc &t, const char *name);
+        static void write(CallerHierarchyFormattedSerializeStream out, const ExtendedValueTypeDesc &t, const char *name);
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
     };   
 
-    inline StreamResult tag_invoke(apply_map_t, ExtendedValueTypeDesc&, FormattedSerializeStream&, bool, const CallerHierarchyBasePtr&) {
+    inline StreamResult tag_invoke(apply_map_t, ExtendedValueTypeDesc &, CallerHierarchyFormattedSerializeStream, bool)
+    {
         return {};
     }
     

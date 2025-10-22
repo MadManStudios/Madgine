@@ -14,6 +14,7 @@ namespace NodeGraph {
     // TODO rename to BehaviorNode
     struct MADGINE_NODEGRAPH_EXPORT LibraryNode : Serialize::VirtualData<LibraryNode, VirtualScope<LibraryNode, NodeBase>> {
 
+        LibraryNode(NodeGraph &graph, BehaviorHandle behavior, Threading::TaskFuture<bool> &future);
         LibraryNode(NodeGraph &graph, BehaviorHandle behavior);
         LibraryNode(const LibraryNode &other, NodeGraph &graph);
 

@@ -311,8 +311,7 @@ namespace Tools {
                             ImGui::EndMenu();
                         }
                         if (BehaviorHandle behavior = BehaviorSelector()) {
-                            NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<NodeGraph::LibraryNode>(mGraph, behavior));
-                            ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                            mPendingLibraryBehavior = behavior;
                         }
                         if (ImGui::BeginMenu("Accessors")) {
                             const MetaTable *type = sTypeList();
@@ -336,6 +335,14 @@ namespace Tools {
                     ImGui::EndPopup();
                 }
                 ImGui::PopStyleVar();
+
+                if (mPendingLibraryBehavior && mPendingLibraryBehavior.state().is_ready()) { 
+                    if (mPendingLibraryBehavior.state()) {
+                        NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<NodeGraph::LibraryNode>(mGraph, std::move(mPendingLibraryBehavior)));
+                        ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                    }
+                    mPendingLibraryBehavior.reset();
+                }
 
                 ed::NodeId selectedNode[2];
                 if (ed::GetSelectedNodes(selectedNode, 2) == 1) {

@@ -11,6 +11,8 @@
 
 #include "../nodeexecution.h"
 
+#include "Madgine/resources/resourcemanager.h"
+
 METATABLE_BEGIN_BASE(Engine::NodeGraph::LibraryNode, Engine::NodeGraph::NodeBase)
 MEMBER(mParameters)
 METATABLE_END(Engine::NodeGraph::LibraryNode)
@@ -89,20 +91,32 @@ namespace NodeGraph {
         BehaviorHandle mType;
     };
 
+    LibraryNode::LibraryNode(NodeGraph &graph, BehaviorHandle behavior, Threading::TaskFuture<bool> &future)
+        : VirtualData(graph)
+        , mBehavior(std::move(behavior))
+        , mParameters(mBehavior.createDummyParameters())
+        , mFullClassName(mBehavior.toString())
+    {
+        future = Engine::Resources::ResourceManager::getSingleton().taskQueue()->queueTask(mBehavior.state().then([this](bool success) {
+            if (success) {
+                mNamedInputs = mBehavior.namedInputs();
+                mSubBehaviorCount = mBehavior.subBehaviorCount();
+                this->setup();                
+            } 
+            return success;
+        }));
+    }
+
     LibraryNode::LibraryNode(NodeGraph &graph, BehaviorHandle behavior)
         : VirtualData(graph)
         , mBehavior(std::move(behavior))
         , mParameters(mBehavior.createDummyParameters())
         , mFullClassName(mBehavior.toString())
     {
-        Execution::detach(mBehavior.state().sender() | Execution::then([this](bool success) {
-            if (success) {
-                mNamedInputs = mBehavior.namedInputs();
-                mSubBehaviorCount = mBehavior.subBehaviorCount();
-                this->setup();
-            } else
-                LOG_ERROR("TODO");
-        }));
+        assert(mBehavior.state());
+        mNamedInputs = mBehavior.namedInputs();
+        mSubBehaviorCount = mBehavior.subBehaviorCount();
+        this->setup();     
     }
 
     LibraryNode::LibraryNode(const LibraryNode &other, NodeGraph &graph)

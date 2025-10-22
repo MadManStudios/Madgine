@@ -13,9 +13,9 @@
 namespace Engine {
 namespace Serialize {
 
-    StreamResult Operations<ValueType>::read(FormattedSerializeStream &in, ValueType &v, const char *name, const CallerHierarchyBasePtr &hierarchy)
+    StreamResult Operations<ValueType>::read(CallerHierarchyFormattedSerializeStream in, ValueType &v, const char *name)
     {
-        STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
+        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
         ValueTypeEnum type;
         STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "type"));
         v.setType(ValueTypeDesc { type });
@@ -31,9 +31,9 @@ namespace Serialize {
         });
     }
 
-    void Operations<ValueType>::write(FormattedSerializeStream &out, const ValueType &v, const char *name, const CallerHierarchyBasePtr &hierarchy)    
+    void Operations<ValueType>::write(CallerHierarchyFormattedSerializeStream out, const ValueType &v, const char *name)    
     {
-        out.beginExtendedWrite(name, 1);
+        out.mStream.beginExtendedWrite(name, 1);
         Serialize::write(out, v.index().mIndex, "type");
         v.visit([&](const auto &value) {
             using T = std::remove_const_t<std::remove_reference_t<decltype(value)>>;
@@ -46,9 +46,9 @@ namespace Serialize {
         });
     }
 
-    StreamResult Operations<ValueType>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult Operations<ValueType>::visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
-        STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
+        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
         ValueTypeEnum type;
         STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "type"));
         ValueType v;
@@ -65,20 +65,20 @@ namespace Serialize {
     }
 
     
-    StreamResult Operations<ExtendedValueTypeDesc>::read(FormattedSerializeStream &in, ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
+    StreamResult Operations<ExtendedValueTypeDesc>::read(CallerHierarchyFormattedSerializeStream in, ExtendedValueTypeDesc &t, const char *name)
     {
         std::string type;
-        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, name, hierarchy));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, name));
         //TODO
         return {};
     }
 
-    void Operations<ExtendedValueTypeDesc>::write(FormattedSerializeStream &out, const ExtendedValueTypeDesc &t, const char *name, const CallerHierarchyBasePtr &hierarchy)
+    void Operations<ExtendedValueTypeDesc>::write(CallerHierarchyFormattedSerializeStream out, const ExtendedValueTypeDesc &t, const char *name)
     {
-        Serialize::write(out, t.toString(), name, hierarchy);
+        Serialize::write(out, t.toString(), name);
     }
 
-    StreamResult Operations<ExtendedValueTypeDesc>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult Operations<ExtendedValueTypeDesc>::visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         return Serialize::visitStream<std::string>(in, name, visitor, depth);
     }

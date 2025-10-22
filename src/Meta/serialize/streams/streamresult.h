@@ -15,7 +15,16 @@ namespace Serialize {
         std::string mNotes;
     };
 
-    struct [[nodiscard]] StreamResult {
+    struct [[nodiscard]] META_EXPORT StreamResult {
+
+        StreamResult() = default;
+        StreamResult(StreamState state, std::unique_ptr<StreamError> error);
+        StreamResult(const StreamResult &other);
+        StreamResult(StreamResult &&) = default;
+
+        StreamResult &operator=(const StreamResult &) = delete;
+        StreamResult &operator=(StreamResult &&) = default;
+
         StreamState mState = StreamState::OK;
         std::unique_ptr<StreamError> mError;
 
@@ -40,6 +49,7 @@ namespace Serialize {
         }
 
         StreamResultBuilder(StreamState type, FormattedSerializeStream &stream, const char *file, size_t line);
+        StreamResultBuilder(StreamState type, CallerHierarchyFormattedSerializeStream stream, const char *file, size_t line);
 
         StreamResultBuilder(StreamState type, const char *file, size_t line)
             : mType(type)

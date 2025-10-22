@@ -434,17 +434,17 @@ namespace Widgets {
         return mManager.lifetime();
     }
 
-    Serialize::StreamResult WidgetBase::readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget)
+    Serialize::StreamResult WidgetBase::readWidget(Serialize::CallerHierarchyFormattedSerializeStream in, std::unique_ptr<WidgetBase> &widget)
     {
         return mManager.readWidget(in, widget, this);
     }
 
-    const char *WidgetBase::writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const
+    const char *WidgetBase::writeWidget(Serialize::CallerHierarchyFormattedSerializeStream out, const std::unique_ptr<WidgetBase> &widget) const
     {
         return mManager.writeWidget(out, widget);
     }
 
-    Serialize::StreamResult WidgetBase::scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in)
+    Serialize::StreamResult WidgetBase::scanWidget(const Serialize::SerializeTable *&out, Serialize::CallerHierarchyFormattedSerializeStream in)
     {
         return WidgetManager::scanWidget(out, in);
     }

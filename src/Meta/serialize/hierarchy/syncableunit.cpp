@@ -57,27 +57,27 @@ namespace Serialize {
         return *this;
     }
 
-    void SyncableUnitBase::writeState(FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy) const
+    void SyncableUnitBase::writeState(CallerHierarchyFormattedSerializeStream out, const char *name) const
     {
-        if (out.isMaster(AccessMode::WRITE) && out.data()) {
-            out.beginExtendedWrite(name, 1);
+        if (out.mStream.isMaster(AccessMode::WRITE) && out.mStream.data()) {
+            out.mStream.beginExtendedWrite(name, 1);
             Serialize::write(out, mMasterId, "syncId");
         }
-        customUnitPtr().writeState(out, name, hierarchy, true);
+        customUnitPtr().writeState(out, name, true);
     }
 
-    StreamResult SyncableUnitBase::readState(FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy)
+    StreamResult SyncableUnitBase::readState(CallerHierarchyFormattedSerializeStream in, const char *name)
     {
-        if (!in.isMaster(AccessMode::READ) && in.data()) {
-            STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
+        if (!in.mStream.isMaster(AccessMode::READ) && in.mStream.data()) {
+            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
             UnitId id;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, id, "syncId"));
 
-            if (in.manager() && in.manager()->getSlaveStreamData() == in.data()) {
-                setSlaveId(id, in.manager());
+            if (in.mStream.manager() && in.mStream.manager()->getSlaveStreamData() == in.mStream.data()) {
+                setSlaveId(id, in.mStream.manager());
             }
         }
-        return customUnitPtr().readState(in, name, hierarchy, true);
+        return customUnitPtr().readState(in, name, true);
     }
 
     void SyncableUnitBase::setActive(bool active, bool existenceChanged)
@@ -85,16 +85,16 @@ namespace Serialize {
         mType->setActive(this, active, existenceChanged);
     }
 
-    StreamResult SyncableUnitBase::visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult SyncableUnitBase::visitStream(const SerializeTable *table, CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
-        assert(!in.isMaster(AccessMode::READ));
-        STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
+        assert(!in.mStream.isMaster(AccessMode::READ));
+        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
         UnitId id;
         STREAM_PROPAGATE_ERROR(read(in, id, "syncId"));
         return SerializableDataPtr::visitStream(table, in, name, visitor, depth);
     }
 
-    StreamResult SyncableUnitBase::readAction(FormattedMessageStream &in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
     {
         return mType->readAction(this, in, request);
     }
@@ -228,7 +228,7 @@ namespace Serialize {
         mType->writeFunctionError(target, index, error);
     }
 
-    StreamResult SyncableUnitBase::readFunctionAction(FormattedMessageStream &in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readFunctionAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
     {
         return mType->readFunctionAction(this, in, request);
     }
@@ -238,7 +238,7 @@ namespace Serialize {
         return mType->readFunctionRequest(this, in, id);
     }
 
-    StreamResult SyncableUnitBase::readFunctionError(FormattedMessageStream &in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readFunctionError(CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
     {
         return mType->readFunctionError(this, in, request);
     }
@@ -336,9 +336,9 @@ namespace Serialize {
         }
     }
 
-    StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, FormattedSerializeStream &in, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
+    StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, CallerHierarchyFormattedSerializeStream in, bool success = true)
     {
-        return unit.mType->applyMap(&unit, in, success, hierarchy);
+        return unit.mType->applyMap(&unit, in, success);
     }
 
 }

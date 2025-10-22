@@ -19,6 +19,8 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorHandle {
     BehaviorHandle &operator=(const BehaviorHandle &other);
     BehaviorHandle &operator=(BehaviorHandle &&other);
 
+    void reset();
+
     Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors = {}) const;
     Threading::TaskFuture<bool> state() const;
     Threading::TaskFuture<ParameterTuple> createParameters() const;

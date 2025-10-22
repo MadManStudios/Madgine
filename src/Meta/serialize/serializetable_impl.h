@@ -22,7 +22,7 @@ namespace Serialize {
     META_EXPORT void writeFunctionResult(SyncableUnitBase *unit, uint16_t index, const void *result, FormattedMessageStream &target, MessageId answerId);
     META_EXPORT void writeFunctionRequest(SyncableUnitBase *unit, uint16_t index, FunctionType type, const void *args, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver = {});
     META_EXPORT void writeFunctionError(SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedMessageStream &target, MessageId answerId);
-    META_EXPORT StreamResult readState(const SerializeTable *table, void *unit, FormattedSerializeStream &in, CallerHierarchyBasePtr hierarchy);
+    META_EXPORT StreamResult readState(const SerializeTable *table, void *unit, CallerHierarchyFormattedSerializeStream in);
     META_EXPORT WriteMessage getMasterRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId = 0);
     META_EXPORT FormattedMessageStream &getMasterFunctionRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget);
 
@@ -45,7 +45,7 @@ namespace Serialize {
             using setter_traits = CallableTraits<decltype(Setter)>;
             static_assert(std::same_as<Unit, typename setter_traits::class_type>);
 
-            //TODO remove const in tuple types
+            // TODO remove const in tuple types
             static_assert(std::same_as<typename setter_traits::argument_types, type_pack<T>>);
 
             return {
@@ -53,14 +53,14 @@ namespace Serialize {
                 []() {
                     return OffsetPtr {};
                 },
-                [](const void *_unit, FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy) {
+                [](const void *_unit, CallerHierarchyFormattedSerializeStream out, const char *name) {
                     const Unit *unit = unit_cast<const Unit *>(_unit);
-                    write(out, (unit->*Getter)(), name, CallerHierarchyPtr { hierarchy.append(unit) });
+                    write({ out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, (unit->*Getter)(), name);
                 },
-                [](void *_unit, FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy) -> StreamResult {
+                [](void *_unit, CallerHierarchyFormattedSerializeStream in, const char *name) -> StreamResult {
                     Unit *unit = unit_cast<Unit *>(_unit);
                     (unit->*Setter)(nullptr);
-                    return read(in, unit->*P, name, CallerHierarchyPtr { hierarchy.append(unit) });
+                    return read({ in.mStream, CallerHierarchyPtr { in.mHierarchy.append(unit) } }, unit->*P, name);
                 },
                 [](SyncableUnitBase *unit, FormattedMessageStream &in, PendingRequest *request) -> StreamResult {
                     throw "Unsupported";
@@ -111,7 +111,7 @@ namespace Serialize {
             using setter_traits = CallableTraits<decltype(Setter)>;
             using setter_unit = std::decay_t<typename setter_traits::class_type>;
 
-            static_assert(requires(setter_unit * unit, MakeOwning_t<T> dummy, CallerHierarchyBasePtr hierarchy) {
+            static_assert(requires(setter_unit *unit, MakeOwning_t<T> dummy, CallerHierarchyBasePtr hierarchy) {
                 TupleUnpacker::invoke(Setter, unit, std::move(dummy), hierarchy);
             });
 
@@ -120,24 +120,24 @@ namespace Serialize {
                 []() {
                     return OffsetPtr {};
                 },
-                [](const void *_unit, FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy) {
+                [](const void *_unit, CallerHierarchyFormattedSerializeStream out, const char *name) {
                     const getter_unit *unit = unit_cast<const getter_unit *>(_unit);
-                    write<T, Configs...>(out, (unit->*Getter)(), name, hierarchy.append(unit));
+                    write<T, Configs...>({ out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, (unit->*Getter)(), name);
                 },
-                [](void *_unit, FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy) -> StreamResult {
+                [](void *_unit, CallerHierarchyFormattedSerializeStream in, const char *name) -> StreamResult {
                     setter_unit *unit = unit_cast<setter_unit *>(_unit);
                     MakeOwning_t<T> dummy;
-                    STREAM_PROPAGATE_ERROR(read<MakeOwning_t<T>, Configs...>(in, dummy, name, CallerHierarchyPtr { hierarchy.append(unit) }));
-                    TupleUnpacker::invoke(Setter, unit, std::move(dummy), hierarchy);
+                    STREAM_PROPAGATE_ERROR(read<MakeOwning_t<T>, Configs...>({ in.mStream, CallerHierarchyPtr { in.mHierarchy.append(unit) } }, dummy, name));
+                    TupleUnpacker::invoke(Setter, unit, std::move(dummy), in.mHierarchy);
                     return {};
                 },
-                [](void *unit, FormattedMessageStream &in, PendingRequest &request) -> StreamResult {
+                [](void *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) -> StreamResult {
                     throw "Unsupported";
                 },
                 [](void *unit, FormattedMessageStream &inout, MessageId id) -> StreamResult {
                     throw "Unsupported";
                 },
-                [](const Serializer *, void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) {
+                [](const Serializer *, void *_unit, CallerHierarchyFormattedSerializeStream in, bool success) {
                     return StreamResult {};
                 },
                 [](const Serialize::Serializer *serializer, void *unit, bool b, const CallerHierarchyBasePtr &hierarchy) {
@@ -149,10 +149,10 @@ namespace Serialize {
                 [](const void *unit, const std::vector<WriteMessage> &outStreams, void *data) {
                     throw "Unsupported";
                 },
-                [](const void *_unit, FormattedMessageStream &out, void *data) {
+                [](const void *_unit, CallerHierarchyFormattedSerializeStream out, void *data) {
                     throw "Unsupported";
                 },
-                [](FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth) -> StreamResult {
+                [](CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth) -> StreamResult {
                     return Serialize::visitStream<T, Configs...>(in, name, visitor, depth);
                 }
             };
@@ -171,31 +171,31 @@ namespace Serialize {
                 []() {
                     return MemberOffsetPtr<Unit, T> { P }.mOffset;
                 },
-                [](const void *_unit, FormattedSerializeStream &out, const char *name, CallerHierarchyBasePtr hierarchy) {
+                [](const void *_unit, CallerHierarchyFormattedSerializeStream out, const char *name) {
                     const Unit *unit = unit_cast<const Unit *>(_unit);
-                    write<T, Configs...>(out, std::invoke(P, unit), name, CallerHierarchyPtr { hierarchy.append(unit) });
+                    write<T, Configs...>({ out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, std::invoke(P, unit), name);
                 },
-                [](void *_unit, FormattedSerializeStream &in, const char *name, CallerHierarchyBasePtr hierarchy) -> StreamResult {
+                [](void *_unit, CallerHierarchyFormattedSerializeStream in, const char *name) -> StreamResult {
                     Unit *unit = unit_cast<Unit *>(_unit);
-                    return read<T, Configs...>(in, unit->*P, name, CallerHierarchyPtr { hierarchy.append(unit) });
+                    return read<T, Configs...>({ in.mStream, CallerHierarchyPtr { in.mHierarchy.append(unit) } }, unit->*P, name);
                 },
-                [](void *_unit, FormattedMessageStream &in, PendingRequest &request) -> StreamResult {
+                [](void *_unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) -> StreamResult {
                     if constexpr (std::derived_from<T, SyncableBase>) {
                         Unit *unit = unit_cast<Unit *>(_unit);
-                        return readAction<T, ParentConfigs..., Configs...>(unit->*P, in, request, CallerHierarchyPtr { CallerHierarchy { unit } });
+                        return readAction<T, ParentConfigs..., Configs...>(unit->*P, { in.mStream, CallerHierarchyPtr { in.mHierarchy.append(unit) } }, request);
                     } else
                         throw "Unsupported";
                 },
                 [](void *_unit, FormattedMessageStream &inout, MessageId id) -> StreamResult {
                     if constexpr (std::derived_from<T, SyncableBase>) {
                         Unit *unit = unit_cast<Unit *>(_unit);
-                        return readRequest<T, ParentConfigs..., Configs...>(unit->*P, inout, id, CallerHierarchyPtr { CallerHierarchy { unit } });
+                        return readRequest<T, ParentConfigs..., Configs...>(unit->*P, inout, id, CallerHierarchy { unit });
                     } else
                         throw "Unsupported";
                 },
-                [](const Serializer *, void *_unit, FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) -> StreamResult {
+                [](const Serializer *, void *_unit, CallerHierarchyFormattedSerializeStream in, bool success) -> StreamResult {
                     Unit *unit = unit_cast<Unit *>(_unit);
-                    return apply_map(unit->*P, in, success, CallerHierarchyPtr { hierarchy.append(unit) });
+                    return apply_map(unit->*P, { in.mStream, CallerHierarchyPtr { in.mHierarchy.append(unit) } }, success);
                 },
                 [](const Serializer *, void *_unit, bool b, const CallerHierarchyBasePtr &hierarchy) {
                     Unit *unit = unit_cast<Unit *>(_unit);
@@ -205,7 +205,7 @@ namespace Serialize {
                     setActive<T, Configs...>(unit_cast<Unit *>(unit)->*P, active, existenceChanged);
                 },
                 [](const Serializer *, void *unit) {
-                    set_parent(unit_cast<Unit *>(unit)->*P, unit_cast<Unit*>(unit));
+                    set_parent(unit_cast<Unit *>(unit)->*P, unit_cast<Unit *>(unit));
                 },
                 [](const void *_unit, const std::vector<WriteMessage> &outStreams, void *data) {
                     if constexpr (std::derived_from<T, SyncableBase>) {
@@ -215,15 +215,15 @@ namespace Serialize {
                     } else
                         throw "Unsupported";
                 },
-                [](const void *_unit, FormattedMessageStream &out, void *data) {
+                [](const void *_unit, CallerHierarchyFormattedSerializeStream out, void *data) {
                     if constexpr (std::derived_from<T, SyncableBase>) {
                         const Unit *unit = unit_cast<const Unit *>(_unit);
                         typename T::request_payload &payload = *static_cast<typename T::request_payload *>(data);
-                        writeRequest<T, Configs...>(unit->*P, out, std::move(payload), CallerHierarchyPtr { CallerHierarchy { unit } });
+                        writeRequest<T, Configs...>(unit->*P, { out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, std::move(payload));
                     } else
                         throw "Unsupported";
                 },
-                [](FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth) -> StreamResult {
+                [](CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth) -> StreamResult {
                     return visitStream<T, Configs...>(in, name, visitor, depth);
                 }
             };
@@ -244,17 +244,17 @@ namespace Serialize {
                         write(out, argTuple, "Args");
                     }
                 },
-                [](FormattedMessageStream &out, const void *result) {
+                [](CallerHierarchyFormattedSerializeStream out, const void *result) {
                     write(out, *static_cast<const R *>(result), "Result");
                 },
-                [](SyncableUnitBase *unit, FormattedMessageStream &in, uint16_t index, FunctionType type, PendingRequest &request) {
+                [](SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, uint16_t index, FunctionType type, PendingRequest &request) {
                     switch (type) {
                     case CALL: {
                         Tuple args;
                         STREAM_PROPAGATE_ERROR(read(in, args, "Args"));
                         STREAM_PROPAGATE_ERROR(apply_map(args, in, true));
                         writeFunctionAction(unit, index, &args, {}, request.mRequester, request.mRequesterTransactionId);
-                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.id() }));
+                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
                         request.mReceiver.set_value(result);
                     } break;
                     case QUERY: {
@@ -294,14 +294,14 @@ namespace Serialize {
         }
 
         template <typename T, typename... Configs>
-        StreamResult readState(const SerializeTable *table, void *unit, FormattedSerializeStream &in, CallerHierarchyBasePtr hierarchy)
+        StreamResult readState(const SerializeTable *table, void *unit, CallerHierarchyFormattedSerializeStream in)
         {
-            CallerHierarchy newHierarchy = hierarchy.append(unit_cast<T *>(unit));
+            CallerHierarchy newHierarchy = in.mHierarchy.append(unit_cast<T *>(unit));
             CallerHierarchyPtr newHierarchyPtr = newHierarchy;
 
             auto guard = GuardSelector<Configs...>::guard(newHierarchyPtr);
             (void)guard;
-            return Serialize::readState(table, unit, in, newHierarchyPtr);
+            return Serialize::readState(table, unit, { in.mStream, newHierarchyPtr });
         }
     }
 

@@ -130,7 +130,7 @@ namespace Window {
             Serialize::FormattedSerializeStream file = res->readAsFormattedStream(mgr);
 
             if (file) {
-                Serialize::StreamResult result = Serialize::readState(file, *this, nullptr, {});
+                Serialize::StreamResult result = Serialize::readState(file, *this, nullptr);
                 if (result.mState != Serialize::StreamState::OK) {
                     LOG_ERROR("Failed loading '" << res->path() << "' with following Error: "
                                                  << "\n"

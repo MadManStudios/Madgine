@@ -73,7 +73,7 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        void writeState(FormattedSerializeStream &out, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
+        void writeState(CallerHierarchyFormattedSerializeStream out, const char *name = nullptr, bool skipId = false) const;
 
         const void *mUnit = nullptr;
         const SerializeTable *mType = nullptr;
@@ -130,15 +130,15 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
+        StreamResult readState(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr, bool skipId = false) const;
 
-        StreamResult applyMap(FormattedSerializeStream &in, bool success, CallerHierarchyBasePtr hierarchy) const;
+        StreamResult applyMap(CallerHierarchyFormattedSerializeStream in, bool success) const;
 
         void setActive(bool active, bool existenceChanged) const;
 
-        static StreamResult visitStream(const SerializeTable *type, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult visitStream(const SerializeTable *type, CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
         template <typename T>
-        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             return visitStream(&serializeTable<decayed_t<T>>(), in, name, visitor, depth);
         }
@@ -251,7 +251,7 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, CallerHierarchyBasePtr hierarchy = {}, bool skipId = false) const;
+        StreamResult readState(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr, bool skipId = false) const;
 
         void setSynced(bool b, const CallerHierarchyBasePtr &hierarchy = {}) const;
         void setActive(bool active, bool existenceChanged) const;

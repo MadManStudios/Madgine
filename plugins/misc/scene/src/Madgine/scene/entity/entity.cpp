@@ -63,13 +63,13 @@ using namespace Engine::Serialize;
 static constexpr Serializer sComponentSynchronizer {
     "ComponentSynchronizer",
     nullptr,
-    [](const void *, FormattedSerializeStream &, const char *, Engine::CallerHierarchyBasePtr) {
+    [](const void *, CallerHierarchyFormattedSerializeStream , const char *) {
     },
-    [](void *, FormattedSerializeStream &, const char *, Engine::CallerHierarchyBasePtr) -> StreamResult {
+    [](void *, CallerHierarchyFormattedSerializeStream , const char *) -> StreamResult {
         throw 0;
         return {};
     },
-    [](void *unit, FormattedMessageStream &in, PendingRequest &request) -> StreamResult {
+    [](void *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) -> StreamResult {
         std::string name;
         STREAM_PROPAGATE_ERROR(read(in, name, "name"));
         auto it = Engine::Scene::Entity::EntityComponentRegistry::sComponentsByName().find(name);
@@ -86,7 +86,7 @@ static constexpr Serializer sComponentSynchronizer {
         throw 0;
         return {};
     },
-    [](const Serializer *, void *, FormattedSerializeStream &, bool, Engine::CallerHierarchyBasePtr) -> StreamResult {
+    [](const Serializer *, void *, CallerHierarchyFormattedSerializeStream, bool) -> StreamResult {
         return {};
     },
     [](const Serializer *, void *, bool, const Engine::CallerHierarchyBasePtr &hierarchy) {
@@ -105,7 +105,7 @@ static constexpr Serializer sComponentSynchronizer {
         uint16_t index = type->getIndex(payload.mOffset);
         type->writeAction(payload.mComponent, index, outStreams, payload.mData);
     },
-    [](const void *, FormattedMessageStream &out, void *) { throw 0; }
+    [](const void *, CallerHierarchyFormattedSerializeStream out, void *) { throw 0; }
 };
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)
@@ -262,9 +262,9 @@ namespace Scene {
             return mLifetime;
         }
 
-        Serialize::StreamResult Entity::readComponent(Serialize::FormattedSerializeStream &in, uint32_t &type, EntityComponentBase *&ptr)
+        Serialize::StreamResult Entity::readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, EntityComponentBase *&ptr)
         {
-            STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Component", 1));
+            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Component", 1));
             std::string name;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, name, "name"));
             type = EntityComponentRegistry::sComponentsByName().at(name);
@@ -272,9 +272,9 @@ namespace Scene {
             return {};
         }
 
-        const char *Entity::writeComponent(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &p) const
+        const char *Entity::writeComponent(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &p) const
         {
-            out.beginExtendedWrite("Component", 1);
+            out.mStream.beginExtendedWrite("Component", 1);
             write(out, EntityComponentRegistry::sComponentName(p.mType), "name");
             return "Component";
         }

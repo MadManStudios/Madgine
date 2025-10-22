@@ -91,7 +91,7 @@ namespace Serialize {
     struct SerializeTableCallbacks;
 
     struct Formatter;
-    using Format = std::unique_ptr<Formatter>(*)();
+    using Format = std::unique_ptr<Formatter> (*)();
 
     struct CompareStreamId;
 
@@ -160,15 +160,34 @@ namespace Serialize {
     struct apply_map_t;
     struct set_synced_t;
 
+    constexpr CallerHierarchyBasePtr sNoCallerHierarchy;
+
+    struct CallerHierarchyFormattedSerializeStream {
+
+        CallerHierarchyFormattedSerializeStream(FormattedSerializeStream &stream)
+            : mStream(stream)
+            , mHierarchy(sNoCallerHierarchy)
+        {
+        }
+        CallerHierarchyFormattedSerializeStream(FormattedSerializeStream &stream, const CallerHierarchyBasePtr &hierarchy)
+            : mStream(stream)
+            , mHierarchy(hierarchy)
+        {
+        }
+
+        FormattedSerializeStream &mStream;
+        const CallerHierarchyBasePtr &mHierarchy;
+    };
+
     template <typename T, typename... Configs>
     void setActive(T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {});
     template <typename T, typename... Configs>
-    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth = 0);
+    StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth = 0);
 
     template <typename T, typename... Configs>
-    void write(FormattedSerializeStream &out, const T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
+    void write(CallerHierarchyFormattedSerializeStream out, const T &t, const char *name);
     template <typename T, typename... Configs>
-    StreamResult read(FormattedSerializeStream &in, T &t, const char *name, const CallerHierarchyBasePtr &hierarchy = {});
+    StreamResult read(CallerHierarchyFormattedSerializeStream in, T &t, const char *name);
 }
 
 struct Vector2;
