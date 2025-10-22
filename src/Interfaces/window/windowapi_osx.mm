@@ -203,11 +203,13 @@ namespace Window {
                             static_cast<OSXWindow*>(this)->mLastKnownMousePos = windowPos;
                             break;
                         case NSEventTypeLeftMouseDown:
+                            captureInput();
                             onEvent(Input::PointerPressEvent{
                                 windowPos, screenPos, Input::MouseButton::LEFT_BUTTON
                             });
                             break;
                         case NSEventTypeLeftMouseUp:
+                            releaseInput();
                             onEvent(Input::PointerReleaseEvent{
                                 windowPos, screenPos, Input::MouseButton::LEFT_BUTTON
                             });

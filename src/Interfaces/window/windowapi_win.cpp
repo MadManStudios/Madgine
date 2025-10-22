@@ -42,21 +42,27 @@ namespace Window {
                 InterfacesVector screenPos = windowPos + renderPos();
                 switch (msg) {
                 case WM_LBUTTONDOWN:
+                    captureInput();
                     onEvent(Input::PointerPressEvent { windowPos, screenPos, Input::MouseButton::LEFT_BUTTON });
                     break;
                 case WM_LBUTTONUP:
+                    releaseInput();
                     onEvent(Input::PointerReleaseEvent { windowPos, screenPos, Input::MouseButton::LEFT_BUTTON });
                     break;
                 case WM_RBUTTONDOWN:
+                    captureInput();
                     onEvent(Input::PointerPressEvent { windowPos, screenPos, Input::MouseButton::RIGHT_BUTTON });
                     break;
                 case WM_RBUTTONUP:
+                    releaseInput();
                     onEvent(Input::PointerReleaseEvent { windowPos, screenPos, Input::MouseButton::RIGHT_BUTTON });
                     break;
                 case WM_MBUTTONDOWN:
+                    captureInput();
                     onEvent(Input::PointerPressEvent { windowPos, screenPos, Input::MouseButton::MIDDLE_BUTTON });
                     break;
                 case WM_MBUTTONUP:
+                    releaseInput();
                     onEvent(Input::PointerReleaseEvent { windowPos, screenPos, Input::MouseButton::MIDDLE_BUTTON });
                     break;
                 case WM_MOUSEMOVE:

@@ -80,11 +80,13 @@ namespace Window {
                 break;
             }
             case ButtonPress: {
+                captureInput();
                 const XButtonEvent &xbe = e.xbutton;
                 onEvent(Input::PointerPressEvent{ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
                 break;
             }
             case ButtonRelease: {
+                releaseInput();
                 const XButtonEvent &xbe = e.xbutton;
                 onEvent(Input::PointerReleaseEvent{ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
                 break;
