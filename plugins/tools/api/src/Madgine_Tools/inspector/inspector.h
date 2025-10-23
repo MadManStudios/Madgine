@@ -21,7 +21,7 @@ namespace Tools {
         void renderMenu() override;
 
         bool drawRemainingMembers(ScopePtr scope, std::set<std::string> &drawn);
-        bool drawMember(ScopePtr parent, const ScopeIterator &it);
+        bool drawMember(const ScopeIterator &it);
         std::pair<bool, bool> drawValue(std::string_view id, ValueType &value, bool editable, bool generic = false);
         std::pair<bool, bool> drawValue(std::string_view id, ScopePtr &scope, bool editable, ValueType *generic = nullptr);
         std::pair<bool, bool> drawValue(std::string_view id, OwnedScopePtr &scope, bool editable, ValueType *generic = nullptr);

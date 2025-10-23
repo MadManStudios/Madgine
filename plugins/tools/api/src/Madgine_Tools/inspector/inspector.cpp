@@ -65,7 +65,7 @@ namespace Tools {
         for (ScopeIterator it = scope.begin(); it != scope.end(); ++it) {
             if (drawn.count(it->key()) == 0) {
                 ImGui::TableNextRow();
-                changed |= drawMember(scope, it);
+                changed |= drawMember(it);
                 //drawn.insert(it->key());
             }
         }
@@ -73,7 +73,7 @@ namespace Tools {
         return changed;
     }
 
-    bool Inspector::drawMember(ScopePtr parent, const ScopeIterator &it)
+    bool Inspector::drawMember(const ScopeIterator &it)
     {
         ValueType value;
         if (streq(it->key(), "__proxy")) {
