@@ -47,6 +47,8 @@ namespace Execution {
                     newHead = nullptr;
                 }
             }
+            if (head)
+                head->mNext = nullptr;
             return head;
         }
 
