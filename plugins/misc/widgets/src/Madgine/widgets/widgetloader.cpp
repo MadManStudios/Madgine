@@ -24,6 +24,10 @@
 
 #include "compoundwidget.h"
 
+#include "widgetcollector.h"
+
+#include "widgettemplate.h"
+
 RESOURCELOADER(Engine::Widgets::WidgetLoader)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetTemplate)
@@ -31,14 +35,6 @@ SERIALIZETABLE_END(Engine::Widgets::WidgetTemplate)
 
 namespace Engine {
 namespace Widgets {
-
-    template <typename Widget>
-    void registerWidget(WidgetLoader &loader, std::string_view name)
-    {
-        loader.getOrCreateManual(name, {}, [](WidgetLoader *loader, WidgetDescriptor &desc, WidgetLoader::ResourceDataInfo &info) -> Threading::Task<bool> {
-            desc = type_holder<Widget>;
-            co_return true; }, &loader);
-    }
 
     WidgetLoader::Handle::Handle() = default;
 
@@ -57,15 +53,9 @@ namespace Widgets {
         if (!co_await ResourceLoaderBase::init())
             co_return false;
 
-        registerWidget<WidgetBase>(*this, "Widget");
-        registerWidget<Button>(*this, "Button");
-        registerWidget<SceneWindow>(*this, "SceneWindow");
-        registerWidget<Label>(*this, "Label");
-        registerWidget<Image>(*this, "Image");
-        registerWidget<Layout>(*this, "Layout");
-        registerWidget<TableWidget>(*this, "TableWidget");
-        registerWidget<TabBar>(*this, "TabBar");
-        registerWidget<TextEdit>(*this, "TextEdit");
+        /* getOrCreateManual("Widget", {}, [](WidgetLoader *loader, WidgetDescriptor &desc, WidgetLoader::ResourceDataInfo &info) -> Threading::Task<bool> {
+                desc = type_holder<WidgetBase>;
+                co_return true; }, this);            */
 
         co_return true;
     }
@@ -78,9 +68,6 @@ namespace Widgets {
         Serialize::FormattedSerializeStream stream { Serialize::Formats::xml(), mgr.wrapStream(info.resource()->readAsStream(), true) };
 
         std::vector<WidgetData> widgets;
-
-        Handle test;
-        co_await test.load("Image"); // TODO
 
         Serialize::StreamVisitorImpl visitor {
             [&](Serialize::PrimitiveHolder<Serialize::DataTag> holder, Serialize::FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<Serialize::StreamResult> {
@@ -116,15 +103,9 @@ namespace Widgets {
         co_return;
     }
 
-    WidgetDescriptor::WidgetDescriptor()
-        : mSerializeTable(&::serializeTable<CompoundWidget>())
-    {
-    }
-
     WidgetDescriptor::WidgetDescriptor(std::unique_ptr<WidgetTemplate> _template)
         : mMetaTable(&_template->mMetaTable)
         , mTemplate(std::move(_template))
-        , mSerializeTable(&::serializeTable<CompoundWidget>())
     {
     }
 
@@ -135,11 +116,6 @@ namespace Widgets {
     const MetaTable *WidgetDescriptor::metaTable()
     {
         return mMetaTable;
-    }
-
-    const Serialize::SerializeTable *WidgetDescriptor::serializeTable()
-    {
-        return mSerializeTable;
     }
 
     std::unique_ptr<WidgetBase> WidgetLoader::Handle::create(WidgetManager &manager, WidgetBase *parent) const

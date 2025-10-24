@@ -11,6 +11,8 @@
 
 #include "widgetmanager.h"
 
+NAMED_UNIQUECOMPONENT(TableWidget, Engine::Widgets::TableWidget)
+
 METATABLE_BEGIN_BASE(Engine::Widgets::TableWidget, Engine::Widgets::WidgetBase)
 NAMED_MEMBER(TextData, mTextRenderData)
 NAMED_MEMBER(SelectionColors, mSelectionRenderData)
@@ -98,11 +100,6 @@ namespace Widgets {
     AreaView<std::string, 2> TableWidget::content()
     {
         return { mCellData.data(), { columnCount(), rowCount() } };
-    }
-
-    const char *TableWidget::getClass() const
-    {
-        return "TableWidget";
     }
 
     void TableWidget::render(WidgetsRenderData &renderData)

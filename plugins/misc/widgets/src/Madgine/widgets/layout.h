@@ -7,9 +7,7 @@ namespace Engine {
 namespace Widgets {
     struct MADGINE_WIDGETS_EXPORT Layout : Widget<Layout> {
         using Widget::Widget;
-        virtual ~Layout() = default;
-
-        const char *getClass() const override;
+        virtual ~Layout() = default;        
 
         void updateChildrenGeometry() override;
     };

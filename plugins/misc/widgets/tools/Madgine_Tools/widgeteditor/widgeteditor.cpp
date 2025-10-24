@@ -28,6 +28,8 @@
 
 #include "Madgine/render/rendertarget.h"
 
+#include "Madgine_Tools/inspector/inspector.h"
+
 #include "imgui/imgui_internal.h"
 
 UNIQUECOMPONENT(Engine::Tools::WidgetEditor);
@@ -49,6 +51,8 @@ namespace Tools {
     Threading::Task<bool> WidgetEditor::init()
     {
         mWidgetManager = &static_cast<const ClientImRoot &>(mRoot).window().getWindowComponent<Widgets::WidgetManager>();
+
+        mInspector = &getTool<Inspector>();
 
         co_return co_await ResourceEditor::init(Widgets::WidgetLoader::getSingleton(), "Widget");
     }
@@ -88,13 +92,46 @@ namespace Tools {
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("WidgetEditor")) {
 
-                    for (Widgets::WidgetBase *w : mWidgetManager->widgets()) {
-                        if (ImGui::MenuItem(w->key().c_str(), nullptr, w->mVisible)) {
-                            mWidgetManager->swapCurrentRoot(w);
+                    for (const Widgets::LayoutWidget &w : mWidgetManager->layoutWidgets()) {
+                        ImGui::PushID(&w);
+                        if (ImGui::MenuItem(w.mName.c_str(), nullptr, w.mWidget.isSet() && std::get<0>(*w.mWidget)->mVisible, w.mWidget.isSet())) {
+                            if (std::get<0>(*w.mWidget)->mVisible)
+                                mWidgetManager->closeLayout(w.mName);
+                            else
+                                mWidgetManager->openLayout(w.mName);
                         }
+                        ImGui::PopID();
                     }
-                    if (ImGui::Button("Create Layout")) {
-                        mWidgetManager->createTopLevel();
+                    ImGui::Separator();
+                    if (ImGui::BeginMenu("Manage")) {
+                        for (Widgets::LayoutWidget &w : mWidgetManager->layoutWidgets()) {
+                            ImGui::PushID(&w);
+                            if (ImGui::BeginMenu((w.mName + "###Layout").c_str())) {
+                                ImGui::PushID(&w);
+                                ImGui::InputText("Name", &w.mName);
+                                ImGui::EnumCombo("Type", &w.mType);
+                                if (ImGui::BeginTable("LayoutWidgetMenuTable", 2, ImGuiTableFlags_SizingStretchProp)) {
+                                    ScopePtr widgetTemplate { &w.mWidgetTemplate };
+                                    if (mInspector->drawValue("Template", widgetTemplate, true).first) {
+                                        w.mWidgetTemplate = scope_cast<Widgets::WidgetLoader::Resource>(widgetTemplate);
+                                        if (w.mWidget.isSet()) {
+                                            mWidgetManager->destroyTopLevel(std::get<0>(*w.mWidget));
+                                            w.mWidget.reset();
+                                        }
+                                    }
+                                    ImGui::EndTable();
+                                }
+                                ImGui::Checkbox("Default Visible", &w.mDefaultVisibility);
+                                ImGui::PopID();
+                                ImGui::EndMenu();
+                            }
+                            ImGui::PopID();
+                        }
+                        ImGui::Separator();
+                        if (ImGui::MenuItem("Create Layout")) {
+                            mWidgetManager->createLayout("Unnamed");
+                        }
+                        ImGui::EndMenu();
                     }
 
                     ImGui::EndMenu();

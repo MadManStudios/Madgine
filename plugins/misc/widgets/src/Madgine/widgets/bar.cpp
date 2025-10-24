@@ -9,6 +9,8 @@
 
 #include "widgetmanager.h"
 
+NAMED_UNIQUECOMPONENT(Bar, Engine::Widgets::Bar);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::Bar, Engine::Widgets::WidgetBase)
 MEMBER(mRatio)
 MEMBER(mColor)
@@ -34,11 +36,6 @@ namespace Widgets {
         }
 
         WidgetBase::render(renderData);
-    }
-
-    const char *Bar::getClass() const
-    {
-        return "Bar";
     }
 
 }

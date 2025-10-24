@@ -15,10 +15,9 @@ METATABLE_END(Engine::Widgets::WidgetHandlerBase)
 
 namespace Engine {
 namespace Widgets {
-    WidgetHandlerBase::WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName, WidgetType type)
+    WidgetHandlerBase::WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName)
         : HandlerBase(ui)
         , mWidgetName(widgetName)
-        , mType(type)
     {
     }
 
@@ -28,13 +27,23 @@ namespace Widgets {
 
     void WidgetHandlerBase::setWidget(Widgets::WidgetBase *widget)
     {
-        mWidget = widget;
+        if (widget){
+            mLifetime.attach(widget->pointerMoveEvent().connect(&WidgetHandlerBase::onPointerMove, this));
+            mLifetime.attach(widget->pointerClickEvent().connect(&WidgetHandlerBase::onPointerClick, this));
+            mLifetime.attach(widget->dragBeginEvent().connect(&WidgetHandlerBase::onDragBegin, this));
+            mLifetime.attach(widget->dragMoveEvent().connect(&WidgetHandlerBase::onDragMove, this));
+            mLifetime.attach(widget->dragEndEvent().connect(&WidgetHandlerBase::onDragEnd, this));
+            mLifetime.attach(widget->axisEvent().connect(&WidgetHandlerBase::onAxisEvent, this));
+            mLifetime.attach(widget->keyPressEvent().connect(&WidgetHandlerBase::onKeyPress, this));
+            mLifetime.attach(widget->keyReleaseEvent().connect(&WidgetHandlerBase::onKeyRelease, this));
+            widget->setAcceptsPointerEvents(true);
+        }
     }
 
     void WidgetHandlerBase::abortDrag()
     {
         if (mWidget)
-            mWidget->abortDrag();
+            std::get<0>(*mWidget->mWidget)->abortDrag();
     }
 
     void WidgetHandlerBase::onPointerMove(const Input::PointerMoveEvent &me)
@@ -77,41 +86,35 @@ namespace Widgets {
 
     bool WidgetHandlerBase::dragging() const
     {
-        return mWidget ? mWidget->dragging() : false;
+        return mWidget ? std::get<0>(*mWidget->mWidget)->dragging() : false;
     }
 
     void WidgetHandlerBase::startLifetime()
     {
         HandlerBase::startLifetime();
 
-        Widgets::WidgetBase *widget = mUI.window().getWindowComponent<Widgets::WidgetManager>().getWidget(mWidgetName);
-        if (widget != mWidget)
-            setWidget(widget);
+        mWidget = mUI.window().getWindowComponent<Widgets::WidgetManager>().getLayoutWidget(mWidgetName);
+        if (mWidget)
+            mLifetime.attach(mWidget->mWidget | Execution::then([this](WidgetBase *widget) {
+                assert(widget);
+                setWidget(widget);
+            }));
+        else
+            setWidget(nullptr);
 
-        if (mWidget) {
-            mLifetime.attach(mWidget->pointerMoveEvent().connect(&WidgetHandlerBase::onPointerMove, this));
-            mLifetime.attach(mWidget->pointerClickEvent().connect(&WidgetHandlerBase::onPointerClick, this));
-            mLifetime.attach(mWidget->dragBeginEvent().connect(&WidgetHandlerBase::onDragBegin, this));
-            mLifetime.attach(mWidget->dragMoveEvent().connect(&WidgetHandlerBase::onDragMove, this));
-            mLifetime.attach(mWidget->dragEndEvent().connect(&WidgetHandlerBase::onDragEnd, this));
-            mLifetime.attach(mWidget->axisEvent().connect(&WidgetHandlerBase::onAxisEvent, this));
-            mLifetime.attach(mWidget->keyPressEvent().connect(&WidgetHandlerBase::onKeyPress, this));
-            mLifetime.attach(mWidget->keyReleaseEvent().connect(&WidgetHandlerBase::onKeyRelease, this));
-            mWidget->setAcceptsPointerEvents(true);
-        }
     }
 
     Widgets::WidgetBase *WidgetHandlerBase::widget() const
     {
-        return mWidget;
+        return std::get<0>(*mWidget->mWidget);
     }
 
     void WidgetHandlerBase::open()
     {
-        assert(mType != WidgetType::DEFAULT_WIDGET);
-
         if (!mWidget)
             return;
+
+        assert(mWidget->mType != WidgetType::DEFAULT_WIDGET);
 
         auto state = this->state();
         if (!state.is_ready() || !state) {
@@ -122,43 +125,24 @@ namespace Widgets {
         if (isOpen())
             return;
 
-        switch (mType) {
-        case WidgetType::MODAL_OVERLAY:
-            mWidget->manager().openModalWidget(mWidget);
-            break;
-        case WidgetType::NONMODAL_OVERLAY:
-            mWidget->manager().openWidget(mWidget);
-            break;
-        case WidgetType::ROOT_WIDGET:
-            mWidget->manager().swapCurrentRoot(mWidget);
-            break;
-        }
+        mUI.window().getWindowComponent<Widgets::WidgetManager>().openLayout(mWidgetName);
     }
 
     void WidgetHandlerBase::close()
     {
-        assert(mType != WidgetType::DEFAULT_WIDGET);
+        assert(mWidget->mType != WidgetType::DEFAULT_WIDGET);
 
-        switch (mType) {
-        case WidgetType::MODAL_OVERLAY:
-            mWidget->manager().closeModalWidget(mWidget);
-            break;
-        case WidgetType::NONMODAL_OVERLAY:
-            mWidget->manager().closeWidget(mWidget);
-            break;
-        case WidgetType::ROOT_WIDGET:
-            std::terminate();
-        }
+        mUI.window().getWindowComponent<Widgets::WidgetManager>().closeLayout(mWidgetName);
     }
 
     bool WidgetHandlerBase::isOpen() const
     {
-        return mWidget->mVisible;
+        return mWidget->mWidget.isSet() && std::get<0>(*mWidget->mWidget)->mVisible;
     }
 
     bool WidgetHandlerBase::isRootWindow() const
     {
-        return mType == WidgetType::ROOT_WIDGET;
+        return mWidget->mType == WidgetType::ROOT_WIDGET;
     }
 
 }

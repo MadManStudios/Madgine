@@ -26,6 +26,8 @@
 
 #include "widgetloader.h"
 
+#include "widgetcollector.h"
+
 namespace Engine {
 namespace Widgets {
 
@@ -81,7 +83,7 @@ namespace Widgets {
         WidgetBase *createChildByDescriptor(const WidgetLoader::Handle &desc);
         void clearChildren();
 
-        WidgetBase *getChildRecursive(std::string_view name);
+        virtual WidgetBase *getChildRecursive(std::string_view name);
         template <typename T>
         T *getChildRecursive(std::string_view name)
         {
@@ -145,6 +147,8 @@ namespace Widgets {
 
 
         bool containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend = 0.0f) const;
+        WidgetBase *getHoveredUp(const Vector2 &point, const Rect2i &screenSpace);
+        virtual WidgetBase *getHoveredDown(const Vector2 &point, const Rect2i &screenSpace);
 
         virtual void render(WidgetsRenderData &renderData);
 
@@ -226,9 +230,14 @@ namespace Widgets {
     };
 
     template <typename T>
-    struct Widget : VirtualScope<T, Serialize::VirtualData<T, WidgetBase>> {
+    struct Widget : VirtualScope<T, Serialize::VirtualData<T, WidgetComponent<T, WidgetBase>>> {
 
-        using VirtualScope<T, Serialize::VirtualData<T, WidgetBase>>::VirtualScope;
+        using VirtualScope<T, Serialize::VirtualData<T, WidgetComponent<T, WidgetBase>>>::VirtualScope;
+
+        const char *getClass() const final
+        {
+            return T::componentName().data();
+        }
     };
 }
 }

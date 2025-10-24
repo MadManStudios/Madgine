@@ -90,10 +90,10 @@ namespace Tools {
 
 #ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::renderLandingPage()
-    {        
+    {
         if (mProjectRoot.empty()) {
 
-            if (ImGui::Begin("GameOverlay")) {                
+            if (ImGui::Begin("GameOverlay")) {
                 ImVec2 size = ImGui::GetWindowContentRegionMax() - ImGui::GetWindowContentRegionMin();
                 size.y -= 20.0f;
                 ImGui::BeginVertical("vLanding", size);
@@ -195,6 +195,48 @@ namespace Tools {
             ImGui::End();
         }
     }
+
+    void ProjectManager::renderGameMenu()
+    {
+        if (ImGui::Begin("Game")) {
+            if (ImGui::BeginMenuBar()) {
+                if (ImGui::BeginMenu("Layout")) {
+                    if (mProjectRoot.empty())
+                        ImGui::BeginDisabled();
+                    if (ImGui::MenuItem("New Layout...")) {
+                        mRoot.dialogs().show([]() -> Dialog<std::string> {
+                    DialogSettings &settings = co_await get_dialog_settings;
+                    std::string layoutName;
+                    do {
+                        ImGui::InputText("Name", &layoutName);
+                        settings.acceptPossible = !layoutName.empty();
+                    } while (co_yield settings);
+                    co_return layoutName; }(),
+                            [this](const std::string &layoutName) {
+                                setLayout(layoutName);
+                            });
+                    }
+                    if (ImGui::MenuItem("Save Layout")) {
+                        save();
+                    }
+
+                    ImGui::Separator();
+
+                    for (const std::string &layout : projectLayouts()) {
+                        if (ImGui::MenuItem(layout.c_str(), nullptr, mLayout == layout)) {
+                            setLayout(layout);
+                        }
+                    }
+                    if (mProjectRoot.empty())
+                        ImGui::EndDisabled();
+
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMenuBar();
+            }
+        }
+        ImGui::End();
+    }
 #endif
 
     void ProjectManager::renderTips()
@@ -246,6 +288,7 @@ namespace Tools {
 #ifndef MADGINE_MAINWINDOW_LAYOUT
         renderLandingPage();
         renderConfigurations();
+        renderGameMenu();
 #endif
     }
 
@@ -261,37 +304,6 @@ namespace Tools {
             if (ImGui::MenuItem("Open Project...")) {
                 openProjectDialog();
             }
-
-            ImGui::Separator();
-
-            if (mProjectRoot.empty())
-                ImGui::BeginDisabled();
-            if (ImGui::MenuItem("New Layout...")) {
-                mRoot.dialogs().show([]() -> Dialog<std::string> {
-                    DialogSettings &settings = co_await get_dialog_settings;
-                    std::string layoutName;
-                    do {
-                        ImGui::InputText("Name", &layoutName);
-                        settings.acceptPossible = !layoutName.empty();
-                    } while (co_yield settings);
-                    co_return layoutName; }(),
-                    [this](const std::string &layoutName) {
-                        setLayout(layoutName);
-                    });
-            }
-            if (ImGui::MenuItem("Save Layout")) {
-                save();
-            }
-
-            ImGui::Separator();
-
-            for (const std::string &layout : projectLayouts()) {
-                if (ImGui::MenuItem(layout.c_str(), nullptr, mLayout == layout)) {
-                    setLayout(layout);
-                }
-            }
-            if (mProjectRoot.empty())
-                ImGui::EndDisabled();
 
             ImGui::Separator();
 

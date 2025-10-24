@@ -25,8 +25,6 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        const char *getClass() const override;
-
         TextRenderData mTextRenderData;
         ScalableImageRenderData mImageRenderData;     
         ColorTintRenderData mColorTintRenderData;

@@ -25,6 +25,7 @@ namespace Tools {
 #ifndef MADGINE_MAINWINDOW_LAYOUT
         void renderLandingPage();
         void renderConfigurations();
+        void renderGameMenu();
 
         void loadConfiguration(const Filesystem::Path &config) override;
         void saveConfiguration(const Filesystem::Path &config) override;

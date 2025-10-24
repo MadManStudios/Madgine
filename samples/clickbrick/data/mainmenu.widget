@@ -1,0 +1,56 @@
+<Widget serId=1>
+    <mChildren>
+        <Button serId=2>
+            <mText>StartGame</mText>
+            <mTextRenderData serId=3>
+                <mFontSize>64</mFontSize>
+                <mPivot>[0.5, 0.5]</mPivot>
+                <mColor>(1, 1, 1, 1)</mColor>
+                <mFont>OpenSans-Regular</mFont>
+            </mTextRenderData>
+            <mImageRenderData serId=4>
+                <Image></Image>
+                <mLeftBorder>0</mLeftBorder>
+                <mTopBorder>0</mTopBorder>
+                <mBottomBorder>0</mBottomBorder>
+                <mRightBorder>0</mRightBorder>
+            </mImageRenderData>
+            <mColorTintRenderData serId=5>
+                <mNormalColor>(1, 1, 1, 1)</mNormalColor>
+                <mHighlightedColor>(1.2, 1.2, 1.2, 1)</mHighlightedColor>
+                <mPressedColor>(1.3, 1.3, 1.3, 1)</mPressedColor>
+                <mSelectedColor>(1.1, 1.1, 1.1, 1)</mSelectedColor>
+                <mDisabledColor>(0.4, 0.4, 0.4, 1)</mDisabledColor>
+            </mColorTintRenderData>
+            <mEnabled>true</mEnabled>
+            <mChildren>
+            </mChildren>
+            <mName>StartGameButton</mName>
+            <mPos>[0.25, 0, 0, 0, 0.2, 0, 0, 0, 0]</mPos>
+            <mSize>[0.5, 0, 0, 0, 0.1, 0, 0, 0, 1]</mSize>
+            <mOpacity>1</mOpacity>
+            <mConditions>
+            </mConditions>
+            <mProperties>
+                <Conditional mask=1>
+                    <Position index=0>0.4</Position>
+                    <Size index=1>0.09</Size>
+                </Conditional>
+            </mProperties>
+        </Button>
+    </mChildren>
+    <mName>MainMenu</mName>
+    <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+    <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+    <mOpacity>1</mOpacity>
+    <mConditions>
+        <Item serId=6>
+            <mName>Test</mName>
+            <mFormula>Formula::W_MINUS_H</mFormula>
+            <mOperator>Operator::GREATER</mOperator>
+            <mReferenceValue>0</mReferenceValue>
+        </Item>
+    </mConditions>
+    <mProperties>
+    </mProperties>
+</Widget>

@@ -33,7 +33,7 @@ namespace ClickBrick {
 
         void spawnBrick();
 
-        void onPointerClick(const Engine::Widgets::PointerClickEvent &evt) override;
+        void onPointerClickHandler(const Engine::Widgets::PointerClickEvent &evt);
 
         void modScore(int diff);
         void modLife(int diff);

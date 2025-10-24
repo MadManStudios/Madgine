@@ -10,9 +10,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Image() = default;
 
-        void render(WidgetsRenderData &renderData) override;
-
-        const char *getClass() const override;
+        void render(WidgetsRenderData &renderData) override;        
 
         ScalableImageRenderData mImageRenderData;
         Color4 mColor = { 1.0f, 1.0f, 1.0f, 1.0f };

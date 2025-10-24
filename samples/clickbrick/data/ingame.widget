@@ -1,0 +1,62 @@
+<Widget serId=1>
+    <mChildren>
+        <SceneWindow serId=2>
+            <mChildren>
+                <Label serId=3>
+                    <mText>Score: 0</mText>
+                    <mTextRenderData serId=4>
+                        <mFontSize>35</mFontSize>
+                        <mPivot>[1, 0]</mPivot>
+                        <mColor>(1, 1, 1, 1)</mColor>
+                        <mFont>OpenSans-Bold</mFont>
+                    </mTextRenderData>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Score</mName>
+                    <mPos>[0.8, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+                    <mSize>[0.2, 0, 0, 0, 0, 40, 0, 0, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Label>
+                <Label serId=5>
+                    <mText>Life: -26</mText>
+                    <mTextRenderData serId=6>
+                        <mFontSize>35</mFontSize>
+                        <mPivot>[0, 0]</mPivot>
+                        <mColor>(1, 1, 1, 1)</mColor>
+                        <mFont>OpenSans-Bold</mFont>
+                    </mTextRenderData>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Life</mName>
+                    <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+                    <mSize>[0.2, 0, 0, 0, 0, 40, 0, 0, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Label>
+            </mChildren>
+            <mName>GameView</mName>
+            <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+            <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+            <mOpacity>1</mOpacity>
+            <mConditions>
+            </mConditions>
+            <mProperties>
+            </mProperties>
+        </SceneWindow>
+    </mChildren>
+    <mName>Ingame</mName>
+    <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+    <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+    <mOpacity>1</mOpacity>
+    <mConditions>
+    </mConditions>
+    <mProperties>
+    </mProperties>
+</Widget>

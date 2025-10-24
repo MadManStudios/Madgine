@@ -30,8 +30,6 @@ namespace Widgets {
 
         AreaView<std::string, 2> content();
 
-        const char *getClass() const override;
-
         void render(WidgetsRenderData &renderData) override;
 
         void sizeChanged(const Vector3 &pixelSize) override;

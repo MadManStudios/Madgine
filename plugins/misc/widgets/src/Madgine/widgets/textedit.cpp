@@ -43,6 +43,8 @@
 #define STB_TEXTEDIT_IMPLEMENTATION
 #include "stb_textedit.h"
 
+NAMED_UNIQUECOMPONENT(TextEdit, Engine::Widgets::TextEdit);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::TextEdit, Engine::Widgets::WidgetBase)
 PROPERTY(Text, text, setText)
 NAMED_MEMBER(TextData, mTextRenderData)
@@ -150,11 +152,6 @@ namespace Widgets {
     void TextEdit::sizeChanged(const Vector3 &pixelSize)
     {
         mTextRenderData.updateText(mText, getAbsoluteTextSize());
-    }
-
-    const char *TextEdit::getClass() const
-    {
-        return "TextEdit";
     }
 
     void TextEdit::onActivate(bool b)

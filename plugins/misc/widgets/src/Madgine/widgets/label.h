@@ -8,9 +8,7 @@ namespace Engine {
 namespace Widgets {
     struct MADGINE_WIDGETS_EXPORT Label : Widget<Label> {
         using Widget::Widget;
-        virtual ~Label() = default;
-
-        const char *getClass() const override;
+        virtual ~Label() = default;        
 
         void render(WidgetsRenderData &renderData) override;
 

@@ -21,9 +21,7 @@ namespace Widgets {
 
         void setEditable(bool b);
 
-        void render(WidgetsRenderData &renderData) override;
-
-        const char *getClass() const override;
+        void render(WidgetsRenderData &renderData) override;        
 
         void injectPointerClick(const PointerClickEvent &arg) override;
         void injectDragBegin(const DragBeginEvent &arg) override;

@@ -8,23 +8,18 @@
 
 #include "Madgine/handler.h"
 
+#include "Madgine/widgets/layoutwidget.h"
+
 namespace Engine {
 namespace Widgets {
 
     struct MADGINE_WIDGETHANDLER_EXPORT WidgetHandlerBase : HandlerBase {
         SERIALIZABLEUNIT(WidgetHandlerBase)
 
-        enum class WidgetType {
-            DEFAULT_WIDGET,
-            MODAL_OVERLAY,
-            NONMODAL_OVERLAY,
-            ROOT_WIDGET
-        };
-
-        WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName, WidgetType type = WidgetType::DEFAULT_WIDGET);
+        WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName);
         virtual ~WidgetHandlerBase() = default;
 
-        virtual void startLifetime();
+        void startLifetime() final;
 
         Widgets::WidgetBase *widget() const;
         virtual void setWidget(Widgets::WidgetBase *w);
@@ -60,7 +55,7 @@ namespace Widgets {
         {
             if (!mWidget)
                 return nullptr;
-            Widgets::Button *button = mWidget->getChildRecursive<Widgets::Button>(name);
+            Widgets::Button *button = std::get<0>(*mWidget->mWidget)->getChildRecursive<Widgets::Button>(name);
             if (button)
                 mLifetime.attach(button->clickEvent().connect(std::forward<Ty>(args)...));
             return button;
@@ -68,9 +63,7 @@ namespace Widgets {
 
     protected:
         std::string_view mWidgetName;
-        Widgets::WidgetBase *mWidget = nullptr;
-
-        const WidgetType mType;
+        Widgets::LayoutWidget *mWidget = nullptr;
     };
 
     

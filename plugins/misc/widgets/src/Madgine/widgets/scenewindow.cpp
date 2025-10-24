@@ -15,6 +15,9 @@
 
 #include "util/renderdata.h"
 
+NAMED_UNIQUECOMPONENT(SceneWindow, Engine::Widgets::SceneWindow);
+
+
 METATABLE_BEGIN_BASE(Engine::Widgets::SceneWindow, Engine::Widgets::WidgetBase)
 METATABLE_END(Engine::Widgets::SceneWindow)
 
@@ -62,11 +65,6 @@ namespace Widgets {
     {
         if (mSource)
             mSource->resize(pixelSize.xy().floor());
-    }
-
-    const char *SceneWindow::getClass() const
-    {
-        return "SceneWindow";
     }
 
 }

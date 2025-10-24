@@ -58,7 +58,7 @@ NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<"Spe
 namespace ClickBrick {
 
 GameManager::GameManager(Engine::HandlerManager &ui)
-    : Engine::Widgets::WidgetHandler<GameManager>(ui, "GameView")
+    : Engine::Widgets::WidgetHandler<GameManager>(ui, "Ingame")
     , mSceneMgr(ui.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
     , mSceneRenderer(ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>(), &mCamera, 50)
     , mSceneClock(mSceneMgr.clock().now())
@@ -97,6 +97,9 @@ void GameManager::setWidget(Engine::Widgets::WidgetBase *widget)
     if (widget) {
         mGameWindow = widget->getChildRecursive<Engine::Widgets::SceneWindow>("GameView");
         mGameWindow->setRenderSource(mGameRenderTarget.get());
+
+        mLifetime.attach(mGameWindow->pointerClickEvent().connect(&GameManager::onPointerClickHandler, this));
+        mGameWindow->setAcceptsPointerEvents(true);
 
         mScoreLabel = widget->getChildRecursive<Engine::Widgets::Label>("Score");
         mLifeLabel = widget->getChildRecursive<Engine::Widgets::Label>("Life");
@@ -151,7 +154,7 @@ void GameManager::spawnBrick()
     brick->addBehavior(Brick(speed, dir, q));
 }
 
-void GameManager::onPointerClick(const Engine::Widgets::PointerClickEvent &evt)
+void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent &evt)
 {
     Engine::Ray3 ray = mCamera.mousePointToRay(Engine::Vector2 { static_cast<float>(evt.mWindowPosition.x), static_cast<float>(evt.mWindowPosition.y) }, mGameWindow->getAbsoluteSize().xy());
 

@@ -41,6 +41,7 @@ namespace Tools {
 
     private:        
         Widgets::WidgetManager *mWidgetManager = nullptr;
+        Inspector *mInspector = nullptr;
 
         friend struct WidgetFile;
         std::map<Widgets::WidgetLoader::Resource *, WidgetFile> mFiles;

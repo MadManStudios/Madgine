@@ -27,8 +27,11 @@
 
 #include "events.h"
 
+#include "layoutwidget.h"
+
 namespace Engine {
 namespace Widgets {
+
 
     struct MADGINE_WIDGETS_EXPORT WidgetManager : Window::MainWindowComponent<WidgetManager> {
 
@@ -46,6 +49,13 @@ namespace Widgets {
         void closeWidget(WidgetBase *widget);
         void openOverlay(WidgetBase *widget);
         void closeOverlay(WidgetBase *widget);
+
+        void openLayout(std::string_view name);
+        void closeLayout(std::string_view name);
+
+        void createLayout(std::string_view name);
+        LayoutWidget *getLayoutWidget(std::string_view name);
+        std::list<LayoutWidget> &layoutWidgets();
 
         bool isHovered(WidgetBase *w);
         WidgetBase *hoveredWidget();
@@ -74,9 +84,6 @@ namespace Widgets {
         {
             return mTopLevelWidgets | std::views::transform(projectionUniquePtrToPtr);
         }
-
-        WidgetBase *mStartupWidget = nullptr;
-        void openStartupWidget();
 
         bool onWindowEvent(const Window::WindowEvent &arg) override;
         bool injectPointerPress(const Input::PointerPressEvent &arg);
@@ -113,6 +120,7 @@ namespace Widgets {
         WidgetBase *getHoveredWidget(const Vector2 &pos, WidgetBase *current);
         WidgetBase *getHoveredWidgetUp(const Vector2 &pos, WidgetBase *current);
         WidgetBase *getHoveredWidgetDown(const Vector2 &pos, WidgetBase *current);
+        WidgetBase *getHoveredWidgetDown2(const Vector2 &pos, WidgetBase *current);
 
         void resetPointerState();
 
@@ -128,6 +136,8 @@ namespace Widgets {
         std::vector<WidgetBase *> mWidgets;
 
         std::vector<std::unique_ptr<WidgetBase>> mTopLevelWidgets;
+
+        std::list<LayoutWidget> mWidgetsLayout;
 
         WidgetBase *mHoveredWidget = nullptr;
         WidgetBase *mFocusedWidget = nullptr;

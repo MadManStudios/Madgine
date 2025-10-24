@@ -8,9 +8,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Bar() = default;
 
-        void render(WidgetsRenderData &renderData) override;
-
-        const char *getClass() const override;
+        void render(WidgetsRenderData &renderData) override;        
 
         float mRatio = 0.0f;
         Color4 mColor;

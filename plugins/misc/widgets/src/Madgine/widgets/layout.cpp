@@ -9,6 +9,8 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+NAMED_UNIQUECOMPONENT(Layout, Engine::Widgets::Layout);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::Layout, Engine::Widgets::WidgetBase)
 METATABLE_END(Engine::Widgets::Layout)
 
@@ -36,11 +38,6 @@ namespace Widgets {
         SizeConstraints mConstraints;
         float mOffset;
     };
-
-    const char *Layout::getClass() const
-    {
-        return "Layout";
-    }
 
     void Layout::updateChildrenGeometry()
     {

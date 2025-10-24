@@ -5,6 +5,8 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+NAMED_UNIQUECOMPONENT(Label, Engine::Widgets::Label);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::Label, Engine::Widgets::WidgetBase)
 MEMBER(mText)
 NAMED_MEMBER(TextData, mTextRenderData)
@@ -17,11 +19,6 @@ SERIALIZETABLE_END(Engine::Widgets::Label)
 
 namespace Engine {
 namespace Widgets {
-
-    const char *Label::getClass() const
-    {
-        return "Label";
-    }
 
     void Label::render(WidgetsRenderData &renderData)
     {

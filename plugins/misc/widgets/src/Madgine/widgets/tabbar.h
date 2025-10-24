@@ -19,8 +19,6 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        const char *getClass() const override;
-
         void sizeChanged(const Vector3 &pixelSize) override;
 
         uint32_t tabCount() const;

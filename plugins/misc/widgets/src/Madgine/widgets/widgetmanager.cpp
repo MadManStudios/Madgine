@@ -39,12 +39,11 @@ NAMED_UNIQUECOMPONENT(WidgetManager, Engine::Widgets::WidgetManager)
 
 METATABLE_BEGIN(Engine::Widgets::WidgetManager)
 READONLY_PROPERTY(Widgets, widgets)
-MEMBER(mStartupWidget)
+MEMBER(mWidgetsLayout)
 METATABLE_END(Engine::Widgets::WidgetManager)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetManager)
-FIELD(mStartupWidget)
-FIELD(mTopLevelWidgets, Serialize::ParentCreator<&Engine::Widgets::WidgetManager::readWidgetStub, &Engine::Widgets::WidgetManager::writeWidget, nullptr, &Engine::Widgets::WidgetManager::scanWidget>)
+FIELD(mWidgetsLayout)
 SERIALIZETABLE_END(Engine::Widgets::WidgetManager)
 
 namespace Engine {
@@ -138,14 +137,24 @@ namespace Widgets {
         std::string _class;
         STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class));
 
-        WidgetLoader::Handle desc;
-        Threading::TaskFuture<bool> result = desc.load(_class);
+        if (_class == "Widget") {
+            widget = std::make_unique<WidgetBase>(*this, parent);
+        } else {
+            auto it = WidgetRegistry::sComponentsByName().find(_class);
+            if (it != WidgetRegistry::sComponentsByName().end()) {
+                widget = construct(WidgetRegistry::get(it->second), *this, std::move(parent));
+            } else {
 
-        if (!result.get()) {
-            return STREAM_UNKNOWN_ERROR(in) << "Widget class '" << _class << "' not found!";
+                WidgetLoader::Handle desc;
+                Threading::TaskFuture<bool> result = desc.load(_class);
+
+                if (result) {
+                    widget = desc.create(*this, parent);
+                } else {
+                    return STREAM_UNKNOWN_ERROR(in) << "Widget class '" << _class << "' not found!";
+                }
+            }
         }
-
-        widget = desc.create(*this, parent);
 
         return {};
     }
@@ -164,8 +173,23 @@ namespace Widgets {
     {
         std::string _class;
         STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class));
-        WidgetLoader::Handle desc = WidgetLoader::load(_class);
-        out = desc->serializeTable();
+
+        if (_class == "Widget") {
+            out = &serializeTable<WidgetBase>();
+        } else {
+            auto it = WidgetRegistry::sComponentsByName().find(_class);
+            if (it != WidgetRegistry::sComponentsByName().end()) {
+                out = WidgetRegistry::get(it->second).mType;
+            } else {
+                WidgetLoader::Resource *res = WidgetLoader::get(_class);
+                if (res) {
+                    out = &serializeTable<CompoundWidget>();
+                } else {
+                    throw 0;
+                }
+            }
+        }
+
         return {};
     }
 
@@ -259,10 +283,10 @@ namespace Widgets {
             arg.mWindowPosition = arg.mWindowPosition - InterfacesVector { pos.x, pos.y };
             if (mDragging) {
                 if (!mDraggingAborted)
-                    mFocusedWidget->injectDragEnd(DragEndEvent {arg.mWindowPosition, arg.mScreenPosition, arg.mButton});
+                    mFocusedWidget->injectDragEnd(DragEndEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton });
                 mDragging = false;
             } else {
-                mFocusedWidget->injectPointerClick(PointerClickEvent {arg.mWindowPosition, arg.mScreenPosition, arg.mButton});
+                mFocusedWidget->injectPointerClick(PointerClickEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton });
             }
 
             mDragStartEvent.mButton = Input::MouseButton::NO_BUTTON;
@@ -275,36 +299,25 @@ namespace Widgets {
 
     WidgetBase *WidgetManager::getHoveredWidgetUp(const Vector2 &pos, WidgetBase *current)
     {
-        if (!current) {
-            return nullptr;
-        } else if (!current->mVisible || !current->containsPoint(pos, { { 0, 0 }, mClientSpace.mSize })) {
-            return getHoveredWidgetUp(pos, current->getParent());
-        } else {
-            return current;
-        }
+        return current ? current->getHoveredUp(pos, { { 0, 0 }, mClientSpace.mSize }) : nullptr;
     }
 
     WidgetBase *WidgetManager::getHoveredWidgetDown(const Vector2 &pos, WidgetBase *current)
     {
         if (current) {
-            for (WidgetBase *w : current->children()) {
-                if (w->mVisible && w->containsPoint(pos, { { 0, 0 }, mClientSpace.mSize })) {
-                    return getHoveredWidgetDown(pos, w);
-                }
-            }
+            return current->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize });
         } else {
             if (!mModalWidgetList.empty()) {
                 assert(mModalWidgetList.front()->mVisible);
-                return getHoveredWidgetDown(pos, mModalWidgetList.front());
+                return mModalWidgetList.front()->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize });
             }
             for (WidgetBase *w : widgets()) {
-                if (w->mVisible && w->containsPoint(pos, { { 0, 0 }, mClientSpace.mSize })) {
-                    return getHoveredWidgetDown(pos, w);
+                if (WidgetBase *hovered = w->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize })) {
+                    return hovered;
                 }
             }
+            return nullptr;
         }
-
-        return current;
     }
 
     WidgetBase *WidgetManager::getHoveredWidget(const Vector2 &pos, WidgetBase *current)
@@ -391,6 +404,8 @@ namespace Widgets {
 
     void WidgetManager::destroyTopLevel(WidgetBase *w)
     {
+        if (mCurrentRoot == w)
+            mCurrentRoot = nullptr;
         auto it = std::ranges::find(mTopLevelWidgets, w, projectionToRawPtr);
         assert(it != mTopLevelWidgets.end());
         mTopLevelWidgets.erase(it);
@@ -517,12 +532,62 @@ namespace Widgets {
         std::erase(mOverlays, widget);
     }
 
-    void WidgetManager::openStartupWidget()
+    void WidgetManager::openLayout(std::string_view name)
     {
-        if (mStartupWidget)
-            swapCurrentRoot(mStartupWidget);
-        else if (mTopLevelWidgets.size() > 0)
-            swapCurrentRoot(mTopLevelWidgets.front().get());
+        auto it = std::ranges::find(mWidgetsLayout, name, &LayoutWidget::mName);
+        if (it != mWidgetsLayout.end() && it->mWidget.isSet()) {
+            switch (it->mType) {
+            case WidgetType::MODAL_OVERLAY:
+                openModalWidget(std::get<0>(*it->mWidget));
+                break;
+            case WidgetType::DEFAULT_WIDGET:
+                openWidget(std::get<0>(*it->mWidget));
+                break;
+            case WidgetType::NONMODAL_OVERLAY:
+                openWidget(std::get<0>(*it->mWidget));
+                break;
+            case WidgetType::ROOT_WIDGET:
+                swapCurrentRoot(std::get<0>(*it->mWidget));
+                break;
+            }
+        }
+    }
+
+    void WidgetManager::closeLayout(std::string_view name)
+    {
+        auto it = std::ranges::find(mWidgetsLayout, name, &LayoutWidget::mName);
+        if (it != mWidgetsLayout.end()) {
+            switch (it->mType) {
+            case WidgetType::MODAL_OVERLAY:
+                closeModalWidget(std::get<0>(*it->mWidget));
+                break;
+            case WidgetType::DEFAULT_WIDGET:
+                closeWidget(std::get<0>(*it->mWidget));
+                break;
+            case WidgetType::NONMODAL_OVERLAY:
+                closeWidget(std::get<0>(*it->mWidget));
+                break;
+            case WidgetType::ROOT_WIDGET:
+                // swapCurrentRoot(it->mWidget);
+                break;
+            }
+        }
+    }
+
+    void WidgetManager::createLayout(std::string_view name)
+    {
+        mWidgetsLayout.emplace_back().mName = name;
+    }
+
+    LayoutWidget *WidgetManager::getLayoutWidget(std::string_view name)
+    {
+        auto it = std::ranges::find(mWidgetsLayout, name, &LayoutWidget::mName);
+        return it == mWidgetsLayout.end() ? nullptr : &*it;
+    }
+
+    std::list<LayoutWidget> &WidgetManager::layoutWidgets()
+    {
+        return mWidgetsLayout;
     }
 
     void WidgetManager::onResize(const Rect2i &space)
@@ -541,6 +606,20 @@ namespace Widgets {
 
         WidgetsRenderData renderData;
         auto keep = renderData.pushClipRect(Vector2::ZERO, Vector2 { mClientSpace.mSize });
+
+        for (LayoutWidget &layoutWidget : mWidgetsLayout) {
+            if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate && layoutWidget.mWidgetTemplate.info()->loadingTask().is_ready() && layoutWidget.mWidgetTemplate.info()->loadingTask()) {
+                std::unique_ptr<WidgetBase> p = layoutWidget.mWidgetTemplate.create(*this);
+
+                layoutWidget.mWidget.emplace(p.get());
+                p->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+                mTopLevelWidgets.emplace_back(std::move(p));
+
+                if (layoutWidget.mDefaultVisibility) {
+                    openLayout(layoutWidget.mName);
+                }
+            }
+        }
 
         if (mCurrentRoot) {
             renderData.setAlpha(mCurrentRoot->opacity());
@@ -642,10 +721,24 @@ namespace Widgets {
     void WidgetManager::onActivate(bool active)
     {
         if (active) {
-            for (WidgetBase *topLevel : widgets()) {
-                topLevel->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+            for (LayoutWidget &layoutWidget : mWidgetsLayout) {
+                if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate.available()) {
+                    std::unique_ptr<WidgetBase> p = layoutWidget.mWidgetTemplate.create(*this);
+                    layoutWidget.mWidget.emplace(p.get());
+                    p->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+                    mTopLevelWidgets.emplace_back(std::move(p));
+                    if (layoutWidget.mDefaultVisibility) {
+                        openLayout(layoutWidget.mName);
+                    }
+                }
             }
-            openStartupWidget();
+        } else {
+            for (LayoutWidget &layoutWidget : mWidgetsLayout) {
+                if (layoutWidget.mWidget.isSet()) {
+                    destroyTopLevel(std::get<0>(*layoutWidget.mWidget));
+                    layoutWidget.mWidget.reset();
+                }
+            }
         }
     }
 
@@ -676,6 +769,5 @@ namespace Widgets {
     {
         setupImpl(target, "widgets", "widgets", { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) });
     }
-
 }
 }

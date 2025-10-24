@@ -9,6 +9,7 @@
 
 #include "widgetmanager.h"
 
+NAMED_UNIQUECOMPONENT(Image, Engine::Widgets::Image);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::Image, Engine::Widgets::WidgetBase)
 NAMED_MEMBER(Image, mImageRenderData)
@@ -35,11 +36,6 @@ namespace Widgets {
         mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, mColor);
 
         WidgetBase::render(renderData);
-    }
-
-    const char *Image::getClass() const
-    {
-        return "Image";
     }
 
 }

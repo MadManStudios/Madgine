@@ -13,6 +13,8 @@
 
 #include "Madgine/imageloader/imageloader.h"
 
+NAMED_UNIQUECOMPONENT(Button, Engine::Widgets::Button);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::Button, Engine::Widgets::WidgetBase)
 MEMBER(mText)
 NAMED_MEMBER(TextData, mTextRenderData)
@@ -95,11 +97,6 @@ namespace Widgets {
     void Button::emitClicked()
     {
         mClicked.emit();
-    }
-
-    const char *Button::getClass() const
-    {
-        return "Button";
     }
 
 }

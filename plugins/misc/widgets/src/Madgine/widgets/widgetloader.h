@@ -3,6 +3,8 @@
 #include "Madgine/resources/resourceloader.h"
 #include "Meta/serialize/hierarchy/serializetable_forward.h"
 
+#include "widgettemplate.h"
+
 namespace Engine {
 namespace Widgets {
 
@@ -31,30 +33,19 @@ namespace Widgets {
     };
 
     struct MADGINE_WIDGETS_EXPORT WidgetDescriptor {
-        WidgetDescriptor();
+        WidgetDescriptor() = default;
 
         WidgetDescriptor(std::unique_ptr<WidgetTemplate> _template);
-        template <typename WidgetType>
-        WidgetDescriptor(type_holder_t<WidgetType>)
-            : mCtor([](WidgetManager &manager, WidgetBase *parent, WidgetLoader::Handle desc) -> std::unique_ptr<WidgetBase> {
-                return std::make_unique<WidgetType>(manager, parent);
-            })
-            , mSerializeTable(&::serializeTable<WidgetType>())
-            , mMetaTable(table<WidgetType>)
-        {
-        }
         ~WidgetDescriptor();
 
         WidgetDescriptor &operator=(WidgetDescriptor &&) noexcept;
 
         const MetaTable *metaTable();
-        const Serialize::SerializeTable *serializeTable();
 
         const std::unique_ptr<WidgetTemplate> &widgetTemplate() const;
         std::unique_ptr<WidgetBase> create(WidgetManager &manager, WidgetLoader::Handle handle, WidgetBase *parent = nullptr) const;
 
-    private:
-        const Serialize::SerializeTable *mSerializeTable;
+    private:        
         const MetaTable *mMetaTable = nullptr;
 
         std::unique_ptr<WidgetBase> (*mCtor)(WidgetManager &, WidgetBase *, WidgetLoader::Handle) = nullptr;

@@ -41,6 +41,8 @@
 #define STB_TEXTEDIT_IMPLEMENTATION
 #include "stb_textedit.h"
 
+NAMED_UNIQUECOMPONENT(Textbox, Engine::Widgets::Textbox);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::Textbox, Engine::Widgets::WidgetBase)
 MEMBER(mText)
 NAMED_MEMBER(TextData, mTextRenderData)
@@ -93,11 +95,6 @@ namespace Widgets {
         }
 
         WidgetBase::render(renderData);
-    }
-
-    const char *Textbox::getClass() const
-    {
-        return "Textbox";
     }
 
     void Textbox::injectPointerClick(const PointerClickEvent &arg)

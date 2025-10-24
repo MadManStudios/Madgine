@@ -33,8 +33,6 @@ namespace Widgets {
 
         virtual void sizeChanged(const Vector3 &pixelSize) override;
 
-        const char *getClass() const override;
-
         void onActivate(bool b);
 
         virtual void injectPointerClick(const PointerClickEvent &arg) override;

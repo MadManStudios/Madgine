@@ -1,0 +1,50 @@
+<Widget serId=1>
+    <mChildren>
+        <Label serId=2>
+            <mText>Game Over</mText>
+            <mTextRenderData serId=3>
+                <mFontSize>80</mFontSize>
+                <mPivot>[0.5, 0.5]</mPivot>
+                <mColor>(1, 1, 1, 1)</mColor>
+                <mFont>OpenSans-Bold</mFont>
+            </mTextRenderData>
+            <mChildren>
+            </mChildren>
+            <mName>GameOverLabel</mName>
+            <mPos>[0.2, 0, 0, 0, 0.4, 0, 0, 0, 0]</mPos>
+            <mSize>[0.6, 0, 0, 0, 0.11, 0, 0, 0, 1]</mSize>
+            <mOpacity>1</mOpacity>
+            <mConditions>
+            </mConditions>
+            <mProperties>
+            </mProperties>
+        </Label>
+        <Label serId=4>
+            <mText>Your Score: 0</mText>
+            <mTextRenderData serId=5>
+                <mFontSize>35</mFontSize>
+                <mPivot>[0.5, 0.5]</mPivot>
+                <mColor>(1, 1, 1, 1)</mColor>
+                <mFont>OpenSans-Regular</mFont>
+            </mTextRenderData>
+            <mChildren>
+            </mChildren>
+            <mName>ScoreLabel</mName>
+            <mPos>[0.3, 0, 0, 0, 0.55, 0, 0, 0, 0]</mPos>
+            <mSize>[0.4, 0, 0, 0, 0.05, 0, 0, 0, 1]</mSize>
+            <mOpacity>1</mOpacity>
+            <mConditions>
+            </mConditions>
+            <mProperties>
+            </mProperties>
+        </Label>
+    </mChildren>
+    <mName>GameOver</mName>
+    <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+    <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+    <mOpacity>1</mOpacity>
+    <mConditions>
+    </mConditions>
+    <mProperties>
+    </mProperties>
+</Widget>

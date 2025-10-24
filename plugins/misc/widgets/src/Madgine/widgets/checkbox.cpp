@@ -5,6 +5,8 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+NAMED_UNIQUECOMPONENT(Checkbox, Engine::Widgets::Checkbox);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::Checkbox, Engine::Widgets::WidgetBase)
 METATABLE_END(Engine::Widgets::Checkbox)
 
@@ -21,11 +23,6 @@ namespace Widgets {
 
     void Checkbox::setChecked(bool b)
     {
-    }
-
-    const char *Checkbox::getClass() const
-    {
-        return "Checkbox";
     }
 
 }

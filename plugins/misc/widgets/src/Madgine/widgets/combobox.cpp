@@ -5,6 +5,8 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+NAMED_UNIQUECOMPONENT(Combobox, Engine::Widgets::Combobox);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::Combobox, Engine::Widgets::WidgetBase)
 METATABLE_END(Engine::Widgets::Combobox)
 
@@ -29,11 +31,6 @@ namespace Widgets {
     std::string Combobox::getText()
     {
         return std::string();
-    }
-
-    const char *Combobox::getClass() const
-    {
-        return "Combobox";
     }
 
 }

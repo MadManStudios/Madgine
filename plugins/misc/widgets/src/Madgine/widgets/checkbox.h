@@ -9,9 +9,7 @@ namespace Widgets {
         virtual ~Checkbox() = default;
 
         virtual bool isChecked();
-        virtual void setChecked(bool b);
-
-        const char *getClass() const override;
+        virtual void setChecked(bool b);        
     };
 }
 }

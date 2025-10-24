@@ -7,6 +7,8 @@
 
 #include "widgetmanager.h"
 
+NAMED_UNIQUECOMPONENT(TabBar, Engine::Widgets::TabBar);
+
 METATABLE_BEGIN_BASE(Engine::Widgets::TabBar, Engine::Widgets::WidgetBase)
 MEMBER(mTabNames)
 PROPERTY(TabCount, tabCount, setTabCount)
@@ -74,11 +76,6 @@ namespace Widgets {
         }
 
         WidgetBase::render(renderData);
-    }
-
-    const char *TabBar::getClass() const
-    {
-        return "TabBar";
     }
 
     uint32_t TabBar::tabCount() const

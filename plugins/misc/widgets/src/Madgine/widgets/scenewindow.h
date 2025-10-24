@@ -11,9 +11,7 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;        
 
-        void setRenderSource(Render::RenderTarget *source);
-
-        const char *getClass() const override;
+        void setRenderSource(Render::RenderTarget *source);        
 
     protected:
         void sizeChanged(const Vector3 &pixelSize) override;

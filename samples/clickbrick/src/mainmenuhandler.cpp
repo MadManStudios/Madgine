@@ -18,7 +18,7 @@ METATABLE_END(ClickBrick::MainMenuHandler)
 namespace ClickBrick {
 
 MainMenuHandler::MainMenuHandler(Engine::HandlerManager &ui)
-    : Engine::Widgets::WidgetHandler<MainMenuHandler>(ui, "MainMenu", Engine::Widgets::WidgetHandlerBase::WidgetType::ROOT_WIDGET)
+    : Engine::Widgets::WidgetHandler<MainMenuHandler>(ui, "MainMenu")
 {
 }
 
@@ -27,10 +27,10 @@ std::string_view MainMenuHandler::key() const
     return "MainMenuHandler";
 }
 
-void MainMenuHandler::startLifetime()
+void MainMenuHandler::setWidget(Engine::Widgets::WidgetBase *widget)
 {
-    WidgetHandlerBase::startLifetime();
-    if (widget()) {
+    WidgetHandlerBase::setWidget(widget);
+    if (widget) {
         setupButton("StartGameButton", &MainMenuHandler::startGame, this);
     }
 }

@@ -412,6 +412,31 @@ namespace Widgets {
         return min.x <= point.x && min.y <= point.y && max.x >= point.x && max.y >= point.y;
     }
 
+    WidgetBase *WidgetBase::getHoveredUp(const Vector2 &point, const Rect2i &screenSpace)
+    {
+        if (mVisible && containsPoint(point, screenSpace)) {
+            return this;
+        } else if (mParent) {
+            return mParent->getHoveredUp(point, screenSpace);
+        } else {
+            return nullptr;
+        }
+    }
+
+    WidgetBase *WidgetBase::getHoveredDown(const Vector2 &point, const Rect2i &screenSpace)
+    {
+        if (!mVisible || !containsPoint(point, screenSpace))
+            return nullptr;
+
+        for (WidgetBase *w : mChildren | std::views::transform(projectionUniquePtrToPtr)) {
+            if (WidgetBase *hovered = w->getHoveredDown(point, screenSpace)) {
+                return hovered;
+            }
+        }
+
+        return this;
+    }
+
     void WidgetBase::render(WidgetsRenderData &renderData)
     {
         float oldAlpha = renderData.alpha();

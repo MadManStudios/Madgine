@@ -2,33 +2,11 @@
 
 #include "widget.h"
 
-#include "Meta/keyvalue/metatable.h"
-#include "Meta/serialize/hierarchy/serializetable.h"
-
 #include "widgetloader.h"
 
 namespace Engine {
 namespace Widgets {
 
-    struct WidgetData {
-        std::string mName;
-        std::string mType;
-    };
-
-    struct MADGINE_WIDGETS_EXPORT WidgetTemplate {
-
-        WidgetTemplate(std::string name, std::vector<WidgetData> widgets);
-        ~WidgetTemplate();
-
-        static std::unique_ptr<Accessor[]> accessors(const std::vector<WidgetData> &widgets);
-
-        std::string mName;
-        std::vector<WidgetData> mWidgets;
-
-        std::unique_ptr<Accessor[]> mAccessors;
-        const MetaTable *mSelfTable = &mMetaTable;
-        MetaTable mMetaTable;
-    };
 
     struct MADGINE_WIDGETS_EXPORT CompoundWidget : WidgetBase {
 
@@ -49,19 +27,14 @@ namespace Widgets {
             return dynamic_cast<T *>(getTemplateWidget(name));
         }
 
-        Serialize::SerializableDataPtr customUnitPtr() override
-        {
-            return { this, mDescriptor->serializeTable() };
-        }
-        Serialize::SerializableDataConstPtr customUnitPtr() const override
-        {
-            return { this, mDescriptor->serializeTable() };
-        }
-
         virtual ScopePtr customScopePtr() override
         {
             return { this, mDescriptor->metaTable() };
         }
+
+        WidgetBase *getChildRecursive(std::string_view name) override;
+
+        WidgetBase *getHoveredDown(const Vector2 &point, const Rect2i &screenSpace) override;
 
     private:
         std::vector<std::unique_ptr<WidgetBase>> mTemplateWidgets;
