@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace Engine {
 
 struct OffsetPtr {
@@ -47,6 +46,12 @@ struct OffsetPtr {
     constexpr OffsetPtr &operator+=(uintptr_t offset)
     {
         mOffset += offset;
+        return *this;
+    }
+
+    constexpr OffsetPtr &operator+=(const OffsetPtr &other)
+    {
+        mOffset += other.mOffset;
         return *this;
     }
 

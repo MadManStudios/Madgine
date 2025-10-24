@@ -246,7 +246,7 @@ namespace Serialize {
         while (!tables.empty()) {
             table = tables.top();
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                if (it->mOffset() == offset) {
+                if (it->mOffset == offset) {
                     return index;
                 }
                 ++index;

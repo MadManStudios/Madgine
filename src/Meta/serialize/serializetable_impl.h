@@ -50,9 +50,7 @@ namespace Serialize {
 
             return {
                 name,
-                []() {
-                    return OffsetPtr {};
-                },
+                OffsetPtr{},
                 [](const void *_unit, CallerHierarchyFormattedSerializeStream out, const char *name) {
                     const Unit *unit = unit_cast<const Unit *>(_unit);
                     write({ out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, (unit->*Getter)(), name);
@@ -117,9 +115,7 @@ namespace Serialize {
 
             return {
                 name,
-                []() {
-                    return OffsetPtr {};
-                },
+                OffsetPtr {},
                 [](const void *_unit, CallerHierarchyFormattedSerializeStream out, const char *name) {
                     const getter_unit *unit = unit_cast<const getter_unit *>(_unit);
                     write<T, Configs...>({ out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, (unit->*Getter)(), name);
@@ -158,7 +154,7 @@ namespace Serialize {
             };
         }
 
-        template <typename _disambiguate__dont_remove, auto P, typename... Configs, typename... ParentConfigs>
+        template <typename _disambiguate__dont_remove, uintptr_t off, auto P, typename... Configs, typename... ParentConfigs>
         constexpr Serializer field(const char *name, type_pack<ParentConfigs...>)
         {
             using traits = CallableTraits<decltype(P)>;
@@ -168,9 +164,7 @@ namespace Serialize {
 
             return {
                 name,
-                []() {
-                    return MemberOffsetPtr<Unit, T> { P }.mOffset;
-                },
+                OffsetPtr { off },
                 [](const void *_unit, CallerHierarchyFormattedSerializeStream out, const char *name) {
                     const Unit *unit = unit_cast<const Unit *>(_unit);
                     write<T, Configs...>({ out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, std::invoke(P, unit), name);
@@ -408,7 +402,7 @@ namespace Serialize {
     SERIALIZETABLE_END_EX(, T)
 
 #define FIELD_EX(Idx, ...) \
-    SERIALIZETABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::Serialize::__serialize_impl__::field<Ty, &Ty::__VA_ARGS__>(STRINGIFY2(FIRST(__VA_ARGS__)), parentConfigs)))
+    SERIALIZETABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::Serialize::__serialize_impl__::field<Ty, offsetof(Ty, FIRST(__VA_ARGS__)), &Ty::__VA_ARGS__>(STRINGIFY2(FIRST(__VA_ARGS__)), parentConfigs)))
 
 #define FIELD(...) \
     FIELD_EX(, __VA_ARGS__)

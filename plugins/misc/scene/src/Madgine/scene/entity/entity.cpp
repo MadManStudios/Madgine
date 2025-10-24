@@ -62,7 +62,7 @@ METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::En
 using namespace Engine::Serialize;
 static constexpr Serializer sComponentSynchronizer {
     "ComponentSynchronizer",
-    nullptr,
+    {},
     [](const void *, CallerHierarchyFormattedSerializeStream , const char *) {
     },
     [](void *, CallerHierarchyFormattedSerializeStream , const char *) -> StreamResult {

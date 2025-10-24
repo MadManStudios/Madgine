@@ -59,7 +59,7 @@ template <typename T>
     requires(!std::is_pointer_v<T>)
 T *scope_cast(const ScopePtr &ptr)
 {
-    size_t offset = 0;
+    OffsetPtr offset { 0 };
     if (!ptr.mType->isDerivedFrom<std::remove_const_t<T>>(&offset))
         std::terminate();
 

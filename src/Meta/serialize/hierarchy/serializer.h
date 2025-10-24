@@ -2,13 +2,14 @@
 
 #include "Generic/callerhierarchy.h"
 #include "Generic/closure.h"
+#include "Generic/offsetptr.h"
 
 namespace Engine {
 namespace Serialize {
 
     struct Serializer {
         const char *mFieldName;
-        OffsetPtr (*mOffset)() = nullptr;
+        OffsetPtr mOffset;
 
         void (*mWriteState)(const void *, CallerHierarchyFormattedSerializeStream, const char *) = nullptr;
         StreamResult (*mReadState)(void *, CallerHierarchyFormattedSerializeStream, const char *) = nullptr;

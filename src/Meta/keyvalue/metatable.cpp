@@ -37,7 +37,7 @@ void MetaTable::moveAssign(ScopePtr scope, ScopePtr other) const
     mMoveAssign(scope, other);
 }
 
-bool MetaTable::isDerivedFrom(const MetaTable *baseType, size_t *offset) const
+bool MetaTable::isDerivedFrom(const MetaTable *baseType, OffsetPtr *offset) const
 {
     if (this == baseType)
         return true;

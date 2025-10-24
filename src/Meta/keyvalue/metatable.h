@@ -2,6 +2,8 @@
 
 #include "table_forward.h"
 
+#include "Generic/offsetptr.h"
+
 namespace Engine {
 
 template <typename T>
@@ -41,7 +43,7 @@ struct META_EXPORT MetaTable {
         : mSelf(&table<T>)
         , mTypeName(name)
         , mBase(&table<Base>)
-        , mBaseOffset(&Engine::inheritance_offset<Base, T>)
+        , mBaseOffset([]() { return OffsetPtr { type_holder<T>, type_holder<Base> }; })
         , mMembers(members)
         , mConstructors(constructors)
         , mMoveAssign(moveAssign<T>())
@@ -67,18 +69,18 @@ struct META_EXPORT MetaTable {
     void moveAssign(ScopePtr scope, ScopePtr other) const;
 
     template <typename T>
-    bool isDerivedFrom(size_t *offset = nullptr) const
+    bool isDerivedFrom(OffsetPtr *offset = nullptr) const
     {
         return isDerivedFrom(table<T>, offset);
     }
-    bool isDerivedFrom(const MetaTable *baseType, size_t *offset = nullptr) const;
+    bool isDerivedFrom(const MetaTable *baseType, OffsetPtr *offset = nullptr) const;
 
     std::string name(ScopePtr scope) const;
 
     const MetaTable **mSelf;
     const char *mTypeName;
     const MetaTable **mBase;
-    size_t (*mBaseOffset)();
+    OffsetPtr (*mBaseOffset)();
     const Accessor *mMembers;
     const Constructor *mConstructors;
     MoveAssign *mMoveAssign;

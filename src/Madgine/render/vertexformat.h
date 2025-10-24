@@ -8,27 +8,27 @@ namespace Render {
 
     struct VertexFormat {
 
-        VertexFormat() = default;
+        constexpr VertexFormat() = default;
 
         template <typename VertexType>
-        VertexFormat(type_holder_t<VertexType>)
+        constexpr VertexFormat(type_holder_t<VertexType>)
             : mFormat(toVertexFormat<VertexType>(std::make_index_sequence<VertexElements::size> {}))
         {
         }
 
-        auto operator<=>(const VertexFormat &) const = default;
+        constexpr auto operator<=>(const VertexFormat &) const = default;
 
-        bool has(uint8_t index) const
+        constexpr bool has(uint8_t index) const
         {
             return mFormat & (1 << index);
         }
 
-        operator uint16_t() const
+        constexpr operator uint16_t() const
         {
             return mFormat;
         }
 
-        size_t stride() const
+        constexpr size_t stride() const
         {
             size_t stride = 0;
             for (size_t i = 0; i < VertexElements::size; ++i) {
@@ -40,7 +40,7 @@ namespace Render {
 
     private:
         template <typename VertexType, size_t... Is>
-        static uint16_t toVertexFormat(std::index_sequence<Is...>)
+        static constexpr uint16_t toVertexFormat(std::index_sequence<Is...>)
         {
             uint16_t format = 0;
 

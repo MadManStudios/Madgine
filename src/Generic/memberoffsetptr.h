@@ -1,7 +1,7 @@
 #pragma once
 
-#include "replace.h"
 #include "offsetptr.h"
+#include "replace.h"
 
 namespace Engine {
 
@@ -15,10 +15,9 @@ struct MemberOffsetPtr {
 
     MemberOffsetPtr() = default;
 
-    template <typename Target>
-    MemberOffsetPtr(Target(T::*P))
-        : mOffset(reinterpret_cast<uintptr_t>(&static_cast<M &>(static_cast<T *>(reinterpret_cast<void *>(0x1))->*P)) - 1)
-    {        
+    constexpr MemberOffsetPtr(size_t offset)
+        : mOffset(offset)
+    {
     }
 
     T *parent(M *m)
@@ -72,17 +71,17 @@ struct MemberOffsetPtrWrapper {
 #define DECLARE_MEMBER_OFFSET(Name) \
     struct __access_##Name##__;
 
-#define DEFINE_MEMBER_OFFSET(Name)                                                                   \
+#define DEFINE_MEMBER_OFFSET(Name)                                                                  \
     static ::Engine::MemberOffsetPtr<Self, decltype(Name)> __##Name##_value__()                     \
-    {                                                                                         \
-        return &Self::Name;                                                                   \
-    }                                                                                         \
-    struct __access_##Name##__ {                                                              \
+    {                                                                                               \
+        return offsetof(Self, Name);                                                                \
+    }                                                                                               \
+    struct __access_##Name##__ {                                                                    \
         static inline ::Engine::MemberOffsetPtr<Self, decltype(Name)> value = __##Name##_value__(); \
     };
 
-#define MEMBER_OFFSET_CONTAINER(Name, Init, ...)                                                                                                \
-    DECLARE_MEMBER_OFFSET(Name)                                                                                                           \
+#define MEMBER_OFFSET_CONTAINER(Name, Init, ...)                                                                                           \
+    DECLARE_MEMBER_OFFSET(Name)                                                                                                            \
     ::Engine::replace<__VA_ARGS__>::tagged<::Engine::MemberOffsetPtrTag, ::Engine::MemberOffsetPtrWrapper<__access_##Name##__>> Name Init; \
     DEFINE_MEMBER_OFFSET(Name)
 

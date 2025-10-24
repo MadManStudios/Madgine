@@ -72,12 +72,6 @@ struct index_range_add<add, std::index_sequence<Is...>> {
 template <size_t from, size_t to>
 using make_index_range = typename index_range_add<from, std::make_index_sequence<to - from>>::type;
 
-template <typename Base, std::derived_from<Base> Derived>
-constexpr size_t inheritance_offset()
-{
-    return reinterpret_cast<uintptr_t>(static_cast<Base *>(reinterpret_cast<Derived *>(0x1))) - 1;
-}
-
 template <typename T>
 struct OutRef {
 
@@ -163,6 +157,11 @@ struct Not {
     template <typename T>
     struct type : std::bool_constant<!Inner<T>::value> {
     };
+};
+
+template <typename T>
+struct declval_helper {
+    static T value;
 };
 
 }
