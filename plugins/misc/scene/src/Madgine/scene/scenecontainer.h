@@ -2,12 +2,10 @@
 
 #include "Meta/serialize/hierarchy/toplevelunit.h"
 
-#include "Generic/container/refcountedcontainer.h"
+#include "Generic/container/freelistcontainer.h"
 #include "entity/entity.h"
 
 #include "Meta/serialize/container/syncablecontainer.h"
-
-#include "entity/entityptr.h"
 
 #include "Generic/execution/signalfunctor.h"
 
@@ -19,8 +17,7 @@ namespace Scene {
     struct MADGINE_SCENE_EXPORT SceneContainer : Serialize::TopLevelUnit<SceneContainer> {
         SERIALIZABLEUNIT(SceneContainer)
 
-        using EntityContainer = RefcountedContainer<std::deque<Entity::Entity>>;
-        using ControlBlock = typename EntityContainer::ControlBlock;
+        using EntityContainer = std::list<Entity::Entity>;
 
         SceneContainer(SceneManager &sceneMgr);
 
@@ -44,7 +41,7 @@ namespace Scene {
         static std::string generateUniqueName();
 
         auto entities() {
-            return mEntities | std::views::transform(projectionAddressOf);
+            return mEntities | std::views::transform(&Entity::Entity::pointer);
         }
 
         Threading::DataMutex &mutex();
@@ -69,12 +66,6 @@ namespace Scene {
 
         SYNCABLE_CONTAINER(mEntities, EntityContainer, Execution::SignalFunctor<const EntityContainer::iterator &, int>);
 
-        struct EntityHelper {
-            Entity::EntityPtr operator()(Entity::Entity &ref) const
-            {
-                return { &ref };
-            }
-        };
     };
 
 }

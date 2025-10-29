@@ -49,7 +49,7 @@ namespace Scene {
         if (it == mEntities.end()) {
             return {};
         }
-        return &*it;
+        return it->pointer();
     }
 
     std::string SceneContainer::generateUniqueName()
@@ -98,8 +98,8 @@ namespace Scene {
     Entity::EntityPtr SceneContainer::createEntity(const std::string &name,
         const std::function<void(Entity::Entity &)> &init)
     {
-        auto toPtr = [this](const typename RefcountedContainer<std::deque<Entity::Entity>>::iterator &it) {
-            return Entity::EntityPtr { &*it };
+        auto toPtr = [this](const EntityContainer::iterator &it) {
+            return it->pointer();
         };
         if (init)
             return toPtr(TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_init, this), mEntities.end(), init, createEntityData(name)));
@@ -110,7 +110,7 @@ namespace Scene {
     void SceneContainer::createEntityAsyncImpl(Serialize::GenericMessageReceiver receiver, const std::string &name, std::function<void(Entity::Entity &)> init)
     {
         Execution::detach(mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }, receiver { std::move(receiver) }]() mutable {
-            auto toPtr = [](const typename RefcountedContainer<std::deque<Entity::Entity>>::iterator &it) { return Entity::EntityPtr { &*it }; };
+            auto toPtr = [](const typename EntityContainer::iterator &it) { return it->pointer(); };
             if (init)
                 Execution::detach_with_receiver(
                     TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_init_async, this), mEntities.end(), init, createEntityData(name))
@@ -139,7 +139,7 @@ namespace Scene {
         return mLifetime;
     }
 
-    Execution::SignalStub<const RefcountedContainer<std::deque<Entity::Entity>>::iterator &, int> &SceneContainer::entitiesSignal()
+    Execution::SignalStub<const SceneContainer::EntityContainer::iterator &, int> &SceneContainer::entitiesSignal()
     {
         return mEntities.observer().signal();
     }

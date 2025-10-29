@@ -10,7 +10,7 @@ struct CallableViewImpl {
     template <typename F>
     explicit CallableViewImpl(F &f)
         : mF([](void *context, Args &&...args) -> R {
-            return (*static_cast<F *>(context))(std::forward<Args>(args)...);
+            return std::invoke(*static_cast<F *>(context), std::forward<Args>(args)...);
         })
         , mContext(&f)
     {
@@ -20,7 +20,7 @@ struct CallableViewImpl {
     CallableViewImpl &operator=(F &f)
     {
         mF = [](void *context, Args &&...args) -> R {
-            return (*static_cast<F *>(context))(std::forward<Args>(args)...);
+            return std::invoke(*static_cast<F *>(context), std::forward<Args>(args)...);
         };
         mContext = &f;
         return *this;

@@ -248,7 +248,7 @@ namespace Serialize {
                         STREAM_PROPAGATE_ERROR(read(in, args, "Args"));
                         STREAM_PROPAGATE_ERROR(apply_map(args, in, true));
                         writeFunctionAction(unit, index, &args, {}, request.mRequester, request.mRequesterTransactionId);
-                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
+                        R result = TupleUnpacker::invokeExpand(patch_void(f, Void{}), static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
                         request.mReceiver.set_value(result);
                     } break;
                     case QUERY: {
@@ -275,7 +275,7 @@ namespace Serialize {
                     } else if (unit->isMaster()) {
                         if (type == CALL)
                             writeFunctionAction(unit, index, &args, {}, answerId, id);
-                        R result = invoke_patch_void(LIFT(TupleUnpacker::invokeExpand), f, unit, traits::patchArgs(std::move(args), context));
+                        R result = TupleUnpacker::invokeExpand(patch_void(f, Void {}), unit, traits::patchArgs(std::move(args), context));
                         if (type == QUERY && id != 0)
                             writeFunctionResult(unit, index, &result, in, id);
                     } else {

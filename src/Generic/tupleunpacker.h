@@ -200,7 +200,7 @@ namespace TupleUnpacker {
     template <typename Tuple, typename F, size_t... Is>
     auto forEach(Tuple &&t, F &&f, std::index_sequence<Is...>)
     {
-        return std::tuple { invoke_patch_void(std::forward<F>(f), std::get<Is>(std::forward<Tuple>(t)))... };
+        return std::tuple { std::invoke(patch_void(std::forward<F>(f), Void {}), std::get<Is>(std::forward<Tuple>(t)))... };
     }
 
     template <typename Tuple, typename F>

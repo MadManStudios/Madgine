@@ -99,15 +99,45 @@ struct OutRef {
 struct Void {
 };
 
-template <typename R = Void, typename F, typename... Args>
-auto invoke_patch_void(F &&f, Args &&...args)
-{
-    if constexpr (std::same_as<std::invoke_result_t<F, Args...>, void>) {
-        std::invoke(std::forward<F>(f), std::forward<Args>(args)...);
-        return R {};
-    } else {
-        return std::invoke(std::forward<F>(f), std::forward<Args>(args)...);
+
+template <typename T>
+struct CaptureHelper {
+    template <typename... Args>
+    decltype(auto) operator()(Args &&...args) const
+    {
+        return mT(std::forward<Args>(args)...);
     }
+    operator T &()
+    {
+        return mT;
+    }
+    T mT;
+};
+
+template <typename T>
+CaptureHelper<T> forward_capture(T &&t)
+{
+    return { std::forward<T>(t) };
+}
+
+template <typename T>
+CaptureHelper<T> forward_capture(T &t)
+{
+    return { std::forward<T>(t) };
+}
+
+
+template <typename F, typename R>
+auto patch_void(F &&f, R &&result)
+{
+    return [f { forward_capture<F>(f) }, result { forward_capture<R>(result) }]<typename... Args>(Args &&...args) mutable {
+        if constexpr (std::same_as<std::invoke_result_t<F, Args...>, void>) {
+            std::invoke(std::forward<F>(f), std::forward<Args>(args)...);
+            return static_cast<R>(result);
+        } else {
+            return std::invoke(std::forward<F>(f), std::forward<Args>(args)...);
+        }
+    };    
 }
 
 template <typename T, typename R = Void>
@@ -131,6 +161,25 @@ concept FSameAs = std::same_as<auto_holder<f>, auto_holder<g>>;
 
 template <bool b, typename T>
 using const_if = std::conditional_t<b, const T, T>;
+
+template <typename T>
+using forward_ref_t = std::conditional_t<
+    std::is_lvalue_reference_v<T>,
+    std::reference_wrapper<std::remove_reference_t<T>>,
+    T>;
+
+template <typename T>
+struct decay_ref {
+    using type = T;
+};
+
+template <InstanceOf<std::reference_wrapper> T>
+struct decay_ref<T> {
+    using type = T::type &;
+};
+
+template <typename T>
+using decay_ref_t = decay_ref<T>::type;
 
 template <typename T>
 decltype(auto) forward_ref(std::remove_reference_t<T> &t)

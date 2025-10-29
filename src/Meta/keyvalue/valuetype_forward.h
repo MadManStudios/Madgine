@@ -76,7 +76,7 @@ struct ValueType_ReturnHelper<T *> {
 
 template <Execution::AnyBinding T>
 struct ValueType_ReturnHelper<T> {
-    typedef Execution::CallBinding<typename ValueType_ReturnHelper<typename T::type>::type (*)(const ValueType &), Execution::BindingPtr<ValueType>> type;
+    typedef Execution::CallBinding<typename ValueType_ReturnHelper<typename T::type>::type (*)(const ValueType &), Execution::BindingPtr<const ValueType&>> type;
 };
 
 template <>
@@ -124,23 +124,23 @@ decltype(auto) ValueType_as(const ValueType &v)
     } else if constexpr (Execution::AnyBinding<T>) {
         return (ValueType_as_impl<KeyValueBinding>(v)->*&ValueType_as<typename T::type>)();
     } else {
-        using Ty = resolveCustomScopePtr_t<T, true>;
+        using Ty = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
+        std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(ValueType_as_impl<ScopePtr>(v));
         if constexpr (Pointer<Ty>) {
-            return scope_cast<std::remove_pointer_t<Ty>>(ValueType_as_impl<ScopePtr>(v));
+            return ptr;
         } else {
-            return *scope_cast<Ty>(ValueType_as_impl<OwnedScopePtr>(v).get());
+            return *ptr;
         }
     }
     // static_assert(dependent_bool<T, false>::value, "A ValueType can not be converted to the given target type");
 }
 
-template <bool reference_as_ptr = false, typename T>
+template <bool isReferenceWrapped = false, typename T>
 decltype(auto) convert_ValueType(T &&t)
 {
     static_assert(!requires { typename std::decay_t<T>::no_value_type; });
 
     if constexpr (InstanceOf<std::decay_t<T>, std::reference_wrapper>) {
-        // using Ty = typename std::decay_t<T>::type;
         return convert_ValueType<true>(t.get());
     } else if constexpr (InstanceOf<T, std::optional>) {
         return std::forward<T>(t);
@@ -169,16 +169,14 @@ decltype(auto) convert_ValueType(T &&t)
         return KeyValueSender { std::forward<T>(t) };
     } else if constexpr (InstanceOfA<std::decay_t<T>, TypedBoundApiFunction>) {
         return BoundApiFunction { std::forward<T>(t) };
+    } else if constexpr (Pointer<std::decay_t<T>>) {
+        return ScopePtr { t };
+    } else if constexpr (InstanceOf<std::decay_t<T>, std::unique_ptr>) {
+        return ScopePtr { t.get() };
+    } else if constexpr (isReferenceWrapped) {
+        return ScopePtr { &t };
     } else {
-        if constexpr (Pointer<std::decay_t<T>>) {
-            return ScopePtr { t };
-        } else if constexpr (InstanceOf<std::decay_t<T>, std::unique_ptr>) {
-            return ScopePtr { t.get() };
-        } else if constexpr (reference_as_ptr) {
-            return ScopePtr { &t };
-        } else {
-            return OwnedScopePtr { std::forward<T>(t) };
-        }
+        return OwnedScopePtr { std::forward<T>(t) };
     }
     // static_assert(dependent_bool<T, false>::value, "The provided type can not be converted to a ValueType");
 }

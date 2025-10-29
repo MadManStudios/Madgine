@@ -6,8 +6,6 @@
 
 #include "sceneview.h"
 
-#include "Madgine/scene/entity/entityptr.h"
-
 #include "Madgine/parametertuple.h"
 
 #include "Madgine/behaviorhandle.h"
@@ -39,7 +37,7 @@ namespace Tools {
         }
 
         int hoveredAxis() const;
-        Scene::Entity::Transform * const&hoveredTransform() const;
+        Scene::Entity::Transform *const &hoveredTransform() const;
 
         void deselect();
         void select(Render::Camera *camera);
@@ -86,18 +84,26 @@ namespace Tools {
             STOP,
             PAUSE } mMode;
 
-        //Save/Load
+        // Save/Load
         std::vector<char> mStartBuffer;
 
         Filesystem::Path mCurrentSceneFile;
 
-        //Entity-Cache
+        // Entity-Cache
         struct EntityNode {
             Scene::Entity::EntityPtr mEntity;
             std::list<EntityNode> mChildren;
         };
+        struct EntityComparator {
+            bool operator()(const Scene::Entity::EntityPtr &a, const Scene::Entity::EntityPtr &b) const
+            {
+                const auto helper = [](Scene::Entity::Entity &entity) { return &entity; };
+                return (a->*helper)() < (b->*helper)();
+            }
+        };
+
         std::list<EntityNode> mEntityCache;
-        std::map<Scene::Entity::EntityPtr, EntityNode *> mEntityMapping;
+        std::map<Scene::Entity::EntityPtr, EntityNode *, EntityComparator> mEntityMapping;
 
         void updateEntityCache();
         bool updateEntityCache(EntityNode &node, const Scene::Entity::EntityPtr &parent = {});
@@ -115,7 +121,7 @@ namespace Tools {
             BehaviorHandle mHandle;
         } mPendingBehavior;
 
-        //Settings
+        // Settings
         Vector4 mBoneForward = { 1, 0, 0, 0 };
         float mDefaultBoneLength = 1.0f;
         bool mShowBoneNames = true;

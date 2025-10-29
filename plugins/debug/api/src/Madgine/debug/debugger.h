@@ -5,7 +5,6 @@
 #include "Generic/execution/statedescriptor.h"
 #include "Generic/execution/stop_callback.h"
 #include "Generic/execution/virtualsender.h"
-#include "Generic/forward_capture.h"
 #include "Madgine/root/rootcomponentbase.h"
 #include "Madgine/root/rootcomponentcollector.h"
 

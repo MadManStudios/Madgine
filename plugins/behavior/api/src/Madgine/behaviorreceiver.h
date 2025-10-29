@@ -30,7 +30,7 @@ template <typename F, typename... Args>
 auto make_simple_behavior_sender(F &&f, Args &&...args)
 {
     return Execution::make_sender<BehaviorError, ArgumentList>(
-        [args = std::tuple<Args...> { std::forward<Args>(args)... }, f { forward_capture<F>(std::forward<F>(f)) }]<typename Rec>(Rec &&rec) mutable {
+        [args = std::tuple<Args...> { std::forward<Args>(args)... }, f { forward_capture<F>(f) }]<typename Rec>(Rec &&rec) mutable {
             return TupleUnpacker::constructExpand<VirtualBehaviorState<Rec, Execution::SimpleState<F, std::tuple<Args...>, BehaviorReceiver>>>(std::forward<Rec>(rec), std::forward<F>(f), std::move(args));
         });
 }

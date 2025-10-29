@@ -13,11 +13,11 @@
 namespace Engine {
 namespace Scene {
 
-    struct EntityBinding : Named<"Entity", Execution::BindingPtr<Entity::Entity *>> {
+    struct EntityBinding : Named<"Entity", Entity::EntityPtr> {
         template <typename F>
         decltype(auto) sender(F &&f)
         {
-            return Named<"Entity", Execution::BindingPtr<Entity::Entity *>>::sender([&](auto binding) {
+            return Named<"Entity", Entity::EntityPtr>::sender([&](auto binding) {
                 return (binding->*std::forward<F>(f))() | Execution::let_value([](auto &&sender) { return std::forward<decltype(sender)>(sender) | Execution::with_debug_location<Debug::SenderLocation>(); });
             });
         }

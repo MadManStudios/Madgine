@@ -142,26 +142,13 @@ bool AcceptDraggableValueType(
     const Engine::ValueType *payload = GetValuetypePayload();
     if (payload) {
         if (Engine::ValueType_is<T>(*payload)) {
-            const T &t = Engine::ValueType_as<T>(*payload);
+            const auto &t = Engine::ValueType_as<T>(*payload);
             if (validate(t) && AcceptDraggableValueType(payloadPointer)) {
                 result = t;
                 return true;
             } else {
                 setPayloadStatus("Payload does not validate");
                 return false;
-            }
-        }
-
-        if constexpr (!Engine::ValueTypePrimitive<T>) {
-            if (Engine::ValueType_is<T *>(*payload)) {
-                const T *t = Engine::ValueType_as<T *>(*payload);
-                if (validate(*t) && AcceptDraggableValueType(payloadPointer)) {
-                    result = *t;
-                    return true;
-                } else {
-                    setPayloadStatus("Payload does not validate");
-                    return false;
-                }
             }
         }
 

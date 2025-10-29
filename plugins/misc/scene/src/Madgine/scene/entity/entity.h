@@ -38,6 +38,8 @@ namespace Scene {
             void startLifetime();
             void endLifetime();
 
+            EntityPtr pointer();
+
             Debug::DebuggableLifetime<get_named_d> &lifetime();
 
             const std::string &key() const;

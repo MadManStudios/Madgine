@@ -92,12 +92,12 @@ namespace Execution {
     };
 
     template <typename T>
-    struct BindingBase<T*> {
-        using type = T*;        
+    struct BindingBase<T *> {
+        using type = T *;
     };
 
     template <typename T>
-    struct ConstantBinding : BindingBase<T> {        
+    struct ConstantBinding : BindingBase<T> {
 
         ConstantBinding(T &&value)
             : mValue(std::forward<T>(value))
@@ -119,19 +119,20 @@ namespace Execution {
         template <std::invocable<const T &> F>
         friend bool tag_invoke(access_binding_t, ConstantBinding &&binding, F &&callback)
         {
-            std::forward<F>(callback)(std::move(binding).mValue);
-            return true;
+            return patch_void(std::forward<F>(callback))(std::move(binding).mValue);            
         }
 
         template <std::invocable<const T &> F>
         friend bool tag_invoke(access_binding_t, const ConstantBinding &binding, F &&callback)
         {
-            std::forward<F>(callback)(binding.mValue);
-            return true;
+            return patch_void(std::forward<F>(callback), true)(binding.mValue);            
         }
 
         T mValue;
     };
+
+    template <typename T>
+    ConstantBinding(T &&value) -> ConstantBinding<T>;
 
     template <typename F, typename... Args>
     struct CallBinding : BindingBase<std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>> {
@@ -139,7 +140,7 @@ namespace Execution {
         using type = typename BindingBase<std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>>::type;
 
         template <typename... Args2>
-        CallBinding(F &&f, Args2&&... args)
+        CallBinding(F &&f, Args2 &&...args)
             : mF(std::forward<F>(f))
             , mArgs(std::forward<Args2>(args)...)
         {
@@ -163,11 +164,10 @@ namespace Execution {
             if constexpr (I == sizeof...(Args)) {
                 if constexpr (std::same_as<type, void>) {
                     std::invoke(std::move(mF), std::forward<BoundArgs>(args)...);
-                    std::forward<decltype(callback)>(callback)();
+                    return std::forward<decltype(callback)>(callback)();
                 } else {
-                    std::forward<decltype(callback)>(callback)(std::invoke(std::move(mF), std::forward<BoundArgs>(args)...));
+                    return std::forward<decltype(callback)>(callback)(std::invoke(std::move(mF), std::forward<BoundArgs>(args)...));
                 }
-                return true;
             } else {
                 return access_binding(
                     std::move(std::get<I>(mArgs)),
@@ -183,11 +183,10 @@ namespace Execution {
             if constexpr (I == sizeof...(Args)) {
                 if constexpr (std::same_as<type, void>) {
                     std::invoke(mF, std::forward<BoundArgs>(args)...);
-                    std::forward<decltype(callback)>(callback)();
+                    return std::forward<decltype(callback)>(callback)();
                 } else {
-                    std::forward<decltype(callback)>(callback)(std::invoke(std::move(mF), std::forward<BoundArgs>(args)...));
+                    return std::forward<decltype(callback)>(callback)(std::invoke(std::move(mF), std::forward<BoundArgs>(args)...));
                 }
-                return true;
             } else {
                 return access_binding(
                     std::get<I>(mArgs),
@@ -199,12 +198,12 @@ namespace Execution {
 
         friend bool tag_invoke(access_binding_t, CallBinding &&binding, auto &&callback)
         {
-            return std::move(binding).call<0>(std::forward<decltype(callback)>(callback));
+            return std::move(binding).template call<0>(patch_void(std::forward<decltype(callback)>(callback), true));
         }
 
         friend bool tag_invoke(access_binding_t, const CallBinding &binding, auto &&callback)
         {
-            return binding.call<0>(std::forward<decltype(callback)>(callback));
+            return binding.call<0>(patch_void(std::forward<decltype(callback)>(callback), true));
         }
 
         std::remove_reference_t<F> mF;
@@ -328,11 +327,23 @@ namespace Execution {
             return *this;
         }
 
+        template <Binding<T> Binding>
+        BindingPtr &operator=(Binding &&binding)
+        {
+            if (mPtr && mPtr->mRefCount.fetch_sub(1, std::memory_order_acq_rel) == 1) {
+                delete mPtr;
+            }
+            mPtr = new BindingBridge<T, Binding> { std::forward<Binding>(binding) };
+            mPtr->mRefCount.store(1, std::memory_order_relaxed);
+            return *this;
+        }
+
         template <typename F>
         friend bool tag_invoke(access_binding_t, const BindingPtr &ptr, F &&callback)
         {
             if (ptr.mPtr) {
-                return ptr.mPtr->access(CallableView<bool(const T &)> { callback });
+                auto wrapped = patch_void(callback, true);
+                return ptr.mPtr->access(CallableView<bool(const T &)> { wrapped });
             } else {
                 return false;
             }
@@ -350,9 +361,38 @@ namespace Execution {
             return MemberFunctionBinding<P, BindingPtr<T>>({ std::forward<P>(right) }, *this);
         }
 
+        explicit operator bool() const
+        {
+            return mPtr;
+        }
+
     private:
         BindingBridgeBase<T> *mPtr = nullptr;
     };
+
+    template <AnyBinding B, typename T>
+    constexpr bool operator==(B &&binding, T &&value)
+    {
+        return access_binding(std::forward<B>(binding), [&](auto &&v) {
+            return std::forward<T>(value) == std::forward<decltype(v)>(v);
+        });
+    }
+
+    template <AnyBinding B, typename T>
+    constexpr bool operator<(B &&binding, T &&value)
+    {
+        return access_binding(std::forward<B>(binding), [&](auto &&v) {
+            return std::forward<T>(value) > std::forward<decltype(v)>(v);
+        });
+    }
+
+    template <AnyBinding B, typename T>
+    constexpr bool operator>(B &&binding, T &&value)
+    {
+        return access_binding(std::forward<B>(binding), [&](auto &&v) {
+            return std::forward<T>(value) < std::forward<decltype(v)>(v);
+        });
+    }
 
 }
 }

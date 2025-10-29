@@ -98,7 +98,7 @@ namespace Tools {
     void SceneEditor::render()
     {
         if (beginToolWindow("Scene", &mVisible, ImGuiWindowFlags_MenuBar)) {
-            
+
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("SceneEditor")) {
 
@@ -328,37 +328,45 @@ namespace Tools {
     void SceneEditor::renderHierarchyEntity(EntityNode &node)
     {
 
-        std::string &name = node.mEntity->mName;
+        bool success = Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
+            std::string &name = e.mName;
 
-        bool hovered = mSelectedEntity == node.mEntity;
+            bool hovered = Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &selected) { return &selected == &e; });
 
-        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
-        if (hovered)
-            flags |= ImGuiTreeNodeFlags_Selected;
+            ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
+            if (hovered)
+                flags |= ImGuiTreeNodeFlags_Selected;
 
-        if (node.mChildren.empty())
-            flags |= ImGuiTreeNodeFlags_Leaf;
+            if (node.mChildren.empty())
+                flags |= ImGuiTreeNodeFlags_Leaf;
 
-        bool open = ImGui::EditableTreeNode(&*node.mEntity, &name, flags);
-        bool aborted = false;
+            bool open = ImGui::EditableTreeNode(&e, &name, flags);
+            bool aborted = false;
 
-        if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0)) {
-            select(node.mEntity);
-        }
-
-        if (ImGui::BeginPopupCompoundContextItem()) {
-            if (ImGui::MenuItem(IMGUI_ICON_X " Delete", "del")) {
-                node.mEntity->endLifetime();
+            if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0)) {
+                select(e.pointer());
             }
-            ImGui::EndPopup();
-        }
 
-        ImGui::DraggableValueTypeSource(name, node.mEntity);
+            if (ImGui::BeginPopupCompoundContextItem()) {
+                if (ImGui::MenuItem(IMGUI_ICON_X " Delete", "del")) {
+                    e.endLifetime();
+                }
+                ImGui::EndPopup();
+            }
 
-        if (open) {
-            for (EntityNode &node : node.mChildren)
-                renderHierarchyEntity(node);
-            ImGui::TreePop();
+            ImGui::DraggableValueTypeSource(name, e.pointer());
+
+            if (open) {
+                for (EntityNode &node : node.mChildren)
+                    renderHierarchyEntity(node);
+                ImGui::TreePop();
+            }
+
+            return true;
+        });
+
+        if (!success) {
+            eraseNode(node);
         }
     }
 
@@ -371,156 +379,158 @@ namespace Tools {
 
     void SceneEditor::renderEntity(Scene::Entity::EntityPtr &entity)
     {
-        if (entity.isDead())
-            return;
-
-        bool showParameters = false;
-        if (ImGui::BeginPopupCompoundContextWindow()) {
-            if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Component")) {
-                for (auto [name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {
-                    if (!entity->hasComponent(name)) {
-                        if (ImGui::MenuItem(name.data())) {
-                            entity->addComponent(index);
-                            if (name == "Transform") {
-                                entity->getComponent<Scene::Entity::Transform>()->mPosition = { 0, 0, 0 };
+        Execution::access_binding(entity, [&](Scene::Entity::Entity &entity) {
+            bool showParameters = false;
+            if (ImGui::BeginPopupCompoundContextWindow()) {
+                if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Component")) {
+                    for (auto [name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {
+                        if (!entity.hasComponent(name)) {
+                            if (ImGui::MenuItem(name.data())) {
+                                entity.addComponent(index);
+                                if (name == "Transform") {
+                                    entity.getComponent<Scene::Entity::Transform>()->mPosition = { 0, 0, 0 };
+                                }
                             }
                         }
                     }
+                    ImGui::EndMenu();
                 }
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
-                if (BehaviorHandle behavior = BehaviorSelector()) {
-                    entity->behaviors().addBehavior(std::move(behavior));
+                if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
+                    if (BehaviorHandle behavior = BehaviorSelector()) {
+                        entity.behaviors().addBehavior(std::move(behavior));
+                    }
+                    ImGui::EndMenu();
                 }
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Temp Behavior")) {
-                if (BehaviorHandle behavior = BehaviorSelector()) {
-                    mPendingBehavior.mTargetEntity = entity;
-                    mPendingBehavior.mHandle = behavior;
-                    mPendingBehavior.mFuture = behavior.createParameters();
-                    mPendingBehavior.mParameters.reset();
-                    showParameters = true;
-                }
-                ImGui::EndMenu();
-            }
-            ImGui::EndPopup();
-        }
-
-        if (showParameters)
-            ImGui::OpenPopup("BehaviorParameters");
-
-        if (ImGui::BeginPopup("BehaviorParameters")) {
-            if (!mPendingBehavior.mFuture.is_ready()) {
-                ImGui::Text("Loading...");
-            } else {
-                if (!mPendingBehavior.mParameters)
-                    mPendingBehavior.mParameters = mPendingBehavior.mFuture;
-                if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                    mInspector->drawMembers(&mPendingBehavior.mParameters);
-                    ImGui::EndTable();
-                }
-                if (ImGui::Button("Cancel")) {
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Create Behavior")) {
-                    mPendingBehavior.mTargetEntity->addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
-                    ImGui::CloseCurrentPopup();
-                }
-            }
-            ImGui::EndPopup();
-        }
-
-        IndexType<uint32_t> componentToRemove;
-        for (const Scene::Entity::EntityComponentHandle &component : entity->components()) {
-            std::string label = std::string { component.name() };
-            auto it = sComponentIcons.find(label);
-            if (it != sComponentIcons.end())
-                label = std::string { it->second } + " " + label;
-            ImGui::BeginGroupPanel(label.c_str());
-            if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
-                mInspector->drawMembers(component.getTyped());
-                ImGui::EndTable();
-            }
-
-            ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
-
-            ImGui::EndGroupPanel();
-
-            if (ImGui::BeginPopupCompoundContextItem()) {
-                if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { component.name() }).c_str())) {
-                    componentToRemove = component.mType;
+                if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Temp Behavior")) {
+                    if (BehaviorHandle behavior = BehaviorSelector()) {
+                        mPendingBehavior.mTargetEntity = entity.pointer();
+                        mPendingBehavior.mHandle = behavior;
+                        mPendingBehavior.mFuture = behavior.createParameters();
+                        mPendingBehavior.mParameters.reset();
+                        showParameters = true;
+                    }
+                    ImGui::EndMenu();
                 }
                 ImGui::EndPopup();
             }
-        }
-        if (componentToRemove) {
-            entity->removeComponent(componentToRemove);
-        }
 
-        getTool<DebuggerView>().renderLifetime(entity->lifetime());
+            if (showParameters)
+                ImGui::OpenPopup("BehaviorParameters");
 
-        getTool<BehaviorTool>().drawBehaviorList(entity->behaviors());
-
-        if (Scene::Entity::Transform *t = entity->getComponent<Scene::Entity::Transform>()) {
-            constexpr Color4 colors[] = {
-                { 0.5f, 0, 0, 0.7f },
-                { 0, 0.5f, 0, 0.7f },
-                { 0, 0, 0.5f, 0.7f }
-            };
-            constexpr Vector3 offsets[] = {
-                { 1, 0, 0 },
-                { 0, 1, 0 },
-                { 0, 0, 1 }
-            };
-
-            const char *labels[] = {
-                "x-move",
-                "y-move",
-                "z-move"
-            };
-
-            mHoveredAxis = -1;
-            mHoveredTransform = {};
-
-            Vector3 pos = (t->worldMatrix() * Vector4::UNIT_W).xyz();
-
-            for (size_t i = 0; i < 3; ++i) {
-                Im3D::Arrow3D(IM3D_TRIANGLES, 0.1f, pos, pos + offsets[i], { .mColor = colors[i] });
-                if (Im3D::BoundingBox(labels[i], 0, 2)) {
-                    mHoveredAxis = i;
-                    mHoveredTransform = t;
-                }
-            }
-
-            /* if (Scene::Entity::Skeleton *s = entity->getComponent<Scene::Entity::Skeleton>()) {
-                if (const Render::SkeletonDescriptor *skeleton = s->data()) {
-                    for (size_t i = 0; i < skeleton->mBones.size(); ++i) {
-                        const Engine::Render::Bone &bone = skeleton->mBones[i];
-
-                        Matrix4 m = s->matrices()[i] * bone.mOffsetMatrix.Inverse() * skeleton->mMatrix.Inverse();
-                        Matrix4 world = t->worldMatrix();
-
-                        if (mShowBoneNames)
-                            Im3D::Text(bone.mName.c_str(), { .mTransform = world * m, .mFontSize = 2.0f });
-
-                        Vector4 start = world * m * Vector4::UNIT_W;
-                        Vector4 end;
-
-                        if (bone.mFirstChild) {
-                            Matrix4 m_child = s->matrices()[bone.mFirstChild] * skeleton->mBones[bone.mFirstChild].mOffsetMatrix.Inverse() * skeleton->mMatrix.Inverse();
-                            end = world * m_child * Vector4::UNIT_W;
-                        } else {
-                            end = world * m * skeleton->mMatrix * (mBoneForward * mDefaultBoneLength) + (1.0f - mBoneForward.w) * start;
-                        }
-                        float length = (end - start).xyz().length();
-                        Im3D::Arrow3D(IM3D_LINES, 0.1f * length, start.xyz(), end.xyz());
+            if (ImGui::BeginPopup("BehaviorParameters")) {
+                if (!mPendingBehavior.mFuture.is_ready()) {
+                    ImGui::Text("Loading...");
+                } else {
+                    if (!mPendingBehavior.mParameters)
+                        mPendingBehavior.mParameters = mPendingBehavior.mFuture;
+                    if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
+                        mInspector->drawMembers(&mPendingBehavior.mParameters);
+                        ImGui::EndTable();
+                    }
+                    if (ImGui::Button("Cancel")) {
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Create Behavior")) {
+                        Execution::access_binding(mPendingBehavior.mTargetEntity, [&](Scene::Entity::Entity &e) {
+                            e.addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
+                        });
+                        ImGui::CloseCurrentPopup();
                     }
                 }
-            }*/
-        }
+                ImGui::EndPopup();
+            }
+
+            IndexType<uint32_t> componentToRemove;
+            for (const Scene::Entity::EntityComponentHandle &component : entity.components()) {
+                std::string label = std::string { component.name() };
+                auto it = sComponentIcons.find(label);
+                if (it != sComponentIcons.end())
+                    label = std::string { it->second } + " " + label;
+                ImGui::BeginGroupPanel(label.c_str());
+                if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
+                    mInspector->drawMembers(component.getTyped());
+                    ImGui::EndTable();
+                }
+
+                ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
+
+                ImGui::EndGroupPanel();
+
+                if (ImGui::BeginPopupCompoundContextItem()) {
+                    if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { component.name() }).c_str())) {
+                        componentToRemove = component.mType;
+                    }
+                    ImGui::EndPopup();
+                }
+            }
+            if (componentToRemove) {
+                entity.removeComponent(componentToRemove);
+            }
+
+            getTool<DebuggerView>().renderLifetime(entity.lifetime());
+
+            getTool<BehaviorTool>().drawBehaviorList(entity.behaviors());
+
+            if (Scene::Entity::Transform *t = entity.getComponent<Scene::Entity::Transform>()) {
+                constexpr Color4 colors[] = {
+                    { 0.5f, 0, 0, 0.7f },
+                    { 0, 0.5f, 0, 0.7f },
+                    { 0, 0, 0.5f, 0.7f }
+                };
+                constexpr Vector3 offsets[] = {
+                    { 1, 0, 0 },
+                    { 0, 1, 0 },
+                    { 0, 0, 1 }
+                };
+
+                const char *labels[] = {
+                    "x-move",
+                    "y-move",
+                    "z-move"
+                };
+
+                mHoveredAxis = -1;
+                mHoveredTransform = {};
+
+                Vector3 pos = (t->worldMatrix() * Vector4::UNIT_W).xyz();
+
+                for (size_t i = 0; i < 3; ++i) {
+                    Im3D::Arrow3D(IM3D_TRIANGLES, 0.1f, pos, pos + offsets[i], { .mColor = colors[i] });
+                    if (Im3D::BoundingBox(labels[i], 0, 2)) {
+                        mHoveredAxis = i;
+                        mHoveredTransform = t;
+                    }
+                }
+
+                /* if (Scene::Entity::Skeleton *s = entity->getComponent<Scene::Entity::Skeleton>()) {
+                    if (const Render::SkeletonDescriptor *skeleton = s->data()) {
+                        for (size_t i = 0; i < skeleton->mBones.size(); ++i) {
+                            const Engine::Render::Bone &bone = skeleton->mBones[i];
+
+                            Matrix4 m = s->matrices()[i] * bone.mOffsetMatrix.Inverse() * skeleton->mMatrix.Inverse();
+                            Matrix4 world = t->worldMatrix();
+
+                            if (mShowBoneNames)
+                                Im3D::Text(bone.mName.c_str(), { .mTransform = world * m, .mFontSize = 2.0f });
+
+                            Vector4 start = world * m * Vector4::UNIT_W;
+                            Vector4 end;
+
+                            if (bone.mFirstChild) {
+                                Matrix4 m_child = s->matrices()[bone.mFirstChild] * skeleton->mBones[bone.mFirstChild].mOffsetMatrix.Inverse() * skeleton->mMatrix.Inverse();
+                                end = world * m_child * Vector4::UNIT_W;
+                            } else {
+                                end = world * m * skeleton->mMatrix * (mBoneForward * mDefaultBoneLength) + (1.0f - mBoneForward.w) * start;
+                            }
+                            float length = (end - start).xyz().length();
+                            Im3D::Arrow3D(IM3D_LINES, 0.1f * length, start.xyz(), end.xyz());
+                        }
+                    }
+                }*/
+            }
+            return true;
+        });
     }
 
     void SceneEditor::renderCamera(Render::Camera *camera)
@@ -553,7 +563,12 @@ namespace Tools {
 
     bool SceneEditor::updateEntityCache(EntityNode &node, const Scene::Entity::EntityPtr &parent)
     {
-        if (node.mEntity.isDead() || (!node.mEntity->hasComponent<Scene::Entity::Transform>() && parent) || (node.mEntity->hasComponent<Scene::Entity::Transform>() && ((parent && parent->getComponent<Scene::Entity::Transform>() != node.mEntity->getComponent<Scene::Entity::Transform>()->parent()) || (!parent && node.mEntity->getComponent<Scene::Entity::Transform>()->parent())))) {
+        bool alive = Execution::access_binding(node.mEntity, [](Scene::Entity::Entity &e) {
+            //return (!e.hasComponent<Scene::Entity::Transform>() || parent) || (node.mEntity->hasComponent<Scene::Entity::Transform>() && ((parent && parent->getComponent<Scene::Entity::Transform>() != node.mEntity->getComponent<Scene::Entity::Transform>()->parent()) || (!parent && node.mEntity->getComponent<Scene::Entity::Transform>()->parent())))
+            //throw 0; // TODO
+            return true;
+        });
+        if (!alive) {
             eraseNode(node);
             return true;
         }
@@ -563,21 +578,24 @@ namespace Tools {
 
     void SceneEditor::createEntityMapping(Scene::Entity::EntityPtr e)
     {
-        Scene::Entity::Transform *transform = e->getComponent<Scene::Entity::Transform>();
-
         Scene::Entity::EntityPtr parent;
 
-        if (transform) {
-            Scene::Entity::Transform *parentTransform = transform->parent();
-            if (parentTransform) {
-                for (Scene::Entity::EntityPtr p : mSceneMgr->container("Default").entities()) {
-                    if (p->getComponent<Scene::Entity::Transform>() == parentTransform) {
-                        parent = p;
-                        break;
+        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {
+            Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
+
+            if (transform) {
+                Scene::Entity::Transform *parentTransform = transform->parent();
+                if (parentTransform) {
+                    for (Scene::Entity::EntityPtr p : mSceneMgr->container("Default").entities()) {
+                        if (Execution::access_binding(p, [&](Scene::Entity::Entity &p) { return p.getComponent<Scene::Entity::Transform>() == parentTransform; })) {
+                            parent = p;
+                            break;
+                        }
                     }
                 }
             }
-        }
+            return true;
+        });
 
         if (parent) {
             if (!mEntityMapping.count(parent))
@@ -587,41 +605,47 @@ namespace Tools {
         std::list<EntityNode> &container = parent ? mEntityMapping[parent]->mChildren : mEntityCache;
 
         container.push_back({ std::move(e) });
-        mEntityMapping[e] = &container.back();
+        mEntityMapping[container.back().mEntity] = &container.back();
     }
 
     void SceneEditor::im3DInteractions()
     {
         for (EntityNode &node : mEntityCache) {
-            Scene::Entity::Transform *transform = node.mEntity->getComponent<Engine::Scene::Entity::Transform>();
-            if (transform) {
-                bool selected = mSelectedEntity == node.mEntity;
+            Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
+                Scene::Entity::Transform *transform = e.getComponent<Engine::Scene::Entity::Transform>();
+                if (transform) {
+                    bool selected = Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &selected) { return &selected == &e; });
 
-                if (ImGui::BeginDragDropTarget()) {
-                    Scene::Entity::EntityPtr *newChild;
-                    if (ImGui::AcceptDraggableValueType(newChild, nullptr, [](Scene::Entity::EntityPtr *child) { return (*child)->hasComponent<Scene::Entity::Transform>(); })) {
-                        Engine::Scene::Entity::Transform *childTransform = (*newChild)->getComponent<Engine::Scene::Entity::Transform>();
-                        assert(childTransform);
-                        childTransform->setParent(transform);
+                    if (ImGui::BeginDragDropTarget()) {
+                        Scene::Entity::EntityPtr newChild;
+                        if (ImGui::AcceptDraggableValueType(newChild, nullptr, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
+                            Execution::access_binding(newChild, [&](Scene::Entity::Entity &childEntity) {
+                                Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
+                                assert(childTransform);
+                                childTransform->setParent(transform);
+                                return true;
+                            });
+                        }
+                        ImGui::EndDragDropTarget();
                     }
-                    ImGui::EndDragDropTarget();
-                }
 
-                Matrix4 transformM = transform->worldMatrix();
-                AABB bb = { { -0.2f, -0.2f, -0.2f }, { 0.2f, 0.2f, 0.2f } };
-                if (node.mEntity->hasComponent<Scene::Entity::Mesh>() && node.mEntity->getComponent<Scene::Entity::Mesh>()->data())
-                    bb = node.mEntity->getComponent<Scene::Entity::Mesh>()->aabb();
+                    Matrix4 transformM = transform->worldMatrix();
+                    AABB bb = { { -0.2f, -0.2f, -0.2f }, { 0.2f, 0.2f, 0.2f } };
+                    if (e.hasComponent<Scene::Entity::Mesh>() && e.getComponent<Scene::Entity::Mesh>()->data())
+                        bb = e.getComponent<Scene::Entity::Mesh>()->aabb();
 
-                Im3DBoundingObjectFlags flags = Im3DBoundingObjectFlags_ShowOnHover;
-                if (selected)
-                    flags |= Im3DBoundingObjectFlags_ShowOutline;
+                    Im3DBoundingObjectFlags flags = Im3DBoundingObjectFlags_ShowOnHover;
+                    if (selected)
+                        flags |= Im3DBoundingObjectFlags_ShowOutline;
 
-                if (Im3D::BoundingBox(node.mEntity->mName.c_str(), bb, transformM, flags)) {
-                    if (ImGui::IsMouseClicked(0)) {
-                        select(node.mEntity);
+                    if (Im3D::BoundingBox(e.mName.c_str(), bb, transformM, flags)) {
+                        if (ImGui::IsMouseClicked(0)) {
+                            select(e.pointer());
+                        }
                     }
                 }
-            }
+                return true;
+            });
         }
 
         const Ray3 &ray = Im3D::GetMouseRay();
@@ -636,7 +660,7 @@ namespace Tools {
             mRoot.filePicker(true),
             [this](const Filesystem::Path &path) {
                 saveScene(path);
-            });        
+            });
     }
 }
 }

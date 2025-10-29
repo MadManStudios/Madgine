@@ -20,8 +20,9 @@ struct KeyValueBinding {
             bool result;
 
             auto f = [&](ValueType &v) {
-                result = Execution::access_binding(ptr.mBinding, [&](const auto &b) {
-                    to_ValueType(v, b);
+                result = Execution::access_binding(ptr.mBinding, [&](auto &&b) {
+                    to_ValueType(v, forward_ref<decltype(b)>(b));
+                    return true;
                 });
                 if (result)
                     std::forward<F>(callback)(v);
@@ -45,7 +46,7 @@ struct KeyValueBinding {
         return mPtr->*std::forward<P>(right);
     }
 
-    Execution::BindingPtr<ValueType> mPtr;
+    Execution::BindingPtr<const ValueType&> mPtr;
 };
 
 }

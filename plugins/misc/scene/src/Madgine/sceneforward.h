@@ -7,7 +7,6 @@ namespace Scene {
     struct SceneComponentBase;
 
     namespace Entity {
-        struct EntityPtr;
         template <typename T>
         struct EntityComponentList;
         struct EntityComponentHandle;
@@ -20,13 +19,15 @@ namespace Scene {
         struct Skeleton;
 
         struct AnimationState;        
+
+        using EntityPtr = Execution::BindingPtr<Entity&>;
     }
 
     struct LightManager;
     struct Light;
 
     struct EntityBinding;
-    using SceneBinding = Named<"Scene", SceneManager*>;
+    using SceneBinding = Named<"Scene", SceneManager&>;
 }
 
 }

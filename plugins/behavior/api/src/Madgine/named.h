@@ -180,7 +180,7 @@ struct Named {
         return *mValue;
     }
 
-    std::optional<ValueType_Return<T>> mValue;
+    std::optional<forward_ref_t<ValueType_Return<T>>> mValue;
 };
 
 struct NamedDescriptor {

@@ -46,7 +46,7 @@ namespace Tools {
         template <typename T, typename F>
         void addPreviewDefinition(F &&preview)
         {
-            addPreviewDefinition(table<T>, [preview { forward_capture(std::forward<F>(preview)) }](ScopePtr p) { return preview(scope_cast<T>(p)); });
+            addPreviewDefinition(table<T>, [preview { forward_capture<F>(preview) }](ScopePtr p) { return preview(scope_cast<T>(p)); });
         }
 
     private:

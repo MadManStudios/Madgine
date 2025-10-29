@@ -135,23 +135,27 @@ void GameManager::spawnBrick()
 {
     Engine::Scene::Entity::EntityPtr brick = mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity();
 
-    Engine::Scene::Entity::Transform *t = brick->addComponent<Engine::Scene::Entity::Transform>();
-    t->mScale = { 0.01f, 0.01f, 0.01f };
+    Engine::Execution::access_binding(brick, [](Engine::Scene::Entity::Entity &brick) {
+        Engine::Scene::Entity::Transform *t = brick.addComponent<Engine::Scene::Entity::Transform>();
+        t->mScale = { 0.01f, 0.01f, 0.01f };
 
-    Engine::Vector3 dir = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
-    dir.normalize();
-    t->mPosition = dir * -10;
+        Engine::Vector3 dir = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+        dir.normalize();
+        t->mPosition = dir * -10;
 
-    Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
-    Engine::Quaternion q { static_cast<float>(rand()), orientation };
-    t->mOrientation = q;
+        Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+        Engine::Quaternion q { static_cast<float>(rand()), orientation };
+        t->mOrientation = q;
 
-    brick->addComponent<Engine::Scene::Entity::Mesh>()->setName("Brick");
-    brick->getComponent<Engine::Scene::Entity::Mesh>()->handle().info()->setPersistent(true);
+        brick.addComponent<Engine::Scene::Entity::Mesh>()->setName("Brick");
+        brick.getComponent<Engine::Scene::Entity::Mesh>()->handle().info()->setPersistent(true);
 
-    float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;
+        float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;
 
-    brick->addBehavior(Brick(speed, dir, q));
+        brick.addBehavior(Brick(speed, dir, q));    
+
+        return true;
+    });    
 }
 
 void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent &evt)
@@ -173,7 +177,7 @@ void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent
     }*/
 
     if (hit) {
-        hit->endLifetime();
+        Engine::Execution::access_binding(hit, &Engine::Scene::Entity::Entity::endLifetime);
         modScore(1);
     }
 }
@@ -220,8 +224,8 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, E
 
         std::chrono::microseconds elapsedTime = co_await Engine::Scene::yield_simulation();
 
-        co_await (entity->*[&](Engine::Scene::Entity::Entity *e) {  
-            Engine::Scene::Entity::Transform *t = e->getComponent<Engine::Scene::Entity::Transform>();
+        co_await (entity->*[&](Engine::Scene::Entity::Entity &e) {  
+            Engine::Scene::Entity::Transform *t = e.getComponent<Engine::Scene::Entity::Transform>();
 
             float ratio = std::chrono::duration_cast<std::chrono::duration<float>>(elapsedTime).count();
 
