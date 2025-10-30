@@ -8,8 +8,6 @@
 
 #include "../entity/components/transform.h"
 
-#include "Madgine/nativebehaviorcollector.h"
-
 namespace Engine {
 namespace Scene {
 

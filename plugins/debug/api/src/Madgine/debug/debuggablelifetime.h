@@ -68,7 +68,7 @@ namespace Debug {
 
         using is_sender = void;
 
-        using result_type = GenericResult;
+        using result_type = void;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 

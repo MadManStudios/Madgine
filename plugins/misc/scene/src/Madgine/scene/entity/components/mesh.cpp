@@ -7,8 +7,6 @@
 
 #include "Meta/math/boundingbox.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 NAMED_UNIQUECOMPONENT(Mesh, Engine::Scene::Entity::Mesh);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Mesh)

@@ -129,12 +129,14 @@ void CppFile::generate(std::ostream &stream, const Constructor &con)
 
 DERIVE_OPERATOR(StreamOut, <<)
 
-void CppFile::generate(std::ostream &stream, const Constant &c)
+void CppFile::generate(std::ostream &stream, const Constant<int> &c)
 {
-    c.mValue.visit([&](const auto &v) {
-        if constexpr (has_operator_StreamOut<decltype(v), std::ostream &> || has_operator_StreamOut<std::ostream &, decltype(v)>)
-            stream << std::forward<decltype(v)>(v);
-    });
+    stream << c.mValue;
+}
+
+void CppFile::generate(std::ostream &stream, const Constant<std::string> &c)
+{
+    stream << "\"" << c.mValue << "\"";
 }
 
 void CppFile::generate(std::ostream &stream, const Comment &c)

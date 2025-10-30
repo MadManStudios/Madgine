@@ -13,6 +13,8 @@
 
 #include "Madgine/resources/resourcemanager.h"
 
+#include "Meta/keyvalue/valuetype.h"
+
 METATABLE_BEGIN_BASE(Engine::NodeGraph::LibraryNode, Engine::NodeGraph::NodeBase)
 MEMBER(mParameters)
 METATABLE_END(Engine::NodeGraph::LibraryNode)

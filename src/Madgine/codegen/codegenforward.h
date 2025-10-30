@@ -12,13 +12,14 @@ struct Namespace;
 struct Function;
 struct ArithOperation;
 struct Constructor;
+template <typename T>
 struct Constant;
 struct Comment;
 struct ForEach;
 
 struct Struct;
 
-using Statement = std::variant<Assignment, Return, VariableAccess, CustomCodeBlock, Namespace, MemberAccess, VariableDefinition, ArithOperation, Constructor, Constant, Comment, ForEach>;
+using Statement = std::variant<Assignment, Return, VariableAccess, CustomCodeBlock, Namespace, MemberAccess, VariableDefinition, ArithOperation, Constructor, Comment, ForEach, Constant<int>, Constant<std::string>>;
 struct Type;
 
 struct ShaderFile;

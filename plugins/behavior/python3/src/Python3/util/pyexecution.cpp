@@ -137,7 +137,7 @@ namespace Scripting {
                 suspend.mStacktop = nullptr;
                 suspend.mBlock = 0;
 
-                suspend.mFrames.push_back(PyFramePtr::fromBorrowed(frame));
+                //suspend.mFrames.push_back(PyFramePtr::fromBorrowed(frame->frame_obj));
 
                 return value.release();
             }
@@ -172,7 +172,8 @@ namespace Scripting {
                 if (!frames || frames->empty()) {
                     fromPyObject(receiver, result);
                 } else {
-                    PyFrame_StackPush(frames->front(), result);
+                    //PyFrame_StackPush(frames->front(), result);
+                    throw 0;
                 }
             }
         }
@@ -201,13 +202,9 @@ namespace Scripting {
                 auto it = frames.begin();
                 PyFramePtr frame = std::move(*it);
                 frames.erase(it);
-#if PY_MINOR_VERSION < 11
+
                 PyObject *result = PyEval_EvalFrame(frame);
-#else
-                PyFrameObject _frame;
-                _frame.f_frame = frame;
-                PyObject *result = PyEval_EvalFrame(&_frame);
-#endif
+
                 handleResult(result, receiver, &frames);
             }
             sUnwindable = false;
@@ -216,7 +213,7 @@ namespace Scripting {
         int executionTrace(PyObject *obj, PyFrameObject *frame, int event, PyObject *arg)
         {
 
-            if (event == PyTrace_OPCODE) {
+            /* if (event == PyTrace_OPCODE) {
                 if (PyFrame_StackSize(frame) > 0 && PyFrame_StackPeek(frame)->ob_type == &PySuspendExceptionType) {
                     PyObject *suspendEx = PyFrame_StackPop(frame);
 
@@ -235,7 +232,7 @@ namespace Scripting {
                     Py_DECREF(suspendEx);
                     return -1;
                 }
-            }
+            }*/
             return 0;
         }
 
@@ -270,8 +267,8 @@ namespace Scripting {
                 while (tb->tb_next)
                     tb = tb->tb_next;
 
-                filename = PyUnicode_AsUTF8(PyFrame_GetCode2(tb->tb_frame)->co_filename);
-                line = PyFrame_GetCode2(tb->tb_frame)->co_firstlineno;
+                filename = PyUnicode_AsUTF8(PyFrame_GetCode(tb->tb_frame)->co_filename);
+                line = PyFrame_GetCode(tb->tb_frame)->co_firstlineno;
             }
 
             PyObjectPtr str = PyObject_Str(value);
@@ -340,8 +337,9 @@ namespace Scripting {
                            },
                            [this](PyFramePtr frame) {
                                PyObject *wrapped = PyObject_CallObject((PyObject *)&PyBehaviorScopeType, NULL);
-                               new (&reinterpret_cast<PyBehaviorScopeObject *>(wrapped)->mScope) PyBehaviorScope { this, frame->f_locals };
-                               frame->f_locals = wrapped;
+                               new (&reinterpret_cast<PyBehaviorScopeObject *>(wrapped)->mScope) PyBehaviorScope { this, PyFrame_GetLocals(frame) };
+                               //frame->f_locals = wrapped;
+                               throw 0;
 
                                evalFrame(*this, std::move(frame));
                            },
@@ -349,6 +347,10 @@ namespace Scripting {
                                set_error(std::move(error));
                            } },
                 std::move(mData));
+        }
+
+        void ExecutionState::stop() {
+            throw 0;
         }
     }
 }

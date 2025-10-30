@@ -92,6 +92,10 @@ namespace Execution {
     struct ConstantBinding;
 
     struct BindingError;
+
+    namespace State {
+        struct Breakpoint;
+    }
 }
 
 }

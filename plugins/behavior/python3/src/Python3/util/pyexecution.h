@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/genericresult.h"
-
 #include "Generic/execution/concepts.h"
 
 #include "pyframeptr.h"
@@ -44,6 +42,7 @@ namespace Scripting {
             ~ExecutionState();
 
             void start();
+            void stop();
 
             ExecutionData mData;
         };

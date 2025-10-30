@@ -37,6 +37,8 @@
 
 #include "Generic/cowstring.h"
 
+#include "util/pyexecution.h"
+
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>
 #else
@@ -289,7 +291,7 @@ namespace Scripting {
         {
             Python3Lock lock;
 
-            PyObjectPtr code = Py_CompileString(command.data(), "<eval>", Py_single_input);
+            PyObjectPtr code = Py_CompileString(command.data(), "<eval>", Py_eval_input);
             if (code) {
                 PyModulePtr main { "__main__" };
 

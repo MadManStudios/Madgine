@@ -3,9 +3,6 @@
 #include "Generic/execution/concepts.h"
 #include "Generic/fixed_string.h"
 
-#include "behaviorerror.h"
-
-#include "Meta/keyvalue/valuetype_desc.h"
 #include "Meta/keyvalue/valuetype_forward.h"
 
 #include "Generic/callable_view.h"
@@ -13,9 +10,6 @@
 #include "Generic/execution/storage.h"
 
 namespace Engine {
-
-template <typename T>
-using NamedStorage = Execution::ResultStorageImpl<Execution::ValueStorageImpl<T>, Execution::ErrorStorageImpl<BehaviorError>>;
 
 struct get_named_d_t {
     using signature = bool(std::string_view, ValueTypeRef);

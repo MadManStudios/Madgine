@@ -4,7 +4,6 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-#include "Meta/keyvalue/valuetype.h"
 #include "Meta/keyvalueutil/valuetypeserialize.h"
 
 METATABLE_BEGIN(Engine::NamedDescriptor)

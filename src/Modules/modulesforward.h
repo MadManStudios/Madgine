@@ -72,8 +72,7 @@ namespace Threading {
     template <typename T>
     using ImmediateTask = Task<T, true>;
 
-    struct TaskPromiseTypeBase;
-    struct TaskSuspendablePromiseTypeBase;
+    struct TaskPromiseBase;
 
     struct WorkGroup;
     struct WorkGroupHandle;

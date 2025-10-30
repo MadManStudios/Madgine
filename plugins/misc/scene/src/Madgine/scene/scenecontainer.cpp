@@ -11,6 +11,8 @@
 
 #include "Meta/serialize/container/noparent.h"
 
+#include "Generic/execution/execution.h"
+
 METATABLE_BEGIN(Engine::Scene::SceneContainer)
 // TODO
 // SYNCABLEUNIT_MEMBERS()

@@ -14,7 +14,7 @@ namespace Threading {
 
     void emscripten_resume(void *address)
     {
-        std::coroutine_handle<TaskSuspendablePromiseTypeBase>::from_address(address).resume();
+        std::coroutine_handle<TaskPromiseBase>::from_address(address).resume();
     }
 
 #endif

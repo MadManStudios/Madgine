@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/closure.h"
-
 namespace Engine {
 namespace Scripting {
     namespace Python3 {

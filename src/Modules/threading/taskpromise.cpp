@@ -10,12 +10,12 @@
 namespace Engine {
 namespace Threading {
 
-    TaskSuspendablePromiseTypeBase::TaskSuspendablePromiseTypeBase(bool immediate)
+    TaskPromiseBase::TaskPromiseBase(bool immediate)
         : mImmediate(immediate)
     {
     }
 
-    TaskSuspendablePromiseTypeBase::~TaskSuspendablePromiseTypeBase()
+    TaskPromiseBase::~TaskPromiseBase()
     {
         if (mQueue) {
             mQueue->decreaseTaskInFlightCount();
@@ -23,9 +23,11 @@ namespace Threading {
             Debug::Tasks::onDestroy(*this);
 #endif
         }
+        if (mState)
+            mState->notifyDestroyed();
     }
 
-    void TaskSuspendablePromiseTypeBase::setQueue(TaskQueue *queue)
+    void TaskPromiseBase::setQueue(TaskQueue *queue)
     {
         assert(queue);
         assert(!mQueue);
@@ -33,12 +35,12 @@ namespace Threading {
         queue->increaseTaskInFlightCount();
     }
 
-    TaskQueue *TaskSuspendablePromiseTypeBase::queue() const
+    TaskQueue *TaskPromiseBase::queue() const
     {
         return mQueue;
     }
 
-    bool TaskSuspendablePromiseTypeBase::immediate() const
+    bool TaskPromiseBase::immediate() const
     {
         return mImmediate;
     }

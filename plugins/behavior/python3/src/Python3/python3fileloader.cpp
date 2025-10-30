@@ -22,6 +22,8 @@
 
 #include "Madgine/parametertuple.h"
 
+#include "util/pyexecution.h"
+
 UNIQUECOMPONENT(Engine::Scripting::Python3::Python3FileLoader)
 
 METATABLE_BEGIN(Engine::Scripting::Python3::Python3FileLoader)
@@ -39,7 +41,7 @@ METATABLE_BEGIN(Engine::Scripting::Python3::Python3FileLoader::Handle)
 //READONLY_PROPERTY(Data, dataPtr)
 METATABLE_END(Engine::Scripting::Python3::Python3FileLoader::Handle)
 
-DEFINE_BEHAVIOR_FACTORY(Python3, Engine::Scripting::Python3::Python3BehaviorFactory)
+BEHAVIOR_FACTORY(Python3, Engine::Scripting::Python3::Python3BehaviorFactory)
 
 namespace Engine {
 namespace Scripting {
@@ -236,7 +238,7 @@ namespace Scripting {
             return {};
         }
 
-        std::vector<BindingDescriptor> Python3BehaviorFactory::bindings(const UniqueOpaquePtr &handle) const
+        std::vector<NamedDescriptor> Python3BehaviorFactory::namedInputs(const UniqueOpaquePtr &handle) const
         {
             const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return {};

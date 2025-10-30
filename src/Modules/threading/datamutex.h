@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/execution/concepts.h"
-#include "Generic/genericresult.h"
 #include "Generic/execution/connection.h"
 #include "Generic/execution/container/queue.h"
 
@@ -100,7 +99,7 @@ namespace Threading {
 
             template <template <typename...> typename Tuple>
             using value_types = typename decltype(return_types_helper<std::invoke_result_t<F>>())::template instantiate<Tuple>;
-            using result_type = GenericResult;
+            using result_type = void;
 
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)

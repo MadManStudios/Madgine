@@ -5,8 +5,6 @@
 
 #include "execution/stop_callback.h"
 
-#include "execution/algorithm.h"
-
 #include "execution/binding.h"
 
 #include "genericresult.h"

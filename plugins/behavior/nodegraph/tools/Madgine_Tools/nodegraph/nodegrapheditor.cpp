@@ -50,6 +50,8 @@
 
 #include "Madgine/nodegraph/nodes/accessornode.h"
 
+#include "Generic/execution/execution.h"
+
 UNIQUECOMPONENT(Engine::Tools::NodeGraphEditor);
 
 METATABLE_BEGIN_BASE(Engine::Tools::NodeGraphEditor, Engine::Tools::ToolBase)

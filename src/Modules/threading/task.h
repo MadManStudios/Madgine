@@ -2,6 +2,7 @@
 
 #include "Generic/coroutines/handle.h"
 #include "taskpromise.h"
+#include "taskfuture.h"
 
 namespace Engine {
 namespace Threading {
@@ -24,10 +25,10 @@ namespace Threading {
 
         static_assert(!IsTask<T>);
 
-        struct promise_type : TaskSuspendablePromise<T> {
+        struct promise_type : TaskPromise<T> {
 
             promise_type()
-                : TaskSuspendablePromise<T>(Immediate)
+                : TaskPromise<T>(Immediate)
             {
             }
 
@@ -116,7 +117,7 @@ namespace Threading {
         }
 
     private:
-        CoroutineHandle<TaskSuspendablePromise<T>> mHandle;
+        CoroutineHandle<TaskPromise<T>> mHandle;
         std::shared_ptr<TaskPromiseSharedState<T>> mState;
     };
 

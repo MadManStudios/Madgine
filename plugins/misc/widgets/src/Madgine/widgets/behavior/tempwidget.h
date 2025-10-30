@@ -2,7 +2,11 @@
 
 #include "../widgetloader.h"
 
-#include "Madgine/nativebehaviorcollector.h"
+#include "Madgine/behavior.h"
+
+#include "Madgine/named.h"
+
+#include "Meta/math/matrix3.h"
 
 namespace Engine {
 namespace Widgets {

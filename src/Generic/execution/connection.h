@@ -1,14 +1,12 @@
 #pragma once
 
-#include "../genericresult.h"
-#include "virtualsender.h"
 #include "virtualstate.h"
 
 namespace Engine {
 namespace Execution {
 
     template <typename... Ty>
-    using ConnectionReceiver = VirtualReceiverBase<GenericResult, Ty...>;
+    using ConnectionReceiver = VirtualReceiverBaseEx<type_pack<>, type_pack<Ty...>>;
 
     template <typename Stub, typename... Ty>
     struct Connection : ConnectionReceiver<Ty...> {
@@ -42,7 +40,7 @@ namespace Execution {
     template <typename Stub, typename... Ty>
     struct ConnectionSender {
 
-        using result_type = GenericResult;
+        using result_type = void;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<Ty...>;
 

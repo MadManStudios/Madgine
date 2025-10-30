@@ -7,8 +7,6 @@
 
 #include "../widget.h"
 
-#include "Madgine/nativebehaviorcollector.h"
-
 #include "../widgetmanager.h"
 
 namespace Engine {

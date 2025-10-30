@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/genericresult.h"
-
 #include "Madgine/behavior.h"
 #include "Madgine/behaviorcollector.h"
 

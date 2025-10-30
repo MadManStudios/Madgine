@@ -11,6 +11,8 @@
 
 #include "../tablewidget.h"
 
+#include "Madgine/nativebehaviorcollector.h"
+
 namespace Engine {
 namespace Widgets {
 

@@ -8,16 +8,16 @@ namespace Scripting {
 
         struct MADGINE_PYTHON3_EXPORT PyFramePtr : PyObjectPtr {
             PyFramePtr() = default;
-            PyFramePtr(_PyInterpreterFrame *frame);
+            PyFramePtr(PyFrameObject *frame);
 
-            static PyFramePtr fromBorrowed(_PyInterpreterFrame *frame);
+            static PyFramePtr fromBorrowed(PyFrameObject *frame);
 
             using PyObjectPtr::operator=;
 
-            operator _PyInterpreterFrame *() const;
-            _PyInterpreterFrame *operator->() const;
+            operator PyFrameObject *() const;
+            PyFrameObject *operator->() const;
 
-            _PyInterpreterFrame *release();
+            PyFrameObject *release();
 
         };
 

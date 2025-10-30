@@ -30,6 +30,7 @@
 
 #include "Python3/util/pylistptr.h"
 #include "Python3/util/pymoduleptr.h"
+#include "Python3/util/pyexecution.h"
 
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>
@@ -52,7 +53,7 @@ namespace Tools {
     const Debug::DebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Scripting::Python3::Python3DebugLocation &location, const Debug::DebugLocation *inlineLocation)
     {
         Scripting::Python3::Python3Lock lock;
-        ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode2(location.mFrame)->co_filename));
+        ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode(location.mFrame)->co_filename));
         if (ImGui::TreeNode("Code")) {
 
             if (ImGui::BeginTable("Code", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_SizingFixedFit)) {
@@ -131,7 +132,7 @@ namespace Tools {
 
     void Python3ImmediateWindow::render()
     {
-        if (beginDefaultWindow()) {
+        if (beginToolPanel("Python3 Immediate Window", &mVisible, ImGuiDir_Right)) {
 
             if (!mPrompt)
                 mPrompt = std::make_unique<InteractivePrompt>(&getTool<TextEditor>(), this);
@@ -182,6 +183,7 @@ namespace Tools {
 
     bool Python3ImmediateWindow::interpret(std::string_view command)
     {
+        Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
         Execution::detach(mEnv->execute(command)
             | Log::log_result()
             | Execution::finally([this]() {
@@ -189,7 +191,7 @@ namespace Tools {
               })
             | Log::with_log(mPrompt.get())
             | Execution::with_debug_location<Debug::SenderLocation>()
-            | Debug::with_debug_context());
+            | Execution::with_sub_debug_location(context));
         return false;
     }
 

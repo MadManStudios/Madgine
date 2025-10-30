@@ -17,6 +17,10 @@
 
 #include "pymoduleptr.h"
 
+#include "Meta/keyvalue/argumentlist.h"
+
+#include "pyexecution.h"
+
 namespace Engine {
 namespace Scripting {
     namespace Python3 {

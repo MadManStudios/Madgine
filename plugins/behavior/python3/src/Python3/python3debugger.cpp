@@ -19,9 +19,10 @@
 
 #include "Interfaces/filesystem/path.h"
 
-#if PY_MINOR_VERSION < 11
-#    include <frameobject.h>
-#else
+#include "util/pyexecution.h"
+
+#include <frameobject.h>
+#if PY_MINOR_VERSION >= 11
 #    define Py_BUILD_CORE
 #    include <internal/pycore_frame.h>
 #endif
@@ -50,7 +51,7 @@ namespace Scripting {
 
         PyTypeObject PyDebugLocationType = {
             .ob_base = PyObject_HEAD_INIT(NULL)
-                           .tp_name
+                .tp_name
             = "PyDebugLocation",
             .tp_basicsize = sizeof(PyDebugLocationObject),
             .tp_itemsize = 0,
@@ -90,23 +91,23 @@ namespace Scripting {
 
         Filesystem::Path Python3DebugLocation::file() const
         {
-            return ""; //TODO
+            return ""; // TODO
             Python3Lock lock;
-            //return PyUnicode_AsUTF8(PyFrame_GetCode(mFrame->frame_obj)->co_filename);
+            // return PyUnicode_AsUTF8(PyFrame_GetCode(mFrame->frame_obj)->co_filename);
         }
 
         std::string Python3DebugLocation::module() const
         {
-            return ""; //TODO
+            return ""; // TODO
             Python3Lock lock;
-            //return PyUnicode_AsUTF8(PyFrame_GetCode(mFrame->frame_obj)->co_name);
+            // return PyUnicode_AsUTF8(PyFrame_GetCode(mFrame->frame_obj)->co_name);
         }
 
         size_t Python3DebugLocation::lineNr() const
         {
             return 0;
             Python3Lock lock;
-            //return PyCode_Addr2Line(PyFrame_GetCode(mFrame->frame_obj), PyFrame_GetLasti(mFrame->frame_obj));
+            // return PyCode_Addr2Line(PyFrame_GetCode(mFrame->frame_obj), PyFrame_GetLasti(mFrame->frame_obj));
         }
 
         Python3Debugger::Guard::Guard(Debug::ParentLocation *parent)
@@ -151,12 +152,8 @@ namespace Scripting {
                     if (sException) {
                         sException = false;
                     } else {
-                        location->mLocation.mFrame =
-#if PY_MINOR_VERSION < 11
-                            frame->f_back;
-#else
-                            frame->f_frame->previous->previous->frame_obj;
-#endif
+                        location->mLocation.mFrame = PyFrame_GetBack(frame);
+                        Py_XDECREF(location->mLocation.mFrame);
                         if (!location->mLocation.mFrame)
                             location->mLocation.stepOut(location->mParent);
                     }
@@ -165,12 +162,8 @@ namespace Scripting {
 
                 case PyTrace_EXCEPTION:
                     if (PyTuple_GetItem(arg, 0) != (PyObject *)&PySuspendExceptionType) {
-                        location->mLocation.mFrame =
-#if PY_MINOR_VERSION < 11
-                            frame->f_back;
-#else
-                            frame->f_frame->previous->previous->frame_obj;
-#endif
+                        location->mLocation.mFrame = PyFrame_GetBack(frame);
+                        Py_XDECREF(location->mLocation.mFrame);
                         if (!location->mLocation.mFrame)
                             location->mLocation.stepOut(location->mParent);
                     }
@@ -185,7 +178,7 @@ namespace Scripting {
                     }
                     if (location->mLocation.wantsPause(Debug::ContinuationType::Flow)) {
                         PyObject *suspendEx = suspend([frame, location](BehaviorReceiver &receiver, std::vector<PyFramePtr> frames, Log::Log *log, Execution::StopToken st) {
-                            _PyInterpreterFrame *frame = frames.front();
+                            //_PyInterpreterFrame *frame = frames.front();
                             //++frame->prev_instr;
                             location->mLocation.yield([location, log, &receiver, st](Debug::ContinuationMode mode, std::vector<PyFramePtr> frames) mutable {
                                 Python3Lock lock { log, std::move(st) };
@@ -194,7 +187,7 @@ namespace Scripting {
                                 case Debug::ContinuationMode::Continue:
                                     location->mSkipOnce = true;
                                     {
-                                        _PyInterpreterFrame *frame = frames.front();
+                                        //_PyInterpreterFrame *frame = frames.front();
                                         //--frame->prev_instr;
                                     }
                                     evalFrames(receiver, std::move(frames));

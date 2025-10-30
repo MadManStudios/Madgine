@@ -1,10 +1,6 @@
 #pragma once
 
-#include "Generic/callable_view.h"
-#include "Generic/closure.h"
-#include "Generic/execution/statedescriptor.h"
 #include "Generic/execution/stop_callback.h"
-#include "Generic/execution/virtualsender.h"
 #include "Madgine/root/rootcomponentbase.h"
 #include "Madgine/root/rootcomponentcollector.h"
 

@@ -2,6 +2,7 @@
 
 #include "Generic/execution/flag.h"
 #include "taskhandle.h"
+#include "Generic/delayedconstruct.h"
 
 namespace Engine {
 namespace Threading {

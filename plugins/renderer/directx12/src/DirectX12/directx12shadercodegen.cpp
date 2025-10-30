@@ -149,9 +149,14 @@ namespace Render {
             stream << ")";
         }
 
-        void generate(std::ostream &stream, const CodeGen::Constant &c)
+        void generate(std::ostream &stream, const CodeGen::Constant<std::string> &c)
         {
-            c.mValue.visit([&](const auto &part) { generate(stream, part); });
+            generate(stream, c.mValue);
+        }
+
+        void generate(std::ostream &stream, const CodeGen::Constant<int> &c)
+        {
+            generate(stream, c.mValue);
         }
 
         void generate(std::ostream &stream, const CodeGen::Statement &statement)

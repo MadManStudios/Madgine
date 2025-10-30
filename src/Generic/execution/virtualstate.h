@@ -37,7 +37,7 @@ namespace Execution {
     template <typename R, typename... V>
     using VirtualReceiverBase = VirtualReceiverBaseEx<make_type_pack_t<R>, type_pack<V...>>;
 
-    template <typename Rec, typename Base, typename R, typename VPack, auto... cpo>
+    template <typename Rec, typename Base, typename R, typename VPack>
     struct VirtualStateEx;
 
     template <typename _Rec, typename Base, typename... V>

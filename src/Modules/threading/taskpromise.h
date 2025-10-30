@@ -1,6 +1,6 @@
 #pragma once
 
-#include "taskfuture.h"
+#include "taskpromisesharedstate.h"
 #include "taskhandle.h"
 
 #include "Generic/execution/concepts.h"
@@ -42,28 +42,13 @@ namespace Threading {
         void await_resume() noexcept;
 
 #if ENABLE_TASK_TRACKING
-        TaskSuspendablePromiseTypeBase *mPromise;
+        TaskPromiseBase *mPromise;
 #endif
     };
 
-    struct MODULES_EXPORT TaskPromiseTypeBase {
-        TaskPromiseTypeBase() = default;
-        TaskPromiseTypeBase(const TaskPromiseTypeBase &) = delete;
-        TaskPromiseTypeBase(TaskPromiseTypeBase &&) = default;
-        TaskPromiseTypeBase &operator=(TaskPromiseTypeBase &&) = default;
-        ~TaskPromiseTypeBase()
-        {
-            if (mState)
-                mState->notifyDestroyed();
-        }
-
-    protected:
-        std::shared_ptr<TaskPromiseSharedStateBase> mState;
-    };
-
-    struct MODULES_EXPORT TaskSuspendablePromiseTypeBase : TaskPromiseTypeBase {
-        TaskSuspendablePromiseTypeBase(bool immediate = false);
-        ~TaskSuspendablePromiseTypeBase();
+    struct MODULES_EXPORT TaskPromiseBase {
+        TaskPromiseBase(bool immediate = false);
+        ~TaskPromiseBase();
 
         TaskInitialSuspend initial_suspend() noexcept
         {
@@ -106,43 +91,17 @@ namespace Threading {
     protected:
         TaskHandle mThenReturn;
 
+        std::shared_ptr<TaskPromiseSharedStateBase> mState;
+
     private:
         TaskQueue *mQueue = nullptr;
-        bool mImmediate;
+        bool mImmediate;        
     };
 
     template <typename T>
-    struct TaskPromise : TaskPromiseTypeBase {
+    struct TaskPromise : TaskPromiseBase {
 
-        void set_value(T value)
-        {
-            if (mState) {
-                static_cast<TaskPromiseSharedState<T> *>(mState.get())->set_value(std::move(value));
-                mState->finalize();
-            }
-        }
-
-        TaskFuture<T> get_future()
-        {
-            assert(!mState);
-            std::shared_ptr<TaskPromiseSharedState<T>> state = std::make_shared<TaskPromiseSharedState<T>>();
-            state->attach();
-            mState = state;
-            return state;
-        }
-
-        void set_future(TaskFuture<T> future)
-        {
-            assert(!mState && future.valid());
-            mState = future.release();
-            mState->attach();
-        }
-    };
-
-    template <typename T>
-    struct TaskSuspendablePromise : TaskSuspendablePromiseTypeBase {
-
-        using TaskSuspendablePromiseTypeBase::TaskSuspendablePromiseTypeBase;
+        using TaskPromiseBase::TaskPromiseBase;
 
         void return_value(T value) noexcept
         {
@@ -168,37 +127,9 @@ namespace Threading {
     };
 
     template <>
-    struct TaskPromise<void> : TaskPromiseTypeBase {
+    struct TaskPromise<void> : TaskPromiseBase {
 
-        void set_value()
-        {
-            if (mState) {
-                static_cast<TaskPromiseSharedState<void> *>(mState.get())->set_value();
-                mState->finalize();
-            }
-        }
-
-        TaskFuture<void> get_future()
-        {
-            assert(!mState);
-            std::shared_ptr<TaskPromiseSharedState<void>> state = std::make_shared<TaskPromiseSharedState<void>>();
-            state->attach();
-            mState = state;
-            return state;
-        }
-
-        void set_future(TaskFuture<void> future)
-        {
-            assert(!mState && future.valid());
-            mState = future.release();
-            mState->attach();
-        }
-    };
-
-    template <>
-    struct TaskSuspendablePromise<void> : TaskSuspendablePromiseTypeBase {
-
-        using TaskSuspendablePromiseTypeBase::TaskSuspendablePromiseTypeBase;
+        using TaskPromiseBase::TaskPromiseBase;
 
         void return_void() noexcept
         {

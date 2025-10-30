@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../genericresult.h"
-
 #include "concepts.h"
 
 #include "virtualstate.h"
@@ -56,7 +54,7 @@ namespace Execution {
 
         using is_sender = void;
 
-        using result_type = GenericResult;
+        using result_type = void;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 

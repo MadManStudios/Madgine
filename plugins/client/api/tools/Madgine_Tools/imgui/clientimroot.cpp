@@ -106,6 +106,16 @@ namespace Tools {
         { Input::Key::X, ImGuiKey_X },
         { Input::Key::Y, ImGuiKey_Y },
         { Input::Key::Z, ImGuiKey_Z },
+        { Input::Key::Alpha0, ImGuiKey_0 },
+        { Input::Key::Alpha1, ImGuiKey_1 },
+        { Input::Key::Alpha2, ImGuiKey_2 },
+        { Input::Key::Alpha3, ImGuiKey_3 },
+        { Input::Key::Alpha4, ImGuiKey_4 },
+        { Input::Key::Alpha5, ImGuiKey_5 },
+        { Input::Key::Alpha6, ImGuiKey_6 },
+        { Input::Key::Alpha7, ImGuiKey_7 },
+        { Input::Key::Alpha8, ImGuiKey_8 },
+        { Input::Key::Alpha9, ImGuiKey_9 }
     };
 
     static void CreateImGuiToolWindow(ImGuiViewport *vp)

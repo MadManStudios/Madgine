@@ -20,6 +20,8 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
+#include "Generic/execution/execution.h"
+
 METATABLE_BEGIN(Engine::HandlerManager)
 MEMBER(mHandlers)
 METATABLE_END(Engine::HandlerManager)

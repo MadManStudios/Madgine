@@ -2,7 +2,6 @@
 
 #include "algorithm.h"
 #include "connection.h"
-#include "execution.h"
 #include "virtualsender.h"
 #include "container/stack.h"
 

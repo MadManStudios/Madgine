@@ -6,6 +6,8 @@
 
 #include "Madgine/awaitables/awaitablesender.h"
 
+#include "Madgine/nativebehaviorcollector.h"
+
 NATIVE_BEHAVIOR(Yield_Frame, Engine::Widgets::yield_frame)
 NATIVE_BEHAVIOR(Wait_Frame, Engine::Widgets::wait_frame, Engine::InputParameter<"Duration", std::chrono::steady_clock::duration>)
 NATIVE_BEHAVIOR(Animate_Move, Engine::Widgets::animate_move, Engine::InputParameter<"Distance", Engine::Matrix3>, Engine::InputParameter<"Duration", std::chrono::nanoseconds>)

@@ -4,8 +4,6 @@
 
 #include "parametertuple.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 #include "behavior.h"
 
 namespace Engine {

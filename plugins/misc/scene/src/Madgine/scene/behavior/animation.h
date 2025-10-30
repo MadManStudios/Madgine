@@ -3,9 +3,9 @@
 #include "Madgine/animationloader/animationloader.h"
 #include "Madgine/skeletonloader/skeletonloader.h"
 
-#include "Madgine/nativebehaviorcollector.h"
-
 #include "Generic/execution/stop_callback.h"
+
+#include "Madgine/behaviorreceiver.h"
 
 namespace Engine {
 namespace Scene {

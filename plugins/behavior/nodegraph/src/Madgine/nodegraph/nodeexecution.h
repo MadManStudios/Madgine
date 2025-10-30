@@ -6,8 +6,6 @@
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/execution.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 #include "nodebase.h"
 #include "nodeinterpreter.h"
 
@@ -182,7 +180,7 @@ namespace NodeGraph {
             struct state : CodeGen::codegen_base_state<Rec> {
                 auto generate()
                 {
-                    return std::make_tuple(CodeGen::Constant { ValueType { 0 } });
+                    return std::make_tuple(CodeGen::Constant<int> { 0 });
                 }
             };
             return state { std::forward<Rec>(rec) };
@@ -194,7 +192,6 @@ namespace NodeGraph {
     template <typename... T>
     struct NodeReader {
         using Signature = Execution::signature<T...>;
-
 
         using is_sender = void;
 
@@ -212,10 +209,6 @@ namespace NodeGraph {
         template <typename Rec>
         struct state : Execution::base_state<Rec> {
 
-            template <typename Ty>
-            struct typed_Value : ValueType {
-                using ValueType::operator=;
-            };
             void start()
             {
                 helper(std::index_sequence_for<T...> {});
@@ -224,28 +217,22 @@ namespace NodeGraph {
             void helper(std::index_sequence<I...>)
             {
                 auto &handle = Execution::get_context(this->mRec);
-                if (handle.mNode.dataInCount() == mIndex) {
+                if (handle.mNode.dataInCount() == mBaseIndex) {
                     this->set_done();
                 } else {
-                    assert(mIndex == 0);
-                    std::tuple<typed_Value<T>...> data;
-                    BehaviorError error = TupleUnpacker::accumulate(
-                        data, [&]<typename Ty>(typed_Value<Ty> &v, BehaviorError e) {
-                            if (e.mResult != GenericResult::SUCCESS)
-                                return e;
-                            return handle.read(v, mIndex++);
-                        },
-                        BehaviorError {});
-                    mIndex = 0;
-                    if (error.mResult != GenericResult::SUCCESS) {
-                        this->set_error(std::move(error));
-                    } else {
-                        this->set_value(std::get<I>(data).template as<decayed_t<T>>()...);
+                    ArgumentList data { sizeof...(T) };
+                    for (size_t index = 0; index < sizeof...(T); ++index) {
+                        BehaviorError error = handle.read(data[index], index + mBaseIndex);
+                        if (error.mResult != GenericResult::SUCCESS) {
+                            this->set_error(std::move(error));
+                            return;
+                        }
                     }
-                }
-            }
 
-            size_t mIndex = 0;
+                    this->set_value(ValueType_as<decayed_t<T>>(data.at(I))...);
+                }
+            }         
+            size_t mBaseIndex;
         };
 
         template <typename Rec>
@@ -384,32 +371,35 @@ namespace NodeGraph {
 
         struct iterator {
 
-            constexpr bool operator!=(const iterator& other) const {
+            constexpr bool operator!=(const iterator &other) const
+            {
                 return mIndex != other.mIndex;
             }
 
-            void operator++() {
+            void operator++()
+            {
                 ++mIndex;
             }
 
-            auto operator*() {
+            auto operator*()
+            {
                 return NodeSender<flowOutGroup> { mIndex } | Debug::debug_channel(mIndex);
             }
 
             uint32_t mIndex;
         };
 
-        iterator begin() {
+        iterator begin()
+        {
             return { 0 };
         }
-        
-        iterator end() {
+
+        iterator end()
+        {
             return { mSize };
         }
 
-
         uint32_t mSize;
-
     };
 
 }

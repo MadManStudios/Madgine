@@ -28,6 +28,4 @@
 #    define _DEBUG
 #endif
 
-#include "python3compat.h"
-
 #include "python3forward.h"

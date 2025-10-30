@@ -14,6 +14,8 @@
 #include "../../pins.h"
 #include "automasknode.h"
 
+#include "Meta/keyvalue/valuetype.h"
+
 #include "Madgine/codegen/fromsender.h"
 
 namespace Engine {

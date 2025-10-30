@@ -2,19 +2,8 @@
 
 #include "Madgine/root/rootcomponentbase.h"
 #include "Madgine/root/rootcomponentcollector.h"
-#include "Modules/uniquecomponent/uniquecomponent.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "python3debugger.h"
-
-#include "Generic/execution/virtualsender.h"
-#include "Generic/genericresult.h"
-
-#include "Madgine/debug/debuggablesender.h"
-
-#include "Meta/keyvalue/valuetype.h"
-
-#include "util/pyexecution.h"
 
 #include "Modules/threading/madgineobject.h"
 
@@ -46,5 +35,3 @@ namespace Scripting {
     }
 }
 }
-
-REGISTER_TYPE(Engine::Scripting::Python3::Python3Environment)

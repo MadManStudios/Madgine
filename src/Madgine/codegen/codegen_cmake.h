@@ -29,7 +29,8 @@ struct MADGINE_CODEGEN_EXPORT CMakeFile : File {
     void generate(std::ostream &stream, const Assignment &assign);
     void generate(std::ostream &stream, const ArithOperation &op);
     void generate(std::ostream &stream, const Constructor &con);
-    void generate(std::ostream &stream, const Constant &c);
+    void generate(std::ostream &stream, const Constant<int> &c);
+    void generate(std::ostream &stream, const Constant<std::string> &c);
     void generate(std::ostream &stream, const Comment &c);
     void generate(std::ostream &stream, const ForEach &c);
 

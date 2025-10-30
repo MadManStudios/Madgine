@@ -16,6 +16,8 @@
 
 #include "../nodeexecution.h"
 
+#include "Meta/keyvalue/valuetype.h"
+
 METATABLE_BEGIN_BASE(Engine::NodeGraph::AccessorNode, Engine::NodeGraph::NodeBase)
 // PROPERTY(Function, getFunction, setFunction)
 METATABLE_END(Engine::NodeGraph::AccessorNode)

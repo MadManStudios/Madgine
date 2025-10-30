@@ -3,13 +3,11 @@
 #include "Madgine/window/mainwindowcomponent.h"
 #include "Madgine/window/mainwindowcomponentcollector.h"
 
-#include "Madgine/render/renderpass.h"
+#include "Meta/math/atlas2.h"
 
 #include "Generic/execution/signal.h"
 
 #include "Generic/coroutines/generator.h"
-
-#include "Meta/math/atlas2.h"
 
 #include "Madgine/imageloader/imageloader.h"
 
@@ -120,7 +118,6 @@ namespace Widgets {
         WidgetBase *getHoveredWidget(const Vector2 &pos, WidgetBase *current);
         WidgetBase *getHoveredWidgetUp(const Vector2 &pos, WidgetBase *current);
         WidgetBase *getHoveredWidgetDown(const Vector2 &pos, WidgetBase *current);
-        WidgetBase *getHoveredWidgetDown2(const Vector2 &pos, WidgetBase *current);
 
         void resetPointerState();
 

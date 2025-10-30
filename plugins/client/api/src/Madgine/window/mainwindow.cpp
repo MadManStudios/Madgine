@@ -31,6 +31,8 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
+#include "Generic/execution/execution.h"
+
 namespace Engine {
 namespace Window {
     static bool filterComponent(const std::unique_ptr<MainWindowComponentBase> &comp)

@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Madgine/debug/debugger.h"
-
-#include "util/pyexecution.h"
+#include "Madgine/debug/debuglocation.h"
+#include "util/pyobjectptr.h"
 
 namespace Engine {
 namespace Scripting {

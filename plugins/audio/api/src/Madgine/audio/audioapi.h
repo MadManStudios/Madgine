@@ -10,9 +10,6 @@
 
 #include "Madgine/behavior.h"
 
-
-#include "Madgine/nativebehaviorcollector.h"
-
 namespace Engine {
 namespace Audio {
 

@@ -1,14 +1,14 @@
 
 if (NOT CMAKE_CROSSCOMPILING)
 
-	find_package (Python3 COMPONENTS Development.Embed)
+	find_package (Python3 REQUIRED COMPONENTS Development.Embed)
 
-	if (NOT Python3_Development.Embed_FOUND OR NOT PYTHON_EXECUTABLE)
+	if (NOT Python3_Development.Embed_FOUND)
 		MESSAGE(STATUS "Python3 not found.")
 		return()
 	endif()
 
-	find_file (python_license NAMES LICENSE.txt PATHS ${Python3_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} ${PYTHON_EXECUTABLE}/.. NO_DEFAULT_PATH)
+	find_file (python_license NAMES LICENSE.txt PATHS ${Python3_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} ${Python3_LIBRARY_DIRS}/.. NO_DEFAULT_PATH)
 
 	if (NOT python_license)
 		MESSAGE(STATUS "Failed to find Python3 License")

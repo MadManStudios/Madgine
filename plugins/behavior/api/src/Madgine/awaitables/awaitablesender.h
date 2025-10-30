@@ -6,6 +6,8 @@
 #include "Generic/makeowning.h"
 #include "Generic/withresult.h"
 
+#include "../behavior.h"
+
 #include "Madgine/debug/debuggablesender.h"
 
 namespace Engine {

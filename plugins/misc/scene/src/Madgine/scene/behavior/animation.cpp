@@ -13,6 +13,8 @@
 
 #include "../scenemanager.h"
 
+#include "Madgine/nativebehaviorcollector.h"
+
 namespace Engine {
 
 namespace Scene {

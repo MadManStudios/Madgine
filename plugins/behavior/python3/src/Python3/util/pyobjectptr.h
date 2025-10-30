@@ -1,10 +1,5 @@
 #pragma once
 
-#include "Generic/execution/sender.h"
-#include "Generic/genericresult.h"
-#include "Madgine/debug/debuggablesender.h"
-#include "Meta/keyvalue/valuetype.h"
-
 namespace Engine {
 namespace Scripting {
     namespace Python3 {

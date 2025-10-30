@@ -2,7 +2,7 @@
 
 #include "Generic/bits/array.h"
 #include "Generic/container/tinyvector.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/keyvalue/valuetype_desc.h"
 
 namespace CodeGen {
 
@@ -101,8 +101,9 @@ struct Constructor : FullStatement {
     StatementVector mArguments;
 };
 
+template <typename T>
 struct Constant {
-    Engine::ValueType mValue;
+    T mValue;
 };
 
 struct Comment {

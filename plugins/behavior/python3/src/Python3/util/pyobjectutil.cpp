@@ -312,6 +312,12 @@ namespace Scripting {
             return nullptr;
         }
 
+        PyObject *Scripting::Python3::toPyObject(const KeyValueBinding &b)
+        {
+            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <KeyValueBinding> yet");
+            return nullptr;
+        }
+
         struct Functor_to_KeyValuePair {
             void operator()(KeyValuePair &p, const std::pair<PyObject *, PyObject *> &o)
             {
@@ -365,7 +371,7 @@ namespace Scripting {
             if (!obj) {                
                 receiver.set_error(fetchError());
             } else if (obj == Py_None) {
-                receiver.set_value(std::monostate {});
+                receiver.set_value();
             } else if (PyUnicode_Check(obj)) {
                 const char *s;
                 if (!PyArg_Parse(obj, "s", &s))

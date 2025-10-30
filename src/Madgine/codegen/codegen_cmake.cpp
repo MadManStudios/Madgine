@@ -4,8 +4,6 @@
 
 #include "statement.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 #include "Meta/serialize/streams/formatter.h"
 
 namespace CodeGen {
@@ -19,7 +17,7 @@ CMakeFile::CMakeFile()
 
 void CMakeFile::setVariable(std::string_view name, std::string_view string)
 {
-    statement(Assignment { {} , VariableAccess { std::string { name } }, Constant { Engine::ValueType { string } } });
+    statement(Assignment { {}, VariableAccess { std::string { name } }, Constant<std::string> { std::string { string } } });
 }
 
 void CMakeFile::statement(Statement statement)
@@ -86,9 +84,14 @@ void CMakeFile::generate(std::ostream &stream, const Constructor &con)
     throw 0;
 }
 
-void CMakeFile::generate(std::ostream &stream, const Constant &c)
+void CMakeFile::generate(std::ostream &stream, const Constant<int> &c)
 {
-    stream << c.mValue.toShortString();
+    stream << c.mValue;
+}
+
+void CMakeFile::generate(std::ostream &stream, const Constant<std::string> &c)
+{
+    stream << "\"" << c.mValue << "\"";
 }
 
 void CMakeFile::generate(std::ostream &stream, const Comment &c)
