@@ -115,7 +115,8 @@ namespace Tools {
         { Input::Key::Alpha6, ImGuiKey_6 },
         { Input::Key::Alpha7, ImGuiKey_7 },
         { Input::Key::Alpha8, ImGuiKey_8 },
-        { Input::Key::Alpha9, ImGuiKey_9 }
+        { Input::Key::Alpha9, ImGuiKey_9 },
+        { Input::Key::Comma, ImGuiKey_Comma }
     };
 
     static void CreateImGuiToolWindow(ImGuiViewport *vp)

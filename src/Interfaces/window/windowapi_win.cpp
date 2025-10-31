@@ -72,17 +72,24 @@ namespace Window {
                 case WM_MOUSEWHEEL:
                     onEvent(Input::AxisEvent { Input::AxisEvent::WHEEL, GET_WHEEL_DELTA_WPARAM(wParam) / float(WHEEL_DELTA) });
                     break;
+                default:
+                    handled = false;
                 }
             } else if (msg >= WM_KEYFIRST && msg <= WM_KEYLAST) {
                 Input::Key::Key keycode = (Input::Key::Key)wParam;
                 UINT scancode = (lParam >> 16) & 0xFF;
+                bool extended = (lParam >> 24) & 0x1; 
                 switch (msg) {
                 case WM_KEYDOWN:
                 case WM_SYSKEYDOWN:
                     mKeyDown[keycode] = std::numeric_limits<BYTE>::max();
+                    if (keycode == Input::Key::Alt) {
+                        mKeyDown[extended ? Input::Key::RAlt : Input::Key::LAlt] = std::numeric_limits<BYTE>::max();
+                    }
+
                     WORD buffer;
                     switch (keycode) {
-                    case Input::Key::Key::Return:
+                    case Input::Key::Key::Return: 
                         buffer = '\n';
                         break;
                     default:
@@ -93,9 +100,15 @@ namespace Window {
                 case WM_KEYUP:
                 case WM_SYSKEYUP:
                     mKeyDown[keycode] = 0;
+                    if (keycode == Input::Key::Alt) {
+                        mKeyDown[extended ? Input::Key::RAlt : Input::Key::LAlt] = 0;
+                    }
                     onEvent(Input::KeyReleaseEvent { keycode, 0, controlKeyState() });
                     break;
+                case WM_CHAR:
+                    break;
                 default:
+                    handled = false;
                     LOG("Unknown KeyEvent " << msg);
                 }
             } else {
@@ -149,8 +162,8 @@ namespace Window {
         {
             return {
                 (bool)mKeyDown[Input::Key::Shift],
-                (bool)mKeyDown[Input::Key::Control],
-                (bool)mKeyDown[Input::Key::Alt]
+                (bool)mKeyDown[Input::Key::Control] && !mKeyDown[Input::Key::RAlt],
+                (bool)mKeyDown[Input::Key::LAlt]
             };
         }
 
