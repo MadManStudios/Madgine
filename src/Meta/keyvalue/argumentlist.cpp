@@ -96,4 +96,14 @@ std::vector<ValueType>::const_iterator ArgumentList::end() const
     return mElements.end();
 }
 
+std::ostream &operator<<(std::ostream &out, const ArgumentList &list)
+{
+    out << "{ ";
+    StringUtil::StreamJoiner join { out, ", " };
+    for (const ValueType &v : list.mElements) {
+        join.next() << v.toShortString();
+    }
+    return out << " }";
+}
+
 }

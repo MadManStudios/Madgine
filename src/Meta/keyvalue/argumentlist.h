@@ -43,6 +43,8 @@ struct META_EXPORT ArgumentList {
     std::vector<ValueType>::const_iterator begin() const;
     std::vector<ValueType>::const_iterator end() const;
 
+    friend META_EXPORT std::ostream &operator<<(std::ostream &out, const ArgumentList &list);
+
 private:
     std::vector<ValueType> mElements;
 };
