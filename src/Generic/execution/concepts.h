@@ -21,8 +21,8 @@ namespace Execution {
     };
 
     struct outer_connect_t {
-        template <typename Sender, typename Rec>
-        requires(!tag_invocable<outer_connect_t, Sender, Rec>) auto operator()(Sender &&sender, Rec &&rec) const
+        template <typename Sender, typename Rec, typename = std::enable_if_t<!tag_invocable<outer_connect_t, Sender, Rec>>>
+        auto operator()(Sender &&sender, Rec &&rec) const
             noexcept(is_nothrow_tag_invocable_v<connect_t, Sender, Rec>)
                 -> tag_invoke_result_t<connect_t, Sender, Rec>
         {

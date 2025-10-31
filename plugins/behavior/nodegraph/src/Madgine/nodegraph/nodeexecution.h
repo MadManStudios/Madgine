@@ -72,7 +72,7 @@ namespace NodeGraph {
         friend auto tag_invoke(CPO f, NodeReceiver &rec, Args &&...args)
             -> tag_invoke_result_t<CPO, BehaviorReceiver &, Args...>
         {
-            return f(rec.mReceiver, std::forward<Args>(args)...);
+            return tag_invoke(f, rec.mReceiver, std::forward<Args>(args)...);
         }
     };
 
@@ -82,9 +82,9 @@ namespace NodeGraph {
         template <typename Sender>
         struct sender : Execution::algorithm_sender<Sender> {
             template <typename Rec>
-            friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
+            friend auto tag_invoke(Execution::connect_t connect, sender &&sender, Rec &&rec)
             {
-                return Execution::connect(std::forward<Sender>(sender.mSender) | Execution::with_query_value(Execution::get_context, std::move(sender.mHandle)), std::forward<Rec>(rec));
+                return tag_invoke(connect, std::forward<Sender>(sender.mSender) | Execution::with_query_value(Execution::get_context, std::move(sender.mHandle)), std::forward<Rec>(rec));
             }
 
             NodeInterpretHandle<Node> mHandle;
@@ -323,9 +323,9 @@ namespace NodeGraph {
             using value_types = Tuple<>;
 
             template <typename Rec>
-            friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
+            friend auto tag_invoke(Execution::connect_t connect, sender &&sender, Rec &&rec)
             {
-                return Execution::connect(std::forward<Inner>(sender.mInner), receiver<Rec> { std::forward<Rec>(rec), sender.mResults });
+                return tag_invoke(connect, std::forward<Inner>(sender.mInner), receiver<Rec> { std::forward<Rec>(rec), sender.mResults });
             }
 
             Inner mInner;
