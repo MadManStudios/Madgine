@@ -64,6 +64,12 @@ namespace Debug {
             , mType(type)
         {
         }
+        Continuation(Continuation &&) = default;
+        ~Continuation() {
+            assert(!mImpl);
+        }
+
+        Continuation &operator=(Continuation &&) = default;
 
         explicit operator bool() const
         {
@@ -77,8 +83,9 @@ namespace Debug {
 
         void operator()(ContinuationMode mode)
         {
-            mImpl->call(mode);
+            std::unique_ptr<Base> impl = std::move(mImpl);
             mImpl.reset();
+            impl->call(mode);            
         }
 
         void visitArguments(std::ostream &out) const

@@ -77,6 +77,11 @@ namespace Threading {
                 }
             }
 
+            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            {
+                visitor(Execution::State::Text { typeid(F).name() });
+            }
+
             F mF;
         };
 

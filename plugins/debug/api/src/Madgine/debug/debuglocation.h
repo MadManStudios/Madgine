@@ -17,28 +17,28 @@ namespace Debug {
         virtual ~DebugLocation() = default;
         virtual std::string toString() const = 0;
         virtual std::map<std::string_view, ValueType> localVariables() const = 0;
-        virtual bool wantsPause(ContinuationType type) const = 0;
+        virtual bool wantsPause(ContinuationType type, IndexType<size_t> line) const = 0;
 
         void stepInto(ParentLocation *parent);
         void stepOut(ParentLocation *parent);
         template <typename F, typename... Args>
-        void yield(F &&callback, Execution::StopToken st, ContinuationType type, Args &&...args)
+        void yield(F &&callback, Continuation &outContinuation, ContinuationType type, Execution::StopToken st, Args &&...args)
         {
-            yieldImpl({ std::forward<F>(callback), type, std::forward<Args>(args)... }, std::move(st));
+            yieldImpl({ std::forward<F>(callback), type, std::forward<Args>(args)... }, outContinuation, std::move(st));
         }
 
         template <typename F, typename... Args>
-        void pass(F &&callback, Execution::StopToken st, ContinuationType type, bool forceStop = false, Args &&...args)
+        void pass(F &&callback, Continuation &outContinuation, ContinuationType type, Execution::StopToken st, IndexType<size_t> line = {}, Args &&...args)
         {
-            if (forceStop || wantsPause(type)) {
-                yield(std::forward<F>(callback), std::move(st), type, std::forward<Args>(args)...);
+            if (wantsPause(type, line)) {
+                yield(std::forward<F>(callback), outContinuation, type, std::move(st), std::forward<Args>(args)...);
             } else {
                 std::forward<F>(callback)(ContinuationMode::Continue, std::forward<Args>(args)...);
             }
         }
 
     private:
-        void yieldImpl(Continuation cont, Execution::StopToken st);
+        void yieldImpl(Continuation cont, Continuation &outContinuation, Execution::StopToken st);
     };
 
 }

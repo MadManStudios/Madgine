@@ -2,8 +2,6 @@
 
 #include "Generic/execution/algorithm.h"
 
-#include "Madgine/debug/debuglocationsplitter.h"
-
 #include "Meta/keyvalueutil/valuetypeserialize.h"
 
 #include "sendernode_impl.h"
@@ -81,7 +79,7 @@ struct stop_when_helper_t {
 DEFAULT_SENDER_NODE_BEGIN(StopWhen, stop_when_helper_t {}, Engine::NodeGraph::NodeReader<Engine::KeyValueSender>, Engine::NodeGraph::NodeSender<1>)
 SENDER_NODE_END(StopWhen)
 
-DEFAULT_SENDER_NODE_BEGIN(WhenAll, Engine::Debug::when_all_range, Engine::NodeGraph::NodeRange<1>)
+DEFAULT_SENDER_NODE_BEGIN(WhenAll, Engine::Execution::when_all_range, Engine::NodeGraph::NodeRange<1>)
 SENDER_NODE_END(WhenAll)
 
 /*using SequenceNode = Engine::NodeGraph::SenderNode<Engine::Execution::sequence, false, Engine::type_pack<>, Engine::type_pack<>, Engine::Execution::recursive<Engine::NodeGraph::NodeSender<1>>>;

@@ -63,24 +63,31 @@ struct get_named_t {
 template <fixed_string Name, typename V>
 inline constexpr get_named_t<Name, V> get_named;
 
-template <typename _Rec, fixed_string Name, typename T, typename F>
-struct NamedState : Execution::base_state<_Rec> {
-    using Rec = _Rec;
+template <typename Rec, fixed_string Name, typename T, typename F>
+struct NamedState : Execution::base_state<Rec> {
 
     using Sender = std::invoke_result_t<F, ValueType_Return<T> &>;
 
-    using State = Execution::connect_result_t<Sender, Rec &>;
+    using State = Execution::connect_result_t<Sender, Rec>;
 
     NamedState(F &&f, Named<Name, T> value, Rec &&rec)
         : Execution::base_state<Rec>(std::forward<Rec>(rec))
-        , mState(std::forward<F>(f))
+        , mF(std::forward<F>(f))
         , mValue(std::move(value))
-        
+
+    {
+        if (!mValue.mValue) {
+            if (!mValue.resolve(this->mRec)) {
+                throw 0;
+            }
+            construct(mState, DelayedConstruct<State> { [&]() { return Execution::connect(std::invoke(mF, *mValue), std::forward<Rec>(this->mRec)); } });
+        }
+    }
+
+    ~NamedState()
     {
         if (mValue.mValue) {
-            F f = std::forward<F>(std::get<F>(mState));
-            mState.template emplace<State>(DelayedConstruct<State> {
-                [&]() { return Execution::connect(std::invoke(std::forward<F>(f), *mValue), this->mRec); } });
+            destruct(mState);
         }
     }
 
@@ -91,22 +98,50 @@ struct NamedState : Execution::base_state<_Rec> {
                 throw 0;
                 //            mRec.set_error( { "Named value '" + std::string(Name) + "' not found" });
                 return;
-            } else {
-                F f = std::forward<F>(std::get<F>(mState));
-                mState.template emplace<State>(DelayedConstruct<State> {
-                    [&]() { return Execution::connect(std::invoke(std::forward<F>(f), *mValue), this->mRec); } });
             }
+            construct(mState, DelayedConstruct<State> { [&]() { return Execution::connect(std::invoke(mF, *mValue), std::forward<Rec>(this->mRec)); } });
         }
-        std::get<State>(mState).start();
+
+        mState->start();
     }
 
     void stop()
     {
-        std::get<State>(mState).stop();
+        mState->stop();
+    }
+
+    template <typename... V>
+    void set_value(V &&...value)
+    {
+        destruct(mState);
+        this->mRec.set_value(std::forward<V>(value)...);
+    }
+    void set_done()
+    {
+        destruct(mState);
+        this->mRec.set_done();
+    }
+    template <typename... R>
+    void set_error(R &&...result)
+    {
+        destruct(mState);
+        this->mRec.set_error(std::forward<R>(result)...);
+    }
+
+    friend auto tag_invoke(Execution::visit_state_t, NamedState *state, const auto &info, auto &&visitor)
+    {
+        visitor(Execution::State::Text { Name.c_str() });
+        if (state) {
+            auto &&sender = std::invoke(state->mF, *state->mValue);
+            Execution::visit_state(&state->mState, Execution::visit_sender(&sender), std::forward<decltype(visitor)>(visitor));
+        } else {
+            Execution::visit_state(static_cast<State *>(nullptr), Execution::visit_sender(static_cast<Sender *>(nullptr)), std::forward<decltype(visitor)>(visitor));
+        }
     }
 
     Named<Name, T> mValue;
-    std::variant<F, State> mState;
+    F mF;
+    ManualLifetime<State> mState;
 };
 
 template <fixed_string Name, typename T, typename F>
@@ -129,7 +164,7 @@ struct NamedSender {
     template <typename Rec>
     friend auto tag_invoke(Execution::connect_t, NamedSender &sender, Rec &&rec)
     {
-        return NamedState<Rec, Name, T, std::reference_wrapper<F>> { sender.mF, sender.mValue, std::forward<Rec>(rec) };
+        return NamedState<Rec, Name, T, F> { F { sender.mF }, sender.mValue, std::forward<Rec>(rec) };
     }
 
     Named<Name, T> mValue;
@@ -212,7 +247,7 @@ struct with_named_t {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
         {
-            return Execution::algorithm_state<Inner, receiver<Rec, T>> { std::forward<Inner>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mValue) };
+            return Execution::algorithm_state<Inner, receiver<Rec, T>> { std::forward<Inner>(sender.mSender), receiver<Rec, T> { std::forward<Rec>(rec), std::forward<T>(sender.mValue) } };
         }
 
         T mValue;

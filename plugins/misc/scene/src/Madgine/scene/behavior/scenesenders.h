@@ -15,16 +15,16 @@ namespace Scene {
         template <typename F>
         decltype(auto) sender(F &&f)
         {
-            return Named<"Entity", Entity::EntityPtr>::sender([&](auto binding) {
-                return (binding->*std::forward<F>(f))() | Execution::let_value([](auto &&sender) { return std::forward<decltype(sender)>(sender) | Execution::with_debug_location<Debug::SenderLocation>(); });
+            return Named<"Entity", Entity::EntityPtr>::sender([f { forward_capture<F>(f) }](auto binding) mutable {
+                return (binding->*std::forward<F>(f))() | Execution::let_value([](auto &&sender) -> decltype(auto) { return std::forward<decltype(sender)>(sender); });
             });
         }
     };
 
-    using NamedSceneManager = Named<"Scene", SceneManager *>;
+    using NamedSceneManager = Named<"Scene", SceneManager &>;
 
     inline constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration, NamedSceneManager scene = {}) {
-        return scene.sender([=](SceneManager *mgr) { return mgr->simulationClock().wait(duration) | Execution::with_debug_location<Debug::SenderLocation>(); });
+        return scene.sender([=](SceneManager &mgr) { return mgr.simulationClock().wait(duration); });
     };
 
     inline constexpr auto yield_simulation = [](NamedSceneManager scene = {}) {

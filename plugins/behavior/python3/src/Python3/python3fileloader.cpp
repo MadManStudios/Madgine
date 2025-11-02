@@ -24,6 +24,8 @@
 
 #include "util/pyexecution.h"
 
+#include "Generic/execution/algorithm.h"
+
 UNIQUECOMPONENT(Engine::Scripting::Python3::Python3FileLoader)
 
 METATABLE_BEGIN(Engine::Scripting::Python3::Python3FileLoader)

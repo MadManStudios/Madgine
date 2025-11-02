@@ -101,8 +101,7 @@ namespace Tools {
                         Execution::detach(
                             Behavior { mGraph.interpret() }
                             | Execution::then([](ArgumentList) { LOG("SUCCESS"); })
-                            | Execution::with_debug_location<Debug::SenderLocation>()
-                            | Execution::with_sub_debug_location(context)
+                            | Execution::with_debug_location(context)                            
                             | Log::log_result());
                     }
                     ImGui::EndMenu();

@@ -17,11 +17,19 @@ namespace Tools {
     bool BeginDebuggablePanel(const char *name);
     void EndDebuggablePanel();
     MADGINE_DEBUGGER_TOOLS_EXPORT void DrawDebugMarker(float y);
-    MADGINE_DEBUGGER_TOOLS_EXPORT bool Breakpoint(const Execution::State::Breakpoint &bp);
+    MADGINE_DEBUGGER_TOOLS_EXPORT bool Breakpoint(float startY, float endY, bool *set);
 
     struct MADGINE_DEBUGGER_TOOLS_EXPORT DebuggerView : Tool<DebuggerView>, Debug::DebugListener {
 
         SERIALIZABLEUNIT(DebuggerView)
+
+        enum class ControlButton {
+            NONE,
+            PLAY,
+            STEP,
+            PAUSE,
+            STOP
+        };
 
         DebuggerView(ImRoot &root);
         DebuggerView(const DebuggerView &) = delete;
@@ -32,13 +40,13 @@ namespace Tools {
         virtual void render() override;
         virtual void renderMenu() override;
 
-        bool renderDebugContext(const Debug::ContextInfo &context);
+        void renderDebugContext(const Debug::ContextInfo &context);
         void renderLifetime(Debug::DebuggableLifetimeBase &lifetime);
 
         void setCurrentContext(Debug::ContextInfo &context);
 
         void onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type) override;
-        bool wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type) override;
+        bool wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line) override;
 
         std::string_view key() const override;
 
@@ -58,7 +66,7 @@ namespace Tools {
 
         const Debug::DebugLocation *visualizeDebugLocation(const Debug::ContextInfo &context, const Debug::DebugLocation &location, const Debug::DebugLocation *inlineLocation);
 
-        std::optional<Debug::ContinuationMode> contextControls(Debug::ContextInfo &context);
+        ControlButton contextControls(bool running);
 
     private:
         Debug::Debugger &mDebugger;

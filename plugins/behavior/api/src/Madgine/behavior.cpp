@@ -59,6 +59,16 @@ void CoroutineBehaviorState::destroy()
     std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).destroy();
 }
 
+void CoroutineBehaviorState::visitState(const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor)
+{
+    throw 0;
+}
+
+Any CoroutineBehaviorState::visitSender()
+{
+    throw 0;
+}
+
 CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept
 {
     return {};
@@ -137,9 +147,9 @@ std::map<std::string_view, ValueType> CoroutineLocation::localVariables() const
     return {};
 }
 
-bool CoroutineLocation::wantsPause(Debug::ContinuationType type) const
+bool CoroutineLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
 {
-    return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
+    return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type, line);
 }
 
 Behavior::state::state(StatePtr state)
@@ -160,6 +170,16 @@ void Behavior::state::stop()
 void Behavior::state::connect()
 {
     mState->connect(*this);
+}
+
+void tag_invoke(Execution::visit_state_t, Behavior::state *state, const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor)
+{
+    return state->mState->visitState(info, visitor);
+}
+
+Any tag_invoke(Execution::visit_sender_t, Behavior *sender)
+{
+    return sender->mState->visitSender();
 }
 
 Behavior::StatePtr Behavior::connect(BehaviorReceiver &receiver)

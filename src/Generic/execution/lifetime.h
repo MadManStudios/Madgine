@@ -178,9 +178,9 @@ namespace Execution {
         };
 
         template <typename Rec>
-        struct state : VirtualState<Rec, LifetimeReceiver>, StopCallback {
+        struct state : VirtualState<LifetimeReceiver, Rec>, StopCallback {
             state(Rec &&rec, Lifetime &lifetime)
-                : VirtualState<Rec, LifetimeReceiver>(std::forward<Rec>(rec), lifetime)
+                : VirtualState<LifetimeReceiver, Rec>(std::forward<Rec>(rec), lifetime)
             {
                 bool registered = this->mStopSource.registerCallback(this);
                 assert(registered);
@@ -195,7 +195,7 @@ namespace Execution {
 
             void stop()
             {
-                this->mStopSource.request_stop();            
+                this->mStopSource.request_stop();
             }
 
             void stopRequested() override
@@ -203,6 +203,16 @@ namespace Execution {
                 assert(this->mLifetime.mReceiver == this);
                 this->mLifetime.mReceiver = nullptr;
                 this->decreaseCount();
+            }
+
+            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            {
+                visitor(State::BeginBlock { "Lifetime" });
+                if (state) {
+                    visitor(State::Marker {});
+                    visitor(State::Text { "Active: " + std::to_string(state->mCount) });
+                }
+                visitor(State::EndBlock { });
             }
         };
 

@@ -37,13 +37,11 @@ namespace Execution {
     template <typename R, typename... V>
     using VirtualReceiverBase = VirtualReceiverBaseEx<make_type_pack_t<R>, type_pack<V...>>;
 
-    template <typename Rec, typename Base, typename R, typename VPack>
+    template <typename Base, typename Rec, typename R, typename VPack>
     struct VirtualStateEx;
 
-    template <typename _Rec, typename Base, typename... V>
-    struct VirtualStateEx<_Rec, Base, type_pack<>, type_pack<V...>> : Base {
-
-        using Rec = _Rec;
+    template <typename Base, typename Rec, typename... V>
+    struct VirtualStateEx<Base, Rec, type_pack<>, type_pack<V...>> : Base {        
 
         template <typename... Args>
         VirtualStateEx(Rec &&rec, Args &&...args)
@@ -63,22 +61,22 @@ namespace Execution {
         Rec mRec;
     };
 
-    template <typename Rec, typename Base, typename R, typename... ExtraR, typename VPack>
-    struct VirtualStateEx<Rec, Base, type_pack<R, ExtraR...>, VPack> : VirtualStateEx<Rec, Base, type_pack<ExtraR...>, VPack> {
+    template <typename Base, typename Rec, typename R, typename... ExtraR, typename VPack>
+    struct VirtualStateEx<Base, Rec, type_pack<R, ExtraR...>, VPack> : VirtualStateEx<Base, Rec, type_pack<ExtraR...>, VPack> {
 
-        using VirtualStateEx<Rec, Base, type_pack<ExtraR...>, VPack>::VirtualStateEx;
+        using VirtualStateEx<Base, Rec, type_pack<ExtraR...>, VPack>::VirtualStateEx;
 
         using result_type = R;
 
-        using VirtualStateEx<Rec, Base, type_pack<ExtraR...>, VPack>::set_error;
+        using VirtualStateEx<Base, Rec, type_pack<ExtraR...>, VPack>::set_error;
         virtual void set_error(R r) override
         {
             this->mRec.set_error(std::forward<R>(r));
         }
     };
 
-    template <typename Rec, typename Base>
-    using VirtualState = VirtualCPOsImpl<VirtualStateEx<Rec, Base, typename Base::result_types, typename Base::value_types>>;
+    template <typename Base, typename Rec>
+    using VirtualState = VirtualCPOsImpl<VirtualStateEx<Base, Rec, typename Base::result_types, typename Base::value_types>>;
 
 }
 }

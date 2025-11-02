@@ -58,6 +58,12 @@ namespace Scripting {
                 return VirtualBehaviorState<Rec, ExecutionState> { std::forward<Rec>(rec), std::move(sender.mData) };
             }
 
+            template <typename Rec>
+            friend auto tag_invoke(Execution::connect_t, ExecutionSender &sender, Rec &&rec)
+            {
+                return VirtualBehaviorState<Rec, ExecutionState> { std::forward<Rec>(rec), sender.mData };
+            }
+
             ExecutionData mData;
         };
 

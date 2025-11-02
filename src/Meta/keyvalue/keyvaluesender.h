@@ -60,9 +60,9 @@ struct KeyValueSender {
     KeyValueSender &operator=(KeyValueSender &&) = default;
 
     template <typename Rec>
-    struct state : Execution::VirtualState<Rec, KeyValueReceiver> {
+    struct state : Execution::VirtualState<KeyValueReceiver, Rec> {
         state(Rec &&rec, std::shared_ptr<KeyValueSenderStateBase> state)
-            : Execution::VirtualState<Rec, KeyValueReceiver>(std::forward<Rec>(rec))
+            : Execution::VirtualState<KeyValueReceiver, Rec>(std::forward<Rec>(rec))
             , mState(std::move(state))
         {
             mState->connect(*this);

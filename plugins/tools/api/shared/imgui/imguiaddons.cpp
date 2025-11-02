@@ -1228,6 +1228,7 @@ void ImGui::BeginGroupPanel(const char *name, const ImVec2 &size)
         ImGui::Dummy(ImVec2(0.0, frameHeight * 0.5f + itemSpacing.y));
     }
 
+    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 0.5f * frameHeight);
     ImGui::BeginGroup();
 
     // ImGui::GetWindowDrawList()->AddRect(labelMin, labelMax, IM_COL32(255, 0, 255, 255));
@@ -1238,8 +1239,12 @@ void ImGui::BeginGroupPanel(const char *name, const ImVec2 &size)
     ImGui::GetCurrentWindow()->ContentRegionRect.Max.x -= frameHeight * 0.5f;
     ImGui::GetCurrentWindow()->WorkRect.Max.x -= frameHeight * 0.5f;
     ImGui::GetCurrentWindow()->InnerRect.Max.x -= frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->ContentRegionRect.Min.x += frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->WorkRect.Min.x += frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->InnerRect.Min.x += frameHeight * 0.5f;
 #else
     ImGui::GetCurrentWindow()->ContentsRegionRect.Max.x -= frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->ContentsRegionRect.Min.x += frameHeight * 0.5f;
 #endif
     ImGui::GetCurrentWindow()->Size.x -= frameHeight;
 
@@ -1265,7 +1270,7 @@ void ImGui::EndGroupPanel()
 
     ImGui::EndGroup();
 
-    // ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), IM_COL32(0, 255, 0, 64), 4.0f);
+    //ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), IM_COL32(0, 255, 0, 64), 4.0f);
 
     ImGui::EndGroup();
 
@@ -1277,7 +1282,7 @@ void ImGui::EndGroupPanel()
 
     auto itemMin = ImGui::GetItemRectMin();
     auto itemMax = ImGui::GetItemRectMax();
-    // ImGui::GetWindowDrawList()->AddRectFilled(itemMin, itemMax, IM_COL32(255, 0, 0, 64), 4.0f);
+    //ImGui::GetWindowDrawList()->AddRectFilled(itemMin, itemMax, IM_COL32(255, 0, 0, 64), 4.0f);
 
     auto labelRect = sGroupPanelLabelStack->back();
     sGroupPanelLabelStack->pop_back();
@@ -1320,8 +1325,12 @@ void ImGui::EndGroupPanel()
     ImGui::GetCurrentWindow()->ContentRegionRect.Max.x += frameHeight * 0.5f;
     ImGui::GetCurrentWindow()->WorkRect.Max.x += frameHeight * 0.5f;
     ImGui::GetCurrentWindow()->InnerRect.Max.x += frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->ContentRegionRect.Min.x -= frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->WorkRect.Min.x -= frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->InnerRect.Min.x -= frameHeight * 0.5f;
 #else
     ImGui::GetCurrentWindow()->ContentsRegionRect.Max.x += frameHeight * 0.5f;
+    ImGui::GetCurrentWindow()->ContentsRegionRect.Min.x -= frameHeight * 0.5f;
 #endif
     ImGui::GetCurrentWindow()->Size.x += frameHeight;
 

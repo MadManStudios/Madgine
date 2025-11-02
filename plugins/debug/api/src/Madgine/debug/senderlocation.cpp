@@ -12,15 +12,25 @@ namespace Debug {
     {
     }
 
-    void SenderLocation::stepInto(Debug::ParentLocation *parent)
-    {
-        mIndex = 0;
-        Debug::DebugLocation::stepInto(parent);
-    }
-
     std::string SenderLocation::toString() const
     {
-        return "Sender";
+        std::string result = "Sender";
+        bool done = false;
+        auto cb = [&](const Execution::StateDescriptor &desc) {
+            if (!done) {
+                if (std::holds_alternative<Execution::State::SubLocation>(desc)) {
+                    if (mChild) {
+                        result = mChild->toString();
+                        done = true;
+                    }
+                } else if (std::holds_alternative<Execution::State::BeginBlock>(desc)) {
+                    result = std::get<Execution::State::BeginBlock>(desc).mName;
+                    done = true;
+                }
+            }
+        };
+        visit(CallableView<void(const Execution::StateDescriptor &)> { cb });
+        return result;
     }
 
     std::map<std::string_view, ValueType> SenderLocation::localVariables() const
@@ -28,14 +38,27 @@ namespace Debug {
         return {};
     }
 
-    bool SenderLocation::wantsPause(Debug::ContinuationType type) const
+    bool SenderLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
     {
-        return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
+        return type == Debug::ContinuationType::Error || (line && getBreakpoint(line)) || Debug::DebugLocation::wantsPause(type, line);
     }
 
     void SenderLocation::visit(CallableView<void(const Execution::StateDescriptor &)> visitor) const
     {
         mState(std::move(visitor));
+    }
+
+    void SenderLocation::setBreakpoint(size_t index, bool set) const
+    {
+        if (mBreakpoints.size() <= index) {
+            mBreakpoints.resize(index + 1);
+        }
+        mBreakpoints[index] = set;
+    }
+
+    bool SenderLocation::getBreakpoint(size_t index) const
+    {
+        return mBreakpoints.size() > index && mBreakpoints[index];
     }
 
 }

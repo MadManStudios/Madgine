@@ -86,6 +86,12 @@ namespace Execution {
                 return state<Rec, R> { std::forward<Rec>(rec), std::move(sender.mError) };
             }
 
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &sender, Rec &&rec)
+            {
+                return state<Rec, R> { std::forward<Rec>(rec), sender.mError };
+            }
+
             R mError;
         };
 
@@ -137,6 +143,16 @@ namespace Execution {
             }
         }
 
+        template <Sender Sender, typename Rec, typename T>
+        struct state : algorithm_state<Sender, receiver<Rec, T>> {
+
+            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            {
+                visit_state(state ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+                visitor(State::Text { typeid(T).name() });
+            }
+        };
+
         template <Sender Sender, typename T>
         struct sender : algorithm_sender<Sender> {
 
@@ -149,13 +165,13 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return algorithm_state<Sender, receiver<Rec, T>> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mTransform) };
+                return state<Sender, Rec, T> { { std::forward<Sender>(sender.mSender), receiver<Rec, T> { std::forward<Rec>(rec), std::forward<T>(sender.mTransform) } } };
             }
 
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &sender, Rec &&rec)
             {
-                return algorithm_state<Sender &, receiver<Rec, T &>> { sender.mSender, std::forward<Rec>(rec), sender.mTransform };
+                return state<Sender &, Rec, T> { { sender.mSender, receiver<Rec, T> { std::forward<Rec>(rec), T { sender.mTransform } } } };
             }
 
             T mTransform;
@@ -204,32 +220,22 @@ namespace Execution {
 
     struct after_t {
 
-        template <typename Inner, typename _Rec, typename T>
-        struct state {
-
-            using Rec = _Rec;
-
-            using State = connect_result_t<Inner, Rec>;
+        template <typename Inner, typename Rec, typename T>
+        struct state : algorithm_state<Inner, Rec> {
 
             state(Inner &&inner, Rec &&rec, T &&func)
-                : mFunc(std::forward<T>(func))
-                , mState(connect(std::forward<Inner>(inner), std::forward<Rec>(rec)))
+                : algorithm_state<Inner, Rec> { std::forward<Inner>(inner), std::forward<Rec>(rec) }
+                , mFunc(std::forward<T>(func))
             {
             }
 
             void start()
             {
                 mFunc();
-                mState.start();
-            }
-
-            void stop()
-            {
-                mState.stop();
+                algorithm_state<Inner, Rec>::start();
             }
 
             T mFunc;
-            State mState;
         };
 
         template <Sender Sender, typename T>
@@ -482,7 +488,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return algorithm_state<Sender, receiver<Rec, F>> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::forward<F>(sender.mFinally) };
+                return algorithm_state<Sender, receiver<Rec, F>> { std::forward<Sender>(sender.mSender), receiver<Rec, F> { std::forward<Rec>(rec), std::forward<F>(sender.mFinally) } };
             }
 
             F mFinally;
@@ -713,7 +719,7 @@ namespace Execution {
             using base = algorithm_state<Sender, receiver<Rec, Sender>>;
 
             state(Rec &&rec, Sender &&sender)
-                : base(std::forward<Sender>(sender), std::forward<Rec>(rec), this)
+                : base(std::forward<Sender>(sender), receiver<Rec, Sender> { std::forward<Rec>(rec), this })
             {
             }
 
@@ -723,6 +729,13 @@ namespace Execution {
             void set_value(Rec &, V &&...args)
             {
                 this->start();
+            }
+
+            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            {
+                visitor(State::BeginBlock { "Repeat" });
+                visit_state(state ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+                visitor(State::EndBlock {});
             }
         };
 
@@ -1195,6 +1208,13 @@ namespace Execution {
                 this->mRec.set_error(std::forward<R>(result)...);
             }
 
+            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            {
+                [&]<size_t... I>(std::index_sequence<I...>) {
+                    (visit_state(state && state->mStates.index() == I+1 ? &std::get<I+1>(state->mStates) : nullptr, std::get<I>(info), visitor), ...);
+                }(std::index_sequence_for<Sender...> {});
+            }
+
             std::tuple<Sender...> mSenders;
 
             StateVariant mStates;
@@ -1210,6 +1230,15 @@ namespace Execution {
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
                 return state<Rec, Sender...> { std::forward<Rec>(rec), std::move(sender.mSenders) };
+            }
+
+            friend auto tag_invoke(Execution::visit_sender_t, sender *sender)
+            {
+                if (sender) {
+                    return TupleUnpacker::forEach(sender->mSenders, [](const auto &sender) { return visit_sender(&sender); });
+                } else {
+                    return std::make_tuple(visit_sender(static_cast<Sender *>(nullptr))...);
+                }
             }
 
             std::tuple<Sender...> mSenders;
@@ -1288,25 +1317,34 @@ namespace Execution {
             };
             template <typename... V>
             using helper = std::invoke_result_t<F, V &...>;
-            using inner_sender_t = typename std::remove_reference_t<Sender>::template value_types<helper>;
+            using inner_sender = typename std::remove_reference_t<Sender>::template value_types<helper>;
             using Tuple = typename std::remove_reference_t<Sender>::template value_types<std::tuple>;
-            using inner_state = connect_result_t<inner_sender_t, receiver<Rec, Sender, F, Rec &, inner_tag>>;
+            using inner_state = connect_result_t<inner_sender, receiver<Rec, Sender, F, Rec &, inner_tag>>;
 
             state(Rec &&rec, Sender &&sender, F &&f)
-                : algorithm_state<Sender, receiver<Rec, Sender, F, Rec>> { std::forward<Sender>(sender), std::forward<Rec>(rec), this }
+                : algorithm_state<Sender, receiver<Rec, Sender, F, Rec>> { std::forward<Sender>(sender), receiver<Rec, Sender, F, Rec> { std::forward<Rec>(rec), this } }
                 , mF(std::forward<F>(f))
             {
             }
 
             ~state() { }
 
+            void stop()
+            {
+                if (!mValue) {
+                    this->mState.stop();
+                } else {
+                    mInnerState->stop();
+                }
+            }
+
             template <typename... V>
             void set_value(Rec &rec, V &&...values)
             {
-                construct(mValue, std::forward<V>(values)...);
+                mValue.emplace(std::forward<V>(values)...);
                 construct(mInnerState,
                     DelayedConstruct<inner_state> {
-                        [&]() { return connect(TupleUnpacker::invokeFromTuple(mF, static_cast<Tuple &>(mValue)), receiver<Rec, Sender, F, Rec &, inner_tag> { rec, this }); } });
+                        [&]() { return connect(TupleUnpacker::invokeFromTuple(mF, *mValue), receiver<Rec, Sender, F, Rec &, inner_tag> { rec, this }); } });
                 mInnerState->start();
             }
             using base::set_done;
@@ -1315,7 +1353,7 @@ namespace Execution {
             void cleanup()
             {
                 destruct(mInnerState);
-                destruct(mValue);
+                mValue.reset();
             }
 
             template <typename... V2>
@@ -1338,8 +1376,19 @@ namespace Execution {
                 rec.set_error(std::forward<R>(result)...);
             }
 
+            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            {
+                visit_state(state && !state->mValue ? &state->mState : nullptr, info, visitor);
+                if (state) {
+                    auto &&sender = TupleUnpacker::invokeFromTuple(state->mF, *state->mValue);
+                    visit_state(state->mValue ? &state->mInnerState : nullptr, visit_sender(&sender), visitor);
+                } else {
+                    visit_state(static_cast<inner_state *>(nullptr), visit_sender(static_cast<std::remove_reference_t<inner_sender> *>(nullptr)), visitor);
+                }
+            }
+
             F mF;
-            ManualLifetime<Tuple> mValue;
+            std::optional<Tuple> mValue;
             ManualLifetime<inner_state> mInnerState;
         };
 
@@ -1605,7 +1654,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return algorithm_state<Sender, receiver<Rec, CPO, T>> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mQueryResult) };
+                return algorithm_state<Sender, receiver<Rec, CPO, T>> { std::forward<Sender>(sender.mSender), receiver<Rec, CPO, T> { std::forward<Rec>(rec), std::forward<T>(sender.mQueryResult) } };
             }
 
             T mQueryResult;

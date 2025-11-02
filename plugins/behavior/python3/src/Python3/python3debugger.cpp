@@ -84,9 +84,9 @@ namespace Scripting {
             return results;
         }
 
-        bool Python3DebugLocation::wantsPause(Debug::ContinuationType type) const
+        bool Python3DebugLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
         {
-            return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
+            return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type, line);
         }
 
         Filesystem::Path Python3DebugLocation::file() const
@@ -176,11 +176,11 @@ namespace Scripting {
                         location->mSkipOnce = false;
                         break;
                     }
-                    if (location->mLocation.wantsPause(Debug::ContinuationType::Flow)) {
+                    if (location->mLocation.wantsPause(Debug::ContinuationType::Flow, location->mLocation.lineNr())) {
                         PyObject *suspendEx = suspend([frame, location](BehaviorReceiver &receiver, std::vector<PyFramePtr> frames, Log::Log *log, Execution::StopToken st) {
                             //_PyInterpreterFrame *frame = frames.front();
                             //++frame->prev_instr;
-                            location->mLocation.yield([location, log, &receiver, st](Debug::ContinuationMode mode, std::vector<PyFramePtr> frames) mutable {
+                            /* location->mLocation.yield([location, log, &receiver, st](Debug::ContinuationMode mode, std::vector<PyFramePtr> frames) mutable {
                                 Python3Lock lock { log, std::move(st) };
                                 Guard guard { PyObjectPtr::fromBorrowed(reinterpret_cast<PyObject *>(location)) };
                                 switch (mode) {
@@ -198,7 +198,8 @@ namespace Scripting {
                                     break;
                                 }
                             },
-                                st, Debug::ContinuationType::Flow, std::move(frames));
+                                Debug::ContinuationType::Flow, std::move(frames));*/
+                            throw 0;
                         });
                         //_PyFrame_StackPush(frame->f_frame, suspendEx);
                         PyErr_SetObject((PyObject *)&PySuspendExceptionType, suspendEx);

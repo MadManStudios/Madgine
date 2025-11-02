@@ -20,9 +20,9 @@ struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBase
 };
 
 template <typename Rec, typename Base = BehaviorReceiver>
-struct VirtualBehaviorState : Execution::VirtualState<Rec, Base> {
+struct VirtualBehaviorState : Execution::VirtualState<Base, Rec> {
 
-    using Execution::VirtualState<Rec, Base>::VirtualState;
+    using Execution::VirtualState<Base, Rec>::VirtualState;
 
 };
 

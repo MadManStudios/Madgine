@@ -34,14 +34,14 @@ namespace Debug {
         parent->mChild = nullptr;
     }
 
-    bool DebugLocation::wantsPause(ContinuationType type) const
+    bool DebugLocation::wantsPause(ContinuationType type, IndexType<size_t> line) const
     {
-        return Debugger::getSingleton().wantsPause(*this, type);
+        return Debugger::getSingleton().wantsPause(*this, type, line);
     }
 
-    void DebugLocation::yieldImpl(Continuation cont, Execution::StopToken st)
+    void DebugLocation::yieldImpl(Continuation cont, Continuation &outContinuation, Execution::StopToken st)
     {
-        mContext->suspend(std::move(cont), std::move(st));
+        mContext->suspend(std::move(cont), outContinuation, std::move(st));
     }
 
 

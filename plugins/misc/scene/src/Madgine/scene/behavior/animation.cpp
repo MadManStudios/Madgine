@@ -23,14 +23,16 @@ namespace Scene {
         template <typename Rec>
         struct AnimationStateImpl : VirtualBehaviorState<Rec, AnimationState> {
 
-            friend auto tag_invoke(Execution::visit_state_t, AnimationStateImpl &state, const auto &, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, AnimationStateImpl *state, const auto &, auto &&visitor)
             {
-                visitor(Execution::State::BeginBlock { "Play '"s + state.mAnimationList->mAnimations[state.mCurrentAnimation].mName + "'" });
+                visitor(Execution::State::BeginBlock { "Play '"s + state->mAnimationList->mAnimations[state->mCurrentAnimation].mName + "'" });
 
                 float progress = 0.0f;
 
-                float duration = state.mAnimationList->mAnimations[state.mCurrentAnimation].mDuration;
-                progress = fmodf(state.mCurrentStep, duration) / duration;
+                if (state) {
+                    float duration = state->mAnimationList->mAnimations[state->mCurrentAnimation].mDuration;
+                    progress = fmodf(state->mCurrentStep, duration) / duration;
+                }
 
                 visitor(Execution::State::Progress { progress });
 
@@ -51,9 +53,11 @@ namespace Scene {
                 return AnimationStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mAnimation), sender.mCurrentAnimation };
             }
 
-            static constexpr size_t debug_start_increment = 1;
-            static constexpr size_t debug_operation_increment = 1;
-            static constexpr size_t debug_stop_increment = 1;
+             template <typename Rec>
+            friend auto tag_invoke(Execution::connect_t, AnimationSender &sender, Rec &&rec)
+            {
+                return AnimationStateImpl<Rec> { std::forward<Rec>(rec), sender.mAnimation, sender.mCurrentAnimation };
+            }
 
             Render::AnimationLoader::Handle mAnimation;
             IndexType<uint32_t> mCurrentAnimation;

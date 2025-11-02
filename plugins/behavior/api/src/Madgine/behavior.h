@@ -12,6 +12,8 @@
 
 #include "Generic/functor.h"
 
+#include "Generic/any.h"
+
 namespace Engine {
 
 template <typename T>
@@ -55,6 +57,8 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
         void start();
         void stop();
 
+        friend MADGINE_BEHAVIOR_EXPORT void tag_invoke(Execution::visit_state_t, state *state, const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor);
+
     protected:
         void connect();
 
@@ -83,6 +87,8 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
         return state_helper<Rec> { std::forward<Rec>(rec), std::move(behavior.mState) };
     }
 
+    friend MADGINE_BEHAVIOR_EXPORT Any tag_invoke(Execution::visit_sender_t, Behavior *sender);
+
     using promise_type = CoroutineBehaviorState;
 
     StatePtr mState;
@@ -98,6 +104,9 @@ struct BehaviorStateBase {
     {
         delete this;
     }
+
+    virtual void visitState(const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor) = 0;
+    virtual Any visitSender() = 0;
 };
 
 template <typename Sender>
@@ -107,7 +116,7 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::DebugLocation {
 
     std::string toString() const override;
     std::map<std::string_view, ValueType> localVariables() const override;
-    virtual bool wantsPause(Debug::ContinuationType type) const override;
+    virtual bool wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const override;
 
 #ifndef NDEBUG
     Debug::StackTrace<1> mStacktrace;
@@ -120,13 +129,13 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     CoroutineBehaviorState(Args &&...args)
     {
         mResolveNames = [&](BehaviorReceiver &rec) {
-            return ([&]() { 
+            return ([&]() {
                 if constexpr (requires { args.resolve(rec); }) {
                     return args.resolve(rec);
                 } else {
                     return true;
                 }
-                }() && ...);
+            }() && ...);
         };
     }
 
@@ -136,6 +145,9 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     void start() override;
     void stop() override;
     void destroy() override;
+
+    void visitState(const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor) override;
+    Any visitSender() override;
 
     struct MADGINE_BEHAVIOR_EXPORT InitialSuspend {
         bool await_ready() noexcept;
@@ -177,7 +189,7 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
 template <Execution::Sender Sender>
 struct SenderBehaviorState : BehaviorStateBase {
 
-    using State = Execution::connect_result_t<typename Execution::with_debug_location_t<Debug::SenderLocation>::sender<Sender>, BehaviorReceiver &>;
+    using State = Execution::connect_result_t<Sender, BehaviorReceiver &>;
 
     SenderBehaviorState(Sender &&sender)
         : mData(std::forward<Sender>(sender))
@@ -188,7 +200,7 @@ struct SenderBehaviorState : BehaviorStateBase {
     {
         Sender sender = std::forward<Sender>(std::get<Sender>(mData));
         mData.template emplace<State>(
-            DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location<Debug::SenderLocation>(), rec); } });
+            DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender), rec); } });
     }
 
     void start() override
@@ -199,6 +211,16 @@ struct SenderBehaviorState : BehaviorStateBase {
     void stop() override
     {
         std::get<State>(mData).stop();
+    }
+
+    void visitState(const Any &any, CallableView<void(const Execution::StateDescriptor &)> visitor) override
+    {
+        Execution::visit_state(std::holds_alternative<State>(mData) ? &std::get<State>(mData) : nullptr, any.as<decltype(Execution::visit_sender(std::declval<Sender *>()))>(), visitor);
+    }
+
+    Any visitSender() override
+    {
+        return Execution::visit_sender(&std::get<Sender>(mData));
     }
 
     std::variant<Sender, State> mData;

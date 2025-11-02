@@ -11,7 +11,7 @@ namespace Scripting {
 
             std::string toString() const override;
             std::map<std::string_view, ValueType> localVariables() const override;
-            bool wantsPause(Debug::ContinuationType type) const override;
+            bool wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const override;
 
             Filesystem::Path file() const;
             std::string module() const;

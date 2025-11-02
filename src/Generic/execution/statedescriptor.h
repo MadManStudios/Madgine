@@ -1,8 +1,9 @@
 #pragma once
 
-#include "algorithm.h"
-
 namespace Engine {
+namespace Debug {
+    struct Continuation;
+}
 namespace Execution {
 
     namespace State {
@@ -14,9 +15,10 @@ namespace Execution {
         struct PopDisabled;
         struct SubLocation;
         struct Breakpoint;
+        struct Marker;
     }
 
-    using StateDescriptor = std::variant<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::SubLocation, State::Breakpoint>;
+    using StateDescriptor = std::variant<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::SubLocation, State::Breakpoint, State::Marker>;
 
     namespace State {
         struct Text {
@@ -36,30 +38,30 @@ namespace Execution {
         };
         struct SubLocation {
         };
-        struct Breakpoint {
-            bool &mSet;
-            enum class Alignment {
-                Top,
-                Center,
-                Bottom
-            } mAlignment
-                = Alignment::Center;
+        struct Breakpoint {            
+            IndexType<size_t> *mLineFeedback;
+            Debug::Continuation &mContinuation;
+        };
+        struct Marker {
         };
     }
 
     struct visit_state_t {
         template <typename T, typename I, typename V>
-            requires(!tag_invocable<visit_state_t, T &, const I &, V>)
-        auto operator()(T &, const I &, V &&visitor) const
+            requires(!tag_invocable<visit_state_t, T *, const I &, V>)
+        auto operator()(T *, const I &i, V &&visitor) const
         {
-            visitor(Execution::State::SubLocation {});
+            visitor(Execution::State::Text { "Unsupported state: <"s + typeid(T).name() + ">" });
+            if constexpr (std::same_as<I, std::string>) {
+                visitor(Execution::State::Text { i });
+            }
         }
 
         template <typename T, typename I, typename V>
-            requires tag_invocable<visit_state_t, T &, const I &, V>
-        auto operator()(T &t, const I &info, V &&visitor) const
-            noexcept(is_nothrow_tag_invocable_v<visit_state_t, T &, const I &, V>)
-                -> tag_invoke_result_t<visit_state_t, T &, const I &, V>
+            requires tag_invocable<visit_state_t, T *, const I &, V>
+        auto operator()(T *t, const I &info, V &&visitor) const
+            noexcept(is_nothrow_tag_invocable_v<visit_state_t, T *, const I &, V>)
+                -> tag_invoke_result_t<visit_state_t, T *, const I &, V>
         {
             return tag_invoke(*this, t, info, std::forward<V>(visitor));
         }
@@ -69,37 +71,23 @@ namespace Execution {
 
     struct visit_sender_t {
         template <typename T>
-            requires(!tag_invocable<visit_sender_t, T &>)
-        auto operator()(T &) const
+            requires(!tag_invocable<visit_sender_t, T *>)
+        auto operator()(T *) const
         {
-            return std::monostate {};
+            return std::string { "Unsupported sender: <"s + typeid(T).name() + ">" };
         }
 
         template <typename T>
-            requires tag_invocable<visit_sender_t, T &>
-        auto operator()(T &t) const
-            noexcept(is_nothrow_tag_invocable_v<visit_sender_t, T &>)
-                -> tag_invoke_result_t<visit_sender_t, T &>
+            requires tag_invocable<visit_sender_t, T *>
+        auto operator()(T *t) const
+            noexcept(is_nothrow_tag_invocable_v<visit_sender_t, T *>)
+                -> tag_invoke_result_t<visit_sender_t, T *>
         {
             return tag_invoke(*this, t);
         }
     };
 
     constexpr visit_sender_t visit_sender;
-
-    template <typename... Sender>
-    auto tag_invoke(visit_sender_t, sequence_t::sender<Sender...> &sender)
-    {
-        return TupleUnpacker::forEach(sender.mSenders, [&](auto &sender) {
-            return visit_sender(sender);
-        });
-    }
-
-    template <typename V, typename Rec, typename... Sender>
-    void tag_invoke(visit_state_t, sequence_t::state<Rec, Sender...> &state, const auto &info, V &&visitor)
-    {
-        visitor(Execution::State::Text("Sequence - TODO"));
-    }
 
 }
 }

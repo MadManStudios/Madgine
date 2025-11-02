@@ -1,26 +1,27 @@
 #pragma once
 
 #include "Generic/callable_view.h"
-#include "debuglocation.h"
+#include "Generic/closure.h"
 #include "Generic/execution/statedescriptor.h"
+#include "debuglocation.h"
 
 namespace Engine {
 namespace Debug {
 
-	
     struct MADGINE_DEBUGGER_EXPORT SenderLocation : Debug::DebugLocation {
         SenderLocation(Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> state);
 
-        void stepInto(Debug::ParentLocation *parent);
-
         std::string toString() const override;
         std::map<std::string_view, ValueType> localVariables() const override;
-        bool wantsPause(Debug::ContinuationType type) const override;
+        bool wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const override;
 
         void visit(CallableView<void(const Execution::StateDescriptor &)> visitor) const;
 
+        void setBreakpoint(size_t index, bool set) const;
+        bool getBreakpoint(size_t index) const;
+
         Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> mState;
-        size_t mIndex = 0;
+        mutable std::vector<bool> mBreakpoints;
     };
 
 }

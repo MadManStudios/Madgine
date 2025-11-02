@@ -54,6 +54,12 @@ namespace Audio {
             return PlaybackStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mBuffer), sender.mApi };
         }
 
+        template <typename Rec>
+        friend auto tag_invoke(Execution::connect_t, PlaybackSender &sender, Rec &&rec)
+        {
+            return PlaybackStateImpl<Rec> { std::forward<Rec>(rec), sender.mBuffer, sender.mApi };
+        }
+
         AudioLoader::Handle mBuffer;
         OboeApi *mApi;
     };

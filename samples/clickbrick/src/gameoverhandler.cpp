@@ -10,6 +10,8 @@
 
 #include "gamemanager.h"
 
+#include "Madgine/widgets/events.h"
+
 UNIQUECOMPONENT(ClickBrick::GameOverHandler)
 
 METATABLE_BEGIN_BASE(ClickBrick::GameOverHandler, Engine::Widgets::WidgetHandlerBase)

@@ -46,7 +46,7 @@ namespace Render {
 
             OffsetPtr ptr { 0 };
 
-            static constexpr void (*fs[])(uint16_t &, OffsetPtr &) = { [](uint16_t &format, OffsetPtr &ptr) {
+            constexpr void (*fs[])(uint16_t &, OffsetPtr &) = { [](uint16_t &format, OffsetPtr &ptr) {
                 //Can't be select<Is> because MSVC
                 using T = typename VertexElements::helpers::template recurse<Is>::type;
                 if constexpr (VertexType::template holds<T>) {

@@ -48,29 +48,22 @@ namespace Debug {
         std::erase(mListeners, listener);
     }
 
-    void ContextInfo::suspend(Continuation callback, Execution::StopToken st)
+    void ContextInfo::suspend(Continuation callback, Continuation &outContinuation, Execution::StopToken st)
     {
-        if (mStopRequested) {
-            callback(ContinuationMode::Abort);
+        outContinuation = std::move(callback); //TODO proper syncing with stop_source; see debuggablesender::stop()
+
+        if (mStopRequested || st->stop_requested()) {
+            outContinuation(ContinuationMode::Abort);
             return;
         }
 
         for (DebugListener *listener : Debugger::getSingleton().mListeners)
-            listener->onSuspend(*this, callback.type());
-        mCallback = std::move(callback);        
-        mRunning.clear();
-        if (!st->registerCallback(this)) {
-            if (mRunning.test_and_set())
-                callback(ContinuationMode::Abort);
-        } 
+            listener->onSuspend(*this, outContinuation.type());        
     }
 
     void ContextInfo::continueExecution(ContinuationMode mode)
     {
-        if (!mRunning.test_and_set()) {
-            Closure<void(ContinuationMode)> callback = std::move(mContext->mCallback);
-            callback(mode);
-        }
+        throw 0;
     }
 
     ContinuationMode ContextInfo::resume()
@@ -104,38 +97,18 @@ namespace Debug {
 
     bool ContextInfo::isPaused() const
     {
-        return !mRunning.test();
+        return false;
     }
-
-    std::string ContextInfo::getArguments() const
+        
+    bool Debugger::wantsPause(const DebugLocation &location, ContinuationType type, IndexType<size_t> line)
     {
-        std::stringstream ss;
-        mCallback.visitArguments(ss);
-        return ss.str();
-    }
-
-    ContinuationType ContextInfo::continuationType() const
-    {
-        return mCallback.type();
-    }
-
-    bool Debugger::wantsPause(const DebugLocation &location, ContinuationType type)
-    {
-        bool pause = location.mContext->mPauseRequested || location.mContext->mStopRequested;
+        bool pause = (line && location.mContext->mPauseRequested) || location.mContext->mStopRequested;
 
         for (DebugListener *listener : mListeners) {
-            pause |= listener->wantsPause(location, type);
+            pause |= listener->wantsPause(location, type, line);
         }
 
         return pause;
-    }
-
-    void ContextInfo::stopRequested()
-    {
-        if (!mRunning.test_and_set()) {
-            Closure<void(ContinuationMode)> callback = std::move(mContext->mCallback);
-            callback(ContinuationMode::Abort);
-        }
     }
 
 }

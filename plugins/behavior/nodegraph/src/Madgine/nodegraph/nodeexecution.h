@@ -11,8 +11,6 @@
 
 #include "Madgine/codegen/fromsender.h"
 
-#include "Madgine/debug/debuglocationsplitter.h"
-
 namespace Engine {
 namespace NodeGraph {
 
@@ -85,6 +83,12 @@ namespace NodeGraph {
             friend auto tag_invoke(Execution::connect_t connect, sender &&sender, Rec &&rec)
             {
                 return tag_invoke(connect, std::forward<Sender>(sender.mSender) | Execution::with_query_value(Execution::get_context, std::move(sender.mHandle)), std::forward<Rec>(rec));
+            }
+
+            template <typename Rec>
+            friend auto tag_invoke(Execution::connect_t connect, sender &sender, Rec &&rec)
+            {
+                return tag_invoke(connect, sender.mSender | Execution::with_query_value(Execution::get_context, sender.mHandle), std::forward<Rec>(rec));
             }
 
             NodeInterpretHandle<Node> mHandle;
@@ -170,6 +174,12 @@ namespace NodeGraph {
 
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, NodeSender &&sender, Rec &&rec)
+        {
+            return NodeState<flowOutGroup, Rec> { std::forward<Rec>(rec), sender.mFlowOutIndex };
+        }
+
+        template <typename Rec>
+        friend auto tag_invoke(Execution::connect_t, NodeSender &sender, Rec &&rec)
         {
             return NodeState<flowOutGroup, Rec> { std::forward<Rec>(rec), sender.mFlowOutIndex };
         }
@@ -357,7 +367,7 @@ namespace NodeGraph {
     template <uint32_t flowOutGroup>
     struct NodeRange {
 
-        using value_type = Debug::debug_channel_t::sender<NodeSender<flowOutGroup>>;
+        using value_type = NodeSender<flowOutGroup>;
 
         NodeRange(uint32_t size)
             : mSize(size)
@@ -383,7 +393,7 @@ namespace NodeGraph {
 
             auto operator*()
             {
-                return NodeSender<flowOutGroup> { mIndex } | Debug::debug_channel(mIndex);
+                return NodeSender<flowOutGroup> { mIndex };
             }
 
             uint32_t mIndex;

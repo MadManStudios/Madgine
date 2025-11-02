@@ -147,7 +147,7 @@ namespace Tools {
         return "Python3ImmediateWindow";
     }
 
-    bool Python3ImmediateWindow::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type)
+    bool Python3ImmediateWindow::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line)
     {
 
         const Scripting::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Scripting::Python3::Python3DebugLocation *>(&location);
@@ -157,8 +157,8 @@ namespace Tools {
 
             if (!path.empty()) {
                 TextDocument *doc = getTool<TextEditor>().getDocument(path);
-                if (doc && doc->hasBreakpoint(pyLocation->lineNr())) {
-                    doc->goToLine(pyLocation->lineNr());
+                if (doc && doc->hasBreakpoint(line)) {
+                    doc->goToLine(line);
                     return true;
                 }
             }
@@ -190,8 +190,7 @@ namespace Tools {
                   mPrompt->resume();
               })
             | Log::with_log(mPrompt.get())
-            | Execution::with_debug_location<Debug::SenderLocation>()
-            | Execution::with_sub_debug_location(context));
+            | Execution::with_debug_location(context));
         return false;
     }
 

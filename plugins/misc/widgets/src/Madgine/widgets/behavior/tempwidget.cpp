@@ -19,11 +19,13 @@ namespace Widgets {
     template <typename Rec>
     struct TempWidgetStateImpl : VirtualBehaviorState<Rec, TempWidgetState> {
 
-        friend auto tag_invoke(Execution::visit_state_t, TempWidgetStateImpl &state, const auto &, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, TempWidgetStateImpl *state, const auto &, auto &&visitor)
         {
             visitor(Execution::State::BeginBlock { "Temp Widget" });
 
-            visitor(Execution::State::SubLocation {});
+            if (state) {
+                visitor(Execution::State::SubLocation {});
+            }
 
             visitor(Execution::State::EndBlock {});
         }
@@ -42,9 +44,12 @@ namespace Widgets {
             return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mDesc), std::move(sender.mPos), std::move(sender.mSize), std::move(sender.mBehavior) };
         }
 
-        static constexpr size_t debug_start_increment = 1;
-        static constexpr size_t debug_operation_increment = 1;
-        static constexpr size_t debug_stop_increment = 1;
+        template <typename Rec>
+        friend auto tag_invoke(Execution::connect_t, TempWidgetSender &sender, Rec &&rec) -> TempWidgetStateImpl<Rec>
+        {
+            throw 0;
+            //return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), sender.mDesc, sender.mPos, sender.mSize, sender.mBehavior };
+        }
 
         WidgetLoader::Handle mDesc;
         Matrix3 mPos;

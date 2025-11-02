@@ -120,7 +120,7 @@ namespace NodeGraph {
             if constexpr (Config::constant)
                 return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(node, std::move(values), argument_types {}, results));
             else
-                return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(node, std::move(values), argument_types {}, results)) | Execution::with_debug_location<Debug::SenderLocation>();
+                return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(node, std::move(values), argument_types {}, results)) | Execution::with_debug_location(nullptr);
         }
 
         template <typename Ty>
@@ -377,7 +377,7 @@ namespace NodeGraph {
                 }
             };
 
-            using State = Execution::connect_result_t<Sender, Receiver>;
+            using State = Execution::connect_result_t<Execution::with_debug_location_t::sender<Sender>, Receiver>;
 
             InterpretData()
             {
@@ -391,7 +391,7 @@ namespace NodeGraph {
             {               
                 const NodeBase &node = Execution::get_context(receiver).mNode;
                 construct(mState,
-                    DelayedConstruct<State> { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults), Receiver { this, std::move(receiver) }); } });
+                    DelayedConstruct<State> { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults) | Execution::with_debug_location(&receiver.mDebugLocation), Receiver { this, std::move(receiver) }); } });
                 mState->start();
             }
 

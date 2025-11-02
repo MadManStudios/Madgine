@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/execution/algorithm.h"
+
 namespace Engine {
 namespace Log {
 
@@ -54,7 +56,7 @@ namespace Log {
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
             {
-                return Execution::algorithm_state<Sender, receiver<Rec>> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec) };
+                return Execution::algorithm_state<Sender, receiver<Rec>> { std::forward<Sender>(sender.mSender), receiver<Rec> { std::forward<Rec>(rec) } };
             }
         };
 

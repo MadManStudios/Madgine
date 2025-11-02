@@ -56,6 +56,12 @@ namespace Execution {
         void stop()
         {
         }
+                
+        friend auto tag_invoke(Execution::visit_state_t, BindingState *state, const auto &info, auto &&visitor)
+        {
+            visitor(State::Text { "Bound: " });
+        }
+
 
         Binding mBinding;
     };
@@ -63,7 +69,7 @@ namespace Execution {
     template <AnyBinding Binding, typename Rec>
     auto tag_invoke(connect_t, Binding &&binding, Rec &&rec)
     {
-        return BindingState<Binding, Rec> { std::forward<Binding>(binding), std::forward<Rec>(rec) };
+        return BindingState<std::remove_reference_t<Binding>, Rec> { std::remove_reference_t<Binding> { std::forward<Binding>(binding) }, std::forward<Rec>(rec) };
     }
 
     template <typename F, typename This>

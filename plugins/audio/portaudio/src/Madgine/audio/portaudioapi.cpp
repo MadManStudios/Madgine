@@ -35,18 +35,20 @@ namespace Audio {
 
         void stop();
 
-        friend auto tag_invoke(Execution::visit_state_t, PlaybackState &state, const auto &, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, PlaybackState *state, const auto &, auto &&visitor)
         {
-            visitor(Execution::State::BeginBlock { "Play '"s + std::string { state.mBuffer.name() } + "'" });
+            visitor(Execution::State::BeginBlock { "Play '"s + std::string { state->mBuffer.name() } + "'" });
 
             float progress = 0.0f;
-            
-            const std::byte *start, *end, *current;
-            start = static_cast<const std::byte *>(state.mBuffer->mBuffer.begin());
-            end = static_cast<const std::byte *>(state.mEnd);
-            current = static_cast<const std::byte *>(state.mPtr);
-            progress = static_cast<float>(current - start) / (end - start);
-            
+
+            if (state) {
+                const std::byte *start, *end, *current;
+                start = static_cast<const std::byte *>(state->mBuffer->mBuffer.begin());
+                end = static_cast<const std::byte *>(state->mEnd);
+                current = static_cast<const std::byte *>(state->mPtr);
+                progress = static_cast<float>(current - start) / (end - start);
+            }
+
             visitor(Execution::State::Progress { progress });
 
             visitor(Execution::State::EndBlock {});
@@ -78,9 +80,11 @@ namespace Audio {
             return PlaybackStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mBuffer), sender.mApi };
         }
 
-        static constexpr size_t debug_start_increment = 1;
-        static constexpr size_t debug_operation_increment = 1;
-        static constexpr size_t debug_stop_increment = 1;
+        template <typename Rec>
+        friend auto tag_invoke(Execution::connect_t, PlaybackSender &sender, Rec &&rec)
+        {
+            return PlaybackStateImpl<Rec> { std::forward<Rec>(rec), sender.mBuffer, sender.mApi };
+        }
 
         AudioLoader::Handle mBuffer;
         PortAudioApi *mApi;
@@ -230,11 +234,12 @@ namespace Audio {
         mStream->play(*this);
     }
 
-    void PlaybackState::stop() {
+    void PlaybackState::stop()
+    {
         if (mStream->abort())
             set_done();
     }
-        
+
     PortAudioApi::PortAudioApi(Root::Root &root)
         : AudioApiImpl<PortAudioApi>(root)
     {
@@ -273,7 +278,7 @@ namespace Audio {
                 out << "Skipping WDMKS.";
                 continue;
             }
-            
+
             if (apiInfo->defaultOutputDevice < 0) {
                 out << "no default output device.";
                 continue;

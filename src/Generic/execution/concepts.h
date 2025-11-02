@@ -1,17 +1,18 @@
 #pragma once
 
+#include "statedescriptor.h"
+
 namespace Engine {
 namespace Execution {
 
     template <typename T>
-    concept Sender = requires
-    {
+    concept Sender = requires {
         typename std::decay_t<T>::is_sender;
     };
 
     struct connect_t {
         template <typename Sender, typename Rec>
-        requires tag_invocable<connect_t, Sender, Rec>
+            requires tag_invocable<connect_t, Sender, Rec>
         auto operator()(Sender &&sender, Rec &&rec) const
             noexcept(is_nothrow_tag_invocable_v<connect_t, Sender, Rec>)
                 -> tag_invoke_result_t<connect_t, Sender, Rec>
@@ -30,7 +31,7 @@ namespace Execution {
         }
 
         template <typename Sender, typename Rec>
-        requires tag_invocable<outer_connect_t, Sender, Rec>
+            requires tag_invocable<outer_connect_t, Sender, Rec>
         auto operator()(Sender &&sender, Rec &&rec) const
             noexcept(is_nothrow_tag_invocable_v<outer_connect_t, Sender, Rec>)
                 -> tag_invoke_result_t<outer_connect_t, Sender, Rec>
@@ -46,7 +47,7 @@ namespace Execution {
 
     struct get_context_t {
         template <typename T>
-        requires tag_invocable<get_context_t, T &>
+            requires tag_invocable<get_context_t, T &>
         auto operator()(T &t) const
             noexcept(is_nothrow_tag_invocable_v<get_context_t, T &>)
                 -> tag_invoke_result_t<get_context_t, T &>
@@ -74,13 +75,14 @@ namespace Execution {
         using signature = StopToken();
 
         template <typename T>
-        requires(!tag_invocable<get_stop_token_t, T &>) auto operator()(T &) const
+            requires(!tag_invocable<get_stop_token_t, T &>)
+        auto operator()(T &) const
         {
             return unstoppable_token {};
         }
 
         template <typename T>
-        requires tag_invocable<get_stop_token_t, T &>
+            requires tag_invocable<get_stop_token_t, T &>
         auto operator()(T &t) const
             noexcept(is_nothrow_tag_invocable_v<get_stop_token_t, T &>)
                 -> tag_invoke_result_t<get_stop_token_t, T &>
@@ -109,7 +111,6 @@ namespace Execution {
 
     template <typename Rec>
     struct algorithm_receiver {
-        using inner = Rec;
 
         template <typename... V>
         void set_value(V &&...value)
@@ -131,16 +132,15 @@ namespace Execution {
         Rec mRec;
 
         template <typename CPO, typename... Args>
-        requires(is_tag_invocable_v<CPO, Rec &, Args...>) friend auto tag_invoke(CPO f, algorithm_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, Rec &, Args...>)
+        friend auto tag_invoke(CPO f, algorithm_receiver &rec, Args &&...args)
             -> tag_invoke_result_t<CPO, Rec &, Args...>
         {
             return f(rec.mRec, std::forward<Args>(args)...);
         }
     };
 
-    template <typename _Rec>
+    template <typename Rec>
     struct base_state {
-        using Rec = _Rec;
 
         base_state(Rec &&rec)
             : mRec(std::forward<Rec>(rec))
@@ -166,19 +166,15 @@ namespace Execution {
         Rec mRec;
     };
 
-    template <typename State>
-    struct algorithm_state_helper {
+    template <typename Sender, typename Rec>
+    struct algorithm_state {
 
-        using InnerRec = typename State::Rec;
-        using Rec = typename InnerRec::inner;
-
-        template <typename Sender, typename... Args>
-        algorithm_state_helper(Sender &&sender, Rec &&rec, Args &&...args)
-            : mState { connect(std::forward<Sender>(sender), InnerRec { std::forward<Rec>(rec), std::forward<Args>(args)... }) }
+        algorithm_state(Sender &&sender, Rec &&rec)
+            : mState { connect(std::forward<Sender>(sender), std::forward<Rec>(rec)) }
         {
         }
 
-        ~algorithm_state_helper() { }
+        ~algorithm_state() { }
 
         void start()
         {
@@ -190,28 +186,31 @@ namespace Execution {
             mState.stop();
         }
 
-        template <typename... V>
-        void set_value(Rec &rec, V &&...value)
+        template <typename InnerRec, typename... V>
+        void set_value(InnerRec &rec, V &&...value)
         {
             rec.set_value(std::forward<V>(value)...);
         }
 
-        void set_done(Rec &rec)
+        template <typename InnerRec>
+        void set_done(InnerRec &rec)
         {
             rec.set_done();
         }
 
-        template <typename... R>
-        void set_error(Rec &rec, R &&...result)
+        template <typename InnerRec, typename... R>
+        void set_error(InnerRec &rec, R &&...result)
         {
             rec.set_error(std::forward<R>(result)...);
         }
 
-        State mState;
-    };
+        friend auto tag_invoke(Execution::visit_state_t, algorithm_state *state, const auto &info, auto &&visitor)
+        {
+            return visit_state(state ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+        }
 
-    template <typename Sender, typename InnerRec>
-    using algorithm_state = algorithm_state_helper<connect_result_t<Sender, InnerRec>>;
+        connect_result_t<Sender, Rec> mState;
+    };
 
     struct base_sender {
         using is_sender = void;
@@ -223,6 +222,11 @@ namespace Execution {
         template <template <typename...> typename Tuple>
         using value_types = typename std::decay_t<Sender>::template value_types<Tuple>;
 
+        friend auto tag_invoke(Execution::visit_sender_t, algorithm_sender *sender)
+        {
+            return visit_sender(sender ? &sender->mSender : nullptr);
+        }
+
         Sender mSender;
     };
 
@@ -232,10 +236,9 @@ namespace Execution {
 
     template <typename T>
     struct stream;
-    
+
     template <typename T>
     using is_stream = is_instance<T, stream>;
-
 
 }
 }

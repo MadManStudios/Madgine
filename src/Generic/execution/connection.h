@@ -26,6 +26,14 @@ namespace Execution {
             if (mStub.extract(this))
                 this->set_done();
         }
+                
+        friend auto tag_invoke(visit_state_t, Connection *con, const auto &info, auto &&visitor)
+        {
+            if (con) {
+                visitor(State::Marker {});
+            }
+            visitor(State::Text { typeid(Stub).name() });
+        }
 
     protected:
         template <typename>
@@ -49,7 +57,7 @@ namespace Execution {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, Stub &stub, Rec &&rec)
         {
-            return Execution::VirtualState<Rec, Connection<Stub, Ty...>>(std::forward<Rec>(rec), stub);
+            return Execution::VirtualState<Connection<Stub, Ty...>, Rec>(std::forward<Rec>(rec), stub);
         }
     };
 

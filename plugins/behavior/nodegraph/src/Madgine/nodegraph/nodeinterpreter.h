@@ -26,7 +26,7 @@ namespace NodeGraph {
 
         std::string toString() const override;
         std::map<std::string_view, ValueType> localVariables() const override;
-        bool wantsPause(Debug::ContinuationType type) const override;
+        bool wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const override;
 
         const NodeBase *mNode = nullptr;
         NodeInterpreterStateBase *mInterpreter;
@@ -73,6 +73,8 @@ namespace NodeGraph {
     protected:
         NodeDebugLocation mDebugLocation;
 
+        Debug::Continuation mContinuation;
+
     private:
         ArgumentList mArguments;
 
@@ -84,10 +86,10 @@ namespace NodeGraph {
     };
 
     template <typename Rec>
-    struct NodeInterpreterState : Execution::VirtualState<Rec, NodeInterpreterStateBase> {
+    struct NodeInterpreterState : Execution::VirtualState<NodeInterpreterStateBase, Rec> {
 
         NodeInterpreterState(Rec &&rec, const NodeGraph *graph, NodeGraphLoader::Handle handle)
-            : Execution::VirtualState<Rec, NodeInterpreterStateBase> { std::forward<Rec>(rec), graph, std::move(handle) }            
+            : Execution::VirtualState<NodeInterpreterStateBase, Rec> { std::forward<Rec>(rec), graph, std::move(handle) }            
         {
         }
 
@@ -137,7 +139,11 @@ namespace NodeGraph {
             return NodeInterpreterState<Rec> { std::forward<Rec>(rec), sender.mGraph, std::move(sender.mHandle) };
         }
 
-        static constexpr size_t debug_operation_increment = 1;
+        template <typename Rec>
+        friend auto tag_invoke(Execution::connect_t, NodeInterpreterSender &sender, Rec &&rec)
+        {
+            return NodeInterpreterState<Rec> { std::forward<Rec>(rec), sender.mGraph, sender.mHandle };
+        }
 
         NodeGraphLoader::Handle mHandle;
         const NodeGraph *mGraph;

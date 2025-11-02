@@ -15,7 +15,7 @@ namespace Widgets {
 
     struct TempWidgetState : BehaviorReceiver {
 
-        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior behavior);
+        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior behavior);        
         ~TempWidgetState();
 
         void start();

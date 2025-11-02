@@ -32,6 +32,7 @@ namespace NodeGraph {
             mBehavior.reset();
             mResult = std::move(values);
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
+            mLocation.stepOut(Execution::get_debug_location(receiver));
             mReceiver.reset();
             receiver.set_value();
         }
@@ -40,6 +41,7 @@ namespace NodeGraph {
         {
             mBehavior.reset();
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
+            mLocation.stepOut(Execution::get_debug_location(receiver));
             mReceiver.reset();
             receiver.set_error(std::move(result));
         }
@@ -48,23 +50,30 @@ namespace NodeGraph {
         {
             mBehavior.reset();
             NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
+            mLocation.stepOut(Execution::get_debug_location(receiver));
             mReceiver.reset();
             receiver.set_done();
         }
 
         template <typename CPO, typename... Args>
         friend auto tag_invoke(CPO f, LibraryInterpretReceiver &rec, Args &&...args)
-            -> tag_invoke_result_t<CPO, BehaviorReceiver &, Args...>
+            -> tag_invoke_result_t<CPO, NodeReceiver<NodeBase> &, Args...>
         {
             return f(*rec.mReceiver, std::forward<Args>(args)...);
+        }
+
+        friend Debug::SenderLocation *tag_invoke(Execution::get_debug_location_t, LibraryInterpretReceiver &rec)
+        {
+            return &rec.mLocation;
         }
 
         std::optional<NodeReceiver<NodeBase>> mReceiver;
         Behavior::StatePtr mBehavior;
         ArgumentList mResult;
+        Debug::SenderLocation mLocation { [this](CallableView<void(const Execution::StateDescriptor &)>) -> void { throw 0; } };
     };
 
-    struct LibraryInterpretData : NodeInterpreterData, Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver> {
+    struct LibraryInterpretData : NodeInterpreterData, Execution::VirtualState<BehaviorReceiver, LibraryInterpretReceiver> {
 
         static std::vector<Behavior> buildSubBehaviors(uint32_t count, const NodeInterpretHandle<LibraryNode> &handle)
         {
@@ -76,7 +85,7 @@ namespace NodeGraph {
         }
 
         LibraryInterpretData(BehaviorHandle type)
-            : Execution::VirtualState<LibraryInterpretReceiver, BehaviorReceiver>(LibraryInterpretReceiver {})
+            : Execution::VirtualState<BehaviorReceiver, LibraryInterpretReceiver>(LibraryInterpretReceiver {})
             , mType(type)
         {
         }
@@ -86,6 +95,9 @@ namespace NodeGraph {
             NodeInterpretHandle<LibraryNode> handle { receiver.mInterpreter, static_cast<const LibraryNode &>(receiver.mNode) };
 
             mRec.mReceiver.emplace(std::move(receiver));
+
+            mRec.mLocation.stepInto(Execution::get_debug_location(*mRec.mReceiver));
+
             mRec.mBehavior = mType.create(args, buildSubBehaviors(mType.subBehaviorCount(), handle)).connect(*this);
             mRec.mBehavior->start();
         }
@@ -103,8 +115,8 @@ namespace NodeGraph {
             if (success) {
                 mNamedInputs = mBehavior.namedInputs();
                 mSubBehaviorCount = mBehavior.subBehaviorCount();
-                this->setup();                
-            } 
+                this->setup();
+            }
             return success;
         }));
     }
@@ -118,7 +130,7 @@ namespace NodeGraph {
         assert(mBehavior.state());
         mNamedInputs = mBehavior.namedInputs();
         mSubBehaviorCount = mBehavior.subBehaviorCount();
-        this->setup();     
+        this->setup();
     }
 
     LibraryNode::LibraryNode(const LibraryNode &other, NodeGraph &graph)

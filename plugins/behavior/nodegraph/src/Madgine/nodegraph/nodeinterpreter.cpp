@@ -62,7 +62,7 @@ namespace NodeGraph {
                 receiver.set_value();
             }
         },
-            Execution::get_stop_token(receiver), Debug::ContinuationType::Flow);
+            mContinuation, Debug::ContinuationType::Flow, Execution::get_stop_token(receiver));
     }
 
     BehaviorError NodeInterpreterStateBase::read(ValueType &retVal, Pin pin)
@@ -159,9 +159,9 @@ namespace NodeGraph {
         throw 0;
     }
 
-    bool NodeDebugLocation::wantsPause(Debug::ContinuationType type) const
+    bool NodeDebugLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
     {
-        return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type);
+        return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type, line);
     }
 }
 }

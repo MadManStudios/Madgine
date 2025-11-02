@@ -49,7 +49,7 @@ namespace Execution {
         template <typename Rec>
         friend auto tag_invoke(connect_t, VirtualSender &&sender, Rec &&rec)
         {
-            return TupleUnpacker::constructExpand<VirtualState<Rec, State>>(std::forward<Rec>(rec), std::move(sender.mArgs));
+            return TupleUnpacker::constructExpand<VirtualState<State, Rec>>(std::forward<Rec>(rec), std::move(sender.mArgs));
         }
 
         std::tuple<Args...> mArgs;

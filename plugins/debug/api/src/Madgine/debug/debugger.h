@@ -10,14 +10,13 @@
 namespace Engine {
 namespace Debug {
 
-    struct MADGINE_DEBUGGER_EXPORT ContextInfo : ParentLocation, Execution::StopCallback {
+    struct MADGINE_DEBUGGER_EXPORT ContextInfo : ParentLocation {
         ContextInfo()
             : ParentLocation { nullptr, this }
         {
-            mRunning.test_and_set();
         }
 
-        void suspend(Continuation callback, Execution::StopToken st);
+        void suspend(Continuation callback, Continuation &outContinuation, Execution::StopToken st);        
         void continueExecution(ContinuationMode mode);
 
         ContinuationMode resume();
@@ -28,19 +27,11 @@ namespace Debug {
         bool alive() const;
         bool isPaused() const;
 
-        std::string getArguments() const;
-        ContinuationType continuationType() const;
-
         mutable std::mutex mMutex;
 
         friend struct Debugger;
 
-    protected:
-        void stopRequested() override;
-
     private:
-        Continuation mCallback;
-        std::atomic_flag mRunning;
         bool mPauseRequested = false;
         bool mStopRequested = false;
     };
@@ -61,7 +52,7 @@ namespace Debug {
         void addListener(DebugListener *listener);
         void removeListener(DebugListener *listener);
 
-        bool wantsPause(const DebugLocation &location, ContinuationType type);
+        bool wantsPause(const DebugLocation &location, ContinuationType type, IndexType<size_t> line);
 
         mutable std::mutex mMutex;
 
