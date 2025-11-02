@@ -63,6 +63,8 @@ else()
 endif()
 
 if (GCC OR CLANG)
+	add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-invalid-offsetof>)
+
 	if (CLANG)
 		add_compile_options(
 			$<$<COMPILE_LANGUAGE:CXX,C>:-Wno-extra-qualification>

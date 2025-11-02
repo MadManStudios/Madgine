@@ -79,7 +79,7 @@ namespace Tools {
                 bool actualContent = false;
 
                 std::visit(overloaded { [&](const Execution::State::Text &text) {
-                                           ImGui::TextWrapped(text.mText.c_str());
+                                           ImGui::TextWrapped("%s", text.mText.c_str());
                                            actualContent = true;
                                        },
                                [&](const Execution::State::Progress &progress) {

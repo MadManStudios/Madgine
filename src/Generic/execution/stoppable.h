@@ -68,6 +68,8 @@ namespace Execution {
 
             void stopRequested() override
             {
+                //TODO also sync with start()
+
                 uint8_t state = mFlags.fetch_or(STOP_STARTED);
                 assert(!(state & STOP_STARTED));
                 assert(!(state & STOP_ENDED));
