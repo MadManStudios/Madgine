@@ -7,16 +7,6 @@ namespace Engine {
 
 ArgumentList::ArgumentList() = default;
 
-ArgumentList::ArgumentList(std::initializer_list<ValueType> vals)
-    : mElements(vals)
-{
-}
-
-ArgumentList::ArgumentList(std::vector<ValueType> vals)
-    : mElements(std::move(vals))
-{
-}
-
 ArgumentList::ArgumentList(size_t size)
     : mElements(size)
 {

@@ -174,7 +174,10 @@ void Behavior::state::connect()
 
 void tag_invoke(Execution::visit_state_t, Behavior::state *state, const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor)
 {
-    return state->mState->visitState(info, visitor);
+    if (state)
+        state->mState->visitState(info, visitor);
+    else
+        visitor(Execution::State::Text { "Behavior" });
 }
 
 Any tag_invoke(Execution::visit_sender_t, Behavior *sender)

@@ -6,6 +6,7 @@ namespace Engine {
 struct META_EXPORT ObjectPtr {
 
     ObjectPtr() = default;
+    ObjectPtr(std::monostate);
     ObjectPtr(const std::shared_ptr<ObjectInstance> &instance);
 
     void setValue(std::string_view name, const ValueType &value);

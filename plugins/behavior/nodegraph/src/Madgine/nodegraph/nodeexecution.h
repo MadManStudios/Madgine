@@ -284,7 +284,7 @@ namespace NodeGraph {
         {
             if (mResults.size() <= flowOutGroup)
                 mResults.resize(flowOutGroup + 1);
-            mResults[flowOutGroup] = { std::forward<Args>(args)... };
+            mResults[flowOutGroup] = ArgumentList{ std::forward<Args>(args)... };
             return NodeSender<flowOutGroup> {};
         }
         std::vector<NodeResults> &mResults;

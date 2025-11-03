@@ -7,12 +7,10 @@ struct META_EXPORT ArgumentList {
     using value_type = ValueType;
 
     ArgumentList();
-    ArgumentList(std::initializer_list<ValueType> vals);
-    ArgumentList(std::vector<ValueType> vals);
     ArgumentList(size_t size);
 
     template <DecayedNoneOf<ArgumentList>... Args>
-    ArgumentList(Args &&...args)
+    explicit ArgumentList(Args &&...args)
         : ArgumentList(sizeof...(args))
     {
         size_t i = 0;

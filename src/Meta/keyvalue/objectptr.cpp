@@ -5,6 +5,10 @@
 
 namespace Engine {
 
+ObjectPtr::ObjectPtr(std::monostate)
+{
+}
+
 ObjectPtr::ObjectPtr(const std::shared_ptr<ObjectInstance> &instance)
     : mInstance(instance)
 {

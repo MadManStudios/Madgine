@@ -76,7 +76,7 @@ struct ValueType_ReturnHelper<T *> {
 
 template <Execution::AnyBinding T>
 struct ValueType_ReturnHelper<T> {
-    typedef Execution::CallBinding<typename ValueType_ReturnHelper<typename T::type>::type (*)(const ValueType &), Execution::BindingPtr<const ValueType&>> type;
+    typedef Execution::CallBinding<typename ValueType_ReturnHelper<typename T::type>::type (*)(const ValueType &), Execution::BindingPtr<const ValueType &>> type;
 };
 
 template <>
@@ -217,5 +217,4 @@ struct ValueTypeRef {
 private:
     ValueType &mRef;
 };
-
 }

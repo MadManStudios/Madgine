@@ -1235,9 +1235,9 @@ namespace Execution {
             friend auto tag_invoke(Execution::visit_sender_t, sender *sender)
             {
                 if (sender) {
-                    return TupleUnpacker::forEach(sender->mSenders, [](const auto &sender) { return visit_sender(&sender); });
+                    return TupleUnpacker::forEach(sender->mSenders, [](auto &sender) { return visit_sender(&sender); });
                 } else {
-                    return std::make_tuple(visit_sender(static_cast<Sender *>(nullptr))...);
+                    return std::make_tuple(visit_sender(static_cast<std::remove_reference_t<Sender> *>(nullptr))...);
                 }
             }
 

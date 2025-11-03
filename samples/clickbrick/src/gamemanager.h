@@ -62,5 +62,6 @@ namespace ClickBrick {
 
     Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity = {});
     Engine::Behavior Test(Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior Test2(Engine::Scene::EntityBinding entity = {});
 
 }

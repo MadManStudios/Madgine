@@ -53,6 +53,7 @@ MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
 NATIVE_BEHAVIOR(ClickBrick_Test, ClickBrick::Test)
+NATIVE_BEHAVIOR(ClickBrick_Test2, ClickBrick::Test2)
 NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<"Speed", float>, Engine::InputParameter<"Direction", Engine::Vector3>, Engine::InputParameter<"Rotation", Engine::Quaternion>)
 
 namespace ClickBrick {
@@ -152,10 +153,10 @@ void GameManager::spawnBrick()
 
         float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;
 
-        brick.addBehavior(Brick(speed, dir, q));    
+        brick.addBehavior(Brick(speed, dir, q));
 
         return true;
-    });    
+    });
 }
 
 void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent &evt)
@@ -224,7 +225,7 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, E
 
         std::chrono::microseconds elapsedTime = co_await Engine::Scene::yield_simulation();
 
-        co_await (entity->*[&](Engine::Scene::Entity::Entity &e) {  
+        co_await (entity->*[&](Engine::Scene::Entity::Entity &e) {
             Engine::Scene::Entity::Transform *t = e.getComponent<Engine::Scene::Entity::Transform>();
 
             float ratio = std::chrono::duration_cast<std::chrono::duration<float>>(elapsedTime).count();
@@ -245,7 +246,6 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, E
 
             loop = t->mPosition.length() < 10.5f;
         })();
-        
     }
 
     co_await (entity->*&Engine::Scene::Entity::Entity::endLifetime)();
@@ -287,6 +287,17 @@ Engine::Behavior Test(Engine::Scene::EntityBinding entity)
     }
 
     co_return;
+}
+
+Engine::Behavior Test2(Engine::Scene::EntityBinding entity)
+{
+
+    return Engine::Execution::sequence(
+               Engine::Scene::wait_simulation(1s),
+               Engine::Scene::wait_simulation(2s),
+               Engine::Scene::wait_simulation(3s),
+               Engine::Scene::wait_simulation(4s))
+        | Engine::Execution::repeat;
 }
 
 }

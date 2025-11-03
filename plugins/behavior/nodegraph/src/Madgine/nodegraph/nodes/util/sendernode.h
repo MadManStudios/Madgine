@@ -349,7 +349,7 @@ namespace NodeGraph {
                 {
                     if (mData->mResults.empty())
                         mData->mResults.emplace_back();
-                    mData->mResults.front() = { std::forward<Args>(args)... };
+                    mData->mResults.front() = ArgumentList { std::forward<Args>(args)... };
                     NodeReceiver<T> rec = std::move(mReceiver);
                     mData->cleanup();
                     rec.set_value();
