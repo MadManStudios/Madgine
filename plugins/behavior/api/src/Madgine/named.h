@@ -128,14 +128,13 @@ struct NamedState : Execution::base_state<Rec> {
         this->mRec.set_error(std::forward<R>(result)...);
     }
 
-    friend auto tag_invoke(Execution::visit_state_t, NamedState *state, const auto &info, auto &&visitor)
+    friend auto tag_invoke(Execution::visit_state_t, NamedState *state, auto &&visitor)
     {
         visitor(Execution::State::Text { Name.c_str() });
         if (state) {
-            auto &&sender = std::invoke(state->mF, *state->mValue);
-            Execution::visit_state(&state->mState, Execution::visit_sender(&sender), std::forward<decltype(visitor)>(visitor));
+            Execution::visit_state(&state->mState, std::forward<decltype(visitor)>(visitor));
         } else {
-            Execution::visit_state(static_cast<State *>(nullptr), Execution::visit_sender(static_cast<Sender *>(nullptr)), std::forward<decltype(visitor)>(visitor));
+            Execution::visit_state(static_cast<State *>(nullptr), std::forward<decltype(visitor)>(visitor));
         }
     }
 

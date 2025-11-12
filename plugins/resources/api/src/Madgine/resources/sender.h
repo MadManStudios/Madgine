@@ -57,9 +57,9 @@ namespace Resources {
                 mState.stop();
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
-                Execution::visit_state(state ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+                Execution::visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
             }
 
             State mState;
@@ -78,11 +78,6 @@ namespace Resources {
             friend auto tag_invoke(Execution::connect_t, sender &sender, Rec &&rec)
             {
                 return state<Sender &, Handle, Rec> { sender.mSender, std::forward<Rec>(rec), Handle { sender.mHandle } };
-            }
-
-            friend decltype(auto) tag_invoke(Execution::visit_sender_t, sender *sender)
-            {
-                return Execution::visit_sender(sender ? &sender->mSender : nullptr);
             }
 
             Handle mHandle;

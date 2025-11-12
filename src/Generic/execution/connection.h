@@ -27,7 +27,7 @@ namespace Execution {
                 this->set_done();
         }
                 
-        friend auto tag_invoke(visit_state_t, Connection *con, const auto &info, auto &&visitor)
+        friend auto tag_invoke(visit_state_t, Connection *con, auto &&visitor)
         {
             if (con) {
                 visitor(State::Marker {});

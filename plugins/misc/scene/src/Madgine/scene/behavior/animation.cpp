@@ -23,7 +23,7 @@ namespace Scene {
         template <typename Rec>
         struct AnimationStateImpl : VirtualBehaviorState<Rec, AnimationState> {
 
-            friend auto tag_invoke(Execution::visit_state_t, AnimationStateImpl *state, const auto &, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, AnimationStateImpl *state, auto &&visitor)
             {
                 visitor(Execution::State::BeginBlock { "Play '"s + state->mAnimationList->mAnimations[state->mCurrentAnimation].mName + "'" });
 

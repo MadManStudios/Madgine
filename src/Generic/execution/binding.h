@@ -57,7 +57,7 @@ namespace Execution {
         {
         }
                 
-        friend auto tag_invoke(Execution::visit_state_t, BindingState *state, const auto &info, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, BindingState *state, auto &&visitor)
         {
             visitor(State::Text { "Bound: " });
         }

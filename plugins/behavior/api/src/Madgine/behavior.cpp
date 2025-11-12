@@ -59,14 +59,9 @@ void CoroutineBehaviorState::destroy()
     std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).destroy();
 }
 
-void CoroutineBehaviorState::visitState(const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor)
+void CoroutineBehaviorState::visitState(CallableView<void(const Execution::StateDescriptor &)> visitor)
 {
-    throw 0;
-}
-
-Any CoroutineBehaviorState::visitSender()
-{
-    throw 0;
+    visitor(Execution::State::Text { "TODO" });
 }
 
 CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept
@@ -172,17 +167,12 @@ void Behavior::state::connect()
     mState->connect(*this);
 }
 
-void tag_invoke(Execution::visit_state_t, Behavior::state *state, const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor)
+void tag_invoke(Execution::visit_state_t, Behavior::state *state, CallableView<void(const Execution::StateDescriptor &)> visitor)
 {
     if (state)
-        state->mState->visitState(info, visitor);
+        state->mState->visitState(visitor);
     else
         visitor(Execution::State::Text { "Behavior" });
-}
-
-Any tag_invoke(Execution::visit_sender_t, Behavior *sender)
-{
-    return sender->mState->visitSender();
 }
 
 Behavior::StatePtr Behavior::connect(BehaviorReceiver &receiver)

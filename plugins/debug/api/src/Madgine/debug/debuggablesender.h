@@ -79,7 +79,7 @@ namespace Execution {
 
             state(Sender &&sender, InnerRec &&rec, Debug::ParentLocation *parent)
                 : mRec(std::forward<InnerRec>(rec))
-                , mLocation([this, info { visit_sender(&sender) }](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(&mState, info, std::move(visitor)); })
+                , mLocation([this](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(&mState, std::move(visitor)); })
                 , mState { connect(std::forward<Sender>(sender), Rec { this }) }
                 , mParent(parent)
             {
@@ -279,14 +279,14 @@ namespace Execution {
                 }
             }
 
-            friend auto tag_invoke(visit_state_t, state *state, const auto &info, auto &&visitor)
+            friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
                 Debug::Continuation empty;
                 visitor(Execution::State::Breakpoint {
                     state ? &state->mStartBreakpoint : nullptr,
                     state && state->mPausedAtStart ? state->mContinuation : empty
                 });
-                visit_state(state && !state->mContinuation ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+                visit_state(state && !state->mContinuation ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
                 visitor(Execution::State::Breakpoint {
                     state ? &state->mEndBreakpoint : nullptr,
                     state && !state->mPausedAtStart ? state->mContinuation : empty });

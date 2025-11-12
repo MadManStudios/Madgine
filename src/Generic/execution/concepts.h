@@ -204,9 +204,9 @@ namespace Execution {
             rec.set_error(std::forward<R>(result)...);
         }
 
-        friend auto tag_invoke(Execution::visit_state_t, algorithm_state *state, const auto &info, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, algorithm_state *state, auto &&visitor)
         {
-            return visit_state(state ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+            return visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
         }
 
         connect_result_t<Sender, Rec> mState;
@@ -221,11 +221,6 @@ namespace Execution {
         using result_type = typename std::decay_t<Sender>::result_type;
         template <template <typename...> typename Tuple>
         using value_types = typename std::decay_t<Sender>::template value_types<Tuple>;
-
-        friend auto tag_invoke(Execution::visit_sender_t, algorithm_sender *sender)
-        {
-            return visit_sender(sender ? &sender->mSender : nullptr);
-        }
 
         Sender mSender;
     };

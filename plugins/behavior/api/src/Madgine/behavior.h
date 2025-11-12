@@ -57,7 +57,7 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
         void start();
         void stop();
 
-        friend MADGINE_BEHAVIOR_EXPORT void tag_invoke(Execution::visit_state_t, state *state, const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor);
+        friend MADGINE_BEHAVIOR_EXPORT void tag_invoke(Execution::visit_state_t, state *state, CallableView<void(const Execution::StateDescriptor &)> visitor);
 
     protected:
         void connect();
@@ -87,8 +87,6 @@ struct MADGINE_BEHAVIOR_EXPORT Behavior {
         return state_helper<Rec> { std::forward<Rec>(rec), std::move(behavior.mState) };
     }
 
-    friend MADGINE_BEHAVIOR_EXPORT Any tag_invoke(Execution::visit_sender_t, Behavior *sender);
-
     using promise_type = CoroutineBehaviorState;
 
     StatePtr mState;
@@ -105,8 +103,7 @@ struct BehaviorStateBase {
         delete this;
     }
 
-    virtual void visitState(const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor) = 0;
-    virtual Any visitSender() = 0;
+    virtual void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) = 0;
 };
 
 template <typename Sender>
@@ -146,8 +143,7 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     void stop() override;
     void destroy() override;
 
-    void visitState(const Any &info, CallableView<void(const Execution::StateDescriptor &)> visitor) override;
-    Any visitSender() override;
+    void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override;
 
     struct MADGINE_BEHAVIOR_EXPORT InitialSuspend {
         bool await_ready() noexcept;
@@ -213,14 +209,9 @@ struct SenderBehaviorState : BehaviorStateBase {
         std::get<State>(mData).stop();
     }
 
-    void visitState(const Any &any, CallableView<void(const Execution::StateDescriptor &)> visitor) override
+    void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override
     {
-        Execution::visit_state(std::holds_alternative<State>(mData) ? &std::get<State>(mData) : nullptr, any.as<decltype(Execution::visit_sender(std::declval<Sender *>()))>(), visitor);
-    }
-
-    Any visitSender() override
-    {
-        return Execution::visit_sender(&std::get<Sender>(mData));
+        Execution::visit_state(std::holds_alternative<State>(mData) ? &std::get<State>(mData) : nullptr, visitor);
     }
 
     std::variant<Sender, State> mData;

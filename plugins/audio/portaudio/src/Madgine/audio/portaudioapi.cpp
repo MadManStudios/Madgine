@@ -35,7 +35,7 @@ namespace Audio {
 
         void stop();
 
-        friend auto tag_invoke(Execution::visit_state_t, PlaybackState *state, const auto &, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, PlaybackState *state, auto &&visitor)
         {
             visitor(Execution::State::BeginBlock { "Play '"s + std::string { state->mBuffer.name() } + "'" });
 

@@ -84,10 +84,12 @@ struct IntervalClock {
     template <Execution::Binding<IntervalClock &> Binding, typename Rec>
     struct state : WaitState, Execution::base_state<Rec> {
 
-        state(Binding &&binding, Rec &&rec, std::chrono::steady_clock::duration duration)
+        state(Binding &&binding, Rec &&rec, std::chrono::steady_clock::duration duration, std::chrono::steady_clock::duration durationOverride, std::chrono::steady_clock::duration acc)
             : WaitState(duration)
             , Execution::base_state<Rec>(std::forward<Rec>(rec))
             , mBinding(std::forward<Binding>(binding))
+            , mDuration(durationOverride > 0s ? durationOverride : duration)
+            , mAcc(acc)
         {
         }
 
@@ -112,45 +114,50 @@ struct IntervalClock {
             this->set_value(std::move(elapsed));
         }
 
-        friend auto tag_invoke(Execution::visit_state_t, state *state, const std::pair<std::chrono::steady_clock::duration, std::chrono::steady_clock::duration> &info, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
         {
-            const auto &[duration, offset] = info;
-
-            if (duration.count() == 0) {
-                if (state) {
-                    visitor(Execution::State::Marker {});
-                }
-                visitor(Execution::State::Text { "Yield" });
+            if (!state) {
+                visitor(Execution::State::Text { "Wait..." });
             } else {
-                std::string title;
-                if (duration.count() < 1000) {
-                    title = std::format("Waiting {} ns", duration.count());
-                } else if (duration.count() < 1000000) {
-                    title = std::format("Waiting {:.3f} us", std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(duration).count());
-                } else if (duration.count() < 1000000000) {
-                    title = std::format("Waiting {:.4f} ms", std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(duration).count());
+                std::chrono::duration duration = state->mDuration;
+                if (duration.count() == 0) {
+                    if (state) {
+                        visitor(Execution::State::Marker {});
+                    }
+                    visitor(Execution::State::Text { "Yield" });
                 } else {
-                    title = std::format("Waiting {:.4f} s", std::chrono::duration_cast<std::chrono::duration<float>>(duration).count());
+                    std::string title;
+                    if (duration.count() < 1000) {
+                        title = std::format("Waiting {} ns", duration.count());
+                    } else if (duration.count() < 1000000) {
+                        title = std::format("Waiting {:.3f} us", std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(duration).count());
+                    } else if (duration.count() < 1000000000) {
+                        title = std::format("Waiting {:.4f} ms", std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(duration).count());
+                    } else {
+                        title = std::format("Waiting {:.4f} s", std::chrono::duration_cast<std::chrono::duration<float>>(duration).count());
+                    }
+
+                    visitor(Execution::State::BeginBlock { title });
+
+                    float progress = 0.0f;
+
+                    if (state) {
+                        std::chrono::steady_clock::duration remaining = std::chrono::duration_cast<std::chrono::steady_clock::duration>(state->mWaitUntil - state->mClock->lastTick()) + state->mAcc;
+                        progress = 1.0f - (static_cast<float>(remaining.count()) / duration.count());
+
+                        visitor(Execution::State::Marker {});
+                    }
+
+                    visitor(Execution::State::Progress { progress });
+
+                    visitor(Execution::State::EndBlock {});
                 }
-
-                visitor(Execution::State::BeginBlock { title });
-
-                float progress = 0.0f;
-
-                if (state) {
-                    std::chrono::steady_clock::duration remaining = std::chrono::duration_cast<std::chrono::steady_clock::duration>(state->mWaitUntil - state->mClock->lastTick()) + offset;
-                    progress = 1.0f - (static_cast<float>(remaining.count()) / duration.count());
-
-                    visitor(Execution::State::Marker {});
-                }
-
-                visitor(Execution::State::Progress { progress });
-
-                visitor(Execution::State::EndBlock {});
             }
         }
 
         Binding mBinding;
+        std::chrono::steady_clock::duration mDuration;
+        std::chrono::steady_clock::duration mAcc;
     };
 
     template <Execution::Binding<IntervalClock &> Binding>
@@ -163,23 +170,7 @@ struct IntervalClock {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
         {
-            return state<Binding, Rec> { std::forward<Binding>(sender.mBinding), std::forward<Rec>(rec), sender.mDuration };
-        }
-
-        friend auto tag_invoke(Execution::visit_sender_t, sender *sender)
-        {
-            if (sender) {
-                std::chrono::steady_clock::duration duration = sender->mDurationOverride.count() < 0 ? sender->mDuration : sender->mDurationOverride;
-
-                return std::make_pair(
-                    duration,
-                    duration - sender->mDuration - sender->mAcc);
-            } else {
-                std::chrono::steady_clock::duration duration = 0s;
-                return std::make_pair(
-                    duration,
-                    duration);
-            }
+            return state<Binding, Rec> { std::forward<Binding>(sender.mBinding), std::forward<Rec>(rec), sender.mDuration, sender.mDurationOverride, sender.mAcc };
         }
 
         Binding mBinding;

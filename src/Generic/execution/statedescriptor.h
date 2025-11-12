@@ -47,47 +47,24 @@ namespace Execution {
     }
 
     struct visit_state_t {
-        template <typename T, typename I, typename V>
-            requires(!tag_invocable<visit_state_t, T *, const I &, V>)
-        auto operator()(T *, const I &i, V &&visitor) const
+        template <typename T, typename V>
+            requires(!tag_invocable<visit_state_t, T *, V>)
+        auto operator()(T *, V &&visitor) const
         {
             visitor(Execution::State::Text { "Unsupported state: <"s + typeid(T).name() + ">" });
-            if constexpr (std::same_as<I, std::string>) {
-                visitor(Execution::State::Text { i });
-            }
         }
 
-        template <typename T, typename I, typename V>
-            requires tag_invocable<visit_state_t, T *, const I &, V>
-        auto operator()(T *t, const I &info, V &&visitor) const
-            noexcept(is_nothrow_tag_invocable_v<visit_state_t, T *, const I &, V>)
-                -> tag_invoke_result_t<visit_state_t, T *, const I &, V>
+        template <typename T, typename V>
+            requires tag_invocable<visit_state_t, T *, V>
+        auto operator()(T *t, V &&visitor) const
+            noexcept(is_nothrow_tag_invocable_v<visit_state_t, T *, V>)
+                -> tag_invoke_result_t<visit_state_t, T *, V>
         {
-            return tag_invoke(*this, t, info, std::forward<V>(visitor));
+            return tag_invoke(*this, t, std::forward<V>(visitor));
         }
     };
 
     constexpr visit_state_t visit_state;
-
-    struct visit_sender_t {
-        template <typename T>
-            requires(!tag_invocable<visit_sender_t, T *>)
-        auto operator()(T *) const
-        {
-            return std::string { "Unsupported sender: <"s + typeid(T).name() + ">" };
-        }
-
-        template <typename T>
-            requires tag_invocable<visit_sender_t, T *>
-        auto operator()(T *t) const
-            noexcept(is_nothrow_tag_invocable_v<visit_sender_t, T *>)
-                -> tag_invoke_result_t<visit_sender_t, T *>
-        {
-            return tag_invoke(*this, t);
-        }
-    };
-
-    constexpr visit_sender_t visit_sender;
 
 }
 }

@@ -146,9 +146,9 @@ namespace Execution {
         template <Sender Sender, typename Rec, typename T>
         struct state : algorithm_state<Sender, receiver<Rec, T>> {
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
-                visit_state(state ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+                visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
                 visitor(State::Text { typeid(T).name() });
             }
         };
@@ -731,10 +731,10 @@ namespace Execution {
                 this->start();
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
                 visitor(State::BeginBlock { "Repeat" });
-                visit_state(state ? &state->mState : nullptr, info, std::forward<decltype(visitor)>(visitor));
+                visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
                 visitor(State::EndBlock {});
             }
         };
@@ -1208,10 +1208,10 @@ namespace Execution {
                 this->mRec.set_error(std::forward<R>(result)...);
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
                 [&]<size_t... I>(std::index_sequence<I...>) {
-                    (visit_state(state && state->mStates.index() == I+1 ? &std::get<I+1>(state->mStates) : nullptr, std::get<I>(info), visitor), ...);
+                    (visit_state(state && state->mStates.index() == I + 1 ? &std::get<I + 1>(state->mStates) : nullptr, visitor), ...);
                 }(std::index_sequence_for<Sender...> {});
             }
 
@@ -1230,15 +1230,6 @@ namespace Execution {
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
                 return state<Rec, Sender...> { std::forward<Rec>(rec), std::move(sender.mSenders) };
-            }
-
-            friend auto tag_invoke(Execution::visit_sender_t, sender *sender)
-            {
-                if (sender) {
-                    return TupleUnpacker::forEach(sender->mSenders, [](auto &sender) { return visit_sender(&sender); });
-                } else {
-                    return std::make_tuple(visit_sender(static_cast<std::remove_reference_t<Sender> *>(nullptr))...);
-                }
             }
 
             std::tuple<Sender...> mSenders;
@@ -1376,15 +1367,10 @@ namespace Execution {
                 rec.set_error(std::forward<R>(result)...);
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
-                visit_state(state && !state->mValue ? &state->mState : nullptr, info, visitor);
-                if (state) {
-                    auto &&sender = TupleUnpacker::invokeFromTuple(state->mF, *state->mValue);
-                    visit_state(state->mValue ? &state->mInnerState : nullptr, visit_sender(&sender), visitor);
-                } else {
-                    visit_state(static_cast<inner_state *>(nullptr), visit_sender(static_cast<std::remove_reference_t<inner_sender> *>(nullptr)), visitor);
-                }
+                visit_state(state && !state->mValue ? &state->mState : nullptr, visitor);
+                visit_state(state && state->mValue ? &state->mInnerState : nullptr, visitor);
             }
 
             F mF;

@@ -19,7 +19,7 @@ namespace Widgets {
     template <typename Rec>
     struct TempWidgetStateImpl : VirtualBehaviorState<Rec, TempWidgetState> {
 
-        friend auto tag_invoke(Execution::visit_state_t, TempWidgetStateImpl *state, const auto &, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, TempWidgetStateImpl *state, auto &&visitor)
         {
             visitor(Execution::State::BeginBlock { "Temp Widget" });
 

@@ -205,7 +205,7 @@ namespace Execution {
                 this->decreaseCount();
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, const auto &info, auto &&visitor)
+            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
                 visitor(State::BeginBlock { "Lifetime" });
                 if (state) {
