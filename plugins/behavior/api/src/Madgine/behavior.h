@@ -108,6 +108,8 @@ struct BehaviorStateBase {
 
 template <typename Sender>
 struct BehaviorAwaitableSender;
+template <typename Binding>
+struct BehaviorAwaitableBinding;
 
 struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::DebugLocation {
 
@@ -120,10 +122,24 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::DebugLocation {
 #endif
 };
 
-struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
+struct MADGINE_BEHAVIOR_EXPORT BoundValueBase {
+    BoundValueBase(CoroutineBehaviorState *state);
+    ~BoundValueBase();
+
+    virtual bool resumeImpl() = 0;
+    virtual void suspendImpl() = 0;
+
+    BoundValueBase *mNext = nullptr;
+};
+
+template <typename Awaiter>
+struct CoroutineAwaiterGuard;
+
+struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase, BoundValueBase {
 
     template <typename... Args>
     CoroutineBehaviorState(Args &&...args)
+        : BoundValueBase(this)
     {
         mResolveNames = [&](BehaviorReceiver &rec) {
             return ([&]() {
@@ -160,6 +176,10 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     InitialSuspend initial_suspend() noexcept;
     FinalSuspend final_suspend() noexcept;
 
+    void resume();
+    void suspend();
+    bool resumeImpl() override;
+    void suspendImpl() override;
     void return_void();
     void unhandled_exception();
     void set_error(BehaviorError result);
@@ -169,9 +189,11 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     decltype(auto) await_transform(T &&awaitable)
     {
         if constexpr (Execution::Sender<std::remove_reference_t<T>>) {
-            return BehaviorAwaitableSender<T> { std::forward<T>(awaitable), this };
+            return CoroutineAwaiterGuard<BehaviorAwaitableSender<T>> { std::forward<T>(awaitable), this };
+        } else if constexpr (Execution::AnyBinding<std::remove_reference_t<T>>) {
+            return CoroutineAwaiterGuard<BehaviorAwaitableBinding<T>> { std::forward<T>(awaitable) };
         } else {
-            return std::forward<T>(awaitable);
+            return CoroutineAwaiterGuard<T> { std::forward<T>(awaitable) };
         }
     }
 
@@ -180,6 +202,45 @@ struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase {
     BehaviorReceiver *mReceiver = nullptr;
 
     Closure<bool(BehaviorReceiver &)> mResolveNames;
+};
+
+template <typename Awaiter>
+struct CoroutineAwaiterGuard {
+    template <typename... Args>
+    CoroutineAwaiterGuard(Args &&...args)
+        : mAwaiter(std::forward<Args>(args)...)
+    {
+    }
+
+    bool await_ready() noexcept
+    {
+        return mAwaiter.await_ready();
+    }
+
+    auto await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle)
+    {
+        mState = &handle.promise();
+        using result_type = std::invoke_result_t<decltype(&Awaiter::await_suspend), Awaiter &, std::coroutine_handle<CoroutineBehaviorState>>;
+        if constexpr (std::same_as<result_type, bool>) {
+            bool result = mAwaiter.await_suspend(std::move(handle));
+            if (result) {
+                mState->suspend();
+            }
+            return result;
+        } else {
+            mState->suspend();
+            return mAwaiter.await_suspend(std::move(handle));
+        }
+    }
+
+    decltype(auto) await_resume()
+    {
+        mState->resume();
+        return mAwaiter.await_resume();
+    }
+
+    Awaiter mAwaiter;
+    CoroutineBehaviorState *mState;
 };
 
 template <Execution::Sender Sender>

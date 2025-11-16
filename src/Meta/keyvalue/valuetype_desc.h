@@ -10,6 +10,8 @@
 
 #include "Generic/execution/concepts.h"
 
+#include "Generic/execution/binding.h"
+
 namespace Engine {
 
 DERIVE_FUNCTION(customScopePtr)
@@ -43,7 +45,7 @@ auto resolveCustomScopePtr(T &t)
 template <typename T, bool keepPtr = false>
 auto resolveHelper()
 {
-    using Ptr = decltype(resolveCustomScopePtr(std::declval<T&>()));
+    using Ptr = decltype(resolveCustomScopePtr(std::declval<T &>()));
     if constexpr (std::same_as<Ptr, ScopePtr>) {
         return type_holder<T>;
     } else {
@@ -373,6 +375,8 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
         return { { ValueTypeEnum::EnumValue }, &T::Representation::sTable };
     } else if constexpr (Execution::Sender<T>) {
         return { { ValueTypeEnum::SenderValue }, nullptr };
+    } else if constexpr (Execution::AnyBinding<T>) {
+        return { { ValueTypeEnum::BindingValue }, &table<std::decay_t<typename T::type>> };
     } else if constexpr (std::same_as<T, ScopePtr>) {
         return { { ValueTypeEnum::ScopeValue }, static_cast<const MetaTable **>(nullptr) };
     } else if constexpr (std::ranges::range<T>) {
@@ -391,8 +395,7 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
             throw 0;
         else if constexpr (InstanceOf<T, std::reference_wrapper>) {
             return { { ValueTypeEnum::ScopeValue }, &table<resolveCustomScopePtr_t<typename T::type>> };
-        }
-        else {
+        } else {
             return { { ValueTypeEnum::ScopeValue }, &table<std::remove_pointer_t<resolveCustomScopePtr_t<T>>> };
         }
     } else if constexpr (InstanceOf<std::decay_t<T>, std::unique_ptr>) {

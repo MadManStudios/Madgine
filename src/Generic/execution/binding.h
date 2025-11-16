@@ -38,72 +38,13 @@ namespace Execution {
         } -> std::same_as<bool>;
     };
 
-    template <AnyBinding Binding, typename Rec>
-    struct BindingState : Execution::base_state<Rec> {
-        BindingState(Binding &&binding, Rec &&rec)
-            : Execution::base_state<Rec>(std::forward<Rec>(rec))
-            , mBinding(std::forward<Binding>(binding))
-        {
-        }
-
-        void start()
-        {
-            if (!access_binding(mBinding, [this](auto &&...v) { this->set_value(std::forward<decltype(v)>(v)...); })) {
-                this->set_error(BindingError {});
-            }
-        }
-
-        void stop()
-        {
-        }
-                
-        friend auto tag_invoke(Execution::visit_state_t, BindingState *state, auto &&visitor)
-        {
-            visitor(State::Text { "Bound: " });
-        }
-
-
-        Binding mBinding;
-    };
-
-    template <AnyBinding Binding, typename Rec>
-    auto tag_invoke(connect_t, Binding &&binding, Rec &&rec)
-    {
-        return BindingState<std::remove_reference_t<Binding>, Rec> { std::remove_reference_t<Binding> { std::forward<Binding>(binding) }, std::forward<Rec>(rec) };
-    }
-
     template <typename F, typename This>
     struct MemberFunctionBinding;
 
     template <typename T>
-    struct BindingBase {
+    struct ConstantBinding {
+
         using type = T;
-
-        using is_sender = void;
-
-        using result_type = BindingError;
-        template <template <typename...> typename Tuple>
-        using value_types = Tuple<std::remove_reference_t<type>>;
-    };
-
-    template <>
-    struct BindingBase<void> {
-        using type = void;
-
-        using is_sender = void;
-
-        using result_type = BindingError;
-        template <template <typename...> typename Tuple>
-        using value_types = Tuple<>;
-    };
-
-    template <typename T>
-    struct BindingBase<T *> {
-        using type = T *;
-    };
-
-    template <typename T>
-    struct ConstantBinding : BindingBase<T> {
 
         ConstantBinding(T &&value)
             : mValue(std::forward<T>(value))
@@ -141,9 +82,9 @@ namespace Execution {
     ConstantBinding(T &&value) -> ConstantBinding<T>;
 
     template <typename F, typename... Args>
-    struct CallBinding : BindingBase<std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>> {
+    struct CallBinding {
 
-        using type = typename BindingBase<std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>>::type;
+        using type = std::invoke_result_t<F, typename std::remove_reference_t<Args>::type...>;
 
         template <typename... Args2>
         CallBinding(F &&f, Args2 &&...args)
@@ -279,7 +220,9 @@ namespace Execution {
     };
 
     template <typename T>
-    struct BindingPtr : BindingBase<T> {
+    struct BindingPtr {
+
+        using type = T;
 
         BindingPtr() = default;
 

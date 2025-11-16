@@ -25,8 +25,8 @@ namespace Scene {
 
     struct LightManager;
     struct Light;
-
-    struct EntityBinding;
+    
+    using EntityBinding = Named<"Entity", Entity::EntityPtr>;
     using SceneBinding = Named<"Scene", SceneManager&>;
 }
 

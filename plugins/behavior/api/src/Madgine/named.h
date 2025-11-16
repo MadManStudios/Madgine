@@ -9,6 +9,8 @@
 
 #include "Generic/execution/storage.h"
 
+#include "behaviorerror.h"
+
 namespace Engine {
 
 struct get_named_d_t {
@@ -63,115 +65,48 @@ struct get_named_t {
 template <fixed_string Name, typename V>
 inline constexpr get_named_t<Name, V> get_named;
 
-template <typename Rec, fixed_string Name, typename T, typename F>
+template <typename Rec, fixed_string Name, typename T>
 struct NamedState : Execution::base_state<Rec> {
 
-    using Sender = std::invoke_result_t<F, ValueType_Return<T> &>;
-
-    using State = Execution::connect_result_t<Sender, Rec>;
-
-    NamedState(F &&f, Named<Name, T> value, Rec &&rec)
+    NamedState(Named<Name, T> value, Rec &&rec)
         : Execution::base_state<Rec>(std::forward<Rec>(rec))
-        , mF(std::forward<F>(f))
         , mValue(std::move(value))
 
     {
-        if (!mValue.mValue) {
-            if (!mValue.resolve(this->mRec)) {
-                throw 0;
-            }
-            construct(mState, DelayedConstruct<State> { [&]() { return Execution::connect(std::invoke(mF, *mValue), std::forward<Rec>(this->mRec)); } });
-        }
-    }
-
-    ~NamedState()
-    {
-        if (mValue.mValue) {
-            destruct(mState);
-        }
     }
 
     void start()
     {
         if (!mValue.mValue) {
             if (!mValue.resolve(this->mRec)) {
-                throw 0;
-                //            mRec.set_error( { "Named value '" + std::string(Name) + "' not found" });
+                this->mRec.set_error(BEHAVIOR_UNKNOWN_ERROR() << "Named value '" << std::string(Name) << "' not found");
                 return;
             }
-            construct(mState, DelayedConstruct<State> { [&]() { return Execution::connect(std::invoke(mF, *mValue), std::forward<Rec>(this->mRec)); } });
         }
 
-        mState->start();
+        this->mRec.set_value(*mValue.mValue);
     }
 
     void stop()
     {
-        mState->stop();
-    }
-
-    template <typename... V>
-    void set_value(V &&...value)
-    {
-        destruct(mState);
-        this->mRec.set_value(std::forward<V>(value)...);
-    }
-    void set_done()
-    {
-        destruct(mState);
-        this->mRec.set_done();
-    }
-    template <typename... R>
-    void set_error(R &&...result)
-    {
-        destruct(mState);
-        this->mRec.set_error(std::forward<R>(result)...);
     }
 
     friend auto tag_invoke(Execution::visit_state_t, NamedState *state, auto &&visitor)
     {
         visitor(Execution::State::Text { Name.c_str() });
-        if (state) {
-            Execution::visit_state(&state->mState, std::forward<decltype(visitor)>(visitor));
-        } else {
-            Execution::visit_state(static_cast<State *>(nullptr), std::forward<decltype(visitor)>(visitor));
-        }
     }
 
-    Named<Name, T> mValue;
-    F mF;
-    ManualLifetime<State> mState;
-};
-
-template <fixed_string Name, typename T, typename F>
-struct NamedSender {
-
-    using is_sender = void;
-
-    using Inner = std::invoke_result_t<F, ValueType_Return<T> &>;
-
-    using result_type = typename Inner::result_type;
-    template <template <typename...> typename Tuple>
-    using value_types = typename Inner::template value_types<Tuple>;
-
-    template <typename Rec>
-    friend auto tag_invoke(Execution::connect_t, NamedSender &&sender, Rec &&rec)
-    {
-        return NamedState<Rec, Name, T, F> { std::forward<F>(sender.mF), std::move(sender.mValue), std::forward<Rec>(rec) };
-    }
-
-    template <typename Rec>
-    friend auto tag_invoke(Execution::connect_t, NamedSender &sender, Rec &&rec)
-    {
-        return NamedState<Rec, Name, T, F> { F { sender.mF }, sender.mValue, std::forward<Rec>(rec) };
-    }
-
-    Named<Name, T> mValue;
-    F mF;
+    Named<Name, T> mValue;        
 };
 
 template <fixed_string Name, typename T>
 struct Named {
+
+    using is_sender = void;
+
+    using result_type = BehaviorError;
+    template <template <typename...> typename Tuple>
+    using value_types = Tuple<ValueType_Return<T> &>;
 
     bool resolve(auto &context)
     {
@@ -179,13 +114,6 @@ struct Named {
             get_named<Name, T>(context, mValue);
         }
         return static_cast<bool>(mValue);
-    }
-
-    template <typename F>
-    auto sender(F &&algorithm)
-    {
-
-        return NamedSender<Name, T, F> { *this, std::forward<F>(algorithm) };
     }
 
     ValueType_Return<T> &operator->()
@@ -207,6 +135,20 @@ struct Named {
     {
         return *mValue;
     }
+
+    
+    template <typename Rec>
+    friend auto tag_invoke(Execution::connect_t, Named &&sender, Rec &&rec)
+    {
+        return NamedState<Rec, Name, T> { std::move(sender), std::forward<Rec>(rec) };
+    }
+
+    template <typename Rec>
+    friend auto tag_invoke(Execution::connect_t, Named &sender, Rec &&rec)
+    {
+        return NamedState<Rec, Name, T> { sender, std::forward<Rec>(rec) };
+    }
+
 
     std::optional<forward_ref_t<ValueType_Return<T>>> mValue;
 };

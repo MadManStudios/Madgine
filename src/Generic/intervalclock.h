@@ -11,10 +11,6 @@
 
 namespace Engine {
 
-namespace Execution {
-    struct get_debug_data_t;
-}
-
 template <typename Timepoint = std::chrono::steady_clock::time_point>
 struct IntervalClock {
 
@@ -71,11 +67,6 @@ struct IntervalClock {
 
         virtual void continueExecution(std::chrono::microseconds elapsed) = 0;
 
-        friend const void *tag_invoke(const Execution::get_debug_data_t &, WaitState &state)
-        {
-            return &state;
-        }
-
         IntervalClock *mClock = nullptr;
         std::chrono::steady_clock::duration mDuration;
         Timepoint mWaitUntil;
@@ -89,7 +80,7 @@ struct IntervalClock {
             , Execution::base_state<Rec>(std::forward<Rec>(rec))
             , mBinding(std::forward<Binding>(binding))
             , mDuration(durationOverride > 0s ? durationOverride : duration)
-            , mAcc(acc)
+            , mAcc(mDuration - duration - acc)
         {
         }
 

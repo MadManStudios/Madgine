@@ -61,7 +61,7 @@ void CoroutineBehaviorState::destroy()
 
 void CoroutineBehaviorState::visitState(CallableView<void(const Execution::StateDescriptor &)> visitor)
 {
-    visitor(Execution::State::Text { "TODO" });
+    visitor(Execution::State::SubLocation {});
 }
 
 CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept
@@ -125,6 +125,50 @@ void CoroutineBehaviorState::InitialSuspend::await_suspend(std::coroutine_handle
 }
 
 void CoroutineBehaviorState::InitialSuspend::await_resume() noexcept
+{
+}
+
+BoundValueBase::BoundValueBase(CoroutineBehaviorState *state)
+{
+    if (state != this) {
+        BoundValueBase *tail = state;
+        while (tail->mNext != state)
+            tail = tail->mNext;
+        tail->mNext = this;
+    }
+    mNext = state;
+}
+
+BoundValueBase::~BoundValueBase()
+{
+    if (mNext != this) {
+        BoundValueBase *prev = this;
+        while (prev->mNext != this) {
+            prev = prev->mNext;
+        }
+        prev->mNext = mNext;
+    }
+}
+
+void CoroutineBehaviorState::resume()
+{
+
+    if (!mNext->resumeImpl()) {
+        set_error(BehaviorError {});
+    }
+}
+
+void CoroutineBehaviorState::suspend()
+{
+    mNext->suspendImpl();
+}
+
+bool CoroutineBehaviorState::resumeImpl()
+{
+    return true;
+}
+
+void CoroutineBehaviorState::suspendImpl()
 {
 }
 
