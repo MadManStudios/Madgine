@@ -3,7 +3,7 @@
 #include "Meta/keyvalue/apifunction.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         extern PyTypeObject PyApiFunctionType;

@@ -5,13 +5,13 @@
 
 #include "Generic/execution/stop_callback.h"
 
-#include "Madgine/behaviorreceiver.h"
+#include "Madgine/behavior/behaviorreceiver.h"
 
 namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        struct MADGINE_SCENE_EXPORT AnimationState : BehaviorReceiver {
+        struct MADGINE_SCENE_EXPORT AnimationState : Behavior::BehaviorReceiver {
             
             AnimationState(Render::AnimationLoader::Handle handle, IndexType<uint32_t> index);
 
@@ -40,8 +40,8 @@ namespace Scene {
             std::atomic<AnimationState *> mNext = nullptr;
         };
 
-        Behavior animation(Render::AnimationLoader::Handle handle, Render::AnimationDescriptor *desc);
-        Behavior animation(Render::AnimationLoader::Handle handle, std::string_view name);
+        Behavior::Behavior animation(Render::AnimationLoader::Handle handle, Render::AnimationDescriptor *desc);
+        Behavior::Behavior animation(Render::AnimationLoader::Handle handle, std::string_view name);
 
     }
 }

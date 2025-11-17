@@ -19,7 +19,9 @@
 #include "Madgine/window/mainwindowlistener.h"
 
 namespace Engine {
-struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerManager>, Window::MainWindowListener {
+namespace Behavior {
+
+    struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerManager>, Window::MainWindowListener {
 
         using Self = HandlerManager;
 
@@ -34,9 +36,9 @@ struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerM
         void showCursor();
         bool isCursorVisible() const;
 
-        //Scene::ContextMask currentContext();
+        // Scene::ContextMask currentContext();
 
-        std::set<HandlerBase *> getHandlers();        
+        std::set<HandlerBase *> getHandlers();
 
         static const constexpr int sMaxInitOrder = 4;
 
@@ -56,7 +58,7 @@ struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerM
 
         Threading::Task<bool> init();
         Threading::Task<void> finalize();
-                                                                
+
         void startLifetime();
         void endLifetime();
 
@@ -76,11 +78,11 @@ struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerM
         DEBUGGABLE_LIFETIME(mLifetime);
 
     public:
-        HandlerContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>> mHandlers;        
+        HandlerContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>> mHandlers;
 
     private:
         Vector2 mKeptCursorPosition;
         bool mKeepingCursorPos = false;
-
     };
+}
 }

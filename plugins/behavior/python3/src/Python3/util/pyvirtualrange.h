@@ -3,7 +3,7 @@
 #include "Generic/container/virtualrange.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         extern PyTypeObject PyVirtualAssociativeRangeType;

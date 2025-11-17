@@ -13,7 +13,7 @@
 #include "python3lock.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         static PyObject *

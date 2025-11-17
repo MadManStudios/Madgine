@@ -2,20 +2,20 @@
 
 #include "../widgetloader.h"
 
-#include "Madgine/behavior.h"
+#include "Madgine/behavior/behavior.h"
 
-#include "Madgine/named.h"
+#include "Madgine/behavior/named.h"
 
 #include "Meta/math/matrix3.h"
 
 namespace Engine {
 namespace Widgets {
 
-    MADGINE_WIDGETS_EXPORT Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior behavior);
+    MADGINE_WIDGETS_EXPORT Behavior::Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior::Behavior behavior);
 
-    struct TempWidgetState : BehaviorReceiver {
+    struct TempWidgetState : Behavior::BehaviorReceiver {
 
-        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior behavior);        
+        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior::Behavior behavior);        
         ~TempWidgetState();
 
         void start();
@@ -26,24 +26,25 @@ namespace Widgets {
     private:
         WidgetLoader::Handle mDesc;
 
-        struct receiver : Execution::algorithm_receiver<BehaviorReceiver &> {
+        struct receiver : Execution::algorithm_receiver<Behavior::BehaviorReceiver &> {
             void set_value(ArgumentList args);
-            void set_error(BehaviorError error);
+            void set_error(Behavior::BehaviorError error);
             void set_done();
 
-            friend bool tag_invoke(get_named_d_t, receiver& rec, std::string_view name, ValueTypeRef& out) {
+            friend bool tag_invoke(Behavior::get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef &out)
+            {
                 if (name == "Widget") {
                     out = Execution::ConstantBinding { rec.mState.widget() };
                     return true;
                 } else {
-                    return get_named_d(rec.mRec, name, out);
+                    return Behavior::get_named_d(rec.mRec, name, out);
                 }
             }
 
             TempWidgetState &mState;
         };
 
-        using state = Execution::connect_result_t<Behavior, receiver>;
+        using state = Execution::connect_result_t<Behavior::Behavior, receiver>;
         state mState;
 
         std::unique_ptr<WidgetBase> mWidget;

@@ -15,7 +15,7 @@ namespace Audio {
 
         virtual std::string_view key() const override;
 
-        virtual Behavior playSound(AudioLoader::Handle buffer) override;
+        virtual Behavior::Behavior playSound(AudioLoader::Handle buffer) override;
 
     protected:
         friend struct PlaybackState;

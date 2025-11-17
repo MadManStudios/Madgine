@@ -235,5 +235,37 @@ namespace Execution {
     template <typename T>
     using is_stream = is_instance<T, stream>;
 
+    
+    struct access_binding_t {
+
+        template <typename T, typename F>
+        auto operator()(T &&binding, F &&callback) const
+            noexcept(is_nothrow_tag_invocable_v<access_binding_t, T, F>)
+                -> tag_invoke_result_t<access_binding_t, T, F>
+        {
+            return tag_invoke(*this, std::forward<T>(binding), std::forward<F>(callback));
+        }
+    };
+
+    constexpr access_binding_t access_binding {};
+
+
+    template <typename B, typename T>
+    concept Binding = requires(B &&binding) {
+        {
+            access_binding(binding, [](const T &) { })
+        } -> std::same_as<bool>;
+    };
+
+    constexpr auto anyBindingCallback = [](const auto &) { };
+
+    template <typename B>
+    concept AnyBinding = requires(B &&binding) {
+        {
+            access_binding(binding, anyBindingCallback)
+        } -> std::same_as<bool>;
+    };
+
+
 }
 }

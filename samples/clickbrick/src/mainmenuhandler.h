@@ -7,7 +7,7 @@ namespace ClickBrick {
     struct MainMenuHandler : Engine::Widgets::WidgetHandler<MainMenuHandler> {
         SERIALIZABLEUNIT(MainMenuHandler)
 
-        MainMenuHandler(Engine::HandlerManager &ui);
+        MainMenuHandler(Engine::Behavior::HandlerManager &ui);
 
         virtual std::string_view key() const override;
 

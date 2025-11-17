@@ -22,11 +22,12 @@
 
 #include "Generic/execution/execution.h"
 
-METATABLE_BEGIN(Engine::HandlerManager)
+METATABLE_BEGIN(Engine::Behavior::HandlerManager)
 MEMBER(mHandlers)
-METATABLE_END(Engine::HandlerManager)
+METATABLE_END(Engine::Behavior::HandlerManager)
 
 namespace Engine {
+namespace Behavior {
 
     static std::chrono::milliseconds fixedUpdateInterval = 15ms;
 
@@ -48,7 +49,7 @@ namespace Engine {
     {
         co_await mWindow.state();
 
-        //Execution::detach(mgr.updatedSignal().connect([this] { onUpdate(); })); TODO
+        // Execution::detach(mgr.updatedSignal().connect([this] { onUpdate(); })); TODO
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callInit();
@@ -126,9 +127,9 @@ namespace Engine {
         mKeepingCursorPos = keep;
         if (keep) {
             /*const OIS::MouseState &mouseState = mMouse->getMouseState();
-				mKeptCursorPosition = { (float)mouseState.X.abs, (float)mouseState.Y.abs };*/
+                                mKeptCursorPosition = { (float)mouseState.X.abs, (float)mouseState.Y.abs };*/
         }
-        //mGUI.hideCursor();
+        // mGUI.hideCursor();
 
         for (const std::unique_ptr<HandlerBase> &h : mHandlers)
             h->onMouseVisibilityChanged(false);
@@ -140,14 +141,14 @@ namespace Engine {
             return;
         if (mKeepingCursorPos) {
             /*OIS::MouseState &mutableMouseState = const_cast<OIS::MouseState &>(mMouse->getMouseState());
-				mutableMouseState.X.abs = mKeptCursorPosition.x;
-				mutableMouseState.Y.abs = mKeptCursorPosition.y;
-				callSafe([&]() {
-					mouseMoved(OIS::MouseEvent(mMouse, mutableMouseState));*/
-            //mGUI.showCursor();
+                                mutableMouseState.X.abs = mKeptCursorPosition.x;
+                                mutableMouseState.Y.abs = mKeptCursorPosition.y;
+                                callSafe([&]() {
+                                        mouseMoved(OIS::MouseEvent(mMouse, mutableMouseState));*/
+            // mGUI.showCursor();
             /*});*/
         } else {
-            //mGUI.showCursor();
+            // mGUI.showCursor();
         }
         for (const std::unique_ptr<HandlerBase> &h : mHandlers)
             h->onMouseVisibilityChanged(true);
@@ -187,4 +188,5 @@ namespace Engine {
         return mApp.taskQueue();
     }
 
+}
 }

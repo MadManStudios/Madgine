@@ -10,7 +10,7 @@
 
 #include "Generic/intervalclock.h"
 
-#include "Madgine/nativebehaviorcollector.h"
+#include "Madgine/behavior/nativebehaviorcollector.h"
 
 #include "Modules/threading/customclock.h"
 
@@ -20,7 +20,7 @@ namespace ClickBrick {
 
     struct GameManager : Engine::Widgets::WidgetHandler<GameManager> {
 
-        GameManager(Engine::HandlerManager &ui);
+        GameManager(Engine::Behavior::HandlerManager &ui);
 
         virtual Engine::Threading::Task<bool> init() override;
         virtual Engine::Threading::Task<void> finalize() override;
@@ -60,8 +60,8 @@ namespace ClickBrick {
         std::unique_ptr<Engine::Render::RenderTarget> mGameRenderTarget;
     };
 
-    Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity = {});
-    Engine::Behavior Test(Engine::Scene::EntityBinding entity = {});
-    Engine::Behavior Test2(Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior::Behavior Test(Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior::Behavior Test2(Engine::Scene::EntityBinding entity = {});
 
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         struct Python3Environment;

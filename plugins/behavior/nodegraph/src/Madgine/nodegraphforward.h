@@ -1,35 +1,37 @@
 #pragma once
 
 namespace Engine {
-namespace NodeGraph {
+namespace Behavior {
+    namespace NodeGraph {
 
-    struct NodeBase;
-    struct NodeGraph;
+        struct NodeBase;
+        struct NodeGraph;
 
-    template <typename Node>
-    struct NodeReceiver;
+        template <typename Node>
+        struct NodeReceiver;
 
-    struct NodeInterpreterData;
-    struct NodeInterpreterStateBase;
-    struct NodeInterpreterSender;
+        struct NodeInterpreterData;
+        struct NodeInterpreterStateBase;
+        struct NodeInterpreterSender;
 
-    struct CodeGenerator;
-    struct CodeGeneratorData;
+        struct CodeGenerator;
+        struct CodeGeneratorData;
 
-    struct Pin;
+        struct Pin;
 
-    struct FlowOutPinPrototype;
-    struct DataInPinPrototype;
-    struct DataOutPinPrototype;
+        struct FlowOutPinPrototype;
+        struct DataInPinPrototype;
+        struct DataOutPinPrototype;
 
-    enum EdgeEvent {
-        CONNECT,
-        DISCONNECT
-    };
+        enum EdgeEvent {
+            CONNECT,
+            DISCONNECT
+        };
 
-    using NodeResults = ArgumentList;
+        using NodeResults = ArgumentList;
 
-    struct NodeDebugLocation;
+        struct NodeDebugLocation;
 
+    }
 }
 }

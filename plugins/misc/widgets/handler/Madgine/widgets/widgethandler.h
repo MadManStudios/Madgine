@@ -13,10 +13,10 @@
 namespace Engine {
 namespace Widgets {
 
-    struct MADGINE_WIDGETHANDLER_EXPORT WidgetHandlerBase : HandlerBase {
+    struct MADGINE_WIDGETHANDLER_EXPORT WidgetHandlerBase : Behavior::HandlerBase {
         SERIALIZABLEUNIT(WidgetHandlerBase)
 
-        WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName);
+        WidgetHandlerBase(Behavior::HandlerManager &ui, std::string_view widgetName);
         virtual ~WidgetHandlerBase() = default;
 
         void startLifetime() final;
@@ -68,6 +68,6 @@ namespace Widgets {
 
     
     template <typename T>
-    using WidgetHandler = VirtualScope<T, HandlerComponent<T, WidgetHandlerBase>>;
+    using WidgetHandler = VirtualScope<T, Behavior::HandlerComponent<T, WidgetHandlerBase>>;
 }
 }

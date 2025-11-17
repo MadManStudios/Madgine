@@ -9,13 +9,13 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-METATABLE_BEGIN_BASE(Engine::Widgets::WidgetHandlerBase, Engine::HandlerBase)
+METATABLE_BEGIN_BASE(Engine::Widgets::WidgetHandlerBase, Engine::Behavior::HandlerBase)
 PROPERTY(Widget, widget, setWidget)
 METATABLE_END(Engine::Widgets::WidgetHandlerBase)
 
 namespace Engine {
 namespace Widgets {
-    WidgetHandlerBase::WidgetHandlerBase(HandlerManager &ui, std::string_view widgetName)
+    WidgetHandlerBase::WidgetHandlerBase(Behavior::HandlerManager &ui, std::string_view widgetName)
         : HandlerBase(ui)
         , mWidgetName(widgetName)
     {

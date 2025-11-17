@@ -26,18 +26,18 @@ namespace Tools {
 
     struct ConnectorInfo {
         ImVec2 mPos;
-        NodeGraph::PinType mType;
+        Behavior::NodeGraph::PinType mType;
         uint32_t mIndex;
     };
 
-    const NodeGraph::NodeDebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const NodeGraph::NodeDebugLocation &location, const Debug::DebugLocation *inlineLocation)
+    const Behavior::NodeGraph::NodeDebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::NodeGraph::NodeDebugLocation &location, const Debug::DebugLocation *inlineLocation)
     {
         const Debug::DebugLocation *child = nullptr;
-        const NodeGraph::NodeGraph &graph = *location.mInterpreter->graph();
+        const Behavior::NodeGraph::NodeGraph &graph = *location.mInterpreter->graph();
 
         if (inlineLocation) {
 
-            const NodeGraph::NodeDebugLocation *inlineNodeLocation = dynamic_cast<const NodeGraph::NodeDebugLocation *>(inlineLocation);
+            const Behavior::NodeGraph::NodeDebugLocation *inlineNodeLocation = dynamic_cast<const Behavior::NodeGraph::NodeDebugLocation *>(inlineLocation);
             if (!inlineNodeLocation || inlineNodeLocation->mInterpreter != location.mInterpreter)
                 return &location;
 
@@ -60,7 +60,7 @@ namespace Tools {
                 config.UserPointer = location.mInterpreter;
 
                 config.LoadSettings = [](char *data, void *userPointer) {
-                    const std::string &layout = static_cast<NodeGraph::NodeInterpreterStateBase *>(userPointer)->graph()->mLayoutData;
+                    const std::string &layout = static_cast<Behavior::NodeGraph::NodeInterpreterStateBase *>(userPointer)->graph()->mLayoutData;
                     if (data) {
                         strcpy(data, layout.c_str());
                     }
@@ -102,7 +102,7 @@ namespace Tools {
             uint32_t handledIndex = 0;
 
             uint32_t nodeId = 1;
-            for (NodeGraph::NodeBase *node : graph.nodes() | std::views::transform(projectionUniquePtrToPtr)) {
+            for (Behavior::NodeGraph::NodeBase *node : graph.nodes() | std::views::transform(projectionUniquePtrToPtr)) {
 
                 if (static_cast<size_t>(ids[handledIndex]) == 60000 * nodeId) {
                     ++handledIndex;
@@ -116,7 +116,7 @@ namespace Tools {
             }
 
             nodeId = 1;
-            for (NodeGraph::NodeBase *node : graph.nodes() | std::views::transform(projectionUniquePtrToPtr)) {
+            for (Behavior::NodeGraph::NodeBase *node : graph.nodes() | std::views::transform(projectionUniquePtrToPtr)) {
                 NodeLinks(node, nodeId);
                 ++nodeId;
             }
@@ -132,9 +132,9 @@ namespace Tools {
                 if (!recenter && selectedNodes[i] != newSelectedNodes[i])
                     recenter = true;
                 uint32_t nodeId = static_cast<size_t>(newSelectedNodes[i]) / 60000;
-                const NodeGraph::NodeBase *node = graph.node(nodeId);
+                const Behavior::NodeGraph::NodeBase *node = graph.node(nodeId);
                 if (node && node->flowInGroupCount() > 0 && node->flowInCount(0) > 0) {
-                    for (NodeGraph::Pin pin : node->flowInSources(0, 0)) {
+                    for (Behavior::NodeGraph::Pin pin : node->flowInSources(0, 0)) {
                         ed::Flow(60000 * pin.mNode + 6000 * pin.mGroup + 1001 + pin.mIndex);
                     }
                 }

@@ -16,13 +16,13 @@
 
 #include "behaviortool.h"
 
-#include "Madgine/behavior.h"
+#include "Madgine/behavior/behavior.h"
 
-#include "Madgine/behaviorlist.h"
+#include "Madgine/behavior/behaviorlist.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
 
-#include "Madgine/behaviorcollector.h"
+#include "Madgine/behavior/behaviorcollector.h"
 
 UNIQUECOMPONENT(Engine::Tools::BehaviorTool);
 
@@ -35,7 +35,7 @@ SERIALIZETABLE_END(Engine::Tools::BehaviorTool)
 namespace Engine {
 namespace Tools {
 
-    const Debug::DebugLocation *visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const CoroutineLocation &location, const Debug::DebugLocation *inlineLocation)
+    const Debug::DebugLocation *visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::CoroutineLocation &location, const Debug::DebugLocation *inlineLocation)
     {
         const char *name = "<unknown>";
 #ifndef NDEBUG
@@ -64,7 +64,7 @@ namespace Tools {
 
         mInspector = &getTool<Inspector>();
 
-        mInspector->addPreviewDefinition<BehaviorList>([this](BehaviorList *list) {
+        mInspector->addPreviewDefinition<Behavior::BehaviorList>([this](Behavior::BehaviorList *list) {
             return drawBehaviorList(*list);
         });
 
@@ -81,9 +81,9 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    bool BehaviorTool::drawBehaviorList(BehaviorList &list)
+    bool BehaviorTool::drawBehaviorList(Behavior::BehaviorList &list)
     {
-        return std::erase_if(list.mEntries, [this](BehaviorList::Entry &entry) {
+        return std::erase_if(list.mEntries, [this](Behavior::BehaviorList::Entry &entry) {
             ImGui::BeginGroupPanel(entry.mHandle.name().data());
             ImGui::BeginTable("Entry", 2, ImGuiTableFlags_Resizable);
             mInspector->drawMembers(entry.mParameters.customScopePtr());
@@ -109,13 +109,13 @@ namespace Tools {
     {
     }
 
-    BehaviorHandle BehaviorSelector()
+    Behavior::BehaviorHandle BehaviorSelector()
     {
-        BehaviorHandle result;
+        Behavior::BehaviorHandle result;
 
-        for (auto [name, index] : BehaviorFactoryRegistry::sComponentsByName()) {
+        for (auto [name, index] : Behavior::BehaviorFactoryRegistry::sComponentsByName()) {
             if (ImGui::BeginMenu(name.data())) {
-                const BehaviorFactoryBase *factory = BehaviorFactoryRegistry::get(index).mFactory;
+                const Behavior::BehaviorFactoryBase *factory = Behavior::BehaviorFactoryRegistry::get(index).mFactory;
                 for (std::string_view name : factory->names()) {
                     if (ImGui::MenuItem(name.data())) {
                         result = { index, std::string { name } };

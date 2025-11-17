@@ -4,6 +4,7 @@
 #include "../nodecollector.h"
 
 namespace Engine {
+namespace Behavior {
 namespace NodeGraph {
 
     struct MADGINE_NODEGRAPH_EXPORT AccessorNode : Serialize::VirtualData<AccessorNode, VirtualScope<AccessorNode, NodeBase>> {
@@ -38,5 +39,6 @@ namespace NodeGraph {
         std::string mFullClassName;
     };
 
+}
 }
 }

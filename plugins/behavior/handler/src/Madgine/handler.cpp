@@ -1,6 +1,6 @@
 #include "handlerlib.h"
 
-#include "Madgine/behavior.h"
+#include "Madgine/behavior/behavior.h"
 #include "Madgine/window/mainwindow.h"
 #include "handler.h"
 #include "handlermanager.h"
@@ -9,56 +9,59 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-DEFINE_UNIQUE_COMPONENT(Engine, Handler)
+DEFINE_UNIQUE_COMPONENT(Engine::Behavior, Handler)
 
-METATABLE_BEGIN(Engine::HandlerBase)
+METATABLE_BEGIN(Engine::Behavior::HandlerBase)
 READONLY_PROPERTY(Lifetime, lifetimeBase)
-METATABLE_END(Engine::HandlerBase)
+METATABLE_END(Engine::Behavior::HandlerBase)
 
 namespace Engine {
-HandlerBase::HandlerBase(HandlerManager &ui)
-    : mUI(ui)
-    , mLifetime(&ui.lifetime())
-{
-}
+namespace Behavior {
 
-HandlerBase &HandlerBase::getHandler(size_t i)
-{
-    return mUI.getHandler(i);
-}
+    HandlerBase::HandlerBase(HandlerManager &ui)
+        : mUI(ui)
+        , mLifetime(&ui.lifetime())
+    {
+    }
 
-Threading::Task<bool> HandlerBase::init()
-{
-    co_return true;
-}
+    HandlerBase &HandlerBase::getHandler(size_t i)
+    {
+        return mUI.getHandler(i);
+    }
 
-Threading::Task<void> HandlerBase::finalize()
-{
-    co_return;
-}
+    Threading::Task<bool> HandlerBase::init()
+    {
+        co_return true;
+    }
 
-void HandlerBase::onMouseVisibilityChanged(bool b)
-{
-}
+    Threading::Task<void> HandlerBase::finalize()
+    {
+        co_return;
+    }
 
-void HandlerBase::startLifetime()
-{
-    mUI.lifetime().attach(mLifetime);
-}
+    void HandlerBase::onMouseVisibilityChanged(bool b)
+    {
+    }
 
-void HandlerBase::endLifetime()
-{
-    mLifetime.end();
-}
+    void HandlerBase::startLifetime()
+    {
+        mUI.lifetime().attach(mLifetime);
+    }
 
-Threading::TaskQueue *HandlerBase::viewTaskQueue() const
-{
-    return mUI.viewTaskQueue();
-}
+    void HandlerBase::endLifetime()
+    {
+        mLifetime.end();
+    }
 
-Debug::DebuggableLifetimeBase &HandlerBase::lifetimeBase()
-{
-    return mLifetime;
-}
+    Threading::TaskQueue *HandlerBase::viewTaskQueue() const
+    {
+        return mUI.viewTaskQueue();
+    }
 
+    Debug::DebuggableLifetimeBase &HandlerBase::lifetimeBase()
+    {
+        return mLifetime;
+    }
+
+}
 }

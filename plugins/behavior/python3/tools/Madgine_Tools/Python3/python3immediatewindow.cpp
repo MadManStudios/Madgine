@@ -50,9 +50,9 @@ UNIQUECOMPONENT(Engine::Tools::Python3ImmediateWindow)
 namespace Engine {
 namespace Tools {
 
-    const Debug::DebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Scripting::Python3::Python3DebugLocation &location, const Debug::DebugLocation *inlineLocation)
+    const Debug::DebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3DebugLocation &location, const Debug::DebugLocation *inlineLocation)
     {
-        Scripting::Python3::Python3Lock lock;
+        Behavior::Python3::Python3Lock lock;
         ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode(location.mFrame)->co_filename));
         if (ImGui::TreeNode("Code")) {
 
@@ -61,9 +61,9 @@ namespace Tools {
                 ImGui::TableSetupColumn("Line", 0);
                 ImGui::TableSetupColumn("Source", ImGuiTableColumnFlags_WidthStretch);
 
-                Scripting::Python3::PyModulePtr inspect { "inspect" };
-                Scripting::Python3::PyObjectPtr sourcelines = PyObject_CallFunctionObjArgs(inspect.get("getsourcelines"), location.mFrame, NULL);
-                Scripting::Python3::PyListPtr sources = Scripting::Python3::PyListPtr::fromBorrowed(PyTuple_GetItem(sourcelines, 0));
+                Behavior::Python3::PyModulePtr inspect { "inspect" };
+                Behavior::Python3::PyObjectPtr sourcelines = PyObject_CallFunctionObjArgs(inspect.get("getsourcelines"), location.mFrame, NULL);
+                Behavior::Python3::PyListPtr sources = Behavior::Python3::PyListPtr::fromBorrowed(PyTuple_GetItem(sourcelines, 0));
                 size_t baseLine = PyLong_AsLong(PyTuple_GetItem(sourcelines, 1));
 
                 ImGui::PushFont(view.getTool<TextEditor>().font());
@@ -113,7 +113,7 @@ namespace Tools {
 
         Debug::Debugger::getSingleton().addListener(this);
 
-        mEnv = &Scripting::Python3::Python3Environment::getSingleton();
+        mEnv = &Behavior::Python3::Python3Environment::getSingleton();
 
         co_return co_await ToolBase::init();
     }
@@ -150,7 +150,7 @@ namespace Tools {
     bool Python3ImmediateWindow::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line)
     {
 
-        const Scripting::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Scripting::Python3::Python3DebugLocation *>(&location);
+        const Behavior::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Behavior::Python3::Python3DebugLocation *>(&location);
 
         if (pyLocation) {
             const Filesystem::Path &path = pyLocation->file();
@@ -169,7 +169,7 @@ namespace Tools {
 
     void Python3ImmediateWindow::onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type)
     {
-        const Scripting::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Scripting::Python3::Python3DebugLocation *>(context.currentLocation());
+        const Behavior::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Behavior::Python3::Python3DebugLocation *>(context.currentLocation());
 
         if (pyLocation) {
             const Filesystem::Path &path = pyLocation->file();

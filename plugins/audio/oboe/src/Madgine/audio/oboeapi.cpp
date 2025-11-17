@@ -22,7 +22,7 @@ UNIQUECOMPONENT(Engine::Audio::OboeApi)
 namespace Engine {
 namespace Audio {
 
-    struct PlaybackState : BehaviorReceiver {
+    struct PlaybackState : Behavior::BehaviorReceiver {
         PlaybackState(AudioLoader::Handle buffer, OboeApi *api)
             : mBuffer(std::move(buffer))
             , mApi(api)
@@ -39,8 +39,8 @@ namespace Audio {
     };
 
     template <typename Rec>
-    struct PlaybackStateImpl : VirtualBehaviorState<Rec, PlaybackState> {
-        using VirtualBehaviorState<Rec, PlaybackState>::VirtualBehaviorState;
+    struct PlaybackStateImpl : Behavior::VirtualBehaviorState<Rec, PlaybackState> {
+        using Behavior::VirtualBehaviorState<Rec, PlaybackState>::VirtualBehaviorState;
     };
 
     struct PlaybackSender : Execution::base_sender {
@@ -167,7 +167,7 @@ namespace Audio {
         return "Oboe";
     }
 
-    Behavior OboeApi::playSound(AudioLoader::Handle buffer)
+    Behavior::Behavior OboeApi::playSound(AudioLoader::Handle buffer)
     {
         return PlaybackSender { {}, buffer, this } | Resources::with_handle(AudioLoader::Handle { buffer });
     }

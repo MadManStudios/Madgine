@@ -5,7 +5,7 @@
 #include "../python3env.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         Python3Lock::Python3Lock(Log::Log *log, Execution::StopToken st)

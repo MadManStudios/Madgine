@@ -4,21 +4,21 @@
 
 #include "../widgetmanager.h"
 
-#include "Madgine/awaitables/awaitablesender.h"
+#include "Madgine/behavior/awaitables/awaitablesender.h"
 
-#include "Madgine/nativebehaviorcollector.h"
+#include "Madgine/behavior/nativebehaviorcollector.h"
 
-#include "Madgine/awaitables/awaitablebinding.h"
+#include "Madgine/behavior/awaitables/awaitablebinding.h"
 
 NATIVE_BEHAVIOR(Yield_Frame, Engine::Widgets::yield_frame)
-NATIVE_BEHAVIOR(Wait_Frame, Engine::Widgets::wait_frame, Engine::InputParameter<"Duration", std::chrono::steady_clock::duration>)
-NATIVE_BEHAVIOR(Animate_Move, Engine::Widgets::animate_move, Engine::InputParameter<"Distance", Engine::Matrix3>, Engine::InputParameter<"Duration", std::chrono::nanoseconds>)
-NATIVE_BEHAVIOR(Animate_Opacity, Engine::Widgets::animate_opacity, Engine::InputParameter<"Delta", float>, Engine::InputParameter<"Duration", std::chrono::nanoseconds>)
+NATIVE_BEHAVIOR(Wait_Frame, Engine::Widgets::wait_frame, Engine::Behavior::InputParameter<"Duration", std::chrono::steady_clock::duration>)
+NATIVE_BEHAVIOR(Animate_Move, Engine::Widgets::animate_move, Engine::Behavior::InputParameter<"Distance", Engine::Matrix3>, Engine::Behavior::InputParameter<"Duration", std::chrono::nanoseconds>)
+NATIVE_BEHAVIOR(Animate_Opacity, Engine::Widgets::animate_opacity, Engine::Behavior::InputParameter<"Delta", float>, Engine::Behavior::InputParameter<"Duration", std::chrono::nanoseconds>)
 
 namespace Engine {
 namespace Widgets {
 
-    Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
+    Behavior::Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
     {
         auto widget = co_await *widgetBinding;
 
@@ -35,7 +35,7 @@ namespace Widgets {
         widget->setPos(end);
     }
 
-    Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
+    Behavior::Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
     {
         auto widget = co_await *widgetBinding;
 

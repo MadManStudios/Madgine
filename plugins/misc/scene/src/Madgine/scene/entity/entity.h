@@ -14,7 +14,7 @@
 
 #include "Interfaces/log/logsenders.h"
 
-#include "Madgine/behaviorlist.h"
+#include "Madgine/behavior/behaviorlist.h"
 
 #include "entitycomponenthandle.h"
 
@@ -40,7 +40,7 @@ namespace Scene {
 
             EntityPtr pointer();
 
-            Debug::DebuggableLifetime<get_named_d> &lifetime();
+            Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
 
             const std::string &key() const;
 
@@ -108,7 +108,7 @@ namespace Scene {
             SceneContainer &container();
             const SceneContainer &container() const;
 
-            BehaviorList &behaviors();
+            Behavior::BehaviorList &behaviors();
 
             friend struct SyncableEntityComponentBase;
             friend struct Scene::SceneContainer;
@@ -127,9 +127,9 @@ namespace Scene {
 
             SceneContainer &mContainer;
 
-            DEBUGGABLE_LIFETIME(mLifetime, get_named_d);
+            DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
 
-            BehaviorList mBehaviors;
+            Behavior::BehaviorList mBehaviors;
         };
 
     }

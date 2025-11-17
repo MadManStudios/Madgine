@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         template <typename T, typename V>

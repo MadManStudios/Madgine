@@ -34,12 +34,12 @@
 
 #include "python3lock.h"
 
-#include "Madgine/behaviorreceiver.h"
+#include "Madgine/behavior/behaviorreceiver.h"
 
 #include "pyexecution.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         struct PyObjectInstance : ObjectInstance {
@@ -312,7 +312,7 @@ namespace Scripting {
             return nullptr;
         }
 
-        PyObject *Scripting::Python3::toPyObject(const KeyValueBinding &b)
+        PyObject *toPyObject(const KeyValueBinding &b)
         {
             PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <KeyValueBinding> yet");
             return nullptr;

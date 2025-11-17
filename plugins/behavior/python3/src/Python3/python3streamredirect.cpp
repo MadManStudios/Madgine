@@ -8,12 +8,12 @@
 
 #include "Interfaces/log/log.h"
 
-METATABLE_BEGIN(Engine::Scripting::Python3::Python3StreamRedirect)
+METATABLE_BEGIN(Engine::Behavior::Python3::Python3StreamRedirect)
 FUNCTION(write, text)
-METATABLE_END(Engine::Scripting::Python3::Python3StreamRedirect)
+METATABLE_END(Engine::Behavior::Python3::Python3StreamRedirect)
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         Python3StreamRedirect::Python3StreamRedirect(Log::Log *log)
@@ -34,7 +34,7 @@ namespace Scripting {
                 mOldStreams[name] = PySys_GetObject(name.data()); // borrowed
             }
 
-            PySys_SetObject(name.data(), Scripting::Python3::toPyObject(ScopePtr { this }));
+            PySys_SetObject(name.data(), toPyObject(ScopePtr { this }));
         }
 
         void Python3StreamRedirect::reset(std::string_view name)

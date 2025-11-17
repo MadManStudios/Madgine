@@ -1,31 +1,33 @@
 #pragma once
 
 namespace Engine {
-namespace NodeGraph {
+namespace Behavior {
+    namespace NodeGraph {
 
-    struct CodeGeneratorData {
-        virtual ~CodeGeneratorData() = default;
-    };
+        struct CodeGeneratorData {
+            virtual ~CodeGeneratorData() = default;
+        };
 
-    struct MADGINE_NODEGRAPH_EXPORT CodeGenerator {
+        struct MADGINE_NODEGRAPH_EXPORT CodeGenerator {
 
-        CodeGenerator(const NodeGraph &graph);
-        CodeGenerator(const CodeGenerator &) = delete;
-        virtual ~CodeGenerator() = default;
+            CodeGenerator(const NodeGraph &graph);
+            CodeGenerator(const CodeGenerator &) = delete;
+            virtual ~CodeGenerator() = default;
 
-        CodeGenerator &operator=(const CodeGenerator &) = delete;
+            CodeGenerator &operator=(const CodeGenerator &) = delete;
 
-        void generate(uint32_t flowIn, const NodeBase *startNode = nullptr);
-        void generate(Pin pin);
+            void generate(uint32_t flowIn, const NodeBase *startNode = nullptr);
+            void generate(Pin pin);
 
-        virtual CodeGen::Statement read(Pin pin);
+            virtual CodeGen::Statement read(Pin pin);
 
-        virtual CodeGen::File &file() = 0;
+            virtual CodeGen::File &file() = 0;
 
-    protected:
-        const NodeGraph &mGraph;    
-        std::vector<std::unique_ptr<CodeGeneratorData>> mData;        
-    };
+        protected:
+            const NodeGraph &mGraph;
+            std::vector<std::unique_ptr<CodeGeneratorData>> mData;
+        };
 
+    }
 }
 }

@@ -2,8 +2,8 @@
 
 #include "Meta/math/matrix3.h"
 
-#include "Madgine/behaviorhandle.h"
-#include "Madgine/parametertuple.h"
+#include "Madgine/behavior/behaviorhandle.h"
+#include "Madgine/behavior/parametertuple.h"
 
 namespace Engine {
 namespace Tools {
@@ -43,9 +43,9 @@ namespace Tools {
         std::vector<bool> mBoolBuffer;
 
         struct {
-            Threading::TaskFuture<ParameterTuple> mFuture;
-            ParameterTuple mParameters;
-            BehaviorHandle mHandle;
+            Threading::TaskFuture<Behavior::ParameterTuple> mFuture;
+            Behavior::ParameterTuple mParameters;
+            Behavior::BehaviorHandle mHandle;
         } mPendingBehavior;
     };
 

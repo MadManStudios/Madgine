@@ -17,7 +17,7 @@ METATABLE_END(ClickBrick::MainMenuHandler)
 
 namespace ClickBrick {
 
-MainMenuHandler::MainMenuHandler(Engine::HandlerManager &ui)
+MainMenuHandler::MainMenuHandler(Engine::Behavior::HandlerManager &ui)
     : Engine::Widgets::WidgetHandler<MainMenuHandler>(ui, "MainMenu")
 {
 }

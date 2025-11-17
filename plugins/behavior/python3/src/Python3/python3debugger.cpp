@@ -27,11 +27,11 @@
 #    include <internal/pycore_frame.h>
 #endif
 
-METATABLE_BEGIN(Engine::Scripting::Python3::Python3Debugger)
-METATABLE_END(Engine::Scripting::Python3::Python3Debugger)
+METATABLE_BEGIN(Engine::Behavior::Python3::Python3Debugger)
+METATABLE_END(Engine::Behavior::Python3::Python3Debugger)
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         bool sSuspending = false;

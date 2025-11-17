@@ -33,10 +33,10 @@ namespace Tools {
     ImRect BeginNodeEditor(ed::EditorContext *editor, const ImVec2 &size = ImVec2(0, 0));
     void EndNodeEditor(ImRect oldViewport);
 
-    std::optional<ExtendedValueTypeDesc> BeginNode(const NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<NodeGraph::PinDesc> dragPin = {}, std::optional<ExtendedValueTypeDesc> dragType = {});
+    std::optional<ExtendedValueTypeDesc> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin = {}, std::optional<ExtendedValueTypeDesc> dragType = {});
     void EndNode();
 
-    void NodeLinks(const NodeGraph::NodeBase *node, uint32_t nodeId);
+    void NodeLinks(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId);
 
     enum class IconType : ImU32 { Flow,
         Circle,

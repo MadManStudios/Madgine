@@ -34,11 +34,11 @@
 
 #include "Interfaces/input/inputevents.h"
 
-#include "Madgine/behaviorcollector.h"
+#include "Madgine/behavior/behaviorcollector.h"
 
 #include "Madgine_Tools/debugger/debuggerview.h"
 
-#include "Madgine/parametertuple.h"
+#include "Madgine/behavior/parametertuple.h"
 
 #include "Madgine_Tools/behaviortool.h"
 
@@ -396,13 +396,13 @@ namespace Tools {
                     ImGui::EndMenu();
                 }
                 if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
-                    if (BehaviorHandle behavior = BehaviorSelector()) {
+                    if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
                         entity.behaviors().addBehavior(std::move(behavior));
                     }
                     ImGui::EndMenu();
                 }
                 if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Temp Behavior")) {
-                    if (BehaviorHandle behavior = BehaviorSelector()) {
+                    if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
                         mPendingBehavior.mTargetEntity = entity.pointer();
                         mPendingBehavior.mHandle = behavior;
                         mPendingBehavior.mFuture = behavior.createParameters();

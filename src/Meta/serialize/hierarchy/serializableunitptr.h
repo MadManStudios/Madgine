@@ -8,7 +8,6 @@
 #include "../primitivetypes.h"
 
 namespace Engine {
-struct ParameterTuple;
 namespace Serialize {
 
     DERIVE_FUNCTION(customUnitPtr)

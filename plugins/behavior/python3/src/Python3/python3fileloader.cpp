@@ -18,35 +18,35 @@
 
 #include <iostream>
 
-#include "Madgine/behavior.h"
+#include "Madgine/behavior/behavior.h"
 
-#include "Madgine/parametertuple.h"
+#include "Madgine/behavior/parametertuple.h"
 
 #include "util/pyexecution.h"
 
 #include "Generic/execution/algorithm.h"
 
-UNIQUECOMPONENT(Engine::Scripting::Python3::Python3FileLoader)
+UNIQUECOMPONENT(Engine::Behavior::Python3::Python3FileLoader)
 
-METATABLE_BEGIN(Engine::Scripting::Python3::Python3FileLoader)
+METATABLE_BEGIN(Engine::Behavior::Python3::Python3FileLoader)
 MEMBER(mResources)
 FUNCTION(find_spec, name, import_path, target_module)
 FUNCTION(create_module, spec)
 FUNCTION(exec_module, module)
-METATABLE_END(Engine::Scripting::Python3::Python3FileLoader)
+METATABLE_END(Engine::Behavior::Python3::Python3FileLoader)
 
-METATABLE_BEGIN_BASE(Engine::Scripting::Python3::Python3FileLoader::Resource, Engine::Resources::ResourceBase)
-//READONLY_PROPERTY(Data, dataPtr)
-METATABLE_END(Engine::Scripting::Python3::Python3FileLoader::Resource)
+METATABLE_BEGIN_BASE(Engine::Behavior::Python3::Python3FileLoader::Resource, Engine::Resources::ResourceBase)
+// READONLY_PROPERTY(Data, dataPtr)
+METATABLE_END(Engine::Behavior::Python3::Python3FileLoader::Resource)
 
-METATABLE_BEGIN(Engine::Scripting::Python3::Python3FileLoader::Handle)
-//READONLY_PROPERTY(Data, dataPtr)
-METATABLE_END(Engine::Scripting::Python3::Python3FileLoader::Handle)
+METATABLE_BEGIN(Engine::Behavior::Python3::Python3FileLoader::Handle)
+// READONLY_PROPERTY(Data, dataPtr)
+METATABLE_END(Engine::Behavior::Python3::Python3FileLoader::Handle)
 
-BEHAVIOR_FACTORY(Python3, Engine::Scripting::Python3::Python3BehaviorFactory)
+BEHAVIOR_FACTORY(Python3, Engine::Behavior::Python3::Python3BehaviorFactory)
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         Python3FileLoader::Python3FileLoader()

@@ -15,15 +15,15 @@
 #include "util/math/pyvector4.h"
 #include "util/pyapifunction.h"
 #include "util/pyboundapifunction.h"
+#include "util/pyenum.h"
+#include "util/pyflags.h"
 #include "util/pyobjectutil.h"
 #include "util/pyownedscopeptr.h"
 #include "util/pyscopeiterator.h"
 #include "util/pyscopeptr.h"
+#include "util/pysender.h"
 #include "util/pyvirtualiterator.h"
 #include "util/pyvirtualrange.h"
-#include "util/pysender.h"
-#include "util/pyflags.h"
-#include "util/pyenum.h"
 
 #include "python3fileloader.h"
 
@@ -46,13 +46,13 @@
 #    include "internal/pycore_frame.h"
 #endif
 
-UNIQUECOMPONENT(Engine::Scripting::Python3::Python3Environment)
+UNIQUECOMPONENT(Engine::Behavior::Python3::Python3Environment)
 
-METATABLE_BEGIN(Engine::Scripting::Python3::Python3Environment)
-METATABLE_END(Engine::Scripting::Python3::Python3Environment)
+METATABLE_BEGIN(Engine::Behavior::Python3::Python3Environment)
+METATABLE_END(Engine::Behavior::Python3::Python3Environment)
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         extern PyTypeObject PySuspendExceptionType;

@@ -11,13 +11,13 @@
 
 #include "../tablewidget.h"
 
-#include "Madgine/nativebehaviorcollector.h"
+#include "Madgine/behavior/nativebehaviorcollector.h"
 
 namespace Engine {
 namespace Widgets {
 
     template <typename Rec>
-    struct TempWidgetStateImpl : VirtualBehaviorState<Rec, TempWidgetState> {
+    struct TempWidgetStateImpl : Behavior::VirtualBehaviorState<Rec, TempWidgetState> {
 
         friend auto tag_invoke(Execution::visit_state_t, TempWidgetStateImpl *state, auto &&visitor)
         {
@@ -30,11 +30,11 @@ namespace Widgets {
             visitor(Execution::State::EndBlock {});
         }
 
-        using VirtualBehaviorState<Rec, TempWidgetState>::VirtualBehaviorState;
+        using Behavior::VirtualBehaviorState<Rec, TempWidgetState>::VirtualBehaviorState;
     };
 
     struct TempWidgetSender : Execution::base_sender {
-        using result_type = BehaviorError;
+        using result_type = Behavior::BehaviorError;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 
@@ -54,15 +54,15 @@ namespace Widgets {
         WidgetLoader::Handle mDesc;
         Matrix3 mPos;
         Matrix3 mSize;
-        Behavior mBehavior;
+        Behavior::Behavior mBehavior;
     };
 
-    Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior behavior)
+    Behavior::Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior::Behavior behavior)
     {
         return TempWidgetSender { {}, WidgetLoader::Handle { desc }, pos, size, std::move(behavior) } | Resources::with_handle(WidgetLoader::Handle { desc });
     }
 
-    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior behavior)
+    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior::Behavior behavior)
         : mDesc(std::move(desc))
         , mState(Execution::connect(std::move(behavior), receiver { { *this }, *this }))
         , mPos(std::move(pos))
@@ -77,7 +77,7 @@ namespace Widgets {
     void TempWidgetState::start()
     {
         WidgetManager *mgr;
-        bool result = get_named<"WidgetManager", WidgetManager*>(*this, mgr);
+        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         assert(!mWidget);
@@ -101,17 +101,17 @@ namespace Widgets {
     void TempWidgetState::receiver::set_value(ArgumentList args)
     {
         WidgetManager *mgr;
-        bool result = get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_value(std::move(args));
     }
 
-    void TempWidgetState::receiver::set_error(BehaviorError error)
+    void TempWidgetState::receiver::set_error(Behavior::BehaviorError error)
     {
         WidgetManager *mgr;
-        bool result = get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -121,7 +121,7 @@ namespace Widgets {
     void TempWidgetState::receiver::set_done()
     {
         WidgetManager *mgr;
-        bool result = get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -131,4 +131,4 @@ namespace Widgets {
 }
 }
 
-NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::InputParameter<"Class", Engine::Widgets::WidgetLoader::Handle>, Engine::InputParameter<"Position", Engine::Matrix3>, Engine::InputParameter<"Size", Engine::Matrix3>, Engine::SubBehavior)
+NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::Behavior::InputParameter<"Class", Engine::Widgets::WidgetLoader::Handle>, Engine::Behavior::InputParameter<"Position", Engine::Matrix3>, Engine::Behavior::InputParameter<"Size", Engine::Matrix3>, Engine::Behavior::SubBehavior)

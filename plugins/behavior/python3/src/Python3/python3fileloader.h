@@ -8,10 +8,10 @@
 
 #include "Meta/keyvalue/functiontable.h"
 
-#include "Madgine/behaviorcollector.h"
+#include "Madgine/behavior/behaviorcollector.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         struct MADGINE_PYTHON3_EXPORT Python3FileLoader : Resources::ResourceLoader<Python3FileLoader, PyModulePtr, std::list<Placeholder<0>>> {

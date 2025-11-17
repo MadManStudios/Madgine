@@ -8,7 +8,7 @@
 
 #include "audioloader.h"
 
-#include "Madgine/behavior.h"
+#include "Madgine/behavior/behavior.h"
 
 namespace Engine {
 namespace Audio {
@@ -19,8 +19,8 @@ namespace Audio {
 
         AudioApi(Root::Root &root);
     
-        Behavior playSound(std::string_view name);
-        virtual Behavior playSound(AudioLoader::Handle buffer) = 0;
+        Behavior::Behavior playSound(std::string_view name);
+        virtual Behavior::Behavior playSound(AudioLoader::Handle buffer) = 0;
     };
 
     template <typename T>

@@ -7,7 +7,7 @@ namespace ClickBrick {
     struct GameOverHandler : Engine::Widgets::WidgetHandler<GameOverHandler> {
         SERIALIZABLEUNIT(GameOverHandler)
 
-        GameOverHandler(Engine::HandlerManager &ui);
+        GameOverHandler(Engine::Behavior::HandlerManager &ui);
 
         virtual std::string_view key() const override;
 

@@ -30,7 +30,7 @@ namespace Scene {
         void startLifetime();
         void endLifetime();
 
-        Debug::DebuggableLifetime<get_named_d> &lifetime();
+        Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
 
         Entity::EntityPtr findEntity(const std::string &name);
         void remove(Entity::Entity *e);
@@ -53,7 +53,7 @@ namespace Scene {
     private:
         friend struct Entity::Entity;
 
-        DEBUGGABLE_LIFETIME(mLifetime, get_named_d);
+        DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
 
         SceneManager &mManager;
 

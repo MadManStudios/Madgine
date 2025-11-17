@@ -4,7 +4,7 @@
 #include "util/pyobjectptr.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         struct MADGINE_PYTHON3_EXPORT Python3DebugLocation : Debug::DebugLocation {            

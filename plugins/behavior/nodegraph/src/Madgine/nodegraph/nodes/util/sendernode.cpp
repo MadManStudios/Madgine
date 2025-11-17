@@ -8,20 +8,20 @@
 
 #include "functors.h"
 
-DEFAULT_SENDER_NODE_BEGIN(ForEach, Engine::Execution::for_each, std::vector<int>, Engine::NodeGraph::NodeRouter<1, Engine::ValueType>)
+DEFAULT_SENDER_NODE_BEGIN(ForEach, Engine::Execution::for_each, std::vector<int>, Engine::Behavior::NodeGraph::NodeRouter<1, Engine::ValueType>)
 ARGUMENT(Arguments, 0)
 SENDER_NODE_END(ForEach)
 
-DEFAULT_SENDER_NODE_BEGIN(LetValue, Engine::Execution::let_value, Engine::NodeGraph::NodeReader<Engine::ValueType>, Engine::NodeGraph::NodeRouter<1, Engine::ValueType>)
+DEFAULT_SENDER_NODE_BEGIN(LetValue, Engine::Execution::let_value, Engine::Behavior::NodeGraph::NodeReader<Engine::ValueType>, Engine::Behavior::NodeGraph::NodeRouter<1, Engine::ValueType>)
 SENDER_NODE_END(LetValue)
 
-CONSTANT_SENDER_NODE_BEGIN(Add, Engine::Execution::reduce_stream, Engine::NodeGraph::NodeStream<int>, std::integral_constant<int, 0>, Engine::NodeGraph::Add)
+CONSTANT_SENDER_NODE_BEGIN(Add, Engine::Execution::reduce_stream, Engine::Behavior::NodeGraph::NodeStream<int>, std::integral_constant<int, 0>, Engine::Behavior::NodeGraph::Add)
 SENDER_NODE_END(Add)
 
-CONSTANT_SENDER_NODE_BEGIN(Divide, Engine::Execution::reduce_stream, Engine::NodeGraph::NodeStream<int>, std::integral_constant<int, 1>, Engine::NodeGraph::Divide)
+CONSTANT_SENDER_NODE_BEGIN(Divide, Engine::Execution::reduce_stream, Engine::Behavior::NodeGraph::NodeStream<int>, std::integral_constant<int, 1>, Engine::Behavior::NodeGraph::Divide)
 SENDER_NODE_END(Divide)
 
-DEFAULT_SENDER_NODE_BEGIN(Log, Engine::Execution::then, Engine::NodeGraph::NodeReader<Engine::ValueType>, Engine::NodeGraph::Log)
+DEFAULT_SENDER_NODE_BEGIN(Log, Engine::Execution::then, Engine::Behavior::NodeGraph::NodeReader<Engine::ValueType>, Engine::Behavior::NodeGraph::Log)
 SENDER_NODE_END(Log)
 
 CONSTANT_SENDER_NODE_BEGIN(Just, Engine::Execution::just, Engine::ValueType);
@@ -41,16 +41,16 @@ CONSTANT_VARIABLE_ACCESS_SENDER_NODE_BEGIN(ReadVar, Engine::Execution::read_var<
 DYNAMIC_NAME(Name)
 SENDER_NODE_END(ReadVar)*/
 
-CONSTANT_SENDER_NODE_BEGIN(Vector3To4, Engine::Execution::then, Engine::NodeGraph::NodeReader<Engine::Vector3, float>, Engine::NodeGraph::Vector3To4)
+CONSTANT_SENDER_NODE_BEGIN(Vector3To4, Engine::Execution::then, Engine::Behavior::NodeGraph::NodeReader<Engine::Vector3, float>, Engine::Behavior::NodeGraph::Vector3To4)
 SENDER_NODE_END(Vector3To4)
 
-CONSTANT_SENDER_NODE_BEGIN(BreakVector3, Engine::Execution::then, Engine::NodeGraph::NodeReader<Engine::Vector3>, Engine::NodeGraph::BreakVector3)
+CONSTANT_SENDER_NODE_BEGIN(BreakVector3, Engine::Execution::then, Engine::Behavior::NodeGraph::NodeReader<Engine::Vector3>, Engine::Behavior::NodeGraph::BreakVector3)
 SENDER_NODE_END(BreakVector3)
 
-CONSTANT_SENDER_NODE_BEGIN(BreakVector4, Engine::Execution::then, Engine::NodeGraph::NodeReader<Engine::Vector4>, Engine::NodeGraph::BreakVector4)
+CONSTANT_SENDER_NODE_BEGIN(BreakVector4, Engine::Execution::then, Engine::Behavior::NodeGraph::NodeReader<Engine::Vector4>, Engine::Behavior::NodeGraph::BreakVector4)
 SENDER_NODE_END(BreakVector4)
 
-CONSTANT_SENDER_NODE_BEGIN(MakeVector3, Engine::Execution::then, Engine::NodeGraph::NodeReader<float, float, float>, Engine::NodeGraph::MakeVector3)
+CONSTANT_SENDER_NODE_BEGIN(MakeVector3, Engine::Execution::then, Engine::Behavior::NodeGraph::NodeReader<float, float, float>, Engine::Behavior::NodeGraph::MakeVector3)
 SENDER_NODE_END(MakeVector3)
 
 struct connect_helper_t {
@@ -64,7 +64,7 @@ struct connect_helper_t {
     }
 };
 
-DEFAULT_SENDER_NODE_BEGIN(Connect, connect_helper_t {}, Engine::NodeGraph::NodeReader<Engine::KeyValueSender>, Engine::NodeGraph::NodeAlgorithm<1>)
+DEFAULT_SENDER_NODE_BEGIN(Connect, connect_helper_t {}, Engine::Behavior::NodeGraph::NodeReader<Engine::KeyValueSender>, Engine::Behavior::NodeGraph::NodeAlgorithm<1>)
 SENDER_NODE_END(Connect)
 
 struct stop_when_helper_t {
@@ -76,10 +76,10 @@ struct stop_when_helper_t {
     }
 };
 
-DEFAULT_SENDER_NODE_BEGIN(StopWhen, stop_when_helper_t {}, Engine::NodeGraph::NodeReader<Engine::KeyValueSender>, Engine::NodeGraph::NodeSender<1>)
+DEFAULT_SENDER_NODE_BEGIN(StopWhen, stop_when_helper_t {}, Engine::Behavior::NodeGraph::NodeReader<Engine::KeyValueSender>, Engine::Behavior::NodeGraph::NodeSender<1>)
 SENDER_NODE_END(StopWhen)
 
-DEFAULT_SENDER_NODE_BEGIN(WhenAll, Engine::Execution::when_all_range, Engine::NodeGraph::NodeRange<1>)
+DEFAULT_SENDER_NODE_BEGIN(WhenAll, Engine::Execution::when_all_range, Engine::Behavior::NodeGraph::NodeRange<1>)
 SENDER_NODE_END(WhenAll)
 
 /*using SequenceNode = Engine::NodeGraph::SenderNode<Engine::Execution::sequence, false, Engine::type_pack<>, Engine::type_pack<>, Engine::Execution::recursive<Engine::NodeGraph::NodeSender<1>>>;

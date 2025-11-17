@@ -3,7 +3,7 @@
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 
-#include "Madgine/behaviorhandle.h"
+#include "Madgine/behavior/behaviorhandle.h"
 
 namespace Engine {
 namespace Tools {
@@ -15,7 +15,7 @@ namespace Tools {
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
 
-        bool drawBehaviorList(BehaviorList &list);
+        bool drawBehaviorList(Behavior::BehaviorList &list);
 
         void renderMenu() override;
 
@@ -25,7 +25,7 @@ namespace Tools {
         Inspector *mInspector = nullptr;
     };
 
-    MADGINE_BEHAVIOR_TOOLS_EXPORT BehaviorHandle BehaviorSelector();
+    MADGINE_BEHAVIOR_TOOLS_EXPORT Behavior::BehaviorHandle BehaviorSelector();
 
 }
 }

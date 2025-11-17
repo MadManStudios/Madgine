@@ -13,7 +13,7 @@
 
 #include "../scenemanager.h"
 
-#include "Madgine/nativebehaviorcollector.h"
+#include "Madgine/behavior/nativebehaviorcollector.h"
 
 namespace Engine {
 
@@ -21,7 +21,7 @@ namespace Scene {
     namespace Entity {
 
         template <typename Rec>
-        struct AnimationStateImpl : VirtualBehaviorState<Rec, AnimationState> {
+        struct AnimationStateImpl : Behavior::VirtualBehaviorState<Rec, AnimationState> {
 
             friend auto tag_invoke(Execution::visit_state_t, AnimationStateImpl *state, auto &&visitor)
             {
@@ -39,7 +39,7 @@ namespace Scene {
                 visitor(Execution::State::EndBlock {});
             }
 
-            using VirtualBehaviorState<Rec, AnimationState>::VirtualBehaviorState;
+            using Behavior::VirtualBehaviorState<Rec, AnimationState>::VirtualBehaviorState;
         };
 
         struct AnimationSender : Execution::base_sender {
@@ -187,23 +187,23 @@ namespace Scene {
         Entity *AnimationState::entity()
         {
             Entity *entity;
-            get_named<"Entity", Entity*>(*this, entity);
+            Behavior::get_named<"Entity", Entity *>(*this, entity);
             return entity;
         }
 
         SceneManager *AnimationState::scene()
         {
             SceneManager *scene;
-            get_named<"Scene", SceneManager*>(*this, scene);
+            Behavior::get_named<"Scene", SceneManager *>(*this, scene);
             return scene;
         }
 
-        Behavior animation(Render::AnimationLoader::Handle handle, Render::AnimationDescriptor *desc)
+        Behavior::Behavior animation(Render::AnimationLoader::Handle handle, Render::AnimationDescriptor *desc)
         {
             return AnimationSender { {}, std::move(handle), 0 };
         }
 
-        Behavior animation(Render::AnimationLoader::Handle handle, std::string_view name)
+        Behavior::Behavior animation(Render::AnimationLoader::Handle handle, std::string_view name)
         {
             auto it = std::ranges::find(handle->mAnimations, name, &Render::AnimationDescriptor::mName);
             return animation(std::move(handle), &*it);
@@ -213,4 +213,4 @@ namespace Scene {
 }
 }
 
-NATIVE_BEHAVIOR(entity_animation, Engine::Scene::Entity::animation, Engine::InputParameter<"Handle", Engine::Render::AnimationLoader::Handle>, Engine::InputParameter<"Animation", std::string>)
+NATIVE_BEHAVIOR(entity_animation, Engine::Scene::Entity::animation, Engine::Behavior::InputParameter<"Handle", Engine::Render::AnimationLoader::Handle>, Engine::Behavior::InputParameter<"Animation", std::string>)

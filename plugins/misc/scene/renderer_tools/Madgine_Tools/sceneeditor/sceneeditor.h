@@ -6,9 +6,9 @@
 
 #include "sceneview.h"
 
-#include "Madgine/parametertuple.h"
+#include "Madgine/behavior/parametertuple.h"
 
-#include "Madgine/behaviorhandle.h"
+#include "Madgine/behavior/behaviorhandle.h"
 
 namespace Engine {
 namespace Tools {
@@ -116,9 +116,9 @@ namespace Tools {
 
         struct {
             Scene::Entity::EntityPtr mTargetEntity;
-            Threading::TaskFuture<ParameterTuple> mFuture;
-            ParameterTuple mParameters;
-            BehaviorHandle mHandle;
+            Threading::TaskFuture<Behavior::ParameterTuple> mFuture;
+            Behavior::ParameterTuple mParameters;
+            Behavior::BehaviorHandle mHandle;
         } mPendingBehavior;
 
         // Settings

@@ -6,10 +6,10 @@
 
 #include "Generic/closure.h"
 
-#include "Madgine/behaviorreceiver.h"
+#include "Madgine/behavior/behaviorreceiver.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
         void setupExecution();
 

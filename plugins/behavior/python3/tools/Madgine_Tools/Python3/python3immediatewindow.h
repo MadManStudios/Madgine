@@ -29,7 +29,7 @@ namespace Tools {
         void onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type) override;
 
         bool interpret(std::string_view command) override;
-        Behavior run(std::string_view command);
+        Behavior::Behavior run(std::string_view command);
 
     private:
         std::string mCommandBuffer;
@@ -37,7 +37,7 @@ namespace Tools {
 
         std::unique_ptr<InteractivePrompt> mPrompt;
 
-        Scripting::Python3::Python3Environment *mEnv = nullptr;
+        Behavior::Python3::Python3Environment *mEnv = nullptr;
     };
 
 }

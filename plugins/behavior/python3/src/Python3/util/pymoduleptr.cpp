@@ -4,11 +4,11 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-METATABLE_BEGIN(Engine::Scripting::Python3::PyModulePtr)
-METATABLE_END(Engine::Scripting::Python3::PyModulePtr)
+METATABLE_BEGIN(Engine::Behavior::Python3::PyModulePtr)
+METATABLE_END(Engine::Behavior::Python3::PyModulePtr)
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         PyModulePtr::PyModulePtr(std::string_view name)

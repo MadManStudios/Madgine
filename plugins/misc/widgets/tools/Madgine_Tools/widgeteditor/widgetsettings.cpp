@@ -19,7 +19,7 @@
 
 #include "Madgine_Tools/behaviortool.h"
 
-#include "Madgine/behavior.h"
+#include "Madgine/behavior/behavior.h"
 
 #include "Madgine_Tools/debugger/debuggerview.h"
 
@@ -271,7 +271,7 @@ namespace Tools {
         if (ImGui::BeginPopupCompoundContextWindow()) {
 
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
-                if (BehaviorHandle behavior = BehaviorSelector()) {
+                if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
                     mPendingBehavior.mHandle = std::move(behavior);
                     mPendingBehavior.mFuture = mPendingBehavior.mHandle.createParameters();
                     mPendingBehavior.mParameters.reset();

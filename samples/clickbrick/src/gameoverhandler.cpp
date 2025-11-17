@@ -19,7 +19,7 @@ METATABLE_END(ClickBrick::GameOverHandler)
 
 namespace ClickBrick {
 
-    GameOverHandler::GameOverHandler(Engine::HandlerManager &ui)
+    GameOverHandler::GameOverHandler(Engine::Behavior::HandlerManager &ui)
     : Engine::Widgets::WidgetHandler<GameOverHandler>(ui, "GameOver")
     {
     }

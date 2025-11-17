@@ -13,7 +13,7 @@ METATABLE_END(ClickBrick::GameHandler)
 
 namespace ClickBrick {
 
-GameHandler::GameHandler(Engine::HandlerManager &ui)
+GameHandler::GameHandler(Engine::Behavior::HandlerManager &ui)
     : Engine::Widgets::WidgetHandler<GameHandler>(ui, "Ingame")
 {
 }

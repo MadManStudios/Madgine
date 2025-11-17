@@ -9,7 +9,7 @@
 #include "Madgine_Tools/resourceeditor.h"
 #include "nodegraphfile.h"
 
-#include "Madgine/behaviorhandle.h"
+#include "Madgine/behavior/behaviorhandle.h"
 
 namespace Engine {
 namespace Tools {
@@ -50,15 +50,15 @@ namespace Tools {
         void renderSelection();
 
 
-        void setDragPin(NodeGraph::PinDesc pin);
+        void setDragPin(Behavior::NodeGraph::PinDesc pin);
 
     private:
         std::unique_ptr<ed::EditorContext, void (*)(ed::EditorContext *)> mEditor = { nullptr, nullptr };
         bool mHierarchyVisible = true;
         bool mNodeDetailsVisible = true;
 
-        NodeGraph::NodeGraphLoader::Handle mGraphHandle;
-        NodeGraph::NodeGraph mGraph;
+        Behavior::NodeGraph::NodeGraphLoader::Handle mGraphHandle;
+        Behavior::NodeGraph::NodeGraph mGraph;
         Filesystem::Path mFilePath;
 
         struct NodeMessages {
@@ -71,9 +71,9 @@ namespace Tools {
 
         Vector2 mPopupPosition;
 
-        BehaviorHandle mPendingLibraryBehavior;
+        Behavior::BehaviorHandle mPendingLibraryBehavior;
 
-        std::optional<NodeGraph::PinDesc> mDragPin;
+        std::optional<Behavior::NodeGraph::PinDesc> mDragPin;
         std::optional<ExtendedValueTypeDesc> mDragType;
         uint32_t mDragMask;
 

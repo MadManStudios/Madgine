@@ -8,7 +8,7 @@
 
 #include "Generic/execution/execution.h"
 
-#include "Madgine/nativebehaviorcollector.h"
+#include "Madgine/behavior/nativebehaviorcollector.h"
 
 METATABLE_BEGIN(Engine::Audio::AudioApi)
 METATABLE_END(Engine::Audio::AudioApi)
@@ -23,7 +23,7 @@ namespace Audio {
     {
     }
 
-    Behavior AudioApi::playSound(std::string_view name)
+    Behavior::Behavior AudioApi::playSound(std::string_view name)
     {
         return playSound(AudioLoader::load(name));
     }
@@ -31,4 +31,4 @@ namespace Audio {
 }
 }
 
-NATIVE_BEHAVIOR(play_sound, Engine::Audio::play_sound, Engine::InputParameter<"buffer", Engine::Audio::AudioLoader::Handle>)
+NATIVE_BEHAVIOR(play_sound, Engine::Audio::play_sound, Engine::Behavior::InputParameter<"buffer", Engine::Audio::AudioLoader::Handle>)

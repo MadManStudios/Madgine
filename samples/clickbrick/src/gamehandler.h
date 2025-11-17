@@ -6,7 +6,7 @@ namespace ClickBrick {
 
     struct GameHandler : Engine::Widgets::WidgetHandler<GameHandler> {
 
-        GameHandler(Engine::HandlerManager &ui);        
+        GameHandler(Engine::Behavior::HandlerManager &ui);        
 
         virtual std::string_view key() const override;		    
 

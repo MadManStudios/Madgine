@@ -2,7 +2,7 @@
 
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/binding.h"
-#include "Madgine/named.h"
+#include "Madgine/behavior/named.h"
 
 #include "../scenemanager.h"
 
@@ -11,9 +11,9 @@
 namespace Engine {
 namespace Scene {
 
-    using EntityBinding = Named<"Entity", Entity::EntityPtr>;
+    using EntityBinding = Behavior::Named<"Entity", Entity::EntityPtr>;
 
-    using NamedSceneManager = Named<"Scene", SceneManager &>;
+    using NamedSceneManager = Behavior::Named<"Scene", SceneManager &>;
 
     inline constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration, NamedSceneManager scene = {}) {
         return scene | Execution::let_value([=](SceneManager &mgr) { return mgr.simulationClock().wait(duration); });

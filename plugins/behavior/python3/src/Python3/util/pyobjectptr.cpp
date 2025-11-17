@@ -22,7 +22,7 @@
 #include "pyexecution.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         PyObjectPtr::PyObjectPtr(PyObject *object)

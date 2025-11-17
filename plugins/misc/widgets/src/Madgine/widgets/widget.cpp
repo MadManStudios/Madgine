@@ -7,7 +7,7 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/behavior.h"
+#include "Madgine/behavior/behavior.h"
 
 #include "geometry.h"
 
@@ -454,7 +454,7 @@ namespace Widgets {
         renderData.setLayer(oldLayer);
     }
 
-    Debug::DebuggableLifetime<get_named_d> &WidgetBase::lifetime()
+    Debug::DebuggableLifetime<Behavior::get_named_d> &WidgetBase::lifetime()
     {
         return mManager.lifetime();
     }

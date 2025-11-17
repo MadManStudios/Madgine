@@ -40,13 +40,13 @@
 #include "Madgine/render/rendercontext.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 
-#include "Madgine/awaitables/awaitablesender.h"
+#include "Madgine/behavior/awaitables/awaitablesender.h"
 
 #include "Madgine/scene/behavior/scenesenders.h"
 
 #include "Madgine/widgets/events.h"
 
-#include "Madgine/awaitables/awaitablebinding.h"
+#include "Madgine/behavior/awaitables/awaitablebinding.h"
 
 UNIQUECOMPONENT(ClickBrick::GameManager)
 
@@ -56,11 +56,11 @@ METATABLE_END(ClickBrick::GameManager)
 
 NATIVE_BEHAVIOR(ClickBrick_Test, ClickBrick::Test)
 NATIVE_BEHAVIOR(ClickBrick_Test2, ClickBrick::Test2)
-NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::InputParameter<"Speed", float>, Engine::InputParameter<"Direction", Engine::Vector3>, Engine::InputParameter<"Rotation", Engine::Quaternion>)
+NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::Behavior::InputParameter<"Speed", float>, Engine::Behavior::InputParameter<"Direction", Engine::Vector3>, Engine::Behavior::InputParameter<"Rotation", Engine::Quaternion>)
 
 namespace ClickBrick {
 
-GameManager::GameManager(Engine::HandlerManager &ui)
+GameManager::GameManager(Engine::Behavior::HandlerManager &ui)
     : Engine::Widgets::WidgetHandler<GameManager>(ui, "Ingame")
     , mSceneMgr(ui.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
     , mSceneRenderer(ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>(), &mCamera, 50)
@@ -213,7 +213,7 @@ void GameManager::start()
     mLifeLabel->mText = "Life: " + std::to_string(mLife);
 }
 
-Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity)
+Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity)
 {
 
     float qAcc = 1.0f;
@@ -254,7 +254,7 @@ Engine::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, E
     co_return;
 }
 
-Engine::Behavior Test(Engine::Scene::EntityBinding entity)
+Engine::Behavior::Behavior Test(Engine::Scene::EntityBinding entity)
 {
 
     bool loop = true;
@@ -290,7 +290,7 @@ Engine::Behavior Test(Engine::Scene::EntityBinding entity)
     co_return;
 }
 
-Engine::Behavior Test2(Engine::Scene::EntityBinding entity)
+Engine::Behavior::Behavior Test2(Engine::Scene::EntityBinding entity)
 {
 
     return Engine::Execution::sequence(

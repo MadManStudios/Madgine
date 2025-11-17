@@ -41,16 +41,16 @@ namespace Tools {
             return FlowColor(mask);
         }
         switch (mask) {
-        case NodeGraph::NodeExecutionMask::NONE:
+        case Behavior::NodeGraph::NodeExecutionMask::NONE:
             return { 50, 50, 50, 255 };
             break;
-        case NodeGraph::NodeExecutionMask::CPU:
+        case Behavior::NodeGraph::NodeExecutionMask::CPU:
             return { 0, 255, 0, 255 };
             break;
-        case NodeGraph::NodeExecutionMask::GPU:
+        case Behavior::NodeGraph::NodeExecutionMask::GPU:
             return { 160, 160, 255, 255 };
             break;
-        case NodeGraph::NodeExecutionMask::ALL:
+        case Behavior::NodeGraph::NodeExecutionMask::ALL:
             return { 0, 255, 255, 255 };
             break;
         default:
@@ -61,16 +61,16 @@ namespace Tools {
     ImColor FlowColor(uint32_t mask)
     {
         switch (mask) {
-        case NodeGraph::NodeExecutionMask::NONE:
+        case Behavior::NodeGraph::NodeExecutionMask::NONE:
             return { 50, 50, 50, 255 };
             break;
-        case NodeGraph::NodeExecutionMask::CPU:
+        case Behavior::NodeGraph::NodeExecutionMask::CPU:
             return { 255, 0, 0, 255 };
             break;
-        case NodeGraph::NodeExecutionMask::GPU:
+        case Behavior::NodeGraph::NodeExecutionMask::GPU:
             return { 200, 200, 0, 255 };
             break;
-        case NodeGraph::NodeExecutionMask::ALL:
+        case Behavior::NodeGraph::NodeExecutionMask::ALL:
             return { 255, 127, 0, 255 };
             break;
         default:
@@ -119,7 +119,7 @@ namespace Tools {
 
     void FlowOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected)
     {
-        int id = 60000 * nodeId + NodeGraph::NodeBase::flowOutId(pinId, group);
+        int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::flowOutId(pinId, group);
         ed::BeginPin(id, ed::PinKind::Output);
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
@@ -152,7 +152,7 @@ namespace Tools {
 
     void FlowInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected)
     {
-        int id = 60000 * nodeId + NodeGraph::NodeBase::flowInId(pinId, group);
+        int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::flowInId(pinId, group);
         ed::BeginPin(id, ed::PinKind::Input);
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
@@ -185,7 +185,7 @@ namespace Tools {
 
     bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
     {
-        int id = 60000 * nodeId + NodeGraph::NodeBase::dataOutId(pinId, group);
+        int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataOutId(pinId, group);
         ed::BeginPin(id, ed::PinKind::Output);
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
@@ -220,7 +220,7 @@ namespace Tools {
 
     bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
     {
-        int id = 60000 * nodeId + NodeGraph::NodeBase::dataInId(pinId, group);
+        int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataInId(pinId, group);
         ed::BeginPin(id, ed::PinKind::Input);
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
@@ -280,7 +280,7 @@ namespace Tools {
         ImGui::GetCurrentContext()->MouseViewport->Size = oldViewport.GetSize();
     }
 
-    std::optional<ExtendedValueTypeDesc> BeginNode(const NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<NodeGraph::PinDesc> dragPin, std::optional<ExtendedValueTypeDesc> dragType)
+    std::optional<ExtendedValueTypeDesc> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin, std::optional<ExtendedValueTypeDesc> dragType)
     {
         ed::BeginNode(60000 * nodeId);
 
@@ -314,7 +314,7 @@ namespace Tools {
 
         for (uint32_t group = 0; group < node->dataInGroupCount(); ++group) {
             for (uint32_t index = 0; index < node->dataInCount(group); ++index) {
-                NodeGraph::Pin source = node->dataInSource(index, group);
+                Behavior::NodeGraph::Pin source = node->dataInSource(index, group);
 
                 ExtendedValueTypeDesc type = node->dataInType(index, group);
 
@@ -322,7 +322,7 @@ namespace Tools {
                     hoveredPin = type;
             }
 
-            if (dragPin && dragPin->mType == NodeGraph::PinType::Data && node->dataInVariadic(group) && dragPin->mDir == NodeGraph::PinDir::Out) {
+            if (dragPin && dragPin->mType == Behavior::NodeGraph::PinType::Data && node->dataInVariadic(group) && dragPin->mDir == Behavior::NodeGraph::PinDir::Out) {
                 uint32_t index = node->dataInCount(group);
                 if (DataInPin(node->dataInName(index).data(), nodeId, index, group, *dragType, node->dataInMask(index, group), {}))
                     hoveredPin = *dragType;
@@ -347,7 +347,7 @@ namespace Tools {
                 FlowOutPin(node->flowOutName(index, group).data(), nodeId, index, group, node->flowOutMask(index, group), static_cast<bool>(node->flowOutTarget(index, group)));
             }
 
-            if (dragPin && dragPin->mType == NodeGraph::PinType::Flow && (node->flowOutVariadic(group) && dragPin->mDir == NodeGraph::PinDir::In)) {
+            if (dragPin && dragPin->mType == Behavior::NodeGraph::PinType::Flow && (node->flowOutVariadic(group) && dragPin->mDir == Behavior::NodeGraph::PinDir::In)) {
                 uint32_t index = node->flowOutCount(group);
                 FlowOutPin(node->flowOutName(index).data(), nodeId, index, group, node->flowOutMask(index, group), false);
             }
@@ -361,7 +361,7 @@ namespace Tools {
                     hoveredPin = type;
             }
 
-            if (dragPin && dragPin->mType == NodeGraph::PinType::Data && node->dataOutVariadic(group) && dragPin->mDir == NodeGraph::PinDir::Out) {
+            if (dragPin && dragPin->mType == Behavior::NodeGraph::PinType::Data && node->dataOutVariadic(group) && dragPin->mDir == Behavior::NodeGraph::PinDir::Out) {
                 uint32_t index = node->dataOutCount(group);
                 if (DataOutPin(node->dataOutName(index, group).data(), nodeId, index, group, *dragType, node->dataOutMask(index, group), false))
                     hoveredPin = *dragType;
@@ -389,21 +389,21 @@ namespace Tools {
         ed::EndNode();
     }
 
-    void NodeLinks(const NodeGraph::NodeBase *node, uint32_t nodeId)
+    void NodeLinks(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId)
     {
         for (uint32_t group = 0; group < node->flowOutGroupCount(); ++group) {
             for (uint32_t flowIndex = 0; flowIndex < node->flowOutCount(group); ++flowIndex) {
-                if (NodeGraph::Pin target = node->flowOutTarget(flowIndex, group)) {
-                    uint32_t id = 60000 * nodeId + NodeGraph::NodeBase::flowOutId(flowIndex, group);
-                    ed::Link(id, id, 60000 * target.mNode + NodeGraph::NodeBase::flowInId(target.mIndex, target.mGroup), FlowColor(node->flowOutMask(flowIndex, group)));
+                if (Behavior::NodeGraph::Pin target = node->flowOutTarget(flowIndex, group)) {
+                    uint32_t id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::flowOutId(flowIndex, group);
+                    ed::Link(id, id, 60000 * target.mNode + Behavior::NodeGraph::NodeBase::flowInId(target.mIndex, target.mGroup), FlowColor(node->flowOutMask(flowIndex, group)));
                 }
             }
         }
         for (uint32_t group = 0; group < node->dataInGroupCount(); ++group) {
             for (uint32_t dataIndex = 0; dataIndex < node->dataInCount(group); ++dataIndex) {
-                if (NodeGraph::Pin source = node->dataInSource(dataIndex, group)) {
-                    uint32_t id = 60000 * nodeId + NodeGraph::NodeBase::dataInId(dataIndex, group);
-                    ed::Link(id, 60000 * source.mNode + NodeGraph::NodeBase::dataOutId(source.mIndex, source.mGroup), id, DataColor(node->dataInMask(dataIndex, group)));
+                if (Behavior::NodeGraph::Pin source = node->dataInSource(dataIndex, group)) {
+                    uint32_t id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataInId(dataIndex, group);
+                    ed::Link(id, 60000 * source.mNode + Behavior::NodeGraph::NodeBase::dataOutId(source.mIndex, source.mGroup), id, DataColor(node->dataInMask(dataIndex, group)));
                 }
             }
         }

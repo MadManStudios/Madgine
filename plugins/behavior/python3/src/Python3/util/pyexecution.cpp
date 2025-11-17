@@ -22,7 +22,7 @@
 #include "../python3env.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         static bool sUnwindable = false;

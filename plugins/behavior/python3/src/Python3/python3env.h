@@ -8,7 +8,7 @@
 #include "Modules/threading/madgineobject.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior {
     namespace Python3 {
 
         struct MADGINE_PYTHON3_EXPORT Python3Environment : Root::RootComponent<Python3Environment>, Threading::MadgineObject<Python3Environment> {

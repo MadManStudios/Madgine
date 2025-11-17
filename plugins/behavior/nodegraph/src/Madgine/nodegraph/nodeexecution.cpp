@@ -8,24 +8,26 @@
 #include "codegenerator.h"
 
 namespace Engine {
-namespace NodeGraph {
+namespace Behavior {
+    namespace NodeGraph {
 
-    BehaviorError NodeInterpretHandleBase::read(const NodeBase &node, ValueType &retVal, uint32_t dataInIndex, uint32_t group)
-    {
-        Pin pin = node.dataInSource(dataInIndex, group);
-        return mInterpreter.read(retVal, pin);
+        BehaviorError NodeInterpretHandleBase::read(const NodeBase &node, ValueType &retVal, uint32_t dataInIndex, uint32_t group)
+        {
+            Pin pin = node.dataInSource(dataInIndex, group);
+            return mInterpreter.read(retVal, pin);
+        }
+
+        void continueExecution(NodeInterpreterStateBase &interpreter, const NodeBase &node, BehaviorReceiver &receiver, NodeDebugLocation &location)
+        {
+            Pin pin = node.flowOutTarget(0);
+            interpreter.branch(receiver, pin, location);
+        }
+
+        CodeGen::Statement NodeCodegenHandle::read(uint32_t dataInIndex, uint32_t group)
+        {
+            return mGenerator.read(mNode->dataInSource(dataInIndex, group));
+        }
+
     }
-
-    void continueExecution(NodeInterpreterStateBase &interpreter, const NodeBase &node, BehaviorReceiver &receiver, NodeDebugLocation &location)
-    {
-        Pin pin = node.flowOutTarget(0);
-        interpreter.branch(receiver, pin, location);
-    }
-
-    CodeGen::Statement NodeCodegenHandle::read(uint32_t dataInIndex, uint32_t group)
-    {
-        return mGenerator.read(mNode->dataInSource(dataInIndex, group));
-    }
-
 }
 }

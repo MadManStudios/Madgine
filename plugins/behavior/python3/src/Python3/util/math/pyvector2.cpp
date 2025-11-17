@@ -5,7 +5,7 @@
 #include "../pyobjectutil.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         PyTypeObject PyVector2Type = {

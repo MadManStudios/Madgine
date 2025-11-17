@@ -3,7 +3,7 @@
 #include "pylistptr.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         PyListPtr::PyListPtr(PyObject *dict)

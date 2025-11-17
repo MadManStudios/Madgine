@@ -38,7 +38,7 @@ int launch(Engine::Closure<void(Engine::App::Application &, Engine::Window::Main
     if (callback)
         callback(app, window);
 
-    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::HandlerManager> ui { "HandlerManager", app, window };
+    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Behavior::HandlerManager> ui { "HandlerManager", app, window };
 
     FIX_LOCAL Engine::Threading::Scheduler scheduler;
     int result = scheduler.go();

@@ -3,7 +3,7 @@
 #include "pyobjectiter.h"
 
 namespace Engine {
-namespace Scripting {
+namespace Behavior{
     namespace Python3 {
 
         
