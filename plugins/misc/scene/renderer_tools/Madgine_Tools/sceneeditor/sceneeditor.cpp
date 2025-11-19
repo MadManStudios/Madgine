@@ -555,9 +555,11 @@ namespace Tools {
         mEntityCache.remove_if([this](EntityNode &node) { return updateEntityCache(node); });
 
         // Add missing Entities
-        for (Scene::Entity::EntityPtr entity : mSceneMgr->container("Default").entities()) {
-            if (!mEntityMapping.count(entity))
-                createEntityMapping(std::move(entity));
+        for (Scene::SceneContainer &container : mSceneMgr->containers()) {
+            for (Scene::Entity::EntityPtr entity : container.entities()) {
+                if (!mEntityMapping.count(entity))
+                    createEntityMapping(std::move(entity));
+            }
         }
     }
 
@@ -586,12 +588,7 @@ namespace Tools {
             if (transform) {
                 Scene::Entity::Transform *parentTransform = transform->parent();
                 if (parentTransform) {
-                    for (Scene::Entity::EntityPtr p : mSceneMgr->container("Default").entities()) {
-                        if (Execution::access_binding(p, [&](Scene::Entity::Entity &p) { return p.getComponent<Scene::Entity::Transform>() == parentTransform; })) {
-                            parent = p;
-                            break;
-                        }
-                    }
+                    parent = parentTransform->entity()->pointer();
                 }
             }
             return true;

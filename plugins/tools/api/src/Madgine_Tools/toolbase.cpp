@@ -192,10 +192,10 @@ namespace Tools {
                     }
                     ImGui::DockBuilderCopyDockSpace(lastDockId, mDockSpaceId, &remapping);
                     ImGui::DockBuilderFinish(mDockSpaceId);
-                }                
+                }
             }
 
-            mRoot.mDockSpaces.try_emplace(lastDockId, 0);            
+            mRoot.mDockSpaces.try_emplace(lastDockId, 0);
         }
 
         ++mRoot.mDockSpaces.try_emplace(mDockSpaceId, 0).first->second;
@@ -224,6 +224,15 @@ namespace Tools {
         std::string newName = std::format("{}##{:x}", name, mDockSpaceId);
         if (ImGui::Begin(newName.c_str(), open, flags)) {
             ImGui::SetWindowDockingDir(mDockSpaceId, dockingDir, ratio, false, ImGuiCond_FirstUseEver);
+            return true;
+        }
+        return false;
+    }
+
+    bool ToolBase::beginGamePanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio, ImGuiWindowFlags flags)
+    {
+        if (ImGui::Begin(name, open, flags)) {
+            ImGui::SetWindowDockingDir(mRoot.gameDockSpaceId(), dockingDir, ratio, false, ImGuiCond_FirstUseEver);
             return true;
         }
         return false;

@@ -32,6 +32,10 @@
 
 #include "imgui/imgui_internal.h"
 
+#include "Madgine_Tools/debugger/debuggerview.h"
+
+#include "Madgine_Tools/behaviortool.h"
+
 UNIQUECOMPONENT(Engine::Tools::WidgetEditor);
 
 METATABLE_BEGIN_BASE(Engine::Tools::WidgetEditor, Engine::Tools::ToolBase)
@@ -136,8 +140,18 @@ namespace Tools {
 
                     ImGui::EndMenu();
                 }
+                if (ImGui::BeginMenu("Panels")) {
+
+                    ImGui::MenuItem("Widgets - Hierarchy", nullptr, &mGameHierarchyVisible);
+                    ImGui::MenuItem("Widgets - Details", nullptr, &mGameDetailsVisible);
+
+                    ImGui::EndMenu();
+                }
                 ImGui::EndMenuBar();
             }
+            Widgets::WidgetBase *hovered = nullptr;
+            renderHierarchy(&hovered);
+            renderSelection();
         }
         ImGui::End();
     }
@@ -168,6 +182,87 @@ namespace Tools {
         drawList->AddRect(ImVec2 { bounds.topLeft() } / io.DisplayFramebufferScale, ImVec2 { bounds.bottomRight() } / io.DisplayFramebufferScale, color);
     }
 
+    void WidgetEditor::renderHierarchy(Widgets::WidgetBase **hoveredWidget)
+    {
+        if (mGameHierarchyVisible) {
+            if (beginGamePanel("Widgets - Hierarchy", &mGameHierarchyVisible, ImGuiDir_Left)) {
+
+                for (Widgets::LayoutWidget &layoutWidget : manager().layoutWidgets()) {
+                    Widgets::WidgetBase *widget = layoutWidget.mWidget.isSet() ? std::get<0>(*layoutWidget.mWidget) : nullptr;
+                    if (widget && widget->mVisible) {
+                        if (ImGui::TreeNode(widget->mName.c_str())) {
+                            drawWidget(widget, hoveredWidget);
+                            ImGui::TreePop();
+                        }
+                    }
+                }
+
+                if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) {
+                    if (hoveredWidget && *hoveredWidget)
+                        mSelected = *hoveredWidget;
+                    else
+                        mSelected = nullptr;
+                }
+            }
+            ImGui::End();
+        }
+    }
+
+    void WidgetEditor::renderSelection()
+    {
+        if (mGameDetailsVisible) {
+            if (beginGamePanel("Widgets - Details", &mGameDetailsVisible, ImGuiDir_Right)) {
+                if (mSelected) {
+                    mInspector->getTool<DebuggerView>().renderLifetime(mSelected->lifetime());
+
+                     bool showParameters = false;
+                    if (ImGui::BeginPopupCompoundContextWindow()) {
+
+                        if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
+                            if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
+                                mPendingBehavior.mHandle = std::move(behavior);
+                                mPendingBehavior.mFuture = mPendingBehavior.mHandle.createParameters();
+                                mPendingBehavior.mParameters.reset();
+                                showParameters = true;
+                            }
+                            ImGui::EndMenu();
+                        }
+
+                        ImGui::EndPopup();
+                    }
+
+                    if (showParameters)
+                        ImGui::OpenPopup("BehaviorParameters");
+
+                    if (ImGui::BeginPopup("BehaviorParameters")) {
+                        if (!mPendingBehavior.mFuture.is_ready()) {
+                            ImGui::Text("Loading...");
+                        } else {
+                            if (!mPendingBehavior.mParameters)
+                                mPendingBehavior.mParameters = mPendingBehavior.mFuture;
+                            if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
+                                mInspector->drawMembers(&mPendingBehavior.mParameters);
+                                ImGui::EndTable();
+                            }
+                            if (ImGui::Button("Cancel")) {
+                                ImGui::CloseCurrentPopup();
+                            }
+                            ImGui::SameLine();
+                            if (ImGui::Button("Create Behavior")) {
+                                mSelected->addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
+                                ImGui::CloseCurrentPopup();
+                            }
+                        }
+                        ImGui::EndPopup();
+                    }
+
+
+                }
+            }
+            ImGui::End();
+        }
+    }
+
     Widgets::WidgetBase *WidgetEditor::handleManagerInteractions(Widgets::WidgetManager &manager, const ImVec2 &pos)
     {
         Widgets::WidgetBase *hoveredWidget = manager.hoveredWidget();
@@ -186,6 +281,29 @@ namespace Tools {
         }
 
         return hoveredWidget;
+    }
+
+    void WidgetEditor::drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget)
+    {
+        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
+        if (w->children().empty())
+            flags |= ImGuiTreeNodeFlags_Leaf;
+        if (mSelected == w)
+            flags |= ImGuiTreeNodeFlags_Selected;
+
+        bool open = ImGui::TreeNodeEx(w->mName.c_str(), flags);
+        if (hoveredWidget && !*hoveredWidget) {
+            if (ImGui::IsItemHovered()) {
+                *hoveredWidget = w;
+            }
+        }
+
+        if (open) {
+            for (Widgets::WidgetBase *child : w->children()) {
+                drawWidget(child, hoveredWidget);
+            }
+            ImGui::TreePop();
+        }
     }
 
 }

@@ -179,7 +179,7 @@ namespace Tools {
 
             ImGui::SetNextWindowDockID(mGameDockSpaceId);
             ImGuiWindowClass overlay_class;
-            overlay_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDocking;
+            overlay_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar;
             ImGui::SetNextWindowClass(&overlay_class);
             if (ImGui::Begin("GameOverlay", nullptr, window_flags)) {
 

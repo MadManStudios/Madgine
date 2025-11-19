@@ -23,7 +23,7 @@ namespace Tools {
 
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
-        
+
         void renderMenu() override;
         void render() override;
 
@@ -35,19 +35,32 @@ namespace Tools {
 
         static void renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color);
 
-    private:
+        void renderHierarchy(Widgets::WidgetBase **hoveredWidget);
+        void renderSelection();
+        void drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget = nullptr);
 
+    private:
         Widgets::WidgetBase *handleManagerInteractions(Widgets::WidgetManager &manager, const ImVec2 &pos);
 
-    private:        
+    private:
         Widgets::WidgetManager *mWidgetManager = nullptr;
         Inspector *mInspector = nullptr;
 
         friend struct WidgetFile;
         std::map<Widgets::WidgetLoader::Resource *, WidgetFile> mFiles;
 
+        Widgets::WidgetBase *mSelected = nullptr;
+
         bool mHierarchyVisible = true;
         bool mWidgetDetailsVisible = true;
+        bool mGameHierarchyVisible = true;
+        bool mGameDetailsVisible = true;
+
+        struct {
+            Threading::TaskFuture<Behavior::ParameterTuple> mFuture;
+            Behavior::ParameterTuple mParameters;
+            Behavior::BehaviorHandle mHandle;
+        } mPendingBehavior;
     };
 
 }

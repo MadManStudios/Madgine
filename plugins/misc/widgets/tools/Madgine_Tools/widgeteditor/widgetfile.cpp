@@ -77,7 +77,7 @@ namespace Tools {
         mIsDirty = false;
     }
 
-    void WidgetFile::renderSelection(const ImVec2 &pos, Widgets::WidgetBase *hoveredWidget)
+    void WidgetFile::renderSelection()
     {
         if (mEditor.mWidgetDetailsVisible) {
             if (mEditor.beginSubPanel("Details", &mEditor.mWidgetDetailsVisible, ImGuiDir_Right)) {
@@ -205,7 +205,7 @@ namespace Tools {
                 if (ImGui::BeginMenu("Panels")) {
 
                     ImGui::MenuItem("Hierarchy", nullptr, &mEditor.mHierarchyVisible);
-                    ImGui::MenuItem("Entity Details", nullptr, &mEditor.mWidgetDetailsVisible);
+                    ImGui::MenuItem("Widget Details", nullptr, &mEditor.mWidgetDetailsVisible);
 
                     ImGui::EndMenu();
                 }
@@ -244,7 +244,7 @@ namespace Tools {
                 if (hoveredWidget)
                     mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>());
                 renderHierarchy(&hoveredWidget);
-                renderSelection(pos, hoveredWidget);
+                renderSelection();
 
                 ImGuiIO &io = ImGui::GetIO();
 

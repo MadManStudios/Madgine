@@ -46,6 +46,11 @@ namespace Scene {
         IntervalClock<Threading::CustomTimepoint> &animationClock();
 
         SceneContainer &container(std::string_view name);
+        auto containers() {
+            return mContainers | std::views::transform([](std::pair<const std::string, ContainerData> &p) -> SceneContainer& {
+                return p.second.mContainer;
+            });
+        }
 
         template <typename T>
         T &getComponent()

@@ -16,7 +16,7 @@ namespace Tools {
 
         void save(const Filesystem::Path &path);
 
-        void renderSelection(const ImVec2 &pos, Widgets::WidgetBase *hoveredWidget = nullptr);
+        void renderSelection();
         void renderHierarchy(Widgets::WidgetBase **hoveredWidget = nullptr);
         bool drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget = nullptr);
 
