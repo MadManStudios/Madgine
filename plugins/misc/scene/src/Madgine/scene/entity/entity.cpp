@@ -241,7 +241,7 @@ namespace Scene {
 
         void Entity::startLifetime()
         {
-            mContainer.mLifetime.attach(Execution::sequence(mLifetime | Behavior::with_named<"Entity">(Execution::ConstantBinding { *this }), mContainer.mutex().locked(AccessMode::WRITE, [this]() {
+            mContainer.mLifetime.attach(Execution::sequence(mLifetime.bound(mSelf, *this) | Behavior::with_named<"Entity">(mSelf), mContainer.mutex().locked(AccessMode::WRITE, [this]() {
                 mContainer.remove(this);
             })));
             mBehaviors.instantiate(mLifetime);
@@ -254,7 +254,7 @@ namespace Scene {
 
         EntityPtr Entity::pointer()
         {
-            return EntityPtr { Execution::ConstantBinding { *this } };
+            return mSelf;
         }
 
         Debug::DebuggableLifetime<Behavior::get_named_d> &Entity::lifetime()

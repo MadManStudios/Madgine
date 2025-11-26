@@ -11,6 +11,8 @@
 
 #include "stoppable.h"
 
+#include "binding.h"
+
 namespace Engine {
 namespace Execution {
 
@@ -50,6 +52,31 @@ namespace Execution {
         auto &finished()
         {
             return mFinished;
+        }
+
+        template <typename T>
+        struct sender {
+            using is_sender = void;
+
+            using result_type = void;
+            template <template <typename...> typename Tuple>
+            using value_types = Tuple<>;
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender<T> &&sender, Rec &&rec)
+            {
+                return state<Rec>(std::forward<Rec>(rec), sender.mLifetime, sender.mPtr, std::forward<T>(sender.mT));
+            }
+
+            Lifetime &mLifetime;
+            T mT;
+            BindingPtr<T> &mPtr;
+        };
+
+        template <typename T>
+        sender<T> bound(BindingPtr<T> &ptr, T &&t)
+        {
+            return sender<T> { *this, std::forward<T>(t), ptr };
         }
 
         using is_sender = void;
@@ -186,6 +213,13 @@ namespace Execution {
                 assert(registered);
             }
 
+            template <typename T>
+            state(Rec &&rec, Lifetime &lifetime, BindingPtr<T> &ptr, T &&t)
+                : state(std::forward<Rec>(rec), lifetime)
+            {
+                ptr = BindingPtr<T> { new BindingPoint<T>(*this, std::forward<T>(t)) };
+            }
+
             void start()
             {
                 this->mLifetime.increaseCount();
@@ -212,8 +246,63 @@ namespace Execution {
                     visitor(State::Marker {});
                     visitor(State::Text { "Active: " + std::to_string(state->mCount) });
                 }
-                visitor(State::EndBlock { });
+                visitor(State::EndBlock {});
             }
+        };
+
+        template <typename T>
+        struct BindingPoint : StopCallback, BindingBridgeBase<T> {
+
+            BindingPoint(LifetimeReceiver &receiver, T &&t)
+                : mReceiver(receiver)
+                , mT(std::forward<T>(t))
+            {
+                ++this->mRefCount;
+                mReceiver.increaseCount();
+                if (!mReceiver.mStopSource.registerCallback(this)) {
+                    stopRequested();
+                }
+            }
+
+            void decreaseCount()
+            {
+                if (mStrongRefCount.fetch_sub(1) == 1) {
+                    mReceiver.decreaseCount();
+                }
+            }
+
+            void stopRequested() override
+            {
+                decreaseCount();
+
+                if (this->mRefCount.fetch_sub(1) == 1) {
+                    delete this;
+                }
+            }
+
+            bool access(CallableView<bool(const T &)> callback) override
+            {
+                uint32_t refCount = mStrongRefCount;
+                if (refCount > 0) {
+                    if (mReceiver.mStopSource.stop_requested())
+                        return false;
+
+                    while (refCount > 0) {
+                        if (mStrongRefCount.compare_exchange_weak(refCount, refCount + 1)) {
+                            bool result = callback(mT);
+                            decreaseCount();
+                            return result;
+                        }
+                    }
+                }
+                return false;
+            }
+
+        private:
+            LifetimeReceiver &mReceiver;
+            T mT;
+
+            std::atomic<uint32_t> mStrongRefCount = 1;
         };
 
         LifetimeReceiver *mReceiver = nullptr;

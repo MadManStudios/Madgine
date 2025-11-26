@@ -129,6 +129,8 @@ namespace Scene {
 
             DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
 
+            EntityPtr mSelf;
+
             Behavior::BehaviorList mBehaviors;
         };
 

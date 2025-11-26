@@ -14,7 +14,7 @@ namespace Debug {
     struct MADGINE_DEBUGGER_EXPORT DebuggableLifetimeBase {
         DebuggableLifetimeBase(DebuggableLifetimeBase *parent = nullptr);
         ~DebuggableLifetimeBase();
-        
+
         virtual void startLifetime() = 0;
         virtual void endLifetime() = 0;
         virtual bool running() = 0;
@@ -64,6 +64,12 @@ namespace Debug {
         auto &finished()
         {
             return mLifetime.finished();
+        }
+
+        template <typename T>
+        auto bound(Execution::BindingPtr<T> &ptr, T &&t)
+        {
+            return mLifetime.bound(ptr, std::forward<T>(t));
         }
 
         using is_sender = void;

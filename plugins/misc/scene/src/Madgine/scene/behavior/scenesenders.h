@@ -16,7 +16,7 @@ namespace Scene {
     using NamedSceneManager = Behavior::Named<"Scene", SceneManager &>;
 
     inline constexpr auto wait_simulation = [](std::chrono::steady_clock::duration duration, NamedSceneManager scene = {}) {
-        return scene | Execution::let_value([=](SceneManager &mgr) { return mgr.simulationClock().wait(duration); });
+        return std::move(scene) | Execution::let_value([=](SceneManager &mgr) { return mgr.simulationClock().wait(duration); });
     };
 
     inline constexpr auto yield_simulation = [](NamedSceneManager scene = {}) {

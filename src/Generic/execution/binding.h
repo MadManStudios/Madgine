@@ -37,13 +37,13 @@ namespace Execution {
         template <std::invocable<const T &> F>
         friend bool tag_invoke(access_binding_t, ConstantBinding &&binding, F &&callback)
         {
-            return patch_void(std::forward<F>(callback))(std::move(binding).mValue);            
+            return patch_void(std::forward<F>(callback))(std::move(binding).mValue);
         }
 
         template <std::invocable<const T &> F>
         friend bool tag_invoke(access_binding_t, const ConstantBinding &binding, F &&callback)
         {
-            return patch_void(std::forward<F>(callback), true)(binding.mValue);            
+            return patch_void(std::forward<F>(callback), true)(binding.mValue);
         }
 
         T mValue;
@@ -202,6 +202,13 @@ namespace Execution {
             : mPtr(new BindingBridge<T, Binding> { std::forward<Binding>(binding) })
         {
             mPtr->mRefCount.store(1, std::memory_order_relaxed);
+        }
+
+        explicit BindingPtr(BindingBridgeBase<T> *bridge)
+            : mPtr(bridge)
+        {
+            assert(mPtr);
+            ++mPtr->mRefCount;
         }
 
         BindingPtr(const BindingPtr &other)
