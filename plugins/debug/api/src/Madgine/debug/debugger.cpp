@@ -52,7 +52,7 @@ namespace Debug {
     {
         outContinuation = std::move(callback); //TODO proper syncing with stop_source; see debuggablesender::stop()
 
-        if (mStopRequested || st->stop_requested()) {
+        if (mStopRequested || (st && st->stop_requested())) {
             outContinuation(ContinuationMode::Abort);
             return;
         }

@@ -40,7 +40,7 @@ namespace Debug {
 
     bool SenderLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
     {
-        return type == Debug::ContinuationType::Error || (line && getBreakpoint(line)) || Debug::DebugLocation::wantsPause(type, line);
+        return (line && (type == Debug::ContinuationType::Error || getBreakpoint(line))) || Debug::DebugLocation::wantsPause(type, line);
     }
 
     void SenderLocation::visit(CallableView<void(const Execution::StateDescriptor &)> visitor) const

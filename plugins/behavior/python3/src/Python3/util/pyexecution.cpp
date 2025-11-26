@@ -43,7 +43,7 @@ namespace Behavior {
 
         PyTypeObject PySuspendExceptionType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                           .tp_name
+                .tp_name
             = "PySuspendException",
             .tp_basicsize = sizeof(PySuspendExceptionObject),
             .tp_itemsize = 0,
@@ -137,7 +137,7 @@ namespace Behavior {
                 suspend.mStacktop = nullptr;
                 suspend.mBlock = 0;
 
-                //suspend.mFrames.push_back(PyFramePtr::fromBorrowed(frame->frame_obj));
+                // suspend.mFrames.push_back(PyFramePtr::fromBorrowed(frame->frame_obj));
 
                 return value.release();
             }
@@ -172,7 +172,7 @@ namespace Behavior {
                 if (!frames || frames->empty()) {
                     fromPyObject(receiver, result);
                 } else {
-                    //PyFrame_StackPush(frames->front(), result);
+                    // PyFrame_StackPush(frames->front(), result);
                     throw 0;
                 }
             }
@@ -338,7 +338,7 @@ namespace Behavior {
                            [this](PyFramePtr frame) {
                                PyObject *wrapped = PyObject_CallObject((PyObject *)&PyBehaviorScopeType, NULL);
                                new (&reinterpret_cast<PyBehaviorScopeObject *>(wrapped)->mScope) PyBehaviorScope { this, PyFrame_GetLocals(frame) };
-                               //frame->f_locals = wrapped;
+                               // frame->f_locals = wrapped;
                                throw 0;
 
                                evalFrame(*this, std::move(frame));
@@ -349,8 +349,14 @@ namespace Behavior {
                 std::move(mData));
         }
 
-        void ExecutionState::stop() {
+        void ExecutionState::stop()
+        {
             throw 0;
+        }
+
+        void tag_invoke(Execution::visit_state_t, ExecutionState *state, auto &&visitor)
+        {
+            visitor(Execution::State::Text { "Python - TODO" });
         }
     }
 }

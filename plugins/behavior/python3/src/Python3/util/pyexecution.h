@@ -44,6 +44,8 @@ namespace Behavior{
             void start();
             void stop();
 
+            friend MADGINE_PYTHON3_EXPORT auto tag_invoke(Execution::visit_state_t, ExecutionState *state, auto &&visitor);
+
             ExecutionData mData;
         };
 
