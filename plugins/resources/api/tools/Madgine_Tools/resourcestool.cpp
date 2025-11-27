@@ -212,7 +212,7 @@ namespace Tools {
                                 draw_list->AddText(box_min, ImColor { 255, 255, 255, 255 }, resource.mResource->extension().data());
                             }
                             if (display_label) {
-                                draw_list->PushClipRect({ box_min.x, box_max.y }, { box_max.x, box_max.y + 1.1f * ImGui::GetFontSize() });
+                                draw_list->PushClipRect({ box_min.x, box_max.y }, { box_max.x, box_max.y + 1.1f * ImGui::GetFontSize() }, true);
                                 ImU32 label_col = ImGui::GetColorU32(item_is_selected || true ? ImGuiCol_Text : ImGuiCol_TextDisabled);
                                 draw_list->AddText(ImVec2(box_min.x, box_max.y), label_col, resource.mResource->name().data());
                                 draw_list->PopClipRect();
