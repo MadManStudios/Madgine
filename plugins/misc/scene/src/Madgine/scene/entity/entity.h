@@ -35,6 +35,10 @@ namespace Scene {
 
             Entity &operator=(Entity &&other);
 
+            auto lifetimeSender() {
+                return mLifetime.bound(mSelf, *this) | Behavior::with_named<"Entity">(mSelf);
+            }
+            
             void startLifetime();
             void endLifetime();
 

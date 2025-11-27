@@ -23,21 +23,22 @@ namespace Engine {
 constexpr auto componentBuilder()
 {
     std::array<Accessor, 32> accessors;
-    
+
     return accessors;
 }
 
-void componentInit(std::array<Accessor, 32>& accessors) {
+void componentInit(std::array<Accessor, 32> &accessors)
+{
 #if ENABLE_PLUGINS
     Scene::Entity::EntityComponentCollector::addInitializer([&]() {
 #endif
         size_t i = 0;
         for (const auto &[name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {
             accessors[i] = { name.data(),
-                [](const Accessor* self, const ScopePtr& entity) {
+                [](const Accessor *self, const ScopePtr &entity) {
                     return scope_cast<Scene::Entity::Entity>(entity)->hasComponent(self->mName);
                 },
-                [](const Accessor *self, ValueType &ret, const ScopePtr &entity) { 
+                [](const Accessor *self, ValueType &ret, const ScopePtr &entity) {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
                     to_ValueType(ret, ScopePtr { scope_cast<Scene::Entity::Entity>(entity)->getComponent(index), *Scene::Entity::EntityComponentRegistry::get(index).mType });
                 },
@@ -63,9 +64,9 @@ using namespace Engine::Serialize;
 static constexpr Serializer sComponentSynchronizer {
     "ComponentSynchronizer",
     {},
-    [](const void *, CallerHierarchyFormattedSerializeStream , const char *) {
+    [](const void *, CallerHierarchyFormattedSerializeStream, const char *) {
     },
-    [](void *, CallerHierarchyFormattedSerializeStream , const char *) -> StreamResult {
+    [](void *, CallerHierarchyFormattedSerializeStream, const char *) -> StreamResult {
         throw 0;
         return {};
     },
@@ -241,9 +242,6 @@ namespace Scene {
 
         void Entity::startLifetime()
         {
-            mContainer.mLifetime.attach(Execution::sequence(mLifetime.bound(mSelf, *this) | Behavior::with_named<"Entity">(mSelf), mContainer.mutex().locked(AccessMode::WRITE, [this]() {
-                mContainer.remove(this);
-            })));
             mBehaviors.instantiate(mLifetime);
         }
 
@@ -262,7 +260,7 @@ namespace Scene {
             return mLifetime;
         }
 
-        Debug::DebuggableLifetimeBase& Entity::lifetimeBase()
+        Debug::DebuggableLifetimeBase &Entity::lifetimeBase()
         {
             return mLifetime;
         }
@@ -314,6 +312,17 @@ namespace Scene {
         {
             return mBehaviors;
         }
+
+        SceneContainer &Entity::container()
+        {
+            return mContainer;
+        }
+
+        const SceneContainer &Entity::container() const
+        {
+            return mContainer;
+        }
+
     }
 }
 }

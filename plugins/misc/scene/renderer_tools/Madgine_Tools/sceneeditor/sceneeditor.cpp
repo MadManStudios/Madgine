@@ -344,7 +344,7 @@ namespace Tools {
             bool aborted = false;
 
             if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0)) {
-                select(e.pointer());
+                select(node.mEntity);
             }
 
             if (ImGui::BeginPopupCompoundContextItem()) {
@@ -354,7 +354,7 @@ namespace Tools {
                 ImGui::EndPopup();
             }
 
-            ImGui::DraggableValueTypeSource(name, e.pointer());
+            ImGui::DraggableValueTypeSource(name, node.mEntity);
 
             if (open) {
                 for (EntityNode &node : node.mChildren)
@@ -377,9 +377,9 @@ namespace Tools {
         mEntityMapping.erase(node.mEntity);
     }
 
-    void SceneEditor::renderEntity(Scene::Entity::EntityPtr &entity)
+    void SceneEditor::renderEntity(Scene::Entity::EntityPtr &e)
     {
-        Execution::access_binding(entity, [&](Scene::Entity::Entity &entity) {
+        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {
             bool showParameters = false;
             if (ImGui::BeginPopupCompoundContextWindow()) {
                 if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Component")) {
@@ -403,7 +403,7 @@ namespace Tools {
                 }
                 if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Temp Behavior")) {
                     if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
-                        mPendingBehavior.mTargetEntity = entity.pointer();
+                        mPendingBehavior.mTargetEntity = e;
                         mPendingBehavior.mHandle = behavior;
                         mPendingBehavior.mFuture = behavior.createParameters();
                         mPendingBehavior.mParameters.reset();
@@ -637,7 +637,7 @@ namespace Tools {
 
                     if (Im3D::BoundingBox(e.mName.c_str(), bb, transformM, flags)) {
                         if (ImGui::IsMouseClicked(0)) {
-                            select(e.pointer());
+                            select(node.mEntity);
                         }
                     }
                 }

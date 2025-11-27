@@ -34,6 +34,7 @@ namespace Scene {
 
         Entity::EntityPtr findEntity(const std::string &name);
         void remove(Entity::Entity *e);
+        void remove(Entity::EntityPtr e);
         void clear();
 
         Execution::SignalStub<const EntityContainer::iterator &, int> &entitiesSignal();
@@ -51,6 +52,8 @@ namespace Scene {
         friend struct SceneManager;
 
     private:
+        Entity::EntityPtr spawnEntity(const std::string &name, const std::function<void(Entity::Entity &)> &init);
+        
         friend struct Entity::Entity;
 
         DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);

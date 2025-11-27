@@ -76,6 +76,11 @@ namespace Scene {
         mEntities.erase(it);
     }
 
+    void SceneContainer::remove(Entity::EntityPtr e)
+    {
+        throw 0;
+    }
+
     Serialize::StreamResult SceneContainer::readEntity(Serialize::CallerHierarchyFormattedSerializeStream in, OutRef<SceneContainer> &mgr, std::string &name)
     {
         STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Entity", 1));
@@ -95,6 +100,17 @@ namespace Scene {
         out.mStream.beginExtendedWrite("Entity", 1);
         write(out, entity.name(), "name");
         return "Entity";
+    }
+
+    Entity::EntityPtr SceneContainer::spawnEntity(const std::string &name, const std::function<void(Entity::Entity &)> &init)
+    {
+        std::unique_ptr<Entity::Entity> entityPtr = std::make_unique<Entity::Entity>(*this, name);
+        Entity::Entity &entity = *entityPtr;
+        init(entity);
+        mLifetime.attach(Execution::sequence(entity.lifetimeSender(), entity.container().mutex().locked(AccessMode::WRITE, [&entity]() {
+            entity.container().remove(entity.pointer());
+        })) | Execution::finally([entityPtr { std::move(entityPtr) }]() mutable { entityPtr.reset(); }));
+        return entity.pointer();
     }
 
     Entity::EntityPtr SceneContainer::createEntity(const std::string &name,
