@@ -117,7 +117,7 @@ namespace Serialize {
     {
         return Execution::make_sender<MessageResult, V...>(
             [f { forward_capture(std::forward<F>(f)) }, args = std::tuple<Args...> { std::forward<Args>(args)... }]<typename Rec>(Rec &&rec) mutable {
-                return Execution::make_simple_state<MessageState<Rec, V...>>(std::forward<F>(f), std::move(args), std::forward<Rec>(rec));
+                return Execution::make_inherited_state<MessageState<Rec, V...>>(std::forward<F>(f), std::move(args), std::forward<Rec>(rec));
             });
     }
 

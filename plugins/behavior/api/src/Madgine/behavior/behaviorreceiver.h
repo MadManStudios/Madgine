@@ -30,7 +30,7 @@ namespace Behavior {
     {
         return Execution::make_sender<BehaviorError, ArgumentList>(
             [args = std::tuple<Args...> { std::forward<Args>(args)... }, f { forward_capture<F>(f) }]<typename Rec>(Rec &&rec) mutable {
-                return TupleUnpacker::constructExpand<VirtualBehaviorState<Rec, Execution::SimpleState<F, std::tuple<Args...>, BehaviorReceiver>>>(std::forward<Rec>(rec), std::forward<F>(f), std::move(args));
+                return TupleUnpacker::constructExpand<VirtualBehaviorState<Rec, Execution::SimpleInheritedState<F, std::tuple<Args...>, BehaviorReceiver>>>(std::forward<Rec>(rec), std::forward<F>(f), std::move(args));
             });
     }
 

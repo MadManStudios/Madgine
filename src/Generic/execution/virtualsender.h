@@ -7,10 +7,10 @@ namespace Engine {
 namespace Execution {
 
     template <typename F, typename Tuple, typename State>
-    struct SimpleState : State {
+    struct SimpleInheritedState : State {
 
         template <typename... Args>
-        SimpleState(F &&f, Tuple &&args, Args &&...baseArgs)
+        SimpleInheritedState(F &&f, Tuple &&args, Args &&...baseArgs)
             : State(std::forward<Args>(baseArgs)...)
             , mF(std::forward<F>(f))
             , mArgs(std::move(args))
@@ -27,9 +27,9 @@ namespace Execution {
     };
 
     template <typename State, typename F, typename Tuple, typename... Args>
-    auto make_simple_state(F &&f, Tuple &&args, Args &&...baseArgs)
+    auto make_inherited_state(F &&f, Tuple &&args, Args &&...baseArgs)
     {
-        return SimpleState<F, Tuple, State> { std::forward<F>(f), std::forward<Tuple>(args), std::forward<Args>(baseArgs)... };
+        return SimpleInheritedState<F, Tuple, State> { std::forward<F>(f), std::forward<Tuple>(args), std::forward<Args>(baseArgs)... };
     }
 
     template <typename State, typename... Args>
@@ -65,7 +65,7 @@ namespace Execution {
     template <typename R, typename... V, typename F, typename... Args>
     auto make_simple_virtual_sender(F &&f, Args &&...args)
     {
-        return make_virtual_sender<SimpleState<F, std::tuple<Args...>, VirtualReceiverBase<R, V...>>>(std::forward<F>(f), std::tuple<Args...> { std::forward<Args>(args)... });
+        return make_virtual_sender<SimpleInheritedState<F, std::tuple<Args...>, VirtualReceiverBase<R, V...>>>(std::forward<F>(f), std::tuple<Args...> { std::forward<Args>(args)... });
     }
 
 }
