@@ -242,6 +242,9 @@ namespace Scene {
 
         void Entity::startLifetime()
         {
+            mContainer.lifetime().attach(Execution::sequence(lifetimeSender(), mContainer.mutex().locked(AccessMode::WRITE, [this]() {
+                mContainer.remove(this);
+            })));
             mBehaviors.instantiate(mLifetime);
         }
 
