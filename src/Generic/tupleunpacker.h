@@ -119,18 +119,17 @@ namespace TupleUnpacker {
     concept unpackable = std::invocable<F, decltype(std::get<S>(std::declval<Tuple>()))...>;
 
     template <typename F, typename Tuple, size_t... S>
-    requires unpackable<F, Tuple, S...>
+        requires unpackable<F, Tuple, S...>
     decltype(auto) unpackTuple(F &&f, Tuple &&args, auto_pack<S...>)
     {
         return std::invoke(std::forward<F>(f), std::get<S>(std::forward<Tuple>(args))...);
     }
 
     template <typename F, typename Tuple>
-    requires requires
-    {
-        unpackTuple(std::declval<F>(), std::declval<Tuple>(),
-            make_index_pack<callable_argument_count<F>(std::tuple_size<std::remove_reference_t<Tuple>>::value)>());
-    }
+        requires requires {
+            unpackTuple(std::declval<F>(), std::declval<Tuple>(),
+                make_index_pack<callable_argument_count<F>(std::tuple_size<std::remove_reference_t<Tuple>>::value)>());
+        }
     decltype(auto) invokeFromTuple(F &&f, Tuple &&args)
     {
         return unpackTuple(std::forward<F>(f), std::forward<Tuple>(args),
@@ -138,15 +137,21 @@ namespace TupleUnpacker {
     }
 
     template <typename F, typename... Args>
+        requires requires {
+            invokeFromTuple(std::declval<F>(), std::forward_as_tuple(std::declval<Args>()...));
+        }
     decltype(auto) invoke(F &&f, Args &&...args)
     {
         return invokeFromTuple(std::forward<F>(f), std::forward_as_tuple(std::forward<Args>(args)...));
     }
 
     template <typename F, typename... Args>
+        requires requires {
+            invokeFromTuple(std::declval<F>(), expand<sizeof...(Args) - 1>(std::forward_as_tuple(std::declval<Args>()...)));
+        }
     decltype(auto) invokeExpand(F &&f, Args &&...args)
     {
-        return invokeFromTuple(std::forward<F>(f), expand<sizeof...(args) - 1>(std::forward_as_tuple(std::forward<Args>(args)...)));
+        return invokeFromTuple(std::forward<F>(f), expand<sizeof...(Args) - 1>(std::forward_as_tuple(std::forward<Args>(args)...)));
     }
 
     template <typename F, typename... Args>
