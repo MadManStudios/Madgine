@@ -718,8 +718,11 @@ namespace Widgets {
         return mData->mAtlas.lookUpImage(name);
     }
 
-    void WidgetManager::onActivate(bool active)
+    void WidgetManager::onActivate(Serialize::CallbackTiming timing, bool active)
     {
+        if ((!active && timing == Serialize::CallbackTiming::AFTER) || (active && timing == Serialize::CallbackTiming::BEFORE))
+            return;
+
         if (active) {
             for (LayoutWidget &layoutWidget : mWidgetsLayout) {
                 if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate.available()) {

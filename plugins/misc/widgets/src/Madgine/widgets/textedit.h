@@ -33,7 +33,7 @@ namespace Widgets {
 
         virtual void sizeChanged(const Vector3 &pixelSize) override;
 
-        void onActivate(bool b);
+        void onActivate(Serialize::CallbackTiming, bool b);
 
         virtual void injectPointerClick(const PointerClickEvent &arg) override;
         virtual void injectDragBegin(const DragBeginEvent &arg) override;

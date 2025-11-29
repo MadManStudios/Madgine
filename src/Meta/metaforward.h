@@ -132,6 +132,11 @@ namespace Serialize {
         FUNCTION_ACTION,
         FUNCTION_REQUEST,
         FUNCTION_ERROR)
+        
+    enum class CallbackTiming {
+        BEFORE,
+        AFTER
+    };
 
     ENUM(MessageResult,
         OK,

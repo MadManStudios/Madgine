@@ -154,7 +154,7 @@ namespace Widgets {
         mTextRenderData.updateText(mText, getAbsoluteTextSize());
     }
 
-    void TextEdit::onActivate(bool b)
+    void TextEdit::onActivate(Serialize::CallbackTiming, bool b)
     {
         mTextRenderData.updateText(mText, getAbsoluteTextSize());
     }

@@ -131,8 +131,8 @@ namespace Serialize {
 
     void SerializeTable::setActive(void *unit, bool active, bool existenceChanged) const
     {
-        if (!active && mCallbacks.onActivate)
-            mCallbacks.onActivate(unit, active, existenceChanged);
+        if (mCallbacks.onActivate)
+            mCallbacks.onActivate(unit, CallbackTiming::BEFORE, active, existenceChanged);
 
         // TODO: Start with base
         const SerializeTable *table = this;
@@ -142,16 +142,17 @@ namespace Serialize {
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
-        if (active && mCallbacks.onActivate)
-            mCallbacks.onActivate(unit, active, existenceChanged);
+        if (mCallbacks.onActivate)
+            mCallbacks.onActivate(unit, CallbackTiming::AFTER, active, existenceChanged);
     }
 
     void SerializeTable::setActive(SerializableUnitBase *unit, bool active, bool existenceChanged) const
     {
         if (active)
             assert(unit->mActiveIndex == 0);
-        else if (mCallbacks.onActivate)
-            mCallbacks.onActivate(unit, active, existenceChanged);
+        
+        if (mCallbacks.onActivate)
+            mCallbacks.onActivate(unit, CallbackTiming::BEFORE, active, existenceChanged);
 
         // TODO: Start with base
         const SerializeTable *table = this;
@@ -167,10 +168,12 @@ namespace Serialize {
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
+        
         if (!active)
             assert(unit->mActiveIndex == 0);
-        else if (mCallbacks.onActivate)
-            mCallbacks.onActivate(unit, active, existenceChanged);
+        
+        if (mCallbacks.onActivate)
+            mCallbacks.onActivate(unit, CallbackTiming::AFTER, active, existenceChanged);
     }
 
     void SerializeTable::setParent(SerializableUnitBase *unit) const

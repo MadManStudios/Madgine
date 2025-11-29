@@ -89,7 +89,7 @@ namespace Tools {
 
         ResourceEditor::render();
 
-        if (ImGui::Begin("Game")) {
+        if (beginGame()) {
 
             handleManagerInteractions(*mWidgetManager, mWidgetManager->getClientSpace().mTopLeft);
 
@@ -185,7 +185,7 @@ namespace Tools {
     void WidgetEditor::renderHierarchy(Widgets::WidgetBase **hoveredWidget)
     {
         if (mGameHierarchyVisible) {
-            if (beginGamePanel("Widgets - Hierarchy", &mGameHierarchyVisible, ImGuiDir_Left)) {
+            if (beginSubPanel("Widgets - Hierarchy", &mGameHierarchyVisible, ImGuiDir_Left)) {
 
                 for (Widgets::LayoutWidget &layoutWidget : manager().layoutWidgets()) {
                     Widgets::WidgetBase *widget = layoutWidget.mWidget.isSet() ? std::get<0>(*layoutWidget.mWidget) : nullptr;
@@ -197,7 +197,8 @@ namespace Tools {
                     }
                 }
 
-                if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) {
+                if (ImGui::IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem) && ImGui::IsMouseClicked(0)) {
+                    ImGui::Text("Clicked");
                     if (hoveredWidget && *hoveredWidget)
                         mSelected = *hoveredWidget;
                     else
@@ -211,11 +212,11 @@ namespace Tools {
     void WidgetEditor::renderSelection()
     {
         if (mGameDetailsVisible) {
-            if (beginGamePanel("Widgets - Details", &mGameDetailsVisible, ImGuiDir_Right)) {
+            if (beginSubPanel("Widgets - Details", &mGameDetailsVisible, ImGuiDir_Right)) {
                 if (mSelected) {
                     mInspector->getTool<DebuggerView>().renderLifetime(mSelected->lifetime());
 
-                     bool showParameters = false;
+                    bool showParameters = false;
                     if (ImGui::BeginPopupCompoundContextWindow()) {
 
                         if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
@@ -255,8 +256,6 @@ namespace Tools {
                         }
                         ImGui::EndPopup();
                     }
-
-
                 }
             }
             ImGui::End();

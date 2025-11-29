@@ -127,7 +127,7 @@ namespace Widgets {
 
         friend struct WidgetBase;
 
-        void onActivate(bool active);
+        void onActivate(Serialize::CallbackTiming timing, bool active);
 
     private:
         std::vector<WidgetBase *> mWidgets;

@@ -12,7 +12,8 @@ namespace Engine {
 namespace Serialize {
 
     template <typename T>
-    T unit_cast(void* unit) {
+    T unit_cast(void *unit)
+    {
         if constexpr (std::derived_from<std::remove_pointer_t<T>, SerializableUnitBase>) {
             return static_cast<T>(static_cast<SerializableUnitBase *>(unit));
         } else {
@@ -31,20 +32,24 @@ namespace Serialize {
     }
 
     struct SerializeTableCallbacks {
+
+        template <typename T>
+        static void_t<decltype(&T::onActivate)> setActiveHelper(T *unit, CallbackTiming timing, bool active, bool existenceChanged)
+        {
+            TupleUnpacker::invoke(&T::onActivate, unit, timing, active, existenceChanged);
+        }
+
         template <typename T>
         constexpr SerializeTableCallbacks(type_holder_t<T>)
-            : onActivate([](void *unit, bool active, bool existenceChanged) {
-                if constexpr (has_function_onActivate_v<T, bool, bool>)
-                    unit_cast<T *>(unit)->onActivate(active, existenceChanged);
-                else if constexpr (has_function_onActivate_v<T, bool>)
-                    unit_cast<T *>(unit)->onActivate(active);
-                else if constexpr (has_function_onActivate_v<T>)
-                    unit_cast<T *>(unit)->onActivate();
+            : onActivate([](void *unit, CallbackTiming timing, bool active, bool existenceChanged) {
+                if constexpr (requires(T *t) { {setActiveHelper(t, timing, active, existenceChanged)} -> std::same_as<void>; }) {
+                    setActiveHelper(unit_cast<T *>(unit), timing, active, existenceChanged);
+                }
             })
         {
         }
 
-        void (*onActivate)(void *, bool, bool);
+        void (*onActivate)(void *, CallbackTiming, bool, bool);
     };
 
     struct META_EXPORT SerializeTable {

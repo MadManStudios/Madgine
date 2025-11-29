@@ -110,7 +110,7 @@ namespace Window {
     protected:
         void storeWindowData();
 
-        void onActivate(bool active);
+        void onActivate(Serialize::CallbackTiming timing, bool active);
 
     private:
         const WindowSettings &mSettings;

@@ -459,8 +459,11 @@ namespace Window {
         }
     }
 
-    void MainWindow::onActivate(bool active)
+    void MainWindow::onActivate(Serialize::CallbackTiming timing, bool active)
     {
+        if ((active && timing == Serialize::CallbackTiming::AFTER) || (!active && timing == Serialize::CallbackTiming::BEFORE))
+            return;
+
         if (state().is_ready()) {
             if (active) {
                 startLifetime();
