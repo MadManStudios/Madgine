@@ -222,16 +222,12 @@ namespace Tools {
 
     void LifetimeControl::renderToolbar()
     {
-        if (ImGui::Begin("Game")) {
-            ImGuiWindowClass window_class;
-            window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDocking;
-            ImGui::SetNextWindowClass(&window_class);
-            if (ImGui::Begin("Lifetime Control - Toolbar", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar)) {
-                ImGui::SetWindowDockingDir(mRoot.gameDockSpaceId(), ImGuiDir_Up, 0.01f, true, ImGuiCond_FirstUseEver);
-
+        if (beginGame()) {
+            if (beginToolBar("Lifetime")) {
                 controls(Debug::getRootLifetime());
+                endToolBar();
             }
-            ImGui::End();
+            
         }
         ImGui::End();
     }

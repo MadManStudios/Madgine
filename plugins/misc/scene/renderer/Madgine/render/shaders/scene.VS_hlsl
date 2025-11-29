@@ -45,7 +45,7 @@ VertexShaderOutput main(AppData IN)
     VertexShaderOutput OUT; 
 
     SceneInstanceData aInstance = InstanceData[IN.instanceId];
-     
+    
     float4 pos = float4(IN.aPos, IN.aW);
 
     float2 aPos2 = IN.aPos2;

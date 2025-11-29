@@ -9,6 +9,9 @@
 
 #include "Meta/math/color3.h"
 
+#include "scenerenderdata.h"
+#include "pointshadowrenderdata.h"
+
 namespace Engine {
 namespace Render {
 
@@ -22,31 +25,24 @@ namespace Render {
         virtual void setup(RenderTarget *target) override;
         virtual void shutdown(RenderTarget *target) override;
 
-        Scene::SceneManager *scene();
+        Scene::SceneManager &scene();
 
-        std::vector<const Texture*> depthTextures();
-
-        Render::RenderTarget *pointShadowTarget(size_t index);
-        Render::RenderData *data();
+        SceneRenderData &renderData();
+        PointShadowRenderData &pointShadowRenderData();
 
         void enableSceneRendering();
         void disableSceneRendering();
 
         Camera mCamera;
 
-        Color3 mAmbientLightColor = { 1.0f, 1.0f, 1.0f };
-        NormalizedVector3 mAmbientLightDirection = { -0.0f, -1.0f, 1.5f };
-
     private:
-        Scene::SceneManager *mScene = nullptr;
+        Scene::SceneManager &mScene;
 
-        SceneRenderPass mPass;
+        SceneRenderData mSceneData;
+        
+        PointShadowRenderData mPointShadowRenderData;
 
-        std::unique_ptr<Render::RenderTarget> mPointShadowMaps[2];
-
-        std::unique_ptr<SceneRenderData> mSceneData;
-
-        PointShadowRenderPass mPointShadowPasses[2];
+        SceneRenderPass mPass;       
     };
 
 }

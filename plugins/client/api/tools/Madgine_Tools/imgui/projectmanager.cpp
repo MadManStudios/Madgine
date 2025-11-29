@@ -198,7 +198,7 @@ namespace Tools {
 
     void ProjectManager::renderGameMenu()
     {
-        if (ImGui::Begin("Game")) {
+        if (beginGame()) {
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("Layout")) {
                     if (mProjectRoot.empty())
@@ -347,11 +347,9 @@ namespace Tools {
 
     void ProjectManager::renderSettings()
     {
-        ImGui::BeginGroupPanel("Project Manager");
+        ImGui::SeparatorText("Project Manager");
 
         ImGui::Checkbox("Show Tips on Startup", &mShowTipsOnStartup);
-
-        ImGui::EndGroupPanel();
     }
 
 #ifndef MADGINE_MAINWINDOW_LAYOUT

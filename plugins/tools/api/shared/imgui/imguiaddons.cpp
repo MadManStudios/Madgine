@@ -915,7 +915,7 @@ bool MethodPicker(const char *label, const std::vector<std::pair<std::string, En
     return result;
 }
 
-void DraggableValueTypeSource(std::string_view name, void (*source)(Engine::ValueType &, void *), void *data, ImGuiDragDropFlags flags)
+void DraggableValueTypeSource(std::string_view name, void (*source)(Engine::ValueType &, const void *), const void *data, ImGuiDragDropFlags flags)
 {
     if (ImGui::BeginDragDropSource(flags)) {
         ValueTypePayload *payload = &sPayload;

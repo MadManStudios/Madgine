@@ -198,6 +198,7 @@ namespace Execution {
         BindingPtr() = default;
 
         template <Binding<T> Binding>
+            requires(!InstanceOf<std::decay_t<Binding>, BindingPtr>)
         explicit BindingPtr(Binding &&binding)
             : mPtr(new BindingBridge<T, Binding> { std::forward<Binding>(binding) })
         {
@@ -255,6 +256,7 @@ namespace Execution {
         }
 
         template <Binding<T> Binding>
+            requires(!InstanceOf<std::decay_t<Binding>, BindingPtr>)
         BindingPtr &operator=(Binding &&binding)
         {
             if (mPtr && mPtr->mRefCount.fetch_sub(1, std::memory_order_acq_rel) == 1) {
@@ -293,33 +295,11 @@ namespace Execution {
             return mPtr;
         }
 
+        auto operator<=>(const BindingPtr &) const = default;
+
     private:
         BindingBridgeBase<T> *mPtr = nullptr;
     };
-
-    template <AnyBinding B, typename T>
-    constexpr bool operator==(B &&binding, T &&value)
-    {
-        return access_binding(std::forward<B>(binding), [&](auto &&v) {
-            return std::forward<T>(value) == std::forward<decltype(v)>(v);
-        });
-    }
-
-    template <AnyBinding B, typename T>
-    constexpr bool operator<(B &&binding, T &&value)
-    {
-        return access_binding(std::forward<B>(binding), [&](auto &&v) {
-            return std::forward<T>(value) > std::forward<decltype(v)>(v);
-        });
-    }
-
-    template <AnyBinding B, typename T>
-    constexpr bool operator>(B &&binding, T &&value)
-    {
-        return access_binding(std::forward<B>(binding), [&](auto &&v) {
-            return std::forward<T>(value) < std::forward<decltype(v)>(v);
-        });
-    }
 
 }
 }

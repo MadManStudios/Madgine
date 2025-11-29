@@ -133,6 +133,24 @@ namespace Tools {
                 ImGui::EndMenuBar();
             }
 
+            if (beginToolBar("Editor")) {
+
+                if (!isDirty)
+                    ImGui::BeginDisabled();
+                if (ImGui::Button("Save")) {
+                    if (path.empty()) {
+                        mRoot.dialogs().show(
+                            mRoot.filePicker(true), std::move(save));
+                    } else {
+                        save(path);
+                    }
+                }
+                if (!isDirty)
+                    ImGui::EndDisabled();
+
+                endToolBar();
+            }
+
             if (ImGui::Shortcut(ImGuiKey_S | ImGuiMod_Ctrl)) {
                 if (path.empty())
                     mRoot.dialogs().show(

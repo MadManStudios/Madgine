@@ -18,7 +18,7 @@ namespace Tools {
 
     struct SceneView {
 
-        SceneView(SceneEditor *editor, Render::RenderContext *renderer);
+        SceneView(SceneEditor &editor, Render::SceneRenderData &renderData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *im3dContext);
         SceneView(SceneView &&);
         ~SceneView();
 
@@ -32,7 +32,7 @@ namespace Tools {
         std::unique_ptr<Render::RenderTarget> mRenderTarget;
         std::unique_ptr<Render::RenderTarget> mRenderTargetSampled;
 
-        SceneEditor *mEditor;
+        SceneEditor &mEditor;
 
         ImGui::InteractiveViewState mState;
         int mDraggedAxis;

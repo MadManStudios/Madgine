@@ -11,19 +11,19 @@ namespace Render {
 
     struct ShadowSceneRenderData : RenderData {
 
-        ShadowSceneRenderData(SceneMainWindowComponent &scene, Camera *camera);
+        ShadowSceneRenderData(Scene::SceneManager &scene, SceneRenderData &renderData);
 
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
 
-        SceneMainWindowComponent &mScene;
-
-        Camera *mCamera;
+        Scene::SceneManager &mScene;
 
         struct ObjectData {
             Matrix4 mTransform;
             GPUPtr<Matrix4[]> mBones;
         };
         std::map<const GPUMeshData *, std::vector<ObjectData>> mInstances;
+
+        SceneRenderData &mRenderData;
     };
 
 }

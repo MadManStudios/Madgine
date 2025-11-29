@@ -7,10 +7,14 @@
 #include "Madgine/meshloader/gpumeshloader.h"
 
 namespace Engine {
+namespace Im3D {
+    struct Im3DContext;
+}
+
 namespace Render {
 
     struct MADGINE_CLIENT_TOOLS_EXPORT Im3DRenderPass : RenderPass {
-        Im3DRenderPass(Camera *camera, int priority);
+        Im3DRenderPass(Im3D::Im3DContext *context, Camera *camera, int priority);
 
         void setup(RenderTarget *target) override;
         void render(RenderTarget *target, size_t iteration) override;
@@ -20,6 +24,8 @@ namespace Render {
         std::string_view name() const override;
 
     private:
+        Im3D::Im3DContext *mContext;
+
         Camera *mCamera;
 
         int mPriority;

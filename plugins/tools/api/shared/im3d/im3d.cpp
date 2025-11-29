@@ -30,22 +30,37 @@ namespace Im3D {
 
     Threading::WorkgroupLocal<Im3DContext *> sContext;
 
-    void CreateContext()
+    Im3DContext *CreateContext()
     {
-        assert(sContext == nullptr);
-        sContext = new Im3DContext;
+        Im3DContext *context = new Im3DContext;
+        if (sContext == nullptr) {
+            sContext = context;
+        }
+        return context;
     }
 
-    void DestroyContext()
+    void DestroyContext(Im3DContext *context)
     {
-        assert(sContext != nullptr);
-        delete sContext;
-        sContext = nullptr;
+        if (!context) {
+            context = sContext;
+        }
+        assert(context != nullptr);
+        if (context == sContext) {
+            sContext = nullptr;
+        }
+        delete context;
     }
 
     Im3DContext *GetCurrentContext()
     {
         return sContext;
+    }
+
+    Im3DContext *SetCurrentContext(Im3DContext *context)
+    {
+        Im3DContext *oldContext = sContext;
+        sContext = context;
+        return oldContext;
     }
 
     Im3DIO &GetIO()
@@ -488,11 +503,11 @@ namespace Im3D {
             param.mColor
         };
         vertices[1] = {
-            Vector3 { radius, t, 0 },            
+            Vector3 { radius, t, 0 },
             param.mColor
         };
         vertices[2] = {
-            Vector3 { -radius, -t, 0 },            
+            Vector3 { -radius, -t, 0 },
             param.mColor
         };
         vertices[3] = {
@@ -500,35 +515,35 @@ namespace Im3D {
             param.mColor
         };
         vertices[4] = {
-            Vector3 { 0, -radius, t },            
+            Vector3 { 0, -radius, t },
             param.mColor
         };
         vertices[5] = {
-            Vector3 { 0, radius, t },            
+            Vector3 { 0, radius, t },
             param.mColor
         };
         vertices[6] = {
-            Vector3 { 0, -radius, -t },            
+            Vector3 { 0, -radius, -t },
             param.mColor
         };
         vertices[7] = {
-            Vector3 { 0, radius, -t },            
+            Vector3 { 0, radius, -t },
             param.mColor
         };
         vertices[8] = {
-            Vector3 { t, 0, -radius },            
+            Vector3 { t, 0, -radius },
             param.mColor
         };
         vertices[9] = {
-            Vector3 { t, 0, radius },            
+            Vector3 { t, 0, radius },
             param.mColor
         };
         vertices[10] = {
-            Vector3 { -t, 0, -radius },            
+            Vector3 { -t, 0, -radius },
             param.mColor
         };
         vertices[11] = {
-            Vector3 { -t, 0, radius },            
+            Vector3 { -t, 0, radius },
             param.mColor
         };
 
@@ -569,7 +584,7 @@ namespace Im3D {
                     if ((y == 0 && (x == 0 || x == param.mDetail + 1)) || y == param.mDetail + 1)
                         continue;
                     vertices[vertexCounter++] = {
-                        slerp(left, right, x / float(param.mDetail + 1 - y)),                        
+                        slerp(left, right, x / float(param.mDetail + 1 - y)),
                         param.mColor
                     };
                 }
@@ -639,7 +654,7 @@ namespace Im3D {
         Engine::Sphere bounds = { bb.center(),
             0.4f * bb.diameter() };
 
-        //Check if Hovered
+        // Check if Hovered
         float distance = 0.0f;
         if (auto intersection = Intersect(c.mMouseRay, transform * bounds))
             distance = intersection[0];
@@ -667,7 +682,7 @@ namespace Im3D {
     {
         Im3DContext &c = *sContext;
 
-        //Check if Hovered
+        // Check if Hovered
         float distance = 0.0f;
         if (auto intersection = Intersect(c.mMouseRay, transform * bb))
             distance = intersection[0];

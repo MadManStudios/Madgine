@@ -21,9 +21,10 @@
 namespace Engine {
 namespace Render {
 
-    Im3DRenderPass::Im3DRenderPass(Camera *camera, int priority)
+    Im3DRenderPass::Im3DRenderPass(Im3D::Im3DContext *context, Camera *camera, int priority)
         : mCamera(camera)
         , mPriority(priority)
+        , mContext(context)
     {
     }
 
@@ -37,7 +38,7 @@ namespace Render {
         if (!mPipeline.available())
             return;
 
-        Im3D::Im3DContext *context = Im3D::GetCurrentContext();
+        Im3D::Im3DContext *context = Im3D::SetCurrentContext(mContext);
 
         target->clearDepthBuffer();
 
@@ -51,10 +52,10 @@ namespace Render {
             perApplication->p = target->getClipSpaceMatrix() * mCamera->getProjectionMatrix(aspectRatio);
         }
 
-        /*for (const std::pair<Im3DNativeMesh, std::vector<Matrix4>> &p : context->mNativeMeshes)
+        /*for (const std::pair<Im3DNativeMesh, std::vector<Matrix4>> &p : mContext->mNativeMeshes)
             target->renderInstancedMesh(RenderPassFlags_NoLighting, p.first, p.second);*/
 
-        for (std::pair<const Im3DTextureId, Im3D::Im3DContext::RenderData> &p : context->mRenderData) {
+        for (std::pair<const Im3DTextureId, Im3D::Im3DContext::RenderData> &p : mContext->mRenderData) {
 
             {
                 auto perObject = mPipeline->mapParameters<Im3DPerObject>(2);
@@ -97,6 +98,8 @@ namespace Render {
                 }
             }
         }
+
+        Im3D::SetCurrentContext(context);
     }
 
     int Im3DRenderPass::priority() const

@@ -7,6 +7,7 @@ namespace Scene {
 namespace Render {
     struct SceneMainWindowComponent;
     struct SceneRenderData;
+    struct PointShadowRenderData;
 }
 
 }

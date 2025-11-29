@@ -26,7 +26,7 @@ void castDirectionalLight(
 
     diffuseIntensity += ambient + diffuse;
 
-    float3 viewDir = normalize(/** -pos /*/ float3(0.0, 0.0, -1.0) /**/);
+    float3 viewDir = normalize(light.orthographic ? float3(0.0, 0.0, -1.0) : -pos);
     float3 reflectDir = reflect(-light.dir, normal);
     float spec = pow(max(dot(viewDir, -reflectDir), 0.0), shininess);
     float3 specular = specularFactor * spec * light.color;

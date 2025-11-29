@@ -22,7 +22,7 @@ namespace Tools {
 
         bool render();
 
-    //private: //TODO
+    private:
         WidgetEditor &mEditor;
         Filesystem::Path mPath;
         bool mIsDirty = true;

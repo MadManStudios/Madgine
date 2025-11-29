@@ -6,6 +6,10 @@ struct DirectionalLight {
 	float _padding0;
 	float3 dir;
 	float _padding1;
+	bool orthographic;
+	float _padding2;
+	float _padding3;
+	float _padding4;
 };
 
 struct PointLight {

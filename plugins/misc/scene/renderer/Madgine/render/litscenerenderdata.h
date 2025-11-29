@@ -11,13 +11,13 @@ namespace Render {
 
     struct LitSceneRenderData : RenderData {
 
-        LitSceneRenderData(SceneMainWindowComponent &scene, Camera *camera);
+        LitSceneRenderData(Scene::SceneManager &scene, SceneRenderData &renderData, Camera &camera);
 
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
 
-        SceneMainWindowComponent &mScene;
+        Scene::SceneManager &mScene;
 
-        Camera *mCamera;
+        Camera &mCamera;
 
         struct NonInstancedData {
             const GPUMeshData *mMesh;
@@ -31,6 +31,8 @@ namespace Render {
             GPUPtr<Matrix4[]> mBones;
         };
         std::map<NonInstancedData, std::vector<ObjectData>> mInstances;
+
+        SceneRenderData &mRenderData;
     };
 
 }

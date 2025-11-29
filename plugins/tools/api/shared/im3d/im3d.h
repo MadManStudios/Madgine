@@ -64,9 +64,10 @@ namespace Im3D {
     struct Im3DContext;
     struct Im3DObject;
 
-    MADGINE_IM3D_EXPORT void CreateContext();
-    MADGINE_IM3D_EXPORT void DestroyContext();
+    MADGINE_IM3D_EXPORT Im3DContext *CreateContext();
+    MADGINE_IM3D_EXPORT void DestroyContext(Im3DContext *context = nullptr);
     MADGINE_IM3D_EXPORT Im3DContext *GetCurrentContext();
+    MADGINE_IM3D_EXPORT Im3DContext *SetCurrentContext(Im3DContext *context);
 
     MADGINE_IM3D_EXPORT Im3DIO &GetIO();
 

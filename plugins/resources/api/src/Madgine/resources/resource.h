@@ -135,16 +135,6 @@ namespace Resources {
         {
         }
 
-        typename Loader::Handle loadData()
-        {
-            return Loader::load(this);
-        }
-
-        Threading::TaskFuture<void> forceUnload()
-        {
-            return Loader::unload(this);
-        }
-
         typename Loader::Ctor mCtor;
     };
 

@@ -66,7 +66,10 @@ namespace Tools {
         bool beginToolPanel(const char *name, bool *open, ImGuiDir dockingDir, ImGuiWindowFlags flags = 0, const char *docTarget = nullptr, const char *pluginSourceDir = PROJECT_ROOT);
         bool beginSubPanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio = 0.2f, ImGuiWindowFlags flags = 0);
         bool beginContent(ImGuiWindowFlags flags = 0);
-        bool beginGamePanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio = 0.2f, ImGuiWindowFlags flags = 0);
+        bool beginGame();
+                
+        bool beginToolBar(const char *name);
+        void endToolBar();
 
     protected:
         virtual Threading::Task<bool> init();

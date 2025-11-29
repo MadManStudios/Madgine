@@ -25,9 +25,10 @@
 namespace Engine {
 namespace Render {
 
-    ShadowRenderPass::ShadowRenderPass(SceneMainWindowComponent &scene, Render::Camera *camera, int priority)
-        : mData(scene, camera)
+    ShadowRenderPass::ShadowRenderPass(Scene::SceneManager &scene, SceneRenderData &renderData, Render::Camera &camera, int priority)
+        : mData(scene, renderData)
         , mPriority(priority)
+        , mCamera(camera)
     {
     }
 
@@ -144,7 +145,7 @@ namespace Render {
         Quaternion q = Quaternion::FromDirection(mData.mScene.mAmbientLightDirection);
         Quaternion qInv = q.inverse();
 
-        Frustum cameraFrustum = mData.mCamera->getFrustum(aspectRatio);
+        Frustum cameraFrustum = mCamera.getFrustum(aspectRatio);
         Frustum localFrustum = qInv * cameraFrustum;
         auto corners = localFrustum.getCorners();
 

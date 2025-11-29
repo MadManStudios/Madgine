@@ -105,7 +105,7 @@ namespace Resources {
         using Data = _Data;
 
         using ResourceDataInfo = typename Interface::ResourceDataInfo;
-        using Resource = Resource<T>;
+        
 
         using DataContainer = typename replace<typename Base::Container>::template type<ResourceData<T>>;
 
@@ -115,6 +115,21 @@ namespace Resources {
 
         using Handle = Handle<T, typename traits::handle>;
         using Ptr = Ptr<T, Data>;
+
+        struct Resource : Resources::Resource<T> {
+
+            using Resources::Resource<T>::Resource;
+
+            Handle loadData()
+            {
+                return load(this);
+            }
+
+            Threading::TaskFuture<void> forceUnload()
+            {
+                return unload(this);
+            }
+        };
 
         using Ctor = Closure<Threading::Task<bool>(T *, Data &, ResourceDataInfo &, Filesystem::FileEventType event)>;
 

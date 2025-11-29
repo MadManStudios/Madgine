@@ -63,7 +63,7 @@ namespace ClickBrick {
 GameManager::GameManager(Engine::Behavior::HandlerManager &ui)
     : Engine::Widgets::WidgetHandler<GameManager>(ui, "Ingame")
     , mSceneMgr(ui.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
-    , mSceneRenderer(ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>(), &mCamera, 50)
+    , mSceneRenderer(mSceneMgr, ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>().renderData(), ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>().pointShadowRenderData(), mCamera, 50)
     , mSceneClock(mSceneMgr.clock().now())
 {
 }

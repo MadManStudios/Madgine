@@ -10,26 +10,18 @@
 
 #include "Madgine/behavior/behaviorhandle.h"
 
+#include "Madgine_Tools/resourceeditor.h"
+
+#include "Madgine/scene/sceneloader.h"
+
+#include "entitycache.h"
+
 namespace Engine {
 namespace Tools {
 
-    struct SceneEditor : Tool<SceneEditor> {
+    struct SceneEditor {
 
-        SERIALIZABLEUNIT(SceneEditor)
-
-        SceneEditor(ImRoot &root);
-        SceneEditor(const SceneEditor &) = delete;
-
-        virtual Threading::Task<bool> init() override;
-        virtual Threading::Task<void> finalize() override;
-
-        virtual void render() override;
-        virtual void renderMenu() override;
-        virtual void renderSettings() override;
-
-        std::string_view key() const override;
-
-        const Filesystem::Path &currentSceneFile() const;
+        SceneEditor(SceneTool &tool);
 
         std::vector<std::unique_ptr<SceneView>> &views()
         {
@@ -40,94 +32,43 @@ namespace Tools {
         Scene::Entity::Transform *const &hoveredTransform() const;
 
         void deselect();
-        void select(Render::Camera *camera);
         void select(const Scene::Entity::EntityPtr &entity);
 
-        Scene::SceneManager &sceneMgr();
+        virtual Scene::SceneManager &sceneMgr() = 0;
 
-        void play();
-        void pause();
-        void stop();
+        SceneTool &tool();
 
-        void openScene(const Filesystem::Path &p);
-        void saveScene(const Filesystem::Path &p);
+        std::string patchIcon(std::string_view label);
 
-        int createViewIndex();
+        void createView(Render::SceneRenderData &sceneData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *context);
+        void clearViews();
+
+        Behavior::BehaviorHandle render();
 
     private:
-        void renderDetails();
+        void renderToolBar();
+
+        Behavior::BehaviorHandle renderDetails();
         void renderHierarchy();
-        void renderEntity(Scene::Entity::EntityPtr &entity);
-        void renderCamera(Render::Camera *camera);
+        Behavior::BehaviorHandle renderEntity(Scene::Entity::EntityPtr &entity);
+        void renderHierarchyEntity(const EntityCache::Node &entity);
 
         void handleInputs();
 
         void im3DInteractions();
 
-        void saveScenePopup();
+    protected:
+        Scene::Entity::EntityPtr mSelectedEntity;
 
     private:
-        Window::MainWindow &mWindow;
-
         std::vector<std::unique_ptr<SceneView>> mSceneViews;
 
-        bool mHierarchyVisible = true;
-        bool mEntityDetailsVisible = true;
+        EntityCache mEntityCache;
 
-        Inspector *mInspector;
-        Scene::SceneManager *mSceneMgr;
-
-        Scene::Entity::EntityPtr mSelectedEntity;
-        Render::Camera *mSelectedCamera = nullptr;
-
-        enum { PLAY,
-            STOP,
-            PAUSE } mMode;
-
-        // Save/Load
-        std::vector<char> mStartBuffer;
-
-        Filesystem::Path mCurrentSceneFile;
-
-        // Entity-Cache
-        struct EntityNode {
-            Scene::Entity::EntityPtr mEntity;
-            std::list<EntityNode> mChildren;
-        };
-        struct EntityComparator {
-            bool operator()(const Scene::Entity::EntityPtr &a, const Scene::Entity::EntityPtr &b) const
-            {
-                const auto helper = [](Scene::Entity::Entity &entity) { return &entity; };
-                return (a->*helper)() < (b->*helper)();
-            }
-        };
-
-        std::list<EntityNode> mEntityCache;
-        std::map<Scene::Entity::EntityPtr, EntityNode *, EntityComparator> mEntityMapping;
-
-        void updateEntityCache();
-        bool updateEntityCache(EntityNode &node, const Scene::Entity::EntityPtr &parent = {});
-        void createEntityMapping(Scene::Entity::EntityPtr e);
-        void renderHierarchyEntity(EntityNode &entity);
-        void eraseNode(EntityNode &node);
+        SceneTool &mTool;
 
         int mHoveredAxis = -1;
         Scene::Entity::Transform *mHoveredTransform;
-
-        struct {
-            Scene::Entity::EntityPtr mTargetEntity;
-            Threading::TaskFuture<Behavior::ParameterTuple> mFuture;
-            Behavior::ParameterTuple mParameters;
-            Behavior::BehaviorHandle mHandle;
-        } mPendingBehavior;
-
-        // Settings
-        Vector4 mBoneForward = { 1, 0, 0, 0 };
-        float mDefaultBoneLength = 1.0f;
-        bool mShowBoneNames = true;
-        bool mRender3DCursor = false;
-
-        int mRunningViewIndex = 0;
     };
 
 }

@@ -5,7 +5,7 @@
 namespace Engine {
 namespace Render {
 
-    struct SceneRenderData : RenderData {
+    struct MADGINE_SCENE_RENDERER_EXPORT SceneRenderData : RenderData {
 
         SceneRenderData(Scene::SceneManager &scene);
 

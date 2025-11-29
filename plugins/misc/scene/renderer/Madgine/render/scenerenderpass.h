@@ -13,7 +13,7 @@ namespace Engine {
 namespace Render {
 
     struct MADGINE_SCENE_RENDERER_EXPORT SceneRenderPass : RenderPass {
-        SceneRenderPass(SceneMainWindowComponent &scene, Camera *camera, int priority);
+        SceneRenderPass(Scene::SceneManager &scene, SceneRenderData &renderData, PointShadowRenderData &pointShadowRenderData, Camera &camera, int priority);
         SceneRenderPass(SceneRenderPass &&);
         ~SceneRenderPass();
 
@@ -40,6 +40,8 @@ namespace Render {
         LitSceneRenderData mData;
 
         ShadowRenderPass mShadowPass;
+
+        PointShadowRenderData &mPointShadowRenderData;
 
         std::unique_ptr<Render::RenderTarget> mShadowMap;
 

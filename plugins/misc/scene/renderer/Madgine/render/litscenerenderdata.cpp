@@ -20,22 +20,25 @@
 namespace Engine {
 namespace Render {
 
-    LitSceneRenderData::LitSceneRenderData(SceneMainWindowComponent &scene, Camera *camera)
+    LitSceneRenderData::LitSceneRenderData(Scene::SceneManager &scene, SceneRenderData &renderData, Camera &camera)
         : mScene(scene)
         , mCamera(camera)
+        , mRenderData(renderData)
     {
     }
 
     Threading::ImmediateTask<RenderFuture> LitSceneRenderData::render(RenderContext *context)
     {
 
+        co_await mRenderData.update(context);
+
         for (auto &[key, transforms] : mInstances)
             transforms.clear();
 
-        co_await mScene.scene()->mutex().locked(AccessMode::READ, [this, context]() {
+        co_await mScene.mutex().locked(AccessMode::READ, [this, context]() {
             //TODO Culling
 
-            for (const auto &mesh : mScene.scene()->entityComponentList<Scene::Entity::Mesh>().data()) {
+            for (const auto &mesh : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {
                 if (!mesh.isVisible())
                     continue;
 

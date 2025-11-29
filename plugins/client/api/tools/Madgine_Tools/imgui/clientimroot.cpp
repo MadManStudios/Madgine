@@ -303,6 +303,7 @@ namespace Tools {
         // config.GlyphMinAdvanceX = 13.0f;
         config.GlyphOffset = { 0.0f, 3.0f * Window::platformCapabilities.mScalingFactor };
         config.FontDataOwnedByAtlas = false;
+        config.RasterizerDensity = 10.0f;    
 
         Filesystem::Path iconsPath = Resources::ResourceManager::getSingleton().findResourceFile("icons.ttf");
         ByteBuffer iconsData = (co_await Filesystem::readFileAsync(iconsPath)).value();

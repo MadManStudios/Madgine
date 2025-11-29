@@ -57,11 +57,9 @@ namespace Tools {
 
     void RenderContextTool::renderSettings()
     {
-        ImGui::BeginGroupPanel("Renderer");
+        ImGui::SeparatorText("Renderer");
         
         ImGui::Checkbox("Show Debug Visualizers", &mRenderDebugVisualizations);
-        
-        ImGui::EndGroupPanel();
     }
 
     void RenderContextTool::update()

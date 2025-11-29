@@ -125,12 +125,12 @@ IMGUI_API bool DragMatrix4(const char *label, Engine::Matrix4 *m, float *v_speed
 
 IMGUI_API bool MethodPicker(const char *label, const std::vector<std::pair<std::string, Engine::BoundApiFunction>> &methods, Engine::BoundApiFunction *m, std::string *currentName, std::string *filter = nullptr, int expectedArgumentCount = -1);
 
-IMGUI_API void DraggableValueTypeSource(std::string_view name, void (*source)(Engine::ValueType &, void *), void *data, ImGuiDragDropFlags flags = 0);
+IMGUI_API void DraggableValueTypeSource(std::string_view name, void (*source)(Engine::ValueType &, const void *), const void *data, ImGuiDragDropFlags flags = 0);
 template <typename T>
-void DraggableValueTypeSource(std::string_view name, T &&data, ImGuiDragDropFlags flags = 0)
+void DraggableValueTypeSource(std::string_view name, const T &data, ImGuiDragDropFlags flags = 0)
 {
     DraggableValueTypeSource(
-        name, [](Engine::ValueType &retVal, void *data) { Engine::to_ValueType(retVal, static_cast<T &&>(*static_cast<std::remove_reference_t<T> *>(data))); }, &data, flags);
+        name, [](Engine::ValueType &retVal, const void *data) { Engine::to_ValueType(retVal, *static_cast<const T*>(data)); }, &data, flags);
 }
 
 IMGUI_API const Engine::ValueType *GetValuetypePayload();

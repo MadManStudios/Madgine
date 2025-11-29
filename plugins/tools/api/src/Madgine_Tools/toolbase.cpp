@@ -229,10 +229,10 @@ namespace Tools {
         return false;
     }
 
-    bool ToolBase::beginGamePanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio, ImGuiWindowFlags flags)
+    bool ToolBase::beginGame()
     {
-        if (ImGui::Begin(name, open, flags)) {
-            ImGui::SetWindowDockingDir(mRoot.gameDockSpaceId(), dockingDir, ratio, false, ImGuiCond_FirstUseEver);
+        if (ImGui::Begin("Game")) {
+            mDockSpaceId = mRoot.gameDockSpaceId();
             return true;
         }
         return false;
@@ -248,6 +248,49 @@ namespace Tools {
 
         ImGui::SetNextWindowDockID(ImGui::DockBuilderGetCentralNode(mDockSpaceId)->ID, ImGuiCond_Appearing);
         return ImGui::Begin(name.c_str(), nullptr, flags | ImGuiWindowFlags_NoMove);
+    }
+
+    bool ToolBase::beginToolBar(const char *name)
+    {
+        ImGuiWindowClass window_class;
+        window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar | ImGuiDockNodeFlags_NoDocking | ImGuiDockNodeFlags_NoResizeY;
+        ImGui::SetNextWindowClass(&window_class);
+        ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoResize;
+        std::string windowName = std::format("Toolbar##{:x}", mDockSpaceId);
+        if (ImGui::Begin(windowName.c_str(), nullptr, flags)) {
+            ImGui::SetWindowDockingDir(mDockSpaceId, ImGuiDir_Up, 0.01f, true, ImGuiCond_FirstUseEver);
+
+            ImGuiDockNode *node = ImGui::GetWindowDockNode();
+            if (node != NULL) {
+                // Overwrite size of the node
+                const float font_size = ImGui::GetFontSize();
+                const ImVec2 icon_size(ImFloor(font_size * 1.7f), ImFloor(font_size * 1.7f));
+
+                ImGuiStyle &style = ImGui::GetStyle();
+                const ImGuiAxis toolbar_axis_perp = ImGuiAxis_Y;
+                const float TOOLBAR_SIZE_WHEN_DOCKED = style.WindowPadding[ImGuiAxis_Y] * 2.0f + icon_size[toolbar_axis_perp];
+                node->WantLockSizeOnce = true;
+                node->Size[ImGuiAxis_Y] = node->SizeRef[ImGuiAxis_Y] = TOOLBAR_SIZE_WHEN_DOCKED;
+            }
+
+            ImGui::BeginHorizontal(name);
+
+            return true;
+        } else {
+            ImGui::End();
+            return false;
+        }
+    }
+
+    void ToolBase::endToolBar()
+    {
+        ImGui::EndHorizontal();
+        ImGui::SameLine();
+
+        ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+        ImGui::SameLine();
+
+        ImGui::End();
     }
 
     ImGuiID ToolBase::dockSpaceId() const

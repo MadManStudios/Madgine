@@ -18,6 +18,8 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
+#include "Meta/serialize/helper/typedobjectserialize.h"
+
 namespace Engine {
 
 constexpr auto componentBuilder()
@@ -270,9 +272,8 @@ namespace Scene {
 
         Serialize::StreamResult Entity::readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, EntityComponentBase *&ptr)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Component", 1));
             std::string name;
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, name, "name"));
+            STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, name));
             type = EntityComponentRegistry::sComponentsByName().at(name);
             ptr = sceneMgr().entityComponentList(type).emplace(this);
             return {};
@@ -280,9 +281,7 @@ namespace Scene {
 
         const char *Entity::writeComponent(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &p) const
         {
-            out.mStream.beginExtendedWrite("Component", 1);
-            write(out, EntityComponentRegistry::sComponentName(p.mType), "name");
-            return "Component";
+            return Serialize::beginExtendedTypedWrite(out, EntityComponentRegistry::sComponentName(p.mType));
         }
 
         void Entity::handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op)

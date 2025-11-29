@@ -38,7 +38,12 @@
 
 #include "Madgine/window/mainwindow.h"
 
-#include "Madgine/render/scenemainwindowcomponent.h"
+#include "scenetool.h"
+
+METATABLE_BEGIN(Engine::Tools::SceneView)
+READONLY_PROPERTY(Camera, camera)
+READONLY_PROPERTY(SceneRenderer, sceneRenderer)
+METATABLE_END(Engine::Tools::SceneView)
 
 namespace Engine {
 namespace Tools {
@@ -65,14 +70,16 @@ namespace Tools {
         return { point, normal };
     }
 
-    SceneView::SceneView(SceneEditor *editor, Engine::Render::RenderContext *context)
+    SceneView::SceneView(SceneEditor &editor, Render::SceneRenderData &renderData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *im3dContext)
         : mEditor(editor)
-        , mSceneRenderer(static_cast<ClientImRoot&>(editor->root()).window().getWindowComponent<Render::SceneMainWindowComponent>(), &mCamera, 25)
+        , mSceneRenderer(editor.sceneMgr(), renderData, pointShadowRenderData, mCamera, 25)
         , mGridRenderer(&mCamera, 50)
-        , mIm3DRenderer(&mCamera, 75)
-        , mIndex(editor->createViewIndex())
+        , mIm3DRenderer(im3dContext, &mCamera, 75)
+        , mIndex(editor.tool().createViewIndex())
     {
         mCamera.mPosition = { 0, 0.5, -1 };
+
+        Render::RenderContext *context = static_cast<ClientImRoot &>(editor.tool().root()).window().getRenderer();
 
         mRenderTargetSampled = context->createRenderTexture({ 1000, 1000 }, { .mName = "SceneView 4x", .mType = Render::TextureType_2DMultiSample, .mFormat = Render::FORMAT_RGBA8_SRGB, .mSamples = 4 });
 
@@ -84,12 +91,12 @@ namespace Tools {
 
         mRenderTarget = context->createRenderTexture({ 1000, 1000 }, { .mName = "SceneView", .mFormat = Render::FORMAT_RGBA8_SRGB, .mBlitSource = mRenderTargetSampled.get() });
 
-        static_cast<ClientImRoot &>(mEditor->root()).addRenderTarget(mRenderTarget.get());
+        static_cast<ClientImRoot &>(mEditor.tool().root()).addRenderTarget(mRenderTarget.get());
     }
 
     SceneView::~SceneView()
     {
-        static_cast<ClientImRoot &>(mEditor->root()).removeRenderTarget(mRenderTarget.get());
+        static_cast<ClientImRoot &>(mEditor.tool().root()).removeRenderTarget(mRenderTarget.get());
 
         mRenderTargetSampled->removeRenderPass(&mIm3DRenderer);
 
@@ -102,7 +109,7 @@ namespace Tools {
     {
         bool open = true;
 
-        ImGui::SetNextWindowDockID(mEditor->dockSpaceId(), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowDockID(mEditor.tool().dockSpaceId(), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSizeConstraints({ 100, 100 }, { 1000000, 1000000 });
         if (ImGui::Begin(("SceneView##SceneView" + std::to_string(mIndex)).c_str(), &open)) {
 
@@ -124,23 +131,23 @@ namespace Tools {
             bool pressed = ImGui::ImageButton((void *)mRenderTarget->texture()->resourceBlock().mPtr, region, { 0, 0 }, { 1, 1 }, 0);
             if (pressed && !mState.mDragging[0])
                 if (!Im3D::IsAnyObjectHovered())
-                    mEditor->deselect();
+                    mEditor.deselect();
 
             if (ImGui::InteractiveView(mState)) {
 
                 if (io.MouseClicked[0]) {
-                    if (mEditor->hoveredAxis() >= 0) {
-                        mDraggedAxis = mEditor->hoveredAxis();
+                    if (mEditor.hoveredAxis() >= 0) {
+                        mDraggedAxis = mEditor.hoveredAxis();
                         mDragStartRay = ray;
-                        mDragStoredPosition = mEditor->hoveredTransform()->mPosition;
+                        mDragStoredPosition = mEditor.hoveredTransform()->mPosition;
 
                         Vector3 axis = axes[mDraggedAxis];
 
                         Plane plane = cameraPlane(mCamera, mDragStoredPosition, &axis);
 
                         if (auto intersection = Intersect(mDragStartRay, plane)) {
-                            mDragTransform = mEditor->hoveredTransform();
-                            mDragStoredMatrix = mEditor->hoveredTransform()->matrix();
+                            mDragTransform = mEditor.hoveredTransform();
+                            mDragStoredMatrix = mEditor.hoveredTransform()->matrix();
                             mDragRelMousePosition = mDragStartRay.point(intersection[0]) - mDragStoredPosition;
                             mAxisDragging = true;
                         } else {
@@ -184,17 +191,18 @@ namespace Tools {
                 Vector3 pos = ray.point(5.0f);
                 Render::GPUMeshLoader::Resource *resource;
                 if (ImGui::AcceptDraggableValueType(resource)) {
-                    Scene::Entity::EntityPtr e = mEditor->sceneMgr().container("Default").createEntity();
+                    throw "TODO"; // Wrong manager
+                    Scene::Entity::EntityPtr e = mEditor.sceneMgr().container("Default").createEntity();
                     Execution::access_binding(e, [&](Scene::Entity::Entity &e) {
                         e.addComponent<Scene::Entity::Transform>()->mPosition = pos;
                         e.addComponent<Scene::Entity::Mesh>()->set(resource);
                         return true;
                     });
-                    mEditor->select(e);
+                    mEditor.select(e);
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {
                     Render::GPUMeshLoader::Handle handle = resource->loadData();
                     handle.info()->setPersistent(true);
-                    //Im3D::NativeMesh(handle->mMaterials.front().mResourceBlock, handle->mAABB, TranslationMatrix(pos)); //TODO
+                    // Im3D::NativeMesh(handle->mMaterials.front().mResourceBlock, handle->mAABB, TranslationMatrix(pos)); //TODO
                 }
                 ImGui::EndDragDropTarget();
             }
@@ -216,8 +224,3 @@ namespace Tools {
 
 }
 }
-
-METATABLE_BEGIN(Engine::Tools::SceneView)
-READONLY_PROPERTY(Camera, camera)
-READONLY_PROPERTY(SceneRenderer, sceneRenderer)
-METATABLE_END(Engine::Tools::SceneView)

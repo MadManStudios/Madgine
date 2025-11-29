@@ -20,6 +20,9 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
+#include "Meta/math/color3.h"
+#include "Meta/math/vector3.h"
+
 namespace Engine {
 namespace Scene {
     struct MADGINE_SCENE_EXPORT SceneManager : Serialize::TopLevelUnit<SceneManager>,
@@ -130,6 +133,10 @@ namespace Scene {
             Serialize::NoParent<SceneContainer> mContainer;
         };
         std::map<std::string, ContainerData> mContainers;
+
+        Color3 mAmbientLightColor = { 1.0f, 1.0f, 1.0f };
+        NormalizedVector3 mAmbientLightDirection = { -0.0f, -1.0f, 1.5f };
+        bool mAmbientLightOrthographic = false;
     };
 
 }

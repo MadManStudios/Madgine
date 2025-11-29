@@ -20,21 +20,23 @@
 namespace Engine {
 namespace Render {
 
-    ShadowSceneRenderData::ShadowSceneRenderData(SceneMainWindowComponent &scene, Camera *camera)
+    ShadowSceneRenderData::ShadowSceneRenderData(Scene::SceneManager &scene, SceneRenderData &renderData)
         : mScene(scene)
-        , mCamera(camera)
+        , mRenderData(renderData)
     {
     }
 
     Threading::ImmediateTask<RenderFuture> ShadowSceneRenderData::render(RenderContext *context)
     {
+        co_await mRenderData.update(context);
+
         for (auto &[key, transforms] : mInstances)
             transforms.clear();
 
-        co_await mScene.scene()->mutex().locked(AccessMode::READ, [this]() {
+        co_await mScene.mutex().locked(AccessMode::READ, [this]() {
             //TODO Culling
 
-            for (const auto &mesh : mScene.scene()->entityComponentList<Scene::Entity::Mesh>().data()) {
+            for (const auto &mesh : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {
                 if (!mesh.isVisible())
                     continue;
 

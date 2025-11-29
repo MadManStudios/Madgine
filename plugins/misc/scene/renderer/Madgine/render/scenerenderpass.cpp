@@ -41,10 +41,11 @@ METATABLE_END(Engine::Render::SceneRenderPass)
 namespace Engine {
 namespace Render {
 
-    SceneRenderPass::SceneRenderPass(SceneMainWindowComponent &scene, Camera *camera, int priority)
-        : mData(scene, camera)
+    SceneRenderPass::SceneRenderPass(Scene::SceneManager &scene, SceneRenderData &renderData, PointShadowRenderData &pointShadowRenderData, Camera &camera, int priority)
+        : mData(scene, renderData, camera)
         , mPriority(priority)
-        , mShadowPass(scene, camera, 50)
+        , mShadowPass(scene, renderData, camera, 50)
+        , mPointShadowRenderData(pointShadowRenderData)
     {
     }
 
@@ -60,11 +61,9 @@ namespace Render {
 
         addDependency(&mData);
         addDependency(mShadowMap.get());
-        addDependency(mData.mScene.pointShadowTarget(0));
-        addDependency(mData.mScene.pointShadowTarget(1));
-        addDependency(mData.mScene.data());
+        addDependency(&mPointShadowRenderData);
 
-        std::vector<const Texture *> textures = mData.mScene.depthTextures();
+        std::vector<const Texture *> textures = mPointShadowRenderData.depthTextures();
         textures.insert(textures.begin(), mShadowMap->depthTexture());
         mShadowResourceBlock = target->context()->createResourceBlock(textures);
     }
@@ -73,9 +72,7 @@ namespace Render {
     {
         removeDependency(&mData);
         removeDependency(mShadowMap.get());
-        removeDependency(mData.mScene.pointShadowTarget(0));
-        removeDependency(mData.mScene.pointShadowTarget(1));
-        removeDependency(mData.mScene.data());
+        removeDependency(&mPointShadowRenderData);
 
         RenderPass::shutdown(target);
 
@@ -96,7 +93,7 @@ namespace Render {
         {
             auto perApplication = mPipeline->mapParameters<ScenePerApplication>(0);
 
-            perApplication->p = target->getClipSpaceMatrix() * mData.mCamera->getProjectionMatrix(aspectRatio);
+            perApplication->p = target->getClipSpaceMatrix() * mData.mCamera.getProjectionMatrix(aspectRatio);
 
             perApplication->hasHDR = target->textureCount() > 1;
 
@@ -105,7 +102,7 @@ namespace Render {
             perApplication->specularFactor = mSpecularFactor;
         }
 
-        Matrix4 v = mData.mCamera->getViewMatrix();
+        Matrix4 v = mData.mCamera.getViewMatrix();
 
         {
             auto perFrame = mPipeline->mapParameters<ScenePerFrame>(1);
@@ -116,8 +113,9 @@ namespace Render {
 
             perFrame->light.light.color = mData.mScene.mAmbientLightColor;
             perFrame->light.light.dir = (v * Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
+            perFrame->light.light.orthographic = mData.mScene.mAmbientLightOrthographic;
 
-            Scene::Entity::EntityComponentList<Scene::Entity::PointLight> &lights = mData.mScene.scene()->entityComponentList<Scene::Entity::PointLight>();
+            Scene::Entity::EntityComponentList<Scene::Entity::PointLight> &lights = mData.mScene.entityComponentList<Scene::Entity::PointLight>();
             perFrame->pointLightCount = lights.size();
             if (perFrame->pointLightCount > 2) {
                 LOG_WARNING("Too many point lights in scene!");
@@ -201,7 +199,7 @@ namespace Render {
 
     void SceneRenderPass::debugCameras(Closure<void(const Camera &, std::string_view)> handler) const
     {
-        handler(*mData.mCamera, "SceneRenderPass");
+        handler(mData.mCamera, "SceneRenderPass");
     }
 
 }

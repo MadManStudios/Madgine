@@ -29,8 +29,8 @@
 namespace Engine {
 namespace Render {
 
-    PointShadowRenderPass::PointShadowRenderPass(size_t index, SceneMainWindowComponent &scene, int priority)
-        : mData(scene, nullptr)
+    PointShadowRenderPass::PointShadowRenderPass(size_t index, Scene::SceneManager &scene, SceneRenderData &renderData, int priority)
+        : mData(scene, renderData)
         , mIndex(index)
         , mPriority(priority)
     {
@@ -55,7 +55,7 @@ namespace Render {
         if (!mPipeline.available())
             return;
 
-        Scene::Entity::EntityComponentList<Scene::Entity::PointLight> &lights = mData.mScene.scene()->entityComponentList<Scene::Entity::PointLight>();
+        Scene::Entity::EntityComponentList<Scene::Entity::PointLight> &lights = mData.mScene.entityComponentList<Scene::Entity::PointLight>();
         if (mIndex >= lights.size())
             return;
 
