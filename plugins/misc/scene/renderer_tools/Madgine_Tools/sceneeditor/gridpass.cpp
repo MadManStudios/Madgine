@@ -48,6 +48,7 @@ namespace Tools {
             auto parameters = mPipeline->mapParameters<GridPerFrame>(1);
 
             parameters->vp = target->getClipSpaceMatrix() * mCamera->getViewProjectionMatrix(aspectRatio);
+            parameters->cameraPos = mCamera->mPosition;
         }
 
         mPipeline->bindMesh(target, mMesh);

@@ -1,7 +1,8 @@
+#include "grid.sl"
 
 cbuffer PerFrame : register( b1 )
 {
-    matrix vp;
+    GridPerFrame frame;
 }
 
 struct AppData
@@ -20,6 +21,6 @@ VertexShaderOutput main( AppData IN )
 {
     VertexShaderOutput OUT;
     OUT.worldPos = float4(IN.aPos, IN.aW);
-    OUT.pos = mul( vp, OUT.worldPos );
+    OUT.pos = mul( frame.vp, OUT.worldPos );
     return OUT;
 } 
