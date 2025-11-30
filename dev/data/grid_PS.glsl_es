@@ -5,16 +5,29 @@
 precision mediump float;
 precision highp int;
 
+struct GridPerFrame
+{
+    highp mat4 vp;
+    highp vec3 cameraPos;
+};
+
+layout(std140) uniform buffer1
+{
+    layout(row_major) GridPerFrame frame;
+} PerFrame;
+
 in highp vec4 out_var_POSITION;
 layout(location = 0) out highp vec4 out_var_SV_TARGET;
 
 void main()
 {
-    highp vec3 _32 = fract(out_var_POSITION.xyz / vec3(out_var_POSITION.w));
-    highp vec3 _34 = clamp(_32 * vec3(100.0), vec3(0.0), vec3(1.0));
-    highp vec3 _41 = clamp((_32 - vec3(0.9900000095367431640625)) * vec3(100.00009918212890625), vec3(0.0), vec3(1.0));
-    highp vec3 _46 = ((_34 * _34) * (vec3(3.0) - (_34 * 2.0))) - ((_41 * _41) * (vec3(3.0) - (_41 * 2.0)));
-    out_var_SV_TARGET = vec4(0.699999988079071044921875, 0.699999988079071044921875, 0.699999988079071044921875, clamp(1.0 - (_46.x * _46.z), 0.0, 1.0));
+    highp vec3 _38 = out_var_POSITION.xyz / vec3(out_var_POSITION.w);
+    highp vec3 _42 = fract(_38);
+    highp float _50 = pow(PerFrame.frame.cameraPos.y, 2.0);
+    highp vec3 _64 = (vec3(sqrt(pow(_38.x - PerFrame.frame.cameraPos.x, 2.0) + _50), 0.0, sqrt(pow(_38.z - PerFrame.frame.cameraPos.z, 2.0) + _50)) * 0.0199999995529651641845703125) / vec3(abs(PerFrame.frame.cameraPos.y));
+    highp vec3 _66 = clamp(_42 / _64, vec3(0.0), vec3(1.0));
+    highp vec3 _73 = ((_66 * _66) * (vec3(3.0) - (_66 * 2.0))) - smoothstep(vec3(1.0) - _64, vec3(1.0), _42);
+    out_var_SV_TARGET = vec4(0.699999988079071044921875, 0.699999988079071044921875, 0.699999988079071044921875, clamp(1.0 - (_73.x * _73.z), 0.0, 1.0) * (1.0 - smoothstep(1.0, 15.0, distance(_38, PerFrame.frame.cameraPos))));
 }
 
 

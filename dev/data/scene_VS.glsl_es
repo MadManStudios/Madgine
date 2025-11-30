@@ -21,6 +21,10 @@ struct DirectionalLight
     float _padding0;
     vec3 dir;
     float _padding1;
+    uint orthographic;
+    float _padding2;
+    float _padding3;
+    float _padding4;
 };
 
 struct ShadowCaster

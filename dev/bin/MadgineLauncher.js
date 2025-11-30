@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpovkdt1x9.js
+// include: /tmp/tmpkw573g4x.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -208,11 +208,11 @@ Module['FS_createPath']("/", "data", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/CascadiaMono.ttf", "start": 349346, "end": 974238}, {"filename": "/data/FontIcon.png", "start": 974238, "end": 976986}, {"filename": "/data/Gamepad.jpg", "start": 976986, "end": 1085442}, {"filename": "/data/NodeGraph.png", "start": 1085442, "end": 1087688}, {"filename": "/data/OpenSans-Bold.msdf", "start": 1087688, "end": 5299360}, {"filename": "/data/OpenSans-BoldItalic.ttf", "start": 5299360, "end": 5434468}, {"filename": "/data/OpenSans-ExtraBold.ttf", "start": 5434468, "end": 5564648}, {"filename": "/data/OpenSans-ExtraBoldItalic.ttf", "start": 5564648, "end": 5700336}, {"filename": "/data/OpenSans-Italic.ttf", "start": 5700336, "end": 5835716}, {"filename": "/data/OpenSans-Light.ttf", "start": 5835716, "end": 5965472}, {"filename": "/data/OpenSans-LightItalic.ttf", "start": 5965472, "end": 6101140}, {"filename": "/data/OpenSans-Regular.msdf", "start": 6101140, "end": 10312812}, {"filename": "/data/OpenSans-Semibold.ttf", "start": 10312812, "end": 10442528}, {"filename": "/data/OpenSans-SemiboldItalic.ttf", "start": 10442528, "end": 10578040}, {"filename": "/data/Planes.fbx", "start": 10578040, "end": 10612036}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 10612036, "end": 10902869}, {"filename": "/data/ShaderIcon.png", "start": 10902869, "end": 10906048}, {"filename": "/data/blank_white.png", "start": 10906048, "end": 10906167}, {"filename": "/data/bloom_PS.glsl_es", "start": 10906167, "end": 10907043}, {"filename": "/data/bloom_VS.glsl_es", "start": 10907043, "end": 10907349}, {"filename": "/data/blur_PS.glsl_es", "start": 10907349, "end": 10908966}, {"filename": "/data/blur_VS.glsl_es", "start": 10908966, "end": 10909272}, {"filename": "/data/default.atl", "start": 10909272, "end": 10909357}, {"filename": "/data/default.layout", "start": 10909357, "end": 10910674}, {"filename": "/data/default_tex.png", "start": 10910674, "end": 10910879}, {"filename": "/data/grid.png", "start": 10910879, "end": 10911031}, {"filename": "/data/grid_PS.glsl_es", "start": 10911031, "end": 10911791}, {"filename": "/data/grid_VS.glsl_es", "start": 10911791, "end": 10912290}, {"filename": "/data/icons.ttf", "start": 10912290, "end": 10915754}, {"filename": "/data/im3d_PS.glsl_es", "start": 10915754, "end": 10916893}, {"filename": "/data/im3d_VS.glsl_es", "start": 10916893, "end": 10917972}, {"filename": "/data/imgui_PS.glsl_es", "start": 10917972, "end": 10918409}, {"filename": "/data/imgui_VS.glsl_es", "start": 10918409, "end": 10919027}, {"filename": "/data/mage.fbx", "start": 10919027, "end": 11021823}, {"filename": "/data/mage_animated.fbx", "start": 11021823, "end": 13773243}, {"filename": "/data/mage_attack.fbx", "start": 13773243, "end": 14020235}, {"filename": "/data/pointshadow_PS.glsl_es", "start": 14020235, "end": 14020522}, {"filename": "/data/pointshadow_VS.glsl_es", "start": 14020522, "end": 14021744}, {"filename": "/data/scene_PS.glsl_es", "start": 14021744, "end": 14029312}, {"filename": "/data/scene_VS.glsl_es", "start": 14029312, "end": 14032337}, {"filename": "/data/skeleton.png", "start": 14032337, "end": 14033237}, {"filename": "/data/widgets_PS.glsl_es", "start": 14033237, "end": 14034459}, {"filename": "/data/widgets_VS.glsl_es", "start": 14034459, "end": 14035364}], "remote_package_size": 14035364});
+    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/CascadiaMono.ttf", "start": 349346, "end": 974238}, {"filename": "/data/FontIcon.png", "start": 974238, "end": 976986}, {"filename": "/data/Gamepad.jpg", "start": 976986, "end": 1085442}, {"filename": "/data/NodeGraph.png", "start": 1085442, "end": 1087688}, {"filename": "/data/OpenSans-Bold.msdf", "start": 1087688, "end": 5299360}, {"filename": "/data/OpenSans-BoldItalic.ttf", "start": 5299360, "end": 5434468}, {"filename": "/data/OpenSans-ExtraBold.ttf", "start": 5434468, "end": 5564648}, {"filename": "/data/OpenSans-ExtraBoldItalic.ttf", "start": 5564648, "end": 5700336}, {"filename": "/data/OpenSans-Italic.ttf", "start": 5700336, "end": 5835716}, {"filename": "/data/OpenSans-Light.ttf", "start": 5835716, "end": 5965472}, {"filename": "/data/OpenSans-LightItalic.ttf", "start": 5965472, "end": 6101140}, {"filename": "/data/OpenSans-Regular.msdf", "start": 6101140, "end": 10312812}, {"filename": "/data/OpenSans-Semibold.ttf", "start": 10312812, "end": 10442528}, {"filename": "/data/OpenSans-SemiboldItalic.ttf", "start": 10442528, "end": 10578040}, {"filename": "/data/Planes.fbx", "start": 10578040, "end": 10612036}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 10612036, "end": 10902869}, {"filename": "/data/ShaderIcon.png", "start": 10902869, "end": 10906048}, {"filename": "/data/blank_white.png", "start": 10906048, "end": 10906167}, {"filename": "/data/bloom_PS.glsl_es", "start": 10906167, "end": 10907043}, {"filename": "/data/bloom_VS.glsl_es", "start": 10907043, "end": 10907349}, {"filename": "/data/blur_PS.glsl_es", "start": 10907349, "end": 10908966}, {"filename": "/data/blur_VS.glsl_es", "start": 10908966, "end": 10909272}, {"filename": "/data/default.atl", "start": 10909272, "end": 10909357}, {"filename": "/data/default.layout", "start": 10909357, "end": 10910674}, {"filename": "/data/default_tex.png", "start": 10910674, "end": 10910879}, {"filename": "/data/grid.png", "start": 10910879, "end": 10911031}, {"filename": "/data/grid_PS.glsl_es", "start": 10911031, "end": 10912206}, {"filename": "/data/grid_VS.glsl_es", "start": 10912206, "end": 10912781}, {"filename": "/data/icons.ttf", "start": 10912781, "end": 10916245}, {"filename": "/data/im3d_PS.glsl_es", "start": 10916245, "end": 10917384}, {"filename": "/data/im3d_VS.glsl_es", "start": 10917384, "end": 10918463}, {"filename": "/data/imgui_PS.glsl_es", "start": 10918463, "end": 10918900}, {"filename": "/data/imgui_VS.glsl_es", "start": 10918900, "end": 10919518}, {"filename": "/data/mage.fbx", "start": 10919518, "end": 11022314}, {"filename": "/data/mage_animated.fbx", "start": 11022314, "end": 13773734}, {"filename": "/data/mage_attack.fbx", "start": 13773734, "end": 14020726}, {"filename": "/data/pointshadow_PS.glsl_es", "start": 14020726, "end": 14021013}, {"filename": "/data/pointshadow_VS.glsl_es", "start": 14021013, "end": 14022235}, {"filename": "/data/scene_PS.glsl_es", "start": 14022235, "end": 14029995}, {"filename": "/data/scene_VS.glsl_es", "start": 14029995, "end": 14033106}, {"filename": "/data/skeleton.png", "start": 14033106, "end": 14034006}, {"filename": "/data/widgets_PS.glsl_es", "start": 14034006, "end": 14035228}, {"filename": "/data/widgets_VS.glsl_es", "start": 14035228, "end": 14036133}], "remote_package_size": 14036133});
 
   })();
 
-// end include: /tmp/tmpovkdt1x9.js
+// end include: /tmp/tmpkw573g4x.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
@@ -383,7 +383,7 @@ window.sentryOnLoad = function () {
     Sentry.init(
         {
             sendDefaultPii: !0,
-            release: "Madgine@0.4.1",
+            release: "Madgine@0.5.0",
             integrations: [wasmIntegration()],
         })
 }
@@ -8359,22 +8359,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1340776: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1340822: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1340874: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1340990: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1341061: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1341132: () => { document.body.style.cursor = 'default'; },  
- 1341172: () => { document.body.style.cursor = 'text'; },  
- 1341209: () => { document.body.style.cursor = 'move'; },  
- 1341246: () => { document.body.style.cursor = 'ns-resize'; },  
- 1341288: () => { document.body.style.cursor = 'ew-resize'; },  
- 1341330: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1341374: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1341418: () => { document.body.style.cursor = 'grab'; },  
- 1341455: () => { document.body.style.cursor = 'not-allowed'; },  
- 1341499: () => { Module.input.focus(); },  
- 1341521: () => { Module.canvas.focus(); }
+  1356104: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 1356150: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 1356202: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 1356318: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 1356389: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 1356460: () => { document.body.style.cursor = 'default'; },  
+ 1356500: () => { document.body.style.cursor = 'text'; },  
+ 1356537: () => { document.body.style.cursor = 'move'; },  
+ 1356574: () => { document.body.style.cursor = 'ns-resize'; },  
+ 1356616: () => { document.body.style.cursor = 'ew-resize'; },  
+ 1356658: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 1356702: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 1356746: () => { document.body.style.cursor = 'grab'; },  
+ 1356783: () => { document.body.style.cursor = 'not-allowed'; },  
+ 1356827: () => { Module.input.focus(); },  
+ 1356849: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
