@@ -60,7 +60,7 @@ struct Generator {
 
     struct iterator {
         using difference_type = std::ptrdiff_t;
-        using value_type = std::remove_reference_t<T>;
+        using value_type = forward_ref_t<T>;
         using reference_type = const T&;
 
         iterator(Generator<T> &gen)
