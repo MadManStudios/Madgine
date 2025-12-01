@@ -54,6 +54,12 @@ namespace Scene {
             {
                 entityComponentHelperSetSynced(handle, synced, hierarchy);
             }
+
+            template <typename... Configs>
+            friend void tag_invoke(Serialize::set_active_t<Configs...>, EntityComponentHandle &handle, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+            {
+                entityComponentHelperSetActive(handle, active, existenceChanged, hierarchy);
+            }
         };
 
     }

@@ -13,7 +13,7 @@ namespace Serialize {
             if constexpr (std::derived_from<T, TopLevelUnitBase>)
                 this->sync();
             else
-                setActive(*static_cast<T *>(this), true, true);
+                set_active<>(*static_cast<T *>(this), true, true);
         }
 
         ~NoParent()
@@ -21,7 +21,7 @@ namespace Serialize {
             if constexpr (std::derived_from<T, TopLevelUnitBase>)
                 this->unsync();
             else
-                setActive(*static_cast<T *>(this), false, true);
+                set_active<>(*static_cast<T *>(this), false, true);
         }
 
         template <typename CPO, typename... Args>

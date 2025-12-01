@@ -94,7 +94,7 @@ namespace Scene {
 
             void setActive(EntityComponentBase *comp, bool active, bool existenceChanged) override final
             {
-                Serialize::setActive(*static_cast<T *>(comp), active, existenceChanged);
+                Serialize::set_active<>(*static_cast<T *>(comp), active, existenceChanged);
             }
 
             auto begin()

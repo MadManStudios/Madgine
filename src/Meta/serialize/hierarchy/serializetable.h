@@ -12,22 +12,22 @@ namespace Engine {
 namespace Serialize {
 
     template <typename T>
-    T unit_cast(void *unit)
+    T *unit_cast(void *unit)
     {
         if constexpr (std::derived_from<std::remove_pointer_t<T>, SerializableUnitBase>) {
-            return static_cast<T>(static_cast<SerializableUnitBase *>(unit));
+            return static_cast<T*>(static_cast<SerializableUnitBase *>(unit));
         } else {
-            return static_cast<T>(unit);
+            return static_cast<T*>(unit);
         }
     }
 
     template <typename T>
-    T unit_cast(const void *unit)
+    const T *unit_cast(const void *unit)
     {
         if constexpr (std::derived_from<std::remove_pointer_t<T>, SerializableUnitBase>) {
-            return static_cast<T>(static_cast<const SerializableUnitBase *>(unit));
+            return static_cast<const T*>(static_cast<const SerializableUnitBase *>(unit));
         } else {
-            return static_cast<T>(unit);
+            return static_cast<const T*>(unit);
         }
     }
 
@@ -43,7 +43,7 @@ namespace Serialize {
         constexpr SerializeTableCallbacks(type_holder_t<T>)
             : onActivate([](void *unit, CallbackTiming timing, bool active, bool existenceChanged) {
                 if constexpr (requires(T *t) { {setActiveHelper(t, timing, active, existenceChanged)} -> std::same_as<void>; }) {
-                    setActiveHelper(unit_cast<T *>(unit), timing, active, existenceChanged);
+                    setActiveHelper(unit_cast<T>(unit), timing, active, existenceChanged);
                 }
             })
         {

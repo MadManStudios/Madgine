@@ -220,24 +220,67 @@ namespace Serialize {
 
     inline constexpr set_synced_t set_synced;
 
-    template <typename T, typename... Configs>
-    void setActive(T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy)
-    {
-        if constexpr (requires { &Operations<T, Configs...>::setActive; })
-            TupleUnpacker::invoke(Operations<T, Configs...>::setActive, t, active, existenceChanged, hierarchy);
-    }
+    template <typename... Configs>
+    struct set_active_t {
+                
+        template <typename U, typename V>
+        friend void tag_invoke(set_active_t cpo, std::pair<U, V> &p, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {})
+        {
+            cpo(p.first, active, existenceChanged, hierarchy);
+            cpo(p.second, active, existenceChanged, hierarchy);
+        }
+
+        template <typename T>
+        friend void tag_invoke(set_active_t cpo, const std::unique_ptr<T> &p, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {})
+        {
+            cpo(*p, active, existenceChanged, hierarchy);
+        }
+
+        template <SerializeRange C>
+            requires(!requires { typename C::is_serializable_container; })
+        friend void tag_invoke(set_active_t cpo, C &c, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {})
+        {
+            for (auto &t : physical(c)) {
+                cpo(t, active, existenceChanged);
+            }
+        }
+
+        template <PrimitiveType T>            
+        friend void tag_invoke(set_active_t cpo, T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy)
+        {            
+        }
+
+        template <typename T>
+            requires(!is_tag_invocable_v<set_active_t, T &, bool, bool, const CallerHierarchyBasePtr &>)
+        void operator()(T &item, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {}) const
+        {
+            if constexpr (!std::is_const_v<T>)
+                SerializableDataPtr { &item }.setActive(active, existenceChanged);
+        }
+
+        template <typename T>
+        auto operator()(T &item, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy = {}) const
+            noexcept(is_nothrow_tag_invocable_v<set_active_t, T &, bool, bool, const CallerHierarchyBasePtr &>)
+                -> tag_invoke_result_t<set_active_t, T &, bool, bool, const CallerHierarchyBasePtr &>
+        {
+            return tag_invoke(*this, item, active, existenceChanged, hierarchy);
+        }
+    };
+
+    template <typename... Configs>
+    inline constexpr set_active_t<Configs...> set_active;
 
     template <typename T, typename... Configs>
     StreamResult readState(CallerHierarchyFormattedSerializeStream in, T &t, const char *name)
     {
-        setActive(t, false, false);
+        set_active<Configs...>(t, false, false);
 
         StreamResult result = read(in, t, name);
 
         assert(in.mStream.manager());
         STREAM_PROPAGATE_ERROR(apply_map(t, in, result.mState == StreamState::OK));
 
-        setActive(t, true, false);
+        set_active<Configs...>(t, true, false);
 
         return result;
     }
@@ -365,17 +408,6 @@ namespace Serialize {
             }
         }
 
-        static void setActive(T &item, bool active, bool existenceChanged)
-        {
-            if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                item.setActive(active, existenceChanged);
-            } else if constexpr (std::derived_from<T, SerializableUnitBase>) {
-                SerializableUnitPtr { &item }.setActive(active, existenceChanged);
-            } else if constexpr (!PrimitiveType<T> && !std::is_const_v<T>) {
-                SerializableDataPtr { &item }.setActive(active, existenceChanged);
-            }
-        }
-
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             auto tags = TagsSelector<Configs...>::getTags();
@@ -407,16 +439,6 @@ namespace Serialize {
         static void write(CallerHierarchyFormattedSerializeStream &out, const std::unique_ptr<T> &p, const char *name)
         {
             Operations<T, Configs...>::write(out, *p, name);
-        }
-
-        static void setSynced(const std::unique_ptr<T> &p, bool b)
-        {
-            Operations<T, Configs...>::setSynced(*p, b);
-        }
-
-        static void setActive(const std::unique_ptr<T> &p, bool active, bool existenceChanged)
-        {
-            Operations<T, Configs...>::setActive(*p, active, existenceChanged);
         }
 
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)

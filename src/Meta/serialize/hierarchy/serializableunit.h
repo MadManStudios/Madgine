@@ -10,13 +10,11 @@ namespace Serialize {
 #define SERIALIZABLEUNIT_MEMBERS() \
     READONLY_PROPERTY(Synced, isSynced)
 
-    
 #define SERIALIZABLEUNIT(_Self)                                 \
     template <typename Tag, size_t...>                          \
     friend struct ::Engine::LineStruct;                         \
     friend struct ::Engine::Serialize::SerializeTableCallbacks; \
     using Self = _Self;
-
 
     struct META_EXPORT SerializableUnitBase {
     protected:
@@ -47,11 +45,17 @@ namespace Serialize {
         {
             SerializableUnitPtr { &unit }.setParent(parent);
         }
-                
+
         template <std::derived_from<SerializableUnitBase> T>
         friend void tag_invoke(set_synced_t cpo, T &unit, bool b, const CallerHierarchyBasePtr &hierarchy)
         {
             SerializableUnitPtr { &unit }.setSynced(b, hierarchy);
+        }
+
+        template <std::derived_from<SerializableUnitBase> T, typename... Configs>
+        friend void tag_invoke(set_active_t<Configs...>, T &unit, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+        {
+            SerializableUnitPtr { &unit }.setActive(active, existenceChanged);
         }
 
     private:

@@ -1,12 +1,12 @@
 #pragma once
 
+#include "../operations.h"
 #include "Generic/container/atomiccontaineroperation.h"
 #include "Generic/container/container_api.h"
 #include "Generic/container/containerevent.h"
 #include "Generic/functor.h"
 #include "Generic/memberoffsetptr.h"
 #include "serializable.h"
-#include "../operations.h"
 
 namespace Engine {
 namespace Serialize {
@@ -25,7 +25,9 @@ namespace Serialize {
 
         typedef typename _traits::iterator iterator;
         typedef typename _traits::const_iterator const_iterator;
-        typedef typename _traits::position_handle position_handle;        
+        typedef typename _traits::position_handle position_handle;
+
+        using is_serializable_container = void;
 
     public:
         SerializableContainerImpl()
@@ -101,6 +103,26 @@ namespace Serialize {
             return _traits::toIterator(*this, mActiveIterator);
         }
 
+        template <typename... Args>
+        iterator find(Args &&...args)
+        {
+            auto it = Base::find(std::forward<Args>(args)...);
+            if (it == Base::end()) {
+                return end();
+            }
+            return it;
+        }
+
+        template <typename... Args>
+        const_iterator find(Args &&...args) const
+        {
+            auto it = Base::find(std::forward<Args>(args)...);
+            if (it == Base::end()) {
+                return end();
+            }
+            return it;
+        }
+
         /* reverse_iterator rbegin()
         {
             return std::make_reverse_iterator(_traits::toIterator(*this, mActiveIterator));
@@ -174,42 +196,17 @@ namespace Serialize {
             return temp;
         }
 
-        void setActive(bool active, bool existenceChange, bool controlled)
-        {
-            if (active) {
-                while (mActiveIterator != _traits::toPositionHandle(*this, Base::end())) {
-                    iterator it = _traits::toIterator(*this, mActiveIterator);
-                    mActiveIterator = _traits::next(*this, mActiveIterator);
-                    if (existenceChange) {
-                        Observer::operator()(it, BEFORE | EMPLACE);
-                        Observer::operator()(it, AFTER | EMPLACE);
-                    }
-                    Observer::operator()(it, BEFORE | ACTIVATE_ITEM);
-                    Serialize::setActive(*it, active, existenceChange || !controlled, CallerHierarchyPtr { OffsetPtr::parent(this) });
-                    Observer::operator()(it, AFTER | ACTIVATE_ITEM);
-                }
-            } else {
-                while (mActiveIterator != _traits::toPositionHandle(*this, Base::begin())) {
-                    mActiveIterator = _traits::prev(*this, mActiveIterator);
-                    iterator it = _traits::toIterator(*this, mActiveIterator);
-                    Observer::operator()(it, BEFORE | DEACTIVATE_ITEM);
-                    Serialize::setActive(*it, active, existenceChange || !controlled, CallerHierarchyPtr { OffsetPtr::parent(this) });
-                    Observer::operator()(it, AFTER | DEACTIVATE_ITEM);
-                    if (existenceChange) {
-                        Observer::operator()(it, BEFORE | ERASE);
-                        Observer::operator()(it, AFTER | ERASE);
-                    }
-                }
-            }
-        }
-
-        
-        template <typename T>
-        friend void tag_invoke(set_synced_t cpo, SerializableContainerImpl& c, bool b, const CallerHierarchyBasePtr &hierarchy)
+        friend void tag_invoke(set_synced_t cpo, container &c, bool b, const CallerHierarchyBasePtr &hierarchy)
         {
             for (auto &e : c.physical()) {
                 cpo(e, b, CallerHierarchyPtr { OffsetPtr::parent(&c) });
             }
+        }
+
+        template <typename... Configs>
+        friend void tag_invoke(set_active_t<Configs...> cpo, container &c, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+        {
+            c.setActive(active, existenceChanged, CreatorSelector<Configs...>::controlled);
         }
 
         const C &physical() const
@@ -232,7 +229,7 @@ namespace Serialize {
             }
 
             template <typename... Ty>
-            auto emplace_local(bool& success, const const_iterator& it, Ty &&...args)
+            auto emplace_local(bool &success, const const_iterator &it, Ty &&...args)
             {
                 return this->mContainer.emplace_intern(success, it, std::forward<Ty>(args)...);
             }
@@ -281,13 +278,13 @@ namespace Serialize {
                 }
                 if (mInserted) {
                     if (this->mContainer.isSynced())
-                        Serialize::set_synced(*mIt, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        set_synced(*mIt, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                 }
                 if (this->mContainer.isItemActive(mIt)) {
                     this->mContainer.Observer::operator()(mIt, (mInserted ? AFTER : ABORTED) | EMPLACE);
                     if (mInserted) {
                         this->mContainer.Observer::operator()(mIt, BEFORE | ACTIVATE_ITEM);
-                        Serialize::setActive(*mIt, true, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        set_active<>(*mIt, true, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                         this->mContainer.Observer::operator()(mIt, AFTER | ACTIVATE_ITEM);
                     }
                 }
@@ -338,13 +335,13 @@ namespace Serialize {
                     bool inserted = std::get<1>(handle);
                     if (inserted) {
                         if (this->mContainer.isSynced())
-                            Serialize::set_synced(*it, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                            set_synced(*it, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                     }
                     if (this->mContainer.isItemActive(it)) {
                         this->mContainer.Observer::operator()(it, (inserted ? AFTER : ABORTED) | EMPLACE);
                         if (inserted) {
                             this->mContainer.Observer::operator()(it, BEFORE | ACTIVATE_ITEM);
-                            Serialize::setActive(*it, true, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                            set_active<>(*it, true, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                             this->mContainer.Observer::operator()(it, AFTER | ACTIVATE_ITEM);
                         }
                     }
@@ -360,11 +357,11 @@ namespace Serialize {
                 : Operation(c)
             {
                 if (this->mContainer.isSynced()) {
-                    Serialize::set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                    set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                 }
                 if (this->mContainer.isItemActive(it)) {
                     this->mContainer.Observer::operator()(it, BEFORE | DEACTIVATE_ITEM);
-                    Serialize::setActive(*it, false, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                    set_active<>(*it, false, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                     this->mContainer.Observer::operator()(it, AFTER | DEACTIVATE_ITEM);
                     this->mContainer.Observer::operator()(it, BEFORE | ERASE);
                     mWasActive = true;
@@ -399,12 +396,12 @@ namespace Serialize {
             {
                 if (this->mContainer.isSynced()) {
                     for (iterator it = from; it != to; ++it) {
-                        Serialize::set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                     }
                 }
                 for (iterator it = from; it != to && this->mContainer.isItemActive(it); ++it) {
                     this->mContainer.Observer::operator()(it, BEFORE | DEACTIVATE_ITEM);
-                    Serialize::setActive(*it, false, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                    set_Active(*it, false, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
                     this->mContainer.Observer::operator()(it, AFTER | DEACTIVATE_ITEM);
                     this->mContainer.Observer::operator()(it, BEFORE | ERASE);
                     ++mCount;
@@ -495,10 +492,39 @@ namespace Serialize {
             return false;
         }
 
+        void setActive(bool active, bool existenceChange, bool controlled)
+        {
+            if (active) {
+                while (mActiveIterator != _traits::toPositionHandle(*this, Base::end())) {
+                    iterator it = _traits::toIterator(*this, mActiveIterator);
+                    mActiveIterator = _traits::next(*this, mActiveIterator);
+                    if (existenceChange) {
+                        Observer::operator()(it, BEFORE | EMPLACE);
+                        Observer::operator()(it, AFTER | EMPLACE);
+                    }
+                    Observer::operator()(it, BEFORE | ACTIVATE_ITEM);
+                    set_active<>(*it, active, existenceChange || !controlled, CallerHierarchyPtr { OffsetPtr::parent(this) });
+                    Observer::operator()(it, AFTER | ACTIVATE_ITEM);
+                }
+            } else {
+                while (mActiveIterator != _traits::toPositionHandle(*this, Base::begin())) {
+                    mActiveIterator = _traits::prev(*this, mActiveIterator);
+                    iterator it = _traits::toIterator(*this, mActiveIterator);
+                    Observer::operator()(it, BEFORE | DEACTIVATE_ITEM);
+                    set_active<>(*it, active, existenceChange || !controlled, CallerHierarchyPtr { OffsetPtr::parent(this) });
+                    Observer::operator()(it, AFTER | DEACTIVATE_ITEM);
+                    if (existenceChange) {
+                        Observer::operator()(it, BEFORE | ERASE);
+                        Observer::operator()(it, AFTER | ERASE);
+                    }
+                }
+            }
+        }
+
         template <typename... _Ty>
         iterator emplace_intern(bool &success, const const_iterator &where, _Ty &&...args)
         {
-            iterator it = Engine::emplace(success, static_cast<Base&>(*this), where, std::forward<_Ty>(args)...);
+            iterator it = Engine::emplace(success, static_cast<Base &>(*this), where, std::forward<_Ty>(args)...);
             if (success) {
                 _traits::revalidateHandleAfterInsert(mActiveIterator, *this, it);
                 position_handle newHandle = _traits::toPositionHandle(*this, it);
@@ -533,14 +559,14 @@ namespace Serialize {
 
         void clear_intern()
         {
-            //size_t oldSize = size();
+            // size_t oldSize = size();
             Base::clear();
             mActiveIterator = _traits::toPositionHandle(*this, Base::begin());
             //_traits::revalidateHandleAfterRemove(mActiveIterator, *this, Base::begin(), true, oldSize);
         }
-        
+
     private:
-        void emplace() { } //only used to hide any potential emplace() in base class;
+        void emplace() { } // only used to hide any potential emplace() in base class;
 
     protected:
         position_handle mActiveIterator;

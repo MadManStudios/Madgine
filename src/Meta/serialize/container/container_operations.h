@@ -71,13 +71,6 @@ namespace Serialize {
             out.mStream.endContainerWrite(name);
         }
 
-        static void setActive(C &c, bool active, bool existenceChanged)
-        {
-            for (auto &t : physical(c)) {
-                Serialize::setActive(t, active, existenceChanged);
-            }
-        }
-
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, !container_traits<C>::is_fixed_size));
@@ -122,16 +115,6 @@ namespace Serialize {
 
     template <typename C, typename Observer, typename OffsetPtr, typename... Configs>
     struct Operations<SerializableContainerImpl<C, Observer, OffsetPtr>, Configs...> : ContainerOperations<SerializableContainerImpl<C, Observer, OffsetPtr>, Configs...> {
-
-        static void setActive(SerializableContainerImpl<C, Observer, OffsetPtr> &c, bool active, bool existenceChange)
-        {
-            c.setActive(active, existenceChange, ContainerOperations<SerializableContainerImpl<C, Observer, OffsetPtr>, Configs...>::Creator::controlled);
-        }
-
-        static void setSynced(SerializableContainerImpl<C, Observer, OffsetPtr> &c, bool synced)
-        {
-            c.setSynced(synced);
-        }
     };
 
     template <typename C, typename Observer, typename OffsetPtr>
@@ -149,16 +132,6 @@ namespace Serialize {
 
         using RequestPolicy = RequestPolicySelector<Configs...>;
         using Creator = CreatorSelector<Configs...>;
-
-        static void setActive(C &c, bool active, bool existenceChange)
-        {
-            c.setActive(active, existenceChange, Creator::controlled);
-        }
-
-        static void setSynced(C &c, bool synced)
-        {
-            c.setSynced(synced);
-        }
 
         static StreamResult performOperation(C &c, ContainerEvent op, CallerHierarchyFormattedSerializeStream in, std::ranges::iterator_t<C> &it, ParticipantId answerTarget, MessageId answerId)
         {

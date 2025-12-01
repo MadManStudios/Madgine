@@ -24,6 +24,11 @@ namespace Serialize {
     {
         return {};
     }
+
+    template <typename... Configs>
+    inline void tag_invoke(set_active_t<Configs...>, ExtendedValueTypeDesc &, bool, bool, const CallerHierarchyBasePtr &)
+    {        
+    }
     
 }
 }

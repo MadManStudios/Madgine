@@ -164,6 +164,8 @@ namespace Serialize {
 
     struct apply_map_t;
     struct set_synced_t;
+    template <typename...>
+    struct set_active_t;
 
     constexpr CallerHierarchyBasePtr sNoCallerHierarchy;
 
@@ -184,8 +186,6 @@ namespace Serialize {
         const CallerHierarchyBasePtr &mHierarchy;
     };
 
-    template <typename T, typename... Configs>
-    void setActive(T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {});
     template <typename T, typename... Configs>
     StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth = 0);
 

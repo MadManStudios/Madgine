@@ -88,7 +88,12 @@ namespace Serialize {
         friend struct SerializableUnitPtr;
         friend struct SerializableDataPtr;
 
-        META_EXPORT friend StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, CallerHierarchyFormattedSerializeStream in, bool success);
+        friend META_EXPORT StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, CallerHierarchyFormattedSerializeStream in, bool success);
+        template <typename... Configs>
+        friend void tag_invoke(set_active_t<Configs...>, SyncableUnitBase &unit, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+        {
+            unit.setActive(active, existenceChanged);
+        }
         friend META_EXPORT StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
 
         DERIVE_FRIEND(customUnitPtr)
