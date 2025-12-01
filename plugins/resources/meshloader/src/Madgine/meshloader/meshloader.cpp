@@ -74,10 +74,10 @@ namespace Render {
             "Plane", {}, [](MeshLoader *loader, MeshData &data, MeshLoader::ResourceDataInfo &info) -> Threading::Task<bool> {
                 std::vector<Compound<VertexPos, VertexPosW>> vertices {
                     { { 0, 0, 0 }, 1 },
-                    { { 1, 0, 0 }, 0 },
-                    { { 0, 0, 1 }, 0 },
-                    { { -1, 0, 0 }, 0 },
-                    { { 0, 0, -1 }, 0 }
+                    { { 1, 0, -1 }, 0 },
+                    { { 1, 0, 1 }, 0 },
+                    { { -1, 0, 1 }, 0 },
+                    { { -1, 0, -1 }, 0 }
                 };
 
                 std::vector<uint32_t> indices {
