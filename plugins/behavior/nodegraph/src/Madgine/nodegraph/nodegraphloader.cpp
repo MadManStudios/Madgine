@@ -81,13 +81,7 @@ namespace Behavior {
             return graph.interpret();
         }
 
-        Threading::TaskFuture<ParameterTuple> NodeGraphBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
-        {
-            const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
-            return ParameterTuple { std::make_tuple(), auto_pack<> {} };
-        }
-
-        ParameterTuple NodeGraphBehaviorFactory::createDummyParameters(const UniqueOpaquePtr &handle) const
+        ParameterTuple NodeGraphBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
             return ParameterTuple { std::make_tuple(), auto_pack<> {} };

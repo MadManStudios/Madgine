@@ -108,31 +108,24 @@ namespace Tools {
             if (behaviorToAdd) {
                 mPendingBehavior.mTargetEntity = mSelectedEntity;
                 mPendingBehavior.mHandle = behaviorToAdd;
-                mPendingBehavior.mFuture = behaviorToAdd.createParameters();
-                mPendingBehavior.mParameters.reset();
+                mPendingBehavior.mParameters = behaviorToAdd.createParameters();
                 ImGui::OpenPopup("BehaviorParameters");
             }
 
             if (ImGui::BeginPopup("BehaviorParameters")) {
-                if (!mPendingBehavior.mFuture.is_ready()) {
-                    ImGui::Text("Loading...");
-                } else {
-                    if (!mPendingBehavior.mParameters)
-                        mPendingBehavior.mParameters = mPendingBehavior.mFuture;
-                    if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                        mInspector->drawMembers(&mPendingBehavior.mParameters);
-                        ImGui::EndTable();
-                    }
-                    if (ImGui::Button("Cancel")) {
-                        ImGui::CloseCurrentPopup();
-                    }
-                    ImGui::SameLine();
-                    if (ImGui::Button("Create Behavior")) {
-                        Execution::access_binding(mPendingBehavior.mTargetEntity, [&](Scene::Entity::Entity &e) {
-                            e.addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
-                        });
-                        ImGui::CloseCurrentPopup();
-                    }
+                if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
+                    mInspector->drawMembers(&mPendingBehavior.mParameters);
+                    ImGui::EndTable();
+                }
+                if (ImGui::Button("Cancel")) {
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::SameLine();
+                if (ImGui::Button("Create Behavior")) {
+                    Execution::access_binding(mPendingBehavior.mTargetEntity, [&](Scene::Entity::Entity &e) {
+                        e.addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
+                    });
+                    ImGui::CloseCurrentPopup();
                 }
                 ImGui::EndPopup();
             }

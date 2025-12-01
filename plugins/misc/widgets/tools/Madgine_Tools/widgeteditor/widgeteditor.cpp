@@ -222,8 +222,7 @@ namespace Tools {
                         if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
                             if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
                                 mPendingBehavior.mHandle = std::move(behavior);
-                                mPendingBehavior.mFuture = mPendingBehavior.mHandle.createParameters();
-                                mPendingBehavior.mParameters.reset();
+                                mPendingBehavior.mParameters = mPendingBehavior.mHandle.createParameters();
                                 showParameters = true;
                             }
                             ImGui::EndMenu();
@@ -236,23 +235,17 @@ namespace Tools {
                         ImGui::OpenPopup("BehaviorParameters");
 
                     if (ImGui::BeginPopup("BehaviorParameters")) {
-                        if (!mPendingBehavior.mFuture.is_ready()) {
-                            ImGui::Text("Loading...");
-                        } else {
-                            if (!mPendingBehavior.mParameters)
-                                mPendingBehavior.mParameters = mPendingBehavior.mFuture;
-                            if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                                mInspector->drawMembers(&mPendingBehavior.mParameters);
-                                ImGui::EndTable();
-                            }
-                            if (ImGui::Button("Cancel")) {
-                                ImGui::CloseCurrentPopup();
-                            }
-                            ImGui::SameLine();
-                            if (ImGui::Button("Create Behavior")) {
-                                mSelected->addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
-                                ImGui::CloseCurrentPopup();
-                            }
+                        if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
+                            mInspector->drawMembers(&mPendingBehavior.mParameters);
+                            ImGui::EndTable();
+                        }
+                        if (ImGui::Button("Cancel")) {
+                            ImGui::CloseCurrentPopup();
+                        }
+                        ImGui::SameLine();
+                        if (ImGui::Button("Create Behavior")) {
+                            mSelected->addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
+                            ImGui::CloseCurrentPopup();
                         }
                         ImGui::EndPopup();
                     }

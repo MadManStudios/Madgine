@@ -216,13 +216,7 @@ namespace Behavior {
             return main.callAsync();
         }
 
-        Threading::TaskFuture<ParameterTuple> Python3BehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
-        {
-            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return ParameterTuple { std::make_tuple(), auto_pack<> {} };
-        }
-
-        ParameterTuple Python3BehaviorFactory::createDummyParameters(const UniqueOpaquePtr &handle) const
+        ParameterTuple Python3BehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
         {
             const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return ParameterTuple { std::make_tuple(), auto_pack<> {} };

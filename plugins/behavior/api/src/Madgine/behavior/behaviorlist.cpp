@@ -29,6 +29,7 @@ FIELD(mEntries, Engine::Serialize::CustomCreator<readBehavior, writeBehavior>)
 SERIALIZETABLE_END(Engine::Behavior::BehaviorList)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::BehaviorList::Entry)
+FIELD(mParameters)
 SERIALIZETABLE_END(Engine::Behavior::BehaviorList::Entry)
 
 METATABLE_BEGIN(Engine::Behavior::BehaviorList)
@@ -44,7 +45,7 @@ namespace Behavior {
 
     BehaviorList::Entry::Entry(BehaviorHandle handle)
         : mHandle(std::move(handle))
-        , mParameters(mHandle.createDummyParameters())
+        , mParameters(mHandle.createParameters())
     {
     }
 

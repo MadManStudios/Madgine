@@ -56,8 +56,7 @@ namespace Tools {
         bool mGameHierarchyVisible = true;
         bool mGameDetailsVisible = true;
 
-        struct {
-            Threading::TaskFuture<Behavior::ParameterTuple> mFuture;
+        struct {            
             Behavior::ParameterTuple mParameters;
             Behavior::BehaviorHandle mHandle;
         } mPendingBehavior;

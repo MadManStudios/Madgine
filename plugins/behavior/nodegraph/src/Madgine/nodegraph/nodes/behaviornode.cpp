@@ -109,7 +109,7 @@ namespace Behavior {
         BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior, Threading::TaskFuture<bool> &future)
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
-            , mParameters(mBehavior.createDummyParameters())
+            , mParameters(mBehavior.createParameters())
             , mFullClassName(mBehavior.toString())
         {
             future = Engine::Resources::ResourceManager::getSingleton().taskQueue()->queueTask(mBehavior.state().then([this](bool success) {
@@ -125,7 +125,7 @@ namespace Behavior {
         BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior)
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
-            , mParameters(mBehavior.createDummyParameters())
+            , mParameters(mBehavior.createParameters())
             , mFullClassName(mBehavior.toString())
         {
             assert(mBehavior.state());

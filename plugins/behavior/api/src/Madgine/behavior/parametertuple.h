@@ -48,12 +48,11 @@ namespace Behavior {
 
         virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
         {
-            return TupleUnpacker::accumulate(
-                this->mTuple, [&](auto &e, Serialize::StreamResult r) {
-                    STREAM_PROPAGATE_ERROR(std::move(r));
-                    return Serialize::read(in, e, nullptr);
-                },
-                Serialize::StreamResult {});
+            return TupleUnpacker::accumulate([this, &in]<size_t... Is>(auto_pack<Is...>) { return std::make_tuple(Serialize::read(in, std::get<Is>(this->mTuple), Names::template get<Is>.c_str())...); }(index_pack_for<Ty...> {}), 
+                [](Serialize::StreamResult first, Serialize::StreamResult second) {
+                    STREAM_PROPAGATE_ERROR(std::move(first));
+                    return std::move(second);
+                }, Serialize::StreamResult {});
         }
 
         virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
@@ -144,6 +143,11 @@ namespace Behavior {
         friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, ParameterTuple &tuple, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
         {
             return {};
+        }
+
+        template <typename... Configs>
+        friend void tag_invoke(Serialize::set_active_t<Configs...>, ParameterTuple &tuple, bool active, bool existenceChanged, const CallerHierarchyBasePtr &)
+        {
         }
 
         std::unique_ptr<ParameterTupleBase> mTuple;

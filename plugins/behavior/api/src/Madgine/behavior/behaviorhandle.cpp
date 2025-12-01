@@ -68,14 +68,9 @@ namespace Behavior {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->state(mHandle);
     }
 
-    Threading::TaskFuture<ParameterTuple> BehaviorHandle::createParameters() const
+    ParameterTuple BehaviorHandle::createParameters() const
     {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->createParameters(mHandle);
-    }
-
-    ParameterTuple BehaviorHandle::createDummyParameters() const
-    {
-        return BehaviorFactoryRegistry::get(mIndex).mFactory->createDummyParameters(mHandle);
     }
 
     std::vector<ValueTypeDesc> BehaviorHandle::parameterTypes() const

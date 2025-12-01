@@ -17,8 +17,7 @@ namespace Behavior {
         virtual void release(UniqueOpaquePtr &ptr) const = 0;
         virtual std::string_view name(const UniqueOpaquePtr &handle) const = 0;
         virtual Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const = 0;
-        virtual Threading::TaskFuture<ParameterTuple> createParameters(const UniqueOpaquePtr &handle) const = 0;
-        virtual ParameterTuple createDummyParameters(const UniqueOpaquePtr &handle) const = 0;
+        virtual ParameterTuple createParameters(const UniqueOpaquePtr &handle) const = 0;        
         virtual std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const = 0;
         virtual std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const = 0;
         virtual std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const = 0;

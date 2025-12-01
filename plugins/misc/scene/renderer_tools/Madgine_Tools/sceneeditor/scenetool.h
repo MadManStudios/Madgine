@@ -69,8 +69,7 @@ namespace Tools {
         Scene::SceneManager *mSceneMgr;
 
         struct {
-            Scene::Entity::EntityPtr mTargetEntity;
-            Threading::TaskFuture<Behavior::ParameterTuple> mFuture;
+            Scene::Entity::EntityPtr mTargetEntity;            
             Behavior::ParameterTuple mParameters;
             Behavior::BehaviorHandle mHandle;
         } mPendingBehavior;

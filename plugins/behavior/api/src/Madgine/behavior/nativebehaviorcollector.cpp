@@ -54,13 +54,7 @@ namespace Behavior {
         return info->create(args, std::move(behaviors));
     }
 
-    Threading::TaskFuture<ParameterTuple> NativeBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
-    {
-        const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
-        return info->createParameters();
-    }
-
-    ParameterTuple NativeBehaviorFactory::createDummyParameters(const UniqueOpaquePtr &handle) const
+    ParameterTuple NativeBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
     {
         const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
         return info->createParameters();
