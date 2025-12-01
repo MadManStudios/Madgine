@@ -22,6 +22,8 @@
 
 #include "Madgine/debug/debuggablelifetime.h"
 
+#include "Interfaces/debug/stacktrace.h"
+
 UNIQUECOMPONENT(Engine::Tools::DebuggerView);
 
 METATABLE_BEGIN_BASE(Engine::Tools::DebuggerView, Engine::Tools::ToolBase)
@@ -131,7 +133,7 @@ namespace Tools {
                                                break;
                                            }
                                            ImGui::BeginGroupPanel();
-                                           ImGui::Text(arguments);                                           
+                                           ImGui::Text(arguments);
                                            ImGui::EndGroupPanel();
                                            if (type != Debug::ContinuationType::Flow) {
                                                ImGui::PopStyleColor(1);
@@ -143,6 +145,13 @@ namespace Tools {
                                },
                                [&](const Execution::State::Marker &m) {
                                    isMarker = true;
+                               },
+                               [](const Execution::State::FunctionPtr &f) {                                   
+                                   Debug::TraceBack trace = Debug::resolveSymbols(&f.mPtr, 1)[0];                                   
+                                   if (ImGui::TreeNode(trace.mFunction)) {
+                                       ImGui::TextWrapped((std::string { trace.mFile } + ":" + std::to_string(trace.mLineNr)).c_str());                                       
+                                       ImGui::TreePop();
+                                   }                                   
                                } },
                     desc);
 

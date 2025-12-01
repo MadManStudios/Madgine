@@ -16,9 +16,10 @@ namespace Execution {
         struct SubLocation;
         struct Breakpoint;
         struct Marker;
+        struct FunctionPtr;
     }
 
-    using StateDescriptor = std::variant<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::SubLocation, State::Breakpoint, State::Marker>;
+    using StateDescriptor = std::variant<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::SubLocation, State::Breakpoint, State::Marker, State::FunctionPtr>;
 
     namespace State {
         struct Text {
@@ -43,6 +44,9 @@ namespace Execution {
             Debug::Continuation &mContinuation;
         };
         struct Marker {
+        };
+        struct FunctionPtr {
+            void *mPtr;
         };
     }
 

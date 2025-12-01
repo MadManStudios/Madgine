@@ -149,7 +149,13 @@ namespace Execution {
             friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
                 visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
-                visitor(State::Text { typeid(T).name() });
+
+                if constexpr (requires { &T ::operator(); }) {
+                    auto f = &T::operator();
+                    visitor(State::FunctionPtr { *(void **)&f });
+                } else {
+                    visitor(State::Text { "Overloaded Function" });
+                }
             }
         };
 
@@ -1852,7 +1858,7 @@ namespace Execution {
     };
 
     inline constexpr stop_when_t stop_when;
-        
+
     struct halt_t {
 
         template <typename Rec>
@@ -1865,7 +1871,7 @@ namespace Execution {
             void stop()
             {
                 this->set_done();
-            }            
+            }
         };
 
         struct sender {
@@ -1889,7 +1895,6 @@ namespace Execution {
     };
 
     inline constexpr halt_t halt;
-
 
 }
 }
