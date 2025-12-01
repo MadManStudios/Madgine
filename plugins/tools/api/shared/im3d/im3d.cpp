@@ -737,6 +737,23 @@ namespace Im3D {
         return object == c.mHoveredObject;
     }
 
+    bool BoundingFrustum(const char *name, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags, size_t priority)
+    {
+        return BoundingFrustum(GetID(name), frustum, flags, priority);
+    }
+
+    bool BoundingFrustum(Im3DID id, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags, size_t priority)
+    {
+        Im3DContext &c = *sContext;
+
+        // Check if Hovered
+        float distance = 0.0f;
+        if (auto intersection = Intersect(c.mMouseRay, frustum))
+            distance = intersection[0];
+
+        return BoundingObject(id, distance, flags, priority);
+    }
+
     bool IsObjectHovered()
     {
         Im3DContext &c = *sContext;

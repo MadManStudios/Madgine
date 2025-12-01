@@ -58,7 +58,7 @@ namespace Tools {
     void RenderContextTool::renderSettings()
     {
         ImGui::SeparatorText("Renderer");
-        
+
         ImGui::Checkbox("Show Debug Visualizers", &mRenderDebugVisualizations);
     }
 
@@ -89,9 +89,11 @@ namespace Tools {
 
         Vector2i size = target->size();
 
+        Im3D::PushID(target);
         for (const Render::RenderPass *pass : target->renderPasses()) {
             debugDraw(pass, static_cast<float>(size.x) / size.y);
         }
+        Im3D::PopID();
     }
 
     void RenderContextTool::debugDraw(const Render::RenderPass *pass, float aspectRatio)
@@ -107,15 +109,21 @@ namespace Tools {
 
     void RenderContextTool::debugDrawImpl(const Render::RenderDebuggable *debuggable, float aspectRatio)
     {
-        debuggable->debugFrustums([](const Frustum &frustum, std::string_view name) {
+        auto debugFrustum = [&](const Frustum &frustum, std::string_view name) {
             Im3D::Frustum(frustum);
-            if (Im3D::IsObjectHovered()) {
-                ImGui::Text(name);
+
+            if (Im3D::BoundingFrustum(name.data(), frustum)) {
+                if (ImGui::BeginTooltip()) {
+                    ImGui::Text(name);
+                    ImGui::EndTooltip();
+                }
             }
-        });
-        debuggable->debugCameras([=](const Render::Camera &camera, std::string_view name) {
+        };
+        debuggable->debugFrustums(CallableView<void(const Frustum &, std::string_view)> { debugFrustum });
+        auto debugCamera = [=](const Render::Camera &camera, std::string_view name) {
             Im3D::Frustum(camera.getFrustum(aspectRatio), { .mColor = { 0.0f, 1.0f, 0.0f, 1.0f } });
-        });
+        }; 
+        debuggable->debugCameras(CallableView<void(const Render::Camera &, std::string_view)> { debugCamera });
     }
 
 }

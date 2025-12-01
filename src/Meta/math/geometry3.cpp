@@ -7,6 +7,7 @@
 #include "ray3.h"
 #include "sphere.h"
 #include "vector3.h"
+#include "frustum.h"
 
 #include "common.h"
 
@@ -41,6 +42,53 @@ UpTo<float, 2> Intersect(const Ray3 &ray, const BoundingBox &box)
     Plane minX { box.mMin, box.mDirX };
     Plane maxX { box.mMax, box.mDirX };
 
+    Plane minY { box.mMin, box.mDirY };
+    Plane maxY { box.mMax, box.mDirY };
+
+    NormalizedVector3 dirZ = box.mDirX.crossProduct(box.mDirY);
+
+    Plane minZ { box.mMin, dirZ };
+    Plane maxZ { box.mMax, dirZ };
+
+    return Intersect(ray, minX, maxX, minY, maxY, minZ, maxZ);
+}
+
+UpTo<float, 1> Intersect(const Ray3 &ray, const Plane &plane)
+{
+    UpTo<float, 1> result;
+
+    float denom = plane.mNormal.dotProduct(ray.mDir);
+    if (!isZero(denom)) {
+        Vector3 pDist = plane.mNormal * plane.mDistance - ray.mPoint;
+        float t = pDist.dotProduct(plane.mNormal) / denom;
+        result.push_back(t);
+    }
+    return result;
+}
+
+UpTo<float, 2> Intersect(const Ray3 &ray, const Frustum &frustum)
+{
+    auto corners = frustum.getCorners();
+
+    Vector3 normalX = (corners[4] - corners[0]).crossProduct(corners[3] - corners[0]);
+    Vector3 normalY = (corners[1] - corners[0]).crossProduct(corners[4] - corners[0]);
+    Vector3 normalZ = (corners[3] - corners[0]).crossProduct(corners[1] - corners[0]);
+
+    Plane minX { corners[0], normalX };
+    Plane maxX { corners[6], normalX };
+
+    Plane minY { corners[0], normalY };
+    Plane maxY { corners[6], normalY };
+
+    Plane minZ { corners[0], normalZ };
+    Plane maxZ { corners[6], normalZ };
+
+    return Intersect(ray, minX, maxX, minY, maxY, minZ, maxZ);
+}
+
+UpTo<float, 2> Intersect(const Ray3 &ray, const Plane &minX, const Plane &maxX, const Plane &minY, const Plane &maxY, const Plane &minZ, const Plane &maxZ)
+{
+    
     float tMin = std::numeric_limits<float>::lowest();
     float tMax = std::numeric_limits<float>::max();
 
@@ -51,9 +99,6 @@ UpTo<float, 2> Intersect(const Ray3 &ray, const BoundingBox &box)
 
     if (tMin > tMax)
         std::swap(tMin, tMax);
-
-    Plane minY { box.mMin, box.mDirY };
-    Plane maxY { box.mMax, box.mDirY };
 
     float t2Min = std::numeric_limits<float>::lowest();
     float t2Max = std::numeric_limits<float>::max();
@@ -71,11 +116,6 @@ UpTo<float, 2> Intersect(const Ray3 &ray, const BoundingBox &box)
 
     if (tMin > tMax)
         return {};
-
-    NormalizedVector3 dirZ = box.mDirX.crossProduct(box.mDirY);
-
-    Plane minZ { box.mMin, dirZ };
-    Plane maxZ { box.mMax, dirZ };
 
     t2Min = std::numeric_limits<float>::lowest();
     t2Max = std::numeric_limits<float>::max();
@@ -99,19 +139,6 @@ UpTo<float, 2> Intersect(const Ray3 &ray, const BoundingBox &box)
             result.push_back(tMax);
     }
 
-    return result;
-}
-
-UpTo<float, 1> Intersect(const Ray3 &ray, const Plane &plane)
-{
-    UpTo<float, 1> result;
-
-    float denom = plane.mNormal.dotProduct(ray.mDir);
-    if (!isZero(denom)) {
-        Vector3 pDist = plane.mNormal * plane.mDistance - ray.mPoint;
-        float t = pDist.dotProduct(plane.mNormal) / denom;
-        result.push_back(t);
-    }
     return result;
 }
 

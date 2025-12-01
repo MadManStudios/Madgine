@@ -6,8 +6,8 @@ namespace Engine {
 namespace Render {
 
     struct RenderDebuggable {
-        virtual void debugFrustums(Closure<void(const Frustum &, std::string_view)> handler) const { }
-        virtual void debugCameras(Closure<void(const Camera &, std::string_view)> handler) const { }
+        virtual void debugFrustums(CallableView<void(const Frustum &, std::string_view)> handler) const { }
+        virtual void debugCameras(CallableView<void(const Camera &, std::string_view)> handler) const { }
     };
 
 }

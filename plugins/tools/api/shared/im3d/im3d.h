@@ -89,7 +89,7 @@ namespace Im3D {
     MADGINE_IM3D_EXPORT void Arrow(float radius, const Vector3 &a, const Vector3 &b, const Parameters &param = {});
     MADGINE_IM3D_EXPORT void Arrow3D(Im3DMeshType type, float radius, const Vector3 &a, const Vector3 &b, const Parameters &param = {});
     MADGINE_IM3D_EXPORT void Sphere(const Vector3 &center, float radius, const SphereParameters &param = {});
-    MADGINE_IM3D_EXPORT void Frustum(const Frustum &frustum, const Parameters &param = {});
+    MADGINE_IM3D_EXPORT void Frustum(const Engine::Frustum &frustum, const Parameters &param = {});
 
     MADGINE_IM3D_EXPORT bool BoundingSphere(const char *name, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
     MADGINE_IM3D_EXPORT bool BoundingSphere(Im3DID id, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
@@ -100,6 +100,9 @@ namespace Im3D {
     MADGINE_IM3D_EXPORT bool BoundingBox(Im3DID id, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
     MADGINE_IM3D_EXPORT bool BoundingBox(const char *name, const AABB &bb, const Matrix4 &transform = Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
     MADGINE_IM3D_EXPORT bool BoundingBox(Im3DID id, const AABB &bb, const Matrix4 &transform = Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+
+    MADGINE_IM3D_EXPORT bool BoundingFrustum(const char *name, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+    MADGINE_IM3D_EXPORT bool BoundingFrustum(Im3DID id, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
 
     MADGINE_IM3D_EXPORT bool BoundingObject(Im3DID id, float distance = 0.0f, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
 
