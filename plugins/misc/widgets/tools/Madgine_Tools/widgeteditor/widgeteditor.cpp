@@ -198,7 +198,6 @@ namespace Tools {
                 }
 
                 if (ImGui::IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem) && ImGui::IsMouseClicked(0)) {
-                    ImGui::Text("Clicked");
                     if (hoveredWidget && *hoveredWidget)
                         mSelected = *hoveredWidget;
                     else
