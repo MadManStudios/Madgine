@@ -1852,6 +1852,44 @@ namespace Execution {
     };
 
     inline constexpr stop_when_t stop_when;
+        
+    struct halt_t {
+
+        template <typename Rec>
+        struct state : base_state<Rec> {
+
+            void start()
+            {
+            }
+
+            void stop()
+            {
+                this->set_done();
+            }            
+        };
+
+        struct sender {
+            using result_type = void;
+            template <template <typename...> typename Tuple>
+            using value_types = Tuple<>;
+
+            using is_sender = void;
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
+            {
+                return state<Rec> { std::forward<Rec>(rec) };
+            }
+        };
+
+        auto operator()() const
+        {
+            return sender {};
+        }
+    };
+
+    inline constexpr halt_t halt;
+
 
 }
 }
