@@ -28,10 +28,10 @@ float4 main( PixelShaderInput IN ) : SV_TARGET
 
 	float3 fract = frac(coord); //fractional parts of squares
 	//interpolation, grad is smoothness of line gradients
-	float3 grad = 0.02 * float3(sqrt(pow(coord.x - frame.cameraPos.x, 2.0) + pow(frame.cameraPos.y, 2.0)), 0.0, sqrt(pow(coord.z - frame.cameraPos.z, 2.0) + pow(frame.cameraPos.y, 2.0))) / abs(frame.cameraPos.y);
+	float3 grad = 0.02 * float3(pow(pow(coord.x - frame.cameraPos.x, 2.0) + pow(frame.cameraPos.y, 2.0), 0.7), 0.0, pow(pow(coord.z - frame.cameraPos.z, 2.0) + pow(frame.cameraPos.y, 2.0), 0.7)) / abs(frame.cameraPos.y);
 	float3 mult = _smoothstep(0.0, grad, fract) - smoothstep(float3(1.0, 1.0, 1.0)-grad, float3(1.0, 1.0, 1.0), fract);
 	//col = mix(float4(1.0,1.0,1.0,1.0), vec4(0.0,0.0,0.0,0.0), mult.x * mult.y * mult.z);
-	col = float4(0.7, 0.7, 0.7, clamp(1.0 - mult.x * mult.z, 0.0, 1.0) * (1.0 - smoothstep(1.0, 15.0, dist)));	
+	col = float4(0.7, 0.7, 0.7, clamp(1.0 - mult.x * mult.z, 0.0, 1.0) * (1.0 - smoothstep(1.0, 10.0 * sqrt(abs(frame.cameraPos.y)), dist)));	
 
     return col;
 }
