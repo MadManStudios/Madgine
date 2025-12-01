@@ -671,6 +671,7 @@ namespace Tools {
         ImGuiIO &io = ImGui::GetIO();
 
         Vector2 oldSize = mAreaSize;
+        Vector2 oldPos = mAreaPos;
 
         ImGuiDockNode *node = ImGui::DockBuilderGetCentralNode(mGameDockSpaceId);
 
@@ -682,7 +683,7 @@ namespace Tools {
             mAreaSize = Vector2::ZERO;
         }
 
-        if (mAreaSize != oldSize)
+        if (mAreaSize != oldSize || mAreaPos != oldPos)
             mWindow.applyClientSpaceResize(this);
     }
 
