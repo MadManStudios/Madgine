@@ -123,30 +123,17 @@ namespace Window {
         }
     }
 
-    bool MainWindow::loadLayout(std::string_view name)
+    Threading::Task<bool> MainWindow::loadLayout(std::string_view name)
     {
         LayoutLoader::Resource *res = LayoutLoader::get(name);
 
         if (res) {
-            Serialize::SerializeManager mgr { "Layout" };
-            Serialize::FormattedSerializeStream file = res->readAsFormattedStream(mgr);
-
-            if (file) {
-                Serialize::StreamResult result = Serialize::readState(file, *this, nullptr);
-                if (result.mState != Serialize::StreamState::OK) {
-                    LOG_ERROR("Failed loading '" << res->path() << "' with following Error: "
-                                                 << "\n"
-                                                 << result);
-                    return false;
-                }
-                return true;
-            } else {
-                LOG_ERROR("Failed to open " << res->path() << "!");
-                return false;
-            }
+            return res->loadTask(*this);
         } else {
             LOG_ERROR("Could not find layout " << name << "!");
-            return false;
+            return []() -> Threading::Task<bool> {
+                co_return false;
+            }();            
         }
     }
 
@@ -187,7 +174,7 @@ namespace Window {
         applyClientSpaceResize();
 
 #ifdef MADGINE_MAINWINDOW_LAYOUT
-        if (!loadLayout(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT)))
+        if (!co_await loadLayout(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT)))
             co_return false;
 #endif
 

@@ -470,7 +470,7 @@ namespace Tools {
     void ProjectManager::load()
     {
         if (!mLayout.empty()) {
-            mWindow->loadLayout(mLayout);
+            mWindow->taskQueue()->queueTask(mWindow->loadLayout(mLayout));
         }
     }
 #endif

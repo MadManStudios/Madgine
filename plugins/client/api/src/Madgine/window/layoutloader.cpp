@@ -15,34 +15,44 @@
 
 #include "mainwindow.h"
 
-RESOURCELOADER(Engine::Window::LayoutLoader)
+INSTANCELOADER(Engine::Window::LayoutLoader)
 
 namespace Engine {
 namespace Window {
 
     LayoutLoader::LayoutLoader()
-        : ResourceLoader({ ".layout" })
+        : InstanceLoader({ ".layout" })
     {
     }
 
-    Threading::Task<bool> LayoutLoader::loadImpl(LayoutDummy &data, ResourceDataInfo &info)
+    Threading::Task<bool> LayoutLoader::loadImpl(MainWindow &window, Resource *res)
     {
-        throw 0;
+        Serialize::SerializeManager mgr { "Layout" };
+        Serialize::FormattedSerializeStream file = Serialize::FormattedSerializeStream { Serialize::Formats::xml(), mgr.wrapStream(res->readAsStream(), true) };
+
+        if (file) {
+            Serialize::StreamResult result = Serialize::readState(file, window, nullptr);
+            if (result.mState != Serialize::StreamState::OK) {
+                LOG_ERROR("Failed loading '" << res->path() << "' with following Error: "
+                                             << "\n"
+                                             << result);
+                co_return false;
+            }
+            co_return true;
+        } else {
+            LOG_ERROR("Failed to open " << res->path() << "!");
+            co_return false;
+        }
     }
 
-    Threading::Task<void> LayoutLoader::unloadImpl(LayoutDummy &data)
+    Threading::Task<void> LayoutLoader::unloadImpl(MainWindow &window)
     {
-        throw 0;
+        co_return;
     }
 
     Threading::Task<Resources::BakeResult> LayoutLoader::bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir)
     {
         co_return Resources::BakeResult::NOTHING_TO_DO;
-    }
-
-    Serialize::FormattedSerializeStream LayoutLoader::Interface::Resource::readAsFormattedStream(Serialize::SerializeManager &mgr)
-    {
-        return Serialize::FormattedSerializeStream { Serialize::Formats::xml(), mgr.wrapStream(readAsStream(), true) };
     }
 
 }

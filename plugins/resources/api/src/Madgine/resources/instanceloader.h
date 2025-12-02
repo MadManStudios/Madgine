@@ -45,6 +45,11 @@ namespace Resources {
                 return T::load(static_cast<typename T::Resource *>(this), data);
             }
 
+            Threading::Task<bool> loadTask(Data &data)
+            {
+                return T::loadTask(static_cast<typename T::Resource *>(this), data);
+            }
+
             /* Threading::TaskFuture<void> forceUnload()
             {
                 return T::unload(this);
@@ -64,7 +69,7 @@ namespace Resources {
         {
             static_assert(!std::is_same_v<C, typename Loader::Ctor>);
             return [ctor { std::forward<C>(ctor) }](T *loader, Data &data, Resource *res) {
-                return Threading::make_task(ctor, static_cast<Loader *>(loader), static_cast<typename Loader::Data &>(data), static_cast<typename Loader::Resource*>(res));
+                return Threading::make_task(ctor, static_cast<Loader *>(loader), static_cast<typename Loader::Data &>(data), static_cast<typename Loader::Resource *>(res));
             };
         }
 
@@ -132,9 +137,14 @@ namespace Resources {
             return resource;
         }
 
+        static Threading::Task<bool> loadTask(Resource *resource, Data &data, T *loader = &getSingleton())
+        {
+            return resource->mCtor(loader, data, resource);
+        }
+
         static Threading::TaskFuture<bool> load(Resource *resource, Data &data, T *loader = &getSingleton())
         {
-            return queueLoad(resource->mCtor(loader, data, resource), loader->loadingTaskQueue());
+            return queueLoad(loadTask(resource, data, loader), loader->loadingTaskQueue());
         }
 
         template <typename C = Ctor>
