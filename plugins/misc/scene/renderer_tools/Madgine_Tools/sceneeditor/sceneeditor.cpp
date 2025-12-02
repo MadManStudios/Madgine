@@ -157,10 +157,10 @@ namespace Tools {
     void SceneEditor::renderHierarchyEntity(const EntityCache::Node &node)
     {
 
-        bool success = Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
+        bool success = node.mEntity.access([&](Scene::Entity::Entity &e) {
             std::string &name = e.mName;
 
-            bool hovered = Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &selected) { return &selected == &e; });
+            bool hovered = mSelectedEntity.access([&](Scene::Entity::Entity &selected) { return &selected == &e; });
 
             ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
             if (hovered)
@@ -192,7 +192,7 @@ namespace Tools {
                 if (ImGui::BeginDragDropTarget()) {
                     Scene::Entity::EntityPtr newChild;
                     if (ImGui::AcceptDraggableValueType(newChild, nullptr, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
-                        Execution::access_binding(newChild, [&](Scene::Entity::Entity &childEntity) {
+                        newChild.access([&](Scene::Entity::Entity &childEntity) {
                             Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
                             assert(childTransform);
                             childTransform->setParent(node.mEntity);
@@ -236,7 +236,7 @@ namespace Tools {
     {
         Behavior::BehaviorHandle behaviorToAdd;
 
-        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {
+        e.access([&](Scene::Entity::Entity &entity) {
             if (ImGui::BeginPopupCompoundContextWindow()) {
                 if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Component")) {
                     for (auto [name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {

@@ -48,7 +48,7 @@ namespace Scene {
     Entity::EntityPtr SceneContainer::findEntity(const std::string &name)
     {
         auto it = std::ranges::find_if(mEntities, [&](Entity::EntityHandle &handle) {
-            return Execution::access_binding(handle.ptr(), [&](Entity::Entity &e) {
+            return handle.ptr().access([&](Entity::Entity &e) {
                 return e.name() == name;
             });
         });
@@ -98,7 +98,7 @@ namespace Scene {
     const char *SceneContainer::writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::EntityHandle &handle) const
     {
         std::string name;
-        Execution::access_binding(handle.ptr(), [&](Entity::Entity &entity) {
+        handle.ptr().access([&](Entity::Entity &entity) {
             name = entity.name();
         });
         if (name.empty()) {

@@ -193,7 +193,7 @@ namespace Tools {
                 if (ImGui::AcceptDraggableValueType(resource)) {
                     throw "TODO"; // Wrong manager
                     Scene::Entity::EntityPtr e = mEditor.sceneMgr().container("Default").createEntity();
-                    Execution::access_binding(e, [&](Scene::Entity::Entity &e) {
+                    e.access([&](Scene::Entity::Entity &e) {
                         e.addComponent<Scene::Entity::Transform>()->mPosition = pos;
                         e.addComponent<Scene::Entity::Mesh>()->set(resource);
                         return true;

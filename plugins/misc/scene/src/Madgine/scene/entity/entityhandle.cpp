@@ -33,7 +33,7 @@ static constexpr Serializer sComponentSynchronizer {
 
         Engine::Serialize::StreamResult result;
 
-        Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
+        handle->ptr().access([&](Engine::Scene::Entity::Entity &entity) {
             result = [&]() -> Engine::Serialize::StreamResult {
                 std::string name;
                 STREAM_PROPAGATE_ERROR(read(in, name, "name"));
@@ -58,33 +58,33 @@ static constexpr Serializer sComponentSynchronizer {
     [](const Serializer *, void *unit, CallerHierarchyFormattedSerializeStream in, bool success) -> StreamResult {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
         Engine::Serialize::StreamResult result;
-        Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
+        handle->ptr().access([&](Engine::Scene::Entity::Entity &entity) {
             result = Engine::Serialize::apply_map(entity, in, success);
         });
         return result;
     },
     [](const Serializer *, void *unit, bool b, const Engine::CallerHierarchyBasePtr &hierarchy) {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
-        Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
+        handle->ptr().access([&](Engine::Scene::Entity::Entity &entity) {
             Engine::Serialize::set_synced(entity, b, hierarchy);
         });
     },
     [](const Serializer *, void *unit, bool active, bool existenceChanged) {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
-        Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
+        handle->ptr().access([&](Engine::Scene::Entity::Entity &entity) {
             Engine::Serialize::set_active<>(entity, active, existenceChanged);
         });
     },
     [](const Serializer *, void *unit) {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
-        Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
+        handle->ptr().access([&](Engine::Scene::Entity::Entity &entity) {
             Engine::Serialize::set_parent(entity, handle);
         });
     },
     [](const void *unit, const std::vector<WriteMessage> &outStreams, void *data) {
         const Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
 
-        Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
+        handle->ptr().access([&](Engine::Scene::Entity::Entity &entity) {
             Engine::Scene::Entity::EntityComponentActionPayload &payload = *static_cast<Engine::Scene::Entity::EntityComponentActionPayload *>(data);
             for (FormattedMessageStream &stream : outStreams) {
                 write(stream, Engine::Scene::Entity::EntityComponentRegistry::sComponentName(payload.mComponentIndex), "name");

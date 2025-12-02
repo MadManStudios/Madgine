@@ -122,7 +122,7 @@ namespace Tools {
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("Create Behavior")) {
-                    Execution::access_binding(mPendingBehavior.mTargetEntity, [&](Scene::Entity::Entity &e) {
+                    mPendingBehavior.mTargetEntity.access([&](Scene::Entity::Entity &e) {
                         e.addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
                     });
                     ImGui::CloseCurrentPopup();
