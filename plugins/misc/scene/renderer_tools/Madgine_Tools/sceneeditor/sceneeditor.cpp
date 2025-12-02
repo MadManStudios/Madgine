@@ -195,7 +195,7 @@ namespace Tools {
                         Execution::access_binding(newChild, [&](Scene::Entity::Entity &childEntity) {
                             Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
                             assert(childTransform);
-                            childTransform->setParent(transform);
+                            childTransform->setParent(node.mEntity);
                             return true;
                         });
                     }

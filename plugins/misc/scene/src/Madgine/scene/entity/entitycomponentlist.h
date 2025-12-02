@@ -4,10 +4,10 @@
 #include "Generic/container/freelistcontainer.h"
 #include "Meta/keyvalue/scopeptr.h"
 #include "Meta/serialize/hierarchy/serializableunitptr.h"
+#include "Meta/serialize/operations.h"
 #include "entitycomponentcollector.h"
 #include "entitycomponentcontainer.h"
 #include "entitycomponentlistbase.h"
-#include "Meta/serialize/operations.h"
 
 namespace Engine {
 namespace Scene {
@@ -30,17 +30,17 @@ namespace Scene {
 
             ScopePtr getTyped(EntityComponentBase &comp) override final
             {
-                return static_cast<T*>(&comp);
+                return static_cast<T *>(&comp);
             }
 
             Serialize::SerializableDataPtr getSerialized(EntityComponentBase &comp) override final
             {
-                return static_cast<T*>(&comp);
+                return static_cast<T *>(&comp);
             }
 
             Serialize::SerializableDataConstPtr getSerialized(const EntityComponentBase &comp) const override final
             {
-                return static_cast<const T*>(&comp);
+                return static_cast<const T *>(&comp);
             }
 
             const Serialize::SerializeTable *serializeTable() const override final
@@ -51,24 +51,24 @@ namespace Scene {
             void init(EntityComponentBase &comp) override final
             {
                 if constexpr (requires { &T::init; })
-                    static_cast<T*>(comp)->init();
+                    static_cast<T &>(comp).init();
             }
 
             void finalize(EntityComponentBase &comp) override final
             {
                 if constexpr (requires { &T::finalize; })
-                    static_cast<T *>(comp)->finalize();
+                    static_cast<T &>(comp).finalize();
             }
 
             EntityComponentBase &emplace(Entity &entity) override final
-            {   
+            {
                 typename Vector::iterator it = Engine::emplace(mData, mData.end(), entity);
                 return *it;
             }
 
             void erase(EntityComponentBase &comp) override final
             {
-                auto it = std::ranges::find_if(mData, [&comp](auto &element) { return &element == &comp; });                
+                auto it = std::ranges::find_if(mData, [&comp](auto &element) { return &element == &comp; });
                 mData.erase(it);
             }
 

@@ -7,9 +7,9 @@
 
 #include "Meta/math/transformation.h"
 
+#include "../entity.h"
+
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-
 
 NAMED_UNIQUECOMPONENT(Transform, Engine::Scene::Entity::Transform);
 
@@ -20,7 +20,7 @@ MEMBER(mOrientation)
 METATABLE_END(Engine::Scene::Entity::Transform)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Transform)
-FIELD(mParent)
+//FIELD(mParent) //TODO
 FIELD(mPosition)
 FIELD(mScale)
 FIELD(mOrientation)
@@ -43,34 +43,33 @@ namespace Scene {
 
         Matrix4 Transform::parentMatrix() const
         {
-            if (mParent)
-                return mParent->worldMatrix();
-            else
-                return Matrix4::IDENTITY;
+            Matrix4 result = Matrix4::IDENTITY;
+            mParent.access([&](Entity &e) { result = e.getComponent<Transform>()->worldMatrix(); });
+            return result;
         }
 
-        void Transform::setParent(Transform *parent)
+        void Transform::setParent(EntityPtr parent)
         {
-            if (parent == this)
+            if (parent == entity().pointer())
                 return;
-            Transform *ptr = parent;
-            while (ptr) {
-                Transform *next = ptr->mParent;
-                if (next == this) {
-                    ptr->setParent(nullptr);
-                    ptr = nullptr;
-                } else {
-                    ptr = next;
-                }
-            }
+            EntityPtr ptr = parent;
+            while (ptr.access([&](Entity &e) {
+                        EntityPtr next = e.getComponent<Transform>()->mParent;
+                        ptr = next;
+                        if (next == entity().pointer()) {
+                            e.getComponent<Transform>()->setParent({});
+                            return false;
+                        } else {                            
+                            return true;
+                        } }))
+                ;
             mParent = parent;
         }
 
-        Transform *Transform::parent() const
+        const EntityPtr &Transform::parent() const
         {
             return mParent;
         }
     }
 }
 }
-

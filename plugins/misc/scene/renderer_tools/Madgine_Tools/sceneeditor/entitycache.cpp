@@ -60,12 +60,8 @@ namespace Tools {
             Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
 
             if (transform) {
-                Scene::Entity::Transform *parentTransform = transform->parent();
-                if (parentTransform) {
-                    parent = parentTransform->entity().pointer();
-                }
+                parent = transform->parent();
             }
-            return true;
         });
 
         if (parent) {

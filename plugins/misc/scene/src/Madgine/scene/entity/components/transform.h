@@ -23,15 +23,15 @@ namespace Scene {
             Matrix4 worldMatrix() const;
             Matrix4 parentMatrix() const;
 
-            void setParent(Transform *parent);
-            Transform *parent() const;
+            void setParent(EntityPtr parent);
+            const EntityPtr &parent() const;
 
             Vector3 mPosition;
             Vector3 mScale = Vector3::UNIT_SCALE;
             Quaternion mOrientation;
 
         private:
-            Transform *mParent = nullptr;
+            EntityPtr mParent;
         };
 
     }
