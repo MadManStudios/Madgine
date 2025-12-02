@@ -19,18 +19,16 @@ namespace Scene {
         void entityComponentHelperSetSynced(EntityComponentHandle &index, bool synced, CallerHierarchyBasePtr hierarchy);
         void entityComponentHelperSetActive(EntityComponentHandle &index, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy);
 
-
         struct MADGINE_SCENE_EXPORT EntityComponentHandle {
 
-            EntityComponentHandle(uint32_t type, EntityComponentBase* component)
+            EntityComponentHandle(uint32_t type, EntityComponentBase &component)
                 : mType(type)
                 , mComponent(component)
             {
-
             }
 
             const uint32_t mType;
-            EntityComponentBase *mComponent;
+            EntityComponentBase &mComponent;
 
             std::string_view name() const;
             ScopePtr getTyped() const;
@@ -84,7 +82,7 @@ namespace Serialize {
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor)
         {
             throw 0;
-            //return SerializableDataPtr::visitStream<T>(in, name, visitor);
+            // return SerializableDataPtr::visitStream<T>(in, name, visitor);
         }
     };
 

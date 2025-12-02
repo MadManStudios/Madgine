@@ -136,6 +136,8 @@ namespace Tools {
     void SceneTool::renderMenu()
     {
         ResourceEditor::renderMenu();
+
+        ToolBase::renderMenu();
     }
 
     void SceneTool::renderSettings()

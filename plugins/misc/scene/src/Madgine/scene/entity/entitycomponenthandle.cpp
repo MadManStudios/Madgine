@@ -50,7 +50,7 @@ namespace Scene {
         }
 
         ScopePtr EntityComponentHandle::getTyped() const {
-            return { mComponent, *EntityComponentRegistry::get(mType).mType };
+            return { &mComponent, *EntityComponentRegistry::get(mType).mType };
         }
 
     }

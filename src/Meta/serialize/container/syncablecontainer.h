@@ -19,9 +19,11 @@ namespace Serialize {
         typedef typename _traits::iterator iterator;
         typedef typename _traits::const_iterator const_iterator;
 
+        using dummy_t = std::ranges::range_value_t<C>;
+
         struct emplace_request_t {
             iterator mWhere;
-            std::ranges::range_value_t<C> &mDummy;
+            dummy_t &mDummy;
         };
         struct emplace_action_t {
             const_iterator mIt;
@@ -88,47 +90,12 @@ namespace Serialize {
                     if (this->isMaster()) {
                         receiver.set_value(Engine::emplace(*this, where, std::forward<_Ty>(args2)...));
                     } else {
-                        std::ranges::range_value_t<C> temp { std::forward<_Ty>(args2)... };
+                        dummy_t temp { std::forward<_Ty>(args2)... };
                         this->writeRequest(receiver, emplace_request_t { where, temp });
                     }
                 },
                 where,
                 std::forward<_Ty>(args)...);
-        }
-
-        template <typename Init, typename... _Ty>
-        iterator emplace_init(const iterator &where, Init &&init, _Ty &&...args)
-        {
-            bool success;
-            return emplace_init(success, where, std::forward<Init>(init), std::forward<_Ty>(args)...);
-        }
-
-        template <typename Init, typename... _Ty>
-        iterator emplace_init(bool &success, const iterator &where, Init &&init, _Ty &&...args)
-        {
-            assert(this->isMaster());
-            InsertOperation op { *this, where };
-            iterator it = Engine::emplace(success, op, where, std::forward<_Ty>(args)...);
-            if (success) {
-                init(*it);
-            }
-            return it;
-        }
-
-        template <typename Init, typename... _Ty>
-        auto emplace_init_async(const iterator &where, Init &&init, _Ty &&...args)
-        {
-            return make_message_sender<iterator>(
-                [this](auto &receiver, const iterator &where, Init &&init, _Ty &&...args) {
-                    if (this->isMaster()) {
-                        receiver.set_value(emplace_init(where, std::forward<decltype(init)>(init), std::forward<_Ty>(args)...));
-                    } else {
-                        std::ranges::range_value_t<C> temp { std::forward<_Ty>(args)... };
-                        TupleUnpacker::invoke(std::forward<Init>(init), temp);
-                        this->writeRequest(receiver, emplace_request_t { where, temp });
-                    }
-                },
-                where, std::forward<Init>(init), std::forward<_Ty>(args)...);
         }
 
         iterator erase(const iterator &it)

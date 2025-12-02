@@ -142,7 +142,7 @@ namespace Render {
         Vector3 minBounds = std::numeric_limits<float>::max() * Vector3 { Vector3::UNIT_SCALE };
         Vector3 maxBounds = std::numeric_limits<float>::lowest() * Vector3 { Vector3::UNIT_SCALE };
 
-        Quaternion q = Quaternion::FromDirection(mData.mScene.mAmbientLightDirection);
+        Quaternion q = Quaternion::FromDirection(mData.mScene.mAmbientLightDirection, (mCamera.mOrientation * Vector3 { Vector3::UNIT_Z }).crossProduct(mData.mScene.mAmbientLightDirection));
         Quaternion qInv = q.inverse();
 
         Frustum cameraFrustum = mCamera.getFrustum(aspectRatio);
@@ -166,7 +166,7 @@ namespace Render {
         };
     }
 
-    void ShadowRenderPass::debugFrustums(Closure<void(const Frustum &, std::string_view)> handler) const
+    void ShadowRenderPass::debugFrustums(CallableView<void(const Frustum &, std::string_view)> handler) const
     {
         handler(mLightFrustum, "ShadowRenderPass");
     }

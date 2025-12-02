@@ -46,12 +46,12 @@ namespace Render {
                 if (!meshData)
                     continue;
 
-                Scene::Entity::Transform *transform = mesh.entity()->getComponent<Scene::Entity::Transform>();
+                Scene::Entity::Transform *transform = mesh.entity().getComponent<Scene::Entity::Transform>();
                 if (!transform)
                     continue;
 
                 const GPUMeshData::Material *material = nullptr;
-                Scene::Entity::Material *materialComponent = mesh.entity()->getComponent<Scene::Entity::Material>();
+                Scene::Entity::Material *materialComponent = mesh.entity().getComponent<Scene::Entity::Material>();
                 if (materialComponent) {
                     material = materialComponent->get();
                 } else if (mesh.material() < meshData->mMaterials.size()) {
@@ -64,7 +64,7 @@ namespace Render {
                     diffuseColor = material->mDiffuseColor;
                 }
 
-                Scene::Entity::Skeleton *skeleton = mesh.entity()->getComponent<Scene::Entity::Skeleton>();
+                Scene::Entity::Skeleton *skeleton = mesh.entity().getComponent<Scene::Entity::Skeleton>();
                 Engine::Render::GPUPtr<Matrix4[]> bones;
                 if (skeleton)
                     bones = skeleton->mBoneMatrices;

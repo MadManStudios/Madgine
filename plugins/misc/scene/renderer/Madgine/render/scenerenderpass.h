@@ -26,7 +26,7 @@ namespace Render {
 
         virtual std::string_view name() const override;
 
-        virtual void debugCameras(Closure<void(const Camera &, std::string_view)> handler) const override;
+        virtual void debugCameras(CallableView<void(const Camera &, std::string_view)> handler) const override;
 
         float mAmbientFactor = 1.0f;
         float mDiffuseFactor = 1.0f;

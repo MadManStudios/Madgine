@@ -8,17 +8,17 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
         
-        Serialize::StreamResult EntityComponentListBase::readState(EntityComponentBase *comp, Serialize::CallerHierarchyFormattedSerializeStream in, const char *name)
+        Serialize::StreamResult EntityComponentListBase::readState(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream in, const char *name)
         {
             return getSerialized(comp).readState(in, name);
         }
 
-        void EntityComponentListBase::writeState(EntityComponentBase *comp, Serialize::CallerHierarchyFormattedSerializeStream out, const char *name) const
+        void EntityComponentListBase::writeState(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream out, const char *name) const
         {
             getSerialized(comp).writeState(out, name);
         }
 
-        Serialize::StreamResult EntityComponentListBase::applyMap(EntityComponentBase *comp, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+        Serialize::StreamResult EntityComponentListBase::applyMap(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
         {            
             return getSerialized(comp).applyMap(in, success);
         }

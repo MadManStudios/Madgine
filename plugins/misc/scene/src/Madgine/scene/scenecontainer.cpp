@@ -47,11 +47,15 @@ namespace Scene {
 
     Entity::EntityPtr SceneContainer::findEntity(const std::string &name)
     {
-        auto it = std::ranges::find(mEntities, name, projectionKey);
+        auto it = std::ranges::find_if(mEntities, [&](Entity::EntityHandle &handle) {
+            return Execution::access_binding(handle.ptr(), [&](Entity::Entity &e) {
+                return e.name() == name;
+            });
+        });
         if (it == mEntities.end()) {
             return {};
         }
-        return it->pointer();
+        return it->ptr();
     }
 
     std::string SceneContainer::generateUniqueName()
@@ -70,75 +74,57 @@ namespace Scene {
         return mManager;
     }
 
-    void SceneContainer::remove(Entity::Entity *e)
-    {
-        auto it = std::ranges::find(mEntities, e, projectionAddressOf);
-        mEntities.erase(it);
-    }
-
     void SceneContainer::remove(Entity::EntityPtr e)
     {
-        throw 0;
+        auto it = std::ranges::find(mEntities, e, &Entity::EntityHandle::ptr);
+        assert(it != mEntities.end());
+        mEntities.erase(it);
     }
 
     Serialize::StreamResult SceneContainer::readEntity(Serialize::CallerHierarchyFormattedSerializeStream in, OutRef<SceneContainer> &mgr, std::string &name)
     {
-        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Entity", 1));
         mgr = *this;
+        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Entity", 1));
         return Serialize::read(in, name, "name");
     }
 
-    std::tuple<SceneContainer &, std::string> SceneContainer::createEntityData(const std::string &name)
+    std::tuple<SceneContainer &, std::string, std::function<void(Entity::Entity &)>> SceneContainer::createEntityData(const std::string &name, std::function<void(Entity::Entity &)> init)
     {
         std::string actualName = name.empty() ? generateUniqueName() : name;
 
-        return make_tuple(std::ref(*this), actualName);
+        return make_tuple(std::ref(*this), actualName, init);
     }
 
-    const char *SceneContainer::writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::Entity &entity) const
+    const char *SceneContainer::writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::EntityHandle &handle) const
     {
+        std::string name;
+        Execution::access_binding(handle.ptr(), [&](Entity::Entity &entity) {
+            name = entity.name();
+        });
+        if (name.empty()) {
+            return nullptr;
+        }
         out.mStream.beginExtendedWrite("Entity", 1);
-        write(out, entity.name(), "name");
-        return "Entity";
-    }
+        write(out, name, "name");
 
-    Entity::EntityPtr SceneContainer::spawnEntity(const std::string &name, const std::function<void(Entity::Entity &)> &init)
-    {
-        std::unique_ptr<Entity::Entity> entityPtr = std::make_unique<Entity::Entity>(*this, name);
-        Entity::Entity &entity = *entityPtr;
-        init(entity);
-        mLifetime.attach(Execution::sequence(entity.lifetimeSender(), entity.container().mutex().locked(AccessMode::WRITE, [&entity]() {
-            entity.container().remove(entity.pointer());
-        })) | Execution::finally([entityPtr { std::move(entityPtr) }]() mutable { entityPtr.reset(); }));
-        return entity.pointer();
+        return "Entity";
     }
 
     Entity::EntityPtr SceneContainer::createEntity(const std::string &name,
         const std::function<void(Entity::Entity &)> &init)
     {
-        auto toPtr = [this](const EntityContainer::iterator &it) {
-            return it->pointer();
-        };
-        if (init)
-            return toPtr(TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_init, this), mEntities.end(), init, createEntityData(name)));
-        else
-            return toPtr(TupleUnpacker::invokeFlatten(emplace, mEntities, mEntities.end(), createEntityData(name)));
+        return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace, this), mEntities.end(), createEntityData(name, init))->ptr();
     }
 
     void SceneContainer::createEntityAsyncImpl(Serialize::GenericMessageReceiver receiver, const std::string &name, std::function<void(Entity::Entity &)> init)
     {
         Execution::detach(mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }, receiver { std::move(receiver) }]() mutable {
-            auto toPtr = [](const typename EntityContainer::iterator &it) { return it->pointer(); };
-            if (init)
-                Execution::detach_with_receiver(
-                    TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_init_async, this), mEntities.end(), init, createEntityData(name))
-                        | Execution::then(std::move(toPtr)),
-                    std::move(receiver));
-            else
-                Execution::detach_with_receiver(
-                    TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name))
-                        | Execution::then(std::move(toPtr)),
-                    std::move(receiver));
+            auto toPtr = [](const typename EntityContainer::iterator &it) { return it->ptr(); };
+
+            Execution::detach_with_receiver(
+                TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)))
+                    | Execution::then(std::move(toPtr)),
+                std::move(receiver));
         }));
     }
 

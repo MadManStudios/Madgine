@@ -54,29 +54,29 @@ namespace Execution {
             return mFinished;
         }
 
-        template <typename T>
-        struct sender {
-            using is_sender = void;
+        template <typename T, typename Dtor>
+        struct sender : Execution::base_sender{            
 
             using result_type = void;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<>;
 
             template <typename Rec>
-            friend auto tag_invoke(connect_t, sender<T> &&sender, Rec &&rec)
+            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return state<Rec>(std::forward<Rec>(rec), sender.mLifetime, sender.mPtr, std::forward<T>(sender.mT));
+                return state<Rec>(std::forward<Rec>(rec), sender.mLifetime, sender.mPtr, std::forward<T>(sender.mT), std::forward<Dtor>(sender.mDtor));
             }
 
             Lifetime &mLifetime;
             T mT;
+            Dtor mDtor;
             BindingPtr<T> &mPtr;
         };
 
-        template <typename T>
-        sender<T> bound(BindingPtr<T> &ptr, T &&t)
+        template <typename T, typename Dtor>
+        sender<T, Dtor> bound(BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
         {
-            return sender<T> { *this, std::forward<T>(t), ptr };
+            return sender<T, Dtor> { {} , * this, std::forward<T>(t), std::forward<Dtor>(dtor), ptr };
         }
 
         using is_sender = void;
@@ -105,7 +105,7 @@ namespace Execution {
             }
         }
 
-        struct LifetimeReceiver;
+        struct receiver;
 
         template <typename Sender>
         struct attach_state;
@@ -150,9 +150,9 @@ namespace Execution {
             }
 
             template <typename CPO, typename... Args>
-                requires(is_tag_invocable_v<CPO, LifetimeReceiver &, Args...>)
-            friend auto tag_invoke(CPO f, attach_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, LifetimeReceiver &, Args...>)
-                -> tag_invoke_result_t<CPO, LifetimeReceiver &, Args...>
+                requires(is_tag_invocable_v<CPO, receiver &, Args...>)
+            friend auto tag_invoke(CPO f, attach_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, receiver &, Args...>)
+                -> tag_invoke_result_t<CPO, receiver &, Args...>
             {
                 return f(rec.mState->mReceiver, std::forward<Args>(args)...);
             }
@@ -162,7 +162,7 @@ namespace Execution {
 
         template <typename Sender>
         struct attach_state {
-            attach_state(Sender &&sender, LifetimeReceiver &receiver)
+            attach_state(Sender &&sender, receiver &receiver)
                 : mReceiver(receiver)
                 , mState(connect(std::forward<Sender>(sender), attach_receiver<Sender> { this }))
             {
@@ -173,13 +173,13 @@ namespace Execution {
                 mState.start();
             }
 
-            LifetimeReceiver &mReceiver;
+            receiver &mReceiver;
             connect_result_t<Sender, attach_receiver<Sender>> mState;
         };
 
-        struct LifetimeReceiver : VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...> {
+        struct receiver : VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...> {
 
-            LifetimeReceiver(Lifetime &lifetime)
+            receiver(Lifetime &lifetime)
                 : mStopToken(mStopSource.get_token())
                 , mLifetime(lifetime)
             {
@@ -205,19 +205,19 @@ namespace Execution {
         };
 
         template <typename Rec>
-        struct state : VirtualState<LifetimeReceiver, Rec>, StopCallback {
+        struct state : VirtualState<receiver, Rec>, StopCallback {
             state(Rec &&rec, Lifetime &lifetime)
-                : VirtualState<LifetimeReceiver, Rec>(std::forward<Rec>(rec), lifetime)
+                : VirtualState<receiver, Rec>(std::forward<Rec>(rec), lifetime)
             {
                 bool registered = this->mStopSource.registerCallback(this);
                 assert(registered);
             }
 
-            template <typename T>
-            state(Rec &&rec, Lifetime &lifetime, BindingPtr<T> &ptr, T &&t)
+            template <typename T, typename Dtor>
+            state(Rec &&rec, Lifetime &lifetime, BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
                 : state(std::forward<Rec>(rec), lifetime)
             {
-                ptr = BindingPtr<T> { new BindingPoint<T>(*this, std::forward<T>(t)) };
+                ptr = BindingPtr<T> { new BindingPoint<T, Dtor>(*this, std::forward<T>(t), std::forward<Dtor>(dtor)) };
             }
 
             void start()
@@ -250,12 +250,13 @@ namespace Execution {
             }
         };
 
-        template <typename T>
+        template <typename T, typename Dtor>
         struct BindingPoint : StopCallback, BindingBridgeBase<T> {
 
-            BindingPoint(LifetimeReceiver &receiver, T &&t)
+            BindingPoint(receiver &receiver, T &&t, Dtor &&dtor)
                 : mReceiver(receiver)
                 , mT(std::forward<T>(t))
+                , mDtor(std::forward<Dtor>(dtor))
             {
                 ++this->mRefCount;
                 mReceiver.increaseCount();
@@ -267,6 +268,7 @@ namespace Execution {
             void decreaseCount()
             {
                 if (mStrongRefCount.fetch_sub(1) == 1) {
+                    mDtor(std::forward<T>(mT));
                     mReceiver.decreaseCount();
                 }
             }
@@ -299,15 +301,21 @@ namespace Execution {
             }
 
         private:
-            LifetimeReceiver &mReceiver;
+            receiver &mReceiver;
             T mT;
+            Dtor mDtor;
 
             std::atomic<uint32_t> mStrongRefCount = 1;
         };
 
-        LifetimeReceiver *mReceiver = nullptr;
+        receiver *mReceiver = nullptr;
         std::atomic<uint32_t> mCount = 0;
         Flag<> mFinished;
+
+    public:
+        template <typename Rec>
+        using inlineState = state<Rec>;
+        using inlineReceiver = receiver;
     };
 
 }

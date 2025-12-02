@@ -62,58 +62,8 @@ READONLY_PROPERTY(Behaviors, behaviors)
 READONLY_PROPERTY(Lifetime, lifetimeBase)
 METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::Entity)
 
-using namespace Engine::Serialize;
-static constexpr Serializer sComponentSynchronizer {
-    "ComponentSynchronizer",
-    {},
-    [](const void *, CallerHierarchyFormattedSerializeStream, const char *) {
-    },
-    [](void *, CallerHierarchyFormattedSerializeStream, const char *) -> StreamResult {
-        throw 0;
-        return {};
-    },
-    [](void *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) -> StreamResult {
-        std::string name;
-        STREAM_PROPAGATE_ERROR(read(in, name, "name"));
-        auto it = Engine::Scene::Entity::EntityComponentRegistry::sComponentsByName().find(name);
-        if (it == Engine::Scene::Entity::EntityComponentRegistry::sComponentsByName().end())
-            return STREAM_INTEGRITY_ERROR(in) << "Received message for component '" << name << "', which is not registered.";
-        Engine::Scene::Entity::Entity *entity = unit_cast<Engine::Scene::Entity::Entity *>(unit);
-        Engine::Scene::Entity::EntityComponentBase *component = entity->getComponent(it->second);
-        if (!component)
-            return STREAM_INTEGRITY_ERROR(in) << "Received message for component '" << name << "', which is not a component of this Entity.";
-        SerializableDataPtr serializedComponent = entity->sceneMgr().entityComponentList(it->second).getSerialized(component);
-        return serializedComponent.mType->readAction(serializedComponent.unit(), in, request);
-    },
-    [](void *, FormattedMessageStream &, MessageId) -> StreamResult {
-        throw 0;
-        return {};
-    },
-    [](const Serializer *, void *, CallerHierarchyFormattedSerializeStream, bool) -> StreamResult {
-        return {};
-    },
-    [](const Serializer *, void *, bool, const Engine::CallerHierarchyBasePtr &hierarchy) {
-    },
-    [](const Serializer *, void *, bool, bool) {
-    },
-    [](const Serializer *, void *) {
-    },
-    [](const void *unit, const std::vector<WriteMessage> &outStreams, void *data) {
-        Engine::Scene::Entity::EntityComponentActionPayload &payload = *static_cast<Engine::Scene::Entity::EntityComponentActionPayload *>(data);
-        for (FormattedMessageStream &stream : outStreams) {
-            write(stream, Engine::Scene::Entity::EntityComponentRegistry::sComponentName(payload.mComponentIndex), "name");
-        }
-        const Engine::Scene::Entity::Entity *entity = unit_cast<const Engine::Scene::Entity::Entity *>(unit);
-        const SerializeTable *type = entity->sceneMgr().entityComponentList(payload.mComponentIndex).serializeTable();
-        uint16_t index = type->getIndex(payload.mOffset);
-        type->writeAction(payload.mComponent, index, outStreams, payload.mData);
-    },
-    [](const void *, CallerHierarchyFormattedSerializeStream out, void *) { throw 0; }
-};
-
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)
 FIELD(mComponents, Serialize::ParentCreator<&Engine::Scene::Entity::Entity::readComponent, &Engine::Scene::Entity::Entity::writeComponent, &Engine::Scene::Entity::Entity::clearComponents>)
-SERIALIZETABLE_ENTRY(sComponentSynchronizer)
 FIELD(mBehaviors)
 SERIALIZETABLE_END(Engine::Scene::Entity::Entity)
 
@@ -138,26 +88,17 @@ namespace Scene {
         {
         }*/
 
-        Entity::Entity(SceneContainer &container, const std::string &name)
+        Entity::Entity(EntityHandle &handle, SceneContainer &container, const std::string &name)
             : mName(name)
+            , mHandle(handle)
             , mContainer(container)
             , mLifetime(&container.lifetime())
         {
-            startLifetime();
         }
 
         Entity::~Entity()
         {
             clearComponents();
-        }
-
-        Entity &Entity::operator=(Entity &&other)
-        {
-            assert(&mContainer == &other.mContainer);
-            SerializableUnitBase::operator=(std::move(other));
-            mName = std::move(other.mName);
-            mComponents = std::move(other.mComponents);
-            return *this;
         }
 
         const std::string &Entity::key() const
@@ -175,7 +116,7 @@ namespace Scene {
             auto it = mComponents.physical().find(i);
             if (it == mComponents.physical().end())
                 return nullptr;
-            return it->mComponent;
+            return &it->mComponent;
         }
 
         const EntityComponentBase *Entity::getComponent(uint32_t i) const
@@ -183,7 +124,7 @@ namespace Scene {
             auto it = mComponents.physical().find(i);
             if (it == mComponents.physical().end())
                 return nullptr;
-            return it->mComponent;
+            return &it->mComponent;
         }
 
         EntityComponentBase *Entity::getComponent(std::string_view name)
@@ -215,10 +156,10 @@ namespace Scene {
         {
             auto it = mComponents.physical().find(i);
             if (it != mComponents.physical().end()) {
-                return it->mComponent;
+                return &it->mComponent;
             } else {
-                auto it = mComponents.emplace(i, sceneMgr().entityComponentList(i).emplace(this));
-                return it->mComponent;
+                auto it = mComponents.emplace(i, sceneMgr().entityComponentList(i).emplace(*this));
+                return &it->mComponent;
             }
         }
 
@@ -231,7 +172,7 @@ namespace Scene {
         {
             auto it = mComponents.find(i);
             assert(it != mComponents.physical().end());
-            EntityComponentBase *comp = it->mComponent;
+            EntityComponentBase &comp = it->mComponent;
             mComponents.erase(it);
             sceneMgr().entityComponentList(i).erase(comp);
         }
@@ -244,10 +185,7 @@ namespace Scene {
 
         void Entity::startLifetime()
         {
-            mContainer.lifetime().attach(Execution::sequence(lifetimeSender(), mContainer.mutex().locked(AccessMode::WRITE, [this]() {
-                mContainer.remove(this);
-            })));
-            mBehaviors.instantiate(mLifetime);
+            throw 0;
         }
 
         void Entity::endLifetime()
@@ -260,6 +198,11 @@ namespace Scene {
             return mSelf;
         }
 
+        EntityHandle &Entity::handle()
+        {
+            return mHandle;
+        }
+
         Debug::DebuggableLifetime<Behavior::get_named_d> &Entity::lifetime()
         {
             return mLifetime;
@@ -270,12 +213,12 @@ namespace Scene {
             return mLifetime;
         }
 
-        Serialize::StreamResult Entity::readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, EntityComponentBase *&ptr)
+        Serialize::StreamResult Entity::readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, OutRef<EntityComponentBase> &ptr)
         {
             std::string name;
             STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, name));
             type = EntityComponentRegistry::sComponentsByName().at(name);
-            ptr = sceneMgr().entityComponentList(type).emplace(this);
+            ptr = sceneMgr().entityComponentList(type).emplace(*this);
             return {};
         }
 
@@ -323,6 +266,23 @@ namespace Scene {
         const SceneContainer &Entity::container() const
         {
             return mContainer;
+        }
+
+        void Entity::onActivate(Serialize::CallbackTiming timing, bool active, bool existenceChanged)
+        {
+            assert(existenceChanged);
+            if (timing == Serialize::CallbackTiming::AFTER && active) {
+                mBehaviors.instantiate(mLifetime);
+            }
+        }
+
+        void Entity::dtor(Entity &e)
+        {
+            if (e.isSynced()) {
+                Serialize::set_synced(e, false);
+            }
+
+            e.container().remove(e.pointer());
         }
 
     }

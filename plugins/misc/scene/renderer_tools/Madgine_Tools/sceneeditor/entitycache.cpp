@@ -62,7 +62,7 @@ namespace Tools {
             if (transform) {
                 Scene::Entity::Transform *parentTransform = transform->parent();
                 if (parentTransform) {
-                    parent = parentTransform->entity()->pointer();
+                    parent = parentTransform->entity().pointer();
                 }
             }
             return true;

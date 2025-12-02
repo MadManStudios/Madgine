@@ -28,19 +28,19 @@ namespace Scene {
                 return &mData;
             }
 
-            ScopePtr getTyped(EntityComponentBase *comp) override final
+            ScopePtr getTyped(EntityComponentBase &comp) override final
             {
-                return static_cast<T*>(comp);
+                return static_cast<T*>(&comp);
             }
 
-            Serialize::SerializableDataPtr getSerialized(EntityComponentBase *comp) override final
+            Serialize::SerializableDataPtr getSerialized(EntityComponentBase &comp) override final
             {
-                return static_cast<T*>(comp);
+                return static_cast<T*>(&comp);
             }
 
-            Serialize::SerializableDataConstPtr getSerialized(const EntityComponentBase *comp) const override final
+            Serialize::SerializableDataConstPtr getSerialized(const EntityComponentBase &comp) const override final
             {
-                return static_cast<const T*>(comp);
+                return static_cast<const T*>(&comp);
             }
 
             const Serialize::SerializeTable *serializeTable() const override final
@@ -48,27 +48,27 @@ namespace Scene {
                 return &::serializeTable<T>();
             }
 
-            void init(EntityComponentBase *comp) override final
+            void init(EntityComponentBase &comp) override final
             {
                 if constexpr (requires { &T::init; })
                     static_cast<T*>(comp)->init();
             }
 
-            void finalize(EntityComponentBase *comp) override final
+            void finalize(EntityComponentBase &comp) override final
             {
                 if constexpr (requires { &T::finalize; })
                     static_cast<T *>(comp)->finalize();
             }
 
-            EntityComponentBase *emplace(Entity *entity) override final
+            EntityComponentBase &emplace(Entity &entity) override final
             {   
                 typename Vector::iterator it = Engine::emplace(mData, mData.end(), entity);
-                return &*it;
+                return *it;
             }
 
-            void erase(EntityComponentBase *comp) override final
+            void erase(EntityComponentBase &comp) override final
             {
-                auto it = std::ranges::find_if(mData, [comp](auto &element) { return &element == comp; });                
+                auto it = std::ranges::find_if(mData, [&comp](auto &element) { return &element == &comp; });                
                 mData.erase(it);
             }
 
@@ -87,14 +87,14 @@ namespace Scene {
                 return mData.size();
             }
 
-            void setSynced(EntityComponentBase *comp, bool synced) override final
+            void setSynced(EntityComponentBase &comp, bool synced) override final
             {
-                Serialize::set_synced(*static_cast<T *>(comp), synced);
+                Serialize::set_synced(static_cast<T &>(comp), synced);
             }
 
-            void setActive(EntityComponentBase *comp, bool active, bool existenceChanged) override final
+            void setActive(EntityComponentBase &comp, bool active, bool existenceChanged) override final
             {
-                Serialize::set_active<>(*static_cast<T *>(comp), active, existenceChanged);
+                Serialize::set_active<>(static_cast<T &>(comp), active, existenceChanged);
             }
 
             auto begin()

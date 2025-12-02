@@ -124,7 +124,7 @@ namespace Render {
 
             size_t i = 0;
             for (Scene::Entity::PointLight &light : lights | std::ranges::views::take(2)) {
-                Scene::Entity::Transform *t = light.entity()->getComponent<Scene::Entity::Transform>();
+                Scene::Entity::Transform *t = light.entity().getComponent<Scene::Entity::Transform>();
                 if (t) {
                     float range = light.mRange;
                     perFrame->pointLights[i].light.position = (v * Vector4 { t->mPosition, 1.0f }).xyz();
@@ -197,7 +197,7 @@ namespace Render {
         return "Scene";
     }
 
-    void SceneRenderPass::debugCameras(Closure<void(const Camera &, std::string_view)> handler) const
+    void SceneRenderPass::debugCameras(CallableView<void(const Camera &, std::string_view)> handler) const
     {
         handler(mData.mCamera, "SceneRenderPass");
     }

@@ -19,19 +19,25 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        EntityComponentBase::EntityComponentBase(Entity *entity)
-            : mEntity(entity)
+        EntityComponentBase::EntityComponentBase(Entity &entity)
+            : mEntity(&entity)
         {
         }
 
-        Entity *EntityComponentBase::entity() const
+        Entity &EntityComponentBase::entity() const
         {
-            return mEntity;
+            assert(mEntity);
+            return *mEntity;
+        }
+
+        bool EntityComponentBase::isFree() const
+        {
+            return !mEntity;
         }
 
         bool SyncableEntityComponentBase::isMaster() const
         {
-            return entity()->isMaster();
+            return entity().handle().isMaster();
         }
 
         void SyncableEntityComponentBase::writeAction(OffsetPtr offset, size_t componentIndex, void *data, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, const std::set<Serialize::ParticipantId> &targets) const
@@ -42,8 +48,8 @@ namespace Scene {
             payload.mComponent = this;
             payload.mData = data;
 
-            std::vector<Serialize::WriteMessage> streams = getMasterActionMessageTargets(entity(), answerTarget, answerId, targets);
-            entity()->serializeType()->writeAction(entity(), 1, streams, &payload);
+            std::vector<Serialize::WriteMessage> streams = getMasterActionMessageTargets(&entity().handle(), answerTarget, answerId, targets);
+            entity().handle().serializeType()->writeAction(&entity().handle(), 0, streams, &payload);
         }
 
         void Engine::Scene::Entity::SyncableEntityComponentBase::writeRequest(OffsetPtr offset, void *data, Serialize::ParticipantId requester, Serialize::MessageId requesterTransactionId, Serialize::GenericMessageReceiver receiver) const

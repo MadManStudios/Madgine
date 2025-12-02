@@ -28,9 +28,11 @@ namespace Scene {
         struct MADGINE_SCENE_EXPORT EntityComponentBase {
             using Container = FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
 
-            EntityComponentBase(Entity *entity);
+            EntityComponentBase(Entity &entity);
 
-            Entity *entity() const;
+            Entity &entity() const;
+
+            bool isFree() const;
 
         private:
             NulledPtr<Entity> mEntity;

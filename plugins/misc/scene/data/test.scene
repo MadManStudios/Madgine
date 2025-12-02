@@ -18,6 +18,10 @@
             <mBehaviors serId=4>
                 <mEntries>
                     <Native/Rotate serId=5>
+					    <mParameters>
+							<Speed>1</Speed>
+							<Axis>[0, 1, 0]</Axis>
+						</mParameters>
                     </Native/Rotate>
                 </mEntries>
             </mBehaviors>

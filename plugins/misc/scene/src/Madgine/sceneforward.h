@@ -12,6 +12,7 @@ namespace Scene {
         struct EntityComponentHandle;
 
         struct Entity;
+        struct EntityHandle;
         struct EntityComponentBase;
         struct EntityComponentListBase;
         struct Transform;

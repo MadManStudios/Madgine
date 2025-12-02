@@ -12,7 +12,7 @@ namespace Scene {
 
             static bool isFree(ManualLifetime<T> &data)
             {
-                return !data.unsafeAccess().entity();
+                return data.unsafeAccess().isFree();
             }
 
             static uintptr_t *getLocation(ManualLifetime<T> &data)

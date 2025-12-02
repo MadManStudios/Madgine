@@ -88,6 +88,9 @@ namespace Tools {
 
         bool open = true;
 
+        //mManager.simulationClock().tick(mManager.clock().now());
+        //mManager.animationClock().tick(mManager.clock().now());
+
         if (tool().BeginResourceFile(this, mPath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &open)) {
 
             if (ImGui::BeginMenuBar()) {

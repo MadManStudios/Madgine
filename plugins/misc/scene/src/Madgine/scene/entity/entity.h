@@ -22,27 +22,22 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        struct MADGINE_SCENE_EXPORT Entity : Serialize::SyncableUnit<Entity> {
+        struct MADGINE_SCENE_EXPORT Entity : Serialize::SerializableUnitBase {
             SERIALIZABLEUNIT(Entity)
 
             // Entity(const Entity &, bool local);
             //             Entity(Entity &&, bool local);
             Entity(Entity &&) = delete;
 
-            Entity(SceneContainer &container, const std::string &name);
+            Entity(EntityHandle &handle, SceneContainer &container, const std::string &name);
             Entity(const Entity &) = delete;
             ~Entity();
 
-            Entity &operator=(Entity &&other);
-
-            auto lifetimeSender() {
-                return mLifetime.bound(mSelf, *this) | Behavior::with_named<"Entity">(mSelf);
-            }
-            
             void startLifetime();
             void endLifetime();
 
             EntityPtr pointer();
+            EntityHandle &handle();
 
             Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
 
@@ -105,6 +100,10 @@ namespace Scene {
                 mLifetime.attach(std::forward<Sender>(sender) | Log::log_result());
             }
 
+            auto lifetimeSender() {
+                return mLifetime.bound(mSelf, *this, Functor<&Entity::dtor> {}) | Behavior::with_named<"Entity">(mSelf);
+            }
+
             void handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op);
 
             SceneManager &sceneMgr() const;
@@ -114,20 +113,25 @@ namespace Scene {
 
             Behavior::BehaviorList &behaviors();
 
-            friend struct SyncableEntityComponentBase;
             friend struct Scene::SceneContainer;
+
+            void onActivate(Serialize::CallbackTiming timing, bool active, bool existenceChanged);
 
         protected:
             Debug::DebuggableLifetimeBase &lifetimeBase();
+
+            static void dtor(Entity &e);
 
         public:
             std::string mName;
 
         private:
-            Serialize::StreamResult readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, EntityComponentBase *&ptr);
+            Serialize::StreamResult readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, OutRef<EntityComponentBase> &ptr);
             const char *writeComponent(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &p) const;
 
             SERIALIZABLE_CONTAINER(mComponents, mutable_set<EntityComponentHandle, std::less<>>, ParentFunctor<&Entity::handleEntityEvent>);
+
+            EntityHandle &mHandle;
 
             SceneContainer &mContainer;
 

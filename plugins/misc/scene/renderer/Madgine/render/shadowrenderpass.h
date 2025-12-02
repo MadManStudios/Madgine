@@ -29,7 +29,7 @@ namespace Render {
 
         void updateFrustum(float aspectRatio);
 
-        virtual void debugFrustums(Closure<void(const Frustum &, std::string_view)> handler) const override;
+        virtual void debugFrustums(CallableView<void(const Frustum &, std::string_view)> handler) const override;
 
     private:
         ShadowSceneRenderData mData;

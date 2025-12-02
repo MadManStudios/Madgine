@@ -66,10 +66,14 @@ namespace Debug {
             return mLifetime.finished();
         }
 
-        template <typename T>
-        auto bound(Execution::BindingPtr<T> &ptr, T &&t)
+        template <typename T, typename Dtor>
+        auto bound(Execution::BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
         {
-            return mLifetime.bound(ptr, std::forward<T>(t));
+            return mLifetime.bound(ptr, std::forward<T>(t), std::forward<Dtor>(dtor));
+        }
+
+        operator Execution::Lifetime<cpos...>& ()& {
+            return mLifetime;
         }
 
         using is_sender = void;

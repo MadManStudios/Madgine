@@ -323,7 +323,9 @@ namespace Serialize {
             static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &arg)
             {
                 const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg);
-                write<std::ranges::range_value_t<C>>(out, arg, name);
+                if (name) { //TODO find clean solution
+                    write<std::ranges::range_value_t<C>>(out, arg, name);
+                }
             }
 
             template <typename Op>
