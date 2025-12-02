@@ -39,10 +39,8 @@ namespace Tools {
 
     bool EntityCache::update(Node &node, const Scene::Entity::EntityPtr &parent)
     {
-        bool alive = Execution::access_binding(node.mEntity, [](Scene::Entity::Entity &e) {
-            // return (!e.hasComponent<Scene::Entity::Transform>() || parent) || (node.mEntity->hasComponent<Scene::Entity::Transform>() && ((parent && parent->getComponent<Scene::Entity::Transform>() != node.mEntity->getComponent<Scene::Entity::Transform>()->parent()) || (!parent && node.mEntity->getComponent<Scene::Entity::Transform>()->parent())))
-            // throw 0; // TODO
-            return true;
+        bool alive = Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
+            return (!e.hasComponent<Scene::Entity::Transform>() && !parent) || (e.hasComponent<Scene::Entity::Transform>() && parent == e.getComponent<Scene::Entity::Transform>()->parent());
         });
         if (!alive) {
             eraseNode(node);
