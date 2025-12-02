@@ -47,6 +47,7 @@ namespace Execution {
         };
         struct FunctionPtr {
             void *mPtr;
+            const char *mTypeName;
         };
     }
 

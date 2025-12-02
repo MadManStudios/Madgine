@@ -146,12 +146,20 @@ namespace Tools {
                                [&](const Execution::State::Marker &m) {
                                    isMarker = true;
                                },
-                               [](const Execution::State::FunctionPtr &f) {                                   
-                                   Debug::TraceBack trace = Debug::resolveSymbols(&f.mPtr, 1)[0];                                   
-                                   if (ImGui::TreeNode(trace.mFunction)) {
-                                       ImGui::TextWrapped((std::string { trace.mFile } + ":" + std::to_string(trace.mLineNr)).c_str());                                       
+                               [](const Execution::State::FunctionPtr &f) {
+                                   const char *name = "function";
+                                   const char *details = f.mTypeName;
+#ifndef NDEBUG
+                                   Debug::TraceBack trace = Debug::resolveSymbols(&f.mPtr, 1)[0];
+                                   std::string detailsStr = std::string { trace.mFile } + ":" + std::to_string(trace.mLineNr);
+
+                                   name = trace.mFunction;
+                                   details = detailsStr.c_str();                                   
+#endif
+                                   if (ImGui::TreeNode(name)) {
+                                       ImGui::TextWrapped("%s", details);
                                        ImGui::TreePop();
-                                   }                                   
+                                   }
                                } },
                     desc);
 

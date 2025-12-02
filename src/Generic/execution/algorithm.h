@@ -150,12 +150,12 @@ namespace Execution {
             {
                 visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
 
+                void *fPtr = nullptr;
                 if constexpr (requires { &T ::operator(); }) {
                     auto f = &T::operator();
-                    visitor(State::FunctionPtr { *(void **)&f });
-                } else {
-                    visitor(State::Text { "Overloaded Function" });
+                    fPtr = *(void **)&f;
                 }
+                visitor(State::FunctionPtr { fPtr, typeid(T).name() });
             }
         };
 
