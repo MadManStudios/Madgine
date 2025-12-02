@@ -268,14 +268,19 @@ namespace Execution {
         }
 
         template <typename F>
-        friend bool tag_invoke(access_binding_t, const BindingPtr &ptr, F &&callback)
-        {
-            if (ptr.mPtr) {
+        bool access(F&& callback) const {
+            if (mPtr) {
                 auto wrapped = patch_void(callback, true);
-                return ptr.mPtr->access(CallableView<bool(const T &)> { wrapped });
+                return mPtr->access(CallableView<bool(const T &)> { wrapped });
             } else {
                 return false;
             }
+        }
+
+        template <typename F>
+        friend bool tag_invoke(access_binding_t, const BindingPtr &ptr, F &&callback)
+        {
+            return ptr.access(std::forward<F>(callback));
         }
 
         template <typename P>
