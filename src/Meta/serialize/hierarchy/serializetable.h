@@ -34,16 +34,10 @@ namespace Serialize {
     struct SerializeTableCallbacks {
 
         template <typename T>
-        static void_t<decltype(&T::onActivate)> setActiveHelper(T *unit, CallbackTiming timing, bool active, bool existenceChanged)
-        {
-            TupleUnpacker::invoke(&T::onActivate, unit, timing, active, existenceChanged);
-        }
-
-        template <typename T>
         constexpr SerializeTableCallbacks(type_holder_t<T>)
             : onActivate([](void *unit, CallbackTiming timing, bool active, bool existenceChanged) {
-                if constexpr (requires(T *t) { {setActiveHelper(t, timing, active, existenceChanged)} -> std::same_as<void>; }) {
-                    setActiveHelper(unit_cast<T>(unit), timing, active, existenceChanged);
+                if constexpr (requires(T *unit) { TupleUnpacker::invoke(&T::onActivate, unit, timing, active, existenceChanged); }) {
+                    TupleUnpacker::invoke(&T::onActivate, unit_cast<T>(unit), timing, active, existenceChanged);
                 }
             })
         {
