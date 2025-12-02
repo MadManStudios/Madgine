@@ -1,8 +1,8 @@
 <Layout serId=1>
     <mComponents>
-        <Item key="SceneMainWindowComponent" serId=2>
-        </Item>
-        <Item key="WidgetManager" serId=3>
+        <SceneMainWindowComponent serId=2>
+        </SceneMainWindowComponent>
+        <WidgetManager serId=3>
             <mWidgetsLayout>
                 <Item serId=4>
                     <mName>MainMenu</mName>
@@ -29,6 +29,6 @@
                     <mDefaultVisibility>false</mDefaultVisibility>
                 </Item>
             </mWidgetsLayout>
-        </Item>
+        </WidgetManager>
     </mComponents>
 </Layout>
