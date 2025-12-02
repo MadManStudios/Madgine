@@ -13,7 +13,7 @@
 namespace Engine {
 namespace Behavior {
 
-	struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::DebugLocation {
+    struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::DebugLocation {
 
         std::string toString() const override;
         std::map<std::string_view, ValueType> localVariables() const override;
@@ -121,15 +121,16 @@ namespace Behavior {
 
         auto await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle)
         {
-            mState = &handle.promise();
             using result_type = std::invoke_result_t<decltype(&Awaiter::await_suspend), Awaiter &, std::coroutine_handle<CoroutineBehaviorState>>;
             if constexpr (std::same_as<result_type, bool>) {
                 bool result = mAwaiter.await_suspend(std::move(handle));
                 if (result) {
+                    mState = &handle.promise();
                     mState->suspend();
                 }
                 return result;
             } else {
+                mState = &handle.promise();
                 mState->suspend();
                 return mAwaiter.await_suspend(std::move(handle));
             }
@@ -137,15 +138,14 @@ namespace Behavior {
 
         decltype(auto) await_resume()
         {
-            mState->resume();
+            if (mState)
+                mState->resume();
             return mAwaiter.await_resume();
         }
 
         Awaiter mAwaiter;
-        CoroutineBehaviorState *mState;
+        CoroutineBehaviorState *mState = nullptr;
     };
 
-
 }
 }
-
