@@ -32,6 +32,7 @@ namespace Audio {
         std::mutex mMutex;
         std::list<PortAudioStream> mStreamPool;
         std::list<PortAudioStream> mBusyStreams;
+        std::list<PortAudioStream> mClosingStreams;
 
         PaDeviceIndex mDevice;
         const PaDeviceInfo *mDeviceInfo = nullptr;

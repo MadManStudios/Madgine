@@ -16,6 +16,8 @@
 
 #include "Generic/execution/stop_callback.h"
 
+#include "Modules/threading/awaitables/awaitabletimepoint.h"
+
 METATABLE_BEGIN_BASE(Engine::Audio::PortAudioApi, Engine::Audio::AudioApi)
 METATABLE_END(Engine::Audio::PortAudioApi)
 
@@ -25,7 +27,7 @@ namespace Engine {
 namespace Audio {
 
     struct PlaybackState : Behavior::BehaviorReceiver {
-        PlaybackState(AudioLoader::Handle buffer, PortAudioApi *api)
+        PlaybackState(AudioLoader::Handle buffer, PortAudioApi &api)
             : mBuffer(std::move(buffer))
             , mApi(api)
         {
@@ -55,7 +57,7 @@ namespace Audio {
         }
 
         AudioLoader::Handle mBuffer;
-        PortAudioApi *mApi;
+        PortAudioApi &mApi;
         PortAudioStream *mStream = nullptr;
 
         const void *mPtr;
@@ -87,7 +89,7 @@ namespace Audio {
         }
 
         AudioLoader::Handle mBuffer;
-        PortAudioApi *mApi;
+        PortAudioApi &mApi;
     };
 
     struct PortAudioStream {
@@ -133,25 +135,19 @@ namespace Audio {
             state.mPtr = state.mBuffer->mBuffer.begin();
             state.mEnd = state.mBuffer->mBuffer.end();
             mState = &state;
-            abort();
+            assert(Pa_IsStreamStopped(mStream));
             PaError err = Pa_StartStream(mStream);
             if (err != paNoError) {
-                state.set_error(BEHAVIOR_UNKNOWN_ERROR() << "PortAudio Error: " << err);
+                PortAudioApi &api = state.mApi;
                 mState = nullptr;
-                state.mApi->reuseStream(*this);
+                state.set_error(BEHAVIOR_UNKNOWN_ERROR() << "PortAudio Error: " << err);                
+                api.reuseStream(*this);
             }
         }
 
-        bool abort()
+        PaError abort()
         {
-            if (!Pa_IsStreamStopped(mStream)) {
-                PaError err = Pa_AbortStream(mStream);
-                if (err != paNoError)
-                    throw 0;
-                return true;
-            } else {
-                return false;
-            }
+            return Pa_AbortStream(mStream);
         }
 
         bool isCompatible(const AudioInfo &info) const
@@ -166,7 +162,7 @@ namespace Audio {
             const PaStreamCallbackTimeInfo *timeInfo,
             PaStreamCallbackFlags statusFlags)
         {
-            if (!Engine::Root::Root::getSingleton().taskQueue()->running())
+            if (Execution::get_stop_token(*mState)->stop_requested())
                 return paAbort;
 
             int16_t *target = static_cast<int16_t *>(output);
@@ -194,10 +190,14 @@ namespace Audio {
 
         void finishedCallback()
         {
-            PortAudioApi *api = static_cast<PortAudioApi *>(mState->mApi);
-            mState->set_value();
+            PortAudioApi &api = mState->mApi;
+            if (Execution::get_stop_token(*mState)->stop_requested()) {
+                mState->set_done();
+            } else {
+                mState->set_value();
+            }
             mState = nullptr;
-            api->reuseStream(*this);
+            api.reuseStream(*this);
         }
 
         static int
@@ -226,18 +226,16 @@ namespace Audio {
 
     void PlaybackState::start()
     {
-        if (!mApi->state()) {
-            set_value();
+        if (!mApi.state()) {
+            set_done();
             return;
         }
-        mStream = &mApi->fetchStream(mBuffer->mInfo);
+        mStream = &mApi.fetchStream(mBuffer->mInfo);
         mStream->play(*this);
     }
 
     void PlaybackState::stop()
     {
-        if (mStream->abort())
-            set_done();
     }
 
     PortAudioApi::PortAudioApi(Root::Root &root)
@@ -338,6 +336,29 @@ namespace Audio {
 
         LOG_DEBUG("PortAudio picked: " << mDeviceInfo->name << " (" << Pa_GetHostApiInfo(mDeviceInfo->hostApi)->name << ")");
 
+        //Potentially moving it to a separate thread altogether. Seems to wait on the thread.
+        mRoot.taskQueue()->queue([this]() -> Threading::Task<void> {
+            while (mRoot.taskQueue()->running()) {
+                {
+                    std::unique_lock lock { mMutex };
+                    while (!mClosingStreams.empty()) {
+                        PortAudioStream &stream = mClosingStreams.front();
+                        lock.unlock();
+                        PaError err = stream.abort();
+                        assert(err == paTimedOut || err == paNoError);
+
+                        if (err == paNoError) {
+                            lock.lock();
+                            mStreamPool.splice(mStreamPool.end(), mClosingStreams, mClosingStreams.begin());
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                co_await 100ms;
+            }
+        });
+
         return true;
     }
 
@@ -349,6 +370,7 @@ namespace Audio {
             stream->abort();
         assert(mBusyStreams.empty());
         mStreamPool.clear();
+        mClosingStreams.clear();
         PaError err = Pa_Terminate();
         if (err != paNoError)
             LOG_ERROR("PortAudio error: " << Pa_GetErrorText(err));
@@ -361,12 +383,12 @@ namespace Audio {
 
     Behavior::Behavior PortAudioApi::playSound(AudioLoader::Handle buffer)
     {
-        return PlaybackSender { {}, buffer, this } | Resources::with_handle(AudioLoader::Handle { buffer });
+        return PlaybackSender { {}, buffer, *this } | Resources::with_handle(AudioLoader::Handle { buffer });
     }
 
     PortAudioStream &PortAudioApi::fetchStream(const AudioInfo &info)
     {
-        std::unique_lock lock { mMutex };
+        std::unique_lock lock { mMutex };        
         auto it = std::ranges::find_if(mStreamPool, [&](const PortAudioStream &stream) { return stream.isCompatible(info); });
         if (it == mStreamPool.end()) {
             return mBusyStreams.emplace_back(info, mDevice, mDeviceInfo);
@@ -380,7 +402,7 @@ namespace Audio {
     {
         std::unique_lock lock { mMutex };
         auto it = std::ranges::find(mBusyStreams, &stream, [](auto &v) { return &v; });
-        mStreamPool.splice(mStreamPool.end(), mBusyStreams, it);
+        mClosingStreams.splice(mClosingStreams.end(), mBusyStreams, it);
     }
 
 }
