@@ -159,6 +159,10 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config RelWithDebInfo --output-on-failure
 
+    - name: Install NSIS
+      if: matrix.platform == 'windows-latest' #&& github.ref_name == 'master'
+      uses: repolevedavaj/install-nsis@v1.0.1
+
     - name: Package
       working-directory: ${{ github.workspace }}/build
       if: github.ref_name == 'master'
@@ -342,6 +346,10 @@ jobs:
         ./wasm-split-Linux-x86_64 ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -o ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -d ${{ github.workspace }}/debug/MadgineLauncher.debug.wasm --strip
         curl -sL https://sentry.io/get-cli/ | sh
         sentry-cli debug-files upload -o madmanstudios -p madgine ${{ github.workspace }}/debug
+      
+    - name: Install NSIS
+      if: matrix.platform == 'windows' #&& github.ref_name == 'master'
+      uses: repolevedavaj/install-nsis@v1.0.1
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
