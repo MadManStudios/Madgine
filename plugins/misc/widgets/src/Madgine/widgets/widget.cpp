@@ -199,6 +199,11 @@ namespace Widgets {
         return mChildren.emplace_back(desc.create(mManager, this)).get();
     }
 
+    WidgetBase *WidgetBase::createChildByAnnotation(const WidgetRegistry::Annotations &annotation)
+    {
+        return mChildren.emplace_back(construct(annotation, mManager, this)).get();        
+    }
+
     void WidgetBase::clearChildren()
     {
         mChildren.clear();
