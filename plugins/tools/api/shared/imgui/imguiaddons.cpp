@@ -36,7 +36,11 @@ ImGuiContext *&getImGuiContext()
 
 namespace ImGui {
 
-static Engine::Threading::WorkgroupLocal<ImVector<ImRect>> sGroupPanelLabelStack;
+struct GroupPanelData {
+    ImRect mRect;
+    ImU32 mColor;
+};
+static Engine::Threading::WorkgroupLocal<ImVector<GroupPanelData>> sGroupPanelLabelStack;
 
 static Engine::Threading::WorkgroupLocal<FilesystemPickerOptions> sFilesystemPickerOptions;
 
@@ -1193,7 +1197,7 @@ bool InteractiveView(InteractiveViewState &state)
     return state.mActive;
 }
 
-void ImGui::BeginGroupPanel(const char *name, const ImVec2 &size)
+void ImGui::BeginGroupPanel(const char *name, const ImVec2 &size, ImU32 backgroundColor)
 {
     ImGui::BeginGroup();
 
@@ -1252,9 +1256,9 @@ void ImGui::BeginGroupPanel(const char *name, const ImVec2 &size)
     ImGui::PushItemWidth(ImMax(0.0f, itemWidth - frameHeight));
 
     if (strlen(name) > 0)
-        sGroupPanelLabelStack->push_back(ImRect(labelMin, labelMax));
+        sGroupPanelLabelStack->push_back({ { labelMin, labelMax }, backgroundColor });
     else
-        sGroupPanelLabelStack->push_back(ImRect());
+        sGroupPanelLabelStack->push_back({ {}, backgroundColor });
 }
 
 void ImGui::EndGroupPanel()
@@ -1270,7 +1274,11 @@ void ImGui::EndGroupPanel()
 
     ImGui::EndGroup();
 
-    //ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), IM_COL32(0, 255, 0, 64), 4.0f);
+    auto data = sGroupPanelLabelStack->back();
+    sGroupPanelLabelStack->pop_back();
+
+    // if (data.mColor > 0)
+    //     ImGui::GetWindowDrawList()->AddRectFilled(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), data.mColor, 4.0f);
 
     ImGui::EndGroup();
 
@@ -1282,10 +1290,8 @@ void ImGui::EndGroupPanel()
 
     auto itemMin = ImGui::GetItemRectMin();
     auto itemMax = ImGui::GetItemRectMax();
-    //ImGui::GetWindowDrawList()->AddRectFilled(itemMin, itemMax, IM_COL32(255, 0, 0, 64), 4.0f);
 
-    auto labelRect = sGroupPanelLabelStack->back();
-    sGroupPanelLabelStack->pop_back();
+    auto labelRect = data.mRect;
 
     ImVec2 halfFrame = ImVec2(frameHeight * 0.25f, frameHeight) * 0.5f;
     ImRect frameRect = ImRect(itemMin + halfFrame, itemMax - ImVec2(halfFrame.x, 0.0f));
@@ -1318,6 +1324,10 @@ void ImGui::EndGroupPanel()
 
         ImGui::PopClipRect();
     }
+        
+    if (data.mColor > 0)
+        ImGui::GetWindowDrawList()->AddRectFilled(frameRect.Min, frameRect.Max, data.mColor, 4.0f);
+
 
     ImGui::PopStyleVar(2);
 

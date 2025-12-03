@@ -31,6 +31,7 @@ namespace Execution {
         };
         struct BeginBlock {
             std::string mName;
+            bool mCompleted = false;
         };
         struct EndBlock {
         };
@@ -48,7 +49,8 @@ namespace Execution {
         struct Marker {
         };
         struct FunctionPtr {
-            void *mPtr;
+            void *mId;
+            void *mFunctionPtr;
             const char *mTypeName;
         };
     }

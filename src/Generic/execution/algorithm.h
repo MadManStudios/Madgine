@@ -146,16 +146,16 @@ namespace Execution {
         template <Sender Sender, typename Rec, typename T>
         struct state : algorithm_state<Sender, receiver<Rec, T>> {
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
+            friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
                 visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
 
                 void *fPtr = nullptr;
-                if constexpr (requires { &T ::operator(); }) {
+                if constexpr (requires { {&T::operator()}; }) {
                     auto f = &T::operator();
                     fPtr = *(void **)&f;
                 }
-                visitor(State::FunctionPtr { fPtr, typeid(T).name() });
+                visitor(State::FunctionPtr { state, fPtr, typeid(T).name() });
             }
         };
 
@@ -737,7 +737,7 @@ namespace Execution {
                 this->start();
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
+            friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
                 visitor(State::BeginBlock { "Repeat" });
                 visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
@@ -853,14 +853,14 @@ namespace Execution {
 
             void stop()
             {
-                TupleUnpacker::forEach(mStates, [](auto &state) { state.start(); });
+                TupleUnpacker::forEach(mStates, [](auto &state) { state.stop(); });
             }
 
             template <size_t I, typename... V>
             void set_value(V &&...values)
             {
                 if (mState == OK)
-                    std::get<I>(mValues) = { std::forward<V>(values)... };
+                    std::get<I>(mValues).emplace(std::forward<V>(values)...);
                 mark_complete();
             }
 
@@ -885,7 +885,7 @@ namespace Execution {
                 if (count == sizeof...(Is)) {
                     switch (mState) {
                     case OK:
-                        TupleUnpacker::invokeFromTuple(LIFT(this->mRec.set_value, &), Tuple { std::move(mValues) });
+                        TupleUnpacker::invokeFromTuple(LIFT(this->mRec.set_value, &), Tuple { TupleUnpacker::forEach(std::move(mValues), [](auto &&v)->decltype(auto){return *std::forward<decltype(v)>(v);}) });
                         break;
                     case ERROR:
                         this->mRec.set_error(std::move(mResult));
@@ -899,11 +899,23 @@ namespace Execution {
                 }
             }
 
+            friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
+            {
+                visitor(Execution::State::BeginBlock { "When All" });
+                ([&]() {
+                    visitor(Execution::State::BeginBlock { "", state && std::get<Is>(state->mValues) });
+                    visit_state(state ? &std::get<Is>(state->mStates) : nullptr, visitor);
+                    visitor(Execution::State::EndBlock {});
+                }(),
+                    ...);
+                visitor(Execution::State::EndBlock {});
+            }
+
             std::tuple<inner_state<Is, Sender, Rec, std::index_sequence<Is...>, Sender...>...> mStates;
             patch_void_t<R> mResult;
             template <typename... V>
             using helper = std::tuple<std::conditional_t<std::is_reference_v<V>, OutRef<std::remove_reference_t<V>>, V>...>;
-            std::tuple<typename Sender::template value_types<helper>...> mValues;
+            std::tuple<std::optional<typename Sender::template value_types<helper>>...> mValues;
             enum State { OK,
                 ERROR,
                 DONE };
@@ -1169,7 +1181,7 @@ namespace Execution {
                     mStates.template emplace<1>(
                                DelayedConstruct<std::variant_alternative_t<1, StateVariant>> {
                                    [this]() {
-                                       return Execution::connect(std::forward<std::tuple_element_t<0, std::tuple<Sender...>>>(std::get<0>(mSenders)), inner_rec<0> { this });
+                                       return connect(std::forward<std::tuple_element_t<0, std::tuple<Sender...>>>(std::get<0>(mSenders)), inner_rec<0> { this });
                                    } })
                         .start();
                 }
@@ -1196,7 +1208,7 @@ namespace Execution {
                     mStates.template emplace<I + 1 + 1>(
                                DelayedConstruct<std::variant_alternative_t<I + 1 + 1, StateVariant>> {
                                    [this]() {
-                                       return Execution::connect(std::forward<std::tuple_element_t<I + 1, std::tuple<Sender...>>>(std::get<I + 1>(mSenders)), inner_rec<I + 1> { this });
+                                       return connect(std::forward<std::tuple_element_t<I + 1, std::tuple<Sender...>>>(std::get<I + 1>(mSenders)), inner_rec<I + 1> { this });
                                    } })
                         .start();
                 }
@@ -1214,7 +1226,7 @@ namespace Execution {
                 this->mRec.set_error(std::forward<R>(result)...);
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
+            friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
                 [&]<size_t... I>(std::index_sequence<I...>) {
                     (visit_state(state && state->mStates.index() == I + 1 ? &std::get<I + 1>(state->mStates) : nullptr, visitor), ...);
@@ -1373,7 +1385,7 @@ namespace Execution {
                 rec.set_error(std::forward<R>(result)...);
             }
 
-            friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
+            friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
                 visit_state(state && !state->mValue ? &state->mState : nullptr, visitor);
                 visit_state(state && state->mValue ? &state->mInnerState : nullptr, visitor);

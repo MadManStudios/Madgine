@@ -16,23 +16,6 @@
 namespace Engine {
 namespace Widgets {
 
-    template <typename Rec>
-    struct TempWidgetStateImpl : Behavior::VirtualBehaviorState<Rec, TempWidgetState> {
-
-        friend auto tag_invoke(Execution::visit_state_t, TempWidgetStateImpl *state, auto &&visitor)
-        {
-            visitor(Execution::State::BeginBlock { "Temp Widget" });
-
-            if (state) {
-                visitor(Execution::State::SubLocation {});
-            }
-
-            visitor(Execution::State::EndBlock {});
-        }
-
-        using Behavior::VirtualBehaviorState<Rec, TempWidgetState>::VirtualBehaviorState;
-    };
-
     struct TempWidgetSender : Execution::base_sender {
         using result_type = Behavior::BehaviorError;
         template <template <typename...> typename Tuple>
@@ -41,14 +24,14 @@ namespace Widgets {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, TempWidgetSender &&sender, Rec &&rec)
         {
-            return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mDesc), std::move(sender.mPos), std::move(sender.mSize), std::move(sender.mBehavior) };
+            return Behavior::VirtualBehaviorState<Rec, TempWidgetState> { std::forward<Rec>(rec), std::move(sender.mDesc), std::move(sender.mPos), std::move(sender.mSize), std::move(sender.mBehavior) };
         }
 
         template <typename Rec>
-        friend auto tag_invoke(Execution::connect_t, TempWidgetSender &sender, Rec &&rec) -> TempWidgetStateImpl<Rec>
+        friend auto tag_invoke(Execution::connect_t, TempWidgetSender &sender, Rec &&rec) -> Behavior::VirtualBehaviorState<Rec, TempWidgetState>
         {
             throw 0;
-            //return TempWidgetStateImpl<Rec> { std::forward<Rec>(rec), sender.mDesc, sender.mPos, sender.mSize, sender.mBehavior };
+            // return Behavior::VirtualBehaviorState<Rec, TempWidgetState> { std::forward<Rec>(rec), sender.mDesc, sender.mPos, sender.mSize, sender.mBehavior };
         }
 
         WidgetLoader::Handle mDesc;
@@ -66,7 +49,7 @@ namespace Widgets {
         : mDesc(std::move(desc))
         , mState(Execution::connect(std::move(behavior), receiver { { *this }, *this }))
         , mPos(std::move(pos))
-        , mSize(std::move(size))        
+        , mSize(std::move(size))
     {
     }
 

@@ -94,7 +94,6 @@ namespace Behavior {
 
         friend auto tag_invoke(Execution::visit_state_t, NamedState *state, auto &&visitor)
         {
-            visitor(Execution::State::Text { Name.c_str() });
         }
 
         Named<Name, T> mValue;

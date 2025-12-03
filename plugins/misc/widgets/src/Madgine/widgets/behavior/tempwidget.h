@@ -15,7 +15,7 @@ namespace Widgets {
 
     struct TempWidgetState : Behavior::BehaviorReceiver {
 
-        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior::Behavior behavior);        
+        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior::Behavior behavior);
         ~TempWidgetState();
 
         void start();
@@ -46,6 +46,15 @@ namespace Widgets {
 
         using state = Execution::connect_result_t<Behavior::Behavior, receiver>;
         state mState;
+
+        friend auto tag_invoke(Execution::visit_state_t, TempWidgetState *state, auto &&visitor)
+        {
+            visitor(Execution::State::BeginBlock { "Temp Widget" });
+
+            Execution::visit_state(state ? &state->mState : nullptr, visitor);
+
+            visitor(Execution::State::EndBlock {});
+        }
 
         std::unique_ptr<WidgetBase> mWidget;
         Matrix3 mPos;

@@ -89,7 +89,7 @@ namespace Tools {
                                    actualContent = true;
                                },
                                [&](const Execution::State::BeginBlock &begin) {
-                                   ImGui::BeginGroupPanel(begin.mName.data());
+                                   ImGui::BeginGroupPanel(begin.mName.data(), { }, begin.mCompleted ? IM_COL32(20, 255, 20, 15) : 0);
                                    actualContent = true;
                                },
                                [&](const Execution::State::EndBlock &end) {
@@ -149,16 +149,18 @@ namespace Tools {
                                    const char *name = "function";
                                    const char *details = f.mTypeName;
 #ifndef NDEBUG
-                                   Debug::TraceBack trace = Debug::resolveSymbols(&f.mPtr, 1)[0];
+                                   Debug::TraceBack trace = Debug::resolveSymbols(&f.mFunctionPtr, 1)[0];
                                    std::string detailsStr = std::string { trace.mFile } + ":" + std::to_string(trace.mLineNr);
 
                                    name = trace.mFunction;
                                    details = detailsStr.c_str();                                   
 #endif
+                                   ImGui::PushID(f.mId);
                                    if (ImGui::TreeNode(name)) {
                                        ImGui::TextWrapped("%s", details);
                                        ImGui::TreePop();
                                    }
+                                   ImGui::PopID();
                                } },
                     desc);
 
@@ -287,14 +289,15 @@ namespace Tools {
                     switch (button) {
                     }
 
-                    Debug::DebugLocation *location = mSelectedContext->mChild;
+                    //TODO: Build tree
+                    /* Debug::DebugLocation *location = mSelectedContext->mChild;
                     while (location) {
                         if (!mSelectedLocation && prevSelected == location)
                             mSelectedLocation = location;
                         if (ImGui::Selectable(location->toString().c_str(), mSelectedLocation == location))
                             mSelectedLocation = location;
                         location = location->mChild;
-                    }
+                    }*/
 
                     renderDebugContext(*mSelectedContext);
                 }
