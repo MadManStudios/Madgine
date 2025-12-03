@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -251,8 +251,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1receiver.html">receiver</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1sender.html">sender</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1state.html">state</a></td></tr>
@@ -268,14 +266,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a492ddb5c0533a395105a8ab14c69378e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a55b73a8c0572801e861d6cb0f6368"><td class="memItemLeft" align="right" valign="top">std::chrono::microseconds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock.html#a35a55b73a8c0572801e861d6cb0f6368">tick</a> (Timepoint now)</td></tr>
 <tr class="separator:a35a55b73a8c0572801e861d6cb0f6368"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a826e62c448294cc935722a9bf1565ca9"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock.html#a826e62c448294cc935722a9bf1565ca9">wait</a> (std::chrono::steady_clock::duration duration)</td></tr>
-<tr class="separator:a826e62c448294cc935722a9bf1565ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c33aa277cad44a05ebab99476e1a46f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock.html#a8c33aa277cad44a05ebab99476e1a46f">wait</a> (std::chrono::steady_clock::duration duration, std::chrono::steady_clock::duration durationOverride=-1s, std::chrono::steady_clock::duration acc=0s)</td></tr>
+<tr class="separator:a8c33aa277cad44a05ebab99476e1a46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab762d29acc9e50c80f4b3892a712b5b4"><td class="memTemplParams" colspan="2">template&lt;typename Sender &gt; </td></tr>
-<tr class="memitem:ab762d29acc9e50c80f4b3892a712b5b4"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock.html#ab762d29acc9e50c80f4b3892a712b5b4">wait</a> (Sender &amp;&amp;inner, std::chrono::steady_clock::duration duration)</td></tr>
-<tr class="separator:ab762d29acc9e50c80f4b3892a712b5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d1bf184a8938651105d73a22399c74"><td class="memTemplParams" colspan="2">template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding&gt; </td></tr>
+<tr class="memitem:a65d1bf184a8938651105d73a22399c74"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock.html#a65d1bf184a8938651105d73a22399c74">wait</a> (Binding &amp;&amp;self, std::chrono::steady_clock::duration duration)</td></tr>
+<tr class="separator:a65d1bf184a8938651105d73a22399c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad9f215776c7d32d8d60a8c0372367be5" name="ad9f215776c7d32d8d60a8c0372367be5"></a>
@@ -335,8 +333,8 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
 
 </div>
 </div>
-<a id="a826e62c448294cc935722a9bf1565ca9" name="a826e62c448294cc935722a9bf1565ca9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a826e62c448294cc935722a9bf1565ca9">&#9670;&#160;</a></span>wait() <span class="overload">[1/2]</span></h2>
+<a id="a8c33aa277cad44a05ebab99476e1a46f" name="a8c33aa277cad44a05ebab99476e1a46f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c33aa277cad44a05ebab99476e1a46f">&#9670;&#160;</a></span>wait() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,8 +348,24 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
           <td class="memname">auto <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::wait </td>
           <td>(</td>
           <td class="paramtype">std::chrono::steady_clock::duration&#160;</td>
-          <td class="paramname"><em>duration</em></td><td>)</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::chrono::steady_clock::duration&#160;</td>
+          <td class="paramname"><em>durationOverride</em> = <code>-1s</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::steady_clock::duration&#160;</td>
+          <td class="paramname"><em>acc</em> = <code>0s</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -363,15 +377,15 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
 
 </div>
 </div>
-<a id="ab762d29acc9e50c80f4b3892a712b5b4" name="ab762d29acc9e50c80f4b3892a712b5b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab762d29acc9e50c80f4b3892a712b5b4">&#9670;&#160;</a></span>wait() <span class="overload">[2/2]</span></h2>
+<a id="a65d1bf184a8938651105d73a22399c74" name="a65d1bf184a8938651105d73a22399c74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65d1bf184a8938651105d73a22399c74">&#9670;&#160;</a></span>wait() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;typename Sender &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -379,8 +393,8 @@ template&lt;typename Sender &gt; </div>
         <tr>
           <td class="memname">static auto <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::wait </td>
           <td>(</td>
-          <td class="paramtype">Sender &amp;&amp;&#160;</td>
-          <td class="paramname"><em>inner</em>, </td>
+          <td class="paramtype">Binding &amp;&amp;&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -436,7 +450,7 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

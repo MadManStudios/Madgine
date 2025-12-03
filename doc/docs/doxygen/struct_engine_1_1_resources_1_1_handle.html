@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -281,6 +281,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5b6b7bc5cf7f8e4904f5c383dda92cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af93a1699965d0746426dc377e4162f5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af93a1699965d0746426dc377e4162f5a">load</a> (std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a>, Loader *loader=&amp;Loader::getSingleton())</td></tr>
 <tr class="separator:af93a1699965d0746426dc377e4162f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab347550a26cc68058a30feea8a4fe96f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#ab347550a26cc68058a30feea8a4fe96f">load</a> (typename Loader::Resource *<a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a98d0a822fc8ecff2a7e1b2daf683be96">resource</a>, Loader *loader=&amp;Loader::getSingleton())</td></tr>
+<tr class="separator:ab347550a26cc68058a30feea8a4fe96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e71b29272d3a19e04e3d31526783246"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a6e71b29272d3a19e04e3d31526783246">loadSerialize</a> (std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a>)</td></tr>
 <tr class="separator:a6e71b29272d3a19e04e3d31526783246"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67c54fd9432c9d74ca77cc0a7029e541"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a> () const</td></tr>
@@ -867,7 +869,7 @@ template&lt;typename Loader , typename Data &gt; </div>
 </div>
 </div>
 <a id="af93a1699965d0746426dc377e4162f5a" name="af93a1699965d0746426dc377e4162f5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af93a1699965d0746426dc377e4162f5a">&#9670;&#160;</a></span>load()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af93a1699965d0746426dc377e4162f5a">&#9670;&#160;</a></span>load() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -882,6 +884,44 @@ template&lt;typename Loader , typename Data &gt; </div>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Loader *&#160;</td>
+          <td class="paramname"><em>loader</em> = <code>&amp;Loader::getSingleton()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab347550a26cc68058a30feea8a4fe96f" name="ab347550a26cc68058a30feea8a4fe96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab347550a26cc68058a30feea8a4fe96f">&#9670;&#160;</a></span>load() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::load </td>
+          <td>(</td>
+          <td class="paramtype">typename Loader::Resource *&#160;</td>
+          <td class="paramname"><em>resource</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1140,7 +1180,7 @@ template&lt;typename Loader , typename Data &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -256,33 +256,33 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a622fcc384130030985b045f5fba81da4"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, <a class="el" href="class_rec.html">Rec</a>&gt;</td></tr>
-<tr class="memitem:a622fcc384130030985b045f5fba81da4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a622fcc384130030985b045f5fba81da4">operator()</a> (Sender &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, <a class="el" href="class_rec.html">Rec</a> &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, <a class="el" href="class_rec.html">Rec</a> &gt;</td></tr>
+<tr class="memitem:a622fcc384130030985b045f5fba81da4"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename Rec &gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, Rec&gt;</td></tr>
+<tr class="memitem:a622fcc384130030985b045f5fba81da4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a622fcc384130030985b045f5fba81da4">operator()</a> (Sender &amp;&amp;sender, Rec &amp;&amp;rec) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, Rec &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, Rec &gt;</td></tr>
 <tr class="separator:a622fcc384130030985b045f5fba81da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:aa298bdfc72405ecbc306755a414da255"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename T , typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:aa298bdfc72405ecbc306755a414da255"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#aa298bdfc72405ecbc306755a414da255">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1assign__t_1_1sender.html">Engine::Execution::assign_t::sender</a>&lt; Sender, T &gt; &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:aa298bdfc72405ecbc306755a414da255"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename T , typename Rec &gt; </td></tr>
+<tr class="memitem:aa298bdfc72405ecbc306755a414da255"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#aa298bdfc72405ecbc306755a414da255">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1assign__t_1_1sender.html">Engine::Execution::assign_t::sender</a>&lt; Sender, T &gt; &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:aa298bdfc72405ecbc306755a414da255"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a653e18801127615f8911aa6f90a6a1e8"><td class="memTemplParams" colspan="2">template&lt;typename C , typename F , typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:a653e18801127615f8911aa6f90a6a1e8"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a653e18801127615f8911aa6f90a6a1e8">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1for__each__t_1_1sender.html">Engine::Execution::for_each_t::sender</a>&lt; C, F &gt; &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:a653e18801127615f8911aa6f90a6a1e8"><td class="memTemplParams" colspan="2">template&lt;typename C , typename F , typename Rec &gt; </td></tr>
+<tr class="memitem:a653e18801127615f8911aa6f90a6a1e8"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a653e18801127615f8911aa6f90a6a1e8">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1for__each__t_1_1sender.html">Engine::Execution::for_each_t::sender</a>&lt; C, F &gt; &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:a653e18801127615f8911aa6f90a6a1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa340052607197796a83b78dcccb66e09"><td class="memTemplParams" colspan="2">template&lt;typename... Args, typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:aa340052607197796a83b78dcccb66e09"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#aa340052607197796a83b78dcccb66e09">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1just__t_1_1sender.html">Engine::Execution::just_t::sender</a>&lt; Args... &gt; &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:aa340052607197796a83b78dcccb66e09"><td class="memTemplParams" colspan="2">template&lt;typename... Args, typename Rec &gt; </td></tr>
+<tr class="memitem:aa340052607197796a83b78dcccb66e09"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#aa340052607197796a83b78dcccb66e09">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1just__t_1_1sender.html">Engine::Execution::just_t::sender</a>&lt; Args... &gt; &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:aa340052607197796a83b78dcccb66e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59920159e19bcbb3ee83a53b0b5a8f55"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename F , typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:a59920159e19bcbb3ee83a53b0b5a8f55"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a59920159e19bcbb3ee83a53b0b5a8f55">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">Engine::Execution::let_value_t::sender</a>&lt; Sender, F &gt; &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:a59920159e19bcbb3ee83a53b0b5a8f55"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename F , typename Rec &gt; </td></tr>
+<tr class="memitem:a59920159e19bcbb3ee83a53b0b5a8f55"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a59920159e19bcbb3ee83a53b0b5a8f55">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">Engine::Execution::let_value_t::sender</a>&lt; Sender, F &gt; &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:a59920159e19bcbb3ee83a53b0b5a8f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d45fc852616a96b54cab17d6b17a79a"><td class="memTemplParams" colspan="2">template&lt;typename Stream , typename T , typename F , typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:a6d45fc852616a96b54cab17d6b17a79a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a6d45fc852616a96b54cab17d6b17a79a">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1reduce__stream__t_1_1sender.html">Engine::Execution::reduce_stream_t::sender</a>&lt; Stream, T, F &gt; &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:a6d45fc852616a96b54cab17d6b17a79a"><td class="memTemplParams" colspan="2">template&lt;typename Stream , typename T , typename F , typename Rec &gt; </td></tr>
+<tr class="memitem:a6d45fc852616a96b54cab17d6b17a79a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a6d45fc852616a96b54cab17d6b17a79a">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1reduce__stream__t_1_1sender.html">Engine::Execution::reduce_stream_t::sender</a>&lt; Stream, T, F &gt; &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:a6d45fc852616a96b54cab17d6b17a79a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e658a7692c5ce80e17e68fa2de8d49d"><td class="memTemplParams" colspan="2">template&lt;typename... Sender, typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:a8e658a7692c5ce80e17e68fa2de8d49d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a8e658a7692c5ce80e17e68fa2de8d49d">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1sequence__t_1_1sender.html">Engine::Execution::sequence_t::sender</a>&lt; Sender... &gt; &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:a8e658a7692c5ce80e17e68fa2de8d49d"><td class="memTemplParams" colspan="2">template&lt;typename... Sender, typename Rec &gt; </td></tr>
+<tr class="memitem:a8e658a7692c5ce80e17e68fa2de8d49d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#a8e658a7692c5ce80e17e68fa2de8d49d">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1sequence__t_1_1sender.html">Engine::Execution::sequence_t::sender</a>&lt; Sender... &gt; &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:a8e658a7692c5ce80e17e68fa2de8d49d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad37ae932522b776dcb170f7eaf7a6bd1"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename T , typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:ad37ae932522b776dcb170f7eaf7a6bd1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#ad37ae932522b776dcb170f7eaf7a6bd1">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html">Engine::Execution::then_t::sender</a>&lt; Sender, T &gt; &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:ad37ae932522b776dcb170f7eaf7a6bd1"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename T , typename Rec &gt; </td></tr>
+<tr class="memitem:ad37ae932522b776dcb170f7eaf7a6bd1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_code_gen_1_1codegen__connect__t.html#ad37ae932522b776dcb170f7eaf7a6bd1">tag_invoke</a> (<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html">Engine::Execution::then_t::sender</a>&lt; Sender, T &gt; &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:ad37ae932522b776dcb170f7eaf7a6bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -292,8 +292,8 @@ Friends</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, <a class="el" href="class_rec.html">Rec</a>&gt;</div>
+template&lt;typename Sender , typename Rec &gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, Rec&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -307,13 +307,13 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, <a class="el" href="class_rec.html">Rec</a>&gt;
+          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, Rec&gt;
     </td>
         </tr>
       </table>
@@ -333,7 +333,7 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename F , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename F , typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -353,7 +353,7 @@ template&lt;typename Sender , typename F , typename <a class="el" href="class_re
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -377,7 +377,7 @@ template&lt;typename Sender , typename F , typename <a class="el" href="class_re
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename T , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename T , typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -397,7 +397,7 @@ template&lt;typename Sender , typename T , typename <a class="el" href="class_re
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -421,7 +421,7 @@ template&lt;typename Sender , typename T , typename <a class="el" href="class_re
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename... Sender, typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename... Sender, typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -441,7 +441,7 @@ template&lt;typename... Sender, typename <a class="el" href="class_rec.html">Rec
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -465,7 +465,7 @@ template&lt;typename... Sender, typename <a class="el" href="class_rec.html">Rec
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename... Args, typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename... Args, typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -485,7 +485,7 @@ template&lt;typename... Args, typename <a class="el" href="class_rec.html">Rec</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -509,7 +509,7 @@ template&lt;typename... Args, typename <a class="el" href="class_rec.html">Rec</
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename T , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename T , typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -529,7 +529,7 @@ template&lt;typename Sender , typename T , typename <a class="el" href="class_re
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -553,7 +553,7 @@ template&lt;typename Sender , typename T , typename <a class="el" href="class_re
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Stream , typename T , typename F , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Stream , typename T , typename F , typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -573,7 +573,7 @@ template&lt;typename Stream , typename T , typename F , typename <a class="el" h
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -597,7 +597,7 @@ template&lt;typename Stream , typename T , typename F , typename <a class="el" h
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename C , typename F , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename C , typename F , typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -617,7 +617,7 @@ template&lt;typename C , typename F , typename <a class="el" href="class_rec.htm
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -641,7 +641,7 @@ template&lt;typename C , typename F , typename <a class="el" href="class_rec.htm
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

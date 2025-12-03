@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -254,7 +254,7 @@ Include dependency graph for scenesenders.h:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="scenesenders_8h__dep__incl.svg" width="520" height="271"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="scenesenders_8h__dep__incl.svg" width="414" height="271"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><table class="memberdecls">
@@ -268,29 +268,26 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:af92996aedd718c1ab8956fdab5616944"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">Engine::Scene::EntityBinding</a> = Binding&lt;&quot;Entity&quot;, Entity::Entity * &gt;</td></tr>
-<tr class="separator:af92996aedd718c1ab8956fdab5616944"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19931bf3268623dc598b4c231f71d2d1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">Engine::Scene::SceneBinding</a> = Binding&lt;&quot;Scene&quot;, SceneManager * &gt;</td></tr>
-<tr class="separator:a19931bf3268623dc598b4c231f71d2d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db20df601c2e39eaf8d01e83663a06c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a1db20df601c2e39eaf8d01e83663a06c">Engine::Scene::EntityBinding</a> = Behavior::Named&lt;&quot;Entity&quot;, Entity::EntityPtr &gt;</td></tr>
+<tr class="separator:a1db20df601c2e39eaf8d01e83663a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a811a39485ffa2a6e5ffbf6c9c85543aa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">Engine::Scene::NamedSceneManager</a> = Behavior::Named&lt;&quot;Scene&quot;, SceneManager &amp; &gt;</td></tr>
+<tr class="separator:a811a39485ffa2a6e5ffbf6c9c85543aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a892027f5cdb7dfb1cfb4781bd5b32924"><td class="memItemLeft" align="right" valign="top">constexpr EntityBinding&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a892027f5cdb7dfb1cfb4781bd5b32924">Engine::Scene::entityBinding</a></td></tr>
-<tr class="separator:a892027f5cdb7dfb1cfb4781bd5b32924"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab95c367ed083ea70780c0314897472a5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab95c367ed083ea70780c0314897472a5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#ab95c367ed083ea70780c0314897472a5">Engine::Scene::get_component</a> = [](EntityBinding entity = {}) { return entity | Execution::then([](Entity::Entity *e) { return e-&gt;getComponent&lt;T&gt;(); }); }</td></tr>
-<tr class="separator:ab95c367ed083ea70780c0314897472a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a604da434343e415a05f5ade8dd34df58"><td class="memItemLeft" align="right" valign="top">constexpr SceneBinding&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a604da434343e415a05f5ade8dd34df58">Engine::Scene::sceneBinding</a></td></tr>
-<tr class="separator:a604da434343e415a05f5ade8dd34df58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82943a49aae5c33eda607bfde185e43b"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a82943a49aae5c33eda607bfde185e43b">Engine::Scene::wait_animation</a></td></tr>
+<tr class="separator:a82943a49aae5c33eda607bfde185e43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b7793967872db21d52a9f6522fdb99a"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">Engine::Scene::wait_simulation</a></td></tr>
 <tr class="separator:a1b7793967872db21d52a9f6522fdb99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a241aaa1ec39c51ee66b257b4814ff3cc"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a241aaa1ec39c51ee66b257b4814ff3cc">Engine::Scene::yield_animation</a></td></tr>
+<tr class="separator:a241aaa1ec39c51ee66b257b4814ff3cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64d96d147ec00535ea2c781685ac1f64"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">Engine::Scene::yield_simulation</a></td></tr>
 <tr class="separator:a64d96d147ec00535ea2c781685ac1f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:54:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

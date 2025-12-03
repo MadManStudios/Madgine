@@ -1,0 +1,2179 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Behavior::Python3 Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Behavior::Python3 Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/namespace_engine_1_1_behavior_1_1_python3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python3-namespace-reference">
+<h1>Python3 Namespace Reference<a class="headerlink" href="#python3-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Behavior::Python3 Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior.html">Behavior</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html">Python3</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Behavior::Python3 Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_code_object.html">CodeObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_execution_sender.html">ExecutionSender</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_execution_state.html">ExecutionState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_functor__to___key_value_pair.html">Functor_to_KeyValuePair</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_functor__to___value_ref.html">Functor_to_ValueRef</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_api_function.html">PyApiFunction</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_behavior_scope.html">PyBehaviorScope</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_behavior_scope_object.html">PyBehaviorScopeObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_bound_api_function.html">PyBoundApiFunction</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_debug_location_object.html">PyDebugLocationObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html">PyDictPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_enum.html">PyEnum</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_flags.html">PyFlags</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_list_ptr.html">PyListPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_matrix3.html">PyMatrix3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_matrix4.html">PyMatrix4</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_field_accessor.html">PyObjectFieldAccessor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_instance.html">PyObjectInstance</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_iterator.html">PyObjectIterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_owned_scope_ptr.html">PyOwnedScopePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_quaternion.html">PyQuaternion</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_scope_iterator.html">PyScopeIterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_sender.html">PySender</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_suspend_exception.html">PySuspendException</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_suspend_exception_object.html">PySuspendExceptionObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_behavior_factory.html">Python3BehaviorFactory</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_debugger.html">Python3Debugger</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_debug_location.html">Python3DebugLocation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_environment.html">Python3Environment</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_file_loader.html">Python3FileLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_inner_lock.html">Python3InnerLock</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_lock.html">Python3Lock</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_stream_redirect.html">Python3StreamRedirect</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_unlock.html">Python3Unlock</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_typed_scope_ptr.html">PyTypedScopePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_vector2.html">PyVector2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_vector3.html">PyVector3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_vector4.html">PyVector4</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_virtual_associative_iterator.html">PyVirtualAssociativeIterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_virtual_associative_range.html">PyVirtualAssociativeRange</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_virtual_sequence_iterator.html">PyVirtualSequenceIterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_virtual_sequence_range.html">PyVirtualSequenceRange</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a93d1752b0f022899ca29a297c900d254"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a93d1752b0f022899ca29a297c900d254">ExecutionData</a> = std::variant&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_code_object.html">CodeObject</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_error.html">BehaviorError</a> &gt;</td></tr>
+<tr class="separator:a93d1752b0f022899ca29a297c900d254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a1b8d935fc25a2d6dac0ff61ed7386f21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a1b8d935fc25a2d6dac0ff61ed7386f21">evalCode</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;receiver, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_code_object.html">CodeObject</a> code)</td></tr>
+<tr class="separator:a1b8d935fc25a2d6dac0ff61ed7386f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fc22b52fcdb3423cc1dae7b9e65936c"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a8fc22b52fcdb3423cc1dae7b9e65936c">evalFrame</a> (_PyInterpreterFrame *frame, int throwExc)</td></tr>
+<tr class="separator:a8fc22b52fcdb3423cc1dae7b9e65936c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a150887ce4d056056a816aab9869b664c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a150887ce4d056056a816aab9869b664c">evalFrame</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;receiver, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a> frame)</td></tr>
+<tr class="separator:a150887ce4d056056a816aab9869b664c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8646c6b538346fe4b9459f5b85069eb5"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a8646c6b538346fe4b9459f5b85069eb5">evalFrame</a> (PyThreadState *tstate, _PyInterpreterFrame *frame, int throwExc)</td></tr>
+<tr class="separator:a8646c6b538346fe4b9459f5b85069eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab795b429f5bd73fb1306af97dcf84fe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab795b429f5bd73fb1306af97dcf84fe5">evalFrames</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;receiver, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a> &gt; frames)</td></tr>
+<tr class="separator:ab795b429f5bd73fb1306af97dcf84fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e182e7f04c11336abd7f99237e81017"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a1e182e7f04c11336abd7f99237e81017">executionTrace</a> (PyObject *obj, PyFrameObject *frame, int event, PyObject *arg)</td></tr>
+<tr class="separator:a1e182e7f04c11336abd7f99237e81017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60acf0c48efb042ac9387e539c424f7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_error.html">BehaviorError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a60acf0c48efb042ac9387e539c424f7f">fetchError</a> ()</td></tr>
+<tr class="separator:a60acf0c48efb042ac9387e539c424f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab400eca62285d3e31a3e7c00070283dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab400eca62285d3e31a3e7c00070283dd">fromPyObject</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;receiver, PyObject *obj)</td></tr>
+<tr class="separator:ab400eca62285d3e31a3e7c00070283dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f46cd6d12cd012f3dd3347235381e34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_value_type.html">ValueType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a7f46cd6d12cd012f3dd3347235381e34">fromPyObject</a> (PyObject *obj)</td></tr>
+<tr class="separator:a7f46cd6d12cd012f3dd3347235381e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13de1531b569b9ecad10f621c6f8b4d6"><td class="memTemplParams" colspan="2">template&lt;typename T , auto p&gt; </td></tr>
+<tr class="memitem:a13de1531b569b9ecad10f621c6f8b4d6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a13de1531b569b9ecad10f621c6f8b4d6">PyDealloc</a> (PyObject *self)</td></tr>
+<tr class="separator:a13de1531b569b9ecad10f621c6f8b4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf62adfbfe0888331e00b248ba946c2"><td class="memTemplParams" colspan="2">template&lt;typename T , typename V &gt; </td></tr>
+<tr class="memitem:a4cf62adfbfe0888331e00b248ba946c2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a4cf62adfbfe0888331e00b248ba946c2">PyDealloc</a> (V(T::*p), PyObject *self)</td></tr>
+<tr class="separator:a4cf62adfbfe0888331e00b248ba946c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29931e58d378754f2140a7a27937f63d"><td class="memItemLeft" align="right" valign="top">PyMODINIT_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a29931e58d378754f2140a7a27937f63d">PyInit_Engine</a> (<a class="el" href="classvoid.html">void</a>)</td></tr>
+<tr class="separator:a29931e58d378754f2140a7a27937f63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9d841f0359c0f726e5f3506192df3e4"><td class="memItemLeft" align="right" valign="top">PyMODINIT_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ad9d841f0359c0f726e5f3506192df3e4">PyInit_Environment</a> (<a class="el" href="classvoid.html">void</a>)</td></tr>
+<tr class="separator:ad9d841f0359c0f726e5f3506192df3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2007579e0295e5ac8175d8d3a21616bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a2007579e0295e5ac8175d8d3a21616bc">PyToValueTypeDesc</a> (PyObject *obj)</td></tr>
+<tr class="separator:a2007579e0295e5ac8175d8d3a21616bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e1854b9dfd9ff04e225854797013cdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a1e1854b9dfd9ff04e225854797013cdd">setupExecution</a> ()</td></tr>
+<tr class="separator:a1e1854b9dfd9ff04e225854797013cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b3b0932ad095def9ca29475da8d266"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a62b3b0932ad095def9ca29475da8d266">stackUnwindable</a> ()</td></tr>
+<tr class="separator:a62b3b0932ad095def9ca29475da8d266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2199757c4413c5ae940d7cc703c5a52"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af2199757c4413c5ae940d7cc703c5a52">suspend</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a> &gt;, <a class="el" href="struct_engine_1_1_log_1_1_log.html">Log::Log</a> *, <a class="el" href="namespace_engine_1_1_execution.html#a6566cf72887f8b06c70e43862be0c706">Execution::StopToken</a>)&gt; callback)</td></tr>
+<tr class="separator:af2199757c4413c5ae940d7cc703c5a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bb4772868b458e475c43a0c0412fee2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a1bb4772868b458e475c43a0c0412fee2">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">Execution::visit_state_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_execution_state.html">ExecutionState</a> *state, auto &amp;&amp;visitor)</td></tr>
+<tr class="separator:a1bb4772868b458e475c43a0c0412fee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098d0cfe872bed68c0af823a9761528f"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a098d0cfe872bed68c0af823a9761528f">toPyObject</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> b)</td></tr>
+<tr class="separator:a098d0cfe872bed68c0af823a9761528f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a748efd430d9814876232da410ae85ae7"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a748efd430d9814876232da410ae85ae7">toPyObject</a> (const <a class="el" href="struct_engine_1_1_api_function.html">ApiFunction</a> &amp;function)</td></tr>
+<tr class="separator:a748efd430d9814876232da410ae85ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b8595c967687aa065efd1c86037d6b"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ad5b8595c967687aa065efd1c86037d6b">toPyObject</a> (const <a class="el" href="struct_engine_1_1_bound_api_function.html">BoundApiFunction</a> &amp;function)</td></tr>
+<tr class="separator:ad5b8595c967687aa065efd1c86037d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af92aa96e9965515b36da0eeeefe69d7f"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af92aa96e9965515b36da0eeeefe69d7f">toPyObject</a> (const <a class="el" href="struct_engine_1_1_co_w.html">CoW</a>&lt; <a class="el" href="struct_engine_1_1_matrix3.html">Matrix3</a> &gt; &amp;m)</td></tr>
+<tr class="separator:af92aa96e9965515b36da0eeeefe69d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95eb97ca6933026f624a307fb9909e2"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aa95eb97ca6933026f624a307fb9909e2">toPyObject</a> (const <a class="el" href="struct_engine_1_1_co_w.html">CoW</a>&lt; <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a> &gt; &amp;m)</td></tr>
+<tr class="separator:aa95eb97ca6933026f624a307fb9909e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c42f9e5a1d058036dc1628524541e8e"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a3c42f9e5a1d058036dc1628524541e8e">toPyObject</a> (const <a class="el" href="struct_engine_1_1_co_w_string.html">CoWString</a> &amp;s)</td></tr>
+<tr class="separator:a3c42f9e5a1d058036dc1628524541e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a5a0435f7c39259203d1bb23912151e"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a9a5a0435f7c39259203d1bb23912151e">toPyObject</a> (const <a class="el" href="struct_engine_1_1_enum_holder.html">EnumHolder</a> &amp;e)</td></tr>
+<tr class="separator:a9a5a0435f7c39259203d1bb23912151e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4220d44ae02b7653ed65444c981049b"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aa4220d44ae02b7653ed65444c981049b">toPyObject</a> (const <a class="el" href="struct_engine_1_1_flags_holder.html">FlagsHolder</a> &amp;f)</td></tr>
+<tr class="separator:aa4220d44ae02b7653ed65444c981049b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bc0db09e1cb83cadf50a04277090fe3"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a4bc0db09e1cb83cadf50a04277090fe3">toPyObject</a> (const <a class="el" href="struct_engine_1_1_key_value_binding.html">KeyValueBinding</a> &amp;b)</td></tr>
+<tr class="separator:a4bc0db09e1cb83cadf50a04277090fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b348782f9b60c5383e6a8b4b5406c58"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a9b348782f9b60c5383e6a8b4b5406c58">toPyObject</a> (const <a class="el" href="struct_engine_1_1_key_value_function.html">KeyValueFunction</a> &amp;f)</td></tr>
+<tr class="separator:a9b348782f9b60c5383e6a8b4b5406c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae987302c392d96a49d9fb2b9f185122e"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ae987302c392d96a49d9fb2b9f185122e">toPyObject</a> (const <a class="el" href="struct_engine_1_1_key_value_sender.html">KeyValueSender</a> &amp;s)</td></tr>
+<tr class="separator:ae987302c392d96a49d9fb2b9f185122e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e00fb97a01303fed45128bcaebc9fe"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ad9e00fb97a01303fed45128bcaebc9fe">toPyObject</a> (const <a class="el" href="namespace_engine.html#a2950c64e412fda80db4b0bfe1a02c802">KeyValueVirtualAssociativeRange</a> &amp;range)</td></tr>
+<tr class="separator:ad9e00fb97a01303fed45128bcaebc9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9134bc6198f219909b127c8ed0a32bc"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ae9134bc6198f219909b127c8ed0a32bc">toPyObject</a> (const <a class="el" href="namespace_engine.html#aa065d748935d4b5bd1bebcd6f87ff876">KeyValueVirtualSequenceRange</a> &amp;range)</td></tr>
+<tr class="separator:ae9134bc6198f219909b127c8ed0a32bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab418571253db5579d9123f4e079f09b6"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab418571253db5579d9123f4e079f09b6">toPyObject</a> (const <a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a> &amp;o)</td></tr>
+<tr class="separator:ab418571253db5579d9123f4e079f09b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af52649dbe05f1440e727eadc145a7ca7"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af52649dbe05f1440e727eadc145a7ca7">toPyObject</a> (const <a class="el" href="struct_engine_1_1_owned_scope_ptr.html">OwnedScopePtr</a> &amp;scope)</td></tr>
+<tr class="separator:af52649dbe05f1440e727eadc145a7ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c3f2a63e4b34db85a70e00e9bc1a59"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ad4c3f2a63e4b34db85a70e00e9bc1a59">toPyObject</a> (const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;q)</td></tr>
+<tr class="separator:ad4c3f2a63e4b34db85a70e00e9bc1a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd40732b6495c87bb1391d64006fb63"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a6dd40732b6495c87bb1391d64006fb63">toPyObject</a> (const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;it)</td></tr>
+<tr class="separator:a6dd40732b6495c87bb1391d64006fb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa24be74e4cefaef1a25113a6b06436fd"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aa24be74e4cefaef1a25113a6b06436fd">toPyObject</a> (const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;scope)</td></tr>
+<tr class="separator:aa24be74e4cefaef1a25113a6b06436fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af51febcd18f913d1932b60b0f1038dd3"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af51febcd18f913d1932b60b0f1038dd3">toPyObject</a> (const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;val)</td></tr>
+<tr class="separator:af51febcd18f913d1932b60b0f1038dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6abb2eda0613e753031e06b645ae52"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a0e6abb2eda0613e753031e06b645ae52">toPyObject</a> (const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &amp;t)</td></tr>
+<tr class="separator:a0e6abb2eda0613e753031e06b645ae52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a120ecf3c9796fc4ae461baa971c0f0e5"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a120ecf3c9796fc4ae461baa971c0f0e5">toPyObject</a> (const <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> &amp;v)</td></tr>
+<tr class="separator:a120ecf3c9796fc4ae461baa971c0f0e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051c46a55f6d02e0a37c18725413bbb1"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a051c46a55f6d02e0a37c18725413bbb1">toPyObject</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;v)</td></tr>
+<tr class="separator:a051c46a55f6d02e0a37c18725413bbb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b2db65f68d0c5860c415811e6d7a4b"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a36b2db65f68d0c5860c415811e6d7a4b">toPyObject</a> (const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="separator:a36b2db65f68d0c5860c415811e6d7a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e949e1daf434015004108fd0aa55f2"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a43e949e1daf434015004108fd0aa55f2">toPyObject</a> (const <a class="el" href="struct_engine_1_1_vector3i.html">Vector3i</a> &amp;v)</td></tr>
+<tr class="separator:a43e949e1daf434015004108fd0aa55f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef4caab0de5cabcf7591b386e249e4fb"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aef4caab0de5cabcf7591b386e249e4fb">toPyObject</a> (const <a class="el" href="struct_engine_1_1_vector4.html">Vector4</a> &amp;v)</td></tr>
+<tr class="separator:aef4caab0de5cabcf7591b386e249e4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2077774d9f9cb339a70e9fa261df45c"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af2077774d9f9cb339a70e9fa261df45c">toPyObject</a> (const <a class="el" href="struct_engine_1_1_vector4i.html">Vector4i</a> &amp;v)</td></tr>
+<tr class="separator:af2077774d9f9cb339a70e9fa261df45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed4d011a70821e8761fcd15f96a2526"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a0ed4d011a70821e8761fcd15f96a2526">toPyObject</a> (const <a class="el" href="struct_engine_1_1_virtual_iterator.html">VirtualIterator</a>&lt; <a class="el" href="struct_engine_1_1_key_value_pair.html">KeyValuePair</a> &gt; &amp;it)</td></tr>
+<tr class="separator:a0ed4d011a70821e8761fcd15f96a2526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6079a4cd9b5b7b98d27dce13aa936469"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a6079a4cd9b5b7b98d27dce13aa936469">toPyObject</a> (const <a class="el" href="struct_engine_1_1_virtual_iterator.html">VirtualIterator</a>&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; &amp;it)</td></tr>
+<tr class="separator:a6079a4cd9b5b7b98d27dce13aa936469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ff493b401ec52ec4e9b4197147e1883"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a8ff493b401ec52ec4e9b4197147e1883">toPyObject</a> (float f)</td></tr>
+<tr class="separator:a8ff493b401ec52ec4e9b4197147e1883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d06af040c4e14a4775b8485e4a510e9"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a8d06af040c4e14a4775b8485e4a510e9">toPyObject</a> (int i)</td></tr>
+<tr class="separator:a8d06af040c4e14a4775b8485e4a510e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9b9e410476555af5bd316b7f2dced1f"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aa9b9e410476555af5bd316b7f2dced1f">toPyObject</a> (std::chrono::nanoseconds d)</td></tr>
+<tr class="separator:aa9b9e410476555af5bd316b7f2dced1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bf238ddca2e8ecae1eb295d1b7b6fcc"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a1bf238ddca2e8ecae1eb295d1b7b6fcc">toPyObject</a> (std::monostate)</td></tr>
+<tr class="separator:a1bf238ddca2e8ecae1eb295d1b7b6fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff261b218adb77b4fd6c9599fc14f5c"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aaff261b218adb77b4fd6c9599fc14f5c">toPyObject</a> (uint64_t i)</td></tr>
+<tr class="separator:aaff261b218adb77b4fd6c9599fc14f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab5981e1d786db5cf8fa347e117c63ad4"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab5981e1d786db5cf8fa347e117c63ad4">PyApiFunctionType</a></td></tr>
+<tr class="separator:ab5981e1d786db5cf8fa347e117c63ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac738a2ad9d947bc438ae2bb1f21e711e"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ac738a2ad9d947bc438ae2bb1f21e711e">PyBehaviorScopeType</a></td></tr>
+<tr class="separator:ac738a2ad9d947bc438ae2bb1f21e711e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2898decdb15a596b96024f5ccfa22b48"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a2898decdb15a596b96024f5ccfa22b48">PyBoundApiFunctionType</a></td></tr>
+<tr class="separator:a2898decdb15a596b96024f5ccfa22b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f8bad843d699cecc7bca9e3f54a6b7"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aa9f8bad843d699cecc7bca9e3f54a6b7">PyDebugLocationType</a></td></tr>
+<tr class="separator:aa9f8bad843d699cecc7bca9e3f54a6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefd97d3233111a96b86558ea6b5e9344"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aefd97d3233111a96b86558ea6b5e9344">PyEnumType</a></td></tr>
+<tr class="separator:aefd97d3233111a96b86558ea6b5e9344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab21cb57fbffdfab12f5676ef0273657f"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab21cb57fbffdfab12f5676ef0273657f">PyFlagsType</a></td></tr>
+<tr class="separator:ab21cb57fbffdfab12f5676ef0273657f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a885a026f3d05504b6d81c990f7c1e029"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a885a026f3d05504b6d81c990f7c1e029">PyMatrix3Type</a></td></tr>
+<tr class="separator:a885a026f3d05504b6d81c990f7c1e029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44747dba97a0c58495c7fd1ce46aafb5"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a44747dba97a0c58495c7fd1ce46aafb5">PyMatrix4Type</a></td></tr>
+<tr class="separator:a44747dba97a0c58495c7fd1ce46aafb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d52205c3c3dcb3f04ff2a5dd058b53"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ac2d52205c3c3dcb3f04ff2a5dd058b53">PyOwnedScopePtrType</a></td></tr>
+<tr class="separator:ac2d52205c3c3dcb3f04ff2a5dd058b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b756cf36140f093e86a55d28b0ec4a"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ae4b756cf36140f093e86a55d28b0ec4a">PyQuaternionType</a></td></tr>
+<tr class="separator:ae4b756cf36140f093e86a55d28b0ec4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3174b45ecc3e7354470ff1cb421da7"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#abd3174b45ecc3e7354470ff1cb421da7">PyScopeIteratorType</a></td></tr>
+<tr class="separator:abd3174b45ecc3e7354470ff1cb421da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa8bd1689a9c5c5ed87ee3c755e13064"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#afa8bd1689a9c5c5ed87ee3c755e13064">PySenderType</a></td></tr>
+<tr class="separator:afa8bd1689a9c5c5ed87ee3c755e13064"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0051b94556c5cf444d0b3632e98ba37f"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a0051b94556c5cf444d0b3632e98ba37f">PySuspendExceptionType</a></td></tr>
+<tr class="separator:a0051b94556c5cf444d0b3632e98ba37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394b8644dde9fe8735d7f5a6da7c0613"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a394b8644dde9fe8735d7f5a6da7c0613">PyTypedScopePtrType</a></td></tr>
+<tr class="separator:a394b8644dde9fe8735d7f5a6da7c0613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8334ad8cde9b09d9f1c686ec5166d9ed"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a8334ad8cde9b09d9f1c686ec5166d9ed">PyVector2Type</a></td></tr>
+<tr class="separator:a8334ad8cde9b09d9f1c686ec5166d9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac5f10fe32cdbd1486ed4ee9d663596f"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aac5f10fe32cdbd1486ed4ee9d663596f">PyVector3Type</a></td></tr>
+<tr class="separator:aac5f10fe32cdbd1486ed4ee9d663596f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf4ce3eb523eb775d7f18927cb83932c"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#acf4ce3eb523eb775d7f18927cb83932c">PyVector4Type</a></td></tr>
+<tr class="separator:acf4ce3eb523eb775d7f18927cb83932c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adea54e8e53255f0d2191c8a861061925"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#adea54e8e53255f0d2191c8a861061925">PyVirtualAssociativeIteratorType</a></td></tr>
+<tr class="separator:adea54e8e53255f0d2191c8a861061925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389f4a996927ada42bfc9c4f790e4355"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a389f4a996927ada42bfc9c4f790e4355">PyVirtualAssociativeRangeType</a></td></tr>
+<tr class="separator:a389f4a996927ada42bfc9c4f790e4355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b3f74ac8ee322c9461787f01fd7f90"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a88b3f74ac8ee322c9461787f01fd7f90">PyVirtualSequenceIteratorType</a></td></tr>
+<tr class="separator:a88b3f74ac8ee322c9461787f01fd7f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d173368d91213cc308f58fb375fc79"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ae4d173368d91213cc308f58fb375fc79">PyVirtualSequenceRangeType</a></td></tr>
+<tr class="separator:ae4d173368d91213cc308f58fb375fc79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0cc31d8faa7d5c29cd73f35d284dbea"><td class="memItemLeft" align="right" valign="top">PyFrameObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab0cc31d8faa7d5c29cd73f35d284dbea">sFrame</a></td></tr>
+<tr class="separator:ab0cc31d8faa7d5c29cd73f35d284dbea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae890487544339fda3ebe7e7040d84fc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ae890487544339fda3ebe7e7040d84fc3">sSuspending</a> = false</td></tr>
+<tr class="separator:ae890487544339fda3ebe7e7040d84fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a93d1752b0f022899ca29a297c900d254" name="a93d1752b0f022899ca29a297c900d254"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93d1752b0f022899ca29a297c900d254">&#9670;&#160;</a></span>ExecutionData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a93d1752b0f022899ca29a297c900d254">Engine::Behavior::Python3::ExecutionData</a> = typedef std::variant&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_code_object.html">CodeObject</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_error.html">BehaviorError</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a1e182e7f04c11336abd7f99237e81017" name="a1e182e7f04c11336abd7f99237e81017"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e182e7f04c11336abd7f99237e81017">&#9670;&#160;</a></span>executionTrace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Behavior::Python3::executionTrace </td>
+          <td>(</td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PyFrameObject *&#160;</td>
+          <td class="paramname"><em>frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29931e58d378754f2140a7a27937f63d" name="a29931e58d378754f2140a7a27937f63d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29931e58d378754f2140a7a27937f63d">&#9670;&#160;</a></span>PyInit_Engine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyMODINIT_FUNC Engine::Behavior::Python3::PyInit_Engine </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9d841f0359c0f726e5f3506192df3e4" name="ad9d841f0359c0f726e5f3506192df3e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9d841f0359c0f726e5f3506192df3e4">&#9670;&#160;</a></span>PyInit_Environment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyMODINIT_FUNC Engine::Behavior::Python3::PyInit_Environment </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8fc22b52fcdb3423cc1dae7b9e65936c" name="a8fc22b52fcdb3423cc1dae7b9e65936c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fc22b52fcdb3423cc1dae7b9e65936c">&#9670;&#160;</a></span>evalFrame() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyObject * Engine::Behavior::Python3::evalFrame </td>
+          <td>(</td>
+          <td class="paramtype">_PyInterpreterFrame *&#160;</td>
+          <td class="paramname"><em>frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>throwExc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1b8d935fc25a2d6dac0ff61ed7386f21" name="a1b8d935fc25a2d6dac0ff61ed7386f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b8d935fc25a2d6dac0ff61ed7386f21">&#9670;&#160;</a></span>evalCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::evalCode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_code_object.html">CodeObject</a>&#160;</td>
+          <td class="paramname"><em>code</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a150887ce4d056056a816aab9869b664c" name="a150887ce4d056056a816aab9869b664c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a150887ce4d056056a816aab9869b664c">&#9670;&#160;</a></span>evalFrame() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::evalFrame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a>&#160;</td>
+          <td class="paramname"><em>frame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab795b429f5bd73fb1306af97dcf84fe5" name="ab795b429f5bd73fb1306af97dcf84fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab795b429f5bd73fb1306af97dcf84fe5">&#9670;&#160;</a></span>evalFrames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::evalFrames </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a> &gt;&#160;</td>
+          <td class="paramname"><em>frames</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62b3b0932ad095def9ca29475da8d266" name="a62b3b0932ad095def9ca29475da8d266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b3b0932ad095def9ca29475da8d266">&#9670;&#160;</a></span>stackUnwindable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Behavior::Python3::stackUnwindable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2199757c4413c5ae940d7cc703c5a52" name="af2199757c4413c5ae940d7cc703c5a52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2199757c4413c5ae940d7cc703c5a52">&#9670;&#160;</a></span>suspend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyObject * Engine::Behavior::Python3::suspend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;, std::vector&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_frame_ptr.html">PyFramePtr</a> &gt;, <a class="el" href="struct_engine_1_1_log_1_1_log.html">Log::Log</a> *, <a class="el" href="namespace_engine_1_1_execution.html#a6566cf72887f8b06c70e43862be0c706">Execution::StopToken</a>)&gt;&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60acf0c48efb042ac9387e539c424f7f" name="a60acf0c48efb042ac9387e539c424f7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60acf0c48efb042ac9387e539c424f7f">&#9670;&#160;</a></span>fetchError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_error.html">BehaviorError</a> Engine::Behavior::Python3::fetchError </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e1854b9dfd9ff04e225854797013cdd" name="a1e1854b9dfd9ff04e225854797013cdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e1854b9dfd9ff04e225854797013cdd">&#9670;&#160;</a></span>setupExecution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::setupExecution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1bb4772868b458e475c43a0c0412fee2" name="a1bb4772868b458e475c43a0c0412fee2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb4772868b458e475c43a0c0412fee2">&#9670;&#160;</a></span>tag_invoke()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">Execution::visit_state_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_execution_state.html">ExecutionState</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>visitor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8646c6b538346fe4b9459f5b85069eb5" name="a8646c6b538346fe4b9459f5b85069eb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8646c6b538346fe4b9459f5b85069eb5">&#9670;&#160;</a></span>evalFrame() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyObject * Engine::Behavior::Python3::evalFrame </td>
+          <td>(</td>
+          <td class="paramtype">PyThreadState *&#160;</td>
+          <td class="paramname"><em>tstate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">_PyInterpreterFrame *&#160;</td>
+          <td class="paramname"><em>frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>throwExc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af51febcd18f913d1932b60b0f1038dd3" name="af51febcd18f913d1932b60b0f1038dd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af51febcd18f913d1932b60b0f1038dd3">&#9670;&#160;</a></span>toPyObject() <span class="overload">[1/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1bf238ddca2e8ecae1eb295d1b7b6fcc" name="a1bf238ddca2e8ecae1eb295d1b7b6fcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bf238ddca2e8ecae1eb295d1b7b6fcc">&#9670;&#160;</a></span>toPyObject() <span class="overload">[2/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">std::monostate&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d06af040c4e14a4775b8485e4a510e9" name="a8d06af040c4e14a4775b8485e4a510e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d06af040c4e14a4775b8485e4a510e9">&#9670;&#160;</a></span>toPyObject() <span class="overload">[3/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaff261b218adb77b4fd6c9599fc14f5c" name="aaff261b218adb77b4fd6c9599fc14f5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaff261b218adb77b4fd6c9599fc14f5c">&#9670;&#160;</a></span>toPyObject() <span class="overload">[4/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a098d0cfe872bed68c0af823a9761528f" name="a098d0cfe872bed68c0af823a9761528f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a098d0cfe872bed68c0af823a9761528f">&#9670;&#160;</a></span>toPyObject() <span class="overload">[5/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ff493b401ec52ec4e9b4197147e1883" name="a8ff493b401ec52ec4e9b4197147e1883"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ff493b401ec52ec4e9b4197147e1883">&#9670;&#160;</a></span>toPyObject() <span class="overload">[6/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9b9e410476555af5bd316b7f2dced1f" name="aa9b9e410476555af5bd316b7f2dced1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9b9e410476555af5bd316b7f2dced1f">&#9670;&#160;</a></span>toPyObject() <span class="overload">[7/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::nanoseconds&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa24be74e4cefaef1a25113a6b06436fd" name="aa24be74e4cefaef1a25113a6b06436fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa24be74e4cefaef1a25113a6b06436fd">&#9670;&#160;</a></span>toPyObject() <span class="overload">[8/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>scope</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af52649dbe05f1440e727eadc145a7ca7" name="af52649dbe05f1440e727eadc145a7ca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af52649dbe05f1440e727eadc145a7ca7">&#9670;&#160;</a></span>toPyObject() <span class="overload">[9/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_owned_scope_ptr.html">OwnedScopePtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>scope</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6dd40732b6495c87bb1391d64006fb63" name="a6dd40732b6495c87bb1391d64006fb63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dd40732b6495c87bb1391d64006fb63">&#9670;&#160;</a></span>toPyObject() <span class="overload">[10/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a748efd430d9814876232da410ae85ae7" name="a748efd430d9814876232da410ae85ae7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a748efd430d9814876232da410ae85ae7">&#9670;&#160;</a></span>toPyObject() <span class="overload">[11/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_api_function.html">ApiFunction</a> &amp;&#160;</td>
+          <td class="paramname"><em>function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5b8595c967687aa065efd1c86037d6b" name="ad5b8595c967687aa065efd1c86037d6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5b8595c967687aa065efd1c86037d6b">&#9670;&#160;</a></span>toPyObject() <span class="overload">[12/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_bound_api_function.html">BoundApiFunction</a> &amp;&#160;</td>
+          <td class="paramname"><em>function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9134bc6198f219909b127c8ed0a32bc" name="ae9134bc6198f219909b127c8ed0a32bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9134bc6198f219909b127c8ed0a32bc">&#9670;&#160;</a></span>toPyObject() <span class="overload">[13/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine.html#aa065d748935d4b5bd1bebcd6f87ff876">KeyValueVirtualSequenceRange</a> &amp;&#160;</td>
+          <td class="paramname"><em>range</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9e00fb97a01303fed45128bcaebc9fe" name="ad9e00fb97a01303fed45128bcaebc9fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e00fb97a01303fed45128bcaebc9fe">&#9670;&#160;</a></span>toPyObject() <span class="overload">[14/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine.html#a2950c64e412fda80db4b0bfe1a02c802">KeyValueVirtualAssociativeRange</a> &amp;&#160;</td>
+          <td class="paramname"><em>range</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6079a4cd9b5b7b98d27dce13aa936469" name="a6079a4cd9b5b7b98d27dce13aa936469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6079a4cd9b5b7b98d27dce13aa936469">&#9670;&#160;</a></span>toPyObject() <span class="overload">[15/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_virtual_iterator.html">VirtualIterator</a>&lt; <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ed4d011a70821e8761fcd15f96a2526" name="a0ed4d011a70821e8761fcd15f96a2526"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ed4d011a70821e8761fcd15f96a2526">&#9670;&#160;</a></span>toPyObject() <span class="overload">[16/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_virtual_iterator.html">VirtualIterator</a>&lt; <a class="el" href="struct_engine_1_1_key_value_pair.html">KeyValuePair</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c42f9e5a1d058036dc1628524541e8e" name="a3c42f9e5a1d058036dc1628524541e8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c42f9e5a1d058036dc1628524541e8e">&#9670;&#160;</a></span>toPyObject() <span class="overload">[17/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_co_w_string.html">CoWString</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a120ecf3c9796fc4ae461baa971c0f0e5" name="a120ecf3c9796fc4ae461baa971c0f0e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a120ecf3c9796fc4ae461baa971c0f0e5">&#9670;&#160;</a></span>toPyObject() <span class="overload">[18/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2.html">Vector2</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a36b2db65f68d0c5860c415811e6d7a4b" name="a36b2db65f68d0c5860c415811e6d7a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b2db65f68d0c5860c415811e6d7a4b">&#9670;&#160;</a></span>toPyObject() <span class="overload">[19/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef4caab0de5cabcf7591b386e249e4fb" name="aef4caab0de5cabcf7591b386e249e4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef4caab0de5cabcf7591b386e249e4fb">&#9670;&#160;</a></span>toPyObject() <span class="overload">[20/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector4.html">Vector4</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a051c46a55f6d02e0a37c18725413bbb1" name="a051c46a55f6d02e0a37c18725413bbb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a051c46a55f6d02e0a37c18725413bbb1">&#9670;&#160;</a></span>toPyObject() <span class="overload">[21/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43e949e1daf434015004108fd0aa55f2" name="a43e949e1daf434015004108fd0aa55f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e949e1daf434015004108fd0aa55f2">&#9670;&#160;</a></span>toPyObject() <span class="overload">[22/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector3i.html">Vector3i</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2077774d9f9cb339a70e9fa261df45c" name="af2077774d9f9cb339a70e9fa261df45c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2077774d9f9cb339a70e9fa261df45c">&#9670;&#160;</a></span>toPyObject() <span class="overload">[23/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector4i.html">Vector4i</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4c3f2a63e4b34db85a70e00e9bc1a59" name="ad4c3f2a63e4b34db85a70e00e9bc1a59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4c3f2a63e4b34db85a70e00e9bc1a59">&#9670;&#160;</a></span>toPyObject() <span class="overload">[24/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>q</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab418571253db5579d9123f4e079f09b6" name="ab418571253db5579d9123f4e079f09b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab418571253db5579d9123f4e079f09b6">&#9670;&#160;</a></span>toPyObject() <span class="overload">[25/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_object_ptr.html">ObjectPtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af92aa96e9965515b36da0eeeefe69d7f" name="af92aa96e9965515b36da0eeeefe69d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af92aa96e9965515b36da0eeeefe69d7f">&#9670;&#160;</a></span>toPyObject() <span class="overload">[26/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_co_w.html">CoW</a>&lt; <a class="el" href="struct_engine_1_1_matrix3.html">Matrix3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa95eb97ca6933026f624a307fb9909e2" name="aa95eb97ca6933026f624a307fb9909e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa95eb97ca6933026f624a307fb9909e2">&#9670;&#160;</a></span>toPyObject() <span class="overload">[27/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_co_w.html">CoW</a>&lt; <a class="el" href="struct_engine_1_1_matrix4.html">Matrix4</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a5a0435f7c39259203d1bb23912151e" name="a9a5a0435f7c39259203d1bb23912151e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a5a0435f7c39259203d1bb23912151e">&#9670;&#160;</a></span>toPyObject() <span class="overload">[28/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_enum_holder.html">EnumHolder</a> &amp;&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4220d44ae02b7653ed65444c981049b" name="aa4220d44ae02b7653ed65444c981049b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4220d44ae02b7653ed65444c981049b">&#9670;&#160;</a></span>toPyObject() <span class="overload">[29/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_flags_holder.html">FlagsHolder</a> &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b348782f9b60c5383e6a8b4b5406c58" name="a9b348782f9b60c5383e6a8b4b5406c58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b348782f9b60c5383e6a8b4b5406c58">&#9670;&#160;</a></span>toPyObject() <span class="overload">[30/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_key_value_function.html">KeyValueFunction</a> &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae987302c392d96a49d9fb2b9f185122e" name="ae987302c392d96a49d9fb2b9f185122e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae987302c392d96a49d9fb2b9f185122e">&#9670;&#160;</a></span>toPyObject() <span class="overload">[31/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_key_value_sender.html">KeyValueSender</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e6abb2eda0613e753031e06b645ae52" name="a0e6abb2eda0613e753031e06b645ae52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e6abb2eda0613e753031e06b645ae52">&#9670;&#160;</a></span>toPyObject() <span class="overload">[32/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4bc0db09e1cb83cadf50a04277090fe3" name="a4bc0db09e1cb83cadf50a04277090fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc0db09e1cb83cadf50a04277090fe3">&#9670;&#160;</a></span>toPyObject() <span class="overload">[33/33]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_key_value_binding.html">KeyValueBinding</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f46cd6d12cd012f3dd3347235381e34" name="a7f46cd6d12cd012f3dd3347235381e34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f46cd6d12cd012f3dd3347235381e34">&#9670;&#160;</a></span>fromPyObject() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> Engine::Behavior::Python3::fromPyObject </td>
+          <td>(</td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab400eca62285d3e31a3e7c00070283dd" name="ab400eca62285d3e31a3e7c00070283dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab400eca62285d3e31a3e7c00070283dd">&#9670;&#160;</a></span>fromPyObject() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> <a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::fromPyObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>obj</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2007579e0295e5ac8175d8d3a21616bc" name="a2007579e0295e5ac8175d8d3a21616bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2007579e0295e5ac8175d8d3a21616bc">&#9670;&#160;</a></span>PyToValueTypeDesc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::Behavior::Python3::PyToValueTypeDesc </td>
+          <td>(</td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4cf62adfbfe0888331e00b248ba946c2" name="a4cf62adfbfe0888331e00b248ba946c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cf62adfbfe0888331e00b248ba946c2">&#9670;&#160;</a></span>PyDealloc() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::PyDealloc </td>
+          <td>(</td>
+          <td class="paramtype">VT::*&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>self</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13de1531b569b9ecad10f621c6f8b4d6" name="a13de1531b569b9ecad10f621c6f8b4d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13de1531b569b9ecad10f621c6f8b4d6">&#9670;&#160;</a></span>PyDealloc() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , auto p&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::Python3::PyDealloc </td>
+          <td>(</td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ae890487544339fda3ebe7e7040d84fc3" name="ae890487544339fda3ebe7e7040d84fc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae890487544339fda3ebe7e7040d84fc3">&#9670;&#160;</a></span>sSuspending</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Behavior::Python3::sSuspending = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0051b94556c5cf444d0b3632e98ba37f" name="a0051b94556c5cf444d0b3632e98ba37f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0051b94556c5cf444d0b3632e98ba37f">&#9670;&#160;</a></span>PySuspendExceptionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PySuspendExceptionType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;PySuspendException&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PySuspendExceptionObject),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PySuspendExceptionObject, &amp;PySuspendExceptionObject::mException&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASE_EXC_SUBCLASS,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Utility exception for Python suspension&quot;</span>,</div>
+<div class="line">            .tp_base = (PyTypeObject *)PyExc_Exception,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa9f8bad843d699cecc7bca9e3f54a6b7" name="aa9f8bad843d699cecc7bca9e3f54a6b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9f8bad843d699cecc7bca9e3f54a6b7">&#9670;&#160;</a></span>PyDebugLocationType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyDebugLocationType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyObject_HEAD_INIT(NULL)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;PyDebugLocation&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyDebugLocationObject),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyDebugLocationObject, &amp;PyDebugLocationObject::mLocation&gt;,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python3 wrapper for debug location&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac738a2ad9d947bc438ae2bb1f21e711e" name="ac738a2ad9d947bc438ae2bb1f21e711e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac738a2ad9d947bc438ae2bb1f21e711e">&#9670;&#160;</a></span>PyBehaviorScopeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyBehaviorScopeType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyObject_HEAD_INIT(NULL).tp_name = <span class="stringliteral">&quot;Engine.BehaviorScope&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyBehaviorScopeObject),</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyBehaviorScopeObject, &amp;PyBehaviorScopeObject::mScope&gt;,</div>
+<div class="line">            </div>
+<div class="line">            .tp_as_mapping = &amp;PyBehaviorScopeMethods,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Scope wrapper to access Behavior scope variables&quot;</span>,</div>
+<div class="line">            </div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab0cc31d8faa7d5c29cd73f35d284dbea" name="ab0cc31d8faa7d5c29cd73f35d284dbea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0cc31d8faa7d5c29cd73f35d284dbea">&#9670;&#160;</a></span>sFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyFrameObject* Engine::Behavior::Python3::sFrame</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a885a026f3d05504b6d81c990f7c1e029" name="a885a026f3d05504b6d81c990f7c1e029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a885a026f3d05504b6d81c990f7c1e029">&#9670;&#160;</a></span>PyMatrix3Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyMatrix3Type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Matrix3&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyMatrix3),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyMatrix3, &amp;PyMatrix3::mMatrix&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyMatrix3, &amp;PyMatrix3::mMatrix&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of Matrix3&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a44747dba97a0c58495c7fd1ce46aafb5" name="a44747dba97a0c58495c7fd1ce46aafb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44747dba97a0c58495c7fd1ce46aafb5">&#9670;&#160;</a></span>PyMatrix4Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyMatrix4Type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Matrix4&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyMatrix4),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyMatrix4, &amp;PyMatrix4::mMatrix&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyMatrix4, &amp;PyMatrix4::mMatrix&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of Matrix4&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae4b756cf36140f093e86a55d28b0ec4a" name="ae4b756cf36140f093e86a55d28b0ec4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4b756cf36140f093e86a55d28b0ec4a">&#9670;&#160;</a></span>PyQuaternionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyQuaternionType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Quaternion&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyQuaternion),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyQuaternion, &amp;PyQuaternion::mQuaternion&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyQuaternion, &amp;PyQuaternion::mQuaternion&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of Quaternion&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8334ad8cde9b09d9f1c686ec5166d9ed" name="a8334ad8cde9b09d9f1c686ec5166d9ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8334ad8cde9b09d9f1c686ec5166d9ed">&#9670;&#160;</a></span>PyVector2Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyVector2Type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Vector2&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyVector2),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyVector2, &amp;PyVector2::mVector&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyVector2, &amp;PyVector2::mVector&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of Vector2&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aac5f10fe32cdbd1486ed4ee9d663596f" name="aac5f10fe32cdbd1486ed4ee9d663596f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac5f10fe32cdbd1486ed4ee9d663596f">&#9670;&#160;</a></span>PyVector3Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyVector3Type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Vector3&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyVector3),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyVector3, &amp;PyVector3::mVector&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyVector3, &amp;PyVector3::mVector&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of Vector3&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acf4ce3eb523eb775d7f18927cb83932c" name="acf4ce3eb523eb775d7f18927cb83932c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf4ce3eb523eb775d7f18927cb83932c">&#9670;&#160;</a></span>PyVector4Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyVector4Type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Vector4&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyVector4),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyVector4, &amp;PyVector4::mVector&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyVector4, &amp;PyVector4::mVector&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of Vector4&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab5981e1d786db5cf8fa347e117c63ad4" name="ab5981e1d786db5cf8fa347e117c63ad4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5981e1d786db5cf8fa347e117c63ad4">&#9670;&#160;</a></span>PyApiFunctionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyApiFunctionType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.ApiFunction&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyApiFunction),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyApiFunction, &amp;PyApiFunction::mFunction&gt;,</div>
+<div class="line">            .tp_call = (ternaryfunc)PyApiFunction_call,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of ApiFunction&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2898decdb15a596b96024f5ccfa22b48" name="a2898decdb15a596b96024f5ccfa22b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2898decdb15a596b96024f5ccfa22b48">&#9670;&#160;</a></span>PyBoundApiFunctionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyBoundApiFunctionType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.BoundApiFunction&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyBoundApiFunction),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyBoundApiFunction, &amp;PyBoundApiFunction::mFunction&gt;,</div>
+<div class="line">            .tp_call = (ternaryfunc)PyBoundApiFunction_call,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of BoundApiFunction&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aefd97d3233111a96b86558ea6b5e9344" name="aefd97d3233111a96b86558ea6b5e9344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefd97d3233111a96b86558ea6b5e9344">&#9670;&#160;</a></span>PyEnumType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyEnumType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Enum&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyEnum),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyEnum, &amp;PyEnum::mEnum&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyEnum, &amp;PyEnum::mEnum&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of EnumHolder&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab21cb57fbffdfab12f5676ef0273657f" name="ab21cb57fbffdfab12f5676ef0273657f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab21cb57fbffdfab12f5676ef0273657f">&#9670;&#160;</a></span>PyFlagsType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyFlagsType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Flags&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyFlags),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyFlags, &amp;PyFlags::mFlags&gt;,</div>
+<div class="line">            .tp_str = &amp;PyStr&lt;PyFlags, &amp;PyFlags::mFlags&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of FlagsHolder&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac2d52205c3c3dcb3f04ff2a5dd058b53" name="ac2d52205c3c3dcb3f04ff2a5dd058b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2d52205c3c3dcb3f04ff2a5dd058b53">&#9670;&#160;</a></span>PyOwnedScopePtrType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyOwnedScopePtrType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.OwnedScopePtr&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyOwnedScopePtr),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyOwnedScopePtr, &amp;PyOwnedScopePtr::mPtr&gt;,</div>
+<div class="line">            .tp_str = (reprfunc)PyOwnedScopePtr_str,</div>
+<div class="line">            .tp_getattro = (getattrofunc)PyOwnedScopePtr_get,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of OwnedScopePtr&quot;</span>,</div>
+<div class="line">            .tp_iter = (getiterfunc)PyOwnedScopePtr_iter,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abd3174b45ecc3e7354470ff1cb421da7" name="abd3174b45ecc3e7354470ff1cb421da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd3174b45ecc3e7354470ff1cb421da7">&#9670;&#160;</a></span>PyScopeIteratorType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyScopeIteratorType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.ScopeIterator&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyScopeIterator),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyScopeIterator, &amp;PyScopeIterator::mIt&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of ScopeIterator&quot;</span>,</div>
+<div class="line">            .tp_iter = (getiterfunc)PyScopeIterator_iter,</div>
+<div class="line">            .tp_iternext = (iternextfunc)PyScopeIterator_next,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a394b8644dde9fe8735d7f5a6da7c0613" name="a394b8644dde9fe8735d7f5a6da7c0613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a394b8644dde9fe8735d7f5a6da7c0613">&#9670;&#160;</a></span>PyTypedScopePtrType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyTypedScopePtrType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.ScopePtr&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyTypedScopePtr),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyTypedScopePtr, &amp;PyTypedScopePtr::mPtr&gt;,</div>
+<div class="line">            .tp_repr = (reprfunc)PyTypedScopePtr_str,</div>
+<div class="line">            .tp_str = (reprfunc)PyTypedScopePtr_str,</div>
+<div class="line">            .tp_getattro = (getattrofunc)PyTypedScopePtr_get,            </div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,         </div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of ScopePtr&quot;</span>,                        </div>
+<div class="line">            .tp_iter = (getiterfunc)PyTypedScopePtr_iter,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afa8bd1689a9c5c5ed87ee3c755e13064" name="afa8bd1689a9c5c5ed87ee3c755e13064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa8bd1689a9c5c5ed87ee3c755e13064">&#9670;&#160;</a></span>PySenderType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PySenderType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.Sender&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PySender),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PySender, &amp;PySender::mSender&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of KeyValueSender&quot;</span>,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a88b3f74ac8ee322c9461787f01fd7f90" name="a88b3f74ac8ee322c9461787f01fd7f90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b3f74ac8ee322c9461787f01fd7f90">&#9670;&#160;</a></span>PyVirtualSequenceIteratorType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyVirtualSequenceIteratorType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.VirtualSequenceIterator&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyVirtualSequenceIterator),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyVirtualSequenceIterator, &amp;PyVirtualSequenceIterator::mIt&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of VirtualSequenceIterator&quot;</span>,</div>
+<div class="line">            .tp_iter = (getiterfunc)PyVirtualSequenceIterator_iter,</div>
+<div class="line">            .tp_iternext = (iternextfunc)PyVirtualSequenceIterator_next,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adea54e8e53255f0d2191c8a861061925" name="adea54e8e53255f0d2191c8a861061925"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adea54e8e53255f0d2191c8a861061925">&#9670;&#160;</a></span>PyVirtualAssociativeIteratorType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyVirtualAssociativeIteratorType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.VirtualAssociativeIterator&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyVirtualAssociativeIterator),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyVirtualAssociativeIterator, &amp;PyVirtualAssociativeIterator::mIt&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of VirtualAssociativeIterator&quot;</span>,</div>
+<div class="line">            .tp_iter = (getiterfunc)PyVirtualAssociativeIterator_iter,</div>
+<div class="line">            .tp_iternext = (iternextfunc)PyVirtualAssociativeIterator_next,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae4d173368d91213cc308f58fb375fc79" name="ae4d173368d91213cc308f58fb375fc79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d173368d91213cc308f58fb375fc79">&#9670;&#160;</a></span>PyVirtualSequenceRangeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyVirtualSequenceRangeType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.VirtualSequenceRange&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyVirtualSequenceRange),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyVirtualSequenceRange, &amp;PyVirtualSequenceRange::mRange&gt;,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of KeyValueVirtualSequenceRange&quot;</span>,</div>
+<div class="line">            .tp_iter = (getiterfunc)PyVirtualSequenceRange_iter,</div>
+<div class="line">            .tp_new = PyType_GenericNew,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a389f4a996927ada42bfc9c4f790e4355" name="a389f4a996927ada42bfc9c4f790e4355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a389f4a996927ada42bfc9c4f790e4355">&#9670;&#160;</a></span>PyVirtualAssociativeRangeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyVirtualAssociativeRangeType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
+<div class="line">                           .tp_name</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.VirtualAssociativeRange&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyVirtualAssociativeRange),</div>
+<div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyVirtualAssociativeRange, &amp;PyVirtualAssociativeRange::mRange&gt;,</div>
+<div class="line">            .tp_as_mapping = &amp;PyVirtualAssociativeRangeMapping,</div>
+<div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of KeyValueVirtualAssociativeRange&quot;</span>,</div>
+<div class="line">            .tp_iter = (getiterfunc)PyVirtualAssociativeRange_iter,</div>
+<div class="line">            .tp_new = PyType_GenericNew</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

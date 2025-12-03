@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -266,9 +266,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex_3_01type__pack_3_4_00_01type__pack_3_01_v_8_8_8_01_4_01_4.html">Engine::Execution::VirtualReceiverBaseEx&lt; type_pack&lt;&gt;, type_pack&lt; V... &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_virtual_state_ex_3_01___rec_00_01_base_00_01type__pack_3_4_00_016dd5f344414e98904f6df7cfd629469e.html">Engine::Execution::VirtualStateEx&lt; _Rec, Base, type_pack&lt;&gt;, type_pack&lt; V... &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_virtual_state_ex_3_01_base_00_01_rec_00_01type__pack_3_01_r_00_0a8b2d7ff454c4f809be480e17bfdac83.html">Engine::Execution::VirtualStateEx&lt; Base, Rec, type_pack&lt; R, ExtraR... &gt;, VPack &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_virtual_state_ex_3_01_rec_00_01_base_00_01type__pack_3_01_r_00_02f8a35f706169aa2c0d17e8a637e9ef0.html">Engine::Execution::VirtualStateEx&lt; Rec, Base, type_pack&lt; R, ExtraR... &gt;, VPack &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_virtual_state_ex_3_01_base_00_01_rec_00_01type__pack_3_4_00_01type__pack_3_01_v_8_8_8_01_4_01_4.html">Engine::Execution::VirtualStateEx&lt; Base, Rec, type_pack&lt;&gt;, type_pack&lt; V... &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -284,14 +284,14 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a00e804b0ca78109adb1b174d39cd11e8"><td class="memTemplParams" colspan="2">template&lt;typename R , typename... V&gt; </td></tr>
 <tr class="memitem:a00e804b0ca78109adb1b174d39cd11e8"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a00e804b0ca78109adb1b174d39cd11e8">Engine::Execution::VirtualReceiverBase</a> = VirtualReceiverBaseEx&lt; make_type_pack_t&lt; R &gt;, type_pack&lt; V... &gt; &gt;</td></tr>
 <tr class="separator:a00e804b0ca78109adb1b174d39cd11e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbc41f6bbe1d29ea7760dccac218e082"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> , typename Base &gt; </td></tr>
-<tr class="memitem:abbc41f6bbe1d29ea7760dccac218e082"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#abbc41f6bbe1d29ea7760dccac218e082">Engine::Execution::VirtualState</a> = <a class="el" href="virtual__invoke_8h.html#aad8e0baf213521a183eec772ad527068">VirtualCPOsImpl</a>&lt; VirtualStateEx&lt; <a class="el" href="class_rec.html">Rec</a>, Base, typename Base::result_types, typename Base::value_types &gt; &gt;</td></tr>
-<tr class="separator:abbc41f6bbe1d29ea7760dccac218e082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f557ecd77fd04d645469b91c6dfe675"><td class="memTemplParams" colspan="2">template&lt;typename Base , typename Rec &gt; </td></tr>
+<tr class="memitem:a9f557ecd77fd04d645469b91c6dfe675"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a9f557ecd77fd04d645469b91c6dfe675">Engine::Execution::VirtualState</a> = <a class="el" href="virtual__invoke_8h.html#aad8e0baf213521a183eec772ad527068">VirtualCPOsImpl</a>&lt; VirtualStateEx&lt; Base, Rec, typename Base::result_types, typename Base::value_types &gt; &gt;</td></tr>
+<tr class="separator:a9f557ecd77fd04d645469b91c6dfe675"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:54:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

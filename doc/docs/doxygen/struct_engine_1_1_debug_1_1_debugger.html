@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -269,8 +269,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8c5f5efa515195df2720189e4c168c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab329affc48c580af3ef261740ad30d46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debugger.html#ab329affc48c580af3ef261740ad30d46">removeListener</a> (<a class="el" href="struct_engine_1_1_debug_1_1_debug_listener.html">DebugListener</a> *listener)</td></tr>
 <tr class="separator:ab329affc48c580af3ef261740ad30d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98a5c99c090f3e1f3d0ddcf40b3fbdf6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debugger.html#a98a5c99c090f3e1f3d0ddcf40b3fbdf6">wantsPause</a> (const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;location, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type)</td></tr>
-<tr class="separator:a98a5c99c090f3e1f3d0ddcf40b3fbdf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42077bedecf60c68022d0968c6b956f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debugger.html#a42077bedecf60c68022d0968c6b956f9">wantsPause</a> (const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;location, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; line)</td></tr>
+<tr class="separator:a42077bedecf60c68022d0968c6b956f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_virtual_scope"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_virtual_scope')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_virtual_scope.html">Engine::VirtualScope&lt; T, Base &gt;</a></td></tr>
 <tr class="memitem:a8eb04bc90993a62dde2f6e5acc85619e inherit pub_methods_struct_engine_1_1_virtual_scope"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope.html#a8eb04bc90993a62dde2f6e5acc85619e">customScopePtr</a> () override</td></tr>
 <tr class="separator:a8eb04bc90993a62dde2f6e5acc85619e inherit pub_methods_struct_engine_1_1_virtual_scope"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -416,8 +416,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a98a5c99c090f3e1f3d0ddcf40b3fbdf6" name="a98a5c99c090f3e1f3d0ddcf40b3fbdf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98a5c99c090f3e1f3d0ddcf40b3fbdf6">&#9670;&#160;</a></span>wantsPause()</h2>
+<a id="a42077bedecf60c68022d0968c6b956f9" name="a42077bedecf60c68022d0968c6b956f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42077bedecf60c68022d0968c6b956f9">&#9670;&#160;</a></span>wantsPause()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -432,7 +432,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt;&#160;</td>
+          <td class="paramname"><em>line</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -497,7 +503,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -268,16 +268,16 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae583baa487184fb5259a6bb51fb52d50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_rec.html">Rec</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html#ae583baa487184fb5259a6bb51fb52d50">mRec</a></td></tr>
+<tr class="memitem:ae583baa487184fb5259a6bb51fb52d50"><td class="memItemLeft" align="right" valign="top">Rec&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html#ae583baa487184fb5259a6bb51fb52d50">mRec</a></td></tr>
 <tr class="separator:ae583baa487184fb5259a6bb51fb52d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61df218789616aa205acf6c92c36a90e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1state.html">state</a>&lt; Sender, <a class="el" href="class_rec.html">Rec</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html#a61df218789616aa205acf6c92c36a90e">mState</a></td></tr>
+<tr class="memitem:a61df218789616aa205acf6c92c36a90e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1state.html">state</a>&lt; Sender, Rec &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html#a61df218789616aa205acf6c92c36a90e">mState</a></td></tr>
 <tr class="separator:a61df218789616aa205acf6c92c36a90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a5400cd155be6ad738e52ce507f632a83"><td class="memTemplParams" colspan="2">template&lt;typename CPO , typename... Args&gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;CPO, <a class="el" href="class_rec.html">Rec</a> &amp;, Args...&gt;)</td></tr>
-<tr class="memitem:a5400cd155be6ad738e52ce507f632a83"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html#a5400cd155be6ad738e52ce507f632a83">tag_invoke</a> (CPO f, <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">receiver</a> &amp;rec, Args &amp;&amp;...args) noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; CPO, <a class="el" href="class_rec.html">Rec</a> &amp;, Args... &gt;) -&gt; tag_invoke_result_t&lt; CPO, <a class="el" href="class_rec.html">Rec</a> &amp;, Args... &gt;</td></tr>
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;CPO, Rec &amp;, Args...&gt;)</td></tr>
+<tr class="memitem:a5400cd155be6ad738e52ce507f632a83"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html#a5400cd155be6ad738e52ce507f632a83">tag_invoke</a> (CPO f, <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">receiver</a> &amp;rec, Args &amp;&amp;...args) noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; CPO, Rec &amp;, Args... &gt;) -&gt; tag_invoke_result_t&lt; CPO, Rec &amp;, Args... &gt;</td></tr>
 <tr class="separator:a5400cd155be6ad738e52ce507f632a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -293,7 +293,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename Rec &gt; </div>
 <div class="memtemplate">
 template&lt;typename... V&gt; </div>
 <table class="mlabels">
@@ -301,7 +301,7 @@ template&lt;typename... V&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, <a class="el" href="class_rec.html">Rec</a> &gt;::set_value </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, Rec &gt;::set_value </td>
           <td>(</td>
           <td class="paramtype">V &amp;&amp;...&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
@@ -323,13 +323,13 @@ template&lt;typename... V&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, <a class="el" href="class_rec.html">Rec</a> &gt;::set_done </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, Rec &gt;::set_done </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -350,7 +350,7 @@ template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename Rec &gt; </div>
 <div class="memtemplate">
 template&lt;typename... R&gt; </div>
 <table class="mlabels">
@@ -358,7 +358,7 @@ template&lt;typename... R&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, <a class="el" href="class_rec.html">Rec</a> &gt;::set_error </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, Rec &gt;::set_error </td>
           <td>(</td>
           <td class="paramtype">R &amp;&amp;...&#160;</td>
           <td class="paramname"><em>r</em></td><td>)</td>
@@ -381,10 +381,10 @@ template&lt;typename... R&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename Rec &gt; </div>
 <div class="memtemplate">
 template&lt;typename CPO , typename... Args&gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;CPO, <a class="el" href="class_rec.html">Rec</a> &amp;, Args...&gt;)</div>
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;CPO, Rec &amp;, Args...&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -398,7 +398,7 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">receiver</a>&lt; Sender, <a class="el" href="class_rec.html">Rec</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">receiver</a>&lt; Sender, Rec &gt; &amp;&#160;</td>
           <td class="paramname"><em>rec</em>, </td>
         </tr>
         <tr>
@@ -410,7 +410,7 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> -&gt; tag_invoke_result_t&lt;CPO, <a class="el" href="class_rec.html">Rec</a> &amp;, Args...&gt;
+          <td></td><td> -&gt; tag_invoke_result_t&lt;CPO, Rec &amp;, Args...&gt;
             </td>
         </tr>
       </table>
@@ -430,10 +430,10 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename Rec &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_rec.html">Rec</a> <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, <a class="el" href="class_rec.html">Rec</a> &gt;::mRec</td>
+          <td class="memname">Rec <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, Rec &gt;::mRec</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -446,10 +446,10 @@ template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename Rec &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1state.html">state</a>&lt;Sender, <a class="el" href="class_rec.html">Rec</a>&gt;* <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, <a class="el" href="class_rec.html">Rec</a> &gt;::mState</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1state.html">state</a>&lt;Sender, Rec&gt;* <a class="el" href="struct_engine_1_1_execution_1_1detach__with__receiver__t_1_1receiver.html">Engine::Execution::detach_with_receiver_t::receiver</a>&lt; Sender, Rec &gt;::mState</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -462,7 +462,7 @@ template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:51 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

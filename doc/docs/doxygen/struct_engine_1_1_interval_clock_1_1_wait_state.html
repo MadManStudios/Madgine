@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -241,7 +241,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_interval_clock_1_1_wait_state-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::IntervalClock&lt; Timepoint &gt;::WaitState Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -261,8 +260,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3e1e98c3361b1b742767c13557547e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56f2d23bfbfa0b62270c624b094c6f2a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html#a56f2d23bfbfa0b62270c624b094c6f2a">continueExecution</a> (std::chrono::microseconds elapsed)=0</td></tr>
 <tr class="separator:a56f2d23bfbfa0b62270c624b094c6f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a537bdb666902f5e20d1a6a4099591d41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html#a537bdb666902f5e20d1a6a4099591d41">start</a> (<a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a> *clock)</td></tr>
-<tr class="separator:a537bdb666902f5e20d1a6a4099591d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d477f60327fb33b5df438a2009b4290"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html#a7d477f60327fb33b5df438a2009b4290">start</a> (<a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a> &amp;clock)</td></tr>
+<tr class="separator:a7d477f60327fb33b5df438a2009b4290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fc0fd74cdafd545c54bf39a71f2a0f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html#a7fc0fd74cdafd545c54bf39a71f2a0f2">stop</a> ()</td></tr>
 <tr class="separator:a7fc0fd74cdafd545c54bf39a71f2a0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -274,11 +273,6 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a2d7f16d5bc324f2b07b9183b7ef7eead"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03297aad9820a68c430f046e28b0838b"><td class="memItemLeft" align="right" valign="top">Timepoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html#a03297aad9820a68c430f046e28b0838b">mWaitUntil</a></td></tr>
 <tr class="separator:a03297aad9820a68c430f046e28b0838b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a5183fabeddb0863a70d667901caec8a9"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classvoid.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html#a5183fabeddb0863a70d667901caec8a9">tag_invoke</a> (const Execution::get_debug_data_t &amp;, <a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html">WaitState</a> &amp;<a class="el" href="struct_engine_1_1_interval_clock_1_1state.html">state</a>)</td></tr>
-<tr class="separator:a5183fabeddb0863a70d667901caec8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3e1e98c3361b1b742767c13557547e4a" name="a3e1e98c3361b1b742767c13557547e4a"></a>
@@ -310,8 +304,8 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a537bdb666902f5e20d1a6a4099591d41" name="a537bdb666902f5e20d1a6a4099591d41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a537bdb666902f5e20d1a6a4099591d41">&#9670;&#160;</a></span>start()</h2>
+<a id="a7d477f60327fb33b5df438a2009b4290" name="a7d477f60327fb33b5df438a2009b4290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d477f60327fb33b5df438a2009b4290">&#9670;&#160;</a></span>start()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,7 +318,7 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
         <tr>
           <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a>&lt; Timepoint &gt;::WaitState::start </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_interval_clock.html">IntervalClock</a> &amp;&#160;</td>
           <td class="paramname"><em>clock</em></td><td>)</td>
           <td></td>
         </tr>
@@ -391,46 +385,7 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="struct_engine_1_1_interval_clock_1_1state.html#a8393e1fe2ca2d23a7e041b2707d88dbc">Engine::IntervalClock&lt; Timepoint &gt;::state&lt; Inner, Rec &gt;</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a5183fabeddb0863a70d667901caec8a9" name="a5183fabeddb0863a70d667901caec8a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5183fabeddb0863a70d667901caec8a9">&#9670;&#160;</a></span>tag_invoke</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classvoid.html">void</a> * tag_invoke </td>
-          <td>(</td>
-          <td class="paramtype">const Execution::get_debug_data_t &amp;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_interval_clock_1_1_wait_state.html">WaitState</a> &amp;&#160;</td>
-          <td class="paramname"><em>state</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Implemented in <a class="el" href="struct_engine_1_1_interval_clock_1_1state.html#aa65392c6246cd71a3c617dd6810dc742">Engine::IntervalClock&lt; Timepoint &gt;::state&lt; Binding, Rec &gt;</a>.</p>
 
 </div>
 </div>
@@ -489,7 +444,7 @@ template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </di
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

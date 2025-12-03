@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Behavior::NodeGraph::CodeGenerator Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Behavior::NodeGraph::CodeGenerator Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="codegenerator-struct-reference">
+<h1>CodeGenerator Struct Reference<a class="headerlink" href="#codegenerator-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Behavior::NodeGraph::CodeGenerator Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior.html">Behavior</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior_1_1_node_graph.html">NodeGraph</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Behavior::NodeGraph::CodeGenerator Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;codegenerator.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aad783a528cdd46e682f43e8bf553b008"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#aad783a528cdd46e682f43e8bf553b008">CodeGenerator</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;)=delete</td></tr>
+<tr class="separator:aad783a528cdd46e682f43e8bf553b008"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac39d527e7ddaf8d73ee62a582854e57f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#ac39d527e7ddaf8d73ee62a582854e57f">CodeGenerator</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph)</td></tr>
+<tr class="separator:ac39d527e7ddaf8d73ee62a582854e57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cdb5847e6ef5c26245789b9237a99aa"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#a9cdb5847e6ef5c26245789b9237a99aa">~CodeGenerator</a> ()=default</td></tr>
+<tr class="separator:a9cdb5847e6ef5c26245789b9237a99aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4128500b040ac89aa40246528d8c9fe2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_code_gen_1_1_file.html">CodeGen::File</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#a4128500b040ac89aa40246528d8c9fe2">file</a> ()=0</td></tr>
+<tr class="separator:a4128500b040ac89aa40246528d8c9fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd03f2858e21387c6704f79687de8b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#a7dd03f2858e21387c6704f79687de8b5">generate</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:a7dd03f2858e21387c6704f79687de8b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa07db40ef476203f5e130fe9dd7e6d71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#aa07db40ef476203f5e130fe9dd7e6d71">generate</a> (uint32_t flowIn, const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">NodeBase</a> *startNode=nullptr)</td></tr>
+<tr class="separator:aa07db40ef476203f5e130fe9dd7e6d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad47dd99331f62d8a90efe553333e4092"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#ad47dd99331f62d8a90efe553333e4092">operator=</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;)=delete</td></tr>
+<tr class="separator:ad47dd99331f62d8a90efe553333e4092"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f123a7dc0c26caf7c1bdb2613184fc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen::Statement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#aa8f123a7dc0c26caf7c1bdb2613184fc">read</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:aa8f123a7dc0c26caf7c1bdb2613184fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aff678b791b53bf5f419e6040f1507583"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#aff678b791b53bf5f419e6040f1507583">mData</a></td></tr>
+<tr class="separator:aff678b791b53bf5f419e6040f1507583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6ffda07b783a28793f3679a339a6a3f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html#aa6ffda07b783a28793f3679a339a6a3f">mGraph</a></td></tr>
+<tr class="separator:aa6ffda07b783a28793f3679a339a6a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac39d527e7ddaf8d73ee62a582854e57f" name="ac39d527e7ddaf8d73ee62a582854e57f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac39d527e7ddaf8d73ee62a582854e57f">&#9670;&#160;</a></span>CodeGenerator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::NodeGraph::CodeGenerator::CodeGenerator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
+          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aad783a528cdd46e682f43e8bf553b008" name="aad783a528cdd46e682f43e8bf553b008"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad783a528cdd46e682f43e8bf553b008">&#9670;&#160;</a></span>CodeGenerator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::NodeGraph::CodeGenerator::CodeGenerator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cdb5847e6ef5c26245789b9237a99aa" name="a9cdb5847e6ef5c26245789b9237a99aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cdb5847e6ef5c26245789b9237a99aa">&#9670;&#160;</a></span>~CodeGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Behavior::NodeGraph::CodeGenerator::~CodeGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad47dd99331f62d8a90efe553333e4092" name="ad47dd99331f62d8a90efe553333e4092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad47dd99331f62d8a90efe553333e4092">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp; Engine::Behavior::NodeGraph::CodeGenerator::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa07db40ef476203f5e130fe9dd7e6d71" name="aa07db40ef476203f5e130fe9dd7e6d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa07db40ef476203f5e130fe9dd7e6d71">&#9670;&#160;</a></span>generate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::NodeGraph::CodeGenerator::generate </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flowIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">NodeBase</a> *&#160;</td>
+          <td class="paramname"><em>startNode</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7dd03f2858e21387c6704f79687de8b5" name="a7dd03f2858e21387c6704f79687de8b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd03f2858e21387c6704f79687de8b5">&#9670;&#160;</a></span>generate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::NodeGraph::CodeGenerator::generate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8f123a7dc0c26caf7c1bdb2613184fc" name="aa8f123a7dc0c26caf7c1bdb2613184fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8f123a7dc0c26caf7c1bdb2613184fc">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen::Statement</a> Engine::Behavior::NodeGraph::CodeGenerator::read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4128500b040ac89aa40246528d8c9fe2" name="a4128500b040ac89aa40246528d8c9fe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4128500b040ac89aa40246528d8c9fe2">&#9670;&#160;</a></span>file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_code_gen_1_1_file.html">CodeGen::File</a> &amp; Engine::Behavior::NodeGraph::CodeGenerator::file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa6ffda07b783a28793f3679a339a6a3f" name="aa6ffda07b783a28793f3679a339a6a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6ffda07b783a28793f3679a339a6a3f">&#9670;&#160;</a></span>mGraph</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a>&amp; Engine::Behavior::NodeGraph::CodeGenerator::mGraph</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff678b791b53bf5f419e6040f1507583" name="aff678b791b53bf5f419e6040f1507583"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff678b791b53bf5f419e6040f1507583">&#9670;&#160;</a></span>mData</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::unique_ptr&lt;<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a>&gt; &gt; Engine::Behavior::NodeGraph::CodeGenerator::mData</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="codegenerator_8h.html">codegenerator.h</a></li>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="codegenerator_8cpp.html">codegenerator.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -249,8 +249,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4e4f9b06fade810d772ad018afb3a63d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_tools_1_1_scene_view.html#a4e4f9b06fade810d772ad018afb3a63d">SceneView</a> (<a class="el" href="struct_engine_1_1_tools_1_1_scene_editor.html">SceneEditor</a> *editor, <a class="el" href="struct_engine_1_1_render_1_1_render_context.html">Render::RenderContext</a> *renderer)</td></tr>
-<tr class="separator:a4e4f9b06fade810d772ad018afb3a63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac3e11b53bf92bfc0b608f7ab9aa0ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_tools_1_1_scene_view.html#a1ac3e11b53bf92bfc0b608f7ab9aa0ac">SceneView</a> (<a class="el" href="struct_engine_1_1_tools_1_1_scene_editor.html">SceneEditor</a> &amp;editor, <a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html">Render::SceneRenderData</a> &amp;renderData, <a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_data.html">Render::PointShadowRenderData</a> &amp;pointShadowRenderData, Im3D::Im3DContext *im3dContext)</td></tr>
+<tr class="separator:a1ac3e11b53bf92bfc0b608f7ab9aa0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d1391557d7e460f09d1eb43f24a7c39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_tools_1_1_scene_view.html#a9d1391557d7e460f09d1eb43f24a7c39">SceneView</a> (<a class="el" href="struct_engine_1_1_tools_1_1_scene_view.html">SceneView</a> &amp;&amp;)</td></tr>
 <tr class="separator:a9d1391557d7e460f09d1eb43f24a7c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a34d9962f1e5344feaab40b0c60451b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_tools_1_1_scene_view.html#a3a34d9962f1e5344feaab40b0c60451b">~SceneView</a> ()</td></tr>
@@ -263,8 +263,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af415ab9167e3ff22d0d6f21ded05581d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4e4f9b06fade810d772ad018afb3a63d" name="a4e4f9b06fade810d772ad018afb3a63d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e4f9b06fade810d772ad018afb3a63d">&#9670;&#160;</a></span>SceneView() <span class="overload">[1/2]</span></h2>
+<a id="a1ac3e11b53bf92bfc0b608f7ab9aa0ac" name="a1ac3e11b53bf92bfc0b608f7ab9aa0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac3e11b53bf92bfc0b608f7ab9aa0ac">&#9670;&#160;</a></span>SceneView() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -272,14 +272,26 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Engine::Tools::SceneView::SceneView </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_tools_1_1_scene_editor.html">SceneEditor</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_tools_1_1_scene_editor.html">SceneEditor</a> &amp;&#160;</td>
           <td class="paramname"><em>editor</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">Render::RenderContext</a> *&#160;</td>
-          <td class="paramname"><em>renderer</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html">Render::SceneRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_point_shadow_render_data.html">Render::PointShadowRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>pointShadowRenderData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Im3D::Im3DContext *&#160;</td>
+          <td class="paramname"><em>im3dContext</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -385,7 +397,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

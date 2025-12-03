@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -260,10 +260,10 @@ Public Types</h2></td></tr>
 <tr class="memitem:a4c46e1b823c713a8710ccc7d52f29bd7"><td class="memTemplParams" colspan="2">template&lt;typename... V&gt; </td></tr>
 <tr class="memitem:a4c46e1b823c713a8710ccc7d52f29bd7"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a4c46e1b823c713a8710ccc7d52f29bd7">helper</a> = std::invoke_result_t&lt; F, V... &gt;</td></tr>
 <tr class="separator:a4c46e1b823c713a8710ccc7d52f29bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53a45bd09a620c5a54476d70e10a3556"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a53a45bd09a620c5a54476d70e10a3556">inner_sender_t</a> = typename Sender::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a4c46e1b823c713a8710ccc7d52f29bd7">helper</a> &gt;</td></tr>
-<tr class="separator:a53a45bd09a620c5a54476d70e10a3556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accaeedca9f6286ce064bd557643eff33"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#accaeedca9f6286ce064bd557643eff33">inner_sender_t</a> = typename std::remove_reference_t&lt; Sender &gt;::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a4c46e1b823c713a8710ccc7d52f29bd7">helper</a> &gt;</td></tr>
+<tr class="separator:accaeedca9f6286ce064bd557643eff33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f890223aee7f7e13c98fc8a44e2ec33"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Tuple&gt; </td></tr>
-<tr class="memitem:a0f890223aee7f7e13c98fc8a44e2ec33"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a> = typename std::remove_reference_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a53a45bd09a620c5a54476d70e10a3556">inner_sender_t</a> &gt;::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt; Tuple &gt;</td></tr>
+<tr class="memitem:a0f890223aee7f7e13c98fc8a44e2ec33"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a> = typename std::remove_reference_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#accaeedca9f6286ce064bd557643eff33">inner_sender_t</a> &gt;::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt; Tuple &gt;</td></tr>
 <tr class="separator:a0f890223aee7f7e13c98fc8a44e2ec33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_execution_1_1algorithm__sender')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html">Engine::Execution::algorithm_sender&lt; Sender &gt;</a></td></tr>
 <tr class="memitem:a4c9e571510667c43971f19e34f282a64 inherit pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html#a4c9e571510667c43971f19e34f282a64">result_type</a> = typename std::decay_t&lt; Sender &gt;::result_type</td></tr>
@@ -285,8 +285,8 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a2d8987748f78a551210c2cd5519caedd"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:a2d8987748f78a551210c2cd5519caedd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a2d8987748f78a551210c2cd5519caedd">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">sender</a> &amp;&amp;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">sender</a>, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:a2d8987748f78a551210c2cd5519caedd"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
+<tr class="memitem:a2d8987748f78a551210c2cd5519caedd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a2d8987748f78a551210c2cd5519caedd">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">sender</a> &amp;&amp;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">sender</a>, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:a2d8987748f78a551210c2cd5519caedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -308,8 +308,8 @@ template&lt;typename... V&gt; </div>
 
 </div>
 </div>
-<a id="a53a45bd09a620c5a54476d70e10a3556" name="a53a45bd09a620c5a54476d70e10a3556"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53a45bd09a620c5a54476d70e10a3556">&#9670;&#160;</a></span>inner_sender_t</h2>
+<a id="accaeedca9f6286ce064bd557643eff33" name="accaeedca9f6286ce064bd557643eff33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accaeedca9f6286ce064bd557643eff33">&#9670;&#160;</a></span>inner_sender_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,7 +317,7 @@ template&lt;typename... V&gt; </div>
 template&lt;Sender Sender, typename F &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">Engine::Execution::let_value_t::sender</a>&lt; Sender, F &gt;::inner_sender_t =  typename Sender::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a4c46e1b823c713a8710ccc7d52f29bd7">helper</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">Engine::Execution::let_value_t::sender</a>&lt; Sender, F &gt;::inner_sender_t =  typename std::remove_reference_t&lt;Sender&gt;::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a4c46e1b823c713a8710ccc7d52f29bd7">helper</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -335,7 +335,7 @@ template&lt;Sender Sender, typename F &gt; </div>
 template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">Engine::Execution::let_value_t::sender</a>&lt; Sender, F &gt;::value_types =  typename std::remove_reference_t&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a53a45bd09a620c5a54476d70e10a3556">inner_sender_t</a>&gt;::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt;Tuple&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html">Engine::Execution::let_value_t::sender</a>&lt; Sender, F &gt;::value_types =  typename std::remove_reference_t&lt;<a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#accaeedca9f6286ce064bd557643eff33">inner_sender_t</a>&gt;::template <a class="el" href="struct_engine_1_1_execution_1_1let__value__t_1_1sender.html#a0f890223aee7f7e13c98fc8a44e2ec33">value_types</a>&lt;Tuple&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -351,7 +351,7 @@ template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
 <div class="memtemplate">
 template&lt;Sender Sender, typename F &gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -371,7 +371,7 @@ template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -412,7 +412,7 @@ template&lt;Sender Sender, typename F &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:51 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

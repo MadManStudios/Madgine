@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Behavior::Python3::PyDictPtr Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Behavior::Python3::PyDictPtr Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/doxygen/struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pydictptr-struct-reference">
+<h1>PyDictPtr Struct Reference<a class="headerlink" href="#pydictptr-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Behavior::Python3::PyDictPtr Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior.html">Behavior</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html">Python3</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html">PyDictPtr</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Behavior::Python3::PyDictPtr Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;pydictptr.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Behavior::Python3::PyDictPtr:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr__inherit__graph.svg" width="182" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr_1_1iterator.html">iterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ae03201053daf9e2afa413dd425e2b720"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#ae03201053daf9e2afa413dd425e2b720">value_type</a> = std::pair&lt; PyObject *, PyObject * &gt;</td></tr>
+<tr class="separator:ae03201053daf9e2afa413dd425e2b720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a60c9cc573ad5f5d293581ce93d9b8d63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#a60c9cc573ad5f5d293581ce93d9b8d63">PyDictPtr</a> ()=default</td></tr>
+<tr class="separator:a60c9cc573ad5f5d293581ce93d9b8d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd62be1ae7e925bf8d88309b2371b992"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#acd62be1ae7e925bf8d88309b2371b992">PyDictPtr</a> (const std::map&lt; std::string, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &gt; &amp;values)</td></tr>
+<tr class="separator:acd62be1ae7e925bf8d88309b2371b992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35485f526898942d06f74d73e47e411e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#a35485f526898942d06f74d73e47e411e">PyDictPtr</a> (PyObject *dict)</td></tr>
+<tr class="separator:a35485f526898942d06f74d73e47e411e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1886610982d0790b0714d458020e702e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#a1886610982d0790b0714d458020e702e">begin</a> () const</td></tr>
+<tr class="separator:a1886610982d0790b0714d458020e702e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2221fd628b18dbf49b9b3d9c4b0a9061"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr_1_1iterator.html">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#a2221fd628b18dbf49b9b3d9c4b0a9061">end</a> () const</td></tr>
+<tr class="separator:a2221fd628b18dbf49b9b3d9c4b0a9061"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0e19c54879d8af3eab8e5685cf3e72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#a5b0e19c54879d8af3eab8e5685cf3e72">operator=</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;other)</td></tr>
+<tr class="separator:a5b0e19c54879d8af3eab8e5685cf3e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c9f29892179d8b77eaff45f6eb23e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#aa2c9f29892179d8b77eaff45f6eb23e4">operator=</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&amp;other)</td></tr>
+<tr class="separator:aa2c9f29892179d8b77eaff45f6eb23e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f3d6a0c69c993e3bfff72379c2611a8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#a8f3d6a0c69c993e3bfff72379c2611a8">size</a> () const</td></tr>
+<tr class="separator:a8f3d6a0c69c993e3bfff72379c2611a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">Engine::Behavior::Python3::PyObjectPtr</a></td></tr>
+<tr class="memitem:a841970b9a075b8d649295359be9c3a38 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a841970b9a075b8d649295359be9c3a38">PyObjectPtr</a> ()=default</td></tr>
+<tr class="separator:a841970b9a075b8d649295359be9c3a38 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d277a9c803b8ab0c571ca4079ae9659 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a0d277a9c803b8ab0c571ca4079ae9659">PyObjectPtr</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;other)</td></tr>
+<tr class="separator:a0d277a9c803b8ab0c571ca4079ae9659 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dbe34db9b14144fdb2944dbf794b0e6 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a4dbe34db9b14144fdb2944dbf794b0e6">PyObjectPtr</a> (PyObject *object)</td></tr>
+<tr class="separator:a4dbe34db9b14144fdb2944dbf794b0e6 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac40626fa7ba6d9ceb5bd660be55216 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a9ac40626fa7ba6d9ceb5bd660be55216">PyObjectPtr</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a9ac40626fa7ba6d9ceb5bd660be55216 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7736f1453b75be30deb1fb3a72f17268 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a7736f1453b75be30deb1fb3a72f17268">~PyObjectPtr</a> ()</td></tr>
+<tr class="separator:a7736f1453b75be30deb1fb3a72f17268 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c5c0ce07993df4371c436badef582c inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_iterator.html">PyObjectIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a60c5c0ce07993df4371c436badef582c">begin</a> () const</td></tr>
+<tr class="separator:a60c5c0ce07993df4371c436badef582c inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a594f8c499e16692ac0f3a681ad0dc04a inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a594f8c499e16692ac0f3a681ad0dc04a">call</a> (const <a class="el" href="struct_engine_1_1_argument_list.html">ArgumentList</a> &amp;args) const</td></tr>
+<tr class="separator:a594f8c499e16692ac0f3a681ad0dc04a inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9d0b2797c7a27dbfafac5ef8a422310 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#ad9d0b2797c7a27dbfafac5ef8a422310">call</a> (const char *format,...) const</td></tr>
+<tr class="separator:ad9d0b2797c7a27dbfafac5ef8a422310 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4173d797b2952023344cfe0b2f68f8 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#aeb4173d797b2952023344cfe0b2f68f8">call</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html">PyDictPtr</a> &amp;kwargs, const char *format,...) const</td></tr>
+<tr class="separator:aeb4173d797b2952023344cfe0b2f68f8 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64c7fc4c59346bd0fca608de8c496d0 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#ab64c7fc4c59346bd0fca608de8c496d0">call</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;args, const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;kwargs) const</td></tr>
+<tr class="separator:ab64c7fc4c59346bd0fca608de8c496d0 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e745aa04aaa3d259da4eef62333a3f0 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_execution_sender.html">ExecutionSender</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a8e745aa04aaa3d259da4eef62333a3f0">callAsync</a> () const</td></tr>
+<tr class="separator:a8e745aa04aaa3d259da4eef62333a3f0 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af432b21c28b520d8c6953598b3df399f inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_iterator.html">PyObjectIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#af432b21c28b520d8c6953598b3df399f">end</a> () const</td></tr>
+<tr class="separator:af432b21c28b520d8c6953598b3df399f inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a700980df98a5ccb4dd1036a90e2d7 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#ab7a700980df98a5ccb4dd1036a90e2d7">get</a> (std::string_view name) const</td></tr>
+<tr class="separator:ab7a700980df98a5ccb4dd1036a90e2d7 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa079170f60571a3acceec498a8bebf42 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#aa079170f60571a3acceec498a8bebf42">operator bool</a> () const</td></tr>
+<tr class="separator:aa079170f60571a3acceec498a8bebf42 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae316a71b5f0656956d88bac7a4227beb inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#ae316a71b5f0656956d88bac7a4227beb">operator PyObject *</a> () const</td></tr>
+<tr class="separator:ae316a71b5f0656956d88bac7a4227beb inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacb4a7772c5ea88536445b257fe949d9 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">PyObject **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#aacb4a7772c5ea88536445b257fe949d9">operator&amp;</a> ()</td></tr>
+<tr class="separator:aacb4a7772c5ea88536445b257fe949d9 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0e19c54879d8af3eab8e5685cf3e72 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a5b0e19c54879d8af3eab8e5685cf3e72">operator=</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;other)</td></tr>
+<tr class="separator:a5b0e19c54879d8af3eab8e5685cf3e72 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c9f29892179d8b77eaff45f6eb23e4 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#aa2c9f29892179d8b77eaff45f6eb23e4">operator=</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&amp;other)</td></tr>
+<tr class="separator:aa2c9f29892179d8b77eaff45f6eb23e4 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7141587a800022f309fa5b117c8d71c0 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_field_accessor.html">PyObjectFieldAccessor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a7141587a800022f309fa5b117c8d71c0">operator[]</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;name) const</td></tr>
+<tr class="separator:a7141587a800022f309fa5b117c8d71c0 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85067ee83efd0e7d25f9fde75525fea5 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a85067ee83efd0e7d25f9fde75525fea5">release</a> ()</td></tr>
+<tr class="separator:a85067ee83efd0e7d25f9fde75525fea5 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfbe62f5d993539cb9eb00b338a9ec67 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#abfbe62f5d993539cb9eb00b338a9ec67">reset</a> ()</td></tr>
+<tr class="separator:abfbe62f5d993539cb9eb00b338a9ec67 inherit pub_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ac1d6f8bc4b7ec20f9689447e05bd1409"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html">PyDictPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#ac1d6f8bc4b7ec20f9689447e05bd1409">fromBorrowed</a> (PyObject *dict)</td></tr>
+<tr class="separator:ac1d6f8bc4b7ec20f9689447e05bd1409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">Engine::Behavior::Python3::PyObjectPtr</a></td></tr>
+<tr class="memitem:a389fc661d3f4661c41a0ab59115092ce inherit pub_static_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a389fc661d3f4661c41a0ab59115092ce">fromBorrowed</a> (PyObject *object)</td></tr>
+<tr class="separator:a389fc661d3f4661c41a0ab59115092ce inherit pub_static_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9890c33f38d67885ebda0b8c14067841 inherit pub_static_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a9890c33f38d67885ebda0b8c14067841">None</a> ()</td></tr>
+<tr class="separator:a9890c33f38d67885ebda0b8c14067841 inherit pub_static_methods_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">Engine::Behavior::Python3::PyObjectPtr</a></td></tr>
+<tr class="memitem:a10ced91f9de6119a8dba62f2fd423856 inherit pro_attribs_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html#a10ced91f9de6119a8dba62f2fd423856">mObject</a> = nullptr</td></tr>
+<tr class="separator:a10ced91f9de6119a8dba62f2fd423856 inherit pro_attribs_struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ae03201053daf9e2afa413dd425e2b720" name="ae03201053daf9e2afa413dd425e2b720"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae03201053daf9e2afa413dd425e2b720">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html#ae03201053daf9e2afa413dd425e2b720">Engine::Behavior::Python3::PyDictPtr::value_type</a> =  std::pair&lt;PyObject *, PyObject *&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a60c9cc573ad5f5d293581ce93d9b8d63" name="a60c9cc573ad5f5d293581ce93d9b8d63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c9cc573ad5f5d293581ce93d9b8d63">&#9670;&#160;</a></span>PyDictPtr() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::Python3::PyDictPtr::PyDictPtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35485f526898942d06f74d73e47e411e" name="a35485f526898942d06f74d73e47e411e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35485f526898942d06f74d73e47e411e">&#9670;&#160;</a></span>PyDictPtr() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::Python3::PyDictPtr::PyDictPtr </td>
+          <td>(</td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>dict</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd62be1ae7e925bf8d88309b2371b992" name="acd62be1ae7e925bf8d88309b2371b992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd62be1ae7e925bf8d88309b2371b992">&#9670;&#160;</a></span>PyDictPtr() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::Python3::PyDictPtr::PyDictPtr </td>
+          <td>(</td>
+          <td class="paramtype">const std::map&lt; std::string, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>values</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac1d6f8bc4b7ec20f9689447e05bd1409" name="ac1d6f8bc4b7ec20f9689447e05bd1409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1d6f8bc4b7ec20f9689447e05bd1409">&#9670;&#160;</a></span>fromBorrowed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr.html">PyDictPtr</a> Engine::Behavior::Python3::PyDictPtr::fromBorrowed </td>
+          <td>(</td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>dict</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1886610982d0790b0714d458020e702e" name="a1886610982d0790b0714d458020e702e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1886610982d0790b0714d458020e702e">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr_1_1iterator.html">PyDictPtr::iterator</a> Engine::Behavior::Python3::PyDictPtr::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2221fd628b18dbf49b9b3d9c4b0a9061" name="a2221fd628b18dbf49b9b3d9c4b0a9061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2221fd628b18dbf49b9b3d9c4b0a9061">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_dict_ptr_1_1iterator.html">PyDictPtr::iterator</a> Engine::Behavior::Python3::PyDictPtr::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f3d6a0c69c993e3bfff72379c2611a8" name="a8f3d6a0c69c993e3bfff72379c2611a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f3d6a0c69c993e3bfff72379c2611a8">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Behavior::Python3::PyDictPtr::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b0e19c54879d8af3eab8e5685cf3e72" name="a5b0e19c54879d8af3eab8e5685cf3e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0e19c54879d8af3eab8e5685cf3e72">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp; Engine::Behavior::Python3::PyObjectPtr::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2c9f29892179d8b77eaff45f6eb23e4" name="aa2c9f29892179d8b77eaff45f6eb23e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2c9f29892179d8b77eaff45f6eb23e4">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp; Engine::Behavior::Python3::PyObjectPtr::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/python3/src/Python3/util/<a class="el" href="pydictptr_8h.html">pydictptr.h</a></li>
+<li>plugins/behavior/python3/src/Python3/util/<a class="el" href="pydictptr_8cpp.html">pydictptr.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

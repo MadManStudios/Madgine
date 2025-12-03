@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -306,15 +306,17 @@ Functions</h2></td></tr>
 <tr class="memitem:a5ba86371429ce6fbeb0119129cfd3d4d"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , typename F , size_t... Is&gt; </td></tr>
 <tr class="memitem:a5ba86371429ce6fbeb0119129cfd3d4d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a5ba86371429ce6fbeb0119129cfd3d4d">Engine::TupleUnpacker::forEach</a> (Tuple &amp;&amp;t, F &amp;&amp;f, std::index_sequence&lt; Is... &gt;)</td></tr>
 <tr class="separator:a5ba86371429ce6fbeb0119129cfd3d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8953e51e16262d6af6524d0b28d5d7f"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:ae8953e51e16262d6af6524d0b28d5d7f"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ae8953e51e16262d6af6524d0b28d5d7f">Engine::TupleUnpacker::invoke</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:ae8953e51e16262d6af6524d0b28d5d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa9e61c54539f0422b7f29bbf29d8ae"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; <br />
+requires requires { invokeFromTuple(std::declval&lt;F&gt;(), std::forward_as_tuple(std::declval&lt;Args&gt;()...)); }</td></tr>
+<tr class="memitem:abfa9e61c54539f0422b7f29bbf29d8ae"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#abfa9e61c54539f0422b7f29bbf29d8ae">Engine::TupleUnpacker::invoke</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:abfa9e61c54539f0422b7f29bbf29d8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c0247a1114489fc3b7183d63e74fef6"><td class="memTemplParams" colspan="2">template&lt;typename R , typename F , typename... Args&gt; </td></tr>
 <tr class="memitem:a6c0247a1114489fc3b7183d63e74fef6"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a6c0247a1114489fc3b7183d63e74fef6">Engine::TupleUnpacker::invokeDefaultResult</a> (R &amp;&amp;defaultValue, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a6c0247a1114489fc3b7183d63e74fef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2ab6054332354319462fb75871b11df"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:af2ab6054332354319462fb75871b11df"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#af2ab6054332354319462fb75871b11df">Engine::TupleUnpacker::invokeExpand</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:af2ab6054332354319462fb75871b11df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44d22a3802565ca68afd0f14b4e46262"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; <br />
+requires requires { invokeFromTuple(std::declval&lt;F&gt;(), expand&lt;sizeof...(Args) - 1&gt;(std::forward_as_tuple(std::declval&lt;Args&gt;()...))); }</td></tr>
+<tr class="memitem:a44d22a3802565ca68afd0f14b4e46262"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a44d22a3802565ca68afd0f14b4e46262">Engine::TupleUnpacker::invokeExpand</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a44d22a3802565ca68afd0f14b4e46262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06089e7d21759f00aff7564cf22128dc"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
 <tr class="memitem:a06089e7d21759f00aff7564cf22128dc"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a06089e7d21759f00aff7564cf22128dc">Engine::TupleUnpacker::invokeFlatten</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a06089e7d21759f00aff7564cf22128dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -368,7 +370,7 @@ requires unpackable&lt;F, Tuple, S...&gt;</td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

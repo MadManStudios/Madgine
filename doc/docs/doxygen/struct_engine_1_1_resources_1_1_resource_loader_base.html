@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -278,6 +278,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adec153cc663751c8c747e0bb781fd1af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8b219fb5e72c08cbd9a86b482fb9f15"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#ac8b219fb5e72c08cbd9a86b482fb9f15">finalize</a> ()</td></tr>
 <tr class="separator:ac8b219fb5e72c08cbd9a86b482fb9f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc486a20193154fc9512c353c2e353fd"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#abc486a20193154fc9512c353c2e353fd">iconPath</a> (<a class="el" href="struct_engine_1_1_resources_1_1_resource_base.html">ResourceBase</a> *res) const</td></tr>
+<tr class="separator:abc486a20193154fc9512c353c2e353fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4616915cf385baff04273f749c3deca5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#a4616915cf385baff04273f749c3deca5">init</a> ()</td></tr>
 <tr class="separator:a4616915cf385baff04273f749c3deca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61e5e69a8025a5ed5d54a8b5815b3e74"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#a61e5e69a8025a5ed5d54a8b5815b3e74">loadingTaskQueue</a> () const</td></tr>
@@ -313,6 +315,8 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a45ec6580ff3c1f2220b9440227d5afb5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#a45ec6580ff3c1f2220b9440227d5afb5">mExtensions</a></td></tr>
 <tr class="separator:a45ec6580ff3c1f2220b9440227d5afb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4ba25dfa5300acd8977d888aa885ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#a3a4ba25dfa5300acd8977d888aa885ea">mIconPath</a></td></tr>
+<tr class="separator:a3a4ba25dfa5300acd8977d888aa885ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaae0bbedb350132e4ff3879031356f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_settings.html">ResourceLoaderSettings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#aeaae0bbedb350132e4ff3879031356f6">mSettings</a></td></tr>
 <tr class="separator:aeaae0bbedb350132e4ff3879031356f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
@@ -577,6 +581,32 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="abc486a20193154fc9512c353c2e353fd" name="abc486a20193154fc9512c353c2e353fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc486a20193154fc9512c353c2e353fd">&#9670;&#160;</a></span>iconPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp; Engine::Resources::ResourceLoaderBase::iconPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_resources_1_1_resource_base.html">ResourceBase</a> *&#160;</td>
+          <td class="paramname"><em>res</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4e74b89ea3a92e666ef5c25ba42cc9fe" name="a4e74b89ea3a92e666ef5c25ba42cc9fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e74b89ea3a92e666ef5c25ba42cc9fe">&#9670;&#160;</a></span>extensionIndex()</h2>
 
@@ -783,6 +813,28 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a3a4ba25dfa5300acd8977d888aa885ea" name="a3a4ba25dfa5300acd8977d888aa885ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a4ba25dfa5300acd8977d888aa885ea">&#9670;&#160;</a></span>mIconPath</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> Engine::Resources::ResourceLoaderBase::mIconPath</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aeaae0bbedb350132e4ff3879031356f6" name="aeaae0bbedb350132e4ff3879031356f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeaae0bbedb350132e4ff3879031356f6">&#9670;&#160;</a></span>mSettings</h2>
 
@@ -812,7 +864,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

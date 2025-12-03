@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -278,9 +278,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a9d38707317e5bb4e09f2c092c77d5c38"><td class="memTemplParams" colspan="2">template&lt;typename... Configs&gt; </td></tr>
 <tr class="memitem:a9d38707317e5bb4e09f2c092c77d5c38"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a9d38707317e5bb4e09f2c092c77d5c38">Engine::Serialize::CreatorSelector</a> = ConfigSelectorDefault&lt; CreatorCategory, DefaultCreator, Configs... &gt;</td></tr>
 <tr class="separator:a9d38707317e5bb4e09f2c092c77d5c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f350be273fa5c773ad4841cb3c0648f"><td class="memTemplParams" colspan="2">template&lt;auto reader, auto writer, auto clear = nullptr&gt; </td></tr>
-<tr class="memitem:a8f350be273fa5c773ad4841cb3c0648f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a8f350be273fa5c773ad4841cb3c0648f">Engine::Serialize::CustomCreator</a> = FunctionCapture&lt; __serialize_impl__::_CustomCreator, reader, Functor&lt; writer &gt;, std::conditional_t&lt; <a class="el" href="conceptstd_1_1same__as.html">std::same_as</a>&lt; decltype(clear), std::nullptr_t &gt;, __serialize_impl__::DefaultClear, Functor&lt; clear &gt; &gt; &gt;</td></tr>
-<tr class="separator:a8f350be273fa5c773ad4841cb3c0648f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace821655e41bea0709c0e45dbbee1e68"><td class="memTemplParams" colspan="2">template&lt;auto reader, auto writer, auto clear = nullptr, auto scan = nullptr&gt; </td></tr>
+<tr class="memitem:ace821655e41bea0709c0e45dbbee1e68"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ace821655e41bea0709c0e45dbbee1e68">Engine::Serialize::CustomCreator</a> = FunctionCapture&lt; __serialize_impl__::_CustomCreator, reader, Functor&lt; writer &gt;, std::conditional_t&lt; <a class="el" href="conceptstd_1_1same__as.html">std::same_as</a>&lt; decltype(clear), std::nullptr_t &gt;, __serialize_impl__::DefaultClear, Functor&lt; clear &gt; &gt;, auto_holder&lt; scan &gt; &gt;</td></tr>
+<tr class="separator:ace821655e41bea0709c0e45dbbee1e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49a1bef69e76cc3c5ee6e3daa36218ee"><td class="memTemplParams" colspan="2">template&lt;auto reader, auto writer, auto clear = nullptr, auto scan = nullptr&gt; </td></tr>
 <tr class="memitem:a49a1bef69e76cc3c5ee6e3daa36218ee"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a49a1bef69e76cc3c5ee6e3daa36218ee">Engine::Serialize::ParentCreator</a> = FunctionCapture&lt; __serialize_impl__::_ParentCreator, reader, MemberFunctor&lt; writer &gt;, std::conditional_t&lt; <a class="el" href="conceptstd_1_1same__as.html">std::same_as</a>&lt; decltype(clear), std::nullptr_t &gt;, __serialize_impl__::DefaultClear, UnpackingMemberFunctor&lt; clear &gt; &gt;, auto_holder&lt; scan &gt; &gt;</td></tr>
 <tr class="separator:a49a1bef69e76cc3c5ee6e3daa36218ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -288,7 +288,7 @@ Typedefs</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

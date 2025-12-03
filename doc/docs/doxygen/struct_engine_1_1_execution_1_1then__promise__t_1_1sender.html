@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -253,14 +253,14 @@ $(function() {
 Public Types</h2></td></tr>
 <tr class="memitem:aa9f909e9c012efb341f42be297e8ea40"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#aa9f909e9c012efb341f42be297e8ea40">result_type</a> = typename Sender::result_type</td></tr>
 <tr class="separator:aa9f909e9c012efb341f42be297e8ea40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab45bc560519dd014d18141a584454abe"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> , template&lt; typename... &gt; typename Tuple&gt; </td></tr>
-<tr class="memitem:ab45bc560519dd014d18141a584454abe"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#ab45bc560519dd014d18141a584454abe">value_types</a> = typename Sender::template <a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#ab45bc560519dd014d18141a584454abe">value_types</a>&lt; <a class="el" href="class_rec.html">Rec</a>, Tuple &gt;</td></tr>
+<tr class="memitem:ab45bc560519dd014d18141a584454abe"><td class="memTemplParams" colspan="2">template&lt;typename Rec , template&lt; typename... &gt; typename Tuple&gt; </td></tr>
+<tr class="memitem:ab45bc560519dd014d18141a584454abe"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#ab45bc560519dd014d18141a584454abe">value_types</a> = typename Sender::template <a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#ab45bc560519dd014d18141a584454abe">value_types</a>&lt; Rec, Tuple &gt;</td></tr>
 <tr class="separator:ab45bc560519dd014d18141a584454abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8c7e24b285b808d0d19aed346ee47e41"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:a8c7e24b285b808d0d19aed346ee47e41"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#a8c7e24b285b808d0d19aed346ee47e41">operator()</a> (<a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:a8c7e24b285b808d0d19aed346ee47e41"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
+<tr class="memitem:a8c7e24b285b808d0d19aed346ee47e41"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#a8c7e24b285b808d0d19aed346ee47e41">operator()</a> (Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:a8c7e24b285b808d0d19aed346ee47e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -295,10 +295,10 @@ template&lt;typename Sender , typename P &gt; </div>
 <div class="memtemplate">
 template&lt;typename Sender , typename P &gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_rec.html">Rec</a> , template&lt; typename... &gt; typename Tuple&gt; </div>
+template&lt;typename Rec , template&lt; typename... &gt; typename Tuple&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html">Engine::Execution::then_promise_t::sender</a>&lt; Sender, P &gt;::value_types =  typename Sender::template <a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#ab45bc560519dd014d18141a584454abe">value_types</a>&lt;<a class="el" href="class_rec.html">Rec</a>, Tuple&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html">Engine::Execution::then_promise_t::sender</a>&lt; Sender, P &gt;::value_types =  typename Sender::template <a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html#ab45bc560519dd014d18141a584454abe">value_types</a>&lt;Rec, Tuple&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -314,7 +314,7 @@ template&lt;typename <a class="el" href="class_rec.html">Rec</a> , template&lt; 
 <div class="memtemplate">
 template&lt;typename Sender , typename P &gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -322,7 +322,7 @@ template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
         <tr>
           <td class="memname">auto <a class="el" href="struct_engine_1_1_execution_1_1then__promise__t_1_1sender.html">Engine::Execution::then_promise_t::sender</a>&lt; Sender, P &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em></td><td>)</td>
           <td></td>
         </tr>
@@ -375,7 +375,7 @@ template&lt;typename Sender , typename P &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:51 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

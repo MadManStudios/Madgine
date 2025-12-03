@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -252,6 +252,14 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1auto__holder.html">Engine::auto_holder&lt; a &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_capture_helper.html">Engine::CaptureHelper&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1decay__ref.html">Engine::decay_ref&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1decay__ref_3_01_t_01_4.html">Engine::decay_ref&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1declval__helper.html">Engine::declval_helper&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1dependent__bool.html">Engine::dependent_bool&lt; T, b &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -298,12 +306,18 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a1be2849dc09877d8fb424f23b8ceabee"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> b, typename T &gt; </td></tr>
 <tr class="memitem:a1be2849dc09877d8fb424f23b8ceabee"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1be2849dc09877d8fb424f23b8ceabee">Engine::const_if</a> = std::conditional_t&lt; b, const T, T &gt;</td></tr>
 <tr class="separator:a1be2849dc09877d8fb424f23b8ceabee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9cd0ed4ed941104ef491ce29a68966c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad9cd0ed4ed941104ef491ce29a68966c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ad9cd0ed4ed941104ef491ce29a68966c">Engine::decay_ref_t</a> = decay_ref&lt; T &gt;::type</td></tr>
+<tr class="separator:ad9cd0ed4ed941104ef491ce29a68966c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a224bcf97f8c392a3fe99697162edc558"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... &gt; </td></tr>
 <tr class="memitem:a224bcf97f8c392a3fe99697162edc558"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a224bcf97f8c392a3fe99697162edc558">Engine::dependent_t</a> = T</td></tr>
 <tr class="separator:a224bcf97f8c392a3fe99697162edc558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a590a6c83bb0c787fc76087a4bc0bf486">Engine::first_t</a> = typename first&lt; Args... &gt;::type</td></tr>
 <tr class="separator:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16dabd9159ebbe731d389c1bb77263fa"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a16dabd9159ebbe731d389c1bb77263fa"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a16dabd9159ebbe731d389c1bb77263fa">Engine::forward_ref_t</a> = std::conditional_t&lt; std::is_lvalue_reference_v&lt; T &gt;, std::reference_wrapper&lt; std::remove_reference_t&lt; T &gt; &gt;, T &gt;</td></tr>
+<tr class="separator:a16dabd9159ebbe731d389c1bb77263fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">Engine::identity</a> = T</td></tr>
 <tr class="separator:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,21 +339,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a0848003e6aecc347f7f33170e3abfce4"><td class="memTemplParams" colspan="2">template&lt;typename T , size_t S&gt; </td></tr>
 <tr class="memitem:a0848003e6aecc347f7f33170e3abfce4"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a0848003e6aecc347f7f33170e3abfce4">Engine::array_size</a> (T(&amp;)[<a class="el" href="class_s.html">S</a>])</td></tr>
 <tr class="separator:a0848003e6aecc347f7f33170e3abfce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c5cd4a1af65d1c047c5793be4b3c4fa"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a2c5cd4a1af65d1c047c5793be4b3c4fa"><td class="memTemplItemLeft" align="right" valign="top">CaptureHelper&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a2c5cd4a1af65d1c047c5793be4b3c4fa">Engine::forward_capture</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a2c5cd4a1af65d1c047c5793be4b3c4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7118456a4aa3ac78865926483df4e89d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7118456a4aa3ac78865926483df4e89d"><td class="memTemplItemLeft" align="right" valign="top">CaptureHelper&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a7118456a4aa3ac78865926483df4e89d">Engine::forward_capture</a> (T &amp;t)</td></tr>
+<tr class="separator:a7118456a4aa3ac78865926483df4e89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a835493204cded8845b5136ed6896947e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a835493204cded8845b5136ed6896947e"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a835493204cded8845b5136ed6896947e">Engine::forward_ref</a> (std::remove_reference_t&lt; T &gt; &amp;&amp;t)</td></tr>
 <tr class="separator:a835493204cded8845b5136ed6896947e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21e0f137df0ba1c9c173e7d9d8a824cc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a21e0f137df0ba1c9c173e7d9d8a824cc"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a21e0f137df0ba1c9c173e7d9d8a824cc">Engine::forward_ref</a> (std::remove_reference_t&lt; T &gt; &amp;t)</td></tr>
 <tr class="separator:a21e0f137df0ba1c9c173e7d9d8a824cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a118c989f4f9c31ec95dbbf0b067de105"><td class="memTemplParams" colspan="2">template&lt;typename Base , <a class="el" href="conceptstd_1_1derived__from.html">std::derived_from</a>&lt; Base &gt; Derived&gt; </td></tr>
-<tr class="memitem:a118c989f4f9c31ec95dbbf0b067de105"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a118c989f4f9c31ec95dbbf0b067de105">Engine::inheritance_offset</a> ()</td></tr>
-<tr class="separator:a118c989f4f9c31ec95dbbf0b067de105"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae877837ae94ebbeefaacaefd1daeea9e"><td class="memTemplParams" colspan="2">template&lt;typename R  = Void, typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:ae877837ae94ebbeefaacaefd1daeea9e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ae877837ae94ebbeefaacaefd1daeea9e">Engine::invoke_patch_void</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:ae877837ae94ebbeefaacaefd1daeea9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af79d26601acf4e432a1176abd331979c"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:af79d26601acf4e432a1176abd331979c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#af79d26601acf4e432a1176abd331979c">Engine::overloaded</a> (Ts...) -&gt; overloaded&lt; Ts... &gt;</td></tr>
 <tr class="separator:af79d26601acf4e432a1176abd331979c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80ffb7b179bfbd177c89dc9910f62930"><td class="memTemplParams" colspan="2">template&lt;typename F , typename R &gt; </td></tr>
+<tr class="memitem:a80ffb7b179bfbd177c89dc9910f62930"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a80ffb7b179bfbd177c89dc9910f62930">Engine::patch_void</a> (F &amp;&amp;f, R &amp;&amp;result)</td></tr>
+<tr class="separator:a80ffb7b179bfbd177c89dc9910f62930"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -350,7 +367,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

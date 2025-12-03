@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -258,15 +258,19 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_loader.html">SceneLoader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:af92996aedd718c1ab8956fdab5616944"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> = <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Entity&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> * &gt;</td></tr>
-<tr class="separator:af92996aedd718c1ab8956fdab5616944"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19931bf3268623dc598b4c231f71d2d1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> = <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> * &gt;</td></tr>
-<tr class="separator:a19931bf3268623dc598b4c231f71d2d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db20df601c2e39eaf8d01e83663a06c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a1db20df601c2e39eaf8d01e83663a06c">EntityBinding</a> = <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Behavior::Named</a>&lt;&quot;Entity&quot;, <a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a2dd7a33cf8e20c3d2416a6675c450c2e">Entity::EntityPtr</a> &gt;</td></tr>
+<tr class="separator:a1db20df601c2e39eaf8d01e83663a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a811a39485ffa2a6e5ffbf6c9c85543aa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">NamedSceneManager</a> = <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Behavior::Named</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp; &gt;</td></tr>
+<tr class="separator:a811a39485ffa2a6e5ffbf6c9c85543aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac184c2e2e2639eaa39cc3d0872cc81"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a5ac184c2e2e2639eaa39cc3d0872cc81">SceneBinding</a> = <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Behavior::Named</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp; &gt;</td></tr>
+<tr class="separator:a5ac184c2e2e2639eaa39cc3d0872cc81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe524036e3f758bb916794b48f039ddd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:abe524036e3f758bb916794b48f039ddd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#abe524036e3f758bb916794b48f039ddd">SceneComponent</a> = <a class="el" href="struct_engine_1_1_virtual_scope.html">VirtualScope</a>&lt; T, <a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Serialize::SyncableUnit</a>&lt; T, SceneComponentComponent&lt; T &gt; &gt; &gt;</td></tr>
 <tr class="separator:abe524036e3f758bb916794b48f039ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -279,43 +283,40 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a892027f5cdb7dfb1cfb4781bd5b32924"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a892027f5cdb7dfb1cfb4781bd5b32924">entityBinding</a></td></tr>
-<tr class="separator:a892027f5cdb7dfb1cfb4781bd5b32924"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab95c367ed083ea70780c0314897472a5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab95c367ed083ea70780c0314897472a5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#ab95c367ed083ea70780c0314897472a5">get_component</a> = [](<a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> entity = {}) { return entity | <a class="el" href="namespace_engine_1_1_execution.html#adbddad51d8bad6c47e49229587b76ad1">Execution::then</a>([](<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> *e) { return e-&gt;getComponent&lt;T&gt;(); }); }</td></tr>
-<tr class="separator:ab95c367ed083ea70780c0314897472a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa3f2989338465bf7a1ba9cdc185e3ab"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#aaa3f2989338465bf7a1ba9cdc185e3ab">rotate</a></td></tr>
 <tr class="separator:aaa3f2989338465bf7a1ba9cdc185e3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a604da434343e415a05f5ade8dd34df58"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a604da434343e415a05f5ade8dd34df58">sceneBinding</a></td></tr>
-<tr class="separator:a604da434343e415a05f5ade8dd34df58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82943a49aae5c33eda607bfde185e43b"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a82943a49aae5c33eda607bfde185e43b">wait_animation</a></td></tr>
+<tr class="separator:a82943a49aae5c33eda607bfde185e43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b7793967872db21d52a9f6522fdb99a"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">wait_simulation</a></td></tr>
 <tr class="separator:a1b7793967872db21d52a9f6522fdb99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a241aaa1ec39c51ee66b257b4814ff3cc"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a241aaa1ec39c51ee66b257b4814ff3cc">yield_animation</a></td></tr>
+<tr class="separator:a241aaa1ec39c51ee66b257b4814ff3cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64d96d147ec00535ea2c781685ac1f64"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">yield_simulation</a></td></tr>
 <tr class="separator:a64d96d147ec00535ea2c781685ac1f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="af92996aedd718c1ab8956fdab5616944" name="af92996aedd718c1ab8956fdab5616944"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af92996aedd718c1ab8956fdab5616944">&#9670;&#160;</a></span>EntityBinding</h2>
+<a id="a1db20df601c2e39eaf8d01e83663a06c" name="a1db20df601c2e39eaf8d01e83663a06c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1db20df601c2e39eaf8d01e83663a06c">&#9670;&#160;</a></span>EntityBinding</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Entity&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> * &gt; <a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">Engine::Scene::EntityBinding</a></td>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Behavior::Named</a>&lt;&quot;Entity&quot;, <a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a2dd7a33cf8e20c3d2416a6675c450c2e">Entity::EntityPtr</a> &gt; <a class="el" href="namespace_engine_1_1_scene.html#a1db20df601c2e39eaf8d01e83663a06c">Engine::Scene::EntityBinding</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a19931bf3268623dc598b4c231f71d2d1" name="a19931bf3268623dc598b4c231f71d2d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19931bf3268623dc598b4c231f71d2d1">&#9670;&#160;</a></span>SceneBinding</h2>
+<a id="a811a39485ffa2a6e5ffbf6c9c85543aa" name="a811a39485ffa2a6e5ffbf6c9c85543aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a811a39485ffa2a6e5ffbf6c9c85543aa">&#9670;&#160;</a></span>NamedSceneManager</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="struct_engine_1_1_binding.html">Binding</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> * &gt; <a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">Engine::Scene::SceneBinding</a></td>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">Engine::Scene::NamedSceneManager</a> = typedef <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Behavior::Named</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -370,51 +371,21 @@ template&lt;typename T , typename Base &gt; </div>
 
 </div>
 </div>
+<a id="a5ac184c2e2e2639eaa39cc3d0872cc81" name="a5ac184c2e2e2639eaa39cc3d0872cc81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ac184c2e2e2639eaa39cc3d0872cc81">&#9670;&#160;</a></span>SceneBinding</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_scene.html#a5ac184c2e2e2639eaa39cc3d0872cc81">Engine::Scene::SceneBinding</a> = typedef <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Behavior::Named</a>&lt;&quot;Scene&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a>&amp;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a892027f5cdb7dfb1cfb4781bd5b32924" name="a892027f5cdb7dfb1cfb4781bd5b32924"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a892027f5cdb7dfb1cfb4781bd5b32924">&#9670;&#160;</a></span>entityBinding</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> Engine::Scene::entityBinding</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a604da434343e415a05f5ade8dd34df58" name="a604da434343e415a05f5ade8dd34df58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a604da434343e415a05f5ade8dd34df58">&#9670;&#160;</a></span>sceneBinding</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> Engine::Scene::sceneBinding</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a1b7793967872db21d52a9f6522fdb99a" name="a1b7793967872db21d52a9f6522fdb99a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1b7793967872db21d52a9f6522fdb99a">&#9670;&#160;</a></span>wait_simulation</h2>
 
@@ -430,15 +401,16 @@ template&lt;typename T , typename Base &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](std::chrono::steady_clock::duration duration, <a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> entity = {}) {</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_struct" href="struct_engine_1_1_interval_clock.html">IntervalClock&lt;Threading::CustomTimepoint&gt;::wait</a>(entity | Execution::then(&amp;SceneManager::simulationClock), duration);</div>
+<b>Initial value:</b><div class="fragment"><div class="line">= [](std::chrono::steady_clock::duration duration, <a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">NamedSceneManager</a> scene = {}) {</div>
+<div class="line">        <span class="keywordflow">return</span> std::move(scene) | Execution::let_value([=](<a class="code hl_struct" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;mgr) { <span class="keywordflow">return</span> mgr.<a class="code hl_function" href="struct_engine_1_1_scene_1_1_scene_manager.html#ae73d90aa1de018b3c1a951b6a0c8fa39">simulationClock</a>().wait(duration); });</div>
 <div class="line">    }</div>
-<div class="ttc" id="anamespace_engine_1_1_scene_html_a19931bf3268623dc598b4c231f71d2d1"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">Engine::Scene::SceneBinding</a></div><div class="ttdeci">Binding&lt;&quot;Scene&quot;, SceneManager * &gt; SceneBinding</div><div class="ttdef"><b>Definition:</b> scenesenders.h:19</div></div>
-<div class="ttc" id="astruct_engine_1_1_interval_clock_html"><div class="ttname"><a href="struct_engine_1_1_interval_clock.html">Engine::IntervalClock</a></div><div class="ttdef"><b>Definition:</b> intervalclock.h:17</div></div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a811a39485ffa2a6e5ffbf6c9c85543aa"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">Engine::Scene::NamedSceneManager</a></div><div class="ttdeci">Behavior::Named&lt;&quot;Scene&quot;, SceneManager &amp; &gt; NamedSceneManager</div><div class="ttdef"><b>Definition:</b> scenesenders.h:16</div></div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html">Engine::Scene::SceneManager</a></div><div class="ttdef"><b>Definition:</b> scenemanager.h:29</div></div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html_ae73d90aa1de018b3c1a951b6a0c8fa39"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html#ae73d90aa1de018b3c1a951b6a0c8fa39">Engine::Scene::SceneManager::simulationClock</a></div><div class="ttdeci">IntervalClock&lt; Threading::CustomTimepoint &gt; &amp; simulationClock()</div><div class="ttdef"><b>Definition:</b> scenemanager.cpp:207</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -457,39 +429,67 @@ template&lt;typename T , typename Base &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](<a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a19931bf3268623dc598b4c231f71d2d1">SceneBinding</a> scene = {}) {</div>
+<b>Initial value:</b><div class="fragment"><div class="line">= [](<a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">NamedSceneManager</a> scene = {}) {</div>
 <div class="line">        <span class="keywordflow">return</span> <a class="code hl_variable" href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">wait_simulation</a>(0s, scene);</div>
 <div class="line">    }</div>
-<div class="ttc" id="anamespace_engine_1_1_scene_html_a1b7793967872db21d52a9f6522fdb99a"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">Engine::Scene::wait_simulation</a></div><div class="ttdeci">constexpr auto wait_simulation</div><div class="ttdef"><b>Definition:</b> scenesenders.h:22</div></div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a1b7793967872db21d52a9f6522fdb99a"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">Engine::Scene::wait_simulation</a></div><div class="ttdeci">constexpr auto wait_simulation</div><div class="ttdef"><b>Definition:</b> scenesenders.h:18</div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="ab95c367ed083ea70780c0314897472a5" name="ab95c367ed083ea70780c0314897472a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab95c367ed083ea70780c0314897472a5">&#9670;&#160;</a></span>get_component</h2>
+<a id="a82943a49aae5c33eda607bfde185e43b" name="a82943a49aae5c33eda607bfde185e43b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82943a49aae5c33eda607bfde185e43b">&#9670;&#160;</a></span>wait_animation</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto Engine::Scene::get_component = [](<a class="el" href="namespace_engine_1_1_scene.html#af92996aedd718c1ab8956fdab5616944">EntityBinding</a> entity = {}) { return entity | <a class="el" href="namespace_engine_1_1_execution.html#adbddad51d8bad6c47e49229587b76ad1">Execution::then</a>([](<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> *e) { return e-&gt;getComponent&lt;T&gt;(); }); }</td>
+          <td class="memname">constexpr auto Engine::Scene::wait_animation</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](std::chrono::steady_clock::duration duration, <a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">NamedSceneManager</a> scene = {}) {</div>
+<div class="line">        <span class="keywordflow">return</span> std::move(scene) | Execution::let_value([=](<a class="code hl_struct" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;mgr) { <span class="keywordflow">return</span> mgr.<a class="code hl_function" href="struct_engine_1_1_scene_1_1_scene_manager.html#a589d15e1d6dfacf688e7c2af7505b1da">animationClock</a>().wait(duration); });</div>
+<div class="line">    }</div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html_a589d15e1d6dfacf688e7c2af7505b1da"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html#a589d15e1d6dfacf688e7c2af7505b1da">Engine::Scene::SceneManager::animationClock</a></div><div class="ttdeci">IntervalClock&lt; Threading::CustomTimepoint &gt; &amp; animationClock()</div><div class="ttdef"><b>Definition:</b> scenemanager.cpp:212</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a241aaa1ec39c51ee66b257b4814ff3cc" name="a241aaa1ec39c51ee66b257b4814ff3cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a241aaa1ec39c51ee66b257b4814ff3cc">&#9670;&#160;</a></span>yield_animation</h2>
 
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::Scene::yield_animation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](<a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">NamedSceneManager</a> scene = {}) {</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_variable" href="namespace_engine_1_1_scene.html#a82943a49aae5c33eda607bfde185e43b">wait_animation</a>(0s, scene);</div>
+<div class="line">    }</div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a82943a49aae5c33eda607bfde185e43b"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a82943a49aae5c33eda607bfde185e43b">Engine::Scene::wait_animation</a></div><div class="ttdeci">constexpr auto wait_animation</div><div class="ttdef"><b>Definition:</b> scenesenders.h:26</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="aaa3f2989338465bf7a1ba9cdc185e3ab" name="aaa3f2989338465bf7a1ba9cdc185e3ab"></a>
@@ -511,21 +511,28 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [](Vector3 axis, <span class="keywordtype">float</span> speed) {</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_variable" href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">yield_simulation</a>() | Execution::let_value([=](std::chrono::microseconds timeSinceLastFrame) {</div>
-<div class="line">            <span class="keywordflow">return</span> get_component&lt;Entity::Transform&gt;() | Execution::then([=](Entity::Transform *transform) {</div>
-<div class="line">                transform-&gt;mOrientation *= Quaternion { timeSinceLastFrame.count() * 0.000001f * speed, axis };</div>
-<div class="line">            });</div>
-<div class="line">        }) | Execution::repeat;</div>
+<b>Initial value:</b><div class="fragment"><div class="line">= [](Vector3 axis, <span class="keywordtype">float</span> speed, <a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a1db20df601c2e39eaf8d01e83663a06c">EntityBinding</a> entity = {}) {</div>
+<div class="line">        <span class="keywordflow">return</span> entity | Execution::let_value([=](<span class="keyword">auto</span> e) {</div>
+<div class="line">            <span class="keywordflow">return</span> <a class="code hl_variable" href="namespace_engine_1_1_scene.html#a241aaa1ec39c51ee66b257b4814ff3cc">yield_animation</a>() | Execution::then([=](std::chrono::microseconds timeSinceLastFrame) {</div>
+<div class="line">                Execution::access_binding(e, [=](<a class="code hl_struct" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> &amp;e) {</div>
+<div class="line">                    e.<a class="code hl_function" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a5124e4dc641916a5469b4f6f06660670">getComponent</a>&lt;<a class="code hl_struct" href="struct_engine_1_1_scene_1_1_entity_1_1_transform.html">Entity::Transform</a>&gt;()-&gt;mOrientation *= <a class="code hl_struct" href="struct_engine_1_1_quaternion.html">Quaternion</a> { timeSinceLastFrame.count() * 0.000001f * speed, axis };</div>
+<div class="line">                });</div>
+<div class="line">            }) | Execution::repeat;</div>
+<div class="line">        });</div>
 <div class="line">    }</div>
-<div class="ttc" id="anamespace_engine_1_1_scene_html_a64d96d147ec00535ea2c781685ac1f64"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">Engine::Scene::yield_simulation</a></div><div class="ttdeci">constexpr auto yield_simulation</div><div class="ttdef"><b>Definition:</b> scenesenders.h:26</div></div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a1db20df601c2e39eaf8d01e83663a06c"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a1db20df601c2e39eaf8d01e83663a06c">Engine::Scene::EntityBinding</a></div><div class="ttdeci">Behavior::Named&lt;&quot;Entity&quot;, Entity::EntityPtr &gt; EntityBinding</div><div class="ttdef"><b>Definition:</b> scenesenders.h:14</div></div>
+<div class="ttc" id="anamespace_engine_1_1_scene_html_a241aaa1ec39c51ee66b257b4814ff3cc"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a241aaa1ec39c51ee66b257b4814ff3cc">Engine::Scene::yield_animation</a></div><div class="ttdeci">constexpr auto yield_animation</div><div class="ttdef"><b>Definition:</b> scenesenders.h:30</div></div>
+<div class="ttc" id="astruct_engine_1_1_quaternion_html"><div class="ttname"><a href="struct_engine_1_1_quaternion.html">Engine::Quaternion</a></div><div class="ttdef"><b>Definition:</b> quaternion.h:9</div></div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_entity_1_1_entity_html"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Engine::Scene::Entity::Entity</a></div><div class="ttdef"><b>Definition:</b> entity.h:25</div></div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_entity_1_1_entity_html_a5124e4dc641916a5469b4f6f06660670"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a5124e4dc641916a5469b4f6f06660670">Engine::Scene::Entity::Entity::getComponent</a></div><div class="ttdeci">T * getComponent()</div><div class="ttdef"><b>Definition:</b> entity.h:61</div></div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_entity_1_1_transform_html"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_entity_1_1_transform.html">Engine::Scene::Entity::Transform</a></div><div class="ttdef"><b>Definition:</b> transform.h:12</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

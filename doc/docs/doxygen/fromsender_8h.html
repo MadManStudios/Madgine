@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -250,7 +250,7 @@ $(function() {
 <div class="textblock"><div class="dynheader">
 Include dependency graph for fromsender.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="fromsender_8h__incl.svg" width="204" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="fromsender_8h__incl.svg" width="204" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -289,16 +289,16 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ade8b52beae0b1cc1c64bf88011965a2c"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename InnerRec &gt; </td></tr>
 <tr class="memitem:ade8b52beae0b1cc1c64bf88011965a2c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ade8b52beae0b1cc1c64bf88011965a2c">CodeGen::codegen_algorithm_state</a> = codegen_algorithm_state_helper&lt; codegen_connect_result_t&lt; Sender, InnerRec &gt; &gt;</td></tr>
 <tr class="separator:ade8b52beae0b1cc1c64bf88011965a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ab0adf85ecf9e97ea4ac3749ff5c41882">CodeGen::codegen_connect_result_t</a> = tag_invoke_result_t&lt; codegen_connect_t, Sender, <a class="el" href="class_rec.html">Rec</a> &gt;</td></tr>
+<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename Rec &gt; </td></tr>
+<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ab0adf85ecf9e97ea4ac3749ff5c41882">CodeGen::codegen_connect_result_t</a> = tag_invoke_result_t&lt; codegen_connect_t, Sender, Rec &gt;</td></tr>
 <tr class="separator:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c0b94d5dd20909ebf57cef960861363"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a9c0b94d5dd20909ebf57cef960861363">CodeGen::codegen_receiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1execution__receiver.html">Engine::Execution::execution_receiver</a>&lt; CodeGen_Context &gt;</td></tr>
 <tr class="separator:a9c0b94d5dd20909ebf57cef960861363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a>  = codegen_receiver&gt; </td></tr>
-<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a168779a2099572088da2ad9fbcec35c9">CodeGen::generatorFromSender</a> (Sender &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> rec={})</td></tr>
+<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename Rec  = codegen_receiver&gt; </td></tr>
+<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a168779a2099572088da2ad9fbcec35c9">CodeGen::generatorFromSender</a> (Sender &amp;&amp;sender, Rec rec={})</td></tr>
 <tr class="separator:a168779a2099572088da2ad9fbcec35c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -309,7 +309,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

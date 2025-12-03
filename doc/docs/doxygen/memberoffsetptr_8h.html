@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -315,10 +315,10 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    static ::Engine::MemberOffsetPtr&lt;Self, <span class="keyword">decltype</span>(Name)&gt; __##Name##_value__()                     \</div>
-<div class="line">    {                                                                                         \</div>
-<div class="line">        <span class="keywordflow">return</span> &amp;Self::Name;                                                                   \</div>
-<div class="line">    }                                                                                         \</div>
-<div class="line">    <span class="keyword">struct </span>__access_##Name##__ {                                                              \</div>
+<div class="line">    {                                                                                               \</div>
+<div class="line">        <span class="keywordflow">return</span> offsetof(Self, Name);                                                                \</div>
+<div class="line">    }                                                                                               \</div>
+<div class="line">    <span class="keyword">struct </span>__access_##Name##__ {                                                                    \</div>
 <div class="line">        <span class="keyword">static</span> inline ::Engine::MemberOffsetPtr&lt;Self, <span class="keyword">decltype</span>(Name)&gt; value = __##Name##_value__(); \</div>
 <div class="line">    };</div>
 </div><!-- fragment -->
@@ -355,11 +355,11 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="memberoffsetptr_8h.html#a9a2f93ec168c5d7f0ec804136e8bb50f">DECLARE_MEMBER_OFFSET</a>(Name)                                                                                                           \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="memberoffsetptr_8h.html#a9a2f93ec168c5d7f0ec804136e8bb50f">DECLARE_MEMBER_OFFSET</a>(Name)                                                                                                            \</div>
 <div class="line">    <a class="code hl_typedef" href="struct_engine_1_1replace.html#ab1b15336a438d8d9ec0e1a5fe3d12bab">::Engine::replace&lt;__VA_ARGS__&gt;::tagged</a>&lt;::Engine::MemberOffsetPtrTag, <a class="code hl_struct" href="struct_engine_1_1_member_offset_ptr_wrapper.html">::Engine::MemberOffsetPtrWrapper&lt;__access_##Name##__&gt;</a>&gt; Name Init; \</div>
 <div class="line">    DEFINE_MEMBER_OFFSET(Name)</div>
-<div class="ttc" id="amemberoffsetptr_8h_html_a9a2f93ec168c5d7f0ec804136e8bb50f"><div class="ttname"><a href="memberoffsetptr_8h.html#a9a2f93ec168c5d7f0ec804136e8bb50f">DECLARE_MEMBER_OFFSET</a></div><div class="ttdeci">#define DECLARE_MEMBER_OFFSET(Name)</div><div class="ttdef"><b>Definition:</b> memberoffsetptr.h:72</div></div>
-<div class="ttc" id="astruct_engine_1_1_member_offset_ptr_wrapper_html"><div class="ttname"><a href="struct_engine_1_1_member_offset_ptr_wrapper.html">Engine::MemberOffsetPtrWrapper</a></div><div class="ttdef"><b>Definition:</b> memberoffsetptr.h:47</div></div>
+<div class="ttc" id="amemberoffsetptr_8h_html_a9a2f93ec168c5d7f0ec804136e8bb50f"><div class="ttname"><a href="memberoffsetptr_8h.html#a9a2f93ec168c5d7f0ec804136e8bb50f">DECLARE_MEMBER_OFFSET</a></div><div class="ttdeci">#define DECLARE_MEMBER_OFFSET(Name)</div><div class="ttdef"><b>Definition:</b> memberoffsetptr.h:71</div></div>
+<div class="ttc" id="astruct_engine_1_1_member_offset_ptr_wrapper_html"><div class="ttname"><a href="struct_engine_1_1_member_offset_ptr_wrapper.html">Engine::MemberOffsetPtrWrapper</a></div><div class="ttdef"><b>Definition:</b> memberoffsetptr.h:46</div></div>
 <div class="ttc" id="astruct_engine_1_1replace_html_ab1b15336a438d8d9ec0e1a5fe3d12bab"><div class="ttname"><a href="struct_engine_1_1replace.html#ab1b15336a438d8d9ec0e1a5fe3d12bab">Engine::replace::tagged</a></div><div class="ttdeci">typename replace_tagged&lt; T, Tag, Args... &gt;::type tagged</div><div class="ttdef"><b>Definition:</b> replace.h:25</div></div>
 </div><!-- fragment -->
 </div>
@@ -367,7 +367,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:54:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

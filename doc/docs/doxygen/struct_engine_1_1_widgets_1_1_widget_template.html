@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -238,18 +238,194 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_widgets_1_1_widget_template-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Widgets::WidgetTemplate Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;compoundwidget.h&gt;</code></p>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>plugins/misc/widgets/src/Madgine/widgets/<a class="el" href="compoundwidget_8h.html">compoundwidget.h</a></li>
+<p><code>#include &lt;widgettemplate.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac65ba262f8ab9f0aafa9b7964fa093bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#ac65ba262f8ab9f0aafa9b7964fa093bc">WidgetTemplate</a> (std::string name, std::vector&lt; <a class="el" href="struct_engine_1_1_widgets_1_1_widget_data.html">WidgetData</a> &gt; widgets)</td></tr>
+<tr class="separator:ac65ba262f8ab9f0aafa9b7964fa093bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b226138ac9af3ba889761c6d38a673"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#a35b226138ac9af3ba889761c6d38a673">~WidgetTemplate</a> ()</td></tr>
+<tr class="separator:a35b226138ac9af3ba889761c6d38a673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a1038b93dbb5f74afe7be529ca5e34740"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a>[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#a1038b93dbb5f74afe7be529ca5e34740">accessors</a> (const std::vector&lt; <a class="el" href="struct_engine_1_1_widgets_1_1_widget_data.html">WidgetData</a> &gt; &amp;widgets)</td></tr>
+<tr class="separator:a1038b93dbb5f74afe7be529ca5e34740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a2b5ac1ea4783b85f08930d428fb3d5a5"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a>[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#a2b5ac1ea4783b85f08930d428fb3d5a5">mAccessors</a></td></tr>
+<tr class="separator:a2b5ac1ea4783b85f08930d428fb3d5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af44fa505f03b80e38858c8d33cc6e324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_meta_table.html">MetaTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#af44fa505f03b80e38858c8d33cc6e324">mMetaTable</a></td></tr>
+<tr class="separator:af44fa505f03b80e38858c8d33cc6e324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6e7506b1cd4682594a68e6f0d9a8970"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#af6e7506b1cd4682594a68e6f0d9a8970">mName</a></td></tr>
+<tr class="separator:af6e7506b1cd4682594a68e6f0d9a8970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dd1878089907052deeeaaf1277123d4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_meta_table.html">MetaTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#a1dd1878089907052deeeaaf1277123d4">mSelfTable</a> = &amp;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#af44fa505f03b80e38858c8d33cc6e324">mMetaTable</a></td></tr>
+<tr class="separator:a1dd1878089907052deeeaaf1277123d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc183790df0c33fae8764d43a77499a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_widgets_1_1_widget_data.html">WidgetData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#a9fc183790df0c33fae8764d43a77499a">mWidgets</a></td></tr>
+<tr class="separator:a9fc183790df0c33fae8764d43a77499a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac65ba262f8ab9f0aafa9b7964fa093bc" name="ac65ba262f8ab9f0aafa9b7964fa093bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac65ba262f8ab9f0aafa9b7964fa093bc">&#9670;&#160;</a></span>WidgetTemplate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Widgets::WidgetTemplate::WidgetTemplate </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_widgets_1_1_widget_data.html">WidgetData</a> &gt;&#160;</td>
+          <td class="paramname"><em>widgets</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35b226138ac9af3ba889761c6d38a673" name="a35b226138ac9af3ba889761c6d38a673"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b226138ac9af3ba889761c6d38a673">&#9670;&#160;</a></span>~WidgetTemplate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Widgets::WidgetTemplate::~WidgetTemplate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1038b93dbb5f74afe7be529ca5e34740" name="a1038b93dbb5f74afe7be529ca5e34740"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1038b93dbb5f74afe7be529ca5e34740">&#9670;&#160;</a></span>accessors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a>[]&gt; Engine::Widgets::WidgetTemplate::accessors </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="struct_engine_1_1_widgets_1_1_widget_data.html">WidgetData</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>widgets</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="af6e7506b1cd4682594a68e6f0d9a8970" name="af6e7506b1cd4682594a68e6f0d9a8970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6e7506b1cd4682594a68e6f0d9a8970">&#9670;&#160;</a></span>mName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Engine::Widgets::WidgetTemplate::mName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9fc183790df0c33fae8764d43a77499a" name="a9fc183790df0c33fae8764d43a77499a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fc183790df0c33fae8764d43a77499a">&#9670;&#160;</a></span>mWidgets</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_data.html">WidgetData</a>&gt; Engine::Widgets::WidgetTemplate::mWidgets</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b5ac1ea4783b85f08930d428fb3d5a5" name="a2b5ac1ea4783b85f08930d428fb3d5a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b5ac1ea4783b85f08930d428fb3d5a5">&#9670;&#160;</a></span>mAccessors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="struct_engine_1_1_accessor.html">Accessor</a>[]&gt; Engine::Widgets::WidgetTemplate::mAccessors</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1dd1878089907052deeeaaf1277123d4" name="a1dd1878089907052deeeaaf1277123d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dd1878089907052deeeaaf1277123d4">&#9670;&#160;</a></span>mSelfTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_meta_table.html">MetaTable</a>* Engine::Widgets::WidgetTemplate::mSelfTable = &amp;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_template.html#af44fa505f03b80e38858c8d33cc6e324">mMetaTable</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af44fa505f03b80e38858c8d33cc6e324" name="af44fa505f03b80e38858c8d33cc6e324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af44fa505f03b80e38858c8d33cc6e324">&#9670;&#160;</a></span>mMetaTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_meta_table.html">MetaTable</a> Engine::Widgets::WidgetTemplate::mMetaTable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/misc/widgets/src/Madgine/widgets/<a class="el" href="widgettemplate_8h.html">widgettemplate.h</a></li>
+<li>plugins/misc/widgets/src/Madgine/widgets/<a class="el" href="widgettemplate_8cpp.html">widgettemplate.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

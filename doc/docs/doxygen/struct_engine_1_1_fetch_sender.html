@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -258,7 +258,7 @@ Inheritance diagram for Engine::FetchSender&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a3c78332468272d7c4c64f5a39b50595c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_fetch_sender.html#a3c78332468272d7c4c64f5a39b50595c">result_type</a> = <a class="el" href="namespace_engine.html#ad8e0463640a5deea5ae60f228984483f">GenericResult</a></td></tr>
+<tr class="memitem:a3c78332468272d7c4c64f5a39b50595c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_fetch_sender.html#a3c78332468272d7c4c64f5a39b50595c">result_type</a> = <a class="el" href="namespace_engine.html#a22ca8ad17f9fa1466d02653e6bd26d87">GenericResult</a></td></tr>
 <tr class="separator:a3c78332468272d7c4c64f5a39b50595c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa975fa0cbe8776bc0f9d8261a3892fa4"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Tuple&gt; </td></tr>
 <tr class="memitem:aa975fa0cbe8776bc0f9d8261a3892fa4"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_fetch_sender.html#aa975fa0cbe8776bc0f9d8261a3892fa4">value_types</a> = Tuple&lt; T &gt;</td></tr>
@@ -281,8 +281,8 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:acac0d5637b50e659f7a38d6e8e7075f1"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:acac0d5637b50e659f7a38d6e8e7075f1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_fetch_sender.html#acac0d5637b50e659f7a38d6e8e7075f1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>, <a class="el" href="struct_engine_1_1_fetch_sender.html">FetchSender</a> &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:acac0d5637b50e659f7a38d6e8e7075f1"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
+<tr class="memitem:acac0d5637b50e659f7a38d6e8e7075f1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_fetch_sender.html#acac0d5637b50e659f7a38d6e8e7075f1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>, <a class="el" href="struct_engine_1_1_fetch_sender.html">FetchSender</a> &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:acac0d5637b50e659f7a38d6e8e7075f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -313,7 +313,7 @@ template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_fetch_sender.html">Engine::FetchSender</a>&lt; T &gt;::result_type =  <a class="el" href="namespace_engine.html#ad8e0463640a5deea5ae60f228984483f">GenericResult</a></td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_fetch_sender.html">Engine::FetchSender</a>&lt; T &gt;::result_type =  <a class="el" href="namespace_engine.html#a22ca8ad17f9fa1466d02653e6bd26d87">GenericResult</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -368,7 +368,7 @@ template&lt;typename T &gt; </div>
 <div class="memtemplate">
 template&lt;typename T &gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -388,7 +388,7 @@ template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -445,7 +445,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

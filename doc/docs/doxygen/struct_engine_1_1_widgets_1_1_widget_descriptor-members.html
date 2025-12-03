@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -244,15 +244,17 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#ac3c38e8891b5fa95024edf783057295a">create</a>(WidgetManager &amp;manager, WidgetBase *parent=nullptr) const</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#ae69a28310082f593addcf374b5ac4427">serializeTable</a>()</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#a85e95bee851c0951f1008395181ef126">WidgetDescriptor</a>(std::unique_ptr&lt; WidgetBase &gt;(*ctor)(WidgetManager &amp;, WidgetBase *, const WidgetDescriptor *)=nullptr, const Serialize::SerializeTable *serializeTable=nullptr, WidgetTemplate _template={})</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#a71ed3d3c88dc2504d8d783c960e3527f">WidgetDescriptor</a>(type_holder_t&lt; WidgetType &gt;)</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#aaa2ea475aedc0dba07e7c6bd3d18c8a3">widgetTemplate</a>() const</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#ad2d4b113c2d6a51f2bb1455018b01b8a">create</a>(WidgetManager &amp;manager, WidgetLoader::Handle handle, WidgetBase *parent=nullptr) const</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#a74a9ff88bcfb4a7a98242ce99d29ec9d">metaTable</a>()</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#ae5ec4b61850426ee759f8862e8361d47">operator=</a>(WidgetDescriptor &amp;&amp;) noexcept</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#aa103e11bc26f9c318376bd97ba86b0d9">WidgetDescriptor</a>()=default</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#a14e9748b689abced03f9f2102d1fbf78">WidgetDescriptor</a>(std::unique_ptr&lt; WidgetTemplate &gt; _template)</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#a3d2720612837868a03da60697d4b829a">widgetTemplate</a>() const</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html#ac3e2d4cdf588ce7da5cb728bdfc47938">~WidgetDescriptor</a>()</td><td class="entry"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_descriptor.html">Engine::Widgets::WidgetDescriptor</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

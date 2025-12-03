@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -313,22 +313,22 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ade8b52beae0b1cc1c64bf88011965a2c"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename InnerRec &gt; </td></tr>
 <tr class="memitem:ade8b52beae0b1cc1c64bf88011965a2c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ade8b52beae0b1cc1c64bf88011965a2c">codegen_algorithm_state</a> = <a class="el" href="struct_code_gen_1_1codegen__algorithm__state__helper.html">codegen_algorithm_state_helper</a>&lt; <a class="el" href="namespace_code_gen.html#ab0adf85ecf9e97ea4ac3749ff5c41882">codegen_connect_result_t</a>&lt; Sender, InnerRec &gt; &gt;</td></tr>
 <tr class="separator:ade8b52beae0b1cc1c64bf88011965a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ab0adf85ecf9e97ea4ac3749ff5c41882">codegen_connect_result_t</a> = tag_invoke_result_t&lt; <a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, <a class="el" href="class_rec.html">Rec</a> &gt;</td></tr>
+<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename Rec &gt; </td></tr>
+<tr class="memitem:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ab0adf85ecf9e97ea4ac3749ff5c41882">codegen_connect_result_t</a> = tag_invoke_result_t&lt; <a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, Rec &gt;</td></tr>
 <tr class="separator:ab0adf85ecf9e97ea4ac3749ff5c41882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c0b94d5dd20909ebf57cef960861363"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a9c0b94d5dd20909ebf57cef960861363">codegen_receiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1execution__receiver.html">Engine::Execution::execution_receiver</a>&lt; <a class="el" href="struct_code_gen_1_1_code_gen___context.html">CodeGen_Context</a> &gt;</td></tr>
 <tr class="separator:a9c0b94d5dd20909ebf57cef960861363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a871ebc2a19fcd6ee17ca559bef379071"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> = std::variant&lt; <a class="el" href="struct_code_gen_1_1_assignment.html">Assignment</a>, <a class="el" href="struct_code_gen_1_1_return.html">Return</a>, <a class="el" href="struct_code_gen_1_1_variable_access.html">VariableAccess</a>, <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CustomCodeBlock</a>, <a class="el" href="struct_code_gen_1_1_namespace.html">Namespace</a>, <a class="el" href="struct_code_gen_1_1_member_access.html">MemberAccess</a>, <a class="el" href="struct_code_gen_1_1_variable_definition.html">VariableDefinition</a>, <a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>, <a class="el" href="struct_code_gen_1_1_constructor.html">Constructor</a>, <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a>, <a class="el" href="struct_code_gen_1_1_comment.html">Comment</a>, <a class="el" href="struct_code_gen_1_1_for_each.html">ForEach</a> &gt;</td></tr>
-<tr class="separator:a871ebc2a19fcd6ee17ca559bef379071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f6d03c2564685c24ef7284bacc5652"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> = std::variant&lt; <a class="el" href="struct_code_gen_1_1_assignment.html">Assignment</a>, <a class="el" href="struct_code_gen_1_1_return.html">Return</a>, <a class="el" href="struct_code_gen_1_1_variable_access.html">VariableAccess</a>, <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CustomCodeBlock</a>, <a class="el" href="struct_code_gen_1_1_namespace.html">Namespace</a>, <a class="el" href="struct_code_gen_1_1_member_access.html">MemberAccess</a>, <a class="el" href="struct_code_gen_1_1_variable_definition.html">VariableDefinition</a>, <a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>, <a class="el" href="struct_code_gen_1_1_constructor.html">Constructor</a>, <a class="el" href="struct_code_gen_1_1_comment.html">Comment</a>, <a class="el" href="struct_code_gen_1_1_for_each.html">ForEach</a>, <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a>&lt; int &gt;, <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a>&lt; std::string &gt; &gt;</td></tr>
+<tr class="separator:a32f6d03c2564685c24ef7284bacc5652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a>  = codegen_receiver&gt; </td></tr>
-<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a168779a2099572088da2ad9fbcec35c9">generatorFromSender</a> (Sender &amp;&amp;sender, <a class="el" href="class_rec.html">Rec</a> rec={})</td></tr>
+<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplParams" colspan="2">template&lt;typename Sender , typename Rec  = codegen_receiver&gt; </td></tr>
+<tr class="memitem:a168779a2099572088da2ad9fbcec35c9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a168779a2099572088da2ad9fbcec35c9">generatorFromSender</a> (Sender &amp;&amp;sender, Rec rec={})</td></tr>
 <tr class="separator:a168779a2099572088da2ad9fbcec35c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab90d375ae14723c15fcffb658d0de920"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ab90d375ae14723c15fcffb658d0de920">operator+</a> (const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;first, const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;second)</td></tr>
+<tr class="memitem:ab90d375ae14723c15fcffb658d0de920"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#ab90d375ae14723c15fcffb658d0de920">operator+</a> (const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;first, const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;second)</td></tr>
 <tr class="separator:ab90d375ae14723c15fcffb658d0de920"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc4181371a2c36f8b6e58a2571547a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#aecc4181371a2c36f8b6e58a2571547a0">operator/</a> (const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;first, const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;second)</td></tr>
+<tr class="memitem:aecc4181371a2c36f8b6e58a2571547a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#aecc4181371a2c36f8b6e58a2571547a0">operator/</a> (const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;first, const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;second)</td></tr>
 <tr class="separator:aecc4181371a2c36f8b6e58a2571547a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5473d4d50d56571f192c6042bdba4633"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_code_gen.html#a5473d4d50d56571f192c6042bdba4633">resolveIncludes</a> (std::string &amp;source, std::function&lt; std::string(const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Engine::Filesystem::Path</a> &amp;, size_t, std::string_view)&gt; lookup, const std::string_view currentFileName, std::map&lt; std::string, size_t &gt; &amp;files)</td></tr>
 <tr class="separator:a5473d4d50d56571f192c6042bdba4633"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -339,14 +339,14 @@ Variables</h2></td></tr>
 <tr class="separator:a47ced9a986973e2e3f6c3458ef635481"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a871ebc2a19fcd6ee17ca559bef379071" name="a871ebc2a19fcd6ee17ca559bef379071"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a871ebc2a19fcd6ee17ca559bef379071">&#9670;&#160;</a></span>Statement</h2>
+<a id="a32f6d03c2564685c24ef7284bacc5652" name="a32f6d03c2564685c24ef7284bacc5652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f6d03c2564685c24ef7284bacc5652">&#9670;&#160;</a></span>Statement</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">CodeGen::Statement</a> = typedef std::variant&lt;<a class="el" href="struct_code_gen_1_1_assignment.html">Assignment</a>, <a class="el" href="struct_code_gen_1_1_return.html">Return</a>, <a class="el" href="struct_code_gen_1_1_variable_access.html">VariableAccess</a>, <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CustomCodeBlock</a>, <a class="el" href="struct_code_gen_1_1_namespace.html">Namespace</a>, <a class="el" href="struct_code_gen_1_1_member_access.html">MemberAccess</a>, <a class="el" href="struct_code_gen_1_1_variable_definition.html">VariableDefinition</a>, <a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>, <a class="el" href="struct_code_gen_1_1_constructor.html">Constructor</a>, <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a>, <a class="el" href="struct_code_gen_1_1_comment.html">Comment</a>, <a class="el" href="struct_code_gen_1_1_for_each.html">ForEach</a>&gt;</td>
+          <td class="memname">using <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen::Statement</a> = typedef std::variant&lt;<a class="el" href="struct_code_gen_1_1_assignment.html">Assignment</a>, <a class="el" href="struct_code_gen_1_1_return.html">Return</a>, <a class="el" href="struct_code_gen_1_1_variable_access.html">VariableAccess</a>, <a class="el" href="struct_code_gen_1_1_custom_code_block.html">CustomCodeBlock</a>, <a class="el" href="struct_code_gen_1_1_namespace.html">Namespace</a>, <a class="el" href="struct_code_gen_1_1_member_access.html">MemberAccess</a>, <a class="el" href="struct_code_gen_1_1_variable_definition.html">VariableDefinition</a>, <a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a>, <a class="el" href="struct_code_gen_1_1_constructor.html">Constructor</a>, <a class="el" href="struct_code_gen_1_1_comment.html">Comment</a>, <a class="el" href="struct_code_gen_1_1_for_each.html">ForEach</a>, <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a>&lt;int&gt;, <a class="el" href="struct_code_gen_1_1_constant.html">Constant</a>&lt;std::string&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -373,10 +373,10 @@ Variables</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Sender , typename Rec &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_code_gen.html#ab0adf85ecf9e97ea4ac3749ff5c41882">CodeGen::codegen_connect_result_t</a> = typedef tag_invoke_result_t&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, <a class="el" href="class_rec.html">Rec</a>&gt;</td>
+          <td class="memname">using <a class="el" href="namespace_code_gen.html#ab0adf85ecf9e97ea4ac3749ff5c41882">CodeGen::codegen_connect_result_t</a> = typedef tag_invoke_result_t&lt;<a class="el" href="struct_code_gen_1_1codegen__connect__t.html">codegen_connect_t</a>, Sender, Rec&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -406,7 +406,7 @@ template&lt;typename Sender , typename InnerRec &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</a>  = codegen_receiver&gt; </div>
+template&lt;typename Sender , typename Rec  = codegen_receiver&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto CodeGen::generatorFromSender </td>
@@ -417,7 +417,7 @@ template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a>&#160;</td>
+          <td class="paramtype">Rec&#160;</td>
           <td class="paramname"><em>rec</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
@@ -490,13 +490,13 @@ template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</
         <tr>
           <td class="memname"><a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a> CodeGen::operator+ </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;&#160;</td>
           <td class="paramname"><em>first</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;&#160;</td>
           <td class="paramname"><em>second</em>&#160;</td>
         </tr>
         <tr>
@@ -526,13 +526,13 @@ template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</
         <tr>
           <td class="memname"><a class="el" href="struct_code_gen_1_1_arith_operation.html">ArithOperation</a> CodeGen::operator/ </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;&#160;</td>
           <td class="paramname"><em>first</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a871ebc2a19fcd6ee17ca559bef379071">Statement</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">Statement</a> &amp;&#160;</td>
           <td class="paramname"><em>second</em>&#160;</td>
         </tr>
         <tr>
@@ -576,7 +576,7 @@ template&lt;typename Sender , typename <a class="el" href="class_rec.html">Rec</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

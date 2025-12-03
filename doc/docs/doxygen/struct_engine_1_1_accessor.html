@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -249,36 +249,68 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ad30fe96b97d832361f67aba720fa1856"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#ad30fe96b97d832361f67aba720fa1856">mGetter</a> )(<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;)</td></tr>
-<tr class="separator:ad30fe96b97d832361f67aba720fa1856"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78dab4e04011359166f9198d5184e7ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#a78dab4e04011359166f9198d5184e7ec">mSetter</a> )(const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;, const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;)</td></tr>
-<tr class="separator:a78dab4e04011359166f9198d5184e7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d550d4300fae38bbd3b0fc6915f5df6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#a1d550d4300fae38bbd3b0fc6915f5df6">mType</a></td></tr>
+<tr class="memitem:a55ef73472542b06c33e6449fe5a39a2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#a55ef73472542b06c33e6449fe5a39a2d">mCheck</a> )(const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *self, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;) = nullptr</td></tr>
+<tr class="separator:a55ef73472542b06c33e6449fe5a39a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e7021b5b2dbbf5a070897f9e5b6b704"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#a9e7021b5b2dbbf5a070897f9e5b6b704">mGetter</a> )(const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *self, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;) = nullptr</td></tr>
+<tr class="separator:a9e7021b5b2dbbf5a070897f9e5b6b704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13df08eb5936a214ce59fe53288eef5b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#a13df08eb5936a214ce59fe53288eef5b">mName</a> = nullptr</td></tr>
+<tr class="separator:a13df08eb5936a214ce59fe53288eef5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6daa05b43b054c6058c8f5036a58e277"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#a6daa05b43b054c6058c8f5036a58e277">mSetter</a> )(const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *self, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;, const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;) = nullptr</td></tr>
+<tr class="separator:a6daa05b43b054c6058c8f5036a58e277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d550d4300fae38bbd3b0fc6915f5df6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_accessor.html#a1d550d4300fae38bbd3b0fc6915f5df6">mType</a> { <a class="el" href="namespace_engine.html#a7fec22d37050d0fb7dab3645c31d48f7a3bc54097047d66661afd46afa1c3fafa">ExtendedValueTypeEnum::GenericType</a> }</td></tr>
 <tr class="separator:a1d550d4300fae38bbd3b0fc6915f5df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad30fe96b97d832361f67aba720fa1856" name="ad30fe96b97d832361f67aba720fa1856"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad30fe96b97d832361f67aba720fa1856">&#9670;&#160;</a></span>mGetter</h2>
+<a id="a13df08eb5936a214ce59fe53288eef5b" name="a13df08eb5936a214ce59fe53288eef5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13df08eb5936a214ce59fe53288eef5b">&#9670;&#160;</a></span>mName</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a>(* Engine::Accessor::mGetter) (<a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;)</td>
+          <td class="memname">const char* Engine::Accessor::mName = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a78dab4e04011359166f9198d5184e7ec" name="a78dab4e04011359166f9198d5184e7ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78dab4e04011359166f9198d5184e7ec">&#9670;&#160;</a></span>mSetter</h2>
+<a id="a55ef73472542b06c33e6449fe5a39a2d" name="a55ef73472542b06c33e6449fe5a39a2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55ef73472542b06c33e6449fe5a39a2d">&#9670;&#160;</a></span>mCheck</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a>(* Engine::Accessor::mSetter) (const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;, const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;)</td>
+          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>(* Engine::Accessor::mCheck) (const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *self, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;) = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e7021b5b2dbbf5a070897f9e5b6b704" name="a9e7021b5b2dbbf5a070897f9e5b6b704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e7021b5b2dbbf5a070897f9e5b6b704">&#9670;&#160;</a></span>mGetter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a>(* Engine::Accessor::mGetter) (const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *self, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;) = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6daa05b43b054c6058c8f5036a58e277" name="a6daa05b43b054c6058c8f5036a58e277"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6daa05b43b054c6058c8f5036a58e277">&#9670;&#160;</a></span>mSetter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a>(* Engine::Accessor::mSetter) (const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *self, const <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> &amp;, const <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;) = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -292,7 +324,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::Accessor::mType</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::Accessor::mType { <a class="el" href="namespace_engine.html#a7fec22d37050d0fb7dab3645c31d48f7a3bc54097047d66661afd46afa1c3fafa">ExtendedValueTypeEnum::GenericType</a> }</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -305,7 +337,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -250,12 +250,22 @@ $(function() {
 
 <p><code>#include &lt;lifetime.h&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime_1_1sender.html">sender</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a5877dc8fe2f55068f5141f520ae9de21"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a5877dc8fe2f55068f5141f520ae9de21">inlineReceiver</a> = receiver</td></tr>
+<tr class="separator:a5877dc8fe2f55068f5141f520ae9de21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a610c689ad762c5a0d44b71f62680a96a"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
+<tr class="memitem:a610c689ad762c5a0d44b71f62680a96a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a610c689ad762c5a0d44b71f62680a96a">inlineState</a> = state&lt; Rec &gt;</td></tr>
+<tr class="separator:a610c689ad762c5a0d44b71f62680a96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f360bd2a0a68069b5887c4c813e9e77"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a8f360bd2a0a68069b5887c4c813e9e77">is_sender</a> = <a class="el" href="classvoid.html">void</a></td></tr>
 <tr class="separator:a8f360bd2a0a68069b5887c4c813e9e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa050f9880b76681aaebed8f32173ef10"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#aa050f9880b76681aaebed8f32173ef10">result_type</a> = <a class="el" href="namespace_engine.html#ad8e0463640a5deea5ae60f228984483f">GenericResult</a></td></tr>
-<tr class="separator:aa050f9880b76681aaebed8f32173ef10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25b48e3954496adcc3dd2af4ba8c3194"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a25b48e3954496adcc3dd2af4ba8c3194">result_type</a> = <a class="el" href="classvoid.html">void</a></td></tr>
+<tr class="separator:a25b48e3954496adcc3dd2af4ba8c3194"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf4a05715c2ed55f1b8dc54ae0f902e7"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Tuple&gt; </td></tr>
 <tr class="memitem:aaf4a05715c2ed55f1b8dc54ae0f902e7"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#aaf4a05715c2ed55f1b8dc54ae0f902e7">value_types</a> = Tuple&lt;&gt;</td></tr>
 <tr class="separator:aaf4a05715c2ed55f1b8dc54ae0f902e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -267,8 +277,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac400c8b5aa079785bf19b5ec37093d71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#ac400c8b5aa079785bf19b5ec37093d71">~Lifetime</a> ()</td></tr>
 <tr class="separator:ac400c8b5aa079785bf19b5ec37093d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a574d564c9021096c3dc5efc481722430"><td class="memTemplParams" colspan="2">template&lt;Sender Sender&gt; </td></tr>
-<tr class="memitem:a574d564c9021096c3dc5efc481722430"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a574d564c9021096c3dc5efc481722430">attach</a> (Sender &amp;&amp;sender)</td></tr>
+<tr class="memitem:a574d564c9021096c3dc5efc481722430"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a574d564c9021096c3dc5efc481722430">attach</a> (Sender &amp;&amp;<a class="el" href="struct_engine_1_1_execution_1_1_lifetime_1_1sender.html">sender</a>)</td></tr>
 <tr class="separator:a574d564c9021096c3dc5efc481722430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c03b0e9b7f38dbe240c1535813cceb2"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Dtor &gt; </td></tr>
+<tr class="memitem:a9c03b0e9b7f38dbe240c1535813cceb2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime_1_1sender.html">sender</a>&lt; T, Dtor &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a9c03b0e9b7f38dbe240c1535813cceb2">bound</a> (<a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">BindingPtr</a>&lt; T &gt; &amp;ptr, T &amp;&amp;t, Dtor &amp;&amp;dtor)</td></tr>
+<tr class="separator:a9c03b0e9b7f38dbe240c1535813cceb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02d50de1464990bce191703d778e3c8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a02d50de1464990bce191703d778e3c8e">end</a> ()</td></tr>
 <tr class="separator:a02d50de1464990bce191703d778e3c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a612c9e8fd3465cfca115d06dcc54b561"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#a612c9e8fd3465cfca115d06dcc54b561">finished</a> ()</td></tr>
@@ -278,8 +291,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:afd85855f075ab69b5d63e9b576369ef1"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:afd85855f075ab69b5d63e9b576369ef1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#afd85855f075ab69b5d63e9b576369ef1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Lifetime</a> &amp;lifetime, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:afd85855f075ab69b5d63e9b576369ef1"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
+<tr class="memitem:afd85855f075ab69b5d63e9b576369ef1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html#afd85855f075ab69b5d63e9b576369ef1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">connect_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Lifetime</a> &amp;lifetime, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:afd85855f075ab69b5d63e9b576369ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -299,8 +312,8 @@ template&lt;auto... cpos&gt; </div>
 
 </div>
 </div>
-<a id="aa050f9880b76681aaebed8f32173ef10" name="aa050f9880b76681aaebed8f32173ef10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa050f9880b76681aaebed8f32173ef10">&#9670;&#160;</a></span>result_type</h2>
+<a id="a25b48e3954496adcc3dd2af4ba8c3194" name="a25b48e3954496adcc3dd2af4ba8c3194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25b48e3954496adcc3dd2af4ba8c3194">&#9670;&#160;</a></span>result_type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -308,7 +321,7 @@ template&lt;auto... cpos&gt; </div>
 template&lt;auto... cpos&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Engine::Execution::Lifetime</a>&lt; cpos &gt;::result_type =  <a class="el" href="namespace_engine.html#ad8e0463640a5deea5ae60f228984483f">GenericResult</a></td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Engine::Execution::Lifetime</a>&lt; cpos &gt;::result_type =  <a class="el" href="classvoid.html">void</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -327,6 +340,40 @@ template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Engine::Execution::Lifetime</a>&lt; cpos &gt;::value_types =  Tuple&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a610c689ad762c5a0d44b71f62680a96a" name="a610c689ad762c5a0d44b71f62680a96a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a610c689ad762c5a0d44b71f62680a96a">&#9670;&#160;</a></span>inlineState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto... cpos&gt; </div>
+<div class="memtemplate">
+template&lt;typename Rec &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Engine::Execution::Lifetime</a>&lt; cpos &gt;::inlineState =  state&lt;Rec&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5877dc8fe2f55068f5141f520ae9de21" name="a5877dc8fe2f55068f5141f520ae9de21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5877dc8fe2f55068f5141f520ae9de21">&#9670;&#160;</a></span>inlineReceiver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto... cpos&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Engine::Execution::Lifetime</a>&lt; cpos &gt;::inlineReceiver =  receiver</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -500,6 +547,52 @@ template&lt;auto... cpos&gt; </div>
 
 </div>
 </div>
+<a id="a9c03b0e9b7f38dbe240c1535813cceb2" name="a9c03b0e9b7f38dbe240c1535813cceb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c03b0e9b7f38dbe240c1535813cceb2">&#9670;&#160;</a></span>bound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto... cpos&gt; </div>
+<div class="memtemplate">
+template&lt;typename T , typename Dtor &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_lifetime_1_1sender.html">sender</a>&lt; T, Dtor &gt; <a class="el" href="struct_engine_1_1_execution_1_1_lifetime.html">Engine::Execution::Lifetime</a>&lt; cpos &gt;::bound </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">BindingPtr</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Dtor &amp;&amp;&#160;</td>
+          <td class="paramname"><em>dtor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
 <a id="afd85855f075ab69b5d63e9b576369ef1" name="afd85855f075ab69b5d63e9b576369ef1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd85855f075ab69b5d63e9b576369ef1">&#9670;&#160;</a></span>tag_invoke</h2>
@@ -509,7 +602,7 @@ template&lt;auto... cpos&gt; </div>
 <div class="memtemplate">
 template&lt;auto... cpos&gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -529,7 +622,7 @@ template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -553,7 +646,7 @@ template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:51 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

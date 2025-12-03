@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -278,7 +278,7 @@ Macros</h2></td></tr>
 <tr class="separator:ad15017619634e557359397248dac72b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9475e290aab4ff102939bb1960972758"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#a9475e290aab4ff102939bb1960972758">FIELD</a>(...)&#160;&#160;&#160;    <a class="el" href="serializetable__impl_8h.html#a56bbb1943f91a802e311b647c0e2dd57">FIELD_EX</a>(, __VA_ARGS__)</td></tr>
 <tr class="separator:a9475e290aab4ff102939bb1960972758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56bbb1943f91a802e311b647c0e2dd57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#a56bbb1943f91a802e311b647c0e2dd57">FIELD_EX</a>(Idx, ...)&#160;&#160;&#160;    <a class="el" href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a>(Idx, <a class="el" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>(::Engine::Serialize::__serialize_impl__::field&lt;Ty, &amp;Ty::__VA_ARGS__&gt;(<a class="el" href="macros_8h.html#accc259137d0a4da60463934735edc34c">STRINGIFY2</a>(<a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)), parentConfigs)))</td></tr>
+<tr class="memitem:a56bbb1943f91a802e311b647c0e2dd57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#a56bbb1943f91a802e311b647c0e2dd57">FIELD_EX</a>(Idx, ...)&#160;&#160;&#160;    <a class="el" href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a>(Idx, <a class="el" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>(::Engine::Serialize::__serialize_impl__::field&lt;Ty, offsetof(Ty, <a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)), &amp;Ty::__VA_ARGS__&gt;(<a class="el" href="macros_8h.html#accc259137d0a4da60463934735edc34c">STRINGIFY2</a>(<a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)), parentConfigs)))</td></tr>
 <tr class="separator:a56bbb1943f91a802e311b647c0e2dd57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b1c31b6b8769e21f37b4dac82b3a35b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#a4b1c31b6b8769e21f37b4dac82b3a35b">SERIALIZETABLE_BEGIN</a>(T, ...)&#160;&#160;&#160;<a class="el" href="serializetable__impl_8h.html#adede1694c7c2883b6c441404acf4406f">SERIALIZETABLE_BEGIN_EX</a>(, T, __VA_ARGS__)</td></tr>
 <tr class="separator:a4b1c31b6b8769e21f37b4dac82b3a35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -309,8 +309,8 @@ Functions</h2></td></tr>
 <tr class="separator:ab0cb9da2298c9cd123916e3c395c2f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80815027f3a9bf898d7fdeb1b6ce6d8b"><td class="memItemLeft" align="right" valign="top">WriteMessage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a80815027f3a9bf898d7fdeb1b6ce6d8b">Engine::Serialize::getMasterRequestResponseTarget</a> (const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId)</td></tr>
 <tr class="separator:a80815027f3a9bf898d7fdeb1b6ce6d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a413623ac14aa82e358093e456543ca"><td class="memItemLeft" align="right" valign="top">StreamResult META_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a7a413623ac14aa82e358093e456543ca">Engine::Serialize::readState</a> (const SerializeTable *table, <a class="el" href="classvoid.html">void</a> *unit, FormattedSerializeStream &amp;in, CallerHierarchyBasePtr hierarchy)</td></tr>
-<tr class="separator:a7a413623ac14aa82e358093e456543ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac855840b66edac2534c84f32d246c783"><td class="memItemLeft" align="right" valign="top">StreamResult META_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ac855840b66edac2534c84f32d246c783">Engine::Serialize::readState</a> (const SerializeTable *table, <a class="el" href="classvoid.html">void</a> *unit, CallerHierarchyFormattedSerializeStream in)</td></tr>
+<tr class="separator:ac855840b66edac2534c84f32d246c783"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a3ea3f1e0f020c1daef3604447bae95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a5a3ea3f1e0f020c1daef3604447bae95">Engine::Serialize::writeFunctionAction</a> (SyncableUnitBase *unit, uint16_t index, const <a class="el" href="classvoid.html">void</a> *args, const std::set&lt; ParticipantId &gt; &amp;targets, ParticipantId answerTarget, MessageId answerId)</td></tr>
 <tr class="separator:a5a3ea3f1e0f020c1daef3604447bae95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e675225f502fac5dda271c273406b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ae8e675225f502fac5dda271c273406b5">Engine::Serialize::writeFunctionError</a> (SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedMessageStream &amp;target, MessageId answerId)</td></tr>
@@ -712,7 +712,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="aconceptstd_1_1derived__from_html"><div class="ttname"><a href="conceptstd_1_1derived__from.html">std::derived_from</a></div><div class="ttdef"><b>Definition:</b> concepts.h:15</div></div>
 <div class="ttc" id="alinestruct_8h_html_a4ae633e4399b0687c9bdf030cbf5b2a2"><div class="ttname"><a href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a></div><div class="ttdeci">#define GET_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:31</div></div>
 <div class="ttc" id="amacros_8h_html_afa8624400132dca5f52f93deec70706b"><div class="ttname"><a href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a></div><div class="ttdeci">#define SINGLE_ARG(...)</div><div class="ttdef"><b>Definition:</b> macros.h:13</div></div>
-<div class="ttc" id="aserializetable__impl_8h_html_ad3279570e995d9467abf41e4f7c89f3d"><div class="ttname"><a href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_ENTRY_EX(Idx, Ser)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:343</div></div>
+<div class="ttc" id="aserializetable__impl_8h_html_ad3279570e995d9467abf41e4f7c89f3d"><div class="ttname"><a href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_ENTRY_EX(Idx, Ser)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:336</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -755,7 +755,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a>(Idx, <a class="el" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>(::Engine::Serialize::__serialize_impl__::field&lt;Ty, &amp;Ty::__VA_ARGS__&gt;(<a class="el" href="macros_8h.html#accc259137d0a4da60463934735edc34c">STRINGIFY2</a>(<a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)), parentConfigs)))</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a>(Idx, <a class="el" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>(::Engine::Serialize::__serialize_impl__::field&lt;Ty, offsetof(Ty, <a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)), &amp;Ty::__VA_ARGS__&gt;(<a class="el" href="macros_8h.html#accc259137d0a4da60463934735edc34c">STRINGIFY2</a>(<a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(__VA_ARGS__)), parentConfigs)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -931,7 +931,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

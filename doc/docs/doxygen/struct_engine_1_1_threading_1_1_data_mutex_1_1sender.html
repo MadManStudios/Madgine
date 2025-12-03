@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -254,8 +254,8 @@ $(function() {
 Public Types</h2></td></tr>
 <tr class="memitem:a0649277f137cf8ef90dfff77f1748b78"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html#a0649277f137cf8ef90dfff77f1748b78">is_sender</a> = <a class="el" href="classvoid.html">void</a></td></tr>
 <tr class="separator:a0649277f137cf8ef90dfff77f1748b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80a6d71cc5642cad1b1aca358a14f651"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html#a80a6d71cc5642cad1b1aca358a14f651">result_type</a> = <a class="el" href="namespace_engine.html#ad8e0463640a5deea5ae60f228984483f">GenericResult</a></td></tr>
-<tr class="separator:a80a6d71cc5642cad1b1aca358a14f651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5d4ff990a66c0bf3258939c4c4e2f62"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html#aa5d4ff990a66c0bf3258939c4c4e2f62">result_type</a> = <a class="el" href="classvoid.html">void</a></td></tr>
+<tr class="separator:aa5d4ff990a66c0bf3258939c4c4e2f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34219b21b9df5ad2187dfe21f54772a6"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Tuple&gt; </td></tr>
 <tr class="memitem:a34219b21b9df5ad2187dfe21f54772a6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html#a34219b21b9df5ad2187dfe21f54772a6">value_types</a> = typename decltype(<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html#ae04af320c18621e023c065773613f6b5">return_types_helper</a>&lt; std::invoke_result_t&lt; F &gt; &gt;())::template instantiate&lt; Tuple &gt;</td></tr>
 <tr class="separator:a34219b21b9df5ad2187dfe21f54772a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,8 +277,8 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:ad9641faa56b03a3601fd437b803579a1"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </td></tr>
-<tr class="memitem:ad9641faa56b03a3601fd437b803579a1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html#ad9641faa56b03a3601fd437b803579a1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>, <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html">sender</a> &amp;&amp;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html">sender</a>, <a class="el" href="class_rec.html">Rec</a> &amp;&amp;rec)</td></tr>
+<tr class="memitem:ad9641faa56b03a3601fd437b803579a1"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
+<tr class="memitem:ad9641faa56b03a3601fd437b803579a1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html#ad9641faa56b03a3601fd437b803579a1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>, <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html">sender</a> &amp;&amp;<a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html">sender</a>, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:ad9641faa56b03a3601fd437b803579a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -316,8 +316,8 @@ template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
 
 </div>
 </div>
-<a id="a80a6d71cc5642cad1b1aca358a14f651" name="a80a6d71cc5642cad1b1aca358a14f651"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80a6d71cc5642cad1b1aca358a14f651">&#9670;&#160;</a></span>result_type</h2>
+<a id="aa5d4ff990a66c0bf3258939c4c4e2f62" name="aa5d4ff990a66c0bf3258939c4c4e2f62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5d4ff990a66c0bf3258939c4c4e2f62">&#9670;&#160;</a></span>result_type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +325,7 @@ template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
 template&lt;typename F &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html">Engine::Threading::DataMutex::sender</a>&lt; F &gt;::result_type =  <a class="el" href="namespace_engine.html#ad8e0463640a5deea5ae60f228984483f">GenericResult</a></td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1sender.html">Engine::Threading::DataMutex::sender</a>&lt; F &gt;::result_type =  <a class="el" href="classvoid.html">void</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -371,7 +371,7 @@ template&lt;typename T &gt; </div>
 <div class="memtemplate">
 template&lt;typename F &gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
+template&lt;typename Rec &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -391,7 +391,7 @@ template&lt;typename <a class="el" href="class_rec.html">Rec</a> &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_rec.html">Rec</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>&#160;</td>
         </tr>
         <tr>
@@ -464,7 +464,7 @@ template&lt;typename F &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.4.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
    </div>
   </td>
  </tr>
@@ -266,6 +266,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_operations.html">Engine::Serialize::Operations&lt; T, Configs &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__active__t.html">Engine::Serialize::set_active_t&lt; Configs &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__parent__t.html">Engine::Serialize::set_parent_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">Engine::Serialize::set_synced_t</a></td></tr>
@@ -290,46 +292,53 @@ Functions</h2></td></tr>
 <tr class="separator:ab918bacf04e938c7c7e7cc28bd11123f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77b72b48dceb8bd7a065e9920bba90a4"><td class="memItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a77b72b48dceb8bd7a065e9920bba90a4">Engine::Serialize::convertSyncablePtr</a> (FormattedSerializeStream &amp;in, UnitId id, SyncableUnitBase *&amp;out, const SerializeTable *&amp;type)</td></tr>
 <tr class="separator:a77b72b48dceb8bd7a065e9920bba90a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f5357d1fb4f72045c8db79d797e7082"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
-<tr class="memitem:a9f5357d1fb4f72045c8db79d797e7082"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a9f5357d1fb4f72045c8db79d797e7082">Engine::Serialize::read</a> (FormattedSerializeStream &amp;in, T &amp;t, const char *name, const CallerHierarchyBasePtr &amp;hierarchy={})</td></tr>
-<tr class="separator:a9f5357d1fb4f72045c8db79d797e7082"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12aab2b18d78978874c0e25c3b2480a5"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
-<tr class="memitem:a12aab2b18d78978874c0e25c3b2480a5"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a12aab2b18d78978874c0e25c3b2480a5">Engine::Serialize::readAction</a> (T &amp;t, FormattedMessageStream &amp;in, PendingRequest &amp;request, const CallerHierarchyBasePtr &amp;hierarchy={})</td></tr>
-<tr class="separator:a12aab2b18d78978874c0e25c3b2480a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f6d7ce89911e530d4803786b0e0397"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
+<tr class="memitem:a39f6d7ce89911e530d4803786b0e0397"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a39f6d7ce89911e530d4803786b0e0397">Engine::Serialize::read</a> (CallerHierarchyFormattedSerializeStream in, T &amp;t, const char *name)</td></tr>
+<tr class="separator:a39f6d7ce89911e530d4803786b0e0397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd469adfae2b36bba60bd66b4e8b7608"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
+<tr class="memitem:acd469adfae2b36bba60bd66b4e8b7608"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#acd469adfae2b36bba60bd66b4e8b7608">Engine::Serialize::readAction</a> (T &amp;t, CallerHierarchyFormattedSerializeStream in, PendingRequest &amp;request)</td></tr>
+<tr class="separator:acd469adfae2b36bba60bd66b4e8b7608"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af10b52d0bfafc57702118a98da6bb22b"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
 <tr class="memitem:af10b52d0bfafc57702118a98da6bb22b"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#af10b52d0bfafc57702118a98da6bb22b">Engine::Serialize::readRequest</a> (T &amp;t, FormattedMessageStream &amp;inout, MessageId id, const CallerHierarchyBasePtr &amp;hierarchy={})</td></tr>
 <tr class="separator:af10b52d0bfafc57702118a98da6bb22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac26b74f2f6b936f1b351be270cdf0063"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
-<tr class="memitem:ac26b74f2f6b936f1b351be270cdf0063"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ac26b74f2f6b936f1b351be270cdf0063">Engine::Serialize::readState</a> (FormattedSerializeStream &amp;in, T &amp;t, const char *name, const CallerHierarchyBasePtr &amp;hierarchy)</td></tr>
-<tr class="separator:ac26b74f2f6b936f1b351be270cdf0063"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af626469b4d5c5e011cfbb118921fe495"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename TargetCompound , typename F &gt; <br />
+<tr class="memitem:ab83ee59b0adc80e6aa5f63ca252dc345"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
+<tr class="memitem:ab83ee59b0adc80e6aa5f63ca252dc345"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ab83ee59b0adc80e6aa5f63ca252dc345">Engine::Serialize::readState</a> (CallerHierarchyFormattedSerializeStream in, T &amp;t, const char *name)</td></tr>
+<tr class="separator:ab83ee59b0adc80e6aa5f63ca252dc345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4966bf14f6129040025f88abd782e66b"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename TargetCompound , typename... Configs, typename F &gt; <br />
 requires (!Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</td></tr>
-<tr class="memitem:af626469b4d5c5e011cfbb118921fe495"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#af626469b4d5c5e011cfbb118921fe495">Engine::Serialize::scanCompound</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback)</td></tr>
-<tr class="separator:af626469b4d5c5e011cfbb118921fe495"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace171659d6dead76516178328c6ee82d"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename Primitive , typename F &gt; <br />
+<tr class="memitem:a4966bf14f6129040025f88abd782e66b"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a4966bf14f6129040025f88abd782e66b">Engine::Serialize::scanCompound</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:a4966bf14f6129040025f88abd782e66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename Primitive , typename F &gt; <br />
 requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
-<tr class="memitem:ace171659d6dead76516178328c6ee82d"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ace171659d6dead76516178328c6ee82d">Engine::Serialize::scanPrimitive</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback)</td></tr>
-<tr class="separator:ace171659d6dead76516178328c6ee82d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab982b8a59ddb0dfb6499d9cae7c516f"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
-<tr class="memitem:aab982b8a59ddb0dfb6499d9cae7c516f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aab982b8a59ddb0dfb6499d9cae7c516f">Engine::Serialize::setActive</a> (T &amp;t, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> active, <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> existenceChanged, CallerHierarchyBasePtr hierarchy={})</td></tr>
-<tr class="separator:aab982b8a59ddb0dfb6499d9cae7c516f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67c89653b4011b11bab1b8ba1310dcca"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
-<tr class="memitem:a67c89653b4011b11bab1b8ba1310dcca"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a67c89653b4011b11bab1b8ba1310dcca">Engine::Serialize::visitStream</a> (FormattedSerializeStream &amp;in, const char *name, const StreamVisitor &amp;visitor)</td></tr>
-<tr class="separator:a67c89653b4011b11bab1b8ba1310dcca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe1762ab902a6510c88ab3ba272021bd"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
-<tr class="memitem:abe1762ab902a6510c88ab3ba272021bd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#abe1762ab902a6510c88ab3ba272021bd">Engine::Serialize::write</a> (FormattedSerializeStream &amp;out, const T &amp;t, const char *name, const CallerHierarchyBasePtr &amp;hierarchy={})</td></tr>
-<tr class="separator:abe1762ab902a6510c88ab3ba272021bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aaa8e5b391ef9853a0a8ca6010f6f3b03">Engine::Serialize::scanPrimitive</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memTemplParams" colspan="2">template&lt;typename Primitive , typename F , typename T &gt; <br />
+requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
+<tr class="memitem:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a44e6b54daa2320fcab07b1dd7d3b7f8d">Engine::Serialize::scanPrimitive</a> (PrimitiveHolder&lt; T &gt; holder, FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
+<tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ade3b2b5dda91683e50026073cb95bdf4">Engine::Serialize::visitStream</a> (CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &amp;visitor, size_t depth=0)</td></tr>
+<tr class="separator:ade3b2b5dda91683e50026073cb95bdf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c06130ffa6fc09805457c7237813e81"><td class="memTemplParams" colspan="2">template&lt;typename... Configs, typename T &gt; </td></tr>
+<tr class="memitem:a4c06130ffa6fc09805457c7237813e81"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a4c06130ffa6fc09805457c7237813e81">Engine::Serialize::visitStream</a> (PrimitiveHolder&lt; T &gt; holder, FormattedSerializeStream &amp;in, const char *name, const StreamVisitor &amp;visitor, size_t depth)</td></tr>
+<tr class="separator:a4c06130ffa6fc09805457c7237813e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3338f58386cc6104c0547eebec8925fe"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
+<tr class="memitem:a3338f58386cc6104c0547eebec8925fe"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a3338f58386cc6104c0547eebec8925fe">Engine::Serialize::write</a> (CallerHierarchyFormattedSerializeStream out, const T &amp;t, const char *name)</td></tr>
+<tr class="separator:a3338f58386cc6104c0547eebec8925fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29ec1e815ec7fd8dd0bb501f9546c3da"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs, typename Payload &gt; </td></tr>
 <tr class="memitem:a29ec1e815ec7fd8dd0bb501f9546c3da"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a29ec1e815ec7fd8dd0bb501f9546c3da">Engine::Serialize::writeAction</a> (const T &amp;t, const std::vector&lt; WriteMessage &gt; &amp;outStreams, Payload &amp;&amp;payload, const CallerHierarchyBasePtr &amp;hierarchy={})</td></tr>
 <tr class="separator:a29ec1e815ec7fd8dd0bb501f9546c3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29f4100a144d18a785de7929da62fbf9"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs, typename Payload &gt; </td></tr>
-<tr class="memitem:a29f4100a144d18a785de7929da62fbf9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a29f4100a144d18a785de7929da62fbf9">Engine::Serialize::writeRequest</a> (const T &amp;t, FormattedMessageStream &amp;out, Payload &amp;&amp;payload, const CallerHierarchyBasePtr &amp;hierarchy={})</td></tr>
-<tr class="separator:a29f4100a144d18a785de7929da62fbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf568997f37fe13dd47518902a2c75fd"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs, typename Payload &gt; </td></tr>
+<tr class="memitem:abf568997f37fe13dd47518902a2c75fd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#abf568997f37fe13dd47518902a2c75fd">Engine::Serialize::writeRequest</a> (const T &amp;t, CallerHierarchyFormattedSerializeStream out, Payload &amp;&amp;payload)</td></tr>
+<tr class="separator:abf568997f37fe13dd47518902a2c75fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a944cae521e637a015b4768a9bca5cce1"><td class="memItemLeft" align="right" valign="top">constexpr apply_map_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a944cae521e637a015b4768a9bca5cce1">Engine::Serialize::apply_map</a></td></tr>
 <tr class="separator:a944cae521e637a015b4768a9bca5cce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a042e918a5c0f770bf931215b115da004"><td class="memTemplParams" colspan="2">template&lt;typename... Configs&gt; </td></tr>
+<tr class="memitem:a042e918a5c0f770bf931215b115da004"><td class="memTemplItemLeft" align="right" valign="top">constexpr set_active_t&lt; Configs... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a042e918a5c0f770bf931215b115da004">Engine::Serialize::set_active</a></td></tr>
+<tr class="separator:a042e918a5c0f770bf931215b115da004"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39f98529ca6ca851427e820c4edc71a1"><td class="memItemLeft" align="right" valign="top">constexpr set_parent_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a39f98529ca6ca851427e820c4edc71a1">Engine::Serialize::set_parent</a></td></tr>
 <tr class="separator:a39f98529ca6ca851427e820c4edc71a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07b09b08af3693b4a908b538b55c4b45"><td class="memItemLeft" align="right" valign="top">constexpr set_synced_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a07b09b08af3693b4a908b538b55c4b45">Engine::Serialize::set_synced</a></td></tr>
@@ -338,7 +347,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 3 2025 21:22:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
