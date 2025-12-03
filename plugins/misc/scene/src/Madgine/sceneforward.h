@@ -21,7 +21,7 @@ namespace Scene {
 
         struct AnimationState;        
 
-        using EntityPtr = Execution::BindingPtr<Entity&>;
+        struct EntityPtr;
     }
 
     struct LightManager;

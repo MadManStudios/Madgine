@@ -59,24 +59,13 @@ namespace Serialize {
 
     void SyncableUnitBase::writeState(CallerHierarchyFormattedSerializeStream out, const char *name) const
     {
-        if (out.mStream.isMaster(AccessMode::WRITE) && out.mStream.data()) {
-            out.mStream.beginExtendedWrite(name, 1);
-            Serialize::write(out, mMasterId, "syncId");
-        }
+        writeId(out, name);
         customUnitPtr().writeState(out, name, true);
     }
 
     StreamResult SyncableUnitBase::readState(CallerHierarchyFormattedSerializeStream in, const char *name)
     {
-        if (!in.mStream.isMaster(AccessMode::READ) && in.mStream.data()) {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
-            UnitId id;
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, id, "syncId"));
-
-            if (in.mStream.manager() && in.mStream.manager()->getSlaveStreamData() == in.mStream.data()) {
-                setSlaveId(id, in.mStream.manager());
-            }
-        }
+        STREAM_PROPAGATE_ERROR(readId(in, name));
         return customUnitPtr().readState(in, name, true);
     }
 
@@ -207,7 +196,7 @@ namespace Serialize {
         assert(answerId != 0);
         auto msg = target.beginMessageWrite();
         SyncManager::writeActionHeader(msg, this, MessageType::FUNCTION_ACTION, answerId);
-        mType->writeFunctionResult(target, index, result);        
+        mType->writeFunctionResult(target, index, result);
     }
 
     void SyncableUnitBase::writeFunctionRequest(uint16_t index, FunctionType type, const void *args, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver)
@@ -260,15 +249,15 @@ namespace Serialize {
             while (it1 != result.end() && it2 != targets.end()) {
                 FormattedMessageStream &out = *it1;
                 while (*it2 < out.id()) {
-                    throw 0; //LOG_WARNING("Specific Target not in MessageTargetList!");
+                    throw 0; // LOG_WARNING("Specific Target not in MessageTargetList!");
                     ++it2;
                 }
                 if (*it2 == out.id()) {
                     auto msg = out.beginMessageWrite();
                     SyncManager::writeActionHeader(msg, unit, MessageType::ACTION, out.id() == answerTarget ? answerId : 0);
                     result.push_back(std::move(msg));
-                    ++it2;                    
-                } 
+                    ++it2;
+                }
                 ++it1;
             }
         }
@@ -311,6 +300,28 @@ namespace Serialize {
         return msg;
     }
 
+    void SyncableUnitBase::writeId(CallerHierarchyFormattedSerializeStream out, const char *name) const
+    {
+        if (out.mStream.isMaster(AccessMode::WRITE) && out.mStream.data()) {
+            out.mStream.beginExtendedWrite(name, 1);
+            Serialize::write(out, mMasterId, "syncId");
+        }
+    }
+
+    StreamResult SyncableUnitBase::readId(CallerHierarchyFormattedSerializeStream in, const char *name)
+    {
+        if (!in.mStream.isMaster(AccessMode::READ) && in.mStream.data()) {
+            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
+            UnitId id;
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, id, "syncId"));
+
+            if (in.mStream.manager() && in.mStream.manager()->getSlaveStreamData() == in.mStream.data()) {
+                setSlaveId(id, in.mStream.manager());
+            }
+        }
+        return {};
+    }
+
     void SyncableUnitBase::writeAction(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId, const std::set<ParticipantId> &targets) const
     {
         uint16_t index = mType->getIndex(offset);
@@ -332,7 +343,7 @@ namespace Serialize {
             WriteMessage msg = Serialize::getMasterRequestResponseTarget(this, answerTarget, answerId);
             std::vector<WriteMessage> dummy;
             dummy.push_back(std::move(msg));
-            mType->writeAction(this, index, dummy, data);            
+            mType->writeAction(this, index, dummy, data);
         }
     }
 

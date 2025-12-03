@@ -18,6 +18,8 @@
 
 #include "entitycomponenthandle.h"
 
+#include "entityptr.h"
+
 namespace Engine {
 namespace Scene {
     namespace Entity {

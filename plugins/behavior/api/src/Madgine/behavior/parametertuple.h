@@ -48,11 +48,14 @@ namespace Behavior {
 
         virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
         {
-            return TupleUnpacker::accumulate([this, &in]<size_t... Is>(auto_pack<Is...>) { return std::make_tuple(Serialize::read(in, std::get<Is>(this->mTuple), Names::template get<Is>.c_str())...); }(index_pack_for<Ty...> {}), 
-                [](Serialize::StreamResult first, Serialize::StreamResult second) {
+            std::tuple<dependent_t<Serialize::StreamResult, Ty>...> results;
+            [&]<size_t... Is>(auto_pack<Is...>) {
+                ([&]() { std::get<Is>(results) = Serialize::read(in, std::get<Is>(this->mTuple), Names::template get<Is>.c_str()); }(), ...);
+            }(index_pack_for<Ty...> {});
+
+            return TupleUnpacker::accumulate(std::move(results), [](Serialize::StreamResult first, Serialize::StreamResult second) {
                     STREAM_PROPAGATE_ERROR(std::move(first));
-                    return std::move(second);
-                }, Serialize::StreamResult {});
+                    return std::move(second); }, Serialize::StreamResult {});
         }
 
         virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
