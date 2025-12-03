@@ -64,6 +64,8 @@ namespace Execution {
             {
                 if (get_stop_token(mRec)->registerCallback(this))
                     this->mState.start();
+                else
+                    mRec.set_done();
             }
 
             void stopRequested() override
