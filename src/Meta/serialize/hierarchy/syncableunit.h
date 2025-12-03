@@ -55,6 +55,8 @@ namespace Serialize {
 
         friend META_EXPORT WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id);
     protected:
+        void writeId(CallerHierarchyFormattedSerializeStream out, const char *name = nullptr) const;
+        StreamResult readId(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr);
         void setSlaveId(UnitId id, SerializeManager *mgr);
 
         const SerializeTable *serializeType() const;

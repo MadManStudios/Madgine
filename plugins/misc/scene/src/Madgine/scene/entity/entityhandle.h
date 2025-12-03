@@ -24,6 +24,9 @@ namespace Scene {
             const EntityPtr &ptr() const;
 
         private:
+            template <typename T, typename... Configs>
+            friend struct Serialize::Operations;
+
             EntityPtr mPtr;
         };
 
@@ -37,6 +40,7 @@ namespace Serialize {
 
         static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, Scene::Entity::EntityHandle &handle, const char *name)
         {
+            STREAM_PROPAGATE_ERROR(handle.readId(in, name));
             StreamResult result;
             handle.ptr().access([&](Scene::Entity::Entity &entity) {
                 result = SerializableDataPtr { &entity }.readState(in, name, true);
@@ -46,6 +50,7 @@ namespace Serialize {
 
         static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityHandle &handle, const char *name)
         {
+            handle.writeId(out, name);
             bool success = handle.ptr().access([&](Scene::Entity::Entity &entity) {
                 SerializableDataConstPtr { &entity }.writeState(out, name, true);
             });

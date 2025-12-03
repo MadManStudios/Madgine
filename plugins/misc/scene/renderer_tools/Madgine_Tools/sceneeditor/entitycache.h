@@ -2,6 +2,8 @@
 
 #include "Generic/execution/binding.h"
 
+#include "Madgine/scene/entity/entityptr.h"
+
 namespace Engine {
 namespace Tools {
 
