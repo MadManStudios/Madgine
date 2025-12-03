@@ -45,7 +45,7 @@ namespace Tools {
 
         void setCurrentContext(Debug::ContextInfo &context);
 
-        void onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type) override;
+        void onSuspend(const Debug::DebugLocation &location, Debug::ContinuationType type) override;
         bool wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line) override;
 
         std::string_view key() const override;

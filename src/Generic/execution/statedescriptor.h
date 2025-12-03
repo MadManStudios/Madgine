@@ -3,6 +3,7 @@
 namespace Engine {
 namespace Debug {
     struct Continuation;
+    struct DebugLocation;
 }
 namespace Execution {
 
@@ -38,6 +39,7 @@ namespace Execution {
         struct PopDisabled {
         };
         struct SubLocation {
+            Debug::DebugLocation &mChild;
         };
         struct Breakpoint {            
             IndexType<size_t> *mLineFeedback;

@@ -33,7 +33,7 @@ namespace Behavior {
                 mBehavior.reset();
                 mResult = std::move(values);
                 NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
-                mLocation.stepOut(Execution::get_debug_location(receiver));
+                Execution::get_debug_location(receiver)->stepOut(mLocation);
                 mReceiver.reset();
                 receiver.set_value();
             }
@@ -42,7 +42,7 @@ namespace Behavior {
             {
                 mBehavior.reset();
                 NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
-                mLocation.stepOut(Execution::get_debug_location(receiver));
+                Execution::get_debug_location(receiver)->stepOut(mLocation);
                 mReceiver.reset();
                 receiver.set_error(std::move(result));
             }
@@ -51,7 +51,7 @@ namespace Behavior {
             {
                 mBehavior.reset();
                 NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
-                mLocation.stepOut(Execution::get_debug_location(receiver));
+                Execution::get_debug_location(receiver)->stepOut(mLocation);
                 mReceiver.reset();
                 receiver.set_done();
             }
@@ -97,7 +97,7 @@ namespace Behavior {
 
                 mRec.mReceiver.emplace(std::move(receiver));
 
-                mRec.mLocation.stepInto(Execution::get_debug_location(*mRec.mReceiver));
+                Execution::get_debug_location(*mRec.mReceiver)->stepInto(mRec.mLocation);
 
                 mRec.mBehavior = mType.create(args, buildSubBehaviors(mType.subBehaviorCount(), handle)).connect(*this);
                 mRec.mBehavior->start();

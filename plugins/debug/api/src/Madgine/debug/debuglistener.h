@@ -9,7 +9,7 @@ namespace Debug {
         {
             return false;
         }
-        virtual void onSuspend(ContextInfo &context, ContinuationType type) { }
+        virtual void onSuspend(const DebugLocation &location, ContinuationType type) { }
     };
 
 

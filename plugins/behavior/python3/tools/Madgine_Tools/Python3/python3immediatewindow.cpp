@@ -167,9 +167,9 @@ namespace Tools {
         return false;
     }
 
-    void Python3ImmediateWindow::onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type)
+    void Python3ImmediateWindow::onSuspend(const Debug::DebugLocation &location, Debug::ContinuationType type)
     {
-        const Behavior::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Behavior::Python3::Python3DebugLocation *>(context.currentLocation());
+        const Behavior::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Behavior::Python3::Python3DebugLocation *>(&location);
 
         if (pyLocation) {
             const Filesystem::Path &path = pyLocation->file();
@@ -183,7 +183,7 @@ namespace Tools {
 
     bool Python3ImmediateWindow::interpret(std::string_view command)
     {
-        Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
+        Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
         Execution::detach(mEnv->execute(command)
             | Log::log_result()
             | Execution::finally([this]() {

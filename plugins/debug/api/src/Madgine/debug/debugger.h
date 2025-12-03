@@ -10,13 +10,16 @@
 namespace Engine {
 namespace Debug {
 
-    struct MADGINE_DEBUGGER_EXPORT ContextInfo : ParentLocation {
+    struct MADGINE_DEBUGGER_EXPORT ContextInfo : BaseLocation {
         ContextInfo()
-            : ParentLocation { nullptr, this }
+            : BaseLocation { this }
         {
         }
 
-        void suspend(Continuation callback, Continuation &outContinuation, Execution::StopToken st);        
+        void stepInto(DebugLocation &child) override;
+        void stepOut(DebugLocation &child) override;
+
+        void suspend(const DebugLocation &location, Continuation callback, Continuation &outContinuation, Execution::StopToken st);
         void continueExecution(ContinuationMode mode);
 
         ContinuationMode resume();
@@ -30,6 +33,8 @@ namespace Debug {
         mutable std::mutex mMutex;
 
         friend struct Debugger;
+
+        DebugLocation *mChild = nullptr;
 
     private:
         bool mPauseRequested = false;

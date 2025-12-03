@@ -104,9 +104,8 @@ namespace Tools {
                                [](const Execution::State::PopDisabled &) {
                                    ImGui::EndDisabled();
                                },
-                               [&, inlineLocation](const Execution::State::SubLocation &) {
-                                   if (location.mChild)
-                                       subLocation = visualizeDebugLocation(context, *location.mChild, inlineLocation);
+                               [&, inlineLocation](const Execution::State::SubLocation &subLoc) {
+                                   subLocation = visualizeDebugLocation(context, subLoc.mChild, inlineLocation);
                                    actualContent = true;
                                },
                                [&](const Execution::State::Breakpoint &bp) {
@@ -258,7 +257,7 @@ namespace Tools {
                 for (Debug::ContextInfo &info : mDebugger.infos()) {
                     std::ostringstream descriptor;
                     if (info.alive()) {
-                        descriptor << info.currentLocation()->toString();
+                        descriptor << info.mChild->toString();
                         if (info.isPaused()) {
                             descriptor << " (paused)";
                         }
@@ -360,9 +359,9 @@ namespace Tools {
         mSelectedContext = &context;
     }
 
-    void DebuggerView::onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type)
+    void DebuggerView::onSuspend(const Debug::DebugLocation &location, Debug::ContinuationType type)
     {
-        setCurrentContext(context);
+        setCurrentContext(*location.mContext);
     }
 
     bool DebuggerView::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line)

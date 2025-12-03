@@ -117,10 +117,7 @@ namespace Behavior {
 
             static auto buildSender(const NodeBase &node, value_argument_tuple &&values, std::vector<NodeResults> *results = nullptr)
             {
-                if constexpr (Config::constant)
-                    return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(node, std::move(values), argument_types {}, results));
-                else
-                    return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(node, std::move(values), argument_types {}, results)) | Execution::with_debug_location(nullptr);
+                return TupleUnpacker::invokeFromTuple(Algorithm, buildArgs<0>(node, std::move(values), argument_types {}, results));
             }
 
             template <typename Ty>
@@ -390,7 +387,7 @@ namespace Behavior {
                 {
                     const NodeBase &node = Execution::get_context(receiver).mNode;
                     construct(mState,
-                        DelayedConstruct<State> { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults) | Execution::with_debug_location(&receiver.mDebugLocation), Receiver { this, std::move(receiver) }); } });
+                        DelayedConstruct<State> { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults) | Execution::with_debug_location(receiver.mDebugLocation), Receiver { this, std::move(receiver) }); } });
                     mState->start();
                 }
 

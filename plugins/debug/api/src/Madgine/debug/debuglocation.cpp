@@ -4,34 +4,35 @@
 
 #include "debugger.h"
 
-
 namespace Engine {
 namespace Debug {
 
-    
-    DebugLocation *ParentLocation::currentLocation() const
+    void BaseLocation::stepInto(DebugLocation &child)
     {
-        if (!mChild)
-            return nullptr;
-        if (!mChild->mChild)
-            return mChild;
-        return mChild->currentLocation();
-    }
-	
-    void DebugLocation::stepInto(ParentLocation *parent)
-    {
-        mContext = parent->mContext;
-        std::unique_lock guard { mContext->mMutex };
-        assert(!parent->mChild);
-        parent->mChild = this;
+        assert(!child.mContext);
+        child.mContext = mContext;
     }
 
-    void DebugLocation::stepOut(ParentLocation *parent)
+    void BaseLocation::stepOut(DebugLocation &child)
     {
-        std::unique_lock guard { mContext->mMutex };
-        assert(parent->mChild == this);
+        assert(child.mContext == mContext);
+        child.mContext = nullptr;
+    }
+
+    void SimpleLocation::stepInto(DebugLocation &child)
+    {
+        std::unique_lock lock { mContext->mMutex };
+        BaseLocation::stepInto(child);
         assert(!mChild);
-        parent->mChild = nullptr;
+        mChild = &child;
+    }
+
+    void SimpleLocation::stepOut(DebugLocation &child)
+    {
+        std::unique_lock lock { mContext->mMutex };
+        assert(mChild == &child);
+        mChild = nullptr;
+        BaseLocation::stepOut(child);
     }
 
     bool DebugLocation::wantsPause(ContinuationType type, IndexType<size_t> line) const
@@ -41,9 +42,8 @@ namespace Debug {
 
     void DebugLocation::yieldImpl(Continuation cont, Continuation &outContinuation, Execution::StopToken st)
     {
-        mContext->suspend(std::move(cont), outContinuation, std::move(st));
+        mContext->suspend(*this, std::move(cont), outContinuation, std::move(st));
     }
-
 
 }
 }

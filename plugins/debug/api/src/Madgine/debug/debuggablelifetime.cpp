@@ -44,7 +44,7 @@ namespace Debug {
         }
         bool running() override
         {
-            for (DebuggableLifetimeBase& child : children()) {
+            for (DebuggableLifetimeBase &child : children()) {
                 if (child.running())
                     return true;
             }
@@ -110,10 +110,11 @@ namespace Debug {
         return mDebugContexts;
     }
 
-    ParentLocation* DebuggableLifetimeBase::createContext() {
+    BaseLocation &DebuggableLifetimeBase::createContext()
+    {
         ContextInfo &context = Debugger::getSingleton().createContext();
         mDebugContexts.emplace_back(context);
-        return &context;
+        return context;
     }
 
 }

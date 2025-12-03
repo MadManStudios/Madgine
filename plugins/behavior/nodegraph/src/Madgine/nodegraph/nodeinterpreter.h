@@ -19,7 +19,7 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        struct MADGINE_NODEGRAPH_EXPORT NodeDebugLocation : Debug::DebugLocation {
+        struct MADGINE_NODEGRAPH_EXPORT NodeDebugLocation : Debug::SimpleLocation {
             NodeDebugLocation(NodeInterpreterStateBase *interpreter)
                 : mInterpreter(interpreter)
             {
@@ -96,23 +96,23 @@ namespace Behavior {
 
             void start()
             {
-                this->mDebugLocation.stepInto(Execution::get_debug_location(this->mRec));
+                Execution::get_debug_location(this->mRec)->stepInto(this->mDebugLocation);
                 NodeInterpreterStateBase::start();
             }
 
             virtual void set_done() override
             {
-                this->mDebugLocation.stepOut(Execution::get_debug_location(this->mRec));
+                Execution::get_debug_location(this->mRec)->stepOut(this->mDebugLocation);
                 this->mRec.set_done();
             }
             virtual void set_error(BehaviorError r) override
             {
-                this->mDebugLocation.stepOut(Execution::get_debug_location(this->mRec));
+                Execution::get_debug_location(this->mRec)->stepOut(this->mDebugLocation);
                 this->mRec.set_error(std::move(r));
             }
             virtual void set_value(ArgumentList result) override
             {
-                this->mDebugLocation.stepOut(Execution::get_debug_location(this->mRec));
+                Execution::get_debug_location(this->mRec)->stepOut(this->mDebugLocation);
                 this->mRec.set_value(std::move(result));
             }
         };

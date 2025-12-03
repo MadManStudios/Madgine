@@ -325,7 +325,7 @@ namespace Behavior {
         {
             Python3Lock lock { Log::get_log(*this), Execution::get_stop_token(*this) };
 
-            Python3Debugger::Guard guard { Execution::get_debug_location(*this) };
+            Python3Debugger::Guard guard { *Execution::get_debug_location(*this) };
 
             std::visit(overloaded {
                            [this](CodeObject code) {

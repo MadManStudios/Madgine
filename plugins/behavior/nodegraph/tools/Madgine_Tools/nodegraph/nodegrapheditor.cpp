@@ -97,7 +97,7 @@ namespace Tools {
                 if (ImGui::BeginMenu("Dev")) {
 
                     if (ImGui::MenuItem("Debug", "", false)) {
-                        Debug::ContextInfo *context = &Debug::Debugger::getSingleton().createContext();
+                        Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
                         Execution::detach(
                             Behavior::Behavior { mGraph.interpret() }
                             | Execution::then([](ArgumentList) { LOG("SUCCESS"); })

@@ -5,22 +5,27 @@
 namespace Engine {
 namespace Debug {
 
-    struct MADGINE_DEBUGGER_EXPORT ParentLocation {
+    struct MADGINE_DEBUGGER_EXPORT BaseLocation {
 
-        DebugLocation *currentLocation() const;
+        BaseLocation(ContextInfo *context = nullptr)
+            : mContext(context)
+        {
+        }
 
-        DebugLocation *mChild = nullptr;
+        virtual void stepInto(DebugLocation &child) = 0;
+        virtual void stepOut(DebugLocation &child) = 0;
+
         ContextInfo *mContext = nullptr;
     };
 
-    struct MADGINE_DEBUGGER_EXPORT DebugLocation : ParentLocation {
+
+
+    struct MADGINE_DEBUGGER_EXPORT DebugLocation : BaseLocation {
         virtual ~DebugLocation() = default;
         virtual std::string toString() const = 0;
         virtual std::map<std::string_view, ValueType> localVariables() const = 0;
         virtual bool wantsPause(ContinuationType type, IndexType<size_t> line) const = 0;
 
-        void stepInto(ParentLocation *parent);
-        void stepOut(ParentLocation *parent);
         template <typename F, typename... Args>
         void yield(F &&callback, Continuation &outContinuation, ContinuationType type, Execution::StopToken st, Args &&...args)
         {
@@ -39,6 +44,14 @@ namespace Debug {
 
     private:
         void yieldImpl(Continuation cont, Continuation &outContinuation, Execution::StopToken st);
+    };
+
+    struct MADGINE_DEBUGGER_EXPORT SimpleLocation : DebugLocation {
+
+        void stepInto(DebugLocation &child) override;
+        void stepOut(DebugLocation &child) override;
+
+        DebugLocation *mChild = nullptr;
     };
 
 }

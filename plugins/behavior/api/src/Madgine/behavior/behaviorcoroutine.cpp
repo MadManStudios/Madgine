@@ -27,7 +27,7 @@ Behavior CoroutineBehaviorState::get_return_object()
                 throw 0;
             }
         }
-        mDebugLocation.stepInto(Execution::get_debug_location(*mReceiver));
+        Execution::get_debug_location(*mReceiver)->stepInto(mDebugLocation);
         std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).resume();
     }
 
@@ -43,7 +43,7 @@ Behavior CoroutineBehaviorState::get_return_object()
 
     void CoroutineBehaviorState::visitState(CallableView<void(const Execution::StateDescriptor &)> visitor)
     {
-        visitor(Execution::State::SubLocation {});
+        visitor(Execution::State::SubLocation {mDebugLocation});
     }
 
     CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept
@@ -73,7 +73,7 @@ Behavior CoroutineBehaviorState::get_return_object()
 
     void CoroutineBehaviorState::return_void()
     {
-        mDebugLocation.stepOut(Execution::get_debug_location(*mReceiver));
+        Execution::get_debug_location(*mReceiver)->stepOut(mDebugLocation);
         // mValue = void
     }
 
@@ -84,13 +84,13 @@ Behavior CoroutineBehaviorState::get_return_object()
 
     void CoroutineBehaviorState::set_error(BehaviorError result)
     {
-        mDebugLocation.stepOut(Execution::get_debug_location(*mReceiver));
+        Execution::get_debug_location(*mReceiver)->stepOut(mDebugLocation);
         mReceiver->set_error(result);
     }
 
     void CoroutineBehaviorState::set_done()
     {
-        mDebugLocation.stepOut(Execution::get_debug_location(*mReceiver));
+        Execution::get_debug_location(*mReceiver)->stepOut(mDebugLocation);
         mReceiver->set_done();
     }
 

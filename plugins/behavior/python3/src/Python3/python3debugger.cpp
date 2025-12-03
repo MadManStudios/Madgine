@@ -44,7 +44,7 @@ namespace Behavior {
         struct PyDebugLocationObject {
             PyObject_HEAD
                 Python3DebugLocation mLocation;
-            Debug::ParentLocation *mParent = nullptr;
+            Debug::BaseLocation *mParent = nullptr;
             bool mResume = false;
             bool mSkipOnce = false;
         };
@@ -110,11 +110,11 @@ namespace Behavior {
             // return PyCode_Addr2Line(PyFrame_GetCode(mFrame->frame_obj), PyFrame_GetLasti(mFrame->frame_obj));
         }
 
-        Python3Debugger::Guard::Guard(Debug::ParentLocation *parent)
+        Python3Debugger::Guard::Guard(Debug::BaseLocation &parent)
         {
             PyObject *obj = PyObject_CallObject((PyObject *)&PyDebugLocationType, NULL);
             Python3DebugLocation *location = new (&reinterpret_cast<PyDebugLocationObject *>(obj)->mLocation) Python3DebugLocation;
-            reinterpret_cast<PyDebugLocationObject *>(obj)->mParent = parent;
+            reinterpret_cast<PyDebugLocationObject *>(obj)->mParent = &parent;
             PyEval_SetTrace(&Python3Debugger::trace, obj);
         }
 
@@ -143,7 +143,7 @@ namespace Behavior {
                     frame->f_trace_opcodes = true;
                     if (!location->mResume && !location->mSkipOnce) {
                         if (!location->mLocation.mFrame)
-                            location->mLocation.stepInto(location->mParent);
+                            location->mParent->stepInto(location->mLocation);
                         location->mLocation.mFrame = frame;
                     }
                     break;
@@ -155,7 +155,7 @@ namespace Behavior {
                         location->mLocation.mFrame = PyFrame_GetBack(frame);
                         Py_XDECREF(location->mLocation.mFrame);
                         if (!location->mLocation.mFrame)
-                            location->mLocation.stepOut(location->mParent);
+                            location->mParent->stepOut(location->mLocation);
                     }
                     location->mResume = frame->f_back;
                     break;
@@ -165,7 +165,7 @@ namespace Behavior {
                         location->mLocation.mFrame = PyFrame_GetBack(frame);
                         Py_XDECREF(location->mLocation.mFrame);
                         if (!location->mLocation.mFrame)
-                            location->mLocation.stepOut(location->mParent);
+                            location->mParent->stepOut(location->mLocation);
                     }
                     sException = true;
                     location->mResume = frame->f_back;

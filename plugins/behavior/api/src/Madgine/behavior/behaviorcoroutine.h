@@ -13,7 +13,7 @@
 namespace Engine {
 namespace Behavior {
 
-    struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::DebugLocation {
+    struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::SimpleLocation {
 
         std::string toString() const override;
         std::map<std::string_view, ValueType> localVariables() const override;

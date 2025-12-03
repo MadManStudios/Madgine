@@ -28,7 +28,7 @@ namespace Debug {
     protected:
         DebuggableLifetimeBase(std::nullopt_t);
 
-        ParentLocation *createContext();
+        BaseLocation &createContext();
 
     private:
         DebuggableLifetimeBase *mParent = nullptr;

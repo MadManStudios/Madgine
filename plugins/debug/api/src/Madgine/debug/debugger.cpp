@@ -47,8 +47,24 @@ namespace Debug {
     {
         std::erase(mListeners, listener);
     }
+        
+    void ContextInfo::stepInto(DebugLocation &child)
+    {
+        std::unique_lock lock { mMutex };
+        BaseLocation::stepInto(child);
+        assert(!mChild);
+        mChild = &child;
+    }
 
-    void ContextInfo::suspend(Continuation callback, Continuation &outContinuation, Execution::StopToken st)
+    void ContextInfo::stepOut(DebugLocation &child)
+    {
+        std::unique_lock lock { mMutex };
+        assert(mChild == &child);
+        mChild = nullptr;
+        BaseLocation::stepOut(child);
+    }
+
+    void ContextInfo::suspend(const DebugLocation &location, Continuation callback, Continuation &outContinuation, Execution::StopToken st)
     {
         outContinuation = std::move(callback); //TODO proper syncing with stop_source; see debuggablesender::stop()
 
@@ -58,7 +74,7 @@ namespace Debug {
         }
 
         for (DebugListener *listener : Debugger::getSingleton().mListeners)
-            listener->onSuspend(*this, outContinuation.type());        
+            listener->onSuspend(location, outContinuation.type());        
     }
 
     void ContextInfo::continueExecution(ContinuationMode mode)

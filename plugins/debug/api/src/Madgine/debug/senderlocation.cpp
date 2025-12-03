@@ -4,12 +4,26 @@
 
 #include "Meta/keyvalue/valuetype.h"
 
+#include "debugger.h"
+
 namespace Engine {
 namespace Debug {
 
     SenderLocation::SenderLocation(Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> state)
         : mState(std::move(state))
     {
+    }
+
+    void SenderLocation::stepInto(DebugLocation &child)
+    {
+        std::unique_lock lock { mContext->mMutex };
+        BaseLocation::stepInto(child);
+    }
+
+    void SenderLocation::stepOut(DebugLocation &child)
+    {
+        std::unique_lock lock { mContext->mMutex };
+        BaseLocation::stepOut(child);
     }
 
     std::string SenderLocation::toString() const
@@ -19,10 +33,8 @@ namespace Debug {
         auto cb = [&](const Execution::StateDescriptor &desc) {
             if (!done) {
                 if (std::holds_alternative<Execution::State::SubLocation>(desc)) {
-                    if (mChild) {
-                        result = mChild->toString();
-                        done = true;
-                    }
+                    result = std::get<Execution::State::SubLocation>(desc).mChild.toString();
+                    done = true;
                 } else if (std::holds_alternative<Execution::State::BeginBlock>(desc)) {
                     result = std::get<Execution::State::BeginBlock>(desc).mName;
                     done = true;

@@ -26,7 +26,7 @@ namespace Tools {
 
     protected:
         bool wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line) override;
-        void onSuspend(Debug::ContextInfo &context, Debug::ContinuationType type) override;
+        void onSuspend(const Debug::DebugLocation &location, Debug::ContinuationType type) override;
 
         bool interpret(std::string_view command) override;
         Behavior::Behavior run(std::string_view command);

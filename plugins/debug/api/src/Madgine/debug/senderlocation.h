@@ -8,8 +8,11 @@
 namespace Engine {
 namespace Debug {
 
-    struct MADGINE_DEBUGGER_EXPORT SenderLocation : Debug::DebugLocation {
+    struct MADGINE_DEBUGGER_EXPORT SenderLocation : DebugLocation {
         SenderLocation(Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> state);
+
+        void stepInto(DebugLocation &child) override;
+        void stepOut(DebugLocation &child) override;
 
         std::string toString() const override;
         std::map<std::string_view, ValueType> localVariables() const override;

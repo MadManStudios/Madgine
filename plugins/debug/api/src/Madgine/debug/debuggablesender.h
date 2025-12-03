@@ -77,7 +77,7 @@ namespace Execution {
 
             using State = connect_result_t<Sender, Rec>;
 
-            state(Sender &&sender, InnerRec &&rec, Debug::ParentLocation *parent)
+            state(Sender &&sender, InnerRec &&rec, Debug::BaseLocation &parent)
                 : mRec(std::forward<InnerRec>(rec))
                 , mLocation([this](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(&mState, std::move(visitor)); })
                 , mState { connect(std::forward<Sender>(sender), Rec { this }) }
@@ -89,7 +89,7 @@ namespace Execution {
 
             void start()
             {
-                mLocation.stepInto(mParent);
+                mParent.stepInto(mLocation);
                 mState.start();
             }
 
@@ -101,20 +101,20 @@ namespace Execution {
             template <typename... V>
             void set_value(V &&...value)
             {
-                mLocation.stepOut(mParent);
+                mParent.stepOut(mLocation);
                 mRec.set_value(std::forward<V>(value)...);
             }
 
             void set_done()
             {
-                mLocation.stepOut(mParent);
+                mParent.stepOut(mLocation);
                 mRec.set_done();
             }
 
             template <typename... R>
             void set_error(R &&...result)
             {
-                mLocation.stepOut(mParent);
+                mParent.stepOut(mLocation);
                 mRec.set_error(std::forward<R>(result)...);
             }
 
@@ -126,7 +126,7 @@ namespace Execution {
             InnerRec mRec;
             Debug::SenderLocation mLocation;
             State mState;
-            Debug::ParentLocation *mParent;
+            Debug::BaseLocation &mParent;
         };
 
         template <Sender Sender>
@@ -138,27 +138,27 @@ namespace Execution {
                 return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), sender.mParent };
             }
 
-            Debug::ParentLocation *mParent;
+            Debug::BaseLocation &mParent;
         };
 
         template <Sender Sender>
-        friend auto tag_invoke(with_debug_location_t, Sender &&inner, Debug::ParentLocation *parent)
+        friend auto tag_invoke(with_debug_location_t, Sender &&inner, Debug::BaseLocation &parent)
         {
             return sender<Sender> { { {}, std::forward<Sender>(inner) }, parent };
         }
 
         template <Sender Sender>
-            requires tag_invocable<with_debug_location_t, Sender, Debug::ParentLocation *>
-        auto operator()(Sender &&sender, Debug::ParentLocation *parent) const
-            noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender, Debug::ParentLocation *>)
-                -> tag_invoke_result_t<with_debug_location_t, Sender, Debug::ParentLocation *>
+            requires tag_invocable<with_debug_location_t, Sender, Debug::BaseLocation &>
+        auto operator()(Sender &&sender, Debug::BaseLocation &parent) const
+            noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender, Debug::BaseLocation &>)
+                -> tag_invoke_result_t<with_debug_location_t, Sender, Debug::BaseLocation &>
         {
             return tag_invoke(*this, std::forward<Sender>(sender), parent);
         }
 
-        auto operator()(Debug::ParentLocation *parent) const
+        auto operator()(Debug::BaseLocation &parent) const
         {
-            return pipable_from_right(*this, std::move(parent));
+            return pipable_from_right(*this, parent);
         }
     };
 
