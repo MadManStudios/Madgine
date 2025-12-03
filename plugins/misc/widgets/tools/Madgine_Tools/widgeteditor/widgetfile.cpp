@@ -106,6 +106,12 @@ namespace Tools {
 
         if (ImGui::BeginPopupCompoundContextItem()) {
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Child Widget")) {
+                for (const auto &[name, index] : Widgets::WidgetRegistry::sComponentsByName()) {
+                    if (ImGui::MenuItem(name.data())) {
+                        const Widgets::WidgetRegistry::Annotations &annotation = Widgets::WidgetRegistry::get(index);
+                        w->createChildByAnnotation(annotation);
+                    }
+                }
                 for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
                     if (ImGui::MenuItem(name.c_str())) {
                         Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);
@@ -163,6 +169,12 @@ namespace Tools {
                 if (root) {
                     if (ImGui::BeginPopupCompoundContextWindow()) {
                         if (ImGui::BeginMenu(IMGUI_ICON_PLUS " New Widget")) {
+                            for (const auto& [name, index] : Widgets::WidgetRegistry::sComponentsByName()) {
+                                if (ImGui::MenuItem(name.data())) {
+                                    const Widgets::WidgetRegistry::Annotations &annotation = Widgets::WidgetRegistry::get(index);
+                                    root->createChildByAnnotation(annotation);
+                                }
+                            }
                             for (const auto &[name, res] : Widgets::WidgetLoader::getSingleton()) {
                                 if (ImGui::MenuItem(name.c_str())) {
                                     Widgets::WidgetLoader::Handle desc = Widgets::WidgetLoader::load(name);

@@ -81,6 +81,7 @@ namespace Widgets {
             return static_cast<WidgetType *>(mChildren.emplace_back(std::make_unique<WidgetType>(mManager, this)).get());
         }
         WidgetBase *createChildByDescriptor(const WidgetLoader::Handle &desc);
+        WidgetBase *createChildByAnnotation(const WidgetRegistry::Annotations &annotation);
         void clearChildren();
 
         virtual WidgetBase *getChildRecursive(std::string_view name);
