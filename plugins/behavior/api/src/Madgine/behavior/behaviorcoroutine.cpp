@@ -33,7 +33,6 @@ Behavior CoroutineBehaviorState::get_return_object()
 
     void CoroutineBehaviorState::stop()
     {
-        throw 0;
     }
 
     void CoroutineBehaviorState::destroy()

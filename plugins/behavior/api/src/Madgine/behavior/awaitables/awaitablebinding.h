@@ -23,29 +23,27 @@ namespace Behavior {
             , mBinding(std::forward<Binding>(binding))
         {
             bool success = Execution::access_binding(mBinding, [this](auto &&v) {
-                construct(mValue, std::forward<decltype(v)>(v));
+                mValue.emplace(std::forward<decltype(v)>(v));
             });
             assert(success);
         }
         BoundValue(BoundValue &&) = delete;
-        ~BoundValue()
-        {
-            destruct(mValue);
-        }
 
         std::conditional_t<std::is_pointer_v<T>, T, std::remove_reference_t<T> *> operator->()
         {
             if constexpr (std::is_pointer_v<T>) {
-                return mValue;
-            } else {
-                return &mValue;
+                return *mValue;
+            } else if constexpr (std::is_reference_v<T>) {
+                return &mValue->get();
+            }else{
+                return &*mValue;
             }
         }
 
         bool resumeImpl() override
         {
             return Execution::access_binding(mBinding, [this](auto &&v) {
-                construct(mValue, std::forward<decltype(v)>(v));
+                mValue.emplace(std::forward<decltype(v)>(v));
                 return mNext->resumeImpl();
             });
         }
@@ -53,11 +51,10 @@ namespace Behavior {
         void suspendImpl() override
         {
             mNext->suspendImpl();
-            destruct(mValue);
+            mValue.reset();
         }
 
-        ManualLifetime<T> mValue
-            = std::nullopt;
+        std::optional<forward_ref_t<T>> mValue;
         Binding mBinding;
     };
 

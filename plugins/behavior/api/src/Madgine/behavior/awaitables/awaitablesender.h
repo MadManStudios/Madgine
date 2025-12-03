@@ -58,7 +58,7 @@ namespace Behavior {
 
         static auto buildState(BehaviorAwaitableSender *self, Sender &&sender, CoroutineBehaviorState *state)
         {
-            return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(&state->mDebugLocation), BehaviorAwaitableReceiver<Sender> { {}, self, state });
+            return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(state->mDebugLocation) | Execution::stoppable, BehaviorAwaitableReceiver<Sender> { {}, self, state });
         }
 
         using S = std::invoke_result_t<decltype(&BehaviorAwaitableSender::buildState), BehaviorAwaitableSender *, Sender, std::nullptr_t>;
