@@ -189,7 +189,7 @@ namespace Tools {
 
                     if (ImGui::BeginDragDropTarget()) {
                         Scene::Entity::EntityPtr newChild;
-                        if (ImGui::AcceptDraggableValueType(newChild, nullptr, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
+                        if (ImGui::AcceptDraggableValueType(newChild, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
                             newChild.access([&](Scene::Entity::Entity &childEntity) {
                                 Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
                                 assert(childTransform);

@@ -15,8 +15,6 @@
 #include "Interfaces/filesystem/fsapi.h"
 #include "Interfaces/filesystem/path.h"
 
-#include "valuetypepayload.h"
-
 #include "Generic/enum.h"
 
 #include "Modules/threading/workgroupstorage.h"
@@ -24,6 +22,8 @@
 #include "Generic/coroutines/generator.h"
 
 #include "Modules/threading/threadlocal.h"
+
+#include "Meta/keyvalue/valuetype.h"
 
 // Engine::Threading::WorkgroupLocal<ImGuiContext *>
 THREADLOCAL(ImGuiContext *)
@@ -36,10 +36,16 @@ ImGuiContext *&getImGuiContext()
 
 namespace ImGui {
 
+struct ValueTypePayload {
+    std::string mName;
+    Engine::ValueType mValue;
+};
+
 struct GroupPanelData {
     ImRect mRect;
     ImU32 mColor;
 };
+
 static Engine::Threading::WorkgroupLocal<ImVector<GroupPanelData>> sGroupPanelLabelStack;
 
 static Engine::Threading::WorkgroupLocal<FilesystemPickerOptions> sFilesystemPickerOptions;
@@ -485,12 +491,6 @@ bool ValueTypeDrawer::draw(const Engine::ExtendedValueTypeDesc &t)
     return false;
 }
 
-void setPayloadStatus(std::string_view msg)
-{
-    if (ImGui::GetIO().KeyShift)
-        sPayload.mStatusMessage = msg;
-}
-
 void Text(std::string_view s)
 {
     TextUnformatted(s.data(), s.data() + s.size());
@@ -919,24 +919,28 @@ bool MethodPicker(const char *label, const std::vector<std::pair<std::string, En
     return result;
 }
 
-void DraggableValueTypeSource(std::string_view name, void (*source)(Engine::ValueType &, const void *), const void *data, ImGuiDragDropFlags flags)
+IMGUI_API void ResetDraggableValueType()
+{
+    sPayload.mValue = {};
+}
+
+void DraggableValueTypeSourceEx(std::string_view name, Engine::CallableView<void(Engine::ValueType &)> out, ImGuiDragDropFlags flags)
 {
     if (ImGui::BeginDragDropSource(flags)) {
         ValueTypePayload *payload = &sPayload;
-        payload->mName = name;
-        source(payload->mValue, data);
-        ImGui::SetDragDropPayload("ValueType", &payload, sizeof(payload), ImGuiCond_Once);
-        ImGui::Text(name);
-        ImGui::Text(payload->mValue.getTypeString());
-        if (!payload->mStatusMessage.empty()) {
-            ImGui::Text(payload->mStatusMessage);
-            payload->mStatusMessage.clear();
+        if (!ImGui::GetDragDropPayload()) {
+            payload->mName = name;
+            out(payload->mValue);
+            ImGui::SetDragDropPayload("ValueType", &payload, sizeof(payload), ImGuiCond_Once);
         }
+
+        ImGui::Text(payload->mName);
+        ImGui::Text(payload->mValue.getTypeString());
         ImGui::EndDragDropSource();
     }
 }
 
-const ValueTypePayload *GetValuetypePayloadData()
+const ValueTypePayload *GetValuetypePayload()
 {
     const ImGuiPayload *payload = ImGui::GetDragDropPayload();
 
@@ -947,39 +951,20 @@ const ValueTypePayload *GetValuetypePayloadData()
     return nullptr;
 }
 
-const Engine::ValueType *GetValuetypePayload()
+bool AcceptDraggableValueType(Engine::CallableView<void(const Engine::ValueType &)> output, Engine::CallableView<bool(const Engine::ValueType &)> validate)
 {
-    const ValueTypePayload *payload = GetValuetypePayloadData();
-    if (payload) {
-        return &payload->mValue;
-    }
-    return nullptr;
-}
-
-bool AcceptDraggableValueType(
-    Engine::ValueType &result, Engine::ExtendedValueTypeDesc type, const ValueTypePayload **payloadPointer, std::function<bool(const Engine::ValueType &)> validate)
-{
-    const Engine::ValueType *payload = GetValuetypePayload();
-    if (payload) {
-        if (validate(*payload) && type.canAccept(payload->type()) && AcceptDraggableValueType(payloadPointer)) {
-            result = *payload;
+    if (ImGui::AcceptDragDropPayload("ValueType")) {
+        const ValueTypePayload *payload = GetValuetypePayload();
+        assert(payload);
+        if (validate(payload->mValue)) {
+            output(payload->mValue);
             return true;
         }
     }
     return false;
 }
 
-bool AcceptDraggableValueType(const ValueTypePayload **payloadPointer)
-{
-    if (ImGui::AcceptDragDropPayload("ValueType")) {
-        if (payloadPointer)
-            *payloadPointer = GetValuetypePayloadData();
-        return true;
-    }
-    return false;
-}
-
-bool IsDraggableValueTypeBeingAccepted(const ValueTypePayload **payloadPointer)
+bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<bool(const Engine::ValueType &)> validate)
 {
     ImGuiContext &g = *GImGui;
     if (!g.DragDropActive)
@@ -999,10 +984,11 @@ bool IsDraggableValueTypeBeingAccepted(const ValueTypePayload **payloadPointer)
         return false;
 
     if (g.DragDropAcceptIdPrev == id) {
-        if (payloadPointer)
-            *payloadPointer = GetValuetypePayloadData();
-        return true;
+        const ValueTypePayload *payload = GetValuetypePayload();
+        assert(payload);
+        return validate(payload->mValue);
     }
+
     return false;
 }
 
@@ -1324,10 +1310,9 @@ void ImGui::EndGroupPanel()
 
         ImGui::PopClipRect();
     }
-        
+
     if (data.mColor > 0)
         ImGui::GetWindowDrawList()->AddRectFilled(frameRect.Min, frameRect.Max, data.mColor, 4.0f);
-
 
     ImGui::PopStyleVar(2);
 
@@ -1383,11 +1368,6 @@ bool BeginPopupCompoundContextWindow(const char *str_id, ImGuiPopupFlags popup_f
     if (IsMouseReleased(mouse_button) && IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup))
         OpenPopupEx(id, popup_flags);
     return BeginPopupEx(id, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings);
-}
-
-bool IsNewWindow(const char *name)
-{
-    return FindWindowByName(name) == nullptr;
 }
 
 void SetWindowDockingDir(ImGuiID dockSpaceId, ImGuiDir dir, float ratio, bool outer, ImGuiCond cond)

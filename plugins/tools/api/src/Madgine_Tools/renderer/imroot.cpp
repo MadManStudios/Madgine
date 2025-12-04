@@ -112,6 +112,7 @@ namespace Tools {
 
     Threading::Task<void> ImRoot::finalize()
     {
+        ImGui::ResetDraggableValueType();
 
         for (const std::unique_ptr<ToolBase> &tool : mCollector) {
             co_await tool->callFinalize();

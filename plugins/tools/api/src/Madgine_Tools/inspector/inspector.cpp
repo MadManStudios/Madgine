@@ -219,7 +219,7 @@ namespace Tools {
 
         ImGui::DraggableValueTypeSource(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {
-            if (ImGui::AcceptDraggableValueType(scope, nullptr, [&](const ScopePtr &ptr) {
+            if (ImGui::AcceptDraggableValueType(scope, [&](const ScopePtr &ptr) {
                     return ptr.mType->isDerivedFrom(scope.mType);
                 })) {
                 modified = true;
