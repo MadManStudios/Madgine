@@ -51,7 +51,7 @@ namespace Tools {
         Behavior::BehaviorHandle renderDetails();
         void renderHierarchy();
         Behavior::BehaviorHandle renderEntity(Scene::Entity::EntityPtr &entity);
-        void renderHierarchyEntity(const EntityCache::Node &entity);
+        void renderHierarchyEntity(const EntityCache::Node &entity, bool visible);
 
         void handleInputs();
 

@@ -148,67 +148,76 @@ namespace Tools {
                 }
 
                 for (const EntityCache::Node &entity : mEntityCache)
-                    renderHierarchyEntity(entity);
+                    renderHierarchyEntity(entity, true);
             }
             ImGui::End();
         }
     }
 
-    void SceneEditor::renderHierarchyEntity(const EntityCache::Node &node)
+    void SceneEditor::renderHierarchyEntity(const EntityCache::Node &node, bool visible)
     {
 
         bool success = node.mEntity.access([&](Scene::Entity::Entity &e) {
-            std::string &name = e.mName;
-
-            bool hovered = mSelectedEntity.access([&](Scene::Entity::Entity &selected) { return &selected == &e; });
-
-            ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
-            if (hovered)
-                flags |= ImGuiTreeNodeFlags_Selected;
-
-            if (node.mChildren.empty())
-                flags |= ImGuiTreeNodeFlags_Leaf;
-
-            bool open = ImGui::EditableTreeNode(&e, &name, flags);
-            bool aborted = false;
-
-            if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0)) {
-                select(node.mEntity);
-            }
-
-            if (ImGui::BeginPopupCompoundContextItem()) {
-                if (ImGui::MenuItem(IMGUI_ICON_X " Delete", "del")) {
-                    e.endLifetime();
-                }
-                ImGui::EndPopup();
-            }
-
-            ImGui::DraggableValueTypeSource(name, node.mEntity);
-
+            
             Scene::Entity::Transform *transform = e.getComponent<Engine::Scene::Entity::Transform>();
-            if (transform) {
-                bool selected = mSelectedEntity == node.mEntity;
 
-                if (ImGui::BeginDragDropTarget()) {
-                    Scene::Entity::EntityPtr newChild;
-                    if (ImGui::AcceptDraggableValueType(newChild, nullptr, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
-                        newChild.access([&](Scene::Entity::Entity &childEntity) {
-                            Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
-                            assert(childTransform);
-                            childTransform->setParent(node.mEntity);
-                            return true;
-                        });
-                    }
-                    ImGui::EndDragDropTarget();
+            if (visible) {
+
+                ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
+                if (mSelectedEntity == node.mEntity)
+                    flags |= ImGuiTreeNodeFlags_Selected;
+
+                if (node.mChildren.empty())
+                    flags |= ImGuiTreeNodeFlags_Leaf;
+
+                bool open = ImGui::EditableTreeNode(&e, &e.mName, flags);
+
+                if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0)) {
+                    select(node.mEntity);
                 }
 
+                if (ImGui::BeginPopupCompoundContextItem()) {
+                    if (ImGui::MenuItem(IMGUI_ICON_X " Delete", "del")) {
+                        e.endLifetime();
+                    }
+                    ImGui::EndPopup();
+                }
+
+                ImGui::DraggableValueTypeSource(e.mName, node.mEntity);
+
+                if (transform) {
+
+                    if (ImGui::BeginDragDropTarget()) {
+                        Scene::Entity::EntityPtr newChild;
+                        if (ImGui::AcceptDraggableValueType(newChild, nullptr, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
+                            newChild.access([&](Scene::Entity::Entity &childEntity) {
+                                Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
+                                assert(childTransform);
+                                childTransform->setParent(node.mEntity);
+                                return true;
+                            });
+                        }
+                        ImGui::EndDragDropTarget();
+                    }
+                }
+
+                for (const EntityCache::Node &node : node.mChildren)
+                    renderHierarchyEntity(node, open);
+                if (open)
+                    ImGui::TreePop();
+            } else {
+                for (const EntityCache::Node &node : node.mChildren)
+                    renderHierarchyEntity(node, false);
+            }
+
+            if (transform){
                 Matrix4 transformM = transform->worldMatrix();
                 AABB bb = { { -0.2f, -0.2f, -0.2f }, { 0.2f, 0.2f, 0.2f } };
                 if (e.hasComponent<Scene::Entity::Mesh>() && e.getComponent<Scene::Entity::Mesh>()->data())
                     bb = e.getComponent<Scene::Entity::Mesh>()->aabb();
 
                 Im3DBoundingObjectFlags flags = Im3DBoundingObjectFlags_ShowOnHover;
-                if (selected)
+                if (mSelectedEntity == node.mEntity)
                     flags |= Im3DBoundingObjectFlags_ShowOutline;
 
                 if (Im3D::BoundingBox(e.mName.c_str(), bb, transformM, flags)) {
@@ -217,14 +226,6 @@ namespace Tools {
                     }
                 }
             }
-
-            if (open) {
-                for (const EntityCache::Node &node : node.mChildren)
-                    renderHierarchyEntity(node);
-                ImGui::TreePop();
-            }
-
-            return true;
         });
 
         if (!success) {
