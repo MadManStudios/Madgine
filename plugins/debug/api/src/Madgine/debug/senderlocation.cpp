@@ -30,7 +30,7 @@ namespace Debug {
     {
         std::string result = "Sender";
         bool done = false;
-        auto cb = [&](const Execution::StateDescriptor &desc) {
+        visit([&](const Execution::StateDescriptor &desc) {
             if (!done) {
                 if (std::holds_alternative<Execution::State::SubLocation>(desc)) {
                     result = std::get<Execution::State::SubLocation>(desc).mChild.toString();
@@ -40,8 +40,7 @@ namespace Debug {
                     done = true;
                 }
             }
-        };
-        visit(CallableView<void(const Execution::StateDescriptor &)> { cb });
+        });
         return result;
     }
 

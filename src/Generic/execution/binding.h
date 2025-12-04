@@ -269,9 +269,8 @@ namespace Execution {
 
         template <typename F>
         bool access(F&& callback) const {
-            if (mPtr) {
-                auto wrapped = patch_void(callback, true);
-                return mPtr->access(CallableView<bool(const T &)> { wrapped });
+            if (mPtr) {                
+                return mPtr->access(patch_void(callback, true));
             } else {
                 return false;
             }
