@@ -2,47 +2,42 @@
 
 #include "scenemanager.h"
 
-#include "scenecomponentbase.h"
+#include "Meta/serialize/configs/controlled.h"
+#include "Meta/serialize/configs/guard.h"
+
+#include "Modules/threading/awaitables/awaitablesender.h"
+#include "Modules/threading/awaitables/awaitabletimepoint.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/app/application.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "entity/entity.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "entity/entitycomponentlistbase.h"
-
-#include "Meta/serialize/configs/controlled.h"
-
-#include "Meta/serialize/configs/guard.h"
-
-#include "Modules/threading/awaitables/awaitablesender.h"
-#include "Modules/threading/awaitables/awaitabletimepoint.h"
-
 #include "behavior/animation.h"
 #include "entity/components/skeleton.h"
+#include "entity/entity.h"
+#include "entity/entitycomponentlistbase.h"
+#include "scenecomponentbase.h"
 
 UNIQUECOMPONENT3(Engine::Scene::SceneManager, Engine::Serialize::NoParent<Engine::Scene::SceneManager>);
 
 METATABLE_BEGIN(Engine::Scene::SceneManager)
-// TODO
-// SYNCABLEUNIT_MEMBERS()
-MEMBER(mSceneComponents)
-MEMBER(mContainers)
-MEMBER(mAmbientLightColor)
-MEMBER(mAmbientLightDirection)
-MEMBER(mAmbientLightOrthographic)
+    // TODO
+    // SYNCABLEUNIT_MEMBERS()
+    MEMBER(mSceneComponents)
+    MEMBER(mContainers)
+    MEMBER(mAmbientLightColor)
+    MEMBER(mAmbientLightDirection)
+    MEMBER(mAmbientLightOrthographic)
 METATABLE_END(Engine::Scene::SceneManager)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::SceneManager)
-FIELD(mSceneComponents, Serialize::ControlledConfig<KeyCompare<std::unique_ptr<Engine::Scene::SceneComponentBase>>>)
+    FIELD(mSceneComponents, Serialize::ControlledConfig<KeyCompare<std::unique_ptr<Engine::Scene::SceneComponentBase>>>)
 SERIALIZETABLE_END(Engine::Scene::SceneManager)
 
 METATABLE_BEGIN(Engine::Scene::SceneManager::ContainerData)
-PROXY(mContainer)
+    PROXY(mContainer)
 METATABLE_END(Engine::Scene::SceneManager::ContainerData)
 
 namespace Engine {
@@ -118,7 +113,7 @@ namespace Scene {
         return mMutex;
     }
 
-    void SceneManager::updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::Skeleton*)> callback)
+    void SceneManager::updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::Skeleton *)> callback)
     {
         std::chrono::microseconds frameTimeSinceLastFrame = mFrameClock.tick(std::chrono::steady_clock::now());
         std::chrono::microseconds sceneTimeSinceLastFrame = mAnimationClock.tick(mClock.now());
@@ -135,7 +130,7 @@ namespace Scene {
 
                 Entity::AnimationState *animation = *it;
 
-                Entity::Skeleton* skeleton = animation->entity()->getComponent<Scene::Entity::Skeleton>();
+                Entity::Skeleton *skeleton = animation->entity()->getComponent<Scene::Entity::Skeleton>();
 
                 const Render::SkeletonDescriptor *data = skeleton->data();
                 if (data) {

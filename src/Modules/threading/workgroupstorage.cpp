@@ -1,16 +1,18 @@
 #include "../moduleslib.h"
 
-#    include "globalvariablemanager.h"
-#    include "workgroup.h"
-#    include "workgroupstorage.h"
+#include "workgroupstorage.h"
+
+#include "globalvariablemanager.h"
+#include "workgroup.h"
 
 namespace Engine {
 namespace Threading {
 
-std::shared_mutex &sMutex(){
-    static std::shared_mutex mutex;
-    return mutex;
-};
+    std::shared_mutex &sMutex()
+    {
+        static std::shared_mutex mutex;
+        return mutex;
+    };
 
     static std::vector<GlobalVariableManager> &sWorkgroupLocalBssConstructors()
     {

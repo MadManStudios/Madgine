@@ -2,16 +2,14 @@
 
 #include "interactivecamera.h"
 
-#include "imgui/imgui.h"
-
 #include "Madgine/render/camera.h"
 
+#include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
 
 namespace Engine {
 namespace Tools {
 
-	
     void InteractiveCamera(const ImGui::InteractiveViewState &state, Render::Camera &camera)
     {
         ImGuiIO &io = ImGui::GetIO();

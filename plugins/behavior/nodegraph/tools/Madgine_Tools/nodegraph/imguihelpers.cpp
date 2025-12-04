@@ -1,15 +1,13 @@
 #include "../nodegraphtoolslib.h"
 
+#include "Madgine/nodegraph/nodeexecution.h"
+
 #define IMGUI_DEFINE_MATH_OPERATORS
+#include "NodeEditor/imgui_node_editor.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
-
 #include "imguihelpers.h"
-
-#include "Madgine/nodegraph/nodeexecution.h"
-
-#include "NodeEditor/imgui_node_editor.h"
 
 namespace Engine {
 namespace Tools {
@@ -29,9 +27,9 @@ namespace Tools {
         auto rectMax = labelPos + size + padding;
 
         auto drawList = ImGui::GetWindowDrawList();
-        //drawList->ChannelsSetCurrent(3);
+        // drawList->ChannelsSetCurrent(3);
         drawList->AddRectFilled(rectMin, rectMax, color, size.y * 0.15f);
-        //drawList->ChannelsSetCurrent(4);
+        // drawList->ChannelsSetCurrent(4);
         drawList->AddText(labelPos, IM_COL32(255, 255, 255, 255), label.data(), label.data() + label.size());
     };
 
@@ -130,7 +128,7 @@ namespace Tools {
 
         ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
 
-        //ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
+        // ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
 
         ImVec2 pivot = rect.GetBR() - ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
@@ -158,13 +156,13 @@ namespace Tools {
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
         ImVec2 pos = FlowInPin(name, mask, connected);
-        //ed::PinPivotRect(pos, pos);
+        // ed::PinPivotRect(pos, pos);
 
         ImGui::EndHorizontal();
 
         ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
 
-        //ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
+        // ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
 
         ImVec2 pivot = rect.GetTL() + ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
@@ -191,13 +189,13 @@ namespace Tools {
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
         ImVec2 pos = DataOutPin(name, type, mask, connected);
-        //ed::PinPivotRect(pos, pos);
+        // ed::PinPivotRect(pos, pos);
 
         ImGui::EndHorizontal();
 
         ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
 
-        //ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
+        // ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
 
         ImVec2 pivot = rect.GetBR() - ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
@@ -226,13 +224,13 @@ namespace Tools {
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
         ImVec2 pos = DataInPin(name, type, mask, connected);
-        //ed::PinPivotRect(pos, pos);
+        // ed::PinPivotRect(pos, pos);
 
         ImGui::EndHorizontal();
 
         ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
 
-        //ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
+        // ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
 
         ImVec2 pivot = rect.GetTL() + ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
@@ -256,7 +254,7 @@ namespace Tools {
 
     ImRect BeginNodeEditor(ed::EditorContext *editor, const ImVec2 &size)
     {
-        //Probably set this in the implementation to the exact Canvas-View area
+        // Probably set this in the implementation to the exact Canvas-View area
         ImVec2 oldViewportPos = ImGui::GetCurrentContext()->MouseViewport->Pos;
         ImVec2 oldViewportSize = ImGui::GetCurrentContext()->MouseViewport->Size;
 
@@ -353,7 +351,7 @@ namespace Tools {
             }
         }
 
-         for (uint32_t group = 0; group < node->dataOutGroupCount(); ++group) {
+        for (uint32_t group = 0; group < node->dataOutGroupCount(); ++group) {
             for (uint32_t index = 0; index < node->dataOutCount(group); ++index) {
                 ExtendedValueTypeDesc type = node->dataOutType(index, group);
 
@@ -430,7 +428,7 @@ namespace Tools {
             const auto margin = (filled ? 2.0f : 2.0f) * origin_scale;
             const auto rounding = 0.1f * origin_scale;
             const auto tip_round = 0.7f; // percentage of triangle edge (for tip)
-            //const auto edge_round = 0.7f; // percentage of triangle edge (for corner)
+            // const auto edge_round = 0.7f; // percentage of triangle edge (for corner)
             const auto canvas = ImRect(
                 rect.Min.x + margin + offset_x,
                 rect.Min.y + margin + offset_y,
@@ -446,7 +444,7 @@ namespace Tools {
             const auto top = canvas_y + canvas_h * 0.5f * 0.2f;
             const auto bottom = canvas_y + canvas_h - canvas_h * 0.5f * 0.2f;
             const auto center_y = (top + bottom) * 0.5f;
-            //const auto angle = AX_PI * 0.5f * 0.5f * 0.5f;
+            // const auto angle = AX_PI * 0.5f * 0.5f * 0.5f;
 
             const auto tip_top = ImVec2(canvas_x + canvas_w * 0.5f, top);
             const auto tip_right = ImVec2(right, center_y);

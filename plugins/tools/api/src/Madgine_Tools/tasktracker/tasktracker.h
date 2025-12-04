@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Meta/math/rect2.h"
+
 #include "../toolbase.h"
 #include "../toolscollector.h"
-
-#include "Meta/math/rect2.h"
 
 namespace Engine {
 namespace Tools {

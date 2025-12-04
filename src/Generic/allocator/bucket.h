@@ -1,8 +1,9 @@
 #pragma once
 
+#include "../delayedconstruct.h"
 #include "../replace.h"
 #include "concepts.h"
-#include "../delayedconstruct.h"
+#include "Meta/math/common.h"
 
 namespace Engine {
 
@@ -34,7 +35,8 @@ struct BucketAllocatorImpl {
             BucketStrategy::select(block.mSize));
     }
 
-    void deallocateAll() {
+    void deallocateAll()
+    {
         TupleUnpacker::forEach(mBuckets, [](auto &bucket) { bucket.deallocateAll(); });
     }
 

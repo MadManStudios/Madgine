@@ -1,9 +1,9 @@
 #pragma once
 
-#include "util/directx12buffer.h"
-#include "directx12textureloader.h"
-
 #include "Madgine/meshloader/gpumeshdata.h"
+
+#include "directx12textureloader.h"
+#include "util/directx12buffer.h"
 
 namespace Engine {
 namespace Render {

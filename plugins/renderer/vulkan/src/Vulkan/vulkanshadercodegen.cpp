@@ -2,9 +2,9 @@
 
 #include "vulkanshadercodegen.h"
 
-#include "Madgine/codegen/codegen_shader.h"
-
 #include "Meta/math/vector4.h"
+
+#include "Madgine/codegen/codegen_shader.h"
 
 namespace Engine {
 namespace Render {
@@ -142,7 +142,7 @@ namespace Render {
         {
             generateType(stream, ctor.mType);
             stream << "(";
-            StringUtil::StreamJoiner join { stream, "," };            
+            StringUtil::StreamJoiner join { stream, "," };
             for (const CodeGen::Statement &statement : ctor.mArguments) {
                 generate(join.next(), statement);
             }
@@ -288,7 +288,6 @@ namespace Render {
                 stream << "\treturn mainImpl(IN);\n";
                 stream << "}\n\n";
             }
-
         }
 
     }

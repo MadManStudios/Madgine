@@ -2,21 +2,18 @@
 
 #include "im3drenderpass.h"
 
-#include "Madgine/render/rendertarget.h"
-#include "Madgine/render/rendercontext.h"
-
-#include "im3d/im3d.h"
-#include "im3d/im3d_internal.h"
-
-#include "Madgine/render/camera.h"
-
-#include "Madgine/render/texturedescriptor.h"
-
 #include "Madgine/meshloader/meshdata.h"
+#include "Madgine/render/camera.h"
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/render/texturedescriptor.h"
 
 #include "Madgine/render/shadinglanguage/sl_support_begin.h"
 #include "shaders/im3d.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
+
+#include "im3d/im3d.h"
+#include "im3d/im3d_internal.h"
 
 namespace Engine {
 namespace Render {
@@ -83,7 +80,7 @@ namespace Render {
                     mPipeline->setGroupSize(i + 1);
                     mPipeline->render(target);
                 }
-                
+
                 if (!p.second.mVertices2[i].empty()) {
                     {
                         auto vertices = mPipeline->mapVertices<Im3D::Vertex2[]>(target, p.second.mVertices2[i].size());

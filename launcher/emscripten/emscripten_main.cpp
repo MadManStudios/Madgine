@@ -1,11 +1,15 @@
 #include "Madgine/rootlib.h"
 
-#include "../launcher.h"
-#include "Interfaces/filesystem/fsapi.h"
-#include "Madgine/root/root.h"
-#include "Modules/threading/workgroup.h"
-#include "Madgine/cli/cli.h"
 #include <emscripten.h>
+
+#include "Interfaces/filesystem/fsapi.h"
+
+#include "Modules/threading/workgroup.h"
+
+#include "Madgine/cli/cli.h"
+#include "Madgine/root/root.h"
+
+#include "../launcher.h"
 
 std::unique_ptr<Engine::CLI::CLICore> sTempCLI;
 
@@ -25,6 +29,6 @@ DLL_EXPORT_TAG int main(int argc, char **argv)
     void (*callback)() = &mainImpl;
     Engine::Filesystem::setup(&callback);
 
-    emscripten_set_main_loop_arg([](void *) {}, nullptr, 0, false);
+    emscripten_set_main_loop_arg([](void *) { }, nullptr, 0, false);
     return 0;
 }

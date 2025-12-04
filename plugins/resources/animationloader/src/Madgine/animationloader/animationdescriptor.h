@@ -32,13 +32,13 @@ namespace Render {
 
     struct MADGINE_ANIMATIONLOADER_EXPORT AnimationList {
         AnimationList() = default;
-		AnimationList(const AnimationList &) = delete;
+        AnimationList(const AnimationList &) = delete;
         AnimationList(AnimationList &&) = default;
 
         std::vector<AnimationDescriptor> mAnimations;
         std::vector<std::string> mBoneNames;
 
-		std::map<SkeletonLoader::Handle, std::unique_ptr<int[]>> mBoneMappings;
+        std::map<SkeletonLoader::Handle, std::unique_ptr<int[]>> mBoneMappings;
         int *generateBoneMappings(const SkeletonLoader::SkeletonLoader::Handle &handle);
     };
 

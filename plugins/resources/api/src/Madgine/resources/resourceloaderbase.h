@@ -1,11 +1,13 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
-#include "Modules/threading/task.h"
-#include "Modules/threading/madgineobject.h"
 #include "Generic/genericresult.h"
 
 #include "Interfaces/filesystem/path.h"
+
+#include "Meta/keyvalue/virtualscope.h"
+
+#include "Modules/threading/madgineobject.h"
+#include "Modules/threading/task.h"
 
 namespace Engine {
 namespace Resources {
@@ -20,7 +22,7 @@ namespace Resources {
         std::string mIconName;
     };
 
-    struct MADGINE_RESOURCES_EXPORT ResourceLoaderBase : VirtualScopeBase<>, Threading::MadgineObject<ResourceLoaderBase>{
+    struct MADGINE_RESOURCES_EXPORT ResourceLoaderBase : VirtualScopeBase<>, Threading::MadgineObject<ResourceLoaderBase> {
 
         using Resource = ResourceBase;
 
@@ -34,17 +36,16 @@ namespace Resources {
         virtual Threading::Task<void> finalize();
 
         virtual Threading::Task<BakeResult> bakeResources(std::vector<Filesystem::Path> &resources, const Filesystem::Path &intermediateDir);
-        
+
         virtual Threading::TaskQueue *loadingTaskQueue() const;
-        
+
         const std::vector<std::string> &fileExtensions() const;
 
         virtual const Filesystem::Path &iconPath(ResourceBase *res) const { return mIconPath; }
 
         size_t extensionIndex(std::string_view ext) const;
 
-
-        //Implemented by ResourceManager template class
+        // Implemented by ResourceManager template class
         virtual std::pair<ResourceBase *, bool> addResource(const Filesystem::Path &path, std::string_view name = {}) = 0;
         virtual void updateResourceData(ResourceBase *res) = 0;
 
@@ -58,7 +59,7 @@ namespace Resources {
 
         virtual std::vector<std::pair<std::string_view, ScopePtr>> typedResources() = 0;
         virtual std::vector<const MetaTable *> resourceTypes() const = 0;
-        virtual std::vector<ResourceBase *> resources() = 0;         
+        virtual std::vector<ResourceBase *> resources() = 0;
 
     protected:
         std::vector<std::string> mExtensions;

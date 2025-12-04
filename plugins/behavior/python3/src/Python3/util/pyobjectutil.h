@@ -1,13 +1,13 @@
 #pragma once
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         template <typename T, typename V>
         void PyDealloc(V(T::*p), PyObject *self)
         {
-            ((T*)(self)->*p).~V();
+            ((T *)(self)->*p).~V();
         }
 
         template <typename T, auto p>
@@ -23,7 +23,7 @@ namespace Behavior{
         PyStr(PyObject *self)
         {
             std::ostringstream ss;
-            ss << (((T*)self)->*p);
+            ss << (((T *)self)->*p);
             return PyUnicode_FromString(ss.str().c_str());
         }
 

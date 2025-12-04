@@ -98,7 +98,6 @@ struct suspend_never {
     void await_resume() noexcept { }
 };
 
-
 namespace experimental {
 
     template <typename T = void>

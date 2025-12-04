@@ -6,6 +6,6 @@ namespace Engine {
 namespace Dl {
 
     INTERFACES_EXPORT Filesystem::FileQuery listSharedLibraries();
-    //INTERFACES_EXPORT std::set<std::string> listLoadedLibraries();
+    // INTERFACES_EXPORT std::set<std::string> listLoadedLibraries();
 }
 }

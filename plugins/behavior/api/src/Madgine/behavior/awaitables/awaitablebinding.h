@@ -6,9 +6,9 @@
 #include "Generic/makeowning.h"
 #include "Generic/withresult.h"
 
-#include "../behavior.h"
-
 #include "Madgine/debug/debuggablesender.h"
+
+#include "../behavior.h"
 
 namespace Engine {
 namespace Behavior {
@@ -35,7 +35,7 @@ namespace Behavior {
                 return *mValue;
             } else if constexpr (std::is_reference_v<T>) {
                 return &mValue->get();
-            }else{
+            } else {
                 return &*mValue;
             }
         }

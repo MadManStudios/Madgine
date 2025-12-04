@@ -1,13 +1,12 @@
 #pragma once
-#include "../toolbase.h"
-#include "../toolscollector.h"
-
+#include "Meta/keyvalue/argumentlist.h"
 #include "Meta/keyvalue/boundapifunction.h"
 #include "Meta/keyvalue/scopeptr.h"
 
-#include "Meta/keyvalue/argumentlist.h"
+#include "../toolbase.h"
+#include "../toolscollector.h"
 
-//#include "inspectorlayout.h"
+// #include "inspectorlayout.h"
 
 namespace Engine {
 namespace Tools {
@@ -55,7 +54,7 @@ namespace Tools {
 
         static std::map<std::string, bool (Inspector::*)(ScopePtr, std::set<std::string> &, tinyxml2::XMLElement *)> sElements;
 
-        //FunctionTool
+        // FunctionTool
         std::string mCurrentPopupFunctionName;
         BoundApiFunction mCurrentPopupFunction;
         ArgumentList mCurrentPopupArguments;

@@ -8,12 +8,12 @@ template <typename C, typename Observer>
 struct ObservableContainer : C, Observer {
 
     using _traits = container_traits<C>;
-    
+
     typedef typename _traits::iterator iterator;
     typedef typename _traits::const_iterator const_iterator;
 
     template <typename... _Ty>
-    typename _traits::emplace_return emplace(const iterator &where, _Ty &&... args)
+    typename _traits::emplace_return emplace(const iterator &where, _Ty &&...args)
     {
         Observer::operator()(where, BEFORE | EMPLACE);
         typename _traits::emplace_return it = _traits::emplace(*this, where, std::forward<_Ty>(args)...);

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "field.h"
 #include "freebits.h"
 #include "types.h"
-#include "field.h"
 
 namespace Engine {
 
@@ -18,8 +18,7 @@ struct BitPair {
     template <typename... FirstArgs, typename... SecondArgs>
     BitPair(std::piecewise_construct_t, std::tuple<FirstArgs...> firstArgs, std::tuple<SecondArgs...> secondArgs)
     {
-        auto helper = []<size_t... Is, typename T>(T * target, auto &tuple, std::index_sequence<Is...>)
-        {
+        auto helper = []<size_t... Is, typename T>(T *target, auto &tuple, std::index_sequence<Is...>) {
             new (target) T(std::get<Is>(std::move(tuple))...);
         };
         helper(&mFirst, firstArgs, std::index_sequence_for<FirstArgs...>());

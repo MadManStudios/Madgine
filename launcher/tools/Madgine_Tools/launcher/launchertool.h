@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Modules/ini/inifile.h"
+
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
-
-#include "Modules/ini/inifile.h"
 
 namespace Engine {
 namespace Tools {

@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Serialize {
 
-    static std::array<std::ctype<char>::mask, 256> sTableQuote = generateMask(~ctype::space, { { '"', ctype::space, ~0 } });    
+    static std::array<std::ctype<char>::mask, 256> sTableQuote = generateMask(~ctype::space, { { '"', ctype::space, ~0 } });
     static std::locale sLocaleQuote { std::locale {}, new ctype { sTableQuote.data() } };
 
     JSONFormatter::JSONFormatter()
@@ -387,7 +387,7 @@ namespace Serialize {
 
     StreamResult JSONFormatter::beginMessageRead()
     {
-        assert(!mAfterItemRead && mParseLevel.empty());            
+        assert(!mAfterItemRead && mParseLevel.empty());
         return {};
     }
 

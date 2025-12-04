@@ -2,40 +2,34 @@
 
 #include "scenerenderpass.h"
 
-#include "Madgine/scene/scenemanager.h"
+#include "Meta/math/transformation.h"
 
+#include "Madgine/render/camera.h"
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/scene/entity/components/material.h"
 #include "Madgine/scene/entity/components/mesh.h"
+#include "Madgine/scene/entity/components/pointlight.h"
 #include "Madgine/scene/entity/components/skeleton.h"
 #include "Madgine/scene/entity/components/transform.h"
 #include "Madgine/scene/entity/entity.h"
+#include "Madgine/scene/scenemanager.h"
 
-#include "Madgine/render/camera.h"
-
-#include "Madgine/render/rendercontext.h"
-
-#include "Madgine/render/rendertarget.h"
-
-#include "Madgine/scene/entity/components/pointlight.h"
-
-#include "Madgine/scene/entity/components/material.h"
-
-#include "Meta/math/transformation.h"
-
-#include "scenemainwindowcomponent.h"
+#include "Meta/keyvalue/metatable_impl.h"
 
 #include "Madgine/render/shadinglanguage/sl_support_begin.h"
 #include "shaders/scene.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "scenemainwindowcomponent.h"
 
 METATABLE_BEGIN(Engine::Render::SceneRenderPass)
-MEMBER(mAmbientFactor)
-MEMBER(mDiffuseFactor)
-MEMBER(mSpecularFactor)
-MEMBER(mLightConstantFactor)
-MEMBER(mLightLinearFactor)
-MEMBER(mLightSquaredFactor)
+    MEMBER(mAmbientFactor)
+    MEMBER(mDiffuseFactor)
+    MEMBER(mSpecularFactor)
+    MEMBER(mLightConstantFactor)
+    MEMBER(mLightLinearFactor)
+    MEMBER(mLightSquaredFactor)
 METATABLE_END(Engine::Render::SceneRenderPass)
 
 namespace Engine {
@@ -178,7 +172,7 @@ namespace Render {
 
             mPipeline->bindMesh(target, meshData);
             mPipeline->renderInstanced(target, instance.second.size());
-            //mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);
+            // mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);
         }
     }
 

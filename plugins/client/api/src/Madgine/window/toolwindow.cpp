@@ -2,13 +2,12 @@
 
 #include "toolwindow.h"
 
-#include "mainwindow.h"
-
 #include "Interfaces/window/windowapi.h"
 
 #include "Madgine/render/rendercontext.h"
-
 #include "Madgine/render/rendertarget.h"
+
+#include "mainwindow.h"
 
 namespace Engine {
 namespace Window {
@@ -54,13 +53,11 @@ namespace Window {
                                   mRenderWindow->resize({ e.mSize.x, e.mSize.y });
                                   return true;
                               },
-                              [this](const auto& event) {
-                                  return mParent.onWindowEvent(event);                                  
-                              }
-                          },
+                              [this](const auto &event) {
+                                  return mParent.onWindowEvent(event);
+                              } },
             event);
     }
-
 
 }
 }

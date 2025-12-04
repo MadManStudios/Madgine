@@ -2,13 +2,11 @@
 
 #include "widgetsenders.h"
 
-#include "../widgetmanager.h"
-
+#include "Madgine/behavior/awaitables/awaitablebinding.h"
 #include "Madgine/behavior/awaitables/awaitablesender.h"
-
 #include "Madgine/behavior/nativebehaviorcollector.h"
 
-#include "Madgine/behavior/awaitables/awaitablebinding.h"
+#include "../widgetmanager.h"
 
 NATIVE_BEHAVIOR(Yield_Frame, Engine::Widgets::yield_frame)
 NATIVE_BEHAVIOR(Wait_Frame, Engine::Widgets::wait_frame, Engine::Behavior::InputParameter<"Duration", std::chrono::steady_clock::duration>)

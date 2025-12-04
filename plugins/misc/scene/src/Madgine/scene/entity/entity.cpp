@@ -2,23 +2,19 @@
 
 #include "entity.h"
 
-#include "../scenemanager.h"
-
-#include "entitycomponentcollector.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "entitycomponentlistbase.h"
-
-#include "entitycomponentbase.h"
-
 #include "Generic/execution/algorithm.h"
+
+#include "Meta/serialize/helper/typedobjectserialize.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/serialize/helper/typedobjectserialize.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "../scenemanager.h"
+#include "entitycomponentbase.h"
+#include "entitycomponentcollector.h"
+#include "entitycomponentlistbase.h"
 
 namespace Engine {
 
@@ -57,14 +53,14 @@ void componentInit(std::array<Accessor, 32> &accessors)
 }
 
 METATABLE_BEGIN(Engine::Scene::Entity::Entity)
-NAMED_MEMBER(Name, mName)
-READONLY_PROPERTY(Behaviors, behaviors)
-READONLY_PROPERTY(Lifetime, lifetimeBase)
+    NAMED_MEMBER(Name, mName)
+    READONLY_PROPERTY(Behaviors, behaviors)
+    READONLY_PROPERTY(Lifetime, lifetimeBase)
 METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::Entity)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)
-FIELD(mComponents, Serialize::ParentCreator<&Engine::Scene::Entity::Entity::readComponent, &Engine::Scene::Entity::Entity::writeComponent, &Engine::Scene::Entity::Entity::clearComponents>)
-FIELD(mBehaviors)
+    FIELD(mComponents, Serialize::ParentCreator<&Engine::Scene::Entity::Entity::readComponent, &Engine::Scene::Entity::Entity::writeComponent, &Engine::Scene::Entity::Entity::clearComponents>)
+    FIELD(mBehaviors)
 SERIALIZETABLE_END(Engine::Scene::Entity::Entity)
 
 namespace Engine {

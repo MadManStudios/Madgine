@@ -1,7 +1,8 @@
 #pragma once
 
-#include "vertex.h"
 #include "Generic/offsetptr.h"
+
+#include "vertex.h"
 
 namespace Engine {
 namespace Render {
@@ -47,7 +48,7 @@ namespace Render {
             OffsetPtr ptr { 0 };
 
             constexpr void (*fs[])(uint16_t &, OffsetPtr &) = { [](uint16_t &format, OffsetPtr &ptr) {
-                //Can't be select<Is> because MSVC
+                // Can't be select<Is> because MSVC
                 using T = typename VertexElements::helpers::template recurse<Is>::type;
                 if constexpr (VertexType::template holds<T>) {
                     format += (1 << Is);

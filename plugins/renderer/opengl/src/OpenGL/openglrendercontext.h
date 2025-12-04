@@ -1,16 +1,18 @@
 #pragma once
 
-#include "Madgine/render/rendercontext.h"
-#include "Madgine/render/rendercontextcollector.h"
-#include "Madgine/render/vertexformat.h"
-#include "Modules/uniquecomponent/uniquecomponent.h"
-#include "util/openglheapallocator.h"
-#include "util/openglvertexarray.h"
-
 #include "Generic/allocator/bucket.h"
 #include "Generic/allocator/bump.h"
 #include "Generic/allocator/fixed.h"
 #include "Generic/allocator/heap.h"
+
+#include "Modules/uniquecomponent/uniquecomponent.h"
+
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendercontextcollector.h"
+#include "Madgine/render/vertexformat.h"
+
+#include "util/openglheapallocator.h"
+#include "util/openglvertexarray.h"
 
 namespace Engine {
 namespace Render {

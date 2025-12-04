@@ -26,7 +26,7 @@ namespace Execution {
             if (mStub.extract(this))
                 this->set_done();
         }
-                
+
         friend auto tag_invoke(visit_state_t, Connection *con, auto &&visitor)
         {
             if (con) {

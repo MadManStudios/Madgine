@@ -4,7 +4,8 @@
 namespace std {
 
 template <class T>
-constexpr int bit_width(T x) noexcept {
+constexpr int bit_width(T x) noexcept
+{
     return std::numeric_limits<T>::digits - std::countl_zero(x);
 }
 

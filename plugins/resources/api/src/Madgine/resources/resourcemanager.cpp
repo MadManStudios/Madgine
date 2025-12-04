@@ -2,31 +2,26 @@
 
 #include "resourcemanager.h"
 
-#include "resourcebase.h"
+#include "Interfaces/filesystem/fsapi.h"
 
 #include "Modules/plugins/plugin.h"
 #include "Modules/plugins/pluginmanager.h"
+#include "Modules/plugins/pluginsection.h"
+#include "Modules/threading/awaitables/awaitabletimepoint.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Madgine/cli/parameter.h"
+#include "Madgine/root/root.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
+#include "resourcebase.h"
 #include "resourceloaderbase.h"
-
-#include "Modules/plugins/pluginsection.h"
-
-#include "Madgine/root/root.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Modules/threading/awaitables/awaitabletimepoint.h"
-
-#include "Madgine/cli/parameter.h"
 
 UNIQUECOMPONENT(Engine::Resources::ResourceManager)
 
 METATABLE_BEGIN(Engine::Resources::ResourceManager)
-MEMBER(mCollector)
+    MEMBER(mCollector)
 METATABLE_END(Engine::Resources::ResourceManager)
 
 namespace Engine {
@@ -151,8 +146,8 @@ namespace Resources {
                 bool isLocal = p.fullPath().parentPath() == binPath;
                 if (isLocal)
                     registerResourceLocation(Filesystem::Path { info->mProjectRoot } / "data", 75);
-                //else
-                //registerResourceLocation(binPath.parent_path() / "data" / plugin->());
+                // else
+                // registerResourceLocation(binPath.parent_path() / "data" / plugin->());
             }
         }
 #endif

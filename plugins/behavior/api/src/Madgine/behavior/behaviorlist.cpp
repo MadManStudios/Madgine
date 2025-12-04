@@ -2,9 +2,10 @@
 
 #include "behaviorlist.h"
 
+#include "Meta/serialize/helper/typedobjectserialize.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-#include "Meta/serialize/helper/typedobjectserialize.h"
 
 Engine::Serialize::StreamResult readBehavior(Engine::Serialize::CallerHierarchyFormattedSerializeStream in, Engine::Behavior::BehaviorHandle &handle)
 {
@@ -25,11 +26,11 @@ const char *writeBehavior(Engine::Serialize::CallerHierarchyFormattedSerializeSt
 }
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::BehaviorList)
-FIELD(mEntries, Engine::Serialize::CustomCreator<readBehavior, writeBehavior>)
+    FIELD(mEntries, Engine::Serialize::CustomCreator<readBehavior, writeBehavior>)
 SERIALIZETABLE_END(Engine::Behavior::BehaviorList)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::BehaviorList::Entry)
-FIELD(mParameters)
+    FIELD(mParameters)
 SERIALIZETABLE_END(Engine::Behavior::BehaviorList::Entry)
 
 METATABLE_BEGIN(Engine::Behavior::BehaviorList)

@@ -12,9 +12,9 @@ namespace Render {
         ~BloomPass();
 
         virtual void setup(RenderTarget *target) override;
-        virtual void render(RenderTarget *target, size_t iteration) override;        
+        virtual void render(RenderTarget *target, size_t iteration) override;
         virtual void onTargetResize(const Vector2i &size) override;
-        
+
         virtual int priority() const override;
         virtual bool swapFlipFlopTextures(size_t) const override;
 

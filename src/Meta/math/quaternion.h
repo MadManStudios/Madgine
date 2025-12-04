@@ -260,7 +260,6 @@ struct Quaternion {
         }
         return in;
     }
-
 };
 
 META_EXPORT Quaternion slerp(Quaternion q1, Quaternion q2, float ratio);

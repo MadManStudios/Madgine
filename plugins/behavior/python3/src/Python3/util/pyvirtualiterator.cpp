@@ -2,14 +2,13 @@
 
 #include "pyvirtualiterator.h"
 
-#include "pyobjectutil.h"
-
+#include "Meta/keyvalue/keyvaluepair.h"
 #include "Meta/keyvalue/valuetype.h"
 
-#include "Meta/keyvalue/keyvaluepair.h"
+#include "pyobjectutil.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         static PyObject *
@@ -31,7 +30,7 @@ namespace Behavior{
 
         PyTypeObject PyVirtualSequenceIteratorType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                           .tp_name
+                .tp_name
             = "Engine.VirtualSequenceIterator",
             .tp_basicsize = sizeof(PyVirtualSequenceIterator),
             .tp_itemsize = 0,
@@ -62,7 +61,7 @@ namespace Behavior{
 
         PyTypeObject PyVirtualAssociativeIteratorType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                           .tp_name
+                .tp_name
             = "Engine.VirtualAssociativeIterator",
             .tp_basicsize = sizeof(PyVirtualAssociativeIterator),
             .tp_itemsize = 0,

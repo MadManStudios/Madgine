@@ -1,19 +1,18 @@
 #include "opengllib.h"
 
-#include "openglrenderwindow.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
 #include "openglrendercontext.h"
-#include "openglrendertexture.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Interfaces/window/windowapi.h"
 
-#include "openglshaderloader.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
 
 #include "openglmeshloader.h"
 #include "openglpipelineloader.h"
+#include "openglrendertexture.h"
+#include "openglrenderwindow.h"
+#include "openglshaderloader.h"
 #include "opengltextureloader.h"
 
 #if WINDOWS

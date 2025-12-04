@@ -3,6 +3,7 @@
 #include "Madgine/render/resourceblock.h"
 #include "Madgine/render/texturedescriptor.h"
 #include "Madgine/render/vertex.h"
+
 #include "renderdata.h"
 
 namespace Engine {
@@ -16,7 +17,7 @@ namespace Render {
 
         virtual void clearDepthBuffer() = 0;
 
-        virtual const Texture *texture(size_t index = 0) const;        
+        virtual const Texture *texture(size_t index = 0) const;
         virtual size_t textureCount() const;
         virtual const Texture *depthTexture() const;
 

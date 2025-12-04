@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Madgine/render/future.h"
 #include "Modules/threading/taskfuture.h"
+
+#include "Madgine/render/future.h"
+
 #include "pipelineloader.h"
 #include "renderdebuggable.h"
 
@@ -18,7 +20,7 @@ namespace Render {
 
         const std::vector<RenderData *> &dependencies() const;
 
-        virtual void onTargetResize(const Vector2i &size) {};
+        virtual void onTargetResize(const Vector2i &size) { };
 
         virtual int priority() const = 0;
         virtual size_t iterations() const;

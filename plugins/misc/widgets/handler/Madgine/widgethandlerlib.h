@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Madgine/widgetslib.h"
 #include "Madgine/handlerlib.h"
+#include "Madgine/widgetslib.h"
 
 #if defined(WidgetHandler_EXPORTS)
 #    define MADGINE_WIDGETHANDLER_EXPORT DLL_EXPORT

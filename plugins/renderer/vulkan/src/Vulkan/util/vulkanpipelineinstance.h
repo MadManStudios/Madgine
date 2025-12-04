@@ -3,7 +3,6 @@
 #include "Madgine/render/pipelineinstance.h"
 
 #include "../vulkanpipelineloader.h"
-
 #include "vulkanbuffer.h"
 
 namespace Engine {
@@ -39,7 +38,7 @@ namespace Render {
 
         bool mDepthChecking;
 
-        VkDescriptorSet mUboDescriptorSet;        
+        VkDescriptorSet mUboDescriptorSet;
 
         mutable bool mHasIndices = false;
         mutable uint32_t mElementCount;

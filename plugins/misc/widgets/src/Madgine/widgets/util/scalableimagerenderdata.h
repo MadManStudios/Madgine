@@ -1,12 +1,11 @@
 #pragma once
 
-#include "renderdata.h"
+#include "Meta/math/atlas2.h"
+#include "Meta/math/color4.h"
 
 #include "Madgine/imageloader/imageloader.h"
 
-#include "Meta/math/atlas2.h"
-
-#include "Meta/math/color4.h"
+#include "renderdata.h"
 
 namespace Engine {
 namespace Widgets {

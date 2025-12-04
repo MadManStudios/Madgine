@@ -2,30 +2,28 @@
 
 #include "rendercontexttool.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Madgine_Tools/inspector/inspector.h"
-
-#include "im3d/im3d.h"
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Madgine/render/fonts/fontloader.h"
-
 #include "Madgine/render/camera.h"
+#include "Madgine/render/fonts/fontloader.h"
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/renderpass.h"
 #include "Madgine/render/rendertarget.h"
 
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "Madgine_Tools/inspector/inspector.h"
+#include "im3d/im3d.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
+
 VIRTUALUNIQUECOMPONENTBASE(Engine::Tools::RenderContextTool);
 
 METATABLE_BEGIN_BASE(Engine::Tools::RenderContextTool, Engine::Tools::ToolBase)
-MEMBER(mRenderDebugVisualizations)
+    MEMBER(mRenderDebugVisualizations)
 METATABLE_END(Engine::Tools::RenderContextTool)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::RenderContextTool, Engine::Tools::ToolBase)
-FIELD(mRenderDebugVisualizations)
+    FIELD(mRenderDebugVisualizations)
 SERIALIZETABLE_END(Engine::Tools::RenderContextTool)
 
 namespace Engine {
@@ -122,7 +120,7 @@ namespace Tools {
         debuggable->debugFrustums(CallableView<void(const Frustum &, std::string_view)> { debugFrustum });
         auto debugCamera = [=](const Render::Camera &camera, std::string_view name) {
             Im3D::Frustum(camera.getFrustum(aspectRatio), { .mColor = { 0.0f, 1.0f, 0.0f, 1.0f } });
-        }; 
+        };
         debuggable->debugCameras(CallableView<void(const Render::Camera &, std::string_view)> { debugCamera });
     }
 

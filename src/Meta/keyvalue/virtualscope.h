@@ -17,7 +17,7 @@ struct VirtualScopeBase<void> {
 template <typename T, typename Base = VirtualScopeBase<>>
 struct VirtualScope : Base {
     using Base::Base;
-    virtual ScopePtr customScopePtr() override 
+    virtual ScopePtr customScopePtr() override
     {
         return { this, table<decayed_t<T>> };
     }

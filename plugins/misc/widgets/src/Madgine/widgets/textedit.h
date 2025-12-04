@@ -1,9 +1,8 @@
 #pragma once
 
-#include "widget.h"
-
 #include "util/multilinetextrenderdata.h"
 #include "util/scalableimagerenderdata.h"
+#include "widget.h"
 
 #define STB_TEXTEDIT_CHARTYPE char
 #define STB_TEXTEDIT_POSTIONTYPE size_t
@@ -60,7 +59,7 @@ namespace Widgets {
         std::string mText;
         bool mEditable = true;
 
-        Vector2 mBorder = Vector2::ZERO;        
+        Vector2 mBorder = Vector2::ZERO;
     };
 }
 }

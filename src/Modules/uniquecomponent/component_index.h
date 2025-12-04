@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Engine{
-    namespace UniqueComponent{
+namespace Engine {
+namespace UniqueComponent {
 
 #if ENABLE_PLUGINS
 
@@ -18,5 +18,5 @@ namespace Engine{
 
 #endif
 
-    }
+}
 }

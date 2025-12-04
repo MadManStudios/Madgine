@@ -2,8 +2,8 @@
 
 #if WINDOWS
 
-#define NOMINMAX
-#include <Windows.h>
+#    define NOMINMAX
+#    include <Windows.h>
 
 namespace Engine {
 namespace StringUtil {

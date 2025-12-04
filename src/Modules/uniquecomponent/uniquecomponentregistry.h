@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../plugins/binaryinfo.h"
 #include "Generic/closure.h"
+
+#include "../plugins/binaryinfo.h"
 #include "annotations.h"
 #include "typeinfo.h"
 
@@ -233,7 +234,7 @@ namespace UniqueComponent {
 
         std::string_view componentName(uint32_t index)
         {
-            for (CollectorInfoBase *info : this->mCollectors) {                
+            for (CollectorInfoBase *info : this->mCollectors) {
                 if (info->mBaseIndex && index >= info->mBaseIndex && index < info->mBaseIndex + info->mComponentNames.size()) {
                     return info->mComponentNames[index - info->mBaseIndex];
                 }

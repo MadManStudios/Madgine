@@ -3,16 +3,16 @@
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/binding.h"
 #include "Generic/intervalclock.h"
+
 #include "Madgine/behavior/named.h"
 
 #include "../widget.h"
-
 #include "../widgetmanager.h"
 
 namespace Engine {
 namespace Widgets {
 
-    using WidgetBinding = Behavior::Named<"Widget", Execution::BindingPtr<WidgetBase &>>;    
+    using WidgetBinding = Behavior::Named<"Widget", Execution::BindingPtr<WidgetBase &>>;
     using NamedWidgetManager = Behavior::Named<"WidgetManager", WidgetManager &>;
 
     constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, NamedWidgetManager manager = {}, std::chrono::steady_clock::duration durationOverride = -1s, std::chrono::steady_clock::duration acc = 0s) {

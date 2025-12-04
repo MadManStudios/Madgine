@@ -26,7 +26,6 @@ namespace Tools {
     protected:
         bool update(Node &node, const Scene::Entity::EntityPtr &parent = {});
         void createEntityMapping(Scene::Entity::EntityPtr e);
-        
 
     private:
         SceneEditor &mEditor;

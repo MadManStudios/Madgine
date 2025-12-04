@@ -1,22 +1,18 @@
 #pragma once
 
-#include "handlercollector.h"
-
+#include "Generic/intervalclock.h"
 #include "Generic/keyvalue.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
-
-#include "Modules/uniquecomponent/component_index.h"
 
 #include "Meta/math/vector2.h"
 
-#include "Generic/intervalclock.h"
-
 #include "Modules/threading/madgineobject.h"
+#include "Modules/uniquecomponent/component_index.h"
+#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
 
 #include "Madgine/debug/debuggablelifetime.h"
-
 #include "Madgine/window/mainwindowlistener.h"
+
+#include "handlercollector.h"
 
 namespace Engine {
 namespace Behavior {

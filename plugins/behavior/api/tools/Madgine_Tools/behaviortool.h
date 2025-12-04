@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Madgine/behavior/behaviorhandle.h"
+
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
-
-#include "Madgine/behavior/behaviorhandle.h"
 
 namespace Engine {
 namespace Tools {

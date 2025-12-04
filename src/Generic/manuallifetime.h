@@ -4,7 +4,7 @@ namespace Engine {
 
 struct destruct_t {
     template <typename T, typename... Args>
-    requires tag_invocable<destruct_t, T, Args...>
+        requires tag_invocable<destruct_t, T, Args...>
     auto operator()(T &&object) const
         noexcept(is_nothrow_tag_invocable_v<destruct_t, T>)
             -> tag_invoke_result_t<destruct_t, T>
@@ -17,7 +17,7 @@ inline constexpr destruct_t destruct;
 
 struct construct_t {
     template <typename T, typename... Args>
-    requires tag_invocable<construct_t, T, Args...>
+        requires tag_invocable<construct_t, T, Args...>
     auto operator()(T &&object, Args &&...args) const
         noexcept(is_nothrow_tag_invocable_v<construct_t, T, Args...>)
             -> tag_invoke_result_t<construct_t, T, Args...>
@@ -31,7 +31,7 @@ inline constexpr construct_t construct;
 template <typename T>
 struct ManualLifetime {
 
-    ManualLifetime() {}
+    ManualLifetime() { }
 
     ManualLifetime(const ManualLifetime &)
     {
@@ -64,7 +64,8 @@ struct ManualLifetime {
     }
 
     template <typename U>
-    explicit operator U() const requires std::convertible_to<T, U>
+    explicit operator U() const
+        requires std::convertible_to<T, U>
     {
         return static_cast<U>(mData);
     }
@@ -121,14 +122,14 @@ struct ManualLifetime {
         mData = std::forward<T>(t);
         return *this;
     }
-    
+
     ManualLifetime &operator=(ManualLifetime &&t)
     {
         assert(mAlive && t.mAlive);
         mData = std::move(t.mData);
         return *this;
     }
-    
+
     template <typename... Args>
     friend auto tag_invoke(construct_t, ManualLifetime &object, Args &&...args)
     {
@@ -151,16 +152,16 @@ struct ManualLifetime {
 };
 
 template <typename T>
-struct ManualLifetime<T&> {
+struct ManualLifetime<T &> {
 
-    ManualLifetime(std::nullopt_t)        
+    ManualLifetime(std::nullopt_t)
     {
     }
 
     template <DecayedNoneOf<ManualLifetime<T>> Arg>
-    requires std::convertible_to<Arg, T&>
+        requires std::convertible_to<Arg, T &>
     ManualLifetime(Arg &&arg)
-        : mData(static_cast<T&>(std::forward<Arg>(arg)))
+        : mData(static_cast<T &>(std::forward<Arg>(arg)))
     {
     }
 
@@ -210,14 +211,14 @@ struct ManualLifetime<T&> {
     template <typename Arg>
     friend auto tag_invoke(construct_t, ManualLifetime &object, Arg &&arg)
     {
-        assert(!object.mData);        
-        object.mData = &static_cast<T&>(std::forward<Arg>(arg));
+        assert(!object.mData);
+        object.mData = &static_cast<T &>(std::forward<Arg>(arg));
     }
 
     friend auto tag_invoke(destruct_t, ManualLifetime &object)
     {
         assert(object.mData);
-        object.mData = nullptr;        
+        object.mData = nullptr;
     }
 
     T *mData = nullptr;

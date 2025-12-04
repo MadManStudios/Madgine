@@ -38,7 +38,7 @@ namespace Behavior {
             return { mKey, mValue };
         }
 
-        PyDictPtr::iterator & PyDictPtr::iterator::operator++()
+        PyDictPtr::iterator &PyDictPtr::iterator::operator++()
         {
             mDone = !PyDict_Next(mDict, &mPos, &mKey, &mValue);
             if (mDone)
@@ -46,7 +46,8 @@ namespace Behavior {
             return *this;
         }
 
-        PyDictPtr::iterator PyDictPtr::iterator::operator++(int) {
+        PyDictPtr::iterator PyDictPtr::iterator::operator++(int)
+        {
             iterator copy = *this;
             ++copy;
             return copy;

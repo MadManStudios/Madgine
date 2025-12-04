@@ -2,7 +2,6 @@
 
 #include "entitycomponentbase.h"
 #include "entitycomponentcollector.h"
-
 #include "entitycomponentlist.h"
 
 namespace Engine {

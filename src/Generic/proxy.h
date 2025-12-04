@@ -6,7 +6,7 @@ template <typename T, bool simplifyPointer = true>
 struct Proxy {
 
     template <typename... Args>
-    Proxy(Args&&... args)
+    Proxy(Args &&...args)
         : mData(std::forward<Args>(args)...)
     {
     }

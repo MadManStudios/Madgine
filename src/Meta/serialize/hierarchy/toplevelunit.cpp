@@ -2,10 +2,8 @@
 
 #include "toplevelunit.h"
 
-#include "serializableids.h"
-
 #include "../syncmanager.h"
-
+#include "serializableids.h"
 #include "serializableunitptr.h"
 
 namespace Engine {
@@ -82,7 +80,7 @@ namespace Serialize {
 
     std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> TopLevelUnitBase::getMasterMessageTargets() const
     {
-        //TODO: maybe return std::vector
+        // TODO: maybe return std::vector
         std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> result;
         for (SyncManager *mgr : mManagers) {
             const std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> &targets = mgr->getMasterMessageTargets();

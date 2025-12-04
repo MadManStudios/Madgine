@@ -2,9 +2,8 @@
 
 #include "vulkanpipelineinstance.h"
 
-#include "../vulkanrendercontext.h"
-
 #include "../vulkanmeshdata.h"
+#include "../vulkanrendercontext.h"
 #include "../vulkanrendertarget.h"
 
 namespace Engine {
@@ -164,7 +163,7 @@ namespace Render {
         VkDescriptorBufferInfo bufferInfo {};
         bufferInfo.buffer = buffer;
         bufferInfo.offset = offset;
-        bufferInfo.range = size;        
+        bufferInfo.range = size;
 
         VkWriteDescriptorSet descriptorWrite {};
         descriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../renderdata.h"
-
 #include "sizeconstraints.h"
 
 namespace Engine {

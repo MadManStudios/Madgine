@@ -2,9 +2,9 @@
 
 #include "rootcomponentbase.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-
 #include "Modules/threading/task.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::Root::RootComponentBase)
 METATABLE_END(Engine::Root::RootComponentBase)

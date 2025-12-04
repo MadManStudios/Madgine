@@ -2,12 +2,12 @@
 
 #if LINUX
 
-#    include "fsapi.h"
-
 #    include <dirent.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
 #    include <wordexp.h>
+
+#    include "fsapi.h"
 
 namespace Engine {
 namespace Filesystem {
@@ -29,7 +29,7 @@ namespace Filesystem {
 
     std::string executableName()
     {
-        //TODO
+        // TODO
         char buffer[512];
 
         auto result = readlink("/proc/self/exe", buffer, sizeof(buffer));

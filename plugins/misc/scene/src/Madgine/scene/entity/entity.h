@@ -1,23 +1,19 @@
 #pragma once
 
-#include "Meta/serialize/container/serializablecontainer.h"
-
-#include "Meta/serialize/hierarchy/syncableunit.h"
-
 #include "Generic/container/mutable_set.h"
-
-#include "Modules/uniquecomponent/component_index.h"
-
 #include "Generic/customfunctors.h"
-
-#include "Madgine/debug/debuggablelifetime.h"
 
 #include "Interfaces/log/logsenders.h"
 
+#include "Meta/serialize/container/serializablecontainer.h"
+#include "Meta/serialize/hierarchy/syncableunit.h"
+
+#include "Modules/uniquecomponent/component_index.h"
+
 #include "Madgine/behavior/behaviorlist.h"
+#include "Madgine/debug/debuggablelifetime.h"
 
 #include "entitycomponenthandle.h"
-
 #include "entityptr.h"
 
 namespace Engine {
@@ -102,7 +98,8 @@ namespace Scene {
                 mLifetime.attach(std::forward<Sender>(sender) | Log::log_result());
             }
 
-            auto lifetimeSender() {
+            auto lifetimeSender()
+            {
                 return mLifetime.bound(mSelf, *this, Functor<&Entity::dtor> {}) | Behavior::with_named<"Entity">(mSelf);
             }
 

@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 namespace Engine {
 namespace Serialize {
 
@@ -29,7 +27,7 @@ namespace Serialize {
 
         const std::string &name() const;
 
-		SerializeStreamData *getSlaveStreamData();        
+        SerializeStreamData *getSlaveStreamData();
 
         SerializeStream wrapStream(Stream stream, bool isSlave = false);
 
@@ -39,12 +37,12 @@ namespace Serialize {
         std::unique_ptr<SerializeStreamData> createStreamData(ParticipantId id = createStreamId());
         static ParticipantId createStreamId();
 
-		static SyncableUnitBase *getByMasterId(UnitId unit);
+        static SyncableUnitBase *getByMasterId(UnitId unit);
 
-        SyncableUnitMap mSlaveMappings;   
+        SyncableUnitMap mSlaveMappings;
 
     private:
-		SerializeStreamData *mSlaveStreamData = nullptr;
+        SerializeStreamData *mSlaveStreamData = nullptr;
 
         std::string mName;
     };

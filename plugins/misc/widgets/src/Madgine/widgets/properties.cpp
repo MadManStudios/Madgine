@@ -2,9 +2,8 @@
 
 #include "properties.h"
 
-#include "Meta/serialize/operations.h"
-
 #include "Meta/serialize/helper/typedobjectserialize.h"
+#include "Meta/serialize/operations.h"
 
 namespace Engine {
 namespace Widgets {

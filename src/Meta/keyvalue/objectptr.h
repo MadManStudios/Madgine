@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace Engine {
 
 struct META_EXPORT ObjectPtr {
@@ -29,4 +28,3 @@ private:
     std::shared_ptr<ObjectInstance> mInstance;
 };
 }
-

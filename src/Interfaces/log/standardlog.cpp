@@ -1,8 +1,8 @@
 #include "../interfaceslib.h"
+
 #include "standardlog.h"
 
 #include <iostream>
-
 #include <time.h>
 
 #if ANDROID
@@ -14,7 +14,7 @@ namespace Log {
     MessageType sLogLevel = MessageType::DEBUG_TYPE;
     extern Log *sLog;
 
-    StandardLog sGlobalLog {"Default"};
+    StandardLog sGlobalLog { "Default" };
 
     StandardLog::StandardLog(const std::string &name)
         : mName(name)

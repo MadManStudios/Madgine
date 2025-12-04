@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Madgine/render/texturedescriptor.h"
-#include "Madgine/render/resourceblock.h"
-
 #include "Madgine/imageloader/imageloader.h"
+#include "Madgine/render/resourceblock.h"
+#include "Madgine/render/texturedescriptor.h"
 
 namespace Engine {
 namespace Widgets {

@@ -7,9 +7,7 @@
 
 #    define NOMINMAX
 #    include <Windows.h>
-
 #    include <cctype>
-
 #    include <direct.h>
 
 namespace Engine {
@@ -72,7 +70,6 @@ namespace Filesystem {
         return data.mData.cFileName;
     }
 
-    
 }
 }
 

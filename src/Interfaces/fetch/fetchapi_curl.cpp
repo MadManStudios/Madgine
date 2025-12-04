@@ -2,13 +2,12 @@
 
 #if !EMSCRIPTEN && !ANDROID
 
+#    include <cstring>
 #    include <curl/curl.h>
 
-#    include <cstring>
+#    include "Generic/execution/stop_source.h"
 
 #    include "fetchapi.h"
-
-#include "Generic/execution/stop_source.h"
 
 namespace Engine {
 

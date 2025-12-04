@@ -2,34 +2,34 @@
 
 #include "skeletonloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Modules/threading/awaitables/awaitablesender.h"
-
-#include "Meta/math/transformation.h"
-
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
+
+#include "Meta/math/transformation.h"
+
+#include "Modules/threading/awaitables/awaitablesender.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "../assimptools.h"
 
 RESOURCELOADER(Engine::Render::SkeletonLoader)
 
 METATABLE_BEGIN(Engine::Render::Bone)
-MEMBER(mName)
-MEMBER(mOffsetMatrix)
-MEMBER(mTTransform)
-//MEMBER(mParent)
-//MEMBER(mFirstChild)
+    MEMBER(mName)
+    MEMBER(mOffsetMatrix)
+    MEMBER(mTTransform)
+// MEMBER(mParent)
+// MEMBER(mFirstChild)
 METATABLE_END(Engine::Render::Bone)
 
 METATABLE_BEGIN(Engine::Render::SkeletonDescriptor)
-MEMBER(mBones)
-MEMBER(mMatrix)
-MEMBER(mMatrix1)
-MEMBER(mMatrix2)
+    MEMBER(mBones)
+    MEMBER(mMatrix)
+    MEMBER(mMatrix1)
+    MEMBER(mMatrix2)
 METATABLE_END(Engine::Render::SkeletonDescriptor)
 
 namespace Engine {

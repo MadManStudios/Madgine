@@ -3,7 +3,7 @@
 #include "pyobjectptr.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         struct MADGINE_PYTHON3_EXPORT PyFramePtr : PyObjectPtr {
@@ -18,10 +18,8 @@ namespace Behavior{
             PyFrameObject *operator->() const;
 
             PyFrameObject *release();
-
         };
 
-    
     }
 }
 }

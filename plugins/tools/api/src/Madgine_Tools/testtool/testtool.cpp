@@ -2,35 +2,34 @@
 
 #include "testtool.h"
 
-#include "../renderer/imroot.h"
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
 #include "Interfaces/window/windowapi.h"
 
 #include "Meta/math/atlas2.h"
 
-#include "im3d/im3d.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/render/vertex.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "../renderer/imroot.h"
+#include "im3d/im3d.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::TestTool);
 
 METATABLE_BEGIN_BASE(Engine::Tools::TestTool, Engine::Tools::ToolBase)
-FUNCTION(logTest)
-FUNCTION(logValue, value)
-FUNCTION(dummy)
-MEMBER(mV)
-MEMBER(mFlags)
+    FUNCTION(logTest)
+    FUNCTION(logValue, value)
+    FUNCTION(dummy)
+    MEMBER(mV)
+    MEMBER(mFlags)
 METATABLE_END(Engine::Tools::TestTool)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::TestTool, Engine::Tools::ToolBase)
-FIELD(mFlags)
+    FIELD(mFlags)
 SERIALIZETABLE_END(Engine::Tools::TestTool)
 
 namespace Engine {

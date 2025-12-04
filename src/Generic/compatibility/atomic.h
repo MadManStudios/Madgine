@@ -7,15 +7,18 @@ namespace std {
 template <typename T>
 struct atomic<std::shared_ptr<T>> {
 
-    std::shared_ptr<T> load() const {
+    std::shared_ptr<T> load() const
+    {
         return atomic_load(&mPtr);
     }
 
-    bool compare_exchange_strong(std::shared_ptr<T>& expected, std::shared_ptr<T> desired) {
+    bool compare_exchange_strong(std::shared_ptr<T> &expected, std::shared_ptr<T> desired)
+    {
         return atomic_compare_exchange_strong(&mPtr, &expected, std::move(desired));
     }
 
-    void store(std::shared_ptr<T> ptr) {
+    void store(std::shared_ptr<T> ptr)
+    {
         atomic_store(&mPtr, std::move(ptr));
     }
 

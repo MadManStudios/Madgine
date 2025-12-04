@@ -1,13 +1,11 @@
 #pragma once
 
 #include "Madgine/render/pipeline.h"
+#include "Madgine/render/texturedescriptor.h"
+#include "Madgine/render/vertexformat.h"
 
 #include "../directx12pixelshaderloader.h"
 #include "../directx12vertexshaderloader.h"
-
-#include "Madgine/render/vertexformat.h"
-
-#include "Madgine/render/texturedescriptor.h"
 
 namespace Engine {
 namespace Render {
@@ -52,7 +50,7 @@ namespace Render {
 
         ID3D12PipelineState *get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking = true) const;
 
-        //const std::array<std::array<std::array<ReleasePtr<ID3D12PipelineState>, 3>, 3>, 3> *ptr() const;
+        // const std::array<std::array<std::array<ReleasePtr<ID3D12PipelineState>, 3>, 3>, 3> *ptr() const;
 
         void reset();
 

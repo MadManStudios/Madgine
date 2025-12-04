@@ -2,24 +2,20 @@
 
 #include "gridpass.h"
 
-//#include "OpenGL/openglshaderloader.h"
-
-#include "Madgine/meshloader/meshloader.h"
+// #include "OpenGL/openglshaderloader.h"
 
 #include "Meta/math/matrix4.h"
 
-#include "Madgine/render/camera.h"
-#include "Madgine/render/rendertarget.h"
-#include "Madgine/render/rendercontext.h"
-#include "Madgine/render/vertex.h"
-
 #include "Madgine/meshloader/gpumeshloader.h"
-
+#include "Madgine/meshloader/meshloader.h"
+#include "Madgine/render/camera.h"
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/render/vertex.h"
 
 #include "Madgine/render/shadinglanguage/sl_support_begin.h"
 #include "shaders/grid.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
-
 
 namespace Engine {
 namespace Tools {
@@ -32,7 +28,6 @@ namespace Tools {
         mMesh.load("Plane");
 
         mPipeline.create({ .vs = "grid", .ps = "grid", .bufferSizes = { 0, sizeof(GridPerFrame) } });
-
     }
 
     void GridPass::render(Render::RenderTarget *target, size_t iteration)

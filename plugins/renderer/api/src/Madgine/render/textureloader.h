@@ -1,27 +1,25 @@
 #pragma once
 
-#include "Madgine/resources/virtualresourceloader.h"
+#include "Generic/bytebuffer.h"
+
+#include "Meta/math/vector2i.h"
 
 #include "Modules/threading/workgroupstorage.h"
 
 #include "Madgine/render/texture.h"
-
 #include "Madgine/render/texturedescriptor.h"
-
-#include "Generic/bytebuffer.h"
-
-#include "Meta/math/vector2i.h"
+#include "Madgine/resources/virtualresourceloader.h"
 
 namespace Engine {
 namespace Render {
 
     enum WrapMode {
-        WRAP_CLAMP_TO_EDGE		
+        WRAP_CLAMP_TO_EDGE
     };
 
-	enum MinMode {
-		MIN_NEAREST
-	};
+    enum MinMode {
+        MIN_NEAREST
+    };
 
     struct MADGINE_RENDER_EXPORT TextureLoader : Resources::VirtualResourceLoaderBase<TextureLoader, Texture, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
 

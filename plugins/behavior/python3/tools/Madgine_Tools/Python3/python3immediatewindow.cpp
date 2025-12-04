@@ -2,35 +2,29 @@
 
 #include "python3immediatewindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Python3/python3debugger.h"
-#include "Python3/python3env.h"
-#include "Python3/util/python3lock.h"
-
-#include "Generic/execution/execution.h"
-
-#include "Madgine/debug/debugger.h"
-
-#include "Madgine_Tools/texteditor/texteditor.h"
-
 #include "Generic/execution/algorithm.h"
-
-#include "Madgine_Tools/texteditor/textdocument.h"
-
-#include "Madgine_Tools/debugger/debuggerview.h"
+#include "Generic/execution/execution.h"
 
 #include "Interfaces/log/logsenders.h"
 
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/debug/debugger.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "Madgine_Tools/debugger/debuggerview.h"
+#include "Madgine_Tools/texteditor/textdocument.h"
+#include "Madgine_Tools/texteditor/texteditor.h"
+#include "Python3/python3debugger.h"
+#include "Python3/python3env.h"
+#include "Python3/util/pyexecution.h"
 #include "Python3/util/pylistptr.h"
 #include "Python3/util/pymoduleptr.h"
-#include "Python3/util/pyexecution.h"
+#include "Python3/util/python3lock.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
 
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>

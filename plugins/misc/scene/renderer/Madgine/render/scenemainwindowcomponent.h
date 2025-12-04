@@ -1,16 +1,14 @@
 #pragma once
 
+#include "Meta/math/color3.h"
+
+#include "Madgine/render/camera.h"
 #include "Madgine/window/mainwindowcomponent.h"
 #include "Madgine/window/mainwindowcomponentcollector.h"
 
-#include "scenerenderpass.h"
-
-#include "Madgine/render/camera.h"
-
-#include "Meta/math/color3.h"
-
-#include "scenerenderdata.h"
 #include "pointshadowrenderdata.h"
+#include "scenerenderdata.h"
+#include "scenerenderpass.h"
 
 namespace Engine {
 namespace Render {
@@ -39,10 +37,10 @@ namespace Render {
         Scene::SceneManager &mScene;
 
         SceneRenderData mSceneData;
-        
+
         PointShadowRenderData mPointShadowRenderData;
 
-        SceneRenderPass mPass;       
+        SceneRenderPass mPass;
     };
 
 }

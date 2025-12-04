@@ -6,7 +6,8 @@
 
 #    define NOMINMAX
 #    include <Windows.h>
-#include "win_ptrs.h"
+
+#    include "win_ptrs.h"
 
 UniqueHandle::~UniqueHandle()
 {
@@ -14,6 +15,4 @@ UniqueHandle::~UniqueHandle()
         CloseHandle(mHandle);
 }
 
-
 #endif
-

@@ -1,30 +1,24 @@
+#include "Madgine/imageloaderlib.h"
 #include "directx12toolslib.h"
 
 #include "directx12rendercontexttool.h"
 
+#include "Madgine/imageloader/imagedata.h"
+#include "Madgine/imageloader/imageloader.h"
+#include "Madgine/render/fonts/fontloader.h"
+#include "Madgine/render/textureloader.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine_Tools/inspector/inspector.h"
-
-#if ENABLE_TASK_TRACKING
-#include "Madgine_Tools/tasktracker/tasktracker.h"
-#endif
-
 #include "DirectX12/directx12rendercontext.h"
-
+#include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/imroot.h"
 #include "imgui/imgui.h"
 
-#include "Madgine/imageloader/imageloader.h"
-#include "Madgine/imageloaderlib.h"
-
-#include "Madgine/render/fonts/fontloader.h"
-
-#include "Madgine/imageloader/imagedata.h"
-
-#include "Madgine/render/textureloader.h"
-
-#include "Madgine_Tools/renderer/imroot.h"
+#if ENABLE_TASK_TRACKING
+#    include "Madgine_Tools/tasktracker/tasktracker.h"
+#endif
 
 UNIQUECOMPONENT(Engine::Tools::DirectX12RenderContextTool);
 

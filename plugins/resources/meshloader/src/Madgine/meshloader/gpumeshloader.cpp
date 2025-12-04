@@ -2,24 +2,24 @@
 
 #include "gpumeshloader.h"
 
-#include "meshloader.h"
+#include "Modules/threading/taskqueue.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Modules/threading/taskqueue.h"
+#include "meshloader.h"
 
 VIRTUALRESOURCELOADERBASE(Engine::Render::GPUMeshLoader)
 
 METATABLE_BEGIN(Engine::Render::GPUMeshData)
-MEMBER(mMaterials)
+    MEMBER(mMaterials)
 METATABLE_END(Engine::Render::GPUMeshData)
 
 METATABLE_BEGIN(Engine::Render::GPUMeshData::Material)
-READONLY_PROPERTY(Name, mName)
-/* MEMBER(mDiffuseTexture)
-MEMBER(mEmissiveTexture)*/
-MEMBER(mDiffuseColor)
+    READONLY_PROPERTY(Name, mName)
+    /* MEMBER(mDiffuseTexture)
+    MEMBER(mEmissiveTexture)*/
+    MEMBER(mDiffuseColor)
 METATABLE_END(Engine::Render::GPUMeshData::Material)
 
 namespace Engine {

@@ -2,16 +2,14 @@
 
 #if EMSCRIPTEN
 
-#    include "windowapi.h"
-#    include "windowsettings.h"
-
 #    include <EGL/egl.h>
-
 #    include <emscripten/html5.h>
 
 #    include "Generic/systemvariable.h"
 
 #    include "../input/inputevents.h"
+#    include "windowapi.h"
+#    include "windowsettings.h"
 
 namespace Engine {
 namespace Window {

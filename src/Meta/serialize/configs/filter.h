@@ -1,5 +1,7 @@
 #pragma once
 
+#include "configselector.h"
+
 namespace Engine {
 namespace Serialize {
 

@@ -121,7 +121,7 @@ namespace Audio {
 
     size_t OggDecodeBuf::ogg_read(void *destination, size_t size1, size_t size2)
     {
-        return mBase->sgetn(reinterpret_cast<char*>(destination), size1 * size2);
+        return mBase->sgetn(reinterpret_cast<char *>(destination), size1 * size2);
     }
 
     int32_t OggDecodeBuf::ogg_seek(int64_t to, int32_t type)

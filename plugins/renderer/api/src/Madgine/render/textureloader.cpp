@@ -2,12 +2,12 @@
 
 #include "textureloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
 #include "Meta/math/vector2i.h"
 
 #include "Madgine/imageloader/imageloader.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 VIRTUALRESOURCELOADERBASE(Engine::Render::TextureLoader)
 
@@ -30,7 +30,7 @@ namespace Render {
                     loader->setData(texture, size, std::move(data));
                 return true;
             },
-            loader);        
+            loader);
     }
 
     Threading::Task<bool> TextureLoader::Ptr::createTask(
@@ -43,7 +43,8 @@ namespace Render {
                 if (data.mSize > 0)
                     loader->setData(texture, size, std::move(data));
                 return true;
-            }, loader);
+            },
+            loader);
     }
 
     Threading::TaskFuture<bool> TextureLoader::Handle::loadFromImage(std::string_view name, TextureType type, TextureFormat format, TextureLoader *loader)
@@ -59,8 +60,7 @@ namespace Render {
                 loader->setData(texture, image->mSize, image->mBuffer);
                 co_return true;
             },
-             loader);
-            
+            loader);
     }
 
     void TextureLoader::Ptr::setData(Vector2i size, const ByteBuffer &data, TextureLoader *loader)

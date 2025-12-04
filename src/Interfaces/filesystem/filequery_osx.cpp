@@ -2,11 +2,11 @@
 
 #if OSX
 
-#    include "fsapi.h"
-
 #    include <dirent.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
+
+#    include "fsapi.h"
 
 namespace Engine {
 namespace Filesystem {

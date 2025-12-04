@@ -1,6 +1,7 @@
 #pragma once
 
 #include "configselector.h"
+#include "../hierarchy/syncfunction.h"
 
 namespace Engine {
 namespace Serialize {

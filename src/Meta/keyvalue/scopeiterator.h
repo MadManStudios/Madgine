@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Generic/proxy.h"
+
 #include "scopefield.h"
 
 namespace Engine {

@@ -2,16 +2,15 @@
 
 #include "blurpass.h"
 
-#include "../rendertarget.h"
-
-#include "Madgine/render/texturedescriptor.h"
 #include "Madgine/render/texture.h"
-
-#include "../rendercontext.h"
+#include "Madgine/render/texturedescriptor.h"
 
 #include "../shadinglanguage/sl_support_begin.h"
 #include "shaders/blur.sl"
 #include "../shadinglanguage/sl_support_end.h"
+
+#include "../rendercontext.h"
+#include "../rendertarget.h"
 
 namespace Engine {
 namespace Render {
@@ -80,7 +79,7 @@ namespace Render {
     void BlurPass::setInput(RenderTarget *input, size_t inputIndex)
     {
         mInput = input;
-        //addDependency(input);
+        // addDependency(input);
         mInputIndex = inputIndex;
     }
 

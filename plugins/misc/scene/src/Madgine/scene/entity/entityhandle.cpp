@@ -2,21 +2,16 @@
 
 #include "entityhandle.h"
 
-#include "entitysender.h"
-
-#include "../scenecontainer.h"
+#include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "entitycomponentcollector.h"
-
-#include "Modules/uniquecomponent/uniquecomponentregistry.h"
-
+#include "../scenecontainer.h"
 #include "../scenemanager.h"
-
-#include "entitycomponentlistbase.h"
-
 #include "entitycomponentbase.h"
+#include "entitycomponentcollector.h"
+#include "entitycomponentlistbase.h"
+#include "entitysender.h"
 
 using namespace Engine::Serialize;
 static constexpr Serializer sComponentSynchronizer {
@@ -99,7 +94,7 @@ static constexpr Serializer sComponentSynchronizer {
 };
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::EntityHandle)
-SERIALIZETABLE_ENTRY(sComponentSynchronizer)
+    SERIALIZETABLE_ENTRY(sComponentSynchronizer)
 SERIALIZETABLE_END(Engine::Scene::Entity::EntityHandle)
 
 namespace Engine {

@@ -47,7 +47,8 @@ struct Vector4i {
         return *this;
     }
 
-    constexpr bool operator==(const Vector4i& other) const {
+    constexpr bool operator==(const Vector4i &other) const
+    {
         return x == other.x && y == other.y && z == other.z && w == other.w;
     }
 
@@ -65,7 +66,8 @@ struct Vector4i {
         return *(&x + i);
     }
 
-    int* ptr() {
+    int *ptr()
+    {
         return &x;
     }
 
@@ -75,7 +77,7 @@ struct Vector4i {
     }
 
     /** Swizzle-like narrowing operations
-		*/
+     */
     Vector2i xy() const
     {
         return { x, y };

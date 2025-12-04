@@ -20,7 +20,8 @@ namespace Render {
         ID3D12GraphicsCommandList *operator->();
 
         template <typename T>
-        void attachResource(T resource) {
+        void attachResource(T resource)
+        {
             attachResource(Any { std::move(resource) });
         }
         void attachResource(Any resource);

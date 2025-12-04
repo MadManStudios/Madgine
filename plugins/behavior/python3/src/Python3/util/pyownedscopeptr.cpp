@@ -3,13 +3,12 @@
 #include "pyownedscopeptr.h"
 
 #include "Meta/keyvalue/scopeiterator.h"
-
 #include "Meta/keyvalue/valuetype.h"
 
 #include "pyobjectutil.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         static PyObject *
@@ -31,13 +30,14 @@ namespace Behavior{
             return toPyObject(v);
         }
 
-        static PyObject* OwnedScopePtr_iter(const ScopePtr& p) {
+        static PyObject *OwnedScopePtr_iter(const ScopePtr &p)
+        {
             if (!p) {
                 PyErr_SetString(PyExc_TypeError, "Nullptr is not iterable!");
                 return NULL;
             }
             ScopeIterator proxyIt = p.find("__proxy");
-            if (proxyIt != p.end()){
+            if (proxyIt != p.end()) {
                 ValueType proxy;
                 proxyIt->value(proxy);
                 if (proxy.is<ScopePtr>()) {

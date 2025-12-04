@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Generic/execution/algorithm.h"
+
 #include "senderlocation.h"
 
 namespace Engine {
@@ -165,7 +166,7 @@ namespace Execution {
     inline constexpr with_debug_location_t with_debug_location;
 
     template <typename T>
-    concept is_debuggable = std::same_as<tag_invoke_result_t<get_debug_location_t, T &>, Debug::SenderLocation*>;
+    concept is_debuggable = std::same_as<tag_invoke_result_t<get_debug_location_t, T &>, Debug::SenderLocation *>;
 
     struct tracked_t {
 
@@ -284,8 +285,7 @@ namespace Execution {
                 Debug::Continuation empty;
                 visitor(Execution::State::Breakpoint {
                     state ? &state->mStartBreakpoint : nullptr,
-                    state && state->mPausedAtStart ? state->mContinuation : empty
-                });
+                    state && state->mPausedAtStart ? state->mContinuation : empty });
                 visit_state(state && !state->mContinuation ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
                 visitor(Execution::State::Breakpoint {
                     state ? &state->mEndBreakpoint : nullptr,

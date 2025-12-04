@@ -2,9 +2,9 @@
 
 #include "directx12shadercodegen.h"
 
-#include "Madgine/codegen/codegen_shader.h"
-
 #include "Meta/math/vector4.h"
+
+#include "Madgine/codegen/codegen_shader.h"
 
 namespace Engine {
 namespace Render {
@@ -254,7 +254,7 @@ namespace Render {
                 StringUtil::StreamJoiner join { stream, "," };
                 for (const CodeGen::Variable &arg : function.mArguments) {
                     generateType(join.next(), arg.mType);
-                    stream << " " << arg.mName;                    
+                    stream << " " << arg.mName;
                 }
                 stream << ")";
 
@@ -288,7 +288,6 @@ namespace Render {
                 stream << "\treturn mainImpl(IN);\n";
                 stream << "}\n\n";
             }
-
         }
 
     }

@@ -2,7 +2,6 @@
 
 namespace Engine {
 namespace Render {
-    
 
     struct MADGINE_OPENGL_EXPORT OpenGLVertexArray {
 
@@ -14,7 +13,7 @@ namespace Render {
 
         OpenGLVertexArray &operator=(OpenGLVertexArray &&other);
 
-		explicit operator bool() const;
+        explicit operator bool() const;
 
         void reset();
 

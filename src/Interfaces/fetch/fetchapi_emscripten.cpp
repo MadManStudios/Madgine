@@ -15,11 +15,10 @@ struct FetchData {
     std::string mUrl;
 };
 
-
 void downloadSucceeded(emscripten_fetch_t *fetch)
 {
     static_cast<FetchStateBase *>(fetch->userData)->set_value();
-    emscripten_fetch_close(fetch); 
+    emscripten_fetch_close(fetch);
 }
 
 void downloadFailed(emscripten_fetch_t *fetch)
@@ -40,11 +39,11 @@ FetchStateBase::FetchStateBase(std::string url, std::vector<std::string> headers
     std::unique_ptr<FetchData> ptr = std::make_unique<FetchData>();
     FetchData &data = *ptr;
     mPtr1.setupAs<std::unique_ptr<FetchData>>() = std::move(ptr);
-    
+
     data.mUrl = std::move(url);
 
     data.mHeaders = std::move(headers);
-    for (const std::string& s : data.mHeaders) {
+    for (const std::string &s : data.mHeaders) {
         data.mHeaderPtrs.push_back(s.c_str());
     }
     data.mHeaderPtrs.push_back(nullptr);
@@ -64,7 +63,7 @@ FetchStateBase::FetchStateBase(std::string url, std::vector<std::string> headers
 }
 
 FetchStateBase::~FetchStateBase()
-{    
+{
     mPtr1.release<std::unique_ptr<FetchData>>();
 }
 
@@ -76,7 +75,7 @@ void FetchStateBase::start()
 
 void FetchStateBase::stop()
 {
-    throw 0;    
+    throw 0;
 }
 
 }

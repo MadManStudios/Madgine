@@ -2,27 +2,23 @@
 
 #include "resourcestoolconfig.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
+#include "Generic/projections.h"
+
+#include "Meta/keyvalue/scopefield.h"
+#include "Meta/keyvalue/valuetype.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Madgine_Tools/inspector/inspector.h"
-
-#include "Madgine_Tools/renderer/imroot.h"
 
 #include "Madgine/resources/resourceloaderbase.h"
 #include "Madgine/resources/resourcemanager.h"
 
-#include "imgui/imguiaddons.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
+#include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/imroot.h"
 #include "imgui/imgui.h"
-
-#include "Generic/projections.h"
-
-#include "Meta/keyvalue/valuetype.h"
-#include "Meta/keyvalue/scopefield.h"
-
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::ResourcesToolConfig);
 
@@ -31,7 +27,6 @@ METATABLE_END(Engine::Tools::ResourcesToolConfig)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::ResourcesToolConfig, Engine::Tools::ToolBase)
 SERIALIZETABLE_END(Engine::Tools::ResourcesToolConfig)
-
 
 namespace Engine {
 namespace Tools {

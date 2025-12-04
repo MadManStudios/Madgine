@@ -2,28 +2,28 @@
 
 #include "transform.h"
 
+#include "Meta/math/transformation.h"
+
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Meta/math/transformation.h"
-
 #include "../entity.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 NAMED_UNIQUECOMPONENT(Transform, Engine::Scene::Entity::Transform);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Transform)
-MEMBER(mPosition)
-MEMBER(mScale)
-MEMBER(mOrientation)
+    MEMBER(mPosition)
+    MEMBER(mScale)
+    MEMBER(mOrientation)
 METATABLE_END(Engine::Scene::Entity::Transform)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Transform)
-FIELD(mParent)
-FIELD(mPosition)
-FIELD(mScale)
-FIELD(mOrientation)
+    FIELD(mParent)
+    FIELD(mPosition)
+    FIELD(mScale)
+    FIELD(mOrientation)
 SERIALIZETABLE_END(Engine::Scene::Entity::Transform)
 
 namespace Engine {

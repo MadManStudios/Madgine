@@ -4,9 +4,9 @@
 
 #include "Interfaces/window/windowapi.h"
 
-#include "vulkanrendercontext.h"
-
 #include "Meta/math/rect2i.h"
+
+#include "vulkanrendercontext.h"
 
 #if ANDROID
 #    include <vulkan/vulkan_android.h>
@@ -102,7 +102,6 @@ namespace Render {
         VK_CHECK(result);
 
         createSurface();
-
     }
 
     VulkanRenderWindow::~VulkanRenderWindow()
@@ -230,7 +229,7 @@ namespace Render {
 
         if (mClipSpaceRotation[0][0] < 0 || mClipSpaceRotation[1][0] < 0)
             x += mBufferSize.x - sizeX;
-        if(mClipSpaceRotation[0][1] < 0 || mClipSpaceRotation[1][1] < 0)
+        if (mClipSpaceRotation[0][1] < 0 || mClipSpaceRotation[1][1] < 0)
             y += mBufferSize.y - sizeY;
 
         VkRect2D scissor {};
@@ -392,7 +391,6 @@ namespace Render {
 
         mFormat = chooseSwapSurfaceFormat(support.formats);
 
-        
         VkSubpassDependency dependency {};
         dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
         dependency.dstSubpass = 0;
@@ -401,7 +399,6 @@ namespace Render {
         dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
         dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
         createRenderPass(1, mFormat.format, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, false, { &dependency, 1 });
-
 
         InterfacesVector size = mWindow->renderSize();
         create({ size.x, size.y });

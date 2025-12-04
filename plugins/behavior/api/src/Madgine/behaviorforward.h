@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Generic/fixed_string.h"
-
 #include "Generic/execution/concepts.h"
+#include "Generic/fixed_string.h"
 
 namespace Engine {
 namespace Behavior {

@@ -2,21 +2,20 @@
 
 #include "scenecontainer.h"
 
-#include "scenemanager.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
+#include "Generic/execution/execution.h"
 #include "Generic/projections.h"
 
 #include "Meta/serialize/container/noparent.h"
 
-#include "Generic/execution/execution.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "scenemanager.h"
 
 METATABLE_BEGIN(Engine::Scene::SceneContainer)
-// TODO
-// SYNCABLEUNIT_MEMBERS()
-READONLY_PROPERTY(entities, entities)
+    // TODO
+    // SYNCABLEUNIT_MEMBERS()
+    READONLY_PROPERTY(entities, entities)
 METATABLE_END(Engine::Scene::SceneContainer)
 
 using Helper = Engine::Serialize::NoParent<Engine::Scene::SceneContainer>;
@@ -30,9 +29,9 @@ static Engine::Threading::DataMutex::Lock static_lock(Engine::Scene::SceneContai
 
 SERIALIZETABLE_BEGIN(Engine::Scene::SceneContainer,
     Engine::Serialize::CallableGuard<&static_lock>)
-FIELD(mEntities,
-    Serialize::ParentCreator<&Engine::Scene::SceneContainer::readEntity, &Engine::Scene::SceneContainer::writeEntity>,
-    Serialize::RequestPolicy::no_requests)
+    FIELD(mEntities,
+        Serialize::ParentCreator<&Engine::Scene::SceneContainer::readEntity, &Engine::Scene::SceneContainer::writeEntity>,
+        Serialize::RequestPolicy::no_requests)
 SERIALIZETABLE_END(Engine::Scene::SceneContainer)
 
 namespace Engine {

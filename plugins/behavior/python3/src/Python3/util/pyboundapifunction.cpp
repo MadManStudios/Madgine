@@ -2,18 +2,15 @@
 
 #include "pyboundapifunction.h"
 
+#include "Meta/keyvalue/functiontable.h"
 #include "Meta/keyvalue/valuetype.h"
 
-#include "pyobjectutil.h"
-
-#include "Meta/keyvalue/functiontable.h"
-
 #include "pyexecution.h"
-
+#include "pyobjectutil.h"
 #include "python3lock.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         static PyObject *
@@ -36,7 +33,7 @@ namespace Behavior{
 
         PyTypeObject PyBoundApiFunctionType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                           .tp_name
+                .tp_name
             = "Engine.BoundApiFunction",
             .tp_basicsize = sizeof(PyBoundApiFunction),
             .tp_itemsize = 0,

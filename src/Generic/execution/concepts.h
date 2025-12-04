@@ -235,7 +235,6 @@ namespace Execution {
     template <typename T>
     using is_stream = is_instance<T, stream>;
 
-    
     struct access_binding_t {
 
         template <typename T, typename F>
@@ -248,7 +247,6 @@ namespace Execution {
     };
 
     constexpr access_binding_t access_binding {};
-
 
     template <typename B, typename T>
     concept Binding = requires(B &&binding) {
@@ -265,7 +263,6 @@ namespace Execution {
             access_binding(binding, anyBindingCallback)
         } -> std::same_as<bool>;
     };
-
 
 }
 }

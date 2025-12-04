@@ -2,16 +2,17 @@
 
 #if WINDOWS
 
-#include "processapi.h"
+#    include "processapi.h"
 
-#define NOMINMAX
-#include <Windows.h>
+#    define NOMINMAX
+#    include <Windows.h>
 
 namespace Engine {
 namespace Process {
 
     struct ProcessAuxiliaryData {
-        ~ProcessAuxiliaryData() {
+        ~ProcessAuxiliaryData()
+        {
             CloseHandle(mProcessInfo.hProcess);
             CloseHandle(mProcessInfo.hThread);
 
@@ -36,9 +37,8 @@ namespace Process {
 
     ProcessState::~ProcessState() = default;
 
-
-
-    void ProcessState::start() {
+    void ProcessState::start()
+    {
 
         SECURITY_ATTRIBUTES sa {};
         sa.nLength = sizeof(SECURITY_ATTRIBUTES);
@@ -109,13 +109,12 @@ namespace Process {
                     state->set_error(GenericResult::UNKNOWN_ERROR);
                 else 
                     state->set_value(exit_code, std::move(stdOut), std::move(stdErr));
-            }
-        },
-            this, mTimeout.count(), WT_EXECUTEINWAITTHREAD);
+            } }, this, mTimeout.count(), WT_EXECUTEINWAITTHREAD);
         assert(result);
     }
 
-    void execute(std::string_view command) {
+    void execute(std::string_view command)
+    {
         std::string cmd { command };
         ShellExecute(0, nullptr, cmd.c_str(), nullptr, nullptr, SW_SHOW);
     }

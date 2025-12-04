@@ -2,16 +2,13 @@
 
 #include "tempwidget.h"
 
+#include "Madgine/behavior/nativebehaviorcollector.h"
 #include "Madgine/resources/sender.h"
-
-#include "../widget.h"
-#include "../widgetmanager.h"
-
 #include "Madgine/window/mainwindow.h"
 
 #include "../tablewidget.h"
-
-#include "Madgine/behavior/nativebehaviorcollector.h"
+#include "../widget.h"
+#include "../widgetmanager.h"
 
 namespace Engine {
 namespace Widgets {

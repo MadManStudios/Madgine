@@ -2,9 +2,9 @@
 
 /// @cond
 
+#include "Madgine/applib.h"
 #include "Madgine/behaviorlib.h"
 #include "Madgine/clientlib.h"
-#include "Madgine/applib.h"
 
 #if defined(Handler_EXPORTS)
 #    define MADGINE_HANDLER_EXPORT DLL_EXPORT

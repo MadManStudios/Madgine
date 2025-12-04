@@ -1,15 +1,13 @@
 #include "../../scenelib.h"
+
 #include "entitycomponenthandle.h"
 
 #include "Meta/serialize/operations.h"
 
-#include "entity.h"
-
 #include "../scenemanager.h"
-
-#include "entitycomponentlistbase.h"
-
+#include "entity.h"
 #include "entitycomponentbase.h"
+#include "entitycomponentlistbase.h"
 
 namespace Engine {
 namespace Scene {
@@ -45,11 +43,13 @@ namespace Scene {
             entity->sceneMgr().entityComponentList(index.mType).setActive(index.mComponent, active, existenceChanged);
         }
 
-        std::string_view EntityComponentHandle::name() const {
+        std::string_view EntityComponentHandle::name() const
+        {
             return EntityComponentRegistry::sComponentName(mType);
         }
 
-        ScopePtr EntityComponentHandle::getTyped() const {
+        ScopePtr EntityComponentHandle::getTyped() const
+        {
             return { &mComponent, *EntityComponentRegistry::get(mType).mType };
         }
 

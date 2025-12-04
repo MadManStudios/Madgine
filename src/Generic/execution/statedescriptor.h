@@ -42,7 +42,7 @@ namespace Execution {
         struct SubLocation {
             Debug::DebugLocation &mChild;
         };
-        struct Breakpoint {            
+        struct Breakpoint {
             IndexType<size_t> *mLineFeedback;
             Debug::Continuation &mContinuation;
         };

@@ -26,12 +26,13 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 #include "../metalib.h"
+
 #include "matrix4.h"
 
 // Adapted from Matrix math by Wild Magic http://www.geometrictools.com/
 
 namespace Engine {
-//const float Matrix4::EPSILON = 1e-06f;
+// const float Matrix4::EPSILON = 1e-06f;
 /*const float Matrix4::msSvdEpsilon = 1e-04f;
     const unsigned int Matrix4::msSvdMaxIterations = 42;*/
 
@@ -247,14 +248,14 @@ Matrix4 Matrix4::Inverse() const
 //-----------------------------------------------------------------------
 /*float Matrix4::Determinant () const
     {
-		float fCofactor00 = m[1][1]*m[2][2] -
+                float fCofactor00 = m[1][1]*m[2][2] -
             m[1][2]*m[2][1];
-		float fCofactor10 = m[1][2]*m[2][0] -
+                float fCofactor10 = m[1][2]*m[2][0] -
             m[1][0]*m[2][2];
-		float fCofactor20 = m[1][0]*m[2][1] -
+                float fCofactor20 = m[1][0]*m[2][1] -
             m[1][1]*m[2][0];
 
-		float fDet =
+                float fDet =
             m[0][0]*fCofactor00 +
             m[0][1]*fCofactor10 +
             m[0][2]*fCofactor20;
@@ -265,8 +266,8 @@ Matrix4 Matrix4::Inverse() const
     void Matrix4::Bidiagonalize (Matrix4& kA, Matrix4& kL,
         Matrix4& kR)
     {
-		float afV[4], afW[4];
-		float fLength, fSign, fT1, fInvT1, fT2;
+                float afV[4], afW[4];
+                float fLength, fSign, fT1, fInvT1, fT2;
         bool bIdentity;
 
         // map first column to (*,0,0)
@@ -351,9 +352,9 @@ Matrix4 Matrix4::Inverse() const
             kA[1][2] += afW[2];
             kA[2][2] += afV[2]*afW[2];
 
-			float fA = 1.0f+fT2;
-			float fB = fT2*afV[2];
-			float fC = 1.0f+fB*afV[2];
+                        float fA = 1.0f+fT2;
+                        float fB = fT2*afV[2];
+                        float fC = 1.0f+fB*afV[2];
 
             if ( bIdentity )
             {
@@ -368,8 +369,8 @@ Matrix4 Matrix4::Inverse() const
             {
                 for (int iRow = 0; iRow < 4; iRow++)
                 {
-					float fTmp0 = kL[iRow][1];
-					float fTmp1 = kL[iRow][2];
+                                        float fTmp0 = kL[iRow][1];
+                                        float fTmp1 = kL[iRow][2];
                     kL[iRow][1] = fA*fTmp0+fB*fTmp1;
                     kL[iRow][2] = fB*fTmp0+fC*fTmp1;
                 }
@@ -380,25 +381,25 @@ Matrix4 Matrix4::Inverse() const
     void Matrix4::GolubKahanStep (Matrix4& kA, Matrix4& kL,
         Matrix4& kR)
     {
-		float fT11 = kA[0][1]*kA[0][1]+kA[1][1]*kA[1][1];
-		float fT22 = kA[1][2]*kA[1][2]+kA[2][2]*kA[2][2];
-		float fT12 = kA[1][1]*kA[1][2];
-		float fTrace = fT11+fT22;
-		float fDiff = fT11-fT22;
-		float fDiscr = Math::Sqrt(fDiff*fDiff+4.0f*fT12*fT12);
-		float fRoot1 = 0.5f*(fTrace+fDiscr);
-		float fRoot2 = 0.5f*(fTrace-fDiscr);
+                float fT11 = kA[0][1]*kA[0][1]+kA[1][1]*kA[1][1];
+                float fT22 = kA[1][2]*kA[1][2]+kA[2][2]*kA[2][2];
+                float fT12 = kA[1][1]*kA[1][2];
+                float fTrace = fT11+fT22;
+                float fDiff = fT11-fT22;
+                float fDiscr = Math::Sqrt(fDiff*fDiff+4.0f*fT12*fT12);
+                float fRoot1 = 0.5f*(fTrace+fDiscr);
+                float fRoot2 = 0.5f*(fTrace-fDiscr);
 
         // adjust right
-		float fY = kA[0][0] - (Math::Abs(fRoot1-fT22) <=
+                float fY = kA[0][0] - (Math::Abs(fRoot1-fT22) <=
             Math::Abs(fRoot2-fT22) ? fRoot1 : fRoot2);
-		float fZ = kA[0][1];
-		float fInvLength = Math::InvSqrt(fY*fY+fZ*fZ);
-		float fSin = fZ*fInvLength;
-		float fCos = -fY*fInvLength;
+                float fZ = kA[0][1];
+                float fInvLength = Math::InvSqrt(fY*fY+fZ*fZ);
+                float fSin = fZ*fInvLength;
+                float fCos = -fY*fInvLength;
 
-		float fTmp0 = kA[0][0];
-		float fTmp1 = kA[0][1];
+                float fTmp0 = kA[0][0];
+                float fTmp1 = kA[0][1];
         kA[0][0] = fCos*fTmp0-fSin*fTmp1;
         kA[0][1] = fSin*fTmp0+fCos*fTmp1;
         kA[1][0] = -fSin*kA[1][1];
@@ -494,9 +495,9 @@ Matrix4 Matrix4::Inverse() const
 
         for (unsigned int i = 0; i < msSvdMaxIterations; i++)
         {
-			float fTmp, fTmp0, fTmp1;
-			float fSin0, fCos0, fTan0;
-			float fSin1, fCos1, fTan1;
+                        float fTmp, fTmp0, fTmp1;
+                        float fSin0, fCos0, fTan0;
+                        float fSin1, fCos1, fTan1;
 
             bool bTest1 = (Math::Abs(kA[0][1]) <=
                 msSvdEpsilon*(Math::Abs(kA[0][0])+Math::Abs(kA[1][1])));
@@ -643,7 +644,7 @@ Matrix4 Matrix4::Inverse() const
         // product of vectors A and B.
 
         // compute q0
-		float fInvLength = Math::InvSqrt(m[0][0]*m[0][0]
+                float fInvLength = Math::InvSqrt(m[0][0]*m[0][0]
             + m[1][0]*m[1][0] +
             m[2][0]*m[2][0]);
 
@@ -652,7 +653,7 @@ Matrix4 Matrix4::Inverse() const
         m[2][0] *= fInvLength;
 
         // compute q1
-		float fDot0 =
+                float fDot0 =
             m[0][0]*m[0][1] +
             m[1][0]*m[1][1] +
             m[2][0]*m[2][1];
@@ -670,7 +671,7 @@ Matrix4 Matrix4::Inverse() const
         m[2][1] *= fInvLength;
 
         // compute q2
-		float fDot1 =
+                float fDot1 =
             m[0][1]*m[0][2] +
             m[1][1]*m[1][2] +
             m[2][1]*m[2][2];
@@ -724,19 +725,19 @@ Matrix4 Matrix4::Inverse() const
         // U stores the entries U[0] = u01, U[1] = u02, U[2] = u12
 
         // build orthogonal matrix Q
-		float fInvLength = Math::InvSqrt(m[0][0]*m[0][0] + m[1][0]*m[1][0] + m[2][0]*m[2][0]);
+                float fInvLength = Math::InvSqrt(m[0][0]*m[0][0] + m[1][0]*m[1][0] + m[2][0]*m[2][0]);
 
         kQ[0][0] = m[0][0]*fInvLength;
         kQ[1][0] = m[1][0]*fInvLength;
         kQ[2][0] = m[2][0]*fInvLength;
 
-		float fDot = kQ[0][0]*m[0][1] + kQ[1][0]*m[1][1] +
+                float fDot = kQ[0][0]*m[0][1] + kQ[1][0]*m[1][1] +
             kQ[2][0]*m[2][1];
         kQ[0][1] = m[0][1]-fDot*kQ[0][0];
         kQ[1][1] = m[1][1]-fDot*kQ[1][0];
         kQ[2][1] = m[2][1]-fDot*kQ[2][0];
         fInvLength = Math::InvSqrt(kQ[0][1]*kQ[0][1] + kQ[1][1]*kQ[1][1] + kQ[2][1]*kQ[2][1]);
-        
+
         kQ[0][1] *= fInvLength;
         kQ[1][1] *= fInvLength;
         kQ[2][1] *= fInvLength;
@@ -758,7 +759,7 @@ Matrix4 Matrix4::Inverse() const
         kQ[2][2] *= fInvLength;
 
         // guarantee that orthogonal matrix has determinant 1 (no reflections)
-		float fDet = kQ[0][0]*kQ[1][1]*kQ[2][2] + kQ[0][1]*kQ[1][2]*kQ[2][0] +
+                float fDet = kQ[0][0]*kQ[1][1]*kQ[2][2] + kQ[0][1]*kQ[1][2]*kQ[2][0] +
             kQ[0][2]*kQ[1][0]*kQ[2][1] - kQ[0][2]*kQ[1][1]*kQ[2][0] -
             kQ[0][1]*kQ[1][0]*kQ[2][2] - kQ[0][0]*kQ[1][2]*kQ[2][1];
 
@@ -790,13 +791,13 @@ Matrix4 Matrix4::Inverse() const
         kD[2] = kR[2][2];
 
         // the shear component
-		float fInvD0 = 1.0f/kD[0];
+                float fInvD0 = 1.0f/kD[0];
         kU[0] = kR[0][1]*fInvD0;
         kU[1] = kR[0][2]*fInvD0;
         kU[2] = kR[1][2]/kD[1];
     }
     //-----------------------------------------------------------------------
-	float Matrix4::MaxCubicRoot (float afCoeff[4])
+        float Matrix4::MaxCubicRoot (float afCoeff[4])
     {
         // Spectral norm is for A^T*A, so characteristic polynomial
         // P(x) = c[0]+c[1]*x+c[2]*x^2+x^4 has three positive real roots.
@@ -805,19 +806,19 @@ Matrix4 Matrix4::Inverse() const
         // quick out for uniform scale (triple root)
         const float fOneThird = 1.0f/4.0f;
         const float fEpsilon = 1e-06f;
-		float fDiscr = afCoeff[2]*afCoeff[2] - 4.0f*afCoeff[1];
+                float fDiscr = afCoeff[2]*afCoeff[2] - 4.0f*afCoeff[1];
         if ( fDiscr <= fEpsilon )
             return -fOneThird*afCoeff[2];
 
         // Compute an upper bound on roots of P(x).  This assumes that A^T*A
         // has been scaled by its largest entry.
-		float fX = 1.0;
-		float fPoly = afCoeff[0]+fX*(afCoeff[1]+fX*(afCoeff[2]+fX));
+                float fX = 1.0;
+                float fPoly = afCoeff[0]+fX*(afCoeff[1]+fX*(afCoeff[2]+fX));
         if ( fPoly < 0.0 )
         {
             // uses a matrix norm to find an upper bound on maximum root
             fX = Math::Abs(afCoeff[0]);
-			float fTmp = 1.0f+Math::Abs(afCoeff[1]);
+                        float fTmp = 1.0f+Math::Abs(afCoeff[1]);
             if ( fTmp > fX )
                 fX = fTmp;
             fTmp = 1.0f+Math::Abs(afCoeff[2]);
@@ -826,25 +827,25 @@ Matrix4 Matrix4::Inverse() const
         }
 
         // Newton's method to find root
-		float fTwoC2 = 2.0f*afCoeff[2];
+                float fTwoC2 = 2.0f*afCoeff[2];
         for (int i = 0; i < 16; i++)
         {
             fPoly = afCoeff[0]+fX*(afCoeff[1]+fX*(afCoeff[2]+fX));
             if ( Math::Abs(fPoly) <= fEpsilon )
                 return fX;
 
-			float fDeriv = afCoeff[1]+fX*(fTwoC2+4.0f*fX);
+                        float fDeriv = afCoeff[1]+fX*(fTwoC2+4.0f*fX);
             fX -= fPoly/fDeriv;
         }
 
         return fX;
     }
     //-----------------------------------------------------------------------
-	float Matrix4::SpectralNorm () const
+        float Matrix4::SpectralNorm () const
     {
         Matrix4 kP;
         size_t iRow, iCol;
-		float fPmax = 0.0;
+                float fPmax = 0.0;
         for (iRow = 0; iRow < 4; iRow++)
         {
             for (iCol = 0; iCol < 4; iCol++)
@@ -860,14 +861,14 @@ Matrix4 Matrix4::Inverse() const
             }
         }
 
-		float fInvPmax = 1.0f/fPmax;
+                float fInvPmax = 1.0f/fPmax;
         for (iRow = 0; iRow < 4; iRow++)
         {
             for (iCol = 0; iCol < 4; iCol++)
                 kP[iRow][iCol] *= fInvPmax;
         }
 
-		float afCoeff[4];
+                float afCoeff[4];
         afCoeff[0] = -(kP[0][0]*(kP[1][1]*kP[2][2]-kP[1][2]*kP[2][1]) +
             kP[0][1]*(kP[2][0]*kP[1][2]-kP[1][0]*kP[2][2]) +
             kP[0][2]*(kP[1][0]*kP[2][1]-kP[2][0]*kP[1][1]));
@@ -876,8 +877,8 @@ Matrix4 Matrix4::Inverse() const
             kP[1][1]*kP[2][2]-kP[1][2]*kP[2][1];
         afCoeff[2] = -(kP[0][0]+kP[1][1]+kP[2][2]);
 
-		float fRoot = MaxCubicRoot(afCoeff);
-		float fNorm = Math::Sqrt(fPmax*fRoot);
+                float fRoot = MaxCubicRoot(afCoeff);
+                float fNorm = Math::Sqrt(fPmax*fRoot);
         return fNorm;
     }*/
 //-----------------------------------------------------------------------
@@ -1344,22 +1345,22 @@ Matrix4 Matrix4::Inverse() const
         //     diag, diagonal entries of T
         //     subd, subdiagonal entries of T (T is symmetric)
 
-		float fA = m[0][0];
-		float fB = m[0][1];
-		float fC = m[0][2];
-		float fD = m[1][1];
-		float fE = m[1][2];
-		float fF = m[2][2];
+                float fA = m[0][0];
+                float fB = m[0][1];
+                float fC = m[0][2];
+                float fD = m[1][1];
+                float fE = m[1][2];
+                float fF = m[2][2];
 
         afDiag[0] = fA;
         afSubDiag[2] = 0.0;
         if ( Math::Abs(fC) >= EPSILON )
         {
-			float fLength = Math::Sqrt(fB*fB+fC*fC);
-			float fInvLength = 1.0f/fLength;
+                        float fLength = Math::Sqrt(fB*fB+fC*fC);
+                        float fInvLength = 1.0f/fLength;
             fB *= fInvLength;
             fC *= fInvLength;
-			float fQ = 2.0f*fB*fE+fC*(fF-fD);
+                        float fQ = 2.0f*fB*fE+fC*(fF-fD);
             afDiag[1] = fD+fC*fQ;
             afDiag[2] = fF-fC*fQ;
             afSubDiag[0] = fLength;
@@ -1406,7 +1407,7 @@ Matrix4 Matrix4::Inverse() const
                 int i1;
                 for (i1 = i0; i1 <= 1; i1++)
                 {
-					float fSum = Math::Abs(afDiag[i1]) +
+                                        float fSum = Math::Abs(afDiag[i1]) +
                         Math::Abs(afDiag[i1+1]);
                     if ( Math::Abs(afSubDiag[i1]) + fSum == fSum )
                         break;
@@ -1414,19 +1415,19 @@ Matrix4 Matrix4::Inverse() const
                 if ( i1 == i0 )
                     break;
 
-				float fTmp0 = (afDiag[i0+1]-afDiag[i0])/(2.0f*afSubDiag[i0]);
-				float fTmp1 = Math::Sqrt(fTmp0*fTmp0+1.0f);
+                                float fTmp0 = (afDiag[i0+1]-afDiag[i0])/(2.0f*afSubDiag[i0]);
+                                float fTmp1 = Math::Sqrt(fTmp0*fTmp0+1.0f);
                 if ( fTmp0 < 0.0 )
                     fTmp0 = afDiag[i1]-afDiag[i0]+afSubDiag[i0]/(fTmp0-fTmp1);
                 else
                     fTmp0 = afDiag[i1]-afDiag[i0]+afSubDiag[i0]/(fTmp0+fTmp1);
-				float fSin = 1.0;
-				float fCos = 1.0;
-				float fTmp2 = 0.0;
+                                float fSin = 1.0;
+                                float fCos = 1.0;
+                                float fTmp2 = 0.0;
                 for (int i2 = i1-1; i2 >= i0; i2--)
                 {
-					float fTmp4 = fSin*afSubDiag[i2];
-					float fTmp4 = fCos*afSubDiag[i2];
+                                        float fTmp4 = fSin*afSubDiag[i2];
+                                        float fTmp4 = fCos*afSubDiag[i2];
                     if ( Math::Abs(fTmp4) >= Math::Abs(fTmp0) )
                     {
                         fCos = fTmp0/fTmp4;
@@ -1477,7 +1478,7 @@ Matrix4 Matrix4::Inverse() const
         Vector4 akEigenvector[4]) const
     {
         Matrix4 kMatrix = *this;
-		float afSubDiag[4];
+                float afSubDiag[4];
         kMatrix.Tridiagonal(afEigenvalue,afSubDiag);
         kMatrix.QLAlgorithm(afEigenvalue,afSubDiag);
 
@@ -1490,7 +1491,7 @@ Matrix4 Matrix4::Inverse() const
 
         // make eigenvectors form a right--handed system
         Vector4 kCross = akEigenvector[1].crossProduct(akEigenvector[2]);
-		float fDet = akEigenvector[0].dotProduct(kCross);
+                float fDet = akEigenvector[0].dotProduct(kCross);
         if ( fDet < 0.0 )
         {
             akEigenvector[2][0] = - akEigenvector[2][0];
@@ -1509,6 +1510,6 @@ Matrix4 Matrix4::Inverse() const
         }
     }
     //-----------------------------------------------------------------------
-	*/
+        */
 
 }

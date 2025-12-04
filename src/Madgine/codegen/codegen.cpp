@@ -53,7 +53,7 @@ bool File::openCStyleGuard(std::ostream &stream, const Engine::TinyVector<Engine
 
         stream << "(";
 
-        Engine::StringUtil::StreamJoiner join { stream, " && " };        
+        Engine::StringUtil::StreamJoiner join { stream, " && " };
 
         for (size_t i = 0; i < 62; ++i) {
             if (cond[i]) {

@@ -1,6 +1,7 @@
 #include "../moduleslib.h"
 
 #include "taskqueue.h"
+
 #include "workgroup.h"
 
 #if EMSCRIPTEN
@@ -58,7 +59,7 @@ namespace Threading {
     void TaskQueue::queueInternal(ScheduledTask task, bool resume)
     {
         assert(mWorkGroup.state() != WorkGroupState::DONE);
-        //TODO: priority Queue
+        // TODO: priority Queue
         std::lock_guard<std::mutex> lock(mMutex);
         if (resume || !mInitializing) {
 #if !EMSCRIPTEN

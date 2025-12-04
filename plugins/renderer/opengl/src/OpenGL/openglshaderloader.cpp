@@ -2,21 +2,19 @@
 
 #include "openglshaderloader.h"
 
-#include "util/openglshader.h"
+#include "Interfaces/filesystem/fsapi.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "openglshadercodegen.h"
-
-#include "Interfaces/filesystem/fsapi.h"
-
 #include "openglrendercontext.h"
+#include "openglshadercodegen.h"
+#include "util/openglshader.h"
 
 UNIQUECOMPONENT(Engine::Render::OpenGLShaderLoader)
 
 METATABLE_BEGIN(Engine::Render::OpenGLShaderLoader)
-MEMBER(mResources)
+    MEMBER(mResources)
 METATABLE_END(Engine::Render::OpenGLShaderLoader)
 
 METATABLE_BEGIN_BASE(Engine::Render::OpenGLShaderLoader::Resource, Engine::Resources::ResourceBase)
@@ -54,9 +52,9 @@ namespace Render {
     OpenGLShaderLoader::OpenGLShaderLoader()
         : ResourceLoader({
 #if !OPENGL_ES
-              ".glsl"
+                             ".glsl"
 #else
-              ".glsl_es"
+                             ".glsl_es"
 #endif
                          },
               { .mIconName = "ShaderIcon.png" })
@@ -124,7 +122,7 @@ namespace Render {
                 source.insert(eol, R"(
     if (SRGB_FRAMEBUFFER){
         out_var_SV_TARGET = vec4(linearToSrgb(out_var_SV_TARGET.rgb).rgb, out_var_SV_TARGET.a);
-    })");          
+    })");
                 source.insert(entrypoint, R"(uniform bool SRGB_FRAMEBUFFER;
 
 vec3 linearToSrgb(vec3 linearRGB) {
@@ -147,7 +145,7 @@ vec3 linearToSrgb(vec3 linearRGB) {
         }
 #endif
 
-            const char *cSource = source.data();
+        const char *cSource = source.data();
 
         glShaderSource(handle, 1, &cSource, NULL);
         glCompileShader(handle);

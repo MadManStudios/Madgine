@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../entitycomponent.h"
 #include "Meta/math/matrix4.h"
 #include "Meta/math/quaternion.h"
 #include "Meta/math/vector3.h"
+
+#include "../entitycomponent.h"
 #include "../entityptr.h"
 
 namespace Engine {

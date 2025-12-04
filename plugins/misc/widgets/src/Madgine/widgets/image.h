@@ -1,8 +1,7 @@
 #pragma once
 
-#include "widget.h"
-
 #include "util/scalableimagerenderdata.h"
+#include "widget.h"
 
 namespace Engine {
 namespace Widgets {
@@ -10,7 +9,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Image() = default;
 
-        void render(WidgetsRenderData &renderData) override;        
+        void render(WidgetsRenderData &renderData) override;
 
         ScalableImageRenderData mImageRenderData;
         Color4 mColor = { 1.0f, 1.0f, 1.0f, 1.0f };

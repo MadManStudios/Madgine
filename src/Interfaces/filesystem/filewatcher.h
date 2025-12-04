@@ -1,10 +1,9 @@
 #pragma once
 
 #include "Generic/enum.h"
+#include "Generic/opaqueptr.h"
 
 #include "path.h"
-
-#include "Generic/opaqueptr.h"
 
 namespace Engine {
 namespace Filesystem {

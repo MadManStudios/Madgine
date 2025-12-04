@@ -1,7 +1,6 @@
 #pragma once
 
 #include "pendingrequest.h"
-
 #include "serializablemapholder.h"
 
 namespace Engine {

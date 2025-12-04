@@ -15,7 +15,6 @@ namespace Audio {
         static const constexpr size_t BUFFER_SIZE = 1024;
 
     protected:
-
         pos_type seekoff(off_type off, std::ios_base::seekdir dir,
             std::ios_base::openmode mode = std::ios_base::in) override;
         pos_type seekpos(pos_type pos,

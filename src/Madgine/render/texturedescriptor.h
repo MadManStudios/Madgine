@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ptr.h"
 #include "Generic/opaqueptr.h"
+
+#include "ptr.h"
 
 namespace Engine {
 namespace Render {

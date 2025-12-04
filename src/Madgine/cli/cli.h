@@ -12,7 +12,7 @@ namespace CLI {
 
         void help();
 
-		static bool isInitialized();
+        static bool isInitialized();
         static const CLICore &getSingleton();
         static std::vector<ParameterBase *> &parameters();
 

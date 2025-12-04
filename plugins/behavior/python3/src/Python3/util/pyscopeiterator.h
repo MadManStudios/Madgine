@@ -3,7 +3,7 @@
 #include "Meta/keyvalue/scopeiterator.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         extern PyTypeObject PyScopeIteratorType;

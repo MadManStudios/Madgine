@@ -1,16 +1,13 @@
 #pragma once
 
-#include "Meta/serialize/hierarchy/toplevelunit.h"
-
 #include "Generic/container/freelistcontainer.h"
-#include "entity/entity.h"
-
-#include "Meta/serialize/container/syncablecontainer.h"
-
 #include "Generic/execution/signalfunctor.h"
-
 #include "Generic/projections.h"
 
+#include "Meta/serialize/container/syncablecontainer.h"
+#include "Meta/serialize/hierarchy/toplevelunit.h"
+
+#include "entity/entity.h"
 #include "entity/entityhandle.h"
 
 namespace Engine {

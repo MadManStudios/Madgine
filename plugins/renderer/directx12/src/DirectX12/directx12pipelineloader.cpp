@@ -2,16 +2,14 @@
 
 #include "directx12pipelineloader.h"
 
-#include "directx12pixelshaderloader.h"
-
-#include "util/directx12pipelineinstance.h"
+#include "Madgine/codegen/codegen_shader.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/codegen/codegen_shader.h"
-
+#include "directx12pixelshaderloader.h"
 #include "directx12rendercontext.h"
+#include "util/directx12pipelineinstance.h"
 
 VIRTUALRESOURCELOADERIMPL(Engine::Render::DirectX12PipelineLoader, Engine::Render::PipelineLoader);
 

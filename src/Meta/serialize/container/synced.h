@@ -1,14 +1,15 @@
 #pragma once
 
-#include "serializable.h"
-#include "syncable.h"
 #include "Generic/memberoffsetptr.h"
 
-//TODO rewrite to modern operations
+#include "serializable.h"
+#include "syncable.h"
+
+// TODO rewrite to modern operations
 namespace Engine {
 namespace Serialize {
 
-#define SYNCED(Name, ...) MEMBER_OFFSET_CONTAINER(Name,, ::Engine::Serialize::Synced<__VA_ARGS__>)
+#define SYNCED(Name, ...) MEMBER_OFFSET_CONTAINER(Name, , ::Engine::Serialize::Synced<__VA_ARGS__>)
 #define SYNCED_INIT(Name, Init, ...) MEMBER_OFFSET_CONTAINER(Name, Init, ::Engine::Serialize::Synced<__VA_ARGS__>)
 
     template <typename T, typename Observer = NoOpFunctor, typename OffsetPtr = TaggedPlaceholder<MemberOffsetPtrTag, 0>>
@@ -117,13 +118,12 @@ namespace Serialize {
         {
             return tag_invoke(cpo, synced.mData, in, success, hierarchy);
         }
-                
+
         friend auto tag_invoke(set_synced_t cpo, Synced &synced, bool b, const CallerHierarchyBasePtr &hierarchy)
             requires(tag_invocable<set_parent_t, T &, bool, const CallerHierarchyBasePtr &>)
         {
             tag_invoke(cpo, synced.mData, b, hierarchy);
         }
-
 
     private:
         T mData;

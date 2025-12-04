@@ -1,15 +1,14 @@
 #include "../../metalib.h"
+
 #include "serializestream.h"
 
-#include "serializestreamdata.h"
-
 #include "Generic/bytebuffer.h"
-
-#include "../serializemanager.h"
 
 #include "Meta/base64/base64.h"
 
 #include "../hierarchy/serializableunitptr.h"
+#include "../serializemanager.h"
+#include "serializestreamdata.h"
 
 namespace Engine {
 namespace Serialize {
@@ -34,7 +33,7 @@ namespace Serialize {
         : Stream(std::move(other))
         , mData(std::move(other.mData))
     {
-        //mData->setManager(mgr);
+        // mData->setManager(mgr);
     }
 
     SerializeStream::~SerializeStream() = default;
@@ -59,7 +58,7 @@ namespace Serialize {
 
     StreamResult SerializeStream::readN(std::string &buffer, size_t n)
     {
-        STREAM_PROPAGATE_ERROR(skipWs());        
+        STREAM_PROPAGATE_ERROR(skipWs());
 
         if (n == 0)
             return {};
@@ -85,7 +84,7 @@ namespace Serialize {
 
     StreamResult SerializeStream::peekN(std::string &buffer, size_t n)
     {
-        //assert(!format().mBinary);
+        // assert(!format().mBinary);
 
         pos_type pos = tell();
         STREAM_PROPAGATE_ERROR(readN(buffer, n));
@@ -95,7 +94,7 @@ namespace Serialize {
 
     StreamResult SerializeStream::peekUntil(std::string &buffer, const char *c)
     {
-        //assert(!format().mBinary);
+        // assert(!format().mBinary);
 
         pos_type pos = tell();
         STREAM_PROPAGATE_ERROR(readUntil(buffer, c));

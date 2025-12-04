@@ -2,15 +2,14 @@
 
 #include "vulkanpipelineloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
 #include "Modules/uniquecomponent/uniquecomponent.h"
-
-#include "util/vulkanpipelineinstance.h"
 
 #include "Madgine/codegen/codegen_shader.h"
 
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "util/vulkanpipelineinstance.h"
 #include "vulkanrendercontext.h"
 
 VIRTUALRESOURCELOADERIMPL(Engine::Render::VulkanPipelineLoader, Engine::Render::PipelineLoader);

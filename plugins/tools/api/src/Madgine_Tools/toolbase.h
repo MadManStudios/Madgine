@@ -1,11 +1,9 @@
 #pragma once
 
-#include "Modules/threading/madgineobject.h"
-
 #include "Meta/keyvalue/virtualscope.h"
-
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
+#include "Modules/threading/madgineobject.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -67,7 +65,7 @@ namespace Tools {
         bool beginSubPanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio = 0.2f, ImGuiWindowFlags flags = 0);
         bool beginContent(ImGuiWindowFlags flags = 0);
         bool beginGame();
-                
+
         bool beginToolBar(const char *name);
         void endToolBar();
 

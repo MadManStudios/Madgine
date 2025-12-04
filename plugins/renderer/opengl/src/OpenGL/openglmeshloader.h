@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
-
 #include "Madgine/meshloader/gpumeshloader.h"
+#include "Madgine/resources/resourceloader.h"
 
 #include "openglmeshdata.h"
 

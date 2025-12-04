@@ -2,26 +2,18 @@
 
 #include "widgetsettings.h"
 
-#define IMGUI_DEFINE_MATH_OPERATORS
-#include "imgui/imgui.h"
-
+#include "Madgine/behavior/behavior.h"
+#include "Madgine/widgets/geometry.h"
 #include "Madgine/widgets/widget.h"
 
-#include "imgui/imguiaddons.h"
-
-#include "Madgine_Tools/inspector/inspector.h"
-
-#include "imgui/imgui_internal.h"
-
-#include "Madgine/widgets/geometry.h"
-
-#include "Madgine_Tools/imguiicons.h"
-
 #include "Madgine_Tools/behaviortool.h"
-
-#include "Madgine/behavior/behavior.h"
-
 #include "Madgine_Tools/debugger/debuggerview.h"
+#include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/inspector/inspector.h"
+#define IMGUI_DEFINE_MATH_OPERATORS
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 namespace Engine {
 namespace Tools {
@@ -103,7 +95,7 @@ namespace Tools {
                         join.next() << (conditions[i]->mName.empty() ? "<>" : conditions[i]->mName);
                     }
                 }
-                
+
                 if (ImGui::Selectable(out.str().c_str(), mCurrentConditional == conditional)) {
                     mCurrentConditional = conditional;
                 }
@@ -307,7 +299,6 @@ namespace Tools {
             }
             ImGui::EndPopup();
         }
-
     }
 
     void WidgetSettings::saveGeometry()

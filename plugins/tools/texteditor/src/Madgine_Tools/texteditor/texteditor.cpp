@@ -4,9 +4,8 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/serialize/serializetable_impl.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/renderer/imroot.h"
 

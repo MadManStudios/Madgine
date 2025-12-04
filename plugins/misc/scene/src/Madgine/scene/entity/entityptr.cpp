@@ -2,9 +2,8 @@
 
 #include "entityptr.h"
 
-#include "Meta/serialize/streams/streamresult.h"
-
 #include "Meta/serialize/operations.h"
+#include "Meta/serialize/streams/streamresult.h"
 
 #include "entityhandle.h"
 
@@ -12,8 +11,9 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        void EntityPtr::fromEntity(Entity& e) {
-            BindingPtr<Entity&>::operator=(static_cast<BindingPtr<Entity&>&&>(e.pointer()));
+        void EntityPtr::fromEntity(Entity &e)
+        {
+            BindingPtr<Entity &>::operator=(static_cast<BindingPtr<Entity &> &&>(e.pointer()));
         }
 
         Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &ptr, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)

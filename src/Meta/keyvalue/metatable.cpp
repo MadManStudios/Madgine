@@ -1,7 +1,8 @@
 #include "../metalib.h"
 
-#include "accessor.h"
 #include "metatable.h"
+
+#include "accessor.h"
 #include "scopefield.h"
 #include "scopeiterator.h"
 #include "valuetype.h"
@@ -57,7 +58,7 @@ std::string MetaTable::name(ScopePtr scope) const
         }
     }
     ScopeIterator proxyIt = find("__proxy", scope);
-    if (proxyIt != scope.end()){
+    if (proxyIt != scope.end()) {
         ValueType proxy;
         proxyIt->value(proxy);
         if (proxy.is<ScopePtr>()) {
@@ -67,23 +68,22 @@ std::string MetaTable::name(ScopePtr scope) const
     return "<"s + mTypeName + ">";
 }
 
-    const MetaTable *&sTypeList()
-    {
-        static const MetaTable *sDummy = nullptr;
-        return sDummy;
-    }
+const MetaTable *&sTypeList()
+{
+    static const MetaTable *sDummy = nullptr;
+    return sDummy;
+}
 
-    void registerType(const MetaTable &f)
-    {
-        if (sTypeList()) {
-            sTypeList()->mPrev = &f.mNext;
-        }
-        f.mNext = std::exchange(sTypeList(), &f);
+void registerType(const MetaTable &f)
+{
+    if (sTypeList()) {
+        sTypeList()->mPrev = &f.mNext;
     }
+    f.mNext = std::exchange(sTypeList(), &f);
+}
 
-    void unregisterType(const MetaTable &f)
-    {
-    }
-
+void unregisterType(const MetaTable &f)
+{
+}
 
 }

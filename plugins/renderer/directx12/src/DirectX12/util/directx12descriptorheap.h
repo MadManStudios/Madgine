@@ -3,8 +3,7 @@
 namespace Engine {
 namespace Render {
 
-    struct MADGINE_DIRECTX12_EXPORT DirectX12DescriptorHeap
-    {
+    struct MADGINE_DIRECTX12_EXPORT DirectX12DescriptorHeap {
         DirectX12DescriptorHeap() = default;
         DirectX12DescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE type);
         ~DirectX12DescriptorHeap();

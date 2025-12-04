@@ -1,15 +1,11 @@
 #pragma once
 
+#include "Madgine/render/pointshadowrenderdata.h"
+#include "Madgine/render/scenerenderdata.h"
 #include "Madgine/scene/sceneloader.h"
-
 #include "Madgine/scene/scenemanager.h"
 
 #include "entitycache.h"
-
-#include "Madgine/render/pointshadowrenderdata.h"
-
-#include "Madgine/render/scenerenderdata.h"
-
 #include "sceneeditor.h"
 
 namespace Engine {
@@ -41,7 +37,7 @@ namespace Tools {
 
         Scene::SceneManager mManager;
         Scene::SceneContainer &mContainer;
-                
+
         Render::SceneRenderData mSceneData;
 
         Render::PointShadowRenderData mPointShadowRenderData;

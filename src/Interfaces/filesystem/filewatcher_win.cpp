@@ -2,13 +2,11 @@
 
 #if WINDOWS
 
-#    include "fsapi.h"
-
-#    include "filewatcher.h"
-
 #    include "Generic/coroutines/generator.h"
 
 #    include "../helpers/win_ptrs.h"
+#    include "filewatcher.h"
+#    include "fsapi.h"
 
 #    define NOMINMAX
 #    include <Windows.h>
@@ -137,7 +135,7 @@ namespace Filesystem {
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
         for (std::pair<const Path, UniqueOpaquePtr> &handle : mWatches) {
             // cause destroy
-            handle.second.release<Generator<std::vector<FileEvent>>>();            
+            handle.second.release<Generator<std::vector<FileEvent>>>();
         }
         mWatches.clear();
 #    endif

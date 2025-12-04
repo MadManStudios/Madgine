@@ -2,17 +2,11 @@
 
 #include "syncableunit.h"
 
-#include "statetransmissionflags.h"
-
-#include "serializetable.h"
-
-#include "toplevelunit.h"
-
-#include "../syncmanager.h"
-
 #include "../operations.h"
-
 #include "../streams/writemessage.h"
+#include "../syncmanager.h"
+#include "serializetable.h"
+#include "toplevelunit.h"
 
 namespace Engine {
 namespace Serialize {

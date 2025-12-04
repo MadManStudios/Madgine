@@ -2,29 +2,25 @@
 
 #include "pointshadowrenderpass.h"
 
-#include "Madgine/scene/scenemanager.h"
+#include "Meta/math/frustum.h"
+#include "Meta/math/transformation.h"
 
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
 #include "Madgine/scene/entity/components/mesh.h"
 #include "Madgine/scene/entity/components/pointlight.h"
 #include "Madgine/scene/entity/components/skeleton.h"
 #include "Madgine/scene/entity/components/transform.h"
 #include "Madgine/scene/entity/entity.h"
-
-#include "Madgine/render/rendercontext.h"
-#include "Madgine/render/rendertarget.h"
+#include "Madgine/scene/scenemanager.h"
 
 #include "scenemainwindowcomponent.h"
 
-#include "Meta/math/transformation.h"
-
-#include "Meta/math/frustum.h"
-
-//#include "Madgine/render/rendercontext.h"
+// #include "Madgine/render/rendercontext.h"
 
 #include "Madgine/render/shadinglanguage/sl_support_begin.h"
 #include "shaders/pointshadow.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
-
 
 namespace Engine {
 namespace Render {
@@ -59,7 +55,7 @@ namespace Render {
         if (mIndex >= lights.size())
             return;
 
-        //TODO Culling
+        // TODO Culling
         auto it = lights.begin();
         std::advance(it, mIndex);
         Scene::Entity::Entity &entity = it->entity();
@@ -85,7 +81,6 @@ namespace Render {
 
             std::vector<PointShadowInstanceData> instanceData;
 
-            
             static constexpr Matrix4 rotationMatrices[] = {
                 { 0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 },
                 { 0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 1 },
@@ -96,7 +91,7 @@ namespace Render {
             };
 
             Matrix4 v = rotationMatrices[iteration] * TranslationMatrix(-transform->mPosition);
-            
+
             {
                 auto instanceData = mPipeline->mapTempBuffer<PointShadowInstanceData[]>(1, instance.second.size());
 

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Generic/linestruct.h"
-#include "valuetype_forward.h"
 
 #include "argumentlist.h"
 #include "functionargument.h"
 #include "functiontable.h"
+#include "valuetype_forward.h"
 
 namespace Engine {
 

@@ -2,20 +2,20 @@
 
 #include "vulkanshaderloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
+#include "Interfaces/filesystem/fsapi.h"
 
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
-#include "vulkanshadercodegen.h"
 #include "vulkanrendercontext.h"
+#include "vulkanshadercodegen.h"
 
 UNIQUECOMPONENT(Engine::Render::VulkanShaderLoader)
 
 METATABLE_BEGIN(Engine::Render::VulkanShaderLoader)
-MEMBER(mResources)
+    MEMBER(mResources)
 METATABLE_END(Engine::Render::VulkanShaderLoader)
 
 METATABLE_BEGIN_BASE(Engine::Render::VulkanShaderLoader::Resource, Engine::Resources::ResourceBase)
@@ -99,14 +99,14 @@ namespace Render {
             std::ofstream f { res->path() };
             f << ss.str();
         }*/
-        
-        //return loadFromSource(shader, "<generated>", ss.str(), type, "<generated>");
+
+        // return loadFromSource(shader, "<generated>", ss.str(), type, "<generated>");
         throw 0;
     }
 
     bool VulkanShaderLoader::loadFromSource(VulkanPtr<VkShaderModule, &vkDestroyShaderModule> &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Filesystem::Path &path)
     {
-       
+
         VkShaderModuleCreateInfo createInfo {};
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.codeSize = source.size();

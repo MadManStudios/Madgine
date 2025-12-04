@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Scene {
     namespace Entity {
-        
+
         Serialize::StreamResult EntityComponentListBase::readState(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream in, const char *name)
         {
             return getSerialized(comp).readState(in, name);
@@ -19,7 +19,7 @@ namespace Scene {
         }
 
         Serialize::StreamResult EntityComponentListBase::applyMap(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
-        {            
+        {
             return getSerialized(comp).applyMap(in, success);
         }
 

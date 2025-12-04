@@ -2,11 +2,10 @@
 
 #include "Generic/callerhierarchy.h"
 
+#include "Meta/serialize/hierarchy/serializableunitptr.h"
 #include "Meta/serialize/streams/streamresult.h"
 
 #include "Modules/uniquecomponent/component_index.h"
-
-#include "Meta/serialize/hierarchy/serializableunitptr.h"
 
 namespace Engine {
 namespace Scene {

@@ -12,19 +12,16 @@
 #    define META_EXPORT DLL_IMPORT
 #endif
 
-#include <variant>
 #include <array>
-#include <queue>
-#include <optional>
-#include <stack>
 #include <cmath>
 #include <cstddef>
 #include <cstring>
+#include <optional>
+#include <queue>
 #include <span>
-
+#include <stack>
+#include <variant>
 
 #include "metaforward.h"
-
-
 
 /// @endcond

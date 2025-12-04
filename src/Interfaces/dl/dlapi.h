@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../filesystem/path.h"
-#include "Generic/genericresult.h"
 #include "Generic/functor.h"
+#include "Generic/genericresult.h"
+
+#include "../filesystem/path.h"
 
 namespace Engine {
 namespace Dl {
@@ -10,7 +11,7 @@ namespace Dl {
     ENUM_BASE(DlAPIResult, GenericResult,
         DEPENDENCY_ERROR)
 
-    struct INTERFACES_EXPORT DlHandle{
+    struct INTERFACES_EXPORT DlHandle {
         DlHandle() = default;
         DlHandle(const DlHandle &) = delete;
         ~DlHandle();
@@ -28,6 +29,6 @@ namespace Dl {
     private:
         void *mHandle = nullptr;
     };
-    
+
 }
 }

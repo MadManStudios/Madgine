@@ -2,18 +2,18 @@
 
 #include "python3streamredirect.h"
 
+#include "Interfaces/log/log.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "util/pyobjectutil.h"
 
-#include "Interfaces/log/log.h"
-
 METATABLE_BEGIN(Engine::Behavior::Python3::Python3StreamRedirect)
-FUNCTION(write, text)
+    FUNCTION(write, text)
 METATABLE_END(Engine::Behavior::Python3::Python3StreamRedirect)
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         Python3StreamRedirect::Python3StreamRedirect(Log::Log *log)

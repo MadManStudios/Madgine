@@ -4,11 +4,6 @@
 
 #include "pyobjectutil.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-
-METATABLE_BEGIN(Engine::Behavior::Python3::PyFramePtr)
-METATABLE_END(Engine::Behavior::Python3::PyFramePtr)
-
 namespace Engine {
 namespace Behavior {
     namespace Python3 {

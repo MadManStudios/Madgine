@@ -1,14 +1,13 @@
 #pragma once
 
-#include "../toolscollector.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
-
-#include "dialogs.h"
-
 #include "Interfaces/filesystem/path.h"
 
 #include "Meta/math/vector2i.h"
+
+#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
+
+#include "../toolscollector.h"
+#include "dialogs.h"
 
 namespace Engine {
 
@@ -55,7 +54,7 @@ namespace Tools {
 
         std::map<unsigned int, size_t> mDockSpaces;
 
-    protected:        
+    protected:
         unsigned int mRootDockSpaceId;
         unsigned int mGameDockSpaceId;
 

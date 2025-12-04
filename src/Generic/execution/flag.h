@@ -39,13 +39,11 @@ namespace Execution {
             return { std::move(stack), this };
         }
 
-        
         void reset()
         {
             std::lock_guard guard { this->mStack.mutex() };
             this->mValue.reset();
         }
-
     };
 }
 }

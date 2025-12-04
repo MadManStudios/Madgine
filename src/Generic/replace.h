@@ -20,7 +20,7 @@ template <typename T>
 struct replace {
     template <typename... Args>
     using type = typename replace_tagged<T, DefaultTag, Args...>::type;
-    
+
     template <typename Tag, typename... Args>
     using tagged = typename replace_tagged<T, Tag, Args...>::type;
 
@@ -60,7 +60,7 @@ struct replace_tagged {
 
 template <typename T, typename Tag, typename... Args>
 struct replace_tagged<T &, Tag, Args...> {
-    using type = typename replace_tagged<T, Tag, Args...>::type&;
+    using type = typename replace_tagged<T, Tag, Args...>::type &;
 };
 
 template <typename Tag, size_t N, typename... Args>
@@ -90,7 +90,7 @@ struct replace_pattern_tagged {
 
 template <typename T, template <auto...> typename Pattern, template <auto...> typename... Args>
 struct replace_pattern_tagged<T &, Pattern, Args...> {
-    using type = typename replace_pattern_tagged<T, Pattern, Args...>::type&;
+    using type = typename replace_pattern_tagged<T, Pattern, Args...>::type &;
 };
 
 template <auto... Params, size_t N, template <auto...> typename Pattern, template <auto...> typename... Args>

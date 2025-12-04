@@ -28,11 +28,13 @@ struct fixed_string {
         return result;
     }
 
-    constexpr operator std::string_view() const& {
+    constexpr operator std::string_view() const &
+    {
         return { mData, Size };
     }
 
-    constexpr const char* c_str() const {
+    constexpr const char *c_str() const
+    {
         return mData;
     }
 
@@ -41,7 +43,6 @@ struct fixed_string {
 
 template <size_t Size>
 fixed_string(const char (&data)[Size]) -> fixed_string<Size - 1>;
-
 
 namespace detail {
     template <unsigned... digits>

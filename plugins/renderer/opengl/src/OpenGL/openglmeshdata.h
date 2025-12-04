@@ -1,10 +1,10 @@
 #pragma once
 
-#include "util/openglbuffer.h"
-#include "util/opengltexture.h"
-
 #include "Madgine/meshloader/gpumeshdata.h"
 #include "Madgine/render/textureloader.h"
+
+#include "util/openglbuffer.h"
+#include "util/opengltexture.h"
 
 namespace Engine {
 namespace Render {

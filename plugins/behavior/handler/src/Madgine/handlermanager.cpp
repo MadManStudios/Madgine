@@ -2,28 +2,24 @@
 
 #include "handlermanager.h"
 
-#include "Madgine/window/mainwindow.h"
-
-#include "Modules/debug/profiler/profile.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Generic/execution/execution.h"
 
 #include "Meta/serialize/configs/controlled.h"
 
-#include "handler.h"
-
+#include "Modules/debug/profiler/profile.h"
+#include "Modules/threading/awaitables/awaitablesender.h"
+#include "Modules/threading/awaitables/awaitabletimepoint.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/app/application.h"
+#include "Madgine/window/mainwindow.h"
 
-#include "Modules/threading/awaitables/awaitabletimepoint.h"
+#include "Meta/keyvalue/metatable_impl.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
-#include "Generic/execution/execution.h"
+#include "handler.h"
 
 METATABLE_BEGIN(Engine::Behavior::HandlerManager)
-MEMBER(mHandlers)
+    MEMBER(mHandlers)
 METATABLE_END(Engine::Behavior::HandlerManager)
 
 namespace Engine {

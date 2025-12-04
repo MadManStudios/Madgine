@@ -2,20 +2,19 @@
 
 #include "launchertool.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
+#include "Interfaces/window/windowapi.h"
+
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/serialize/filesystem/filemanager.h"
+#include "Madgine/window/mainwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
 #include "Madgine_Tools/imgui/clientimroot.h"
-
-#include "Interfaces/window/windowapi.h"
-#include "Madgine/window/mainwindow.h"
-
-#include "Madgine/serialize/filesystem/filemanager.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::LauncherTool);
 
@@ -35,7 +34,6 @@ namespace Tools {
 
     void LauncherTool::renderMenu()
     {
-
     }
 
     bool LauncherTool::renderConfiguration(const Filesystem::Path &config)

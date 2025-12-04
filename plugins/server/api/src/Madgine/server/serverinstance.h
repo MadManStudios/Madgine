@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Modules/threading/workgrouphandle.h"
-
 #include "Generic/closure.h"
+
+#include "Modules/threading/workgrouphandle.h"
 
 namespace Engine {
 namespace Server {
@@ -13,7 +13,7 @@ namespace Server {
 
         const char *key() const;
 
-        //ValueType toValueType() const;
+        // ValueType toValueType() const;
 
     private:
         std::string mName;

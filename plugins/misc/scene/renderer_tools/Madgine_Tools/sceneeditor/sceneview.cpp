@@ -2,47 +2,32 @@
 
 #include "sceneview.h"
 
-#include "imgui/imgui.h"
-
-#include "imgui/imguiaddons.h"
+#include "Meta/math/geometry3.h"
+#include "Meta/math/plane.h"
+#include "Meta/math/transformation.h"
 
 #include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/render/texture.h"
+#include "Madgine/scene/entity/components/mesh.h"
+#include "Madgine/scene/entity/components/transform.h"
+#include "Madgine/scene/entity/entity.h"
+#include "Madgine/scene/scenemanager.h"
+#include "Madgine/window/mainwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "im3d/im3d.h"
-
-#include "sceneeditor.h"
-
-#include "Madgine/scene/entity/components/transform.h"
-
-#include "Meta/math/plane.h"
-
-#include "Meta/math/geometry3.h"
-
-#include "Madgine/scene/scenemanager.h"
-
-#include "Madgine/scene/entity/entity.h"
-
-#include "Madgine/scene/entity/components/mesh.h"
-
-#include "Madgine/render/texture.h"
-
-#include "Meta/math/transformation.h"
-
-#include "Madgine/render/rendertarget.h"
-
-#include "Madgine_Tools/interactivecamera.h"
-
 #include "Madgine_Tools/imgui/clientimroot.h"
-
-#include "Madgine/window/mainwindow.h"
-
+#include "Madgine_Tools/interactivecamera.h"
+#include "im3d/im3d.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
+#include "sceneeditor.h"
 #include "scenetool.h"
 
 METATABLE_BEGIN(Engine::Tools::SceneView)
-READONLY_PROPERTY(Camera, camera)
-READONLY_PROPERTY(SceneRenderer, sceneRenderer)
+    READONLY_PROPERTY(Camera, camera)
+    READONLY_PROPERTY(SceneRenderer, sceneRenderer)
 METATABLE_END(Engine::Tools::SceneView)
 
 namespace Engine {

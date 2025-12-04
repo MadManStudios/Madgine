@@ -1,17 +1,16 @@
+#include "Madgine/imageloaderlib.h"
 #include "directx12lib.h"
 
 #include "directx12meshloader.h"
 
-#include "directx12meshdata.h"
+#include "Madgine/imageloader/imagedata.h"
+#include "Madgine/imageloader/imageloader.h"
+#include "Madgine/meshloader/meshdata.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/imageloader/imagedata.h"
-#include "Madgine/imageloader/imageloader.h"
-#include "Madgine/imageloaderlib.h"
-#include "Madgine/meshloader/meshdata.h"
-
+#include "directx12meshdata.h"
 #include "directx12rendercontext.h"
 
 VIRTUALRESOURCELOADERIMPL(Engine::Render::DirectX12MeshLoader, Engine::Render::GPUMeshLoader);
@@ -39,7 +38,6 @@ namespace Render {
         if (!co_await GPUMeshLoader::generate(_data, mesh))
             co_return false;
 
-        
         for (const MeshData::Material &mat : mesh.mMaterials) {
             GPUMeshData::Material &gpuMat = data.mMaterials.emplace_back();
             gpuMat.mName = mat.mName;
@@ -51,7 +49,7 @@ namespace Render {
             data.mTextureCache.emplace_back();
             TextureLoader::Handle &diffuseTexture = data.mTextureCache[data.mTextureCache.size() - 2];
             TextureLoader::Handle &emissiveTexture = data.mTextureCache[data.mTextureCache.size() - 1];
-            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));            
+            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));
             futures.push_back(emissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
 
             for (Threading::TaskFuture<bool> &fut : futures) {
@@ -70,7 +68,7 @@ namespace Render {
 
     void DirectX12MeshLoader::reset(GPUMeshData &data)
     {
-        static_cast<DirectX12MeshData&>(data).mVertices.reset();
+        static_cast<DirectX12MeshData &>(data).mVertices.reset();
         static_cast<DirectX12MeshData &>(data).mIndices.reset();
         static_cast<DirectX12MeshData &>(data).mTextureCache.clear();
         for (GPUMeshData::Material &gpuMat : data.mMaterials) {

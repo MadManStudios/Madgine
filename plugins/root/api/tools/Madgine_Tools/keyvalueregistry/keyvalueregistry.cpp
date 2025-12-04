@@ -2,19 +2,17 @@
 
 #include "keyvalueregistry.h"
 
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
 #include "Madgine/root/keyvalueregistry.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
+#include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/imroot.h"
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
-
-#include "Madgine_Tools/renderer/imroot.h"
-
-#include "Madgine_Tools/inspector/inspector.h"
 
 UNIQUECOMPONENT(Engine::Tools::KeyValueRegistry);
 

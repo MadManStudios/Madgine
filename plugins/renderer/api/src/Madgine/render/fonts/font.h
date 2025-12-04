@@ -3,7 +3,6 @@
 #include "Meta/math/vector2i.h"
 
 #include "../textureloader.h"
-
 #include "glyph.h"
 
 namespace Engine {

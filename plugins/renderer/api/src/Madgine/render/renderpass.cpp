@@ -2,11 +2,10 @@
 
 #include "renderpass.h"
 
-#include "renderdata.h"
-
-#include "rendertarget.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
+
+#include "renderdata.h"
+#include "rendertarget.h"
 
 METATABLE_BEGIN(Engine::Render::RenderPass)
 METATABLE_END(Engine::Render::RenderPass)

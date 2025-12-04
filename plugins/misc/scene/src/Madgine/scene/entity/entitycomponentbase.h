@@ -1,24 +1,21 @@
 #pragma once
 
+#include "Generic/container/compactcontainer.h"
+#include "Generic/container/freelistcontainer.h"
+#include "Generic/offsetptr.h"
+
 #include "Meta/serialize/hierarchy/serializableunit.h"
+#include "Meta/serialize/streams/pendingrequest.h"
 
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
 #include "entitycomponentcontainer.h"
 
-#include "Generic/container/compactcontainer.h"
-
-#include "Meta/serialize/streams/pendingrequest.h"
-
-#include "Generic/offsetptr.h"
-
-#include "Generic/container/freelistcontainer.h"
-
 namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        struct EntityComponentActionPayload {            
+        struct EntityComponentActionPayload {
             size_t mComponentIndex;
             OffsetPtr mOffset;
             const void *mComponent;
@@ -48,11 +45,9 @@ namespace Scene {
         protected:
             void writeAction(OffsetPtr offset, size_t componentIndex, void *data, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, const std::set<Serialize::ParticipantId> &targets = {}) const;
             void writeRequest(OffsetPtr offset, void *data, Serialize::ParticipantId requester = 0, Serialize::MessageId requesterTransactionId = 0, Serialize::GenericMessageReceiver receiver = {}) const;
-        
+
             friend MADGINE_SCENE_EXPORT Serialize::WriteMessage getSlaveRequestMessageTarget(const EntityComponentBase *unit, Serialize::ParticipantId requester, Serialize::MessageId requestId, Serialize::GenericMessageReceiver receiver);
 
-
-            
             template <typename Ty, typename... Args>
             void writeAction(Ty *field, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, Args &&...args) const
             {
@@ -80,7 +75,6 @@ namespace Scene {
 
             template <typename T>
             friend struct Serialize::Syncable;
-
         };
     }
 }

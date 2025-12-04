@@ -125,7 +125,7 @@ namespace Render {
     void VulkanRenderTexture::beginFrame()
     {
         mCommandList = context()->fetchCommandList(name(), {}, { /* mRenderSemaphore */ });
-        
+
         if (mBlitSource)
             blit(mBlitSource);
 
@@ -167,4 +167,3 @@ namespace Render {
 
 }
 }
-

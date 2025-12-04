@@ -2,9 +2,9 @@
 
 #include "inifile.h"
 
-#include "inisection.h"
-
 #include "Interfaces/filesystem/fsapi.h"
+
+#include "inisection.h"
 
 namespace Engine {
 namespace Ini {
@@ -66,7 +66,7 @@ namespace Ini {
             std::string sectionName = "General";
             if (StringUtil::startsWith(line, "[") && StringUtil::endsWith(line, "]"))
                 sectionName = StringUtil::substr(line, 1, -1);
-            
+
             auto pib = mSections.try_emplace(sectionName);
             if (!pib.second) {
                 LOG_WARNING("Ini-File '" << path.c_str() << "' contains section '" << sectionName << "' twice. Second instance is ignored!");

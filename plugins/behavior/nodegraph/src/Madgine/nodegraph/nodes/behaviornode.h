@@ -1,13 +1,11 @@
 #pragma once
 
-#include "../nodebase.h"
-#include "../nodecollector.h"
-
+#include "Madgine/behavior/behaviorhandle.h"
+#include "Madgine/behavior/named.h"
 #include "Madgine/behavior/parametertuple.h"
 
-#include "Madgine/behavior/behaviorhandle.h"
-
-#include "Madgine/behavior/named.h"
+#include "../nodebase.h"
+#include "../nodecollector.h"
 
 namespace Engine {
 namespace Behavior {

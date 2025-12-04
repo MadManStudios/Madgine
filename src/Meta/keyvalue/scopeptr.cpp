@@ -1,11 +1,10 @@
 #include "../metalib.h"
 
-#include "scopeiterator.h"
 #include "scopeptr.h"
-#include "scopefield.h"
 
 #include "metatable.h"
-
+#include "scopefield.h"
+#include "scopeiterator.h"
 #include "virtualscope.h" //enforce export of VirtualScopeBase<void>
 
 namespace Engine {

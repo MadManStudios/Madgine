@@ -23,13 +23,13 @@ namespace Scene {
 
             EntityPtr &operator=(const EntityPtr &other)
             {
-                Execution::BindingPtr<Entity &>::operator=(static_cast<const Execution::BindingPtr<Entity&>&>(other));
+                Execution::BindingPtr<Entity &>::operator=(static_cast<const Execution::BindingPtr<Entity &> &>(other));
                 return *this;
             }
 
             EntityPtr &operator=(EntityPtr &&other)
             {
-                Execution::BindingPtr<Entity &>::operator=(static_cast<Execution::BindingPtr<Entity&>&&>(other));
+                Execution::BindingPtr<Entity &>::operator=(static_cast<Execution::BindingPtr<Entity &> &&>(other));
                 return *this;
             }
 

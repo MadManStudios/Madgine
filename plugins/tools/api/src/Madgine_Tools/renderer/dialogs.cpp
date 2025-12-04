@@ -7,7 +7,8 @@
 namespace Engine {
 namespace Tools {
 
-    void DialogSettings::accept() {
+    void DialogSettings::accept()
+    {
         result = DialogResult::Accepted;
     }
 
@@ -32,23 +33,22 @@ namespace Tools {
         std::vector<CoroutineHandle<DialogPromise>> dialogs = std::move(mDialogs);
 
         for (CoroutineHandle<DialogPromise> &dialog : dialogs) {
-            if (renderHeader(dialog->mSettings)) {                
+            if (renderHeader(dialog->mSettings)) {
                 CoroutineHandle<DialogPromise> continuation;
                 dialog->mOutHandle = &continuation;
                 DialogSettings backup = dialog->mSettings;
                 dialog.release().resume();
                 DialogSettings &settings = continuation ? continuation->mSettings : backup;
                 renderFooter(settings);
-                if (continuation) {       
+                if (continuation) {
                     if (settings.result) {
-                        if (*settings.result != DialogResult::Canceled) {                            
+                        if (*settings.result != DialogResult::Canceled) {
                             continuation.release().resume();
                         }
                     } else {
                         mDialogs.push_back(std::move(continuation));
                     }
                 }
-
             }
         }
     }

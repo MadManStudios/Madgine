@@ -1,20 +1,19 @@
 #include "Madgine/applib.h"
 #include "Madgine/resourceslib.h"
 
+#include "main.h"
+
 #include "Interfaces/filesystem/fsapi.h"
 
+#include "Modules/threading/scheduler.h"
 #include "Modules/threading/workgroup.h"
 
 #include "Madgine/root/root.h"
-#include "Modules/threading/scheduler.h"
-
-#include "launcherconfig.h"
 
 #include "launcher.h"
-#include "server.h"
-
-#include "main.h"
+#include "launcherconfig.h"
 #include "main_compat.h"
+#include "server.h"
 
 int desktopMain_compat(int argc, char **argv)
 {

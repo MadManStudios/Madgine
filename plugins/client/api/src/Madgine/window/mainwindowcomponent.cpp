@@ -2,13 +2,12 @@
 
 #include "mainwindowcomponent.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Madgine/render/rendertarget.h"
 
+#include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "mainwindow.h"
-
-#include "Madgine/render/rendertarget.h"
 
 METATABLE_BEGIN(Engine::Window::MainWindowComponentBase)
 METATABLE_END(Engine::Window::MainWindowComponentBase)

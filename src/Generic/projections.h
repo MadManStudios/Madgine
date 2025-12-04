@@ -21,7 +21,7 @@ constexpr auto projectionUniquePtrToPtr = LIFT(uniquePtrToPtr);
 template <typename T>
 decltype(auto) pairSecond(T &&t)
 {
-    return std::invoke(&std::remove_reference_t<T>::second, std::forward<T>(t));    
+    return std::invoke(&std::remove_reference_t<T>::second, std::forward<T>(t));
 }
 
 constexpr auto projectionPairSecond = LIFT(pairSecond);

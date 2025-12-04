@@ -3,7 +3,7 @@
 #include "Meta/math/quaternion.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         extern PyTypeObject PyQuaternionType;

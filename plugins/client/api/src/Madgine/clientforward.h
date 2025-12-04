@@ -7,10 +7,9 @@ namespace Window {
     struct MainWindow;
     struct ToolWindow;
 
-	struct MainWindowComponentBase;
+    struct MainWindowComponentBase;
     struct MainWindowComponentComparator;
 }
-
 
 namespace Render {
     struct RendererBase;
@@ -21,7 +20,7 @@ namespace Render {
     struct RenderData;
     struct RenderDebuggable;
     struct Camera;
-    
+
 }
 
 }

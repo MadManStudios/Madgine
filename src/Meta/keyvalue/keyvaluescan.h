@@ -16,8 +16,8 @@ void kvScan(F &&f, const ScopePtr &scope, std::string_view name = {}, ScopePtr p
         field.value(v);
         v.visit([&](auto &&v) { kvScan(f, std::forward<decltype(v)>(v), field.key(), scope); });
     }
-} 
-    
+}
+
 template <typename F, typename T>
 void kvScan(F &&f, const T &t, std::string_view name = {}, ScopePtr parent = {})
 {

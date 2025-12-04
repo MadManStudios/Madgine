@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace ax {
 namespace NodeEditor {
 
@@ -8,7 +7,6 @@ namespace NodeEditor {
 
 }
 }
-
 
 namespace Engine {
 namespace Tools {

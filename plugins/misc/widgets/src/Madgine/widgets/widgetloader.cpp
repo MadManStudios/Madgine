@@ -2,13 +2,15 @@
 
 #include "widgetloader.h"
 
+#include "Meta/serialize/formats.h"
+#include "Meta/serialize/helper/typedobjectserialize.h"
+#include "Meta/serialize/serializemanager.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Meta/serialize/formats.h"
-#include "Meta/serialize/serializemanager.h"
-
 #include "button.h"
+#include "compoundwidget.h"
 #include "image.h"
 #include "label.h"
 #include "layout.h"
@@ -17,15 +19,8 @@
 #include "tablewidget.h"
 #include "textedit.h"
 #include "widget.h"
-
-#include "widgetmanager.h"
-
-#include "Meta/serialize/helper/typedobjectserialize.h"
-
-#include "compoundwidget.h"
-
 #include "widgetcollector.h"
-
+#include "widgetmanager.h"
 #include "widgettemplate.h"
 
 RESOURCELOADER(Engine::Widgets::WidgetLoader)

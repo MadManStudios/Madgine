@@ -1,15 +1,14 @@
 #pragma once
 
-#include "Generic/execution/concepts.h"
-#include "Madgine/behavior/named.h"
-
 #include "Generic/execution/algorithm.h"
+#include "Generic/execution/concepts.h"
 #include "Generic/execution/execution.h"
+
+#include "Madgine/behavior/named.h"
+#include "Madgine/codegen/fromsender.h"
 
 #include "nodebase.h"
 #include "nodeinterpreter.h"
-
-#include "Madgine/codegen/fromsender.h"
 
 namespace Engine {
 namespace Behavior {

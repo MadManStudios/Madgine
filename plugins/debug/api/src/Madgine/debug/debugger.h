@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Generic/execution/stop_callback.h"
+
 #include "Madgine/root/rootcomponentbase.h"
 #include "Madgine/root/rootcomponentcollector.h"
 

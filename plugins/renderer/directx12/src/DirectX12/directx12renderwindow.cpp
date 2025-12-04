@@ -2,16 +2,15 @@
 
 #include "directx12renderwindow.h"
 
-#include "Modules/debug/profiler/profile.h"
+#include "Interfaces/window/windowapi.h"
 
 #include "Meta/math/vector2i.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Modules/debug/profiler/profile.h"
+#include "Modules/threading/taskqueue.h"
 
 #include "directx12rendercontext.h"
 #include "util/directx12commandallocator.h"
-
-#include "Modules/threading/taskqueue.h"
 
 namespace Engine {
 namespace Render {
@@ -20,7 +19,7 @@ namespace Render {
         : DirectX12RenderTarget(context, true, w->title(), TextureType_2D, samples)
         , mWindow(w)
     {
-        //context->waitForGPU();
+        // context->waitForGPU();
 
         HRESULT hr;
 
@@ -99,7 +98,7 @@ namespace Render {
 
         DirectX12RenderTarget::beginFrame();
 
-        //mCommandList.attachResource(mBackBuffers[mSwapChain->GetCurrentBackBufferIndex()]);
+        // mCommandList.attachResource(mBackBuffers[mSwapChain->GetCurrentBackBufferIndex()]);
     }
 
     RenderFuture DirectX12RenderWindow::endFrame()

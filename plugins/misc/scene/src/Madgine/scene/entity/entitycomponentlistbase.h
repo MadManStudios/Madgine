@@ -22,13 +22,11 @@ namespace Scene {
             virtual void setSynced(EntityComponentBase &comp, bool synced) = 0;
             virtual void setActive(EntityComponentBase &comp, bool active, bool existenceChanged) = 0;
 
-            
             Serialize::StreamResult readState(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream in, const char *name);
 
             void writeState(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream out, const char *name) const;
 
             Serialize::StreamResult applyMap(EntityComponentBase &comp, Serialize::CallerHierarchyFormattedSerializeStream in, bool success);
-
         };
 
     }

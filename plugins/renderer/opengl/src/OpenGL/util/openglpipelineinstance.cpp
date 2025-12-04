@@ -1,20 +1,18 @@
 #include "../opengllib.h"
 
 #include "openglpipelineinstance.h"
-#include "openglshader.h"
+
+#include "Generic/bytebuffer.h"
 
 #include "Meta/math/matrix4.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Generic/bytebuffer.h"
-
-#include "openglvertexarray.h"
-
 #include "../openglmeshdata.h"
-
 #include "../openglrendercontext.h"
 #include "../openglrendertarget.h"
+#include "openglshader.h"
+#include "openglvertexarray.h"
 
 namespace Engine {
 namespace Render {
@@ -125,7 +123,7 @@ namespace Render {
             glUniform1i(location, static_cast<OpenGLRenderTarget *>(target)->mIsSRGBTarget);
             GL_CHECK();
         }
-#endif        
+#endif
 
         if (mHasIndices) {
             glDrawElements(mMode, mElementCount, GL_UNSIGNED_INT, reinterpret_cast<const void *>(mIndexOffset));

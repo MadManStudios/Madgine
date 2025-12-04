@@ -4,11 +4,9 @@
 
 namespace Engine {
 
-	
 struct FunctionArgument {
     ExtendedValueTypeDesc mType;
     std::string_view mName;
 };
-
 
 }

@@ -2,20 +2,20 @@
 
 #include "meshloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Madgine/render/vertex.h"
-
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
-#include "../assimptools.h"
+#include "Interfaces/filesystem/fsapi.h"
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Madgine/render/vertex.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "../assimptools.h"
 
 RESOURCELOADER(Engine::Render::MeshLoader)
 
@@ -95,7 +95,7 @@ namespace Render {
     {
         std::vector<V> vertices;
         std::vector<uint32_t> indices;
-        //Reserve??
+        // Reserve??
 
         std::map<aiNode *, size_t> boneIndices;
 
@@ -237,7 +237,7 @@ namespace Render {
         for (size_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
             aiMaterial *mat = scene->mMaterials[materialIndex];
             if (mat->GetName() == aiString { "DefaultMaterial" })
-                continue; //TODO: Find proper solution
+                continue; // TODO: Find proper solution
 
             MeshData::Material &targetMat = materials.emplace_back();
             targetMat.mName = mat->GetName().C_Str();

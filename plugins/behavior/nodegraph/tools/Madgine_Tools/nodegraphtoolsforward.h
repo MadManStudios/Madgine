@@ -3,7 +3,7 @@
 namespace ax {
 namespace NodeEditor {
 
-	struct EditorContext;
+    struct EditorContext;
 
 }
 }

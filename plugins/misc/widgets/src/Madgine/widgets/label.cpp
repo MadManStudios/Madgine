@@ -8,13 +8,13 @@
 NAMED_UNIQUECOMPONENT(Label, Engine::Widgets::Label);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::Label, Engine::Widgets::WidgetBase)
-MEMBER(mText)
-NAMED_MEMBER(TextData, mTextRenderData)
+    MEMBER(mText)
+    NAMED_MEMBER(TextData, mTextRenderData)
 METATABLE_END(Engine::Widgets::Label)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::Label, Engine::Widgets::WidgetBase)
-FIELD(mText)
-FIELD(mTextRenderData)
+    FIELD(mText)
+    FIELD(mTextRenderData)
 SERIALIZETABLE_END(Engine::Widgets::Label)
 
 namespace Engine {

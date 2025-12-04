@@ -1,28 +1,23 @@
 #include "behaviortoolslib.h"
 
-#define IMGUI_DEFINE_MATH_OPERATORS
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-#include "imgui/imguiaddons.h"
+#include "behaviortool.h"
+
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/behavior/behavior.h"
+#include "Madgine/behavior/behaviorcollector.h"
+#include "Madgine/behavior/behaviorlist.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Madgine_Tools/imguiicons.h"
-
 #include "Madgine_Tools/debugger/debuggerview.h"
-
-#include "behaviortool.h"
-
-#include "Madgine/behavior/behavior.h"
-
-#include "Madgine/behavior/behaviorlist.h"
-
+#include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
-
-#include "Madgine/behavior/behaviorcollector.h"
+#define IMGUI_DEFINE_MATH_OPERATORS
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::BehaviorTool);
 

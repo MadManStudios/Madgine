@@ -11,7 +11,7 @@ struct BitArray {
     static constexpr size_t InternalArraySize = (Count * MemberSize - 1) / 8 + 1;
     static constexpr size_t FreeBitCount = InternalArraySize * 8 - Count * MemberSize;
     static constexpr uint8_t FreeBitMask = (1 << FreeBitCount) - 1;
-    
+
     constexpr BitArray() = default;
 
     static constexpr uint64_t readPtrAsUInt64(const uint8_t *ptr, size_t offset)
@@ -131,12 +131,14 @@ struct BitArray {
             return other;
         }
 
-        constexpr pointer& operator+=(size_t diff) {
+        constexpr pointer &operator+=(size_t diff)
+        {
             mOffset += diff;
             return *this;
         }
 
-        constexpr pointer operator+(size_t diff) const {
+        constexpr pointer operator+(size_t diff) const
+        {
             pointer other = *this;
             other += diff;
             return other;

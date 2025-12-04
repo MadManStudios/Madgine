@@ -3,10 +3,9 @@
 #include "pylistptr.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
- 
         struct PyObjectIterator {
 
             using iterator_category = std::input_iterator_tag;
@@ -29,7 +28,7 @@ namespace Behavior{
             PyObjectPtr mObject;
             PyListPtr::iterator mIt;
         };
-    
+
     }
 }
 }

@@ -1,13 +1,12 @@
 #pragma once
 
-#include "Madgine/debug/debuglocation.h"
+#include "Generic/closure.h"
 
 #include "Interfaces/debug/stacktrace.h"
 
+#include "Madgine/debug/debuglocation.h"
+
 #include "behaviorstatebase.h"
-
-#include "Generic/closure.h"
-
 #include "concepts.h"
 
 namespace Engine {

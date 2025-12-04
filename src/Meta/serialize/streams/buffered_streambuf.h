@@ -2,7 +2,6 @@
 
 #include "message_streambuf.h"
 
-
 namespace Engine {
 namespace Serialize {
 
@@ -44,12 +43,12 @@ namespace Serialize {
         StreamResult sendMessages() override;
 
     private:
-        //read
+        // read
         uint64_t mBytesToRead;
         BufferedMessageHeader mReceiveMessageHeader;
         std::vector<char> mRecBuffer;
 
-        //write
+        // write
         std::vector<char> mSendBuffer;
 
         struct BufferedMessage {

@@ -2,17 +2,14 @@
 
 #include "shadowrenderpass.h"
 
-#include "Madgine/scene/scenemanager.h"
-
+#include "Madgine/render/camera.h"
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
 #include "Madgine/scene/entity/components/mesh.h"
 #include "Madgine/scene/entity/components/skeleton.h"
 #include "Madgine/scene/entity/components/transform.h"
 #include "Madgine/scene/entity/entity.h"
-
-#include "Madgine/render/rendercontext.h"
-#include "Madgine/render/rendertarget.h"
-
-#include "Madgine/render/camera.h"
+#include "Madgine/scene/scenemanager.h"
 
 #include "scenemainwindowcomponent.h"
 

@@ -1,11 +1,10 @@
 #pragma once
 
+#include "Modules/threading/workgroupstorage.h"
+
 #include "Madgine/resources/virtualresourceloader.h"
 
 #include "gpumeshdata.h"
-
-#include "Modules/threading/workgroupstorage.h"
-
 #include "meshdata.h"
 
 namespace Engine {

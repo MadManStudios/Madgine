@@ -2,10 +2,10 @@
 
 /// @cond
 
+#include "Madgine/behaviorlib.h"
 #include "Madgine/clientlib.h"
 #include "Madgine/imageloaderlib.h"
 #include "Madgine/meshloaderlib.h"
-#include "Madgine/behaviorlib.h"
 
 #if defined(Widgets_EXPORTS)
 #    define MADGINE_WIDGETS_EXPORT DLL_EXPORT

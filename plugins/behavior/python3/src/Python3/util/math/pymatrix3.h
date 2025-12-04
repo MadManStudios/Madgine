@@ -3,7 +3,7 @@
 #include "Meta/math/matrix3.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         extern PyTypeObject PyMatrix3Type;

@@ -10,8 +10,46 @@ Language: Cpp
 DerivePointerAlignment: false
 PointerAlignment: Right
 
+IncludeBlocks: Regroup 
+
 IncludeCategories:
-  - Regex:     '^"(\.\./)*[a-zA-Z]+lib\.h"$'
-    Priority:  -1
+  - Regex:     'lib\.h"$'
+    Priority:     -1
+  - Regex:     'sl_support_begin.h"$'
+    Priority:     10
+    SortPriority: 11
+  - Regex:     'sl_support_end.h"$'
+    Priority:     10
+    SortPriority: 13
+  - Regex:     '.sl"$'
+    Priority:     10
+    SortPriority: 12
+  - Regex:     '_impl.h"$'
+    Priority:     9
+  - Regex:     '^"Generic/'
+    Priority:     2
+  - Regex:     '^"Interfaces/'
+    Priority:     3
+  - Regex:     '^"Meta/'
+    Priority:     4
+  - Regex:     '^"Modules/'
+    Priority:     5
+  - Regex:     '^"Madgine/'
+    Priority:     6
+  - Regex:     '^<'
+    Priority:     1
+
 
 IndentPPDirectives: AfterHash
+
+MacroBlockBegin: "^METATABLE_BEGIN|\
+METATABLE_BEGIN_BASE|\
+SERIALIZETABLE_BEGIN|\
+SERIALIZETABLE_INHERIT_BEGIN|\
+DEFAULT_SENDER_NODE_BEGIN|\
+DEFAULT_SENDER_NODE_BEGIN|\
+CONSTANT_SENDER_NODE_BEGIN$"
+MacroBlockEnd: "^METATABLE_END|\
+METATABLE_DYNAMIC_END|\
+SERIALIZETABLE_END|\
+SENDER_NODE_END$"

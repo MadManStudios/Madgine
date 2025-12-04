@@ -2,9 +2,9 @@
 
 #include "base64.h"
 
-#include "Generic/bytebuffer.h"
-
 #include <span>
+
+#include "Generic/bytebuffer.h"
 
 namespace Engine {
 namespace Base64 {
@@ -13,7 +13,7 @@ namespace Base64 {
     static constexpr std::array<uint8_t, 256> base64Lookup = []() {
         std::array<uint8_t, 256> result;
         std::fill_n(result.begin(), 256, 255);
-        //result.fill(255); //TODO: Not constexpr in current NDK
+        // result.fill(255); //TODO: Not constexpr in current NDK
         for (uint8_t i = 0; i < 64; ++i) {
             result[base64Symbols[i]] = i;
         }
@@ -58,7 +58,7 @@ namespace Base64 {
             ++rit;
         size_t fillCount = rit - string.rbegin();
         if (fillCount >= 3)
-            return false;            
+            return false;
         size_t resultSize = string.size() / 4 * 3 - fillCount;
         std::unique_ptr<uint8_t[]> data = std::make_unique<uint8_t[]>(resultSize);
         uint16_t buffer;

@@ -2,13 +2,12 @@
 
 #if ANDROID
 
-#    include "fsapi.h"
-
+#    include <android/asset_manager.h>
 #    include <dirent.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
 
-#    include <android/asset_manager.h>
+#    include "fsapi.h"
 
 namespace Engine {
 namespace Filesystem {

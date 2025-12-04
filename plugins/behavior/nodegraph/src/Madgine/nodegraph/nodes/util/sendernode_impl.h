@@ -1,10 +1,11 @@
 #pragma once
 
-#include "sendernode.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "sendernode.h"
 
 namespace Engine {
 namespace Behavior {
@@ -24,19 +25,21 @@ namespace Behavior {
 }
 }
 
-#define SENDER_NODE_BEGIN(Name, Config, ...)                                              \
+#define SENDER_NODE_BEGIN(Name, Config, ...)                                                        \
     struct Name##Node : Engine::Behavior::NodeGraph::SenderNode<Name##Node, Config, __VA_ARGS__> {  \
         using Engine::Behavior::NodeGraph::SenderNode<Name##Node, Config, __VA_ARGS__>::SenderNode; \
-    };                                                                                    \
-                                                                                          \
-    NAMED_UNIQUECOMPONENT(Name, Name##Node)                                               \
-                                                                                          \
+    };                                                                                              \
+                                                                                                    \
+    NAMED_UNIQUECOMPONENT(Name, Name##Node)                                                         \
+                                                                                                    \
     METATABLE_BEGIN_BASE(Name##Node, Engine::Behavior::NodeGraph::NodeBase)                         \
-    SERIALIZETABLE_INHERIT_BEGIN(Name##Node, Engine::Behavior::NodeGraph::NodeBase)
+        SERIALIZETABLE_INHERIT_BEGIN(Name##Node, Engine::Behavior::NodeGraph::NodeBase)
 
 #define SENDER_NODE_END(Name) \
-    METATABLE_END(Name##Node) \
-    SERIALIZETABLE_END(Name##Node)
+    METATABLE_END             \
+    (Name##Node)              \
+    SERIALIZETABLE_END        \
+    (Name##Node)
 
 #define DEFAULT_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::Behavior::NodeGraph::DefaultConfig, __VA_ARGS__)
 #define CONSTANT_SENDER_NODE_BEGIN(Name, ...) SENDER_NODE_BEGIN(Name, Engine::Behavior::NodeGraph::ConstantConfig, __VA_ARGS__)

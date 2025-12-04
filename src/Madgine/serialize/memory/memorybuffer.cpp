@@ -7,7 +7,7 @@ namespace Memory {
     MemoryWriteBuffer::MemoryWriteBuffer(WritableByteBuffer buffer)
         : mWriteBuffer(std::move(buffer))
     {
-        setp(static_cast<char*>(buffer.mData), static_cast<char*>(buffer.mData) + buffer.mSize);
+        setp(static_cast<char *>(buffer.mData), static_cast<char *>(buffer.mData) + buffer.mSize);
     }
 
     MemoryReadBuffer::MemoryReadBuffer(ByteBuffer buffer)
@@ -62,7 +62,7 @@ namespace Memory {
     }
 
     MemoryReadBuffer::pos_type MemoryReadBuffer::seekoff(off_type off, std::ios_base::seekdir dir,
-        std::ios_base::openmode mode) 
+        std::ios_base::openmode mode)
     {
         assert(mode & std::ios_base::in);
 
@@ -90,7 +90,7 @@ namespace Memory {
     }
 
     MemoryReadBuffer::pos_type MemoryReadBuffer::seekpos(pos_type pos,
-        std::ios_base::openmode mode) 
+        std::ios_base::openmode mode)
     {
         assert(mode & std::ios_base::in);
 

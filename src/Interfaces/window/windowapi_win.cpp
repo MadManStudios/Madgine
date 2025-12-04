@@ -2,11 +2,10 @@
 
 #if WINDOWS
 
-#    include "windowapi.h"
-#    include "windowsettings.h"
-
 #    include "../input/inputevents.h"
 #    include "../input/rawinput_win.h"
+#    include "windowapi.h"
+#    include "windowsettings.h"
 
 #    define NOMINMAX
 #    include <Windows.h>
@@ -78,7 +77,7 @@ namespace Window {
             } else if (msg >= WM_KEYFIRST && msg <= WM_KEYLAST) {
                 Input::Key::Key keycode = (Input::Key::Key)wParam;
                 UINT scancode = (lParam >> 16) & 0xFF;
-                bool extended = (lParam >> 24) & 0x1; 
+                bool extended = (lParam >> 24) & 0x1;
                 switch (msg) {
                 case WM_KEYDOWN:
                 case WM_SYSKEYDOWN:
@@ -89,7 +88,7 @@ namespace Window {
 
                     WORD buffer;
                     switch (keycode) {
-                    case Input::Key::Key::Return: 
+                    case Input::Key::Key::Return:
                         buffer = '\n';
                         break;
                     default:
@@ -133,13 +132,12 @@ namespace Window {
                 }
                 case WM_INPUT: {
                     Input::RawInputDevice &device = Input::handleRawInput((HRAWINPUT)lParam);
-                    
+
                     auto event = device.fetchEvent();
 
                     std::visit(overloaded {
                                    [&](const Input::NoEvent &) {},
-                                   [&](const auto &event) { onEvent(event); }
-                               },
+                                   [&](const auto &event) { onEvent(event); } },
                         event);
                     break;
                 }
@@ -151,7 +149,7 @@ namespace Window {
                     break;
                 default:
                     handled = false;
-                    //LOG_WARNING("Unhandled Event type: " << msg);
+                    // LOG_WARNING("Unhandled Event type: " << msg);
                 }
             }
 
@@ -297,7 +295,7 @@ namespace Window {
         return result;
     }
 
-    //Input
+    // Input
     bool OSWindow::isKeyDown(Input::Key::Key key)
     {
         return static_cast<WindowsWindow *>(this)->mKeyDown[key];
@@ -459,7 +457,7 @@ namespace Window {
             HICON icon = (HICON)LoadImage(GetModuleHandle(nullptr), (LPCSTR)settings.mIcon, IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR);
             SendMessage(handle, WM_SETICON, ICON_SMALL, (LPARAM)icon);
             SendMessage(handle, WM_SETICON, ICON_BIG, (LPARAM)icon);
-            //DestroyIcon(icon);
+            // DestroyIcon(icon);
         }
 
         if (!settings.mHidden) {

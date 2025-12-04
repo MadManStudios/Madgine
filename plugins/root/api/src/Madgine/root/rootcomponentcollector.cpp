@@ -1,7 +1,8 @@
 #include "../rootlib.h"
 
-#include "Modules/uniquecomponent/uniquecomponentregistry.h"
 #include "rootcomponentcollector.h"
+
+#include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "root.h"
 

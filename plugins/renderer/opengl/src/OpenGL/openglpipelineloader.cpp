@@ -2,15 +2,13 @@
 
 #include "openglpipelineloader.h"
 
-#include "openglshaderloader.h"
+#include "Madgine/codegen/codegen_shader.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/codegen/codegen_shader.h"
-
 #include "openglrendercontext.h"
-
+#include "openglshaderloader.h"
 #include "util/openglpipelineinstance.h"
 
 VIRTUALRESOURCELOADERIMPL(Engine::Render::OpenGLPipelineLoader, Engine::Render::PipelineLoader);

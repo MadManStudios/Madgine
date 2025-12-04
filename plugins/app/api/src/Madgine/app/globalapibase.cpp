@@ -2,10 +2,9 @@
 
 #include "globalapibase.h"
 
-#include "application.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 
+#include "application.h"
 
 METATABLE_BEGIN(Engine::App::GlobalAPIBase)
 METATABLE_END(Engine::App::GlobalAPIBase)
@@ -48,4 +47,3 @@ namespace App {
 
 }
 }
-

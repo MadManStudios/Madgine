@@ -1,20 +1,21 @@
 #pragma once
 
-#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
-#include "Interfaces/filesystem/filewatcher.h"
-#include "resourceloadercollector.h"
-#include "Modules/threading/taskqueue.h"
 #include "Generic/systemvariable.h"
 
-#include "Modules/threading/madgineobject.h"
+#include "Interfaces/filesystem/filewatcher.h"
 
-#include "Madgine/root/rootcomponentcollector.h"
+#include "Modules/threading/madgineobject.h"
+#include "Modules/threading/taskqueue.h"
+#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
+
 #include "Madgine/root/rootcomponentbase.h"
+#include "Madgine/root/rootcomponentcollector.h"
+
+#include "resourceloadercollector.h"
 
 namespace Engine {
 namespace Resources {
-    struct MADGINE_RESOURCES_EXPORT ResourceManager : Root::RootComponent<ResourceManager>, Threading::MadgineObject<ResourceManager>
-    {
+    struct MADGINE_RESOURCES_EXPORT ResourceManager : Root::RootComponent<ResourceManager>, Threading::MadgineObject<ResourceManager> {
         static ResourceManager &getSingleton();
 
         ResourceManager(Root::Root &root);
@@ -56,7 +57,7 @@ namespace Resources {
 
         Threading::TaskQueue *taskQueue();
 
-        std::map<Filesystem::Path, std::vector<ResourceBase*>> buildResourceList();
+        std::map<Filesystem::Path, std::vector<ResourceBase *>> buildResourceList();
 
     private:
         void updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority);

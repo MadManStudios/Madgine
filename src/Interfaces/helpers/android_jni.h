@@ -2,7 +2,7 @@
 
 #if ANDROID
 
-#include <jni.h>
+#    include <jni.h>
 
 namespace Engine {
 namespace JNI {
@@ -14,7 +14,7 @@ namespace JNI {
 
     INTERFACES_EXPORT jobject activity();
     INTERFACES_EXPORT JNIEnv *env();
-    
+
     INTERFACES_EXPORT void callStaticFunction(const char *className, const char *functionName, jobject object);
     INTERFACES_EXPORT void callStaticFunction2(const char *className, const char *functionName, std::string_view string, jlong v);
     INTERFACES_EXPORT void callStaticFunction3(const char *className, const char *functionName, std::string_view string1, jint v1, std::string_view string2, jlong v2);

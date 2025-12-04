@@ -4,17 +4,13 @@
 
 #include "server.h"
 
+#include "Modules/threading/scheduler.h"
 
 #include "Madgine/cli/parameter.h"
-
 #include "Madgine/root/keyvalueregistry.h"
-
 #include "Madgine/server/server.h"
 
 #include "launcher.h"
-
-#include "Modules/threading/scheduler.h"
-
 
 #if EMSCRIPTEN
 #    define FIX_LOCAL static
@@ -29,7 +25,8 @@ int server_launch(Engine::Closure<void(Engine::App::Application &, Engine::Windo
     return launch(std::move(init));
 }
 
-int server() {
+int server()
+{
     FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Server::Server> server { "Server", server_launch };
 
     if (headlessParameter) {

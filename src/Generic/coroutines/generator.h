@@ -45,7 +45,7 @@ struct Generator {
     Generator(CoroutineHandle<promise_type> handle)
         : mHandle(std::move(handle))
     {
-    }    
+    }
 
     Generator(Generator &&) = default;
 
@@ -61,7 +61,7 @@ struct Generator {
     struct iterator {
         using difference_type = std::ptrdiff_t;
         using value_type = forward_ref_t<T>;
-        using reference_type = const T&;
+        using reference_type = const T &;
 
         iterator(Generator<T> &gen)
             : mGen(&gen)
@@ -93,7 +93,7 @@ struct Generator {
         }
 
     private:
-        Generator<T> *mGen; //TODO: Store pointer to promise type directly?
+        Generator<T> *mGen; // TODO: Store pointer to promise type directly?
     };
 
     iterator begin()

@@ -2,12 +2,12 @@
 
 #if ENABLE_PLUGINS
 
+#    include "Generic/execution/lifetime.h"
+
+#    include "Modules/ini/inifile.h"
+
 #    include "../toolbase.h"
 #    include "../toolscollector.h"
-
-#include "Modules/ini/inifile.h"
-
-#include "Generic/execution/lifetime.h"
 
 namespace Engine {
 namespace Tools {
@@ -44,7 +44,7 @@ namespace Tools {
         };
         std::map<std::string, Icon> mIconCache;
 
-        Execution::Lifetime<> mLifetime;        
+        Execution::Lifetime<> mLifetime;
     };
 
 }

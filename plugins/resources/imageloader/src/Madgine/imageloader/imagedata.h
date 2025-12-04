@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Meta/math/vector2i.h"
 #include "Generic/bytebuffer.h"
+
+#include "Meta/math/vector2i.h"
 
 namespace Engine {
 namespace Resources {

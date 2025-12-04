@@ -1,15 +1,13 @@
 #include "../metalib.h"
 
 #include "boundapifunction.h"
-#include "valuetype.h"
-
-#include "functionargument.h"
-
-#include "functiontable.h"
 
 #include "Generic/execution/execution.h"
 
 #include "argumentlist.h"
+#include "functionargument.h"
+#include "functiontable.h"
+#include "valuetype.h"
 
 namespace Engine {
 

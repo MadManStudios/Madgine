@@ -55,7 +55,7 @@ namespace Threading {
             return mState->is_ready();
         }
 
-        auto &sender() const 
+        auto &sender() const
         {
             return mState->sender();
         }
@@ -143,7 +143,7 @@ namespace Threading {
         {
             return mState->sender();
         }
-           
+
         auto operator co_await() const
         {
             return TaskFutureAwaitable<void> { mState };

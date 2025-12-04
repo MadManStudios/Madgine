@@ -2,7 +2,7 @@
 
 #ifndef NDEBUG
 
-#include "traceback.h"
+#    include "traceback.h"
 
 namespace Engine {
 namespace Debug {
@@ -31,7 +31,8 @@ namespace Debug {
         }
 
         template <size_t U>
-        StackTrace<U> subset(size_t offset = 0) const {
+        StackTrace<U> subset(size_t offset = 0) const
+        {
             static_assert(U <= S);
             assert(U + offset <= S);
             StackTrace<U> result;
@@ -58,25 +59,29 @@ namespace Debug {
         }
 
         struct iterator {
-            bool operator!=(const iterator& other) {
+            bool operator!=(const iterator &other)
+            {
                 return mCurrent != other.mCurrent;
             }
 
-            void operator++() {
+            void operator++()
+            {
                 assert(mCurrent < mEnd);
                 ++mCurrent;
                 if (mCurrent != mEnd && !*mCurrent)
                     mCurrent = mEnd;
             }
 
-            void* &operator*() {
+            void *&operator*()
+            {
                 return *mCurrent;
             }
 
             void **mCurrent, **mEnd;
         };
 
-        iterator begin() {
+        iterator begin()
+        {
             return { mTrace.data(), mTrace.data() + S };
         }
 

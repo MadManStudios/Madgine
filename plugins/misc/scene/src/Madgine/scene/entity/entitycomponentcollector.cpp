@@ -2,9 +2,9 @@
 
 #include "entitycomponentcollector.h"
 
-#include "entitycomponentlistbase.h"
-
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
+
+#include "entitycomponentlistbase.h"
 
 DEFINE_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent)
 

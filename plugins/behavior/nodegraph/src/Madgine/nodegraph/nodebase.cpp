@@ -6,15 +6,14 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "nodegraph.h"
-
 #include "nodes/util/sendernode.h"
 
 METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeBase)
 METATABLE_END(Engine::Behavior::NodeGraph::NodeBase)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeBase)
-FIELD(mFlowOutPins)
-FIELD(mDataInPins)
+    FIELD(mFlowOutPins)
+    FIELD(mDataInPins)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeBase)
 
 namespace Engine {

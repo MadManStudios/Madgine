@@ -15,7 +15,7 @@ namespace Serialize {
 
     StreamResult::StreamResult(const StreamResult &other)
         : mState(other.mState)
-        , mError(other.mError ? std::make_unique<StreamError>(*other.mError) : std::unique_ptr<StreamError>{})
+        , mError(other.mError ? std::make_unique<StreamError>(*other.mError) : std::unique_ptr<StreamError> {})
     {
     }
 

@@ -2,13 +2,13 @@
 
 #include "debugger.h"
 
+#include "Generic/execution/stop_source.h"
+
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "debuglistener.h"
-
-#include "Generic/execution/stop_source.h"
 
 UNIQUECOMPONENT(Engine::Debug::Debugger)
 
@@ -16,7 +16,7 @@ METATABLE_BEGIN(Engine::Debug::Debugger)
 METATABLE_END(Engine::Debug::Debugger)
 
 METATABLE_BEGIN(Engine::Debug::ContextInfo)
-READONLY_PROPERTY(Alive, alive)
+    READONLY_PROPERTY(Alive, alive)
 METATABLE_END(Engine::Debug::ContextInfo)
 
 namespace Engine {
@@ -47,7 +47,7 @@ namespace Debug {
     {
         std::erase(mListeners, listener);
     }
-        
+
     void ContextInfo::stepInto(DebugLocation &child)
     {
         std::unique_lock lock { mMutex };
@@ -66,7 +66,7 @@ namespace Debug {
 
     void ContextInfo::suspend(const DebugLocation &location, Continuation callback, Continuation &outContinuation, Execution::StopToken st)
     {
-        outContinuation = std::move(callback); //TODO proper syncing with stop_source; see debuggablesender::stop()
+        outContinuation = std::move(callback); // TODO proper syncing with stop_source; see debuggablesender::stop()
 
         if (mStopRequested || (st && st->stop_requested())) {
             outContinuation(ContinuationMode::Abort);
@@ -74,7 +74,7 @@ namespace Debug {
         }
 
         for (DebugListener *listener : Debugger::getSingleton().mListeners)
-            listener->onSuspend(location, outContinuation.type());        
+            listener->onSuspend(location, outContinuation.type());
     }
 
     void ContextInfo::continueExecution(ContinuationMode mode)
@@ -115,7 +115,7 @@ namespace Debug {
     {
         return false;
     }
-        
+
     bool Debugger::wantsPause(const DebugLocation &location, ContinuationType type, IndexType<size_t> line)
     {
         bool pause = (line && location.mContext->mPauseRequested) || location.mContext->mStopRequested;

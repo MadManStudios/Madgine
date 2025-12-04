@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../widgetloader.h"
+#include "Meta/math/matrix3.h"
 
 #include "Madgine/behavior/behavior.h"
-
 #include "Madgine/behavior/named.h"
 
-#include "Meta/math/matrix3.h"
+#include "../widgetloader.h"
 
 namespace Engine {
 namespace Widgets {

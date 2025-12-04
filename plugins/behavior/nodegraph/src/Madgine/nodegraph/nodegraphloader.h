@@ -1,12 +1,10 @@
 #pragma once
 
+#include "Madgine/behavior/behaviorcollector.h"
 #include "Madgine/resources/resourceloader.h"
+#include "Madgine/resources/sender.h"
 
 #include "nodegraph.h"
-
-#include "Madgine/behavior/behaviorcollector.h"
-
-#include "Madgine/resources/sender.h"
 
 namespace Engine {
 namespace Behavior {

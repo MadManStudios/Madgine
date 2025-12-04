@@ -1,5 +1,7 @@
 #include "../metalib.h"
+
 #include "objectptr.h"
+
 #include "objectinstance.h"
 #include "valuetype.h"
 

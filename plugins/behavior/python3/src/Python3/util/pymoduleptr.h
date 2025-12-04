@@ -1,12 +1,12 @@
 #pragma once
 
-#include "pyobjectptr.h"
 #include "pydictptr.h"
+#include "pyobjectptr.h"
 
 namespace Engine {
 namespace Behavior {
     namespace Python3 {
-    
+
         struct MADGINE_PYTHON3_EXPORT PyModulePtr : PyObjectPtr {
             PyModulePtr() = default;
             PyModulePtr(std::string_view name);
@@ -19,7 +19,7 @@ namespace Behavior {
 
             PyDictPtr getDict() const;
         };
-    
+
     }
 }
 }

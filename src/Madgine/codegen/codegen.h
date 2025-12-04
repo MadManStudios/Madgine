@@ -15,7 +15,6 @@ struct MADGINE_CODEGEN_EXPORT File {
     bool openCStyleGuard(std::ostream &stream, const Engine::TinyVector<Engine::BitArray<62>> &conditionals) const;
     void closeCStyleGuard(std::ostream &stream, bool wasOpened) const;
 
-    
     struct MADGINE_CODEGEN_EXPORT CustomCodeBuilder {
         CustomCodeBuilder(File *file)
             : mFile(file)
@@ -26,9 +25,9 @@ struct MADGINE_CODEGEN_EXPORT File {
 
         CustomCodeBuilder &operator<<(std::string_view code);
         template <typename T>
-        requires(!std::convertible_to<T, std::string_view>)
-            CustomCodeBuilder &
-            operator<<(const T &t)
+            requires(!std::convertible_to<T, std::string_view>)
+        CustomCodeBuilder &
+        operator<<(const T &t)
         {
             return (*this) << std::to_string(t);
         }
@@ -40,7 +39,6 @@ struct MADGINE_CODEGEN_EXPORT File {
     CustomCodeBuilder operator<<(std::string_view code);
 
     void addCustomCodeBlock(std::string code);
-
 
     std::vector<size_t> mConditionalsStack;
     std::vector<std::string> mConditionalTokenList;

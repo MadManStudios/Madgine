@@ -13,5 +13,7 @@ namespace Render {
     typedef int RenderPassFlags;
     struct TextureHandle;
 
+    struct RenderFuture;
+
 }
 }

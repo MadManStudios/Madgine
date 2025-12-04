@@ -2,15 +2,15 @@
 
 #if WINDOWS
 
+#    include "../helpers/win_ptrs.h"
 #    include "rawinput_win.h"
-#include "../helpers/win_ptrs.h"
 
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 namespace Engine {
 namespace Input {
 
-#    define USB_PACKET_LENGTH 64
+#        define USB_PACKET_LENGTH 64
 
     static std::mutex sRawInputDevicesMutex;
     static std::atomic_flag sRawInputInitialized = ATOMIC_FLAG_INIT;
@@ -80,14 +80,14 @@ namespace Input {
                 product = { ws.begin(), ws.end() };
             }
 
-            //device->name = SDL_CreateJoystickName(device->vendor_id, device->product_id, manufacturer_string, product_string);
+            // device->name = SDL_CreateJoystickName(device->vendor_id, device->product_id, manufacturer_string, product_string);
         }
 
         PHIDP_PREPARSED_DATA preparsedData;
         result = sGetPreparsedData(hFile, &preparsedData);
         assert(result);
 
-        //CHECK(SDL_HidD_GetPreparsedData(hFile, &device->preparsed_data));
+        // CHECK(SDL_HidD_GetPreparsedData(hFile, &device->preparsed_data));
 
         sRawInputDevices.try_emplace(device, device, std::move(manufacturer), std::move(product), preparsedData);
     }
@@ -266,7 +266,7 @@ namespace Input {
         }
         default:
             LOG("unknown value usage: " << usage);
-            return { CapData::FLOAT, & mUnknownValueDummy.dummy1, { &mUnknownValueDummy.dummy2 } };
+            return { CapData::FLOAT, &mUnknownValueDummy.dummy1, { &mUnknownValueDummy.dummy2 } };
         }
     }
 
@@ -289,11 +289,11 @@ namespace Input {
         for (ControlStick &stick : mControlSticks) {
             if (stick.mChanged) {
                 stick.mChanged = false;
-                return AxisEvent {stick.mType, stick.mAxis1, stick.mAxis2};
+                return AxisEvent { stick.mType, stick.mAxis1, stick.mAxis2 };
             }
         }
 
-        if (mZAxis.mChanged) {            
+        if (mZAxis.mChanged) {
             mZAxis.mChanged = false;
             return AxisEvent { AxisEvent::Z, mZAxis.mValue };
         }
@@ -307,7 +307,7 @@ namespace Input {
             auto event = std::move(mKeyEvents.front());
             mKeyEvents.pop();
             return std::visit([](const auto &ev) -> std::variant<NoEvent, AxisEvent, KeyPressEvent, KeyReleaseEvent> { return ev; }, event);
-        } 
+        }
 
         return {};
     }
@@ -315,6 +315,6 @@ namespace Input {
 }
 }
 
-#endif
+#    endif
 
 #endif

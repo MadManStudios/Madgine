@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../toolbase.h"
-#include "../toolscollector.h"
-
 #include "Generic/flags.h"
 #include "Generic/genericresult.h"
 
 #include "Meta/keyvalue/valuetype.h"
+
+#include "../toolbase.h"
+#include "../toolscollector.h"
 
 namespace Engine {
 namespace Tools {

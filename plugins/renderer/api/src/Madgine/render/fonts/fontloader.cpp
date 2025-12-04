@@ -1,35 +1,30 @@
 #include "../../renderlib.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
 #include "fontloader.h"
-
-#include "Meta/math/atlas2.h"
-#include "Meta/math/vector2i.h"
-
-#include "Madgine/serialize/memory/memorymanager.h"
-#include "Meta/serialize/operations.h"
 
 #include "Generic/areaview.h"
 #include "Generic/bytebuffer.h"
 
-#include "Meta/math/vector3.h"
-
 #include "Interfaces/filesystem/fsapi.h"
+
+#include "Meta/math/atlas2.h"
+#include "Meta/math/vector2i.h"
+#include "Meta/math/vector3.h"
+#include "Meta/serialize/container/container_operations.h"
+#include "Meta/serialize/formats.h"
+#include "Meta/serialize/operations.h"
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
 #include "Madgine/serialize/filesystem/filemanager.h"
+#include "Madgine/serialize/memory/memorymanager.h"
 
-#include "Meta/serialize/container/container_operations.h"
-
-#include "Meta/serialize/formats.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #undef INFINITE
-#include "msdfgen.h"
-
 #include "core/edge-coloring.h"
+#include "msdfgen.h"
 
 #ifdef STATIC_BUILD
 #    undef DLL_EXPORT
@@ -48,13 +43,13 @@
 RESOURCELOADER(Engine::Render::FontLoader)
 
 SERIALIZETABLE_BEGIN(Engine::Rect2i)
-FIELD(mTopLeft)
-FIELD(mSize)
+    FIELD(mTopLeft)
+    FIELD(mSize)
 SERIALIZETABLE_END(Engine::Rect2i)
 
 SERIALIZETABLE_BEGIN(Engine::Atlas2::Entry)
-FIELD(mArea)
-FIELD(mFlipped)
+    FIELD(mArea)
+    FIELD(mFlipped)
 SERIALIZETABLE_END(Engine::Atlas2::Entry)
 
 namespace Engine {
@@ -132,7 +127,6 @@ namespace Render {
         if (info.resource()->path().extension() == ".msdf") {
 
             ByteBuffer fileBuffer = (co_await info.resource()->readAsync()).value();
-
 
             Memory::MemoryManager cache("msdf_cache");
             Serialize::FormattedSerializeStream in = cache.openRead(std::move(fileBuffer), Serialize::Formats::safebinary);

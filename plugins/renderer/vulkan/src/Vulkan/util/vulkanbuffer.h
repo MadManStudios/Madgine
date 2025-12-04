@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Generic/offsetptr.h"
-
 #include "Generic/allocator/concepts.h"
+#include "Generic/offsetptr.h"
 
 namespace Engine {
 namespace Render {

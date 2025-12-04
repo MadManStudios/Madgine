@@ -1,24 +1,21 @@
 #pragma once
 
-#include "Madgine/render/rendercontext.h"
-#include "Madgine/render/rendercontextcollector.h"
-
-#include "Modules/threading/threadlocal.h"
-
-#include "util/vulkancommandlist.h"
-
-#include "util/vulkanbuffer.h"
-#include "util/vulkantexture.h"
-
-#include "Madgine/render/vertexformat.h"
-
-#include "util/vulkanheapallocator.h"
-
 #include "Generic/allocator/bucket.h"
 #include "Generic/allocator/bump.h"
 #include "Generic/allocator/fixed.h"
 #include "Generic/allocator/heap.h"
 #include "Generic/allocator/tracked.h"
+
+#include "Modules/threading/threadlocal.h"
+
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendercontextcollector.h"
+#include "Madgine/render/vertexformat.h"
+
+#include "util/vulkanbuffer.h"
+#include "util/vulkancommandlist.h"
+#include "util/vulkanheapallocator.h"
+#include "util/vulkantexture.h"
 
 namespace Engine {
 namespace Render {
@@ -71,7 +68,7 @@ namespace Render {
 
         size_t tempAllocatorMemoryQuota() const;
 
-        VkQueue mGraphicsQueue;        
+        VkQueue mGraphicsQueue;
 
         QueueFamilyIndices mIndices;
 

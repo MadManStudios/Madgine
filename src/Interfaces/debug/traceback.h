@@ -47,7 +47,7 @@ struct hash<Engine::Debug::TraceBack> {
     }
 
     size_t operator()(const Engine::Debug::TraceBack &traceback) const
-    {        
+    {
         return 1647 * hashCString(traceback.mFile) - hashCString(traceback.mFunction);
     }
 };

@@ -2,17 +2,16 @@
 
 #include "oboeapi.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Madgine/root/root.h"
+#include <oboe/Oboe.h>
 
 #include "Generic/execution/execution.h"
 
-#include "Madgine/resources/sender.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include <oboe/Oboe.h>
+#include "Madgine/resources/sender.h"
+#include "Madgine/root/root.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
 
 METATABLE_BEGIN_BASE(Engine::Audio::OboeApi, Engine::Audio::AudioApi)
 METATABLE_END(Engine::Audio::OboeApi)
@@ -74,7 +73,7 @@ namespace Audio {
             assert(!mState);
             state.mNext = state.mBuffer->mBuffer.begin();
             state.mEnd = state.mBuffer->mBuffer.end();
-            mState = &state;            
+            mState = &state;
             mStream->requestStart();
         }
 

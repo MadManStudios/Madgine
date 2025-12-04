@@ -268,8 +268,9 @@ namespace Execution {
         }
 
         template <typename F>
-        bool access(F&& callback) const {
-            if (mPtr) {                
+        bool access(F &&callback) const
+        {
+            if (mPtr) {
                 return mPtr->access(patch_void(callback, true));
             } else {
                 return false;

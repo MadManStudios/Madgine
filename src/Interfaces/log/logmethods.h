@@ -51,7 +51,7 @@ namespace Log {
         }
 
         template <typename T>
-        requires tag_invocable<get_file_name_t, T &>
+            requires tag_invocable<get_file_name_t, T &>
         auto operator()(T &value) const
             noexcept(is_nothrow_tag_invocable_v<get_file_name_t, T &>)
                 -> tag_invoke_result_t<get_file_name_t, T &>
@@ -70,7 +70,7 @@ namespace Log {
         }
 
         template <typename T>
-        requires tag_invocable<get_line_nr_t, T &>
+            requires tag_invocable<get_line_nr_t, T &>
         auto operator()(T &value) const
             noexcept(is_nothrow_tag_invocable_v<get_line_nr_t, T &>)
                 -> tag_invoke_result_t<get_line_nr_t, T &>
@@ -83,7 +83,7 @@ namespace Log {
 
     struct get_log_t {
 
-        using signature = Log*();
+        using signature = Log *();
 
         template <typename T>
             requires(!tag_invocable<get_log_t, T &>)

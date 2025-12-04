@@ -5,12 +5,11 @@
 namespace Engine {
 namespace Threading {
 
-	struct GlobalStorage {
-    
-		template <typename T>
-		using container_type = Proxy<T, false>;
-	
-	};
+    struct GlobalStorage {
+
+        template <typename T>
+        using container_type = Proxy<T, false>;
+    };
 
 }
 }

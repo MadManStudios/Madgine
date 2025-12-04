@@ -1,8 +1,7 @@
 #pragma once
 
-#include "serializestreamdata.h"
-
 #include "pendingrequest.h"
+#include "serializestreamdata.h"
 
 namespace Engine {
 namespace Serialize {

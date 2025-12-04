@@ -52,7 +52,8 @@ struct SafeIterator {
             return *this;
         }
 
-        IteratorImpl operator++(int) {
+        IteratorImpl operator++(int)
+        {
             IteratorImpl copy = *this;
             ++*this;
             return copy;

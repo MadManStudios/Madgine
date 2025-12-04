@@ -14,7 +14,7 @@ namespace Render {
 
     struct OpenGLFontData;
 
-	struct OpenGLRenderContext;
+    struct OpenGLRenderContext;
 
     constexpr struct create_t {
     } create;

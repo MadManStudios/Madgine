@@ -1,27 +1,22 @@
 #pragma once
 
-#include "scenecomponentcollector.h"
-
-#include "Madgine/app/globalapibase.h"
-#include "Madgine/app/globalapicollector.h"
-#include "Meta/serialize/container/noparent.h"
-
-#include "Modules/threading/datamutex.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
-
-#include "entity/entitycomponentcollector.h"
-
 #include "Generic/intervalclock.h"
-
-#include "Modules/threading/customclock.h"
-
-#include "scenecontainer.h"
-
-#include "Madgine/debug/debuggablelifetime.h"
 
 #include "Meta/math/color3.h"
 #include "Meta/math/vector3.h"
+#include "Meta/serialize/container/noparent.h"
+
+#include "Modules/threading/customclock.h"
+#include "Modules/threading/datamutex.h"
+#include "Modules/uniquecomponent/uniquecomponentcontainer.h"
+
+#include "Madgine/app/globalapibase.h"
+#include "Madgine/app/globalapicollector.h"
+#include "Madgine/debug/debuggablelifetime.h"
+
+#include "entity/entitycomponentcollector.h"
+#include "scenecomponentcollector.h"
+#include "scenecontainer.h"
 
 namespace Engine {
 namespace Scene {
@@ -36,7 +31,7 @@ namespace Scene {
 
         virtual std::string_view key() const override;
 
-        void updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::Skeleton*)> callback);
+        void updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::Skeleton *)> callback);
 
         void clear();
 
@@ -49,8 +44,9 @@ namespace Scene {
         IntervalClock<Threading::CustomTimepoint> &animationClock();
 
         SceneContainer &container(std::string_view name);
-        auto containers() {
-            return mContainers | std::views::transform([](std::pair<const std::string, ContainerData> &p) -> SceneContainer& {
+        auto containers()
+        {
+            return mContainers | std::views::transform([](std::pair<const std::string, ContainerData> &p) -> SceneContainer & {
                 return p.second.mContainer;
             });
         }
@@ -62,11 +58,11 @@ namespace Scene {
         }
         SceneComponentBase &getComponent(size_t i);
         size_t getComponentCount();
-                
+
         void startLifetime() override;
         bool endLifetime();
 
-        Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime(); 
+        Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
 
         template <typename Sender>
         void addBehavior(Sender &&sender)

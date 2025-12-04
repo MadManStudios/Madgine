@@ -2,7 +2,7 @@
 
 #include "Generic/closure.h"
 
-namespace Engine{
+namespace Engine {
 namespace Window {
     struct MainWindow;
 }

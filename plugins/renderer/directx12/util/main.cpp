@@ -1,15 +1,12 @@
 
-#include <assert.h>
-
-#include <fstream>
-#include <iostream>
-#include <sstream>
-
 #include <array>
-
+#include <assert.h>
 #include <comdef.h>
 #include <d3d12.h>
 #include <dxgi1_6.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 #include "../src/DirectX12/d3dx12.h"
 
@@ -218,7 +215,7 @@ int main()
         debugController->EnableDebugLayer();
         ReleasePtr<ID3D12Debug1> debugController1;
         if (SUCCEEDED(debugController->QueryInterface(IID_PPV_ARGS(&debugController1)))) {
-            //debugController1->SetEnableGPUBasedValidation(true);
+            // debugController1->SetEnableGPUBasedValidation(true);
             log("Enabled Debug Layer");
         }
     }

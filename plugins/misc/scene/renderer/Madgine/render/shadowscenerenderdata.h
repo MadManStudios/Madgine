@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Madgine/render/renderdata.h"
-
 #include "Madgine/meshloader/gpumeshdata.h"
-
 #include "Madgine/render/ptr.h"
+#include "Madgine/render/renderdata.h"
 
 namespace Engine {
 namespace Render {

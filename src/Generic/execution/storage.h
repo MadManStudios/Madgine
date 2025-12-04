@@ -17,7 +17,8 @@ namespace Execution {
         }
 
         template <size_t I>
-        decltype(auto) get() {
+        decltype(auto) get()
+        {
             return std::get<I>(mValues);
         }
 
@@ -42,7 +43,8 @@ namespace Execution {
             return std::forward<V>(std::get<0>(mValues));
         }
 
-        V get() {
+        V get()
+        {
             return std::forward<V>(std::get<0>(mValues));
         }
 

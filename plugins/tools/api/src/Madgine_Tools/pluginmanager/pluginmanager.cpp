@@ -2,34 +2,26 @@
 
 #if ENABLE_PLUGINS
 
-#    include "pluginmanager.h"
+#    include "Generic/execution/execution.h"
 
-#    include "imgui/imgui.h"
-#    include "imgui/imgui_internal.h"
+#    include "Interfaces/fetch/fetchapi.h"
+#    include "Interfaces/filesystem/fsapi.h"
 
+#    include "Modules/ini/inisection.h"
+#    include "Modules/plugins/plugin.h"
 #    include "Modules/plugins/pluginmanager.h"
+#    include "Modules/plugins/pluginsection.h"
+#    include "Modules/threading/awaitables/awaitablesender.h"
+#    include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #    include "Meta/keyvalue/metatable_impl.h"
 #    include "Meta/serialize/serializetable_impl.h"
 
-#    include "Interfaces/filesystem/fsapi.h"
-
-#    include "Modules/plugins/plugin.h"
-#    include "Modules/plugins/pluginsection.h"
-
-#    include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#    include "imgui/imguiaddons.h"
-
-#    include "Modules/ini/inisection.h"
-
-#    include "Generic/execution/execution.h"
-
-#    include "Modules/threading/awaitables/awaitablesender.h"
-
-#    include "Interfaces/fetch/fetchapi.h"
-
 #    include "../renderer/imroot.h"
+#    include "imgui/imgui.h"
+#    include "imgui/imgui_internal.h"
+#    include "imgui/imguiaddons.h"
+#    include "pluginmanager.h"
 
 UNIQUECOMPONENT(Engine::Tools::PluginManager);
 

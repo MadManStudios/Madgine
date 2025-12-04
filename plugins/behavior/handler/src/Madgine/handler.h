@@ -2,13 +2,13 @@
 
 #include "Meta/keyvalue/virtualscope.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
-#include "Modules/threading/madgineobject.h"
 
+#include "Modules/threading/madgineobject.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
-#include "handlercollector.h"
-
 #include "Madgine/debug/debuggablelifetime.h"
+
+#include "handlercollector.h"
 
 namespace Engine {
 namespace Behavior {

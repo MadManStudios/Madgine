@@ -1,5 +1,7 @@
 #include "../interfaceslib.h"
+
 #include "path.h"
+
 #include "fsapi.h"
 
 namespace Engine {
@@ -145,7 +147,7 @@ namespace Filesystem {
             }
         }
 
-        if (!lastElement.empty()) {            
+        if (!lastElement.empty()) {
             if (lastElement == ".." && cursor > 0) {
                 --cursor;
                 size_t pos = mPath.rfind('/', cursor - 1);
@@ -166,7 +168,7 @@ namespace Filesystem {
 
         mPath.resize(cursor);
 
-        //Filesystem::makeNormalized(mPath);
+        // Filesystem::makeNormalized(mPath);
     }
 
     Path Path::filename() const

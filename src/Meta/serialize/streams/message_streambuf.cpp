@@ -1,5 +1,7 @@
 #include "../../metalib.h"
+
 #include "message_streambuf.h"
+
 #include "streamresult.h"
 
 namespace Engine {
@@ -48,7 +50,8 @@ namespace Serialize {
         }
     }
 
-    std::streamsize message_streambuf::endMessageReadImpl() {
+    std::streamsize message_streambuf::endMessageReadImpl()
+    {
         std::streamsize result = showmanyc();
         setg(nullptr, nullptr, nullptr);
         return result;

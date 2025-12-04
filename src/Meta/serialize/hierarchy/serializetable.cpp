@@ -1,23 +1,17 @@
 #include "../../metalib.h"
 
-#include "serializer.h"
 #include "serializetable.h"
-#include "syncfunction.h"
-
-#include "statetransmissionflags.h"
-
-#include "serializableunit.h"
-#include "syncableunit.h"
-
-#include "../operations.h"
-
-#include "../streams/formattedmessagestream.h"
 
 #include "Generic/offsetptr.h"
 
+#include "../operations.h"
 #include "../streams/comparestreamid.h"
-
+#include "../streams/formattedmessagestream.h"
 #include "../streams/writemessage.h"
+#include "serializableunit.h"
+#include "serializer.h"
+#include "syncableunit.h"
+#include "syncfunction.h"
 
 namespace Engine {
 namespace Serialize {
@@ -150,7 +144,7 @@ namespace Serialize {
     {
         if (active)
             assert(unit->mActiveIndex == 0);
-        
+
         if (mCallbacks.onActivate)
             mCallbacks.onActivate(unit, CallbackTiming::BEFORE, active, existenceChanged);
 
@@ -168,10 +162,10 @@ namespace Serialize {
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
-        
+
         if (!active)
             assert(unit->mActiveIndex == 0);
-        
+
         if (mCallbacks.onActivate)
             mCallbacks.onActivate(unit, CallbackTiming::AFTER, active, existenceChanged);
     }

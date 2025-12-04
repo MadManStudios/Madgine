@@ -12,8 +12,8 @@ namespace Network {
 
         SocketAddress getAddress() const;
 
-    protected:        
-        //void handleError() override;
+    protected:
+        // void handleError() override;
 
         std::streamsize xsgetn(char *, std::streamsize) override;
 

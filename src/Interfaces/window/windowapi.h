@@ -2,7 +2,6 @@
 
 #include "../input/cursoricons.h"
 #include "../input/inputevents.h"
-
 #include "windowsettings.h"
 
 namespace Engine {
@@ -32,7 +31,8 @@ namespace Window {
         {
         }
 
-        std::optional<WindowEvent> update() {
+        std::optional<WindowEvent> update()
+        {
             if (mPendingEvents.empty()) {
                 updateImpl();
             }
@@ -108,7 +108,7 @@ namespace Window {
     protected:
         uintptr_t mHandle;
 
-    private:        
+    private:
         std::vector<WindowEvent> mPendingEvents;
     };
 

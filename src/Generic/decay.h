@@ -14,8 +14,8 @@ namespace __generic_impl__ {
     };
 
     template <typename T>
-    struct decayBase<T&, std::void_t<typename T::decay_t>> {
-        using type = typename T::decay_t&;
+    struct decayBase<T &, std::void_t<typename T::decay_t>> {
+        using type = typename T::decay_t &;
     };
 
     template <typename T, T v>
@@ -41,7 +41,8 @@ template <typename T>
 using decayed_t = typename decayed<T, decay_t<T>>::type;
 
 template <typename T>
-decltype(auto) decay(T&& item) {
+decltype(auto) decay(T &&item)
+{
     return std::forward<decayed_t<T>>(item);
 }
 

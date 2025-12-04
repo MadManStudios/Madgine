@@ -6,25 +6,18 @@
 
 #include "interfacesconfig.h"
 
-
-
 #if defined(Interfaces_EXPORTS)
 #    define INTERFACES_EXPORT DLL_EXPORT
 #else
 #    define INTERFACES_EXPORT DLL_IMPORT
 #endif
 
-
-
-#include "debug/memory/memoryglobal.h"
-
-
 #include <array>
+#include <cstring>
 #include <fstream>
 #include <optional>
-#include <cstring>
 
-
+#include "debug/memory/memoryglobal.h"
 #include "interfacesforward.h"
 #include "log/logmethods.h"
 

@@ -2,15 +2,14 @@
 
 #include "audioloader.h"
 
+#include "Generic/stream.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "oggdecode.h"
 
-#include "Generic/stream.h"
-
 RESOURCELOADER(Engine::Audio::AudioLoader)
-
 
 namespace Engine {
 namespace Audio {

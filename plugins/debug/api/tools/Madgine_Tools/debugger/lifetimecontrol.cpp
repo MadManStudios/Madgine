@@ -2,23 +2,20 @@
 
 #include "lifetimecontrol.h"
 
-#include "Madgine_Tools/imguiicons.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-#include "imgui/imguiaddons.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/debug/debuggablelifetime.h"
+#include "Madgine/trees/treeformat.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Madgine/debug/debuggablelifetime.h"
-
-#include "NodeEditor/imgui_node_editor.h"
-
-#include "Madgine/trees/treeformat.h"
-
+#include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/renderer/imroot.h"
+#include "NodeEditor/imgui_node_editor.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::LifetimeControl);
 
@@ -227,7 +224,6 @@ namespace Tools {
                 controls(Debug::getRootLifetime());
                 endToolBar();
             }
-            
         }
         ImGui::End();
     }

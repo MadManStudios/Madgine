@@ -1,25 +1,21 @@
 #include "../toolslib.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
 #include "inspector.h"
 
-#include "imgui/imguiaddons.h"
+#include "Meta/keyvalue/keyvaluepair.h"
+#include "Meta/keyvalue/scopeiterator.h"
+
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Meta/keyvalue/scopeiterator.h"
-
-#include "Meta/keyvalue/keyvaluepair.h"
-
-#include "functiontool.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "../renderer/imroot.h"
-
 #include "../imguiicons.h"
+#include "../renderer/imroot.h"
+#include "functiontool.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::Inspector);
 
@@ -66,7 +62,7 @@ namespace Tools {
             if (drawn.count(it->key()) == 0) {
                 ImGui::TableNextRow();
                 changed |= drawMember(it);
-                //drawn.insert(it->key());
+                // drawn.insert(it->key());
             }
         }
 
@@ -172,7 +168,7 @@ namespace Tools {
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
 
-        //ImGui::BeginGroup();
+        // ImGui::BeginGroup();
 
         bool open = false;
         if (scope)
@@ -215,7 +211,7 @@ namespace Tools {
             }
         }
 
-        //ImGui::EndGroup();
+        // ImGui::EndGroup();
 
         ImGui::DraggableValueTypeSource(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {
@@ -255,7 +251,7 @@ namespace Tools {
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
 
-        //ImGui::BeginGroup();
+        // ImGui::BeginGroup();
 
         bool open = false;
         if (object)
@@ -280,7 +276,7 @@ namespace Tools {
             }
         }
 
-        //ImGui::EndGroup();
+        // ImGui::EndGroup();
 
         ImGui::DraggableValueTypeSource(id, object, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {

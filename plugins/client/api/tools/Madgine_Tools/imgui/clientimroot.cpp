@@ -2,46 +2,32 @@
 
 #include "clientimroot.h"
 
+#include "Interfaces/filesystem/fsapi.h"
+#include "Interfaces/input/inputevents.h"
 #include "Interfaces/window/windowapi.h"
 #include "Interfaces/window/windowsettings.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-
-#include "im3d/im3d.h"
-
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Madgine/render/rendercontext.h"
-#include "Madgine/render/rendertarget.h"
-
 #include "Modules/debug/profiler/profile.h"
-
-#include "Madgine/window/toolwindow.h"
-
-#include "Madgine/window/mainwindow.h"
-
-#include "Interfaces/input/inputevents.h"
-
-#include "Interfaces/filesystem/fsapi.h"
-
-#include "Madgine_Tools/toolbase.h"
-
-#include "Madgine/render/fonts/fontloader.h"
-
-#include "Madgine/resources/resourcemanager.h"
-
-#include "imgui/misc/freetype/imgui_freetype.h"
-
-#include "imgui/imguiaddons.h"
-
-#include "Madgine_Tools/imguiicons.h"
-
 #include "Modules/threading/awaitables/awaitablesender.h"
 
 #include "Madgine/imageloader/imageloader.h"
+#include "Madgine/render/fonts/fontloader.h"
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/resources/resourcemanager.h"
+#include "Madgine/window/mainwindow.h"
+#include "Madgine/window/toolwindow.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/toolbase.h"
+#include "im3d/im3d.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
+#include "imgui/misc/freetype/imgui_freetype.h"
 
 METATABLE_BEGIN_BASE(Engine::Tools::ClientImRoot, Engine::Tools::ImRoot)
 METATABLE_END(Engine::Tools::ClientImRoot)
@@ -49,8 +35,7 @@ METATABLE_END(Engine::Tools::ClientImRoot)
 SERIALIZETABLE_BEGIN(Engine::Tools::ClientImRoot)
 SERIALIZETABLE_END(Engine::Tools::ClientImRoot)
 
-COMPONENT_NAME(ClientImRoot, Engine::Tools::ClientImRoot)
-UNIQUECOMPONENT(Engine::Tools::ClientImRoot)
+NAMED_UNIQUECOMPONENT(ClientImRoot, Engine::Tools::ClientImRoot)
 
 namespace Engine {
 namespace Tools {
@@ -303,7 +288,7 @@ namespace Tools {
         // config.GlyphMinAdvanceX = 13.0f;
         config.GlyphOffset = { 0.0f, 3.0f * Window::platformCapabilities.mScalingFactor };
         config.FontDataOwnedByAtlas = false;
-        config.RasterizerDensity = 10.0f;    
+        config.RasterizerDensity = 10.0f;
 
         Filesystem::Path iconsPath = Resources::ResourceManager::getSingleton().findResourceFile("icons.ttf");
         ByteBuffer iconsData = (co_await Filesystem::readFileAsync(iconsPath)).value();
@@ -622,9 +607,9 @@ namespace Tools {
 
         Vector2 pos;
         if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            pos = Vector2 { static_cast<float>(arg.mScreenPosition.x), static_cast<float>(arg.mScreenPosition.y) } / io.DisplayFramebufferScale;
+            pos = Vector2 { static_cast<float>(arg.mScreenPosition.x), static_cast<float>(arg.mScreenPosition.y) } / Vector2 { io.DisplayFramebufferScale };
         else
-            pos = Vector2 { static_cast<float>(arg.mWindowPosition.x), static_cast<float>(arg.mWindowPosition.y) } / io.DisplayFramebufferScale;
+            pos = Vector2 { static_cast<float>(arg.mWindowPosition.x), static_cast<float>(arg.mWindowPosition.y) } / Vector2 { io.DisplayFramebufferScale };
 
         io.AddMousePosEvent(pos.x, pos.y);
 
@@ -676,8 +661,8 @@ namespace Tools {
         ImGuiDockNode *node = ImGui::DockBuilderGetCentralNode(mGameDockSpaceId);
 
         if (node) {
-            mAreaPos = Vector2 { node->Pos } * io.DisplayFramebufferScale;
-            mAreaSize = Vector2 { node->Size } * io.DisplayFramebufferScale;
+            mAreaPos = Vector2 { node->Pos } * Vector2 { io.DisplayFramebufferScale };
+            mAreaSize = Vector2 { node->Size } * Vector2 { io.DisplayFramebufferScale };
         } else {
             mAreaPos = Vector2::ZERO;
             mAreaSize = Vector2::ZERO;

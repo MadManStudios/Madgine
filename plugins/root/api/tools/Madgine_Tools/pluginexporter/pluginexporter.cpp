@@ -2,23 +2,18 @@
 
 #include "pluginexporter.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Madgine/cli/parameter.h"
-
 #include "Interfaces/filesystem/fsapi.h"
 
 #include "Modules/ini/inifile.h"
-
-#include "Madgine/codegen/codegen_cpp.h"
-
 #include "Modules/plugins/binaryinfo.h"
-
+#include "Modules/plugins/pluginmanager.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
-#include "Modules/plugins/pluginmanager.h"
+#include "Madgine/cli/parameter.h"
+#include "Madgine/codegen/codegen_cpp.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
 
 #include "Madgine_Tools/pluginmanager/pluginmanager.h"
 

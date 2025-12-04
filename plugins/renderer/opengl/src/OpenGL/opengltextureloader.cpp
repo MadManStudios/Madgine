@@ -2,12 +2,11 @@
 
 #include "opengltextureloader.h"
 
-#include "util/opengltexture.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "openglrendercontext.h"
+#include "util/opengltexture.h"
 
 RESOURCELOADER(Engine::Render::OpenGLTextureLoader);
 

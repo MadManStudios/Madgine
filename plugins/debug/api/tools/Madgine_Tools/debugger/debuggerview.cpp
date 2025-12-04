@@ -2,27 +2,24 @@
 
 #include "debuggerview.h"
 
-#include "Madgine_Tools/imguiicons.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-#include "imgui/imguiaddons.h"
+#include "Interfaces/debug/stacktrace.h"
+
+#include "Meta/keyvalue/valuetype.h"
+
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/debug/debuggablelifetime.h"
+#include "Madgine/debug/debuggablesender.h"
+#include "Madgine/debug/debugger.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Madgine/debug/debugger.h"
-
-#include "Meta/keyvalue/valuetype.h"
-
+#include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
-
-#include "Madgine/debug/debuggablesender.h"
-
-#include "Madgine/debug/debuggablelifetime.h"
-
-#include "Interfaces/debug/stacktrace.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::DebuggerView);
 
@@ -89,7 +86,7 @@ namespace Tools {
                                    actualContent = true;
                                },
                                [&](const Execution::State::BeginBlock &begin) {
-                                   ImGui::BeginGroupPanel(begin.mName.data(), { }, begin.mCompleted ? IM_COL32(20, 255, 20, 15) : 0);
+                                   ImGui::BeginGroupPanel(begin.mName.data(), {}, begin.mCompleted ? IM_COL32(20, 255, 20, 15) : 0);
                                    actualContent = true;
                                },
                                [&](const Execution::State::EndBlock &end) {
@@ -153,7 +150,7 @@ namespace Tools {
                                    std::string detailsStr = std::string { trace.mFile } + ":" + std::to_string(trace.mLineNr);
 
                                    name = trace.mFunction;
-                                   details = detailsStr.c_str();                                   
+                                   details = detailsStr.c_str();
 #endif
                                    ImGui::PushID(f.mId);
                                    if (ImGui::TreeNode(name)) {
@@ -289,7 +286,7 @@ namespace Tools {
                     switch (button) {
                     }
 
-                    //TODO: Build tree
+                    // TODO: Build tree
                     /* Debug::DebugLocation *location = mSelectedContext->mChild;
                     while (location) {
                         if (!mSelectedLocation && prevSelected == location)

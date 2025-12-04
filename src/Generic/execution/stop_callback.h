@@ -6,7 +6,8 @@ namespace Execution {
     struct StopCallback {
 
         virtual void stopRequested() = 0;
-        void set_done() {
+        void set_done()
+        {
             throw 0;
         }
 

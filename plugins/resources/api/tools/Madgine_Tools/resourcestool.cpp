@@ -2,26 +2,23 @@
 
 #include "resourcestool.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Madgine/resources/resourcemanager.h"
-
 #include "Generic/projections.h"
-
-#include "Madgine/resources/resourcebase.h"
-#include "Madgine/resources/resourceloaderbase.h"
-
-#include "resourceeditor.h"
 
 #include "Interfaces/process/processapi.h"
 
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/resources/resourcebase.h"
+#include "Madgine/resources/resourceloaderbase.h"
+#include "Madgine/resources/resourcemanager.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
 #include "Madgine_Tools/renderer/imroot.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
+#include "resourceeditor.h"
 
 UNIQUECOMPONENT(Engine::Tools::ResourcesTool);
 
@@ -284,7 +281,7 @@ namespace Tools {
                 ImGui::EndMenu();
             ImGui::Separator();
             ImGui::EndMenu();
-        }        
+        }
     }
 
     void ResourcesTool::registerEditor(Resources::ResourceLoaderBase *loader, ResourceEditor *editor)

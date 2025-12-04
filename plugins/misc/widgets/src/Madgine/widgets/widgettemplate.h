@@ -1,12 +1,9 @@
 #pragma once
 
-
 #include "Meta/keyvalue/metatable.h"
-
 
 namespace Engine {
 namespace Widgets {
-
 
     struct WidgetData {
         std::string mName;

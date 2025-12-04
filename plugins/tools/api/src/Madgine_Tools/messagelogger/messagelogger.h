@@ -2,8 +2,8 @@
 
 #if ENABLE_MESSAGE_LOGGING
 
-#include "../toolbase.h"
-#include "../toolscollector.h"
+#    include "../toolbase.h"
+#    include "../toolscollector.h"
 
 namespace Engine {
 namespace Serialize {

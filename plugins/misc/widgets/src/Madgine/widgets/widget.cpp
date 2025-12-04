@@ -2,37 +2,36 @@
 
 #include "widget.h"
 
-#include "widgetmanager.h"
+#include "Interfaces/window/windowapi.h"
+
+#include "Madgine/behavior/behavior.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/behavior/behavior.h"
-
 #include "geometry.h"
-
-#include "Interfaces/window/windowapi.h"
+#include "widgetmanager.h"
 
 METATABLE_BEGIN(Engine::Widgets::WidgetBase)
-READONLY_PROPERTY(Children, children)
-MEMBER(mName)
-READONLY_PROPERTY(Pos, getPos)
-READONLY_PROPERTY(Size, getSize)
-MEMBER(mOpacity)
-READONLY_PROPERTY(PointerEnter, pointerEnterSender)
-READONLY_PROPERTY(PointerLeave, pointerLeaveSender)
-MEMBER(mVisible)
-MEMBER(mConditions)
+    READONLY_PROPERTY(Children, children)
+    MEMBER(mName)
+    READONLY_PROPERTY(Pos, getPos)
+    READONLY_PROPERTY(Size, getSize)
+    MEMBER(mOpacity)
+    READONLY_PROPERTY(PointerEnter, pointerEnterSender)
+    READONLY_PROPERTY(PointerLeave, pointerLeaveSender)
+    MEMBER(mVisible)
+    MEMBER(mConditions)
 METATABLE_END(Engine::Widgets::WidgetBase)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetBase)
-FIELD(mChildren, Engine::Widgets::WidgetBase::WidgetCreator)
-FIELD(mName)
-FIELD(mPos)
-FIELD(mSize)
-FIELD(mOpacity)
-FIELD(mConditions)
-FIELD(mProperties)
+    FIELD(mChildren, Engine::Widgets::WidgetBase::WidgetCreator)
+    FIELD(mName)
+    FIELD(mPos)
+    FIELD(mSize)
+    FIELD(mOpacity)
+    FIELD(mConditions)
+    FIELD(mProperties)
 SERIALIZETABLE_END(Engine::Widgets::WidgetBase)
 
 namespace Engine {
@@ -201,7 +200,7 @@ namespace Widgets {
 
     WidgetBase *WidgetBase::createChildByAnnotation(const WidgetRegistry::Annotations &annotation)
     {
-        return mChildren.emplace_back(construct(annotation, mManager, this)).get();        
+        return mChildren.emplace_back(construct(annotation, mManager, this)).get();
     }
 
     void WidgetBase::clearChildren()
@@ -395,12 +394,12 @@ namespace Widgets {
         return mDragAbortSignal;
     }
 
-    Execution::SignalStub<const Input::AxisEvent&> &WidgetBase::axisEvent()
+    Execution::SignalStub<const Input::AxisEvent &> &WidgetBase::axisEvent()
     {
         return mAxisEventSignal;
     }
 
-    Execution::SignalStub<const Input::KeyPressEvent&> &WidgetBase::keyPressEvent()
+    Execution::SignalStub<const Input::KeyPressEvent &> &WidgetBase::keyPressEvent()
     {
         return mKeyPressSignal;
     }

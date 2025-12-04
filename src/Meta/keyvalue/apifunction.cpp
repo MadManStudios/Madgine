@@ -2,17 +2,16 @@
 
 #include "apifunction.h"
 
-#include "functiontable.h"
-
 #include "Generic/execution/execution.h"
 
+#include "functiontable.h"
 #include "valuetype.h"
 
 namespace Engine {
 
 void ApiFunction::operator()(ValueType &retVal, const ArgumentList &args) const
 {
-    return mTable->mFunctionPtr(mTable, retVal, args);    
+    return mTable->mFunctionPtr(mTable, retVal, args);
 }
 
 size_t ApiFunction::argumentsCount(bool excludeThis) const

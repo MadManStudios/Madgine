@@ -4,17 +4,17 @@
 
 #include "launcher.h"
 
+#include "Interfaces/filesystem/path.h"
 #include "Interfaces/window/windowsettings.h"
-#include "Madgine/app/application.h"
-#include "Madgine/root/keyvalueregistry.h"
-#include "Madgine/window/mainwindow.h"
+
 #include "Modules/threading/scheduler.h"
 
+#include "Madgine/app/application.h"
 #include "Madgine/handlermanager.h"
+#include "Madgine/root/keyvalueregistry.h"
+#include "Madgine/window/mainwindow.h"
 
 #include "launcherconfig.h"
-
-#include "Interfaces/filesystem/path.h"
 
 #if EMSCRIPTEN
 #    define FIX_LOCAL static

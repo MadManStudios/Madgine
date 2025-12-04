@@ -9,7 +9,7 @@ namespace Threading {
     struct Global {
 
         template <typename... Args>
-        Global(Args &&... args)
+        Global(Args &&...args)
         {
             std::tuple<Args...> tuple {
                 std::forward<Args>(args)...
@@ -70,7 +70,7 @@ namespace Threading {
             assert(valid());
             return Storage::localVariable(mIndex).template as<T>();
         }
-                
+
         bool valid() const
         {
             return mIndex != INVALID;

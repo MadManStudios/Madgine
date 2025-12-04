@@ -33,7 +33,8 @@ struct Color4 {
     {
     }
 
-    static constexpr Color4 fromHSV(float h, float s, float v, float a = 1.0f) {        
+    static constexpr Color4 fromHSV(float h, float s, float v, float a = 1.0f)
+    {
         if (s == 0.0f) {
             // gray
             return { v, v, v, a };

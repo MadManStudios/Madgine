@@ -2,18 +2,16 @@
 
 #include "tasktracker.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
 #include "Modules/threading/taskqueue.h"
 #include "Modules/threading/workgroup.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::TaskTracker);
 
@@ -66,7 +64,7 @@ namespace Tools {
 
             ImGui::Columns(2);
 
-            std::vector<std::pair<const char *, Debug::Tasks::TaskTracker *>> trackers; 
+            std::vector<std::pair<const char *, Debug::Tasks::TaskTracker *>> trackers;
             for (Threading::TaskQueue *queue : Threading::WorkGroup::self().taskQueues()) {
                 trackers.emplace_back(queue->name().c_str(), &queue->mTracker);
             }
@@ -167,7 +165,7 @@ namespace Tools {
                             float x = 0.0f;
                             void *identifier = nullptr;
                             if (!xs.empty()) {
-                                //assert(xs.top().second == ev.mIdentifier);
+                                // assert(xs.top().second == ev.mIdentifier);
                                 identifier = xs.top().second;
                                 x = xs.top().first;
                                 xs.pop();
@@ -190,7 +188,7 @@ namespace Tools {
                     } break;
                     }
                 }
-                //assert(callDepth > 0 || xs.empty());
+                // assert(callDepth > 0 || xs.empty());
 
                 while (!xs.empty()) {
                     plots.push({ xs.top().first, plotRect.mSize.x, xs.top().second, xs.size() });
@@ -220,8 +218,8 @@ namespace Tools {
 
             ImGui::EndColumns();
 
-            //ImGui::Text("%lld < %lld < %lld", 0, mScroll, fullPlotSize);
-            //ImGui::DragScalar("debug", ImGuiDataType_S64, &mScroll);
+            // ImGui::Text("%lld < %lld < %lld", 0, mScroll, fullPlotSize);
+            // ImGui::DragScalar("debug", ImGuiDataType_S64, &mScroll);
 
             if (isHovered) {
                 float factor = powf(1.1f, io.MouseWheel);

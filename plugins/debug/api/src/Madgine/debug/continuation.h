@@ -3,7 +3,6 @@
 namespace Engine {
 namespace Debug {
 
-
     enum class ContinuationMode {
         Continue,
         Abort
@@ -65,7 +64,8 @@ namespace Debug {
         {
         }
         Continuation(Continuation &&) = default;
-        ~Continuation() {
+        ~Continuation()
+        {
             assert(!mImpl);
         }
 
@@ -85,7 +85,7 @@ namespace Debug {
         {
             std::unique_ptr<Base> impl = std::move(mImpl);
             mImpl.reset();
-            impl->call(mode);            
+            impl->call(mode);
         }
 
         void visitArguments(std::ostream &out) const
@@ -97,7 +97,6 @@ namespace Debug {
         std::unique_ptr<Base> mImpl;
         ContinuationType mType;
     };
-
 
 }
 }

@@ -2,10 +2,11 @@
 
 #if ENABLE_MEMTRACKING
 
-#    include "../toolbase.h"
-#    include "../toolscollector.h"
 #    include "Interfaces/debug/memory/memory.h"
 #    include "Interfaces/debug/stacktrace.h"
+
+#    include "../toolbase.h"
+#    include "../toolscollector.h"
 
 namespace Engine {
 namespace Tools {

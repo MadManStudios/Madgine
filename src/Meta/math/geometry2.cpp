@@ -2,10 +2,9 @@
 
 #include "geometry2.h"
 
+#include "common.h"
 #include "line2.h"
 #include "rect2.h"
-
-#include "common.h"
 
 namespace Engine {
 META_EXPORT UpTo<float, 2> Intersect(const Line2 &line, const Rect2 &rect)

@@ -25,7 +25,6 @@ namespace Render {
         std::unique_ptr<Render::RenderTarget> mPointShadowMaps[2];
 
         PointShadowRenderPass mPointShadowPasses[2];
-
     };
 
 }

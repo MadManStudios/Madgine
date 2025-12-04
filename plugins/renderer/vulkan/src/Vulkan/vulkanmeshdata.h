@@ -1,10 +1,10 @@
 #pragma once
 
-#include "util/vulkanbuffer.h"
-#include "util/vulkantexture.h"
+#include "Madgine/meshloader/gpumeshdata.h"
 #include "Madgine/render/textureloader.h"
 
-#include "Madgine/meshloader/gpumeshdata.h"
+#include "util/vulkanbuffer.h"
+#include "util/vulkantexture.h"
 
 namespace Engine {
 namespace Render {

@@ -14,14 +14,14 @@ struct Color3 {
         , b(b)
     {
     }
-       
+
     constexpr Color3(const float r[3])
         : r(r[0])
         , g(r[1])
         , b(r[2])
     {
     }
-    
+
     constexpr Color3(float *const r)
         : r(r[0])
         , g(r[1])

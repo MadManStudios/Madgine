@@ -55,7 +55,6 @@ namespace Execution {
         std::tuple<Args...> mArgs;
     };
 
-    
     template <typename State, typename... Args>
     auto make_virtual_sender(Args &&...args)
     {

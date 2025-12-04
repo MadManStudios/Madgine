@@ -1,20 +1,14 @@
 #pragma once
 
-#include "Madgine_Tools/toolscollector.h"
-
-#include "Madgine_Tools/toolbase.h"
-
-#include "sceneview.h"
-
-#include "Madgine/behavior/parametertuple.h"
-
 #include "Madgine/behavior/behaviorhandle.h"
-
-#include "Madgine_Tools/resourceeditor.h"
-
+#include "Madgine/behavior/parametertuple.h"
 #include "Madgine/scene/sceneloader.h"
 
+#include "Madgine_Tools/resourceeditor.h"
+#include "Madgine_Tools/toolbase.h"
+#include "Madgine_Tools/toolscollector.h"
 #include "entitycache.h"
+#include "sceneview.h"
 
 namespace Engine {
 namespace Tools {

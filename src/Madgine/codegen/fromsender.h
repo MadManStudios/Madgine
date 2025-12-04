@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Generic/execution/concepts.h"
-//#include "Generic/execution/state.h"
+#include "statement.h"
+// #include "Generic/execution/state.h"
 
 namespace CodeGen {
 
@@ -182,11 +183,9 @@ struct codegen_connect_t {
         struct state : codegen_base_state<Rec> {
             auto generate()
             {
-                return [this]<size_t... Is>(std::index_sequence<Is...>)
-                {
+                return [this]<size_t... Is>(std::index_sequence<Is...>) {
                     return std::make_tuple(CodeGen::Constant { std::get<Is>(mArgs)... });
-                }
-                (std::index_sequence_for<Args...> {});
+                }(std::index_sequence_for<Args...> {});
             }
             std::tuple<Args...> mArgs;
         };
@@ -215,9 +214,8 @@ struct codegen_connect_t {
             {
                 return std::make_tuple();
             }
-           
         };
-        return state { };
+        return state {};
     }
 
     template <typename C, typename F, typename Rec>
@@ -241,7 +239,7 @@ struct codegen_connect_t {
     }
 
     template <typename Sender, typename Rec>
-    requires tag_invocable<codegen_connect_t, Sender, Rec>
+        requires tag_invocable<codegen_connect_t, Sender, Rec>
     auto operator()(Sender &&sender, Rec &&rec) const
         noexcept(is_nothrow_tag_invocable_v<codegen_connect_t, Sender, Rec>)
             -> tag_invoke_result_t<codegen_connect_t, Sender, Rec>
@@ -256,8 +254,8 @@ struct codegen_for_each_t {
 
     template <typename C, typename F>
     struct sender {
-        //using value_type = typename std::remove_reference_t<C>::value_type &;
-        //using inner_sender_t = std::invoke_result_t<F, value_type>;
+        // using value_type = typename std::remove_reference_t<C>::value_type &;
+        // using inner_sender_t = std::invoke_result_t<F, value_type>;
         using result_type = void;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;

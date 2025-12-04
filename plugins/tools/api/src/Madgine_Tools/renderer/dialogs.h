@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Generic/closure.h"
 #include "Generic/enum.h"
 #include "Generic/execution/concepts.h"
 #include "Generic/type_pack.h"
-#include "Generic/closure.h"
 
 namespace Engine {
 namespace Tools {
@@ -99,9 +99,9 @@ namespace Tools {
 
             void await_suspend(CoroutineHandle<DialogPromise> self) noexcept
             {
-                self->mTargetContainer->show(std::move(mResume));                
+                self->mTargetContainer->show(std::move(mResume));
             }
-            constexpr void await_resume() const noexcept {  }
+            constexpr void await_resume() const noexcept { }
 
             CoroutineHandle<DialogPromise> mResume;
         };
@@ -124,9 +124,8 @@ namespace Tools {
     };
 
     struct get_dialog_settings_t {
-        
     };
-    
+
     constexpr get_dialog_settings_t get_dialog_settings;
 
     struct get_dialog_settings_helper_t {
@@ -134,10 +133,12 @@ namespace Tools {
         {
             return true;
         }
-        void await_suspend(std::coroutine_handle<>) const noexcept {
+        void await_suspend(std::coroutine_handle<>) const noexcept
+        {
             std::terminate();
         }
-        constexpr DialogSettings& await_resume() const noexcept {
+        constexpr DialogSettings &await_resume() const noexcept
+        {
             return mPromise.mSettings;
         }
 
@@ -181,21 +182,21 @@ namespace Tools {
             void return_value(std::tuple<T...> value)
             {
                 if (!mSettings.result)
-                    mSettings.result = DialogResult::Accepted;                                
+                    mSettings.result = DialogResult::Accepted;
                 if (*mSettings.result == DialogResult::Accepted)
                     TupleUnpacker::invokeFromTuple(mCallback, value);
-                
             }
 
             FinalSuspender final_suspend() noexcept
             {
-                assert(mSettings.result && *mSettings.result != DialogResult::Canceled);                    
+                assert(mSettings.result && *mSettings.result != DialogResult::Canceled);
                 return { std::move(mResume) };
             }
 
             template <typename A>
-            decltype(auto) await_transform(A &&a) {
-                if constexpr (std::same_as<A, const get_dialog_settings_t&>) {
+            decltype(auto) await_transform(A &&a)
+            {
+                if constexpr (std::same_as<A, const get_dialog_settings_t &>) {
                     return get_dialog_settings_helper_t { *this };
                 } else {
                     return std::forward<A>(a);
@@ -205,7 +206,8 @@ namespace Tools {
             Closure<void(T...)> mCallback;
         };
 
-        AwaitableDialog<T...> operator co_await() && {
+        AwaitableDialog<T...> operator co_await() &&
+        {
             return { std::move(*this) };
         }
 

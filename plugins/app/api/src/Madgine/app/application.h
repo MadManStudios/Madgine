@@ -1,24 +1,22 @@
 #pragma once
 
 #include "Modules/threading/madgineobject.h"
-
-#include "globalapicollector.h"
-
+#include "Modules/threading/taskqueue.h"
 #include "Modules/uniquecomponent/uniquecomponentcontainer.h"
 
-#include "Modules/threading/taskqueue.h"
-
 #include "Madgine/debug/debuggablelifetime.h"
+
+#include "globalapicollector.h"
 
 namespace Engine {
 namespace App {
 
     /**
      * @brief The Application manages all GlobalAPIComponents
-     * 
+     *
      * The Application creates all registered GlobalAPIComponents.
      * It also creates a TaskQueue for game logic tasks.
-    */
+     */
     struct MADGINE_APP_EXPORT Application : Threading::MadgineObject<Application> {
         using Self = Application;
 
@@ -45,8 +43,8 @@ namespace App {
 
     protected:
         /**
-     * @name MadgineObject interface
-    */
+         * @name MadgineObject interface
+         */
         ///@{
         Threading::Task<bool> init();
         Threading::Task<void> finalize();

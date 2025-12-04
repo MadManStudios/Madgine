@@ -3,7 +3,6 @@
 #include "pointshadowrenderdata.h"
 
 #include "Madgine/render/rendercontext.h"
-
 #include "Madgine/render/rendertarget.h"
 
 namespace Engine {

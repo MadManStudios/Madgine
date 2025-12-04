@@ -4,7 +4,7 @@
 
 namespace Engine {
 namespace Widgets {
-    
+
     ENUM(Formula,
         W_MINUS_H,
         ABS_W_MINUS_H,
@@ -17,7 +17,7 @@ namespace Widgets {
         LESS,
         GREATER_OR_EQUAL,
         LESS_OR_EQUAL);
-        
+
     struct Condition {
         std::string mName;
 

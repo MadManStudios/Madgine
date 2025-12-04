@@ -2,9 +2,8 @@
 
 #include "ownedscopeptr.h"
 
-#include "proxyscopebase.h"
-
 #include "metatable.h"
+#include "proxyscopebase.h"
 
 namespace Engine {
 

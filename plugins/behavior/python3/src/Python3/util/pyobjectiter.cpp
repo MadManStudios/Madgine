@@ -3,10 +3,9 @@
 #include "pyobjectiter.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
-        
         PyObjectIterator::PyObjectIterator(PyObjectPtr object)
             : mObject(std::move(object))
         {
@@ -14,7 +13,7 @@ namespace Behavior{
 
         PyObjectIterator::PyObjectIterator(PyObjectPtr object, PyListPtr::iterator it)
             : mObject(std::move(object))
-            , mIt(std::move(it))            
+            , mIt(std::move(it))
         {
         }
 

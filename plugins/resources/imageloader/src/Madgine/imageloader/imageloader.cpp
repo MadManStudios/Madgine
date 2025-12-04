@@ -2,10 +2,10 @@
 
 #include "imageloader.h"
 
+#include "Modules/threading/awaitables/awaitablesender.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-
-#include "Modules/threading/awaitables/awaitablesender.h"
 
 #include "imagedata.h"
 
@@ -15,7 +15,6 @@
 #include "stb_image_write.h"
 
 RESOURCELOADER(Engine::Resources::ImageLoader)
-
 
 namespace Engine {
 namespace Resources {

@@ -6,7 +6,8 @@
 #        include <sys/prctl.h>
 #    endif
 
-#include <pthread.h>
+#    include <pthread.h>
+
 #    include "threadapi.h"
 
 namespace Engine {

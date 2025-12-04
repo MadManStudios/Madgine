@@ -1,7 +1,6 @@
 #pragma once
 
 #include "codegen.h"
-
 #include "statement.h"
 
 namespace CodeGen {
@@ -22,7 +21,7 @@ struct MADGINE_CODEGEN_EXPORT ShaderFile : File {
 
     virtual void statement(Statement statement) override;
     Struct *getStruct(std::string_view name);
-    
+
     std::list<std::vector<Function>> mInstances;
     std::vector<Function> *mCurrentInstance;
     std::stack<Function *> mFunctionStack;

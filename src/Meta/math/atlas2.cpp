@@ -65,7 +65,7 @@ Atlas2::Entry Atlas2::insertIntoBin(Bin &bin, const Vector2i &_size, int cornerI
     entry.mArea.mSize = size;
     entry.mFlipped = flipped;
 
-    //Update x
+    // Update x
     Vector2i newCornerX = bin.mCorners[cornerIndex] + Vector2i { size.x, 0 };
     while (cornerIndex > 0 && newCornerX.x >= bin.mCorners[cornerIndex - 1].x) {
         newCornerX.y = bin.mCorners[cornerIndex - 1].y;
@@ -75,7 +75,7 @@ Atlas2::Entry Atlas2::insertIntoBin(Bin &bin, const Vector2i &_size, int cornerI
     bin.mCorners.insert(bin.mCorners.begin() + cornerIndex, newCornerX);
     ++cornerIndex;
 
-    //Update y
+    // Update y
     Vector2i newCornerY = bin.mCorners[cornerIndex] + Vector2i { 0, size.y };
     while (cornerIndex < bin.mCorners.size() - 1 && newCornerY.y >= bin.mCorners[cornerIndex + 1].y) {
         newCornerY.x = bin.mCorners[cornerIndex + 1].x;

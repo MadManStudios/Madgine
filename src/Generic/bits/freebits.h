@@ -8,8 +8,7 @@ struct FreeBitCount {
 };
 
 template <typename T>
-concept has_FreeBitCount = requires
-{
+concept has_FreeBitCount = requires {
     T::FreeBitCount;
 };
 

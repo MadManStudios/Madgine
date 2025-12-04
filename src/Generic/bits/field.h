@@ -31,5 +31,4 @@ private:
     InnerType mHolder;
 };
 
-
 }

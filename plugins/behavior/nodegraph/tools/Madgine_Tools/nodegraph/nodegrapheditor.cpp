@@ -1,56 +1,39 @@
 #include "../nodegraphtoolslib.h"
 
-#define IMGUI_DEFINE_MATH_OPERATORS
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-#include "imgui/imguiaddons.h"
+#include "Generic/execution/algorithm.h"
+#include "Generic/execution/execution.h"
+#include "Generic/projections.h"
+
+#include "Interfaces/filesystem/fsapi.h"
+#include "Interfaces/log/logsenders.h"
+
+#include "Meta/keyvalue/valuetype.h"
+
+#include "Madgine/behavior/behavior.h"
+#include "Madgine/codegen/codegen_cpp.h"
+#include "Madgine/codegen/fromsender.h"
+#include "Madgine/nodegraph/nodebase.h"
+#include "Madgine/nodegraph/nodecollector.h"
+#include "Madgine/nodegraph/nodeinterpreter.h"
+#include "Madgine/nodegraph/nodes/accessornode.h"
+#include "Madgine/nodegraph/nodes/behaviornode.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/nodegraph/nodecollector.h"
-#include "nodegrapheditor.h"
-
-#include "NodeEditor/imgui_node_editor.h"
-
-#include "Interfaces/filesystem/fsapi.h"
-
-#include "Madgine/nodegraph/nodebase.h"
-
-#include "Madgine_Tools/inspector/inspector.h"
-
-#include "Madgine/nodegraph/nodeinterpreter.h"
-
-#include "Meta/keyvalue/valuetype.h"
-
-#include "Madgine_Tools/renderer/imroot.h"
-
-#include "Madgine_Tools/imguiicons.h"
-
-#include "Generic/projections.h"
-
-#include "Generic/execution/algorithm.h"
-
-#include "Madgine/codegen/codegen_cpp.h"
-#include "Madgine/codegen/fromsender.h"
-
-#include "Madgine/behavior/behavior.h"
-
-#include "Madgine_Tools/debugger/debuggerview.h"
-
-#include "Madgine/nodegraph/nodes/behaviornode.h"
-
-#include "imguihelpers.h"
-
-#include "debugvisualizer.h"
-
-#include "Interfaces/log/logsenders.h"
-
 #include "Madgine_Tools/behaviortool.h"
-
-#include "Madgine/nodegraph/nodes/accessornode.h"
-
-#include "Generic/execution/execution.h"
+#include "Madgine_Tools/debugger/debuggerview.h"
+#include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/imroot.h"
+#include "NodeEditor/imgui_node_editor.h"
+#include "debugvisualizer.h"
+#define IMGUI_DEFINE_MATH_OPERATORS
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
+#include "imguihelpers.h"
+#include "nodegrapheditor.h"
 
 UNIQUECOMPONENT(Engine::Tools::NodeGraphEditor);
 
@@ -58,8 +41,8 @@ METATABLE_BEGIN_BASE(Engine::Tools::NodeGraphEditor, Engine::Tools::ToolBase)
 METATABLE_END(Engine::Tools::NodeGraphEditor)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::NodeGraphEditor, Engine::Tools::ToolBase)
-FIELD(mHierarchyVisible)
-FIELD(mNodeDetailsVisible)
+    FIELD(mHierarchyVisible)
+    FIELD(mNodeDetailsVisible)
 // ENCAPSULATED_FIELD(Current, getCurrentName, load)
 SERIALIZETABLE_END(Engine::Tools::NodeGraphEditor)
 
@@ -70,7 +53,7 @@ namespace Tools {
         : Tool<NodeGraphEditor, ResourceEditor>(root)
     {
         mVisible = false;
-    }  
+    }
 
     Threading::Task<bool> NodeGraphEditor::init()
     {
@@ -92,7 +75,7 @@ namespace Tools {
     void NodeGraphEditor::render()
     {
         if (BeginResourceFile(this, mFilePath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &mVisible, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar)) {
-            
+
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("Dev")) {
 
@@ -101,7 +84,7 @@ namespace Tools {
                         Execution::detach(
                             Behavior::Behavior { mGraph.interpret() }
                             | Execution::then([](ArgumentList) { LOG("SUCCESS"); })
-                            | Execution::with_debug_location(context)                            
+                            | Execution::with_debug_location(context)
                             | Log::log_result());
                     }
                     ImGui::EndMenu();
@@ -114,7 +97,7 @@ namespace Tools {
                     ImGui::EndMenu();
                 }
                 ImGui::EndMenuBar();
-            }            
+            }
 
             if (beginContent(ImGuiWindowFlags_NoScrollbar)) {
 
@@ -337,7 +320,7 @@ namespace Tools {
                 }
                 ImGui::PopStyleVar();
 
-                if (mPendingLibraryBehavior && mPendingLibraryBehavior.state().is_ready()) { 
+                if (mPendingLibraryBehavior && mPendingLibraryBehavior.state().is_ready()) {
                     if (mPendingLibraryBehavior.state()) {
                         Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::BehaviorNode>(mGraph, std::move(mPendingLibraryBehavior)));
                         ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
@@ -373,13 +356,12 @@ namespace Tools {
             renderSelection();
         }
         ImGui::End();
-
     }
 
     void NodeGraphEditor::renderHierarchy()
     {
         if (mHierarchyVisible) {
-            if (beginSubPanel("Hierarchy", &mHierarchyVisible, ImGuiDir_Left)) {                
+            if (beginSubPanel("Hierarchy", &mHierarchyVisible, ImGuiDir_Left)) {
             }
             ImGui::End();
         }
@@ -388,7 +370,7 @@ namespace Tools {
     void NodeGraphEditor::renderSelection()
     {
         if (mNodeDetailsVisible) {
-            if (beginSubPanel("Node Details", &mNodeDetailsVisible, ImGuiDir_Right)) {                
+            if (beginSubPanel("Node Details", &mNodeDetailsVisible, ImGuiDir_Right)) {
                 if (mSelectedInputs) {
                     if (ImGui::BeginTable("inputs", 2, ImGuiTableFlags_Resizable)) {
                         KeyValueVirtualSequenceRange range { mGraph.mNamedInputs };

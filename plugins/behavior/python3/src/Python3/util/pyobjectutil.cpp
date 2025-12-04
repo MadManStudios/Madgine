@@ -2,6 +2,13 @@
 
 #include "pyobjectutil.h"
 
+#include "Meta/keyvalue/keyvaluepair.h"
+#include "Meta/keyvalue/objectinstance.h"
+#include "Meta/keyvalue/objectptr.h"
+#include "Meta/keyvalue/valuetype.h"
+
+#include "Madgine/behavior/behaviorreceiver.h"
+
 #include "math/pymatrix3.h"
 #include "math/pymatrix4.h"
 #include "math/pyquaternion.h"
@@ -11,35 +18,23 @@
 #include "pyapifunction.h"
 #include "pyboundapifunction.h"
 #include "pydictptr.h"
+#include "pyenum.h"
+#include "pyexecution.h"
+#include "pyflags.h"
 #include "pylistptr.h"
+#include "pymoduleptr.h"
+#include "pyobjectiter.h"
+#include "pyobjectptr.h"
 #include "pyownedscopeptr.h"
 #include "pyscopeiterator.h"
 #include "pyscopeptr.h"
+#include "pysender.h"
+#include "python3lock.h"
 #include "pyvirtualiterator.h"
 #include "pyvirtualrange.h"
-#include "pysender.h"
-#include "pyflags.h"
-#include "pyenum.h"
-
-#include "pymoduleptr.h"
-
-#include "Meta/keyvalue/keyvaluepair.h"
-#include "Meta/keyvalue/valuetype.h"
-
-#include "Meta/keyvalue/objectinstance.h"
-#include "Meta/keyvalue/objectptr.h"
-#include "pyobjectiter.h"
-
-#include "pyobjectptr.h"
-
-#include "python3lock.h"
-
-#include "Madgine/behavior/behaviorreceiver.h"
-
-#include "pyexecution.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         struct PyObjectInstance : ObjectInstance {
@@ -49,7 +44,8 @@ namespace Behavior{
             {
             }
 
-            ~PyObjectInstance() {
+            ~PyObjectInstance()
+            {
                 Python3InnerLock lock;
                 mPtr.reset();
             }
@@ -368,7 +364,7 @@ namespace Behavior{
 
         void fromPyObject(BehaviorReceiver &receiver, PyObject *obj)
         {
-            if (!obj) {                
+            if (!obj) {
                 receiver.set_error(fetchError());
             } else if (obj == Py_None) {
                 receiver.set_value();

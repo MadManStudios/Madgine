@@ -2,11 +2,9 @@
 
 #include "readmessage.h"
 
-#include "streamresult.h"
-
 #include "formatter.h"
-
 #include "message_streambuf.h"
+#include "streamresult.h"
 
 namespace Engine {
 namespace Serialize {
@@ -17,7 +15,7 @@ namespace Serialize {
         , mHolder(formatter ? formatter->stream().data() : nullptr)
     {
     }
-	
+
     ReadMessage::~ReadMessage()
     {
     }
@@ -50,7 +48,6 @@ namespace Serialize {
     {
         return mId != 0;
     }
-
 
 }
 }

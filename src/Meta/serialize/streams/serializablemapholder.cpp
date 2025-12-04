@@ -2,11 +2,9 @@
 
 #include "serializablemapholder.h"
 
-#include "formattedserializestream.h"
-
-#include "serializestreamdata.h"
-
 #include "../hierarchy/serializableunitptr.h"
+#include "formattedserializestream.h"
+#include "serializestreamdata.h"
 
 namespace Engine {
 namespace Serialize {
@@ -35,7 +33,7 @@ namespace Serialize {
         : mData(data)
     {
         if (mData) {
-            assert(mData->mSerializableList.empty());            
+            assert(mData->mSerializableList.empty());
         }
     }
 
@@ -51,7 +49,7 @@ namespace Serialize {
         }
     }
 
-    SerializableListHolder &SerializableListHolder::operator=(SerializableListHolder &&other)        
+    SerializableListHolder &SerializableListHolder::operator=(SerializableListHolder &&other)
     {
         std::swap(mData, other.mData);
         return *this;

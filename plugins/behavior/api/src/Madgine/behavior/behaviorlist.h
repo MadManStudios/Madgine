@@ -1,8 +1,8 @@
 #pragma once
 
+#include "behavior.h"
 #include "behaviorhandle.h"
 #include "parametertuple.h"
-#include "behavior.h"
 
 namespace Engine {
 namespace Behavior {

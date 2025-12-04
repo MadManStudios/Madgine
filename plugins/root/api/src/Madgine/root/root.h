@@ -1,9 +1,11 @@
 #pragma once
 
+#include "Interfaces/log/fileloglistener.h"
+
 #include "Modules/threading/taskqueue.h"
 #include "Modules/uniquecomponent/uniquecomponentcontainer.h"
+
 #include "rootcomponentcollector.h"
-#include "Interfaces/log/fileloglistener.h"
 
 namespace Engine {
 namespace Root {

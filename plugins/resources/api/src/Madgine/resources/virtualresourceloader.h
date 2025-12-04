@@ -1,8 +1,8 @@
 #pragma once
 
-#include "resourceloader.h"
-
 #include "Meta/keyvalue/virtualscope.h"
+
+#include "resourceloader.h"
 
 namespace Engine {
 namespace Resources {
@@ -174,19 +174,19 @@ namespace Resources {
     METATABLE_END_EX(4, Loader::Resource)                                         \
                                                                                   \
     SERIALIZETABLE_BEGIN_EX(8, Loader::Handle)                                    \
-    ENCAPSULATED_FIELD_EX(9, Name, name, loadSerialize)                           \
+        ENCAPSULATED_FIELD_EX(9, Name, name, loadSerialize)                       \
     SERIALIZETABLE_END_EX(10, Loader::Handle)
 
 #define VIRTUALRESOURCELOADERIMPL(Loader, Base)                  \
     UNIQUECOMPONENT(Loader)                                      \
                                                                  \
     METATABLE_BEGIN_BASE_EX(1, Loader, Base)                     \
-    MEMBER_EX(2, mResources)                                     \
+        MEMBER_EX(2, mResources)                                 \
     METATABLE_END_EX(3, Loader)                                  \
                                                                  \
     METATABLE_BEGIN_BASE_EX(4, Loader::Resource, Base::Resource) \
     METATABLE_END_EX(5, Loader::Resource)                        \
                                                                  \
     SERIALIZETABLE_BEGIN_EX(9, Loader::Handle)                   \
-    ENCAPSULATED_FIELD_EX(10, Name, name, loadSerialize)         \
+        ENCAPSULATED_FIELD_EX(10, Name, name, loadSerialize)     \
     SERIALIZETABLE_END_EX(11, Loader::Handle)

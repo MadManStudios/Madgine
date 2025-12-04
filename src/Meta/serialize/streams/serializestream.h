@@ -2,9 +2,8 @@
 
 #include "Generic/stream.h"
 
-#include "streamresult.h"
-
 #include "../hierarchy/serializableunitptr.h"
+#include "streamresult.h"
 
 namespace Engine {
 namespace Serialize {
@@ -92,7 +91,8 @@ namespace Serialize {
             return {};
         }
 
-        StreamResult operator>>(String auto &s) requires(!std::same_as<decltype(s), std::string &>)
+        StreamResult operator>>(String auto &s)
+            requires(!std::same_as<decltype(s), std::string &>)
         {
             std::string string;
             STREAM_PROPAGATE_ERROR(operator>>(string));
@@ -109,13 +109,15 @@ namespace Serialize {
         StreamResult operator>>(Void &);
 
         template <typename T>
-        requires(!Pointer<T> && !StringViewable<T>) void write(const T &t)
+            requires(!Pointer<T> && !StringViewable<T>)
+        void write(const T &t)
         {
             Stream::write(t);
         }
 
         template <typename T>
-        requires(!Pointer<T> && !StringViewable<T>) SerializeStream &operator<<(const T &t)
+            requires(!Pointer<T> && !StringViewable<T>)
+        SerializeStream &operator<<(const T &t)
         {
             Stream::operator<<(t);
             return *this;

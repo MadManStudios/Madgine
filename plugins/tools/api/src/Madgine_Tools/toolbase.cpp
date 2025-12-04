@@ -2,7 +2,7 @@
 
 #include "toolbase.h"
 
-#include "renderer/imroot.h"
+#include "Interfaces/process/processapi.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
@@ -10,8 +10,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
-
-#include "Interfaces/process/processapi.h"
+#include "renderer/imroot.h"
 
 namespace Engine {
 namespace Tools {
@@ -302,9 +301,9 @@ namespace Tools {
 }
 
 METATABLE_BEGIN(Engine::Tools::ToolBase)
-PROPERTY(visible, isVisible, setVisible)
+    PROPERTY(visible, isVisible, setVisible)
 METATABLE_END(Engine::Tools::ToolBase)
 
 SERIALIZETABLE_BEGIN(Engine::Tools::ToolBase)
-FIELD(mVisible)
+    FIELD(mVisible)
 SERIALIZETABLE_END(Engine::Tools::ToolBase)

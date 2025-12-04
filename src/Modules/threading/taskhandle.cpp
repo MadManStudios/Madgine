@@ -1,6 +1,7 @@
 #include "../moduleslib.h"
 
 #include "taskhandle.h"
+
 #include "taskpromise.h"
 #include "taskqueue.h"
 
@@ -38,13 +39,13 @@ namespace Threading {
         Debug::Tasks::onResume(*this);
         TaskQueue *q = queue();
 #endif
-        //Reset mHandle to allow exception handling
+        // Reset mHandle to allow exception handling
         std::coroutine_handle<TaskPromiseBase> handle = mHandle;
         mHandle = {};
         handle.resume();
 #if MODULES_ENABLE_TASK_TRACKING
         Debug::Tasks::onSuspend(q);
-#endif        
+#endif
     }
 
     void TaskHandle::resumeInQueue()

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Madgine/debug/debuglocation.h"
+
 #include "util/pyobjectptr.h"
 
 namespace Engine {

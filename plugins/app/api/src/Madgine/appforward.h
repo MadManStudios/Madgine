@@ -1,12 +1,10 @@
 #pragma once
 
-namespace Engine
-{
+namespace Engine {
 
-	namespace App
-	{
-		struct Application;			
-		struct GlobalAPIBase;
-	}
-	
+namespace App {
+    struct Application;
+    struct GlobalAPIBase;
+}
+
 }

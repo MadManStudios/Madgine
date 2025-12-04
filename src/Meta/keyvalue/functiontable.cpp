@@ -7,7 +7,6 @@
 METATABLE_BEGIN(Engine::FunctionTable)
 METATABLE_END(Engine::FunctionTable)
 
-
 namespace Engine {
 
 const FunctionTable *&sFunctionList()

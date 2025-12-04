@@ -49,7 +49,7 @@ namespace Execution {
 
     protected:
         ConnectionStack<Connection<FlagStub<Ty...>, Ty...>> mStack;
-        std::optional<std::tuple<Ty...>> mValue;        
+        std::optional<std::tuple<Ty...>> mValue;
     };
 
 }

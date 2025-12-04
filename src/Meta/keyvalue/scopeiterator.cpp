@@ -3,10 +3,8 @@
 #include "scopeiterator.h"
 
 #include "accessor.h"
-
-#include "scopefield.h"
-
 #include "metatable.h"
+#include "scopefield.h"
 
 namespace Engine {
 

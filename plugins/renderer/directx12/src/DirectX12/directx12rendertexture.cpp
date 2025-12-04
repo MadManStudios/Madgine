@@ -128,7 +128,7 @@ namespace Render {
     }
 
     void DirectX12RenderTexture::flipTextures(size_t startIndex, size_t count)
-    {        
+    {
         size_t size = textureCount();
         count = std::min(size, count);
         for (size_t index = 0; index < count; ++index) {

@@ -2,17 +2,13 @@
 
 #include "resourceeditor.h"
 
-#include "resourcestool.h"
-
+#include "Madgine/resources/resourceloaderbase.h"
 #include "Madgine/resources/resourcemanager.h"
 
-#include "Madgine/resources/resourceloaderbase.h"
-
-#include "imgui/imgui_internal.h"
-
-#include "imgui/imguiaddons.h"
-
 #include "Madgine_Tools/renderer/imroot.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
+#include "resourcestool.h"
 
 namespace Engine {
 namespace Tools {

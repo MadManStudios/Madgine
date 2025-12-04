@@ -2,36 +2,32 @@
 #include "Madgine/serialize/filesystem/filesystemlib.h"
 
 #include "mainwindow.h"
-#include "mainwindowcomponent.h"
-#include "toolwindow.h"
+
+#include "Generic/execution/execution.h"
+#include "Generic/projections.h"
 
 #include "Interfaces/filesystem/fsapi.h"
 #include "Interfaces/window/windowapi.h"
 #include "Interfaces/window/windowsettings.h"
 
-#include "Madgine/serialize/filesystem/filemanager.h"
-#include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/configs/controlled.h"
-#include "Meta/serialize/serializetable_impl.h"
-
 #include "Meta/serialize/formats.h"
+
+#include "Modules/debug/profiler/profile.h"
+#include "Modules/threading/awaitables/awaitablesender.h"
+#include "Modules/threading/awaitables/awaitabletimepoint.h"
 
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendertarget.h"
-
-#include "Modules/debug/profiler/profile.h"
-
-#include "Modules/threading/awaitables/awaitabletimepoint.h"
-
 #include "Madgine/resources/resourcemanager.h"
+#include "Madgine/serialize/filesystem/filemanager.h"
 
-#include "Generic/projections.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "layoutloader.h"
-
-#include "Modules/threading/awaitables/awaitablesender.h"
-
-#include "Generic/execution/execution.h"
+#include "mainwindowcomponent.h"
+#include "toolwindow.h"
 
 namespace Engine {
 namespace Window {
@@ -48,26 +44,26 @@ namespace Window {
 }
 
 METATABLE_BEGIN(Engine::Window::MainWindow)
-READONLY_PROPERTY(Components, components)
+    READONLY_PROPERTY(Components, components)
 METATABLE_END(Engine::Window::MainWindow)
 
 SERIALIZETABLE_BEGIN(Engine::Window::MainWindow)
-FIELD(mComponents,
-    Serialize::ControlledConfig<
-        KeyCompare<std::unique_ptr<Engine::Window::MainWindowComponentBase>>,
-        Engine::Window::staticTypeResolve>,
-    Serialize::CustomFilter<Engine::Window::filterComponent>)
+    FIELD(mComponents,
+        Serialize::ControlledConfig<
+            KeyCompare<std::unique_ptr<Engine::Window::MainWindowComponentBase>>,
+            Engine::Window::staticTypeResolve>,
+        Serialize::CustomFilter<Engine::Window::filterComponent>)
 SERIALIZETABLE_END(Engine::Window::MainWindow)
 
 SERIALIZETABLE_BEGIN(Engine::Window::WindowData)
-FIELD(mPosition)
-FIELD(mSize)
-FIELD(mMaximized)
+    FIELD(mPosition)
+    FIELD(mSize)
+    FIELD(mMaximized)
 SERIALIZETABLE_END(Engine::Window::WindowData)
 
 SERIALIZETABLE_BEGIN(Engine::InterfacesVector)
-FIELD(x)
-FIELD(y)
+    FIELD(x)
+    FIELD(y)
 SERIALIZETABLE_END(Engine::InterfacesVector)
 
 namespace Engine {
@@ -133,7 +129,7 @@ namespace Window {
             LOG_ERROR("Could not find layout " << name << "!");
             return []() -> Threading::Task<bool> {
                 co_return false;
-            }();            
+            }();
         }
     }
 
@@ -411,7 +407,7 @@ namespace Window {
                                   mTaskQueue.stop();
                                   return true;
                               },
-                              [this](const RepaintEvent& event) {
+                              [this](const RepaintEvent &event) {
                                   for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
                                       comp->onWindowEvent(event);
                                   }

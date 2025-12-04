@@ -2,9 +2,9 @@
 
 #include "operations.h"
 
+#include "hierarchy/syncableunit.h"
 #include "serializemanager.h"
 #include "streams/formattedserializestream.h"
-#include "hierarchy/syncableunit.h"
 
 namespace Engine {
 namespace Serialize {

@@ -5,7 +5,7 @@
 namespace Engine {
 namespace Execution {
 
-	template <typename... Args>
+    template <typename... Args>
     struct SignalFunctor {
         void operator()(Args... args)
         {

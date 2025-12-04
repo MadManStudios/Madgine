@@ -9,7 +9,7 @@ namespace Widgets {
         virtual ~Checkbox() = default;
 
         virtual bool isChecked();
-        virtual void setChecked(bool b);        
+        virtual void setChecked(bool b);
     };
 }
 }

@@ -6,7 +6,8 @@ namespace Execution {
     struct Gate {
 
         template <typename F>
-        bool pass(F&& f) {
+        bool pass(F &&f)
+        {
             if (mState.fetch_add(1) == 0) {
                 std::forward<F>(f)();
             }

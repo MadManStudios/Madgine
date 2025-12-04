@@ -1,35 +1,26 @@
 #pragma once
 
-#include "Madgine/window/mainwindowcomponent.h"
-#include "Madgine/window/mainwindowcomponentcollector.h"
-
-#include "Meta/math/atlas2.h"
-
-#include "Generic/execution/signal.h"
-
 #include "Generic/coroutines/generator.h"
-
-#include "Madgine/imageloader/imageloader.h"
+#include "Generic/execution/signal.h"
+#include "Generic/intervalclock.h"
+#include "Generic/projections.h"
 
 #include "Interfaces/input/inputevents.h"
 
-#include "Generic/projections.h"
-
-#include "Madgine/debug/debuggablelifetime.h"
+#include "Meta/math/atlas2.h"
 
 #include "Madgine/behavior/named.h"
-
-#include "Generic/intervalclock.h"
-
-#include "widgetloader.h"
+#include "Madgine/debug/debuggablelifetime.h"
+#include "Madgine/imageloader/imageloader.h"
+#include "Madgine/window/mainwindowcomponent.h"
+#include "Madgine/window/mainwindowcomponentcollector.h"
 
 #include "events.h"
-
 #include "layoutwidget.h"
+#include "widgetloader.h"
 
 namespace Engine {
 namespace Widgets {
-
 
     struct MADGINE_WIDGETS_EXPORT WidgetManager : Window::MainWindowComponent<WidgetManager> {
 

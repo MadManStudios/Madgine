@@ -2,11 +2,10 @@
 
 #include "vulkanmeshloader.h"
 
-#include "vulkanmeshdata.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+#include "vulkanmeshdata.h"
 #include "vulkanrendercontext.h"
 
 VIRTUALRESOURCELOADERIMPL(Engine::Render::VulkanMeshLoader, Engine::Render::GPUMeshLoader);
@@ -33,7 +32,6 @@ namespace Render {
         if (!co_await GPUMeshLoader::generate(_data, mesh))
             co_return false;
 
-        
         for (const MeshData::Material &mat : mesh.mMaterials) {
             GPUMeshData::Material &gpuMat = data.mMaterials.emplace_back();
             gpuMat.mName = mat.mName;
@@ -68,7 +66,7 @@ namespace Render {
         for (GPUMeshData::Material &gpuMat : data.mMaterials) {
             if (gpuMat.mResourceBlock)
                 VulkanRenderContext::getSingleton().destroyResourceBlock(gpuMat.mResourceBlock);
-        }        
+        }
         GPUMeshLoader::reset(data);
     }
 

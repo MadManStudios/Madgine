@@ -10,18 +10,18 @@
 NAMED_UNIQUECOMPONENT(TabBar, Engine::Widgets::TabBar);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::TabBar, Engine::Widgets::WidgetBase)
-MEMBER(mTabNames)
-PROPERTY(TabCount, tabCount, setTabCount)
-NAMED_MEMBER(TextData, mTextRenderData)
-NAMED_MEMBER(ImageData, mImageRenderData)
-NAMED_MEMBER(ColorTint, mColorTintRenderData)
+    MEMBER(mTabNames)
+    PROPERTY(TabCount, tabCount, setTabCount)
+    NAMED_MEMBER(TextData, mTextRenderData)
+    NAMED_MEMBER(ImageData, mImageRenderData)
+    NAMED_MEMBER(ColorTint, mColorTintRenderData)
 METATABLE_END(Engine::Widgets::TabBar)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::TabBar, Engine::Widgets::WidgetBase)
-FIELD(mTabNames)
-FIELD(mTextRenderData)
-FIELD(mImageRenderData)
-FIELD(mColorTintRenderData)
+    FIELD(mTabNames)
+    FIELD(mTextRenderData)
+    FIELD(mImageRenderData)
+    FIELD(mColorTintRenderData)
 SERIALIZETABLE_END(Engine::Widgets::TabBar)
 
 namespace Engine {

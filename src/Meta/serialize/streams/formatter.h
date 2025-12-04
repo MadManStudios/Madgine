@@ -19,14 +19,14 @@ namespace Serialize {
         virtual ~Formatter() = default;
 
         void setupStream(SerializeStream stream);
-        virtual void setupStream(std::iostream &) {};
+        virtual void setupStream(std::iostream &) { };
 
         SerializeStream &stream();
 
-        virtual void beginExtendedWrite(const char *name, size_t count) {};
+        virtual void beginExtendedWrite(const char *name, size_t count) { };
 
-        virtual void beginCompoundWrite(const char *name) {};
-        virtual void endCompoundWrite(const char *name) {};
+        virtual void beginCompoundWrite(const char *name) { };
+        virtual void endCompoundWrite(const char *name) { };
 
         virtual StreamResult beginExtendedRead(const char *name, size_t count);
 
@@ -92,7 +92,6 @@ namespace Serialize {
 
         void pushLocale(const std::locale &locale, bool skipWs);
         void popLocale();
-
 
         std::stack<std::pair<std::locale, bool>> mLocaleStack;
 

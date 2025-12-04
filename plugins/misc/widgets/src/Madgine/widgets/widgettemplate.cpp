@@ -2,14 +2,14 @@
 
 #include "widgettemplate.h"
 
-#include "compoundwidget.h"
-
 #include "Meta/keyvalue/accessor.h"
+
+#include "compoundwidget.h"
 
 namespace Engine {
 namespace Widgets {
 
-	WidgetTemplate::WidgetTemplate(std::string name, std::vector<WidgetData> widgets)
+    WidgetTemplate::WidgetTemplate(std::string name, std::vector<WidgetData> widgets)
         : mName(std::move(name))
         , mWidgets(std::move(widgets))
         , mAccessors(accessors(mWidgets))
@@ -47,7 +47,6 @@ namespace Widgets {
 
         return accessors;
     }
-
 
 }
 }

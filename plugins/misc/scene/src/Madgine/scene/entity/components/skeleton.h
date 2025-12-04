@@ -1,10 +1,9 @@
 #pragma once
 
-#include "../entitycomponent.h"
-
+#include "Madgine/render/buffer.h"
 #include "Madgine/skeletonloader/skeletonloader.h"
 
-#include "Madgine/render/buffer.h"
+#include "../entitycomponent.h"
 
 namespace Engine {
 namespace Scene {

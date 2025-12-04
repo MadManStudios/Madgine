@@ -7,7 +7,7 @@ namespace Render {
 
     struct VulkanHeapAllocator {
 
-        static constexpr size_t goodSize = 32 * 1024 * 1024; //8MB
+        static constexpr size_t goodSize = 32 * 1024 * 1024; // 8MB
 
         VulkanHeapAllocator(std::string_view name);
 
@@ -34,7 +34,7 @@ namespace Render {
 
     struct VulkanMappedHeapAllocator {
 
-        static constexpr size_t goodSize = 32 * 1024 * 1024; //128MB
+        static constexpr size_t goodSize = 32 * 1024 * 1024; // 128MB
 
         VulkanMappedHeapAllocator(std::string_view name);
 

@@ -86,7 +86,7 @@ namespace UniqueComponent {
 
 #    define VIRTUALUNIQUECOMPONENTBASE(Name)                                                                            \
         DLL_EXPORT_VARIABLE2(, Engine::UniqueComponent::IndexHolder *, Engine::UniqueComponent::, _preg, nullptr, Name) \
-        DLL_EXPORT_VARIABLE2(constexpr , const Engine::UniqueComponent::TypeInfo, , typeInfo, TYPE_INFO(Name), Name)
+        DLL_EXPORT_VARIABLE2(constexpr, const Engine::UniqueComponent::TypeInfo, , typeInfo, TYPE_INFO(Name), Name)
 
 }
 }

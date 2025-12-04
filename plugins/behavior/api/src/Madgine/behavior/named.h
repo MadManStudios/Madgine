@@ -1,13 +1,11 @@
 #pragma once
 
+#include "Generic/callable_view.h"
 #include "Generic/execution/concepts.h"
+#include "Generic/execution/storage.h"
 #include "Generic/fixed_string.h"
 
 #include "Meta/keyvalue/valuetype_forward.h"
-
-#include "Generic/callable_view.h"
-
-#include "Generic/execution/storage.h"
 
 #include "behaviorerror.h"
 

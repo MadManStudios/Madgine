@@ -1,9 +1,9 @@
 #pragma once
 
-#include "taskpromisesharedstate.h"
-#include "taskhandle.h"
-
 #include "Generic/execution/concepts.h"
+
+#include "taskhandle.h"
+#include "taskpromisesharedstate.h"
 
 #if MODULES_ENABLE_TASK_TRACKING
 #    include "../debug/tasktracking/tasktracker.h"
@@ -95,7 +95,7 @@ namespace Threading {
 
     private:
         TaskQueue *mQueue = nullptr;
-        bool mImmediate;        
+        bool mImmediate;
     };
 
     template <typename T>

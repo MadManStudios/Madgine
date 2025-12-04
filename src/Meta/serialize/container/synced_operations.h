@@ -7,7 +7,7 @@ namespace Serialize {
     DERIVE_OPERATOR(MinusAssign, -=)
 
     template <typename T, typename Observer, typename OffsetPtr>
-    struct Operations<Synced<T, Observer, OffsetPtr>> {        
+    struct Operations<Synced<T, Observer, OffsetPtr>> {
         static StreamResult readRequest(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
         {
             if (synced.isMaster()) {
@@ -36,7 +36,7 @@ namespace Serialize {
                 synced.notify(old, inout.id(), id);
             } else {
                 WriteMessage msg = getSlaveRequestMessageTarget(&synced, inout.id(), id);
-                msg.stream().pipe(inout.stream());                
+                msg.stream().pipe(inout.stream());
             }
             return {};
         }
@@ -76,7 +76,7 @@ namespace Serialize {
         }
 
         static void writeAction(const Synced<T, Observer, OffsetPtr> &synced, const std::vector<WriteMessage> &outStreams, Synced<T, Observer, OffsetPtr>::action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
-        {            
+        {
             for (const WriteMessage &out : outStreams) {
                 Serialize::write(out, payload.mOperation, nullptr);
                 Serialize::write(out, payload.mValue, nullptr);
@@ -113,7 +113,6 @@ namespace Serialize {
         {
             return Serialize::visitStream<T>(in, name, visitor);
         }
-
     };
 
 }

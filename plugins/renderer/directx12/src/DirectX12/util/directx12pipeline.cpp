@@ -3,7 +3,6 @@
 #include "directx12pipeline.h"
 
 #include "../directx12rendercontext.h"
-
 #include "../directx12rendertarget.h"
 
 namespace Engine {

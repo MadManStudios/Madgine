@@ -1,7 +1,8 @@
 #pragma once
 
-#include "configselector.h"
 #include "Generic/fixed_string.h"
+
+#include "configselector.h"
 
 namespace Engine {
 namespace Serialize {
@@ -12,7 +13,8 @@ namespace Serialize {
     struct Tags {
         using Category = TagsCategory;
 
-        static std::array<std::string_view, sizeof...(TagStrings)> getTags() {
+        static std::array<std::string_view, sizeof...(TagStrings)> getTags()
+        {
             return { TagStrings... };
         }
     };

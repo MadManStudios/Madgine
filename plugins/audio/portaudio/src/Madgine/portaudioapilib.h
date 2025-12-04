@@ -12,6 +12,4 @@
 
 #include "portaudioapiforward.h"
 
-
-
 /// @endcond

@@ -3,23 +3,18 @@
 #include "debugvisualizer.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
+#include "Generic/projections.h"
+
+#include "Madgine/nodegraph/nodeinterpreter.h"
+#include "Madgine/nodegraph/pins.h"
+
+#include "Madgine_Tools/debugger/debuggerview.h"
+#include "NodeEditor/imgui_node_editor.h"
+#include "NodeEditor/imgui_node_editor_internal.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
 #include "imguihelpers.h"
-
-#include "Madgine/nodegraph/pins.h"
-
-#include "Madgine/nodegraph/nodeinterpreter.h"
-
-#include "Madgine_Tools/debugger/debuggerview.h"
-
-#include "imguihelpers.h"
-
-#include "NodeEditor/imgui_node_editor.h"
-#include "NodeEditor/imgui_node_editor_internal.h"
-
-#include "Generic/projections.h"
 
 namespace Engine {
 namespace Tools {
@@ -92,8 +87,6 @@ namespace Tools {
                 EndNode();
 
                 ed::SelectNode(60000 * nodeId, true);
-
- 
             }
 
             ed::NodeId ids[256];
@@ -121,13 +114,12 @@ namespace Tools {
                 ++nodeId;
             }
 
-
             ed::NodeId newSelectedNodes[256];
             auto newSelectedNodesCount = ed::GetSelectedNodes(newSelectedNodes, 256);
             assert(newSelectedNodesCount < 255);
 
             bool recenter = newSelectedNodesCount != selectedNodesCount;
-            
+
             for (uint32_t i = 0; i < newSelectedNodesCount; ++i) {
                 if (!recenter && selectedNodes[i] != newSelectedNodes[i])
                     recenter = true;
@@ -139,7 +131,7 @@ namespace Tools {
                     }
                 }
             }
-           
+
             if (recenter)
                 ed::NavigateToSelection(true);
 

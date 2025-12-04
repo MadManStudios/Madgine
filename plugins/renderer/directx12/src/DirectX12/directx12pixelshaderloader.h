@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
-
 #include "Modules/threading/workgroupstorage.h"
+
+#include "Madgine/resources/resourceloader.h"
 
 namespace Engine {
 namespace Render {
@@ -20,7 +20,6 @@ namespace Render {
 
             Threading::TaskFuture<bool> create(const CodeGen::ShaderFile &file, DirectX12PixelShaderLoader *loader = &DirectX12PixelShaderLoader::getSingleton());
         };
-
 
         bool loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
         void unloadImpl(ReleasePtr<IDxcBlob> &shader);

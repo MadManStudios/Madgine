@@ -2,10 +2,9 @@
 
 #if ENABLE_PLUGINS
 
-#    include "../ini/inifile.h"
-
 #    include "Generic/container/mutable_set.h"
 
+#    include "../ini/inifile.h"
 #    include "namecompare.h"
 
 namespace Engine {

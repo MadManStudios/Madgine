@@ -2,14 +2,13 @@
 
 #include "directx12vertexshaderloader.h"
 
+#include "Interfaces/filesystem/fsapi.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "directx12shadercodegen.h"
-
-#include "Interfaces/filesystem/fsapi.h"
-
 #include "directx12rendercontext.h"
+#include "directx12shadercodegen.h"
 
 RESOURCELOADER(Engine::Render::DirectX12VertexShaderLoader);
 
@@ -25,10 +24,10 @@ namespace Render {
         : ResourceLoader({ ".vs_hlsl12" }, { .mIconName = "ShaderIcon.png" })
     {
         HRESULT hr = DxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&mLibrary));
-        //if(FAILED(hr)) Handle error...
+        // if(FAILED(hr)) Handle error...
 
         hr = DxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&mCompiler));
-        //if(FAILED(hr)) Handle error
+        // if(FAILED(hr)) Handle error
     }
 
     Threading::TaskFuture<bool> DirectX12VertexShaderLoader::Ptr::create(const CodeGen::ShaderFile &file, DirectX12VertexShaderLoader *loader)

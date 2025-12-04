@@ -2,9 +2,9 @@
 
 #include "codegen_cmake.h"
 
-#include "statement.h"
-
 #include "Meta/serialize/streams/formatter.h"
+
+#include "statement.h"
 
 namespace CodeGen {
 

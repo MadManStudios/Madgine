@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Meta/math/matrix4.h"
-
 #include <assimp/matrix4x4.h>
+
+#include "Meta/math/matrix4.h"
 
 namespace Engine {
 namespace Render {
@@ -26,7 +26,7 @@ namespace Render {
         }
         return m;
     }
-		
+
     template <typename F>
     void assimpTraverseTree(const aiNode *node, const F &f, Matrix4 m)
     {

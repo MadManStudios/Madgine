@@ -10,8 +10,7 @@ namespace Log {
         INFO_TYPE,
         WARNING_TYPE,
         ERROR_TYPE,
-        FATAL_TYPE
-    )
+        FATAL_TYPE)
 
 }
 }

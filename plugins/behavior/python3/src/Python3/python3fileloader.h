@@ -1,14 +1,12 @@
 #pragma once
 
+#include "Meta/keyvalue/functiontable.h"
+#include "Meta/keyvalue/objectptr.h"
+
+#include "Madgine/behavior/behaviorcollector.h"
 #include "Madgine/resources/resourceloader.h"
 
 #include "util/pymoduleptr.h"
-
-#include "Meta/keyvalue/objectptr.h"
-
-#include "Meta/keyvalue/functiontable.h"
-
-#include "Madgine/behavior/behaviorcollector.h"
 
 namespace Engine {
 namespace Behavior {
@@ -32,7 +30,7 @@ namespace Behavior {
             void exec_module(ValueType &result, ObjectPtr module);
 
         private:
-            struct Python3FunctionTable : FunctionTable{
+            struct Python3FunctionTable : FunctionTable {
                 Python3FunctionTable(PyObjectPtr fn);
                 ~Python3FunctionTable();
 
@@ -52,7 +50,7 @@ namespace Behavior {
             void release(UniqueOpaquePtr &ptr) const override;
             std::string_view name(const UniqueOpaquePtr &handle) const override;
             Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
-            ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;            
+            ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;
             std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
             std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
             std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;

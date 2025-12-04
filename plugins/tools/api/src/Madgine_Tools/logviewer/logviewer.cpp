@@ -2,27 +2,22 @@
 
 #include "logviewer.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Interfaces/log/standardlog.h"
-
 #include "Generic/coroutines/generator.h"
 
 #include "Interfaces/filesystem/path.h"
+#include "Interfaces/log/standardlog.h"
 
 #include "Modules/threading/workgroup.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "../imguiicons.h"
-
 #include "../renderer/imroot.h"
-
+#include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::LogViewer);
 
@@ -30,7 +25,7 @@ METATABLE_BEGIN_BASE(Engine::Tools::LogViewer, Engine::Tools::ToolBase)
 METATABLE_END(Engine::Tools::LogViewer)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::LogViewer, Engine::Tools::ToolBase)
-FIELD(mMsgFilters)
+    FIELD(mMsgFilters)
 SERIALIZETABLE_END(Engine::Tools::LogViewer)
 
 namespace Engine {
@@ -55,7 +50,7 @@ namespace Tools {
             if (table->IsInsideRow)
                 ImGui::TableEndRow(table);
             const int row_increase = (int)((off_y / line_height) + 0.5f);
-            //table->CurrentRow += row_increase; // Can't do without fixing TableEndRow()
+            // table->CurrentRow += row_increase; // Can't do without fixing TableEndRow()
             table->RowBgColorCounter += row_increase;
         }
     }
@@ -101,7 +96,7 @@ namespace Tools {
                 ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHide, 12.0f);
                 ImGui::TableSetupColumn("Message", ImGuiTableColumnFlags_WidthStretch | ImGuiTableColumnFlags_NoHide);
                 ImGui::TableSetupColumn("Log", ImGuiTableColumnFlags_WidthStretch, 0.1f);
-                ImGui::TableSetupColumn("Source", ImGuiTableColumnFlags_WidthStretch, 0.3f);                
+                ImGui::TableSetupColumn("Source", ImGuiTableColumnFlags_WidthStretch, 0.3f);
                 ImGui::TableSetupColumn("Line", ImGuiTableColumnFlags_WidthFixed);
                 ImGui::TableSetupScrollFreeze(0, 1);
                 ImGui::TableHeadersRow();
@@ -126,7 +121,6 @@ namespace Tools {
                         ++i;
                     }
                 }
-
 
                 ImGuiWindow *window = ImGui::GetCurrentWindow();
                 float lossyness = window->DC.CursorStartPosLossyness.y;

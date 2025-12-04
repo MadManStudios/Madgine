@@ -2,9 +2,9 @@
 
 #include "vulkanconstantbufferheap.h"
 
-#include "../vulkanrendercontext.h"
-
 #include "Generic/bytebuffer.h"
+
+#include "../vulkanrendercontext.h"
 
 namespace Engine {
 namespace Render {
@@ -101,7 +101,7 @@ namespace Render {
 
     void VulkanConstantBufferHeap::deallocateTemp(OffsetPtr ptr, size_t size)
     {
-        //mFreeListTemp.push_back({ ptr, size });
+        // mFreeListTemp.push_back({ ptr, size });
     }
 
     OffsetPtr VulkanConstantBufferHeap::allocatePersistent(size_t size)

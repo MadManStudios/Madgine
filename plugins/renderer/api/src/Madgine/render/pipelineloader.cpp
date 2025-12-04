@@ -2,14 +2,13 @@
 
 #include "pipelineloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
+#include "Modules/threading/taskqueue.h"
 
 #include "Madgine/codegen/codegen_shader.h"
-
 #include "Madgine/meshloader/gpumeshloader.h"
 
-#include "Modules/threading/taskqueue.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 METATABLE_BEGIN(Engine::Render::PipelineInstance)
 METATABLE_END(Engine::Render::PipelineInstance)

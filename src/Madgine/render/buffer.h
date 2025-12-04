@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ptr.h"
 #include "Generic/opaqueptr.h"
+
+#include "ptr.h"
 
 namespace Engine {
 namespace Render {
@@ -12,7 +13,7 @@ namespace Render {
         GPUBuffer() = default;
 
         template <typename U>
-        requires std::convertible_to<U *, T *>
+            requires std::convertible_to<U *, T *>
         GPUBuffer(GPUBuffer<U> other)
             : mBuffer(std::move(other.mBuffer))
             , mPtr(other.mPtr)
@@ -29,7 +30,7 @@ namespace Render {
         }
 
         template <typename U>
-        requires std::convertible_to<T *, U *>
+            requires std::convertible_to<T *, U *>
         constexpr operator GPUBuffer<U> &() &
         {
             return reinterpret_cast<GPUBuffer<U> &>(*this);

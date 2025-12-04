@@ -2,30 +2,29 @@
 
 #include "tablewidget.h"
 
-#include "util/layouts/gridlayoutrenderdata.h"
-
 #include "Meta/math/line3.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+#include "util/layouts/gridlayoutrenderdata.h"
 #include "widgetmanager.h"
 
 NAMED_UNIQUECOMPONENT(TableWidget, Engine::Widgets::TableWidget)
 
 METATABLE_BEGIN_BASE(Engine::Widgets::TableWidget, Engine::Widgets::WidgetBase)
-NAMED_MEMBER(TextData, mTextRenderData)
-NAMED_MEMBER(SelectionColors, mSelectionRenderData)
-PROPERTY(RowCount, rowCount, setRowCount)
-PROPERTY(ColumnCount, columnCount, setColumnCount)
-PROPERTY(ColumnConfigs, columnConfigs, setColumnConfigs)
+    NAMED_MEMBER(TextData, mTextRenderData)
+    NAMED_MEMBER(SelectionColors, mSelectionRenderData)
+    PROPERTY(RowCount, rowCount, setRowCount)
+    PROPERTY(ColumnCount, columnCount, setColumnCount)
+    PROPERTY(ColumnConfigs, columnConfigs, setColumnConfigs)
 METATABLE_END(Engine::Widgets::TableWidget)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::TableWidget, Engine::Widgets::WidgetBase)
-FIELD(mTextRenderData)
-FIELD(mRowCount)
-FIELD(mSelectionRenderData)
-ENCAPSULATED_FIELD(mColumnConfigs, columnConfigs, setColumnConfigs)
+    FIELD(mTextRenderData)
+    FIELD(mRowCount)
+    FIELD(mSelectionRenderData)
+    ENCAPSULATED_FIELD(mColumnConfigs, columnConfigs, setColumnConfigs)
 SERIALIZETABLE_END(Engine::Widgets::TableWidget)
 
 namespace Engine {
@@ -107,7 +106,7 @@ namespace Widgets {
         if (mTextRenderData.available()) {
 
             Vector2 pos = getAbsolutePosition();
-            Vector3 size = getAbsoluteSize();            
+            Vector3 size = getAbsoluteSize();
             renderData.setSubLayer(1);
 
             auto keep = renderData.pushClipRect(pos, size.xy());

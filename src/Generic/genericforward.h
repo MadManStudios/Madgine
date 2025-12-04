@@ -2,7 +2,7 @@
 
 /**
  * @brief Main namespace for the Madgine
-*/
+ */
 namespace Engine {
 
 template <typename C, typename Base>
@@ -27,7 +27,6 @@ struct make_type_pack<type_pack<T...>> {
 };
 template <typename T>
 using make_type_pack_t = typename make_type_pack<T>::type;
-
 
 struct CompoundAtomicOperation;
 
@@ -84,7 +83,7 @@ namespace Execution {
 
     struct StopSource;
     struct StopCallback;
-    using StopToken = StopSource*;
+    using StopToken = StopSource *;
 
     template <typename T>
     struct BindingPtr;

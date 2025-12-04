@@ -42,7 +42,7 @@ namespace Serialize {
         MessageLogger::MessageInfo &info = stream.mMessages.emplace_back(std::move(header), std::move(data));
         info.mDir = INCOMING;
         stream.mThread = std::this_thread::get_id();
-        size_t id = stream.mMessages.size();        
+        size_t id = stream.mMessages.size();
         return info;
     }
 

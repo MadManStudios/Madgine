@@ -2,7 +2,9 @@
 
 #include "Generic/bytebuffer.h"
 #include "Generic/offsetptr.h"
+
 #include "Meta/math/boundingbox.h"
+
 #include "Madgine/render/vertex.h"
 #include "Madgine/render/vertexformat.h"
 
@@ -33,7 +35,6 @@ namespace Render {
                 maxP };
         }
 
-        
         MeshData() = default;
 
         template <typename VertexType>

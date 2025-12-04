@@ -2,21 +2,18 @@
 
 #include "portaudioapi.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Madgine/root/root.h"
-
 #include "Generic/execution/execution.h"
-
-#include "portaudio.h"
-
-#include "Madgine/resources/sender.h"
-
 #include "Generic/execution/stop_callback.h"
 
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/resources/sender.h"
+#include "Madgine/root/root.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+
+#include "portaudio.h"
 
 METATABLE_BEGIN_BASE(Engine::Audio::PortAudioApi, Engine::Audio::AudioApi)
 METATABLE_END(Engine::Audio::PortAudioApi)
@@ -140,7 +137,7 @@ namespace Audio {
             if (err != paNoError) {
                 PortAudioApi &api = state.mApi;
                 mState = nullptr;
-                state.set_error(BEHAVIOR_UNKNOWN_ERROR() << "PortAudio Error: " << err);                
+                state.set_error(BEHAVIOR_UNKNOWN_ERROR() << "PortAudio Error: " << err);
                 api.reuseStream(*this);
             }
         }
@@ -336,7 +333,7 @@ namespace Audio {
 
         LOG_DEBUG("PortAudio picked: " << mDeviceInfo->name << " (" << Pa_GetHostApiInfo(mDeviceInfo->hostApi)->name << ")");
 
-        //Potentially moving it to a separate thread altogether. Seems to wait on the thread.
+        // Potentially moving it to a separate thread altogether. Seems to wait on the thread.
         mRoot.taskQueue()->queue([this]() -> Threading::Task<void> {
             while (mRoot.taskQueue()->running()) {
                 {
@@ -388,7 +385,7 @@ namespace Audio {
 
     PortAudioStream &PortAudioApi::fetchStream(const AudioInfo &info)
     {
-        std::unique_lock lock { mMutex };        
+        std::unique_lock lock { mMutex };
         auto it = std::ranges::find_if(mStreamPool, [&](const PortAudioStream &stream) { return stream.isCompatible(info); });
         if (it == mStreamPool.end()) {
             return mBusyStreams.emplace_back(info, mDevice, mDeviceInfo);

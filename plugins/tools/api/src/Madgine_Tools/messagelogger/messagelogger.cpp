@@ -1,22 +1,20 @@
 #include "../toolslib.h"
 
-#if ENABLE_MESSAGE_LOGGING
-
 #include "messagelogger.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
+#if ENABLE_MESSAGE_LOGGING
 
-#include "Meta/serialize/serializetable_impl.h"
+#    include "Meta/serialize/streams/messagelogger.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+#    include "Modules/threading/workgroup.h"
+#    include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/serialize/streams/messagelogger.h"
+#    include "Meta/keyvalue/metatable_impl.h"
+#    include "Meta/serialize/serializetable_impl.h"
 
-#include "../imguiicons.h"
-
-#include "Modules/threading/workgroup.h"
+#    include "../imguiicons.h"
+#    include "imgui/imgui.h"
+#    include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::MessageLogger);
 
@@ -29,8 +27,8 @@ SERIALIZETABLE_END(Engine::Tools::MessageLogger)
 namespace Engine {
 namespace Tools {
 
-    #define IMGUI_ICON_IN "->|"
-#define IMGUI_ICON_OUT "<-|"
+#    define IMGUI_ICON_IN "->|"
+#    define IMGUI_ICON_OUT "<-|"
 
     MessageLogger::MessageLogger(ImRoot &root)
         : Tool<MessageLogger>(root)
@@ -45,14 +43,14 @@ namespace Tools {
     void MessageLogger::render()
     {
         if (beginDefaultWindow()) {
-            for (const auto& [stream, data] : mLogger.mStreams) {
+            for (const auto &[stream, data] : mLogger.mStreams) {
                 if (!Threading::WorkGroup::self().contains(data.mThread))
                     continue;
 
                 char buffer[256];
                 sprintf(buffer, "%x", stream);
                 ImGui::Checkbox(buffer, &mVisibleStreams[stream]);
-                
+
                 if (mVisibleStreams[stream]) {
                     if (ImGui::Begin(buffer, &mVisibleStreams[stream])) {
                         if (ImGui::TreeNode("Messages")) {

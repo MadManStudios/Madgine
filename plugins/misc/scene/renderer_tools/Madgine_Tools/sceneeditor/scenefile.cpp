@@ -1,36 +1,29 @@
 #include "../scenerenderertoolslib.h"
 
-#include "sceneeditor.h"
 #include "scenefile.h"
-
-#include "Madgine_Tools/imgui/clientimroot.h"
-
-#include "Madgine/serialize/filesystem/filemanager.h"
 
 #include "Meta/serialize/formats.h"
 
+#include "Madgine/scene/entity/components/mesh.h"
+#include "Madgine/scene/entity/components/transform.h"
+#include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/window/mainwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Madgine_Tools/imguiicons.h"
-
-#include "Madgine/scene/entity/components/mesh.h"
-#include "Madgine/scene/entity/components/transform.h"
-
-#include "Madgine_Tools/inspector/inspector.h"
-
 #include "Madgine_Tools/behaviortool.h"
-
+#include "Madgine_Tools/imgui/clientimroot.h"
+#include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/inspector/inspector.h"
 #include "im3d/im3d.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
-
+#include "sceneeditor.h"
 #include "scenetool.h"
 
 METATABLE_BEGIN(Engine::Tools::SceneFile)
-READONLY_PROPERTY(Views, views)
-READONLY_PROPERTY(Scene, sceneMgr)
+    READONLY_PROPERTY(Views, views)
+    READONLY_PROPERTY(Scene, sceneMgr)
 METATABLE_END(Engine::Tools::SceneFile)
 
 namespace Engine {
@@ -88,8 +81,8 @@ namespace Tools {
 
         bool open = true;
 
-        //mManager.simulationClock().tick(mManager.clock().now());
-        //mManager.animationClock().tick(mManager.clock().now());
+        // mManager.simulationClock().tick(mManager.clock().now());
+        // mManager.animationClock().tick(mManager.clock().now());
 
         if (tool().BeginResourceFile(this, mPath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &open)) {
 

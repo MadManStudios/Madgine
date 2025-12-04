@@ -77,7 +77,7 @@ namespace Execution {
                 delete mState;
             }
             template <typename... R>
-            void set_error(R &&... r)
+            void set_error(R &&...r)
             {
                 mRec.set_error(std::forward<R>(r)...);
                 delete mState;

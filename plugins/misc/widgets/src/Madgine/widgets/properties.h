@@ -41,7 +41,6 @@ namespace Widgets {
         PropertyIterator &operator++();
         PropertyIterator operator++(int);
 
-
         PropertyRange conditionalRange() const;
         float value(size_t i) const;
 

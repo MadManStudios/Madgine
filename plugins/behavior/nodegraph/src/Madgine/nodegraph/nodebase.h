@@ -1,14 +1,12 @@
 #pragma once
 
-#include "pins.h"
-
+#include "Meta/keyvalue/virtualscope.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Madgine/codegen/statement.h"
 
 #include "nodeexecutionmask.h"
-
-#include "Madgine/codegen/statement.h"
+#include "pins.h"
 
 namespace Engine {
 namespace Behavior {

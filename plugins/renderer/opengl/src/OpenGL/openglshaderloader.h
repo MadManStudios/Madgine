@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
-
 #include "Modules/threading/workgroupstorage.h"
+
+#include "Madgine/resources/resourceloader.h"
 
 #include "util/openglshader.h"
 

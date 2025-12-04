@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-struct META_EXPORT ApiFunction {    
+struct META_EXPORT ApiFunction {
 
     constexpr ApiFunction() = default;
 
@@ -25,7 +25,7 @@ struct META_EXPORT ApiFunction {
 
     size_t argumentsCount(bool excludeThis = false) const;
     bool isMemberFunction() const;
-    
+
     const FunctionTable *mTable = nullptr;
 };
 

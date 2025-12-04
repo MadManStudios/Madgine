@@ -2,39 +2,30 @@
 
 #include "widgeteditor.h"
 
-#include "Madgine_Tools/imgui/clientimroot.h"
-#include "imgui/imgui.h"
+#include "Generic/coroutines/generator.h"
 
-#include "imgui/imguiaddons.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/math/bounds.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Madgine/widgets/widget.h"
-#include "Madgine/window/mainwindow.h"
-
 #include "Meta/serialize/streams/serializestream.h"
-
-#include "Madgine/widgets/widgetmanager.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Generic/coroutines/generator.h"
-
-#include "Madgine_Tools/imguiicons.h"
-
-#include "Madgine/widgets/widgetloader.h"
-
 #include "Madgine/render/rendertarget.h"
+#include "Madgine/widgets/widget.h"
+#include "Madgine/widgets/widgetloader.h"
+#include "Madgine/widgets/widgetmanager.h"
+#include "Madgine/window/mainwindow.h"
 
-#include "Madgine_Tools/inspector/inspector.h"
-
-#include "imgui/imgui_internal.h"
-
-#include "Madgine_Tools/debugger/debuggerview.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/behaviortool.h"
+#include "Madgine_Tools/debugger/debuggerview.h"
+#include "Madgine_Tools/imgui/clientimroot.h"
+#include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/inspector/inspector.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::WidgetEditor);
 

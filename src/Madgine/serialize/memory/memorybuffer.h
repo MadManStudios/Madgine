@@ -14,7 +14,7 @@ namespace Memory {
         int_type overflow(int c = EOF) override;
 
     private:
-        WritableByteBuffer mWriteBuffer;        
+        WritableByteBuffer mWriteBuffer;
     };
 
     struct MADGINE_MEMORY_SERIALIZE_EXPORT MemoryReadBuffer : std::basic_streambuf<char> {
@@ -29,7 +29,7 @@ namespace Memory {
         pos_type seekoff(off_type off, std::ios_base::seekdir way, std::ios_base::openmode which = std::ios_base::in) override;
         pos_type seekpos(pos_type sp, std::ios_base::openmode which = std::ios_base::in) override;
 
-    private:        
+    private:
         ByteBuffer mReadBuffer;
     };
 }

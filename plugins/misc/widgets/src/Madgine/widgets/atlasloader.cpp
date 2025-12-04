@@ -2,37 +2,31 @@
 
 #include "atlasloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Madgine/serialize/filesystem/filemanager.h"
-
-#include "Meta/serialize/streams/formattedserializestream.h"
-
-#include "Meta/serialize/formats.h"
-
-#include "Meta/serialize/operations.h"
-
-#include "widgetmanager.h"
-
-#include "Madgine/window/mainwindow.h"
-
-#include "Madgine/window/layoutloader.h"
-
 #include "Generic/areaview.h"
 
-#include "Madgine/resources/resourcemanager.h"
+#include "Meta/serialize/formats.h"
+#include "Meta/serialize/operations.h"
+#include "Meta/serialize/streams/formattedserializestream.h"
 
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 
+#include "Madgine/resources/resourcemanager.h"
+#include "Madgine/serialize/filesystem/filemanager.h"
+#include "Madgine/window/layoutloader.h"
+#include "Madgine/window/mainwindow.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
 #include "widgetloader.h"
+#include "widgetmanager.h"
 
 RESOURCELOADER(Engine::Widgets::AtlasLoader)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::PreprocessedUIAtlas)
-FIELD(mSize)
-FIELD(mEntries, Engine::Serialize::KeyValueCreator<Engine::Serialize::DefaultCreator, Engine::Serialize::DefaultCreator>)
-ENCAPSULATED_FIELD(Image, toPNG, fromPNG)
+    FIELD(mSize)
+    FIELD(mEntries, Engine::Serialize::KeyValueCreator<Engine::Serialize::DefaultCreator, Engine::Serialize::DefaultCreator>)
+    ENCAPSULATED_FIELD(Image, toPNG, fromPNG)
 SERIALIZETABLE_END(Engine::Widgets::PreprocessedUIAtlas)
 
 namespace Engine {
@@ -160,7 +154,7 @@ namespace Widgets {
             sizes[i] = handle->mSize + Vector2i { 2, 2 };
             ++i;
         }
-        std::vector<Atlas2::Entry> entries = mAtlas.insert({sizes.data(), sizes.size()}, [this]() { expand(); });
+        std::vector<Atlas2::Entry> entries = mAtlas.insert({ sizes.data(), sizes.size() }, [this]() { expand(); });
         i = 0;
         for (const auto &[name, handle] : images) {
             mEntries[name] = entries[i];
@@ -222,7 +216,7 @@ namespace Widgets {
 
     ByteBuffer PreprocessedUIAtlas::toPNG() const
     {
-        return Resources::ImageLoader::convertToPNG(mBuffer, imageSize());        
+        return Resources::ImageLoader::convertToPNG(mBuffer, imageSize());
     }
 
     void PreprocessedUIAtlas::fromPNG(const ByteBuffer &buffer)
@@ -236,7 +230,7 @@ namespace Widgets {
         mAtlas.clear();
         mAtlas.addBin({ 0, 0 });
         Vector2i furthestCorner { 0, 0 };
-        for (const Atlas2::Entry& entry : kvValues(mEntries)) {
+        for (const Atlas2::Entry &entry : kvValues(mEntries)) {
             Vector2i bottomRight = entry.mArea.bottomRight();
             furthestCorner = { std::max(bottomRight.x, furthestCorner.x),
                 std::max(bottomRight.y, furthestCorner.y) };
@@ -248,7 +242,7 @@ namespace Widgets {
     {
         if (mSize == 0) {
             mSize = 1;
-            //mTexture.setData({ mSize * 2048, mSize * 2048 }, {});
+            // mTexture.setData({ mSize * 2048, mSize * 2048 }, {});
             for (int x = 0; x < mSize; ++x) {
                 for (int y = 0; y < mSize; ++y) {
                     mAtlas.addBin({ 2048 * x, 2048 * y });
@@ -287,7 +281,7 @@ namespace Widgets {
     }
 
     Threading::Task<void> AtlasLoader::unloadImpl(PreprocessedUIAtlas &data)
-    {       
+    {
         co_return;
     }
 
@@ -297,7 +291,6 @@ namespace Widgets {
         for (auto &[name, res] : WidgetLoader::getSingleton()) {
             co_await res.loadData().info()->loadingTask();
         }
-
 
         std::vector<Filesystem::Path> filesToAdd;
         for (Filesystem::Path path : resourcesToBake) {
@@ -337,8 +330,8 @@ namespace Widgets {
                 Filesystem::FileManager outMgr { "Atlas" };
                 Filesystem::Path outPath = intermediateDir / (std::string { path.stem() } + ".atl");
                 Serialize::FormattedSerializeStream out = outMgr.openWrite(outPath, Serialize::Formats::safebinary);
-                
-                Serialize::write(out, atlas, "Atlas");   
+
+                Serialize::write(out, atlas, "Atlas");
 
                 filesToAdd.push_back(outPath);
             }

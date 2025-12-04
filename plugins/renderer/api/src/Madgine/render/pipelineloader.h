@@ -1,16 +1,15 @@
 #pragma once
 
-#include "Madgine/resources/virtualresourceloader.h"
 #include "Modules/threading/workgroupstorage.h"
 
 #include "Madgine/render/vertexformat.h"
+#include "Madgine/resources/virtualresourceloader.h"
 
 #include "pipeline.h"
 #include "pipelineinstance.h"
 
 namespace Engine {
 namespace Render {
-
 
     struct MADGINE_RENDER_EXPORT PipelineLoader : Resources::VirtualResourceLoaderBase<PipelineLoader, Pipeline, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
 
@@ -26,7 +25,6 @@ namespace Render {
             Threading::TaskFuture<bool> create(PipelineConfiguration config, PipelineLoader *loader = &PipelineLoader::getSingleton());
 
             Threading::TaskFuture<bool> createGenerated(PipelineConfiguration config, CodeGen::ShaderFile file, PipelineLoader *loader = &PipelineLoader::getSingleton());
-            
 
             void reset();
 

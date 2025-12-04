@@ -1,17 +1,12 @@
 #pragma once
 
+#include "binding.h"
 #include "concepts.h"
-
-#include "virtualstate.h"
-
 #include "flag.h"
-
 #include "stop_callback.h"
 #include "stop_source.h"
-
 #include "stoppable.h"
-
-#include "binding.h"
+#include "virtualstate.h"
 
 namespace Engine {
 namespace Execution {
@@ -55,7 +50,7 @@ namespace Execution {
         }
 
         template <typename T, typename Dtor>
-        struct sender : Execution::base_sender{            
+        struct sender : Execution::base_sender {
 
             using result_type = void;
             template <template <typename...> typename Tuple>
@@ -76,7 +71,7 @@ namespace Execution {
         template <typename T, typename Dtor>
         sender<T, Dtor> bound(BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
         {
-            return sender<T, Dtor> { {} , * this, std::forward<T>(t), std::forward<Dtor>(dtor), ptr };
+            return sender<T, Dtor> { {}, *this, std::forward<T>(t), std::forward<Dtor>(dtor), ptr };
         }
 
         using is_sender = void;

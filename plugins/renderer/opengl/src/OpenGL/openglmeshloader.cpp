@@ -2,13 +2,12 @@
 
 #include "openglmeshloader.h"
 
-#include "openglmeshdata.h"
+#include "Madgine/meshloader/meshdata.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/meshloader/meshdata.h"
-
+#include "openglmeshdata.h"
 #include "openglrendercontext.h"
 
 VIRTUALRESOURCELOADERIMPL(Engine::Render::OpenGLMeshLoader, Engine::Render::GPUMeshLoader);
@@ -34,7 +33,7 @@ namespace Render {
 
         if (!co_await GPUMeshLoader::generate(data, mesh))
             co_return false;
-                
+
         for (const MeshData::Material &mat : mesh.mMaterials) {
             GPUMeshData::Material &gpuMat = data.mMaterials.emplace_back();
             gpuMat.mName = mat.mName;

@@ -13,9 +13,9 @@ struct ReferenceTuple {
     }
 
     template <typename... Ty2>
-    requires(std::convertible_to<Ty2 &, Ty &> &&...)
-        ReferenceTuple(ReferenceTuple<Ty2...> data)
-        : mData(static_cast<std::tuple<Ty2&...>>(data))
+        requires(std::convertible_to<Ty2 &, Ty &> && ...)
+    ReferenceTuple(ReferenceTuple<Ty2...> data)
+        : mData(static_cast<std::tuple<Ty2 &...>>(data))
     {
     }
 
@@ -66,7 +66,7 @@ struct ReferenceTuple {
     }
 
     template <typename... Args>
-    friend auto tag_invoke(construct_t, ReferenceTuple tuple, Args&&... args)
+    friend auto tag_invoke(construct_t, ReferenceTuple tuple, Args &&...args)
     {
         (construct(std::get<Ty &>(tuple.mData), std::forward<Args>(args)), ...);
     }
@@ -76,8 +76,6 @@ struct ReferenceTuple {
     {
         (TupleUnpacker::invokeFromTuple(construct, std::get<Ty &>(tuple.mData), std::forward<Tuples>(tuples)), ...);
     }
-
-    
 
 private:
     std::tuple<Ty &...> mData;

@@ -20,7 +20,6 @@ namespace Render {
         HRESULT hr = GetDevice()->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&mHeap));
         DX12_CHECK(hr);
 
-
         ZeroMemory(&desc, sizeof(D3D12_DESCRIPTOR_HEAP_DESC));
         desc.Type = type;
         desc.NodeMask = 0;
