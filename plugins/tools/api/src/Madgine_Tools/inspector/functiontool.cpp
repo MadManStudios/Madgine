@@ -18,11 +18,11 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "imgui/valuetypepayload.h"
-
 #include "imgui/imgui_internal.h"
 
 #include "Generic/execution/execution.h"
+
+#include "Meta/keyvalue/valuetype.h"
 
 UNIQUECOMPONENT(Engine::Tools::FunctionTool);
 
@@ -97,9 +97,8 @@ namespace Tools {
         }
 
         if (ImGui::BeginDragDropTarget()) {
-            const ImGui::ValueTypePayload *payload;
-            if (ImGui::AcceptDraggableValueType(function, &payload)) {
-                functionName = payload->mName;
+            if (ImGui::AcceptDraggableValueType(function)) {
+                functionName = function.mFunction.mTable->mName;
                 changed = true;
             }
             ImGui::EndDragDropTarget();
@@ -139,7 +138,7 @@ namespace Tools {
                     bool changed = mInspector->drawValue(function.mFunction.mTable->mArguments[i].mName, v, true, !function.mFunction.mTable->mArguments[i].mType.mType.isRegular()).first;
 
                     if (ImGui::BeginDragDropTarget()) {
-                        changed |= ImGui::AcceptDraggableValueType(v, function.mFunction.mTable->mArguments[i].mType);
+                        changed |= ImGui::AcceptDraggableValueType([&](const ValueType &dropped) { v = dropped; }, [&](const ValueType &dropped) { return function.mFunction.mTable->mArguments[i].mType.canAccept(dropped.type()); });
                         ImGui::EndDragDropTarget();
                     }
                     if (changed) {
