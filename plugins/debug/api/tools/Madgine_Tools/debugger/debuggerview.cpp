@@ -206,7 +206,7 @@ namespace Tools {
                     }
                 }
             };
-            senderLocation->visit(CallableView<void(const Execution::StateDescriptor &)> { visitor });
+            senderLocation->visit(visitor);
 
             return subLocation;
         } else {

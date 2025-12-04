@@ -18,16 +18,14 @@ struct KeyValueBinding {
         friend bool tag_invoke(Execution::access_binding_t, const InnerBinding &ptr, F &&callback)
         {
             bool result;
-
-            auto f = [&](ValueType &v) {
+            ValueType_erased([&](ValueType &v) {
                 result = Execution::access_binding(ptr.mBinding, [&](auto &&b) {
                     to_ValueType(v, forward_ref<decltype(b)>(b));
                     return true;
                 });
                 if (result)
                     std::forward<F>(callback)(v);
-            };
-            ValueType_erased(CallableView<void(ValueType &)> { f });
+            });
 
             return result;
         }
