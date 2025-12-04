@@ -15,7 +15,6 @@ namespace Render {
 
         Threading::Task<bool> loadImpl(AnimationList &data, ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(AnimationList &data);
-
     };
 
 }

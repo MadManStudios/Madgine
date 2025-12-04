@@ -2,6 +2,10 @@
 
 #include "compoundwidget.h"
 
+#include "Meta/serialize/formats.h"
+
+#include "Madgine/serialize/memory/memorymanager.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
@@ -9,10 +13,6 @@
 #include "label.h"
 #include "widgetloader.h"
 #include "widgetmanager.h"
-
-#include "Madgine/serialize/memory/memorymanager.h"
-
-#include "Meta/serialize/formats.h"
 
 METATABLE_BEGIN_BASE(Engine::Widgets::CompoundWidget, Engine::Widgets::WidgetBase)
 METATABLE_END(Engine::Widgets::CompoundWidget)
@@ -94,7 +94,7 @@ namespace Widgets {
                     return hovered;
                 }
             }
-        }        
+        }
 
         return hovered;
     }
@@ -108,7 +108,6 @@ namespace Widgets {
         return nullptr;
     }
 
-    
     const char *CompoundWidget::getClass() const
     {
         return mDescriptor.name().data();

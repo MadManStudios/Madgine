@@ -1,14 +1,14 @@
 #include "../widgetslib.h"
 
 #include "textedit.h"
-#include "widgetmanager.h"
+
+#include "Interfaces/input/inputevents.h"
+#include "Interfaces/window/windowapi.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Interfaces/input/inputevents.h"
-
-#include "Interfaces/window/windowapi.h"
+#include "widgetmanager.h"
 
 #define STB_TEXTEDIT_KEYTYPE uint32_t
 
@@ -46,20 +46,20 @@
 NAMED_UNIQUECOMPONENT(TextEdit, Engine::Widgets::TextEdit);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::TextEdit, Engine::Widgets::WidgetBase)
-PROPERTY(Text, text, setText)
-NAMED_MEMBER(TextData, mTextRenderData)
-NAMED_MEMBER(Image, mImageRenderData)
-PROPERTY(Border, border, setBorder)
-MEMBER(mVerticalScroll)
-PROPERTY(Editable, editable, setEditable)
+    PROPERTY(Text, text, setText)
+    NAMED_MEMBER(TextData, mTextRenderData)
+    NAMED_MEMBER(Image, mImageRenderData)
+    PROPERTY(Border, border, setBorder)
+    MEMBER(mVerticalScroll)
+    PROPERTY(Editable, editable, setEditable)
 METATABLE_END(Engine::Widgets::TextEdit)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::TextEdit, Engine::Widgets::WidgetBase)
-ENCAPSULATED_FIELD(Text, text, setText)
-FIELD(mTextRenderData)
-FIELD(mImageRenderData)
-ENCAPSULATED_FIELD(Border, border, setBorder)
-ENCAPSULATED_FIELD(Editable, editable, setEditable)
+    ENCAPSULATED_FIELD(Text, text, setText)
+    FIELD(mTextRenderData)
+    FIELD(mImageRenderData)
+    ENCAPSULATED_FIELD(Border, border, setBorder)
+    ENCAPSULATED_FIELD(Editable, editable, setEditable)
 SERIALIZETABLE_END(Engine::Widgets::TextEdit)
 
 namespace Engine {

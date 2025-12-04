@@ -3,7 +3,7 @@
 namespace Engine {
 namespace Render {
 
-typedef int RenderPassFlags;
+    typedef int RenderPassFlags;
     enum RenderPassFlags_ {
         RenderPassFlags_None = 0,
         RenderPassFlags_NoLighting = 1 << 0,

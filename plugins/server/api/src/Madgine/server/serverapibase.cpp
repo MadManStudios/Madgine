@@ -2,10 +2,9 @@
 
 #include "serverapibase.h"
 
-#include "server.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 
+#include "server.h"
 
 METATABLE_BEGIN(Engine::Server::ServerAPIBase)
 METATABLE_END(Engine::Server::ServerAPIBase)
@@ -44,4 +43,3 @@ namespace Server {
 
 }
 }
-

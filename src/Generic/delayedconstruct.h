@@ -7,7 +7,8 @@ namespace Engine {
 template <typename T>
 struct DelayedConstruct {
 
-    operator T() {
+    operator T()
+    {
         return mConstructor();
     }
 

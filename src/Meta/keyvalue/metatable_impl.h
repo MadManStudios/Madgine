@@ -3,10 +3,12 @@
 #include "Generic/fixed_string.h"
 #include "Generic/guard.h"
 #include "Generic/linestruct.h"
+
+#include "functiontable_impl.h"
+
 #include "accessor.h"
 #include "boundapifunction.h"
 #include "dynamicaccessorlist.h"
-#include "functiontable_impl.h"
 #include "metatable.h"
 #include "valuetype_forward.h"
 
@@ -215,10 +217,12 @@ struct ctorHelper {
 #define CONSTRUCTOR(...) CONSTRUCTOR_EX(, __VA_ARGS__)
 
 #define METATABLE_END(T) \
-    METATABLE_END_EX(, T)
+    METATABLE_END_EX     \
+    (, T)
 
 #define METATABLE_DYNAMIC_END(Builder, Init, T) \
-    METATABLE_DYNAMIC_END_EX(, Builder, Init, T)
+    METATABLE_DYNAMIC_END_EX                    \
+    (, Builder, Init, T)
 
 #define METATABLE_END_EX(Idx, T)         \
     METATABLE_ENTRY_EX(Idx, Accessor {}) \

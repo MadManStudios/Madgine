@@ -1,8 +1,8 @@
 #pragma once
 
-#include "vulkanrendertarget.h"
-
 #include "Meta/math/matrix4.h"
+
+#include "vulkanrendertarget.h"
 
 namespace Engine {
 namespace Render {
@@ -52,7 +52,7 @@ namespace Render {
         std::vector<VkImage> mSwapChainImages;
         std::vector<VulkanPtr<VkImageView, &vkDestroyImageView>> mSwapChainImageViews;
         std::vector<VulkanPtr<VkFramebuffer, &vkDestroyFramebuffer>> mFramebuffers;
-        VkSurfaceFormatKHR mFormat;        
+        VkSurfaceFormatKHR mFormat;
     };
 
 }

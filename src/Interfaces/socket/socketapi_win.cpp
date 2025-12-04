@@ -2,10 +2,11 @@
 
 #if WINDOWS
 
-#    include "socketapi.h"
-
+#define NOMINMAX
 #    include <WS2tcpip.h>
 #    include <WinSock2.h>
+
+#    include "socketapi.h"
 
 #    undef NO_ERROR
 
@@ -55,8 +56,9 @@ void Socket::close()
     mSocket = Invalid_Socket;
 }
 
-SocketAddress Socket::address() const {
-    sockaddr address;    
+SocketAddress Socket::address() const
+{
+    sockaddr address;
     char ext[16];
     int length = sizeof(sockaddr) + sizeof(ext);
     if (getpeername(mSocket, &address, &length))
@@ -65,12 +67,12 @@ SocketAddress Socket::address() const {
     char buffer[256];
     switch (address.sa_family) {
     case AF_INET:
-        inet_ntop(AF_INET, &reinterpret_cast<sockaddr_in&>(address).sin_addr,
+        inet_ntop(AF_INET, &reinterpret_cast<sockaddr_in &>(address).sin_addr,
             buffer, 256);
         break;
 
     case AF_INET6:
-        inet_ntop(AF_INET6, &reinterpret_cast<sockaddr_in6&>(address).sin6_addr,
+        inet_ntop(AF_INET6, &reinterpret_cast<sockaddr_in6 &>(address).sin6_addr,
             buffer, 256);
         break;
 
@@ -127,7 +129,7 @@ SocketAPIResult Socket::open(int port)
     }
 
     mSocket = s;
-    
+
     if (bind(mSocket, LPSOCKADDR(&addr), sizeof addr) == SOCKET_ERROR) {
         SocketAPIResult result = SocketAPI::getError("bind");
         close();
@@ -155,7 +157,7 @@ SocketAPIResult Socket::accept(const Socket &from, TimeOut timeout)
     timeval *timeout_p = &timeout_s;
     if (timeout.isInfinite()) {
         timeout_p = nullptr;
-    }else if (timeout.isZero()) {
+    } else if (timeout.isZero()) {
         timeout_s.tv_sec = 0;
         timeout_s.tv_usec = 0;
     } else {
@@ -187,14 +189,14 @@ SocketAPIResult Socket::connect(std::string_view url, int portNr)
     if (*this)
         return SocketAPIResult::ALREADY_IN_USE;
 
-    //Fill out the information needed to initialize a socket…
-    SOCKADDR_IN target; //Socket address information
+    // Fill out the information needed to initialize a socket…
+    SOCKADDR_IN target; // Socket address information
 
     target.sin_family = AF_INET; // address family Internet
-    target.sin_port = htons(portNr); //Port to connect on
+    target.sin_port = htons(portNr); // Port to connect on
     InetPton(AF_INET, url.data(), &target.sin_addr.s_addr);
 
-    SOCKET s = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); //Create socket
+    SOCKET s = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); // Create socket
 
     if (s == INVALID_SOCKET) {
         return SocketAPI::getError("socket");
@@ -202,7 +204,7 @@ SocketAPIResult Socket::connect(std::string_view url, int portNr)
 
     mSocket = s;
 
-    //Try connecting...
+    // Try connecting...
 
     if (::connect(s, reinterpret_cast<SOCKADDR *>(&target), sizeof target) == SOCKET_ERROR) {
         SocketAPIResult error = SocketAPI::getError("connect");

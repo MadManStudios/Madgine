@@ -5,11 +5,13 @@ namespace Engine {
 template <auto Builder, auto Init>
 struct DynamicAccessorList {
 
-    void init() {
+    void init()
+    {
         Init(mData);
     }
 
-    constexpr const Accessor* data() const {
+    constexpr const Accessor *data() const
+    {
         return mData.data();
     }
 

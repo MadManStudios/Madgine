@@ -73,7 +73,7 @@ namespace Filesystem {
 
     protected:
         void verify();
-    
+
         void increment();
 
     private:

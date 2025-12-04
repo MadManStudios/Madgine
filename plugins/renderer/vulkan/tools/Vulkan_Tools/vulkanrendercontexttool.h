@@ -1,12 +1,11 @@
 #pragma once
 
+#include "Modules/debug/history.h"
+
+#include "Madgine_Tools/render/rendercontexttool.h"
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
-
 #include "Vulkan/util/vulkantexture.h"
-#include "Madgine_Tools/render/rendercontexttool.h"
-
-#include "Modules/debug/history.h"
 
 namespace Engine {
 namespace Tools {
@@ -21,7 +20,7 @@ namespace Tools {
         Threading::Task<void> finalize() override;
 
         void update() override;
-        void renderMetrics() override;        
+        void renderMetrics() override;
 
         std::string_view key() const override;
 

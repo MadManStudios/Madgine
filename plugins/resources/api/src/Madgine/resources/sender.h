@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Madgine/root/root.h"
-
 #include "Generic/execution/statedescriptor.h"
+
+#include "Madgine/root/root.h"
 
 namespace Engine {
 namespace Resources {

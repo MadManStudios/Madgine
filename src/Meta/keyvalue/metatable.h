@@ -1,8 +1,8 @@
 #pragma once
 
-#include "table_forward.h"
-
 #include "Generic/offsetptr.h"
+
+#include "table_forward.h"
 
 namespace Engine {
 
@@ -89,12 +89,10 @@ struct META_EXPORT MetaTable {
     mutable const MetaTable **mPrev = nullptr;
 };
 
-
 META_EXPORT const MetaTable *&sTypeList();
 
 META_EXPORT void registerType(const MetaTable &t);
 META_EXPORT void unregisterType(const MetaTable &t);
-
 
 template <typename T>
 struct MetaTableRegistrator {

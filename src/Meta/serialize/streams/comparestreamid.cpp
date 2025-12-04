@@ -2,10 +2,8 @@
 
 #include "comparestreamid.h"
 
-namespace Engine
-{
-	namespace Serialize
-	{
-		
-	}
+namespace Engine {
+namespace Serialize {
+
+}
 }

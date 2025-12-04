@@ -2,11 +2,10 @@
 
 #include "textdocument.h"
 
-#include "imgui/imgui.h"
-
-#include "texteditor.h"
-
 #include "Interfaces/filesystem/fsapi.h"
+
+#include "imgui/imgui.h"
+#include "texteditor.h"
 
 namespace Engine {
 namespace Tools {

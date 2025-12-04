@@ -64,7 +64,7 @@ namespace __generic_impl__ {
     }                                                                                                                                                                                                         \
                                                                                                                                                                                                               \
     template <typename T, typename prio = Engine::__generic_impl__::prio<0>, typename... Args>                                                                                                                \
-    using has_function_##Name = __generic_impl__::has_function_##Name##_select<T, void, prio, Args...>;                                                                                                                         \
+    using has_function_##Name = __generic_impl__::has_function_##Name##_select<T, void, prio, Args...>;                                                                                                       \
     template <typename T, typename... Args>                                                                                                                                                                   \
     constexpr bool has_function_##Name##_v = has_function_##Name<T, Engine::__generic_impl__::prio<0>, Args...>::value;
 
@@ -99,17 +99,15 @@ namespace __generic_impl__ {
     template <typename T, typename... Args>                                                                                                                                                      \
     constexpr bool has_function_##Name##_v = has_function_##Name<T, Args...>::value;
     */
-#define DERIVE_OPERATOR(Name, Operator)                  \
-    template <typename T, typename Arg>                  \
-    concept has_operator_##Name = requires(T t, Arg arg) \
-    {                                                    \
-        t Operator arg;                                  \
+#define DERIVE_OPERATOR(Name, Operator)                    \
+    template <typename T, typename Arg>                    \
+    concept has_operator_##Name = requires(T t, Arg arg) { \
+        t Operator arg;                                    \
     };
 
-#define DERIVE_TYPENAME(Name)              \
-    template <typename T>                  \
-    concept has_typename_##Name = requires \
-    {                                      \
-        typename T::Name;                  \
+#define DERIVE_TYPENAME(Name)                \
+    template <typename T>                    \
+    concept has_typename_##Name = requires { \
+        typename T::Name;                    \
     };
 }

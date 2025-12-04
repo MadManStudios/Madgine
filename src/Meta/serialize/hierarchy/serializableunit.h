@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../operations.h"
-
 #include "Generic/linestruct.h"
+
+#include "../operations.h"
 
 namespace Engine {
 namespace Serialize {

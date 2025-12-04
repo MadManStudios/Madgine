@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../toolscollector.h"
-#include "../toolbase.h"
-
 #include "Modules/debug/history.h"
+
+#include "../toolbase.h"
+#include "../toolscollector.h"
 
 namespace Engine {
 namespace Tools {

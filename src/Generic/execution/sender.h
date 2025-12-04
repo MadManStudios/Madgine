@@ -51,8 +51,8 @@ namespace Execution {
             this->set_value();
         }
 
-        void stop() {
-
+        void stop()
+        {
         }
 
         F mF;
@@ -67,7 +67,8 @@ namespace Execution {
     template <typename R = void, typename F>
     auto make_simple_sender(F &&f)
     {
-        return make_sender<R>([f { forward_capture<F>(f) }](auto &&rec) mutable { return make_simple_state(std::forward<F>(f), std::forward<decltype(rec)>(rec)); });;
+        return make_sender<R>([f { forward_capture<F>(f) }](auto &&rec) mutable { return make_simple_state(std::forward<F>(f), std::forward<decltype(rec)>(rec)); });
+        ;
     }
 
 }

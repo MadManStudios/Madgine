@@ -2,9 +2,9 @@
 
 #include "directx12texture.h"
 
-#include "../directx12rendercontext.h"
-
 #include "Generic/align.h"
+
+#include "../directx12rendercontext.h"
 
 namespace Engine {
 namespace Render {
@@ -290,7 +290,7 @@ namespace Render {
 
     ID3D12Resource *DirectX12Texture::resource() const
     {
-        return mTextureHandle.as<ID3D12Resource*>();
+        return mTextureHandle.as<ID3D12Resource *>();
     }
 
     ReleasePtr<ID3D12Resource> DirectX12Texture::resourcePtr() const

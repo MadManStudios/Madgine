@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../entitycomponent.h"
-
 #include "Madgine/meshloader/gpumeshdata.h"
+
+#include "../entitycomponent.h"
 
 namespace Engine {
 namespace Scene {

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Generic/execution/flag.h"
-#include "taskhandle.h"
 #include "Generic/delayedconstruct.h"
+#include "Generic/execution/flag.h"
+
+#include "taskhandle.h"
 
 namespace Engine {
 namespace Threading {
@@ -163,7 +164,7 @@ namespace Threading {
             mTask = std::move(task);
             construct(mState, DelayedConstruct<S> { [this]() { return Execution::connect(mPromiseState->sender(), TaskFutureAwaitableReceiver<T> { {}, this }); } });
             mState->start();
-            
+
             if (mFlag.test_and_set()) {
                 mTask.release();
                 return false;
@@ -181,7 +182,7 @@ namespace Threading {
         {
             destruct(mState);
             if (mFlag.test_and_set())
-                mTask.resumeInQueue();            
+                mTask.resumeInQueue();
         }
 
     private:

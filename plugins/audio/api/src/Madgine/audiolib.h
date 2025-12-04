@@ -2,9 +2,9 @@
 
 /// @cond
 
-#include "Madgine/rootlib.h"
 #include "Madgine/behaviorlib.h"
 #include "Madgine/resourceslib.h"
+#include "Madgine/rootlib.h"
 
 #if defined(Audio_EXPORTS)
 #    define MADGINE_AUDIO_EXPORT DLL_EXPORT
@@ -13,7 +13,5 @@
 #endif
 
 #include "audioforward.h"
-
-
 
 /// @endcond

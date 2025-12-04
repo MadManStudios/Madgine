@@ -3,7 +3,6 @@
 namespace Engine {
 namespace Debug {
 
-	
     struct DebugListener {
         virtual bool wantsPause(const DebugLocation &location, ContinuationType type, IndexType<size_t> line)
         {
@@ -11,7 +10,6 @@ namespace Debug {
         }
         virtual void onSuspend(const DebugLocation &location, ContinuationType type) { }
     };
-
 
 }
 }

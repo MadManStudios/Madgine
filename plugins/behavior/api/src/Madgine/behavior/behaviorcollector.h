@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Modules/uniquecomponent/uniquecomponent.h"
-#include "Modules/uniquecomponent/uniquecomponentdefine.h"
+#include "Generic/opaqueptr.h"
 
 #include "Modules/threading/taskfuture.h"
-
-#include "Generic/opaqueptr.h"
+#include "Modules/uniquecomponent/uniquecomponent.h"
+#include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
 namespace Engine {
 namespace Behavior {
@@ -17,7 +16,7 @@ namespace Behavior {
         virtual void release(UniqueOpaquePtr &ptr) const = 0;
         virtual std::string_view name(const UniqueOpaquePtr &handle) const = 0;
         virtual Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const = 0;
-        virtual ParameterTuple createParameters(const UniqueOpaquePtr &handle) const = 0;        
+        virtual ParameterTuple createParameters(const UniqueOpaquePtr &handle) const = 0;
         virtual std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const = 0;
         virtual std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const = 0;
         virtual std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const = 0;

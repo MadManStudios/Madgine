@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Madgine/render/renderpass.h"
+#include "Meta/math/frustum.h"
 
 #include "Madgine/render/pipelineloader.h"
-
-#include "Meta/math/frustum.h"
+#include "Madgine/render/renderpass.h"
 
 #include "shadowscenerenderdata.h"
 
@@ -16,7 +15,7 @@ namespace Render {
 
         virtual void setup(RenderTarget *target) override;
         virtual void shutdown(RenderTarget *target) override;
-        virtual void render(RenderTarget *target, size_t iteration) override;        
+        virtual void render(RenderTarget *target, size_t iteration) override;
 
         virtual int priority() const override;
         virtual size_t targetCount(size_t) const override;
@@ -33,7 +32,7 @@ namespace Render {
 
     private:
         ShadowSceneRenderData mData;
-        
+
         Render::Camera &mCamera;
 
         int mPriority;

@@ -2,14 +2,14 @@
 
 namespace Engine {
 namespace Serialize {
-    //TODO: Implement OffsetPtr interface + operations
+    // TODO: Implement OffsetPtr interface + operations
     template <typename T>
     struct Serialized : SerializableBase {
         template <typename... _Ty>
-        Serialized(_Ty &&... args)
+        Serialized(_Ty &&...args)
             : mData(std::forward<_Ty>(args)...)
         {
-            //this->setParent(mData, unit());
+            // this->setParent(mData, unit());
         }
 
         template <typename Ty>

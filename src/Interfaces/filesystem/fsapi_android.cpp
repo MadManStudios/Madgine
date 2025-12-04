@@ -2,15 +2,13 @@
 
 #if ANDROID
 
-#    include "fsapi.h"
-
+#    include <android/asset_manager.h>
+#    include <android/native_activity.h>
 #    include <dirent.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
 
-#    include <android/asset_manager.h>
-
-#include <android/native_activity.h>
+#    include "fsapi.h"
 
 namespace Engine {
 namespace Filesystem {
@@ -34,7 +32,8 @@ namespace Filesystem {
         return dir;
     }
 
-    void setup(void* _activity) {
+    void setup(void *_activity)
+    {
         ANativeActivity *activity = static_cast<ANativeActivity *>(_activity);
 
         sAssetManager = activity->assetManager;
@@ -43,7 +42,7 @@ namespace Filesystem {
 
     Path executablePath()
     {
-        //TODO
+        // TODO
         char buffer[512];
 
         auto result = readlink("/proc/self/exe", buffer, sizeof(buffer));
@@ -53,8 +52,9 @@ namespace Filesystem {
         return Path(buffer).parentPath();
     }
 
-    std::string executableName() {
-        //TODO
+    std::string executableName()
+    {
+        // TODO
         char buffer[512];
 
         auto result = readlink("/proc/self/exe", buffer, sizeof(buffer));
@@ -74,7 +74,8 @@ namespace Filesystem {
         return sAppData;
     }
 
-    bool isDir(const Path& p) {
+    bool isDir(const Path &p)
+    {
         if (isAssetPath(p))
             return false;
 
@@ -115,7 +116,7 @@ namespace Filesystem {
     }
 
     void makeNormalized(std::string &p)
-    {        
+    {
     }
 
     bool isAbsolute(const Path &p)
@@ -154,7 +155,7 @@ namespace Filesystem {
                 setg(eback(), eback() + off, egptr());
                 break;
             case std::ios_base::cur:
-                if (gptr() + off < eback() || gptr() + off > egptr())                     
+                if (gptr() + off < eback() || gptr() + off > egptr())
                     return pos_type(off_type(-1));
                 setg(eback(), gptr() + off, egptr());
                 break;
@@ -200,7 +201,7 @@ namespace Filesystem {
     Stream openFileWrite(const Path &p, bool isBinary)
     {
         if (isAssetPath(p)) {
-            return { };
+            return {};
         } else {
             std::unique_ptr<std::filebuf> buffer = std::make_unique<std::filebuf>();
             if (buffer->open(p.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::out | (isBinary ? std::ios_base::binary : 0))))
@@ -224,7 +225,6 @@ namespace Filesystem {
         return buffer;
     }
 
-    
     bool isValidPath(const std::string &p)
     {
         const char *c = p.data();
@@ -242,7 +242,7 @@ namespace Filesystem {
                 return false;
         return true;
     }
-        
+
     FileInfo fileInfo(const Path &path)
     {
         FileInfo result;

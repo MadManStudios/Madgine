@@ -1,12 +1,10 @@
 #pragma once
 
-#include "Modules/uniquecomponent/uniquecomponentdefine.h"
-
+#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/serialize/helper/annotations.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
-#include "Meta/keyvalue/virtualscope.h"
-
-#include "Meta/serialize/helper/annotations.h"
+#include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
 DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Window, MainWindowComponent, MainWindowComponentBase,
     Engine::UniqueComponent::Constructor<MainWindow &>,

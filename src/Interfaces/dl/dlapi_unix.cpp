@@ -2,25 +2,26 @@
 
 #if UNIX
 
-#include "dlapi.h"
+#    include <dlfcn.h>
+#    include <unistd.h>
 
-#include <dlfcn.h>
-#include <unistd.h>
+#    include "dlapi.h"
 
 namespace Engine {
 namespace Dl {
 
     static DlAPIResult toResult(const char *op)
-    {        
+    {
         const char *error = dlerror();
-        if (error){
+        if (error) {
             fprintf(stderr, "Unix Dl-Error from %s: %s\n", op, error);
             fflush(stderr);
         }
         return DlAPIResult::UNKNOWN_ERROR;
     }
 
-    DlHandle::~DlHandle(){
+    DlHandle::~DlHandle()
+    {
         close();
     }
 
@@ -32,7 +33,7 @@ namespace Dl {
             mHandle = dlopen(nullptr, RTLD_LAZY);
         else
             mHandle = dlopen(name.data(), RTLD_NOW);
-        
+
         if (!mHandle)
             return toResult("DlHandle::open");
 
@@ -41,12 +42,12 @@ namespace Dl {
 
     DlAPIResult DlHandle::close()
     {
-        if (mHandle){
+        if (mHandle) {
             int result = dlclose(mHandle);
-            
+
             if (result != 0)
                 return toResult("DlHandle::close");
-            
+
             mHandle = nullptr;
         }
         return DlAPIResult::SUCCESS;

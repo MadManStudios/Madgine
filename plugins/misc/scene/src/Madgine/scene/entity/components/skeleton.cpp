@@ -2,23 +2,22 @@
 
 #include "skeleton.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Madgine/skeletonloader/skeletondescriptor.h"
+#include "Meta/math/transformation.h"
 
 #include "Madgine/resources/resourcemanager.h"
+#include "Madgine/skeletonloader/skeletondescriptor.h"
 
-#include "Meta/math/transformation.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 NAMED_UNIQUECOMPONENT(Skeleton, Engine::Scene::Entity::Skeleton);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Skeleton)
-PROPERTY(Skeleton, get, set)
+    PROPERTY(Skeleton, get, set)
 METATABLE_END(Engine::Scene::Entity::Skeleton)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Skeleton)
-ENCAPSULATED_FIELD(Skeleton, getName, setName)
+    ENCAPSULATED_FIELD(Skeleton, getName, setName)
 SERIALIZETABLE_END(Engine::Scene::Entity::Skeleton)
 
 namespace Engine {

@@ -6,7 +6,6 @@
 namespace Engine {
 namespace Execution {
 
-    
     template <fixed_string Name>
     struct resolve_t {
 
@@ -21,7 +20,6 @@ namespace Execution {
 
     template <fixed_string Name>
     inline constexpr resolve_t<Name> resolve;
-
 
     struct read_var_t {
         template <fixed_string Name, typename T, typename Rec>
@@ -181,7 +179,7 @@ namespace Execution {
             }
 
             template <typename Sender, typename T>
-            requires tag_invocable<Inner, Sender, T>
+                requires tag_invocable<Inner, Sender, T>
             auto operator()(Sender &&sender, T &&initialValue) const
                 noexcept(is_nothrow_tag_invocable_v<Inner, Sender, T>)
                     -> tag_invoke_result_t<Inner, Sender, T>

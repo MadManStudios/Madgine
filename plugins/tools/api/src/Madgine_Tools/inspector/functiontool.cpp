@@ -2,27 +2,24 @@
 
 #include "functiontool.h"
 
-#include "../renderer/imroot.h"
-
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-//#include "Madgine/app/application.h"
+#include "../renderer/imroot.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
 
-#include "inspector.h"
+// #include "Madgine/app/application.h"
+
+#include "Generic/execution/execution.h"
 
 #include "Meta/keyvalue/functionargument.h"
+#include "Meta/keyvalue/valuetype.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "imgui/imgui_internal.h"
-
-#include "Generic/execution/execution.h"
-
-#include "Meta/keyvalue/valuetype.h"
+#include "inspector.h"
 
 UNIQUECOMPONENT(Engine::Tools::FunctionTool);
 
@@ -126,7 +123,7 @@ namespace Tools {
 
             ImGui::SameLine();
             ImGui::Text("(");
-            //ImGui::SameLine();
+            // ImGui::SameLine();
 
             if (ImGui::BeginTable("arguments", 2, ImGuiTableFlags_Resizable)) {
 
@@ -156,8 +153,6 @@ namespace Tools {
                             assert(i > 0);
                             ImGui::SetTooltip("%s (%s)", args[i - 1].type().toString().c_str(), type.toString().c_str());
                         }
-
-                        
                     }
                 }
 

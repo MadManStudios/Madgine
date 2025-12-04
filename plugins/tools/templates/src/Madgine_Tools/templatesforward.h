@@ -3,7 +3,7 @@
 namespace Engine {
 namespace Tools {
 
-struct Templates;
+    struct Templates;
 
 }
 }

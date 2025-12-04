@@ -3,8 +3,8 @@
 /// @cond
 
 #include "Madgine/widgetslib.h"
-#include "Madgine_Tools/clienttoolslib.h"
 #include "Madgine_Tools/behaviortoolslib.h"
+#include "Madgine_Tools/clienttoolslib.h"
 #include "Madgine_Tools/resourcestoolslib.h"
 
 #if defined(WidgetsTools_EXPORTS)

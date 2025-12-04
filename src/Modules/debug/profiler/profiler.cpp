@@ -2,15 +2,12 @@
 
 #include "profiler.h"
 
-#include "../../threading/workgroupstorage.h"
-
-#include "../../threading/threadlocal.h"
-
 #include "Generic/guard.h"
 
-#include "profilerthread.h"
-
+#include "../../threading/threadlocal.h"
 #include "../../threading/workgroup.h"
+#include "../../threading/workgroupstorage.h"
+#include "profilerthread.h"
 
 namespace Engine {
 
@@ -18,7 +15,8 @@ namespace Debug {
 
     namespace Profiler {
 
-        THREADLOCAL(ProfilerThread) sThread;
+        THREADLOCAL(ProfilerThread)
+        sThread;
         Threading::WorkgroupLocal<Profiler> sProfiler;
 #if ENABLE_THREADING
         Guard _reg { []() { Threading::WorkGroup::addStaticThreadGuards([]() { sProfiler->registerThread(&sThread); sThread->updateName(); }); }, []() {} };

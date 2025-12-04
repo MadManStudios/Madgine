@@ -1,14 +1,13 @@
 #pragma once
 
-#include "renderdata.h"
-
-#include "Madgine/render/fonts/fontloader.h"
-
 #include "Meta/math/atlas2.h"
 #include "Meta/math/color4.h"
 #include "Meta/math/rect2.h"
 
+#include "Madgine/render/fonts/fontloader.h"
+
 #include "layouts/sizeconstraints.h"
+#include "renderdata.h"
 #include "texturesettings.h"
 #include "vertex.h"
 

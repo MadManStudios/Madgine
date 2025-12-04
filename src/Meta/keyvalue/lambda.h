@@ -92,7 +92,7 @@ private:
 
     static const constexpr Accessor sMembers[2] {
         { "__call", nullptr, &sGetter, nullptr, toValueTypeDesc<BoundApiFunction>() },
-        {  }
+        {}
     };
 
     static const constexpr MetaTable sMetaTable {

@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
-
 #include "Madgine/render/textureloader.h"
+#include "Madgine/resources/resourceloader.h"
 
 #include "util/opengltexture.h"
 
@@ -16,10 +15,10 @@ namespace Render {
         void unloadImpl(OpenGLTexture &tex);
         bool create(Texture &texture, TextureType type, TextureFormat format) override;
 
-		virtual void setData(Texture &tex, Vector2i size, const ByteBuffer &data) override;
+        virtual void setData(Texture &tex, Vector2i size, const ByteBuffer &data) override;
         virtual void setSubData(Texture &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) override;
 
-         virtual Threading::TaskQueue *loadingTaskQueue() const override;
-	};
+        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+    };
 }
 }

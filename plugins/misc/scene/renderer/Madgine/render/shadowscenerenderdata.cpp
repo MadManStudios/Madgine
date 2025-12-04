@@ -2,20 +2,17 @@
 
 #include "shadowscenerenderdata.h"
 
-#include "scenemainwindowcomponent.h"
+#include "Modules/threading/awaitables/awaitablesender.h"
 
-#include "Madgine/window/mainwindow.h"
-
-#include "Madgine/scene/scenemanager.h"
-
+#include "Madgine/render/rendercontext.h"
 #include "Madgine/scene/entity/components/material.h"
 #include "Madgine/scene/entity/components/mesh.h"
 #include "Madgine/scene/entity/components/skeleton.h"
 #include "Madgine/scene/entity/components/transform.h"
+#include "Madgine/scene/scenemanager.h"
+#include "Madgine/window/mainwindow.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
-#include "Madgine/render/rendercontext.h"
+#include "scenemainwindowcomponent.h"
 
 namespace Engine {
 namespace Render {
@@ -34,7 +31,7 @@ namespace Render {
             transforms.clear();
 
         co_await mScene.mutex().locked(AccessMode::READ, [this]() {
-            //TODO Culling
+            // TODO Culling
 
             for (const auto &mesh : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {
                 if (!mesh.isVisible())

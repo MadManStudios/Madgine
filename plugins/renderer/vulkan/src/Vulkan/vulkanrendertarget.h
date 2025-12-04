@@ -3,7 +3,6 @@
 #include "Madgine/render/rendertarget.h"
 
 #include "util/vulkancommandlist.h"
-
 #include "util/vulkantexture.h"
 
 namespace Engine {

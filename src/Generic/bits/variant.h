@@ -1,7 +1,7 @@
 #pragma once
 
-#include "freebits.h"
 #include "field.h"
+#include "freebits.h"
 
 namespace Engine {
 
@@ -122,7 +122,7 @@ private:
     }
 
     void reset()
-    {        
+    {
         if (mIndex != 0) {
             using F = void (*)(BitVariant *);
             F fs[] = {

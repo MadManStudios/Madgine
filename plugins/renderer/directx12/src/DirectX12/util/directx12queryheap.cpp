@@ -41,7 +41,7 @@ namespace Render {
     }
 
     void DirectX12QueryHeap::deallocate(size_t handle)
-    {        
+    {
     }
 
     ID3D12QueryHeap *DirectX12QueryHeap::resource() const

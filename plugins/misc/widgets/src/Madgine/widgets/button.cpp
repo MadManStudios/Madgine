@@ -2,33 +2,32 @@
 
 #include "button.h"
 
-#include "widgetmanager.h"
-
 #include "Meta/math/vector4.h"
+
+#include "Madgine/imageloader/imageloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/render/fonts/fontloader.h"
-
-#include "Madgine/imageloader/imageloader.h"
+#include "widgetmanager.h"
 
 NAMED_UNIQUECOMPONENT(Button, Engine::Widgets::Button);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::Button, Engine::Widgets::WidgetBase)
-MEMBER(mText)
-NAMED_MEMBER(TextData, mTextRenderData)
-NAMED_MEMBER(Image, mImageRenderData)
-NAMED_MEMBER(ColorTint, mColorTintRenderData)
-MEMBER(mEnabled)
+    MEMBER(mText)
+    NAMED_MEMBER(TextData, mTextRenderData)
+    NAMED_MEMBER(Image, mImageRenderData)
+    NAMED_MEMBER(ColorTint, mColorTintRenderData)
+    MEMBER(mEnabled)
 METATABLE_END(Engine::Widgets::Button)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::Button, Engine::Widgets::WidgetBase)
-FIELD(mText)
-FIELD(mTextRenderData)
-FIELD(mImageRenderData)
-FIELD(mColorTintRenderData)
-FIELD(mEnabled)
+    FIELD(mText)
+    FIELD(mTextRenderData)
+    FIELD(mImageRenderData)
+    FIELD(mColorTintRenderData)
+    FIELD(mEnabled)
 SERIALIZETABLE_END(Engine::Widgets::Button)
 
 namespace Engine {

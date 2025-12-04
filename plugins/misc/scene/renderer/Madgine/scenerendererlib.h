@@ -2,8 +2,8 @@
 
 /// @cond
 
-#include "Madgine/scenelib.h"
 #include "Madgine/clientlib.h"
+#include "Madgine/scenelib.h"
 
 #if defined(SceneRenderer_EXPORTS)
 #    define MADGINE_SCENE_RENDERER_EXPORT DLL_EXPORT
@@ -11,9 +11,8 @@
 #    define MADGINE_SCENE_RENDERER_EXPORT DLL_IMPORT
 #endif
 
-#include "scenerendererforward.h"
-
 #include <numeric>
 
+#include "scenerendererforward.h"
 
 /// @endcond

@@ -68,7 +68,7 @@ namespace Threading {
         }
 
         template <typename... V>
-        void set_value(V &&... v)
+        void set_value(V &&...v)
         {
             mResult.set_value(std::forward<V>(v)...);
             if (mFlag.test_and_set())
@@ -83,7 +83,7 @@ namespace Threading {
         }
 
         template <typename... R>
-        void set_error(R&&... result)
+        void set_error(R &&...result)
         {
             mResult.set_error(std::forward<R>(result)...);
             if (mFlag.test_and_set())

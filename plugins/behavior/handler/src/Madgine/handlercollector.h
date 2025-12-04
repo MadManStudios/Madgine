@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Modules/uniquecomponent/uniquecomponentdefine.h"
-
 #include "Meta/keyvalue/virtualscope.h"
+
+#include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
 DECLARE_UNIQUE_COMPONENT(Engine::Behavior, Handler, HandlerBase, Engine::UniqueComponent::Constructor<HandlerManager &>)
 

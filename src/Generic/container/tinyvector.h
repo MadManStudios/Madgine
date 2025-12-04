@@ -25,7 +25,8 @@ struct TinyVector {
         (*this) = other;
     }
 
-    TinyVector& operator=(const TinyVector& other) {
+    TinyVector &operator=(const TinyVector &other)
+    {
         other.mData.visit(overloaded {
             [this](std::monostate) {
                 mData.template emplace<0>();

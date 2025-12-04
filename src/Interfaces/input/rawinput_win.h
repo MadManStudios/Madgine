@@ -3,10 +3,11 @@
 #if WINDOWS
 
 #    define NOMINMAX
-#    include "inputevents.h"
 #    include <Windows.h>
 #    include <hidsdi.h>
 #    include <queue>
+
+#    include "inputevents.h"
 
 #    if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
@@ -34,7 +35,7 @@ namespace Input {
 
         CapData resolveButtonCap(USAGE usage);
 
-        std::variant<NoEvent, AxisEvent, KeyPressEvent, KeyReleaseEvent> fetchEvent();        
+        std::variant<NoEvent, AxisEvent, KeyPressEvent, KeyReleaseEvent> fetchEvent();
 
         HANDLE mHandle;
         std::string mManufacturer;
@@ -77,6 +78,6 @@ namespace Input {
 }
 }
 
-#endif
+#    endif
 
 #endif

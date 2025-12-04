@@ -3,7 +3,6 @@
 #if ENABLE_MEMTRACKING
 
 #    include "memory.h"
-
 #    include "statsmemoryresource.h"
 #    include "untrackedmemoryresource.h"
 
@@ -20,9 +19,9 @@ typedef struct _CrtMemBlockHeader {
     int nLine;
 #        ifdef _WIN64
     /* These items are reversed on Win64 to eliminate gaps in the struct
-         * and ensure that sizeof(struct)%16 == 0, so 16-byte alignment is
-         * maintained in the debug heap.
-         */
+     * and ensure that sizeof(struct)%16 == 0, so 16-byte alignment is
+     * maintained in the debug heap.
+     */
     int nBlockUse;
     size_t nDataSize;
 #        else /* _WIN64 */
@@ -32,9 +31,9 @@ typedef struct _CrtMemBlockHeader {
     long lRequest;
     unsigned char gap[nNoMansLandSize];
     /* followed by:
-         *  unsigned char           data[nDataSize];
-         *  unsigned char           anotherGap[nNoMansLandSize];
-         */
+     *  unsigned char           data[nDataSize];
+     *  unsigned char           anotherGap[nNoMansLandSize];
+     */
 } _CrtMemBlockHeader;
 
 #    elif UNIX
@@ -188,7 +187,7 @@ namespace Debug {
         static void linuxFreeHook(void *ptr, const void *)
         {
             bool b = pushUntracked();
-            //TODO (0)
+            // TODO (0)
             sSingleton->onFree(reinterpret_cast<uintptr_t>(ptr), 0);
             free(ptr);
             popUntracked(b);

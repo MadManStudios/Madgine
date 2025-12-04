@@ -2,9 +2,9 @@
 
 #include "resourceloaderbase.h"
 
-#include "resourcemanager.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
+
+#include "resourcemanager.h"
 
 METATABLE_BEGIN(Engine::Resources::ResourceLoaderBase)
 METATABLE_END(Engine::Resources::ResourceLoaderBase)

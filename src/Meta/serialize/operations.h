@@ -1,22 +1,15 @@
 #pragma once
 
+#include "Generic/container/atomiccontaineroperation.h"
+
 #include "configs/configselector.h"
 #include "configs/creator.h"
 #include "configs/guard.h"
 #include "configs/tags.h"
-
-#include "hierarchy/serializableunitptr.h"
-
-#include "streams/formattedmessagestream.h"
-
-#include "Generic/container/atomiccontaineroperation.h"
-
 #include "container/physical.h"
-
-#include "hierarchy/statetransmissionflags.h"
-
+#include "hierarchy/serializableunitptr.h"
+#include "streams/formattedmessagestream.h"
 #include "streams/serializablemapholder.h"
-
 #include "visitor.h"
 
 namespace Engine {
@@ -222,7 +215,7 @@ namespace Serialize {
 
     template <typename... Configs>
     struct set_active_t {
-                
+
         template <typename U, typename V>
         friend void tag_invoke(set_active_t cpo, std::pair<U, V> &p, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {})
         {
@@ -245,9 +238,9 @@ namespace Serialize {
             }
         }
 
-        template <PrimitiveType T>            
+        template <PrimitiveType T>
         friend void tag_invoke(set_active_t cpo, T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy)
-        {            
+        {
         }
 
         template <typename T>
@@ -344,7 +337,8 @@ namespace Serialize {
             STREAM_PROPAGATE_ERROR(stream.readPrimitive(v, name));
             callback(v, name, tags, depth);
             return {};
-        } }, depth);
+        } },
+            depth);
     }
 
     template <typename Primitive, typename F, typename T>

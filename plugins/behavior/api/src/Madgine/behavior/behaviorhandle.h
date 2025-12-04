@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Modules/threading/taskfuture.h"
-
 #include "Generic/opaqueptr.h"
+
+#include "Modules/threading/taskfuture.h"
 
 #include "behavior.h"
 
@@ -24,7 +24,7 @@ namespace Behavior {
 
         Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors = {}) const;
         Threading::TaskFuture<bool> state() const;
-        ParameterTuple createParameters() const;        
+        ParameterTuple createParameters() const;
         std::vector<ValueTypeDesc> parameterTypes() const;
         std::vector<ValueTypeDesc> resultTypes() const;
         std::vector<NamedDescriptor> namedInputs() const;

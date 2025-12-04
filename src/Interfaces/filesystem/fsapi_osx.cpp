@@ -2,33 +2,31 @@
 
 #if OSX
 
-#    include "fsapi.h"
-
 #    include <dirent.h>
+#    include <mach-o/dyld.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
 
-#include <mach-o/dyld.h>
+#    include "fsapi.h"
 
 namespace Engine {
 namespace Filesystem {
 
-void setup(void *)
-{
-    
-}
+    void setup(void *)
+    {
+    }
 
-Path executablePath()
-{
-    char buffer[512];
+    Path executablePath()
+    {
+        char buffer[512];
 
-    uint32_t size = 512;
+        uint32_t size = 512;
 
-    auto result = _NSGetExecutablePath(buffer, &size);
-    assert(result == 0);
-    
-    return Path(buffer).parentPath();
-}
+        auto result = _NSGetExecutablePath(buffer, &size);
+        assert(result == 0);
+
+        return Path(buffer).parentPath();
+    }
 
     std::string executableName()
     {
@@ -38,21 +36,22 @@ Path executablePath()
 
         auto result = _NSGetExecutablePath(buffer, &size);
         assert(result == 0);
-        
-        return std::string{Path(buffer).stem()};
+
+        return std::string { Path(buffer).stem() };
     }
 
-Path appDataPath()
-{
-    Path result = Path{getenv("HOME")} / ("." + executableName());
+    Path appDataPath()
+    {
+        Path result = Path { getenv("HOME") } / ("." + executableName());
 
-    if (!exists(result))
-        createDirectory(result);
+        if (!exists(result))
+            createDirectory(result);
 
-    return result;
-}
+        return result;
+    }
 
-    bool isDir(const Path& p) {
+    bool isDir(const Path &p)
+    {
         struct stat statbuffer;
         auto result = stat(p.c_str(), &statbuffer);
         assert(result != -1);
@@ -76,7 +75,7 @@ Path appDataPath()
     }
 
     void makeNormalized(std::string &p)
-    {        
+    {
     }
 
     bool isAbsolute(const Path &p)
@@ -121,35 +120,35 @@ Path appDataPath()
         return buffer;
     }
 
-bool isValidPath(const std::string &p)
-{
-    for (char c : p)
-        if ((!std::isalnum(c) && !isSeparator(c) && !std::ispunct(c) && c != ' ')
-            || c == '<'
-            || c == '>'
-            || c == ':'
-            || c == '"'
-            || c == '|'
-            || c == '?'
-            || c == '*')
-            return false;
-    return true;
-}
+    bool isValidPath(const std::string &p)
+    {
+        for (char c : p)
+            if ((!std::isalnum(c) && !isSeparator(c) && !std::ispunct(c) && c != ' ')
+                || c == '<'
+                || c == '>'
+                || c == ':'
+                || c == '"'
+                || c == '|'
+                || c == '?'
+                || c == '*')
+                return false;
+        return true;
+    }
 
-FileInfo fileInfo(const Path &path)
-{
-    FileInfo result;
+    FileInfo fileInfo(const Path &path)
+    {
+        FileInfo result;
 
-    struct stat stats;
-    stat(path.c_str(), &stats);
+        struct stat stats;
+        stat(path.c_str(), &stats);
 
-    result.mSize = static_cast<size_t>(stats.st_size);
+        result.mSize = static_cast<size_t>(stats.st_size);
 
-    std::chrono::seconds d { stats.st_mtimespec.tv_sec };
-    result.mLastModified = std::chrono::file_clock::time_point { d };
+        std::chrono::seconds d { stats.st_mtimespec.tv_sec };
+        result.mLastModified = std::chrono::file_clock::time_point { d };
 
-    return result;
-}
+        return result;
+    }
 
 }
 }

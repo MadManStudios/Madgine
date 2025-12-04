@@ -6,13 +6,13 @@ namespace Filesystem {
     struct INTERFACES_EXPORT Path {
 
         Path() = default;
-        Path(std::string_view s);  
+        Path(std::string_view s);
         Path(const std::string &s);
         Path(const char *s);
 
-		Path &operator=(std::string_view s);        
-        Path &operator=(const std::string &s);        
-        Path &operator=(const char *s);        
+        Path &operator=(std::string_view s);
+        Path &operator=(const std::string &s);
+        Path &operator=(const char *s);
 
         Path &operator/=(const Path &p);
 
@@ -33,7 +33,7 @@ namespace Filesystem {
         Path absolute() const;
         Path absolute(const Path &base) const;
 
-		void normalize();
+        void normalize();
 
         Path filename() const;
         std::string_view stem() const;
@@ -44,7 +44,7 @@ namespace Filesystem {
         bool isRelative() const;
         bool isRelative(const Path &base) const;
 
-		void clear();
+        void clear();
         bool empty() const;
         const std::string &str() const;
         const char *c_str() const;

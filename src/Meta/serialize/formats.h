@@ -8,7 +8,7 @@ namespace Serialize {
         static Format json;
         static Format safebinary;
         static Format unsafebinary;
-        static Format xml;        
+        static Format xml;
     };
 
 }

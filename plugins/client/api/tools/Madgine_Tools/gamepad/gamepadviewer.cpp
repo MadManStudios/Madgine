@@ -2,15 +2,14 @@
 
 #include "gamepadviewer.h"
 
+#include "Interfaces/input/inputevents.h"
+
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Interfaces/input/inputevents.h"
-
 #include "../imgui/clientimroot.h"
-
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"

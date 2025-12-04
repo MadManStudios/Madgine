@@ -2,14 +2,14 @@
 
 #include "nodegraphloader.h"
 
+#include "Meta/serialize/streams/streamresult.h"
+
+#include "Madgine/behavior/parametertuple.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Meta/serialize/streams/streamresult.h"
-
 #include "nodeinterpreter.h"
-
-#include "Madgine/behavior/parametertuple.h"
 
 RESOURCELOADER(Engine::Behavior::NodeGraph::NodeGraphLoader)
 

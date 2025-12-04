@@ -1,12 +1,10 @@
 #pragma once
 
 #include "widget.h"
-
 #include "widgetloader.h"
 
 namespace Engine {
 namespace Widgets {
-
 
     struct MADGINE_WIDGETS_EXPORT CompoundWidget : WidgetBase {
 

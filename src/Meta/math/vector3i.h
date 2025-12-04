@@ -73,7 +73,7 @@ struct Vector3i {
     }
 
     /** Swizzle-like narrowing operations
-		*/
+     */
     Vector2i xy() const
     {
         return { x, y };

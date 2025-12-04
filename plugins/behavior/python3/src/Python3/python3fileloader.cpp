@@ -2,37 +2,31 @@
 
 #include "python3fileloader.h"
 
-#include "python3env.h"
+#include <iostream>
 
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "util/python3lock.h"
-
-#include "util/pymoduleptr.h"
-
-#include "util/pyobjectutil.h"
-
-#include "util/pydictptr.h"
+#include "Generic/execution/algorithm.h"
 
 #include "Meta/keyvalue/valuetype.h"
 
-#include <iostream>
-
 #include "Madgine/behavior/behavior.h"
-
 #include "Madgine/behavior/parametertuple.h"
 
-#include "util/pyexecution.h"
+#include "Meta/keyvalue/metatable_impl.h"
 
-#include "Generic/execution/algorithm.h"
+#include "python3env.h"
+#include "util/pydictptr.h"
+#include "util/pyexecution.h"
+#include "util/pymoduleptr.h"
+#include "util/pyobjectutil.h"
+#include "util/python3lock.h"
 
 UNIQUECOMPONENT(Engine::Behavior::Python3::Python3FileLoader)
 
 METATABLE_BEGIN(Engine::Behavior::Python3::Python3FileLoader)
-MEMBER(mResources)
-FUNCTION(find_spec, name, import_path, target_module)
-FUNCTION(create_module, spec)
-FUNCTION(exec_module, module)
+    MEMBER(mResources)
+    FUNCTION(find_spec, name, import_path, target_module)
+    FUNCTION(create_module, spec)
+    FUNCTION(exec_module, module)
 METATABLE_END(Engine::Behavior::Python3::Python3FileLoader)
 
 METATABLE_BEGIN_BASE(Engine::Behavior::Python3::Python3FileLoader::Resource, Engine::Resources::ResourceBase)

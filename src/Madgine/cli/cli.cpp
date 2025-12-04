@@ -1,6 +1,7 @@
 ﻿#include "clilib.h"
 
 #include "cli.h"
+
 #include "parameter.h"
 
 namespace Engine {
@@ -48,7 +49,7 @@ namespace CLI {
                 parameter->init();
 
             std::set<std::string_view> unusedArguments;
-            //use kvKeys
+            // use kvKeys
             for (auto &p : mArguments)
                 unusedArguments.insert(p.first);
             for (ParameterBase *parameter : parameters())
@@ -89,7 +90,7 @@ namespace CLI {
         return dummy;
     }
 
-	bool CLICore::isInitialized()
+    bool CLICore::isInitialized()
     {
         return sSingleton != nullptr;
     }

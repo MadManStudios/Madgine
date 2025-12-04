@@ -2,11 +2,10 @@
 
 #if ENABLE_PLUGINS
 
-#    include "../threading/taskfuture.h"
-
 #    include "Generic/container/mutable_set.h"
 
-#include "namecompare.h"
+#    include "../threading/taskfuture.h"
+#    include "namecompare.h"
 
 namespace Engine {
 namespace Plugins {

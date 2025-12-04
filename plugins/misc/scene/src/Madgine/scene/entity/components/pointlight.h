@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../entitycomponent.h"
-
 #include "Meta/math/color3.h"
+
+#include "../entitycomponent.h"
 
 namespace Engine {
 namespace Scene {

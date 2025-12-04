@@ -17,12 +17,10 @@ namespace Filesystem {
 
     void FileWatcher::addWatch(const Path &path)
     {
-
     }
 
     void FileWatcher::removeWatch(const Path &path)
     {
-
     }
 
     void FileWatcher::clear()

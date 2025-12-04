@@ -2,9 +2,11 @@
 
 #include "Generic/container/container_api.h"
 #include "Generic/container/freelistcontainer.h"
+
 #include "Meta/keyvalue/scopeptr.h"
 #include "Meta/serialize/hierarchy/serializableunitptr.h"
 #include "Meta/serialize/operations.h"
+
 #include "entitycomponentcollector.h"
 #include "entitycomponentcontainer.h"
 #include "entitycomponentlistbase.h"

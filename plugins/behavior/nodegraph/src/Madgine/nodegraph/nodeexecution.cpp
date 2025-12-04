@@ -2,10 +2,9 @@
 
 #include "nodeexecution.h"
 
+#include "codegenerator.h"
 #include "nodebase.h"
 #include "nodeinterpreter.h"
-
-#include "codegenerator.h"
 
 namespace Engine {
 namespace Behavior {

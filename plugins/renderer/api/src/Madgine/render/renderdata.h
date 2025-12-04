@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Madgine/render/future.h"
 #include "Modules/threading/task.h"
+
+#include "Madgine/render/future.h"
 
 namespace Engine {
 

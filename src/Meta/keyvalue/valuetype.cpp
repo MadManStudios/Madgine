@@ -1,9 +1,10 @@
 #include "../metalib.h"
+
 #include "valuetype.h"
 
-#include "metatable.h"
-
 #include "Generic/execution/execution.h"
+
+#include "metatable.h"
 
 namespace Engine {
 

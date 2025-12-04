@@ -1,11 +1,10 @@
 #pragma once
 
-#include "widget.h"
-
 #include "util/colortintrenderdata.h"
 #include "util/layouts/uniformlayoutrenderdata.h"
 #include "util/scalableimagerenderdata.h"
 #include "util/textrenderdata.h"
+#include "widget.h"
 
 namespace Engine {
 namespace Widgets {
@@ -37,7 +36,7 @@ namespace Widgets {
         void injectPointerMove(const Input::PointerMoveEvent &arg) override;
         void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
 
-        void injectPointerClick(const PointerClickEvent &arg) override;      
+        void injectPointerClick(const PointerClickEvent &arg) override;
 
     private:
         Execution::Signal<uint32_t> mSelectedTabChanged;

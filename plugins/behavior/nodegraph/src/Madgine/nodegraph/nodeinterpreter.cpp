@@ -2,13 +2,12 @@
 
 #include "nodeinterpreter.h"
 
-#include "nodegraph.h"
-
 #include "Meta/keyvalue/valuetype.h"
 
-#include "nodeexecution.h"
-
 #include "Madgine/debug/debugger.h"
+
+#include "nodeexecution.h"
+#include "nodegraph.h"
 
 namespace Engine {
 namespace Behavior {

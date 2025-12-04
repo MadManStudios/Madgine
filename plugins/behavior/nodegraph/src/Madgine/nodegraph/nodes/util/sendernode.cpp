@@ -9,7 +9,7 @@
 #include "functors.h"
 
 DEFAULT_SENDER_NODE_BEGIN(ForEach, Engine::Execution::for_each, std::vector<int>, Engine::Behavior::NodeGraph::NodeRouter<1, Engine::ValueType>)
-ARGUMENT(Arguments, 0)
+    ARGUMENT(Arguments, 0)
 SENDER_NODE_END(ForEach)
 
 DEFAULT_SENDER_NODE_BEGIN(LetValue, Engine::Execution::let_value, Engine::Behavior::NodeGraph::NodeReader<Engine::ValueType>, Engine::Behavior::NodeGraph::NodeRouter<1, Engine::ValueType>)
@@ -24,8 +24,8 @@ SENDER_NODE_END(Divide)
 DEFAULT_SENDER_NODE_BEGIN(Log, Engine::Execution::then, Engine::Behavior::NodeGraph::NodeReader<Engine::ValueType>, Engine::Behavior::NodeGraph::Log)
 SENDER_NODE_END(Log)
 
-CONSTANT_SENDER_NODE_BEGIN(Just, Engine::Execution::just, Engine::ValueType);
-ARGUMENT(Value, 0)
+CONSTANT_SENDER_NODE_BEGIN(Just, Engine::Execution::just, Engine::ValueType)
+    ARGUMENT(Value, 0)
 SENDER_NODE_END(Just)
 
 /* VARIABLE_SENDER_NODE_BEGIN(Variable, Engine::Execution::Variable<"Name">, Engine::NodeGraph::NodeReader<>, Engine::ValueType)

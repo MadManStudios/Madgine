@@ -2,21 +2,18 @@
 
 #include "scenewindow.h"
 
-#include "widgetmanager.h"
-
 #include "Meta/math/vector4.h"
+
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/render/texture.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/render/rendertarget.h"
-
-#include "Madgine/render/texture.h"
-
 #include "util/renderdata.h"
+#include "widgetmanager.h"
 
 NAMED_UNIQUECOMPONENT(SceneWindow, Engine::Widgets::SceneWindow);
-
 
 METATABLE_BEGIN_BASE(Engine::Widgets::SceneWindow, Engine::Widgets::WidgetBase)
 METATABLE_END(Engine::Widgets::SceneWindow)

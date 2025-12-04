@@ -1,23 +1,22 @@
 #pragma once
 
-#include "Madgine/animationloader/animationloader.h"
-#include "Madgine/skeletonloader/skeletonloader.h"
-
 #include "Generic/execution/stop_callback.h"
 
+#include "Madgine/animationloader/animationloader.h"
 #include "Madgine/behavior/behaviorreceiver.h"
+#include "Madgine/skeletonloader/skeletonloader.h"
 
 namespace Engine {
 namespace Scene {
     namespace Entity {
 
         struct MADGINE_SCENE_EXPORT AnimationState : Behavior::BehaviorReceiver {
-            
+
             AnimationState(Render::AnimationLoader::Handle handle, IndexType<uint32_t> index);
 
             void start();
-            void stop();            
-            
+            void stop();
+
             void step(float delta);
             void setStep(float step);
             float currentStep() const;
@@ -36,7 +35,7 @@ namespace Scene {
         protected:
             template <typename>
             friend struct Execution::ConnectionStack;
-            
+
             std::atomic<AnimationState *> mNext = nullptr;
         };
 

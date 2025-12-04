@@ -1,16 +1,13 @@
 #pragma once
 
+#include "Generic/container/emplace.h"
+#include "Generic/customfunctors.h"
+#include "Generic/functor.h"
 #include "Generic/makeowning.h"
 
-#include "Generic/customfunctors.h"
-
-#include "Generic/container/emplace.h"
-
 #include "../streams/formattedserializestream.h"
-
-#include "Generic/functor.h"
-
 #include "../visitor.h"
+#include "configselector.h"
 
 namespace Engine {
 namespace Serialize {
@@ -72,7 +69,7 @@ namespace Serialize {
                 assert(success);
                 STREAM_PROPAGATE_ERROR(read(in, it->first, "Key"));
                 STREAM_PROPAGATE_ERROR(read(in, it->second, "Value"));
-                return in.mStream.endCompoundRead("Item");                
+                return in.mStream.endCompoundRead("Item");
 
             } else {
                 ArgsTuple<T> tuple;
@@ -323,7 +320,7 @@ namespace Serialize {
             static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &arg)
             {
                 const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg);
-                if (name) { //TODO find clean solution
+                if (name) { // TODO find clean solution
                     write<std::ranges::range_value_t<C>>(out, arg, name);
                 }
             }

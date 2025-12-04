@@ -1,8 +1,7 @@
 #pragma once
 
-#include "formatter.h"
-
 #include "../primitivetypes.h"
+#include "formatter.h"
 
 namespace Engine {
 namespace Serialize {

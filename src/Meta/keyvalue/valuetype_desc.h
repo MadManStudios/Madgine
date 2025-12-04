@@ -1,16 +1,12 @@
 #pragma once
 
-#include "valuetype_types.h"
-
 #include "Generic/bits/array.h"
-
+#include "Generic/execution/binding.h"
+#include "Generic/execution/concepts.h"
 #include "Generic/keyvalue.h"
 
 #include "table_forward.h"
-
-#include "Generic/execution/concepts.h"
-
-#include "Generic/execution/binding.h"
+#include "valuetype_types.h"
 
 namespace Engine {
 

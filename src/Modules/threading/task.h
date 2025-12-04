@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Generic/coroutines/handle.h"
-#include "taskpromise.h"
+
 #include "taskfuture.h"
+#include "taskpromise.h"
 
 namespace Engine {
 namespace Threading {
@@ -109,8 +110,9 @@ namespace Threading {
         }
 
         template <typename F>
-        Task<std::invoke_result_t<F>, Immediate> then(F&& f) &&{
-            return [](F f, Task task) -> Task<std::invoke_result_t<F>, Immediate>{
+        Task<std::invoke_result_t<F>, Immediate> then(F &&f) &&
+        {
+            return [](F f, Task task) -> Task<std::invoke_result_t<F>, Immediate> {
                 co_await std::move(task);
                 f();
             }(std::forward<F>(f), std::move(*this));
@@ -138,10 +140,10 @@ namespace Threading {
         using R = std::invoke_result_t<F, Args...>;
 
         if constexpr (IsTask<R>) {
-            if constexpr (sizeof(F) == 1) { //most likely captureless lambda
+            if constexpr (sizeof(F) == 1) { // most likely captureless lambda
                 return std::invoke(std::move(f), std::forward<Args>(args)...);
             } else {
-                return [](F f, Args... args) -> R { //keep f alive during the whole lifetime of the Task
+                return [](F f, Args... args) -> R { // keep f alive during the whole lifetime of the Task
                     co_return co_await std::invoke(std::move(f), std::forward<Args>(args)...);
                 }(std::move(f), std::forward<Args>(args)...);
             }

@@ -1,14 +1,12 @@
 #pragma once
 
-#include "Madgine/root/rootcomponentcollector.h"
-
-#include "Madgine/root/rootcomponentbase.h"
-
 #include "Generic/execution/virtualsender.h"
 
-#include "audioloader.h"
-
 #include "Madgine/behavior/behavior.h"
+#include "Madgine/root/rootcomponentbase.h"
+#include "Madgine/root/rootcomponentcollector.h"
+
+#include "audioloader.h"
 
 namespace Engine {
 namespace Audio {
@@ -18,7 +16,7 @@ namespace Audio {
     struct MADGINE_AUDIO_EXPORT AudioApi : Root::VirtualRootComponentBase<AudioApi> {
 
         AudioApi(Root::Root &root);
-    
+
         Behavior::Behavior playSound(std::string_view name);
         virtual Behavior::Behavior playSound(AudioLoader::Handle buffer) = 0;
     };

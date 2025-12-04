@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/execution/concepts.h"
-
 #include "Generic/virtual_invoke.h"
 
 namespace Engine {
@@ -41,7 +40,7 @@ namespace Execution {
     struct VirtualStateEx;
 
     template <typename Base, typename Rec, typename... V>
-    struct VirtualStateEx<Base, Rec, type_pack<>, type_pack<V...>> : Base {        
+    struct VirtualStateEx<Base, Rec, type_pack<>, type_pack<V...>> : Base {
 
         template <typename... Args>
         VirtualStateEx(Rec &&rec, Args &&...args)

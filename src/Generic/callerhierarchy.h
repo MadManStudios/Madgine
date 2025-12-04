@@ -37,7 +37,7 @@ struct CallerHierarchyBasePtr {
     }
 
     template <typename U>
-    requires(!InstanceOf<U, CallerHierarchy>)
+        requires(!InstanceOf<U, CallerHierarchy>)
     operator const U &() const
     {
         const CallerHierarchyBase *ptr = mPtr;
@@ -46,7 +46,7 @@ struct CallerHierarchyBasePtr {
                 return static_cast<const CallerHierarchy<U> *>(ptr)->mData;
             ptr = ptr->mParent;
         }
-        throw 0; //LOG_ERROR("Cannot find type '" << typeid(U).name() << "' in caller hierarchy. Containing:");
+        throw 0; // LOG_ERROR("Cannot find type '" << typeid(U).name() << "' in caller hierarchy. Containing:");
     }
 
     template <typename U>
@@ -76,7 +76,7 @@ struct CallerHierarchyPtr : CallerHierarchyBasePtr {
     }
 
     template <typename U>
-    requires std::convertible_to<T, U>
+        requires std::convertible_to<T, U>
     operator CallerHierarchy<U>() const
     {
         return *static_cast<const CallerHierarchy<T> *>(mPtr);

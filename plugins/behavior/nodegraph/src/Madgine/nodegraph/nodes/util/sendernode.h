@@ -1,22 +1,21 @@
 #pragma once
 
-#include "Generic/execution/concepts.h"
-
-#include "../../nodecollector.h"
-#include "../../nodeinterpreter.h"
 #include "Generic/delayedconstruct.h"
 #include "Generic/execution/algorithm.h"
+#include "Generic/execution/concepts.h"
 #include "Generic/execution/execution.h"
 #include "Generic/manuallifetime.h"
-
-#include "../../nodeexecution.h"
-#include "../../nodegraph.h"
-#include "../../pins.h"
-#include "automasknode.h"
 
 #include "Meta/keyvalue/valuetype.h"
 
 #include "Madgine/codegen/fromsender.h"
+
+#include "../../nodecollector.h"
+#include "../../nodeexecution.h"
+#include "../../nodegraph.h"
+#include "../../nodeinterpreter.h"
+#include "../../pins.h"
+#include "automasknode.h"
 
 namespace Engine {
 namespace Behavior {

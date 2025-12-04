@@ -1,24 +1,16 @@
 #pragma once
 
-#include "ownedscopeptr.h"
-
-#include "keyvaluesender.h"
-
 #include "Generic/container/virtualrange.h"
-
+#include "Generic/execution/binding.h"
+#include "Generic/execution/concepts.h"
 #include "Generic/keyvalue.h"
 
-#include "valuetype_desc.h"
-
 #include "../enumholder.h"
-
 #include "../flagsholder.h"
-
-#include "Generic/execution/concepts.h"
-
-#include "Generic/execution/binding.h"
-
 #include "keyvaluebinding.h"
+#include "keyvaluesender.h"
+#include "ownedscopeptr.h"
+#include "valuetype_desc.h"
 
 namespace Engine {
 

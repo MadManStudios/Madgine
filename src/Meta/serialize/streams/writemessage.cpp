@@ -3,13 +3,12 @@
 #include "writemessage.h"
 
 #include "formattedmessagestream.h"
-
 #include "message_streambuf.h"
 
 namespace Engine {
 namespace Serialize {
 
-	WriteMessage::WriteMessage(FormattedMessageStream &stream, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
+    WriteMessage::WriteMessage(FormattedMessageStream &stream, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver)
         : mStream(&stream)
         , mRequester(requester)
         , mRequestId(requestId)
@@ -57,12 +56,10 @@ namespace Serialize {
         return *mStream;
     }
 
-    
     WriteMessage::operator CallerHierarchyFormattedSerializeStream() const
     {
         return *mStream;
     }
-
 
 }
 }

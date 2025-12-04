@@ -99,7 +99,6 @@ struct OutRef {
 struct Void {
 };
 
-
 template <typename T>
 struct CaptureHelper {
     template <typename... Args>
@@ -126,7 +125,6 @@ CaptureHelper<T> forward_capture(T &t)
     return { std::forward<T>(t) };
 }
 
-
 template <typename F, typename R>
 auto patch_void(F &&f, R &&result)
 {
@@ -137,7 +135,7 @@ auto patch_void(F &&f, R &&result)
         } else {
             return std::invoke(std::forward<F>(f), std::forward<Args>(args)...);
         }
-    };    
+    };
 }
 
 template <typename T, typename R = Void>

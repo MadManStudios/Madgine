@@ -7,7 +7,8 @@ namespace Engine {
 template <typename C, typename Observer = NoOpFunctor>
 struct CompactContainer : C, Observer {
 
-    typename C::iterator erase(const typename C::iterator& it) {
+    typename C::iterator erase(const typename C::iterator &it)
+    {
         auto last = --C::end();
         if (last != it) {
             using std::swap;
@@ -16,7 +17,6 @@ struct CompactContainer : C, Observer {
         }
         return C::erase(last);
     }
-
 };
 
 template <typename C, typename Observer>

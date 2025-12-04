@@ -10,7 +10,7 @@ namespace UniqueComponent {
         typedef typename Registry::Base Base;
 
         template <typename... Args>
-        Selector(Args&&... args)
+        Selector(Args &&...args)
             : mValue(construct(Registry::sComponents().at(0), std::forward<Args>(args)...))
         {
         }

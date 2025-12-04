@@ -1,18 +1,14 @@
 #pragma once
 
-#include "Madgine/render/rendercontextcollector.h"
-
-#include "mainwindowcomponentcollector.h"
-
 #include "Modules/threading/madgineobject.h"
-
+#include "Modules/threading/taskqueue.h"
 #include "Modules/uniquecomponent/uniquecomponentcontainer.h"
 #include "Modules/uniquecomponent/uniquecomponentselector.h"
 
-#include "Modules/threading/taskqueue.h"
-
 #include "Madgine/debug/debuggablelifetime.h"
+#include "Madgine/render/rendercontextcollector.h"
 
+#include "mainwindowcomponentcollector.h"
 #include "mainwindowlistener.h"
 
 namespace Engine {

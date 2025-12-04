@@ -2,7 +2,6 @@
 
 #include "Interfaces/interfaceslib.h"
 
-
 #if defined(CLI_EXPORTS)
 #    define CLI_EXPORT DLL_EXPORT
 #else

@@ -6,13 +6,10 @@
 #    include "path.h"
 
 #    define NOMINMAX
-#    include <Windows.h>
-
-#    include <cctype>
-
-#    include <direct.h>
-
 #    include <ShlObj.h>
+#    include <Windows.h>
+#    include <cctype>
+#    include <direct.h>
 
 namespace Engine {
 namespace Filesystem {
@@ -107,7 +104,7 @@ namespace Filesystem {
             return;
 
         if (GetFileAttributes(p.c_str()) == INVALID_FILE_ATTRIBUTES)
-            return; //TODO ???
+            return; // TODO ???
 
         char buffer[1024];
         auto result = GetLongPathNameA(p.c_str(), buffer, sizeof(buffer));
@@ -136,7 +133,7 @@ namespace Filesystem {
                     return false;
             }
         }
-        
+
         if (c[0] != '.') {
             if (!std::isalnum(c[0]) && c[0] != '_' && c[0] != '$' && c[0] != '%')
                 return false;
@@ -224,7 +221,7 @@ namespace Filesystem {
         FILETIME ft = fad.ftLastAccessTime;
         std::chrono::file_clock::duration d { (static_cast<int64_t>(ft.dwHighDateTime) << 32)
             | ft.dwLowDateTime };
-        result.mLastModified = std::chrono::file_clock::time_point { d };        
+        result.mLastModified = std::chrono::file_clock::time_point { d };
 
         return result;
     }

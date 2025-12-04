@@ -3,7 +3,6 @@
 #include "Madgine/render/pipelineinstance.h"
 
 #include "../directx12pipelineloader.h"
-
 #include "directx12buffer.h"
 
 namespace Engine {
@@ -27,8 +26,7 @@ namespace Render {
         virtual void renderRange(RenderTarget *target, size_t elementCount, size_t vertexOffset, IndexType<size_t> indexOffset = {}) const override;
         virtual void renderInstanced(RenderTarget *target, size_t count) const override;
 
-        
-        virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;        
+        virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;
 
     private:
         const DirectX12Pipeline *mPipeline;

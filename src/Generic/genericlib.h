@@ -4,10 +4,9 @@
 
 #include "commonlib.h"
 
-#include "genericconfig.h"
-
 #include <algorithm>
 #include <array>
+#include <assert.h>
 #include <chrono>
 #include <compare>
 #include <deque>
@@ -20,15 +19,14 @@
 #include <sstream>
 #include <stdint.h>
 #include <string>
-#include <vector>
-#include <variant>
 #include <utility>
+#include <variant>
+#include <vector>
 
-
-#include <assert.h>
-
+#include "genericconfig.h"
 #include "genericforward.h"
 
+// clang-format off
 #include "concepts.h"
 
 #include "templates.h"
@@ -50,8 +48,7 @@
 #include "decay.h"
 #include "tupleunpacker.h"
 #include "typeunpacker.h"
-
-
+// clang-format on
 
 using namespace std::literals::chrono_literals;
 using namespace std::literals::string_literals;

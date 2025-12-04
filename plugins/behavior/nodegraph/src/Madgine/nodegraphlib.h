@@ -2,13 +2,11 @@
 
 /// @cond
 
+#include "Madgine/behaviorlib.h"
 #include "Madgine/codegen/codegenlib.h"
 #include "Madgine/debuglib.h"
-#include "Madgine/behaviorlib.h"
-
-#include "Modules/moduleslib.h"
 #include "Madgine/resourceslib.h"
-
+#include "Modules/moduleslib.h"
 
 #if defined(NodeGraph_EXPORTS)
 #    define MADGINE_NODEGRAPH_EXPORT DLL_EXPORT

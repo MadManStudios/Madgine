@@ -1,9 +1,7 @@
 #pragma once
 
 #include "../streams/comparestreamid.h"
-
 #include "../streams/pendingrequest.h"
-
 #include "../streams/writemessage.h"
 
 namespace Engine {
@@ -14,9 +12,7 @@ namespace Serialize {
         const std::set<ParticipantId> &targets = {});
     META_EXPORT WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id);
 
-
-    struct META_EXPORT SyncableBase {
-    };
+    struct META_EXPORT SyncableBase {};
 
     template <typename OffsetPtr>
     struct Syncable : SyncableBase {

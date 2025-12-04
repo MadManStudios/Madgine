@@ -2,29 +2,18 @@
 
 #include "syncmanager.h"
 
-#include "hierarchy/toplevelunit.h"
-
-#include "hierarchy/serializableids.h"
-
-#include "hierarchy/statetransmissionflags.h"
-
-#include "streams/syncstreamdata.h"
-
-#include "operations.h"
-
+#include "Generic/execution/algorithm.h"
 #include "Generic/execution/execution.h"
-
 #include "Generic/projections.h"
 
-#include "hierarchy/serializetable.h"
-
-#include "Generic/execution/algorithm.h"
-
 #include "container/container_operations.h"
-
+#include "hierarchy/serializableids.h"
+#include "hierarchy/serializetable.h"
+#include "hierarchy/toplevelunit.h"
+#include "operations.h"
 #include "streams/message_streambuf.h"
-
 #include "streams/readmessage.h"
+#include "streams/syncstreamdata.h"
 
 namespace Engine {
 namespace Serialize {
@@ -67,7 +56,7 @@ namespace Serialize {
     void SyncManager::writeHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type)
     {
         msg.beginHeaderWrite();
-        write(msg, SerializeManager::convertPtr(static_cast<FormattedSerializeStream&>(msg).stream(), unit), "Object");
+        write(msg, SerializeManager::convertPtr(static_cast<FormattedSerializeStream &>(msg).stream(), unit), "Object");
         write(msg, type, "MessageType");
         msg.endHeaderWrite();
     }
@@ -361,7 +350,7 @@ namespace Serialize {
         auto pib = mMasterStreams.try_emplace(id, format(), std::move(buffer), std::move(data));
 
         assert(pib.second);
-        
+
         FormattedMessageStream &stream = pib.first->second;
 
         {
@@ -390,7 +379,6 @@ namespace Serialize {
             sendState(stream, unit);
         }
 
-        
         return SyncManagerResult::SUCCESS;
     }
 
@@ -437,7 +425,7 @@ namespace Serialize {
             assert(it != mMasterStreams.end());
             FormattedMessageStream &stream = it->second;
             auto msg = stream.beginMessageWrite();
-            writeActionHeader(msg, unit, MessageType::ERROR, pending.mRequesterTransactionId);            
+            writeActionHeader(msg, unit, MessageType::ERROR, pending.mRequesterTransactionId);
         }
     }
 
@@ -448,7 +436,7 @@ namespace Serialize {
             switch (result.mState) {
             case StreamState::OK:
                 if (mReceivingMasterState && mReceivingMasterStateTimeout.expired()) {
-                    //StreamResult result = STREAM_INTEGRITY_ERROR(*mSlaveStream) << "Server did not provide initial state in time (timeout)";
+                    // StreamResult result = STREAM_INTEGRITY_ERROR(*mSlaveStream) << "Server did not provide initial state in time (timeout)";
                     removeSlaveStream(SyncManagerResult::TIMEOUT);
                 }
                 break;
@@ -534,7 +522,7 @@ namespace Serialize {
 
     std::set<ParticipantId> SyncManager::clients()
     {
-        std::set<ParticipantId> result;        
+        std::set<ParticipantId> result;
         for (const FormattedMessageStream &stream : mMasterStreams | std::views::transform(projectionPairSecond)) {
             result.insert(stream.id());
         }

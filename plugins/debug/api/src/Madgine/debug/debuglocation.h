@@ -18,8 +18,6 @@ namespace Debug {
         ContextInfo *mContext = nullptr;
     };
 
-
-
     struct MADGINE_DEBUGGER_EXPORT DebugLocation : BaseLocation {
         virtual ~DebugLocation() = default;
         virtual std::string toString() const = 0;

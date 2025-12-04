@@ -2,18 +2,16 @@
 
 #include "directx12rendertarget.h"
 
+#include "Meta/math/rect2i.h"
+
 #include "Madgine/meshloader/meshdata.h"
+#include "Madgine/render/renderpass.h"
 
 #include "directx12meshdata.h"
 #include "directx12meshloader.h"
-#include "util/directx12pipelineinstance.h"
-
 #include "directx12rendercontext.h"
 #include "directx12rendertexture.h"
-
-#include "Meta/math/rect2i.h"
-
-#include "Madgine/render/renderpass.h"
+#include "util/directx12pipelineinstance.h"
 
 namespace Engine {
 namespace Render {

@@ -2,9 +2,9 @@
 
 #include "keyvalueregistry.h"
 
-#include "Modules/threading/workgroupstorage.h"
-
 #include "Generic/projections.h"
+
+#include "Modules/threading/workgroupstorage.h"
 
 namespace Engine {
 

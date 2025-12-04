@@ -3,7 +3,7 @@
 namespace Engine {
 namespace Render {
 
-    struct Pipeline{
+    struct Pipeline {
     };
 
 }

@@ -2,35 +2,27 @@
 
 #include "imroot.h"
 
-#include "Modules/debug/profiler/profile.h"
-
-#include "../toolbase.h"
-
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-
-#include "imgui/imguiaddons.h"
-
-#include "im3d/im3d.h"
-
 #include "Generic/container/safeiterator.h"
-
-#include "Meta/serialize/operations.h"
-
-#include "Meta/serialize/streams/serializestreamdata.h"
-
-#include "Meta/serialize/hierarchy/statetransmissionflags.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Meta/serialize/formats.h"
-
 #include "Generic/projections.h"
 
 #include "Interfaces/filesystem/fsapi.h"
 
+#include "Meta/serialize/formats.h"
+#include "Meta/serialize/operations.h"
+#include "Meta/serialize/streams/serializestreamdata.h"
+
+#include "Modules/debug/profiler/profile.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+
+#include "../toolbase.h"
+#include "im3d/im3d.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
+
 METATABLE_BEGIN(Engine::Tools::ImRoot)
-READONLY_PROPERTY(Tools, tools)
+    READONLY_PROPERTY(Tools, tools)
 METATABLE_END(Engine::Tools::ImRoot)
 
 namespace Engine {

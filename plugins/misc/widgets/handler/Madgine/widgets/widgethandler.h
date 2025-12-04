@@ -1,13 +1,10 @@
 #pragma once
 
-#include "Madgine/handlercollector.h"
-
 #include "Interfaces/input/inputevents.h"
 
-#include "Madgine/widgets/button.h"
-
 #include "Madgine/handler.h"
-
+#include "Madgine/handlercollector.h"
+#include "Madgine/widgets/button.h"
 #include "Madgine/widgets/layoutwidget.h"
 
 namespace Engine {
@@ -66,7 +63,6 @@ namespace Widgets {
         Widgets::LayoutWidget *mWidget = nullptr;
     };
 
-    
     template <typename T>
     using WidgetHandler = VirtualScope<T, Behavior::HandlerComponent<T, WidgetHandlerBase>>;
 }

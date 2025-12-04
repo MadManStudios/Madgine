@@ -1,19 +1,18 @@
 #pragma once
 
-#include "widget.h"
-
 #include "Generic/execution/signal.h"
 
-#include "util/textrenderdata.h"
-#include "util/scalableimagerenderdata.h"
 #include "util/colortintrenderdata.h"
+#include "util/scalableimagerenderdata.h"
+#include "util/textrenderdata.h"
+#include "widget.h"
 
 namespace Engine {
 namespace Widgets {
     struct MADGINE_WIDGETS_EXPORT Button : Widget<Button> {
 
         SERIALIZABLEUNIT(Button)
-        
+
         Button(WidgetManager &manager, WidgetBase *parent = nullptr);
 
         virtual ~Button() = default;
@@ -26,7 +25,7 @@ namespace Widgets {
         void render(WidgetsRenderData &renderData) override;
 
         TextRenderData mTextRenderData;
-        ScalableImageRenderData mImageRenderData;     
+        ScalableImageRenderData mImageRenderData;
         ColorTintRenderData mColorTintRenderData;
 
         std::string mText;
@@ -35,7 +34,7 @@ namespace Widgets {
         void injectPointerEnter(const Input::PointerMoveEvent &arg) override;
         void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
 
-        void injectPointerClick(const PointerClickEvent &arg) override;        
+        void injectPointerClick(const PointerClickEvent &arg) override;
 
         void emitClicked();
 

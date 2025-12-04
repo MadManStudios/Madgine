@@ -90,8 +90,8 @@ struct META_EXPORT Matrix3 {
     {
     }
 
-    /** Exchange the contents of this matrix with another. 
-        */
+    /** Exchange the contents of this matrix with another.
+     */
     inline void swap(Matrix3 &other)
     {
         std::swap(m00, other.m00);
@@ -106,13 +106,13 @@ struct META_EXPORT Matrix3 {
     }
 
     struct AccessHelper {
-        constexpr float &operator[](size_t iCol) { return m[3*iCol+row]; }
+        constexpr float &operator[](size_t iCol) { return m[3 * iCol + row]; }
         size_t row;
         float *m;
     };
 
     struct const_AccessHelper {
-        constexpr const float &operator[](size_t iCol) { return m[3*iCol+row]; }
+        constexpr const float &operator[](size_t iCol) { return m[3 * iCol + row]; }
         size_t row;
         const float *m;
     };
@@ -144,11 +144,11 @@ struct META_EXPORT Matrix3 {
     inline Matrix3 &operator=(const Matrix3 &rkMatrix) = default;
 
     /** Tests 2 matrices for equality.
-         */
+     */
     bool operator==(const Matrix3 &rkMatrix) const;
 
     /** Tests 2 matrices for inequality.
-         */
+     */
     inline bool operator!=(const Matrix3 &rkMatrix) const
     {
         return !operator==(rkMatrix);
@@ -158,7 +158,7 @@ struct META_EXPORT Matrix3 {
 
     // arithmetic operations
     /** Matrix addition.
-         */
+     */
     constexpr Matrix3 &operator+=(const Matrix3 &rkMatrix)
     {
         m00 += rkMatrix.m00;
@@ -180,12 +180,12 @@ struct META_EXPORT Matrix3 {
     }
 
     /** Matrix subtraction.
-         */
+     */
     Matrix3 &operator-=(const Matrix3 &rkMatrix);
     Matrix3 operator-(const Matrix3 &rkMatrix) const;
 
     /** Matrix concatenation using '*'.
-         */
+     */
     Matrix3 operator*(const Matrix3 &rkMatrix) const;
     Matrix3 operator-() const;
 
@@ -231,7 +231,7 @@ struct META_EXPORT Matrix3 {
             rfAngle = r;
         }
         void FromAngleAxis (const Vector3& rkAxis, const Radian& fRadians);
-		*/
+                */
     /** The matrix must be orthonormal.  The decomposition is yaw*pitch*roll
             where yaw is rotation about the Up vector, pitch is rotation about the
             Right axis, and roll is rotation about the Direction axis. */
@@ -278,7 +278,7 @@ struct META_EXPORT Matrix3 {
     }
 
     /** Function for writing to a stream.
-        */
+     */
     inline META_EXPORT friend std::ostream &operator<<(std::ostream &out, const Matrix3 &mat)
     {
         return out << "[" << mat[0][0] << ", " << mat[0][1] << ", " << mat[0][2] << ", "
@@ -338,11 +338,9 @@ struct META_EXPORT Matrix3 {
     friend struct Matrix4;
 };
 
-
 constexpr Matrix3 lerp(const Matrix3 &m1, const Matrix3 &m2, float ratio)
 {
     return (1.0f - ratio) * m1 + ratio * m2;
 }
-
 
 }

@@ -15,9 +15,6 @@ namespace Render {
 
         Threading::Task<bool> loadImpl(MeshData &data, ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(MeshData &data);
-
-        
-        
     };
 
 }

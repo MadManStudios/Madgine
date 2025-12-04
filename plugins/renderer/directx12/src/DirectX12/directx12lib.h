@@ -15,12 +15,13 @@
 
 #define NOMINMAX
 
+#include <comdef.h>
 #include <d3d12.h>
+#include <dxcapi.h>
 #include <dxgi1_6.h>
 #include <pix.h>
+
 #include "d3dx12.h"
-#include <dxcapi.h>
-#include <comdef.h>
 
 MADGINE_DIRECTX12_EXPORT void dx12Dump(HRESULT result, const char *file, size_t line);
 MADGINE_DIRECTX12_EXPORT bool checkDevice(HRESULT &result);
@@ -35,10 +36,10 @@ inline void dx12Check(const char *file, size_t line, HRESULT result = 0)
     }
 }
 
-#define DX12_CHECK(...) dx12Check(__FILE__, __LINE__ __VA_OPT__(,) __VA_ARGS__)
+#define DX12_CHECK(...) dx12Check(__FILE__, __LINE__ __VA_OPT__(, ) __VA_ARGS__)
 
 #define DX12_LOG(x) LOG_DEBUG("DX12: " << x)
-//#define DX12_LOG(x)
+// #define DX12_LOG(x)
 
 #include "Generic/offsetptr.h"
 

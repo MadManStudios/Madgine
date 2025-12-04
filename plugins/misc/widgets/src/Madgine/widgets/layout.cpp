@@ -2,12 +2,11 @@
 
 #include "layout.h"
 
-#include "util/layouts/sizeconstraints.h"
-
-#include "geometry.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
+
+#include "geometry.h"
+#include "util/layouts/sizeconstraints.h"
 
 NAMED_UNIQUECOMPONENT(Layout, Engine::Widgets::Layout);
 
@@ -65,7 +64,7 @@ namespace Widgets {
             for (size_t i = 0; i < pos.mColumnSpan; ++i)
                 cols[col + i].mConstraints = max(cols[col + i].mConstraints, size.mConstraints.mWidth / pos.mColumnSpan);
             for (size_t i = 0; i < pos.mRowSpan; ++i)
-            rows[row + i].mConstraints = max(rows[row + i].mConstraints, size.mConstraints.mHeight / pos.mRowSpan);
+                rows[row + i].mConstraints = max(rows[row + i].mConstraints, size.mConstraints.mHeight / pos.mRowSpan);
         }
 
         SizeConstraints width;
@@ -109,16 +108,11 @@ namespace Widgets {
             for (size_t i = 0; i < pos.mRowSpan; ++i)
                 height += rows[pos.mRow + i].mConstraints.apply(rowFactor);
 
-
-
-            Vector2 absolutePosition = getAbsolutePosition() + Vector2 { 
-                cols[pos.mColumn].mOffset, 
-                rows[pos.mRow].mOffset
-            };
+            Vector2 absolutePosition = getAbsolutePosition() + Vector2 { cols[pos.mColumn].mOffset, rows[pos.mRow].mOffset };
             if (size.mConstraints.mWidth.mMax < width) {
                 absolutePosition.x += pos.mXAlign * (width - size.mConstraints.mWidth.mMax);
             }
-            if (size.mConstraints.mHeight.mMax < height){
+            if (size.mConstraints.mHeight.mMax < height) {
                 absolutePosition.y += pos.mYAlign * (height - size.mConstraints.mHeight.mMax);
             }
             Vector3 absoluteSize = {
@@ -128,7 +122,7 @@ namespace Widgets {
             };
 
             child->setAbsolutePosition(absolutePosition);
-            child->setAbsoluteSize(absoluteSize);            
+            child->setAbsoluteSize(absoluteSize);
         }
     }
 

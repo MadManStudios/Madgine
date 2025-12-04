@@ -1,12 +1,11 @@
 #include "clilib.h"
 
 #include "parameterbase.h"
+
 #include "cli.h"
 
 namespace Engine {
 namespace CLI {
-
-    
 
     ParameterBase::ParameterBase(size_t minArgumentCount, size_t maxArgumentCount, std::vector<const char *> options, const char *help)
         : mOptions(std::move(options))
@@ -49,7 +48,7 @@ namespace CLI {
                         LOG_WARNING("Too many arguments provided for option '" << optionName << "'! Superfluous arguments will be discarded!");
                     }
                     if (!parse(*args)) {
-                        LOG_ERROR("Invalid parameters provided for option '" << optionName << "': " << StringUtil::join(*args, ", "));                        
+                        LOG_ERROR("Invalid parameters provided for option '" << optionName << "': " << StringUtil::join(*args, ", "));
                         LOG_ERROR("\t" << help());
                     }
                 }

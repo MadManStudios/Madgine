@@ -22,8 +22,7 @@ namespace Resources {
         void readAsyncImpl(Execution::VirtualReceiverBase<GenericResult, ByteBuffer> &rec) const;
         ASYNC_STUB(readAsync, readAsyncImpl, Execution::make_simple_virtual_sender<GenericResult, ByteBuffer>)
 
-    private:        
-
+    private:
         std::string mName;
         Filesystem::Path mPath;
     };

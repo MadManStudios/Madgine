@@ -1,10 +1,10 @@
 #include "Interfaces/interfaceslib.h"
 
-#include "Generic/guard.h"
-#include "Interfaces/debug/stacktrace.h"
-
-
 #include <csignal>
+
+#include "Generic/guard.h"
+
+#include "Interfaces/debug/stacktrace.h"
 
 #ifndef NDEBUG
 void madgine_terminate_handler()
@@ -20,7 +20,8 @@ void madgine_terminate_handler()
     abort();
 }
 
-void madgine_signal_handler(int signal) {
+void madgine_signal_handler(int signal)
+{
     {
         std::stringstream cout;
         cout << "Signal caught: " << signal << " (Madgine - Handler)\n ";

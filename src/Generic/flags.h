@@ -12,10 +12,11 @@ struct Flags {
 
     Flags(BitArray<64> bits)
         : mBits(bits)
-    {    
+    {
     }
 
-    BitArray<64> values() const {
+    BitArray<64> values() const
+    {
         return mBits;
     }
 

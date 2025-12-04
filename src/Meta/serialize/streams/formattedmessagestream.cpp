@@ -4,9 +4,9 @@
 
 #include "../syncmanager.h"
 #include "message_streambuf.h"
+#include "readmessage.h"
 #include "syncstreamdata.h"
 #include "writemessage.h"
-#include "readmessage.h"
 
 namespace Engine {
 namespace Serialize {
@@ -27,7 +27,6 @@ namespace Serialize {
         return { *this, requester, requestId, std::move(receiver) };
     }
 
-    
     StreamResult FormattedMessageStream::beginMessageRead(ReadMessage &msg)
     {
         if (!mFormatter)

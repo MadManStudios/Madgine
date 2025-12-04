@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Modules/uniquecomponent/uniquecomponentdefine.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
+#include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
 DECLARE_UNIQUE_COMPONENT(Engine::Root, RootComponent, RootComponentBase, Engine::UniqueComponent::Constructor<Engine::Root::Root &>)
 
@@ -15,8 +15,9 @@ namespace Root {
 
         using VirtualScope<T, RootComponentComponent<T>>::VirtualScope;
 
-        static T& getSingleton() {
-            return static_cast<T&>(getRootComponent(Engine::UniqueComponent::component_index<T>()));
+        static T &getSingleton()
+        {
+            return static_cast<T &>(getRootComponent(Engine::UniqueComponent::component_index<T>()));
         }
     };
 

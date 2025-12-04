@@ -2,12 +2,13 @@
 
 #include "Generic/fixed_string.h"
 #include "Generic/replace.h"
+
 #include "annotations.h"
 
 // base is included in __VA_ARGS__ to circumvent the problem with empty __VA_ARGS__ and ,
 #define DECLARE_UNIQUE_COMPONENT2(ns, prefix, registry, component, /*base, */...)                                                                                                        \
     namespace ns {                                                                                                                                                                       \
-    constexpr auto prefix##Header() { return __FILE__; }                                                                                                                          \
+    constexpr auto prefix##Header() { return __FILE__; }                                                                                                                                 \
     using prefix##Registry = registry<STRINGIFY(ns::prefix##BaseRegistry), STRINGIFY(ns::prefix##Registry), prefix##Header, __VA_ARGS__>;                                                \
     using prefix##BaseRegistry = Engine::UniqueComponent::Registry<STRINGIFY(ns::prefix##BaseRegistry), STRINGIFY(ns::prefix##Registry), prefix##Header, __VA_ARGS__>;                   \
     using prefix##Collector = Engine::UniqueComponent::Collector<prefix##Registry>;                                                                                                      \

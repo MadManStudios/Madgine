@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
-
 #include "Madgine/render/textureloader.h"
+#include "Madgine/resources/resourceloader.h"
 
 #include "util/vulkantexture.h"
 

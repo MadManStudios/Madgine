@@ -1,16 +1,15 @@
 #pragma once
 
-#include "uniquecomponentregistry.h"
+#include "Generic/container/emplace.h"
 
 #include "uniquecomponent.h"
-
-#include "Generic/container/emplace.h"
+#include "uniquecomponentregistry.h"
 
 namespace Engine {
 namespace UniqueComponent {
 
     template <typename C, typename Registry, typename Base = typename Registry::Base>
-    struct Container : C {        
+    struct Container : C {
 
         template <typename... Args>
             requires tag_invocable<construct_t, const typename Registry::Annotations, Args...>

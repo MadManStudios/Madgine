@@ -1,11 +1,8 @@
 #pragma once
 
-#include "../proxy.h"
-
 #include "../defaultassign.h"
-
 #include "../heapobject.h"
-
+#include "../proxy.h"
 #include "emplace.h"
 
 namespace Engine {
@@ -335,7 +332,7 @@ struct VirtualRange {
         __generic_impl__::VirtualRangeSecondBase<RefT, C> *typed = dynamic_cast<__generic_impl__::VirtualRangeSecondBase<RefT, C> *>(mRange.get());
         if (typed) {
             if (isReference()) {
-                return std::shared_ptr<C> { &typed->get(), [](C *) {} };
+                return std::shared_ptr<C> { &typed->get(), [](C *) { } };
             } else {
                 return std::shared_ptr<C> { mRange, &typed->get() };
             }
@@ -352,7 +349,7 @@ struct VirtualRange {
         __generic_impl__::VirtualRangeSecondBase<RefT, C> *typed = dynamic_cast<__generic_impl__::VirtualRangeSecondBase<RefT, C> *>(mRange.get());
         if (typed) {
             if (isReference()) {
-                return std::shared_ptr<const C> { &typed->get(), [](C *) {} };
+                return std::shared_ptr<const C> { &typed->get(), [](C *) { } };
             } else {
                 return std::shared_ptr<const C> { mRange, &typed->get() };
             }

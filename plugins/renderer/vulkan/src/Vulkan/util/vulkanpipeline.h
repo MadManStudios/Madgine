@@ -1,10 +1,9 @@
 #pragma once
 
 #include "Madgine/render/pipeline.h"
+#include "Madgine/render/vertexformat.h"
 
 #include "../vulkanshaderloader.h"
-
-#include "Madgine/render/vertexformat.h"
 
 namespace Engine {
 namespace Render {

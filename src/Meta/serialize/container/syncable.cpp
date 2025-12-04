@@ -5,7 +5,6 @@
 #include "Generic/offsetptr.h"
 
 #include "../hierarchy/serializetable.h"
-
 #include "../hierarchy/toplevelunit.h"
 #include "../syncmanager.h"
 

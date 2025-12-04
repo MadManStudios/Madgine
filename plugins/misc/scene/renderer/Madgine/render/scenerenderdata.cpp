@@ -2,21 +2,16 @@
 
 #include "scenerenderdata.h"
 
-#include "Madgine/scene/scenemanager.h"
+#include "Generic/container/safeiterator.h"
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-#include "Madgine/scene/entity/entitycomponentlist.h"
-
-#include "Madgine/scene/entity/components/skeleton.h"
-
 #include "Madgine/render/rendercontext.h"
-
 #include "Madgine/scene/behavior/animation.h"
-
+#include "Madgine/scene/entity/components/skeleton.h"
 #include "Madgine/scene/entity/components/transform.h"
-
-#include "Generic/container/safeiterator.h"
+#include "Madgine/scene/entity/entitycomponentlist.h"
+#include "Madgine/scene/scenemanager.h"
 
 #include "im3d/im3d.h"
 

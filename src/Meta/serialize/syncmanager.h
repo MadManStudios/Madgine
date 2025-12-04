@@ -1,20 +1,14 @@
 #pragma once
 
-#include "serializemanager.h"
-
+#include "Generic/container/mutable_set.h"
+#include "Generic/execution/virtualsender.h"
+#include "Generic/functor.h"
 #include "Generic/genericresult.h"
-
 #include "Generic/timeout.h"
 
-#include "Generic/container/mutable_set.h"
-
+#include "serializemanager.h"
 #include "streams/comparestreamid.h"
-
 #include "streams/formattedmessagestream.h"
-
-#include "Generic/execution/virtualsender.h"
-
-#include "Generic/functor.h"
 
 namespace Engine {
 namespace Serialize {
@@ -43,7 +37,6 @@ namespace Serialize {
 
         std::set<ParticipantId> clients();
         size_t clientCount() const;
-        
 
         static void writeHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type);
         static void writeActionHeader(WriteMessage &msg, const SyncableUnitBase *unit, MessageType type, MessageId id);
@@ -89,9 +82,9 @@ namespace Serialize {
         std::map<ParticipantId, FormattedMessageStream> mMasterStreams;
         std::optional<FormattedMessageStream> mSlaveStream;
 
-        std::set<TopLevelUnitBase *> mTopLevelUnits; //TODO: Sort by MasterId
+        std::set<TopLevelUnitBase *> mTopLevelUnits; // TODO: Sort by MasterId
 
-        std::map<std::string, TopLevelUnitBase *> mTopLevelUnitNameMappings;        
+        std::map<std::string, TopLevelUnitBase *> mTopLevelUnitNameMappings;
     };
 }
 }

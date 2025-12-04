@@ -5,7 +5,7 @@ namespace Engine {
 template <typename T, size_t Count>
 struct UpTo {
 
-    UpTo() {};
+    UpTo() { };
 
     UpTo(std::initializer_list<T> elements)
     {
@@ -49,8 +49,8 @@ struct UpTo {
 
     size_t size() const
     {
-		return mCount;
-	}
+        return mCount;
+    }
 
 private:
     union {

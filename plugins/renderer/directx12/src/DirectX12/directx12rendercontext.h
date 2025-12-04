@@ -1,25 +1,20 @@
 #pragma once
 
+#include "Generic/allocator/bucket.h"
+#include "Generic/allocator/bump.h"
+#include "Generic/allocator/fixed.h"
+#include "Generic/allocator/heap.h"
+
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendercontextcollector.h"
-
-#include "util/directx12commandlist.h"
-#include "util/directx12descriptorheap.h"
-
 #include "Madgine/render/vertexformat.h"
 
 #include "util/directx12buffer.h"
-
-#include "util/directx12heapallocator.h"
-
 #include "util/directx12commandallocator.h"
-
+#include "util/directx12commandlist.h"
+#include "util/directx12descriptorheap.h"
+#include "util/directx12heapallocator.h"
 #include "util/directx12queryheap.h"
-
-#include "Generic/allocator/bucket.h"
-#include "Generic/allocator/heap.h"
-#include "Generic/allocator/fixed.h"
-#include "Generic/allocator/bump.h"
 
 namespace Engine {
 namespace Render {
@@ -44,7 +39,7 @@ namespace Render {
         virtual void deallocateBufferImpl(GPUBuffer<void> buffer) override;
         virtual WritableByteBuffer mapBufferImpl(GPUBuffer<void> &buffer) override;
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture*> textures) override;
+        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture *> textures) override;
         virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
 
         static DirectX12RenderContext &getSingleton();
@@ -61,7 +56,7 @@ namespace Render {
         DirectX12DescriptorHeap mDescriptorHeap;
         DirectX12DescriptorHeap mRenderTargetDescriptorHeap;
         DirectX12DescriptorHeap mDepthStencilDescriptorHeap;
-        
+
         ReleasePtr<ID3D12RootSignature> mRootSignature;
         ReleasePtr<IDXGIFactory4> mFactory;
 

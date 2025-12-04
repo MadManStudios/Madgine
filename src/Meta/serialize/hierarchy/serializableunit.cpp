@@ -1,4 +1,5 @@
 #include "../../metalib.h"
+
 #include "serializableunit.h"
 
 namespace Engine {
@@ -16,14 +17,14 @@ namespace Serialize {
     SerializableUnitBase::SerializableUnitBase(SerializableUnitBase &&other) noexcept
         : mTopLevel(std::exchange(other.mTopLevel, nullptr))
         , mActiveIndex(std::exchange(other.mActiveIndex, 0))
-        , mSynced(std::exchange(other.mSynced, false))     
+        , mSynced(std::exchange(other.mSynced, false))
     {
     }
 
     SerializableUnitBase::~SerializableUnitBase()
     {
-        //If this fails, you forgot to add all Serializables to the SerializeTable.
-        //Temporary solution! Proper solution: Move mSynced into Serializable (=> evtl default mActive to true)
+        // If this fails, you forgot to add all Serializables to the SerializeTable.
+        // Temporary solution! Proper solution: Move mSynced into Serializable (=> evtl default mActive to true)
         assert(!mSynced);
     }
 
@@ -44,7 +45,6 @@ namespace Serialize {
     {
         return mSynced;
     }
-
 
 } // namespace Serialize
 } // namespace Core

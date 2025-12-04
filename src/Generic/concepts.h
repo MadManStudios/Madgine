@@ -48,7 +48,7 @@ struct is_instance_auto2 : std::false_type {
 
 template <auto A, auto B, typename... V, template <auto, auto, typename...> typename U>
 struct is_instance_auto2<U<A, B, V...>, U> : std::true_type {
-    //using value_argument = auto_holder<A>;
+    // using value_argument = auto_holder<A>;
     using arguments = type_pack<V...>;
 };
 

@@ -2,8 +2,8 @@
 
 #include "Meta/keyvalue/virtualscope.h"
 #include "Meta/serialize/hierarchy/syncableunit.h"
-#include "Modules/threading/madgineobject.h"
 
+#include "Modules/threading/madgineobject.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
 namespace Engine {

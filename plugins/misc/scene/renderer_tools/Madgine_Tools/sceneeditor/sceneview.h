@@ -1,16 +1,13 @@
 #pragma once
 
-#include "Madgine/render/camera.h"
-
 #include "Meta/math/matrix4.h"
 #include "Meta/math/ray3.h"
 
+#include "Madgine/render/camera.h"
 #include "Madgine/render/scenerenderpass.h"
 
 #include "Madgine_Tools/im3d/im3drenderpass.h"
-
 #include "gridpass.h"
-
 #include "imgui/imguiaddons.h"
 
 namespace Engine {
@@ -44,7 +41,7 @@ namespace Tools {
 
         bool mAxisDragging = false;
 
-		Render::SceneRenderPass mSceneRenderer;
+        Render::SceneRenderPass mSceneRenderer;
         GridPass mGridRenderer;
         Render::Im3DRenderPass mIm3DRenderer;
 

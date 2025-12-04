@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Interfaces/filesystem/path.h"
+
 #include "../toolbase.h"
 #include "../toolscollector.h"
-
-#include "Interfaces/filesystem/path.h"
 
 namespace Engine {
 namespace Tools {

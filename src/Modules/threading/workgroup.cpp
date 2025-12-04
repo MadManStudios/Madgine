@@ -2,14 +2,14 @@
 
 #if ENABLE_THREADING
 #    include "Interfaces/threading/threadapi.h"
+
 #    include "threadlocal.h"
 #    include "threadstorage.h"
 #endif
 
+#include "taskqueue.h"
 #include "workgroup.h"
 #include "workgroupstorage.h"
-
-#include "taskqueue.h"
 
 namespace Engine {
 namespace Threading {
@@ -58,7 +58,7 @@ namespace Threading {
             task();
         }
 
-        //Is that useful at all?
+        // Is that useful at all?
         for (const std::function<void()> &task : mThreadInitializers) {
             task();
         }

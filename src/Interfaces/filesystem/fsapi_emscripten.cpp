@@ -2,18 +2,16 @@
 
 #if EMSCRIPTEN
 
-#    include "fsapi.h"
-
 #    include <dirent.h>
+#    include <emscripten.h>
+#    include <emscripten/html5.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
-#    include <emscripten.h>
 
-#    include <emscripten/html5.h>
-
+#    include "fsapi.h"
 
 namespace Engine {
-namespace Filesystem {    
+namespace Filesystem {
 
     void (*sSetupSuccessFunction)() = nullptr;
 
@@ -26,7 +24,8 @@ namespace Filesystem {
                 }););
     }
 
-    EMSCRIPTEN_KEEPALIVE DLL_EXPORT_TAG extern "C" void setupDoneImpl() {
+    EMSCRIPTEN_KEEPALIVE DLL_EXPORT_TAG extern "C" void setupDoneImpl()
+    {
         sSetupSuccessFunction();
         emscripten_set_interval(&sync, 15000, nullptr);
     }

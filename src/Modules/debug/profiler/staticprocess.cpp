@@ -3,7 +3,6 @@
 #include "staticprocess.h"
 
 #include "../../threading/threadlocal.h"
-
 #include "profilerthread.h"
 
 namespace Engine {

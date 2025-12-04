@@ -7,7 +7,6 @@ DLL_IMPORT_VARIABLE2(const Engine::UniqueComponent::TypeInfo, typeInfo, typename
 namespace Engine {
 namespace UniqueComponent {
 
-    
     struct TypeInfo {
 
         constexpr TypeInfo(std::string_view fullName)

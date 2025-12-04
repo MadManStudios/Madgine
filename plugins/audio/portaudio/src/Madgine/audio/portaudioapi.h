@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Madgine/audio/audioapi.h"
-
 #include "Modules/threading/madgineobject.h"
+
+#include "Madgine/audio/audioapi.h"
 
 typedef int PaDeviceIndex;
 struct PaDeviceInfo;
 
 namespace Engine {
 namespace Audio {
-    
+
     struct PortAudioApi : AudioApiImpl<PortAudioApi>, Threading::MadgineObject<PortAudioApi> {
 
         PortAudioApi(Root::Root &root);
@@ -28,7 +28,7 @@ namespace Audio {
         PortAudioStream &fetchStream(const AudioInfo &info);
         void reuseStream(PortAudioStream &stream);
 
-    private:      
+    private:
         std::mutex mMutex;
         std::list<PortAudioStream> mStreamPool;
         std::list<PortAudioStream> mBusyStreams;

@@ -1,14 +1,14 @@
 #include "../opengllib.h"
 
 #include "openglpipeline.h"
-#include "openglshader.h"
+
+#include "Generic/bytebuffer.h"
 
 #include "Meta/math/matrix4.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Generic/bytebuffer.h"
-
+#include "openglshader.h"
 #include "openglvertexarray.h"
 
 METATABLE_BEGIN(Engine::Render::OpenGLPipeline)

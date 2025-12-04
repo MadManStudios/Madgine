@@ -2,14 +2,12 @@
 
 #include "memorymanager.h"
 
-#include "memorybuffer.h"
-
+#include "Meta/serialize/streams/formattedserializestream.h"
+#include "Meta/serialize/streams/formatter.h"
 #include "Meta/serialize/streams/serializestream.h"
 #include "Meta/serialize/streams/serializestreamdata.h"
 
-#include "Meta/serialize/streams/formatter.h"
-
-#include "Meta/serialize/streams/formattedserializestream.h"
+#include "memorybuffer.h"
 
 namespace Engine {
 namespace Memory {

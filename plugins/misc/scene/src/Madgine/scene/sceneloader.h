@@ -5,7 +5,6 @@
 namespace Engine {
 namespace Scene {
 
-    
     struct MADGINE_SCENE_EXPORT SceneLoader : Resources::InstanceLoader<SceneLoader, SceneContainer> {
         SceneLoader();
 

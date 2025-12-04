@@ -19,16 +19,16 @@ namespace Scene {
         struct Mesh;
         struct Skeleton;
 
-        struct AnimationState;        
+        struct AnimationState;
 
         struct EntityPtr;
     }
 
     struct LightManager;
     struct Light;
-    
+
     using EntityBinding = Behavior::Named<"Entity", Entity::EntityPtr>;
-    using SceneBinding = Behavior::Named<"Scene", SceneManager&>;
+    using SceneBinding = Behavior::Named<"Scene", SceneManager &>;
 }
 
 }

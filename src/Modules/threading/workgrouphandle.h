@@ -12,7 +12,7 @@ namespace Threading {
         WorkGroupHandle(const WorkGroupHandle &) = delete;
 
         template <typename F, typename... Args>
-        WorkGroupHandle(std::string_view name, F &&main, Args &&... args)
+        WorkGroupHandle(std::string_view name, F &&main, Args &&...args)
         {
             std::promise<int> p;
             mResult = p.get_future();

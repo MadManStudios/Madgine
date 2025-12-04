@@ -2,11 +2,10 @@
 
 #if WINDOWS
 
-#    include "async.h"
-
 #    include "Generic/align.h"
 
 #    include "../helpers/win_ptrs.h"
+#    include "async.h"
 
 #    define NOMINMAX
 #    include <Windows.h>
@@ -42,7 +41,7 @@ namespace Filesystem {
         LPOVERLAPPED overlapped = NULL;
         ULONG_PTR key;
         DWORD bytesTransferred;
-        
+
         while (true) {
             bool result = GetQueuedCompletionStatus(sCompletionPort,
                 &bytesTransferred,
@@ -92,7 +91,7 @@ namespace Filesystem {
             bool result = CancelIo(data->mHandle);
             assert(result);
             data = data->mNext;
-        }        
+        }
     }
 
     size_t pendingIOOperationCount()
@@ -157,7 +156,7 @@ namespace Filesystem {
         result = ReadFile(handle, buffer.get(), alignTo(size, 512), nullptr, &mData->mOverlapped);
 
         assert(!result);
-        
+
         assert(GetLastError() == ERROR_IO_PENDING);
 
         mBuffer = {

@@ -3,23 +3,19 @@
 #include "root.h"
 
 #include "Interfaces/debug/memory/memory.h"
-#include "Modules/plugins/pluginmanager.h"
-#include "keyvalueregistry.h"
-
-#include "Madgine/cli/cli.h"
-#include "Modules/uniquecomponent/uniquecomponentcollectormanager.h"
-
-#include "Madgine/cli/parameter.h"
-
-#include "rootcomponentbase.h"
-
+#include "Interfaces/filesystem/async.h"
+#include "Interfaces/filesystem/path.h"
 #include "Interfaces/log/standardlog.h"
 
-#include "Interfaces/filesystem/async.h"
-
-#include "Interfaces/filesystem/path.h"
-
+#include "Modules/plugins/pluginmanager.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
+#include "Modules/uniquecomponent/uniquecomponentcollectormanager.h"
+
+#include "Madgine/cli/cli.h"
+#include "Madgine/cli/parameter.h"
+
+#include "keyvalueregistry.h"
+#include "rootcomponentbase.h"
 
 namespace Engine {
 namespace Root {

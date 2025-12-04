@@ -2,23 +2,23 @@
 
 #include "textrenderdata.h"
 
-#include "widgetsrenderdata.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+#include "widgetsrenderdata.h"
+
 METATABLE_BEGIN_BASE(Engine::Widgets::TextRenderData, Engine::Widgets::RenderData)
-MEMBER(mFontSize)
-MEMBER(mPivot)
-MEMBER(mColor)
-PROPERTY(Font, getFont, setFont)
+    MEMBER(mFontSize)
+    MEMBER(mPivot)
+    MEMBER(mColor)
+    PROPERTY(Font, getFont, setFont)
 METATABLE_END(Engine::Widgets::TextRenderData)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::TextRenderData, Engine::Widgets::RenderData)
-FIELD(mFontSize)
-FIELD(mPivot)
-FIELD(mColor)
-ENCAPSULATED_FIELD(mFont, getFontName, setFontName)
+    FIELD(mFontSize)
+    FIELD(mPivot)
+    FIELD(mColor)
+    ENCAPSULATED_FIELD(mFont, getFontName, setFontName)
 SERIALIZETABLE_END(Engine::Widgets::TextRenderData)
 
 namespace Engine {
@@ -127,7 +127,6 @@ namespace Widgets {
                 float startX = cursorX - 1.5f * scale;
                 float startY = originY - ref.mBearing.y * scale;
 
-                
                 renderData.setSubLayer(2);
                 if (useSmallSize)
                     renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV2, cursor.mSize2 }, font->mTexture->size(), cursor.mFlipped2);
@@ -146,14 +145,14 @@ namespace Widgets {
             float startX = cursorX + g.mBearing.x * scale;
             float startY = originY - g.mBearing.y * scale;
 
-             renderData.setSubLayer(1);
+            renderData.setSubLayer(1);
             if (useSmallSize)
                 renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, color, tex, { g.mUV2, g.mSize2 }, font->mTexture->size(), g.mFlipped2);
             else
                 renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, color, tex, { g.mUV, g.mSize }, font->mTexture->size(), g.mFlipped);
 
             cursorX += g.mAdvance / 64.0f * scale;
-        }        
+        }
     }
 
     void TextRenderData::renderSelection(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, Color4 color)
@@ -193,9 +192,9 @@ namespace Widgets {
         float height = ref.mSize.y * scale;
 
         float startY = originY - ref.mBearing.y * scale;
-        
+
         renderData.setSubLayer(0);
-        renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { endX - startX, height }, color, {}, entry.mArea, { 2048, 2048 }, entry.mFlipped);        
+        renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { endX - startX, height }, color, {}, entry.mArea, { 2048, 2048 }, entry.mFlipped);
     }
 
     float TextRenderData::calculateWidth(std::string_view text, const Render::Font *font, float fontSize)

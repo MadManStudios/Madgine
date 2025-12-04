@@ -6,7 +6,7 @@ template <typename T, typename Holder = std::unique_ptr<T>>
 struct HeapObject {
 
     template <typename... Args>
-    HeapObject(Args &&... args)
+    HeapObject(Args &&...args)
         : mObject(std::make_unique<T>(std::forward<Args>(args)...))
     {
     }
@@ -21,7 +21,7 @@ struct HeapObject {
     {
     }
 
-	HeapObject(HeapObject<T, Holder> &&) = default;
+    HeapObject(HeapObject<T, Holder> &&) = default;
 
     HeapObject<T, Holder> &operator=(const HeapObject<T, Holder> &other)
     {

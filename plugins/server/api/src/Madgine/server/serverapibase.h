@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Modules/threading/madgineobject.h"
-
 #include "Meta/keyvalue/virtualscope.h"
 
+#include "Modules/threading/madgineobject.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
 namespace Engine {

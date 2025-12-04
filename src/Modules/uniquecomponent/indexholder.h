@@ -31,7 +31,7 @@ namespace UniqueComponent {
 
     protected:
         IndexType<size_t> mIndex;
-        //Make it a member to prevent problems through weak symbols during link time
+        // Make it a member to prevent problems through weak symbols during link time
         IndexType<size_t> &mBaseIndex;
     };
 

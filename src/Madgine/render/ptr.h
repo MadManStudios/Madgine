@@ -8,7 +8,7 @@ namespace Render {
 
         GPUPtr() = default;
         template <typename U>
-        requires std::convertible_to<U *, T *>
+            requires std::convertible_to<U *, T *>
         GPUPtr(GPUPtr<U> other)
             : mOffset(other.mOffset)
             , mBuffer(other.mBuffer)

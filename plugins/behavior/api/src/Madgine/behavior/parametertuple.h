@@ -2,11 +2,9 @@
 
 #include "Meta/keyvalue/accessor.h"
 #include "Meta/keyvalue/metatable.h"
-#include "Meta/serialize/streams/streamresult.h"
-
-#include "Meta/serialize/operations.h"
-
 #include "Meta/keyvalue/scopeptr.h"
+#include "Meta/serialize/operations.h"
+#include "Meta/serialize/streams/streamresult.h"
 
 namespace Engine {
 namespace Behavior {

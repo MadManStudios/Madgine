@@ -2,9 +2,9 @@
 
 #include "server.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
 
 #include "serverapibase.h"
 

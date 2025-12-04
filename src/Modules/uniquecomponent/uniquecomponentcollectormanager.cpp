@@ -2,15 +2,11 @@
 
 #if ENABLE_PLUGINS
 
-#    include "uniquecomponentcollectormanager.h"
-
-#    include "uniquecomponentregistry.h"
-
-#    include "../plugins/pluginmanager.h"
-
 #    include "../plugins/plugin.h"
-
-#include "../plugins/pluginsection.h"
+#    include "../plugins/pluginmanager.h"
+#    include "../plugins/pluginsection.h"
+#    include "uniquecomponentcollectormanager.h"
+#    include "uniquecomponentregistry.h"
 
 namespace Engine {
 namespace UniqueComponent {

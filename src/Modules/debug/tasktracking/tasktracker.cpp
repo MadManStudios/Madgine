@@ -14,9 +14,9 @@ namespace Debug {
         {
             std::lock_guard guard { mMutex };
 
-            //mEvents.emplace_back(Event:: { stacktrace }, ident);
+            // mEvents.emplace_back(Event:: { stacktrace }, ident);
             auto pib = mTasksInFlight.try_emplace(ident, stacktrace);
-            //assert(pib.second);
+            // assert(pib.second);
         }
 
         void TaskTracker::onEnter(void *ident, std::chrono::high_resolution_clock::time_point timePoint)
@@ -45,10 +45,10 @@ namespace Debug {
 
         void TaskTracker::onDestroy(void *ident)
         {
-            //std::lock_guard guard { mMutex };
-            //mEvents.emplace_back(Event::DESTROY, ident);
-            //auto count = mTasksInFlight.erase(ident);
-            //assert(count == 1);
+            // std::lock_guard guard { mMutex };
+            // mEvents.emplace_back(Event::DESTROY, ident);
+            // auto count = mTasksInFlight.erase(ident);
+            // assert(count == 1);
         }
 
         TraceBack TaskTracker::getTraceback(void *ident)

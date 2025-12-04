@@ -3,10 +3,8 @@
 #include "frustum.h"
 
 #include "matrix4.h"
-
-#include "transformation.h"
-
 #include "ray3.h"
+#include "transformation.h"
 
 namespace Engine {
 
@@ -50,7 +48,8 @@ Matrix4 Frustum::getViewProjectionMatrix() const
     return getProjectionMatrix() * getViewMatrix();
 }
 
-Ray3 Frustum::toRay(const Vector2& uv) const {
+Ray3 Frustum::toRay(const Vector2 &uv) const
+{
 
     Vector3 dir = mOrientation * Vector3 { (2.f * uv.x - 1.0f) * mRight, (1.0f - 2.f * uv.y) * mTop, mNear };
 

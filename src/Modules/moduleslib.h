@@ -12,15 +12,11 @@
 #    define MODULES_EXPORT DLL_IMPORT
 #endif
 
-#include <shared_mutex>
 #include <regex>
-#include <variant>
+#include <shared_mutex>
 #include <stack>
-
+#include <variant>
 
 #include "modulesforward.h"
-
-
-
 
 /// @endcond

@@ -2,25 +2,23 @@
 
 #include "behaviornode.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
+#include "Meta/keyvalue/valuetype.h"
 #include "Meta/keyvalueutil/valuetypeserialize.h"
-
-#include "../nodeinterpreter.h"
-
-#include "../nodeexecution.h"
 
 #include "Madgine/resources/resourcemanager.h"
 
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+#include "../nodeexecution.h"
+#include "../nodeinterpreter.h"
 
 METATABLE_BEGIN_BASE(Engine::Behavior::NodeGraph::BehaviorNode, Engine::Behavior::NodeGraph::NodeBase)
-MEMBER(mParameters)
+    MEMBER(mParameters)
 METATABLE_END(Engine::Behavior::NodeGraph::BehaviorNode)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Behavior::NodeGraph::BehaviorNode, Engine::Behavior::NodeGraph::NodeBase)
-FIELD(mParameters)
+    FIELD(mParameters)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::BehaviorNode)
 
 namespace Engine {

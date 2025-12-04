@@ -1,37 +1,27 @@
 #pragma once
 
-#include "Meta/math/matrix3.h"
-
 #include "Generic/execution/signal.h"
-
-#include "Meta/serialize/hierarchy/virtualserializableunit.h"
-
-#include "Meta/keyvalue/virtualscope.h"
-
-#include "Madgine/render/texturedescriptor.h"
-#include "util/widgetsrenderdata.h"
-
-#include "condition.h"
-#include "properties.h"
-
 #include "Generic/projections.h"
-
-#include "Madgine/debug/debuggablesender.h"
 
 #include "Interfaces/log/logsenders.h"
 
+#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/math/matrix3.h"
+#include "Meta/serialize/hierarchy/virtualserializableunit.h"
+
 #include "Madgine/behavior/named.h"
-
 #include "Madgine/debug/debuggablelifetime.h"
+#include "Madgine/debug/debuggablesender.h"
+#include "Madgine/render/texturedescriptor.h"
 
-#include "widgetloader.h"
-
+#include "condition.h"
+#include "properties.h"
+#include "util/widgetsrenderdata.h"
 #include "widgetcollector.h"
+#include "widgetloader.h"
 
 namespace Engine {
 namespace Widgets {
-
-
 
     struct WidgetConfig {
         bool acceptsPointerEvents = false;
@@ -146,7 +136,6 @@ namespace Widgets {
         Execution::SignalStub<const Input::KeyPressEvent &> &keyPressEvent();
         Execution::SignalStub<const Input::KeyReleaseEvent &> &keyReleaseEvent();
 
-
         bool containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend = 0.0f) const;
         WidgetBase *getHoveredUp(const Vector2 &point, const Rect2i &screenSpace);
         virtual WidgetBase *getHoveredDown(const Vector2 &point, const Rect2i &screenSpace);
@@ -211,7 +200,7 @@ namespace Widgets {
     private:
         WidgetManager &mManager;
 
-        WidgetBase *mParent;        
+        WidgetBase *mParent;
 
         Vector2 mAbsolutePos;
         Vector3 mAbsoluteSize;

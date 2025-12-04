@@ -2,41 +2,41 @@
 
 #include "animationloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 RESOURCELOADER(Engine::Render::AnimationLoader)
 
 METATABLE_BEGIN(Engine::Render::AnimationList)
-MEMBER(mAnimations)
+    MEMBER(mAnimations)
 METATABLE_END(Engine::Render::AnimationList)
 
 METATABLE_BEGIN(Engine::Render::AnimationDescriptor)
-MEMBER(mName)
-MEMBER(mDuration)
-MEMBER(mTicksPerSecond)
-MEMBER(mBones)
+    MEMBER(mName)
+    MEMBER(mDuration)
+    MEMBER(mTicksPerSecond)
+    MEMBER(mBones)
 METATABLE_END(Engine::Render::AnimationDescriptor)
 
 METATABLE_BEGIN(Engine::Render::AnimationBone)
-MEMBER(mPositions)
-MEMBER(mOrientations)
-MEMBER(mScalings)
+    MEMBER(mPositions)
+    MEMBER(mOrientations)
+    MEMBER(mScalings)
 METATABLE_END(Engine::Render::AnimationBone)
 
 METATABLE_BEGIN(Engine::Render::VectorKeyFrame)
-MEMBER(mTime)
-MEMBER(mValue)
+    MEMBER(mTime)
+    MEMBER(mValue)
 METATABLE_END(Engine::Render::VectorKeyFrame)
 
 METATABLE_BEGIN(Engine::Render::QuaternionKeyFrame)
-MEMBER(mTime)
-MEMBER(mValue)
+    MEMBER(mTime)
+    MEMBER(mValue)
 METATABLE_END(Engine::Render::QuaternionKeyFrame)
 
 namespace Engine {

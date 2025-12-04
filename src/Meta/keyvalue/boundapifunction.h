@@ -3,7 +3,6 @@
 #include "apifunction.h"
 #include "scopeptr.h"
 
-
 namespace Engine {
 
 struct META_EXPORT BoundApiFunction {
@@ -53,7 +52,8 @@ struct TypedBoundApiFunction : TypedApiFunction<f> {
         return mScope == other.mScope;
     }
 
-    operator BoundApiFunction() const {
+    operator BoundApiFunction() const
+    {
         return { *f, { mScope, *(*f)->mArguments[0].mType.mSecondary.mMetaTable } };
     }
 

@@ -84,7 +84,6 @@ namespace Threading {
     struct CustomTimepoint;
 }
 
-
 namespace Ini {
     struct IniFile;
     struct IniSection;

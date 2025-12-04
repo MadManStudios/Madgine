@@ -31,9 +31,9 @@ namespace __generic_impl__ {
         ClosureImpl() = default;
 
         template <DecayedNoneOf<ClosureImpl> F>
-        requires requires(F& f) {
-            f(std::declval<Args>()...);
-        }
+            requires requires(F &f) {
+                f(std::declval<Args>()...);
+            }
         ClosureImpl(F &&f)
             : mWrapper(std::make_unique<ClosureWrapperImpl<std::remove_reference_t<F>, R, Args...>>(std::forward<F>(f)))
         {
@@ -65,7 +65,6 @@ namespace __generic_impl__ {
     };
 
 }
-
 
 template <typename F>
 using Closure = typename CallableTraits<F>::template instance<__generic_impl__::ClosureImpl>;

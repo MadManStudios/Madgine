@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Generic/indextype.h"
+
 #include "Meta/keyvalue/valuetype_desc.h"
 
 namespace Engine {

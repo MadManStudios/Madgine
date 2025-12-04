@@ -1,7 +1,6 @@
 #pragma once
 
 #include "serializableunit.h"
-
 #include "serializableunitptr.h"
 
 namespace Engine {
@@ -45,7 +44,7 @@ namespace Serialize {
         virtual ~VirtualData() = default;
         virtual SerializableDataPtr customUnitPtr() override
         {
-            return { static_cast<decayed_t<T>*>(this), &serializeTable<decayed_t<T>>() };
+            return { static_cast<decayed_t<T> *>(this), &serializeTable<decayed_t<T>>() };
         }
         virtual SerializableDataConstPtr customUnitPtr() const override
         {

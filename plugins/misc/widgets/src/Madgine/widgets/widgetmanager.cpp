@@ -2,48 +2,41 @@
 
 #include "widgetmanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "Madgine/meshloader/gpumeshloader.h"
-#include "Madgine/render/pipelineloader.h"
-
-#include "widget.h"
-
-#include "Madgine/imageloader/imagedata.h"
-
-#include "Madgine/window/mainwindow.h"
-
 #include "Interfaces/input/inputevents.h"
-
-#include "Madgine/meshloader/meshloader.h"
-
-#include "Madgine/render/rendercontext.h"
-#include "Madgine/render/rendertarget.h"
+#include "Interfaces/window/windowapi.h"
 
 #include "Meta/serialize/helper/typedobjectserialize.h"
+
+#include "Modules/threading/awaitables/awaitablesender.h"
+
+#include "Madgine/imageloader/imagedata.h"
+#include "Madgine/meshloader/gpumeshloader.h"
+#include "Madgine/meshloader/meshloader.h"
+#include "Madgine/render/pipelineloader.h"
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/window/mainwindow.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine/render/shadinglanguage/sl_support_begin.h"
 #include "shaders/widgets.sl"
 #include "Madgine/render/shadinglanguage/sl_support_end.h"
 
 #include "atlasloader.h"
-
-#include "Interfaces/window/windowapi.h"
-
-#include "Modules/threading/awaitables/awaitablesender.h"
-
+#include "widget.h"
 #include "widgetloader.h"
 
 NAMED_UNIQUECOMPONENT(WidgetManager, Engine::Widgets::WidgetManager)
 
 METATABLE_BEGIN(Engine::Widgets::WidgetManager)
-READONLY_PROPERTY(Widgets, widgets)
-MEMBER(mWidgetsLayout)
+    READONLY_PROPERTY(Widgets, widgets)
+    MEMBER(mWidgetsLayout)
 METATABLE_END(Engine::Widgets::WidgetManager)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetManager)
-FIELD(mWidgetsLayout)
+    FIELD(mWidgetsLayout)
 SERIALIZETABLE_END(Engine::Widgets::WidgetManager)
 
 namespace Engine {

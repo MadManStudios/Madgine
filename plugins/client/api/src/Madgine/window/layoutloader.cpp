@@ -2,16 +2,14 @@
 
 #include "layoutloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
+#include "Meta/serialize/formats.h"
+#include "Meta/serialize/operations.h"
+#include "Meta/serialize/streams/formattedserializestream.h"
 
 #include "Madgine/serialize/filesystem/filemanager.h"
 
-#include "Meta/serialize/formats.h"
-
-#include "Meta/serialize/streams/formattedserializestream.h"
-
-#include "Meta/serialize/operations.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "mainwindow.h"
 

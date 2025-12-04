@@ -1,10 +1,13 @@
 #pragma once
 
+#include "Generic/container/containerevent.h"
+
+#include "../configs/creator.h"
 #include "../configs/filter.h"
+#include "../configs/requestpolicy.h"
+#include "../operations.h"
 #include "../primitivetypes.h"
 #include "../streams/comparestreamid.h"
-#include "Generic/container/containerevent.h"
-#include "../configs/requestpolicy.h"
 #include "../streams/pendingrequest.h"
 #include "../streams/writemessage.h"
 
@@ -101,8 +104,7 @@ namespace Serialize {
     };
 
     template <typename C>
-    concept SerializeWrappedRange = SerializeRange<C> && requires
-    {
+    concept SerializeWrappedRange = SerializeRange<C> && requires {
         typename underlying_container<C>::type;
     };
 
@@ -161,7 +163,7 @@ namespace Serialize {
             }
         }
 
-        //TODO: Maybe move loop out of this function
+        // TODO: Maybe move loop out of this function
         static void writeAction(const C &c, const std::vector<WriteMessage> &outStreams, action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
         {
             for (FormattedMessageStream &out : outStreams) {
@@ -204,7 +206,7 @@ namespace Serialize {
             } else {
                 if (request.mRequesterTransactionId) {
                     WriteMessage msg = getRequestResponseTarget(&c, request.mRequester, request.mRequesterTransactionId);
-                    Serialize::write(msg, op, "operation");                    
+                    Serialize::write(msg, op, "operation");
                 }
                 request.mReceiver.set_error(MessageResult::REJECTED);
             }
@@ -239,7 +241,7 @@ namespace Serialize {
                            },
                            [&](typename C::reset_to_request_t &&reset) {
                                Serialize::write(out, RESET, "operation");
-                               //Base::write(out, reset.mNewData, "content", hierarchy);
+                               // Base::write(out, reset.mNewData, "content", hierarchy);
                                throw "TODO";
                            } },
                 std::move(payload));

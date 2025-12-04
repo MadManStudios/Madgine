@@ -22,7 +22,8 @@ struct META_EXPORT FlagsHolder {
 
     const EnumMetaTable *table() const;
 
-    decltype(auto) operator[](int32_t i) {
+    decltype(auto) operator[](int32_t i)
+    {
         return mValue[i];
     }
 

@@ -91,7 +91,7 @@ struct CoroutineHandle {
     }
 
     template <std::derived_from<T> U>
-    CoroutineHandle<U> cast()&&
+    CoroutineHandle<U> cast() &&
     {
         CoroutineHandle<U> result = CoroutineHandle<U>::fromPromise(static_cast<U &>(mHandle.promise()));
         mHandle = {};

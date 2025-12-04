@@ -61,7 +61,7 @@ struct META_EXPORT Matrix4 {
         @note
             It does <b>NOT</b> initialize the matrix for efficiency.
     */
-    inline Matrix4() {}
+    inline Matrix4() { }
     inline constexpr explicit Matrix4(const Matrix3 &in)
         : m { { in[0][0], in[1][0], in[2][0], 0.0f },
             { in[0][1], in[1][1], in[2][1], 0.0f },
@@ -126,7 +126,8 @@ struct META_EXPORT Matrix4 {
     };
     inline constexpr AccessHelper operator[](size_t iRow) { return { iRow, m }; }
 
-    inline float* data() {
+    inline float *data()
+    {
         return &m[0][0];
     }
 
@@ -282,7 +283,7 @@ struct META_EXPORT Matrix4 {
         return o;
     }
 
-    //static const float EPSILON;
+    // static const float EPSILON;
     static constexpr float ZERO[4][4] { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
     static constexpr float IDENTITY[4][4] { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Madgine_Tools/toolslib.h"
 #include "Madgine/resourceslib.h"
+#include "Madgine_Tools/toolslib.h"
 #include "TemplateEngine/templatelib.h"
 
 #if defined(Templates_EXPORTS)

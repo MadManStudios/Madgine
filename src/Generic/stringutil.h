@@ -111,7 +111,7 @@ namespace StringUtil {
         }
 
         Stream &next()
-        { 
+        {
             if (mFirst) {
                 mFirst = false;
             } else {
@@ -120,7 +120,8 @@ namespace StringUtil {
             return mOut;
         }
 
-        bool empty() const {
+        bool empty() const
+        {
             return mFirst;
         }
 

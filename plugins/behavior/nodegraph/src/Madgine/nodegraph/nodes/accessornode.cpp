@@ -2,21 +2,18 @@
 
 #include "accessornode.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
+#include "Meta/keyvalue/functiontable.h"
+#include "Meta/keyvalue/valuetype.h"
 #include "Meta/keyvalueutil/valuetypeserialize.h"
 
-#include "../nodeinterpreter.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "../codegenerator.h"
-
-#include "Meta/keyvalue/functiontable.h"
-
 #include "../nodeexecution.h"
-
-#include "Meta/keyvalue/valuetype.h"
+#include "../nodeinterpreter.h"
 
 METATABLE_BEGIN_BASE(Engine::Behavior::NodeGraph::AccessorNode, Engine::Behavior::NodeGraph::NodeBase)
 // PROPERTY(Function, getFunction, setFunction)

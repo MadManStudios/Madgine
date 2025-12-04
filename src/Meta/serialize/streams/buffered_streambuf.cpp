@@ -1,4 +1,5 @@
 #include "../../metalib.h"
+
 #include "buffered_streambuf.h"
 
 #include "messagelogger.h"
@@ -130,7 +131,7 @@ namespace Serialize {
             mBufferedSendMsgs.pop();
             int num = mBuffer->sputn(msg.mData.data(), msg.mData.size());
             if (num != msg.mData.size()) {
-                return STREAM_CONNECTION_LOST_ERROR() << "Connection lost sending messages";                
+                return STREAM_CONNECTION_LOST_ERROR() << "Connection lost sending messages";
             }
 #if ENABLE_MESSAGE_LOGGING
             MessageLogger::log(this, std::move(msg));

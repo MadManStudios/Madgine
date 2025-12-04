@@ -27,25 +27,25 @@ THE SOFTWARE.
 */
 #pragma once
 
-#include "vector2i.h"
 #include "common.h"
+#include "vector2i.h"
 
 namespace Engine {
 /** Standard 2-dimensional vector.
-	@remarks
-	A direction in 2D space represented as distances along the 2
-	orthogonal axes (x, y). Note that positions, directions and
-	scaling factors can be represented by a vector, depending on how
-	you interpret the values.
-	*/
+        @remarks
+        A direction in 2D space represented as distances along the 2
+        orthogonal axes (x, y). Note that positions, directions and
+        scaling factors can be represented by a vector, depending on how
+        you interpret the values.
+        */
 struct META_EXPORT Vector2 {
     float x, y;
 
 public:
     /** Default constructor.
-		@note
-		It does <b>NOT</b> initialize the vector for efficiency.
-		*/
+                @note
+                It does <b>NOT</b> initialize the vector for efficiency.
+                */
     Vector2()
     {
     }
@@ -87,7 +87,7 @@ public:
     }
 
     /** Exchange the contents of this vector with another.
-		*/
+     */
     void swap(Vector2 &other) noexcept
     {
         std::swap(x, other.x);
@@ -121,9 +121,9 @@ public:
     }
 
     /** Assigns the value of the other vector.
-		@param
-		rkVector The other vector
-		*/
+                @param
+                rkVector The other vector
+                */
     constexpr Vector2 &operator=(const Vector2 &rkVector)
     {
         x = rkVector.x;
@@ -374,8 +374,8 @@ public:
     }
 
     /** Returns a vector at a point half way between this and the passed
-		in vector.
-		*/
+                in vector.
+                */
     Vector2 midPoint(const Vector2 &vec) const
     {
         return Vector2(
@@ -384,8 +384,8 @@ public:
     }
 
     /** Returns true if the vector's scalar components are all greater
-		that the ones of the vector it is compared against.
-		*/
+                that the ones of the vector it is compared against.
+                */
     /* bool operator<(const Vector2 &rhs) const
     {
         if (x < rhs.x && y < rhs.y)
@@ -394,8 +394,8 @@ public:
     }*/
 
     /** Returns true if the vector's scalar components are all smaller
-		that the ones of the vector it is compared against.
-		*/
+                that the ones of the vector it is compared against.
+                */
     /* bool operator>(const Vector2 &rhs) const
     {
         if (x > rhs.x && y > rhs.y)
@@ -404,12 +404,12 @@ public:
     }*/
 
     /** Sets this vector's components to the minimum of its own and the
-		ones of the passed in vector.
-		@remarks
-		'Minimum' in this case means the combination of the lowest
-		value of x, y and z from both vectors. Lowest is taken just
-		numerically, not magnitude, so -1 < 0.
-		*/
+                ones of the passed in vector.
+                @remarks
+                'Minimum' in this case means the combination of the lowest
+                value of x, y and z from both vectors. Lowest is taken just
+                numerically, not magnitude, so -1 < 0.
+                */
     void makeFloor(const Vector2 &cmp)
     {
         if (cmp.x < x)
@@ -419,12 +419,12 @@ public:
     }
 
     /** Sets this vector's components to the maximum of its own and the
-		ones of the passed in vector.
-		@remarks
-		'Maximum' in this case means the combination of the highest
-		value of x, y and z from both vectors. Highest is taken just
-		numerically, not magnitude, so 1 > -3.
-		*/
+                ones of the passed in vector.
+                @remarks
+                'Maximum' in this case means the combination of the highest
+                value of x, y and z from both vectors. Highest is taken just
+                numerically, not magnitude, so 1 > -3.
+                */
     void makeCeil(const Vector2 &cmp)
     {
         if (cmp.x > x)
@@ -434,45 +434,45 @@ public:
     }
 
     /** Generates a vector perpendicular to this vector (eg an 'up' vector).
-		@remarks
-		This method will return a vector which is perpendicular to this
-		vector. There are an infinite number of possibilities but this
-		method will guarantee to generate one of them. If you need more
-		control you should use the Quaternion class.
-		*/
+                @remarks
+                This method will return a vector which is perpendicular to this
+                vector. There are an infinite number of possibilities but this
+                method will guarantee to generate one of them. If you need more
+                control you should use the Quaternion class.
+                */
     Vector2 perpendicular() const
     {
         return Vector2(-y, x);
     }
 
     /** Calculates the 2 dimensional cross-product of 2 vectors, which results
-		in a single floating point value which is 2 times the area of the triangle.
-		*/
+                in a single floating point value which is 2 times the area of the triangle.
+                */
     float crossProduct(const Vector2 &rkVector) const
     {
         return x * rkVector.y - y * rkVector.x;
     }
 
     /* Generates a new random vector which deviates from this vector by a
-		given angle in a random direction.
-		@remarks
-		This method assumes that the random number generator has already
-		been seeded appropriately.
-		@param angle
-		The angle at which to deviate in radians
-		@return
-		A random vector which deviates from this vector by angle. This
-		vector will not be normalised, normalise it if you wish
-		afterwards.
-		*/
+                given angle in a random direction.
+                @remarks
+                This method assumes that the random number generator has already
+                been seeded appropriately.
+                @param angle
+                The angle at which to deviate in radians
+                @return
+                A random vector which deviates from this vector by angle. This
+                vector will not be normalised, normalise it if you wish
+                afterwards.
+                */
     /*inline Vector2 randomDeviant(Radian angle) const
-		{
-			angle *= Math::RangeRandom(-1, 1);
-			float cosa = Math::Cos(angle);
-			float sina = Math::Sin(angle);
-			return Vector2(cosa * x - sina * y,
-				sina * x + cosa * y);
-		}*/
+                {
+                        angle *= Math::RangeRandom(-1, 1);
+                        float cosa = Math::Cos(angle);
+                        float sina = Math::Sin(angle);
+                        return Vector2(cosa * x - sina * y,
+                                sina * x + cosa * y);
+                }*/
 
     /** Returns true if this vector is zero length. */
     bool isZeroLength() const
@@ -482,7 +482,7 @@ public:
     }
 
     /** As normalise, except that this vector is unaffected and the
-		normalised vector is returned as a copy. */
+                normalised vector is returned as a copy. */
     Vector2 normalizedCopy() const
     {
         Vector2 ret = *this;
@@ -491,8 +491,8 @@ public:
     }
 
     /** Calculates a reflection vector to the plane with the given normal .
-		@remarks NB assumes 'this' is pointing AWAY FROM the plane, invert if it is not.
-		*/
+                @remarks NB assumes 'this' is pointing AWAY FROM the plane, invert if it is not.
+                */
     Vector2 reflect(const Vector2 &normal) const
     {
         return Vector2(*this - 2 * this->dotProduct(normal) * normal);
@@ -500,41 +500,41 @@ public:
 
     /// Check whether this vector contains valid values
     /*inline bool isNaN() const
-		{
-			return Math::isNaN(x) || Math::isNaN(y);
-		}*/
+                {
+                        return Math::isNaN(x) || Math::isNaN(y);
+                }*/
 
     /*  Gets the angle between 2 vectors.
-		@remarks
-		Vectors do not have to be unit-length but must represent directions.
-		*/
+                @remarks
+                Vectors do not have to be unit-length but must represent directions.
+                */
     /*inline Ogre::Radian angleBetween(const Ogre::Vector2& other) const
-		{
-			Ogre::float lenProduct = length() * other.length();
-			// Divide by zero check
-			if (lenProduct < 1e-6f)
-				lenProduct = 1e-6f;
+                {
+                        Ogre::float lenProduct = length() * other.length();
+                        // Divide by zero check
+                        if (lenProduct < 1e-6f)
+                                lenProduct = 1e-6f;
 
-			Ogre::float f = dotProduct(other) / lenProduct;
+                        Ogre::float f = dotProduct(other) / lenProduct;
 
-			f = Ogre::Math::Clamp(f, (Ogre::float) - 1.0, (Ogre::float)1.0);
-			return Ogre::Math::ACos(f);
-		}*/
+                        f = Ogre::Math::Clamp(f, (Ogre::float) - 1.0, (Ogre::float)1.0);
+                        return Ogre::Math::ACos(f);
+                }*/
 
     /*  Gets the oriented angle between 2 vectors.
-		@remarks
-		Vectors do not have to be unit-length but must represent directions.
-		The angle is comprised between 0 and 2 PI.
-		*/
+                @remarks
+                Vectors do not have to be unit-length but must represent directions.
+                The angle is comprised between 0 and 2 PI.
+                */
     /*inline Ogre::Radian angleTo(const Ogre::Vector2& other) const
-		{
-			Ogre::Radian angle = angleBetween(other);
+                {
+                        Ogre::Radian angle = angleBetween(other);
 
-			if (crossProduct(other)<0)
-				angle = (Ogre::Radian)Ogre::Math::TWO_PI - angle;
+                        if (crossProduct(other)<0)
+                                angle = (Ogre::Radian)Ogre::Math::TWO_PI - angle;
 
-			return angle;
-		}*/
+                        return angle;
+                }*/
 
     // special points
     static const constexpr float ZERO[] { 0, 0 };
@@ -545,7 +545,7 @@ public:
     static const constexpr float UNIT_SCALE[] { 1, 1 };
 
     /** Function for writing to a stream.
-		*/
+     */
     friend std::ostream &operator<<(std::ostream &o, const Vector2 &v)
     {
         o << "[" << v.x << ", " << v.y << "]";

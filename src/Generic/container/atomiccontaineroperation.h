@@ -64,19 +64,23 @@ struct AtomicContainerOperationBase {
         return mContainer.size();
     }
 
-    auto begin() {
+    auto begin()
+    {
         return mContainer.begin();
     }
 
-    auto begin() const {
+    auto begin() const
+    {
         return std::as_const(mContainer).begin();
     }
 
-    auto end() {
+    auto end()
+    {
         return mContainer.end();
     }
 
-    auto end() const {
+    auto end() const
+    {
         return std::as_const(mContainer).end();
     }
 

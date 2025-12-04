@@ -2,27 +2,22 @@
 
 #include "pyobjectptr.h"
 
-#include "pydictptr.h"
-
-#include "pyobjectutil.h"
-#include "pyobjectiter.h"
-
-#include "Meta/keyvalue/valuetype.h"
-
 #include <frameobject.h>
 #include <traceback.h>
 
-#include "python3lock.h"
-#include "../python3debugger.h"
-
-#include "pymoduleptr.h"
-
 #include "Meta/keyvalue/argumentlist.h"
+#include "Meta/keyvalue/valuetype.h"
 
+#include "../python3debugger.h"
+#include "pydictptr.h"
 #include "pyexecution.h"
+#include "pymoduleptr.h"
+#include "pyobjectiter.h"
+#include "pyobjectutil.h"
+#include "python3lock.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         PyObjectPtr::PyObjectPtr(PyObject *object)

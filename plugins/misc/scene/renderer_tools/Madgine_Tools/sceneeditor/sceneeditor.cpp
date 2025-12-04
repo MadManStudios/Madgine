@@ -2,50 +2,37 @@
 
 #include "sceneeditor.h"
 
-#include "Madgine/window/mainwindow.h"
-#include "Madgine_Tools/imgui/clientimroot.h"
+#include "Interfaces/input/inputevents.h"
 
-#include "Madgine_Tools/imguiicons.h"
-#include "im3d/im3d.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-#include "imgui/imguiaddons.h"
+#include "Meta/math/boundingbox.h"
+#include "Meta/serialize/formats.h"
+
+#include "Madgine/app/application.h"
+#include "Madgine/behavior/behaviorcollector.h"
+#include "Madgine/behavior/parametertuple.h"
+#include "Madgine/render/scenemainwindowcomponent.h"
+#include "Madgine/scene/entity/components/mesh.h"
+#include "Madgine/scene/entity/components/skeleton.h"
+#include "Madgine/scene/entity/components/transform.h"
+#include "Madgine/scene/entity/entity.h"
+#include "Madgine/scene/entity/entitycomponentcollector.h"
+#include "Madgine/scene/scenemanager.h"
+#include "Madgine/serialize/filesystem/filemanager.h"
+#include "Madgine/serialize/memory/memorymanager.h"
+#include "Madgine/window/mainwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/app/application.h"
-#include "Madgine/scene/scenemanager.h"
-
-#include "Madgine/scene/entity/entity.h"
-#include "Madgine/scene/entity/entitycomponentcollector.h"
-
-#include "Madgine/scene/entity/components/mesh.h"
-#include "Madgine/scene/entity/components/skeleton.h"
-#include "Madgine/scene/entity/components/transform.h"
-
-#include "Madgine_Tools/inspector/inspector.h"
-
-#include "Meta/math/boundingbox.h"
-
-#include "Madgine/serialize/filesystem/filemanager.h"
-#include "Madgine/serialize/memory/memorymanager.h"
-#include "Meta/serialize/hierarchy/statetransmissionflags.h"
-
-#include "Interfaces/input/inputevents.h"
-
-#include "Madgine/behavior/behaviorcollector.h"
-
-#include "Madgine_Tools/debugger/debuggerview.h"
-
-#include "Madgine/behavior/parametertuple.h"
-
 #include "Madgine_Tools/behaviortool.h"
-
-#include "Meta/serialize/formats.h"
-
-#include "Madgine/render/scenemainwindowcomponent.h"
-
+#include "Madgine_Tools/debugger/debuggerview.h"
+#include "Madgine_Tools/imgui/clientimroot.h"
+#include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/inspector/inspector.h"
+#include "im3d/im3d.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 #include "scenetool.h"
 
 namespace Engine {
@@ -158,7 +145,6 @@ namespace Tools {
     {
 
         bool success = node.mEntity.access([&](Scene::Entity::Entity &e) {
-            
             Scene::Entity::Transform *transform = e.getComponent<Engine::Scene::Entity::Transform>();
 
             if (visible) {
@@ -210,7 +196,7 @@ namespace Tools {
                     renderHierarchyEntity(node, false);
             }
 
-            if (transform){
+            if (transform) {
                 Matrix4 transformM = transform->worldMatrix();
                 AABB bb = { { -0.2f, -0.2f, -0.2f }, { 0.2f, 0.2f, 0.2f } };
                 if (e.hasComponent<Scene::Entity::Mesh>() && e.getComponent<Scene::Entity::Mesh>()->data())

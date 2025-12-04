@@ -2,9 +2,7 @@
 
 namespace Engine {
 
-    
-    META_EXPORT void ValueType_erased(CallableView<void(ValueType &)> cb);
-
+META_EXPORT void ValueType_erased(CallableView<void(ValueType &)> cb);
 
 struct KeyValueBinding {
 
@@ -44,7 +42,7 @@ struct KeyValueBinding {
         return mPtr->*std::forward<P>(right);
     }
 
-    Execution::BindingPtr<const ValueType&> mPtr;
+    Execution::BindingPtr<const ValueType &> mPtr;
 };
 
 }

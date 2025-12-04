@@ -1,10 +1,10 @@
 #pragma once
 
-#include "directx12commandlist.h"
+#include "Modules/debug/profiler/profilerthread.h"
 
 #include "Madgine/render/future.h"
 
-#include "Modules/debug/profiler/profilerthread.h"
+#include "directx12commandlist.h"
 
 #if ENABLE_TASK_TRACKING
 #    include "Modules/debug/tasktracking/tasktracker.h"

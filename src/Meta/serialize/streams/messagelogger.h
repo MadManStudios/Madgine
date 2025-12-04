@@ -2,7 +2,7 @@
 
 #if ENABLE_MESSAGE_LOGGING
 
-#include "buffered_streambuf.h"
+#    include "buffered_streambuf.h"
 
 namespace Engine {
 namespace Serialize {
@@ -19,7 +19,7 @@ namespace Serialize {
 
             Direction mDir;
             BufferedMessageHeader mHeader;
-            std::vector<char> mData;            
+            std::vector<char> mData;
         };
 
         struct StreamInfo {
@@ -33,7 +33,7 @@ namespace Serialize {
         static MessageInfo &log(buffered_streambuf *buffer, BufferedSendMessage msg);
         static MessageInfo &log(buffered_streambuf *buffer, BufferedMessageHeader header, std::vector<char> data);
 
-        static MessageLogger &getSingleton();        
+        static MessageLogger &getSingleton();
 
         std::map<buffered_streambuf *, StreamInfo> mStreams;
         std::mutex mMutex;

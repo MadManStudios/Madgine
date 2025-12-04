@@ -2,12 +2,11 @@
 
 #include "sceneloader.h"
 
+#include "Meta/serialize/formats.h"
+#include "Meta/serialize/serializemanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-
-#include "Meta/serialize/serializemanager.h"
-#include "Meta/serialize/formats.h"
 
 #include "scenecontainer.h"
 

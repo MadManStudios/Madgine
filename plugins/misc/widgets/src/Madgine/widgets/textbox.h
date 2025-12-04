@@ -1,9 +1,8 @@
 #pragma once
 
-#include "widget.h"
-
 #include "util/scalableimagerenderdata.h"
 #include "util/textrenderdata.h"
+#include "widget.h"
 
 #define STB_TEXTEDIT_CHARTYPE char
 #define STB_TEXTEDIT_POSTIONTYPE size_t
@@ -21,12 +20,12 @@ namespace Widgets {
 
         void setEditable(bool b);
 
-        void render(WidgetsRenderData &renderData) override;        
+        void render(WidgetsRenderData &renderData) override;
 
         void injectPointerClick(const PointerClickEvent &arg) override;
         void injectDragBegin(const DragBeginEvent &arg) override;
         void injectDragMove(const DragMoveEvent &arg) override;
-        bool injectKeyPress(const Input::KeyPressEvent &arg) override;        
+        bool injectKeyPress(const Input::KeyPressEvent &arg) override;
 
         void layoutRow(StbTexteditRow *row, size_t i);
         float calculateWidth(size_t i, size_t n);

@@ -2,25 +2,18 @@
 
 #if ENABLE_PLUGINS
 
-#    include "pluginmanager.h"
-
-#    include "plugin.h"
-
-#    include "Interfaces/dl/runtime.h"
-
 #    include "Generic/keyvalue.h"
 
-#    include "../ini/inisection.h"
-
-#    include "pluginsection.h"
-
-#    include "../ini/inifile.h"
-
-#    include "../threading/workgroup.h"
-
+#    include "Interfaces/dl/runtime.h"
 #    include "Interfaces/filesystem/fsapi.h"
 
+#    include "../ini/inifile.h"
+#    include "../ini/inisection.h"
+#    include "../threading/workgroup.h"
 #    include "binaryinfo.h"
+#    include "plugin.h"
+#    include "pluginmanager.h"
+#    include "pluginsection.h"
 
 namespace Engine {
 namespace Plugins {

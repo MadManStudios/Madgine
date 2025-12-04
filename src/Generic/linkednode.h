@@ -16,7 +16,6 @@ struct DoublyLinkedNodeBase {
         mNext = ptr;
     }
 
-
 protected:
     PtrT mNext = nullptr;
 };
@@ -24,23 +23,25 @@ protected:
 template <typename PtrT>
 struct DoublyLinkedStartNode : DoublyLinkedNodeBase<PtrT> {
 
-    void reset() {
+    void reset()
+    {
         this->mNext = nullptr;
     }
-
 };
 
 template <typename PtrT>
 struct DoublyLinkedNode : DoublyLinkedNodeBase<PtrT> {
 
-    void unlink() {
+    void unlink()
+    {
         if (this->mNext)
-            this->mNext->mNode.mPrev = mPrev;       
+            this->mNext->mNode.mPrev = mPrev;
         PtrT keepAlive = *mPrev;
         *mPrev = this->mNext;
     }
 
-    PtrT self() const {
+    PtrT self() const
+    {
         return *mPrev;
     }
 

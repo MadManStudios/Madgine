@@ -5,12 +5,12 @@
 #include "pyobjectutil.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         PyTypeObject PyEnumType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                           .tp_name
+                .tp_name
             = "Engine.Enum",
             .tp_basicsize = sizeof(PyEnum),
             .tp_itemsize = 0,

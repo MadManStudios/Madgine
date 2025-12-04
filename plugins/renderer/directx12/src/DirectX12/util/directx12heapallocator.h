@@ -7,7 +7,7 @@ namespace Render {
 
     struct DirectX12HeapAllocator {
 
-        static constexpr size_t goodSize = 8 * 1024 * 1024; //8MB
+        static constexpr size_t goodSize = 8 * 1024 * 1024; // 8MB
 
         DirectX12HeapAllocator(DirectX12DescriptorHeap &descHeap);
 
@@ -34,7 +34,7 @@ namespace Render {
 
     struct DirectX12MappedHeapAllocator {
 
-        static constexpr size_t goodSize = 8 * 1024 * 1024; //128MB
+        static constexpr size_t goodSize = 8 * 1024 * 1024; // 128MB
 
         DirectX12MappedHeapAllocator(D3D12_HEAP_TYPE type);
 

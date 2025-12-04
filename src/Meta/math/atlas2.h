@@ -1,7 +1,7 @@
 #pragma once
 
-#include "vector2i.h"
 #include "rect2i.h"
+#include "vector2i.h"
 
 namespace Engine {
 
@@ -20,15 +20,13 @@ struct META_EXPORT Atlas2 {
     void addBin(const Vector2i &origin);
     void clear();
 
-	Entry insert(const Vector2i &size, const std::function<void()> &expand, bool allowFlip = true);
+    Entry insert(const Vector2i &size, const std::function<void()> &expand, bool allowFlip = true);
     std::vector<Entry> insert(const std::span<Vector2i> &sizes, const std::function<void()> &expand, bool allowFlip = true);
 
-
 private:
-
     struct Bin {
         Vector2i mOrigin;
-        std::vector<Vector2i> mCorners; //Ordered top -> down ( x left -> right)
+        std::vector<Vector2i> mCorners; // Ordered top -> down ( x left -> right)
     };
 
     std::tuple<float, int, bool> getScore(Bin &bin, const Vector2i &size, bool allowFlip);

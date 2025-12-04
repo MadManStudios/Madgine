@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Generic/cow.h"
+#include "Generic/cowstring.h"
+
 #include "../math/color3.h"
 #include "../math/color4.h"
 #include "../math/matrix3.h"
@@ -11,24 +14,14 @@
 #include "../math/vector3i.h"
 #include "../math/vector4.h"
 #include "../math/vector4i.h"
-
 #include "boundapifunction.h"
-#include "keyvaluefunction.h"
-
-#include "keyvaluevirtualrange.h"
-
-#include "objectptr.h"
-
-#include "scopeptr.h"
-
-#include "ownedscopeptr.h"
-
-#include "Generic/cow.h"
-#include "Generic/cowstring.h"
-
-#include "keyvaluesender.h"
 #include "keyvaluebinding.h"
-
+#include "keyvaluefunction.h"
+#include "keyvaluesender.h"
+#include "keyvaluevirtualrange.h"
+#include "objectptr.h"
+#include "ownedscopeptr.h"
+#include "scopeptr.h"
 #include "valuetype_desc.h"
 #include "valuetype_forward.h"
 
@@ -170,7 +163,7 @@ ValueType_Return<T> ValueType::as() const
             else
                 throw 0;
         });
-        //return std::get<static_cast<size_t>(toValueTypeIndex<T>().mIndex)>(mUnion);
+        // return std::get<static_cast<size_t>(toValueTypeIndex<T>().mIndex)>(mUnion);
     } else if constexpr (std::same_as<T, ValueType>) {
         return *this;
     } else if constexpr (Enum<T>) {
@@ -182,7 +175,7 @@ ValueType_Return<T> ValueType::as() const
             return scope_cast<std::remove_reference_t<T>>(std::get<OwnedScopePtr>(mUnion));
         }
     }
-    //static_assert(dependent_bool<T, false>::value, "Invalid target type for Valuetype cast provided!");
+    // static_assert(dependent_bool<T, false>::value, "Invalid target type for Valuetype cast provided!");
 }
 
 META_EXPORT std::ostream &operator<<(std::ostream &stream,

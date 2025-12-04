@@ -2,9 +2,9 @@
 
 #include "oggdecode.h"
 
-#include "oggdecodebuf.h"
-
 #include "Generic/stream.h"
+
+#include "oggdecodebuf.h"
 
 namespace Engine {
 namespace Audio {

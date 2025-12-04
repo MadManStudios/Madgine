@@ -1,18 +1,20 @@
 #include "handlerlib.h"
 
+#include "handler.h"
+
+#include "Modules/threading/awaitables/awaitablesender.h"
+
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/window/mainwindow.h"
-#include "handler.h"
-#include "handlermanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
+#include "handlermanager.h"
 
 DEFINE_UNIQUE_COMPONENT(Engine::Behavior, Handler)
 
 METATABLE_BEGIN(Engine::Behavior::HandlerBase)
-READONLY_PROPERTY(Lifetime, lifetimeBase)
+    READONLY_PROPERTY(Lifetime, lifetimeBase)
 METATABLE_END(Engine::Behavior::HandlerBase)
 
 namespace Engine {

@@ -1,13 +1,12 @@
 #pragma once
 
-#include "widget.h"
+#include "Generic/areaview.h"
 
 #include "util/colortintrenderdata.h"
 #include "util/layouts/explicitlayoutrenderdata.h"
 #include "util/layouts/uniformlayoutrenderdata.h"
 #include "util/textrenderdata.h"
-
-#include "Generic/areaview.h"
+#include "widget.h"
 
 namespace Engine {
 namespace Widgets {

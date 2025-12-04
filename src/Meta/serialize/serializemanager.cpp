@@ -3,11 +3,8 @@
 #include "serializemanager.h"
 
 #include "hierarchy/serializableids.h"
-
 #include "hierarchy/syncableunit.h"
-
 #include "streams/serializestream.h"
-
 #include "streams/serializestreamdata.h"
 
 namespace Engine {
@@ -180,6 +177,6 @@ namespace Serialize {
         return mName;
     }
 
-    //const std::string &SerializeManager::name() const { return mName; }
+    // const std::string &SerializeManager::name() const { return mName; }
 } // namespace Serialize
 } // namespace Engine

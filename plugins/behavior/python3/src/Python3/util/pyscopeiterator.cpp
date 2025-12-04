@@ -2,12 +2,12 @@
 
 #include "pyscopeiterator.h"
 
-#include "pyobjectutil.h"
-
 #include "Meta/keyvalue/valuetype.h"
 
+#include "pyobjectutil.h"
+
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         static PyObject *

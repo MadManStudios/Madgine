@@ -2,23 +2,21 @@
 
 #if ENABLE_MEMTRACKING
 
+#    include "../renderer/imroot.h"
 #    include "imgui/imgui.h"
 #    include "imgui/imgui_internal.h"
 #    include "imgui/imguiaddons.h"
 #    include "memoryviewer.h"
 
-#    include "../renderer/imroot.h"
-
-//#include "Modules/math/math.h"
+// #include "Modules/math/math.h"
 
 #    include "Interfaces/debug/memory/memory.h"
-
 #    include "Interfaces/debug/memory/untrackedmemoryresource.h"
+
+#    include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #    include "Meta/keyvalue/metatable_impl.h"
 #    include "Meta/serialize/serializetable_impl.h"
-
-#    include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 UNIQUECOMPONENT(Engine::Tools::MemoryViewer);
 
@@ -46,11 +44,10 @@ namespace Tools {
         ImGui::TableNextColumn();
 
         ImGui::BeginSpanningTreeNode(&traceback, traceback.mFunction, leaf ? ImGuiTreeNodeFlags_Leaf : ImGuiTreeNodeFlags_None);
-        
+
         if (mShowAddress) {
             ImGui::TableNextColumn();
             ImGui::Text("%#010x", traceback.mAddress);
-            
         }
         if (mShowFile) {
             ImGui::TableNextColumn();
@@ -226,7 +223,7 @@ namespace Tools {
     static void collapseSort(std::strong_ordering (*inOrder)(const Item &, const Item &), std::strong_ordering dir, size_t depth, MemoryBlock &block)
     {
 
-        //assert(block.mSources);
+        // assert(block.mSources);
 
         while (block.mSources) {
             if (block.mSources->first.size() <= depth) {
@@ -337,7 +334,7 @@ namespace Tools {
 
             float width = ImGui::GetWindowWidth() - 20;
 
-            if (ImGui::BeginTable("cols", 3 + mShowAddress + 2 * mShowFile, ImGuiTableFlags_ScrollY/* | ImGuiColumnsFlags_NoPreserveWidths */)) {
+            if (ImGui::BeginTable("cols", 3 + mShowAddress + 2 * mShowFile, ImGuiTableFlags_ScrollY /* | ImGuiColumnsFlags_NoPreserveWidths */)) {
 
                 ImGui::TableSetupColumn("Method", ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_WidthStretch, 0.0f, METHODNAME_SORTING);
                 if (mShowAddress)
@@ -410,24 +407,24 @@ namespace Tools {
                     }
                 }
 
-                //Sort Unsorted List & Merge
+                // Sort Unsorted List & Merge
                 if (mCollapsing) {
                     /*if (resort) {
-						mRootBlock.mChildren.clear();
-						mRootBlock.mData = BlockData{};
-						mRootBlock.mLeafs.clear();
-					}*/
+                                                mRootBlock.mChildren.clear();
+                                                mRootBlock.mData = BlockData{};
+                                                mRootBlock.mLeafs.clear();
+                                        }*/
                     /*sort(methodNameSorting, false, unsortedFront);
-					merge(methodNameSorting, false, sortedFront, unsortedFront);*/
+                                        merge(methodNameSorting, false, sortedFront, unsortedFront);*/
                     mRootBlock.mSources = unsortedFront;
                     collapseSort(inOrder, mSortDescending ? std::strong_ordering::less : std::strong_ordering::greater, 0, mRootBlock);
-                    //mCollapsing = false;
+                    // mCollapsing = false;
                 } else {
                     sort(inOrder, mSortDescending ? std::strong_ordering::less : std::strong_ordering::greater, unsortedFront);
                     merge(inOrder, mSortDescending ? std::strong_ordering::less : std::strong_ordering::greater, sortedFront, unsortedFront);
                 }
 
-                //Fix Links
+                // Fix Links
                 if (front != sortedFront) {
                     Item *originalFront = front;
                     if (!mTracker.linkedFront().compare_exchange_strong(front, sortedFront)) {

@@ -2,21 +2,19 @@
 
 #include "resourcebase.h"
 
+#include "Generic/execution/algorithm.h"
+#include "Generic/execution/execution.h"
+
+#include "Interfaces/fetch/fetchapi.h"
+#include "Interfaces/filesystem/async.h"
 #include "Interfaces/filesystem/fsapi.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Interfaces/filesystem/async.h"
-
-#include "Generic/execution/execution.h"
-#include "Generic/execution/algorithm.h"
-
-#include "Interfaces/fetch/fetchapi.h"
-
 #include "resourcemanager.h"
 
 METATABLE_BEGIN(Engine::Resources::ResourceBase)
-READONLY_PROPERTY(Name, name)
+    READONLY_PROPERTY(Name, name)
 METATABLE_END(Engine::Resources::ResourceBase)
 
 namespace Engine {
@@ -69,7 +67,7 @@ namespace Resources {
         std::string_view protocol = mPath.protocol();
 
         if (protocol == "http" || protocol == "https" || protocol == "ftp") {
-            Execution::detach_with_receiver(FetchSender<std::vector<std::byte>>(mPath, { mPath }), rec);       
+            Execution::detach_with_receiver(FetchSender<std::vector<std::byte>>(mPath, { mPath }), rec);
             return;
         } else if (!protocol.empty()) {
             LOG_WARNING("Unrecognized file protocol '" << protocol << "'");

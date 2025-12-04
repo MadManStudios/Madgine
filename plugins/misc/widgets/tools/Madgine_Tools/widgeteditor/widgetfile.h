@@ -1,9 +1,7 @@
 #pragma once
 
-#include "Madgine/widgets/widgetloader.h"
-
 #include "Madgine/render/renderpass.h"
-
+#include "Madgine/widgets/widgetloader.h"
 #include "Madgine/widgets/widgetmanager.h"
 
 namespace Engine {
@@ -12,7 +10,7 @@ namespace Tools {
     struct WidgetFile {
 
         WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Resource *resource);
-        ~WidgetFile();        
+        ~WidgetFile();
 
         void save(const Filesystem::Path &path);
 
@@ -31,7 +29,7 @@ namespace Tools {
         Widgets::WidgetBase *mTopLevel = nullptr;
 
         WidgetSettings *mSelected = nullptr;
-        std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;        
+        std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;
 
         std::unique_ptr<Render::RenderTarget> mRenderTarget;
 

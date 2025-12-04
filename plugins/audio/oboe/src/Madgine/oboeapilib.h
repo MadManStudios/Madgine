@@ -12,6 +12,4 @@
 
 #include "oboeapiforward.h"
 
-
-
 /// @endcond

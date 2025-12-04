@@ -77,7 +77,7 @@ namespace Serialize {
                 std::optional<StreamResult> result = this->mF(holder, in, name, tags, depth);
                 if (result)
                     return std::move(*result);
-            } 
+            }
             if constexpr (std::same_as<T, EnumTag>) {
                 return visitSkipEnum(holder.mTable, in, name);
             } else if constexpr (std::same_as<T, FlagsTag>) {

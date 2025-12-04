@@ -2,17 +2,13 @@
 
 #include "filemanager.h"
 
+#include "Interfaces/filesystem/fsapi.h"
 #include "Interfaces/filesystem/path.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-
-#include "Meta/serialize/streams/serializestream.h"
-
-#include "Meta/serialize/streams/formatter.h"
-
-#include "Meta/serialize/streams/serializestreamdata.h"
-
 #include "Meta/serialize/streams/formattedserializestream.h"
+#include "Meta/serialize/streams/formatter.h"
+#include "Meta/serialize/streams/serializestream.h"
+#include "Meta/serialize/streams/serializestreamdata.h"
 
 namespace Engine {
 namespace Filesystem {

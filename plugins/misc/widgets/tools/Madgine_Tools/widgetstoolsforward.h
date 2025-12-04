@@ -3,7 +3,8 @@
 namespace Engine {
 namespace Tools {
 
-struct WidgetEditor;
+    struct WidgetEditor;
+    struct WidgetSettings;
 
 }
 }

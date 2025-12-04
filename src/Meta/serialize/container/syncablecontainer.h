@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Generic/container/containerevent.h"
+
 #include "serializablecontainer.h"
 #include "syncable.h"
-
-#include "Generic/container/containerevent.h"
 
 namespace Engine {
 namespace Serialize {
@@ -224,7 +224,7 @@ namespace Serialize {
         using RemoveOperation = AtomicContainerOperation<_RemoveOperation>;
         using RemoveRangeOperation = AtomicContainerOperation<_RemoveRangeOperation>;
         using ResetOperation = AtomicContainerOperation<_ResetOperation>;
-        //TODO: MultiInsertOperation
+        // TODO: MultiInsertOperation
     };
 
     template <typename C, typename Observer = NoOpFunctor, typename OffsetPtr = TaggedPlaceholder<MemberOffsetPtrTag, 0>>

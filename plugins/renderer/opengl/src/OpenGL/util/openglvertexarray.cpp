@@ -5,7 +5,8 @@
 namespace Engine {
 namespace Render {
 
-    OpenGLVertexArray::OpenGLVertexArray(create_t) {
+    OpenGLVertexArray::OpenGLVertexArray(create_t)
+    {
         glGenVertexArrays(1, &mHandle);
     }
 

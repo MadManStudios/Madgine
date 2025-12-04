@@ -1,19 +1,19 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
 #include "Meta/serialize/hierarchy/serializetable_forward.h"
+
+#include "Madgine/resources/resourceloader.h"
 
 #include "widgettemplate.h"
 
 namespace Engine {
 namespace Widgets {
 
-    
     struct MADGINE_WIDGETS_EXPORT WidgetLoader : Resources::ResourceLoader<WidgetLoader, WidgetDescriptor> {
         WidgetLoader();
 
         struct MADGINE_WIDGETS_EXPORT Handle : Base::Handle {
-            
+
             Handle();
 
             Handle(Resource *res);
@@ -45,14 +45,13 @@ namespace Widgets {
         const std::unique_ptr<WidgetTemplate> &widgetTemplate() const;
         std::unique_ptr<WidgetBase> create(WidgetManager &manager, WidgetLoader::Handle handle, WidgetBase *parent = nullptr) const;
 
-    private:        
+    private:
         const MetaTable *mMetaTable = nullptr;
 
         std::unique_ptr<WidgetBase> (*mCtor)(WidgetManager &, WidgetBase *, WidgetLoader::Handle) = nullptr;
 
         std::unique_ptr<WidgetTemplate> mTemplate;
     };
-
 
 }
 }

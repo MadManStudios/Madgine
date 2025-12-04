@@ -6,13 +6,13 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 METATABLE_BEGIN(Engine::Widgets::ExplicitLayoutConfig)
-MEMBER(mSizingPolicy)
-MEMBER(mFactor)
+    MEMBER(mSizingPolicy)
+    MEMBER(mFactor)
 METATABLE_END(Engine::Widgets::ExplicitLayoutConfig)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::ExplicitLayoutConfig)
-FIELD(mSizingPolicy)
-FIELD(mFactor)
+    FIELD(mSizingPolicy)
+    FIELD(mFactor)
 SERIALIZETABLE_END(Engine::Widgets::ExplicitLayoutConfig)
 
 namespace Engine {

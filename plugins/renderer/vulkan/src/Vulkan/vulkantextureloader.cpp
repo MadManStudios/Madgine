@@ -2,10 +2,10 @@
 
 #include "vulkantextureloader.h"
 
+#include "Modules/uniquecomponent/uniquecomponent.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-
-#include "Modules/uniquecomponent/uniquecomponent.h"
 
 #include "vulkanrendercontext.h"
 

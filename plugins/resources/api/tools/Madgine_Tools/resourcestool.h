@@ -2,7 +2,6 @@
 
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
-
 #include "imgui/imgui.h"
 
 namespace Engine {

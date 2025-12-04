@@ -2,8 +2,8 @@
 
 /// @cond
 
-#include "Modules/moduleslib.h"
 #include "Meta/metalib.h"
+#include "Modules/moduleslib.h"
 
 #if defined(Server_EXPORTS)
 #    define MADGINE_SERVER_EXPORT DLL_EXPORT
@@ -11,9 +11,9 @@
 #    define MADGINE_SERVER_EXPORT DLL_IMPORT
 #endif
 
-#include "serverforward.h"
-
 #include <queue>
 #include <set>
+
+#include "serverforward.h"
 
 /// @endcond

@@ -25,7 +25,7 @@ namespace Render {
 
         void reset();
         RenderFuture setData(const ByteBuffer &data, D3D12_RESOURCE_STATES targetState);
-        
+
         ID3D12Resource *resource() const;
 
         D3D12_GPU_VIRTUAL_ADDRESS gpuAddress() const;

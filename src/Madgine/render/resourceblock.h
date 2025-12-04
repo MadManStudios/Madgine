@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ptr.h"
 #include "Generic/opaqueptr.h"
+
+#include "ptr.h"
 
 namespace Engine {
 namespace Render {
@@ -24,13 +25,12 @@ namespace Render {
         uintptr_t mPtr = 0;
     };
 
-    struct UniqueResourceBlock : UniqueOpaquePtr {        
+    struct UniqueResourceBlock : UniqueOpaquePtr {
 
         operator ResourceBlock() const
         {
             return { get() };
         }
-
     };
 
 }

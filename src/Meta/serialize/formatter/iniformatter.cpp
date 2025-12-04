@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Serialize {
 
-    static std::array<std::ctype<char>::mask, 256> sTable = generateMask(~ctype::space, { { '\n', ctype::space, ~0 } });    
+    static std::array<std::ctype<char>::mask, 256> sTable = generateMask(~ctype::space, { { '\n', ctype::space, ~0 } });
     static std::locale sLocale { std::locale {}, new ctype { sTable.data() } };
 
     IniFormatter::IniFormatter()

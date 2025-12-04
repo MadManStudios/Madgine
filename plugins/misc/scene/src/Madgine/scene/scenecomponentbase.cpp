@@ -1,10 +1,11 @@
 #include "../scenelib.h"
+
 #include "scenecomponentbase.h"
-#include "scenemanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
-
 #include "Meta/serialize/serializetable_impl.h"
+
+#include "scenemanager.h"
 
 METATABLE_BEGIN(Engine::Scene::SceneComponentBase)
 METATABLE_END(Engine::Scene::SceneComponentBase)
@@ -55,8 +56,8 @@ namespace Scene {
         return mSceneMgr.taskQueue();
     }
 
-    void SceneComponentBase::updateFrame(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame) {
-
+    void SceneComponentBase::updateFrame(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame)
+    {
     }
 
 }

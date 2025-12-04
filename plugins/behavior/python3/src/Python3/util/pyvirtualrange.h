@@ -3,7 +3,7 @@
 #include "Generic/container/virtualrange.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         extern PyTypeObject PyVirtualAssociativeRangeType;
@@ -13,14 +13,12 @@ namespace Behavior{
                 KeyValueVirtualAssociativeRange mRange;
         };
 
-        
         extern PyTypeObject PyVirtualSequenceRangeType;
 
         struct PyVirtualSequenceRange {
             PyObject_HEAD
                 KeyValueVirtualSequenceRange mRange;
         };
-
 
     }
 }

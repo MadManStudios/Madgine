@@ -1,8 +1,8 @@
 #include "../../scenelib.h"
+
 #include "entitycomponentbase.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
-
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../scenemanager.h"

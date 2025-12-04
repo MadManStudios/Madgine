@@ -33,7 +33,6 @@ namespace Execution {
             P mPromise;
         };
 
-
         template <typename Sender, typename P>
         struct sender {
             using result_type = typename Sender::result_type;
@@ -57,7 +56,7 @@ namespace Execution {
         }
 
         template <typename Sender, typename P>
-        requires tag_invocable<then_promise_t, Sender, P>
+            requires tag_invocable<then_promise_t, Sender, P>
         auto operator()(Sender &&sender, P &&promise) const
             noexcept(is_nothrow_tag_invocable_v<then_promise_t, Sender, P>)
                 -> tag_invoke_result_t<then_promise_t, Sender, P>
@@ -67,7 +66,7 @@ namespace Execution {
     };
 
     struct detach_with_future_t {
-    
+
         template <typename Sender>
         struct traits {
             using R = typename Sender::result_type;
@@ -76,7 +75,7 @@ namespace Execution {
             using Promise = typename Sender::template value_types<helper>;
             template <typename... V>
             using helper2 = WithResultFuture<R, V...>;
-            using Future = typename Sender::template value_types<helper2>; 
+            using Future = typename Sender::template value_types<helper2>;
         };
 
         template <typename Sender>
@@ -87,7 +86,6 @@ namespace Execution {
             detach(then_promise(std::forward<Sender>(sender), std::move(p)));
             return f;
         }
-
     };
     inline constexpr detach_with_future_t detach_with_future;
 

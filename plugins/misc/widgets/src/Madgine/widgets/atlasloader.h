@@ -1,17 +1,15 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
+#include "Meta/math/atlas2.h"
+#include "Meta/serialize/hierarchy/serializableunit.h"
 
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/textureloader.h"
-
-#include "Meta/math/atlas2.h"
-
-#include "Meta/serialize/hierarchy/serializableunit.h"
+#include "Madgine/resources/resourceloader.h"
 
 namespace Engine {
 namespace Widgets {
-       
+
     struct PreprocessedUIAtlas {
         SERIALIZABLEUNIT(PreprocessedUIAtlas);
 
@@ -38,7 +36,7 @@ namespace Widgets {
         ByteBuffer mBuffer;
     };
 
-     struct UIAtlas {
+    struct UIAtlas {
 
         UIAtlas();
 
@@ -63,7 +61,6 @@ namespace Widgets {
         std::map<std::string, Atlas2::Entry, std::less<>> mEntries;
         std::map<std::string, Resources::ImageLoader::Resource, std::less<>> mDummyResources;
     };
-
 
     struct MADGINE_WIDGETS_EXPORT AtlasLoader : Resources::ResourceLoader<AtlasLoader, PreprocessedUIAtlas> {
 

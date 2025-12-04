@@ -1,11 +1,10 @@
 #pragma once
 
+#include "Generic/bytebuffer.h"
+
 #include "Meta/math/vector2i.h"
 
 #include "Madgine/render/texture.h"
-
-#include "Generic/bytebuffer.h"
-
 #include "Madgine/render/texturedescriptor.h"
 
 namespace Engine {

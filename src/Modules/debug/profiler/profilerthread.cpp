@@ -2,10 +2,8 @@
 
 #include "profilerthread.h"
 
-#include "profiler.h"
-
 #include "../../threading/workgroup.h"
-
+#include "profiler.h"
 
 #if ENABLE_THREADING
 #    include "Interfaces/threading/threadapi.h"

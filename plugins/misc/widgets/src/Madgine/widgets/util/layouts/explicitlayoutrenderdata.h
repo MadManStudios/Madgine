@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../renderdata.h"
-
 #include "sizeconstraints.h"
 
 namespace Engine {
@@ -29,7 +28,7 @@ namespace Widgets {
         struct ExplicitLayoutElement {
             float mOffset;
             float mSize;
-        };  
+        };
 
         std::vector<ExplicitLayoutElement> mElements;
 

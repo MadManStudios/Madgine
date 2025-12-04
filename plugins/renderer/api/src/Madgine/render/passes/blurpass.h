@@ -1,8 +1,7 @@
 #pragma once
 
-#include "../renderpass.h"
-
 #include "../pipelineloader.h"
+#include "../renderpass.h"
 
 namespace Engine {
 namespace Render {
@@ -10,7 +9,7 @@ namespace Render {
     struct MADGINE_RENDER_EXPORT BlurPass : RenderPass {
 
         BlurPass(int priority, size_t iterations = 10);
-        
+
         virtual void setup(RenderTarget *target) override;
         virtual void render(RenderTarget *target, size_t iteration) override;
         virtual void onTargetResize(const Vector2i &size) override;
@@ -25,7 +24,7 @@ namespace Render {
         void setInput(RenderTarget *input, size_t inputIndex = 0);
 
     private:
-        int mPriority; 
+        int mPriority;
         size_t mIterations;
 
         size_t mInputIndex;

@@ -43,7 +43,7 @@ namespace Threading {
                 std::shared_lock lock(*mMutex);
                 available = (mData.size() > index);
             }
-            if (available) {                
+            if (available) {
                 std::unique_lock lock2(*mMutex);
                 mData[index] = {};
             }

@@ -2,13 +2,12 @@
 
 #if LINUX
 
-#    include "windowapi.h"
-#    include "windowsettings.h"
-
-#    include "../input/inputevents.h"
-
 #    include <GL/glx.h>
 #    include <X11/Xlib.h>
+
+#    include "../input/inputevents.h"
+#    include "windowapi.h"
+#    include "windowsettings.h"
 
 namespace Engine {
 namespace Window {
@@ -75,20 +74,20 @@ namespace Window {
             case MotionNotify: {
                 const XMotionEvent &xme = e.xmotion;
                 InterfacesVector mousePos { xme.x, xme.y };
-                onEvent(Input::PointerMoveEvent{ mousePos, { xme.x_root, xme.y_root }, mousePos - mLastMousePosition });
+                onEvent(Input::PointerMoveEvent { mousePos, { xme.x_root, xme.y_root }, mousePos - mLastMousePosition });
                 mLastMousePosition = mousePos;
                 break;
             }
             case ButtonPress: {
                 captureInput();
                 const XButtonEvent &xbe = e.xbutton;
-                onEvent(Input::PointerPressEvent{ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
+                onEvent(Input::PointerPressEvent { { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
                 break;
             }
             case ButtonRelease: {
                 releaseInput();
                 const XButtonEvent &xbe = e.xbutton;
-                onEvent(Input::PointerReleaseEvent{ { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
+                onEvent(Input::PointerReleaseEvent { { xbe.x, xbe.y }, { xbe.x_root, xbe.y_root }, convertMouseButton(xbe.button) });
                 break;
             }
             case ConfigureNotify: {
@@ -119,7 +118,6 @@ namespace Window {
                 break;
             }
             return handled;
-
         }
 
         InterfacesVector mSize;
@@ -138,7 +136,6 @@ namespace Window {
             auto it = sWindows.find(event.xany.window);
             if (it != sWindows.end()) {
                 if (!it->second.handle(event)) {
-
                 }
             }
         }
@@ -146,7 +143,7 @@ namespace Window {
 
     InterfacesVector OSWindow::size()
     {
-        return static_cast<LinuxWindow*>(this)->mSize;
+        return static_cast<LinuxWindow *>(this)->mSize;
     }
 
     InterfacesVector OSWindow::renderSize()
@@ -171,7 +168,7 @@ namespace Window {
 
     void OSWindow::setSize(const InterfacesVector &size)
     {
-        static_cast<LinuxWindow*>(this)->mSize = size;
+        static_cast<LinuxWindow *>(this)->mSize = size;
     }
 
     void OSWindow::setRenderSize(const InterfacesVector &size)

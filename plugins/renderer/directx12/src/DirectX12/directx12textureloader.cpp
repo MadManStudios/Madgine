@@ -2,12 +2,11 @@
 
 #include "directx12textureloader.h"
 
-#include "util/directx12texture.h"
-
-#include "directx12rendercontext.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
+
+#include "directx12rendercontext.h"
+#include "util/directx12texture.h"
 
 RESOURCELOADER(Engine::Render::DirectX12TextureLoader);
 

@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Generic/execution/virtualsender.h"
-#include "Meta/keyvalue/argumentlist.h"
-#include "behaviorerror.h"
 
-#include "named.h"
+#include "Meta/keyvalue/argumentlist.h"
 
 #include "Madgine/debug/debuggablesender.h"
+
+#include "behaviorerror.h"
+#include "named.h"
 
 namespace Engine {
 namespace Behavior {

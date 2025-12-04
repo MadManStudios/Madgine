@@ -2,9 +2,8 @@
 
 #include "Madgine/render/pipelineinstance.h"
 
-#include "openglbuffer.h"
-
 #include "../openglpipelineloader.h"
+#include "openglbuffer.h"
 
 namespace Engine {
 namespace Render {

@@ -1,18 +1,18 @@
 #include "../applib.h"
+
 #include "application.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Modules/threading/workgroupstorage.h"
-
-#include "globalapibase.h"
-
-#include "Modules/threading/awaitables/awaitablesender.h"
 
 #include "Generic/execution/execution.h"
 
+#include "Modules/threading/awaitables/awaitablesender.h"
+#include "Modules/threading/workgroupstorage.h"
+
+#include "Meta/keyvalue/metatable_impl.h"
+
+#include "globalapibase.h"
+
 METATABLE_BEGIN(Engine::App::Application)
-MEMBER(mGlobalAPIs)
+    MEMBER(mGlobalAPIs)
 METATABLE_END(Engine::App::Application)
 
 namespace Engine {
@@ -23,10 +23,10 @@ namespace App {
 
     /**
      * @brief Creates an Application and sets up its TaskQueue
-     * 
+     *
      * Instantiates all WindowAPIComponents. Initialization/Deinitialization-tasks
      * of the MadgineObject are registered as setup steps in the TaskQueue.
-    */
+     */
     Application::Application()
         : mTaskQueue("Application")
         , mGlobalAPIs(*this)
@@ -40,8 +40,8 @@ namespace App {
     }
 
     /**
-     * @brief 
-    */
+     * @brief
+     */
     Application::~Application()
     {
         assert(sApp == this);
@@ -49,15 +49,15 @@ namespace App {
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Threading::Task<bool> Application::init()
     {
         for (const std::unique_ptr<GlobalAPIBase> &api : mGlobalAPIs) {
             if (!co_await api->callInit())
                 co_return false;
-        }        
+        }
 
         startLifetime();
 
@@ -65,9 +65,9 @@ namespace App {
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Threading::Task<void> Application::finalize()
     {
         endLifetime();
@@ -79,37 +79,37 @@ namespace App {
     }
 
     /**
-     * @brief 
-     * @param i 
-     * @return 
-    */
+     * @brief
+     * @param i
+     * @return
+     */
     GlobalAPIBase &Application::getGlobalAPIComponent(size_t i)
     {
         return mGlobalAPIs.get(i);
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Application &Application::getSingleton()
     {
         return *sApp;
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Application *Application::getSingletonPtr()
     {
         return sApp;
     }
 
     /**
-     * @brief 
-     * @return 
-    */
+     * @brief
+     * @return
+     */
     Threading::TaskQueue *Application::taskQueue()
     {
         return &mTaskQueue;

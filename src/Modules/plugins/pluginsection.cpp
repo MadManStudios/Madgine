@@ -2,21 +2,16 @@
 
 #if ENABLE_PLUGINS
 
-#    include "pluginsection.h"
-
-#    include "plugin.h"
-
-#    include "pluginmanager.h"
+#    include "Generic/keyvalue.h"
 
 #    include "Interfaces/dl/runtime.h"
 
-#    include "Generic/keyvalue.h"
-
 #    include "../ini/inisection.h"
-
 #    include "../threading/workgroup.h"
-
 #    include "binaryinfo.h"
+#    include "plugin.h"
+#    include "pluginmanager.h"
+#    include "pluginsection.h"
 
 namespace Engine {
 namespace Plugins {
@@ -42,7 +37,7 @@ namespace Plugins {
 
     PluginSection::~PluginSection()
     {
-        //assert(mDependents.empty());
+        // assert(mDependents.empty());
     }
 
     const std::string &PluginSection::name() const
@@ -154,7 +149,6 @@ namespace Plugins {
         p->setLoaded(true, file);
         p->loadDependencies(mMgr, file);
 
-        
         if (autoLoadTools && strlen(p->info()->mToolsName) > 0) {
             PluginSection &toolsSection = mMgr.section("Tools");
             return toolsSection.loadPlugin(p->info()->mToolsName, file);

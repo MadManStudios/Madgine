@@ -1,13 +1,10 @@
 #pragma once
 
-#include "Modules/threading/madgineobject.h"
-
 #include "Meta/keyvalue/virtualscope.h"
-
+#include "Meta/math/rect2i.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
-#include "Meta/math/rect2i.h"
-
+#include "Modules/threading/madgineobject.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
 #include "Madgine/render/renderpass.h"

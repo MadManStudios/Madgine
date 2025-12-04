@@ -33,12 +33,11 @@ namespace Execution {
             ConnectionStack<Connection<ValueStub<_Ty...>, _Ty...>> stack = std::move(this->mStack);
             {
                 std::lock_guard guard { this->mStack.mutex() };
-                this->mValue = {std::forward<_Ty>(args)...};
+                this->mValue = { std::forward<_Ty>(args)... };
             }
 
             return { std::move(stack), this };
         }
-
     };
 }
 }

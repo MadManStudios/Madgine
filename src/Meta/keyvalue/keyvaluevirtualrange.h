@@ -9,5 +9,4 @@ using KeyValueVirtualAssociativeRange = VirtualRange<KeyValuePair, Functor_to_Ke
 using KeyValueVirtualSequenceIterator = VirtualIterator<ValueType>;
 using KeyValueVirtualSequenceRange = VirtualRange<ValueType, Functor_to_ValueType>;
 
-
 }

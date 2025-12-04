@@ -2,21 +2,18 @@
 
 #include "templates.h"
 
+#include "Interfaces/filesystem/fsapi.h"
+
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/serialize/serializetable_impl.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
-
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Interfaces/filesystem/fsapi.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
 #include "Madgine_Tools/renderer/imroot.h"
-
 #include "TemplateEngine/parser.h"
+#include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::Templates)
 

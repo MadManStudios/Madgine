@@ -2,11 +2,10 @@
 
 #include "scheduler.h"
 
-#include "workgroup.h"
+#include "Interfaces/threading/threadapi.h"
 
 #include "taskqueue.h"
-
-#include "Interfaces/threading/threadapi.h"
+#include "workgroup.h"
 
 namespace Engine {
 namespace Threading {
@@ -39,7 +38,7 @@ namespace Threading {
 
         setupThreadInfo(main_queue, " (Main)");
 
-        while (mWorkgroup.state() != WorkGroupState::DONE || !mWorkgroup.singleThreaded()){
+        while (mWorkgroup.state() != WorkGroupState::DONE || !mWorkgroup.singleThreaded()) {
             main_queue->update();
             mWorkgroup.update();
         }

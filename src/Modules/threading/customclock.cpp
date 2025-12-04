@@ -42,13 +42,13 @@ namespace Threading {
 
     std::strong_ordering CustomTimepoint::operator<=>(const std::chrono::steady_clock::time_point other) const
     {
-        return mTimePoint <_> (mClock ? mClock->get(other) : other);
+        return mTimePoint<_>(mClock ? mClock->get(other) : other);
     }
 
     std::strong_ordering CustomTimepoint::operator<=>(const CustomTimepoint &other) const
     {
         assert(mClock == other.mClock);
-        return mTimePoint <_> other.mTimePoint;
+        return mTimePoint<_> other.mTimePoint;
     }
 
 }

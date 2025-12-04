@@ -7,17 +7,16 @@
 #endif
 
 #ifdef COMPATIBILITY_CONFIG_HEADER
-#include COMPATIBILITY_CONFIG_HEADER
+#    include COMPATIBILITY_CONFIG_HEADER
 #endif
 
-
-#include "concepts.h"
-#include "spaceship.h"
-#include "coroutine.h"
-#include "ranges.h"
 #include "atomic.h"
-#include "memory_resource.h"
 #include "bit.h"
+#include "concepts.h"
+#include "coroutine.h"
+#include "memory_resource.h"
+#include "ranges.h"
+#include "spaceship.h"
 
 #if __cpp_lib_constexpr_algorithms >= 201806L
 #    define CONSTEXPR_ALGORITHM constexpr

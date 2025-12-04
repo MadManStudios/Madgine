@@ -4,10 +4,8 @@
 
 #define NOMINMAX
 #include <Windows.h>
-
-#include <wincodec.h>
-
 #include <thread>
+#include <wincodec.h>
 
 #include "Madgine/window/mainwindow.h"
 

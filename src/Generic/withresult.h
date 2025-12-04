@@ -22,7 +22,7 @@ struct WithResult {
         return mResult;
     }
 
-    operator T&() &
+    operator T &() &
     {
         return *mData;
     }

@@ -2,27 +2,25 @@
 
 #include "scenemainwindowcomponent.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/serialize/serializetable_impl.h"
+#include "Meta/math/matrix4.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/app/application.h"
-#include "Madgine/scene/scenemanager.h"
-
-#include "Madgine/window/mainwindow.h"
-
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendertarget.h"
+#include "Madgine/scene/scenemanager.h"
+#include "Madgine/window/mainwindow.h"
 
-#include "Meta/math/matrix4.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "scenerenderdata.h"
 
 NAMED_UNIQUECOMPONENT(SceneMainWindowComponent, Engine::Render::SceneMainWindowComponent)
 
 METATABLE_BEGIN(Engine::Render::SceneMainWindowComponent)
-MEMBER(mCamera)
+    MEMBER(mCamera)
 METATABLE_END(Engine::Render::SceneMainWindowComponent)
 
 SERIALIZETABLE_BEGIN(Engine::Render::SceneMainWindowComponent)

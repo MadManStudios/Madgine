@@ -1,8 +1,9 @@
 #include "../vulkanlib.h"
 
+#include "vulkancommandlist.h"
+
 #include "../vulkanrendercontext.h"
 #include "../vulkanrendertarget.h"
-#include "vulkancommandlist.h"
 
 namespace Engine {
 namespace Render {
@@ -10,7 +11,7 @@ namespace Render {
     VulkanCommandList::VulkanCommandList(NulledPtr<std::remove_pointer_t<VkCommandBuffer>> buffer, std::vector<VkSemaphore> waitSemaphores, std::vector<VkSemaphore> signalSemaphores)
         : mBuffer(std::move(buffer))
         , mWaitSemaphores(std::move(waitSemaphores))
-        , mSignalSemaphores(std::move(signalSemaphores))        
+        , mSignalSemaphores(std::move(signalSemaphores))
     {
     }
 

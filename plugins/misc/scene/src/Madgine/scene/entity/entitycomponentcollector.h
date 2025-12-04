@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Modules/uniquecomponent/uniquecomponentdefine.h"
-
 #include "Meta/keyvalue/helper/annotations.h"
+
+#include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
 namespace Engine {
 namespace Scene {

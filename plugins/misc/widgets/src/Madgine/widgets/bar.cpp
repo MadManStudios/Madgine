@@ -2,18 +2,18 @@
 
 #include "bar.h"
 
+#include "Meta/math/atlas2.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-
-#include "Meta/math/atlas2.h"
 
 #include "widgetmanager.h"
 
 NAMED_UNIQUECOMPONENT(Bar, Engine::Widgets::Bar);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::Bar, Engine::Widgets::WidgetBase)
-MEMBER(mRatio)
-MEMBER(mColor)
+    MEMBER(mRatio)
+    MEMBER(mColor)
 METATABLE_END(Engine::Widgets::Bar)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::Bar, Engine::Widgets::WidgetBase)

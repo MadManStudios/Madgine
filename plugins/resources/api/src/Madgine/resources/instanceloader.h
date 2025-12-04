@@ -1,26 +1,22 @@
 #pragma once
 
-#include "resourcebase.h"
-#include "resourceloadercollector.h"
+#include "Generic/closure.h"
+#include "Generic/container/emplace.h"
+
+#include "Interfaces/filesystem/filewatcher.h"
+
+#include "Meta/keyvalue/ownedscopeptr.h"
 
 #include "Modules/threading/globalstorage.h"
+#include "Modules/uniquecomponent/uniquecomponent.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "handle.h"
 #include "ptr.h"
 #include "resource.h"
-
+#include "resourcebase.h"
 #include "resourceloaderbase.h"
-
-#include "Modules/uniquecomponent/uniquecomponent.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "Interfaces/filesystem/filewatcher.h"
-
-#include "Generic/closure.h"
-
-#include "Generic/container/emplace.h"
-
-#include "Meta/keyvalue/ownedscopeptr.h"
+#include "resourceloadercollector.h"
 
 namespace Engine {
 namespace Resources {
@@ -219,7 +215,7 @@ namespace Resources {
     UNIQUECOMPONENT(Loader)                                                       \
                                                                                   \
     METATABLE_BEGIN_EX(1, Loader)                                                 \
-    MEMBER_EX(2, mResources)                                                      \
+        MEMBER_EX(2, mResources)                                                  \
     METATABLE_END_EX(4, Loader)                                                   \
                                                                                   \
     METATABLE_BEGIN_BASE_EX(5, Loader::Resource, Engine::Resources::ResourceBase) \

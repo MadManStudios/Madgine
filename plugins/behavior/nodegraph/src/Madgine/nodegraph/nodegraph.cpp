@@ -3,53 +3,44 @@
 
 #include "nodegraph.h"
 
-#include "nodebase.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Generic/projections.h"
 
 #include "Interfaces/filesystem/fsapi.h"
 
-#include "Madgine/serialize/filesystem/filemanager.h"
-
+#include "Meta/keyvalueutil/valuetypeserialize.h"
+#include "Meta/serialize/formats.h"
 #include "Meta/serialize/streams/serializestream.h"
-
-#include "Meta/serialize/serializetable_impl.h"
-
-#include "nodecollector.h"
 
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
-#include "Meta/serialize/hierarchy/statetransmissionflags.h"
+#include "Madgine/serialize/filesystem/filemanager.h"
 
-#include "Generic/projections.h"
+#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
+#include "nodebase.h"
+#include "nodecollector.h"
 #include "nodeinterpreter.h"
-
-#include "nodes/behaviornode.h"
-
-#include "Meta/serialize/formats.h"
-
 #include "nodes/accessornode.h"
-
-#include "Meta/keyvalueutil/valuetypeserialize.h"
+#include "nodes/behaviornode.h"
 
 METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph)
 METATABLE_END(Engine::Behavior::NodeGraph::NodeGraph)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph)
-FIELD(mNodes, Serialize::ParentCreator<&Engine::Behavior::NodeGraph::NodeGraph::readNode, &Engine::Behavior::NodeGraph::NodeGraph::writeNode>)
-FIELD(mFlowOutPins)
-FIELD(mDataInPins)
-FIELD(mLayoutData)
-FIELD(mNamedInputs)
+    FIELD(mNodes, Serialize::ParentCreator<&Engine::Behavior::NodeGraph::NodeGraph::readNode, &Engine::Behavior::NodeGraph::NodeGraph::writeNode>)
+    FIELD(mFlowOutPins)
+    FIELD(mDataInPins)
+    FIELD(mLayoutData)
+    FIELD(mNamedInputs)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeGraph)
 
 METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
-MEMBER(mDescriptor)
+    MEMBER(mDescriptor)
 METATABLE_END(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
-FIELD(mDescriptor)
+    FIELD(mDescriptor)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
 
 namespace Engine {

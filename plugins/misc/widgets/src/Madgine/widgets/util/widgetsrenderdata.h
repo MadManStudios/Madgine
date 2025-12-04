@@ -1,12 +1,11 @@
 #pragma once
 
-#include "texturesettings.h"
-#include "vertex.h"
-
 #include "Meta/math/color4.h"
-
 #include "Meta/math/rect2.h"
 #include "Meta/math/rect2i.h"
+
+#include "texturesettings.h"
+#include "vertex.h"
 
 namespace Engine {
 namespace Widgets {

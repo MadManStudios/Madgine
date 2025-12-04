@@ -1,16 +1,12 @@
 #pragma once
 
-#include "Madgine_Tools/toolscollector.h"
-
-#include "widgetsettings.h"
-
-#include "Madgine_Tools/toolbase.h"
-
-#include "widgetfile.h"
+#include "Madgine/widgets/widgetloader.h"
 
 #include "Madgine_Tools/resourceeditor.h"
-
-#include "Madgine/widgets/widgetloader.h"
+#include "Madgine_Tools/toolbase.h"
+#include "Madgine_Tools/toolscollector.h"
+#include "widgetfile.h"
+#include "widgetsettings.h"
 
 namespace Engine {
 namespace Tools {
@@ -56,7 +52,7 @@ namespace Tools {
         bool mGameHierarchyVisible = true;
         bool mGameDetailsVisible = true;
 
-        struct {            
+        struct {
             Behavior::ParameterTuple mParameters;
             Behavior::BehaviorHandle mHandle;
         } mPendingBehavior;

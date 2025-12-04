@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Meta/keyvalue/argumentlist.h"
+
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/behavior/behaviorcollector.h"
 
 #include "nodegraphloader.h"
-
-#include "Meta/keyvalue/argumentlist.h"
 
 namespace ax {
 namespace NodeEditor {

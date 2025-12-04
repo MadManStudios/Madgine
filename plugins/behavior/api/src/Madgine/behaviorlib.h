@@ -2,10 +2,9 @@
 
 /// @cond
 
+#include "Madgine/debuglib.h"
 #include "Meta/metalib.h"
 #include "Modules/moduleslib.h"
-
-#include "Madgine/debuglib.h"
 
 #if defined(Behavior_EXPORTS)
 #    define MADGINE_BEHAVIOR_EXPORT DLL_EXPORT
@@ -14,6 +13,5 @@
 #endif
 
 #include "behaviorforward.h"
-
 
 /// @endcond

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "formattedserializestream.h"
-
 #include "pendingrequest.h"
 
 namespace Engine {

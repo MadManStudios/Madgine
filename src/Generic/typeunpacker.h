@@ -10,7 +10,7 @@ namespace TypeUnpacker {
         else
             return std::make_tuple(std::forward<T>(value));
     }
-    
+
     template <typename T, typename... Ts, size_t... Is>
     auto prependImpl(T &&val, std::tuple<Ts...> &&tuple, std::index_sequence<Is...>)
     {
@@ -37,7 +37,7 @@ namespace TypeUnpacker {
     {
         return std::tuple<Ts...>{std::get<1 + Is>(std::move(tuple))...};
     }
-    
+
     template <typename T, typename... Ts, size_t... Is>
     auto popFrontImpl(const std::tuple<T, Ts...> &tuple, std::index_sequence<Is...>)
     {
@@ -393,7 +393,7 @@ namespace TypeUnpacker {
     {
         return forEach<Pack>(std::forward<F>(f), typename Pack::indices {});
     }
-    
+
     template <typename Pack, typename F, typename T>
     T accumulate(F &&f, T &&t)
     {

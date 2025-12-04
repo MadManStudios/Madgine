@@ -2,23 +2,23 @@
 
 #include "image.h"
 
+#include "Madgine/imageloader/imageloader.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-
-#include "Madgine/imageloader/imageloader.h"
 
 #include "widgetmanager.h"
 
 NAMED_UNIQUECOMPONENT(Image, Engine::Widgets::Image);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::Image, Engine::Widgets::WidgetBase)
-NAMED_MEMBER(Image, mImageRenderData)
-MEMBER(mColor)
+    NAMED_MEMBER(Image, mImageRenderData)
+    MEMBER(mColor)
 METATABLE_END(Engine::Widgets::Image)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::Image, Engine::Widgets::WidgetBase)
-FIELD(mImageRenderData)
-FIELD(mColor)
+    FIELD(mImageRenderData)
+    FIELD(mColor)
 SERIALIZETABLE_END(Engine::Widgets::Image)
 
 namespace Engine {
@@ -26,7 +26,7 @@ namespace Widgets {
 
     void Image::render(WidgetsRenderData &renderData)
     {
-        const Atlas2::Entry* entry = manager().lookUpImage(mImageRenderData.image());
+        const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
         if (!entry)
             return;
 

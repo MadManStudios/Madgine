@@ -1,20 +1,16 @@
 #pragma once
 
-#include "behaviorerror.h"
+#include "Generic/any.h"
+#include "Generic/delayedconstruct.h"
+#include "Generic/functor.h"
 
 #include "Interfaces/debug/stacktrace.h"
 
-#include "Generic/delayedconstruct.h"
-
 #include "Madgine/debug/debuggablesender.h"
 
-#include "behaviorreceiver.h"
-
-#include "Generic/functor.h"
-
-#include "Generic/any.h"
-
 #include "behaviorcoroutine.h"
+#include "behaviorerror.h"
+#include "behaviorreceiver.h"
 
 namespace Engine {
 namespace Behavior {

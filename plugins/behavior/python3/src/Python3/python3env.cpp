@@ -2,11 +2,15 @@
 
 #include "python3env.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Generic/cowstring.h"
 
 #include "Madgine/root/keyvalueregistry.h"
 #include "Madgine/root/root.h"
 
+#include "Meta/keyvalue/metatable_impl.h"
+
+#include "python3fileloader.h"
+#include "python3streamredirect.h"
 #include "util/math/pymatrix3.h"
 #include "util/math/pymatrix4.h"
 #include "util/math/pyquaternion.h"
@@ -15,29 +19,20 @@
 #include "util/math/pyvector4.h"
 #include "util/pyapifunction.h"
 #include "util/pyboundapifunction.h"
+#include "util/pydictptr.h"
 #include "util/pyenum.h"
+#include "util/pyexecution.h"
 #include "util/pyflags.h"
+#include "util/pyframeptr.h"
+#include "util/pylistptr.h"
 #include "util/pyobjectutil.h"
 #include "util/pyownedscopeptr.h"
 #include "util/pyscopeiterator.h"
 #include "util/pyscopeptr.h"
 #include "util/pysender.h"
+#include "util/python3lock.h"
 #include "util/pyvirtualiterator.h"
 #include "util/pyvirtualrange.h"
-
-#include "python3fileloader.h"
-
-#include "util/pydictptr.h"
-#include "util/pyframeptr.h"
-#include "util/pylistptr.h"
-
-#include "python3streamredirect.h"
-
-#include "util/python3lock.h"
-
-#include "Generic/cowstring.h"
-
-#include "util/pyexecution.h"
 
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>

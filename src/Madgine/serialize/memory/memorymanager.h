@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Meta/serialize/serializemanager.h"
 #include "Generic/bytebuffer.h"
+
+#include "Meta/serialize/serializemanager.h"
 
 namespace Engine {
 namespace Memory {
 
-    
     struct MADGINE_MEMORY_SERIALIZE_EXPORT MemoryManager : Serialize::SerializeManager {
         MemoryManager(const std::string &name);
         MemoryManager(const MemoryManager &) = delete;
@@ -17,7 +17,6 @@ namespace Memory {
 
         Serialize::FormattedSerializeStream openRead(ByteBuffer buffer, Serialize::Format format);
         Serialize::FormattedSerializeStream openWrite(WritableByteBuffer buffer, Serialize::Format format);
-
     };
 }
 }

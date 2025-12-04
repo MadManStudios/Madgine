@@ -2,12 +2,11 @@
 
 #include "directx12pipelineinstance.h"
 
-#include "../directx12rendercontext.h"
+#include "Generic/align.h"
 
 #include "../directx12meshdata.h"
+#include "../directx12rendercontext.h"
 #include "../directx12rendertarget.h"
-
-#include "Generic/align.h"
 
 namespace Engine {
 namespace Render {
@@ -77,7 +76,7 @@ namespace Render {
         if (!bind(target, mFormat, mGroupSize))
             return;
 
-        if (mHasIndices){
+        if (mHasIndices) {
             commandList->DrawIndexedInstanced(mElementCount, 1, 0, 0, 0);
         } else {
             commandList->DrawInstanced(mElementCount, 1, 0, 0);
@@ -97,7 +96,7 @@ namespace Render {
         assert(elementCount <= mElementCount);
 
         if (mHasIndices) {
-            assert(indexOffset);            
+            assert(indexOffset);
             commandList->DrawIndexedInstanced(elementCount, 1, indexOffset, vertexOffset, 0);
         } else {
             commandList->DrawInstanced(elementCount, 1, vertexOffset, 0);
@@ -150,7 +149,6 @@ namespace Render {
 
         DirectX12RenderContext::getSingleton().mConstantBuffer.bindVertex(commandList, 0, 2);
 
-        
         if (mesh->mIndices) {
             mesh->mIndices.bindIndex(commandList);
             mHasIndices = true;
@@ -202,7 +200,7 @@ namespace Render {
         mElementCount = count;
         mHasIndices = true;
 
-        return { static_cast<uint32_t*>(block.mAddress), block.mSize };
+        return { static_cast<uint32_t *>(block.mAddress), block.mSize };
     }
 
     void DirectX12PipelineInstance::setGroupSize(size_t groupSize) const

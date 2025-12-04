@@ -21,8 +21,7 @@ namespace Render {
 
         void reset();
         void setData(const ByteBuffer &data);
-        
-        
+
     private:
         size_t mSize = 0;
         OffsetPtr mOffset;

@@ -7,10 +7,10 @@
 namespace Engine {
 namespace Serialize {
 
-    static std::array<std::ctype<char>::mask, 256> sTableQuote = generateMask(~ctype::space, { { '"', ctype::space, ~0 } });    
-    static std::locale sLocaleQuote { std::locale {}, new ctype {sTableQuote.data()} };
+    static std::array<std::ctype<char>::mask, 256> sTableQuote = generateMask(~ctype::space, { { '"', ctype::space, ~0 } });
+    static std::locale sLocaleQuote { std::locale {}, new ctype { sTableQuote.data() } };
     static std::array<std::ctype<char>::mask, 256> sTableBracket = generateMask(~ctype::space, { { '<', ctype::space, ~0 } });
-    static std::locale sLocaleBracket { std::locale {}, new ctype {sTableBracket.data()} };
+    static std::locale sLocaleBracket { std::locale {}, new ctype { sTableBracket.data() } };
 
     XMLFormatter::XMLFormatter()
         : Formatter(false, true)
@@ -163,7 +163,7 @@ namespace Serialize {
             FORMATTER_EXPECT(">");
 
             if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds>) {
-                pushLocale(sLocaleBracket, false);                
+                pushLocale(sLocaleBracket, false);
             }
         }
         return {};
@@ -187,7 +187,7 @@ namespace Serialize {
                 mStream.seek(mExtendedLookupPos);
                 mExtendedLookupPos = -1;
             }
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>) {                
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>) {
                 popLocale();
                 FORMATTER_EXPECT("\"");
             }
@@ -281,7 +281,7 @@ namespace Serialize {
             STREAM_PROPAGATE_ERROR(mStream.readN(next, 1));
             STREAM_PROPAGATE_ERROR(mStream.readUntil(next, "\""));
         } else {
-            float dummy; //TODO Is this catching all cases?
+            float dummy; // TODO Is this catching all cases?
             STREAM_PROPAGATE_ERROR(mStream >> dummy);
         }
         return {};

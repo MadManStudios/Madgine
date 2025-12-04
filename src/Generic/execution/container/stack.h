@@ -25,7 +25,8 @@ namespace Execution {
             return push(item, lock);
         }
 
-        bool push(T* item, std::unique_lock<std::mutex>& lock) {
+        bool push(T *item, std::unique_lock<std::mutex> &lock)
+        {
             assert(lock.mutex() == &mMutex);
             assert(!item->mNext);
             T *previous = mHead;

@@ -2,10 +2,10 @@
 
 #include "multilinetextrenderdata.h"
 
-#include "widgetsrenderdata.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
+
+#include "widgetsrenderdata.h"
 
 METATABLE_BEGIN_BASE(Engine::Widgets::MultilineTextRenderData, Engine::Widgets::TextRenderData)
 METATABLE_END(Engine::Widgets::MultilineTextRenderData)

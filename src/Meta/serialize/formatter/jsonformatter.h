@@ -57,7 +57,7 @@ namespace Serialize {
         bool mLastPrimitive;
 
         struct ParseLevel {
-        
+
             ParseLevel(bool isContainer)
                 : mIsContainer(isContainer)
             {

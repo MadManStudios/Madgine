@@ -1,19 +1,14 @@
 #pragma once
 
-#include "hierarchy/serializer.h"
-#include "hierarchy/syncfunction.h"
-
+#include "Generic/linestruct.h"
 #include "Generic/memberoffsetptr.h"
 
-#include "hierarchy/serializetable.h"
-
-#include "operations.h"
-
-#include "container/container_operations.h"
-
 #include "configs/verifier.h"
-
-#include "Generic/linestruct.h"
+#include "container/container_operations.h"
+#include "hierarchy/serializer.h"
+#include "hierarchy/serializetable.h"
+#include "hierarchy/syncfunction.h"
+#include "operations.h"
 
 namespace Engine {
 namespace Serialize {
@@ -50,7 +45,7 @@ namespace Serialize {
 
             return {
                 name,
-                OffsetPtr{},
+                OffsetPtr {},
                 [](const void *_unit, CallerHierarchyFormattedSerializeStream out, const char *name) {
                     const Unit *unit = unit_cast<const Unit *>(_unit);
                     write({ out.mStream, CallerHierarchyPtr { out.mHierarchy.append(unit) } }, (unit->*Getter)(), name);
@@ -248,7 +243,7 @@ namespace Serialize {
                         STREAM_PROPAGATE_ERROR(read(in, args, "Args"));
                         STREAM_PROPAGATE_ERROR(apply_map(args, in, true));
                         writeFunctionAction(unit, index, &args, {}, request.mRequester, request.mRequesterTransactionId);
-                        R result = TupleUnpacker::invokeExpand(patch_void(f, Void{}), static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
+                        R result = TupleUnpacker::invokeExpand(patch_void(f, Void {}), static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
                         request.mReceiver.set_value(result);
                     } break;
                     case QUERY: {
@@ -399,7 +394,8 @@ namespace Serialize {
     DLL_EXPORT_VARIABLE2(constexpr, const ::Engine::Serialize::SerializeTable, ::, serializeTable, SINGLE_ARG({ #T, ::Engine::type_holder<T>, ::Serialize_##T::baseType, ::Serialize_##T::readState, ::Serialize_##T::fields.data(), ::Serialize_##T::functions.data(), std::derived_from<T, ::Engine::Serialize::TopLevelUnitBase> }), T);
 
 #define SERIALIZETABLE_END(T) \
-    SERIALIZETABLE_END_EX(, T)
+    SERIALIZETABLE_END_EX     \
+    (, T)
 
 #define FIELD_EX(Idx, ...) \
     SERIALIZETABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::Serialize::__serialize_impl__::field<Ty, offsetof(Ty, FIRST(__VA_ARGS__)), &Ty::__VA_ARGS__>(STRINGIFY2(FIRST(__VA_ARGS__)), parentConfigs)))

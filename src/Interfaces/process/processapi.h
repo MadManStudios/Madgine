@@ -1,14 +1,12 @@
 #pragma once
 
-#include "Generic/execution/virtualstate.h"
 #include "Generic/execution/virtualsender.h"
-
+#include "Generic/execution/virtualstate.h"
 #include "Generic/genericresult.h"
 
 namespace Engine {
 namespace Process {
 
-	
     struct ProcessAuxiliaryData;
 
     struct INTERFACES_EXPORT ProcessState : Execution::VirtualReceiverBase<GenericResult, int, std::string, std::string> {
@@ -30,7 +28,6 @@ namespace Process {
         std::chrono::milliseconds mTimeout;
     };
 
-    
     inline auto runAsync(std::string executable, std::vector<std::string> commandLine, std::chrono::milliseconds timeout = std::chrono::milliseconds::max())
     {
         return Execution::make_virtual_sender<ProcessState>(std::move(executable), std::move(commandLine), timeout);

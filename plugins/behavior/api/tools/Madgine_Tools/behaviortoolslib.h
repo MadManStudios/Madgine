@@ -3,8 +3,8 @@
 /// @cond
 
 #include "Madgine/behaviorlib.h"
-#include "Madgine_Tools/toolslib.h"
 #include "Madgine_Tools/debugtoolslib.h"
+#include "Madgine_Tools/toolslib.h"
 
 #if defined(BehaviorTools_EXPORTS)
 #    define MADGINE_BEHAVIOR_TOOLS_EXPORT DLL_EXPORT

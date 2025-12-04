@@ -1,5 +1,9 @@
 #include "../widgethandlerlib.h"
+
 #include "widgethandler.h"
+
+#include "Modules/threading/awaitables/awaitablesender.h"
+
 #include "Madgine/handlermanager.h"
 #include "Madgine/widgets/widget.h"
 #include "Madgine/widgets/widgetmanager.h"
@@ -7,10 +11,8 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 METATABLE_BEGIN_BASE(Engine::Widgets::WidgetHandlerBase, Engine::Behavior::HandlerBase)
-PROPERTY(Widget, widget, setWidget)
+    PROPERTY(Widget, widget, setWidget)
 METATABLE_END(Engine::Widgets::WidgetHandlerBase)
 
 namespace Engine {
@@ -27,7 +29,7 @@ namespace Widgets {
 
     void WidgetHandlerBase::setWidget(Widgets::WidgetBase *widget)
     {
-        if (widget){
+        if (widget) {
             mLifetime.attach(widget->pointerMoveEvent().connect(&WidgetHandlerBase::onPointerMove, this));
             mLifetime.attach(widget->pointerClickEvent().connect(&WidgetHandlerBase::onPointerClick, this));
             mLifetime.attach(widget->dragBeginEvent().connect(&WidgetHandlerBase::onDragBegin, this));
@@ -101,7 +103,6 @@ namespace Widgets {
             }));
         else
             setWidget(nullptr);
-
     }
 
     Widgets::WidgetBase *WidgetHandlerBase::widget() const

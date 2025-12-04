@@ -2,8 +2,6 @@
 
 #if UNIX
 
-#    include "socketapi.h"
-
 #    include <arpa/inet.h>
 #    include <fcntl.h>
 #    include <netinet/ip.h>
@@ -11,6 +9,8 @@
 #    include <sys/ioctl.h>
 #    include <sys/socket.h>
 #    include <unistd.h>
+
+#    include "socketapi.h"
 
 namespace Engine {
 
@@ -35,7 +35,7 @@ SocketAddress Socket::address() const
 {
     sockaddr address;
     char ext[16];
-    socklen_t length; 
+    socklen_t length;
     if (getpeername(mSocket, &address, &length))
         return {};
 
@@ -221,17 +221,17 @@ SocketAPIResult Socket::connect(std::string_view url, int portNr)
     if (*this)
         return SocketAPIResult::ALREADY_IN_USE;
 
-    //Fill out the information needed to initialize a socket…
-    struct sockaddr_in target; //Socket address information
+    // Fill out the information needed to initialize a socket…
+    struct sockaddr_in target; // Socket address information
 
     target.sin_family = AF_INET; // address family Internet
-    target.sin_port = htons(portNr); //Port to connect on
+    target.sin_port = htons(portNr); // Port to connect on
 
     if (inet_pton(AF_INET, url.data(), &target.sin_addr) <= 0) {
         return SocketAPI::getError("inet_pton");
     }
 
-    int s = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); //Create socket
+    int s = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); // Create socket
     if (s < 0) {
         return SocketAPI::getError("socket");
     }
@@ -243,7 +243,7 @@ SocketAPIResult Socket::connect(std::string_view url, int portNr)
         return result;
     }
 
-    //Try connecting...
+    // Try connecting...
 
     if (::connect(s, (struct sockaddr *)&target, sizeof(target)) < 0) {
         SocketAPIResult error = SocketAPI::getError("connect");

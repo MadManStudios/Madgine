@@ -1,6 +1,7 @@
 #include "../moduleslib.h"
 
 #include "taskpromise.h"
+
 #include "taskqueue.h"
 
 #if ENABLE_TASK_TRACKING

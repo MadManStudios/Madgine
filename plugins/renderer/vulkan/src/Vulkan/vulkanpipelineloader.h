@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
-
 #include "Madgine/render/pipelineloader.h"
+#include "Madgine/resources/resourceloader.h"
 
 #include "util/vulkanpipeline.h"
 

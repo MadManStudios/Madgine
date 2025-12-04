@@ -1,15 +1,15 @@
 #pragma once
 
+#include "Meta/math/frustum.h"
 #include "Meta/math/quaternion.h"
 #include "Meta/math/vector3.h"
-#include "Meta/math/frustum.h"
 
 namespace Engine {
 namespace Render {
 
     struct MADGINE_RENDER_EXPORT Camera {
         Camera(std::string name = "");
-        //Camera(const Camera &) = delete;
+        // Camera(const Camera &) = delete;
         ~Camera() = default;
 
         Matrix4 getViewProjectionMatrix(float aspectRatio);

@@ -20,8 +20,8 @@ struct KeyValueWorkGroupLocal : T {
     using decay_t = T;
 
     template <typename... Args>
-    requires std::constructible_from<T, Args...>
-    KeyValueWorkGroupLocal(const char *name, Args &&... args)
+        requires std::constructible_from<T, Args...>
+    KeyValueWorkGroupLocal(const char *name, Args &&...args)
         : T(std::forward<Args>(args)...)
     {
         KeyValueRegistry::registerWorkGroupLocal(name, this);
@@ -39,7 +39,7 @@ struct KeyValueGlobal : T {
     using decay_t = T;
 
     template <typename... Args>
-    KeyValueGlobal(const char *name, Args &&... args)
+    KeyValueGlobal(const char *name, Args &&...args)
         : T(std::forward<Args>(args)...)
     {
         KeyValueRegistry::registerGlobal(name, this);

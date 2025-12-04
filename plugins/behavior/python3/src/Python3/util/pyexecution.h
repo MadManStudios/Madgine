@@ -1,21 +1,19 @@
 #pragma once
 
-#include "Generic/execution/concepts.h"
-
-#include "pyframeptr.h"
-
 #include "Generic/closure.h"
+#include "Generic/execution/concepts.h"
 
 #include "Madgine/behavior/behaviorreceiver.h"
 
+#include "pyframeptr.h"
+
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
         void setupExecution();
 
         bool stackUnwindable();
 
-        
         struct CodeObject {
             PyObjectPtr mCode;
             PyObjectPtr mGlobals;
@@ -26,7 +24,6 @@ namespace Behavior{
             CodeObject,
             PyFramePtr,
             BehaviorError>;
-
 
         PyObject *evalFrame(PyThreadState *tstate, _PyInterpreterFrame *frame, int throwExc);
         void evalCode(BehaviorReceiver &receiver, CodeObject code);

@@ -2,13 +2,11 @@
 
 #include "valuetypeserialize.h"
 
-#include "../serialize/streams/serializestream.h"
+#include "Meta/serialize/operations.h"
 
 #include "../keyvalue/valuetype.h"
-
 #include "../serialize/streams/formattedserializestream.h"
-
-#include "Meta/serialize/operations.h"
+#include "../serialize/streams/serializestream.h"
 
 namespace Engine {
 namespace Serialize {
@@ -31,7 +29,7 @@ namespace Serialize {
         });
     }
 
-    void Operations<ValueType>::write(CallerHierarchyFormattedSerializeStream out, const ValueType &v, const char *name)    
+    void Operations<ValueType>::write(CallerHierarchyFormattedSerializeStream out, const ValueType &v, const char *name)
     {
         out.mStream.beginExtendedWrite(name, 1);
         Serialize::write(out, v.index().mIndex, "type");
@@ -39,7 +37,7 @@ namespace Serialize {
             using T = std::remove_const_t<std::remove_reference_t<decltype(value)>>;
             if constexpr (PrimitiveType<T> || InstanceOf<T, std::chrono::duration>) {
                 Serialize::write(out, value, name);
-            } else if constexpr (std::same_as<T, std::monostate>){
+            } else if constexpr (std::same_as<T, std::monostate>) {
                 Serialize::write(out, Void {}, name);
             } else
                 throw 0;
@@ -57,19 +55,18 @@ namespace Serialize {
             using T = std::remove_reference_t<decltype(value)>;
             if constexpr (PrimitiveType<T>) {
                 return Serialize::visitStream<T>(in, name, visitor, depth);
-            } else if constexpr (std::same_as<T, std::monostate>) {                
+            } else if constexpr (std::same_as<T, std::monostate>) {
                 return Serialize::visitStream<Void>(in, name, visitor, depth);
             } else
                 throw 0;
         });
     }
 
-    
     StreamResult Operations<ExtendedValueTypeDesc>::read(CallerHierarchyFormattedSerializeStream in, ExtendedValueTypeDesc &t, const char *name)
     {
         std::string type;
         STREAM_PROPAGATE_ERROR(Serialize::read(in, type, name));
-        //TODO
+        // TODO
         return {};
     }
 

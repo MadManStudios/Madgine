@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../toolscollector.h"
 #include "../toolbase.h"
+#include "../toolscollector.h"
 
 namespace Engine {
 namespace Tools {

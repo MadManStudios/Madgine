@@ -2,18 +2,16 @@
 
 #include "animation.h"
 
+#include "Meta/math/transformation.h"
+
+#include "Madgine/behavior/nativebehaviorcollector.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../entity/components/skeleton.h"
-
-#include "Meta/math/transformation.h"
-
 #include "../entity/entity.h"
-
 #include "../scenemanager.h"
-
-#include "Madgine/behavior/nativebehaviorcollector.h"
 
 namespace Engine {
 
@@ -53,7 +51,7 @@ namespace Scene {
                 return AnimationStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mAnimation), sender.mCurrentAnimation };
             }
 
-             template <typename Rec>
+            template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, AnimationSender &sender, Rec &&rec)
             {
                 return AnimationStateImpl<Rec> { std::forward<Rec>(rec), sender.mAnimation, sender.mCurrentAnimation };

@@ -1,23 +1,22 @@
 #pragma once
 
 namespace Engine {
-	namespace Render {
+namespace Render {
 
-		struct OpenGLShader 
-		{
-			OpenGLShader() = default;
-			OpenGLShader(ShaderType type);
-                    OpenGLShader(const OpenGLShader &) = delete;
-                        OpenGLShader(OpenGLShader &&);
-			~OpenGLShader();
+    struct OpenGLShader {
+        OpenGLShader() = default;
+        OpenGLShader(ShaderType type);
+        OpenGLShader(const OpenGLShader &) = delete;
+        OpenGLShader(OpenGLShader &&);
+        ~OpenGLShader();
 
-			OpenGLShader &operator=(OpenGLShader &&);
+        OpenGLShader &operator=(OpenGLShader &&);
 
-			void reset();
+        void reset();
 
-			GLuint mHandle = 0;
-			ShaderType mType;
-		};
+        GLuint mHandle = 0;
+        ShaderType mType;
+    };
 
-	}
+}
 }

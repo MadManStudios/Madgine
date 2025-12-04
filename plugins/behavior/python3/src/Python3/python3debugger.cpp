@@ -2,26 +2,23 @@
 
 #include "python3debugger.h"
 
-#include "util/pymoduleptr.h"
-#include "util/pyobjectutil.h"
+#include <frameobject.h>
+
+#include "Generic/execution/algorithm.h"
+
+#include "Interfaces/filesystem/path.h"
 
 #include "Meta/keyvalue/boundapifunction.h"
 #include "Meta/keyvalue/functiontable.h"
 #include "Meta/keyvalue/scopeptr.h"
-
 #include "Meta/keyvalue/valuetype.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Generic/execution/algorithm.h"
-
-#include "util/python3lock.h"
-
-#include "Interfaces/filesystem/path.h"
-
 #include "util/pyexecution.h"
-
-#include <frameobject.h>
+#include "util/pymoduleptr.h"
+#include "util/pyobjectutil.h"
+#include "util/python3lock.h"
 #if PY_MINOR_VERSION >= 11
 #    define Py_BUILD_CORE
 #    include <internal/pycore_frame.h>

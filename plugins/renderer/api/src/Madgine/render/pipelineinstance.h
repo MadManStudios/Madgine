@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Madgine/render/vertexformat.h"
-
 #include "Generic/bytebuffer.h"
+
+#include "Madgine/render/vertexformat.h"
 
 namespace Engine {
 namespace Render {
@@ -37,14 +37,14 @@ namespace Render {
 
         virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size) const = 0;
         template <typename T>
-        requires(!std::is_array_v<T>)
-            ByteBufferImpl<T> mapTempBuffer(size_t space)
+            requires(!std::is_array_v<T>)
+        ByteBufferImpl<T> mapTempBuffer(size_t space)
         {
             return mapTempBuffer(space, sizeof(T)).cast<T>();
         }
         template <typename T>
-        requires std::is_unbounded_array_v<T>
-            ByteBufferImpl<T> mapTempBuffer(size_t space, size_t count)
+            requires std::is_unbounded_array_v<T>
+        ByteBufferImpl<T> mapTempBuffer(size_t space, size_t count)
         {
             return mapTempBuffer(space, sizeof(std::remove_extent_t<T>) * count).cast<T>();
         }
@@ -53,11 +53,11 @@ namespace Render {
         virtual ByteBufferImpl<uint32_t> mapIndices(RenderTarget *target, size_t count) const = 0;
         virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const = 0;
         template <typename T>
-        requires std::is_unbounded_array_v<T>
-            ByteBufferImpl<T> mapVertices(RenderTarget *target, size_t count)
+            requires std::is_unbounded_array_v<T>
+        ByteBufferImpl<T> mapVertices(RenderTarget *target, size_t count)
         {
             return mapVertices(target, type_holder<std::remove_extent_t<T>>, count).template cast<T>();
-        }       
+        }
         virtual void setGroupSize(size_t groupSize) const = 0;
 
         virtual void render(RenderTarget *target) const = 0;

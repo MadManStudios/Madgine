@@ -4,14 +4,14 @@
 
 namespace Engine {
 namespace Widgets {
-    struct MADGINE_WIDGETS_EXPORT SceneWindow : Widget<SceneWindow> {        
+    struct MADGINE_WIDGETS_EXPORT SceneWindow : Widget<SceneWindow> {
         SceneWindow(WidgetManager &manager, WidgetBase *parent = nullptr);
 
         virtual ~SceneWindow();
 
-        void render(WidgetsRenderData &renderData) override;        
+        void render(WidgetsRenderData &renderData) override;
 
-        void setRenderSource(Render::RenderTarget *source);        
+        void setRenderSource(Render::RenderTarget *source);
 
     protected:
         void sizeChanged(const Vector3 &pixelSize) override;

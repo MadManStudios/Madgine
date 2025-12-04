@@ -37,8 +37,8 @@ struct mutable_set : std::set<T, Cmp> {
         }
 
         template <typename It2, bool isConst2>
-        requires(!isConst2 || isConst)
-            iterator_prototype(const iterator_prototype<It2, isConst2> &other)
+            requires(!isConst2 || isConst)
+        iterator_prototype(const iterator_prototype<It2, isConst2> &other)
             : mIterator(static_cast<const It2 &>(other))
         {
         }
@@ -184,7 +184,7 @@ struct container_traits<mutable_set<T, Cmp>> : container_traits<std::set<T, Cmp>
     typedef iterator position_handle;
     typedef const_iterator const_position_handle;
 
-    //static_assert(sizeof(position_handle) <= sizeof(void *));
+    // static_assert(sizeof(position_handle) <= sizeof(void *));
 
     static position_handle toPositionHandle(mutable_set<T, Cmp> &c, const iterator &it)
     {

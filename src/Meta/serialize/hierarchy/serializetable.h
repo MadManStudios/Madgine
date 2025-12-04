@@ -1,12 +1,10 @@
 #pragma once
 
-#include "serializetable_forward.h"
-
 #include "Generic/callerhierarchy.h"
-
 #include "Generic/closure.h"
 
 #include "../primitivetypes.h"
+#include "serializetable_forward.h"
 
 namespace Engine {
 namespace Serialize {
@@ -15,9 +13,9 @@ namespace Serialize {
     T *unit_cast(void *unit)
     {
         if constexpr (std::derived_from<std::remove_pointer_t<T>, SerializableUnitBase>) {
-            return static_cast<T*>(static_cast<SerializableUnitBase *>(unit));
+            return static_cast<T *>(static_cast<SerializableUnitBase *>(unit));
         } else {
-            return static_cast<T*>(unit);
+            return static_cast<T *>(unit);
         }
     }
 
@@ -25,9 +23,9 @@ namespace Serialize {
     const T *unit_cast(const void *unit)
     {
         if constexpr (std::derived_from<std::remove_pointer_t<T>, SerializableUnitBase>) {
-            return static_cast<const T*>(static_cast<const SerializableUnitBase *>(unit));
+            return static_cast<const T *>(static_cast<const SerializableUnitBase *>(unit));
         } else {
-            return static_cast<const T*>(unit);
+            return static_cast<const T *>(unit);
         }
     }
 

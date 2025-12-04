@@ -7,7 +7,7 @@ namespace Render {
 
     struct OpenGLHeapAllocator {
 
-        static constexpr size_t goodSize = 8 * 1024 * 1024; //8MB
+        static constexpr size_t goodSize = 8 * 1024 * 1024; // 8MB
 
         OpenGLHeapAllocator();
 
@@ -19,7 +19,7 @@ namespace Render {
 
     struct OpenGLMappedHeapAllocator {
 
-        static constexpr size_t goodSize = 8 * 1024 * 1024; //8MB
+        static constexpr size_t goodSize = 8 * 1024 * 1024; // 8MB
 
         OpenGLMappedHeapAllocator(
 #if OPENGL_ES

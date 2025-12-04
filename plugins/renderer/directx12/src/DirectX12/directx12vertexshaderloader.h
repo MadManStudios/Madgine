@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Madgine/resources/resourceloader.h"
-
 #include "Modules/threading/workgroupstorage.h"
 
 #include "Madgine/render/vertexformat.h"
+#include "Madgine/resources/resourceloader.h"
 
 namespace Engine {
 namespace Render {
@@ -22,7 +21,6 @@ namespace Render {
 
             Threading::TaskFuture<bool> create(const CodeGen::ShaderFile &file, DirectX12VertexShaderLoader *loader = &DirectX12VertexShaderLoader::getSingleton());
         };
-
 
         bool loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
         void unloadImpl(ReleasePtr<IDxcBlob> &shader);

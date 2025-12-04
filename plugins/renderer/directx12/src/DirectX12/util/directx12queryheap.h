@@ -11,7 +11,7 @@ namespace Render {
         DirectX12QueryHeap &operator=(DirectX12QueryHeap &&other);
 
         size_t allocate(size_t count = 1);
-        void deallocate(size_t handle);        
+        void deallocate(size_t handle);
 
         ID3D12QueryHeap *resource() const;
 

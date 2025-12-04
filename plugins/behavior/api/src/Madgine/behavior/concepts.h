@@ -1,8 +1,6 @@
 #pragma once
 
-
 #include "Generic/execution/concepts.h"
-
 
 namespace Engine {
 namespace Behavior {

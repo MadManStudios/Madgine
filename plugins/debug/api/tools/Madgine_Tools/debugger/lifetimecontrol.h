@@ -1,16 +1,12 @@
 #pragma once
 
-#include "Madgine_Tools/toolscollector.h"
-
 #include "Madgine_Tools/toolbase.h"
-
+#include "Madgine_Tools/toolscollector.h"
 
 namespace Engine {
 namespace Tools {
 
-    
     namespace ed = ax::NodeEditor;
-
 
     struct MADGINE_DEBUGGER_TOOLS_EXPORT LifetimeControl : Tool<LifetimeControl> {
 

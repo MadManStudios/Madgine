@@ -2,11 +2,10 @@
 
 #include "directx12buffer.h"
 
-#include "../directx12rendercontext.h"
-
+#include "Generic/align.h"
 #include "Generic/bytebuffer.h"
 
-#include "Generic/align.h"
+#include "../directx12rendercontext.h"
 
 namespace Engine {
 namespace Render {

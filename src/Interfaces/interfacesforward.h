@@ -6,7 +6,8 @@ struct InterfacesVector {
     int x;
     int y;
 
-    InterfacesVector operator-(const InterfacesVector& other) const {
+    InterfacesVector operator-(const InterfacesVector &other) const
+    {
         return { x - other.x, y - other.y };
     }
     InterfacesVector operator+(const InterfacesVector &other) const
@@ -56,7 +57,6 @@ namespace Input {
     }
 }
 
-
 namespace Window {
     struct OSWindow;
     struct WindowSettings;
@@ -65,11 +65,9 @@ namespace Window {
     struct CloseEvent;
     struct RepaintEvent;
 
-    
     using WindowEvent = std::variant<ResizeEvent, CloseEvent, RepaintEvent, Input::KeyPressEvent, Input::KeyReleaseEvent, Input::PointerPressEvent, Input::PointerReleaseEvent, Input::PointerMoveEvent, Input::AxisEvent>;
 
 }
-
 
 namespace Log {
 
@@ -80,4 +78,3 @@ namespace Log {
 }
 
 }
-

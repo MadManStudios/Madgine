@@ -2,12 +2,10 @@
 
 #include "vulkanbuffer.h"
 
-#include "../vulkanrendercontext.h"
-
+#include "Generic/align.h"
 #include "Generic/bytebuffer.h"
 
-#include "Generic/align.h"
-
+#include "../vulkanrendercontext.h"
 #include "vulkanconstantbufferheap.h"
 
 namespace Engine {
@@ -85,7 +83,7 @@ namespace Render {
         copyRegion.dstOffset = offset; // Optional
         copyRegion.size = data.mSize;
         vkCmdCopyBuffer(list, heap, buffer, 1, &copyRegion);
-        
+
         struct Deleter {
 
             void operator()(void *ptr)

@@ -78,11 +78,7 @@ struct ConcatItContainer {
     private:
         void update()
         {
-            while (mIndex < sizeof...(It) && TupleUnpacker::select(
-                       mIt, [](auto &it) -> decltype(auto) {
-                           return it.first == it.second;
-                       },
-                       mIndex))
+            while (mIndex < sizeof...(It) && TupleUnpacker::select(mIt, [](auto &it) -> decltype(auto) { return it.first == it.second; }, mIndex))
                 ++mIndex;
         }
 

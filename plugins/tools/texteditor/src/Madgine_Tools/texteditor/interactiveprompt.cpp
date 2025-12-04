@@ -2,11 +2,10 @@
 
 #include "interactiveprompt.h"
 
-#include "imgui/imgui.h"
-
-#include "texteditor.h"
-
 #include <zep/mode_repl.h>
+
+#include "imgui/imgui.h"
+#include "texteditor.h"
 
 namespace Engine {
 namespace Tools {
@@ -14,7 +13,7 @@ namespace Tools {
     struct Highlighter : Zep::ZepSyntax {
 
         using Zep::ZepSyntax::ZepSyntax;
-                
+
         void UpdateSyntax() override
         {
             auto &buffer = m_buffer.GetWorkingBuffer();
@@ -34,7 +33,7 @@ namespace Tools {
                 (m_syntax.begin() + (itrA - buffer.begin()))->background = background;
             };
 
-            for (const Zep::ByteRange& errorRange : mErrors) {
+            for (const Zep::ByteRange &errorRange : mErrors) {
                 m_processedChar = long(itrCurrent - buffer.begin());
                 if (m_processedChar >= errorRange.second)
                     continue;
@@ -58,12 +57,12 @@ namespace Tools {
             m_processedChar = long(buffer.size() - 1);
         }
 
-        void addError(Zep::ByteRange range) {
-            mErrors.insert(std::ranges::upper_bound(mErrors, range.first, {}, & Zep::ByteRange::first), range);
+        void addError(Zep::ByteRange range)
+        {
+            mErrors.insert(std::ranges::upper_bound(mErrors, range.first, {}, &Zep::ByteRange::first), range);
         }
 
         std::vector<Zep::ByteRange> mErrors;
-
     };
 
     InteractivePrompt::InteractivePrompt(TextEditor *editor, Interpreter *interpreter)
@@ -177,7 +176,7 @@ namespace Tools {
 
     std::string InteractivePrompt::getName()
     {
-        return std::string{ mInterpreter->name() };
+        return std::string { mInterpreter->name() };
     }
 
     void InteractivePrompt::log(std::string_view msg, Engine::Log::MessageType lvl, const char *file, size_t line)

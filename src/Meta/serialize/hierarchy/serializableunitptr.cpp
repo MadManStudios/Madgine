@@ -1,14 +1,10 @@
 #include "../../metalib.h"
 
-#include "statetransmissionflags.h"
-
-#include "serializetable.h"
-
 #include "Generic/offsetptr.h"
 
-#include "toplevelunit.h"
-
 #include "../operations.h"
+#include "serializetable.h"
+#include "toplevelunit.h"
 
 namespace Engine {
 namespace Serialize {

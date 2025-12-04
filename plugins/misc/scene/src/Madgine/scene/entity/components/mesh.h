@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../entitycomponent.h"
-
 #include "Madgine/meshloader/gpumeshloader.h"
+
+#include "../entitycomponent.h"
 
 namespace Engine {
 namespace Scene {
@@ -18,11 +18,11 @@ namespace Scene {
             const Render::GPUMeshData *data() const;
             uint32_t material() const;
             void setMaterial(uint32_t index);
-            //void setMaterialName(std::string_view name);
+            // void setMaterialName(std::string_view name);
 
             AABB aabb() const;
 
-            void set(Render::GPUMeshLoader::Handle handle);            
+            void set(Render::GPUMeshLoader::Handle handle);
 
             Render::GPUMeshLoader::Resource *get() const;
             const Render::GPUMeshLoader::Handle &handle() const;
@@ -31,7 +31,8 @@ namespace Scene {
             bool isVisible() const;
 
             typename Render::GPUMeshLoader::Handle mMesh;
-        private:            
+
+        private:
             uint32_t mMaterial = 0;
             bool mIsVisible = true;
         };

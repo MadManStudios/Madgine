@@ -2,15 +2,14 @@
 
 #include "behaviorcoroutine.h"
 
-#include "behavior.h"
-
 #include "Meta/keyvalue/valuetype.h"
+
+#include "behavior.h"
 
 namespace Engine {
 namespace Behavior {
 
-
-Behavior CoroutineBehaviorState::get_return_object()
+    Behavior CoroutineBehaviorState::get_return_object()
     {
         return Behavior::StatePtr { this };
     }
@@ -42,7 +41,7 @@ Behavior CoroutineBehaviorState::get_return_object()
 
     void CoroutineBehaviorState::visitState(CallableView<void(const Execution::StateDescriptor &)> visitor)
     {
-        visitor(Execution::State::SubLocation {mDebugLocation});
+        visitor(Execution::State::SubLocation { mDebugLocation });
     }
 
     CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept
@@ -171,7 +170,6 @@ Behavior CoroutineBehaviorState::get_return_object()
     {
         return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type, line);
     }
-
 
 }
 }

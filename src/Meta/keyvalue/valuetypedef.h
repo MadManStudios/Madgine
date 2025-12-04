@@ -14,7 +14,7 @@ VALUETYPE_TYPE(Scope, ScopePtr, const ScopePtr &)
 VALUETYPE_SEP
 VALUETYPE_TYPE(OwnedScope, OwnedScopePtr, const OwnedScopePtr &)
 VALUETYPE_SEP
-VALUETYPE_TYPE(Matrix3, CoW<Matrix3>, const CoW<Matrix3>&, const Matrix3 &)
+VALUETYPE_TYPE(Matrix3, CoW<Matrix3>, const CoW<Matrix3> &, const Matrix3 &)
 VALUETYPE_SEP
 VALUETYPE_TYPE(Matrix4, CoW<Matrix4>, const CoW<Matrix4> &, const Matrix4 &)
 VALUETYPE_SEP

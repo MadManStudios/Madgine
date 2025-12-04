@@ -2,6 +2,7 @@
 
 #include "Generic/bits/array.h"
 #include "Generic/container/tinyvector.h"
+
 #include "Meta/keyvalue/valuetype_desc.h"
 
 namespace CodeGen {
@@ -44,8 +45,7 @@ struct FullStatement {
 };
 
 template <typename T>
-concept hasConditionals = requires(T &t)
-{
+concept hasConditionals = requires(T &t) {
     t.mConditionals;
 };
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "texturedescriptor.h"
-#include "resourceblock.h"
-
 #include "Meta/math/vector2i.h"
+
+#include "resourceblock.h"
+#include "texturedescriptor.h"
 
 namespace Engine {
 namespace Render {

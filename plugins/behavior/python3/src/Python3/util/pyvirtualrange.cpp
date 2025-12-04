@@ -2,14 +2,13 @@
 
 #include "pyvirtualrange.h"
 
+#include "Meta/keyvalue/keyvaluepair.h"
 #include "Meta/keyvalue/valuetype.h"
 
 #include "pyobjectutil.h"
 
-#include "Meta/keyvalue/keyvaluepair.h"
-
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         static PyObject *
@@ -20,7 +19,7 @@ namespace Behavior{
 
         PyTypeObject PyVirtualSequenceRangeType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                           .tp_name
+                .tp_name
             = "Engine.VirtualSequenceRange",
             .tp_basicsize = sizeof(PyVirtualSequenceRange),
             .tp_itemsize = 0,
@@ -56,7 +55,7 @@ namespace Behavior{
 
         PyTypeObject PyVirtualAssociativeRangeType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                           .tp_name
+                .tp_name
             = "Engine.VirtualAssociativeRange",
             .tp_basicsize = sizeof(PyVirtualAssociativeRange),
             .tp_itemsize = 0,

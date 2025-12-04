@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
 #if ENABLE_MEMTRACKING
 #    include "Interfaces/debug/stacktrace.h"
@@ -158,7 +158,7 @@ struct GenerationContainerBase {
 
             uint32_t oldGen = index.mGeneration;
 
-            //Apply History
+            // Apply History
             uint32_t wrap = mHistory.size();
             while (index.mGeneration != mGeneration) {
 
@@ -454,7 +454,7 @@ struct GenerationContainer : GenerationContainerBase, protected C {
             mVector->reset(mIndex);
         }
 
-        reference operator *() const
+        reference operator*() const
         {
             return (*mVector)[mIndex];
         }
@@ -506,7 +506,7 @@ struct GenerationContainer : GenerationContainerBase, protected C {
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     template <typename... Args>
-    iterator emplace(Args &&... args)
+    iterator emplace(Args &&...args)
     {
         pointer t = &C::emplace_back(std::forward<Args>(args)...);
         uint32_t index = t - &C::front();
@@ -560,7 +560,8 @@ struct GenerationContainer : GenerationContainerBase, protected C {
         return C::front();
     }
 
-    reference operator[](size_t i) {
+    reference operator[](size_t i)
+    {
         return C::operator[](i);
     }
 
@@ -655,15 +656,14 @@ struct GenerationContainer : GenerationContainerBase, protected C {
         return { {}, this };
     }
 
-    iterator fetch(GenerationContainerIndex& index) {        
+    iterator fetch(GenerationContainerIndex &index)
+    {
         return { copy(index), this };
     }
-
 };
 
 template <typename T>
 using GenerationVector = GenerationContainer<std::vector<T>>;
-
 
 template <typename C>
 struct underlying_container<GenerationContainer<C>> {

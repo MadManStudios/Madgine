@@ -8,7 +8,6 @@ namespace Behavior {
             Python3Lock(Log::Log *log = nullptr, Execution::StopToken st = {});
             Python3Lock(const Python3Lock &) = delete;
             ~Python3Lock();
-
         };
 
         struct MADGINE_PYTHON3_EXPORT Python3InnerLock {

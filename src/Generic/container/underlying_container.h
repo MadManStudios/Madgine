@@ -14,5 +14,4 @@ template <typename C>
 struct base_container<C, std::void_t<typename underlying_container<C>::type>> : base_container<typename underlying_container<C>::type> {
 };
 
-
 }

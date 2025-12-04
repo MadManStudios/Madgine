@@ -40,12 +40,12 @@ namespace Render {
             return reinterpret_cast<T const *>(this);
         }
 
-        operator T () const
+        operator T() const
         {
             return this->get();
         }
     };
-        
+
     template <typename T, auto D>
     using VulkanPtr2 = VulkanPtr<T, D, vulkanDeleter2<T, D>>;
 

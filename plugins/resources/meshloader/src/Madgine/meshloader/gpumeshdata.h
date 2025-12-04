@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Meta/math/boundingbox.h"
-#include "Madgine/render/vertexformat.h"
+
 #include "Madgine/render/resourceblock.h"
+#include "Madgine/render/vertexformat.h"
 
 namespace Engine {
 namespace Render {

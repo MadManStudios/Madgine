@@ -71,7 +71,7 @@ namespace Serialize {
         virtual void set_value(const void *data) override final
         {
             assert(data);
-            TupleUnpacker::invokeFromTuple(LIFT(mRec.set_value, this), *static_cast<const std::tuple<const V &...>*>(data));
+            TupleUnpacker::invokeFromTuple(LIFT(mRec.set_value, this), *static_cast<const std::tuple<const V &...> *>(data));
         }
         virtual void set_done() override final
         {

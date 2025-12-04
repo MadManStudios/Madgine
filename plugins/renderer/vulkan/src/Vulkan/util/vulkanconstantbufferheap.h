@@ -33,7 +33,7 @@ namespace Render {
         OffsetPtr mOffsetTemp { 0 };
         OffsetPtr mOffsetPersistent { 0 };
 
-        //std::vector<std::pair<OffsetPtr, size_t>> mFreeListTemp;
+        // std::vector<std::pair<OffsetPtr, size_t>> mFreeListTemp;
         std::vector<std::pair<OffsetPtr, size_t>> mFreeListPersistent;
     };
 

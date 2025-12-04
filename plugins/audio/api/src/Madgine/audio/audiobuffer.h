@@ -1,7 +1,8 @@
 #pragma once
 
-#include "audioinfo.h"
 #include "Generic/bytebuffer.h"
+
+#include "audioinfo.h"
 
 namespace Engine {
 namespace Audio {

@@ -1,10 +1,8 @@
 #pragma once
 
-#include "behaviorcollector.h"
-
-#include "parametertuple.h"
-
 #include "behavior.h"
+#include "behaviorcollector.h"
+#include "parametertuple.h"
 
 namespace Engine {
 namespace Behavior {
@@ -200,7 +198,7 @@ namespace Behavior {
         void release(UniqueOpaquePtr &ptr) const override;
         std::string_view name(const UniqueOpaquePtr &handle) const override;
         Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
-        ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;        
+        ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;
         std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
         std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
         std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;
@@ -210,29 +208,29 @@ namespace Behavior {
 }
 }
 
-#define NATIVE_BEHAVIOR(Name, Sender, ...)                                                                                     \
-    struct Name##NativeBehavior;                                                                                               \
-    struct Name##Linkage {                                                                                                     \
-        template <typename... Args>                                                                                            \
-        auto operator()(Args &&...args) const                                                                                  \
-        {                                                                                                                      \
-            return Sender(std::forward<Args>(args)...);                                                                        \
-        }                                                                                                                      \
-    };                                                                                                                         \
-                                                                                                                               \
-    using Name##NativeBehaviorType = Engine::Behavior::NativeBehavior < Name##NativeBehavior, Name##Linkage                              \
-    {                                                                                                                          \
-    }                                                                                                                          \
-    __VA_OPT__(, )                                                                                                             \
-    __VA_ARGS__                                                                                                                \
-        > ;                                                                                                                    \
-                                                                                                                               \
-    struct Name##NativeBehavior : Name##NativeBehaviorType {                                                                   \
-        using Name##NativeBehaviorType::Name##NativeBehaviorType;                                                              \
-    };                                                                                                                         \
-                                                                                                                               \
-    static const Name##NativeBehavior Name##Info { #Name };                                                                    \
-                                                                                                                               \
+#define NATIVE_BEHAVIOR(Name, Sender, ...)                                                                                                         \
+    struct Name##NativeBehavior;                                                                                                                   \
+    struct Name##Linkage {                                                                                                                         \
+        template <typename... Args>                                                                                                                \
+        auto operator()(Args &&...args) const                                                                                                      \
+        {                                                                                                                                          \
+            return Sender(std::forward<Args>(args)...);                                                                                            \
+        }                                                                                                                                          \
+    };                                                                                                                                             \
+                                                                                                                                                   \
+    using Name##NativeBehaviorType = Engine::Behavior::NativeBehavior < Name##NativeBehavior, Name##Linkage                                        \
+    {                                                                                                                                              \
+    }                                                                                                                                              \
+    __VA_OPT__(, )                                                                                                                                 \
+    __VA_ARGS__                                                                                                                                    \
+        > ;                                                                                                                                        \
+                                                                                                                                                   \
+    struct Name##NativeBehavior : Name##NativeBehaviorType {                                                                                       \
+        using Name##NativeBehaviorType::Name##NativeBehaviorType;                                                                                  \
+    };                                                                                                                                             \
+                                                                                                                                                   \
+    static const Name##NativeBehavior Name##Info { #Name };                                                                                        \
+                                                                                                                                                   \
     DLL_EXPORT_VARIABLE(, const Engine::Behavior::NativeBehaviorInfo *, Engine::Behavior::, nativeBehaviorInfo, &Name##Info, Name##NativeBehavior) \
-                                                                                                                               \
+                                                                                                                                                   \
     NAMED_UNIQUECOMPONENT(Name, Name##NativeBehavior)

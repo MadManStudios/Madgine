@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../operations.h"
 #include "../helper/typedobjectserialize.h"
+#include "../operations.h"
 
 namespace Engine {
 namespace Serialize {
@@ -19,7 +19,7 @@ namespace Serialize {
         static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &t)
         {
             const char *name = "Item";
-            
+
             if (true) {
                 name = beginExtendedTypedWrite(out, comparator_traits<Cmp>::to_cmp_type(t));
             } else {
@@ -43,7 +43,7 @@ namespace Serialize {
 
                 STREAM_PROPAGATE_ERROR(read(in, key, "key"));
             }
-            
+
             it = std::ranges::find(physical(op), key, &comparator_traits<Cmp>::to_cmp_type);
             if (it == physical(op).end())
                 return STREAM_UNKNOWN_ERROR(in) << "Missing item of name '" << key << "' in controlled container";
@@ -65,13 +65,13 @@ namespace Serialize {
 
             if constexpr (std::same_as<decltype(staticTypeResolve), std::nullptr_t>) {
                 using T = std::remove_reference_t<std::ranges::range_reference_t<C>>;
-                return Serialize::visitStream<T>(in, nullptr, visitor, depth);            
+                return Serialize::visitStream<T>(in, nullptr, visitor, depth);
             } else {
                 const SerializeTable *type = nullptr;
                 STREAM_PROPAGATE_ERROR(staticTypeResolve(type, key));
                 assert(type);
-                return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {}, depth);                
-            }            
+                return visitor.visit(PrimitiveHolder<DataTag> { type }, in, nullptr, {}, depth);
+            }
         }
 
         template <typename Op>

@@ -9,16 +9,15 @@ namespace Serialize {
     struct META_EXPORT Operations<ValueType> {
         static StreamResult read(CallerHierarchyFormattedSerializeStream in, ValueType &v, const char *name);
         static void write(CallerHierarchyFormattedSerializeStream out, const ValueType &v, const char *name);
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);     
-    };   
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
+    };
 
-    
     template <>
     struct META_EXPORT Operations<ExtendedValueTypeDesc> {
         static StreamResult read(CallerHierarchyFormattedSerializeStream in, ExtendedValueTypeDesc &t, const char *name);
         static void write(CallerHierarchyFormattedSerializeStream out, const ExtendedValueTypeDesc &t, const char *name);
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
-    };   
+    };
 
     inline StreamResult tag_invoke(apply_map_t, ExtendedValueTypeDesc &, CallerHierarchyFormattedSerializeStream, bool)
     {
@@ -27,8 +26,8 @@ namespace Serialize {
 
     template <typename... Configs>
     inline void tag_invoke(set_active_t<Configs...>, ExtendedValueTypeDesc &, bool, bool, const CallerHierarchyBasePtr &)
-    {        
+    {
     }
-    
+
 }
 }

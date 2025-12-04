@@ -17,7 +17,8 @@ namespace Threading {
             }
 
             virtual void onLockAcquired() = 0;
-            void cancel() {
+            void cancel()
+            {
                 throw 0;
             }
 
@@ -59,7 +60,8 @@ namespace Threading {
                 }
             }
 
-            bool stop() {
+            bool stop()
+            {
                 throw 0;
                 return false;
             }
@@ -147,7 +149,7 @@ namespace Threading {
         std::string mName;
 
         Execution::ConnectionQueue<LockState> mReadQueue;
-        Execution::ConnectionQueue<LockState> mWriteQueue;        
+        Execution::ConnectionQueue<LockState> mWriteQueue;
     };
 
 }

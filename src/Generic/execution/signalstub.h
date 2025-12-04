@@ -2,8 +2,8 @@
 
 #include "algorithm.h"
 #include "connection.h"
-#include "virtualsender.h"
 #include "container/stack.h"
+#include "virtualsender.h"
 
 namespace Engine {
 namespace Execution {

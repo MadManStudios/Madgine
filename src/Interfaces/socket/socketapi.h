@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Generic/timeout.h"
-
 #include "Generic/genericresult.h"
+#include "Generic/timeout.h"
 
 namespace Engine {
 
@@ -43,7 +42,8 @@ struct INTERFACES_EXPORT Socket {
 
     int in_available() const;
 
-    Socket& operator=(Socket&& other) {
+    Socket &operator=(Socket &&other)
+    {
         assert(!(*this));
         mSocket = std::exchange(other.mSocket, Invalid_Socket);
         return *this;

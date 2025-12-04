@@ -11,9 +11,8 @@ template <typename C, typename = void>
 struct container_traits;
 
 template <typename C>
-requires requires { typename underlying_container<C>::type; }
-struct container_traits<C> : container_traits<typename underlying_container<C>::type>
-{
+    requires requires { typename underlying_container<C>::type; }
+struct container_traits<C> : container_traits<typename underlying_container<C>::type> {
     typedef C container;
 };
 
@@ -31,7 +30,7 @@ struct container_traits<std::list<T>> {
     typedef iterator position_handle;
     typedef const_iterator const_position_handle;
 
-    //static_assert(sizeof(position_handle) <= sizeof(void *));
+    // static_assert(sizeof(position_handle) <= sizeof(void *));
 
     static position_handle toPositionHandle(std::list<T> &c, const iterator &it)
     {
@@ -164,7 +163,7 @@ struct container_traits<std::set<T, Cmp>> {
     typedef iterator position_handle;
     typedef const_iterator const_position_handle;
 
-    //static_assert(sizeof(position_handle) <= sizeof(void *));
+    // static_assert(sizeof(position_handle) <= sizeof(void *));
 
     static position_handle toPositionHandle(std::set<T, Cmp> &c, const iterator &it)
     {
@@ -223,7 +222,7 @@ struct container_traits<std::map<K, T, Cmp>> {
     typedef iterator position_handle;
     typedef const_iterator const_position_handle;
 
-    //static_assert(sizeof(position_handle) <= sizeof(void *));
+    // static_assert(sizeof(position_handle) <= sizeof(void *));
 
     static position_handle toPositionHandle(std::map<K, T, Cmp> &c, const iterator &it)
     {
@@ -282,7 +281,7 @@ struct container_traits<std::array<T, Size>> {
     typedef IndexType<uint32_t> const_handle;
     typedef IndexType<uint32_t> position_handle;
     typedef IndexType<uint32_t> const_position_handle;
-    
+
     static_assert(sizeof(position_handle) <= sizeof(void *));
 
     /* template <typename C>

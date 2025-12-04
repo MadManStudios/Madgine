@@ -1,14 +1,15 @@
 #pragma once
 
-#include "Meta/serialize/serializemanager.h"
 #include "Interfaces/filesystem/path.h"
+
+#include "Meta/serialize/serializemanager.h"
 
 namespace Engine {
 namespace Filesystem {
-    struct MADGINE_FILESYSTEM_SERIALIZE_EXPORT FileManager : Serialize::SerializeManager {    
+    struct MADGINE_FILESYSTEM_SERIALIZE_EXPORT FileManager : Serialize::SerializeManager {
         FileManager(const std::string &name);
         FileManager(const FileManager &) = delete;
-        FileManager(FileManager &&) noexcept = default; 
+        FileManager(FileManager &&) noexcept = default;
         virtual ~FileManager() = default;
 
         void operator=(const FileManager &) = delete;

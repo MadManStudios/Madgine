@@ -2,9 +2,9 @@
 
 #include "Interfaces/filesystem/path.h"
 
-#include "nodebase.h"
-
 #include "Madgine/behavior/named.h"
+
+#include "nodebase.h"
 
 namespace Engine {
 namespace Behavior {

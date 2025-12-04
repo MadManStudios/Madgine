@@ -2,14 +2,13 @@
 
 #include "directx12pixelshaderloader.h"
 
+#include "Interfaces/filesystem/fsapi.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "directx12shadercodegen.h"
-
-#include "Interfaces/filesystem/fsapi.h"
-
 #include "directx12rendercontext.h"
+#include "directx12shadercodegen.h"
 
 RESOURCELOADER(Engine::Render::DirectX12PixelShaderLoader);
 
@@ -25,10 +24,10 @@ namespace Render {
         : ResourceLoader({ ".ps_hlsl12" }, { .mIconName = "ShaderIcon.png" })
     {
         HRESULT hr = DxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&mLibrary));
-        //if(FAILED(hr)) Handle error...
+        // if(FAILED(hr)) Handle error...
 
         hr = DxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&mCompiler));
-        //if(FAILED(hr)) Handle error
+        // if(FAILED(hr)) Handle error
     }
 
     Threading::TaskFuture<bool> DirectX12PixelShaderLoader::Ptr::create(const CodeGen::ShaderFile &file, DirectX12PixelShaderLoader *loader)
@@ -121,7 +120,7 @@ namespace Render {
         result->GetOutput(DXC_OUT_PDB, IID_PPV_ARGS(&pDebugData), &pDebugDataPath);
 
         std::ofstream pdbFile { BINARY_DIR "/bin/" + StringUtil::fromWString(pDebugDataPath->GetStringPointer()), std::ios::out | std::ios::binary };
-        pdbFile.write(static_cast<const char*>(pDebugData->GetBufferPointer()), pDebugData->GetBufferSize());
+        pdbFile.write(static_cast<const char *>(pDebugData->GetBufferPointer()), pDebugData->GetBufferSize());
 
         return true;
     }

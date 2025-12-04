@@ -2,13 +2,11 @@
 
 #include "networkmanager.h"
 
-#include "networkbuffer.h"
-
+#include "Meta/serialize/streams/buffered_streambuf.h"
 #include "Meta/serialize/streams/formattedmessagestream.h"
-
 #include "Meta/serialize/streams/syncstreamdata.h"
 
-#include "Meta/serialize/streams/buffered_streambuf.h"
+#include "networkbuffer.h"
 
 namespace Engine {
 namespace Network {
@@ -71,7 +69,7 @@ namespace Network {
             return;
         }
 
-        setSlaveStreamImpl(receiver, format, std::make_unique<Engine::Serialize::buffered_streambuf>(std::make_unique<NetworkBuffer>(std::move(socket))), timeout);        
+        setSlaveStreamImpl(receiver, format, std::make_unique<Engine::Serialize::buffered_streambuf>(std::make_unique<NetworkBuffer>(std::move(socket))), timeout);
     }
 
     void NetworkManager::close()
@@ -111,7 +109,7 @@ namespace Network {
         SocketAPIResult error = sock.accept(mServerSocket, timeout);
         if (!sock)
             return recordSocketError(error);
-        
+
         return addMasterStream(format, std::make_unique<Engine::Serialize::buffered_streambuf>(std::make_unique<NetworkBuffer>(std::move(sock))));
     }
 

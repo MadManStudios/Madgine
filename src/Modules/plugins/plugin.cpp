@@ -4,10 +4,8 @@
 
 #    include "Generic/projections.h"
 
-#    include "plugin.h"
-
 #    include "binaryinfo.h"
-
+#    include "plugin.h"
 #    include "pluginmanager.h"
 #    include "pluginsection.h"
 
@@ -38,9 +36,9 @@ namespace Plugins {
 
     Plugin::~Plugin()
     {
-        //assert(!mModule);
-        //assert(mDependencies.empty());
-        //assert(mDependents.empty());
+        // assert(!mModule);
+        // assert(mDependencies.empty());
+        // assert(mDependents.empty());
     }
 
     void Plugin::ensureModule(PluginManager &manager)

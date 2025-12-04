@@ -17,7 +17,6 @@ namespace Behavior {
 
 }
 
-
 namespace Serialize {
 
     StreamResult Operations<Behavior::ParameterTuple>::read(Serialize::CallerHierarchyFormattedSerializeStream in, Behavior::ParameterTuple &tuple, const char *name)

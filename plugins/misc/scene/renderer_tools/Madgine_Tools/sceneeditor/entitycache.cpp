@@ -2,9 +2,8 @@
 
 #include "entitycache.h"
 
-#include "Madgine/scene/scenemanager.h"
-
 #include "Madgine/scene/entity/components/transform.h"
+#include "Madgine/scene/scenemanager.h"
 
 #include "sceneeditor.h"
 

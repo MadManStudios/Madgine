@@ -2,21 +2,17 @@
 
 #if ANDROID
 
-#    include "windowapi.h"
-#    include "windowsettings.h"
-
 #    include <android/input.h>
+#    include <android/native_activity.h>
 #    include <android/native_window.h>
 
 #    include "Generic/systemvariable.h"
 
-#    include "../input/inputevents.h"
-
-#    include "../log/logmethods.h"
-
 #    include "../helpers/android_jni.h"
-
-#    include <android/native_activity.h>
+#    include "../input/inputevents.h"
+#    include "../log/logmethods.h"
+#    include "windowapi.h"
+#    include "windowsettings.h"
 
 namespace Engine {
 namespace Window {
@@ -59,7 +55,7 @@ namespace Window {
                 mTouchStartPosition = position;
                 mTouchStartTimestamp = AMotionEvent_getEventTime(event);
                 mPendingTouch = true;
-                onEvent(Input::PointerMoveEvent{ position, position, position - mLastKnownMousePos });
+                onEvent(Input::PointerMoveEvent { position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_UP: {
                 int64_t nanoseconds = AMotionEvent_getEventTime(event) - mTouchStartTimestamp;
@@ -68,14 +64,14 @@ namespace Window {
                     onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, button });
                     mPendingTouch = false;
                 }
-                onEvent(Input::PointerReleaseEvent{ position, position, button });
+                onEvent(Input::PointerReleaseEvent { position, position, button });
             } break;
             case AMOTION_EVENT_ACTION_MOVE:
                 if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
-                    onEvent(Input::PointerPressEvent{ mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
+                    onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
                     mPendingTouch = false;
                 }
-                onEvent(Input::PointerMoveEvent{ position, position, position - mLastKnownMousePos });
+                onEvent(Input::PointerMoveEvent { position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_CANCEL:
                 LOG("Motion Cancel");
@@ -230,16 +226,15 @@ namespace Window {
             if (JNI::callMemberFunction2(jevent, "isPrintingKey")) {
                 text = (char)JNI::callMemberFunction3(jevent, "getUnicodeChar", AKeyEvent_getMetaState(event));
             }
-             
 
             bool handled = true;
 
             switch (action) {
             case AKEY_EVENT_ACTION_DOWN:
-                onEvent(Input::KeyPressEvent{ key, text });
+                onEvent(Input::KeyPressEvent { key, text });
                 break;
             case AKEY_EVENT_ACTION_UP:
-                onEvent(Input::KeyReleaseEvent{ key, text });
+                onEvent(Input::KeyReleaseEvent { key, text });
                 break;
             case AKEY_EVENT_ACTION_MULTIPLE:
                 LOG("Multiple Keys");
@@ -463,7 +458,7 @@ namespace Window {
 
     void OSWindow::destroy()
     {
-        //sWindow.reset();
+        // sWindow.reset();
         throw 0;
     }
 

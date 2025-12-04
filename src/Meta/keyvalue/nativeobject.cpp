@@ -1,6 +1,7 @@
 #include "../metalib.h"
 
 #include "nativeobject.h"
+
 #include "objectinstance.h"
 #include "valuetype.h"
 
@@ -23,7 +24,7 @@ struct NativeObjectInstance : ObjectInstance {
 
     virtual void setValue(std::string_view name, const ValueType &value) override
     {
-        mData[std::string{name}] = value;
+        mData[std::string { name }] = value;
     }
 
 private:

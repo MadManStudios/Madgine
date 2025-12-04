@@ -1,12 +1,11 @@
-#include <gtest/gtest.h>
-
 #include "Madgine/serialize/network/networklib.h"
 
 #include "Madgine/serialize/network/networkmanager.h"
 
-#include "Meta/serialize/formats.h"
-
 #include <future>
+#include <gtest/gtest.h>
+
+#include "Meta/serialize/formats.h"
 
 #include "../../../test/Meta/serialize/testManager.h"
 
@@ -30,7 +29,7 @@ TEST(NetworkManager, Connect)
     EXPECT_EQ(future.get(), NetworkManagerResult::SUCCESS);
     server.sendMessages();
     client.receiveMessages(-1, 1s);
-    ASSERT_TRUE(receiver.mFinished);    
+    ASSERT_TRUE(receiver.mFinished);
     ASSERT_TRUE(receiver.mHasValue);
 #endif
 }

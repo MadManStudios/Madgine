@@ -1,17 +1,17 @@
 #include "../behaviorlib.h"
 
-#include "behavior.h"
-#include "behaviorcollector.h"
 #include "behaviorhandle.h"
 
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
+#include "behavior.h"
+#include "behaviorcollector.h"
 #include "parametertuple.h"
 
 METATABLE_BEGIN(Engine::Behavior::BehaviorHandle)
-CONSTRUCTOR()
+    CONSTRUCTOR()
 // MEMBER(mName)
 METATABLE_END(Engine::Behavior::BehaviorHandle)
 

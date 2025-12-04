@@ -3,26 +3,23 @@
 #include "camera.h"
 
 #include "Meta/math/matrix4.h"
+#include "Meta/math/pi.h"
+#include "Meta/math/ray3.h"
+#include "Meta/math/transformation.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Meta/math/pi.h"
-
-#include "Meta/math/ray3.h"
-
-#include "Meta/math/transformation.h"
-
 METATABLE_BEGIN(Engine::Render::Camera)
-CONSTRUCTOR()
-MEMBER(mName)
-MEMBER(mPosition)
-MEMBER(mOrientation)
-MEMBER(mN)
-MEMBER(mF)
-MEMBER(mFOV)
-MEMBER(mOrthographic)
-FUNCTION(getViewMatrix)
-FUNCTION(getViewProjectionMatrix, aspectRatio)
+    CONSTRUCTOR()
+    MEMBER(mName)
+    MEMBER(mPosition)
+    MEMBER(mOrientation)
+    MEMBER(mN)
+    MEMBER(mF)
+    MEMBER(mFOV)
+    MEMBER(mOrthographic)
+    FUNCTION(getViewMatrix)
+    FUNCTION(getViewProjectionMatrix, aspectRatio)
 METATABLE_END(Engine::Render::Camera)
 
 namespace Engine {

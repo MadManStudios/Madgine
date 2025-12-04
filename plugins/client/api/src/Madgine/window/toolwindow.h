@@ -3,7 +3,7 @@
 namespace Engine {
 namespace Window {
 
-    struct MADGINE_CLIENT_EXPORT ToolWindow {    
+    struct MADGINE_CLIENT_EXPORT ToolWindow {
         ToolWindow(MainWindow &parent, const WindowSettings &settings);
         virtual ~ToolWindow();
 
@@ -19,7 +19,6 @@ namespace Window {
         MainWindow &mParent;
         OSWindow *mOsWindow = nullptr;
         std::unique_ptr<Render::RenderTarget> mRenderWindow;
-
     };
 
 }

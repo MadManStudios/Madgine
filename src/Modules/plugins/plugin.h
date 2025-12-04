@@ -2,9 +2,8 @@
 
 #if ENABLE_PLUGINS
 
-#    include "Interfaces/filesystem/path.h"
-
 #    include "Interfaces/dl/dlapi.h"
+#    include "Interfaces/filesystem/path.h"
 
 namespace Engine {
 namespace Plugins {
@@ -27,7 +26,6 @@ namespace Plugins {
 
         PluginSection *section() const;
 
-        
         void ensureModule(PluginManager &manager);
 
         void setLoaded(bool loaded, Ini::IniFile &file);

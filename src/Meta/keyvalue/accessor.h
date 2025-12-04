@@ -4,7 +4,6 @@
 
 namespace Engine {
 
-
 struct Accessor {
     const char *mName = nullptr;
     bool (*mCheck)(const Accessor *self, const ScopePtr &) = nullptr;

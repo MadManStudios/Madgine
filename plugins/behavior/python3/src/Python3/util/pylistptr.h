@@ -5,7 +5,7 @@
 namespace Engine {
 namespace Behavior {
     namespace Python3 {
-    
+
         struct MADGINE_PYTHON3_EXPORT PyListPtr : PyObjectPtr {
             PyListPtr() = default;
             PyListPtr(PyObject *list);
@@ -15,10 +15,10 @@ namespace Behavior {
 
             static PyListPtr fromBorrowed(PyObject *object);
 
-            using value_type = PyObject*;
+            using value_type = PyObject *;
 
             struct MADGINE_PYTHON3_EXPORT iterator {
-                using value_type = PyObject*;
+                using value_type = PyObject *;
                 using difference_type = ptrdiff_t;
 
                 iterator() = default;
@@ -39,7 +39,7 @@ namespace Behavior {
 
             size_t size() const;
         };
-    
+
     }
 }
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../manuallifetime.h"
-
 #include "emplace.h"
 
 namespace Engine {

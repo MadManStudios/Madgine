@@ -1,12 +1,13 @@
 #include "../widgetslib.h"
 
 #include "textbox.h"
-#include "widgetmanager.h"
+
+#include "Interfaces/input/inputevents.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Interfaces/input/inputevents.h"
+#include "widgetmanager.h"
 
 #define STB_TEXTEDIT_KEYTYPE uint16_t
 
@@ -44,14 +45,14 @@
 NAMED_UNIQUECOMPONENT(Textbox, Engine::Widgets::Textbox);
 
 METATABLE_BEGIN_BASE(Engine::Widgets::Textbox, Engine::Widgets::WidgetBase)
-MEMBER(mText)
-NAMED_MEMBER(TextData, mTextRenderData)
-NAMED_MEMBER(Image, mImageRenderData)
+    MEMBER(mText)
+    NAMED_MEMBER(TextData, mTextRenderData)
+    NAMED_MEMBER(Image, mImageRenderData)
 METATABLE_END(Engine::Widgets::Textbox)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::Textbox, Engine::Widgets::WidgetBase)
-FIELD(mTextRenderData)
-FIELD(mImageRenderData)
+    FIELD(mTextRenderData)
+    FIELD(mImageRenderData)
 SERIALIZETABLE_END(Engine::Widgets::Textbox)
 
 namespace Engine {

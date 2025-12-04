@@ -36,7 +36,6 @@ namespace Render {
     template <typename T>
     struct DataFuture {
 
-
         RenderFuture mFuture;
         uintptr_t mOffset;
     };

@@ -1,25 +1,20 @@
+#include "Madgine/imageloaderlib.h"
 #include "vulkantoolslib.h"
 
 #include "vulkanrendercontexttool.h"
+
+#include "Madgine/imageloader/imagedata.h"
+#include "Madgine/imageloader/imageloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
-
+#include "Madgine_Tools/renderer/imroot.h"
+#include "Vulkan/vulkanrendercontext.h"
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
-
-#include "Madgine/imageloader/imageloader.h"
-#include "Madgine/imageloaderlib.h"
-
-#include "Madgine/render/fonts/fontloader.h"
-
-#include "Madgine/imageloader/imagedata.h"
-
-#include "Vulkan/vulkanrendercontext.h"
-
-#include "Madgine_Tools/renderer/imroot.h"
 
 UNIQUECOMPONENT(Engine::Tools::VulkanRenderContextTool);
 
@@ -66,9 +61,9 @@ namespace Tools {
         if (ImGui::CollapsingHeader("Vulkan")) {
             ImGui::Text("Bytes/frame:");
             ImGui::SameLine();
-            ImGui::Bytes(mTempBytesPerFrame.average());      
-            float ratio = mTempBytesPerFrame.average() / Render::VulkanMappedHeapAllocator::goodSize;            
-            ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "RingBuffer usage: %.1f%%", 100.0f * ratio);            
+            ImGui::Bytes(mTempBytesPerFrame.average());
+            float ratio = mTempBytesPerFrame.average() / Render::VulkanMappedHeapAllocator::goodSize;
+            ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "RingBuffer usage: %.1f%%", 100.0f * ratio);
             ImGui::PlotHistory(mTempBytesPerFrameTrend, "Temp Bytes per Frame", ImGui::sByteUnits);
         }
     }

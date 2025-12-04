@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Interfaces/log/loglistener.h"
+
 #include "../toolbase.h"
 #include "../toolscollector.h"
-
-#include "Interfaces/log/loglistener.h"
 
 namespace Engine {
 namespace Tools {

@@ -3,7 +3,7 @@
 #include "Meta/math/vector3.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         extern PyTypeObject PyVector3Type;

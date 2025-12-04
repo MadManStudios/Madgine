@@ -3,13 +3,12 @@
 #include "geometry3.h"
 
 #include "boundingbox.h"
+#include "common.h"
+#include "frustum.h"
 #include "plane.h"
 #include "ray3.h"
 #include "sphere.h"
 #include "vector3.h"
-#include "frustum.h"
-
-#include "common.h"
 
 namespace Engine {
 
@@ -23,7 +22,7 @@ float Distance(const Ray3 &ray, const Vector3 &point, float *rayClosestParameter
 UpTo<float, 2> Intersect(const Ray3 &ray, const Sphere &sphere)
 {
     Vector3 oc = ray.mPoint - sphere.mCenter;
-    float a = 1.0f/* ray.mDir.dotProduct(ray.mDir) */;
+    float a = 1.0f /* ray.mDir.dotProduct(ray.mDir) */;
     float b = 2.0f * oc.dotProduct(ray.mDir);
     float c = oc.dotProduct(oc) - sphere.mRadius * sphere.mRadius;
     float discriminant = b * b - 4 * a * c;
@@ -88,7 +87,7 @@ UpTo<float, 2> Intersect(const Ray3 &ray, const Frustum &frustum)
 
 UpTo<float, 2> Intersect(const Ray3 &ray, const Plane &minX, const Plane &maxX, const Plane &minY, const Plane &maxY, const Plane &minZ, const Plane &maxZ)
 {
-    
+
     float tMin = std::numeric_limits<float>::lowest();
     float tMax = std::numeric_limits<float>::max();
 

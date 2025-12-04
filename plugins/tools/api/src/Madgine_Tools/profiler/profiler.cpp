@@ -2,18 +2,17 @@
 
 #include "profiler.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imgui_internal.h"
-#include "imgui/imguiaddons.h"
-
+#include "Modules/debug/profiler/processstats.h"
 #include "Modules/debug/profiler/profiler.h"
 #include "Modules/debug/profiler/profilerthread.h"
-#include "Modules/debug/profiler/processstats.h"
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::Profiler);
 
@@ -59,13 +58,13 @@ namespace Tools {
     void Profiler::render()
     {
         if (beginToolPanel("Profiler", &mVisible, ImGuiDir_Down)) {
-            
-             if (ImGui::BeginTable("cols", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable)) {
+
+            if (ImGui::BeginTable("cols", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable)) {
 
                 ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_NoHide);
                 ImGui::TableSetupColumn("Total time");
                 ImGui::TableSetupColumn("Rel. Time (parent)");
-                ImGui::TableSetupColumn("Rel. Time (total)");         
+                ImGui::TableSetupColumn("Rel. Time (total)");
 
                 ImGui::TableSetupScrollFreeze(0, 1);
 
@@ -94,4 +93,3 @@ METATABLE_END(Engine::Tools::Profiler)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::Profiler, Engine::Tools::ToolBase)
 SERIALIZETABLE_END(Engine::Tools::Profiler)
-

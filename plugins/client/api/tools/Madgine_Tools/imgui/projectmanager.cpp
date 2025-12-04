@@ -2,50 +2,43 @@
 
 #include "projectmanager.h"
 
+#include "Generic/projections.h"
+
+#include "Interfaces/filesystem/fsapi.h"
+#include "Interfaces/window/windowapi.h"
+
+#include "Modules/uniquecomponent/uniquecomponentcollector.h"
+
+#include "Madgine/resources/resourcemanager.h"
+#include "Madgine/window/layoutloader.h"
+#include "Madgine/window/mainwindow.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "imgui/imgui.h"
-#include "imgui/imguiaddons.h"
-
-#include "Interfaces/filesystem/fsapi.h"
-
-#include "Madgine/resources/resourcemanager.h"
-#include "Modules/uniquecomponent/uniquecomponentcollector.h"
-
-#include "imgui/imgui_internal.h"
-
 #include "Madgine_Tools/imguiicons.h"
-
-#include "Madgine/window/mainwindow.h"
-#include "clientimroot.h"
-
-#include "Meta/serialize/hierarchy/statetransmissionflags.h"
-
-#include "Interfaces/window/windowapi.h"
-
-#include "Generic/projections.h"
-
-#include "Madgine/window/layoutloader.h"
-
 #include "Madgine_Tools/templates/templates.h"
+#include "clientimroot.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "imgui/imguiaddons.h"
 
 METATABLE_BEGIN_BASE(Engine::Tools::ProjectManager, Engine::Tools::ToolBase)
 #ifndef MADGINE_MAINWINDOW_LAYOUT
-PROPERTY(ProjectRoot, projectRootString, setProjectRoot)
-PROPERTY(Layout, layout, setLayout)
+    PROPERTY(ProjectRoot, projectRootString, setProjectRoot)
+    PROPERTY(Layout, layout, setLayout)
 #endif
 METATABLE_END(Engine::Tools::ProjectManager)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::ProjectManager, Engine::Tools::ToolBase)
 #ifndef MADGINE_MAINWINDOW_LAYOUT
-ENCAPSULATED_FIELD(ProjectRoot, projectRoot, setProjectRoot)
-ENCAPSULATED_FIELD(Layout, layout, setLayout)
-FIELD(mShowConfigurations)
-FIELD(mConfigs)
+    ENCAPSULATED_FIELD(ProjectRoot, projectRoot, setProjectRoot)
+    ENCAPSULATED_FIELD(Layout, layout, setLayout)
+    FIELD(mShowConfigurations)
+    FIELD(mConfigs)
 #endif
-FIELD(mShowSettings)
-FIELD(mShowTipsOnStartup)
+    FIELD(mShowSettings)
+    FIELD(mShowTipsOnStartup)
 SERIALIZETABLE_END(Engine::Tools::ProjectManager)
 
 UNIQUECOMPONENT(Engine::Tools::ProjectManager)

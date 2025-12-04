@@ -1,22 +1,19 @@
+#include "Madgine/imageloaderlib.h"
 #include "opengltoolslib.h"
 
 #include "openglrendercontexttool.h"
 
+#include "Generic/bytebuffer.h"
+
+#include "Madgine/imageloader/imagedata.h"
+#include "Madgine/imageloader/imageloader.h"
+#include "Madgine/render/fonts/fontloader.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Generic/bytebuffer.h"
-
 #include "Madgine_Tools/inspector/inspector.h"
-
 #include "imgui/imgui.h"
-
-#include "Madgine/imageloaderlib.h"
-#include "Madgine/imageloader/imageloader.h"
-
-#include "Madgine/render/fonts/fontloader.h"
-
-#include "Madgine/imageloader/imagedata.h"
 
 UNIQUECOMPONENT(Engine::Tools::OpenGLRenderContextTool);
 

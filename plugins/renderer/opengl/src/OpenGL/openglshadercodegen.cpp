@@ -2,9 +2,9 @@
 
 #include "openglshadercodegen.h"
 
-#include "Madgine/codegen/codegen_shader.h"
-
 #include "Meta/math/vector4.h"
+
+#include "Madgine/codegen/codegen_shader.h"
 
 namespace Engine {
 namespace Render {

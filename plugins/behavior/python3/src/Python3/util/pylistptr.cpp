@@ -3,7 +3,7 @@
 #include "pylistptr.h"
 
 namespace Engine {
-namespace Behavior{
+namespace Behavior {
     namespace Python3 {
 
         PyListPtr::PyListPtr(PyObject *dict)
@@ -38,7 +38,6 @@ namespace Behavior{
             return PyList_GetItem(mList, mIndex);
         }
 
-        
         PyListPtr::iterator &PyListPtr::iterator::operator++()
         {
             assert(mList);

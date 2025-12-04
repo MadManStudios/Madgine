@@ -1,11 +1,10 @@
 #pragma once
 
 #include "Generic/callerhierarchy.h"
-#include "serializetable_forward.h"
-
-#include "../streams/streamresult.h"
 
 #include "../primitivetypes.h"
+#include "../streams/streamresult.h"
+#include "serializetable_forward.h"
 
 namespace Engine {
 namespace Serialize {
@@ -16,7 +15,7 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableDataConstPtr(const T *t, std::true_type)
-            : SerializableDataConstPtr(t ? t->customUnitPtr() : SerializableDataConstPtr { static_cast<const void*>(nullptr), &serializeTable<decayed_t<T>>() })
+            : SerializableDataConstPtr(t ? t->customUnitPtr() : SerializableDataConstPtr { static_cast<const void *>(nullptr), &serializeTable<decayed_t<T>>() })
         {
         }
 
@@ -82,7 +81,7 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableDataPtr(T *t, std::true_type)
-            : SerializableDataPtr(t ? SerializableDataPtr { t->customUnitPtr() } : SerializableDataPtr { static_cast<void*>(nullptr), &serializeTable<decayed_t<T>>() })
+            : SerializableDataPtr(t ? SerializableDataPtr { t->customUnitPtr() } : SerializableDataPtr { static_cast<void *>(nullptr), &serializeTable<decayed_t<T>>() })
         {
         }
 

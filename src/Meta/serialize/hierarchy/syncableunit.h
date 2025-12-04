@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../streams/pendingrequest.h"
 #include "Generic/offsetptr.h"
+
+#include "../streams/pendingrequest.h"
 #include "serializableunit.h"
 #include "syncfunction.h"
 
@@ -54,6 +55,7 @@ namespace Serialize {
         friend META_EXPORT FormattedMessageStream &getMasterFunctionRequestResponseTarget(const SyncableUnitBase *unit, ParticipantId answerTarget);
 
         friend META_EXPORT WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id);
+
     protected:
         void writeId(CallerHierarchyFormattedSerializeStream out, const char *name = nullptr) const;
         StreamResult readId(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr);
@@ -217,7 +219,7 @@ namespace Serialize {
             return make_message_sender<R>(
                 [this](auto &receiver, Args &&...args2) {
                     Tuple args { std::forward<Args>(args2)... };
-                    if (this->isMaster()) {                        
+                    if (this->isMaster()) {
                         if constexpr (std::same_as<decltype(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { 1 }))), void>) {
                             TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { sLocalMasterParticipantId })); // TODO: Constant
                             receiver.set_value();
@@ -240,7 +242,7 @@ namespace Serialize {
             Tuple argTuple { std::forward<Args>(args)... };
             if (this->isMaster()) {
                 TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argTuple), { sLocalMasterParticipantId }));
-            } else {                 
+            } else {
                 this->writeFunctionRequest(functionIndex<f>, QUERY, &argTuple);
             }
         }

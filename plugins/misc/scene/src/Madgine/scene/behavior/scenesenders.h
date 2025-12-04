@@ -2,11 +2,11 @@
 
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/binding.h"
+
 #include "Madgine/behavior/named.h"
 
-#include "../scenemanager.h"
-
 #include "../entity/components/transform.h"
+#include "../scenemanager.h"
 
 namespace Engine {
 namespace Scene {
@@ -32,4 +32,3 @@ namespace Scene {
     };
 }
 }
-

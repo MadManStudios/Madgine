@@ -3,17 +3,17 @@
 
 #include "androidlauncher.h"
 
-#include "Madgine/root/root.h"
-
-#include "Madgine/window/mainwindow.h"
-
 #include <android/native_activity.h>
 
 #include "Generic/systemvariable.h"
 
-#include "../launcher.h"
 #include "Interfaces/filesystem/fsapi.h"
 #include "Interfaces/helpers/android_jni.h"
+
+#include "Madgine/root/root.h"
+#include "Madgine/window/mainwindow.h"
+
+#include "../launcher.h"
 
 namespace Engine {
 
@@ -37,7 +37,7 @@ namespace Android {
         activity->callbacks->onDestroy = delegate<&AndroidLauncher::onDestroy>;
 
         Window::setup(activity);
-        
+
         JNI::setVM(activity->vm, activity->env, activity->clazz);
         Threading::WorkGroup::addStaticThreadGuards(JNI::initThread, JNI::finalizeThread);
 
@@ -64,6 +64,6 @@ namespace Android {
         mActivity->instance = nullptr;
         delete this;
     }
-        
+
 }
 }

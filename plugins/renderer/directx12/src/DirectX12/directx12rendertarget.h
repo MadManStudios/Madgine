@@ -3,7 +3,6 @@
 #include "Madgine/render/rendertarget.h"
 
 #include "util/directx12commandlist.h"
-
 #include "util/directx12texture.h"
 
 namespace Engine {

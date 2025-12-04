@@ -885,7 +885,7 @@ namespace Execution {
                 if (count == sizeof...(Is)) {
                     switch (mState) {
                     case OK:
-                        TupleUnpacker::invokeFromTuple(LIFT(this->mRec.set_value, &), Tuple { TupleUnpacker::forEach(std::move(mValues), [](auto &&v)->decltype(auto){return *std::forward<decltype(v)>(v);}) });
+                        TupleUnpacker::invokeFromTuple(LIFT(this->mRec.set_value, &), Tuple { TupleUnpacker::forEach(std::move(mValues), [](auto &&v) -> decltype(auto) { return *std::forward<decltype(v)>(v); }) });
                         break;
                     case ERROR:
                         this->mRec.set_error(std::move(mResult));

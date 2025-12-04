@@ -13,7 +13,7 @@ namespace Ini {
 
     std::string &IniSection::operator[](std::string_view key)
     {
-        return mValues[std::string{ key }];
+        return mValues[std::string { key }];
     }
 
     std::string IniSection::operator[](std::string_view key) const

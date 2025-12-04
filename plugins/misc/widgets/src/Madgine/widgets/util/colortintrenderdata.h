@@ -1,8 +1,8 @@
 #pragma once
 
-#include "renderdata.h"
-
 #include "Meta/math/color4.h"
+
+#include "renderdata.h"
 
 namespace Engine {
 namespace Widgets {
@@ -14,7 +14,6 @@ namespace Widgets {
         Color4 mPressedColor = { 1.3f, 1.3f, 1.3f, 1.0f };
         Color4 mSelectedColor = { 1.1f, 1.1f, 1.1f, 1.0f };
         Color4 mDisabledColor = { 0.4f, 0.4f, 0.4f, 1.0f };
-
     };
 
 }

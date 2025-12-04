@@ -1,33 +1,24 @@
 #include "../widgetstoolslib.h"
 
-#include "widgeteditor.h"
 #include "widgetfile.h"
 
-#include "Madgine_Tools/imgui/clientimroot.h"
-
-#include "Madgine/window/mainwindow.h"
-
-#include "Madgine/render/rendercontext.h"
-
-#include "Madgine/widgets/widgetmanager.h"
-
-#include "Madgine/widgets/util/widgetsrenderdata.h"
-
-#include "Madgine/render/rendertarget.h"
-
-#include "Madgine/widgets/widget.h"
-
-#include "Madgine/serialize/filesystem/filemanager.h"
-
+#include "Meta/math/bounds.h"
+#include "Meta/serialize/container/container_operations.h"
 #include "Meta/serialize/formats.h"
 
-#include "Meta/serialize/container/container_operations.h"
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/serialize/filesystem/filemanager.h"
+#include "Madgine/widgets/util/widgetsrenderdata.h"
+#include "Madgine/widgets/widget.h"
+#include "Madgine/widgets/widgetmanager.h"
+#include "Madgine/window/mainwindow.h"
 
+#include "Madgine_Tools/imgui/clientimroot.h"
 #include "Madgine_Tools/imguiicons.h"
-#include "Meta/math/bounds.h"
-#include "imgui/imguiaddons.h"
-
 #include "Madgine_Tools/inspector/inspector.h"
+#include "imgui/imguiaddons.h"
+#include "widgeteditor.h"
 
 namespace Engine {
 namespace Tools {
@@ -169,7 +160,7 @@ namespace Tools {
                 if (root) {
                     if (ImGui::BeginPopupCompoundContextWindow()) {
                         if (ImGui::BeginMenu(IMGUI_ICON_PLUS " New Widget")) {
-                            for (const auto& [name, index] : Widgets::WidgetRegistry::sComponentsByName()) {
+                            for (const auto &[name, index] : Widgets::WidgetRegistry::sComponentsByName()) {
                                 if (ImGui::MenuItem(name.data())) {
                                     const Widgets::WidgetRegistry::Annotations &annotation = Widgets::WidgetRegistry::get(index);
                                     root->createChildByAnnotation(annotation);

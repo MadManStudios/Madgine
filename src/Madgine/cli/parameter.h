@@ -1,9 +1,8 @@
 #pragma once
 
-#include "parameterbase.h"
-
-
 #include "Interfaces/filesystem/path.h"
+
+#include "parameterbase.h"
 
 namespace Engine {
 
@@ -102,7 +101,7 @@ namespace CLI {
 
     template <>
     struct Parameter<std::string> : ParameterImpl<std::string> {
-        //using ParameterImpl<std::string>::ParameterImpl;
+        // using ParameterImpl<std::string>::ParameterImpl;
         Parameter(std::vector<const char *> options, std::string defaultValue, const char *help)
             : ParameterImpl(std::move(options), std::move(defaultValue), help)
         {

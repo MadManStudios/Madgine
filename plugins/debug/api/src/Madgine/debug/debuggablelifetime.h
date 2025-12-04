@@ -1,12 +1,11 @@
 #pragma once
 
+#include "Generic/execution/lifetime.h"
 #include "Generic/memberoffsetptr.h"
 
-#include "Generic/execution/lifetime.h"
+#include "Meta/keyvalue/scopeptr.h"
 
 #include "debuggablesender.h"
-
-#include "Meta/keyvalue/scopeptr.h"
 
 namespace Engine {
 namespace Debug {
@@ -72,7 +71,8 @@ namespace Debug {
             return mLifetime.bound(ptr, std::forward<T>(t), std::forward<Dtor>(dtor));
         }
 
-        operator Execution::Lifetime<cpos...>& ()& {
+        operator Execution::Lifetime<cpos...> &() &
+        {
             return mLifetime;
         }
 

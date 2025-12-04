@@ -2,9 +2,8 @@
 
 #include "pyexecution.h"
 
-#include "python3lock.h"
-
 #include "../python3debugger.h"
+#include "python3lock.h"
 
 #if PY_MINOR_VERSION < 11
 #    include <frameobject.h>
@@ -14,12 +13,11 @@
 #    include <pyframe.h>
 #endif
 
-#include "pydictptr.h"
-#include "pyobjectutil.h"
-
 #include "Meta/keyvalue/argumentlist.h"
 
 #include "../python3env.h"
+#include "pydictptr.h"
+#include "pyobjectutil.h"
 
 namespace Engine {
 namespace Behavior {

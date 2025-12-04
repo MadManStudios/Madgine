@@ -26,7 +26,7 @@ namespace Scene {
                 mEntity.endLifetime();
             }
 
-            using State = Execution::connect_result_t<std::invoke_result_t<decltype(&Entity::lifetimeSender), Entity&>, Rec>;
+            using State = Execution::connect_result_t<std::invoke_result_t<decltype(&Entity::lifetimeSender), Entity &>, Rec>;
 
             Entity mEntity;
             State mState;

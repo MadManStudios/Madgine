@@ -6,9 +6,9 @@
 #include "Generic/makeowning.h"
 #include "Generic/withresult.h"
 
-#include "../behavior.h"
-
 #include "Madgine/debug/debuggablesender.h"
+
+#include "../behavior.h"
 
 namespace Engine {
 namespace Behavior {

@@ -3,7 +3,7 @@
 namespace Engine {
 namespace Resources {
 
-	struct ImageLoader;
+    struct ImageLoader;
     struct ImageData;
 
 }

@@ -8,11 +8,10 @@ struct Block {
 };
 
 template <typename T>
-concept Allocator = requires(T t)
-{
+concept Allocator = requires(T t) {
     {
         std::remove_reference_t<T>::goodSize
-        } -> std::convertible_to<size_t>;
+    } -> std::convertible_to<size_t>;
 };
 
 struct AllocatorAutoSizeTag;

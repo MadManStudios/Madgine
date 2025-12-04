@@ -1,20 +1,17 @@
 #pragma once
 
-#include "Meta/math/vector2i.h"
-
-#include "rendertextureconfig.h"
-
-#include "Modules/uniquecomponent/uniquecomponent.h"
-
-#include "Modules/threading/taskfuture.h"
-
-#include "Madgine/render/buffer.h"
-
-#include "Madgine/render/resourceblock.h"
-
 #include "Generic/bytebuffer.h"
 
+#include "Meta/math/vector2i.h"
+
+#include "Modules/threading/taskfuture.h"
+#include "Modules/uniquecomponent/uniquecomponent.h"
+
+#include "Madgine/render/buffer.h"
 #include "Madgine/render/future.h"
+#include "Madgine/render/resourceblock.h"
+
+#include "rendertextureconfig.h"
 
 namespace Engine {
 namespace Render {
@@ -46,15 +43,15 @@ namespace Render {
         virtual bool supportsMultisampling() const = 0;
 
         template <typename T>
-        requires (!std::is_array_v<T>)
+            requires(!std::is_array_v<T>)
         GPUBuffer<T> allocateBuffer()
         {
             return static_cast<GPUBuffer<T>>(allocateBufferImpl(sizeof(T)));
         }
 
         template <typename T>
-        requires std::is_unbounded_array_v<T>
-            GPUBuffer<T> allocateBuffer(size_t elementCount)
+            requires std::is_unbounded_array_v<T>
+        GPUBuffer<T> allocateBuffer(size_t elementCount)
         {
             return static_cast<GPUBuffer<T>>(allocateBufferImpl(sizeof(std::remove_extent_t<T>) * elementCount));
         }
@@ -71,7 +68,7 @@ namespace Render {
             return mapBufferImpl(buffer).template cast<T>();
         }
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture*> textures) = 0;
+        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture *> textures) = 0;
         virtual void destroyResourceBlock(UniqueResourceBlock &block) = 0;
 
     protected:

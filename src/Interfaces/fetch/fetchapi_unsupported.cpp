@@ -11,7 +11,7 @@ FetchStateBase::FetchStateBase(std::string url, std::vector<std::string> headers
 }
 
 FetchStateBase::~FetchStateBase()
-{        
+{
 }
 
 void FetchStateBase::start()

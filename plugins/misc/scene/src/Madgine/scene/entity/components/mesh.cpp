@@ -2,22 +2,22 @@
 
 #include "mesh.h"
 
+#include "Meta/math/boundingbox.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
-
-#include "Meta/math/boundingbox.h"
 
 NAMED_UNIQUECOMPONENT(Mesh, Engine::Scene::Entity::Mesh);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Mesh)
-MEMBER(mMesh)
-PROPERTY(Visible, isVisible, setVisible)
-PROPERTY(Material, material, setMaterial)
+    MEMBER(mMesh)
+    PROPERTY(Visible, isVisible, setVisible)
+    PROPERTY(Material, material, setMaterial)
 METATABLE_END(Engine::Scene::Entity::Mesh)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Mesh)
-FIELD(mMesh)
-ENCAPSULATED_FIELD(Material, material, setMaterial)
+    FIELD(mMesh)
+    ENCAPSULATED_FIELD(Material, material, setMaterial)
 SERIALIZETABLE_END(Engine::Scene::Entity::Mesh)
 
 namespace Engine {
