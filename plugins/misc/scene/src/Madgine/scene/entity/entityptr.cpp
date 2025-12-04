@@ -12,6 +12,10 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
+        void EntityPtr::fromEntity(Entity& e) {
+            BindingPtr<Entity&>::operator=(static_cast<BindingPtr<Entity&>&&>(e.pointer()));
+        }
+
         Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &ptr, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
         {
             Scene::Entity::EntityHandle *h = std::exchange(reinterpret_cast<Scene::Entity::EntityHandle *&>(ptr), nullptr);
