@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp44qalrs3.js
+// include: /tmp/tmpka6q77eu.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -208,11 +208,11 @@ Module['FS_createPath']("/", "data", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/CascadiaMono.ttf", "start": 349346, "end": 974238}, {"filename": "/data/FontIcon.png", "start": 974238, "end": 976986}, {"filename": "/data/Gamepad.jpg", "start": 976986, "end": 1085442}, {"filename": "/data/NodeGraph.png", "start": 1085442, "end": 1087688}, {"filename": "/data/OpenSans-Bold.msdf", "start": 1087688, "end": 5299360}, {"filename": "/data/OpenSans-BoldItalic.ttf", "start": 5299360, "end": 5434468}, {"filename": "/data/OpenSans-ExtraBold.ttf", "start": 5434468, "end": 5564648}, {"filename": "/data/OpenSans-ExtraBoldItalic.ttf", "start": 5564648, "end": 5700336}, {"filename": "/data/OpenSans-Italic.ttf", "start": 5700336, "end": 5835716}, {"filename": "/data/OpenSans-Light.ttf", "start": 5835716, "end": 5965472}, {"filename": "/data/OpenSans-LightItalic.ttf", "start": 5965472, "end": 6101140}, {"filename": "/data/OpenSans-Regular.msdf", "start": 6101140, "end": 10312812}, {"filename": "/data/OpenSans-Semibold.ttf", "start": 10312812, "end": 10442528}, {"filename": "/data/OpenSans-SemiboldItalic.ttf", "start": 10442528, "end": 10578040}, {"filename": "/data/Planes.fbx", "start": 10578040, "end": 10612036}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 10612036, "end": 10902869}, {"filename": "/data/ShaderIcon.png", "start": 10902869, "end": 10906048}, {"filename": "/data/blank_white.png", "start": 10906048, "end": 10906167}, {"filename": "/data/bloom_PS.glsl_es", "start": 10906167, "end": 10907043}, {"filename": "/data/bloom_VS.glsl_es", "start": 10907043, "end": 10907349}, {"filename": "/data/blur_PS.glsl_es", "start": 10907349, "end": 10908966}, {"filename": "/data/blur_VS.glsl_es", "start": 10908966, "end": 10909272}, {"filename": "/data/default.atl", "start": 10909272, "end": 10909357}, {"filename": "/data/default.layout", "start": 10909357, "end": 10910681}, {"filename": "/data/default_tex.png", "start": 10910681, "end": 10910886}, {"filename": "/data/grid.png", "start": 10910886, "end": 10911038}, {"filename": "/data/grid_PS.glsl_es", "start": 10911038, "end": 10912306}, {"filename": "/data/grid_VS.glsl_es", "start": 10912306, "end": 10912881}, {"filename": "/data/icons.ttf", "start": 10912881, "end": 10916345}, {"filename": "/data/im3d_PS.glsl_es", "start": 10916345, "end": 10917484}, {"filename": "/data/im3d_VS.glsl_es", "start": 10917484, "end": 10918563}, {"filename": "/data/imgui_PS.glsl_es", "start": 10918563, "end": 10919000}, {"filename": "/data/imgui_VS.glsl_es", "start": 10919000, "end": 10919618}, {"filename": "/data/mage.fbx", "start": 10919618, "end": 11022414}, {"filename": "/data/mage_animated.fbx", "start": 11022414, "end": 13773834}, {"filename": "/data/mage_attack.fbx", "start": 13773834, "end": 14020826}, {"filename": "/data/pointshadow_PS.glsl_es", "start": 14020826, "end": 14021113}, {"filename": "/data/pointshadow_VS.glsl_es", "start": 14021113, "end": 14022335}, {"filename": "/data/scene_PS.glsl_es", "start": 14022335, "end": 14030095}, {"filename": "/data/scene_VS.glsl_es", "start": 14030095, "end": 14033206}, {"filename": "/data/skeleton.png", "start": 14033206, "end": 14034106}, {"filename": "/data/widgets_PS.glsl_es", "start": 14034106, "end": 14035328}, {"filename": "/data/widgets_VS.glsl_es", "start": 14035328, "end": 14036233}], "remote_package_size": 14036233});
+    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/CascadiaMono.ttf", "start": 349346, "end": 974238}, {"filename": "/data/FontIcon.png", "start": 974238, "end": 976986}, {"filename": "/data/Gamepad.jpg", "start": 976986, "end": 1085442}, {"filename": "/data/NodeGraph.png", "start": 1085442, "end": 1087688}, {"filename": "/data/OpenSans-Bold.msdf", "start": 1087688, "end": 5299360}, {"filename": "/data/OpenSans-BoldItalic.ttf", "start": 5299360, "end": 5434468}, {"filename": "/data/OpenSans-ExtraBold.ttf", "start": 5434468, "end": 5564648}, {"filename": "/data/OpenSans-ExtraBoldItalic.ttf", "start": 5564648, "end": 5700336}, {"filename": "/data/OpenSans-Italic.ttf", "start": 5700336, "end": 5835716}, {"filename": "/data/OpenSans-Light.ttf", "start": 5835716, "end": 5965472}, {"filename": "/data/OpenSans-LightItalic.ttf", "start": 5965472, "end": 6101140}, {"filename": "/data/OpenSans-Regular.msdf", "start": 6101140, "end": 10312812}, {"filename": "/data/OpenSans-Semibold.ttf", "start": 10312812, "end": 10442528}, {"filename": "/data/OpenSans-SemiboldItalic.ttf", "start": 10442528, "end": 10578040}, {"filename": "/data/Planes.fbx", "start": 10578040, "end": 10612036}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 10612036, "end": 10902869}, {"filename": "/data/ShaderIcon.png", "start": 10902869, "end": 10906048}, {"filename": "/data/blank_white.png", "start": 10906048, "end": 10906167}, {"filename": "/data/bloom_PS.glsl_es", "start": 10906167, "end": 10907043}, {"filename": "/data/bloom_VS.glsl_es", "start": 10907043, "end": 10907349}, {"filename": "/data/blur_PS.glsl_es", "start": 10907349, "end": 10908966}, {"filename": "/data/blur_VS.glsl_es", "start": 10908966, "end": 10909272}, {"filename": "/data/default.atl", "start": 10909272, "end": 10909357}, {"filename": "/data/default.layout", "start": 10909357, "end": 10910681}, {"filename": "/data/default_tex.png", "start": 10910681, "end": 10910886}, {"filename": "/data/gameover.widget", "start": 10910886, "end": 10912516}, {"filename": "/data/grid.png", "start": 10912516, "end": 10912668}, {"filename": "/data/grid_PS.glsl_es", "start": 10912668, "end": 10913936}, {"filename": "/data/grid_VS.glsl_es", "start": 10913936, "end": 10914511}, {"filename": "/data/icons.ttf", "start": 10914511, "end": 10917975}, {"filename": "/data/im3d_PS.glsl_es", "start": 10917975, "end": 10919114}, {"filename": "/data/im3d_VS.glsl_es", "start": 10919114, "end": 10920193}, {"filename": "/data/imgui_PS.glsl_es", "start": 10920193, "end": 10920630}, {"filename": "/data/imgui_VS.glsl_es", "start": 10920630, "end": 10921248}, {"filename": "/data/ingame.widget", "start": 10921248, "end": 10923526}, {"filename": "/data/mage.fbx", "start": 10923526, "end": 11026322}, {"filename": "/data/mage_animated.fbx", "start": 11026322, "end": 13777742}, {"filename": "/data/mage_attack.fbx", "start": 13777742, "end": 14024734}, {"filename": "/data/mainmenu.widget", "start": 14024734, "end": 14026824}, {"filename": "/data/pointshadow_PS.glsl_es", "start": 14026824, "end": 14027111}, {"filename": "/data/pointshadow_VS.glsl_es", "start": 14027111, "end": 14028333}, {"filename": "/data/scene_PS.glsl_es", "start": 14028333, "end": 14036093}, {"filename": "/data/scene_VS.glsl_es", "start": 14036093, "end": 14039204}, {"filename": "/data/skeleton.png", "start": 14039204, "end": 14040104}, {"filename": "/data/widgets_PS.glsl_es", "start": 14040104, "end": 14041326}, {"filename": "/data/widgets_VS.glsl_es", "start": 14041326, "end": 14042231}], "remote_package_size": 14042231});
 
   })();
 
-// end include: /tmp/tmp44qalrs3.js
+// end include: /tmp/tmpka6q77eu.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
@@ -383,7 +383,7 @@ window.sentryOnLoad = function () {
     Sentry.init(
         {
             sendDefaultPii: !0,
-            release: "Madgine@0.5.0",
+            release: "Madgine@0.5.1",
             integrations: [wasmIntegration()],
         })
 }
@@ -8359,22 +8359,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1340952: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1340998: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1341050: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1341166: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1341237: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1341308: () => { document.body.style.cursor = 'default'; },  
- 1341348: () => { document.body.style.cursor = 'text'; },  
- 1341385: () => { document.body.style.cursor = 'move'; },  
- 1341422: () => { document.body.style.cursor = 'ns-resize'; },  
- 1341464: () => { document.body.style.cursor = 'ew-resize'; },  
- 1341506: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1341550: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1341594: () => { document.body.style.cursor = 'grab'; },  
- 1341631: () => { document.body.style.cursor = 'not-allowed'; },  
- 1341675: () => { Module.input.focus(); },  
- 1341697: () => { Module.canvas.focus(); }
+  1341016: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 1341062: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 1341114: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 1341230: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 1341301: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 1341372: () => { document.body.style.cursor = 'default'; },  
+ 1341412: () => { document.body.style.cursor = 'text'; },  
+ 1341449: () => { document.body.style.cursor = 'move'; },  
+ 1341486: () => { document.body.style.cursor = 'ns-resize'; },  
+ 1341528: () => { document.body.style.cursor = 'ew-resize'; },  
+ 1341570: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 1341614: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 1341658: () => { document.body.style.cursor = 'grab'; },  
+ 1341695: () => { document.body.style.cursor = 'not-allowed'; },  
+ 1341739: () => { Module.input.focus(); },  
+ 1341761: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
