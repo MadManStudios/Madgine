@@ -350,26 +350,24 @@ jobs:
         sentry-cli debug-files upload -o madmanstudios -p madgine ${{ github.workspace }}/debug
       
     - name: Install NSIS
-      if: matrix.platform == 'windows' && github.ref_name == 'master'
+      if: matrix.platform == 'windows'
       uses: repolevedavaj/install-nsis@v1.0.1
       with:
         nsis-version: '3.10'
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
-      if: github.ref_name == 'master' || matrix.platform == 'emscripten'
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: cpack
 
-    - name: Release
-      uses: softprops/action-gh-release@v2
-      if: github.ref_name == 'master'
+    - name: Pushing Artifacts
+      uses: actions/upload-artifact@v4
       with:
-        name: ${{ steps.version.outputs.version_tag }}
-        tag_name: ${{ steps.version.outputs.version_tag }}
-        files: ${{ github.workspace }}/build/packages/*
-      
+        name: config-${{ matrix.platform }}
+        path: ${{ github.workspace }}/build/packages/*
+        overwrite: true
+
     - uses: actions/checkout@v4
       if: matrix.platform == 'emscripten' && github.event_name == 'push'
       with:
@@ -384,7 +382,7 @@ jobs:
         mkdir ${{ github.ref_name }} 
         unzip ${{ github.workspace }}/build/packages/*.zip -d ${{ github.ref_name }} 
 
-    - name: "Updating gh-pages branch"
+    - name: Updating gh-pages branch
       if: matrix.platform == 'emscripten' && github.event_name == 'push'
       run: |
         cd gh-pages
@@ -394,4 +392,66 @@ jobs:
         git commit -m "Updating emscripten binaries for branch ${{ github.ref_name }} "
         git push
 
-          
+  release:
+    
+    needs: [build-configs]
+
+    runs-on: ubuntu-latest
+
+    if: github.ref_name == 'master'
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - uses: paulhatch/semantic-version@v5.4.0
+      id: version
+      with:
+        # The prefix to use to identify tags
+        tag_prefix: "v"
+        # A string which, if present in a git commit, indicates that a change represents a
+        # major (breaking) change, supports regular expressions wrapped with '/'
+        major_pattern: "(MAJOR)"
+        # A string which indicates the flags used by the `major_pattern` regular expression. Supported flags: idgs
+        major_regexp_flags: ""
+        # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+        minor_pattern: "(MINOR)"
+        # A string which indicates the flags used by the `minor_pattern` regular expression. Supported flags: idgs
+        minor_regexp_flags: ""
+        # A string to determine the format of the version output
+        version_format: ${{ fromJSON(needs.configuration.outputs.versions)[github.event_name] }}
+        # Optional path to check for changes. If any changes are detected in the path the
+        # 'changed' output will true. Enter multiple paths separated by spaces.
+        change_path: ""
+        # Named version, will be used as suffix for name version tag
+        namespace: ""
+        # If this is set to true, *every* commit will be treated as a new version.
+        bump_each_commit: false
+        # If bump_each_commit is also set to true, setting this value will cause the version to increment only if the pattern specified is matched.
+        bump_each_commit_patch_pattern: ""
+        # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
+        search_commit_body: false
+        # The output method used to generate list of users, 'csv' or 'json'.
+        user_format_type: "json"
+        # Prevents pre-v1.0.0 version from automatically incrementing the major version.
+        # If enabled, when the major version is 0, major releases will be treated as minor and minor as patch. Note that the version_type output is unchanged.
+        enable_prerelease_mode: false
+        # If enabled, diagnostic information will be added to the action output.
+        debug: false
+        # If true, the branch will be used to select the maximum version.
+        version_from_branch: false
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v5
+      with:
+        path: ${{ github.workspace }}/packages
+        pattern: config-*
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: ${{ steps.version.outputs.version_tag }}
+        tag_name: ${{ steps.version.outputs.version_tag }}
+        files: ${{ github.workspace }}/packages/*
