@@ -7,7 +7,6 @@
 #include "Modules/threading/workgroupstorage.h"
 
 #include "Madgine/render/texture.h"
-#include "Madgine/render/texturedescriptor.h"
 #include "Madgine/resources/virtualresourceloader.h"
 
 namespace Engine {

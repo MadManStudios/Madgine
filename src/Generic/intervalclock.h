@@ -3,7 +3,6 @@
 #include "execution/binding.h"
 #include "execution/concepts.h"
 #include "execution/statedescriptor.h"
-#include "execution/stop_callback.h"
 #include "genericresult.h"
 
 namespace Engine {

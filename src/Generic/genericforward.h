@@ -8,12 +8,6 @@ namespace Engine {
 template <typename C, typename Base>
 struct container_api_impl;
 
-template <typename C>
-struct GenerationContainer;
-
-template <typename T>
-using GenerationVector = GenerationContainer<std::vector<T>>;
-
 template <typename...>
 struct type_pack;
 

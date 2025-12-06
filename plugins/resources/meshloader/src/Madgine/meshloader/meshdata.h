@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/bytebuffer.h"
-#include "Generic/offsetptr.h"
 
 #include "Meta/math/boundingbox.h"
 
