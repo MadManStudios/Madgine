@@ -363,7 +363,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: config-${{ matrix.platform }}
-        path: ${{ github.workspace }}/build/packages/*
+        path: |
+            ${{ github.workspace }}/build/packages/*
+            !${{ github.workspace }}/build/packages/*/
         overwrite: true
 
     - uses: actions/checkout@v4
