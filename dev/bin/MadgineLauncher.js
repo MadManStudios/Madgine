@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpjobmeduj.js
+// include: /tmp/tmpn82ye5qo.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -212,7 +212,7 @@ Module['FS_createPath']("/", "data", true, true);
 
   })();
 
-// end include: /tmp/tmpjobmeduj.js
+// end include: /tmp/tmpn82ye5qo.js
 // include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
 
 /**
@@ -383,7 +383,7 @@ window.sentryOnLoad = function () {
     Sentry.init(
         {
             sendDefaultPii: !0,
-            release: "Madgine@0.5.1",
+            release: "Madgine@0.5.2",
             integrations: [wasmIntegration()],
         })
 }
