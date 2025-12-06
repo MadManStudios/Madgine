@@ -3,9 +3,15 @@
 #define buffer uniform
 #define std430 std140
 
+struct GridPerFrame
+{
+    mat4 vp;
+    vec3 cameraPos;
+};
+
 layout(std140) uniform buffer1
 {
-    layout(row_major) mat4 vp;
+    layout(row_major) GridPerFrame frame;
 } PerFrame;
 
 layout(location = 0) in vec3 in_var_POSITION0;
@@ -16,9 +22,9 @@ mat4 spvWorkaroundRowMajor(mat4 wrap) { return wrap; }
 
 void main()
 {
-    vec4 _27 = vec4(in_var_POSITION0, in_var_POSITION1);
-    gl_Position = _27 * spvWorkaroundRowMajor(PerFrame.vp);
-    out_var_POSITION = _27;
+    vec4 _28 = vec4(in_var_POSITION0, in_var_POSITION1);
+    gl_Position = _28 * spvWorkaroundRowMajor(PerFrame.frame.vp);
+    out_var_POSITION = _28;
 }
 
 
