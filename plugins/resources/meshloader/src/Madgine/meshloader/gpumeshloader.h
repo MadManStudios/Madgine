@@ -5,7 +5,6 @@
 #include "Madgine/resources/virtualresourceloader.h"
 
 #include "gpumeshdata.h"
-#include "meshdata.h"
 
 namespace Engine {
 namespace Render {
@@ -21,10 +20,7 @@ namespace Render {
             {
             }
 
-            Threading::TaskFuture<bool> create(MeshData mesh)
-            {
-                return Base::Ptr::create([mesh { std::move(mesh) }](Render::GPUMeshLoader *loader, Render::GPUMeshData &data) mutable { return loader->generate(data, std::move(mesh)); });
-            }
+            Threading::TaskFuture<bool> create(MeshData mesh);
         };
 
         GPUMeshLoader();

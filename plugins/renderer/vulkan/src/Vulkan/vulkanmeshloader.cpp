@@ -2,6 +2,8 @@
 
 #include "vulkanmeshloader.h"
 
+#include "Madgine/meshloader/meshdata.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 

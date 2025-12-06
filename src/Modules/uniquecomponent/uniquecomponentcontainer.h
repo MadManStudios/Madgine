@@ -8,7 +8,7 @@
 namespace Engine {
 namespace UniqueComponent {
 
-    template <typename C, typename Registry, typename Base = typename Registry::Base>
+    template <typename C, typename Registry, typename Base>
     struct Container : C {
 
         template <typename... Args>

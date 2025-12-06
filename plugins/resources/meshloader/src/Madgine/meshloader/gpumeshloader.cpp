@@ -25,6 +25,11 @@ METATABLE_END(Engine::Render::GPUMeshData::Material)
 namespace Engine {
 namespace Render {
 
+    Threading::TaskFuture<bool> GPUMeshLoader::Ptr::create(MeshData mesh)
+    {
+        return Base::Ptr::create([mesh { std::move(mesh) }](Render::GPUMeshLoader *loader, Render::GPUMeshData &data) mutable { return loader->generate(data, std::move(mesh)); });
+    }
+
     GPUMeshLoader::GPUMeshLoader()
         : VirtualResourceLoaderBase({ ".fbx", ".dae", ".stl" }, { .mIconName = "grid.png" })
     {
@@ -73,3 +78,5 @@ namespace Render {
 
 }
 }
+
+

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Generic/container/mutable_set.h"
 #include "Generic/execution/virtualsender.h"
 #include "Generic/functor.h"
 #include "Generic/genericresult.h"

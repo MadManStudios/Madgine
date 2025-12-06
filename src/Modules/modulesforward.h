@@ -14,7 +14,7 @@ namespace UniqueComponent {
     struct NamedComponent;
     template <typename Registry>
     struct Selector;
-    template <typename C, typename Registry, typename _Base>
+    template <typename C, typename Registry, typename Base>
     struct Container;
     template <typename T, typename _Collector, typename Base>
     struct VirtualComponentBase;
