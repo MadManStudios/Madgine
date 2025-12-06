@@ -160,7 +160,7 @@ jobs:
       run: ctest --build-config RelWithDebInfo --output-on-failure
 
     - name: Install NSIS
-      if: matrix.platform == 'windows'
+      if: matrix.platform == 'windows-latest'
       uses: negrutiu/nsis-install@v2
 
     - name: Package
