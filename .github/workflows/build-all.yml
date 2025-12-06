@@ -390,7 +390,7 @@ jobs:
 
   release:
     
-    needs: [build-configs, build-plugins]
+    needs: [configuration, build-configs, build-plugins]
 
     runs-on: ubuntu-latest
 
