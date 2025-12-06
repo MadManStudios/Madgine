@@ -160,25 +160,21 @@ jobs:
       run: ctest --build-config RelWithDebInfo --output-on-failure
 
     - name: Install NSIS
-      if: matrix.platform == 'windows-latest' && github.ref_name == 'master'
-      uses: repolevedavaj/install-nsis@v1.0.1
-      with:
-        nsis-version: '3.10'
+      if: matrix.platform == 'windows'
+      uses: negrutiu/nsis-install@v2
 
     - name: Package
       working-directory: ${{ github.workspace }}/build
-      if: github.ref_name == 'master'
-      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: cpack
 
-    - name: Release
-      uses: softprops/action-gh-release@v2
-      if: github.ref_name == 'master'
+    - name: Pushing Artifacts
+      uses: actions/upload-artifact@v4
       with:
-        name: ${{ steps.version.outputs.version_tag }}
-        tag_name: ${{ steps.version.outputs.version_tag }}
-        files: ${{ github.workspace }}/build/packages/*
+        name: release-${{ matrix.platform }}
+        path: |
+            ${{ github.workspace }}/build/packages/*
+            !${{ github.workspace }}/build/packages/*/
+        overwrite: true
 
     - name: Pushing Artifacts
       uses: actions/upload-artifact@v4
@@ -362,7 +358,7 @@ jobs:
     - name: Pushing Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: config-${{ matrix.platform }}
+        name: release-${{ matrix.platform }}
         path: |
             ${{ github.workspace }}/build/packages/*
             !${{ github.workspace }}/build/packages/*/
@@ -394,7 +390,7 @@ jobs:
 
   release:
     
-    needs: [build-configs]
+    needs: [build-configs, build-plugins]
 
     runs-on: ubuntu-latest
 
@@ -447,7 +443,7 @@ jobs:
       uses: actions/download-artifact@v5
       with:
         path: ${{ github.workspace }}/packages
-        pattern: config-*
+        pattern: release-*
 
     - name: Release
       uses: softprops/action-gh-release@v2
