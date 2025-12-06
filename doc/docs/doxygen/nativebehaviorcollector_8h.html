@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.1</span>
    </div>
   </td>
  </tr>
@@ -344,41 +344,41 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>Name##NativeBehavior;                                                                                               \</div>
-<div class="line">    <span class="keyword">struct </span>Name##Linkage {                                                                                                     \</div>
-<div class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;                                                                                            \</div>
-<div class="line">        <span class="keyword">auto</span> operator()(Args &amp;&amp;...args) <span class="keyword">const</span>                                                                                  \</div>
-<div class="line">        {                                                                                                                      \</div>
-<div class="line">            <span class="keywordflow">return</span> Sender(std::forward&lt;Args&gt;(args)...);                                                                        \</div>
-<div class="line">        }                                                                                                                      \</div>
-<div class="line">    };                                                                                                                         \</div>
-<div class="line">                                                                                                                               \</div>
-<div class="line">    <span class="keyword">using </span>Name##NativeBehaviorType = <a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a> &lt; Name##NativeBehavior, Name##Linkage                              \</div>
-<div class="line">    {                                                                                                                          \</div>
-<div class="line">    }                                                                                                                          \</div>
-<div class="line">    __VA_OPT__(, )                                                                                                             \</div>
-<div class="line">    __VA_ARGS__                                                                                                                \</div>
-<div class="line">        &gt; ;                                                                                                                    \</div>
-<div class="line">                                                                                                                               \</div>
-<div class="line">    <span class="keyword">struct </span>Name##NativeBehavior : Name##NativeBehaviorType {                                                                   \</div>
-<div class="line">        <span class="keyword">using </span>Name##NativeBehaviorType::Name##NativeBehaviorType;                                                              \</div>
-<div class="line">    };                                                                                                                         \</div>
-<div class="line">                                                                                                                               \</div>
-<div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> Name##NativeBehavior Name##Info { #Name };                                                                    \</div>
-<div class="line">                                                                                                                               \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>Name##NativeBehavior;                                                                                                                   \</div>
+<div class="line">    <span class="keyword">struct </span>Name##Linkage {                                                                                                                         \</div>
+<div class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;                                                                                                                \</div>
+<div class="line">        <span class="keyword">auto</span> operator()(Args &amp;&amp;...args) <span class="keyword">const</span>                                                                                                      \</div>
+<div class="line">        {                                                                                                                                          \</div>
+<div class="line">            <span class="keywordflow">return</span> Sender(std::forward&lt;Args&gt;(args)...);                                                                                            \</div>
+<div class="line">        }                                                                                                                                          \</div>
+<div class="line">    };                                                                                                                                             \</div>
+<div class="line">                                                                                                                                                   \</div>
+<div class="line">    <span class="keyword">using </span>Name##NativeBehaviorType = <a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a> &lt; Name##NativeBehavior, Name##Linkage                                        \</div>
+<div class="line">    {                                                                                                                                              \</div>
+<div class="line">    }                                                                                                                                              \</div>
+<div class="line">    __VA_OPT__(, )                                                                                                                                 \</div>
+<div class="line">    __VA_ARGS__                                                                                                                                    \</div>
+<div class="line">        &gt; ;                                                                                                                                        \</div>
+<div class="line">                                                                                                                                                   \</div>
+<div class="line">    <span class="keyword">struct </span>Name##NativeBehavior : Name##NativeBehaviorType {                                                                                       \</div>
+<div class="line">        <span class="keyword">using </span>Name##NativeBehaviorType::Name##NativeBehaviorType;                                                                                  \</div>
+<div class="line">    };                                                                                                                                             \</div>
+<div class="line">                                                                                                                                                   \</div>
+<div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> Name##NativeBehavior Name##Info { #Name };                                                                                        \</div>
+<div class="line">                                                                                                                                                   \</div>
 <div class="line">    DLL_EXPORT_VARIABLE(, <span class="keyword">const</span> <a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_native_behavior_info.html">Engine::Behavior::NativeBehaviorInfo</a> *, <a class="code hl_namespace" href="namespace_engine_1_1_behavior.html">Engine::Behavior</a>::, nativeBehaviorInfo, &amp;Name##Info, Name##NativeBehavior) \</div>
-<div class="line">                                                                                                                               \</div>
+<div class="line">                                                                                                                                                   \</div>
 <div class="line">    NAMED_UNIQUECOMPONENT(Name, Name##NativeBehavior)</div>
-<div class="ttc" id="anamespace_engine_1_1_behavior_html"><div class="ttname"><a href="namespace_engine_1_1_behavior.html">Engine::Behavior</a></div><div class="ttdef"><b>Definition:</b> awaitablebinding.h:14</div></div>
-<div class="ttc" id="astruct_engine_1_1_behavior_1_1_native_behavior_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a></div><div class="ttdef"><b>Definition:</b> nativebehaviorcollector.h:78</div></div>
-<div class="ttc" id="astruct_engine_1_1_behavior_1_1_native_behavior_info_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_native_behavior_info.html">Engine::Behavior::NativeBehaviorInfo</a></div><div class="ttdef"><b>Definition:</b> nativebehaviorcollector.h:12</div></div>
+<div class="ttc" id="anamespace_engine_1_1_behavior_html"><div class="ttname"><a href="namespace_engine_1_1_behavior.html">Engine::Behavior</a></div><div class="ttdef"><b>Definition:</b> awaitablebinding.h:6</div></div>
+<div class="ttc" id="astruct_engine_1_1_behavior_1_1_native_behavior_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a></div><div class="ttdef"><b>Definition:</b> nativebehaviorcollector.h:76</div></div>
+<div class="ttc" id="astruct_engine_1_1_behavior_1_1_native_behavior_info_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_native_behavior_info.html">Engine::Behavior::NativeBehaviorInfo</a></div><div class="ttdef"><b>Definition:</b> nativebehaviorcollector.h:10</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 3 2025 20:54:58 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Dec 6 2025 18:24:24 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.1</span>
    </div>
   </td>
  </tr>
@@ -286,7 +286,7 @@ Macros</h2></td></tr>
 <tr class="separator:adede1694c7c2883b6c441404acf4406f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac164499997db7cd6313436d6a33c492d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#ac164499997db7cd6313436d6a33c492d">SERIALIZETABLE_BEGIN_IMPL_EX</a>(Idx,  T,  Base, ...)</td></tr>
 <tr class="separator:ac164499997db7cd6313436d6a33c492d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22446a6e00792ce7a6c79adf7766b7f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(T)&#160;&#160;&#160;    <a class="el" href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a>(, T)</td></tr>
+<tr class="memitem:a22446a6e00792ce7a6c79adf7766b7f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>(T)</td></tr>
 <tr class="separator:a22446a6e00792ce7a6c79adf7766b7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c77e34af79ce62f77d0b1037734c125"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a>(Idx,  T)</td></tr>
 <tr class="separator:a0c77e34af79ce62f77d0b1037734c125"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -709,10 +709,10 @@ Functions</h2></td></tr>
 <div class="line">        }                                                                                                             \</div>
 <div class="line">    }                                                                                                                 \</div>
 <div class="line">    DLL_EXPORT_VARIABLE2(<span class="keyword">constexpr</span>, const ::Engine::Serialize::SerializeTable, ::, serializeTable, <a class="code hl_define" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>({ #<a class="code hl_enumvalue" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002">T</a>, ::Engine::type_holder&lt;T&gt;, ::Serialize_##T::baseType, ::Serialize_##T::readState, ::Serialize_##T::fields.data(), ::Serialize_##T::functions.data(), <a class="code hl_concept" href="conceptstd_1_1derived__from.html">std::derived_from&lt;T, ::Engine::Serialize::TopLevelUnitBase&gt;</a> }), T);</div>
-<div class="ttc" id="aconceptstd_1_1derived__from_html"><div class="ttname"><a href="conceptstd_1_1derived__from.html">std::derived_from</a></div><div class="ttdef"><b>Definition:</b> concepts.h:15</div></div>
+<div class="ttc" id="aconceptstd_1_1derived__from_html"><div class="ttname"><a href="conceptstd_1_1derived__from.html">std::derived_from</a></div><div class="ttdef"><b>Definition:</b> concepts.h:13</div></div>
 <div class="ttc" id="alinestruct_8h_html_a4ae633e4399b0687c9bdf030cbf5b2a2"><div class="ttname"><a href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a></div><div class="ttdeci">#define GET_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:31</div></div>
 <div class="ttc" id="amacros_8h_html_afa8624400132dca5f52f93deec70706b"><div class="ttname"><a href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a></div><div class="ttdeci">#define SINGLE_ARG(...)</div><div class="ttdef"><b>Definition:</b> macros.h:13</div></div>
-<div class="ttc" id="aserializetable__impl_8h_html_ad3279570e995d9467abf41e4f7c89f3d"><div class="ttname"><a href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_ENTRY_EX(Idx, Ser)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:336</div></div>
+<div class="ttc" id="aserializetable__impl_8h_html_ad3279570e995d9467abf41e4f7c89f3d"><div class="ttname"><a href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_ENTRY_EX(Idx, Ser)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:331</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -727,11 +727,14 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">T</td><td>)</td>
-          <td>&#160;&#160;&#160;    <a class="el" href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a>(, T)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a>     \</div>
+<div class="line">    (, T)</div>
+<div class="ttc" id="aserializetable__impl_8h_html_a0c77e34af79ce62f77d0b1037734c125"><div class="ttname"><a href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:378</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a56bbb1943f91a802e311b647c0e2dd57" name="a56bbb1943f91a802e311b647c0e2dd57"></a>
@@ -931,7 +934,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 3 2025 20:55:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Dec 6 2025 18:24:26 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

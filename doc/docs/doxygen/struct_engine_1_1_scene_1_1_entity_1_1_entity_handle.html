@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.1</span>
    </div>
   </td>
  </tr>
@@ -258,11 +258,14 @@ Inheritance diagram for Engine::Scene::Entity::EntityHandle:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a29f7458e9fd8ebd0f2789cbee92d8f71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html#a29f7458e9fd8ebd0f2789cbee92d8f71">EntityHandle</a> (<a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a> &amp;container, const std::string &amp;name, std::function&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity</a> &amp;)&gt; init={})</td></tr>
 <tr class="separator:a29f7458e9fd8ebd0f2789cbee92d8f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae72fc911bfc1da27c894bce38e9a1f69"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a2dd7a33cf8e20c3d2416a6675c450c2e">EntityPtr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html#ae72fc911bfc1da27c894bce38e9a1f69">ptr</a> () const</td></tr>
+<tr class="memitem:ae72fc911bfc1da27c894bce38e9a1f69"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html#ae72fc911bfc1da27c894bce38e9a1f69">ptr</a> () const</td></tr>
 <tr class="separator:ae72fc911bfc1da27c894bce38e9a1f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
+<tr class="memitem:a47f72a6ee05e849e5e1ba4b3bb237f58"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
+<tr class="memitem:a47f72a6ee05e849e5e1ba4b3bb237f58"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html#a47f72a6ee05e849e5e1ba4b3bb237f58">Serialize::Operations</a></td></tr>
+<tr class="separator:a47f72a6ee05e849e5e1ba4b3bb237f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6de447d1b10c1c05344576909e341af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html#ae6de447d1b10c1c05344576909e341af">SyncableEntityComponentBase</a></td></tr>
 <tr class="separator:ae6de447d1b10c1c05344576909e341af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -343,7 +346,7 @@ requires <a class="el" href="conceptstd_1_1constructible__from.html">std::constr
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a2dd7a33cf8e20c3d2416a6675c450c2e">EntityPtr</a> &amp; Engine::Scene::Entity::EntityHandle::ptr </td>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> &amp; Engine::Scene::Entity::EntityHandle::ptr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -376,6 +379,30 @@ requires <a class="el" href="conceptstd_1_1constructible__from.html">std::constr
 
 </div>
 </div>
+<a id="a47f72a6ee05e849e5e1ba4b3bb237f58" name="a47f72a6ee05e849e5e1ba4b3bb237f58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47f72a6ee05e849e5e1ba4b3bb237f58">&#9670;&#160;</a></span>Serialize::Operations</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Configs&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_serialize_1_1_operations.html">Serialize::Operations</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/misc/scene/src/Madgine/scene/entity/<a class="el" href="entityhandle_8h.html">entityhandle.h</a></li>
 <li>plugins/misc/scene/src/Madgine/scene/entity/<a class="el" href="entityhandle_8cpp.html">entityhandle.cpp</a></li>
@@ -383,7 +410,7 @@ requires <a class="el" href="conceptstd_1_1constructible__from.html">std::constr
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 3 2025 20:55:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Dec 6 2025 18:24:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.1</span>
    </div>
   </td>
  </tr>
@@ -382,10 +382,9 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Arg&gt;                  \</div>
-<div class="line">    <span class="keyword">concept </span>has_operator_##Name = <span class="keyword">requires</span>(T t, Arg arg) \</div>
-<div class="line">    {                                                    \</div>
-<div class="line">        t Operator arg;                                  \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Arg&gt;                    \</div>
+<div class="line">    <span class="keyword">concept </span>has_operator_##Name = <span class="keyword">requires</span>(T t, Arg arg) { \</div>
+<div class="line">        t Operator arg;                                    \</div>
 <div class="line">    };</div>
 </div><!-- fragment -->
 </div>
@@ -405,10 +404,9 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;                  \</div>
-<div class="line">    <span class="keyword">concept </span>has_typename_##Name = <span class="keyword">requires</span> \</div>
-<div class="line">    {                                      \</div>
-<div class="line">        <span class="keyword">typename</span> T::Name;                  \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;                    \</div>
+<div class="line">    <span class="keyword">concept </span>has_typename_##Name = <span class="keyword">requires</span> { \</div>
+<div class="line">        <span class="keyword">typename</span> T::Name;                    \</div>
 <div class="line">    };</div>
 </div><!-- fragment -->
 </div>
@@ -416,7 +414,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 3 2025 20:54:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Dec 6 2025 18:24:25 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.1</span>
    </div>
   </td>
  </tr>
@@ -322,14 +322,14 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>Name##Node : <a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html">Engine::Behavior::NodeGraph::SenderNode</a>&lt;Name##Node, Config, __VA_ARGS__&gt; {  \</div>
 <div class="line">        <span class="keyword">using </span><a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html">Engine::Behavior::NodeGraph::SenderNode</a>&lt;Name##Node, Config, __VA_ARGS__&gt;::SenderNode; \</div>
-<div class="line">    };                                                                                    \</div>
-<div class="line">                                                                                          \</div>
-<div class="line">    NAMED_UNIQUECOMPONENT(Name, Name##Node)                                               \</div>
-<div class="line">                                                                                          \</div>
+<div class="line">    };                                                                                              \</div>
+<div class="line">                                                                                                    \</div>
+<div class="line">    NAMED_UNIQUECOMPONENT(Name, Name##Node)                                                         \</div>
+<div class="line">                                                                                                    \</div>
 <div class="line">    METATABLE_BEGIN_BASE(Name##Node, <a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">Engine::Behavior::NodeGraph::NodeBase</a>)                         \</div>
-<div class="line">    SERIALIZETABLE_INHERIT_BEGIN(Name##Node, <a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">Engine::Behavior::NodeGraph::NodeBase</a>)</div>
-<div class="ttc" id="astruct_engine_1_1_behavior_1_1_node_graph_1_1_node_base_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">Engine::Behavior::NodeGraph::NodeBase</a></div><div class="ttdef"><b>Definition:</b> nodebase.h:17</div></div>
-<div class="ttc" id="astruct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html">Engine::Behavior::NodeGraph::SenderNode</a></div><div class="ttdef"><b>Definition:</b> sendernode.h:68</div></div>
+<div class="line">        SERIALIZETABLE_INHERIT_BEGIN(Name##Node, <a class="code hl_struct" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">Engine::Behavior::NodeGraph::NodeBase</a>)</div>
+<div class="ttc" id="astruct_engine_1_1_behavior_1_1_node_graph_1_1_node_base_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">Engine::Behavior::NodeGraph::NodeBase</a></div><div class="ttdef"><b>Definition:</b> nodebase.h:15</div></div>
+<div class="ttc" id="astruct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node_html"><div class="ttname"><a href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html">Engine::Behavior::NodeGraph::SenderNode</a></div><div class="ttdef"><b>Definition:</b> sendernode.h:67</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -348,9 +348,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#a1cfb1b61ff9edb4cd5f72411e1f9d595">METATABLE_END</a>(Name##Node) \</div>
-<div class="line">    SERIALIZETABLE_END(Name##Node)</div>
-<div class="ttc" id="ametatable__impl_8h_html_a1cfb1b61ff9edb4cd5f72411e1f9d595"><div class="ttname"><a href="metatable__impl_8h.html#a1cfb1b61ff9edb4cd5f72411e1f9d595">METATABLE_END</a></div><div class="ttdeci">#define METATABLE_END(T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:217</div></div>
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#a1cfb1b61ff9edb4cd5f72411e1f9d595">METATABLE_END</a>             \</div>
+<div class="line">    (Name##Node)              \</div>
+<div class="line">    <a class="code hl_define" href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a>        \</div>
+<div class="line">    (Name##Node)</div>
+<div class="ttc" id="ametatable__impl_8h_html_a1cfb1b61ff9edb4cd5f72411e1f9d595"><div class="ttname"><a href="metatable__impl_8h.html#a1cfb1b61ff9edb4cd5f72411e1f9d595">METATABLE_END</a></div><div class="ttdeci">#define METATABLE_END(T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:219</div></div>
+<div class="ttc" id="aserializetable__impl_8h_html_a22446a6e00792ce7a6c79adf7766b7f3"><div class="ttname"><a href="serializetable__impl_8h.html#a22446a6e00792ce7a6c79adf7766b7f3">SERIALIZETABLE_END</a></div><div class="ttdeci">#define SERIALIZETABLE_END(T)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:396</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -437,14 +440,14 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#ad08e2ce39e34ee19adefa6e0eebeaec2">PROPERTY</a>(Name, getArguments&lt;Index&gt;, setArguments&lt;Index&gt;) \</div>
 <div class="line">    ENCAPSULATED_FIELD(Name, getArguments&lt;Index&gt;, setArguments&lt;Index&gt;)</div>
-<div class="ttc" id="ametatable__impl_8h_html_ad08e2ce39e34ee19adefa6e0eebeaec2"><div class="ttname"><a href="metatable__impl_8h.html#ad08e2ce39e34ee19adefa6e0eebeaec2">PROPERTY</a></div><div class="ttdeci">#define PROPERTY(Name, Getter, Setter)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:267</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_ad08e2ce39e34ee19adefa6e0eebeaec2"><div class="ttname"><a href="metatable__impl_8h.html#ad08e2ce39e34ee19adefa6e0eebeaec2">PROPERTY</a></div><div class="ttdeci">#define PROPERTY(Name, Getter, Setter)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:271</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 3 2025 20:54:58 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Dec 6 2025 18:24:24 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

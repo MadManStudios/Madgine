@@ -12,57 +12,57 @@
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="218.5,-151 115.5,-151 115.5,-110 218.5,-110 218.5,-151"/>
-<text text-anchor="start" x="123.5" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/server/api</text>
-<text text-anchor="start" x="123.5" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Madgine/server</text>
-<text text-anchor="middle" x="167" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">/serverinstance.h</text>
+<polygon fill="#999999" stroke="#666666" points="174.5,-151 71.5,-151 71.5,-110 174.5,-110 174.5,-151"/>
+<text text-anchor="start" x="79.5" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/server/api</text>
+<text text-anchor="start" x="79.5" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Madgine/server</text>
+<text text-anchor="middle" x="123" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">/serverinstance.h</text>
 </a>
 </g>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="workgrouphandle_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="180,-74 0,-74 0,-55 180,-55 180,-74"/>
-<text text-anchor="middle" x="90" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Modules/threading/workgrouphandle.h</text>
+<g id="a_node2"><a xlink:href="closure_8h.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="92,-74 0,-74 0,-55 92,-55 92,-74"/>
+<text text-anchor="middle" x="46" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Generic/closure.h</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="#63b8ff" d="M143.06,-109.6C132.11,-100.5 119.31,-89.86 109.03,-81.32"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="111.51,-78.83 101.59,-75.13 107.04,-84.21 111.51,-78.83"/>
-</g>
-<!-- Node4 -->
-<g id="node4" class="node">
-<title>Node4</title>
-<g id="a_node4"><a xlink:href="closure_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="290,-74 198,-74 198,-55 290,-55 290,-74"/>
-<text text-anchor="middle" x="244" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Generic/closure.h</text>
-</a>
-</g>
-</g>
-<!-- Node1&#45;&gt;Node4 -->
-<g id="edge3" class="edge">
-<title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M190.94,-109.6C201.89,-100.5 214.69,-89.86 224.97,-81.32"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="226.96,-84.21 232.41,-75.13 222.49,-78.83 226.96,-84.21"/>
+<path fill="none" stroke="#63b8ff" d="M99.06,-109.6C88.11,-100.5 75.31,-89.86 65.03,-81.32"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="67.51,-78.83 57.59,-75.13 63.04,-84.21 67.51,-78.83"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="workgroup_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="124.5,-19 55.5,-19 55.5,0 124.5,0 124.5,-19"/>
-<text text-anchor="middle" x="90" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">workgroup.h</text>
+<g id="a_node3"><a xlink:href="workgrouphandle_8h.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="290,-74 110,-74 110,-55 290,-55 290,-74"/>
+<text text-anchor="middle" x="200" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Modules/threading/workgrouphandle.h</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node3 -->
+<!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M90,-54.75C90,-48.27 90,-39.16 90,-30.9"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="93.5,-30.96 90,-20.96 86.5,-30.96 93.5,-30.96"/>
+<title>Node1&#45;&gt;Node3</title>
+<path fill="none" stroke="#63b8ff" d="M146.94,-109.6C157.89,-100.5 170.69,-89.86 180.97,-81.32"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="182.96,-84.21 188.41,-75.13 178.49,-78.83 182.96,-84.21"/>
+</g>
+<!-- Node4 -->
+<g id="node4" class="node">
+<title>Node4</title>
+<g id="a_node4"><a xlink:href="workgroup_8h.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="234.5,-19 165.5,-19 165.5,0 234.5,0 234.5,-19"/>
+<text text-anchor="middle" x="200" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">workgroup.h</text>
+</a>
+</g>
+</g>
+<!-- Node3&#45;&gt;Node4 -->
+<g id="edge3" class="edge">
+<title>Node3&#45;&gt;Node4</title>
+<path fill="none" stroke="#63b8ff" d="M200,-54.75C200,-48.27 200,-39.16 200,-30.9"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="203.5,-30.96 200,-20.96 196.5,-30.96 203.5,-30.96"/>
 </g>
 </g>
 </svg>
