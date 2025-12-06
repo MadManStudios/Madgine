@@ -789,6 +789,10 @@ namespace Execution {
     inline constexpr repeat_t repeat;
 
     struct when_all_t {
+        template <typename T>
+        using helper = std::negation<std::is_same<T, void>>;
+        template <typename... Sender>
+        using common_result_type_t = typename type_pack<typename Sender::result_type...>::template filter<helper>::template instantiate<std::common_type_t>;
 
         template <typename Rec, typename Is, typename... Sender>
         struct state;
@@ -830,7 +834,7 @@ namespace Execution {
         struct state<Rec, std::index_sequence<Is...>, Sender...> : base_state<Rec> {
 
             using Tuple = std::tuple<typename Sender::template value_types<std::tuple>...>;
-            using R = std::common_type_t<typename Sender::result_type...>;
+            using R = common_result_type_t<Sender...>;
 
             state(Rec &&rec, Sender &&...senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
@@ -926,7 +930,7 @@ namespace Execution {
         template <typename... Sender>
         struct sender : base_sender {
 
-            using result_type = std::common_type_t<typename Sender::result_type...>;
+            using result_type = common_result_type_t<Sender...>;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<typename Sender::template value_types<std::tuple>...>;
 
