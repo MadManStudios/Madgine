@@ -98,23 +98,6 @@
       "hidden": true
     },
     {
-      "name": "OpenGL-Tools",
-      "inherits": "OpenGL",
-      "displayName": "-OpenGL (Tools)",
-      "description": "Uses OpenGL including Tools config as madgine configuration",
-      "cacheVariables": {
-        "MADGINE_CONFIGURATION": {
-          "type": "FILEPATH",
-          "value": "${sourceDir}/test/configs/OpenGL_tools"
-        },
-        "BUILD_SHARED_LIBS": {
-          "type": "BOOL",
-          "value": "OFF"
-        }
-      },
-      "hidden": true
-    },
-    {
       "name": "Vulkan",
       "displayName": "-Vulkan",
       "description": "Uses Vulkan config as madgine configuration",
@@ -122,22 +105,6 @@
         "MADGINE_CONFIGURATION": {
           "type": "FILEPATH",
           "value": "${sourceDir}/test/configs/Vulkan"
-        },
-        "BUILD_SHARED_LIBS": {
-          "type": "BOOL",
-          "value": "OFF"
-        }
-      },
-      "hidden": true
-    },
-    {
-      "name": "Vulkan-Tools",
-      "displayName": "-Vulkan (Tools)",
-      "description": "Uses Vulkan including Tools config as madgine configuration",
-      "cacheVariables": {
-        "MADGINE_CONFIGURATION": {
-          "type": "FILEPATH",
-          "value": "${sourceDir}/test/configs/Vulkan_tools"
         },
         "BUILD_SHARED_LIBS": {
           "type": "BOOL",
@@ -203,20 +170,12 @@
       "inherits": [ "clang", "debug", "OpenGL" ]
     },
     {
-      "name": "Clang-Debug-OpenGL (Tools)",
-      "inherits": [ "clang", "debug", "OpenGL-Tools" ]
-    },
-    {
       "name": "Clang-Release",
       "inherits": [ "clang", "release" ]
     },
     {
       "name": "Clang-Release-OpenGL",
       "inherits": [ "clang", "release", "OpenGL" ]
-    },
-    {
-      "name": "Clang-Release-OpenGL (Tools)",
-      "inherits": [ "clang", "release", "OpenGL-Tools" ]
     },
     {
       "name": "Clang-RelWithDebInfo",
@@ -227,80 +186,40 @@
       "inherits": [ "clang", "relwithdebinfo", "OpenGL" ]
     },
     {
-      "name": "Clang-RelWithDebInfo-OpenGL (Tools)",
-      "inherits": [ "clang", "relwithdebinfo", "OpenGL-Tools" ]
-    },
-    {
       "name": "Emscripten-Debug-OpenGL",
       "inherits": [ "emscripten", "debug", "OpenGL" ]
-    },
-    {
-      "name": "Emscripten-Debug-OpenGL (Tools)",
-      "inherits": [ "emscripten", "debug", "OpenGL-Tools" ]
     },
     {
       "name": "Emscripten-Release-OpenGL",
       "inherits": [ "emscripten", "release", "OpenGL" ]
     },
     {
-      "name": "Emscripten-Release-OpenGL (Tools)",
-      "inherits": [ "emscripten", "release", "OpenGL-Tools" ]
-    },
-    {
       "name": "Emscripten-RelWithDebInfo-OpenGL",
       "inherits": [ "emscripten", "relwithdebinfo", "OpenGL" ]
-    },
-    {
-      "name": "Emscripten-RelWithDebInfo-OpenGL (Tools)",
-      "inherits": [ "emscripten", "relwithdebinfo", "OpenGL-Tools" ]
     },
     {
       "name": "Android-x64-Debug-Vulkan",
       "inherits": [ "android-x64", "debug", "Vulkan" ]
     },
     {
-      "name": "Android-x64-Debug-Vulkan (Tools)",
-      "inherits": [ "android-x64", "debug", "Vulkan-Tools" ]
-    },
-    {
       "name": "Android-x64-Release-Vulkan",
       "inherits": [ "android-x64", "release", "Vulkan" ]
-    },
-    {
-      "name": "Android-x64-Release-Vulkan (Tools)",
-      "inherits": [ "android-x64", "release", "Vulkan-Tools" ]
     },
     {
       "name": "Android-x64-RelWithDebInfo-Vulkan",
       "inherits": [ "android-x64", "relwithdebinfo", "Vulkan" ]
     },
     {
-      "name": "Android-x64-RelWithDebInfo-Vulkan (Tools)",
-      "inherits": [ "android-x64", "relwithdebinfo", "Vulkan-Tools" ]
-    },
-    {
       "name": "Android-arm64-Debug-Vulkan",
       "inherits": [ "android-arm64", "debug", "Vulkan" ]
-    },
-    {
-      "name": "Android-arm64-Debug-Vulkan (Tools)",
-      "inherits": [ "android-arm64", "debug", "Vulkan-Tools" ]
     },
     {
       "name": "Android-arm64-Release-Vulkan",
       "inherits": [ "android-arm64", "release", "Vulkan" ]
     },
     {
-      "name": "Android-arm64-Release-Vulkan (Tools)",
-      "inherits": [ "android-arm64", "release", "Vulkan-Tools" ]
-    },
-    {
       "name": "Android-arm64-RelWithDebInfo-Vulkan",
       "inherits": [ "android-arm64", "relwithdebinfo", "Vulkan" ]
-    },
-    {
-      "name": "Android-arm64-RelWithDebInfo-Vulkan (Tools)",
-      "inherits": [ "android-arm64", "relwithdebinfo", "Vulkan-Tools" ]
     }
   ],
   "buildPresets": [],
