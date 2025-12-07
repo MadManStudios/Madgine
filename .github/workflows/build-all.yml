@@ -446,4 +446,4 @@ jobs:
       with:
         name: ${{ steps.version.outputs.version_tag }}
         tag_name: ${{ steps.version.outputs.version_tag }}
-        files: ${{ github.workspace }}/packages/*
+        files: ${{ github.workspace }}/packages/**/*
