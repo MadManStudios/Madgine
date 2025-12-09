@@ -27,13 +27,13 @@ namespace Widgets {
     void Image::render(WidgetsRenderData &renderData)
     {
         const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
-        if (!entry)
-            return;
 
-        Vector2 pos = getAbsolutePosition();
-        Vector3 size = getAbsoluteSize();
+        if (entry) {
+            Vector2 pos = getAbsolutePosition();
+            Vector3 size = getAbsoluteSize();
 
-        mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, mColor);
+            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, mColor);
+        }
 
         WidgetBase::render(renderData);
     }
