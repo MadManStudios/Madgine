@@ -81,6 +81,8 @@ namespace Widgets {
                 size_t width = data->mSize.x;
                 size_t height = data->mSize.y;
 
+                Atlas2::Entry entry = mAtlas.insert(data->mSize + Vector2i { 2, 2 }, [this]() { expand(); });
+
                 assert(data->mChannels == 4);
 
                 const uint32_t *source = static_cast<const uint32_t *>(data->mBuffer.mData);
@@ -88,9 +90,18 @@ namespace Widgets {
                 std::vector<uint32_t> targetBuffer;
                 targetBuffer.resize((width + 2) * (height + 2));
 
-                AreaView<uint32_t, 2> targetArea { targetBuffer.data(), { width + 2, height + 2 } };
-
                 AreaView<const uint32_t, 2> sourceArea { source, { width, height } };
+
+                size_t targetWidth = width + 2;
+                size_t targetHeight = height + 2;
+                if (entry.mFlipped) {
+                    std::swap(targetWidth, targetHeight);
+                }
+
+                AreaView<uint32_t, 2> targetArea { targetBuffer.data(), { targetWidth, targetHeight } };
+                if (entry.mFlipped) {
+                    targetArea.swapAxis(0, 1);
+                }
 
                 std::ranges::copy(sourceArea, targetArea.subArea({ 1, 1 }, { width, height }).begin());
                 std::ranges::copy(sourceArea.subArea({ 0, 0 }, { 1, height }), targetArea.subArea({ 0, 1 }, { 1, height }).begin());
@@ -103,9 +114,8 @@ namespace Widgets {
                 targetArea[height + 1][0] = sourceArea[height - 1][0];
                 targetArea[height + 1][width + 1] = sourceArea[height - 1][width - 1];
 
-                Atlas2::Entry entry = mAtlas.insert(data->mSize + Vector2i { 2, 2 }, [this]() { expand(); });
                 it = mEntries.try_emplace(std::string { image->name() }, entry).first;
-                mTexture.setSubData(entry.mArea.mTopLeft, data->mSize + Vector2i { 2, 2 }, targetBuffer);
+                mTexture.setSubData(entry.mArea.mTopLeft, { static_cast<int>(targetWidth), static_cast<int>(targetHeight) }, targetBuffer);
                 mImageLoadingTasks.erase(data);
             }
         }
