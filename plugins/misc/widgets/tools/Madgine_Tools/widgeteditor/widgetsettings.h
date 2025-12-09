@@ -14,7 +14,7 @@ namespace Tools {
 
         Widgets::WidgetBase *widget();
 
-        void render();
+        bool render();
 
         void saveGeometry();
         void applyGeometry();

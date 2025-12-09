@@ -33,8 +33,9 @@ namespace Tools {
         return mWidget;
     }
 
-    void WidgetSettings::render()
+    bool WidgetSettings::render()
     {
+        bool changed = false;
 
         if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_SpanFullWidth)) {
 
@@ -51,6 +52,7 @@ namespace Tools {
                     bool v = ref;
                     if (ImGui::Checkbox(cond->mName.empty() ? "<>" : cond->mName.c_str(), &v)) {
                         ref = v;
+                        changed = true;
                     }
                     selection |= v << i;
                     ++i;
@@ -61,6 +63,7 @@ namespace Tools {
                     mWidget->addConditional(selection);
                     mCurrentConditional = selection;
                     ImGui::CloseCurrentPopup();
+                    changed = true;
                 }
                 if (selection == 0)
                     ImGui::EndDisabled();
@@ -138,6 +141,7 @@ namespace Tools {
                         }
                         if (ImGui::DragFloat("", &geometry.mPos[i][j], j == 2 ? 1.0f : 0.01f)) {
                             mWidget->setPosValue(compoundId, geometry.mPos[i][j], mCurrentConditional);
+                            changed = true;
                         }
                         if (source.mPos[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
                             ImGui::PopStyleColor(4);
@@ -181,6 +185,7 @@ namespace Tools {
                         }
                         if (ImGui::DragFloat("", &geometry.mSize[i][j], j == 2 ? 1.0f : 0.01f)) {
                             mWidget->setSizeValue(compoundId, geometry.mSize[i][j], mCurrentConditional);
+                            changed = true;
                         }
                         if (source.mSize[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
                             ImGui::PopStyleColor(4);
@@ -205,14 +210,18 @@ namespace Tools {
                 ImGui::Text("AspectRatio");
                 ImGui::Unindent();
                 ImGui::TableNextColumn();
-                if (ImGui::Checkbox("##aspectratioEnabled", &mEnforceAspectRatio))
+                if (ImGui::Checkbox("##aspectratioEnabled", &mEnforceAspectRatio)) {
                     enforceAspectRatio();
+                    changed = true;
+                }
                 ImGui::SameLine();
 
                 if (!mEnforceAspectRatio)
                     ImGui::BeginDisabled();
-                if (ImGui::DragFloat("##aspectratio", &mAspectRatio, 0.05f))
+                if (ImGui::DragFloat("##aspectratio", &mAspectRatio, 0.05f)) {
                     enforceAspectRatio();
+                    changed = true;
+                }
                 if (!mEnforceAspectRatio)
                     ImGui::EndDisabled();
 
@@ -226,7 +235,7 @@ namespace Tools {
 
         if (ImGui::CollapsingHeader("WidgetData")) {
             if (ImGui::BeginTable("WidgetData-columns", 2, ImGuiTableFlags_Resizable)) {
-                mInspector.drawMembers(mWidget, { "Pos", "Size", "Children", "mConditions" });
+                changed |= mInspector.drawMembers(mWidget, { "Pos", "Size", "Children", "mConditions" });
                 ImGui::EndTable();
             }
         }
@@ -234,20 +243,21 @@ namespace Tools {
         if (ImGui::CollapsingHeader("Conditions")) {
             if (ImGui::Button("+")) {
                 mWidget->mConditions.emplace_back();
+                changed = true;
             }
             if (ImGui::BeginTable("Conditions-columns", 2, ImGuiTableFlags_Resizable)) {
                 for (Widgets::Condition &condition : mWidget->mConditions) {
                     ImGui::TableNextRow();
                     ImGui::PushID(&condition);
                     ImGui::TableNextColumn();
-                    ImGui::InputText("##condName", &condition.mName);
+                    changed |= ImGui::InputText("##condName", &condition.mName);
                     ImGui::TableNextColumn();
                     ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x / 4.0f);
-                    ImGui::EnumCombo("##formula", &condition.mFormula);
+                    changed |= ImGui::EnumCombo("##formula", &condition.mFormula);
                     ImGui::SameLine();
-                    ImGui::EnumCombo("##operator", &condition.mOperator);
+                    changed |= ImGui::EnumCombo("##operator", &condition.mOperator);
                     ImGui::SameLine();
-                    ImGui::DragFloat("##reference", &condition.mReferenceValue);
+                    changed |= ImGui::DragFloat("##reference", &condition.mReferenceValue);
                     ImGui::PopItemWidth();
                     ImGui::PopID();
                 }
@@ -295,10 +305,12 @@ namespace Tools {
                 if (ImGui::Button("Create Behavior")) {
                     mWidget->addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
                     ImGui::CloseCurrentPopup();
+                    changed = true;
                 }
             }
             ImGui::EndPopup();
         }
+        return changed;
     }
 
     void WidgetSettings::saveGeometry()

@@ -74,7 +74,7 @@ namespace Tools {
             if (mEditor.beginSubPanel("Details", &mEditor.mWidgetDetailsVisible, ImGuiDir_Right)) {
 
                 if (mSelected) {
-                    mSelected->render();
+                    mIsDirty |= mSelected->render();
                 }
 
                 // io.WantCaptureMouse = true;
