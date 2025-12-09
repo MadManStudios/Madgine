@@ -26,23 +26,26 @@ struct AreaView {
 
     AreaView<T, Dim, Storage> subArea(const std::array<size_t, Storage> &topLeft, const std::array<size_t, Storage> &sizes)
     {
+        std::array<size_t, Storage> newSizes;
         size_t acc = 0;
         for (int i = Dim - 1; i >= 0; --i) {
             size_t axis = mAxisMapping[i];
-            assert(topLeft[i] <= mSizes[axis]);
-            acc *= mFullSizes[axis];
-            if (!mFlipped[axis]) {
-                acc += topLeft[i];
+            assert(topLeft[axis] <= mSizes[i]);
+            acc *= mFullSizes[i];
+            if (!mFlipped[i]) {
+                acc += topLeft[axis];
             } else {
-                acc += (mSizes[axis] - topLeft[i] - sizes[i]);
+                acc += (mSizes[i] - topLeft[axis] - sizes[axis]);
             }
+            assert(sizes[axis] <= mSizes[i]);
+            newSizes[i] = sizes[axis];
         }
-        return { mBuffer + acc, sizes, mFullSizes, mFlipped, mAxisMapping };
+        return { mBuffer + acc, newSizes, mFullSizes, mFlipped, mAxisMapping };
     }
 
     decltype(auto) operator[](size_t i) const
     {
-        size_t axis = mAxisMapping[Dim - 1];
+        size_t axis = std::ranges::find(mAxisMapping, Dim - 1) - mAxisMapping.begin();
         assert(i < mSizes[axis]);
         if (mFlipped[axis])
             i = mSizes[axis] - 1 - i;
@@ -82,15 +85,14 @@ struct AreaView {
     {
         size_t acc = 0;
         for (int i = Dim - 1; i >= 0; --i) {
-            size_t reverseAxis = std::ranges::find(mAxisMapping, i) - mAxisMapping.begin();
+            size_t axis = mAxisMapping[i];
             acc *= mFullSizes[i];
-            if (reverseAxis < Dim) {
-                assert(indices[reverseAxis] < mSizes[i]);
-                if (!mFlipped[i]) {
-                    acc += indices[reverseAxis];
-                } else {
-                    acc += (mSizes[i] - 1 - indices[reverseAxis]);
-                }
+            assert(axis < Dim);
+            assert(indices[axis] < mSizes[i]);
+            if (!mFlipped[i]) {
+                acc += indices[axis];
+            } else {
+                acc += (mSizes[i] - 1 - indices[axis]);
             }
         }
         return acc;
