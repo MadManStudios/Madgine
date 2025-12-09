@@ -186,6 +186,10 @@ namespace Tools {
             ImGui::PushID(id.data());
             ImGui::PushItemWidth(-1.0f + (-2.0f * ImGui::GetFrameHeight() * bool(generic)));
             if (ImGui::BeginCombo("##suggestions", scope.name().c_str())) {
+                if (ImGui::Selectable("<None>")) {
+                    scope.mScope = nullptr;
+                    modified = true;
+                }
                 for (std::pair<std::string_view, ScopePtr> p : it->second()) {
                     if (ImGui::Selectable(p.first.data())) {
                         scope = p.second;
