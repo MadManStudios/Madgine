@@ -1,0 +1,227 @@
+#version 300 es
+#define readonly 
+#define buffer uniform
+#define std430 std140
+precision mediump float;
+precision highp int;
+
+struct ScenePerApplication
+{
+    highp mat4 p;
+    uint hasHDR;
+    highp float ambientFactor;
+    highp float diffuseFactor;
+    highp float specularFactor;
+};
+
+struct DirectionalLight
+{
+    highp vec3 color;
+    highp float _padding0;
+    highp vec3 dir;
+    highp float _padding1;
+    uint orthographic;
+    highp float _padding2;
+    highp float _padding3;
+    highp float _padding4;
+};
+
+struct ShadowCaster
+{
+    highp mat4 reprojectionMatrix;
+    int shadowSamples;
+    highp float _padding0;
+    highp float _padding1;
+    highp float _padding2;
+};
+
+struct DirectionalShadowLight
+{
+    DirectionalLight light;
+    ShadowCaster caster;
+};
+
+struct PointLight
+{
+    highp vec3 position;
+    highp float _padding0;
+    highp vec3 color;
+    highp float _padding1;
+    highp float constantFactor;
+    highp float linearFactor;
+    highp float squaredFactor;
+    highp float _padding2;
+};
+
+struct PointShadowLight
+{
+    PointLight light;
+    ShadowCaster caster;
+};
+
+struct ScenePerFrame
+{
+    int pointLightCount;
+    highp float _padding0;
+    highp float _padding1;
+    highp float _padding2;
+    DirectionalShadowLight light;
+    PointShadowLight pointLights[2];
+};
+
+struct ScenePerObject
+{
+    highp float shininess;
+    uint hasLight;
+    uint hasTexture;
+    uint hasDistanceField;
+};
+
+vec4 _88;
+
+layout(std140) uniform buffer0
+{
+    layout(row_major) ScenePerApplication app;
+} PerApplication;
+
+layout(std140) uniform buffer1
+{
+    layout(row_major) ScenePerFrame frame;
+} PerFrame;
+
+layout(std140) uniform buffer2
+{
+    ScenePerObject object;
+} PerObject;
+
+uniform highp sampler2D texture4;
+uniform highp sampler2DMS texture8;
+uniform highp samplerCube texture9;
+uniform highp samplerCube texture10;
+uniform highp sampler2D texture5;
+
+in highp vec4 out_var_COLOR;
+in highp vec4 out_var_POSITION;
+in highp vec3 out_var_NORMAL;
+in highp vec2 out_var_TEXCOORD0;
+in highp vec4 out_var_TEXCOORD1;
+layout(location = 0) out highp vec4 out_var_SV_Target0;
+layout(location = 1) out highp vec4 out_var_SV_Target1;
+
+DirectionalShadowLight spvWorkaroundRowMajor(DirectionalShadowLight wrap) { return wrap; }
+PointShadowLight spvWorkaroundRowMajor(PointShadowLight wrap) { return wrap; }
+
+void main()
+{
+    highp vec3 _97 = normalize(out_var_NORMAL);
+    bool _100 = PerObject.object.hasTexture != 0u;
+    highp vec4 _132;
+    if (_100)
+    {
+        highp vec4 _131;
+        if (PerObject.object.hasDistanceField != 0u)
+        {
+            highp vec4 _112 = texture(texture4, out_var_TEXCOORD0);
+            highp float _113 = _112.x;
+            highp float _114 = _112.y;
+            highp float _120 = max(min(_113, _114), min(max(_113, _114), _112.z)) - 0.5;
+            _131 = out_var_COLOR * clamp((_120 / fwidth(_120)) + 0.5, 0.0, 1.0);
+        }
+        else
+        {
+            _131 = texture(texture4, out_var_TEXCOORD0) * out_var_COLOR;
+        }
+        _132 = _131;
+    }
+    else
+    {
+        _132 = out_var_COLOR;
+    }
+    highp vec4 _328;
+    if (PerObject.object.hasLight != 0u)
+    {
+        highp vec3 _152 = out_var_POSITION.xyz / vec3(out_var_POSITION.w);
+        highp vec3 _166 = out_var_TEXCOORD1.xyz / vec3(out_var_TEXCOORD1.w);
+        highp vec3 _169 = _166;
+        _169.y = _166.y * (-1.0);
+        ivec2 _174 = ivec2(((_169.xy * 0.5) + vec2(0.5)) * 2048.0);
+        highp float _176 = _166.z - 0.0005000000237487256526947021484375;
+        highp float _178;
+        _178 = 1.0;
+        for (int _181 = 0; _181 < spvWorkaroundRowMajor(PerFrame.frame.light).caster.shadowSamples; )
+        {
+            _178 -= (float(_176 > texelFetch(texture8, _174, _181).x) / float(spvWorkaroundRowMajor(PerFrame.frame.light).caster.shadowSamples));
+            _181++;
+            continue;
+        }
+        highp vec3 _194 = -spvWorkaroundRowMajor(PerFrame.frame.light).light.dir;
+        highp vec3 _204;
+        if (spvWorkaroundRowMajor(PerFrame.frame.light).light.orthographic != 0u)
+        {
+            _204 = vec3(0.0, 0.0, -1.0);
+        }
+        else
+        {
+            _204 = -_152;
+        }
+        highp vec3 _214;
+        _214 = (spvWorkaroundRowMajor(PerFrame.frame.light).light.color * PerApplication.app.ambientFactor) + (spvWorkaroundRowMajor(PerFrame.frame.light).light.color * ((PerApplication.app.diffuseFactor * _178) * max(dot(_97, _194), 0.0)));
+        highp vec3 _215;
+        for (int _217 = 0; _217 < PerFrame.frame.pointLightCount; _214 = _215, _217++)
+        {
+            if (_217 == 0)
+            {
+                highp vec3 _246 = (vec4(_152 - spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.position, 0.0) * spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).caster.reprojectionMatrix).xyz;
+                highp vec3 _259 = spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.position - _152;
+                highp float _265 = length(_259);
+                _215 = _214 + ((spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.color * (((PerApplication.app.diffuseFactor * (1.0 - float((((length(_246) - 0.00999999977648258209228515625) * 0.0100010000169277191162109375) - 0.001000000047497451305389404296875) > texture(texture9, _246).x))) * 10.0) * max(dot(_97, normalize(_259)), 0.0))) * (1.0 / ((spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.constantFactor + (spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.linearFactor * _265)) + (spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.squaredFactor * (_265 * _265)))));
+            }
+            else
+            {
+                highp vec3 _292 = (vec4(_152 - spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.position, 0.0) * spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).caster.reprojectionMatrix).xyz;
+                highp vec3 _305 = spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.position - _152;
+                highp float _311 = length(_305);
+                _215 = _214 + ((spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.color * (((PerApplication.app.diffuseFactor * (1.0 - float((((length(_292) - 0.00999999977648258209228515625) * 0.0100010000169277191162109375) - 0.001000000047497451305389404296875) > texture(texture10, _292).x))) * 10.0) * max(dot(_97, normalize(_305)), 0.0))) * (1.0 / ((spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.constantFactor + (spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.linearFactor * _311)) + (spvWorkaroundRowMajor(PerFrame.frame.pointLights[_217]).light.squaredFactor * (_311 * _311)))));
+            }
+        }
+        _328 = vec4((_214 * _132.xyz) + (spvWorkaroundRowMajor(PerFrame.frame.light).light.color * ((PerApplication.app.specularFactor * _178) * pow(max(dot(normalize(_204), -reflect(_194, _97)), 0.0), PerObject.object.shininess))), _132.w);
+    }
+    else
+    {
+        _328 = _132;
+    }
+    highp vec3 _336;
+    if (_100)
+    {
+        _336 = texture(texture5, out_var_TEXCOORD0).xyz;
+    }
+    else
+    {
+        _336 = vec3(0.0);
+    }
+    highp vec4 _355;
+    if (PerApplication.app.hasHDR != 0u)
+    {
+        highp vec4 _345 = vec4(_336, 1.0);
+        highp vec4 _354;
+        if (dot(_328.xyz, vec3(0.2125999927520751953125, 0.715200006961822509765625, 0.072200000286102294921875)) > 1.0)
+        {
+            highp vec3 _352 = _345.xyz + _328.xyz;
+            _354 = vec4(_352.x, _352.y, _352.z, _345.w);
+        }
+        else
+        {
+            _354 = _345;
+        }
+        _355 = _354;
+    }
+    else
+    {
+        _355 = _88;
+    }
+    highp vec3 _357 = _328.xyz + _336;
+    out_var_SV_Target0 = vec4(_357.x, _357.y, _357.z, _328.w);
+    out_var_SV_Target1 = _355;
+}
+
+
