@@ -90,6 +90,8 @@ namespace Threading {
             mIndex = Storage::registerLocalBssVariable([=]() { return Any { (T *)initial }; });
         }
 
+        Global(const Global &) = delete;
+
         ~Global()
         {
             Storage::unregisterLocalBssVariable(mIndex);

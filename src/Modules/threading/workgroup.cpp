@@ -219,7 +219,8 @@ namespace Threading {
     bool WorkGroup::isInitialized()
     {
 #if ENABLE_THREADING && USE_CUSTOM_THREADLOCAL
-        assert(sSelf.valid());
+        if (!sSelf.valid())
+            return false;
 #endif
         return sSelf != nullptr;
     }
