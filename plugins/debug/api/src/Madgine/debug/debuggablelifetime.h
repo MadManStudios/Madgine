@@ -71,6 +71,12 @@ namespace Debug {
             return mLifetime.bound(ptr, std::forward<T>(t), std::forward<Dtor>(dtor));
         }
 
+        template <typename T, typename Dtor>
+        auto bind(T &&t, Dtor &&dtor)
+        {
+            return mLifetime.bind(std::forward<T>(t), std::forward<Dtor>(dtor));
+        }
+
         operator Execution::Lifetime<cpos...> &() &
         {
             return mLifetime;

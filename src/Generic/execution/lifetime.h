@@ -27,6 +27,7 @@ namespace Execution {
         template <Sender Sender>
         void attach(Sender &&sender)
         {
+            std::unique_lock lock { mMutex };
             if (mReceiver) {
                 (new attach_state<stoppable_t::sender<Sender>> { std::forward<Sender>(sender) | stoppable, *mReceiver })->start();
             }
@@ -34,6 +35,7 @@ namespace Execution {
 
         bool end()
         {
+            std::unique_lock lock { mMutex };
             if (!mReceiver)
                 return false;
             return mReceiver->mStopSource.request_stop();
@@ -41,6 +43,7 @@ namespace Execution {
 
         bool running() const
         {
+            std::unique_lock lock { mMutex };
             return mReceiver;
         }
 
@@ -72,6 +75,15 @@ namespace Execution {
         sender<T, Dtor> bound(BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
         {
             return sender<T, Dtor> { {}, *this, std::forward<T>(t), std::forward<Dtor>(dtor), ptr };
+        }
+
+        template <typename T, typename Dtor>
+        BindingPtr<T> bind(T &&t, Dtor &&dtor)
+        {
+            std::unique_lock lock { mMutex };
+            if (!mReceiver)
+                return {};
+            return BindingPtr<T> { new BindingPoint<T, Dtor>(*mReceiver, std::forward<T>(t), std::forward<Dtor>(dtor)) };
         }
 
         using is_sender = void;
@@ -218,6 +230,7 @@ namespace Execution {
             void start()
             {
                 this->mLifetime.increaseCount();
+                std::unique_lock lock { this->mLifetime.mMutex };
                 assert(!this->mLifetime.mReceiver);
                 this->mLifetime.mReceiver = this;
             }
@@ -229,8 +242,11 @@ namespace Execution {
 
             void stopRequested() override
             {
-                assert(this->mLifetime.mReceiver == this);
-                this->mLifetime.mReceiver = nullptr;
+                {
+                    std::unique_lock lock { this->mLifetime.mMutex };
+                    assert(this->mLifetime.mReceiver == this);
+                    this->mLifetime.mReceiver = nullptr;
+                }
                 this->decreaseCount();
             }
 
@@ -306,11 +322,7 @@ namespace Execution {
         receiver *mReceiver = nullptr;
         std::atomic<uint32_t> mCount = 0;
         Flag<> mFinished;
-
-    public:
-        template <typename Rec>
-        using inlineState = state<Rec>;
-        using inlineReceiver = receiver;
+        mutable std::recursive_mutex mMutex;
     };
 
 }
