@@ -272,13 +272,13 @@ namespace Scene {
             }
         }
 
-        void Entity::dtor(Entity &e)
+        void Entity::dtor()
         {
-            if (e.isSynced()) {
-                Serialize::set_synced(e, false);
+            if (isSynced()) {
+                Serialize::set_synced(*this, false);
             }
 
-            e.container().remove(e.pointer());
+            container().remove(pointer());
         }
 
     }

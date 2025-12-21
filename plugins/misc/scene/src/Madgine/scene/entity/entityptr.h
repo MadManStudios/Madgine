@@ -2,15 +2,23 @@
 
 #include "Generic/execution/binding.h"
 
+#include "Generic/execution/lifetime.h"
+
+#include "Madgine/behavior/named.h"
+
 namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        struct MADGINE_SCENE_EXPORT EntityPtr : Execution::BindingPtr<Entity &> {
+        struct MADGINE_SCENE_EXPORT EntityPtr : Execution::Lifetime<Behavior::get_named_d>::BindingPoint<Execution::ConstantBinding<Entity&>> {
+
+            using Base = Execution::Lifetime<Behavior::get_named_d>::BindingPoint<Execution::ConstantBinding<Entity&>>;
 
             EntityPtr() = default;
             EntityPtr(const EntityPtr &) = default;
             EntityPtr(EntityPtr &&) = default;
+
+            using Base::Base;
 
             template <Execution::Binding<Entity &> Binding>
                 requires(!std::same_as<std::remove_cvref_t<Binding>, EntityPtr>)
@@ -21,17 +29,14 @@ namespace Scene {
                 });
             }
 
-            EntityPtr &operator=(const EntityPtr &other)
-            {
-                Execution::BindingPtr<Entity &>::operator=(static_cast<const Execution::BindingPtr<Entity &> &>(other));
-                return *this;
-            }
+            EntityPtr &operator=(const EntityPtr &other) = default;
 
-            EntityPtr &operator=(EntityPtr &&other)
-            {
-                Execution::BindingPtr<Entity &>::operator=(static_cast<Execution::BindingPtr<Entity &> &&>(other));
-                return *this;
-            }
+            EntityPtr &operator=(EntityPtr &&other) = default;
+
+            std::strong_ordering operator<=>(const EntityPtr &other) const;
+            bool operator==(const EntityPtr &other) const;
+
+            explicit operator bool() const;
 
             template <Execution::Binding<Entity &> Binding>
                 requires(!std::same_as<std::remove_cvref_t<Binding>, EntityPtr>)

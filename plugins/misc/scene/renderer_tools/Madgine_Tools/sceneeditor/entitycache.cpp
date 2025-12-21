@@ -38,7 +38,7 @@ namespace Tools {
 
     bool EntityCache::update(Node &node, const Scene::Entity::EntityPtr &parent)
     {
-        bool alive = node.mEntity.access([&](Scene::Entity::Entity &e) {
+        bool alive = Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
             return (!e.hasComponent<Scene::Entity::Transform>() && !parent) || (e.hasComponent<Scene::Entity::Transform>() && parent == e.getComponent<Scene::Entity::Transform>()->parent());
         });
         if (!alive) {
@@ -53,7 +53,7 @@ namespace Tools {
     {
         Scene::Entity::EntityPtr parent;
 
-        e.access([&](Scene::Entity::Entity &entity) {
+        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {
             Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
 
             if (transform) {

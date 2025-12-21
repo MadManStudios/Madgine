@@ -64,17 +64,17 @@ namespace Debug {
         {
             return mLifetime.finished();
         }
-
-        template <typename T, typename Dtor>
-        auto bound(Execution::BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
+        
+        template <typename F>
+        auto tracked(F &&callback)
         {
-            return mLifetime.bound(ptr, std::forward<T>(t), std::forward<Dtor>(dtor));
+            return mLifetime.tracked(std::forward<F>(callback));
         }
 
-        template <typename T, typename Dtor>
-        auto bind(T &&t, Dtor &&dtor)
+        template <Execution::AnyBinding Binding>
+        auto bind(Binding &&binding)
         {
-            return mLifetime.bind(std::forward<T>(t), std::forward<Dtor>(dtor));
+            return mLifetime.bind(std::forward<Binding>(binding));
         }
 
         operator Execution::Lifetime<cpos...> &() &

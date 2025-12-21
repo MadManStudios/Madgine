@@ -138,7 +138,7 @@ void GameManager::spawnBrick()
 {
     Engine::Scene::Entity::EntityPtr brick = mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity();
 
-    brick.access([](Engine::Scene::Entity::Entity &brick) {
+    Engine::Execution::access_binding(brick, [](Engine::Scene::Entity::Entity &brick) {
         Engine::Scene::Entity::Transform *t = brick.addComponent<Engine::Scene::Entity::Transform>();
         t->mScale = { 0.01f, 0.01f, 0.01f };
 
@@ -180,7 +180,7 @@ void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent
     }*/
 
     if (hit) {
-        hit.access(&Engine::Scene::Entity::Entity::endLifetime);
+        Engine::Execution::access_binding(hit, &Engine::Scene::Entity::Entity::endLifetime);
         modScore(1);
     }
 }

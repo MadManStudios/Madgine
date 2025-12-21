@@ -100,7 +100,9 @@ namespace Scene {
 
             auto lifetimeSender()
             {
-                return mLifetime.bound(mSelf, *this, Functor<&Entity::dtor> {}) | Behavior::with_named<"Entity">(mSelf);
+                return mLifetime.tracked([this](auto lifetimePtr) { mSelf = EntityPtr { std::move(lifetimePtr), Execution::ConstantBinding { *this } }; })
+                    | Execution::finally([this]() { dtor(); })
+                    | Behavior::with_named<"Entity">(mSelf);
             }
 
             void handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op);
@@ -119,7 +121,7 @@ namespace Scene {
         protected:
             Debug::DebuggableLifetimeBase &lifetimeBase();
 
-            static void dtor(Entity &e);
+            void dtor();
 
         public:
             std::string mName;

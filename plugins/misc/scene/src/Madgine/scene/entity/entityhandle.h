@@ -40,7 +40,7 @@ namespace Serialize {
         {
             STREAM_PROPAGATE_ERROR(handle.readId(in, name));
             StreamResult result;
-            handle.ptr().access([&](Scene::Entity::Entity &entity) {
+            Execution::access_binding(handle.ptr(), [&](Scene::Entity::Entity &entity) {
                 result = SerializableDataPtr { &entity }.readState(in, name, true);
             });
             return result;
@@ -49,7 +49,7 @@ namespace Serialize {
         static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityHandle &handle, const char *name)
         {
             handle.writeId(out, name);
-            bool success = handle.ptr().access([&](Scene::Entity::Entity &entity) {
+            bool success = Execution::access_binding(handle.ptr(), [&](Scene::Entity::Entity &entity) {
                 SerializableDataConstPtr { &entity }.writeState(out, name, true);
             });
             assert(success);

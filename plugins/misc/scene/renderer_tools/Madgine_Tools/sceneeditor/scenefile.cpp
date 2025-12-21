@@ -101,7 +101,7 @@ namespace Tools {
 
             Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render();
             if (behaviorToAdd) {
-                mSelectedEntity.access([&](Scene::Entity::Entity &entity) {
+                Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &entity) {
                     entity.behaviors().addBehavior(std::move(behaviorToAdd));
                 });
             }

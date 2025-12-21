@@ -44,7 +44,8 @@ namespace Scene {
         Matrix4 Transform::parentMatrix() const
         {
             Matrix4 result = Matrix4::IDENTITY;
-            mParent.access([&](Entity &e) { result = e.getComponent<Transform>()->worldMatrix(); });
+            Execution::access_binding(mParent, [&](Entity &e) {
+                result = e.getComponent<Transform>()->worldMatrix(); });
             return result;
         }
 
@@ -53,7 +54,7 @@ namespace Scene {
             if (parent == entity().pointer())
                 return;
             EntityPtr ptr = parent;
-            while (ptr.access([&](Entity &e) {
+            while (Execution::access_binding(ptr, [&](Entity &e) {
                         EntityPtr next = e.getComponent<Transform>()->mParent;
                         ptr = next;
                         if (next == entity().pointer()) {

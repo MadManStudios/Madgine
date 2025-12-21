@@ -144,7 +144,7 @@ namespace Tools {
     void SceneEditor::renderHierarchyEntity(const EntityCache::Node &node, bool visible)
     {
 
-        bool success = node.mEntity.access([&](Scene::Entity::Entity &e) {
+        bool success = Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
             Scene::Entity::Transform *transform = e.getComponent<Engine::Scene::Entity::Transform>();
 
             if (visible) {
@@ -176,7 +176,7 @@ namespace Tools {
                     if (ImGui::BeginDragDropTarget()) {
                         Scene::Entity::EntityPtr newChild;
                         if (ImGui::AcceptDraggableValueType(newChild, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
-                            newChild.access([&](Scene::Entity::Entity &childEntity) {
+                            Execution::access_binding(newChild, [&](Scene::Entity::Entity &childEntity) {
                                 Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
                                 assert(childTransform);
                                 childTransform->setParent(node.mEntity);
@@ -223,7 +223,7 @@ namespace Tools {
     {
         Behavior::BehaviorHandle behaviorToAdd;
 
-        e.access([&](Scene::Entity::Entity &entity) {
+        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {
             if (ImGui::BeginPopupCompoundContextWindow()) {
                 if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Component")) {
                     for (auto [name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {

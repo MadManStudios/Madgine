@@ -17,8 +17,8 @@ namespace Execution {
 
         using type = T;
 
-        ConstantBinding(T &&value)
-            : mValue(std::forward<T>(value))
+        ConstantBinding(T value)
+            : mValue(std::move(value))
         {
         }
 
@@ -47,6 +47,41 @@ namespace Execution {
         }
 
         T mValue;
+    };
+
+    template <typename T>
+    struct ConstantBinding<T&> {
+
+        using type = T&;
+
+        ConstantBinding() = default;
+
+        ConstantBinding(T &value)
+            : mValue(&value)
+        {
+        }
+
+        template <typename P>
+        auto operator->*(P &&right) &&
+        {
+            return MemberFunctionBinding<P, ConstantBinding<T&>>({ std::forward<P>(right) }, std::move(*this));
+        }
+
+        template <typename P>
+        auto operator->*(P &&right) const &
+        {
+            return MemberFunctionBinding<P, ConstantBinding<T&>>({ std::forward<P>(right) }, *this);
+        }
+
+        template <std::invocable<T &> F>
+        friend bool tag_invoke(access_binding_t, const ConstantBinding<T&> &binding, F &&callback)
+        {
+            if (!binding.mValue)
+                return false;
+            return patch_void(std::forward<F>(callback), true)(*binding.mValue);
+        }
+
+        T *mValue = nullptr;
     };
 
     template <typename T>

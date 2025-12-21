@@ -13,6 +13,74 @@ namespace Execution {
 
     template <auto... cpos>
     struct Lifetime {
+    private:
+        struct ControlBlock;
+
+    public:
+        struct ControlPtr {
+            ControlPtr() = default;
+            ControlPtr(ControlBlock &block)
+                : mBlock(&block)
+            {
+                mBlock->increaseWeakCount();
+            }
+            ~ControlPtr()
+            {
+                if (mBlock)
+                    mBlock->decreaseWeakCount();
+            }
+
+            ControlPtr(const ControlPtr &other)
+                : mBlock(other.mBlock)
+            {
+                if (mBlock)
+                    mBlock->increaseWeakCount();
+            }
+
+            ControlPtr(ControlPtr &&other) noexcept
+                : mBlock(std::exchange(other.mBlock, nullptr))
+            {
+            }
+
+            ControlPtr &operator=(const ControlPtr &other)
+            {
+                if (this != &other) {
+                    if (mBlock) {
+                        mBlock->decreaseWeakCount();
+                    }
+                    mBlock = other.mBlock;
+                    if (mBlock) {
+                        mBlock->increaseWeakCount();
+                    }
+                }
+                return *this;
+            }
+
+            ControlPtr &operator=(ControlPtr &&other) noexcept
+            {
+                if (this != &other) {
+                    if (mBlock) {
+                        mBlock->decreaseWeakCount();
+                    }
+                    mBlock = std::exchange(other.mBlock, nullptr);
+                }
+                return *this;
+            }
+
+            bool alive() const
+            {
+                return mBlock && mBlock->running();
+            }
+
+            explicit operator bool() const
+            {
+                return mBlock;
+            }
+
+            auto operator<=>(const ControlPtr &other) const = default;
+
+            ControlBlock *mBlock = nullptr;
+        };
 
         Lifetime()
         {
@@ -20,39 +88,33 @@ namespace Execution {
 
         ~Lifetime()
         {
-            assert(!mReceiver);
-            assert(mCount == 0);
+            assert(!mPtr.alive());
         }
 
         template <Sender Sender>
         void attach(Sender &&sender)
         {
-            std::unique_lock lock { mMutex };
-            if (mReceiver) {
-                (new attach_state<stoppable_t::sender<Sender>> { std::forward<Sender>(sender) | stoppable, *mReceiver })->start();
+            if (mPtr) {
+                (new attach_state<stoppable_t::sender<Sender>> { std::forward<Sender>(sender) | stoppable, mPtr })->start();
             }
         }
 
         bool end()
         {
-            std::unique_lock lock { mMutex };
-            if (!mReceiver)
-                return false;
-            return mReceiver->mStopSource.request_stop();
+            return mPtr.mBlock->request_stop();
         }
 
         bool running() const
         {
-            std::unique_lock lock { mMutex };
-            return mReceiver;
+            return mPtr.mBlock->running();
         }
 
         auto &finished()
         {
-            return mFinished;
+            return mPtr.mBlock->mFinished;
         }
 
-        template <typename T, typename Dtor>
+        template <typename F>
         struct sender : Execution::base_sender {
 
             using result_type = void;
@@ -62,28 +124,55 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return state<Rec>(std::forward<Rec>(rec), sender.mLifetime, sender.mPtr, std::forward<T>(sender.mT), std::forward<Dtor>(sender.mDtor));
+                return state<Rec>(std::forward<Rec>(rec), sender.mLifetime, std::forward<F>(sender.mCallback));
             }
 
             Lifetime &mLifetime;
-            T mT;
-            Dtor mDtor;
-            BindingPtr<T> &mPtr;
+            F mCallback;
         };
 
-        template <typename T, typename Dtor>
-        sender<T, Dtor> bound(BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
+        template <typename F>
+        sender<F> tracked(F &&callback)
         {
-            return sender<T, Dtor> { {}, *this, std::forward<T>(t), std::forward<Dtor>(dtor), ptr };
+            return sender<F> { {}, *this, std::forward<F>(callback) };
         }
 
-        template <typename T, typename Dtor>
-        BindingPtr<T> bind(T &&t, Dtor &&dtor)
+        template <AnyBinding Binding>
+        struct BindingPoint {
+
+            using type = typename Binding::type;
+
+            BindingPoint() = default;
+            BindingPoint(ControlPtr ptr, Binding &&binding)
+                : mPtr(std::move(ptr))
+                , mBinding(std::forward<Binding>(binding))
+            {
+            }
+
+            friend bool tag_invoke(Execution::access_binding_t, const BindingPoint<Binding> &binding, auto &&callback)
+            {
+                bool result = false;
+                if (binding.mPtr.mBlock && binding.mPtr.mBlock->increaseStrongCount()) {
+                    result = access_binding(binding.mBinding, callback);
+                    binding.mPtr.mBlock->decreaseStrongCount();
+                }
+                return result;
+            }
+
+            const ControlPtr &ptr() const
+            {
+                return mPtr;
+            }
+
+        private:
+            ControlPtr mPtr;
+            Binding mBinding;
+        };
+
+        template <AnyBinding Binding>
+        BindingPoint<Binding> bind(Binding &&binding)
         {
-            std::unique_lock lock { mMutex };
-            if (!mReceiver)
-                return {};
-            return BindingPtr<T> { new BindingPoint<T, Dtor>(*mReceiver, std::forward<T>(t), std::forward<Dtor>(dtor)) };
+            return { mPtr, std::forward<Binding>(binding) };
         }
 
         using is_sender = void;
@@ -99,20 +188,81 @@ namespace Execution {
         }
 
     private:
-        void increaseCount()
-        {
-            mFinished.reset();
-            ++mCount;
-        }
-
-        void decreaseCount()
-        {
-            if (mCount.fetch_sub(1) == 1) {
-                mFinished.emplace();
-            }
-        }
-
         struct receiver;
+
+        struct ControlBlock {
+            ControlBlock(receiver &rec)
+                : mReceiver(rec)
+            {
+            }
+
+            ~ControlBlock()
+            {
+                assert(mStrongRefCount == 0);
+            }
+
+            bool increaseStrongCount()
+            {
+                uint32_t refCount = mStrongRefCount;
+                while (refCount > 0) {
+                    if (mStrongRefCount.compare_exchange_weak(refCount, refCount + 1)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            void decreaseStrongCount()
+            {
+                if (mStrongRefCount.fetch_sub(1) == 1) {
+                    mReceiver.set_value();
+                    mFinished.emplace();
+                    decreaseWeakCount();
+                }
+            }
+
+            void increaseWeakCount()
+            {
+                ++mWeakRefCount;
+            }
+
+            void decreaseWeakCount()
+            {
+                if (mWeakRefCount.fetch_sub(1) == 1) {
+                    delete this;
+                }
+            }
+
+            bool request_stop()
+            {
+                if (increaseStrongCount()) {
+                    bool result = mReceiver.mStopSource.request_stop();
+                    decreaseStrongCount();
+                    return result;
+                }
+                return false;
+            }
+
+            bool running() const
+            {
+                return mStrongRefCount > 0;
+            }
+
+            StopToken stop_token()
+            {
+                if (increaseStrongCount()) {
+                    StopToken token = mReceiver.mStopSource.get_token();
+                    decreaseStrongCount();
+                    return token;
+                }
+                return nullptr;
+            }
+
+            receiver &mReceiver;
+            std::atomic<uint32_t> mStrongRefCount = 1;
+            std::atomic<uint32_t> mWeakRefCount = 1;
+            Flag<> mFinished;
+        };
 
         template <typename Sender>
         struct attach_state;
@@ -127,33 +277,33 @@ namespace Execution {
 
             void set_value()
             {
-                mState->mReceiver.decreaseCount();
+                mState->mPtr.mBlock->decreaseStrongCount();
                 delete mState;
             }
 
             template <typename... V>
             [[nodiscard]] std::monostate set_value(V &&...)
             {
-                mState->mReceiver.decreaseCount();
+                mState->mPtr.mBlock->decreaseStrongCount();
                 delete mState;
                 return {};
             }
             void set_done()
             {
-                mState->mReceiver.decreaseCount();
+                mState->mPtr.mBlock->decreaseStrongCount();
                 delete mState;
             }
             template <typename... R>
             [[nodiscard]] std::monostate set_error(R &&...)
             {
-                mState->mReceiver.decreaseCount();
+                mState->mPtr.mBlock->decreaseStrongCount();
                 delete mState;
                 return {};
             }
 
             friend StopToken tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)
             {
-                return rec.mState->mReceiver.mStopToken;
+                return rec.mState->mPtr.mBlock->stop_token();
             }
 
             template <typename CPO, typename... Args>
@@ -161,7 +311,7 @@ namespace Execution {
             friend auto tag_invoke(CPO f, attach_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, receiver &, Args...>)
                 -> tag_invoke_result_t<CPO, receiver &, Args...>
             {
-                return f(rec.mState->mReceiver, std::forward<Args>(args)...);
+                return f(rec.mState->mPtr.mBlock->mReceiver, std::forward<Args>(args)...);
             }
 
             attach_state<Sender> *mState;
@@ -169,70 +319,57 @@ namespace Execution {
 
         template <typename Sender>
         struct attach_state {
-            attach_state(Sender &&sender, receiver &receiver)
-                : mReceiver(receiver)
+            attach_state(Sender &&sender, ControlPtr ptr)
+                : mPtr(std::move(ptr))
                 , mState(connect(std::forward<Sender>(sender), attach_receiver<Sender> { this }))
             {
             }
             void start()
             {
-                mReceiver.increaseCount();
+                bool success = mPtr.mBlock->increaseStrongCount();
+                assert(success);
                 mState.start();
             }
 
-            receiver &mReceiver;
+            ControlPtr mPtr;
             connect_result_t<Sender, attach_receiver<Sender>> mState;
         };
 
-        struct receiver : VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...> {
+        struct receiver : VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...>, StopCallback {
 
             receiver(Lifetime &lifetime)
-                : mStopToken(mStopSource.get_token())
+                : mControl(*new ControlBlock(*this))
                 , mLifetime(lifetime)
             {
+                bool registered = mStopSource.registerCallback(this);
+                assert(registered);
             }
 
-            void increaseCount()
+            template <typename F>
+            receiver(Lifetime &lifetime, F &&callback)
+                : receiver(lifetime)
             {
-                ++mCount;
+                std::forward<F>(callback)(mControl);
             }
 
-            void decreaseCount()
+            void stopRequested() override
             {
-                if (mCount.fetch_sub(1) == 1) {
-                    mLifetime.decreaseCount();
-                    this->set_value();
-                }
+                mControl.mBlock->decreaseStrongCount();
             }
 
-            std::atomic<uint32_t> mCount = 1;
+            ControlPtr mControl;
             StopSource mStopSource;
-            StopToken mStopToken;
             Lifetime &mLifetime;
         };
 
         template <typename Rec>
-        struct state : VirtualState<receiver, Rec>, StopCallback {
-            state(Rec &&rec, Lifetime &lifetime)
-                : VirtualState<receiver, Rec>(std::forward<Rec>(rec), lifetime)
-            {
-                bool registered = this->mStopSource.registerCallback(this);
-                assert(registered);
-            }
+        struct state : VirtualState<receiver, Rec> {
 
-            template <typename T, typename Dtor>
-            state(Rec &&rec, Lifetime &lifetime, BindingPtr<T> &ptr, T &&t, Dtor &&dtor)
-                : state(std::forward<Rec>(rec), lifetime)
-            {
-                ptr = BindingPtr<T> { new BindingPoint<T, Dtor>(*this, std::forward<T>(t), std::forward<Dtor>(dtor)) };
-            }
+            using VirtualState<receiver, Rec>::VirtualState;
 
             void start()
             {
-                this->mLifetime.increaseCount();
-                std::unique_lock lock { this->mLifetime.mMutex };
-                assert(!this->mLifetime.mReceiver);
-                this->mLifetime.mReceiver = this;
+                this->mLifetime.mPtr = this->mControl;
             }
 
             void stop()
@@ -240,90 +377,18 @@ namespace Execution {
                 this->mStopSource.request_stop();
             }
 
-            void stopRequested() override
-            {
-                {
-                    std::unique_lock lock { this->mLifetime.mMutex };
-                    assert(this->mLifetime.mReceiver == this);
-                    this->mLifetime.mReceiver = nullptr;
-                }
-                this->decreaseCount();
-            }
-
             friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
                 visitor(State::BeginBlock { "Lifetime" });
                 if (state) {
                     visitor(State::Marker {});
-                    visitor(State::Text { "Active: " + std::to_string(state->mCount) });
+                    visitor(State::Text { "Active: " + std::to_string(state->mControl.mBlock->mStrongRefCount) });
                 }
                 visitor(State::EndBlock {});
             }
         };
 
-        template <typename T, typename Dtor>
-        struct BindingPoint : StopCallback, BindingBridgeBase<T> {
-
-            BindingPoint(receiver &receiver, T &&t, Dtor &&dtor)
-                : mReceiver(receiver)
-                , mT(std::forward<T>(t))
-                , mDtor(std::forward<Dtor>(dtor))
-            {
-                ++this->mRefCount;
-                mReceiver.increaseCount();
-                if (!mReceiver.mStopSource.registerCallback(this)) {
-                    stopRequested();
-                }
-            }
-
-            void decreaseCount()
-            {
-                if (mStrongRefCount.fetch_sub(1) == 1) {
-                    mDtor(std::forward<T>(mT));
-                    mReceiver.decreaseCount();
-                }
-            }
-
-            void stopRequested() override
-            {
-                decreaseCount();
-
-                if (this->mRefCount.fetch_sub(1) == 1) {
-                    delete this;
-                }
-            }
-
-            bool access(CallableView<bool(const T &)> callback) override
-            {
-                uint32_t refCount = mStrongRefCount;
-                if (refCount > 0) {
-                    if (mReceiver.mStopSource.stop_requested())
-                        return false;
-
-                    while (refCount > 0) {
-                        if (mStrongRefCount.compare_exchange_weak(refCount, refCount + 1)) {
-                            bool result = callback(mT);
-                            decreaseCount();
-                            return result;
-                        }
-                    }
-                }
-                return false;
-            }
-
-        private:
-            receiver &mReceiver;
-            T mT;
-            Dtor mDtor;
-
-            std::atomic<uint32_t> mStrongRefCount = 1;
-        };
-
-        receiver *mReceiver = nullptr;
-        std::atomic<uint32_t> mCount = 0;
-        Flag<> mFinished;
-        mutable std::recursive_mutex mMutex;
+        ControlPtr mPtr;
     };
-
 }
 }
