@@ -152,8 +152,8 @@ namespace Execution {
             friend bool tag_invoke(Execution::access_binding_t, const BindingPoint<Binding> &binding, auto &&callback)
             {
                 bool result = false;
-                ControlBlock *block = binding.mPtr.mBlock;
-                if (block && block->increaseStrongCount()) {                    
+                auto *block = binding.mPtr.mBlock;
+                if (block && block->increaseStrongCount()) {
                     result = access_binding(binding.mBinding, callback);
                     block->decreaseStrongCount();
                 }
