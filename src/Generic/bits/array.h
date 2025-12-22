@@ -48,7 +48,13 @@ struct BitArray {
     };
 
     struct reference {
-        constexpr reference operator=(type v)
+
+        constexpr reference &operator=(const reference &other)
+        {
+            return *this = static_cast<type>(other);
+        }
+
+        constexpr reference &operator=(type v)
         {
             uint64_t newMask = Mask << (mOffset % 8);
             uint64_t newValue = static_cast<uint64_t>(v);
