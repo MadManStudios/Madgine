@@ -15,6 +15,7 @@
 #include "widgetmanager.h"
 
 METATABLE_BEGIN_BASE(Engine::Widgets::CompoundWidget, Engine::Widgets::WidgetBase)
+    READONLY_PROPERTY(TemplateWidgets, templateWidgets)
 METATABLE_END(Engine::Widgets::CompoundWidget)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::CompoundWidget, Engine::Widgets::WidgetBase)
