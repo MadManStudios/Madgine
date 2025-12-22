@@ -87,6 +87,7 @@ struct META_EXPORT ValueTypeIndex {
 enum class ExtendedValueTypeEnum : unsigned char {
     GenericType = static_cast<unsigned char>(ValueTypeEnum::MAX_VALUETYPE_TYPE),
     OptionalType,
+    BindableType,
     MAX_EXTENDEDVALUETYPE_TYPE
 };
 
@@ -113,15 +114,15 @@ struct META_EXPORT ExtendedValueTypeIndex {
         do {
             --mark;
             mTypeList[i + 1] = inner.mTypeList[i];
-            ++i;
             if (mTypeList[i + 1] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue)) {
                 assert(mark == 0);
                 mark = 2;
             }
-            if (mTypeList[i + 1] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue)) {
+            if (mTypeList[i + 1] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[i + 1] == ExtendedValueTypeEnum::BindableType || mTypeList[i + 1] == ExtendedValueTypeEnum::OptionalType) {
                 assert(mark == 0);
                 mark = 1;
             }
+            ++i;
         } while (mark > 0);
     }
 
@@ -134,15 +135,15 @@ struct META_EXPORT ExtendedValueTypeIndex {
         do {
             --mark;
             mTypeList[i + 2] = innerValue.mTypeList[i];
-            ++i;
             if (mTypeList[i + 2] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue)) {
                 assert(mark == 0);
                 mark = 2;
             }
-            if (mTypeList[i + 2] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue)) {
+            if (mTypeList[i + 2] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[i + 2] == ExtendedValueTypeEnum::BindableType || mTypeList[i + 2] == ExtendedValueTypeEnum::OptionalType) {
                 assert(mark == 0);
                 mark = 1;
             }
+            ++i;
         } while (mark > 0);
     }
 
@@ -154,6 +155,31 @@ struct META_EXPORT ExtendedValueTypeIndex {
     constexpr bool isRegular(size_t level = 0) const
     {
         return static_cast<ValueTypeEnum>(static_cast<ExtendedValueTypeEnum>(mTypeList[level])) < ValueTypeEnum::MAX_VALUETYPE_TYPE;
+    }
+
+    constexpr ExtendedValueTypeIndex unwrap()
+    {
+        assert(mTypeList[0] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[0] == ExtendedValueTypeEnum::BindableType || mTypeList[0] == ExtendedValueTypeEnum::OptionalType);
+
+        ExtendedValueTypeIndex result;
+        int i = 0;
+
+        int mark = 1;
+        do {
+            --mark;
+            result.mTypeList[i] = mTypeList[i + 1];
+            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue)) {
+                assert(mark == 0);
+                mark = 2;
+            }
+            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[i] == ExtendedValueTypeEnum::BindableType || mTypeList[i] == ExtendedValueTypeEnum::OptionalType) {
+                assert(mark == 0);
+                mark = 1;
+            }
+            ++i;
+        } while (mark > 0);
+
+        return result;
     }
 
     constexpr operator ExtendedValueTypeEnum() const
@@ -191,6 +217,9 @@ struct META_EXPORT ExtendedValueTypeIndex {
     }
 
     std::string_view toString(size_t level = 0) const;
+
+private:
+    constexpr ExtendedValueTypeIndex() = default;
 };
 
 union ValueTypeSecondaryTypeInfo {
@@ -375,6 +404,8 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
         return { { ValueTypeEnum::BindingValue }, &table<std::decay_t<typename T::type>> };
     } else if constexpr (std::same_as<T, ScopePtr>) {
         return { { ValueTypeEnum::ScopeValue }, static_cast<const MetaTable **>(nullptr) };
+    } else if constexpr (InstanceOf<T, Execution::Bindable>) {
+        return { { ExtendedValueTypeEnum::BindableType }, toValueTypeDesc<typename is_instance<T, Execution::Bindable>::argument_types::template unpack_unique<>>() };
     } else if constexpr (std::ranges::range<T>) {
         if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
             return { { ValueTypeEnum::KeyValueVirtualSequenceRangeValue }, toValueTypeDesc<std::ranges::range_value_t<T>>() };

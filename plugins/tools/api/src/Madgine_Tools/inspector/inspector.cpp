@@ -79,24 +79,27 @@ namespace Tools {
 
         std::string_view id = it->key();
         bool editable = it->isEditable();
-        bool generic = it->type().mType == ExtendedValueTypeEnum::GenericType;
 
         it->value(value);
-        std::pair<bool, bool> modified = drawValue(id, value, editable, generic);
+        std::pair<bool, bool> modified = drawValue(id, value, editable, it->type());
 
         if (modified.first || (modified.second && !value.isReference()))
             *it = value;
         return modified.first || modified.second;
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ValueType &value, bool editable, bool generic)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ValueType &value, bool editable, ExtendedValueTypeDesc type, std::optional<ValueTypeDesc> actualTypeIn)
     {
+        ValueTypeDesc actualType = actualTypeIn ? *actualTypeIn : value.type();
+
+        bool typeWasRegular = type.mType.isRegular();
+
         std::pair<bool, bool> modified = value.visit(overloaded {
             [&](ScopePtr &scope) {
-                return drawValue(id, scope, editable, generic ? &value : nullptr);
+                return drawValue(id, scope, editable, &type, actualType);
             },
             [&](OwnedScopePtr scope) {
-                return drawValue(id, scope, editable, generic ? &value : nullptr);
+                return drawValue(id, scope, editable, &type, actualType);
             },
             [&](KeyValueVirtualSequenceRange &range) {
                 return std::make_pair(false, drawValue(id, range, editable));
@@ -109,7 +112,18 @@ namespace Tools {
                 return std::make_pair(false, false);
             },
             [&](ObjectPtr &object) {
-                return drawValue(id, object, editable, generic ? &value : nullptr);
+                return drawValue(id, object, editable, &type, actualType);
+            },
+            [&](KeyValueBinding &binding) {
+                std::pair<bool, bool> result;
+                if (!Execution::access_binding(binding.mPtr, [&](const ValueType &v) {
+                        ValueType v_copy = v;
+                        result = drawValue(id, v_copy, false, type, actualType);
+                    })) {
+                    ValueType v;
+                    result = drawValue(id, v, false, type, actualType);
+                }
+                return result;
             },
             [&](auto &other) {
                 int columns = ImGui::TableGetColumnCount();
@@ -126,26 +140,16 @@ namespace Tools {
 
                 ImGui::PushID(id.data());
 
-                if (generic) {
-                    ImGui::BeginGroup();
-                    ImGui::PushItemWidth(-2.0f * ImGui::GetFrameHeight());
-                } else {
-                    ImGui::PushItemWidth(-1.0f);
-                }
+                ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !type.mType.isRegular()));
 
                 ImGui::BeginDisabled(!editable);
                 std::pair<bool, bool> result = std::make_pair(ImGui::ValueTypeDrawer::draw(other), false);
 
                 ImGui::PopItemWidth();
 
-                if (generic) {
-                    ImGui::SameLine(0);
-                    ValueTypeDesc desc;
-                    if (ImGui::ValueTypeTypePicker(desc)) {
-                        result.first = true;
-                        value.setType(desc);
-                    }
-                    ImGui::EndGroup();
+                if (!type.mType.isRegular()) {
+                    ImGui::SameLine(0, 0);
+                    result.first |= drawTypeDecorations(type, actualType);
                 }
                 ImGui::EndDisabled();
 
@@ -154,10 +158,14 @@ namespace Tools {
                 return result;
             } });
 
+        if (modified.first && !typeWasRegular && type.mType.isRegular()) {
+            value.setType(type);
+        }
+
         return modified;
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ScopePtr &scope, bool editable, ValueType *generic)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ScopePtr &scope, bool editable, ExtendedValueTypeDesc *type, std::optional<ValueTypeDesc> actualType)
     {
         bool modified = false;
         bool changed = false;
@@ -167,8 +175,6 @@ namespace Tools {
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
-
-        // ImGui::BeginGroup();
 
         bool open = false;
         if (scope)
@@ -184,7 +190,7 @@ namespace Tools {
 
         if (hasSuggestions) {
             ImGui::PushID(id.data());
-            ImGui::PushItemWidth(-1.0f + (-2.0f * ImGui::GetFrameHeight() * bool(generic)));
+            ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * (type && !type->mType.isRegular())));
             if (ImGui::BeginCombo("##suggestions", scope.name().c_str())) {
                 if (ImGui::Selectable("<None>")) {
                     scope.mScope = nullptr;
@@ -200,22 +206,14 @@ namespace Tools {
             }
             ImGui::PopItemWidth();
             ImGui::PopID();
-
-            if (generic)
-                ImGui::SameLine();
         } else if (scope.mType) {
             ImGui::TextDisabled("%s", scope.mType->mTypeName);
         }
 
-        if (generic) {
-            ValueTypeDesc desc;
-            if (ImGui::ValueTypeTypePicker(desc)) {
-                modified = true;
-                generic->setType(desc);
-            }
+        if (type && !type->mType.isRegular()) {
+            ImGui::SameLine(0, 0);
+            modified |= drawTypeDecorations(*type, actualType ? *actualType : ValueTypeDesc{ValueTypeEnum::ScopeValue, scope.mType->mSelf});            
         }
-
-        // ImGui::EndGroup();
 
         ImGui::DraggableValueTypeSource(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {
@@ -241,13 +239,13 @@ namespace Tools {
         return std::make_pair(modified, changed);
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, OwnedScopePtr &scope, bool editable, ValueType *generic)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, OwnedScopePtr &scope, bool editable, ExtendedValueTypeDesc *type, std::optional<ValueTypeDesc> actualType)
     {
         ScopePtr ptr = scope.get();
-        return drawValue(id, ptr, editable, generic);
+        return drawValue(id, ptr, editable, type, actualType);
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ObjectPtr &object, bool editable, ValueType *generic)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ObjectPtr &object, bool editable, ExtendedValueTypeDesc *type, std::optional<ValueTypeDesc> actualType)
     {
         bool modified = false;
         bool changed = false;
@@ -271,13 +269,9 @@ namespace Tools {
 
         ImGui::Text(object.descriptor());
 
-        if (generic) {
-            ImGui::SameLine();
-            ValueTypeDesc desc;
-            if (ImGui::ValueTypeTypePicker(desc)) {
-                modified = true;
-                generic->setType(desc);
-            }
+        if (type && !type->mType.isRegular()) {
+            ImGui::SameLine(0, 0);
+            modified |= drawTypeDecorations(*type, actualType ? *actualType : ValueTypeDesc { ValueTypeEnum::ObjectValue });
         }
 
         // ImGui::EndGroup();
@@ -301,7 +295,7 @@ namespace Tools {
 
             for (auto &[key, value] : object.values()) {
                 ValueType v = value;
-                std::pair<bool, bool> p = drawValue(key, v, value.isReference());
+                std::pair<bool, bool> p = drawValue(key, v, value.isReference(), v.type());
                 changed |= p.first || p.second;
                 if (p.first) {
                     value = v;
@@ -332,7 +326,7 @@ namespace Tools {
             for (auto vValue : range) {
                 ImGui::TableNextRow();
                 ValueType value = vValue;
-                std::pair<bool, bool> modified = drawValue("[" + std::to_string(i) + "]", value, editable, false);
+                std::pair<bool, bool> modified = drawValue("[" + std::to_string(i) + "]", value, editable, value.type());
                 if (modified.first)
                     vValue = value;
                 changed |= modified.first || (modified.second && !range.isReference());
@@ -360,7 +354,7 @@ namespace Tools {
                 ImGui::TableNextRow();
                 ValueType value = vValue;
                 std::string key = vKey.toShortString() /* + "##" + std::to_string(i)*/;
-                std::pair<bool, bool> result = drawValue(key, value, editable, false);
+                std::pair<bool, bool> result = drawValue(key, value, editable, value.type());
                 if (result.first)
                     vValue = value;
                 changed |= result.second;
@@ -393,6 +387,38 @@ namespace Tools {
             changed |= it2->second(scope);
         }
         return changed;
+    }
+
+    bool Inspector::drawTypeDecorations(ExtendedValueTypeDesc &type, ValueTypeDesc actual)
+    {
+        ValueTypeDesc desc;
+        bool isSet = actual != static_cast<ValueTypeDesc>(toValueTypeDesc<std::monostate>());
+        switch (type.mType) {
+        case ExtendedValueTypeEnum::GenericType:
+            if (ImGui::ValueTypeTypePicker(desc)) {
+                type = desc;
+                return true;
+            }
+            break;
+        case ExtendedValueTypeEnum::OptionalType:
+            if (ImGui::Checkbox("##Optional", &isSet)) {
+                if (isSet) {
+                    type = { type.mType.unwrap(), type.mSecondary };
+                } else {
+                    type = toValueTypeDesc<std::monostate>();
+                }
+                return true;
+            }
+            break;
+        case ExtendedValueTypeEnum::BindableType:
+            if (ImGui::LED("##Bindable", actual.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
+
+            }
+            break;
+        default:
+            throw 0;
+        }
+        return false;
     }
 
     std::string_view Inspector::key() const

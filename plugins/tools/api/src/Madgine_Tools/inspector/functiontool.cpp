@@ -132,7 +132,7 @@ namespace Tools {
                     ImGui::TableNextRow();
 
                     ValueType v = i == 0 ? ValueType { function.scope() } : args[i - 1];
-                    bool changed = mInspector->drawValue(function.mFunction.mTable->mArguments[i].mName, v, true, !function.mFunction.mTable->mArguments[i].mType.mType.isRegular()).first;
+                    bool changed = mInspector->drawValue(function.mFunction.mTable->mArguments[i].mName, v, true, function.mFunction.mTable->mArguments[i].mType).first;
 
                     if (ImGui::BeginDragDropTarget()) {
                         changed |= ImGui::AcceptDraggableValueType([&](const ValueType &dropped) { v = dropped; }, [&](const ValueType &dropped) { return function.mFunction.mTable->mArguments[i].mType.canAccept(dropped.type()); });

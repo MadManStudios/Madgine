@@ -81,7 +81,7 @@ namespace Tools {
                 do {
                     if (ImGui::BeginTable("fields", 2, ImGuiTableFlags_Resizable)) {
                         for (auto &[key, value] : parser.fields()) {
-                            templates->mInspector->drawValue(key, value, true, false);
+                            templates->mInspector->drawValue(key, value, true, value.type());
                         }
                         ImGui::EndTable();
                     }

@@ -28,6 +28,8 @@ namespace Tools {
 
         Flags<GenericResult> mFlags;
 
+        std::optional<std::string> mOptional;
+
     private:
         bool mRenderSphere = false;
         int mSphereDetail = 1;
@@ -35,7 +37,7 @@ namespace Tools {
         bool mRenderText = false;
         std::string m3DText = "Test_1234 Hello World!";
 
-        bool mRenderArrow = false;
+        bool mRenderArrow = false;        
     };
 
 }

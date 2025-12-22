@@ -313,7 +313,7 @@ namespace Tools {
 
                         for (auto &[key, value] : mSelectedLocation->localVariables()) {
                             ValueType v = value;
-                            if (mInspector->drawValue(key, v, value.isReference()).first)
+                            if (mInspector->drawValue(key, v, value.isReference(), value.type()).first)
                                 value = v;
                         }
 

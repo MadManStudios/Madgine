@@ -19,10 +19,8 @@ struct KeyValueBinding {
             ValueType_erased([&](ValueType &v) {
                 result = Execution::access_binding(ptr.mBinding, [&](auto &&b) {
                     to_ValueType(v, forward_ref<decltype(b)>(b));
-                    return true;
-                });
-                if (result)
                     std::forward<F>(callback)(v);
+                });
             });
 
             return result;

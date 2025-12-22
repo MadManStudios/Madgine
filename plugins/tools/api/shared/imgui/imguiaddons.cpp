@@ -919,6 +919,66 @@ bool MethodPicker(const char *label, const std::vector<std::pair<std::string, En
     return result;
 }
 
+bool LED(const char *label, bool on, const ImVec2 &size)
+{
+    ImGui::BeginGroup();
+    ImGui::PushID(label);
+
+    // Get current window and draw list
+    ImGuiWindow *window = ImGui::GetCurrentWindow();
+    if (window->SkipItems) {
+        ImGui::PopID();
+        ImGui::EndGroup();
+        return false;
+    }
+    ImDrawList *draw_list = ImGui::GetWindowDrawList();
+
+    // Calculate position for the LED
+    ImVec2 p = ImGui::GetCursorScreenPos();
+    ImVec2 center = ImVec2(p.x + size.x * 0.5f, p.y + size.y * 0.5f);
+    float radius = size.x * 0.2f;
+
+    // Define colors: a darker grey for 'off', and a vibrant color for 'on'
+    ImU32 color_on = ImGui::GetColorU32(ImVec4(0.0f, 1.0f, 0.0f, 1.0f)); // Bright green
+    ImU32 color_off = ImGui::GetColorU32(ImVec4(0.5f, 0.5f, 0.5f, 1.0f)); // Grey
+
+    // Draw the LED (circle)
+    if (on) {
+        // Optional: Add a subtle background glow for "on" state
+        // This creates an outer, slightly transparent circle
+        ImU32 glow_color = ImGui::GetColorU32(ImVec4(0.0f, 1.0f, 0.0f, 0.3f));
+        draw_list->AddCircleFilled(center, radius + 2.0f, glow_color, 16);
+        draw_list->AddCircleFilled(center, radius, color_on, 16);
+    } else {
+        draw_list->AddCircleFilled(center, radius, color_off, 16);
+    }
+
+    // Handle interaction (if needed, e.g., make it a clickable toggle)
+    // Here we just advance the cursor position so other widgets can follow
+    bool pressed = ImGui::InvisibleButton("##LED_button", size);
+
+    // Add label text if provided (after the LED, on the same line)
+    if (label && label[0] != '#') // Check if it's not a hidden label (starting with ##)
+    {
+        ImGui::SameLine();
+        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + (size.y - ImGui::GetTextLineHeight()) * 0.5f);
+        ImGui::Text("%s", label);
+    }
+
+    ImGui::PopID();
+    ImGui::EndGroup();
+
+    return pressed;
+}
+
+bool LED(const char* label, bool *on, const ImVec2& size)
+{
+    bool pressed = LED(label, *on, size);
+    if (pressed)
+        *on = !*on;
+    return pressed;
+}
+
 IMGUI_API void ResetDraggableValueType()
 {
     sPayload.mValue = {};

@@ -26,6 +26,7 @@ METATABLE_BEGIN_BASE(Engine::Tools::TestTool, Engine::Tools::ToolBase)
     FUNCTION(dummy)
     MEMBER(mV)
     MEMBER(mFlags)
+    MEMBER(mOptional)
 METATABLE_END(Engine::Tools::TestTool)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::TestTool, Engine::Tools::ToolBase)

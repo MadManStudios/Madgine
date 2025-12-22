@@ -53,6 +53,8 @@ using KeyValueVirtualAssociativeRange = VirtualRange<KeyValuePair, Functor_to_Ke
 using KeyValueVirtualSequenceIterator = VirtualIterator<ValueType>;
 using KeyValueVirtualSequenceRange = VirtualRange<ValueType, Functor_to_ValueType>;
 
+using Duration64 = std::chrono::duration<uint64_t, std::nano>;
+
 namespace Serialize {
     struct SerializeStream;
     struct SerializableUnitBase;

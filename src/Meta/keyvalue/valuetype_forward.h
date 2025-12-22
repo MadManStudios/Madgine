@@ -115,6 +115,13 @@ decltype(auto) ValueType_as(const ValueType &v)
         return ValueType_as_impl<FlagsHolder>(v).safe_cast<T>();
     } else if constexpr (Execution::AnyBinding<T>) {
         return (ValueType_as_impl<KeyValueBinding>(v)->*&ValueType_as<typename T::type>)();
+    } else if constexpr (InstanceOf<std::decay_t<T>, Execution::Bindable>) {
+        using V = typename is_instance<T, Execution::Bindable>::argument_types::template unpack_unique<>;
+        if (ValueType_is<V>(v)) {
+            return T { ValueType_as_impl<V>(v) };
+        } else {
+            return T { (ValueType_as_impl<KeyValueBinding>(v)->*&ValueType_as<V>)() };
+        }
     } else {
         using Ty = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
         std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(ValueType_as_impl<ScopePtr>(v));
@@ -134,8 +141,21 @@ decltype(auto) convert_ValueType(T &&t)
 
     if constexpr (InstanceOf<std::decay_t<T>, std::reference_wrapper>) {
         return convert_ValueType<true>(t.get());
-    } else if constexpr (InstanceOf<T, std::optional>) {
-        return std::forward<T>(t);
+    } else if constexpr (InstanceOf<std::decay_t<T>, std::optional>) {
+        using U = std::decay_t<T>::value_type;
+        using R = std::variant<U, std::monostate>;
+        if (t) {
+            return R { *std::forward<T>(t) };
+        } else {
+            return R { std::monostate {} };
+        }
+    } else if constexpr (InstanceOf<std::decay_t<T>, Execution::Bindable>) {
+        using U = typename is_instance<std::decay_t<T>, Execution::Bindable>::argument_types::template unpack_unique<>;
+        using R = std::variant<std::remove_reference_t<decltype(convert_ValueType(std::declval<U>()))>, KeyValueBinding>;
+        return std::visit([](auto &v) {
+            return R { convert_ValueType(v) };
+        },
+            std::forward<T>(t).mValue);
     } else if constexpr (ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>) {
         return std::forward<T>(t);
     } else if constexpr (String<std::decay_t<T>>) {
@@ -176,6 +196,15 @@ decltype(auto) convert_ValueType(T &&t)
 template <typename T>
     requires(ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>)
 META_EXPORT void to_ValueType_impl(ValueType &v, T &&t);
+
+template <typename... V>
+void to_ValueType_impl(ValueType &v, std::variant<V...> &&t)
+{
+    std::visit([&v](auto &&arg) {
+        to_ValueType_impl(v, std::forward<decltype(arg)>(arg));
+    },
+        std::move(t));
+}
 
 template <typename T>
 void to_ValueType(ValueType &v, T &&t)

@@ -83,6 +83,9 @@ namespace Execution {
     struct BindingPtr;
     template <typename T>
     struct ConstantBinding;
+    
+    template <typename T>
+    struct Bindable;
 
     struct BindingError;
 
