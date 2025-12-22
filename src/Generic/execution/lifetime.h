@@ -152,9 +152,10 @@ namespace Execution {
             friend bool tag_invoke(Execution::access_binding_t, const BindingPoint<Binding> &binding, auto &&callback)
             {
                 bool result = false;
-                if (binding.mPtr.mBlock && binding.mPtr.mBlock->increaseStrongCount()) {
+                ControlBlock *block = binding.mPtr.mBlock;
+                if (block && block->increaseStrongCount()) {                    
                     result = access_binding(binding.mBinding, callback);
-                    binding.mPtr.mBlock->decreaseStrongCount();
+                    block->decreaseStrongCount();
                 }
                 return result;
             }
