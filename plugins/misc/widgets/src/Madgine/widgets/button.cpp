@@ -68,7 +68,7 @@ namespace Widgets {
         }
 
         if (mTextRenderData.available()) {
-            mTextRenderData.render(renderData, mText, pos, size);
+            mTextRenderData.render(renderData, mText.get(), pos, size);
         }
 
         WidgetBase::render(renderData);

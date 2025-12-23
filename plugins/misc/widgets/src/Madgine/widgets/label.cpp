@@ -27,7 +27,7 @@ namespace Widgets {
             Vector2 pos = getAbsolutePosition();
             Vector3 size = getAbsoluteSize();
 
-            mTextRenderData.render(renderData, mText, pos, size);
+            mTextRenderData.render(renderData, mText.get(), pos, size);
         }
 
         WidgetBase::render(renderData);

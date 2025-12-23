@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/execution/bindable.h"
+
 #include "util/textrenderdata.h"
 #include "widget.h"
 
@@ -11,8 +13,8 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        TextRenderData mTextRenderData;
-        std::string mText;
+        TextRenderData mTextRenderData;      
+        Execution::Bindable<std::string> mText;
     };
 }
 }

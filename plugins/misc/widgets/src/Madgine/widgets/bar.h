@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/execution/bindable.h"
+
 #include "widget.h"
 
 namespace Engine {
@@ -10,8 +12,8 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        float mRatio = 0.0f;
-        Color4 mColor;
+        Execution::Bindable<float> mRatio = 0.0f;
+        Execution::Bindable<Color4> mColor;
     };
 }
 }

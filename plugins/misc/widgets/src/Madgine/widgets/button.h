@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Generic/execution/bindable.h"
 #include "Generic/execution/signal.h"
 
 #include "util/colortintrenderdata.h"
@@ -28,7 +29,7 @@ namespace Widgets {
         ScalableImageRenderData mImageRenderData;
         ColorTintRenderData mColorTintRenderData;
 
-        std::string mText;
+        Execution::Bindable<std::string> mText;
 
     protected:
         void injectPointerEnter(const Input::PointerMoveEvent &arg) override;
