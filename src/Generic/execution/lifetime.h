@@ -16,7 +16,10 @@ namespace Execution {
     private:
         struct ControlBlock;
 
+        struct state;
+
     public:
+
         struct ControlPtr {
             ControlPtr() = default;
             ControlPtr(ControlBlock &block)
@@ -81,6 +84,9 @@ namespace Execution {
 
             ControlBlock *mBlock = nullptr;
         };
+                
+        template <typename Rec>
+        using virtual_state = VirtualState<state, Rec>;
 
         Lifetime()
         {
@@ -94,7 +100,7 @@ namespace Execution {
         template <Sender Sender>
         void attach(Sender &&sender)
         {
-            if (mPtr) {
+            if (mPtr.alive()) {
                 (new attach_state<stoppable_t::sender<Sender>> { std::forward<Sender>(sender) | stoppable, mPtr })->start();
             }
         }
@@ -106,7 +112,7 @@ namespace Execution {
 
         bool running() const
         {
-            return mPtr.mBlock->running();
+            return mPtr.alive();
         }
 
         auto &finished()
@@ -124,7 +130,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return VirtualState<state, Rec>(std::forward<Rec>(rec), sender.mLifetime, std::forward<F>(sender.mCallback));
+                return virtual_state<Rec>(std::forward<Rec>(rec), sender.mLifetime, std::forward<F>(sender.mCallback));
             }
 
             Lifetime &mLifetime;
@@ -185,11 +191,10 @@ namespace Execution {
         template <typename Rec>
         friend auto tag_invoke(connect_t, Lifetime &lifetime, Rec &&rec)
         {
-            return VirtualState<state, Rec>(std::forward<Rec>(rec), lifetime);
+            return virtual_state<Rec>(std::forward<Rec>(rec), lifetime);
         }
 
     private:
-        struct state;
 
         struct ControlBlock {
             ControlBlock(state &state)
@@ -317,9 +322,11 @@ namespace Execution {
             }
             void start()
             {
-                bool success = mPtr.mBlock->increaseStrongCount();
-                assert(success);
-                mState.start();
+                if (mPtr.mBlock->increaseStrongCount()) {
+                    mState.start();
+                } else {
+                    delete this;
+                }
             }
 
             ControlPtr mPtr;
