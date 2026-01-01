@@ -56,10 +56,7 @@ namespace Tools {
 
     Threading::Task<bool> SceneTool::init()
     {
-        App::Application *app = App::Application::getSingletonPtr();
-        if (!app)
-            co_return false;
-        mSceneMgr = &app->getGlobalAPIComponent<Scene::SceneManager>();
+        mSceneMgr = &mWindow.app().getGlobalAPIComponent<Scene::SceneManager>();
 
         mInspector = &mRoot.getTool<Inspector>();
 

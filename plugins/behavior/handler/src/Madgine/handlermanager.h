@@ -10,35 +10,28 @@
 #include "Modules/uniquecomponent/uniquecomponentcontainer.h"
 
 #include "Madgine/debug/debuggablelifetime.h"
-#include "Madgine/window/mainwindowlistener.h"
+#include "Madgine/window/mainwindowcomponent.h"
+#include "Madgine/window/mainwindowcomponentcollector.h"
 
 #include "handlercollector.h"
 
 namespace Engine {
 namespace Behavior {
 
-    struct MADGINE_HANDLER_EXPORT HandlerManager : Threading::MadgineObject<HandlerManager>, Window::MainWindowListener {
+    struct MADGINE_HANDLER_EXPORT HandlerManager : Window::MainWindowComponent<HandlerManager> {
 
         using Self = HandlerManager;
 
-        HandlerManager(App::Application &app, Window::MainWindow &window);
+        HandlerManager(Window::MainWindow &window);
         HandlerManager(const HandlerManager &) = delete;
 
         ~HandlerManager();
-
-        void clear();
 
         void hideCursor(bool keep = true);
         void showCursor();
         bool isCursorVisible() const;
 
-        // Scene::ContextMask currentContext();
-
         std::set<HandlerBase *> getHandlers();
-
-        static const constexpr int sMaxInitOrder = 4;
-
-        std::string_view key() const;
 
         template <typename T>
         T &getHandler()
@@ -60,16 +53,12 @@ namespace Behavior {
 
         Debug::DebuggableLifetime<> &lifetime();
 
-        void onActivate(bool active) override;
+        App::Application &app() const;        
 
-        App::Application &app() const;
-        Window::MainWindow &window() const;
-
-        void shutdown();
+        bool includeInLayout() const override;
 
     private:
         App::Application &mApp;
-        Window::MainWindow &mWindow;
 
         DEBUGGABLE_LIFETIME(mLifetime);
 

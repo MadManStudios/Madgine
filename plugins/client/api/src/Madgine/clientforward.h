@@ -2,6 +2,10 @@
 
 namespace Engine {
 
+namespace App {
+    struct Application;
+}
+
 namespace Window {
 
     struct MainWindow;

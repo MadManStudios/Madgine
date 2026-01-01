@@ -16,6 +16,8 @@
 
 #include "Madgine/scene/behavior/scenesenders.h"
 
+#include "Generic/manuallifetime.h"
+
 namespace ClickBrick {
 
     struct GameManager : Engine::Widgets::WidgetHandler<GameManager> {
@@ -56,7 +58,7 @@ namespace ClickBrick {
         std::chrono::microseconds mAcc = 0s;
         Engine::IntervalClock<Engine::Threading::CustomTimepoint> mSceneClock;
         
-        Engine::Render::SceneRenderPass mSceneRenderer;
+        Engine::ManualLifetime<Engine::Render::SceneRenderPass> mSceneRenderer;
         std::unique_ptr<Engine::Render::RenderTarget> mGameRenderTarget;
     };
 

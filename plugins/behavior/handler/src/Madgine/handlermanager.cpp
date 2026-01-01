@@ -15,6 +15,7 @@
 #include "Madgine/window/mainwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 #include "handler.h"
 
@@ -22,19 +23,19 @@ METATABLE_BEGIN(Engine::Behavior::HandlerManager)
     MEMBER(mHandlers)
 METATABLE_END(Engine::Behavior::HandlerManager)
 
+SERIALIZETABLE_BEGIN(Engine::Behavior::HandlerManager)
+SERIALIZETABLE_END(Engine::Behavior::HandlerManager)
+
+NAMED_UNIQUECOMPONENT(HandlerManager, Engine::Behavior::HandlerManager)
+
 namespace Engine {
 namespace Behavior {
 
-    static std::chrono::milliseconds fixedUpdateInterval = 15ms;
-
-    HandlerManager::HandlerManager(App::Application &app, Window::MainWindow &window)
-        : mApp(app)
-        , mWindow(window)
+    HandlerManager::HandlerManager(Window::MainWindow &window)
+        : MainWindowComponent(window, 100)
+        , mApp(window.app())
         , mHandlers(*this)
     {
-        window.taskQueue()->addSetupSteps(
-            [this]() { return callInit(); },
-            [this]() { return callFinalize(); });
     }
 
     HandlerManager::~HandlerManager()
@@ -43,39 +44,35 @@ namespace Behavior {
 
     Threading::Task<bool> HandlerManager::init()
     {
-        co_await mWindow.state();
-
         // Execution::detach(mgr.updatedSignal().connect([this] { onUpdate(); })); TODO
+
+        if (!co_await MainWindowComponent::init())
+            co_return false;
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callInit();
-
-        mWindow.addListener(this);
-
-        startLifetime();
 
         co_return true;
     }
 
     Threading::Task<void> HandlerManager::finalize()
     {
-        endLifetime();
-        co_await mLifetime.finished();
-
-        mWindow.removeListener(this);
+        assert(!mLifetime.running());
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callFinalize();
+
+        co_await MainWindowComponent::finalize();
     }
 
     void HandlerManager::startLifetime()
     {
-        Execution::detach(mLifetime);
+        mWindow.lifetime().attach(mLifetime);
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             handler->startLifetime();
     }
-
+        
     void HandlerManager::endLifetime()
     {
         mLifetime.end();
@@ -86,34 +83,14 @@ namespace Behavior {
         return mLifetime;
     }
 
-    void HandlerManager::onActivate(bool active)
-    {
-        if (active)
-            startLifetime();
-        else
-            endLifetime();
-    }
-
     App::Application &HandlerManager::app() const
     {
         return mApp;
     }
 
-    Window::MainWindow &HandlerManager::window() const
+    bool HandlerManager::includeInLayout() const
     {
-        return mWindow;
-    }
-
-    void HandlerManager::shutdown()
-    {
-        mWindow.shutdown();
-    }
-
-    void HandlerManager::clear()
-    {
-        /*while (!mModalWindowList.empty()) {
-            closeModalWindow(mModalWindowList.top());
-        }*/
+        return false;
     }
 
     void HandlerManager::hideCursor(bool keep)
@@ -162,11 +139,6 @@ namespace Behavior {
             result.insert(h.get());
         }
         return result;
-    }
-
-    std::string_view HandlerManager::key() const
-    {
-        return "UI";
     }
 
     HandlerBase &HandlerManager::getHandler(size_t i)

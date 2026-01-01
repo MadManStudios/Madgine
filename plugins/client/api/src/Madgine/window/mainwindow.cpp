@@ -91,8 +91,9 @@ namespace Window {
      * setup steps in the TaskQueue. render() is registered as repeated task to the
      * TaskQueue.
      */
-    MainWindow::MainWindow(const WindowSettings &settings)
-        : mSettings(settings)
+    MainWindow::MainWindow(App::Application &app, const WindowSettings &settings)
+        : mApp(app)
+        , mSettings(settings)
         , mTaskQueue("FrameLoop", true)
         , mComponents(*this)
         , mRenderContext(&mTaskQueue)
@@ -258,14 +259,9 @@ namespace Window {
         return mLifetime;
     }
 
-    void MainWindow::addListener(MainWindowListener *listener)
+    App::Application &MainWindow::app() const
     {
-        mListeners.push_back(listener);
-    }
-
-    void MainWindow::removeListener(MainWindowListener *listener)
-    {
-        std::erase(mListeners, listener);
+        return mApp;
     }
 
     /**
@@ -454,8 +450,6 @@ namespace Window {
                 endLifetime();
             }
         }
-        for (MainWindowListener *listener : mListeners)
-            listener->onActivate(active);
     }
 
     void MainWindow::sTestScreens(size_t n)

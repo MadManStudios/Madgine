@@ -9,7 +9,6 @@
 #include "Madgine/render/rendercontextcollector.h"
 
 #include "mainwindowcomponentcollector.h"
-#include "mainwindowlistener.h"
 
 namespace Engine {
 namespace Window {
@@ -42,7 +41,7 @@ namespace Window {
     struct MADGINE_CLIENT_EXPORT MainWindow : Threading::MadgineObject<MainWindow> {
         SERIALIZABLEUNIT(MainWindow)
 
-        MainWindow(const WindowSettings &settings);
+        MainWindow(App::Application &app, const WindowSettings &settings);
         ~MainWindow();
 
         void saveLayout(const Filesystem::Path &path);
@@ -62,9 +61,6 @@ namespace Window {
         void endLifetime();
 
         Debug::DebuggableLifetime<> &lifetime();
-
-        void addListener(MainWindowListener *listener);
-        void removeListener(MainWindowListener *listener);
 
         /**
          * @name Components
@@ -90,6 +86,8 @@ namespace Window {
         ToolWindow *createToolWindow(const WindowSettings &settings);
         void destroyToolWindow(ToolWindow *w);
 
+        App::Application &app() const;
+
         OSWindow *osWindow() const;
 
         Render::RenderContext *getRenderer();
@@ -109,6 +107,8 @@ namespace Window {
         void onActivate(Serialize::CallbackTiming timing, bool active);
 
     private:
+        App::Application &mApp;
+
         const WindowSettings &mSettings;
 
         Threading::TaskQueue mTaskQueue;
@@ -122,8 +122,6 @@ namespace Window {
         OSWindow *mOsWindow = nullptr;
         Render::RenderContextSelector mRenderContext;
         std::unique_ptr<Render::RenderTarget> mRenderWindow;
-
-        std::vector<MainWindowListener *> mListeners;
 
         bool mSoftwareKeyboardRequested = false;
     };

@@ -19,8 +19,6 @@ namespace Engine {
 
 namespace App {
 
-    static Threading::WorkgroupLocal<Application *> sApp;
-
     /**
      * @brief Creates an Application and sets up its TaskQueue
      *
@@ -31,9 +29,6 @@ namespace App {
         : mTaskQueue("Application")
         , mGlobalAPIs(*this)
     {
-        assert(!sApp);
-        sApp = this;
-
         mTaskQueue.addSetupSteps(
             [this]() { return callInit(); },
             [this]() { return callFinalize(); });
@@ -44,8 +39,6 @@ namespace App {
      */
     Application::~Application()
     {
-        assert(sApp == this);
-        sApp = nullptr;
     }
 
     /**
@@ -86,24 +79,6 @@ namespace App {
     GlobalAPIBase &Application::getGlobalAPIComponent(size_t i)
     {
         return mGlobalAPIs.get(i);
-    }
-
-    /**
-     * @brief
-     * @return
-     */
-    Application &Application::getSingleton()
-    {
-        return *sApp;
-    }
-
-    /**
-     * @brief
-     * @return
-     */
-    Application *Application::getSingletonPtr()
-    {
-        return sApp;
     }
 
     /**

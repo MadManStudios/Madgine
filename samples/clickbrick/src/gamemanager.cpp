@@ -63,7 +63,6 @@ namespace ClickBrick {
 GameManager::GameManager(Engine::Behavior::HandlerManager &ui)
     : Engine::Widgets::WidgetHandler<GameManager>(ui, "Ingame")
     , mSceneMgr(ui.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
-    , mSceneRenderer(mSceneMgr, ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>().renderData(), ui.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>().pointShadowRenderData(), mCamera, 50)
     , mSceneClock(mSceneMgr.clock().now())
 {
 }
@@ -78,6 +77,8 @@ Engine::Threading::Task<bool> GameManager::init()
     mCamera.mPosition = { 0, 0, -10 };
     mCamera.mOrientation = {};
 
+    Engine::construct(mSceneRenderer, mSceneMgr, mUI.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>().renderData(), mUI.window().getWindowComponent<Engine::Render::SceneMainWindowComponent>().pointShadowRenderData(), mCamera, 50);
+
     mGameRenderTarget = mUI.window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName = "Game", .mFormat = Engine::Render::FORMAT_RGBA8_SRGB });
     mGameRenderTarget->addRenderPass(&mSceneRenderer);
 
@@ -89,6 +90,8 @@ Engine::Threading::Task<bool> GameManager::init()
 Engine::Threading::Task<void> GameManager::finalize()
 {
     mGameRenderTarget.reset();
+
+    Engine::destruct(mSceneRenderer);
 
     co_await WidgetHandlerBase::finalize();
 }

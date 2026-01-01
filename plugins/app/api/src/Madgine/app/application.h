@@ -38,9 +38,6 @@ namespace App {
 
         Debug::DebuggableLifetime<> &lifetime();
 
-        static Application &getSingleton();
-        static Application *getSingletonPtr();
-
     protected:
         /**
          * @name MadgineObject interface

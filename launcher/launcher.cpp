@@ -1,6 +1,5 @@
 #include "Madgine/applib.h"
 #include "Madgine/clientlib.h"
-#include "Madgine/handlerlib.h"
 
 #include "launcher.h"
 
@@ -10,7 +9,6 @@
 #include "Modules/threading/scheduler.h"
 
 #include "Madgine/app/application.h"
-#include "Madgine/handlermanager.h"
 #include "Madgine/root/keyvalueregistry.h"
 #include "Madgine/window/mainwindow.h"
 
@@ -33,12 +31,10 @@ int launch(Engine::Closure<void(Engine::App::Application &, Engine::Window::Main
     FIX_LOCAL Engine::Window::WindowSettings windowSettings;
     windowSettings.mTitle = MADGINE_LAUNCHER_WINDOW_TITLE;
     windowSettings.mIcon = MADGINE_LAUNCHER_ICON;
-    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Window::MainWindow> window { "MainWindow", windowSettings };
+    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Window::MainWindow> window { "MainWindow", app, windowSettings };
 
     if (callback)
         callback(app, window);
-
-    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Behavior::HandlerManager> ui { "HandlerManager", app, window };
 
     FIX_LOCAL Engine::Threading::Scheduler scheduler;
     int result = scheduler.go();

@@ -39,7 +39,7 @@ set_target_properties(${MADGINE_BINARY_NAME} PROPERTIES
 		PLUGIN_BASE Madgine
 		)
 
-target_link_plugins(${MADGINE_BINARY_NAME} App Client Handler Root)
+target_link_plugins(${MADGINE_BINARY_NAME} App Client Root)
 if (MADGINE_SERVER)
 	target_sources(${MADGINE_BINARY_NAME} PRIVATE server.cpp)
 	target_link_plugins(${MADGINE_BINARY_NAME} Server)

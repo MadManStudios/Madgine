@@ -31,7 +31,7 @@ namespace Render {
 
     SceneMainWindowComponent::SceneMainWindowComponent(Window::MainWindow &window)
         : MainWindowComponent(window, 5)
-        , mScene(Engine::App::Application::getSingleton().getGlobalAPIComponent<Engine::Scene::SceneManager>())
+        , mScene(window.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
         , mSceneData(mScene)
         , mPointShadowRenderData(mScene, mSceneData)
         , mPass(mScene, mSceneData, mPointShadowRenderData, mCamera, 1)
