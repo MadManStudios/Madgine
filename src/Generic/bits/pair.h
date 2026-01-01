@@ -22,7 +22,7 @@ struct BitPair {
             new (target) T(std::get<Is>(std::move(tuple))...);
         };
         helper(&mFirst, firstArgs, std::index_sequence_for<FirstArgs...>());
-        helper(&mFirst, secondArgs, std::index_sequence_for<SecondArgs...>());
+        helper(&mSecond, secondArgs, std::index_sequence_for<SecondArgs...>());
     }
 
     BitPair()
