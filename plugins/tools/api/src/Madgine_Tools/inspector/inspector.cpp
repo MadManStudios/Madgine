@@ -88,18 +88,16 @@ namespace Tools {
         return modified.first || modified.second;
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ValueType &value, bool editable, ExtendedValueTypeDesc type, std::optional<ValueTypeDesc> actualTypeIn)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ValueType &value, bool editable, ExtendedValueTypeDesc possibleTypes)
     {
-        ValueTypeDesc actualType = actualTypeIn ? *actualTypeIn : value.type();
-
-        bool typeWasRegular = type.mType.isRegular();
+        ValueTypeDesc actualType = value.type();        
 
         std::pair<bool, bool> modified = value.visit(overloaded {
             [&](ScopePtr &scope) {
-                return drawValue(id, scope, editable, &type, actualType);
+                return drawValue(id, scope, editable, &actualType, possibleTypes);
             },
             [&](OwnedScopePtr scope) {
-                return drawValue(id, scope, editable, &type, actualType);
+                return drawValue(id, scope, editable, &actualType, possibleTypes);
             },
             [&](KeyValueVirtualSequenceRange &range) {
                 return std::make_pair(false, drawValue(id, range, editable));
@@ -112,16 +110,18 @@ namespace Tools {
                 return std::make_pair(false, false);
             },
             [&](ObjectPtr &object) {
-                return drawValue(id, object, editable, &type, actualType);
+                return drawValue(id, object, editable, &actualType, possibleTypes);
             },
             [&](KeyValueBinding &binding) {
                 std::pair<bool, bool> result;
                 if (!Execution::access_binding(binding.mPtr, [&](const ValueType &v) {
                         ValueType v_copy = v;
-                        result = drawValue(id, v_copy, false, type, actualType);
+                        result = drawValue(id, v_copy, false, possibleTypes);
+                        actualType = v_copy.type();
                     })) {
                     ValueType v;
-                    result = drawValue(id, v, false, type, actualType);
+                    result = drawValue(id, v, false, possibleTypes);
+                    actualType = v.type();
                 }
                 return result;
             },
@@ -140,16 +140,16 @@ namespace Tools {
 
                 ImGui::PushID(id.data());
 
-                ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !type.mType.isRegular()));
+                ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !possibleTypes.mType.isRegular()));
 
                 ImGui::BeginDisabled(!editable);
                 std::pair<bool, bool> result = std::make_pair(ImGui::ValueTypeDrawer::draw(other), false);
 
                 ImGui::PopItemWidth();
 
-                if (!type.mType.isRegular()) {
+                if (!possibleTypes.mType.isRegular()) {
                     ImGui::SameLine(0, 0);
-                    result.first |= drawTypeDecorations(type, actualType);
+                    result.first |= drawTypeDecorations(actualType, possibleTypes);
                 }
                 ImGui::EndDisabled();
 
@@ -158,14 +158,14 @@ namespace Tools {
                 return result;
             } });
 
-        if (modified.first && !typeWasRegular && type.mType.isRegular()) {
-            value.setType(type);
+        if (modified.first && actualType != value.type()) {
+            value.setType(actualType);
         }
 
         return modified;
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ScopePtr &scope, bool editable, ExtendedValueTypeDesc *type, std::optional<ValueTypeDesc> actualType)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ScopePtr &scope, bool editable, ValueTypeDesc *type, ExtendedValueTypeDesc possibleTypes)
     {
         bool modified = false;
         bool changed = false;
@@ -190,7 +190,7 @@ namespace Tools {
 
         if (hasSuggestions) {
             ImGui::PushID(id.data());
-            ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * (type && !type->mType.isRegular())));
+            ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !possibleTypes.mType.isRegular()));
             if (ImGui::BeginCombo("##suggestions", scope.name().c_str())) {
                 if (ImGui::Selectable("<None>")) {
                     scope.mScope = nullptr;
@@ -210,9 +210,9 @@ namespace Tools {
             ImGui::TextDisabled("%s", scope.mType->mTypeName);
         }
 
-        if (type && !type->mType.isRegular()) {
+        if (!possibleTypes.mType.isRegular()) {
             ImGui::SameLine(0, 0);
-            modified |= drawTypeDecorations(*type, actualType ? *actualType : ValueTypeDesc{ValueTypeEnum::ScopeValue, scope.mType->mSelf});            
+            modified |= drawTypeDecorations(*type, possibleTypes);            
         }
 
         ImGui::DraggableValueTypeSource(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
@@ -239,13 +239,13 @@ namespace Tools {
         return std::make_pair(modified, changed);
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, OwnedScopePtr &scope, bool editable, ExtendedValueTypeDesc *type, std::optional<ValueTypeDesc> actualType)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, OwnedScopePtr &scope, bool editable, ValueTypeDesc *type, ExtendedValueTypeDesc possibleTypes)
     {
         ScopePtr ptr = scope.get();
-        return drawValue(id, ptr, editable, type, actualType);
+        return drawValue(id, ptr, editable, type, possibleTypes);
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ObjectPtr &object, bool editable, ExtendedValueTypeDesc *type, std::optional<ValueTypeDesc> actualType)
+    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ObjectPtr &object, bool editable, ValueTypeDesc *type, ExtendedValueTypeDesc possibleTypes)
     {
         bool modified = false;
         bool changed = false;
@@ -269,9 +269,9 @@ namespace Tools {
 
         ImGui::Text(object.descriptor());
 
-        if (type && !type->mType.isRegular()) {
+        if (!possibleTypes.mType.isRegular()) {
             ImGui::SameLine(0, 0);
-            modified |= drawTypeDecorations(*type, actualType ? *actualType : ValueTypeDesc { ValueTypeEnum::ObjectValue });
+            modified |= drawTypeDecorations(*type, possibleTypes);
         }
 
         // ImGui::EndGroup();
@@ -389,21 +389,20 @@ namespace Tools {
         return changed;
     }
 
-    bool Inspector::drawTypeDecorations(ExtendedValueTypeDesc &type, ValueTypeDesc actual)
+    bool Inspector::drawTypeDecorations(ValueTypeDesc &type, ExtendedValueTypeDesc possibleTypes)
     {
         ValueTypeDesc desc;
-        bool isSet = actual != static_cast<ValueTypeDesc>(toValueTypeDesc<std::monostate>());
-        switch (type.mType) {
+        bool isSet = type != static_cast<ValueTypeDesc>(toValueTypeDesc<std::monostate>());
+        switch (possibleTypes.mType) {
         case ExtendedValueTypeEnum::GenericType:
-            if (ImGui::ValueTypeTypePicker(desc)) {
-                type = desc;
+            if (ImGui::ValueTypeTypePicker(type)) {                
                 return true;
             }
             break;
         case ExtendedValueTypeEnum::OptionalType:
             if (ImGui::Checkbox("##Optional", &isSet)) {
                 if (isSet) {
-                    type = { type.mType.unwrap(), type.mSecondary };
+                    type = { possibleTypes.mType.unwrap(), possibleTypes.mSecondary };
                 } else {
                     type = toValueTypeDesc<std::monostate>();
                 }
@@ -411,7 +410,7 @@ namespace Tools {
             }
             break;
         case ExtendedValueTypeEnum::BindableType:
-            if (ImGui::LED("##Bindable", actual.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
+            if (ImGui::LED("##Bindable", type.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
 
             }
             break;
