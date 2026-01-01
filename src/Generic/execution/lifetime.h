@@ -124,7 +124,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return state<Rec>(std::forward<Rec>(rec), sender.mLifetime, std::forward<F>(sender.mCallback));
+                return VirtualState<state, Rec>(std::forward<Rec>(rec), sender.mLifetime, std::forward<F>(sender.mCallback));
             }
 
             Lifetime &mLifetime;
@@ -185,15 +185,15 @@ namespace Execution {
         template <typename Rec>
         friend auto tag_invoke(connect_t, Lifetime &lifetime, Rec &&rec)
         {
-            return state<Rec>(std::forward<Rec>(rec), lifetime);
+            return VirtualState<state, Rec>(std::forward<Rec>(rec), lifetime);
         }
 
     private:
-        struct receiver;
+        struct state;
 
         struct ControlBlock {
-            ControlBlock(receiver &rec)
-                : mReceiver(rec)
+            ControlBlock(state &state)
+                : mState(state)
             {
             }
 
@@ -216,7 +216,7 @@ namespace Execution {
             void decreaseStrongCount()
             {
                 if (mStrongRefCount.fetch_sub(1) == 1) {
-                    mReceiver.set_value();
+                    mState.set_value();
                     mFinished.emplace();
                     decreaseWeakCount();
                 }
@@ -237,7 +237,7 @@ namespace Execution {
             bool request_stop()
             {
                 if (increaseStrongCount()) {
-                    bool result = mReceiver.mStopSource.request_stop();
+                    bool result = mState.mStopSource.request_stop();
                     decreaseStrongCount();
                     return result;
                 }
@@ -249,17 +249,7 @@ namespace Execution {
                 return mStrongRefCount > 0;
             }
 
-            StopToken stop_token()
-            {
-                if (increaseStrongCount()) {
-                    StopToken token = mReceiver.mStopSource.get_token();
-                    decreaseStrongCount();
-                    return token;
-                }
-                return nullptr;
-            }
-
-            receiver &mReceiver;
+            state &mState;
             std::atomic<uint32_t> mStrongRefCount = 1;
             std::atomic<uint32_t> mWeakRefCount = 1;
             Flag<> mFinished;
@@ -304,15 +294,15 @@ namespace Execution {
 
             friend StopToken tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)
             {
-                return rec.mState->mPtr.mBlock->stop_token();
+                return rec.mState->mPtr.mBlock->mState.mStopSource.get_token();
             }
 
             template <typename CPO, typename... Args>
-                requires(is_tag_invocable_v<CPO, receiver &, Args...>)
-            friend auto tag_invoke(CPO f, attach_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, receiver &, Args...>)
-                -> tag_invoke_result_t<CPO, receiver &, Args...>
+                requires(is_tag_invocable_v<CPO, state &, Args...>)
+            friend auto tag_invoke(CPO f, attach_receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, state &, Args...>)
+                -> tag_invoke_result_t<CPO, state &, Args...>
             {
-                return f(rec.mState->mPtr.mBlock->mReceiver, std::forward<Args>(args)...);
+                return f(rec.mState->mPtr.mBlock->mState, std::forward<Args>(args)...);
             }
 
             attach_state<Sender> *mState;
@@ -336,9 +326,9 @@ namespace Execution {
             connect_result_t<Sender, attach_receiver<Sender>> mState;
         };
 
-        struct receiver : VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...>, StopCallback {
+        struct state : VirtualReceiverBaseEx<type_pack<>, type_pack<>, cpos...>, StopCallback {
 
-            receiver(Lifetime &lifetime)
+            state(Lifetime &lifetime)
                 : mControl(*new ControlBlock(*this))
                 , mLifetime(lifetime)
             {
@@ -347,26 +337,11 @@ namespace Execution {
             }
 
             template <typename F>
-            receiver(Lifetime &lifetime, F &&callback)
-                : receiver(lifetime)
+            state(Lifetime &lifetime, F &&callback)
+                : state(lifetime)
             {
                 std::forward<F>(callback)(mControl);
             }
-
-            void stopRequested() override
-            {
-                mControl.mBlock->decreaseStrongCount();
-            }
-
-            ControlPtr mControl;
-            StopSource mStopSource;
-            Lifetime &mLifetime;
-        };
-
-        template <typename Rec>
-        struct state : VirtualState<receiver, Rec> {
-
-            using VirtualState<receiver, Rec>::VirtualState;
 
             void start()
             {
@@ -378,6 +353,11 @@ namespace Execution {
                 this->mStopSource.request_stop();
             }
 
+            void stopRequested() override
+            {
+                mControl.mBlock->decreaseStrongCount();
+            }
+
             friend auto tag_invoke(Execution::visit_state_t, state *state, auto &&visitor)
             {
                 visitor(State::BeginBlock { "Lifetime" });
@@ -387,6 +367,10 @@ namespace Execution {
                 }
                 visitor(State::EndBlock {});
             }
+
+            ControlPtr mControl;
+            StopSource mStopSource;
+            Lifetime &mLifetime;
         };
 
         ControlPtr mPtr;
