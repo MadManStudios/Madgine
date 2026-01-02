@@ -1,21 +1,29 @@
-#include "scene.sl"
 
 #include "light.hlsl"
+#include "Madgine/render/shadinglanguage/memory.hlsl"
 
-cbuffer PerApplication : register(b0)
+
+cbuffer ScenePerApplication : register(b0)
 {
-    ScenePerApplication app;
+    float4x4 p;
 }
 
-cbuffer PerFrame : register(b1)
+cbuffer ScenePerObject : register(b2)
 {
-    ScenePerFrame frame;
+    float shininess;
+
+    bool hasTexture;
+    bool hasDistanceField;
 }
 
-cbuffer PerObject : register(b2)
+struct SceneInstanceData
 {
-    ScenePerObject object;
-}
+    row_major float4x4 mv;
+    row_major float4x4 anti_mv;
+    float4 diffuseColor;
+    float4 specularColor;
+	//ArrayPtr<float4x4> bones;
+};
 
 StructuredBuffer<SceneInstanceData> InstanceData : register(t0, space1);
 
@@ -38,7 +46,6 @@ struct FragmentData
     float4 viewPos : POSITION;
     float3 normal : NORMAL;
     float2 uv : TEXCOORD0;
-    float4 lightViewPosition : TEXCOORD1;
     float4 position : SV_Position;
 };
 
@@ -49,7 +56,7 @@ export FragmentData scene_VS(AppData IN)
     SceneInstanceData aInstance = InstanceData[IN.instanceId];
      
     float4 pos = float4(IN.aPos, IN.aW);
-
+    
     float2 aPos2 = IN.aPos2;
 
     float4 effectivePos = pos;
@@ -64,7 +71,7 @@ export FragmentData scene_VS(AppData IN)
 
     OUT.viewPos = mul(aInstance.mv, effectivePos);
     
-    OUT.position = mul(app.p, OUT.viewPos + float4(aPos2, 0.0, 0.0));
+    OUT.position = mul(p, OUT.viewPos + float4(aPos2, 0.0, 0.0));
     
     OUT.color = IN.aColor * aInstance.diffuseColor;
 
@@ -72,132 +79,47 @@ export FragmentData scene_VS(AppData IN)
 
     OUT.uv = IN.aUV;
 
-    OUT.lightViewPosition = projectShadow(frame.light.caster, OUT.viewPos);
- 
     return OUT;
 }
 
 
 Texture2D diffuseTex : register(t0, space2);
 Texture2D emissiveTex : register(t1, space2);
-Texture2DMS<float> shadowDepthMap : register(t0, space3);
-TextureCube<float> pointShadowDepthMaps0 : register(t1, space3);
-TextureCube<float> pointShadowDepthMaps1 : register(t2, space3);
 
-SamplerState texSampler : register(s0);
-SamplerState clampSampler : register(s1);
 
-struct PixelShaderOutput
-{
-    float4 fragColor : SV_Target0;
-    float4 brightColor : SV_Target1;
-};
 
 float median(float r, float g, float b)
 {
     return max(min(r, g), min(max(r, g), b));
 }
 
-export PixelShaderOutput scene_PS(FragmentData IN)
+export LightingInput scene(FragmentData IN)
 {
-    float4 diffuseColor = IN.color;
-    float4 specularColor = float4(1.0, 1.0, 1.0, 1.0);
+    LightingInput lightInput;
+    
+    lightInput.albedo = IN.color;
+    lightInput.viewPos = IN.viewPos;
+    lightInput.emissiveColor = float3(0.0, 0.0, 0.0);
+    lightInput.shininess = shininess;
 
-    float3 normal = normalize(IN.normal);
+    lightInput.normal = normalize(IN.normal);
 
-    if (object.hasTexture)
+    if (hasTexture)
     {
-        if (object.hasDistanceField)
+        if (hasDistanceField)
         {
             float4 sample = diffuseTex.Sample(texSampler, IN.uv);
             float sigDist = median(sample.r, sample.g, sample.b) - 0.5;
             float opacity = saturate(sigDist / fwidth(sigDist) + 0.5);
-            diffuseColor = opacity * diffuseColor;
+            lightInput.albedo = opacity * lightInput.albedo;
         }
         else
         {
-            diffuseColor = diffuseTex.Sample(texSampler, IN.uv) * diffuseColor;
+            lightInput.emissiveColor = emissiveTex.Sample(texSampler, IN.uv).rgb;
+            lightInput.albedo = diffuseTex.Sample(texSampler, IN.uv) * lightInput.albedo;
         }
     }
-
-    PixelShaderOutput OUT;
-	
-    if (object.hasLight)
-    {
-        float3 lightDiffuseIntensity = float3(0.0, 0.0, 0.0);
-        float3 lightSpecularIntensity = float3(0.0, 0.0, 0.0);
-		
-        castDirectionalShadowLight(
-			lightDiffuseIntensity,
-			lightSpecularIntensity,
-			frame.light,
-			IN.lightViewPosition,
-			IN.viewPos.xyz / IN.viewPos.w,
-			normal,
-			shadowDepthMap,
-			app.ambientFactor,
-			app.diffuseFactor,
-			app.specularFactor,
-			object.shininess
-		);
-        for (int i = 0; i < frame.pointLightCount; ++i)
-        {
-            if (i == 0)
-                castPointShadowLight(
-					lightDiffuseIntensity,
-					lightSpecularIntensity,
-					frame.pointLights[i],
-					IN.viewPos.xyz / IN.viewPos.w,
-					normal,
-					pointShadowDepthMaps0,
-					texSampler,
-					0,
-					app.diffuseFactor,
-					app.specularFactor,
-					object.shininess
-				);
-            else
-                castPointShadowLight(
-					lightDiffuseIntensity,
-					lightSpecularIntensity,
-					frame.pointLights[i],
-					IN.viewPos.xyz / IN.viewPos.w,
-					normal,
-					pointShadowDepthMaps1,
-					texSampler,
-					0,
-					app.diffuseFactor,
-					app.specularFactor,
-					object.shininess
-				);
-        }
-
-        OUT.fragColor =
-			float4(
-				lightDiffuseIntensity * diffuseColor.xyz +
-				lightSpecularIntensity * specularColor.xyz,
-				diffuseColor.a
-			);
-    }
-    else
-    {
-        OUT.fragColor = diffuseColor;
-    }
-
-    float3 emissive = float3(0.0, 0.0, 0.0);
-    if (object.hasTexture)
-    {
-        emissive = emissiveTex.Sample(texSampler, IN.uv).rgb;
-    }
-
-    if (app.hasHDR)
-    {
-        OUT.brightColor = float4(emissive, 1.0);
-        float brightness = dot(OUT.fragColor.rgb, float3(0.2126, 0.7152, 0.0722));
-        if (brightness > 1.0)
-            OUT.brightColor.rgb += OUT.fragColor.rgb;
-    }
-    OUT.fragColor.rgb += emissive;
-	
-    return OUT;
+    
+    return lightInput;
+    
 }

@@ -18,10 +18,6 @@
 
 // #include "Madgine/render/rendercontext.h"
 
-#include "Madgine/render/shadinglanguage/sl_support_begin.h"
-#include "shaders/pointshadow.sl"
-#include "Madgine/render/shadinglanguage/sl_support_end.h"
-
 #include "pointshadow_hlsl.h"
 
 namespace Engine {
@@ -36,7 +32,7 @@ namespace Render {
 
     void PointShadowRenderPass::setup(RenderTarget *target)
     {
-        setupImpl(target, HLSL::pointshadow_VS, HLSL::pointshadow_PS, { sizeof(PointShadowPerApplication), 0, 0 });
+        setupImpl(target, HLSL::pointshadow_VS, HLSL::pointshadow_PS, { sizeof(HLSL::PointShadowPerApplication), 0, 0 });
 
         addDependency(&mData);
     }
@@ -66,7 +62,7 @@ namespace Render {
             return;
 
         {
-            auto perApplication = mPipeline->mapParameters<PointShadowPerApplication>(0);
+            auto perApplication = mPipeline->mapParameters<HLSL::PointShadowPerApplication>(0);
 
             Frustum f {
                 Vector3::ZERO,
@@ -81,7 +77,7 @@ namespace Render {
         for (std::pair<const GPUMeshData *const, std::vector<ShadowSceneRenderData::ObjectData>> &instance : mData.mInstances) {
             const GPUMeshData *meshData = instance.first;
 
-            std::vector<PointShadowInstanceData> instanceData;
+            std::vector<HLSL::PointShadowInstanceData> instanceData;
 
             static constexpr Matrix4 rotationMatrices[] = {
                 { 0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 },
@@ -95,13 +91,13 @@ namespace Render {
             Matrix4 v = rotationMatrices[iteration] * TranslationMatrix(-transform->mPosition);
 
             {
-                auto instanceData = mPipeline->mapTempBuffer<PointShadowInstanceData[]>(1, instance.second.size());
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::PointShadowInstanceData[]>(1, instance.second.size());
 
                 std::ranges::transform(instance.second, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData &o) {
                     Matrix4 mv = v * o.mTransform;
-                    return PointShadowInstanceData {
+                    return HLSL::PointShadowInstanceData {
                         mv.Transpose(),
-                        o.mBones
+                        //o.mBones
                     };
                 });
             }

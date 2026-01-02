@@ -15,11 +15,8 @@
 
 // #include "Madgine/render/rendercontext.h"
 
-#include "Madgine/render/shadinglanguage/sl_support_begin.h"
-#include "shaders/scene.sl"
-#include "Madgine/render/shadinglanguage/sl_support_end.h"
-
 #include "scene_hlsl.h"
+#include "light_hlsl.h"
 
 namespace Engine {
 namespace Render {
@@ -33,7 +30,7 @@ namespace Render {
 
     void ShadowRenderPass::setup(RenderTarget *target)
     {
-        setupImpl(target, HLSL::scene_VS, {}, { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
+        setupImpl(target, HLSL::scene_VS, {}, { sizeof(HLSL::ScenePerApplication), sizeof(HLSL::LightPerFrame), sizeof(HLSL::ScenePerObject) });
 
         addDependency(&mData);
     }
@@ -55,7 +52,7 @@ namespace Render {
         updateFrustum(1.0f);
 
         {
-            auto perApplication = mPipeline->mapParameters<ScenePerApplication>(0);
+            auto perApplication = mPipeline->mapParameters<HLSL::ScenePerApplication>(0);
 
             perApplication->p = target->getClipSpaceMatrix() * projectionMatrix();
         }
@@ -63,7 +60,7 @@ namespace Render {
         Matrix4 v = viewMatrix();
 
         {
-            auto perFrame = mPipeline->mapParameters<ScenePerFrame>(1);
+            auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
 
             perFrame->light.light.color = mData.mScene.mAmbientLightColor;
             perFrame->light.light.dir = (v * Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
@@ -73,28 +70,26 @@ namespace Render {
             const GPUMeshData *meshData = instance.first;
 
             {
-                auto perObject = mPipeline->mapParameters<ScenePerObject>(2);
-
-                perObject->hasLight = false;
+                auto perObject = mPipeline->mapParameters<HLSL::ScenePerObject>(2);
 
                 perObject->hasDistanceField = false;
 
                 perObject->hasTexture = false;
             }
 
-            std::vector<SceneInstanceData> instanceData;
+            std::vector<HLSL::SceneInstanceData> instanceData;
 
             {
-                auto instanceData = mPipeline->mapTempBuffer<SceneInstanceData[]>(1, instance.second.size());
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, instance.second.size());
 
                 std::ranges::transform(instance.second, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData &o) {
                     Matrix4 mv = v * o.mTransform;
-                    return SceneInstanceData {
+                    return HLSL::SceneInstanceData {
                         mv.Transpose(),
                         mv.Inverse().Transpose().Transpose(),
                         Vector4 { 0.0f, 0.0f, 0.0f, 0.0f },
                         Vector4 { 0.0f, 0.0f, 0.0f, 0.0f },
-                        o.mBones
+                        //o.mBones
                     };
                 });
             }

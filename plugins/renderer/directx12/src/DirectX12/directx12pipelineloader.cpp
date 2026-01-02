@@ -17,6 +17,7 @@ namespace Engine {
 namespace Render {
 
     DirectX12PipelineLoader::DirectX12PipelineLoader()
+        : Resources::VirtualResourceLoaderImpl<DirectX12PipelineLoader, DirectX12Pipeline, PipelineLoader>("-HLSL", ".ps_hlsl")
     {
     }
 

@@ -67,9 +67,7 @@ namespace Render {
             p = ShaderCache::directory() / p;
         }
 
-        assert(Filesystem::exists(p));
-
-        return Filesystem::fileInfo(p).mLastModified;
+        return Filesystem::exists(p) ? Filesystem::fileInfo(p).mLastModified : std::chrono::file_clock::time_point::min();
     }
 
     std::chrono::file_clock::time_point ShaderObjectBase::chainTimestamp() const
@@ -81,6 +79,34 @@ namespace Render {
         }
 
         return acc;
+    }
+
+    MergedShaderObjectBase::MergedShaderObjectBase(const ShaderObjectPtr &first, const ShaderObjectPtr &second)
+        : ShaderObjectBase({ first, second })
+    {
+        mMetadata.mPath = first->entrypoint() + "_" + second->entrypoint() + ".hlsl";
+        std::ranges::set_union(first->metadata().mIncludePaths, second->metadata().mIncludePaths, std::back_inserter(mMetadata.mIncludePaths));
+    }
+
+    std::string MergedShaderObjectBase::entrypoint() const
+    {
+        return std::string { mMetadata.mPath.stem() };
+    }
+
+    const ShaderMetadata &MergedShaderObjectBase::metadata() const
+    {
+        return mMetadata;
+    }
+
+    void MergedShaderObjectBase::toHLSLImpl(std::ostream &o, std::string_view r, std::string_view in) const
+    {
+        for (const ShaderObjectPtr &dependency : mDependencies) {
+            o << "#include \"" << dependency->metadata().mPath << "\"\n";
+        }
+        o << "\n";
+        o << r << " " << entrypoint() << "(" << in << " IN) {\n"
+          << "    return " << mDependencies[1]->entrypoint() << "(" << mDependencies[0]->entrypoint() << "(IN));\n"
+          << "}";
     }
 
 }

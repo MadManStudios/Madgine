@@ -10,7 +10,6 @@ FolderSources(sources "" src)
 			FolderSources(sources render fonts font.h fontloader.cpp fontloader.h glyph.cpp glyph.h)
 			FolderSources(sources render passes bloompass.cpp bloompass.h blurpass.cpp blurpass.h)
 				FolderSources(sources passes shaders bloom.hlsl blur.hlsl)
-			FolderSources(sources render shadinglanguage sl_support_begin.h sl_support_end.h)
 		
 add_plugin(Render Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/renderlib.h EXTERNAL_DEPS freetype API_PLUGIN EXCLUSIVE ATLEAST_ONE)
 

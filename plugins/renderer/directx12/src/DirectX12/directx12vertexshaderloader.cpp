@@ -44,7 +44,7 @@ namespace Render {
         std::string entrypoint = "main";
         if (object) {
             entrypoint = object->entrypoint();
-            co_await ShaderCache::generate(p, object, "-HLSL", "vs_6_2");
+            co_await ShaderCache::generate(p, object, "-HLSL", ShaderType::VertexShader);
         }
 
         if (!Filesystem::exists(p))

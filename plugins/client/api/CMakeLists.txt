@@ -25,7 +25,7 @@ FolderSources(sources "" tools)
 	FolderSources(sources tools Madgine_Tools)
 		FolderSources(sources Madgine_Tools gamepad gamepadviewer.cpp gamepadviewer.h)
 		FolderSources(sources Madgine_Tools im3d im3drenderpass.cpp im3drenderpass.h)
-			FolderSources(sources im3d shaders im3d.hlsl im3d.sl)
+			FolderSources(sources im3d shaders im3d.hlsl)
 		FolderSources(sources Madgine_Tools imgui clientimroot.cpp clientimroot.h projectmanager.cpp projectmanager.h)
 			FolderSources(sources imgui shaders imgui.hlsl)
 

@@ -43,7 +43,7 @@ namespace Render {
         std::string entrypoint = "main";
         if (object) {
             entrypoint = object->entrypoint();
-            co_await ShaderCache::generate(p, object, "-HLSL", "ps_6_2");
+            co_await ShaderCache::generate(p, object, "-HLSL", ShaderType::PixelShader);
         }
 
         if (!Filesystem::exists(p))

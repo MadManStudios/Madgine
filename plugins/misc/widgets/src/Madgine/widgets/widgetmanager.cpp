@@ -20,10 +20,6 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine/render/shadinglanguage/sl_support_begin.h"
-#include "shaders/widgets.sl"
-#include "Madgine/render/shadinglanguage/sl_support_end.h"
-
 #include "atlasloader.h"
 #include "widget.h"
 #include "widgetloader.h"
@@ -648,7 +644,7 @@ namespace Widgets {
             return;
 
         {
-            auto perApp = mPipeline->mapParameters<WidgetsPerApplication>(0);
+            auto perApp = mPipeline->mapParameters<HLSL::WidgetsPerApplication>(0);
             perApp->c = target->getClipSpaceMatrix();
             perApp->screenSize = Vector2 { size };
         }
@@ -659,7 +655,7 @@ namespace Widgets {
                     continue;
 
                 {
-                    auto parameters = mPipeline->mapParameters<WidgetsPerObject>(2);
+                    auto parameters = mPipeline->mapParameters<HLSL::WidgetsPerObject>(2);
                     parameters->hasDistanceField = bool(tex.mFlags & TextureFlag_IsDistanceField);
                     parameters->hasTexture = true;
                 }
@@ -680,7 +676,7 @@ namespace Widgets {
         }
         if (!renderData.lineVertices().empty()) {
             {
-                auto parameters = mPipeline->mapParameters<WidgetsPerObject>(2);
+                auto parameters = mPipeline->mapParameters<HLSL::WidgetsPerObject>(2);
                 parameters->hasDistanceField = false;
                 parameters->hasTexture = false;
             }
@@ -765,7 +761,7 @@ namespace Widgets {
 
     void WidgetManager::setup(Render::RenderTarget *target)
     {
-        setupImpl(target, HLSL::widgets_VS, HLSL::widgets_PS, { sizeof(WidgetsPerApplication), 0, sizeof(WidgetsPerObject) });
+        setupImpl(target, HLSL::widgets_VS, HLSL::widgets_PS, { sizeof(HLSL::WidgetsPerApplication), 0, sizeof(HLSL::WidgetsPerObject) });
     }
 }
 }

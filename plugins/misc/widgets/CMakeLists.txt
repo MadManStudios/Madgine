@@ -7,7 +7,7 @@ FolderSources(sources "" src)
 	FolderSources(sources src Madgine widgetsforward.h widgetslib.h)
 		FolderSources(sources Madgine widgets atlasloader.cpp atlasloader.h bar.cpp bar.h button.cpp button.h checkbox.cpp checkbox.h combobox.cpp combobox.h compoundwidget.cpp compoundwidget.h condition.cpp condition.h image.cpp image.h label.cpp label.h layout.cpp layout.h layoutwidget.cpp layoutwidget.h properties.cpp properties.h scenewindow.cpp scenewindow.h tabbar.cpp tabbar.h tablewidget.cpp tablewidget.h textbox.cpp textbox.h textedit.cpp textedit.h widget.cpp widget.h widgetcollector.cpp widgetcollector.h widgetloader.cpp widgetloader.h widgetmanager.cpp widgetmanager.h widgettemplate.cpp widgettemplate.h)
 			FolderSources(sources widgets behavior tempwidget.cpp tempwidget.h widgetsenders.cpp widgetsenders.h)
-			FolderSources(sources widgets shaders widgets.hlsl widgets.sl)
+			FolderSources(sources widgets shaders widgets.hlsl)
 			FolderSources(sources widgets util colortintrenderdata.cpp multilinetextrenderdata.cpp renderdata.cpp scalableimagerenderdata.cpp tabbarrenderdata.cpp textrenderdata.cpp widgetsrenderdata.cpp)
 				FolderSources(sources util layouts explicitlayoutrenderdata.cpp uniformlayoutrenderdata.cpp)
 

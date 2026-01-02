@@ -10,6 +10,8 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+#include "shadercache.h"
+
 METATABLE_BEGIN(Engine::Render::PipelineInstance)
 METATABLE_END(Engine::Render::PipelineInstance)
 
@@ -18,8 +20,10 @@ VIRTUALRESOURCELOADERBASE(Engine::Render::PipelineLoader)
 namespace Engine {
 namespace Render {
 
-    PipelineLoader::PipelineLoader()
+    PipelineLoader::PipelineLoader(std::string target, std::string extension)
         : VirtualResourceLoaderBase(std::vector<std::string> {})
+        , mTarget(std::move(target))
+        , mExtension(std::move(extension))
     {
     }
 
@@ -70,6 +74,22 @@ namespace Render {
             bindMesh(target, GPUMeshLoader::getSingleton().mQuad);
             render(target);
         }
+    }
+
+    Threading::Task<Resources::BakeResult> PipelineLoader::bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir)
+    {
+        Resources::BakeResult result = Resources::BakeResult::SUCCESS;
+
+        for (ShaderObjectPtr object : ShaderCache::shaderCache()) {
+
+            Filesystem::Path p = intermediateDir.parentPath() / "shadercache" / (object->entrypoint() + mExtension);
+
+            if (!co_await ShaderCache::generate(p, object, mTarget, ShaderType::PixelShader)) {
+                result = Resources::BakeResult::UNKNOWN_ERROR;
+            }
+        }
+
+        co_return result;
     }
 
 }

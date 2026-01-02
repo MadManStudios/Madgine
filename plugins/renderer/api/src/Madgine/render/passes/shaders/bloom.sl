@@ -1,4 +1,0 @@
-
-struct BloomData {
-	float exposure;
-};

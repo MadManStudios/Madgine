@@ -24,7 +24,6 @@ namespace Render {
 
             Threading::TaskFuture<bool> create(PipelineConfiguration config, PipelineLoader *loader = &PipelineLoader::getSingleton());
 
-
             void reset();
 
             bool available() const;
@@ -37,9 +36,15 @@ namespace Render {
             Threading::TaskFuture<bool> mState;
         };
 
-        PipelineLoader();
+        PipelineLoader(std::string target, std::string extension);
 
         virtual Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) = 0;
+
+        Threading::Task<Resources::BakeResult> bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir) override;
+
+    private:
+        std::string mTarget;
+        std::string mExtension;
     };
 
 }

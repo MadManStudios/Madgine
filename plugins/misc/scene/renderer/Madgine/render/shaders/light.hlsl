@@ -1,5 +1,75 @@
 
-#include "lightdata.sl"
+struct DirectionalLight
+{
+    float3 color;
+    float3 dir;
+    bool orthographic;
+};
+
+struct PointLight
+{
+    float3 position;
+    float3 color;
+
+    float constantFactor;
+    float linearFactor;
+    float squaredFactor;
+};
+
+struct ShadowCaster
+{
+    float4x4 reprojectionMatrix;
+
+    int shadowSamples;
+};
+
+struct DirectionalShadowLight
+{
+    DirectionalLight light;
+
+    ShadowCaster caster;
+};
+
+struct PointShadowLight
+{
+    PointLight light;
+
+    ShadowCaster caster;
+};
+
+struct LightingInput
+{
+    float4 albedo;
+    float4 viewPos;
+    float3 normal;
+    float shininess;
+    float3 emissiveColor;
+};
+
+struct HDRShaderOutput
+{
+    float4 fragColor : SV_Target0;
+    float4 brightColor : SV_Target1;
+};
+
+
+cbuffer LightPerFrame : register(b1)
+{
+    int pointLightCount;
+
+    DirectionalShadowLight light;
+
+    PointShadowLight pointLights[2];
+}
+
+SamplerState texSampler : register(s0);
+SamplerState clampSampler : register(s1);
+
+Texture2DMS<float> shadowDepthMap : register(t0, space3);
+TextureCube<float> pointShadowDepthMaps0 : register(t1, space3);
+TextureCube<float> pointShadowDepthMaps1 : register(t2, space3);
+
+static const float ambientFactor = 0.5;
 
 float4 projectShadow(
     ShadowCaster caster,
@@ -12,24 +82,20 @@ void castDirectionalLight(
     inout float3 diffuseIntensity,
     inout float3 specularIntensity,
     DirectionalLight light,
-    float3 pos,
+    float4 viewPos,
     float3 normal,
-    float ambientFactor,
-    float diffuseFactor,
-    float specularFactor,
+    float factor,
     float shininess)
-{ 
-    float3 ambient = ambientFactor * light.color;
-    
+{    
     float diff = max(dot(normal, -light.dir), 0.0);
-    float3 diffuse = diffuseFactor * diff * light.color;
+    float3 diffuse = factor * diff * light.color;
 
-    diffuseIntensity += ambient + diffuse;
+    diffuseIntensity += diffuse;
 
-    float3 viewDir = normalize(light.orthographic ? float3(0.0, 0.0, -1.0) : -pos);
+    float3 viewDir = normalize(light.orthographic ? float3(0.0, 0.0, -1.0) : -viewPos.xyz);
     float3 reflectDir = reflect(-light.dir, normal);
     float spec = pow(max(dot(viewDir, -reflectDir), 0.0), shininess);
-    float3 specular = specularFactor * spec * light.color;
+    float3 specular = factor * spec * light.color;
 
     specularIntensity += specular;
 }
@@ -38,17 +104,17 @@ void castDirectionalShadowLight(
     inout float3 diffuseIntensity,
     inout float3 specularIntensity,
     DirectionalShadowLight light,
-    float4 lightViewPosition,
-    float3 pos,
+    float4 viewPos,
     float3 normal,
     Texture2DMS<float> shadowMap,
-    float ambientFactor,
-    float diffuseFactor,
-    float specularFactor,
     float shininess)
 {
-    float bias = /* max(0.05 * (1.0 - dot(normal, light.light.dir)), */0.0005/*)*/;  
-    float3 normalizedLightViewPosition = lightViewPosition.xyz / lightViewPosition.w;    
+    float bias = /* max(0.05 * (1.0 - dot(normal, light.light.dir)), */0.0005 /*)*/;
+    
+    
+    float4 lightViewPosition = projectShadow(light.caster, viewPos); 
+    
+    float3 normalizedLightViewPosition = lightViewPosition.xyz / lightViewPosition.w;
     normalizedLightViewPosition.y *= -1;
     int2 lightTexCoord = int2(2048 * (normalizedLightViewPosition.xy * 0.5 + 0.5));
     
@@ -56,20 +122,19 @@ void castDirectionalShadowLight(
 
     float lightStrength = 1.0;
 
-    for (int i = 0; i < light.caster.shadowSamples; ++i) {
+    for (int i = 0; i < light.caster.shadowSamples; ++i)
+    {
         float shadowDepth = shadowMap.Load(lightTexCoord, i).r;
         lightStrength -= float(lightDepth > shadowDepth) / light.caster.shadowSamples;
     }
 
     castDirectionalLight(
         diffuseIntensity,
-        specularIntensity, 
-        light.light, 
-        pos,
-        normal, 
-        ambientFactor, 
-        diffuseFactor * lightStrength,
-        specularFactor * lightStrength,
+        specularIntensity,
+        light.light,
+        viewPos,
+        normal,
+        lightStrength,
         shininess
     );
 
@@ -81,41 +146,34 @@ void castPointLight(
     inout float3 diffuseIntensity,
     inout float3 specularIntensity,
     PointLight light,
-    float3 pos,
+    float3 viewPos,
     float3 normal,
-    float ambientFactor,
-    float diffuseFactor,
-    float specularFactor,
+    float factor,
     float shininess)
 {
-    float3 ambient = ambientFactor * light.color;
-
-    float3 lightDir = normalize(light.position - pos);
+    float3 lightDir = normalize(light.position - viewPos);
 
     float diff = max(dot(normal, lightDir), 0.0);
-    float3 diffuse = diffuseFactor * diff * light.color;
+    float3 diffuse = factor * diff * light.color;
 
-    float distance = length(light.position - pos);
+    float distance = length(light.position - viewPos);
     float attenuation = 1.0 / (light.constantFactor + light.linearFactor * distance + light.squaredFactor * (distance * distance));
 
-    diffuseIntensity += attenuation * (ambient + diffuse);
+    diffuseIntensity += attenuation * diffuse;
 }
 
 void castPointShadowLight(
     inout float3 diffuseIntensity,
     inout float3 specularIntensity,
     PointShadowLight light,
-    float3 pos,
+    float3 viewPos,
     float3 normal,
     TextureCube<float> shadowMap,
     SamplerState samplerState,
-    float ambientFactor,
-    float diffuseFactor,
-    float specularFactor,
     float shininess)
 {
     float bias = 0.001;
-    float3 lightDir = projectShadow(light.caster, float4(pos - light.light.position, 0.0)).xyz;
+    float3 lightDir = projectShadow(light.caster, float4(viewPos - light.light.position, 0.0)).xyz;
 
     float lightDepth = (length(lightDir) - 0.01) / 99.99 - bias;
 
@@ -126,13 +184,75 @@ void castPointShadowLight(
     
     castPointLight(
         diffuseIntensity,
-        specularIntensity, 
-        light.light, 
-        pos, 
-        normal, 
-        ambientFactor, 
-        diffuseFactor * lightStrength * 10.0,
-        specularFactor * lightStrength * 10.0,
+        specularIntensity,
+        light.light,
+        viewPos,
+        normal,
+        lightStrength,
         shininess
     );
+}
+
+export HDRShaderOutput lighting(LightingInput IN)
+{
+    
+    HDRShaderOutput OUT;
+    
+    float3 specularColor = float3(1.0, 1.0, 1.0);
+	
+
+    float3 lightDiffuseIntensity = ambientFactor.rrr;
+    float3 lightSpecularIntensity = float3(0.0, 0.0, 0.0);
+		
+    castDirectionalShadowLight(
+		lightDiffuseIntensity,
+		lightSpecularIntensity,
+		light,
+		IN.viewPos,
+		IN.normal,
+		shadowDepthMap,
+		IN.shininess
+	);
+    for (int i = 0; i < pointLightCount; ++i)
+    {
+        if (i == 0)
+            castPointShadowLight(
+				lightDiffuseIntensity,
+				lightSpecularIntensity,
+				pointLights[i],
+				IN.viewPos.xyz / IN.viewPos.w,
+				IN.normal,
+				pointShadowDepthMaps0,
+				texSampler,
+				IN.shininess
+			);
+        else
+            castPointShadowLight(
+				lightDiffuseIntensity,
+				lightSpecularIntensity,
+				pointLights[i],
+				IN.viewPos.xyz / IN.viewPos.w,
+				IN.normal,
+				pointShadowDepthMaps1,
+				texSampler,
+				IN.shininess
+			);
+    }
+
+    OUT.fragColor =
+		float4(
+			lightDiffuseIntensity * IN.albedo.xyz +
+			lightSpecularIntensity * specularColor.xyz,
+			IN.albedo.a
+		);
+    
+
+    OUT.brightColor = float4(IN.emissiveColor, 1.0);
+    float brightness = dot(OUT.fragColor.rgb, float3(0.2126, 0.7152, 0.0722));
+    if (brightness > 1.0)
+        OUT.brightColor.rgb += OUT.fragColor.rgb;
+
+    OUT.fragColor.rgb += IN.emissiveColor;
+	
+    return OUT;
 }

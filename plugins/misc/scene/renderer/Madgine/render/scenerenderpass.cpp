@@ -7,6 +7,7 @@
 #include "Madgine/render/camera.h"
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendertarget.h"
+#include "Madgine/render/shadercache.h"
 #include "Madgine/scene/entity/components/material.h"
 #include "Madgine/scene/entity/components/mesh.h"
 #include "Madgine/scene/entity/components/pointlight.h"
@@ -17,22 +18,17 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "Madgine/render/shadinglanguage/sl_support_begin.h"
-#include "shaders/scene.sl"
-#include "Madgine/render/shadinglanguage/sl_support_end.h"
-
+#include "light_hlsl.h"
+#include "scene_hlsl.h"
 #include "scenemainwindowcomponent.h"
 
-#include "scene_hlsl.h"
-
 METATABLE_BEGIN(Engine::Render::SceneRenderPass)
-    MEMBER(mAmbientFactor)
-    MEMBER(mDiffuseFactor)
-    MEMBER(mSpecularFactor)
     MEMBER(mLightConstantFactor)
     MEMBER(mLightLinearFactor)
     MEMBER(mLightSquaredFactor)
 METATABLE_END(Engine::Render::SceneRenderPass)
+
+CACHED_SHADER(HLSL::scene | HLSL::lighting)
 
 namespace Engine {
 namespace Render {
@@ -53,7 +49,7 @@ namespace Render {
 
         mShadowMap->addRenderPass(&mShadowPass);
 
-        setupImpl(target, HLSL::scene_VS, HLSL::scene_PS, { sizeof(ScenePerApplication), sizeof(ScenePerFrame), sizeof(ScenePerObject) });
+        setupImpl(target, HLSL::scene_VS, HLSL::scene | HLSL::lighting, { sizeof(HLSL::ScenePerApplication), sizeof(HLSL::LightPerFrame), sizeof(HLSL::ScenePerObject) });
 
         addDependency(&mData);
         addDependency(mShadowMap.get());
@@ -87,21 +83,15 @@ namespace Render {
         float aspectRatio = float(size.x) / size.y;
 
         {
-            auto perApplication = mPipeline->mapParameters<ScenePerApplication>(0);
+            auto perApplication = mPipeline->mapParameters<HLSL::ScenePerApplication>(0);
 
             perApplication->p = target->getClipSpaceMatrix() * mData.mCamera.getProjectionMatrix(aspectRatio);
-
-            perApplication->hasHDR = target->textureCount() > 1;
-
-            perApplication->ambientFactor = mAmbientFactor;
-            perApplication->diffuseFactor = mDiffuseFactor;
-            perApplication->specularFactor = mSpecularFactor;
         }
 
         Matrix4 v = mData.mCamera.getViewMatrix();
 
         {
-            auto perFrame = mPipeline->mapParameters<ScenePerFrame>(1);
+            auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
 
             perFrame->light.caster.reprojectionMatrix = mShadowPass.viewProjectionMatrix() * v.Inverse();
 
@@ -141,9 +131,7 @@ namespace Render {
             ResourceBlock material = instance.first.mMaterial;
 
             {
-                auto perObject = mPipeline->mapParameters<ScenePerObject>(2);
-
-                perObject->hasLight = true;
+                auto perObject = mPipeline->mapParameters<HLSL::ScenePerObject>(2);
 
                 perObject->hasDistanceField = false;
 
@@ -158,16 +146,16 @@ namespace Render {
                 mPipeline->bindResources(target, 2, {});
 
             {
-                auto instanceData = mPipeline->mapTempBuffer<SceneInstanceData[]>(1, instance.second.size());
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, instance.second.size());
 
                 std::ranges::transform(instance.second, instanceData.mData, [&](const LitSceneRenderData::ObjectData &o) {
                     Matrix4 mv = v * o.mTransform;
-                    return SceneInstanceData {
+                    return HLSL::SceneInstanceData {
                         mv.Transpose(),
                         mv.Inverse() /*.Transpose().Transpose()*/,
                         o.mDiffuseColor,
                         Vector4 { 1.0f, 1.0f, 1.0f, 1.0f },
-                        o.mBones
+                        // o.mBones
                     };
                 });
             }

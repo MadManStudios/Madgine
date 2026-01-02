@@ -8,10 +8,6 @@
 #include "Madgine/render/rendertarget.h"
 #include "Madgine/render/texturedescriptor.h"
 
-#include "Madgine/render/shadinglanguage/sl_support_begin.h"
-#include "shaders/im3d.sl"
-#include "Madgine/render/shadinglanguage/sl_support_end.h"
-
 #include "im3d/im3d.h"
 #include "im3d/im3d_internal.h"
 
@@ -29,7 +25,7 @@ namespace Render {
 
     void Im3DRenderPass::setup(RenderTarget *target)
     {
-        setupImpl(target, HLSL::im3d_VS, HLSL::im3d_PS, { sizeof(Im3DPerApplication), 0, sizeof(Im3DPerObject) });
+        setupImpl(target, HLSL::im3d_VS, HLSL::im3d_PS, { sizeof(HLSL::Im3DPerApplication), 0, sizeof(HLSL::Im3DPerObject) });
     }
 
     void Im3DRenderPass::render(RenderTarget *target, size_t iteration)
@@ -46,7 +42,7 @@ namespace Render {
         float aspectRatio = float(size.x) / size.y;
 
         {
-            auto perApplication = mPipeline->mapParameters<Im3DPerApplication>(0);
+            auto perApplication = mPipeline->mapParameters<HLSL::Im3DPerApplication>(0);
 
             perApplication->p = target->getClipSpaceMatrix() * mCamera->getProjectionMatrix(aspectRatio);
         }
@@ -57,7 +53,7 @@ namespace Render {
         for (std::pair<const Im3DTextureId, Im3D::Im3DContext::RenderData> &p : mContext->mRenderData) {
 
             {
-                auto perObject = mPipeline->mapParameters<Im3DPerObject>(2);
+                auto perObject = mPipeline->mapParameters<HLSL::Im3DPerObject>(2);
 
                 perObject->hasDistanceField = false;
 

@@ -26,10 +26,6 @@ namespace Render {
 
         virtual void debugCameras(CallableView<void(const Camera &, std::string_view)> handler) const override;
 
-        float mAmbientFactor = 1.0f;
-        float mDiffuseFactor = 1.0f;
-        float mSpecularFactor = 1.0f;
-
         float mLightConstantFactor = 1.0f;
         float mLightLinearFactor = 4.5f;
         float mLightSquaredFactor = 75.0f;

@@ -158,7 +158,7 @@ namespace Tools {
                 return result;
             } });
 
-        if (modified.first && actualType != value.type()) {
+        if (modified.first && actualType.mType != value.type().mType) {
             value.setType(actualType);
         }
 

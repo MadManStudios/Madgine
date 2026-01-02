@@ -15,15 +15,6 @@ IncludeBlocks: Regroup
 IncludeCategories:
   - Regex:     'lib\.h"$'
     Priority:     -1
-  - Regex:     'sl_support_begin.h"$'
-    Priority:     10
-    SortPriority: 11
-  - Regex:     'sl_support_end.h"$'
-    Priority:     10
-    SortPriority: 13
-  - Regex:     '.sl"$'
-    Priority:     10
-    SortPriority: 12
   - Regex:     '_impl.h"$'
     Priority:     9
   - Regex:     '^"Generic/'

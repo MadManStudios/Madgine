@@ -50,6 +50,8 @@ struct type_pack<> {
     using transform_with_index = type_pack<>;
     template <template <typename> typename F>
     using value_transform = auto_pack<>;
+    template <template <typename, typename> typename F, typename OtherPack>
+    using zip = std::enable_if_t<OtherPack::size == 0, type_pack<>>;
 
     template <typename T>
     using unique = T;
@@ -63,6 +65,8 @@ struct type_pack<> {
 
 template <typename Head, typename... Ty>
 struct type_pack<Head, Ty...> {
+
+    static constexpr const size_t size = 1 + sizeof...(Ty);
 
     using Tail = type_pack<Ty...>;
 
@@ -92,12 +96,33 @@ struct type_pack<Head, Ty...> {
             requires type_pack<Ty2...>::template
         contains<T> struct is_or_contains<type_pack<Ty2...>, T> : is_or_contains<T, T> {
         };
+
+        template <size_t n, typename Fill>
+        struct resize_helper;
+
+        template <size_t n, typename Fill>
+            requires(n == size)
+        struct resize_helper<n, Fill>
+        {
+            using type = type_pack<Head, Ty...>;
+        };
+
+        template <size_t n, typename Fill>
+            requires(n < size)
+        struct resize_helper<n, Fill> {
+            using type = typename Tail::template resize<n, Fill>;
+        };
+
+        template <size_t n, typename Fill>
+            requires(n > size)
+        struct resize_helper<n, Fill> {
+            using type = typename type_pack<Head, Ty..., Fill>::template resize<n, Fill>;
+        };
     };
 
     using first = Head;
 
     using indices = std::index_sequence_for<Head, Ty...>;
-    static constexpr const size_t size = 1 + sizeof...(Ty);
 
     template <template <typename...> typename Filter, typename... Args>
     using filter = typename Tail::template filter<Filter>::template prepend_if<Filter<Head, Args...>::value, Head>;
@@ -112,6 +137,8 @@ struct type_pack<Head, Ty...> {
 
     template <typename Pack2>
     using concat = typename Pack2::template prepend<Head, Ty...>;
+    template <size_t n, typename Fill = void>
+    using resize = typename helpers::template resize_helper<n, Fill>::type;
 
     template <template <typename> typename F>
     using transform = type_pack<F<Head>, F<Ty>...>;
@@ -121,6 +148,8 @@ struct type_pack<Head, Ty...> {
     using transform_with_index = typename Tail::template transform_with_index<F, offset + 1>::template prepend<F<Head, offset>>;
     template <template <typename> typename F>
     using value_transform = auto_pack<F<Head>::value, F<Ty>::value...>;
+    template <template <typename, typename> typename F, typename OtherPack>
+    using zip = typename Tail::template zip<F, typename OtherPack::pop_front>::template prepend<F<Head, typename OtherPack::first>>;
 
     template <template <typename...> typename Wrapper>
     using instantiate = Wrapper<Head, Ty...>;

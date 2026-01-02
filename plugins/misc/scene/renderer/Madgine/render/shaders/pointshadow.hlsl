@@ -1,11 +1,17 @@
-#include "pointshadow.sl"
+#include "Madgine/render/shadinglanguage/memory.hlsl"
 
 #include "light.hlsl"
 
 
-cbuffer PerApplication : register(b0)
+cbuffer PointShadowPerApplication : register(b0)
 {
-    PointShadowPerApplication app;
+    float4x4 p;
+};
+
+struct PointShadowInstanceData
+{
+    row_major float4x4 mv;
+	//ArrayPtr<float4x4> bones;
 };
 
 StructuredBuffer<PointShadowInstanceData> InstanceData : register(t0, space1);
@@ -54,7 +60,7 @@ export FragmentData pointshadow_VS(AppData IN)
 
     OUT.worldPos = worldPos + float4(aPos2, 0.0, 0.0);
 
-    OUT.position = mul(app.p, OUT.worldPos);
+    OUT.position = mul(p, OUT.worldPos);
 
     return OUT;
 }

@@ -32,27 +32,26 @@ namespace Render {
     };
 #endif
 
-    Threading::Task<void> ShaderCache::generate(const Filesystem::Path &path, ShaderObjectPtr object, std::string_view target, std::string_view profile)
+    Threading::Task<bool> ShaderCache::generate(const Filesystem::Path &path, ShaderObjectPtr object, std::string_view target, ShaderType type)
     {
-
+        bool exists = Filesystem::exists(path);
 #ifdef SHADERGEN_LOCATION
 
-        std::chrono::file_clock::time_point time = std::chrono::file_clock::time_point::min();
-
-        if (Filesystem::exists(path)) {
-            time = Filesystem::fileInfo(path).mLastModified;
-        }
-
-        if (time < object->chainTimestamp()) {
+        if (!exists || Filesystem::fileInfo(path).mLastModified < object->chainTimestamp()) {
             object->generate();
 
+            Filesystem::Path p = object->metadata().mPath;
+            if (p.isRelative()) {
+                p = directory() / p;
+            }
+
             std::vector<std::string> commandLine = {
-                object->metadata().mPath,
+                p,
                 path.parentPath().str(),
                 "-g",
                 std::string { target },
                 "-T",
-                std::string { profile },
+                type == ShaderType::VertexShader ? "vs_6_2" : "ps_6_2",
                 "-E",
                 object->entrypoint()
             };
@@ -64,10 +63,32 @@ namespace Render {
             auto [result, stdOut, stdErr] = (co_await Process::runAsync(SHADERGEN_LOCATION, commandLine, 2s)).value();
             if (result != 0) {
                 LOG_FATAL(stdErr);
+                co_return false;
             }
+            co_return true;
         }
 #endif
-        co_return;
+        co_return exists;
+    }
+
+    std::list<ShaderObjectPtr (*)()> &shaderCacheInternal()
+    {
+        static std::list<ShaderObjectPtr (*)()> cache;
+        return cache;
+    }
+
+    void ShaderCache::registerShader(ShaderObjectPtr (*object)())
+    {
+        shaderCacheInternal().push_back(std::move(object));
+    }
+
+    std::list<ShaderObjectPtr> ShaderCache::shaderCache()
+    {
+        std::list<ShaderObjectPtr> result;
+        for (auto f : shaderCacheInternal()) {
+            result.push_back(f());
+        }
+        return result;
     }
 
 }

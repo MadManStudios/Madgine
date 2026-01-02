@@ -6,18 +6,10 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "../shadinglanguage/sl_support_begin.h"
-#include "shaders/bloom.sl"
-#include "../shadinglanguage/sl_support_end.h"
-
-#include "../shaderfileobject.h"
-#include "bloom_hlsl.h"
-
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Madgine/render/texture.h"
 #include "../rendercontext.h"
 #include "../rendertarget.h"
+#include "../shaderfileobject.h"
+#include "bloom_hlsl.h"
 
 METATABLE_BEGIN(Engine::Render::BloomPass)
     MEMBER(mExposure)
@@ -38,7 +30,7 @@ namespace Render {
 
     void BloomPass::setup(RenderTarget *target)
     {
-        setupImpl(target, HLSL::bloom_VS, HLSL::bloom_PS, { sizeof(BloomData) });
+        setupImpl(target, HLSL::bloom_VS, HLSL::bloom_PS, { sizeof(HLSL::BloomData) });
 
         target->addRenderPass(&mBlur);
     }
@@ -51,7 +43,7 @@ namespace Render {
         mPipeline->bindResources(target, 2, mInput->texture(mInputIndex)->resourceBlock());
         mPipeline->bindResources(target, 3, target->texture(1)->resourceBlock());
 
-        mPipeline->mapParameters<BloomData>(0)->exposure = mExposure;
+        mPipeline->mapParameters<HLSL::BloomData>(0)->exposure = mExposure;
 
         mPipeline->renderQuad(target);
     }

@@ -1,13 +1,15 @@
-#include "widgets.sl"
 
-cbuffer PerApplication : register(b0)
+
+cbuffer WidgetsPerApplication : register(b0)
 {
-    WidgetsPerApplication app;
+    float4x4 c;
+    float2 screenSize;
 }
 
-cbuffer PerObject : register(b2)
+cbuffer WidgetsPerObject : register(b2)
 {
-    WidgetsPerObject object;
+    bool hasDistanceField;
+    bool hasTexture;
 }
 
 
@@ -34,10 +36,10 @@ export FragmentData widgets_VS(AppData IN)
 
 
 
-    OUT.position.xy = ((IN.aPos.xy / app.screenSize) * float2(2, -2)) - float2(1, -1);
+    OUT.position.xy = ((IN.aPos.xy / screenSize) * float2(2, -2)) - float2(1, -1);
     OUT.position.z = 0.999999 / (IN.aPos.z + 1.0);
     OUT.position.w = 1.0;
-    OUT.position = mul(app.c, OUT.position);
+    OUT.position = mul(c, OUT.position);
     OUT.color = IN.aColor;
     OUT.uv = IN.aUV;
 
@@ -58,7 +60,7 @@ float median(float r, float g, float b)
 export float4 widgets_PS(FragmentData IN) : SV_TARGET
 {
     float4 texColor;
-    if (object.hasDistanceField)
+    if (hasDistanceField)
     {
         float3 sample = tex.Sample(texSampler, IN.uv).rgb;
         float sigDist = median(sample.r, sample.g, sample.b) - 0.5;
@@ -70,7 +72,7 @@ export float4 widgets_PS(FragmentData IN) : SV_TARGET
         }
         texColor = opacity;
     }
-    else if (object.hasTexture)
+    else if (hasTexture)
     {
         texColor = tex.Sample(texSampler, IN.uv);
     }

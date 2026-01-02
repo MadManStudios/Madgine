@@ -12,7 +12,7 @@ namespace Window {
         Threading::Task<bool> loadImpl(MainWindow &window, Resource *res);
         Threading::Task<void> unloadImpl(MainWindow &window);
 
-        virtual Threading::Task<Resources::BakeResult> bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir) override;
+        Threading::Task<Resources::BakeResult> bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir) override;
     };
 
 }

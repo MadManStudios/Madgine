@@ -1,13 +1,15 @@
-#include "im3d.sl"
 
-cbuffer PerApplication : register(b0)
+cbuffer Im3DPerApplication : register(b0)
 {
-    Im3DPerApplication app;
+    float4x4 p;
 }
 
-cbuffer PerObject : register(b2)
+cbuffer Im3DPerObject : register(b2)
 {
-    Im3DPerObject object;
+    float4x4 mv;
+	
+    bool hasTexture;
+    bool hasDistanceField;
 }
 
 
@@ -39,7 +41,7 @@ export FragmentData im3d_VS(AppData IN)
 
     float2 aPos2 = IN.aPos2;
     
-    OUT.position = mul(app.p, mul(object.mv, float4(IN.aPos, IN.aW)) + float4(aPos2, 0.0, 0.0));
+    OUT.position = mul(p, mul(mv, float4(IN.aPos, IN.aW)) + float4(aPos2, 0.0, 0.0));
     OUT.position.z += OUT.position.w;
     OUT.position.z /= 2;
 
@@ -60,9 +62,9 @@ export float4 im3d_PS(FragmentData IN) : SV_TARGET
 {
     float4 colorAcc = IN.color;
 
-    if (object.hasTexture)
+    if (hasTexture)
     {
-        if (object.hasDistanceField)
+        if (hasDistanceField)
         {
             float2 msdfUnit = 4.0 / float2(512.0, 512.0);
             float4 sample = tex.Sample(texSampler, IN.uv);

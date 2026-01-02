@@ -1,4 +1,3 @@
-#ifndef __cplusplus
 
 ByteAddressBuffer memory[4] : register(t0, space0);
 
@@ -27,5 +26,3 @@ struct ArrayPtr<float4x4>{
 
 	uint2 data;
 };
-
-#endif

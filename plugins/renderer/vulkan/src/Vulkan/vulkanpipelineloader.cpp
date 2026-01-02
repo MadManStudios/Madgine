@@ -18,6 +18,7 @@ namespace Engine {
 namespace Render {
 
     VulkanPipelineLoader::VulkanPipelineLoader()
+        : Resources::VirtualResourceLoaderImpl<VulkanPipelineLoader, VulkanPipeline, PipelineLoader>("-SPIRV", ".spirv")
     {
     }
 

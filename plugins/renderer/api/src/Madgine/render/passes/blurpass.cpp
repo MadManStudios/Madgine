@@ -8,10 +8,6 @@
 #include "../shaderfileobject.h"
 #include "blur_hlsl.h"
 
-#include "../shadinglanguage/sl_support_begin.h"
-#include "shaders/blur.sl"
-#include "../shadinglanguage/sl_support_end.h"
-
 #include "../rendercontext.h"
 #include "../rendertarget.h"
 
@@ -26,7 +22,7 @@ namespace Render {
 
     void BlurPass::setup(RenderTarget *target)
     {
-        setupImpl(target, HLSL::blur_VS, HLSL::blur_PS, { sizeof(BlurData) });
+        setupImpl(target, HLSL::blur_VS, HLSL::blur_PS, { sizeof(HLSL::BlurData) });
     }
 
     void BlurPass::render(RenderTarget *target, size_t iteration)
@@ -35,7 +31,7 @@ namespace Render {
             return;
 
         {
-            auto data = mPipeline->mapParameters<BlurData>(0);
+            auto data = mPipeline->mapParameters<HLSL::BlurData>(0);
             data->horizontal = iteration % 2;
             data->textureSize = mInput->size();
         }
