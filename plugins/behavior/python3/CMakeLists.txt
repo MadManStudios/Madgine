@@ -24,6 +24,7 @@ target_link_libraries(Python3 PUBLIC Python3::Python)
 if (_Python3_LIBRARY_DEBUG)
 	target_compile_definitions(Python3 PUBLIC HAS_PYTHON3_DEBUG_LIB)
 endif (_Python3_LIBRARY_DEBUG)
+target_compile_definitions(Python3 PRIVATE PYTHON3_STDLIB="$<PATH:GET_PARENT_PATH,$<TARGET_FILE:Python3::Python>>")
 
 if (NOT CMAKE_CROSSCOMPILING)
 	add_custom_command(TARGET Python3

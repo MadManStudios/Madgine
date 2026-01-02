@@ -226,6 +226,8 @@ namespace Behavior {
 
             Py_SetProgramName(program);
 
+            Py_SetPythonHome(L"" PYTHON3_STDLIB);
+
             /* Add a built-in module, before Py_Initialize */
             if (PyImport_AppendInittab("Engine", PyInit_Engine) == -1) {
                 LOG("Error: could not extend built-in modules table");
