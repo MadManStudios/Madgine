@@ -152,11 +152,9 @@ namespace Resources {
         }
 #endif
 
-        registerResourceLocation(Filesystem::executablePath().parentPath() / "data", 50);
+        
 
-#if ANDROID
-        registerResourceLocation("assets:/data", 25);
-#endif
+        registerResourceLocation(Filesystem::shippingPath() / "data", 50);
 
         std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> loaderByExtension = getLoaderByExtension();
 

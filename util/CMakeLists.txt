@@ -41,11 +41,7 @@ function(add_shadergen_target target flag)
 
 endfunction(add_shadergen_target)
 
-if (ANDROID)
-	install(DIRECTORY ${CMAKE_BINARY_DIR}/shadercache DESTINATION assets COMPONENT MadgineLauncher)
-else()
-	install(DIRECTORY ${CMAKE_BINARY_DIR}/shadercache DESTINATION . COMPONENT MadgineLauncher)
-endif()
+
 
 add_library(dxcompiler SHARED IMPORTED GLOBAL)
 

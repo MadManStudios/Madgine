@@ -74,6 +74,11 @@ namespace Filesystem {
         return sAppData;
     }
 
+    Path shippingPath()
+    {
+        return "assets:";
+    }
+
     bool isDir(const Path &p)
     {
         if (isAssetPath(p))

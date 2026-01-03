@@ -169,6 +169,13 @@ macro(add_workspace_interface_library name)
 
 endmacro(add_workspace_interface_library)
 
+macro(target_ship_folder target path)
+	install(DIRECTORY ${path} DESTINATION . COMPONENT MadgineLauncher)
+endmacro(target_ship_folder)
+
+macro(target_ship_file target path)
+	install(FILES ${path} DESTINATION . COMPONENT MadgineLauncher)
+endmacro(target_ship_file)
 
 function(get_dependencies list target)
 

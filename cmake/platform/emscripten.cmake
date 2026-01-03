@@ -17,7 +17,7 @@ if (EMSCRIPTEN)
 
 		set_target_properties(${target} PROPERTIES SUFFIX ".html")
 
-		_target_link_libraries(${target} PRIVATE "--preload-file \"${CMAKE_BINARY_DIR}/shadercache@/shadercache\"" "--preload-file \"${CMAKE_BINARY_DIR}/data@/data\"" )
+		_target_link_libraries(${target} PRIVATE "--preload-file \"${CMAKE_BINARY_DIR}/data@/data\"" )
 
 		file(GENERATE OUTPUT ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<TARGET_FILE_BASE_NAME:${target}>.bat CONTENT "emrun ./$<TARGET_FILE_NAME:${target}>")
 
@@ -50,6 +50,15 @@ if (EMSCRIPTEN)
 			endif()
 		endforeach()
 	endfunction(target_link_libraries)
+
+	function(target_ship_folder target path)
+		cmake_path(GET path FILENAME filename)
+		target_link_libraries(${target} INTERFACE "--preload-file \"${path}@/${filename}\"")
+	endfunction(target_ship_folder)	
+
+	function(target_ship_file target path)
+		target_link_libraries(${target} INTERFACE "--preload-file \"${path}\"")
+	endfunction(target_ship_file)	
 
 	function(install_to_workspace name)
 

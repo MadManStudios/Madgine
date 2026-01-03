@@ -81,6 +81,11 @@ namespace Filesystem {
         return sTempPathBuffer;
     }
 
+    Path shippingPath()
+    {
+        return executablePath().parentPath();
+    }
+
     bool createDirectory(const Path &p)
     {
         auto result = CreateDirectory(p.c_str(), NULL);

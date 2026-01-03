@@ -5,7 +5,7 @@ once()
 include(Workspace)
 include(binaryinfo)
 
-include(GetPrerequisites)
+
 
 if (MADGINE_CONFIGURATION)
 	file(GLOB lists "${MADGINE_CONFIGURATION}/*.list")

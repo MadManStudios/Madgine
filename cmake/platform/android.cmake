@@ -62,6 +62,14 @@ if (ANDROID)
 
 	endmacro(add_workspace_application)
 
+	macro(target_ship_folder target path)
+		install(DIRECTORY ${path} DESTINATION assets COMPONENT MadgineLauncher)
+	endmacro(target_ship_folder)
+	
+	macro(target_ship_file target path)
+		install(FILES ${path} DESTINATION assets COMPONENT MadgineLauncher)
+	endmacro(target_ship_file)
+
 	function(install_to_workspace name)
 
 		set(options)

@@ -4,6 +4,8 @@
 
 #include "Generic/cowstring.h"
 
+#include "Interfaces/filesystem/fsapi.h"
+
 #include "Madgine/root/keyvalueregistry.h"
 #include "Madgine/root/root.h"
 
@@ -222,11 +224,12 @@ namespace Behavior {
 
         Threading::Task<bool> Python3Environment::init()
         {
-            wchar_t *program = Py_DecodeLocale("Madgine-Python3-Env", NULL);
+            std::string path = Filesystem::shippingPath() / PYTHON3_STDLIB_ZIP;
+            std::wstring wpath = { path.begin(), path.end() };
 
-            Py_SetProgramName(program);
+            Py_SetPath(wpath.c_str());            
 
-            Py_SetPythonHome(L"" PYTHON3_STDLIB);
+            Py_SetProgramName(L"Madgine-Python3-Env");
 
             /* Add a built-in module, before Py_Initialize */
             if (PyImport_AppendInittab("Engine", PyInit_Engine) == -1) {
@@ -242,6 +245,7 @@ namespace Behavior {
                 co_return false;
             }
 
+            Py_NoSiteFlag = mRoot.toolMode();
             Py_InitializeEx(0);
 
             setupExecution();

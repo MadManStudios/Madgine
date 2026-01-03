@@ -61,6 +61,11 @@ namespace Filesystem {
         return Path { "/cwd" };
     }
 
+    Path shippingPath()
+    {
+        return Path { "/" };
+    }
+
     bool isDir(const Path &p)
     {
         struct stat statbuffer;

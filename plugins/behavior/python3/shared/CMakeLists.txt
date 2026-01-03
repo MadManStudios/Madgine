@@ -1,7 +1,7 @@
 
 if (NOT CMAKE_CROSSCOMPILING)
 
-	find_package (Python3 REQUIRED COMPONENTS Development.Embed)
+	find_package (Python3 REQUIRED COMPONENTS Interpreter Development.Embed)
 
 	if (NOT Python3_Development.Embed_FOUND)
 		MESSAGE(STATUS "Python3 not found.")
@@ -19,6 +19,11 @@ if (NOT CMAKE_CROSSCOMPILING)
 		READABLE_NAME Python3
 		LICENSE_FILE ${python_license}
 		CREDITS "Scripting-Language: Python3 - https://www.python.org/")
+
+	set_target_properties(Python3::Python PROPERTIES STDLIB ${Python3_STDLIB})
+
+	set(Python3_VERSION_MAJOR ${Python3_VERSION_MAJOR} PARENT_SCOPE)
+	set(Python3_VERSION_MINOR ${Python3_VERSION_MINOR} PARENT_SCOPE)
 
 else()
 
@@ -52,8 +57,6 @@ else()
 		IMPORTED_LOCATION ${MADGINE_PYTHON_LIB})
 
 	target_include_directories(Python3::Python INTERFACE ${MADGINE_PYTHON_ROOT}/include ${MADGINE_PYTHON_LIB}/..)
-
-	target_link_libraries(Python3::Python INTERFACE ${MADGINE_PYTHON_MODULE_LIBS} "--preload-file \"${MADGINE_PYTHON_LIB}/../usr@/usr\"")
 
 
 	add_notices(Python3::Python 

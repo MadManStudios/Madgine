@@ -22,6 +22,8 @@ target_link_libraries(Render PRIVATE freetype lib_msdfgen)
 target_include_directories(Render PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(Render PRIVATE src)
 
+target_ship_folder(Render ${CMAKE_BINARY_DIR}/shadercache)
+
 if (NOT CMAKE_CROSSCOMPILING)
 	target_compile_definitions(Render PRIVATE SHADERGEN_LOCATION="$<TARGET_FILE:ShaderGen>")
 endif()

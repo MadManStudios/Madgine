@@ -17,20 +17,8 @@ namespace Render {
 
     Filesystem::Path ShaderCache::directory()
     {
-#if ANDROID
-        return "assets:/shadercache";
-#else
-        return Filesystem::executablePath().parentPath() / "shadercache";
-#endif
+        return Filesystem::shippingPath() / "shadercache";
     }
-
-#if !ANDROID
-    static Guard sInitializer {
-        []() {
-            Filesystem::createDirectories(ShaderCache::directory());
-        }
-    };
-#endif
 
     Threading::Task<bool> ShaderCache::generate(const Filesystem::Path &path, ShaderObjectPtr object, std::string_view target, ShaderType type)
     {

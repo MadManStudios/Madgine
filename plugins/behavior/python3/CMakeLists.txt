@@ -15,7 +15,7 @@ FolderSources(sources src Python3 python3debugger.cpp python3debugger.h python3e
 	FolderSources(sources Python3 util pyapifunction.cpp pyapifunction.h pyboundapifunction.cpp pyboundapifunction.h pydictptr.cpp pydictptr.h pyenum.cpp pyenum.h pyexecution.cpp pyexecution.h pyflags.cpp pyflags.h pyframeptr.cpp pyframeptr.h pylistptr.cpp pylistptr.h pymoduleptr.cpp pymoduleptr.h pyobjectiter.cpp pyobjectiter.h pyobjectptr.cpp pyobjectptr.h pyobjectutil.cpp pyobjectutil.h pyownedscopeptr.cpp pyownedscopeptr.h pyscopeiterator.cpp pyscopeiterator.h pysender.cpp pysender.h python3lock.cpp python3lock.h pyscopeptr.cpp pyscopeptr.h pyvirtualiterator.cpp pyvirtualiterator.h pyvirtualrange.cpp pyvirtualrange.h)
 		FolderSources(sources util math pymatrix3.cpp pymatrix3.h pymatrix4.cpp pymatrix4.h pyquaternion.cpp pyquaternion.h pyvector2.cpp pyvector2.h pyvector3.cpp pyvector3.h pyvector4.cpp pyvector4.h)
 
-add_plugin(Python3 Madgine Behavior ${sources} PRECOMPILED_HEADER src/Python3/python3lib.h)
+add_plugin(Python3 Madgine Behavior ${sources} PRECOMPILED_HEADER src/Python3/python3lib.h IMPORTED_DEPS Python3::Python)
 
 target_link_plugins(Python3 Root Resources Debugger Behavior)
 
@@ -24,13 +24,23 @@ target_link_libraries(Python3 PUBLIC Python3::Python)
 if (_Python3_LIBRARY_DEBUG)
 	target_compile_definitions(Python3 PUBLIC HAS_PYTHON3_DEBUG_LIB)
 endif (_Python3_LIBRARY_DEBUG)
-target_compile_definitions(Python3 PRIVATE PYTHON3_STDLIB="$<PATH:GET_PARENT_PATH,$<TARGET_FILE:Python3::Python>>")
 
-if (NOT CMAKE_CROSSCOMPILING)
-	add_custom_command(TARGET Python3
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Python3::Python> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-endif()
+get_target_property(stdlib Python3::Python STDLIB)
+file(GLOB files LIST_DIRECTORIES true RELATIVE ${stdlib} ${stdlib}/*)
+
+list(REMOVE_ITEM files site-packages)
+
+set(filename python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}.zip)
+
+add_custom_command(TARGET Python3
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Python3::Python> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+	COMMAND ${CMAKE_COMMAND} -E tar "c" ${CMAKE_BINARY_DIR}/${filename} --format=zip ${files}
+	WORKING_DIRECTORY ${stdlib})
+
+target_compile_definitions(Python3 PRIVATE PYTHON3_STDLIB_ZIP="${filename}")
+
+target_ship_file(Python3 ${CMAKE_BINARY_DIR}/${filename})
 
 set(sources "")
 FolderSources(sources "" tools)

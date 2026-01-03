@@ -50,6 +50,11 @@ namespace Filesystem {
         return result;
     }
 
+    Path shippingPath()
+    {
+        return executablePath().parentPath();
+    }
+
     bool isDir(const Path &p)
     {
         struct stat statbuffer;
