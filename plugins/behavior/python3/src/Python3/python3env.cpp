@@ -224,12 +224,32 @@ namespace Behavior {
 
         Threading::Task<bool> Python3Environment::init()
         {
+            PyStatus status;
+
+#define HANDLE_STATUS()             \
+    if (PyStatus_IsError(status)) { \
+        LOG_ERROR(status.err_msg);  \
+    }                               \
+    if (PyStatus_IsExit(status)) {  \
+        PyConfig_Clear(&config);    \
+        co_return false;            \
+    }
+
+            PyConfig config;
+            PyConfig_InitPythonConfig(&config);
+            config.isolated = 1;
+
             std::string path = Filesystem::shippingPath() / PYTHON3_STDLIB_ZIP;
-            std::wstring wpath = { path.begin(), path.end() };
 
-            Py_SetPath(wpath.c_str());            
+            status = PyConfig_SetBytesString(&config, &config.pythonpath_env, path.c_str());
+            HANDLE_STATUS();
 
-            Py_SetProgramName(L"Madgine-Python3-Env");
+            status = PyConfig_SetBytesString(&config, &config.program_name, "Madgine-Python3-Env");
+            HANDLE_STATUS();
+
+            config.module_search_paths_set = 1;
+            status = PyWideStringList_Append(&config.module_search_paths, config.pythonpath_env);
+            HANDLE_STATUS();
 
             /* Add a built-in module, before Py_Initialize */
             if (PyImport_AppendInittab("Engine", PyInit_Engine) == -1) {
@@ -245,8 +265,11 @@ namespace Behavior {
                 co_return false;
             }
 
-            Py_NoSiteFlag = mRoot.toolMode();
-            Py_InitializeEx(0);
+            config.site_import = !mRoot.toolMode();
+
+            status = Py_InitializeFromConfig(&config);
+            HANDLE_STATUS();
+            PyConfig_Clear(&config);
 
             setupExecution();
 
