@@ -33,7 +33,7 @@ namespace Filesystem {
 
     void AsyncFileReadState::start()
     {
-        Stream file = openFileRead(mPath);
+        Stream file = openFileRead(mPath, true);
         if (!file)
             set_error(GenericResult::UNKNOWN_ERROR);
         else
