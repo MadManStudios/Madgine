@@ -114,39 +114,33 @@ macro(add_plugin name base type)
 
 	compile_shaders(${name} ${PLUGIN_CONFIG_INSTALL_COMPONENT})
 
-	set(installPlugin TRUE)
-
 	if (NOT MODULES_ENABLE_PLUGINS AND NOT PLUGINS_${type}_${name})		
 		MESSAGE (STATUS "Excluding Plugin '${name}' from ALL build.")
 		set_target_properties(${name} PROPERTIES EXCLUDE_FROM_ALL TRUE)
-		set(installPlugin FALSE)
-	endif()
+	else()
+	
+		set(PLUGIN_LIST ${PLUGIN_LIST} ${name} CACHE INTERNAL "")	
 
-	set(PLUGIN_LIST ${PLUGIN_LIST} ${name} CACHE INTERNAL "")	
+		if (NOT MADGINE_CONFIGURATION)
+			cpack_add_component_group(${type}Group
+						DISPLAY_NAME ${type})
+			if (("API_PLUGIN" IN_LIST PLUGIN_CONFIG_KEYWORDS_MISSING_VALUES) OR PLUGIN_CONFIG_API_PLUGIN)
+				plugin_group(${name} ${PLUGIN_CONFIG_API_PLUGIN})
+				cpack_add_component_group(${name}Group
+							DISPLAY_NAME ${name}
+							PARENT_GROUP ${type}Group)
+				cpack_add_component(${name}
+							DISPLAY_NAME API
+							GROUP ${name}Group)
+			else()
+				cpack_add_component(${PLUGIN_CONFIG_INSTALL_COMPONENT} GROUP ${type}Group)
+			endif()
 
-	if (installPlugin)
-		cpack_add_component_group(${type}Group
-					DISPLAY_NAME ${type})
-		if (("API_PLUGIN" IN_LIST PLUGIN_CONFIG_KEYWORDS_MISSING_VALUES) OR PLUGIN_CONFIG_API_PLUGIN)
-			plugin_group(${name} ${PLUGIN_CONFIG_API_PLUGIN})
-			cpack_add_component_group(${name}Group
-						DISPLAY_NAME ${name}
-						PARENT_GROUP ${type}Group)
-			cpack_add_component(${name}
-						DISPLAY_NAME API
-						GROUP ${name}Group)
-		else()
-			cpack_add_component(${PLUGIN_CONFIG_INSTALL_COMPONENT} GROUP ${type}Group)
+			install_to_workspace(${PLUGIN_CONFIG_INSTALL_COMPONENT} TARGETS ${name} ${PLUGIN_CONFIG_EXTERNAL_DEPS})
 		endif()
 
-		install_to_workspace(${PLUGIN_CONFIG_INSTALL_COMPONENT} TARGETS ${name} ${PLUGIN_CONFIG_EXTERNAL_DEPS})
 		install(IMPORTED_RUNTIME_ARTIFACTS ${PLUGIN_CONFIG_IMPORTED_DEPS} RUNTIME DESTINATION bin COMPONENT ${PLUGIN_CONFIG_INSTALL_COMPONENT})
-
 	endif()
-
-	#foreach(project ${PROJECTS_DEPENDING_ON_ALL_PLUGINS})
-	#	target_link_plugins(${project} ${name})
-	#endforeach()
 
 endmacro(add_plugin)
 
