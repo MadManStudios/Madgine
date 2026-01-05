@@ -150,6 +150,16 @@ namespace Debug {
         size = 0;
 #        endif
 #    elif ANDROID
+        struct BufferObject {
+            BufferObject(const char *function)
+                : mFunction(function)
+            {
+            }
+
+            const char *mFunction;
+        };
+        using AddressBuffer = std::pmr::unordered_map<void *, std::optional<BufferObject>>;
+        static AddressBuffer addressBuffer { resource };
 #    elif LINUX
         char **symbols = backtrace_symbols(data, size);
 #    elif EMSCRIPTEN
@@ -184,20 +194,20 @@ namespace Debug {
             }
 #        endif
 #    elif ANDROID
-            const void *addr = data[i];
-            const char *symbol = "";
+            auto pib = addressBuffer.try_emplace(data[i]);
+            if (pib.second) {
+                const char *symbol = "";
 
-            Dl_info info;
-            if (dladdr(addr, &info) && info.dli_sname) {
-                symbol = info.dli_sname;
+                Dl_info info;
+                if (dladdr(data[i], &info) && info.dli_sname) {
+                    symbol = info.dli_sname;
+                }
+                int status = 0;
+                char *demangled = __cxxabiv1::__cxa_demangle(symbol, 0, 0, &status);
+                
+                pib.first->second.emplace(demangled && status == 0 ? demangled : symbol);
             }
-            int status = 0;
-            char *demangled = __cxxabiv1::__cxa_demangle(symbol, 0, 0, &status);
-
-            result.emplace_back(data[i], demangled && status == 0 ? demangled : symbol);
-
-            if (demangled)
-                free(demangled);
+            result.emplace_back(data[i], pib.first->second ? pib.first->second->mFunction : "");
 #    elif LINUX
             if (symbols && symbols[i]) {
                 result.emplace_back(data[i], symbols[i]);
