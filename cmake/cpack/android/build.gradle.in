@@ -1,6 +1,6 @@
 plugins {
-    id 'com.android.application' version '8.6.1'
-    id 'com.android.library' version '8.6.1' apply false
+    id 'com.android.application' version '8.13.1'
+    id 'com.android.library' version '8.13.1' apply false
 }
 
 android {
@@ -17,11 +17,6 @@ android {
 
 
     buildTypes {
-        debug {
-            debuggable true
-            zipAlignEnabled false
-            minifyEnabled false
-        }
         release {
             versionNameSuffix ""
             debuggable false
@@ -45,12 +40,6 @@ android {
 			assets.srcDirs = ['../MadgineLauncher/assets/']
             res.srcDirs = ['@MADGINE_CONFIGURATION@/res' @ANDROID_ADDITIONAL_RESOURCES@]
             java.srcDirs = [@ANDROID_ADDITIONAL_SOURCES@]
-        }
-    }
-
-    packagingOptions{
-        jniLibs{
-            useLegacyPackaging true
         }
     }
 
