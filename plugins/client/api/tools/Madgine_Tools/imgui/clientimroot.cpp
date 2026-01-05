@@ -28,7 +28,6 @@
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
 #include "imgui/misc/freetype/imgui_freetype.h"
-
 #include "imgui_hlsl.h"
 
 METATABLE_BEGIN_BASE(Engine::Tools::ClientImRoot, Engine::Tools::ImRoot)
@@ -284,20 +283,26 @@ namespace Tools {
         defaultConfig.RasterizerDensity = 2.0f;
         io.FontDefault = io.Fonts->AddFontDefault(&defaultConfig);
 
-        static const ImWchar icons_ranges[] = { 0xf100, 0xf1ff, 0 };
-
-        ImFontConfig config;
-        config.MergeMode = true;
-        config.FontBuilderFlags |= ImGuiFreeTypeBuilderFlags_LoadColor;
-        // config.GlyphMinAdvanceX = 13.0f;
-        config.GlyphOffset = { 0.0f, 3.0f * Window::platformCapabilities.mScalingFactor };
-        config.FontDataOwnedByAtlas = false;
-        config.RasterizerDensity = 10.0f;
-
         Filesystem::Path iconsPath = Resources::ResourceManager::getSingleton().findResourceFile("icons.ttf");
-        ByteBuffer iconsData = (co_await Filesystem::readFileAsync(iconsPath)).value();
+        auto iconsResult = co_await Filesystem::readFileAsync(iconsPath);
+        if (iconsResult.is_value()) {
+            ByteBuffer iconsData = std::move(iconsResult).value();
 
-        io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(iconsData.mData), iconsData.mSize, 13.0f * Window::platformCapabilities.mScalingFactor, &config, icons_ranges);
+            static const ImWchar icons_ranges[] = { 0xf100, 0xf1ff, 0 };
+
+            ImFontConfig config;
+            config.MergeMode = true;
+            config.FontBuilderFlags |= ImGuiFreeTypeBuilderFlags_LoadColor;
+            // config.GlyphMinAdvanceX = 13.0f;
+            config.GlyphOffset = { 0.0f, 3.0f * Window::platformCapabilities.mScalingFactor };
+            config.FontDataOwnedByAtlas = false;
+            config.RasterizerDensity = 5.0f;
+
+
+            io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(iconsData.mData), iconsData.mSize, 13.0f * Window::platformCapabilities.mScalingFactor, &config, icons_ranges);
+        } else {
+            LOG_ERROR("Reading icons.ttf failed!");
+        }
 
         io.Fonts->Build();
 
