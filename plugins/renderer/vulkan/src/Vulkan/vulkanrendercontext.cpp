@@ -164,6 +164,25 @@ namespace Render {
         return true;
     }
 
+    bool checkExtensionSupport(const char *extension)
+    {
+        // Get the instance extension count.
+        uint32_t inst_ext_count = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &inst_ext_count, nullptr);
+
+        // Enumerate the instance extensions.
+        std::vector<VkExtensionProperties> inst_exts(inst_ext_count);
+        vkEnumerateInstanceExtensionProperties(nullptr, &inst_ext_count, inst_exts.data());
+
+        // Check for debug utils extension within the system driver or loader.
+        // Check if the debug utils extension is available (in the driver).
+        return inst_exts.end() != std::find_if(inst_exts.begin(), inst_exts.end(), [=](VkExtensionProperties extensionProperties) {
+            return strcmp(extensionProperties.extensionName,
+                       extension)
+                == 0;
+        });
+    }
+
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
         VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -209,6 +228,10 @@ namespace Render {
 
     VulkanPtr2<VkInstance, destroyInstance> createInstance()
     {
+        std::vector<const char *> actualExtensions = extensions;
+
+        // checkExtensionSupport(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)
+
         assert(checkValidationLayerSupport());
 
         VkApplicationInfo appInfo {};
@@ -226,8 +249,8 @@ namespace Render {
         createInfo.enabledLayerCount = layers.size();
         createInfo.ppEnabledLayerNames = layers.data();
 
-        createInfo.enabledExtensionCount = extensions.size();
-        createInfo.ppEnabledExtensionNames = extensions.data();
+        createInfo.enabledExtensionCount = actualExtensions.size();
+        createInfo.ppEnabledExtensionNames = actualExtensions.data();
 
         VkDebugUtilsMessengerCreateInfoEXT createInfo2 {};
         createInfo2.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
@@ -250,9 +273,13 @@ namespace Render {
 
         createInfo2.pNext = &layerSettings;*/
 
+        LOG_DEBUG("Vulkan: vkCreateInstance...");
+
         VulkanPtr2<VkInstance, destroyInstance> instance;
         VkResult result = vkCreateInstance(&createInfo, nullptr, &instance);
         VK_CHECK(result);
+
+        LOG_DEBUG("Vulkan: vkCreateInstance...Success");
 
 #if !ANDROID
         gladLoaderLoadVulkan(instance, nullptr, nullptr);
@@ -501,10 +528,14 @@ namespace Render {
 
         ConstantValues values;
         mConstantBuffer.setData({ &values, sizeof(values) });
+
+        LOG_DEBUG("Vulkan: VulkanRenderContext initialized");
     }
 
     VulkanRenderContext::~VulkanRenderContext()
     {
+        LOG_DEBUG("Vulkan: Shutting down VulkanRenderContext");
+
         mConstantBuffer.reset();
 
         mSemaphore.reset();
