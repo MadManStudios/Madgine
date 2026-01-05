@@ -22,10 +22,10 @@ if (MADGINE_CONFIGURATION)
 
 	if (ANDROID)
 		install(CODE "file(MAKE_DIRECTORY $<INSTALL_PREFIX>/assets/data)
-		execute_process(COMMAND ${CMAKE_COMMAND} -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/assets/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
+		execute_process(COMMAND \"${CMAKE_COMMAND}\" -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/assets/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
 	elseif (NOT EMSCRIPTEN)
 		install(CODE 		
-		"execute_process(COMMAND ${CMAKE_COMMAND} -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
+		"execute_process(COMMAND \"${CMAKE_COMMAND}\" -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
 	endif ()
 
 endif ()
