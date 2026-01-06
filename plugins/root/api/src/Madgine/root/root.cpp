@@ -6,6 +6,7 @@
 #include "Interfaces/filesystem/async.h"
 #include "Interfaces/filesystem/path.h"
 #include "Interfaces/log/standardlog.h"
+#include "Interfaces/process/processapi.h"
 
 #include "Modules/plugins/pluginmanager.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
@@ -109,13 +110,15 @@ namespace Root {
     {
         while (mTaskQueue.running()) {
             Filesystem::checkAsyncIOCompletion();
+            Process::checkAsyncProcessCompletion();
             co_await 500ms;
         }
         do {
             Filesystem::cancelAllAsyncIO();
             Filesystem::checkAsyncIOCompletion();
+            Process::checkAsyncProcessCompletion();
             co_await 0ms;
-        } while (Filesystem::pendingIOOperationCount() > 0);
+        } while (Filesystem::pendingIOOperationCount() > 0 || Process::pendingProcesses() > 0);
     }
 
     int Root::errorCode()

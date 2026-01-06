@@ -33,6 +33,9 @@ namespace Process {
         return Execution::make_virtual_sender<ProcessState>(std::move(executable), std::move(commandLine), timeout);
     }
 
+    INTERFACES_EXPORT void checkAsyncProcessCompletion();
+    INTERFACES_EXPORT size_t pendingProcesses();
+
     INTERFACES_EXPORT void execute(std::string_view command);
 
 }

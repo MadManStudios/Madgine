@@ -10,6 +10,8 @@
 namespace Engine {
 namespace Process {
 
+    static std::atomic<size_t> sPendingCount = 0;
+
     struct ProcessAuxiliaryData {
         ~ProcessAuxiliaryData()
         {
@@ -70,12 +72,19 @@ namespace Process {
             command += " " + argument;
 
         result = CreateProcess(nullptr, command.data(), nullptr, nullptr, true, CREATE_NO_WINDOW, nullptr, nullptr, &startup, &mData->mProcessInfo);
-        assert(result);
+        if (!result) {
+            set_error(GenericResult::UNKNOWN_ERROR);
+            return;
+        }
 
         CloseHandle(out_write);
         CloseHandle(err_write);
 
+        ++sPendingCount;
+
         result = RegisterWaitForSingleObject(&mData->mWaitHandle, mData->mProcessInfo.hProcess, [](void *self, BOOLEAN timedOut) { 
+            --sPendingCount;
+
             ProcessState *state = static_cast<ProcessState *>(self);
 
             UnregisterWait(state->mData->mWaitHandle);
@@ -111,6 +120,15 @@ namespace Process {
                     state->set_value(exit_code, std::move(stdOut), std::move(stdErr));
             } }, this, mTimeout.count(), WT_EXECUTEINWAITTHREAD);
         assert(result);
+    }
+
+    void checkAsyncProcessCompletion()
+    {        
+    }
+
+    size_t pendingProcesses()
+    {
+        return sPendingCount;
     }
 
     void execute(std::string_view command)
