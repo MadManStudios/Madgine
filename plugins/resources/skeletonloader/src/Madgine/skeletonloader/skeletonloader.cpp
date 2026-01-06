@@ -42,9 +42,19 @@ namespace Render {
 
     Threading::Task<bool> SkeletonLoader::loadImpl(SkeletonDescriptor &skeleton, ResourceDataInfo &info)
     {
-        Assimp::Importer importer;
+        auto bufferResult = co_await info.resource()->readAsync();
+        if (!bufferResult.is_value()) {
+            if (bufferResult.is_error()) {
+                LOG_ERROR("Failed to load skeleton: " << std::move(bufferResult).error().mError);
+            } else {
+                LOG_ERROR("Failed to load skeleton: Cancelled");
+            }
+            co_return false;
+        }
 
-        ByteBuffer buffer = (co_await info.resource()->readAsync()).value();
+        ByteBuffer buffer = std::move(bufferResult).value();
+
+        Assimp::Importer importer;
 
         const aiScene *scene = importer.ReadFileFromMemory(buffer.mData, buffer.mSize, aiProcess_MakeLeftHanded | aiProcess_Triangulate | aiProcess_LimitBoneWeights | aiProcess_OptimizeGraph);
 

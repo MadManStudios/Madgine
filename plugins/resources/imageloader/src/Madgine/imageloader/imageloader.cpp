@@ -27,7 +27,17 @@ namespace Resources {
 
     Threading::Task<bool> ImageLoader::loadImpl(ImageData &data, ResourceDataInfo &info)
     {
-        ByteBuffer buffer = (co_await info.resource()->readAsync()).value();
+        auto bufferResult = co_await info.resource()->readAsync();
+        if (!bufferResult.is_value()) {
+            if (bufferResult.is_error()) {
+                LOG_ERROR("Failed to load image: " << std::move(bufferResult).error().mError);
+            } else {
+                LOG_ERROR("Failed to load image: Cancelled");
+            }
+            co_return false;
+        }
+
+        ByteBuffer buffer = std::move(bufferResult).value();
 
         data.mChannels = 4;
 

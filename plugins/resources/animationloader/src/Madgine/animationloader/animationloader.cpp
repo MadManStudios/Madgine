@@ -51,7 +51,17 @@ namespace Render {
     {
         Assimp::Importer importer;
 
-        ByteBuffer buffer = (co_await info.resource()->readAsync()).value();
+        auto bufferResult = co_await info.resource()->readAsync();
+        if (!bufferResult.is_value()) {
+            if (bufferResult.is_error()) {
+                LOG_ERROR("Failed to read animation resource data: " << std::move(bufferResult).error().mError);
+            } else {
+                LOG_ERROR("Failed to read animation resource data: Cancelled");
+            }            
+            co_return false;
+        }
+
+        ByteBuffer buffer = std::move(bufferResult).value();
 
         const aiScene *scene = importer.ReadFileFromMemory(buffer.mData, buffer.mSize, 0);
 

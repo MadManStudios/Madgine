@@ -48,9 +48,20 @@ namespace Render {
                 commandLine.push_back(include);
             }
 
-            auto [result, stdOut, stdErr] = (co_await Process::runAsync(SHADERGEN_LOCATION, commandLine, 2s)).value();
+            auto resultStorage = co_await Process::runAsync(SHADERGEN_LOCATION, commandLine, 2s);
+
+            if (!resultStorage.is_value()) {
+                if (resultStorage.is_error()) {
+                    LOG_ERROR("Running ShaderGen failed: " << std::move(resultStorage).error().mError);
+                } else {
+                    LOG_ERROR("Running ShaderGen cancelled");
+                }
+                co_return false;
+            }
+
+            auto [result, stdOut, stdErr] = std::move(resultStorage).value();
             if (result != 0) {
-                LOG_FATAL(stdErr);
+                LOG_FATAL("ShaderGen failed with:\n" << stdErr);
                 co_return false;
             }
             co_return true;

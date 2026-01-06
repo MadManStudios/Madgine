@@ -212,14 +212,17 @@ namespace Render {
     {
         Assimp::Importer importer;
 
-        auto result = co_await info.resource()->readAsync();
-
-        if (result.is_done()) {
-            LOG_ERROR("File read was cancelled");
+        auto bufferResult = co_await info.resource()->readAsync();
+        if (!bufferResult.is_value()) {
+            if (bufferResult.is_error()) {
+                LOG_ERROR("Failed to load mesh: " << std::move(bufferResult).error().mError);
+            } else {
+                LOG_ERROR("Failed to load mesh: Cancelled");
+            }
             co_return false;
         }
 
-        ByteBuffer buffer = std::move(result).value();
+        ByteBuffer buffer = std::move(bufferResult).value();
 
         const aiScene *scene = importer.ReadFileFromMemory(buffer.mData, buffer.mSize, aiProcess_MakeLeftHanded | aiProcess_Triangulate | aiProcess_LimitBoneWeights);
 

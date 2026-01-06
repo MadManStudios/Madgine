@@ -126,25 +126,34 @@ namespace Render {
 
         if (info.resource()->path().extension() == ".msdf") {
 
-            ByteBuffer fileBuffer = (co_await info.resource()->readAsync()).value();
+            auto fileBufferResult = co_await info.resource()->readAsync();
+            std::stringstream errorReason;
+            if (fileBufferResult.is_value()) {
+                ByteBuffer fileBuffer = std::move(fileBufferResult).value();
 
-            Memory::MemoryManager cache("msdf_cache");
-            Serialize::FormattedSerializeStream in = cache.openRead(std::move(fileBuffer), Serialize::Formats::safebinary);
-            assert(in);
-            ByteBuffer b;
-            Vector2i textureSize;
-            Serialize::StreamResult result = [&]() {
-                STREAM_PROPAGATE_ERROR(read(in, font.mGlyphs, nullptr));
-                STREAM_PROPAGATE_ERROR(read(in, textureSize, nullptr));
-                STREAM_PROPAGATE_ERROR(read(in, font.mAscender, nullptr));
-                STREAM_PROPAGATE_ERROR(read(in, font.mDescender, nullptr));
-                return read(in, b, nullptr);
-            }();
-            if (result.mState == Serialize::StreamState::OK) {
-                co_return co_await font.mTexture.createTask(TextureType_2D, FORMAT_RGBA8, textureSize, std::move(b));
+                Memory::MemoryManager cache("msdf_cache");
+                Serialize::FormattedSerializeStream in = cache.openRead(std::move(fileBuffer), Serialize::Formats::safebinary);
+                assert(in);
+                ByteBuffer b;
+                Vector2i textureSize;
+                Serialize::StreamResult result = [&]() {
+                    STREAM_PROPAGATE_ERROR(read(in, font.mGlyphs, nullptr));
+                    STREAM_PROPAGATE_ERROR(read(in, textureSize, nullptr));
+                    STREAM_PROPAGATE_ERROR(read(in, font.mAscender, nullptr));
+                    STREAM_PROPAGATE_ERROR(read(in, font.mDescender, nullptr));
+                    return read(in, b, nullptr);
+                }();
+                if (result.mState == Serialize::StreamState::OK) {
+                    co_return co_await font.mTexture.createTask(TextureType_2D, FORMAT_RGBA8, textureSize, std::move(b));
+                }
+                errorReason << result;
+            } else if(fileBufferResult.is_error()) {
+                errorReason << std::move(fileBufferResult).error().mError;
+            } else {
+                errorReason << "Cancelled";
             }
             LOG_ERROR("Failed to load \"" << info.resource()->path() << "\": \n"
-                                          << result);
+                                          << errorReason.str());
             LOG("Falling back to .ttf file load");
         }
         Filesystem::Path path = info.resource()->path();
