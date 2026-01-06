@@ -231,6 +231,12 @@ namespace Render {
         std::vector<const char *> actualExtensions = extensions;
 
         // checkExtensionSupport(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)
+        // Android Emulator:
+        //    SDK level >= 29 needed
+        //    ~/.android/advancedFeatures.ini:
+        //        Vulkan = on
+        //        VulkanDebugUtils = on
+        //        GLDirectMem = on
 
         assert(checkValidationLayerSupport());
 
