@@ -2,6 +2,8 @@
 
 #include "pipelineloader.h"
 
+#include "Interfaces/filesystem/fsapi.h"
+
 #include "Modules/threading/taskqueue.h"
 
 #include "Madgine/codegen/codegen_shader.h"
@@ -79,6 +81,8 @@ namespace Render {
     Threading::Task<Resources::BakeResult> PipelineLoader::bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir)
     {
         Resources::BakeResult result = Resources::BakeResult::SUCCESS;
+
+        Filesystem::createDirectories(ShaderCache::directory());
 
         for (ShaderObjectPtr object : ShaderCache::shaderCache()) {
 

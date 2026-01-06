@@ -55,6 +55,12 @@ namespace Render {
 
         if (needsToRegenerate) {
             std::ofstream of { p };
+            if (!of.is_open()) {
+                LOG_ERROR("Failed to open shader file for writing: " << p);
+                if (!Filesystem::exists(ShaderCache::directory())) {
+                    LOG_ERROR("note: shadercache folder missing");
+                }
+            }
             toHLSL(of);
         }
     }
