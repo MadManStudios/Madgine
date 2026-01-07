@@ -65,7 +65,7 @@ namespace Process {
                 stdErr.append(buffer, bytes_read);
             }
 
-            state->set_value(WIFEXITED(status), std::move(stdOut), std::move(stdErr));
+            state->set_value(WEXITSTATUS(status), std::move(stdOut), std::move(stdErr));
             return true;
         }
         return false;
