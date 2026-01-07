@@ -17,7 +17,7 @@ namespace Engine {
 namespace Render {
 
     OpenGLPipelineLoader::OpenGLPipelineLoader()
-        : Resources::VirtualResourceLoaderImpl<OpenGLPipelineLoader, OpenGLPipeline, PipelineLoader>("-GLSL", EXTENSION)
+        : Resources::VirtualResourceLoaderImpl<OpenGLPipelineLoader, OpenGLPipeline, PipelineLoader>(TARGET, EXTENSION)
     {
     }
 

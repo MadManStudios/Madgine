@@ -24,7 +24,7 @@ target_include_directories(Render PRIVATE src)
 
 target_ship_folder(Render ${CMAKE_BINARY_DIR}/shadercache)
 
-if (NOT CMAKE_CROSSCOMPILING)
+if (NOT MADGINE_CONFIGURATION)
 	target_compile_definitions(Render PRIVATE SHADERGEN_LOCATION="$<TARGET_FILE:ShaderGen>")
 endif()
 

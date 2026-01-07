@@ -35,8 +35,10 @@
 
 #if !OPENGL_ES
 #    define EXTENSION ".glsl"
+#    define TARGET "-GLSL"
 #else
 #    define EXTENSION ".glsl_es"
+#    define TARGET "-GLSLES"
 #endif
 
 MADGINE_OPENGL_EXPORT void glDump();

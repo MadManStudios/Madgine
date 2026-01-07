@@ -52,7 +52,7 @@ namespace Render {
         std::string entrypoint = "main";
         if (object) {
             entrypoint = object->entrypoint();
-            co_await ShaderCache::generate(p, object, "-GLSL", type);
+            co_await ShaderCache::generate(p, object, TARGET, type);
         }
 
         if (!Filesystem::exists(p))
