@@ -15,7 +15,7 @@
 
 #if !ANDROID && !EMSCRIPTEN && !IOS
 #    include "../glad/glad.h"
-//#    define OPENGL_ES 30
+// #    define OPENGL_ES 30
 #elif IOS
 #    include <OpenGLES/ES3/gl.h>
 #    define OPENGL_ES 30
@@ -31,6 +31,12 @@
 #    define WEBGL 1
 #else
 #    define WEBGL 0
+#endif
+
+#if !OPENGL_ES
+#    define EXTENSION ".glsl"
+#else
+#    define EXTENSION ".glsl_es"
 #endif
 
 MADGINE_OPENGL_EXPORT void glDump();

@@ -13,6 +13,9 @@ namespace Render {
         {
         }
 
+        void generate() const override {
+
+        }
         std::string entrypoint() const override
         {
             return mEntrypoint;

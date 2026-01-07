@@ -43,7 +43,7 @@ namespace Render {
 
         ShaderObjectBase(std::vector<ShaderObjectPtr> dependencies);
 
-        void generate() const;
+        virtual void generate() const;
 
         std::chrono::file_clock::time_point timestamp() const;
         std::chrono::file_clock::time_point chainTimestamp() const;

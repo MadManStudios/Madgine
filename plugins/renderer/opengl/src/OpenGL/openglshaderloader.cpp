@@ -22,12 +22,6 @@ METATABLE_END(Engine::Render::OpenGLShaderLoader::Resource)
 SERIALIZETABLE_BEGIN(Engine::Render::OpenGLShaderLoader::Handle)
 SERIALIZETABLE_END(Engine::Render::OpenGLShaderLoader::Handle)
 
-#if !OPENGL_ES
-#    define EXTENSION ".glsl"
-#else
-#    define EXTENSION ".glsl_es"
-#endif
-
 namespace Engine {
 namespace Render {
 
