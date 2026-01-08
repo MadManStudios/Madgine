@@ -368,6 +368,22 @@ namespace Window {
             };
         }
 
+        static EM_BOOL eventCallback(int type, const EmscriptenUiEvent *event, void *userData)
+        {
+            double w;
+            double h;
+
+            emscripten_get_element_css_size("#canvas", &w, &h);
+
+            EmscriptenWindow *window = static_cast<EmscriptenWindow *>(userData);
+
+            window->mSize = { static_cast<int>(w), static_cast<int>(h) };
+
+            window->onEvent(ResizeEvent { static_cast<int>(w), static_cast<int>(h) });
+
+            return true;
+        }
+
         InterfacesVector mSize;
         InterfacesVector mLastMousePosition;
 
@@ -547,17 +563,6 @@ namespace Window {
         return true;
     }
 
-    EM_BOOL eventCallback(int type, const EmscriptenUiEvent *event, void *userData)
-    {
-        double w;
-        double h;
-
-        emscripten_get_element_css_size("#canvas", &w, &h);
-
-        static_cast<EmscriptenWindow *>(userData)->setSize({ static_cast<int>(w), static_cast<int>(h) });
-        return true;
-    }
-
     OSWindow *sCreateWindow(const WindowSettings &settings)
     {
         assert(sDisplay);
@@ -595,7 +600,7 @@ namespace Window {
 
         EmscriptenWindow *window = &pib.first->second;
 
-        emscripten_set_resize_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, window, false, &eventCallback);
+        emscripten_set_resize_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, window, false, &EmscriptenWindow::eventCallback);
 
         double w;
         double h;
