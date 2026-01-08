@@ -18,7 +18,6 @@ namespace Engine {
 namespace Render {
 
     VulkanPipelineLoader::VulkanPipelineLoader()
-        : Resources::VirtualResourceLoaderImpl<VulkanPipelineLoader, VulkanPipeline, PipelineLoader>("-SPIRV", ".spirv")
     {
     }
 
@@ -62,6 +61,11 @@ namespace Render {
     Threading::TaskQueue *VulkanPipelineLoader::loadingTaskQueue() const
     {
         return VulkanRenderContext::renderQueue();
+    }
+
+    std::string_view VulkanPipelineLoader::extensionForTarget(std::string_view target, ShaderType type)
+    {
+        return ".spirv";
     }
 
 }

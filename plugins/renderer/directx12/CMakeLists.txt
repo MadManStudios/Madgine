@@ -23,6 +23,6 @@ add_tools(DirectX12 ${sources} PRECOMPILED_HEADER tools/DirectX12_Tools/directx1
 target_link_plugins(DirectX12Tools RenderTools)
 target_link_libraries(DirectX12Tools PRIVATE d3d12 dxgi dxcompiler)
 
-add_shadergen_target(DirectX12 -HLSL)
+add_shadergen_target(DirectX12 HLSL)
 
 add_subdirectory(util)

@@ -17,7 +17,9 @@ namespace Render {
         void unloadImpl(DirectX12Pipeline &program);
         Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) override;
 
-        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+        Threading::TaskQueue *loadingTaskQueue() const override;
+
+        std::string_view extensionForTarget(std::string_view target, ShaderType type) override;
     };
 }
 }

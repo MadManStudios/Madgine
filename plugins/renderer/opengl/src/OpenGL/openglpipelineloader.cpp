@@ -17,7 +17,6 @@ namespace Engine {
 namespace Render {
 
     OpenGLPipelineLoader::OpenGLPipelineLoader()
-        : Resources::VirtualResourceLoaderImpl<OpenGLPipelineLoader, OpenGLPipeline, PipelineLoader>(TARGET, EXTENSION)
     {
     }
 
@@ -69,6 +68,11 @@ namespace Render {
     Threading::TaskQueue *OpenGLPipelineLoader::loadingTaskQueue() const
     {
         return OpenGLRenderContext::renderQueue();
+    }
+
+    std::string_view OpenGLPipelineLoader::extensionForTarget(std::string_view target, ShaderType type)
+    {
+        return target == "GLSLES" ? ".glsl_es" : ".glsl";
     }
 
 }

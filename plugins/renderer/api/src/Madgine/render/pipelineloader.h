@@ -36,15 +36,15 @@ namespace Render {
             Threading::TaskFuture<bool> mState;
         };
 
-        PipelineLoader(std::string target, std::string extension);
+        PipelineLoader();
 
         virtual Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) = 0;
+
+        virtual std::string_view extensionForTarget(std::string_view target, ShaderType type) = 0;
 
         Threading::Task<Resources::BakeResult> bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir) override;
 
     private:
-        std::string mTarget;
-        std::string mExtension;
     };
 
 }

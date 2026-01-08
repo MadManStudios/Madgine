@@ -22,4 +22,18 @@ if (MADGINE_CONFIGURATION)
 		set(MADGINE_TOOLING_PREFIX ${CMAKE_BINARY_DIR}/../${MADGINE_TOOLING_PRESET}/bin CACHE INTERNAL "")
 	endif()
 
+	set_target_properties(MadgineTooling PROPERTIES PARAMETERS "")
+
+	function(add_tooling_parameters)
+		get_target_property(parameters MadgineTooling PARAMETERS)
+		list(APPEND parameters ${ARGN})
+		set_target_properties(MadgineTooling PROPERTIES PARAMETERS "${parameters}")
+	endfunction(add_tooling_parameters)
+
+else()
+
+	function(add_tooling_parameters)
+	endfunction(add_tooling_parameters)
+
 endif()
+

@@ -58,7 +58,7 @@ namespace Render {
         std::string entrypoint = "main";
         if (object) {
             entrypoint = object->entrypoint();
-            co_await ShaderCache::generate(p, object, "-SPIRV", type);
+            co_await ShaderCache::generate(p, object, "SPIRV", type);
         }
 
         if (!Filesystem::exists(p))

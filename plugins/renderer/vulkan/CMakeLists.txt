@@ -43,7 +43,7 @@ add_tools(Vulkan ${sources} PRECOMPILED_HEADER tools/Vulkan_Tools/vulkantoolslib
 target_link_plugins(VulkanTools RenderTools)
 target_link_libraries(VulkanTools PRIVATE ${VULKAN_DEPENDENCIES})
 
-add_shadergen_target(Vulkan -SPIRV)
+add_shadergen_target(Vulkan SPIRV)
 
 
 if (ANDROID)

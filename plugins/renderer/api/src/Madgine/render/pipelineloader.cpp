@@ -6,6 +6,7 @@
 
 #include "Modules/threading/taskqueue.h"
 
+#include "Madgine/cli/parameter.h"
 #include "Madgine/codegen/codegen_shader.h"
 #include "Madgine/meshloader/gpumeshloader.h"
 
@@ -22,10 +23,10 @@ VIRTUALRESOURCELOADERBASE(Engine::Render::PipelineLoader)
 namespace Engine {
 namespace Render {
 
-    PipelineLoader::PipelineLoader(std::string target, std::string extension)
+    CLI::Parameter<std::string> shadergenTarget { { "--shadergen-target" }, "", "Specifies the target format for shader code generation during resource baking." };
+
+    PipelineLoader::PipelineLoader()
         : VirtualResourceLoaderBase(std::vector<std::string> {})
-        , mTarget(std::move(target))
-        , mExtension(std::move(extension))
     {
     }
 
@@ -86,9 +87,9 @@ namespace Render {
 
         for (ShaderObjectPtr object : ShaderCache::shaderCache()) {
 
-            Filesystem::Path p = intermediateDir.parentPath() / "shadercache" / (object->entrypoint() + mExtension);
+            Filesystem::Path p = intermediateDir.parentPath() / "shadercache" / (object->entrypoint() + std::string { extensionForTarget(shadergenTarget, ShaderType::PixelShader) });
 
-            if (!co_await ShaderCache::generate(p, object, mTarget, ShaderType::PixelShader)) {
+            if (!co_await ShaderCache::generate(p, object, shadergenTarget, ShaderType::PixelShader)) {
                 result = Resources::BakeResult::UNKNOWN_ERROR;
             }
         }

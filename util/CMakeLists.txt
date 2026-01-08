@@ -34,9 +34,11 @@ function(add_shadergen_target target flag)
 		add_dependencies(${target} ShaderGen)
 
 		get_target_property(targets ShaderGen ShaderGenTargets)
-	    set (targets ${targets} ${flag})
+	    list(APPEND targets -${flag})
 		list(REMOVE_DUPLICATES targets)
 		set_target_properties(ShaderGen PROPERTIES ShaderGenTargets "${targets}")
+
+		add_tooling_parameters(--shadergen-target ${flag})
 	endif()
 
 endfunction(add_shadergen_target)

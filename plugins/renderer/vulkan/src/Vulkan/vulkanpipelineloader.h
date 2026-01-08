@@ -18,6 +18,8 @@ namespace Render {
         Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) override;
 
         virtual Threading::TaskQueue *loadingTaskQueue() const override;
+
+        std::string_view extensionForTarget(std::string_view target, ShaderType type) override;
     };
 }
 }

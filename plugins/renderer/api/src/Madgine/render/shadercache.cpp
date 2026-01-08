@@ -37,7 +37,7 @@ namespace Render {
                 p,
                 path.parentPath().str(),
                 "-g",
-                std::string { target },
+                "-" + std::string { target },
                 "-T",
                 type == ShaderType::VertexShader ? "vs_6_2" : "ps_6_2",
                 "-E",

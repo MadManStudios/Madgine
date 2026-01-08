@@ -17,7 +17,6 @@ namespace Engine {
 namespace Render {
 
     DirectX12PipelineLoader::DirectX12PipelineLoader()
-        : Resources::VirtualResourceLoaderImpl<DirectX12PipelineLoader, DirectX12Pipeline, PipelineLoader>("-HLSL", ".ps_hlsl")
     {
     }
 
@@ -62,6 +61,11 @@ namespace Render {
     Threading::TaskQueue *DirectX12PipelineLoader::loadingTaskQueue() const
     {
         return DirectX12RenderContext::renderQueue();
+    }
+
+    std::string_view DirectX12PipelineLoader::extensionForTarget(std::string_view target, ShaderType type)
+    {
+        return type == ShaderType::VertexShader ? ".vs_hlsl" : ".ps_hlsl";
     }
 
 }
