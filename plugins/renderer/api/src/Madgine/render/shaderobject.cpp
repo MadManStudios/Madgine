@@ -27,7 +27,10 @@ namespace Render {
 
     std::ostream &operator<<(std::ostream &out, const ShaderObjectPtr &p)
     {
-        out << p.mObject->name();
+        if (p.mObject)
+            out << p.mObject->name();
+        else
+            out << "<null>";
         return out;
     }
 
