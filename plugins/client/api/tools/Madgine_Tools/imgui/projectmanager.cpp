@@ -86,44 +86,48 @@ namespace Tools {
     {
         if (mProjectRoot.empty()) {
 
-            if (ImGui::Begin("GameOverlay")) {
-                ImVec2 size = ImGui::GetWindowContentRegionMax() - ImGui::GetWindowContentRegionMin();
-                size.y -= 20.0f;
-                ImGui::BeginVertical("vLanding", size);
-                ImGui::Spring();
-                ImGui::BeginHorizontal("aLanding");
-                ImGui::Text("Welcome to the Madgine!");
-                ImGui::EndHorizontal();
-                ImGui::Spring();
-                ImGui::BeginHorizontal("hLanding");
+            if (beginGame()) {
 
-                ImVec2 widget_size;
-                widget_size.x = floorf(ImGui::GetContentRegionAvail().x / 4);
-                widget_size.y = 150.0f;
+                if (ImGui::Begin("GameOverlay")) {
+                    ImVec2 size = ImGui::GetWindowContentRegionMax() - ImGui::GetWindowContentRegionMin();
+                    size.y -= 20.0f;
+                    ImGui::BeginVertical("vLanding", size);
+                    ImGui::Spring();
+                    ImGui::BeginHorizontal("aLanding");
+                    ImGui::Text("Welcome to the Madgine!");
+                    ImGui::EndHorizontal();
+                    ImGui::Spring();
+                    ImGui::BeginHorizontal("hLanding");
 
-                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 2.0f);
-                ImGui::PushStyleColor(ImGuiCol_Button, { 0.2f, 0.2f, 0.2f, 1.0f });
+                    ImVec2 widget_size;
+                    widget_size.x = floorf(ImGui::GetContentRegionAvail().x / 4);
+                    widget_size.y = 150.0f;
 
-                ImGui::Spring();
-                if (ImGui::Button(IMGUI_ICON_FILE "\nCreate Project...", widget_size))
-                    createProjectDialog();
-                ImGui::Spring();
-                if (ImGui::Button(IMGUI_ICON_FOLDER "\nOpen Project...", widget_size))
-                    openProjectDialog();
-                ImGui::Spring();
-                ImGui::Button("Icon\nSomething", widget_size);
-                ImGui::Spring();
+                    ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 2.0f);
+                    ImGui::PushStyleColor(ImGuiCol_Button, { 0.2f, 0.2f, 0.2f, 1.0f });
 
-                ImGui::PopStyleColor();
-                ImGui::PopStyleVar();
+                    ImGui::Spring();
+                    if (ImGui::Button(IMGUI_ICON_FILE "\nCreate Project...", widget_size))
+                        createProjectDialog();
+                    ImGui::Spring();
+                    if (ImGui::Button(IMGUI_ICON_FOLDER "\nOpen Project...", widget_size))
+                        openProjectDialog();
+                    ImGui::Spring();
+                    ImGui::Button("Icon\nSomething", widget_size);
+                    ImGui::Spring();
 
-                ImGui::EndHorizontal();
-                ImGui::Spring();
-                ImGui::BeginHorizontal("bLanding");
-                ImGui::Text("Below");
-                ImGui::EndHorizontal();
-                ImGui::Spring();
-                ImGui::EndVertical();
+                    ImGui::PopStyleColor();
+                    ImGui::PopStyleVar();
+
+                    ImGui::EndHorizontal();
+                    ImGui::Spring();
+                    ImGui::BeginHorizontal("bLanding");
+                    ImGui::Text("Below");
+                    ImGui::EndHorizontal();
+                    ImGui::Spring();
+                    ImGui::EndVertical();
+                }
+                ImGui::End();
             }
             ImGui::End();
         }
