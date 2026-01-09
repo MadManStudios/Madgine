@@ -377,7 +377,7 @@ namespace Window {
 
             EmscriptenWindow *window = static_cast<EmscriptenWindow *>(userData);
 
-            window->mSize = { static_cast<int>(w), static_cast<int>(h) };
+            window->setSize({ static_cast<int>(w), static_cast<int>(h) });
 
             window->onEvent(ResizeEvent { static_cast<int>(w), static_cast<int>(h) });
 
