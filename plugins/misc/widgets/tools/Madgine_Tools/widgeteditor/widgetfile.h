@@ -23,7 +23,7 @@ namespace Tools {
     private:
         WidgetEditor &mEditor;
         Filesystem::Path mPath;
-        bool mIsDirty = true;
+        bool mIsDirty = false;
 
         Widgets::WidgetManager mWidgetManager;
         Widgets::WidgetBase *mTopLevel = nullptr;
