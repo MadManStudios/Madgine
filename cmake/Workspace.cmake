@@ -210,7 +210,11 @@ endfunction(get_dependencies)
 
 
 SET(CMAKE_DEBUG_POSTFIX "" CACHE STRING "" FORCE) #Some libs set this value
-set(USE_MSVC_RUNTIME_LIBRARY_DLL ${BUILD_SHARED_LIBS} CACHE BOOL "" FORCE)
+if (BUILD_SHARED_LIBS)
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>DLL)
+else()
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>)
+endif()
 
 macro(push_static)
 	set(OLD_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
