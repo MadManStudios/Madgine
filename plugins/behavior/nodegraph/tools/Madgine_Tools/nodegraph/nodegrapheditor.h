@@ -33,7 +33,7 @@ namespace Tools {
         std::string_view getCurrentName() const;
 
     protected:
-        bool saveImpl(std::string_view view);
+        bool saveImpl(std::string_view view, ed::SaveReasonFlags reason);
         size_t loadImpl(char *data);
 
         void createEditor();
@@ -72,7 +72,6 @@ namespace Tools {
         std::optional<ExtendedValueTypeDesc> mDragType;
         uint32_t mDragMask;
 
-        bool mSaveQueued = false;
         bool mIsDirty = false;
         bool mInitialLoad = false;
     };

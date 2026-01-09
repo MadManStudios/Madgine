@@ -422,7 +422,13 @@ namespace Tools {
     void NodeGraphEditor::save(const Filesystem::Path &path)
     {
         mFilePath = path;
-        mSaveQueued = true;
+
+        mGraph.saveToFile(mFilePath);
+
+        if (!mGraphHandle)
+            mGraphHandle.create(mFilePath.stem(), mFilePath);
+
+        mIsDirty = false;
     }
 
     void NodeGraphEditor::open(Resources::ResourceBase *res)
@@ -454,29 +460,17 @@ namespace Tools {
         return mFilePath.stem();
     }
 
-    bool NodeGraphEditor::saveImpl(std::string_view view)
+    bool NodeGraphEditor::saveImpl(std::string_view view, ed::SaveReasonFlags reason)
     {
         // verify();
 
         if (mInitialLoad) {
             mInitialLoad = false;
-            return true;
+        } else if ((reason & (ed::SaveReasonFlags::User | ed::SaveReasonFlags::AddNode | ed::SaveReasonFlags::RemoveNode)) != ed::SaveReasonFlags::None) {
+            mIsDirty = true;            
         }
 
         mGraph.mLayoutData = view;
-
-        if (!mSaveQueued) {
-            mIsDirty = true;
-            return false;
-        }
-
-        mSaveQueued = false;
-        mIsDirty = false;
-
-        mGraph.saveToFile(mFilePath);
-
-        if (!mGraphHandle)
-            mGraphHandle.create(mFilePath.stem(), mFilePath);
 
         return true;
     }
@@ -498,7 +492,7 @@ namespace Tools {
         config.UserPointer = this;
 
         config.SaveSettings = [](const char *data, size_t size, ed::SaveReasonFlags reason, void *userPointer) {
-            return static_cast<NodeGraphEditor *>(userPointer)->saveImpl({ data, size });
+            return static_cast<NodeGraphEditor *>(userPointer)->saveImpl({ data, size }, reason);
         };
 
         config.LoadSettings = [](char *data, void *userPointer) {
