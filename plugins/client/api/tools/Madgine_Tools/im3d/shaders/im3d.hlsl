@@ -1,16 +1,20 @@
 
-cbuffer Im3DPerApplication : register(b0)
+struct Im3DPerApplication
 {
     float4x4 p;
-}
+};
 
-cbuffer Im3DPerObject : register(b2)
+ConstantBuffer<Im3DPerApplication> app : register(b0);
+
+struct Im3DPerObject
 {
     float4x4 mv;
 	
     bool hasTexture;
     bool hasDistanceField;
-}
+};
+
+ConstantBuffer<Im3DPerObject> object : register(b2);
 
 
 Texture2D tex : register(t0, space2);
@@ -41,7 +45,7 @@ export FragmentData im3d_VS(AppData IN)
 
     float2 aPos2 = IN.aPos2;
     
-    OUT.position = mul(p, mul(mv, float4(IN.aPos, IN.aW)) + float4(aPos2, 0.0, 0.0));
+    OUT.position = mul(app.p, mul(object.mv, float4(IN.aPos, IN.aW)) + float4(aPos2, 0.0, 0.0));
     OUT.position.z += OUT.position.w;
     OUT.position.z /= 2;
 
@@ -62,9 +66,9 @@ export float4 im3d_PS(FragmentData IN) : SV_TARGET
 {
     float4 colorAcc = IN.color;
 
-    if (hasTexture)
+    if (object.hasTexture)
     {
-        if (hasDistanceField)
+        if (object.hasDistanceField)
         {
             float2 msdfUnit = 4.0 / float2(512.0, 512.0);
             float4 sample = tex.Sample(texSampler, IN.uv);

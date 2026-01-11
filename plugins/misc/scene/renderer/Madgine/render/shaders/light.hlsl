@@ -53,14 +53,16 @@ struct HDRShaderOutput
 };
 
 
-cbuffer LightPerFrame : register(b1)
+struct LightPerFrame
 {
     int pointLightCount;
 
     DirectionalShadowLight light;
 
     PointShadowLight pointLights[2];
-}
+};
+
+ConstantBuffer<LightPerFrame> frame : register(b1);
 
 SamplerState texSampler : register(s0);
 SamplerState clampSampler : register(s1);
@@ -207,19 +209,19 @@ export HDRShaderOutput lighting(LightingInput IN)
     castDirectionalShadowLight(
 		lightDiffuseIntensity,
 		lightSpecularIntensity,
-		light,
+		frame.light,
 		IN.viewPos,
 		IN.normal,
 		shadowDepthMap,
 		IN.shininess
 	);
-    for (int i = 0; i < pointLightCount; ++i)
+    for (int i = 0; i < frame.pointLightCount; ++i)
     {
         if (i == 0)
             castPointShadowLight(
 				lightDiffuseIntensity,
 				lightSpecularIntensity,
-				pointLights[i],
+				frame.pointLights[i],
 				IN.viewPos.xyz / IN.viewPos.w,
 				IN.normal,
 				pointShadowDepthMaps0,
@@ -230,7 +232,7 @@ export HDRShaderOutput lighting(LightingInput IN)
             castPointShadowLight(
 				lightDiffuseIntensity,
 				lightSpecularIntensity,
-				pointLights[i],
+				frame.pointLights[i],
 				IN.viewPos.xyz / IN.viewPos.w,
 				IN.normal,
 				pointShadowDepthMaps1,

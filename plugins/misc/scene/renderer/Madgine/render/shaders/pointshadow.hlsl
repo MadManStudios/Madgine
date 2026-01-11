@@ -3,10 +3,11 @@
 #include "light.hlsl"
 
 
-cbuffer PointShadowPerApplication : register(b0)
+struct PointShadowPerApplication
 {
     float4x4 p;
 };
+ConstantBuffer<PointShadowPerApplication> app : register(b0);
 
 struct PointShadowInstanceData
 {
@@ -60,7 +61,7 @@ export FragmentData pointshadow_VS(AppData IN)
 
     OUT.worldPos = worldPos + float4(aPos2, 0.0, 0.0);
 
-    OUT.position = mul(p, OUT.worldPos);
+    OUT.position = mul(app.p, OUT.worldPos);
 
     return OUT;
 }

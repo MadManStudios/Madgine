@@ -136,8 +136,6 @@ namespace Render {
                 perObject->hasDistanceField = false;
 
                 perObject->hasTexture = material;
-
-                perObject->shininess = 32.0f;
             }
 
             if (material)

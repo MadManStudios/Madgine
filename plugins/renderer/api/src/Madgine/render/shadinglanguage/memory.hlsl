@@ -3,7 +3,22 @@ ByteAddressBuffer memory[4] : register(t0, space0);
 
 template <typename T>
 struct ArrayPtr{
-	uint offset;
+    T Load()
+    {
+		return memory[buffer() - 1].template Load<T>(offset());
+    }
+
+    uint offset()
+    {
+        return data.x;
+    }
+
+    uint buffer()
+    {
+        return data.y;
+    }
+	
+	uint2 data;
 };
 
 template <>

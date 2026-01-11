@@ -1,9 +1,11 @@
 
-cbuffer BlurData : register(b0)
+struct BlurData
 {
     int2 textureSize;
     bool horizontal;
-}
+};
+
+ConstantBuffer<BlurData> data : register(b0);
 
 Texture2D input : register(t0, space2);
 
@@ -36,9 +38,9 @@ static float weight[5] = { 0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216 };
 
 export float4 blur_PS(FragmentData IN) : SV_TARGET
 {
-    float2 tex_offset = 1.0 / textureSize; // gets size of single texel
+    float2 tex_offset = 1.0 / data.textureSize; // gets size of single texel
     float3 result = input.Sample(texSampler, IN.texCoord).rgb * weight[0]; // current fragment's contribution
-    if (horizontal)
+    if (data.horizontal)
     {
         for (int i = 1; i < 5; ++i)
         {

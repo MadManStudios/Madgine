@@ -1,9 +1,10 @@
 
-cbuffer GridPerFrame : register(b1)
+struct GridPerFrame
 {
     float4x4 vp;
     float3 cameraPos;
-}
+};
+ConstantBuffer<GridPerFrame> frame : register(b1);
 
 struct AppData
 {
@@ -21,7 +22,7 @@ export FragmentData grid_VS(AppData IN)
 {
     FragmentData OUT;
     OUT.worldPos = float4(IN.aPos, IN.aW);
-    OUT.pos = mul(vp, OUT.worldPos);
+    OUT.pos = mul(frame.vp, OUT.worldPos);
     return OUT;
 }
 
@@ -38,14 +39,14 @@ export float4 grid_PS(FragmentData IN) : SV_TARGET
     float3 coord = IN.worldPos.xyz / 1.0; //square size in world space
     coord /= IN.worldPos.w;
 	
-    float dist = distance(coord, cameraPos);
+    float dist = distance(coord, frame.cameraPos);
 
     float3 fract = frac(coord); //fractional parts of squares
 	//interpolation, grad is smoothness of line gradients
-    float3 grad = 0.02 * float3(pow(pow(coord.x - cameraPos.x, 2.0) + pow(cameraPos.y, 2.0), 0.7), 0.0, pow(pow(coord.z - cameraPos.z, 2.0) + pow(cameraPos.y, 2.0), 0.7)) / abs(cameraPos.y);
+    float3 grad = 0.02 * float3(pow(pow(coord.x - frame.cameraPos.x, 2.0) + pow(frame.cameraPos.y, 2.0), 0.7), 0.0, pow(pow(coord.z - frame.cameraPos.z, 2.0) + pow(frame.cameraPos.y, 2.0), 0.7)) / abs(frame.cameraPos.y);
     float3 mult = _smoothstep(0.0, grad, fract) - smoothstep(float3(1.0, 1.0, 1.0) - grad, float3(1.0, 1.0, 1.0), fract);
 	//col = mix(float4(1.0,1.0,1.0,1.0), vec4(0.0,0.0,0.0,0.0), mult.x * mult.y * mult.z);
-    col = float4(0.7, 0.7, 0.7, clamp(1.0 - mult.x * mult.z, 0.0, 1.0) * (1.0 - smoothstep(1.0, 10.0 * sqrt(abs(cameraPos.y)), dist)));
+    col = float4(0.7, 0.7, 0.7, clamp(1.0 - mult.x * mult.z, 0.0, 1.0) * (1.0 - smoothstep(1.0, 10.0 * sqrt(abs(frame.cameraPos.y)), dist)));
 
     return col;
 }

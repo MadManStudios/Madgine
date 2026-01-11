@@ -1,8 +1,9 @@
 
-cbuffer BloomData : register(b0)
+struct BloomData
 {
     float exposure;
-}
+};
+ConstantBuffer<BloomData> data : register(b0);
 
 Texture2D input : register(t0, space2);
 Texture2D blurred : register(t0, space3);
@@ -56,7 +57,7 @@ export float4 bloom_PS(FragmentData IN) : SV_TARGET
     hdrColor += bloomColor; // additive blending
     // tone mapping
 
-    hdrColor *= exposure; // Hardcoded Exposure Adjustment
+    hdrColor *= data.exposure; // Hardcoded Exposure Adjustment
 
     float ExposureBias = 2.0;
     float3 curr = Uncharted2Tonemap(ExposureBias * hdrColor);

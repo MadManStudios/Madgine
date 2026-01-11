@@ -18,7 +18,7 @@ macro(compile_shaders target installComponent)
             set_source_files_properties(${source} PROPERTIES VS_TOOL_OVERRIDE "None")
 
             get_filename_component(name ${source} NAME_WE)
-            add_custom_command(OUTPUT ${name}_hlsl.h
+            add_custom_command(OUTPUT ${name}_hlsl.cpp ${name}_hlsl.h
                 COMMAND ${CMAKE_COMMAND}
                     -E make_directory 
                     spirv
@@ -34,7 +34,7 @@ macro(compile_shaders target installComponent)
                 IMPLICIT_DEPENDS C ${source}
                 COMMENT "Transpiling shader: ${name}${ext}"
                 VERBATIM)
-            target_sources(${target} PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/${name}_hlsl.h)
+            target_sources(${target} PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/${name}_hlsl.cpp ${CMAKE_CURRENT_BINARY_DIR}/${name}_hlsl.h)
             install(DIRECTORY ${CMAKE_BINARY_DIR}/data DESTINATION .
                 COMPONENT ${installComponent}
                 FILES_MATCHING REGEX "${name}[\\._].*")

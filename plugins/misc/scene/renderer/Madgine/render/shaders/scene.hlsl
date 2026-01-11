@@ -3,18 +3,20 @@
 #include "Madgine/render/shadinglanguage/memory.hlsl"
 
 
-cbuffer ScenePerApplication : register(b0)
+struct ScenePerApplication
 {
     float4x4 p;
-}
+};
 
-cbuffer ScenePerObject : register(b2)
+ConstantBuffer<ScenePerApplication> app : register(b0);
+
+struct ScenePerObject
 {
-    float shininess;
-
     bool hasTexture;
     bool hasDistanceField;
-}
+};
+
+ConstantBuffer<ScenePerObject> object : register(b2);
 
 struct SceneInstanceData
 {
@@ -23,6 +25,11 @@ struct SceneInstanceData
     float4 diffuseColor;
     float4 specularColor;
 	//ArrayPtr<float4x4> bones;
+};
+
+struct MaterialData
+{
+    float shininess;
 };
 
 StructuredBuffer<SceneInstanceData> InstanceData : register(t0, space1);
@@ -71,7 +78,7 @@ export FragmentData scene_VS(AppData IN)
 
     OUT.viewPos = mul(aInstance.mv, effectivePos);
     
-    OUT.position = mul(p, OUT.viewPos + float4(aPos2, 0.0, 0.0));
+    OUT.position = mul(app.p, OUT.viewPos + float4(aPos2, 0.0, 0.0));
     
     OUT.color = IN.aColor * aInstance.diffuseColor;
 
@@ -86,7 +93,7 @@ export FragmentData scene_VS(AppData IN)
 Texture2D diffuseTex : register(t0, space2);
 Texture2D emissiveTex : register(t1, space2);
 
-
+ConstantBuffer<MaterialData> Material : register(b0, space2);
 
 float median(float r, float g, float b)
 {
@@ -100,13 +107,13 @@ export LightingInput scene(FragmentData IN)
     lightInput.albedo = IN.color;
     lightInput.viewPos = IN.viewPos;
     lightInput.emissiveColor = float3(0.0, 0.0, 0.0);
-    lightInput.shininess = shininess;
+    lightInput.shininess = Material.shininess;
 
     lightInput.normal = normalize(IN.normal);
 
-    if (hasTexture)
+    if (object.hasTexture)
     {
-        if (hasDistanceField)
+        if (object.hasDistanceField)
         {
             float4 sample = diffuseTex.Sample(texSampler, IN.uv);
             float sigDist = median(sample.r, sample.g, sample.b) - 0.5;
