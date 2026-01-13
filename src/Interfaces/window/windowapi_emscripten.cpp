@@ -143,7 +143,7 @@ namespace Window {
             static std::map<std::string, Input::Key::Key> sKeys {
                 { "Backspace", Backspace },
                 { "Tab", Tabulator },
-                { "Delete", Clear },
+                { "Delete", Delete },
                 { "Enter", Return },
                 { "Pause", Pause },
                 { "CapsLock", Capslock },
