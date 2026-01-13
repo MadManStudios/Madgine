@@ -167,9 +167,12 @@
                             code: ev.code,
                             key: ev.key,
                             keyCode: ev.keyCode,
-                            which: ev.which
+                            which: ev.which,
+                            altKey: ev.altKey,
+                            ctrlKey: ev.ctrlKey,
+                            shiftKey: ev.shiftKey
                         }
-                        Module.canvas.dispatchEvent(new KeyboardEvent('keydown', options));
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keydown', options));                        
                     }
 
                     ev.preventDefault();
@@ -181,9 +184,12 @@
                             code: ev.code,
                             key: ev.key,
                             keyCode: ev.keyCode,
-                            which: ev.which
+                            which: ev.which,
+                            altKey: ev.altKey,
+                            ctrlKey: ev.ctrlKey,
+                            shiftKey: ev.shiftKey
                         }
-                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', options));
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', options));                        
                     }
 
                     ev.preventDefault();
@@ -202,14 +208,15 @@
                             which: upper_keycode,
                         }
                         Module.canvas.dispatchEvent(new KeyboardEvent('keydown', down_up_options))
-                        Module.canvas.dispatchEvent(new KeyboardEvent('keypress', {
+                        const options = {
                             charCode: char_keycode,
                             code: 'Key' + upper_key,
                             key: char,
                             keyCode: char_keycode,
                             which: char_keycode,
-                        }))
-                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', down_up_options))
+                        }
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keypress', options))                        
+                        Module.canvas.dispatchEvent(new KeyboardEvent('keyup', down_up_options))                        
                     }
 
                     input.value = '';
