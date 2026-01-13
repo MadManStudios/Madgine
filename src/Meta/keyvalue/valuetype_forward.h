@@ -142,7 +142,7 @@ decltype(auto) convert_ValueType(T &&t)
     if constexpr (InstanceOf<std::decay_t<T>, std::reference_wrapper>) {
         return convert_ValueType<true>(t.get());
     } else if constexpr (InstanceOf<std::decay_t<T>, std::optional>) {
-        using U = std::decay_t<T>::value_type;
+        using U = std::conditional_t<std::is_lvalue_reference_v<T>, std::reference_wrapper<typename std::decay_t<T>::value_type>, typename std::decay_t<T>::value_type>;
         using R = std::variant<U, std::monostate>;
         if (t) {
             return R { *std::forward<T>(t) };
@@ -201,7 +201,7 @@ template <typename... V>
 void to_ValueType_impl(ValueType &v, std::variant<V...> &&t)
 {
     std::visit([&v](auto &&arg) {
-        to_ValueType_impl(v, std::forward<decltype(arg)>(arg));
+        to_ValueType(v, std::forward<decltype(arg)>(arg));
     },
         std::move(t));
 }
