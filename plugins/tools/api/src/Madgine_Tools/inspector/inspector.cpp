@@ -210,7 +210,7 @@ namespace Tools {
             ImGui::TextDisabled("%s", scope.mType->mTypeName);
         }
 
-        if (!possibleTypes.mType.isRegular()) {
+        if (!possibleTypes.mType.isRegular() && type) {
             ImGui::SameLine(0, 0);
             modified |= drawTypeDecorations(*type, possibleTypes);            
         }
@@ -269,7 +269,7 @@ namespace Tools {
 
         ImGui::Text(object.descriptor());
 
-        if (!possibleTypes.mType.isRegular()) {
+        if (!possibleTypes.mType.isRegular() && type) {
             ImGui::SameLine(0, 0);
             modified |= drawTypeDecorations(*type, possibleTypes);
         }
