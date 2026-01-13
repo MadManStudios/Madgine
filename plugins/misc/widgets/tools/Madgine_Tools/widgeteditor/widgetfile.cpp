@@ -31,6 +31,7 @@ namespace Tools {
     {
         static_cast<ClientImRoot &>(editor.root()).addRenderTarget(mRenderTarget.get());
         mRenderTarget->addRenderPass(&mWidgetManager);
+        mWidgetManager.onResize({ { 0, 0 }, { 1, 1 } });
 
         mTopLevel = mWidgetManager.createTopLevel();
 
