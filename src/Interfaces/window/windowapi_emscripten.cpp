@@ -264,8 +264,6 @@ namespace Window {
             }
             Input::Key::Key key = it->second;
 
-            LOG(keyEvent->code << ": " << key);
-
             mKeyDown[Input::Key::Shift] = keyEvent->shiftKey;
             mKeyDown[Input::Key::Control] = keyEvent->ctrlKey;
             mKeyDown[Input::Key::Alt] = keyEvent->altKey;

@@ -47,6 +47,7 @@ endif()
 
 if (EMSCRIPTEN)
 	_target_link_libraries(${MADGINE_BINARY_NAME} PRIVATE "--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/emscripten/template.html")
+	target_sources(${MADGINE_BINARY_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/emscripten/template.html)
 elseif (ANDROID)
 	target_link_libraries(${MADGINE_BINARY_NAME} PRIVATE android)	
 elseif (OSX)
