@@ -1137,6 +1137,14 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
     size.x -= 4.0f;
     size.y -= 4.0f;
 
+    ImGuiContext &g = *GImGui;
+
+    ImGuiStyle &style = g.Style;
+
+    std::string fileName = selection.relative(path).str();
+    
+    size.y -= CalcTextSize(fileName.c_str(), NULL, true).y + style.FramePadding.y * 2.0f;
+
     if (ImGui::BeginTable("CurrentFolder", 1, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable, size)) {
 
         ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_NoHide);
@@ -1195,7 +1203,6 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
         ImGui::EndTable();
     }
 
-    std::string fileName = selection.relative(path).str();
     if (InputText("Filename:", &fileName)) {
         Engine::Filesystem::Path p = fileName;
         if (!p.empty() && p.isRelative())
