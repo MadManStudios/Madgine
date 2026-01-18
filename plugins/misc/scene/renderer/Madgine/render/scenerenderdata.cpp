@@ -14,6 +14,7 @@
 #include "Madgine/scene/scenemanager.h"
 
 #include "im3d/im3d.h"
+#include "scene_hlsl.h"
 
 namespace Engine {
 namespace Render {
@@ -27,13 +28,30 @@ namespace Render {
     {
         co_await mScene.mutex().locked(Engine::AccessMode::READ, [this, context]() {
             mScene.updateFrame([context](Scene::Entity::Skeleton *skeleton) {
-                if (!skeleton->mBoneMatrices.mBuffer) {
+                if (!skeleton->mBoneMatrices) {
                     skeleton->mBoneMatrices = context->allocateBuffer<Matrix4[]>(skeleton->data()->mBones.size());
                 }
                 return context->mapBuffer(skeleton->mBoneMatrices); });
         });
 
         co_return {};
+    }
+
+    void SceneRenderData::setup(RenderContext *context)
+    {
+        HLSL::sceneResourceBlock0 block;
+        block.material./* emplace_back().*/shininess = 128.0f;
+        mDefaultMaterial = block.toResourceBlock(context);
+    }
+
+    void SceneRenderData::shutdown(RenderContext *context)
+    {
+        context->destroyResourceBlock(mDefaultMaterial);
+    }
+
+    ResourceBlock SceneRenderData::defaultMaterial()
+    {
+        return mDefaultMaterial;
     }
 
 }

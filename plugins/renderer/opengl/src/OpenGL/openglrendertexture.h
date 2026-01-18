@@ -20,9 +20,9 @@ namespace Render {
         virtual void beginFrame() override;
         virtual RenderFuture endFrame() override;
 
-        virtual const OpenGLTexture *texture(size_t index) const override;
+        virtual ConstTexturePtr texture(size_t index) const override;
         virtual size_t textureCount() const override;
-        virtual const OpenGLTexture *depthTexture() const override;
+        virtual ConstTexturePtr depthTexture() const override;
 
         void blit(RenderTarget *input) const;
 
@@ -37,12 +37,12 @@ namespace Render {
         mutable std::map<BitArray<4>, std::array<GLuint, 6>> mFramebuffers;
         GLuint mDepthRenderbuffer = 0;
 
-        OpenGLTexture mDepthTexture;
+        std::shared_ptr<OpenGLTexture> mDepthTexture;
         bool mCreateDepthTexture;
 
         size_t mSamples;
 
-        std::vector<OpenGLTexture> mTextures;
+        std::vector<std::shared_ptr<OpenGLTexture>> mTextures;
 
         Vector2i mSize;
 

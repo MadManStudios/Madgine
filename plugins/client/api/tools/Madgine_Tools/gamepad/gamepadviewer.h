@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Madgine/render/textureloader.h"
-
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
+
+#include "Madgine/imageloader/imageloader.h"
 
 namespace Engine {
 namespace Tools {
@@ -20,7 +20,8 @@ namespace Tools {
         virtual void render() override;
 
     private:
-        Render::TextureLoader::Handle mGamepadTexture;
+        Render::TexturePtr mGamepadTexture;        
+        Resources::ImageLoader::Handle mImage;
     };
 
 }

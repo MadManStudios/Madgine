@@ -84,7 +84,7 @@ namespace Render {
         , mIsRenderTarget(isRenderTarget)
         , mSamples(samples)
     {
-        VkFormat vFormat = this->format();
+        VkFormat vFormat = this->vkFormat();
         size_t byteCount;
         switch (format) {
         case FORMAT_RGBA8:
@@ -248,7 +248,8 @@ namespace Render {
         descAllocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
         descAllocInfo.descriptorPool = context.mDescriptorPool;
         descAllocInfo.descriptorSetCount = 1;
-        descAllocInfo.pSetLayouts = &std::as_const(context.mResourceBlockDescriptorSetLayout);
+        const auto descriptorSetLayout = context.fetchSetLayout({ ResourceBlockType::Texture });
+        descAllocInfo.pSetLayouts = &descriptorSetLayout;
         result = vkAllocateDescriptorSets(GetDevice(), &descAllocInfo, &descriptorSet);
         VK_CHECK(result);
 
@@ -280,7 +281,9 @@ namespace Render {
 
         vkUpdateDescriptorSets(GetDevice(), 1, &descriptorWrite, 0, nullptr);
 
-        mResourceBlock.setupAs<VkDescriptorSet>() = descriptorSet;
+        mBlock.mHandle = descriptorSet;
+        mBlock.mResources[0] = ConstTexturePtr { this, NoOpFunctor {} };
+        mResourceBlock.setupAs<VulkanResourceBlock<1> *>() = &mBlock;
     }
 
     VulkanTexture::VulkanTexture(TextureType type, bool isRenderTarget, TextureFormat format, size_t samples)
@@ -315,8 +318,8 @@ namespace Render {
     void VulkanTexture::reset()
     {
         if (mResourceBlock) {
-            VkDescriptorSet set = mResourceBlock.release<VkDescriptorSet>();
-            vkFreeDescriptorSets(GetDevice(), VulkanRenderContext::getSingleton().mDescriptorPool, 1, &set);
+            VulkanResourceBlock<1> *set = mResourceBlock.release<VulkanResourceBlock<1> *>();
+            vkFreeDescriptorSets(GetDevice(), VulkanRenderContext::getSingleton().mDescriptorPool, 1, &set->mHandle);
         }
         mImageView.reset();
         mDeviceMemory.reset();
@@ -326,14 +329,9 @@ namespace Render {
         mSamples = 1;
     }
 
-    void VulkanTexture::setData(Vector2i size, const ByteBuffer &data)
-    {
-        *this = VulkanTexture { mType, mIsRenderTarget, mFormat, size, mSamples, data };
-    }
-
     void VulkanTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)
     {
-        VkFormat vFormat = format();
+        VkFormat vFormat = vkFormat();
         VkImageViewType vType;
         size_t byteCount;
         switch (mFormat) {
@@ -431,7 +429,7 @@ namespace Render {
         return mTextureHandle.as<VkImage>();
     }
 
-    VkFormat VulkanTexture::format() const
+    VkFormat VulkanTexture::vkFormat() const
     {
         switch (mFormat) {
         case FORMAT_RGBA8:
@@ -447,13 +445,23 @@ namespace Render {
         }
     }
 
+    TextureFormat VulkanTexture::format() const
+    {
+        return mFormat;
+    }
+
+    size_t VulkanTexture::samples() const
+    {
+        return mSamples;
+    }
+
     void VulkanTexture::setName(std::string_view name)
     {
     }
 
     void VulkanTexture::transition(VkCommandBuffer commandList, VkImageLayout oldLayout, VkImageLayout newLayout)
     {
-        transitionImageLayout(commandList, image(), format(), VK_IMAGE_ASPECT_COLOR_BIT, oldLayout, newLayout);
+        transitionImageLayout(commandList, image(), vkFormat(), VK_IMAGE_ASPECT_COLOR_BIT, oldLayout, newLayout);
     }
 }
 }

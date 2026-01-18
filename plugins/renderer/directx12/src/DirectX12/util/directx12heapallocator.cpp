@@ -67,18 +67,16 @@ namespace Render {
         desc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_RAW;
         mDescriptorHeap.addShaderResourceView(mDescriptors + mHeaps.size() - 1, mHeaps.back().mReservedResource, &desc);
 
-        ptr.mBuffer = mHeaps.size();
-        ptr.mOffset = 0;
-
-        return { ptr.encode(), size };
+        return { reinterpret_cast<void *>(mHeaps.size() << 32), size };
     }
 
     void DirectX12HeapAllocator::deallocate(Block block)
     {
-        GPUPtr<void> ptr { block.mAddress };
-        assert(ptr.mOffset == 0 && ptr.mBuffer != 0);
+        uint32_t offset = reinterpret_cast<uintptr_t>(block.mAddress);
+        uint32_t buffer = reinterpret_cast<uintptr_t>(block.mAddress) >> 32;
+        assert(offset == 0 && buffer != 0);
 
-        size_t index = ptr.mBuffer - 1;
+        size_t index = buffer - 1;
         assert(mHeaps[index].mHeap->GetDesc().SizeInBytes == block.mSize);
         mHeaps[index].mReservedResource.reset();
         mHeaps[index].mHeap.reset();
@@ -91,8 +89,10 @@ namespace Render {
 
     std::pair<ID3D12Resource *, size_t> DirectX12HeapAllocator::resolve(void *ptr)
     {
-        GPUPtr<void> gpuPtr { ptr };
-        return { mHeaps[gpuPtr.mBuffer - 1].mReservedResource, gpuPtr.mOffset };
+        uint32_t offset = reinterpret_cast<uintptr_t>(ptr);
+        uint32_t buffer = reinterpret_cast<uintptr_t>(ptr) >> 32;        
+        
+        return { mHeaps[buffer - 1].mReservedResource, offset };
     }
 
     D3D12_GPU_DESCRIPTOR_HANDLE DirectX12HeapAllocator::descriptorTable() const

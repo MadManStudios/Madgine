@@ -29,17 +29,26 @@ namespace Render {
 
         OpenGLRenderContext &operator=(const OpenGLRenderContext &) = delete;
 
-        virtual std::unique_ptr<RenderTarget> createRenderWindow(Window::OSWindow *w, size_t samples) override;
-        virtual std::unique_ptr<RenderTarget> createRenderTexture(const Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
+        std::unique_ptr<RenderTarget> createRenderWindow(Window::OSWindow *w, size_t samples) override;
+        std::unique_ptr<RenderTarget> createRenderTexture(const Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
 
-        virtual Threading::Task<void> unloadAllResources() override;
+        Threading::Task<void> unloadAllResources() override;
 
         static OpenGLRenderContext &getSingleton();
 
-        virtual bool supportsMultisampling() const override;
+        bool supportsMultisampling() const override;
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture *> textures) override;
-        virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
+        GPUPtr<void> allocateBufferImpl(size_t size) override;
+        GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count) override;
+        WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
+        WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
+
+        TexturePtr createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data) override;
+
+        void setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) override;
+
+        UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures) override;
+        void destroyResourceBlock(UniqueResourceBlock &block) override;
 
         void bindFormat(VertexFormat format, size_t offset = 0);
         void unbindFormat();

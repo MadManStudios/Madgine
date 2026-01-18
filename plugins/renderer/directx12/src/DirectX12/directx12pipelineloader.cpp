@@ -40,16 +40,20 @@ namespace Render {
         if (!co_await pipeline.create(name, {}, [config](DirectX12PipelineLoader *loader, DirectX12Pipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
                 pipeline.setName(info.resource()->name());
                 DirectX12VertexShaderLoader::Handle vertexShader;
+                PipelineSignature signature = config.vs->signature();
                 if (!co_await vertexShader.load(config.vs)) {
                     LOG_ERROR("Failed to load VS '" << config.vs << "'!");
                     co_return false;
                 }
                 DirectX12PixelShaderLoader::Handle pixelShader;
+                if (config.ps) {
+                    signature = signature.merge(config.ps->signature());
+                }
                 if (config.ps && !co_await pixelShader.load(config.ps)) {
                     LOG_ERROR("Failed to load PS '" << config.ps << "'!");
                     co_return false;
                 }
-                co_return pipeline.link(std::move(vertexShader), std::move(pixelShader));
+                co_return pipeline.link(std::move(signature), std::move(vertexShader), std::move(pixelShader));
             }))
             co_return false;
 

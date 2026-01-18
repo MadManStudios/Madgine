@@ -156,9 +156,9 @@ namespace Render {
         return Matrix4::IDENTITY;
     }
 
-    const Texture *RenderTarget::texture(size_t index) const
+    ConstTexturePtr RenderTarget::texture(size_t index) const
     {
-        return nullptr;
+        return {};
     }
 
     size_t RenderTarget::textureCount() const
@@ -166,9 +166,9 @@ namespace Render {
         return 0;
     }
 
-    const Texture *RenderTarget::depthTexture() const
+    ConstTexturePtr RenderTarget::depthTexture() const
     {
-        return nullptr;
+        return {};
     }
 
     RenderContext *RenderTarget::context() const

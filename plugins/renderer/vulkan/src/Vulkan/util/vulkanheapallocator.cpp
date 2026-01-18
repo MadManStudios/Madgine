@@ -59,8 +59,6 @@ namespace Render {
 
     Block VulkanHeapAllocator::allocate(size_t size, size_t alignment)
     {
-        GPUPtr<void> ptr;
-
         Heap &heap = mHeaps.emplace_back();
 
         createBuffer(size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, &heap.mBuffer, &heap.mMemory);
@@ -72,26 +70,26 @@ namespace Render {
         VkResult result = vkSetDebugUtilsObjectNameEXT(GetDevice(), &nameInfo);
         VK_CHECK(result);
 
-        ptr.mBuffer = mHeaps.size();
-        ptr.mOffset = 0;
-
-        return { ptr.encode(), size };
+        return { reinterpret_cast<void *>(mHeaps.size() << 32), size };
     }
 
     void VulkanHeapAllocator::deallocate(Block block)
     {
-        GPUPtr<void> ptr { block.mAddress };
-        assert(ptr.mOffset == 0 && ptr.mBuffer != 0);
+        uint32_t offset = reinterpret_cast<uintptr_t>(block.mAddress);
+        uint32_t buffer = reinterpret_cast<uintptr_t>(block.mAddress) >> 32;        
+        assert(offset == 0 && buffer != 0);
 
-        size_t index = ptr.mBuffer - 1;
+        size_t index = buffer - 1;
         mHeaps[index].mBuffer.reset();
         mHeaps[index].mMemory.reset();
     }
 
-    std::pair<VkBuffer, size_t> VulkanHeapAllocator::resolve(void *ptr)
+    std::tuple<VkBuffer, VkDeviceMemory, size_t> VulkanHeapAllocator::resolve(void *ptr)
     {
-        GPUPtr<void> gpuPtr { ptr };
-        return { mHeaps[gpuPtr.mBuffer - 1].mBuffer, gpuPtr.mOffset };
+        uint32_t offset = reinterpret_cast<uintptr_t>(ptr);
+        uint32_t buffer = reinterpret_cast<uintptr_t>(ptr) >> 32;        
+        
+        return { mHeaps[buffer - 1].mBuffer, mHeaps[buffer - 1].mMemory, offset };
     }
 
     VulkanMappedHeapAllocator::VulkanMappedHeapAllocator(std::string_view name)

@@ -39,14 +39,14 @@ namespace Render {
 
     void VulkanBuffer::bindVertex(VkCommandBuffer commandList, size_t index) const
     {
-        auto [buffer, offset] = VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress);
+        auto [buffer, memory, offset] = VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress);
         VkDeviceSize vOffset = offset;
         vkCmdBindVertexBuffers(commandList, index, 1, &buffer, &vOffset);
     }
 
     void VulkanBuffer::bindIndex(VkCommandBuffer commandList) const
     {
-        auto [buffer, offset] = VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress);
+        auto [buffer, memory, offset] = VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress);
         vkCmdBindIndexBuffer(commandList, buffer, offset, VK_INDEX_TYPE_UINT32);
     }
 
@@ -73,7 +73,7 @@ namespace Render {
         Block uploadAllocation = context.mUploadAllocator.allocate(expectedSize);
         std::memcpy(uploadAllocation.mAddress, data.mData, data.mSize);
 
-        auto [buffer, offset] = context.mConstantMemoryHeap.resolve(mBlock.mAddress);
+        auto [buffer, memory, offset] = context.mConstantMemoryHeap.resolve(mBlock.mAddress);
         auto [heap, srcOffset] = context.mUploadHeap.resolve(uploadAllocation.mAddress);
 
         auto list = context.fetchCommandList("BufferUpload");
@@ -98,12 +98,12 @@ namespace Render {
 
     size_t VulkanBuffer::offset() const
     {
-        return VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress).second;
+        return std::get<2>(VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress));
     }
 
     VkBuffer VulkanBuffer::buffer() const
     {
-        return VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress).first;
+        return std::get<0>(VulkanRenderContext::getSingleton().mConstantMemoryHeap.resolve(mBlock.mAddress));
     }
 
     size_t VulkanBuffer::size() const

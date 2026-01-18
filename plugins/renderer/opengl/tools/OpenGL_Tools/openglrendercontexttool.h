@@ -20,7 +20,7 @@ namespace Tools {
         std::string_view key() const override;
 
     private:
-        Render::OpenGLTexture mImageTexture;
+        std::shared_ptr<Render::OpenGLTexture> mImageTexture;
     };
 
 }

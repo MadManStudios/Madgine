@@ -1,7 +1,10 @@
-cbuffer vertexBuffer : register(b0)
+struct Data
 {
     float4x4 ProjectionMatrix;
 };
+
+ConstantBuffer<Data> data : register(b0);
+
 struct AppData
 {
     [[vk::location(2)]] float2 pos : POSITION2;
@@ -19,7 +22,7 @@ struct FragmentData
 export FragmentData imgui_VS(AppData input)
 {
     FragmentData output;
-    output.pos = mul(ProjectionMatrix, float4(input.pos.xy, 0.f, 1.f));
+    output.pos = mul(data.ProjectionMatrix, float4(input.pos.xy, 0.f, 1.f));
     output.col = input.col;
     output.uv = input.uv;
     return output;

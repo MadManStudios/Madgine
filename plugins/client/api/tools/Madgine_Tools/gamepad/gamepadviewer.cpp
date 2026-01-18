@@ -6,6 +6,9 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/texture.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
@@ -41,7 +44,7 @@ namespace Tools {
         if (!co_await ToolBase::init())
             co_return false;
 
-        mGamepadTexture.loadFromImage("Gamepad", Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
+        mImage.load("Gamepad");
 
         co_return true;
     }
@@ -76,7 +79,15 @@ namespace Tools {
 
             ImVec2 cursor = window->DC.CursorPos;
 
-            if (mGamepadTexture.available())
+            if (!mGamepadTexture && mImage.available()) {
+                mGamepadTexture = Render::RenderContext::getSingleton().createTexture(
+                    Render::TextureType_2D,
+                    Render::FORMAT_RGBA8_SRGB,
+                    mImage->mSize,
+                    mImage->mBuffer);
+            }
+
+            if (mGamepadTexture)
                 ImGui::Image((void *)mGamepadTexture->resourceBlock(), Canvas);
 
             size_t i = 0;

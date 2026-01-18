@@ -8,6 +8,7 @@
 
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendercontextcollector.h"
+#include "Madgine/render/shaderobject.h"
 #include "Madgine/render/vertexformat.h"
 
 #include "util/vulkanbuffer.h"
@@ -42,9 +43,18 @@ namespace Render {
         virtual bool beginFrame() override;
         virtual void endFrame() override;
 
-        VkDescriptorSet allocateResourceBlock(std::vector<const Texture *> textures);
+        GPUPtr<void> allocateBufferImpl(size_t size) override;
+        GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count) override;
+        WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
+        WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
+
+        TexturePtr createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data) override;
+
+        void setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) override;
+
+        VkDescriptorSet allocateResourceBlock(const std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> &textures);
         void freeResourceBlock(VkDescriptorSet descriptorSet);
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture *> textures) override;
+        virtual UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures) override;
         virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
 
         VulkanCommandList fetchCommandList(std::string_view name, std::vector<VkSemaphore> waitSemaphores = {}, std::vector<VkSemaphore> signalSemaphores = {});
@@ -61,6 +71,8 @@ namespace Render {
         static VulkanRenderContext &getSingleton();
 
         void createPipelineLayout();
+        VkPipelineLayout fetchLayout(const PipelineSignature &signature);
+        VkDescriptorSetLayout fetchSetLayout(const ResourceBlockSignature &signature);
 
         static std::pair<std::vector<VkVertexInputBindingDescription>, std::vector<VkVertexInputAttributeDescription>> createVertexLayout(VertexFormat format);
 
@@ -83,11 +95,9 @@ namespace Render {
         VulkanPtr<VkDescriptorSetLayout, &vkDestroyDescriptorSetLayout> mUBODescriptorSetLayout;
         VulkanPtr<VkDescriptorSetLayout, &vkDestroyDescriptorSetLayout> mHeapDescriptorSetLayout;
         VulkanPtr<VkDescriptorSetLayout, &vkDestroyDescriptorSetLayout> mTempBufferDescriptorSetLayout;
-        VulkanPtr<VkDescriptorSetLayout, &vkDestroyDescriptorSetLayout> mResourceBlockDescriptorSetLayout;
         VulkanPtr<VkDescriptorSetLayout, &vkDestroyDescriptorSetLayout> mSamplerDescriptorSetLayout;
-        VulkanPtr<VkPipelineLayout, &vkDestroyPipelineLayout> mPipelineLayout;
-
-        VkDescriptorSet mDefaultResourceBlockDescriptorSet;
+        std::map<ResourceBlockSignature, VulkanPtr<VkDescriptorSetLayout, &vkDestroyDescriptorSetLayout>> mResourceBlockDescriptorSetLayouts;
+        std::map<PipelineSignature, VulkanPtr<VkPipelineLayout, &vkDestroyPipelineLayout>> mPipelineLayouts;
 
         VulkanPtr<VkSampler, &vkDestroySampler> mSamplers[2];
         VkDescriptorSet mSamplerDescriptorSet;
@@ -105,7 +115,7 @@ namespace Render {
         LogBucketAllocator<HeapAllocator<VulkanHeapAllocator &>, 64, 4096, 4> mConstantAllocator;
 
         VulkanBuffer mConstantBuffer;
-        VulkanTexture mDefaultTexture;
+        std::shared_ptr<VulkanTexture> mDefaultTexture;
     };
 
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);

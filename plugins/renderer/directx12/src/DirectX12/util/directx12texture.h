@@ -10,6 +10,13 @@
 namespace Engine {
 namespace Render {
 
+    template <size_t I = 1>
+    struct DirectX12ResourceBlock {
+        D3D12_GPU_DESCRIPTOR_HANDLE mHandle;
+        size_t mSize = I;
+        std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>> mResources[I];
+    };
+
     struct MADGINE_DIRECTX12_EXPORT DirectX12Texture : Texture {
 
         DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples = 1, const ByteBuffer &data = {});
@@ -22,7 +29,6 @@ namespace Render {
 
         void reset();
 
-        void setData(Vector2i size, const ByteBuffer &data);
         void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data);
 
         void createShaderResourceView(OffsetPtr descriptorHandle) const;
@@ -39,6 +45,7 @@ namespace Render {
     private:
         bool mIsRenderTarget;
         size_t mSamples = 0;
+        DirectX12ResourceBlock<1> mBlock;
     };
 
 }

@@ -4,7 +4,6 @@
 #include "Meta/serialize/hierarchy/serializableunit.h"
 
 #include "Madgine/imageloader/imageloader.h"
-#include "Madgine/render/textureloader.h"
 #include "Madgine/resources/resourceloader.h"
 
 namespace Engine {
@@ -40,7 +39,6 @@ namespace Widgets {
 
         UIAtlas();
 
-        Threading::Task<bool> createTexture();
         void preload(const PreprocessedUIAtlas &atlas);
         void reset();
 
@@ -54,7 +52,7 @@ namespace Widgets {
     private:
         void expand();
 
-        Render::TextureLoader::Ptr mTexture;
+        Render::TexturePtr mTexture;
         std::set<Resources::ImageLoader::Handle> mImageLoadingTasks;
         Atlas2 mAtlas { { 2048, 2048 } };
         int mSize = 0;

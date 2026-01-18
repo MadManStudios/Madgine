@@ -7,9 +7,11 @@
 namespace Engine {
 namespace Render {
 
-    bool VulkanPipeline::link(typename VulkanShaderLoader::Handle vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Handle pixelShader, std::string ps_entrypoint)
+    bool VulkanPipeline::link(PipelineSignature signature, typename VulkanShaderLoader::Handle vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Handle pixelShader, std::string ps_entrypoint)
     {
         reset();
+
+        mLayout = VulkanRenderContext::getSingleton().fetchLayout(signature);
 
         mVertexShader = std::move(vertexShader);
         mVsEntrypoint = vs_entrypoint;
@@ -19,9 +21,11 @@ namespace Render {
         return true;
     }
 
-    bool VulkanPipeline::link(typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint)
+    bool VulkanPipeline::link(PipelineSignature signature, typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint)
     {
         reset();
+
+        mLayout = VulkanRenderContext::getSingleton().fetchLayout(signature);
 
         mVertexShader = std::move(vertexShader);
         mVsEntrypoint = vs_entrypoint;
@@ -189,7 +193,7 @@ namespace Render {
             pipelineInfo.subpass = 0;
             pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
             pipelineInfo.basePipelineIndex = -1;
-            pipelineInfo.layout = VulkanRenderContext::getSingleton().mPipelineLayout;
+            pipelineInfo.layout = mLayout;
             VkResult result = vkCreateGraphicsPipelines(GetDevice(), nullptr, 1, &pipelineInfo, nullptr, &pipeline);
             VK_CHECK(result);
         }
@@ -202,12 +206,18 @@ namespace Render {
         return mPipelines.data();
     }
 
+    VkPipelineLayout VulkanPipeline::layout() const
+    {
+        return mLayout;
+    }
+
     void VulkanPipeline::reset()
     {
         for (std::array<std::array<VulkanPtr<VkPipeline, &vkDestroyPipeline>, 3>, 3> &groupPipelines : mPipelines)
             for (std::array<VulkanPtr<VkPipeline, &vkDestroyPipeline>, 3> &samplePipelines : groupPipelines)
                 for (VulkanPtr<VkPipeline, &vkDestroyPipeline> &pipeline : samplePipelines)
                     pipeline.reset();
+        mLayout = nullptr;
         mVertexShader = {};
         mPixelShader = {};
     }

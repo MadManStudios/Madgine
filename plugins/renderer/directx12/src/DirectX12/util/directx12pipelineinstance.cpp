@@ -30,6 +30,8 @@ namespace Render {
 
     bool DirectX12PipelineInstance::bind(DirectX12RenderTarget *target, VertexFormat vertexFormat, size_t groupSize) const
     {
+        bindRootSignature(target);
+
         ID3D12GraphicsCommandList *commandList = target->mCommandList;
 
         size_t samplesBits = sqrt(target->samples());
@@ -39,7 +41,9 @@ namespace Render {
         if (!pipeline) {
             return false;
         }
+
         commandList->SetPipelineState(pipeline);
+        
 
         assert(groupSize > 0 && groupSize <= 3);
         D3D12_PRIMITIVE_TOPOLOGY mode = sModes[groupSize - 1];
@@ -57,6 +61,11 @@ namespace Render {
         DX12_CHECK();
 
         return true;
+    }
+
+    void DirectX12PipelineInstance::bindRootSignature(DirectX12RenderTarget *target) const
+    {
+        target->context()->setupRootSignature(mPipeline->rootSignature(), target->mCommandList);
     }
 
     WritableByteBuffer DirectX12PipelineInstance::mapParameters(size_t index)
@@ -120,8 +129,10 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer DirectX12PipelineInstance::mapTempBuffer(size_t space, size_t size) const
+    WritableByteBuffer DirectX12PipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
     {
+        size_t size = elementSize * count;
+
         assert(space >= 1);
         if (mTempGPUAddresses.size() <= space - 1)
             mTempGPUAddresses.resize(space);
@@ -210,9 +221,12 @@ namespace Render {
 
     void DirectX12PipelineInstance::bindResources(RenderTarget *target, size_t space, ResourceBlock block) const
     {
+        bindRootSignature(static_cast<DirectX12RenderTarget*>(target));
+
         assert(space > 1);
-        if (block)
-            static_cast<DirectX12RenderTarget *>(target)->mCommandList->SetGraphicsRootDescriptorTable(3 + space, { block.mPtr });
+        assert(block);
+        DirectX12ResourceBlock<1> *resBlock = block;
+        static_cast<DirectX12RenderTarget *>(target)->mCommandList->SetGraphicsRootDescriptorTable(3 + space, resBlock->mHandle);
     }
 
     DirectX12PipelineInstanceHandle::DirectX12PipelineInstanceHandle(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline)

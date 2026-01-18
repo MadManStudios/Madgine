@@ -68,11 +68,11 @@ namespace Render {
         mFramebufferCount = getFramebufferCount(&createDepthBufferView);
 
         for (size_t i = 0; i < config.mTextureCount * bufferCount; ++i) {
-            OpenGLTexture &tex = mTextures.emplace_back(mType, config.mFormat, config.mSamples);
+            std::shared_ptr<OpenGLTexture> &tex = mTextures.emplace_back(std::make_shared<OpenGLTexture>(mType, config.mFormat, config.mSamples));
         }
 
         if (mCreateDepthTexture) {
-            mDepthTexture = { mType, FORMAT_D32, mSamples };
+            mDepthTexture = std::make_shared<OpenGLTexture>(mType, FORMAT_D32, mSamples);
         } else {
             glGenRenderbuffers(1, &mDepthRenderbuffer);
             GL_CHECK();
@@ -106,11 +106,11 @@ namespace Render {
 
         assert(width > 0 && height > 0);
 
-        for (OpenGLTexture &tex : mTextures) {
-            tex.setData({ width, height }, {});
+        for (std::shared_ptr<OpenGLTexture> &tex : mTextures) {
+            tex = std::make_shared<OpenGLTexture>(mType, tex->format(), Vector2i { width, height }, mSamples);
             if (mType != TextureType_2DMultiSample) {
-                tex.setWrapMode(GL_CLAMP_TO_EDGE);
-                tex.setFilter(GL_NEAREST);
+                tex->setWrapMode(GL_CLAMP_TO_EDGE);
+                tex->setFilter(GL_NEAREST);
             }
         }
 
@@ -128,10 +128,10 @@ namespace Render {
             GL_CHECK();
         }
         if (mCreateDepthTexture) {
-            mDepthTexture.setData({ width, height }, {});
+            mDepthTexture = std::make_shared<OpenGLTexture>(mType, mDepthTexture->format(), Vector2i { width, height }, mSamples);            
             if (mType == TextureType_Cube) {
-                mDepthTexture.setWrapMode(GL_CLAMP_TO_EDGE);
-                mDepthTexture.setFilter(GL_NEAREST);
+                mDepthTexture->setWrapMode(GL_CLAMP_TO_EDGE);
+                mDepthTexture->setFilter(GL_NEAREST);
             }
         }
 
@@ -142,12 +142,12 @@ namespace Render {
                 glBindFramebuffer(GL_FRAMEBUFFER, framebuffers[j]);
                 GL_CHECK();
                 for (size_t i = 0; i < textureCount(); ++i) {
-                    const OpenGLTexture &tex = mTextures[offsets[i] * textureCount() + i];
+                    const OpenGLTexture &tex = *mTextures[offsets[i] * textureCount() + i];
                     attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
                 }
 
                 if (mCreateDepthTexture) {
-                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
+                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, *mDepthTexture, 0);
                 } else {
                     glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
                     GL_CHECK();
@@ -179,12 +179,12 @@ namespace Render {
                 GL_CHECK();
 
                 for (size_t i = 0; i < textureCount(); ++i) {
-                    const OpenGLTexture &tex = mTextures[mFlipFlopIndices[i] * textureCount() + i];
+                    const OpenGLTexture &tex = *mTextures[mFlipFlopIndices[i] * textureCount() + i];
                     attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
                 }
 
                 if (mCreateDepthTexture) {
-                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
+                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, *mDepthTexture, 0);
                 } else {
                     glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
                     GL_CHECK();
@@ -248,10 +248,10 @@ namespace Render {
         return OpenGLRenderTarget::endFrame();
     }
 
-    const OpenGLTexture *OpenGLRenderTexture::texture(size_t index) const
+    ConstTexturePtr OpenGLRenderTexture::texture(size_t index) const
     {
         int offset = canFlipFlop() ? mFlipFlopIndices[index] : 0;
-        return &mTextures[textureCount() * offset + index];
+        return mTextures[textureCount() * offset + index];
     }
 
     size_t OpenGLRenderTexture::textureCount() const
@@ -260,9 +260,9 @@ namespace Render {
         return mTextures.size() / bufferCount;
     }
 
-    const OpenGLTexture *OpenGLRenderTexture::depthTexture() const
+    ConstTexturePtr OpenGLRenderTexture::depthTexture() const
     {
-        return &mDepthTexture;
+        return mDepthTexture;
     }
 
     void OpenGLRenderTexture::blit(RenderTarget *input) const
@@ -284,12 +284,12 @@ namespace Render {
                 GL_CHECK();
 
                 for (size_t i = 0; i < textureCount(); ++i) {
-                    const OpenGLTexture &tex = mTextures[mFlipFlopIndices[i] * textureCount() + i];
+                    const OpenGLTexture &tex = *mTextures[mFlipFlopIndices[i] * textureCount() + i];
                     attachFramebufferTexture(GL_COLOR_ATTACHMENT0 + i, tex, i);
                 }
 
                 if (mCreateDepthTexture) {
-                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, mDepthTexture, 0);
+                    attachFramebufferTexture(GL_DEPTH_ATTACHMENT, *mDepthTexture, 0);
                 } else {
                     glBindRenderbuffer(GL_RENDERBUFFER, mDepthRenderbuffer);
                     GL_CHECK();

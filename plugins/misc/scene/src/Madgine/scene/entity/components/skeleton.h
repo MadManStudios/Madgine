@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Madgine/render/buffer.h"
+#include "Madgine/render/ptr.h"
 #include "Madgine/skeletonloader/skeletonloader.h"
 
 #include "../entitycomponent.h"
@@ -25,7 +25,7 @@ namespace Scene {
 
             void resetMatrices(Matrix4 *matrices);
 
-            Render::GPUBuffer<Matrix4[]> mBoneMatrices;
+            Render::GPUPtr<Matrix4[]> mBoneMatrices;
 
             std::vector<Matrix4> mLocalMatrices;
 

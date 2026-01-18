@@ -10,6 +10,8 @@
 
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/texture.h"
 #include "Madgine/resources/resourcemanager.h"
 #include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/window/layoutloader.h"
@@ -36,17 +38,12 @@ namespace Widgets {
     {
     }
 
-    Threading::Task<bool> UIAtlas::createTexture()
-    {
-        return mTexture.createTask(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
-    }
-
     void UIAtlas::preload(const PreprocessedUIAtlas &atlas)
     {
         mEntries = atlas.entries();
         mSize = atlas.size();
         if (mSize > 0) {
-            mTexture.setData(atlas.imageSize(), atlas.buffer());
+            mTexture = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, atlas.imageSize(), atlas.buffer());
         }
         mAtlas = atlas.atlas();
         for (const std::string &entry : kvKeys(mEntries)) {
@@ -115,7 +112,7 @@ namespace Widgets {
                 targetArea[height + 1][width + 1] = sourceArea[height - 1][width - 1];
 
                 it = mEntries.try_emplace(std::string { image->name() }, entry).first;
-                mTexture.setSubData(entry.mArea.mTopLeft, { static_cast<int>(targetWidth), static_cast<int>(targetHeight) }, targetBuffer);
+                Render::RenderContext::getSingleton().setTextureSubData(mTexture, entry.mArea.mTopLeft, { static_cast<int>(targetWidth), static_cast<int>(targetHeight) }, targetBuffer);
                 mImageLoadingTasks.erase(data);
             }
         }
@@ -136,7 +133,7 @@ namespace Widgets {
     {
         if (mSize == 0) {
             mSize = 1;
-            mTexture.setData({ mSize * 2048, mSize * 2048 }, {});
+            mTexture = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { mSize * 2048, mSize * 2048 }, {});
             for (int x = 0; x < mSize; ++x) {
                 for (int y = 0; y < mSize; ++y) {
                     mAtlas.addBin({ 2048 * x, 2048 * y });

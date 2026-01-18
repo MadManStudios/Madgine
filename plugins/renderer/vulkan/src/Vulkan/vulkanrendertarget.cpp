@@ -15,7 +15,7 @@ namespace Render {
 
     VulkanRenderTarget::VulkanRenderTarget(VulkanRenderContext *context, bool global, std::string name, TextureType type, size_t samples, RenderTarget *blitSource)
         : RenderTarget(context, global, name, 1, blitSource)
-        , mDepthTexture(type, false, FORMAT_D24, samples)
+        , mDepthTexture(std::make_shared<VulkanTexture>(type, false, FORMAT_D24, samples))
         , mSamples(samples)
     {
         VkSemaphoreCreateInfo binarySemaphoreInfo {};
@@ -93,7 +93,7 @@ namespace Render {
         mBufferSize = framebufferSize;
         mSize = size;
 
-        mDepthTexture.setData(framebufferSize, {});
+        mDepthTexture = std::make_shared<VulkanTexture>(mDepthTexture->type(), false, FORMAT_D24, framebufferSize, mSamples);
     }
 
     void VulkanRenderTarget::beginFrame()
@@ -197,9 +197,9 @@ namespace Render {
         vkCmdClearAttachments(mCommandList, 1, &depthAttachment, 1, &r);
     }
 
-    const Texture *VulkanRenderTarget::depthTexture() const
+    ConstTexturePtr VulkanRenderTarget::depthTexture() const
     {
-        return &mDepthTexture;
+        return mDepthTexture;
     }
 
     VulkanRenderContext *VulkanRenderTarget::context() const

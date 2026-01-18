@@ -16,7 +16,6 @@
 #include "vulkanpipelineloader.h"
 #include "vulkanrendertexture.h"
 #include "vulkanrenderwindow.h"
-#include "vulkantextureloader.h"
 
 #if ANDROID
 #    include <vulkan/vulkan_android.h>
@@ -553,12 +552,12 @@ namespace Render {
         mConstantAllocator.deallocateAll();
         mUploadAllocator.deallocateAll();
 
-        mPipelineLayout.reset();
+        mPipelineLayouts.clear();
 
         mUBODescriptorSetLayout.reset();
         mHeapDescriptorSetLayout.reset();
         mTempBufferDescriptorSetLayout.reset();
-        mResourceBlockDescriptorSetLayout.reset();
+        mPipelineLayouts.clear();
         mSamplerDescriptorSetLayout.reset();
 
         mSamplers[0].reset();
@@ -572,8 +571,6 @@ namespace Render {
 
         VkResult result = vkFreeDescriptorSets(GetDevice(), mDescriptorPool, 1, &mSamplerDescriptorSet);
         VK_CHECK(result);
-
-        freeResourceBlock(mDefaultResourceBlockDescriptorSet);
 
         mCommandPool.reset();
         mDescriptorPool.reset();
@@ -601,7 +598,83 @@ namespace Render {
         RenderContext::endFrame();
     }
 
-    VkDescriptorSet VulkanRenderContext::allocateResourceBlock(std::vector<const Texture *> textures)
+    GPUPtr<void> VulkanRenderContext::allocateBufferImpl(size_t size)
+    {
+        Block allocation = mBufferAllocator.allocate(size);
+
+        if (!allocation.mAddress)
+            return {};
+
+        return { allocation.mAddress, size, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
+    }
+
+    GPUPtr<Void[]> VulkanRenderContext::allocateBufferImpl(size_t elementSize, size_t count)
+    {
+        Block allocation = mBufferAllocator.allocate(elementSize * count);
+
+        if (!allocation.mAddress)
+            return {};
+
+        return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
+    }
+
+    WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    {
+        auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
+
+        void *data;
+
+        VkResult result = vkMapMemory(GetDevice(), memory, offset, buffer.size(), 0, &data);
+        VK_CHECK(result);
+
+        struct UnmapDeleter {
+            VkDeviceMemory mMemory;
+
+            void operator()(void *p)
+            {
+                vkUnmapMemory(GetDevice(), mMemory);
+            }
+        };
+
+        std::unique_ptr<void, UnmapDeleter> dataBuffer { data, { memory } };
+
+        return { std::move(dataBuffer), buffer.size() };
+    }
+
+    WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+    {
+        auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
+
+        void *data;
+
+        VkResult result = vkMapMemory(GetDevice(), memory, offset, buffer.size(), 0, &data);
+        VK_CHECK(result);
+
+        struct UnmapDeleter {
+            VkDeviceMemory mMemory;
+
+            void operator()(void *p)
+            {
+                vkUnmapMemory(GetDevice(), mMemory);
+            }
+        };
+
+        std::unique_ptr<void, UnmapDeleter> dataBuffer { data, { memory } };
+
+        return { std::move(dataBuffer), buffer.size() };
+    }
+
+    TexturePtr VulkanRenderContext::createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data)
+    {
+        return std::make_shared<VulkanTexture>(type, false, format, size, 1, data);
+    }
+
+    void VulkanRenderContext::setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data)
+    {
+        static_cast<VulkanTexture &>(*tex).setSubData(offset, size, data);
+    }
+
+    VkDescriptorSet VulkanRenderContext::allocateResourceBlock(const std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> &data)
     {
         VkDescriptorSet descriptorSet;
 
@@ -609,7 +682,8 @@ namespace Render {
         descAllocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
         descAllocInfo.descriptorPool = mDescriptorPool;
         descAllocInfo.descriptorSetCount = 1;
-        descAllocInfo.pSetLayouts = &std::as_const(mResourceBlockDescriptorSetLayout);
+        const auto resourceBlockDescriptorSetLayout = fetchSetLayout(data);
+        descAllocInfo.pSetLayouts = &resourceBlockDescriptorSetLayout;
         VkResult result = vkAllocateDescriptorSets(GetDevice(), &descAllocInfo, &descriptorSet);
         VK_CHECK(result);
 
@@ -621,16 +695,17 @@ namespace Render {
         result = vkSetDebugUtilsObjectNameEXT(GetDevice(), &nameInfo);
         VK_CHECK(result);
 
-        for (size_t i = 0; i < 4; ++i) {
-            const VulkanTexture *tex = &mDefaultTexture;
-            if (i < textures.size()) {
-                tex = static_cast<const VulkanTexture *>(textures[i]);
-            }
+        for (size_t i = 0; i < data.size(); ++i) {
 
             VkDescriptorImageInfo imageDescriptorInfo {};
             imageDescriptorInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            imageDescriptorInfo.imageView = tex->view();
+            imageDescriptorInfo.imageView = mDefaultTexture->view();
             imageDescriptorInfo.sampler = VK_NULL_HANDLE;
+
+            VkDescriptorBufferInfo bufferDescriptorInfo {};
+            bufferDescriptorInfo.buffer = VK_NULL_HANDLE;
+            bufferDescriptorInfo.offset = 0;
+            bufferDescriptorInfo.range = VK_WHOLE_SIZE;
 
             VkWriteDescriptorSet descriptorWrite {};
             descriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
@@ -645,6 +720,32 @@ namespace Render {
             descriptorWrite.pImageInfo = &imageDescriptorInfo; // Optional
             descriptorWrite.pTexelBufferView = nullptr; // Optional
 
+            std::visit(overloaded {
+                           [&](const ConstTexturePtr &tex) {
+                               if (tex) {
+                                   imageDescriptorInfo.imageView = std::static_pointer_cast<const VulkanTexture>(tex)->view();
+                               }
+                           },
+                           [&](const GPUPtr<Void[]> &buffer) {
+                               descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+                               descriptorWrite.pImageInfo = nullptr;
+                               descriptorWrite.pBufferInfo = &bufferDescriptorInfo;
+
+                               auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
+                               bufferDescriptorInfo.buffer = vkBuffer;
+                               bufferDescriptorInfo.offset = offset;
+                           },
+                           [&](const GPUPtr<void> &buffer) {
+                               descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+                               descriptorWrite.pImageInfo = nullptr;
+                               descriptorWrite.pBufferInfo = &bufferDescriptorInfo;
+
+                               auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
+                               bufferDescriptorInfo.buffer = vkBuffer;
+                               bufferDescriptorInfo.offset = offset;
+                           } },
+                data[i]);
+
             vkUpdateDescriptorSets(GetDevice(), 1, &descriptorWrite, 0, nullptr);
         }
 
@@ -657,16 +758,25 @@ namespace Render {
         VK_CHECK(result);
     }
 
-    UniqueResourceBlock VulkanRenderContext::createResourceBlock(std::vector<const Texture *> textures)
+    UniqueResourceBlock VulkanRenderContext::createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> data)
     {
-        UniqueResourceBlock block;
-        block.setupAs<VkDescriptorSet>() = allocateResourceBlock(std::move(textures));
-        return block;
+        std::unique_ptr<VulkanResourceBlock<4>> block = std::make_unique<VulkanResourceBlock<4>>();
+
+        block->mHandle = allocateResourceBlock(data);
+        for (size_t i = 0; i < data.size(); ++i) {
+            block->mResources[i] = std::move(data[i]);
+        }
+        block->mSize = data.size();
+
+        UniqueResourceBlock result;
+        result.setupAs<std::unique_ptr<VulkanResourceBlock<4>>>() = std::move(block);
+        return result;
     }
 
     void VulkanRenderContext::destroyResourceBlock(UniqueResourceBlock &block)
     {
-        freeResourceBlock(block.release<VkDescriptorSet>());
+        std::unique_ptr<VulkanResourceBlock<4>> resourceBlock = block.release<std::unique_ptr<VulkanResourceBlock<4>>>();
+        freeResourceBlock(resourceBlock->mHandle);
     }
 
     VulkanRenderContext &VulkanRenderContext::getSingleton()
@@ -721,8 +831,6 @@ namespace Render {
 
         VkResult result = vkBeginCommandBuffer(buffer, &beginInfo);
         VK_CHECK(result);
-
-        vkCmdBindDescriptorSets(buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipelineLayout, 6, 1, &mSamplerDescriptorSet, 0, nullptr);
 
         return { buffer, std::move(waitSemaphores), std::move(signalSemaphores) };
     }
@@ -827,10 +935,6 @@ namespace Render {
             co_await res.second.forceUnload();
         }
 
-        for (std::pair<const std::string, VulkanTextureLoader::Resource> &res : VulkanTextureLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
-
         for (std::pair<const std::string, VulkanMeshLoader::Resource> &res : VulkanMeshLoader::getSingleton()) {
             co_await res.second.forceUnload();
         }
@@ -906,27 +1010,6 @@ namespace Render {
         result = vkSetDebugUtilsObjectNameEXT(GetDevice(), &nameInfo);
         VK_CHECK(result);
 
-        VkDescriptorSetLayoutBinding imagePushLayoutBindings[4] {};
-        for (size_t i = 0; i < 4; ++i) {
-            imagePushLayoutBindings[i].binding = i;
-            imagePushLayoutBindings[i].descriptorType = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
-            imagePushLayoutBindings[i].descriptorCount = 1;
-            imagePushLayoutBindings[i].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-            imagePushLayoutBindings[i].pImmutableSamplers = nullptr;
-        }
-
-        layoutInfo.bindingCount = 4;
-        layoutInfo.pBindings = imagePushLayoutBindings;
-        layoutInfo.flags = 0;
-
-        result = vkCreateDescriptorSetLayout(*sDevice, &layoutInfo, nullptr, &mResourceBlockDescriptorSetLayout);
-        VK_CHECK(result);
-
-        nameInfo.objectHandle = reinterpret_cast<uintptr_t>(mUBODescriptorSetLayout.get());
-        nameInfo.pObjectName = "ResourceBlock Layout";
-        result = vkSetDebugUtilsObjectNameEXT(GetDevice(), &nameInfo);
-        VK_CHECK(result);
-
         layoutInfo.flags = 0;
         layoutInfo.pNext = nullptr;
 
@@ -969,18 +1052,6 @@ namespace Render {
         result = vkSetDebugUtilsObjectNameEXT(GetDevice(), &nameInfo);
         VK_CHECK(result);
 
-        VkDescriptorSetLayout descriptorSetLayouts[7] = { mUBODescriptorSetLayout, mHeapDescriptorSetLayout, mTempBufferDescriptorSetLayout, mResourceBlockDescriptorSetLayout, mResourceBlockDescriptorSetLayout, mResourceBlockDescriptorSetLayout, mSamplerDescriptorSetLayout };
-
-        VkPipelineLayoutCreateInfo pipelineLayoutInfo {};
-        pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        pipelineLayoutInfo.setLayoutCount = 7; // Optional
-        pipelineLayoutInfo.pSetLayouts = descriptorSetLayouts; // Optional
-        pipelineLayoutInfo.pushConstantRangeCount = 0; // Optional
-        pipelineLayoutInfo.pPushConstantRanges = nullptr; // Optional
-
-        result = vkCreatePipelineLayout(*sDevice, &pipelineLayoutInfo, nullptr, &mPipelineLayout);
-        VK_CHECK(result);
-
         VkDescriptorSetAllocateInfo allocInfo {};
         allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
         allocInfo.descriptorPool = mDescriptorPool;
@@ -995,9 +1066,73 @@ namespace Render {
         result = vkSetDebugUtilsObjectNameEXT(GetDevice(), &nameInfo);
         VK_CHECK(result);
 
-        mDefaultTexture.setData({ 64, 64 }, sUnboundDefaultTexture);
+        mDefaultTexture = std::make_shared<VulkanTexture>(TextureType_2D, false, TextureFormat::FORMAT_RGBA8_SRGB, Vector2i { 64, 64 }, 1, sUnboundDefaultTexture);
+    }
 
-        mDefaultResourceBlockDescriptorSet = allocateResourceBlock({});
+    VkPipelineLayout VulkanRenderContext::fetchLayout(const PipelineSignature &signature)
+    {
+        auto [it, b] = mPipelineLayouts.try_emplace(signature);
+        if (b) {
+            std::vector<VkDescriptorSetLayout> descriptorSetLayouts = { mUBODescriptorSetLayout, mHeapDescriptorSetLayout, mTempBufferDescriptorSetLayout, mSamplerDescriptorSetLayout };
+            for (const ResourceBlockSignature &blockSignature : signature.mResourceBlocks) {
+                descriptorSetLayouts.push_back(fetchSetLayout(blockSignature));
+            }
+
+            VkPipelineLayoutCreateInfo pipelineLayoutInfo {};
+            pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+            pipelineLayoutInfo.setLayoutCount = descriptorSetLayouts.size(); // Optional
+            pipelineLayoutInfo.pSetLayouts = descriptorSetLayouts.data(); // Optional
+            pipelineLayoutInfo.pushConstantRangeCount = 0; // Optional
+            pipelineLayoutInfo.pPushConstantRanges = nullptr; // Optional
+
+            VkResult result = vkCreatePipelineLayout(*sDevice, &pipelineLayoutInfo, nullptr, &it->second);
+            VK_CHECK(result);
+        }
+        return it->second;
+    }
+
+    VkDescriptorSetLayout VulkanRenderContext::fetchSetLayout(const ResourceBlockSignature &signature)
+    {
+        auto [it, b] = mResourceBlockDescriptorSetLayouts.try_emplace(signature);
+        if (b) {
+            std::vector<VkDescriptorSetLayoutBinding> layoutBindings;
+            layoutBindings.resize(signature.mTypes.size());
+            for (size_t i = 0; i < signature.mTypes.size(); ++i) {
+                layoutBindings[i].binding = i;
+                switch (signature.mTypes[i]) {
+                case ResourceBlockType::StructuredBuffer:
+                    layoutBindings[i].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+                    break;
+                case ResourceBlockType::ConstantBuffer:
+                    layoutBindings[i].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+                    break;
+                case ResourceBlockType::Texture:
+                    layoutBindings[i].descriptorType = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+                    break;
+                }
+                layoutBindings[i].descriptorCount = 1;
+                layoutBindings[i].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+                layoutBindings[i].pImmutableSamplers = nullptr;
+            }
+
+            VkDescriptorSetLayoutCreateInfo layoutInfo {};
+            layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+            layoutInfo.bindingCount = layoutBindings.size();
+            layoutInfo.pBindings = layoutBindings.data();
+            layoutInfo.flags = 0;
+
+            VkResult result = vkCreateDescriptorSetLayout(*sDevice, &layoutInfo, nullptr, &it->second);
+            VK_CHECK(result);
+
+            VkDebugUtilsObjectNameInfoEXT nameInfo {};
+            nameInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
+            nameInfo.objectType = VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT;
+            nameInfo.objectHandle = reinterpret_cast<uintptr_t>(it->second.get());
+            nameInfo.pObjectName = "ResourceBlock Layout";
+            result = vkSetDebugUtilsObjectNameEXT(*sDevice, &nameInfo);
+            VK_CHECK(result);
+        }
+        return it->second;
     }
 
     static constexpr VkFormat vFormats[] = {

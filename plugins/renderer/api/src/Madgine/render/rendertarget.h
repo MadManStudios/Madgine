@@ -17,9 +17,9 @@ namespace Render {
 
         virtual void clearDepthBuffer() = 0;
 
-        virtual const Texture *texture(size_t index = 0) const;
+        virtual ConstTexturePtr texture(size_t index = 0) const;
         virtual size_t textureCount() const;
-        virtual const Texture *depthTexture() const;
+        virtual ConstTexturePtr depthTexture() const;
 
         virtual Matrix4 getClipSpaceMatrix() const;
 

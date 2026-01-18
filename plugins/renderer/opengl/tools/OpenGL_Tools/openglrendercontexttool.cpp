@@ -33,15 +33,15 @@ namespace Tools {
 
     Threading::Task<bool> OpenGLRenderContextTool::init()
     {
-        mImageTexture = { Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB };
+        mImageTexture = std::make_shared<Render::OpenGLTexture>(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
 
         getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](Resources::ImageLoader::Resource *image) {
             Resources::ImageLoader::Handle data = image->loadData();
             data.info()->setPersistent(true);
 
             if (data.available()) {
-                mImageTexture.setData(data->mSize, data->mBuffer);
-                ImGui::Image((void *)(uintptr_t)mImageTexture.resourceBlock(), data->mSize);
+                mImageTexture = std::make_shared<Render::OpenGLTexture>(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, data->mSize, 1, data->mBuffer);
+                ImGui::Image((void *)(uintptr_t)mImageTexture->resourceBlock(), data->mSize);
             }
             return false;
         });

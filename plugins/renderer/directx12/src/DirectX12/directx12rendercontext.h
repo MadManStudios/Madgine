@@ -35,17 +35,22 @@ namespace Render {
 
         virtual bool supportsMultisampling() const override;
 
-        virtual GPUBuffer<void> allocateBufferImpl(size_t size) override;
-        virtual void deallocateBufferImpl(GPUBuffer<void> buffer) override;
-        virtual WritableByteBuffer mapBufferImpl(GPUBuffer<void> &buffer) override;
+        virtual GPUPtr<void> allocateBufferImpl(size_t size) override;    
+        virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count) override;
+        virtual WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
+        virtual WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture *> textures) override;
+        virtual UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures) override;
         virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
 
-        static DirectX12RenderContext &getSingleton();
+        TexturePtr createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data) override;
 
-        void createRootSignature();
-        void setupRootSignature(ID3D12GraphicsCommandList *list);
+        void setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) override;
+
+        static DirectX12RenderContext &getSingleton();
+        
+        ID3D12RootSignature *getRootSignature(const PipelineSignature &signature);
+        void setupRootSignature(ID3D12RootSignature *signature, ID3D12GraphicsCommandList *list);
 
         DirectX12CommandList fetchCommandList(D3D12_COMMAND_LIST_TYPE type);
 
@@ -57,8 +62,9 @@ namespace Render {
         DirectX12DescriptorHeap mRenderTargetDescriptorHeap;
         DirectX12DescriptorHeap mDepthStencilDescriptorHeap;
 
-        ReleasePtr<ID3D12RootSignature> mRootSignature;
         ReleasePtr<IDXGIFactory4> mFactory;
+
+        std::map<PipelineSignature, ReleasePtr<ID3D12RootSignature>> mRootSignatures;
 
         DirectX12QueryHeap mTimestampQueryHeap;
 

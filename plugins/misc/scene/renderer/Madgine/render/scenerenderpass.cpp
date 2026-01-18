@@ -55,9 +55,11 @@ namespace Render {
         addDependency(mShadowMap.get());
         addDependency(&mPointShadowRenderData);
 
-        std::vector<const Texture *> textures = mPointShadowRenderData.depthTextures();
+        std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures;
+        std::ranges::move(mPointShadowRenderData.depthTextures(), std::back_inserter(textures));        
         textures.insert(textures.begin(), mShadowMap->depthTexture());
-        mShadowResourceBlock = target->context()->createResourceBlock(textures);
+        mShadowResourceBlock = target->context()->createResourceBlock(std::move(textures));
+
     }
 
     void SceneRenderPass::shutdown(RenderTarget *target)
@@ -141,7 +143,7 @@ namespace Render {
             if (material)
                 mPipeline->bindResources(target, 2, material);
             else
-                mPipeline->bindResources(target, 2, {});
+                mPipeline->bindResources(target, 2, mData.mRenderData.defaultMaterial());
 
             {
                 auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, instance.second.size());

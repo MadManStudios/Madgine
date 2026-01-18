@@ -25,7 +25,7 @@ namespace Tools {
         std::string_view key() const override;
 
     private:
-        Render::VulkanTexture mImageTexture;
+        std::shared_ptr<Render::VulkanTexture> mImageTexture;
         size_t mLastFrameTempBytes = 0;
         float mTimeBank = 0.0f;
 

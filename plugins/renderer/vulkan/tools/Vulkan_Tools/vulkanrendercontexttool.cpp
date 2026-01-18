@@ -34,14 +34,14 @@ namespace Tools {
 
     Threading::Task<bool> VulkanRenderContextTool::init()
     {
-        mImageTexture = { Render::TextureType_2D, false, Render::FORMAT_RGBA8, { 100, 100 } };
+        mImageTexture = std::make_shared<Render::VulkanTexture>(Render::TextureType_2D, false, Render::FORMAT_RGBA8, Vector2i{ 100, 100 });
 
         getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](Resources::ImageLoader::Resource *image) {
             Resources::ImageLoader::Handle data = image->loadData();
             data.info()->setPersistent(true);
 
-            mImageTexture.setData(data->mSize, data->mBuffer);
-            ImGui::Image((void *)mImageTexture.handle(), data->mSize);
+            mImageTexture = std::make_shared<Render::VulkanTexture>(Render::TextureType_2D, false, Render::FORMAT_RGBA8, data->mSize, 1, data->mBuffer);
+            ImGui::Image((void *)mImageTexture->handle(), data->mSize);
 
             return false;
         });

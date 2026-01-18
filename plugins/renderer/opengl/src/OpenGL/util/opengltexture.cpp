@@ -5,6 +5,8 @@
 #include "Generic/areaview.h"
 #include "Generic/bytebuffer.h"
 
+#include "Generic/functor.h"
+
 namespace Engine {
 namespace Render {
 
@@ -27,8 +29,7 @@ namespace Render {
         }
 #endif
 
-        mBlock.mResources[0].mHandle = mTextureHandle.as<GLuint>();
-        mBlock.mResources[0].mTarget = target();
+        mBlock.mResources[0] = ConstTexturePtr { this, NoOpFunctor {} };
         mResourceBlock.setupAs<OpenGLResourceBlock<1> *>() = &mBlock;
 
         GLenum internalStorage;
@@ -158,11 +159,6 @@ namespace Render {
     {
         glBindTexture(target(), mTextureHandle.as<GLuint>());
         GL_CHECK();
-    }
-
-    void OpenGLTexture::setData(Vector2i size, const ByteBuffer &data)
-    {
-        *this = OpenGLTexture { mType, mFormat, size, mSamples, data };
     }
 
     void OpenGLTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)

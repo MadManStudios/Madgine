@@ -17,7 +17,7 @@ namespace Render {
         void deallocate(Block block);
 
         /* ID3D12Heap *heap(size_t index);*/
-        std::pair<VkBuffer, size_t> resolve(void *ptr);
+        std::tuple<VkBuffer, VkDeviceMemory, size_t> resolve(void *ptr);
 
         /* D3D12_GPU_DESCRIPTOR_HANDLE descriptorTable() const;*/
 

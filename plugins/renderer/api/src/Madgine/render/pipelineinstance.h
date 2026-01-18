@@ -36,18 +36,12 @@ namespace Render {
             return mapParameters(index).cast<T>();
         }
 
-        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size) const = 0;
-        template <typename T>
-            requires(!std::is_array_v<T>)
-        ByteBufferImpl<T> mapTempBuffer(size_t space)
-        {
-            return mapTempBuffer(space, sizeof(T)).cast<T>();
-        }
+        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t elementSize, size_t count) const = 0;
         template <typename T>
             requires std::is_unbounded_array_v<T>
         ByteBufferImpl<T> mapTempBuffer(size_t space, size_t count)
         {
-            return mapTempBuffer(space, sizeof(std::remove_extent_t<T>) * count).cast<T>();
+            return mapTempBuffer(space, sizeof(std::remove_extent_t<T>), count).cast<T>();
         }
 
         virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh) const = 0;

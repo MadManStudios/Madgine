@@ -15,5 +15,14 @@ namespace Render {
 
     struct RenderFuture;
 
+    struct ResourceBlock;
+    struct UniqueResourceBlock;
+
+    using ConstTexturePtr = std::shared_ptr<const Texture>;
+    using TexturePtr = std::shared_ptr<Texture>;
+
+    template <typename T>
+    struct GPUPtr;
+
 }
 }

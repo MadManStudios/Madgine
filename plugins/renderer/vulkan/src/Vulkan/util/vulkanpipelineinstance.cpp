@@ -9,7 +9,7 @@
 namespace Engine {
 namespace Render {
 
-    VulkanPipelineInstance::VulkanPipelineInstance(const PipelineConfiguration &config, const VulkanPipeline *pipeline)
+    VulkanPipelineInstance::VulkanPipelineInstance(const PipelineConfiguration &config, const VulkanPipeline &pipeline)
         : PipelineInstance(config)
         , mPipeline(pipeline)
         , mConstantBufferSizes(config.bufferSizes)
@@ -75,18 +75,22 @@ namespace Render {
         size_t samplesBits = sqrt(samples);
         assert(samplesBits * samplesBits == samples);
 
-        VkPipeline pipeline = mPipeline->ptr()[format][groupSize - 1][samplesBits - 1];
+        VkPipeline pipeline = mPipeline.ptr()[format][groupSize - 1][samplesBits - 1];
         if (!pipeline) {
-            pipeline = mPipeline->get(format, groupSize, samples, renderpass, mDepthChecking);
+            pipeline = mPipeline.get(format, groupSize, samples, renderpass, mDepthChecking);
             if (!pipeline)
                 return false;
         }
         vkCmdBindPipeline(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
 
-        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, VulkanRenderContext::getSingleton().mPipelineLayout, 0, 1, &mUboDescriptorSet, mConstantGPUBufferOffsets.size(), mConstantGPUBufferOffsets.data());
+        
+        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 3, 1, &VulkanRenderContext::getSingleton().mSamplerDescriptorSet, 0, nullptr);
+
+
+        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 0, 1, &mUboDescriptorSet, mConstantGPUBufferOffsets.size(), mConstantGPUBufferOffsets.data());
 
         if (!mTempDescriptors.empty())
-            vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, VulkanRenderContext::getSingleton().mPipelineLayout, 2, mTempDescriptors.size(), mTempDescriptors.data(), 0, nullptr);
+            vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 2, mTempDescriptors.size(), mTempDescriptors.data(), 0, nullptr);
 
         return true;
     }
@@ -149,8 +153,10 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer VulkanPipelineInstance::mapTempBuffer(size_t space, size_t size) const
+    WritableByteBuffer VulkanPipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
     {
+        size_t size = elementSize * count;
+
         assert(space >= 1);
         if (mTempDescriptors.size() <= space - 1)
             mTempDescriptors.resize(space);
@@ -251,25 +257,22 @@ namespace Render {
     void VulkanPipelineInstance::bindResources(RenderTarget *_target, size_t space, ResourceBlock block) const
     {
         assert(space > 1);
+        assert(block);
         VulkanRenderTarget *target = static_cast<VulkanRenderTarget *>(_target);
         VkCommandBuffer commandList = target->mCommandList;
-        VkDescriptorSet set;
-        if (block) {
-            set = block;
-        } else {
-            set = target->context()->mDefaultResourceBlockDescriptorSet;
-        }
-        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, target->context()->mPipelineLayout, 1 + space, 1, &set, 0, nullptr);
+        VulkanResourceBlock<1> *resBlock = block;
+        VkDescriptorSet set = resBlock->mHandle;
+        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 2 + space, 1, &set, 0, nullptr);
     }
 
     VulkanPipelineInstanceHandle::VulkanPipelineInstanceHandle(const PipelineConfiguration &config, VulkanPipelineLoader::Handle pipeline)
-        : VulkanPipelineInstance(config, &*pipeline)
+        : VulkanPipelineInstance(config, *pipeline)
         , mPipelineHandle(std::move(pipeline))
     {
     }
 
     VulkanPipelineInstancePtr::VulkanPipelineInstancePtr(const PipelineConfiguration &config, VulkanPipelineLoader::Ptr pipeline)
-        : VulkanPipelineInstance(config, &*pipeline)
+        : VulkanPipelineInstance(config, *pipeline)
         , mPipelinePtr(std::move(pipeline))
     {
     }

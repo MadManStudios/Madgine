@@ -13,7 +13,6 @@
 #include "openglrendertexture.h"
 #include "openglrenderwindow.h"
 #include "openglshaderloader.h"
-#include "opengltextureloader.h"
 
 #if WINDOWS
 #    include "wglext.h"
@@ -637,10 +636,6 @@ namespace Render {
             co_await res.second.forceUnload();
         }
 
-        for (std::pair<const std::string, OpenGLTextureLoader::Resource> &res : OpenGLTextureLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
-
         for (std::pair<const std::string, OpenGLMeshLoader::Resource> &res : OpenGLMeshLoader::getSingleton()) {
             co_await res.second.forceUnload();
         }
@@ -651,19 +646,120 @@ namespace Render {
         return checkMultisampling();
     }
 
-    template <size_t I = 1>
-    struct ResourceBlockBuffer {
-        size_t mSize;
-        const Texture *mTexture[I];
-    };
+    GPUPtr<void> OpenGLRenderContext::allocateBufferImpl(size_t size)
+    {
+        Block allocation = mBufferAllocator.allocate(size);
 
-    UniqueResourceBlock OpenGLRenderContext::createResourceBlock(std::vector<const Texture *> textures)
+        if (!allocation.mAddress)
+            return {};
+
+        return { allocation.mAddress, size, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
+    }
+
+    GPUPtr<Void[]> Engine::Render::OpenGLRenderContext::allocateBufferImpl(size_t elementSize, size_t count)
+    {
+        Block allocation = mBufferAllocator.allocate(elementSize * count);
+
+        if (!allocation.mAddress)
+            return {};
+
+        return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
+    }
+
+    WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    {
+        auto [glBuffer, offset] = mBufferMemoryHeap.resolve(buffer.get());
+
+#if !OPENGL_ES
+        void *result = glMapNamedBufferRange(glBuffer, offset, buffer.size(), GL_MAP_WRITE_BIT);
+
+        struct Deleter {
+            void operator()(void *ptr)
+            {
+                glUnmapNamedBuffer(mBuffer);
+            }
+
+            GLuint mBuffer;
+        };
+
+        return { std::unique_ptr<void, Deleter> { result, Deleter { glBuffer } }, buffer.size() };
+#else
+        struct Deleter {
+            void operator()(void *data) const
+            {
+                glBindBuffer(GL_COPY_WRITE_BUFFER, mBuffer);
+                GL_CHECK();
+
+                glBufferSubData(GL_COPY_WRITE_BUFFER, mOffset, mSize, data);
+                GL_CHECK();
+
+                delete[] data;
+            }
+
+            GLuint mBuffer;
+            size_t mOffset;
+            size_t mSize;
+        };
+
+        return { std::unique_ptr<void, Deleter> { new std::byte[buffer.size()], { glBuffer, offset, buffer.size() } }, buffer.size() };
+#endif
+    }
+
+    WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+    {
+        auto [glBuffer, offset] = mBufferMemoryHeap.resolve(buffer.get());
+
+#if !OPENGL_ES
+        void *result = glMapNamedBufferRange(glBuffer, offset, buffer.size(), GL_MAP_WRITE_BIT);
+
+        struct Deleter {
+            void operator()(void *ptr)
+            {
+                glUnmapNamedBuffer(mBuffer);
+            }
+
+            GLuint mBuffer;
+        };
+
+        return { std::unique_ptr<void, Deleter> { result, Deleter { glBuffer } }, buffer.size() };
+#else
+        struct Deleter {
+            void operator()(void *data) const
+            {
+                glBindBuffer(GL_COPY_WRITE_BUFFER, mBuffer);
+                GL_CHECK();
+
+                glBufferSubData(GL_COPY_WRITE_BUFFER, mOffset, mSize, data);
+                GL_CHECK();
+
+                delete[] data;
+            }
+
+            GLuint mBuffer;
+            size_t mOffset;
+            size_t mSize;
+        };
+
+        return { std::unique_ptr<void, Deleter> { new std::byte[buffer.size()], { glBuffer, offset, buffer.size() } }, buffer.size() };
+#endif
+    }
+
+    TexturePtr OpenGLRenderContext::createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data)
+    {
+        return std::make_shared<OpenGLTexture>(type, format, size, 1, data);
+    }
+
+    void OpenGLRenderContext::setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data)
+    {
+        static_cast<OpenGLTexture &>(*tex).setSubData(offset, size, data);
+    }
+
+    UniqueResourceBlock OpenGLRenderContext::createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> data)
     {
         std::unique_ptr<OpenGLResourceBlock<4>> ptr = std::make_unique<OpenGLResourceBlock<4>>();
-        ptr->mSize = textures.size();
-        for (size_t i = 0; i < textures.size(); ++i) {
-            ptr->mResources[i].mHandle = textures[i]->handle();
-            ptr->mResources[i].mTarget = static_cast<const OpenGLTexture *>(textures[i])->target();
+        ptr->mSize = data.size();
+        for (size_t i = 0; i < data.size(); ++i) {
+            ptr->mResources[i] = std::move(data[i]);
         }
 
         UniqueResourceBlock block;
@@ -745,6 +841,5 @@ namespace Render {
         GL_CHECK();
 #endif
     }
-
 }
 }

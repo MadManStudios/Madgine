@@ -14,6 +14,8 @@ namespace Render {
         Block allocate(size_t size, size_t alignment = 1);
         void deallocate(Block block);
 
+        std::pair<GLuint, size_t> resolve(void *ptr);
+
     private:
     };
 

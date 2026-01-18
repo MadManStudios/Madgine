@@ -39,17 +39,21 @@ namespace Render {
 
         Handle pipeline;
         if (!co_await pipeline.create(name, {}, [config](VulkanPipelineLoader *loader, VulkanPipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
+                PipelineSignature signature = config.vs->signature();
                 VulkanShaderLoader::Handle vertexShader;
                 if (!co_await vertexShader.load(config.vs, VertexShader)) {
                     LOG_ERROR("Failed to load VS '" << config.vs << "'!");
                     co_return false;
+                }
+                if (config.ps) {
+                    signature = signature.merge(config.ps->signature());
                 }
                 VulkanShaderLoader::Handle pixelShader;
                 if (config.ps && !co_await pixelShader.load(config.ps, PixelShader)) {
                     LOG_ERROR("Failed to load PS '" << config.ps << "'!");
                     co_return false;
                 }
-                co_return pipeline.link(std::move(vertexShader), config.vs->entrypoint(), std::move(pixelShader), config.ps ? config.ps->entrypoint() : "");
+                co_return pipeline.link(signature, std::move(vertexShader), config.vs->entrypoint(), std::move(pixelShader), config.ps ? config.ps->entrypoint() : "");
             }))
             co_return false;
 

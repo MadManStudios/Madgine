@@ -15,6 +15,7 @@ namespace Render {
         Im3DRenderPass(Im3D::Im3DContext *context, Camera *camera, int priority);
 
         void setup(RenderTarget *target) override;
+        void shutdown(RenderTarget *target) override;
         void render(RenderTarget *target, size_t iteration) override;
 
         int priority() const override;
@@ -27,6 +28,8 @@ namespace Render {
         Camera *mCamera;
 
         int mPriority;
+
+        UniqueResourceBlock mDefaultBlock;
     };
 
 }

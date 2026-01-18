@@ -45,12 +45,19 @@ namespace Render {
 
             std::vector<Threading::TaskFuture<bool>> futures;
 
-            data.mTextureCache.emplace_back();
-            data.mTextureCache.emplace_back();
-            TextureLoader::Handle &diffuseTexture = data.mTextureCache[data.mTextureCache.size() - 2];
-            TextureLoader::Handle &emissiveTexture = data.mTextureCache[data.mTextureCache.size() - 1];
-            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));
-            futures.push_back(emissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
+            TexturePtr diffuseTexture;
+            TexturePtr emissiveTexture;
+
+            Resources::ImageLoader::Handle diffuseImage;
+            Resources::ImageLoader::Handle emissiveImage;
+
+            if (!mat.mDiffuseName.empty()) {
+                futures.push_back(diffuseImage.load(mat.mDiffuseName));
+            }
+
+            if (!mat.mEmissiveName.empty()) {
+                futures.push_back(emissiveImage.load(mat.mEmissiveName));
+            }
 
             for (Threading::TaskFuture<bool> &fut : futures) {
                 bool result = co_await fut;
@@ -60,7 +67,22 @@ namespace Render {
                 }
             }
 
-            gpuMat.mResourceBlock = DirectX12RenderContext::getSingleton().createResourceBlock({ &*diffuseTexture, &*emissiveTexture });
+            if (diffuseImage)
+                diffuseTexture = DirectX12RenderContext::getSingleton().createTexture(TextureType_2D, TextureFormat::FORMAT_RGBA8_SRGB, diffuseImage->mSize, diffuseImage->mBuffer);
+            if (emissiveImage)
+                emissiveTexture = DirectX12RenderContext::getSingleton().createTexture(TextureType_2D, TextureFormat::FORMAT_RGBA8_SRGB, emissiveImage->mSize, emissiveImage->mBuffer);
+
+            struct helper {
+                float shininess;
+            };
+            GPUPtr<helper> buffer = DirectX12RenderContext::getSingleton().allocateBuffer<helper>();
+
+            {
+                auto mapped = DirectX12RenderContext::getSingleton().mapBuffer(buffer);
+                mapped->shininess = 32.0f;
+            }
+
+            gpuMat.mResourceBlock = DirectX12RenderContext::getSingleton().createResourceBlock({ std::move(diffuseTexture), std::move(emissiveTexture), buffer });
         }
 
         co_return true;

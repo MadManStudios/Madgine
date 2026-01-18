@@ -8,6 +8,7 @@
 
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendertarget.h"
+#include "Madgine/render/texture.h"
 #include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/widgets/util/widgetsrenderdata.h"
 #include "Madgine/widgets/widget.h"

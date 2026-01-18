@@ -10,13 +10,13 @@ namespace Render {
 
     struct MADGINE_VULKAN_EXPORT VulkanPipelineInstance : PipelineInstance {
 
-        VulkanPipelineInstance(const PipelineConfiguration &config, const VulkanPipeline *pipeline);
+        VulkanPipelineInstance(const PipelineConfiguration &config, const VulkanPipeline &pipeline);
         ~VulkanPipelineInstance();
 
         bool bind(VkCommandBuffer commandList, VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass) const;
 
         virtual WritableByteBuffer mapParameters(size_t index) override;
-        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size) const override;
+        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t elementSize, size_t count) const override;
 
         virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh) const override;
         virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const override;
@@ -30,7 +30,7 @@ namespace Render {
         virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;
 
     private:
-        const VulkanPipeline *mPipeline;
+        const VulkanPipeline &mPipeline;
 
         std::vector<size_t> mConstantBufferSizes;
         std::vector<uint32_t> mConstantGPUBufferOffsets;

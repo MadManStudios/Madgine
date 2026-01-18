@@ -21,7 +21,7 @@ namespace Render {
     DirectX12RenderTarget::DirectX12RenderTarget(DirectX12RenderContext *context, bool global, std::string name, TextureType type, size_t samples, bool flipFlop, RenderTarget *blitSource)
         : RenderTarget(context, global, name, flipFlop, blitSource)
         , mSamples(samples)
-        , mDepthTexture(type, false, FORMAT_D24, samples)
+        , mDepthTexture(std::make_shared<DirectX12Texture>(type, false, FORMAT_D24, samples))
     {
     }
 
@@ -39,7 +39,7 @@ namespace Render {
 
         size_t count = 1;
         UINT *target = nullptr;
-        switch (mDepthTexture.type()) {
+        switch (mDepthTexture->type()) {
         case TextureType_2D:
             dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
             break;
@@ -56,15 +56,15 @@ namespace Render {
             throw 0;
         }
 
-        mDepthTexture.setData(size, {});
-        mDepthTexture.setName(name() + "DepthTexture");
+        mDepthTexture = std::make_shared<DirectX12Texture>(mDepthTexture->type(), false, FORMAT_D24, size, mSamples);
+        mDepthTexture->setName(name() + "DepthTexture");
 
         for (size_t i = 0; i < count; ++i) {
             if (!mDepthStencilViews[i])
                 mDepthStencilViews[i] = DirectX12RenderContext::getSingleton().mDepthStencilDescriptorHeap.allocate();
             if (target)
                 *target = i;
-            GetDevice()->CreateDepthStencilView(mDepthTexture.resource(), &dsvDesc, DirectX12RenderContext::getSingleton().mDepthStencilDescriptorHeap.cpuHandle(mDepthStencilViews[i]));
+            GetDevice()->CreateDepthStencilView(mDepthTexture->resource(), &dsvDesc, DirectX12RenderContext::getSingleton().mDepthStencilDescriptorHeap.cpuHandle(mDepthStencilViews[i]));
             DX12_CHECK();
         }
     }
@@ -73,22 +73,20 @@ namespace Render {
     {
         RenderTarget::beginFrame();
 
-        mCommandList.Transition(mDepthTexture.resource(), mDepthTexture.readStateFlags(), D3D12_RESOURCE_STATE_DEPTH_WRITE);
+        mCommandList.Transition(mDepthTexture->resource(), mDepthTexture->readStateFlags(), D3D12_RESOURCE_STATE_DEPTH_WRITE);
 
-        mCommandList.attachResource(mDepthTexture.resourcePtr());
+        mCommandList.attachResource(mDepthTexture->resourcePtr());
 
         for (RenderPass *pass : renderPasses()) {
             for (RenderData *data : pass->dependencies()) {
                 DirectX12RenderTexture *tex = dynamic_cast<DirectX12RenderTexture *>(data);
                 if (tex) {
-                    for (const DirectX12Texture &texture : tex->textures())
-                        mCommandList.attachResource(texture.resourcePtr());
+                    for (const std::shared_ptr<DirectX12Texture> &texture : tex->textures())
+                        mCommandList.attachResource(texture->resourcePtr());
                 }
                 context()->mGraphicsQueue.wait(data->lastFrame());
             }
         }
-
-        context()->setupRootSignature(mCommandList);
 
         const Vector2i &screenSize = size();
 
@@ -126,7 +124,7 @@ namespace Render {
     RenderFuture DirectX12RenderTarget::endFrame()
     {
 
-        mCommandList.Transition(mDepthTexture.resource(), D3D12_RESOURCE_STATE_DEPTH_WRITE, mDepthTexture.readStateFlags());
+        mCommandList.Transition(mDepthTexture->resource(), D3D12_RESOURCE_STATE_DEPTH_WRITE, mDepthTexture->readStateFlags());
 
         return RenderTarget::endFrame();
     }

@@ -6,7 +6,6 @@
 #include "Madgine/imageloader/imagedata.h"
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/fonts/fontloader.h"
-#include "Madgine/render/textureloader.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"

@@ -107,6 +107,12 @@ vec3 linearToSrgb(vec3 linearRGB) {
 )");
             }
         }
+
+#    if !MULTISAMPLING
+        auto pos = source.find('\n');
+        assert(pos != std::string::npos);
+        source.insert(pos + 1, "#define sampler2DMS sampler2D\n");
+#    endif
 #endif
 
         const char *cSource = source.data();

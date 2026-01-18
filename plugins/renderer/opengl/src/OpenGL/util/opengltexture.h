@@ -13,10 +13,7 @@ namespace Render {
     template <size_t I = 1>
     struct OpenGLResourceBlock {
         size_t mSize = I;
-        struct {
-            GLenum mTarget;
-            GLint mHandle;
-        } mResources[I];
+        std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>> mResources[I];
     };
 
     struct MADGINE_OPENGL_EXPORT OpenGLTexture : Texture {
@@ -33,7 +30,6 @@ namespace Render {
         void reset();
         void bind() const;
 
-        void setData(Vector2i size, const ByteBuffer &data);
         void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data);
 
         GLenum target() const;

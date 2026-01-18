@@ -5,10 +5,72 @@
 #include "Interfaces/filesystem/fsapi.h"
 #include "Interfaces/filesystem/path.h"
 
+#include "Madgine/render/ptr.h"
+
 #include "shadercache.h"
 
 namespace Engine {
 namespace Render {
+
+    ResourceBlockSignature::ResourceBlockSignature(std::initializer_list<ResourceBlockType> types)
+        : mTypes(types)
+    {
+    }
+
+    PipelineSignature::PipelineSignature(std::initializer_list<ResourceBlockSignature> blocks)
+        : mResourceBlocks(blocks)
+    {
+    }
+
+    ResourceBlockSignature::ResourceBlockSignature(const std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> &data)
+    {
+        std::ranges::transform(data, std::back_inserter(mTypes), [](const std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>> &v) {
+            return std::visit(overloaded {
+                                  [](const ConstTexturePtr &) {
+                                      return ResourceBlockType::Texture;
+                                  },
+                                  [](const GPUPtr<void> &) {
+                                      return ResourceBlockType::ConstantBuffer;
+                                  },
+                                  [](const GPUPtr<Void[]> &) {
+                                      return ResourceBlockType::StructuredBuffer;
+                                  } },
+                v);
+        });
+    }
+
+    ResourceBlockSignature ResourceBlockSignature::merge(const ResourceBlockSignature &other) const
+    {
+        ResourceBlockSignature result;
+        for (size_t i = 0; i < std::max(mTypes.size(), other.mTypes.size()); ++i) {
+            if (i >= mTypes.size()) {
+                result.mTypes.push_back(other.mTypes[i]);
+            } else if (i >= other.mTypes.size()) {
+                result.mTypes.push_back(mTypes[i]);
+            } else if (mTypes[i] == other.mTypes[i]) {
+                result.mTypes.push_back(mTypes[i]);
+            } else {
+                LOG_WARNING("Conflicting resource block types during merge: " << static_cast<int>(mTypes[i]) << " vs " << static_cast<int>(other.mTypes[i]) << ", using first");
+                result.mTypes.push_back(mTypes[i]);
+            }
+        }
+        return result;
+    }
+
+    PipelineSignature PipelineSignature::merge(const PipelineSignature &other) const
+    {
+        PipelineSignature result;
+        for (size_t i = 0; i < std::max(mResourceBlocks.size(), other.mResourceBlocks.size()); ++i) {
+            if (i >= mResourceBlocks.size()) {
+                result.mResourceBlocks.push_back(other.mResourceBlocks[i]);
+            } else if (i >= other.mResourceBlocks.size()) {
+                result.mResourceBlocks.push_back(mResourceBlocks[i]);
+            } else {
+                result.mResourceBlocks.push_back(mResourceBlocks[i].merge(other.mResourceBlocks[i]));
+            }
+        }
+        return result;
+    }
 
     const ShaderObjectBase *ShaderObjectPtr::operator->() const
     {
@@ -105,6 +167,11 @@ namespace Render {
     const ShaderMetadata &MergedShaderObjectBase::metadata() const
     {
         return mMetadata;
+    }
+
+    PipelineSignature MergedShaderObjectBase::signature() const
+    {
+        return mDependencies[0]->signature().merge(mDependencies[1]->signature());
     }
 
     void MergedShaderObjectBase::toHLSLImpl(std::ostream &o, std::string_view r, std::string_view in) const

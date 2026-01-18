@@ -7,6 +7,7 @@
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/renderpass.h"
 #include "Madgine/render/rendertarget.h"
+#include "Madgine/render/texture.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"

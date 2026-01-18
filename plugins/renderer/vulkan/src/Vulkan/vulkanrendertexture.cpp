@@ -17,15 +17,15 @@ namespace Render {
         size_t bufferCount = config.mFlipFlop ? 2 : 1;
 
         for (size_t i = 0; i < config.mTextureCount * bufferCount; ++i) {
-            mTextures.emplace_back(config.mType, true, config.mFormat, config.mSamples);
+            mTextures.emplace_back(std::make_shared<VulkanTexture>(config.mType, true, config.mFormat, config.mSamples));
         }
 
         createRenderPass();
 
         resize(size);
 
-        for (VulkanTexture &tex : mTextures) {
-            tex.setName(config.mName.empty() ? "RenderTexture" : config.mName);
+        for (const std::shared_ptr<VulkanTexture> &tex : mTextures) {
+            tex->setName(config.mName.empty() ? "RenderTexture" : config.mName);
         }
     }
 
@@ -40,14 +40,14 @@ namespace Render {
 
         mSize = size;
 
-        for (VulkanTexture &tex : mTextures) {
-            tex.setData(size, {});
+        for (std::shared_ptr<VulkanTexture> &tex : mTextures) {
+            tex = std::make_shared<VulkanTexture>(tex->type(), true, tex->format(), size, tex->samples());
         }
         setup(size, size, mCreateDepthBufferView);
 
-        VkImageView views[5] { mDepthTexture.view() };
+        VkImageView views[5] { mDepthTexture->view() };
         for (size_t i = 0; i < mTextures.size(); ++i)
-            views[i + 1] = mTextures[i].view();
+            views[i + 1] = mTextures[i]->view();
         VkFramebufferCreateInfo framebufferInfo {};
         framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
         framebufferInfo.renderPass = mRenderPass;
@@ -77,9 +77,9 @@ namespace Render {
         VulkanRenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
-    const Texture *VulkanRenderTexture::texture(size_t index) const
+    ConstTexturePtr VulkanRenderTexture::texture(size_t index) const
     {
-        return &mTextures[index];
+        return mTextures[index];
     }
 
     size_t VulkanRenderTexture::textureCount() const
@@ -104,15 +104,15 @@ namespace Render {
         region.extent.height = mSize.y;
 
         for (size_t i = 0; i < count; ++i) {
-            inputTex->mTextures[i].transition(mCommandList, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
-            mTextures[i].transition(mCommandList, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
-            vkCmdResolveImage(mCommandList, inputTex->mTextures[i].image(), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, mTextures[i].image(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
-            inputTex->mTextures[i].transition(mCommandList, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-            mTextures[i].transition(mCommandList, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            inputTex->mTextures[i]->transition(mCommandList, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+            mTextures[i]->transition(mCommandList, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+            vkCmdResolveImage(mCommandList, inputTex->mTextures[i]->image(), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, mTextures[i]->image(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+            inputTex->mTextures[i]->transition(mCommandList, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            mTextures[i]->transition(mCommandList, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         }
     }
 
-    const std::vector<VulkanTexture> &VulkanRenderTexture::textures() const
+    const std::vector<std::shared_ptr<VulkanTexture>> &VulkanRenderTexture::textures() const
     {
         return mTextures;
     }
@@ -142,7 +142,7 @@ namespace Render {
 
         VkFormat vFormat = VK_FORMAT_UNDEFINED;
         if (!mTextures.empty())
-            vFormat = mTextures.front().format();
+            vFormat = mTextures.front()->vkFormat();
 
         VkSubpassDependency dependencies[2] {};
 

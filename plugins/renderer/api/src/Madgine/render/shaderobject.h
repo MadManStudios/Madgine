@@ -7,6 +7,35 @@
 namespace Engine {
 namespace Render {
 
+    enum class ResourceBlockType {
+        Texture,
+        ConstantBuffer,
+        StructuredBuffer
+    };
+
+    struct MADGINE_RENDER_EXPORT ResourceBlockSignature {
+        ResourceBlockSignature() = default;
+        ResourceBlockSignature(std::initializer_list<ResourceBlockType> types);
+        ResourceBlockSignature(const std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> &data);
+
+        ResourceBlockSignature merge(const ResourceBlockSignature &other) const;
+
+        auto operator<=>(const ResourceBlockSignature &) const = default;
+
+        std::vector<ResourceBlockType> mTypes;
+    };
+
+    struct MADGINE_RENDER_EXPORT PipelineSignature {
+        PipelineSignature() = default;
+        PipelineSignature(std::initializer_list<ResourceBlockSignature>);
+
+        PipelineSignature merge(const PipelineSignature &other) const;
+
+        auto operator<=>(const PipelineSignature &) const = default;
+
+        std::vector<ResourceBlockSignature> mResourceBlocks;
+    };
+
     struct ShaderMetadata {
         Filesystem::Path mPath;
         std::vector<Filesystem::Path> mIncludePaths;
@@ -52,6 +81,7 @@ namespace Render {
 
         virtual std::string entrypoint() const = 0;
         virtual const ShaderMetadata &metadata() const = 0;
+        virtual PipelineSignature signature() const = 0;
         virtual void toHLSL(std::ostream &o) const = 0;
 
     protected:
@@ -77,6 +107,7 @@ namespace Render {
 
         std::string entrypoint() const override;
         const ShaderMetadata &metadata() const override;
+        PipelineSignature signature() const override;
         void toHLSLImpl(std::ostream &o, std::string_view r, std::string_view in) const;
 
     private:
@@ -86,7 +117,8 @@ namespace Render {
     template <fixed_string R, fixed_string In, typename... ConstantBuffers>
     struct MergedShaderObject : ShaderObject<MergedShaderObjectBase, R, In, ConstantBuffers...> {
         using ShaderObject<MergedShaderObjectBase, R, In, ConstantBuffers...>::ShaderObject;
-        void toHLSL(std::ostream& o) const override {
+        void toHLSL(std::ostream &o) const override
+        {
             MergedShaderObjectBase::toHLSLImpl(o, R, In);
         }
     };

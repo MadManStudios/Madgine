@@ -13,9 +13,10 @@ namespace Render {
         DirectX12PipelineInstance(const PipelineConfiguration &config, const DirectX12Pipeline *pipeline);
 
         bool bind(DirectX12RenderTarget *target, VertexFormat vertexFormat, size_t groupSize) const;
+        void bindRootSignature(DirectX12RenderTarget *target) const;
 
         virtual WritableByteBuffer mapParameters(size_t index) override;
-        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t size) const override;
+        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t elementSize, size_t count) const override;
 
         virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh) const override;
         virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const override;

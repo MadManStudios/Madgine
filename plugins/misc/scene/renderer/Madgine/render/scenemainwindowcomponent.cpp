@@ -43,11 +43,15 @@ namespace Render {
     void SceneMainWindowComponent::setup(RenderTarget *target)
     {
         mPointShadowRenderData.setup(target->context());
+
+        mSceneData.setup(target->context());
     }
 
     void SceneMainWindowComponent::shutdown(RenderTarget *target)
     {
         mPointShadowRenderData.shutdown(target->context());
+
+        mSceneData.shutdown(target->context());
     }
 
     Scene::SceneManager &SceneMainWindowComponent::scene()

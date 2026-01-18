@@ -30,7 +30,7 @@ namespace Render {
         mPointShadowMaps[1].reset();
     }
 
-    std::vector<const Texture *> PointShadowRenderData::depthTextures()
+    std::vector<ConstTexturePtr> PointShadowRenderData::depthTextures()
     {
         return { mPointShadowMaps[0]->depthTexture(), mPointShadowMaps[1]->depthTexture() };
     }

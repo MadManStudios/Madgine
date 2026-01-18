@@ -2,6 +2,7 @@
 
 #include "vulkanmeshloader.h"
 
+#include "Madgine/imageloader/imageloader.h"
 #include "Madgine/meshloader/meshdata.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
@@ -41,10 +42,10 @@ namespace Render {
 
             std::vector<Threading::TaskFuture<bool>> futures;
 
-            TextureLoader::Handle &diffuseTexture = data.mTextureCache.emplace_back();
-            futures.push_back(diffuseTexture.loadFromImage(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName, TextureType_2D, FORMAT_RGBA8_SRGB));
-            TextureLoader::Handle &emissiveTexture = data.mTextureCache.emplace_back();
-            futures.push_back(emissiveTexture.loadFromImage(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName, TextureType_2D, FORMAT_RGBA8_SRGB));
+            Resources::ImageLoader::Handle diffuseImage;
+            futures.push_back(diffuseImage.load(mat.mDiffuseName.empty() ? "blank_black" : mat.mDiffuseName));
+            Resources::ImageLoader::Handle emissiveImage;
+            futures.push_back(emissiveImage.load(mat.mEmissiveName.empty() ? "blank_black" : mat.mEmissiveName));
 
             for (Threading::TaskFuture<bool> &fut : futures) {
                 bool result = co_await fut;
@@ -54,7 +55,10 @@ namespace Render {
                 }
             }
 
-            gpuMat.mResourceBlock = VulkanRenderContext::getSingleton().createResourceBlock({ &*diffuseTexture, &*emissiveTexture });
+            TexturePtr diffuseTexture = VulkanRenderContext::getSingleton().createTexture(TextureType_2D, TextureFormat::FORMAT_RGBA8_SRGB, diffuseImage->mSize, diffuseImage->mBuffer);
+            TexturePtr emissiveTexture = VulkanRenderContext::getSingleton().createTexture(TextureType_2D, TextureFormat::FORMAT_RGBA8_SRGB, emissiveImage->mSize, emissiveImage->mBuffer);
+
+            gpuMat.mResourceBlock = VulkanRenderContext::getSingleton().createResourceBlock({ std::move(diffuseTexture), std::move(emissiveTexture) });
         }
 
         co_return true;

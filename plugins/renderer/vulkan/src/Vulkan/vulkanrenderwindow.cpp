@@ -340,7 +340,7 @@ namespace Render {
             VkResult result = vkCreateImageView(GetDevice(), &createInfo, nullptr, &mSwapChainImageViews[i]);
             VK_CHECK(result);
 
-            VkImageView attachments[2] { mDepthTexture.view(), mSwapChainImageViews[i] };
+            VkImageView attachments[2] { mDepthTexture->view(), mSwapChainImageViews[i] };
             VkFramebufferCreateInfo framebufferInfo {};
             framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
             framebufferInfo.renderPass = mRenderPass;

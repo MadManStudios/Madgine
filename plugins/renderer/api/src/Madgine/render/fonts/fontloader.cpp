@@ -16,6 +16,7 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
+#include "Madgine/render/rendercontext.h"
 #include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/serialize/memory/memorymanager.h"
 
@@ -144,10 +145,11 @@ namespace Render {
                     return read(in, b, nullptr);
                 }();
                 if (result.mState == Serialize::StreamState::OK) {
-                    co_return co_await font.mTexture.createTask(TextureType_2D, FORMAT_RGBA8, textureSize, std::move(b));
+                    font.mTexture = RenderContext::getSingleton().createTexture(TextureType_2D, FORMAT_RGBA8, textureSize, std::move(b));
+                    co_return true;
                 }
                 errorReason << result;
-            } else if(fileBufferResult.is_error()) {
+            } else if (fileBufferResult.is_error()) {
                 errorReason << std::move(fileBufferResult).error().mError;
             } else {
                 errorReason << "Cancelled";
@@ -354,8 +356,8 @@ namespace Render {
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
 
-        if (!co_await font.mTexture.createTask(TextureType_2D, FORMAT_RGBA8, textureSize, { texBuffer.get(), 4 * byteSize }))
-            co_return false;
+
+        font.mTexture = RenderContext::getSingleton().createTexture(TextureType_2D, FORMAT_RGBA8, textureSize, { texBuffer.get(), 4 * byteSize });
 
         Filesystem::FileManager cache("msdf_cache");
         Serialize::FormattedSerializeStream out = cache.openWrite(info.resource()->path().parentPath() / (std::string { info.resource()->name() } + ".msdf"), Serialize::Formats::safebinary);
@@ -377,7 +379,7 @@ namespace Render {
 
     Threading::TaskQueue *FontLoader::loadingTaskQueue() const
     {
-        return TextureLoader::getSingleton().loadingTaskQueue();
+        return RenderContext::renderQueue();
     }
 
 }

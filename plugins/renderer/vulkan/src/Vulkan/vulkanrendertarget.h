@@ -32,7 +32,7 @@ namespace Render {
         virtual void setRenderSpace(const Rect2i &space) override;
         virtual void setScissorsRect(const Rect2i &space) override;
 
-        virtual const Texture *depthTexture() const override;
+        virtual ConstTexturePtr depthTexture() const override;
 
         virtual void clearDepthBuffer() override;
 
@@ -49,7 +49,7 @@ namespace Render {
 
         VulkanPtr<VkSemaphore, &vkDestroySemaphore> mRenderSemaphore;
 
-        VulkanTexture mDepthTexture;
+        std::shared_ptr<VulkanTexture> mDepthTexture;
 
         size_t mSamples;
     };

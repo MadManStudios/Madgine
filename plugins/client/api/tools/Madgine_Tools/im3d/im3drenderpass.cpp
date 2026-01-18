@@ -26,6 +26,14 @@ namespace Render {
     void Im3DRenderPass::setup(RenderTarget *target)
     {
         setupImpl(target, HLSL::im3d_VS, HLSL::im3d_PS, { sizeof(HLSL::Im3DPerApplication), 0, sizeof(HLSL::Im3DPerObject) });
+
+        HLSL::im3d_PSResourceBlock0 block;
+        mDefaultBlock = block.toResourceBlock(target->context());
+    }
+
+    void Im3DRenderPass::shutdown(RenderTarget* target)
+    {
+        target->context()->destroyResourceBlock(mDefaultBlock);
     }
 
     void Im3DRenderPass::render(RenderTarget *target, size_t iteration)
@@ -63,7 +71,10 @@ namespace Render {
                 perObject->hasDistanceField = bool(p.second.mFlags & RenderPassFlags_DistanceField);
             }
 
-            mPipeline->bindResources(target, 2, { p.first });
+            ResourceBlock block { p.first };
+            if (!block)
+                block = mDefaultBlock;
+            mPipeline->bindResources(target, 2, block);
 
             for (size_t i = 0; i < IM3D_MESHTYPE_COUNT; ++i) {
                 if (!p.second.mVertices[i].empty()) {

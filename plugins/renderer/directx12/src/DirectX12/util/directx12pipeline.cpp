@@ -8,9 +8,11 @@
 namespace Engine {
 namespace Render {
 
-    bool DirectX12Pipeline::link(typename DirectX12VertexShaderLoader::Handle vertexShader, typename DirectX12PixelShaderLoader::Handle pixelShader)
+    bool DirectX12Pipeline::link(const PipelineSignature &signature, typename DirectX12VertexShaderLoader::Handle vertexShader, typename DirectX12PixelShaderLoader::Handle pixelShader)
     {
         reset();
+
+        mRootSignature = DirectX12RenderContext::getSingleton().getRootSignature(signature);
 
         mVertexShader = std::move(vertexShader);
         mPixelShader = std::move(pixelShader);
@@ -18,9 +20,11 @@ namespace Render {
         return true;
     }
 
-    bool DirectX12Pipeline::link(typename DirectX12VertexShaderLoader::Ptr vertexShader, typename DirectX12PixelShaderLoader::Ptr pixelShader)
+    bool DirectX12Pipeline::link(const PipelineSignature &signature, typename DirectX12VertexShaderLoader::Ptr vertexShader, typename DirectX12PixelShaderLoader::Ptr pixelShader)
     {
         reset();
+
+        mRootSignature = DirectX12RenderContext::getSingleton().getRootSignature(signature);
 
         mVertexShader = std::move(vertexShader);
         mPixelShader = std::move(pixelShader);
@@ -92,7 +96,7 @@ namespace Render {
             pipelineDesc.InputLayout.pInputElementDescs = vertexLayoutDesc.data();
             pipelineDesc.InputLayout.NumElements = vertexLayoutDesc.size();
 
-            pipelineDesc.pRootSignature = DirectX12RenderContext::getSingleton().mRootSignature;
+            pipelineDesc.pRootSignature = mRootSignature;
 
             pipelineDesc.RasterizerState.AntialiasedLineEnable = FALSE;
             pipelineDesc.RasterizerState.CullMode = /*D3D12_CULL_BACK*/ D3D12_CULL_MODE_NONE;
@@ -168,11 +172,17 @@ namespace Render {
         mPipelines.clear();
         mVertexShader = {};
         mPixelShader = {};
+        mRootSignature = nullptr;
     }
 
     void DirectX12Pipeline::setName(std::string_view name)
     {
         mName = name;
+    }
+
+    ID3D12RootSignature *DirectX12Pipeline::rootSignature() const
+    {
+        return mRootSignature;
     }
 
 }

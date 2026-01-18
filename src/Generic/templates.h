@@ -139,7 +139,7 @@ auto patch_void(F &&f, R &&result)
 }
 
 template <typename T, typename R = Void>
-using patch_void_t = std::conditional_t<std::same_as<T, void>, R, T>;
+using patch_void_t = std::conditional_t<std::is_void_v<T>, R, T>;
 
 template <auto a>
 struct auto_holder {

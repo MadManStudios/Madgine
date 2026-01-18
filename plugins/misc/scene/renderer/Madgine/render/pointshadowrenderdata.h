@@ -15,7 +15,7 @@ namespace Render {
         void setup(RenderContext *context);
         void shutdown(RenderContext *context);
 
-        std::vector<const Texture *> depthTextures();
+        std::vector<ConstTexturePtr> depthTextures();
 
         Render::RenderTarget *pointShadowTarget(size_t index);
 

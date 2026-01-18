@@ -13,7 +13,7 @@ namespace Render {
         size_t bufferCount = config.mFlipFlop ? 2 : 1;
 
         for (size_t i = 0; i < config.mTextureCount * bufferCount; ++i) {
-            mTextures.emplace_back(config.mType, true, config.mFormat, config.mSamples);
+            mTextures.emplace_back(std::make_shared<DirectX12Texture>(config.mType, true, config.mFormat, config.mSamples));
         }
 
         size_t count = config.mType == TextureType_Cube ? 6 : 1;
@@ -31,7 +31,7 @@ namespace Render {
 
     bool DirectX12RenderTexture::resizeImpl(const Vector2i &size)
     {
-        if (mDepthTexture.size() == size)
+        if (mDepthTexture->size() == size)
             return false;
 
         if (context()->graphicsQueue()->isComplete(lastFrame())) {
@@ -58,10 +58,10 @@ namespace Render {
         DirectX12RenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
-    const DirectX12Texture *DirectX12RenderTexture::texture(size_t index) const
+    ConstTexturePtr DirectX12RenderTexture::texture(size_t index) const
     {
         int offset = canFlipFlop() ? (1 ^ mFlipFlopIndices[index]) : 0;
-        return &mTextures[textureCount() * offset + index];
+        return mTextures[textureCount() * offset + index];
     }
 
     size_t DirectX12RenderTexture::textureCount() const
@@ -70,12 +70,12 @@ namespace Render {
         return mTextures.size() / bufferCount;
     }
 
-    const DirectX12Texture *DirectX12RenderTexture::depthTexture() const
+    ConstTexturePtr DirectX12RenderTexture::depthTexture() const
     {
-        return &mDepthTexture;
+        return mDepthTexture;
     }
 
-    const std::vector<DirectX12Texture> &DirectX12RenderTexture::textures() const
+    const std::vector<std::shared_ptr<DirectX12Texture>> &DirectX12RenderTexture::textures() const
     {
         return mTextures;
     }
@@ -86,13 +86,13 @@ namespace Render {
         size_t i = 0;
         std::vector<std::array<OffsetPtr, 6>> targetViews = std::move(mTargetViews);
 
-        for (DirectX12Texture &tex : mTextures) {
-            tex.setData(size, {});
-            tex.setName((name().empty() ? "RenderTexture" : name()) + "[" + std::to_string(i) + "]");
+        for (std::shared_ptr<DirectX12Texture> &tex : mTextures) {
+            tex = std::make_shared<DirectX12Texture>(tex->type(), true, tex->format(), size, tex->samples());
+            tex->setName((name().empty() ? "RenderTexture" : name()) + "[" + std::to_string(i) + "]");
 
             D3D12_RENDER_TARGET_VIEW_DESC renderTargetViewDesc {};
 
-            switch (tex.format()) {
+            switch (tex->format()) {
             case FORMAT_RGBA8:
                 renderTargetViewDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
                 break;
@@ -105,7 +105,7 @@ namespace Render {
             default:
                 throw 0;
             }
-            switch (tex.type()) {
+            switch (tex->type()) {
             case TextureType_2D:
                 renderTargetViewDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
                 break;
@@ -118,7 +118,7 @@ namespace Render {
             renderTargetViewDesc.Texture2D.MipSlice = 0;
 
             for (size_t j = 0; j < count; ++j) {
-                GetDevice()->CreateRenderTargetView(tex.resource(), &renderTargetViewDesc, DirectX12RenderContext::getSingleton().mRenderTargetDescriptorHeap.cpuHandle(targetViews[i][j]));
+                GetDevice()->CreateRenderTargetView(tex->resource(), &renderTargetViewDesc, DirectX12RenderContext::getSingleton().mRenderTargetDescriptorHeap.cpuHandle(targetViews[i][j]));
             }
 
             ++i;
@@ -134,15 +134,15 @@ namespace Render {
         for (size_t index = 0; index < count; ++index) {
             int oldOffset = mFlipFlopIndices[index + startIndex];
             int newOffset = 1 ^ mFlipFlopIndices[index + startIndex];
-            mCommandList.Transition(mTextures[size * oldOffset + index + startIndex].resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, mTextures[size * oldOffset + index + startIndex].readStateFlags());
-            mCommandList.Transition(mTextures[size * newOffset + index + startIndex].resource(), mTextures[size * newOffset + index + startIndex].readStateFlags(), D3D12_RESOURCE_STATE_RENDER_TARGET);
+            mCommandList.Transition(mTextures[size * oldOffset + index + startIndex]->resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, mTextures[size * oldOffset + index + startIndex]->readStateFlags());
+            mCommandList.Transition(mTextures[size * newOffset + index + startIndex]->resource(), mTextures[size * newOffset + index + startIndex]->readStateFlags(), D3D12_RESOURCE_STATE_RENDER_TARGET);
         }
         DirectX12RenderTarget::flipTextures(startIndex, count);
     }
 
     Vector2i DirectX12RenderTexture::size() const
     {
-        return mDepthTexture.size();
+        return mDepthTexture->size();
     }
 
     bool DirectX12RenderTexture::skipFrame()
@@ -159,14 +159,14 @@ namespace Render {
     {
         mCommandList = context()->fetchCommandList(D3D12_COMMAND_LIST_TYPE_DIRECT);
 
-        for (DirectX12Texture &tex : mTextures)
-            mCommandList.attachResource(tex.resourcePtr());
+        for (std::shared_ptr<DirectX12Texture> &tex : mTextures)
+            mCommandList.attachResource(tex->resourcePtr());
 
         int bufferCount = canFlipFlop() ? 2 : 1;
         size_t size = mTextures.size() / bufferCount;
         for (size_t index = 0; index < size; ++index) {
             int offset = mFlipFlopIndices[index];
-            mCommandList.Transition(mTextures[size * offset + index].resource(), mTextures[size * offset + index].readStateFlags(), D3D12_RESOURCE_STATE_RENDER_TARGET);
+            mCommandList.Transition(mTextures[size * offset + index]->resource(), mTextures[size * offset + index]->readStateFlags(), D3D12_RESOURCE_STATE_RENDER_TARGET);
         }
 
         DirectX12RenderTarget::beginFrame();
@@ -187,7 +187,7 @@ namespace Render {
         size_t size = mTextures.size() / bufferCount;
         for (size_t index = 0; index < size; ++index) {
             int offset = mFlipFlopIndices[index];
-            mCommandList.Transition(mTextures[size * offset + index].resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, mTextures[size * offset + index].readStateFlags());
+            mCommandList.Transition(mTextures[size * offset + index]->resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, mTextures[size * offset + index]->readStateFlags());
         }
 
         return mCommandList.execute();
@@ -202,7 +202,7 @@ namespace Render {
 
         for (size_t i = 0; i < count; ++i) {
             DXGI_FORMAT xFormat;
-            switch (mTextures[i].format()) {
+            switch (mTextures[i]->format()) {
             case FORMAT_RGBA8:
                 xFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
                 break;
@@ -223,9 +223,9 @@ namespace Render {
             }
 
             int offset = canFlipFlop() ? mFlipFlopIndices[i] : 0;
-            const DirectX12Texture &target = mTextures[textureCount() * offset + i];
+            const DirectX12Texture &target = *mTextures[textureCount() * offset + i];
             mCommandList.Transition(target.resource(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_RESOLVE_DEST);
-            mCommandList->ResolveSubresource(target.resource(), 0, inputTex->texture(i)->resource(), 0, xFormat);
+            mCommandList->ResolveSubresource(target.resource(), 0, static_cast<const DirectX12Texture &>(*inputTex->texture(i)).resource(), 0, xFormat);
             mCommandList.Transition(target.resource(), D3D12_RESOURCE_STATE_RESOLVE_DEST, D3D12_RESOURCE_STATE_RENDER_TARGET);
         }
     }

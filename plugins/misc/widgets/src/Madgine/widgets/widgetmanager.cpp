@@ -73,9 +73,6 @@ namespace Widgets {
         if (!co_await MainWindowComponentBase::init())
             co_return false;
 
-        if (!co_await mData->mAtlas.createTexture())
-            co_return false;
-
 #ifdef MADGINE_MAINWINDOW_LAYOUT
         AtlasLoader::Handle atlas;
         bool hasAtlas = co_await atlas.load(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT));

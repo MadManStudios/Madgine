@@ -21,13 +21,13 @@ namespace Render {
         virtual void beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
         virtual void endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
 
-        virtual const DirectX12Texture *texture(size_t index) const override;
+        virtual ConstTexturePtr texture(size_t index) const override;
         virtual size_t textureCount() const override;
-        virtual const DirectX12Texture *depthTexture() const override;
+        virtual ConstTexturePtr depthTexture() const override;
 
         void blit(RenderTarget *input) const;
 
-        const std::vector<DirectX12Texture> &textures() const;
+        const std::vector<std::shared_ptr<DirectX12Texture>> &textures() const;
 
     protected:
         void resizeBuffers(const Vector2i &size);
@@ -35,7 +35,7 @@ namespace Render {
         void flipTextures(size_t startIndex, size_t count) override;
 
     private:
-        std::vector<DirectX12Texture> mTextures;
+        std::vector<std::shared_ptr<DirectX12Texture>> mTextures;
 
         RenderFuture mResizeFence;
         Vector2i mResizeTarget;

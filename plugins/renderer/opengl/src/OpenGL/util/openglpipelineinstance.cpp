@@ -69,12 +69,12 @@ namespace Render {
         Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size, uniformAlignment());
         auto [buffer, offset] = OpenGLRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 #if !OPENGL_ES
-        glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, block.mSize);
+        glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, alignTo(block.mSize, 16));
         GL_CHECK();
 
         return { block.mAddress, block.mSize };
 #else
-        glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, size);
+        glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, alignTo(block.mSize, 16));
         GL_CHECK();
 
         GLint location = glGetUniformBlockIndex(mHandle, ("buffer" + std::to_string(index)).c_str());
@@ -88,10 +88,10 @@ namespace Render {
         struct Deleter {
             void operator()(std::byte *data) const
             {
-                glBindBuffer(GL_UNIFORM_BUFFER, mBuffer);
+                glBindBuffer(GL_COPY_WRITE_BUFFER, mBuffer);
                 GL_CHECK();
 
-                glBufferSubData(GL_UNIFORM_BUFFER, mOffset, mSize, data);
+                glBufferSubData(GL_COPY_WRITE_BUFFER, mOffset, mSize, data);
                 GL_CHECK();
 
                 delete[] data;
@@ -204,21 +204,23 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer OpenGLPipelineInstance::mapTempBuffer(size_t space, size_t size) const
+    WritableByteBuffer OpenGLPipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
     {
+        size_t size = elementSize * count;
+
         Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size, uniformAlignment());
         auto [buffer, offset] = OpenGLRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
 #if !OPENGL_ES
-        glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4 + (space - 1), buffer, offset, block.mSize);
+        glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4 * space, buffer, offset, block.mSize);
         GL_CHECK();
 
         return { block.mAddress, block.mSize };
 #else
 
-        size_t index = 4 + (space - 1);
+        size_t index = 4 * space;
 
-        glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, size);
+        glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, 10 * elementSize);
         GL_CHECK();
 
         GLint location = glGetUniformBlockIndex(mHandle, ("buffer" + std::to_string(index)).c_str());
@@ -230,10 +232,10 @@ namespace Render {
         struct Deleter {
             void operator()(std::byte *data) const
             {
-                glBindBuffer(GL_UNIFORM_BUFFER, mBuffer);
+                glBindBuffer(GL_COPY_WRITE_BUFFER, mBuffer);
                 GL_CHECK();
 
-                glBufferSubData(GL_UNIFORM_BUFFER, mOffset, mSize, data);
+                glBufferSubData(GL_COPY_WRITE_BUFFER, mOffset, mSize, data);
                 GL_CHECK();
 
                 delete[] data;
@@ -309,10 +311,10 @@ namespace Render {
         struct Deleter {
             void operator()(std::byte *data) const
             {
-                glBindBuffer(GL_UNIFORM_BUFFER, mBuffer);
+                glBindBuffer(GL_COPY_WRITE_BUFFER, mBuffer);
                 GL_CHECK();
 
-                glBufferSubData(GL_UNIFORM_BUFFER, mOffset, mSize, data);
+                glBufferSubData(GL_COPY_WRITE_BUFFER, mOffset, mSize, data);
                 GL_CHECK();
 
                 delete[] data;
@@ -378,22 +380,60 @@ namespace Render {
 
     void OpenGLPipelineInstance::bindResources(RenderTarget *target, size_t space, ResourceBlock block) const
     {
-        if (block) {
-            OpenGLResourceBlock<> *textures = block;
-            for (size_t i = 0; i < textures->mSize; ++i) {
-                size_t index = 4 * (space - 1) + i;
-                glActiveTexture(GL_TEXTURE0 + index);
-                glBindTexture(textures->mResources[i].mTarget, textures->mResources[i].mHandle);
-                GL_CHECK();
+        assert(block);
+        assert(space > 1);
+
+        OpenGLResourceBlock<> *textures = block;
+        for (size_t i = 0; i < textures->mSize; ++i) {
+            size_t index = 4 * space + i;
+            std::visit(overloaded {
+                           [=](const ConstTexturePtr &tex) {
+                               glActiveTexture(GL_TEXTURE0 + index);
+                               if (tex)
+                                   glBindTexture(std::static_pointer_cast<const OpenGLTexture>(tex)->target(), tex->handle());
+                               else
+                                   glBindTexture(GL_TEXTURE_2D, 0);
+
+                               GL_CHECK();
 
 #if OPENGL_ES && OPENGL_ES < 31
-                GLint location = glGetUniformLocation(mHandle, ("texture" + std::to_string(index)).c_str());
-                GL_CHECK();
-                glUseProgram(mHandle);
-                glUniform1i(location, index);
-                GL_CHECK();
+                               GLint location = glGetUniformLocation(mHandle, ("texture" + std::to_string(index)).c_str());
+                               GL_CHECK();
+                               glUseProgram(mHandle);
+                               glUniform1i(location, index);
+                               GL_CHECK();
 #endif
-            }
+                           },
+                           [=](const GPUPtr<void> &ptr) {
+                               auto [buffer, offset] = OpenGLRenderContext::getSingleton().mBufferMemoryHeap.resolve(ptr.get());
+
+                               glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, alignTo(ptr.size(), 16));
+                               GL_CHECK();
+
+#if OPENGL_ES && OPENGL_ES < 31
+                               GLint location = glGetUniformBlockIndex(mHandle, ("buffer" + std::to_string(index)).c_str());
+                               GL_CHECK();
+                               glUniformBlockBinding(mHandle, location, index);
+                               GL_CHECK();
+#endif
+                           },
+                           [=](const GPUPtr<Void[]> &ptr) {
+                               auto [buffer, offset] = OpenGLRenderContext::getSingleton().mBufferMemoryHeap.resolve(ptr.get());
+
+#if OPENGL_ES && OPENGL_ES < 31
+                               glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, alignTo(ptr.size(), 16));
+                               GL_CHECK();
+
+                               GLint location = glGetUniformBlockIndex(mHandle, ("buffer" + std::to_string(index)).c_str());
+                               GL_CHECK();
+                               glUniformBlockBinding(mHandle, location, index);
+                               GL_CHECK();
+#else
+                               glBindBufferRange(GL_SHADER_STORAGE_BUFFER, index, buffer, offset, alignTo(ptr.size(), 16));
+                               GL_CHECK();
+#endif
+                           } },
+                textures->mResources[i]);
         }
     }
 

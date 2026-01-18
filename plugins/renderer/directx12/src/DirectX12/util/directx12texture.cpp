@@ -3,6 +3,7 @@
 #include "directx12texture.h"
 
 #include "Generic/align.h"
+#include "Generic/functor.h"
 
 #include "../directx12rendercontext.h"
 
@@ -125,7 +126,9 @@ namespace Render {
         }
 
         OffsetPtr handle = DirectX12RenderContext::getSingleton().mDescriptorHeap.allocate();
-        mResourceBlock.setupAs<D3D12_GPU_DESCRIPTOR_HANDLE>() = DirectX12RenderContext::getSingleton().mDescriptorHeap.gpuHandle(handle);
+        mBlock.mHandle = DirectX12RenderContext::getSingleton().mDescriptorHeap.gpuHandle(handle);
+        mBlock.mResources[0] = ConstTexturePtr { this, NoOpFunctor {} };
+        mResourceBlock.setupAs<DirectX12ResourceBlock<1> *>() = &mBlock;
         createShaderResourceView(handle);
     }
 
@@ -160,14 +163,10 @@ namespace Render {
     {
         if (mTextureHandle) {
             mTextureHandle.release<ID3D12Resource *>()->Release();
-            DirectX12RenderContext::getSingleton().mDescriptorHeap.deallocate(DirectX12RenderContext::getSingleton().mDescriptorHeap.fromGpuHandle({ mResourceBlock.release<UINT64>() }));
+            mResourceBlock.release<DirectX12ResourceBlock<1> *>();
+            DirectX12RenderContext::getSingleton().mDescriptorHeap.deallocate(DirectX12RenderContext::getSingleton().mDescriptorHeap.fromGpuHandle(mBlock.mHandle));
             mSamples = 0;
         }
-    }
-
-    void DirectX12Texture::setData(Vector2i size, const ByteBuffer &data)
-    {
-        *this = DirectX12Texture { mType, mIsRenderTarget, mFormat, size, mSamples, data };
     }
 
     void DirectX12Texture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)

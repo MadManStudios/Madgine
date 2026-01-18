@@ -2,6 +2,8 @@
 
 #include "openglheapallocator.h"
 
+#include "Generic/align.h"
+
 #include "Madgine/render/ptr.h"
 
 namespace Engine {
@@ -13,29 +15,37 @@ namespace Render {
 
     Block OpenGLHeapAllocator::allocate(size_t size, size_t alignment)
     {
-        /* GPUPtr<void> ptr;
+        GLuint buffer;
 
-        glGenBuffers(1, &ptr.mBuffer.mIndex);
+        glGenBuffers(1, &buffer);
         GL_CHECK();
 
-        glBindBuffer(GL_SHADER_STORAGE_BUFFER, ptr.mBuffer);
+        glBindBuffer(GL_COPY_WRITE_BUFFER, buffer);
         GL_CHECK();
 
-        glBufferData(GL_SHADER_STORAGE_BUFFER, size, nullptr, GL_DYNAMIC_COPY);
+        glBufferData(GL_COPY_WRITE_BUFFER, size, nullptr, GL_DYNAMIC_COPY);
         GL_CHECK();
 
-        return { reinterpret_cast<void *&>(ptr), size };*/
-        throw 0;
+        return { reinterpret_cast<void *>(static_cast<uintptr_t>(buffer) << 24), size };
     }
 
     void OpenGLHeapAllocator::deallocate(Block block)
     {
-        /* GPUPtr<void> ptr = reinterpret_cast<GPUPtr<void> &>(block.mAddress);
-        assert(ptr.mOffset == 0 && ptr.mBuffer != 0);
+        uintptr_t ptr = reinterpret_cast<uintptr_t>(block.mAddress);
+        uint32_t buffer = ptr >> 24;
+        uint32_t offset = ptr & ((1 << 24) - 1);
+        assert(offset == 0 && buffer != 0);
 
-        glDeleteBuffers(1, &ptr.mBuffer.mIndex);
-        GL_CHECK();*/
-        throw 0;
+        glDeleteBuffers(1, &buffer);
+        GL_CHECK();
+    }
+
+    std::pair<GLuint, size_t> OpenGLHeapAllocator::resolve(void *ptr)
+    {
+        uintptr_t address = reinterpret_cast<uintptr_t>(ptr);
+        uint32_t buffer = address >> 24;
+        uint32_t offset = address & ((1 << 24) - 1);
+        return { buffer, offset };
     }
 
     OpenGLMappedHeapAllocator::OpenGLMappedHeapAllocator(
@@ -70,11 +80,11 @@ namespace Render {
         return { ptr, size };
 
 #else
-        GPUPtr<void> ptr;
-        glGenBuffers(1, &ptr.mBuffer.mIndex);
+        GLuint handle;
+        glGenBuffers(1, &handle);
         GL_CHECK();
 
-        glBindBuffer(mTarget, ptr.mBuffer);
+        glBindBuffer(mTarget, handle);
         GL_CHECK();
 
         glBufferData(mTarget, size, nullptr, GL_DYNAMIC_DRAW);
@@ -83,7 +93,7 @@ namespace Render {
         glBindBuffer(mTarget, 0);
         GL_CHECK();
 
-        return { ptr.encode(), size };
+        return { reinterpret_cast<void *>(static_cast<uintptr_t>(handle) << 24), size };
 #endif
     }
 
@@ -97,9 +107,9 @@ namespace Render {
 
         mPages.erase(it);
 #else
-        GPUPtr<void> gpuPtr { block.mAddress };
+        GLuint handle = reinterpret_cast<uintptr_t>(block.mAddress) >> 24;
 
-        glDeleteBuffers(1, &gpuPtr.mBuffer.mIndex);
+        glDeleteBuffers(1, &handle);
 #endif
     }
 
@@ -112,8 +122,10 @@ namespace Render {
         assert(it != mPages.end());
         return { it->mBuffer, static_cast<std::byte *>(ptr) - static_cast<std::byte *>(it->mMappedAddress) };
 #else
-        GPUPtr<void> gpuPtr { ptr };
-        return { gpuPtr.mBuffer, gpuPtr.mOffset };
+        GLuint handle = reinterpret_cast<uintptr_t>(ptr) >> 24;
+        uint32_t offset = reinterpret_cast<uintptr_t>(ptr) & ((1 << 24) - 1);
+
+        return { handle, offset };
 #endif
     }
 

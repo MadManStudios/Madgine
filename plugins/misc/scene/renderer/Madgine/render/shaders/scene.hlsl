@@ -93,7 +93,7 @@ export FragmentData scene_VS(AppData IN)
 Texture2D diffuseTex : register(t0, space2);
 Texture2D emissiveTex : register(t1, space2);
 
-//ConstantBuffer<MaterialData> Material : register(b0, space2);
+ConstantBuffer<MaterialData> material : register(b2, space2);
 
 float median(float r, float g, float b)
 {
@@ -107,7 +107,7 @@ export LightingInput scene(FragmentData IN)
     lightInput.albedo = IN.color;
     lightInput.viewPos = IN.viewPos;
     lightInput.emissiveColor = float3(0.0, 0.0, 0.0);
-    lightInput.shininess = 32.0f; //Material.shininess;
+    lightInput.shininess = material.shininess;
 
     lightInput.normal = normalize(IN.normal);
 

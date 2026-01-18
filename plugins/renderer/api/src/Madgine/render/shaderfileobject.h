@@ -2,14 +2,17 @@
 
 #include "shaderobject.h"
 
+#include "Madgine/render/resourceblock.h"
+
 namespace Engine {
 namespace Render {
 
     struct ShaderFileObjectBase : ShaderObjectBase {
-        ShaderFileObjectBase(const ShaderMetadata &metadata, std::string_view entrypoint, std::vector<ShaderObjectPtr> dependencies)
+        ShaderFileObjectBase(const ShaderMetadata &metadata, std::string_view entrypoint, std::vector<ShaderObjectPtr> dependencies, PipelineSignature signature)
             : ShaderObjectBase(std::move(dependencies))
             , mMetadata(metadata)
             , mEntrypoint(entrypoint)
+            , mSignature(std::move(signature))
         {
         }
 
@@ -24,6 +27,10 @@ namespace Render {
         {
             return mMetadata;
         }
+        PipelineSignature signature() const override
+        {
+            return mSignature;
+        }
         void toHLSL(std::ostream &o) const override
         {
             throw 0;
@@ -31,6 +38,7 @@ namespace Render {
 
         const ShaderMetadata &mMetadata;
         std::string mEntrypoint;
+        PipelineSignature mSignature;
     };    
 
     template <fixed_string R, fixed_string In, typename... ConstantBuffers>

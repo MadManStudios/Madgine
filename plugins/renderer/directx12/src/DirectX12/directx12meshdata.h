@@ -2,7 +2,6 @@
 
 #include "Madgine/meshloader/gpumeshdata.h"
 
-#include "directx12textureloader.h"
 #include "util/directx12buffer.h"
 
 namespace Engine {
@@ -13,7 +12,7 @@ namespace Render {
         DirectX12Buffer mVertices;
         DirectX12Buffer mIndices;
 
-        std::vector<TextureLoader::Handle> mTextureCache;
+        std::vector<TexturePtr> mTextureCache;
     };
 
 }

@@ -9,6 +9,14 @@
 
 namespace Engine {
 namespace Render {
+        
+    template <size_t I = 1>
+    struct VulkanResourceBlock {
+        VkDescriptorSet mHandle;
+        size_t mSize = I;
+        std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>> mResources[I];
+    };
+
 
     struct MADGINE_VULKAN_EXPORT VulkanTexture : Texture {
 
@@ -22,13 +30,15 @@ namespace Render {
 
         void reset();
 
-        void setData(Vector2i size, const ByteBuffer &data);
         void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data);
 
         VkImageView view() const;
         VkImage image() const;
 
-        VkFormat format() const;
+        VkFormat vkFormat() const;
+        TextureFormat format() const;
+
+        size_t samples() const;
 
         void setName(std::string_view name);
 
@@ -39,6 +49,7 @@ namespace Render {
         VulkanPtr<VkImageView, &vkDestroyImageView> mImageView;
         bool mIsRenderTarget;
         size_t mSamples;
+        VulkanResourceBlock<1> mBlock;
     };
 
 }

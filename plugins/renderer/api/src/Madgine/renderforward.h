@@ -21,6 +21,9 @@ namespace Render {
     struct RenderDebuggable;
     struct Camera;
 
+    struct ResourceBlockSignature;
+    struct PipelineSignature;
+
     enum ShaderType {
         VertexShader,
         PixelShader

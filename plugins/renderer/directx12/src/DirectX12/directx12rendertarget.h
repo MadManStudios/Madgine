@@ -45,7 +45,7 @@ namespace Render {
 
         size_t mSamples;
 
-        DirectX12Texture mDepthTexture;
+        std::shared_ptr<DirectX12Texture> mDepthTexture;
     };
 
 }

@@ -7,7 +7,7 @@
 #include "Modules/threading/taskfuture.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
-#include "Madgine/render/buffer.h"
+#include "Madgine/render/ptr.h"
 #include "Madgine/render/future.h"
 #include "Madgine/render/resourceblock.h"
 
@@ -44,37 +44,36 @@ namespace Render {
 
         template <typename T>
             requires(!std::is_array_v<T>)
-        GPUBuffer<T> allocateBuffer()
+        GPUPtr<T> allocateBuffer()
         {
-            return static_cast<GPUBuffer<T>>(allocateBufferImpl(sizeof(T)));
+            return static_cast<GPUPtr<T>>(allocateBufferImpl(sizeof(T)));
         }
 
         template <typename T>
             requires std::is_unbounded_array_v<T>
-        GPUBuffer<T> allocateBuffer(size_t elementCount)
+        GPUPtr<T> allocateBuffer(size_t elementCount)
         {
-            return static_cast<GPUBuffer<T>>(allocateBufferImpl(sizeof(std::remove_extent_t<T>) * elementCount));
+            return static_cast<GPUPtr<T>>(allocateBufferImpl(sizeof(std::remove_extent_t<T>), elementCount));
         }
 
         template <typename T>
-        void deallocateBuffer(GPUBuffer<T> buffer)
-        {
-            deallocateBufferImpl(std::move(buffer));
-        }
-
-        template <typename T>
-        auto mapBuffer(GPUBuffer<T> &buffer)
+        auto mapBuffer(GPUPtr<T> &buffer)
         {
             return mapBufferImpl(buffer).template cast<T>();
         }
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<const Texture *> textures) = 0;
+        virtual TexturePtr createTexture(TextureType type, TextureFormat format, Vector2i size = { 0, 0 }, const ByteBuffer &data = {}) = 0;
+        
+        virtual void setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) = 0;
+
+        virtual UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> data) = 0;
         virtual void destroyResourceBlock(UniqueResourceBlock &block) = 0;
 
     protected:
-        virtual GPUBuffer<void> allocateBufferImpl(size_t size) { throw 0; };
-        virtual void deallocateBufferImpl(GPUBuffer<void> buffer) { throw 0; };
-        virtual WritableByteBuffer mapBufferImpl(GPUBuffer<void> &buffer) { throw 0; };
+        virtual GPUPtr<void> allocateBufferImpl(size_t size) { throw 0; };
+        virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count) { throw 0; };
+        virtual WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) { throw 0; };
+        virtual WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) { throw 0; };
 
     protected:
         void checkThread();

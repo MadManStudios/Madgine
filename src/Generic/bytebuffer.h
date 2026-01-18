@@ -107,6 +107,12 @@ struct ByteBufferImpl {
         return mData;
     }
 
+    patch_void_t<Data> &operator*() const
+        requires(!std::is_void_v<Data>)
+    {
+        return *mData;
+    }
+
     bool operator==(const ByteBufferImpl &other) const
     {
         if (mSize != other.mSize)

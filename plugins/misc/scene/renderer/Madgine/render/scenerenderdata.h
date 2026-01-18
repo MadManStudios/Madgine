@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Madgine/render/renderdata.h"
+#include "Madgine/render/resourceblock.h"
 
 namespace Engine {
 namespace Render {
@@ -11,8 +12,15 @@ namespace Render {
 
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
 
+        void setup(RenderContext *context);
+        void shutdown(RenderContext *context);
+
+        ResourceBlock defaultMaterial();
+
     private:
         Scene::SceneManager &mScene;
+
+        UniqueResourceBlock mDefaultMaterial;
     };
 
 }

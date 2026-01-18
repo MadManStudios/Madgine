@@ -6,9 +6,9 @@
 
 #include "Meta/math/vector2.h"
 
+#include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/pipelineloader.h"
 #include "Madgine/render/renderpass.h"
-#include "Madgine/render/textureloader.h"
 #include "Madgine/window/mainwindowcomponent.h"
 #include "Madgine/window/mainwindowcomponentcollector.h"
 
@@ -80,10 +80,11 @@ namespace Tools {
 
         std::vector<Render::RenderTarget *> mRenderTargets;
 
-        Render::TextureLoader::Ptr mFontTexture;
+        Render::TexturePtr mFontTexture;
 
         struct CachedImage {
-            Render::TextureLoader::Handle mHandle;
+            Resources::ImageLoader::Handle mHandle;
+            Render::TexturePtr mTexture;
         };
         std::map<Filesystem::Path, CachedImage> mImageCache;
     };

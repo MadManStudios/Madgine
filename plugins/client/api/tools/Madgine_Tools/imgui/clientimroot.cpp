@@ -14,6 +14,7 @@
 #include "Madgine/render/fonts/fontloader.h"
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendertarget.h"
+#include "Madgine/render/texture.h"
 #include "Madgine/resources/resourcemanager.h"
 #include "Madgine/window/mainwindow.h"
 #include "Madgine/window/toolwindow.h"
@@ -298,7 +299,6 @@ namespace Tools {
             config.FontDataOwnedByAtlas = false;
             config.RasterizerDensity = 5.0f;
 
-
             io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(iconsData.mData), iconsData.mSize, 13.0f * Window::platformCapabilities.mScalingFactor, &config, icons_ranges);
         } else {
             LOG_ERROR("Reading icons.ttf failed!");
@@ -309,7 +309,7 @@ namespace Tools {
         unsigned char *pixels;
         int width, height;
         io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
-        co_await mFontTexture.createTask(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { width, height }, { pixels, static_cast<size_t>(width * height * 4) });
+        mFontTexture = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { width, height }, { pixels, static_cast<size_t>(width * height * 4) });
 
         io.Fonts->SetTexID(mFontTexture->resourceBlock());
 
@@ -696,13 +696,16 @@ namespace Tools {
         std::string_view name = path.stem();
 
         CachedImage &image = mImageCache[path];
-        if (!image.mHandle) {
-            Resources::ImageLoader::getOrCreateManual(name, path);
-            image.mHandle.loadFromImage(name, Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
+        if (!image.mTexture && !image.mHandle) {
+            image.mHandle.create(name, path);
         }
 
-        if (image.mHandle.available()) {
-            const Render::Texture &tex = *image.mHandle;
+        if (!image.mTexture && image.mHandle.available()) {
+            image.mTexture = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, image.mHandle->mSize, image.mHandle->mBuffer);
+        }
+
+        if (image.mTexture) {
+            const Render::Texture &tex = *image.mTexture;
 
             if (image_size.x == -1 || image_size.y == -1) {
                 image_size = tex.size();
@@ -719,14 +722,16 @@ namespace Tools {
         std::string_view name = path.stem();
 
         CachedImage &image = mImageCache[path];
-        if (!image.mHandle) {
-            Resources::ImageLoader::getOrCreateManual(name, path);
-            image.mHandle.loadFromImage(name, Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
+        if (!image.mTexture && !image.mHandle) {
+            image.mHandle.create(name, path);            
         }
 
-        if (image.mHandle.available()) {
-            const Render::Texture &tex = *image.mHandle;
+        if (!image.mTexture && image.mHandle.available()) {
+            image.mTexture = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, image.mHandle->mSize, image.mHandle->mBuffer);
+        }
 
+        if (image.mTexture) {
+            const Render::Texture &tex = *image.mTexture;
             if (image_size.x == -1 || image_size.y == -1) {
                 image_size = tex.size();
             } else {

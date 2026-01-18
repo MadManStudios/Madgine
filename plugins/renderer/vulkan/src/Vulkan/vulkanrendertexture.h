@@ -20,18 +20,18 @@ namespace Render {
         virtual void beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
         virtual void endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
 
-        virtual const Texture *texture(size_t index) const override;
+        virtual ConstTexturePtr texture(size_t index) const override;
         virtual size_t textureCount() const override;
 
         void blit(RenderTarget *input);
 
-        const std::vector<VulkanTexture> &textures() const;
+        const std::vector<std::shared_ptr<VulkanTexture>> &textures() const;
 
     protected:
         void createRenderPass();
 
     private:
-        std::vector<VulkanTexture> mTextures;
+        std::vector<std::shared_ptr<VulkanTexture>> mTextures;
 
         Vector2i mSize;
 
