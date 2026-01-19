@@ -16,6 +16,11 @@
 namespace Engine {
 namespace Render {
 
+    enum class UsageHint {
+        USAGE_DEFAULT,
+        USAGE_INDEX
+    };
+
     struct MADGINE_RENDER_EXPORT RenderContext {
         RenderContext(Threading::TaskQueue *queue);
         virtual ~RenderContext();
@@ -44,16 +49,16 @@ namespace Render {
 
         template <typename T>
             requires(!std::is_array_v<T>)
-        GPUPtr<T> allocateBuffer()
+        GPUPtr<T> allocateBuffer(UsageHint hint = UsageHint::USAGE_DEFAULT)
         {
-            return static_cast<GPUPtr<T>>(allocateBufferImpl(sizeof(T)));
+            return static_cast<GPUPtr<T>>(allocateBufferImpl(sizeof(T), hint));
         }
 
         template <typename T>
             requires std::is_unbounded_array_v<T>
-        GPUPtr<T> allocateBuffer(size_t elementCount)
+        GPUPtr<T> allocateBuffer(size_t elementCount, UsageHint hint = UsageHint::USAGE_DEFAULT)
         {
-            return static_cast<GPUPtr<T>>(allocateBufferImpl(sizeof(std::remove_extent_t<T>), elementCount));
+            return static_cast<GPUPtr<T>>(allocateBufferImpl(sizeof(std::remove_extent_t<T>), elementCount, hint));
         }
 
         template <typename T>
@@ -70,8 +75,8 @@ namespace Render {
         virtual void destroyResourceBlock(UniqueResourceBlock &block) = 0;
 
     protected:
-        virtual GPUPtr<void> allocateBufferImpl(size_t size) { throw 0; };
-        virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count) { throw 0; };
+        virtual GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) { throw 0; };
+        virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) { throw 0; };
         virtual WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) { throw 0; };
         virtual WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) { throw 0; };
 

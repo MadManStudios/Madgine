@@ -44,7 +44,7 @@ namespace Render {
             return mapTempBuffer(space, sizeof(std::remove_extent_t<T>), count).cast<T>();
         }
 
-        virtual void bindMesh(RenderTarget *target, const GPUMeshData *mesh) const = 0;
+        virtual void bindMesh(RenderTarget *target, const GPUMeshData &mesh) const = 0;
         virtual ByteBufferImpl<uint32_t> mapIndices(RenderTarget *target, size_t count) const = 0;
         virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const = 0;
         template <typename T>

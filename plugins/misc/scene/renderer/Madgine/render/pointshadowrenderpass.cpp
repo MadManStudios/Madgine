@@ -102,7 +102,7 @@ namespace Render {
                 });
             }
 
-            mPipeline->bindMesh(target, meshData);
+            mPipeline->bindMesh(target, *meshData);
             mPipeline->renderInstanced(target, instance.second.size());
         }
     }

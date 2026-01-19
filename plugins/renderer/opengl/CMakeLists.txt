@@ -25,9 +25,8 @@ FolderSources(sources "" src)
 if (NOT ANDROID AND NOT EMSCRIPTEN AND NOT IOS)
 	FolderSources(sources src glad glad.c glad.h)
 endif()
-FolderSources(sources src OpenGL openglforward.h opengllib.h openglmeshdata.h openglmeshloader.cpp openglmeshloader.h openglpipelineloader.cpp openglpipelineloader.h openglrendertexture.cpp openglrendertexture.h openglrenderwindow.cpp openglrenderwindow.h openglshaderloader.cpp openglshaderloader.h openglrendertarget.cpp openglrendertarget.h openglrendercontext.cpp openglrendercontext.h)
-	FolderSources(sources OpenGL util gldump.cpp openglbuffer.cpp openglbuffer.h
-	openglheapallocator.cpp openglheapallocator.h openglshader.cpp openglshader.h opengltexture.cpp opengltexture.h openglvertexarray.cpp openglvertexarray.h openglpipeline.cpp openglpipeline.h openglpipelineinstance.cpp openglpipelineinstance.h)
+FolderSources(sources src OpenGL openglforward.h opengllib.h openglpipelineloader.cpp openglpipelineloader.h openglrendertexture.cpp openglrendertexture.h openglrenderwindow.cpp openglrenderwindow.h openglshaderloader.cpp openglshaderloader.h openglrendertarget.cpp openglrendertarget.h openglrendercontext.cpp openglrendercontext.h)
+	FolderSources(sources OpenGL util gldump.cpp openglheapallocator.cpp openglheapallocator.h openglshader.cpp openglshader.h opengltexture.cpp opengltexture.h openglvertexarray.cpp openglvertexarray.h openglpipeline.cpp openglpipeline.h openglpipelineinstance.cpp openglpipelineinstance.h)
 
 add_plugin(OpenGL Madgine Render ${sources} PRECOMPILED_HEADER src/OpenGL/opengllib.h)
 

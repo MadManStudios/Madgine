@@ -9,7 +9,14 @@
 namespace Engine {
 namespace Render {
 
-    OpenGLHeapAllocator::OpenGLHeapAllocator()
+    OpenGLHeapAllocator::OpenGLHeapAllocator(
+#if OPENGL_ES
+        GLenum target
+#endif
+        )
+#if OPENGL_ES
+        : mTarget(target)
+#endif
     {
     }
 
@@ -17,13 +24,19 @@ namespace Render {
     {
         GLuint buffer;
 
+#if OPENGL_ES
+        GLenum target = mTarget;
+#else
+        GLenum target = GL_COPY_WRITE_BUFFER;
+#endif
+
         glGenBuffers(1, &buffer);
         GL_CHECK();
 
-        glBindBuffer(GL_COPY_WRITE_BUFFER, buffer);
+        glBindBuffer(target, buffer);
         GL_CHECK();
 
-        glBufferData(GL_COPY_WRITE_BUFFER, size, nullptr, GL_DYNAMIC_COPY);
+        glBufferData(target, size, nullptr, GL_DYNAMIC_COPY);
         GL_CHECK();
 
         return { reinterpret_cast<void *>(static_cast<uintptr_t>(buffer) << 24), size };

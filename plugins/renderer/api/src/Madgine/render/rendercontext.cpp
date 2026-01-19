@@ -8,6 +8,7 @@
 #include "Modules/threading/workgroupstorage.h"
 
 #include "fonts/fontloader.h"
+#include "rendermeshloader.h"
 #include "rendertarget.h"
 
 namespace Engine {
@@ -33,6 +34,10 @@ namespace Render {
     Threading::Task<void> RenderContext::unloadAllResources()
     {
         for (std::pair<const std::string, FontLoader::Resource> &res : FontLoader::getSingleton()) {
+            co_await res.second.forceUnload();
+        }
+
+        for (std::pair<const std::string, RenderMeshLoader::Resource> &res : RenderMeshLoader::getSingleton()) {
             co_await res.second.forceUnload();
         }
     }

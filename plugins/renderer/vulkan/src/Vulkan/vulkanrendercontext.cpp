@@ -12,7 +12,6 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "vulkanmeshloader.h"
 #include "vulkanpipelineloader.h"
 #include "vulkanrendertexture.h"
 #include "vulkanrenderwindow.h"
@@ -432,8 +431,6 @@ namespace Render {
         , mBufferAllocator(mBufferMemoryHeap)
         , mTempMemoryHeap("Temp Heap")
         , mTempAllocator(mTempMemoryHeap)
-        , mConstantMemoryHeap("Constant Heap")
-        , mConstantAllocator(mConstantMemoryHeap)
     {
 
         assert(!sSingleton);
@@ -531,8 +528,9 @@ namespace Render {
 
         mNextFenceValue = mLastCompletedFenceValue + 1;
 
-        ConstantValues values;
-        mConstantBuffer.setData({ &values, sizeof(values) });
+        mConstantBuffer = allocateBuffer<ConstantValues>();
+        auto values = mapBuffer(mConstantBuffer);
+        *values = { };
 
         LOG_DEBUG("Vulkan: VulkanRenderContext initialized");
     }
@@ -541,7 +539,7 @@ namespace Render {
     {
         LOG_DEBUG("Vulkan: Shutting down VulkanRenderContext");
 
-        mConstantBuffer.reset();
+        mConstantBuffer = { };
 
         mSemaphore.reset();
 
@@ -549,7 +547,6 @@ namespace Render {
 
         mBufferAllocator.deallocateAll();
         mTempAllocator.deallocateAll();
-        mConstantAllocator.deallocateAll();
         mUploadAllocator.deallocateAll();
 
         mPipelineLayouts.clear();
@@ -598,7 +595,7 @@ namespace Render {
         RenderContext::endFrame();
     }
 
-    GPUPtr<void> VulkanRenderContext::allocateBufferImpl(size_t size)
+    GPUPtr<void> VulkanRenderContext::allocateBufferImpl(size_t size, UsageHint hint)
     {
         Block allocation = mBufferAllocator.allocate(size);
 
@@ -608,7 +605,7 @@ namespace Render {
         return { allocation.mAddress, size, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    GPUPtr<Void[]> VulkanRenderContext::allocateBufferImpl(size_t elementSize, size_t count)
+    GPUPtr<Void[]> VulkanRenderContext::allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint)
     {
         Block allocation = mBufferAllocator.allocate(elementSize * count);
 
@@ -932,10 +929,6 @@ namespace Render {
         co_await RenderContext::unloadAllResources();
 
         for (std::pair<const std::string, VulkanPipelineLoader::Resource> &res : VulkanPipelineLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
-
-        for (std::pair<const std::string, VulkanMeshLoader::Resource> &res : VulkanMeshLoader::getSingleton()) {
             co_await res.second.forceUnload();
         }
     }

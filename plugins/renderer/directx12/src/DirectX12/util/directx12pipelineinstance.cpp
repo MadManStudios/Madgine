@@ -4,7 +4,9 @@
 
 #include "Generic/align.h"
 
-#include "../directx12meshdata.h"
+#include "Madgine/meshloader/gpumeshdata.h"
+#include "Madgine/render/constantvalues.h"
+
 #include "../directx12rendercontext.h"
 #include "../directx12rendertarget.h"
 
@@ -43,7 +45,6 @@ namespace Render {
         }
 
         commandList->SetPipelineState(pipeline);
-        
 
         assert(groupSize > 0 && groupSize <= 3);
         D3D12_PRIMITIVE_TOPOLOGY mode = sModes[groupSize - 1];
@@ -144,30 +145,47 @@ namespace Render {
         return { block.mAddress, block.mSize };
     }
 
-    void DirectX12PipelineInstance::bindMesh(RenderTarget *_target, const GPUMeshData *m) const
+    void DirectX12PipelineInstance::bindMesh(RenderTarget *_target, const GPUMeshData &mesh) const
     {
 
         DirectX12RenderTarget *target = static_cast<DirectX12RenderTarget *>(_target);
 
         ID3D12GraphicsCommandList *commandList = target->mCommandList;
 
-        const DirectX12MeshData *mesh = static_cast<const DirectX12MeshData *>(m);
+        mFormat = mesh.mFormat;
+        mGroupSize = mesh.mGroupSize;
 
-        mFormat = mesh->mFormat;
-        mGroupSize = mesh->mGroupSize;
+        auto [resource, offset] = DirectX12RenderContext::getSingleton().mBufferMemoryHeap.resolve(mesh.mVertices.get());
 
-        mesh->mVertices.bindVertex(commandList, mesh->mVertexSize);
+        D3D12_VERTEX_BUFFER_VIEW view;
+        view.BufferLocation = resource->GetGPUVirtualAddress() + offset;
+        view.SizeInBytes = mesh.mVertices.size();
+        view.StrideInBytes = mesh.mFormat.stride();
+        commandList->IASetVertexBuffers(0, 1, &view);
+        DX12_LOG("Bind Vertex Buffer -> " << (resource->GetGPUVirtualAddress() + offset));
 
-        DirectX12RenderContext::getSingleton().mConstantBuffer.bindVertex(commandList, 0, 2);
+        auto [constantResource, constantOffset] = DirectX12RenderContext::getSingleton().mBufferMemoryHeap.resolve(DirectX12RenderContext::getSingleton().mConstantBuffer.get());
 
-        if (mesh->mIndices) {
-            mesh->mIndices.bindIndex(commandList);
+        view.BufferLocation = constantResource->GetGPUVirtualAddress() + constantOffset;
+        view.SizeInBytes = DirectX12RenderContext::getSingleton().mConstantBuffer.size();
+        view.StrideInBytes = 0;
+        commandList->IASetVertexBuffers(2, 1, &view);
+
+        if (mesh.mIndices) {
+            auto [resource, offset] = DirectX12RenderContext::getSingleton().mBufferMemoryHeap.resolve(mesh.mIndices.get());
+
+            D3D12_INDEX_BUFFER_VIEW view;
+            view.BufferLocation = resource->GetGPUVirtualAddress() + offset;
+            view.SizeInBytes = mesh.mIndices.size();
+            view.Format = DXGI_FORMAT_R32_UINT;
+            commandList->IASetIndexBuffer(&view);
+            DX12_LOG("Bind Index Buffer -> " << (resource->GetGPUVirtualAddress() + offset));
             mHasIndices = true;
         } else {
             mHasIndices = false;
         }
 
-        mElementCount = mesh->mElementCount;
+        mElementCount = mesh.mElementCount;
     }
 
     WritableByteBuffer DirectX12PipelineInstance::mapVertices(RenderTarget *_target, VertexFormat format, size_t count) const
@@ -221,7 +239,7 @@ namespace Render {
 
     void DirectX12PipelineInstance::bindResources(RenderTarget *target, size_t space, ResourceBlock block) const
     {
-        bindRootSignature(static_cast<DirectX12RenderTarget*>(target));
+        bindRootSignature(static_cast<DirectX12RenderTarget *>(target));
 
         assert(space > 1);
         assert(block);

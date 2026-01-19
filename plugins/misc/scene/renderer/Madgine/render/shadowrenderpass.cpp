@@ -94,7 +94,7 @@ namespace Render {
                 });
             }
 
-            mPipeline->bindMesh(target, meshData);
+            mPipeline->bindMesh(target, *meshData);
 
             mPipeline->renderInstanced(target, instance.second.size());
             // mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);

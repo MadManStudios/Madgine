@@ -2,9 +2,10 @@
 
 #include "vulkanpipelineinstance.h"
 
-#include "../vulkanmeshdata.h"
 #include "../vulkanrendercontext.h"
 #include "../vulkanrendertarget.h"
+
+#include "Madgine/meshloader/gpumeshdata.h"
 
 namespace Engine {
 namespace Render {
@@ -191,28 +192,31 @@ namespace Render {
         return { block.mAddress, block.mSize };
     }
 
-    void VulkanPipelineInstance::bindMesh(RenderTarget *target, const GPUMeshData *m) const
+    void VulkanPipelineInstance::bindMesh(RenderTarget *target, const GPUMeshData &mesh) const
     {
         VkCommandBuffer commandList = static_cast<VulkanRenderTarget *>(target)->mCommandList;
         VkRenderPass renderpass = static_cast<VulkanRenderTarget *>(target)->mRenderPass;
 
-        const VulkanMeshData *mesh = static_cast<const VulkanMeshData *>(m);
+        mFormat = mesh.mFormat;
+        mGroupSize = mesh.mGroupSize;
 
-        mFormat = mesh->mFormat;
-        mGroupSize = mesh->mGroupSize;
+        auto [buffer, memory, offset] = VulkanRenderContext::getSingleton().mBufferMemoryHeap.resolve(mesh.mVertices.get());
+        VkDeviceSize vOffset = offset;
+        vkCmdBindVertexBuffers(commandList, 0, 1, &buffer, &vOffset);
 
-        mesh->mVertices.bindVertex(commandList);
+        auto [constantBuffer, constantMemory, constantOffset] = VulkanRenderContext::getSingleton().mBufferMemoryHeap.resolve(VulkanRenderContext::getSingleton().mConstantBuffer.get());
+        vOffset = constantOffset;
+        vkCmdBindVertexBuffers(commandList, 2, 1, &constantBuffer, &vOffset);
 
-        VulkanRenderContext::getSingleton().mConstantBuffer.bindVertex(commandList, 2);
-
-        if (mesh->mIndices) {
-            mesh->mIndices.bindIndex(commandList);
+        if (mesh.mIndices) {
+            auto [buffer, memory, offset] = VulkanRenderContext::getSingleton().mBufferMemoryHeap.resolve(mesh.mIndices.get());
+            vkCmdBindIndexBuffer(commandList, buffer, offset, VK_INDEX_TYPE_UINT32);
             mHasIndices = true;
         } else {
             mHasIndices = false;
         }
 
-        mElementCount = mesh->mElementCount;
+        mElementCount = mesh.mElementCount;
     }
 
     WritableByteBuffer VulkanPipelineInstance::mapVertices(RenderTarget *_target, VertexFormat format, size_t count) const
@@ -226,7 +230,9 @@ namespace Render {
 
         vkCmdBindVertexBuffers(commandList, 0, 1, &buffer, &vOffset);
 
-        VulkanRenderContext::getSingleton().mConstantBuffer.bindVertex(commandList, 2);
+        auto [constantBuffer, constantMemory, constantOffset] = VulkanRenderContext::getSingleton().mBufferMemoryHeap.resolve(VulkanRenderContext::getSingleton().mConstantBuffer.get());
+        vOffset = constantOffset;
+        vkCmdBindVertexBuffers(commandList, 2, 1, &constantBuffer, &vOffset);
 
         mFormat = format;
         mElementCount = count;

@@ -8,7 +8,6 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "openglmeshloader.h"
 #include "openglpipelineloader.h"
 #include "openglrendertexture.h"
 #include "openglrenderwindow.h"
@@ -586,9 +585,12 @@ namespace Render {
         , mTempAllocator(mTempMemoryHeap)
 #if OPENGL_ES
         , mTempMemoryHeap(GL_UNIFORM_BUFFER)
+        , mBufferMemoryHeap(GL_COPY_WRITE_BUFFER)
 #    if EMSCRIPTEN
         , mTempIndexMemoryHeap(GL_ELEMENT_ARRAY_BUFFER)
         , mTempIndexAllocator(mTempIndexMemoryHeap)
+        , mIndexMemoryHeap(GL_ELEMENT_ARRAY_BUFFER)
+        , mIndexAllocator(mIndexMemoryHeap)
 #    endif
 #endif
     {
@@ -635,10 +637,6 @@ namespace Render {
         for (std::pair<const std::string, OpenGLPipelineLoader::Resource> &res : OpenGLPipelineLoader::getSingleton()) {
             co_await res.second.forceUnload();
         }
-
-        for (std::pair<const std::string, OpenGLMeshLoader::Resource> &res : OpenGLMeshLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
     }
 
     bool OpenGLRenderContext::supportsMultisampling() const
@@ -646,9 +644,16 @@ namespace Render {
         return checkMultisampling();
     }
 
-    GPUPtr<void> OpenGLRenderContext::allocateBufferImpl(size_t size)
+    GPUPtr<void> OpenGLRenderContext::allocateBufferImpl(size_t size, UsageHint hint)
     {
-        Block allocation = mBufferAllocator.allocate(size);
+        Block allocation;
+
+#if EMSCRIPTEN
+        if (hint == UsageHint::USAGE_INDEX)
+            allocation = mIndexAllocator.allocate(size);
+        else
+#endif
+            allocation = mBufferAllocator.allocate(size);
 
         if (!allocation.mAddress)
             return {};
@@ -656,9 +661,16 @@ namespace Render {
         return { allocation.mAddress, size, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    GPUPtr<Void[]> Engine::Render::OpenGLRenderContext::allocateBufferImpl(size_t elementSize, size_t count)
+    GPUPtr<Void[]> Engine::Render::OpenGLRenderContext::allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint)
     {
-        Block allocation = mBufferAllocator.allocate(elementSize * count);
+        Block allocation;
+
+#if EMSCRIPTEN
+        if (hint == UsageHint::USAGE_INDEX)
+            allocation = mIndexAllocator.allocate(elementSize * count);
+        else
+#endif
+            allocation = mBufferAllocator.allocate(elementSize * count);
 
         if (!allocation.mAddress)
             return {};

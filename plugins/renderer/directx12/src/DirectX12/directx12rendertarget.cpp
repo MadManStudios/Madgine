@@ -7,8 +7,6 @@
 #include "Madgine/meshloader/meshdata.h"
 #include "Madgine/render/renderpass.h"
 
-#include "directx12meshdata.h"
-#include "directx12meshloader.h"
 #include "directx12rendercontext.h"
 #include "directx12rendertexture.h"
 #include "util/directx12pipelineinstance.h"

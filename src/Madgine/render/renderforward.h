@@ -24,5 +24,7 @@ namespace Render {
     template <typename T>
     struct GPUPtr;
 
+    struct ConstantValues;
+
 }
 }

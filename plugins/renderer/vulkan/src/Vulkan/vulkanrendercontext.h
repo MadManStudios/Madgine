@@ -11,7 +11,6 @@
 #include "Madgine/render/shaderobject.h"
 #include "Madgine/render/vertexformat.h"
 
-#include "util/vulkanbuffer.h"
 #include "util/vulkancommandlist.h"
 #include "util/vulkanheapallocator.h"
 #include "util/vulkantexture.h"
@@ -43,8 +42,8 @@ namespace Render {
         virtual bool beginFrame() override;
         virtual void endFrame() override;
 
-        GPUPtr<void> allocateBufferImpl(size_t size) override;
-        GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count) override;
+        GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
+        GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
         WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
         WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
 
@@ -111,10 +110,7 @@ namespace Render {
         VulkanMappedHeapAllocator mTempMemoryHeap;
         TrackedAllocator<BumpAllocator<FixedAllocator<VulkanMappedHeapAllocator &>>> mTempAllocator;
 
-        VulkanHeapAllocator mConstantMemoryHeap;
-        LogBucketAllocator<HeapAllocator<VulkanHeapAllocator &>, 64, 4096, 4> mConstantAllocator;
-
-        VulkanBuffer mConstantBuffer;
+        GPUPtr<ConstantValues> mConstantBuffer;
         std::shared_ptr<VulkanTexture> mDefaultTexture;
     };
 

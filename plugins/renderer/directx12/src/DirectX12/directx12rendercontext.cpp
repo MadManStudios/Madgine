@@ -9,7 +9,6 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "directx12meshloader.h"
 #include "directx12pipelineloader.h"
 #include "directx12rendertexture.h"
 #include "directx12renderwindow.h"
@@ -154,8 +153,9 @@ namespace Render {
         mCopyQueue.setup();
         mComputeQueue.setup();
 
-        ConstantValues values;
-        mConstantBuffer.setData({ &values, sizeof(values) }, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER);
+        mConstantBuffer = allocateBuffer<ConstantValues>();
+        auto values = mapBuffer(mConstantBuffer);
+        *values = {};
     }
 
     DirectX12RenderContext::~DirectX12RenderContext()
@@ -168,7 +168,7 @@ namespace Render {
             DX12_CHECK(hr);
         }
 
-        mConstantBuffer.reset();
+        mConstantBuffer = {};
 
         mBufferAllocator.deallocateAll();
         mTempAllocator.deallocateAll();
@@ -333,10 +333,6 @@ namespace Render {
             co_await res.second.forceUnload();
         }
 
-        for (std::pair<const std::string, DirectX12MeshLoader::Resource> &res : DirectX12MeshLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
-
         mGraphicsQueue.waitForIdle();
         mComputeQueue.waitForIdle();
         mCopyQueue.waitForIdle();
@@ -347,7 +343,7 @@ namespace Render {
         return true;
     }
 
-    GPUPtr<void> DirectX12RenderContext::allocateBufferImpl(size_t size)
+    GPUPtr<void> DirectX12RenderContext::allocateBufferImpl(size_t size, UsageHint hint)
     {
         Block allocation = mBufferAllocator.allocate(size);
 
@@ -357,7 +353,7 @@ namespace Render {
         return { allocation.mAddress, size, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    GPUPtr<Void[]> Engine::Render::DirectX12RenderContext::allocateBufferImpl(size_t elementSize, size_t count)
+    GPUPtr<Void[]> Engine::Render::DirectX12RenderContext::allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint)
     {
         Block allocation = mBufferAllocator.allocate(elementSize * count);
 

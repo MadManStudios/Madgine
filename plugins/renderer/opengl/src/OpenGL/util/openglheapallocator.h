@@ -9,7 +9,11 @@ namespace Render {
 
         static constexpr size_t goodSize = 8 * 1024 * 1024; // 8MB
 
-        OpenGLHeapAllocator();
+        OpenGLHeapAllocator(
+#if OPENGL_ES
+            GLenum target
+#endif
+        );
 
         Block allocate(size_t size, size_t alignment = 1);
         void deallocate(Block block);
@@ -17,6 +21,9 @@ namespace Render {
         std::pair<GLuint, size_t> resolve(void *ptr);
 
     private:
+#if OPENGL_ES
+        GLenum mTarget;
+#endif
     };
 
     struct OpenGLMappedHeapAllocator {

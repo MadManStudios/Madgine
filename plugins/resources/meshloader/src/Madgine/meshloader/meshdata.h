@@ -42,7 +42,6 @@ namespace Render {
             , mAABB(calculateAABB(vertices))
             , mGroupSize(groupSize)
             , mVertices(std::move(vertices))
-            , mVertexSize(sizeof(VertexType))
             , mIndices(std::move(indices))
             , mMaterials(std::move(materials))
         {
@@ -52,7 +51,6 @@ namespace Render {
         AABB mAABB;
         size_t mGroupSize;
         ByteBuffer mVertices;
-        size_t mVertexSize;
         std::vector<uint32_t> mIndices;
         std::vector<Material> mMaterials;
     };

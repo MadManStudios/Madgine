@@ -3,13 +3,11 @@
 #include "Madgine/meshloader/gpumeshloader.h"
 #include "Madgine/resources/resourceloader.h"
 
-#include "vulkanmeshdata.h"
-
 namespace Engine {
 namespace Render {
 
-    struct MADGINE_VULKAN_EXPORT VulkanMeshLoader : Resources::VirtualResourceLoaderImpl<VulkanMeshLoader, VulkanMeshData, GPUMeshLoader> {
-        VulkanMeshLoader();
+    struct MADGINE_RENDER_EXPORT RenderMeshLoader : Resources::VirtualResourceLoaderImpl<RenderMeshLoader, GPUMeshData, GPUMeshLoader> {
+        RenderMeshLoader();
 
         virtual Threading::Task<bool> generate(GPUMeshData &data, const MeshData &mesh) override;
 

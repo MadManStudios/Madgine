@@ -6,12 +6,14 @@
 
 #include "Meta/math/matrix4.h"
 
+#include "Madgine/meshloader/gpumeshdata.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 
-#include "../openglmeshdata.h"
 #include "../openglrendercontext.h"
 #include "../openglrendertarget.h"
 #include "openglshader.h"
+#include "opengltexture.h"
 #include "openglvertexarray.h"
 
 namespace Engine {
@@ -251,35 +253,44 @@ namespace Render {
 #endif
     }
 
-    void OpenGLPipelineInstance::bindMesh(RenderTarget *target, const GPUMeshData *m) const
+    void OpenGLPipelineInstance::bindMesh(RenderTarget *target, const GPUMeshData &mesh) const
     {
-        const OpenGLMeshData *mesh = static_cast<const OpenGLMeshData *>(m);
-
-        if (!bind(mesh->mFormat))
+        if (!bind(mesh.mFormat))
             return;
 
-#if !OPENGL_ES || OPENGL_ES >= 32
-        mesh->mVertices.bindVertex(mesh->mVertexSize);
-#else
-        glBindBuffer(GL_ARRAY_BUFFER, mesh->mVertices.handle());
+        auto [buffer, offset] = OpenGLRenderContext::getSingleton().mBufferMemoryHeap.resolve(mesh.mVertices.get());
 
-        mBuffer = mesh->mVertices.handle();
-        mBufferOffset = 0;
-        mStride = mesh->mFormat.stride();
+#if !OPENGL_ES || OPENGL_ES >= 31
+#    if !OPENGL_ES
+        if (glBindVertexBuffer)
+#    endif
+            glBindVertexBuffer(0, buffer, offset, mesh.mFormat.stride());
+
+#else
+        glBindBuffer(GL_ARRAY_BUFFER, buffer);
+
+        mBuffer = buffer;
+        mBufferOffset = offset;
+        mStride = mesh.mFormat.stride();
 #endif
 
-        mMode = sModes[mesh->mGroupSize - 1];
+        mMode = sModes[mesh.mGroupSize - 1];
 
-        if (mesh->mIndices) {
-            mesh->mIndices.bind();
+        if (mesh.mIndices) {
+            auto [buffer, offset] = OpenGLRenderContext::getSingleton().mBufferMemoryHeap.resolve(mesh.mIndices.get());
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
+            GL_CHECK();
+
+            mIndexOffset = offset;
+
             mHasIndices = true;
         } else {
+            mIndexOffset = 0;
             mHasIndices = false;
         }
 
-        mElementCount = mesh->mElementCount;
-
-        mIndexOffset = 0;
+        mElementCount = mesh.mElementCount;        
     }
 
     WritableByteBuffer OpenGLPipelineInstance::mapVertices(RenderTarget *target, VertexFormat format, size_t count) const

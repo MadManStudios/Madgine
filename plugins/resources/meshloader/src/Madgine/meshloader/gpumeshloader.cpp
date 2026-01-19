@@ -62,13 +62,12 @@ namespace Render {
         GPUMeshLoader::reset(data);
 
         data.mFormat = mesh.mFormat;
-        data.mVertexSize = mesh.mVertexSize;
         data.mAABB = mesh.mAABB;
 
         data.mGroupSize = mesh.mGroupSize;
 
         if (mesh.mIndices.empty()) {
-            data.mElementCount = mesh.mVertices.mSize / mesh.mVertexSize;
+            data.mElementCount = mesh.mVertices.mSize / mesh.mFormat.stride();
         } else {
             data.mElementCount = mesh.mIndices.size();
         }

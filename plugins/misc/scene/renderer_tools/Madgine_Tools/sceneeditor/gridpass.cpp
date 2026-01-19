@@ -46,7 +46,7 @@ namespace Tools {
             parameters->cameraPos = mCamera->mPosition;
         }
 
-        mPipeline->bindMesh(target, mMesh);
+        mPipeline->bindMesh(target, *mMesh);
         mPipeline->render(target);
     }
 

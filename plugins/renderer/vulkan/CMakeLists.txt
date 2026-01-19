@@ -19,8 +19,8 @@ FolderSources(sources "" src)
 if (NOT ANDROID AND NOT EMSCRIPTEN AND NOT IOS)
 	FolderSources(sources src glad vulkan.c vulkan.h)
 endif()
-FolderSources(sources src Vulkan vulkanforward.h vulkanlib.h vulkanmeshdata.h vulkanmeshloader.cpp vulkanmeshloader.h vulkanpipelineloader.cpp vulkanpipelineloader.h vulkanrendertexture.cpp vulkanrendertexture.h vulkanrenderwindow.cpp vulkanrenderwindow.h vulkanrendertarget.cpp vulkanrendertarget.h vulkanrendercontext.cpp vulkanrendercontext.h vulkanshaderloader.cpp vulkanshaderloader.h)
-	FolderSources(sources Vulkan util vulkanbuffer.cpp vulkanbuffer.h vulkancommandlist.cpp vulkancommandlist.h vulkanheapallocator.cpp vulkanheapallocator.h vulkantexture.cpp vulkantexture.h vulkanpipeline.cpp vulkanpipeline.h vulkanpipelineinstance.cpp vulkanpipelineinstance.h)
+FolderSources(sources src Vulkan vulkanforward.h vulkanlib.h vulkanpipelineloader.cpp vulkanpipelineloader.h vulkanrendertexture.cpp vulkanrendertexture.h vulkanrenderwindow.cpp vulkanrenderwindow.h vulkanrendertarget.cpp vulkanrendertarget.h vulkanrendercontext.cpp vulkanrendercontext.h vulkanshaderloader.cpp vulkanshaderloader.h)
+	FolderSources(sources Vulkan util vulkancommandlist.cpp vulkancommandlist.h vulkanheapallocator.cpp vulkanheapallocator.h vulkantexture.cpp vulkantexture.h vulkanpipeline.cpp vulkanpipeline.h vulkanpipelineinstance.cpp vulkanpipelineinstance.h)
 
 add_plugin(Vulkan Madgine Render ${sources} PRECOMPILED_HEADER src/Vulkan/vulkanlib.h)
 

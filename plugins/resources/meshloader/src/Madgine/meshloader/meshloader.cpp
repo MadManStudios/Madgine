@@ -318,7 +318,6 @@ namespace Render {
         data.mGroupSize = 0;
         data.mIndices.clear();
         data.mMaterials.clear();
-        data.mVertexSize = 0;
         data.mVertices.clear();
         co_return;
     }

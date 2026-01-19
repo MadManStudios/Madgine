@@ -9,7 +9,6 @@
 #include "Madgine/render/rendercontextcollector.h"
 #include "Madgine/render/vertexformat.h"
 
-#include "util/directx12buffer.h"
 #include "util/directx12commandallocator.h"
 #include "util/directx12commandlist.h"
 #include "util/directx12descriptorheap.h"
@@ -35,8 +34,8 @@ namespace Render {
 
         virtual bool supportsMultisampling() const override;
 
-        virtual GPUPtr<void> allocateBufferImpl(size_t size) override;    
-        virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count) override;
+        virtual GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) override;    
+        virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
         virtual WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
         virtual WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
 
@@ -87,7 +86,7 @@ namespace Render {
         DirectX12HeapAllocator mConstantMemoryHeap;
         LogBucketAllocator<HeapAllocator<DirectX12HeapAllocator &>, 64, 4096, 4> mConstantAllocator;
 
-        DirectX12Buffer mConstantBuffer;
+        GPUPtr<ConstantValues> mConstantBuffer;
 
         DWORD mCallbackCookie;
 

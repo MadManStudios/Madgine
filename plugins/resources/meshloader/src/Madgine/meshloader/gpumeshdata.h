@@ -16,10 +16,12 @@ namespace Render {
         };
         std::vector<Material> mMaterials;
         AABB mAABB;
-        size_t mVertexSize;
         VertexFormat mFormat;
         size_t mGroupSize;
         size_t mElementCount;
+
+        GPUPtr<Void[]> mVertices;
+        GPUPtr<uint32_t[]> mIndices;
     };
 
 }
