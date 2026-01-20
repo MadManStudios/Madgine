@@ -4,7 +4,6 @@
 
 #include "Generic/areaview.h"
 #include "Generic/bytebuffer.h"
-
 #include "Generic/functor.h"
 
 namespace Engine {
@@ -15,7 +14,7 @@ namespace Render {
         , mSamples(samples)
     {
         GLuint temp;
-        glGenTextures(1, &mTextureHandle.setupAs<GLuint>());
+        glGenTextures(1, &mHandle);
         GL_CHECK();
         if (mType != TextureType_2DMultiSample)
             setFilter(GL_LINEAR);
@@ -144,10 +143,10 @@ namespace Render {
 
     void OpenGLTexture::reset()
     {
-        if (mTextureHandle) {
-            GLuint handle = mTextureHandle.release<GLuint>();
-            glDeleteTextures(1, &handle);
+        if (mHandle) {
+            glDeleteTextures(1, &mHandle);
             GL_CHECK();
+            mHandle = 0;
         }
         if (mResourceBlock) {
             OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
@@ -157,8 +156,13 @@ namespace Render {
 
     void OpenGLTexture::bind() const
     {
-        glBindTexture(target(), mTextureHandle.as<GLuint>());
+        glBindTexture(target(), mHandle);
         GL_CHECK();
+    }
+
+    GLuint OpenGLTexture::handle() const
+    {
+        return mHandle;
     }
 
     void OpenGLTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)

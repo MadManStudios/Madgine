@@ -1,32 +1,7 @@
 #pragma once
 
-#include "Generic/opaqueptr.h"
-
-#include "ptr.h"
-
 namespace Engine {
 namespace Render {
-
-    struct TextureHandle {
-
-        template <typename T>
-        operator T() const
-        {
-            return (T)(mPtr);
-        }
-
-        auto operator<=>(const TextureHandle &) const = default;
-
-        uintptr_t mPtr;
-    };
-
-    struct UniqueTextureHandle : UniqueOpaquePtr {
-
-        operator TextureHandle() const
-        {
-            return { get() };
-        }
-    };
 
     enum TextureType {
         TextureType_2D,

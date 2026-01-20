@@ -42,7 +42,8 @@ namespace Tools {
         getTool<Inspector>().addPreviewDefinition<Render::FontLoader::Resource>([](Render::FontLoader::Resource *font) {
             Render::FontLoader::Handle handle = font->loadData();
             handle.info()->setPersistent(true);
-            ImGui::Image((void *)handle->mTexture->handle(), handle->mTexture->size());
+            if (handle.available())
+                ImGui::Image((void *)handle->mTexture->resourceBlock(), handle->mTexture->size());
             return false;
         });
 

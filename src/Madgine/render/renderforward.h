@@ -11,7 +11,6 @@ namespace Render {
     struct Font;
 
     typedef int RenderPassFlags;
-    struct TextureHandle;
 
     struct RenderFuture;
 

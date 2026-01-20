@@ -22,7 +22,6 @@ namespace Render {
         Texture(Texture &&other)
             : mType(other.mType)
             , mFormat(other.mFormat)
-            , mTextureHandle(std::move(other.mTextureHandle))
             , mResourceBlock(std::move(other.mResourceBlock))
             , mSize(other.mSize)
         {
@@ -30,17 +29,11 @@ namespace Render {
 
         Texture &operator=(Texture &&other)
         {
-            std::swap(mTextureHandle, other.mTextureHandle);
             std::swap(mResourceBlock, other.mResourceBlock);
             std::swap(mType, other.mType);
             std::swap(mFormat, other.mFormat);
             std::swap(mSize, other.mSize);
             return *this;
-        }
-
-        TextureHandle handle() const
-        {
-            return mTextureHandle;
         }
 
         ResourceBlock resourceBlock() const
@@ -64,7 +57,6 @@ namespace Render {
         }
 
     protected:
-        UniqueTextureHandle mTextureHandle;
         UniqueResourceBlock mResourceBlock;
         TextureType mType;
         TextureFormat mFormat;

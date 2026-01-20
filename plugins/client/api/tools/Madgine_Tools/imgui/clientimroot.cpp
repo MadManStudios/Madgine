@@ -256,7 +256,7 @@ namespace Tools {
 
             if (font.available()) {
                 return Im3DFont {
-                    (Im3DTextureId)font->mTexture->handle(),
+                    (Im3DTextureId)font->mTexture->resourceBlock(),
                     font->mTexture->size(),
                     font->mGlyphs.data()
                 };

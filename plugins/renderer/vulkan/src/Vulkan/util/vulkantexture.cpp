@@ -150,7 +150,7 @@ namespace Render {
             std::terminate();
         }
 
-        VkResult result = vkCreateImage(GetDevice(), &imageInfo, nullptr, &mTextureHandle.setupAs<VkImage>());
+        VkResult result = vkCreateImage(GetDevice(), &imageInfo, nullptr, &mImage);
         VK_CHECK(result);
 
         VkMemoryRequirements memRequirements;
@@ -323,9 +323,7 @@ namespace Render {
         }
         mImageView.reset();
         mDeviceMemory.reset();
-        if (mTextureHandle) {
-            vkDestroyImage(GetDevice(), mTextureHandle.release<VkImage>(), nullptr);
-        }
+        mImage.reset();
         mSamples = 1;
     }
 
@@ -426,7 +424,7 @@ namespace Render {
 
     VkImage VulkanTexture::image() const
     {
-        return mTextureHandle.as<VkImage>();
+        return mImage;
     }
 
     VkFormat VulkanTexture::vkFormat() const

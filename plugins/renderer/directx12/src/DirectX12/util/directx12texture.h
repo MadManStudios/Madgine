@@ -34,7 +34,7 @@ namespace Render {
         void createShaderResourceView(OffsetPtr descriptorHandle) const;
 
         ID3D12Resource *resource() const;
-        ReleasePtr<ID3D12Resource> resourcePtr() const;
+        const ReleasePtr<ID3D12Resource> &resourcePtr() const;
 
         void setName(std::string_view name);
 
@@ -46,6 +46,7 @@ namespace Render {
         bool mIsRenderTarget;
         size_t mSamples = 0;
         DirectX12ResourceBlock<1> mBlock;
+        ReleasePtr<ID3D12Resource> mResource;
     };
 
 }

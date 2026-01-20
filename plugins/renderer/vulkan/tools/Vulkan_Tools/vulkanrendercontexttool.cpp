@@ -41,7 +41,7 @@ namespace Tools {
             data.info()->setPersistent(true);
 
             mImageTexture = std::make_shared<Render::VulkanTexture>(Render::TextureType_2D, false, Render::FORMAT_RGBA8, data->mSize, 1, data->mBuffer);
-            ImGui::Image((void *)mImageTexture->handle(), data->mSize);
+            ImGui::Image((void *)mImageTexture->resourceBlock(), data->mSize);
 
             return false;
         });

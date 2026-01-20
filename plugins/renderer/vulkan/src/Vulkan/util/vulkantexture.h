@@ -50,6 +50,7 @@ namespace Render {
         bool mIsRenderTarget;
         size_t mSamples;
         VulkanResourceBlock<1> mBlock;
+        VulkanPtr<VkImage, &vkDestroyImage> mImage;
     };
 
 }

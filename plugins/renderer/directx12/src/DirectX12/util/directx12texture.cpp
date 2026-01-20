@@ -92,7 +92,7 @@ namespace Render {
             &textureDesc,
             data.mData ? D3D12_RESOURCE_STATE_COPY_DEST : readStateFlags(),
             isRenderTarget || isDepthTarget ? &clear : nullptr,
-            IID_PPV_ARGS(&mTextureHandle.setupAs<ID3D12Resource *>()));
+            IID_PPV_ARGS(&mResource));
         DX12_CHECK(hr);
 
         if (data.mData) {
@@ -161,8 +161,8 @@ namespace Render {
 
     void DirectX12Texture::reset()
     {
-        if (mTextureHandle) {
-            mTextureHandle.release<ID3D12Resource *>()->Release();
+        mResource.reset();
+        if (mResourceBlock) {            
             mResourceBlock.release<DirectX12ResourceBlock<1> *>();
             DirectX12RenderContext::getSingleton().mDescriptorHeap.deallocate(DirectX12RenderContext::getSingleton().mDescriptorHeap.fromGpuHandle(mBlock.mHandle));
             mSamples = 0;
@@ -289,14 +289,12 @@ namespace Render {
 
     ID3D12Resource *DirectX12Texture::resource() const
     {
-        return mTextureHandle.as<ID3D12Resource *>();
+        return mResource;
     }
 
-    ReleasePtr<ID3D12Resource> DirectX12Texture::resourcePtr() const
+    const ReleasePtr<ID3D12Resource> &DirectX12Texture::resourcePtr() const
     {
-        ID3D12Resource *res = resource();
-        res->AddRef();
-        return ReleasePtr<ID3D12Resource> { res };
+        return mResource;
     }
 
     void DirectX12Texture::setName(std::string_view name)

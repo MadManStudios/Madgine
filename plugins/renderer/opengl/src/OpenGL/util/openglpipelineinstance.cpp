@@ -401,7 +401,7 @@ namespace Render {
                            [=](const ConstTexturePtr &tex) {
                                glActiveTexture(GL_TEXTURE0 + index);
                                if (tex)
-                                   glBindTexture(std::static_pointer_cast<const OpenGLTexture>(tex)->target(), tex->handle());
+                                   glBindTexture(std::static_pointer_cast<const OpenGLTexture>(tex)->target(), std::static_pointer_cast<const OpenGLTexture>(tex)->handle());
                                else
                                    glBindTexture(GL_TEXTURE_2D, 0);
 

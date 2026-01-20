@@ -30,6 +30,8 @@ namespace Render {
         void reset();
         void bind() const;
 
+        GLuint handle() const;
+
         void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data);
 
         GLenum target() const;
@@ -42,6 +44,8 @@ namespace Render {
         size_t mSamples = 1;
 
         OpenGLResourceBlock<1> mBlock;
+
+        GLuint mHandle = 0;
     };
 
 }
