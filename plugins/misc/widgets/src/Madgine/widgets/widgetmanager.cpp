@@ -31,6 +31,7 @@ NAMED_UNIQUECOMPONENT(WidgetManager, Engine::Widgets::WidgetManager)
 METATABLE_BEGIN(Engine::Widgets::WidgetManager)
     READONLY_PROPERTY(Widgets, widgets)
     MEMBER(mWidgetsLayout)
+    MEMBER(mShadowOffset)
 METATABLE_END(Engine::Widgets::WidgetManager)
 
 SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetManager)
@@ -644,6 +645,7 @@ namespace Widgets {
             auto perApp = mPipeline->mapParameters<HLSL::WidgetsPerApplication>(0);
             perApp->c = target->getClipSpaceMatrix();
             perApp->screenSize = Vector2 { size };
+            perApp->distanceFieldScaling = 2.0f;
         }
 
         for (auto &[layer, layerData] : renderData.vertexData()) {
@@ -655,6 +657,7 @@ namespace Widgets {
                     auto parameters = mPipeline->mapParameters<HLSL::WidgetsPerObject>(2);
                     parameters->hasDistanceField = bool(tex.mFlags & TextureFlag_IsDistanceField);
                     parameters->hasTexture = true;
+                    parameters->shadowOffset = mShadowOffset / Vector2 { target->size() };                    
                 }
 
                 {
@@ -676,6 +679,7 @@ namespace Widgets {
                 auto parameters = mPipeline->mapParameters<HLSL::WidgetsPerObject>(2);
                 parameters->hasDistanceField = false;
                 parameters->hasTexture = false;
+                parameters->shadowOffset = { 0, 0 };
             }
 
             if (mData->mAtlas.resource())

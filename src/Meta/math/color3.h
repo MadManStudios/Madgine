@@ -29,7 +29,109 @@ struct Color3 {
     {
     }
 
-    constexpr operator Vector3() const
+    constexpr Color3 operator+(const Color3 &rkVector) const
+    {
+        return Color3(
+            r + rkVector.r,
+            g + rkVector.g,
+            b + rkVector.b);
+    }
+
+    Color3 operator-(const Color3 &rkVector) const
+    {
+        return Color3(
+            r - rkVector.r,
+            g - rkVector.g,
+            b - rkVector.b);
+    }
+
+    Color3 operator*(const float fScalar) const
+    {
+        return Color3(
+            r * fScalar,
+            g * fScalar,
+            b * fScalar);
+    }
+
+    Color3 operator*(const Color3 &rhs) const
+    {
+        return Color3(
+            r * rhs.r,
+            g * rhs.g,
+            b * rhs.b);
+    }
+
+    Color3 operator/(const float fScalar) const
+    {
+        assert(fScalar != 0.0);
+
+        float fInv = 1.0f / fScalar;
+
+        return Color3(
+            r * fInv,
+            g * fInv,
+            b * fInv);
+    }
+
+    Color3 operator/(const Color3 &rhs) const
+    {
+        return Color3(
+            r / rhs.r,
+            g / rhs.g,
+            b / rhs.b);
+    }
+
+
+    friend constexpr Color3 operator*(const float fScalar, const Color3 &rkVector)
+    {
+        return Color3(
+            fScalar * rkVector.r,
+            fScalar * rkVector.g,
+            fScalar * rkVector.b);
+    }
+
+    friend Color3 operator/(const float fScalar, const Color3 &rkVector)
+    {
+        return Color3(
+            fScalar / rkVector.r,
+            fScalar / rkVector.g,
+            fScalar / rkVector.b);
+    }
+
+    friend Color3 operator+(const Color3 &lhs, const float rhs)
+    {
+        return Color3(
+            lhs.r + rhs,
+            lhs.g + rhs,
+            lhs.b + rhs);
+    }
+
+    friend Color3 operator+(const float lhs, const Color3 &rhs)
+    {
+        return Color3(
+            lhs + rhs.r,
+            lhs + rhs.g,
+            lhs + rhs.b);
+    }
+
+    friend Color3 operator-(const Color3 &lhs, const float rhs)
+    {
+        return Color3(
+            lhs.r - rhs,
+            lhs.g - rhs,
+            lhs.b - rhs);
+    }
+
+    friend Color3 operator-(const float lhs, const Color3 &rhs)
+    {
+        return Color3(
+            lhs - rhs.r,
+            lhs - rhs.g,
+            lhs - rhs.b);
+    }
+
+
+    explicit constexpr operator Vector3() const
     {
         const auto toLinear = [](float x) {
             if (x <= 0.04045f) {
@@ -40,6 +142,8 @@ struct Color3 {
         };
         return { toLinear(r), toLinear(g), toLinear(b) };
     }
+
+
 
     friend std::ostream &operator<<(std::ostream &o, const Color3 &c)
     {
@@ -71,5 +175,12 @@ struct Color3 {
     float g;
     float b;
 };
+
+
+constexpr Color3 lerp(const Color3 &c1, const Color3 &c2, float ratio)
+{
+    return (1.0f - ratio) * c1 + ratio * c2;
+}
+
 
 }

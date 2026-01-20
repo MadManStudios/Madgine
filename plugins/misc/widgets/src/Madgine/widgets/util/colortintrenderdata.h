@@ -2,6 +2,7 @@
 
 #include "Meta/math/color4.h"
 
+#include "colorrenderdata.h"
 #include "renderdata.h"
 
 namespace Engine {
@@ -9,11 +10,11 @@ namespace Widgets {
 
     struct ColorTintRenderData : RenderData {
 
-        Color4 mNormalColor = { 1.0f, 1.0f, 1.0f, 1.0f };
-        Color4 mHighlightedColor = { 1.2f, 1.2f, 1.2f, 1.0f };
-        Color4 mPressedColor = { 1.3f, 1.3f, 1.3f, 1.0f };
-        Color4 mSelectedColor = { 1.1f, 1.1f, 1.1f, 1.0f };
-        Color4 mDisabledColor = { 0.4f, 0.4f, 0.4f, 1.0f };
+        ColorRenderData mNormalColor = Color4 { 1.0f, 1.0f, 1.0f, 1.0f };
+        ColorRenderData mHighlightedColor = Color4 { 1.2f, 1.2f, 1.2f, 1.0f };
+        ColorRenderData mPressedColor = Color4 { 1.3f, 1.3f, 1.3f, 1.0f };
+        ColorRenderData mSelectedColor = Color4 { 1.1f, 1.1f, 1.1f, 1.0f };
+        ColorRenderData mDisabledColor = Color4 { 0.4f, 0.4f, 0.4f, 1.0f };
     };
 
 }

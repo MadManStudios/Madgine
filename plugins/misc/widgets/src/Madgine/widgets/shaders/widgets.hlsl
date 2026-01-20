@@ -4,6 +4,7 @@ struct WidgetsPerApplication
 {
     float4x4 c;
     float2 screenSize;
+    float distanceFieldScaling;
 };
 
 ConstantBuffer<WidgetsPerApplication> app : register(b0);
@@ -12,6 +13,7 @@ struct WidgetsPerObject
 {
     bool hasDistanceField;
     bool hasTexture;
+    float2 shadowOffset;
 };
 
 ConstantBuffer<WidgetsPerObject> object : register(b2);
@@ -64,17 +66,19 @@ float median(float r, float g, float b)
 export float4 widgets_PS(FragmentData IN) : SV_TARGET
 {
     float4 texColor;
+    float4 shadowColor = float4(0, 0, 0, 0);
     if (object.hasDistanceField)
     {
         float3 sample = tex.Sample(texSampler, IN.uv).rgb;
         float sigDist = median(sample.r, sample.g, sample.b) - 0.5;
-        float opacity = saturate(sigDist / fwidth(sigDist) + 0.5);
-		
-        if (opacity == 0.0)
+        float opacity = smoothstep(0, 1, app.distanceFieldScaling * sigDist + 0.5);
+
+        if (opacity <= 0.0)
         {
             discard;
         }
-        texColor = opacity;
+        
+        texColor = float4(1, 1, 1, opacity);
     }
     else if (object.hasTexture)
     {

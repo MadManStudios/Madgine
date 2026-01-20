@@ -35,6 +35,8 @@ namespace Widgets {
     struct DragBeginEvent;
     struct DragMoveEvent;
     struct DragEndEvent;
+    
+    struct ColorFrame;
 
 }
 

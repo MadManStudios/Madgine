@@ -60,11 +60,11 @@ namespace Widgets {
         Vector2 pos = getAbsolutePosition();
         Vector3 size = getAbsoluteSize();
 
-        Color4 color = mEnabled ? (mHovered ? mColorTintRenderData.mHighlightedColor : mColorTintRenderData.mNormalColor)
+        const ColorRenderData &color = mEnabled ? (mHovered ? mColorTintRenderData.mHighlightedColor : mColorTintRenderData.mNormalColor)
                                 : mColorTintRenderData.mDisabledColor;
 
         if (entry) {
-            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, color);
+            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, color.frame(pos, size.xy()));
         }
 
         if (mTextRenderData.available()) {

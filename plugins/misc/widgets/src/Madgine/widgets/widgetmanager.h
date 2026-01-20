@@ -149,6 +149,8 @@ namespace Widgets {
         bool mDragging = false;
         bool mDraggingAborted = false;
         std::chrono::steady_clock::time_point mDragStartTime;
+
+        Vector2 mShadowOffset = { 0, 0 };
     };
 
 }

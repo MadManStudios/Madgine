@@ -61,14 +61,14 @@ namespace Widgets {
                         size.z
                     };
 
-                    Color4 color = mColorTintRenderData.mNormalColor;
+                    const ColorRenderData *color = &mColorTintRenderData.mNormalColor;
                     if (mHoveredTab == tabIndex)
-                        color = mColorTintRenderData.mHighlightedColor;
+                        color = &mColorTintRenderData.mHighlightedColor;
                     else if (mSelectedTab == tabIndex)
-                        color = mColorTintRenderData.mPressedColor;
+                        color = &mColorTintRenderData.mPressedColor;
 
                     renderData.setSubLayer(0);
-                    mImageRenderData.renderImage(renderData, tabPos, tabSize.xy(), *entry, color);
+                    mImageRenderData.renderImage(renderData, tabPos, tabSize.xy(), *entry, color->frame(pos, size.xy()));
                     renderData.setSubLayer(1);
                     mTextRenderData.render(renderData, mTabNames[tabIndex], tabPos, tabSize);
                 }

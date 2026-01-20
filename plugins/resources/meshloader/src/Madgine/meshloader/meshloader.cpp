@@ -163,7 +163,7 @@ namespace Render {
                         if constexpr (V::template holds<VertexColor>) {
                             if (mesh->mColors[0]) {
                                 aiColor4D &c = mesh->mColors[0][vertexIndex];
-                                vertex.mColor = Color4 { &c.r };
+                                vertex.mColor = Vector4 { Color4 { &c.r } };
                             } else {
                                 vertex.mColor = Vector4::UNIT_SCALE;
                             }

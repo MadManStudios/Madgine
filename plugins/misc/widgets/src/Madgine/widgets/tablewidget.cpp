@@ -131,16 +131,16 @@ namespace Widgets {
                 auto [rowPos, rowSize] = mHorizontalLayoutRenderData.getElementDimensions(row);
 
                 if (blankEntry) {
-                    Color4 color = mSelectionRenderData.mNormalColor;
+                    const ColorRenderData *color = &mSelectionRenderData.mNormalColor;
 
                     if (mHoveredRow == row) {
-                        color = mSelectionRenderData.mHighlightedColor;
+                        color = &mSelectionRenderData.mHighlightedColor;
                     } else if (mSelectedRow == row) {
-                        color = mSelectionRenderData.mSelectedColor;
+                        color = &mSelectionRenderData.mSelectedColor;
                     }
 
                     renderData.setSubLayer(0);
-                    renderData.renderQuadUV({ pos.x, pos.y + rowPos }, { fullWidth, rowSize }, color, {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
+                    renderData.renderQuadUV({ pos.x, pos.y + rowPos }, { fullWidth, rowSize }, color->frame(pos, size.xy()), {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
                     renderData.setSubLayer(1);
                 }
 

@@ -226,6 +226,18 @@ namespace Behavior {
             return NULL;
         }
 
+        PyObject *toPyObject(const Color3 &v)
+        {
+            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <Color3> yet");
+            return NULL;
+        }
+
+        PyObject *toPyObject(const Color4 &v)
+        {
+            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <Color4> yet");
+            return NULL;
+        }
+
         PyObject *toPyObject(const Vector3i &v)
         {
             PyObject *obj = PyObject_CallObject((PyObject *)&PyVector3Type, NULL);

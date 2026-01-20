@@ -12,7 +12,7 @@ namespace Widgets {
         void render(WidgetsRenderData &renderData) override;
 
         ScalableImageRenderData mImageRenderData;
-        Color4 mColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+        ColorRenderData mColor;
     };
 }
 }

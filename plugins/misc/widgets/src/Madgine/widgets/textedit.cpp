@@ -140,7 +140,7 @@ namespace Widgets {
                     const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
                     if (blankEntry) {
                         Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
-                        mTextRenderData.renderSelection(renderData, scrolledPos, textSize, *blankEntry, mState.select_start, mState.select_end, color);
+                        mTextRenderData.renderSelection(renderData, scrolledPos, textSize, *blankEntry, mState.select_start, mState.select_end, ColorRenderData { color }.frame(textPos, textSize.xy()));
                     }
                 }
             }

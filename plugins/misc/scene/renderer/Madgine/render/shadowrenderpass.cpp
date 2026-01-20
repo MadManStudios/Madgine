@@ -62,7 +62,7 @@ namespace Render {
         {
             auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
 
-            perFrame->light.light.color = mData.mScene.mAmbientLightColor;
+            perFrame->light.light.color = Vector3 { mData.mScene.mAmbientLightColor };
             perFrame->light.light.dir = (v * Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
         }
 

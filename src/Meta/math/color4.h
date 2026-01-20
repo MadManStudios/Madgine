@@ -86,7 +86,120 @@ struct Color4 {
         return { r, g, b, a };
     }
 
-    constexpr operator Vector4() const
+    constexpr Color4 operator+(const Color4 &rkVector) const
+    {
+        return Color4(
+            r + rkVector.r,
+            g + rkVector.g,
+            b + rkVector.b,
+            a + rkVector.a);
+    }
+
+    Color4 operator-(const Color4 &rkVector) const
+    {
+        return Color4(
+            r - rkVector.r,
+            g - rkVector.g,
+            b - rkVector.b,
+            a - rkVector.a);
+    }
+
+    Color4 operator*(const float fScalar) const
+    {
+        return Color4(
+            r * fScalar,
+            g * fScalar,
+            b * fScalar,
+            a * fScalar);
+    }
+
+    Color4 operator*(const Color4 &rhs) const
+    {
+        return Color4(
+            r * rhs.r,
+            g * rhs.g,
+            b * rhs.b,
+            a * rhs.a);
+    }
+
+    Color4 operator/(const float fScalar) const
+    {
+        assert(fScalar != 0.0);
+
+        float fInv = 1.0f / fScalar;
+
+        return Color4(
+            r * fInv,
+            g * fInv,
+            b * fInv,
+            a * fInv);
+    }
+
+    Color4 operator/(const Color4 &rhs) const
+    {
+        return Color4(
+            r / rhs.r,
+            g / rhs.g,
+            b / rhs.b,
+            a / rhs.a);
+    }
+
+    friend constexpr Color4 operator*(const float fScalar, const Color4 &rkVector)
+    {
+        return Color4(
+            fScalar * rkVector.r,
+            fScalar * rkVector.g,
+            fScalar * rkVector.b,
+            fScalar * rkVector.a);
+    }
+
+    friend Color4 operator/(const float fScalar, const Color4 &rkVector)
+    {
+        return Color4(
+            fScalar / rkVector.r,
+            fScalar / rkVector.g,
+            fScalar / rkVector.b,
+            fScalar / rkVector.a);
+    }
+
+    friend Color4 operator+(const Color4 &lhs, const float rhs)
+    {
+        return Color4(
+            lhs.r + rhs,
+            lhs.g + rhs,
+            lhs.b + rhs,
+            lhs.a + rhs);
+    }
+
+    friend Color4 operator+(const float lhs, const Color4 &rhs)
+    {
+        return Color4(
+            lhs + rhs.r,
+            lhs + rhs.g,
+            lhs + rhs.b,
+            lhs + rhs.a);
+    }
+
+    friend Color4 operator-(const Color4 &lhs, const float rhs)
+    {
+        return Color4(
+            lhs.r - rhs,
+            lhs.g - rhs,
+            lhs.b - rhs,
+            lhs.a - rhs);
+    }
+
+    friend Color4 operator-(const float lhs, const Color4 &rhs)
+    {
+        return Color4(
+            lhs - rhs.r,
+            lhs - rhs.g,
+            lhs - rhs.b,
+            lhs - rhs.a);
+    }
+
+
+    explicit constexpr operator Vector4() const
     {
         const auto toLinear = [](float x) {
             if (x <= 0.04045f) {
@@ -135,5 +248,13 @@ struct Color4 {
     float b;
     float a;
 };
+
+
+
+constexpr Color4 lerp(const Color4 &c1, const Color4 &c2, float ratio)
+{
+    return (1.0f - ratio) * c1 + ratio * c2;
+}
+
 
 }

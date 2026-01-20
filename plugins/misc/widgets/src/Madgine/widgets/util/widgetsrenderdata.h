@@ -4,6 +4,7 @@
 #include "Meta/math/rect2.h"
 #include "Meta/math/rect2i.h"
 
+#include "colorrenderdata.h"
 #include "texturesettings.h"
 #include "vertex.h"
 
@@ -13,8 +14,8 @@ namespace Widgets {
     struct WidgetsVertexData {
         std::vector<Vertex> mTriangleVertices;
 
-        void renderQuad(Vector3 pos, Vector2 size, const Rect2 &clipRect, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f }, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false);
-        void renderQuadUV(Vector3 pos, Vector2 size, const Rect2 &clipRect, Color4 color, Rect2i rect, Vector2i textureSize, bool flippedUV = false);
+        void renderQuad(Vector3 pos, Vector2 size, const Rect2 &clipRect, ColorFrame color = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false);
+        void renderQuadUV(Vector3 pos, Vector2 size, const Rect2 &clipRect, ColorFrame color, Rect2i rect, Vector2i textureSize, bool flippedUV = false);
     };
 
     struct WidgetsLinesData {
@@ -25,8 +26,8 @@ namespace Widgets {
 
     struct MADGINE_WIDGETS_EXPORT WidgetsRenderData {
 
-        void renderQuad(Vector2 pos, Vector2 size, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f }, TextureSettings tex = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false, bool transparentContent = false);
-        void renderQuadUV(Vector2 pos, Vector2 size, Color4 color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV = false, bool transparentContent = false);
+        void renderQuad(Vector2 pos, Vector2 size, ColorFrame color = {}, TextureSettings tex = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false, bool transparentContent = false);
+        void renderQuadUV(Vector2 pos, Vector2 size, ColorFrame color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV = false, bool transparentContent = false);
 
         void renderLine(const Line2 &line, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
 

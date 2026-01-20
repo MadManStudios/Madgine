@@ -99,7 +99,7 @@ namespace Render {
 
             perFrame->light.caster.shadowSamples = 4;
 
-            perFrame->light.light.color = mData.mScene.mAmbientLightColor;
+            perFrame->light.light.color = Vector3 { mData.mScene.mAmbientLightColor };
             perFrame->light.light.dir = (v * Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
             perFrame->light.light.orthographic = mData.mScene.mAmbientLightOrthographic;
 
@@ -116,7 +116,7 @@ namespace Render {
                 if (t) {
                     float range = light.mRange;
                     perFrame->pointLights[i].light.position = (v * Vector4 { t->mPosition, 1.0f }).xyz();
-                    perFrame->pointLights[i].light.color = light.mColor;
+                    perFrame->pointLights[i].light.color = Vector3 { light.mColor };
                     perFrame->pointLights[i].light.constantFactor = mLightConstantFactor;
                     perFrame->pointLights[i].light.linearFactor = mLightLinearFactor / range;
                     perFrame->pointLights[i].light.squaredFactor = mLightSquaredFactor / (range * range);

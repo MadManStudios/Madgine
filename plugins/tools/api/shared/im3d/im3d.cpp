@@ -621,7 +621,7 @@ namespace Im3D {
         auto corners = frustum.getCorners();
         for (size_t i = 0; i < 8; ++i) {
             vertices[i].mPos = corners[i];
-            vertices[i].mColor = param.mColor;
+            vertices[i].mColor = Vector4 { param.mColor };
         }
 
         static constexpr uint32_t indices[] = {

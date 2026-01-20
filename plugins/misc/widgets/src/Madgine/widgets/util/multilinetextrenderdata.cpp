@@ -23,10 +23,10 @@ namespace Widgets {
 
     void MultilineTextRenderData::render(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, int cursorIndex) const
     {
-        renderText(renderData, mLines, pos, size.xy(), mFont, size.z * mFontSize, mColor, mPivot, cursorIndex);
+        renderText(renderData, mLines, pos, size.xy(), mFont, size.z * mFontSize, mColor.frame(pos, size.xy()), mPivot, mShadowOffset, cursorIndex);
     }
 
-    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, Color4 color)
+    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
         renderSelection(renderData, mLines, pos, size.xy(), mFont, size.z * mFontSize, mPivot, entry, selectionStart, selectionEnd, color);
     }
@@ -41,7 +41,7 @@ namespace Widgets {
         return calculateTotalHeight(mLines.size(), mFont, z * mFontSize);
     }
 
-    void MultilineTextRenderData::renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Color4 color, Vector2 pivot, int cursorIndex)
+    void MultilineTextRenderData::renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset, int cursorIndex)
     {
         float scale = fontSize / 64.0f;
 
@@ -54,11 +54,11 @@ namespace Widgets {
         for (const Line &line : lines) {
             originY += lineHeight;
 
-            renderLine(renderData, line, originY, pos, size, font, fontSize, color, pivot, cursorIndex == -1 ? -1 : cursorIndex - (line.mBegin - lines.front().mBegin));
+            renderLine(renderData, line, originY, pos, size, font, fontSize, color, pivot, shadowOffset, cursorIndex == -1 ? -1 : cursorIndex - (line.mBegin - lines.front().mBegin));
         }
     }
 
-    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, Color4 color)
+    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
         if (selectionStart > selectionEnd)
             std::swap(selectionStart, selectionEnd);

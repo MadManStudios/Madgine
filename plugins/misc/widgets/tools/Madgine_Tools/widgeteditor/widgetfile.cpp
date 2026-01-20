@@ -15,11 +15,17 @@
 #include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
 
+#include "Meta/keyvalue/metatable_impl.h"
+
 #include "Madgine_Tools/imgui/clientimroot.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
 #include "imgui/imguiaddons.h"
 #include "widgeteditor.h"
+
+METATABLE_BEGIN(Engine::Tools::WidgetFile)
+    READONLY_PROPERTY(WidgetManager, widgetManager)
+METATABLE_END(Engine::Tools::WidgetFile)
 
 namespace Engine {
 namespace Tools {
@@ -455,6 +461,11 @@ namespace Tools {
         ImGui::End();
 
         return open;
+    }
+
+    Widgets::WidgetManager &WidgetFile::widgetManager()
+    {
+        return mWidgetManager;
     }
 
 }

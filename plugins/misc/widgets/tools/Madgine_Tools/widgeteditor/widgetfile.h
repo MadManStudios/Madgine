@@ -20,6 +20,8 @@ namespace Tools {
 
         bool render();
 
+        Widgets::WidgetManager &widgetManager();
+
     private:
         WidgetEditor &mEditor;
         Filesystem::Path mPath;

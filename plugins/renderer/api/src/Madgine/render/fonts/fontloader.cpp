@@ -172,12 +172,10 @@ namespace Render {
             co_return false;
         }
 
-        Stream buffer = Filesystem::openFileRead(path, true);
-
-        std::vector<unsigned char> fontBuffer { buffer.iterator(), buffer.end() };
+        ByteBuffer buffer = (co_await Filesystem::readFileAsync(path)).value();        
 
         FT_Face face;
-        if (FT_New_Memory_Face(ft, fontBuffer.data(), fontBuffer.size(), 0, &face)) {
+        if (FT_New_Memory_Face(ft, static_cast<const FT_Byte*>(buffer.mData), buffer.mSize, 0, &face)) {
             FT_Done_FreeType(ft);
             LOG_ERROR("FREETYPE: Failed to load font");
             co_return false;
@@ -201,8 +199,8 @@ namespace Render {
                 extendedSizes[c] = { 0, 0 };
                 continue;
             }
-            sizes[c] = { static_cast<int>(face->glyph->bitmap.width) + 2, static_cast<int>(face->glyph->bitmap.rows) + 2 };
-            extendedSizes[c] = { static_cast<int>(face->glyph->bitmap.width) + 3, static_cast<int>(face->glyph->bitmap.rows) + 3 };
+            sizes[c] = { static_cast<int>(face->glyph->bitmap.width) + 4, static_cast<int>(face->glyph->bitmap.rows) + 4 };
+            extendedSizes[c] = { static_cast<int>(face->glyph->bitmap.width) + 5, static_cast<int>(face->glyph->bitmap.rows) + 5 };
         }
 
         constexpr int UNIT_SIZE = 256;
@@ -263,7 +261,7 @@ namespace Render {
             FT_Outline_Decompose(&face->glyph->outline, &ftFunctions, &context);
 
             ::msdfgen::edgeColoringSimple(shape, 3);
-            ::msdfgen::generateMSDF(bm, shape, 4.0, { 1, 1 }, { static_cast<double>(-face->glyph->bitmap_left + 1), static_cast<double>(sizes[c].y - face->glyph->bitmap_top - 1) });
+            ::msdfgen::generateMSDF(bm, shape, 4.0, { 1, 1 }, { static_cast<double>(-face->glyph->bitmap_left + 2), static_cast<double>(sizes[c].y - face->glyph->bitmap_top - 2) });
 
             font.mGlyphs[c].mSize = sizes[c];
             font.mGlyphs[c].mUV = entries[c].mArea.mTopLeft;

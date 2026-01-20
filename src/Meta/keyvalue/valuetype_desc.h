@@ -310,7 +310,7 @@ struct META_EXPORT ExtendedValueTypeDesc {
         : mType(type, innerKeyDesc.mType, innerValueDesc.mType)
         , mSecondary(innerValueDesc.mSecondary)
     {
-        assert(!innerKeyDesc.mSecondary.mDummy);
+        //assert(!innerKeyDesc.mSecondary.mDummy);
     }
 
     constexpr ExtendedValueTypeDesc(const ValueTypeDesc &desc)

@@ -6,6 +6,7 @@
 #include "Madgine/imageloader/imageloader.h"
 
 #include "renderdata.h"
+#include "colorrenderdata.h"
 
 namespace Engine {
 namespace Widgets {
@@ -18,7 +19,7 @@ namespace Widgets {
         std::string_view imageName() const;
         Resources::ImageLoader::Resource *image() const;
 
-        void renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector2 size, const Atlas2::Entry &entry, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
+        void renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector2 size, const Atlas2::Entry &entry, const ColorFrame &color = {});
 
         uint16_t mLeftBorder = 0;
         uint16_t mTopBorder = 0;

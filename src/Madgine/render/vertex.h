@@ -28,6 +28,12 @@ namespace Render {
     };
 
     struct VertexColor {
+        VertexColor() = default;
+        VertexColor(Color4 color)
+            : mColor(color)
+        {
+        }
+
         using ctor = Color4;
         Vector4 mColor;
     };

@@ -30,6 +30,7 @@
 UNIQUECOMPONENT(Engine::Tools::WidgetEditor);
 
 METATABLE_BEGIN_BASE(Engine::Tools::WidgetEditor, Engine::Tools::ToolBase)
+    MEMBER(mFiles)
 METATABLE_END(Engine::Tools::WidgetEditor)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::WidgetEditor, Engine::Tools::ToolBase)
