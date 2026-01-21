@@ -39,8 +39,10 @@ if (MADGINE_CONFIGURATION)
 					-lp ${MADGINE_CONFIGURATION}/plugins.ini
 					--bake ${local_lists}
 					--bake-output-list ${CMAKE_BINARY_DIR}/bake_results/resources.list
-					\"$<JOIN:$<TARGET_PROPERTY:MadgineTooling,PARAMETERS>," ">\"
-		DEPENDS MadgineTooling ${local_lists})
+					"$<TARGET_PROPERTY:MadgineTooling,PARAMETERS>"					
+		DEPENDS MadgineTooling ${local_lists}
+		COMMAND_EXPAND_LISTS
+		VERBATIM)
 
 	add_dependencies(copy_data bake_resource_lists)
 
