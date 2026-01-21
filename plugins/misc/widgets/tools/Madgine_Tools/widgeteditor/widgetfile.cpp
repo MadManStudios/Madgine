@@ -49,7 +49,6 @@ namespace Tools {
             Serialize::StreamResult result = Serialize::read({ stream, CallerHierarchy { &mWidgetManager } }, *mTopLevel, "Widget");
             if (result.mState != Serialize::StreamState::OK) {
                 LOG_ERROR(result);
-                throw 0;
             }
         }
 

@@ -5,22 +5,47 @@
             <mTextRenderData serId=3>
                 <mFontSize>64</mFontSize>
                 <mPivot>[0.5, 0.5]</mPivot>
-                <mColor>(1, 1, 1, 1)</mColor>
+                <mColor serId=4>
+                    <mColor>(1, 1, 1, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mColor>
                 <mFont>OpenSans-Regular</mFont>
+                <mShadowOffset>[0, 0]</mShadowOffset>
             </mTextRenderData>
-            <mImageRenderData serId=4>
+            <mImageRenderData serId=5>
                 <Image></Image>
                 <mLeftBorder>0</mLeftBorder>
                 <mTopBorder>0</mTopBorder>
                 <mBottomBorder>0</mBottomBorder>
                 <mRightBorder>0</mRightBorder>
             </mImageRenderData>
-            <mColorTintRenderData serId=5>
-                <mNormalColor>(1, 1, 1, 1)</mNormalColor>
-                <mHighlightedColor>(1.2, 1.2, 1.2, 1)</mHighlightedColor>
-                <mPressedColor>(1.3, 1.3, 1.3, 1)</mPressedColor>
-                <mSelectedColor>(1.1, 1.1, 1.1, 1)</mSelectedColor>
-                <mDisabledColor>(0.4, 0.4, 0.4, 1)</mDisabledColor>
+            <mColorTintRenderData serId=6>
+                <mNormalColor serId=7>
+                    <mColor>(1, 1, 1, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mNormalColor>
+                <mHighlightedColor serId=8>
+                    <mColor>(1.2, 1.2, 1.2, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mHighlightedColor>
+                <mPressedColor serId=9>
+                    <mColor>(1.3, 1.3, 1.3, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mPressedColor>
+                <mSelectedColor serId=10>
+                    <mColor>(1.1, 1.1, 1.1, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mSelectedColor>
+                <mDisabledColor serId=11>
+                    <mColor>(0.4, 0.4, 0.4, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mDisabledColor>
             </mColorTintRenderData>
             <mEnabled>true</mEnabled>
             <mChildren>
@@ -44,7 +69,7 @@
     <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
     <mOpacity>1</mOpacity>
     <mConditions>
-        <Item serId=6>
+        <Item serId=12>
             <mName>Test</mName>
             <mFormula>Formula::W_MINUS_H</mFormula>
             <mOperator>Operator::GREATER</mOperator>

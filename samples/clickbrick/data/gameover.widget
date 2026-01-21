@@ -5,8 +5,13 @@
             <mTextRenderData serId=3>
                 <mFontSize>80</mFontSize>
                 <mPivot>[0.5, 0.5]</mPivot>
-                <mColor>(1, 1, 1, 1)</mColor>
+                <mColor serId=4>
+                    <mColor>(1, 1, 1, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mColor>
                 <mFont>OpenSans-Bold</mFont>
+                <mShadowOffset>[0, 0]</mShadowOffset>
             </mTextRenderData>
             <mChildren>
             </mChildren>
@@ -19,13 +24,18 @@
             <mProperties>
             </mProperties>
         </Label>
-        <Label serId=4>
+        <Label serId=5>
             <mText>Your Score: 0</mText>
-            <mTextRenderData serId=5>
+            <mTextRenderData serId=6>
                 <mFontSize>35</mFontSize>
                 <mPivot>[0.5, 0.5]</mPivot>
-                <mColor>(1, 1, 1, 1)</mColor>
+                <mColor serId=7>
+                    <mColor>(1, 1, 1, 1)</mColor>
+                    <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                    <mGradient>[0, 0]</mGradient>
+                </mColor>
                 <mFont>OpenSans-Regular</mFont>
+                <mShadowOffset>[0, 0]</mShadowOffset>
             </mTextRenderData>
             <mChildren>
             </mChildren>
