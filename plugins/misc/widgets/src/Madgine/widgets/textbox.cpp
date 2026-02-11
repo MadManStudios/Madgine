@@ -81,7 +81,7 @@ namespace Widgets {
             Vector2 pos = getAbsolutePosition();
             Vector3 size = getAbsoluteSize();
 
-            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
+            mImageRenderData.renderImage(renderData, pos, size, *entry);
 
             if (mTextRenderData.available()) {
                 mTextRenderData.render(renderData, mText, pos, size, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);

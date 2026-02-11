@@ -124,7 +124,7 @@ namespace Widgets {
             Vector2 pos = getAbsolutePosition();
             Vector3 size = getAbsoluteSize();
 
-            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry);
+            mImageRenderData.renderImage(renderData, pos, size, *entry);
 
             if (mTextRenderData.available()) {
                 if (mTextRenderData.lines().empty() && !mText.empty())

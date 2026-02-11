@@ -64,7 +64,7 @@ namespace Widgets {
                                 : mColorTintRenderData.mDisabledColor;
 
         if (entry) {
-            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, color.frame(pos, size.xy()));
+            mImageRenderData.renderImage(renderData, pos, size, *entry, color.frame(pos, size.xy()));
         }
 
         if (mTextRenderData.available()) {

@@ -68,7 +68,7 @@ namespace Widgets {
                         color = &mColorTintRenderData.mPressedColor;
 
                     renderData.setSubLayer(0);
-                    mImageRenderData.renderImage(renderData, tabPos, tabSize.xy(), *entry, color->frame(pos, size.xy()));
+                    mImageRenderData.renderImage(renderData, tabPos, tabSize, *entry, color->frame(pos, size.xy()));
                     renderData.setSubLayer(1);
                     mTextRenderData.render(renderData, mTabNames[tabIndex], tabPos, tabSize);
                 }

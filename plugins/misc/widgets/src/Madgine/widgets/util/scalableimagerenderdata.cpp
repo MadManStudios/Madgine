@@ -48,10 +48,10 @@ namespace Widgets {
         return mImage;
     }
 
-    void ScalableImageRenderData::renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector2 size, const Atlas2::Entry &entry, const ColorFrame &color)
+    void ScalableImageRenderData::renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, const ColorFrame &color)
     {
         Vector2 posOuter = pos;
-        Vector2 sizeOuter = size;
+        Vector2 sizeOuter = size.xy();
 
         Vector2 topLeftUV = Vector2 { entry.mArea.mTopLeft + Vector2i { 1, 1 } } / (2048.f /* * mData->mUIAtlasSize*/);
         Vector2 uvSize = Vector2 { entry.mArea.mSize - Vector2i { 2, 2 } } / (2048.f /* * mData->mUIAtlasSize*/);
@@ -63,52 +63,52 @@ namespace Widgets {
         const Vector2i &imageSize = entry.mArea.mSize;
 
         if (mLeftBorder > 0) {
-            pos.x += mLeftBorder;
-            size.x -= mLeftBorder;
+            pos.x += size.z * mLeftBorder;
+            size.x -= size.z * mLeftBorder;
             topLeftUV.x += mLeftBorder * uvSize.x / imageSize.x;
         }
 
         if (mTopBorder > 0) {
-            pos.y += mTopBorder;
-            size.y -= mTopBorder;
+            pos.y += size.z * mTopBorder;
+            size.y -= size.z * mTopBorder;
             topLeftUV.y += mTopBorder * uvSize.y / imageSize.y;
         }
 
         if (mRightBorder > 0) {
-            size.x -= mRightBorder;
+            size.x -= size.z * mRightBorder;
             bottomRightUV.x -= mRightBorder * uvSize.x / imageSize.x;
         }
 
         if (mBottomBorder > 0) {
-            size.y -= mBottomBorder;
+            size.y -= size.z * mBottomBorder;
             bottomRightUV.y -= mBottomBorder * uvSize.y / imageSize.y;
         }
 
-        renderData.renderQuad(pos, size, color, {}, topLeftUV, bottomRightUV, entry.mFlipped);
+        renderData.renderQuad(pos, size.xy(), color, {}, topLeftUV, bottomRightUV, entry.mFlipped);
 
         if (mLeftBorder > 0)
-            renderData.renderQuad({ posOuter.x, pos.y }, { static_cast<float>(mLeftBorder), size.y }, color, {}, { topLeftUVOuter.x, topLeftUV.y }, { topLeftUV.x, bottomRightUV.y }, entry.mFlipped);
+            renderData.renderQuad({ posOuter.x, pos.y }, { size.z * mLeftBorder, size.y }, color, {}, { topLeftUVOuter.x, topLeftUV.y }, { topLeftUV.x, bottomRightUV.y }, entry.mFlipped);
 
         if (mTopBorder > 0)
-            renderData.renderQuad({ pos.x, posOuter.y }, { size.x, static_cast<float>(mTopBorder) }, color, {}, { topLeftUV.x, topLeftUVOuter.y }, { bottomRightUV.x, topLeftUV.y }, entry.mFlipped);
+            renderData.renderQuad({ pos.x, posOuter.y }, { size.x, size.z * mTopBorder }, color, {}, { topLeftUV.x, topLeftUVOuter.y }, { bottomRightUV.x, topLeftUV.y }, entry.mFlipped);
 
         if (mRightBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, pos.y }, { static_cast<float>(mRightBorder), size.y }, color, {}, { bottomRightUV.x, topLeftUV.y }, { bottomRightUVOuter.x, bottomRightUV.y }, entry.mFlipped);
+            renderData.renderQuad({ pos.x + size.x, pos.y }, { size.z * mRightBorder, size.y }, color, {}, { bottomRightUV.x, topLeftUV.y }, { bottomRightUVOuter.x, bottomRightUV.y }, entry.mFlipped);
 
         if (mBottomBorder > 0)
-            renderData.renderQuad({ pos.x, pos.y + size.y }, { size.x, static_cast<float>(mBottomBorder) }, color, {}, { topLeftUV.x, bottomRightUV.y }, { bottomRightUV.x, bottomRightUVOuter.y }, entry.mFlipped);
+            renderData.renderQuad({ pos.x, pos.y + size.y }, { size.x, size.z * mBottomBorder }, color, {}, { topLeftUV.x, bottomRightUV.y }, { bottomRightUV.x, bottomRightUVOuter.y }, entry.mFlipped);
 
         if (mLeftBorder > 0 && mTopBorder > 0)
-            renderData.renderQuad(posOuter, { static_cast<float>(mLeftBorder), static_cast<float>(mTopBorder) }, color, {}, topLeftUVOuter, topLeftUV, entry.mFlipped);
+            renderData.renderQuad(posOuter, { size.z * mLeftBorder, size.z * mTopBorder }, color, {}, topLeftUVOuter, topLeftUV, entry.mFlipped);
 
         if (mRightBorder > 0 && mBottomBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, pos.y + size.y }, { static_cast<float>(mRightBorder), static_cast<float>(mBottomBorder) }, color, {}, bottomRightUV, bottomRightUVOuter, entry.mFlipped);
+            renderData.renderQuad({ pos.x + size.x, pos.y + size.y }, { size.z * mRightBorder, size.z * mBottomBorder }, color, {}, bottomRightUV, bottomRightUVOuter, entry.mFlipped);
 
         if (mLeftBorder > 0 && mBottomBorder > 0)
-            renderData.renderQuad({ posOuter.x, pos.y + size.y }, { static_cast<float>(mLeftBorder), static_cast<float>(mBottomBorder) }, color, {}, { topLeftUVOuter.x, bottomRightUV.y }, { topLeftUV.x, bottomRightUVOuter.y }, entry.mFlipped);
+            renderData.renderQuad({ posOuter.x, pos.y + size.y }, { size.z * mLeftBorder, size.z * mBottomBorder }, color, {}, { topLeftUVOuter.x, bottomRightUV.y }, { topLeftUV.x, bottomRightUVOuter.y }, entry.mFlipped);
 
         if (mRightBorder > 0 && mTopBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, posOuter.y }, { static_cast<float>(mRightBorder), static_cast<float>(mTopBorder) }, color, {}, { bottomRightUV.x, topLeftUVOuter.y }, { bottomRightUVOuter.x, topLeftUV.y }, entry.mFlipped);
+            renderData.renderQuad({ pos.x + size.x, posOuter.y }, { size.z * mRightBorder, size.z * mTopBorder }, color, {}, { bottomRightUV.x, topLeftUVOuter.y }, { bottomRightUVOuter.x, topLeftUV.y }, entry.mFlipped);
     }
 
 }

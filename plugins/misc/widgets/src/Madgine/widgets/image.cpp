@@ -32,7 +32,7 @@ namespace Widgets {
             Vector2 pos = getAbsolutePosition();
             Vector3 size = getAbsoluteSize();
 
-            mImageRenderData.renderImage(renderData, pos, size.xy(), *entry, mColor.frame(pos, size.xy()));
+            mImageRenderData.renderImage(renderData, pos, size, *entry, mColor.frame(pos, size.xy()));
         }
 
         WidgetBase::render(renderData);
