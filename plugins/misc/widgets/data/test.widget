@@ -8,7 +8,11 @@
                 <mBottomBorder>0</mBottomBorder>
                 <mRightBorder>0</mRightBorder>
             </mImageRenderData>
-            <mColor>(1, 1, 1, 1)</mColor>
+            <mColor serId=4>
+                <mColor>(1, 1, 1, 1)</mColor>
+                <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                <mGradient>[0, 0]</mGradient>
+            </mColor>
             <mChildren>
             </mChildren>
             <mName>Background</mName>
