@@ -50,9 +50,9 @@ namespace Execution {
     };
 
     template <typename T>
-    struct ConstantBinding<T&> {
+    struct ConstantBinding<T &> {
 
-        using type = T&;
+        using type = T &;
 
         ConstantBinding() = default;
 
@@ -64,17 +64,17 @@ namespace Execution {
         template <typename P>
         auto operator->*(P &&right) &&
         {
-            return MemberFunctionBinding<P, ConstantBinding<T&>>({ std::forward<P>(right) }, std::move(*this));
+            return MemberFunctionBinding<P, ConstantBinding<T &>>({ std::forward<P>(right) }, std::move(*this));
         }
 
         template <typename P>
         auto operator->*(P &&right) const &
         {
-            return MemberFunctionBinding<P, ConstantBinding<T&>>({ std::forward<P>(right) }, *this);
+            return MemberFunctionBinding<P, ConstantBinding<T &>>({ std::forward<P>(right) }, *this);
         }
 
         template <std::invocable<T &> F>
-        friend bool tag_invoke(access_binding_t, const ConstantBinding<T&> &binding, F &&callback)
+        friend bool tag_invoke(access_binding_t, const ConstantBinding<T &> &binding, F &&callback)
         {
             if (!binding.mValue)
                 return false;
@@ -183,6 +183,9 @@ namespace Execution {
 
         std::remove_reference_t<F> mF;
     };
+
+    template <typename F>
+    FunctionBinding(F &&) -> FunctionBinding<F>;
 
     template <typename F, typename This>
     struct MemberFunctionBinding {
