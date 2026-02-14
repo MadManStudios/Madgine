@@ -162,7 +162,7 @@ namespace Serialize {
             }
             FORMATTER_EXPECT(">");
 
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds> || typeId == Serialize::PrimitiveTypeIndex_v<FlagsTag>) {
                 pushLocale(sLocaleBracket, false);
             }
         }
@@ -193,7 +193,7 @@ namespace Serialize {
             }
         } else {
             const char *cPrefix = "</";
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds> || typeId == Serialize::PrimitiveTypeIndex_v<FlagsTag>) {
                 popLocale();
             }
             std::string prefix;
