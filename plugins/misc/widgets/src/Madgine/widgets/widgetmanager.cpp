@@ -204,7 +204,12 @@ namespace Widgets {
             return true;
 
         if (mPointerEventTargetWidget) {
-            mFocusedWidget = mPointerEventTargetWidget;
+            if (mFocusedWidget != mPointerEventTargetWidget) {
+                if (mFocusedWidget) {
+                    mFocusedWidget->onFocusLost();
+                }
+                mFocusedWidget = mPointerEventTargetWidget;
+            }
 
             mDragStartEvent = DragBeginEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton };
 
@@ -215,6 +220,9 @@ namespace Widgets {
 
             return true;
         } else {
+            if (mFocusedWidget) {
+                mFocusedWidget->onFocusLost();
+            }
             mFocusedWidget = nullptr;
         }
 
@@ -452,6 +460,9 @@ namespace Widgets {
 
     void WidgetManager::resetPointerState()
     {
+        if (mFocusedWidget) {
+            mFocusedWidget->onFocusLost();
+        }
         mFocusedWidget = nullptr;
         mHoveredWidget = nullptr;
         if (mPointerEventTargetWidget) {

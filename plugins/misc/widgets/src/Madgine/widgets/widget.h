@@ -96,6 +96,7 @@ namespace Widgets {
         bool allowsDragging() const;
 
         bool isFocused() const;
+        virtual void onFocusLost();
 
         bool dragging() const;
         void abortDrag();
@@ -111,7 +112,7 @@ namespace Widgets {
         virtual bool injectAxisEvent(const Input::AxisEvent &arg);
         virtual bool injectKeyPress(const Input::KeyPressEvent &arg);
         virtual bool injectKeyRelease(const Input::KeyReleaseEvent &arg);
-
+              
         Execution::SignalStub<const Input::PointerMoveEvent &> &pointerMoveEvent();
         Execution::SignalStub<const PointerClickEvent &> &pointerClickEvent();
         Execution::SignalStub<const Input::PointerMoveEvent &> &pointerEnterEvent();
@@ -136,7 +137,7 @@ namespace Widgets {
         Execution::SignalStub<const Input::KeyPressEvent &> &keyPressEvent();
         Execution::SignalStub<const Input::KeyReleaseEvent &> &keyReleaseEvent();
 
-        bool containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend = 0.0f) const;
+        virtual bool containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend = 0.0f) const;
         WidgetBase *getHoveredUp(const Vector2 &point, const Rect2i &screenSpace);
         virtual WidgetBase *getHoveredDown(const Vector2 &point, const Rect2i &screenSpace);
 

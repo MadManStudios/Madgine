@@ -28,6 +28,14 @@
                     <mType>WidgetType::MODAL_OVERLAY</mType>
                     <mDefaultVisibility>false</mDefaultVisibility>
                 </Item>
+                <Item serId=10>
+                    <mName>Test</mName>
+                    <mWidgetTemplate serId=11>
+                        <Name>test</Name>
+                    </mWidgetTemplate>
+                    <mType>WidgetType::ROOT_WIDGET</mType>
+                    <mDefaultVisibility>false</mDefaultVisibility>
+                </Item>
             </mWidgetsLayout>
         </WidgetManager>
     </mComponents>

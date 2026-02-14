@@ -33,7 +33,7 @@ namespace Widgets {
         void renderSelection(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color);
         float calculateWidth(std::string_view text, float z = 1.0f);
         float calculateWidth(char c, float z = 1.0f);
-        float calculateLineHeight(float z = 1.0f);
+        float calculateLineHeight(float z = 1.0f) const;
         Rect2 calculateBoundingBox(const Line &line, size_t lineCount, size_t lineNr, Vector2 pos, Vector3 size);
         Rect2 calculateBoundingBox(std::string_view text, Vector2 pos, Vector3 size);
 

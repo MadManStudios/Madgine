@@ -354,6 +354,10 @@ namespace Widgets {
         return true;
     }
 
+    void WidgetBase::onFocusLost()
+    {
+    }
+
     Execution::SignalStub<const Input::PointerMoveEvent &> &WidgetBase::pointerMoveEvent()
     {
         return mPointerMoveSignal;

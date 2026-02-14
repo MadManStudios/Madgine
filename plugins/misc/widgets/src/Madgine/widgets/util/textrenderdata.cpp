@@ -75,7 +75,7 @@ namespace Widgets {
         return calculateWidth(c, mFont, mStyle, z * mFontSize);
     }
 
-    float TextRenderData::calculateLineHeight(float z)
+    float TextRenderData::calculateLineHeight(float z) const
     {
         return calculateLineHeight(mFont, z * mFontSize);
     }
@@ -123,6 +123,8 @@ namespace Widgets {
 
         float cursorHeight = ref.mSize.y * scale;
 
+        size_t baseLayer = renderData.subLayer();
+
         for (const char *c = line.mBegin; c <= line.mEnd; ++c) {
 
             if (c - line.mBegin == cursorIndex) {
@@ -133,7 +135,7 @@ namespace Widgets {
                 float startX = cursorX - 1.5f * scale;
                 float startY = originY - ref.mBearing.y * scale;
 
-                renderData.setSubLayer(2);
+                renderData.setSubLayer(baseLayer + 2);
                 if (useSmallSize)
                     renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV2, cursor.mSize2 }, typeFace->mTexture->size(), cursor.mFlipped2);
                 else
@@ -152,7 +154,7 @@ namespace Widgets {
             float startY = originY - g.mBearing.y * scale;
 
             if (shadowOffset.x != 0.0f || shadowOffset.y != 0.0f) {
-                renderData.setSubLayer(0);
+                renderData.setSubLayer(baseLayer);
                 ColorFrame shadowFrame = ColorRenderData { Color4 { 0.0f, 0.0f, 0.0f, 1.0f } }.frame(color.mPos, color.mSize);
                 if (useSmallSize)
                     renderData.renderQuadUV({ pos.x + startX + shadowOffset.x * scale, pos.y + startY + shadowOffset.y * scale }, { width, height }, shadowFrame, tex, { g.mUV2, g.mSize2 }, typeFace->mTexture->size(), g.mFlipped2);
@@ -160,7 +162,7 @@ namespace Widgets {
                     renderData.renderQuadUV({ pos.x + startX + shadowOffset.x * scale, pos.y + startY + shadowOffset.y * scale }, { width, height }, shadowFrame, tex, { g.mUV, g.mSize }, typeFace->mTexture->size(), g.mFlipped);
             }
 
-            renderData.setSubLayer(1);
+            renderData.setSubLayer(baseLayer + 1);
             if (useSmallSize)
                 renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, color, tex, { g.mUV2, g.mSize2 }, typeFace->mTexture->size(), g.mFlipped2);
             else
@@ -168,6 +170,8 @@ namespace Widgets {
 
             cursorX += g.mAdvance / 64.0f * scale;
         }
+
+        renderData.setSubLayer(baseLayer);
     }
 
     void TextRenderData::renderSelection(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
@@ -208,7 +212,6 @@ namespace Widgets {
 
         float startY = originY - ref.mBearing.y * scale;
 
-        renderData.setSubLayer(0);
         renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { endX - startX, height }, color, {}, entry.mArea, { 2048, 2048 }, entry.mFlipped);
     }
 
