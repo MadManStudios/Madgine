@@ -26,7 +26,7 @@ namespace Tools {
 
         ValueType mV;
 
-        Flags<GenericResult> mFlags;
+        Flags<GenericResult::Representation> mFlags;
 
         std::optional<std::string> mOptional;
 

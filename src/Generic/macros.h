@@ -3,7 +3,10 @@
 #define STRINGIFY(x) #x
 #define STRINGIFY2(a) STRINGIFY(a)
 
-#define EVAL(x) x
+#define EVAL(...) __VA_ARGS__
+#define EVAL2(...) EVAL(EVAL(__VA_ARGS__))
+
+#define PARENS ()
 
 #define APPLY(f, ...) f(__VA_ARGS__)
 

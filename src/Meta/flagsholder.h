@@ -13,7 +13,7 @@ struct META_EXPORT FlagsHolder {
 
     template <typename Rep>
     FlagsHolder(Flags<Rep> f)
-        : mValue(f.values())
+        : mValue(f.value())
         , mTable(&Rep::sTable)
     {
     }
@@ -22,9 +22,33 @@ struct META_EXPORT FlagsHolder {
 
     const EnumMetaTable *table() const;
 
-    decltype(auto) operator[](int32_t i)
+    struct reference {
+        reference(uint64_t &value, int32_t index)
+            : mValue(value)
+            , mIndex(index)
+        {
+        }
+        operator bool() const
+        {
+            return (mValue & (1ull << mIndex)) != 0;
+        }
+        reference &operator=(bool value)
+        {
+            if (value) {
+                mValue |= (1ull << mIndex);
+            } else {
+                mValue &= ~(1ull << mIndex);
+            }
+            return *this;
+        }
+
+        uint64_t &mValue;
+        uint32_t mIndex;
+    };
+
+    reference operator[](int32_t i)
     {
-        return mValue[i];
+        return { mValue, i };
     }
 
     template <typename T>
@@ -32,14 +56,14 @@ struct META_EXPORT FlagsHolder {
     {
         if (mTable != &T::Representation::sTable)
             throw 0;
-        return static_cast<T>(mValue);
+        return static_cast<T::EnumType>(mValue);
     }
 
     META_EXPORT friend std::ostream &operator<<(std::ostream &stream, const FlagsHolder &value);
     META_EXPORT friend std::istream &operator>>(std::istream &stream, FlagsHolder &value);
 
 private:
-    BitArray<64> mValue;
+    uint64_t mValue;
     const EnumMetaTable *mTable;
 };
 

@@ -42,11 +42,11 @@ struct EnumMetaTable {
         return stream << actualType << "::" << toString(value);
     }
 
-    std::ostream &printFlags(std::ostream &stream, BitArray<64> flags) const
+    std::ostream &printFlags(std::ostream &stream, uint64_t flags) const
     {
         StringUtil::StreamJoiner join { stream, "|" };
         for (int32_t v : values<int32_t>()) {
-            if (flags[v]) {
+            if (flags & (1 << v)) {
                 print(join.next(), v, mName);
             }
         }
@@ -89,7 +89,7 @@ struct EnumMetaTable {
         return stream;
     }
 
-    std::istream &readFlags(std::istream &stream, BitArray<64> &flags) const
+    std::istream &readFlags(std::istream &stream, uint64_t &flags) const
     {
         std::string s;
         stream >> s;
@@ -105,7 +105,7 @@ struct EnumMetaTable {
                 int32_t v;
                 if (!fromString(e, v))
                     throw 0;
-                flags[v] = true;
+                flags |= 1 << v;                
             }
         }
         return stream;
