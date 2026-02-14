@@ -258,7 +258,7 @@ namespace Tools {
                 return Im3DFont {
                     (Im3DTextureId)font->mTexture->resourceBlock(),
                     font->mTexture->size(),
-                    font->mGlyphs.data()
+                    font->mFonts.at(Render::FontStyle::Default).data()
                 };
             } else {
                 return Im3DFont {};

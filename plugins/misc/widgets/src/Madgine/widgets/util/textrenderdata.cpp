@@ -14,6 +14,7 @@ METATABLE_BEGIN_BASE(Engine::Widgets::TextRenderData, Engine::Widgets::RenderDat
     MEMBER(mPivot)
     MEMBER(mColor)
     PROPERTY(Font, getFont, setFont)
+    MEMBER(mStyle)
     MEMBER(mShadowOffset)
 METATABLE_END(Engine::Widgets::TextRenderData)
 
@@ -22,6 +23,7 @@ SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::TextRenderData, Engine::Widgets::R
     FIELD(mPivot)
     FIELD(mColor)
     ENCAPSULATED_FIELD(mFont, getFontName, setFontName)
+    FIELD(mStyle)
     FIELD(mShadowOffset)
 SERIALIZETABLE_END(Engine::Widgets::TextRenderData)
 
@@ -55,22 +57,22 @@ namespace Widgets {
 
     void TextRenderData::render(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector3 size, int cursorIndex) const
     {
-        renderText(renderData, text, pos, size.xy(), mFont, size.z * mFontSize, mColor.frame(pos, size.xy()), mPivot, mShadowOffset, cursorIndex);
+        renderText(renderData, text, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mColor.frame(pos, size.xy()), mPivot, mShadowOffset, cursorIndex);
     }
 
     void TextRenderData::renderSelection(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
-        renderSelection(renderData, text, pos, size.xy(), mFont, size.z * mFontSize, mPivot, entry, selectionStart, selectionEnd, color);
+        renderSelection(renderData, text, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mPivot, entry, selectionStart, selectionEnd, color);
     }
 
     float TextRenderData::calculateWidth(std::string_view text, float z)
     {
-        return calculateWidth(text, mFont, z * mFontSize);
+        return calculateWidth(text, mFont, mStyle, z * mFontSize);
     }
 
     float TextRenderData::calculateWidth(char c, float z)
     {
-        return calculateWidth(c, mFont, z * mFontSize);
+        return calculateWidth(c, mFont, mStyle, z * mFontSize);
     }
 
     float TextRenderData::calculateLineHeight(float z)
@@ -85,46 +87,46 @@ namespace Widgets {
 
     Rect2 TextRenderData::calculateBoundingBox(std::string_view text, Vector2 pos, Vector3 size)
     {
-        return calculateBoundingBox(text, pos, size.xy(), mFont, size.z * mFontSize, mPivot);
+        return calculateBoundingBox(text, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mPivot);
     }
 
-    void TextRenderData::renderText(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset, int cursorIndex)
+    void TextRenderData::renderText(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset, int cursorIndex)
     {
         size_t textLen = text.size();
 
         if (textLen == 0 && cursorIndex == -1)
             return;
 
-        float scale = fontSize / 64.0f;
+        float scale = fontSize / Render::FontLoader::sFontSize;
 
-        float minY = font->mDescender / 64.0f * scale;
-        float maxY = font->mAscender / 64.0f * scale;
+        float minY = typeFace->mDescender / 64.0f * scale;
+        float maxY = typeFace->mAscender / 64.0f * scale;
         float fullHeight = maxY - minY;
-        float fullWidth = calculateWidth(text, font, fontSize);
+        float fullWidth = calculateWidth(text, typeFace, style, fontSize);
 
         float originY = (size.y - fullHeight) * pivot.y + maxY;
 
-        renderLine(renderData, { text.data(), text.data() + text.size(), fullWidth }, originY, pos, size, font, fontSize, color, pivot, shadowOffset, cursorIndex);
+        renderLine(renderData, { text.data(), text.data() + text.size(), fullWidth }, originY, pos, size, typeFace, style, fontSize, color, pivot, shadowOffset, cursorIndex);
     }
 
-    void TextRenderData::renderLine(WidgetsRenderData &renderData, const Line &line, float originY, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset, int cursorIndex)
+    void TextRenderData::renderLine(WidgetsRenderData &renderData, const Line &line, float originY, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset, int cursorIndex)
     {
-        float scale = fontSize / 64.0f;
+        float scale = fontSize / Render::FontLoader::sFontSize;
 
         float cursorX = (size.x - line.mWidth) * pivot.x;
 
         bool useSmallSize = fontSize < 32;
 
-        TextureSettings tex { font->mTexture->resourceBlock(), useSmallSize ? 0 : TextureFlag_IsDistanceField };
+        TextureSettings tex { typeFace->mTexture->resourceBlock(), useSmallSize ? 0 : TextureFlag_IsDistanceField };
 
-        const Render::Glyph &ref = font->mGlyphs['D'];
+        const Render::Glyph &ref = typeFace->mFonts.at(style)['D'];
 
         float cursorHeight = ref.mSize.y * scale;
 
         for (const char *c = line.mBegin; c <= line.mEnd; ++c) {
 
             if (c - line.mBegin == cursorIndex) {
-                const Render::Glyph &cursor = font->mGlyphs['|'];
+                const Render::Glyph &cursor = typeFace->mFonts.at(style)['|'];
 
                 float width = 3.0f * scale;
 
@@ -133,15 +135,15 @@ namespace Widgets {
 
                 renderData.setSubLayer(2);
                 if (useSmallSize)
-                    renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV2, cursor.mSize2 }, font->mTexture->size(), cursor.mFlipped2);
+                    renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV2, cursor.mSize2 }, typeFace->mTexture->size(), cursor.mFlipped2);
                 else
-                    renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV, cursor.mSize }, font->mTexture->size(), cursor.mFlipped);
+                    renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV, cursor.mSize }, typeFace->mTexture->size(), cursor.mFlipped);
             }
 
             if (c == line.mEnd)
                 break;
 
-            const Render::Glyph &g = font->mGlyphs[static_cast<unsigned char>(*c)];
+            const Render::Glyph &g = typeFace->mFonts.at(style)[static_cast<unsigned char>(*c)];
 
             float width = g.mSize.x * scale;
             float height = g.mSize.y * scale;
@@ -153,31 +155,31 @@ namespace Widgets {
                 renderData.setSubLayer(0);
                 ColorFrame shadowFrame = ColorRenderData { Color4 { 0.0f, 0.0f, 0.0f, 1.0f } }.frame(color.mPos, color.mSize);
                 if (useSmallSize)
-                    renderData.renderQuadUV({ pos.x + startX + shadowOffset.x * scale, pos.y + startY + shadowOffset.y * scale }, { width, height }, shadowFrame, tex, { g.mUV2, g.mSize2 }, font->mTexture->size(), g.mFlipped2);
+                    renderData.renderQuadUV({ pos.x + startX + shadowOffset.x * scale, pos.y + startY + shadowOffset.y * scale }, { width, height }, shadowFrame, tex, { g.mUV2, g.mSize2 }, typeFace->mTexture->size(), g.mFlipped2);
                 else
-                    renderData.renderQuadUV({ pos.x + startX + shadowOffset.x * scale, pos.y + startY + shadowOffset.y * scale }, { width, height }, shadowFrame, tex, { g.mUV, g.mSize }, font->mTexture->size(), g.mFlipped);
+                    renderData.renderQuadUV({ pos.x + startX + shadowOffset.x * scale, pos.y + startY + shadowOffset.y * scale }, { width, height }, shadowFrame, tex, { g.mUV, g.mSize }, typeFace->mTexture->size(), g.mFlipped);
             }
 
             renderData.setSubLayer(1);
             if (useSmallSize)
-                renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, color, tex, { g.mUV2, g.mSize2 }, font->mTexture->size(), g.mFlipped2);
+                renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, color, tex, { g.mUV2, g.mSize2 }, typeFace->mTexture->size(), g.mFlipped2);
             else
-                renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, color, tex, { g.mUV, g.mSize }, font->mTexture->size(), g.mFlipped);
+                renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, color, tex, { g.mUV, g.mSize }, typeFace->mTexture->size(), g.mFlipped);
 
             cursorX += g.mAdvance / 64.0f * scale;
         }
     }
 
-    void TextRenderData::renderSelection(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
+    void TextRenderData::renderSelection(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
         size_t textLen = text.size();
 
-        float scale = fontSize / 64.0f;
+        float scale = fontSize / Render::FontLoader::sFontSize;
 
-        float minY = font->mDescender / 64.0f * scale;
-        float maxY = font->mAscender / 64.0f * scale;
+        float minY = typeFace->mDescender / 64.0f * scale;
+        float maxY = typeFace->mAscender / 64.0f * scale;
         float fullHeight = maxY - minY;
-        float fullWidth = calculateWidth(text, font, fontSize);
+        float fullWidth = calculateWidth(text, typeFace, style, fontSize);
 
         float cursorX = (size.x - fullWidth) * pivot.x;
         float originY = (size.y - fullHeight) * pivot.y + maxY;
@@ -195,12 +197,12 @@ namespace Widgets {
             if (i == textLen)
                 break;
 
-            const Render::Glyph &g = font->mGlyphs[text[i]];
+            const Render::Glyph &g = typeFace->mFonts.at(style)[text[i]];
 
             cursorX += g.mAdvance / 64.0f * scale;
         }
 
-        const Render::Glyph &ref = font->mGlyphs['D'];
+        const Render::Glyph &ref = typeFace->mFonts.at(style)['D'];
 
         float height = ref.mSize.y * scale;
 
@@ -210,14 +212,14 @@ namespace Widgets {
         renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { endX - startX, height }, color, {}, entry.mArea, { 2048, 2048 }, entry.mFlipped);
     }
 
-    float TextRenderData::calculateWidth(std::string_view text, const Render::Font *font, float fontSize)
+    float TextRenderData::calculateWidth(std::string_view text, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize)
     {
-        float scale = fontSize / 64.0f;
+        float scale = fontSize / Render::FontLoader::sFontSize;
 
         float result = 0.0f;
 
         for (char c : text) {
-            const Render::Glyph &g = font->mGlyphs[static_cast<uint8_t>(c)];
+            const Render::Glyph &g = typeFace->mFonts.at(style)[static_cast<uint8_t>(c)];
 
             result += g.mAdvance / 64.0f * scale;
         }
@@ -225,27 +227,27 @@ namespace Widgets {
         return result;
     }
 
-    float TextRenderData::calculateWidth(char c, const Render::Font *font, float fontSize)
+    float TextRenderData::calculateWidth(char c, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize)
     {
-        float scale = fontSize / 64.0f;
+        float scale = fontSize / Render::FontLoader::sFontSize;
 
-        const Render::Glyph &g = font->mGlyphs[c];
+        const Render::Glyph &g = typeFace->mFonts.at(style)[c];
 
         return g.mAdvance / 64.0f * scale;
     }
 
-    float TextRenderData::calculateLineHeight(const Render::Font *font, float fontSize)
+    float TextRenderData::calculateLineHeight(const Render::TypeFace *typeFace, float fontSize)
     {
-        float scale = fontSize / 64.0f;
+        float scale = fontSize / Render::FontLoader::sFontSize;
 
-        float minY = font->mDescender / 64.0f * scale;
-        float maxY = font->mAscender / 64.0f * scale;
+        float minY = typeFace->mDescender / 64.0f * scale;
+        float maxY = typeFace->mAscender / 64.0f * scale;
         return maxY - minY;
     }
 
-    Rect2 TextRenderData::calculateBoundingBox(const Line &line, size_t lineCount, size_t lineNr, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot)
+    Rect2 TextRenderData::calculateBoundingBox(const Line &line, size_t lineCount, size_t lineNr, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, float fontSize, Vector2 pivot)
     {
-        float lineHeight = calculateLineHeight(font, fontSize);
+        float lineHeight = calculateLineHeight(typeFace, fontSize);
         float fullWidth = line.mWidth;
 
         float cursorX = (size.x - fullWidth) * pivot.x;
@@ -257,11 +259,11 @@ namespace Widgets {
         };
     }
 
-    Rect2 TextRenderData::calculateBoundingBox(std::string_view text, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot)
+    Rect2 TextRenderData::calculateBoundingBox(std::string_view text, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Vector2 pivot)
     {
-        float fullWidth = calculateWidth(text, font, fontSize);
+        float fullWidth = calculateWidth(text, typeFace, style, fontSize);
 
-        return calculateBoundingBox({ text.data(), text.data() + text.size(), fullWidth }, 1, 0, pos, size, font, fontSize, pivot);
+        return calculateBoundingBox({ text.data(), text.data() + text.size(), fullWidth }, 1, 0, pos, size, typeFace, fontSize, pivot);
     }
 
 }

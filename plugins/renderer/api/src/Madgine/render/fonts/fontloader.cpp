@@ -110,7 +110,7 @@ namespace Render {
             return true;
         } else if (c == '\t') {
             if (g)
-                g->mAdvance = 8192;
+                g->mAdvance = 128 * FontLoader::sFontSize;
             return true;
         } else {
             return false;
@@ -122,7 +122,27 @@ namespace Render {
     {
     }
 
-    Threading::Task<bool> FontLoader::loadImpl(Font &font, ResourceDataInfo &info)
+    Threading::Task<bool> FontLoader::init()
+    {
+        if (!co_await ResourceLoader::init())
+            co_return false;
+
+        if (FT_Init_FreeType(&mFreeType)) {
+            LOG_ERROR("FREETYPE: Could not init FreeType Library");
+            co_return false;
+        }
+
+        co_return true;
+    }
+
+    Threading::Task<void> FontLoader::finalize()
+    {
+        FT_Done_FreeType(mFreeType);
+
+        co_await ResourceLoader::finalize();
+    }
+
+    Threading::Task<bool> FontLoader::loadImpl(TypeFace &typeFace, ResourceDataInfo &info)
     {
 
         if (info.resource()->path().extension() == ".msdf") {
@@ -138,14 +158,14 @@ namespace Render {
                 ByteBuffer b;
                 Vector2i textureSize;
                 Serialize::StreamResult result = [&]() {
-                    STREAM_PROPAGATE_ERROR(read(in, font.mGlyphs, nullptr));
+                    STREAM_PROPAGATE_ERROR(read(in, typeFace.mFonts, nullptr));
                     STREAM_PROPAGATE_ERROR(read(in, textureSize, nullptr));
-                    STREAM_PROPAGATE_ERROR(read(in, font.mAscender, nullptr));
-                    STREAM_PROPAGATE_ERROR(read(in, font.mDescender, nullptr));
+                    STREAM_PROPAGATE_ERROR(read(in, typeFace.mAscender, nullptr));
+                    STREAM_PROPAGATE_ERROR(read(in, typeFace.mDescender, nullptr));
                     return read(in, b, nullptr);
                 }();
                 if (result.mState == Serialize::StreamState::OK) {
-                    font.mTexture = RenderContext::getSingleton().createTexture(TextureType_2D, FORMAT_RGBA8, textureSize, std::move(b));
+                    typeFace.mTexture = RenderContext::getSingleton().createTexture(TextureType_2D, FORMAT_RGBA8, textureSize, std::move(b));
                     co_return true;
                 }
                 errorReason << result;
@@ -166,43 +186,6 @@ namespace Render {
 
         LOG("Creating Cache for " << path);
 
-        FT_Library ft;
-        if (FT_Init_FreeType(&ft)) {
-            LOG_ERROR("FREETYPE: Could not init FreeType Library");
-            co_return false;
-        }
-
-        ByteBuffer buffer = (co_await Filesystem::readFileAsync(path)).value();        
-
-        FT_Face face;
-        if (FT_New_Memory_Face(ft, static_cast<const FT_Byte*>(buffer.mData), buffer.mSize, 0, &face)) {
-            FT_Done_FreeType(ft);
-            LOG_ERROR("FREETYPE: Failed to load font");
-            co_return false;
-        }
-
-        FT_Set_Pixel_Sizes(face, 0, 64);
-
-        font.mAscender = face->size->metrics.ascender;
-        font.mDescender = face->size->metrics.descender;
-
-        std::array<Vector2i, Font::sFontGlyphCount> sizes;
-        std::array<Vector2i, Font::sFontGlyphCount> extendedSizes;
-
-        for (unsigned char c = 0; c < Font::sFontGlyphCount; c++) {
-            if (ignore(c))
-                continue;
-            // Load character glyph
-            if (FT_Load_Char(face, c, FT_LOAD_DEFAULT)) {
-                LOG_ERROR("FREETYTPE: Failed to load Glyph");
-                sizes[c] = { 0, 0 };
-                extendedSizes[c] = { 0, 0 };
-                continue;
-            }
-            sizes[c] = { static_cast<int>(face->glyph->bitmap.width) + 4, static_cast<int>(face->glyph->bitmap.rows) + 4 };
-            extendedSizes[c] = { static_cast<int>(face->glyph->bitmap.width) + 5, static_cast<int>(face->glyph->bitmap.rows) + 5 };
-        }
-
         constexpr int UNIT_SIZE = 256;
 
         Atlas2 atlas({ UNIT_SIZE, UNIT_SIZE });
@@ -221,8 +204,97 @@ namespace Render {
             areaSize *= 2;
         };
 
-        std::vector<Atlas2::Entry> entries = atlas.insert(
-            extendedSizes, expand, true);
+        struct TempData {
+            std::array<Vector2i, TypeFace::sFontGlyphCount> mSizes;
+            std::array<Vector2i, TypeFace::sFontGlyphCount> mLowResSizes;
+            std::vector<Atlas2::Entry> mEntries;
+            std::vector<Atlas2::Entry> mLowResEntries;
+            FT_Face mFace;
+            ByteBuffer mBuffer;
+        };
+
+        std::map<FontStyle, TempData> tempData;
+        for (FontStyle style : { FontStyle::Default, FontStyle::Italic, FontStyle::Bold, FontStyle::Light }) {
+
+            static constexpr auto sStyleNames = std::array { "Bold", "Italic", "Light" };
+            std::string styleName = "";
+            for (size_t i = 0; i < sStyleNames.size(); i++) {
+                if (style & (1 << i)) {
+                    styleName += sStyleNames[i];
+                    break;
+                }
+            }
+            if (styleName.empty())
+                styleName = "Regular";
+
+            Filesystem::Path stylePath = path.parentPath() / (std::string { path.stem() } + "-" + styleName + std::string { path.extension() });
+
+            if (!Filesystem::exists(stylePath)) {
+                if (style == FontStyle::Default) {
+                    if (Filesystem::exists(path)) {
+                        stylePath = path;
+                    } else {
+                        LOG_ERROR("FREETYPE: Regular Font file does not exist: " << path);
+                        co_return false;
+                    }
+                } else {
+                    continue;
+                }
+            }
+
+            TempData &data = tempData[style];
+            data.mBuffer = (co_await Filesystem::readFileAsync(stylePath)).value();
+
+            if (FT_New_Memory_Face(mFreeType, static_cast<const FT_Byte *>(data.mBuffer.mData), data.mBuffer.mSize, 0, &data.mFace)) {
+                LOG_ERROR("FREETYPE: Failed to load font");
+                co_return false;
+            }
+
+            FT_Set_Pixel_Sizes(data.mFace, 0, sFontSize);
+
+            // TODO
+            typeFace.mAscender = data.mFace->size->metrics.ascender;
+            typeFace.mDescender = data.mFace->size->metrics.descender;
+
+            std::array<Vector2i, TypeFace::sFontGlyphCount> extendedSizes;
+
+            for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
+                if (ignore(c))
+                    continue;
+                // Load character glyph
+                if (FT_Load_Char(data.mFace, c, FT_LOAD_DEFAULT)) {
+                    LOG_ERROR("FREETYTPE: Failed to load Glyph");
+                    data.mSizes[c] = { 0, 0 };
+                    extendedSizes[c] = { 0, 0 };
+                    continue;
+                }
+                data.mSizes[c] = { static_cast<int>(data.mFace->glyph->bitmap.width) + 4, static_cast<int>(data.mFace->glyph->bitmap.rows) + 4 };
+                extendedSizes[c] = { static_cast<int>(data.mFace->glyph->bitmap.width) + 5, static_cast<int>(data.mFace->glyph->bitmap.rows) + 5 };
+            }
+
+            data.mEntries = atlas.insert(
+                extendedSizes, expand, true);
+
+            FT_Set_Pixel_Sizes(data.mFace, 0, 24);
+
+            for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
+                if (ignore(c))
+                    continue;
+
+                // Load character glyph
+                if (FT_Load_Char(data.mFace, c, FT_LOAD_DEFAULT)) {
+                    LOG_ERROR("FREETYTPE: Failed to load Glyph");
+                    data.mSizes[c] = { 0, 0 };
+                    extendedSizes[c] = { 0, 0 };
+                    continue;
+                }
+                data.mLowResSizes[c] = { static_cast<int>(data.mFace->glyph->bitmap.width), static_cast<int>(data.mFace->glyph->bitmap.rows) };
+                extendedSizes[c] = { static_cast<int>(data.mFace->glyph->bitmap.width) + 1, static_cast<int>(data.mFace->glyph->bitmap.rows) + 1 };
+            }
+
+            data.mLowResEntries = atlas.insert(
+                extendedSizes, expand, true);
+        }
 
         Vector2i textureSize = { areaSize * UNIT_SIZE,
             areaSize * UNIT_SIZE };
@@ -230,154 +302,166 @@ namespace Render {
         std::unique_ptr<std::array<unsigned char, 4>[]> texBuffer = std::make_unique<std::array<unsigned char, 4>[]>(byteSize);
         AreaView<std::array<unsigned char, 4>, 2> tex { texBuffer.get(), { static_cast<size_t>(textureSize.x), static_cast<size_t>(textureSize.y) } };
 
-        for (unsigned char c = 0; c < Font::sFontGlyphCount; c++) {
-            if (ignore(c, &font.mGlyphs[c]))
-                continue;
+        for (const auto &[style, data] : tempData) {
 
-            // Load character glyph
-            if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-                LOG_ERROR("FREETYTPE: Failed to load Glyph");
-                continue;
+            TypeFace::Font &font = typeFace.mFonts[style];
+
+            FT_Set_Pixel_Sizes(data.mFace, 0, sFontSize);
+
+            for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
+                if (ignore(c, &font[c]))
+                    continue;
+
+                // Load character glyph
+                if (FT_Load_Char(data.mFace, c, FT_LOAD_RENDER)) {
+                    LOG_ERROR("FREETYTPE: Failed to load Glyph");
+                    continue;
+                }
+
+                std::unique_ptr<Vector3[]> buffer = std::make_unique<Vector3[]>(data.mSizes[c].x * data.mSizes[c].y);
+                AreaView<Vector3, 2> bufferView { buffer.get(), { static_cast<size_t>(data.mSizes[c].x), static_cast<size_t>(data.mSizes[c].y) } };
+
+                ::msdfgen::BitmapRef<float, 3>
+                    bm { buffer[0].ptr(), data.mSizes[c].x, data.mSizes[c].y };
+
+                ::msdfgen::Shape shape;
+                shape.inverseYAxis = true;
+
+                msdfgen::FtContext context = {};
+                context.shape = &shape;
+                FT_Outline_Funcs ftFunctions;
+                ftFunctions.move_to = &msdfgen::ftMoveTo;
+                ftFunctions.line_to = &msdfgen::ftLineTo;
+                ftFunctions.conic_to = &msdfgen::ftConicTo;
+                ftFunctions.cubic_to = &msdfgen::ftCubicTo;
+                ftFunctions.shift = 0;
+                ftFunctions.delta = 0;
+                FT_Outline_Decompose(&data.mFace->glyph->outline, &ftFunctions, &context);
+
+                ::msdfgen::edgeColoringSimple(shape, 3);
+                ::msdfgen::generateMSDF(bm, shape, 4.0, { 1, 1 }, { static_cast<double>(-data.mFace->glyph->bitmap_left + 2), static_cast<double>(data.mSizes[c].y - data.mFace->glyph->bitmap_top - 2) });
+
+                font[c].mSize = data.mSizes[c];
+                font[c].mUV = data.mEntries[c].mArea.mTopLeft;
+                font[c].mFlipped = data.mEntries[c].mFlipped;
+                font[c].mAdvance = data.mFace->glyph->advance.x;
+                font[c].mBearing.x = data.mFace->glyph->bitmap_left - 1;
+                font[c].mBearing.y = data.mFace->glyph->bitmap_top - 1;
+
+                Vector2i size = data.mSizes[c];
+                if (data.mEntries[c].mFlipped)
+                    std::swap(size.x, size.y);
+                Vector2i pos = { data.mEntries[c].mArea.mTopLeft.x, data.mEntries[c].mArea.mTopLeft.y };
+
+                AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
+                if (data.mEntries[c].mFlipped)
+                    targetView.swapAxis(0, 1);
+
+                std::ranges::transform(bufferView, targetView.begin(),
+                    [](const Vector3 &v) {
+                        return std::array<unsigned char, 4> {
+                            static_cast<unsigned char>(clamp(v.x, 0.0f, 1.0f) * 255),
+                            static_cast<unsigned char>(clamp(v.y, 0.0f, 1.0f) * 255),
+                            static_cast<unsigned char>(clamp(v.z, 0.0f, 1.0f) * 255),
+                            255
+                        };
+                    });
             }
 
-            std::unique_ptr<Vector3[]> buffer = std::make_unique<Vector3[]>(sizes[c].x * sizes[c].y);
-            AreaView<Vector3, 2> bufferView { buffer.get(), { static_cast<size_t>(sizes[c].x), static_cast<size_t>(sizes[c].y) } };
+            FT_Set_Pixel_Sizes(data.mFace, 0, 24);
 
-            ::msdfgen::BitmapRef<float, 3>
-                bm { buffer[0].ptr(), sizes[c].x, sizes[c].y };
+            for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
+                if (ignore(c))
+                    continue;
 
-            ::msdfgen::Shape shape;
-            shape.inverseYAxis = true;
+                // Load character glyph
+                if (FT_Load_Char(data.mFace, c, FT_LOAD_RENDER)) {
+                    LOG_ERROR("FREETYTPE: Failed to load Glyph");
+                    continue;
+                }
 
-            msdfgen::FtContext context = {};
-            context.shape = &shape;
-            FT_Outline_Funcs ftFunctions;
-            ftFunctions.move_to = &msdfgen::ftMoveTo;
-            ftFunctions.line_to = &msdfgen::ftLineTo;
-            ftFunctions.conic_to = &msdfgen::ftConicTo;
-            ftFunctions.cubic_to = &msdfgen::ftCubicTo;
-            ftFunctions.shift = 0;
-            ftFunctions.delta = 0;
-            FT_Outline_Decompose(&face->glyph->outline, &ftFunctions, &context);
+                if (FT_Render_Glyph(data.mFace->glyph, FT_RENDER_MODE_NORMAL)) {
+                    LOG_ERROR("FREETYPE: Failed to render Glyph");
+                    continue;
+                }
 
-            ::msdfgen::edgeColoringSimple(shape, 3);
-            ::msdfgen::generateMSDF(bm, shape, 4.0, { 1, 1 }, { static_cast<double>(-face->glyph->bitmap_left + 2), static_cast<double>(sizes[c].y - face->glyph->bitmap_top - 2) });
+                AreaView<unsigned char, 2> bufferView { data.mFace->glyph->bitmap.buffer, { static_cast<size_t>(data.mLowResSizes[c].x), static_cast<size_t>(data.mLowResSizes[c].y) } };
 
-            font.mGlyphs[c].mSize = sizes[c];
-            font.mGlyphs[c].mUV = entries[c].mArea.mTopLeft;
-            font.mGlyphs[c].mFlipped = entries[c].mFlipped;
-            font.mGlyphs[c].mAdvance = face->glyph->advance.x;
-            font.mGlyphs[c].mBearing.x = face->glyph->bitmap_left - 1;
-            font.mGlyphs[c].mBearing.y = face->glyph->bitmap_top - 1;
+                font[c].mSize2 = data.mLowResSizes[c] + Vector2i(2, 2);
+                font[c].mUV2 = data.mLowResEntries[c].mArea.mTopLeft - Vector2i(1, 1);
+                font[c].mFlipped2 = data.mLowResEntries[c].mFlipped;
 
-            Vector2i size = sizes[c];
-            if (entries[c].mFlipped)
-                std::swap(size.x, size.y);
-            Vector2i pos = { entries[c].mArea.mTopLeft.x, entries[c].mArea.mTopLeft.y };
+                Vector2i size = data.mLowResSizes[c];
+                if (data.mLowResEntries[c].mFlipped)
+                    std::swap(size.x, size.y);
+                Vector2i pos = { data.mLowResEntries[c].mArea.mTopLeft.x, data.mLowResEntries[c].mArea.mTopLeft.y };
 
-            AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
-            if (entries[c].mFlipped)
-                targetView.swapAxis(0, 1);
+                AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
+                if (data.mLowResEntries[c].mFlipped)
+                    targetView.swapAxis(0, 1);
 
-            std::ranges::transform(bufferView, targetView.begin(),
-                [](const Vector3 &v) {
-                    return std::array<unsigned char, 4> {
-                        static_cast<unsigned char>(clamp(v.x, 0.0f, 1.0f) * 255),
-                        static_cast<unsigned char>(clamp(v.y, 0.0f, 1.0f) * 255),
-                        static_cast<unsigned char>(clamp(v.z, 0.0f, 1.0f) * 255),
-                        255
-                    };
-                });
+                std::ranges::transform(bufferView, targetView.begin(),
+                    [](const unsigned char f) {
+                        return std::array<unsigned char, 4> {
+                            255,
+                            255,
+                            255,
+                            f
+                        };
+                    });
+            }
+
+            FT_Done_Face(data.mFace);
         }
 
-        FT_Set_Pixel_Sizes(face, 0, 24);
-
-        for (unsigned char c = 0; c < Font::sFontGlyphCount; c++) {
-            if (ignore(c))
-                continue;
-
-            // Load character glyph
-            if (FT_Load_Char(face, c, FT_LOAD_DEFAULT)) {
-                LOG_ERROR("FREETYTPE: Failed to load Glyph");
-                sizes[c] = { 0, 0 };
-                extendedSizes[c] = { 0, 0 };
-                continue;
-            }
-            sizes[c] = { static_cast<int>(face->glyph->bitmap.width), static_cast<int>(face->glyph->bitmap.rows) };
-            extendedSizes[c] = { static_cast<int>(face->glyph->bitmap.width) + 1, static_cast<int>(face->glyph->bitmap.rows) + 1 };
-        }
-
-        entries = atlas.insert(
-            extendedSizes, expand, true);
-
-        for (unsigned char c = 0; c < Font::sFontGlyphCount; c++) {
-            if (ignore(c))
-                continue;
-
-            // Load character glyph
-            if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-                LOG_ERROR("FREETYTPE: Failed to load Glyph");
-                continue;
-            }
-
-            if (FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL)) {
-                LOG_ERROR("FREETYPE: Failed to render Glyph");
-                continue;
-            }
-
-            AreaView<unsigned char, 2> bufferView { face->glyph->bitmap.buffer, { static_cast<size_t>(sizes[c].x), static_cast<size_t>(sizes[c].y) } };
-
-            font.mGlyphs[c].mSize2 = sizes[c] + Vector2i(2, 2);
-            font.mGlyphs[c].mUV2 = entries[c].mArea.mTopLeft - Vector2i(1, 1);
-            font.mGlyphs[c].mFlipped2 = entries[c].mFlipped;
-
-            Vector2i size = sizes[c];
-            if (entries[c].mFlipped)
-                std::swap(size.x, size.y);
-            Vector2i pos = { entries[c].mArea.mTopLeft.x, entries[c].mArea.mTopLeft.y };
-
-            AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
-            if (entries[c].mFlipped)
-                targetView.swapAxis(0, 1);
-
-            std::ranges::transform(bufferView, targetView.begin(),
-                [](const unsigned char f) {
-                    return std::array<unsigned char, 4> {
-                        255,
-                        255,
-                        255,
-                        f
-                    };
-                });
-        }
-
-        FT_Done_Face(face);
-        FT_Done_FreeType(ft);
-
-
-        font.mTexture = RenderContext::getSingleton().createTexture(TextureType_2D, FORMAT_RGBA8, textureSize, { texBuffer.get(), 4 * byteSize });
+        typeFace.mTexture = RenderContext::getSingleton().createTexture(TextureType_2D, FORMAT_RGBA8, textureSize, { texBuffer.get(), 4 * byteSize });
 
         Filesystem::FileManager cache("msdf_cache");
         Serialize::FormattedSerializeStream out = cache.openWrite(info.resource()->path().parentPath() / (std::string { info.resource()->name() } + ".msdf"), Serialize::Formats::safebinary);
         if (out) {
-            write(out, font.mGlyphs, "glyphs");
+            write(out, typeFace.mFonts, "fonts");
             write(out, textureSize, "size");
-            write(out, font.mAscender, "ascender");
-            write(out, font.mDescender, "descender");
+            write(out, typeFace.mAscender, "ascender");
+            write(out, typeFace.mDescender, "descender");
             write(out, ByteBuffer { texBuffer.get(), 4 * byteSize }, "texture");
         }
 
         co_return true;
     }
 
-    void FontLoader::unloadImpl(Font &font)
+    void FontLoader::unloadImpl(TypeFace &typeFace)
     {
-        font.mTexture.reset();
+        typeFace.mTexture.reset();
     }
 
     Threading::TaskQueue *FontLoader::loadingTaskQueue() const
     {
         return RenderContext::renderQueue();
+    }
+
+    std::pair<Resources::ResourceBase *, bool> FontLoader::addResource(const Filesystem::Path &path, std::string_view name)
+    {
+        if (path.extension() == ".msdf") {
+            return ResourceLoader::addResource(path, name);
+        } else if (path.extension() == ".ttf") {
+            std::string_view typefaceName = path.stem();
+
+            auto it = typefaceName.find('-');
+            if (it == std::string_view::npos) {
+                LOG_WARNING("Font file \"" << path << "\" does not follow the naming convention \"<typeface>-<style>.ttf\". This may cause issues with caching and loading.");
+            } else {
+                std::string_view style = typefaceName.substr(it + 1);
+                typefaceName = typefaceName.substr(0, it);
+
+                if (style != "Regular" && style != "Italic" && style != "Bold") {
+                    LOG_WARNING("Font file \"" << path << "\" has an unrecognized style \"" << style << "\". This may cause issues with caching and loading.");
+                }
+            }
+
+            return ResourceLoader::addResource(path.parentPath() / (std::string { typefaceName } + ".ttf"), typefaceName);
+        } else {
+            throw 0;
+        }
     }
 
 }

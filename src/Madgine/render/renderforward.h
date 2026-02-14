@@ -8,7 +8,7 @@ namespace Render {
     struct Texture;
     struct Material;
     struct Glyph;
-    struct Font;
+    struct TypeFace;
 
     typedef int RenderPassFlags;
 

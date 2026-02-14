@@ -14,10 +14,10 @@ namespace Widgets {
         void updateText(std::string_view text, Vector3 size, std::locale loc = {});
         float calculateTotalHeight(float z = 1.0f);
 
-        static void renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset = { 0.0f, 0.0f }, int cursorIndex = -1);
-        static void renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::Font *font, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color);
-        static std::vector<Line> calculateLines(std::string_view text, Vector2 size, const Render::Font *font, float fontSize, std::locale loc);
-        static float calculateTotalHeight(size_t lineCount, const Render::Font *font, float fontSize);
+        static void renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset = { 0.0f, 0.0f }, int cursorIndex = -1);
+        static void renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color);
+        static std::vector<Line> calculateLines(std::string_view text, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, std::locale loc);
+        static float calculateTotalHeight(size_t lineCount, const Render::TypeFace *typeFace, float fontSize);
 
     private:
         std::vector<Line> mLines;

@@ -12,6 +12,7 @@
 #include "Madgine/imageloader/imagedata.h"
 #include "Madgine/meshloader/gpumeshloader.h"
 #include "Madgine/meshloader/meshloader.h"
+#include "Madgine/render/fonts/fontloader.h"
 #include "Madgine/render/pipelineloader.h"
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendertarget.h"
@@ -23,7 +24,6 @@
 #include "atlasloader.h"
 #include "widget.h"
 #include "widgetloader.h"
-
 #include "widgets_hlsl.h"
 
 NAMED_UNIQUECOMPONENT(WidgetManager, Engine::Widgets::WidgetManager)
@@ -645,7 +645,7 @@ namespace Widgets {
             auto perApp = mPipeline->mapParameters<HLSL::WidgetsPerApplication>(0);
             perApp->c = target->getClipSpaceMatrix();
             perApp->screenSize = Vector2 { size };
-            perApp->distanceFieldScaling = 2.0f;
+            perApp->distanceFieldScaling = 2.0f / Render::FontLoader::sFontSize * 64.0f;
         }
 
         for (auto &[layer, layerData] : renderData.vertexData()) {
@@ -657,7 +657,7 @@ namespace Widgets {
                     auto parameters = mPipeline->mapParameters<HLSL::WidgetsPerObject>(2);
                     parameters->hasDistanceField = bool(tex.mFlags & TextureFlag_IsDistanceField);
                     parameters->hasTexture = true;
-                    parameters->shadowOffset = mShadowOffset / Vector2 { target->size() };                    
+                    parameters->shadowOffset = mShadowOffset / Vector2 { target->size() };
                 }
 
                 {
