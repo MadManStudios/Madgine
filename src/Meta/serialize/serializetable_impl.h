@@ -225,6 +225,7 @@ namespace Serialize {
             using R = patch_void_t<typename traits::return_type>;
             using T = typename traits::class_type;
             using Tuple = typename traits::decay_argument_types::as_tuple;
+            using OwningTuple = typename traits::decay_argument_types::template transform<MakeOwning_t>::as_tuple;
 
             return {
                 [](const std::vector<WriteMessage> &outStreams, const void *args) {
@@ -239,9 +240,10 @@ namespace Serialize {
                 [](SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, uint16_t index, FunctionType type, PendingRequest &request) {
                     switch (type) {
                     case CALL: {
-                        Tuple args;
-                        STREAM_PROPAGATE_ERROR(read(in, args, "Args"));
-                        STREAM_PROPAGATE_ERROR(apply_map(args, in, true));
+                        OwningTuple owningArgs;
+                        STREAM_PROPAGATE_ERROR(read(in, owningArgs, "Args"));
+                        STREAM_PROPAGATE_ERROR(apply_map(owningArgs, in, true));
+                        Tuple args = owningArgs;
                         writeFunctionAction(unit, index, &args, {}, request.mRequester, request.mRequesterTransactionId);
                         R result = TupleUnpacker::invokeExpand(patch_void(f, Void {}), static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
                         request.mReceiver.set_value(result);
@@ -260,11 +262,12 @@ namespace Serialize {
                 },
                 [](SyncableUnitBase *_unit, FormattedMessageStream &in, uint16_t index, FunctionType type, MessageId id) {
                     T *unit = static_cast<T *>(_unit);
-                    Tuple args;
-                    STREAM_PROPAGATE_ERROR(read(in, args, "Args"));
-                    STREAM_PROPAGATE_ERROR(apply_map(args, in, true));
+                    OwningTuple owningArgs;
+                    STREAM_PROPAGATE_ERROR(read(in, owningArgs, "Args"));
+                    STREAM_PROPAGATE_ERROR(apply_map(owningArgs, in, true));
                     ParticipantId answerId = in.id();
                     SyncFunctionContext context { answerId };
+                    Tuple args = owningArgs;
                     if (!TupleUnpacker::invokeExpand(VerifierSelector<Configs...>::verify, CallerHierarchyPtr { CallerHierarchy { unit } }, context, args)) {
                         writeFunctionError(unit, index, MessageResult::REJECTED, in, id);
                     } else if (unit->isMaster()) {
