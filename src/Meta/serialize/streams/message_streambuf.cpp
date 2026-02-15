@@ -7,6 +7,14 @@
 namespace Engine {
 namespace Serialize {
 
+    message_streambuf::~message_streambuf()
+    {
+        while (!mPendingRequests.empty()) {
+            mPendingRequests.front().mReceiver.set_done();
+            mPendingRequests.pop_front();
+        }
+    }
+
     void message_streambuf::beginMessageWrite()
     {
         assert(!pptr());

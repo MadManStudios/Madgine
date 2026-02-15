@@ -10,6 +10,7 @@ namespace Serialize {
 
         message_streambuf() = default;
         message_streambuf(const message_streambuf &) = delete;
+        ~message_streambuf();
 
         message_streambuf &operator=(const message_streambuf &) = delete;
 
