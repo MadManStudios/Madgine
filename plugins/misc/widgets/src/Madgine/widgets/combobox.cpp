@@ -127,6 +127,11 @@ namespace Widgets {
         }
     }
 
+    size_t Combobox::currentIndex() const
+    {
+        return mSelectedIndex;
+    }
+
     void Combobox::setEnabled(bool enabled)
     {
         mEnabled = enabled;

@@ -21,6 +21,7 @@ namespace Widgets {
         void clear();
 
         void setCurrentIndex(size_t index);
+        size_t currentIndex() const;
 
         void setEnabled(bool enabled);
         bool isEnabled() const;
