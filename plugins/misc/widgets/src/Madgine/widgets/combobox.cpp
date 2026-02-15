@@ -121,8 +121,10 @@ namespace Widgets {
 
     void Combobox::setCurrentIndex(size_t index)
     {
-        mSelectedIndex = index;
-        mIndexChanged.emit(index);
+        if (mSelectedIndex != index) {
+            mSelectedIndex = index;
+            mIndexChanged.emit(index);
+        }
     }
 
     void Combobox::setEnabled(bool enabled)
