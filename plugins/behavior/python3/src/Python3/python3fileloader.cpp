@@ -128,7 +128,11 @@ namespace Behavior {
             if (!res)
                 return;
             Python3InnerLock lock;
-            PyObjectPtr spec = PyModulePtr { "importlib.machinery" }.get("ModuleSpec").call({ { { "loader_state", toPyObject(ScopePtr { res }) } } }, "sO", res->name().data(), toPyObject(ScopePtr { this }));
+            PyModulePtr module { "importlib.machinery" };
+            if (!module) {
+                return;
+            }
+            PyObjectPtr spec = module.get("ModuleSpec").call({ { { "loader_state", toPyObject(ScopePtr { res }) } } }, "sO", res->name().data(), toPyObject(ScopePtr { this }));
             result = fromPyObject(spec);
         }
 

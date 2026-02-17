@@ -266,6 +266,7 @@ namespace Behavior {
             }
 
             config.site_import = !mRoot.toolMode();
+            config._init_main = !mRoot.toolMode();
 
             status = Py_InitializeFromConfig(&config);
             HANDLE_STATUS();
