@@ -9,11 +9,17 @@
 
 #include "Modules/threading/awaitables/awaitablesender.h"
 
+#include "Madgine/cli/parameter.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 namespace Engine {
 namespace Render {
+
+#ifdef SHADERGEN_LOCATION
+    CLI::Parameter<Filesystem::Path> shaderGenPath { { "--shadergen" }, SHADERGEN_LOCATION, "Overwrite ShaderGen location." };
+#endif
 
     Filesystem::Path ShaderCache::directory()
     {
@@ -48,7 +54,7 @@ namespace Render {
                 commandLine.push_back(include);
             }
 
-            auto resultStorage = co_await Process::runAsync(SHADERGEN_LOCATION, commandLine, 2s);
+            auto resultStorage = co_await Process::runAsync(*shaderGenPath, commandLine, 2s);
 
             if (!resultStorage.is_value()) {
                 if (resultStorage.is_error()) {
@@ -61,7 +67,8 @@ namespace Render {
 
             auto [result, stdOut, stdErr] = std::move(resultStorage).value();
             if (result != 0) {
-                LOG_FATAL("ShaderGen failed with:\n" << stdErr);
+                LOG_FATAL("ShaderGen failed with:\n"
+                    << stdErr);
                 co_return false;
             }
             co_return true;

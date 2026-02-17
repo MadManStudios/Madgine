@@ -26,6 +26,8 @@ set(shadergenPath ${shadergenext_SOURCE_DIR}/ShaderGen${HOST_EXECUTABLE_SUFFIX})
 set_target_properties(ShaderGen 
 	PROPERTIES ShaderGenTargets "-CPP"
 	IMPORTED_LOCATION ${shadergenPath})
+
+add_tooling_parameters(--shadergen ${shadergenPath})
 	
 function(add_shadergen_target target flag)
 
@@ -42,7 +44,6 @@ function(add_shadergen_target target flag)
 	endif()
 
 endfunction(add_shadergen_target)
-
 
 
 add_library(dxcompiler SHARED IMPORTED GLOBAL)
