@@ -30,6 +30,7 @@ namespace Resources {
     CLI::Parameter<Filesystem::Path> exportResources { { "--export-resources", "-er" }, "", "If set, the resource manager will write all available resources to the specified list file." };
     CLI::Parameter<Filesystem::Path> bakeResources { { "--bake" }, "", "If set, all resources listed in the specified list file will be baked." };
     CLI::Parameter<Filesystem::Path> bakeOutputList { { "--bake-output-list" }, "", "If set, all baked resources will be written to a list file at the specified location." };
+    CLI::Parameter<Filesystem::Path> bakeSourceDir { { "--bake-source-dir" }, SOURCE_DIR, "directory that will be used as the base for resource paths." };
 
     static ResourceManager *sSingleton = nullptr;
 
@@ -89,7 +90,10 @@ namespace Resources {
             std::vector<Filesystem::Path> resourcesToBake;
             std::string line;
             while (std::getline(list, line)) {
-                resourcesToBake.emplace_back(line);
+                Filesystem::Path &path = resourcesToBake.emplace_back(line);
+                if (path.isRelative()) {
+                    path = *bakeSourceDir / path;
+                }
             }
 
             for (const std::unique_ptr<ResourceLoaderBase> &loader : mCollector) {
@@ -151,8 +155,6 @@ namespace Resources {
             }
         }
 #endif
-
-        
 
         registerResourceLocation(Filesystem::shippingPath() / "data", 50);
 

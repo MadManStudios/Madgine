@@ -302,8 +302,6 @@ namespace Widgets {
         std::vector<Filesystem::Path> filesToAdd;
         for (Filesystem::Path path : resourcesToBake) {
             if (path.extension() == ".layout") {
-                if (path.isRelative())
-                    path = Filesystem::Path { SOURCE_DIR } / path;
                 Window::LayoutLoader::Resource res { "", path };
                 Serialize::SerializeManager mgr { "Layout" };
                 Serialize::FormattedSerializeStream stream = Serialize::FormattedSerializeStream { Serialize::Formats::xml(), mgr.wrapStream(res.readAsStream(), true) };
