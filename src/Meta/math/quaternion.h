@@ -109,7 +109,7 @@ struct Quaternion {
             qz = 0.25 * S;
         }
 
-        assert(!isnan(qx) && !isnan(qy) && !isnan(qz) && !isnan(qw));
+        assert(!std::isnan(qx) && !std::isnan(qy) && !std::isnan(qz) && !std::isnan(qw));
         return { qx, qy, qz, qw };
     }
 
