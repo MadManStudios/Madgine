@@ -90,6 +90,7 @@ namespace Resources {
             std::vector<Filesystem::Path> resourcesToBake;
             std::string line;
             while (std::getline(list, line)) {
+                line = StringUtil::trim(line);
                 Filesystem::Path &path = resourcesToBake.emplace_back(line);
                 if (path.isRelative()) {
                     path = *bakeSourceDir / path;

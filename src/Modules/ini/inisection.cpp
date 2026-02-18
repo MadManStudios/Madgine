@@ -36,6 +36,7 @@ namespace Ini {
         std::streampos save = stream.tell();
         std::string line;
         while (std::getline(stream.stream(), line)) {
+            line = StringUtil::trim(line);
             if (line.empty()) {
                 continue;
             }

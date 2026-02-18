@@ -7,7 +7,7 @@ namespace StringUtil {
 
     constexpr bool isspace(char c)
     {
-        return c == ' ' || c == '\n' || c == '\t';
+        return c == ' ' || c == '\n' || c == '\t' || c == '\r';
     }
 
     constexpr bool startsWith(std::string_view s, std::string_view prefix)

@@ -63,6 +63,7 @@ namespace Ini {
         mSections.clear();
         std::string line;
         while (std::getline(stream.stream(), line)) {
+            line = StringUtil::trim(line);
             std::string sectionName = "General";
             if (StringUtil::startsWith(line, "[") && StringUtil::endsWith(line, "]"))
                 sectionName = StringUtil::substr(line, 1, -1);

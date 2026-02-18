@@ -105,8 +105,10 @@ namespace Tools {
         mResourceConfig.clear();
         std::ifstream in { config / "resources.list" };
         std::string line;
-        while (std::getline(in, line))
+        while (std::getline(in, line)) {
+            line = StringUtil::trim(line);
             mResourceConfig.insert(line);
+        }
     }
 
     void ResourcesToolConfig::saveConfiguration(const Filesystem::Path &config)
