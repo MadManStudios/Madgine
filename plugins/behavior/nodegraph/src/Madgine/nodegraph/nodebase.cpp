@@ -32,10 +32,10 @@ namespace Behavior {
 
         NodeBase::NodeBase(const NodeBase &other, NodeGraph &graph)
             : mGraph(graph)
+            , mFlowInPins(other.mFlowInPins)
             , mFlowOutPins(other.mFlowOutPins)
             , mDataInPins(other.mDataInPins)
-            , mDataOutPins(other.mDataOutPins)
-            , mFlowInPins(other.mFlowInPins)
+            , mDataOutPins(other.mDataOutPins)         
         {
         }
 

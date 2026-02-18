@@ -57,7 +57,7 @@ namespace Widgets {
     void TempWidgetState::start()
     {
         WidgetManager *mgr;
-        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         assert(!mWidget);
@@ -81,7 +81,7 @@ namespace Widgets {
     void TempWidgetState::receiver::set_value(ArgumentList args)
     {
         WidgetManager *mgr;
-        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -91,7 +91,7 @@ namespace Widgets {
     void TempWidgetState::receiver::set_error(Behavior::BehaviorError error)
     {
         WidgetManager *mgr;
-        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -101,7 +101,7 @@ namespace Widgets {
     void TempWidgetState::receiver::set_done()
     {
         WidgetManager *mgr;
-        bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(result);
 
         mgr->closeOverlay(mState.mWidget.get());

@@ -25,12 +25,12 @@ namespace Serialize {
 
     SyncManager::SyncManager(SyncManager &&other) noexcept
         : SerializeManager(std::move(other))
-        , mTopLevelUnits(std::move(other.mTopLevelUnits))
         , mReceivingMasterState(std::exchange(other.mReceivingMasterState, nullptr))
+        , mTopLevelUnits(std::move(other.mTopLevelUnits))
     {
         for (TopLevelUnitBase *unit : mTopLevelUnits) {
             unit->removeManager(&other);
-            bool result = unit->addManager(this);
+            [[maybe_unused]] bool result = unit->addManager(this);
             assert(result);
         }
         other.mTopLevelUnits.clear();
@@ -185,7 +185,7 @@ namespace Serialize {
 
     void SyncManager::addTopLevelItemImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, TopLevelUnitBase *unit, std::string_view name)
     {
-        auto pib = mTopLevelUnitNameMappings.try_emplace(std::string { name }, unit);
+        [[maybe_unused]] auto pib = mTopLevelUnitNameMappings.try_emplace(std::string { name }, unit);
         assert(pib.second);
 
         if (!mSlaveStream) {
@@ -250,7 +250,7 @@ namespace Serialize {
         TopLevelUnitBase *newUnit)
     {
         removeTopLevelItem(oldUnit);
-        addTopLevelItem(newUnit, false);
+        Execution::sync_expect(addTopLevelItem(newUnit, false));
     }
 
     FormattedMessageStream &SyncManager::getSlaveMessageTarget()
@@ -304,7 +304,7 @@ namespace Serialize {
             decreaseReceivingCounter();
         } else {
             for (TopLevelUnitBase *unit : updatedUnits | std::views::reverse) {
-                bool result = unit->updateManagerType(this, true);
+                [[maybe_unused]] bool result = unit->updateManagerType(this, true);
                 assert(result);
             }
             receiver.set_error(state);
@@ -324,7 +324,7 @@ namespace Serialize {
     {
         if (mSlaveStream) {
             while (!mSlaveMappings.empty()) {
-                size_t s = mSlaveMappings.size();
+                [[maybe_unused]] size_t s = mSlaveMappings.size();
                 mSlaveMappings.begin()->second->clearSlaveId(this);
                 assert(s > mSlaveMappings.size());
             }

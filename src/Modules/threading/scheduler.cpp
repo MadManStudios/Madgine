@@ -43,7 +43,7 @@ namespace Threading {
             mWorkgroup.update();
         }
 
-        for (Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
+        for ([[maybe_unused]] Threading::TaskQueue *queue : mWorkgroup.taskQueues()) {
             assert(queue->idle());
         }
 

@@ -139,7 +139,7 @@ namespace Widgets {
 
         DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
 
-        IntervalClock<> mFrameClock;
+        IntervalClock<> mFrameClock = std::chrono::steady_clock::now();
 
         struct WidgetManagerData;
         std::shared_ptr<WidgetManagerData> mData;

@@ -12,9 +12,9 @@ namespace Behavior {
 
     BehaviorError::BehaviorError(BehaviorResult result, const std::string &msg, const char *file, size_t sourceLine)
         : mResult(result)
-        , mMsg(msg)
         , mFile(file)
         , mLineNumber(sourceLine)
+        , mMsg(msg)
     {
     }
 

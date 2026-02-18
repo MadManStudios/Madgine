@@ -13,7 +13,6 @@ namespace Render {
         : Texture(type, format, size)
         , mSamples(samples)
     {
-        GLuint temp;
         glGenTextures(1, &mHandle);
         GL_CHECK();
         if (mType != TextureType_2DMultiSample)
@@ -34,19 +33,16 @@ namespace Render {
         GLenum internalStorage;
         GLenum internalFormat;
         GLenum sizedFormat;
-        size_t byteWidth;
         switch (mFormat) {
         case FORMAT_RGBA8:
             internalStorage = GL_UNSIGNED_BYTE;
             internalFormat = GL_RGBA;
             sizedFormat = GL_RGBA8;
-            byteWidth = 4;
             break;
         case FORMAT_RGBA8_SRGB:
             internalStorage = GL_UNSIGNED_BYTE;
             internalFormat = GL_RGBA;
             sizedFormat = GL_SRGB8_ALPHA8;
-            byteWidth = 4;
             break;
         case FORMAT_RGBA16F:
             internalStorage = GL_FLOAT;
@@ -102,16 +98,16 @@ namespace Render {
 
     OpenGLTexture::OpenGLTexture(OpenGLTexture &&other)
         : Texture(std::move(other))
-        , mBlock(std::move(other.mBlock))
         , mSamples(std::move(other.mSamples))
+        , mBlock(std::move(other.mBlock))        
     {
         if (mResourceBlock) {
-            OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
+            [[maybe_unused]] OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
             assert(block == &other.mBlock);
             mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &mBlock;
         }
         if (other.mResourceBlock) {
-            OpenGLResourceBlock<> *block = other.mResourceBlock.release<OpenGLResourceBlock<> *>();
+            [[maybe_unused]] OpenGLResourceBlock<> *block = other.mResourceBlock.release<OpenGLResourceBlock<> *>();
             assert(block == &mBlock);
             other.mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &other.mBlock;
         }
@@ -127,12 +123,12 @@ namespace Render {
         Texture::operator=(std::move(other));
         std::swap(mBlock, other.mBlock);
         if (mResourceBlock) {
-            OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
+            [[maybe_unused]] OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
             assert(block == &other.mBlock);
             mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &mBlock;
         }
         if (other.mResourceBlock) {
-            OpenGLResourceBlock<> *block = other.mResourceBlock.release<OpenGLResourceBlock<> *>();
+            [[maybe_unused]] OpenGLResourceBlock<> *block = other.mResourceBlock.release<OpenGLResourceBlock<> *>();
             assert(block == &mBlock);
             other.mResourceBlock.setupAs<OpenGLResourceBlock<> *>() = &other.mBlock;
         }
@@ -149,7 +145,7 @@ namespace Render {
             mHandle = 0;
         }
         if (mResourceBlock) {
-            OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
+            [[maybe_unused]] OpenGLResourceBlock<> *block = mResourceBlock.release<OpenGLResourceBlock<> *>();
             assert(block == &mBlock);
         }
     }
@@ -169,32 +165,26 @@ namespace Render {
     {
         GLenum internalStorage;
         GLenum internalFormat;
-        GLenum sizedFormat;
         switch (mFormat) {
         case FORMAT_RGBA8:
             internalStorage = GL_UNSIGNED_BYTE;
             internalFormat = GL_RGBA;
-            sizedFormat = GL_RGBA8;
             break;
         case FORMAT_RGBA8_SRGB:
             internalStorage = GL_UNSIGNED_BYTE;
             internalFormat = GL_RGBA;
-            sizedFormat = GL_SRGB;
             break;
         case FORMAT_RGBA16F:
             internalStorage = GL_FLOAT;
             internalFormat = GL_RGBA;
-            sizedFormat = GL_RGBA16F;
             break;
         case FORMAT_R32F:
             internalStorage = GL_FLOAT,
             internalFormat = GL_RED;
-            sizedFormat = GL_R32F;
             break;
         case FORMAT_D24:
             internalStorage = GL_UNSIGNED_INT;
             internalFormat = GL_DEPTH_COMPONENT;
-            sizedFormat = GL_DEPTH_COMPONENT24;
             break;
         default:
             throw 0;

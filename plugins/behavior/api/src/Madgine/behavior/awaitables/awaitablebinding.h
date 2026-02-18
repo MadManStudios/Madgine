@@ -14,7 +14,7 @@ namespace Behavior {
             : BoundValueBase(state)
             , mBinding(std::forward<Binding>(binding))
         {
-            bool success = Execution::access_binding(mBinding, [this](auto &&v) {
+            [[maybe_unused]] bool success = Execution::access_binding(mBinding, [this](auto &&v) {
                 mValue.emplace(std::forward<decltype(v)>(v));
             });
             assert(success);

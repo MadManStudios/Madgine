@@ -38,8 +38,8 @@ namespace Engine {
 namespace Scene {
 
     SceneContainer::SceneContainer(SceneManager &sceneMgr)
-        : mManager(sceneMgr)
-        , mLifetime(&sceneMgr.lifetime())
+        : mLifetime(&sceneMgr.lifetime())
+        , mManager(sceneMgr)
     {
         startLifetime();
     }

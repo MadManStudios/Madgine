@@ -64,7 +64,7 @@ namespace Log {
         t = localtime(&time);
 #    endif
 
-        const char *type;
+        /* const char *type;
         switch (lvl) {
         case MessageType::DEBUG_TYPE:
             type = "Debug    :";
@@ -81,7 +81,7 @@ namespace Log {
         case MessageType::FATAL_TYPE:
             type = "Fatal    :";
             break;
-        }
+        }*/
 
         char s[30];
         strftime(s, 28, "%d/%m/%Y - %H:%M : ", t);

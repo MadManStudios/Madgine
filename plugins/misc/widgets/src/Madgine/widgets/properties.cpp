@@ -68,7 +68,7 @@ namespace Widgets {
     PropertyRange PropertyIterator::conditionalRange() const
     {
         assert(mIt->mDescriptor.mType == PropertyType::CONDITIONAL);
-        return { std::next(mIt), std::next(mIt, 1 + mIt->mDescriptor.mAnnotator0) };
+        return { { std::next(mIt) }, { std::next(mIt, 1 + mIt->mDescriptor.mAnnotator0) } };
     }
 
     float PropertyIterator::value(size_t index) const
@@ -264,7 +264,6 @@ namespace Serialize {
             std::vector<float> values;
             STREAM_PROPAGATE_ERROR(readPropertyDescriptor(in, desc, values));
             if (desc.mType == Widgets::PropertyType::CONDITIONAL) {
-                uint16_t mask = desc.mAnnotator1;
                 STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead("Conditional", true));
                 while (in.mStream.hasContainerItem()) {
                     STREAM_PROPAGATE_ERROR(readPropertyDescriptor(in, desc, values));

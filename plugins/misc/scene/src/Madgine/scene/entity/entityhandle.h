@@ -49,7 +49,7 @@ namespace Serialize {
         static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityHandle &handle, const char *name)
         {
             handle.writeId(out, name);
-            bool success = Execution::access_binding(handle.ptr(), [&](Scene::Entity::Entity &entity) {
+            [[maybe_unused]] bool success = Execution::access_binding(handle.ptr(), [&](Scene::Entity::Entity &entity) {
                 SerializableDataConstPtr { &entity }.writeState(out, name, true);
             });
             assert(success);

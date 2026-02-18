@@ -64,7 +64,6 @@ namespace Tools {
         if (const Debug::SenderLocation *senderLocation = dynamic_cast<const Debug::SenderLocation *>(&location)) {
             const Debug::DebugLocation *subLocation = nullptr;
 
-            size_t index = 0;
             IndexType<size_t> breakpoint;
             bool isMarker = false;
             Debug::Continuation *continuation = nullptr;
@@ -339,7 +338,7 @@ namespace Tools {
         std::unique_lock guard { context.mMutex };
         if (context.mChild) {
             if (BeginDebuggablePanel("Debug Context")) {
-                const Debug::DebugLocation *child = visualizeDebugLocation(context, *context.mChild, nullptr);
+                [[maybe_unused]] const Debug::DebugLocation *child = visualizeDebugLocation(context, *context.mChild, nullptr);
                 assert(!child); // Parents that allow inline rendering need to take care of child rendering.
                 EndDebuggablePanel();
             }

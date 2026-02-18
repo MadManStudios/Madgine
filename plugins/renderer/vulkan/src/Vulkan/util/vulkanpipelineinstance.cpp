@@ -194,8 +194,7 @@ namespace Render {
 
     void VulkanPipelineInstance::bindMesh(RenderTarget *target, const GPUMeshData &mesh) const
     {
-        VkCommandBuffer commandList = static_cast<VulkanRenderTarget *>(target)->mCommandList;
-        VkRenderPass renderpass = static_cast<VulkanRenderTarget *>(target)->mRenderPass;
+        VkCommandBuffer commandList = static_cast<VulkanRenderTarget *>(target)->mCommandList;        
 
         mFormat = mesh.mFormat;
         mGroupSize = mesh.mGroupSize;

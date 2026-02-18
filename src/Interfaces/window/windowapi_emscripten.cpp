@@ -616,7 +616,7 @@ namespace Window {
 
         emscripten_get_element_css_size("#canvas", &w, &h);
 
-        MonitorInfo info { 0, 0, static_cast<int>(w), static_cast<int>(h) };
+        MonitorInfo info { { 0, 0 }, { static_cast<int>(w), static_cast<int>(h) } };
 
         return { info };
     }

@@ -164,7 +164,7 @@ namespace Window {
         mRenderWindow = mRenderContext->createRenderWindow(mOsWindow);
 
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components()) {
-            bool result = co_await comp->callInit();
+            [[maybe_unused]] bool result = co_await comp->callInit();
             assert(result);
         }
 

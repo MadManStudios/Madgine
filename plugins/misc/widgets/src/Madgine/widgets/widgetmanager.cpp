@@ -50,9 +50,8 @@ namespace Widgets {
 
     WidgetManager::WidgetManager(Window::MainWindow &window)
         : MainWindowComponent(window, 20)
-        , mLifetime(&window.lifetime())
+        , mLifetime(&window.lifetime())        
         , mData(std::make_shared<WidgetManagerData>())
-        , mFrameClock(std::chrono::steady_clock::now())
     {
     }
 
@@ -60,7 +59,6 @@ namespace Widgets {
         : MainWindowComponent(sharedInstance.mWindow, 20)
         , mLifetime(&mWindow.lifetime())
         , mData(sharedInstance.mData)
-        , mFrameClock(std::chrono::steady_clock::now())
     {
     }
 

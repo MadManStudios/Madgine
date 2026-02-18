@@ -183,10 +183,10 @@ namespace Behavior {
                         }
                     }
                 }
-                for (const std::optional<FlowInPinPrototype> &pin : inFlows) {
+                for ([[maybe_unused]] const std::optional<FlowInPinPrototype> &pin : inFlows) {
                     assert(pin);
                 }
-                for (const std::optional<DataOutPinPrototype> &pin : outPins) {
+                for ([[maybe_unused]] const std::optional<DataOutPinPrototype> &pin : outPins) {
                     assert(pin);
                 }
                 mFlowInPins.clear();
@@ -541,7 +541,7 @@ namespace Behavior {
                     mDataOutPins.erase(mDataOutPins.begin() + source.mIndex);
                 }
             } else {
-                auto result = std::erase(node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex].mTargets, target);
+                [[maybe_unused]] auto result = std::erase(node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex].mTargets, target);
                 assert(result == 1);
                 if (!ignore.mIgnoreSource)
                     node(source.mNode)->onDataOutUpdate(source, DISCONNECT);

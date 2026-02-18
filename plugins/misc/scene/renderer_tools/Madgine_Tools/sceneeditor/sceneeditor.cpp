@@ -46,8 +46,8 @@ namespace Tools {
     };
 
     SceneEditor::SceneEditor(SceneTool &tool)
-        : mTool(tool)
-        , mEntityCache(*this)
+        : mEntityCache(*this)
+        , mTool(tool)
     {
     }
 

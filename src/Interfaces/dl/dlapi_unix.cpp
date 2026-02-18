@@ -61,7 +61,7 @@ namespace Dl {
     Filesystem::Path DlHandle::fullPath(std::string_view symbolName) const
     {
         Dl_info info;
-        auto result = dladdr(getSymbol(symbolName), &info);
+        [[maybe_unused]] auto result = dladdr(getSymbol(symbolName), &info);
         assert(result);
         return info.dli_fname;
     }

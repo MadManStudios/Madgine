@@ -45,10 +45,10 @@ namespace Behavior {
 
         Threading::TaskQueue *modelTaskQueue() const;
 
-        Threading::Task<bool> init();
-        Threading::Task<void> finalize();
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
 
-        void startLifetime();
+        void startLifetime() override;
         void endLifetime();
 
         Debug::DebuggableLifetime<> &lifetime();

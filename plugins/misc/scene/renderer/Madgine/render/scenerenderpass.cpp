@@ -35,9 +35,9 @@ namespace Render {
 
     SceneRenderPass::SceneRenderPass(Scene::SceneManager &scene, SceneRenderData &renderData, PointShadowRenderData &pointShadowRenderData, Camera &camera, int priority)
         : mData(scene, renderData, camera)
-        , mPriority(priority)
         , mShadowPass(scene, renderData, camera, 50)
         , mPointShadowRenderData(pointShadowRenderData)
+        , mPriority(priority)
     {
     }
 

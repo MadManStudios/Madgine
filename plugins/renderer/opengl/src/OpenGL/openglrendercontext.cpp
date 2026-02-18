@@ -569,7 +569,7 @@ namespace Render {
                 assert(wglChoosePixelFormatARB);
                 wglSwapIntervalEXT = reinterpret_cast<PFNWGLSWAPINTERVALEXTPROC>(wglGetProcAddress("wglSwapIntervalEXT"));
 #    endif
-                bool result = gladLoadGL();
+                [[maybe_unused]] bool result = gladLoadGL();
                 assert(result);
 
                 destroyContext(surface, context);

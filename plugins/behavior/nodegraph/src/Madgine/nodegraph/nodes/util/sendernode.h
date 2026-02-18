@@ -410,7 +410,7 @@ namespace Behavior {
                     if (!data) {
                         data = std::make_unique<InterpretData>();
                     }
-                    static_cast<InterpretData *>(data.get())->start({ { receiver.mInterpreter, static_cast<const T &>(receiver.mNode) }, receiver.mReceiver, receiver.mDebugLocation }, mArguments);
+                    static_cast<InterpretData *>(data.get())->start({ { { { receiver.mInterpreter }, static_cast<const T &>(receiver.mNode) } }, receiver.mReceiver, receiver.mDebugLocation }, mArguments);
                 } else {
                     throw 0;
                 }
@@ -420,7 +420,7 @@ namespace Behavior {
             {
                 if constexpr (Config::constant) {
 
-                    DummyReceiver rec { interpreter, static_cast<const T &>(*this) };
+                    DummyReceiver rec { { { { interpreter }, static_cast<const T &>(*this) } } };
 
                     auto state = Execution::connect(buildSender(*this, value_argument_tuple { mArguments }), rec);
 

@@ -57,7 +57,7 @@ namespace Filesystem {
     bool isDir(const Path &p)
     {
         struct stat statbuffer;
-        auto result = stat(p.c_str(), &statbuffer);
+        [[maybe_unused]] auto result = stat(p.c_str(), &statbuffer);
         assert(result != -1);
         return (statbuffer.st_mode & S_IFMT) == S_IFDIR;
     }
@@ -127,14 +127,14 @@ namespace Filesystem {
 
     void setCwd(const Path &p)
     {
-        auto result = chdir(p.c_str());
+        [[maybe_unused]] auto result = chdir(p.c_str());
         assert(result == 0);
     }
 
     Path getCwd()
     {
         char buffer[256];
-        auto result = getcwd(buffer, sizeof(buffer));
+        [[maybe_unused]] auto result = getcwd(buffer, sizeof(buffer));
         assert(result);
         return buffer;
     }

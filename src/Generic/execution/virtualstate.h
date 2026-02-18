@@ -17,15 +17,18 @@ namespace Execution {
         using result_types = type_pack<>;
         using mapped_cpos = auto_pack<>;
 
-    public:
         virtual void set_done() = 0;
         virtual void set_value(V... v) = 0;
+
+    protected:
+        void set_error() = delete;
     };
 
     template <typename R, typename... ExtraR, typename VPack>
     struct VirtualReceiverBaseEx<type_pack<R, ExtraR...>, VPack> : VirtualReceiverBaseEx<type_pack<ExtraR...>, VPack> {
         using result_types = type_pack<R, ExtraR...>;
 
+        using VirtualReceiverBaseEx<type_pack<ExtraR...>, VPack>::set_error;
         virtual void set_error(R r) = 0;
     };
 

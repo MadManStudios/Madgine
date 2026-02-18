@@ -353,7 +353,7 @@ namespace Render {
         }
 
         if (!requiredExtensions.empty()) {
-            for (std::string_view ext : requiredExtensions)
+            for ([[maybe_unused]] std::string_view ext : requiredExtensions)
                 LOG_DEBUG("Does not support " << ext);
             return false;
         }

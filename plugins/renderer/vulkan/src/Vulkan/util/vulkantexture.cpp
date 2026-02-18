@@ -330,7 +330,6 @@ namespace Render {
     void VulkanTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)
     {
         VkFormat vFormat = vkFormat();
-        VkImageViewType vType;
         size_t byteCount;
         switch (mFormat) {
         case FORMAT_RGBA8:

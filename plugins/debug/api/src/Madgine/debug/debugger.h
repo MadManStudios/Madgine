@@ -11,7 +11,7 @@
 namespace Engine {
 namespace Debug {
 
-    struct MADGINE_DEBUGGER_EXPORT ContextInfo : BaseLocation {
+    struct MADGINE_DEBUGGER_EXPORT ContextInfo final : BaseLocation {
         ContextInfo()
             : BaseLocation { this }
         {

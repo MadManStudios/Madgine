@@ -339,7 +339,7 @@ namespace Execution {
                 : mControl(*new ControlBlock(*this))
                 , mLifetime(lifetime)
             {
-                bool registered = mStopSource.registerCallback(this);
+                [[maybe_unused]] bool registered = mStopSource.registerCallback(this);
                 assert(registered);
             }
 

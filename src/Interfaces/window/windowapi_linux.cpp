@@ -348,7 +348,7 @@ namespace Window {
         for (int i = 0; i < XScreenCount(sDisplay()); ++i) {
             Screen *screen = XScreenOfDisplay(sDisplay(), i);
             // TODO position
-            sBuffer.push_back({ 0, 0, XWidthOfScreen(screen), XHeightOfScreen(screen) });
+            sBuffer.push_back({ { 0, 0 }, { XWidthOfScreen(screen), XHeightOfScreen(screen) } });
         }
     }
 

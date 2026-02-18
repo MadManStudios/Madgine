@@ -18,11 +18,11 @@ namespace Engine {
 namespace Render {
 
     RenderTarget::RenderTarget(RenderContext *context, bool global, std::string name, bool flipFlop, RenderTarget *blitSource)
-        : mGlobal(global)
+        : mBlitSource(blitSource)
+        , mContext(context)
+        , mGlobal(global)
         , mName(std::move(name))
         , mFlipFlop(flipFlop)
-        , mBlitSource(blitSource)
-        , mContext(context)
     {
         if (global)
             context->addRenderTarget(this);

@@ -29,7 +29,7 @@ namespace Plugins {
             if (std::regex_match(file.str(), match, e)) {
                 std::string project = match[1];
                 std::string name = match[2];
-                auto pib = mPlugins.emplace(name, this, project, result.path());
+                [[maybe_unused]] auto pib = mPlugins.emplace(name, this, project, result.path());
                 assert(pib.second);
             }
         }
@@ -113,7 +113,7 @@ namespace Plugins {
 
     bool PluginSection::loadPluginByFilename(std::string_view name, Ini::IniFile &file)
     {
-        auto pib = mPlugins.emplace(name);
+        [[maybe_unused]] auto pib = mPlugins.emplace(name);
         assert(pib.second);
         return loadPlugin(&*pib.first, file);
     }

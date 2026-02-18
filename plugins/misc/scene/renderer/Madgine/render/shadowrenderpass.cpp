@@ -23,8 +23,8 @@ namespace Render {
 
     ShadowRenderPass::ShadowRenderPass(Scene::SceneManager &scene, SceneRenderData &renderData, Render::Camera &camera, int priority)
         : mData(scene, renderData)
-        , mPriority(priority)
         , mCamera(camera)
+        , mPriority(priority)
     {
     }
 
@@ -48,7 +48,6 @@ namespace Render {
         if (!mPipeline.available())
             return;
 
-        Vector2i size = target->size();
         updateFrustum(1.0f);
 
         {
@@ -66,7 +65,7 @@ namespace Render {
             perFrame->light.light.dir = (v * Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
         }
 
-        for (const std::pair<const GPUMeshData *, std::vector<ShadowSceneRenderData::ObjectData>> &instance : mData.mInstances) {
+        for (const std::pair<const GPUMeshData * const, std::vector<ShadowSceneRenderData::ObjectData>> &instance : mData.mInstances) {
             const GPUMeshData *meshData = instance.first;
 
             {

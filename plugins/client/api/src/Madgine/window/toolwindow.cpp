@@ -46,7 +46,7 @@ namespace Window {
                                   close();
                                   return true;
                               },
-                              [this](const RepaintEvent &) {
+                              [](const RepaintEvent &) {
                                   return true;
                               },
                               [this](const ResizeEvent &e) {

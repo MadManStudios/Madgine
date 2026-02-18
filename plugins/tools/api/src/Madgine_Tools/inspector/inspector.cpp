@@ -125,9 +125,8 @@ namespace Tools {
                 }
                 return result;
             },
-            [&](auto &other) {
-                int columns = ImGui::TableGetColumnCount();
-                assert(columns == 2);
+            [&](auto &other) {                
+                assert(ImGui::TableGetColumnCount() == 2);
 
                 ImGui::TableNextColumn();
 
@@ -349,7 +348,7 @@ namespace Tools {
         ImGui::TableNextColumn();
 
         if (b) {
-            size_t i = 0;
+            //size_t i = 0;
             for (auto [vKey, vValue] : range) {
                 ImGui::TableNextRow();
                 ValueType value = vValue;
@@ -358,7 +357,7 @@ namespace Tools {
                 if (result.first)
                     vValue = value;
                 changed |= result.second;
-                ++i;
+                //++i;
             }
             ImGui::TreePop();
         }
@@ -391,7 +390,6 @@ namespace Tools {
 
     bool Inspector::drawTypeDecorations(ValueTypeDesc &type, ExtendedValueTypeDesc possibleTypes)
     {
-        ValueTypeDesc desc;
         bool isSet = type != static_cast<ValueTypeDesc>(toValueTypeDesc<std::monostate>());
         switch (possibleTypes.mType) {
         case ExtendedValueTypeEnum::GenericType:

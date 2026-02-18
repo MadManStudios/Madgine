@@ -75,8 +75,8 @@ namespace Render {
 
     void VulkanHeapAllocator::deallocate(Block block)
     {
-        uint32_t offset = reinterpret_cast<uintptr_t>(block.mAddress);
-        uint32_t buffer = reinterpret_cast<uintptr_t>(block.mAddress) >> 32;        
+        [[maybe_unused]] uint32_t offset = reinterpret_cast<uintptr_t>(block.mAddress);
+        uint32_t buffer = reinterpret_cast<uintptr_t>(block.mAddress) >> 32;
         assert(offset == 0 && buffer != 0);
 
         size_t index = buffer - 1;
@@ -87,8 +87,8 @@ namespace Render {
     std::tuple<VkBuffer, VkDeviceMemory, size_t> VulkanHeapAllocator::resolve(void *ptr)
     {
         uint32_t offset = reinterpret_cast<uintptr_t>(ptr);
-        uint32_t buffer = reinterpret_cast<uintptr_t>(ptr) >> 32;        
-        
+        uint32_t buffer = reinterpret_cast<uintptr_t>(ptr) >> 32;
+
         return { mHeaps[buffer - 1].mBuffer, mHeaps[buffer - 1].mMemory, offset };
     }
 

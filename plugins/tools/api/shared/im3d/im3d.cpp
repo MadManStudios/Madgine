@@ -215,7 +215,7 @@ namespace Im3D {
         c.mTemp.mLastAABB = { minP, maxP };
         c.mTemp.mLastTransform = param.mTransform;
 
-        size_t groupSize = (size_t)type + 1;
+        [[maybe_unused]] size_t groupSize = (size_t)type + 1;
 
         if (indices) {
             assert(indexCount % groupSize == 0);
@@ -260,7 +260,7 @@ namespace Im3D {
         c.mTemp.mLastAABB = { minP, maxP };
         c.mTemp.mLastTransform = param.mTransform;
 
-        size_t groupSize = (size_t)type + 1;
+        [[maybe_unused]] size_t groupSize = (size_t)type + 1;
 
         if (indices) {
             assert(indexCount % groupSize == 0);

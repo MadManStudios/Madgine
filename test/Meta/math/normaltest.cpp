@@ -35,7 +35,7 @@ TEST(Math, Normals)
 
     Vector4 n { 1, 0, 0, 0 };
 
-    Vector4 result = anti_m * n;
+    //Vector4 result = anti_m * n;
 
 
 }

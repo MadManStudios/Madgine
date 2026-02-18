@@ -60,7 +60,6 @@ namespace Tools {
     {
         if (beginToolPanel("Gamepad", &mVisible, ImGuiDir_None, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
 
-            const ImGuiStyle &Style = ImGui::GetStyle();
             ImDrawList *DrawList = ImGui::GetWindowDrawList();
             ImGuiWindow *window = ImGui::GetCurrentWindow();
 

@@ -26,7 +26,7 @@ void SocketAPI::finalize()
 void Socket::close()
 {
     assert(mSocket);
-    int result = ::close(mSocket);
+    [[maybe_unused]] int result = ::close(mSocket);
     assert(result == 0);
     mSocket = Invalid_Socket;
 }
@@ -34,7 +34,6 @@ void Socket::close()
 SocketAddress Socket::address() const
 {
     sockaddr address;
-    char ext[16];
     socklen_t length;
     if (getpeername(mSocket, &address, &length))
         return {};

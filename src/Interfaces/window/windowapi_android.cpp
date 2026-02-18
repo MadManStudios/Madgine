@@ -544,7 +544,7 @@ namespace Window {
         int width = ANativeWindow_getWidth(sNativeWindow);
         int height = ANativeWindow_getHeight(sNativeWindow);
 
-        MonitorInfo info { 0, 0, width, height };
+        MonitorInfo info { { 0, 0 }, { width, height } };
 
         return { info };
     }

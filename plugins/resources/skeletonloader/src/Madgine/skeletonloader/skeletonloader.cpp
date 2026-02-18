@@ -93,7 +93,7 @@ namespace Render {
         for (aiBone *bone : bones) {
             aiNode *node = scene->mRootNode->FindNode(bone->mName);
 
-            bool newBone = indices.try_emplace(node, skeleton.mBones.size()).second;
+            [[maybe_unused]] bool newBone = indices.try_emplace(node, skeleton.mBones.size()).second;
             assert(newBone);
             skeleton.mBones.push_back(Bone { bone->mName.C_Str() });
             skeleton.mBones.back().mTTransform = assimpConvertMatrix(node->mTransformation);

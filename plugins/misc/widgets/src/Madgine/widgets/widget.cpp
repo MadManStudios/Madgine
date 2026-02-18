@@ -39,11 +39,11 @@ namespace Engine {
 namespace Widgets {
 
     WidgetBase::WidgetBase(WidgetManager &manager, WidgetBase *parent, const WidgetConfig &config)
-        : mManager(manager)
+        : mVisible(parent)
+        , mManager(manager)
         , mParent(parent)
         , mAcceptsPointerEvents(config.acceptsPointerEvents || !parent)
         , mAllowsDragging(config.allowsDragging)
-        , mVisible(parent)
     {
         mManager.registerWidget(this);
 

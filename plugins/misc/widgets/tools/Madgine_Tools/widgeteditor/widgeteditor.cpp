@@ -250,7 +250,6 @@ namespace Tools {
     {
         Widgets::WidgetBase *hoveredWidget = manager.hoveredWidget();
 
-        WidgetSettings *hoveredSettings = nullptr;
         if (hoveredWidget) {
             Rect2i screenSpace = manager.getClientSpace();
             screenSpace.mTopLeft = { static_cast<int>(pos.x), static_cast<int>(pos.y) };

@@ -51,7 +51,6 @@ namespace Widgets {
     void ScalableImageRenderData::renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, const ColorFrame &color)
     {
         Vector2 posOuter = pos;
-        Vector2 sizeOuter = size.xy();
 
         Vector2 topLeftUV = Vector2 { entry.mArea.mTopLeft + Vector2i { 1, 1 } } / (2048.f /* * mData->mUIAtlasSize*/);
         Vector2 uvSize = Vector2 { entry.mArea.mSize - Vector2i { 2, 2 } } / (2048.f /* * mData->mUIAtlasSize*/);

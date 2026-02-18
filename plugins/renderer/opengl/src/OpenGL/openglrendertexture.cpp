@@ -54,10 +54,10 @@ namespace Render {
 
     OpenGLRenderTexture::OpenGLRenderTexture(OpenGLRenderContext *context, const Vector2i &size, const RenderTextureConfig &config)
         : OpenGLRenderTarget(context, false, config.mName, config.mFormat == FORMAT_RGBA8_SRGB, false, config.mFlipFlop, config.mBlitSource)
+        , mCreateDepthTexture(config.mCreateDepthBufferView)
         , mSamples(context->supportsMultisampling() ? config.mSamples : 1)
         , mSize { 0, 0 }
-        , mType(config.mType)
-        , mCreateDepthTexture(config.mCreateDepthBufferView)
+        , mType(config.mType)        
     {
         if (mType == TextureType_2DMultiSample && !context->supportsMultisampling())
             mType = TextureType_2D;
@@ -68,7 +68,7 @@ namespace Render {
         mFramebufferCount = getFramebufferCount(&createDepthBufferView);
 
         for (size_t i = 0; i < config.mTextureCount * bufferCount; ++i) {
-            std::shared_ptr<OpenGLTexture> &tex = mTextures.emplace_back(std::make_shared<OpenGLTexture>(mType, config.mFormat, config.mSamples));
+            mTextures.emplace_back(std::make_shared<OpenGLTexture>(mType, config.mFormat, config.mSamples));
         }
 
         if (mCreateDepthTexture) {

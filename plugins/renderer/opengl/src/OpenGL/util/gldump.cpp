@@ -11,7 +11,7 @@ void glDump()
 
     cout << "GL-State: ---------- \n";
 
-    GLenum glenum;
+    //GLenum glenum;
     GLint glint;
 
     glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &glint);

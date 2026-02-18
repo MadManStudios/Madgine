@@ -90,7 +90,7 @@ namespace Tools {
             }
 
             ed::NodeId ids[256];
-            auto handledNodesCount = ed::GetOrderedNodeIds(ids, 256);
+            [[maybe_unused]] auto handledNodesCount = ed::GetOrderedNodeIds(ids, 256);
             assert(handledNodesCount < 255);
             uint32_t handledIndex = 0;
 

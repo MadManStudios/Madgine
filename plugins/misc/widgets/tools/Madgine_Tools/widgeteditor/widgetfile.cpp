@@ -33,8 +33,8 @@ namespace Tools {
     WidgetFile::WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Resource *resource)
         : mEditor(editor)
         , mPath(resource ? resource->path() : "")
-        , mRenderTarget(editor.manager().window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName { resource ? resource->name() : "<Unnamed>" }, .mFormat = Render::FORMAT_RGBA8_SRGB }))
         , mWidgetManager(editor.manager())
+        , mRenderTarget(editor.manager().window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName { resource ? resource->name() : "<Unnamed>" }, .mFormat = Render::FORMAT_RGBA8_SRGB }))
     {
         static_cast<ClientImRoot &>(editor.root()).addRenderTarget(mRenderTarget.get());
         mRenderTarget->addRenderPass(&mWidgetManager);

@@ -69,7 +69,7 @@ namespace Behavior {
             std::optional<NodeReceiver<NodeBase>> mReceiver;
             Behavior::StatePtr mBehavior;
             ArgumentList mResult;
-            Debug::SenderLocation mLocation { [this](CallableView<void(const Execution::StateDescriptor &)>) -> void { throw 0; } };
+            Debug::SenderLocation mLocation { [](CallableView<void(const Execution::StateDescriptor &)>) -> void { throw 0; } };
         };
 
         struct BehaviorInterpretData : NodeInterpreterData, Execution::VirtualState<BehaviorReceiver, BehaviorInterpretReceiver> {
@@ -91,7 +91,7 @@ namespace Behavior {
 
             void start(NodeReceiver<NodeBase> receiver, const ParameterTuple &args)
             {
-                NodeInterpretHandle<BehaviorNode> handle { receiver.mInterpreter, static_cast<const BehaviorNode &>(receiver.mNode) };
+                NodeInterpretHandle<BehaviorNode> handle { { receiver.mInterpreter }, static_cast<const BehaviorNode &>(receiver.mNode) };
 
                 mRec.mReceiver.emplace(std::move(receiver));
 
@@ -107,8 +107,8 @@ namespace Behavior {
         BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior, Threading::TaskFuture<bool> &future)
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
-            , mParameters(mBehavior.createParameters())
             , mFullClassName(mBehavior.toString())
+            , mParameters(mBehavior.createParameters())
         {
             future = Engine::Resources::ResourceManager::getSingleton().taskQueue()->queueTask(mBehavior.state().then([this](bool success) {
                 if (success) {
@@ -123,8 +123,8 @@ namespace Behavior {
         BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior)
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
-            , mParameters(mBehavior.createParameters())
             , mFullClassName(mBehavior.toString())
+            , mParameters(mBehavior.createParameters())            
         {
             assert(mBehavior.state());
             mNamedInputs = mBehavior.namedInputs();
@@ -135,8 +135,8 @@ namespace Behavior {
         BehaviorNode::BehaviorNode(const BehaviorNode &other, NodeGraph &graph)
             : VirtualData(other, graph)
             , mBehavior(other.mBehavior)
-            , mParameters(other.mParameters)
             , mFullClassName(other.mFullClassName)
+            , mParameters(other.mParameters)
             , mNamedInputs(other.mNamedInputs)
         {
         }

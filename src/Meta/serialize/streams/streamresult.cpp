@@ -34,7 +34,7 @@ namespace Serialize {
             mPosition = static_cast<int>(in->tell());
 
             if (!binary) {
-                bool result = in->seek(0, std::ios_base::beg);
+                [[maybe_unused]] bool result = in->seek(0, std::ios_base::beg);
                 assert(result);
                 pos_type lastNewLine = 0;
                 mLineNumber = 1;

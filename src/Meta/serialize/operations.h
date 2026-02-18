@@ -293,7 +293,7 @@ namespace Serialize {
     template <typename T, typename... Configs>
     StreamResult readAction(T &t, CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
     {
-        auto guard = GuardSelector<Configs...>::guard(in.mHierarchy);
+        [[maybe_unused]] auto guard = GuardSelector<Configs...>::guard(in.mHierarchy);
         return Operations<T, Configs...>::readAction(t, in, request);
     }
 

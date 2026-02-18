@@ -71,7 +71,7 @@ namespace Resources {
     ByteBuffer ImageLoader::convertToPNG(const ByteBuffer &data, Vector2i size)
     {
         ByteBuffer image;
-        int result = stbi_write_png_to_func([](void *context, void *data, int size) {
+        [[maybe_unused]] int result = stbi_write_png_to_func([](void *context, void *data, int size) {
             WritableByteBuffer output { std::make_unique<std::byte[]>(size), static_cast<size_t>(size) };
             std::memcpy(output.mData, data, size);
             *static_cast<ByteBuffer *>(context) = std::move(output).cast<const void>();

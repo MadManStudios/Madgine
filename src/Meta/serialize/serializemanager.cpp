@@ -45,7 +45,7 @@ namespace Serialize {
 
     void SerializeManager::removeSlaveMapping(SyncableUnitBase *item)
     {
-        size_t result = mSlaveMappings.erase(item->slaveId());
+        [[maybe_unused]] size_t result = mSlaveMappings.erase(item->slaveId());
         assert(result == 1);
     }
 
@@ -59,7 +59,7 @@ namespace Serialize {
         } else {
             assert(id >= BEGIN_USER_ID_SPACE);
             if (id >= RESERVED_ID_COUNT) {
-                bool b = sMasterMappings.try_emplace(id, unit).second;
+                [[maybe_unused]] bool b = sMasterMappings.try_emplace(id, unit).second;
                 assert(b);
             }
         }

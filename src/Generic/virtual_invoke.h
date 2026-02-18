@@ -2,6 +2,11 @@
 
 #include "callable_traits.h"
 
+template <typename Base>
+struct VirtualCPOBaseWrapper : Base {
+    void v_tag_invoke() = delete;
+};
+
 template <typename CPO_holder, typename Base, typename R, std::same_as<void> T, typename... V>
 struct VirtualCPOBaseHelper : Base {
     using Base::Base;
@@ -10,6 +15,7 @@ struct VirtualCPOBaseHelper : Base {
 
     using mapped_cpos = typename Base::mapped_cpos::template append<CPO_holder::value>;
 
+    using Base::v_tag_invoke;
     virtual R v_tag_invoke(CPO _cpo, V... v) = 0;
 
     template <typename... Args>
@@ -40,7 +46,7 @@ template <auto cpo, typename Base>
 using VirtualCPOsImplHelper = VirtualCPOImpl<cpo, Base>;
 
 template <typename Base, auto... cpos>
-using VirtualCPOsBase = typename Engine::auto_pack<cpos...>::template fold<VirtualCPOBase, Base>;
+using VirtualCPOsBase = typename Engine::auto_pack<cpos...>::template fold<VirtualCPOBase, VirtualCPOBaseWrapper<Base>>;
 
 template <typename Base>
 using VirtualCPOsImpl = typename Base::mapped_cpos::template fold<VirtualCPOsImplHelper, Base>;

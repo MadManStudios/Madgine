@@ -129,8 +129,6 @@ namespace Widgets {
 
         std::vector<Line> lines;
 
-        const Render::Glyph &space = typeFace->mFonts.at(style)[' '];
-
         float currentLineWidth = 0.0f;
         const char *end = text.data() + text.size();
         const char *sol = text.data();

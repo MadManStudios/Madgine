@@ -32,7 +32,7 @@ namespace Render {
         for (auto &[key, transforms] : mInstances)
             transforms.clear();
 
-        co_await mScene.mutex().locked(AccessMode::READ, [this, context]() {
+        co_await mScene.mutex().locked(AccessMode::READ, [this]() {
             // TODO Culling
 
             for (const auto &mesh : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {

@@ -34,9 +34,9 @@ namespace Tools {
         , mPath(resource ? resource->path() : "")
         , mManager(tool.sceneMgr().app())
         , mContainer(mManager.container("Editor"))
-        , mIm3DContext(Im3D::CreateContext())
         , mSceneData(mManager)
         , mPointShadowRenderData(mManager, mSceneData)
+        , mIm3DContext(Im3D::CreateContext())
     {
         mManager.startLifetime();
 
@@ -73,8 +73,6 @@ namespace Tools {
 
     bool SceneFile::render()
     {
-        constexpr float borderSize = 10.0f;
-
         Im3D::Im3DContext *context = Im3D::SetCurrentContext(mIm3DContext);
 
         Im3D::NewFrame();

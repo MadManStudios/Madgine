@@ -725,7 +725,7 @@ namespace Execution {
             using base = algorithm_state<Sender, receiver<Rec, Sender>>;
 
             state(Rec &&rec, Sender &&sender)
-                : base(std::forward<Sender>(sender), receiver<Rec, Sender> { std::forward<Rec>(rec), this })
+                : base(std::forward<Sender>(sender), receiver<Rec, Sender> { { std::forward<Rec>(rec) }, this })
             {
             }
 

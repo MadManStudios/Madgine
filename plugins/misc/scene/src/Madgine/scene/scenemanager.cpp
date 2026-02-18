@@ -50,12 +50,12 @@ namespace Scene {
 
     SceneManager::SceneManager(App::Application &app)
         : VirtualScope(app)
-        , mLifetime(&app.lifetime())
-        , mSceneComponents(*this)
         , mMutex("SceneData")
-        , mFrameClock(std::chrono::steady_clock::now())
-        , mAnimationClock(mClock.now())
+        , mLifetime(&app.lifetime())        
         , mSimulationClock(mClock.now())
+        , mAnimationClock(mClock.now())        
+        , mFrameClock(std::chrono::steady_clock::now())
+        , mSceneComponents(*this)
     {
         pause();
     }

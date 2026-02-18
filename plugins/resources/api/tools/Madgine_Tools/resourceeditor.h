@@ -18,6 +18,8 @@ namespace Tools {
         bool BeginResourceFile(const void *id, const Filesystem::Path &path, bool isDirty, Closure<void(const Filesystem::Path &)> save, bool *open = nullptr, ImGuiWindowFlags flags = 0);
 
     private:
+        using ToolBase::init;
+
         Resources::ResourceLoaderBase *mResourceLoader = nullptr;
         ResourcesTool *mManager = nullptr;
         std::string mType;

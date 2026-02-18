@@ -111,7 +111,7 @@ namespace Behavior {
             if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
                 ArgumentList arguments { dataInCount() };
                 for (size_t i = 0; i < dataInCount(); ++i) {
-                    BehaviorError error = NodeInterpretHandle<NodeBase> { interpreter, *this }.read(arguments[i], i);
+                    BehaviorError error = NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(arguments[i], i);
                     if (error.mResult != GenericResult::SUCCESS) {
                         return error;
                     }
@@ -119,7 +119,7 @@ namespace Behavior {
                 (*accessor()->mType.mSecondary.mFunctionTable)->mFunctionPtr((*accessor()->mType.mSecondary.mFunctionTable), retVal, arguments);
             } else {
                 ValueType scope;
-                if (BehaviorError error = NodeInterpretHandle<NodeBase> { interpreter, *this }.read(scope, 0); error.mResult != GenericResult::SUCCESS)
+                if (BehaviorError error = NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(scope, 0); error.mResult != GenericResult::SUCCESS)
                     return error;
 
                 accessor()->mGetter(accessor(), retVal, scope.as<ScopePtr>());
@@ -164,7 +164,6 @@ namespace Behavior {
             if (pos == std::string_view::npos)
                 return nullptr;
 
-            std::string_view typeName = path.substr(0, pos);
             std::string_view accessorName = path.substr(pos + 1);
 
             const MetaTable *classType = type();

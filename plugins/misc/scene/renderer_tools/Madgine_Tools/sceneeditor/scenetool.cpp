@@ -78,7 +78,7 @@ namespace Tools {
 
     void SceneTool::render()
     {
-        std::erase_if(mFiles, [&, this](std::pair<Scene::SceneLoader::Resource *const, SceneFile> &p) {
+        std::erase_if(mFiles, [&](std::pair<Scene::SceneLoader::Resource *const, SceneFile> &p) {
             return !p.second.render();
         });
 

@@ -13,13 +13,13 @@ Threading::WorkgroupLocal<std::map<std::string_view, ScopePtr>> sWorkGroupLocalR
 
 void KeyValueRegistry::registerGlobal(const char *name, ScopePtr ptr)
 {
-    auto pib = sGlobalRegistry.try_emplace(name, ptr);
+    [[maybe_unused]] auto pib = sGlobalRegistry.try_emplace(name, ptr);
     assert(pib.second);
 }
 
 void KeyValueRegistry::registerWorkGroupLocal(const char *name, ScopePtr ptr)
 {
-    auto pib = sWorkGroupLocalRegistry->try_emplace(name, ptr);
+    [[maybe_unused]] auto pib = sWorkGroupLocalRegistry->try_emplace(name, ptr);
     assert(pib.second);
 }
 

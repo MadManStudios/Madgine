@@ -38,7 +38,7 @@ TEST(ValueType, Construct)
     using namespace Engine;
     using namespace std::literals::string_view_literals;
 
-    ValueType_Foo foo;
+    //ValueType_Foo foo;
 
     ValueType test;
     test = "abc"sv;

@@ -26,7 +26,7 @@ namespace Execution {
                 previous->mNext = item;
             } else {
                 T *expected = nullptr;
-                bool result = mHead.compare_exchange_strong(expected, item);
+                [[maybe_unused]] bool result = mHead.compare_exchange_strong(expected, item);
                 assert(result);
             }
             return wasFirst;

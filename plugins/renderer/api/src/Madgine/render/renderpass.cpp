@@ -22,7 +22,7 @@ namespace Render {
     {
         for (RenderData *dep : mDependencies)
             dependencies.push_back(dep->update(context));
-        for (const auto &fut : dependencies)
+        for ([[maybe_unused]] const auto &fut : dependencies)
             assert(fut.valid());
     }
 

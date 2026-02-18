@@ -20,9 +20,9 @@ namespace Render {
         }
 
         Texture(Texture &&other)
-            : mType(other.mType)
+            : mResourceBlock(std::move(other.mResourceBlock))
+            , mType(other.mType)
             , mFormat(other.mFormat)
-            , mResourceBlock(std::move(other.mResourceBlock))
             , mSize(other.mSize)
         {
         }

@@ -222,7 +222,7 @@ namespace Plugins {
 
     void PluginManager::setupSection(const std::string &name, bool exclusive, bool atleastOne)
     {
-        auto pib = mSections.emplace(*this, name, exclusive, atleastOne);
+        [[maybe_unused]] auto pib = mSections.emplace(*this, name, exclusive, atleastOne);
         assert(pib.second);
     }
 

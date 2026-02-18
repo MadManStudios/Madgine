@@ -10,16 +10,15 @@
 
 #include "im3d/im3d.h"
 #include "im3d/im3d_internal.h"
-
 #include "im3d_hlsl.h"
 
 namespace Engine {
 namespace Render {
 
     Im3DRenderPass::Im3DRenderPass(Im3D::Im3DContext *context, Camera *camera, int priority)
-        : mCamera(camera)
+        : mContext(context)
+        , mCamera(camera)
         , mPriority(priority)
-        , mContext(context)
     {
     }
 
@@ -31,7 +30,7 @@ namespace Render {
         mDefaultBlock = block.toResourceBlock(target->context());
     }
 
-    void Im3DRenderPass::shutdown(RenderTarget* target)
+    void Im3DRenderPass::shutdown(RenderTarget *target)
     {
         target->context()->destroyResourceBlock(mDefaultBlock);
     }
