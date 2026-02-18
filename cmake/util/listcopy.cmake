@@ -6,12 +6,7 @@ foreach(list ${LISTS})
 	
 	message(STATUS "Copying data-list: ${list}")
 
-	file(READ ${list} contents)
-
-	# Convert file contents into a CMake list (where each element in the list
-	# is one line of the file)		
-	string(REGEX REPLACE ";" "\\\\;" contents "${contents}")
-	string(REGEX REPLACE "\n" ";" contents "${contents}")
+	file(STRINGS ${list} contents)
 
 	file(INSTALL ${contents} DESTINATION ${TARGET})
 

@@ -1,0 +1,1 @@
+ act -W '.\.github\workflows\build-all.yml' -P windows-latest=-self-hosted --artifact-server-path out/artifacts -e event.json

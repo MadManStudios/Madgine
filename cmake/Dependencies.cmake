@@ -12,12 +12,7 @@ function(resolve_dependencies)
 		
 		message(STATUS "Reading dependencies: ${dependenciesFile}")
 
-		file(READ ${dependenciesFile} contents)
-
-		# Convert file contents into a CMake list (where each element in the list
-		# is one line of the file)		
-		string(REGEX REPLACE ";" "\\\\;" contents "${contents}")
-		string(REGEX REPLACE "\n" ";" contents "${contents}")
+		file(STRINGS ${dependenciesFile} contents)
 
 		set(dependencies )
 

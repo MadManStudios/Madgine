@@ -1,5 +1,3 @@
-# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
-# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
 name: CMake on multiple platforms
 
 on:
@@ -15,41 +13,43 @@ jobs:
 
         
     steps:
-    - name: Set reusable strings
-      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
-      shell: bash
-      run: |
-        echo "Setting up configuration"
-          
+    - uses: actions/checkout@v4
+      if: ${{ !env.ACT }}
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+        
+    - uses: paulhatch/semantic-version@v5.4.0
+      id: version
+      if: ${{ !env.ACT }}
+      with:
+        major_pattern: "(MAJOR)"
+        minor_pattern: "(MINOR)"
+        version_format: "${major}.${minor}.${patch}"
+        user_format_type: "json"
+        enable_prerelease_mode: true
+        debug: false          
 
     outputs:
       platforms: "{
-        \"windows\": \"windows-latest\", 
-        \"osx\": \"macos-latest\", 
-        \"ios\": \"macos-latest\", 
-        \"linux\": \"ubuntu-latest\", 
-        \"android_arm64\": \"ubuntu-latest\", 
-        \"android_x64\": \"ubuntu-latest\", 
-        \"emscripten\": \"ubuntu-latest\"}"
-      toolchains: "{
-        \"windows\": \"\", 
-        \"osx\": \"\", 
-        \"ios\": \"\", 
-        \"linux\": \"\", 
-        \"android_arm64\": \"--toolchain cmake/toolchains/android.cmake -DANDROID_ABI=arm64-v8a\", 
-        \"android_x64\": \"--toolchain cmake/toolchains/android.cmake -DANDROID_ABI=x86_64\", 
-        \"emscripten\": \"--toolchain cmake/toolchains/emscripten-wasm.cmake\"}"
-      configs: "{
-        \"windows\": \"OpenGL\", 
-        \"osx\": \"OpenGL\", 
-        \"ios\": \"\", 
-        \"linux\": \"OpenGL\", 
-        \"android_arm64\": \"Vulkan\", 
-        \"android_x64\": \"Vulkan\", 
-        \"emscripten\": \"OpenGL\"}"
-      versions: "{
-        \"push\": \"${major}.${minor}.${patch}\",
-        \"pull_request\": \"${major}.${minor}.${patch}\"}"
+        \"Windows\": \"windows-latest\", 
+        \"macOS\": \"macos-latest\", 
+        \"iOS\": \"macos-latest\", 
+        \"Linux\": \"ubuntu-latest\", 
+        \"Android_arm64\": \"ubuntu-latest\", 
+        \"Android_x64\": \"ubuntu-latest\", 
+        \"Emscripten\": \"ubuntu-latest\"}"
+      presets: "{
+        \"Windows\": \"Clang-RelWithDebInfo-DirectX\", 
+        \"macOS\": \"RelWithDebInfo-OpenGL\", 
+        \"iOS\": \"RelWithDebInfo-OpenGL\", 
+        \"Linux\": \"RelWithDebInfo-OpenGL\", 
+        \"Android_arm64\": \"Android-arm64-RelWithDebInfo-Vulkan\", 
+        \"Android_x64\": \"Android-x64-RelWithDebInfo-Vulkan\", 
+        \"Emscripten\": \"Emscripten-RelWithDebInfo-OpenGL\"}"
+      version: "${{ steps.version.outputs.version }}"
+      version_tag: "${{ steps.version.outputs.version_tag }}"
     
   build-plugins:
   
@@ -58,108 +58,39 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
       fail-fast: false
 
-      # Set up a matrix to run the following 3 configurations:
-      # 1. <Windows, Release, latest MSVC compiler toolchain on the default runner image, default generator>
-      # 2. <Linux, Release, latest GCC compiler toolchain on the default runner image, default generator>
-      # 3. <Linux, Release, latest Clang compiler toolchain on the default runner image, default generator>
-      #
-      # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        platform: [windows-latest, macos-latest, ubuntu-latest]
+        platform: [ubuntu-latest, windows-latest] #, macos-latest] 
 
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 0
-
-        
-    - uses: paulhatch/semantic-version@v5.4.0
-      id: version
-      with:
-        # The prefix to use to identify tags
-        tag_prefix: "v"
-        # A string which, if present in a git commit, indicates that a change represents a
-        # major (breaking) change, supports regular expressions wrapped with '/'
-        major_pattern: "(MAJOR)"
-        # A string which indicates the flags used by the `major_pattern` regular expression. Supported flags: idgs
-        major_regexp_flags: ""
-        # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
-        minor_pattern: "(MINOR)"
-        # A string which indicates the flags used by the `minor_pattern` regular expression. Supported flags: idgs
-        minor_regexp_flags: ""
-        # A string to determine the format of the version output
-        version_format: ${{ fromJSON(needs.configuration.outputs.versions)[github.event_name] }}
-        # Optional path to check for changes. If any changes are detected in the path the
-        # 'changed' output will true. Enter multiple paths separated by spaces.
-        change_path: ""
-        # Named version, will be used as suffix for name version tag
-        namespace: ""
-        # If this is set to true, *every* commit will be treated as a new version.
-        bump_each_commit: false
-        # If bump_each_commit is also set to true, setting this value will cause the version to increment only if the pattern specified is matched.
-        bump_each_commit_patch_pattern: ""
-        # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
-        search_commit_body: false
-        # The output method used to generate list of users, 'csv' or 'json'.
-        user_format_type: "json"
-        # Prevents pre-v1.0.0 version from automatically incrementing the major version.
-        # If enabled, when the major version is 0, major releases will be treated as minor and minor as patch. Note that the version_type output is unchanged.
-        enable_prerelease_mode: false
-        # If enabled, diagnostic information will be added to the action output.
-        debug: false
-        # If true, the branch will be used to select the maximum version.
-        version_from_branch: false
-
 
     - name: Patch Dependencies
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
-
-    - name: Install Dependencies
-      if: matrix.platform == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install libx11-dev mesa-utils libgl1-mesa-dev
-
-    - name: Set up Clang
-      if: matrix.platform == 'ubuntu-latest'
-      uses: egor-tensin/setup-clang@v1
+   
+    - name: Install Toolchain
+      uses: ./.github/actions/install-toolchain
       with:
-        version: latest
-        platform: x64
+        platform: ${{ runner.os }}
 
     - name: Configure CMake
       env:
-        MADGINE_VERSION: ${{ steps.version.outputs.version }}
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: >
-        cmake -B ${{ github.workspace }}/build
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo
-        -DUSE_CMAKE_LOG=1 
-        -DBUILD_SHARED_LIBS=ON
-        -S ${{ github.workspace }}
+        MADGINE_VERSION: ${{ needs.configuration.outputs.version }}
+      run: cmake --preset=RelWithDebInfo -S ${{ github.workspace }}
 
     - name: Build
-      # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      run: cmake --build ${{ github.workspace }}/build --config RelWithDebInfo --verbose
+      run: cmake --build ${{ github.workspace }}/out/build/RelWithDebInfo --config RelWithDebInfo -j
 
     - name: Test
-      working-directory: ${{ github.workspace }}/build
-      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      working-directory: ${{ github.workspace }}/out/build/RelWithDebInfo
       run: ctest --build-config RelWithDebInfo --output-on-failure
 
-    - name: Install NSIS
-      if: matrix.platform == 'windows-latest'
-      uses: negrutiu/nsis-install@v2
-
     - name: Package
-      working-directory: ${{ github.workspace }}/build
+      working-directory: ${{ github.workspace }}/out/build/RelWithDebInfo
       run: cpack
 
     - name: Pushing Artifacts
@@ -167,15 +98,15 @@ jobs:
       with:
         name: release-${{ matrix.platform }}
         path: |
-            ${{ github.workspace }}/build/packages/*
-            !${{ github.workspace }}/build/packages/*/
+            ${{ github.workspace }}/out/build/RelWithDebInfo/packages/*
+            !${{ github.workspace }}/out/build/RelWithDebInfo/packages/*/
         overwrite: true
 
     - name: Pushing Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.platform }}
-        path: ${{ github.workspace }}/build/bin
+        path: ${{ github.workspace }}/out/build/RelWithDebInfo/bin
         overwrite: true
 
   build-configs:
@@ -183,169 +114,57 @@ jobs:
     needs: [configuration, build-plugins]
 
     runs-on: ${{ fromJSON(needs.configuration.outputs.platforms)[matrix.platform] }}    
-    
-    permissions:
-      contents: write    
 
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
       fail-fast: false
 
-      # Set up a matrix to run the following 3 configurations:
-      # 1. <Windows, Release, latest MSVC compiler toolchain on the default runner image, default generator>
-      # 2. <Linux, Release, latest GCC compiler toolchain on the default runner image, default generator>
-      # 3. <Linux, Release, latest Clang compiler toolchain on the default runner image, default generator>
-      #
-      # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        platform: [windows, osx, ios, linux, android_arm64, android_x64, emscripten]
+        platform: [Linux, Android_arm64, Android_x64, Emscripten, Windows] #, macOS, iOS]
         exclude:          
-          - platform: ios
+          - platform: iOS
 
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 0
         
     - name: Patch Dependencies
       run: |
         echo "https://github.com/MadManStudios/MadgineSentry.git" >> ${{ github.workspace }}/dependencies.txt
-        
-    - name: Install Dependencies
-      if: fromJSON(needs.configuration.outputs.platforms)[matrix.platform] == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install libx11-dev mesa-utils libgl1-mesa-dev
-
-    - name: Install Toolchain
-      if: matrix.platform == 'emscripten'
-      uses: mymindstorm/setup-emsdk@v14
-      with:
-        version: '4.0.9'
-
-    - name: Install Toolchain
-      if: matrix.platform == 'android_arm64' || matrix.platform == 'android_x64'
-      uses: android-actions/setup-android@v3
-
-    - name: Install Toolchain
-      if: matrix.platform == 'android_arm64' || matrix.platform == 'android_x64'
-      uses: nttld/setup-ndk@v1
-      with:
-        ndk-version: r26d
-        link-to-sdk: true
-
-    - name: Install wasm-split
-      if: matrix.platform == 'emscripten'
-      uses: robinraju/release-downloader@v1
-      with:
-        repository: getsentry/symbolicator
-        latest: true
-        fileName: wasm-split-Linux-x86_64
-
-    - name: Set up Clang
-      if: matrix.platform == 'linux'
-      uses: egor-tensin/setup-clang@v1
-      with:
-        version: latest
-        platform: x64
-
-    - uses: paulhatch/semantic-version@v5.4.0
-      id: version
-      with:
-        # The prefix to use to identify tags
-        tag_prefix: "v"
-        # A string which, if present in a git commit, indicates that a change represents a
-        # major (breaking) change, supports regular expressions wrapped with '/'
-        major_pattern: "(MAJOR)"
-        # A string which indicates the flags used by the `major_pattern` regular expression. Supported flags: idgs
-        major_regexp_flags: ""
-        # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
-        minor_pattern: "(MINOR)"
-        # A string which indicates the flags used by the `minor_pattern` regular expression. Supported flags: idgs
-        minor_regexp_flags: ""
-        # A string to determine the format of the version output
-        version_format: ${{ fromJSON(needs.configuration.outputs.versions)[github.event_name] }}
-        # Optional path to check for changes. If any changes are detected in the path the
-        # 'changed' output will true. Enter multiple paths separated by spaces.
-        change_path: ""
-        # Named version, will be used as suffix for name version tag
-        namespace: ""
-        # If this is set to true, *every* commit will be treated as a new version.
-        bump_each_commit: false
-        # If bump_each_commit is also set to true, setting this value will cause the version to increment only if the pattern specified is matched.
-        bump_each_commit_patch_pattern: ""
-        # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
-        search_commit_body: false
-        # The output method used to generate list of users, 'csv' or 'json'.
-        user_format_type: "json"
-        # Prevents pre-v1.0.0 version from automatically incrementing the major version.
-        # If enabled, when the major version is 0, major releases will be treated as minor and minor as patch. Note that the version_type output is unchanged.
-        enable_prerelease_mode: false
-        # If enabled, diagnostic information will be added to the action output.
-        debug: false
-        # If true, the branch will be used to select the maximum version.
-        version_from_branch: false
-
 
     - name: Fetching Artifacts
       uses: actions/download-artifact@v4
       with:
-        # Name of the artifact to download.
-        # If unspecified, all artifacts for the run are downloaded.
-        # Optional.
         name: ${{ fromJSON(needs.configuration.outputs.platforms)[matrix.platform] }}    
         path: tooling
 
     - name: Changing Permissions
-      if: fromJSON(needs.configuration.outputs.platforms)[matrix.platform] == 'ubuntu-latest' || fromJSON(needs.configuration.outputs.platforms)[matrix.platform] == 'macos-latest'
+      if: runner.os == 'Linux' || runner.os == 'macOS'
       run: |
         chmod +x tooling/MadgineLauncher
 
+    - name: Install Toolchain
+      uses: ./.github/actions/install-toolchain
+      with:
+        platform: ${{ matrix.platform }}
+
     - name: Configure CMake
       env:
-        MADGINE_VERSION: ${{ steps.version.outputs.version }}
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+        MADGINE_VERSION: ${{ needs.configuration.outputs.version }}
       run: >
-        cmake -B ${{ github.workspace }}/build
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo
-        -DUSE_CMAKE_LOG=1 
-        -DMADGINE_CONFIGURATION=test/configs/${{ fromJSON(needs.configuration.outputs.configs)[matrix.platform] }}/
-        -DBUILD_SHARED_LIBS=OFF 
+        cmake --preset=${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}
         -DMADGINE_PREBUILT_TOOLING=tooling
-        ${{ fromJSON(needs.configuration.outputs.toolchains)[matrix.platform] }}
         -S ${{ github.workspace }}
 
     - name: Build
-      # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      run: cmake --build ${{ github.workspace }}/build --config RelWithDebInfo --verbose
+      run: cmake --build ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }} --config RelWithDebInfo
 
     - name: Test
-      working-directory: ${{ github.workspace }}/build
-      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      working-directory: ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}
       run: ctest --build-config RelWithDebInfo --output-on-failure
-
-    - name: Split debug information
-      if: matrix.platform == 'emscripten'
-      env: 
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      run: |
-        chmod +x wasm-split-Linux-x86_64
-        mkdir ${{ github.workspace }}/debug
-        ./wasm-split-Linux-x86_64 ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -o ${{ github.workspace }}/build/bin/MadgineLauncher.wasm -d ${{ github.workspace }}/debug/MadgineLauncher.debug.wasm --strip
-        curl -sL https://sentry.io/get-cli/ | sh
-        sentry-cli debug-files upload -o madmanstudios -p madgine ${{ github.workspace }}/debug
-      
-    - name: Install NSIS
-      if: matrix.platform == 'windows'
-      uses: negrutiu/nsis-install@v2
-
+  
     - name: Package
-      working-directory: ${{ github.workspace }}/build
-      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      working-directory: ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}
       run: cpack
 
     - name: Pushing Artifacts
@@ -353,33 +172,9 @@ jobs:
       with:
         name: release-${{ matrix.platform }}
         path: |
-            ${{ github.workspace }}/build/packages/*
-            !${{ github.workspace }}/build/packages/*/
+            ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}/packages/*
+            !${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}/packages/*/
         overwrite: true
-
-    - uses: actions/checkout@v4
-      if: matrix.platform == 'emscripten' && github.event_name == 'push'
-      with:
-        ref: 'gh-pages'
-        path: 'gh-pages'
-
-    - name: Copy static files into repository
-      if: matrix.platform == 'emscripten' && github.event_name == 'push'
-      run: |
-        cd gh-pages
-        rm -rf ${{ github.ref_name }} 
-        mkdir ${{ github.ref_name }} 
-        unzip ${{ github.workspace }}/build/packages/*.zip -d ${{ github.ref_name }} 
-
-    - name: Updating gh-pages branch
-      if: matrix.platform == 'emscripten' && github.event_name == 'push'
-      run: |
-        cd gh-pages
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add ${{ github.ref_name }} 
-        git commit -m "Updating emscripten binaries for branch ${{ github.ref_name }} "
-        git push
 
   release:
     
@@ -387,63 +182,62 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: github.ref_name == 'master'
+    if: github.ref_name == 'master' && !github.event.act
 
     permissions:
       contents: write    
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 0
-
-    - uses: paulhatch/semantic-version@v5.4.0
-      id: version
-      with:
-        # The prefix to use to identify tags
-        tag_prefix: "v"
-        # A string which, if present in a git commit, indicates that a change represents a
-        # major (breaking) change, supports regular expressions wrapped with '/'
-        major_pattern: "(MAJOR)"
-        # A string which indicates the flags used by the `major_pattern` regular expression. Supported flags: idgs
-        major_regexp_flags: ""
-        # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
-        minor_pattern: "(MINOR)"
-        # A string which indicates the flags used by the `minor_pattern` regular expression. Supported flags: idgs
-        minor_regexp_flags: ""
-        # A string to determine the format of the version output
-        version_format: ${{ fromJSON(needs.configuration.outputs.versions)[github.event_name] }}
-        # Optional path to check for changes. If any changes are detected in the path the
-        # 'changed' output will true. Enter multiple paths separated by spaces.
-        change_path: ""
-        # Named version, will be used as suffix for name version tag
-        namespace: ""
-        # If this is set to true, *every* commit will be treated as a new version.
-        bump_each_commit: false
-        # If bump_each_commit is also set to true, setting this value will cause the version to increment only if the pattern specified is matched.
-        bump_each_commit_patch_pattern: ""
-        # If true, the body of commits will also be searched for major/minor patterns to determine the version type.
-        search_commit_body: false
-        # The output method used to generate list of users, 'csv' or 'json'.
-        user_format_type: "json"
-        # Prevents pre-v1.0.0 version from automatically incrementing the major version.
-        # If enabled, when the major version is 0, major releases will be treated as minor and minor as patch. Note that the version_type output is unchanged.
-        enable_prerelease_mode: false
-        # If enabled, diagnostic information will be added to the action output.
-        debug: false
-        # If true, the branch will be used to select the maximum version.
-        version_from_branch: false
-
     - name: Download Artifacts
       uses: actions/download-artifact@v5
       with:
         path: ${{ github.workspace }}/packages
         pattern: release-*
-
+        
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        name: ${{ steps.version.outputs.version_tag }}
-        tag_name: ${{ steps.version.outputs.version_tag }}
+        name: ${{ needs.configuration.outputs.version_tag }}
+        tag_name: ${{ needs.configuration.outputs.version_tag }}
         files: ${{ github.workspace }}/packages/**/*
+
+  upload-gh-pages:
+    
+    needs: build-configs
+
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'push' && !github.event.act
+            
+    permissions:
+      contents: write    
+
+    steps:
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v5
+      with:
+        path: ${{ github.workspace }}/packages
+        name: release-Emscripten
+     
+    
+    - uses: actions/checkout@v4
+      with:
+        ref: 'gh-pages'
+        path: 'gh-pages'
+
+    - name: Updating gh-pages branch
+      env: 
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      run: |
+        cd gh-pages
+        rm -rf ${{ github.ref_name }} 
+        mkdir ${{ github.ref_name }} 
+        unzip ${{ github.workspace }}/packages/*.zip -d ${{ github.ref_name }} 
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add ${{ github.ref_name }} 
+        git commit -m "Updating emscripten binaries for branch ${{ github.ref_name }} "
+        git push
+        curl -sL https://sentry.io/get-cli/ | sh
+        sentry-cli debug-files upload -o madmanstudios -p madgine ${{ github.workspace }}/packages/*.debug.wasm

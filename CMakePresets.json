@@ -19,6 +19,10 @@
         "CMAKE_MINSIZEREL_POSTFIX": "",
         "CMAKE_RELWITHDEBINFO_POSTFIX": ""
       },
+      "toolset": {
+        "strategy": "external",
+        "value": "host=x64"
+      },
       "architecture": {
         "strategy": "external",
         "value": "x64"
@@ -84,7 +88,7 @@
     {
       "name": "OpenGL",
       "displayName": "-OpenGL",
-      "description": "Uses OpenGL config as madgine configuration",
+      "description": "Uses OpenGL config as Madgine configuration",
       "cacheVariables": {
         "MADGINE_CONFIGURATION": {
           "type": "FILEPATH",
@@ -100,11 +104,27 @@
     {
       "name": "Vulkan",
       "displayName": "-Vulkan",
-      "description": "Uses Vulkan config as madgine configuration",
+      "description": "Uses Vulkan config as Madgine configuration",
       "cacheVariables": {
         "MADGINE_CONFIGURATION": {
           "type": "FILEPATH",
           "value": "${sourceDir}/test/configs/Vulkan"
+        },
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": "OFF"
+        }
+      },
+      "hidden": true
+    },
+    {
+      "name": "DirectX",
+      "displayName": "-DirectX",
+      "description": "Uses DirectX config as Madgine configuration",
+      "cacheVariables": {
+        "MADGINE_CONFIGURATION": {
+          "type": "FILEPATH",
+          "value": "${sourceDir}/test/configs/DirectX"
         },
         "BUILD_SHARED_LIBS": {
           "type": "BOOL",
@@ -150,12 +170,24 @@
       "inherits": [ "base", "debug" ]
     },
     {
+      "name": "Debug-OpenGL",
+      "inherits": [ "base", "debug", "OpenGL" ]
+    },
+    {
       "name": "Release",
       "inherits": [ "base", "release" ]
     },
     {
+      "name": "Release-OpenGL",
+      "inherits": [ "base", "debug", "OpenGL" ]
+    },
+    {
       "name": "RelWithDebInfo",
       "inherits": [ "base", "relwithdebinfo" ]
+    },
+    {
+      "name": "RelWithDebInfo-OpenGL",
+      "inherits": [ "base", "debug", "OpenGL" ]
     },
     {
       "name": "Clang-Debug",
@@ -170,6 +202,10 @@
       "inherits": [ "clang", "debug", "OpenGL" ]
     },
     {
+      "name": "Clang-Debug-DirectX",
+      "inherits": [ "clang", "debug", "DirectX" ]
+    },
+    {
       "name": "Clang-Release",
       "inherits": [ "clang", "release" ]
     },
@@ -178,12 +214,20 @@
       "inherits": [ "clang", "release", "OpenGL" ]
     },
     {
+      "name": "Clang-Release-DirectX",
+      "inherits": [ "clang", "release", "DirectX" ]
+    },
+    {
       "name": "Clang-RelWithDebInfo",
       "inherits": [ "clang", "relwithdebinfo" ]
     },
     {
       "name": "Clang-RelWithDebInfo-OpenGL",
       "inherits": [ "clang", "relwithdebinfo", "OpenGL" ]
+    },
+    {
+      "name": "Clang-RelWithDebInfo-DirectX",
+      "inherits": [ "clang", "relwithdebinfo", "DirectX" ]
     },
     {
       "name": "Emscripten-Debug-OpenGL",

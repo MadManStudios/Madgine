@@ -56,11 +56,6 @@ endif()
 #set (CMAKE_CXX_VISIBILITY_PRESET hidden)
 #set (CMAKE_C_VISIBILITY_PRESET hidden)
 
-if (ANDROID)
-	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-else()
-	set(CMAKE_POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS})
-endif()
 
 if (GCC OR CLANG)
 	add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-invalid-offsetof>)

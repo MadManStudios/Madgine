@@ -4,9 +4,6 @@ once()
 
 cmake_policy(SET CMP0022 NEW)
 
-
-include(CMakeDependentOption)
-   
 set(workspace_file_dir ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
 
 set(WORKSPACE_HOOKS)
@@ -42,6 +39,12 @@ if (NOT support_shared)
 	set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 endif()
 
+if (ANDROID)
+	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+else()
+	set(CMAKE_POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS})
+endif()
+
 if (NOT BUILD_SHARED_LIBS)
 	MESSAGE(STATUS "Enabling STATIC_BUILD=1")
 	add_definitions(-DSTATIC_BUILD=1)
@@ -49,6 +52,14 @@ endif()
 
 add_definitions(-DBINARY_DIR="${CMAKE_BINARY_DIR}")
 add_definitions(-DSOURCE_DIR="${CMAKE_SOURCE_DIR}")
+
+
+SET(CMAKE_DEBUG_POSTFIX "" CACHE STRING "" FORCE) #Some libs set this value
+if (BUILD_SHARED_LIBS)
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>DLL CACHE INTERNAL "")
+else()
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug> CACHE INTERNAL "")
+endif()
 
  
 function(install_header name)    
@@ -208,13 +219,6 @@ function(get_dependencies list target)
 
 endfunction(get_dependencies)
 
-
-SET(CMAKE_DEBUG_POSTFIX "" CACHE STRING "" FORCE) #Some libs set this value
-if (BUILD_SHARED_LIBS)
-	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>DLL CACHE INTERNAL "")
-else()
-	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug> CACHE INTERNAL "")
-endif()
 
 macro(push_static)
 	set(OLD_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})

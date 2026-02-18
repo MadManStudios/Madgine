@@ -1,0 +1,51 @@
+name: Install Toolchain
+description: 'Installing all tools needed to build the Madgine'
+inputs:
+  platform:
+    description: 'The platform to build for'
+    required: true
+  
+runs:
+  using: "composite"
+  steps:
+    - name: Install Dependencies
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libx11-dev mesa-utils libgl1-mesa-dev
+
+    - name: Set up Clang
+      if: inputs.platform == 'Linux'
+      uses: egor-tensin/setup-clang@v2
+      with:
+        version: latest
+        platform: x64
+
+    - name: Install Toolchain
+      if: inputs.platform == 'Android'
+      uses: android-actions/setup-android@v3
+
+    - name: Install Toolchain
+      if: inputs.platform == 'Android'
+      uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r26d
+        link-to-sdk: true
+    
+    - name: Install Toolchain
+      if: inputs.platform == 'Emscripten'
+      uses: mymindstorm/setup-emsdk@v14
+      with:
+        version: '4.0.9'
+                      
+    - name: Install NSIS
+      if: inputs.platform == 'Windows' && !env.ACT
+      uses: negrutiu/nsis-install@v2
+
+    - name: Set up MSVC
+      if: inputs.platform == 'Windows'
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+
