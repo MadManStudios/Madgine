@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp0kfbun2w.js
+// include: /tmp/tmp1ry1ho40.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -50,7 +50,7 @@ if (ENVIRONMENT_IS_NODE) {
         // web worker
         PACKAGE_PATH = encodeURIComponent(location.pathname.substring(0, location.pathname.lastIndexOf('/')) + '/');
       }
-      var PACKAGE_NAME = '../bin/MadgineLauncher.data';
+      var PACKAGE_NAME = 'bin/MadgineLauncher.data';
       var REMOTE_PACKAGE_BASE = 'MadgineLauncher.data';
       var REMOTE_PACKAGE_NAME = Module['locateFile'] ? Module['locateFile'](REMOTE_PACKAGE_BASE, '') : REMOTE_PACKAGE_BASE;
 var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
@@ -186,10 +186,10 @@ Module['FS_createPath']("/", "shadercache", true, true);
           var files = metadata['files'];
           for (var i = 0; i < files.length; ++i) {
             DataRequest.prototype.requests[files[i].filename].onload();
-          }          Module['removeRunDependency']('datafile_../bin/MadgineLauncher.data');
+          }          Module['removeRunDependency']('datafile_bin/MadgineLauncher.data');
 
       };
-      Module['addRunDependency']('datafile_../bin/MadgineLauncher.data');
+      Module['addRunDependency']('datafile_bin/MadgineLauncher.data');
 
       Module['preloadResults'] ??= {};
 
@@ -213,8 +213,8 @@ Module['FS_createPath']("/", "shadercache", true, true);
 
   })();
 
-// end include: /tmp/tmp0kfbun2w.js
-// include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
+// end include: /tmp/tmp1ry1ho40.js
+// include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 /**
  * Minified by jsDelivr using Terser v5.39.0.
@@ -384,7 +384,7 @@ window.sentryOnLoad = function () {
     Sentry.init(
         {
             sendDefaultPii: !0,
-            release: "Madgine@1.0.0",
+            release: "Madgine@0.6.0",
             integrations: [wasmIntegration()],
         })
 }
@@ -394,7 +394,7 @@ Module.sentry_capture_event = function (message) {
 }
 
 !function (n, e, r, t, o, i, a, c, s) { for (var u = s, f = 0; f < document.scripts.length; f++)if (document.scripts[f].src.indexOf(i) > -1) { u && "no" === document.scripts[f].getAttribute("data-lazy") && (u = !1); break } var p = []; function l(n) { return "e" in n } function d(n) { return "p" in n } function _(n) { return "f" in n } var v = []; function y(n) { u && (l(n) || d(n) || _(n) && n.f.indexOf("capture") > -1 || _(n) && n.f.indexOf("showReportDialog") > -1) && L(), v.push(n) } function h() { y({ e: [].slice.call(arguments) }) } function g(n) { y({ p: n }) } function E() { try { n.SENTRY_SDK_SOURCE = "loader"; var e = n[o], i = e.init; e.init = function (o) { n.removeEventListener(r, h), n.removeEventListener(t, g); var a = c; for (var s in o) Object.prototype.hasOwnProperty.call(o, s) && (a[s] = o[s]); !function (n, e) { var r = n.integrations || []; if (!Array.isArray(r)) return; var t = r.map((function (n) { return n.name })); n.tracesSampleRate && -1 === t.indexOf("BrowserTracing") && (e.browserTracingIntegration ? r.push(e.browserTracingIntegration({ enableInp: !0 })) : e.BrowserTracing && r.push(new e.BrowserTracing)); (n.replaysSessionSampleRate || n.replaysOnErrorSampleRate) && -1 === t.indexOf("Replay") && (e.replayIntegration ? r.push(e.replayIntegration()) : e.Replay && r.push(new e.Replay)); n.integrations = r }(a, e), i(a) }, setTimeout((function () { return function (e) { try { "function" == typeof n.sentryOnLoad && (n.sentryOnLoad(), n.sentryOnLoad = void 0) } catch (n) { console.error("Error while calling `sentryOnLoad` handler:"), console.error(n) } try { for (var r = 0; r < p.length; r++)"function" == typeof p[r] && p[r](); p.splice(0); for (r = 0; r < v.length; r++) { _(i = v[r]) && "init" === i.f && e.init.apply(e, i.a) } m() || e.init(); var t = n.onerror, o = n.onunhandledrejection; for (r = 0; r < v.length; r++) { var i; if (_(i = v[r])) { if ("init" === i.f) continue; e[i.f].apply(e, i.a) } else l(i) && t ? t.apply(n, i.e) : d(i) && o && o.apply(n, [i.p]) } } catch (n) { console.error(n) } }(e) })) } catch (n) { console.error(n) } } var O = !1; function L() { if (!O) { O = !0; var n = e.scripts[0], r = e.createElement("script"); r.src = a, r.crossOrigin = "anonymous", r.addEventListener("load", E, { once: !0, passive: !0 }), n.parentNode.insertBefore(r, n) } } function m() { var e = n.__SENTRY__, r = void 0 !== e && e.version; return r ? !!e[r] : !(void 0 === e || !e.hub || !e.hub.getClient()) } n[o] = n[o] || {}, n[o].onLoad = function (n) { m() ? n() : p.push(n) }, n[o].forceLoad = function () { setTimeout((function () { L() })) }, ["init", "addBreadcrumb", "captureMessage", "captureException", "captureEvent", "configureScope", "withScope", "showReportDialog"].forEach((function (e) { n[o][e] = function () { y({ f: e, a: arguments }) } })), n.addEventListener(r, h), n.addEventListener(t, g), u || setTimeout((function () { L() })) }(window, document, "error", "unhandledrejection", "Sentry", 'f374f10cbc10297d79d8b7be16390381', 'https://browser.sentry-cdn.com/8.55.0/bundle.tracing.replay.min.js', { "dsn": "https://f374f10cbc10297d79d8b7be16390381@o4508897651785728.ingest.de.sentry.io/4508897675968592", "tracesSampleRate": 1, "replaysSessionSampleRate": 0.1, "replaysOnErrorSampleRate": 1 }, false);
-// end include: /home/runner/work/Madgine/Madgine/build/_deps/madginesentry-build/js/header.js
+// end include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 
 var arguments_ = [];
@@ -8360,22 +8360,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1362184: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1362230: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1362282: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1362398: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1362469: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1362540: () => { document.body.style.cursor = 'default'; },  
- 1362580: () => { document.body.style.cursor = 'text'; },  
- 1362617: () => { document.body.style.cursor = 'move'; },  
- 1362654: () => { document.body.style.cursor = 'ns-resize'; },  
- 1362696: () => { document.body.style.cursor = 'ew-resize'; },  
- 1362738: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1362782: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1362826: () => { document.body.style.cursor = 'grab'; },  
- 1362863: () => { document.body.style.cursor = 'not-allowed'; },  
- 1362907: () => { Module.input.focus(); },  
- 1362929: () => { Module.canvas.focus(); }
+  1362472: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 1362518: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 1362570: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 1362686: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 1362757: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 1362828: () => { document.body.style.cursor = 'default'; },  
+ 1362868: () => { document.body.style.cursor = 'text'; },  
+ 1362905: () => { document.body.style.cursor = 'move'; },  
+ 1362942: () => { document.body.style.cursor = 'ns-resize'; },  
+ 1362984: () => { document.body.style.cursor = 'ew-resize'; },  
+ 1363026: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 1363070: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 1363114: () => { document.body.style.cursor = 'grab'; },  
+ 1363151: () => { document.body.style.cursor = 'not-allowed'; },  
+ 1363195: () => { Module.input.focus(); },  
+ 1363217: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
