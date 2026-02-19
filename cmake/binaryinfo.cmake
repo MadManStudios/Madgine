@@ -1,6 +1,4 @@
-include(Util)
-
-once()
+include_guard(GLOBAL)
 
 set(binaryinfo_dir ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
 

@@ -1,3 +1,5 @@
+include_guard(GLOBAL)
+
 function(get_version_from_git result_var)
     find_package(Git QUIET)
     if(NOT Git_FOUND)

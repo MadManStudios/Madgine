@@ -1,6 +1,4 @@
-include (Util)
-
-once()
+include_guard(GLOBAL)
 
 cmake_policy(SET CMP0054 NEW)
 cmake_policy(SET CMP0049 NEW)

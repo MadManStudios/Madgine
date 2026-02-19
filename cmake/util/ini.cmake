@@ -1,6 +1,4 @@
-include(util/includeguard)
-
-once()
+include_guard(GLOBAL)
 
 
 function (read_ini_file filepath prefix)

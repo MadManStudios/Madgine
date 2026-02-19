@@ -1,65 +1,10 @@
-include(Util)
+include_guard(GLOBAL)
 
-once()
+include(Util)
 
 cmake_policy(SET CMP0022 NEW)
 
 set(workspace_file_dir ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
-
-set(WORKSPACE_HOOKS)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "")
-
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(CMAKE_FOLDER "External")
-
-if (NOT WIN32)
-	set (outDir ${CMAKE_BINARY_DIR}/bin)
-
-	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${outDir})
-	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${outDir})
-	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${outDir})
-	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${outDir})
-
-	set(CMAKE_INSTALL_RPATH $ORIGIN/)
-	set(CMAKE_BUILD_RPATH $ORIGIN/)
-
-endif()
-
-
-get_property(support_shared GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS)
-
-option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" ON)
-
-if (NOT support_shared)
-	MESSAGE(STATUS "Forcing static libraries as shared libraries are not supported on that platform!")
-	set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-endif()
-
-if (ANDROID)
-	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-else()
-	set(CMAKE_POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS})
-endif()
-
-if (NOT BUILD_SHARED_LIBS)
-	MESSAGE(STATUS "Enabling STATIC_BUILD=1")
-	add_definitions(-DSTATIC_BUILD=1)
-endif()
-
-add_definitions(-DBINARY_DIR="${CMAKE_BINARY_DIR}")
-add_definitions(-DSOURCE_DIR="${CMAKE_SOURCE_DIR}")
-
-
-SET(CMAKE_DEBUG_POSTFIX "" CACHE STRING "" FORCE) #Some libs set this value
-if (BUILD_SHARED_LIBS)
-	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>DLL CACHE INTERNAL "")
-else()
-	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug> CACHE INTERNAL "")
-endif()
 
  
 function(install_header name)    

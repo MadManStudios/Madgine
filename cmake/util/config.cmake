@@ -1,6 +1,4 @@
-include(../Util)
-
-once()
+include_guard(GLOBAL)
 
 macro(set_config out_name config var_name)
 	if (${config}_General_${var_name})

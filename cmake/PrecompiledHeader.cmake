@@ -1,6 +1,4 @@
-include (Util)
-
-once()
+include_guard(GLOBAL)
 
 if (EMSCRIPTEN OR NOT COMMAND target_precompile_headers OR IWYU)
 

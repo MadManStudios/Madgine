@@ -1,6 +1,4 @@
-include(Util)
-
-once()
+include_guard(GLOBAL)
 
 include(Workspace)
 include(util/ini)
@@ -20,8 +18,6 @@ if (MADGINE_CONFIGURATION)
 	endif()
 endif ()
 
-
-set(BUILD_SHARED_LIBS ${MODULES_ENABLE_PLUGINS} CACHE BOOL "") #Provide default value OFF for given plugin config
 
 if (MODULES_ENABLE_PLUGINS AND NOT BUILD_SHARED_LIBS)
 	MESSAGE(FATAL_ERROR "Currently static builds with plugins are not supported!")

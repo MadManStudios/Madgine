@@ -1,6 +1,4 @@
-include(Util)
-
-once()
+include_guard(GLOBAL)
 
 function(add_notices target)
 	

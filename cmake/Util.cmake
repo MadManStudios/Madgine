@@ -1,6 +1,10 @@
-include (util/includeguard)
+include_guard(DIRECTORY)
 
-once()
+
+
+option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" ON)
+
+
 
 macro(cmake_log)
 	if (USE_CMAKE_LOG)
@@ -92,41 +96,7 @@ if (MSVC)
 	if (NOT CLANG)
 		add_compile_options($<$<COMPILE_LANGUAGE:C,CXX>:/Zc:preprocessor>)
 	endif()
- 
-	# Set compiler options.
-	set(variables
-		CMAKE_C_FLAGS
-		CMAKE_C_FLAGS_DEBUG
-		CMAKE_C_FLAGS_MINSIZEREL
-		CMAKE_C_FLAGS_RELEASE
-		CMAKE_C_FLAGS_RELWITHDEBINFO
-		CMAKE_CXX_FLAGS
-		CMAKE_CXX_FLAGS_DEBUG
-		CMAKE_CXX_FLAGS_MINSIZEREL
-		CMAKE_CXX_FLAGS_RELEASE
-		CMAKE_CXX_FLAGS_RELWITHDEBINFO
-	)
-	if(NOT BUILD_SHARED_LIBS)
-		message(STATUS
-		"MSVC -> forcing use of statically-linked runtime."
-		)
-		foreach(variable ${variables})
-			if(${variable} MATCHES "/MD")
-				string(REGEX REPLACE "/MD" "/MT" ${variable} "${${variable}}")
-				set(${variable} "${${variable}}" CACHE INTERNAL "")
-			endif()
-		endforeach()
-	else()
-		message(STATUS
-		"MSVC -> forcing use of dynamically-linked runtime."
-		)
-		foreach(variable ${variables})
-			if(${variable} MATCHES "/MT")
-				string(REGEX REPLACE "/MT" "/MD" ${variable} "${${variable}}")
-				set(${variable} "${${variable}}" CACHE INTERNAL "")
-			endif()
-		endforeach()
-	endif()
+
 endif()
 
 set(CMAKE_MACOSX_RPATH TRUE)
@@ -136,4 +106,56 @@ if (OSX)
 	set(CMAKE_SHARED_LIBRARY_RPATH_ORIGIN_TOKEN "@executable_path")
 	# Fix linking on 10.14+. See https://stackoverflow.com/questions/54068035
     LINK_DIRECTORIES(/opt/homebrew/lib)
+endif()
+
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/bin)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set(CMAKE_FOLDER "External")
+
+if (NOT WIN32)
+	set (outDir ${CMAKE_BINARY_DIR}/bin)
+
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${outDir})
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${outDir})
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${outDir})
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${outDir})
+
+	set(CMAKE_INSTALL_RPATH $ORIGIN/)
+	set(CMAKE_BUILD_RPATH $ORIGIN/)
+
+endif()
+
+
+get_property(support_shared GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS)
+
+if (NOT support_shared)
+	MESSAGE(STATUS "Forcing static libraries as shared libraries are not supported on that platform!")
+	set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+endif()
+
+if (ANDROID)
+	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+else()
+	set(CMAKE_POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS})
+endif()
+
+if (NOT BUILD_SHARED_LIBS)
+	MESSAGE(STATUS "Enabling STATIC_BUILD=1")
+	add_definitions(-DSTATIC_BUILD=1)
+endif()
+
+add_definitions(-DBINARY_DIR="${CMAKE_BINARY_DIR}")
+add_definitions(-DSOURCE_DIR="${CMAKE_SOURCE_DIR}")
+
+
+SET(CMAKE_DEBUG_POSTFIX "" CACHE STRING "" FORCE) #Some libs set this value
+if (BUILD_SHARED_LIBS)
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>DLL CACHE INTERNAL "")
+else()
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug> CACHE INTERNAL "")
 endif()

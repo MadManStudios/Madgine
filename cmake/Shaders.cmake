@@ -1,6 +1,4 @@
-include(Util)
-
-once()
+include_guard(GLOBAL)
 
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/shadercache)
 
