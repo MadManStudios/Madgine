@@ -114,6 +114,9 @@ macro(add_plugin name base type)
 		MESSAGE (STATUS "Excluding Plugin '${name}' from ALL build.")
 		set_target_properties(${name} PROPERTIES EXCLUDE_FROM_ALL TRUE)
 	else()
+
+		set_target_properties(${name} PROPERTIES 
+			INSTALL_COMPONENT ${PLUGIN_CONFIG_INSTALL_COMPONENT})
 	
 		set(PLUGIN_LIST ${PLUGIN_LIST} ${name} CACHE INTERNAL "")	
 
