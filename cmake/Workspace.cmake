@@ -23,10 +23,18 @@ function(install_to_workspace name)
 	set(multiValueArgs TARGETS)
 	cmake_parse_arguments(OPTIONS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
+	foreach(target ${OPTIONS_TARGETS})
+		get_target_property(target_type ${target} TYPE)
+		if (target_type STREQUAL STATIC_LIBRARY)
+			list(REMOVE_ITEM OPTIONS_TARGETS ${target})
+		endif()
+	endforeach()
+
 	install(
 		TARGETS ${OPTIONS_TARGETS} 
 		RUNTIME DESTINATION bin COMPONENT ${name}
 		BUNDLE DESTINATION App COMPONENT ${name}
+		ARCHIVE DESTINATION lib COMPONENT ${name}
 	)
 
 	foreach(target ${OPTIONS_TARGETS})

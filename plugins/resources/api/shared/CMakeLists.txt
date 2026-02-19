@@ -9,7 +9,7 @@ set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE BOOL "" FORCE)
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(ASSIMP_INSTALL_PDB OFF CACHE BOOL "" FORCE)
 set(USE_STATIC_CRT OFF CACHE BOOL "" FORCE)
-add_subdirectory(assimp-5.2.5)
+add_subdirectory(assimp-5.2.5 EXCLUDE_FROM_ALL)
 
 add_notices(assimp 
 	READABLE_NAME "Asset Importer" 

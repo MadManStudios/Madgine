@@ -4,8 +4,7 @@ set(DISABLE_FORCE_DEBUG_POSTFIX ON)
 set(FT_DISABLE_ZLIB ON CACHE BOOL "" FORCE)
 set(FT_DISABLE_BROTLI ON CACHE BOOL "" FORCE)
 #comment definition of FT_CONFIG_OPTION_USE_ZLIB out in ftconfig.h
-add_subdirectory(freetype-2.14.1)
-set_target_properties(freetype PROPERTIES EXCLUDE_FROM_ALL TRUE)
+add_subdirectory(freetype-2.14.1 EXCLUDE_FROM_ALL)
 
 add_notices(freetype 
 	READABLE_NAME FreeType
@@ -13,8 +12,7 @@ add_notices(freetype
 	CREDITS "Font-Loading: FreeType - https://freetype.org/")
 
 
-add_subdirectory(msdfgen)
-set_target_properties(lib_msdfgen PROPERTIES EXCLUDE_FROM_ALL TRUE)
+add_subdirectory(msdfgen EXCLUDE_FROM_ALL)
 
 add_notices(lib_msdfgen 
 	READABLE_NAME msdfgen 

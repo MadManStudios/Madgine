@@ -1,5 +1,5 @@
 
-add_subdirectory(imgui)
+add_subdirectory(imgui EXCLUDE_FROM_ALL)
 set_target_properties(ImGui PROPERTIES EXCLUDE_FROM_ALL TRUE)
 target_include_directories(ImGui PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
@@ -12,11 +12,11 @@ add_notices(ImGui
 	CREDITS "Tooling-UI: Dear ImGui - https://github.com/ocornut/imgui")
 
 	
-add_subdirectory(im3d)
+add_subdirectory(im3d EXCLUDE_FROM_ALL)
 set_target_properties(Im3D PROPERTIES EXCLUDE_FROM_ALL TRUE)
 
 
-add_subdirectory(NodeEditor)
+add_subdirectory(NodeEditor EXCLUDE_FROM_ALL)
 
 add_notices(imgui_node_editor 
 	READABLE_NAME "ImGui Node Editor" 

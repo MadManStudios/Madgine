@@ -14,7 +14,7 @@ if (NOT EMSCRIPTEN AND NOT ANDROID)
 	set(BUILD_STATIC_LIBS ON CACHE BOOL "" FORCE)
 	set(CURL_STATIC_CRT OFF CACHE BOOL "" FORCE)
 	set(CURL_DISABLE_INSTALL ON CACHE BOOL "" FORCE)
-	add_subdirectory(curl-8.12.1)
+	add_subdirectory(curl-8.12.1 EXCLUDE_FROM_ALL)
 
 	add_notices(libcurl_static
 		READABLE_NAME "libcurl"

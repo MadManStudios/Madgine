@@ -121,17 +121,10 @@ if (BUILD_TESTING)
 endif()
 
 
-set (CPACK_NSIS_MODIFY_PATH ON)
 set (CPACK_PACKAGE_VENDOR "MadMan Studios")
-
-#set (CPACK_PACKAGE_EXECUTABLES "Maditor;Maditor")
-
 
 cpack_add_component(MadgineLauncher REQUIRED)
 cpack_add_component(Runtime REQUIRED)
-
-get_cmake_property(CPACK_COMPONENTS_ALL COMPONENTS)
-list(REMOVE_ITEM CPACK_COMPONENTS_ALL "assimp_dev" "libassimp5.2.4" "libassimp5.2.4_dev" "Trash" "LibA" "LibB" "TestShared")
 
 
 cpack_add_component_group(APIGroup

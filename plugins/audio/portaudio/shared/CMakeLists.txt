@@ -7,7 +7,7 @@ set(PA_BUILD_STATIC ON CACHE BOOL "" FORCE)
 set(PA_BUILD_SHARED OFF CACHE BOOL "" FORCE)
 set(PA_DISABLE_INSTALL ON CACHE BOOL "" FORCE)
 set(PA_DLL_LINK_WITH_STATIC_RUNTIME OFF CACHE BOOL "" FORCE)
-add_subdirectory(portaudio-19.7.0)
+add_subdirectory(portaudio-19.7.0 EXCLUDE_FROM_ALL)
 
 add_notices(portaudio_static 
 		READABLE_NAME PortAudio
