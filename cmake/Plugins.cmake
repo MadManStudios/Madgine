@@ -115,6 +115,10 @@ macro(add_plugin name base type)
 		set_target_properties(${name} PROPERTIES EXCLUDE_FROM_ALL TRUE)
 	else()
 
+		if (NOT MODULES_ENABLE_PLUGINS AND PLUGIN_CONFIG_STUB)
+			MESSAGE(SEND_ERROR "Plugin '${name}' is configured as a stub, but enabled in the plugin selection. This is an error.")
+		endif()
+
 		set_target_properties(${name} PROPERTIES 
 			INSTALL_COMPONENT ${PLUGIN_CONFIG_INSTALL_COMPONENT})
 	
