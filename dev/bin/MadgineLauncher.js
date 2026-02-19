@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpf5xqibj0.js
+// include: /tmp/tmpsuddg2ss.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -213,7 +213,7 @@ Module['FS_createPath']("/", "shadercache", true, true);
 
   })();
 
-// end include: /tmp/tmpf5xqibj0.js
+// end include: /tmp/tmpsuddg2ss.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 /**
