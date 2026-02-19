@@ -44,7 +44,7 @@ runs:
       uses: negrutiu/nsis-install@v2
 
     - name: Set up MSVC
-      if: inputs.platform == 'Windows'
+      if: inputs.platform == 'Windows' || inputs.platform == 'Steam'
       uses: ilammy/msvc-dev-cmd@v1
       with:
         arch: x64
