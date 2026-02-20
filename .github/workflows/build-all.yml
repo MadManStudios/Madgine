@@ -99,7 +99,7 @@ jobs:
         name: release-${{ matrix.platform }}
         path: |
             ${{ github.workspace }}/out/build/RelWithDebInfo/packages/*
-            !${{ github.workspace }}/out/build/RelWithDebInfo/packages/*/
+            !${{ github.workspace }}/out/build/RelWithDebInfo/packages/_CPack_Packages/
         overwrite: true
 
     - name: Pushing Artifacts
@@ -173,7 +173,7 @@ jobs:
         name: release-${{ matrix.platform }}
         path: |
             ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}/packages/*
-            !${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}/packages/*/
+            !${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}/packages/_CPack_Packages/
         overwrite: true
 
   release:
