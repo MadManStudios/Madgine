@@ -1,0 +1,186 @@
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches: [ "master", "dev" ]
+  pull_request:
+    branches: [ "master", "dev" ]
+
+jobs:
+  configuration:
+    name: configuration  
+    runs-on: ubuntu-latest
+
+        
+    steps:
+    - uses: actions/checkout@v4
+      if: ${{ !env.ACT }}
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+        
+    - uses: paulhatch/semantic-version@v5.4.0
+      id: version
+      if: ${{ !env.ACT }}
+      with:
+        major_pattern: "(MAJOR)"
+        minor_pattern: "(MINOR)"
+        version_format: "${major}.${minor}.${patch}"
+        user_format_type: "json"
+        enable_prerelease_mode: true
+        debug: false          
+
+    outputs:
+      platforms: "{
+        \"Steam\": \"windows-latest\", 
+        \"Windows\": \"windows-latest\", 
+        \"macOS\": \"macos-latest\", 
+        \"iOS\": \"macos-latest\", 
+        \"Linux\": \"ubuntu-latest\", 
+        \"Android_arm64\": \"ubuntu-latest\", 
+        \"Android_x64\": \"ubuntu-latest\", 
+        \"Emscripten\": \"ubuntu-latest\"}"
+      presets: "{
+        \"Steam\": \"Clang-RelWithDebInfo-Steam\", 
+        \"Windows\": \"Clang-RelWithDebInfo-DirectX\", 
+        \"macOS\": \"RelWithDebInfo-OpenGL\", 
+        \"iOS\": \"RelWithDebInfo-OpenGL\", 
+        \"Linux\": \"RelWithDebInfo-OpenGL\", 
+        \"Android_arm64\": \"Android-arm64-RelWithDebInfo-Vulkan\", 
+        \"Android_x64\": \"Android-x64-RelWithDebInfo-Vulkan\", 
+        \"Emscripten\": \"Emscripten-RelWithDebInfo-OpenGL\"}"
+      version: "${{ steps.version.outputs.version }}"
+      version_tag: "${{ steps.version.outputs.version_tag }}"
+    
+  build-plugins:
+  
+    needs: configuration
+
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        platform: [windows-latest] #, macos-latest] 
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - uses: actions/checkout@v4
+      with:
+        repository: 'MadManStudios/Madgine'
+        ref: 'dev'
+        path: 'Madgine'
+
+    - name: Install Toolchain
+      uses: ./Madgine/.github/actions/install-toolchain
+      with:
+        platform: ${{ runner.os }}
+
+    - name: Configure CMake
+      env:
+        MADGINE_VERSION: ${{ needs.configuration.outputs.version }}
+        MADGINE: Madgine
+      run: cmake --preset=RelWithDebInfo -S ${{ github.workspace }}
+
+    - name: Build
+      run: cmake --build ${{ github.workspace }}/out/build/RelWithDebInfo --config RelWithDebInfo -j
+
+    - name: Test
+      working-directory: ${{ github.workspace }}/out/build/RelWithDebInfo
+      run: ctest --build-config RelWithDebInfo --output-on-failure
+
+    - name: Package
+      working-directory: ${{ github.workspace }}/out/build/RelWithDebInfo
+      run: cpack
+
+    - name: Pushing Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-${{ matrix.platform }}
+        path: |
+            ${{ github.workspace }}/out/build/RelWithDebInfo/packages/*
+            !${{ github.workspace }}/out/build/RelWithDebInfo/packages/_CPack_Packages/
+        overwrite: true
+
+    - name: Pushing Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.platform }}
+        path: ${{ github.workspace }}/out/build/RelWithDebInfo/bin
+        overwrite: true
+
+  build-configs:
+  
+    needs: [configuration, build-plugins]
+
+    runs-on: ${{ fromJSON(needs.configuration.outputs.platforms)[matrix.platform] }}    
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        platform: [Steam] #Windows, Linux, Android_arm64, Android_x64, Emscripten, macOS, iOS]
+        exclude:          
+          - platform: iOS
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+                
+    - uses: actions/checkout@v4
+      with:
+        repository: 'MadManStudios/Madgine'
+        ref: 'dev'
+        path: 'Madgine'
+        
+    - name: Fetching Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ fromJSON(needs.configuration.outputs.platforms)[matrix.platform] }}    
+        path: tooling
+
+    - name: Changing Permissions
+      if: runner.os == 'Linux' || runner.os == 'macOS'
+      run: |
+        chmod +x tooling/MadgineLauncher
+
+    - name: Install Toolchain
+      uses: ./Madgine/.github/actions/install-toolchain
+      with:
+        platform: ${{ matrix.platform }}
+
+    - name: Configure CMake
+      env:
+        MADGINE_VERSION: ${{ needs.configuration.outputs.version }}
+      run: >
+        cmake --preset=${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}
+        -DMADGINE_PREBUILT_TOOLING=tooling
+        -S ${{ github.workspace }}
+
+    - name: Build
+      run: cmake --build ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }} --config RelWithDebInfo
+
+    - name: Test
+      working-directory: ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}
+      run: ctest --build-config RelWithDebInfo --output-on-failure
+  
+    - name: Package
+      working-directory: ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}
+      run: cpack
+
+    - name: Pushing Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-${{ matrix.platform }}
+        path: |
+            ${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}/packages/*
+            !${{ github.workspace }}/out/build/${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}/packages/_CPack_Packages/
+        overwrite: true
+
+  
