@@ -83,7 +83,7 @@ namespace Filesystem {
         size_t baseCount = base.mPath.size();
         size_t count = mPath.size();
 
-        if (baseCount >= count)
+        if (baseCount > count)
             return {};
 
         if (!isEqual(mPath.substr(0, baseCount), base.mPath))

@@ -73,7 +73,7 @@ namespace Tools {
                 ImGui::TableHeadersRow();
 
                 for (const auto &[path, resources] : mResourceCache) {
-                    ImGui::PushID(path.c_str());
+                    ImGui::PushID((path.first + path.second.str()).c_str());
 
                     ImGui::TableNextRow();
                     ImGui::TableNextColumn();
@@ -87,7 +87,7 @@ namespace Tools {
                     }
 
                     ImGui::TableNextColumn();
-                    ImGui::Text(path);
+                    ImGui::Text(path.second);
 
                     ImGui::PopID();
                 }
@@ -107,15 +107,17 @@ namespace Tools {
         std::string line;
         while (std::getline(in, line)) {
             line = StringUtil::trim(line);
-            mResourceConfig.insert(line);
+            auto it = line.find(':');
+
+            mResourceConfig.insert(std::make_pair(line.substr(0, it), line.substr(it + 1)));
         }
     }
 
     void ResourcesToolConfig::saveConfiguration(const Filesystem::Path &config)
     {
         std::ofstream out { config / "resources.list" };
-        for (const Filesystem::Path &path : mResourceConfig)
-            out << path << "\n";
+        for (const auto &[name, path] : mResourceConfig)
+            out << name << ":" << path << "\n";
     }
 
     std::string_view ResourcesToolConfig::key() const

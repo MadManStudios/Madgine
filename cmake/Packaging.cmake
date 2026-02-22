@@ -6,27 +6,41 @@ include(binaryinfo)
 
 
 if (MADGINE_CONFIGURATION)
+
+	file(GENERATE OUTPUT listcopy.cmake INPUT ${CMAKE_CURRENT_LIST_DIR}/util/listcopy.cmake.in)
+
 	file(GLOB lists "${MADGINE_CONFIGURATION}/*.list")
 
 	add_custom_target(
 		copy_data ALL
-		COMMAND ${CMAKE_COMMAND} "-DLISTS=\"$<TARGET_PROPERTY:copy_data,DATA_LISTS>\"" -DTARGET=${CMAKE_BINARY_DIR}/data -P ${workspace_file_dir}/util/listcopy.cmake
+		COMMAND ${CMAKE_COMMAND} -DTARGET=${CMAKE_BINARY_DIR}/data -P ${CMAKE_CURRENT_BINARY_DIR}/listcopy.cmake
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 	)
 
 	set_target_properties(copy_data
 		PROPERTIES
-		DATA_LISTS "${lists}")
+		DATA_LISTS "${lists}"
+		DATA_TARGETS "")
 
 	if (ANDROID)
 		install(CODE "file(MAKE_DIRECTORY $<INSTALL_PREFIX>/assets/data)
-		execute_process(COMMAND \"${CMAKE_COMMAND}\" -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/assets/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
+		execute_process(COMMAND \"${CMAKE_COMMAND}\" -DTARGET=$<INSTALL_PREFIX>/assets/data -P ${CMAKE_CURRENT_BINARY_DIR}/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
 	elseif (NOT EMSCRIPTEN)
 		install(CODE 		
-		"execute_process(COMMAND \"${CMAKE_COMMAND}\" -DLISTS=$<TARGET_PROPERTY:copy_data,DATA_LISTS> -DTARGET=$<INSTALL_PREFIX>/data -P ${workspace_file_dir}/util/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
+		"execute_process(COMMAND \"${CMAKE_COMMAND}\" -DTARGET=$<INSTALL_PREFIX>/data -P ${CMAKE_CURRENT_BINARY_DIR}/listcopy.cmake WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})" COMPONENT MadgineLauncher)
 	endif ()
 
 endif ()
+
+macro(add_data_source name path)
+	if (MADGINE_CONFIGURATION)
+		get_target_property(data_targets copy_data DATA_TARGETS)	
+		set_target_properties(copy_data
+			PROPERTIES
+			DATA_TARGETS "${data_targets}
+			set(${name}_SOURCE_DIR \"${path}\")")
+	endif()
+endmacro(add_data_source)
 
 macro(enable_packaging)
 

@@ -19,7 +19,6 @@ extern "C" DLL_EXPORT const Engine::Plugins::BinaryInfo PLUGIN_LOCAL(binaryInfo)
 
     PROJECT_ROOT,
     BINARY_SOURCE_ROOT,
-    BINARY_BINARY_DIR,
     BINARY_FILENAME,
 
     TOOLS_NAME,
@@ -29,9 +28,14 @@ extern "C" DLL_EXPORT const Engine::Plugins::BinaryInfo PLUGIN_LOCAL(binaryInfo)
     groupDependencies,
 
 #ifdef PLUGIN_STUBS
-    true
+    true,
 #else
-    false
+    false,
+#endif
+#ifdef PLUGIN_DATA
+    STRINGIFY2(PLUGIN_DATA)
+#else
+    ""
 #endif
 
 };

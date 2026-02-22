@@ -51,7 +51,7 @@ endif ()
 
 macro(add_plugin name base type)
 
-	set(options STUB)
+	set(options STUB NO_DATA)
 	set(oneValueArgs INSTALL_COMPONENT PRECOMPILED_HEADER SOURCE_ROOT)
 	set(multiValueArgs EXTERNAL_DEPS API_PLUGIN IMPORTED_DEPS UNIQUE_COMPONENTS)
 	cmake_parse_arguments(PLUGIN_CONFIG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})	
@@ -143,6 +143,18 @@ macro(add_plugin name base type)
 		endif()
 
 		install(IMPORTED_RUNTIME_ARTIFACTS ${PLUGIN_CONFIG_IMPORTED_DEPS} RUNTIME DESTINATION bin COMPONENT ${PLUGIN_CONFIG_INSTALL_COMPONENT})
+
+		get_target_property(SOURCE_DIR ${name} SOURCE_DIR)
+		if (EXISTS ${SOURCE_DIR}/data AND NOT PLUGIN_CONFIG_NO_DATA)
+			add_data_source(${name} ${SOURCE_DIR}/data)			
+
+			set(path ${SOURCE_DIR}/data)
+			cmake_path(IS_PREFIX CMAKE_SOURCE_DIR ${path} NORMALIZE relative)
+			if (relative)
+				cmake_path(RELATIVE_PATH path BASE_DIRECTORY ${CMAKE_SOURCE_DIR})
+			endif()			
+			target_compile_definitions(${name} PRIVATE PLUGIN_DATA=${path})
+		endif()
 	endif()
 
 endmacro(add_plugin)

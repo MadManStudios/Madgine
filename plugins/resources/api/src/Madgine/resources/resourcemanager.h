@@ -25,7 +25,7 @@ namespace Resources {
 
         virtual Threading::Task<int> runTools() override;
 
-        void registerResourceLocation(const Filesystem::Path &path, int priority);
+        void registerResourceLocation(const Filesystem::Path &path, std::string_view identifier, int priority);
 
         template <typename Loader>
         typename Loader::Resource *getResource(const std::string &name)
@@ -57,7 +57,7 @@ namespace Resources {
 
         Threading::TaskQueue *taskQueue();
 
-        std::map<Filesystem::Path, std::vector<ResourceBase *>> buildResourceList();
+        std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> buildResourceList();
 
     private:
         void updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority);
@@ -69,6 +69,9 @@ namespace Resources {
 
         void enumerateResources();
 
+        std::pair<std::string, Filesystem::Path> makeRelative(const Filesystem::Path &path) const;
+        Filesystem::Path getProjectPath(std::string_view name) const;
+
     private:
         struct SubDirCompare {
             bool operator()(const Filesystem::Path &first, const Filesystem::Path &second) const;
@@ -76,7 +79,11 @@ namespace Resources {
 
         Filesystem::FileWatcher mFileWatcher;
 
-        std::map<Filesystem::Path, int, SubDirCompare> mResourcePaths;
+        struct PathProperties {
+            int mPriority;
+            std::string mIdentifier;
+        };
+        std::map<Filesystem::Path, PathProperties, SubDirCompare> mResourcePaths;
 
         SystemVariable<bool, false> mEnumerated;
     };

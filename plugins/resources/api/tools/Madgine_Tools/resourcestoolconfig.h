@@ -22,8 +22,8 @@ namespace Tools {
         std::string_view key() const override;
 
     private:
-        std::map<Filesystem::Path, std::vector<Resources::ResourceBase *>> mResourceCache;
-        std::set<Filesystem::Path> mResourceConfig;
+        std::map<std::pair<std::string, Filesystem::Path>, std::vector<Resources::ResourceBase *>> mResourceCache;
+        std::set<std::pair<std::string, Filesystem::Path>> mResourceConfig;
     };
 
 }

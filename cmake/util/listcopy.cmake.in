@@ -1,0 +1,49 @@
+cmake_policy(SET CMP0057 NEW)
+
+$<TARGET_PROPERTY:copy_data,DATA_TARGETS>
+
+
+set(filenames)
+
+foreach(list "$<TARGET_PROPERTY:copy_data,DATA_LISTS>")
+	
+	message(STATUS "Copying data-list: ${list}")
+
+	file(STRINGS ${list} contents)
+
+	foreach(file ${contents})
+
+		if (file MATCHES "([^:]*):(.*)")
+
+			if (NOT CMAKE_MATCH_1)
+				set(path ${CMAKE_MATCH_2})
+			elseif (${CMAKE_MATCH_1}_SOURCE_DIR)
+				set(path ${${CMAKE_MATCH_1}_SOURCE_DIR}/${CMAKE_MATCH_2})
+			else ()
+				MESSAGE(STATUS "Skipping file ${CMAKE_MATCH_2} in project ${CMAKE_MATCH_1} as source directory is not defined. Plugin is probably disabled.")
+				continue()
+			endif()
+
+			file(INSTALL ${path} DESTINATION ${TARGET})
+
+			get_filename_component(name ${path} NAME)
+			list(APPEND filenames ${name})
+
+		else()
+			MESSAGE(SEND_ERROR "Unknown line format in list '${list}': ${file}")
+		endif()
+
+	endforeach()
+
+endforeach()
+
+#file(GLOB targetFiles "${TARGET}/*")
+#foreach(file ${targetFiles})
+#	get_filename_component(name ${file} NAME)
+#	if (NOT ${name} IN_LIST filenames)
+#		MESSAGE(STATUS "Removing old file: ${name}")
+#		file(REMOVE ${file})
+#	endif()
+#endforeach()
+
+

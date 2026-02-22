@@ -357,6 +357,7 @@ namespace Tools {
 
     void ProjectManager::saveConfiguration(const Filesystem::Path &config)
     {
+        mConfiguration["General"]["ROOT"] = mProjectRoot.relative(SOURCE_DIR);
         mConfiguration.saveToDisk(config / "client.ini");
     }
 
@@ -371,7 +372,7 @@ namespace Tools {
             mProjectRoot = root;
 
             if (!mProjectRoot.empty()) {
-                Resources::ResourceManager::getSingleton().registerResourceLocation(mProjectRoot / "data", 80);
+                Resources::ResourceManager::getSingleton().registerResourceLocation(mProjectRoot / "data", "Game", 80);
             }
 
             const std::vector<std::string> &layouts = projectLayouts();

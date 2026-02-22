@@ -15,7 +15,7 @@ macro(add_tools targetProject)
 		set(TOOL_CONFIG_SOURCE_ROOT tools)
 	endif()
 
-	add_plugin(${targetProject}Tools ${base} Tools ${TOOL_CONFIG_UNPARSED_ARGUMENTS} SOURCE_ROOT ${TOOL_CONFIG_SOURCE_ROOT} INSTALL_COMPONENT ${targetProject})
+	add_plugin(${targetProject}Tools ${base} Tools ${TOOL_CONFIG_UNPARSED_ARGUMENTS} SOURCE_ROOT ${TOOL_CONFIG_SOURCE_ROOT} INSTALL_COMPONENT ${targetProject} NO_DATA)
 
 	if (NOT TOOL_CONFIG_NO_DEFAULT_LINK)
 		target_link_plugins(${targetProject}Tools ${targetProject} Tools)

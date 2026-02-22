@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Interfaces/filesystem/path.h"
+
 #include "pluginlocal.h"
 
 namespace Engine {
@@ -15,7 +17,6 @@ namespace Plugins {
 
         const char *mProjectRoot;
         const char *mSourceRoot;
-        const char *mBinaryDir;
         const char *mBinaryFileName;
 
         const char *mToolsName;
@@ -26,6 +27,7 @@ namespace Plugins {
         const char **mPluginGroupDependencies;
 
         bool mIsStub;
+        Filesystem::Path mDataPath;
     };
 
 #if ENABLE_PLUGINS

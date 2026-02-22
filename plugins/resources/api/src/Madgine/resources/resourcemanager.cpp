@@ -30,7 +30,9 @@ namespace Resources {
     CLI::Parameter<Filesystem::Path> exportResources { { "--export-resources", "-er" }, "", "If set, the resource manager will write all available resources to the specified list file." };
     CLI::Parameter<Filesystem::Path> bakeResources { { "--bake" }, "", "If set, all resources listed in the specified list file will be baked." };
     CLI::Parameter<Filesystem::Path> bakeOutputList { { "--bake-output-list" }, "", "If set, all baked resources will be written to a list file at the specified location." };
-    CLI::Parameter<Filesystem::Path> bakeSourceDir { { "--bake-source-dir" }, SOURCE_DIR, "directory that will be used as the base for resource paths." };
+
+    CLI::Parameter<Filesystem::Path> sourceDirPath { { "--source-dir" }, SOURCE_DIR, "Set source root folder." };
+    CLI::Parameter<Filesystem::Path> gameRootPath { { "--game-root" }, "", "Set game root folder." };
 
     static ResourceManager *sSingleton = nullptr;
 
@@ -64,14 +66,14 @@ namespace Resources {
     {
         if (!exportResources->empty()) {
 
-            std::map<Filesystem::Path, std::vector<ResourceBase *>> resourceList = buildResourceList();
+            std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> resourceList = buildResourceList();
             std::ofstream out { *exportResources };
             if (!out) {
                 LOG_ERROR("Error opening for writing: " << *exportResources);
                 co_return -1;
             }
             for (const auto &[path, resources] : resourceList) {
-                out << path << "\n";
+                out << path.first << ":" << path.second << "\n";
             }
         }
 
@@ -91,9 +93,18 @@ namespace Resources {
             std::string line;
             while (std::getline(list, line)) {
                 line = StringUtil::trim(line);
-                Filesystem::Path &path = resourcesToBake.emplace_back(line);
-                if (path.isRelative()) {
-                    path = *bakeSourceDir / path;
+                auto it = line.find(':');
+                std::string project;
+                if (it != std::string::npos) {
+                    project = line.substr(0, it);
+                    Filesystem::Path path = getProjectPath(project);
+                    if (path.empty()) {
+                        LOG_WARNING("Project " << project << " not found for resource " << line << ", skipping.");
+                        continue;
+                    }
+                    resourcesToBake.emplace_back(path / line.substr(it + 1));
+                } else {
+                    resourcesToBake.emplace_back(line);
                 }
             }
 
@@ -113,20 +124,28 @@ namespace Resources {
                 co_return -1;
             }
             for (const Filesystem::Path &resource : resourcesToBake) {
-                out << resource << "\n";
+                const auto &[project, path] = makeRelative(resource);
+                if (project.empty()) {
+                    LOG_WARNING("Resource " << resource << " is not in a registered resource location, skipping writing it to the output list.");
+                    continue;
+                }
+                out << project << ":" << path << "\n";
             }
         }
         co_return 0;
     }
 
-    void ResourceManager::registerResourceLocation(const Filesystem::Path &path, int priority)
+    void ResourceManager::registerResourceLocation(const Filesystem::Path &path, std::string_view identifier, int priority)
     {
         Filesystem::Path absolutePath = path.absolute();
 
         if (!exists(absolutePath))
             return;
 
-        auto [it, b] = mResourcePaths.try_emplace(absolutePath, priority);
+        LOG("Registering resource location: " << path << " with identifier: " << identifier);
+
+        auto [it, b] = mResourcePaths.try_emplace(absolutePath, PathProperties { priority, std::string { identifier } });
+        assert(b);
         if (b) {
             mFileWatcher.addWatch(absolutePath);
 
@@ -147,25 +166,59 @@ namespace Resources {
                 if (!p.isLoaded(pMgr.selection()))
                     continue;
                 const Plugins::BinaryInfo *info = p.info();
-                Filesystem::Path binPath = info->mBinaryDir;
-                bool isLocal = p.fullPath().parentPath() == binPath;
-                if (isLocal)
-                    registerResourceLocation(Filesystem::Path { info->mProjectRoot } / "data", 75);
-                // else
-                // registerResourceLocation(binPath.parent_path() / "data" / plugin->());
+                if (info->mDataPath.empty())
+                    continue;
+                Filesystem::Path path = info->mDataPath;               
+                if (path.isRelative()) {
+                    path = *sourceDirPath / path;
+                }                
+                registerResourceLocation(path, p.name(), 75);
             }
         }
 #endif
 
-        registerResourceLocation(Filesystem::shippingPath() / "data", 50);
+        if (!bakeOutputList->empty()) {
+            registerResourceLocation(bakeOutputList->parentPath(), "Generated", 50);
+        }
+
+        if (!gameRootPath->empty()) {
+            registerResourceLocation(*gameRootPath / "data", "Game", 80);
+        }
 
         std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> loaderByExtension = getLoaderByExtension();
 
-        for (const std::pair<const Filesystem::Path, int> &p : mResourcePaths) {
-            updateResources(Filesystem::FileEventType::FILE_CREATED, p.first, p.second, loaderByExtension);
+        for (const std::pair<const Filesystem::Path, PathProperties> &p : mResourcePaths) {
+            updateResources(Filesystem::FileEventType::FILE_CREATED, p.first, p.second.mPriority, loaderByExtension);
         }
 
         mEnumerated = true;
+    }
+
+    std::pair<std::string, Filesystem::Path> ResourceManager::makeRelative(const Filesystem::Path &path) const
+    {
+        for (const std::pair<const Filesystem::Path, PathProperties> &p : mResourcePaths) {
+            Filesystem::Path relative = path.relative(p.first);
+            if (!relative.empty()) {
+                return { p.second.mIdentifier, std::move(relative) };
+            }
+        }
+
+        if (!bakeOutputList->empty()) {
+            Filesystem::Path relative = path.relative(bakeOutputList->parentPath());
+            if (!relative.empty()) {
+                return { "Generated", std::move(relative) };
+            }
+        }
+
+        return std::make_pair("", "");
+    }
+
+    Filesystem::Path ResourceManager::getProjectPath(std::string_view name) const
+    {
+        auto it = std::ranges::find(mResourcePaths, name, [](const std::pair<const Filesystem::Path, PathProperties> &p) { return p.second.mIdentifier; });
+        if (it == mResourcePaths.end())
+            return {};
+        return it->first;
     }
 
     Threading::Task<bool> ResourceManager::init()
@@ -193,7 +246,7 @@ namespace Resources {
 
     Filesystem::Path ResourceManager::findResourceFile(std::string_view fileName)
     {
-        for (const std::pair<const Filesystem::Path, int> &p : mResourcePaths) {
+        for (const std::pair<const Filesystem::Path, PathProperties> &p : mResourcePaths) {
             for (Filesystem::Path p : Filesystem::listFilesRecursive(p.first)) {
                 if (p.filename().str() == fileName)
                     return p;
@@ -210,7 +263,7 @@ namespace Resources {
             std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> loaderByExtension = getLoaderByExtension();
 
             for (const Filesystem::FileEvent &event : events) {
-                updateResource(event.mType, event.mPath, mResourcePaths.at(event.mPath), loaderByExtension);
+                updateResource(event.mType, event.mPath, mResourcePaths.at(event.mPath).mPriority, loaderByExtension);
             }
 
             co_await 1s;
@@ -255,7 +308,7 @@ namespace Resources {
                 switch (event) {
                 case Filesystem::FileEventType::FILE_CREATED:
                     if (!created && path != resource->path()) {
-                        int otherPriority = mResourcePaths.at(resource->path());
+                        int otherPriority = mResourcePaths.at(resource->path()).mPriority;
                         if (priority > otherPriority || (priority == otherPriority && loader->extensionIndex(extension) < loader->extensionIndex(resource->path().extension()))) {
                             resource->setPath(path);
                             loader->updateResourceData(resource);
@@ -283,16 +336,19 @@ namespace Resources {
         return loaderByExtension;
     }
 
-    std::map<Filesystem::Path, std::vector<ResourceBase *>> ResourceManager::buildResourceList()
+    std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> ResourceManager::buildResourceList()
     {
-        std::map<Filesystem::Path, std::vector<ResourceBase *>> result;
+        std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> result;
         for (const std::unique_ptr<ResourceLoaderBase> &loader : mCollector) {
             for (ResourceBase *res : loader->resources()) {
                 Filesystem::Path path = res->path();
-                if (!path.empty() && !path.isRelative(BINARY_DIR)) {
-                    if (path.isRelative(SOURCE_DIR))
-                        path = path.relative(SOURCE_DIR);
-                    result[path].push_back(res);
+                if (!path.empty()) {
+                    const auto &[project, relPath] = makeRelative(path);
+                    if (project.empty()) {
+                        LOG_WARNING("Resource " << path << " is not in a registered resource location, skipping writing it to the output list.");
+                        continue;
+                    }
+                    result[{ project, relPath }].push_back(res);
                 }
             }
         }

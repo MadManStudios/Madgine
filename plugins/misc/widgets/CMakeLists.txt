@@ -23,7 +23,7 @@ FolderSources(sources "" handler)
 	FolderSources(sources handler Madgine)
 		FolderSources(sources Madgine widgets widgethandler.cpp widgethandler.h)
 
-add_plugin(WidgetHandler Madgine Misc ${sources} SOURCE_ROOT handler)
+add_plugin(WidgetHandler Madgine Misc ${sources} SOURCE_ROOT handler NO_DATA)
 
 target_link_plugins(WidgetHandler Widgets Handler)
 

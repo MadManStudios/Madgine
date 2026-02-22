@@ -39,7 +39,7 @@ if (MADGINE_CONFIGURATION)
 					-lp ${MADGINE_CONFIGURATION}/plugins.ini
 					--bake ${local_lists}
 					--bake-output-list ${CMAKE_BINARY_DIR}/bake_results/resources.list
-					--bake-source-dir ${CMAKE_SOURCE_DIR}
+					--source-dir ${CMAKE_SOURCE_DIR}
 					"$<TARGET_PROPERTY:MadgineTooling,PARAMETERS>"					
 		DEPENDS MadgineTooling ${local_lists}
 		COMMAND_EXPAND_LISTS
@@ -52,4 +52,7 @@ if (MADGINE_CONFIGURATION)
 	set_target_properties(copy_data
 		PROPERTIES
 		DATA_LISTS "${data_lists}")
+
+	add_data_source(Generated ${CMAKE_BINARY_DIR}/bake_results)
+
 endif()
