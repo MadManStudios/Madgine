@@ -291,7 +291,7 @@ namespace Serialize {
         if (!Stream::skipWs(overwrite)) {
             auto error = STREAM_ERROR(StreamState::OK, *this, true);
             error.mType = streamError(state(), error.mMsg);
-            error.mMsg << "after skipWs";
+            error.mMsg << " after skipWs";
             return error;
         }
         return {};
