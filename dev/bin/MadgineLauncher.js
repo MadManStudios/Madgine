@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpxmbmaw6l.js
+// include: /tmp/tmptsnj3w_q.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -209,11 +209,11 @@ Module['FS_createPath']("/", "shadercache", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/CascadiaMono.ttf", "start": 349346, "end": 974238}, {"filename": "/data/FontIcon.png", "start": 974238, "end": 976986}, {"filename": "/data/Gamepad.jpg", "start": 976986, "end": 1085442}, {"filename": "/data/NodeGraph.png", "start": 1085442, "end": 1087688}, {"filename": "/data/OpenSans-BoldItalic.ttf", "start": 1087688, "end": 1222796}, {"filename": "/data/OpenSans-ExtraBold.ttf", "start": 1222796, "end": 1352976}, {"filename": "/data/OpenSans-ExtraBoldItalic.ttf", "start": 1352976, "end": 1488664}, {"filename": "/data/OpenSans-Italic.ttf", "start": 1488664, "end": 1624044}, {"filename": "/data/OpenSans-Light.ttf", "start": 1624044, "end": 1753800}, {"filename": "/data/OpenSans-LightItalic.ttf", "start": 1753800, "end": 1889468}, {"filename": "/data/OpenSans-Semibold.ttf", "start": 1889468, "end": 2019184}, {"filename": "/data/OpenSans-SemiboldItalic.ttf", "start": 2019184, "end": 2154696}, {"filename": "/data/OpenSans.msdf", "start": 2154696, "end": 19001328}, {"filename": "/data/Planes.fbx", "start": 19001328, "end": 19035324}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 19035324, "end": 19326157}, {"filename": "/data/ShaderIcon.png", "start": 19326157, "end": 19329336}, {"filename": "/data/blank_white.png", "start": 19329336, "end": 19329455}, {"filename": "/data/default.atl", "start": 19329455, "end": 19329540}, {"filename": "/data/default.layout", "start": 19329540, "end": 19331214}, {"filename": "/data/default_tex.png", "start": 19331214, "end": 19331419}, {"filename": "/data/gameover.widget", "start": 19331419, "end": 19333519}, {"filename": "/data/grid.png", "start": 19333519, "end": 19333671}, {"filename": "/data/icons.ttf", "start": 19333671, "end": 19337135}, {"filename": "/data/ingame.widget", "start": 19337135, "end": 19339963}, {"filename": "/data/mage.fbx", "start": 19339963, "end": 19442759}, {"filename": "/data/mage_animated.fbx", "start": 19442759, "end": 22194179}, {"filename": "/data/mage_attack.fbx", "start": 22194179, "end": 22441171}, {"filename": "/data/mainmenu.widget", "start": 22441171, "end": 22444396}, {"filename": "/data/skeleton.png", "start": 22444396, "end": 22445296}, {"filename": "/shadercache/bloom_PS.glsl_es", "start": 22445296, "end": 22446126}, {"filename": "/shadercache/bloom_VS.glsl_es", "start": 22446126, "end": 22446432}, {"filename": "/shadercache/blur_PS.glsl_es", "start": 22446432, "end": 22448004}, {"filename": "/shadercache/blur_VS.glsl_es", "start": 22448004, "end": 22448310}, {"filename": "/shadercache/grid_PS.glsl_es", "start": 22448310, "end": 22449480}, {"filename": "/shadercache/grid_VS.glsl_es", "start": 22449480, "end": 22450078}, {"filename": "/shadercache/im3d_PS.glsl_es", "start": 22450078, "end": 22451141}, {"filename": "/shadercache/im3d_VS.glsl_es", "start": 22451141, "end": 22452153}, {"filename": "/shadercache/imgui_PS.glsl_es", "start": 22452153, "end": 22452590}, {"filename": "/shadercache/imgui_VS.glsl_es", "start": 22452590, "end": 22453277}, {"filename": "/shadercache/pointshadow_PS.glsl_es", "start": 22453277, "end": 22453564}, {"filename": "/shadercache/pointshadow_VS.glsl_es", "start": 22453564, "end": 22454671}, {"filename": "/shadercache/scene_VS.glsl_es", "start": 22454671, "end": 22456490}, {"filename": "/shadercache/scene_lighting.glsl_es", "start": 22456490, "end": 22462783}, {"filename": "/shadercache/widgets_PS.glsl_es", "start": 22462783, "end": 22464067}, {"filename": "/shadercache/widgets_VS.glsl_es", "start": 22464067, "end": 22464985}], "remote_package_size": 22464985});
+    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/Gamepad.jpg", "start": 349346, "end": 457802}, {"filename": "/data/NodeGraph.png", "start": 457802, "end": 460048}, {"filename": "/data/OpenSans.msdf", "start": 460048, "end": 17306680}, {"filename": "/data/Planes.fbx", "start": 17306680, "end": 17340676}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 17340676, "end": 17631509}, {"filename": "/data/blank_white.png", "start": 17631509, "end": 17631628}, {"filename": "/data/default.atl", "start": 17631628, "end": 17631713}, {"filename": "/data/default.layout", "start": 17631713, "end": 17633387}, {"filename": "/data/default_tex.png", "start": 17633387, "end": 17633592}, {"filename": "/data/gameover.widget", "start": 17633592, "end": 17635692}, {"filename": "/data/grid.png", "start": 17635692, "end": 17635844}, {"filename": "/data/icons.ttf", "start": 17635844, "end": 17639308}, {"filename": "/data/ingame.widget", "start": 17639308, "end": 17642136}, {"filename": "/data/mage.fbx", "start": 17642136, "end": 17744932}, {"filename": "/data/mage_animated.fbx", "start": 17744932, "end": 20496352}, {"filename": "/data/mage_attack.fbx", "start": 20496352, "end": 20743344}, {"filename": "/data/mainmenu.widget", "start": 20743344, "end": 20746569}, {"filename": "/shadercache/bloom_PS.glsl_es", "start": 20746569, "end": 20747399}, {"filename": "/shadercache/bloom_VS.glsl_es", "start": 20747399, "end": 20747705}, {"filename": "/shadercache/blur_PS.glsl_es", "start": 20747705, "end": 20749277}, {"filename": "/shadercache/blur_VS.glsl_es", "start": 20749277, "end": 20749583}, {"filename": "/shadercache/grid_PS.glsl_es", "start": 20749583, "end": 20750753}, {"filename": "/shadercache/grid_VS.glsl_es", "start": 20750753, "end": 20751351}, {"filename": "/shadercache/im3d_PS.glsl_es", "start": 20751351, "end": 20752414}, {"filename": "/shadercache/im3d_VS.glsl_es", "start": 20752414, "end": 20753426}, {"filename": "/shadercache/imgui_PS.glsl_es", "start": 20753426, "end": 20753863}, {"filename": "/shadercache/imgui_VS.glsl_es", "start": 20753863, "end": 20754550}, {"filename": "/shadercache/pointshadow_PS.glsl_es", "start": 20754550, "end": 20754837}, {"filename": "/shadercache/pointshadow_VS.glsl_es", "start": 20754837, "end": 20755944}, {"filename": "/shadercache/scene_VS.glsl_es", "start": 20755944, "end": 20757763}, {"filename": "/shadercache/scene_lighting.glsl_es", "start": 20757763, "end": 20764056}, {"filename": "/shadercache/widgets_PS.glsl_es", "start": 20764056, "end": 20765340}, {"filename": "/shadercache/widgets_VS.glsl_es", "start": 20765340, "end": 20766258}], "remote_package_size": 20766258});
 
   })();
 
-// end include: /tmp/tmpxmbmaw6l.js
+// end include: /tmp/tmptsnj3w_q.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 /**
@@ -8360,22 +8360,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1362472: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1362518: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1362570: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1362686: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1362757: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1362828: () => { document.body.style.cursor = 'default'; },  
- 1362868: () => { document.body.style.cursor = 'text'; },  
- 1362905: () => { document.body.style.cursor = 'move'; },  
- 1362942: () => { document.body.style.cursor = 'ns-resize'; },  
- 1362984: () => { document.body.style.cursor = 'ew-resize'; },  
- 1363026: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1363070: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1363114: () => { document.body.style.cursor = 'grab'; },  
- 1363151: () => { document.body.style.cursor = 'not-allowed'; },  
- 1363195: () => { Module.input.focus(); },  
- 1363217: () => { Module.canvas.focus(); }
+  1362536: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 1362582: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 1362634: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 1362750: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 1362821: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 1362892: () => { document.body.style.cursor = 'default'; },  
+ 1362932: () => { document.body.style.cursor = 'text'; },  
+ 1362969: () => { document.body.style.cursor = 'move'; },  
+ 1363006: () => { document.body.style.cursor = 'ns-resize'; },  
+ 1363048: () => { document.body.style.cursor = 'ew-resize'; },  
+ 1363090: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 1363134: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 1363178: () => { document.body.style.cursor = 'grab'; },  
+ 1363215: () => { document.body.style.cursor = 'not-allowed'; },  
+ 1363259: () => { Module.input.focus(); },  
+ 1363281: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
