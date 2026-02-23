@@ -158,6 +158,7 @@ jobs:
     - name: Configure CMake
       env:
         MADGINE_VERSION: ${{ needs.configuration.outputs.version }}
+        MADGINE: Madgine
       run: >
         cmake --preset=${{ fromJSON(needs.configuration.outputs.presets)[matrix.platform] }}
         -DMADGINE_PREBUILT_TOOLING=tooling
