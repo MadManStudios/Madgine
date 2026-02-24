@@ -31,8 +31,10 @@ namespace Resources {
     CLI::Parameter<Filesystem::Path> bakeResources { { "--bake" }, "", "If set, all resources listed in the specified list file will be baked." };
     CLI::Parameter<Filesystem::Path> bakeOutputList { { "--bake-output-list" }, "", "If set, all baked resources will be written to a list file at the specified location." };
 
+#if ENABLE_PLUGINS
     CLI::Parameter<Filesystem::Path> sourceDirPath { { "--source-dir" }, SOURCE_DIR, "Set source root folder." };
     CLI::Parameter<Filesystem::Path> gameRootPath { { "--game-root" }, "", "Set game root folder." };
+#endif
 
     static ResourceManager *sSingleton = nullptr;
 
@@ -168,14 +170,13 @@ namespace Resources {
                 const Plugins::BinaryInfo *info = p.info();
                 if (info->mDataPath.empty())
                     continue;
-                Filesystem::Path path = info->mDataPath;               
+                Filesystem::Path path = info->mDataPath;
                 if (path.isRelative()) {
                     path = *sourceDirPath / path;
-                }                
+                }
                 registerResourceLocation(path, p.name(), 75);
             }
         }
-#endif
 
         if (!bakeOutputList->empty()) {
             registerResourceLocation(bakeOutputList->parentPath(), "Generated", 50);
@@ -184,6 +185,10 @@ namespace Resources {
         if (!gameRootPath->empty()) {
             registerResourceLocation(*gameRootPath / "data", "Game", 80);
         }
+
+#else
+        registerResourceLocation(Filesystem::shippingPath() / "data", "Game", 80);
+#endif
 
         std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> loaderByExtension = getLoaderByExtension();
 
