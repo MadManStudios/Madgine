@@ -89,8 +89,6 @@ generate_binary_info(${MADGINE_BINARY_NAME})
 
 install_to_workspace(MadgineLauncher TARGETS ${MADGINE_BINARY_NAME})
 
-write_notices(${MADGINE_BINARY_NAME})
-
 
 if (TARGET copy_data)
 	add_dependencies(${MADGINE_BINARY_NAME} copy_data)

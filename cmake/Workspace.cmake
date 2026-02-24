@@ -154,14 +154,6 @@ function(get_dependencies list target)
 	if (found_target EQUAL -1)
 		list(APPEND ${list} ${target})
 
-		get_target_property(dependencies ${target} MANUALLY_ADDED_DEPENDENCIES)
-
-		if (dependencies)
-			foreach(dep ${dependencies})
-				get_dependencies(${list} ${dep})
-			endforeach()
-		endif()
-
 		get_target_property(dependencies ${target} LINK_LIBRARIES)
 
 		if (dependencies)

@@ -4,6 +4,37 @@ $<TARGET_PROPERTY:copy_data,DATA_TARGETS>
 
 
 set(filenames)
+set(licenses "")
+
+macro(resolve_licenses group path)
+
+	string(REPLACE "/" "_" identifier "${path}")
+
+	set(identifier "CACHE_${group}_${identifier}")
+
+	if (NOT ${identifier})	
+		set(license "")
+		if (EXISTS ${${group}_SOURCE_DIR}/${path}/LICENSE.txt)
+			file(READ ${${group}_SOURCE_DIR}/${path}/LICENSE.txt content)
+			set(licenses "${licenses}${content}
+			
+
+=================================================
+			
+
+			")
+			set(license "${${group}_SOURCE_DIR}/${path}/LICENSE.txt")
+		elseif(NOT "${path}" STREQUAL "")
+			set(local ${path})
+			cmake_path(GET local PARENT_PATH parent)
+			resolve_licenses(${group} "${parent}")
+		endif()
+		set(${identifier} ${license})
+	else()
+		set(license ${identifier})
+	endif()
+
+endmacro(resolve_licenses)
 
 foreach(list "$<TARGET_PROPERTY:copy_data,DATA_LISTS>")
 	
@@ -19,6 +50,12 @@ foreach(list "$<TARGET_PROPERTY:copy_data,DATA_LISTS>")
 				set(path ${CMAKE_MATCH_2})
 			elseif (${CMAKE_MATCH_1}_SOURCE_DIR)
 				set(path ${${CMAKE_MATCH_1}_SOURCE_DIR}/${CMAKE_MATCH_2})
+				cmake_path(GET CMAKE_MATCH_2 PARENT_PATH folder)
+				cmake_path(SET folder NORMALIZE "${folder}")
+				resolve_licenses(${CMAKE_MATCH_1} "${folder}")
+				if (NOT ${license} STREQUAL "")
+					MESSAGE(STATUS "Using license ${license} for:")
+				endif()
 			else ()
 				MESSAGE(STATUS "Skipping file ${CMAKE_MATCH_2} in project ${CMAKE_MATCH_1} as source directory is not defined. Plugin is probably disabled.")
 				continue()
@@ -47,3 +84,5 @@ endforeach()
 #endforeach()
 
 
+MESSAGE(STATUS "Generating: ${TARGET}/Data-LICENSES.txt")
+file(WRITE ${TARGET}/Data-LICENSES.txt ${licenses})

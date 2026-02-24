@@ -34,11 +34,33 @@ function(add_notices target)
 
 endfunction(add_notices)
 
-function(write_notices target)
+macro(list_all_targets list DIR)
+    get_property(TGTS DIRECTORY "${DIR}" PROPERTY BUILDSYSTEM_TARGETS)
+    foreach(TGT IN LISTS TGTS)
+		get_target_property(excluded ${TGT} EXCLUDE_FROM_ALL)
+		if (NOT excluded)
+			list(APPEND ${list} ${TGT})
+		endif()
+    endforeach()
+
+    get_property(SUBDIRS DIRECTORY "${DIR}" PROPERTY SUBDIRECTORIES)
+    foreach(SUBDIR IN LISTS SUBDIRS)
+		get_property(excluded DIRECTORY ${SUBDIR} PROPERTY EXCLUDE_FROM_ALL)
+		if (NOT excluded)
+			list_all_targets(${list} "${SUBDIR}")
+		endif()
+    endforeach()
+endmacro()
+
+function(write_notices)
 
 	MESSAGE(STATUS "Generating legal notices...")
 
-	get_dependencies(targetList ${target})
+	list_all_targets(targets ${CMAKE_SOURCE_DIR})
+
+	foreach(target ${targets})
+		get_dependencies(targetList ${target})
+	endforeach()
 
 	set(CREDITS_TEXT "This software uses third-party libraries. Those include:")
 	
@@ -46,8 +68,6 @@ function(write_notices target)
 			"Copyright (c) 2023 MadManRises
 	
 	The respective licenses and copyrights of the used third-party libraries are listed in the following.")
-	
-	MESSAGE(STATUS ${targetList})
 
 	foreach(target ${targetList})
 
@@ -82,6 +102,10 @@ ${fileContent}")
 	file(WRITE ${CMAKE_BINARY_DIR}/LICENSES.txt ${LICENSES_TEXT})
 	file(WRITE ${CMAKE_BINARY_DIR}/CREDITS.txt ${CREDITS_TEXT})
 
+	install(FILES ${CMAKE_BINARY_DIR}/LICENSES.txt ${CMAKE_BINARY_DIR}/CREDITS.txt DESTINATION . COMPONENT MadgineLauncher)
+
 	MESSAGE(STATUS "Success")
 
 endfunction(write_notices)
+
+cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL write_notices)

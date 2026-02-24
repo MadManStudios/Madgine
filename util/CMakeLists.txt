@@ -52,3 +52,7 @@ set_target_properties(dxcompiler
 	PROPERTIES
 	IMPORTED_LOCATION ${shadergenext_SOURCE_DIR}/dxcompiler${CMAKE_SHARED_LIBRARY_SUFFIX}
 	IMPORTED_IMPLIB ${shadergenext_SOURCE_DIR}/dxcompiler${CMAKE_IMPORT_LIBRARY_SUFFIX})
+
+add_notices(dxcompiler
+	READABLE_NAME DirectXShaderCompiler 
+	LICENSE_FILE ${shadergenext_SOURCE_DIR}/DXCompiler-LICENSE.txt )
