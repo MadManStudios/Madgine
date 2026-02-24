@@ -13,7 +13,6 @@
 #include "Madgine/scene/entity/entitycomponentlist.h"
 #include "Madgine/scene/scenemanager.h"
 
-#include "im3d/im3d.h"
 #include "scene_hlsl.h"
 
 namespace Engine {

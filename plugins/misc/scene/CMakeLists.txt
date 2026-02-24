@@ -12,8 +12,6 @@ add_plugin(Scene Madgine Misc ${sources} PRECOMPILED_HEADER src/Madgine/scenelib
 
 target_link_plugins(Scene MeshLoader AnimationLoader App Behavior)
 
-target_link_libraries(Scene PRIVATE Im3D)
-
 if (MSVC)
 	target_link_options(Scene PUBLIC "/NATVIS:${CMAKE_CURRENT_LIST_DIR}/src/Scene.natvis")
 endif()
@@ -29,8 +27,6 @@ FolderSources(sources "" renderer)
 add_plugin(SceneRenderer Madgine Misc ${sources} SOURCE_ROOT renderer PRECOMPILED_HEADER renderer/Madgine/scenerendererlib.h NO_DATA)
 
 target_link_plugins(SceneRenderer Scene Client)
-
-target_link_libraries(SceneRenderer PRIVATE Im3D)
 
 target_include_directories(SceneRenderer PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
