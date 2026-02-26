@@ -43,6 +43,15 @@ namespace Tools {
 
         co_await Resources::ResourceManager::getSingleton().state();
 
+        refresh();
+
+        co_return true;
+    }
+
+    void ResourcesTool::refresh()
+    {
+        mResources.clear();
+
         for (Resources::ResourceLoaderBase *loader : Resources::ResourceManager::getSingleton().mCollector | std::views::transform(projectionUniquePtrToPtr)) {
             for (Resources::ResourceBase *res : loader->resources()) {
                 if (!res->path().empty()) {
@@ -50,8 +59,6 @@ namespace Tools {
                 }
             }
         }
-
-        co_return true;
     }
 
     std::string_view ResourcesTool::key() const
@@ -225,6 +232,10 @@ namespace Tools {
 
             // Context menu
             if (ImGui::BeginPopupContextWindow()) {
+                if (ImGui::Selectable("Refresh")) {
+                    refresh();
+                }
+                ImGui::Separator();
                 ImGui::Text("Selection: %d items", Selection.Size);
                 ImGui::Separator();
                 if (ImGui::MenuItem("Delete", "Del", false, Selection.Size > 0))

@@ -83,6 +83,8 @@ namespace Tools {
 
         bool lastFocusedEditor(ResourceEditor *editor);
 
+        void refresh();
+
     private:
         ExampleSelectionWithDeletion Selection;
 
