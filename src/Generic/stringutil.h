@@ -29,6 +29,8 @@ namespace StringUtil {
     {
         auto begin = std::ranges::find_if_not(s, isspace);
         auto end = std::find_if_not(s.rbegin(), s.rend(), isspace);
+        if (end.base() - begin <= 0)
+            return "";
         return { &*begin, static_cast<size_t>(end.base() - begin) };
     }
 
