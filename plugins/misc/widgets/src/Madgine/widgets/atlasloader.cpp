@@ -14,12 +14,12 @@
 #include "Madgine/render/texture.h"
 #include "Madgine/resources/resourcemanager.h"
 #include "Madgine/serialize/filesystem/filemanager.h"
-#include "Madgine/window/layoutloader.h"
 #include "Madgine/window/mainwindow.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+#include "compoundwidget.h"
 #include "widgetloader.h"
 #include "widgetmanager.h"
 
@@ -299,49 +299,51 @@ namespace Widgets {
             co_await res.loadData().info()->loadingTask();
         }
 
-        std::vector<Filesystem::Path> filesToAdd;
+        std::map<std::string, Resources::ImageLoader::Handle> images;
+
         for (Filesystem::Path path : resourcesToBake) {
-            if (path.extension() == ".layout") {
-                Window::LayoutLoader::Resource res { "", path };
-                Serialize::SerializeManager mgr { "Layout" };
-                Serialize::FormattedSerializeStream stream = Serialize::FormattedSerializeStream { Serialize::Formats::xml(), mgr.wrapStream(res.readAsStream(), true) };
-                std::map<std::string, Resources::ImageLoader::Handle> images;
-                Serialize::StreamResult result = Serialize::scanCompound<Window::MainWindow, WidgetManager>(stream, nullptr, [&](Serialize::FormattedSerializeStream &stream, const char *name, size_t depth) {
-                    return Serialize::scanPrimitive<WidgetManager, std::string>(stream, name, [&](const std::string &s, const char *name, std::span<std::string_view> tags, size_t depth) {
-                        if (!s.empty() && std::ranges::contains(tags, "Image"))
-                            images[s];
-                    });
+            if (path.extension() == ".widget") {
+                WidgetLoader::Resource res { "", path };
+                Serialize::SerializeManager mgr { "Widget" };
+                Serialize::FormattedSerializeStream stream = Serialize::FormattedSerializeStream { Serialize::Formats::xml(), mgr.wrapStream(res.readAsStream(), true) };                
+                Serialize::StreamResult result = Serialize::scanPrimitive<CompoundWidget, std::string>(stream, "Widget", [&](const std::string &s, const char *name, std::span<std::string_view> tags, size_t depth) {
+                    if (!s.empty() && std::ranges::contains(tags, "Image"))
+                        images[s];
                 });
+
                 if (result.mState != Serialize::StreamState::OK) {
                     LOG_ERROR(*result.mError);
                     co_return Resources::BakeResult::UNKNOWN_ERROR;
                 }
-                for (auto &[name, handle] : images)
-                    handle.load(name);
-
-                for (const auto &[name, handle] : images) {
-                    if (!handle) {
-                        LOG_ERROR("Image not found: '" << name << "'!");
-                        co_return Resources::BakeResult::UNKNOWN_ERROR;
-                    }
-                    if (!co_await handle.info()->loadingTask()) {
-                        LOG_ERROR("Failed to load image '" << name << "'!");
-                        co_return Resources::BakeResult::UNKNOWN_ERROR;
-                    }
-                }
-                LOG("Creating UI Atlas containing " << images.size() << " images...");
-                PreprocessedUIAtlas atlas;
-                atlas.insert(images);
-                Filesystem::FileManager outMgr { "Atlas" };
-                Filesystem::Path outPath = intermediateDir / (std::string { path.stem() } + ".atl");
-                Serialize::FormattedSerializeStream out = outMgr.openWrite(outPath, Serialize::Formats::safebinary);
-
-                Serialize::write(out, atlas, "Atlas");
-
-                filesToAdd.push_back(outPath);
             }
         }
-        std::ranges::move(filesToAdd, std::back_inserter(resourcesToBake));
+
+        LOG("Creating UI Atlas containing " << images.size() << " images...");
+
+        for (auto &[name, handle] : images)
+            handle.load(name);
+
+        for (const auto &[name, handle] : images) {
+            if (!handle) {
+                LOG_ERROR("Image not found: '" << name << "'!");
+                co_return Resources::BakeResult::UNKNOWN_ERROR;
+            }
+            if (!co_await handle.info()->loadingTask()) {
+                LOG_ERROR("Failed to load image '" << name << "'!");
+                co_return Resources::BakeResult::UNKNOWN_ERROR;
+            }
+        }
+
+        PreprocessedUIAtlas atlas;
+        atlas.insert(images);
+        Filesystem::FileManager outMgr { "Atlas" };
+        Filesystem::Path outPath = intermediateDir / "default.atl";
+        Serialize::FormattedSerializeStream out = outMgr.openWrite(outPath, Serialize::Formats::safebinary);
+
+        Serialize::write(out, atlas, "Atlas");
+
+        resourcesToBake.push_back(outPath);
+
         co_return Resources::BakeResult::SUCCESS;
     }
 
