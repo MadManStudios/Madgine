@@ -44,6 +44,11 @@ namespace Resources {
                         this->mRec.set_error(GenericResult { GenericResult::UNKNOWN_ERROR });
                 };
 
+                if (!this->mRec.mHandle) {
+                    this->mRec.set_error(GenericResult { GenericResult::UNKNOWN_ERROR });
+                    return;
+                }
+
                 Threading::TaskFuture<bool> fut = this->mRec.mHandle.info()->loadingTask();
                 if (fut.is_ready()) {
                     handler(fut);
