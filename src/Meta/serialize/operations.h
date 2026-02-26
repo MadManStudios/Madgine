@@ -332,9 +332,9 @@ namespace Serialize {
         requires(!Reference<F> && PrimitiveType<Primitive>)
     StreamResult scanPrimitive(FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
-        return visitStream<Compound>(in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
+        return visitStream<Compound>(in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
             Primitive v;
-            STREAM_PROPAGATE_ERROR(stream.readPrimitive(v, name));
+            STREAM_PROPAGATE_ERROR(stream.mStream.readPrimitive(v, name));
             callback(v, name, tags, depth);
             return {};
         } },
@@ -345,9 +345,9 @@ namespace Serialize {
         requires(!Reference<F> && PrimitiveType<Primitive>)
     StreamResult scanPrimitive(PrimitiveHolder<T> holder, FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
-        return visitStream(holder, in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
+        return visitStream(holder, in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
             Primitive v;
-            STREAM_PROPAGATE_ERROR(stream.readPrimitive(v, name));
+            STREAM_PROPAGATE_ERROR(stream.mStream.readPrimitive(v, name));
             callback(v, name, tags, depth);
             return {};
         } },
@@ -360,7 +360,7 @@ namespace Serialize {
     {
         using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, DataTag>;
         StreamVisitorImpl visitor {
-            [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<StreamResult> {
+            [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<StreamResult> {
                 if (holder.mTable == &serializeTable<TargetCompound>()) {
                     return callback(stream, name, depth);
                 } else {
