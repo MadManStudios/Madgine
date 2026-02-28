@@ -19,6 +19,7 @@ namespace Widgets {
     struct TableWidget;
     struct TabBar;
     struct Layout;
+    struct TextEdit;
 
     struct CompoundWidget;
 
