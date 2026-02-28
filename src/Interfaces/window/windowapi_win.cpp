@@ -403,6 +403,8 @@ namespace Window {
 
     static const char *CreateWindowClass()
     {
+        SetCursor(LoadCursor(nullptr, IDC_ARROW));
+
         HINSTANCE hInstance = GetModuleHandle(nullptr);
 
         // Register class
