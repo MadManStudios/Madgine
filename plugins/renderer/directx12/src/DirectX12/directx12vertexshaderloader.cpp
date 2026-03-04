@@ -43,7 +43,9 @@ namespace Render {
 
         std::string entrypoint = "main";
         if (object) {
+#ifndef NDEBUG
             entrypoint = object->entrypoint();
+#endif
             co_await ShaderCache::generate(p, object, "HLSL", ShaderType::VertexShader);
         }
 

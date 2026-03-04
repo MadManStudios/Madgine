@@ -7,8 +7,6 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-
 #include "directx12rendercontext.h"
 
 RESOURCELOADER(Engine::Render::DirectX12PixelShaderLoader);
@@ -42,7 +40,9 @@ namespace Render {
 
         std::string entrypoint = "main";
         if (object) {
+#ifndef NDEBUG
             entrypoint = object->entrypoint();
+#endif
             co_await ShaderCache::generate(p, object, "HLSL", ShaderType::PixelShader);
         }
 

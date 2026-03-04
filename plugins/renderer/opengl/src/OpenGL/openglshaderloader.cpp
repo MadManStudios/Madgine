@@ -49,9 +49,7 @@ namespace Render {
     {
         const Filesystem::Path &p = info.resource()->path();
 
-        std::string entrypoint = "main";
         if (object) {
-            entrypoint = object->entrypoint();
             co_await ShaderCache::generate(p, object, TARGET, type);
         }
 
