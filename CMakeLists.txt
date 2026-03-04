@@ -5,6 +5,7 @@ cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0011 NEW)
 cmake_policy(SET CMP0049 NEW)
 cmake_policy(SET CMP0070 NEW)
+cmake_policy(SET CMP0091 NEW)
 
 if (NOT CXX_STANDARD_OVERRIDE)
 	set(CMAKE_CXX_STANDARD 20 CACHE INTERNAL "")
