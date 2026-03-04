@@ -10,6 +10,7 @@
 #include "Modules/threading/awaitables/awaitablesender.h"
 
 #include "Madgine/cli/parameter.h"
+#include "Madgine/root/root.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
@@ -42,13 +43,17 @@ namespace Render {
             std::vector<std::string> commandLine = {
                 p,
                 path.parentPath().str(),
-                "-g",
                 "-" + std::string { target },
                 "-T",
                 type == ShaderType::VertexShader ? "vs_6_2" : "ps_6_2",
                 "-E",
                 object->entrypoint()
             };
+
+            if (Root::Root::getSingleton().debug()) {
+                commandLine.push_back("-g");
+            }
+
             for (const std::string &include : object->metadata().mIncludePaths) {
                 commandLine.push_back("-I");
                 commandLine.push_back(include);

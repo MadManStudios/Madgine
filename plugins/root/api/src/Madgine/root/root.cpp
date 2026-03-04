@@ -29,6 +29,7 @@ namespace Root {
 #endif
 
     CLI::Parameter<bool> toolModeParameter { { "--toolMode", "-t" }, false, "If set, no application will be started. Only the root will be initialized and then immediately shutdown again." };
+    CLI::Parameter<bool> debugParameter { { "--debug", "-g" }, false, "Marks the build as a debug build in tool mode." };
     CLI::Parameter<Engine::Log::MessageType> logLevel { { "--logLevel", "-l" }, Engine::Log::MessageType::DEBUG_TYPE, "Specify log-level." };
     CLI::Parameter<Filesystem::Path> logFile { { "--logFile" }, "out.log", "If set, the log output will be written to the specified path" };
 
@@ -104,6 +105,19 @@ namespace Root {
     bool Root::toolMode() const
     {
         return toolModeParameter;
+    }
+
+    bool Root::debug() const
+    {
+        if (toolMode()) {
+            return debugParameter;
+        } else {
+#ifndef NDEBUG
+            return true;
+#else
+            return false;
+#endif
+        }
     }
 
     Threading::Task<void> Root::updateAsyncIO()

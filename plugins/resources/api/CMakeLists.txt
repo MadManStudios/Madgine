@@ -35,6 +35,7 @@ if (MADGINE_CONFIGURATION)
 	add_custom_target(bake_resource_lists
 		COMMAND $<TARGET_FILE:MadgineTooling>
 					-t
+					$<IF:$<CONFIG:DEBUG>,-g,>
 					-npc
 					-lp ${MADGINE_CONFIGURATION}/plugins.ini
 					--bake ${local_lists}

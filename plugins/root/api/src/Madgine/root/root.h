@@ -30,6 +30,7 @@ namespace Root {
         static Root &getSingleton();
 
         bool toolMode() const;
+        bool debug() const;
 
     protected:
         Threading::Task<void> updateAsyncIO();
