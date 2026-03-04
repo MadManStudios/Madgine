@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpd4k2hylx.js
+// include: /tmp/tmpikchtlt8.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -213,7 +213,7 @@ Module['FS_createPath']("/", "shadercache", true, true);
 
   })();
 
-// end include: /tmp/tmpd4k2hylx.js
+// end include: /tmp/tmpikchtlt8.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 /**
@@ -8360,22 +8360,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1363240: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1363286: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1363338: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1363454: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1363525: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1363596: () => { document.body.style.cursor = 'default'; },  
- 1363636: () => { document.body.style.cursor = 'text'; },  
- 1363673: () => { document.body.style.cursor = 'move'; },  
- 1363710: () => { document.body.style.cursor = 'ns-resize'; },  
- 1363752: () => { document.body.style.cursor = 'ew-resize'; },  
- 1363794: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1363838: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1363882: () => { document.body.style.cursor = 'grab'; },  
- 1363919: () => { document.body.style.cursor = 'not-allowed'; },  
- 1363963: () => { Module.input.focus(); },  
- 1363985: () => { Module.canvas.focus(); }
+  1363288: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 1363334: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 1363386: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 1363502: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 1363573: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 1363644: () => { document.body.style.cursor = 'default'; },  
+ 1363684: () => { document.body.style.cursor = 'text'; },  
+ 1363721: () => { document.body.style.cursor = 'move'; },  
+ 1363758: () => { document.body.style.cursor = 'ns-resize'; },  
+ 1363800: () => { document.body.style.cursor = 'ew-resize'; },  
+ 1363842: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 1363886: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 1363930: () => { document.body.style.cursor = 'grab'; },  
+ 1363967: () => { document.body.style.cursor = 'not-allowed'; },  
+ 1364011: () => { Module.input.focus(); },  
+ 1364033: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
