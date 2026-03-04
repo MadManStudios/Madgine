@@ -111,6 +111,11 @@ namespace Threading {
         mWorkGroup.stop();
     }
 
+    Execution::StopToken TaskQueue::stopToken()
+    {
+        return mWorkGroup.stopToken();
+    }
+
     void TaskQueue::queueHandle(TaskHandle task, bool resume, TaskQualifiers qualifiers)
     {
         queueInternal({ std::move(task), std::move(qualifiers) }, resume);

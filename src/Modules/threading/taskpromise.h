@@ -84,7 +84,7 @@ namespace Threading {
             mCurrentSuspensionPoint = Debug::StackTrace<1>::getCurrent(1);
 #endif
             if constexpr (Execution::Sender<std::remove_reference_t<T>>) {
-                return TaskAwaitableSender<T> { std::forward<T>(awaitable) };
+                return TaskAwaitableSender<T> { std::forward<T>(awaitable), stopToken() };
             } else {
                 return std::forward<T>(awaitable);
             }
@@ -92,6 +92,7 @@ namespace Threading {
 
         void setQueue(TaskQueue *queue);
         TaskQueue *queue() const;
+        Execution::StopToken stopToken();
 
         bool immediate() const;
 

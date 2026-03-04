@@ -2,6 +2,7 @@
 
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/sender.h"
+#include "Generic/execution/stoppable.h"
 #include "Generic/execution/storage.h"
 
 namespace Engine {
@@ -30,16 +31,22 @@ namespace Threading {
             mState->set_error(std::forward<R>(result)...);
         }
 
+        friend auto tag_invoke(Execution::get_stop_token_t, TaskAwaitableReceiver &rec)
+        {
+            return rec.mStopToken;
+        }
+
         TaskAwaitableSender<Sender> *mState;
+        Execution::StopToken mStopToken;
     };
 
     template <typename Sender>
     struct TaskAwaitableSender {
 
-        using S = Execution::connect_result_t<Sender, TaskAwaitableReceiver<Sender>>;
+        using S = Execution::connect_result_t<Execution::stoppable_t::sender<Sender>, TaskAwaitableReceiver<Sender>>;
 
-        TaskAwaitableSender(Sender &&sender)
-            : mState(Execution::connect(std::forward<Sender>(sender), TaskAwaitableReceiver<Sender> { {}, this }))
+        TaskAwaitableSender(Sender &&sender, Execution::StopToken stopToken)
+            : mState(Execution::connect(std::forward<Sender>(sender) | Execution::stoppable, TaskAwaitableReceiver<Sender> { {}, this, stopToken }))
         {
         }
 

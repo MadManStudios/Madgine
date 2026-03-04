@@ -125,6 +125,11 @@ namespace Process {
         }
     }
 
+    void ProcessState::stop() 
+    {
+        throw 0;
+    }
+
     void checkAsyncProcessCompletion()
     {
         std::unique_lock lock { sMutex };

@@ -22,6 +22,11 @@ namespace Execution {
             TupleUnpacker::invokeExpand(std::forward<F>(mF), *this, std::move(mArgs));
         }
 
+        void stop()
+        {
+
+        }
+
         F mF;
         Tuple mArgs;
     };

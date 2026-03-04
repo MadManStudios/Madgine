@@ -91,8 +91,15 @@ namespace Threading {
 
     void WorkGroup::stop()
     {
-        if (mState.load() == WorkGroupState::INITIALIZING || mState.load() == WorkGroupState::RUNNING)
+        if (mState.load() == WorkGroupState::INITIALIZING || mState.load() == WorkGroupState::RUNNING) {
             setState(WorkGroupState::STOPPING);
+            mStopSource.request_stop();
+        }
+    }
+
+    Execution::StopToken WorkGroup::stopToken()
+    {
+        return mStopSource.get_token();
     }
 
     void WorkGroup::addThreadInitializer(std::function<void()> &&task)

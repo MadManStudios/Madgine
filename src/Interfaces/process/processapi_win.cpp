@@ -122,6 +122,11 @@ namespace Process {
         assert(result);
     }
 
+    void ProcessState::stop()
+    {
+        throw 0;
+    }
+
     void checkAsyncProcessCompletion()
     {        
     }

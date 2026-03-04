@@ -68,6 +68,7 @@ namespace Threading {
 
         bool running() const;
         void stop();
+        Execution::StopToken stopToken();
 
         bool wantsMainThread() const;
 

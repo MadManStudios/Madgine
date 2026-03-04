@@ -40,6 +40,11 @@ namespace Filesystem {
             set_value(std::vector<unsigned char> { file.iterator(), file.end() });
     }
 
+    void AsyncFileReadState::stop()
+    {
+
+    }
+
 }
 }
 

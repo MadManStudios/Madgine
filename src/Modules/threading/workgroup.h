@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/execution/stop_source.h"
+
 namespace Engine {
 namespace Threading {
 
@@ -22,6 +24,7 @@ namespace Threading {
         void update();
 
         void stop();
+        Execution::StopToken stopToken();
 
 #if ENABLE_THREADING
         template <typename F, typename... Args>
@@ -128,9 +131,12 @@ namespace Threading {
 
         std::atomic<WorkGroupState> mState;
 
+        Execution::StopSource mStopSource;
+
 #ifndef NDEBUG
         std::chrono::steady_clock::time_point mStopTimepoint;
 #endif
     };
+
 }
 }

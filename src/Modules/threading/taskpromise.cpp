@@ -41,6 +41,11 @@ namespace Threading {
         return mQueue;
     }
 
+    Execution::StopToken TaskPromiseBase::stopToken()
+    {
+        return mQueue->stopToken();
+    }
+
     bool TaskPromiseBase::immediate() const
     {
         return mImmediate;

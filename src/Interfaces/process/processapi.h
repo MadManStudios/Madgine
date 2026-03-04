@@ -20,6 +20,7 @@ namespace Process {
         ProcessState &operator=(ProcessState &&) = delete;
 
         void start();
+        void stop();
 
         std::unique_ptr<ProcessAuxiliaryData> mData;
 

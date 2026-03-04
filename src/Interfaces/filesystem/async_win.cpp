@@ -165,6 +165,12 @@ namespace Filesystem {
         };
     }
 
+    void AsyncFileReadState::stop()
+    {
+        bool result = CancelIo(mData->mHandle);
+        assert(result);
+    }
+
 }
 }
 

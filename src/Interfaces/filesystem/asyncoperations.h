@@ -24,6 +24,7 @@ namespace Filesystem {
         AsyncFileReadState &operator=(AsyncFileReadState &&) = delete;
 
         void start();
+        void stop();
 
         Path mPath;
 
