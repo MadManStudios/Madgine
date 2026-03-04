@@ -133,6 +133,15 @@ namespace Threading {
         }
 #endif
 
+#ifndef NDEBUG
+        if (mState.load() != WorkGroupState::INITIALIZING && mState.load() != WorkGroupState::RUNNING && std::chrono::steady_clock::now() - mStopTimepoint > 5s) {
+            for (TaskQueue *queue : mTaskQueues) {
+                queue->reportStuckPromises();
+            }
+            std::abort();
+        }
+#endif
+
         if (mState.load() != WorkGroupState::RUNNING) {
             for (TaskQueue *queue : mTaskQueues)
                 if (!queue->idle())
@@ -207,6 +216,9 @@ namespace Threading {
 #if !EMSCRIPTEN
         for (TaskQueue *queue : mTaskQueues)
             queue->notify();
+#endif
+#ifndef NDEBUG
+        mStopTimepoint = std::chrono::steady_clock::now();
 #endif
     }
 

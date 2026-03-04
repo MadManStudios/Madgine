@@ -116,14 +116,23 @@ namespace Threading {
         queueInternal({ std::move(task), std::move(qualifiers) }, resume);
     }
 
-    void TaskQueue::increaseTaskInFlightCount()
+    void TaskQueue::registerTaskInFlight(TaskPromiseBase *promise)
     {
         ++mTaskInFlightCount;
+#ifndef NDEBUG
+        std::unique_lock lock { mPromiseMutex };
+        mPromises.push_back(promise);
+#endif
     }
 
-    void TaskQueue::decreaseTaskInFlightCount()
+    void TaskQueue::unregisterTaskInFlight(TaskPromiseBase *promise)
     {
         --mTaskInFlightCount;
+#ifndef NDEBUG
+        std::unique_lock lock { mPromiseMutex };
+        size_t count = std::erase(mPromises, promise);
+        assert(count == 1);
+#endif
     }
 
     size_t TaskQueue::taskInFlightCount() const
@@ -224,6 +233,16 @@ namespace Threading {
 
         mCleanupSteps.emplace_back(std::move(finalize));
     }
+
+#ifndef NDEBUG
+    void TaskQueue::reportStuckPromises() {
+        std::unique_lock lock { mPromiseMutex };
+        for (TaskPromiseBase* promise : mPromises) {
+            Debug::FullStackTrace trace = promise->getSuspensionPoint();
+            LOG_FATAL("Task '" << trace[0].mFunction << "' stuck at \n " << trace[0].mFile << ":" << trace[0].mLineNr);
+        }
+    }
+#endif
 
 }
 }

@@ -9,6 +9,10 @@
 #    include "../debug/tasktracking/tasktracker.h"
 #endif
 
+#ifndef NDEBUG
+#    include "Interfaces/debug/stacktrace.h"
+#endif
+
 namespace Engine {
 namespace Threading {
 
@@ -76,6 +80,9 @@ namespace Threading {
         template <typename T>
         decltype(auto) await_transform(T &&awaitable)
         {
+#ifndef NDEBUG
+            mCurrentSuspensionPoint = Debug::StackTrace<1>::getCurrent(1);
+#endif
             if constexpr (Execution::Sender<std::remove_reference_t<T>>) {
                 return TaskAwaitableSender<T> { std::forward<T>(awaitable) };
             } else {
@@ -96,6 +103,13 @@ namespace Threading {
     private:
         TaskQueue *mQueue = nullptr;
         bool mImmediate;
+
+#ifndef NDEBUG
+        Debug::StackTrace<1> mCurrentSuspensionPoint;
+
+    public:
+        Debug::FullStackTrace getSuspensionPoint();
+#endif
     };
 
     template <typename T>

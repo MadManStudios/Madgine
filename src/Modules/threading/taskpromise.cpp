@@ -19,7 +19,7 @@ namespace Threading {
     TaskPromiseBase::~TaskPromiseBase()
     {
         if (mQueue) {
-            mQueue->decreaseTaskInFlightCount();
+            mQueue->unregisterTaskInFlight(this);
 #if ENABLE_TASK_TRACKING
             Debug::Tasks::onDestroy(*this);
 #endif
@@ -33,7 +33,7 @@ namespace Threading {
         assert(queue);
         assert(!mQueue);
         mQueue = queue;
-        queue->increaseTaskInFlightCount();
+        queue->registerTaskInFlight(this);
     }
 
     TaskQueue *TaskPromiseBase::queue() const
@@ -52,6 +52,13 @@ namespace Threading {
         Debug::Tasks::onAssign(std::coroutine_handle<TaskSuspendablePromiseTypeBase>::from_promise(*mPromise), mPromise->queue(), Debug::StackTrace<1>::getCurrent(1));
 #endif
     }
+
+#ifndef NDEBUG
+    Debug::FullStackTrace TaskPromiseBase::getSuspensionPoint()
+    {
+        return mCurrentSuspensionPoint.calculateReadable();
+    }
+#endif
 
 }
 }

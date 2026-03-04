@@ -58,8 +58,8 @@ namespace Threading {
                 queueHandle(std::move(handle), false, std::move(qualifiers));
         }
 
-        void increaseTaskInFlightCount();
-        void decreaseTaskInFlightCount();
+        void registerTaskInFlight(TaskPromiseBase *promise);
+        void unregisterTaskInFlight(TaskPromiseBase *promise);
         size_t taskInFlightCount() const;
 
         bool idle() const;
@@ -132,6 +132,14 @@ namespace Threading {
 #endif
 
         mutable std::mutex mMutex;
+
+#ifndef NDEBUG
+        std::vector<TaskPromiseBase *> mPromises;
+        std::mutex mPromiseMutex;
+
+    public:
+        void reportStuckPromises();
+#endif
     };
 
 }

@@ -127,6 +127,10 @@ namespace Threading {
         std::vector<TaskQueue *> mTaskQueues;
 
         std::atomic<WorkGroupState> mState;
+
+#ifndef NDEBUG
+        std::chrono::steady_clock::time_point mStopTimepoint;
+#endif
     };
 }
 }
