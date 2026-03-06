@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Generic/execution/algorithm.h"
-#include "Generic/execution/sender.h"
+#include "Generic/execution/make_sender.h"
 #include "Generic/execution/stoppable.h"
 #include "Generic/execution/storage.h"
 
