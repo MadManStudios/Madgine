@@ -179,7 +179,7 @@ namespace Behavior {
             T mValue;
         };
 
-        template <Execution::Sender Inner, typename T>
+        template <Execution::AnySender Inner, typename T>
         struct sender : Execution::algorithm_sender<Inner> {
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, sender &&sender, Rec &&rec)
@@ -190,7 +190,7 @@ namespace Behavior {
             T mValue;
         };
 
-        template <Execution::Sender Sender, typename T>
+        template <Execution::AnySender Sender, typename T>
         friend auto tag_invoke(with_named_t, Sender &&inner, T &&value)
         {
             return sender<Sender, T> { { {}, std::forward<Sender>(inner) }, std::forward<T>(value) };

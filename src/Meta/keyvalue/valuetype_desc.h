@@ -368,7 +368,7 @@ constexpr ValueTypeIndex toValueTypeIndex()
             return ValueTypeEnum::KeyValueVirtualSequenceRangeValue;
         else
             return ValueTypeEnum::KeyValueVirtualAssociativeRangeValue;
-    } else if constexpr (Execution::Sender<T>) {
+    } else if constexpr (Execution::AnySender<T>) {
         return ValueTypeEnum::SenderValue;
     } else if constexpr (Pointer<T>) {
         if constexpr (std::is_function_v<std::remove_pointer_t<T>>)
@@ -398,7 +398,7 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
         return { { ValueTypeEnum::FlagsValue }, &T::Representation::sTable };
     } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
         return { { ValueTypeEnum::EnumValue }, &T::Representation::sTable };
-    } else if constexpr (Execution::Sender<T>) {
+    } else if constexpr (Execution::AnySender<T>) {
         return { { ValueTypeEnum::SenderValue }, nullptr };
     } else if constexpr (Execution::AnyBinding<T>) {
         return { { ValueTypeEnum::BindingValue }, &table<std::decay_t<typename T::type>> };

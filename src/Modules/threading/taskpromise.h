@@ -83,7 +83,7 @@ namespace Threading {
 #ifndef NDEBUG
             mCurrentSuspensionPoint = Debug::StackTrace<1>::getCurrent(1);
 #endif
-            if constexpr (Execution::Sender<std::remove_reference_t<T>>) {
+            if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
                 return TaskAwaitableSender<T> { std::forward<T>(awaitable), stopToken() };
             } else {
                 return std::forward<T>(awaitable);

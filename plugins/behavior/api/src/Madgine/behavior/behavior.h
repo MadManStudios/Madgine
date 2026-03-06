@@ -4,10 +4,6 @@
 #include "Generic/delayedconstruct.h"
 #include "Generic/functor.h"
 
-#include "Interfaces/debug/stacktrace.h"
-
-#include "Madgine/debug/debuggablesender.h"
-
 #include "behaviorcoroutine.h"
 #include "behaviorerror.h"
 #include "behaviorreceiver.h"
@@ -23,7 +19,7 @@ namespace Behavior {
         Behavior() = default;
         Behavior(StatePtr state);
 
-        template <Execution::Sender Sender>
+        template <Execution::AnySender Sender>
         Behavior(Sender &&sender)
             : mState(new SenderBehaviorState<Sender>(std::forward<Sender>(sender)))
         {
@@ -80,12 +76,7 @@ namespace Behavior {
         StatePtr mState;
     };
 
-    template <typename Sender>
-    struct BehaviorAwaitableSender;
-    template <typename Binding>
-    struct BehaviorAwaitableBinding;
-
-    template <Execution::Sender Sender>
+    template <Execution::AnySender Sender>
     struct SenderBehaviorState : BehaviorStateBase {
 
         using State = Execution::connect_result_t<Sender, BehaviorReceiver &>;

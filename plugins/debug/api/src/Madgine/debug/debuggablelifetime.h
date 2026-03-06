@@ -44,7 +44,7 @@ namespace Debug {
 
         using DebuggableLifetimeBase::DebuggableLifetimeBase;
 
-        template <Execution::Sender Sender>
+        template <Execution::AnySender Sender>
         void attach(Sender &&sender)
         {
             mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location(createContext()));

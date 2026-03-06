@@ -89,7 +89,7 @@ namespace Behavior {
         template <typename T>
         decltype(auto) await_transform(T &&awaitable)
         {
-            if constexpr (Execution::Sender<std::remove_reference_t<T>>) {
+            if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
                 return CoroutineAwaiterGuard<BehaviorAwaitableSender<T>> { std::forward<T>(awaitable), this };
             } else if constexpr (Execution::AnyBinding<std::remove_reference_t<T>>) {
                 return CoroutineAwaiterGuard<BehaviorAwaitableBinding<T>> { std::forward<T>(awaitable) };

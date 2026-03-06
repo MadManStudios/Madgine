@@ -97,7 +97,7 @@ namespace Execution {
             assert(!mPtr.alive());
         }
 
-        template <Sender Sender>
+        template <AnySender Sender>
         void attach(Sender &&sender)
         {
             if (mPtr.alive()) {

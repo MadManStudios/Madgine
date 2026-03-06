@@ -15,10 +15,10 @@ namespace Execution {
 
     struct stoppable_t {
 
-        template <Sender Sender, typename Rec>
+        template <AnySender Sender, typename Rec>
         struct state;
 
-        template <Sender Sender, typename Rec>
+        template <AnySender Sender, typename Rec>
         struct receiver {
             using inner = Rec;
 
@@ -49,7 +49,7 @@ namespace Execution {
             state<Sender, Rec> *mState;
         };
 
-        template <Sender Sender, typename Rec>
+        template <AnySender Sender, typename Rec>
         struct state : StopCallback {
 
             using InnerState = connect_result_t<Sender, receiver<Sender, Rec>>;
@@ -131,7 +131,7 @@ namespace Execution {
             InnerState mState;
         };
 
-        template <Sender Sender>
+        template <AnySender Sender>
         struct sender : algorithm_sender<Sender> {
 
             template <typename Rec>
@@ -141,7 +141,7 @@ namespace Execution {
             }
         };
 
-        template <Sender Sender>
+        template <AnySender Sender>
         friend auto tag_invoke(stoppable_t, Sender &&inner)
         {
             return sender<Sender> { { {}, std::forward<Sender>(inner) } };

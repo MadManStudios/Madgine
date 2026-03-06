@@ -143,7 +143,7 @@ namespace Execution {
             }
         }
 
-        template <Sender Sender, typename Rec, typename T>
+        template <AnySender Sender, typename Rec, typename T>
         struct state : algorithm_state<Sender, receiver<Rec, T>> {
 
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
@@ -159,7 +159,7 @@ namespace Execution {
             }
         };
 
-        template <Sender Sender, typename T>
+        template <AnySender Sender, typename T>
         struct sender : algorithm_sender<Sender> {
 
             template <typename... V>
@@ -183,7 +183,7 @@ namespace Execution {
             T mTransform;
         };
 
-        template <Sender Sender, typename T>
+        template <AnySender Sender, typename T>
         friend auto tag_invoke(then_t, Sender &&inner, T &&transform)
         {
             return sender<Sender, T> { { {}, std::forward<Sender>(inner) }, std::forward<T>(transform) };
@@ -244,7 +244,7 @@ namespace Execution {
             T mFunc;
         };
 
-        template <Sender Sender, typename T>
+        template <AnySender Sender, typename T>
         struct sender : algorithm_sender<Sender> {
 
             template <typename Rec>
@@ -256,7 +256,7 @@ namespace Execution {
             T mFunc;
         };
 
-        template <Sender Sender, typename T>
+        template <AnySender Sender, typename T>
         friend auto tag_invoke(after_t, Sender &&inner, T &&func)
         {
             return sender<Sender, T> { { {}, std::forward<Sender>(inner) }, std::forward<T>(func) };
@@ -1400,7 +1400,7 @@ namespace Execution {
             ManualLifetime<inner_state> mInnerState;
         };
 
-        template <Sender Sender, typename F>
+        template <AnySender Sender, typename F>
         struct sender : algorithm_sender<Sender> {
             template <typename... V>
             using helper = std::invoke_result_t<F, V...>;
@@ -1418,7 +1418,7 @@ namespace Execution {
             F mF;
         };
 
-        template <Sender Sender, typename F>
+        template <AnySender Sender, typename F>
         friend auto tag_invoke(let_value_t, Sender &&inner, F &&f)
         {
             return sender<Sender, F> { { {}, std::forward<Sender>(inner) }, std::forward<F>(f) };
@@ -1836,7 +1836,7 @@ namespace Execution {
             std::atomic_flag mFinished;
         };
 
-        template <Sender Inner, Sender Trigger>
+        template <AnySender Inner, AnySender Trigger>
         struct sender : algorithm_sender<Inner> {
 
             template <template <typename...> typename Tuple>
@@ -1851,13 +1851,13 @@ namespace Execution {
             Trigger mTrigger;
         };
 
-        template <Sender Inner, Sender Trigger>
+        template <AnySender Inner, AnySender Trigger>
         friend auto tag_invoke(stop_when_t, Inner &&inner, Trigger &&trigger)
         {
             return sender<Inner, Trigger> { { {}, std::forward<Inner>(inner) }, std::forward<Trigger>(trigger) };
         }
 
-        template <Sender Inner, Sender Trigger>
+        template <AnySender Inner, AnySender Trigger>
             requires tag_invocable<stop_when_t, Inner, Trigger>
         auto operator()(Inner &&sender, Trigger &&trigger) const
             noexcept(is_nothrow_tag_invocable_v<stop_when_t, Inner, Trigger>)
@@ -1866,7 +1866,7 @@ namespace Execution {
             return tag_invoke(*this, std::forward<Inner>(sender), std::forward<Trigger>(trigger));
         }
 
-        template <Sender Trigger>
+        template <AnySender Trigger>
         auto operator()(Trigger &&trigger) const
         {
             return pipable_from_right(*this, std::forward<Trigger>(trigger));

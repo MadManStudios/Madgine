@@ -130,7 +130,7 @@ namespace Execution {
             Debug::BaseLocation &mParent;
         };
 
-        template <Sender Sender>
+        template <AnySender Sender>
         struct sender : algorithm_sender<Sender> {
 
             template <typename Rec>
@@ -142,13 +142,13 @@ namespace Execution {
             Debug::BaseLocation &mParent;
         };
 
-        template <Sender Sender>
+        template <AnySender Sender>
         friend auto tag_invoke(with_debug_location_t, Sender &&inner, Debug::BaseLocation &parent)
         {
             return sender<Sender> { { {}, std::forward<Sender>(inner) }, parent };
         }
 
-        template <Sender Sender>
+        template <AnySender Sender>
             requires tag_invocable<with_debug_location_t, Sender, Debug::BaseLocation &>
         auto operator()(Sender &&sender, Debug::BaseLocation &parent) const
             noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender, Debug::BaseLocation &>)
@@ -301,7 +301,7 @@ namespace Execution {
             Debug::Continuation mContinuation;
         };
 
-        template <Sender Sender>
+        template <AnySender Sender>
         struct sender : algorithm_sender<Sender> {
 
             template <is_debuggable Rec>

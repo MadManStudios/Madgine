@@ -45,7 +45,7 @@ struct KeyValueSender {
     template <template <typename...> typename Tuple>
     using value_types = Tuple<>;
 
-    template <Execution::Sender Sender>
+    template <Execution::AnySender Sender>
         requires DecayedNoneOf<Sender, KeyValueSender>
     KeyValueSender(Sender &&sender)
         : mState(std::make_shared<KeyValueSenderState<Sender>>(std::forward<Sender>(sender)))

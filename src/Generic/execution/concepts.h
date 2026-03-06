@@ -6,7 +6,7 @@ namespace Engine {
 namespace Execution {
 
     template <typename T>
-    concept Sender = requires {
+    concept AnySender = requires {
         typename std::decay_t<T>::is_sender;
     };
 
@@ -216,7 +216,7 @@ namespace Execution {
         using is_sender = void;
     };
 
-    template <Sender Sender>
+    template <AnySender Sender>
     struct algorithm_sender : base_sender {
         using result_type = typename std::decay_t<Sender>::result_type;
         template <template <typename...> typename Tuple>

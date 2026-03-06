@@ -177,7 +177,7 @@ decltype(auto) convert_ValueType(T &&t)
         return FlagsHolder { std::forward<T>(t) };
     } else if constexpr (Execution::AnyBinding<std::decay_t<T>>) {
         return KeyValueBinding { std::forward<T>(t) };
-    } else if constexpr (Execution::Sender<std::decay_t<T>>) {
+    } else if constexpr (Execution::AnySender<std::decay_t<T>>) {
         return KeyValueSender { std::forward<T>(t) };
     } else if constexpr (InstanceOfA<std::decay_t<T>, TypedBoundApiFunction>) {
         return BoundApiFunction { std::forward<T>(t) };

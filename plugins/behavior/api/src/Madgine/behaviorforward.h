@@ -31,7 +31,7 @@ namespace Behavior {
     template <typename Binding>
     struct BehaviorAwaitableBinding;
 
-    template <Execution::Sender Sender>
+    template <Execution::AnySender Sender>
     struct SenderBehaviorState;
 }
 }
