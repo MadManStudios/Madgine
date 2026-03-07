@@ -2,6 +2,8 @@
 
 #include "Interfaces/filesystem/async.h"
 
+#include "Generic/execution/sender.h"
+
 namespace Engine {
 namespace Resources {
 
@@ -19,8 +21,7 @@ namespace Resources {
         std::string readAsText() const;
         std::vector<unsigned char> readAsBlob() const;
 
-        void readAsyncImpl(Execution::VirtualReceiverBase<GenericResult, ByteBuffer> &rec) const;
-        ASYNC_STUB(readAsync, readAsyncImpl, Execution::make_simple_virtual_sender<GenericResult, ByteBuffer>)
+        Execution::Sender<GenericResult, ByteBuffer> readAsync() const;
 
     private:
         std::string mName;

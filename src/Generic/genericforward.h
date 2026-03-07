@@ -61,6 +61,9 @@ enum class AccessMode {
 
 namespace Execution {
 
+    template <typename R, typename... V>
+    struct Sender;
+
     template <auto... cpos>
     struct Lifetime;
 

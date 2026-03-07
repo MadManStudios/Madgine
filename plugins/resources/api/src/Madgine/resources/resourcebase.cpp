@@ -62,18 +62,17 @@ namespace Resources {
         return std::vector<unsigned char> { buffer.iterator(), buffer.end() };
     }
 
-    void ResourceBase::readAsyncImpl(Execution::VirtualReceiverBase<GenericResult, ByteBuffer> &rec) const
+    Execution::Sender<GenericResult, ByteBuffer> ResourceBase::readAsync() const
     {
         std::string_view protocol = mPath.protocol();
 
         if (protocol == "http" || protocol == "https" || protocol == "ftp") {
-            Execution::detach_with_receiver(FetchSender<std::vector<std::byte>>(mPath, { mPath }), rec);
-            return;
+            co_return (co_await FetchSender<std::vector<std::byte>>(mPath, { mPath })).get();
         } else if (!protocol.empty()) {
             LOG_WARNING("Unrecognized file protocol '" << protocol << "'");
         }
 
-        Execution::detach_with_receiver(Filesystem::readFileAsync(mPath), rec);
+        co_return (co_await Filesystem::readFileAsync(mPath)).get();
     }
 
 }
