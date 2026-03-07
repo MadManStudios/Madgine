@@ -22,11 +22,6 @@ namespace Behavior {
             interpreter.branch(receiver, pin, location);
         }
 
-        CodeGen::Statement NodeCodegenHandle::read(uint32_t dataInIndex, uint32_t group)
-        {
-            return mGenerator.read(mNode->dataInSource(dataInIndex, group));
-        }
-
     }
 }
 }

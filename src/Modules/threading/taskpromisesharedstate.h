@@ -120,7 +120,7 @@ namespace Threading {
     struct TaskFutureAwaitable;
 
     template <typename T>
-    struct TaskFutureAwaitableReceiver : Execution::execution_receiver<> {
+    struct TaskFutureAwaitableReceiver {
 
         template <typename... V>
         void set_value(V &&...value)
@@ -162,7 +162,7 @@ namespace Threading {
         bool await_suspend(TaskHandle task)
         {
             mTask = std::move(task);
-            construct(mState, DelayedConstruct<S> { [this]() { return Execution::connect(mPromiseState->sender(), TaskFutureAwaitableReceiver<T> { {}, this }); } });
+            construct(mState, DelayedConstruct<S> { [this]() { return Execution::connect(mPromiseState->sender(), TaskFutureAwaitableReceiver<T> { this }); } });
             mState->start();
 
             if (mFlag.test_and_set()) {

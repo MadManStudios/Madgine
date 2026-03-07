@@ -12,7 +12,7 @@ namespace Execution {
             virtual ~state_base() = default;
         };
 
-        struct receiver : execution_receiver<> {
+        struct receiver {
 
             template <typename... V>
             void set_value(V &&...)
@@ -35,7 +35,7 @@ namespace Execution {
         template <typename Sender>
         struct state : state_base {
             state(Sender &&sender)
-                : mState(connect(std::forward<Sender>(sender), receiver { {}, this }))
+                : mState(connect(std::forward<Sender>(sender), receiver { this }))
             {
             }
             void start()
@@ -61,7 +61,7 @@ namespace Execution {
         struct state;
 
         template <typename Sender, typename Rec>
-        struct receiver : execution_receiver<> {
+        struct receiver {
 
             template <typename... V>
             void set_value(V &&...v)
@@ -96,7 +96,7 @@ namespace Execution {
         template <typename Sender, typename Rec>
         struct state {
             state(Sender &&sender, Rec &&rec)
-                : mState(connect(std::forward<Sender>(sender), receiver<Sender, Rec> { {}, std::forward<Rec>(rec), this }))
+                : mState(connect(std::forward<Sender>(sender), receiver<Sender, Rec> { std::forward<Rec>(rec), this }))
             {
             }
             void start()
@@ -122,7 +122,7 @@ namespace Execution {
         struct state;
 
         template <typename Sender>
-        struct receiver : execution_receiver<> {
+        struct receiver {
 
             template <typename... V>
             void set_value(V &&...v)
@@ -148,7 +148,7 @@ namespace Execution {
         template <typename Sender>
         struct state {
             state(Sender &&sender)
-                : mState(connect(std::forward<Sender>(sender), receiver<Sender> { {}, this }))
+                : mState(connect(std::forward<Sender>(sender), receiver<Sender> { this }))
             {
             }
             void start()
@@ -179,7 +179,7 @@ namespace Execution {
         struct state;
 
         template <typename Sender>
-        struct receiver : execution_receiver<> {
+        struct receiver {
 
             template <typename... V>
             void set_value(V &&...v)

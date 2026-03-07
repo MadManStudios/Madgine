@@ -11,7 +11,6 @@
 
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/codegen/codegen_cpp.h"
-#include "Madgine/codegen/fromsender.h"
 #include "Madgine/nodegraph/nodebase.h"
 #include "Madgine/nodegraph/nodecollector.h"
 #include "Madgine/nodegraph/nodeinterpreter.h"

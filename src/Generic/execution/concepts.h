@@ -96,10 +96,7 @@ namespace Execution {
     template <typename T>
     concept has_stop_token = !std::same_as<decltype(get_stop_token(std::declval<T &>())), unstoppable_token>;
 
-    struct CPU_context {
-    };
-
-    template <typename _Context = CPU_context>
+    template <typename _Context>
     struct execution_receiver : _Context {
         using Context = _Context;
 

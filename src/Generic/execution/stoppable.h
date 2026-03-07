@@ -1,7 +1,6 @@
 #pragma once
 
 #include "concepts.h"
-#include "connection.h"
 #include "stop_callback.h"
 
 namespace Engine {

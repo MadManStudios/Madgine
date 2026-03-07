@@ -264,7 +264,7 @@ namespace Execution {
         struct attach_state;
 
         template <typename Sender>
-        struct attach_receiver : execution_receiver<> {
+        struct attach_receiver {
 
             attach_receiver(attach_state<Sender> *state)
                 : mState(state)

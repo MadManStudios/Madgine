@@ -8,8 +8,6 @@
 
 #include "Meta/keyvalue/valuetype.h"
 
-#include "Madgine/codegen/fromsender.h"
-
 #include "../../nodecollector.h"
 #include "../../nodeexecution.h"
 #include "../../nodegraph.h"

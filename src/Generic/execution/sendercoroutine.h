@@ -107,7 +107,7 @@ namespace Execution {
         struct SenderAwaitableSender;
 
         template <typename Sender>
-        struct SenderAwaitableReceiver : Execution::execution_receiver<> {
+        struct SenderAwaitableReceiver {
 
             template <typename... V2>
             void set_value(V2 &&...value)
@@ -143,7 +143,7 @@ namespace Execution {
 
             static auto buildState(SenderAwaitableSender *self, Sender &&sender, CoroutineSenderStateBase *state)
             {
-                return Execution::connect(std::forward<Sender>(sender) | Execution::stoppable, SenderAwaitableReceiver<Sender> { {}, self, state });
+                return Execution::connect(std::forward<Sender>(sender) | Execution::stoppable, SenderAwaitableReceiver<Sender> { self, state });
             }
 
             using S = std::invoke_result_t<decltype(&SenderAwaitableSender::buildState), SenderAwaitableSender *, Sender, std::nullptr_t>;

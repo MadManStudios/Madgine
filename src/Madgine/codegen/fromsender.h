@@ -16,8 +16,6 @@ struct CodeGen_Context {
     size_t mRunningIndex = 0;
 };
 
-using codegen_receiver = Engine::Execution::execution_receiver<CodeGen_Context>;
-
 template <typename _Rec>
 struct codegen_base_state {
     using Rec = _Rec;

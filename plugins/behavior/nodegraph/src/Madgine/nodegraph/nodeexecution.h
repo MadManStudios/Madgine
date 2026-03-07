@@ -5,7 +5,6 @@
 #include "Generic/execution/execution.h"
 
 #include "Madgine/behavior/named.h"
-#include "Madgine/codegen/fromsender.h"
 
 #include "nodebase.h"
 #include "nodeinterpreter.h"
@@ -112,15 +111,6 @@ namespace Behavior {
         template <typename Node>
         NodeReceiverWrapper(NodeInterpretHandle<Node>) -> NodeReceiverWrapper<Node>;
 
-        struct MADGINE_NODEGRAPH_EXPORT NodeCodegenHandle : CodeGen::CodeGen_Context {
-            const NodeBase *mNode;
-            CodeGenerator &mGenerator;
-
-            CodeGen::Statement read(uint32_t dataInIndex, uint32_t group = 0);
-        };
-
-        using NodeCodegenReceiver = Execution::execution_receiver<NodeCodegenHandle>;
-
         template <uint32_t flowOutGroup, typename Rec>
         struct NodeState : VirtualBehaviorState<Rec> {
 
@@ -180,18 +170,6 @@ namespace Behavior {
                 return NodeState<flowOutGroup, Rec> { std::forward<Rec>(rec), sender.mFlowOutIndex };
             }
 
-            template <typename Rec>
-            friend auto tag_invoke(CodeGen::codegen_connect_t, NodeSender &&sender, Rec &&rec)
-            {
-                struct state : CodeGen::codegen_base_state<Rec> {
-                    auto generate()
-                    {
-                        return std::make_tuple(CodeGen::Constant<int> { 0 });
-                    }
-                };
-                return state { std::forward<Rec>(rec) };
-            }
-
             uint32_t mFlowOutIndex = 0;
         };
 
@@ -245,26 +223,6 @@ namespace Behavior {
             friend auto tag_invoke(Execution::connect_t, NodeReader &&reader, Rec &&rec)
             {
                 return state<Rec> { std::forward<Rec>(rec), reader.mBaseIndex };
-            }
-
-            template <typename Rec>
-            struct codegen_state : CodeGen::codegen_base_state<Rec> {
-                auto generate()
-                {
-                    return helper(std::index_sequence_for<T...> {});
-                }
-                template <size_t... I>
-                auto helper(std::index_sequence<I...>)
-                {
-                    return std::make_tuple(Execution::get_context(this->mRec).read(mIndex + I)...);
-                }
-                size_t mIndex;
-            };
-
-            template <typename Rec>
-            friend auto tag_invoke(CodeGen::codegen_connect_t, NodeReader &&reader, Rec &&rec)
-            {
-                return codegen_state<Rec> { std::forward<Rec>(rec), reader.mBaseIndex };
             }
 
             size_t mBaseIndex = 0;

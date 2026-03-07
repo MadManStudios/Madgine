@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/execution/algorithm.h"
-#include "Generic/execution/make_sender.h"
 #include "Generic/execution/stoppable.h"
 #include "Generic/execution/storage.h"
 
@@ -12,7 +11,7 @@ namespace Threading {
     struct TaskAwaitableSender;
 
     template <typename Sender>
-    struct TaskAwaitableReceiver : Execution::execution_receiver<> {
+    struct TaskAwaitableReceiver {
 
         template <typename... V>
         void set_value(V &&...value)
@@ -46,7 +45,7 @@ namespace Threading {
         using S = Execution::connect_result_t<Execution::stoppable_t::sender<Sender>, TaskAwaitableReceiver<Sender>>;
 
         TaskAwaitableSender(Sender &&sender, Execution::StopToken stopToken)
-            : mState(Execution::connect(std::forward<Sender>(sender) | Execution::stoppable, TaskAwaitableReceiver<Sender> { {}, this, stopToken }))
+            : mState(Execution::connect(std::forward<Sender>(sender) | Execution::stoppable, TaskAwaitableReceiver<Sender> { this, stopToken }))
         {
         }
 

@@ -15,7 +15,7 @@ namespace Behavior {
     struct BehaviorAwaitableSender;
 
     template <typename Sender>
-    struct BehaviorAwaitableReceiver : Execution::execution_receiver<> {
+    struct BehaviorAwaitableReceiver {
 
         template <typename... V>
         void set_value(V &&...value)
@@ -56,7 +56,7 @@ namespace Behavior {
 
         static auto buildState(BehaviorAwaitableSender *self, Sender &&sender, CoroutineBehaviorState *state)
         {
-            return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(state->mDebugLocation.mChild) | Execution::stoppable, BehaviorAwaitableReceiver<Sender> { {}, self, state });
+            return Execution::connect(std::forward<Sender>(sender) | Execution::with_debug_location(state->mDebugLocation.mChild) | Execution::stoppable, BehaviorAwaitableReceiver<Sender> { self, state });
         }
 
         using S = std::invoke_result_t<decltype(&BehaviorAwaitableSender::buildState), BehaviorAwaitableSender *, Sender, std::nullptr_t>;
