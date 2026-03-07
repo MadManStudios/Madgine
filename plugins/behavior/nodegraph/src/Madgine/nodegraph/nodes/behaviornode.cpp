@@ -25,54 +25,7 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        struct BehaviorInterpretReceiver {
-            void set_value(ArgumentList values)
-            {
-                mBehavior.reset();
-                mResult = std::move(values);
-                NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
-                Execution::get_debug_location(receiver)->stepOut(mLocation);
-                mReceiver.reset();
-                receiver.set_value();
-            }
-
-            void set_error(BehaviorError result)
-            {
-                mBehavior.reset();
-                NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
-                Execution::get_debug_location(receiver)->stepOut(mLocation);
-                mReceiver.reset();
-                receiver.set_error(std::move(result));
-            }
-
-            void set_done()
-            {
-                mBehavior.reset();
-                NodeReceiver<NodeBase> receiver = std::move(*mReceiver);
-                Execution::get_debug_location(receiver)->stepOut(mLocation);
-                mReceiver.reset();
-                receiver.set_done();
-            }
-
-            template <typename CPO, typename... Args>
-            friend auto tag_invoke(CPO f, BehaviorInterpretReceiver &rec, Args &&...args)
-                -> tag_invoke_result_t<CPO, NodeReceiver<NodeBase> &, Args...>
-            {
-                return f(*rec.mReceiver, std::forward<Args>(args)...);
-            }
-
-            friend Debug::SenderLocation *tag_invoke(Execution::get_debug_location_t, BehaviorInterpretReceiver &rec)
-            {
-                return &rec.mLocation;
-            }
-
-            std::optional<NodeReceiver<NodeBase>> mReceiver;
-            Behavior::StatePtr mBehavior;
-            ArgumentList mResult;
-            Debug::SenderLocation mLocation { [](CallableView<void(const Execution::StateDescriptor &)>) -> void { throw 0; } };
-        };
-
-        struct BehaviorInterpretData : NodeInterpreterData, Execution::VirtualState<BehaviorReceiver, BehaviorInterpretReceiver> {
+        struct BehaviorInterpretData : NodeInterpreterData, Execution::VirtualState<BehaviorReceiver, BehaviorInterpretData &> {
 
             static std::vector<Behavior> buildSubBehaviors(uint32_t count, const NodeInterpretHandle<BehaviorNode> &handle)
             {
@@ -84,7 +37,7 @@ namespace Behavior {
             }
 
             BehaviorInterpretData(BehaviorHandle type)
-                : Execution::VirtualState<BehaviorReceiver, BehaviorInterpretReceiver>(BehaviorInterpretReceiver {})
+                : Execution::VirtualState<BehaviorReceiver, BehaviorInterpretData &>(*this)
                 , mType(type)
             {
             }
@@ -93,15 +46,64 @@ namespace Behavior {
             {
                 NodeInterpretHandle<BehaviorNode> handle { { receiver.mInterpreter }, static_cast<const BehaviorNode &>(receiver.mNode) };
 
-                mRec.mReceiver.emplace(std::move(receiver));
+                construct(mState,
+                    std::move(receiver),
+                    mType.create(args, buildSubBehaviors(mType.subBehaviorCount(), handle)).connect(*this));
 
-                Execution::get_debug_location(*mRec.mReceiver)->stepInto(mRec.mLocation);
+                mState->mBehavior->start();
+            }
 
-                mRec.mBehavior = mType.create(args, buildSubBehaviors(mType.subBehaviorCount(), handle)).connect(*this);
-                mRec.mBehavior->start();
+            void set_value(ArgumentList values)
+            {
+                mResult = std::move(values);
+                NodeReceiver<NodeBase> receiver = std::move(mState->mReceiver);
+                destruct(mState);
+                receiver.set_value();
+            }
+
+            void set_error(BehaviorError result)
+            {
+                NodeReceiver<NodeBase> receiver = std::move(mState->mReceiver);
+                destruct(mState);
+                receiver.set_error(std::move(result));
+            }
+
+            void set_done()
+            {
+                NodeReceiver<NodeBase> receiver = std::move(mState->mReceiver);
+                destruct(mState);
+                receiver.set_done();
+            }
+
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, BehaviorInterpretData &rec, Args &&...args)
+                -> tag_invoke_result_t<CPO, NodeReceiver<NodeBase> &, Args...>
+            {
+                return f(rec.mState->mReceiver, std::forward<Args>(args)...);
+            }
+
+            friend Debug::SenderLocation *tag_invoke(Execution::get_debug_location_t, BehaviorInterpretData &rec)
+            {
+                return &rec.mState->mLocation;
             }
 
             BehaviorHandle mType;
+            ArgumentList mResult;
+
+            struct state {
+
+                state(NodeReceiver<NodeBase> receiver, Behavior::StatePtr behavior)
+                    : mReceiver(std::move(receiver))
+                    , mBehavior(std::move(behavior))
+                    , mLocation([](CallableView<void(const Execution::StateDescriptor &)>) -> void { throw 0; })
+                {
+                }
+
+                NodeReceiver<NodeBase> mReceiver;
+                Behavior::StatePtr mBehavior;
+                Debug::SenderLocation mLocation;
+            };
+            ManualLifetime<state> mState;
         };
 
         BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior, Threading::TaskFuture<bool> &future)
@@ -124,7 +126,7 @@ namespace Behavior {
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
             , mFullClassName(mBehavior.toString())
-            , mParameters(mBehavior.createParameters())            
+            , mParameters(mBehavior.createParameters())
         {
             assert(mBehavior.state());
             mNamedInputs = mBehavior.namedInputs();

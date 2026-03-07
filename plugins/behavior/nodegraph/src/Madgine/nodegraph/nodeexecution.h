@@ -132,7 +132,6 @@ namespace Behavior {
 
             void start()
             {
-                Execution::get_debug_location(this->mRec)->stepInto(mDebugLocation);
                 const auto &handle = Execution::get_context(this->mRec);
                 handle.mInterpreter.branch(*this, handle.mNode.flowOutTarget(mFlowOutIndex, flowOutGroup), mDebugLocation);
             }
@@ -144,19 +143,16 @@ namespace Behavior {
 
             void set_value(ArgumentList args) override
             {
-                Execution::get_debug_location(this->mRec)->stepOut(mDebugLocation);
                 VirtualBehaviorState<Rec>::set_value(std::move(args));
             }
 
             void set_error(BehaviorError error) override
             {
-                Execution::get_debug_location(this->mRec)->stepOut(mDebugLocation);
                 VirtualBehaviorState<Rec>::set_error(std::move(error));
             }
 
             void set_done() override
             {
-                Execution::get_debug_location(this->mRec)->stepOut(mDebugLocation);
                 VirtualBehaviorState<Rec>::set_done();
             }
 

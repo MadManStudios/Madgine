@@ -19,15 +19,13 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        struct MADGINE_NODEGRAPH_EXPORT NodeDebugLocation : Debug::SimpleLocation {
+        struct MADGINE_NODEGRAPH_EXPORT NodeDebugLocation {
             NodeDebugLocation(NodeInterpreterStateBase *interpreter)
                 : mInterpreter(interpreter)
             {
-            }
+            }            
 
-            std::string toString() const override;
-            std::map<std::string_view, ValueType> localVariables() const override;
-            bool wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const override;
+            Debug::SenderLocation *mChild = nullptr;
 
             const NodeBase *mNode = nullptr;
             NodeInterpreterStateBase *mInterpreter;
@@ -87,35 +85,7 @@ namespace Behavior {
         };
 
         template <typename Rec>
-        struct NodeInterpreterState : Execution::VirtualState<NodeInterpreterStateBase, Rec> {
-
-            NodeInterpreterState(Rec &&rec, const NodeGraph *graph, NodeGraphLoader::Handle handle)
-                : Execution::VirtualState<NodeInterpreterStateBase, Rec> { std::forward<Rec>(rec), graph, std::move(handle) }
-            {
-            }
-
-            void start()
-            {
-                Execution::get_debug_location(this->mRec)->stepInto(this->mDebugLocation);
-                NodeInterpreterStateBase::start();
-            }
-
-            virtual void set_done() override
-            {
-                Execution::get_debug_location(this->mRec)->stepOut(this->mDebugLocation);
-                this->mRec.set_done();
-            }
-            virtual void set_error(BehaviorError r) override
-            {
-                Execution::get_debug_location(this->mRec)->stepOut(this->mDebugLocation);
-                this->mRec.set_error(std::move(r));
-            }
-            virtual void set_value(ArgumentList result) override
-            {
-                Execution::get_debug_location(this->mRec)->stepOut(this->mDebugLocation);
-                this->mRec.set_value(std::move(result));
-            }
-        };
+        using NodeInterpreterState = Execution::VirtualState<NodeInterpreterStateBase, Rec>;
 
         struct NodeInterpreterSender : Execution::base_sender {
 

@@ -44,7 +44,7 @@ UNIQUECOMPONENT(Engine::Tools::Python3ImmediateWindow)
 namespace Engine {
 namespace Tools {
 
-    const Debug::DebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3DebugLocation &location, const Debug::DebugLocation *inlineLocation)
+    TypedPtr visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3DebugLocation &location, TypedPtr inlineLocation)
     {
         Behavior::Python3::Python3Lock lock;
         ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode(location.mFrame)->co_filename));
@@ -88,7 +88,7 @@ namespace Tools {
 
         ImGui::EndGroupPanel();
 
-        return nullptr;
+        return {};
     }
 
     Python3ImmediateWindow::Python3ImmediateWindow(ImRoot &root)
@@ -141,12 +141,10 @@ namespace Tools {
         return "Python3ImmediateWindow";
     }
 
-    bool Python3ImmediateWindow::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line)
+    bool Python3ImmediateWindow::wantsPause(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type, IndexType<size_t> line)
     {
+        if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
 
-        const Behavior::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Behavior::Python3::Python3DebugLocation *>(&location);
-
-        if (pyLocation) {
             const Filesystem::Path &path = pyLocation->file();
 
             if (!path.empty()) {
@@ -161,11 +159,10 @@ namespace Tools {
         return false;
     }
 
-    void Python3ImmediateWindow::onSuspend(const Debug::DebugLocation &location, Debug::ContinuationType type)
+    void Python3ImmediateWindow::onSuspend(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type)
     {
-        const Behavior::Python3::Python3DebugLocation *pyLocation = dynamic_cast<const Behavior::Python3::Python3DebugLocation *>(&location);
+        if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
 
-        if (pyLocation) {
             const Filesystem::Path &path = pyLocation->file();
 
             if (!path.empty()) {
@@ -184,7 +181,8 @@ namespace Tools {
                   mPrompt->resume();
               })
             | Log::with_log(mPrompt.get())
-            | Execution::with_debug_location(context));
+            | Execution::with_debug_location(context.mChild)
+            | Debug::with_debug_context(context));
         return false;
     }
 

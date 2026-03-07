@@ -1,56 +1,28 @@
 #pragma once
 
-#include "continuation.h"
+#include "Generic/execution/algorithm.h"
+#include "Generic/execution/concepts.h"
 
 namespace Engine {
 namespace Debug {
 
-    struct MADGINE_DEBUGGER_EXPORT BaseLocation {
+    struct get_debug_context_t {
 
-        BaseLocation(ContextInfo *context = nullptr)
-            : mContext(context)
+        using signature = ContextInfo &();
+
+        template <typename T>
+            requires tag_invocable<get_debug_context_t, T &>
+        auto operator()(T &t) const
+            noexcept(is_nothrow_tag_invocable_v<get_debug_context_t, T &>)
+                -> tag_invoke_result_t<get_debug_context_t, T &>
         {
+            return tag_invoke(*this, t);
         }
-
-        virtual void stepInto(DebugLocation &child) = 0;
-        virtual void stepOut(DebugLocation &child) = 0;
-
-        ContextInfo *mContext = nullptr;
     };
 
-    struct MADGINE_DEBUGGER_EXPORT DebugLocation : BaseLocation {
-        virtual ~DebugLocation() = default;
-        virtual std::string toString() const = 0;
-        virtual std::map<std::string_view, ValueType> localVariables() const = 0;
-        virtual bool wantsPause(ContinuationType type, IndexType<size_t> line) const = 0;
+    inline constexpr get_debug_context_t get_debug_context;
 
-        template <typename F, typename... Args>
-        void yield(F &&callback, Continuation &outContinuation, ContinuationType type, Execution::StopToken st, Args &&...args)
-        {
-            yieldImpl({ std::forward<F>(callback), type, std::forward<Args>(args)... }, outContinuation, std::move(st));
-        }
-
-        template <typename F, typename... Args>
-        void pass(F &&callback, Continuation &outContinuation, ContinuationType type, Execution::StopToken st, IndexType<size_t> line = {}, Args &&...args)
-        {
-            if (wantsPause(type, line)) {
-                yield(std::forward<F>(callback), outContinuation, type, std::move(st), std::forward<Args>(args)...);
-            } else {
-                std::forward<F>(callback)(ContinuationMode::Continue, std::forward<Args>(args)...);
-            }
-        }
-
-    private:
-        void yieldImpl(Continuation cont, Continuation &outContinuation, Execution::StopToken st);
-    };
-
-    struct MADGINE_DEBUGGER_EXPORT SimpleLocation : DebugLocation {
-
-        void stepInto(DebugLocation &child) override;
-        void stepOut(DebugLocation &child) override;
-
-        DebugLocation *mChild = nullptr;
-    };
+    inline constexpr auto with_debug_context = [](ContextInfo &info) { return Execution::with_query_value(get_debug_context, info); };
 
 }
 }

@@ -27,9 +27,9 @@ namespace Execution {
         {
         }
 
-        template <AnySender Sender>
-        Sender(Sender &&sender)
-            : mState(new SenderState<Sender, R, V...>(std::forward<Sender>(sender)))
+        template <AnySender Inner>
+        Sender(Inner &&sender)
+            : mState(new SenderState<Inner, R, V...>(std::forward<Inner>(sender)))
         {
         }
 

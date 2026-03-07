@@ -110,7 +110,7 @@ namespace Debug {
         return mDebugContexts;
     }
 
-    BaseLocation &DebuggableLifetimeBase::createContext()
+    ContextInfo &DebuggableLifetimeBase::createContext()
     {
         ContextInfo &context = Debugger::getSingleton().createContext();
         mDebugContexts.emplace_back(context);

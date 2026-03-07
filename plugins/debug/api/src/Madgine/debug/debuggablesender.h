@@ -2,6 +2,7 @@
 
 #include "Generic/execution/algorithm.h"
 
+#include "contextinfo.h"
 #include "senderlocation.h"
 
 namespace Engine {
@@ -78,7 +79,7 @@ namespace Execution {
 
             using State = connect_result_t<Sender, Rec>;
 
-            state(Sender &&sender, InnerRec &&rec, Debug::BaseLocation &parent)
+            state(Sender &&sender, InnerRec &&rec, Debug::SenderLocation *&parent)
                 : mRec(std::forward<InnerRec>(rec))
                 , mLocation([this](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(&mState, std::move(visitor)); })
                 , mState { connect(std::forward<Sender>(sender), Rec { this }) }
@@ -90,7 +91,7 @@ namespace Execution {
 
             void start()
             {
-                mParent.stepInto(mLocation);
+                mLocation.stepInto(mParent, Debug::get_debug_context(mRec));
                 mState.start();
             }
 
@@ -102,20 +103,20 @@ namespace Execution {
             template <typename... V>
             void set_value(V &&...value)
             {
-                mParent.stepOut(mLocation);
+                mLocation.stepOut(mParent, Debug::get_debug_context(mRec));
                 mRec.set_value(std::forward<V>(value)...);
             }
 
             void set_done()
             {
-                mParent.stepOut(mLocation);
+                mLocation.stepOut(mParent, Debug::get_debug_context(mRec));
                 mRec.set_done();
             }
 
             template <typename... R>
             void set_error(R &&...result)
             {
-                mParent.stepOut(mLocation);
+                mLocation.stepOut(mParent, Debug::get_debug_context(mRec));
                 mRec.set_error(std::forward<R>(result)...);
             }
 
@@ -127,7 +128,7 @@ namespace Execution {
             InnerRec mRec;
             Debug::SenderLocation mLocation;
             State mState;
-            Debug::BaseLocation &mParent;
+            Debug::SenderLocation *&mParent;
         };
 
         template <AnySender Sender>
@@ -139,25 +140,25 @@ namespace Execution {
                 return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), sender.mParent };
             }
 
-            Debug::BaseLocation &mParent;
+            Debug::SenderLocation *&mParent;
         };
 
         template <AnySender Sender>
-        friend auto tag_invoke(with_debug_location_t, Sender &&inner, Debug::BaseLocation &parent)
+        friend auto tag_invoke(with_debug_location_t, Sender &&inner, Debug::SenderLocation *&parent)
         {
             return sender<Sender> { { {}, std::forward<Sender>(inner) }, parent };
         }
 
         template <AnySender Sender>
-            requires tag_invocable<with_debug_location_t, Sender, Debug::BaseLocation &>
-        auto operator()(Sender &&sender, Debug::BaseLocation &parent) const
-            noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender, Debug::BaseLocation &>)
-                -> tag_invoke_result_t<with_debug_location_t, Sender, Debug::BaseLocation &>
+            requires tag_invocable<with_debug_location_t, Sender, Debug::SenderLocation *&>
+        auto operator()(Sender &&sender, Debug::SenderLocation *&parent) const
+            noexcept(is_nothrow_tag_invocable_v<with_debug_location_t, Sender, Debug::SenderLocation *&>)
+                -> tag_invoke_result_t<with_debug_location_t, Sender, Debug::SenderLocation *&>
         {
             return tag_invoke(*this, std::forward<Sender>(sender), parent);
         }
 
-        auto operator()(Debug::BaseLocation &parent) const
+        auto operator()(Debug::SenderLocation *&parent) const
         {
             return pipable_from_right(*this, parent);
         }
@@ -183,17 +184,7 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
-                location->pass([=, this](Debug::ContinuationMode mode, V &&...value) mutable {
-                    switch (mode) {
-                    case Debug::ContinuationMode::Continue:
-                        this->mState.mRec.set_value(std::forward<V>(value)...);
-                        break;
-                    case Debug::ContinuationMode::Abort:
-                        this->mState.mRec.set_done();
-                        break;
-                    }
-                },
-                    mState.mContinuation, Debug::ContinuationType::Return, get_stop_token(this->mState.mRec), mState.mEndBreakpoint, std::forward<V>(value)...);
+                Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec, V &&...value) mutable { rec.set_value(std::forward<V>(value)...); }, mState.mContinuation, Debug::ContinuationType::Return, mState.mEndBreakpoint, std::forward<V>(value)...);
             }
 
             void set_done()
@@ -202,10 +193,7 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
-                location->pass([=, this](Debug::ContinuationMode mode) {
-                    this->mState.mRec.set_done();
-                },
-                    mState.mContinuation, Debug::ContinuationType::Cancelled, get_stop_token(this->mState.mRec), mState.mEndBreakpoint);
+                Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec) { rec.set_done(); }, mState.mContinuation, Debug::ContinuationType::Cancelled, mState.mEndBreakpoint);
             }
 
             template <typename... R>
@@ -215,17 +203,7 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
-                location->pass([=, this](Debug::ContinuationMode mode, R &&...result) mutable {
-                    switch (mode) {
-                    case Debug::ContinuationMode::Continue:
-                        this->mState.mRec.set_error(std::forward<R>(result)...);
-                        break;
-                    case Debug::ContinuationMode::Abort:
-                        this->mState.mRec.set_done();
-                        break;
-                    }
-                },
-                    mState.mContinuation, Debug::ContinuationType::Error, get_stop_token(this->mState.mRec), mState.mEndBreakpoint, std::forward<R>(result)...);
+                Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec, R &&...result) mutable { rec.set_error(std::forward<R>(result)...); }, mState.mContinuation, Debug::ContinuationType::Error, mState.mEndBreakpoint, std::forward<R>(result)...);
             }
 
             template <typename CPO, typename... Args>
@@ -257,17 +235,7 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(mRec);
 
-                location->pass([=, this](Debug::ContinuationMode mode) {
-                    switch (mode) {
-                    case Debug::ContinuationMode::Continue:
-                        mState.start();
-                        break;
-                    case Debug::ContinuationMode::Abort:
-                        mRec.set_done();
-                        break;
-                    }
-                },
-                    mContinuation, Debug::ContinuationType::Flow, get_stop_token(mRec), mStartBreakpoint);
+                Debug::get_debug_context(mRec).pass(location, mRec, [this](Rec &rec) { mState.start(); }, mContinuation, Debug::ContinuationType::Flow, mStartBreakpoint);
             }
 
             void stop()

@@ -3,7 +3,7 @@ Project(Debugger)
 set(sources)
 FolderSources(sources "" src)
 	FolderSources(sources src Madgine debugforward.h debuglib.h)
-		FolderSources(sources Madgine debug debuggablelifetime.cpp debuggablelifetime.h debuggablesender.h debugger.cpp debugger.h debuglocation.cpp debuglocation.h senderlocation.cpp senderlocation.h)
+		FolderSources(sources Madgine debug contextinfo.cpp contextinfo.h debuggablelifetime.cpp debuggablelifetime.h debuggablesender.h debugger.cpp debugger.h debuglocation.h senderlocation.cpp senderlocation.h)
 
 	
 add_plugin(Debugger Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/debuglib.h API_PLUGIN)

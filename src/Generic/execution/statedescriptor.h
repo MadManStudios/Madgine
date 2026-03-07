@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../typed_ptr.h"
+
 namespace Engine {
 namespace Debug {
     struct Continuation;
@@ -14,13 +16,13 @@ namespace Execution {
         struct EndBlock;
         struct PushDisabled;
         struct PopDisabled;
-        struct SubLocation;
+        struct DebugLocation;
         struct Breakpoint;
         struct Marker;
         struct FunctionPtr;
     }
 
-    using StateDescriptor = std::variant<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::SubLocation, State::Breakpoint, State::Marker, State::FunctionPtr>;
+    using StateDescriptor = std::variant<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::DebugLocation, State::Breakpoint, State::Marker, State::FunctionPtr>;
 
     namespace State {
         struct Text {
@@ -39,8 +41,8 @@ namespace Execution {
         };
         struct PopDisabled {
         };
-        struct SubLocation {
-            Debug::DebugLocation &mChild;
+        struct DebugLocation {
+            TypedPtr mLocation;
         };
         struct Breakpoint {
             IndexType<size_t> *mLineFeedback;

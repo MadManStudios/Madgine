@@ -25,17 +25,27 @@ namespace Debug {
             virtual void visitArguments(std::ostream &) = 0;
         };
 
-        template <typename F, typename... Args>
+        template <typename Rec, typename F, typename... Args>
         struct Impl : Base {
-            Impl(F &&callback, Args &&...args)
-                : mCallback(std::forward<F>(callback))
+            Impl(Rec &rec, F &&callback, Args &&...args)
+                : mRec(rec)
+                , mCallback(std::forward<F>(callback))
                 , mArgs { std::forward<Args>(args)... }
             {
             }
 
             virtual void call(ContinuationMode mode) override
             {
-                TupleUnpacker::invokeExpand(std::forward<F>(mCallback), mode, std::move(mArgs));
+                switch (mode) {
+                case Debug::ContinuationMode::Continue:
+                    TupleUnpacker::invokeExpand(std::forward<F>(mCallback), mRec, std::move(mArgs));
+                    break;
+                case Debug::ContinuationMode::Abort:
+                    mRec.set_done();
+                    break;
+                default:
+                    throw 0;
+                }                
             }
 
             virtual void visitArguments(std::ostream &out) override
@@ -50,6 +60,7 @@ namespace Debug {
                 });
             }
 
+            Rec &mRec;
             F mCallback;
             std::tuple<Args...> mArgs;
         };
@@ -57,9 +68,9 @@ namespace Debug {
     public:
         Continuation() = default;
 
-        template <typename F, typename... Args>
-        Continuation(F &&callback, ContinuationType type, Args &&...args)
-            : mImpl(std::make_unique<Impl<F, Args...>>(std::forward<F>(callback), std::forward<Args>(args)...))
+        template <typename Rec, typename F, typename... Args>
+        Continuation(Rec &rec, F &&callback, ContinuationType type, Args &&...args)
+            : mImpl(std::make_unique<Impl<Rec, F, Args...>>(rec, std::forward<F>(callback), std::forward<Args>(args)...))
             , mType(type)
         {
         }

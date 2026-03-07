@@ -109,10 +109,10 @@ namespace Execution {
         template <typename Sender>
         struct SenderAwaitableReceiver : Execution::execution_receiver<> {
 
-            template <typename... V>
-            void set_value(V &&...value)
+            template <typename... V2>
+            void set_value(V2 &&...value)
             {
-                mState->set_value(std::forward<V>(value)...);
+                mState->set_value(std::forward<V2>(value)...);
             }
 
             void set_done()
@@ -120,10 +120,10 @@ namespace Execution {
                 mState->set_done();
             }
 
-            template <typename... R>
-            void set_error(R &&...result)
+            template <typename... R2>
+            void set_error(R2 &&...result)
             {
-                mState->set_error(std::forward<R>(result)...);
+                mState->set_error(std::forward<R2>(result)...);
             }
 
             template <typename CPO, typename... Args>
@@ -179,10 +179,10 @@ namespace Execution {
                 return std::move(mResult).value();
             }
 
-            template <typename... V>
-            void set_value(V &&...v)
+            template <typename... V2>
+            void set_value(V2 &&...v)
             {
-                mResult.set_value(std::forward<V>(v)...);
+                mResult.set_value(std::forward<V2>(v)...);
                 if (mFlag.test_and_set())
                     mCoroutine.resume();
             }
@@ -194,10 +194,10 @@ namespace Execution {
                     mCoroutine.promise().set_done();
             }
 
-            template <typename... R>
-            void set_error(R &&...error)
+            template <typename... R2>
+            void set_error(R2 &&...error)
             {
-                mResult.set_error(std::forward<R>(error)...);
+                mResult.set_error(std::forward<R2>(error)...);
                 if (mFlag.test_and_set())
                     mResult.reproduce_error(mCoroutine.promise());
             }
@@ -234,7 +234,7 @@ namespace Execution {
         {
             std::tuple<V...> result = std::move(*mResult);
             destruct(mResult);
-            TupleUnpacker::invokeExpand(LIFT(mReceiver->set_value, this), std::move(result));
+            TupleUnpacker::invokeExpand(LIFT(this->mReceiver->set_value, this), std::move(result));
         }
 
         ManualLifetime<std::tuple<V...>> mResult;
@@ -249,7 +249,7 @@ namespace Execution {
 
         void set_value()
         {
-            mReceiver->set_value();
+            this->mReceiver->set_value();
         }
     };
 

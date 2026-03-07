@@ -19,7 +19,7 @@ struct VirtualCPOBaseHelper : Base {
     virtual R v_tag_invoke(CPO _cpo, V... v) = 0;
 
     template <typename... Args>
-    friend auto tag_invoke(CPO _cpo, VirtualCPOBaseHelper &base, Args &&...args)
+    friend R tag_invoke(CPO _cpo, VirtualCPOBaseHelper &base, Args &&...args)
     {
         return base.v_tag_invoke(_cpo, std::forward<Args>(args)...);
     }

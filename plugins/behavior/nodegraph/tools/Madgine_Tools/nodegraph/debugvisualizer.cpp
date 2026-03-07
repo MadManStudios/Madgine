@@ -25,14 +25,14 @@ namespace Tools {
         uint32_t mIndex;
     };
 
-    const Behavior::NodeGraph::NodeDebugLocation *visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::NodeGraph::NodeDebugLocation &location, const Debug::DebugLocation *inlineLocation)
+    TypedPtr visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::NodeGraph::NodeDebugLocation &location, TypedPtr inlineLocation)
     {
-        const Debug::DebugLocation *child = nullptr;
+        TypedPtr child;
         const Behavior::NodeGraph::NodeGraph &graph = *location.mInterpreter->graph();
 
         if (inlineLocation) {
 
-            const Behavior::NodeGraph::NodeDebugLocation *inlineNodeLocation = dynamic_cast<const Behavior::NodeGraph::NodeDebugLocation *>(inlineLocation);
+            const Behavior::NodeGraph::NodeDebugLocation *inlineNodeLocation = inlineLocation.as<const Behavior::NodeGraph::NodeDebugLocation>();
             if (!inlineNodeLocation || inlineNodeLocation->mInterpreter != location.mInterpreter)
                 return &location;
 
@@ -45,7 +45,7 @@ namespace Tools {
             ImGui::BeginVertical("child");
 
             if (location.mChild)
-                child = view.visualizeDebugLocation(context, *location.mChild, inlineLocation);
+                child = view.visualizeDebugLocation(context, location.mChild, inlineLocation);
 
             ed::SelectNode(60000 * graph.nodeIndex(location.mNode), true);
         } else {
@@ -80,7 +80,7 @@ namespace Tools {
 
                 if (location.mChild) {
                     ImGui::BeginVertical("child");
-                    child = view.visualizeDebugLocation(context, *location.mChild, &location);
+                    child = view.visualizeDebugLocation(context, location.mChild, &location);
                     ImGui::EndVertical();
                 }
 
@@ -141,9 +141,9 @@ namespace Tools {
         }
 
         if (child)
-            view.visualizeDebugLocation(context, *child, nullptr);
+            view.visualizeDebugLocation(context, child, {});
 
-        return nullptr;
+        return {};
     }
 
 }

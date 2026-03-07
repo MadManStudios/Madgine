@@ -8,11 +8,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        struct MADGINE_PYTHON3_EXPORT Python3DebugLocation : Debug::SimpleLocation {
-
-            std::string toString() const override;
-            std::map<std::string_view, ValueType> localVariables() const override;
-            bool wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const override;
+        struct MADGINE_PYTHON3_EXPORT Python3DebugLocation {            
 
             Filesystem::Path file() const;
             std::string module() const;
@@ -24,7 +20,7 @@ namespace Behavior {
         struct Python3Debugger {
 
             struct Guard {
-                Guard(Debug::BaseLocation &parent);
+                Guard();
                 Guard(PyObjectPtr location);
                 ~Guard();
             };

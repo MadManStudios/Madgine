@@ -22,6 +22,7 @@
 #include <utility>
 #include <variant>
 #include <vector>
+#include <typeindex>
 
 #include "genericconfig.h"
 #include "genericforward.h"

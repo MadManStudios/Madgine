@@ -59,10 +59,10 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    const Debug::DebugLocation *DebuggerView::visualizeDebugLocation(const Debug::ContextInfo &context, const Debug::DebugLocation &location, const Debug::DebugLocation *inlineLocation)
+    TypedPtr DebuggerView::visualizeDebugLocation(const Debug::ContextInfo &context, TypedPtr location, TypedPtr inlineLocation)
     {
-        if (const Debug::SenderLocation *senderLocation = dynamic_cast<const Debug::SenderLocation *>(&location)) {
-            const Debug::DebugLocation *subLocation = nullptr;
+        if (const Debug::SenderLocation *senderLocation = location.as<const Debug::SenderLocation>()) {
+            TypedPtr subLocation;
 
             IndexType<size_t> breakpoint;
             bool isMarker = false;
@@ -100,8 +100,8 @@ namespace Tools {
                                [](const Execution::State::PopDisabled &) {
                                    ImGui::EndDisabled();
                                },
-                               [&, inlineLocation](const Execution::State::SubLocation &subLoc) {
-                                   subLocation = visualizeDebugLocation(context, subLoc.mChild, inlineLocation);
+                               [&, inlineLocation](const Execution::State::DebugLocation &subLoc) {
+                                   subLocation = visualizeDebugLocation(context, subLoc.mLocation, inlineLocation);
                                    actualContent = true;
                                },
                                [&](const Execution::State::Breakpoint &bp) {
@@ -166,9 +166,9 @@ namespace Tools {
                         if (lineFeedback) {
                             *lineFeedback = breakpoint;
                         }
-                        bool set = senderLocation->getBreakpoint(breakpoint);
+                        bool set = context.getBreakpoint(senderLocation, breakpoint);
                         if (Breakpoint(startY, ImGui::GetCursorScreenPos().y, &set))
-                            senderLocation->setBreakpoint(breakpoint, set);
+                            context.setBreakpoint(senderLocation, breakpoint, set);
                         breakpoint.reset();
                         if (continuation) {
                             DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY));
@@ -206,13 +206,12 @@ namespace Tools {
 
             return subLocation;
         } else {
-            for (auto debugVisualizer : mDebugLocationVisualizers) {
-                auto [matched, child] = debugVisualizer(*this, context, location, inlineLocation);
-                if (matched)
-                    return child;
+            auto it = mDebugLocationVisualizers.find(location.type());
+            if (it != mDebugLocationVisualizers.end()) {
+                return it->second(*this, context, location.ptr(), inlineLocation);
             }
-            ImGui::Text("Unknown ["s + typeid(location).name() + "]");
-            return nullptr;
+            ImGui::Text("Unknown ["s + location.type().name() + "]");
+            return {};
         }
     }
 
@@ -255,7 +254,7 @@ namespace Tools {
                 for (Debug::ContextInfo &info : mDebugger.infos()) {
                     std::ostringstream descriptor;
                     if (info.alive()) {
-                        descriptor << info.mChild->toString();
+                        descriptor << "Context";
                         if (info.isPaused()) {
                             descriptor << " (paused)";
                         }
@@ -273,7 +272,6 @@ namespace Tools {
             }
             ImGui::End();
 
-            std::optional<Debug::ContinuationMode> continuation;
             Debug::DebugLocation *prevSelected = mSelectedLocation;
             mSelectedLocation = nullptr;
 
@@ -310,20 +308,18 @@ namespace Tools {
                 } else {
                     if (ImGui::BeginTable("locals", 2, ImGuiTableFlags_Resizable)) {
 
-                        for (auto &[key, value] : mSelectedLocation->localVariables()) {
+                        /* for (auto &[key, value] : mSelectedLocation->localVariables()) {
                             ValueType v = value;
                             if (mInspector->drawValue(key, v, value.isReference(), value.type()).first)
                                 value = v;
-                        }
+                        }*/
+                        ImGui::Text("TODO");
 
                         ImGui::EndTable();
                     }
                 }
             }
             ImGui::End();
-
-            if (continuation)
-                mSelectedContext->continueExecution(*continuation);
         }
         ImGui::End();
     }
@@ -338,7 +334,7 @@ namespace Tools {
         std::unique_lock guard { context.mMutex };
         if (context.mChild) {
             if (BeginDebuggablePanel("Debug Context")) {
-                [[maybe_unused]] const Debug::DebugLocation *child = visualizeDebugLocation(context, *context.mChild, nullptr);
+                [[maybe_unused]] TypedPtr child = visualizeDebugLocation(context, context.mChild, {});
                 assert(!child); // Parents that allow inline rendering need to take care of child rendering.
                 EndDebuggablePanel();
             }
@@ -358,12 +354,12 @@ namespace Tools {
         mSelectedContext = &context;
     }
 
-    void DebuggerView::onSuspend(const Debug::DebugLocation &location, Debug::ContinuationType type)
+    void DebuggerView::onSuspend(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type)
     {
-        setCurrentContext(*location.mContext);
+        setCurrentContext(context);
     }
 
-    bool DebuggerView::wantsPause(const Debug::DebugLocation &location, Debug::ContinuationType type, IndexType<size_t> line)
+    bool DebuggerView::wantsPause(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type, IndexType<size_t> line)
     {
         return false;
     }

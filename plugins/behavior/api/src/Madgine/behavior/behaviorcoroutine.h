@@ -12,11 +12,8 @@
 namespace Engine {
 namespace Behavior {
 
-    struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation : Debug::SimpleLocation {
-
-        std::string toString() const override;
-        std::map<std::string_view, ValueType> localVariables() const override;
-        virtual bool wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const override;
+    struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation {
+        Debug::SenderLocation *mChild = nullptr;
 
 #ifndef NDEBUG
         Debug::StackTrace<1> mStacktrace;

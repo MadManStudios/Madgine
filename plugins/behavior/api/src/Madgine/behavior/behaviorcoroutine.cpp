@@ -26,7 +26,6 @@ namespace Behavior {
                 throw 0;
             }
         }
-        Execution::get_debug_location(*mReceiver)->stepInto(mDebugLocation);
         std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).resume();
     }
 
@@ -41,7 +40,7 @@ namespace Behavior {
 
     void CoroutineBehaviorState::visitState(CallableView<void(const Execution::StateDescriptor &)> visitor)
     {
-        visitor(Execution::State::SubLocation { mDebugLocation });
+        visitor(Execution::State::DebugLocation { &mDebugLocation });
     }
 
     CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept
@@ -71,7 +70,6 @@ namespace Behavior {
 
     void CoroutineBehaviorState::return_void()
     {
-        Execution::get_debug_location(*mReceiver)->stepOut(mDebugLocation);
         // mValue = void
     }
 
@@ -82,13 +80,11 @@ namespace Behavior {
 
     void CoroutineBehaviorState::set_error(BehaviorError result)
     {
-        Execution::get_debug_location(*mReceiver)->stepOut(mDebugLocation);
         mReceiver->set_error(result);
     }
 
     void CoroutineBehaviorState::set_done()
     {
-        Execution::get_debug_location(*mReceiver)->stepOut(mDebugLocation);
         mReceiver->set_done();
     }
 
@@ -150,25 +146,6 @@ namespace Behavior {
 
     void CoroutineBehaviorState::suspendImpl()
     {
-    }
-
-    std::string CoroutineLocation::toString() const
-    {
-#ifdef NDEBUG
-        return "<Coroutine>";
-#else
-        return mStacktrace.calculateReadable()[0].mFunction;
-#endif
-    }
-
-    std::map<std::string_view, ValueType> CoroutineLocation::localVariables() const
-    {
-        return {};
-    }
-
-    bool CoroutineLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
-    {
-        return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type, line);
     }
 
 }

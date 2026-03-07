@@ -30,7 +30,7 @@ SERIALIZETABLE_END(Engine::Tools::BehaviorTool)
 namespace Engine {
 namespace Tools {
 
-    const Debug::DebugLocation *visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::CoroutineLocation &location, const Debug::DebugLocation *inlineLocation)
+    TypedPtr visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::CoroutineLocation &location, TypedPtr inlineLocation)
     {
         const char *name = "<unknown>";
 #ifndef NDEBUG
@@ -40,9 +40,9 @@ namespace Tools {
         }
 #endif
         ImGui::BeginGroupPanel(name);
-        const Debug::DebugLocation *content = nullptr;
+        TypedPtr content;
         if (location.mChild)
-            content = view.visualizeDebugLocation(context, *location.mChild, inlineLocation);
+            content = view.visualizeDebugLocation(context, location.mChild, inlineLocation);
         ImGui::EndGroupPanel();
 
         return content == location.mChild ? &location : content;

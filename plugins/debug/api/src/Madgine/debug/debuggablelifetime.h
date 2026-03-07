@@ -27,7 +27,7 @@ namespace Debug {
     protected:
         DebuggableLifetimeBase(std::nullopt_t);
 
-        BaseLocation &createContext();
+        ContextInfo &createContext();
 
     private:
         DebuggableLifetimeBase *mParent = nullptr;
@@ -47,7 +47,8 @@ namespace Debug {
         template <Execution::AnySender Sender>
         void attach(Sender &&sender)
         {
-            mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location(createContext()));
+            ContextInfo &context = createContext();
+            mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location(context.mChild) | Debug::with_debug_context(context));
         }
 
         bool end()

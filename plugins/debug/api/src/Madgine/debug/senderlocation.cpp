@@ -14,62 +14,23 @@ namespace Debug {
     {
     }
 
-    void SenderLocation::stepInto(DebugLocation &child)
+    void SenderLocation::stepInto(Debug::SenderLocation *&location, ContextInfo &context)
     {
-        std::unique_lock lock { mContext->mMutex };
-        BaseLocation::stepInto(child);
+        std::unique_lock lock { context.mMutex };
+        assert(!location);
+        location = this;
     }
 
-    void SenderLocation::stepOut(DebugLocation &child)
+    void SenderLocation::stepOut(Debug::SenderLocation *&location, ContextInfo &context)
     {
-        std::unique_lock lock { mContext->mMutex };
-        BaseLocation::stepOut(child);
-    }
-
-    std::string SenderLocation::toString() const
-    {
-        std::string result = "Sender";
-        bool done = false;
-        visit([&](const Execution::StateDescriptor &desc) {
-            if (!done) {
-                if (std::holds_alternative<Execution::State::SubLocation>(desc)) {
-                    result = std::get<Execution::State::SubLocation>(desc).mChild.toString();
-                    done = true;
-                } else if (std::holds_alternative<Execution::State::BeginBlock>(desc)) {
-                    result = std::get<Execution::State::BeginBlock>(desc).mName;
-                    done = true;
-                }
-            }
-        });
-        return result;
-    }
-
-    std::map<std::string_view, ValueType> SenderLocation::localVariables() const
-    {
-        return {};
-    }
-
-    bool SenderLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
-    {
-        return (line && (type == Debug::ContinuationType::Error || getBreakpoint(line))) || Debug::DebugLocation::wantsPause(type, line);
+        std::unique_lock lock { context.mMutex };
+        assert(location == this);
+        location = nullptr;
     }
 
     void SenderLocation::visit(CallableView<void(const Execution::StateDescriptor &)> visitor) const
     {
         mState(std::move(visitor));
-    }
-
-    void SenderLocation::setBreakpoint(size_t index, bool set) const
-    {
-        if (mBreakpoints.size() <= index) {
-            mBreakpoints.resize(index + 1);
-        }
-        mBreakpoints[index] = set;
-    }
-
-    bool SenderLocation::getBreakpoint(size_t index) const
-    {
-        return mBreakpoints.size() > index && mBreakpoints[index];
     }
 
 }

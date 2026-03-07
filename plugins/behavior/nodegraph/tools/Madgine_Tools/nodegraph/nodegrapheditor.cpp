@@ -84,7 +84,8 @@ namespace Tools {
                         Execution::detach(
                             Behavior::Behavior { mGraph.interpret() }
                             | Execution::then([](ArgumentList) { LOG("SUCCESS"); })
-                            | Execution::with_debug_location(context)
+                            | Execution::with_debug_location(context.mChild)
+                            | Debug::with_debug_context(context)
                             | Log::log_result());
                     }
                     ImGui::EndMenu();

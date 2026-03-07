@@ -13,26 +13,6 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        std::string NodeDebugLocation::toString() const
-        {
-            std::stringstream ss;
-            if (mNode) {
-                ss << mNode->className() << " [" << mNode << "]";
-            } else {
-                ss << "Graph [" << mInterpreter->graph() << "]";
-            }
-            return ss.str();
-        }
-
-        std::map<std::string_view, ValueType> NodeDebugLocation::localVariables() const
-        {
-            std::map<std::string_view, ValueType> values;
-            /* for (std::string_view name : mInterpreter->variables()) {
-                mInterpreter->readVar(values.try_emplace(name).first->second, name);
-            }*/
-            return values;
-        }
-
         NodeInterpreterStateBase::NodeInterpreterStateBase(const NodeGraph *graph, NodeGraphLoader::Handle handle)
             : mDebugLocation(this)
             , mGraph(graph)
@@ -55,14 +35,14 @@ namespace Behavior {
 
             location.mNode = node;
 
-            location.pass([=, this, &receiver, &location](Debug::ContinuationMode mode) {
+            Debug::get_debug_context(receiver).pass(&mDebugLocation, receiver, [=, this, &location](BehaviorReceiver &receiver) {
                 if (pin && pin.mNode) {
                     node->interpret({ { { { *this }, *node } }, receiver, location }, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
                 } else {
                     receiver.set_value();
                 }
             },
-                mContinuation, Debug::ContinuationType::Flow, Execution::get_stop_token(receiver));
+                mContinuation, Debug::ContinuationType::Flow);
         }
 
         BehaviorError NodeInterpreterStateBase::read(ValueType &retVal, Pin pin)
@@ -159,10 +139,6 @@ namespace Behavior {
             throw 0;
         }
 
-        bool NodeDebugLocation::wantsPause(Debug::ContinuationType type, IndexType<size_t> line) const
-        {
-            return type == Debug::ContinuationType::Error || Debug::DebugLocation::wantsPause(type, line);
-        }
     }
 }
 }
